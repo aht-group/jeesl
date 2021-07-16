@@ -14,7 +14,7 @@
     <name>JEESL - Connectors</name>
 	
 	<properties>
-		<version.jetty>9.2.12.v20150709</version.jetty>
+		<version.jetty>9.4.34.v20201102</version.jetty>
 		<version.jdk>1.7</version.jdk>
 	</properties>	
 	
