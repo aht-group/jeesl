@@ -187,7 +187,7 @@
         	<dependency> <!-- This is the bundled version in JBoss-7.1.1 -->
         		<groupId>org.jboss.resteasy</groupId>
         		<artifactId>resteasy-bom</artifactId>
-        		<version>2.3.1.GA</version>
+        		<version>4.6.1.Final</version>
         		<type>pom</type>
 				<scope>import</scope>
         	</dependency> 
