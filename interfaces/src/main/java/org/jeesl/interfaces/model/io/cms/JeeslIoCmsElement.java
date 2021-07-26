@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.io.fr.JeeslWithFileRepositoryContainer;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisibleMigration;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
 
@@ -19,6 +20,7 @@ public interface JeeslIoCmsElement<
 									C extends JeeslIoCmsContent<V,?,?>,
 									FC extends JeeslFileContainer<?,?>>
 		extends Serializable,EjbWithId,EjbPersistable,EjbSaveable,EjbWithPositionParent,
+				EjbWithVisibleMigration,
 				JeeslWithFileRepositoryContainer<FC>
 {	
 	public enum Attributes{section}

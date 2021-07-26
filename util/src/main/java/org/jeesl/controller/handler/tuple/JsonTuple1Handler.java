@@ -105,6 +105,13 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler im
 			return map1.get(a).getCount();
 		}
 	}
+	public Double sum1(A a)
+	{
+		if(!this.contains(a)){return null;}
+		{
+			return map1.get(a).getSum1();
+		}
+	}
 	
 	public void orderDescending()
 	{

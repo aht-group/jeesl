@@ -2,6 +2,7 @@ package org.jeesl.factory.ejb.io.cms;
 
 import java.util.List;
 
+import org.jeesl.factory.ejb.util.EjbPositionFactory;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -28,9 +29,8 @@ public class EjbIoCmsElementFactory <L extends JeeslLang,
 		{
 			ejb = cElement.newInstance();
 			ejb.setSection(section);
-			
-			if(list!=null) {ejb.setPosition(list.size()+1);}
-			else {ejb.setPosition(1);}
+			EjbPositionFactory.calcNext(ejb,list);
+			ejb.setVisible(true);
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
