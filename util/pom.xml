@@ -60,13 +60,6 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jeesl</groupId>
-            <artifactId>jeesl-xml</artifactId>
-            <type>jar</type>
-            <scope>test</scope>
-            <classifier>tests</classifier>
-        </dependency>
 
         <!-- MetaChart -->
         <dependency>
@@ -233,22 +226,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <scope>test</scope>
-        </dependency>
 
         <dependency>
             <groupId>org.openfuxml</groupId>
@@ -291,7 +268,6 @@
   			<scope>provided</scope>
   		</dependency>
 
-
         <!--	28.11.2015 ... Trying to deactivate. Should only be required in report module -->
         <!--	27.03.2016 ... Scope set to provided -->
         <dependency>
@@ -303,12 +279,6 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jeesl</groupId>
-            <artifactId>jeesl-test</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -327,20 +297,6 @@
                 </exclusion>
             </exclusions>
 		</dependency>
-
-        <!-- Test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <type>jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jaxen</groupId>
-            <artifactId>jaxen</artifactId>
-            <scope>test</scope>
-        </dependency>
-
        
         <dependency>
             <groupId>org.antlr</groupId>
@@ -350,23 +306,17 @@
             <version>4.7</version>
         </dependency>
         
-        <!-- 2018-04-29 antlr4-maven-plugin deactivatd by tk -->
-<!--        <dependency>
-            <groupId>org.antlr</groupId>
-            <artifactId>antlr4-maven-plugin</artifactId>
-            <version>4.7</version>
-        </dependency>
--->      <dependency>
+		<dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
+			<scope>provided</scope>
+			<type>jar</type>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
                     <groupId>commons-logging</groupId>
                 </exclusion>
             </exclusions>
-            <type>jar</type>
-            <scope>provided</scope>
         </dependency>
 
         <!-- JBoss Wildfly -->
@@ -378,11 +328,52 @@
         </dependency>
         
         <!-- PWD Security -->
-			<dependency>
-				<groupId>com.nulab-inc</groupId>
-				<artifactId>zxcvbn</artifactId>
-			</dependency>
+		<dependency>
+			<groupId>com.nulab-inc</groupId>
+			<artifactId>zxcvbn</artifactId>
+		</dependency>
 
+        <!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+		<!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jaxen</groupId>
+            <artifactId>jaxen</artifactId>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+            <groupId>org.jeesl</groupId>
+            <artifactId>jeesl-xml</artifactId>
+            <type>jar</type>
+            <scope>test</scope>
+            <classifier>tests</classifier>
+        </dependency>
+		<dependency>
+            <groupId>org.jeesl</groupId>
+            <artifactId>jeesl-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
