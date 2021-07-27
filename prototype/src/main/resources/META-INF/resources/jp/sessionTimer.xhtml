@@ -13,7 +13,7 @@
 
 	<composite:implementation>
 		<p:growl for="growl" widgetVar="growlWV" autoUpdate="true" severity="info" showDetail="true" life="3000" sticky="false" />
-		<div id="sessionTimeoutCounter"/>
+		<span id="sessionTimeoutCounter"/>
 		<script>
 			var time = #{cc.attrs.timeout};
 			var warning = #{cc.attrs.warning};
@@ -47,7 +47,7 @@
 													 'severity':'warn'});
 					}
 	
-					timeoutCounter.html(String(Math.floor(time / 60)).padStart(2, '0') + ':' + String(time % 60).padstart(2, '0') + ' until your session expires');
+					timeoutCounter.html(String(Math.floor(time / 60)).padStart(2, '0') + ':' + String(time % 60).padStart(2, '0') + ' until your session expires');
 					time--;
 				}, 1000);
 			}
