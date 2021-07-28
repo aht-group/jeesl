@@ -13,24 +13,24 @@ import org.metachart.xml.graph.Graph;
 
 public interface JeeslRevisionRestExport
 {
-	@GET @Path("/system/io/revision/category") @Produces(MediaType.APPLICATION_XML)
+	@GET @Path("/export/system/io/revision/category") @Produces(MediaType.APPLICATION_XML)
 	Container exportSystemRevisionCategories();
 	
-	@GET @Path("/system/io/revision/attribute/type") @Produces(MediaType.APPLICATION_XML)
+	@GET @Path("/export/system/io/revision/attribute/type") @Produces(MediaType.APPLICATION_XML)
 	Container exportSystemIoRevisionAttributeTypes();
 	
-	@GET @Path("/system/io/revision/scope/type") @Produces(MediaType.APPLICATION_XML)
+	@GET @Path("/export/system/io/revision/scope/type") @Produces(MediaType.APPLICATION_XML)
 	Container exportSystemIoRevisionScopeTypes();
 	
-	@GET @Path("/system/io/revision/relation/type") @Produces(MediaType.APPLICATION_XML)
+	@GET @Path("/export/system/io/revision/relation/type") @Produces(MediaType.APPLICATION_XML)
 	Container exportSystemRevisionRelationType();
 	
-	@GET @Path("/system/revision/entities") @Produces(MediaType.APPLICATION_XML)
+	@GET @Path("/export/system/io/revision/entities") @Produces(MediaType.APPLICATION_XML)
 	Entities exportSystemRevisionEntities();
 	
-	@GET @Path("/system/revision/diagrams") @Produces(MediaType.APPLICATION_XML)
+	@GET @Path("/export/system/revision/diagrams") @Produces(MediaType.APPLICATION_XML)
 	Diagrams exportSystemRevisionDiagrams();
 	
-	@GET @Path("/system/revision/graph/{code}") @Produces(MediaType.APPLICATION_XML)
+	@GET @Path("/export/system/revision/graph/{code}") @Produces(MediaType.APPLICATION_XML)
 	Graph exportSystemRevisionGraph(@PathParam("code") String code);
 }

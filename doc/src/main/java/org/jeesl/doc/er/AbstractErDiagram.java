@@ -35,6 +35,7 @@ public class AbstractErDiagram
 	final static Logger logger = LoggerFactory.getLogger(AbstractErDiagram.class);
 
 	protected File fTmp;
+	protected File fXmlEntities;
 	protected File fSrc,fDot,fSvg;
 	protected File dPdf,dAtt;
 
@@ -61,7 +62,7 @@ public class AbstractErDiagram
 
 	protected void loadEntites(String path)
 	{
-		try {entities = JaxbUtil.loadJAXB(new File(path).getAbsoluteFile(), Entities.class);}
+		try {entities = JaxbUtil.loadJAXB(fXmlEntities.getAbsoluteFile(), Entities.class);}
 		catch (FileNotFoundException e) {e.printStackTrace();}
 	}
 
