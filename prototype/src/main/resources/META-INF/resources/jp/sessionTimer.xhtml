@@ -30,30 +30,33 @@
 			
 			var warningMessage = 'System idle for ' + getUserFriendlyTime(#{cc.attrs.timeout} - warning) + ', it will close down in ' + getUserFriendlyTime(warning) + '.';
 			
+			function executeTimerAction() {
+				if (time === 0) {
+					timeoutCounter.html('Session expired.');
+					window.location.href = '#{request.contextPath}/index.jsf';
+					return;
+				}
+				
+				if (time === #{cc.attrs.warning}) {
+					//alert("your session expires in x minutes!");
+					PF('growlWV').renderMessage({'summary':'Inactivity Warning',
+												 'detail':warningMessage,
+												 'severity':'warn'});
+				}
+
+				timeoutCounter.html(String(Math.floor(time / 60)).padStart(2, '0') + ':' + String(time % 60).padStart(2, '0') + ' until your session expires');
+				time--;
+			}
+			
 			function startTimer() {
 				if (interval) { return; }
 				
-				interval = setInterval(function() {
-					if (time === 0) {
-						timeoutCounter.html('Session expired.');
-						window.location.href = '#{request.contextPath}/index.jsf';
-						return;
-					}
-					
-					if (time === #{cc.attrs.warning}) {
-						//alert("your session expires in x minutes!");
-						PF('growlWV').renderMessage({'summary':'Inactivity Warning',
-													 'detail':warningMessage,
-													 'severity':'warn'});
-					}
-	
-					timeoutCounter.html(String(Math.floor(time / 60)).padStart(2, '0') + ':' + String(time % 60).padStart(2, '0') + ' until your session expires');
-					time--;
-				}, 1000);
+				executeTimerAction();
+				interval = setInterval(executeTimerAction, 1000);
 			}
 			
 			function resetTimer() {
-				clearInterval(interval);
+				interval = clearInterval(interval);
 				time = #{cc.attrs.timeout};
 				startTimer();
 			}
