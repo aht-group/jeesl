@@ -75,20 +75,21 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 
 	protected void postConstructRevisionEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
 	{
+		if(jogger!=null) {jogger.start("postConstructRevisionEntity");}
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
 		this.bLabel=bLabel;
 
-		scopes = fRevision.all(fbRevision.getClassScope());
-		types = fRevision.allOrderedPositionVisible(fbRevision.getClassAttributeType());
-		relations = fRevision.allOrderedPositionVisible(fbRevision.getClassRelation());
-		scopeTypes = fRevision.allOrderedPositionVisible(fbRevision.getClassScopeType());
-
-		diagrams = fRevision.all(fbRevision.getClassDiagram());
+		scopes = fRevision.all(fbRevision.getClassScope());									if(jogger!=null) {jogger.milestone(fbRevision.getClassScope().getSimpleName(), null, scopes.size());}
+		types = fRevision.allOrderedPositionVisible(fbRevision.getClassAttributeType());	if(jogger!=null) {jogger.milestone(fbRevision.getClassAttributeType().getSimpleName(), null, types.size());}
+		relations = fRevision.allOrderedPositionVisible(fbRevision.getClassRelation());		if(jogger!=null) {jogger.milestone(fbRevision.getClassRelation().getSimpleName(), null, relations.size());}
+		scopeTypes = fRevision.allOrderedPositionVisible(fbRevision.getClassScopeType());	if(jogger!=null) {jogger.milestone(fbRevision.getClassScopeType().getSimpleName(), null, scopeTypes.size());}
+		diagrams = fRevision.all(fbRevision.getClassDiagram());								if(jogger!=null) {jogger.milestone(fbRevision.getClassDiagram().getSimpleName(), null, diagrams.size());}
+		links = fRevision.all(fbRevision.getClassEntity());									if(jogger!=null) {jogger.milestone(fbRevision.getClassEntity().getSimpleName(),"Links", links.size());}
+		
 		Collections.sort(diagrams, new PositionParentComparator<ERD>(fbRevision.getClassDiagram()));
-
-		links = fRevision.all(fbRevision.getClassEntity());
 		Collections.sort(links,cpEntity);
-
+		jogger.milestone("Sorting",null,null);
+		
 		reloadEntities();
 	}
 
@@ -119,7 +120,6 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 			        }
 				}
 			}
-
 		}
 		cancelEntity();
 	}
@@ -128,6 +128,8 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 	{
 //		if(debugOnInfo) {logger.info("fRevision==null?"+(fRevision==null)+" sbhCategory==null?"+(sbhCategory==null)+" sbhCategory.getSelected()==null?"+(sbhCategory.getSelected()==null));}
 		entities = fRevision.findRevisionEntities(sbhCategory.getSelected(), true);
+		if(jogger!=null) {jogger.milestone(fbRevision.getClassEntity().getSimpleName(),"Entities", entities.size());}
+		
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbRevision.getClassEntity(),entities));}
 		Collections.sort(entities,cpEntity);
 
@@ -135,19 +137,25 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		sbhDiagram.setList(efEntity.toDiagrams(entities));
 		Collections.sort(sbhDiagram.getList(),cpDiagram);
 		sbhDiagram.selectAll();
+		if(jogger!=null) {jogger.milestone(fbRevision.getClassDiagram().getSimpleName(),null, sbhDiagram.getList().size());}
 		prepareEntitiesCodeMap();
+		if(jogger!=null) {jogger.milestone(fbRevision.getClassAttribute().getSimpleName(),"prepareEntitiesCodeMap", mapEntitesCodeToAttribustes.size());}
 	}
 
-	private void prepareEntitiesCodeMap() {
+	private void prepareEntitiesCodeMap()
+	{
 		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
-		if(!sbhCategory.getHasSelected()) {
+		if(!sbhCategory.getHasSelected())
+		{
 			List<RE> allRevisionEntities = fRevision.findRevisionEntities(sbhCategory.getList(), true);
-			for (Iterator<RE> iterator = allRevisionEntities.iterator(); iterator.hasNext();) {
+			for (Iterator<RE> iterator = allRevisionEntities.iterator(); iterator.hasNext();)
+			{
 				RE re = iterator.next();
 				re  = fRevision.load(fbRevision.getClassEntity(), re);
 
 				ArrayList<String> raCodes = new ArrayList<String>();
-				for(RA ra : re.getAttributes()) {
+				for(RA ra : re.getAttributes())
+				{
 					raCodes.add(ra.getCode());
 				}
 				mapEntitesCodeToAttribustes.put(re.getCode(), raCodes);
@@ -155,18 +163,22 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		}
 	}
 
-	public boolean hasEntitiesWithShortCode(String missingEntityCode) {
-		for (Iterator<String> iterator = mapEntitesCodeToAttribustes.keySet().iterator(); iterator.hasNext();) {
+	public boolean hasEntitiesWithShortCode(String missingEntityCode)
+	{
+		for (Iterator<String> iterator = mapEntitesCodeToAttribustes.keySet().iterator(); iterator.hasNext();)
+		{
 			String code = iterator.next();
-			if(code.endsWith("." + missingEntityCode)) {
+			if(code.endsWith("." + missingEntityCode))
+			{
 				//logger.info("code ends with" + missingEntityCode);
 				return true;
-				}
+			}
 		}
 		return false;
 	}
 
-	public boolean hasEntitiesWithShortCodeAndAttribute(String missingEntityCode, String missingAttributeCode) {
+	public boolean hasEntitiesWithShortCodeAndAttribute(String missingEntityCode, String missingAttributeCode)
+	{
 		for (Entry<String, List<String>> entry : mapEntitesCodeToAttribustes.entrySet()) {
 			if(entry.getKey().endsWith("." + missingEntityCode)) {
 				for (Iterator<String> iterator = entry.getValue().iterator(); iterator.hasNext();) {
@@ -181,7 +193,8 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		return false;
 	}
 
-	public void selectMissingEntity(String missingEntityCode){
+	public void selectMissingEntity(String missingEntityCode)
+	{
 		entity=null;
 		attributes=null;
 		attribute=null;

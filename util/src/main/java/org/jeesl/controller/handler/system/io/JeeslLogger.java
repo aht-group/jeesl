@@ -1,7 +1,6 @@
 package org.jeesl.controller.handler.system.io;
 
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import org.jeesl.controller.processor.arithmetic.NullCalculator;
 import org.jeesl.controller.processor.finance.AmountRounder;
 import org.jeesl.factory.builder.io.IoLogFactoryBuilder;
 import org.jeesl.factory.ejb.io.log.EjbIoLogMilestoneFactory;
+import org.jeesl.interfaces.controller.handler.system.io.JeeslLoggerHandler;
 import org.jeesl.interfaces.model.io.logging.JeeslIoLog;
 import org.jeesl.interfaces.model.io.logging.JeeslIoLogEvent;
 import org.jeesl.interfaces.model.io.logging.JeeslIoLogLoop;
@@ -36,7 +36,7 @@ public class JeeslLogger<L extends JeeslLang, D extends JeeslDescription,
 							LOOP extends JeeslIoLogLoop<LOG>,
 							EVENT extends JeeslIoLogEvent<LOG>,
 							USER extends JeeslSimpleUser>
-				implements Serializable
+				implements JeeslLoggerHandler
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslLogger.class);
@@ -76,6 +76,7 @@ public class JeeslLogger<L extends JeeslLang, D extends JeeslDescription,
 		mapLoopInstant.clear();
 	}
 	
+	@Override public String start(String log) {return start(log,null,null);}
 	public String start(String log, USER user) {return start(log,null,user);}
 	public String start(String log, String message, USER user)
 	{
@@ -150,7 +151,7 @@ public class JeeslLogger<L extends JeeslLang, D extends JeeslDescription,
 		return "";
 	}
 	
-	public void ofxMilestones(OutputStream os)
+	@Override public void ofxMilestones(OutputStream os)
 	{
 		List<String> header = new ArrayList<>();
 		header.add("Time");
