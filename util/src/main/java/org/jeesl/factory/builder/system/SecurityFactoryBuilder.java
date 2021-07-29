@@ -16,6 +16,7 @@ import org.jeesl.factory.ejb.system.security.EjbStaffFactory;
 import org.jeesl.factory.json.system.security.JsonPageFactory;
 import org.jeesl.factory.json.system.security.JsonPagesFactory;
 import org.jeesl.factory.sql.system.security.SqlUserFactory;
+import org.jeesl.factory.txt.system.security.TxtSecurityViewFactory;
 import org.jeesl.factory.txt.system.security.TxtStaffFactory;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
@@ -122,6 +123,8 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	{
 		return new TxtStaffFactory<L,D,R,USER,STAFF,D1,D2>(localeCode);
 	}
+	
+	public TxtSecurityViewFactory<L,D,C,V> txtView(String localeCode){return new TxtSecurityViewFactory<>(localeCode);}
 	
 	public JsonPageFactory<L,D,C,V,CTX,M> jsonPage() {return new JsonPageFactory<>();}
 	public JsonPagesFactory<L,D,C,R,V,U,A,AT,CTX,M,AR,USER> jsonPages() {return new JsonPagesFactory<>(this);}
