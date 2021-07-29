@@ -41,16 +41,12 @@
 	                </li>
 	            </c:if>
 	            
-	            <c:if test="#{not empty cc.attrs.childs}">
-					<ui:repeat var="var" value="#{cc.attrs.childs}">
-						<li class="jeesl-dropdown-item #{cc.attrs.readonly ? 'jeesl-greyscale' : ''}">
-							<composite:insertChildren/>
-						</li>
-					</ui:repeat>
-	            </c:if>
-	            <c:if test="#{empty cc.attrs.childs}">
-	            	<composite:insertChildren/>
-	            </c:if>
+				<ui:repeat var="var" value="#{cc.attrs.childs}" rendered="#{not empty cc.attrs.childs}">
+					<li class="jeesl-dropdown-item #{cc.attrs.readonly ? 'jeesl-greyscale' : ''}">
+						<composite:insertChildren/>
+					</li>
+				</ui:repeat>
+				<composite:insertChildren rendered="#{empty cc.attrs.childs}" />
 				
 				<c:if test="#{not empty cc.facets.bottom}">
 					<li class="jeesl-dropdown-item">
