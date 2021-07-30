@@ -9,6 +9,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Table;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.query.AuditEntity;
@@ -111,6 +116,42 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		List<ParentPredicate<RC>> ppCategory = ParentPredicate.createFromList(fbRevision.getClassCategory(),"category",categories);
 		return allForOrParents(fbRevision.getClassEntity(),ppCategory);
 	}
+
+	@Override public List<RE> findRevisionEntitiesWithAttribute(List<RC> categories, boolean showInvisibleEntities)
+	{
+		List<ParentPredicate<RC>> ppCategory = ParentPredicate.createFromList(fbRevision.getClassCategory(),"category",categories);
+		List<ParentPredicate<RC>> lAnd = ParentPredicate.empty();
+
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<RE> criteriaQuery = cB.createQuery(fbRevision.getClassEntity());
+
+		Root<RE> revisionEntity = criteriaQuery.from(fbRevision.getClassEntity());
+		revisionEntity.fetch("attributes", JoinType.LEFT);
+
+		Predicate pOr = cB.or(ParentPredicate.array(cB, revisionEntity, ppCategory));
+		Predicate pAnd = cB.and(ParentPredicate.array(cB, revisionEntity, lAnd));
+
+		CriteriaQuery<RE> select = criteriaQuery.select(revisionEntity);
+		if(ppCategory==null || ppCategory.size()==0)
+		{
+			if(lAnd==null || lAnd.size()==0)
+			{
+				return new ArrayList<RE>();
+			}
+			else
+			{
+				select.where(pAnd);
+			}
+		}
+		else
+		{
+			select.where(cB.and(pAnd,pOr));
+		}
+
+		TypedQuery<RE> q = em.createQuery(select);
+		return q.getResultList();
+	}
+
 
 	@Override public void rm(Class<RVM> cMappingView, RVM mapping) throws JeeslConstraintViolationException
 	{

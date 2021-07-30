@@ -48,7 +48,7 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 
 	List<RS> findRevisionScopes(List<RC> categories, boolean showInvisibleScopes);
 	List<RE> findRevisionEntities(List<RC> categories, boolean showInvisibleEntities);
-
+	List<RE> findRevisionEntitiesWithAttribute(List<RC> categories, boolean showInvisibleEntities);
 //	<E extends Enum<E>> RA findRevisionAttribute(Class<?> c, E code);
 
 	void rm(Class<RVM> cMappingView, RVM mapping) throws JeeslConstraintViolationException;
@@ -66,5 +66,6 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 	<RML extends EjbWithId> List<RML> allMissingLabels(Class<RML> cRml);
 	void addMissingLabel(RML rML);
 	void cleanMissingLabels(Class<RML> cRml);
+
 
 }

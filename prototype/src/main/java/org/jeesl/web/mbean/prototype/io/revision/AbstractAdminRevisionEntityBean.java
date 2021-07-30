@@ -67,7 +67,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 
 	private String className; public String getClassName() {return className;}
 	private Map<String, List<String>> mapEntitesCodeToAttribustes;
-	
+
 	public AbstractAdminRevisionEntityBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision){
 		super(fbRevision);
 		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
@@ -85,11 +85,11 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		scopeTypes = fRevision.allOrderedPositionVisible(fbRevision.getClassScopeType());	if(jogger!=null) {jogger.milestone(fbRevision.getClassScopeType().getSimpleName(), null, scopeTypes.size());}
 		diagrams = fRevision.all(fbRevision.getClassDiagram());								if(jogger!=null) {jogger.milestone(fbRevision.getClassDiagram().getSimpleName(), null, diagrams.size());}
 		links = fRevision.all(fbRevision.getClassEntity());									if(jogger!=null) {jogger.milestone(fbRevision.getClassEntity().getSimpleName(),"Links", links.size());}
-		
+
 		Collections.sort(diagrams, new PositionParentComparator<ERD>(fbRevision.getClassDiagram()));
 		Collections.sort(links,cpEntity);
-		jogger.milestone("Sorting",null,null);
-		
+		if(jogger!=null) {jogger.milestone("Sorting",null,null);}
+
 		reloadEntities();
 	}
 
@@ -129,7 +129,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 //		if(debugOnInfo) {logger.info("fRevision==null?"+(fRevision==null)+" sbhCategory==null?"+(sbhCategory==null)+" sbhCategory.getSelected()==null?"+(sbhCategory.getSelected()==null));}
 		entities = fRevision.findRevisionEntities(sbhCategory.getSelected(), true);
 		if(jogger!=null) {jogger.milestone(fbRevision.getClassEntity().getSimpleName(),"Entities", entities.size());}
-		
+
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbRevision.getClassEntity(),entities));}
 		Collections.sort(entities,cpEntity);
 
@@ -147,11 +147,10 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
 		if(!sbhCategory.getHasSelected())
 		{
-			List<RE> allRevisionEntities = fRevision.findRevisionEntities(sbhCategory.getList(), true);
+			List<RE> allRevisionEntities = fRevision.findRevisionEntitiesWithAttribute(sbhCategory.getList(), true);
 			for (Iterator<RE> iterator = allRevisionEntities.iterator(); iterator.hasNext();)
 			{
 				RE re = iterator.next();
-				re  = fRevision.load(fbRevision.getClassEntity(), re);
 
 				ArrayList<String> raCodes = new ArrayList<String>();
 				for(RA ra : re.getAttributes())
