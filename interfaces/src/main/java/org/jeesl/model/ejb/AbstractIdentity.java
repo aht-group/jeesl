@@ -116,7 +116,9 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("loggedIn:"+loggedIn);
+		sb.append(this.getClass().getSimpleName());
+		sb.append(" loggedIn:"+loggedIn);
+		
 		return sb.toString();
 	}
 }

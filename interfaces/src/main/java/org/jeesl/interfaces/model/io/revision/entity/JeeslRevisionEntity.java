@@ -27,7 +27,7 @@ public interface JeeslRevisionEntity<L extends JeeslLang, D extends JeeslDescrip
 				EjbWithCode,EjbWithPositionVisible,EjbWithParentAttributeResolver,EjbWithPositionParent,
 				EjbWithLang<L>,EjbWithDescription<D>,EjbWithRevisionAttributes<RA>
 {
-	public enum Attributes {category}
+	public enum Attributes {category,attributes}
 
 	RC getCategory();
 	void setCategory(RC category);
