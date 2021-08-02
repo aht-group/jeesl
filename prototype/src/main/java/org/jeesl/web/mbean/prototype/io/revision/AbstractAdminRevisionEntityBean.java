@@ -127,7 +127,8 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 	private void reloadEntities()
 	{
 //		if(debugOnInfo) {logger.info("fRevision==null?"+(fRevision==null)+" sbhCategory==null?"+(sbhCategory==null)+" sbhCategory.getSelected()==null?"+(sbhCategory.getSelected()==null));}
-		entities = fRevision.findRevisionEntitiesWithAttribute(sbhCategory.getSelected(), true);
+		entities = fRevision.findRevisionEntities(sbhCategory.getSelected(), true);
+
 		if(jogger!=null) {jogger.milestone(fbRevision.getClassEntity().getSimpleName(),"Entities", entities.size());}
 
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbRevision.getClassEntity(),entities));}

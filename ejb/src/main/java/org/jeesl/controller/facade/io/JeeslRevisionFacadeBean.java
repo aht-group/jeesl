@@ -112,7 +112,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 	}
 
 
-	@Override public List<RE> findRevisionEntitiesWithAttribute(List<RC> categories, boolean withAttributes)
+	@Override public List<RE> findRevisionEntities(List<RC> categories, boolean withAttributes)
 	{
 		List<ParentPredicate<RC>> ppCategory = ParentPredicate.createFromList(fbRevision.getClassCategory(),"category",categories);
 		if(withAttributes)
@@ -123,7 +123,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 			CriteriaQuery<RE> criteriaQuery = cB.createQuery(fbRevision.getClassEntity());
 
 			Root<RE> revisionEntity = criteriaQuery.from(fbRevision.getClassEntity());
-			revisionEntity.fetch("attributes", JoinType.LEFT);
+			revisionEntity.fetch(JeeslRevisionEntity.Attributes.attributes.toString(), JoinType.LEFT);
 
 			Predicate pOr = cB.or(ParentPredicate.array(cB, revisionEntity, ppCategory));
 			Predicate pAnd = cB.and(ParentPredicate.array(cB, revisionEntity, lAnd));
@@ -137,15 +137,16 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 				}
 				else
 				{
-					select.where(pAnd);
+					select.where(pAnd).distinct(true);
 				}
 			}
 			else
 			{
-				select.where(cB.and(pAnd,pOr));
+				select.where(cB.and(pAnd,pOr)).distinct(true);
 			}
 
 			TypedQuery<RE> q = em.createQuery(select);
+
 			return q.getResultList();
 		}
 		else
