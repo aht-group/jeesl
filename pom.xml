@@ -25,7 +25,9 @@
 		<module>interfaces</module>
 		<module>jsf</module>
 		<module>maven</module>
-		<module>prototype</module>  
+		<module>prototype</module>
+		
+		<module>io-locale</module>
 	</modules>
 
 	<properties>
