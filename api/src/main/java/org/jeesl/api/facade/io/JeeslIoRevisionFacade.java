@@ -47,8 +47,7 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 	RE load(Class<RE> cEntity, RE entity);
 
 	List<RS> findRevisionScopes(List<RC> categories, boolean showInvisibleScopes);
-	List<RE> findRevisionEntities(List<RC> categories, boolean showInvisibleEntities);
-	List<RE> findRevisionEntitiesWithAttribute(List<RC> categories, boolean showInvisibleEntities);
+	List<RE> findRevisionEntitiesWithAttribute(List<RC> categories, boolean withAttributes);
 //	<E extends Enum<E>> RA findRevisionAttribute(Class<?> c, E code);
 
 	void rm(Class<RVM> cMappingView, RVM mapping) throws JeeslConstraintViolationException;

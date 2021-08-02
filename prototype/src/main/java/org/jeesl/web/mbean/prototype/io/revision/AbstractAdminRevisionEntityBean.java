@@ -127,7 +127,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 	private void reloadEntities()
 	{
 //		if(debugOnInfo) {logger.info("fRevision==null?"+(fRevision==null)+" sbhCategory==null?"+(sbhCategory==null)+" sbhCategory.getSelected()==null?"+(sbhCategory.getSelected()==null));}
-		entities = fRevision.findRevisionEntities(sbhCategory.getSelected(), true);
+		entities = fRevision.findRevisionEntitiesWithAttribute(sbhCategory.getSelected(), true);
 		if(jogger!=null) {jogger.milestone(fbRevision.getClassEntity().getSimpleName(),"Entities", entities.size());}
 
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbRevision.getClassEntity(),entities));}
@@ -147,8 +147,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
 		if(!sbhCategory.getHasSelected())
 		{
-			List<RE> allRevisionEntities = fRevision.findRevisionEntitiesWithAttribute(sbhCategory.getList(), true);
-			for (Iterator<RE> iterator = allRevisionEntities.iterator(); iterator.hasNext();)
+			for (Iterator<RE> iterator = entities.iterator(); iterator.hasNext();)
 			{
 				RE re = iterator.next();
 
