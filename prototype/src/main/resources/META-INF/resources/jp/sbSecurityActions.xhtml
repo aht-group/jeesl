@@ -15,7 +15,7 @@
 	</composite:interface>
 
 	<composite:implementation>
-<ui:remove>
+
 		<jp:sbItem orientation="left" childs="#{cc.attrs.handler.actions}" readonly="true" styleClass="jeesl-menu-bar-dropdown">
 			<c:if test="#{cc.attrs.handler.noActions}">
 				<f:attribute name="styleClass" value="jeesl-disabled"/>
@@ -40,6 +40,6 @@
 				</span>
 			</span>
 		</jp:sbItem>
-</ui:remove>
+
 	</composite:implementation>
 </html>
