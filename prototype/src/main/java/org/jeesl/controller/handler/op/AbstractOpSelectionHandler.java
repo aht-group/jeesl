@@ -94,4 +94,6 @@ public abstract class AbstractOpSelectionHandler <T extends EjbWithId> implement
         }
         reset(false,true,true);
     }
+    
+    public void prepareSelection() {}
 }

@@ -155,14 +155,14 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 
 	@Override public List<R> fRoles(V view)
 	{
-		logger.info(StringUtil.stars());
-		logger.info("View: "+view.getCode());
+		if(debugOnInfo) {logger.info(StringUtil.stars());}
+		if(debugOnInfo) {logger.info("fRoles for view "+view.getCode());}
+		
 		if(!mapRoles.containsKey(view))
 		{
 			List<R> list = fSecurity.rolesForView(view);
 			Collections.sort(list,cpRole);
-			logger.info(StringUtil.stars());
-			for(R r : list) {logger.info(r.getCategory().getPosition()+"."+r.getPosition()+" "+r.getCode());}
+			if(debugOnInfo) {for(R r : list) {logger.info(r.getCategory().getPosition()+"."+r.getPosition()+" "+r.getCode());}}
 			mapRoles.put(view,list);
 		}
 		return mapRoles.get(view);
