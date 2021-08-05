@@ -202,22 +202,22 @@
 		vertical-align: middle;
 		width: 18px;
 
-		&:after {
-			@include button-after;
-		}
+//		&:after {
+//			@include button-after;
+//		}
 
-		&.ui-state-active {
-			&:after {
-				display: none;
-			}
-		}
+//		&.ui-state-active {
+//			&:after {
+//				display: none;
+//			}
+//		}
 
-		.ui-chkbox-icon {
-			left: 50%;
-			margin: -8px;
-			position: absolute;
-			top: 50%;
-		}
+//		.ui-chkbox-icon {
+//			left: 50%;
+//			margin: -8px;
+//			position: absolute;
+//			top: 50%;
+//		}
 	}
 
 	.ui-helper-hidden-accessible {

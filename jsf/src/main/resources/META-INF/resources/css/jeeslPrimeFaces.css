@@ -118,24 +118,6 @@
     position: relative;
     vertical-align: middle;
     width: 18px; }
-    .ui-selectbooleancheckbox .ui-chkbox-box:after {
-      border-bottom: 1px solid #ebebeb;
-      box-sizing: border-box;
-      content: 'ui-button';
-      display: block;
-      height: 100%;
-      line-height: normal;
-      padding: 3px 0 2px 0;
-      text-indent: -9999999px;
-      width: 100%;
-      border-radius: 2px; }
-    .ui-selectbooleancheckbox .ui-chkbox-box.ui-state-active:after {
-      display: none; }
-    .ui-selectbooleancheckbox .ui-chkbox-box .ui-chkbox-icon {
-      left: 50%;
-      margin: -8px;
-      position: absolute;
-      top: 50%; }
   .ui-selectbooleancheckbox .ui-helper-hidden-accessible > input[type=checkbox] {
     -webkit-appearance: none; }
 
