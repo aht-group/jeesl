@@ -10,7 +10,7 @@ import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-import org.apache.batik.dom.svg.SVGDOMImplementation;
+import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.ext.awt.geom.Polygon2D;
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;

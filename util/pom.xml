@@ -210,6 +210,17 @@
 
         <!-- Batik -->
         <dependency>
+		    <groupId>org.apache.xmlgraphics</groupId>
+		    <artifactId>fop</artifactId>
+		    <scope>provided</scope>
+		    <exclusions>
+		    	<exclusion>
+		    		<groupId>commons-logging</groupId>
+		    		<artifactId>commons-logging</artifactId>
+		    	</exclusion>
+		    </exclusions>
+        </dependency>
+        <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
             <scope>provided</scope>
