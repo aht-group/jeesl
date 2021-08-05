@@ -17,7 +17,7 @@ $enable-pointer-cursor-for-buttons: true;
     display: block;
 }
 
-@mixin jeesl-dropdown($foreground, $background, $hover, $separator, $zindex: 1) {
+@mixin jeesl-sb-dropdown($foreground, $background, $hover, $separator, $zindex: 1) {
 	.jeesl-dropdown-list {
 		background: $background;
 		opacity: 0;
@@ -188,6 +188,11 @@ $enable-pointer-cursor-for-buttons: true;
 		height: 42px;
 	}
 	
+	a:hover {
+		color: $white-100;
+		text-decoration: none;
+	}
+	
 	.jeesl-menu-bar-list {
 	    height: 100%;
 	    list-style: none;
@@ -233,11 +238,13 @@ $enable-pointer-cursor-for-buttons: true;
 				font-size: $font-size;
 				
 				@media (max-width: 768px) {
-					font-size: $font-size-responsive;
+					font-size: $font-size-mobile;
 				}
 			}
 
 			.jeesl-menu-bar-button {
+				@include vertical-center(after);
+				
 				box-sizing: border-box;
 			    color: $white-100;
 				cursor: pointer;
@@ -334,7 +341,7 @@ $enable-pointer-cursor-for-buttons: true;
 		top: 5px;
 	}
 	
-	@include jeesl-dropdown($anthracite, $white-100, $white-100, $bright-grey, 20);
+	@include jeesl-sb-dropdown($anthracite, $white-100, $white-100, $bright-grey, 20);
 	
 	.jeesl-dropdown-list {
 		background: transparent;
@@ -362,6 +369,19 @@ $enable-pointer-cursor-for-buttons: true;
 				.jeesl-dropdown-item-label {
 					border-bottom: 2px solid $dark-colour;
 					color: $dark-colour;
+				}
+			}
+			
+			&.active {
+				@media (max-width: 768px) {
+					background: $dark-colour;
+				}
+				
+				.jeesl-dropdown-item-label {
+					@media (max-width: 768px) {
+						color: $white-100;
+						border-color: $dark-colour;
+					}
 				}
 			}
 			
@@ -458,7 +478,7 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.jeesl-menu-bar-button {
 				background: $main-background-gradient 0 0 / 99% 100% no-repeat;
-				padding: 7px 15px 6px 15px;
+				padding: 4px 15px;
 				
 				@media (min-width: 769px) {
 					a.jeesl-menu-bar-button-label {
@@ -500,7 +520,7 @@ $enable-pointer-cursor-for-buttons: true;
 				}
 			}
 			
-			@include jeesl-dropdown($white-100, $main-background-gradient, $dark-colour, $dark-colour, 10);
+			@include jeesl-sb-dropdown($white-100, $main-background-gradient, $dark-colour, $dark-colour, 10);
 			
 			.jeesl-dropdown-list {
 				.jeesl-dropdown-item {
@@ -581,6 +601,7 @@ $enable-pointer-cursor-for-buttons: true;
 					background: $brighter-colour;
 				}
 			}
+			
 			&:hover {
 				.jeesl-menu-bar-button {
 					background: $dark-colour;
@@ -643,7 +664,7 @@ $enable-pointer-cursor-for-buttons: true;
 
 			.jeesl-menu-bar-button {
 				background: $medium-colour;
-			    padding: 7px 0 6px;
+			    padding: 6px 0;
 				
 				&.jeesl-disabled {
 					cursor: default;
@@ -687,7 +708,7 @@ $enable-pointer-cursor-for-buttons: true;
 				}
 			}
 			
-			@include jeesl-dropdown($white-100, $medium-colour, $dark-colour, $dark-colour);
+			@include jeesl-sb-dropdown($white-100, $medium-colour, $dark-colour, $dark-colour);
 			
 			.jeesl-dropdown-list {
 				&.jeesl-dropdown-list-multi {
@@ -774,6 +795,95 @@ $enable-pointer-cursor-for-buttons: true;
 					}
 				}
 			}
+			
+			.ui-inputgroup {
+				height: 100%;
+				padding: $slim-spacing $half-spacing;
+				
+				> * {
+					height: 100%;
+				}
+				
+				+ .ui-input-overlay {
+					margin: -$slim-spacing $half-spacing 0;
+					position: relative;
+					width: calc(100% - (2 * #{$half-spacing}));
+				}
+			}
+			
+			.jeesl-overlay-container {
+				@include overlay;
+				
+				.jeesl-overlay-wrapper {
+					@include select-list;
+					
+					.ui-selectonemenu-item {
+						height: $ls-element-height;
+						
+						&:hover {
+							.jeesl-field-tip {
+								.jeesl-field-tip-content {
+									opacity: 1;
+								}
+							}
+						}
+					
+						.jeesl-field-tip {
+							height: $ls-element-height;
+							position: absolute;
+							width: calc(100% - (2 * #{$half-spacing}));
+							
+							.jeesl-field-tip-content {
+								@include overlay;
+								
+								display: block;
+								left: 100%;
+								opacity: 0;
+								position: absolute;
+								top: calc(#{$ls-element-height / 2});
+								transition: opacity .2s linear;
+								
+								&:before {
+									@include triangle(transparent transparent transparent $dark-grey, 8px 0 8px 8px);
+									
+									left: -9px;
+									margin-top: -8px;
+									top: calc(#{$ls-element-height} - #{$border-width});
+								}
+								
+								&:after {
+									@include triangle(transparent transparent transparent $white-100, 8px 0 8px 8px);
+									
+									left: -8px;
+									margin-top: -8px;
+									top: calc(#{$ls-element-height} - #{$border-width});
+								}
+							}
+						}
+					}
+				}
+			}
+			
+//			.ui-inputgroup {
+//				align-items: stretch;
+//				display: flex;
+//				height: 100%;
+//				margin: 0;
+//				padding: $slim-spacing $half-spacing;
+//				
+//				> * {
+//					border: none;
+//				}
+//				
+//				.ui-button, .ui-inputfield {
+//					margin: 0;
+//					height: 100%;
+//				}
+//				
+//				.ui-button {
+//					width: auto;
+//				}
+//			}
 		}
 		
 		.jeesl-menu-bar-radio-item, .jeesl-menu-bar-radio-item:hover {
@@ -805,6 +915,7 @@ $enable-pointer-cursor-for-buttons: true;
 @mixin jeesl-titlebar {
 	box-sizing: border-box;
 	display: flex;	
+	height: auto;
 	margin-bottom: 2px;
     padding: 0 0 0 10px;
 	

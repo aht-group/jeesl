@@ -7,6 +7,11 @@ $sb-element-height-mobile: 42px;
 $ls-element-height: 26px;
 $ls-element-height-mobile: 50px;
 
+$header-icon-height: 12px;
+$header-icon-height-mobile: 29px;
+$header-element-height: 22px;
+$header-element-height-mobile: 42px;
+
 $min-button-width: 15px;
 $min-button-width-mobile: 30px;
 
@@ -16,6 +21,7 @@ $regular-spacing: 10px;
 $wide-spacing: 15px;
 
 $border-width: 1px;
+$separator-thickness-mobile: 2px;
 
 $headings-margin-bottom: $half-spacing;
 $paragraph-margin-bottom: $wide-spacing;
@@ -30,6 +36,9 @@ $border-radius: 3px;
 $border-radius-top: $border-radius $border-radius 0 0;
 $border-radius-bottom: 0 0 $border-radius $border-radius;
 $border-radius-left: $border-radius 0 0 $border-radius;
+$border-radius-right: 0 $border-radius $border-radius 0;
+
+$transition-duration: .2s;
 
 @mixin element-height {
 	height: $element-height;

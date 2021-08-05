@@ -2,6 +2,8 @@ $white-0: hsla(0,0%,100%,0);
 $white-80: hsla(0,0%,100%,.8);
 $white-100: hsla(0,0%,100%,1);
 
+$black-40: hsla(0,0%,0%,.4);
+
 $bright-grey: hsla(0,0%,93%,1);
 $light-grey: hsla(0,0%,87%,1);
 $soft-grey: hsla(0,0%,77%,1);
@@ -35,6 +37,9 @@ $breadcrumb-background-gradient: linear-gradient(to right, $white-0, $bright-col
 $status-background-gradient: linear-gradient(to bottom, $dark-colour, $medium-colour);
 
 $panel-header-gradient: linear-gradient(to bottom, $bright-grey, $soft-grey);
+
+$overlay-shadow: 0 3px 3px $black-40;
+$highlight-shadow: 0 -1px inset $white-80;
 
 @mixin setColours($brighter, $bright, $medium, $dark, $darker) {
 	$brighter-colour: $brighter;

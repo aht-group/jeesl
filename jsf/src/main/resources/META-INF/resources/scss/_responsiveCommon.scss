@@ -14,6 +14,99 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+@mixin overlay {
+	background: $white-100;
+	border: $border-width solid $border-colour;
+	border-radius: $border-radius;
+	box-shadow: $overlay-shadow;
+	z-index: 1000;
+	
+	@media (max-width: 768px) {
+		border: none;
+		border-radius: 0;
+		left: 0 !important;
+		width: 100% !important;
+	}
+	
+	.jeesl-overlay-wrapper {
+		color: $body-foreground;
+		overflow: auto;
+	}
+}
+
+@mixin select-list {
+	padding: $half-spacing 0;
+	
+	@media (max-width: 768px) {
+		padding: $wide-spacing 0;
+	}
+	
+	&:before {
+		@media (max-width: 768px) {
+			border-bottom: $separator-thickness-mobile solid $soft-grey;
+		    content: '';
+		    display: block;
+		    width: calc(100% - (2 * $wide-spacing));
+		    margin: 0 $wide-spacing;
+		}
+	}
+	
+	.ui-selectonemenu-item {
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		line-height: $ls-element-height;
+		padding: 0 $half-spacing;
+		transition: background .2s linear;
+		
+		@media (max-width: 768px) {
+			border-radius: 0;
+			font-size: 1.2em;
+		    font-weight: 700;
+			height: $ls-element-height-mobile;
+		    line-height: calc(#{$ls-element-height-mobile} - #{$separator-thickness-mobile});
+			margin: 0;
+		    padding: 0 $wide-spacing;
+			text-shadow: none;
+		}
+		
+		&:after {
+			@media (max-width: 768px) {
+				border-bottom: $separator-thickness-mobile solid $bright-grey;
+				content: '';
+				display: block;
+				width: 100%;
+			}
+		}
+		
+		&.ui-state-hover, &:hover {
+			background: $light-grey;
+			box-shadow: none;
+			
+			@media (max-width: 768px) {
+				background: none;
+				color: $dark-colour;
+			}
+			
+			&:after {
+				@media (max-width: 768px) {
+					border-color: $dark-colour;
+				}
+			}
+		}
+				
+		&.ui-state-highlight {
+			background: $dark-colour;
+			
+			&:after {
+				@media (max-width: 768px) {
+					border-color: $white-0;
+				}
+			}
+		}
+	}
+}
+
 html, body {
 	height: 100%;
 }
@@ -29,7 +122,7 @@ body, .ui-widget {
 	font-weight: normal;
 	
 	@media (max-width: 768px) {
-		font-size: $font-size-responsive;
+		font-size: $font-size-mobile;
 	}
 }
 
@@ -45,16 +138,42 @@ body, .ui-widget {
 	filter: grayscale(1);
 }
 
+.ui-corner-all {
+	border-radius: $border-radius;
+}
+	
+.ui-corner-top {
+	border-radius: $border-radius-top;
+}
+	
+.ui-corner-bottom {
+	border-radius: $border-radius-bottom;
+}
+	
+.ui-corner-left {
+	border-radius: $border-radius-left;
+}
+	
+.ui-corner-right {
+	border-radius: $border-radius-right;
+}
+
+.ui-input-overlay {
+	@include overlay;
+}
+
 @mixin button {
 	@include element-height;
 	@include min-button-width;
+	@include vertical-center(after);
 	
 	background: $panel-header-gradient;
 	border: $border;
-	box-shadow: 0 -1px inset $white-80;
+	box-shadow: $highlight-shadow;
 	color: $foreground;
+	line-height: normal;
 	padding: 0 $half-spacing;
-	transition: border-color .2s linear, color .2s linear, text-shadow .2s linear;
+	transition: border-color $transition-duration linear, color $transition-duration linear, text-shadow $transition-duration linear;
 	z-index: 0;
 	
 	@media (max-width: 768px) {
@@ -69,9 +188,35 @@ body, .ui-widget {
 		opacity: 0;
 	    position: absolute;
 	    top: 0;
-		transition: background .2s linear, opacity .2s linear;
+		transition: background $transition-duration linear, opacity $transition-duration linear;
 	    width: 100%;
 	    z-index: -1;
+	}
+	
+	&.ui-button-icon-only {
+		.ui-button-text {
+			display: none;
+		}
+	}
+
+	&.ui-corner-all:before {
+		@extend .ui-corner-all;
+	}
+	
+	&.ui-corner-top:before {
+		@extend .ui-corner-top;
+	}
+	
+	&.ui-corner-bottom:before {
+		@extend .ui-corner-bottom;
+	}
+	
+	&.ui-corner-left:before {
+		@extend .ui-corner-left;
+	}
+	
+	&.ui-corner-right:before {
+		@extend .ui-corner-right;
 	}
 	
 	&.ui-state-active, &.ui-state-hover {
@@ -82,7 +227,7 @@ body, .ui-widget {
 		
 		&:before {
 			opacity: 1;
-			transition: background .2s linear, opacity .2s linear;
+			transition: background $transition-duration linear, opacity $transition-duration linear;
 		}
 	}
 	
@@ -95,6 +240,10 @@ body, .ui-widget {
 			background: $dark-colour;
 		}
 	}
+	
+	.ui-button-text {
+		line-height: normal;
+	}
 }
 
 @mixin inputfield {
@@ -103,19 +252,21 @@ body, .ui-widget {
     border: none;
 	border-radius: $border-radius;
     box-shadow: none;
-	line-height: normal;
+	line-height: calc(#{$element-height} - (2 * #{$half-spacing}));
     padding: $half-spacing $slim-spacing;
 
 	@media (max-width: 768px) {
-		line-height: calc($element-height-mobile - $regular-spacing);
+		line-height: calc(#{$element-height-mobile} - 2 * (#{$half-spacing}));
 	}
 }
 
 @mixin icon {
 	background: none;
 	height: auto;
-	text-align: center;
-	text-indent: 0;
+	left: 0;
+	margin: 0;
+	position: relative;
+	top: 0;
 	width: auto;
 	
 	&:before {
@@ -130,6 +281,12 @@ body, .ui-widget {
 .ui-button.ui-state-default {
 	@include button;
 	
+	&.ui-state-disabled {
+		background: linear-gradient(to bottom, $bright-grey, $light-grey);
+		color: $soft-grey;
+		opacity: 1;
+	}
+	
 	.ui-icon {
 		@include icon;
 	}
@@ -143,8 +300,49 @@ body, .ui-widget {
 	}
 }
 
+.ui-chkbox {
+	.ui-chkbox-box.ui-state-default {
+		@include button;
+		
+		text-align: center;
+		width: $element-height;
+		
+		@media (max-width: 768px) {
+			padding: 0;
+			width: $element-height-mobile;
+		}
+		
+		.ui-icon {
+			@include icon;
+		}
+		
+		.ui-icon-check:before {
+			content: "\1F5F8";
+			display: inline-block;
+			
+			@media (max-width: 768px) {
+				padding: 7px 2px 0 0;
+			}
+		}
+	}
+}
+
 .ui-inputfield.ui-state-default {
 	@include inputfield;
+}
+
+.ui-inputgroup {
+	align-items: stretch;
+	display: flex;
+	margin: 0;
+	
+	.ui-button, .ui-inputfield {
+		margin: 0;
+	}
+	
+	.ui-button {
+		width: auto;
+	}
 }
 
 .ui-selectonemenu.ui-state-default {
@@ -188,6 +386,115 @@ body, .ui-widget {
 		.ui-icon-triangle-1-s:before {
 			content: "\25bc";
 			transform: scale(1.5,0.7);
+		}
+	}
+}
+
+.ui-selectonemenu-panel {
+	@include overlay;
+	
+	.ui-selectonemenu-items-wrapper {
+		@media (max-width: 768px) {
+			max-height: 400px !important;
+		}
+		
+		.ui-selectonemenu-list {
+			@include select-list;
+		}
+	}
+}
+
+.ui-datepicker {
+	@include overlay;
+	
+	.ui-datepicker-header {
+		background: $status-background-gradient;
+		border: 0;
+		color: $white-100;
+		display: flex;
+		font-size: 1.2em;
+		padding: 0;
+		text-shadow: none;
+		
+		.ui-datepicker-title {
+			flex-grow: 1;
+			line-height: $header-element-height;
+			margin: 0;
+			order: 1;
+			
+			@media (max-width: 768px) {
+				line-height: $header-element-height-mobile;
+			}
+		}
+		
+		.ui-datepicker-prev {
+			order: 0;
+		}
+		
+		.ui-datepicker-next {
+			order: 2;
+		}
+		
+		.ui-datepicker-prev, .ui-datepicker-next {
+			background: transparent;
+			border-radius: 0;
+			font-size: $font-size;
+			height: $header-element-height;
+			left: 0;
+			overflow: hidden;
+			position: relative;
+			text-align: center;
+			top: 0;
+			transition: background $transition-duration linear;
+			width: $header-element-height;
+			
+			@media (max-width: 768px) {
+				font-size: $font-size-mobile;
+				height: $header-element-height-mobile;
+				width: $header-element-height-mobile;
+			}
+			
+			&.ui-state-hover {
+				border: none;
+				box-shadow: none;
+				background: $dark-colour;
+			}
+		}
+		
+		.ui-icon {
+			@include vertical-center(after);
+			
+			background: none;
+			height: 100%;
+			margin: 0;
+			position: initial;
+			text-indent: $header-element-height;
+			white-space: nowrap;
+			width: 100%;
+			
+			@media (max-width: 768px) {
+				text-indent: $header-element-height-mobile;
+			}
+			
+			&:before {
+				color: white;
+				display: inline-block;
+				font-size: 2em;
+				text-indent: -$header-element-height-mobile;
+				vertical-align: middle;
+				
+				@media (max-width: 768px) {
+					text-indent: -$header-element-height-mobile;
+				}
+			}
+		}
+		
+		.ui-icon-circle-triangle-w:before {
+			content: "\25c4";
+		}
+		
+		.ui-icon-circle-triangle-e:before {
+			content: "\25ba";
 		}
 	}
 }
