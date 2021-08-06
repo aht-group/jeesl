@@ -47,7 +47,7 @@ public class JeeslXhtmlGoal extends AbstractMojo
     	getLog().info("projectBuildDirectory: "+projectBuildDirectory);
 
     	File fRoot = new File(xhtmlSource);
-    	if(!fRoot.exists()){throw new MojoExecutionException("msg.bundle directory does not exist: "+fRoot.getAbsolutePath());}
+    	if(!fRoot.exists()){throw new MojoExecutionException("XHTML directory does not exist: "+fRoot.getAbsolutePath());}
 
 		try
 		{

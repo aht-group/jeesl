@@ -13,7 +13,7 @@ import org.jeesl.controller.processor.arithmetic.NullCalculator;
 import org.jeesl.controller.processor.finance.AmountRounder;
 import org.jeesl.factory.builder.io.IoLogFactoryBuilder;
 import org.jeesl.factory.ejb.io.log.EjbIoLogMilestoneFactory;
-import org.jeesl.interfaces.controller.handler.system.io.JeeslLoggerHandler;
+import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.io.logging.JeeslIoLog;
 import org.jeesl.interfaces.model.io.logging.JeeslIoLogEvent;
 import org.jeesl.interfaces.model.io.logging.JeeslIoLogLoop;
@@ -28,7 +28,7 @@ import org.openfuxml.renderer.text.OfxTextSilentRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslLogger<L extends JeeslLang, D extends JeeslDescription,
+public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 							LOG extends JeeslIoLog<L,D,STATUS,RETENTION,USER>,
 							STATUS extends JeeslIoLogStatus<L,D,STATUS,?>,
 							RETENTION extends JeeslIoLogRetention<L,D,RETENTION,?>,
@@ -36,10 +36,10 @@ public class JeeslLogger<L extends JeeslLang, D extends JeeslDescription,
 							LOOP extends JeeslIoLogLoop<LOG>,
 							EVENT extends JeeslIoLogEvent<LOG>,
 							USER extends JeeslSimpleUser>
-				implements JeeslLoggerHandler
+				implements JeeslLogger
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslLogger.class);
+	final static Logger logger = LoggerFactory.getLogger(LoggerHandler.class);
 	
 	private final IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog;
 	private final EjbIoLogMilestoneFactory<LOG,MILESTONE> efMilestone;
@@ -56,7 +56,7 @@ public class JeeslLogger<L extends JeeslLang, D extends JeeslDescription,
 	private LOG log;
 	
 	
-	public JeeslLogger(IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog,
+	public LoggerHandler(IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog,
 					   Class<?> c)
 	{
 		this.fbLog=fbLog;

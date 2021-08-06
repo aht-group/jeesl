@@ -11,6 +11,7 @@ import java.util.Map;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
+import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
@@ -50,6 +51,8 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppSecurityBean.class);
 	
+	protected enum JoggerLoop {loadView}
+	
 	protected JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
 	protected final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 
@@ -70,6 +73,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	
 	private final Comparator<R> cpRole;
 	
+	protected JeeslLogger jogger;
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 
 	public AbstractAppSecurityBean(final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
@@ -97,24 +101,41 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	public void init(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
 	{
 		this.fSecurity=fSecurity;
-		reload();
-	}
-	
-	private void reload()
-	{
 		views = fSecurity.all(fbSecurity.getClassView());
-		for(V v : views){update(v);}
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),"Loaded", views.size());}
+		
+		List<A> actions = fSecurity.all(fbSecurity.getClassAction());
+		Map<V,List<A>> mapAction = fbSecurity.ejbAction().toMapView(actions);
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassAction().getSimpleName(),"Loaded and put to Map", actions.size());}
+		
+		List<AR> areas = fSecurity.all(fbSecurity.getClassArea());	
+		Map<V,List<AR>> mapArea = fbSecurity.ejbArea().toMapView(areas);
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassArea().getSimpleName(),"Loaded and put to Map", areas.size());}
+		
+		for(V v : views)
+		{
+			update(v,mapAction.get(v),mapArea.get(v));
+		}
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),"Updated", views.size());}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassView(), views));}
 	}
 	
 	public void update(V view)
 	{
+		if(jogger!=null) {jogger.loopStart(JoggerLoop.loadView);}
 		view = fSecurity.load(fbSecurity.getClassView(), view);
+		if(jogger!=null) {jogger.loopEnd(JoggerLoop.loadView,1);}
+		
+		update(view,view.getActions(),fSecurity.allForParent(fbSecurity.getClassArea(),view));
+	}
+	
+	private void update(V view, List<A> actions, List<AR> areas)
+	{
 		mapUrlPattern.put(view.getViewPattern(),view);
 		mapUrlMapping.put(view.getUrlMapping(),view);
 		mapCodeView.put(view.getCode(),view);
-		mapActionsByView.put(view,view.getActions());
-		mapAreas.put(view,fSecurity.allForParent(fbSecurity.getClassArea(),view));
+		if(actions!=null) {mapActionsByView.put(view,actions);} else {mapActionsByView.put(view,new ArrayList<>());}
+		if(areas!=null) {mapAreas.put(view,areas);} else {mapAreas.put(view,new ArrayList<>());}
 		if(debugOnInfo) {logger.info("Updated "+JeeslSecurityView.class.getSimpleName()+" "+view.getCode()+" "+mapAreas.get(view).size());}
 	}
 	

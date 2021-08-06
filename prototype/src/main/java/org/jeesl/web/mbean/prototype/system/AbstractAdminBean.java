@@ -9,7 +9,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
-import org.jeesl.interfaces.controller.handler.system.io.JeeslLoggerHandler;
+import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -31,7 +31,7 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription
 	
 	protected JeeslFacesMessageBean bMessage;
 	protected JeeslTranslationBean<L,D,?> bTranslation;
-	protected JeeslLoggerHandler jogger;
+	protected JeeslLogger jogger;
 	
 	protected boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;}
 	protected String[] langs; public String[] getLangs() {return langs;}

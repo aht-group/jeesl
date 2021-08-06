@@ -1,6 +1,9 @@
 package org.jeesl.factory.ejb.system.security;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
@@ -36,5 +39,16 @@ public class EjbSecurityActionFactory <V extends JeeslSecurityView<?,?,?,?,?,A>,
     	catch (IllegalAccessException e) {e.printStackTrace();}
     	
     	return ejb;
+    }
+    
+    public Map<V,List<A>> toMapView(List<A> list)
+    {
+    	Map<V,List<A>> map = new HashMap<>();
+    	for(A a : list)
+    	{
+    		if(!map.containsKey(a.getView())) {map.put(a.getView(),new ArrayList<>());}
+    		map.get(a.getView()).add(a);
+    	}
+    	return map;
     }
 }

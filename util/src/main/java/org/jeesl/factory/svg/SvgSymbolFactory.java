@@ -142,51 +142,53 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 	private static SVGGraphics2D build(DOMImplementation impl, int canvasSize, JeeslGraphicStyle.Code style, int size, String color)
 	{
-		 SVGDocument doc = (SVGDocument) impl.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, "svg", null);
-		    SVGGraphics2D g = new SVGGraphics2D(doc);
+		SVGDocument doc = (SVGDocument) impl.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, "svg", null);
+		SVGGraphics2D g = new SVGGraphics2D(doc);
 
-		    double cS = canvasSize; double s = size;
-		    double low = (cS - s)/2;
+		double cS = canvasSize; double s = size;
+		double low = (cS - s)/2;
 		    
-		    logger.trace("Canvas: "+canvasSize+" low:"+low+" size:"+size);
+		logger.trace("Canvas: "+canvasSize+" low:"+low+" size:"+size);
 		    
-		    Shape shape = null;
-		    switch(style)
-		    {
-		    	case circle:  shape = new Ellipse2D.Double(low, low, size, size);break;
-		    	case square:  shape = new Rectangle2D.Double(low, low, size, size);break;
-		    }
+		Shape shape = null;
+		switch(style)
+		{
+			case circle:  shape = new Ellipse2D.Double(low, low, size, size);break;
+			case square:  shape = new Rectangle2D.Double(low, low, size, size);break;
+			case triangle: logger.warn("NYI: Triangle Shape !!"); break;
+		}
 		    
-		    g.setPaint(Color.decode("#"+color));
-		    g.fill(shape);
+		g.setPaint(Color.decode("#"+color));
+		g.fill(shape);
 		      
-		    g.setSVGCanvasSize(new Dimension(canvasSize, canvasSize));
+		g.setSVGCanvasSize(new Dimension(canvasSize, canvasSize));
 		    
-		    return g;
+		return g;
 	}
 	
 	private static SVGGraphics2D test(DOMImplementation impl, int canvasSize, JeeslGraphicStyle.Code style, int size, String color)
 	{
-		 SVGDocument doc = (SVGDocument) impl.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, "svg", null);
-		    SVGGraphics2D g = new SVGGraphics2D(doc);
+		SVGDocument doc = (SVGDocument) impl.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, "svg", null);
+		SVGGraphics2D g = new SVGGraphics2D(doc);
 
-		    double cS = canvasSize; double s = size;
-		    double low = (cS - s)/2;
+		double cS = canvasSize; double s = size;
+		double low = (cS - s)/2;
 		    
-		    logger.trace("Canvas: "+canvasSize+" low:"+low+" size:"+size);
+		logger.trace("Canvas: "+canvasSize+" low:"+low+" size:"+size);
 		    
-		    Shape shape = null;
-		    switch(style)
-		    {
-		    	case circle:  shape = new Ellipse2D.Double(low, low, size, size);break;
-		    	case square:  shape = new Rectangle2D.Double(low, low, size, size);break;
-		    }
-		    
-		    g.setPaint(Color.decode("#"+color));
-		    g.fill(shape);
-		      
-		    g.setSVGCanvasSize(new Dimension(canvasSize, canvasSize));
-		    
-		    return g;
+		Shape shape = null;
+	    switch(style)
+	    {
+	    	case circle:  shape = new Ellipse2D.Double(low, low, size, size);break;
+	    	case square:  shape = new Rectangle2D.Double(low, low, size, size);break;
+	    	case triangle: logger.warn("NYI: Triangle Shape !!"); break;
+	    }
+	    
+	    g.setPaint(Color.decode("#"+color));
+	    g.fill(shape);
+	      
+	    g.setSVGCanvasSize(new Dimension(canvasSize, canvasSize));
+	    
+	    return g;
 	}
 }
