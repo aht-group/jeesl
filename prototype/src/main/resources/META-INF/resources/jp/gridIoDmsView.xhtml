@@ -6,9 +6,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf"
-	xmlns:jp="http://jsf.jeesl.org/prototype"
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -43,7 +41,7 @@
 					<h:form id="fSection" rendered="#{not empty cc.attrs.bean.section}">
 						<p:panel header="#{cc.attrs.bean.section.name[localeCode].lang}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
 							</f:facet>
 							<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 								<h:outputText value="#{cc.attrs.bean.section.description[localeCode].lang}"/>

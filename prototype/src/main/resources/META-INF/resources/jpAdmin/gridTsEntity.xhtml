@@ -5,6 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -25,7 +26,7 @@
 							selection="#{cc.attrs.bean.entity}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslTsClasses}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderEntities()}" update="@form"/>
@@ -50,9 +51,9 @@
 						<p:panel id="pLang" header="#{msg.jeeslTsClass}"
 								 rendered="#{not empty cc.attrs.bean.entity}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancel()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslTtCancel}"/>
-								<aht:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" rendered="#{cc.attrs.bean.entity.id gt 0}" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttDelete}"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancel()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.entity.id gt 0}" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.aupCode}"/>

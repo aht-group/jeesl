@@ -5,7 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -41,7 +41,7 @@
 								 selection="#{cc.attrs.bean.analysis}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<aht:pfDataTableHeader title="#{msg.jeeslSurveyAnalyses}">
-		                         <aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAnalysis()}" update=":#{cc.id}:grid"/>
+		                         <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAnalysis()}" update=":#{cc.id}:grid"/>
 		                     </aht:pfDataTableHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAnalyses()}" update="@form"/>
@@ -60,8 +60,8 @@
 				<h:form id="fAnalysis" rendered="#{not empty cc.attrs.bean.analysis}">
 					<p:panel header="#{msg.jeeslSurveyAnalysis}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<aht:icon type="jeeslSave" listener="#{cc.attrs.bean.saveAnalysis()}" update=":#{cc.id}:grid"/>
-							<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAnalysis()}" update=":#{cc.id}:grid" mayDisappear="true" rendered="#{cc.attrs.bean.analysis.id gt 0}"/>
+							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveAnalysis()}" update=":#{cc.id}:grid"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAnalysis()}" update=":#{cc.id}:grid" mayDisappear="true" rendered="#{cc.attrs.bean.analysis.id gt 0}"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="4" columnClasses="jeeslGrid30,jeeslGrid20,jeeslGrid30,jeeslGrid20">
@@ -125,8 +125,8 @@
 				<h:form id="fAnalysisQuestion" rendered="#{not empty cc.attrs.bean.analysisQuestion}">
 					<p:panel header="#{msg.jeeslSurveyAnalysisQuestion}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<aht:icon type="jeeslSave" listener="#{cc.attrs.bean.saveAnalysisQuestion()}" update=":#{cc.id}:sAnalysis"/>
-							<aht:icon type="jeeslDelete"  listener="#{cc.attrs.bean.rmAnalysisQuestion()}" update=":#{cc.id}:sAnalysis" mayDisappear="true"/>
+							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveAnalysisQuestion()}" update=":#{cc.id}:sAnalysis"/>
+							<j:icon type="jeeslDelete"  listener="#{cc.attrs.bean.rmAnalysisQuestion()}" update=":#{cc.id}:sAnalysis" mayDisappear="true"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -140,7 +140,7 @@
 								 selection="#{cc.attrs.bean.tool}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<aht:pfDataTableHeader title="#{msg.jeeslSurveyAnalysisTools}">
-		                         <aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTool()}" update=":#{cc.id}:sAnalysis"/>
+		                         <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTool()}" update=":#{cc.id}:sAnalysis"/>
 		                     </aht:pfDataTableHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTools()}" update="@form"/>
@@ -160,8 +160,8 @@
 				<h:form id="fTool" rendered="#{not empty cc.attrs.bean.tool}">
 					<p:panel header="#{msg.jeeslSurveyAnalysisQuestion}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<aht:icon type="jeeslSave" listener="#{cc.attrs.bean.saveTool()}" update=":#{cc.id}:sAnalysis"/>
-							<aht:icon type="jeeslDelete"  listener="#{cc.attrs.bean.deleteTool()}" update=":#{cc.id}:sAnalysis" mayDisappear="true"/>
+							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveTool()}" update=":#{cc.id}:sAnalysis"/>
+							<j:icon type="jeeslDelete"  listener="#{cc.attrs.bean.deleteTool()}" update=":#{cc.id}:sAnalysis" mayDisappear="true"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="4" columnClasses="jeeslGrid30,jeeslGrid20,jeeslGrid30,jeeslGrid20">

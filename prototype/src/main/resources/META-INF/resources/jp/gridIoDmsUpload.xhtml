@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:jp="http://jsf.jeesl.org/prototype"
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
 	xmlns:aupAdmin="http://ahtutils.sourceforge.net/prototype/admin"
@@ -42,7 +36,7 @@
 					<h:form id="fSection" rendered="#{not empty cc.attrs.bean.section}">
 						<p:panel header="#{cc.attrs.bean.section.name[localeCode].lang}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
 							</f:facet>
 							<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 								<h:outputText value="#{cc.attrs.bean.section.description[localeCode].lang}"/>
@@ -54,7 +48,7 @@
 										selection="#{cc.attrs.bean.file}" selectionMode="single" rowKey="#{f.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslIoDmsDocuments}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addFile()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addFile()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderFiles()}" update="@form"/>
@@ -67,9 +61,9 @@
 					<h:form id="fFile">
 						<p:panel id="pView" header="#{msg.jeeslIoDmsDocument}" rendered="#{not empty cc.attrs.bean.file}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetFile()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveFile()}" update=":#{cc.id}:sSection"  tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteFile()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.file.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetFile()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveFile()}" update=":#{cc.id}:sSection"  tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteFile()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.file.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">

@@ -4,11 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import org.jeesl.api.bean.JeeslSettingsBean;
-import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 {
@@ -41,7 +38,6 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 
 	public AbstractSettingsBean()
 	{
-		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
 		positionMenu2="right";
 		positionSideMenu="right";
 		calendarFormat = "dd.MM.yyyy";
@@ -56,8 +52,6 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 		allowUploadJesslGraphicType = "/(\\.|\\/)(svg|png)$/";
 		
 		cssTimestamp = Long.valueOf(Instant.now().getEpochSecond()).toString();
-		
-		logger.info(AbstractLogMessage.postConstruct(ptt));
 	}
 	
 	protected String datePattern; @Override public String getDatePattern(){return datePattern;}

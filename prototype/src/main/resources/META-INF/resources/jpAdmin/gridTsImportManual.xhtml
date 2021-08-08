@@ -6,9 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:j="http://www.jeesl.org/jsf"
-	xmlns:jp="http://jsf.jeesl.org/prototype"
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:mc="http://www.metachart.org/chart"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
  	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -58,7 +56,7 @@
                 	<h:form id="fTransaction">
                 		 <p:panel id="pData" header="#{msg.jeeslTsTransaction}" styleClass="jeeslPanel">
                            <f:facet name="actions">
-                               <aht:icon type="jeeslSave" listener="#{cc.attrs.bean.saveTransaction()}" update="@form :#{cc.id}:row2"/>
+                               <j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveTransaction()}" update="@form :#{cc.id}:row2"/>
                            </f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
                            <p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
@@ -124,8 +122,8 @@
                     <h:form id="fData">
                         <p:panel id="pData" header="#{msg.aupOptionDetails}" styleClass="jeeslPanel">
                             <f:facet name="actions">
-                                <aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelData()}" update=":#{cc.id}:sTs" mayDisappear="true" tooltip="#{msg.jeeslTtCancel}"/>
-                                <aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveData()}" update=":#{cc.id}:fTimeSeries" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+                                <j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelData()}" update=":#{cc.id}:sTs" mayDisappear="true" tooltip="#{msg.jeeslTtCancel}"/>
+                                <j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveData()}" update=":#{cc.id}:fTimeSeries" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
                             </f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
                             <p:panelGrid columns="2" columnClasses="auPwg30,auPwg70" styleClass="auCleanPanelGrid">

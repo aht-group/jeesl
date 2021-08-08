@@ -5,6 +5,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://primefaces.org/ui"
+    xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
     xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
 >
@@ -53,7 +54,7 @@
 								 selection="#{bean.version}" selectionMode="single">
 						<f:facet name="header">
 							<aht:pfDataTableHeader title="#{msg.jpSurveyTemplateVersions}">
-                         <aht:icon type="aupAdd" listener="#{bean.addVersion()}" update=":row1"/>
+                         <j:icon type="aupAdd" listener="#{bean.addVersion()}" update=":row1"/>
                      </aht:pfDataTableHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":row1" listener="#{bean.selectVersion()}"/>
@@ -70,8 +71,8 @@
                                  selection="#{bean.section}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<aht:pfDataTableHeader title="#{msg.aupSurveySections}">
-                    		<aht:icon type="aupAdd" listener="#{bean.addSection()}" update=":row1"/>
-                     </aht:pfDataTableHeader>
+		                    	<j:icon type="aupAdd" listener="#{bean.addSection()}" update=":row1"/>
+		                	</aht:pfDataTableHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{bean.reorderSections()}" update="@form"/>
 						<p:ajax event="rowSelect" update=":row1" listener="#{bean.selectSection()}"/>

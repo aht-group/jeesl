@@ -7,10 +7,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:of="http://omnifaces.org/functions"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
 	xmlns:aupAdm="http://ahtutils.sourceforge.net/prototype/admin"
-	 xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	 
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
@@ -29,7 +30,7 @@
 							<p:ajax event="rowSelect" update=":#{cc.id}:sSurvey" listener="#{cc.attrs.bean.selectSurvey}"/>
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslListOfSurvey}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSurvey()}" update=":#{cc.id}:sSurvey"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSurvey()}" update=":#{cc.id}:sSurvey"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:column>

@@ -5,6 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -25,7 +26,7 @@
 									selection="#{cc.attrs.bean.entity}" selectionMode="single" rowKey="#{e.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslRevisionEntities}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderEntites()}" update="@form"/>
@@ -55,9 +56,9 @@
 					<h:form id="fView">
 						<p:panel id="pView" header="#{msg.jeeslRevisionEntity}" rendered="#{not empty cc.attrs.bean.entity}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.jeeslTtCancel}"/>
-								<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
-								<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.entity.id gt 0}"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.entity.id gt 0}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							<p:messages for="entity" redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -110,7 +111,7 @@
 							selection="#{cc.attrs.bean.mapping}" selectionMode="single" rowKey="#{m.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.aupRevisionMappings}">
-									<aht:icon type="aupAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMappings :#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
+									<j:icon type="aupAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMappings :#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderMappings()}" update="@form"/>
@@ -126,9 +127,9 @@
 					<h:form id="fMapping">
 						<p:panel header="#{msg.aupRevisionMapping}" rendered="#{not empty cc.attrs.bean.mapping}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelMapping()}" 	update=":#{cc.id}:sAttributes" mayDisappear="true" tooltip="#{msg.jeeslTtCancel}"/>
-								<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveMapping()}" 	update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmMapping()}" 		update=":#{cc.id}:sAttributes" mayDisappear="true" rendered="#{cc.attrs.bean.mapping.id gt 0}"  tooltip="#{msg.ttDelete}"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelMapping()}" 	update=":#{cc.id}:sAttributes" mayDisappear="true" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveMapping()}" 	update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmMapping()}" 		update=":#{cc.id}:sAttributes" mayDisappear="true" rendered="#{cc.attrs.bean.mapping.id gt 0}"  tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="auPwg20,auPwg80">
 								<p:outputLabel value="#{msg.aupRevisionScope}"/>

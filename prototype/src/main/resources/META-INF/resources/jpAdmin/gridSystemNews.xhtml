@@ -5,6 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -25,7 +26,7 @@
 							selection="#{cc.attrs.bean.news}" selectionMode="single" rowKey="#{news.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslSystemNews}">
-									<aht:icon type="aupAdd" listener="#{cc.attrs.bean.addNews()}" update=":#{cc.id}:sDetails" tooltip="#{msg.ttNew}"/>
+									<j:icon type="aupAdd" listener="#{cc.attrs.bean.addNews()}" update=":#{cc.id}:sDetails" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sDetails" listener="#{cc.attrs.bean.selectNews()}"/>
@@ -53,9 +54,9 @@
 					<h:form id="fNews">
 						<p:panel header="#{msg.jeeslNewsDetail}" rendered="#{not empty cc.attrs.bean.news}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelNews()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveNews()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" rendered="#{cc.attrs.bean.news.id gt 0}" listener="#{cc.attrs.bean.rmNews()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelNews()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveNews()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.news.id gt 0}" listener="#{cc.attrs.bean.rmNews()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslPanel20,jeeslPanel80">
 								<p:outputLabel value="#{msg.aupCategory}"/>

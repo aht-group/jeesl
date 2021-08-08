@@ -22,7 +22,7 @@
 					selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
 						<aht:pfDataTableHeader title="#{msg.jeeslConstraintScopes}">
-							<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addScope()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
+							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addScope()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
 						</aht:pfDataTableHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderScopes()}" update="@form"/>
@@ -43,9 +43,9 @@
 			<h:form id="fScope" rendered="#{(not empty cc.attrs.bean.scope) and (cc.attrs.bean.ui2.showA)}">
 				<p:panel id="pView" header="#{msg.jeeslConstraintScope}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-						<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveScope()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-						<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteScope()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.scope.id gt 0}"/>
+						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveScope()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteScope()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.scope.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						<p:outputLabel value="#{msg.jeeslCategory}"/>
@@ -65,7 +65,7 @@
 					selection="#{cc.attrs.bean.constraint}" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
 						<aht:pfDataTableHeader title="#{msg.jeeslConstraints}">
-							<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addConstraint()}" update=":#{cc.id}:sConstraint" tooltip="#{msg.ttNew}"/>
+							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addConstraint()}" update=":#{cc.id}:sConstraint" tooltip="#{msg.ttNew}"/>
 						</aht:pfDataTableHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderScopes()}" update="@form"/>
@@ -84,9 +84,9 @@
 			<h:form id="fConstraint" rendered="#{not empty cc.attrs.bean.constraint}">
 				<p:panel header="#{msg.jeeslConstraint}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:sScope :#{cc.id}:sConstraint" tooltip="#{msg.jeeslTtCancel}"/>
-						<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveConstraint()}" update=":#{cc.id}:sScope :#{cc.id}:sConstraint" tooltip="#{msg.ttSave}"/>
-						<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteScope()}" update=":#{cc.id}:sScope :#{cc.id}:sConstraint" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.scope.id gt 0}"/>
+						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:sScope :#{cc.id}:sConstraint" tooltip="#{msg.jeeslTtCancel}"/>
+						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveConstraint()}" update=":#{cc.id}:sScope :#{cc.id}:sConstraint" tooltip="#{msg.ttSave}"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteScope()}" update=":#{cc.id}:sScope :#{cc.id}:sConstraint" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.scope.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						<p:outputLabel value="#{msg.jeeslType}"/>

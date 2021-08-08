@@ -85,8 +85,8 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		timeMilestone = Instant.now();
 		milestone(log,message);
 		StringBuilder sb = new StringBuilder();
-		sb.append("Starting ");
-		sb.append(c.getSimpleName());
+		sb.append("Starting logging in ").append(c.getSimpleName());
+		sb.append(": ").append(log);
 		if(user!=null) {sb.append(" by ").append(user.getEmail());}
 		return sb.toString();
 	}

@@ -5,6 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -39,7 +40,7 @@
 								selection="#{cc.attrs.bean.trafficLight}" selectionMode="single" rowKey="#{trafficLight.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslSystemLights}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTrafficLight()}" update=":#{cc.id}:sLight" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTrafficLight()}" update=":#{cc.id}:sLight" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sLight" listener="#{cc.attrs.bean.selectTrafficLight()}"/>
@@ -59,8 +60,8 @@
 						<p:panel header="#{msg.jeeslSystemLight}" styleClass="jeeslPanel"
 							rendered="#{not empty cc.attrs.bean.trafficLight}">
 							<f:facet name="actions">
-									<aht:icon type="jeeslSave" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-									<aht:icon type="jeeslDelete" ejb="#{cc.attrs.bean.trafficLight}" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
+									<j:icon type="jeeslSave" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+									<j:icon type="jeeslDelete" ejb="#{cc.attrs.bean.trafficLight}" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid60,jeeslGrid40" >
 								 <p:outputLabel value="#{msg.jeeslSystemLightColorBackground}"/>

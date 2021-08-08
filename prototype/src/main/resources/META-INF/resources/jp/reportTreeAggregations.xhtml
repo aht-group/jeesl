@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
     xmlns:aup="http://ahtutils.sourceforge.net/prototype"
     xmlns:composite="http://java.sun.com/jsf/composite">
@@ -19,10 +20,10 @@
 					 selection="#{cc.attrs.bean.opAggregationHandler.tb}" selectionMode="single" rowKey="#{p.id}" draggableRows="true">
 			<f:facet name="header">
 				<aht:pfDataTableHeader id="dth" title="#{msg.jeeslIoReportAggregations}">
-					<aht:icon type="jeeslFilter" listener="#{cc.attrs.bean.applyFilter()}" update="#{cc.attrs.update}" tooltip="Apply Filter"/>
+					<j:icon type="jeeslFilter" listener="#{cc.attrs.bean.applyFilter()}" update="#{cc.attrs.update}" tooltip="Apply Filter"/>
 					<h:graphicImage id="giAdd" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAdd']}"/>
 					<p:tooltip for="giAdd" value="#{msg.ttAdd}"/>
-					<aht:icon type="jeeslRemove" rendered="#{not empty cc.attrs.bean.opAggregationHandler.tb}" listener="#{cc.attrs.bean.opAggregationHandler.removeEntity()}" update=":fProjects"/>
+					<j:icon type="jeeslRemove" rendered="#{not empty cc.attrs.bean.opAggregationHandler.tb}" listener="#{cc.attrs.bean.opAggregationHandler.removeEntity()}" update=":fProjects"/>
 					<aht:downloadIcon rendered="false" disabled="#{cc.attrs.bean.opAggregationHandler.tbList.size() gt 0}" type="reportPdf" value="#{cc.attrs.bean.pdfStream()}" tooltip="#{msg.reportPdf}"/>
 					<aht:downloadIcon disabled="#{cc.attrs.bean.opAggregationHandler.tbList.size() gt 0}" type="reportXls" value="#{cc.attrs.bean.xlsStream()}" tooltip="#{msg.reportXls}"/>
 				</aht:pfDataTableHeader>

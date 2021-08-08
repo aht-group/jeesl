@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:h="http://java.sun.com/jsf/html"
+	
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -25,7 +26,7 @@
 							selection="#{cc.attrs.bean.algorithm}" selectionMode="single" rowKey="#{a.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslConstraintAlgorithms}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAlgorithms()}" update="@form"/>
@@ -46,9 +47,9 @@
 					<h:form id="falgorithm" rendered="#{not empty cc.attrs.bean.algorithm}">
 						<p:panel id="pAlgorithm" header="#{msg.jeeslConstraintAlgorithm}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.algorithm.id gt 0}"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.algorithm.id gt 0}"/>
 							</f:facet>
 							<div class="ui-fluid">
 								<div class="p-field p-grid">

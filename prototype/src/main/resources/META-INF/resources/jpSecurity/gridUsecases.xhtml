@@ -5,6 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:jpSec="http://jsf.jeesl.org/prototype/security"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
@@ -30,7 +31,7 @@
 							selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.aupSecurityUsecases}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectUsecase}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase"/>
@@ -51,8 +52,8 @@
 						<p:panel header="#{msg.aupSecurityUsecase}" styleClass="jeeslPanel"
 								 rendered="#{not empty cc.attrs.bean.usecase}">
 							<f:facet name="actions">
-								<aht:icon type="jeeslSave" listener="#{cc.attrs.bean.saveUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
-								<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{msg.ttDelete}"/>
+								<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 							

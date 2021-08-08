@@ -6,7 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
-    xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+    xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
@@ -21,7 +21,7 @@
 						 	selection="#{cc.attrs.handler.file}" selectionMode="single">
 				<f:facet name="header">
 					<aht:pfDataTableHeader title="#{msg.jeeslIoFiles}">
-						<aht:icon type="jeeslAdd" listener="#{cc.attrs.handler.addFile()}" update=":opUpload" oncomplete="PF('wvUpload').show();"/>
+						<j:icon type="jeeslAdd" listener="#{cc.attrs.handler.addFile()}" update=":opUpload" oncomplete="PF('wvUpload').show();"/>
 					</aht:pfDataTableHeader>
 				</f:facet>
 				<p:ajax event="rowSelect" listener="#{cc.attrs.handler.selectFile()}" update=":#{cc.id}:fDownload" />

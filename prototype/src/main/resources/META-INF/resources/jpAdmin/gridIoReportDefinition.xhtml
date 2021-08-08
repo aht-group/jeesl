@@ -27,7 +27,7 @@
 							selection="#{cc.attrs.bean.report}" selectionMode="single" rowKey="#{r.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslIoReports}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addReport()}" update=":#{cc.id}:fReport :#{cc.id}:sSheet :#{cc.id}:sGroup :#{cc.id}:row2 :#{cc.id}:row3" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addReport()}" update=":#{cc.id}:fReport :#{cc.id}:sSheet :#{cc.id}:sGroup :#{cc.id}:row2 :#{cc.id}:row3" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderReports()}" update="@form"/>
@@ -43,10 +43,10 @@
 					<h:form id="fReport">
 						<p:panel header="#{msg.jeeslIoReport}" rendered="#{(not empty cc.attrs.bean.report) and cc.attrs.bean.uiHelper.showPanelReport}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelReport()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveReport()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" rendered="#{cc.attrs.bean.report.id gt 0}" listener="#{cc.attrs.bean.rmReport()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
-								<aht:icon type="jeeslDownload" rendered="#{(cc.attrs.bean.report.id gt 0) and (not empty cc.attrs.bean.restUrl)}" listener="#{cc.attrs.bean.download()}" update=":#{cc.id}:grid" tooltip="#{msg.ttUpload}" />
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelReport()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveReport()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.report.id gt 0}" listener="#{cc.attrs.bean.rmReport()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslDownload" rendered="#{(cc.attrs.bean.report.id gt 0) and (not empty cc.attrs.bean.restUrl)}" listener="#{cc.attrs.bean.download()}" update=":#{cc.id}:grid" tooltip="#{msg.ttUpload}" />
 								<j:icon type="jeeslClone" listener="#{cc.attrs.bean.cloneReport()}" process="@this" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTooltipClone}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -78,7 +78,7 @@
 									selection="#{cc.attrs.bean.sheet}" selectionMode="single" rowKey="#{sheet.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslIoSheets}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSheet()}" update=":#{cc.id}:fSheet :#{cc.id}:sGroup :#{cc.id}:row2  :#{cc.id}:row3" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSheet()}" update=":#{cc.id}:fSheet :#{cc.id}:sGroup :#{cc.id}:row2  :#{cc.id}:row3" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderSheets()}" update="@form"/>
@@ -98,9 +98,9 @@
 					<h:form id="fSheet">
 						<p:panel header="#{msg.jeeslIoSheet}" rendered="#{(not empty cc.attrs.bean.sheet) and cc.attrs.bean.uiHelper.showPanelSheet}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" mayDisappear="true"/>
-								<aht:icon type="jeeslDelete" rendered="#{cc.attrs.bean.sheet.id gt 0}" listener="#{cc.attrs.bean.rmSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" mayDisappear="true"/>
+								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.sheet.id gt 0}" listener="#{cc.attrs.bean.rmSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
 								<j:icon type="jeeslClone" listener="#{cc.attrs.bean.cloneSheet()}" process="@this" update=":#{cc.id}:sSheet" tooltip="#{msg.jeeslTooltipClone}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
@@ -125,7 +125,7 @@
 							selection="#{cc.attrs.bean.group}" selectionMode="single" rowKey="#{group.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslIoReportGroups}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addGroup()}" update=":#{cc.id}:fGroup :#{cc.id}:row2" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addGroup()}" update=":#{cc.id}:fGroup :#{cc.id}:row2" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderGroups()}" update="@form"/>
@@ -143,9 +143,9 @@
 					<h:form id="fGroup">
 						<p:panel header="#{msg.jeeslIoReportGroup}" rendered="#{(not empty cc.attrs.bean.group) and cc.attrs.bean.uiHelper.showPanelGroup}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" mayDisappear="true"/>
-								<aht:icon type="jeeslDelete" rendered="#{cc.attrs.bean.group.id gt 0}" listener="#{cc.attrs.bean.rmGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" mayDisappear="true"/>
+								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.group.id gt 0}" listener="#{cc.attrs.bean.rmGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
 							</f:facet>
 							<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid40,jeeslGrid10">
 								<p:selectBooleanCheckbox value="#{cc.attrs.bean.group.visible}"/>
@@ -180,7 +180,7 @@
 							selection="#{cc.attrs.bean.column}" selectionMode="single" rowKey="#{column.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslIoReportColumns}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addColumn()}" update=":#{cc.id}:sColumns :#{cc.id}:sColumn" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addColumn()}" update=":#{cc.id}:sColumns :#{cc.id}:sColumn" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderColumns()}" update="@form"/>
@@ -200,9 +200,9 @@
 					<h:form id="fColumn">
 						<p:panel header="#{msg.jeeslIoReportColumn}" rendered="#{not empty cc.attrs.bean.column}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" rendered="#{cc.attrs.bean.column.id gt 0}" listener="#{cc.attrs.bean.rmColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.column.id gt 0}" listener="#{cc.attrs.bean.rmColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslIoReportGroup}"/>
@@ -311,7 +311,7 @@
 									selection="#{cc.attrs.bean.row}" selectionMode="single" rowKey="#{row.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslIoReportRows}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addRow()}" update=":#{cc.id}:sRows :#{cc.id}:sRow" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addRow()}" update=":#{cc.id}:sRows :#{cc.id}:sRow" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderRows()}" update="@form"/>
@@ -332,9 +332,9 @@
 					<h:form id="fRow">
 						<p:panel header="#{msg.jeeslIoReportRow}" rendered="#{not empty cc.attrs.bean.row}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelRow()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveRow()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" rendered="#{cc.attrs.bean.row.id gt 0}" listener="#{cc.attrs.bean.rmRow()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelRow()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveRow()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.row.id gt 0}" listener="#{cc.attrs.bean.rmRow()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.aupSecurityVisible}"/>

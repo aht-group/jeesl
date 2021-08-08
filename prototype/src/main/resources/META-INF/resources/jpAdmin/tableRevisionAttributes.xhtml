@@ -5,6 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -22,7 +23,7 @@
 			selection="#{cc.attrs.bean.attribute}" selectionMode="single" rowKey="#{a.id}">
 			<f:facet name="header">
 				<aht:pfDataTableHeader title="#{msg.jeeslRevisionAttributes}">
-					<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}" tooltip="#{msg.ttNew}"/>
+					<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}" tooltip="#{msg.ttNew}"/>
 				</aht:pfDataTableHeader>
 			</f:facet>
 			<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAttributes()}" update="@form"/>

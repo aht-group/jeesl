@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
-import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
+import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
@@ -31,6 +31,8 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
 	private boolean debugOnInfo; public boolean isDebugOnInfo() {return debugOnInfo;} public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 	
 	private final SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity;
+	private JeeslLogger jogger; public JeeslLogger getJogger() {return jogger;} public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
+
 	final Class<I>  cIdentity;
 
 	public JeeslIdentityFactory(SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity,final Class<I> cIdentity)
@@ -65,8 +67,8 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
 		return identity;
 	}
 
-	public I create(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, USER user) {return create(fSecurity,null,user,null);}
-	public I create(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, USER user, ProcessingTimeTracker ptt)
+	public I create(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, USER user) {return build(fSecurity,null,user);}
+	public I build(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, USER user)
 	{		
 		I identity = null;
 		
@@ -77,18 +79,16 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
 			
 			List<R> roles = fSecurity.allRolesForUser(user);
 			for(R r : roles){identity.allowRole(r);}
-			if(ptt!=null) {ptt.tick(JeeslIdentityFactory.class.getSimpleName()+".allRolesForUser()");}
+			if(jogger!=null) {jogger.milestone(fbSecurity.getClassRole().getSimpleName(), null, roles.size());}
 			
-			if(bSecurity==null)
-			{
-				processViews(fSecurity,user,identity,ptt);
-				processActions(fSecurity,user,identity,ptt);
-			}
-			else
-			{
-				processViews(bSecurity,roles,identity,ptt);
-				processActions(bSecurity,roles,identity,ptt);
-			}
+			if(bSecurity==null) {processViews(fSecurity,user,identity);}
+			else {processViews(bSecurity,roles,identity);}
+			if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(), null, identity.sizeAllowedViews());}
+			
+			if(bSecurity==null) {processActions(fSecurity,user,identity);}
+			else {processActions(bSecurity,roles,identity);}
+			if(jogger!=null) {jogger.milestone(fbSecurity.getClassAction().getSimpleName(), null, identity.sizeAllowedActions());}
+			
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
@@ -96,12 +96,11 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
 		return identity;
 	}
 	
-	private void processViews(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, USER user, I identity, ProcessingTimeTracker ptt)
+	private void processViews(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, USER user, I identity)
 	{
 		for(V v : fSecurity.allViewsForUser(user)){identity.allowView(v);}
-		if(ptt!=null) {ptt.tick(JeeslIdentityFactory.class.getSimpleName()+".allViewsForUser("+JeeslSecurityFacade.class.getSimpleName()+")");}
 	}
-	private void processViews(JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, List<R> roles, I identity, ProcessingTimeTracker ptt)
+	private void processViews(JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, List<R> roles, I identity)
 	{	
 		Map<Long,V> map = new HashMap<Long,V>();
 		for(R role : roles)
@@ -121,15 +120,13 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
 		List<V> views = new ArrayList<V>(map.values());
 		
 		for(V v : views){identity.allowView(v);}
-		if(ptt!=null) {ptt.tick(JeeslIdentityFactory.class.getSimpleName()+".allViewsForUser("+JeeslSecurityBean.class.getSimpleName()+")");}
 	}
 	
-	private void processActions(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, USER user, I identity, ProcessingTimeTracker ptt)
+	private void processActions(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, USER user, I identity)
 	{
 		for(A a : fSecurity.allActionsForUser(user)){identity.allowAction(a);}
-		if(ptt!=null) {ptt.tick(JeeslIdentityFactory.class.getSimpleName()+".allActionsForUser()");}
 	}
-	private void processActions(JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, List<R> roles, I identity, ProcessingTimeTracker ptt)
+	private void processActions(JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, List<R> roles, I identity)
 	{
 		Map<Long,A> actions = new HashMap<Long,A>();
 		for(R r : roles)

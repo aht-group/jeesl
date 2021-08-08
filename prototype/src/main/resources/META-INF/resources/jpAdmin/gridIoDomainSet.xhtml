@@ -5,6 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -25,7 +26,7 @@
 							selection="#{cc.attrs.bean.set}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslIoDomainSets}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderSets()}" update="@form"/>
@@ -46,9 +47,9 @@
 					<h:form id="fSet">
 						<p:panel header="#{msg.jeeslIoDomainSet}" rendered="#{not empty cc.attrs.bean.set}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetSet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveSet()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteSet()}" update=":#{cc.id}:grid" rendered="#{(cc.attrs.bean.set.id gt 0) and (cc.attrs.bean.items.isEmpty())}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetSet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveSet()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteSet()}" update=":#{cc.id}:grid" rendered="#{(cc.attrs.bean.set.id gt 0) and (cc.attrs.bean.items.isEmpty())}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslSurveyDomain}"/>
@@ -66,7 +67,7 @@
 							selection="#{cc.attrs.bean.item}" selectionMode="single" rowKey="#{i.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslSurveyDomainQuery}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.addItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderItems()}" update="@form"/>
@@ -83,9 +84,9 @@
 					<h:form id="fItem">
 						<p:panel header="#{msg.jeeslIoAttributeItem}" rendered="#{not empty cc.attrs.bean.item}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.item.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.item.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">

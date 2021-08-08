@@ -6,8 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf"
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
 	xmlns:aupSec="http://ahtutils.sourceforge.net/prototype/security"
@@ -27,7 +26,7 @@
 							selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
 								<aht:pfDataTableHeader title="#{msg.jeeslTsScopes}">
-									<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory" tooltip="#{msg.ttNew}"/>
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory" tooltip="#{msg.ttNew}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderScopes()}" update="@form"/>
@@ -59,9 +58,9 @@
 						<p:panel id="pLang" header="#{msg.jeeslTsScope}"
 								 rendered="#{not empty cc.attrs.bean.scope}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" rendered="#{cc.attrs.bean.scope.id gt 0}" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttDelete}"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.scope.id gt 0}" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -99,7 +98,7 @@
 								<aht:pfDataTableHeader id="dth" title="#{msg.aupTsIntervals}">
 									<h:graphicImage id="giViewAdd" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAdd']}"/>
 			                        <p:tooltip for="giViewAdd" value="Add an item!" />
-			                        <aht:icon rendered="#{not empty cc.attrs.bean.tbInterval}" type="jeeslRemove" mayDisappear="true" listener="#{cc.attrs.bean.opRmInterval()}" update=":#{cc.id}:fIntervals" tooltip="#{msg.ttRemove}"/>
+			                        <j:icon type="jeeslRemove" rendered="#{not empty cc.attrs.bean.tbInterval}"  mayDisappear="true" listener="#{cc.attrs.bean.opRmInterval()}" update=":#{cc.id}:fIntervals" tooltip="#{msg.ttRemove}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:fIntervals" listener="#{cc.attrs.bean.selectTbInterval()}"/>
@@ -126,7 +125,7 @@
 								<aht:pfDataTableHeader id="dth" title="#{msg.jeeslTsClasses}">
 									<h:graphicImage id="giAdd" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAdd']}"/>
 			                        <p:tooltip for="giAdd" value="Add an item!" />
-			                        <aht:icon rendered="#{not empty cc.attrs.bean.tbClass}" type="jeeslRemove" mayDisappear="true" listener="#{cc.attrs.bean.opRmClass()}" update=":#{cc.id}:fClasses" tooltip="#{msg.ttRemove}"/>
+			                        <j:icon type="jeeslRemove" rendered="#{not empty cc.attrs.bean.tbClass}"  mayDisappear="true" listener="#{cc.attrs.bean.opRmClass()}" update=":#{cc.id}:fClasses" tooltip="#{msg.ttRemove}"/>
 								</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:fClasses" listener="#{cc.attrs.bean.selectTbClass()}"/>
@@ -176,9 +175,9 @@
 						<p:panel id="pLang" header="#{msg.jeeslTsMultiPoint}"
 								 rendered="#{not empty cc.attrs.bean.multiPoint}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
-								<aht:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttSave}"/>
-								<aht:icon type="jeeslDelete" rendered="#{cc.attrs.bean.scope.id gt 0}" listener="#{cc.attrs.bean.deleteMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttDelete}"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.scope.id gt 0}" listener="#{cc.attrs.bean.deleteMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslCode}"/>

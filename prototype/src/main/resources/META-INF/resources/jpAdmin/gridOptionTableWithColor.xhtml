@@ -3,13 +3,11 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	
 	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
-	xmlns:j="http://www.jeesl.org/jsf"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
 	xmlns:aupAdm="http://ahtutils.sourceforge.net/prototype/admin"
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
@@ -49,7 +47,6 @@
 							</p:panelGrid>
 						</p:panel>
 					</h:form>
-					
 					<h:form id="fCategory" rendered="#{not empty cc.attrs.bean.category}">
 						<p:dataTable var="s" value="#{cc.attrs.bean.items}" draggableRows="#{cc.attrs.bean.uiAllowReorder}"
 					          selection="#{cc.attrs.bean.status}" selectionMode="single" rowKey="#{s.id}">
@@ -59,7 +56,7 @@
 										<h:outputText value="#{msg[cc.attrs.bean.category.code]}" rendered="#{empty cc.attrs.bean.mapEntity[cc.attrs.bean.category]}"/>
 										<h:outputText value="#{cc.attrs.bean.mapEntity[cc.attrs.bean.category].name[localeCode].lang}" rendered="#{not empty cc.attrs.bean.mapEntity[cc.attrs.bean.category]}"/>
 									</f:facet>
-					          		<aht:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.uiAllowAdd}"/>
+					          		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.uiAllowAdd}"/>
 					          		<j:icon type="jeeslUpload" listener="#{cc.attrs.bean.upload()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttUpload}" rendered="#{cc.attrs.bean.supportsUpload}"/>
 					          		<j:icon type="jeeslDownload" listener="#{cc.attrs.bean.downloadData()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" rendered="#{cc.attrs.bean.supportsDownload}"/>
 					          		<j:icon type="jeeslIoAttributeCriteriaWithDescription" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.bean.showDescription}" mayDisappear="true"/>
@@ -99,9 +96,9 @@
 					<h:form id="fLang">
 						<p:panel id="pLang" header="#{msg.aupOptionDetails}" rendered="#{not empty cc.attrs.bean.status}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDispappear="true" tooltip="#{msg.jeeslTtCancel}"/>
-								<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
-								<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDisappear="true" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDispappear="true" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDisappear="true" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							
@@ -172,7 +169,7 @@
 					          selection="#{cc.attrs.bean.figure}" selectionMode="single" rowKey="#{f.id}">
 							<f:facet name="header">
 					          	<aht:pfDataTableHeader title="#{msg.jeeslOptionGraphicFigures}">
-					          		<aht:icon rendered="#{cc.attrs.bean.uiAllowAdd}" type="jeeslAdd" listener="#{cc.attrs.bean.addFigure()}" update=":#{cc.id}:fFigure" tooltip="#{msg.ttNew}"/>
+					          		<j:icon rendered="#{cc.attrs.bean.uiAllowAdd}" type="jeeslAdd" listener="#{cc.attrs.bean.addFigure()}" update=":#{cc.id}:fFigure" tooltip="#{msg.ttNew}"/>
 					          	</aht:pfDataTableHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderFigures()}" update="@form"/>
@@ -197,9 +194,9 @@
 					<h:form id="fFigure">
 						<p:panel id="pLang" header="#{msg.jeeslOptionGraphicFigure}" rendered="#{not empty cc.attrs.bean.figure}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<aht:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" mayDisappear="true" tooltip="#{msg.jeeslTtCancel}"/>
-								<aht:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveFigure()}"   update=":#{cc.id}:fFigures :#{cc.id}:fFigure" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
-								<aht:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" mayDisappear="true" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" mayDisappear="true" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveFigure()}"   update=":#{cc.id}:fFigures :#{cc.id}:fFigure" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" mayDisappear="true" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							
