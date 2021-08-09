@@ -1,9 +1,8 @@
 package org.jeesl.web.rest.auth;
 
+import org.jeesl.model.json.system.io.ssi.mobile.Login;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.model.pojo.UtilsCredential;
 
 public abstract class JeeslRestSecurityInterceptor
 {
@@ -15,7 +14,7 @@ public abstract class JeeslRestSecurityInterceptor
 
     }
     
-    protected UtilsCredential decodeBasicAuthentication(String authorizationHeader)
+    protected Login decodeBasicAuthentication(String authorizationHeader)
     {
     	return JeeslRestBasicAuthenticator.decode(authorizationHeader);
     }
