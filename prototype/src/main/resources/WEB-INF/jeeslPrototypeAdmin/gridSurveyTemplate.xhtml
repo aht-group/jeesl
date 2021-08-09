@@ -41,7 +41,7 @@
 					<p:dataTable var="category" value="#{bean.categories}" rowKey="#{category.id}"
 								 selection="#{bean.category}" selectionMode="single">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.aupSurveyCategory}"/>
+							<j:dtHeader title="#{msg.aupSurveyCategory}"/>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":row1" listener="#{bean.selectCategory()}"/>
 						<p:column>
@@ -53,9 +53,9 @@
 					<p:dataTable var="version" value="#{bean.versions}" rowKey="#{version.id}"
 								 selection="#{bean.version}" selectionMode="single">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jpSurveyTemplateVersions}">
+							<j:dtHeader title="#{msg.jpSurveyTemplateVersions}">
                          <j:icon type="aupAdd" listener="#{bean.addVersion()}" update=":row1"/>
-                     </aht:pfDataTableHeader>
+                     </j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":row1" listener="#{bean.selectVersion()}"/>
 						<p:column headerText="#{msg.aupDate}">  
@@ -70,9 +70,9 @@
 					<p:dataTable var="s" value="#{bean.sections}" rowKey="#{s.id}"
                                  selection="#{bean.section}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.aupSurveySections}">
+							<j:dtHeader title="#{msg.aupSurveySections}">
 		                    	<j:icon type="aupAdd" listener="#{bean.addSection()}" update=":row1"/>
-		                	</aht:pfDataTableHeader>
+		                	</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{bean.reorderSections()}" update="@form"/>
 						<p:ajax event="rowSelect" update=":row1" listener="#{bean.selectSection()}"/>

@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
 	xmlns:composite="http://java.sun.com/jsf/composite">
@@ -22,7 +23,7 @@
 				selection="#{cc.attrs.handler.entity}" selectionMode="single" rowKey="#{var.id}"
 				rows="5" rowsPerPageTemplate="#{cc.attrs.rowsTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">
 				<f:facet name="header">
-					<aht:pfDataTableHeader id="dth" title="#{cc.attrs.header}"/>
+					<j:dtHeader id="dth" title="#{cc.attrs.header}"/>
 				</f:facet>
 				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.select()}"/>
 				<composite:insertChildren/>

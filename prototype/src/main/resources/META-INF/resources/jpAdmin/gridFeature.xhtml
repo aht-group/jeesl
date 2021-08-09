@@ -25,9 +25,9 @@
 						<p:dataTable var="f" value="#{cc.attrs.manager.features}"
 							selection="#{cc.attrs.bean.feature}" selectionMode="single" rowKey="#{f.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslFeatures}">
+								<j:dtHeader title="#{msg.jeeslFeatures}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addFeature()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:grid" listener="#{cc.attrs.bean.selectFeature()}"/> 
 							<p:column headerText="#{msg.jeeslFeatureActive}">  

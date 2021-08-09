@@ -25,9 +25,9 @@
 						<p:dataTable var="news" value="#{cc.attrs.bean.list}" draggableRows="true"
 							selection="#{cc.attrs.bean.news}" selectionMode="single" rowKey="#{news.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslSystemNews}">
+								<j:dtHeader title="#{msg.jeeslSystemNews}">
 									<j:icon type="aupAdd" listener="#{cc.attrs.bean.addNews()}" update=":#{cc.id}:sDetails" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sDetails" listener="#{cc.attrs.bean.selectNews()}"/>
 							<p:column rendered="#{cc.attrs.bean.uiShowInvisible}">  

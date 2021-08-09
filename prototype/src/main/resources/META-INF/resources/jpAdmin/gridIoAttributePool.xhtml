@@ -89,9 +89,9 @@
 					rendered="#{(not empty cc.attrs.bean.criteria) and (cc.attrs.bean.criteria.id gt 0) and ((cc.attrs.bean.criteria.type.code eq 'selectOne') or (cc.attrs.bean.criteria.type.code eq 'selectMany'))}"
 					selection="#{cc.attrs.bean.option}" selectionMode="single" rowKey="#{o.id}">
 					<f:facet name="header">
-						<aht:pfDataTableHeader title="#{msg.jeeslIoAttributeOptions}">
+						<j:dtHeader title="#{msg.jeeslIoAttributeOptions}">
 							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:fOptions :#{cc.id}:fOption" tooltip="#{msg.ttNew}"/>
-						</aht:pfDataTableHeader>
+						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderOptions()}" update="@form"/>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectOption()}" update=":#{cc.id}:fOption"/>

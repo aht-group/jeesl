@@ -171,9 +171,9 @@
 						<p:dataTable var="f" value="#{cc.attrs.bean.figures}" draggableRows="#{cc.attrs.bean.uiAllowReorder}"
 					          selection="#{cc.attrs.bean.figure}" selectionMode="single" rowKey="#{f.id}">
 							<f:facet name="header">
-					          	<aht:pfDataTableHeader title="#{msg.jeeslOptionGraphicFigures}">
+					          	<j:dtHeader title="#{msg.jeeslOptionGraphicFigures}">
 					          		<j:icon type="jeeslAdd" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addFigure()}" update=":#{cc.id}:fFigure" tooltip="#{msg.ttNew}"/>
-					          	</aht:pfDataTableHeader>
+					          	</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderFigures()}" update="@form"/>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectFigure()}" update=":#{cc.id}:fFigure"/>

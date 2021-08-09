@@ -35,11 +35,11 @@
 	<p:dataTable id="dtProject" var="p" value="#{cc.attrs.handler.tbList}"
 			selection="#{cc.attrs.handler.tb}" selectionMode="single" rowKey="#{p.id}">
 		<f:facet name="header">
-			<aht:pfDataTableHeader id="dth" title="#{cc.attrs.tableHeader}">
+			<j:dtHeader id="dth" title="#{cc.attrs.tableHeader}">
 				<h:graphicImage id="giProjectSelection" rendered="#{cc.attrs.allowAdd}" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAdd']}"/>
 				<p:tooltip for="giProjectSelection" value="#{msg.ttAdd}"/>
 				<j:icon type="jeeslRemove" rendered="#{(not empty cc.attrs.handler.tb) and (cc.attrs.allowRemove)}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}" mayDisappear="true"/>
-			</aht:pfDataTableHeader>
+			</j:dtHeader>
 		</f:facet>
 		<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.selectTb}"/>
 		<p:columns var="column" value="#{cc.attrs.handler.columns}" columnIndexVar="colIndex">

@@ -24,9 +24,9 @@
 						<p:dataTable var="z" value="#{cc.attrs.bean.zones}"
 								selection="#{cc.attrs.bean.zone}" selectionMode="single" rowKey="#{z.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslTimeZones}">
+								<j:dtHeader title="#{msg.jeeslTimeZones}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addZone()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:grid" listener="#{cc.attrs.bean.selectZone()}"/>  
 				            <p:column headerText="#{msg.jeeslTimeZoneCode}">  

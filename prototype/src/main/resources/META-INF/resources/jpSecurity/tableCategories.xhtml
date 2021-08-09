@@ -22,10 +22,10 @@
 		<p:dataTable var="c" value="#{cc.attrs.bean.categories}" draggableRows="true"
 			selection="#{cc.attrs.bean.category}" selectionMode="single" rowKey="#{c.id}">
 			<f:facet name="header">
-				<aht:pfDataTableHeader title="#{msg.jeeslSecurityCategories}">
+				<j:dtHeader title="#{msg.jeeslSecurityCategories}">
 					<j:icon type="jeeslAdd" rendered="#{cc.attrs.withAdd}" listener="#{cc.attrs.bean.addCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
 					<aht:downloadIcon rendered="#{cc.attrs.withXls}" type="reportXls" value="#{cc.attrs.bean.xlsStream()}" tooltip="#{msg.reportXls}"/>
-				</aht:pfDataTableHeader>
+				</j:dtHeader>
 			</f:facet>
 			<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderCategories()}" update="@form"/>
 			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectCategory()}"/>

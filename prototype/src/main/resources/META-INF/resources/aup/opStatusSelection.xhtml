@@ -5,7 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:meis="http://meis.loda.gov.rw/jsf"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:composite="http://java.sun.com/jsf/composite">
    
@@ -28,11 +28,11 @@
 	<p:dataTable id="dtProject" var="p" value="#{cc.attrs.handler.tbList}"
 			selection="#{cc.attrs.handler.tb}" selectionMode="single" rowKey="#{p.id}">
 		<f:facet name="header">
-			<aht:pfDataTableHeader id="dth" title="#{cc.attrs.tableHeader}">
+			<j:dtHeader id="dth" title="#{cc.attrs.tableHeader}">
 				<h:graphicImage id="giProjectSelection" styleClass="pf-action-icon" library="gfx" name="#{iconBean.icon12['new']}"/>
 				<p:tooltip for="giProjectSelection" value="#{msg.ttAdd}"/>
 				<meis:iconRemove rendered="#{not empty cc.attrs.handler.tb}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}"/>
-			</aht:pfDataTableHeader>
+			</j:dtHeader>
 		</f:facet>
 		<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.selectTb}"/>
 				<p:column headerText="#{cc.attrs.colHeader}">

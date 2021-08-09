@@ -25,9 +25,9 @@
 						<p:dataTable var="s" value="#{cc.attrs.bean.classes}" draggableRows="true"
 							selection="#{cc.attrs.bean.entity}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslTsClasses}">
+								<j:dtHeader title="#{msg.jeeslTsClasses}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderEntities()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sCategory" listener="#{cc.attrs.bean.select()}"/>

@@ -30,9 +30,9 @@
 					<h:form>
 						<p:dataTable var="var" value="#{cc.attrs.domains}"
 	                			selection="#{cc.attrs.bean.domain}" selectionMode="single" rowKey="#{var.id}">
-							<aht:pfDataTableHeader title="#{cc.attrs.staffTableHeader}">
+							<j:dtHeader title="#{cc.attrs.staffTableHeader}">
                                 
-                            </aht:pfDataTableHeader>
+                            </j:dtHeader>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sStaff :#{cc.id}:sUser" listener="#{cc.attrs.bean.selectDomain()}"/>
 							<composite:renderFacet name="domainColumns"/>
 							<composite:insertChildren/>
@@ -44,9 +44,9 @@
 		                <p:dataTable var="staff" value="#{cc.attrs.bean.staffs}"
 		                             selection="#{cc.attrs.bean.staff}" selectionMode="single" rowKey="#{staff.id}">
 		   					<f:facet name="header">
-	                            <aht:pfDataTableHeader title="#{cc.attrs.staffTableHeader}">
+	                            <j:dtHeader title="#{cc.attrs.staffTableHeader}">
 	                                <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addStaff()}" update=":#{cc.id}:sUser"/>
-	                            </aht:pfDataTableHeader>
+	                            </j:dtHeader>
 	                        </f:facet>
 		                    <p:ajax event="rowSelect" update=":#{cc.id}:sUser" listener="#{cc.attrs.bean.selectStaff()}"/>
 		                    <p:column headerText="#{msg.jeeslSecurityRole}" sortBy="#{staff.role.name[userBean.localeCode].lang}" filterBy="#{staff.role.name[userBean.localeCode].lang}" filterMatchMode="contains" filterStyle="width: 50px;">

@@ -5,6 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jtp="http://jsf.jeesl.org/prototype/tag" xmlns:jp="http://jsf.jeesl.org/prototype"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -23,9 +24,9 @@
 						<p:dataTable var="c" value="#{cc.attrs.bean.categories}" draggableRows="true"
 							selection="#{cc.attrs.bean.category}" selectionMode="single" rowKey="#{c.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslRevisionClasses}">
+								<j:dtHeader title="#{msg.jeeslRevisionClasses}">
 									
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sSql" listener="#{cc.attrs.bean.selectCategory()}"/>
 				            <p:column headerText="#{msg.aupCategory}">  

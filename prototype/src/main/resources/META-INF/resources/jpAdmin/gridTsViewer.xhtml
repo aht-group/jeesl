@@ -6,6 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:jeesl="http://www.jeesl.org/jsf"
 	xmlns:mc="http://www.metachart.org/chart"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
@@ -25,7 +26,7 @@
 						<p:dataTable var="ts" value="#{cc.attrs.bean.tsh.tbList}" 
 							selection="#{cc.attrs.bean.tsh.opList}" selectionMode="multiple" rowKey="#{ts.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslTsStation}"/>
+								<j:dtHeader title="#{msg.jeeslTsStation}"/>
 							</f:facet>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTimeseries()}" update=":#{cc.id}:sCategory"/>
 							<p:column rendered="#{not empty ts.bridge.entityClass.xpath}">

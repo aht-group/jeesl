@@ -8,10 +8,10 @@ public abstract class JeeslRestSecurityInterceptor
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslRestSecurityInterceptor.class);
 	
+	
     public boolean isBasicAuthentication(String authorizationHeader)
     {
     	return authorizationHeader.toUpperCase().startsWith(JeeslRestBasicAuthenticator.BASIC);
-
     }
     
     protected Login decodeBasicAuthentication(String authorizationHeader)

@@ -24,9 +24,9 @@
 						<p:dataTable var="v" value="#{cc.attrs.bean.scopes}" draggableRows="true"
 							selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{v.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.aupRevisionScopes}">
+								<j:dtHeader title="#{msg.aupRevisionScopes}">
 									<j:icon type="aupAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderScopes()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sView :#{cc.id}:sAttributes" listener="#{cc.attrs.bean.select()}"/>

@@ -27,13 +27,13 @@
 									selection="#{cc.attrs.beanMissingLabel.missingLabel}" rowKey="#{e.id}">
 							<f:facet name="header">
 								
-								<aht:pfDataTableHeader title="#{msg.jeeslRevisionEntities}">
+								<j:dtHeader title="#{msg.jeeslRevisionEntities}">
 									<p:commandButton value="Reset" update=":#{cc.id}:grid"> 
 										<f:actionListener binding="#{cc.attrs.beanMissingLabel.removeMissingLabels()}"/>
 										<f:actionListener binding="#{cc.attrs.bean.initMissingLables()}"/>
 										<f:actionListener binding="#{cc.attrs.beanAppLabel.init()}"/>
 									</p:commandButton>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>							
 				            <p:column headerText="#{msg.jeeslRevisionEntity}">
 								<h:outputText rendered="#{not cc.attrs.bean.hasEntitiesWithShortCode(e.missingEntity)}" value="#{e.missingEntity}"/>
@@ -114,9 +114,9 @@
 						<p:dataTable var="m" value="#{cc.attrs.bean.entityMappings}" draggableRows="true"
 							selection="#{cc.attrs.bean.mapping}" selectionMode="single" rowKey="#{m.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.aupRevisionMappings}">
+								<j:dtHeader title="#{msg.aupRevisionMappings}">
 									<j:icon type="aupAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMappings :#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderMappings()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:fMapping" listener="#{cc.attrs.bean.selectMapping()}"/>

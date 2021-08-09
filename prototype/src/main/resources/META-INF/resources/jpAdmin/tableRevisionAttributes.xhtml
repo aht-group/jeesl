@@ -22,9 +22,9 @@
 		<p:dataTable var="a" value="#{cc.attrs.bean.attributes}" draggableRows="true"
 			selection="#{cc.attrs.bean.attribute}" selectionMode="single" rowKey="#{a.id}">
 			<f:facet name="header">
-				<aht:pfDataTableHeader title="#{msg.jeeslRevisionAttributes}">
+				<j:dtHeader title="#{msg.jeeslRevisionAttributes}">
 					<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}" tooltip="#{msg.ttNew}"/>
-				</aht:pfDataTableHeader>
+				</j:dtHeader>
 			</f:facet>
 			<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAttributes()}" update="@form"/>
 			<p:ajax event="rowSelect" update="#{cc.attrs.updateSelect}" listener="#{cc.attrs.bean.selectAttribute()}"/>

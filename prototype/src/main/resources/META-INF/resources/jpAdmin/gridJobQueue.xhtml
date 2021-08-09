@@ -20,7 +20,7 @@
 					<h:form id="fQueue">
 						<p:dataTable var="j" value="#{cc.attrs.bean.jobs}" draggableRows="true"
 							selection="#{cc.attrs.bean.job}" selectionMode="single" rowKey="#{j.id}">
-							<f:facet name="header"><aht:pfDataTableHeader title="#{msg.jeeslJobQueue}"/></f:facet>
+							<f:facet name="header"><j:dtHeader title="#{msg.jeeslJobQueue}"/></f:facet>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectJob()}" update=":#{cc.id}:fJob" oncomplete="PF('wvJob').show();"/>
 							<p:column rendered="#{cc.attrs.withCategory}" headerText="#{msg.jeeslJobCategory}"><h:outputText value="#{j.template.category.name[localeCode].lang}"/></p:column>
 							<p:column headerText="#{msg.jeeslJobType}" styleClass="jeeslPfTcCenter"><jtp:symbolizer value="#{j.template.type}" height="12"/></p:column>

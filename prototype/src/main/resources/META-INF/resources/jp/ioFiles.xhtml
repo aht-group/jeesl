@@ -20,9 +20,9 @@
 			<p:dataTable var="f" value="#{cc.attrs.handler.files}" rowKey="#{f.name}"
 						 	selection="#{cc.attrs.handler.file}" selectionMode="single">
 				<f:facet name="header">
-					<aht:pfDataTableHeader title="#{msg.jeeslIoFiles}">
+					<j:dtHeader title="#{msg.jeeslIoFiles}">
 						<j:icon type="jeeslAdd" listener="#{cc.attrs.handler.addFile()}" update=":opUpload" oncomplete="PF('wvUpload').show();"/>
-					</aht:pfDataTableHeader>
+					</j:dtHeader>
 				</f:facet>
 				<p:ajax event="rowSelect" listener="#{cc.attrs.handler.selectFile()}" update=":#{cc.id}:fDownload" />
 				<p:column>

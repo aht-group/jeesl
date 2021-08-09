@@ -37,7 +37,7 @@
 					<p:dataTable var="category" value="#{cc.attrs.bean.categories}" rowKey="#{category.id}"
 								 selection="#{cc.attrs.bean.category}" selectionMode="single">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyCategory}"/>
+							<j:dtHeader title="#{msg.jeeslSurveyCategory}"/>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:row1" listener="#{cc.attrs.bean.selectCategory()}"/>
 						<p:column>
@@ -49,9 +49,9 @@
 					<p:dataTable var="version" value="#{cc.attrs.bean.versions}" rowKey="#{version.id}"
 								 selection="#{cc.attrs.bean.version}" selectionMode="single">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jpSurveyTemplateVersions}">
+							<j:dtHeader title="#{msg.jpSurveyTemplateVersions}">
 		                         <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addVersion()}" update=":#{cc.id}:row1"/>
-		                     </aht:pfDataTableHeader>
+		                     </j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:row1" listener="#{cc.attrs.bean.selectVersion()}"/>
 						<p:column headerText="#{msg.jeeslDate}">  
@@ -66,9 +66,9 @@
 					<p:dataTable var="s" value="#{cc.attrs.bean.sections}" rowKey="#{s.id}"
                                  selection="#{cc.attrs.bean.section}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.aupSurveySections}">
+							<j:dtHeader title="#{msg.aupSurveySections}">
 	                    		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:row1"/>
-							</aht:pfDataTableHeader>
+							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderSections()}" update="@form"/>
 						<p:ajax event="rowSelect" update=":#{cc.id}:row1" listener="#{cc.attrs.bean.selectSection()}"/>
@@ -86,9 +86,9 @@
 					<p:dataTable var="scheme" value="#{cc.attrs.bean.schemes}" rowKey="#{scheme.id}"
 								 selection="#{cc.attrs.bean.scheme}" selectionMode="single">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveySchemes}">
+							<j:dtHeader title="#{msg.jeeslSurveySchemes}">
 								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
-							</aht:pfDataTableHeader>
+							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
 						<p:column>
@@ -120,9 +120,9 @@
 					<p:dataTable var="os" value="#{cc.attrs.bean.optionSets}" rowKey="#{os.id}"
                                  selection="#{cc.attrs.bean.optionSet}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyOptionSets}">
+							<j:dtHeader title="#{msg.jeeslSurveyOptionSets}">
 								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid"/>
-                      		</aht:pfDataTableHeader>
+                      		</j:dtHeader>
 						</f:facet>
 		                  <p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectSet()}" update=":#{cc.id}:grid" />
 								<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderSets()}" update="@form"/>
@@ -351,9 +351,9 @@
 					<p:dataTable var="o" value="#{cc.attrs.bean.options}" rowKey="#{o.id}" rendered="#{cc.attrs.withOptions or cc.attrs.withMultiOptions}"
                                  selection="#{cc.attrs.bean.option}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyOptions}">
+							<j:dtHeader title="#{msg.jeeslSurveyOptions}">
                           		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:sQuestion"/>
-                      		</aht:pfDataTableHeader>
+                      		</j:dtHeader>
                   		</f:facet>
                   		<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectOption()}" update=":#{cc.id}:sQuestion"/>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderOptions()}" update="@form"/>
@@ -376,9 +376,9 @@
 					<p:dataTable var="o" value="#{cc.attrs.bean.options}" rowKey="#{o.id}" rendered="#{cc.attrs.withOptions or cc.attrs.withMultiOptions}"
                                  selection="#{cc.attrs.bean.option}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyOptions}">
+							<j:dtHeader title="#{msg.jeeslSurveyOptions}">
                        			<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:sQuestion"/>
-                   			</aht:pfDataTableHeader>
+                   			</j:dtHeader>
                   		</f:facet>
                   		<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectOption()}" update=":#{cc.id}:sQuestion"/>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderOptions()}" update="@form"/>
@@ -475,9 +475,9 @@
 					<p:dataTable var="score" value="#{cc.attrs.bean.scores}" rowKey="#{scores.id}"
 								 selection="#{cc.attrs.bean.score}" selectionMode="single">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyScores}">
+							<j:dtHeader title="#{msg.jeeslSurveyScores}">
 								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
-							</aht:pfDataTableHeader>
+							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
 						<p:column>
@@ -519,9 +519,9 @@
 					<p:dataTable var="condition" value="#{cc.attrs.bean.conditions}" rowKey="#{condition.id}"
 								 selection="#{cc.attrs.bean.condition}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyConditions}">
+							<j:dtHeader title="#{msg.jeeslSurveyConditions}">
 								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
-							</aht:pfDataTableHeader>
+							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderConditions()}" update="@form"/>
@@ -578,9 +578,9 @@
 					<p:dataTable var="validation" value="#{cc.attrs.bean.validations}" rowKey="#{validation.id}"
 								 selection="#{cc.attrs.bean.validation}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyValidations}">
+							<j:dtHeader title="#{msg.jeeslSurveyValidations}">
 								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
-							</aht:pfDataTableHeader>
+							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderValidations()}" update="@form"/>

@@ -25,9 +25,9 @@
 						<p:dataTable var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
 							selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslIoReportTemplates}">
+								<j:dtHeader title="#{msg.jeeslIoReportTemplates}">
 									<j:icon type="aupAdd" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sCells :#{cc.id}:sCell" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sCells :#{cc.id}:sCell" listener="#{cc.attrs.bean.selectTemplate()}"/>
@@ -62,9 +62,9 @@
 						<p:dataTable var="cell" value="#{cc.attrs.bean.cells}"
 									selection="#{cc.attrs.bean.cell}" selectionMode="single" rowKey="#{cell.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslIoReportCells}">
+								<j:dtHeader title="#{msg.jeeslIoReportCells}">
 									<j:icon type="aupAdd" listener="#{cc.attrs.bean.addCell()}" update=":#{cc.id}:fCell" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCell()}" update=":#{cc.id}:fCell" />
 							<p:column rendered="true"><h:outputText value="#{cell.rowNr}.#{cell.colNr}"/></p:column>

@@ -25,9 +25,9 @@
 						<p:dataTable var="e" value="#{cc.attrs.bean.entities}" draggableRows="true"
 									selection="#{cc.attrs.bean.entity}" selectionMode="single" rowKey="#{e.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslRevisionEntities}">
+								<j:dtHeader title="#{msg.jeeslRevisionEntities}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderEntites()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sView :#{cc.id}:sAttributes" listener="#{cc.attrs.bean.selectEntity()}"/>
@@ -110,9 +110,9 @@
 						<p:dataTable var="m" value="#{cc.attrs.bean.entityMappings}" draggableRows="true"
 							selection="#{cc.attrs.bean.mapping}" selectionMode="single" rowKey="#{m.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.aupRevisionMappings}">
-									<j:icon type="aupAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMappings :#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								<j:dtHeader title="#{msg.aupRevisionMappings}">
+									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMappings :#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderMappings()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:fMapping" listener="#{cc.attrs.bean.selectMapping()}"/>

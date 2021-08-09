@@ -25,9 +25,9 @@
 						<p:dataTable var="a" value="#{cc.attrs.bean.algorithms}" draggableRows="true"
 							selection="#{cc.attrs.bean.algorithm}" selectionMode="single" rowKey="#{a.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslConstraintAlgorithms}">
+								<j:dtHeader title="#{msg.jeeslConstraintAlgorithms}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAlgorithms()}" update="@form"/>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.saveAlgorithm()}" update=":#{cc.id}:sAlgorithm"/>

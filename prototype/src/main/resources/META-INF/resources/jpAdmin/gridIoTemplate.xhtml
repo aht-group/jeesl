@@ -92,9 +92,9 @@
 					<p:dataTable var="token" value="#{cc.attrs.bean.tokens}" draggableRows="true"
 						selection="#{cc.attrs.bean.token}" selectionMode="single" rowKey="#{token.id}">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslIoTokens}">
+							<j:dtHeader title="#{msg.jeeslIoTokens}">
 								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addToken()}" update=":#{cc.id}:fTokens :#{cc.id}:fToken"/>
-							</aht:pfDataTableHeader>
+							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTokens()}" update="@form"/>
 						<p:ajax event="rowSelect" update=":#{cc.id}:fToken" listener="#{cc.attrs.bean.selectToken()}"/>
@@ -149,9 +149,9 @@
 					<p:dataTable var="d" value="#{cc.attrs.bean.definitions}" draggableRows="false"
 						selection="#{cc.attrs.bean.definition}" selectionMode="single" rowKey="#{d.id}">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslIoTemplateDefinitions}">
+							<j:dtHeader title="#{msg.jeeslIoTemplateDefinitions}">
 								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addDefinition()}" update=":#{cc.id}:row2"/>
-							</aht:pfDataTableHeader>
+							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:sDefinition" listener="#{cc.attrs.bean.selectDefinition()}"/>
 			         <p:column headerText="#{msg.jeeslType}">  

@@ -25,7 +25,7 @@
 						<p:dataTable var="scope" value="#{cc.attrs.bean.trafficLightScopes}"
 							selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{scope.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslSystemLightScopes}"/>
+								<j:dtHeader title="#{msg.jeeslSystemLightScopes}"/>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sLights :#{cc.id}:sLight" listener="#{cc.attrs.bean.selectScope()}"/>
 							<p:column headerText="#{msg.jeeslName}">
@@ -39,9 +39,9 @@
 						<p:dataTable var="trafficLight" value="#{cc.attrs.bean.trafficLights}" rendered="#{not empty cc.attrs.bean.scope}"
 								selection="#{cc.attrs.bean.trafficLight}" selectionMode="single" rowKey="#{trafficLight.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslSystemLights}">
+								<j:dtHeader title="#{msg.jeeslSystemLights}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTrafficLight()}" update=":#{cc.id}:sLight" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sLight" listener="#{cc.attrs.bean.selectTrafficLight()}"/>
 							<p:column headerText="#{msg.jeeslName}">

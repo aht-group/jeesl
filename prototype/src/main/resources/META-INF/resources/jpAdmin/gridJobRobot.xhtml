@@ -25,9 +25,9 @@
 						<p:dataTable var="t" value="#{cc.attrs.bean.robots}" draggableRows="true"
 							selection="#{cc.attrs.bean.robot}" selectionMode="single" rowKey="#{t.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslJobRobots}">
+								<j:dtHeader title="#{msg.jeeslJobRobots}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addRobot()}" update=":#{cc.id}:sRobot" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderConsumers()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sRobot" listener="#{cc.attrs.bean.selectRobot()}"/>

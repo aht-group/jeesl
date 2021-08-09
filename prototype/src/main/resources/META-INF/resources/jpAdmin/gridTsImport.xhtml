@@ -88,7 +88,7 @@
 						<p:dataTable var="e" value="#{cc.attrs.bean.entities}" rendered="#{not empty cc.attrs.bean.entities}"
 								selection="#{cc.attrs.bean.entity}" selectionMode="single" rowKey="#{e.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.aupTsEntities}"/>
+								<j:dtHeader title="#{msg.aupTsEntities}"/>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sImport" listener="#{cc.attrs.bean.selectEntity()}"/>
 			                <p:column rendered="true" headerText="#{msg.jeeslTsEntity}"
@@ -101,7 +101,7 @@
 				<aht:slot id="sTs" width="4">
 					<p:dataTable var="d" value="#{cc.attrs.bean.timeSeries.data}" rendered="#{not empty cc.attrs.bean.timeSeries}">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.aupTsTimeSerie}"/>
+							<j:dtHeader title="#{msg.aupTsTimeSerie}"/>
 						</f:facet>
 						<p:column rendered="true" headerText="#{msg.aupDate}">  
 							<h:outputText value="#{d.record}">

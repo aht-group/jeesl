@@ -21,11 +21,11 @@
 		<p:dataTable id="dtViews" var="v" value="#{cc.attrs.views}"
 						 selection="#{cc.attrs.bean.tblView}" selectionMode="single" rowKey="#{v.id}">
 				<f:facet name="header">
-					<aht:pfDataTableHeader id="dth" title="#{msg.aupSecurityViews}">
+					<j:dtHeader id="dth" title="#{msg.aupSecurityViews}">
 						<h:graphicImage id="giViewAdd" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAdd']}"/>
                         <p:tooltip for="giViewAdd" value="#{msg.ttAdd}" />
                         <j:icon type="jeeslRemove" listener="#{cc.attrs.bean.opRmView()}" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblView)}"  mayDisappear="true"  update="#{cc.attrs.update}" tooltip="#{msg.ttRemove}"/>
-					</aht:pfDataTableHeader>
+					</j:dtHeader>
 				</f:facet>
 				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblView}"/>
 				<p:column>

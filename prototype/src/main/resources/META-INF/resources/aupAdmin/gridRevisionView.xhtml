@@ -24,9 +24,9 @@
 						<p:dataTable var="v" value="#{cc.attrs.bean.views}" draggableRows="true"
 							selection="#{cc.attrs.bean.rv}" selectionMode="single" rowKey="#{v.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.aupRevisionViews}">
+								<j:dtHeader title="#{msg.aupRevisionViews}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sView :#{cc.id}:sDetails" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderViews()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sView :#{cc.id}:sDetails" listener="#{cc.attrs.bean.select()}"/>
@@ -66,9 +66,9 @@
 						<p:dataTable var="m" value="#{cc.attrs.bean.viewMappings}" draggableRows="true"
 							selection="#{cc.attrs.bean.mapping}" selectionMode="single" rowKey="#{m.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.aupRevisionMappings}">
+								<j:dtHeader title="#{msg.aupRevisionMappings}">
 									<:icon type="jeeslAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderMappings()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:fMapping" listener="#{cc.attrs.bean.selectMapping()}"/>

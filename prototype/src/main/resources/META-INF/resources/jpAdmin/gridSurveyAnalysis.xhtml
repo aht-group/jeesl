@@ -25,7 +25,7 @@
 					<p:dataTable var="version" value="#{cc.attrs.bean.versions}" rowKey="#{version.id}"
 								 selection="#{cc.attrs.bean.version}" selectionMode="single">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jpSurveyTemplateVersions}"/>
+							<j:dtHeader title="#{msg.jpSurveyTemplateVersions}"/>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:sTemplate" listener="#{cc.attrs.bean.selectVersion()}"/>
 						<p:column headerText="#{msg.jeeslDate}">  
@@ -40,9 +40,9 @@
 					<p:dataTable var="analysis" value="#{cc.attrs.bean.analyses}" rowKey="#{analysis.id}"
 								 selection="#{cc.attrs.bean.analysis}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyAnalyses}">
+							<j:dtHeader title="#{msg.jeeslSurveyAnalyses}">
 		                         <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAnalysis()}" update=":#{cc.id}:grid"/>
-		                     </aht:pfDataTableHeader>
+		                     </j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAnalyses()}" update="@form"/>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectAnalysis()}" update=":#{cc.id}:grid"/>
@@ -92,7 +92,7 @@
 					<p:dataTable var="s" value="#{cc.attrs.bean.sections}" rowKey="#{s.id}"
                                  selection="#{cc.attrs.bean.section}" selectionMode="single" draggableRows="flase">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.aupSurveySections}"/>
+							<j:dtHeader title="#{msg.aupSurveySections}"/>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:sCenter" listener="#{cc.attrs.bean.selectSection()}"/>
 						<p:column>
@@ -108,7 +108,7 @@
 					<p:dataTable var="q" value="#{cc.attrs.bean.questions}" rowKey="#{q.id}"
                                  selection="#{cc.attrs.bean.question}" selectionMode="single" draggableRows="false">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.aupSurveyQuestions}"/>
+							<j:dtHeader title="#{msg.aupSurveyQuestions}"/>
                  		 </f:facet>
                   		<p:ajax event="rowSelect" update=":#{cc.id}:sAnalysis" listener="#{cc.attrs.bean.selectQuestion()}"/>
                   		<p:column>
@@ -139,9 +139,9 @@
 					<p:dataTable var="tool" value="#{cc.attrs.bean.tools}" rowKey="#{tool.id}"
 								 selection="#{cc.attrs.bean.tool}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyAnalysisTools}">
+							<j:dtHeader title="#{msg.jeeslSurveyAnalysisTools}">
 		                         <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTool()}" update=":#{cc.id}:sAnalysis"/>
-		                     </aht:pfDataTableHeader>
+		                     </j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTools()}" update="@form"/>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTool()}" update=":#{cc.id}:sAnalysis"/>

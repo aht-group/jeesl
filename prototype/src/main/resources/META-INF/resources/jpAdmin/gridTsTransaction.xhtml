@@ -88,9 +88,9 @@
 
                        <p:dataTable var="d" value="#{cc.attrs.bean.datas}"  rendered="#{not empty cc.attrs.bean.transaction}">
                            <f:facet name="header">
-                               <aht:pfDataTableHeader title="#{msg.jeeslTsData}">
+                               <j:dtHeader title="#{msg.jeeslTsData}">
                                    <j:downloadIcon type="reportXls" value="#{cc.attrs.bean.xlsStream()}" tooltip="#{msg.reportXls}" rendered="false"/>
-                               </aht:pfDataTableHeader>
+                               </j:dtHeader>
                            </f:facet>
                            <p:column rendered="true" headerText="#{msg.jeeslTsTransactionRecord}">
                                <jp:outputDate value="#{d.record}" withTime="true"/>

@@ -30,9 +30,9 @@
 							rendered="#{not empty cc.attrs.bean.category}"
 							selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.aupSecurityUsecases}">
+								<j:dtHeader title="#{msg.aupSecurityUsecases}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectUsecase}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase"/>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderUsecases()}" update="@form"/>
@@ -79,7 +79,7 @@
 					<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
 					
 					<p:dataTable var="r" value="#{cc.attrs.bean.roles}" rendered="#{not empty cc.attrs.bean.usecase}">
-						<f:facet name="header"><aht:pfDataTableHeader title="#{msg.aupSecurityViewAppliedToRole}"/></f:facet>
+						<f:facet name="header"><j:dtHeader title="#{msg.aupSecurityViewAppliedToRole}"/></f:facet>
 						<p:column><h:outputText value="#{r.category.position}.#{r.position}" /></p:column>  
 			         <p:column headerText="#{msg.jeeslSecurityRole}">  
 							<h:outputText value="#{r.name[userBean.localeCode].lang}" />  

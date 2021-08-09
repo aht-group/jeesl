@@ -5,9 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf" 
-	xmlns:jp="http://jsf.jeesl.org/prototype" 
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag" 
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag" 
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -50,9 +48,9 @@
 						<p:dataTable var="c" value="#{cc.attrs.bean.timeGroups}" draggableRows="true"
 							selection="#{cc.attrs.bean.timeGroup}" selectionMode="single" rowKey="#{c.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{appLabelBean.labels['LfTimeGroup']['listOf'][localeCode].lang}">
+								<j:dtHeader title="#{appLabelBean.labels['LfTimeGroup']['listOf'][localeCode].lang}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTimeGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" />
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTimeGroups()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sTimeGroup" listener="#{cc.attrs.bean.selectTimeGroup()}"/>
@@ -142,9 +140,9 @@
 							rendered="#{(not empty cc.attrs.bean.timeGroup) and (cc.attrs.bean.timeGroup.id gt 0)}"
 							selection="#{cc.attrs.bean.element}" selectionMode="single" rowKey="#{o.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{appLabelBean.labels['LfTimeElement']['listOf'][localeCode].lang}">
+								<j:dtHeader title="#{appLabelBean.labels['LfTimeElement']['listOf'][localeCode].lang}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addElement()}" update=":#{cc.id}:fElement" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectElement()}" update=":#{cc.id}:fElement"/>
 							<p:column> 

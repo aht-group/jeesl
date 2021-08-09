@@ -5,9 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf" 
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag" 
-	xmlns:jp="http://jsf.jeesl.org/prototype" 
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jtp="http://jsf.jeesl.org/prototype/tag" xmlns:jp="http://jsf.jeesl.org/prototype" 
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -30,9 +28,9 @@
 					<h:form id="fIndicators">
 						<p:dataTable var="level" value="#{cc.attrs.bean.indicatorLevels}" draggableRows="false">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{appLabelBean.labels['LfIndicator']['listOf'][localeCode].lang}">
+								<j:dtHeader title="#{appLabelBean.labels['LfIndicator']['listOf'][localeCode].lang}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addIndicator()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" />
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:column>
 					         	<h:outputText value="#{level.name[localeCode].lang}"/>
@@ -84,9 +82,9 @@
 					<h:form id="fIndicatorValues">
 						<p:dataTable var="iv" value="#{cc.attrs.bean.indicatorValues}" selection="#{cc.attrs.bean.indicatorValue}" selectionMode="single" rowKey="#{iv.id}" draggableRows="false">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{appLabelBean.labels['LfValue']['listOf'][localeCode].lang}">
+								<j:dtHeader title="#{appLabelBean.labels['LfValue']['listOf'][localeCode].lang}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addIndicatorValue()}" update=":#{cc.id}:fIndicatorValue :#{cc.id}:fElementSelection" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:fIndicatorValue" listener="#{cc.attrs.bean.selectIndicatorValue()}"/>
 							<p:column>

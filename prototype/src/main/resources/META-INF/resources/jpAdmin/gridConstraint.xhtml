@@ -21,9 +21,9 @@
 				<p:dataTable var="s" value="#{cc.attrs.bean.scopes}" draggableRows="true"
 					selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
-						<aht:pfDataTableHeader title="#{msg.jeeslConstraintScopes}">
+						<j:dtHeader title="#{msg.jeeslConstraintScopes}">
 							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addScope()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
-						</aht:pfDataTableHeader>
+						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderScopes()}" update="@form"/>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectScope()}" update=":#{cc.id}:sScope :#{cc.id}:sConstraint"/>
@@ -64,9 +64,9 @@
 				<p:dataTable var="c" value="#{cc.attrs.bean.constraints}" draggableRows="true"
 					selection="#{cc.attrs.bean.constraint}" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
-						<aht:pfDataTableHeader title="#{msg.jeeslConstraints}">
+						<j:dtHeader title="#{msg.jeeslConstraints}">
 							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addConstraint()}" update=":#{cc.id}:sConstraint" tooltip="#{msg.ttNew}"/>
-						</aht:pfDataTableHeader>
+						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderScopes()}" update="@form"/>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectConstraint()}" update=":#{cc.id}:sConstraint"/>

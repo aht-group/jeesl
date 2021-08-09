@@ -25,9 +25,9 @@
 						<p:dataTable var="dm" value="#{cc.attrs.bean.dms}" draggableRows="false"
 							selection="#{cc.attrs.bean.dm}" selectionMode="single" rowKey="#{dm.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslIoDmsSystems}">
+								<j:dtHeader title="#{msg.jeeslIoDmsSystems}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addDm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderDms()}" update="@form"/>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectDm()}" update=":#{cc.id}:sDm"/>
@@ -74,9 +74,9 @@
 						<p:dataTable var="v" value="#{cc.attrs.bean.dmsViews}" draggableRows="true"
 							selection="#{cc.attrs.bean.dmsView}" selectionMode="single" rowKey="#{v.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslIoDmsViews}">
+								<j:dtHeader title="#{msg.jeeslIoDmsViews}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sDm" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderViews()}" update="@form"/>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectView()}" update=":#{cc.id}:sDm"/>

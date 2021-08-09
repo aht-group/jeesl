@@ -25,9 +25,9 @@
 					<p:dataTable var="domain" value="#{cc.attrs.bean.sbhDomain.list}" rowKey="#{domain.id}"
 								 selection="#{cc.attrs.bean.domain}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyDomains}">
+							<j:dtHeader title="#{msg.jeeslSurveyDomains}">
                          		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addDomain()}" update=":#{cc.id}:grid"/>
-                     		</aht:pfDataTableHeader>
+                     		</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderDomains()}" update="@form"/>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectDomain()}" update=":#{cc.id}:grid"/>
@@ -71,9 +71,9 @@
 					<p:dataTable var="query" value="#{cc.attrs.bean.queries}" rowKey="#{query.id}"
 								 selection="#{cc.attrs.bean.query}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyDomainQueries}">
-                         <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addQuery()}" update=":#{cc.id}:row2"/>
-                     </aht:pfDataTableHeader>
+							<j:dtHeader title="#{msg.jeeslSurveyDomainQueries}">
+                         		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addQuery()}" update=":#{cc.id}:row2"/>
+							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderQueries()}" update="@form"/>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectQuery()}" update=":#{cc.id}:row2"/>
@@ -105,9 +105,9 @@
 					<p:dataTable var="path" value="#{cc.attrs.bean.paths}" rowKey="#{path.id}"
 								 selection="#{cc.attrs.bean.path}" selectionMode="single" draggableRows="false">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.jeeslSurveyDomainPaths}">
+							<j:dtHeader title="#{msg.jeeslSurveyDomainPaths}">
                          		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addPath()}" update=":#{cc.id}:row2" rendered="#{not empty cc.attrs.bean.entity}"/>
-                     		</aht:pfDataTableHeader>
+                     		</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectPath()}" update=":#{cc.id}:row2"/>
 						<p:column>

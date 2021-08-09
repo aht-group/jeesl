@@ -19,14 +19,14 @@
 		<p:dataTable id="dtTreeAggregation" var="p" value="#{cc.attrs.bean.opAggregationHandler.tbList}"
 					 selection="#{cc.attrs.bean.opAggregationHandler.tb}" selectionMode="single" rowKey="#{p.id}" draggableRows="true">
 			<f:facet name="header">
-				<aht:pfDataTableHeader id="dth" title="#{msg.jeeslIoReportAggregations}">
+				<j:dtHeader id="dth" title="#{msg.jeeslIoReportAggregations}">
 					<j:icon type="jeeslFilter" listener="#{cc.attrs.bean.applyFilter()}" update="#{cc.attrs.update}" tooltip="Apply Filter"/>
 					<h:graphicImage id="giAdd" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAdd']}"/>
 					<p:tooltip for="giAdd" value="#{msg.ttAdd}"/>
 					<j:icon type="jeeslRemove" rendered="#{not empty cc.attrs.bean.opAggregationHandler.tb}" listener="#{cc.attrs.bean.opAggregationHandler.removeEntity()}" update=":fProjects"/>
 					<aht:downloadIcon rendered="false" disabled="#{cc.attrs.bean.opAggregationHandler.tbList.size() gt 0}" type="reportPdf" value="#{cc.attrs.bean.pdfStream()}" tooltip="#{msg.reportPdf}"/>
 					<aht:downloadIcon disabled="#{cc.attrs.bean.opAggregationHandler.tbList.size() gt 0}" type="reportXls" value="#{cc.attrs.bean.xlsStream()}" tooltip="#{msg.reportXls}"/>
-				</aht:pfDataTableHeader>
+				</j:dtHeader>
 			</f:facet>
 			<p:ajax event="rowSelect" update=":fProjects" listener="#{cc.attrs.bean.opAggregationHandler.selectTb}"/>
 			<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAggregations()}" update="@form"/>

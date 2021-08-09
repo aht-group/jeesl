@@ -5,9 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf" 
-	xmlns:jp="http://jsf.jeesl.org/prototype" 
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag" 
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag" 
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -26,9 +24,9 @@
 					<h:form id="fConfigurations">
 						<p:dataTable var="config" value="#{cc.attrs.bean.configurations}" draggableRows="false">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{appLabelBean.labels['LfConfiguration']['listOf'][localeCode].lang}">
+								<j:dtHeader title="#{appLabelBean.labels['LfConfiguration']['listOf'][localeCode].lang}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addConfiguration()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" />
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:column>
 								<f:facet name="header"><jtp:label entity="LfConfiguration" code="type"/></f:facet>

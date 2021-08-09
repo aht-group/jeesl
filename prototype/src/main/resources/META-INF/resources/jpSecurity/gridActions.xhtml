@@ -32,9 +32,9 @@
 						rendered="#{not empty cc.attrs.bean.category}"
 						selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{v.id}">
 						<f:facet name="header">
-							<aht:pfDataTableHeader title="#{msg.aupSecurityActionTemplates}">
+							<j:dtHeader title="#{msg.aupSecurityActionTemplates}">
 								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sActions :#{cc.id}:sAction" tooltip="#{msg.ttAdd}"/>
-							</aht:pfDataTableHeader>
+							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:sAction" listener="#{cc.attrs.bean.selectTemplate()}"/>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>

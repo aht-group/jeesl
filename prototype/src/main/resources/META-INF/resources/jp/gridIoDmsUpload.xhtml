@@ -47,9 +47,9 @@
 						<p:dataTable var="f" value="#{cc.attrs.bean.files}" draggableRows="true"
 										selection="#{cc.attrs.bean.file}" selectionMode="single" rowKey="#{f.id}">
 							<f:facet name="header">
-								<aht:pfDataTableHeader title="#{msg.jeeslIoDmsDocuments}">
+								<j:dtHeader title="#{msg.jeeslIoDmsDocuments}">
 									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addFile()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttNew}"/>
-								</aht:pfDataTableHeader>
+								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderFiles()}" update="@form"/>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectFile()}" update=":#{cc.id}:sSection"/>
