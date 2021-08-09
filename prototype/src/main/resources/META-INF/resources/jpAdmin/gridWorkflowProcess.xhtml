@@ -133,8 +133,8 @@
 					<h:form id="fStage" rendered="#{not empty cc.attrs.bean.stage}">
 						<p:panel header="#{msg.jeeslApprovalStage}"  styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" mayDisappear="true" rendered="#{not cc.attrs.bean.editStage}"/>
-								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" mayDisappear="true" rendered="#{cc.attrs.bean.editStage}"/>
+								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{not cc.attrs.bean.editStage}"/>
+								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{cc.attrs.bean.editStage}"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveStage()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editStage}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteStage()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.stage.id gt 0) and cc.attrs.bean.editStage}"/>
 							</f:facet>
@@ -278,7 +278,7 @@
 					<h:form id="fNotification" rendered="#{not empty cc.attrs.bean.notification}">
 						<p:panel header="#{appLabelBean.entities['WorkflowStageNotification'][localeCode].lang}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelNotification()}" update=":#{cc.id}:rStage" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelNotification()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveNotification()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteNotification()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.notification.id gt 0)}"/>
 							</f:facet>
@@ -345,8 +345,8 @@
 					<h:form id="fTransition" rendered="#{not empty cc.attrs.bean.transition}">
 						<p:panel header="#{msg.jeeslApprovalTransition} (#{cc.attrs.bean.transition.id})" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" mayDisappear="true" rendered="#{not cc.attrs.bean.editTransition}"/>
-								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" mayDisappear="true" rendered="#{cc.attrs.bean.editTransition}"/>
+								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{not cc.attrs.bean.editTransition}"/>
+								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{cc.attrs.bean.editTransition}"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveTransition()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editTransition}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteTransition()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.transition.id gt 0) and cc.attrs.bean.editTransition}"/>
 							</f:facet>
@@ -449,7 +449,7 @@
 					<h:form id="fAction" rendered="#{not empty cc.attrs.bean.action}">
 						<p:panel header="#{msg.jeeslApprovalAction}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelAction()}" update=":#{cc.id}:rStage" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelAction()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAction()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.action.id gt 0)}"/>
 							</f:facet>
@@ -542,7 +542,7 @@
 					<h:form id="fCommunication" rendered="#{not empty cc.attrs.bean.communication}">
 						<p:panel header="#{msg.jeeslApprovalCommunication}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelCommunication()}" update=":#{cc.id}:rStage" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelCommunication()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveCommunication()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteCommunication()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.communication.id gt 0)}"/>
 							</f:facet>

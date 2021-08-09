@@ -37,7 +37,7 @@
 					<h:form id="fDocument" rendered="#{not empty cc.attrs.bean.cms}">
 						<p:panel header="#{msg.jeeslCmsDocument}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveDocument()}" update=":#{cc.id}:grid #{cc.attrs.updateStatusBar}" tooltip="#{msg.ttSave}" mayDisappear="true"/>
+								<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveDocument()}" update=":#{cc.id}:grid #{cc.attrs.updateStatusBar}" tooltip="#{msg.ttSave}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid40,jeeslGrid60">
 								<p:outputLabel value="#{msg.jeeslId}"/>
@@ -83,9 +83,9 @@
 						<h:form id="fSection" rendered="#{not empty cc.attrs.bean.section}">
 							<p:panel header="#{msg.jeeslCmsSection}" styleClass="jeeslPanel">
 								<f:facet name="actions">
-									<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true" library="jeeslGfx"/>
+									<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" library="jeeslGfx"/>
 									<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveSection()}" update=":#{cc.id}:fTree :#{cc.id}:sSection" rendered="#{not empty cc.attrs.bean.section}" tooltip="#{msg.ttSave}" library="jeeslGfx"/>
-									<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.cms.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true" library="jeeslGfx"/>
+									<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.cms.id gt 0}" tooltip="#{msg.ttDelete}" library="jeeslGfx"/>
 									<j:svg type="jeeslRefresh" listener="#{cc.attrs.bean.clearSectionCache()}" update=":#{cc.id}:fSection" rendered="#{cc.attrs.bean.cms.id gt 0}" tooltip="#{msg.ttDelete}" library="jeeslGfx"/>
 								</f:facet>
 								<p:panelGrid columns="6" columnClasses="jeeslGrid10,jeeslGrid10,jeeslGrid10,jeeslGrid10,jeeslGrid10,jeeslGrid60" >
@@ -126,7 +126,7 @@
 							<p:panel header="#{msg.jeeslCmsElement}"  styleClass="jeeslPanel">
 								<f:facet name="actions">
 									<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveElement()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttSave}"/>
-									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteElement()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttSave}" mayDisappear="true"/>
+									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteElement()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttSave}"/>
 								</f:facet>
 								<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 									<p:outputLabel value="#{msg.jeeslCmsElementCategory}"/>
@@ -225,9 +225,9 @@
 						<h:form id="fSection" rendered="#{not empty cc.attrs.bean.section}">
 							<p:panel header="#{msg.jeeslCmsSection}" styleClass="jeeslPanel">
 								<f:facet name="actions">
-									<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+									<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}"/>
 									<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveSection()}" update=":#{cc.id}:fTree :#{cc.id}:sSection" rendered="#{not empty cc.attrs.bean.section}" tooltip="#{msg.ttSave}"/>
-									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.cms.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.cms.id gt 0}" tooltip="#{msg.ttDelete}"/>
 									<j:icon type="jeeslRefresh" listener="#{cc.attrs.bean.clearSectionCache()}" update=":#{cc.id}:fSection" rendered="#{cc.attrs.bean.cms.id gt 0}" tooltip="#{msg.ttDelete}"/>
 								</f:facet>
 								<p:panelGrid columns="6" columnClasses="jeeslGrid10,jeeslGrid10,jeeslGrid10,jeeslGrid10,jeeslGrid10,jeeslGrid60" >
@@ -266,7 +266,7 @@
 							<p:panel header="#{msg.jeeslCmsElement}"  styleClass="jeeslPanel">
 								<f:facet name="actions">
 									<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveElement()}" update=":#{cc.id}:sRow" tooltip="#{msg.ttSave}"/>
-									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteElement()}" update=":#{cc.id}:sRow" tooltip="#{msg.ttSave}" mayDisappear="true"/>
+									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteElement()}" update=":#{cc.id}:sRow" tooltip="#{msg.ttSave}"/>
 								</f:facet>
 								<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 									<p:outputLabel value="#{msg.jeeslCmsElementCategory}"/>

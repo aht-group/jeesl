@@ -68,7 +68,7 @@
 			<h:form id="fEvent">
 				<p:panel id="pEvent" header="#{msg.jeeslAssetEvent}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.event}">
 					<f:facet name="actions">
-						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelEvent()}" update=":#{cc.id}:grid" mayDisappear="true"/>
+						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelEvent()}" update=":#{cc.id}:grid"/>
 						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveEvent()}"   update=":#{cc.id}:grid"/>
 						<j:icon type="jeeslClone"  listener="#{cc.attrs.bean.cloneEvent()}"  update=":#{cc.id}:sEvent"/>
 					</f:facet>

@@ -105,7 +105,7 @@
 						<f:facet name="actions">
 							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.deleteScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme" rendered="#{cc.attrs.bean.uiHelper.versionRemoveable}"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme" rendered="#{cc.attrs.bean.uiHelper.versionRemoveable}"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">
 							<p:outputLabel value="#{msg.jeeslCode}"/>
@@ -145,7 +145,7 @@
 					<p:panel header="#{msg.jpSurveyTemplateVersion}" styleClass="jeeslPanel">
 						<f:facet name="actions">
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveVersion()}" update=":#{cc.id}:row1"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.deleteVersion()}" update=":#{cc.id}:row1" rendered="#{cc.attrs.bean.uiHelper.versionRemoveable}"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteVersion()}" update=":#{cc.id}:row1" rendered="#{cc.attrs.bean.uiHelper.versionRemoveable}"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 							<p:outputLabel value="#{msg.jeeslName}"/>
@@ -173,7 +173,7 @@
 					<p:panel header="#{msg.jeeslSurveySection}" styleClass="jeeslPanel">
 						<f:facet name="actions">
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveSection()}" update=":#{cc.id}:row1"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:row1" rendered="#{(cc.attrs.bean.section.id gt 0) and (cc.attrs.bean.questions.isEmpty())}"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:row1" rendered="#{(cc.attrs.bean.section.id gt 0) and (cc.attrs.bean.questions.isEmpty())}"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="6" columnClasses="jeeslGrid30,jeeslGrid20,jeeslGrid10,jeeslGrid10,jeeslGrid20,jeeslGrid10">
@@ -218,7 +218,7 @@
 					<p:panel header="#{msg.jeeslSurveyOptionSet}" styleClass="jeeslPanel">
 						<f:facet name="actions">
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveSet()}" update=":#{cc.id}:row1"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.rmSet()}" update=":#{cc.id}:row1"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmSet()}" update=":#{cc.id}:row1"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="4" columnClasses="jeeslGrid30,jeeslGrid20,jeeslGrid30,jeeslGrid20" rendered="false">
@@ -260,7 +260,7 @@
 					<p:panel header="#{msg.jeeslSurveyQuestion} #{cc.attrs.bean.question.id}" styleClass="jeeslPanel">
 						<f:facet name="actions">
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveQuestion()}" update=":#{cc.id}:row1"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.rmQuestion()}" update=":#{cc.id}:row1"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmQuestion()}" update=":#{cc.id}:row1"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">
@@ -401,7 +401,7 @@
 					<p:panel header="#{msg.jeeslSurveyOption} #{cc.attrs.bean.option.id}" styleClass="jeeslPanel" rendered="#{(not empty cc.attrs.bean.question) and (not empty cc.attrs.bean.option)}">
 						<f:facet name="actions">
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveQuestionOption()}" update=":#{cc.id}:sQuestion"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.delQuestionOption()}" update=":#{cc.id}:sQuestion"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.delQuestionOption()}" update=":#{cc.id}:sQuestion"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">
@@ -438,7 +438,7 @@
 					<p:panel header="#{msg.jeeslSurveyOption}" styleClass="jeeslPanel" rendered="#{(not empty cc.attrs.bean.optionSet) and (not empty cc.attrs.bean.option)}">
 						<f:facet name="actions">
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveSetOption()}" update=":#{cc.id}:sQuestion"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.delSetOption()}" update=":#{cc.id}:sQuestion"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.delSetOption()}" update=":#{cc.id}:sQuestion"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">
@@ -498,7 +498,7 @@
 						<f:facet name="actions">
 							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.deleteScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
 						</f:facet>
 						<p:panelGrid columns="4" columnClasses="auPwg10,auPwg40,auPwg30,auPwg20">
 							<p:selectBooleanCheckbox value="#{cc.attrs.bean.score.calculateScore}" />
@@ -548,7 +548,7 @@
 						<f:facet name="actions">
 							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.deleteCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 							<p:outputLabel value="#{msg.jeeslSurveyConditionNegated}"/>
@@ -600,7 +600,7 @@
 						<f:facet name="actions">
 							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" listener="#{cc.attrs.bean.deleteValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 							<p:outputLabel value="#{msg.jeeslVisible}"/>

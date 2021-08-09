@@ -24,7 +24,7 @@
 					<j:dtHeader id="dth" title="#{msg.aupSecurityUsecases}">
 						<h:graphicImage id="giUsecaseAdd" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAdd']}"/>
                         <p:tooltip for="giUsecaseAdd" value="#{msg.ttAdd}"/>
-						<j:icon type="jeeslRemove" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblUsecase)}"  mayDisappear="true" listener="#{cc.attrs.bean.opRmUsecase()}" update="#{cc.attrs.update}" tooltip="#{msg.ttRemove}"/>
+						<j:icon type="jeeslRemove" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblUsecase)}" listener="#{cc.attrs.bean.opRmUsecase()}" update="#{cc.attrs.update}" tooltip="#{msg.ttRemove}"/>
 					</j:dtHeader>
 				</f:facet>
 				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblUsecase}"/>

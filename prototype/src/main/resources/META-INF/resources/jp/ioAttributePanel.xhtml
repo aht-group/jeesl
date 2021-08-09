@@ -32,8 +32,8 @@
 			<p:panel id="pQuestions" header="#{cc.attrs.handler.attributeSet.name[localeCode].lang}" styleClass="jeeslPanel">
 				<f:facet name="actions">
 					<j:icon type="jeeslSave" listener="#{cc.attrs.handler.save()}" update="@form #{cc.attrs.update}" tooltip="#{msg.jeeslSurveyTtSaveSection}" rendered="#{cc.attrs.withSave}"/>
-					<j:icon type="jeeslIoAttributeCriteriaWithDescription" listener="#{cc.attrs.handler.toggleDescription()}" update="@form" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.withDescriptionToggle and cc.attrs.handler.showDescription}" mayDisappear="true"/>
-					<j:icon type="jeeslIoAttributeCriteriaWithoutDescription" listener="#{cc.attrs.handler.toggleDescription()}" update="@form" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.withDescriptionToggle and (not cc.attrs.handler.showDescription)}" mayDisappear="true"/>
+					<j:icon type="jeeslIoAttributeCriteriaWithDescription" listener="#{cc.attrs.handler.toggleDescription()}" update="@form" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.withDescriptionToggle and cc.attrs.handler.showDescription}"/>
+					<j:icon type="jeeslIoAttributeCriteriaWithoutDescription" listener="#{cc.attrs.handler.toggleDescription()}" update="@form" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.withDescriptionToggle and (not cc.attrs.handler.showDescription)}"/>
 				</f:facet>
 				<ui:repeat id="repeatC" value="#{appAttributeBean.mapCriteria[cc.attrs.handler.attributeSet]}" var="c">	
 					<p:panelGrid columns="#{cc.attrs.withLabel ? 2 : 1}" columnClasses="#{cc.attrs.withLabel ? cc.attrs.columnClasses : 'jeeslGrid100'}">

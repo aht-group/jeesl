@@ -37,9 +37,9 @@
 					<h:form id="fSection" rendered="#{not empty cc.attrs.bean.board}">
 						<p:panel header="#{msg.jeeslBbBoard}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelBoard()}" update=":#{cc.id}:sBoard" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelBoard()}" update=":#{cc.id}:sBoard"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveBoard()}" update=":#{cc.id}:fTree :#{cc.id}:sBoard"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteBoard()}" update=":#{cc.id}:sBoard" rendered="#{false and cc.attrs.bean.board.id gt 0}" mayDisappear="true"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteBoard()}" update=":#{cc.id}:sBoard" rendered="#{false and cc.attrs.bean.board.id gt 0}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslBbName}"/>

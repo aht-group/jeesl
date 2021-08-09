@@ -55,9 +55,9 @@
 			<h:form id="fCriteria">
 				<p:panel id="pView" header="#{msg.jeeslIoAttribute}" rendered="#{not empty cc.attrs.bean.criteria}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetCriteria()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetCriteria()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
 						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.criteria.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.criteria.id gt 0}" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						<p:outputLabel value="Will be removed"/>
@@ -109,9 +109,9 @@
 			<h:form id="fOption">
 				<p:panel id="pView" header="#{msg.jeeslIoAttributeOption}" rendered="#{not empty cc.attrs.bean.option}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetOption()}" update=":#{cc.id}:sCriteria" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetOption()}" update=":#{cc.id}:sCriteria" tooltip="#{msg.jeeslTtCancel}"/>
 						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveOption()}" update=":#{cc.id}:sCriteria" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteOption()}" update=":#{cc.id}:sCriteria" rendered="#{cc.attrs.bean.option.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteOption()}" update=":#{cc.id}:sCriteria" rendered="#{cc.attrs.bean.option.id gt 0}" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						<p:outputLabel value="#{msg.jeeslCode}"/>

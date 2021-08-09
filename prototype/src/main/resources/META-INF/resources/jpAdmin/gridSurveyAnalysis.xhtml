@@ -61,7 +61,7 @@
 					<p:panel header="#{msg.jeeslSurveyAnalysis}" styleClass="jeeslPanel">
 						<f:facet name="actions">
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveAnalysis()}" update=":#{cc.id}:grid"/>
-							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAnalysis()}" update=":#{cc.id}:grid" mayDisappear="true" rendered="#{cc.attrs.bean.analysis.id gt 0}"/>
+							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAnalysis()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.analysis.id gt 0}"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="4" columnClasses="jeeslGrid30,jeeslGrid20,jeeslGrid30,jeeslGrid20">
@@ -126,7 +126,7 @@
 					<p:panel header="#{msg.jeeslSurveyAnalysisQuestion}" styleClass="jeeslPanel">
 						<f:facet name="actions">
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveAnalysisQuestion()}" update=":#{cc.id}:sAnalysis"/>
-							<j:icon type="jeeslDelete"  listener="#{cc.attrs.bean.rmAnalysisQuestion()}" update=":#{cc.id}:sAnalysis" mayDisappear="true"/>
+							<j:icon type="jeeslDelete"  listener="#{cc.attrs.bean.rmAnalysisQuestion()}" update=":#{cc.id}:sAnalysis"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -161,7 +161,7 @@
 					<p:panel header="#{msg.jeeslSurveyAnalysisQuestion}" styleClass="jeeslPanel">
 						<f:facet name="actions">
 							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveTool()}" update=":#{cc.id}:sAnalysis"/>
-							<j:icon type="jeeslDelete"  listener="#{cc.attrs.bean.deleteTool()}" update=":#{cc.id}:sAnalysis" mayDisappear="true"/>
+							<j:icon type="jeeslDelete"  listener="#{cc.attrs.bean.deleteTool()}" update=":#{cc.id}:sAnalysis"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="4" columnClasses="jeeslGrid30,jeeslGrid20,jeeslGrid30,jeeslGrid20">

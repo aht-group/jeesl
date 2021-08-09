@@ -58,9 +58,9 @@
 			<h:form id="fMapping" rendered="#{not empty cc.attrs.bean.mapping}">
 				<p:panel id="pView" header="#{msg.jeeslIoSsiMapping}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelMapping()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelMapping()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
 						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveMapping()}"   update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteMapping()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.mapping.id gt 0}" mayDisappear="true"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteMapping()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.mapping.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGRid80">
 						

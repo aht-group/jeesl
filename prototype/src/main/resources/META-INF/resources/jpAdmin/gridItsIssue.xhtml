@@ -53,7 +53,7 @@
 			<h:form id="fIssue" rendered="#{not empty cc.attrs.bean.issue}">
 				<p:panel header="#{msg.jeeslAomType}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelIssue()}" update=":#{cc.id}:grid" mayDisappear="true" tooltip="#{msg.jeeslTtCancel}"/>
+						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelIssue()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
 						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveIssue()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteIssue()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.issue.id gt 0}" tooltip="#{msg.ttDelete}"/>
 					</f:facet>

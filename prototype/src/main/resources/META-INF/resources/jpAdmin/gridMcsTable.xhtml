@@ -71,7 +71,7 @@
 			<h:form id="fDetail" rendered="#{not empty cc.attrs.bean.status}">
 				<p:panel id="pLang" header="#{msg.jeeslDetails}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sDetail" mayDisappear="true"/>
+						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sDetail"/>
 						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.save()}"   update=":#{cc.id}:sCategory :#{cc.id}:sDetail" rendered="#{cc.attrs.bean.uiAllowSave}"/>
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rm()}"     update=":#{cc.id}:sCategory :#{cc.id}:sDetail" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
 					</f:facet>

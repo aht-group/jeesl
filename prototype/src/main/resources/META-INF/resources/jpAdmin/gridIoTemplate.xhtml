@@ -32,8 +32,8 @@
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslIoTemplates}">
 								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTokens :#{cc.id}:row2"/>
-								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" mayDisappear="true" rendered="#{not cc.attrs.bean.editTemplate}"/>
-								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" mayDisappear="true" rendered="#{cc.attrs.bean.editTemplate}"/>
+								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" rendered="#{not cc.attrs.bean.editTemplate}"/>
+								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.editTemplate}"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>
@@ -66,9 +66,9 @@
 					<p:panel id="pView" header="#{msg.jeeslIoTemplate}"
 								rendered="#{not empty cc.attrs.bean.template}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid" mayDisappear="true"/>
+							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid"/>
 							<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid" />
-							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.template.id gt 0}" listener="#{cc.attrs.bean.rmTemplate()}" update=":#{cc.id}:grid" mayDisappear="true"/>
+							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.template.id gt 0}" listener="#{cc.attrs.bean.rmTemplate()}" update=":#{cc.id}:grid"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 							<p:outputLabel value="#{msg.aupCategory}"/>
@@ -117,9 +117,9 @@
 				<h:form id="fToken">
 					<p:panel header="#{msg.jeeslIoToken}" rendered="#{not empty cc.attrs.bean.token}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslCancel" mayDisappear="true" listener="#{cc.attrs.bean.cancelToken()}" update=":#{cc.id}:sTokens"/>
+							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelToken()}" update=":#{cc.id}:sTokens"/>
 							<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveToken()}" update=":#{cc.id}:sTokens"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" rendered="#{cc.attrs.bean.token.id gt 0}" listener="#{cc.attrs.bean.rmToken()}" update=":#{cc.id}:sTokens"/>
+							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.token.id gt 0}" listener="#{cc.attrs.bean.rmToken()}" update=":#{cc.id}:sTokens"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -164,9 +164,9 @@
 				<h:form id="fDefinition">
 					<p:panel header="#{msg.jeeslIoTemplateDefinition}" rendered="#{not empty cc.attrs.bean.definition}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslCancel" mayDisappear="true" listener="#{cc.attrs.bean.cancelDefinition()}" update=":#{cc.id}:row2"/>
+							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelDefinition()}" update=":#{cc.id}:row2"/>
 							<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveDefinition()}" update=":#{cc.id}:row2"/>
-							<j:icon type="jeeslDelete" mayDisappear="true" rendered="#{cc.attrs.bean.definition.id gt 0}" listener="#{cc.attrs.bean.rmDefinition()}" update=":#{cc.id}:row2"/>
+							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.definition.id gt 0}" listener="#{cc.attrs.bean.rmDefinition()}" update=":#{cc.id}:row2"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 							<p:outputLabel value="#{msg.aupType}"/>

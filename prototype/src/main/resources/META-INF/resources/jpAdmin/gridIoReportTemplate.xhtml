@@ -41,9 +41,9 @@
 					<h:form id="fTemplate">
 						<p:panel header="#{msg.jeeslIoReportTemplate}" rendered="#{not empty cc.attrs.bean.template}" styleClass="auPanelWithGrid">
 							<f:facet name="actions">
-								<j:icon type="aupCancel" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="aupCancel" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
 								<j:icon type="aupSave"   listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
-								<j:icon type="aupDelete" listener="#{cc.attrs.bean.rmTemplate()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true" rendered="#{cc.attrs.bean.template.id gt 0}" />
+								<j:icon type="aupDelete" listener="#{cc.attrs.bean.rmTemplate()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.template.id gt 0}" />
 							</f:facet>
 							<div class="ui-fluid">
 								<div class="p-field p-grid">
@@ -77,9 +77,9 @@
 					<h:form id="fCell">
 						<p:panel header="#{msg.jeeslIoReportCell}" rendered="#{not empty cc.attrs.bean.cell}" styleClass="auPanelWithGrid">
 							<f:facet name="actions">
-								<j:icon type="aupCancel" listener="#{cc.attrs.bean.cancelCell()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="aupCancel" listener="#{cc.attrs.bean.cancelCell()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
 								<j:icon type="aupSave"   listener="#{cc.attrs.bean.saveCell()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-								<j:icon type="aupDelete" rendered="#{cc.attrs.bean.cell.id gt 0}" listener="#{cc.attrs.bean.rmCell()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="aupDelete" rendered="#{cc.attrs.bean.cell.id gt 0}" listener="#{cc.attrs.bean.rmCell()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">
 								<p:outputLabel value="#{msg.aupSecurityVisible}"/>

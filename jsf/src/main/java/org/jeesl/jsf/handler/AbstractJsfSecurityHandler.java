@@ -69,6 +69,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
+	@Deprecated //Use the other constructure with caching features of JeeslSecurityBean!
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
 									I identity,
 									JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
@@ -152,9 +153,12 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	
 	protected void update()
 	{
-		clear();	
+		clear();
+		List<A> actions = new ArrayList<>();
+		if(bSecurity!=null) {actions.addAll(bSecurity.fActions(view));}
+		else {actions.addAll(fSecurity.allForParent(fbSecurity.getClassAction(),view));}
 		if(debugOnInfo) {logger.info("Checking assignment of "+view.getActions().size()+" "+fbSecurity.getClassAction().getSimpleName()+" for user");}
-		for(A action : view.getActions())
+		for(A action : actions)
 		{
 			boolean allow = false;
 			if(identity!=null){allow=identity.hasAction(action.toCode());}

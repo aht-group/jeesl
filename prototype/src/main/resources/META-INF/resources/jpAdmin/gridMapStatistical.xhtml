@@ -78,7 +78,7 @@
 					<h:form id="fCommunication" rendered="#{not empty cc.attrs.bean.map}">
 						<p:panel header="#{msg.jeeslMapImplementation}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.implementation}">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelImplementation()}" update=":#{cc.id}:grid" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelImplementation()}" update=":#{cc.id}:grid"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveImplementation()}" update=":#{cc.id}:grid"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteImplementation()}" update=":#{cc.id}:grid" rendered="#{(cc.attrs.bean.implementation.id gt 0)}"/>
 							</f:facet>

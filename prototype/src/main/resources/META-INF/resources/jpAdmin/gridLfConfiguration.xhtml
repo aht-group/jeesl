@@ -44,9 +44,9 @@
 						<p:panel id="pView" rendered="#{not empty cc.attrs.bean.configuration}" styleClass="jeeslPanel">
 							<f:facet name="header"><jtp:label entity="LfConfiguration"/></f:facet>    
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetConfiguration()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetConfiguration()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveConfiguration()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteConfiguration()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.configuration.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteConfiguration()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.configuration.id gt 0}" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">

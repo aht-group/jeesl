@@ -59,8 +59,8 @@
 					          		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.uiAllowAdd}"/>
 					          		<j:icon type="jeeslUpload" listener="#{cc.attrs.bean.upload()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttUpload}" rendered="#{cc.attrs.bean.supportsUpload}"/>
 					          		<j:icon type="jeeslDownload" listener="#{cc.attrs.bean.downloadData()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" rendered="#{cc.attrs.bean.supportsDownload}"/>
-					          		<j:icon type="jeeslIoAttributeCriteriaWithDescription" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.bean.showDescription}" mayDisappear="true"/>
-									<j:icon type="jeeslIoAttributeCriteriaWithoutDescription" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{not cc.attrs.bean.showDescription}" mayDisappear="true"/>
+					          		<j:icon type="jeeslIoAttributeCriteriaWithDescription" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.bean.showDescription}"/>
+									<j:icon type="jeeslIoAttributeCriteriaWithoutDescription" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{not cc.attrs.bean.showDescription}"/>
 					          	</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorder()}" update="@form"/>
@@ -98,7 +98,7 @@
 							<f:facet name="actions">
 								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDispappear="true" tooltip="#{msg.jeeslTtCancel}"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDisappear="true" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							
@@ -194,9 +194,9 @@
 					<h:form id="fFigure">
 						<p:panel id="pLang" header="#{msg.jeeslOptionGraphicFigure}" rendered="#{not empty cc.attrs.bean.figure}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" mayDisappear="true" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" tooltip="#{msg.jeeslTtCancel}"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveFigure()}"   update=":#{cc.id}:fFigures :#{cc.id}:fFigure" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" mayDisappear="true" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							

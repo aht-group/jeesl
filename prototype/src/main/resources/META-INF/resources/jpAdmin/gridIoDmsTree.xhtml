@@ -24,7 +24,7 @@
 					<h:form id="fTree" >
 						<p:panel header="#{cc.attrs.bean.sbhDms.selection.name[localeCode].lang}" styleClass="jeeslTree" >
 							<f:facet name="actions">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttAdd}" mayDisappear="true"/>
+								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttAdd}"/>
 							</f:facet>
 							<p:tree id="tree1" value="#{cc.attrs.bean.tree}" var="node" 
 									selection="#{cc.attrs.bean.node}" selectionMode="single"
@@ -44,9 +44,9 @@
 					<h:form id="fSection" rendered="#{not empty cc.attrs.bean.section}">
 						<p:panel header="#{msg.jeeslIoDmsSection}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveSection()}" update=":#{cc.id}:fTree :#{cc.id}:sSection" rendered="#{not empty cc.attrs.bean.section}" tooltip="#{msg.ttSave}"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteSection()}" update=":#{cc.id}:fTree :#{cc.id}:sSection" rendered="#{cc.attrs.bean.section.id gt 0}" tooltip="#{msg.ttDelete}" mayDisappear="true"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteSection()}" update=":#{cc.id}:fTree :#{cc.id}:sSection" rendered="#{cc.attrs.bean.section.id gt 0}" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslVisible}"/>

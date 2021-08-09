@@ -40,7 +40,7 @@
 					<f:facet name="actions">
 						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelInstance()}" update=":#{cc.id}:grid"/>
 						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveInstance()}"   update=":#{cc.id}:grid"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteInstance()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.instance.id gt 0}" mayDisappear="true"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteInstance()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.instance.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGRid80">
 						

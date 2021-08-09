@@ -39,7 +39,7 @@
 			<h:form id="fType" rendered="#{not empty cc.attrs.bean.type}">
 				<p:panel header="#{msg.jeeslAomType}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelType()}" update=":#{cc.id}:grid" mayDisappear="true"/>
+						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelType()}" update=":#{cc.id}:grid"/>
 						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveType()}" update=":#{cc.id}:grid" />
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteType()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.type.id gt 0}"/>
 					</f:facet>

@@ -53,9 +53,9 @@
 					<h:form id="fHydroYear">
 						<p:panel header="#{msg.jeeslHydroYear}" rendered="#{not empty cc.attrs.bean.hydroYear}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelHydroYear()}" update=":#{cc.id}:sHydroYear" mayDisappear="true"/>
+								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelHydroYear()}" update=":#{cc.id}:sHydroYear"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveHydroYear()}"   update=":#{cc.id}:sHydroYears :#{cc.id}:sHydroYear" tooltip="#{msg.ttSave}"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteHydroYear()}" update=":#{cc.id}:sHydroYears :#{cc.id}:sHydroYear" rendered="#{cc.attrs.bean.hydroYear.id gt 0}" mayDisappear="true"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteHydroYear()}" update=":#{cc.id}:sHydroYears :#{cc.id}:sHydroYear" rendered="#{cc.attrs.bean.hydroYear.id gt 0}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">

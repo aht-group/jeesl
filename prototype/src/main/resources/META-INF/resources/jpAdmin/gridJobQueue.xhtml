@@ -37,7 +37,7 @@
 							<!-- This only works on EAP7 -->
 								<j:dialog id="dJob" header="#{msg.Details}" size="7">
 								<f:facet name="actions">
-									<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelJob()}" update=":#{cc.id}:grid" mayDisappear="true" oncomplete="PF('dJobWidget').hide();"/>
+									<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelJob()}" update=":#{cc.id}:grid" oncomplete="PF('dJobWidget').hide();"/>
 									<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveJob()}" update=":#{cc.id}:grid"/>
 								</f:facet>
 								<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -75,7 +75,7 @@
 								
 									<p:panel header="#{msg.Details}" styleClass="auPanelWithGrid" rendered="#{not empty cc.attrs.bean.job}">
 										<f:facet name="actions">
-											<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveJob()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" mayDisappear="false"/>
+											<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveJob()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 										</f:facet>
 										<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">
 											
