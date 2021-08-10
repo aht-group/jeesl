@@ -26,11 +26,11 @@
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sTemplate" listener="#{cc.attrs.bean.selectTemplate()}"/>
-							<p:column headerText="#{msg.jeeslJobType}" styleClass="jeeslPfTcCenter"><jtp:statusSymbolizer value="#{t.type}" height="12"/></p:column>
+							<p:column headerText="#{msg.jeeslJobType}" styleClass="jeeslPfTcCenter"><jtp:symbolizer value="#{t.type}" height="12"/></p:column>
 							<p:column headerText="#{msg.jeeslJobCategory}"><h:outputText value="#{t.category.name[userBean.localeCode].lang}"/></p:column>
 							<p:column headerText="#{msg.jeeslName}"><h:outputText value="#{t.name[userBean.localeCode].lang}"/></p:column>
-							<p:column headerText="#{msg.jeeslJobPriority}" styleClass="jeeslCenter"><jtp:statusSymbolizer value="#{t.priority}" height="12"/></p:column>
-							<p:column headerText="#{msg.jeeslJobExpiration}" styleClass="jeeslCenter"><jtp:statusSymbolizer value="#{t.expiration}" height="12"/></p:column>
+							<p:column headerText="#{msg.jeeslJobPriority}" styleClass="jeeslCenter"><jtp:symbolizer value="#{t.priority}" height="12"/></p:column>
+							<p:column headerText="#{msg.jeeslJobExpiration}" styleClass="jeeslCenter"><jtp:symbolizer value="#{t.expiration}" height="12"/></p:column>
 						</p:dataTable>
 					</h:form>
 				</j:slot>

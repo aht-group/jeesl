@@ -31,7 +31,7 @@
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sTemplate" listener="#{cc.attrs.bean.selectTemplate()}"/>
-							<p:column headerText="#{msg.jeeslJobType}" styleClass="jeeslPfTcCenter"><jtp:statusSymbolizer value="#{t.type}" height="12"/></p:column>
+							<p:column headerText="#{msg.jeeslJobType}" styleClass="jeeslPfTcCenter"><jtp:symbolizer value="#{t.type}" height="12"/></p:column>
 							<p:column headerText="#{msg.jeeslJobCategory}"><h:outputText value="#{t.category.name[userBean.localeCode].lang}"/></p:column>
 							<p:column headerText="#{msg.Name}"><h:outputText value="#{t.name[userBean.localeCode].lang}"/></p:column>
 						</p:dataTable>
