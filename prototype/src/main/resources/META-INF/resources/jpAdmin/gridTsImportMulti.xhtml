@@ -24,7 +24,7 @@
 					<h:form id="fCategories">
 					    <p:wizard flowListener="#{cc.attrs.bean.onFlowProcess}">
 						<p:tab id="wCategories" title="Select Categories">
-						    <p:panel id="pCategories" header="#{msg.aupTsImport} MULTI" styleClass="auPanelWithGrid">
+						    <p:panel id="pCategories" header="#{msg.aupTsImport} MULTI" styleClass="jeeslPanel">
 							<p:panelGrid columns="2" columnClasses="auPwg20,auPwg80">
 								
 								<p:outputLabel value="#{msg.jeeslTsClass}" rendered="false"/>
@@ -42,11 +42,11 @@
 						    </p:panel>
 						</p:tab>
 						<p:tab id="wUpload" title="Upload Excel File">
-						    <p:panel id="pUpload" rendered="#{empty cc.attrs.bean.forbiddenScopes}" header="#{msg.aupTsUpload}" styleClass="auPanelWithGrid">
+						    <p:panel id="pUpload" rendered="#{empty cc.attrs.bean.forbiddenScopes}" header="#{msg.aupTsUpload}" styleClass="jeeslPanel">
 								<p:fileUpload oncomplete="PF('forbiddenScopes').show();" fileUploadListener="#{cc.attrs.bean.uploadData}" mode="advanced" dragDropSupport="false"
                                                             update="@form" sizeLimit="10000000"  process="@form" fileLimit="1" allowTypes="/(\.|\/)(xlsx)$/" />
 						    </p:panel>
-							<p:panel id="pScopeProblemsSummary" header="#{msg.validationSummary}" styleClass="auPanelWithGrid" rendered="#{not empty cc.attrs.bean.forbiddenScopes or not empty cc.attrs.bean.failedScopes}">
+							<p:panel id="pScopeProblemsSummary" header="#{msg.validationSummary}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.forbiddenScopes or not empty cc.attrs.bean.failedScopes}">
 								<h:outputText value="There are problems with the given scope codes. Please check:"  />
 
 								<br/>
@@ -62,7 +62,7 @@
 						    <br/>
 						</p:tab>
 						<p:tab id="wStations" title="Handle new Stations" rendered="#{not empty cc.attrs.bean.stationsValidationList}">
-						    <p:panel rendered="#{not empty cc.attrs.bean.stationsValidationList}" id="pStationsImport" header="#{msg.stationsImport}" styleClass="auPanelWithGrid">
+						    <p:panel rendered="#{not empty cc.attrs.bean.stationsValidationList}" id="pStationsImport" header="#{msg.stationsImport}" styleClass="jeeslPanel">
 							<h:outputText value="Fix validation problems and upload file again to save." rendered="#{not cc.attrs.bean.stationsValidated}"/>
 							<h:outputText value="Click save to store new stations data in database." rendered="#{cc.attrs.bean.stationsValidated}"/>
 							<br/>
@@ -100,7 +100,7 @@
 						    </p:panel>
 						</p:tab>
 						<p:tab id="wVerify" title="Verify Data">
-						    <p:panel id="pValidationSummary" header="#{msg.validationSummary}" styleClass="auPanelWithGrid" rendered="#{not empty cc.attrs.bean.getFailureList()}">
+						    <p:panel id="pValidationSummary" header="#{msg.validationSummary}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.getFailureList()}">
 							<h:outputText value="Fix validation problems and upload file again to save. Please check:"  />
 							
 							<br/>
@@ -169,7 +169,7 @@
 						    </p:panel>
 						</p:tab>
 						<p:tab id="wImport" title="Save Data" >
-						    <p:panel id="pImport" header="#{msg.aupTsImport}" styleClass="auPanelWithGrid">
+						    <p:panel id="pImport" header="#{msg.aupTsImport}" styleClass="jeeslPanel">
 							<p:panelGrid columns="2" columnClasses="auPwg20,auPwg80">
 								<p:outputLabel value="#{msg.aupTsWorkspace}"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.workspace}" effect="fade">

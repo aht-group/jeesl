@@ -102,19 +102,19 @@
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							
-							<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70" styleClass="auCleanPanelGrid">
+							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" styleClass="auCleanPanelGrid">
 								<p:outputLabel value="#{msg.aupOptionCode}"/>
 								<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}" autocomplete="off"/>
 								<h:outputText rendered="#{not cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}"/>
 							</p:panelGrid>
 							
-							<p:panelGrid rendered="#{cc.attrs.bean.supportsSymbol}" columns="2" columnClasses="auPwg30,auPwg70" styleClass="auCleanPanelGrid">
+							<p:panelGrid rendered="#{cc.attrs.bean.supportsSymbol}" columns="2" columnClasses="jeeslGrid30,jeeslGrid70" styleClass="auCleanPanelGrid">
 								<p:outputLabel  value="#{msg.aupOptionSymbol}"/>
 								<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.symbol}" autocomplete="off"/>
 								<h:outputText rendered="#{not cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.symbol}"/>
 							</p:panelGrid>
 							
-							<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70" styleClass="auCleanPanelGrid">
+							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" styleClass="auCleanPanelGrid">
 								<p:outputLabel rendered="#{cc.attrs.bean.uiAllowReorder}" value="#{msg.aupOptionPosition}"/>
 								<p:inputText rendered="#{cc.attrs.bean.uiAllowReorder}" value="#{cc.attrs.bean.status.position}"/>
 								
@@ -135,7 +135,7 @@
 							</p:panelGrid>
 							<aht:tabTranslationEditor value="#{cc.attrs.bean.status}" keys="#{cc.attrs.langKeys}" withDescription="true"/>
 										
-							<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70" rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'symbol')}">
+							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'symbol')}">
 								<p:outputLabel value="#{msg.aupGraphicStyle}"/>
 								<p:selectOneMenu styleClass="w100" value="#{cc.attrs.bean.graphic.style}" effect="fade">
 									<f:selectItems value="#{cc.attrs.bean.graphicStyles}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
@@ -148,7 +148,7 @@
 								<p:colorPicker value="#{cc.attrs.bean.graphic.color}" />
 							</p:panelGrid>
 							
-							<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70" rendered="#{cc.attrs.bean.supportsGraphic}">
+							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" rendered="#{cc.attrs.bean.supportsGraphic}">
 								<p:outputLabel value="#{msg.aupGraphicType}"/>
 								<p:selectOneMenu styleClass="w100" value="#{cc.attrs.bean.graphic.type}" effect="fade">
 									<f:selectItems value="#{cc.attrs.bean.graphicTypes}" var="type" itemLabel="#{type.name[localeCode].lang}" itemValue="#{type}"/>

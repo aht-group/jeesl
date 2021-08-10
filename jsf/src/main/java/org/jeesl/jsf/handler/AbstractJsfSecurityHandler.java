@@ -157,7 +157,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		List<A> actions = new ArrayList<>();
 		if(bSecurity!=null) {actions.addAll(bSecurity.fActions(view));}
 		else {actions.addAll(fSecurity.allForParent(fbSecurity.getClassAction(),view));}
-		if(debugOnInfo) {logger.info("Checking assignment of "+view.getActions().size()+" "+fbSecurity.getClassAction().getSimpleName()+" for user");}
+		if(debugOnInfo) {logger.info("Checking assignment of "+actions.size()+" "+fbSecurity.getClassAction().getSimpleName()+" for user");}
 		for(A action : actions)
 		{
 			boolean allow = false;
@@ -291,7 +291,11 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	
 	protected void updateActionsForDomainRoles(List<R> staffRoles)
 	{
-		for(A action : view.getActions())
+		List<A> actions = new ArrayList<>();
+		if(bSecurity!=null) {actions.addAll(bSecurity.fActions(view));}
+		else {actions.addAll(fSecurity.allForParent(fbSecurity.getClassAction(),view));}
+		
+		for(A action : actions)
 		{
 			boolean allowSystem = identity.hasAction(action.toCode());
 			boolean allowDomain = hasDomainRole(action,staffRoles);

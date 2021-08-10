@@ -126,7 +126,7 @@
                                 <j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveData()}" update=":#{cc.id}:fTimeSeries" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
                             </f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-                            <p:panelGrid columns="2" columnClasses="auPwg30,auPwg70" styleClass="auCleanPanelGrid">
+                            <p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" styleClass="auCleanPanelGrid">
                                 <p:outputLabel for="popup" value="#{msg.aupDate}"/>
                                 <p:calendar id="popup" value="#{cc.attrs.bean.date}" pattern="dd-MM-yyyy" required="true"/>
                                 <p:outputLabel value="#{cc.attrs.bean.data.timeSeries.scope.unit.name[localeCode].lang}" />

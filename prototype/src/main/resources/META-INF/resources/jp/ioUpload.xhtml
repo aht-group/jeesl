@@ -23,18 +23,18 @@
 				sizeLimit="10000000" fileLimit="100" allowTypes="#{lcfUploadBean.allowedUploadTypes}" />
 			</h:form>
 			<h:form id="fConfirm" >
-				<p:panel header="#{msg.jeeslIoFileUpload}" styleClass="auPanelWithGrid" rendered="#{not empty cc.attrs.handler.file}">
+				<p:panel header="#{msg.jeeslIoFileUpload}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.handler.file}">
 					<f:facet name="actions">
 						<j:icon type="jeeslSave" listener="#{cc.attrs.handler.saveFile()}" update="#{cc.attrs.update}" oncomplete="PF('wvUpload').hide();"/> 
 					</f:facet>
-					<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">
+					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 	
 						<p:outputLabel value="#{msg.jeeslIoFileName}"/>
 						<h:outputText value="#{cc.attrs.handler.file.name}"/>
 							
 					</p:panelGrid>
 					
-					<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70" rendered="#{cc.attrs.handler.withTypes}">
+					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" rendered="#{cc.attrs.handler.withTypes}">
 	
 						<p:outputLabel value="#{msg.jeeslIoFileType}"/>
 						<p:selectOneMenu value="#{cc.attrs.handler.type}" effect="fade" autoWidth="false">

@@ -47,7 +47,7 @@
 			</aht:slot>
 			<aht:slot id="sTransaction" width="6">
 				<h:form id="fTransaction" rendered="#{not empty cc.attrs.bean.transaction}">
-					<p:panel header="#{msg.jeeslTsTransaction}" styleClass="auPanelWithGrid">
+					<p:panel header="#{msg.jeeslTsTransaction}" styleClass="jeeslPanel">
 						<f:facet name="actions">
 							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.cch.generateCode()}" update="#{cc.clientId}:fCode" tooltip="#{msg.ttDelete}" oncomplete="PF('dCodeRemove').show();"/>
 						</f:facet>

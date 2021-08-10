@@ -73,11 +73,11 @@
 						<p:dialog id="dJob" widgetVar="wvJob" modal="true">
 							<aht:slot width="8">
 								
-									<p:panel header="#{msg.Details}" styleClass="auPanelWithGrid" rendered="#{not empty cc.attrs.bean.job}">
+									<p:panel header="#{msg.Details}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.job}">
 										<f:facet name="actions">
 											<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveJob()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 										</f:facet>
-										<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">
+										<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 											
 											<p:outputLabel value="#{msg.jeeslJobUser}"/>
 											<h:outputText value="#{cc.attrs.bean.job.user.email}"/>

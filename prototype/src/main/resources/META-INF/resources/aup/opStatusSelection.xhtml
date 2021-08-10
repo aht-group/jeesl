@@ -31,7 +31,7 @@
 			<j:dtHeader id="dth" title="#{cc.attrs.tableHeader}">
 				<h:graphicImage id="giProjectSelection" styleClass="pf-action-icon" library="gfx" name="#{iconBean.icon12['new']}"/>
 				<p:tooltip for="giProjectSelection" value="#{msg.ttAdd}"/>
-				<meis:iconRemove rendered="#{not empty cc.attrs.handler.tb}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}"/>
+				<j:icon type="jeeslRemove" rendered="#{not empty cc.attrs.handler.tb}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}"/>
 			</j:dtHeader>
 		</f:facet>
 		<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.selectTb}"/>

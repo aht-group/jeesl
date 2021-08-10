@@ -76,7 +76,7 @@
 								<j:icon type="jeeslClone" listener="#{cc.attrs.bean.cloneView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.jeeslTooltipClone}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
-							<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">
+							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 								<p:outputLabel value="#{msg.jeeslSecurityCategory}"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.view.category}" effect="fade" autoWidth="false">
 									<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
@@ -89,7 +89,7 @@
 								<p:triStateCheckbox value="#{cc.attrs.bean.tsb.a}"/>
 								<p:outputLabel value="#{msg.jeeslSecurityRedirect}"/>
 							</p:panelGrid>	
-							<p:panelGrid columns="2" columnClasses="auPwg30,auPwg70">				
+							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">				
 								<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
 								<h:outputText rendered="#{not cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.view.code}"/>
 								<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.view.code}"/>
