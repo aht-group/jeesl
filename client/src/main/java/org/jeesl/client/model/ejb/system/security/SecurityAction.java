@@ -39,6 +39,7 @@ public class SecurityAction implements JeeslSecurityAction<Lang,Description,Secu
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
 	
+	@Override public String resolveParentAttribute() {return JeeslSecurityAction.Attributes.view.toString();}
 	@NotNull @ManyToOne
 	private SecurityView view;
 	public SecurityView getView() {return view;}
@@ -70,8 +71,6 @@ public class SecurityAction implements JeeslSecurityAction<Lang,Description,Secu
 		if(template==null){return name;}
 		else{return template.getName();}
 	}
-	
-	@Override public String resolveParentAttribute() {return "category";}
 	
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
