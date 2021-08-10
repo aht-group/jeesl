@@ -56,7 +56,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityViewBean.class);
 
 	private List<V> views; public List<V> getViews(){return views;}
-	private List<A> actions; public List<A> getActions(){return actions;}
+	private final List<A> actions; public List<A> getActions(){return actions;}
 	private List<AR> areas; public List<AR> getAreas(){return areas;}
 	private List<R> roles; public List<R> getRoles(){return roles;}
 	private List<U> usecases; public List<U> getUsecases(){return usecases;}
@@ -73,6 +73,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		super(fbSecurity);
 		categoryType = JeeslSecurityCategory.Type.view;
 		tsb = new TriStateBinder();
+		actions = new ArrayList<>();
 	}
 	
 	public void initSuper(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
@@ -122,7 +123,8 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	
 	private void reloadActions()
 	{
-		actions = view.getActions();
+		actions.clear();
+		actions.addAll(fSecurity.allForParent(fbSecurity.getClassAction(), view));
 		Collections.sort(actions, comparatorAction);
 	}
 	

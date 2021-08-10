@@ -124,8 +124,9 @@ public class AbstractAdminSecurityUsecasesBean <L extends JeeslLang, D extends J
 		opActions.clear();
 		for(V v : usecase.getViews())
 		{
-			v = fSecurity.load(fbSecurity.getClassView(),v);
-			opActions.addAll(v.getActions());
+			// TODO Use cahce!
+			opActions.addAll(fSecurity.allForParent(fbSecurity.getClassAction(), v));
+//			opActions.addAll(bSecurity.fActions(v));
 		}
 		Collections.sort(opActions, comparatorAction);
 	}
