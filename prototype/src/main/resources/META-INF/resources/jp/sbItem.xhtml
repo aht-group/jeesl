@@ -33,7 +33,9 @@
 					<composite:renderFacet name="label"/>
 				</c:if>
 			</p:outputLabel>
-			<input type="checkbox"/>
+			<ui:remove>
+				<input type="checkbox"/>
+			</ui:remove>
 			<ul class="jeesl-dropdown-list #{not empty cc.attrs.multi ? 'jeesl-dropdown-list-multi' : ''}">
 				<c:if test="#{not empty cc.facets.top}">
 	                <li class="jeesl-dropdown-item">

@@ -48,6 +48,9 @@ $highlight-shadow: 0 -1px inset $white-80;
 	$dark-colour: $dark;
 	$darker-colour: $darker;
 
+	$link-colour: $dark-colour;
+	$link-hover-colour: $bright-colour;
+
 	$main-background-gradient: linear-gradient(to right, $dark-colour, $bright-colour);
 	$breadcrumb-background-gradient: linear-gradient(to right, $white-0, $bright-colour);
 	$status-background-gradient: linear-gradient(to bottom, $dark-colour, $medium-colour);
