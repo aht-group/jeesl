@@ -38,15 +38,7 @@
             <component-type>net.sf.ahtutils.jsf.components.Security</component-type>
         </component>
     </tag>
-    
-	<tag>
-        <tag-name>li</tag-name>
-        <component>
-            <component-type>org.jeesl.jsf.components.html.Li</component-type>
-        </component>
-    </tag>
-
-    
+        
 	<tag>
         <tag-name>outputXpath</tag-name>
         <component>
@@ -54,12 +46,6 @@
         </component>
     </tag>
 	
-	
-	<function>
-		<function-name>byteCount</function-name>
-		<function-class>net.sf.exlp.util.io.ByteCount</function-class>
-		<function-signature>java.util.String human(java.lang.Long,java.lang.Boolean)</function-signature>
-	</function>
 
 	<function>
 		<function-name>mobileDevice</function-name>

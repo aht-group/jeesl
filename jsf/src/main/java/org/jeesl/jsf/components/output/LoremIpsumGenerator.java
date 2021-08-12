@@ -1,4 +1,4 @@
-package net.sf.ahtutils.jsf.components.layout;
+package org.jeesl.jsf.components.output;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UINamingContainer;
@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import de.svenjacobs.loremipsum.LoremIpsum;
 
-@FacesComponent(value="net.sf.ahtutils.jsf.components.layout.LoremIpsumGenerator")
+@FacesComponent(value="org.jeesl.jsf.components.output.LoremIpsumGenerator")
 public class LoremIpsumGenerator extends UINamingContainer
 {
 	final static Logger logger = LoggerFactory.getLogger(LoremIpsumGenerator.class);
