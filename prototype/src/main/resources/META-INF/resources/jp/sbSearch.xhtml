@@ -22,18 +22,25 @@
 	<div class="sbSearch jeesl-menu-bar-item jeesl-left">
 		<div class="ui-inputgroup">
 			<p:commandButton icon="ui-icon ui-icon-search fas fa-search" styleClass="search-btn-light ui-corner-left"  disabled="true" />
-			<p:inputText id="searchText" value="#{cc.attrs.handler.searchText}"  placeholder="Search" styleClass="search-box"  onkeyup="reloadSearch()">
-				<p:ajax event="keyup" update="searchResults" process="searchText" listener="#{cc.attrs.handler.handleKeyEvent}" />
+			<p:inputText id="searchText" value="#{cc.attrs.handler.searchText}"  placeholder="Search" styleClass="search-box">
+				<p:ajax event="keyup" update="searchResults" process="searchText" listener="#{cc.attrs.handler.handleKeyEvent}" oncomplete="showResults()"/>
 			</p:inputText>
 			<p:commandButton icon="ui-icon ui-icon-close fas fa-times" styleClass="search-btn-light ui-corner-right" onclick="cancelSearch()" update="searchResults" action="#{cc.attrs.handler.cancelEvent}"/>
 		</div>
 		
-		<h:panelGroup id="searchResults" styleClass="auContainer jeesl-overlay-container">
+		<h:panelGroup id="searchResults" layout="block" styleClass="auContainer jeesl-overlay-container">
+			<script>
+				function showResults() {
+					let input = $('##{cc.clientId}:searchText'.replaceAll(':','\\:'));
+					let overlay = $('##{cc.clientId}:searchResults'.replaceAll(':','\\:'));
+					input.val() ? overlay.addClass('jeesl-visible') : overlay.removeClass('jeesl-visible');
+				}
+			</script>
 			<div class="jeesl-overlay-wrapper">
 				<ul class="ui-selectonemenu-list">
 					<ui:repeat var="var" value="#{cc.attrs.handler.list}" varStatus="loop">
 						<li class="ui-selectonemenu-item">
-							<div class="jeesl-field-tip" onmouseover="showTipContent(this)" onmouseout="hideTipContent(this)">
+							<div class="jeesl-field-tip">
 								<composite:renderFacet name="resultList"/>
 		            			<div class="jeesl-field-tip-content">
 									<composite:renderFacet name="resultDetail"/>

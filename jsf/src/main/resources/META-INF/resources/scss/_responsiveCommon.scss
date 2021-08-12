@@ -19,6 +19,8 @@ $border: $border-width solid $border-colour;
 	border: $border-width solid $border-colour;
 	border-radius: $border-radius;
 	box-shadow: $overlay-shadow;
+	opacity: 0;
+	transition: opacity .2s linear;
 	z-index: 1000;
 	
 	@media (max-width: 768px) {
@@ -26,6 +28,10 @@ $border: $border-width solid $border-colour;
 		border-radius: 0;
 		left: 0 !important;
 		width: 100% !important;
+	}
+	
+	&.jeesl-visible {
+		opacity: 1;
 	}
 	
 	.jeesl-overlay-wrapper {
@@ -55,6 +61,7 @@ $border: $border-width solid $border-colour;
 		background: transparent;
 		border: none;
 		border-radius: 0;
+		cursor: pointer;
 		line-height: $ls-element-height;
 		padding: 0 $half-spacing;
 		transition: background .2s linear;
@@ -107,6 +114,12 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+@mixin setBackground($url) {
+	body {
+		background: $light-grey url($url) repeat fixed;
+	}
+}
+
 html, body {
 	height: 100%;
 }
@@ -114,7 +127,6 @@ html, body {
 body {
 	min-width: $min-content-width;
 	padding: $regular-spacing 0;
-	background: $light-grey url("/erp/javax.faces.resource/background.jpg.xhtml?ln=aupGfx&buildVersion=1626445190") repeat fixed;
 }
 
 body, .ui-widget {
