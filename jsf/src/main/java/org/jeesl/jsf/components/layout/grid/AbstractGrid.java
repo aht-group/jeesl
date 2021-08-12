@@ -1,4 +1,4 @@
-package net.sf.ahtutils.jsf.components.layout;
+package org.jeesl.jsf.components.layout.grid;
 
 import java.io.IOException;
 import java.util.Map;
@@ -15,14 +15,14 @@ import net.sf.ahtutils.jsf.util.ComponentAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractUtilsGrid extends UIPanel
+public class AbstractGrid extends UIPanel
 {	
-	final static Logger logger = LoggerFactory.getLogger(AbstractUtilsGrid.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractGrid.class);
 	protected static enum Properties {width,gutter,type,styleClass,renderChildren}
 
 	protected int slot,gutter;
 	
-	public AbstractUtilsGrid()
+	public AbstractGrid()
 	{	
 		slot=70;
 		gutter=5;

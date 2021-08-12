@@ -33,7 +33,7 @@
 							<p:ajax event="rowSelect" update=":#{cc.id}:sStyle" listener="#{cc.attrs.bean.selectStyle()}"/>
 							<p:column rendered="true"><h:outputText value="#{s.position}"/></p:column>
 							<p:column headerText="#{msg.jeeslName}"><h:outputText value="#{s.name[userBean.localeCode].lang}"/></p:column>
-							<p:column><aup:iconCheckmark value="#{s.visible}"/></p:column>
+							<p:column><j:duoCheckmark value="#{s.visible}"/></p:column>
 						</p:dataTable>
 					</h:form>
 				</aht:slot>

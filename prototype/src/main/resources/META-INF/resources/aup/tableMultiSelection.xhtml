@@ -28,7 +28,7 @@
 				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.select()}"/>
 				<composite:insertChildren/>
 				<p:column>
-					<aup:iconCheckmark value="#{cc.attrs.handler.map[var]}"/>
+					<j:duoCheckmark value="#{cc.attrs.handler.map[var]}"/>
 				</p:column>
 		</p:dataTable>
 	</composite:implementation>

@@ -44,7 +44,7 @@
 								<h:outputText value="#{e.name[userBean.localeCode].lang}"/>
 				            </p:column>
 							<p:column styleClass="jeeslCenter">  
-								<aup:iconCheckmark value="#{e.visible}"/>
+								<j:duoCheckmark value="#{e.visible}"/>
 								<p:graphicImage style="margin-left: 5px;" name="ui/module/survey/row.svg" library="jeeslGfx" height="12" rendered="#{e.timeseries}"/>
 								<p:graphicImage style="margin-left: 5px;" name="ui/system/io/cms/books.svg" library="jeeslGfx" height="12" rendered="#{e.documentation}"/>
 								<p:graphicImage style="margin-left: 5px;" name="ui/system/io/revision/diagram.svg" library="jeeslGfx" height="12" rendered="#{not empty e.diagram}"/>

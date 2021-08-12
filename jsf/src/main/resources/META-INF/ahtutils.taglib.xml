@@ -7,6 +7,12 @@
 	<composite-library-name>ahtutils</composite-library-name>
 	
 	<tag>
+        <tag-name>row</tag-name>
+        <component>
+            <component-type>org.jeesl.jsf.components.layout.Row</component-type>
+        </component>
+    </tag>
+	<tag>
         <tag-name>slot</tag-name>
         <component>
             <component-type>org.jeesl.jsf.components.layout.Slot</component-type>
@@ -25,18 +31,7 @@
             <component-type>net.sf.ahtutils.jsf.components.layout.Grid</component-type>
         </component>
     </tag>
-	<tag>
-        <tag-name>row</tag-name>
-        <component>
-            <component-type>net.sf.ahtutils.jsf.components.layout.Row</component-type>
-        </component>
-    </tag>
-    <tag>
-        <tag-name>panelGrid</tag-name>
-        <component>
-            <component-type>net.sf.ahtutils.jsf.components.layout.PanelGrid</component-type>
-        </component>
-    </tag>
+
 	<tag>
         <tag-name>security</tag-name>
         <component>

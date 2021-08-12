@@ -33,7 +33,7 @@
 							<p:ajax event="rowSelect" update=":#{cc.id}:sCells :#{cc.id}:sCell" listener="#{cc.attrs.bean.selectTemplate()}"/>
 							<p:column rendered="true"><h:outputText value="#{t.position}"/></p:column>
 							<p:column headerText="#{msg.Name}"><h:outputText value="#{t.name[userBean.localeCode].lang}"/></p:column>
-							<p:column><aup:iconCheckmark value="#{t.visible}"/></p:column>
+							<p:column><j:duoCheckmark value="#{t.visible}"/></p:column>
 						</p:dataTable>
 					</h:form>
 				</aht:slot>
@@ -69,7 +69,7 @@
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCell()}" update=":#{cc.id}:fCell" />
 							<p:column rendered="true"><h:outputText value="#{cell.rowNr}.#{cell.colNr}"/></p:column>
 							<p:column headerText="#{msg.aupName}"><h:outputText value="#{cell.name[userBean.localeCode].lang}"/></p:column>
-							<p:column><aup:iconCheckmark value="#{cell.visible}"/></p:column>
+							<p:column><j:duoCheckmark value="#{cell.visible}"/></p:column>
 						</p:dataTable>
 					</h:form>
 				</aht:slot>

@@ -31,7 +31,7 @@
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:grid" listener="#{cc.attrs.bean.selectFeature()}"/> 
 							<p:column headerText="#{msg.jeeslFeatureActive}">  
-								<aup:iconCheckmark value="#{f.visible}"/>
+								<j:duoCheckmark value="#{f.visible}"/>
 							</p:column>
 				            <p:column headerText="#{msg.jeeslCode}">  
 								<h:outputText value="#{f.code}" />  

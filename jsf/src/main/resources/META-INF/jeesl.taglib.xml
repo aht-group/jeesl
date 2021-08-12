@@ -5,16 +5,18 @@
 	<namespace>http://www.jeesl.org/jsf</namespace>
 	<composite-library-name>jeesl</composite-library-name>
 	
+	<!-- 
 	<tag>
         <tag-name>grid</tag-name>
         <component>
             <component-type>net.sf.ahtutils.jsf.components.layout.Grid</component-type>
         </component>
     </tag>
+     -->
 	<tag>
         <tag-name>row</tag-name>
         <component>
-            <component-type>net.sf.ahtutils.jsf.components.layout.Row</component-type>
+            <component-type>org.jeesl.jsf.components.layout.Row</component-type>
         </component>
     </tag>
 	<tag>

@@ -189,9 +189,7 @@ public class AbstractIconBean implements Serializable
 		mapStatic.put("jeeslDownload", "ui/jeesl/control/download.png");				svg.put("jeeslDownload","ui/control/download.svg");
 		mapStatic.put("jeeslUpload", "ui/jeesl/control/upload.png");					svg.put("jeeslUpload","ui/control/upload.svg");
 		mapStatic.put("jeeslGenerate", "ui/jeesl/control/gear.png");					svg.put("jeeslUpload","ui/control/gear.svg");
-		
 																						svg.put("jeeslWizard","ui/control/wizard/wand.svg");
-
 		mapStatic.put("jeeslArrowUp", "ui/jeesl/control/arrow/blue/up.png");			svg.put("jeeslArrowUp","ui/control/arrow/blue/up.svg");
 		mapStatic.put("jeeslArrowDown", "ui/jeesl/control/arrow/blue/down.png");		svg.put("jeeslArrowDown","ui/control/arrow/blue/down.svg");
 		mapStatic.put("jeeslArrowLeft", "ui/jeesl/control/arrow/blue/left.png");		svg.put("jeeslArrowLeft","ui/control/arrow/blue/left.svg");
@@ -224,6 +222,14 @@ public class AbstractIconBean implements Serializable
 		svg.put("jeeslOnlineHelp", "ui/info/help.svg");
 	}
 
+	protected void jeeslRevision()
+	{
+		svg.put("jeeslRevision","ui/io/revision/envers/revision.svg");
+		svg.put("jeeslRevisionAdd","ui/io/revision/envers/add.svg");
+		svg.put("jeeslRevisionMod","ui/io/revision/envers/mod.svg");
+		svg.put("jeeslRevisionDel","ui/io/revision/envers/del.svg");
+	}
+	
 	protected void jeeslDm()
 	{
 		mapStatic.put("dmUnlockDeactivated", "ui/jeesl/control/dm/circleMinusGrey.png");

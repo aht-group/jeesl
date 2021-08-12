@@ -46,7 +46,7 @@
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorder()}" update="@form"/>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectStatus}" update=":#{cc.id}:sDetail"/>
 					<p:column styleClass="aupPfDtColCentered">  
-						<aup:iconCheckmark value="#{s.visible}"/>
+						<j:duoCheckmark value="#{s.visible}"/>
 		            </p:column>
 					
 					<p:column>

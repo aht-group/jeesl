@@ -1,4 +1,4 @@
-package net.sf.ahtutils.jsf.components.layout;
+package org.jeesl.jsf.components.layout;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 import net.sf.ahtutils.jsf.util.ComponentAttribute;
 
-@FacesComponent("net.sf.ahtutils.jsf.components.layout.Row")
+@FacesComponent("org.jeesl.jsf.components.layout.Row")
 public class Row extends UIPanel
 {	
 	private static enum Properties {renderChildren,renderChildrenIfEjb,renderChildrenIfEjbPersisted}

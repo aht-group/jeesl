@@ -11,12 +11,13 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
+import org.jeesl.jsf.components.layout.grid.AbstractGrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @FacesComponent("net.sf.ahtutils.jsf.components.layout.Grid")
 @ListenerFor(systemEventClass=PostAddToViewEvent.class)
-public class Grid extends AbstractUtilsGrid
+public class Grid extends AbstractGrid
 {	
 	//j:grid
 	final static Logger logger = LoggerFactory.getLogger(Grid.class);

@@ -9,7 +9,7 @@
 	<tag>
         <tag-name>grid</tag-name>
         <component>
-            <component-type>net.sf.ahtutils.prototype.web.component.Grid</component-type>
+            <component-type>org.jeesl.web.component.grid.Grid</component-type>
         </component>
     </tag>
     <tag>

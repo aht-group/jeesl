@@ -1,4 +1,4 @@
-package net.sf.ahtutils.prototype.web.component;
+package org.jeesl.web.component.grid;
 
 import java.io.IOException;
 import java.util.Map;
@@ -11,14 +11,13 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
-import net.sf.ahtutils.jsf.components.layout.AbstractUtilsGrid;
-
+import org.jeesl.jsf.components.layout.grid.AbstractGrid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@FacesComponent("net.sf.ahtutils.prototype.web.component.Grid")
+@FacesComponent("org.jeesl.web.component.grid.Grid")
 @ListenerFor(systemEventClass=PostAddToViewEvent.class)
-public class Grid extends AbstractUtilsGrid
+public class Grid extends AbstractGrid
 {	
 	final static Logger logger = LoggerFactory.getLogger(Grid.class);
 	
