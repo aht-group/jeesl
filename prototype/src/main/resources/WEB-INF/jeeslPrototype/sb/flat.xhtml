@@ -7,14 +7,12 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
-	xmlns:j="http://www.jeesl.org/jsf"
-	xmlns:jp="http://jsf.jeesl.org/prototype"
-  	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
     xmlns:aup="http://ahtutils.sourceforge.net/prototype">
     
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
 
-	<aht:li>
+	<j:li>
 	    <c:choose>
 			<c:when test="#{orientation eq 'left'}"><f:attribute name="styleClass" value="aupStatusBarLeft jeesl-menu-bar-radio-item jeesl-left"/></c:when>
 			<c:otherwise><f:attribute name="styleClass" value="aupStatusBarRight jeesl-menu-bar-radio-item jeesl-right"/></c:otherwise>
@@ -22,15 +20,15 @@
 		
 		<ul class="jeesl-menu-bar-radio-item-list">
 			<ui:repeat var="var" value="#{handler.list}">
-				<aht:li styleClass="aupStatusBarRight jeeslSbFlat jeesl-menu-bar-item jeesl-left">
+				<j:li styleClass="aupStatusBarRight jeeslSbFlat jeesl-menu-bar-item jeesl-left">
 					<j:label styleClass="jeesl-menu-bar-button #{(handler.selection.id eq var.id) ? 'jeeslSbFlatSelected' : 'jeeslSbFlatUnSelected'} #{(handler.selection.id eq var.id) ? 'jeesl-active' : ''}">
 						<p:commandLink>
 							<h:outputText value="#{var.name[localeCode].lang}" styleClass="jeesl-menu-bar-button-label"/>
 							<p:ajax event="click" listener="#{handler.selectSbSingle(var)}" update="#{update}"/>
 						</p:commandLink>
 					</j:label>
-				</aht:li>
+				</j:li>
 			</ui:repeat>
 		</ul>
-	</aht:li>
+	</j:li>
 </ui:composition>

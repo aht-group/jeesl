@@ -20,11 +20,11 @@
 			</f:facet>
 			<f:facet name="top">
 				<ui:fragment>
-					<aht:li>
+					<j:li>
 						<h:outputLink id="link1" value="#{request.contextPath}/admin/me">
 							<h:outputText value="#{identity.user.firstName} #{currentUser.lastName}"/>
 						</h:outputLink>
-					</aht:li>
+					</j:li>
 					<ui:fragment><jtp:sbLocaleItem/></ui:fragment>
 					<j:li><h:commandLink action="#{userBean.logout}"><h:outputText value="Logout"/></h:commandLink></j:li>
 				</ui:fragment>

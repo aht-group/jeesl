@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
     xmlns:aup="http://ahtutils.sourceforge.net/prototype"
     xmlns:composite="http://java.sun.com/jsf/composite">
@@ -25,7 +26,7 @@
 			</f:facet>
 		</aup:statusBarItem>
 
-		<aht:li rendered="#{empty cc.attrs.handler}">
+		<j:li rendered="#{empty cc.attrs.handler}">
 			<f:attribute name="styleClass" value="aupStatusBarLeft"/>
 			<label for="#{cc.id}">
 				<h:graphicImage library="gfx" name="#{iconBean.icon12['securityRolesGrey']}"/>
@@ -36,6 +37,6 @@
 					<h:outputText value="#{msg.NoRoleSecurities}"/>
 				</li>
 			</ul>
-		</aht:li>
+		</j:li>
 	</composite:implementation>
 </html>

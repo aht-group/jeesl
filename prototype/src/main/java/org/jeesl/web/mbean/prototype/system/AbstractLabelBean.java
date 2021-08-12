@@ -1,5 +1,6 @@
 package org.jeesl.web.mbean.prototype.system;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,9 +13,9 @@ import org.jeesl.controller.handler.system.TranslationHandler;
 import org.jeesl.controller.provider.FacadeTranslationProvider;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.interfaces.controller.handler.JeeslTranslationProvider;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionMissingLabel;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionMissingLabel;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -42,11 +43,16 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 
 	public Map<String,RE> getMapEntities() {return th.getMapEntities();}
 	@Override public List<RE> allEntities() {return th.allEntities();}
-
+	
+	private final List<LOC> locales; public List<LOC> getLocales() {return locales;}
+	private final Map<String,LOC> mapLocales; public Map<String, LOC> getMapLocales() {return mapLocales;}
+	
 	public AbstractLabelBean(IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fbRevision)
 	{
 		this.fbRevision=fbRevision;
 		mapXpath = new HashMap<RE,Map<MultiKey,String>>();
+		locales = new ArrayList<>();
+		mapLocales = new HashMap<String,LOC>();
 	}
 
 	protected void postConstruct(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision)
@@ -56,7 +62,13 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		{
 			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);
 		}
-
+	}
+	
+	protected void addLocales(List<LOC> locs) {for(LOC loc : locs) {addLocale(loc);}}
+	protected void addLocale(LOC loc)
+	{
+		locales.add(loc);
+		mapLocales.put(loc.getCode(),loc);
 	}
 
 	@Override public void reload(RE re)

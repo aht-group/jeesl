@@ -5,6 +5,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:composite="http://java.sun.com/jsf/composite">
@@ -21,7 +22,7 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<aht:li>
+		<j:li>
 			<c:if test="#{cc.attrs.orientation eq 'left'}"><f:attribute name="styleClass" value="aupStatusBarLeft jeesl-menu-bar-item jeesl-left"/></c:if>
 			<c:if test="#{cc.attrs.orientation eq 'right'}"><f:attribute name="styleClass" value="aupStatusBarRight jeesl-menu-bar-item jeesl-right"/></c:if>
 			<label for="#{cc.id}" class="jeesl-menu-bar-button #{cc.attrs.styleClass}">
@@ -41,6 +42,6 @@
                     <composite:renderFacet name="top"/>
                 </c:if>
 			</ul>
-		</aht:li>
+		</j:li>
 	</composite:implementation>
 </html>

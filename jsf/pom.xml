@@ -299,11 +299,10 @@
 										<include>io/fr/type/*.*</include>
 										<include>io/logging/*.*</include>
 										<include>io/revision/**/*.*</include>
-										
 										<include>module/survey/*.*</include>
 										<include>system/io/revision/*.*</include>
-										
 										<include>security/*.*</include>
+										<include>system/*.*</include>
 									</includes>
 								</resource>
 							</resources>              

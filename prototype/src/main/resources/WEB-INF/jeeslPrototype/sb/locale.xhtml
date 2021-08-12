@@ -1,21 +1,13 @@
-<ui:composition
-	xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:jp="http://jsf.jeesl.org/prototype"
-  	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
 	<c:set var="loc"  value="#{not empty loc ? loc : localeCode}" />
 
-	<jp:sbItem orientation="left" childs="#{appTranslationBean.locales}" rendered="#{rendered}">
+	<jp:sbItem orientation="left" childs="#{appLabelBean.locales}" rendered="#{rendered}">
 		<f:facet name="label">
-			<jtp:symbolizer value="#{appTranslationBean.mapLocales[loc]}"/>
+			<jtp:symbolizer value="#{appLabelBean.mapLocales[loc]}"/>
 		</f:facet>
 		<h:commandLink>
 			<jtp:symbolizer value="#{var}"/>
