@@ -5,7 +5,9 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:j="http://www.jeesl.org/jsf"
+	xmlns:jp="http://jsf.jeesl.org/prototype"
+	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:composite="http://java.sun.com/jsf/composite">
@@ -43,14 +45,18 @@
 	                	<composite:renderFacet name="top"/>
 	                </li>
 	            </c:if>
-	            
-				<ui:repeat var="var" value="#{cc.attrs.childs}" rendered="#{not empty cc.attrs.childs}">
-					<li class="jeesl-dropdown-item #{cc.attrs.readonly ? 'jeesl-greyscale' : ''}">
-						<composite:insertChildren/>
-					</li>
-				</ui:repeat>
-				<composite:insertChildren rendered="#{empty cc.attrs.childs}" />
 				
+	            <c:if test="#{cc.getValueExpression('childs') ne null}">
+					<ui:repeat var="var" value="#{cc.attrs.childs}">
+						<li class="jeesl-dropdown-item #{cc.attrs.readonly ? 'jeesl-greyscale' : ''}">
+							<composite:insertChildren/>
+						</li>
+					</ui:repeat>
+				</c:if>
+				<c:if test="#{cc.getValueExpression('childs') eq null}">
+					<composite:insertChildren/>
+				</c:if>
+	            
 				<c:if test="#{not empty cc.facets.bottom}">
 					<li class="jeesl-dropdown-item">
 						<composite:renderFacet name="bottom"/>

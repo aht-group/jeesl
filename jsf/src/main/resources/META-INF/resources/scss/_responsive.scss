@@ -706,11 +706,12 @@ $enable-pointer-cursor-for-buttons: true;
 							.jeesl-dropdown-multi-summary {
 							    font-style: italic;
 							    opacity: .5;
+								padding-left: $half-spacing
 							}
 							
 							.jeesl-dropdown-item-label {
 								display: inline-block;
-								padding: 8px 7px 8px 5px;
+								padding: 6px 7px 6px 5px;
 								width: auto;
 								
 								@media (max-width: 768px) {
@@ -724,17 +725,19 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 						
 						.jeesl-dropdown-item-label {
+							@media (max-width: 768px) {
+								padding-right: 0;
+							}
+							
 							.jeesl-dropdown-item-label-icon {
 								@media (max-width: 768px) {
 									padding: 12px 0;
 								}
 								
 								&:last-child {
-									margin-right: -8px;
 									padding: 0;
 									
-									@media (max-width: 768px) {									
-										margin-right: -10px;
+									@media (max-width: 768px) {
 										padding: 12px;
 									}
 								}
@@ -749,7 +752,7 @@ $enable-pointer-cursor-for-buttons: true;
 					
 						@media (min-width: 768px) {
 							height: 26px;
-							padding: 6px 15px;
+							padding: 6px 7px;
 						}
 						
 						.jeesl-dropdown-item-label-icon {
