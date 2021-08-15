@@ -36,6 +36,21 @@
    	   		<groupId>org.jeesl</groupId>
    	   		<artifactId>jeesl-ejb</artifactId>
    	   	</dependency>
+   	   	
+   	   	<!-- Jakarta EE -->
+   	   	<dependency>
+			<groupId>org.jboss.spec.javax.faces</groupId>
+			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
+			<version>3.0.0.SP04-redhat-00001</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 
+		<dependency>
+   	   		<groupId>com.sun.faces</groupId>
+   	   		<artifactId>jsf-api</artifactId>
+   	   		<scope>provided</scope>
+   	   	</dependency>
+	 	-->
 	
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -144,11 +159,6 @@
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.faces</groupId>
-   	   		<artifactId>jsf-api</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
 		<dependency>  
    			<groupId>org.primefaces</groupId>  
    			<artifactId>primefaces</artifactId>

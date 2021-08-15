@@ -51,12 +51,8 @@
 						<p:dataTable var="s" value="#{cc.attrs.bean.items}" draggableRows="#{cc.attrs.bean.uiAllowReorder}"
 					          selection="#{cc.attrs.bean.status}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
-					          	<j:dtHeader>
-					          		<f:facet name="header">
-										<h:outputText value="#{msg[cc.attrs.bean.category.code]}" rendered="#{empty cc.attrs.bean.mapEntity[cc.attrs.bean.category]}"/>
-										<h:outputText value="#{cc.attrs.bean.mapEntity[cc.attrs.bean.category].name[localeCode].lang}" rendered="#{not empty cc.attrs.bean.mapEntity[cc.attrs.bean.category]}"/>
-									</f:facet>
-					          		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.uiAllowAdd}"/>
+					          	<j:dtHeader title="#{empty cc.attrs.bean.mapEntity[cc.attrs.bean.category] ? msg[cc.attrs.bean.category.code] : cc.attrs.bean.mapEntity[cc.attrs.bean.category].name[localeCode].lang}">
+					          		<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.uiAllowAdd}" library="jeeslGfx"/>
 					          		<j:icon type="jeeslUpload" listener="#{cc.attrs.bean.upload()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttUpload}" rendered="#{cc.attrs.bean.supportsUpload}"/>
 					          		<j:icon type="jeeslDownload" listener="#{cc.attrs.bean.downloadData()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" rendered="#{cc.attrs.bean.supportsDownload}"/>
 					          		<j:icon type="jeeslIoAttributeCriteriaWithDescription" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.bean.showDescription}"/>
@@ -102,7 +98,7 @@
 							<f:facet name="actions">
 								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDispappear="true" tooltip="#{msg.jeeslTtCancel}"/>
 								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
+								<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" ejb="#{cc.attrs.bean.status}" ejbRendered="saved" library="jeeslGfx"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							
@@ -242,8 +238,8 @@
 						<jtp:symbolizer value="#{cc.attrs.bean.status}" height="12"/>
 					</p:panel>
 					
-					<h:form id="fUpload" enctype="multipart/form-data" >
-						<p:fileUpload rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'svg')}"
+					<h:form id="fUpload" enctype="multipart/form-data" rendered="#{(not empty cc.attrs.bean.status) and cc.attrs.bean.supportsGraphic}">
+						<p:fileUpload rendered="#{cc.attrs.bean.graphic.type.code eq 'svg'}"
 											styleClass="jeeslFileUpload"
 											fileUploadListener="#{cc.attrs.bean.handleFileUpload}" mode="advanced" dragDropSupport="false"
 											update=":#{cc.id}:sLang" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/" />

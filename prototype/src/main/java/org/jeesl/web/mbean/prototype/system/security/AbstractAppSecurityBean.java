@@ -62,11 +62,15 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	private final Map<String,V> mapUrlPattern;
 	private final Map<String,V> mapUrlMapping;
 	private final Map<String,V> mapCodeView;
+	
 	private final Map<V,List<R>> mapRoles;
 	private final Map<V,List<AR>> mapAreas;
+	
 	private final Map<R,List<V>> mapViewsByRole;
-	private final Map<R,List<U>> mapUsecasesByRole;
 	private final Map<U,List<V>> mapViewsByUsecase;
+	
+	private final Map<R,List<U>> mapUsecasesByRole;
+	
 	private final Map<V,List<A>> mapActionsByView;
 	private final Map<R,List<A>> mapActionsByRole;
 	private final Map<U,List<A>> mapActionsByUsecase;
@@ -80,18 +84,19 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	{
 		this.fbSecurity=fbSecurity;
 		
-		mapUrlPattern = new HashMap<String,V>();
-		mapUrlMapping = new HashMap<String,V>();
-		mapCodeView = new HashMap<String,V>();
-		mapRoles = new HashMap<V,List<R>>();
-		mapAreas = new HashMap<>();
-		mapViewsByRole = new HashMap<R,List<V>>();
-		mapUsecasesByRole = new HashMap<R,List<U>>();
-		mapViewsByUsecase = new HashMap<U,List<V>>();
+		mapUrlPattern = new HashMap<>();
+		mapUrlMapping = new HashMap<>();
+		mapCodeView = new HashMap<>();
 		
-		mapActionsByView = new HashMap<V,List<A>>();
-		mapActionsByRole = new HashMap<R,List<A>>();
-		mapActionsByUsecase = new HashMap<U,List<A>>();
+		mapRoles = new HashMap<>();
+		mapAreas = new HashMap<>();
+		mapViewsByRole = new HashMap<>();
+		mapUsecasesByRole = new HashMap<>();
+		mapViewsByUsecase = new HashMap<>();
+		
+		mapActionsByView = new HashMap<>();
+		mapActionsByRole = new HashMap<>();
+		mapActionsByUsecase = new HashMap<>();
 		
 		debugOnInfo = false;
 		

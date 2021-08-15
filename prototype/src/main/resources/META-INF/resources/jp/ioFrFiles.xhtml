@@ -81,7 +81,7 @@
 					<j:icon id="iconJeeslFileSave" type="jeeslSave" listener="#{cc.attrs.handler.saveMeta()}"
 							update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload" />
 					<j:icon type="jeeslDelete" listener="#{cc.attrs.handler.deleteFile()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload"
-								mayDisappear="true" tooltip="#{msg.ttJeeslIoFileDelete}"
+								tooltip="#{msg.ttJeeslIoFileDelete}"
 								rendered="#{(cc.attrs.allowDelete) and (not empty cc.attrs.handler.meta) and (cc.attrs.handler.meta.id gt 0)}" />
 					<j:downloadIcon type="jeeslDownload" value="#{cc.attrs.handler.fileStream()}" />
 				</f:facet>
