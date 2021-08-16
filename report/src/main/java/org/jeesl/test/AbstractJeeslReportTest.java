@@ -1,4 +1,4 @@
-package net.sf.ahtutils.report;
+package org.jeesl.test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -23,6 +23,8 @@ import com.itextpdf.text.pdf.parser.PdfReaderContentParser;
 import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
 
+import net.sf.ahtutils.report.ReportHandler;
+import net.sf.ahtutils.report.ReportHandler.Format;
 import net.sf.ahtutils.report.exception.ReportException;
 import net.sf.ahtutils.xml.report.Info;
 import net.sf.ahtutils.xml.report.Report;
@@ -35,9 +37,9 @@ import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
-public class AbstractAhtUtilsReportTst
+public class AbstractJeeslReportTest
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractAhtUtilsReportTst.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslReportTest.class);
 	
 	protected static NsPrefixMapperInterface nsPrefixMapper;
 	protected File f;
@@ -64,6 +66,8 @@ public class AbstractAhtUtilsReportTst
     protected static String loggerConfigFile;
     protected static String loggerConfigPath;
 	
+    public AbstractJeeslReportTest() {}
+    
     @BeforeClass
 	public static void initTargetDirectory()
 	{

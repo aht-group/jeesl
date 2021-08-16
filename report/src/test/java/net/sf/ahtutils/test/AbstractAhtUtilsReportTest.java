@@ -1,13 +1,12 @@
 package net.sf.ahtutils.test;
 
-import net.sf.ahtutils.report.AbstractAhtUtilsReportTst;
-
+import org.jeesl.test.AbstractJeeslReportTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractAhtUtilsReportTest extends AbstractAhtUtilsReportTst
+public class AbstractAhtUtilsReportTest extends AbstractJeeslReportTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractAhtUtilsReportTest.class);
 	

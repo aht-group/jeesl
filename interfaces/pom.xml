@@ -29,47 +29,49 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<dependency>
-			<groupId>net.sf.exlp</groupId>
-			<artifactId>exlp-interfaces</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
 		
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-		   <groupId>org.jboss.spec</groupId>
-		   <artifactId>jboss-javaee-6.0</artifactId>
-		   <type>pom</type>
-		   <scope>provided</scope>
-		</dependency>
-		<dependency>
-	      	<groupId>org.hibernate</groupId>
-	      	<artifactId>hibernate-envers</artifactId>
-	      	<version>4.2.0.Final</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openfuxml</groupId>
-    		<artifactId>ofx-interfaces</artifactId>
-    	</dependency>
-
+		<!-- JEESL -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-xml</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- Interfaces from EXLP & OFX -->
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-interfaces</artifactId>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openfuxml</groupId>
+    		<artifactId>ofx-interfaces</artifactId>
+    	</dependency>
+		
+		<!-- Jakarta EE -->
+		<dependency>
+    		<groupId>jakarta.inject</groupId>
+    		<artifactId>jakarta.inject-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Hibernate -->
+		<dependency>
+	      	<groupId>org.hibernate</groupId>
+	      	<artifactId>hibernate-envers</artifactId>
+	      	<version>4.2.0.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Apache Commons -->
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Freemarker (for exception) -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
@@ -83,7 +85,7 @@
 		   <scope>provided</scope>
 		</dependency>
 		
-	<!-- REST -->
+		<!-- REST -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.ws.rs</groupId>
 	  		<artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
@@ -94,6 +96,13 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

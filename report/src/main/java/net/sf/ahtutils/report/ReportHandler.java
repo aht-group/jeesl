@@ -2,7 +2,6 @@ package net.sf.ahtutils.report;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,13 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 
-import net.sf.jasperreports.engine.fill.JRSwapFileVirtualizer;
-import net.sf.jasperreports.engine.fill.JRVirtualizationContext;
-import net.sf.jasperreports.engine.util.JRConcurrentSwapFile;
 import org.apache.commons.jxpath.JXPathContext;
 import org.jdom2.Namespace;
 import org.jeesl.util.query.xpath.ReportXpath;
@@ -48,7 +43,10 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
+import net.sf.jasperreports.engine.fill.JRSwapFileVirtualizer;
+import net.sf.jasperreports.engine.fill.JRVirtualizationContext;
 import net.sf.jasperreports.engine.query.JRXPathQueryExecuterFactory;
+import net.sf.jasperreports.engine.util.JRConcurrentSwapFile;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.engine.xml.JRXmlTemplateLoader;
@@ -57,7 +55,8 @@ import net.sf.jasperreports.engine.xml.JRXmlTemplateLoader;
  * @author helgehemmer
  *
  */
-public class ReportHandler {
+public class ReportHandler
+{
 	
 	final static Logger logger = LoggerFactory.getLogger(ReportHandler.class);
 	protected Reports reports;

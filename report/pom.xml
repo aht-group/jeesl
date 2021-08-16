@@ -13,6 +13,18 @@
     <packaging>jar</packaging>
     <name>JEESL - Report</name>
 		
+	<dependencyManagement>
+		<dependencies>      	         
+			<dependency>
+				<groupId>org.jeesl.bom</groupId>
+				<artifactId>bom-core</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>	
+		
 	<dependencies>
 	
 		<dependency>
@@ -175,16 +187,7 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-		</dependency>
-		
-		<!-- Test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
-		
+		</dependency>		
 
 		<!-- Chart -->
 		<dependency>
@@ -195,7 +198,6 @@
 			<groupId>org.openfuxml</groupId>
 			<artifactId>ofx-xml</artifactId>
 		</dependency>
-
 	 		
 	 	<!-- Commons -->
 		<dependency>
@@ -203,14 +205,6 @@
 			<artifactId>commons-jxpath</artifactId>
 			<scope>compile</scope>
 		</dependency>
-   	   	
-
-		
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
@@ -222,9 +216,9 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-                
+        
+        <!--GeoTools - required to work with Esri SHP Shape files -->
 		<dependency>
-			<!--GeoTools - required to work with Esri SHP Shape files -->
 			<groupId>org.geotools</groupId>
 			<artifactId>gt-shapefile</artifactId>
 			<version>19.4</version>
@@ -234,7 +228,7 @@
 					<groupId>commons-logging</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
+		</dependency>    
 		
 		<!-- Logging -->
 		<dependency>
@@ -253,20 +247,20 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
 		-->
+		
+		<!-- Test -->
+		<dependency>
+   	   		<groupId>com.sun.xml.bind</groupId>
+   	   		<artifactId>jaxb-impl</artifactId>
+   	   		<scope>test</scope>
+   	   	</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
-	
-	<dependencyManagement>
-            <dependencies>      	         
-                <dependency>
-                    <groupId>org.jeesl.bom</groupId>
-                    <artifactId>bom-core</artifactId>
-                    <version>${project.version}</version>
-                    <type>pom</type>
-                    <scope>import</scope>
-                </dependency>
-            </dependencies>
-	</dependencyManagement>
-	
+		
 	<build>
         <plugins>
             <plugin>

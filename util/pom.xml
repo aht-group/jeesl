@@ -27,6 +27,21 @@
     </dependencyManagement>
 
     <dependencies>
+    
+		<!-- JEESL -->
+		<dependency>
+            <groupId>org.jeesl</groupId>
+            <artifactId>jeesl-api</artifactId>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
+            <groupId>org.jeesl</groupId>
+            <artifactId>jeesl-xml</artifactId>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        
         <dependency>
             <groupId>net.sf.exlp</groupId>
             <artifactId>exlp-util</artifactId>
@@ -48,19 +63,7 @@
         	<groupId>net.sf.exlp</groupId>
         	<artifactId>exlp-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.jeesl</groupId>
-            <artifactId>jeesl-xml</artifactId>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jeesl</groupId>
-            <artifactId>jeesl-api</artifactId>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
-
+        
         <!-- MetaChart -->
         <dependency>
             <groupId>org.metachart</groupId>
@@ -94,8 +97,7 @@
 			<version>3.0.0.SP04-redhat-00001</version>
 			<scope>provided</scope>
 		</dependency>
-		
-		        
+		 
         <dependency>
             <groupId>org.jboss.spec</groupId>
             <artifactId>jboss-javaee-6.0</artifactId>
@@ -109,7 +111,6 @@
             </exclusions>
         </dependency>
       
-
         <!-- XML -->
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
@@ -187,7 +188,7 @@
 		    <version>3.6</version>
 		</dependency>
 
-		<!-- 2021-07-22 tk deactivate 
+		<!-- 2021-07-22 tk deactivated
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
@@ -262,7 +263,6 @@
             <artifactId>batik-codec</artifactId>
             <scope>test</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.openfuxml</groupId>
