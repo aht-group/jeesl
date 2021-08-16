@@ -14,9 +14,20 @@
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+	<dependencyManagement>
+		<dependencies>      	         
+			<dependency>
+				<groupId>org.jeesl.bom</groupId>
+				<artifactId>bom-core</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>	
 		<!-- Jeesl -->
 		<dependency>
@@ -51,32 +62,19 @@
 					<groupId>commons-codec</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-      
-        <!-- Test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
+		</dependency>        
         
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        
+       
+        
+         <!--  -->
 		<dependency>
 	      	<groupId>org.hibernate</groupId>
 	      	<artifactId>hibernate-envers</artifactId>
 	      	<version>4.2.0.Final</version>
 			<scope>provided</scope>
 		</dependency>
+       
         
        <dependency>
 		   <groupId>org.jboss.spec</groupId>
@@ -84,26 +82,23 @@
 		   <type>pom</type>
 		   <scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.jboss.as</groupId>
 			<artifactId>jboss-as-ejb-client-bom</artifactId>
 			<type>pom</type>
 			<scope>provided</scope>
 	  	</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
          
-         <dependency>
+         <!-- 
+		<dependency>
          	<groupId>org.hibernate</groupId>
          	<artifactId>hibernate-core</artifactId>
          	<type>jar</type>
          	<scope>provided</scope>
          </dependency>
-         
+          -->
+          
          <dependency>
          	<groupId>net.sf.exlp</groupId>
          	<artifactId>exlp-util</artifactId>
@@ -116,39 +111,9 @@
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-xml</artifactId>
 			<type>jar</type>
-			<exclusions>
-        		<exclusion>
-        			<artifactId>jaxb-impl</artifactId>
-        			<groupId>com.sun.xml.bind</groupId>
-        		</exclusion>
-        		<exclusion>
-        			<artifactId>jaxb-api</artifactId>
-        			<groupId>javax.xml.bind</groupId>
-        		</exclusion>
-        	</exclusions>
 		</dependency>
-      	<dependency>
-    	   	<groupId>javax.xml.bind</groupId>
-    	   	<artifactId>jaxb-api</artifactId>
-    	   	<scope>test</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-xjc</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>commons-jxpath</groupId>
-   	   		<artifactId>commons-jxpath</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
-   	   	
-		<!-- SVG -->
+		
+		<!-- Batik -->
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-transcoder</artifactId>
@@ -178,19 +143,34 @@
          	<type>jar</type>
          	<scope>test</scope>
          </dependency>
+         
+         <!-- Test -->
+         <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+         <dependency>
+    	   	<groupId>javax.xml.bind</groupId>
+    	   	<artifactId>jaxb-api</artifactId>
+    	   	<scope>test</scope>
+   	   	</dependency>
+   	   	<dependency>
+   	   		<groupId>com.sun.xml.bind</groupId>
+   	   		<artifactId>jaxb-impl</artifactId>
+   	   		<scope>test</scope>
+   	   	</dependency>
+   	   	<dependency>
+   	   		<groupId>com.sun.xml.bind</groupId>
+   	   		<artifactId>jaxb-xjc</artifactId>
+   	   		<scope>test</scope>
+   	   	</dependency>
+   	   	<dependency>
+   	   		<groupId>commons-jxpath</groupId>
+   	   		<artifactId>commons-jxpath</artifactId>
+   	   		<scope>test</scope>
+   	   	</dependency>
 	</dependencies>
-
-	<dependencyManagement>
-		<dependencies>      	         
-			<dependency>
-				<groupId>org.jeesl.bom</groupId>
-				<artifactId>bom-core</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
     <build>
         <plugins>

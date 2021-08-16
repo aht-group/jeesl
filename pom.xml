@@ -35,8 +35,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-       
-		<jboss.version>6.0.0.Final</jboss.version>   
+         
 	
 		<maven.ignore.versions>file://${project.parent.basedir}/maven/src/main/resources/jeesl/maven/ignore-versions.xml</maven.ignore.versions>
 
@@ -79,6 +78,7 @@
 	
 	<dependencyManagement>
 		<dependencies>
+		<!-- 
 			<dependency>
 	            <groupId>org.antlr</groupId>
 	            <artifactId>antlr4</artifactId>
@@ -86,13 +86,7 @@
 	            <scope>compile</scope>
 	            <version>4.5.3</version>
 	        </dependency>
-	        <!-- 
-			<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>resteasy-jaxrs</artifactId>
-				<version>2.2.1.GA</version>
-			</dependency>
-			 -->
+ -->
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jaxb-provider</artifactId>
@@ -120,12 +114,12 @@
 			        <version>2.2</version>
 				</plugin>
 				<plugin>
-			         <groupId>org.apache.maven.plugins</groupId>
-			        	<artifactId>maven-pmd-plugin</artifactId>
-			        	<version>3.6</version>
-			        	<configuration>
-				        	<linkXRef>false</linkXRef>
-				      </configuration>
+					<groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-pmd-plugin</artifactId>
+			        <version>3.6</version>
+					<configuration>
+						<linkXRef>false</linkXRef>
+					</configuration>
 				</plugin>
     		</plugins>
   		</pluginManagement>
