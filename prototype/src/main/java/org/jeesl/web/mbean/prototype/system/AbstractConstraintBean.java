@@ -136,7 +136,8 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 		constraints = new Hashtable<String,Constraint>();
 		scopes = new Hashtable<String,ConstraintScope>();
 		
-		Constraints index = JaxbUtil.loadJAXB("constraints."+artifact+"/index.xml", Constraints.class);
+		String resourceName = "constraints."+artifact+"/index.xml";
+		Constraints index = JaxbUtil.loadJAXB(resourceName, Constraints.class);
 		for(ConstraintScope scopeCategory : index.getConstraintScope())
 		{
 			Constraints c = JaxbUtil.loadJAXB("constraints."+artifact+"/"+scopeCategory.getCategory()+".xml", Constraints.class);
@@ -149,13 +150,12 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 					if(constraint.isSetCode())
 					{
 						String key = scopeCode+"-"+constraint.getCode();
-						logger.info("Adding "+key);
 						constraints.put(key, constraint);
 					}
 				}
 			}
 		}
-		logger.info(AbstractLogMessage.postConstruct(ptt)+" with Constraints:"+constraints.size());
+		logger.info(AbstractLogMessage.postConstruct(ptt)+" via XML init ("+resourceName+") for "+ constraints.size()+" "+Constraints.class.getSimpleName());
     }
     
     public void init2(String artifact) throws FileNotFoundException
