@@ -3,27 +3,26 @@ package org.jeesl.jsf.converter;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractEjbIdConverter <I extends EjbWithId> implements Converter
+public abstract class AbstractEjbIdConverter <T extends EjbWithId>
 {    
 	final static Logger logger = LoggerFactory.getLogger(AbstractEjbIdConverter.class);
 	
-	private Class<I> clEjb;
+	private Class<T> clEjb;
 	private static boolean jeeslDebug = false;
 
-	public AbstractEjbIdConverter(final Class<I> clEjb)
+	public AbstractEjbIdConverter(final Class<T> clEjb)
 	{
 		this.clEjb=clEjb;
 	}
 	
 	public AbstractEjbIdConverter(){}
-	public void setClEjb(Class<I> clEjb) {this.clEjb = clEjb;}	
+	public void setClEjb(Class<T> clEjb) {this.clEjb = clEjb;}	
 	
     public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue)
     {
@@ -35,7 +34,7 @@ public abstract class AbstractEjbIdConverter <I extends EjbWithId> implements Co
             try
             {   
                 long id = Long.valueOf(submittedValue);
-                I ejb = clEjb.newInstance();
+                T ejb = clEjb.newInstance();
                 ejb.setId(id);
                 if(jeeslDebug) {logger.warn(clEjb.getSimpleName()+" getAsObject return "+ejb.toString());}
                 return ejb;

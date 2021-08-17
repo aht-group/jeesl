@@ -30,6 +30,7 @@ public class JeeslFileStatusHandler<META extends JeeslFileMeta<?,?,?,STATUS>,
 		try
 		{
 			byte[] bytes = fFr.loadFromFileRepository(meta);
+			logger.info("Bytes: "+bytes.length);
 			meta.setStatus(cache.ejb(JeeslFileStatus.Code.exists));
 		}
 		catch (JeeslNotFoundException e)

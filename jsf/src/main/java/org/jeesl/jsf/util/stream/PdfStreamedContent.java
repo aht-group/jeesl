@@ -12,9 +12,15 @@ public class PdfStreamedContent <REPORT extends JeeslIoReport<?,?,?,?>>
 {
 	public PdfStreamedContent(JeeslPdfReport<REPORT> report) throws Exception
 	{
-		this(report.pdfStream(),JeeslPdfReport.mimeType,report.pdfFileName());
+		this(report.pdfStream(),report.pdfFileName());
 	}
 	
+	public PdfStreamedContent(InputStream is, String fileName)
+	{
+		super(is,JeeslPdfReport.mimeType,fileName);
+	}
+	
+	@Deprecated //public use is deprecated ... use (is,fileName)
 	public PdfStreamedContent(InputStream is, String mimeType, String fileName)
 	{
 		super(is,mimeType,fileName);
