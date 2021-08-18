@@ -10,12 +10,9 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-
-
 public class HydroYearComparator<L extends JeeslLang,D extends JeeslDescription,
-HD extends JeeslStatus<L,D,HD>,
-HY extends JeeslHydroYear<L,D,HD,HY>>
+								HD extends JeeslStatus<L,D,HD>,
+								HY extends JeeslHydroYear<L,D,HD,HY>>
 {
     final static Logger logger = LoggerFactory.getLogger(HydroYearComparator.class);
 
@@ -24,7 +21,7 @@ HY extends JeeslHydroYear<L,D,HD,HY>>
     public Comparator<HY> factory(Type type)
     {
         Comparator<HY> c = null;
-        HydroYearComparator factory = new HydroYearComparator();
+        HydroYearComparator<L,D,HD,HY> factory = new HydroYearComparator<>();
         switch (type)
         {
             case code: c = factory.new CodeComparator();break;

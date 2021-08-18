@@ -3,13 +3,14 @@ package org.jeesl.jsf.converter;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractEjbIdConverter <T extends EjbWithId>
+public abstract class AbstractEjbIdConverter <T extends EjbWithId> implements Converter
 {    
 	final static Logger logger = LoggerFactory.getLogger(AbstractEjbIdConverter.class);
 	
@@ -24,10 +25,10 @@ public abstract class AbstractEjbIdConverter <T extends EjbWithId>
 	public AbstractEjbIdConverter(){}
 	public void setClEjb(Class<T> clEjb) {this.clEjb = clEjb;}	
 	
-    public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue)
+    @Override public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue)
     {
-    		submittedValue = submittedValue.trim();
-    		if(jeeslDebug) {logger.warn(clEjb.getSimpleName()+" getAsObject submittedValue: "+submittedValue);}
+    	submittedValue = submittedValue.trim();
+    	if(jeeslDebug) {logger.warn(clEjb.getSimpleName()+" getAsObject submittedValue: "+submittedValue);}
         if (submittedValue.equals("")) {return null;}
         else
         {  
@@ -60,7 +61,7 @@ public abstract class AbstractEjbIdConverter <T extends EjbWithId>
         }
     }  
   
-	public String getAsString(FacesContext facesContext, UIComponent component, Object value)
+    @Override public String getAsString(FacesContext facesContext, UIComponent component, Object value)
     { 
 		if(jeeslDebug) {logger.warn(clEjb.getSimpleName()+" value: "+value);}
         if (value == null || value.equals(""))

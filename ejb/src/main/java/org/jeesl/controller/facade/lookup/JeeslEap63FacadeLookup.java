@@ -1,7 +1,6 @@
 package org.jeesl.controller.facade.lookup;
 
 import java.security.Security;
-import java.util.Hashtable;
 import java.util.Properties;
 
 import javax.naming.Context;

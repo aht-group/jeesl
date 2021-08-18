@@ -12,17 +12,11 @@ public class XlsStreamedContent <REPORT extends JeeslIoReport<?,?,?,?>>
 {
 	public XlsStreamedContent(JeeslXlsReport<REPORT> report) throws Exception
 	{
-		this(report.xlsStream(),JeeslXlsReport.mimeType,report.xlsFileName());
+		super(report.xlsStream(),JeeslXlsReport.mimeType,report.xlsFileName());
 	}
-	
-	@Deprecated //public use is deprecated ... use (is,fileName)
-	public XlsStreamedContent(InputStream is, String mimeType, String fileName)
-	{
-		super(is,mimeType,fileName);
-	}
-	
+
 	public XlsStreamedContent(InputStream is, String fileName)
 	{
-		this(is,JeeslXlsReport.mimeType,fileName);
+		super(is,JeeslXlsReport.mimeType,fileName);
 	}
 }

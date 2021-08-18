@@ -139,7 +139,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 	private JsonSurveyFactory<L,D,SURVEY,SS> jfSurvey;
 	
 	private XmlContainerFactory xfContainer;
-	private XmlStatusFactory xfStatus;
+	private XmlStatusFactory<SS,L,D> xfStatus;
 	private final XmlStatusFactory<TC,L,D> xfTemplateCategory;
 	private final XmlStatusFactory<TS,L,D> xfTemplateStatus;
 	private XmlTemplateFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xfTemplate;
@@ -180,7 +180,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		
 		xfTemplateCategory = new XmlStatusFactory<TC,L,D>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		xfTemplateStatus = new XmlStatusFactory<TS,L,D>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
-		xfStatus = new XmlStatusFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		xfStatus = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		
 		xfTemplate = new XmlTemplateFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,XmlSurveyQuery.get(XmlSurveyQuery.Key.exTemplate).getTemplate());
 		xfTemplate.lazyLoad(fTemplate,fSurvey);

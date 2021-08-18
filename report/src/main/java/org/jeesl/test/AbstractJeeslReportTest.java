@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.jeesl.interfaces.controller.report.JeeslXlsReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.util.query.xpath.ReportXpath;
 import org.junit.Assert;
 import org.junit.Before;
@@ -24,7 +25,6 @@ import com.itextpdf.text.pdf.parser.SimpleTextExtractionStrategy;
 import com.itextpdf.text.pdf.parser.TextExtractionStrategy;
 
 import net.sf.ahtutils.report.ReportHandler;
-import net.sf.ahtutils.report.ReportHandler.Format;
 import net.sf.ahtutils.report.exception.ReportException;
 import net.sf.ahtutils.xml.report.Info;
 import net.sf.ahtutils.xml.report.Report;
@@ -170,7 +170,7 @@ public class AbstractJeeslReportTest
 		Assert.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
 	}
 	
-	protected void outputXls(JeeslXlsReport report) throws Exception
+	protected <REPORT extends JeeslIoReport<?,?,?,?>> void outputXls(JeeslXlsReport<REPORT> report) throws Exception
     {
 		File fDst = new File(fTarget,report.xlsFileName());
 		logger.debug("Saving to "+fDst);

@@ -26,7 +26,7 @@ public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 	
 	private Template q;
 	
-	private XmlCategoryFactory xfCategory;
+	private XmlCategoryFactory<L,D,CATEGORY> xfCategory;
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 
@@ -34,7 +34,7 @@ public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlTemplateFactory(Template q)
 	{
 		this.q=q;
-		if(q.isSetCategory()){xfCategory = new XmlCategoryFactory(q.getCategory());}
+		if(q.isSetCategory()){xfCategory = new XmlCategoryFactory<>(q.getCategory());}
 		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}

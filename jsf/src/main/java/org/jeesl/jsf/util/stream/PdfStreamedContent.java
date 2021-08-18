@@ -20,9 +20,4 @@ public class PdfStreamedContent <REPORT extends JeeslIoReport<?,?,?,?>>
 		super(is,JeeslPdfReport.mimeType,fileName);
 	}
 	
-	@Deprecated //public use is deprecated ... use (is,fileName)
-	public PdfStreamedContent(InputStream is, String mimeType, String fileName)
-	{
-		super(is,mimeType,fileName);
-	}
 }
