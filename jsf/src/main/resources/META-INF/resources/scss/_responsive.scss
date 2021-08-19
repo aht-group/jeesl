@@ -1282,6 +1282,12 @@ $enable-pointer-cursor-for-buttons: true;
 					
 					margin: 0;
 				}
+				
+				.ui-panelgrid-cell {
+					.ui-outputpanel {
+						font-size: bold;
+					}
+				}
 			}
 			
 			.ui-tree {

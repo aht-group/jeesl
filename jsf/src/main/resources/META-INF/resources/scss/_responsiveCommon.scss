@@ -1,3 +1,5 @@
+@import '_decimal';
+
 $border: $border-width solid $border-colour;
 
 @mixin vertical-center($pseudo) {
@@ -405,6 +407,8 @@ body, .ui-widget {
 .ui-selectonemenu-panel {
 	@include overlay;
 	
+	opacity: 1;
+	
 	.ui-selectonemenu-items-wrapper {
 		@media (max-width: 768px) {
 			max-height: 400px !important;
@@ -418,6 +422,12 @@ body, .ui-widget {
 
 .ui-datepicker {
 	@include overlay;
+	
+	opacity: 1;
+	
+	@media (max-width: 768px) {
+		padding: $wide-spacing 0;
+	}
 	
 	.ui-datepicker-header {
 		background: $status-background-gradient;
@@ -491,11 +501,12 @@ body, .ui-widget {
 			&:before {
 				color: white;
 				display: inline-block;
-				font-size: 2em;
-				text-indent: -$header-element-height-mobile;
+				font-size: 1.2em;
+				text-indent: -$header-element-height;
 				vertical-align: middle;
 				
 				@media (max-width: 768px) {
+					font-size: 2em;
 					text-indent: -$header-element-height-mobile;
 				}
 			}
@@ -507,6 +518,47 @@ body, .ui-widget {
 		
 		.ui-icon-circle-triangle-e:before {
 			content: "\25ba";
+		}
+	}
+}
+
+@for $i from 1 to 13 {
+	.p-md-#{$i} {
+		flex: 0 0 auto;
+		width: decimal-round(100 / 12 * $i) * 1%;
+	}
+}
+
+.input-grid {
+	&:first-child {
+		.p-field:first-child {
+			padding-top: 0;
+		}
+	}
+	
+	.p-grid {
+		display: flex;
+		flex-wrap: wrap;
+		
+		&.p-field {
+			align-items: center;
+		    margin: 0;
+		    padding: $half-spacing 0;
+		}
+	}
+	
+	.p-field {
+		> label {
+			margin-bottom: 0;
+		}
+		
+		.p-col {
+			line-height: $ls-element-height;
+			padding: 0 $regular-spacing;
+			
+			&:first-child {
+				padding-left: 0;
+			}
 		}
 	}
 }

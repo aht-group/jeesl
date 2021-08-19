@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class InputGrid extends UIPanel
 {
 	final static Logger logger = LoggerFactory.getLogger(InputGrid.class);
-	private static enum Properties {id,inputFields,styleClass,renderChildren,renderChildrenIfEjb,renderChildrenIfEjbPersisted}
+	private static enum Properties {id,inputFields,labelWidth,styleClass,renderChildren,renderChildrenIfEjb,renderChildrenIfEjbPersisted}
 	
 	@Override public boolean getRendersChildren(){return true;}
 	
@@ -33,6 +33,7 @@ public class InputGrid extends UIPanel
 	
 	private AtomicInteger counter = new AtomicInteger(0);
 	private int columnCount = 2;
+	private int labelWidth = 3;
 	
 	private int classifyChildGroup()
 	{
@@ -51,7 +52,7 @@ public class InputGrid extends UIPanel
 		responseWriter.writeAttribute("id",getClientId(context),"id");
 		
 		StringBuffer sbStyleClass = new StringBuffer();
-		sbStyleClass.append("ui-fluid");
+		sbStyleClass.append("ui-fluid input-grid");
 		
 		if(map.containsKey(Properties.styleClass.toString()))
 		{
@@ -70,10 +71,15 @@ public class InputGrid extends UIPanel
 	@Override
 	public void encodeChildren(FacesContext context) throws IOException
 	{
-		String inputCount = ComponentAttribute.get(Properties.inputFields, "1", context, this);
 		try
 		{
-			columnCount = Integer.parseInt(inputCount) + 1;
+			columnCount = Integer.parseInt(ComponentAttribute.get(Properties.inputFields, "1", context, this)) + 1;
+		}
+		catch(NumberFormatException e) {}
+		
+		try
+		{
+			labelWidth = Integer.parseInt(ComponentAttribute.get(Properties.labelWidth, "3", context, this));
 		}
 		catch(NumberFormatException e) {}
 		
@@ -97,7 +103,7 @@ public class InputGrid extends UIPanel
 			counter = new AtomicInteger(0);
 			List<List<UIComponent>> childGroup = this.getChildren().stream().collect(Collectors.groupingBy(child -> classifyChildGroup())).values().stream().collect(Collectors.toList());
 			
-			float inputWidth = 9 / (columnCount - 1);
+			float inputWidth = (12 - labelWidth) / (columnCount - 1);
 			
 			for (List<UIComponent> group : childGroup)
 			{
@@ -111,8 +117,11 @@ public class InputGrid extends UIPanel
 					if (child instanceof OutputLabel)
 					{
 						Map<String, Object> attributes = child.getAttributes();
-						String styleClass = attributes.containsKey("styleClass") ? (String)attributes.get("styleClass") + " p-col p-md-3" : "p-col p-md-3";
-						attributes.put("styleClass", styleClass);
+						StringBuffer styleClass = new StringBuffer("p-col p-md-" + labelWidth);
+						if (attributes.containsKey("styleClass")) {
+							styleClass.append(" " + (String)attributes.get("styleClass"));
+						}
+						attributes.put("styleClass", styleClass.toString());
 						
 						child.encodeAll(context);
 					}
@@ -122,7 +131,6 @@ public class InputGrid extends UIPanel
         				UIPanel inputChild = new UIPanel();
         				responseWriter.startElement("div", inputChild);
         				responseWriter.writeAttribute("class", "p-col p-md-" + (int)inputWidth, null);
-        				responseWriter.writeAttribute("style", "width: " + ((100f/12) * inputWidth) + "%;", null);
 						
         				child.encodeAll(context);
 				
