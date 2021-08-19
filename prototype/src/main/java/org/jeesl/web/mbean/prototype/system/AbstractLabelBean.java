@@ -158,15 +158,6 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		logger.warn("NYI");
 		return null;
 	}
-	@Override
-	public String toCurrency(String localeCode, boolean grouping, int decimals, Double value)
-	{
-		logger.warn("NYI");
-		return null;
-	}
-	@Override
-	public void setLanguages(List<LOC> locales)
-	{
-		logger.warn("NYI");
-	}
+	@Override public String toCurrency(String localeCode, boolean grouping, int decimals, Double value) {logger.warn("NYI"); return null;}
+	@Override public void setLanguages(List<LOC> locales) {logger.warn("NYI");}
 }

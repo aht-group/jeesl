@@ -40,7 +40,6 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 	public String tempMissingLabelEntity;
 	public RML tempRevisionMissingLabel;
 
-
 	public TranslationHandler(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, final Class<RE> cRE, final Class<L> cL, final Class<RML> cRml)
 	{
 		this.cRE = cRE;
@@ -49,26 +48,31 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 		this.fRevision=fRevision;
 		tempMissingLabelEntity ="";
 
-        entities = new HashMap<String,Map<String,L>>(){
+        entities = new HashMap<String,Map<String,L>>()
+        {
 			private static final long serialVersionUID = 1L;
 
-			@Override
-			public  Map<String, L> get(Object key) {
-				Map<String, L> m = super.get(key);
-				tempMissingLabelEntity =(String)key;
-				if (m != null) {
-					for (java.util.Map.Entry<String, L> entry : m.entrySet()) {
-						if(entry.getValue().getLang().isEmpty()) {
+			@Override public Map<String, L> get(Object key)
+			{
+				Map<String,L> m = super.get(key);
+				tempMissingLabelEntity = (String)key;
+				if (m != null)
+				{
+					for (java.util.Map.Entry<String,L> entry : m.entrySet())
+					{
+						if(entry.getValue().getLang().isEmpty())
+						{
 							updateMissingEntity(tempMissingLabelEntity,"",entry.getValue().getLkey());
 						}
 					}
 					return m;
-					}
+				}
 			    else {return getLangMap(tempMissingLabelEntity,null);}
 			}
         };
 
-        labels = new HashMap<String,Map<String,Map<String,L>>>(){
+        labels = new HashMap<String,Map<String,Map<String,L>>>()
+        {
         	private static final long serialVersionUID = 1L;
 
 			@Override
@@ -177,7 +181,6 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 					labels.get(c.getSimpleName()).put(attribute.getCode(), attribute.getName());
 					descriptions.get(c.getSimpleName()).put(attribute.getCode(), attribute.getDescription());
 				}
-
 			}
 		}
 		catch (ClassNotFoundException e) {logger.warn("CNFE: "+re.getCode());}
@@ -185,7 +188,8 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 
 	@Override public List<RE> allEntities() {return new ArrayList<RE>(mapEntities.values());}
 
-	private Hashtable<String, Map<String, L>> getTempLabelHashtable() {
+	private Hashtable<String, Map<String, L>> getTempLabelHashtable()
+	{
 		return new Hashtable<String,Map<String,L>>(){
 			private static final long serialVersionUID = 1L;
 
@@ -206,10 +210,12 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 		};
 	}
 
-	private Map<String, L> getLangMap(String missingEntity, String missingCode) {
+	private Map<String, L> getLangMap(String missingEntity, String missingCode)
+	{
 		Map<String, L> m = new HashMap<String, L>() {
 		@Override
-		public L get(Object key) {
+		public L get(Object key)
+		{
 			L langLabel = super.get(key);
 			if (langLabel != null) {
 		        return langLabel;
@@ -227,16 +233,20 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
     	return m;
     }
 
-	private void updateMissingEntity(String missingEntity, String missingCode, String localString) {
+	private void updateMissingEntity(String missingEntity, String missingCode, String localString)
+	{
+		try
+		{
 			RML mr;
-			try {
-				mr = cRml.newInstance();
-				mr.setMissingEntity(missingEntity);
-				mr.setMissingCode(missingCode);
-				mr.setMissingLocal(localString);
-				fRevision.addMissingLabel(mr);
-			} catch (InstantiationException | IllegalAccessException e) {
-				logger.info("Can not add Missing Entity: " + missingEntity + " Code : "+ missingCode  + "Lang: " + localString );
-			}
+			mr = cRml.newInstance();
+			mr.setMissingEntity(missingEntity);
+			mr.setMissingCode(missingCode);
+			mr.setMissingLocal(localString);
+			fRevision.addMissingLabel(mr);
+		}
+		catch (InstantiationException | IllegalAccessException e)
+		{
+			logger.info("Can not add Missing Entity: " + missingEntity + " Code : "+ missingCode  + "Lang: " + localString );
+		}
 	}
 }
