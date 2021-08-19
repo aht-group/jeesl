@@ -78,6 +78,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	@Override public String start(String log) {return start(log,null,null);}
 	public String start(String log, USER user) {return start(log,null,user);}
+	public String start(String log, String message) {return start(log,message,null);}
 	public String start(String log, String message, USER user)
 	{
 		reset();

@@ -48,7 +48,6 @@
 					   immediate="#{cc.attrs.immediate}"
 					   styleClass="#{cc.attrs.styleClass}">
 			<h:graphicImage id="image2"
-							rendered="#{not cc.attrs.disabled}"
 							value="/image/symbolizer/graphic/#{cc.attrs.value.class.name}/#{cc.attrs.height}/#{cc.attrs.value.id}"
 							rendered="#{(empty cc.attrs.ejb) or
 										(
