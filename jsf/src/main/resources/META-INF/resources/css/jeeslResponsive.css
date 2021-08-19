@@ -621,7 +621,8 @@ body, .ui-widget {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
   opacity: 0;
   transition: opacity .2s linear;
-  z-index: 1000; }
+  z-index: 1000;
+  opacity: 1; }
   @media (max-width: 768px) {
     .ui-selectonemenu-panel {
       border: none;
@@ -695,7 +696,8 @@ body, .ui-widget {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
   opacity: 0;
   transition: opacity .2s linear;
-  z-index: 1000; }
+  z-index: 1000;
+  opacity: 1; }
   @media (max-width: 768px) {
     .ui-datepicker {
       border: none;
@@ -707,6 +709,9 @@ body, .ui-widget {
   .ui-datepicker .jeesl-overlay-wrapper {
     color: #333333;
     overflow: auto; }
+  @media (max-width: 768px) {
+    .ui-datepicker {
+      padding: 15px 0; } }
   .ui-datepicker .ui-datepicker-header {
     background: linear-gradient(to bottom, #00663a, #007a45);
     border: 0;
@@ -770,16 +775,82 @@ body, .ui-widget {
       .ui-datepicker .ui-datepicker-header .ui-icon:before {
         color: white;
         display: inline-block;
-        font-size: 2em;
-        text-indent: -42px;
+        font-size: 1.2em;
+        text-indent: -22px;
         vertical-align: middle; }
         @media (max-width: 768px) {
           .ui-datepicker .ui-datepicker-header .ui-icon:before {
+            font-size: 2em;
             text-indent: -42px; } }
     .ui-datepicker .ui-datepicker-header .ui-icon-circle-triangle-w:before {
       content: "\25c4"; }
     .ui-datepicker .ui-datepicker-header .ui-icon-circle-triangle-e:before {
       content: "\25ba"; }
+
+.p-md-1 {
+  flex: 0 0 auto;
+  width: 8%; }
+
+.p-md-2 {
+  flex: 0 0 auto;
+  width: 17%; }
+
+.p-md-3 {
+  flex: 0 0 auto;
+  width: 25%; }
+
+.p-md-4 {
+  flex: 0 0 auto;
+  width: 33%; }
+
+.p-md-5 {
+  flex: 0 0 auto;
+  width: 42%; }
+
+.p-md-6 {
+  flex: 0 0 auto;
+  width: 50%; }
+
+.p-md-7 {
+  flex: 0 0 auto;
+  width: 58%; }
+
+.p-md-8 {
+  flex: 0 0 auto;
+  width: 67%; }
+
+.p-md-9 {
+  flex: 0 0 auto;
+  width: 75%; }
+
+.p-md-10 {
+  flex: 0 0 auto;
+  width: 83%; }
+
+.p-md-11 {
+  flex: 0 0 auto;
+  width: 92%; }
+
+.p-md-12 {
+  flex: 0 0 auto;
+  width: 100%; }
+
+.input-grid:first-child .p-field:first-child {
+  padding-top: 0; }
+.input-grid .p-grid {
+  display: flex;
+  flex-wrap: wrap; }
+  .input-grid .p-grid.p-field {
+    align-items: center;
+    margin: 0;
+    padding: 5px 0; }
+.input-grid .p-field > label {
+  margin-bottom: 0; }
+.input-grid .p-field .p-col {
+  line-height: 26px;
+  padding: 0 10px; }
+  .input-grid .p-field .p-col:first-child {
+    padding-left: 0; }
 
 #container {
   background: white;
@@ -1488,10 +1559,11 @@ body, .ui-widget {
       border-top: 2px solid #007a45; } }
   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item:first-child .jeesl-dropdown-multi-summary {
     font-style: italic;
-    opacity: .5; }
+    opacity: .5;
+    padding-left: 5px; }
   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item:first-child .jeesl-dropdown-item-label {
     display: inline-block;
-    padding: 8px 7px 8px 5px;
+    padding: 6px 7px 6px 5px;
     width: auto; }
     @media (max-width: 768px) {
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item:first-child .jeesl-dropdown-item-label {
@@ -1499,14 +1571,15 @@ body, .ui-widget {
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item:first-child .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon:last-child {
       margin: 0; }
   @media (max-width: 768px) {
+    .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item .jeesl-dropdown-item-label {
+      padding-right: 0; } }
+  @media (max-width: 768px) {
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
       padding: 12px 0; } }
   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon:last-child {
-    margin-right: -8px;
     padding: 0; }
     @media (max-width: 768px) {
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon:last-child {
-        margin-right: -10px;
         padding: 12px; } }
   @media (max-width: 768px) {
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
@@ -1516,7 +1589,7 @@ body, .ui-widget {
   @media (min-width: 768px) {
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
       height: 26px;
-      padding: 6px 15px; } }
+      padding: 6px 7px; } }
   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
     margin: 0;
     padding: 2px 0; }
@@ -1945,6 +2018,8 @@ body, .ui-widget {
                     padding: 0 6px; } }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
               height: 100%; }
+      .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-panelgrid-cell .ui-outputpanel {
+        font-size: bold; }
       .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-tree-droppoint.ui-droppable-active.ui-state-hover {
         background: #007a45;
         color: white; }
