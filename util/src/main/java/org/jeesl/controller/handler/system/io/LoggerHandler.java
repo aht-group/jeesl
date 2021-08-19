@@ -51,10 +51,10 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	private final Map<String,LOOP> loops;
 	
 	private final Map<String,Instant> mapLoopInstant;
+	private final Map<String,Integer> mapCount;
 	
 	private final Class<?> c;
 	private LOG log;
-	
 	
 	public LoggerHandler(IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog,
 					   Class<?> c)
@@ -67,6 +67,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		loops = new HashMap<>();
 		
 		mapLoopInstant = new HashMap<>();
+		mapCount = new HashMap<>();
 	}
 	
 	private void reset()
@@ -152,6 +153,12 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		return "";
 	}
 	
+	public void count(String code)
+	{
+		mapCount.putIfAbsent(code,0);
+		mapCount.put(code,1+mapCount.get(code));
+	}
+	
 	@Override public void ofxMilestones(OutputStream os)
 	{
 		List<String> header = new ArrayList<>();
@@ -206,6 +213,27 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 			cell[2] = Long.valueOf(loop.getMilliTotal()).toString();
 			cell[3] = Double.valueOf(AmountRounder.one(loop.getMilliTotal()/loop.getCounter())).toString();
 			cell[4] = loop.getCode();
+			
+			data.add(cell);
+		}
+		
+		OfxTextSilentRenderer.table(XmlTableFactory.build(c.getSimpleName(),header,data),os);
+	}
+	
+	public void ofxCount(OutputStream os)
+	{
+		List<String> header = new ArrayList<>();
+		header.add("Code");
+		header.add("Count");
+		
+		List<Object[]> data = new ArrayList<>();
+		
+		for(String key : mapCount.keySet())
+		{
+			String[] cell = new String[2];
+			
+			cell[0] = key;
+			cell[1] = Integer.valueOf(mapCount.get(key)).toString();
 			
 			data.add(cell);
 		}
