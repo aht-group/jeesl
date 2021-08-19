@@ -10,9 +10,9 @@ import java.util.Map;
 
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionMissingLabel;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionMissingLabel;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -30,6 +30,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 	private final Class<RE> cRE;
 	private final Class<L> cL;
 	private Class<RML> cRml;
+
 	private final JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision;
 
 	private final Map<String,Map<String,L>> entities; public Map<String,Map<String,L>> getEntities() {return entities;}
@@ -37,8 +38,11 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 	private final Map<String,Map<String,Map<String,D>>> descriptions;public Map<String, Map<String, Map<String,D>>> getDescriptions() {return descriptions;}
 
 	public final Map<String,RE> mapEntities; public Map<String,RE> getMapEntities() {return mapEntities;}
+
+	private final List<RML> missingLabelCollection;
 	public String tempMissingLabelEntity;
 	public RML tempRevisionMissingLabel;
+
 
 	public TranslationHandler(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, final Class<RE> cRE, final Class<L> cL, final Class<RML> cRml)
 	{
@@ -46,6 +50,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 		this.cL = cL;
 		this.cRml = cRml;
 		this.fRevision=fRevision;
+		missingLabelCollection = new ArrayList<RML>();
 		tempMissingLabelEntity ="";
 
         entities = new HashMap<String,Map<String,L>>()
@@ -62,7 +67,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 					{
 						if(entry.getValue().getLang().isEmpty())
 						{
-							updateMissingEntity(tempMissingLabelEntity,"",entry.getValue().getLkey());
+							collectMissingLabel(tempMissingLabelEntity,"",entry.getValue().getLkey());
 						}
 					}
 					return m;
@@ -190,63 +195,101 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 
 	private Hashtable<String, Map<String, L>> getTempLabelHashtable()
 	{
-		return new Hashtable<String,Map<String,L>>(){
-			private static final long serialVersionUID = 1L;
-
+		return new Hashtable<String,Map<String,L>>()
+		{
+			final static long serialVersionUID = 1L;
 			@Override
-			public   Map<String, L> get(Object key) {
+			public   Map<String, L> get(Object key)
+			{
 				String missingCode = (String)key;
 				Map<String, L> m = super.get(key);
-				if (m != null) {
-					for (java.util.Map.Entry<String, L> entry : m.entrySet()) {
-						if(entry.getValue().getLang().isEmpty()) {
-							updateMissingEntity(tempMissingLabelEntity,missingCode,entry.getValue().getLkey());
+				if (m != null)
+				{
+					for (java.util.Map.Entry<String, L> entry : m.entrySet())
+					{
+						if(entry.getValue().getLang().isEmpty())
+						{
+							collectMissingLabel(tempMissingLabelEntity,missingCode,entry.getValue().getLkey());
 						}
 					}
 					return m;
-					}
-			    else {return getLangMap(tempMissingLabelEntity,missingCode);}
+				}
+			    else
+			    {
+			    	return getLangMap(tempMissingLabelEntity,missingCode);
+			    }
 			}
 		};
 	}
 
 	private Map<String, L> getLangMap(String missingEntity, String missingCode)
 	{
-		Map<String, L> m = new HashMap<String, L>() {
-		@Override
-		public L get(Object key)
+		return new HashMap<String, L>()
 		{
-			L langLabel = super.get(key);
-			if (langLabel != null) {
-		        return langLabel;
-		    }
-			else {
-				updateMissingEntity(missingEntity,missingCode,(String)key);
-				try {
-					L l = cL.newInstance();
-					l.setLkey((String)key);
-					return l;
-					} catch (InstantiationException | IllegalAccessException e) {return null;}
+			final static long serialVersionUID = 1L;
+			@Override
+			public L get(Object key)
+			{
+				L langLabel = super.get(key);
+				if (langLabel != null)
+				{
+			        return langLabel;
+			    }
+				else
+				{
+					collectMissingLabel(missingEntity,missingCode,(String)key);
+					try
+					{
+						L l = cL.newInstance();
+						l.setLkey((String)key);
+						return l;
+					}
+					catch (InstantiationException | IllegalAccessException e)
+					{
+						return null;
+					}
+				}
 			}
-		}
     	};
-    	return m;
     }
 
-	private void updateMissingEntity(String missingEntity, String missingCode, String localString)
+	private void collectMissingLabel(String missingEntity, String missingCode, String localString)
 	{
 		try
 		{
-			RML mr;
-			mr = cRml.newInstance();
-			mr.setMissingEntity(missingEntity);
-			mr.setMissingCode(missingCode);
-			mr.setMissingLocal(localString);
-			fRevision.addMissingLabel(mr);
+			if(!containsInMissingLabelCollection(missingEntity,missingCode,localString))
+			{
+				RML rml;
+				rml = cRml.newInstance();
+				rml.setMissingEntity(missingEntity);
+				rml.setMissingCode(missingCode);
+				rml.setMissingLocal(localString);
+				missingLabelCollection.add( rml);
+			}
 		}
 		catch (InstantiationException | IllegalAccessException e)
 		{
 			logger.info("Can not add Missing Entity: " + missingEntity + " Code : "+ missingCode  + "Lang: " + localString );
+		}
+	}
+
+	private boolean containsInMissingLabelCollection(String missingEntity, String missingCode, String localString)
+	{
+		for(RML rml : missingLabelCollection)
+		{
+			if(rml.getMissingEntity().equals(missingEntity) && rml.getMissingCode().equals(missingCode) && rml.getMissingLocal().equals(localString))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void updateMissingLabels()
+	{
+		for(RML rml : missingLabelCollection)
+		{
+			fRevision.addMissingLabel(rml);
 		}
 	}
 }
