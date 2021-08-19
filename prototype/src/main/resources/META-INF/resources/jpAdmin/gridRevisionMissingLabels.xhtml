@@ -28,6 +28,10 @@
 							<f:facet name="header">
 								
 								<j:dtHeader title="#{msg.jeeslRevisionEntities}">
+									<p:commandButton value="Check missing entities" update=":#{cc.id}:grid">
+										<f:actionListener binding="#{cc.attrs.beanAppLabel.updateMissingLabels()}"/>
+										<f:actionListener binding="#{cc.attrs.beanMissingLabel.reloadMissingLabels()}"/>
+									</p:commandButton>
 									<p:commandButton value="Reset" update=":#{cc.id}:grid"> 
 										<f:actionListener binding="#{cc.attrs.beanMissingLabel.removeMissingLabels()}"/>
 										<f:actionListener binding="#{cc.attrs.bean.initMissingLables()}"/>

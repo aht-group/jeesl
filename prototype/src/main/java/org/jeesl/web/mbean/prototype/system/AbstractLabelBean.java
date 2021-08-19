@@ -43,10 +43,10 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 
 	public Map<String,RE> getMapEntities() {return th.getMapEntities();}
 	@Override public List<RE> allEntities() {return th.allEntities();}
-	
+
 	private final List<LOC> locales; public List<LOC> getLocales() {return locales;}
 	private final Map<String,LOC> mapLocales; public Map<String, LOC> getMapLocales() {return mapLocales;}
-	
+
 	public AbstractLabelBean(IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fbRevision)
 	{
 		this.fbRevision=fbRevision;
@@ -63,8 +63,9 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);
 		}
 	}
-	
+
 	protected void addLocales(List<LOC> locs) {for(LOC loc : locs) {addLocale(loc);}}
+
 	protected void addLocale(LOC loc)
 	{
 		locales.add(loc);
@@ -108,6 +109,14 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		}
 
 		return th.getMapEntities().get(c.getSimpleName()).getName().get(localeCode).getLang();
+	}
+
+	public void updateMissingLabels()
+	{
+		if(th != null)
+		{
+			this.th.updateMissingLabels();
+		}
 	}
 
 	@Override

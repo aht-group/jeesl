@@ -69,7 +69,7 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 		reloadMissingLabels();
 	}
 
-	private void reloadMissingLabels()
+	public void reloadMissingLabels()
 	{
 		if (debugOnInfo) {logger.info("reloadMissingLabels");}
 
