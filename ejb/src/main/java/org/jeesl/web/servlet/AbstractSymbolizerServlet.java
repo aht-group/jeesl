@@ -4,6 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URLDecoder;
+import java.time.Duration;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -68,7 +72,7 @@ public abstract class AbstractSymbolizerServlet<L extends JeeslLang, D extends J
 	
 	protected Image getGraphicInfo(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
-		if (request.getPathInfo() == null)
+		if(request.getPathInfo() == null)
 		{
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return null;
@@ -108,6 +112,7 @@ public abstract class AbstractSymbolizerServlet<L extends JeeslLang, D extends J
 		response.reset();
 		response.setContentType(getServletContext().getMimeType("x."+suffix));
 		response.setHeader("Content-Length", String.valueOf(bytes.length));
+//		response.setHeader("Expires", DateTimeFormatter.RFC_1123_DATE_TIME.format(OffsetDateTime.now(ZoneOffset.UTC).plus(Duration.ofMinutes(5))));
 		
 	  	IOUtils.copy(bais,response.getOutputStream());
 	}

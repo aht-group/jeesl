@@ -13,6 +13,7 @@ import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
+import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
 import org.jeesl.factory.svg.SvgFigureFactory;
 import org.jeesl.factory.svg.SvgSymbolFactory;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
@@ -60,7 +61,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	@SuppressWarnings("unchecked")
 	protected void symbolizer(JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic , HttpServletRequest request, HttpServletResponse response) throws IOException
     {
-		Image m = getGraphicInfo(request,response);
+		Image m = super.getGraphicInfo(request,response);
 		
 	    if(m == null)
 	    {
@@ -69,22 +70,43 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	    }
 	    else
 	   	{
-    		try
-    		{
-    			Class<EjbWithGraphic<G>> c = (Class<EjbWithGraphic<G>>)Class.forName(m.getVersion()).asSubclass(EjbWithGraphic.class);
-    			if(EjbWithGraphic.class.isAssignableFrom(c))
-    			{
-    				G g = fGraphic.fGraphic(c,Long.valueOf(m.getId()));
-	            	process(request,response,fGraphic,g,m);
-    			}
-    			else {logger.error("Class "+c.getName()+" not assingable from "+EjbWithGraphic.class.getName());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
-    		}
-    		catch (TranscoderException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
-    		catch (JeeslNotFoundException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
-	   		catch (UtilsProcessingException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
-	   		catch (ClassNotFoundException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
+	    	String cacheKey = EjbGraphicFactory.toCacheKey(m);
+	    	boolean inCache = this.cacheContainsKey(cacheKey);
+			logger.info("Using cached value: "+inCache+" ("+cacheKey+")");
+	    	if(inCache)
+	    	{	
+	    		try
+	    		{
+	    			G g = this.cacheGet(cacheKey);
+					process(request,response,fGraphic,g,m);
+				}
+	    		catch (TranscoderException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
+		   		catch (UtilsProcessingException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
+	    	}
+	    	else
+	    	{
+	    		try
+	    		{
+	    			Class<EjbWithGraphic<G>> c = (Class<EjbWithGraphic<G>>)Class.forName(m.getVersion()).asSubclass(EjbWithGraphic.class);
+	    			if(EjbWithGraphic.class.isAssignableFrom(c))
+	    			{
+	    				G g = fGraphic.fGraphic(c,Long.valueOf(m.getId()));
+	    				this.cachePut(cacheKey,g);
+		            	process(request,response,fGraphic,g,m);
+	    			}
+	    			else {logger.error("Class "+c.getName()+" not assingable from "+EjbWithGraphic.class.getName());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
+	    		}
+	    		catch (TranscoderException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
+	    		catch (JeeslNotFoundException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
+		   		catch (UtilsProcessingException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
+		   		catch (ClassNotFoundException e) {logger.error(e.getMessage());response.sendError(HttpServletResponse.SC_NOT_FOUND);}
+	    	}
 	   	}
     }
+	
+	protected boolean cacheContainsKey(String key) {return false;}
+	protected void cachePut(String key, G g) {}
+	protected G cacheGet(String key) {return null;}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response, G graphic, Image image) throws IOException, TranscoderException, UtilsProcessingException
     {
