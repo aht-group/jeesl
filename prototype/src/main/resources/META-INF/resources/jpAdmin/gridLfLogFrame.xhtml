@@ -29,7 +29,7 @@
 						<p:dataTable var="level" value="#{cc.attrs.bean.indicatorLevels}" draggableRows="false">
 							<f:facet name="header">
 								<j:dtHeader title="#{appLabelBean.labels['LfIndicator']['listOf'][localeCode].lang}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addIndicator()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" />
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addIndicator()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" />
 								</j:dtHeader>
 							</f:facet>
 							<p:column>
@@ -83,7 +83,7 @@
 						<p:dataTable var="iv" value="#{cc.attrs.bean.indicatorValues}" selection="#{cc.attrs.bean.indicatorValue}" selectionMode="single" rowKey="#{iv.id}" draggableRows="false">
 							<f:facet name="header">
 								<j:dtHeader title="#{appLabelBean.labels['LfValue']['listOf'][localeCode].lang}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addIndicatorValue()}" update=":#{cc.id}:fIndicatorValue :#{cc.id}:fElementSelection" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addIndicatorValue()}" update=":#{cc.id}:fIndicatorValue :#{cc.id}:fElementSelection" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:fIndicatorValue" listener="#{cc.attrs.bean.selectIndicatorValue()}"/>

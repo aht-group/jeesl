@@ -20,7 +20,7 @@
 					rows="25" paginator="true" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslAssetCompanies}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addManufacturer()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addManufacturer()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectManufacturer()}" update=":#{cc.id}:sManufacturer"/>

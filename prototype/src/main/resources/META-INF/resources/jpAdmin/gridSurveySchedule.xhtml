@@ -29,7 +29,7 @@
 							<p:ajax event="rowSelect" update=":#{cc.id}:sSurvey" listener="#{cc.attrs.bean.selectSurvey}"/>
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslListOfSurvey}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSurvey()}" update=":#{cc.id}:sSurvey"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addSurvey()}" update=":#{cc.id}:sSurvey"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:column>

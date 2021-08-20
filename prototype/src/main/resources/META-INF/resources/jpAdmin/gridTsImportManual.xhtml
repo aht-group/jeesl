@@ -103,7 +103,7 @@
                                      rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
                             <f:facet name="header">
                                 <j:dtHeader title="#{msg.aupTsTimeSerie}">
-                                    <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addData()}" update=":#{cc.id}:sTs" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.uiAllowAdd}"/>
+                                    <j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addData()}" update=":#{cc.id}:sTs" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.uiAllowAdd}"/>
                                 </j:dtHeader>
                             </f:facet>
                             <p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectData()}" update=":#{cc.id}:sTs"/>

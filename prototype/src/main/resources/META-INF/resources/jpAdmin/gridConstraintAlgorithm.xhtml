@@ -26,7 +26,7 @@
 							selection="#{cc.attrs.bean.algorithm}" selectionMode="single" rowKey="#{a.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslConstraintAlgorithms}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAlgorithms()}" update="@form"/>

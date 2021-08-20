@@ -36,7 +36,7 @@
 						paginator="true" rows="5" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslUsers}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addUser()}" update=":#{cc.id}:sDetail"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addUser()}" update=":#{cc.id}:sDetail"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectUser}" update=":#{cc.id}:sDetail"/>

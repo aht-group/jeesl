@@ -21,7 +21,7 @@
 								paginator="true" rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslAomLevels}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addLevel()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addLevel()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectLevel()}" update=":#{cc.id}:sLevel"/>

@@ -168,7 +168,7 @@
 					          selection="#{cc.attrs.bean.figure}" selectionMode="single" rowKey="#{f.id}">
 							<f:facet name="header">
 					          	<j:dtHeader title="#{msg.jeeslOptionGraphicFigures}">
-					          		<j:icon type="jeeslAdd" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addFigure()}" update=":#{cc.id}:fFigure" tooltip="#{msg.ttNew}"/>
+					          		<j:svg type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addFigure()}" update=":#{cc.id}:fFigure" tooltip="#{msg.ttNew}"/>
 					          	</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderFigures()}" update="@form"/>

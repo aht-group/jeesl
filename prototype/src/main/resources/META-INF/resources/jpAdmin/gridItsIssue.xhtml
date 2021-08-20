@@ -20,7 +20,7 @@
 				<p:panel header="#{msg.jeeslCmsDocumentStructure}" styleClass="jeeslTree" >
 					<f:facet name="actions">
 						<p:outputPanel id="cActions">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addIssue()}" update=":#{cc.id}:sIssue" tooltip="#{msg.jeeslItsIssueAdd}"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addIssue()}" update=":#{cc.id}:sIssue" tooltip="#{msg.jeeslItsIssueAdd}"/>
 						</p:outputPanel>
 					</f:facet>
 					<p:treeTable id="tTable" value="#{cc.attrs.bean.tree}" var="node" 

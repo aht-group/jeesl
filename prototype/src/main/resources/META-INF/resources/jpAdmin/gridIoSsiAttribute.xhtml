@@ -23,7 +23,7 @@
 							 selection="#{cc.attrs.bean.attribute}" selectionMode="single" rowKey="#{a.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoSsiAttributeMappings}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAttribute()}" update=":#{cc.id}:sAttribute"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAttribute()}" update=":#{cc.id}:sAttribute"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectAttribute()}" update=":#{cc.id}:grid"/>

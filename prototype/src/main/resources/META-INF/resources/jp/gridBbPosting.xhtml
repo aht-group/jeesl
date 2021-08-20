@@ -62,7 +62,7 @@
 										selection="#{cc.attrs.bean.thread}" selectionMode="single" rowKey="#{t.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslBbThreads}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addThread()}" update=":#{cc.id}:sThread"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addThread()}" update=":#{cc.id}:sThread"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectThread()}" update=":#{cc.id}:sThread"/>
@@ -101,7 +101,7 @@
 						<p:dataTable var="p" value="#{cc.attrs.bean.postings}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslBbPostings}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addPosting()}" update=":#{cc.id}:sThread"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addPosting()}" update=":#{cc.id}:sThread"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:column>  

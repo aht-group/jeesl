@@ -41,7 +41,7 @@
 								 selection="#{cc.attrs.bean.analysis}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyAnalyses}">
-		                         <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAnalysis()}" update=":#{cc.id}:grid"/>
+		                         <j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAnalysis()}" update=":#{cc.id}:grid"/>
 		                     </j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAnalyses()}" update="@form"/>
@@ -140,7 +140,7 @@
 								 selection="#{cc.attrs.bean.tool}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyAnalysisTools}">
-		                         <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTool()}" update=":#{cc.id}:sAnalysis"/>
+		                         <j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTool()}" update=":#{cc.id}:sAnalysis"/>
 		                     </j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTools()}" update="@form"/>

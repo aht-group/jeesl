@@ -48,7 +48,7 @@
 										selection="#{cc.attrs.bean.file}" selectionMode="single" rowKey="#{f.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslIoDmsDocuments}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addFile()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addFile()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderFiles()}" update="@form"/>

@@ -31,7 +31,7 @@
 							selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.aupSecurityUsecases}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectUsecase}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase"/>

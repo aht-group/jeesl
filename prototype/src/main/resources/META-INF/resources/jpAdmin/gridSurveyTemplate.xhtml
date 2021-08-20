@@ -50,7 +50,7 @@
 								 selection="#{cc.attrs.bean.version}" selectionMode="single">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jpSurveyTemplateVersions}">
-		                         <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addVersion()}" update=":#{cc.id}:row1"/>
+		                         <j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addVersion()}" update=":#{cc.id}:row1"/>
 		                     </j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:row1" listener="#{cc.attrs.bean.selectVersion()}"/>
@@ -67,7 +67,7 @@
                                  selection="#{cc.attrs.bean.section}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.aupSurveySections}">
-	                    		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:row1"/>
+	                    		<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:row1"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderSections()}" update="@form"/>
@@ -87,7 +87,7 @@
 								 selection="#{cc.attrs.bean.scheme}" selectionMode="single">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveySchemes}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectScheme()}" update=":#{cc.id}:fSchemes :#{cc.id}:fScheme"/>
@@ -121,7 +121,7 @@
                                  selection="#{cc.attrs.bean.optionSet}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyOptionSets}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid"/>
                       		</j:dtHeader>
 						</f:facet>
 		                  <p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectSet()}" update=":#{cc.id}:grid" />
@@ -239,7 +239,7 @@
                                  selection="#{cc.attrs.bean.question}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.aupSurveyQuestions}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addQuestion()}" update=":#{cc.id}:sQuestion"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addQuestion()}" update=":#{cc.id}:sQuestion"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:sQuestion" listener="#{cc.attrs.bean.selectQuestion()}"/>
@@ -352,7 +352,7 @@
                                  selection="#{cc.attrs.bean.option}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyOptions}">
-                          		<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:sQuestion"/>
+                          		<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:sQuestion"/>
                       		</j:dtHeader>
                   		</f:facet>
                   		<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectOption()}" update=":#{cc.id}:sQuestion"/>
@@ -377,7 +377,7 @@
                                  selection="#{cc.attrs.bean.option}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyOptions}">
-                       			<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:sQuestion"/>
+                       			<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:sQuestion"/>
                    			</j:dtHeader>
                   		</f:facet>
                   		<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectOption()}" update=":#{cc.id}:sQuestion"/>
@@ -476,7 +476,7 @@
 								 selection="#{cc.attrs.bean.score}" selectionMode="single">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyScores}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectScore()}" update=":#{cc.id}:fScores :#{cc.id}:fScore"/>
@@ -520,7 +520,7 @@
 								 selection="#{cc.attrs.bean.condition}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyConditions}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCondition()}" update=":#{cc.id}:fConditions :#{cc.id}:fCondition"/>
@@ -579,7 +579,7 @@
 								 selection="#{cc.attrs.bean.validation}" selectionMode="single" draggableRows="true">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslSurveyValidations}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectValidation()}" update=":#{cc.id}:fValidations :#{cc.id}:fValidation"/>

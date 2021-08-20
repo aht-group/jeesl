@@ -25,7 +25,7 @@
 							selection="#{cc.attrs.bean.rv}" selectionMode="single" rowKey="#{v.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.aupRevisionViews}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sView :#{cc.id}:sDetails" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sView :#{cc.id}:sDetails" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderViews()}" update="@form"/>

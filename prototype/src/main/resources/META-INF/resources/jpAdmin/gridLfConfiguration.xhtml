@@ -25,7 +25,7 @@
 						<p:dataTable var="config" value="#{cc.attrs.bean.configurations}" draggableRows="false">
 							<f:facet name="header">
 								<j:dtHeader title="#{appLabelBean.labels['LfConfiguration']['listOf'][localeCode].lang}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addConfiguration()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" />
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addConfiguration()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" />
 								</j:dtHeader>
 							</f:facet>
 							<p:column>

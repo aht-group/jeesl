@@ -26,7 +26,7 @@
 							selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslTsScopes}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderScopes()}" update="@form"/>
@@ -151,7 +151,7 @@
 						 	selection="#{cc.attrs.bean.multiPoint}" selectionMode="single" rowKey="#{mp.id}">
 							<f:facet name="header">
 								<j:dtHeader id="dth" title="#{msg.jeeslTsMultiPoints}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderMultiPoints()}" update="@form"/>

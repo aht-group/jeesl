@@ -24,7 +24,7 @@
 					<h:form id="fTree" >
 						<p:panel header="#{cc.attrs.bean.sbhDms.selection.name[localeCode].lang}" styleClass="jeeslTree" >
 							<f:facet name="actions">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttAdd}"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttAdd}"/>
 							</f:facet>
 							<p:tree id="tree1" value="#{cc.attrs.bean.tree}" var="node" 
 									selection="#{cc.attrs.bean.node}" selectionMode="single"

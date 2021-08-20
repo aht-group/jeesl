@@ -26,7 +26,7 @@
 							selection="#{cc.attrs.bean.set}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslIoDomainSets}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderSets()}" update="@form"/>
@@ -67,7 +67,7 @@
 							selection="#{cc.attrs.bean.item}" selectionMode="single" rowKey="#{i.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslSurveyDomainQuery}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderItems()}" update="@form"/>

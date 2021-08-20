@@ -22,7 +22,7 @@
 					selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslConstraintScopes}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addScope()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addScope()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderScopes()}" update="@form"/>
@@ -65,7 +65,7 @@
 					selection="#{cc.attrs.bean.constraint}" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslConstraints}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addConstraint()}" update=":#{cc.id}:sConstraint" tooltip="#{msg.ttNew}"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addConstraint()}" update=":#{cc.id}:sConstraint" tooltip="#{msg.ttNew}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderScopes()}" update="@form"/>

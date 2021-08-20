@@ -27,7 +27,7 @@
 							selection="#{cc.attrs.bean.storage}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslIoFileStorages}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addStorage()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addStorage()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
 									<jp:icon value="#{cc.attrs.bean.typeUnknown}" listener="#{cc.attrs.bean.fixType()}" update=":#{cc.id}:sStorages"/>
 								</j:dtHeader>
 							</f:facet>

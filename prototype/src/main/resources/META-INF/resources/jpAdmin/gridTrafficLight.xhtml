@@ -40,7 +40,7 @@
 								selection="#{cc.attrs.bean.trafficLight}" selectionMode="single" rowKey="#{trafficLight.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslSystemLights}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTrafficLight()}" update=":#{cc.id}:sLight" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTrafficLight()}" update=":#{cc.id}:sLight" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sLight" listener="#{cc.attrs.bean.selectTrafficLight()}"/>

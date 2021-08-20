@@ -27,7 +27,7 @@
 					selection="#{cc.attrs.bean.criteria}" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoAttributes}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addCriteria()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.sbhCat.hasSelected}"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addCriteria()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.sbhCat.hasSelected}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderCriterias()}" update="@form"/>
@@ -90,7 +90,7 @@
 					selection="#{cc.attrs.bean.option}" selectionMode="single" rowKey="#{o.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoAttributeOptions}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:fOptions :#{cc.id}:fOption" tooltip="#{msg.ttNew}"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addOption()}" update=":#{cc.id}:fOptions :#{cc.id}:fOption" tooltip="#{msg.ttNew}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderOptions()}" update="@form"/>
