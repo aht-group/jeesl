@@ -8,18 +8,19 @@
     
 	<composite:interface componentType="net.sf.ahtutils.jsf.components.IconListener">		
 		<composite:attribute name="styleClass" required="false" default="pf-action-icon"/>
-		<composite:attribute name="height" required="false" default="12"/>
-		<composite:attribute name="value" required="true"/>
+		<composite:attribute name="height" required="false" default="12" shortDescription="THe height in px for the image."/>
+		<composite:attribute name="value" required="true" shortDescription="Any object implementing EjbWithGraphic."/>
 		<composite:attribute name="tooltip" required="false"/>
-		<composite:attribute name="immediate" required="false" default="false"/>
+		
 				
 		<composite:attribute name="listener" required="false" method-signature="void listener(javax.faces.event.AjaxBehaviorEvent)"/>
+		<composite:attribute name="immediate" required="false" default="false"/>
 		<composite:attribute name="process" required="false" default=""/>
-		<composite:attribute name="oncomplete" required="false"/>
-		<composite:attribute name="onstart" required="false"/>
+		<composite:attribute name="onstart" required="false" shortDescription="JS will be executed before the listener is invoked."/>
+		<composite:attribute name="oncomplete" required="false" shortDescription="JS will be executed after the listener is invoked."/>
 		
-		<composite:attribute name="ejb" required="false" default=""/>
-		<composite:attribute name="ejbRendered" required="false" default=""/>
+		<composite:attribute name="ejb" required="false" default="" shortDescription="Any oject implementing EjbWithId, used in conjunction with ejbRendered"/>
+		<composite:attribute name="ejbRendered" required="false" default="" shortDescription="Valid values are: unsaved (icon only rendered when ejb onject is unsaved)"/>
 	</composite:interface>
 
 	<composite:implementation>

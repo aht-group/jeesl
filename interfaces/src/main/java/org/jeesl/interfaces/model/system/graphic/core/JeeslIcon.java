@@ -20,5 +20,5 @@ public interface JeeslIcon <L extends JeeslLang, D extends JeeslDescription,
 								JeeslStatus<L,D,S>
 {
 	public static enum CodeTreeFilter{tfCollapseAll,tfExpandAll,tfExpandTwo,tfExpandThree,tfExpandRelevant}
-	public enum Ejb{ejbNew}
+	public enum Ejb{ejbUnsaved,ejbInvisible}
 }

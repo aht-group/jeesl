@@ -304,6 +304,7 @@
 										<include>control/arrow/blue/*.*</include>
 										<include>control/wizard/*.*</include>
 										<include>info/*.*</include>
+										<include>info/ejb/*.*</include>
 										<include>info/mark/*.*</include>
 										<include>system/io/cms/*.*</include>
 										<include>io/fr/type/*.*</include>
