@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
@@ -277,7 +278,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 	{
 		for(RML rml : missingLabelCollection)
 		{
-			if(rml.getMissingEntity().equals(missingEntity) && rml.getMissingCode().equals(missingCode) && rml.getMissingLocal().equals(localString))
+			if(Objects.equals(rml.getMissingEntity(), missingEntity) && Objects.equals(rml.getMissingCode(), missingCode) && Objects.equals(rml.getMissingLocal(),localString))
 			{
 				return true;
 			}
