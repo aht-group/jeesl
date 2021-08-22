@@ -8,7 +8,6 @@ import javax.ws.rs.core.MediaType;
 
 import org.jeesl.model.xml.jeesl.Container;
 
-import net.sf.ahtutils.xml.report.Report;
 import net.sf.ahtutils.xml.report.Reports;
 import net.sf.ahtutils.xml.report.Styles;
 import net.sf.ahtutils.xml.report.Templates;

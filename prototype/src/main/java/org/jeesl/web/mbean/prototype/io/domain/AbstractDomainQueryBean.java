@@ -81,7 +81,7 @@ public abstract class AbstractDomainQueryBean <L extends JeeslLang, D extends Je
 		cpDomainEntity = new RevisionEntityComparator().factory(RevisionEntityComparator.Type.position);
 	}
 	
-	protected void postConstructDomainQuery(String userLocale, JeeslTranslationBean bTranslation, JeeslFacesMessageBean bMessage,
+	protected void postConstructDomainQuery(String userLocale, JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 			JeeslIoDomainFacade<L,D,DOMAIN,QUERY,PATH,ENTITY,DATTRIBUTE,SET,ITEM> fDomain)
 	{
 		super.postConstructDomain(bTranslation,bMessage,fDomain);

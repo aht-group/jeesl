@@ -41,7 +41,6 @@ public abstract class AbstractDomainBean <L extends JeeslLang, D extends JeeslDe
 	
 	protected List<QUERY> queries; public List<QUERY> getQueries(){return queries;}
 	
-//	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public AbstractDomainBean(IoDomainFactoryBuilder<L,D,DOMAIN,QUERY,PATH,ENTITY,ATTRIBUTE,SET,ITEM> fbDomain)
 	{
 		super(fbDomain.getClassL(),fbDomain.getClassD());
@@ -50,7 +49,7 @@ public abstract class AbstractDomainBean <L extends JeeslLang, D extends JeeslDe
 
 	}
 	
-	protected void postConstructDomain(JeeslTranslationBean bTranslation, JeeslFacesMessageBean bMessage,
+	protected void postConstructDomain(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 			JeeslIoDomainFacade<L,D,DOMAIN,QUERY,PATH,ENTITY,ATTRIBUTE,SET,ITEM> fDomain)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);

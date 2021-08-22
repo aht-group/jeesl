@@ -23,8 +23,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslCalendarFacadeBean<L extends JeeslLang,
-									D extends JeeslDescription,
+public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									CALENDAR extends JeeslCalendar<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
 									ZONE extends JeeslCalendarTimeZone<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
 									CT extends JeeslStatus<L,D,CT>,
@@ -34,6 +33,8 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang,
 					extends JeeslFacadeBean
 					implements JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT>
 {	
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(JeeslCalendarFacadeBean.class);
 	
 	private final Class<ITEM> cItem;

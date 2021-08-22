@@ -1,14 +1,14 @@
 package org.jeesl.controller.processor;
 
-import net.sf.ahtutils.controller.processor.bool.BoolProcessingBaseVisitor;
-import net.sf.ahtutils.controller.processor.bool.BoolProcessingLexer;
-import net.sf.ahtutils.controller.processor.bool.BoolProcessingParser;
+import java.util.List;
+
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.collections.ListUtils;
 
-import java.util.Iterator;
-import java.util.List;
+import net.sf.ahtutils.controller.processor.bool.BoolProcessingBaseVisitor;
+import net.sf.ahtutils.controller.processor.bool.BoolProcessingLexer;
+import net.sf.ahtutils.controller.processor.bool.BoolProcessingParser;
 
 public class BooleanProcessor extends BoolProcessingBaseVisitor
 {

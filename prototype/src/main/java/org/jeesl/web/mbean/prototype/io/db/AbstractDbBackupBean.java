@@ -49,6 +49,7 @@ public class AbstractDbBackupBean <L extends JeeslLang,D extends JeeslDescriptio
 	protected final List<DH> hosts; public List<DH> getHosts() {return hosts;}
 	private Map<DUMP,Map<DH,DF>> mapFiles; public Map<DUMP, Map<DH,DF>> getMapFiles() {return mapFiles;}
 	
+	@SuppressWarnings("unused")
 	private SYSTEM system;
 	
 	public AbstractDbBackupBean(final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb)

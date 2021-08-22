@@ -15,7 +15,6 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 public interface JeeslSurveyTemplateFacade <L extends JeeslLang, D extends JeeslDescription,
 									SCHEME extends JeeslSurveyScheme<L,D,TEMPLATE,SCORE>,

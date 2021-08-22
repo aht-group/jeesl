@@ -62,7 +62,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 	private Class<QAT> cQAT;
 	
-	private XmlStatusFactory<QATS,L2,D2> xfDeveloperStatus;
+	private XmlStatusFactory<L2,D2,QATS> xfDeveloperStatus;
 	private XmlGroupsFactory<GROUP,QAT> xfGroups;
 	private XmlInfoFactory<L2,D2,QATI,QATC> xfInfo;
 	private XmlStatementFactory<QATS,L2,D2> xfStatement;
@@ -70,7 +70,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 	public XmlTestFactory(Test q)
 	{
 		this.q=q;
-		if(q.isSetStatus()){xfDeveloperStatus = new XmlStatusFactory<QATS,L2,D2>(null,q.getStatus());}
+		if(q.isSetStatus()){xfDeveloperStatus = new XmlStatusFactory<>(null,q.getStatus());}
 		if(q.isSetGroups()) {xfGroups = new XmlGroupsFactory<GROUP,QAT>(q.getGroups());}
 		if(q.isSetInfo()) {xfInfo = new XmlInfoFactory<L2,D2,QATI,QATC>(q.getInfo());}
 		if(q.isSetStatement()) {xfStatement = new XmlStatementFactory<QATS,L2,D2>(null,q.getStatement());}

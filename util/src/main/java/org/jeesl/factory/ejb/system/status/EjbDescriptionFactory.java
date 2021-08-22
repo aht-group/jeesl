@@ -20,8 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.status.Description;
 import net.sf.ahtutils.xml.status.Descriptions;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Langs;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class EjbDescriptionFactory<D extends JeeslDescription>

@@ -25,6 +25,8 @@ import net.sf.ahtutils.model.interfaces.tracker.UtilsTrackerLog;
 
 public class UtilsTrackerFacadeBean extends JeeslFacadeBean implements UtilsTrackerFacade
 {	
+	private static final long serialVersionUID = 1L;
+
 	public UtilsTrackerFacadeBean(EntityManager em)
 	{
 		super(em);

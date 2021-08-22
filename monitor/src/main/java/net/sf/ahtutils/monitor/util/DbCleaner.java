@@ -19,7 +19,9 @@ public class DbCleaner
 {
 	final static Logger logger = LoggerFactory.getLogger(DbCleaner.class);
 	
+	@SuppressWarnings("unused")
 	private EntityManager em;
+	@SuppressWarnings("unused")
 	private JeeslMonitoringFacade fUm;
 	private Map<String,List<Long>> map;
 	

@@ -1,8 +1,6 @@
 package org.jeesl.factory.json.module.ts;
 
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.json.module.ts.JsonTsMultipoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -9,8 +9,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DashComponentComparator<L extends JeeslLang,D extends JeeslDescription,
-DBC extends JeeslIoDashComponent<L,D,DBC>>
+public class DashComponentComparator<L extends JeeslLang,D extends JeeslDescription, DBC extends JeeslIoDashComponent<L,D,DBC>>
 {
     final static Logger logger = LoggerFactory.getLogger(DashComponentComparator.class);
 

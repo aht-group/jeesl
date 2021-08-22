@@ -6,8 +6,6 @@ import org.apache.commons.lang.StringUtils;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Diagram;
 import org.jeesl.model.xml.system.revision.Diagrams;
-import org.jeesl.model.xml.system.revision.Entities;
-import org.jeesl.model.xml.system.revision.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

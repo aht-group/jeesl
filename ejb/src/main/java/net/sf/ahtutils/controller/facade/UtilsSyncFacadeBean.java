@@ -20,13 +20,14 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;
 
-public class UtilsSyncFacadeBean <L extends JeeslLang,
-									D extends JeeslDescription,
+public class UtilsSyncFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 									STATUS extends JeeslStatus<L,D,STATUS>,
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 									SYNC extends JeeslSync<L,D,STATUS,CATEGORY>>  
 	extends JeeslFacadeBean implements JeeslSyncFacade<L,D,STATUS,CATEGORY,SYNC>
 {	
+	private static final long serialVersionUID = 1L;
+
 	public UtilsSyncFacadeBean(EntityManager em)
 	{
 		super(em);

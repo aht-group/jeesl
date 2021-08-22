@@ -15,6 +15,8 @@ import net.sf.ahtutils.interfaces.bl.UtilsStatusBl;
 
 public class UtilsStatusBlBean extends JeeslFacadeBean implements UtilsStatusBl
 {	
+	private static final long serialVersionUID = 1L;
+
 	public UtilsStatusBlBean(EntityManager em)
 	{
 		super(em);

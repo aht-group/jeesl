@@ -139,9 +139,9 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 	private JsonSurveyFactory<L,D,SURVEY,SS> jfSurvey;
 	
 	private XmlContainerFactory xfContainer;
-	private XmlStatusFactory<SS,L,D> xfStatus;
-	private final XmlStatusFactory<TC,L,D> xfTemplateCategory;
-	private final XmlStatusFactory<TS,L,D> xfTemplateStatus;
+	private XmlStatusFactory<L,D,SS> xfStatus;
+	private final XmlStatusFactory<L,D,TC> xfTemplateCategory;
+	private final XmlStatusFactory<L,D,TS> xfTemplateStatus;
 	private XmlTemplateFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xfTemplate;
 	private XmlSurveyFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xfSurveys;
 	private XmlSurveyFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xfSurvey;
@@ -178,8 +178,8 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		
 		xfContainer = new XmlContainerFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		
-		xfTemplateCategory = new XmlStatusFactory<TC,L,D>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
-		xfTemplateStatus = new XmlStatusFactory<TS,L,D>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		xfTemplateCategory = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		xfTemplateStatus = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		xfStatus = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		
 		xfTemplate = new XmlTemplateFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,XmlSurveyQuery.get(XmlSurveyQuery.Key.exTemplate).getTemplate());
@@ -188,7 +188,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		xfSurveys = new XmlSurveyFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,XmlSurveyQuery.get(XmlSurveyQuery.Key.exSurveys).getSurveys().getSurvey().get(0));
 		
 		xfSurvey = new XmlSurveyFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,XmlSurveyQuery.get(XmlSurveyQuery.Key.exSurvey).getSurvey());
-		xfSurvey.lazyLoad(fTemplate,fSurvey,fbCore.getClassSurvey(),fbTemplate.getClassSection(),fbCore.getClassData());
+		xfSurvey.lazyLoad(fTemplate,fSurvey,fbCore.getClassSurvey(),fbTemplate.getClassSection());
 		
 		xfAnswer = new XmlAnswerFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(XmlSurveyQuery.get(XmlSurveyQuery.Key.surveyAnswers));
 		

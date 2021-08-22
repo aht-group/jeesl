@@ -18,12 +18,12 @@ public class XmlInfoFactory<L extends JeeslLang, D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(XmlInfoFactory.class);
 		
 	private Info q;
-	private XmlStatusFactory<QATC,L,D> xfCondition;
+	private XmlStatusFactory<L,D,QATC> xfCondition;
 	
 	public XmlInfoFactory(Info q)
 	{
 		this.q=q;
-		if(q.isSetStatus()){xfCondition = new XmlStatusFactory<QATC,L,D>(null,q.getStatus());}
+		if(q.isSetStatus()){xfCondition = new XmlStatusFactory<>(null,q.getStatus());}
 	}
 	
 	public Info build(QATI info)
