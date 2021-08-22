@@ -1,5 +1,6 @@
 package org.jeesl.web.mbean.prototype.system.security;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
+import net.sf.exlp.util.io.ObjectIO;
 import net.sf.exlp.util.io.StringUtil;
 
 public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescription,
@@ -56,8 +58,9 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	protected JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
 	protected final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 
-	private List<V> views; @Override public List<V> getViews() {return views;}
-	private List<R> roles; public List<R> getRoles() {return roles;}
+	private final List<V> views; @Override public List<V> getViews() {return views;}
+	private final List<R> roles; public List<R> getRoles() {return roles;}
+	private final List<M> menus; @Override public List<M> getMenus() {return menus;}
 	
 	private final Map<String,V> mapUrlPattern;
 	private final Map<String,V> mapUrlMapping;
@@ -84,6 +87,10 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	{
 		this.fbSecurity=fbSecurity;
 		
+		views = new ArrayList<>();
+		roles = new ArrayList<>();
+		menus = new ArrayList<>();
+		
 		mapUrlPattern = new HashMap<>();
 		mapUrlMapping = new HashMap<>();
 		mapCodeView = new HashMap<>();
@@ -103,11 +110,15 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		cpRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
 	}
 	
-	public void init(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
+	public void postConstructDb(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity) {this.postConstructDb(fSecurity,null);}
+	public void postConstructDb(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity, File fApp)
 	{
 		this.fSecurity=fSecurity;
-		views = fSecurity.all(fbSecurity.getClassView());
+		views.addAll(fSecurity.all(fbSecurity.getClassView()));
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),"Loaded", views.size());}
+		
+		roles.addAll(fSecurity.all(fbSecurity.getClassRole()));
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassRole().getSimpleName(),"Loaded", roles.size());}
 		
 		List<A> actions = fSecurity.all(fbSecurity.getClassAction());
 		Map<V,List<A>> mapAction = fbSecurity.ejbAction().toMapView(actions);
@@ -123,6 +134,49 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		}
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),"Updated", views.size());}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassView(), views));}
+		
+		if(fApp!=null)
+		{
+			ObjectIO.save(new File(fApp,"views.ser"),views);
+			ObjectIO.save(new File(fApp,"roles.ser"),roles);
+			ObjectIO.save(new File(fApp,"menus.ser"),menus);
+			
+			ObjectIO.save(new File(fApp,"mapUrlPattern.ser"),mapUrlPattern);
+			ObjectIO.save(new File(fApp,"mapUrlMapping.ser"),mapUrlMapping);
+			ObjectIO.save(new File(fApp,"mapCodeView.ser"),mapCodeView);
+			
+			ObjectIO.save(new File(fApp,"mapRoles.ser"),mapRoles);
+			ObjectIO.save(new File(fApp,"mapAreas.ser"),mapAreas);
+			ObjectIO.save(new File(fApp,"mapViewsByRole.ser"),mapViewsByRole);
+			ObjectIO.save(new File(fApp,"mapViewsByUsecase.ser"),mapViewsByUsecase);
+			
+			ObjectIO.save(new File(fApp,"mapActionsByView.ser"),mapActionsByView);
+			ObjectIO.save(new File(fApp,"mapActionsByRole.ser"),mapActionsByRole);
+			ObjectIO.save(new File(fApp,"mapActionsByUsecase.ser"),mapActionsByUsecase);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void postConstructFile(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity, File fApp)
+	{
+		this.fSecurity=fSecurity;
+		
+		views.addAll((List<V>)ObjectIO.load(new File(fApp,"views.ser")));
+		roles.addAll((List<R>)ObjectIO.load(new File(fApp,"roles.ser")));
+		menus.addAll((List<M>)ObjectIO.load(new File(fApp,"menus.ser")));
+		
+		mapUrlPattern.putAll((Map<String,V>)ObjectIO.load(new File(fApp,"mapUrlPattern.ser")));
+		mapUrlMapping.putAll((Map<String,V>)ObjectIO.load(new File(fApp,"mapUrlMapping.ser")));
+		mapCodeView.putAll((Map<String,V>)ObjectIO.load(new File(fApp,"mapCodeView.ser")));
+		
+		mapRoles.putAll((Map<V,List<R>>)ObjectIO.load(new File(fApp,"mapRoles.ser")));
+		mapAreas.putAll((Map<V,List<AR>>)ObjectIO.load(new File(fApp,"mapAreas.ser")));
+		mapViewsByRole.putAll((Map<R,List<V>>)ObjectIO.load(new File(fApp,"mapViewsByRole.ser")));
+		mapViewsByUsecase.putAll((Map<U,List<V>>)ObjectIO.load(new File(fApp,"mapViewsByUsecase.ser")));
+
+		mapActionsByView.putAll((Map<V,List<A>>)ObjectIO.load(new File(fApp,"mapActionsByView.ser")));
+		mapActionsByRole.putAll((Map<R,List<A>>)ObjectIO.load(new File(fApp,"mapActionsByRole.ser")));
+		mapActionsByUsecase.putAll((Map<U,List<A>>)ObjectIO.load(new File(fApp,"mapActionsByUsecase.ser")));
 	}
 	
 	public void update(V view)

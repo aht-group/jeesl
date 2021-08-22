@@ -72,7 +72,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityMenuBean.class);
 
-	private final IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?> fbCms;
+//	private final IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?> fbCms;
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity;
 
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?> fCms;
@@ -96,7 +96,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 	public AbstractAdminSecurityMenuBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity, IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbSecurity);
-		this.fbCms = fbCms;
+//		this.fbCms = fbCms;
 		this.fbSecurity=fbSecurity;
 
 		sbhContext = new SbSingleHandler<CTX>(fbSecurity.getClassContext(),this);
