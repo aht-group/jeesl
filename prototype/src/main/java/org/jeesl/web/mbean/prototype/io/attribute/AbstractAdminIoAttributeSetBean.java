@@ -68,10 +68,10 @@ public abstract class AbstractAdminIoAttributeSetBean <L extends JeeslLang, D ex
 		sets = new ArrayList<>();
 	}
 	
-	protected void postConstructAttributePool(R realm,
-			JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-			JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
-			JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
+	protected void postConstructAttributeSet(R realm,
+												JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+												JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
+												JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
 	{
 		super.postConstructAttribute(realm,bTranslation,bMessage,bAttribute,fAttribute);
 	}

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.JeeslMenuBean;
 import org.jeesl.api.bean.JeeslSecurityBean;
@@ -138,12 +139,14 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			List<M> list = new ArrayList<>();
 			if(context==null)
 			{
-				list.addAll(fSecurity.all(fbSecurity.getClassMenu()));
+				if(bSecurity==null) {list.addAll(fSecurity.all(fbSecurity.getClassMenu()));}
+				else {list.addAll(bSecurity.getMenus());}
 				if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size());}
 			}
 			else
 			{
-				list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(),JeeslSecurityMenu.Attributes.context,context));
+				if(bSecurity==null) {list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(),JeeslSecurityMenu.Attributes.context,context));}
+				else {list.addAll(bSecurity.getMenus().stream().filter(m -> m.getContext().equals(context)).collect(Collectors.toList()));}
 				if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size()+" in context "+context.getCode());}
 			}
 			Collections.sort(list,new PositionComparator<M>());
