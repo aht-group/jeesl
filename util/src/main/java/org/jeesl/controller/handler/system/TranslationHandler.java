@@ -1,5 +1,6 @@
 package org.jeesl.controller.handler.system;
 
+import java.io.File;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.exlp.util.io.ObjectIO;
+
 public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 								RE extends JeeslRevisionEntity<L,D,?,?,RA,?>,
 								RA extends JeeslRevisionAttribute<L,D,RE,?,?>,
@@ -28,11 +31,11 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(TranslationHandler.class);
 	private static final long serialVersionUID = 1L;
 
+	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision;
+	
 	private final Class<RE> cRE;
 	private final Class<L> cL;
 	private Class<RML> cRml;
-
-	private final JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision;
 
 	private final Map<String,Map<String,L>> entities; public Map<String,Map<String,L>> getEntities() {return entities;}
 	private final Map<String,Map<String,Map<String,L>>> labels; public Map<String, Map<String, Map<String,L>>> getLabels() {return labels;}
@@ -47,10 +50,10 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 
 	public TranslationHandler(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, final Class<RE> cRE, final Class<L> cL, final Class<RML> cRml)
 	{
+		this.fRevision=fRevision;
 		this.cRE = cRE;
 		this.cL = cL;
 		this.cRml = cRml;
-		this.fRevision=fRevision;
 		missingLabelCollection = new ArrayList<RML>();
 		tempMissingLabelEntity ="";
 
@@ -82,10 +85,12 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
         	private static final long serialVersionUID = 1L;
 
 			@Override
-			public  Map<String, Map<String, L>> get(Object key) {
+			public  Map<String, Map<String, L>> get(Object key)
+			{
 				Map<String, Map<String, L>> m = super.get(key);
 				tempMissingLabelEntity =(String)key;
-				if (m != null) {
+				if (m != null)
+				{
 			        return m;
 			    }
 				return getTempLabelHashtable();
@@ -94,8 +99,27 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 
         descriptions = new HashMap<String,Map<String,Map<String,D>>>();
         mapEntities = new HashMap<String,RE>();
-
-        loadAll();
+	}
+	
+	public void reloadFromDb()
+	{
+		loadAll();
+	}
+	public void reloadFromDb(File fTmpCache)
+	{
+		loadAll();
+		
+		ObjectIO.save(new File(fTmpCache,"thEntities.ser"),entities);
+		ObjectIO.save(new File(fTmpCache,"thLabels.ser"),labels);
+		ObjectIO.save(new File(fTmpCache,"thDescriptions.ser"),descriptions);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void reloadFromFile(File fTmpCache)
+	{
+		entities.putAll((Map<String,Map<String,L>>)ObjectIO.load(new File(fTmpCache,"thEntities.ser")));
+		labels.putAll((Map<String,Map<String,Map<String,L>>>)ObjectIO.load(new File(fTmpCache,"thLabels.ser")));
+		descriptions.putAll((Map<String,Map<String,Map<String,D>>>)ObjectIO.load(new File(fTmpCache,"thDescriptions.ser")));
 	}
 
 	private void loadAll()
@@ -134,34 +158,37 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 
 			entities.put(c.getSimpleName(), re.getName());
 
-
-			labels.put(c.getSimpleName(),getTempLabelHashtable() );
+			labels.put(c.getSimpleName(),getTempLabelHashtable());
 			descriptions.put(c.getSimpleName(), new Hashtable<String,Map<String,D>>());
 
 			//Prepare a list of attributes from "Attributes" or "Labels" Enum
 			List<Class> classes = new ArrayList<>();
 			List<Field> fields = new ArrayList<>();
-			try {
+			try
+			{
 				classes.add(c);
 				Class[] interfaces = c.getInterfaces();
-				for (Class i : interfaces) {
+				for (Class i : interfaces)
+				{
 					classes.add(i);
 				}
-				for (Class cls : classes) {
-					for (Class enumClass : cls.getDeclaredClasses()) {
-						if (enumClass.getName().endsWith("$Attributes") || enumClass.getName().endsWith("$Labels")) {
+				for (Class cls : classes)
+				{
+					for (Class enumClass : cls.getDeclaredClasses())
+					{
+						if (enumClass.getName().endsWith("$Attributes") || enumClass.getName().endsWith("$Labels"))
+						{
 							Field[] allFields = enumClass.getFields();
-							for (Field f : allFields) {
+							for (Field f : allFields)
+							{
 								fields.add(f);
-								//System.out.println(f.getName());
 							}
 						}
 					}
 
 				}
-			} catch (SecurityException e) {
-				logger.warn("SecurityException: "+e.getMessage());
 			}
+			catch (SecurityException e) {logger.warn("SecurityException: "+e.getMessage());}
 
 			//Write log waring when enum attributes are not saved revision attributes in database
 			for (Field f : fields)

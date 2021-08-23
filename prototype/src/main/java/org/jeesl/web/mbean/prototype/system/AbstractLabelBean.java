@@ -1,5 +1,6 @@
 package org.jeesl.web.mbean.prototype.system;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -57,7 +58,31 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 
 	protected void postConstruct(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision)
 	{
-		th = new TranslationHandler<L,D,RE,RA,RML>(fRevision,fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
+		th = new TranslationHandler<>(fRevision,fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
+		th.reloadFromDb();
+		
+		if(fbRevision!=null)
+		{
+			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);
+		}
+	}
+	
+	protected void postConstructDb(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, File fTmpCache)
+	{
+		th = new TranslationHandler<>(fRevision, fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
+		th.reloadFromDb(fTmpCache);
+				
+		if(fbRevision!=null)
+		{
+			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);
+		}
+	}
+	
+	protected void postConstructFile(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, File fTmpCache)
+	{
+		th = new TranslationHandler<>(fRevision, fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
+		th.reloadFromFile(fTmpCache);
+		
 		if(fbRevision!=null)
 		{
 			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);

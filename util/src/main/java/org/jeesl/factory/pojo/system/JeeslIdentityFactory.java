@@ -71,7 +71,6 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
 	public I build(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, USER user)
 	{		
 		I identity = null;
-		
 		try
 		{
 			identity = cIdentity.newInstance();

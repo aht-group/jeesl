@@ -81,6 +81,9 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	private final Comparator<R> cpRole;
 	
 	protected JeeslLogger jogger;
+	
+	protected File dirCaching; protected void activateCaching(File dirCaching) {this.dirCaching=dirCaching;}
+	private boolean cachingFilesSaved;
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 
 	public AbstractAppSecurityBean(final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
@@ -106,12 +109,12 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		mapActionsByUsecase = new HashMap<>();
 		
 		debugOnInfo = false;
+		cachingFilesSaved = false;
 		
 		cpRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
 	}
 	
-	public void postConstructDb(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity) {this.postConstructDb(fSecurity,null);}
-	public void postConstructDb(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity, File fApp)
+	public void postConstructDb(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
 	{
 		this.fSecurity=fSecurity;
 		views.addAll(fSecurity.all(fbSecurity.getClassView()));
@@ -119,6 +122,9 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		
 		roles.addAll(fSecurity.all(fbSecurity.getClassRole()));
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassRole().getSimpleName(),"Loaded", roles.size());}
+		
+		menus.addAll(fSecurity.all(fbSecurity.getClassMenu()));
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassMenu().getSimpleName(),"Loaded", menus.size());}
 		
 		List<A> actions = fSecurity.all(fbSecurity.getClassAction());
 		Map<V,List<A>> mapAction = fbSecurity.ejbAction().toMapView(actions);
@@ -134,49 +140,54 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		}
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),"Updated", views.size());}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassView(), views));}
-		
-		if(fApp!=null)
-		{
-			ObjectIO.save(new File(fApp,"views.ser"),views);
-			ObjectIO.save(new File(fApp,"roles.ser"),roles);
-			ObjectIO.save(new File(fApp,"menus.ser"),menus);
-			
-			ObjectIO.save(new File(fApp,"mapUrlPattern.ser"),mapUrlPattern);
-			ObjectIO.save(new File(fApp,"mapUrlMapping.ser"),mapUrlMapping);
-			ObjectIO.save(new File(fApp,"mapCodeView.ser"),mapCodeView);
-			
-			ObjectIO.save(new File(fApp,"mapRoles.ser"),mapRoles);
-			ObjectIO.save(new File(fApp,"mapAreas.ser"),mapAreas);
-			ObjectIO.save(new File(fApp,"mapViewsByRole.ser"),mapViewsByRole);
-			ObjectIO.save(new File(fApp,"mapViewsByUsecase.ser"),mapViewsByUsecase);
-			
-			ObjectIO.save(new File(fApp,"mapActionsByView.ser"),mapActionsByView);
-			ObjectIO.save(new File(fApp,"mapActionsByRole.ser"),mapActionsByRole);
-			ObjectIO.save(new File(fApp,"mapActionsByUsecase.ser"),mapActionsByUsecase);
-		}
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void postConstructFile(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity, File fApp)
+	public void postConstructFile(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
 	{
 		this.fSecurity=fSecurity;
 		
-		views.addAll((List<V>)ObjectIO.load(new File(fApp,"views.ser")));
-		roles.addAll((List<R>)ObjectIO.load(new File(fApp,"roles.ser")));
-		menus.addAll((List<M>)ObjectIO.load(new File(fApp,"menus.ser")));
+		views.addAll((List<V>)ObjectIO.load(new File(dirCaching,"views.ser")));
+		roles.addAll((List<R>)ObjectIO.load(new File(dirCaching,"roles.ser")));
+		menus.addAll((List<M>)ObjectIO.load(new File(dirCaching,"menus.ser")));
 		
-		mapUrlPattern.putAll((Map<String,V>)ObjectIO.load(new File(fApp,"mapUrlPattern.ser")));
-		mapUrlMapping.putAll((Map<String,V>)ObjectIO.load(new File(fApp,"mapUrlMapping.ser")));
-		mapCodeView.putAll((Map<String,V>)ObjectIO.load(new File(fApp,"mapCodeView.ser")));
+		mapUrlPattern.putAll((Map<String,V>)ObjectIO.load(new File(dirCaching,"mapUrlPattern.ser")));
+		mapUrlMapping.putAll((Map<String,V>)ObjectIO.load(new File(dirCaching,"mapUrlMapping.ser")));
+		mapCodeView.putAll((Map<String,V>)ObjectIO.load(new File(dirCaching,"mapCodeView.ser")));
 		
-		mapRoles.putAll((Map<V,List<R>>)ObjectIO.load(new File(fApp,"mapRoles.ser")));
-		mapAreas.putAll((Map<V,List<AR>>)ObjectIO.load(new File(fApp,"mapAreas.ser")));
-		mapViewsByRole.putAll((Map<R,List<V>>)ObjectIO.load(new File(fApp,"mapViewsByRole.ser")));
-		mapViewsByUsecase.putAll((Map<U,List<V>>)ObjectIO.load(new File(fApp,"mapViewsByUsecase.ser")));
+		mapRoles.putAll((Map<V,List<R>>)ObjectIO.load(new File(dirCaching,"mapRoles.ser")));
+		mapAreas.putAll((Map<V,List<AR>>)ObjectIO.load(new File(dirCaching,"mapAreas.ser")));
+		mapViewsByRole.putAll((Map<R,List<V>>)ObjectIO.load(new File(dirCaching,"mapViewsByRole.ser")));
+		mapViewsByUsecase.putAll((Map<U,List<V>>)ObjectIO.load(new File(dirCaching,"mapViewsByUsecase.ser")));
 
-		mapActionsByView.putAll((Map<V,List<A>>)ObjectIO.load(new File(fApp,"mapActionsByView.ser")));
-		mapActionsByRole.putAll((Map<R,List<A>>)ObjectIO.load(new File(fApp,"mapActionsByRole.ser")));
-		mapActionsByUsecase.putAll((Map<U,List<A>>)ObjectIO.load(new File(fApp,"mapActionsByUsecase.ser")));
+		mapActionsByView.putAll((Map<V,List<A>>)ObjectIO.load(new File(dirCaching,"mapActionsByView.ser")));
+		mapActionsByRole.putAll((Map<R,List<A>>)ObjectIO.load(new File(dirCaching,"mapActionsByRole.ser")));
+		mapActionsByUsecase.putAll((Map<U,List<A>>)ObjectIO.load(new File(dirCaching,"mapActionsByUsecase.ser")));
+	}
+	
+	public void saveCachingFilesOnce()
+	{
+		if(dirCaching!=null && !cachingFilesSaved)
+		{
+			ObjectIO.save(new File(dirCaching,"views.ser"),views);
+			ObjectIO.save(new File(dirCaching,"roles.ser"),roles);
+			ObjectIO.save(new File(dirCaching,"menus.ser"),menus);
+			
+			ObjectIO.save(new File(dirCaching,"mapUrlPattern.ser"),mapUrlPattern);
+			ObjectIO.save(new File(dirCaching,"mapUrlMapping.ser"),mapUrlMapping);
+			ObjectIO.save(new File(dirCaching,"mapCodeView.ser"),mapCodeView);
+			
+			ObjectIO.save(new File(dirCaching,"mapRoles.ser"),mapRoles);
+			ObjectIO.save(new File(dirCaching,"mapAreas.ser"),mapAreas);
+			ObjectIO.save(new File(dirCaching,"mapViewsByRole.ser"),mapViewsByRole);
+			ObjectIO.save(new File(dirCaching,"mapViewsByUsecase.ser"),mapViewsByUsecase);
+			
+			ObjectIO.save(new File(dirCaching,"mapActionsByView.ser"),mapActionsByView);
+			ObjectIO.save(new File(dirCaching,"mapActionsByRole.ser"),mapActionsByRole);
+			ObjectIO.save(new File(dirCaching,"mapActionsByUsecase.ser"),mapActionsByUsecase);
+			
+			cachingFilesSaved = true;
+		}
 	}
 	
 	public void update(V view)
