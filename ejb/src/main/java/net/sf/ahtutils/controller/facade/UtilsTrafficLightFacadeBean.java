@@ -16,6 +16,8 @@ public class UtilsTrafficLightFacadeBean <L extends JeeslLang,D extends JeeslDes
 											SCOPE extends JeeslStatus<L,D,SCOPE>>
 	extends JeeslFacadeBean implements JeeslTrafficLightFacade<L,D,LIGHT,SCOPE>
 {	
+	private static final long serialVersionUID = 1L;
+	
 	private final Class<LIGHT> cLight;
 	
 	public UtilsTrafficLightFacadeBean(EntityManager em, final Class<LIGHT> cLight)

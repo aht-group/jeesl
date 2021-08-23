@@ -1,4 +1,4 @@
-package org.jeesl.factory.ejb.system.symbol;
+package org.jeesl.factory.ejb.io.graphic;
 
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;

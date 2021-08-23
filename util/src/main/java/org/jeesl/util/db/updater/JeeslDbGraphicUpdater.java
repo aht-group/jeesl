@@ -7,7 +7,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
-import org.jeesl.factory.ejb.system.symbol.EjbGraphicFactory;
+import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.status.Status;
 import net.sf.exlp.util.io.StringUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslDbGraphicUpdater <G extends JeeslGraphic<?,?,GT,?,?>, GT extends JeeslGraphicType<?,?,GT,G>>
 {

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.util.JeeslLazyListHandler;
 import org.jeesl.model.json.system.translation.JsonTranslation;

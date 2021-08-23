@@ -3,13 +3,13 @@ package org.jeesl.util;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
-import org.apache.commons.beanutils.PropertyUtils;
 
 /**
  *
  * This utility can be used when a setter should be called without knowing a priori the exact type cast to be made
  */
-public class SetterHelper {
+public class SetterHelper
+{
 	
     /**
      * Uses reflection to set a property. The parameter will be casted as needed.

@@ -22,7 +22,7 @@
 								selection="#{cc.attrs.bean.dashboard}" selectionMode="single" rowKey="#{y.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslIoDashboards}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addDashboard()}" update=":#{cc.id}:sIoDashboard"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addDashboard()}" update=":#{cc.id}:sIoDashboard"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sIoDashboards :#{cc.id}:sIoDashboard" listener="#{cc.attrs.bean.selectDashboard}"/>
@@ -66,7 +66,7 @@
 								selection="#{cc.attrs.bean.dashComponentPosition}" selectionMode="single" rowKey="#{comp.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslIoDashboardsComponent}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addDashboardComponent()}" update=":#{cc.id}:fIoDashboardComponent"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addDashboardComponent()}" update=":#{cc.id}:fIoDashboardComponent"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:fIoDashboardComponents :#{cc.id}:fIoDashboardComponent" listener="#{cc.attrs.bean.selectDashboardComponent}"/>

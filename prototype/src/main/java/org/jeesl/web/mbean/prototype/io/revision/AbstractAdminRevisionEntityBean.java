@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -437,14 +437,15 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 			logger.warn("Pull Attributes From Class Exception: "+e.getMessage());
 		}
 	}
-	private List<Class> getClasssHierarchy(List<Class> classes,Class<?> c) {
+	private List<Class> getClasssHierarchy(List<Class> classes,Class<?> c)
+	{
 		classes.add(c);
-		try {
+		try
+		{
 			return getClasssHierarchy(classes,c.getSuperclass());
 
-		} catch (NullPointerException e) {
-			return classes;
 		}
+		catch (NullPointerException e) {return classes;}
 	}
 
 	private void addPulledField(Field f) throws InstantiationException, IllegalAccessException, JeeslLockingException, JeeslConstraintViolationException {
@@ -460,15 +461,18 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		attribute = fRevision.save(fbRevision.getClassEntity(),entity,attribute);
 	}
 
-	private RAT getAttributeTypeFromeCode(String code) {
-		for (Iterator iterator = types.iterator(); iterator.hasNext();) {
+	private RAT getAttributeTypeFromeCode(String code)
+	{
+		for (Iterator iterator = types.iterator(); iterator.hasNext();)
+		{
 			RAT type = (RAT) iterator.next();
 			if(type.getCode().equals(code)) {return type;}
 		}
 		return types.get(0);
 	}
 
-	private boolean isFieldAvilable(Field f,Class<?> c){
+	private boolean isFieldAvilable(Field f,Class<?> c)
+	{
 		int mod = f.getModifiers();
 		//static, final and abstract field are marked as available so that its not saved for automatic download
 		if(Modifier.isFinal(mod) || Modifier.isStatic(mod) || Modifier.isAbstract(mod)) {return true;}

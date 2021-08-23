@@ -1,11 +1,6 @@
 package org.jeesl.web.mbean.prototype.system.locale;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -23,8 +18,6 @@ import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
-import org.jeesl.factory.ejb.system.symbol.EjbGraphicFactory;
-import org.jeesl.factory.ejb.system.symbol.EjbGraphicFigureFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -56,7 +49,6 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.db.updater.JeeslDbMcsStatusUpdater;
-import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;

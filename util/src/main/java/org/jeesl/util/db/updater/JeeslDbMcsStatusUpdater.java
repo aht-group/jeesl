@@ -8,7 +8,6 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
-import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

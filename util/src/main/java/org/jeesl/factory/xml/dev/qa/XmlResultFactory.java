@@ -55,13 +55,13 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(XmlResultFactory.class);
 		
 	private Result q;
-	private XmlStatusFactory<QARS,L2,D2> xfResultStatus;
+	private XmlStatusFactory<L2,D2,QARS> xfResultStatus;
 	private XmlStaffFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QA> xfStaff;
 	
 	public XmlResultFactory(Result q)
 	{
 		this.q=q;
-		if(q.isSetStatus()) {xfResultStatus = new XmlStatusFactory<QARS,L2,D2>(null,q.getStatus());}
+		if(q.isSetStatus()) {xfResultStatus = new XmlStatusFactory<>(null,q.getStatus());}
 		if(q.isSetStaff()) {xfStaff = new XmlStaffFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QA>(q.getStaff());}
 	}
 	

@@ -2,7 +2,6 @@ package org.jeesl.factory.xml.system.io.report;
 
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.factory.xml.system.symbol.XmlColorFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -20,7 +19,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.report.Layout;
 import net.sf.ahtutils.xml.report.Style;
 
 public class XmlStyleFactory <L extends JeeslLang,D extends JeeslDescription,

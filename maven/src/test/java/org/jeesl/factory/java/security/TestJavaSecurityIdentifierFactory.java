@@ -28,7 +28,7 @@ public class TestJavaSecurityIdentifierFactory extends AbstractJavaSecurityFacto
 {
 	final static Logger logger = LoggerFactory.getLogger(TestJavaSecurityIdentifierFactory.class);
 	
-	private JavaSecurityViewIdentifierFactory idFactory;
+	private JavaSecurityViewIdentifierFactory fViewIdentifier;
 	
 	private File fPackage;
 	private String classPrefix;
@@ -39,7 +39,7 @@ public class TestJavaSecurityIdentifierFactory extends AbstractJavaSecurityFacto
 		classPrefix = "Utils";
 		fPackage = new File(fTarget,"idFactory");
 		fPackage.mkdir();
-		idFactory = new JavaSecurityViewIdentifierFactory(fTmpDir,fPackage,"net.sf.ahtutils",classPrefix);
+		fViewIdentifier = new JavaSecurityViewIdentifierFactory(fTmpDir,fPackage,"net.sf.ahtutils",classPrefix);
 	}
 	
 	@After
@@ -47,7 +47,7 @@ public class TestJavaSecurityIdentifierFactory extends AbstractJavaSecurityFacto
 	{	
 		if(fPackage.isDirectory()){FileUtils.deleteDirectory(fPackage);}
 		else if(fPackage.isFile()){fPackage.delete();}
-		idFactory = null;
+		fViewIdentifier = null;
 	}
 	
 	@Ignore
@@ -73,14 +73,14 @@ public class TestJavaSecurityIdentifierFactory extends AbstractJavaSecurityFacto
 	{
 		File actual = new File(fPackage,AbstractJavaSecurityFileFactory.buildPackage(c1.getCode()));
 		actual.createNewFile();
-		idFactory.create(c1);
+		fViewIdentifier.create(c1);
 	}
 	
 	@Ignore
 	@Test
 	public void categoryDir() throws UtilsConfigurationException, IOException, TemplateException
 	{
-		idFactory.create(c1);
+		fViewIdentifier.create(c1);
 		File actual = new File(fPackage,AbstractJavaSecurityFileFactory.buildPackage(c1.getCode()));
 		Assert.assertTrue(actual.exists());
 		Assert.assertTrue(actual.isDirectory());
@@ -90,11 +90,11 @@ public class TestJavaSecurityIdentifierFactory extends AbstractJavaSecurityFacto
 	@Test
 	public void createIdentifier() throws UtilsConfigurationException, IOException, TemplateException
 	{
-		idFactory.create(c1);
+		fViewIdentifier.create(c1);
 		File fSub = new File(fPackage,AbstractJavaSecurityFileFactory.buildPackage(c1.getCode()));
 		for(View v : c1.getViews().getView())
 		{
-			File actual = new File(fSub,idFactory.createFileName(v.getCode()));
+			File actual = new File(fSub,fViewIdentifier.createFileName(v.getCode()));
 			Assert.assertTrue("File should exist: "+actual.getAbsolutePath(),actual.exists());
 			Assert.assertTrue(actual.isFile());
 			
@@ -114,7 +114,7 @@ public class TestJavaSecurityIdentifierFactory extends AbstractJavaSecurityFacto
 		
 		for(String[] test : tests)
 		{
-			Assert.assertEquals(test[1], idFactory.createClassName(test[0]));
+			Assert.assertEquals(test[1], fViewIdentifier.createClassName(test[0]));
 		}
 	}
 	

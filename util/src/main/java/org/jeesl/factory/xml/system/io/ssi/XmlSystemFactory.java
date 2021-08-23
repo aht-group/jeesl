@@ -4,7 +4,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XmlSystemFactory<SYSTEM extends JeeslIoSsiSystem>
+public class XmlSystemFactory<SYSTEM extends JeeslIoSsiSystem<?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSystemFactory.class);
 

@@ -25,8 +25,8 @@ import net.sf.ahtutils.xml.report.XlsSheet;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.reflect.MethodUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.MethodUtils;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;

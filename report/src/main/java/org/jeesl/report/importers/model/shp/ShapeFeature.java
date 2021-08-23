@@ -1,6 +1,5 @@
 package org.jeesl.report.importers.model.shp;
 
-import java.util.List;
 import java.util.Map;
 
 /**

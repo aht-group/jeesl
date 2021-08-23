@@ -34,7 +34,7 @@
 							selection="#{cc.attrs.bean.view}" selectionMode="single" rowKey="#{v.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.aupSecurityViews}">
-									<j:icon type="jeeslAdd" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttAdd}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttAdd}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectView}" update=":#{cc.id}:sViews :#{cc.id}:sView"/>
@@ -125,7 +125,7 @@
 									selection="#{cc.attrs.bean.action}" selectionMode="single" rowKey="#{a.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslSecurityActions}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderActions()}" update="@form"/>
@@ -164,7 +164,7 @@
 									selection="#{cc.attrs.bean.area}" selectionMode="single" rowKey="#{a.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslSecurityAreas}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAreas()}" update="@form"/>

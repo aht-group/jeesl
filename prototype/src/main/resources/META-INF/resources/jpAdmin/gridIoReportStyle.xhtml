@@ -26,7 +26,7 @@
 							selection="#{cc.attrs.bean.style}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslIoReportStyles}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addStyle()}" update=":#{cc.id}:sStyle" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addStyle()}" update=":#{cc.id}:sStyle" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderStyles()}" update="@form"/>

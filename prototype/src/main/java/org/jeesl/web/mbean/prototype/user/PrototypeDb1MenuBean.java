@@ -18,9 +18,9 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 import net.sf.ahtutils.xml.access.Access;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class PrototypeDbMenuBean implements Serializable
+public class PrototypeDb1MenuBean implements Serializable
 {
-	final static Logger logger = LoggerFactory.getLogger(PrototypeDbMenuBean.class);
+	final static Logger logger = LoggerFactory.getLogger(PrototypeDb1MenuBean.class);
 	private static final long serialVersionUID = 1L;
 	
 	private boolean debugOnInfo; protected void setLogInfo(boolean log) {debugOnInfo = log;}
@@ -37,7 +37,7 @@ public class PrototypeDbMenuBean implements Serializable
 	
 	protected String localeCode;
 
-	public PrototypeDbMenuBean()
+	public PrototypeDb1MenuBean()
 	{
 		userLoggedIn = false;
 		localeCode = "en";

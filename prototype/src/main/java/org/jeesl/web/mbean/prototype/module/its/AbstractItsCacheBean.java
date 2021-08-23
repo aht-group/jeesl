@@ -1,20 +1,12 @@
 package org.jeesl.web.mbean.prototype.module.its;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.bean.module.its.JeeslItsCacheBean;
-import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.api.facade.module.JeeslItsFacade;
-import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.builder.module.ItsFactoryBuilder;
-import org.jeesl.factory.ejb.util.EjbCodeFactory;
-import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
-import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.module.its.config.JeeslItsConfig;
 import org.jeesl.interfaces.model.module.its.config.JeeslItsConfigOption;
 import org.jeesl.interfaces.model.module.its.issue.JeeslItsIssue;
@@ -25,11 +17,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public abstract class AbstractItsCacheBean <L extends JeeslLang, D extends JeeslDescription,
 										R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,

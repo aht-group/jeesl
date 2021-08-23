@@ -49,7 +49,7 @@
 							selection="#{cc.attrs.bean.timeGroup}" selectionMode="single" rowKey="#{c.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{appLabelBean.labels['LfTimeGroup']['listOf'][localeCode].lang}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTimeGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" />
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTimeGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" />
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTimeGroups()}" update="@form"/>
@@ -141,7 +141,7 @@
 							selection="#{cc.attrs.bean.element}" selectionMode="single" rowKey="#{o.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{appLabelBean.labels['LfTimeElement']['listOf'][localeCode].lang}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addElement()}" update=":#{cc.id}:fElement" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addElement()}" update=":#{cc.id}:fElement" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectElement()}" update=":#{cc.id}:fElement"/>

@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.JeeslMenuBean;
+import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
@@ -55,6 +57,7 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity;
 	private JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
+	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
 
 	private final XmlMenuItemFactory<L,D,C,R,V,U,A,AT,CTX,M,USER> xfMenuItem;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
@@ -90,9 +93,11 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		setupRequired = false;
 	}
 
-	public void postConstructMenu(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity, I identity, String localeCode, CTX context)
+	public void postConstructMenu(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity, I identity, String localeCode, CTX context) {this.postConstructMenu(fSecurity,null,identity,localeCode,context);}
+	public void postConstructMenu(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity, JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, I identity, String localeCode, CTX context)
 	{
 		this.fSecurity=fSecurity;
+		this.bSecurity=bSecurity;
 		this.context=context;
 		prepare(localeCode,identity);
 	}
@@ -134,12 +139,14 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			List<M> list = new ArrayList<>();
 			if(context==null)
 			{
-				list.addAll(fSecurity.all(fbSecurity.getClassMenu()));
+				if(bSecurity==null) {list.addAll(fSecurity.all(fbSecurity.getClassMenu()));}
+				else {list.addAll(bSecurity.getMenus());}
 				if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size());}
 			}
 			else
 			{
-				list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context,context));
+				if(bSecurity==null) {list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(),JeeslSecurityMenu.Attributes.context,context));}
+				else {list.addAll(bSecurity.getMenus().stream().filter(m -> m.getContext().equals(context)).collect(Collectors.toList()));}
 				if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size()+" in context "+context.getCode());}
 			}
 			Collections.sort(list,new PositionComparator<M>());

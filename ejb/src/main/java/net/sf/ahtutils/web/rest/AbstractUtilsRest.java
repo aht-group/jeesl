@@ -57,7 +57,7 @@ public class AbstractUtilsRest <L extends JeeslLang, D extends JeeslDescription>
 	
 	protected <S extends JeeslStatus<L,D,S>> Aht exportStatus(Class<S> c)
 	{
-		XmlStatusFactory<S,L,D> f = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		XmlStatusFactory<L,D,S> f = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		
 		Aht xml = new Aht();
 		for(S s : fUtils.all(c))
@@ -71,7 +71,7 @@ public class AbstractUtilsRest <L extends JeeslLang, D extends JeeslDescription>
 	
 	protected <S extends JeeslStatus<L,D,S>> Container exportContainer(Class<S> c)
 	{
-		XmlStatusFactory<S,L,D> f = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
+		XmlStatusFactory<L,D,S> f = new XmlStatusFactory<>(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		
 		Container xml = new Container();
 		for(S s : fUtils.all(c))

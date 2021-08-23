@@ -22,7 +22,7 @@
 							 selection="#{cc.attrs.bean.mapping}" selectionMode="single" rowKey="#{m.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoSsiMappings}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:sMapping" rendered="false"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:sMapping" rendered="false"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectMapping()}" update=":#{cc.id}:rowDetail"/>

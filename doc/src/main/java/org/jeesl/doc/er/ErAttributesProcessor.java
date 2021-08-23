@@ -30,7 +30,7 @@ public class ErAttributesProcessor
 	
 	private final String[] langs = {"en"};
 	
-	public ErAttributesProcessor(OfxMultiLangLatexWriter ofxWriter,Configuration config, File fBase)
+	public ErAttributesProcessor(OfxMultiLangLatexWriter ofxWriter, Configuration config, File fBase)
 	{
 		this.fBase=fBase;
 		this.ofxWriter=ofxWriter;

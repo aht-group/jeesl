@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class UtilsIssueFacadeBean extends JeeslFacadeBean implements JeeslIssueFacade
 {
+	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(UtilsIssueFacadeBean.class);
 	
 	public UtilsIssueFacadeBean(EntityManager em)

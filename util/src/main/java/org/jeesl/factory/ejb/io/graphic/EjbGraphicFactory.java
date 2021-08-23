@@ -1,4 +1,4 @@
-package org.jeesl.factory.ejb.system.symbol;
+package org.jeesl.factory.ejb.io.graphic;
 
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
@@ -6,6 +6,8 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.openfuxml.content.media.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,4 +55,20 @@ public class EjbGraphicFactory<L extends JeeslLang, D extends JeeslDescription,
         return ejb;
     }
 
+	public static <T extends EjbWithId> String toCacheKey(T t)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(t.getClass().getName());
+		sb.append(":");
+		sb.append(t.getId());
+		return sb.toString();
+	}
+	public static String toCacheKey(Image image)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(image.getVersion());
+		sb.append(":");
+		sb.append(image.getId());
+		return sb.toString();
+	}
 }

@@ -26,7 +26,7 @@
 							selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslJobTemplates}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTemplate" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTemplate" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>

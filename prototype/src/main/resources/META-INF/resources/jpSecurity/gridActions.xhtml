@@ -33,7 +33,7 @@
 						selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{v.id}">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.aupSecurityActionTemplates}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sActions :#{cc.id}:sAction" tooltip="#{msg.ttAdd}"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sActions :#{cc.id}:sAction" tooltip="#{msg.ttAdd}"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:sAction" listener="#{cc.attrs.bean.selectTemplate()}"/>

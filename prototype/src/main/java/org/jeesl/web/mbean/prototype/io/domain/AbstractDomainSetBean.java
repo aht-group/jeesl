@@ -51,7 +51,7 @@ public abstract class AbstractDomainSetBean <L extends JeeslLang, D extends Jees
 		super(fbDomain);
 	}
 	
-	protected void postConstructDomainQuery(String userLocale, JeeslTranslationBean bTranslation, JeeslFacesMessageBean bMessage,
+	protected void postConstructDomainQuery(String userLocale, JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 			JeeslIoDomainFacade<L,D,DOMAIN,QUERY,PATH,ENTITY,ATTRIBUTE,SET,ITEM> fDomain)
 	{
 		super.postConstructDomain(bTranslation,bMessage,fDomain);

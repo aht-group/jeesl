@@ -111,7 +111,7 @@
 								paginator="true" rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslAssetEvents}">
-							<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addEvent()}" update=":#{cc.id}:fEvents :#{cc.id}:fEvent :#{cc.id}:pgFr"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addEvent()}" update=":#{cc.id}:fEvents :#{cc.id}:fEvent :#{cc.id}:pgFr"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectEvent()}" update=":#{cc.id}:sAsset"/>

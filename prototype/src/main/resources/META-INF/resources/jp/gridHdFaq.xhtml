@@ -74,7 +74,7 @@
 									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAnswer()}" update=":#{cc.id}:fAnswers :#{cc.id}:fAnswer" library="jeeslGfx"/>
 							    	<p:separator/>
 									<ui:repeat var="d" value="#{cc.attrs.bean.sbhDocuments.getList()}">
-								     	<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.selectDocument(d)}" update=":#{cc.id}:sFaq" tooltip="#{d.id}" styleClass="pf-action-icon"/>
+								     	<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.selectDocument(d)}" update=":#{cc.id}:sFaq" tooltip="#{d.id}" styleClass="pf-action-icon"/>
 							    	</ui:repeat>
 								</j:dtHeader>
 							</f:facet>

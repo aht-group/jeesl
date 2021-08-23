@@ -21,7 +21,7 @@
 								selection="#{cc.attrs.bean.process}" selectionMode="single" rowKey="#{p.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslApprovalProcesses}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addProcess()}" update=":#{cc.id}:rProcess"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addProcess()}" update=":#{cc.id}:rProcess"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderProcesses()}" update="@form :fStatusBar"/>
@@ -41,7 +41,7 @@
 								selection="#{cc.attrs.bean.document}" selectionMode="single" rowKey="#{d.id}">
 							<f:facet name="header">
 								<j:dtHeader entity="WorkflowDocument" code="listOf">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addDocument()}" update=":#{cc.id}:rProcess"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addDocument()}" update=":#{cc.id}:rProcess"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderDocuments()}" update="@form "/>
@@ -108,7 +108,7 @@
 								selection="#{cc.attrs.bean.stage}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslApprovalStages}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addStage()}" update=":#{cc.id}:rStage"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addStage()}" update=":#{cc.id}:rStage"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderStages()}" update="@form"/>
@@ -187,7 +187,7 @@
 								selection="#{cc.attrs.bean.permission}" selectionMode="single" rowKey="#{p.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslApprovalPermissions}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addPermission()}" update=":#{cc.id}:sStage"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addPermission()}" update=":#{cc.id}:sStage"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderPermissions()}" update="@form"/>
@@ -241,7 +241,7 @@
 								selection="#{cc.attrs.bean.notification}" selectionMode="single" rowKey="#{n.id}">
 							<f:facet name="header">
 								<j:dtHeader entity="WorkflowStageNotification" code="listOf">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addNotification()}" update=":#{cc.id}:sStage"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addNotification()}" update=":#{cc.id}:sStage"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderNotification()}" update="@form"/>
@@ -320,7 +320,7 @@
 								selection="#{cc.attrs.bean.transition}" selectionMode="single" rowKey="#{t.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslApprovalTransitions}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTransition()}" update=":#{cc.id}:sStage"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTransition()}" update=":#{cc.id}:sStage"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTransitions()}" update="@form"/>
@@ -418,7 +418,7 @@
 								selection="#{cc.attrs.bean.action}" selectionMode="single" rowKey="#{a.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslApprovalActions}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addAction()}" update=":#{cc.id}:sStage"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAction()}" update=":#{cc.id}:sStage"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderActions()}" update="@form"/>
@@ -497,7 +497,7 @@
 							<f:facet name="header">
 								<j:dtHeader entity="WorkflowTransition" code="documents">
 									<j:icon type="jeeslRemove" listener="#{cc.attrs.bean.opDocument.removeEntity()}" update=":#{cc.id}:fRequired" rendered="#{not empty cc.attrs.bean.opDocument.tb}"/>
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.prepareAddRequired()}" update=":#{cc.id}:opRequired" oncomplete="PF('wvRequired').show();"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.prepareAddRequired()}" update=":#{cc.id}:opRequired" oncomplete="PF('wvRequired').show();"/>
 								</j:dtHeader>
 							</f:facet>
 		                    <p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectRequired()}" update=":#{cc.id}:fRequired"/>
@@ -517,7 +517,7 @@
 								selection="#{cc.attrs.bean.communication}" selectionMode="single" rowKey="#{c.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslApprovalCommunications}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addCommunication()}" update=":#{cc.id}:sStage"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addCommunication()}" update=":#{cc.id}:sStage"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderCommunication()}" update="@form"/>

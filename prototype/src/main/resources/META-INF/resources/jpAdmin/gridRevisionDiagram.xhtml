@@ -20,7 +20,7 @@
 								rows="50" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">>
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslRevisionDiagrams}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addErDiagram()}" update=":#{cc.id}:grid"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addErDiagram()}" update=":#{cc.id}:grid"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderDiagrams()}" update="@form"/>

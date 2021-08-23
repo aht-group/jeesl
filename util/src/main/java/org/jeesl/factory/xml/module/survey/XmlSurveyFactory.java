@@ -23,7 +23,6 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.module.survey.Data;
 import org.jeesl.model.xml.module.survey.Survey;
 import org.slf4j.Logger;
@@ -59,24 +58,25 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 	private final String localeCode;
 	private final Survey q;
 	
-	private XmlStatusFactory<SS,L,D> xfStatus;
+	private XmlStatusFactory<L,D,SS> xfStatus;
 	private XmlDataFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xfData;
 	
 	public XmlSurveyFactory(String localeCode, Survey q)
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(q.isSetData()){xfData = new XmlDataFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,q.getData().get(0));}
-		if(q.isSetStatus()){xfStatus = new XmlStatusFactory<SS,L,D>(q.getStatus());}
+		if(q.isSetData()){xfData = new XmlDataFactory<>(localeCode,q.getData().get(0));}
+		if(q.isSetStatus()){xfStatus = new XmlStatusFactory<>(q.getStatus());}
 	}
 	
 	public void lazyLoad(JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
-				JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,Class<SURVEY> cSurvey,Class<SECTION> cSection,Class<DATA> cData)
+				JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,Class<SURVEY> cSurvey,Class<SECTION> cSection
+				)
 	{
 		this.fSurvey=fSurvey;
 		this.cSurvey=cSurvey;
 		
-		if(q.isSetData()){xfData.lazyLoad(fSurvey,fTemplate,cData);}
+		if(q.isSetData()){xfData.lazyLoad(fSurvey,fTemplate);}
 	}
 	
 	public Survey build(SURVEY ejb)

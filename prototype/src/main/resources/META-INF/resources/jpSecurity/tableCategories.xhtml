@@ -23,7 +23,7 @@
 			selection="#{cc.attrs.bean.category}" selectionMode="single" rowKey="#{c.id}">
 			<f:facet name="header">
 				<j:dtHeader title="#{msg.jeeslSecurityCategories}">
-					<j:icon type="jeeslAdd" rendered="#{cc.attrs.withAdd}" listener="#{cc.attrs.bean.addCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
+					<j:svg type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.withAdd}" listener="#{cc.attrs.bean.addCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
 					<aht:downloadIcon rendered="#{cc.attrs.withXls}" type="reportXls" value="#{cc.attrs.bean.xlsStream()}" tooltip="#{msg.reportXls}"/>
 				</j:dtHeader>
 			</f:facet>

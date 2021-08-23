@@ -19,7 +19,6 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidationAlgorithm;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.json.survey.Condition;
 import org.jeesl.model.json.survey.Option;
 import org.jeesl.model.json.survey.Question;

@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.client.model.ejb.user.User;

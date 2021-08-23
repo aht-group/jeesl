@@ -26,7 +26,6 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.jeesl.QuerySurvey;
 import org.jeesl.model.xml.module.survey.Template;
 import org.slf4j.Logger;
@@ -60,7 +59,7 @@ public class XmlTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 	private final String localeCode;
 	private final Template q;
 	
-	private XmlStatusFactory<TS,L,D> xfStatus;
+	private XmlStatusFactory<L,D,TS> xfStatus;
 	private XmlCategoryFactory<L,D,TC> xfCategory;
 	private XmlSectionFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION> xfSection;
 	

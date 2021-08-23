@@ -214,6 +214,12 @@
 			<version>6.0</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+   			<groupId>org.apache.commons</groupId>
+   			<artifactId>commons-lang3</artifactId>
+   			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -304,6 +310,7 @@
 										<include>control/arrow/blue/*.*</include>
 										<include>control/wizard/*.*</include>
 										<include>info/*.*</include>
+										<include>info/ejb/*.*</include>
 										<include>info/mark/*.*</include>
 										<include>system/io/cms/*.*</include>
 										<include>io/fr/type/*.*</include>

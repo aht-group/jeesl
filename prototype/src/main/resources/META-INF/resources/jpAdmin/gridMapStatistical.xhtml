@@ -21,7 +21,7 @@
 							selection="#{cc.attrs.bean.map}" selectionMode="single" rowKey="#{map.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslMapStatisticalMaps}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addMap()}" update=":#{cc.id}:grid"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addMap()}" update=":#{cc.id}:grid"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectMap()}" update=":#{cc.id}:sMap"/> 
@@ -62,7 +62,7 @@
 							selection="#{cc.attrs.bean.implementation}" selectionMode="single" rowKey="#{i.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslMapImplementations}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addImplementation()}" update=":#{cc.id}:sMap"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addImplementation()}" update=":#{cc.id}:sMap"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectImplementation()}" update=":#{cc.id}:sMap"/> 

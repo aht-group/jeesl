@@ -31,7 +31,7 @@
 							paginator="true" rows="5" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">>
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslIoTemplates}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTokens :#{cc.id}:row2"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTokens :#{cc.id}:row2"/>
 								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" rendered="#{not cc.attrs.bean.editTemplate}"/>
 								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.editTemplate}"/>
 							</j:dtHeader>
@@ -93,7 +93,7 @@
 						selection="#{cc.attrs.bean.token}" selectionMode="single" rowKey="#{token.id}">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslIoTokens}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addToken()}" update=":#{cc.id}:fTokens :#{cc.id}:fToken"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addToken()}" update=":#{cc.id}:fTokens :#{cc.id}:fToken"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTokens()}" update="@form"/>
@@ -150,7 +150,7 @@
 						selection="#{cc.attrs.bean.definition}" selectionMode="single" rowKey="#{d.id}">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.jeeslIoTemplateDefinitions}">
-								<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addDefinition()}" update=":#{cc.id}:row2"/>
+								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addDefinition()}" update=":#{cc.id}:row2"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowSelect" update=":#{cc.id}:sDefinition" listener="#{cc.attrs.bean.selectDefinition()}"/>

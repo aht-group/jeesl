@@ -25,7 +25,7 @@
 								selection="#{cc.attrs.bean.zone}" selectionMode="single" rowKey="#{z.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslTimeZones}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addZone()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addZone()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:grid" listener="#{cc.attrs.bean.selectZone()}"/>  

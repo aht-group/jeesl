@@ -23,7 +23,11 @@ public class CliSmtpMailSender
 {
 	final static Logger logger = LoggerFactory.getLogger(CliSmtpMailSender.class);
 	
-	private String smtpHost,smtpUser,smtpPassword,smtpHelo;
+	private String smtpHost,smtpUser,smtpPassword;
+	
+	@SuppressWarnings("unused")
+	private String smtpHelo;
+	
 	private String smtpFrom,smtpTo;
 	private int smtpPort;
 	

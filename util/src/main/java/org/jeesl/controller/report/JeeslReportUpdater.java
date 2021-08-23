@@ -1,17 +1,10 @@
 package org.jeesl.controller.report;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
-import org.jeesl.controller.processor.JobCodeProcessor;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -23,14 +16,8 @@ import org.jeesl.factory.ejb.io.report.EjbIoReportFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportRowFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportSheetFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportWorkbookFactory;
-import org.jeesl.factory.ejb.system.status.EjbLangFactory;
-import org.jeesl.factory.xls.system.io.report.XlsFactory;
-import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
-import org.jeesl.interfaces.controller.report.JeeslReport;
-import org.jeesl.interfaces.factory.txt.JeeslReportAggregationLevelFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
-import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
@@ -43,17 +30,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.JsonFlatFigures;
-import org.jeesl.util.comparator.ejb.system.io.report.IoReportCellComparator;
-import org.jeesl.util.comparator.ejb.system.io.report.IoReportColumnComparator;
-import org.jeesl.util.comparator.ejb.system.io.report.IoReportGroupComparator;
-import org.jeesl.util.comparator.ejb.system.io.report.IoReportRowComparator;
-import org.jeesl.util.comparator.ejb.system.io.report.IoReportSheetComparator;
-import org.metachart.model.json.pivot.PivotSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import net.sf.ahtutils.xml.report.ColumnGroup;
 import net.sf.ahtutils.xml.report.Report;
@@ -63,8 +41,6 @@ import net.sf.ahtutils.xml.report.XlsColumn;
 import net.sf.ahtutils.xml.report.XlsSheet;
 import net.sf.ahtutils.xml.report.XlsWorkbook;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.util.io.JsonUtil;
-import net.sf.exlp.util.io.StringUtil;
 
 public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,

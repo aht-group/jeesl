@@ -15,7 +15,6 @@ import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityActionFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityActionTemplateFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityCategoryFactory;
-import org.jeesl.factory.ejb.system.security.EjbSecurityRoleFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityUsecaseFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityViewFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

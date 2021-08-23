@@ -7,12 +7,14 @@
     
   <composite:interface componentType="org.jeesl.jsf.components.output.Highlight">
     <composite:attribute name="resource" required="true"/>
-    <composite:attribute name="lang" required="false" default="xml"/>
+    
   	<composite:attribute name="between" required="false"/>
     <composite:attribute name="from" required="false" default="0"/>
     <composite:attribute name="to" required="false" default="-1"/>
-  	<composite:attribute name="tab" required="false" default="2"/>
-  	<composite:attribute name="relativeTab" required="false" default="true"/>
+    
+    <composite:attribute name="lang" required="false" default="xml" shortDescription="NYI: Highlightning for a specific lanaguage, e.g. js, java, xml ..."/>
+  	<composite:attribute name="tab" required="false" default="2" shortDescription="NYI: The tabsize"/>
+  	<composite:attribute name="relativeTab" required="false" default="true" shortDescription="NYI: Need to check what this really is ..."/>
 	</composite:interface>
         
  	<composite:implementation>

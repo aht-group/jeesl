@@ -1,6 +1,5 @@
 package org.jeesl.factory.json.system.io.db.tuple.t3;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -15,8 +14,6 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
 import org.jeesl.model.json.db.tuple.t3.Json3Tuples;
-import org.jeesl.model.json.db.tuple.two.Json2Tuple;
-import org.jeesl.model.json.db.tuple.two.Json2Tuples;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

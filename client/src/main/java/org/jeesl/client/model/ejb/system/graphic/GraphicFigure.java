@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.ManyToOne;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;

@@ -45,7 +45,7 @@
 		                             selection="#{cc.attrs.bean.staff}" selectionMode="single" rowKey="#{staff.id}">
 		   					<f:facet name="header">
 	                            <j:dtHeader title="#{cc.attrs.staffTableHeader}">
-	                                <j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addStaff()}" update=":#{cc.id}:sUser"/>
+	                                <j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addStaff()}" update=":#{cc.id}:sUser"/>
 	                            </j:dtHeader>
 	                        </f:facet>
 		                    <p:ajax event="rowSelect" update=":#{cc.id}:sUser" listener="#{cc.attrs.bean.selectStaff()}"/>

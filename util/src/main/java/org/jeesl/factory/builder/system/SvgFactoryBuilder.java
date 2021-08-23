@@ -1,9 +1,9 @@
 package org.jeesl.factory.builder.system;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
+import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
+import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
-import org.jeesl.factory.ejb.system.symbol.EjbGraphicFactory;
-import org.jeesl.factory.ejb.system.symbol.EjbGraphicFigureFactory;
 import org.jeesl.factory.svg.SvgFigureFactory;
 import org.jeesl.factory.svg.SvgSymbolFactory;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;

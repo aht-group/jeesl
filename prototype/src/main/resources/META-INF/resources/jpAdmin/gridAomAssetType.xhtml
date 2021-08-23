@@ -18,7 +18,7 @@
 			<h:form id="fTree" >
 				<p:panel header="#{msg.jeeslCmsDocumentStructure}" styleClass="jeeslTree" >
 					<f:facet name="actions">
-						<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addType()}" update=":#{cc.id}:sType" tooltip="#{msg.jeeslAomTypeAdd}"/>
+						<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addType()}" update=":#{cc.id}:sType" tooltip="#{msg.jeeslAomTypeAdd}"/>
 					</f:facet>
 					<p:tree id="tree1" value="#{cc.attrs.bean.tree}" var="node" 
 							selection="#{cc.attrs.bean.node}" selectionMode="single"

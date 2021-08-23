@@ -22,7 +22,7 @@
 								selection="#{cc.attrs.bean.hydroYear}" selectionMode="single" rowKey="#{y.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslHydroYears}">
-									<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addHydroYear()}" update=":#{cc.id}:sHydroYear"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addHydroYear()}" update=":#{cc.id}:sHydroYear"/>
 								</j:dtHeader>
 							</f:facet>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sHydroYears :#{cc.id}:sHydroYear" listener="#{cc.attrs.bean.selectHydroYear}"/>

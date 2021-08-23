@@ -60,7 +60,7 @@
 					<f:facet name="header">
 						<j:dtHeader title="Documents">
 							<ui:repeat var="d" value="#{cc.attrs.bean.documents}">
-						     	<j:icon type="jeeslAdd" listener="#{cc.attrs.bean.addHelp(d)}" update=":#{cc.id}:sView" tooltip="#{d.id}"/>						
+						     	<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addHelp(d)}" update=":#{cc.id}:sView" tooltip="#{d.id}"/>						
 					    	</ui:repeat>
 							<j:icon rendered="#{not empty cc.attrs.bean.help}" type="jeeslRemove" listener="#{cc.attrs.bean.removeHelp()}" update=":#{cc.id}:sView"/>
 						</j:dtHeader>
