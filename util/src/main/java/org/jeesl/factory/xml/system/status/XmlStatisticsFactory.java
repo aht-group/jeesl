@@ -11,13 +11,12 @@ public class XmlStatisticsFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLa
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlStatisticsFactory.class);
 
-	private String localeCode;
+	@SuppressWarnings("unused") //Class unfinished
 	private Statistic q;
 
 	public XmlStatisticsFactory(Statistic q){this(null,q);}
-	public XmlStatisticsFactory(String localeCode,Statistic q)
+	public XmlStatisticsFactory(String localeCode, Statistic q)
 	{
-		this.localeCode=localeCode;
 		this.q=q;
 	}
 

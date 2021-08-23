@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Namespace;

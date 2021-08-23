@@ -117,6 +117,7 @@ public abstract class AbstractSurveyReportBean <L extends JeeslLang, D extends J
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSurveyReportBean.class);
 
+	@SuppressWarnings("unused") //Required for future improvements
 	private JeeslJobFacade<L,D,TOOLCACHETEMPLATE,?,?,?,?,?,?,?,?,?,CACHE,?,?> fJob;
 	
 	private McOptionDataSetFactory<OPTION> mfOption;	

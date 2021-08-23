@@ -18,8 +18,10 @@ public class XmlFigureFactory <L extends JeeslLang,D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlFigureFactory.class);
 		
+	@SuppressWarnings("unused")
 	private final Figure q;
 	
+	@SuppressWarnings("unused")
 	private XmlStyleFactory<FS,L,D> xfStyle;
 	
 //	public XmlFigureFactory(Query query){this(query.getLang(),query.getGraphic());}

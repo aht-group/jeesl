@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.io.IOUtils;
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jboss.as.controller.client.OperationBuilder;
 import org.jboss.as.controller.client.helpers.ClientConstants;

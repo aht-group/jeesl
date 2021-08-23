@@ -2,7 +2,8 @@ package org.jeesl.jsf.functions;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
-public final class StringEscape {
+public final class StringEscape
+{
 	 public static String escapeJavaScript(String value)
 	 {
 		return StringEscapeUtils.escapeJavaScript(value);

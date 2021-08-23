@@ -2,7 +2,7 @@ package org.jeesl.model.json.module.survey;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 import com.fasterxml.jackson.annotation.JsonProperty;

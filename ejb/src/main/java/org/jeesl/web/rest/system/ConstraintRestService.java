@@ -44,29 +44,19 @@ public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescript
 	private final ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint;
 	private JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint;
 	
-	private final Class<SCOPE> cScope;
-	private final Class<CONCAT> cCategory;
-	private final Class<CONSTRAINT> cConstraint;
-	private final Class<TYPE> cType;
-	
 	private final EjbConstraintScopeFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> efScope;
 	private final EjbConstraintFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> efConstraint;
 	
 	private ConstraintRestService(final String[] localeCodes, JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint,
-			final ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint,
-			Class<SCOPE> cScope, Class<CONCAT> cCategory, Class<CONSTRAINT> cConstraint, Class<TYPE> cType)
+			final ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
 	{
 		super(fConstraint,fbConstraint.getClassL(),fbConstraint.getClassD());
 		this.fbConstraint=fbConstraint;
 		
 		this.fConstraint=fConstraint;
-		this.cScope=cScope;
-		this.cCategory=cCategory;
-		this.cConstraint=cConstraint;
-		this.cType=cType;
 
-		efScope = new EjbConstraintScopeFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(cL,cD,cScope,cCategory);
-		efConstraint = new EjbConstraintFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(cL,cD,cConstraint,cType);
+		efScope = new EjbConstraintScopeFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(cL,cD,fbConstraint.getClassScope(),fbConstraint.getClassConstraintCategory());
+		efConstraint = new EjbConstraintFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(cL,cD,fbConstraint.getClassConstraint(),fbConstraint.getClassConstraintType());
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
@@ -78,26 +68,25 @@ public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescript
 						LEVEL extends JeeslStatus<L,D,LEVEL>,
 						TYPE extends JeeslStatus<L,D,TYPE>,
 						RESOLUTION extends JeeslConstraintResolution<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>>
-	ConstraintRestService<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
-			factory(String[] localeCodes,
-					JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint,
-					final ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint
-					, Class<SCOPE> cScope, Class<CONCAT> cCategory, Class<CONSTRAINT> cConstraint, Class<TYPE> cType)
+			ConstraintRestService<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
+					factory(String[] localeCodes,
+							JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint,
+							final ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
 	{
-		return new ConstraintRestService<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(localeCodes,fConstraint,fbConstraint,cScope,cCategory,cConstraint,cType);
+		return new ConstraintRestService<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(localeCodes,fConstraint,fbConstraint);
 	}
 	
-	@Override public Container exportSystemConstraintCategories() {return xfContainer.build(fConstraint.allOrderedPosition(cCategory));}
-	@Override public Container exportSystemConstraintTypes() {return xfContainer.build(fConstraint.allOrderedPosition(cType));}
-	@Override public Container exportSystemConstraintLevel() {return xfContainer.build(fConstraint.allOrderedPosition(cType));}
+	@Override public Container exportSystemConstraintCategories() {return xfContainer.build(fConstraint.allOrderedPosition(fbConstraint.getClassConstraintCategory()));}
+	@Override public Container exportSystemConstraintTypes() {return xfContainer.build(fConstraint.allOrderedPosition(fbConstraint.getClassConstraintType()));}
+	@Override public Container exportSystemConstraintLevel() {return xfContainer.build(fConstraint.allOrderedPosition(fbConstraint.getClassConstraintLevel()));}
 	@Override public Constraints exportConstraints()
 	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	@Override public DataUpdate importSystemConstraintCategories(Container categories) {return super.importStatus(cCategory,categories,null);}
-	@Override public DataUpdate importSystemConstraintTypes(Container categories) {return super.importStatus(cType,categories,null);}
+	@Override public DataUpdate importSystemConstraintCategories(Container categories) {return super.importStatus(fbConstraint.getClassConstraintCategory(),categories,null);}
+	@Override public DataUpdate importSystemConstraintTypes(Container categories) {return super.importStatus(fbConstraint.getClassConstraintType(),categories,null);}
 
 	@Override public DataUpdate importConstraints(Constraints constraints)
 	{
@@ -107,24 +96,24 @@ public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescript
 			try
 			{
 				SCOPE eScope = efScope.importOrUpdate(fConstraint, xScope);
-				dut.createSuccess(cScope);
+				dut.createSuccess(fbConstraint.getClassScope());
 				
 				for(Constraint xConstraint : xScope.getConstraint())
 				{
 					try
 					{
 						efConstraint.importOrUpdate(fConstraint,eScope,xConstraint);
-						dut.createSuccess(cConstraint);
+						dut.createSuccess(fbConstraint.getClassConstraint());
 					}
-					catch (JeeslNotFoundException e) {dut.createFail(cConstraint,e);}
-					catch (JeeslConstraintViolationException e) {dut.createFail(cConstraint,e);}
-					catch (JeeslLockingException e) {dut.createFail(cConstraint,e);}
+					catch (JeeslNotFoundException e) {dut.createFail(fbConstraint.getClassConstraint(),e);}
+					catch (JeeslConstraintViolationException e) {dut.createFail(fbConstraint.getClassConstraint(),e);}
+					catch (JeeslLockingException e) {dut.createFail(fbConstraint.getClassConstraint(),e);}
 				}
 				
 			}
-			catch (JeeslNotFoundException e) {dut.createFail(cScope,e);}
-			catch (JeeslConstraintViolationException e) {dut.createFail(cScope,e);}
-			catch (JeeslLockingException e) {dut.createFail(cScope,e);}
+			catch (JeeslNotFoundException e) {dut.createFail(fbConstraint.getClassScope(),e);}
+			catch (JeeslConstraintViolationException e) {dut.createFail(fbConstraint.getClassScope(),e);}
+			catch (JeeslLockingException e) {dut.createFail(fbConstraint.getClassScope(),e);}
 		}
 		return dut.toDataUpdate();
 	}
