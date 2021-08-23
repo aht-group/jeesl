@@ -604,7 +604,8 @@ body, .ui-widget {
       position: relative;
       top: 0;
       width: auto;
-      position: relative; }
+      position: relative;
+      text-indent: 0; }
       .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon:before {
         vertical-align: top; }
         @media (max-width: 768px) {
@@ -615,25 +616,7 @@ body, .ui-widget {
       transform: scale(1.5, 0.7); }
 
 .ui-selectonemenu-panel {
-  background: white;
-  border: 1px solid #ababab;
-  border-radius: 3px;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  transition: opacity .2s linear;
-  z-index: 1000;
   opacity: 1; }
-  @media (max-width: 768px) {
-    .ui-selectonemenu-panel {
-      border: none;
-      border-radius: 0;
-      left: 0 !important;
-      width: 100% !important; } }
-  .ui-selectonemenu-panel.jeesl-visible {
-    opacity: 1; }
-  .ui-selectonemenu-panel .jeesl-overlay-wrapper {
-    color: #333333;
-    overflow: auto; }
   @media (max-width: 768px) {
     .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper {
       max-height: 400px !important; } }
@@ -689,26 +672,11 @@ body, .ui-widget {
           .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight:after {
             border-color: rgba(255, 255, 255, 0); } }
 
-.ui-datepicker {
-  background: white;
-  border: 1px solid #ababab;
-  border-radius: 3px;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  transition: opacity .2s linear;
-  z-index: 1000;
+.ui-autocomplete-panel {
   opacity: 1; }
-  @media (max-width: 768px) {
-    .ui-datepicker {
-      border: none;
-      border-radius: 0;
-      left: 0 !important;
-      width: 100% !important; } }
-  .ui-datepicker.jeesl-visible {
-    opacity: 1; }
-  .ui-datepicker .jeesl-overlay-wrapper {
-    color: #333333;
-    overflow: auto; }
+
+.ui-datepicker {
+  opacity: 1; }
   @media (max-width: 768px) {
     .ui-datepicker {
       padding: 15px 0; } }
