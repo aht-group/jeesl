@@ -9,7 +9,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.jdom2.Document;
 import org.jeesl.controller.mail.freemarker.FreemarkerEngine;
 import org.jeesl.exception.processing.UtilsMailException;

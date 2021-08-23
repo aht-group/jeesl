@@ -2,7 +2,7 @@ package org.jeesl.util.comparator.xml;
 
 import java.util.Comparator;
 
-import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.jeesl.model.xml.system.revision.Diagram;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.controller.processor.JobCodeProcessor;
 import org.jeesl.exception.ejb.JeeslNotFoundException;

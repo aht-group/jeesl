@@ -182,7 +182,7 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+	     <dependency>
 	 		<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
 			<type>jar</type>

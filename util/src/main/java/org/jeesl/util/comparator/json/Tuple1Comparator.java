@@ -3,7 +3,7 @@ package org.jeesl.util.comparator.json;
 import java.util.Comparator;
 import java.util.Map;
 
-import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
 import org.slf4j.Logger;

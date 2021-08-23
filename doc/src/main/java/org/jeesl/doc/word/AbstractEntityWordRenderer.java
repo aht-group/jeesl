@@ -2,7 +2,7 @@ package org.jeesl.doc.word;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Diagram;
 import org.jeesl.model.xml.system.revision.Diagrams;

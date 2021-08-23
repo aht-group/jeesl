@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.apache.commons.io.filefilter.SuffixFileFilter;
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.mozilla.javascript.EvaluatorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

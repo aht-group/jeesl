@@ -8,7 +8,7 @@ import javax.mail.internet.MimeMultipart;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-import org.apache.commons.lang.SystemUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.jeesl.model.xml.system.io.mail.Attachment;
 import org.jeesl.model.xml.system.io.mail.Image;
 import org.jeesl.model.xml.system.io.mail.Mail;

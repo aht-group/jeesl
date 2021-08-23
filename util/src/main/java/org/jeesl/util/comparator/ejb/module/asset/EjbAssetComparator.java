@@ -2,7 +2,7 @@ package org.jeesl.util.comparator.ejb.module.asset;
 
 import java.util.Comparator;
 
-import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
