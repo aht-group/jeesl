@@ -5,7 +5,7 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface componentType="org.jeesl.jsf.components.IconListener">
-		<composite:attribute name="listener" method-signature="java.lang.Void action(javax.faces.event.ActionEvent)"/>
+		<composite:attribute name="listener" required="false" method-signature="java.lang.Void action(javax.faces.event.ActionEvent)"/>
 		<composite:attribute name="update"/>
 		<composite:attribute name="styleClass" required="false" default="pf-action-icon"/>
 		<composite:attribute name="disabled" required="false" default="false"/>
@@ -21,26 +21,52 @@
 	</composite:interface>
 
 	<composite:implementation>
-	    <p:commandLink id="link" 
-					update="#{cc.attrs.update}"
-					actionListener="#{cc.listener}"
-					process="#{cc.attrs.process}" 
-					onstart="#{cc.attrs.onstart}"
-					oncomplete="#{cc.attrs.oncomplete}"
-					styleClass="#{cc.attrs.styleClass}"
-					immediate="#{cc.attrs.immediate}"
-					rendered="#{(empty cc.attrs.ejb) or
-					(
-						(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
-					)}"
-					>
-			<h:graphicImage id="image2"
-							rendered="#{not cc.attrs.disabled}"
-							library="#{cc.attrs.library}"
-							name="#{appIconBean.svg[cc.attrs.type]}">
-				<f:attribute name="height" value="12"/>
-			</h:graphicImage>
-			<p:tooltip for="image2" rendered="#{not empty cc.attrs.tooltip}" value="#{cc.attrs.tooltip}" showDelay="1500" hideEvent="mouseleave click"/>
-		</p:commandLink>
+		<c:if test="#{cc.getValueExpression('listener') ne null}">
+		    <p:commandLink id="#{cc.id}" 
+						update="#{cc.attrs.update}"
+						actionListener="#{cc.listener}"
+						process="#{cc.attrs.process}" 
+						onstart="#{cc.attrs.onstart}"
+						oncomplete="#{cc.attrs.oncomplete}"
+						styleClass="#{cc.attrs.styleClass}"
+						immediate="#{cc.attrs.immediate}"
+						rendered="#{(empty cc.attrs.ejb) or
+						(
+							(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
+						)}"
+						>
+				
+				<h:graphicImage id="image2"
+								rendered="#{not cc.attrs.disabled}"
+								library="#{cc.attrs.library}"
+								name="#{appIconBean.svg[cc.attrs.type]}">
+					<f:attribute name="height" value="12"/>
+				</h:graphicImage>
+				<p:tooltip for="image2" rendered="#{not empty cc.attrs.tooltip}" value="#{cc.attrs.tooltip}" showDelay="1500" hideEvent="mouseleave click"/>
+			</p:commandLink>
+		</c:if>
+		<c:if test="#{cc.getValueExpression('listener') eq null}">
+		    <p:commandLink id="#{cc.id}" 
+						update="#{cc.attrs.update}"
+						process="#{cc.attrs.process}" 
+						onstart="#{cc.attrs.onstart}"
+						oncomplete="#{cc.attrs.oncomplete}"
+						styleClass="#{cc.attrs.styleClass}"
+						immediate="#{cc.attrs.immediate}"
+						rendered="#{(empty cc.attrs.ejb) or
+						(
+							(cc.attrs.ejbRendered eq 'saved') ? (cc.attrs.ejb.id gt 0) : false
+						)}"
+						>
+				
+				<h:graphicImage id="image2"
+								rendered="#{not cc.attrs.disabled}"
+								library="#{cc.attrs.library}"
+								name="#{appIconBean.svg[cc.attrs.type]}">
+					<f:attribute name="height" value="12"/>
+				</h:graphicImage>
+				<p:tooltip for="image2" rendered="#{not empty cc.attrs.tooltip}" value="#{cc.attrs.tooltip}" showDelay="1500" hideEvent="mouseleave click"/>
+			</p:commandLink>
+		</c:if>
 	</composite:implementation>
 </html>
