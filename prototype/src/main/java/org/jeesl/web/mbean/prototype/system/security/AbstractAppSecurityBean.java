@@ -123,8 +123,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		roles.addAll(fSecurity.all(fbSecurity.getClassRole()));
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassRole().getSimpleName(),"Loaded", roles.size());}
 		
-		menus.addAll(fSecurity.all(fbSecurity.getClassMenu()));
-		if(jogger!=null) {jogger.milestone(fbSecurity.getClassMenu().getSimpleName(),"Loaded", menus.size());}
+		this.reloadMenu();
 		
 		List<A> actions = fSecurity.all(fbSecurity.getClassAction());
 		Map<V,List<A>> mapAction = fbSecurity.ejbAction().toMapView(actions);
@@ -188,6 +187,13 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 			
 			cachingFilesSaved = true;
 		}
+	}
+	
+	public void reloadMenu()
+	{
+		menus.clear();
+		menus.addAll(fSecurity.all(fbSecurity.getClassMenu()));
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassMenu().getSimpleName(),"Loaded", menus.size());}
 	}
 	
 	public void update(V view)

@@ -72,7 +72,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	   	{
 	    	String cacheKey = EjbGraphicFactory.toCacheKey(m);
 	    	boolean inCache = this.cacheContainsKey(cacheKey);
-			logger.info("Using cached value: "+inCache+" ("+cacheKey+")");
+			logger.trace("Using cached value: "+inCache+" ("+cacheKey+")");
 	    	if(inCache)
 	    	{	
 	    		try

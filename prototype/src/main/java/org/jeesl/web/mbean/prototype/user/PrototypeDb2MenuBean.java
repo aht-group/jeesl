@@ -130,7 +130,13 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	{
 		if(setupRequired)
 		{
-			if(debugOnInfo) {logger.info(StringUtil.stars());logger.info("Setup Menu");}
+			if(debugOnInfo)
+			{
+				logger.info(StringUtil.stars());
+				logger.info("Setup Menu");
+				logger.info("\tUsing "+JeeslSecurityBean.class.getSimpleName()+" "+(bSecurity!=null));
+				logger.info("\tUsing "+fbSecurity.getClassContext()+" "+(context!=null));
+			}
 			xfMenuItem.setLocaleCode(localeCode);
 
 			M root = efMenu.build();
@@ -153,15 +159,15 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			
 			for(M m : list)
 			{
-				if(debugOnInfo)
-				{
-					logger.info("View: "+m.getView().getCode());
-					logger.info("\t\tm.getView().isVisible() "+m.getView().isVisible());
-					logger.info("\t\tm.getView().getAccessPublic() "+m.getView().getAccessPublic());
-					logger.info("\t\tidentity.isLoggedIn() "+identity.isLoggedIn());
-					logger.info("\t\tm.getView().getAccessLogin() "+m.getView().getAccessLogin());
-					logger.info("\t\tidentity.hasView(m.getView()) "+identity.hasView(m.getView()));
-				}
+//				if(debugOnInfo)
+//				{
+//					logger.info("View: "+m.getView().getCode());
+//					logger.info("\t\tm.getView().isVisible() "+m.getView().isVisible());
+//					logger.info("\t\tm.getView().getAccessPublic() "+m.getView().getAccessPublic());
+//					logger.info("\t\tidentity.isLoggedIn() "+identity.isLoggedIn());
+//					logger.info("\t\tm.getView().getAccessLogin() "+m.getView().getAccessLogin());
+//					logger.info("\t\tidentity.hasView(m.getView()) "+identity.hasView(m.getView()));
+//				}
 
 				boolean visible = m.getView().isVisible() && (m.getView().getAccessPublic() || (identity.isLoggedIn() && (m.getView().getAccessLogin() || identity.hasView(m.getView()))));
 				if(debugOnInfo) {logger.info("\t\t"+m.getView().getCode()+" visible:"+visible);}
