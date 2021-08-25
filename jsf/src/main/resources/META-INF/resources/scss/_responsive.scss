@@ -499,7 +499,7 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 			.jeesl-menu-bar-button {
-				background: $main-background-gradient 0 0 / 99% 100% no-repeat;
+				background: $main-background-gradient 0 0 / 100% 99% no-repeat;
 				padding: 4px 15px;
 				
 				@media (min-width: 769px) {

@@ -378,12 +378,18 @@ body, .ui-widget {
     opacity: 1; }
   .ui-button.ui-state-default .ui-icon {
     background: none;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
     height: auto;
     left: 0;
     margin: 0;
     position: relative;
+    text-indent: 0;
+    text-rendering: auto;
     top: 0;
-    width: auto; }
+    width: auto;
+    -webkit-font-smoothing: antialiased; }
     .ui-button.ui-state-default .ui-icon:before {
       vertical-align: top; }
       @media (max-width: 768px) {
@@ -459,12 +465,18 @@ body, .ui-widget {
       width: 42px; } }
   .ui-chkbox .ui-chkbox-box.ui-state-default .ui-icon {
     background: none;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
     height: auto;
     left: 0;
     margin: 0;
     position: relative;
+    text-indent: 0;
+    text-rendering: auto;
     top: 0;
-    width: auto; }
+    width: auto;
+    -webkit-font-smoothing: antialiased; }
     .ui-chkbox .ui-chkbox-box.ui-state-default .ui-icon:before {
       vertical-align: top; }
       @media (max-width: 768px) {
@@ -598,12 +610,18 @@ body, .ui-widget {
         padding: 0; } }
     .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon {
       background: none;
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
       height: auto;
       left: 0;
       margin: 0;
       position: relative;
+      text-indent: 0;
+      text-rendering: auto;
       top: 0;
       width: auto;
+      -webkit-font-smoothing: antialiased;
       position: relative;
       text-indent: 0; }
       .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon:before {
@@ -612,8 +630,11 @@ body, .ui-widget {
           .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon:before {
             font-size: 2em; } }
     .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon-triangle-1-s:before {
-      content: "\25bc";
-      transform: scale(1.5, 0.7); }
+      content: "\f0d7";
+      font-size: 1.5em; }
+      @media (max-width: 768px) {
+        .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon-triangle-1-s:before {
+          font-size: 2.5em; } }
 
 .ui-selectonemenu-panel {
   opacity: 1; }
@@ -675,8 +696,31 @@ body, .ui-widget {
 .ui-autocomplete-panel {
   opacity: 1; }
 
+.ui-calendar .ui-datepicker-trigger .ui-icon {
+  background: none;
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  height: auto;
+  left: 0;
+  margin: 0;
+  position: relative;
+  text-indent: 0;
+  text-rendering: auto;
+  top: 0;
+  width: auto;
+  -webkit-font-smoothing: antialiased; }
+  .ui-calendar .ui-datepicker-trigger .ui-icon:before {
+    vertical-align: top; }
+    @media (max-width: 768px) {
+      .ui-calendar .ui-datepicker-trigger .ui-icon:before {
+        font-size: 2em; } }
+.ui-calendar .ui-datepicker-trigger .ui-icon-calendar:before {
+  content: "\f073"; }
+
 .ui-datepicker {
-  opacity: 1; }
+  opacity: 1;
+  width: auto; }
   @media (max-width: 768px) {
     .ui-datepicker {
       padding: 15px 0; } }
@@ -1159,7 +1203,7 @@ body, .ui-widget {
     .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item.jeesl-right {
       float: right; }
     .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button {
-      background: linear-gradient(to right, #00663a, #008a4e) 0 0/99% 100% no-repeat;
+      background: linear-gradient(to right, #00663a, #008a4e) 0 0/100% 99% no-repeat;
       padding: 4px 15px; }
       @media (min-width: 769px) {
         .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button a.jeesl-menu-bar-button-label + .jeesl-menu-bar-button-label {

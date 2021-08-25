@@ -275,13 +275,19 @@ body, .ui-widget {
 }
 
 @mixin icon {
-	background: none;
+	background: none;	
+	display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
 	height: auto;
 	left: 0;
 	margin: 0;
 	position: relative;
+    text-indent: 0;
+    text-rendering: auto;
 	top: 0;
 	width: auto;
+    -webkit-font-smoothing: antialiased;
 	
 	&:before {
 		vertical-align: top;
@@ -399,8 +405,12 @@ body, .ui-widget {
 		}
 		
 		.ui-icon-triangle-1-s:before {
-			content: "\25bc";
-			transform: scale(1.5,0.7);
+			content: "\f0d7";
+			font-size: 1.5em;
+			
+			@media (max-width: 768px) {
+				font-size: 2.5em;
+			}
 		}
 	}
 }
@@ -423,8 +433,21 @@ body, .ui-widget {
 	opacity: 1;
 }
 
+.ui-calendar {
+	.ui-datepicker-trigger {
+		.ui-icon {
+			@include icon;
+		}
+		
+		.ui-icon-calendar:before {
+			content: "\f073";
+		}
+	}
+}
+
 .ui-datepicker {
 	opacity: 1;
+	width: auto;
 	
 	@media (max-width: 768px) {
 		padding: $wide-spacing 0;
