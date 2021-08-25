@@ -1,10 +1,5 @@
 package org.jeesl.controller.db.shell.mysql;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -100,26 +95,4 @@ public class MySqlShellCommands
 		}	
 		return sb.toString();
 	}
-	
-	public static void work() throws IOException
-	{
-		ProcessBuilder pb = new ProcessBuilder("/usr/local/bin/mysql", "-u root", "-e \"DROP DATABASE IF EXISTS ofxdev;\"");
-		Map<String, String> env = pb.environment();
-		
-		
-		for(String kex : env.keySet())
-		{
-//			logger.info(kex+" "+env.get(kex));
-		}
-//		env.put("VAR1", "myValue");
-//		env.remove("OTHERVAR");
-//		env.put("VAR2", env.get("VAR1") + "suffix");
-//		pb.directory(new File("/usr/local/bin"));
-		File log = new File("log");
-
-		Process p = pb.start();
-		
-		logger.info(IOUtils.toString(p.getErrorStream()));
-	}
-
 }

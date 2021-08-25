@@ -105,10 +105,11 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 	{
 		loadAll();
 	}
-	public void reloadFromDb(File fTmpCache)
+	public void saveToFile(File fTmpCache)
 	{
-		loadAll();
 		
+		
+		logger.info("Saving Maps to File in "+fTmpCache.getAbsolutePath());
 		ObjectIO.save(new File(fTmpCache,"thEntities.ser"),entities);
 		ObjectIO.save(new File(fTmpCache,"thLabels.ser"),labels);
 		ObjectIO.save(new File(fTmpCache,"thDescriptions.ser"),descriptions);
@@ -117,6 +118,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 	@SuppressWarnings("unchecked")
 	public void reloadFromFile(File fTmpCache)
 	{
+		logger.info("Reloading Maps from File in "+fTmpCache.getAbsolutePath());
 		entities.putAll((Map<String,Map<String,L>>)ObjectIO.load(new File(fTmpCache,"thEntities.ser")));
 		labels.putAll((Map<String,Map<String,Map<String,L>>>)ObjectIO.load(new File(fTmpCache,"thLabels.ser")));
 		descriptions.putAll((Map<String,Map<String,Map<String,D>>>)ObjectIO.load(new File(fTmpCache,"thDescriptions.ser")));
