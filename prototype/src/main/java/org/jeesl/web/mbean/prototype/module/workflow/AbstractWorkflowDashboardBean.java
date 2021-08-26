@@ -153,11 +153,6 @@ public abstract class AbstractWorkflowDashboardBean <L extends JeeslLang, D exte
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbApproval.getClassContext(), sbhContext.getList()));}
 	}
 
-	private void reset()
-	{
-
-	}
-
 	@Override
 	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{

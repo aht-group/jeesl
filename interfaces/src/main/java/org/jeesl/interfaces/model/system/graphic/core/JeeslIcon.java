@@ -19,6 +19,7 @@ public interface JeeslIcon <L extends JeeslLang, D extends JeeslDescription,
 								JeeslStatusFixedCode,EjbWithCodeGraphic<G>,
 								JeeslStatus<L,D,S>
 {
+	public enum Network {download,upload}
 	public static enum CodeTreeFilter{tfCollapseAll,tfExpandAll,tfExpandTwo,tfExpandThree,tfExpandRelevant}
 	public enum Ejb{ejbUnsaved,ejbInvisible}
 }

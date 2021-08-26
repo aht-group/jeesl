@@ -60,7 +60,7 @@ public class SystemPropertyRestService <L extends JeeslLang,D extends JeeslDescr
 	@Override public DataUpdate importSystemPropertyCategories(Container categories){return importStatus2(fbProperty.getClassCategory(),null,categories);}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-    public <S extends JeeslStatus<L,D,S>, P extends JeeslStatus<L,D,P>> DataUpdate importStatus2(Class<S> clStatus, Class<P> clParent, Container container)
+    public <S extends JeeslStatus<L,D,S>> DataUpdate importStatus2(Class<S> clStatus, Class<P> clParent, Container container)
     {
     	for(Status xml : container.getStatus()){xml.setGroup(clStatus.getSimpleName());}
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();

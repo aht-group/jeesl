@@ -106,7 +106,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 		
 		fCategory = new XmlCategoryFactory<L,D,C,R,V,U,A,AT,USER>(null,SecurityQuery.exCategory());
 		xfView = new org.jeesl.factory.xml.system.security.XmlViewFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exView());
-		xfViewOld = new org.jeesl.factory.xml.system.security.XmlViewFactory(SecurityQuery.exViewOld());
+		xfViewOld = new org.jeesl.factory.xml.system.security.XmlViewFactory<>(SecurityQuery.exViewOld());
 		xfRole = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exRole());
 		fRoleDescription = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.role());
 		xfAction = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exAction());

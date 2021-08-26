@@ -19,8 +19,8 @@ public class JeeslFeedbackFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 										USER extends EjbWithEmail>
 					extends JeeslFacadeBean
 					implements JeeslFeedbackFacade<L,D,THREAD,FEEDBACK,STYLE,TYPE,USER>
-{	
-
+{
+	private static final long serialVersionUID = 1L;
 	private final Class<THREAD> cThread;
 		
 	public JeeslFeedbackFacadeBean(EntityManager em, final Class<THREAD> cThread)
