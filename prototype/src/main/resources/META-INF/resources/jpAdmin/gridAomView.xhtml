@@ -42,8 +42,8 @@
 			<h:form id="fLevel" rendered="#{not empty cc.attrs.bean.level}">
 				<p:panel header="#{msg.jeeslAomLevel}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelLevel()}" update=":#{cc.id}:grid"/>
-						<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveLevel()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelLevel()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveLevel()}" update=":#{cc.id}:grid"/>
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteLevel()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.level.id gt 0}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>

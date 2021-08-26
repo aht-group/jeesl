@@ -79,8 +79,8 @@
 						<p:panel id="pView" rendered="#{not empty cc.attrs.bean.timeGroup}" styleClass="jeeslPanel">
 							<f:facet name="header"><jtp:label entity="LfTimeGroup"/></f:facet>    
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetTimeGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveTimeGroup()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave and not cc.attrs.bean.uiGenerate}" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetTimeGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveTimeGroup()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave and not cc.attrs.bean.uiGenerate}" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslGenerate"   listener="#{cc.attrs.bean.updateUiTimeGroup()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowGenerate}" tooltip="#{msg.ttGenerate}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteTimeGroup()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.timeGroup.id gt 0}" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
@@ -159,8 +159,8 @@
 						<p:panel id="pView" rendered="#{not empty cc.attrs.bean.element}" styleClass="jeeslPanel">
 							<f:facet name="header"><jtp:label entity="LfTimeElement"/></f:facet>
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetElement()}" update=":#{cc.id}:sTimeGroup :#{cc.id}:sTimeGroups" tooltip="#{msg.jeeslTtCancel}" immediate="true"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveElement()}" update=":#{cc.id}:sTimeGroup :#{cc.id}:sTimeGroups" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetElement()}" update=":#{cc.id}:sTimeGroup :#{cc.id}:sTimeGroups" tooltip="#{msg.jeeslTtCancel}" immediate="true"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveElement()}" update=":#{cc.id}:sTimeGroup :#{cc.id}:sTimeGroups" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteElement()}" update=":#{cc.id}:sTimeGroup :#{cc.id}:sTimeGroups" rendered="#{cc.attrs.bean.element.id gt 0}" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"

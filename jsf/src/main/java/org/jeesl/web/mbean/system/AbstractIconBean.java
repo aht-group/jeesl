@@ -190,10 +190,11 @@ public class AbstractIconBean implements Serializable
 		mapStatic.put("jeeslUpload", "ui/jeesl/control/upload.png");					svg.put("jeeslUpload","ui/control/upload.svg");
 		mapStatic.put("jeeslGenerate", "ui/jeesl/control/gear.png");					svg.put("jeeslUpload","ui/control/gear.svg");
 																						svg.put("jeeslWizard","ui/control/wizard/wand.svg");
-		mapStatic.put("jeeslArrowUp", "ui/jeesl/control/arrow/blue/up.png");			svg.put("jeeslArrowUp","ui/control/arrow/blue/up.svg");
-		mapStatic.put("jeeslArrowDown", "ui/jeesl/control/arrow/blue/down.png");		svg.put("jeeslArrowDown","ui/control/arrow/blue/down.svg");
-		mapStatic.put("jeeslArrowLeft", "ui/jeesl/control/arrow/blue/left.png");		svg.put("jeeslArrowLeft","ui/control/arrow/blue/left.svg");
-		mapStatic.put("jeeslArrowRight", "ui/jeesl/control/arrow/blue/right.png");		svg.put("jeeslArrowRight","ui/control/arrow/blue/right.svg");
+																						
+		svg.put("jeeslArrowUp","ui/control/arrow/blue/up.svg");
+		svg.put("jeeslArrowDown","ui/control/arrow/blue/down.svg");
+		svg.put("jeeslArrowLeft","ui/control/arrow/blue/left.svg");
+		svg.put("jeeslArrowRight","ui/control/arrow/blue/right.svg");
 
 		mapStatic.put("jeeslInvisible", "ui/jeesl/generic/ghost.png");
 		mapStatic.put("jeeslUnsaved", "ui/jeesl/generic/unsaved.png");

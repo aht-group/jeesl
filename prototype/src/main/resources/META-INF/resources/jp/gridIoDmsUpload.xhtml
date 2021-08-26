@@ -36,7 +36,7 @@
 					<h:form id="fSection" rendered="#{not empty cc.attrs.bean.section}">
 						<p:panel header="#{cc.attrs.bean.section.name[localeCode].lang}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelSection()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}"/>
 							</f:facet>
 							<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 								<h:outputText value="#{cc.attrs.bean.section.description[localeCode].lang}"/>
@@ -61,8 +61,8 @@
 					<h:form id="fFile">
 						<p:panel id="pView" header="#{msg.jeeslIoDmsDocument}" rendered="#{not empty cc.attrs.bean.file}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetFile()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveFile()}" update=":#{cc.id}:sSection"  tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetFile()}" update=":#{cc.id}:sSection" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveFile()}" update=":#{cc.id}:sSection"  tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteFile()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.file.id gt 0}" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>

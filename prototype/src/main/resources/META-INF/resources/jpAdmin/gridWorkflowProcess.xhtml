@@ -61,7 +61,7 @@
 					<h:form id="fProcess" rendered="#{not empty cc.attrs.bean.process}">
 						<p:panel id="pLang" header="#{msg.jeeslApprovalProcess}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveProcess()}" update=":fStatusBar :#{cc.id}:rProcess"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveProcess()}" update=":fStatusBar :#{cc.id}:rProcess"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.process.id gt 0}" listener="#{cc.attrs.bean.deleteProcess()}" update=":fStatusBar :#{cc.id}:rProcess"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -89,7 +89,7 @@
 					<h:form id="fDocument" rendered="#{not empty cc.attrs.bean.process}">
 						<p:panel id="pLang" header="#{appLabelBean.entities['WorkflowDocument'][localeCode].lang}" rendered="#{not empty cc.attrs.bean.document}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveDocument()}" update=":#{cc.id}:rProcess"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveDocument()}" update=":#{cc.id}:rProcess"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteDocument()}" rendered="#{cc.attrs.bean.document.id gt 0}" update=":#{cc.id}:rProcess"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -135,7 +135,7 @@
 							<f:facet name="actions">
 								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{not cc.attrs.bean.editStage}"/>
 								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{cc.attrs.bean.editStage}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveStage()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editStage}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveStage()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editStage}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteStage()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.stage.id gt 0) and cc.attrs.bean.editStage}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -208,8 +208,8 @@
 					<h:form id="fPermission" rendered="#{not empty cc.attrs.bean.permission}">
 						<p:panel header="#{msg.jeeslApprovalPermission}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelPermission()}" update=":#{cc.id}:rStage"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.savePermission()}" update=":#{cc.id}:rStage"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelPermission()}" update=":#{cc.id}:rStage"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.savePermission()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deletePermission()}" update=":#{cc.id}:rStage"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -278,8 +278,8 @@
 					<h:form id="fNotification" rendered="#{not empty cc.attrs.bean.notification}">
 						<p:panel header="#{appLabelBean.entities['WorkflowStageNotification'][localeCode].lang}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelNotification()}" update=":#{cc.id}:rStage"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveNotification()}" update=":#{cc.id}:rStage"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelNotification()}" update=":#{cc.id}:rStage"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveNotification()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteNotification()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.notification.id gt 0)}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -347,7 +347,7 @@
 							<f:facet name="actions">
 								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{not cc.attrs.bean.editTransition}"/>
 								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{cc.attrs.bean.editTransition}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveTransition()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editTransition}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveTransition()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editTransition}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteTransition()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.transition.id gt 0) and cc.attrs.bean.editTransition}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
@@ -449,8 +449,8 @@
 					<h:form id="fAction" rendered="#{not empty cc.attrs.bean.action}">
 						<p:panel header="#{msg.jeeslApprovalAction}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelAction()}" update=":#{cc.id}:rStage"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:rStage"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelAction()}" update=":#{cc.id}:rStage"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAction()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.action.id gt 0)}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
@@ -542,8 +542,8 @@
 					<h:form id="fCommunication" rendered="#{not empty cc.attrs.bean.communication}">
 						<p:panel header="#{msg.jeeslApprovalCommunication}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelCommunication()}" update=":#{cc.id}:rStage"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveCommunication()}" update=":#{cc.id}:rStage"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelCommunication()}" update=":#{cc.id}:rStage"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveCommunication()}" update=":#{cc.id}:rStage"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteCommunication()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.communication.id gt 0)}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">

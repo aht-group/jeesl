@@ -47,8 +47,8 @@
 					<h:form id="falgorithm" rendered="#{not empty cc.attrs.bean.algorithm}">
 						<p:panel id="pAlgorithm" header="#{msg.jeeslConstraintAlgorithm}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAlgorithm()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.algorithm.id gt 0}"/>
 							</f:facet>
 							<div class="ui-fluid">

@@ -76,7 +76,7 @@
 		<h:form id="fDownload">
 			<p:panel header="#{msg.jeeslIoFile}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.handler.meta}">
 				<f:facet name="actions">
-					<j:icon type="jeeslCancel" listener="#{cc.attrs.handler.cancelMeta()}"
+					<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.handler.cancelMeta()}"
 							update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload" />
 					<j:icon id="iconJeeslFileSave" type="jeeslSave" listener="#{cc.attrs.handler.saveMeta()}"
 							update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload" />

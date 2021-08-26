@@ -42,8 +42,8 @@
 					<h:form id="fIoDashComponent">
 						<p:panel header="#{msg.jeeslIoDashComponent}" rendered="#{not empty cc.attrs.bean.dashComponent}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelDashComponent()}" update=":#{cc.id}:sIoDashComponent"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveDashComponent()}"   update=":#{cc.id}:sIoDashComponents :#{cc.id}:sIoDashComponent" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelDashComponent()}" update=":#{cc.id}:sIoDashComponent"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveDashComponent()}"   update=":#{cc.id}:sIoDashComponents :#{cc.id}:sIoDashComponent" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteDashComponent()}" update=":#{cc.id}:sIoDashComponents :#{cc.id}:sIoDashComponent" rendered="#{cc.attrs.bean.dashComponent.id gt 0}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>

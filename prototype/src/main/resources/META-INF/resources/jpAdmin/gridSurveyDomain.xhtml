@@ -47,7 +47,7 @@
 				<h:form id="fDomain" rendered="#{not empty cc.attrs.bean.domain}">
 					<p:panel header="#{msg.jeeslSurveyDomain}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveDomain()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveDomain()}" update=":#{cc.id}:grid"/>
 							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteDomain()}" update=":fStatusBar :#{cc.id}:grid"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -90,7 +90,7 @@
 				<h:form id="fQuery" rendered="#{not empty cc.attrs.bean.query}">
 					<p:panel header="#{msg.jeeslSurveyDomainQuery}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveQuery()}" update=":#{cc.id}:row2"/>
+							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveQuery()}" update=":#{cc.id}:row2"/>
 							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteQuery()}" update=":#{cc.id}:row2"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -129,7 +129,7 @@
 				<h:form id="fPath" rendered="#{not empty cc.attrs.bean.path}">
 					<p:panel header="#{msg.jeeslSurveyDomainPath}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslSave" listener="#{cc.attrs.bean.savePath()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.savePath()}" update=":#{cc.id}:grid"/>
 							<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deletePath()}" update=":#{cc.id}:row2" rendered="#{(cc.attrs.bean.path.id gt 0) and (cc.attrs.bean.path.position eq cc.attrs.bean.paths.size())}"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>

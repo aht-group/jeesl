@@ -57,8 +57,8 @@
 					<h:form id="fStorage">
 						<p:panel header="#{msg.jeeslIoFileStorage}" rendered="#{not empty cc.attrs.bean.storage}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetStorage()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetStorage()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.storage.id gt 0}" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">

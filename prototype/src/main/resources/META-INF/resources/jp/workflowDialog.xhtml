@@ -90,7 +90,7 @@
 					<h:form id="fDelegate" rendered="#{cc.attrs.handler.delegationRoles}">
 						<p:panel header="#{appLabelBean.labels['WorkflowDelegate']['request'][localeCode].lang}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.handler.delegate}">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave" listener="#{cc.attrs.handler.saveDelegate()}" update="#{cc.attrs.update}" oncomplete="PF('#{cc.attrs.widgetVar}').show();"/>
+								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.handler.saveDelegate()}" update="#{cc.attrs.update}" oncomplete="PF('#{cc.attrs.widgetVar}').show();"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 								<jtp:label entity="WorkflowDelegate" code="recordRequest"/>

@@ -58,8 +58,8 @@
 						<p:panel id="pLang" header="#{msg.jeeslTsScope}"
 								 rendered="#{not empty cc.attrs.bean.scope}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.scope.id gt 0}" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -175,8 +175,8 @@
 						<p:panel id="pLang" header="#{msg.jeeslTsMultiPoint}"
 								 rendered="#{not empty cc.attrs.bean.multiPoint}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.scope.id gt 0}" listener="#{cc.attrs.bean.deleteMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">

@@ -47,8 +47,8 @@
 					<h:form id="fSet">
 						<p:panel header="#{msg.jeeslIoDomainSet}" rendered="#{not empty cc.attrs.bean.set}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetSet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveSet()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetSet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveSet()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteSet()}" update=":#{cc.id}:grid" rendered="#{(cc.attrs.bean.set.id gt 0) and (cc.attrs.bean.items.isEmpty())}" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -84,8 +84,8 @@
 					<h:form id="fItem">
 						<p:panel header="#{msg.jeeslIoAttributeItem}" rendered="#{not empty cc.attrs.bean.item}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.resetItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.item.id gt 0}" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>

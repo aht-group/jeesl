@@ -17,7 +17,7 @@
 				<h:form id="fObject">
 					<p:panel header="Json Object" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslSave" listener="#{componentDataJsonBean.saveObject()}" update="@form" tooltip="#{msg.ttSave}"/>
+							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{componentDataJsonBean.saveObject()}" update="@form" tooltip="#{msg.ttSave}"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" >
 							<p:outputLabel value="BaseDir"/>
@@ -38,7 +38,7 @@
 				<h:form id="fJson">
 					<p:panel header="Json Magic" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslSave" listener="#{componentDataJsonBean.saveJson()}" update="@form" tooltip="#{msg.ttSave}"/>
+							<j:svg type="jeeslSave" library="jeeslGfx" listener="#{componentDataJsonBean.saveJson()}" update="@form" tooltip="#{msg.ttSave}"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" >
 							<p:outputLabel value="Todo 1"/>

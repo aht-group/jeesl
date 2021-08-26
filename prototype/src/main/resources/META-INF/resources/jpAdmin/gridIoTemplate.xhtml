@@ -66,8 +66,8 @@
 					<p:panel id="pView" header="#{msg.jeeslIoTemplate}"
 								rendered="#{not empty cc.attrs.bean.template}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid"/>
-							<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid" />
+							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid" />
 							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.template.id gt 0}" listener="#{cc.attrs.bean.rmTemplate()}" update=":#{cc.id}:grid"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -117,8 +117,8 @@
 				<h:form id="fToken">
 					<p:panel header="#{msg.jeeslIoToken}" rendered="#{not empty cc.attrs.bean.token}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelToken()}" update=":#{cc.id}:sTokens"/>
-							<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveToken()}" update=":#{cc.id}:sTokens"/>
+							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelToken()}" update=":#{cc.id}:sTokens"/>
+							<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveToken()}" update=":#{cc.id}:sTokens"/>
 							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.token.id gt 0}" listener="#{cc.attrs.bean.rmToken()}" update=":#{cc.id}:sTokens"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -164,8 +164,8 @@
 				<h:form id="fDefinition">
 					<p:panel header="#{msg.jeeslIoTemplateDefinition}" rendered="#{not empty cc.attrs.bean.definition}" styleClass="jeeslPanel">
 						<f:facet name="actions">
-							<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelDefinition()}" update=":#{cc.id}:row2"/>
-							<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveDefinition()}" update=":#{cc.id}:row2"/>
+							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelDefinition()}" update=":#{cc.id}:row2"/>
+							<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveDefinition()}" update=":#{cc.id}:row2"/>
 							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.definition.id gt 0}" listener="#{cc.attrs.bean.rmDefinition()}" update=":#{cc.id}:row2"/>
 						</f:facet>
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
