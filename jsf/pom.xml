@@ -315,6 +315,7 @@
 									<directory>${project.basedir}/../doc/src/main/resources/jeesl/svg/icon/ui</directory>
 									<includes>
 										<include>control/*.*</include>
+										<include>control/calc/*.*</include>
 										<include>control/checkbox/*.*</include>
 										<include>control/tree/*.*</include>
 										<include>control/email/*.*</include>

@@ -29,9 +29,7 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 	
 	private final Item q;
 	private final TimeZoneProcessor tzp;
-	@SuppressWarnings("unused")
 	private XmlTypeFactory<L,D,IT> xfType;
-	
 	
 	public XmlCalendarItemFactory(String localeCode, Item q, TimeZoneProcessor tzp)
 	{

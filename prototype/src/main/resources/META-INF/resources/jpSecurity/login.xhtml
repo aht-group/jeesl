@@ -25,6 +25,7 @@
 				<p:password id="password" value="#{userBean.identity.loginPassword}"/>
 				<h:outputText value=""/>
 				<p:commandButton id="cbLogin" value="#{msg.jeeslSecurityLoginButton}" action="#{userBean.login}"/>
+				<p:blockUI trigger="cbLogin" block="@form" />
 			</p:panelGrid>
       		<p:messages id="messages" showDetail="true" closable="true">
       			<p:autoUpdate/>

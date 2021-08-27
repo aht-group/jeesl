@@ -22,7 +22,7 @@
 
 	<composite:implementation>
 		<c:if test="#{cc.getValueExpression('listener') ne null}">
-		    <p:commandLink id="#{cc.id}" 
+		    <p:commandLink id="link" 
 						update="#{cc.attrs.update}"
 						actionListener="#{cc.listener}"
 						process="#{cc.attrs.process}" 
@@ -46,7 +46,7 @@
 			</p:commandLink>
 		</c:if>
 		<c:if test="#{cc.getValueExpression('listener') eq null}">
-		    <p:commandLink id="#{cc.id}" 
+		    <p:commandLink id="link" 
 						update="#{cc.attrs.update}"
 						process="#{cc.attrs.process}" 
 						onstart="#{cc.attrs.onstart}"
