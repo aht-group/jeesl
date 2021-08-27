@@ -1668,3 +1668,16 @@ $enable-pointer-cursor-for-buttons: true;
 		min-height: 312px;
 	}
 }
+
+.jeesl-revision-footer {
+	display: flex;
+	justify-content: space-between;
+	
+	> *:not(:last-child) {
+		margin-right: $half-spacing;
+	}
+	
+	.jeesl-revision-timestamp {
+		flex-grow: 1;
+	}
+}

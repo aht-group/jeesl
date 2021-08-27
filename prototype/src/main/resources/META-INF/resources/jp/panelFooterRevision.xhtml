@@ -15,20 +15,20 @@
 	</composite:interface>
         
 	<composite:implementation>
-		<h:panelGroup layout="block" styleClass="meis-revision-footer" rendered="#{cc.attrs.revision.showFooter}">
-			<h:panelGroup layout="block" styleClass="meis-revision-icon">
+		<h:panelGroup layout="block" styleClass="jeesl-revision-footer" rendered="#{cc.attrs.revision.showFooter}">
+			<h:panelGroup layout="block" styleClass="jeesl-revision-icon">
 				<h:graphicImage id="iconRevision" style="cursor:pointer;" name="#{appIconBean.svg['jeeslRevision']}" library="jeeslGfx">
 					<f:attribute name="height" value="12"/>
 					<p:ajax update="#{cc.attrs.updateToggle}" event="click" listener="#{cc.listener}"/>
                 </h:graphicImage>
                 <p:tooltip for="iconRevision" value="#{cc.attrs.tooltip}"/>
 			</h:panelGroup>
-			<h:panelGroup layout="block" styleClass="meis-revision-timestamp">
+			<h:panelGroup layout="block" styleClass="jeesl-revision-timestamp">
 				<h:outputText value="#{cc.attrs.revision.info.auditRecord}">
 					<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
 				</h:outputText>
 			</h:panelGroup>
-			<h:panelGroup layout="block" styleClass="meis-revision-user" rendered="#{cc.attrs.revision.info.userId gt 0}">
+			<h:panelGroup layout="block" styleClass="jeesl-revision-user" rendered="#{cc.attrs.revision.info.userId gt 0}">
 				#{cc.attrs.revision.user.firstName} #{cc.attrs.revision.user.lastName}
 			</h:panelGroup>
 		</h:panelGroup>

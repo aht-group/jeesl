@@ -446,8 +446,8 @@ body, .ui-widget {
 }
 
 .ui-datepicker {
+	padding: $slim-spacing $slim-spacing 0;
 	opacity: 1;
-	width: auto;
 	
 	@media (max-width: 768px) {
 		padding: $wide-spacing 0;
@@ -508,40 +508,64 @@ body, .ui-widget {
 		}
 		
 		.ui-icon {
+			@include icon();
 			@include vertical-center(after);
 			
-			background: none;
 			height: 100%;
-			margin: 0;
-			position: initial;
-			text-indent: $header-element-height;
 			white-space: nowrap;
 			width: 100%;
-			
-			@media (max-width: 768px) {
-				text-indent: $header-element-height-mobile;
-			}
-			
+
 			&:before {
 				color: white;
 				display: inline-block;
-				font-size: 1.2em;
-				text-indent: -$header-element-height;
+				font-size: 1.5em;
 				vertical-align: middle;
-				
+				width: 100%;
+
 				@media (max-width: 768px) {
-					font-size: 2em;
-					text-indent: -$header-element-height-mobile;
+					font-size: 2.5em;
 				}
 			}
 		}
 		
 		.ui-icon-circle-triangle-w:before {
-			content: "\25c4";
+			content: "\f0d9";
 		}
 		
 		.ui-icon-circle-triangle-e:before {
-			content: "\25ba";
+			content: "\f0da";
+		}
+	}
+	
+	.ui-datepicker-calendar {
+		> tbody {
+			border: solid $border-colour;
+			border-width: $border-width 0;
+			
+			.ui-state-default {
+				color: inherit;
+				text-align: center;
+				font-weight: 400;
+				
+				&.ui-state-hover {
+					background: $light-grey;
+					font-weight: inherit;
+				}
+				
+				&.ui-state-highlight {
+					color: $dark-colour;
+					font-weight: bold;
+					text-shadow: none;
+				}
+			}
+			
+			.ui-datepicker-current-day {
+				.ui-state-default {
+					background: $dark-colour;
+					color: $white-100;
+					text-shadow: none;
+				}
+			}
 		}
 	}
 }

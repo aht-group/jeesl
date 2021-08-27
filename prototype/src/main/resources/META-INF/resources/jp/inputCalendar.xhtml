@@ -14,7 +14,7 @@
 		<composite:attribute name="stepMinute" required="false" default="5"/>
 		<composite:attribute name="showWeek" required="false"  default="false"/>
 		<composite:attribute name="navigator" required="false"  default="false"/>
-		<composite:attribute name="widgetVar" required="false"/>
+		<composite:attribute name="widgetVar" required="false" default="#{cc.id}Widget"/>
 		<composite:attribute name="pagedate" required="false"/>
 		<composite:clientBehavior name="change" targets="pCalendar" event="change" />
 		<composite:clientBehavior name="dateSelect" targets="pCalendar" event="dateSelect" />
@@ -35,5 +35,18 @@
 						required="#{cc.attrs.required}">
 			<p:ajax event="dateSelect" update="#{cc.attrs.update}"/>
 		</p:calendar>
+		<script>
+			$(function() {
+				var style = $('#calendarWidth');
+				var widget = PF('#{cc.attrs.widgetVar}');
+				var popupTrigger = widget.jq.find('.ui-datepicker-trigger');
+				
+				if (!style.length) {
+					style = $('head').first().append('<style id="calendarWidth"></style>').children('#calendarWidth').first();
+				}
+				
+				popupTrigger.click(() => style.html('#ui-datepicker-div { width: ' + widget.jqEl.css('width') + ' !important; left: ' + widget.jqEl.offset().left + 'px !important; }'));
+			});
+		</script>
 	</composite:implementation>
 </html>
