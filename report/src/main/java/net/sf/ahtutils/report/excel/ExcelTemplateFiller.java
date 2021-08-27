@@ -9,6 +9,8 @@ import org.apache.commons.jxpath.JXPathContext;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,13 +57,13 @@ public class ExcelTemplateFiller
         // Create a new font and alter it.
         Font font = wb.createFont();
         font.setItalic(true);
-        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        font.setBold(true);
 
         // Create styles
         dateHeaderStyle = wb.createCellStyle();
         dateHeaderStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy.MM"));
-        dateHeaderStyle.setAlignment(CellStyle.ALIGN_CENTER);
-        dateHeaderStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        dateHeaderStyle.setAlignment(HorizontalAlignment.CENTER);
+        dateHeaderStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         dateHeaderStyle.setFont(font);
 
         numberStyle = wb.createCellStyle();

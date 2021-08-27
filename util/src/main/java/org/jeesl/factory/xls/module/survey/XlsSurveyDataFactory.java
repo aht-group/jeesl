@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -128,7 +129,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 	public void buildSimple(Sheet sheet, TEMPLATE t, List<DATA> list)
 	{		
 		style = sheet.getWorkbook().createCellStyle();
-		style.setAlignment(CellStyle.ALIGN_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
 		xlfAnswer = new XlsSurveyAnswerFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,style);
 
 		simpleCalculateSizes(t);
@@ -267,7 +268,7 @@ public class XlsSurveyDataFactory <L extends JeeslLang, D extends JeeslDescripti
 		
 		// Create a style for the cells
 		style = wb.createCellStyle();
-		style.setAlignment(CellStyle.ALIGN_CENTER);
+		style.setAlignment(HorizontalAlignment.CENTER);
 				 
 		//Get data for lazy loading
 		TEMPLATE template = survey.getTemplate();

@@ -14,8 +14,10 @@ import org.apache.commons.lang3.mutable.MutableInt;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.jeesl.factory.builder.system.ReportFactoryBuilder;
@@ -124,13 +126,13 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
         // Create a new font and alter it.
         Font font = wb.createFont();
         font.setItalic(true);
-        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        font.setBold(true);
 
         // Create styles
         dateHeaderStyle = wb.createCellStyle();
         dateHeaderStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy.MM"));
-        dateHeaderStyle.setAlignment(CellStyle.ALIGN_CENTER);
-        dateHeaderStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        dateHeaderStyle.setAlignment(HorizontalAlignment.CENTER);
+        dateHeaderStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         dateHeaderStyle.setFont(font);
 
         numberStyle = wb.createCellStyle();

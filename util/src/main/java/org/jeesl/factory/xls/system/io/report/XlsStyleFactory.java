@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.jeesl.factory.builder.system.ReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
@@ -73,22 +76,22 @@ public class XlsStyleFactory<
 		
         Font fontItalicBold = xlsWorkbook.createFont();
         fontItalicBold.setItalic(true);
-        fontItalicBold.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        fontItalicBold.setBold(true);
 		
 		styleFallback = xlsWorkbook.createCellStyle();
 //        dateHeaderStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy.MM"));
-        styleFallback.setAlignment(CellStyle.ALIGN_LEFT);
-        styleFallback.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        styleFallback.setAlignment(HorizontalAlignment.LEFT);
+        styleFallback.setVerticalAlignment(VerticalAlignment.CENTER);
  //       dateHeaderStyle.setFont(font);
         
         styleLabelCenter = xlsWorkbook.createCellStyle();
-        styleLabelCenter.setAlignment(CellStyle.ALIGN_CENTER);
-        styleLabelCenter.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        styleLabelCenter.setAlignment(HorizontalAlignment.CENTER);
+        styleLabelCenter.setVerticalAlignment(VerticalAlignment.CENTER);
         styleLabelCenter.setFont(fontItalicBold);
         
         styleLabelLeft = xlsWorkbook.createCellStyle();
-        styleLabelLeft.setAlignment(CellStyle.ALIGN_LEFT);
-        styleLabelLeft.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        styleLabelLeft.setAlignment(HorizontalAlignment.LEFT);
+        styleLabelLeft.setVerticalAlignment(VerticalAlignment.CENTER);
         styleLabelLeft.setFont(fontItalicBold);
         
 		for(ROW r : ioRows)
@@ -129,15 +132,15 @@ public class XlsStyleFactory<
 	{
         Font font = xlsWorkbook.createFont();
         if(ioStyle.isFontItalic()){font.setItalic(true);}
-        if(ioStyle.isFontBold()){font.setBoldweight(Font.BOLDWEIGHT_BOLD);}
+        if(ioStyle.isFontBold()){font.setBold(true);}
         
         CellStyle style = xlsWorkbook.createCellStyle();
-        style.setAlignment(CellStyle.ALIGN_CENTER);
-        style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
         style.setFont(font);
         style.setFillBackgroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
         
-        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         
         return styleLabelCenter;
 	}
@@ -145,8 +148,8 @@ public class XlsStyleFactory<
 	private CellStyle buildCell(Workbook xlsWorkbook, COLUMN column)
 	{
         CellStyle style = xlsWorkbook.createCellStyle();
-//        style.setAlignment(CellStyle.ALIGN_CENTER);
-//        style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+//        style.setAlignment(HorizontalAlignment.CENTER);
+//        style.setVerticalAlignment(VerticalAlignment.CENTER);
        
         CDT dataType = efColumn.toCellDataType(column);
         if(dataType!=null)
@@ -243,8 +246,8 @@ public class XlsStyleFactory<
 	{
 		CellStyle style = workbook.createCellStyle();
 //		style.setDataFormat(createHelper.createDataFormat().getFormat("yyyy.MM"));
-		style.setAlignment(CellStyle.ALIGN_LEFT);
-		style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		style.setAlignment(HorizontalAlignment.LEFT);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
 		style.setFont(font);
 		return style;
 	}
@@ -253,8 +256,8 @@ public class XlsStyleFactory<
 	{
 		CellStyle style = workbook.createCellStyle();
 //		style.setDataFormat(createHelper.createDataFormat().getFormat("yyyy.MM"));
-		style.setAlignment(CellStyle.ALIGN_LEFT);
-		style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		style.setAlignment(HorizontalAlignment.LEFT);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
 //		style.setFont(font);
 		return style;
 	}

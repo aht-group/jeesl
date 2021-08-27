@@ -5,13 +5,16 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.jxpath.JXPathContext;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -67,7 +70,7 @@ public class JeeslAggregationsFlatExporter
 
         // Create fonts and alter it.
         Font font = wb.createFont();
-        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        font.setBold(true);
 		
         Font fontTitle = wb.createFont();
         fontTitle.setItalic(true);
@@ -75,16 +78,16 @@ public class JeeslAggregationsFlatExporter
         // Create styles
         dateHeaderStyle = wb.createCellStyle();
         dateHeaderStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy.MM"));
-        dateHeaderStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        dateHeaderStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         dateHeaderStyle.setFont(font);
         dateHeaderStyle.setFillBackgroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
         dateHeaderStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-        dateHeaderStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        dateHeaderStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         numberStyle = wb.createCellStyle();
         numberStyle.setDataFormat(createHelper.createDataFormat().getFormat("#,##0.00"));
 		
         CellStyle titleStyle = wb.createCellStyle();
-        titleStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+        titleStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         titleStyle.setFont(fontTitle);
 		
 		
@@ -150,7 +153,7 @@ public class JeeslAggregationsFlatExporter
             CellStyle borderStyle = wb.createCellStyle();
             CellStyle oldStyle    = financeBegin.getCellStyle();
             borderStyle.cloneStyleFrom(oldStyle);
-            borderStyle.setBorderLeft(CellStyle.BORDER_THIN);
+            borderStyle.setBorderLeft(BorderStyle.THIN);
             financeBegin.setCellStyle(borderStyle);
         }
     }
