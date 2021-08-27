@@ -10,8 +10,6 @@ public class JsonXlsCell implements Serializable
 {
 	public static final long serialVersionUID=1;
 
-
-	
 	@JsonProperty("column")
 	private JsonXlsColumn column;
 	public JsonXlsColumn getColumn() {return column;}

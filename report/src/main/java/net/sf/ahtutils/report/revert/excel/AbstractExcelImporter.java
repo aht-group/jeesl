@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellReference;
@@ -503,7 +504,7 @@ public abstract class AbstractExcelImporter <C extends Serializable, I extends I
 			for(int cellNum = row.getFirstCellNum(); cellNum < row.getLastCellNum(); cellNum++)
 			{
 			   Cell cell = row.getCell(cellNum);
-			   if(cell != null && cell.getCellType() != Cell.CELL_TYPE_BLANK && StringUtils.isNotBlank(cell.toString()))
+			   if(cell != null && cell.getCellTypeEnum() != CellType.BLANK && StringUtils.isNotBlank(cell.toString()))
 			   {
 				   isEmptyRow = false;
 			   }    

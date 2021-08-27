@@ -3,13 +3,13 @@ package org.jeesl.factory.xml.domain.finance;
 import java.util.Date;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.controller.util.poi.PoiRowColNumerator;
-import net.sf.ahtutils.controller.util.poi.PoiSsCellType;
 import net.sf.ahtutils.xml.finance.Figures;
 import net.sf.ahtutils.xml.finance.Time;
 import net.sf.exlp.util.DateUtil;
@@ -51,7 +51,7 @@ public class XmlTimeFactory
 		{
 			throw new UtilsProcessingException("The cell is null. No Date in "+PoiRowColNumerator.create(row, col));
 		}
-		else if(cell.getCellType()!=Cell.CELL_TYPE_NUMERIC)
+		else if(cell.getCellTypeEnum()!=CellType.NUMERIC)
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append(XmlTimeFactory.class.getSimpleName());
@@ -59,8 +59,8 @@ public class XmlTimeFactory
 			if(label!=null){sb.append("(").append(label).append(") ");}
 			sb.append(PoiRowColNumerator.create(row, col));
 			sb.append(" has wrong CellType.");
-			sb.append(" Expected: ").append(PoiSsCellType.translate(0));
-			sb.append(" Actual:").append(PoiSsCellType.translate(cell.getCellType()));
+			sb.append(" Expected: ").append(CellType.NUMERIC);//.append(PoiSsCellType.translate(0));
+			sb.append(" Actual:").append(cell.getCellTypeEnum());
 			throw new UtilsProcessingException(sb.toString());
 		}
 		else

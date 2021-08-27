@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Hyperlink;
@@ -60,26 +61,26 @@ public class DataUtil {
 		if (cell != null)
 		{
 			if (cell.getHyperlink()!=null)
-						{
-                                                        Workbook workbook = new XSSFWorkbook();
-							FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
-							Hyperlink link = cell.getHyperlink();
-							String address = link.getAddress();
-							if(logger.isTraceEnabled()){logger.trace("Found a Hyperlink to " +cell.getHyperlink().getAddress() +" in cell " +cell.getRowIndex() +"," +cell.getColumnIndex());}
-							cell = evaluator.evaluateInCell(cell);
-						}
+			{
+				Workbook workbook = new XSSFWorkbook();
+				FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+				Hyperlink link = cell.getHyperlink();
+				String address = link.getAddress();
+				if(logger.isTraceEnabled()){logger.trace("Found a Hyperlink to " +cell.getHyperlink().getAddress() +" in cell " +cell.getRowIndex() +"," +cell.getColumnIndex());}
+				cell = evaluator.evaluateInCell(cell);
+			}
 			// Depending on the cell type, the value is read using Apache POI methods
 			
-			switch (cell.getCellType()) {
+			switch (cell.getCellTypeEnum()) {
 			
 				// String are easy to handle
-				case Cell.CELL_TYPE_STRING : 
+				case STRING : 
 					logger.trace("Found string " +cell.getStringCellValue());
 					value = cell.getStringCellValue();
 					break;
 					
 				// Since date formatted cells are also of the numeric type, this needs to be processed
-				case Cell.CELL_TYPE_NUMERIC:
+				case NUMERIC:
 					if (DateUtil.isCellDateFormatted(cell))
 					{
 						Date date = cell.getDateCellValue();
@@ -93,6 +94,7 @@ public class DataUtil {
 						value = cell.getNumericCellValue();
 					}
 					break;
+				default: break;
 			}
 		}
 		else

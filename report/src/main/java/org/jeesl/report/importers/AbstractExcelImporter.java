@@ -15,6 +15,7 @@ import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import org.apache.commons.lang3.StringUtils;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -110,7 +111,7 @@ public abstract class AbstractExcelImporter <C extends Serializable, I extends I
         for(int cellNum = excelRow.getFirstCellNum(); cellNum < excelRow.getLastCellNum(); cellNum++)
         {
            Cell cell = excelRow.getCell(cellNum);
-           if(cell != null && cell.getCellType() != Cell.CELL_TYPE_BLANK && StringUtils.isNotBlank(cell.toString()))
+           if(cell != null && cell.getCellTypeEnum() != CellType.BLANK && StringUtils.isNotBlank(cell.toString()))
            {
                 rowExists = true;
            }    
