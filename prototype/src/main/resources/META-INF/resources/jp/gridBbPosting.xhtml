@@ -45,7 +45,7 @@
 					<h:form id="fThread" rendered="#{(not empty cc.attrs.bean.thread) and (cc.attrs.bean.thread.id eq 0)}">
 						<p:panel header="#{msg.jeeslBbThread}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveThread()}" update=":#{cc.id}:sThread"/>
+								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveThread()}" update=":#{cc.id}:sThread"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslBbMessageDate}"/>
@@ -74,7 +74,7 @@
 					<h:form id="fThread2" rendered="#{(not empty cc.attrs.bean.thread) and (cc.attrs.bean.thread.id gt 0)}">
 						<p:panel header="#{msg.jeeslBbThread}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslArrowLeft" listener="#{cc.attrs.bean.postingToThreads()}" update=":#{cc.id}:sThread"/>
+								<j:svg type="jeeslArrowLeft" library="jeeslGfx" listener="#{cc.attrs.bean.postingToThreads()}" update=":#{cc.id}:sThread"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslBbMessageDate}"/>
@@ -87,7 +87,7 @@
 					<h:form id="fPosting" >
 						<p:panel header="#{msg.jeeslBbPosting}" styleClass="jeeslPanel" rendered="#{(not empty cc.attrs.bean.thread) and (cc.attrs.bean.thread.id gt 0) and (not empty cc.attrs.bean.posting) and (cc.attrs.bean.posting.id eq 0)}">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave" listener="#{cc.attrs.bean.savePosting()}" update=":#{cc.id}:sThread"/>
+								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.savePosting()}" update=":#{cc.id}:sThread"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslBbMessageDate}"/>

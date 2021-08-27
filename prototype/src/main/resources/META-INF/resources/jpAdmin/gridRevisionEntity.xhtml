@@ -56,8 +56,8 @@
 					<h:form id="fView">
 						<p:panel id="pView" header="#{msg.jeeslRevisionEntity}" rendered="#{not empty cc.attrs.bean.entity}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.entity.id gt 0}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -127,8 +127,8 @@
 					<h:form id="fMapping">
 						<p:panel header="#{msg.aupRevisionMapping}" rendered="#{not empty cc.attrs.bean.mapping}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelMapping()}" 	update=":#{cc.id}:sAttributes" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveMapping()}" 	update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelMapping()}" 	update=":#{cc.id}:sAttributes" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveMapping()}" 	update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmMapping()}" 		update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.bean.mapping.id gt 0}"  tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="auPwg20,auPwg80">

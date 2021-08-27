@@ -42,8 +42,8 @@
 					<h:form id="fIoDashboard">
 						<p:panel header="#{msg.jeeslIoDashboard}" rendered="#{not empty cc.attrs.bean.dashboard}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelDashboard()}" update=":#{cc.id}:sIoDashboard"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveDashboard()}"   update=":#{cc.id}:sIoDashboards :#{cc.id}:sIoDashboard" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelDashboard()}" update=":#{cc.id}:sIoDashboard"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveDashboard()}"   update=":#{cc.id}:sIoDashboards :#{cc.id}:sIoDashboard" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteDashboard()}" update=":#{cc.id}:sIoDashboards :#{cc.id}:sIoDashboard" rendered="#{cc.attrs.bean.dashboard.id gt 0}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
@@ -84,8 +84,8 @@
 					<h:form id="fIoDashboardComponent">
 						<p:panel header="#{msg.jeeslIoDashboardsComponent}" rendered="#{not empty cc.attrs.bean.dashComponentPosition}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelDashboardComponent()}" update=":#{cc.id}:fIoDashboardComponent :#{cc.id}:sIoDashboard"/>
-								<j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveDashboardComponent()}"   update=":#{cc.id}:fIoDashboardComponents :#{cc.id}:fIoDashboardComponent" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelDashboardComponent()}" update=":#{cc.id}:fIoDashboardComponent :#{cc.id}:sIoDashboard"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveDashboardComponent()}"   update=":#{cc.id}:fIoDashboardComponents :#{cc.id}:fIoDashboardComponent" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteDashboardComponent()}" update=":#{cc.id}:fIoDashboardComponents :#{cc.id}:fIoDashboardComponent" rendered="#{cc.attrs.bean.dashComponentPosition.id gt 0}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>

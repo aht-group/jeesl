@@ -47,7 +47,7 @@
 				<p:panel styleClass="jeeslPanel">
 					<f:facet name="header"><j:pHeader entity="MdcCollection"/></f:facet>
 					<f:facet name="actions">
-						<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveActivity()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveActivity()}" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">

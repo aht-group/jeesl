@@ -1,14 +1,8 @@
 package org.jeesl.report.excel.aggregation;
 
-import net.sf.ahtutils.report.excel.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import net.sf.ahtutils.xml.finance.Figures;
-import net.sf.ahtutils.xml.finance.Finance;
-import net.sf.ahtutils.xml.finance.Time;
-import net.sf.ahtutils.xml.report.Info;
-import net.sf.ahtutils.xml.report.Label;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.poi.ss.usermodel.Cell;
@@ -22,6 +16,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.finance.Figures;
+import net.sf.ahtutils.xml.finance.Finance;
+import net.sf.ahtutils.xml.finance.Time;
+import net.sf.ahtutils.xml.report.Info;
+import net.sf.ahtutils.xml.report.Label;
 
 
 public class JeeslAggregationsFlatExporter

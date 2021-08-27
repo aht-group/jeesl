@@ -64,7 +64,7 @@ public class DbCleaner
 //		 em.getTransaction().begin();
 		for(Long id : list)
 		{
-//			logger.info("Deleting "+id);
+			logger.info("Deleting "+id);
 		}
 	}
 }

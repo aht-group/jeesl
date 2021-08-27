@@ -21,7 +21,7 @@ public class UtilsFileRepository
 	public UtilsFileRepository(File baseRepo)
 	{
 		this.baseRepo=baseRepo;
-		fs = SystemUtils.FILE_SEPARATOR;
+
 	}
 	
 	protected void setFs(String fs)

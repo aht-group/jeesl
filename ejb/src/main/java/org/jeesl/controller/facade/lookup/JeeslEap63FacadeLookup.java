@@ -50,6 +50,7 @@ public class JeeslEap63FacadeLookup implements JeeslFacadeLookup
 		this.password=password;
 		
 		if(this.host==null){this.host="localhost";}
+		logger.trace("Using "+host+":"+this.port);
 		
 		Security.addProvider(new JBossSaslProvider());
 		

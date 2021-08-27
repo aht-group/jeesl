@@ -56,7 +56,7 @@
                 	<h:form id="fTransaction">
                 		 <p:panel id="pData" header="#{msg.jeeslTsTransaction}" styleClass="jeeslPanel">
                            <f:facet name="actions">
-                               <j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveTransaction()}" update="@form :#{cc.id}:row2"/>
+                               <j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveTransaction()}" update="@form :#{cc.id}:row2"/>
                            </f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
                            <p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
@@ -122,8 +122,8 @@
                     <h:form id="fData">
                         <p:panel id="pData" header="#{msg.aupOptionDetails}" styleClass="jeeslPanel">
                             <f:facet name="actions">
-                                <j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelData()}" update=":#{cc.id}:sTs" tooltip="#{msg.jeeslTtCancel}"/>
-                                <j:icon type="jeeslSave"   listener="#{cc.attrs.bean.saveData()}" update=":#{cc.id}:fTimeSeries" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+                                <j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelData()}" update=":#{cc.id}:sTs" tooltip="#{msg.jeeslTtCancel}"/>
+                                <j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveData()}" update=":#{cc.id}:fTimeSeries" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
                             </f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
                             <p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" styleClass="auCleanPanelGrid">

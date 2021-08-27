@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +68,6 @@ public class AbstractJavaSecurityFileFactory extends AbstractFreemarkerFileFacto
 	protected static String buildPackageFile(String code)
 	{
 		String dotPackage = buildPackage(code);
-		return dotPackage.replace(".",SystemUtils.FILE_SEPARATOR);
+		return dotPackage.replace(".",File.separator);
 	}
 }

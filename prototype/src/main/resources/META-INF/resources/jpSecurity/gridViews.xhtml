@@ -71,7 +71,7 @@
 					<h:form id="fView">
 						<p:panel rendered="#{not empty cc.attrs.bean.view}" header="#{msg.aupSecurityView}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" rendered="#{cc.attrs.bean.hasDeveloperAction}" tooltip="#{msg.ttDelete}"/>
 								<j:icon type="jeeslClone" listener="#{cc.attrs.bean.cloneView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.jeeslTooltipClone}"/>
 							</f:facet>
@@ -142,7 +142,7 @@
 					<h:form id="fAction">						
 						<p:panel rendered="#{not empty cc.attrs.bean.action}" header="#{msg.jeeslSecurityAction}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.hasDeveloperAction}" listener="#{cc.attrs.bean.rmAction()}" update=":#{cc.id}:sView" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
@@ -183,7 +183,7 @@
 					<h:form id="fArea">						
 						<p:panel rendered="#{not empty cc.attrs.bean.area}" header="#{msg.jeeslSecurityArea}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
+								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.hasDeveloperAction}" listener="#{cc.attrs.bean.deleteArea()}" update=":#{cc.id}:sView" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">

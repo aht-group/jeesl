@@ -31,7 +31,6 @@ public class XmlTransitionFactory<L extends JeeslLang, D extends JeeslDescriptio
 	final static Logger logger = LoggerFactory.getLogger(XmlTransitionFactory.class);
 	
 
-	@SuppressWarnings("unused")
 	private final String localeCode;
 	private final Transition q;
 	
@@ -62,8 +61,6 @@ public class XmlTransitionFactory<L extends JeeslLang, D extends JeeslDescriptio
 		if(q.isSetDescriptions()) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
 		if(q.isSetStage()) {xfStage = new XmlStageFactory<>(localeCode,q.getStage());}
 	}
-	
-	
 	
 	public static Transition build(){return new Transition();}
 	

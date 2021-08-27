@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.apache.commons.io.filefilter.SuffixFileFilter;
-import org.apache.commons.lang3.SystemUtils;
 import org.mozilla.javascript.EvaluatorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +72,7 @@ public class JsFactory
 		{
 			File f = new File(dir,library);
 			logger.info("Adding "+library);
-			sb.append(readFile(f)).append(SystemUtils.LINE_SEPARATOR);
+			sb.append(readFile(f)).append(File.separator);
 		}
 		
 		logger.info("-------------------");
@@ -85,7 +84,7 @@ public class JsFactory
 			{
 				File f = new File(dir,s);
 				logger.info("Adding "+s);
-				sb.append(readFile(f)).append(SystemUtils.LINE_SEPARATOR);
+				sb.append(readFile(f)).append(File.separator);
 			}
 		}
 		
@@ -100,7 +99,7 @@ public class JsFactory
 	    StringBuffer sb = new StringBuffer();
 	    while ((line = br.readLine()) != null)
 	    {
-	        sb.append(line).append(SystemUtils.LINE_SEPARATOR);
+	        sb.append(line).append(File.separator);
 	    }
 	    br.close();
 	    return sb.toString();

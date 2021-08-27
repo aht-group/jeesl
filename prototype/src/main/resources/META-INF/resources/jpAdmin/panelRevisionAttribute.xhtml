@@ -21,8 +21,8 @@
 	<composite:implementation>
 		<p:panel header="#{msg.jeeslRevisionAttribute}" rendered="#{not empty cc.attrs.bean.attribute}" styleClass="jeeslPanel">
 			<f:facet name="actions">
-				<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.jeeslTtCancel}"/>
-				<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.ttSave}"/>
+				<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.jeeslTtCancel}"/>
+				<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.ttSave}"/>
 				<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.attribute.id gt 0}" listener="#{cc.attrs.bean.rmAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
 			</f:facet>
 			<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">

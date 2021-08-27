@@ -59,7 +59,7 @@
 					<h:form id="fQuestion">
 						<p:panel header="#{msg.jeeslSurvey} (#{cc.attrs.bean.survey.id})" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveSurvey()}" update=":#{cc.id}:grid"/>
+								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveSurvey()}" update=":#{cc.id}:grid"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteSurvey()}" update=":#{cc.id}:grid"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" >

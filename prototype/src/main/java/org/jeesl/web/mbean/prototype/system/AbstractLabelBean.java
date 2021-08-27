@@ -70,7 +70,8 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	protected void postConstructDb(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, File fTmpCache)
 	{
 		th = new TranslationHandler<>(fRevision, fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
-		th.reloadFromDb(fTmpCache);
+		th.reloadFromDb();
+		th.saveToFile(fTmpCache);
 				
 		if(fbRevision!=null)
 		{
@@ -81,7 +82,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	protected void postConstructFile(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, File fTmpCache)
 	{
 		th = new TranslationHandler<>(fRevision, fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
-		th.reloadFromFile(fTmpCache);
+		th.reloadFromDb();
 		
 		if(fbRevision!=null)
 		{

@@ -14,8 +14,7 @@ import org.jeesl.api.controller.ImportStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ExcelSimpleSerializableImporter <S extends Serializable, I extends ImportStrategy>
-	extends AbstractExcelImporter<S,I> {
+public class ExcelSimpleSerializableImporter <S extends Serializable, I extends ImportStrategy> extends AbstractExcelImporter<S,I> {
 	
 	final static Logger logger = LoggerFactory.getLogger(ExcelSimpleSerializableImporter.class);
 	

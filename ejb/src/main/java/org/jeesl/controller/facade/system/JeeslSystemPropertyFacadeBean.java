@@ -23,6 +23,7 @@ public class JeeslSystemPropertyFacadeBean<L extends JeeslLang,D extends JeeslDe
 					extends JeeslFacadeBean
 					implements JeeslSystemPropertyFacade<L,D,C,P>
 {	
+	private static final long serialVersionUID = 1L;
 	private final Class<P> cProperty;
 	
 	public JeeslSystemPropertyFacadeBean(EntityManager em, final Class<P> cProperty)

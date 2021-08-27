@@ -66,7 +66,7 @@
 			<h:form id="fUser">
 				<p:panel header="User Details" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						  <j:icon type="jeeslSave" listener="#{cc.attrs.bean.saveUser()}" update=":#{cc.id}:grid"/>
+						  <j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveUser()}" update=":#{cc.id}:grid"/>
 						  <j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rm(cc.attrs.bean.user)}" tooltip="delete user" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" >

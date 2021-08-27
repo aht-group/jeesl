@@ -43,8 +43,8 @@
 					<h:form id="fReport">
 						<p:panel header="#{msg.jeeslIoReport}" rendered="#{(not empty cc.attrs.bean.report) and cc.attrs.bean.uiHelper.showPanelReport}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelReport()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveReport()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelReport()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveReport()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.report.id gt 0}" listener="#{cc.attrs.bean.rmReport()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
 								<j:icon type="jeeslDownload" rendered="#{(cc.attrs.bean.report.id gt 0) and (not empty cc.attrs.bean.restUrl)}" listener="#{cc.attrs.bean.download()}" update=":#{cc.id}:grid" tooltip="#{msg.ttUpload}" />
 								<j:icon type="jeeslClone" listener="#{cc.attrs.bean.cloneReport()}" process="@this" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTooltipClone}"/>
@@ -98,8 +98,8 @@
 					<h:form id="fSheet">
 						<p:panel header="#{msg.jeeslIoSheet}" rendered="#{(not empty cc.attrs.bean.sheet) and cc.attrs.bean.uiHelper.showPanelSheet}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.sheet.id gt 0}" listener="#{cc.attrs.bean.rmSheet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
 								<j:icon type="jeeslClone" listener="#{cc.attrs.bean.cloneSheet()}" process="@this" update=":#{cc.id}:sSheet" tooltip="#{msg.jeeslTooltipClone}"/>
 							</f:facet>
@@ -143,8 +143,8 @@
 					<h:form id="fGroup">
 						<p:panel header="#{msg.jeeslIoReportGroup}" rendered="#{(not empty cc.attrs.bean.group) and cc.attrs.bean.uiHelper.showPanelGroup}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.group.id gt 0}" listener="#{cc.attrs.bean.rmGroup()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid40,jeeslGrid10">
@@ -200,8 +200,8 @@
 					<h:form id="fColumn">
 						<p:panel header="#{msg.jeeslIoReportColumn}" rendered="#{not empty cc.attrs.bean.column}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.column.id gt 0}" listener="#{cc.attrs.bean.rmColumn()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -332,8 +332,8 @@
 					<h:form id="fRow">
 						<p:panel header="#{msg.jeeslIoReportRow}" rendered="#{not empty cc.attrs.bean.row}" styleClass="jeeslPanel">
 							<f:facet name="actions">
-								<j:icon type="jeeslCancel" listener="#{cc.attrs.bean.cancelRow()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:icon type="jeeslSave"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveRow()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelRow()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveRow()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.row.id gt 0}" listener="#{cc.attrs.bean.rmRow()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
