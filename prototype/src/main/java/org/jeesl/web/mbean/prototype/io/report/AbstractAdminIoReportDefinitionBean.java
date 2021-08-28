@@ -80,7 +80,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 						COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
 						ROW extends JeeslReportRow<L,D,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
 						TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-						CELL extends JeeslReportCell<L,D,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
+						CELL extends JeeslReportCell<L,D,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
 						STYLE extends JeeslReportStyle<L,D>,
 						CDT extends JeeslStatus<L,D,CDT>,
 						CW extends JeeslStatus<L,D,CW>,
