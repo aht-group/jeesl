@@ -22,10 +22,9 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 public interface JeeslReportRow<L extends JeeslLang,D extends JeeslDescription,
 									
 									
-									SHEET extends JeeslReportSheet<L,D,?,?,GROUP,ROW>,
-									GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-									COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,?>,
-									ROW extends JeeslReportRow<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT>,
+									SHEET extends JeeslReportSheet<L,D,?,?,?,ROW>,
+									
+									ROW extends JeeslReportRow<L,D,SHEET,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT>,
 									TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 									CELL extends JeeslReportCell<L,D,TEMPLATE>,
 									STYLE extends JeeslReportStyle<L,D>,
