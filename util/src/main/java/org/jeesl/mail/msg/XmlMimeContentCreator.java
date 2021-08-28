@@ -6,14 +6,13 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.apache.commons.lang3.SystemUtils;
 import org.jeesl.model.xml.system.io.mail.Attachment;
 import org.jeesl.model.xml.system.io.mail.Image;
 import org.jeesl.model.xml.system.io.mail.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class XmlMimeContentCreator extends AbstractMimeContentCreator
 {
@@ -94,7 +93,7 @@ public class XmlMimeContentCreator extends AbstractMimeContentCreator
 	
 		if(mail.isSetAttachment())
 		{
-			txt.setContent(mail.getExample()+SystemUtils.LINE_SEPARATOR, "text/plain; charset=\"ISO-8859-1\"");
+			txt.setContent(mail.getExample()+System.lineSeparator(), "text/plain; charset=\"ISO-8859-1\"");
 		}
 		else
 		{
@@ -110,7 +109,7 @@ public class XmlMimeContentCreator extends AbstractMimeContentCreator
 	
 		if(mail.isSetAttachment())
 		{
-			txt.setContent(mail.getText().getValue()+SystemUtils.LINE_SEPARATOR, "text/plain; charset=\"ISO-8859-1\"");
+			txt.setContent(mail.getText().getValue()+System.lineSeparator(), "text/plain; charset=\"ISO-8859-1\"");
 		}
 		else
 		{

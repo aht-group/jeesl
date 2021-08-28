@@ -91,7 +91,7 @@ public class FreemarkerMimeContentCreator extends AbstractMimeContentCreator
 		{
 			if(mail.isSetAttachment())
 			{
-				txt.setContent(fme.process(xml)+SystemUtils.LINE_SEPARATOR, "text/plain; charset=\""+encoding+"\"");
+				txt.setContent(fme.process(xml)+System.lineSeparator(), "text/plain; charset=\""+encoding+"\"");
 			}
 			else{txt.setContent(fme.process(xml), "text/plain; charset=\""+encoding+"\"");}
 		}
@@ -111,7 +111,7 @@ public class FreemarkerMimeContentCreator extends AbstractMimeContentCreator
 		{
 			if(mail.isSetAttachment())
 			{
-				html.setContent(fme.process(xml)+SystemUtils.LINE_SEPARATOR, "text/html; charset=\""+encoding+"\"");
+				html.setContent(fme.process(xml)+System.lineSeparator(), "text/html; charset=\""+encoding+"\"");
 
 			}
 			else{html.setContent(fme.process(xml), "text/html; charset=\""+encoding+"\"");}

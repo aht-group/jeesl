@@ -1,8 +1,12 @@
 package org.jeesl.interfaces.model.io.report.xlsx;
 
+import java.io.Serializable;
+
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
+import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
+import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -16,16 +20,16 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslReportRow<L extends JeeslLang,D extends JeeslDescription,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-									REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
+									
+									REPORT extends JeeslIoReport<L,D,?,WORKBOOK>,
 									IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 									WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
 									SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
 									GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
 									COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
-									ROW extends JeeslReportRow<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
+									ROW extends JeeslReportRow<L,D,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
 									TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-									CELL extends JeeslReportCell<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
+									CELL extends JeeslReportCell<L,D,?,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
 									STYLE extends JeeslReportStyle<L,D>,
 									CDT extends JeeslStatus<L,D,CDT>,
 									CW extends JeeslStatus<L,D,CW>,
@@ -35,7 +39,7 @@ public interface JeeslReportRow<L extends JeeslLang,D extends JeeslDescription,
 									TL extends JeeslTrafficLight<L,D,TLS>,
 									TLS extends JeeslStatus<L,D,TLS>>
 
-		extends EjbWithId,EjbSaveable,
+		extends Serializable,EjbRemoveable,EjbPersistable,EjbWithId,EjbSaveable,
 				EjbWithCode,EjbWithPositionVisible,EjbWithPositionParent,
 				EjbWithLang<L>,EjbWithDescription<D>
 {	

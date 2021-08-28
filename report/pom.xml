@@ -34,14 +34,15 @@
         	<scope>provided</scope>
 	    </dependency>
 	
-		<!-- XML -->
+		<!-- XML 
 		<dependency>
-				<groupId>org.jdom</groupId>
-				<artifactId>jdom</artifactId>
-		</dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+		</dependency> -->
+		
 		<dependency>
-				<groupId>jaxen</groupId>
-				<artifactId>jaxen</artifactId>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>
@@ -86,30 +87,21 @@
 			    		 <groupId>bouncycastle</groupId>
   						 <artifactId>bcmail-jdk14</artifactId>
   		    		</exclusion>
-  		    		<!-- 
-  		    		<exclusion>
-  		    			<artifactId>commons-beanutils</artifactId>
-  		    			<groupId>commons-beanutils</groupId>
-  		    		</exclusion>
-  		    		 -->
-  		    		<!-- 
-  		    		<exclusion>
-  		    			<artifactId>commons-digester</artifactId>
-  		    			<groupId>commons-digester</groupId>
-  		    		</exclusion>
-  		    		 -->
 			    </exclusions>
 			</dependency>
-			<dependency>
-			    <groupId>xalan</groupId>
-			    <artifactId>xalan</artifactId>
-			    <exclusions>
-			    	<exclusion>
-			    		<artifactId>xml-apis</artifactId>
-			    		<groupId>xml-apis</groupId>
-			    	</exclusion>
-			    </exclusions>
-			</dependency>
+		
+		<!-- XALAN	2021-08-18 tk: deactivated
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>xml-apis</artifactId>
+					<groupId>xml-apis</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>  -->
+		
 			<dependency>
 			    <groupId>net.sf.jasperreports</groupId>
 			    <artifactId>jasperreports-fonts</artifactId>
@@ -118,6 +110,8 @@
 			    <groupId>org.codehaus.groovy</groupId>
 			    <artifactId>groovy-all</artifactId>
 		</dependency>
+		
+		<!-- ExLP -->
 		<dependency>
         	<groupId>net.sf.exlp</groupId>
         	<artifactId>exlp-util</artifactId>
@@ -153,7 +147,7 @@
         	<scope>compile</scope>
 	    </dependency>
 	    
-	<!-- Need to check if this is really required-->
+		<!-- Need to check if this is really required -->
        <dependency>
 			<groupId>org.apache.ant</groupId>
 			<artifactId>ant</artifactId>
@@ -165,7 +159,8 @@
 					<artifactId>ant-launcher</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>  
+		</dependency>
+		
 		
 		<dependency>
 	      	<groupId>org.hibernate</groupId>
