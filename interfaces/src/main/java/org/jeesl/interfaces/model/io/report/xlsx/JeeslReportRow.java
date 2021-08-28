@@ -20,14 +20,11 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslReportRow<L extends JeeslLang,D extends JeeslDescription,
+									SHEET extends JeeslReportSheet<L,D,?,?,?,?>,
 									
 									
-									SHEET extends JeeslReportSheet<L,D,?,?,?,ROW>,
+									TEMPLATE extends JeeslReportTemplate<L,D,?>,
 									
-									ROW extends JeeslReportRow<L,D,SHEET,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT>,
-									TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-									CELL extends JeeslReportCell<L,D,TEMPLATE>,
-									STYLE extends JeeslReportStyle<L,D>,
 									CDT extends JeeslStatus<L,D,CDT>,
 									CW extends JeeslStatus<L,D,CW>,
 									RT extends JeeslStatus<L,D,RT>>
