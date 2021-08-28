@@ -21,13 +21,11 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslReportRow<L extends JeeslLang,D extends JeeslDescription,
 									
-									REPORT extends JeeslIoReport<L,D,?,WORKBOOK>,
-									IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
-									WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-									SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
+									
+									SHEET extends JeeslReportSheet<L,D,?,?,GROUP,ROW>,
 									GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
 									COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
-									ROW extends JeeslReportRow<L,D,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
+									ROW extends JeeslReportRow<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
 									TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
 									CELL extends JeeslReportCell<L,D,TEMPLATE>,
 									STYLE extends JeeslReportStyle<L,D>,

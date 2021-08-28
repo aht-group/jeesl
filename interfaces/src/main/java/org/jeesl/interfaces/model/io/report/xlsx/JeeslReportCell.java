@@ -19,12 +19,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslReportCell<L extends JeeslLang,D extends JeeslDescription,
-									
-									
-									
-									
-									TEMPLATE extends JeeslReportTemplate<L,D,?>
-									>
+									TEMPLATE extends JeeslReportTemplate<L,D,?>>
 
 		extends Serializable,EjbRemoveable,EjbPersistable,EjbSaveable,
 				EjbWithCode,EjbWithVisible,
