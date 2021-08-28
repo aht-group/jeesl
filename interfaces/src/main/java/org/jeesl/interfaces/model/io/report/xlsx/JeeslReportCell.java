@@ -19,12 +19,12 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslReportCell<L extends JeeslLang,D extends JeeslDescription,
-									SHEET extends JeeslReportSheet<L,D,?,?,GROUP,ROW>,
-									GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
+									
+									GROUP extends JeeslReportColumnGroup<L,D,?,COLUMN,STYLE>,
 									COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
-									ROW extends JeeslReportRow<L,D,?,?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
+									ROW extends JeeslReportRow<L,D,?,?,?,?,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
 									TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-									CELL extends JeeslReportCell<L,D,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
+									CELL extends JeeslReportCell<L,D,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
 									STYLE extends JeeslReportStyle<L,D>,
 									CDT extends JeeslStatus<L,D,CDT>,
 									CW extends JeeslStatus<L,D,CW>,
