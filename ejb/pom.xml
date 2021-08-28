@@ -45,8 +45,15 @@
 			<artifactId>jeesl-xml</artifactId>
 			<type>jar</type>
 		</dependency>
+		
+		<!-- ExLP -->
+		<dependency>
+         	<groupId>net.sf.exlp</groupId>
+         	<artifactId>exlp-util</artifactId>
+         	<scope>provided</scope>
+         </dependency>
         
-        <!-- MEtachart -->
+        <!-- Metachart -->
 		<dependency>
          	<groupId>org.metachart</groupId>
          	<artifactId>metachart-util</artifactId>
@@ -115,15 +122,13 @@
 			<scope>provided</scope>
 	  	</dependency>
          
-
-          
-         <dependency>
-         	<groupId>net.sf.exlp</groupId>
-         	<artifactId>exlp-util</artifactId>
-         	<type>jar</type>
-         	<scope>provided</scope>
-         </dependency>
-		
+		<!-- E-Mail -->
+		<dependency>
+    		<groupId>javax.mail</groupId>
+    		<artifactId>javax.mail-api</artifactId>
+    		<version>1.5.6</version>
+		</dependency>
+ 		
 		<!-- Batik -->
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>

@@ -137,39 +137,17 @@
                 </exclusion>
             </exclusions>
         </dependency>
-		<!--
-        <dependency>
-            <groupId>net.sf.jasperreports</groupId>
-            <artifactId>jasperreports-fonts</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>xalan</groupId>
-            <artifactId>xalan</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>xml-apis</artifactId>
-                    <groupId>xml-apis</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        -->         
-        
+      
+        <!-- 
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <scope>provided</scope>
         </dependency>
-
-<!-- 
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-        </dependency>
-  --> 	<dependency>
+         -->
+		
+		<!-- Apache Commons -->
+	 	<dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
@@ -201,21 +179,6 @@
 		    <version>3.6</version>
 		</dependency>
 
-		<!-- 2021-07-22 tk deactivated
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20090211</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency> -->
-
-		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-email</artifactId>
-		    <version>1.5</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
@@ -281,12 +244,8 @@
             <groupId>org.openfuxml</groupId>
             <artifactId>ofx-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>commons-dbutils</groupId>
-            <artifactId>commons-dbutils</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
+        
+        <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -311,6 +270,7 @@
             </exclusions>
             <scope>provided</scope>
         </dependency>
+        
 		<dependency>
   			<groupId>org.jboss.spec.javax.ws.rs</groupId>
   			<artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
@@ -336,6 +296,7 @@
             <artifactId>joda-time</artifactId>
         </dependency>
 
+		<!-- FR Access to AWS-S3 -->
 		<dependency>
 		    <groupId>com.amazonaws</groupId>
 		    <artifactId>aws-java-sdk-s3</artifactId>
@@ -348,14 +309,15 @@
             </exclusions>
 		</dependency>
        
+       <!-- ANTLR for Survey Condition Evaluator -->
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <type>jar</type>
             <scope>compile</scope>
             <version>4.7</version>
         </dependency>
         
+        <!-- Apache Commons -->
 		<dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
@@ -367,6 +329,11 @@
                     <groupId>commons-logging</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+		<dependency>
+            <groupId>commons-dbutils</groupId>
+            <artifactId>commons-dbutils</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- JBoss Wildfly -->
@@ -391,12 +358,12 @@
 		</dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <scope>compile</scope>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
+            <artifactId>jcl-over-slf4j</artifactId>
             <scope>test</scope>
         </dependency>
 
