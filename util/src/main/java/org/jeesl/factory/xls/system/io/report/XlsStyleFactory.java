@@ -33,7 +33,7 @@ public class XlsStyleFactory<
 								SHEET extends JeeslReportSheet<?,?,?,?,GROUP,ROW>,
 								GROUP extends JeeslReportColumnGroup<?,?,SHEET,COLUMN,STYLE>,
 								COLUMN extends JeeslReportColumn<?,?,GROUP,STYLE,CDT,CW,TLS>,
-								ROW extends JeeslReportRow<?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
+								ROW extends JeeslReportRow<?,?,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT>,
 								TEMPLATE extends JeeslReportTemplate<?,?,CELL>,
 								CELL extends JeeslReportCell<?,?,TEMPLATE>,
 								STYLE extends JeeslReportStyle<?,?>,
