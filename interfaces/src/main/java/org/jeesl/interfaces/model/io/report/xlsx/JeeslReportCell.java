@@ -23,16 +23,8 @@ public interface JeeslReportCell<L extends JeeslLang,D extends JeeslDescription,
 									
 									
 									
-									TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-									CELL extends JeeslReportCell<L,D,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
-									STYLE extends JeeslReportStyle<L,D>,
-									CDT extends JeeslStatus<L,D,CDT>,
-									CW extends JeeslStatus<L,D,CW>,
-									RT extends JeeslStatus<L,D,RT>,
-									ENTITY extends EjbWithId,
-									ATTRIBUTE extends EjbWithId,
-									TL extends JeeslTrafficLight<L,D,TLS>,
-									TLS extends JeeslStatus<L,D,TLS>>
+									TEMPLATE extends JeeslReportTemplate<L,D,?>
+									>
 
 		extends Serializable,EjbRemoveable,EjbPersistable,EjbSaveable,
 				EjbWithCode,EjbWithVisible,
