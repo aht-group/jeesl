@@ -15,7 +15,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslReportTemplate<L extends JeeslLang,D extends JeeslDescription,
-								CELL extends JeeslReportCell<L,D,?,?,?,?,?,?,?,?,?,CELL,?,?,?,?,?,?,?,?>>
+								CELL extends JeeslReportCell<L,D,?,?,?,?,?,?,?,CELL,?,?,?,?,?,?,?,?>>
 		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 				EjbWithCode,EjbWithPositionVisible,
 				EjbWithLang<L>,EjbWithDescription<D>
