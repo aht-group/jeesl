@@ -22,7 +22,7 @@ public class RestUrlDelay
 		return url;
 	}
 	
-	public static String getUrl(Configuration config){return getUrl(config,ConfigKey.netRestUrl);}
+	public static String getUrl(Configuration config){return getUrl(config,ConfigKey.netRestUrlLocal);}
 	public static String getUrl(Configuration config, String key)
 	{
 		String url = config.getString(key);

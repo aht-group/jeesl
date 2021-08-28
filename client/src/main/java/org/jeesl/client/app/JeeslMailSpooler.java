@@ -53,7 +53,7 @@ public class JeeslMailSpooler extends AbstractSmtpSpooler
 	{	
 		Configuration config = JeeslBootstrap.init();
 		
-		cfgUrl = config.getString(ConfigKey.netRestUrl);
+		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
 		cfgSmtp = config.getString(ConfigKey.netSmtpHost);
 		
 		debugConfig();

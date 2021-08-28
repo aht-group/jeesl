@@ -59,7 +59,7 @@ public class JeeslDbBackupNotifier
 	{	
 		Configuration config = JeeslBootstrap.init();
 		
-		cfgUrl = config.getString(ConfigKey.netRestUrl);
+		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
 		cfgDirectory = new File(config.getString("dir.db.backup"));
 		cfgHost = "x";
 		cfgSystem = "jeesl";
