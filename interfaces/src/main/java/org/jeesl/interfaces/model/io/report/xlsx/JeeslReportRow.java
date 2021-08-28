@@ -21,12 +21,8 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslReportRow<L extends JeeslLang,D extends JeeslDescription,
 									SHEET extends JeeslReportSheet<L,D,?,?,?,?>,
-									
-									
 									TEMPLATE extends JeeslReportTemplate<L,D,?>,
-									
 									CDT extends JeeslStatus<L,D,CDT>,
-									CW extends JeeslStatus<L,D,CW>,
 									RT extends JeeslStatus<L,D,RT>>
 
 		extends Serializable,EjbRemoveable,EjbPersistable,EjbWithId,EjbSaveable,

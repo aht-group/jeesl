@@ -20,7 +20,7 @@ public interface JeeslReportSheet<L extends JeeslLang,D extends JeeslDescription
 									IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 									WORKBOOK extends JeeslReportWorkbook<?,?>,
 									GROUP extends JeeslReportColumnGroup<L,D,?,?,?>,
-									ROW extends JeeslReportRow<L,D,?,?,?,?,?>>
+									ROW extends JeeslReportRow<L,D,?,?,?,?>>
 		extends Serializable,EjbRemoveable,EjbPersistable,EjbWithId,EjbSaveable,
 				EjbWithCode,EjbWithPositionVisible,EjbWithPositionParent,
 				EjbWithLang<L>,EjbWithDescription<D>
