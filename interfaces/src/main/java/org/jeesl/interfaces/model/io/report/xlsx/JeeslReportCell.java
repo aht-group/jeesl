@@ -21,10 +21,10 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 public interface JeeslReportCell<L extends JeeslLang,D extends JeeslDescription,
 									
 									
-									COLUMN extends JeeslReportColumn<L,D,?,STYLE,CDT,CW,TLS>,
-									ROW extends JeeslReportRow<L,D,?,?,?,?,?,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
+									
+									
 									TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-									CELL extends JeeslReportCell<L,D,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
+									CELL extends JeeslReportCell<L,D,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>,
 									STYLE extends JeeslReportStyle<L,D>,
 									CDT extends JeeslStatus<L,D,CDT>,
 									CW extends JeeslStatus<L,D,CW>,
