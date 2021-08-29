@@ -37,6 +37,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
+import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.JsonFlatFigures;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportCellComparator;
@@ -73,7 +74,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDes
 											ENTITY extends EjbWithId,
 											ATTRIBUTE extends EjbWithId,
 											TL extends JeeslTrafficLight<L,D,TLS>,
-											TLS extends JeeslStatus<L,D,TLS>,
+											TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
 											FILLING extends JeeslStatus<L,D,FILLING>,
 											TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>>
 					implements JeeslReport<REPORT>

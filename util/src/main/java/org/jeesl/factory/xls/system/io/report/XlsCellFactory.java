@@ -26,6 +26,7 @@ import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportSheet;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
+import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,7 @@ public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
 							ENTITY extends EjbWithId,
 							ATTRIBUTE extends EjbWithId,
 							TL extends JeeslTrafficLight<?,?,TLS>,
-							TLS extends JeeslStatus<?,?,TLS>>
+							TLS extends JeeslTrafficLightScope<?,?,TLS,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XlsCellFactory.class);
 		

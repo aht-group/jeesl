@@ -9,8 +9,8 @@ import javax.faces.context.FacesContext;
 import org.jeesl.factory.css.CssAlignmentFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
+import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.jsf.util.ComponentAttributeProcessor;
 import org.jeesl.jsf.util.TrafficLightProcessor;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 @FacesComponent("org.jeesl.jsf.components.TrafficLight")
 public class TrafficLight <L extends JeeslLang,D extends JeeslDescription,
 							LIGHT extends JeeslTrafficLight<L,D,SCOPE>,
-							SCOPE extends JeeslStatus<L,D,SCOPE>>
+							SCOPE extends JeeslTrafficLightScope<L,D,SCOPE,?>>
 							extends UIOutput 
 {
     final static Logger logger = LoggerFactory.getLogger(TrafficLight.class);

@@ -39,6 +39,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
+import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportComparator;
@@ -77,7 +78,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 									ENTITY extends EjbWithId,
 									ATTRIBUTE extends EjbWithId,
 									TL extends JeeslTrafficLight<L,D,TLS>,
-									TLS extends JeeslStatus<L,D,TLS>,
+									TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
 									FILLING extends JeeslStatus<L,D,FILLING>,
 									TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>,
 									AGGREGATION extends JeeslStatus<L,D,AGGREGATION>>
@@ -168,7 +169,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 					ENTITY extends EjbWithId,
 					ATTRIBUTE extends EjbWithId,
 					TL extends JeeslTrafficLight<L,D,TLS>,
-					TLS extends JeeslStatus<L,D,TLS>,
+					TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
 					FILLING extends JeeslStatus<L,D,FILLING>,
 					TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>,
 					AGGREGATION extends JeeslStatus<L,D,AGGREGATION>>

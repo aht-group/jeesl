@@ -26,6 +26,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
+import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.util.query.xpath.ReportXpath;
 import org.slf4j.Logger;
@@ -51,7 +52,7 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 								ENTITY extends EjbWithId,
 								ATTRIBUTE extends EjbWithId,
 								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslStatus<L,D,TLS>,
+								TLS extends JeeslTrafficLightScope<L,D,TLS,?>,
 								FILLING extends JeeslStatus<L,D,FILLING>,
 								TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>>
 {
