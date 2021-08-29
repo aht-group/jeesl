@@ -14,6 +14,7 @@ import org.jeesl.factory.builder.system.ReportFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportCellFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportTemplateFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -41,7 +42,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+										CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 										REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 										IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 										WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
@@ -95,8 +96,8 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 		efTemplate = fbReport.template();
 		efCell = fbReport.cell();
 				
-		comparatorTemplate = new IoReportTemplateComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportTemplateComparator.Type.position);
-		comparatorCell = new IoReportCellComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportCellComparator.Type.position);
+		comparatorTemplate = new IoReportTemplateComparator<TEMPLATE>().factory(IoReportTemplateComparator.Type.position);
+		comparatorCell = new IoReportCellComparator<TEMPLATE,CELL>().factory(IoReportCellComparator.Type.position);
 
 		reloadTemplates();
 	}

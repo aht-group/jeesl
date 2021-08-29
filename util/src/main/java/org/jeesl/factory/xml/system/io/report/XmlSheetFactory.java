@@ -7,6 +7,7 @@ import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlImplementationFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportQueryType;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -31,7 +32,7 @@ import net.sf.ahtutils.xml.report.XlsSheet;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class XmlSheetFactory <L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 								REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
@@ -66,7 +67,7 @@ public class XmlSheetFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlSheetFactory(String localeCode, XlsSheet q)
 	{
 		this.q=q;
-		cGroup = new IoReportGroupComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportGroupComparator.Type.position);
+		cGroup = new IoReportGroupComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP>().factory(IoReportGroupComparator.Type.position);
 	
 		try {xfLangs = new XmlLangsFactory<L>(ReportXpath.getLangs(q));} catch (ExlpXpathNotFoundException e) {}
 		try {xfDescriptions = new XmlDescriptionsFactory<D>(ReportXpath.getDescriptions(q));} catch (ExlpXpathNotFoundException e) {}

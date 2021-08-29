@@ -6,6 +6,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -24,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class XlsColumnFactory <L extends JeeslLang,D extends JeeslDescription,
-							CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+							CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 							REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 							IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 							WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,

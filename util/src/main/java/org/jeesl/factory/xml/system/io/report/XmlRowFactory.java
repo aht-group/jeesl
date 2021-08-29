@@ -5,6 +5,7 @@ import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlDataTypeFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportQueryType;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -26,7 +27,7 @@ import net.sf.ahtutils.xml.report.Queries;
 import net.sf.ahtutils.xml.report.Row;
 
 public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 								REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
@@ -55,7 +56,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlTypeFactory<L,D,RT> xfType;
 	private XmlDataTypeFactory<CDT,L,D> xfDataType;
-	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfLayout;
+	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfLayout;
 	private XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfTemplate;
 	
 	public XmlRowFactory(String localeCode, Row q)
@@ -65,7 +66,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetType()){xfType = new XmlTypeFactory<>(localeCode,q.getType());}
 		if(q.isSetDataType()){xfDataType = new XmlDataTypeFactory<CDT,L,D>(localeCode,q.getDataType());}
-		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(localeCode,q.getLayout());}
+		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
 		if(q.isSetTemplate()){xfTemplate = new XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(q.getTemplate());}
 	}
 	

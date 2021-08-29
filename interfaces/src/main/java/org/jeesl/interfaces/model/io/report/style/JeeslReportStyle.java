@@ -13,9 +13,9 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslReportStyle<L extends JeeslLang,D extends JeeslDescription>
-		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
-				EjbWithCode,EjbWithPositionVisible,
-				EjbWithLang<L>,EjbWithDescription<D>
+			extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
+					EjbWithCode,EjbWithPositionVisible,
+					EjbWithLang<L>,EjbWithDescription<D>
 {		
 	String getFont();
 	void setFont(String font);
@@ -28,7 +28,6 @@ public interface JeeslReportStyle<L extends JeeslLang,D extends JeeslDescription
 	
 	int getSizeFont();
 	void setSizeFont(int sizeFont);
-		
 		
 	boolean isBorderTop();
 	void setBorderTop(boolean borderTop);

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -21,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UiHelperIoReport <L extends JeeslLang,D extends JeeslDescription,
-										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+										CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 										REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 										IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 										WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,

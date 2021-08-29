@@ -4,6 +4,7 @@ import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -25,7 +26,7 @@ import net.sf.ahtutils.xml.aht.Query;
 import net.sf.ahtutils.xml.report.Report;
 
 public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 								REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,

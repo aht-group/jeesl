@@ -6,6 +6,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -21,7 +22,7 @@ import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslIoReportFacade <L extends JeeslLang,D extends JeeslDescription,
-										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+										CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 										REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 										IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 										WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,

@@ -13,6 +13,7 @@ import org.jeesl.factory.xml.module.ts.XmlDataFactory;
 import org.jeesl.factory.xml.module.ts.XmlTsFactory;
 import org.jeesl.factory.xml.system.io.report.XmlReportFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -48,7 +49,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.xml.report.Report;
 
 public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
-						CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+						CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 						REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 						IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 						WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,

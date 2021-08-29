@@ -34,6 +34,7 @@ import org.jeesl.factory.xml.system.io.report.XmlReportsFactory;
 import org.jeesl.interfaces.bean.sb.SbToggleBean;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -71,7 +72,7 @@ import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-						CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+						CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 						REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 						IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 						WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
@@ -170,11 +171,11 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		
 		revisionCategories = fReport.allOrderedPositionVisible(fbReport.getClassRevisionCategory());
 		
-		comparatorReport = new IoReportComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportComparator.Type.position);
-		comparatorSheet = new IoReportSheetComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportSheetComparator.Type.position);
-		comparatorGroup = new IoReportGroupComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportGroupComparator.Type.position);
-		comparatorColumn = new IoReportColumnComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportColumnComparator.Type.position);
-		comparatorRow  = new IoReportRowComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportRowComparator.Type.position);
+		comparatorReport = new IoReportComparator<L,D,CATEGORY,REPORT>().factory(IoReportComparator.Type.position);
+		comparatorSheet = new IoReportSheetComparator<CATEGORY,REPORT,WORKBOOK,SHEET>().factory(IoReportSheetComparator.Type.position);
+		comparatorGroup = new IoReportGroupComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP>().factory(IoReportGroupComparator.Type.position);
+		comparatorColumn = new IoReportColumnComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP,COLUMN>().factory(IoReportColumnComparator.Type.position);
+		comparatorRow  = new IoReportRowComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW>().factory(IoReportRowComparator.Type.position);
 		
 		implementations = fReport.allOrderedPositionVisible(fbReport.getClassImplementation());
 		attributeTypes = fReport.allOrderedPositionVisible(fbReport.getClassCellDataType());

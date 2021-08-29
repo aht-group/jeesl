@@ -4,6 +4,7 @@ import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlDataTypeFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportQueryType;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -25,7 +26,7 @@ import net.sf.ahtutils.xml.report.Queries;
 import net.sf.ahtutils.xml.report.XlsColumn;
 
 public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 								REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
@@ -53,7 +54,7 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlDataTypeFactory<CDT,L,D> xfDataType;
-	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfLayout;
+	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfLayout;
 	
 	public XmlColumnFactory(String localeCode, XlsColumn q)
 	{
@@ -61,7 +62,7 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetDataType()){xfDataType = new XmlDataTypeFactory<CDT,L,D>(localeCode,q.getDataType());}
-		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(localeCode,q.getLayout());}
+		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
 	}
 	
 	public XlsColumn build(COLUMN column)

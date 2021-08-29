@@ -17,7 +17,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslIoReport<L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 								WORKBOOK extends JeeslReportWorkbook<?,?>
 								>
 		extends Serializable,EjbWithId,EjbPersistable,EjbSaveable,EjbRemoveable,

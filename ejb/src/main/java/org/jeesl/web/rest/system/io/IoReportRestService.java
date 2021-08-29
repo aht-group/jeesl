@@ -26,6 +26,7 @@ import org.jeesl.factory.xml.system.io.report.XmlTemplateFactory;
 import org.jeesl.factory.xml.system.io.report.XmlTemplatesFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -58,7 +59,7 @@ import net.sf.ahtutils.xml.report.Templates;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class IoReportRestService <L extends JeeslLang, D extends JeeslDescription,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+									CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 									REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 									IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 									WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
@@ -101,7 +102,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 
 	private XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> xfReport;
 	private XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfTemplate;
-	private XmlStyleFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfStyle;
+	private XmlStyleFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfStyle;
 		
 	private final JeeslReportUpdater<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,RCAT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> reportUpdater;
 	
@@ -138,19 +139,19 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 		
 		xfReport = new XmlReportFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(XmlReportQuery.get(XmlReportQuery.Key.exReport));
 		xfTemplate = new XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(XmlReportQuery.exTemplate());
-		xfStyle = new XmlStyleFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(XmlReportQuery.exStyle());
+		xfStyle = new XmlStyleFactory<>(XmlReportQuery.exStyle());
 		
 		efTemplate = fbReport.template();
 		efCell = fbReport.cell();
 		efStyle = fbReport.style();
 		
-		comparatorReport = new IoReportComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportComparator.Type.position);
-		comparatorTemplate = new IoReportTemplateComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportTemplateComparator.Type.position);
-		comparatorStyle = new IoReportStyleComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportStyleComparator.Type.position);
+		comparatorReport = new IoReportComparator<L,D,CATEGORY,REPORT>().factory(IoReportComparator.Type.position);
+		comparatorTemplate = new IoReportTemplateComparator<TEMPLATE>().factory(IoReportTemplateComparator.Type.position);
+		comparatorStyle = new IoReportStyleComparator<STYLE>().factory(IoReportStyleComparator.Type.position);
 	}
 	
 	public static <L extends JeeslLang,D extends JeeslDescription,
-					CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+					CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 					REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 					IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 					WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,

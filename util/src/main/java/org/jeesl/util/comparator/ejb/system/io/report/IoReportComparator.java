@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -21,23 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class IoReportComparator<L extends JeeslLang,D extends JeeslDescription,
-								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-								REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
-								IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
-								WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
-								SHEET extends JeeslReportSheet<L,D,IMPLEMENTATION,WORKBOOK,GROUP,ROW>,
-								GROUP extends JeeslReportColumnGroup<L,D,SHEET,COLUMN,STYLE>,
-								COLUMN extends JeeslReportColumn<L,D,GROUP,STYLE,CDT,CW,TLS>,
-								ROW extends JeeslReportRow<L,D,SHEET,TEMPLATE,CDT,RT>,
-								TEMPLATE extends JeeslReportTemplate<L,D,CELL>,
-								CELL extends JeeslReportCell<L,D,TEMPLATE>,
-								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
-								CW extends JeeslStatus<L,D,CW>,
-								RT extends JeeslStatus<L,D,RT>,
-								ENTITY extends EjbWithId,
-								ATTRIBUTE extends EjbWithId,
-								TL extends JeeslTrafficLight<L,D,TLS>,
-								TLS extends JeeslStatus<L,D,TLS>>
+								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
+								REPORT extends JeeslIoReport<L,D,CATEGORY,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(IoReportComparator.class);
 
@@ -51,7 +37,7 @@ public class IoReportComparator<L extends JeeslLang,D extends JeeslDescription,
     public Comparator<REPORT> factory(Type type)
     {
         Comparator<REPORT> c = null;
-        IoReportComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> factory = new IoReportComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>();
+        IoReportComparator<L,D,CATEGORY,REPORT> factory = new IoReportComparator<>();
         switch (type)
         {
             case position: c = factory.new PositionCodeComparator();break;

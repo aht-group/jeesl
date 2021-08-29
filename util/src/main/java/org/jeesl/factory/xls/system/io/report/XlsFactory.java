@@ -31,6 +31,7 @@ import org.jeesl.factory.txt.system.io.report.TxtIoGroupFactory;
 import org.jeesl.interfaces.controller.report.JeeslReport;
 import org.jeesl.interfaces.controller.report.JeeslReportSelectorTransformation;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.setting.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
@@ -57,7 +58,7 @@ import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
-										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+										CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 										REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 										IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 										WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,

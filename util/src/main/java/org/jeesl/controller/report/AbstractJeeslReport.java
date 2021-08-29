@@ -23,6 +23,7 @@ import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.controller.report.JeeslReport;
 import org.jeesl.interfaces.factory.txt.JeeslReportAggregationLevelFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
@@ -54,7 +55,7 @@ import net.sf.exlp.util.io.JsonUtil;
 import net.sf.exlp.util.io.StringUtil;
 
 public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDescription,
-											CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+											CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 											REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 											IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 											WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
@@ -143,11 +144,11 @@ public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDes
 		efGroup = fbReport.group();
 		efColumn = fbReport.column();
 		
-		comparatorSheet = new IoReportSheetComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportSheetComparator.Type.position);
-		comparatorGroup = new IoReportGroupComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportGroupComparator.Type.position);
-		comparatorColumn = new IoReportColumnComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportColumnComparator.Type.position);
-		comparatorRow = new IoReportRowComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportRowComparator.Type.position);
-		comparatorCell = new IoReportCellComparator<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>().factory(IoReportCellComparator.Type.position);
+		comparatorSheet = new IoReportSheetComparator<CATEGORY,REPORT,WORKBOOK,SHEET>().factory(IoReportSheetComparator.Type.position);
+		comparatorGroup = new IoReportGroupComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP>().factory(IoReportGroupComparator.Type.position);
+		comparatorColumn = new IoReportColumnComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP,COLUMN>().factory(IoReportColumnComparator.Type.position);
+		comparatorRow = new IoReportRowComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW>().factory(IoReportRowComparator.Type.position);
+		comparatorCell = new IoReportCellComparator<TEMPLATE,CELL>().factory(IoReportCellComparator.Type.position);
 		
 		mapFilter = new HashMap<>();
 		mapGroupVisibilityToggle = new HashMap<>();

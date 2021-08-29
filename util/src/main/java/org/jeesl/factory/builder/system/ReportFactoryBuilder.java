@@ -23,6 +23,7 @@ import org.jeesl.factory.xls.system.io.report.XlsRowFactory;
 import org.jeesl.factory.xls.system.io.report.XlsStyleFactory;
 import org.jeesl.factory.xml.system.io.report.XmlReportFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
+import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -42,7 +43,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.xml.aht.Query;
 
 public class ReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
-										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+										CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,
 										REPORT extends JeeslIoReport<L,D,CATEGORY,WORKBOOK>,
 										IMPLEMENTATION extends JeeslStatus<L,D,IMPLEMENTATION>,
 										WORKBOOK extends JeeslReportWorkbook<REPORT,SHEET>,
