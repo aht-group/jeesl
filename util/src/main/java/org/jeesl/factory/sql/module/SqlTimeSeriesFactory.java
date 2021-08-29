@@ -3,10 +3,10 @@ package org.jeesl.factory.sql.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.factory.sql.SqlFactory;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
-import org.jsoup.helper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ public class SqlTimeSeriesFactory <TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		sb.append(" WHERE d.timeSeries_id IN (");
 		List<Long> ids = new ArrayList<>();
 		for(TS ts : list) {ids.add(ts.getId());}
-		sb.append(StringUtil.join(ids,",")).append(")");
+		sb.append(StringUtils.join(ids,",")).append(")");
 		
 		SqlFactory.newLine(newLine,sb);
 		sb.append(" ORDER BY d.timeSeries_id ASC, d.record DESC;");

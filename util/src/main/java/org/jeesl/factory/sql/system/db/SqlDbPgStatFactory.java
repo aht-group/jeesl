@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.factory.xml.system.io.db.XmlQueryFactory;
 import org.jeesl.model.xml.system.io.db.Query;
-import org.jsoup.helper.StringUtil;
 
 public class SqlDbPgStatFactory
 {
@@ -20,7 +20,7 @@ public class SqlDbPgStatFactory
 		fileds.add("query");
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT ").append(StringUtil.join(fileds,","));
+		sb.append("SELECT ").append(StringUtils.join(fileds,","));
 		sb.append(" FROM pg_stat_activity");
 		sb.append(" WHERE usename='").append(userName).append("'");
 		
@@ -49,7 +49,7 @@ public class SqlDbPgStatFactory
 		fileds.add("pss.mean_time");
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT ").append(StringUtil.join(fileds,","));
+		sb.append("SELECT ").append(StringUtils.join(fileds,","));
 		sb.append(" FROM pg_stat_statements AS pss");
 		sb.append(" INNER JOIN pg_database AS pd");
 		sb.append("            ON pss.dbid=pd.oid");

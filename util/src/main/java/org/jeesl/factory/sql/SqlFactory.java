@@ -5,9 +5,9 @@ import java.util.List;
 
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.util.query.sql.JeeslSqlQuery;
-import org.jsoup.helper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -131,7 +131,7 @@ public class SqlFactory
 		for(E attribute : attributes) {list.add(id(alias,attribute));}
 		
 		sb.append(" DISTINCT ON (");
-		sb.append(StringUtil.join(list,","));
+		sb.append(StringUtils.join(list,","));
 		sb.append(")");
 		newLine(newLine,sb);
 		return sb.toString();

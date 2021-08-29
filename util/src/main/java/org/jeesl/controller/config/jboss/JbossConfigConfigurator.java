@@ -33,14 +33,14 @@ public class JbossConfigConfigurator
 	
 	private Document doc;
 	
-	public JbossConfigConfigurator(String jbossDir)
+	private JbossConfigConfigurator(String jbossDir)
 	{
 		jbossBaseDir = new File(jbossDir);
 		File fStandalone = new File(jbossBaseDir,"standalone/configuration/standalone.xml");
 		doc = JDomUtil.load(fStandalone);
 	}
 	
-	public JbossConfigConfigurator(Product product, String version,String jbossDir)
+	private JbossConfigConfigurator(Product product, String version,String jbossDir)
 	{
 		jbossBaseDir = new File(jbossDir);
 		mrl = new MultiResourceLoader();

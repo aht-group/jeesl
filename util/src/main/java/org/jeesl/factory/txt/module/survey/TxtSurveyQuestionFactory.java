@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jsoup.helper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,6 +70,6 @@ public class TxtSurveyQuestionFactory <L extends JeeslLang, D extends JeeslDescr
 		List<String> codes = new ArrayList<>();
 		for(QUESTION q : questions) {codes.add(q.getCode());}
 		
-		return StringUtil.join(codes,", ");
+		return StringUtils.join(codes,", ");
 	}
 }

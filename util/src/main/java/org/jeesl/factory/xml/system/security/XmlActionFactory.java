@@ -18,8 +18,7 @@ import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
-public class XmlActionFactory <L extends JeeslLang,
-								D extends JeeslDescription, 
+public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,
 								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -33,13 +32,23 @@ public class XmlActionFactory <L extends JeeslLang,
 	private net.sf.ahtutils.xml.security.Action q;
 	private net.sf.ahtutils.xml.access.Action qAcl;
 	
+	private XmlLangsFactory<L> xfLangs;
+	private XmlDescriptionsFactory<D> xfDescription;
+	private XmlViewFactory<L,D,C,R,V,U,A,AT,USER> xfView;
+	private XmlTemplateFactory<L,D,C,AT> xfTemplate;
+	
 	public XmlActionFactory(net.sf.ahtutils.xml.security.Action q)
 	{
 		this.q=q;
+		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(q.isSetDescriptions()) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(q.isSetView()) {xfView = new XmlViewFactory<L,D,C,R,V,U,A,AT,USER>(q.getView());}
+		if(q.isSetTemplate()){xfTemplate= new XmlTemplateFactory<>(q.getTemplate());}
 	}
 	public XmlActionFactory(net.sf.ahtutils.xml.access.Action qAcl)
 	{
 		this.qAcl=qAcl;
+		if(qAcl.isSetTemplate()){xfTemplate = new XmlTemplateFactory<>(qAcl.getTemplate());}
 	}
 
 	public net.sf.ahtutils.xml.security.Action build(A action)
@@ -49,29 +58,11 @@ public class XmlActionFactory <L extends JeeslLang,
 		if(q.isSetPosition()){xml.setPosition(action.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(action.isVisible());}
 		
-		if(q.isSetLangs())
-		{
-			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
-			xml.setLangs(f.getUtilsLangs(action.getName()));
-		}
+		if(q.isSetLangs()) {xml.setLangs(xfLangs.getUtilsLangs(action.getName()));}
+		if(q.isSetDescriptions()) {xml.setDescriptions(xfDescription.create(action.getDescription()));}
+		if(q.isSetView()) {xml.setView(xfView.build(action.getView()));}
 		
-		if(q.isSetDescriptions())
-		{
-			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
-			xml.setDescriptions(f.create(action.getDescription()));
-		}
-		
-		if(q.isSetView())
-		{
-			XmlViewFactory<L,D,C,R,V,U,A,AT,USER> f = new XmlViewFactory<L,D,C,R,V,U,A,AT,USER>(q.getView());
-			xml.setView(f.build(action.getView()));
-		}
-		
-		if(q.isSetTemplate() && action.getTemplate()!=null)
-		{
-			XmlTemplateFactory<L,D,C,R,V,U,A,AT,USER> f = new XmlTemplateFactory<L,D,C,R,V,U,A,AT,USER>(q.getTemplate());
-			xml.setTemplate(f.build(action.getTemplate()));
-		}
+		if(q.isSetTemplate() && action.getTemplate()!=null) {xml.setTemplate(xfTemplate.build(action.getTemplate()));}
 		
 		return xml;
 	}
@@ -95,12 +86,7 @@ public class XmlActionFactory <L extends JeeslLang,
 			xml.setDescriptions(f.create(action.getDescription()));
 		}
 		
-		if(qAcl.isSetTemplate() && processTemplate)
-		{
-			
-			XmlTemplateFactory<L,D,C,R,V,U,A,AT,USER> f = new XmlTemplateFactory<L,D,C,R,V,U,A,AT,USER>(qAcl.getTemplate());
-			xml.setTemplate(f.build(action.getTemplate()));
-		}
+		if(qAcl.isSetTemplate() && processTemplate) {xml.setTemplate(xfTemplate.build(action.getTemplate()));}
 		
 		return xml;
 	}

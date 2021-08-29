@@ -17,8 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.security.View;
 
-public class XmlViewFactory <L extends JeeslLang,
-								D extends JeeslDescription, 
+public class XmlViewFactory <L extends JeeslLang, D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,
 								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -34,8 +33,7 @@ public class XmlViewFactory <L extends JeeslLang,
 	
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescription;
-	private XmlNavigationFactory<L,D,C,R,V,U,A,AT,USER> xfNavigation;
-	
+	private XmlNavigationFactory<V> xfNavigation;
 	
 	public XmlViewFactory(net.sf.ahtutils.xml.access.View q)
 	{
@@ -47,7 +45,7 @@ public class XmlViewFactory <L extends JeeslLang,
 		this.q=q;
 		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(q.isSetDescriptions()) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetNavigation()) {xfNavigation = new XmlNavigationFactory<L,D,C,R,V,U,A,AT,USER>(q.getNavigation());}
+		if(q.isSetNavigation()) {xfNavigation = new XmlNavigationFactory<>(q.getNavigation());}
 	}
 
 	public View build(V view)

@@ -85,7 +85,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 	private org.jeesl.factory.xml.system.security.XmlViewFactory<L,D,C,R,V,U,A,AT,USER> xfView,xfViewOld;
 	private XmlRoleFactory<L,D,C,R,V,U,A,AT,USER> xfRole,fRoleDescription;
 	private XmlActionFactory<L,D,C,R,V,U,A,AT,USER> xfAction,xfActionOld,xfActionDoc;
-	private XmlTemplateFactory<L,D,C,R,V,U,A,AT,USER> fTemplate;
+	private XmlTemplateFactory<L,D,C,AT> fTemplate;
 	private XmlUsecaseFactory<L,D,C,R,V,U,A,AT,USER> fUsecase,fUsecaseDoc;
 	
 	protected Comparator<R> comparatorRole;
@@ -112,7 +112,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 		xfAction = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exAction());
 		xfActionOld = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exActionAcl());
 		xfActionDoc = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.docActionAcl());
-		fTemplate = new XmlTemplateFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exTemplate());
+		fTemplate = new XmlTemplateFactory<>(SecurityQuery.exTemplate());
 		fUsecase = new XmlUsecaseFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exUsecase());
 		fUsecaseDoc = new XmlUsecaseFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.docUsecase());
 		

@@ -16,8 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.security.Actions;
 
-public class XmlActionsFactory <L extends JeeslLang,
-								D extends JeeslDescription, 
+public class XmlActionsFactory <L extends JeeslLang, D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,
 								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -30,20 +29,23 @@ public class XmlActionsFactory <L extends JeeslLang,
 		
 	private Actions q;
 	
+	private XmlActionFactory<L,D,C,R,V,U,A,AT,USER> xfAction;
+	
 	public XmlActionsFactory(Actions q)
 	{
 		this.q=q;
+		if(q.isSetAction()) {xfAction = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(q.getAction().get(0));}
 	}
-	
 
 	public Actions build(List<A> actions)
 	{
-		XmlActionFactory<L,D,C,R,V,U,A,AT,USER> f = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(q.getAction().get(0));
-		
 		Actions xml = build();
-		for(A action : actions)
+		if(q.isSetAction())
 		{
-			xml.getAction().add(f.build(action));
+			for(A action : actions)
+			{
+				xml.getAction().add(xfAction.build(action));
+			}
 		}
 		return xml;
 	}

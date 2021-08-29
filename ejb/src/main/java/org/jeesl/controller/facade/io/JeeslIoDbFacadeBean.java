@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -27,7 +28,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.json.system.io.db.JsonPostgres;
 import org.jeesl.model.json.system.io.db.JsonPostgresReplication;
-import org.jsoup.helper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -140,7 +140,7 @@ public class JeeslIoDbFacadeBean <L extends JeeslLang,D extends JeeslDescription
 		fileds.add("extract('milliseconds' from replay_lag) as rl");
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append("SELECT "+StringUtil.join(fileds, ", "));
+		sb.append("SELECT "+StringUtils.join(fileds, ", "));
 		sb.append(" FROM pg_stat_replication");						
 		logger.info(sb.toString());
 		

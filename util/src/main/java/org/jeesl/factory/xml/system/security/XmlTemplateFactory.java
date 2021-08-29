@@ -2,37 +2,31 @@ package org.jeesl.factory.xml.system.security;
 
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.security.Template;
 
-public class XmlTemplateFactory <L extends JeeslLang,
-								D extends JeeslDescription, 
+public class XmlTemplateFactory <L extends JeeslLang, D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,
-								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-								V extends JeeslSecurityView<L,D,C,R,U,A>,
-								U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-								A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-								AT extends JeeslSecurityTemplate<L,D,C>,
-								USER extends JeeslUser<R>>
+								AT extends JeeslSecurityTemplate<L,D,C>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlTemplateFactory.class);
 		
 	private Template q;
 	
+	private XmlLangsFactory<L> xfLangs;
+	private XmlDescriptionsFactory<D> xfDescriptions;
+	
 	public XmlTemplateFactory(Template q)
 	{
 		this.q=q;
+		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(q.isSetDescriptions()) {xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}
 
 	public Template build(AT template)
@@ -42,17 +36,8 @@ public class XmlTemplateFactory <L extends JeeslLang,
 		if(q.isSetPosition()){xml.setPosition(template.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(template.isVisible());}
 		
-		if(q.isSetLangs())
-		{
-			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
-			xml.setLangs(f.getUtilsLangs(template.getName()));
-		}
-		
-		if(q.isSetDescriptions())
-		{
-			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
-			xml.setDescriptions(f.create(template.getDescription()));
-		}
+		if(q.isSetLangs()) {xml.setLangs(xfLangs.getUtilsLangs(template.getName()));}
+		if(q.isSetDescriptions()) {xml.setDescriptions(xfDescriptions.create(template.getDescription()));}
 		
 		return xml;
 	}
