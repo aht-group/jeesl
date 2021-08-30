@@ -8,9 +8,7 @@ import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RevisionEntityComparator<
-										RC extends JeeslRevisionCategory<?,?,RC,?>,	
-										
+public class RevisionEntityComparator<RC extends JeeslRevisionCategory<?,?,RC,?>,	
 										RE extends JeeslRevisionEntity<?,?,RC,?,?,?>
 										>
 {

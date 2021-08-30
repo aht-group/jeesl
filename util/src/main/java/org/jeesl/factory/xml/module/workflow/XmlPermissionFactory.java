@@ -26,7 +26,6 @@ public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescriptio
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlPermissionFactory.class);
 	
-	private final String localeCode;
 	private final Permission q;
 	
 	private XmlTypeFactory<L,D,WPT> xfType;
@@ -36,7 +35,6 @@ public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescriptio
 //	public XmlPermissionFactory(QueryWf query) {this(query.getLocaleCode(),query.getStage());}
 	public XmlPermissionFactory(String localeCode, Permission q)
 	{
-		this.localeCode=localeCode;
 		this.q=q;
 		if(q.isSetType()) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
 		if(q.isSetLevel()) {xfLevel = new XmlLevelFactory<>(localeCode,q.getLevel());}
@@ -58,7 +56,6 @@ public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescriptio
 		{
 			Role role = XmlRoleFactory.build(permission.getRole().getCode());
 			if(q.getRole().isSetLangs()) {role.setLangs(xfLangs.getUtilsLangs(permission.getRole().getName()));}
-			
 			xml.setRole(role);
 		}		
 		return xml;

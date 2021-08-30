@@ -6,11 +6,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.controller.jboss.CliJbossConfigConfigurator;
-
 public class TestUtilsPasswordGenerator
 {
-	final static Logger logger = LoggerFactory.getLogger(CliJbossConfigConfigurator.class);
+	final static Logger logger = LoggerFactory.getLogger(TestUtilsPasswordGenerator.class);
 		
 	@Test
 	public void pwdSize()

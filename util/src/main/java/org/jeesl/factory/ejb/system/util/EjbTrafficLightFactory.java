@@ -1,17 +1,16 @@
 package org.jeesl.factory.ejb.system.util;
 
-import net.sf.ahtutils.xml.utils.TrafficLight;
-
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.utils.TrafficLight;
 
 public class EjbTrafficLightFactory<L extends JeeslLang,D extends JeeslDescription,
 									SCOPE extends JeeslTrafficLightScope<L,D,SCOPE,?>,

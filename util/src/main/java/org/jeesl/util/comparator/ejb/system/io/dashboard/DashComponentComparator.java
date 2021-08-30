@@ -18,7 +18,7 @@ public class DashComponentComparator<L extends JeeslLang,D extends JeeslDescript
     public Comparator<DBC> factory(Type type)
     {
         Comparator<DBC> c = null;
-        DashComponentComparator factory = new DashComponentComparator();
+        DashComponentComparator<L,D,DBC> factory = new DashComponentComparator<>();
         switch (type)
         {
             case code: c = factory.new CodeComparator();break;

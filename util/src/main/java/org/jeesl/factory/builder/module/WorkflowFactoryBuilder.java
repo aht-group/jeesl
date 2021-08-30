@@ -15,7 +15,9 @@ import org.jeesl.factory.ejb.module.workflow.EjbWorkflowPermissionFactory;
 import org.jeesl.factory.ejb.module.workflow.EjbWorkflowProcessFactory;
 import org.jeesl.factory.ejb.module.workflow.EjbWorkflowStageFactory;
 import org.jeesl.factory.ejb.module.workflow.EjbWorkflowTransitionFactory;
+import org.jeesl.factory.xml.module.workflow.XmlProcessFactory;
 import org.jeesl.factory.xml.module.workflow.XmlStageFactory;
+import org.jeesl.factory.xml.module.workflow.XmlTransitionFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
@@ -46,6 +48,7 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.jeesl.QueryWf;
 import org.jeesl.util.comparator.ejb.module.workflow.EjbWorkflowProcessComparator;
+import org.jeesl.util.query.xml.module.XmlWorkflowQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -155,5 +158,7 @@ public class WorkflowFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	
 	public Comparator<WP> cpProcess(EjbWorkflowProcessComparator.Type type) {return new EjbWorkflowProcessComparator<WX,WP>().factory(type);}
 	
+	public XmlProcessFactory<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WT,WTT,SR> xmlProcess(String localeCode, XmlWorkflowQuery.Key key) {return new XmlProcessFactory<>(XmlWorkflowQuery.get(key, localeCode));}
 	public XmlStageFactory<L,D,WS,WST,WSP,WPT,WML,WT,WTT,SR> xmlStage(QueryWf q) {return new XmlStageFactory<>(q);}
+	public XmlTransitionFactory<L,D,WS,WST,WSP,WPT,WML,WT,WTT,SR> xmlTransition(String localeCode, XmlWorkflowQuery.Key key) {return new XmlTransitionFactory<>(XmlWorkflowQuery.get(key, localeCode));}
 }

@@ -5,15 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.ahtutils.report.revert.excel.DummyEntity;
 import net.sf.ahtutils.report.revert.excel.importers.ExcelSimpleSerializableImporter;
 import net.sf.ahtutils.test.AbstractAhtUtilsReportTest;
 import net.sf.ahtutils.test.AhtUtilsReportBootstrap;
-
-import org.junit.Ignore;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TestExcelImport extends AbstractAhtUtilsReportTest {
 	

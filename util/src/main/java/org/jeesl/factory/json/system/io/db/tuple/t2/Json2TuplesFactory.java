@@ -19,8 +19,6 @@ import org.jeesl.model.json.db.tuple.two.Json2Tuples;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.JsonUtil;
-
 public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 {
 	final static Logger logger = LoggerFactory.getLogger(Json2TuplesFactory.class);

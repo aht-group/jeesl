@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import org.jeesl.api.controller.ImportStrategy;
+import org.jeesl.api.controller.ValidationStrategy;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
@@ -20,9 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.report.DataAssociation;
-import static org.hibernate.criterion.Projections.property;
-import org.jeesl.api.controller.ImportStrategy;
-import org.jeesl.api.controller.ValidationStrategy;
 
 
 public class XmlDataAssociationFactory <L extends JeeslLang,D extends JeeslDescription,

@@ -8,7 +8,8 @@ import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 /**
  * Class that is used to hold information on TimeSeries when using the Excel importer
  */
-public class TsDataHolder implements Serializable {
+public class TsDataHolder implements Serializable
+{
     
     private JeeslTsBridge   bridge;
     private JeeslTsData	    data;

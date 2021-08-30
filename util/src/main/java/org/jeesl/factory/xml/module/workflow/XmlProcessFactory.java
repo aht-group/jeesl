@@ -54,7 +54,7 @@ public class XmlProcessFactory<L extends JeeslLang, D extends JeeslDescription,
 	private WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,?,?,?,?,WT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?> fbWorkflow;
 	private JeeslWorkflowFacade<L,D,?,WX,WP,WPD,WS,WST,?,?,?,?,WT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?> fWorkflow;
 	
-	public static <L extends JeeslLang, D extends JeeslDescription,
+	private static <L extends JeeslLang, D extends JeeslDescription,
 					WX extends JeeslWorkflowContext<L,D,WX,?>,
 					WP extends JeeslWorkflowProcess<L,D,WX,WS>,
 					WPD extends JeeslWorkflowDocument<L,D,WP>,

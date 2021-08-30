@@ -268,11 +268,8 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 		@SuppressWarnings("unchecked")
 		Iterator<Pointer> iterator = context.iteratePointers(ioSheet.getQueryTable());
 		logger.info("Beginning iteration");
-		int i=0;
         while (iterator.hasNext())
         {
-        	i++;
-//        	logger.info("Row "+i);
         	Row xlsRow = sheet.createRow(rowNr.intValue());
         	
             Pointer pointer = iterator.next();

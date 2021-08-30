@@ -5,11 +5,9 @@ import org.jeesl.util.db.ActiveDirectoryAuthenticator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.controller.jboss.CliJbossConfigConfigurator;
-
 public class TstActiveDirectoryAuthenticator
 {
-	final static Logger logger = LoggerFactory.getLogger(CliJbossConfigConfigurator.class);
+	final static Logger logger = LoggerFactory.getLogger(TstActiveDirectoryAuthenticator.class);
 		
 	private ActiveDirectoryAuthenticator adsAuth;
 	

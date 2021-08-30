@@ -9,11 +9,9 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.jdom2.Document;
 import org.jeesl.controller.mail.freemarker.FreemarkerEngine;
 import org.jeesl.exception.processing.UtilsMailException;
-import org.jeesl.mail.msg.AbstractMimeContentCreator;
 import org.jeesl.model.xml.system.io.mail.Attachment;
 import org.jeesl.model.xml.system.io.mail.Image;
 import org.jeesl.model.xml.system.io.mail.Mail;

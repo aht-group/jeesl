@@ -9,8 +9,6 @@ import org.jeesl.model.json.system.translation.JsonTranslation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Translation;
-
 public class JsonTranslationFactory <RE extends JeeslRevisionEntity<?,?,?,?,RA,?>, RA extends JeeslRevisionAttribute<?,?,RE,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonTranslationFactory.class);

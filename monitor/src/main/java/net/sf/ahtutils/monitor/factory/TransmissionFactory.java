@@ -26,7 +26,7 @@ public class TransmissionFactory extends AbstractTransmissionFactory
 		return transmission;
 	}
 	
-	private Component buildComponent(List<Indicator> indicators)
+	public Component buildComponent(List<Indicator> indicators)
 	{
 		Component component = new Component();
 		component.getIndicator().addAll(indicators);

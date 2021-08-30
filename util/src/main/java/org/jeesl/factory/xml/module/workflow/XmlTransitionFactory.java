@@ -14,7 +14,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.model.xml.jeesl.QueryWf;
 import org.jeesl.model.xml.module.workflow.Transition;
-import org.jeesl.util.query.xml.module.XmlWorkflowQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,20 +36,6 @@ public class XmlTransitionFactory<L extends JeeslLang, D extends JeeslDescriptio
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescription;
 	private XmlStageFactory<L,D,WS,WST,WSP,WPT,WML,WT,WTT,SR> xfStage;
-	
-	public static <L extends JeeslLang, D extends JeeslDescription,
-					WS extends JeeslWorkflowStage<L,D,?,WST,WSP,WT,?>,
-					WST extends JeeslWorkflowStageType<L,D,WST,?>,
-					WSP extends JeeslWorkflowStagePermission<WS,WPT,WML,SR>,
-					WPT extends JeeslWorkflowPermissionType<L,D,WPT,?>,
-					WML extends JeeslWorkflowModificationLevel<L,D,WML,?>,
-					WT extends JeeslWorkflowTransition<L,D,?,WS,WTT,?,?>,
-					WTT extends JeeslWorkflowTransitionType<L,D,WTT,?>,
-					SR extends JeeslSecurityRole<L,D,?,?,?,?,?>>
-				XmlTransitionFactory<L,D,WS,WST,WSP,WPT,WML,WT,WTT,SR> instance(String localeCode, XmlWorkflowQuery.Key key)
-	{
-		return new XmlTransitionFactory<>(XmlWorkflowQuery.get(key, localeCode));
-	}
 	
 	public XmlTransitionFactory(QueryWf query) {this(query.getLocaleCode(),query.getTransition());}
 	public XmlTransitionFactory(String localeCode, Transition q)
