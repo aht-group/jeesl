@@ -435,6 +435,8 @@ body, .ui-widget {
 
 .ui-calendar {
 	.ui-datepicker-trigger {
+		padding: 0;
+		
 		.ui-icon {
 			@include icon;
 		}
@@ -446,7 +448,7 @@ body, .ui-widget {
 }
 
 .ui-datepicker {
-	padding: $slim-spacing $slim-spacing 0;
+	padding: $regular-spacing $half-spacing;
 	opacity: 1;
 	
 	@media (max-width: 768px) {
@@ -459,17 +461,22 @@ body, .ui-widget {
 		color: $white-100;
 		display: flex;
 		font-size: 1.2em;
+		margin: 0 #{-$half-spacing};
 		padding: 0;
 		text-shadow: none;
 		
+		@media (max-width: 768px) {
+			margin: 0;
+		}
+		
 		.ui-datepicker-title {
 			flex-grow: 1;
-			line-height: $header-element-height;
+			line-height: $ls-element-height;
 			margin: 0;
 			order: 1;
 			
 			@media (max-width: 768px) {
-				line-height: $header-element-height-mobile;
+				line-height: $ls-element-height-mobile;
 			}
 		}
 		
@@ -485,19 +492,19 @@ body, .ui-widget {
 			background: transparent;
 			border-radius: 0;
 			font-size: $font-size;
-			height: $header-element-height;
+			height: $ls-element-height;
 			left: 0;
 			overflow: hidden;
 			position: relative;
 			text-align: center;
 			top: 0;
 			transition: background $transition-duration linear;
-			width: $header-element-height;
+			width: $ls-element-height;
 			
 			@media (max-width: 768px) {
 				font-size: $font-size-mobile;
-				height: $header-element-height-mobile;
-				width: $header-element-height-mobile;
+				height: $ls-element-height-mobile;
+				width: $ls-element-height-mobile;
 			}
 			
 			&.ui-state-hover {
@@ -538,34 +545,195 @@ body, .ui-widget {
 	}
 	
 	.ui-datepicker-calendar {
+		margin: 0;
+		
+		@media (max-width: 768px) {
+			margin: 0 $wide-spacing;
+			width: calc(100% - (2 * #{$wide-spacing}));
+		}
+		
 		> tbody {
 			border: solid $border-colour;
 			border-width: $border-width 0;
 			
-			.ui-state-default {
-				color: inherit;
-				text-align: center;
-				font-weight: 400;
-				
-				&.ui-state-hover {
-					background: $light-grey;
-					font-weight: inherit;
-				}
-				
-				&.ui-state-highlight {
-					color: $dark-colour;
-					font-weight: bold;
-					text-shadow: none;
+			@media (max-width: 768px) {
+				border-width: $separator-thickness-mobile 0;
+			
+				> tr:last-child {
+					.ui-state-default {
+						margin-bottom: $slim-spacing;
+					}
 				}
 			}
 			
-			.ui-datepicker-current-day {
-				.ui-state-default {
+			.ui-state-default {
+				color: inherit;
+				font-weight: 400;
+				text-align: center;
+				text-shadow: none;
+				
+				@media (max-width: 768px) {
+					font-size: $font-size-ls-mobile;
+					font-weight: $font-weight-bold;
+					line-height: calc(#{$ls-element-height-mobile} - #{$separator-thickness-mobile});
+					padding: 0;
+					
+					&:after {
+						border-bottom: $separator-thickness-mobile solid $bright-grey;
+					    content: '';
+					    display: block;
+					}
+				}
+				
+				&.ui-state-highlight {
+					background: $bright-grey;
+					box-shadow: none;
+					color: $dark-colour;
+					font-weight: bold;
+					
+					&.ui-state-hover {
+						background: $bright-grey;
+					}
+				}
+				
+				&.ui-state-hover {
+					background: $light-grey;
+					text-shadow: none;
+					
+					@media (max-width: 768px) {
+						background: transparent;
+						color: $dark-colour;
+						
+						&:after {
+							background: none;
+							border-color: $dark-colour;
+							color: $dark-colour;
+						}
+					}
+				}
+				
+				&.ui-state-active {
 					background: $dark-colour;
 					color: $white-100;
-					text-shadow: none;
+					
+					@media (max-width: 768px) {
+						&:after {
+							border-color: $dark-colour;
+						}
+					}
+					
+					&.ui-state-hover {
+						background: $dark-colour;
+					}
 				}
 			}
+		}
+	}
+	
+	.ui-timepicker-div {
+		dl, dl dt, dl dd {
+			float: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		dl {
+			align-items: center;
+			display: flex;
+			flex-wrap: wrap;
+			padding: 0 $regular-spacing;
+			
+			dt {
+				font-weight: 700;
+				width: 40%;
+				
+				@media (max-width: 768px) {
+					height: $ls-element-height-mobile;
+					line-height: $ls-element-height-mobile;
+					padding-left: $ls-element-height-mobile / 2;
+				}
+			}
+			
+			dd {
+				width: 60%;
+				
+				@media (max-width: 768px) {
+					padding-right: $ls-element-height-mobile / 2;
+				}
+			}
+		}
+		
+		.ui_tpicker_time_label, .ui_tpicker_time {
+			background: $bright-grey;
+			margin-bottom: $regular-spacing;
+		}
+		
+		.ui_tpicker_time_label {
+			height: $ls-element-height;
+			line-height: $ls-element-height;
+			margin-left: -#{$regular-spacing + $half-spacing};
+			padding-left: #{$regular-spacing + $half-spacing};
+			width: calc(40% + #{$regular-spacing + $half-spacing});
+			
+			@media (max-width: 768px) {
+				height: $ls-element-height-mobile;
+				line-height: $ls-element-height-mobile;
+				padding-left: #{$regular-spacing + $half-spacing + ($ls-element-height-mobile / 2)};
+			}
+		}
+		
+		.ui_tpicker_time {
+			height: $ls-element-height;
+			line-height: $ls-element-height;
+			margin-right: -#{$regular-spacing + $half-spacing};
+			padding-right: #{$regular-spacing + $half-spacing};
+			width: calc(60% + #{$regular-spacing + $half-spacing});
+			
+			@media (max-width: 768px) {
+				font-size: 1.2em;
+				height: $ls-element-height-mobile;
+				line-height: $ls-element-height-mobile;
+			}
+			
+			.ui_tpicker_time_input {
+				border: none;
+				width: 100%;
+			}
+		}
+	}
+}
+
+.ui-slider {
+	background: linear-gradient(to bottom, $dark-colour, $bright-colour);
+    border: none;
+
+	&.ui-slider-horizontal {
+		box-shadow: none;
+		height: 8px;
+	}
+	
+	.ui-slider-handle.ui-state-default {
+		@include button;
+		
+		border-radius: 50%;
+		height: 16px;
+		margin-left: -8px;
+		outline: none;
+		top: -4px;
+		width: 16px;
+		
+		&.ui-state-hover {
+			cursor: pointer;
+		}
+		
+		&.ui-corner-all:before {
+			border-radius: 50%;
+		}
+		
+		@media (max-width: 768px) {
+			margin-left: -$element-height-mobile / 2;
+			top: -($element-height-mobile / 2) + 4px;
+			width: $element-height-mobile;
 		}
 	}
 }
