@@ -45,7 +45,7 @@
 					style = $('head').first().append('<style id="calendarWidth"></style>').children('#calendarWidth').first();
 				}
 				
-				popupTrigger.click(() => style.html('#ui-datepicker-div { width: ' + widget.jqEl.css('width') + ' !important; left: ' + widget.jqEl.offset().left + 'px !important; }'));
+				popupTrigger.click(() => style.html('#ui-datepicker-div { width: ' + widget.jqEl.css('width') + '; left: ' + widget.jqEl.offset().left + 'px; }'));
 			});
 		</script>
 	</composite:implementation>
