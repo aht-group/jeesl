@@ -10,8 +10,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
+
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -178,18 +187,56 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 
 	public boolean hasEntitiesWithShortCodeAndAttribute(String missingEntityCode, String missingAttributeCode)
 	{
-		for (Entry<String, List<String>> entry : mapEntitesCodeToAttribustes.entrySet()) {
-			if(entry.getKey().endsWith("." + missingEntityCode)) {
-				for (Iterator<String> iterator = entry.getValue().iterator(); iterator.hasNext();) {
+		for (Entry<String, List<String>> entry : mapEntitesCodeToAttribustes.entrySet())
+		{
+			if(entry.getKey().endsWith("." + missingEntityCode))
+			{
+				for (Iterator<String> iterator = entry.getValue().iterator(); iterator.hasNext();)
+				{
 					String raCode = iterator.next();
-					if(raCode.equals(missingAttributeCode)) {
+					if(raCode.equals(missingAttributeCode))
+					{
 						//logger.info("attribute code ends with" + missingAttributeCode);
 						return true;
-						}
+					}
 				}
 			}
 		}
 		return false;
+	}
+
+//ToDo: Sachin : test these methods call these method from hasEntitiesWithShortCode and hasEntitiesWithShortCodeAndAttribute
+	public void updateWithAutomatedTranslation(String missingEntityCode, String missingAttributeCode, String defaultLangCode, String langCode)
+	{
+		selectMissingEntityAttribute(missingEntityCode, missingAttributeCode);
+		if(Objects.isNull(missingAttributeCode))
+		{
+			String defaultLangText = entity.getName().get(defaultLangCode).getLang();
+			String automatedTranslatedText = callRemoteWebserviceForTranslation(defaultLangText,defaultLangCode,langCode);
+			entity.getName().get(defaultLangCode).setLang(automatedTranslatedText);
+		}
+		entity=null;
+		attributes=null;
+		attribute=null;
+
+	}
+
+	private String callRemoteWebserviceForTranslation(String defaultLangText, String defaultLangCode, String langCode)
+	{
+		Form form = new Form();
+		form
+		 .param("q", defaultLangText)
+		 .param("source", defaultLangCode)
+		 .param("target", langCode);
+		Entity<Form> entity = Entity.form(form);
+
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		ResteasyWebTarget target = client.target("https://libretranslate.com/translate");
+		Response response = target.request(MediaType.APPLICATION_JSON).post(entity);
+		String value = response.readEntity(String.class);
+        response.close();  // You should close connections!
+
+        return value;
 	}
 
 	public void selectMissingEntity(String missingEntityCode)
