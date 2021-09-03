@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf"
+    xmlns:jp="http://jsf.jeesl.org/prototype"
+    xmlns:mcg="http://www.metachart.org/graph"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+            <composite:attribute name="bean" required="true"/>
+            <composite:attribute name="localeKeys" required="false" default="#{appTranslationBean.langKeys}"/>
+	</composite:interface>
+	
+	<composite:implementation>
+            <jp:grid id="grid">
+			<j:row id="row1">
+				<j:slot id="sProjects" width="7">
+					<h:form id="fProjects">
+						<p:dataTable var="y" value="#{cc.attrs.bean.projects}" widgetVar="projectDt"
+								selection="#{cc.attrs.bean.project}" selectionMode="single" rowKey="#{y.id}">
+							<f:facet name="header">
+								<j:dtHeader title="#{msg.jeeslProjects}">
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addProject()}" update=":#{cc.id}:sProject"/>
+								</j:dtHeader>
+							</f:facet>
+							<p:ajax event="rowSelect" update=":#{cc.id}:sProjects :#{cc.id}:sProject" listener="#{cc.attrs.bean.selectProject}"/>
+				            <p:column headerText="#{msg.jeeslCode}" rendered="false" filterBy="#{y.code}"  filterMatchMode="contains">  
+								<h:outputText value="#{y.code}" />  
+				            </p:column>
+				            <p:column headerText="#{msg.jeeslName}" filterBy="#{y.name[localeCode].lang}" filterMatchMode="contains"> 
+								<h:outputText value="#{y.name[localeCode].lang}"/>
+				            </p:column>
+						</p:dataTable>
+					</h:form>
+				</j:slot>
+				<j:slot id="sProject" width="5">
+					<h:form id="fProject">
+						<p:panel header="#{msg.jeeslProject}" rendered="#{not empty cc.attrs.bean.project}" styleClass="jeeslPanel">
+							<f:facet name="actions">
+								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelProject()}" update=":#{cc.id}:sProject"/>
+								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveProject()}"   update=":#{cc.id}:sProjects :#{cc.id}:sProject" tooltip="#{msg.ttSave}"/>
+								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteProject()}" update=":#{cc.id}:sProjects :#{cc.id}:sProject" rendered="#{cc.attrs.bean.project.id gt 0}"/>
+							</f:facet>
+							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+							
+								<p:outputLabel value="#{msg.jeeslCode}"/>
+                                <p:inputText value="#{cc.attrs.bean.project.code}" autocomplete="off"/>
+                               
+							</p:panelGrid>
+							<j:tabTranslationEditor value="#{cc.attrs.bean.project}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
+						</p:panel>
+					</h:form>
+				</j:slot>
+			</j:row>
+	    </jp:grid>
+            
+	</composite:implementation>
+</html>
