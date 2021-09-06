@@ -258,12 +258,8 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 	}
 
 	@Override
-	public <MR extends EjbWithId> List<MR> allMissingLabels(Class<MR> cLMr) {
-		return this.all(cLMr);
-	}
-
-	@Override
-	public void cleanMissingLabels(Class<RML> cRml) {
+	public void cleanMissingLabels(Class<RML> cRml)
+	{
 		 String query = new StringBuilder("DELETE FROM ")
                  .append(cRml.getSimpleName())
                  .append(" e")
@@ -272,16 +268,17 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 	}
 
 	@Override
-	public void addMissingLabel(RML rMl) {
-		try {
-			if(!this.hasMissingLabel(rMl)) {
-				this.save(rMl);
-			}
-		} catch (JeeslConstraintViolationException | JeeslLockingException e) {
-			e.printStackTrace();
-		}	}
+	public void addMissingLabel(RML rMl)
+	{
+		try
+		{
+			if(!this.hasMissingLabel(rMl)) {this.save(rMl);}
+		}
+		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
+	}
 
-	private boolean hasMissingLabel(RML rMl) {
+	private boolean hasMissingLabel(RML rMl)
+	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("SELECT c ");
 		sb.append(" FROM "+fbRevision.getClassMissingRevision().getName()+" c");
@@ -302,10 +299,11 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		q.setParameter("refMissingCode", rMl.getMissingCode());
 		q.setParameter("refMissingLocal", rMl.getMissingLocal());
 
-		try	{
+		try
+		{
 			if(q.getResultList().size() > 0) {return true;}
 			return false;
-			}
+		}
 		catch (NoResultException ex){return false;}
 	}
 }

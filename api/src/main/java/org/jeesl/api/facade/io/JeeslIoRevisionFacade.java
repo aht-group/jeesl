@@ -62,7 +62,6 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 	<T extends EjbWithId> List<Long> ids(Class<T> c, JeeslIoRevisionFacade.Scope scope);
 	<T extends EjbWithId> List<JsonRevision> findCreated(Class<T> c, Date from, Date to);
 
-	<RML extends EjbWithId> List<RML> allMissingLabels(Class<RML> cRml);
 	void addMissingLabel(RML rML);
 	void cleanMissingLabels(Class<RML> cRml);
 

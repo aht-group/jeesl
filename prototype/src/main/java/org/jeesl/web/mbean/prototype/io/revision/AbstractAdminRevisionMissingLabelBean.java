@@ -73,7 +73,7 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 	{
 		if (debugOnInfo) {logger.info("reloadMissingLabels");}
 
-		missingLabels = fRevision.allMissingLabels(fbRevision.getClassMissingRevision());
+		missingLabels = fRevision.all(fbRevision.getClassMissingRevision());
 		missingLabels = sbhStatusfilter(missingLabels);
 		if (debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbRevision.getClassMissingRevision(), missingLabels));}
 	}
