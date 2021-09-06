@@ -1,4 +1,4 @@
-package org.jeesl.client.model.ejb;
+package org.jeesl.client.maintenance;
 
 import java.io.*;
 import java.util.*;

@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Map;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.client.model.ejb.DuplicateHashCodeFinder;
+import org.jeesl.client.maintenance.DuplicateHashCodeFinder;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;

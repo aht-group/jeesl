@@ -47,12 +47,6 @@
             <artifactId>exlp-util</artifactId>
             <type>jar</type>
             <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>commons-collections</artifactId>
-                    <groupId>commons-collections</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>  
         <dependency>
             <groupId>net.sf.exlp</groupId>
