@@ -12,7 +12,7 @@
 		<composite:attribute name="onclick"    required="false"/>
         <composite:attribute name="tooltip"    required="false" default=""/>
 		<composite:attribute name="svg" required="false" type="java.lang.Boolean" default="false"/>
-		<composite:attribute name="library" required="false" default="gfx"/>
+		<composite:attribute name="library" required="false" default="jeeslGfx"/>
 		
 	</composite:interface>
 
@@ -24,8 +24,8 @@
 					   styleClass="#{cc.attrs.styleClass}">
 			<h:graphicImage id="downloadIcon"
 							library="#{cc.attrs.library}"
-							name="#{cc.attrs.svg ? appIconBean.svg[cc.attrs.type] : appIconBean.icon12[cc.attrs.type]}">
-						<c:if test="#{cc.attrs.svg}"><f:attribute name="height" value="12"/></c:if>
+							name="#{appIconBean.svg[cc.attrs.type]}">
+				<f:attribute name="height" value="12"/>
 			</h:graphicImage>
 			<p:fileDownload value="#{cc.attrs.value}" />
             <p:tooltip widgetVar="#{cc.clientId}-toolTip" for="downloadIcon" value="#{cc.attrs.tooltip}" />
