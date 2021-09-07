@@ -108,7 +108,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
         rangeCheck(skipTitle);
         for (short row = startRow; row < endRow; row++)
         {
-            logger.info("Processing row " +row);
+            logger.trace("Processing row " +row);
             if (rowExists(row))
             {
                 try {
