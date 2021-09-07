@@ -20,12 +20,9 @@ public class CreateTimeSeriesBridge implements ImportStrategy
 {
     final static Logger logger = LoggerFactory.getLogger(CreateTimeSeriesBridge.class);
 
-    private JeeslFacade facade;
-
-    private Hashtable<String, Object> tempPropertyStore;
-    public  Hashtable<String, Object> getTempPropertyStore() {return tempPropertyStore;}
-    public void setTempPropertyStore(Hashtable<String, Object> tempPropertyStore) {this.tempPropertyStore = tempPropertyStore;}
-
+    private JeeslFacade facade; @Override public void setFacade(JeeslFacade facade) {this.facade = facade;}
+    private Hashtable<String, Object> tempPropertyStore; public  Hashtable<String, Object> getTempPropertyStore() {return tempPropertyStore;} public void setTempPropertyStore(Hashtable<String, Object> tempPropertyStore) {this.tempPropertyStore = tempPropertyStore;}
+	
     @Override
     public Object handleObject(Object object, String parameterClass, String property) {
 
@@ -63,11 +60,6 @@ public class CreateTimeSeriesBridge implements ImportStrategy
         // Return the result
         return "";
     }
-
-    @Override
-    public void setFacade(JeeslFacade facade) {
-        this.facade = facade;
-    }
     
     public Object createEjbWithCode(Object code, Class targetClass)
     {
@@ -100,5 +92,4 @@ public class CreateTimeSeriesBridge implements ImportStrategy
 	}
 	return ejbWithCode;
     }
-
 }

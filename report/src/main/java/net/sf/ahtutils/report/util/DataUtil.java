@@ -134,7 +134,7 @@ public class DataUtil {
 		}
 		
 		// Show the StringBuffer content in logging
-		logger.info(sb.toString());
+		logger.trace(sb.toString());
 		
 		return propertyColumnRelations;
 	}

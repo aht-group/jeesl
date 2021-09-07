@@ -20,9 +20,9 @@ public class SetterHelper
     public static void set(String propertyName, Object targetObject, Object parameter)
     {
         try {
-            System.out.println("Property " +propertyName +" is not handled and will be set by standard logic");
-            System.out.println("Value to be set is " +parameter);
-            System.out.println("Target Object is " +targetObject.getClass().getCanonicalName());
+            // System.out.println("Property " +propertyName +" is not handled and will be set by standard logic");
+            // System.out.println("Value to be set is " +parameter);
+            // System.out.println("Target Object is " +targetObject.getClass().getCanonicalName());
             Object[] arguments = new Object[1];
             Method setter = findSetMethod(targetObject, propertyName);
             // The old way to get the write Method was not working in some cases
