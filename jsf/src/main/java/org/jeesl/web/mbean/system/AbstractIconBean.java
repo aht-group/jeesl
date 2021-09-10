@@ -25,12 +25,19 @@ public class AbstractIconBean implements Serializable
 	private Map<String,Map<Long,String>> mapImagesAlt,mapResourceAlternative;
 	protected Map<String,String> mapStatic;
 
-	protected Map<String,String> svg; public Map<String, String> getSvg() {return svg;}
+	protected final Map<String,String> svg; public Map<String,String> getSvg() {return svg;}
+	protected final Map<String,String> library; public Map<String,String> getLibrary() {return library;}
 
 	private Map<Integer,Map<String,String>> icon; public Map<Integer,Map<String,String>> getIcon() {return icon;}
 	public Map<String,String> getIcon12() {return icon.get(12);}
 	public Map<String,String> getIcon16() {return icon.get(16);}
 
+	public AbstractIconBean()
+	{
+		svg = new HashMap<String,String>();
+		library = new HashMap<String,String>();
+	}
+	
 	public void initPath(String imagePath)
     {
 		this.imagePath=imagePath;
@@ -40,8 +47,7 @@ public class AbstractIconBean implements Serializable
 		mapResourceAlternative = new Hashtable<String,Map<Long,String>>();
 
 		mapStatic = new HashMap<String,String>();
-		svg = new HashMap<String,String>();
-
+		
 		icon = new Hashtable<Integer,Map<String,String>>();
     }
 

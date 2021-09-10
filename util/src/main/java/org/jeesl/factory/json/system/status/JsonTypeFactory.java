@@ -20,6 +20,9 @@ public class JsonTypeFactory<L extends JeeslLang, D extends JeeslDescription,S e
 		this.localeCode=localeCode;
 		this.q=q;
 	}
+	
+	public static JsonType build() {return new JsonType();}
+	public static JsonType build(String code) {JsonType json=build(); json.setCode(code); return json;}
 		
 	public JsonType build(S ejb)
 	{

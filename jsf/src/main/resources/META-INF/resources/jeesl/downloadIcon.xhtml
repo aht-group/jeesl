@@ -5,14 +5,13 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
-		<composite:attribute name="styleClass" required="false" default="pf-action-icon"/>
-		<composite:attribute name="disabled"   required="false" default="true"/>
-		<composite:attribute name="value"      required="true"/>
-		<composite:attribute name="type"       required="true"/>
-		<composite:attribute name="onclick"    required="false"/>
-        <composite:attribute name="tooltip"    required="false" default=""/>
-		<composite:attribute name="svg" required="false" type="java.lang.Boolean" default="false"/>
-		<composite:attribute name="library" required="false" default="jeeslGfx"/>
+		<composite:attribute name="styleClass"	required="false" default="pf-action-icon"/>
+		<composite:attribute name="disabled"	required="false" default="true"/>
+		<composite:attribute name="value"		required="true"  shortDescription="Has to point to a bean method returning a org.primefaces.model.StreamedContent"/>
+		<composite:attribute name="type"		required="true"/>
+		<composite:attribute name="onclick"		required="false"/>
+        <composite:attribute name="tooltip"		required="false" default=""/>
+		<composite:attribute name="library"		required="false" default="" shortDescription="Can be explictly set, otherwise a redirection is checked in AppIconBean, then a fallback to jeeslGfx is used."/>
 		
 	</composite:interface>
 
@@ -23,7 +22,8 @@
 					   icon="ui-icon-arrowthick-1-s"
 					   styleClass="#{cc.attrs.styleClass}">
 			<h:graphicImage id="downloadIcon"
-							library="#{cc.attrs.library}"
+							library="#{(not empty cc.attrs.library) ? cc.attrs.library :
+									 ((not empty appIconBean.library[cc.attrs.type]) ? appIconBean.library[cc.attrs.type] : 'jeeslGfx')}"
 							name="#{appIconBean.svg[cc.attrs.type]}">
 				<f:attribute name="height" value="12"/>
 			</h:graphicImage>
