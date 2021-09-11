@@ -32,7 +32,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>
-//,	JSON extends Object
+,	JSON extends Object
 >
 						implements SsiMappingProcessor<MAPPING,DATA>
 {
