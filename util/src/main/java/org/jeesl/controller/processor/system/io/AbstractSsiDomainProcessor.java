@@ -32,7 +32,8 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>
-										>
+//,	JSON extends Object
+>
 						implements SsiMappingProcessor<MAPPING,DATA>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiDomainProcessor.class);
@@ -43,14 +44,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 	protected final EjbIoSsiDataFactory<MAPPING,DATA,LINK> efData;
 	
 	protected final EjbCodeCache<LINK> cacheLink; public EjbCodeCache<LINK> getCacheLink() {return cacheLink;}
-	
-	protected LINK linkUnlinked; public LINK getLinkUnlinked() {return linkUnlinked;}
-	protected LINK linkPrecondition; public LINK getLinkPrecondition() {return linkPrecondition;}
-	protected LINK linkPossible; public LINK getLinkPossible() {return linkPossible;}
-	protected LINK linkLinked; public LINK getLinkLinked() {return linkLinked;}
-	protected LINK linkIgnore; public LINK getLinkIgnore() {return linkIgnore;}
-	protected LINK linkUpdate;
-	
+		
 	protected MAPPING mapping; @Override public MAPPING getMapping() {return mapping;}
 
 	public AbstractSsiDomainProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi,
@@ -62,19 +56,6 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 		cacheLink = new EjbCodeCache<>(fbSsi.getClassLink(),fSsi);
 		
 		efData = fbSsi.ejbData();
-		
-		try {initLinks();}
-		catch (JeeslNotFoundException e) {e.printStackTrace();}
-	}
-	
-	private void initLinks() throws JeeslNotFoundException
-	{		
-		linkUnlinked = fSsi.fByCode(fbSsi.getClassLink(),JeeslIoSsiLink.Code.unlinked);
-		linkPrecondition = fSsi.fByCode(fbSsi.getClassLink(),JeeslIoSsiLink.Code.precondition);
-		linkPossible = fSsi.fByCode(fbSsi.getClassLink(),JeeslIoSsiLink.Code.possible);
-		linkLinked = fSsi.fByCode(fbSsi.getClassLink(),JeeslIoSsiLink.Code.linked);
-		linkIgnore = fSsi.fByCode(fbSsi.getClassLink(),JeeslIoSsiLink.Code.ignore);
-		linkUpdate = fSsi.fByCode(fbSsi.getClassLink(),JeeslIoSsiLink.Code.update);
 	}
 	
 	@Override public void ignoreData(List<DATA> datas)
@@ -93,7 +74,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 		try
 		{
 			data.setLocalId(null);
-			data.setLink(linkIgnore);
+			data.setLink(cacheLink.ejb(JeeslIoSsiLink.Code.ignore));
 			fSsi.save(data);
 		}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
@@ -115,7 +96,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 		try
 		{
 			data.setLocalId(null);
-			data.setLink(linkUnlinked);
+			data.setLink(cacheLink.ejb(JeeslIoSsiLink.Code.unlinked));
 			fSsi.save(data);
 		}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
