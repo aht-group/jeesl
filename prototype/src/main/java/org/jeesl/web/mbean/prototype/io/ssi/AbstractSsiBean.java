@@ -35,7 +35,9 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
-										HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
+										HOST extends JeeslIoSsiHost<L,D,SYSTEM>
+,JSON extends Object
+										>
 						implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -47,7 +49,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	
 	protected final SbMultiHandler<LINK> sbhLink; public SbMultiHandler<LINK> getSbhLink() {return sbhLink;}
 	protected final JsonTuple1Handler<LINK> thLink; public JsonTuple1Handler<LINK> getThLink() {return thLink;}
-	protected SsiMappingProcessor<MAPPING,DATA> ssiProcessor;
+	protected SsiMappingProcessor<MAPPING,DATA,JSON> ssiProcessor;
 	
 	protected final List<DATA> datas; public List<DATA> getDatas() {return datas;}
 	protected List<DATA> selection; public List<DATA> getSelection() {return selection;} public void setSelection(List<DATA> selection) {this.selection = selection;}

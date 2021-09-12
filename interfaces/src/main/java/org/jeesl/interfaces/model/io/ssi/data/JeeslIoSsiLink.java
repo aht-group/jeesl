@@ -18,5 +18,5 @@ public interface JeeslIoSsiLink <L extends JeeslLang, D extends JeeslDescription
 				JeeslOptionRestDownload,JeeslStatusFixedCode,
 				EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {
-	public static enum Code{unlinked,precondition,possible,partial,linked,ignore,update};
+	public static enum Code{unlinked,precondition,possible,partial,linked,ignore,update,updated};
 }

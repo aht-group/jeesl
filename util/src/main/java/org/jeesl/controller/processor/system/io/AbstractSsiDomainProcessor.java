@@ -1,11 +1,11 @@
 package org.jeesl.controller.processor.system.io;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
-import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiDataFactory;
 import org.jeesl.interfaces.controller.processor.SsiMappingProcessor;
@@ -23,6 +23,8 @@ import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.exlp.util.io.JsonUtil;
+
 public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends JeeslDescription,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
 										CRED extends JeeslIoSsiCredential<SYSTEM>,
@@ -34,7 +36,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>
 ,	JSON extends Object
 >
-						implements SsiMappingProcessor<MAPPING,DATA>
+						implements SsiMappingProcessor<MAPPING,DATA,JSON>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiDomainProcessor.class);
 	
@@ -101,4 +103,31 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 		}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 	}
+	
+	public void updateData(List<DATA> datas)
+	{
+		for(DATA data : datas)
+		{
+			try
+			{
+				if(data.getLink().equals(cacheLink.ejb(JeeslIoSsiLink.Code.update)))
+				{
+					if(data.getLocalId()==null)
+					{
+						logger.warn("No local ID");
+					}
+					else
+					{
+						JSON json = JsonUtil.read(data.getJson(),this.getClassJson());
+						updateData(data,json);
+					}
+				}
+			}
+			catch (IOException  e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	protected abstract void updateData(DATA data, JSON json);
 }

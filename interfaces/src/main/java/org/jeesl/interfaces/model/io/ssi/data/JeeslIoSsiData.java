@@ -1,5 +1,7 @@
 package org.jeesl.interfaces.model.io.ssi.data;
 
+import java.util.Date;
+
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -36,4 +38,16 @@ public interface JeeslIoSsiData <MAPPING extends JeeslIoSsiMapping<?,?>,
 	
 	Long getRefC();
 	void setRefC(Long refC);
+	
+	Date getJsonCreatedAt();
+	void setJsonCreatedAt(Date jsonCreatedAt);
+	
+	Date getJsonUpdatedAt();
+	void setJsonUpdatedAt(Date jsonUpdatedAt);
+	
+	Date getEjbCreatedAt();
+	void setEjbCreatedAt(Date ejbCreatedAt);
+	
+	Date getEjbUpdatedAt();
+	void setEjbUpdatedAt(Date ejbUpdatedAt);
 }

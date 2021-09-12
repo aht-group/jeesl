@@ -7,7 +7,9 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 
 public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiMapping<?,?>,
-										DATA extends JeeslIoSsiData<MAPPING,?>>
+										DATA extends JeeslIoSsiData<MAPPING,?>
+,JSON extends Object
+										>
 {
 	MAPPING getMapping();
 	
@@ -16,7 +18,7 @@ public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiMapping<?,?>,
 	Class<?> getClassA();
 	Class<?> getClassB();
 	Class<?> getClassC();
-	Class<?> getClassJson();
+	Class<JSON> getClassJson();
 	Class<?> getClassLocal();
 	Class<?> getClassTarget();
 

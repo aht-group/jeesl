@@ -1,5 +1,7 @@
 package org.jeesl.factory.ejb.io.ssi.data;
 
+import java.util.Date;
+
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -28,6 +30,7 @@ public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiMapping<?,?>,
 			ejb.setMapping(mapping);
 			ejb.setCode(code);
 			ejb.setLink(link);
+			ejb.setJsonCreatedAt(new Date());
 			this.updateJson(ejb,json);
 	       
 		}
