@@ -1,5 +1,6 @@
 package org.jeesl.controller.processor.system;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityPasswordRating;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityPasswordRule;
 import org.jeesl.interfaces.model.system.security.user.JeeslPasswordHistory;
+import org.jeesl.util.comparator.ejb.RecordComparator;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Months;
@@ -37,17 +39,29 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 
 	private JeeslFacade fJeesl;
 	
+	private final RecordComparator<HISTORY> cpHistory;
+	
 	public JeeslPasswordRuleChecker(JeeslFacade fJeesl, Class<RATING> cRating)
 	{		
 		this.fJeesl=fJeesl;
 		this.cRating=cRating;
 		zxcvbn = new Zxcvbn();
 		mapResult = new HashMap<>();
+		
+		cpHistory = new RecordComparator<>();
 	}
 	
 	public void clear()
 	{
 		mapResult.clear();
+	}
+	
+	public void bypassAgeCheck(List<RULE> rules)
+	{		
+		for(RULE r : rules)
+		{
+			if(r.getCode().equals(JeeslSecurityPasswordRule.Code.age.toString())) {mapResult.put(r,true);}
+		}
 	}
 	
 	public boolean passwordCompliant()
@@ -92,6 +106,11 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	
 	public void analyseHistory(List<RULE> rules, String hash, List<HISTORY> histories)
 	{
+		Collections.sort(histories,cpHistory);
+		Collections.reverse(histories);
+		
+		for(HISTORY h : histories) {logger.info(h.toString());}
+		
 		for(RULE r : rules)
 		{
 			Integer value = Integer.valueOf(r.getSymbol());
@@ -145,13 +164,13 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		return true;
 	}
 	
-	protected boolean validAge(int maxMonths, List<HISTORY> histories)
+	protected boolean validAge(int maxDays, List<HISTORY> histories)
 	{
 		if(histories.isEmpty()) {return true;}
 		DateTime dtNow = new DateTime();
 		DateTime dt = new DateTime(histories.get(0).getRecord());
-		int months = Days.daysBetween(dt,dtNow).getDays();
-		if(months>=maxMonths) {return false;}
+		int days = Days.daysBetween(dt,dtNow).getDays();
+		if(days>=maxDays) {return false;}
 		else {return true;}
 	}
 }

@@ -11,6 +11,8 @@ public class RecordComparator<T extends EjbWithRecord> implements Comparator<T>
 {
 	final static Logger logger = LoggerFactory.getLogger(RecordComparator.class);
 
+	public RecordComparator() {}
+	
 	public int compare(T a, T b)
     {
 		  CompareToBuilder ctb = new CompareToBuilder();

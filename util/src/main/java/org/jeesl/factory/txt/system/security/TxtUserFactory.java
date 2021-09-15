@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
+import org.jeesl.factory.sql.SqlFactory;
+import org.jeesl.interfaces.model.system.security.user.JeeslPasswordUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,4 +75,14 @@ public class TxtUserFactory <USER extends JeeslUser<?>>
         if (Base64.isBase64(input)) {return Base64.decodeBase64(input);}
         else {return Base64.encodeBase64(input.getBytes());}
     }
+	
+	public String updatePwd(USER user)
+	{
+		StringBuilder sb = new StringBuilder();
+		SqlFactory.updateS(sb, user.getClass(), null, JeeslPasswordUser.Attributes.pwd, "xy", false);
+		SqlFactory.whereId(sb, null, user, false);
+		SqlFactory.semicolon(sb);
+		
+		return sb.toString();
+	}
 }
