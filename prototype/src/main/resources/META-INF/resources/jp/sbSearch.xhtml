@@ -30,18 +30,35 @@
 		
 		<h:panelGroup id="searchResults" layout="block" styleClass="auContainer jeesl-overlay-container">
 			<script>
+				function toggleDetails(eventArgs) {
+					let currentListItem = $(this);
+					let closeRequested = currentListItem.children('.jeesl-field-tip').eq(0).height() > 0;
+					
+					eventArgs.data.overlay.find('.ui-selectonemenu-item').removeClass('jeesl-active');
+					eventArgs.data.overlay.find('.jeesl-field-tip').height(0);
+					if (!closeRequested) {
+						currentListItem.addClass('jeesl-active');
+						let fieldTip = currentListItem.children('.jeesl-field-tip').eq(0);
+						fieldTip.height(fieldTip.children('.jeesl-field-tip-content').eq(0).height());
+					}
+				}
+			
 				function showResults() {
 					let input = $('##{cc.clientId}:searchText'.replaceAll(':','\\:'));
 					let overlay = $('##{cc.clientId}:searchResults'.replaceAll(':','\\:'));
 					input.val() ? overlay.addClass('jeesl-visible') : overlay.removeClass('jeesl-visible');
+					
+					overlay.find('.ui-selectonemenu-item').click({ overlay: overlay }, toggleDetails);
 				}
 			</script>
 			<div class="jeesl-overlay-wrapper">
 				<ul class="ui-selectonemenu-list">
 					<ui:repeat var="var" value="#{cc.attrs.handler.list}" varStatus="loop">
 						<li class="ui-selectonemenu-item">
-							<div class="jeesl-field-tip">
+							<p:outputPanel class="ui-selectonemenu-item-text">
 								<composite:renderFacet name="resultList"/>
+							</p:outputPanel>
+							<div class="jeesl-field-tip">
 		            			<div class="jeesl-field-tip-content">
 									<composite:renderFacet name="resultDetail"/>
 								</div>

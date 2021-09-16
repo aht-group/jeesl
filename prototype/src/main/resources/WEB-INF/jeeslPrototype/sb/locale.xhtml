@@ -10,17 +10,21 @@
 			  	xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
 	<c:set var="rendered" value="#{not empty rendered ? rendered : true}" />
 	<c:set var="loc" value="#{not empty loc ? loc : localeCode}" />
+	<c:set var="showFlag" value="#{not empty showFlag ? showFlag : true}"/>
 
 	<jp:sbItem orientation="left" childs="#{appLabelBean.locales}" rendered="#{rendered}" styleClass="jeesl-menu-bar-dropdown">
 		<f:facet name="label">
-			<jtp:symbolizer value="#{appLabelBean.mapLocales[loc]}" styleClass="jeesl-menu-bar-button-icon"/>
+			<c:if test="#{showFlag}">
+				<jtp:symbolizer value="#{appLabelBean.mapLocales[loc]}" styleClass="jeesl-menu-bar-button-icon"/>
+			</c:if>
+			<c:if test="#{not showFlag}">
+				<p:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslLanguageSelect']}" styleClass="jeesl-menu-bar-button-icon"/>
+			</c:if>
 		</f:facet>
-		<li class="jeesl-dropdown-item">
-			<h:commandLink styleClass="jeesl-dropdown-item-label">
-				<jtp:symbolizer value="#{var}"/>
-				<h:outputText value="#{var.code}" styleClass="jeesl-dropdown-item-label-icon"/>
-				<p:ajax event="click" listener="#{userBean.setLocale(var.code)}" update="@form" oncomplete="javascript:location.reload(true)"/>
-			</h:commandLink>
-		</li>
+		<h:commandLink styleClass="jeesl-dropdown-item-label">
+			<jtp:symbolizer value="#{var}" styleClass="jeesl-dropdown-item-label-icon"/>
+			<h:outputText value="#{var.code}" styleClass="jeesl-dropdown-item-label-text"/>
+			<p:ajax event="click" listener="#{userBean.setLocale(var.code)}" update="@form" oncomplete="javascript:location.reload(true)"/>
+		</h:commandLink>
 	</jp:sbItem>
 </ui:composition>

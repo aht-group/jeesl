@@ -19,7 +19,7 @@
 	</composite:interface>
 
 	<composite:implementation>
-		<jp:sbItem rendered="#{cc.attrs.handler.showLevel5}" orientation="right" childs="#{cc.attrs.handler.list5}">
+		<jp:sbItem rendered="#{cc.attrs.handler.showLevel5}" styleClass="jeesl-menu-bar-dropdown" orientation="right" childs="#{cc.attrs.handler.list5}">
 			<f:facet name="label">
 				<j:outputXpath value="#{cc.attrs.handler.l5}" xpath="#{cc.attrs.handler.xpath5}" localeCode="#{localeCode}" styleClass="jeesl-menu-bar-button-label"/>
 			</f:facet>
@@ -27,7 +27,7 @@
 				<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.xpath5}" localeCode="#{localeCode}" styleClass="jeesl-dropdown-item-label-text"/>
 			</p:commandLink>
 		</jp:sbItem>
-		<jp:sbItem rendered="#{cc.attrs.handler.showLevel4}" orientation="right" childs="#{cc.attrs.handler.list4}">
+		<jp:sbItem rendered="#{cc.attrs.handler.showLevel4}" styleClass="jeesl-menu-bar-dropdown" orientation="right" childs="#{cc.attrs.handler.list4}">
 			<f:facet name="label">
 				<j:outputXpath value="#{cc.attrs.handler.l4}" xpath="#{cc.attrs.handler.xpath4}" localeCode="#{localeCode}" styleClass="jeesl-menu-bar-button-label"/>
 			</f:facet>
@@ -35,7 +35,7 @@
 				<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.xpath4}" localeCode="#{localeCode}" styleClass="jeesl-dropdown-item-label-text"/>
 			</p:commandLink>
 		</jp:sbItem>
-		<jp:sbItem rendered="#{cc.attrs.handler.showLevel3}" orientation="right" childs="#{cc.attrs.handler.list3}">
+		<jp:sbItem rendered="#{cc.attrs.handler.showLevel3}" styleClass="jeesl-menu-bar-dropdown" orientation="right" childs="#{cc.attrs.handler.list3}">
 			<f:facet name="label">
 				<j:outputXpath value="#{cc.attrs.handler.l3}" xpath="#{cc.attrs.handler.xpath3}" localeCode="#{localeCode}" styleClass="jeesl-menu-bar-button-label"/>
 			</f:facet>
@@ -43,7 +43,7 @@
 				<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.xpath3}" localeCode="#{localeCode}" styleClass="jeesl-dropdown-item-label-text"/>
 			</p:commandLink>
 		</jp:sbItem>
-		<jp:sbItem rendered="#{cc.attrs.handler.showLevel2}" orientation="right" childs="#{cc.attrs.handler.list2}">
+		<jp:sbItem rendered="#{cc.attrs.handler.showLevel2}" styleClass="jeesl-menu-bar-dropdown" orientation="right" childs="#{cc.attrs.handler.list2}">
 			<f:facet name="label">
 				<j:outputXpath value="#{cc.attrs.handler.l2}" xpath="#{cc.attrs.handler.xpath2}" localeCode="#{localeCode}" styleClass="jeesl-menu-bar-button-label"/>
 			</f:facet>
@@ -51,7 +51,7 @@
 				<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.xpath2}" localeCode="#{localeCode}" styleClass="jeesl-dropdown-item-label-text"/>
 			</p:commandLink>
 		</jp:sbItem>
-		<jp:sbItem rendered="#{cc.attrs.handler.showLevel1}" orientation="right" childs="#{cc.attrs.handler.list1}">
+		<jp:sbItem rendered="#{cc.attrs.handler.showLevel1}" styleClass="jeesl-menu-bar-dropdown" orientation="right" childs="#{cc.attrs.handler.list1}">
 			<f:facet name="label">
 				<j:outputXpath value="#{cc.attrs.handler.l1}" xpath="#{cc.attrs.handler.xpath1}" localeCode="#{localeCode}" styleClass="jeesl-menu-bar-button-label"/>
 			</f:facet>
