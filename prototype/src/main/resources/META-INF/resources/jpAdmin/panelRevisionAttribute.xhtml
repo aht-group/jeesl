@@ -67,8 +67,23 @@
 				</p:selectOneMenu>
 				
 				<p:outputLabel value="#{msg.jeeslRevisionEntity}" rendered="#{not empty cc.attrs.bean.attribute.relation}"/>
-				<p:selectOneMenu value="#{cc.attrs.bean.attribute.entity}" effect="fade" autoWidth="false" rendered="#{not empty cc.attrs.bean.attribute.relation}">
+				<p:selectOneMenu value="#{cc.attrs.bean.attribute.entity}" effect="fade" autoWidth="false" rendered="#{not empty cc.attrs.bean.attribute.relation}"
+									filter="true" filterMatchMode="contains" var="entity">
 					<f:selectItems value="#{cc.attrs.bean.links}" var="l" itemLabel="#{l.category.position}.#{l.position} #{l.name[localeCode].lang}" itemValue="#{l}"/>
+
+					<p:column>
+						<h:outputText value="#{entity.category.position}.#{entity.position}" />
+					</p:column>
+					<p:column headerText="#{msg.aupCategory}">
+						<h:outputText value="#{entity.category.name[localeCode].lang}" />
+					</p:column>
+					<p:column headerText="#{msg.jeeslRevisionDiagramShort}">
+						<h:outputText value="#{entity.diagram.name[localeCode].lang}" />
+					</p:column>
+					<p:column headerText="#{msg.jeeslRevisionEntity}">
+						<h:outputText value="#{entity.name[localeCode].lang}" />
+					</p:column>
+
 				</p:selectOneMenu>
 				
 				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.relationOwner}" rendered="#{not empty cc.attrs.bean.attribute.relation}"/>
