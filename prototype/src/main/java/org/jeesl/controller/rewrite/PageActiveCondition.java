@@ -13,6 +13,7 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslIdentity;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.ocpsoft.rewrite.config.Condition;
 import org.ocpsoft.rewrite.context.EvaluationContext;
@@ -41,7 +42,7 @@ public class PageActiveCondition <L extends JeeslLang, D extends JeeslDescriptio
 	
 	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
 	
-	public PageActiveCondition(boolean debugOnInfo, JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity)
+	public PageActiveCondition(boolean debugOnInfo, JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, JeeslIdentity<R,V,U,A,USER> identity)
 	{
 		this.debugOnInfo=debugOnInfo;
 		this.bSecurity=bSecurity;
@@ -62,7 +63,12 @@ public class PageActiveCondition <L extends JeeslLang, D extends JeeslDescriptio
 	    		else {logger.warn("View not found");}
 	 	}
 		
-		if(view!=null) {return view.isVisible();}
+		if(view!=null)
+		{
+			if(view.isVisible()) {return true;}
+			
+			return view.isVisible();
+		}
 		else
 		{
 			logger.warn("Assuming active=false, because view not found for url: "+url);

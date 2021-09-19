@@ -113,6 +113,8 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 	public Map<String, Boolean> getMapSystemViews() {return mapSystemViews;}
 	public void setMapSystemViews(Map<String, Boolean> mapSystemViews) {this.mapSystemViews = mapSystemViews;}
 	
+	@Override public String getRoleCodeWithAccessToAllPages() {return null;}
+	
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();

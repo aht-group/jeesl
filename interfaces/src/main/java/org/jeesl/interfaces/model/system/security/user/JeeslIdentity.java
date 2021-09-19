@@ -38,4 +38,6 @@ public interface JeeslIdentity <R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
 	void allowView(V view);
 	void allowRole(R role);
 	void allowAction(A action);
+	
+	String getRoleCodeWithAccessToAllPages();
 }
