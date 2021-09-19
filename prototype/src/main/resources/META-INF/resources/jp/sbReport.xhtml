@@ -29,38 +29,6 @@
 				<li><b><h:outputText value="#{cc.attrs.report.ioReport.name[localeCode].lang}"/></b></li>
 				<li><h:outputText value="#{cc.attrs.report.ioReport.description[localeCode].lang}"/></li>
 				
-				<j:li rendered="#{cc.attrs.filling}"><b><h:outputText value="Filling"/></b></j:li>
-				<ui:repeat var="var" value="#{appReportBean.fillings}">
-					<j:li rendered="#{cc.attrs.filling}">
-						<h:commandLink>
-							<h:outputText value="#{var.name[userBean.localeCode].lang}"/>
-							<aup:sbCheckmark value="#{reportSelectorBean.mapFilling[var]}"/>
-							<p:ajax event="click" update=":fStatusBar" ajax="true" listener="#{reportSelectorBean.toggleFilling(var)}"/>
-						</h:commandLink>
-					</j:li>
-				</ui:repeat>
-				
-				<j:li rendered="#{cc.attrs.transformation}"><b><h:outputText value="Column Transformation"/></b></j:li>
-				<ui:repeat var="var" value="#{appReportBean.columnAggregations}">
-					<j:li rendered="#{cc.attrs.transformation}">
-						<h:commandLink>
-							<h:outputText value="#{var.name[userBean.localeCode].lang}"/>
-							<aup:sbCheckmark value="#{reportSelectorBean.mapTransformation[var]}"/>
-							<p:ajax event="click" update=":fStatusBar" ajax="true" listener="#{reportSelectorBean.toggleTransformation(var)}"/>
-						</h:commandLink>
-					</j:li>
-				</ui:repeat>
-				
-				<j:li rendered="#{cc.attrs.groups}"><b><h:outputText value="Column Groups"/></b></j:li>
-				<ui:repeat var="var" value="#{cc.attrs.report.groupsAll}">
-					<j:li rendered="#{cc.attrs.groups}">
-						<h:commandLink>
-							<h:outputText value="#{var.name[userBean.localeCode].lang}"/>
-							<aup:sbCheckmark value="#{cc.attrs.report.mapGroupVisibilityToggle[var]}"/>
-							<p:ajax event="click" update=":fStatusBar" ajax="true" listener="#{cc.attrs.report.toggleGroupVisibility(var)}"/>
-						</h:commandLink>
-					</j:li>
-				</ui:repeat>
 			</ul>
 		</j:li>
 	</composite:implementation>

@@ -170,8 +170,10 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 //				}
 
 				boolean visible = m.getView().isVisible() && (m.getView().getAccessPublic() || (identity.isLoggedIn() && (m.getView().getAccessLogin() || identity.hasView(m.getView()))));
-				if(debugOnInfo) {logger.info("\t\t"+m.getView().getCode()+" visible:"+visible);}
-				if(visible)
+				boolean developer = identity.getRoleCodeWithAccessToAllPages()!=null && identity.hasRole(identity.getRoleCodeWithAccessToAllPages());
+				
+				if(debugOnInfo) {logger.info("\t\t"+m.getView().getCode()+" visible:"+visible+" developer:"+developer);}
+				if(visible || developer)
 				{
 					M parent = null;
 					if(m.getParent()!=null) {parent = m.getParent();}

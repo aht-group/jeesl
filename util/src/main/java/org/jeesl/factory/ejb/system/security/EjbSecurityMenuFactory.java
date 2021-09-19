@@ -29,7 +29,6 @@ public class EjbSecurityMenuFactory <V extends JeeslSecurityView<?,?,?,?,?,?>,
 		comparator = new PositionComparator<M>();
     } 
     
-    
     public M build()
     {
 	    	M ejb = null;
@@ -78,6 +77,12 @@ public class EjbSecurityMenuFactory <V extends JeeslSecurityView<?,?,?,?,?,?>,
     		for(M m : list) {if(m.getParent()==null) {result.add(m);}}
     		Collections.sort(result,comparator);
     		return result;
+    }
+    
+    public M toRoot(M menu)
+    {
+    	if(menu.getParent()==null) {return menu;}
+    	else {return this.toRoot(menu.getParent());}
     }
     
     public Map<M,List<M>> toMapChild(List<M> list)

@@ -36,6 +36,7 @@ import org.jeesl.model.xml.text.Description;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="href" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="active" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="visible" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -75,6 +76,8 @@ public class MenuItem
     protected String href;
     @XmlAttribute(name = "active")
     protected Boolean active;
+    @XmlAttribute(name = "visible")
+    protected Boolean visible;
 
     /**
      * Gets the value of the menuItem property.
@@ -339,6 +342,38 @@ public class MenuItem
 
     public void unsetActive() {
         this.active = null;
+    }
+
+    /**
+     * Gets the value of the visible property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isVisible() {
+        return visible;
+    }
+
+    /**
+     * Sets the value of the visible property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setVisible(boolean value) {
+        this.visible = value;
+    }
+
+    public boolean isSetVisible() {
+        return (this.visible!= null);
+    }
+
+    public void unsetVisible() {
+        this.visible = null;
     }
 
 }

@@ -48,6 +48,7 @@ public class XmlMenuItemFactory <L extends JeeslLang, D extends JeeslDescription
 		*/
 		
 		MenuItem xml = build();
+		xml.setVisible(menu.getView().isVisible());
 		xml.setCode(menu.getView().getCode());
 		if(menu.getView().getName().containsKey(localeCode)) {xml.setName(menu.getView().getName().get(localeCode).getLang());}
 		else {xml.setName("??");}
@@ -69,6 +70,7 @@ public class XmlMenuItemFactory <L extends JeeslLang, D extends JeeslDescription
 	public static MenuItem build(MenuItem mi)
 	{
 		MenuItem xml = build();
+		xml.setVisible(mi.isSetVisible() && mi.isVisible());
 		xml.setActive(mi.isSetActive() && mi.isActive());
 		xml.setCode(mi.getCode());
 		xml.setHref(mi.getHref());

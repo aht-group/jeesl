@@ -6,12 +6,12 @@ import javax.faces.component.UINamingContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@FacesComponent(value="net.sf.ahtutils.jsf.components.MenuUl")
-public class MenuUl extends UINamingContainer
+@FacesComponent(value="net.sf.ahtutils.jsf.components.MenuItem")
+public class MenuItem extends UINamingContainer
 {
-	final static Logger logger = LoggerFactory.getLogger(MenuUl.class);
+	final static Logger logger = LoggerFactory.getLogger(MenuItem.class);
 
-	public String styleClassLi(boolean active, boolean first, boolean last, String cssActive, String cssLi, String cssFirst, String cssLast)
+	public String styleClassLi(boolean active, boolean visible, boolean first, boolean last, String cssActive, String cssLi, String cssFirst, String cssLast)
 	{
 		StringBuffer sb = new StringBuffer();
 		if(active){sb.append(cssActive);}

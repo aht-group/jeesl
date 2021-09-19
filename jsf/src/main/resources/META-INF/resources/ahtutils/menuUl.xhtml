@@ -7,7 +7,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
-  <composite:interface componentType="net.sf.ahtutils.jsf.components.MenuUl">
+  <composite:interface componentType="net.sf.ahtutils.jsf.components.MenuItem">
     <composite:attribute name="value"/>
     <composite:attribute name="styleClass"/>
     <composite:attribute name="maxLevel" required="false" default="99"/>
@@ -22,10 +22,10 @@
    	<label class="jeesl-menu-bar-button jeesl-menu-bar-dropdown jeesl-burger-menu-icon"/>
     <ul class="jeesl-dropdown-list #{cc.attrs.styleClass}">
       <ui:repeat var="mi1" value="#{cc.attrs.value.menuItem}" varStatus="vs1">
-      	<li id="#{mi1.code}" class="jeesl-dropdown-item #{cc.styleClassLi(mi1.active,vs1.first,vs1.last,cc.attrs.scActive,cc.attrs.sc1,cc.attrs.sc1First,cc.attrs.sc1Last)}">
+      	<li id="#{mi1.code}" class="jeesl-dropdown-item #{cc.styleClassLi(mi1.active,mi1.visible,vs1.first,vs1.last,cc.attrs.scActive,cc.attrs.sc1,cc.attrs.sc1First,cc.attrs.sc1Last)}">
       		<a class="jeesl-dropdown-item-label" href="#{facesContext.externalContext.requestContextPath}#{mi1.href}">#{mi1.name}</a>
       		<ui:repeat var="mi2" value="#{mi1.menuItem}" varStatus="vs2" rendered="#{cc.attrs.maxLevel > 1}">
-		      	<li class="jeesl-dropdown-item #{cc.styleClassLi(mi2.active,vs2.first,vs2.last,cc.attrs.scActive,cc.attrs.sc2,cc.attrs.sc2First,cc.attrs.sc2Last)}">
+		      	<li class="jeesl-dropdown-item #{cc.styleClassLi(mi2.active,mi2.visible,vs2.first,vs2.last,cc.attrs.scActive,cc.attrs.sc2,cc.attrs.sc2First,cc.attrs.sc2Last)}">
 		      		<a class="jeesl-dropdown-item-label" href="#{facesContext.externalContext.requestContextPath}#{mi2.href}">#{mi2.name}</a>
 		      	</li>
 		    </ui:repeat>

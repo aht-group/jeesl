@@ -21,7 +21,7 @@
 			<f:facet name="#{appSettingsBean.positionSideMenu}"><jp:menuSide code="#{cc.attrs.bean.security.pageCode}"/></f:facet>
 			<j:row>
         		<j:slot width="4">
-        			<h:outputText value="#{cc.attrs.bean.security.view.name[localeCode].lang}"/>
+        			<h:outputText value="#{cc.attrs.bean.security.view.name[localeCode].lang}"/><br/>
         			<h:outputText value="#{cc.attrs.bean.security.view.description[localeCode].lang}"/>
         		</j:slot>
         		<j:slot width="1"/>
@@ -33,6 +33,7 @@
         					</p:panelGrid>
         				</p:panel>
         			</ui:repeat>
+        			<composite:insertChildren/>
         		</j:slot>
 			</j:row>
 		</jp:grid>

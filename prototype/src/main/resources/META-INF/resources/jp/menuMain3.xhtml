@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="code" required="true"/>
+		<composite:attribute name="bean" required="false" default="#{menu3Bean}"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		<label class="jeesl-menu-bar-button jeesl-menu-bar-dropdown jeesl-burger-menu-icon"/>
+	    <ul class="jeesl-dropdown-list">
+	      <ui:repeat var="m" value="#{cc.attrs.bean.mainMenu}" varStatus="vs">
+	      	<li id="#{m.view.code}" class="jeesl-dropdown-item" style="#{ m.view.code eq cc.attrs.bean.mapRoot[cc.attrs.cocde].view.code ? 'color:red' : ''}">
+	      		<a class="jeesl-dropdown-item-label" href="#{facesContext.externalContext.requestContextPath}#{m.view.urlMapping}">#{m.view.name[localeCode].lang}</a>
+	      	</li>
+		    <!-- <p:tooltip for="#{mi1.code}" value="Test" rendered="#{cc.attrs.withDescription}"/> -->
+	      </ui:repeat>
+	    </ul>
+    
+	</composite:implementation>
+</html>
