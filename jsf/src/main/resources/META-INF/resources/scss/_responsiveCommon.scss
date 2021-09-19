@@ -54,7 +54,7 @@ $border: $border-width solid $border-colour;
 			border-bottom: $separator-thickness-mobile solid $soft-grey;
 		    content: '';
 		    display: block;
-		    width: calc(100% - (2 * $wide-spacing));
+		    width: calc(100% - (2 * #{$wide-spacing}));
 		    margin: 0 $wide-spacing;
 		}
 	}
@@ -84,7 +84,6 @@ $border: $border-width solid $border-colour;
 				border-bottom: $separator-thickness-mobile solid $bright-grey;
 				content: '';
 				display: block;
-				width: 100%;
 			}
 		}
 		

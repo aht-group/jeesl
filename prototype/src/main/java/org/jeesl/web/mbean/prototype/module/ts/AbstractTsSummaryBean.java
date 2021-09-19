@@ -1,6 +1,7 @@
 package org.jeesl.web.mbean.prototype.module.ts;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 											MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT>,
 											TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
 											TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
-											SOURCE extends EjbWithLangDescription<L,D>, 
+											SOURCE extends EjbWithLangDescription<L,D>,
 											BRIDGE extends JeeslTsBridge<EC>,
 											EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
 											ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
@@ -58,8 +59,8 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 											STAT extends JeeslTsStatistic<L,D,STAT,?>,
 											DATA extends JeeslTsData<TS,TRANSACTION,SAMPLE,POINT,WS>,
 											POINT extends JeeslTsDataPoint<DATA,MP>,
-											SAMPLE extends JeeslTsSample, 
-											USER extends EjbWithId, 
+											SAMPLE extends JeeslTsSample,
+											USER extends EjbWithId,
 											WS extends JeeslStatus<L,D,WS>,
 											QAF extends JeeslStatus<L,D,QAF>,
 											CRON extends JeeslTsCron<SCOPE,INT,STAT>>
@@ -71,17 +72,17 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 
 	protected final SbSingleHandler<EC> sbhClass; public SbSingleHandler<EC> getSbhClass() {return sbhClass;}
 	private final JsonTuple1Handler<TS> th; public JsonTuple1Handler<TS> getTh() {return th;}
-	
+
 	protected final Map<Long,EjbWithId> mapBridge; public Map<Long, EjbWithId> getMapBridge() {return mapBridge;}
 	protected final Map<BRIDGE,List<TS>> mapTs; public Map<BRIDGE, List<TS>> getMapTs() {return mapTs;}
-	
+
 	protected List<BRIDGE> bridges; public List<BRIDGE> getBridges() {return bridges;}
 	protected List<TS> series; public List<TS> getSeries() {return series;} public void setSeries(List<TS> series) {this.series = series;}
-	
+
 	protected BRIDGE bridge;  public BRIDGE getBridge() {return bridge;} public void setBridge(BRIDGE bridge) {this.bridge = bridge;}
 	private TS ts; public TS getTs() {return ts;} public void setTs(TS ts) {this.ts = ts;}
-	
-	
+
+
 	public AbstractTsSummaryBean(final TsFactoryBuilder<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
@@ -90,36 +91,36 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		sbhClass = new SbSingleHandler<EC>(fbTs.getClassEntity(),this);
 		th = new JsonTuple1Handler<TS>(fbTs.getClassTs());
 	}
-	
+
 	protected void postConstructSummary(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		sbhClass.update(fTs.all(fbTs.getClassEntity()));
 		reloadBridges();
 	}
-	
+
 	@Override
 	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadBridges();
 	}
-	
+
 	public void cancelScope(){reset(true,true);}
 	public void cancelMultiPoint(){reset(false,true);}
 	public void reset(boolean rScope, boolean rMultiPoint)
 	{
-		
+
 	}
-	
-	
+
+
 	@SuppressWarnings("unchecked")
 	private void reloadBridges()
 	{
 		bridges = fTs.allForParent(fbTs.getClassBridge(),sbhClass.getSelection());
-		
+
 		mapBridge.clear();
 		mapTs.clear();
-		
+
 		try
 		{
 			Class<EjbWithId> c = (Class<EjbWithId>)Class.forName(sbhClass.getSelection().getCode()).asSubclass(EjbWithId.class);
@@ -127,14 +128,17 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 			mapBridge.putAll(EjbIdFactory.toIdMap(list));
 		}
 		catch (ClassNotFoundException e) {e.printStackTrace();}
-		
-		series = fTs.fTimeSeries(bridges);
-		mapTs.putAll(efTs.toMapBridgTsList(series));
-		th.init(fTs.tpCountRecordsByTs(series));
+		if(bridges.size() > 0)
+		{
+			series = fTs.fTimeSeries(bridges);
+			mapTs.putAll(efTs.toMapBridgTsList(series));
+			th.init(fTs.tpCountRecordsByTs(series));
+		}
+		else {series = new ArrayList<TS>();}
 		if(debugOnInfo){logger.info("reloadBridges Bridges:"+bridges.size()+" TS:"+series.size());}
-		
+
 	}
-	
+
 	public void select() throws JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.selectEntity(ts));

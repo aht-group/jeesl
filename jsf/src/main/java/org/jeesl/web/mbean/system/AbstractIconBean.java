@@ -227,6 +227,8 @@ public class AbstractIconBean implements Serializable
 		svg.put("jeeslCheckboxChecked", "ui/control/checkbox/bright-checked.svg");
 
 		svg.put("jeeslOnlineHelp", "ui/info/help.svg");
+		
+		svg.put("jeeslLanguageSelect", "ui/system/language-select.svg");
 	}
 
 	protected void jeeslRevision()

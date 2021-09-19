@@ -795,6 +795,11 @@ $enable-pointer-cursor-for-buttons: true;
 					margin: -$slim-spacing $half-spacing 0;
 					position: relative;
 					width: calc(100% - (2 * #{$half-spacing}));
+					
+					@media (max-width: 768px) {
+						margin: -$slim-spacing 0 0;
+						position: absolute;
+					}
 				}
 			}
 			
@@ -802,51 +807,120 @@ $enable-pointer-cursor-for-buttons: true;
 				@include overlay;
 				
 				.jeesl-overlay-wrapper {
-					@include select-list;
-					
-					.ui-selectonemenu-item {
-						height: $ls-element-height;
+					.ui-selectonemenu-list {
+						@include select-list;
 						
-						&:hover {
-							.jeesl-field-tip {
-								.jeesl-field-tip-content {
-									cursor: default;
-									opacity: 1;
-									pointer-events: all;
-								}
-							}
+						@media (max-width: 768px) {
+							overflow: hidden;
 						}
 					
-						.jeesl-field-tip {
-							height: $ls-element-height;
-							position: absolute;
-							width: calc(100% - (2 * #{$half-spacing}));
+						.ui-selectonemenu-item {
+							padding: 0;
 							
-							.jeesl-field-tip-content {
-								@include overlay;
-								
-								display: block;
-								left: 100%;
-								opacity: 0;
-								pointer-events: none;
-								position: absolute;
-								top: calc(-#{$ls-element-height / 2});
-								transition: opacity .2s linear;
-								
-								&:before {
-									@include triangle(transparent $border-colour transparent transparent, 8px 8px 8px 0);
-									
-									left: -9px;
-									margin-top: -8px;
-									top: calc(#{$ls-element-height} - #{$border-width});
+							@media (max-width:768px) {
+								height: auto;
+							}
+							
+							&.jeesl-active {
+								&:after {
+									border-color: $dark-colour;
 								}
 								
-								&:after {
-									@include triangle(transparent $white-100 transparent transparent, 8px 8px 8px 0);
+								.ui-selectonemenu-item-text {
+									background: $status-background-gradient;
+									color: $white-100;
+								}
+							}
+							
+							&:after {
+								font-size: inherit;
+    							font-weight: inherit;
+								margin: 0 $wide-spacing;
+							}
+							
+							&:hover {
+								.jeesl-field-tip {
+									color: $body-foreground;
 									
-									left: -8px;
-									margin-top: -8px;
-									top: calc(#{$ls-element-height} - #{$border-width});
+									.jeesl-field-tip-content {
+										cursor: default;
+										opacity: 1;
+										pointer-events: all;
+									}
+								}
+							}
+							
+							.ui-selectonemenu-item-text {
+								height: $ls-element-height;
+								padding: 0 $wide-spacing;
+								transition: background .2s linear, color .2s linear;
+							
+								@media (max-width: 768px) {
+									font-weight: $font-weight-bold;
+									font-size: $font-size-ls-mobile;
+									height: $ls-element-height-mobile;
+								}
+							}
+						
+							.jeesl-field-tip {
+								height: $ls-element-height;
+								margin-top: -$ls-element-height;
+								position: absolute;
+								width: calc(100% - (2 * #{$half-spacing}));
+								font-size: $font-size;
+								font-weight: $font-weight-base;
+								
+								@media (max-width: 768px) {
+									font-size: $font-size-mobile;
+									height: 0;
+									margin-top: 0;
+									overflow: hidden;
+									position: relative;
+									transition: height .2s linear;
+									width: 100%;
+								}
+								
+								.jeesl-field-tip-content {
+									@include overlay;
+									
+									display: block;
+									left: 100%;
+									opacity: 0;
+									pointer-events: none;
+									position: absolute;
+									top: calc(-#{$ls-element-height / 2});
+									transition: opacity .2s linear;
+									
+									@media (max-width: 768px) {
+										box-shadow: none;
+										padding: 0 $wide-spacing;
+										position: relative;
+										opacity: 1;
+										top: 0;
+									}
+									
+									&:before {
+										@include triangle(transparent $border-colour transparent transparent, 8px 8px 8px 0);
+										
+										left: -9px;
+										margin-top: -8px;
+										top: calc(#{$ls-element-height} - #{$border-width});
+									}
+									
+									&:after {
+										@include triangle(transparent $white-100 transparent transparent, 8px 8px 8px 0);
+										
+										left: -8px;
+										margin-top: -8px;
+										top: calc(#{$ls-element-height} - #{$border-width});
+									}
+									
+									.jeesl-grid {
+										@media (max-width: 768px) {
+											margin: 0;
+											padding-bottom: 5px;
+										}
+									}
 								}
 							}
 						}
@@ -1069,6 +1143,7 @@ $enable-pointer-cursor-for-buttons: true;
 						position: absolute;
 						top: 0;
 	    				transform: translate(-50%, 0);
+						width: auto;
 						
 						&:first-child {
 							left: 15px;
@@ -1235,6 +1310,212 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 }
 
+@mixin jeesl-panel {
+	@include jeesl-panel-titlebar;
+			
+	margin-bottom: 10px;
+	
+	@media (max-width: 768px) {
+		padding: 0;
+	}
+	
+	&:last-child {
+		margin-bottom: 0;
+	}
+	
+	&.jeesl-editor {
+		@include jeesl-editor;
+	}
+	
+	.ui-panelgrid {
+		.ui-datatable {
+			@include jeesl-table-titlebar;
+			
+			margin: 0;
+		}
+		
+		.ui-panelgrid-cell {
+			.ui-outputlabel {
+				font-weight: bold;
+			}
+		}
+	}
+	
+	.ui-tree {
+		.ui-tree-droppoint {
+			&.ui-droppable-active {
+				&.ui-state-hover {
+					background: $medium-colour;
+					color: $white-100;
+				}
+			}
+		}
+		
+		.ui-treenode {
+			padding: 0;
+			
+			.ui-treenode-content {
+				@include font-interactable;
+				
+				display: flex;
+				width: 100%;
+				
+				@media (max-width: 768px) {
+					border-bottom: 2px solid $soft-grey;
+					height: 50px;
+					line-height: 50px;
+				}
+				
+				&.ui-droppable {
+					@media (max-width: 768px) {
+						height: 46px;
+						line-height: 42px;
+					}
+				}
+				
+				&.ui-droppable-active {
+					.ui-treenode-label {
+						&.ui-state-hover {
+							background: $medium-colour;
+							color: $white-100;
+						}
+					}
+				}
+				
+				.ui-treenode-leaf-icon {
+					@media (max-width: 768px) {
+						display: none;
+						
+						~ .ui-treenode-label {
+							padding-left: 43px;
+						}
+					}
+				}
+				
+				.ui-tree-toggler {
+					background: none;
+					height: auto;
+					text-align: center;
+					text-indent: 0;
+					
+					@media (max-width:768px) {
+						width: 40px;
+					}
+					
+					&:hover {
+						background: $soft-grey;
+					}
+					
+					&:before {
+						content: '';
+					    display: inline-block;
+					    height: 100%;
+					    vertical-align: middle;
+					}
+	
+					&:after {
+						@include triangle(transparent transparent transparent $dark-grey, 4px 0 4px 4px);
+						
+						display: inline-block;
+						position: relative;
+						vertical-align: middle;
+						
+						@media (max-width: 768px) {
+							border-width: 8px 0 8px 8px;
+						}
+					}
+					
+					&.ui-icon-triangle-1-s:after {
+						transform: rotate(90deg);
+					}
+				}
+				
+				.ui-treenode-label {
+					border-radius: 0;
+					flex: 1;
+					
+					&.ui-state-hover {
+						background: $soft-grey;
+						box-shadow: none;
+					}
+				}
+			}
+		}
+	}
+	
+	.jeesl-tabs {
+		border: 0;
+		margin: 4px calc(-.2em - 10px);
+	
+		@media (max-width: 768px) {
+			margin: 4px -10px;
+		}
+	
+		&.jeesl-editor {
+			&:first-child {
+				margin-top: calc(-.2em - 4px);
+				
+				@media (max-width: 768px) {
+					margin-top: -4px;
+				}
+			}
+			
+			&:last-child {
+				margin-bottom: calc(-.2em - 4px);
+				
+				@media (max-width: 768px) {
+					margin-bottom: -4px;
+				}
+				
+				.ui-widget-content {
+					.ql-container {
+						border-bottom: 0;
+						border-radius: 0 0 3px 3px;
+					}
+				}
+			}
+			
+			.ui-widget-content {
+				.ql-container {
+					border-radius: 0;
+					border-width: 1px 0;
+				}
+			}
+		}
+	}
+	
+	.ui-panel-content {
+		@include input-grid;
+		@include image-gallery;
+		
+		.ui-galleria {
+			border: 0;
+			margin: -6px -10px -4px;
+			max-width: calc(100% + 20px);
+			width: calc(100% + 20px) !important;
+		}
+		
+		.ui-separator {
+			@media (max-width: 768px) {
+				background: $light-grey;
+				height: 2px;
+				margin: 6px 0;
+			}
+		}
+	}
+	
+	.ui-panel-footer {
+		@media (max-width: 768px) {
+			margin: 5px 0 0;
+			border-width: 4px 0 0;
+		}
+	}
+}
+
+.jeesl-panel {
+	@include jeesl-panel
+}
+
 .jeesl-content {
 	float: none;
 	
@@ -1260,206 +1541,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.ui-panel {
-			@include jeesl-panel-titlebar;
-			
-			margin-bottom: 10px;
-			
-			@media (max-width: 768px) {
-				padding: 0;
-			}
-			
-			&:last-child {
-				margin-bottom: 0;
-			}
-			
-			&.jeesl-editor {
-				@include jeesl-editor;
-			}
-			
-			.ui-panelgrid {
-				.ui-datatable {
-					@include jeesl-table-titlebar;
-					
-					margin: 0;
-				}
-				
-				.ui-panelgrid-cell {
-					.ui-outputpanel {
-						font-size: bold;
-					}
-				}
-			}
-			
-			.ui-tree {
-				.ui-tree-droppoint {
-					&.ui-droppable-active {
-						&.ui-state-hover {
-							background: $medium-colour;
-							color: $white-100;
-						}
-					}
-				}
-				
-				.ui-treenode {
-					padding: 0;
-					
-					.ui-treenode-content {
-						@include font-interactable;
-						
-						display: flex;
-//						height: 22px;
-						width: 100%;
-						
-						@media (max-width: 768px) {
-							border-bottom: 2px solid $soft-grey;
-							height: 50px;
-							line-height: 50px;
-						}
-						
-						&.ui-droppable {
-							@media (max-width: 768px) {
-								height: 46px;
-								line-height: 42px;
-							}
-						}
-						
-						&.ui-droppable-active {
-							.ui-treenode-label {
-								&.ui-state-hover {
-									background: $medium-colour;
-									color: $white-100;
-								}
-							}
-						}
-						
-						.ui-treenode-leaf-icon {
-							@media (max-width: 768px) {
-								display: none;
-								
-								~ .ui-treenode-label {
-									padding-left: 43px;
-								}
-							}
-						}
-						
-						.ui-tree-toggler {
-							background: none;
-							height: auto;
-							text-align: center;
-							text-indent: 0;
-							
-							@media (max-width:768px) {
-								width: 40px;
-							}
-							
-							&:hover {
-								background: $soft-grey;
-							}
-							
-							&:before {
-								content: '';
-							    display: inline-block;
-							    height: 100%;
-							    vertical-align: middle;
-							}
-
-							&:after {
-								@include triangle(transparent transparent transparent $dark-grey, 4px 0 4px 4px);
-								
-								display: inline-block;
-								position: relative;
-								vertical-align: middle;
-								
-								@media (max-width: 768px) {
-									border-width: 8px 0 8px 8px;
-								}
-							}
-							
-							&.ui-icon-triangle-1-s:after {
-								transform: rotate(90deg);
-							}
-						}
-						
-						.ui-treenode-label {
-							border-radius: 0;
-							flex: 1;
-							
-							&.ui-state-hover {
-								background: $soft-grey;
-								box-shadow: none;
-							}
-						}
-					}
-				}
-			}
-			
-			.jeesl-tabs {
-				border: 0;
-    			margin: 4px calc(-.2em - 10px);
-
-				@media (max-width: 768px) {
-					margin: 4px -10px;
-				}
-
-				&.jeesl-editor {
-					&:first-child {
-						margin-top: calc(-.2em - 4px);
-						
-						@media (max-width: 768px) {
-							margin-top: -4px;
-						}
-					}
-					
-					&:last-child {
-						margin-bottom: calc(-.2em - 4px);
-						
-						@media (max-width: 768px) {
-							margin-bottom: -4px;
-						}
-						
-						.ui-widget-content {
-							.ql-container {
-								border-bottom: 0;
-								border-radius: 0 0 3px 3px;
-							}
-						}
-					}
-					
-					.ui-widget-content {
-						.ql-container {
-							border-radius: 0;
-							border-width: 1px 0;
-						}
-					}
-				}
-			}
-			
-			.ui-panel-content {
-				@include input-grid;
-				@include image-gallery;
-				
-				.ui-galleria {
-					border: 0;
-					margin: -6px -10px -4px;
-					max-width: calc(100% + 20px);
-					width: calc(100% + 20px) !important;
-				}
-				
-				.ui-separator {
-					@media (max-width: 768px) {
-						background: $light-grey;
-						height: 2px;
-						margin: 6px 0;
-					}
-				}
-			}
-			
-			.ui-panel-footer {
-				@media (max-width: 768px) {
-					margin: 5px 0 0;
-					border-width: 4px 0 0;
-				}
-			}
+			@include jeesl-panel;
 		}
 	}
 }
