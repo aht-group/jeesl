@@ -43,7 +43,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									USER extends JeeslUser<R>,
 									I extends JeeslIdentity<R,V,U,A,USER>>
-		implements Serializable,JeeslMenuBean<L,D,R,V,U,A,CTX,M,USER,I>
+		implements Serializable,JeeslMenuBean<V,CTX,M>
 {
 	final static Logger logger = LoggerFactory.getLogger(PrototypeDb3MenuBean.class);
 	private static final long serialVersionUID = 1L;

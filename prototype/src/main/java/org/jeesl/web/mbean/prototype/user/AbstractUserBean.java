@@ -43,7 +43,7 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 	private JeeslUserFacade<USER> fUser;
 	protected JeeslSecurityFacade<L,D,?,R,V,U,A,?,?,?,USER> fSecurity;
 	protected JeeslIdentityFactory<I,R,V,U,A,USER> fId;
-	private JeeslMenuBean<L,D,R,V,U,A,?,?,USER,I> bMenu;
+	private JeeslMenuBean<V,?,?> bMenu;
 
 	protected JeeslLogger jogger;
 	
@@ -66,7 +66,7 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 		this.fSecurity=fSecurity;
 	}
 
-	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<L,D,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslMenuBean<L,D,R,V,U,A,?,?,USER,I> bMenu)
+	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<L,D,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslMenuBean<V,?,?> bMenu)
 	{
 		this.fUser=fUser;
 		this.fSecurity=fSecurity;

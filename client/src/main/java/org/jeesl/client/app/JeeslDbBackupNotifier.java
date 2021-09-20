@@ -18,6 +18,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.rest.system.io.db.JeeslIoDbRest;
 import org.jeesl.client.JeeslBootstrap;
+import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.controller.processor.system.io.db.DatabaseBackupProcessor;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -27,7 +28,6 @@ import org.jeesl.exception.processing.UtilsProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.util.cli.UtilsCliOption;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.interfaces.util.ConfigKey;
@@ -36,7 +36,7 @@ public class JeeslDbBackupNotifier
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbBackupNotifier.class);
 	
-	private UtilsCliOption jco;
+	private JeeslCliOptionHandler jco;
 	private Option oUrl,oDirectory,oHost,oSystem;
 
 	private String cfgUrl,cfgHost,cfgSystem;
@@ -88,7 +88,7 @@ public class JeeslDbBackupNotifier
 		logger.info("System: "+cfgSystem);
 	}
 	
-	public void parseArguments(UtilsCliOption jco, String args[]) throws Exception
+	public void parseArguments(JeeslCliOptionHandler jco, String args[]) throws Exception
 	{
 		this.jco = jco;
 		
@@ -118,7 +118,7 @@ public class JeeslDbBackupNotifier
 		
 		notifier.local(); System.exit(0);
 		
-		UtilsCliOption jco = new UtilsCliOption(org.jeesl.Version.class.getPackage().getImplementationVersion());
+		JeeslCliOptionHandler jco = new JeeslCliOptionHandler(org.jeesl.Version.class.getPackage().getImplementationVersion());
 		jco.setLog4jPaths("jeesl/client/config");
 		
 		try

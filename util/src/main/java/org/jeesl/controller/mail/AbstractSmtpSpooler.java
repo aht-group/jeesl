@@ -4,6 +4,7 @@ import javax.mail.MessagingException;
 
 import org.apache.commons.cli.Option;
 import org.jeesl.api.rest.system.io.mail.JeeslIoMailRest;
+import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.factory.txt.system.io.mail.core.TxtMailFactory;
 import org.jeesl.mail.smtp.TextMailSender;
 import org.jeesl.model.xml.system.io.mail.Attachment;
@@ -12,14 +13,13 @@ import org.jeesl.model.xml.system.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.util.cli.UtilsCliOption;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractSmtpSpooler
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractSmtpSpooler.class);
 	
-	protected UtilsCliOption jco;
+	protected JeeslCliOptionHandler jco;
 	protected JeeslIoMailRest rest;
 	
 	protected TextMailSender smtp;

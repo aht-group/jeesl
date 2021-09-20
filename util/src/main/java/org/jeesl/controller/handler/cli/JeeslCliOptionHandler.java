@@ -1,4 +1,4 @@
-package net.sf.ahtutils.util.cli;
+package org.jeesl.controller.handler.cli;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
@@ -14,9 +14,9 @@ import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 
-public class UtilsCliOption
+public class JeeslCliOptionHandler
 {
-	final static Logger logger = LoggerFactory.getLogger(UtilsCliOption.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslCliOptionHandler.class);
 	
 	private Options options;
 	private Option oHelp,oDebug,oConfig;
@@ -27,9 +27,10 @@ public class UtilsCliOption
 	private String version;
 	private String[] log4jPaths;
 	
-	private String exlpApp,exlpCode;
+	private String exlpApp; public String getExlpApp() {return exlpApp;}
+	private String exlpCode; public String getExlpCode() {return exlpCode;}
 
-	public UtilsCliOption(String version)
+	public JeeslCliOptionHandler(String version)
 	{
 		this.version=version;
 		appStarted = false;
