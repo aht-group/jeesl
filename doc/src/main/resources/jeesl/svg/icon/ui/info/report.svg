@@ -1,109 +1,42 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   id="svg1"
-   viewBox="0 0 42.534855 53.756027"
-   sodipodi:version="0.32"
-   _SVGFile__filename="oldscale/actions/klipper_dock2.svg"
-   version="1.0"
-   inkscape:version="0.91 r13725"
-   y="0"
-   x="0"
-   sodipodi:docname="report.svg"
-   width="42.534855"
-   height="53.756027"
-   inkscape:export-filename="/Users/thorsten/workspace/4.6/jeesl/doc/src/main/resources/jeesl/svg/icon/ui/info/report.png"
-   inkscape:export-xdpi="20.090771"
-   inkscape:export-ydpi="20.090771">
-  <defs
-     id="defs13" />
-  <sodipodi:namedview
-     id="base"
-     bordercolor="#666666"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     pagecolor="#ffffff"
-     inkscape:zoom="6.925837"
-     inkscape:pageshadow="2"
-     borderopacity="1.0"
-     inkscape:current-layer="svg1"
-     inkscape:cx="6.7965037"
-     inkscape:cy="27.852732"
-     inkscape:window-width="1286"
-     inkscape:pageopacity="0.0"
-     inkscape:window-height="745"
-     showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
-     inkscape:window-maximized="0" />
-  <path
-     id="rect1101"
-     d="m 4.3703262,8.1594427 c -1.5555602,0 -2.8078151,1.330942 -2.8078151,2.9842473 l 0,38.066184 c 0,1.653426 1.2522549,2.983644 2.8078151,2.983644 l 33.7947698,0 c 1.555674,0 2.807248,-1.330218 2.807248,-2.983644 l 0,-38.066184 c 0,-1.6530643 -1.251574,-2.9840063 -2.807248,-2.9840063 l -33.7947698,0 z"
-     style="fill:#ffe940;fill-rule:evenodd;stroke:#000000;stroke-width:3.12502217;stroke-linejoin:round"
-     inkscape:connector-curvature="0" />
-  <path
-     id="rect689"
-     d="m 11.84568,1.5624802 c -2.1381969,0 -3.8593979,1.7211036 -3.8593979,3.8589137 l 0,2.1772848 c 0,2.137423 1.721201,3.8586233 3.8593979,3.8586233 l 18.842257,0 c 2.138197,0 3.85843,-1.7212003 3.85843,-3.8586233 l 0,-2.1772848 c 0,-2.1378101 -1.720233,-3.8589137 -3.85843,-3.8589137 l -18.842257,0 z"
-     style="fill:#d8ae7e;fill-rule:evenodd;stroke:#000000;stroke-width:3.12496042;stroke-linecap:round;stroke-linejoin:round"
-     inkscape:connector-curvature="0" />
-  <path
-     id="path1101"
-     sodipodi:nodetypes="cc"
-     style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round"
-     d="m 9.7037251,19.517843 23.1259999,0"
-     inkscape:connector-curvature="0" />
-  <path
-     id="path1723"
-     sodipodi:nodetypes="cc"
-     style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round"
-     d="m 9.7037251,27.017843 16.0359999,0"
-     inkscape:connector-curvature="0" />
-  <path
-     id="path1725"
-     sodipodi:nodetypes="cc"
-     style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round"
-     d="m 9.7037251,37.017843 11.3099999,0"
-     inkscape:connector-curvature="0" />
-  <path
-     id="path1727"
-     d="m 9.7031651,44.517843 20.0879999,0"
-     sodipodi:nodetypes="cc"
-     style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:round;stroke-linejoin:round"
-     inkscape:connector-curvature="0" />
-  <metadata
-     id="metadata11">
-    <rdf:RDF>
-      <cc:Work>
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <cc:license
-           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
-        <dc:publisher>
-          <cc:Agent
-             rdf:about="http://openclipart.org/">
-            <dc:title>Openclipart</dc:title>
-          </cc:Agent>
-        </dc:publisher>
-        <dc:title></dc:title>
-      </cc:Work>
-      <cc:License
-         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Reproduction" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Distribution" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
-      </cc:License>
-    </rdf:RDF>
-  </metadata>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/" sodipodi:version="0.32" inkscape:output_extension="org.inkscape.output.svg.inkscape" sodipodi:modified="TRUE" sodipodi:docname="barretr-House.svg" inkscape:version="0.48.4 r9939" inkscape:export-xdpi="90" inkscape:export-ydpi="90" inkscape:export-filename="/home/barret/Desktop/house.png"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="485.037px" height="617px"
+	 viewBox="96.055 0 485.037 617" enable-background="new 96.055 0 485.037 617" xml:space="preserve">
+<path fill="#FFFFFF" stroke="#C8C8C8" stroke-width="4.6705" d="M514.414,88.296h-67.341V46.131h-217v42.165h-67.338
+	c-12.321,0-22.399,10.081-22.399,22.402v439.618c0,12.321,10.078,22.402,22.396,22.402h351.679
+	c12.321,0,22.399-10.081,22.399-22.402V110.698C536.812,98.377,526.734,88.296,514.414,88.296z"/>
+<path fill="#875717" d="M524.812,550.317c0,5.735-4.665,10.402-10.399,10.402h-351.68c-5.733,0-10.396-4.667-10.396-10.402V110.698
+	c0-5.735,4.665-10.402,10.399-10.402h351.679c5.733,0,10.396,4.667,10.396,10.402L524.812,550.317L524.812,550.317z"/>
+<g>
+	<rect id="rect2328_1_" x="180.073" y="124.792" fill="#DDDDDD" width="314.739" height="382.507"/>
+	<path id="path2336_1_" inkscape:connector-curvature="0" opacity="0.1307" stroke="#000000" enable-background="new    " d="
+		M205.804,187.573h263.272"/>
+	<path id="path2336_2_" inkscape:connector-curvature="0" opacity="0.1307" stroke="#000000" enable-background="new    " d="
+		M205.804,240.86h263.272"/>
+	<path id="path2336_3_" inkscape:connector-curvature="0" opacity="0.1307" stroke="#000000" enable-background="new    " d="
+		M205.804,134.284h263.272"/>
+	<path id="path2336_6_" inkscape:connector-curvature="0" opacity="0.1307" stroke="#000000" enable-background="new    " d="
+		M205.804,294.149h263.272"/>
+	<path id="path2336_5_" inkscape:connector-curvature="0" opacity="0.1307" stroke="#000000" enable-background="new    " d="
+		M205.804,347.438h263.272"/>
+	<path id="path2336_9_" inkscape:connector-curvature="0" opacity="0.1307" stroke="#000000" enable-background="new    " d="
+		M205.804,400.727h263.272"/>
+	<path id="path2336_8_" inkscape:connector-curvature="0" opacity="0.1307" stroke="#000000" enable-background="new    " d="
+		M205.804,454.013h263.272"/>
+</g>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="338.5935" y1="471.2979" x2="338.5935" y2="557.9629" gradientTransform="matrix(1 0 0 -1 -0.02 616.0947)">
+	<stop  offset="0" style="stop-color:#858585"/>
+	<stop  offset="0.5" style="stop-color:#CBCBCB"/>
+	<stop  offset="1" style="stop-color:#6B6B6B"/>
+</linearGradient>
+<rect x="242.073" y="58.131" fill="url(#SVGID_1_)" width="193" height="86.665"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="212.2019" y1="19.6523" x2="376.8681" y2="283.1734">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+</linearGradient>
+<path fill="url(#SVGID_2_)" d="M524.812,110.698c0-5.735-4.663-10.402-10.396-10.402h-79.341V58.131h-193v42.165h-79.339
+	c-5.734,0-10.399,4.667-10.399,10.402v225.362c109.27-88.74,242.844-129.25,372.476-131.919V110.698z"/>
 </svg>

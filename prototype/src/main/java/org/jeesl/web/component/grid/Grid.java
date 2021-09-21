@@ -58,7 +58,7 @@ public class Grid extends AbstractGrid
 		if(this.getFacets().containsKey("left") || this.getFacets().containsKey("right"))
 		{
 			responseWriter.startElement("div", this);
-			responseWriter.writeAttribute("class","aupContentCenter jeesl-content",null);
+			responseWriter.writeAttribute("class","aupContentCenter jeesl-content-center",null);
 		}
 		super.writeGridBegin(context, responseWriter, map);
 	}

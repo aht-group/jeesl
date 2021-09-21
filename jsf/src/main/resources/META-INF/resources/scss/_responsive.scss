@@ -298,6 +298,7 @@ $enable-pointer-cursor-for-buttons: true;
 #container {
 	background: $white-100;
 	box-shadow: 0 0 $regular-spacing $medium-grey;
+	margin: 0 auto;
 	max-width: $max-content-width;
 	padding: 0 0 $wide-spacing 0;
 	width: auto;
@@ -322,6 +323,12 @@ $enable-pointer-cursor-for-buttons: true;
 		.logo {
 			margin: 0;
 			pointer-events: none;
+		}
+	}
+	
+	ul {
+		li {
+			display: inline;
 		}
 	}
 	
@@ -630,6 +637,7 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.jeesl-menu-bar-button {
 				background: $medium-colour;
+				font-size: 0;
 			    padding: 6px 0;
 				
 				@media (max-width: 768px) {
@@ -778,6 +786,27 @@ $enable-pointer-cursor-for-buttons: true;
 									margin-right: 12px;
 								}
 							}
+						}
+					}
+					
+					.jeesl-dropdown-item-title {
+						display: block;
+						font-weight: bold;
+						padding: $half-spacing $regular-spacing $slim-spacing;
+						
+						@media (max-width: 768px) {
+							font-size: $font-size-ls-mobile;
+							height: $ls-element-height-mobile / 2;
+						}
+					}
+					
+					.jeesl-dropdown-item-content {
+						display: block;
+						padding: $slim-spacing $regular-spacing $half-spacing;
+						
+						@media (max-width: 768px) {
+							font-size: $font-size-ls-mobile;
+							height: $ls-element-height-mobile / 2;
 						}
 					}
 				}
@@ -1517,7 +1546,14 @@ $enable-pointer-cursor-for-buttons: true;
 }
 
 .jeesl-content {
+	display: flex;
 	float: none;
+	padding: 0 $regular-spacing;
+	
+	.jeesl-content-center {
+		display: flex;
+		flex-grow: 1;
+	}
 	
 	.jeesl-content-container {
 		padding: 0;
@@ -1560,6 +1596,9 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.jeesl-dropdown-list {
+			margin: 0;
+			padding: 0;
+			
 			.jeesl-dropdown-item {
 				position: relative;
     			background: $main-background-gradient;
@@ -1762,4 +1801,11 @@ $enable-pointer-cursor-for-buttons: true;
 	.jeesl-revision-timestamp {
 		flex-grow: 1;
 	}
+}
+
+.jeesl-footer {
+	max-width: $max-content-width - (2 * $regular-spacing);
+    margin: $regular-spacing auto;
+    display: flex;
+    justify-content: space-between;
 }

@@ -20,15 +20,18 @@
 	<composite:implementation>
 
 		<j:li>
-			<f:attribute name="styleClass" value="aupStatusBarRight"/>
-			<label for="#{cc.id}">
-				<h:graphicImage library="jeeslPrototypeGfx" name="12/sb/report.png"/>
+			<f:attribute name="styleClass" value="aupStatusBarRight jeesl-menu-bar-item jeesl-right"/>
+			<label for="#{cc.id}" class="jeesl-menu-bar-button jeesl-menu-bar-dropdown">
+				<h:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslReport']}" styleClass="jeesl-menu-bar-button-icon"/>
 			</label>
-			<input type="checkbox" id="#{cc.id}" />
-			<ul id="aupStatusBarReports">
-				<li><b><h:outputText value="#{cc.attrs.report.ioReport.name[localeCode].lang}"/></b></li>
-				<li><h:outputText value="#{cc.attrs.report.ioReport.description[localeCode].lang}"/></li>
-				
+			<ui:remove>
+				<input type="checkbox" id="#{cc.id}" />
+			</ui:remove>
+			<ul id="aupStatusBarReports" class="jeesl-dropdown-list">
+				<li class="jeesl-dropdown-item jeesl-greyscale">
+					<h:outputText value="#{cc.attrs.report.ioReport.name[localeCode].lang}" styleClass="jeesl-dropdown-item-title"/>
+					<h:outputText value="#{cc.attrs.report.ioReport.description[localeCode].lang}" styleClass="jeesl-dropdown-item-content"/>
+				</li>
 			</ul>
 		</j:li>
 	</composite:implementation>

@@ -206,6 +206,7 @@ public class AbstractIconBean implements Serializable
 		mapStatic.put("jeeslUnsaved", "ui/jeesl/generic/unsaved.png");
 
 		svg.put("jeeslHome", "ui/system/home.svg");
+		svg.put("jeeslLanguageSelect", "ui/system/language-select.svg");
 		
 		svg.put("jeeslSbLogging", "svg/jeesl/icon/ui/ui/io/logging/sbLogging.svg");
 
@@ -227,8 +228,7 @@ public class AbstractIconBean implements Serializable
 		svg.put("jeeslCheckboxChecked", "ui/control/checkbox/bright-checked.svg");
 
 		svg.put("jeeslOnlineHelp", "ui/info/help.svg");
-		
-		svg.put("jeeslLanguageSelect", "ui/system/language-select.svg");
+		svg.put("jeeslReport", "ui/info/report.svg");
 	}
 
 	protected void jeeslRevision()
