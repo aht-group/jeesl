@@ -32,7 +32,7 @@ import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
-@Deprecated // Better use OfxMultiLocaleFactory
+//@Deprecated // Better use OfxMultiLocaleFactory
 public class OfxMultiLangFactory<L extends JeeslLang>
 {	
 	final static Logger logger = LoggerFactory.getLogger(OfxMultiLangFactory.class);
