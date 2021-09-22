@@ -371,7 +371,7 @@ $enable-pointer-cursor-for-buttons: true;
 				}
 			}
 			
-			&.active {
+			&.jeesl-active {
 				@media (max-width: 768px) {
 					background: $dark-colour;
 				}
@@ -382,6 +382,19 @@ $enable-pointer-cursor-for-buttons: true;
 						
 					@media (max-width: 768px) {
 						color: $white-100;
+					}
+				}
+			}
+			
+			&.jeesl-marked {
+				.jeesl-dropdown-item-label {
+					color: $medium-grey;
+					font-style: italic;
+				}
+				
+				&:hover {
+					.jeesl-dropdown-item-label {
+						color: $dark-colour;
 					}
 				}
 			}
@@ -789,24 +802,28 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 					}
 					
-					.jeesl-dropdown-item-title {
-						display: block;
-						font-weight: bold;
-						padding: $half-spacing $regular-spacing $slim-spacing;
+					&.jeesl-dropdown-multiline-item {
+						padding: $ls-element-padding;
 						
-						@media (max-width: 768px) {
-							font-size: $font-size-ls-mobile;
-							height: $ls-element-height-mobile / 2;
+						.jeesl-dropdown-item-title {
+							display: block;
+							font-weight: bold;
+							
+							@media (max-width: 768px) {
+								font-size: $font-size-ls-mobile;
+								line-height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+								height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+							}
 						}
-					}
-					
-					.jeesl-dropdown-item-content {
-						display: block;
-						padding: $slim-spacing $regular-spacing $half-spacing;
 						
-						@media (max-width: 768px) {
-							font-size: $font-size-ls-mobile;
-							height: $ls-element-height-mobile / 2;
+						.jeesl-dropdown-item-content {
+							display: block;
+							
+							@media (max-width: 768px) {
+								font-size: $font-size-ls-mobile;
+								line-height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+								height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+							}
 						}
 					}
 				}
@@ -1804,8 +1821,9 @@ $enable-pointer-cursor-for-buttons: true;
 }
 
 .jeesl-footer {
-	max-width: $max-content-width - (2 * $regular-spacing);
-    margin: $regular-spacing auto;
     display: flex;
     justify-content: space-between;
+    margin: $regular-spacing auto;
+	max-width: $max-content-width;
+	padding: 0 $regular-spacing;
 }
