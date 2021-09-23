@@ -21,9 +21,9 @@
 
 		<j:li>
 			<f:attribute name="styleClass" value="aupStatusBarRight jeesl-menu-bar-item jeesl-right"/>
-			<label for="#{cc.id}" class="jeesl-menu-bar-button jeesl-menu-bar-dropdown">
+			<p:outputLabel for="#{cc.id}" styleClass="jeesl-menu-bar-button jeesl-menu-bar-dropdown">
 				<h:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslReport']}" styleClass="jeesl-menu-bar-button-icon"/>
-			</label>
+			</p:outputLabel>
 			<ui:remove>
 				<input type="checkbox" id="#{cc.id}" />
 			</ui:remove>

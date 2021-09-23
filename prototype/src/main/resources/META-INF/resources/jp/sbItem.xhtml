@@ -24,7 +24,7 @@
 			<c:if test="#{cc.attrs.orientation eq 'left'}"><f:attribute name="styleClass" value="aupStatusBarLeft jeesl-menu-bar-item jeesl-left"/></c:if>
 			<c:if test="#{cc.attrs.orientation eq 'right'}"><f:attribute name="styleClass" value="aupStatusBarRight jeesl-menu-bar-item jeesl-right"/></c:if>
 			<p:outputLabel id="sbItemLabel" styleClass="jeesl-menu-bar-button #{cc.attrs.styleClass} #{cc.attrs.toggled ? 'jeesl-active' : ''}">
-				<h:outputText rendered="#{not empty cc.attrs.label}" value="#{cc.attrs.label}"/>
+				<h:outputText rendered="#{not empty cc.attrs.label}" value="#{cc.attrs.label}" styleClass="jeesl-menu-bar-button-label"/>
 				<c:if test="#{not empty cc.facets.label}">
 					<composite:renderFacet name="label"/>
 				</c:if>

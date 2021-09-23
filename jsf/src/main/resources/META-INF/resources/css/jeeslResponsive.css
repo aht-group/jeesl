@@ -1650,7 +1650,6 @@ body, .ui-widget {
     text-align: left; }
   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button {
     background: #007a45;
-    font-size: 0;
     padding: 6px 0; }
     @media (max-width: 768px) {
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button.jeesl-active {
@@ -1830,7 +1829,8 @@ body, .ui-widget {
     padding: 6px 7px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-dropdown-multiline-item .jeesl-dropdown-item-title {
       display: block;
-      font-weight: bold; }
+      font-weight: bold;
+      white-space: nowrap; }
       @media (max-width: 768px) {
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-dropdown-multiline-item .jeesl-dropdown-item-title {
           font-size: 1.2em;

@@ -650,7 +650,6 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.jeesl-menu-bar-button {
 				background: $medium-colour;
-				font-size: 0;
 			    padding: 6px 0;
 				
 				@media (max-width: 768px) {
@@ -808,6 +807,7 @@ $enable-pointer-cursor-for-buttons: true;
 						.jeesl-dropdown-item-title {
 							display: block;
 							font-weight: bold;
+							white-space: nowrap;
 							
 							@media (max-width: 768px) {
 								font-size: $font-size-ls-mobile;
