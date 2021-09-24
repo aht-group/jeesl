@@ -2034,12 +2034,71 @@ body, .ui-widget {
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content .jeesl-grid {
                 margin: 0;
                 padding-bottom: 5px; } }
-  .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover {
-    background: transparent;
+  .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item {
+    display: flex;
     height: 100%;
     padding: 0; }
+    .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item.jeesl-left:not(:first-child):before, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item.jeesl-right:not(:last-child):before {
+      border-left: 1px solid #008a4e;
+      content: '';
+      display: inline-block;
+      height: calc(100% - 14px);
+      margin: 7px 0;
+      position: initial;
+      vertical-align: top; }
+    .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item:hover {
+      background: transparent; }
+    .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list {
+      height: 100%;
+      opacity: 1;
+      position: relative;
+      visibility: visible; }
+      .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-calendar-icon {
+        height: 100%;
+        padding: 6px 2px; }
+        .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-calendar-icon:before {
+          content: '';
+          display: inline-block;
+          height: 100%;
+          vertical-align: middle; }
+        .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-calendar-icon > * {
+          display: inline-block;
+          vertical-align: middle; }
+        .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-calendar-icon > * {
+          height: 100%; }
+      .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-menu-bar-item:before {
+        display: none; }
+      .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-menu-bar-item .jeesl-menu-bar-button {
+        cursor: text;
+        padding: 0; }
+        .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-menu-bar-item .jeesl-menu-bar-button .ui-inputfield {
+          background: transparent;
+          color: white;
+          padding: 0;
+          text-shadow: none;
+          width: 55px; }
+          @media (max-width: 768px) {
+            .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-menu-bar-item .jeesl-menu-bar-button .ui-inputfield {
+              width: 88px; } }
+  .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover {
+    background: transparent;
+    display: flex;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    top: 0; }
+    .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item.jeesl-left:not(:first-child):before, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item.jeesl-right:not(:last-child):before, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover.jeesl-left:not(:first-child):before, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover.jeesl-right:not(:last-child):before {
+      border-left: 1px solid #008a4e;
+      content: '';
+      display: inline-block;
+      height: calc(100% - 14px);
+      margin: 7px 0;
+      position: initial;
+      vertical-align: top; }
+    .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover:after {
+      display: none; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item .jeesl-menu-bar-radio-item-list, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item .jeesl-menu-bar-radio-item-list:hover, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover .jeesl-menu-bar-radio-item-list, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover .jeesl-menu-bar-radio-item-list:hover {
-      display: flex;
+      display: inline-block;
       height: 100%;
       opacity: 1;
       position: inherit;
@@ -2079,6 +2138,7 @@ body, .ui-widget {
           line-height: 42px; } }
     .jeesl-panel .ui-panel-titlebar .ui-panel-actions {
       display: flex;
+      flex-direction: row-reverse;
       float: none;
       height: auto; }
       .jeesl-panel .ui-panel-titlebar .ui-panel-actions .ui-outputpanel {
@@ -2161,6 +2221,7 @@ body, .ui-widget {
             line-height: 42px; } }
       .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions {
         display: flex;
+        flex-direction: row-reverse;
         float: none;
         height: auto; }
         .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
@@ -2537,6 +2598,7 @@ body, .ui-widget {
               line-height: 42px; } }
         .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions {
           display: flex;
+          flex-direction: row-reverse;
           float: none;
           height: auto; }
           .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions .ui-outputpanel {
@@ -2619,6 +2681,7 @@ body, .ui-widget {
                 line-height: 42px; } }
           .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions {
             display: flex;
+            flex-direction: row-reverse;
             float: none;
             height: auto; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
@@ -2923,6 +2986,7 @@ body, .ui-widget {
             line-height: 42px; } }
       .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions {
         display: flex;
+        flex-direction: row-reverse;
         float: none;
         height: auto;
         bottom: 0;

@@ -17,6 +17,16 @@ $enable-pointer-cursor-for-buttons: true;
     display: block;
 }
 
+@mixin jeesl-sb-separator($colour: $bright-colour) {
+	border-left: 1px solid $colour;
+    content: '';
+    display: inline-block;
+    height: calc(100% - 14px);
+	margin: 7px 0;
+	position: initial;
+    vertical-align: top;
+}
+
 @mixin jeesl-sb-dropdown($foreground, $background, $hover, $separator, $zindex: 1) {
 	.jeesl-dropdown-list {
 		background: $background;
@@ -624,13 +634,7 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 			&:before {
-				border-left: 1px solid $bright-colour;
-			    content: '';
-			    display: inline-block;
-			    height: calc(100% - 14px);
-				margin: 7px 0;
-				position: initial;
-			    vertical-align: top;
+				@include jeesl-sb-separator;
 			}
 
 			&.jeesl-left:first-child, &.jeesl-right:last-child {
@@ -650,7 +654,7 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.jeesl-menu-bar-button {
 				background: $medium-colour;
-			    padding: 6px 0;
+			    padding: $sb-vertical-padding 0;
 				
 				@media (max-width: 768px) {
 					&.jeesl-active {
@@ -996,13 +1000,79 @@ $enable-pointer-cursor-for-buttons: true;
 //			}
 		}
 		
-		.jeesl-menu-bar-radio-item, .jeesl-menu-bar-radio-item:hover {
-			background: transparent;
+		.jeesl-menu-bar-calendar-item {
+			display: flex;
 			height: 100%;
 			padding: 0;
 			
+			&.jeesl-left:not(:first-child):before, &.jeesl-right:not(:last-child):before {
+				@include jeesl-sb-separator;
+			}
+			
+			&:hover {
+				background: transparent;
+			}
+			
+			.jeesl-menu-bar-calendar-item-list {
+				height: 100%;
+			    opacity: 1;
+				position: relative;
+			    visibility: visible;
+				
+				.jeesl-calendar-icon {
+					@include vertical-center(before);
+					
+					height: 100%;
+					padding: $sb-vertical-padding $slim-spacing;
+					
+					> * {
+						height: 100%;
+					}
+				}
+
+				.jeesl-menu-bar-item {
+					&:before {
+						display: none;
+					}
+					
+					.jeesl-menu-bar-button {
+						cursor: text;
+						padding: 0;
+
+						.ui-inputfield {
+							background: transparent;
+							color: $white-100;
+							padding: 0;
+							text-shadow: none;
+							width: 55px;
+							
+							@media (max-width: 768px) {
+								width: 88px;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		.jeesl-menu-bar-radio-item, .jeesl-menu-bar-radio-item:hover {
+			background: transparent;
+			display: flex;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			top: 0;
+			
+			&.jeesl-left:not(:first-child):before, &.jeesl-right:not(:last-child):before {
+				@include jeesl-sb-separator;
+			}
+			
+			&:after {
+				display: none;
+			}
+			
 			.jeesl-menu-bar-radio-item-list, .jeesl-menu-bar-radio-item-list:hover {
-			    display: flex;
+			    display: inline-block;
 			    height: 100%;
 			    opacity: 1;
 			    position: inherit;
@@ -1049,6 +1119,7 @@ $enable-pointer-cursor-for-buttons: true;
 
 @mixin jeesl-titlebar-actions {
 	display: flex;
+	flex-direction: row-reverse;
 	float: none;
 	height: auto;
 		

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:aup="http://ahtutils.sourceforge.net/prototype"
-	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
-    xmlns:composite="http://java.sun.com/jsf/composite">
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:j="http://www.jeesl.org/jsf"
+	  xmlns:jp="http://jsf.jeesl.org/prototype"
+	  xmlns:aup="http://ahtutils.sourceforge.net/prototype"
+	  xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+	  xmlns:composite="http://java.sun.com/jsf/composite">
 
 	<composite:interface>
 		<composite:attribute name="handler" required="true"/>
@@ -14,22 +16,28 @@
 	</composite:interface>
 
 	<composite:implementation>
-		<aup:statusBarItem orientation="right">
-            <f:facet name="label">
-                <ui:fragment>
-                    <p:calendar styleClass="aupStatusBarCalendar aupStatusBarDpFirst jeesl-menu-bar-button-label" value="#{cc.attrs.handler.date1}" pattern="dd.MM.yyyy">
-                        <p:ajax update="#{cc.attrs.update}" event="dateSelect" listener="#{cc.attrs.handler.dateChanged()}"/>
-                        <p:ajax update="#{cc.attrs.update}" event="change" listener="#{cc.attrs.handler.dateChanged()}"/>
-                    </p:calendar>
-
-                    <h:graphicImage styleClass="aupDateGraphic" name="ui/control/dates.svg" library="jeeslGfx" height="12"/>
-                    <p:calendar styleClass="aupStatusBarCalendar jeesl-menu-bar-button-label" value="#{cc.attrs.handler.date2}" pattern="dd.MM.yyyy" >
-                        <p:ajax update="#{cc.attrs.update}" event="dateSelect" listener="#{cc.attrs.handler.dateChanged()}"/>
-                        <p:ajax update="#{cc.attrs.update}" event="change" listener="#{cc.attrs.handler.dateChanged()}"/>
-                    </p:calendar>
-                </ui:fragment>
-            </f:facet>
-		</aup:statusBarItem>
-
+		<j:li styleClass="jeesl-menu-bar-calendar-item jeesl-right">
+			<ul class="jeesl-menu-bar-calendar-item-list">
+				<jp:sbItem orientation="left">
+					<f:facet name="label">
+						<p:calendar styleClass="aupStatusBarCalendar aupStatusBarDpFirst jeesl-menu-bar-button-label jeesl-menu-bar-button-calendar" value="#{cc.attrs.handler.date1}" pattern="dd.MM.yyyy">
+	                        <p:ajax update="#{cc.attrs.update}" event="dateSelect" listener="#{cc.attrs.handler.dateChanged()}"/>
+	                        <p:ajax update="#{cc.attrs.update}" event="change" listener="#{cc.attrs.handler.dateChanged()}"/>
+	                    </p:calendar>
+                    </f:facet>
+				</jp:sbItem>
+				<p:outputLabel styleClass="jeesl-calendar-icon jeesl-left">
+					<p:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslCalendar']}"/>
+				</p:outputLabel>
+				<jp:sbItem orientation="left">
+					<f:facet name="label">
+	                    <p:calendar styleClass="aupStatusBarCalendar jeesl-menu-bar-button-label jeesl-menu-bar-button-calendar" value="#{cc.attrs.handler.date2}" pattern="dd.MM.yyyy" >
+	                        <p:ajax update="#{cc.attrs.update}" event="dateSelect" listener="#{cc.attrs.handler.dateChanged()}"/>
+	                        <p:ajax update="#{cc.attrs.update}" event="change" listener="#{cc.attrs.handler.dateChanged()}"/>
+	                    </p:calendar>
+                    </f:facet>
+				</jp:sbItem>
+			</ul>
+		</j:li>
 	</composite:implementation>
 </html>
