@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/" inkscape:export-ydpi="90" inkscape:export-xdpi="90" inkscape:version="0.48.4 r9939" sodipodi:docname="barretr-House.svg" sodipodi:modified="TRUE" inkscape:output_extension="org.inkscape.output.svg.inkscape" sodipodi:version="0.32" inkscape:export-filename="/home/barret/Desktop/house.png"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="534.755px" height="617px"
+	 viewBox="0 0 534.755 617" enable-background="new 0 0 534.755 617" xml:space="preserve">
+<path fill="#FFFFFF" stroke="#C8C8C8" stroke-width="4.6705" d="M468.522,88.296h-59.979V70.854
+	c0-13.632-11.09-24.723-24.723-24.723s-24.723,11.09-24.723,24.723v17.442H175.659V70.854c0-13.632-11.09-24.723-24.723-24.723
+	s-24.723,11.09-24.723,24.723v17.442H66.235c-12.321,0-22.399,10.081-22.399,22.402v439.618c0,12.32,10.078,22.401,22.396,22.401
+	h402.287c12.321,0,22.399-10.081,22.399-22.401V110.698C490.921,98.377,480.843,88.296,468.522,88.296z"/>
+<path fill="#DBDBDB" d="M478.921,550.317c0,5.734-4.665,10.401-10.399,10.401H66.233c-5.733,0-10.396-4.667-10.396-10.401V110.698
+	c0-5.735,4.665-10.402,10.399-10.402h402.287c5.733,0,10.396,4.667,10.396,10.402L478.921,550.317L478.921,550.317z"/>
+<path fill="#AF1B1B" d="M66.236,100.296c-5.734,0-10.399,4.667-10.399,10.402V214H478.92V110.698
+	c0-5.735-4.663-10.402-10.396-10.402H66.236z"/>
+<circle fill="#6B0E0E" cx="150.936" cy="148.519" r="23.082"/>
+<circle fill="#6B0E0E" cx="383.821" cy="148.519" r="23.082"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="150.9363" y1="157.5186" x2="150.9363" y2="58.1309">
+	<stop  offset="0" style="stop-color:#858585"/>
+	<stop  offset="0.5" style="stop-color:#CBCBCB"/>
+	<stop  offset="1" style="stop-color:#6B6B6B"/>
+</linearGradient>
+<path fill="url(#SVGID_1_)" d="M150.936,58.131c-7.026,0-12.723,5.696-12.723,12.723v73.942c0,7.026,5.696,12.723,12.723,12.723
+	s12.723-5.696,12.723-12.723V70.854C163.659,63.827,157.963,58.131,150.936,58.131z"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="383.821" y1="156.3511" x2="383.821" y2="56.9634">
+	<stop  offset="0" style="stop-color:#858585"/>
+	<stop  offset="0.5" style="stop-color:#CBCBCB"/>
+	<stop  offset="1" style="stop-color:#6B6B6B"/>
+</linearGradient>
+<path fill="url(#SVGID_2_)" d="M383.821,56.963c-7.026,0-12.723,5.696-12.723,12.723v73.942c0,7.026,5.696,12.723,12.723,12.723
+	s12.723-5.696,12.723-12.723V69.686C396.544,62.66,390.847,56.963,383.821,56.963z"/>
+<g>
+	<rect x="160.761" y="242.561" fill="#BCBCBC" width="60.505" height="60.504"/>
+	<rect x="160.761" y="318.925" fill="#BCBCBC" width="60.505" height="60.505"/>
+	<rect x="160.761" y="395.289" fill="#BCBCBC" width="60.505" height="60.505"/>
+	<rect x="160.761" y="471.653" fill="#BCBCBC" width="60.505" height="60.505"/>
+	<rect x="237.126" y="242.561" fill="#BCBCBC" width="60.504" height="60.504"/>
+	<rect x="313.491" y="242.561" fill="#BCBCBC" width="60.504" height="60.504"/>
+	<rect x="389.854" y="242.561" fill="#BCBCBC" width="60.506" height="60.504"/>
+	<rect x="237.126" y="318.925" fill="#BCBCBC" width="60.504" height="60.505"/>
+	<rect x="313.491" y="318.925" fill="#BCBCBC" width="60.504" height="60.505"/>
+	<rect x="389.854" y="318.925" fill="#BCBCBC" width="60.506" height="60.505"/>
+	<rect x="237.126" y="395.289" fill="#BCBCBC" width="60.504" height="60.505"/>
+	<rect x="313.491" y="395.289" fill="#BCBCBC" width="60.504" height="60.505"/>
+	<rect x="389.854" y="395.289" fill="#385FC1" width="60.506" height="60.505"/>
+	<rect x="84.397" y="471.653" fill="#BCBCBC" width="60.505" height="60.505"/>
+	<rect x="237.126" y="471.653" fill="#BCBCBC" width="60.504" height="60.505"/>
+	<rect x="313.491" y="471.653" fill="#BCBCBC" width="60.504" height="60.505"/>
+	<rect x="84.397" y="318.925" fill="#BCBCBC" width="60.505" height="60.505"/>
+	<rect x="84.397" y="395.289" fill="#BCBCBC" width="60.505" height="60.505"/>
+</g>
+<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="133.0188" y1="6.8701" x2="304.4286" y2="281.1831">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+</linearGradient>
+<path fill="url(#SVGID_3_)" d="M478.92,110.698c0-5.735-4.663-10.402-10.396-10.402h-71.979v-30.61
+	c0-7.026-5.696-12.723-12.723-12.723s-12.723,5.696-12.723,12.723v30.61H163.659V70.854c0-7.026-5.696-12.723-12.723-12.723
+	s-12.723,5.696-12.723,12.723v29.442H66.236c-5.734,0-10.399,4.667-10.399,10.402v225.362
+	C179.957,235.26,331.665,189.206,478.92,186.112V110.698z"/>
+</svg>
