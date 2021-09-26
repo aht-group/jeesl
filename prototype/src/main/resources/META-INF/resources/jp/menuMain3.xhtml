@@ -6,7 +6,7 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
-		<composite:attribute name="code" required="true"/>
+		<composite:attribute name="value" required="true" shortDescription="A JEESL JsfSecurityHandler of the current page."/>
 		<composite:attribute name="bean" required="false" default="#{menu3Bean}"/>
 	</composite:interface>
 	
@@ -14,7 +14,7 @@
 		<label class="jeesl-menu-bar-button jeesl-menu-bar-dropdown jeesl-burger-menu-icon"/>
 	    <ul class="jeesl-dropdown-list">
 	      <ui:repeat var="m" value="#{cc.attrs.bean.mainMenu}">
-	      	<li id="#{m.view.code}" class="jeesl-dropdown-item #{m.view.visible ? '' : 'jeesl-marked'} #{m.view.code eq cc.attrs.bean.mapRoot[cc.attrs.code].view.code ? 'jeesl-active' : ''}">
+	      	<li id="#{m.view.code}" class="jeesl-dropdown-item #{m.view.visible ? '' : 'jeesl-marked'} #{m.view.code eq cc.attrs.bean.mapRoot[cc.attrs.value.pageCode].view.code ? 'jeesl-active' : ''}">
 	      		<a class="jeesl-dropdown-item-label" href="#{facesContext.externalContext.requestContextPath}#{m.view.urlMapping}">#{m.view.name[localeCode].lang}</a>
 	      	</li>
 		    <!-- <p:tooltip for="#{mi1.code}" value="Test" rendered="#{cc.attrs.withDescription}"/> -->

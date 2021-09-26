@@ -115,7 +115,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 				logger.info(StringUtil.stars());
 				logger.info("Setup Menu");
 				logger.info("\tUsing "+JeeslSecurityBean.class.getSimpleName()+" "+(bSecurity!=null));
-				logger.info("\tUsing "+fbSecurity.getClassContext()+" "+(context!=null));
+				logger.info("\tUsing "+fbSecurity.getClassContext().getSimpleName()+" "+(context!=null));
 			}
 			
 			List<M> list = new ArrayList<>();
