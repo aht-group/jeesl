@@ -37,6 +37,7 @@ public abstract class AbstractEjbQuery implements Serializable,JeeslQuery
 	@Override public Integer getMaxResults() {return maxResults;}
 	@Override public void setMaxResults(Integer maxResults) {this.maxResults = maxResults;}
 	
+	//Dates
 	private Date fromDate1;
 	public Date getFromDate1() {return fromDate1;}
 	public void setFromDate1(Date fromDate1) {this.fromDate1 = fromDate1;}
@@ -55,6 +56,19 @@ public abstract class AbstractEjbQuery implements Serializable,JeeslQuery
 	public Date getToDate3() {return toDate3;}
 	public void setToDate3(Date toDate3) {this.toDate3 = toDate3;}
 	
+	//Strings
+	private String string1;
+	@Override public String getString1() {return string1;}
+	@Override public void setString1(String string1) {this.string1 = string1;}
+	
+	private String string2;
+	@Override public String getString2() {return string2;}
+	@Override public void setString2(String string2) {this.string2 = string2;}
+	
+	private String string3;
+	@Override public String getString3() {return string3;}
+	@Override public void setString3(String string3) {this.string3 = string3;}
+
 	//Sorting
 	private String sortBy;
 	@Override public String getSortBy() {return sortBy;}

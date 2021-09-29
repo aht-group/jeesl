@@ -28,4 +28,14 @@ public interface JeeslQuery
 	
 	void debug(boolean debug);
 	void debug(boolean debug, int ident);
+	
+	
+	String getString1();
+	void setString1(String string1);
+	
+	String getString2();
+	void setString2(String string2);
+	
+	String getString3();
+	void setString3(String string3);
 }
