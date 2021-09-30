@@ -1,6 +1,7 @@
 package org.jeesl.web.mbean.prototype.user;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,6 +31,10 @@ import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.LoadingCache;
+import com.github.benmanes.caffeine.cache.RemovalCause;
+
 import net.sf.exlp.util.io.StringUtil;
 
 public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescription,
@@ -53,10 +58,12 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
 
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
-	private TxtSecurityMenuFactory<L,D,C,R,V,U,A,AT,CTX,M,USER> tfMenu;
+	private final PositionComparator<M> cpMenu;
 
 	private final Map<String,M> mapRoot; public Map<String,M> getMapRoot() {return mapRoot;}
-
+	
+	private LoadingCache<String,List<M>> cacheSub;
+	
 	private final List<M> mainMenu; public List<M> getMainMenu() {if(setupRequired) {this.setup();} return mainMenu;}
 
 	private I identity;
@@ -70,9 +77,15 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		this.fbSecurity=fbSecurity;
 		
 		efMenu = fbSecurity.ejbMenu();
-		tfMenu = new TxtSecurityMenuFactory<>();
+		cpMenu = new PositionComparator<M>();
 		
-		mapRoot = new HashMap<String,M>();
+		cacheSub = Caffeine.newBuilder()
+			       .maximumSize(100)
+			       .expireAfterWrite(Duration.ofMinutes(10))
+//			       .removalListener((String key, String graph, RemovalCause cause) -> System.out.printf("Key %s was removed (%s)%n", key, cause))
+			       .build(key -> createExpensiveGraph(key));
+	
+		mapRoot = new HashMap<>();
 		
 		mainMenu = new ArrayList<>();
 
@@ -80,23 +93,60 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		setupRequired = true;
 	}
 	
-	public void updateLocale(String localeCode) {}
-
 	public void postConstructMenu(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
-									JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity,
-									CTX context, I identity)
+			JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity,
+			CTX context, I identity)
 	{
 		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
 		this.context=context;
 		prepare(identity);
 	}
+	
+	private List<M> createExpensiveGraph(String key)
+	{
+		List<M> list = new ArrayList<>();
+		if(bSecurity==null)
+		{
+			logger.error("Implementation for a empty bSecurity is not forseen");
+			return list;
+		}
+		
+		if(context==null)
+		{
+			list.addAll(bSecurity.getMenus()
+					.stream()
+					.filter(m -> m.getParent()!=null && m.getParent().getView().getCode().equals(key))
+					.collect(Collectors.toList()));
+		}
+		else
+		{
+			list.addAll(bSecurity.getMenus()
+						.stream()
+						.filter(m -> m.getContext().equals(context) && m.getParent()!=null && m.getParent().getView().getCode().equals(key))
+						.collect(Collectors.toList()));
+		}
+		logger.info("Key: "+key+" list "+list.size());
+		Collections.sort(list,cpMenu);
+		return list;
+	}
+	
+	public List<M> subMenu(String key)
+	{
+		logger.info("SubMenu "+key);
+		return cacheSub.get(key);
+	}
+	
+	public void updateLocale(String localeCode) {}
+
+
 
 	public void reset()
 	{
 		if(debugOnInfo) {logger.info("Resettings Menu");}
 		mapRoot.clear();
 		mainMenu.clear();
+		cacheSub.invalidateAll(); cacheSub.cleanUp();
 		setupRequired = true;
 	}
 	
@@ -131,7 +181,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 				else {list.addAll(bSecurity.getMenus().stream().filter(m -> m.getContext().equals(context)).collect(Collectors.toList()));}
 				if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size()+" in context "+context.getCode());}
 			}
-			Collections.sort(list,new PositionComparator<M>());
+			Collections.sort(list,cpMenu);
 			
 			for(M m : list)
 			{

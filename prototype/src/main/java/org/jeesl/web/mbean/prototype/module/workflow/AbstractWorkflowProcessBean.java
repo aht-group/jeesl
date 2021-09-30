@@ -225,9 +225,17 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	}
 
 	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+											JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+											JeeslWorkflowFacade<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fApproval,
+											JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision)
+	{
+		postConstructProcess(bTranslation,bMessage,fGraphic,fApproval,fRevision,null);
+	}
+	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 										JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 										JeeslWorkflowFacade<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fApproval,
-										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision)
+										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision,
+										WP preSelection)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fGraphic=fGraphic;
@@ -250,7 +258,13 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 		Collections.sort(roles,cpRole);
 
-		reloadProcesses();
+		if(preSelection==null) {reloadProcesses();}
+		else
+		{
+			sbhContext.setDefault(preSelection.getContext());
+			reloadProcesses();
+			sbhProcess.setDefault(preSelection);
+		}
 		if(sbhProcess.isSelected())
 		{
 			process = fApproval.find(fbWorkflow.getClassProcess(),sbhProcess.getSelection());
@@ -298,8 +312,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 		if(reset.isAction()) {action=null;}
 	}
 
-	@Override
-	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reset(WorkflowProcesslResetHandler.build().all());
 		if(item instanceof JeeslWorkflowContext)
@@ -320,7 +333,6 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	{
 		sbhProcess.update(fWorkflow.allForContext(fbWorkflow.getClassProcess(),sbhContext.getSelection()));
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbWorkflow.getClassProcess(), sbhProcess.getList(),sbhContext.getSelection()));}
-		updateProcesDiagram();
 	}
 
 	public void reloadStages()
@@ -359,9 +371,11 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 		updateProcesDiagram();
 	}
 
-	private void updateProcesDiagram() {
+	private void updateProcesDiagram()
+	{
 		processDiagram= "";
-		if(process !=null) {
+		if(process !=null)
+		{
 			XmlProcessFactory<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WT,WTT,SR> xfProcess = new XmlProcessFactory<>(XmlWorkflowQuery.get(XmlWorkflowQuery.Key.xProcess));
 			xfProcess.lazy(fbWorkflow, fWorkflow);
 			GraphWorkflowFactory gfWorkflow = new GraphWorkflowFactory(getLocaleCode());
