@@ -42,7 +42,7 @@ $border: $border-width solid $border-colour;
 	}
 }
 
-@mixin select-list {
+@mixin select-list($class) {
 	padding: $half-spacing 0;
 	
 	@media (max-width: 768px) {
@@ -59,7 +59,7 @@ $border: $border-width solid $border-colour;
 		}
 	}
 	
-	.ui-selectonemenu-item {
+	.#{$class}-item {
 		background: transparent;
 		border: none;
 		border-radius: 0;
@@ -88,17 +88,19 @@ $border: $border-width solid $border-colour;
 		}
 		
 		&.ui-state-hover, &:hover {
-			background: $light-grey;
-			box-shadow: none;
-			
-			@media (max-width: 768px) {
-				background: none;
-				color: $dark-colour;
-			}
-			
-			&:after {
+			&:not(.ui-state-highlight) {
+				background: $light-grey;
+				box-shadow: none;
+				
 				@media (max-width: 768px) {
-					border-color: $dark-colour;
+					background: none;
+					color: $dark-colour;
+				}
+				
+				&:after {
+					@media (max-width: 768px) {
+						border-color: $dark-colour;
+					}
 				}
 			}
 		}
@@ -271,6 +273,10 @@ body, .ui-widget {
 	@media (max-width: 768px) {
 		line-height: calc(#{$element-height-mobile} - 2 * (#{$half-spacing}));
 	}
+	
+	&.ui-state-focus {
+		box-shadow: none;
+	}
 }
 
 @mixin icon {
@@ -323,12 +329,17 @@ body, .ui-widget {
 	.ui-chkbox-box.ui-state-default {
 		@include button;
 		
+		position: relative;
 		text-align: center;
 		width: $element-height;
 		
 		@media (max-width: 768px) {
 			padding: 0;
 			width: $element-height-mobile;
+		}
+		
+		&.ui-corner-all:before {
+			border-radius: 0;
 		}
 		
 		.ui-icon {
@@ -364,38 +375,42 @@ body, .ui-widget {
 	}
 }
 
-.ui-selectonemenu.ui-state-default {
-	background: $panel-header-gradient;
-	border: none;
-	display: flex;
-	padding: 0;
-	
-	&.ui-state-active, &.ui-state-hover, &.ui-state-focus {
-		border-color: $medium-grey;
-		box-shadow: none;
-		color: $anthracite;
-	}
-	
-	.ui-inputfield {
-		@include inputfield;
-		
-		border-radius: $border-radius-left;
-		width: calc(85% + 6px);
-	}
-	
-	.ui-selectonemenu-trigger {
-		@include button;
-		@include vertical-center(after);
-		
-		flex-grow: 1;
+@mixin jeesl-select($class) {
+	.#{$class}.ui-state-default {
+		background: $panel-header-gradient;
+		border: none;
+		display: flex;
 		padding: 0;
-		position: relative;
-		text-align: center;
 		
-		@media (max-width: 768px) {
-			padding: 0;
+		&.ui-state-active, &.ui-state-hover, &.ui-state-focus {
+			border-color: $medium-grey;
+			box-shadow: none;
+			color: $anthracite;
 		}
-
+		
+		.ui-inputfield {
+			@include inputfield;
+			
+			border-radius: $border-radius-left;
+			width: calc(85% + 6px);
+		}
+		
+		.#{$class}-trigger {
+			@include button;
+			@include vertical-center(after);
+			
+			flex-grow: 1;
+			height: auto;
+			padding: 0;
+			position: relative;
+			text-align: center;
+			
+			@media (max-width: 768px) {
+				height: auto;
+				padding: 0;
+			}
+		}
+	
 		.ui-icon {
 			@include icon;
 			
@@ -411,19 +426,72 @@ body, .ui-widget {
 				font-size: 2.5em;
 			}
 		}
+		
+		.ui-icon-close:before {
+			content: "\f00d";
+		}
+	}
+	
+	.#{$class}-panel {
+		opacity: 1;
+		
+		.#{$class}-items-wrapper {
+			@media (max-width: 768px) {
+				max-height: 400px !important;
+			}
+			
+			.#{$class}-list {
+				@include select-list($class);
+			}
+		}
 	}
 }
 
-.ui-selectonemenu-panel {
-	opacity: 1;
-	
-	.ui-selectonemenu-items-wrapper {
-		@media (max-width: 768px) {
-			max-height: 400px !important;
-		}
+@include jeesl-select(ui-selectonemenu);
+@include jeesl-select(ui-selectcheckboxmenu);
+
+.ui-selectcheckboxmenu.ui-state-default {
+	.ui-selectcheckboxmenu-multiple-container {
+		height: auto;
+		min-height: $element-height;
+		padding: 0;
 		
-		.ui-selectonemenu-list {
-			@include select-list;
+		.ui-selectcheckboxmenu-token {
+			@include button;
+			
+    		align-items: center;
+			display: flex;
+			height: $element-height - (2 * $slim-spacing);
+			padding: 0;
+			
+			.ui-selectcheckboxmenu-token-label {
+    			margin: 0 $half-spacing;
+				order: 1;
+				padding: 0;
+			}
+			
+			.ui-selectcheckboxmenu-token-icon {
+				@include vertical-center(after);
+				
+				height: 100%;
+				order: 2;
+				padding: 0 $half-spacing;
+				transition: background .2s linear;
+				
+				@media (max-width: 768px) {
+					margin-right: -$regular-spacing;
+					padding: 0 $regular-spacing;
+				}
+				
+				&:hover {
+					background: $bright-colour;
+				}
+				
+				&:before {
+					display: inline-block;
+					vertical-align: middle;
+				}
+			}
 		}
 	}
 }
@@ -446,29 +514,53 @@ body, .ui-widget {
 	}
 }
 
-.ui-datepicker {
-	padding: $regular-spacing $half-spacing;
+@mixin headlined-overlay-icon {
+	background: transparent;
+	border-radius: 0;
+	font-size: $font-size;
+	height: $ls-element-height;
+	left: 0;
+	overflow: hidden;
+	position: relative;
+	text-align: center;
+	top: 0;
+	transition: background $transition-duration linear;
+	width: $ls-element-height;
+	
+	@media (max-width: 768px) {
+		font-size: $font-size-mobile;
+		height: $ls-element-height-mobile;
+		width: $ls-element-height-mobile;
+	}
+	
+	&.ui-state-hover {
+		border: none;
+		box-shadow: none;
+		background: $dark-colour;
+	}
+}
+
+@mixin headlined-overlay($class) {
+	padding: $half-spacing 0;
 	opacity: 1;
 	
 	@media (max-width: 768px) {
 		padding: $wide-spacing 0;
 	}
 	
-	.ui-datepicker-header {
+	.#{$class}-header {
+		align-items: center;
 		background: $status-background-gradient;
 		border: 0;
+		border-radius: 0;
 		color: $white-100;
 		display: flex;
 		font-size: 1.2em;
-		margin: 0 #{-$half-spacing};
+		margin: 0;
 		padding: 0;
 		text-shadow: none;
 		
-		@media (max-width: 768px) {
-			margin: 0;
-		}
-		
-		.ui-datepicker-title {
+		.#{$class}-title {
 			flex-grow: 1;
 			line-height: $ls-element-height;
 			margin: 0;
@@ -476,40 +568,6 @@ body, .ui-widget {
 			
 			@media (max-width: 768px) {
 				line-height: $ls-element-height-mobile;
-			}
-		}
-		
-		.ui-datepicker-prev {
-			order: 0;
-		}
-		
-		.ui-datepicker-next {
-			order: 2;
-		}
-		
-		.ui-datepicker-prev, .ui-datepicker-next {
-			background: transparent;
-			border-radius: 0;
-			font-size: $font-size;
-			height: $ls-element-height;
-			left: 0;
-			overflow: hidden;
-			position: relative;
-			text-align: center;
-			top: 0;
-			transition: background $transition-duration linear;
-			width: $ls-element-height;
-			
-			@media (max-width: 768px) {
-				font-size: $font-size-mobile;
-				height: $ls-element-height-mobile;
-				width: $ls-element-height-mobile;
-			}
-			
-			&.ui-state-hover {
-				border: none;
-				box-shadow: none;
-				background: $dark-colour;
 			}
 		}
 		
@@ -532,6 +590,103 @@ body, .ui-widget {
 					font-size: 2.5em;
 				}
 			}
+		}
+	}
+}
+
+.ui-selectcheckboxmenu-panel {
+	@include headlined-overlay(ui-selectcheckboxmenu);
+	
+	.ui-selectcheckboxmenu-header {
+		padding-left: $half-spacing;
+		
+		.ui-selectcheckboxmenu-filter-container {
+		    align-items: center;
+		    display: flex;
+			flex: 1;
+		    height: 26px;
+
+			.ui-inputfield {
+				flex: .85;
+			}
+			
+			.ui-icon {
+				flex: .25;
+			}
+		}
+		
+		.ui-selectcheckboxmenu-close {
+			@include headlined-overlay-icon;
+			
+			float: none;
+			margin: 0;
+			padding: 0;
+		}
+		
+		.ui-icon {
+			float: none;
+		}
+		
+		.ui-icon-circle-close:before {
+			content: "\f00d";
+		}
+	}
+	
+	.ui-selectcheckboxmenu-items-wrapper {
+		height: auto !important;
+		max-height: $ls-max-height;
+		padding: 0;
+		
+		.ui-selectcheckboxmenu-list {
+			padding: 0;
+			
+			.ui-selectcheckboxmenu-item {
+				display: flex;
+				
+				&:after {
+					bottom: 0;
+					position: absolute;
+					width: calc(100% - (2 * $wide-spacing));
+				}
+				
+				label {
+					cursor: inherit;
+					flex: 1;
+					padding: 0 0 0 $half-spacing;
+				}
+				
+				.ui-chkbox {
+					margin: 0;
+					position: relative;
+					top: 0;
+				}
+			}
+		}
+	}
+}
+
+.ui-datepicker {
+	@include headlined-overlay(ui-datepicker);
+	
+	padding: $half-spacing;
+	
+	.ui-datepicker-header {
+		margin: 0 #{-$half-spacing};
+		
+		@media (max-width: 768px) {
+			margin: 0;
+		}
+		
+		.ui-datepicker-prev {
+			order: 0;
+		}
+		
+		.ui-datepicker-next {
+			order: 2;
+		}
+		
+		.ui-datepicker-prev, .ui-datepicker-next {
+			@include headlined-overlay-icon;
 		}
 		
 		.ui-icon-circle-triangle-w:before {

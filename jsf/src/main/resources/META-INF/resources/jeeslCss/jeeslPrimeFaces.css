@@ -242,7 +242,7 @@ input[class="ui-spinner-input ui-inputfield ui-state-default ui-corner-all ui-st
 .jeeslPanel .ui-calendar {display: flex; flex-direction: row; align-items: center;}
 .jeeslPanel .ui-calendar .ui-datepicker-trigger {margin: 0 0 0 6px; flex: 1;}
 
-.ui-selectonemenu.styled-select,
+/*.ui-selectonemenu.styled-select,
 .ui-selectcheckboxmenu.styled-select
 {padding: 0 !important; width: 100% !important; box-sizing: border-box; display: flex; flex-direction: row; border-width: 0;}
 .ui-selectonemenu.styled-select .ui-selectonemenu-label,
@@ -258,7 +258,7 @@ input[class="ui-spinner-input ui-inputfield ui-state-default ui-corner-all ui-st
 {content: 'ui-button'; display: block; padding: 3px 0 2px 0; text-indent: -9999999px; line-height: normal; border-bottom: 1px solid hsla(0,0%,92%,1); width: 100%; height: 100%; box-sizing: border-box;}
 .ui-selectonemenu.styled-select .ui-selectonemenu-trigger .ui-icon,
 .ui-selectcheckboxmenu.styled-select .ui-selectcheckboxmenu-trigger .ui-icon
-{position: absolute; margin: -8px; top: 50%; left: 50%;}
+{position: absolute; margin: -8px; top: 50%; left: 50%;}*/
 .ui-calendar .ui-datepicker-trigger.ui-button-icon-only .ui-button-text {padding: 3px; border-bottom: 1px solid hsla(0,0%,92%,1);}
 
 

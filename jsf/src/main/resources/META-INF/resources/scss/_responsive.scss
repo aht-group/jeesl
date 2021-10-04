@@ -30,6 +30,7 @@ $enable-pointer-cursor-for-buttons: true;
 @mixin jeesl-sb-dropdown($foreground, $background, $hover, $separator, $zindex: 1) {
 	.jeesl-dropdown-list {
 		background: $background;
+		list-style: none;
 		opacity: 0;
 	    overflow: visible;
 		padding: 0;
@@ -249,7 +250,6 @@ $enable-pointer-cursor-for-buttons: true;
 			.jeesl-menu-bar-button {
 				@include vertical-center(after);
 				
-			    color: $white-100;
 				cursor: pointer;
 			    display: inline-block;
 			    height: 100%;
@@ -272,6 +272,7 @@ $enable-pointer-cursor-for-buttons: true;
 				}
 				
 				.jeesl-menu-bar-button-label {
+			    	color: $white-100;
 				    display: inline-block;
 					vertical-align: middle;
 				}
@@ -388,7 +389,7 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				.jeesl-dropdown-item-label {
 					color: $dark-colour;
-					border-color: $dark-colour;
+					border-bottom: 2px solid $dark-colour;
 						
 					@media (max-width: 768px) {
 						color: $white-100;
@@ -858,7 +859,7 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				.jeesl-overlay-wrapper {
 					.ui-selectonemenu-list {
-						@include select-list;
+						@include select-list(ui-selectonemenu);
 						
 						@media (max-width: 768px) {
 							overflow: hidden;
@@ -1450,12 +1451,10 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			margin: 0;
 		}
-		
-		.ui-panelgrid-cell {
-			.ui-outputlabel {
-				font-weight: bold;
-			}
-		}
+	}
+	
+	.ui-outputlabel {
+		font-weight: bold;
 	}
 	
 	.ui-tree {
@@ -1664,6 +1663,12 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 		}
 		
+		.jeesl-grid {
+			form {
+				margin-bottom: $regular-spacing;
+			}
+		}
+		
 		.ui-panel {
 			@include jeesl-panel;
 		}
@@ -1684,6 +1689,7 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.jeesl-dropdown-list {
+			list-style: none;
 			margin: 0;
 			padding: 0;
 			
