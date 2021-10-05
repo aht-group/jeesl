@@ -61,44 +61,6 @@
   line-height: normal;
   padding: 0 10px; }
 
-.ui-panel-content .ui-selectcheckboxmenu {
-  border-width: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  padding: 0;
-  width: 100%; }
-  .ui-panel-content .ui-selectcheckboxmenu .ui-selectcheckboxmenu-multiple-container {
-    border-radius: 3px 0 0 3px;
-    box-sizing: border-box;
-    line-height: normal;
-    width: calc(85% + 6px); }
-  .ui-panel-content .ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger {
-    align-items: center;
-    border: 1px solid #a8a8a8;
-    display: flex;
-    flex-grow: 1;
-    height: auto;
-    justify-content: center;
-    padding: 0;
-    position: relative; }
-    .ui-panel-content .ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger:after {
-      border-bottom: 1px solid #ebebeb;
-      box-sizing: border-box;
-      content: 'ui-button';
-      display: block;
-      height: 100%;
-      line-height: normal;
-      padding: 3px 0 2px 0;
-      text-indent: -9999999px;
-      width: 100%;
-      border-radius: 2px;
-      border-radius: 0 0 2px 2px; }
-    .ui-panel-content .ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger .ui-icon {
-      left: 50%;
-      margin: -8px;
-      position: absolute;
-      top: 50%; }
 .ui-panel-content .ui-fluid:first-child .p-field:first-child {
   padding-top: 0; }
 .ui-panel-content .ui-fluid:last-child .p-field:last-child {

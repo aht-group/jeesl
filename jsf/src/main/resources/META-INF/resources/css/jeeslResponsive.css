@@ -280,19 +280,19 @@ body, .ui-widget {
 .jeesl-greyscale {
   filter: grayscale(1); }
 
-.ui-corner-all, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before {
+.ui-corner-all, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before {
   border-radius: 3px; }
 
-.ui-corner-top, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before {
+.ui-corner-top, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before {
   border-radius: 3px 3px 0 0; }
 
-.ui-corner-bottom, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before {
+.ui-corner-bottom, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before {
   border-radius: 0 0 3px 3px; }
 
-.ui-corner-left, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before {
+.ui-corner-left, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before {
   border-radius: 3px 0 0 3px; }
 
-.ui-corner-right, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before {
+.ui-corner-right, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before {
   border-radius: 0 3px 3px 0; }
 
 .ui-input-overlay {
@@ -411,6 +411,7 @@ body, .ui-widget {
   padding: 0 5px;
   transition: border-color 0.2s linear, color 0.2s linear, text-shadow 0.2s linear;
   z-index: 0;
+  position: relative;
   text-align: center;
   width: 22px; }
   @media (max-width: 768px) {
@@ -463,6 +464,8 @@ body, .ui-widget {
     .ui-chkbox .ui-chkbox-box.ui-state-default {
       padding: 0;
       width: 42px; } }
+  .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before {
+    border-radius: 0; }
   .ui-chkbox .ui-chkbox-box.ui-state-default .ui-icon {
     background: none;
     display: inline-block;
@@ -502,6 +505,8 @@ body, .ui-widget {
   @media (max-width: 768px) {
     .ui-inputfield.ui-state-default {
       line-height: calc(42px - 2 * (5px)); } }
+  .ui-inputfield.ui-state-default.ui-state-focus {
+    box-shadow: none; }
 
 .ui-inputgroup {
   align-items: stretch;
@@ -536,6 +541,8 @@ body, .ui-widget {
     @media (max-width: 768px) {
       .ui-selectonemenu.ui-state-default .ui-inputfield {
         line-height: calc(42px - 2 * (5px)); } }
+    .ui-selectonemenu.ui-state-default .ui-inputfield.ui-state-focus {
+      box-shadow: none; }
   .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger {
     height: 22px;
     min-width: 15px;
@@ -548,6 +555,7 @@ body, .ui-widget {
     transition: border-color 0.2s linear, color 0.2s linear, text-shadow 0.2s linear;
     z-index: 0;
     flex-grow: 1;
+    height: auto;
     padding: 0;
     position: relative;
     text-align: center; }
@@ -607,34 +615,37 @@ body, .ui-widget {
       vertical-align: middle; }
     @media (max-width: 768px) {
       .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger {
+        height: auto;
         padding: 0; } }
-    .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon {
-      background: none;
-      display: inline-block;
-      font: normal normal normal 14px/1 FontAwesome;
-      font-size: inherit;
-      height: auto;
-      left: 0;
-      margin: 0;
-      position: relative;
-      text-indent: 0;
-      text-rendering: auto;
-      top: 0;
-      width: auto;
-      -webkit-font-smoothing: antialiased;
-      position: relative;
-      text-indent: 0; }
-      .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon:before {
-        vertical-align: top; }
-        @media (max-width: 768px) {
-          .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon:before {
-            font-size: 2em; } }
-    .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon-triangle-1-s:before {
-      content: "\f0d7";
-      font-size: 1.5em; }
+  .ui-selectonemenu.ui-state-default .ui-icon {
+    background: none;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    height: auto;
+    left: 0;
+    margin: 0;
+    position: relative;
+    text-indent: 0;
+    text-rendering: auto;
+    top: 0;
+    width: auto;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    text-indent: 0; }
+    .ui-selectonemenu.ui-state-default .ui-icon:before {
+      vertical-align: top; }
       @media (max-width: 768px) {
-        .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-icon-triangle-1-s:before {
-          font-size: 2.5em; } }
+        .ui-selectonemenu.ui-state-default .ui-icon:before {
+          font-size: 2em; } }
+  .ui-selectonemenu.ui-state-default .ui-icon-triangle-1-s:before {
+    content: "\f0d7";
+    font-size: 1.5em; }
+    @media (max-width: 768px) {
+      .ui-selectonemenu.ui-state-default .ui-icon-triangle-1-s:before {
+        font-size: 2.5em; } }
+  .ui-selectonemenu.ui-state-default .ui-icon-close:before {
+    content: "\f00d"; }
 
 .ui-selectonemenu-panel {
   opacity: 1; }
@@ -676,21 +687,299 @@ body, .ui-widget {
           border-bottom: 2px solid #ededed;
           content: '';
           display: block; } }
-      .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover, .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover {
+      .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight) {
         background: #dedede;
         box-shadow: none; }
         @media (max-width: 768px) {
-          .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover, .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover {
+          .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight) {
             background: none;
             color: #00663a; } }
         @media (max-width: 768px) {
-          .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:after, .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:after {
+          .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight):after, .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight):after {
             border-color: #00663a; } }
       .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight {
         background: #00663a; }
         @media (max-width: 768px) {
           .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight:after {
             border-color: rgba(255, 255, 255, 0); } }
+
+.ui-selectcheckboxmenu.ui-state-default {
+  background: linear-gradient(to bottom, #ededed, #c4c4c4);
+  border: none;
+  display: flex;
+  padding: 0; }
+  .ui-selectcheckboxmenu.ui-state-default.ui-state-active, .ui-selectcheckboxmenu.ui-state-default.ui-state-hover, .ui-selectcheckboxmenu.ui-state-default.ui-state-focus {
+    border-color: #ababab;
+    box-shadow: none;
+    color: #333333; }
+  .ui-selectcheckboxmenu.ui-state-default .ui-inputfield {
+    height: 22px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: none;
+    line-height: calc(22px - (2 * 5px));
+    padding: 5px 2px;
+    border-radius: 3px 0 0 3px;
+    width: calc(85% + 6px); }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-inputfield {
+        height: 42px; } }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-inputfield {
+        line-height: calc(42px - 2 * (5px)); } }
+    .ui-selectcheckboxmenu.ui-state-default .ui-inputfield.ui-state-focus {
+      box-shadow: none; }
+  .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger {
+    height: 22px;
+    min-width: 15px;
+    background: linear-gradient(to bottom, #ededed, #c4c4c4);
+    border: 1px solid #ababab;
+    box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
+    color: #333333;
+    line-height: normal;
+    padding: 0 5px;
+    transition: border-color 0.2s linear, color 0.2s linear, text-shadow 0.2s linear;
+    z-index: 0;
+    flex-grow: 1;
+    height: auto;
+    padding: 0;
+    position: relative;
+    text-align: center; }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger {
+        height: 42px; } }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger {
+        min-width: 30px; } }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger:after {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger > * {
+      display: inline-block;
+      vertical-align: middle; }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger {
+        padding: 0 10px; } }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger:before {
+      background: #c4c4c4;
+      content: '';
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: background 0.2s linear, opacity 0.2s linear;
+      width: 100%;
+      z-index: -1; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-button-icon-only .ui-button-text {
+      display: none; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-hover {
+      background: linear-gradient(to bottom, #ededed, #c4c4c4);
+      border-color: #ababab;
+      box-shadow: none;
+      color: #333333; }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-hover:before {
+        opacity: 1;
+        transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active {
+      border-color: #00663a;
+      color: white;
+      text-shadow: none; }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active:before {
+        background: #00663a; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger .ui-button-text {
+      line-height: normal; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger:after {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger > * {
+      display: inline-block;
+      vertical-align: middle; }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger {
+        height: auto;
+        padding: 0; } }
+  .ui-selectcheckboxmenu.ui-state-default .ui-icon {
+    background: none;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    height: auto;
+    left: 0;
+    margin: 0;
+    position: relative;
+    text-indent: 0;
+    text-rendering: auto;
+    top: 0;
+    width: auto;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    text-indent: 0; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-icon:before {
+      vertical-align: top; }
+      @media (max-width: 768px) {
+        .ui-selectcheckboxmenu.ui-state-default .ui-icon:before {
+          font-size: 2em; } }
+  .ui-selectcheckboxmenu.ui-state-default .ui-icon-triangle-1-s:before {
+    content: "\f0d7";
+    font-size: 1.5em; }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-icon-triangle-1-s:before {
+        font-size: 2.5em; } }
+  .ui-selectcheckboxmenu.ui-state-default .ui-icon-close:before {
+    content: "\f00d"; }
+
+.ui-selectcheckboxmenu-panel {
+  opacity: 1; }
+  @media (max-width: 768px) {
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper {
+      max-height: 400px !important; } }
+  .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list {
+    padding: 5px 0; }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list {
+        padding: 15px 0; } }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list:before {
+        border-bottom: 2px solid #c4c4c4;
+        content: '';
+        display: block;
+        width: calc(100% - (2 * 15px));
+        margin: 0 15px; } }
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      line-height: 26px;
+      padding: 0 5px;
+      transition: background .2s linear; }
+      @media (max-width: 768px) {
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item {
+          border-radius: 0;
+          font-size: 1.2em;
+          font-weight: 700;
+          height: 50px;
+          line-height: calc(50px - 2px);
+          margin: 0;
+          padding: 0 15px;
+          text-shadow: none; } }
+      @media (max-width: 768px) {
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:after {
+          border-bottom: 2px solid #ededed;
+          content: '';
+          display: block; } }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:hover:not(.ui-state-highlight) {
+        background: #dedede;
+        box-shadow: none; }
+        @media (max-width: 768px) {
+          .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:hover:not(.ui-state-highlight) {
+            background: none;
+            color: #00663a; } }
+        @media (max-width: 768px) {
+          .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-hover:not(.ui-state-highlight):after, .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:hover:not(.ui-state-highlight):after {
+            border-color: #00663a; } }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-highlight {
+        background: #00663a; }
+        @media (max-width: 768px) {
+          .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-highlight:after {
+            border-color: rgba(255, 255, 255, 0); } }
+
+.ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container {
+  height: auto;
+  min-height: 22px;
+  padding: 0; }
+  .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token {
+    height: 22px;
+    min-width: 15px;
+    background: linear-gradient(to bottom, #ededed, #c4c4c4);
+    border: 1px solid #ababab;
+    box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
+    color: #333333;
+    line-height: normal;
+    padding: 0 5px;
+    transition: border-color 0.2s linear, color 0.2s linear, text-shadow 0.2s linear;
+    z-index: 0;
+    align-items: center;
+    display: flex;
+    height: 18px;
+    padding: 0; }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token {
+        height: 42px; } }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token {
+        min-width: 30px; } }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token:after {
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token > * {
+      display: inline-block;
+      vertical-align: middle; }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token {
+        padding: 0 10px; } }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token:before {
+      background: #c4c4c4;
+      content: '';
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: background 0.2s linear, opacity 0.2s linear;
+      width: 100%;
+      z-index: -1; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-button-icon-only .ui-button-text {
+      display: none; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-hover {
+      background: linear-gradient(to bottom, #ededed, #c4c4c4);
+      border-color: #ababab;
+      box-shadow: none;
+      color: #333333; }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-hover:before {
+        opacity: 1;
+        transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active {
+      border-color: #00663a;
+      color: white;
+      text-shadow: none; }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active:before {
+        background: #00663a; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-button-text {
+      line-height: normal; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-selectcheckboxmenu-token-label {
+      margin: 0 5px;
+      order: 1;
+      padding: 0; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-selectcheckboxmenu-token-icon {
+      height: 100%;
+      order: 2;
+      padding: 0 5px;
+      transition: background .2s linear; }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-selectcheckboxmenu-token-icon:after {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle; }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-selectcheckboxmenu-token-icon > * {
+        display: inline-block;
+        vertical-align: middle; }
+      @media (max-width: 768px) {
+        .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-selectcheckboxmenu-token-icon {
+          margin-right: -10px;
+          padding: 0 10px; } }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-selectcheckboxmenu-token-icon:hover {
+        background: #008a4e; }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-selectcheckboxmenu-token-icon:before {
+        display: inline-block;
+        vertical-align: middle; }
 
 .ui-autocomplete-panel {
   opacity: 1; }
@@ -719,37 +1008,82 @@ body, .ui-widget {
   .ui-calendar .ui-datepicker-trigger .ui-icon-calendar:before {
     content: "\f073"; }
 
-.ui-datepicker {
-  padding: 10px 5px;
+.ui-selectcheckboxmenu-panel {
+  padding: 5px 0;
   opacity: 1; }
   @media (max-width: 768px) {
-    .ui-datepicker {
+    .ui-selectcheckboxmenu-panel {
       padding: 15px 0; } }
-  .ui-datepicker .ui-datepicker-header {
+  .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header {
+    align-items: center;
     background: linear-gradient(to bottom, #00663a, #007a45);
     border: 0;
+    border-radius: 0;
     color: white;
     display: flex;
     font-size: 1.2em;
-    margin: 0 -5px;
+    margin: 0;
     padding: 0;
     text-shadow: none; }
-    @media (max-width: 768px) {
-      .ui-datepicker .ui-datepicker-header {
-        margin: 0; } }
-    .ui-datepicker .ui-datepicker-header .ui-datepicker-title {
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-title {
       flex-grow: 1;
       line-height: 26px;
       margin: 0;
       order: 1; }
       @media (max-width: 768px) {
-        .ui-datepicker .ui-datepicker-header .ui-datepicker-title {
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-title {
           line-height: 50px; } }
-    .ui-datepicker .ui-datepicker-header .ui-datepicker-prev {
-      order: 0; }
-    .ui-datepicker .ui-datepicker-header .ui-datepicker-next {
-      order: 2; }
-    .ui-datepicker .ui-datepicker-header .ui-datepicker-prev, .ui-datepicker .ui-datepicker-header .ui-datepicker-next {
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon {
+      background: none;
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      height: auto;
+      left: 0;
+      margin: 0;
+      position: relative;
+      text-indent: 0;
+      text-rendering: auto;
+      top: 0;
+      width: auto;
+      -webkit-font-smoothing: antialiased;
+      height: 100%;
+      white-space: nowrap;
+      width: 100%; }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon:before {
+        vertical-align: top; }
+        @media (max-width: 768px) {
+          .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon:before {
+            font-size: 2em; } }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon:after {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle; }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon > * {
+        display: inline-block;
+        vertical-align: middle; }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon:before {
+        color: white;
+        display: inline-block;
+        font-size: 1.5em;
+        vertical-align: middle;
+        width: 100%; }
+        @media (max-width: 768px) {
+          .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon:before {
+            font-size: 2.5em; } }
+  .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header {
+    padding-left: 5px; }
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-filter-container {
+      align-items: center;
+      display: flex;
+      flex: 1;
+      height: 26px; }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-filter-container .ui-inputfield {
+        flex: .85; }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-filter-container .ui-icon {
+        flex: .25; }
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-close {
       background: transparent;
       border-radius: 0;
       font-size: 11px;
@@ -760,16 +1094,70 @@ body, .ui-widget {
       text-align: center;
       top: 0;
       transition: background 0.2s linear;
-      width: 26px; }
+      width: 26px;
+      float: none;
+      margin: 0;
+      padding: 0; }
       @media (max-width: 768px) {
-        .ui-datepicker .ui-datepicker-header .ui-datepicker-prev, .ui-datepicker .ui-datepicker-header .ui-datepicker-next {
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-close {
           font-size: 13px;
           height: 50px;
           width: 50px; } }
-      .ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-hover, .ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-hover {
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-close.ui-state-hover {
         border: none;
         box-shadow: none;
         background: #00663a; }
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon {
+      float: none; }
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon-circle-close:before {
+      content: "\f00d"; }
+  .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper {
+    height: auto !important;
+    max-height: 200px;
+    padding: 0; }
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list {
+      padding: 0; }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item {
+        display: flex; }
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:after {
+          bottom: 0;
+          position: absolute;
+          width: calc(100% - (2 * $wide-spacing)); }
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item label {
+          cursor: inherit;
+          flex: 1;
+          padding: 0 0 0 5px; }
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item .ui-chkbox {
+          margin: 0;
+          position: relative;
+          top: 0; }
+
+.ui-datepicker {
+  padding: 5px 0;
+  opacity: 1;
+  padding: 5px; }
+  @media (max-width: 768px) {
+    .ui-datepicker {
+      padding: 15px 0; } }
+  .ui-datepicker .ui-datepicker-header {
+    align-items: center;
+    background: linear-gradient(to bottom, #00663a, #007a45);
+    border: 0;
+    border-radius: 0;
+    color: white;
+    display: flex;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+    text-shadow: none; }
+    .ui-datepicker .ui-datepicker-header .ui-datepicker-title {
+      flex-grow: 1;
+      line-height: 26px;
+      margin: 0;
+      order: 1; }
+      @media (max-width: 768px) {
+        .ui-datepicker .ui-datepicker-header .ui-datepicker-title {
+          line-height: 50px; } }
     .ui-datepicker .ui-datepicker-header .ui-icon {
       background: none;
       display: inline-block;
@@ -809,6 +1197,36 @@ body, .ui-widget {
         @media (max-width: 768px) {
           .ui-datepicker .ui-datepicker-header .ui-icon:before {
             font-size: 2.5em; } }
+  .ui-datepicker .ui-datepicker-header {
+    margin: 0 -5px; }
+    @media (max-width: 768px) {
+      .ui-datepicker .ui-datepicker-header {
+        margin: 0; } }
+    .ui-datepicker .ui-datepicker-header .ui-datepicker-prev {
+      order: 0; }
+    .ui-datepicker .ui-datepicker-header .ui-datepicker-next {
+      order: 2; }
+    .ui-datepicker .ui-datepicker-header .ui-datepicker-prev, .ui-datepicker .ui-datepicker-header .ui-datepicker-next {
+      background: transparent;
+      border-radius: 0;
+      font-size: 11px;
+      height: 26px;
+      left: 0;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      top: 0;
+      transition: background 0.2s linear;
+      width: 26px; }
+      @media (max-width: 768px) {
+        .ui-datepicker .ui-datepicker-header .ui-datepicker-prev, .ui-datepicker .ui-datepicker-header .ui-datepicker-next {
+          font-size: 13px;
+          height: 50px;
+          width: 50px; } }
+      .ui-datepicker .ui-datepicker-header .ui-datepicker-prev.ui-state-hover, .ui-datepicker .ui-datepicker-header .ui-datepicker-next.ui-state-hover {
+        border: none;
+        box-shadow: none;
+        background: #00663a; }
     .ui-datepicker .ui-datepicker-header .ui-icon-circle-triangle-w:before {
       content: "\f0d9"; }
     .ui-datepicker .ui-datepicker-header .ui-icon-circle-triangle-e:before {
@@ -1125,6 +1543,7 @@ body, .ui-widget {
     top: 5px; }
   .jeesl-header .jeesl-dropdown-list {
     background: white;
+    list-style: none;
     opacity: 0;
     overflow: visible;
     padding: 0;
@@ -1231,7 +1650,7 @@ body, .ui-widget {
           background: #00663a; } }
       .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-active .jeesl-dropdown-item-label {
         color: #00663a;
-        border-color: #00663a; }
+        border-bottom: 2px solid #00663a; }
         @media (max-width: 768px) {
           .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-active .jeesl-dropdown-item-label {
             color: white; } }
@@ -1298,7 +1717,6 @@ body, .ui-widget {
           .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item > * {
             font-size: 13px; } }
       .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button {
-        color: white;
         cursor: pointer;
         display: inline-block;
         height: 100%;
@@ -1323,6 +1741,7 @@ body, .ui-widget {
           .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-icon.jeesl-greyscale, .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .ui-commandlink.jeesl-greyscale {
             cursor: default; }
         .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-label {
+          color: white;
           display: inline-block;
           vertical-align: middle; }
         .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-summary {
@@ -1424,9 +1843,11 @@ body, .ui-widget {
         .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button.jeesl-active {
           background: linear-gradient(to right, #00663a, #008a4e) 12500% 0/99% 100% no-repeat; } }
       .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-label {
+        color: white;
         font-size: 1.4em;
         font-weight: 700;
         letter-spacing: -1px;
+        white-space: nowrap;
         padding: 0;
         background: none; }
         .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-label:before, .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-label:after {
@@ -1435,6 +1856,7 @@ body, .ui-widget {
           background: none; }
     .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list {
       background: linear-gradient(to right, #00663a, #008a4e);
+      list-style: none;
       opacity: 0;
       overflow: visible;
       padding: 0;
@@ -1517,9 +1939,11 @@ body, .ui-widget {
                 margin: 0;
                 padding: 9px; } }
     .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item {
+      color: white;
       font-size: 1.4em;
       font-weight: 700;
-      letter-spacing: -1px; }
+      letter-spacing: -1px;
+      white-space: nowrap; }
       @media (max-width: 768px) {
         .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item {
           font-size: 1.1em;
@@ -1576,7 +2000,6 @@ body, .ui-widget {
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item > * {
             font-size: 13px; } }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button {
-        color: white;
         cursor: pointer;
         display: inline-block;
         height: 100%;
@@ -1601,6 +2024,7 @@ body, .ui-widget {
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-icon.jeesl-greyscale, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .ui-commandlink.jeesl-greyscale {
             cursor: default; }
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-label {
+          color: white;
           display: inline-block;
           vertical-align: middle; }
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-summary {
@@ -1691,6 +2115,7 @@ body, .ui-widget {
         padding-left: 6px; }
   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list {
     background: #007a45;
+    list-style: none;
     opacity: 0;
     overflow: visible;
     padding: 0;
@@ -1910,15 +2335,15 @@ body, .ui-widget {
             border-bottom: 2px solid #ededed;
             content: '';
             display: block; } }
-        .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover {
+        .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight), .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight) {
           background: #dedede;
           box-shadow: none; }
           @media (max-width: 768px) {
-            .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover {
+            .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight), .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight) {
               background: none;
               color: #00663a; } }
           @media (max-width: 768px) {
-            .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:after {
+            .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight):after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight):after {
               border-color: #00663a; } }
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight {
           background: #00663a; }
@@ -2255,7 +2680,7 @@ body, .ui-widget {
                 padding: 0 6px; } }
         .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
           height: 100%; }
-  .jeesl-panel .ui-panelgrid .ui-panelgrid-cell .ui-outputlabel {
+  .jeesl-panel .ui-outputlabel {
     font-weight: bold; }
   .jeesl-panel .ui-tree .ui-tree-droppoint.ui-droppable-active.ui-state-hover {
     background: #007a45;
@@ -2572,6 +2997,8 @@ body, .ui-widget {
       @media (max-width: 768px) {
         .jeesl-content .jeesl-content-container .jeesl-grid-12 {
           width: calc(100% - 10px); } }
+    .jeesl-content .jeesl-content-container .jeesl-grid form {
+      margin-bottom: 10px; }
     .jeesl-content .jeesl-content-container .ui-panel {
       margin-bottom: 10px; }
       .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar {
@@ -2715,7 +3142,7 @@ body, .ui-widget {
                     padding: 0 6px; } }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
               height: 100%; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-panelgrid-cell .ui-outputlabel {
+      .jeesl-content .jeesl-content-container .ui-panel .ui-outputlabel {
         font-weight: bold; }
       .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-tree-droppoint.ui-droppable-active.ui-state-hover {
         background: #007a45;
@@ -2923,6 +3350,7 @@ body, .ui-widget {
   .jeesl-content-right .jeesl-sidemenu .jeesl-menu-bar-button {
     display: none; }
   .jeesl-content-right .jeesl-sidemenu .jeesl-dropdown-list {
+    list-style: none;
     margin: 0;
     padding: 0; }
     .jeesl-content-right .jeesl-sidemenu .jeesl-dropdown-list .jeesl-dropdown-item {
