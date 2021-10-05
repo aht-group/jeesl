@@ -2879,6 +2879,9 @@ body, .ui-widget {
       margin: 5px 0 0;
       border-width: 4px 0 0; } }
 
+.ui-datatable table {
+  table-layout: auto; }
+
 .jeesl-content {
   display: flex;
   float: none;
