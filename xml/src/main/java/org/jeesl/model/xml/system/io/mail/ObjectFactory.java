@@ -110,6 +110,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Html }
+     * 
+     */
+    public Html createHtml() {
+        return new Html();
+    }
+
+    /**
      * Create an instance of {@link Attachment }
      * 
      */

@@ -51,6 +51,13 @@ public class XmlMailFactory
     	mail.setText(XmlTextFactory.build(text));
     	return mail;
     }
+    public static Mail build(Header header)
+    {   	   	
+    	Mail mail = new Mail();
+    	mail.setHeader(header);
+    	
+    	return mail;
+    }
     
     public static Mail create(String subject, String emailFrom, String emailTo, String content)
     {    	

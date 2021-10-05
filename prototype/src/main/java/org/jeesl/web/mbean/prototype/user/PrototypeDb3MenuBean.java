@@ -14,7 +14,6 @@ import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
-import org.jeesl.factory.txt.system.security.TxtSecurityMenuFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
@@ -33,7 +32,6 @@ import org.slf4j.LoggerFactory;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
-import com.github.benmanes.caffeine.cache.RemovalCause;
 
 import net.sf.exlp.util.io.StringUtil;
 
@@ -62,7 +60,8 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 
 	private final Map<String,M> mapRoot; public Map<String,M> getMapRoot() {return mapRoot;}
 	
-	private LoadingCache<String,List<M>> cacheSub;
+	private final LoadingCache<String,List<M>> cacheSub;
+	private final LoadingCache<String,List<M>> cacheBreadcrumb;
 	
 	private final List<M> mainMenu; public List<M> getMainMenu() {if(setupRequired) {this.setup();} return mainMenu;}
 
@@ -81,9 +80,15 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		
 		cacheSub = Caffeine.newBuilder()
 			       .maximumSize(100)
-			       .expireAfterWrite(Duration.ofMinutes(10))
+			       .expireAfterWrite(Duration.ofMinutes(15))
 //			       .removalListener((String key, String graph, RemovalCause cause) -> System.out.printf("Key %s was removed (%s)%n", key, cause))
-			       .build(key -> createExpensiveGraph(key));
+			       .build(key -> buildSub(key));
+		
+		cacheBreadcrumb = Caffeine.newBuilder()
+			       .maximumSize(100)
+			       .expireAfterWrite(Duration.ofMinutes(15))
+//			       .removalListener((String key, String graph, RemovalCause cause) -> System.out.printf("Key %s was removed (%s)%n", key, cause))
+			       .build(key -> buildBreadcrumb(key));
 	
 		mapRoot = new HashMap<>();
 		
@@ -103,7 +108,12 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		prepare(identity);
 	}
 	
-	private List<M> createExpensiveGraph(String key)
+	public List<M> subMenu(String key)
+	{
+		logger.info("SubMenu "+key);
+		return cacheSub.get(key);
+	}
+	private List<M> buildSub(String key)
 	{
 		List<M> list = new ArrayList<>();
 		if(bSecurity==null)
@@ -131,11 +141,52 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		return list;
 	}
 	
-	public List<M> subMenu(String key)
+	public List<M> breadcrumb(String key)
 	{
-		logger.info("SubMenu "+key);
-		return cacheSub.get(key);
+		logger.info("breadcrumb "+key);
+		return cacheBreadcrumb.get(key);
 	}
+	private List<M> buildBreadcrumb(String key)
+	{
+		List<M> list = new ArrayList<>();
+		if(bSecurity==null)
+		{
+			logger.error("Implementation for a empty bSecurity is not forseen");
+			return list;
+		}
+		
+		if(context==null)
+		{
+			for(M m : bSecurity.getMenus())
+			{
+				if(m.getView().getCode().equals(key))
+				{
+					traverseParent(list,m);
+				}
+			}
+		}
+		else
+		{
+			for(M m : bSecurity.getMenus())
+			{
+				if(m.getContext().equals(context) && m.getView().getCode().equals(key))
+				{
+					traverseParent(list,m);
+				}
+			}
+		}
+		logger.info("Key: "+key+" list "+list.size());
+		Collections.reverse(list);
+		return list;
+	}
+	
+	private void traverseParent(List<M> list, M m)
+	{
+		list.add(m);
+		if(m.getParent()!=null) {traverseParent(list,m.getParent());}
+	}
+	
+
 	
 	public void updateLocale(String localeCode) {}
 

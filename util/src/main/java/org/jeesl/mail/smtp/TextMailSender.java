@@ -18,7 +18,7 @@ public class TextMailSender extends AbstractMailSender
 	final static Logger logger = LoggerFactory.getLogger(TextMailSender.class);
 	
 	public TextMailSender(String smtpHost){this(smtpHost,25);}
-	public TextMailSender(String smtpHost, int smtpPort)
+	private TextMailSender(String smtpHost, int smtpPort)
 	{
 		super(smtpHost,smtpPort);
 	}

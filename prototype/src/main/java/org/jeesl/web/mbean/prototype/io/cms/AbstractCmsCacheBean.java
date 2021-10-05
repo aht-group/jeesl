@@ -99,7 +99,7 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 	
 	public Section section(String localeCode, Long id) throws JeeslNotFoundException
 	{
-		logger.info("buildById: "+localeCode+" "+id);
+		if(debugOnInfo) {logger.info("buildById: "+localeCode+" "+id);}
 		if(mapId.containsKey(id)) {return buildBySection(localeCode,mapId.get(id));}
 		else
 		{
