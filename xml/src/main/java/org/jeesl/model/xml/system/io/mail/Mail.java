@@ -27,6 +27,7 @@ import org.jeesl.model.xml.text.Example;
  *         &lt;element ref="{http://www.jeesl.org/io/mail}header"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/io/mail}template" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/io/mail}text"/&gt;
+ *         &lt;element ref="{http://www.jeesl.org/io/mail}html"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/io/mail}attachment" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/io/mail}image" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/text}example"/&gt;
@@ -51,6 +52,7 @@ import org.jeesl.model.xml.text.Example;
     "header",
     "template",
     "text",
+    "html",
     "attachment",
     "image",
     "example"
@@ -69,6 +71,8 @@ public class Mail
     protected List<Template> template;
     @XmlElement(required = true)
     protected Text text;
+    @XmlElement(required = true)
+    protected Html html;
     @XmlElement(required = true)
     protected List<Attachment> attachment;
     @XmlElement(required = true)
@@ -209,6 +213,34 @@ public class Mail
 
     public boolean isSetText() {
         return (this.text!= null);
+    }
+
+    /**
+     * Gets the value of the html property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Html }
+     *     
+     */
+    public Html getHtml() {
+        return html;
+    }
+
+    /**
+     * Sets the value of the html property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Html }
+     *     
+     */
+    public void setHtml(Html value) {
+        this.html = value;
+    }
+
+    public boolean isSetHtml() {
+        return (this.html!= null);
     }
 
     /**

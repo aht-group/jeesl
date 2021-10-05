@@ -27,7 +27,7 @@ public class FreemarkerMimeContentCreator extends AbstractMimeContentCreator
 	
 	private MimeMessage message;
 	private FreemarkerEngine fme;
-	private static final String encoding = "ISO-8859-1";
+	public static final String encoding = "ISO-8859-1";
 	
 	public FreemarkerMimeContentCreator(MimeMessage message, FreemarkerEngine fme)
 	{
@@ -48,7 +48,6 @@ public class FreemarkerMimeContentCreator extends AbstractMimeContentCreator
 		if(htmlBody)
 		{
 			mbpHtml = createHtml(mail.getLang(),xml,mail);
-//			mbpHtml.setDisposition(BodyPart.INLINE);
 		}
 		
 		Multipart mpAlternative = new MimeMultipart("alternative");
@@ -101,7 +100,7 @@ public class FreemarkerMimeContentCreator extends AbstractMimeContentCreator
 		return txt;
 	}
 	
-	private MimeBodyPart createHtml(String lang,Document xml, Mail mail) throws MessagingException
+	private MimeBodyPart createHtml(String lang, Document xml, Mail mail) throws MessagingException
 	{
 		fme.createTemplate(mail.getCode(), lang, "html");
 		MimeBodyPart html = new MimeBodyPart();

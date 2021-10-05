@@ -23,6 +23,7 @@
                 <xsd:element ref="m:header" maxOccurs="1"/>
 		        <xsd:element ref="m:template" maxOccurs="unbounded"/>
 		        <xsd:element ref="m:text" maxOccurs="1"/>
+		        <xsd:element ref="m:html" maxOccurs="1"/>
 		        <xsd:element ref="m:attachment" maxOccurs="unbounded"/>
 		        <xsd:element ref="m:image" maxOccurs="unbounded"/>
 		        <xsd:element ref="t:example" maxOccurs="1"/>
@@ -44,6 +45,13 @@
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="text">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string"/>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	 <xsd:element name="html">
 		<xsd:complexType>
 			<xsd:simpleContent>
 				<xsd:extension base="xsd:string"/>

@@ -65,12 +65,8 @@ public class EjbDescriptionFactory<D extends JeeslDescription>
 	public D build(String key, String value)
 	{
 		D d = null;
-		try {
-			d = create(key,value);
-		} catch (JeeslConstraintViolationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		try {d = create(key,value);}
+		catch (JeeslConstraintViolationException e) {e.printStackTrace();}
 		return d;
 	}
 	public D create(String key, String value) throws JeeslConstraintViolationException

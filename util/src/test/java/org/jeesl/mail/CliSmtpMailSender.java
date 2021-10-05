@@ -1,4 +1,4 @@
-package org.jeesl.controller.smtp;
+package org.jeesl.mail;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
