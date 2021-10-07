@@ -15,6 +15,8 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.exlp.util.io.StringUtil;
+
 public class SbSingleHandler <T extends EjbWithId> implements Serializable,SbSingleBean
 {
 	final static Logger logger = LoggerFactory.getLogger(SbSingleHandler.class);
@@ -196,6 +198,15 @@ public class SbSingleHandler <T extends EjbWithId> implements Serializable,SbSin
 			int next = (index-1);
 			if(next<0) {next=list.size();}
 			this.selectSbSingle(list.get(next));
+		}
+	}
+	
+	public void debug()
+	{
+		logger.info(StringUtil.stars());
+		for(T t : list)
+		{
+			logger.info(t.toString()+" "+(t.equals(selection)));
 		}
 	}
 }

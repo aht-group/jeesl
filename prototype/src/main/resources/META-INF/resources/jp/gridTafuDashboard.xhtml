@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:ofx="http://www.openfuxml.org/jsf"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+		
+	<composite:interface>
+		<composite:attribute name="bean" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sBacklog" width="2">
+			<h:form id="fBacklog">
+				<p:dataTable var="t" value="#{cc.attrs.bean.backlog}" draggableRows="false"
+								selection="#{cc.attrs.bean.task}" selectionMode="single" rowKey="#{t.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="TafuTask" code="backlog">
+							
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTask()}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask"/>
+					<p:column>
+						<jtp:symbolizer value="#{t.status}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="TafuTask" code="backlog"/></f:facet>
+						<h:outputText value="#{t.name}"/>
+					</p:column>
+			   	</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sWeek" width="10">
+			<h:form id="fWeek">
+				<p:dataTable var="row" value="#{cc.attrs.bean.rows}" draggableRows="false">
+					<f:facet name="header">
+						<j:dtHeader title="#{cc.attrs.bean.sbhViewport.selection.name[localeCode].lang}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTask()}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask" tooltip="#{msg.ttNew}"/>
+						</j:dtHeader>
+					</f:facet>
+					
+					<p:columns var="d" value="#{cc.attrs.bean.sbhDow.selected}" columnIndexVar="colIndex">
+						<f:facet name="header">
+							<h:outputText value="#{d.name[localeCode].lang}" />
+						</f:facet>
+						
+						<ui:fragment>
+							<jtp:symbolizer value="#{cc.attrs.bean.n2m.m[row][d].status}"/>
+							<p:commandLink value="#{cc.attrs.bean.n2m.m[row][d].name}" action="#{cc.attrs.bean.selectTask(cc.attrs.bean.n2m.m[row][d])}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask"/>
+						</ui:fragment>
+						
+
+						<f:facet name="footer">
+							<jp:outputDate value="#{cc.attrs.bean.mapDate[d]}" />
+						</f:facet>
+					</p:columns>
+			   	</p:dataTable>
+			</h:form>
+		</j:slot>
+	</j:row>
+	<h:form id="fTask">
+		<j:dialog id="dTask" widgetVar="testWidget" header="#{appLabelBean.entities['TafuTask'][localeCode]}">
+			<f:facet name="actions">
+				<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveTask()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
+				<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelTask()}" update=":#{cc.id}:fTask" library="jeeslGfx"/>
+			</f:facet>
+			<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{not empty cc.attrs.bean.task}">
+				<jtp:label entity="TafuTask" code="id"/>
+				<h:outputText value="#{cc.attrs.bean.task.id}"/>
+				
+				<jtp:label entity="TafuTask" code="status"/>
+				<p:selectOneMenu value="#{cc.attrs.bean.task.status}" effect="fade" autoWidth="false" dynamic="true" >
+					<f:selectItems value="#{cc.attrs.bean.status}" var="s" itemLabel="#{s.name[userBean.localeCode].lang}" itemValue="#{s}"/>
+				</p:selectOneMenu>
+				
+				<jtp:label entity="TafuTask" code="name"/>
+				<jtp:inputText value="#{cc.attrs.bean.task.name}"/>
+				
+				<jtp:label entity="TafuTask" code="recordShow"/>
+				<jp:inputCalendar  value="#{cc.attrs.bean.task.recordShow}"/>
+				
+				<jtp:label entity="TafuTask" code="recordDue"/>
+				<jp:inputCalendar  value="#{cc.attrs.bean.task.recordDue}"/>
+			</p:panelGrid>
+		</j:dialog>
+	</h:form>
+</jp:grid>
+	</composite:implementation>
+</html>
