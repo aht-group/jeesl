@@ -18,5 +18,5 @@ public interface JeeslTafuStatus <L extends JeeslLang, D extends JeeslDescriptio
 										JeeslOptionRestDownload,EjbWithCodeGraphic<G>,
 										JeeslStatus<L,D,S>
 {
-	public static enum Code{open};
+	public static enum Code{open,discarded,waiting,overdue,progress,resolved,closed};
 }

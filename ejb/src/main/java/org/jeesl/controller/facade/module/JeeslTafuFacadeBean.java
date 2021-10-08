@@ -1,6 +1,16 @@
 package org.jeesl.controller.facade.module;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.JeeslTafuFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
@@ -11,7 +21,11 @@ import org.jeesl.interfaces.model.module.tafu.JeeslTafuViewport;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
+import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.system.time.JeeslTimeDayOfWeek;
+import org.jeesl.interfaces.model.with.primitive.date.EjbWithRecord;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,6 +48,33 @@ public class JeeslTafuFacadeBean<L extends JeeslLang, D extends JeeslDescription
 	{
 		super(em);
 		this.fbTafu=fbTafu;
+	}
+
+	@Override
+	public <RREF extends EjbWithId> List<T> fTafuBacklog(R realm, RREF rref, Date date)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<T> cQ = cB.createQuery(fbTafu.getClassTask());
+		Root<T> task = cQ.from(fbTafu.getClassTask());
+
+		Path<R> pRealm = task.get(JeeslWithTenantSupport.Attributes.realm.toString());
+		Expression<Long> eRref = task.get(JeeslWithTenantSupport.Attributes.rref.toString());
+		Predicate pTenant = cB.and(cB.equal(pRealm,realm),cB.equal(eRref,rref.getId()));
+		
+		List<TS> listStatus = new ArrayList<>();
+		listStatus.add(this.fByEnum(fbTafu.getClassStatus(),JeeslTafuStatus.Code.closed));
+		listStatus.add(this.fByEnum(fbTafu.getClassStatus(),JeeslTafuStatus.Code.discarded));
+		Path<TS> pathStatus = task.get(JeeslTafuTask.Attributes.status.toString());
+		Predicate pStatus = cB.not(pathStatus.in(listStatus));
+		
+		
+		CriteriaQuery<T> select = cQ.select(task);
+		select.where(cB.and(pTenant,pStatus));
+
+//		if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithPosition.attributePosition)));}
+//		else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithRecord.attributeRecord)));}
+
+		return em.createQuery(select).getResultList();
 	}
 
 	

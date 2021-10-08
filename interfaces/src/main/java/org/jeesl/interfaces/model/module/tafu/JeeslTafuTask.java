@@ -16,7 +16,7 @@ public interface JeeslTafuTask <R extends JeeslTenantRealm<?,?,R,?>,
 					JeeslWithTenantSupport<R>, JeeslWithStatus<TS>,
 					EjbWithName
 {
-	public enum Attributes{realm,rref}
+	public enum Attributes{realm,rref,status}
 	
 	Date getRecordCreated();
 	void setRecordCreated(Date recordCreated);

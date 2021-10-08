@@ -1,5 +1,8 @@
 package org.jeesl.api.facade.module;
 
+import java.util.Date;
+import java.util.List;
+
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuStatus;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuTask;
@@ -8,6 +11,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.time.JeeslTimeDayOfWeek;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslTafuFacade <L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
@@ -17,5 +21,5 @@ public interface JeeslTafuFacade <L extends JeeslLang, D extends JeeslDescriptio
 									DOW extends JeeslTimeDayOfWeek<L,D,DOW,?>>
 			extends JeeslFacade
 {	
-//	<RREF extends EjbWithId> List<T> fTafuBacklog(R realm, RREF rref, Date date);
+	<RREF extends EjbWithId> List<T> fTafuBacklog(R realm, RREF rref, Date date);
 }

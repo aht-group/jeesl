@@ -73,7 +73,8 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	private final List<T> backlog; public List<T> getBacklog() {return backlog;}
 	
 	private T task; public T getTask() {return task;} public void setTask(T task) {this.task = task;}
-
+	private Date dateVpBegin;
+	
 	public AbstractTafuDashboardBean(TafuFactoryBuilder<L,D,R,T,TS,VP,DOW> fbTafu)
 	{
 		super(fbTafu.getClassL(),fbTafu.getClassD());	
@@ -164,6 +165,11 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 				mapDate.put(dow,d);
 			}
 		}
+		
+		dateVpBegin = mapDate.get(sbhDow.getList().get(0));
+		
+		logger.info("Viewport");
+		logger.info("\tdateVpBegin"+dateVpBegin.toInstant().toString());
 	}
 	
 	protected void reload()
@@ -172,7 +178,9 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		
 		rows.clear();
 		backlog.clear();
-		backlog.addAll(fTafu.all(fbTafu.getClassTask(),realm, rref));
+		n2m.clear();
+		
+		backlog.addAll(fTafu.fTafuBacklog(realm,rref,dateVpBegin));
 		
 		for(T t : backlog)
 		{

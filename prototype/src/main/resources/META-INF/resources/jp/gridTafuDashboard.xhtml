@@ -20,16 +20,14 @@
 				<p:dataTable var="t" value="#{cc.attrs.bean.backlog}" draggableRows="false"
 								selection="#{cc.attrs.bean.task}" selectionMode="single" rowKey="#{t.id}">
 					<f:facet name="header">
-						<j:dtHeader entity="TafuTask" code="backlog">
-							
-						</j:dtHeader>
+						<j:dtHeader entity="TafuTask" code="backlog"/>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTask()}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask"/>
 					<p:column>
 						<jtp:symbolizer value="#{t.status}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="TafuTask" code="backlog"/></f:facet>
+						<f:facet name="header"><jtp:label entity="TafuTask" code="name"/></f:facet>
 						<h:outputText value="#{t.name}"/>
 					</p:column>
 			   	</p:dataTable>
@@ -40,7 +38,10 @@
 				<p:dataTable var="row" value="#{cc.attrs.bean.rows}" draggableRows="false">
 					<f:facet name="header">
 						<j:dtHeader title="#{cc.attrs.bean.sbhViewport.selection.name[localeCode].lang}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTask()}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask" tooltip="#{msg.ttNew}"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTask()}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask"/>
+							
+							<j:svg type="jeeslArrowLeft" library="jeeslGfx" listener="#{cc.attrs.bean.navigateWeek(-1)}" update=":#{cc.id}:grid" marginRight="5"/>
+							<j:svg type="jeeslArrowRight" library="jeeslGfx" listener="#{cc.attrs.bean.navigateWeek(1)}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
 					
