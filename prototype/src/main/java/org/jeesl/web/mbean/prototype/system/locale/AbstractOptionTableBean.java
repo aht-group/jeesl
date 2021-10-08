@@ -88,7 +88,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	protected boolean supportsImage; public boolean getSupportsImage() {return supportsImage;}
 	protected boolean supportsGraphic; public boolean getSupportsGraphic() {return supportsGraphic;}
 	protected boolean supportsFigure; public boolean isSupportsFigure() {return supportsFigure;}
-//	protected boolean supportsLocked; public boolean isSupportsLocked() {return supportsLocked;}
+
 
 
 	@SuppressWarnings("rawtypes")
@@ -161,14 +161,16 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 	protected void updateUiForCategory()
 	{
+		super.updateUiForCategory();
+		
 		supportsUpload = JeeslOptionUploadable.class.isAssignableFrom(cStatus);
-		supportsDownload = JeeslOptionRestDownload.class.isAssignableFrom(cStatus);
+		
 		supportsDescription = JeeslOptionRestDescription.class.isAssignableFrom(cStatus);
 		supportsImage = JeeslStatusWithImage.class.isAssignableFrom(cStatus);
 		supportsGraphic = EjbWithGraphic.class.isAssignableFrom(cStatus);
-		supportsSymbol = JeeslStatusWithSymbol.class.isAssignableFrom(cStatus);
+		
 		supportsFigure = EjbWithGraphicFigure.class.isAssignableFrom(cStatus);
-		supportsLocked = EjbWithLocked.class.isAssignableFrom(cStatus);
+		
 	}
 
 	@Override

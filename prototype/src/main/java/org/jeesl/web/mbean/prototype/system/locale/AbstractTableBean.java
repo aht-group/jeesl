@@ -22,6 +22,10 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithColour;
+import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
+import org.jeesl.interfaces.model.system.option.JeeslOptionRestDownload;
+import org.jeesl.interfaces.model.with.primitive.bool.EjbWithLocked;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
@@ -60,6 +64,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected boolean supportsSymbol; public boolean getSupportsSymbol(){return supportsSymbol;}
 	protected boolean supportsLocked; public boolean isSupportsLocked() {return supportsLocked;}
 	protected boolean supportsDownload; public boolean getSupportsDownload(){return supportsDownload;}
+	protected boolean supportsColour; public boolean getSupportsColour(){return supportsColour;}
 	protected boolean logOnInfo; public boolean isLogOnInfo() {return logOnInfo;} public void setLogOnInfo(boolean logOnInfo) {this.logOnInfo = logOnInfo;}
 	
 	protected final EjbGraphicFactory<L,D,G,GT,F,FS> efGraphic;
@@ -127,6 +132,14 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	{
 		if(rStatus){status=null;}
 		if(rFigure){figure=null;}
+	}
+	
+	protected void updateUiForCategory()
+	{
+		supportsSymbol = JeeslStatusWithSymbol.class.isAssignableFrom(cStatus);
+		supportsLocked = EjbWithLocked.class.isAssignableFrom(cStatus);
+		supportsDownload = JeeslOptionRestDownload.class.isAssignableFrom(cStatus);
+		supportsColour = JeeslStatusWithColour.class.isAssignableFrom(cStatus);
 	}
 	
 }

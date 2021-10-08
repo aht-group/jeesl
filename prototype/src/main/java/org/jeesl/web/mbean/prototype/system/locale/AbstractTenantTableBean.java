@@ -153,9 +153,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 
 	protected void updateUiForCategory()
 	{
-		supportsSymbol = JeeslStatusWithSymbol.class.isAssignableFrom(cStatus);
-		supportsDownload = JeeslOptionRestDownload.class.isAssignableFrom(cStatus);
-		supportsLocked = EjbWithLocked.class.isAssignableFrom(cStatus);
+		super.updateUiForCategory();
 	}
 
 	@Override
