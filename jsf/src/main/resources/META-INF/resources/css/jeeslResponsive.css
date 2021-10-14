@@ -3000,8 +3000,10 @@ body, .ui-widget {
       @media (max-width: 768px) {
         .jeesl-content .jeesl-content-container .jeesl-grid-12 {
           width: calc(100% - 10px); } }
-    .jeesl-content .jeesl-content-container .jeesl-grid form {
-      margin-bottom: 10px; }
+    .jeesl-content .jeesl-content-container .jeesl-grid {
+      position: relative; }
+      .jeesl-content .jeesl-content-container .jeesl-grid form {
+        margin-bottom: 10px; }
     .jeesl-content .jeesl-content-container .ui-panel {
       margin-bottom: 10px; }
       .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar {
@@ -3585,12 +3587,14 @@ body, .ui-widget {
         left: 15px !important;
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
-  @media (max-width: 768px) {
-    .ui-dialog .ui-dialog-content {
-      margin: 0; } }
-  @media (max-width: 768px) {
-    .ui-dialog .ui-dialog-content .ui-resizable-handle {
-      display: none; } }
+  .ui-dialog .ui-dialog-content {
+    width: 100% !important; }
+    @media (max-width: 768px) {
+      .ui-dialog .ui-dialog-content {
+        margin: 0; } }
+    @media (max-width: 768px) {
+      .ui-dialog .ui-dialog-content .ui-resizable-handle {
+        display: none; } }
 
 .jeesl-tabs {
   background: #f0f0f0; }
