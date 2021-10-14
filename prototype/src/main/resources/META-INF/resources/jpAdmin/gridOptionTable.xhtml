@@ -85,6 +85,9 @@
 							<p:column rendered="#{cc.attrs.bean.supportsGraphic}" styleClass="jeeslCenter">
 								<jtp:symbolizer value="#{s}"/>
 							</p:column>
+							<p:column rendered="#{cc.attrs.bean.supportsColour}" styleClass="jeeslCenter">
+								<p:colorPicker value="#{s.color}"/>
+							</p:column>
 							<p:column rendered="#{cc.attrs.bean.supportsSymbol}">
 								<f:facet name="header">#{msg.aupOptionSymbol}</f:facet>  
 								<h:outputText value="#{s.symbol}" />
@@ -130,7 +133,10 @@
 								
 								<p:outputLabel value="#{msg.aupStatusImageResource}" rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}"/>
 								<p:inputText value="#{cc.attrs.bean.status.image}" rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}" autocomplete="off"/>
-				
+								
+								<p:outputLabel value="#{msg.aupGraphicColor}" rendered="#{cc.attrs.bean.supportsColour}"/>
+								<p:colorPicker value="#{cc.attrs.bean.status.color}" rendered="#{cc.attrs.bean.supportsColour}"/>
+
 							</p:panelGrid>
 							<aht:tabTranslationEditor value="#{cc.attrs.bean.status}" keys="#{cc.attrs.langKeys}" withDescription="true"/>
 										
