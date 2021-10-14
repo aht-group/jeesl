@@ -6,8 +6,9 @@ public interface UtilsJsfOptionTableBean
 {
 	boolean getSupportsSymbol();
 	boolean getSupportsGraphic();
-	
+	boolean getSupportsColour();
+
 	Map<Long, Boolean> getAllowAdditionalElements();
-	
+
 	void changeGraphicType();
 }
