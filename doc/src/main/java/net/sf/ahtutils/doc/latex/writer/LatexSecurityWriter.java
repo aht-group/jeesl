@@ -49,7 +49,7 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 	private List<String> headerKeysViews;
 	
 	@Deprecated
-	public LatexSecurityWriter(Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
+	public LatexSecurityWriter(Configuration config, Translations translations, String[] langs, ConfigurationProvider cp)
 	{
 		super(config,translations,langs,cp);
 		
@@ -59,7 +59,7 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 		buildFactories();
 	}
 	
-	public LatexSecurityWriter(Configuration config, Translations translations,String[] langs, OfxMultiLangLatexWriter ofxMlw, ConfigurationProvider cp)
+	public LatexSecurityWriter(Configuration config, Translations translations, String[] langs, OfxMultiLangLatexWriter ofxMlw, ConfigurationProvider cp)
 	{
 		super(config,translations,langs,cp);
 		this.ofxMlw=ofxMlw;

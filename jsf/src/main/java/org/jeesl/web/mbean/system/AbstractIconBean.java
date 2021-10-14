@@ -230,6 +230,8 @@ public class AbstractIconBean implements Serializable
 
 		svg.put("jeeslOnlineHelp", "ui/info/help.svg");
 		svg.put("jeeslReport", "ui/info/report.svg");
+		
+		svg.put("jeeslAddressBook", "/ui/system/person/addressbook.svg");
 	}
 
 	protected void jeeslRevision()

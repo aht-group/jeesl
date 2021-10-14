@@ -332,7 +332,7 @@
 										<include>module/survey/*.*</include>
 										<include>system/io/revision/*.*</include>
 										<include>security/*.*</include>
-										<include>system/*.*</include>
+										<include>system/**/*.*</include>
 									</includes>
 								</resource>
 							</resources>              

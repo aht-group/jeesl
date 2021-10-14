@@ -1,12 +1,13 @@
 package org.jeesl.model.json.system.status;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+@JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="container")
 public class JsonContainer implements Serializable
 {
@@ -14,7 +15,7 @@ public class JsonContainer implements Serializable
 
 	@JsonProperty("status")
 	private List<JsonStatus> status;
-	public List<JsonStatus> getStatus() {if(status==null){status = new ArrayList<JsonStatus>();}return status;}
+	public List<JsonStatus> getStatus() {return status;} //{if(status==null){status = new ArrayList<JsonStatus>();}return status;}
 	public void setStatus(List<JsonStatus> status) {this.status = status;}
 	
 	@JsonProperty("categories")

@@ -54,4 +54,6 @@ public class OpEntitySelectionHandler <T extends EjbWithId> extends AbstractOpSe
     	lazy.clear();
     	lazy.addAll(opEntites);
     }
+    
+    public void showOverlay() {}
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Locale;
 
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
@@ -85,7 +86,12 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 
 		logger.info("localeCode:"+localeCode+" locale"+locale);
 		
-		FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		if(ctx!=null)
+		{
+			UIViewRoot root = ctx.getViewRoot();
+			if(root!=null) {root.setLocale(locale);}
+		}
 		if(bMenu!=null) {bMenu.updateLocale(localeCode);}
 		localeChanged();
 	}

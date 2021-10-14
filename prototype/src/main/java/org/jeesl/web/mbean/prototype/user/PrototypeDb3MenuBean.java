@@ -190,8 +190,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	public void updateLocale(String localeCode) {}
 
-
-
 	public void reset()
 	{
 		if(debugOnInfo) {logger.info("Resettings Menu");}

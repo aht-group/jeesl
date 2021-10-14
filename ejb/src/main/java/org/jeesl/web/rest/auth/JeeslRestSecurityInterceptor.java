@@ -8,8 +8,14 @@ public abstract class JeeslRestSecurityInterceptor
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslRestSecurityInterceptor.class);
 	
+	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
+
+	public JeeslRestSecurityInterceptor()
+	{
+		debugOnInfo = false;
+	}
 	
-    public boolean isBasicAuthentication(String authorizationHeader)
+	public boolean isBasicAuthentication(String authorizationHeader)
     {
     	return authorizationHeader.toUpperCase().startsWith(JeeslRestBasicAuthenticator.BASIC);
     }
