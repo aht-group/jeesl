@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.module.tafu;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuTask;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
@@ -28,9 +29,9 @@ public class EjbTaskFactory<R extends JeeslTenantRealm<?,?,R,?>,
 			t.setRealm(realm);
 			t.setRref(rref.getId());
 			
-			t.setRecordCreated(new Date());
-			t.setRecordUpdated(new Date());
-			t.setRecordShow(new Date());	
+			t.setRecordCreated(LocalDateTime.now());
+			t.setRecordUpdated(LocalDateTime.now());
+			t.setRecordShow(LocalDate.now());	
 			
 		    return t;
 		}

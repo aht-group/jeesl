@@ -1,7 +1,7 @@
 package org.jeesl.controller.facade.module;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,9 +23,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.system.time.JeeslTimeDayOfWeek;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithRecord;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,8 +48,7 @@ public class JeeslTafuFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		this.fbTafu=fbTafu;
 	}
 
-	@Override
-	public <RREF extends EjbWithId> List<T> fTafuBacklog(R realm, RREF rref, Date date)
+	@Override public <RREF extends EjbWithId> List<T> fTafuBacklog(R realm, RREF rref, LocalDate date)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQ = cB.createQuery(fbTafu.getClassTask());
@@ -67,14 +64,21 @@ public class JeeslTafuFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		Path<TS> pathStatus = task.get(JeeslTafuTask.Attributes.status.toString());
 		Predicate pStatus = cB.not(pathStatus.in(listStatus));
 		
+		Expression<LocalDate> eShow = task.get(JeeslTafuTask.Attributes.recordShow.toString());
+		Predicate pDate = cB.lessThan(eShow, date);
 		
 		CriteriaQuery<T> select = cQ.select(task);
-		select.where(cB.and(pTenant,pStatus));
+		select.where(cB.and(pTenant,pStatus,pDate));
 
 //		if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithPosition.attributePosition)));}
 //		else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithRecord.attributeRecord)));}
 
 		return em.createQuery(select).getResultList();
+	}
+
+	@Override public <RREF extends EjbWithId> List<T> fTafuActive(R realm, RREF rref, LocalDate from, LocalDate to)
+	{
+		return this.all(fbTafu.getClassTask(),realm,rref);
 	}
 
 	

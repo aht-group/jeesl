@@ -159,13 +159,26 @@
 		</h:form>
 		<p:overlayPanel id="opUpload" widgetVar="wvUpload" appendToBody="false">
 			<aht:slot width="7">
-				<h:form id="fUploadOverlay">
-					<p:fileUpload id="pfUploadOverlay" fileUploadListener="#{cc.attrs.handler.handleFileUpload}" mode="advanced" auto="true"
-						dragDropSupport="false" update="#{cc.attrs.componentPrefix}:#{cc.id}:fConfirm" multiple="false"
-						sizeLimit="#{cc.attrs.handler.storage.fileSizeLimit}" fileLimit="100">
-						<c:if test="#{not empty cc.attrs.allowTypes}"><f:attribute name="allowTypes" value="#{cc.attrs.allowTypes}"/></c:if>
-					</p:fileUpload>
-				</h:form>
+				<ui:remove>Primefaces 7</ui:remove>
+					<h:form id="fUploadOverlay">
+						<p:fileUpload id="pfUploadOverlay"	
+							fileUploadListener="#{cc.attrs.handler.handleFileUpload}" mode="advanced" auto="true"
+							dragDropSupport="false" update="#{cc.attrs.componentPrefix}:#{cc.id}:fConfirm" multiple="false"
+							sizeLimit="#{cc.attrs.handler.storage.fileSizeLimit}" fileLimit="100">
+							<c:if test="#{not empty cc.attrs.allowTypes}"><f:attribute name="allowTypes" value="#{cc.attrs.allowTypes}"/></c:if>
+						</p:fileUpload>
+					</h:form>
+				
+				<ui:remove>
+					Primefaces 8	
+					<h:form id="fUploadOverlay" >
+						<p:fileUpload value="#{cc.attrs.handler.file}" mode="simple" skinSimple="true">
+							<c:if test="#{not empty cc.attrs.allowTypes}"><f:attribute name="allowTypes" value="#{cc.attrs.allowTypes}"/></c:if>
+						</p:fileUpload>
+						<p:commandButton value="Submit" ajax="false" action="#{cc.attrs.handler.uploadFile}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles"/>
+					</h:form>
+				</ui:remove>
+				
 				<h:form id="fConfirm" >
 					<p:panel header="#{msg.jeeslIoFileUpload}" rendered="#{not empty cc.attrs.handler.meta}" styleClass="jeeslPanel" >
 						<f:facet name="actions">

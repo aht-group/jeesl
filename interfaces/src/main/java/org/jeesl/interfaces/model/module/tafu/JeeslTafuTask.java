@@ -1,7 +1,8 @@
 package org.jeesl.interfaces.model.module.tafu;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -16,20 +17,20 @@ public interface JeeslTafuTask <R extends JeeslTenantRealm<?,?,R,?>,
 					JeeslWithTenantSupport<R>, JeeslWithStatus<TS>,
 					EjbWithName
 {
-	public enum Attributes{realm,rref,status}
+	public enum Attributes{realm,rref,status,recordShow}
 	
-	Date getRecordCreated();
-	void setRecordCreated(Date recordCreated);
+	LocalDateTime getRecordCreated();
+	void setRecordCreated(LocalDateTime recordCreated);
 		
-	Date getRecordUpdated();
-	void setRecordUpdated(Date recordUpdated);
+	LocalDateTime getRecordUpdated();
+	void setRecordUpdated(LocalDateTime recordUpdated);
 
-	Date getRecordShow();
-	void setRecordShow(Date recordShow);
+	LocalDate getRecordShow();
+	void setRecordShow(LocalDate recordShow);
 	
-	Date getRecordDue();
-	void setRecordDue(Date recordDue);
+	LocalDate getRecordDue();
+	void setRecordDue(LocalDate recordDue);
 	
-	Date getRecordResolved();
-	void setRecordResolved(Date recordResolved);
+	LocalDateTime getRecordResolved();
+	void setRecordResolved(LocalDateTime recordResolved);
 }

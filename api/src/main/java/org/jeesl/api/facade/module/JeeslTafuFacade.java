@@ -1,6 +1,6 @@
 package org.jeesl.api.facade.module;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -21,5 +21,6 @@ public interface JeeslTafuFacade <L extends JeeslLang, D extends JeeslDescriptio
 									DOW extends JeeslTimeDayOfWeek<L,D,DOW,?>>
 			extends JeeslFacade
 {	
-	<RREF extends EjbWithId> List<T> fTafuBacklog(R realm, RREF rref, Date date);
+	<RREF extends EjbWithId> List<T> fTafuBacklog(R realm, RREF rref, LocalDate date);
+	<RREF extends EjbWithId> List<T> fTafuActive(R realm, RREF rref, LocalDate from, LocalDate to);
 }
