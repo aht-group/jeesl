@@ -1635,7 +1635,7 @@ $enable-pointer-cursor-for-buttons: true;
 .ui-datatable {
 	table {
 		table-layout: auto;
-	}
+	} 
 }
 
 .jeesl-content {
@@ -1670,6 +1670,8 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		.jeesl-grid {
+			position: relative;
+			
 			form {
 				margin-bottom: $regular-spacing;
 			}
@@ -1761,6 +1763,8 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 
 	.ui-dialog-content {
+		width: 100% !important; // Fix for primefaces incorrectly calculating width after resize.
+		
 		@media (max-width: 768px) {
 			margin: 0;
 		}
