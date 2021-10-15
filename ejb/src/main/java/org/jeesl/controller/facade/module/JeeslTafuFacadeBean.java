@@ -15,11 +15,14 @@ import javax.persistence.criteria.Root;
 import org.jeesl.api.facade.module.JeeslTafuFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.factory.builder.module.TafuFactoryBuilder;
+import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.module.tafu.JeeslTafuScope;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuStatus;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuTask;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuViewport;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.system.time.JeeslTimeDayOfWeek;
@@ -29,26 +32,29 @@ import org.slf4j.LoggerFactory;
 
 public class JeeslTafuFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>,
-								T extends JeeslTafuTask<R,TS>,
+								T extends JeeslTafuTask<R,TS,SC,M>,
 								TS extends JeeslTafuStatus<L,D,TS,?>,
+								SC extends JeeslTafuScope<L,D,R,SC,?>,
 								VP extends JeeslTafuViewport<L,D,VP,?>,
-								DOW extends JeeslTimeDayOfWeek<L,D,DOW,?>>
+								DOW extends JeeslTimeDayOfWeek<L,D,DOW,?>,
+								M extends JeeslMarkup<MT>,
+								MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
 					extends JeeslFacadeBean
-					implements JeeslTafuFacade<L,D,R,T,TS,VP,DOW>
+					implements JeeslTafuFacade<L,D,R,T,TS,SC,VP,DOW,M>
 {	
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslAssetFacadeBean.class);
 	
-	private final TafuFactoryBuilder<L,D,R,T,TS,VP,DOW> fbTafu;
+	private final TafuFactoryBuilder<L,D,R,T,TS,SC,VP,DOW,M,MT> fbTafu;
 	
-	public JeeslTafuFacadeBean(EntityManager em, final TafuFactoryBuilder<L,D,R,T,TS,VP,DOW> fbTafu)
+	public JeeslTafuFacadeBean(EntityManager em, final TafuFactoryBuilder<L,D,R,T,TS,SC,VP,DOW,M,MT> fbTafu)
 	{
 		super(em);
 		this.fbTafu=fbTafu;
 	}
 
-	@Override public <RREF extends EjbWithId> List<T> fTafuBacklog(R realm, RREF rref, LocalDate date)
+	@Override public <RREF extends EjbWithId> List<T> fTafuBacklog(R realm, RREF rref, LocalDate vpStart, LocalDate vpEnd)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQ = cB.createQuery(fbTafu.getClassTask());
@@ -62,23 +68,42 @@ public class JeeslTafuFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		listStatus.add(this.fByEnum(fbTafu.getClassStatus(),JeeslTafuStatus.Code.closed));
 		listStatus.add(this.fByEnum(fbTafu.getClassStatus(),JeeslTafuStatus.Code.discarded));
 		Path<TS> pathStatus = task.get(JeeslTafuTask.Attributes.status.toString());
-		Predicate pStatus = cB.not(pathStatus.in(listStatus));
+		Predicate pStatusActive = cB.not(pathStatus.in(listStatus));
 		
 		Expression<LocalDate> eShow = task.get(JeeslTafuTask.Attributes.recordShow.toString());
-		Predicate pDate = cB.lessThan(eShow, date);
+		Expression<LocalDate> eDue = task.get(JeeslTafuTask.Attributes.recordDue.toString());
+		
+		Predicate pShowBeforeVpStartWithoutDue = cB.and(cB.lessThan(eShow,vpStart),cB.isNull(eDue));
+		
+		Predicate pShowOutsideVp = cB.or(cB.lessThan(eShow,vpStart),cB.greaterThan(eShow,vpEnd));
+		Predicate pShowOutsideVpDue = cB.and(cB.lessThanOrEqualTo(eDue,vpEnd),pShowOutsideVp);
+		
+		Predicate pBacklog = cB.or(pShowBeforeVpStartWithoutDue,pShowOutsideVpDue);
 		
 		CriteriaQuery<T> select = cQ.select(task);
-		select.where(cB.and(pTenant,pStatus,pDate));
-
-//		if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithPosition.attributePosition)));}
-//		else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithRecord.attributeRecord)));}
+		select.where(cB.and(pTenant,pStatusActive,pBacklog));
 
 		return em.createQuery(select).getResultList();
 	}
 
-	@Override public <RREF extends EjbWithId> List<T> fTafuActive(R realm, RREF rref, LocalDate from, LocalDate to)
+	@Override public <RREF extends EjbWithId> List<T> fTafuActive(R realm, RREF rref, LocalDate vpStart, LocalDate vpEnd)
 	{
-		return this.all(fbTafu.getClassTask(),realm,rref);
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<T> cQ = cB.createQuery(fbTafu.getClassTask());
+		Root<T> task = cQ.from(fbTafu.getClassTask());
+
+		Path<R> pRealm = task.get(JeeslWithTenantSupport.Attributes.realm.toString());
+		Expression<Long> eRref = task.get(JeeslWithTenantSupport.Attributes.rref.toString());
+		Predicate pTenant = cB.and(cB.equal(pRealm,realm),cB.equal(eRref,rref.getId()));
+		
+		Expression<LocalDate> eShow = task.get(JeeslTafuTask.Attributes.recordShow.toString());
+		Predicate pFrom = cB.greaterThanOrEqualTo(eShow,vpStart);
+		Predicate pTo = cB.lessThanOrEqualTo(eShow,vpEnd);
+		
+		CriteriaQuery<T> select = cQ.select(task);
+		select.where(cB.and(pTenant,pFrom,pTo));
+
+		return em.createQuery(select).getResultList();
 	}
 
 	

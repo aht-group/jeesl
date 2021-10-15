@@ -6,18 +6,22 @@ import java.time.LocalDateTime;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
+import org.jeesl.interfaces.model.with.system.status.JeeslWithScope;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 
 public interface JeeslTafuTask <R extends JeeslTenantRealm<?,?,R,?>,
-								TS extends JeeslTafuStatus<?,?,TS,?>>
+								TS extends JeeslTafuStatus<?,?,TS,?>,
+								SC extends JeeslTafuScope<?,?,R,SC,?>,
+								M extends JeeslMarkup<?>>
 			extends Serializable,EjbSaveable,EjbRemoveable,
-					JeeslWithTenantSupport<R>, JeeslWithStatus<TS>,
+					JeeslWithTenantSupport<R>, JeeslWithStatus<TS>, JeeslWithScope<SC>, 
 					EjbWithName
 {
-	public enum Attributes{realm,rref,status,recordShow}
+	public enum Attributes{realm,rref,status,recordShow,recordDue}
 	
 	LocalDateTime getRecordCreated();
 	void setRecordCreated(LocalDateTime recordCreated);
@@ -33,4 +37,7 @@ public interface JeeslTafuTask <R extends JeeslTenantRealm<?,?,R,?>,
 	
 	LocalDateTime getRecordResolved();
 	void setRecordResolved(LocalDateTime recordResolved);
+	
+	M getMarkup();
+	void setMarkup(M markup);
 }

@@ -27,8 +27,7 @@ public class JeeslJbossEap73Configurator extends AbstractJbossEapConfigurator
     	BasicConfigurator.configure();
     	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
 
-    	Configuration config = config();
-		configureEap(config);
+		configureEap(super.config());
     }
     
     private void configureEap(Configuration config) throws MojoExecutionException

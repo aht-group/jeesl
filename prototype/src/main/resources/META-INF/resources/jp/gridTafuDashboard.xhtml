@@ -27,7 +27,7 @@
 						<jtp:symbolizer value="#{t.status}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="TafuTask" code="name"/></f:facet>
+						<f:facet name="header"><jtp:label entity="TafuTask" code="task"/></f:facet>
 						<h:outputText value="#{t.name}"/>
 					</p:column>
 			   	</p:dataTable>
@@ -40,8 +40,8 @@
 						<j:dtHeader title="#{cc.attrs.bean.sbhViewport.selection.name[localeCode].lang}">
 							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTask()}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask"/>
 							
-							<j:svg type="jeeslArrowLeft" library="jeeslGfx" listener="#{cc.attrs.bean.navigateWeek(-1)}" update=":#{cc.id}:grid" marginRight="5"/>
 							<j:svg type="jeeslArrowRight" library="jeeslGfx" listener="#{cc.attrs.bean.navigateWeek(1)}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslArrowLeft" library="jeeslGfx" listener="#{cc.attrs.bean.navigateWeek(-1)}" update=":#{cc.id}:grid" marginRight="5"/>
 						</j:dtHeader>
 					</f:facet>
 					
@@ -70,24 +70,45 @@
 				<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveTask()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
 				<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelTask()}" update=":#{cc.id}:fTask" library="jeeslGfx"/>
 			</f:facet>
-			<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{not empty cc.attrs.bean.task}">
-				<jtp:label entity="TafuTask" code="id"/>
-				<h:outputText value="#{cc.attrs.bean.task.id}"/>
+			
+				<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{not empty cc.attrs.bean.task}">
+					<jtp:label entity="TafuTask" code="id"/>
+					<h:outputText value="#{cc.attrs.bean.task.id}"/>
+					
+					<jtp:label entity="TafuTask" code="status"/>
+					<p:selectOneMenu value="#{cc.attrs.bean.task.status}" effect="fade" autoWidth="false" dynamic="true" >
+						<f:selectItems value="#{cc.attrs.bean.status}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+					</p:selectOneMenu>
+					
+					<jtp:label entity="TafuTask" code="scope"/>
+					<p:selectOneMenu value="#{cc.attrs.bean.task.scope}" effect="fade" autoWidth="false" dynamic="true" >
+						<f:selectItem itemLabel="--"/>
+						<f:selectItems value="#{cc.attrs.bean.scopes}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+					</p:selectOneMenu>
+					
+					<jtp:label entity="TafuTask" code="name"/>
+					<jtp:inputText value="#{cc.attrs.bean.task.name}"/>
+					
+					<jtp:label entity="TafuTask" code="recordShow"/>
+					<jp:inputCalendar  value="#{cc.attrs.bean.tmpShow}"/>
+					
+					<jtp:label entity="TafuTask" code="recordDue"/>
+					<jp:inputCalendar  value="#{cc.attrs.bean.tmpDue}"/>
+				</p:panelGrid>
 				
-				<jtp:label entity="TafuTask" code="status"/>
-				<p:selectOneMenu value="#{cc.attrs.bean.task.status}" effect="fade" autoWidth="false" dynamic="true" >
-					<f:selectItems value="#{cc.attrs.bean.status}" var="s" itemLabel="#{s.name[userBean.localeCode].lang}" itemValue="#{s}"/>
-				</p:selectOneMenu>
 				
-				<jtp:label entity="TafuTask" code="name"/>
-				<jtp:inputText value="#{cc.attrs.bean.task.name}"/>
-				
-				<jtp:label entity="TafuTask" code="recordShow"/>
-				<jp:inputCalendar  value="#{cc.attrs.bean.tmpShow}"/>
-				
-				<jtp:label entity="TafuTask" code="recordDue"/>
-				<jp:inputCalendar  value="#{cc.attrs.bean.tmpDue}"/>
-			</p:panelGrid>
+				<p:textEditor value="#{cc.attrs.bean.task.markup.content}" >
+					<f:facet name="toolbar">
+						<span class="ql-formats">
+							<button class="ql-bold"></button>
+							<button class="ql-italic"></button>
+						</span>
+						<span class="ql-formats">
+							<button class="ql-list" value="ordered"></button>
+							<button class="ql-list" value="bullet"></button>
+						</span>
+					</f:facet>
+				</p:textEditor>
 		</j:dialog>
 	</h:form>
 </jp:grid>

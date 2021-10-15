@@ -18,15 +18,19 @@ import org.jeesl.controller.handler.sb.SbSingleHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.TafuFactoryBuilder;
+import org.jeesl.factory.ejb.module.tafu.EjbTaskFactory;
 import org.jeesl.factory.json.util.JsonDayFactory;
 import org.jeesl.interfaces.bean.sb.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.SbToggleBean;
+import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.module.tafu.JeeslTafuScope;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuStatus;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuTask;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuViewport;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.time.JeeslTimeDayOfWeek;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -41,10 +45,13 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
     										R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
-    										T extends JeeslTafuTask<R,TS>,
+    										T extends JeeslTafuTask<R,TS,SC,M>,
     										TS extends JeeslTafuStatus<L,D,TS,?>,
+    										SC extends JeeslTafuScope<L,D,R,SC,?>,
     										VP extends JeeslTafuViewport<L,D,VP,?>,
-    										DOW extends JeeslTimeDayOfWeek<L,D,DOW,?>
+    										DOW extends JeeslTimeDayOfWeek<L,D,DOW,?>,
+    										M extends JeeslMarkup<MT>,
+    										MT extends JeeslIoCmsMarkupType<L,D,MT,?>
     										>
 					extends AbstractAdminBean<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
@@ -52,9 +59,11 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractTafuDashboardBean.class);
 	
-	private JeeslTafuFacade<L,D,R,T,TS,VP,DOW> fTafu;
+	private JeeslTafuFacade<L,D,R,T,TS,SC,VP,DOW,M> fTafu;
 
-	protected final TafuFactoryBuilder<L,D,R,T,TS,VP,DOW> fbTafu;
+	protected final TafuFactoryBuilder<L,D,R,T,TS,SC,VP,DOW,M,MT> fbTafu;
+	
+	private final EjbTaskFactory<R,T,TS,SC,M,MT> efTask;
 	
     protected R realm;
     protected RREF rref; public RREF getRref() {return rref;}
@@ -69,7 +78,8 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	private final Map<DOW,Date> mapDate; public Map<DOW, Date> getMapDate() {return mapDate;}
 
     private final List<TS> status; public List<TS> getStatus() {return status;}
-    private final List<JsonDay> rows; public List<JsonDay> getRows() {return rows;}
+    private final List<SC> scopes; public List<SC> getScopes() {return scopes;}
+	private final List<JsonDay> rows; public List<JsonDay> getRows() {return rows;}
 	private final List<T> backlog; public List<T> getBacklog() {return backlog;}
 	
 	private T task; public T getTask() {return task;} public void setTask(T task) {this.task = task;}
@@ -78,10 +88,12 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	private Date tmpShow; public Date getTmpShow() {return tmpShow;}public void setTmpShow(Date tmpShow) {this.tmpShow = tmpShow;}
 	private Date tmpDue; public Date getTmpDue() {return tmpDue;} public void setTmpDue(Date tmpDue) {this.tmpDue = tmpDue;}
 	
-	public AbstractTafuDashboardBean(TafuFactoryBuilder<L,D,R,T,TS,VP,DOW> fbTafu)
+	public AbstractTafuDashboardBean(TafuFactoryBuilder<L,D,R,T,TS,SC,VP,DOW,M,MT> fbTafu)
 	{
 		super(fbTafu.getClassL(),fbTafu.getClassD());	
 		this.fbTafu=fbTafu;
+		
+		efTask = fbTafu.ejbTask();
 		
 		sbhViewport = new SbSingleHandler<>(fbTafu.getClassViewport(),this);
 		sbhDow = new SbMultiHandler<>(fbTafu.getClassDayOfWeek(),this);
@@ -89,13 +101,14 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		n2m = new Nested2Map<JsonDay,DOW,T>();
 		mapDate = new HashMap<>();
 		
+		scopes = new ArrayList<>();
 		rows = new ArrayList<>();
 		status = new ArrayList<>();
 		backlog = new ArrayList<>();
 	}
 
 	protected void postConstructDashboard(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-									JeeslTafuFacade<L,D,R,T,TS,VP,DOW> fTafu,
+									JeeslTafuFacade<L,D,R,T,TS,SC,VP,DOW,M> fTafu,
 									R realm)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
@@ -108,7 +121,6 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		cacheDay = new EjbCodeCache<>(fbTafu.getClassDayOfWeek(),sbhDow.getList());
 		status.addAll(fTafu.allOrderedPositionVisible(fbTafu.getClassStatus()));
 		
-
 		sbhViewport.setList(fTafu.allOrderedPositionVisible(fbTafu.getClassViewport()));
 		sbhViewport.setDefault();
 		sbhViewport.debug();
@@ -117,6 +129,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	protected void updateRealmReference(RREF rref)
 	{
 		this.rref=rref;
+		scopes.clear();scopes.addAll(fTafu.all(fbTafu.getClassScope(),realm,rref));
 		reloadViewport();
 		reload();
 	}
@@ -185,7 +198,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		backlog.clear();
 		n2m.clear();
 		
-		backlog.addAll(fTafu.fTafuBacklog(realm,rref,dateViewportBegin));
+		backlog.addAll(fTafu.fTafuBacklog(realm,rref,dateViewportBegin,dateViewportEnd));
 		
 		
 		for(T t : fTafu.fTafuActive(realm,rref,dateViewportBegin,dateViewportEnd))
@@ -209,12 +222,26 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(task));}
 		tmpShow = java.sql.Date.valueOf(task.getRecordShow());
 		tmpDue=null; if(task.getRecordDue()!=null) {tmpDue = java.sql.Date.valueOf(task.getRecordDue());}
+		
+		if(task.getMarkup()==null)
+		{
+			MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+			task.setMarkup(fbTafu.ejbMarkup().build(type));
+			try {
+				task = fTafu.save(task);
+			} catch (JeeslConstraintViolationException | JeeslLockingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public void addTask()
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbTafu.getClassTask()));}
-		task = fbTafu.ejbTask().build(realm,rref);
+		
+		MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+		task = efTask.build(realm,rref,type);
 		task.setStatus(fTafu.fByEnum(fbTafu.getClassStatus(),JeeslTafuStatus.Code.open));
 		tmpShow = java.sql.Date.valueOf(task.getRecordShow());
 		tmpDue=null; if(task.getRecordDue()!=null) {tmpDue = java.sql.Date.valueOf(task.getRecordDue());}
@@ -226,6 +253,8 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		task.setRecordShow(tmpShow.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 		task.setRecordDue(null); if(tmpDue!=null) {task.setRecordDue(tmpDue.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());}
 		
+		efTask.converter(fTafu,task);
+		efTask.preSave(fTafu,task);
 		task = fTafu.save(task);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.savedEntity(task));}
 		reload();

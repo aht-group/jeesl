@@ -1,6 +1,8 @@
 package org.jeesl.maven.goal.eap;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -34,14 +36,38 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     {
     	try
 		{
-			String cfn = ExlpCentralConfigPointer.getFile("jeesl","eapConfig").getAbsolutePath();
-			ConfigLoader.add(cfn);
-			getLog().info("Using config in: "+cfn );
+    		ConfigLoader.add(ExlpCentralConfigPointer.getFile("jeesl","eapConfig"+test()).getAbsolutePath());
+    		ConfigLoader.add(ExlpCentralConfigPointer.getFile("jeesl","eapConfig").getAbsolutePath());
 		}
 		catch (ExlpConfigurationException e) {getLog().error("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" "+e.getMessage());}
 		
-		Configuration config = ConfigLoader.init();					
+		Configuration config = ConfigLoader.init();
+		getLog().info("Using Config "+config.getString("jeesl.classifier","--"));
 		return config;
+    }
+    
+    private String test()
+    {
+    	try
+    	{
+    		Socket socket = new Socket();
+			socket.connect(new InetSocketAddress("google.com", 80));
+			String outbondIp = socket.getLocalAddress().getHostAddress();
+			socket.close();
+			
+			System.out.println(outbondIp.lastIndexOf("."));
+			
+			String x = outbondIp.substring(0, outbondIp.lastIndexOf("."));
+			
+			getLog().info("Determined outbound IP "+outbondIp+" and checking config -"+x);
+			return "-"+x;
+		}
+    	catch (IOException e)
+    	{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return "";
     }
     
     protected void dbDs(String[] keys, Configuration config, JbossConfigurator jbossConfig) throws IOException
