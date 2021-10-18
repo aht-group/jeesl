@@ -80,7 +80,6 @@ public class AbstractJeeslMail<L extends JeeslLang,D extends JeeslDescription,LO
 	protected final Mails mails;
 	
 	protected String subjectPreifx;
-//	private final String dummyLocaleCode = "xx";
 	protected boolean developmentMode; public void activateDevelopmentMode() {developmentMode=true;}
 	
 	public AbstractJeeslMail(IoTemplateFactoryBuilder<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fbTemplate,

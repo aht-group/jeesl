@@ -2,6 +2,7 @@ package org.jeesl.controller.handler.sb;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -152,6 +153,21 @@ public class SbSingleHandler <T extends EjbWithId> implements Serializable,SbSin
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public void addAll(Collection<T> collection)
+	{
+		if(collection!=null)
+		{
+			for(T t : collection)
+			{
+				this.add(t);
+			}
+		}
+	}
+	public void add(T item)
+	{
+		if(!list.contains(item)) {list.add(item);}
 	}
 
 	public void clear()

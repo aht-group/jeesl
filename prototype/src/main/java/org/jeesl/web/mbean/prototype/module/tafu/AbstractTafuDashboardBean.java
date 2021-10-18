@@ -1,7 +1,6 @@
 package org.jeesl.web.mbean.prototype.module.tafu;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -225,14 +224,22 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		
 		if(task.getMarkup()==null)
 		{
-			MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+			MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.text);
 			task.setMarkup(fbTafu.ejbMarkup().build(type));
-			try {
+			try {task = fTafu.save(task);}
+			catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
+		}
+		
+		if(task.getMarkup().getType().getCode().equals(JeeslIoCmsMarkupType.Code.xhtml.toString()))
+		{
+			try
+			{
+				logger.info("Changing type to text");
+				MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.text);
+				task.getMarkup().setType(type);
 				task = fTafu.save(task);
-			} catch (JeeslConstraintViolationException | JeeslLockingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+			catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 		}
 	}
 	
@@ -240,7 +247,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbTafu.getClassTask()));}
 		
-		MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+		MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.text);
 		task = efTask.build(realm,rref,type);
 		task.setStatus(fTafu.fByEnum(fbTafu.getClassStatus(),JeeslTafuStatus.Code.open));
 		tmpShow = java.sql.Date.valueOf(task.getRecordShow());

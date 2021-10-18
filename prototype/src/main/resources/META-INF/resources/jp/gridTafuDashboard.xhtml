@@ -96,19 +96,7 @@
 					<jp:inputCalendar  value="#{cc.attrs.bean.tmpDue}"/>
 				</p:panelGrid>
 				
-				
-				<p:textEditor value="#{cc.attrs.bean.task.markup.content}" >
-					<f:facet name="toolbar">
-						<span class="ql-formats">
-							<button class="ql-bold"></button>
-							<button class="ql-italic"></button>
-						</span>
-						<span class="ql-formats">
-							<button class="ql-list" value="ordered"></button>
-							<button class="ql-list" value="bullet"></button>
-						</span>
-					</f:facet>
-				</p:textEditor>
+				<jtp:inputMarkup value="#{cc.attrs.bean.task.markup}"/>
 		</j:dialog>
 	</h:form>
 </jp:grid>
