@@ -35,6 +35,7 @@ import org.jeesl.interfaces.model.system.time.JeeslTimeDayOfWeek;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.util.time.JsonDay;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
+import org.jeesl.model.pojo.map.list.Nested2MapList;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
@@ -72,16 +73,17 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
     private final SbSingleHandler<VP> sbhViewport; public SbSingleHandler<VP> getSbhViewport() {return sbhViewport;}
     private final SbMultiHandler<DOW> sbhDow; public SbMultiHandler<DOW> getSbhDow() {return sbhDow;}
 
-    private final Nested2Map<JsonDay,DOW,T> n2m; public Nested2Map<JsonDay, DOW, T> getN2m() {return n2m;}
+    private final Nested2MapList<SC,DOW,T> n2m; public Nested2MapList<SC, DOW, T> getN2m() {return n2m;}
 
 	private final Map<DOW,Date> mapDate; public Map<DOW, Date> getMapDate() {return mapDate;}
 
     private final List<TS> status; public List<TS> getStatus() {return status;}
     private final List<SC> scopes; public List<SC> getScopes() {return scopes;}
-	private final List<JsonDay> rows; public List<JsonDay> getRows() {return rows;}
+	private final List<SC> rows; public List<SC> getRows() {return rows;}
 	private final List<T> backlog; public List<T> getBacklog() {return backlog;}
 	
 	private T task; public T getTask() {return task;} public void setTask(T task) {this.task = task;}
+	private SC emptyScope;
 	private LocalDate dateViewportBegin,dateViewportEnd;
 	
 	private Date tmpShow; public Date getTmpShow() {return tmpShow;}public void setTmpShow(Date tmpShow) {this.tmpShow = tmpShow;}
@@ -97,13 +99,24 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		sbhViewport = new SbSingleHandler<>(fbTafu.getClassViewport(),this);
 		sbhDow = new SbMultiHandler<>(fbTafu.getClassDayOfWeek(),this);
 		
-		n2m = new Nested2Map<JsonDay,DOW,T>();
+		n2m = new Nested2MapList<>();
 		mapDate = new HashMap<>();
 		
 		scopes = new ArrayList<>();
 		rows = new ArrayList<>();
 		status = new ArrayList<>();
 		backlog = new ArrayList<>();
+		
+		try {
+			emptyScope = fbTafu.getClassScope().newInstance();
+			emptyScope.setId(-1);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	protected void postConstructDashboard(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
@@ -128,7 +141,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	protected void updateRealmReference(RREF rref)
 	{
 		this.rref=rref;
-		scopes.clear();scopes.addAll(fTafu.all(fbTafu.getClassScope(),realm,rref));
+		scopes.clear();scopes.addAll(fTafu.all(fbTafu.getClassScope(),realm,rref));scopes.add(emptyScope);
 		reloadViewport();
 		reload();
 	}
@@ -191,8 +204,6 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	
 	protected void reload()
 	{
-		Map<DOW,Integer> mapFilling = new HashMap<>();
-		
 		rows.clear();
 		backlog.clear();
 		n2m.clear();
@@ -203,16 +214,12 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		for(T t : fTafu.fTafuActive(realm,rref,dateViewportBegin,dateViewportEnd))
 		{
 			DOW dow = cacheDay.ejb(t.getRecordShow().getDayOfWeek().getValue()+"");
-			if(!mapFilling.containsKey(dow)) {mapFilling.put(dow,1);}
-			else {mapFilling.put(dow,mapFilling.get(dow)+1);}
-			if(rows.size()<mapFilling.get(dow))
-			{
-				JsonDay jd = JsonDayFactory.build();
-				jd.setId(rows.size()+1);
-				rows.add(jd);
-			}
-			n2m.put(rows.get(mapFilling.get(dow)-1),dow,t);
+
+
+			if(t.getScope()==null) {n2m.put(emptyScope,dow,t);}
+			else  {n2m.put(t.getScope(),dow,t);}
 		}
+		rows.addAll(n2m.toL1());
     }
 	
 	public void selectTask(T task) {this.task=task; selectTask();}

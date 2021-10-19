@@ -35,7 +35,7 @@
 		</j:slot>
 		<j:slot id="sWeek" width="10">
 			<h:form id="fWeek">
-				<p:dataTable var="row" value="#{cc.attrs.bean.rows}" draggableRows="false">
+				<p:dataTable var="scope" value="#{cc.attrs.bean.rows}" draggableRows="false">
 					<f:facet name="header">
 						<j:dtHeader title="#{cc.attrs.bean.sbhViewport.selection.name[localeCode].lang}">
 							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTask()}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask"/>
@@ -44,18 +44,22 @@
 							<j:svg type="jeeslArrowLeft" library="jeeslGfx" listener="#{cc.attrs.bean.navigateWeek(-1)}" update=":#{cc.id}:grid" marginRight="5"/>
 						</j:dtHeader>
 					</f:facet>
-					
+					<p:column>
+						
+						<h:outputText value="#{scope.name[localeCode].lang}"/>
+					</p:column>
 					<p:columns var="d" value="#{cc.attrs.bean.sbhDow.selected}" columnIndexVar="colIndex">
 						<f:facet name="header">
 							<h:outputText value="#{d.name[localeCode].lang}" />
 						</f:facet>
 						
-						<ui:fragment>
-							<jtp:symbolizer value="#{cc.attrs.bean.n2m.m[row][d].status}"/>
-							<p:commandLink value="#{cc.attrs.bean.n2m.m[row][d].name}" action="#{cc.attrs.bean.selectTask(cc.attrs.bean.n2m.m[row][d])}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask"/>
-						</ui:fragment>
-						
-
+						<ui:repeat var="t" value="#{cc.attrs.bean.n2m.m[scope][d]}">
+							<ui:fragment>
+								<jtp:symbolizer value="#{t.status}"/>
+								<p:commandLink value="#{t.name}" action="#{cc.attrs.bean.selectTask(t)}" oncomplete="PF('testWidget').show();" update=":#{cc.id}:fTask"/>
+							</ui:fragment>
+							<br/>
+						</ui:repeat>
 						<f:facet name="footer">
 							<jp:outputDate value="#{cc.attrs.bean.mapDate[d]}" />
 						</f:facet>
