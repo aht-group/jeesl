@@ -138,12 +138,13 @@ pre code {
     width: 100%; }
 
 .ui-dialog {
-  display: none !important;
+  display: none;
   flex-direction: column;
   max-height: 80%;
   top: 50% !important;
   left: 50% !important;
-  transform: translate(-50%, -50%); }
+  transform: translate(-50%, -50%);
+  z-index: 1000; }
   .ui-dialog[aria-hidden=false] {
     display: flex !important; }
   .ui-dialog .ui-dialog-content {

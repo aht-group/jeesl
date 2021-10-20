@@ -301,12 +301,13 @@ pre {
 
 // important is necessary because primefaces uses element style on display and position.
 .ui-dialog {
-	display: none !important;
+	display: none;
 	flex-direction: column;
     max-height: 80%;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%);
+	z-index: 1000;
 
 	&[aria-hidden=false] {
 		display: flex !important;

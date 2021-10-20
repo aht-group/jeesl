@@ -1416,6 +1416,18 @@ body, .ui-widget {
         top: -17px;
         width: 42px; } }
 
+.ui-texteditor {
+  border: 1px solid #ababab; }
+  .ui-texteditor .ql-toolbar {
+    margin: 0;
+    border: solid #ababab;
+    border-width: 0 0 1px; }
+  .ui-texteditor .ql-container {
+    border: none;
+    overflow: hidden; }
+    .ui-texteditor .ql-container .ql-editor {
+      background: white; }
+
 .p-md-1 {
   flex: 0 0 auto;
   width: 8%; }
@@ -2538,7 +2550,27 @@ body, .ui-widget {
  ******************/
 /******************/
 .jeesl-panel {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  padding: 2px; }
+  .jeesl-panel .ui-texteditor {
+    border-left-width: 0;
+    border-right-width: 0;
+    margin-left: -12px;
+    margin-right: -12px; }
+    @media (max-width: 768px) {
+      .jeesl-panel .ui-texteditor {
+        margin-left: -10px;
+        margin-right: -10px; } }
+    .jeesl-panel .ui-texteditor:first-child {
+      border-top-width: 0; }
+    .jeesl-panel .ui-texteditor:last-child {
+      margin-bottom: -7px;
+      border-bottom-width: 0; }
+      @media (max-width: 768px) {
+        .jeesl-panel .ui-texteditor:last-child {
+          margin-bottom: -5px; } }
+      .jeesl-panel .ui-texteditor:last-child .ql-container {
+        border-radius: 0 0 3px 3px; }
   .jeesl-panel .ui-panel-titlebar {
     display: flex;
     height: auto;
@@ -2604,22 +2636,6 @@ body, .ui-widget {
       padding: 0; } }
   .jeesl-panel:last-child {
     margin-bottom: 0; }
-  .jeesl-panel.jeesl-editor .ui-widget-content {
-    margin: 0 -.2em -.2em;
-    padding: 0 !important; }
-    @media (max-width: 768px) {
-      .jeesl-panel.jeesl-editor .ui-widget-content {
-        margin: 0; } }
-    .jeesl-panel.jeesl-editor .ui-widget-content .ql-toolbar {
-      border: 0;
-      margin: 0; }
-    .jeesl-panel.jeesl-editor .ui-widget-content .ql-container {
-      border: solid #c4c4c4;
-      border-radius: 0 0 3px 3px;
-      border-width: 1px 0 0;
-      overflow: hidden; }
-      .jeesl-panel.jeesl-editor .ui-widget-content .ql-container .ql-editor {
-        background: white; }
   .jeesl-panel .ui-panelgrid .ui-datatable {
     margin: 0; }
     .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
@@ -2749,27 +2765,23 @@ body, .ui-widget {
           background: #c4c4c4;
           box-shadow: none; }
   .jeesl-panel .jeesl-tabs {
-    border: 0;
-    margin: 4px calc(-.2em - 10px); }
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-radius: 0;
+    margin: 5px -12px; }
     @media (max-width: 768px) {
       .jeesl-panel .jeesl-tabs {
-        margin: 4px -10px; } }
-    .jeesl-panel .jeesl-tabs.jeesl-editor:first-child {
-      margin-top: calc(-.2em - 4px); }
+        border-top: 1px solid #ababab;
+        margin: 5px -10px; } }
+    .jeesl-panel .jeesl-tabs:first-child {
+      margin-top: -7px; }
+    .jeesl-panel .jeesl-tabs:last-child {
+      border: 0;
+      margin-bottom: -7px; }
       @media (max-width: 768px) {
-        .jeesl-panel .jeesl-tabs.jeesl-editor:first-child {
-          margin-top: -4px; } }
-    .jeesl-panel .jeesl-tabs.jeesl-editor:last-child {
-      margin-bottom: calc(-.2em - 4px); }
-      @media (max-width: 768px) {
-        .jeesl-panel .jeesl-tabs.jeesl-editor:last-child {
-          margin-bottom: -4px; } }
-      .jeesl-panel .jeesl-tabs.jeesl-editor:last-child .ui-widget-content .ql-container {
-        border-bottom: 0;
-        border-radius: 0 0 3px 3px; }
-    .jeesl-panel .jeesl-tabs.jeesl-editor .ui-widget-content .ql-container {
-      border-radius: 0;
-      border-width: 1px 0; }
+        .jeesl-panel .jeesl-tabs:last-child {
+          margin-bottom: -5px; } }
   .jeesl-panel .ui-panel-content .ui-fluid .p-grid {
     position: relative; }
     @media (max-width: 768px) {
@@ -3005,7 +3017,27 @@ body, .ui-widget {
       .jeesl-content .jeesl-content-container .jeesl-grid form {
         margin-bottom: 10px; }
     .jeesl-content .jeesl-content-container .ui-panel {
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      padding: 2px; }
+      .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor {
+        border-left-width: 0;
+        border-right-width: 0;
+        margin-left: -12px;
+        margin-right: -12px; }
+        @media (max-width: 768px) {
+          .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor {
+            margin-left: -10px;
+            margin-right: -10px; } }
+        .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor:first-child {
+          border-top-width: 0; }
+        .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor:last-child {
+          margin-bottom: -7px;
+          border-bottom-width: 0; }
+          @media (max-width: 768px) {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor:last-child {
+              margin-bottom: -5px; } }
+          .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor:last-child .ql-container {
+            border-radius: 0 0 3px 3px; }
       .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar {
         display: flex;
         height: auto;
@@ -3071,22 +3103,6 @@ body, .ui-widget {
           padding: 0; } }
       .jeesl-content .jeesl-content-container .ui-panel:last-child {
         margin-bottom: 0; }
-      .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-widget-content {
-        margin: 0 -.2em -.2em;
-        padding: 0 !important; }
-        @media (max-width: 768px) {
-          .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-widget-content {
-            margin: 0; } }
-        .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-widget-content .ql-toolbar {
-          border: 0;
-          margin: 0; }
-        .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-widget-content .ql-container {
-          border: solid #c4c4c4;
-          border-radius: 0 0 3px 3px;
-          border-width: 1px 0 0;
-          overflow: hidden; }
-          .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-widget-content .ql-container .ql-editor {
-            background: white; }
       .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable {
         margin: 0; }
         .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
@@ -3216,27 +3232,23 @@ body, .ui-widget {
               background: #c4c4c4;
               box-shadow: none; }
       .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs {
-        border: 0;
-        margin: 4px calc(-.2em - 10px); }
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+        border-radius: 0;
+        margin: 5px -12px; }
         @media (max-width: 768px) {
           .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs {
-            margin: 4px -10px; } }
-        .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor:first-child {
-          margin-top: calc(-.2em - 4px); }
+            border-top: 1px solid #ababab;
+            margin: 5px -10px; } }
+        .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs:first-child {
+          margin-top: -7px; }
+        .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs:last-child {
+          border: 0;
+          margin-bottom: -7px; }
           @media (max-width: 768px) {
-            .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor:first-child {
-              margin-top: -4px; } }
-        .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor:last-child {
-          margin-bottom: calc(-.2em - 4px); }
-          @media (max-width: 768px) {
-            .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor:last-child {
-              margin-bottom: -4px; } }
-          .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor:last-child .ui-widget-content .ql-container {
-            border-bottom: 0;
-            border-radius: 0 0 3px 3px; }
-        .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor .ui-widget-content .ql-container {
-          border-radius: 0;
-          border-width: 1px 0; }
+            .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs:last-child {
+              margin-bottom: -5px; } }
       .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid {
         position: relative; }
         @media (max-width: 768px) {
@@ -3588,6 +3600,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog .ui-dialog-content {
+    padding: 5px 10px;
+    margin-bottom: 0;
     width: 100% !important; }
     @media (max-width: 768px) {
       .ui-dialog .ui-dialog-content {
@@ -3595,30 +3609,61 @@ body, .ui-widget {
     @media (max-width: 768px) {
       .ui-dialog .ui-dialog-content .ui-resizable-handle {
         display: none; } }
+    .ui-dialog .ui-dialog-content .ui-texteditor {
+      margin-left: -10px;
+      margin-right: -10px;
+      border-width: 1px 0; }
+      .ui-dialog .ui-dialog-content .ui-texteditor:first-child {
+        border-top-width: 0;
+        margin-top: -5px; }
+      .ui-dialog .ui-dialog-content .ui-texteditor:last-child {
+        border-bottom-width: 0;
+        margin-bottom: -5px; }
 
 .jeesl-tabs {
-  background: #f0f0f0; }
+  background: #f0f0f0;
+  padding: 2px; }
   @media (max-width: 768px) {
     .jeesl-tabs {
       padding: 0; } }
   .jeesl-tabs.ui-tabs-top .ui-tabs-nav {
     padding: 2px 3px 0; }
-  .jeesl-tabs.jeesl-editor .ui-widget-content {
-    margin: 0 -.2em -.2em;
-    padding: 0 !important; }
+  .jeesl-tabs.jeesl-editor .ui-texteditor {
+    border-left-width: 0;
+    border-right-width: 0;
+    margin-left: -12px;
+    margin-right: -12px; }
     @media (max-width: 768px) {
-      .jeesl-tabs.jeesl-editor .ui-widget-content {
-        margin: 0; } }
-    .jeesl-tabs.jeesl-editor .ui-widget-content .ql-toolbar {
-      border: 0;
-      margin: 0; }
-    .jeesl-tabs.jeesl-editor .ui-widget-content .ql-container {
-      border: solid #c4c4c4;
-      border-radius: 0 0 3px 3px;
-      border-width: 1px 0 0;
-      overflow: hidden; }
-      .jeesl-tabs.jeesl-editor .ui-widget-content .ql-container .ql-editor {
-        background: white; }
+      .jeesl-tabs.jeesl-editor .ui-texteditor {
+        margin-left: -10px;
+        margin-right: -10px; } }
+    .jeesl-tabs.jeesl-editor .ui-texteditor:first-child {
+      border-top-width: 0; }
+    .jeesl-tabs.jeesl-editor .ui-texteditor:last-child {
+      margin-bottom: -7px;
+      border-bottom-width: 0; }
+      @media (max-width: 768px) {
+        .jeesl-tabs.jeesl-editor .ui-texteditor:last-child {
+          margin-bottom: -5px; } }
+      .jeesl-tabs.jeesl-editor .ui-texteditor:last-child .ql-container {
+        border-radius: 0 0 3px 3px; }
+  .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
+    margin-left: -2px;
+    margin-right: -2px; }
+    @media (max-width: 768px) {
+      .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
+        margin-left: 0;
+        margin-right: 0; } }
+    .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:first-child {
+      border-top: none; }
+    .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:last-child {
+      border-bottom-width: 0;
+      margin-bottom: -2px; }
+      @media (max-width: 768px) {
+        .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:last-child {
+          margin-bottom: 0; } }
+      .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:last-child .ql-container {
+        border-radius: 0 0 3px 3px; }
   .jeesl-tabs .ui-tabs-nav {
     display: flex;
     height: auto;

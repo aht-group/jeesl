@@ -1401,37 +1401,68 @@ $enable-pointer-cursor-for-buttons: true;
 //}
 /******************/
 
-@mixin jeesl-editor {
-	.ui-widget-content {
-		margin: 0 -.2em -.2em;
-		padding: 0 !important; // overriding necessary.
+@mixin jeesl-editor-layout {
+	.ui-texteditor {
+		border-left-width: 0;
+		border-right-width: 0;
+		margin-left: (-$regular-spacing - $slim-spacing);
+		margin-right: (-$regular-spacing - $slim-spacing);
 		
 		@media (max-width: 768px) {
-			margin: 0;
+			margin-left: -$regular-spacing;
+			margin-right: -$regular-spacing;
 		}
 		
-		.ql-toolbar {
-			border: 0;
-			margin: 0;
+		&:first-child {
+			border-top-width: 0;
 		}
 		
-		.ql-container {
-			border: solid $soft-grey;
-			border-radius: $border-radius-bottom;
-			border-width: 1px 0 0;
-			overflow: hidden;
+		&:last-child {
+			margin-bottom: -$half-spacing - $slim-spacing;
+			border-bottom-width: 0;
 			
-			.ql-editor {
-				background: $white-100;
+			@media (max-width: 768px) {
+				margin-bottom: -$half-spacing;
+			}
+			
+			.ql-container {
+				border-radius: $border-radius-bottom;
 			}
 		}
 	}
+	
+//	.ui-widget-content {
+//		margin: 0 -.2em -.2em;
+//		padding: 0 !important; // overriding necessary.
+//		
+//		@media (max-width: 768px) {
+//			margin: 0;
+//		}
+//		
+//		.ql-toolbar {
+//			border: 0;
+//			margin: 0;
+//		}
+//		
+//		.ql-container {
+//			border: solid $soft-grey;
+//			border-radius: $border-radius-bottom;
+//			border-width: 1px 0 0;
+//			overflow: hidden;
+//			
+//			.ql-editor {
+//				background: $white-100;
+//			}
+//		}
+//	}
 }
 
 @mixin jeesl-panel {
+	@include jeesl-editor-layout;
 	@include jeesl-panel-titlebar;
 			
 	margin-bottom: 10px;
+	padding: $slim-spacing;
 	
 	@media (max-width: 768px) {
 		padding: 0;
@@ -1439,10 +1470,6 @@ $enable-pointer-cursor-for-buttons: true;
 	
 	&:last-child {
 		margin-bottom: 0;
-	}
-	
-	&.jeesl-editor {
-		@include jeesl-editor;
 	}
 	
 	.ui-panelgrid {
@@ -1560,44 +1587,61 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	.jeesl-tabs {
-		border: 0;
-		margin: 4px calc(-.2em - 10px);
+		border-left: 0;
+		border-right: 0;
+		border-top: 0;
+		border-radius: 0;
+		margin: $half-spacing (-$slim-spacing - $regular-spacing);
 	
 		@media (max-width: 768px) {
-			margin: 4px -10px;
+			border-top: $border;
+			margin: $half-spacing (-$regular-spacing);
+		}
+		
+		&:first-child {
+			margin-top: -$slim-spacing - $half-spacing
+		}
+		
+		&:last-child {
+			border: 0;
+			margin-bottom: (-$slim-spacing - $half-spacing);
+			
+			@media (max-width: 768px) {
+				margin-bottom: -$half-spacing;
+			}
 		}
 	
-		&.jeesl-editor {
-			&:first-child {
-				margin-top: calc(-.2em - 4px);
-				
-				@media (max-width: 768px) {
-					margin-top: -4px;
-				}
-			}
-			
-			&:last-child {
-				margin-bottom: calc(-.2em - 4px);
-				
-				@media (max-width: 768px) {
-					margin-bottom: -4px;
-				}
-				
-				.ui-widget-content {
-					.ql-container {
-						border-bottom: 0;
-						border-radius: 0 0 3px 3px;
-					}
-				}
-			}
-			
-			.ui-widget-content {
-				.ql-container {
-					border-radius: 0;
-					border-width: 1px 0;
-				}
-			}
-		}
+//		&.jeesl-editor {
+//			&:first-child {
+//				margin-top: calc(-.2em - 4px);
+//				
+//				@media (max-width: 768px) {
+//					margin-top: -4px;
+//				}
+//			}
+//			
+//			&:last-child {
+//				margin-bottom: calc(-.2em - 4px);
+//				
+//				@media (max-width: 768px) {
+//					margin-bottom: -4px;
+//				}
+//				
+//				.ui-widget-content {
+//					.ql-container {
+//						border-bottom: 0;
+//						border-radius: 0 0 3px 3px;
+//					}
+//				}
+//			}
+//			
+//			.ui-widget-content {
+//				.ql-container {
+//					border-radius: 0;
+//					border-width: 1px 0;
+//				}
+//			}
+//		}
 	}
 	
 	.ui-panel-content {
@@ -1763,6 +1807,8 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 
 	.ui-dialog-content {
+		padding: $half-spacing $regular-spacing;
+		margin-bottom: 0;
 		width: 100% !important; // Fix for primefaces incorrectly calculating width after resize.
 		
 		@media (max-width: 768px) {
@@ -1774,11 +1820,28 @@ $enable-pointer-cursor-for-buttons: true;
 				display: none;
 			}
 		}
+		
+		.ui-texteditor {
+			margin-left: -$regular-spacing;
+			margin-right: -$regular-spacing;
+			border-width: $border-width 0;
+			
+			&:first-child {
+				border-top-width: 0;
+				margin-top: -$half-spacing;
+			}
+			
+			&:last-child {
+				border-bottom-width: 0;
+				margin-bottom: -$half-spacing;
+			}
+		}
 	}
 }
 
 .jeesl-tabs {
 	background: $panel-background;
+	padding: $slim-spacing;
 	
 	@media (max-width: 768px) {
 		padding: 0;
@@ -1791,7 +1854,36 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	&.jeesl-editor {
-		@include jeesl-editor;
+		@include jeesl-editor-layout;
+		
+		.ui-tabs-panel {
+			.ui-texteditor {
+				margin-left: -$slim-spacing;
+				margin-right: -$slim-spacing;
+				
+				@media (max-width: 768px) {
+					margin-left: 0;
+					margin-right: 0;
+				}
+				
+				&:first-child {
+					border-top: none;
+				}
+				
+				&:last-child {
+					border-bottom-width: 0;
+					margin-bottom: -$slim-spacing;
+				
+					@media (max-width: 768px) {
+						margin-bottom: 0;
+					}
+				
+					.ql-container {
+						border-radius: $border-radius-bottom;
+					}
+				}
+			}
+		}
 	}
 
 	.ui-tabs-nav {

@@ -892,6 +892,25 @@ body, .ui-widget {
 	}
 }
 
+.ui-texteditor {
+	border: $border;
+	
+	.ql-toolbar {
+		margin: 0;
+		border: solid $border-colour;
+		border-width: 0 0 $border-width;
+	}
+	
+	.ql-container {
+		border: none;
+		overflow: hidden;
+	
+		.ql-editor {
+			background: $white-100;
+		}
+	}
+}
+
 @for $i from 1 to 13 {
 	.p-md-#{$i} {
 		flex: 0 0 auto;

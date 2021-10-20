@@ -18,7 +18,7 @@ html, body {
    * (See following .ui-panelgrid) */ }
   .jeeslPanel .ui-panel-content {
     flex: 1;
-    padding: 4px 10px !important;
+    padding: 5px 10px !important;
     /* Remove outer padding from input panel cells */ }
     .jeeslPanel .ui-panel-content .ui-panelgrid:first-child .ui-widget-content:first-child .ui-panelgrid-cell {
       padding-top: 0; }
@@ -74,7 +74,7 @@ html, body {
     vertical-align: middle; }
   .jeesl-panel .ui-panel-content {
     flex: 1;
-    padding: 4px 10px !important;
+    padding: 5px 10px !important;
     /* Remove outer padding from input panel cells */ }
     .jeesl-panel .ui-panel-content .ui-panelgrid:first-child .ui-widget-content:first-child .ui-panelgrid-cell {
       padding-top: 0; }
