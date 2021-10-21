@@ -215,7 +215,6 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		{
 			DOW dow = cacheDay.ejb(t.getRecordShow().getDayOfWeek().getValue()+"");
 
-
 			if(t.getScope()==null) {n2m.put(emptyScope,dow,t);}
 			else  {n2m.put(t.getScope(),dow,t);}
 		}
@@ -231,18 +230,18 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		
 		if(task.getMarkup()==null)
 		{
-			MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.text);
+			MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 			task.setMarkup(fbTafu.ejbMarkup().build(type));
 			try {task = fTafu.save(task);}
 			catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 		}
 		
-		if(task.getMarkup().getType().getCode().equals(JeeslIoCmsMarkupType.Code.xhtml.toString()))
+		if(task.getMarkup().getType().getCode().equals(JeeslIoCmsMarkupType.Code.text.toString()))
 		{
 			try
 			{
 				logger.info("Changing type to text");
-				MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.text);
+				MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 				task.getMarkup().setType(type);
 				task = fTafu.save(task);
 			}
@@ -254,7 +253,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbTafu.getClassTask()));}
 		
-		MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.text);
+		MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 		task = efTask.build(realm,rref,type);
 		task.setStatus(fTafu.fByEnum(fbTafu.getClassStatus(),JeeslTafuStatus.Code.open));
 		tmpShow = java.sql.Date.valueOf(task.getRecordShow());

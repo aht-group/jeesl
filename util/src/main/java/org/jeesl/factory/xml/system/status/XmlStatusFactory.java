@@ -53,7 +53,7 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 		Status xml = new Status();
 		xml.setGroup(group);
 		if(q.isSetId()){xml.setId(ejb.getId());}		
-		try{if(q.isSetCode()){xml.setCode(ejb.getCode());}}catch(Exception e){xml.setCode("");}
+		if(q.isSetCode()){xml.setCode(ejb.getCode());}
 		
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		if(q.isSetStyle()){xml.setStyle(ejb.getStyle());}
@@ -63,7 +63,7 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 		
 		if(q.isSetLangs()) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}		
-		try{if(q.isSetLabel() && localeCode!=null){xml.setLabel(XmlLangFactory.label(localeCode,ejb));}}catch(Exception e){xml.setLabel("");}
+		if(q.isSetLabel() && localeCode!=null){xml.setLabel(XmlLangFactory.label(localeCode,ejb));}
 		
 		if(q.isSetParent() && ejb.getParent()!=null)
 		{

@@ -50,7 +50,6 @@ public abstract class AbstractItsConfigBean <L extends JeeslLang, D extends Jees
 	private List<C> configs; public List<C> getConfigs() {return configs;}
 
 	private R realm;
-    private RREF rref;
     private C config; public C getConfig() {return config;} public void setConfig(C config) {this.config = config;}
 
 	public AbstractItsConfigBean(ItsFactoryBuilder<L,D,R,C,O,I,IS,T,TT> fbIts)
@@ -70,7 +69,6 @@ public abstract class AbstractItsConfigBean <L extends JeeslLang, D extends Jees
 	
 	protected void updateRealmReference(RREF rref)
 	{
-		this.rref=rref;
 		configs = fIts.all(fbIts.getClassConfig(),realm,rref);
 		Map<O,C> map = fbIts.ejbConfig().toMapOption(configs);
 		for(O o : fIts.all(fbIts.getClassOption()))
