@@ -103,6 +103,15 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 		else {logger.error(cT.getSimpleName()+" is not a "+EjbWithCode.class.getSimpleName());}
 		refresh();
 	}
+	public <E extends Enum<E>> void preSelect(List<T> selection)
+	{
+		for(T t : selection)
+		{
+			map.put(t,true);
+		}
+		refresh();
+	}
+	
 	public void select(T t)
 	{
 		map.put(t,true);

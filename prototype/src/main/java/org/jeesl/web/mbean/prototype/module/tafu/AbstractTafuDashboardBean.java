@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.util.time.JsonDay;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.model.pojo.map.list.Nested2MapList;
+import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
@@ -73,8 +75,11 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
     private final SbSingleHandler<VP> sbhViewport; public SbSingleHandler<VP> getSbhViewport() {return sbhViewport;}
     private final SbMultiHandler<DOW> sbhDow; public SbMultiHandler<DOW> getSbhDow() {return sbhDow;}
 
+    private final PositionComparator<SC> cpScope;
+    
     private final Nested2MapList<SC,DOW,T> n2m; public Nested2MapList<SC, DOW, T> getN2m() {return n2m;}
-
+   
+    
 	private final Map<DOW,Date> mapDate; public Map<DOW, Date> getMapDate() {return mapDate;}
 
     private final List<TS> status; public List<TS> getStatus() {return status;}
@@ -95,6 +100,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		this.fbTafu=fbTafu;
 		
 		efTask = fbTafu.ejbTask();
+		cpScope = new PositionComparator<SC>();
 		
 		sbhViewport = new SbSingleHandler<>(fbTafu.getClassViewport(),this);
 		sbhDow = new SbMultiHandler<>(fbTafu.getClassDayOfWeek(),this);
@@ -107,16 +113,14 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		status = new ArrayList<>();
 		backlog = new ArrayList<>();
 		
-		try {
+		try
+		{
 			emptyScope = fbTafu.getClassScope().newInstance();
 			emptyScope.setId(-1);
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			emptyScope.setPosition(Integer.MAX_VALUE);
 		}
+		catch (InstantiationException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
 	}
 
 	protected void postConstructDashboard(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
@@ -219,6 +223,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 			else  {n2m.put(t.getScope(),dow,t);}
 		}
 		rows.addAll(n2m.toL1());
+		Collections.sort(rows,cpScope);
     }
 	
 	public void selectTask(T task) {this.task=task; selectTask();}

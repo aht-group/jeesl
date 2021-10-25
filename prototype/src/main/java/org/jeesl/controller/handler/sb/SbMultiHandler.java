@@ -101,7 +101,6 @@ public class SbMultiHandler <T extends EjbWithId> implements Serializable
 		refresh();
 	}
 	
-	
 	@SuppressWarnings("unchecked") public <E extends Enum<E>> void preSelect(E... codes) {preRefresh(true, codes);}
 	@SuppressWarnings("unchecked") public <E extends Enum<E>> void preDeselect(E... codes) {preRefresh(false, codes);}
 	@SuppressWarnings("unchecked") public <E extends Enum<E>> void preRefresh(boolean value, E... codes)
