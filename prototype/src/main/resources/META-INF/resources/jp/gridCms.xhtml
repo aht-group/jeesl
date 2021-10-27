@@ -12,6 +12,8 @@
 		<composite:attribute name="bean" required="true"/>
 		<composite:attribute name="updateStatusBar" required="false"/>
 		<composite:attribute name="layout" required="false" default="false"/>
+		
+
 	</composite:interface>
 	
 	<composite:implementation>
@@ -161,7 +163,7 @@
 							</h:form>
 						
 							<h:form id="fParagrpah" rendered="#{(cc.attrs.bean.element.type.code eq 'paragraph') or (cc.attrs.bean.element.type.code eq 'image')}">
-								<p:panel header="#{msg.jeeslCmsElementParagraph}" styleClass="jeeslPanel jeeslEditor">
+								<p:panel header="#{msg.jeeslCmsElementParagraph}" styleClass="jeesl-panel jeesl-editor">
 									<f:facet name="actions">
 										<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveParagraph()}" update="@form" tooltip="#{msg.ttSave}"/>
 									</f:facet>
