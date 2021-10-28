@@ -39,9 +39,10 @@ public class JsonTranslationFactory <RE extends JeeslRevisionEntity<?,?,?,?,RA,?
 		return json;
 	}
 	
+	public static JsonTranslation build() {return new JsonTranslation();}
 	public static JsonTranslation build(String code, String label)
 	{
-		JsonTranslation json = new JsonTranslation();
+		JsonTranslation json = JsonTranslationFactory.build();
 		json.setCode(code);
 		json.setLabel(label);
 		return json;
