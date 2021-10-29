@@ -32,7 +32,8 @@ public class JsonTupleFactory
 	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple build(Json2Tuple<A,B> tuple)
 	{
 		JsonTuple json = build();
-		json.setCount(tuple.getCount());
+		if(tuple.getCount1()!=null) {json.setCount(tuple.getCount1());}
+		else {json.setCount(tuple.getCount());}
 		json.setSum(tuple.getSum());
 		
 		json.setId1(tuple.getId1());

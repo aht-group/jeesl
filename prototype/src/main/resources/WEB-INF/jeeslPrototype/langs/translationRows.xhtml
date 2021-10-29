@@ -5,8 +5,10 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:p="http://primefaces.org/ui"
 >
-	<c:forEach var="key" items="#{appTranslationBean.langKeys}">
-		<p:outputLabel value="#{key}"/>
-		<p:inputText value="#{value.name[key].lang}"/>
+	<c:set var="locales"  value="#{not empty locales ? locales : appTranslationBean.locales}" />
+
+	<c:forEach var="loc" items="#{locales}">
+		<p:outputLabel value="#{loc.code}"/>
+		<p:inputText value="#{value[loc.code].lang}"/>
 	</c:forEach>
 </ui:composition>

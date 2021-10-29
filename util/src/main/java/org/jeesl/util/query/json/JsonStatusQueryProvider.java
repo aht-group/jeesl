@@ -1,5 +1,6 @@
 package org.jeesl.util.query.json;
 
+import org.jeesl.model.json.system.status.JsonCategory;
 import org.jeesl.model.json.system.status.JsonInterval;
 import org.jeesl.model.json.system.status.JsonStatus;
 import org.jeesl.model.json.system.status.JsonType;
@@ -13,6 +14,15 @@ public class JsonStatusQueryProvider
 		xml.setId(Long.valueOf(0));
 		xml.setCode("");
 		return xml;
+	}
+	
+	public static JsonCategory categoryIdCodeLabel()
+	{				
+		JsonCategory json = new JsonCategory();
+		json.setId(Long.valueOf(0));
+		json.setCode("");
+		json.setLabel("");
+		return json;
 	}
 	
 	public static JsonStatus statusLabel()

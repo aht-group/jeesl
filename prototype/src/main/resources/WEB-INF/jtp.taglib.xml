@@ -28,8 +28,8 @@
         <source>jeeslPrototype/input/date.xhtml</source>
     </tag>
 	<tag>
-        <tag-name>inputMultiLangRows</tag-name>
-        <source>jeeslPrototype/langs/inputRows.xhtml</source>
+        <tag-name>translationRows</tag-name>
+        <source>jeeslPrototype/langs/translationRows.xhtml</source>
     </tag>
     <tag>
         <tag-name>inputTabMarkup</tag-name>

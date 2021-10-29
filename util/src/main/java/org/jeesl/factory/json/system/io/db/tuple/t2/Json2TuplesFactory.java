@@ -67,6 +67,8 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		map2.clear();
 	}
 	
+	public Json2Tuples<A,B> build2(){return new Json2Tuples<A,B>();}
+	
 	private void ejb2Load(Json2Tuples<A,B> json)
 	{
 		for(Json2Tuple<A,B> t : json.getTuples())

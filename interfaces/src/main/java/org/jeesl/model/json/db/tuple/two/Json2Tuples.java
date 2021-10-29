@@ -17,7 +17,6 @@ public class Json2Tuples <X extends EjbWithId, Y extends EjbWithId> implements S
 	public List<Json2Tuple<X,Y>> getTuples() {if(tuples==null){tuples = new ArrayList<Json2Tuple<X,Y>>();} return tuples;}
 	public void setTuples(List<Json2Tuple<X,Y>> tuples) {this.tuples = tuples;}
 
-
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
