@@ -5,13 +5,13 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
-		<composite:attribute name="handler" required="true"/>
+		<composite:attribute name="handler" required="true" shortDescription="A ThMultiFilterHandler for handling a list of option and  the selected ones."/>
 		<composite:attribute name="update" required="false" default="@form"/>
 		<composite:attribute name="process" required="false" default="@this"/>
 		<composite:attribute name="immediate" required="false" default="true"/>
 		<composite:attribute name="height" required="false" default="12"/>
 		<composite:attribute name="styleClass" required="false" default="12"/>
-		<composite:attribute name="header" required="false" default="false"/>
+		<composite:attribute name="header" required="false" default="false" shortDescription="If used inside j:dtHeader, it need to be true. In columns the default=false can be used."/>
 	</composite:interface>
 
 	<composite:implementation>

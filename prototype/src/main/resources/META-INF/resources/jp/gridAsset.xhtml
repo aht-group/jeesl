@@ -120,7 +120,7 @@
 						<jp:outputDate value="#{e.record}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslAssetEventType}">
-						<f:facet name="header"><jp:thMulti handler="#{cc.attrs.bean.thfEventType}"/></f:facet>
+						<f:facet name="header"><jp:thFilter handler="#{cc.attrs.bean.thfEventType}"/></f:facet>
 						<jtp:symbolizer value="#{e.type}" marginRight="5"/>
 						<h:outputText value="#{e.type.name[localeCode].lang}"/>
 					</p:column>
