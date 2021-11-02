@@ -34,9 +34,16 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
 	
     protected Configuration config()
     {
+    	String subnetConfigPrefix = test();
     	try
 		{
-    		ConfigLoader.add(ExlpCentralConfigPointer.getFile("jeesl","eapConfig"+test()).getAbsolutePath());
+    		ConfigLoader.add(ExlpCentralConfigPointer.getFile("jeesl","eapConfig"+subnetConfigPrefix).getAbsolutePath());
+    		
+		}
+		catch (ExlpConfigurationException e) {getLog().info("No specific "+ExlpCentralConfigPointer.class.getSimpleName()+" for "+subnetConfigPrefix);}
+    	
+    	try
+		{
     		ConfigLoader.add(ExlpCentralConfigPointer.getFile("jeesl","eapConfig").getAbsolutePath());
 		}
 		catch (ExlpConfigurationException e) {getLog().error("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" "+e.getMessage());}
