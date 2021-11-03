@@ -28,6 +28,7 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 	private final List<T> tmp;
 	
 	private final Map<String,JsonTranslation> mapFilter;
+	private boolean debugOnInfo;
 	
 	public XpathLazyModel()
 	{
@@ -36,6 +37,8 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 		source = new ArrayList<T>();
 		tmp = new ArrayList<T>();
 		mapFilter = new HashMap<String,JsonTranslation>();
+		
+		debugOnInfo = true;
 	}
 	
 	public void updateFiler(List<JsonTranslation> columns)
@@ -43,8 +46,12 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 		mapFilter.clear();
 		for(int i=0;i<columns.size();i++)
 		{
-			mapFilter.put("column"+i, columns.get(i));
+			String key = "column"+i;
+			JsonTranslation json = columns.get(i);
+			mapFilter.put(key,json);
+			if(debugOnInfo) {logger.info("Adding "+i+" "+key+" "+json.getXpath());}
 		}
+		if(debugOnInfo) {logger.info("Filters updated "+mapFilter.size());}
 	}
 	
 	public void clear()
@@ -91,12 +98,14 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
     
     private boolean matches(T item, Map<String,Object> filters)
 	{
+    	if(debugOnInfo) {logger.info("Matching ... "+item.toString());}
     	JXPathContext ctx = JXPathContext.newContext(item);
 		boolean match = true;
-		if (filters != null)
+		if(filters!=null)
 		{
 			for(String key : filters.keySet())
 			{
+				if(debugOnInfo) {logger.info("Filtering "+key);}
 				if(mapFilter.containsKey(key))
 				{
 					Object value = ctx.getValue(mapFilter.get(key).getXpath());
@@ -107,6 +116,15 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 					else
 					{
 						match = StringUtils.containsIgnoreCase(value.toString(), filters.get(key).toString());
+					}
+				}
+				else
+				{
+					logger.warn("The filter "+key+" is not defined");
+					logger.warn("We have the following:");
+					for(String s : mapFilter.keySet())
+					{
+						logger.info("\t"+s+" "+mapFilter.get(s).getXpath());
 					}
 				}
 				if(!match){break;}

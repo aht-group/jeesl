@@ -3,6 +3,9 @@ package org.jeesl.model.json.system.status;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.model.json.module.attribute.JsonAttributeSet;
+import org.jeesl.model.json.system.translation.JsonTranslation;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -22,4 +25,14 @@ public class JsonContainer implements Serializable
 	private List<JsonCategory> categories;
 	public List<JsonCategory> getCategories() {return categories;}
 	public void setCategories(List<JsonCategory> categories) {this.categories = categories;}
+	
+	@JsonProperty("translations")
+	private List<JsonTranslation> translations;
+	public List<JsonTranslation> getTranslations() {return translations;}
+	public void setTranslations(List<JsonTranslation> translations) {this.translations = translations;}
+	
+	@JsonProperty("attributeSet")
+	private JsonAttributeSet attributeSet;
+	public JsonAttributeSet getAttributeSet() {return attributeSet;}
+	public void setAttributeSet(JsonAttributeSet attributeSet) {this.attributeSet = attributeSet;}
 }

@@ -19,6 +19,14 @@ public class JsonAttributeOptionFactory<L extends JeeslLang, D extends JeeslDesc
 		this.localeCode=localeCode;
 		this.q=q;
 	}
+	
+	public static JsonAttributeOption build(String code, String label)
+	{
+		JsonAttributeOption json = new JsonAttributeOption();
+		json.setCode(code);
+		json.setLabel(label);
+		return json;
+	}
 		
 	public JsonAttributeOption build(OPTION ejb)
 	{

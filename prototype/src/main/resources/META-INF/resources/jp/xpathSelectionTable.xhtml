@@ -36,9 +36,8 @@
 			selection="#{cc.attrs.handler.tb}" selectionMode="single" rowKey="#{p.id}">
 		<f:facet name="header">
 			<j:dtHeader id="dth" title="#{cc.attrs.tableHeader}">
-				<h:graphicImage id="giProjectSelection" rendered="#{cc.attrs.allowAdd}" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAdd']}"/>
-				<p:tooltip for="giProjectSelection" value="#{msg.ttAdd}"/>
-				<j:icon type="jeeslRemove" rendered="#{(not empty cc.attrs.handler.tb) and (cc.attrs.allowRemove)}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}"/>
+				<j:svg id="giProjectSelection" type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.allowAdd}" />
+				<j:svg type="jeeslRemove" library="jeeslGfx" rendered="#{(not empty cc.attrs.handler.tb) and (cc.attrs.allowRemove)}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}"/>
 			</j:dtHeader>
 		</f:facet>
 		<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.selectTb}"/>
@@ -50,13 +49,13 @@
 			<j:outputXpath value="#{p}" xpath="#{column.xpath}" localeCode="#{localeCode}"/>
 		</p:columns>
 	</p:dataTable>
-	<p:overlayPanel for=":#{cc.clientId}:dtProject:dth:giProjectSelection" widgetVar="wv-#{cc.clientId}" appendToBody="false">
+	<p:overlayPanel for=":#{cc.clientId}:dtProject:dth:giProjectSelection:link" widgetVar="wv-#{cc.clientId}" appendToBody="false">
 		<p:dataTable id="dtOpContact" var="var" value="#{cc.attrs.handler.lazy}" lazy="true"
 					 selection="#{cc.attrs.handler.op}" selectionMode="single" rowKey="#{var.id}"
 					 rows="#{cc.attrs.opRows}" rowsPerPageTemplate="#{cc.attrs.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">>
 			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.addEntity()}" oncomplete="PF('wv-#{cc.clientId}').hide();"/>
 			<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 0}">
-				<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterBy" value="#{column0}"/></c:if>
+				<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterBy" value="#{var.column0}"/></c:if>
 				<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
 				<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
 				<f:facet name="header">
@@ -66,7 +65,7 @@
 				<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[0].xpath}" localeCode="#{localeCode}"/>
 			</p:column>
 			<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 1}">
-				<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterBy" value="#{column1}"/></c:if>
+				<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterBy" value="#{var.column1}"/></c:if>
 				<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
 				<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
 				<f:facet name="header">
@@ -76,7 +75,7 @@
 				<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[1].xpath}" localeCode="#{localeCode}"/>
 			</p:column>
 			<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 2}">
-				<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterBy" value="#{column2}"/></c:if>
+				<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterBy" value="#{var.column2}"/></c:if>
 				<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
 				<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
 				<f:facet name="header">

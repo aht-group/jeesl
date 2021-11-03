@@ -40,6 +40,7 @@ public class JsonTranslationFactory <RE extends JeeslRevisionEntity<?,?,?,?,RA,?
 	}
 	
 	public static JsonTranslation build() {return new JsonTranslation();}
+	public static <E extends Enum<E>> JsonTranslation build(E code, String label) {return build(code.toString(),label);}
 	public static JsonTranslation build(String code, String label)
 	{
 		JsonTranslation json = JsonTranslationFactory.build();

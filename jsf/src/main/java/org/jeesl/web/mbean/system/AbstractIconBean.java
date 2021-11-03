@@ -187,7 +187,7 @@ public class AbstractIconBean implements Serializable
 		mapStatic.put("jeeslEditGrey", "ui/jeesl/control/editGrey.png");
 		mapStatic.put("jeeslFilter", "ui/jeesl/control/filter.png");					svg.put("jeeslFilter","ui/control/calc/filter.svg");
 		mapStatic.put("jeeslMove", "ui/jeesl/control/move.png");
-		mapStatic.put("jeeslRemove", "ui/jeesl/control/remove.png");
+		mapStatic.put("jeeslRemove", "ui/jeesl/control/remove.png");					svg.put("jeeslRemove","ui/control/remove.svg");
 		mapStatic.put("jeeslRefresh", "ui/jeesl/control/refresh.png");					svg.put("jeeslRefresh","ui/control/refresh.svg");
 		mapStatic.put("jeeslClean", "ui/jeesl/control/clean.png");
 		mapStatic.put("jeeslSave", "ui/jeesl/control/save.png");						svg.put("jeeslSave","ui/control/save.svg");

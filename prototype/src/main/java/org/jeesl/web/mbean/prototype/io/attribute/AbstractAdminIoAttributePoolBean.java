@@ -62,9 +62,9 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 	}
 	
 	protected void postConstructAttributePool(R realm,
-			JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-			JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
-			JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
+								JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+								JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
+								JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
 	{
 		super.postConstructAttribute(realm,bTranslation,bMessage,bAttribute,fAttribute);
 	}
@@ -93,6 +93,19 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 			reloadCriterias();
 		}
 		sbhCategory.debug(true);
+	}
+	
+	protected void reloadCategories()
+	{
+		logger.warn("Relaoding v");
+		sbhCat.clear();
+		if(realm!=null && rref!=null)
+		{
+			List<CAT> list = fAttribute.all(fbAttribute.getClassCat(),realm,rref);
+			sbhCat.setList(list);
+		}
+		sbhCat.debug(true);
+		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassCat(),sbhCat.getList()));}
 	}
 	
 //	private void resetOption() {reset(false,false,true);}
