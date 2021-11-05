@@ -76,10 +76,10 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
     private final SbMultiHandler<DOW> sbhDow; public SbMultiHandler<DOW> getSbhDow() {return sbhDow;}
 
     private final PositionComparator<SC> cpScope;
+    private final PositionComparator<DOW> cpDow;
     
     private final Nested2MapList<SC,DOW,T> n2m; public Nested2MapList<SC, DOW, T> getN2m() {return n2m;}
    
-    
 	private final Map<DOW,Date> mapDate; public Map<DOW, Date> getMapDate() {return mapDate;}
 
     private final List<TS> status; public List<TS> getStatus() {return status;}
@@ -89,7 +89,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	
 	private T task; public T getTask() {return task;} public void setTask(T task) {this.task = task;}
 	private SC emptyScope;
-	private LocalDate dateViewportBegin,dateViewportEnd;
+	private LocalDate ldBegin,ldEnd;
 	
 	private Date tmpShow; public Date getTmpShow() {return tmpShow;}public void setTmpShow(Date tmpShow) {this.tmpShow = tmpShow;}
 	private Date tmpDue; public Date getTmpDue() {return tmpDue;} public void setTmpDue(Date tmpDue) {this.tmpDue = tmpDue;}
@@ -101,6 +101,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		
 		efTask = fbTafu.ejbTask();
 		cpScope = new PositionComparator<SC>();
+		cpDow = new PositionComparator<DOW>();
 		
 		sbhViewport = new SbSingleHandler<>(fbTafu.getClassViewport(),this);
 		sbhDow = new SbMultiHandler<>(fbTafu.getClassDayOfWeek(),this);
@@ -121,6 +122,11 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
+		
+		ldBegin = LocalDate.now();
+		logger.info("Start "+ldBegin);
+		ldBegin = ldBegin.minusDays(ldBegin.getDayOfWeek().getValue()-1);
+		logger.info("Adjusted "+ldBegin);
 	}
 
 	protected void postConstructDashboard(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
@@ -162,32 +168,32 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		
 	}
 	
-	public void cancelTask()
-	{
-		reset(true);
-	}
+	public void cancelTask() {reset(true);}
 	private void reset(boolean rTask)
 	{
 		if(rTask) {task=null;}
 	}
 	
+	public void navigateWeek(int i)
+	{
+		ldBegin = ldBegin.plusWeeks(i);
+		logger.info("Adjusted "+ldBegin);
+		reloadViewport();
+		reload();
+	}
+	
 	private void reloadViewport()
 	{
-		LocalDate ldNow = LocalDate.now();
-		
-		logger.info("Day of Week: "+ldNow.getDayOfWeek().getValue());
-		
+		sbhDow.selectNone();
 		switch(JeeslTafuViewport.Code.valueOf(sbhViewport.getSelection().getCode()))
 		{
-			case workingWeek: sbhDow.selectNone(); for(int i=0;i<5;i++) {sbhDow.preSelect(sbhDow.getList().get(i));} break;
-			case fullWeek: sbhDow.selectAll(); break;
+			case workingWeek: ldEnd = ldBegin.plusDays(4); sbhDow.preSelect(0,4); break;
+			case fullWeek: ldEnd = ldBegin.plusDays(6); sbhDow.preSelect(0,6); break;
 		}
 		
-		
-		for(int i=1;i<=sbhDow.getSelected().size();i++)
+		LocalDate ld = LocalDate.from(ldBegin);
+		while(ld.isBefore(ldEnd))
 		{
-			int offset = i-ldNow.getDayOfWeek().getValue();
-			LocalDate ld = ldNow.plusDays(offset);
 			Date d = Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
 			if(debugOnInfo) {logger.info(ld.getDayOfWeek().getValue()+" "+ld.toString());}
 			DOW dow = cacheDay.ejb(ld.getDayOfWeek().getValue()+"");
@@ -196,14 +202,10 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 				if(debugOnInfo) {logger.info(dow.toString()+" "+ld.toString());}
 				mapDate.put(dow,d);
 			}
+			ld = ld.plusDays(1);
 		}
 		
-		dateViewportBegin = mapDate.get(sbhDow.getList().get(0)).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		dateViewportEnd = dateViewportBegin.plusDays(7);
-		
-		logger.info("Viewport");
-		logger.info("\tdateVpBegin"+dateViewportBegin.toString());
-		logger.info("\tdateViewportEnd"+dateViewportEnd.toString());
+		logger.info("Viewport: "+ldBegin.toString()+" -- "+ldEnd.toString());
 	}
 	
 	protected void reload()
@@ -212,10 +214,9 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		backlog.clear();
 		n2m.clear();
 		
-		backlog.addAll(fTafu.fTafuBacklog(realm,rref,dateViewportBegin,dateViewportEnd));
+		backlog.addAll(fTafu.fTafuBacklog(realm,rref,ldBegin,ldEnd));
 		
-		
-		for(T t : fTafu.fTafuActive(realm,rref,dateViewportBegin,dateViewportEnd))
+		for(T t : fTafu.fTafuActive(realm,rref,ldBegin,ldEnd))
 		{
 			DOW dow = cacheDay.ejb(t.getRecordShow().getDayOfWeek().getValue()+"");
 

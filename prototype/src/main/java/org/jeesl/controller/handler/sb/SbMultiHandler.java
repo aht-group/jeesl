@@ -94,12 +94,21 @@ public class SbMultiHandler <T extends EjbWithId> implements Serializable
 		}
 		refresh();
 	}
-	
+	public void preSelect(int from, int to)
+	{
+		for(int i=from;i<=to;i++)
+		{
+			T t = list.get(i);
+			if(t!=null) {map.put(t,true);}
+		}
+		refresh();
+	}
 	public void preSelect(T t)
 	{
 		map.put(t,true);
 		refresh();
 	}
+	
 	
 	@SuppressWarnings("unchecked") public <E extends Enum<E>> void preSelect(E... codes) {preRefresh(true, codes);}
 	@SuppressWarnings("unchecked") public <E extends Enum<E>> void preDeselect(E... codes) {preRefresh(false, codes);}

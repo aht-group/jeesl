@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:of="http://omnifaces.org/functions"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf"
-	xmlns:jp="http://jsf.jeesl.org/prototype"
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:of="http://omnifaces.org/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aupAdm="http://ahtutils.sourceforge.net/prototype/admin"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
@@ -35,6 +27,7 @@
 					<j:icon type="jeeslIoAttributeCriteriaWithDescription" listener="#{cc.attrs.handler.toggleDescription()}" update="@form" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.withDescriptionToggle and cc.attrs.handler.showDescription}"/>
 					<j:icon type="jeeslIoAttributeCriteriaWithoutDescription" listener="#{cc.attrs.handler.toggleDescription()}" update="@form" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.withDescriptionToggle and (not cc.attrs.handler.showDescription)}"/>
 				</f:facet>
+				<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 				<ui:repeat id="repeatC" value="#{appAttributeBean.mapCriteria[cc.attrs.handler.attributeSet]}" var="c">	
 					<p:panelGrid columns="#{cc.attrs.withLabel ? 2 : 1}" columnClasses="#{cc.attrs.withLabel ? cc.attrs.columnClasses : 'jeeslGrid100'}">
 						<ui:fragment rendered="#{cc.attrs.withLabel}">
@@ -49,6 +42,7 @@
 			</p:panel>
 		</ui:fragment>
 		<ui:fragment rendered="#{not cc.attrs.withPanel}">
+			<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 			<ui:repeat id="repeatG" value="#{appAttributeBean.mapCriteria[cc.attrs.handler.attributeSet]}"  var="c">	
 				<p:panelGrid columns="#{cc.attrs.withLabel ? 2 : 1}" columnClasses="#{cc.attrs.withLabel ? cc.attrs.columnClasses : 'jeeslGrid100'}">
 					<ui:fragment rendered="#{cc.attrs.withLabel}">

@@ -1,8 +1,7 @@
-<ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:p="http://primefaces.org/ui"
     xmlns:jp="http://jsf.jeesl.org/prototype"
@@ -22,14 +21,20 @@
 		
 		
 		
-		<p:selectOneMenu id="sOne" value="#{attributeHandler.data[criteria].valueOption}" effect="fade" rendered="#{criteria.type.code eq 'selectOne'}" autoWidth="false">
-			<c:if test="#{criteria.allowEmpty}"><f:selectItem itemLabel="--"/></c:if>
+		<p:selectOneMenu id="sOne" value="#{attributeHandler.data[criteria].valueOption}"
+							rendered="#{criteria.type.code eq 'selectOne'}"
+							required="#{not criteria.allowEmpty}"
+							effect="fade" autoWidth="false">
+			<f:selectItem itemLabel="--" itemDisabled="#{not criteria.allowEmpty}"
+						pt:class="#{criteria.allowEmpty ? '' : 'jeesl-selectone-hidden'}"						/>
 			<f:selectItems value="#{appAttributeBean.mapOption[criteria]}" var="o" itemLabel="#{o.name[loc].lang}" itemValue="#{o}"/>
 		</p:selectOneMenu>
 		
 		<p:selectManyCheckbox id="sMulti" value="#{attributeHandler.options[criteria]}" layout="grid" columns="1" rendered="#{criteria.type.code eq 'selectMany'}">
 	        <f:selectItems value="#{appAttributeBean.mapOption[criteria]}" var="o" itemLabel="#{o.name[loc].lang}" itemValue="#{o.code}"/>
 	    </p:selectManyCheckbox>
+	    
+	   	<h:outputText value="#{criteria.allowEmpty}"/>
 
 	</ui:fragment>
 </ui:composition>
