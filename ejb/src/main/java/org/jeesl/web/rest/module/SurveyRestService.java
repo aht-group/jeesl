@@ -136,7 +136,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 	private final Class<CORRELATION> cCorrelation;
 	
 	private JsonContainerFactory jfContainer;
-	private JsonSurveyFactory<L,D,SURVEY,SS> jfSurvey;
+//	private JsonSurveyFactory<L,D,SURVEY,SS> jfSurvey;
 	
 	private XmlContainerFactory xfContainer;
 	private XmlStatusFactory<L,D,SS> xfStatus;

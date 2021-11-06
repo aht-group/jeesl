@@ -6,7 +6,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jeesl.model.xml.module.survey.Correlation;
 import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.module.survey.Templates;
 
