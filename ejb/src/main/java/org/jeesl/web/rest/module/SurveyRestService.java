@@ -400,12 +400,6 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		return dut.toDataUpdate();
 	}
 	
-	@Override public DataUpdate importCorrelations(Correlation correlations)
-	{
-		logger.warn("This method should be never used here! You have to implement your project-specific method!");
-		return null;
-	}
-	
 	// Survey
 	
 //	@Override

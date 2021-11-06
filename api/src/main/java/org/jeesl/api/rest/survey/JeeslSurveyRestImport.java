@@ -33,6 +33,6 @@ public interface JeeslSurveyRestImport
 	@POST  @Path("/survey") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
 	DataUpdate importSurvey(Survey survey);
 	
-	@POST  @Path("/survey/correlations") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
-	DataUpdate importCorrelations(Correlation correlations);
+//	@POST  @Path("/survey/correlations") @Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
+//	DataUpdate importCorrelations2(Correlation correlations);
 }
