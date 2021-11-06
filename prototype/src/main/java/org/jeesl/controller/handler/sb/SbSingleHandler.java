@@ -185,17 +185,33 @@ public class SbSingleHandler <T extends EjbWithId> implements Serializable,SbSin
 	public boolean isSelected(){return selection!=null;}
 	public boolean getTwiceSelected() {return previous.equals(selection);}
 
-	public void setDefault(T t)
-	{
-		if(list.contains(t)) {selection = t;}
-		else {setDefault();}
-	}
-
 	public void setDefault()
 	{
 		selection=null;
 		if(list!=null && !list.isEmpty()){selection = list.get(0);}
 	}
+	
+	public void setDefault(T t)
+	{
+		if(list.contains(t)) {selection = t;}
+		else {setDefault();}
+	}
+	
+	public <E extends Enum<E>> void  setDefault(E code)
+	{
+		if(EjbWithCode.class.isAssignableFrom(c))
+		{
+			for(T t : list)
+			{
+				if(((EjbWithCode)t).getCode().equals(code.toString()))
+				{
+					setDefault(t);
+					break;
+				}
+			}
+		}
+	}
+	
 	
 	public void selectNext() throws JeeslLockingException, JeeslConstraintViolationException
 	{

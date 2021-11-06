@@ -19,7 +19,6 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.TafuFactoryBuilder;
 import org.jeesl.factory.ejb.module.tafu.EjbTaskFactory;
-import org.jeesl.factory.json.util.JsonDayFactory;
 import org.jeesl.interfaces.bean.sb.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.SbToggleBean;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
@@ -34,8 +33,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.time.JeeslTimeDayOfWeek;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.util.time.JsonDay;
-import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.model.pojo.map.list.Nested2MapList;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.db.cache.EjbCodeCache;
@@ -76,7 +73,6 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
     private final SbMultiHandler<DOW> sbhDow; public SbMultiHandler<DOW> getSbhDow() {return sbhDow;}
 
     private final PositionComparator<SC> cpScope;
-    private final PositionComparator<DOW> cpDow;
     
     private final Nested2MapList<SC,DOW,T> n2m; public Nested2MapList<SC, DOW, T> getN2m() {return n2m;}
    
@@ -101,7 +97,6 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		
 		efTask = fbTafu.ejbTask();
 		cpScope = new PositionComparator<SC>();
-		cpDow = new PositionComparator<DOW>();
 		
 		sbhViewport = new SbSingleHandler<>(fbTafu.getClassViewport(),this);
 		sbhDow = new SbMultiHandler<>(fbTafu.getClassDayOfWeek(),this);
@@ -122,11 +117,6 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
-		
-		ldBegin = LocalDate.now();
-		logger.info("Start "+ldBegin);
-		ldBegin = ldBegin.minusDays(ldBegin.getDayOfWeek().getValue()-1);
-		logger.info("Adjusted "+ldBegin);
 	}
 
 	protected void postConstructDashboard(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
@@ -146,6 +136,11 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		sbhViewport.setList(fTafu.allOrderedPositionVisible(fbTafu.getClassViewport()));
 		sbhViewport.setDefault();
 		sbhViewport.debug();
+		
+		ldBegin = LocalDate.now();		
+		logger.info("Start "+ldBegin+" "+ldBegin.getDayOfWeek().getValue());
+		if(ldBegin.getDayOfWeek().getValue()>5) {sbhViewport.setDefault(JeeslTafuViewport.Code.fullWeek);}
+		ldBegin = ldBegin.minusDays(ldBegin.getDayOfWeek().getValue()-1);
 	}
 	
 	protected void updateRealmReference(RREF rref)
