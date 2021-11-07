@@ -15,6 +15,7 @@ import net.sf.ahtutils.xml.report.Templates;
 
 public interface JeeslIoReportRestExport
 {
+	@JeeslRestSecured
 	@GET @Path("/system/io/report/category") @Produces(MediaType.APPLICATION_XML)
 	Container exportSystemIoReportCategories();
 	

@@ -18,75 +18,80 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<aup:grid>
-			<aht:row>
-				<aht:slot id="sCategories" width="3">
-					<h:form id="fCategories"><jpSec:tableCategories bean="#{cc.attrs.bean}" update=":#{cc.id}:sCategories :#{cc.id}:sUsecases :#{cc.id}:sUsecase" withAdd="true" tooltip="#{msg.ttNew}"/></h:form>
-					<h:form id="fCategory"><jpSec:panelCategory bean="#{cc.attrs.bean}" update=":#{cc.id}:sCategories :#{cc.id}:sUsecases :#{cc.id}:sUsecase" withAdd="true" tooltip="#{msg.ttSave}"/></h:form>
-				</aht:slot>
-				<aht:slot id="sUsecases" width="3" renderChildren="#{(not empty cc.attrs.bean.category) and (cc.attrs.bean.category.id gt 0)}">
-					<h:form id="fUsecases">
-						<p:dataTable var="u" value="#{cc.attrs.bean.usecases}" draggableRows="true"
-							rendered="#{not empty cc.attrs.bean.category}"
-							selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
-							<f:facet name="header">
-								<j:dtHeader title="#{msg.aupSecurityUsecases}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectUsecase}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase"/>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderUsecases()}" update="@form"/>
-							<p:column>  
-								<h:graphicImage rendered="#{not u.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
-								<h:outputText rendered="#{u.visible}" value="#{u.position}"/>
-				            </p:column>
-				            <p:column headerText="#{msg.aupSecurityUsecase}">  
-								<h:outputText value="#{u.name[userBean.localeCode].lang}" />  
-				            </p:column>
-							<p:column rendered="#{cc.attrs.bean.uiShowDocumentation}">  
-								<h:graphicImage rendered="#{u.documentation}" name="#{iconBean.icon12['aupSecurityDocumentation']}" library="gfx"/>
-				            </p:column>
-				       	</p:dataTable>
-					</h:form>
-					<h:form id="fUsecase">
-						<p:panel header="#{msg.aupSecurityUsecase}" styleClass="jeeslPanel"
-								 rendered="#{not empty cc.attrs.bean.usecase}">
-							<f:facet name="actions">
-								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{msg.ttDelete}"/>
-							</f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-							
-								<p:outputLabel value="#{msg.jeeslSecurityCategory}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.usecase.category}" effect="fade" >
-									<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
-								</p:selectOneMenu>
-								<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
-								<p:inputText value="#{cc.attrs.bean.usecase.code}"/>
-								
-								<p:outputLabel rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{msg.aupSecurityVisible}"/>
-								<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{cc.attrs.bean.usecase.visible}"/>
-								
-								<p:outputLabel rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{msg.aupSecurityIncludeInManual}"/>
-								<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{cc.attrs.bean.usecase.documentation}"/>
-							</p:panelGrid>
-							<aht:tabTranslationEditor value="#{cc.attrs.bean.usecase}" keys="#{appTranslationBean.langKeys}" withDescription="true"/>
-						</p:panel>
-					</h:form>
-				</aht:slot>
-				<aht:slot id="sUsecase" width="6" renderChildren="#{not empty cc.attrs.bean.usecase}">
-					<h:form id="fViews"><aupSec:addViews rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
-					<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
+<jp:grid>
+	<j:row>
+		<aht:slot id="sCategories" width="3">
+			<h:form id="fCategories"><jpSec:tableCategories bean="#{cc.attrs.bean}" update=":#{cc.id}:sCategories :#{cc.id}:sUsecases :#{cc.id}:sUsecase" withAdd="true" tooltip="#{msg.ttNew}"/></h:form>
+			<h:form id="fCategory"><jpSec:panelCategory bean="#{cc.attrs.bean}" update=":#{cc.id}:sCategories :#{cc.id}:sUsecases :#{cc.id}:sUsecase" withAdd="true" tooltip="#{msg.ttSave}"/></h:form>
+		</aht:slot>
+		<aht:slot id="sUsecases" width="3" renderChildren="#{(not empty cc.attrs.bean.category) and (cc.attrs.bean.category.id gt 0)}">
+			<h:form id="fUsecases">
+				<p:dataTable var="u" value="#{cc.attrs.bean.usecases}" draggableRows="true"
+					rendered="#{not empty cc.attrs.bean.category}"
+					selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.aupSecurityUsecases}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectUsecase}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderUsecases()}" update="@form"/>
+					<p:column>  
+						<h:graphicImage rendered="#{not u.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
+						<h:outputText rendered="#{u.visible}" value="#{u.position}"/>
+		            </p:column>
+		            <p:column headerText="#{msg.aupSecurityUsecase}">  
+						<h:outputText value="#{u.name[userBean.localeCode].lang}" />  
+		            </p:column>
+					<p:column rendered="#{cc.attrs.bean.uiShowDocumentation}">  
+						<h:graphicImage rendered="#{u.documentation}" name="#{iconBean.icon12['aupSecurityDocumentation']}" library="gfx"/>
+		            </p:column>
+		       	</p:dataTable>
+			</h:form>
+			<h:form id="fUsecase">
+				<p:panel header="#{msg.aupSecurityUsecase}" styleClass="jeeslPanel"
+						 rendered="#{not empty cc.attrs.bean.usecase}">
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{msg.ttDelete}"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 					
-					<p:dataTable var="r" value="#{cc.attrs.bean.roles}" rendered="#{not empty cc.attrs.bean.usecase}">
-						<f:facet name="header"><j:dtHeader title="#{msg.aupSecurityViewAppliedToRole}"/></f:facet>
-						<p:column><h:outputText value="#{r.category.position}.#{r.position}" /></p:column>  
-			         <p:column headerText="#{msg.jeeslSecurityRole}">  
-							<h:outputText value="#{r.name[userBean.localeCode].lang}" />  
-						</p:column>
-					</p:dataTable>
-				</aht:slot>
-			</aht:row>
-	    </aup:grid>
+						<p:outputLabel value="#{msg.jeeslSecurityCategory}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.usecase.category}" effect="fade" >
+							<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
+						</p:selectOneMenu>
+						<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
+						<p:inputText value="#{cc.attrs.bean.usecase.code}"/>
+						
+						<p:outputLabel rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{msg.aupSecurityVisible}"/>
+						<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{cc.attrs.bean.usecase.visible}"/>
+						
+						<p:outputLabel rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{msg.aupSecurityIncludeInManual}"/>
+						<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{cc.attrs.bean.usecase.documentation}"/>
+					</p:panelGrid>
+					<aht:tabTranslationEditor value="#{cc.attrs.bean.usecase}" keys="#{appTranslationBean.langKeys}" withDescription="true"/>
+				</p:panel>
+			</h:form>
+		</aht:slot>
+		<j:slot id="sUsecase" width="6" renderChildren="#{not empty cc.attrs.bean.usecase}">
+			<h:form id="fViews"><aupSec:addViews rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
+			<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
+			
+			<p:dataTable var="r" value="#{cc.attrs.bean.roles}" rendered="#{not empty cc.attrs.bean.usecase}">
+				<f:facet name="header"><j:dtHeader title="#{msg.aupSecurityViewAppliedToRole}"/></f:facet>
+				<p:column><h:outputText value="#{r.category.position}.#{r.position}" /></p:column>  
+	         	<p:column>
+	         		<f:facet name="header"><jtp:label entity="SecurityRole" code="category"/></f:facet>
+					<h:outputText value="#{r.name[localeCode].lang}" />  
+				</p:column>
+	         	<p:column>
+	         		<f:facet name="header"><jtp:label entity="SecurityRole"/></f:facet>
+					<h:outputText value="#{r.name[localeCode].lang}" />  
+				</p:column>
+			</p:dataTable>
+		</j:slot>
+	</j:row>
+</jp:grid>
 	</composite:implementation>
 </html>
