@@ -19,14 +19,11 @@
 		
 		<jp:inputCalendar value="#{attributeHandler.data[criteria].valueRecord}" rendered="#{criteria.type.code eq 'date'}"/>
 		
-		
-		
 		<p:selectOneMenu id="sOne" value="#{attributeHandler.data[criteria].valueOption}"
 							rendered="#{criteria.type.code eq 'selectOne'}"
-							required="#{not criteria.allowEmpty}"
+							panelStyleClass="hideDisabled"
 							effect="fade" autoWidth="false">
-			<f:selectItem itemLabel="--" itemDisabled="#{not criteria.allowEmpty}"
-						pt:class="#{criteria.allowEmpty ? '' : 'jeesl-selectone-hidden'}"						/>
+			<f:selectItem itemLabel="--" itemDisabled="#{not criteria.allowEmpty}"/>
 			<f:selectItems value="#{appAttributeBean.mapOption[criteria]}" var="o" itemLabel="#{o.name[loc].lang}" itemValue="#{o}"/>
 		</p:selectOneMenu>
 		
@@ -34,7 +31,5 @@
 	        <f:selectItems value="#{appAttributeBean.mapOption[criteria]}" var="o" itemLabel="#{o.name[loc].lang}" itemValue="#{o.code}"/>
 	    </p:selectManyCheckbox>
 	    
-	   	<h:outputText value="#{criteria.allowEmpty}"/>
-
 	</ui:fragment>
 </ui:composition>

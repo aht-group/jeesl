@@ -9,6 +9,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeContainer;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.model.json.module.attribute.JsonAttributeData;
 import org.jeesl.model.json.module.attribute.JsonAttributeOption;
 import org.jeesl.util.db.cache.EjbIdCache;
@@ -47,7 +48,7 @@ public class EjbAttributeDataFactory<CRITERIA extends JeeslAttributeCriteria<?,?
 	public DATA build(CONTAINER container, CRITERIA criteria, JsonAttributeData json, EjbIdCache<OPTION> cacheOption)
 	{
 		DATA ejb = build(container,criteria);
-		switch(JeeslAttributeCriteria.Types.valueOf(criteria.getType().getCode()))
+		switch(JeeslAttributeType.Code.valueOf(criteria.getType().getCode()))
 		{
 			case text:	ejb.setValueString(json.getValueString()); break;
 			case remark:	ejb.setValueString(json.getValueString()); break;

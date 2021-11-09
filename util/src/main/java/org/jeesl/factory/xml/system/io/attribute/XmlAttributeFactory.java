@@ -4,6 +4,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.xml.jeesl.QueryAttribute;
@@ -40,8 +41,8 @@ public class XmlAttributeFactory <L extends JeeslLang, D extends JeeslDescriptio
 		if(q.isSetCode()) {xml.setCode(data.getCriteria().getCode());}
 		if(q.isSetLabel() && localeCode!=null && data.getCriteria().getName().containsKey(localeCode)) {xml.setLabel(data.getCriteria().getName().get(localeCode).getLang());}
 		
-		if(data.getCriteria().getType().getCode().equals(JeeslAttributeCriteria.Types.selectOne.toString()) && data.getValueOption()!=null) {xml.setOption(xfOption.build(data.getValueOption()));}
-		if(data.getCriteria().getType().getCode().equals(JeeslAttributeCriteria.Types.bool.toString()) && data.getValueBoolean()!=null) {xml.setBool(data.getValueBoolean());}
+		if(data.getCriteria().getType().getCode().equals(JeeslAttributeType.Code.selectOne.toString()) && data.getValueOption()!=null) {xml.setOption(xfOption.build(data.getValueOption()));}
+		if(data.getCriteria().getType().getCode().equals(JeeslAttributeType.Code.bool.toString()) && data.getValueBoolean()!=null) {xml.setBool(data.getValueBoolean());}
 		
 		return xml;
 	}

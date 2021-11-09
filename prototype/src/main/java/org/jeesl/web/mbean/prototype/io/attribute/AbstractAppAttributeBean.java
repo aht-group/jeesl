@@ -15,6 +15,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -75,7 +76,7 @@ public abstract class AbstractAppAttributeBean <L extends JeeslLang, D extends J
 		for(TYPE type : fAttribute.allOrderedPositionVisible(fbAttribute.getClassType()))
 		{
 			boolean add=false;
-			for(JeeslAttributeCriteria.Types t : JeeslAttributeCriteria.Types.values())
+			for(JeeslAttributeType.Code t : JeeslAttributeType.Code.values())
 			{
 				if(type.getCode().equals(t.toString())) {add=true;}
 			}

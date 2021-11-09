@@ -25,12 +25,14 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.module.attribute.JeeslWithAttributeContainer;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.util.comparator.pojo.BooleanComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -191,7 +193,13 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 			{
 				if(!data.containsKey(c))
 				{
-					data.put(c, efData.build(container, c));
+					DATA d = efData.build(container,c);
+					if(c.getType().getCode().equals(JeeslAttributeType.Code.selectOne.toString()) && !BooleanComparator.active(c.getAllowEmpty()))
+					{
+						if(bAttribute.getMapOption().containsKey(c) && !bAttribute.getMapOption().isEmpty())
+						d.setValueOption(bAttribute.getMapOption().get(c).get(0));
+					}
+					data.put(c,d);
 				}
 			}
 		}
@@ -230,7 +238,7 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 			}
 			else {d.setValueOptions(null);}
 			
-			if(d.getCriteria().getType().getCode().equals(JeeslAttributeCriteria.Types.selectOne.toString()))
+			if(d.getCriteria().getType().getCode().equals(JeeslAttributeType.Code.selectOne.toString()))
 			{
 				if(d.getValueOption()!=null)
 				{
