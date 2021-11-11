@@ -649,6 +649,8 @@ body, .ui-widget {
 
 .ui-selectonemenu-panel {
   opacity: 1; }
+  .ui-selectonemenu-panel.hide-disabled-items .ui-selectonemenu-item.ui-state-disabled {
+    display: none; }
   @media (max-width: 768px) {
     .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper {
       max-height: 400px !important; } }
@@ -835,6 +837,8 @@ body, .ui-widget {
 
 .ui-selectcheckboxmenu-panel {
   opacity: 1; }
+  .ui-selectcheckboxmenu-panel.hide-disabled-items .ui-selectonemenu-item.ui-state-disabled {
+    display: none; }
   @media (max-width: 768px) {
     .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper {
       max-height: 400px !important; } }
