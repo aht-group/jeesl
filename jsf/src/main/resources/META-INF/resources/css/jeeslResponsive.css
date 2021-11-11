@@ -2892,7 +2892,10 @@ body, .ui-widget {
       border-width: 4px 0 0; } }
 
 .ui-datatable table {
+  height: 100%;
   table-layout: auto; }
+  .ui-datatable table .cell-select label {
+    height: 100%; }
 
 .jeesl-content {
   display: flex;
