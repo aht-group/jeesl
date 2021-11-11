@@ -1678,7 +1678,14 @@ $enable-pointer-cursor-for-buttons: true;
 
 .ui-datatable {
 	table {
+		height: 100%;
 		table-layout: auto;
+		
+		.cell-select {
+			label {
+				height: 100%;
+			}
+		}
 	} 
 }
 
