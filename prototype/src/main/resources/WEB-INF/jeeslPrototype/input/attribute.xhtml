@@ -21,7 +21,7 @@
 		
 		<p:selectOneMenu id="sOne" value="#{attributeHandler.data[criteria].valueOption}"
 							rendered="#{criteria.type.code eq 'selectOne'}"
-							panelStyleClass="hideDisabled"
+							panelStyleClass="hide-disabled-items"
 							effect="fade" autoWidth="false">
 			<f:selectItem itemLabel="--" itemDisabled="#{not criteria.allowEmpty}"/>
 			<f:selectItems value="#{appAttributeBean.mapOption[criteria]}" var="o" itemLabel="#{o.name[loc].lang}" itemValue="#{o}"/>

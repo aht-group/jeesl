@@ -435,6 +435,12 @@ body, .ui-widget {
 	.#{$class}-panel {
 		opacity: 1;
 		
+		&.hide-disabled-items {
+			.ui-selectonemenu-item.ui-state-disabled {
+				display: none;
+			}
+		}
+		
 		.#{$class}-items-wrapper {
 			@media (max-width: 768px) {
 				max-height: 400px !important;
