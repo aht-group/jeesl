@@ -5,6 +5,7 @@ import java.util.Map;
 
 import net.sf.ahtutils.xml.aht.Query;
 import net.sf.ahtutils.xml.status.Category;
+import net.sf.ahtutils.xml.status.Condition;
 import net.sf.ahtutils.xml.status.Description;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Lang;
@@ -120,6 +121,15 @@ public class XmlStatusQuery
 	public static Category categoryLabel()
 	{		
 		Category xml = new Category();
+//		xml.setId(0);
+		xml.setCode("");
+		xml.setLabel("");
+		return xml;
+	}
+	
+	public static Condition conditionLabel()
+	{		
+		Condition xml = new Condition();
 //		xml.setId(0);
 		xml.setCode("");
 		xml.setLabel("");

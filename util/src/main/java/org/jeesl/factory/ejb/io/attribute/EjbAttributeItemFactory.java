@@ -47,6 +47,15 @@ public class EjbAttributeItemFactory<CRITERIA extends JeeslAttributeCriteria<?,?
 		return set;
 	}
 	
+	public CRITERIA toCriteria(List<ITEM> list, String code)
+	{
+		for(ITEM i : list)
+		{
+			if(i.getCriteria().getCode().equals(code)) {return i.getCriteria();}
+		}
+		return null;
+	}
+	
 	public ITEM clone(ITEM item, SET dstSet)
 	{
 		ITEM ejb = build(item.getCriteria(),dstSet,null);
