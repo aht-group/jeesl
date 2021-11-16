@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="dateTimePattern" required="false" default="dd.MM.yyyy"/>
+		
+		<composite:facet name="top" required="false"/>
+		<composite:facet name="bottom" required="false"/>
+	</composite:interface>
+	
+<composite:implementation>
+	<jp:grid id="grid">
+		<c:if test="#{not empty cc.facets.top}"><composite:renderFacet name="top"/></c:if>
+		<j:row>
+			<j:slot id="sCache" width="12">
+				TBD
+			</j:slot>
+		</j:row>
+		<c:if test="#{not empty cc.facets.bottom}"><composite:renderFacet name="bottom"/></c:if>
+    </jp:grid>
+</composite:implementation>
+</html>
