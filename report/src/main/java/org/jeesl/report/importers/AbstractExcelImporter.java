@@ -66,7 +66,7 @@ public abstract class AbstractExcelImporter <C extends Serializable, I extends I
     @Override
     public void rangeCheck(Boolean skipTitle)
     {
-        logger.info("Performing Range check");
+        logger.debug("Performing Range check");
         // Define the rows to begin with and to end with, whether with or without first row
         endRow   = (short) activeSheet.getLastRowNum();
         startRow = activeSheet.getFirstRowNum();
@@ -94,7 +94,7 @@ public abstract class AbstractExcelImporter <C extends Serializable, I extends I
     public Object getCellValue(short row, short column)
     {
         Cell cell = activeSheet.getRow(row).getCell(column);
-        logger.info("Value of " +row +"/" +column + " is " +DataUtil.getCellValue(cell).toString());
+        if (logger.isTraceEnabled()){logger.trace("Value of " +row +"/" +column + " is " +DataUtil.getCellValue(cell).toString());}
         return DataUtil.getCellValue(cell);
     }
 	 
@@ -105,7 +105,7 @@ public abstract class AbstractExcelImporter <C extends Serializable, I extends I
         Row excelRow = activeSheet.getRow(row);
         if (excelRow == null) 
         {
-            logger.info("There is no row " +row +" in " +activeSheet.getSheetName());
+            logger.warn("There is no row " +row +" in " +activeSheet.getSheetName());
             return false;
         }
         for(int cellNum = excelRow.getFirstCellNum(); cellNum < excelRow.getLastCellNum(); cellNum++)

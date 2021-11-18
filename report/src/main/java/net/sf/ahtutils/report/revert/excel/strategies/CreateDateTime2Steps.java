@@ -33,15 +33,17 @@ public class CreateDateTime2Steps implements ImportStrategy {
 			if (!tempPropertyStore.containsKey("datePart"))
 			{
 				tempPropertyStore.put("datePart",     utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-				logger.trace("Saved date part " +tempPropertyStore.get("datePart").toString());
-				return "";
+				if (logger.isTraceEnabled()){logger.trace("Saved date part " +tempPropertyStore.get("datePart").toString());}
+				ConvertToXmlCalendarStrategy helper = new ConvertToXmlCalendarStrategy();
+				XMLGregorianCalendar calender = (XMLGregorianCalendar)helper.handleObject(Date.from(new Date().toInstant()), "","");
+				return calender;
 			}
 			else
 			{
-			    
 				LocalDate datePart = (LocalDate) tempPropertyStore.get("datePart");
 				LocalTime timePart = utilDate.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
 				LocalDateTime dt = LocalDateTime.of(datePart, timePart);
+				if (logger.isTraceEnabled()){logger.trace("Added time part " +timePart.toString());}
 				
 				tempPropertyStore.remove("datePart");
 				ConvertToXmlCalendarStrategy helper = new ConvertToXmlCalendarStrategy();

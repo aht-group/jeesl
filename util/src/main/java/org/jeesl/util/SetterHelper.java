@@ -32,8 +32,8 @@ public class SetterHelper
             setter.invoke(targetObject, arguments);	
         } catch (Exception e)
         {
-            System.out.println("Could not set " +propertyName + " to " +parameter.toString());
-            e.printStackTrace();
+            System.err.println("Could not set " +propertyName + " to " +parameter.toString());
+            //e.printStackTrace();
         }
 
     }

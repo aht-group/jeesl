@@ -75,7 +75,7 @@ public class DataUtil {
 			
 				// String are easy to handle
 				case STRING : 
-					logger.trace("Found string " +cell.getStringCellValue());
+					if (logger.isTraceEnabled()){logger.trace("Found string " +cell.getStringCellValue());}
 					value = cell.getStringCellValue();
 					break;
 					
@@ -85,12 +85,12 @@ public class DataUtil {
 					{
 						Date date = cell.getDateCellValue();
 						DateFormat df = SimpleDateFormat.getDateInstance();
-						logger.trace("Found date " +df.format(date));
+						if (logger.isTraceEnabled()){logger.trace("Found date " +df.format(date));}
 						value = date;
 					}
 					else
 					{
-						logger.trace("Found general number " +cell.getNumericCellValue());
+						if (logger.isTraceEnabled()){logger.trace("Found general number " +cell.getNumericCellValue());}
 						value = cell.getNumericCellValue();
 					}
 					break;
@@ -99,7 +99,7 @@ public class DataUtil {
 		}
 		else
 		{
-			logger.trace("Found cell with NULL value");
+			if (logger.isTraceEnabled()){logger.trace("Found cell with NULL value");}
 		}
 		return value;
 	}
