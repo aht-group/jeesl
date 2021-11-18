@@ -83,6 +83,8 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 		else if(localeCode.equals("en")){locale = Locale.ENGLISH;}
 		else if(localeCode.equals("fr")){locale = Locale.FRENCH;}
 		else if(localeCode.equals("kin")){locale = new Locale.Builder().setLanguage("rw").setRegion("RW").build();}
+		else if(localeCode.equals("id")){locale = new Locale("id", "ID");}
+		else if(localeCode.equals("in")){locale = new Locale("id", "ID");}
 
 		logger.info("localeCode:"+localeCode+" locale"+locale);
 		

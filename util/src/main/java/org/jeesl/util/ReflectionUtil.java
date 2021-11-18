@@ -86,11 +86,11 @@ public class ReflectionUtil
             if (expression.contains("."))
             {
                 int elements = expression.split("\\.").length;
-                logger.trace("Still resolving " +elements);
+                if (logger.isTraceEnabled()){logger.trace("Still resolving " +elements);}
                 String pathToProperty = expression.substring(0, expression.indexOf("."));
-                logger.trace("Path to Property " +pathToProperty);
+                if (logger.isTraceEnabled()){logger.trace("Path to Property " +pathToProperty);}
                 String getter         = "get" +(pathToProperty.substring(0, 1).toUpperCase() + pathToProperty.substring(1));
-                logger.trace("Getter: " +getter);
+                if (logger.isTraceEnabled()){logger.trace("Getter: " +getter);}
                 Object nextObject = simpleInvokeMethod(getter,
                                 new Object[] { },
                                 parent.getClass(),
@@ -100,7 +100,7 @@ public class ReflectionUtil
             else
             {
                 String methodName = "get" +(expression.substring(0, 1).toUpperCase() + expression.substring(1));
-                logger.trace("Requesting value by invoking " +methodName + "()");
+                if (logger.isTraceEnabled()){logger.trace("Requesting value by invoking " +methodName + "()");}
                 return simpleInvokeMethod(methodName,
                                 new Object[] { },
                                 parent.getClass(),
@@ -126,15 +126,15 @@ public class ReflectionUtil
                             Class<?> targetClass,
                             Object   target)        throws Exception
     {
-        logger.trace("Invoking " +methodName);
+        if (logger.isTraceEnabled()){logger.trace("Invoking " +methodName);}
 
         // Now find the correct method
-        logger.trace("Searching for methods of class " +targetClass.getName());
+        if (logger.isTraceEnabled()){logger.trace("Searching for methods of class " +targetClass.getName());}
         Method[] methods = targetClass.getMethods();
         Method m         = null;
         for (Method method : methods)
         {
-            logger.trace("Found method " +method.getName());
+            if (logger.isTraceEnabled()){logger.trace("Found method " +method.getName());}
             if (method.getName().equals(methodName))
             {
                     m = method;
@@ -246,7 +246,7 @@ public class ReflectionUtil
 	PropertyDescriptor desc = PropertyUtils.getPropertyDescriptor(object, property);
 	for (TypeVariable t : desc.getReadMethod().getTypeParameters())
 	{
-	    logger.trace("t " +t.getTypeName());
+	    if (logger.isTraceEnabled()){logger.trace("t " +t.getTypeName());}
 	}
 	Field field = object.getClass().getField(property); 
 
@@ -254,7 +254,7 @@ public class ReflectionUtil
 
         for (Type typeArgument : type.getActualTypeArguments())
         {
-            logger.trace("  " + typeArgument);
+            if (logger.isTraceEnabled()){logger.trace("  " + typeArgument);}
         }
 	return type.getRawType().getClass();
     }
