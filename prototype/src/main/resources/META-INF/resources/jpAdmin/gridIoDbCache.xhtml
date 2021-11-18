@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
@@ -17,7 +18,24 @@
 		<c:if test="#{not empty cc.facets.top}"><composite:renderFacet name="top"/></c:if>
 		<j:row>
 			<j:slot id="sCache" width="12">
-				TBD
+				<p:dataTable var="c" value="#{cc.attrs.bean.systemCaches}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslFeatures}">
+							
+						</j:dtHeader>
+					</f:facet>
+					
+					<p:column headerText="#{msg.jeeslFeatureActive}">  
+						<h:outputText value="#{c}"/>
+					</p:column>
+					<p:column headerText="#{msg.jeeslFeatureActive}">  
+						<h:outputText value="#{cc.attrs.bean.systemStatistic[c].hits}"/>
+					</p:column>
+					<p:column headerText="#{msg.jeeslFeatureActive}">  
+						<h:outputText value="#{cc.attrs.bean.systemStatistic[c].misses}"/>
+					</p:column>
+		            
+		       	</p:dataTable>
 			</j:slot>
 		</j:row>
 		<c:if test="#{not empty cc.facets.bottom}"><composite:renderFacet name="bottom"/></c:if>

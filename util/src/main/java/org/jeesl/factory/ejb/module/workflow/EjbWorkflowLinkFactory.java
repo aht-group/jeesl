@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWithWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowLink;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +48,17 @@ public class EjbWorkflowLinkFactory<RE extends JeeslRevisionEntity<?,?,?,?,?,?>,
 		for(WL link : links)
 		{
 			map.put(link.getRefId(),link);
+		}
+		return map;
+	}
+	
+	public <T extends EjbWithId> Map<T,WL> toMapOwner(List<T> owners, List<WL> links)
+	{
+		Map<T,WL> map = new HashMap<>();
+		Map<Long,WL> ids = toMapRefId(links);
+		for(T o : owners)
+		{
+			if(ids.containsKey(o.getId())) {map.put(o,ids.get(o.getId()));}
 		}
 		return map;
 	}
