@@ -1,0 +1,862 @@
+@import '_colours';
+@import '_decimal';
+@import '_fonts';
+@import '_sizes';
+
+$border: $border-width solid $border-colour;
+
+@mixin font-dropdown {
+	font-size: $font-size-interactable;
+	font-weight: $font-weight-bold;
+	letter-spacing: normal;
+}
+
+@mixin overlay {
+	border: none;
+	border-radius: 0;
+	left: 0 !important;
+	width: 100% !important;
+}
+
+@mixin select-list($class) {
+	padding: $wide-spacing 0;
+	
+	&:before {
+		border-bottom: $separator-thickness-mobile solid $soft-grey;
+	    content: '';
+	    display: block;
+	    width: calc(100% - (2 * #{$wide-spacing}));
+	    margin: 0 $wide-spacing;
+	}
+	
+	.#{$class}-item {
+		border-radius: 0;
+		font-size: 1.2em;
+	    font-weight: 700;
+		height: $ls-element-height-mobile;
+	    line-height: calc(#{$ls-element-height-mobile} - #{$separator-thickness-mobile});
+		margin: 0;
+	    padding: 0 $wide-spacing;
+		text-shadow: none;
+		
+		&:after {
+			border-bottom: $separator-thickness-mobile solid $bright-grey;
+			content: '';
+			display: block;
+		}
+		
+		&.ui-state-hover, &:hover {
+			&:not(.ui-state-highlight) {
+				background: none;
+			}
+		}
+				
+		&.ui-state-highlight:after {
+			border-color: $white-0;
+		}
+	}
+}
+
+body, .ui-widget {
+	font-size: $font-size-mobile;
+}
+
+.ui-input-overlay {
+	@include overlay;
+}
+
+@mixin button {
+	height: $element-height-mobile;
+	min-width: $min-button-width-mobile;
+	padding: 0 $regular-spacing;
+}
+
+@mixin inputfield {
+	height: $ls-element-height-mobile;
+	line-height: calc(#{$ls-element-height-mobile} - 2 * (#{$half-spacing}));
+}
+
+@mixin icon {
+	&:before {
+		font-size: 2em;
+	}
+}
+
+.ui-button.ui-state-default {
+	@include button;
+	
+	.ui-icon {
+		@include icon;
+	}
+}
+
+.ui-chkbox .ui-chkbox-box.ui-state-default {
+	@include button;
+	
+	padding: 0;
+	width: $element-height-mobile;
+	
+	.ui-icon {
+		@include icon;
+	}
+	
+	.ui-icon-check:before {
+		padding: 7px 2px 0 0;
+	}
+}
+
+.ui-inputfield.ui-state-default {
+	@include inputfield;
+}
+
+@mixin jeesl-select($class) {
+	.#{$class}.ui-state-default {
+		.ui-inputfield {
+			@include inputfield;
+		}
+		
+		.#{$class}-trigger {
+			@include button;
+			
+			height: auto;
+			padding: 0;
+		}
+	
+		.ui-icon {
+			@include icon;
+		}
+		
+		.ui-icon-triangle-1-s:before {
+			font-size: 2.5em;
+		}
+	}
+	
+	.#{$class}-panel .#{$class}-items-wrapper {
+		max-height: 400px !important;
+		
+		.#{$class}-list {
+			@include select-list($class);
+		}
+	}
+}
+
+@include jeesl-select(ui-selectonemenu);
+@include jeesl-select(ui-selectcheckboxmenu);
+
+.ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token {
+	@include button;
+	
+	.ui-selectcheckboxmenu-token-icon {
+		margin-right: -$regular-spacing;
+		padding: 0 $regular-spacing;
+	}
+}
+
+@mixin headlined-overlay-icon {
+	font-size: $font-size-mobile;
+	height: $ls-element-height-mobile;
+	width: $ls-element-height-mobile;
+}
+
+@mixin headlined-overlay($class) {
+	padding: $wide-spacing 0;
+
+	.#{$class}-header {
+		.#{$class}-title {
+			line-height: $ls-element-height-mobile;
+		}
+		
+		.ui-icon {
+			@include icon();
+			
+			&:before {
+				font-size: 2.5em;
+			}
+		}
+	}
+}
+
+.ui-selectcheckboxmenu-panel {
+	@include headlined-overlay(ui-selectcheckboxmenu);
+	
+	.ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-close {
+		@include headlined-overlay-icon;
+	}
+}
+
+.ui-datepicker {
+	@include headlined-overlay(ui-datepicker);
+	
+	.ui-datepicker-header {
+		margin: 0;
+		
+		.ui-datepicker-prev, .ui-datepicker-next {
+			@include headlined-overlay-icon;
+		}
+	}
+	
+	.ui-datepicker-calendar {
+		margin: 0 $wide-spacing;
+		width: calc(100% - (2 * #{$wide-spacing}));
+		
+		> tbody {
+			border-width: $separator-thickness-mobile 0;
+		
+			> tr:last-child .ui-state-default {
+				margin-bottom: $slim-spacing;
+			}
+			
+			.ui-state-default {
+				font-size: $font-size-ls-mobile;
+				font-weight: $font-weight-bold;
+				line-height: calc(#{$ls-element-height-mobile} - #{$separator-thickness-mobile});
+				padding: 0;
+				
+				&:after {
+					border-bottom: $separator-thickness-mobile solid $bright-grey;
+				    content: '';
+				    display: block;
+				}
+				
+				&.ui-state-hover {
+					background: transparent;
+					
+					&:after {
+						background: none;
+					}
+				}
+			}
+		}
+	}
+	
+	.ui-timepicker-div {
+		dl {
+			dt {
+				height: $ls-element-height-mobile;
+				line-height: $ls-element-height-mobile;
+				padding-left: $ls-element-height-mobile / 2;
+			}
+			
+			dd {
+				padding-right: $ls-element-height-mobile / 2;
+			}
+		}
+		
+		.ui_tpicker_time_label {
+			height: $ls-element-height-mobile;
+			line-height: $ls-element-height-mobile;
+			padding-left: #{$regular-spacing + $half-spacing + ($ls-element-height-mobile / 2)};
+		}
+		
+		.ui_tpicker_time {
+			font-size: 1.2em;
+			height: $ls-element-height-mobile;
+			line-height: $ls-element-height-mobile;
+		}
+	}
+}
+
+.ui-slider .ui-slider-handle.ui-state-default {
+	@include button;
+	
+	margin-left: -$element-height-mobile / 2;
+	top: -($element-height-mobile / 2) + 4px;
+	width: $element-height-mobile;
+}
+
+@mixin jeesl-sb-dropdown($zindex: 1) {
+	.jeesl-dropdown-list {
+		height: 0;
+	    opacity: 1;
+	    overflow: hidden;
+		transition: opacity 0s .4s, height .4s ease-in-out, visibility 0s .4s;
+	    visibility: visible;
+	    width: 100%;
+	
+		&:before, &:after {
+			content: '';
+			display: list-item;
+			height: 15px;
+			width: 100%;
+		}
+		
+		.jeesl-dropdown-item {
+			display: list-item;
+		    opacity: 0;
+		    padding: 0 15px;
+		    transition: opacity 0s .4s;
+		    width: 100%;
+			
+			.jeesl-dropdown-item-label {
+				border-bottom: 2px;
+				display: flex;
+				height: 50px;
+				line-height: 50px;
+				margin: 0;
+				padding: 0 10px;
+				text-align: left;
+				width: 100%;
+				
+				.jeesl-dropdown-item-label-icon {
+					margin: 0;
+					padding: 9px;
+				}
+			}
+		}
+	}
+}
+
+@mixin jeesl-menu-bar {
+	height: 42px;
+	
+	.jeesl-menu-bar-list .jeesl-menu-bar-item {
+		position: initial;
+
+//		&.jeesl-active .jeesl-menu-bar-button .jeesl-menu-bar-dropdown {
+//			background: $dark-colour;
+//		}
+		
+		> * {
+			font-size: $font-size-mobile;
+		}
+
+		.jeesl-menu-bar-button {
+			transition-duration: .4s;
+			
+			.jeesl-menu-bar-button-summary {
+				display: inline-block;
+			}
+			
+			.jeesl-menu-bar-button-selected-items {
+				display: none;
+			}
+		}
+	}
+}
+
+.jeesl-header {
+	border-color: transparent;
+	
+	@include jeesl-sb-dropdown(20);
+	
+	display: inline-block;
+	
+	.jeesl-dropdown-list {
+		background: $white-100;
+		margin: 0;
+		opacity: 0;
+		top: 51px;
+		visibility: hidden;
+		
+		&.jeesl-active {
+			opacity: 1;
+			visibility: visible;
+		}
+		
+		.jeesl-dropdown-item {
+			&.jeesl-active .jeesl-dropdown-item-label {
+				color: $white-100;
+			}
+			
+			.jeesl-dropdown-item-label {
+				float: none;
+				height: 50px;
+				line-height: 50px;
+			}
+		}
+	}
+}
+
+.jeesl-breadcrumb-header {
+	@include jeesl-menu-bar;
+
+	.jeesl-menu-bar-list .jeesl-menu-bar-item {
+		&:not(:last-child) {
+			.jeesl-menu-bar-button {
+				padding-right: 36px;
+			
+				&:before, &:after {
+					border-width: 21px 1px 21px 21px;
+				}
+			}
+			
+			.jeesl-dropdown-list {
+				right: 0;
+				
+				.jeesl-dropdown-item .jeesl-dropdown-item-label {
+					&:before, &:after {
+						display: none;
+					}
+				}
+			}
+		}
+		
+		.jeesl-menu-bar-button {
+			padding: 11px 15px 10px 15px;
+			
+			a.jeesl-menu-bar-button-label {
+				display: none;
+			}
+			
+			&.jeesl-active {
+				background: $main-background-gradient 12500% 0 / 99% 100% no-repeat;
+			}
+		}
+		
+		@include jeesl-sb-dropdown(10);
+		
+		.jeesl-dropdown-list .jeesl-dropdown-item {
+			@include font-dropdown;
+			
+			&:first-child {
+				display: list-item;
+			}
+		}
+	}
+}
+
+.jeesl-status-bar {
+	@include jeesl-menu-bar;
+	
+	.jeesl-menu-bar-list {
+		.jeesl-menu-bar-item {
+			.jeesl-menu-bar-button {
+				&.jeesl-active:after {
+					opacity: 1;
+				}
+			
+				.jeesl-menu-bar-button-label {
+					font-size: $font-size-status;
+					line-height: 30px;
+				}
+			}
+			
+			@include jeesl-sb-dropdown();
+			
+			.jeesl-dropdown-list {
+				&.jeesl-dropdown-list-multi .jeesl-dropdown-item {
+					&:first-child {
+						border-top-width: 2px;
+						
+						&:before {
+							visibility: visible;
+						}
+						
+						.jeesl-dropdown-item-label {
+							padding: 0;
+						}
+					}
+					
+					.jeesl-dropdown-item-label {
+						padding-right: 0;
+						
+						.jeesl-dropdown-item-label-icon {
+							padding: 12px 0;
+							
+							&:last-child {
+								padding: 12px;
+							}
+						}
+					}
+				}
+			
+				.jeesl-dropdown-item {
+					.jeesl-dropdown-item-label {
+						@include font-dropdown;
+					
+						height: 26px;
+						padding: 6px 7px;
+						
+						.jeesl-dropdown-item-label-icon {
+							padding: 12px 0;
+							
+							&:not(:first-child) {
+								margin-left: 12px;
+							}
+							
+							&:not(:last-child) {
+								margin-right: 12px;
+							}
+						}
+					}
+					
+					&.jeesl-dropdown-multiline-item {
+						.jeesl-dropdown-item-title {
+							font-size: $font-size-ls-mobile;
+							line-height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+							height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+						}
+						
+						.jeesl-dropdown-item-content {
+							font-size: $font-size-ls-mobile;
+							line-height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+							height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+						}
+					}
+				}
+			}
+			
+			.ui-inputgroup + .jeesl-overlay-container {
+				margin: -$slim-spacing 0 0;
+				position: absolute;
+			}
+			
+			.jeesl-overlay-container {
+				@include overlay;
+				
+				.jeesl-overlay-wrapper .ui-selectonemenu-list {
+					@include select-list(ui-selectonemenu);
+					
+					overflow: hidden;
+				
+					.ui-selectonemenu-item {
+						height: auto;
+						
+						.ui-selectonemenu-item-text {
+							font-weight: $font-weight-bold;
+							font-size: $font-size-ls-mobile;
+							height: $ls-element-height-mobile;
+						}
+					
+						.jeesl-field-tip {
+							font-size: $font-size-mobile;
+							height: 0;
+							margin-top: 0;
+							overflow: hidden;
+							position: relative;
+							transition: height .2s linear;
+							width: 100%;
+							
+							.jeesl-field-tip-content {
+								@include overlay;
+								
+								box-shadow: none;
+								padding: 0 $wide-spacing;
+								position: relative;
+								opacity: 1;
+								top: 0;
+								
+								.jeesl-grid {
+									margin: 0;
+									padding-bottom: 5px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		.jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-menu-bar-item .jeesl-menu-bar-button .ui-inputfield {
+			width: 88px;
+		}
+	}
+}
+
+@mixin jeesl-titlebar {
+	border: none;
+	border-radius: $border-radius-top;
+	
+	&:after {
+		display: block;
+	}
+}
+
+@mixin jeesl-titlebar-title {
+	font-size: $font-size-header;
+	letter-spacing: -.5px;
+    line-height: 42px;
+}
+
+@mixin jeesl-titlebar-actions {
+	.pf-action-icon, .jeesl-action-icon {
+		padding: 7px 0 6px;
+		
+		&:before {
+		    border-left: 1px solid #a8a8a8;
+		}
+		
+		img {
+			height: 29px;
+			padding: 0 6px;
+		}
+	}
+}
+
+@mixin jeesl-panel-titlebar {
+	.ui-panel-titlebar {
+		@include jeesl-titlebar;
+		
+		.ui-panel-title {
+			@include jeesl-titlebar-title;
+		}
+		
+		.ui-panel-actions {
+			@include jeesl-titlebar-actions;
+		}
+	}
+}
+
+@mixin jeesl-table-titlebar {
+	.ui-datatable-header {
+		@include jeesl-titlebar;
+		
+		.pf-datatable-header-title {
+			@include jeesl-titlebar-title;
+		}
+		
+		.pf-datatable-header-actions {
+			@include jeesl-titlebar-actions;
+		}
+	}
+}
+
+@mixin jeesl-dialog-titlebar {
+	.ui-dialog-titlebar {
+		@include jeesl-titlebar;
+		
+		pointer-events: none;
+		
+		> .ui-dialog-title {
+			.ui-dialog-title {
+				@include jeesl-titlebar-title;
+			}
+			
+			.ui-dialog-titlebar-actions {
+				@include jeesl-titlebar-actions;
+				
+				pointer-events: all;
+			}
+		}
+	}
+}
+
+@mixin input-grid {
+	.ui-fluid .p-grid {
+		display: block;
+		padding: 4px 0 0;
+		
+		.p-col {
+			&.ui-outputlabel {
+				left: 50%;
+				line-height: 14px;
+				padding: 0;
+				position: absolute;
+				top: 0;
+				transform: translate(-50%, 0);
+				width: auto;
+				z-index: 1;
+				
+				&:first-child {
+					left: 15px;
+					transform: none;
+				}
+				
+				&:last-child {
+					left: auto;
+					right: 15px;
+					transform: none;
+				}
+			}
+			
+			&:not(.ui-outputlabel) {
+				height: 56px;
+			    line-height: 50px;
+			    padding: 3px 0;
+
+				// Overriding inline css
+				width: 100% !important;
+
+				> * {
+					padding-left: 0;
+					width: 100%;
+					
+					> .ui-inputfield {
+						padding-left: $regular-spacing;
+					}
+				}
+				
+				> span {
+					background: $light-grey;
+				}
+			}
+		}
+	}
+}
+
+@mixin jeesl-editor-layout {
+	.ui-texteditor {
+		margin-left: -$regular-spacing;
+		margin-right: -$regular-spacing;
+		
+		&:last-child {
+			margin-bottom: -$half-spacing;
+		}
+	}
+}
+
+@mixin jeesl-panel {
+	@include jeesl-editor-layout;
+	@include jeesl-panel-titlebar;
+			
+	padding: 0;
+	
+	.ui-panelgrid .ui-datatable {
+		@include jeesl-table-titlebar;
+	}
+	
+	.ui-tree .ui-treenode .ui-treenode-content {
+		@include font-interactable;
+		
+		border-bottom: 2px solid $soft-grey;
+		height: 50px;
+		line-height: 50px;
+		
+		&.ui-droppable {
+			height: 46px;
+			line-height: 42px;
+		}
+		
+		.ui-treenode-leaf-icon {
+			display: none;
+			
+			~ .ui-treenode-label {
+				padding-left: 43px;
+			}
+		}
+		
+		.ui-tree-toggler {
+			width: 40px;
+			
+			&:after {
+				border-width: 8px 0 8px 8px;
+			}
+		}
+	}
+	
+	.jeesl-tabs {
+		border-top: $border;
+		margin: $half-spacing (-$regular-spacing);
+		
+		&:last-child {
+			margin-bottom: -$half-spacing;
+		}
+	}
+	
+	.ui-panel-content {
+		@include input-grid;
+		
+		.ui-separator {
+			background: $light-grey;
+			height: 2px;
+			margin: 6px 0;
+		}
+	}
+	
+	.ui-panel-footer {
+		margin: 5px 0 0;
+		border-width: 4px 0 0;
+	}
+}
+
+.jeesl-panel {
+	@include jeesl-panel;
+}
+
+.jeesl-content .jeesl-content-container {
+	@for $i from 1 to 13 {
+		.jeesl-grid-#{$i} {
+			width: calc(100% - 10px);
+		}
+	}
+	
+	.ui-panel {
+		@include jeesl-panel;
+	}
+}
+
+.jeesl-content-right {
+	display: none;
+}
+
+.ui-dialog {
+	@include jeesl-dialog-titlebar;
+
+	@for $i from 1 to 13 {
+		&.jeesl-dialog-#{$i} {
+			@media (max-width: $max-content-width) {
+				width: calc(100% * (#{$i} / 12)) !important;
+			}
+	
+			left: 15px !important;
+			transform: translate(0, -50%);
+			width: calc(100% - 30px) !important;
+		}
+	}
+
+	.ui-dialog-content {
+		margin: 0;
+		
+		.ui-resizable-handle {
+			display: none;
+		}
+	}
+}
+
+.jeesl-tabs {
+	padding: 0;
+	
+	&.jeesl-editor {
+		@include jeesl-editor-layout;
+		
+		.ui-tabs-panel .ui-texteditor {
+			margin-left: 0;
+			margin-right: 0;
+			
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.ui-tabs-nav {
+		@include jeesl-titlebar;
+		
+		padding-top: 3px;
+		
+		&:after {
+			margin-left: -3px;
+			width: calc(100% + 6px);
+		}
+		
+		.ui-tabs-header {
+			@include jeesl-titlebar-title;
+			
+			height: 37px;
+			line-height: 37px;
+			top: 0 !important;
+			
+			&.ui-tabs-selected {
+			    border: 0;
+				padding: 1px;
+
+				&:before {
+					content: '';
+				}
+				
+				a {
+					color: $white-100;
+					text-shadow: none;
+				}
+			}
+		}
+	}
+}
+
+.fc .fc-head {
+	@include jeesl-titlebar;
+	
+	.fc-day-header > span {
+		@include jeesl-titlebar-title;
+	}
+}

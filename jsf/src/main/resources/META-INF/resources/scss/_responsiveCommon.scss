@@ -91,16 +91,14 @@ $border: $border-width solid $border-colour;
 			&:not(.ui-state-highlight) {
 				background: $light-grey;
 				box-shadow: none;
+				color: $dark-colour;
 				
 				@media (max-width: 768px) {
 					background: none;
-					color: $dark-colour;
 				}
 				
 				&:after {
-					@media (max-width: 768px) {
-						border-color: $dark-colour;
-					}
+					border-color: $dark-colour;
 				}
 			}
 		}
@@ -262,16 +260,16 @@ body, .ui-widget {
 }
 
 @mixin inputfield {
-	@include element-height;
-	
-    border: none;
+	border: none;
 	border-radius: $border-radius;
     box-shadow: none;
-	line-height: calc(#{$element-height} - (2 * #{$half-spacing}));
+	height: $ls-element-height;
+	line-height: calc(#{$ls-element-height} - (2 * #{$half-spacing}));
     padding: $half-spacing $slim-spacing;
 
 	@media (max-width: 768px) {
-		line-height: calc(#{$element-height-mobile} - 2 * (#{$half-spacing}));
+		height: $ls-element-height-mobile;
+		line-height: calc(#{$ls-element-height-mobile} - 2 * (#{$half-spacing}));
 	}
 	
 	&.ui-state-focus {
@@ -758,16 +756,19 @@ body, .ui-widget {
 				
 				&.ui-state-hover {
 					background: $light-grey;
+					color: $dark-colour;
 					text-shadow: none;
+					
+					&:after {
+						border-color: $dark-colour;
+						color: $dark-colour;
+					}
 					
 					@media (max-width: 768px) {
 						background: transparent;
-						color: $dark-colour;
 						
 						&:after {
 							background: none;
-							border-color: $dark-colour;
-							color: $dark-colour;
 						}
 					}
 				}
@@ -776,10 +777,8 @@ body, .ui-widget {
 					background: $dark-colour;
 					color: $white-100;
 					
-					@media (max-width: 768px) {
-						&:after {
-							border-color: $dark-colour;
-						}
+					&:after {
+						border-color: $dark-colour;
 					}
 					
 					&.ui-state-hover {
