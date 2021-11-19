@@ -858,6 +858,7 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 			.ui-inputgroup {
+				display: inline-block;
 				height: 100%;
 				padding: $slim-spacing $half-spacing;
 				
