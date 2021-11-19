@@ -2296,6 +2296,7 @@ body, .ui-widget {
           line-height: 19px;
           height: 19px; } }
   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup {
+    display: inline-block;
     height: 100%;
     padding: 2px 5px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup > * {
