@@ -554,7 +554,7 @@ body, .ui-widget {
 	
 	.#{$class}-header {
 		align-items: center;
-		background: $status-background-gradient;
+		background: statusBackgroundGradient($ls-element-height);
 		border: 0;
 		border-radius: 0;
 		color: $white-100;
@@ -563,6 +563,10 @@ body, .ui-widget {
 		margin: 0;
 		padding: 0;
 		text-shadow: none;
+		
+		@media (max-height: 768px) {
+			background: statusBackgroundGradient($ls-element-height-mobile);
+		}
 		
 		.#{$class}-title {
 			flex-grow: 1;

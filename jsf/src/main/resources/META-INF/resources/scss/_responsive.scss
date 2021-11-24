@@ -583,10 +583,15 @@ $enable-pointer-cursor-for-buttons: true;
 .jeesl-status-bar {
 	@include jeesl-menu-bar;
 	
-	background: $status-background-gradient;
-    height: 25px;
+	background: statusBackgroundGradient($sb-element-height);
+    height: auto;
 	line-height: normal;
     margin: -10px 10px 10px;
+
+	@media (max-width: 768px) {
+		background: statusBackgroundGradient($sb-element-height-mobile);
+		height: auto;
+	}
 
 	// Overriding more specific rule necessary.
 	> .jeesl-menu-bar-list {
@@ -601,7 +606,65 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	.jeesl-menu-bar-list {
+		display: flex;
+		overflow: hidden;
+		
+		@for $i from 1 to 15 {
+			> .jeesl-right:nth-child(#{$i}) {
+				order: #{15 - $i};
+			}
+		}
+		
+		> .jeesl-right:last-child {
+			flex-grow: 1;
+			text-align: right;
+		}
+		
+		.jeesl-status-bar-group {
+			padding: 0;
+			
+			&:hover {
+				background: transparent;
+				height: auto;
+			}
+			
+			&.jeesl-status-bar-center {
+				flex-grow: 1;
+			}
+			
+			&.jeesl-status-bar-left .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:first-child):before,
+			&.jeesl-status-bar-right .jeesl-status-bar-group-list > .jeesl-menu-bar-item:not(:last-child):before {
+				content: '';
+				display: inline-block;
+				position: initial;
+				left: 0;
+				top: 0;
+			}
+			
+			&.jeesl-status-bar-right  .jeesl-status-bar-group-list {
+				flex-direction: row-reverse;
+			}
+			
+			.jeesl-status-bar-group-list {
+				display: flex;
+				flex-wrap: wrap;
+				padding: 0;
+				
+				// Overwrite aupStatusBar rules
+				position: initial;
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+		
 		.jeesl-menu-bar-item {
+			height: $sb-element-height;
+			white-space: nowrap;
+			
+			@media(max-width: 768px) {
+				height: $sb-element-height-mobile;
+			}
+			
 			&:hover {
 				.jeesl-menu-bar-button {
 					background: $dark-colour;
@@ -728,6 +791,8 @@ $enable-pointer-cursor-for-buttons: true;
 			@include jeesl-sb-dropdown($white-100, $medium-colour, $dark-colour, $dark-colour);
 			
 			.jeesl-dropdown-list {
+				z-index: 3;
+				
 				&.jeesl-dropdown-list-multi {
 					.jeesl-dropdown-item {
 						&:first-child {
@@ -902,7 +967,7 @@ $enable-pointer-cursor-for-buttons: true;
 								}
 								
 								.ui-selectonemenu-item-text {
-									background: $status-background-gradient;
+									background: statusBackgroundGradient($ls-element-height-mobile);
 									color: $white-100;
 								}
 							}
@@ -920,6 +985,7 @@ $enable-pointer-cursor-for-buttons: true;
 									.jeesl-field-tip-content {
 										cursor: default;
 										opacity: 1;
+										padding: $half-spacing;
 										pointer-events: all;
 									}
 								}
@@ -1027,8 +1093,11 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.jeesl-menu-bar-calendar-item {
 			display: flex;
-			height: 100%;
-			padding: 0;
+			height: $sb-element-height;
+			
+			@media (max-width: 768px) {
+				height: $sb-element-height-mobile;
+			}
 			
 			&.jeesl-left:not(:first-child):before, &.jeesl-right:not(:last-child):before {
 				@include jeesl-sb-separator;
@@ -1041,14 +1110,19 @@ $enable-pointer-cursor-for-buttons: true;
 			.jeesl-menu-bar-calendar-item-list {
 				height: 100%;
 			    opacity: 1;
+				padding: 0;
 				position: relative;
 			    visibility: visible;
 				
 				.jeesl-calendar-icon {
 					@include vertical-center(before);
 					
-					height: 100%;
+					height: $sb-element-height;
 					padding: $sb-vertical-padding $slim-spacing;
+					
+					@media (max-width: 768px) {
+						height: $sb-element-height-mobile;
+					}
 					
 					> * {
 						height: 100%;
@@ -1072,6 +1146,7 @@ $enable-pointer-cursor-for-buttons: true;
 							width: 55px;
 							
 							@media (max-width: 768px) {
+								max-height: $sb-element-height-mobile;
 								width: 88px;
 							}
 						}

@@ -162,6 +162,8 @@ body, .ui-widget {
 	padding: $wide-spacing 0;
 
 	.#{$class}-header {
+		background: statusBackgroundGradient($ls-element-height-mobile);
+		
 		.#{$class}-title {
 			line-height: $ls-element-height-mobile;
 		}
@@ -418,8 +420,13 @@ body, .ui-widget {
 .jeesl-status-bar {
 	@include jeesl-menu-bar;
 	
+	background: statusBackgroundGradient($sb-element-height-mobile);
+	height: auto;
+	
 	.jeesl-menu-bar-list {
 		.jeesl-menu-bar-item {
+			height: $sb-element-height-mobile;
+			
 			.jeesl-menu-bar-button {
 				&.jeesl-active:after {
 					opacity: 1;
@@ -547,8 +554,15 @@ body, .ui-widget {
 			}
 		}
 		
-		.jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-menu-bar-item .jeesl-menu-bar-button .ui-inputfield {
-			width: 88px;
+		.jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list {
+			.jeesl-calendar-icon {
+				height: $sb-element-height-mobile;
+			}
+			
+			.jeesl-menu-bar-item .jeesl-menu-bar-button .ui-inputfield {
+				max-height: $sb-element-height-mobile;
+				width: 88px;
+			}
 		}
 	}
 }
