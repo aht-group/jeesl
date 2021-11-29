@@ -297,7 +297,7 @@ pre {
 }
 
 // unfortunately auGrid_* class uses display table, which prevents child size dependent on parent size, so the child sizes have to be set explicitly
-//@import 'gridContent-70';
+@import 'gridContent-70';
 
 // important is necessary because primefaces uses element style on display and position.
 .ui-dialog {
