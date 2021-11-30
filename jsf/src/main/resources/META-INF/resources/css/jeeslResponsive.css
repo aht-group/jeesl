@@ -2059,8 +2059,7 @@ body, .ui-widget {
     left: 0;
     top: 0; }
   .jeesl-status-bar .jeesl-menu-bar-list {
-    display: flex;
-    overflow: hidden; }
+    display: flex; }
     .jeesl-status-bar .jeesl-menu-bar-list > .jeesl-right:nth-child(1) {
       order: 14; }
     .jeesl-status-bar .jeesl-menu-bar-list > .jeesl-right:nth-child(2) {
@@ -2363,12 +2362,12 @@ body, .ui-widget {
                 line-height: 19px;
                 height: 19px; } }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-dropdown-multiline-item .jeesl-dropdown-item-content {
-            display: block; }
+            display: block;
+            white-space: normal; }
             @media (max-width: 768px) {
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-dropdown-multiline-item .jeesl-dropdown-item-content {
                 font-size: 1.2em;
-                line-height: 19px;
-                height: 19px; } }
+                line-height: 19px; } }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup {
         display: inline-block;
         height: 100%;

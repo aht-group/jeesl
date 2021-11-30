@@ -607,7 +607,6 @@ $enable-pointer-cursor-for-buttons: true;
 	
 	.jeesl-menu-bar-list {
 		display: flex;
-		overflow: hidden;
 		
 		@for $i from 1 to 15 {
 			> .jeesl-right:nth-child(#{$i}) {
@@ -911,11 +910,11 @@ $enable-pointer-cursor-for-buttons: true;
 						
 						.jeesl-dropdown-item-content {
 							display: block;
+							white-space: normal;
 							
 							@media (max-width: 768px) {
 								font-size: $font-size-ls-mobile;
 								line-height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
-								height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
 							}
 						}
 					}
