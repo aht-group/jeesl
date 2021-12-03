@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
@@ -161,6 +163,11 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 					{
 						M m = efMenu.build(v);
 						if(sbhContext.isSelected()) {m.setContext(sbhContext.getSelection());}
+						V parentView = searchParentView(m, opViews);
+						if(Objects.nonNull(parentView) && map.containsKey(parentView))
+						{
+							m.setParent(map.get(parentView));
+						}
 						m = fSecurity.save(m);
 						list.add(m);
 					}
@@ -170,6 +177,23 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 			}
 		}
 		return list;
+	}
+
+	private V searchParentView(M m, List<V> opViews)
+	{
+		V parentView = null;
+		String mappingUrl = m.getView().getUrlMapping();
+		if(Objects.nonNull(mappingUrl))
+		{
+			int iend = mappingUrl.lastIndexOf("/");
+			if(iend > 0)
+			{
+				String parentUrlMapping = mappingUrl.substring(0, iend);
+				Optional<V> matchingParentView = opViews.stream().filter(p -> p.getUrlMapping().equals(parentUrlMapping)).findFirst();
+				parentView = matchingParentView.orElse(null);
+			}
+		}
+		return parentView;
 	}
 
 	private void buildMenu(List<M> list)
