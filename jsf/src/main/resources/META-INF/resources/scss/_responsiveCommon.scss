@@ -121,24 +121,6 @@ $border: $border-width solid $border-colour;
 	}
 }
 
-html, body {
-	height: 100%;
-}
-
-body {
-	min-width: $min-content-width;
-	padding: $regular-spacing 0;
-}
-
-body, .ui-widget {
-	font-size: $font-size;
-	font-weight: normal;
-	
-	@media (max-width: 768px) {
-		font-size: $font-size-mobile;
-	}
-}
-
 .jeesl-left {
 	float: left;
 }

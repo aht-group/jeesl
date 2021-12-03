@@ -295,6 +295,29 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 }
 
+html, body {
+	font-size: $font-size;
+	height: 100%;
+	
+	@media (max-width: 768px) {
+		font-size: $font-size-mobile;
+	}
+}
+
+body {
+	min-width: $min-content-width;
+	padding: $regular-spacing 0;
+}
+
+body, .ui-widget {
+	font-size: $font-size;
+	font-weight: normal;
+	
+	@media (max-width: 768px) {
+		font-size: $font-size-mobile;
+	}
+}
+
 #container {
 	background: $white-100;
 	box-shadow: 0 0 $regular-spacing $medium-grey;
@@ -418,21 +441,31 @@ $enable-pointer-cursor-for-buttons: true;
 	@include jeesl-menu-bar;
 	
 	background: $dark-colour;
-    height: 30px;
+    height: auto;
     margin: 10px;
 
+	@media (max-width: 768px) {
+		height: auto;
+	}
+
 	.jeesl-menu-bar-list {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: end;
 	    right: 0;
 	    top: 0;
 
 		// Overriding aupHeadlineBreadcrumb float necessary.
 		float: none;
 		
-		// Moving breadcrumbs left without using float: right to not inverse order.
-		display: flex;
-		&:before {
-			content: '';
-			flex: 1;
+		.jeesl-subtitle {
+			@include font-regular;
+			
+			background: $dark-colour;
+			flex-grow: 1;
+			float: none;
+			padding: 0 $regular-spacing;
 		}
 
 		.jeesl-menu-bar-item {

@@ -18,6 +18,9 @@
 	<composite:implementation>
 
 	<ul class="#{cc.attrs.styleClass}">
+		<li class="jeesl-subtitle">
+			<h:outputText value="#{sessionTenantBean.context.name[localeCode].lang}" />
+		</li>
 	    <c:forEach var="menuItem" items="#{cc.attrs.value.menuItem}">
 	    	<li class="jeesl-menu-bar-item">
 	    		<label class="jeesl-menu-bar-button jeesl-menu-bar-dropdown">
