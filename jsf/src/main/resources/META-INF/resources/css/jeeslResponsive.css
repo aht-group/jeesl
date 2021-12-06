@@ -257,20 +257,6 @@ template {
 [hidden] {
   display: none !important; }
 
-html, body {
-  height: 100%; }
-
-body {
-  min-width: 400px;
-  padding: 10px 0; }
-
-body, .ui-widget {
-  font-size: 11px;
-  font-weight: normal; }
-  @media (max-width: 768px) {
-    body, .ui-widget {
-      font-size: 13px; } }
-
 .jeesl-left {
   float: left; }
 
@@ -1495,6 +1481,24 @@ body, .ui-widget {
   .input-grid .p-field .p-col:first-child {
     padding-left: 0; }
 
+html, body {
+  font-size: 11px;
+  height: 100%; }
+  @media (max-width: 768px) {
+    html, body {
+      font-size: 13px; } }
+
+body {
+  min-width: 400px;
+  padding: 10px 0; }
+
+body, .ui-widget {
+  font-size: 11px;
+  font-weight: normal; }
+  @media (max-width: 768px) {
+    body, .ui-widget {
+      font-size: 13px; } }
+
 #container {
   background: white;
   box-shadow: 0 0 10px #ababab;
@@ -1690,7 +1694,7 @@ body, .ui-widget {
   color: white;
   padding: 0;
   background: #00663a;
-  height: 30px;
+  height: auto;
   margin: 10px; }
   @media (max-width: 768px) {
     .jeesl-breadcrumb-header {
@@ -1770,14 +1774,26 @@ body, .ui-widget {
               display: none; } }
           .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-selected-items img {
             padding: 0 1px; }
+  @media (max-width: 768px) {
+    .jeesl-breadcrumb-header {
+      height: auto; } }
   .jeesl-breadcrumb-header .jeesl-menu-bar-list {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
     right: 0;
     top: 0;
-    float: none;
-    display: flex; }
-    .jeesl-breadcrumb-header .jeesl-menu-bar-list:before {
-      content: '';
-      flex: 1; }
+    float: none; }
+    .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-subtitle {
+      font-size: 1rem;
+      font-weight: normal;
+      letter-spacing: normal;
+      text-align: left;
+      background: #00663a;
+      flex-grow: 1;
+      float: none;
+      padding: 0 10px; }
     .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item:not(:last-child) .jeesl-menu-bar-button {
       padding-right: 30px; }
       .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item:not(:last-child) .jeesl-menu-bar-button:before {
