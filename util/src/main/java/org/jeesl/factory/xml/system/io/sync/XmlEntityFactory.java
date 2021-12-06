@@ -18,8 +18,6 @@ public class XmlEntityFactory
 		return xml;
 	}
 	
-	
-	
 	public static long toLong(Entity entity)
 	{
 		Long l = new Long(entity.getValue());

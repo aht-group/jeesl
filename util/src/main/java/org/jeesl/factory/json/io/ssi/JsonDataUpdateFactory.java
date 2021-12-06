@@ -1,11 +1,11 @@
 package org.jeesl.factory.json.io.ssi;
 
-import org.jeesl.model.json.system.io.ssi.DataUpdate;
+import org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate;
 
 public class JsonDataUpdateFactory
 {
-	public static DataUpdate build()
+	public static JsonSsiUpdate build()
 	{
-		return new DataUpdate();
+		return new JsonSsiUpdate();
 	}
 }

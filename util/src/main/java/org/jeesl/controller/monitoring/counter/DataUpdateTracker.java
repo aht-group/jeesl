@@ -1,5 +1,6 @@
 package org.jeesl.controller.monitoring.counter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,6 +10,8 @@ import java.util.Set;
 import org.jeesl.factory.xml.system.io.sync.XmlExceptionFactory;
 import org.jeesl.factory.xml.system.io.sync.XmlExceptionsFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
+import org.jeesl.model.json.system.io.ssi.update.JsonSsiStatistic;
+import org.jeesl.model.json.system.job.JsonJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,9 +28,12 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	public static enum Code {success,fail,partial}
 	
 	private DataUpdate update;
+	private final org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate json;
 	
 	private final Map<String,Integer> updateSuccess,updateFail;
 	private final Map<String,Integer> createSuccess,createFail;
+	
+	public static DataUpdateTracker instance() {return new DataUpdateTracker();}
 	
 	public DataUpdateTracker()
 	{
@@ -36,6 +42,10 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	public DataUpdateTracker(boolean autoStart)
 	{
 		update = new DataUpdate();
+		json = new org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate();
+		json.setJob(new JsonJob());
+		json.setStatistic(new JsonSsiStatistic());
+		
 		
 		update.setResult(new Result());
 		update.getResult().setSuccess(0);
@@ -51,20 +61,33 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		if(autoStart){start();}
 	}
 	
-	public void start()
+	public DataUpdateTracker start()
 	{
 		update.setBegin(DateUtil.getXmlGc4D(new Date(), true));
+		json.getJob().setStart(LocalDateTime.now());
+		return this;
 	}
 	
 	public void stop()
 	{
 		update.setFinished(DateUtil.getXmlGc4D(new Date(), true));
 		update.getResult().setTotal(update.getResult().getSuccess()+update.getResult().getFail());
+		
+		if(json.getJob().getEnd()==null) {json.getJob().setEnd(LocalDateTime.now());}
 	}
 	
 	public void success()
 	{
 		update.getResult().setSuccess(update.getResult().getSuccess()+1);
+		if(json.getStatistic().getSuccess()==null) {json.getStatistic().setSuccess(1);}
+		else {json.getStatistic().setSuccess(json.getStatistic().getSuccess()+1);}
+		total();
+	}
+	
+	private void total()
+	{
+		if(json.getStatistic().getTotal()==null) {json.getStatistic().setTotal(1);}
+		else {json.getStatistic().setTotal(json.getStatistic().getTotal()+1);}
 	}
 	
 	public void skip()
@@ -157,5 +180,12 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 			sb.append(" createFail:");if(createFail.containsKey(c)){sb.append(createFail.get(c));}else{sb.append(0);}
 			logger.info(sb.toString());
 		}
+	}
+	
+	public org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate toJson()
+	{
+		this.stop();
+		
+		return json;
 	}
 }

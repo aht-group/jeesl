@@ -164,4 +164,5 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	}
 	
 	public double sum(A a, B b) {return map.get(a).get(b).getSum();}
+	public double sum1(A a, B b) {return map.get(a).get(b).getSum1();}
 }

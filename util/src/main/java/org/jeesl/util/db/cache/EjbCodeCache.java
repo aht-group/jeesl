@@ -64,4 +64,14 @@ public class EjbCodeCache <T extends EjbWithCode>
 			map.put(code, fUtils.fByCode(c,code));
 		}
 	}
+	
+	public <E extends Enum<E>> boolean equals(T ejb, E code)
+	{
+		return ejb.equals(this.ejb(code));
+	}
+	
+	public <E extends Enum<E>> boolean equalsOr(T ejb, E a, E b)
+	{
+		return this.equals(ejb,a) || this.equals(ejb,b);
+	}
 }

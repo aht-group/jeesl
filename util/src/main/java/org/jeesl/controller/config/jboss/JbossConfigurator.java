@@ -269,6 +269,11 @@ public class JbossConfigurator
 		  
 		request.get("prepared-statements-cache-size").set(32);
 		request.get("share-prepared-statements").set(true);
+		
+		//Validation
+		request.get("check-valid-connection-sql").set("select 1");
+		request.get("background-validation").set(true);
+		request.get("background-validation-millis").set(5000);
 		  
 		client.execute(new OperationBuilder(request).build());
 	}
