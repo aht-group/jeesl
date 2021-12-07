@@ -1778,10 +1778,11 @@ body, .ui-widget {
     .jeesl-breadcrumb-header {
       height: auto; } }
   .jeesl-breadcrumb-header .jeesl-menu-bar-list {
-    align-items: center;
+    align-items: stretch;
     display: flex;
     flex-wrap: wrap;
     justify-content: end;
+    margin-bottom: 0;
     right: 0;
     top: 0;
     float: none; }
@@ -1793,7 +1794,11 @@ body, .ui-widget {
       background: #00663a;
       flex-grow: 1;
       float: none;
+      line-height: calc(22px + 4 * 2px);
       padding: 0 10px; }
+      @media (max-width: 768px) {
+        .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-subtitle {
+          line-height: 42px; } }
     .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item:not(:last-child) .jeesl-menu-bar-button {
       padding-right: 30px; }
       .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item:not(:last-child) .jeesl-menu-bar-button:before {

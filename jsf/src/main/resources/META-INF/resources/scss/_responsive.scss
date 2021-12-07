@@ -449,10 +449,11 @@ body, .ui-widget {
 	}
 
 	.jeesl-menu-bar-list {
-		align-items: center;
+		align-items: stretch;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: end;
+		margin-bottom: 0;
 	    right: 0;
 	    top: 0;
 
@@ -465,7 +466,12 @@ body, .ui-widget {
 			background: $dark-colour;
 			flex-grow: 1;
 			float: none;
+			line-height: calc(#{$element-height} + 4 * #{$slim-spacing});
 			padding: 0 $regular-spacing;
+			
+			@media (max-width: 768px) {
+				line-height: $element-height-mobile;
+			}
 		}
 
 		.jeesl-menu-bar-item {

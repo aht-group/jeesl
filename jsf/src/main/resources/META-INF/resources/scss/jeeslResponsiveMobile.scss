@@ -341,7 +341,9 @@ body, .ui-widget {
 	
 	@include jeesl-sb-dropdown(20);
 	
-	display: inline-block;
+	.jeesl-burger-menu-icon {
+		display: inline-block;
+	}
 	
 	.jeesl-dropdown-list {
 		background: $white-100;
@@ -424,6 +426,10 @@ body, .ui-widget {
 	height: auto;
 	
 	.jeesl-menu-bar-list {
+		.jeesl-subtitle {
+			line-height: $element-height-mobile;
+		}
+		
 		.jeesl-menu-bar-item {
 			height: $sb-element-height-mobile;
 			
