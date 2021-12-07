@@ -8,7 +8,7 @@
 let menuHeightStyle;
 let treeHeightStyle;
 
-function calculateMenuHeight() {
+var calculateMenuHeight = function() {
 	let cssRules = '@media (max-width: 768px) {';
 	
 	$('.jeesl-dropdown-list').each((index, element) => cssRules += '#' + $(element).attr('id') + '.jeesl-active { height: ' + ($(element).children('.jeesl-dropdown-item').toArray().map(child => $(child).outerHeight()).reduce((previous, current) => previous + current, 0) + 30) + 'px; }');
