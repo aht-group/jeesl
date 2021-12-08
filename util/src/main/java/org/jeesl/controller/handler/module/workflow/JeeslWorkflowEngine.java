@@ -449,13 +449,12 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		if(!constraints.isEmpty())
 		{
 			if(debugOnInfo) {logger.info("PreconditionCheck failed. Aborting.");}
-//			actionHandler.abort(entity);
 			return;
 		}
 
 		try
 		{
-			actionHandler.perform(user,transition,entity,actions);
+			entity = actionHandler.perform(user,transition,entity,actions);
 
 			workflow.setCurrentStage(transition.getDestination());
 			workflow = fWorkflow.save(workflow);
