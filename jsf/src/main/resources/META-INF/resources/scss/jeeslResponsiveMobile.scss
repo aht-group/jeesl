@@ -290,7 +290,7 @@ body, .ui-widget {
 		    width: 100%;
 			
 			.jeesl-dropdown-item-label {
-				border-bottom: 2px;
+				border-bottom-width: 2px;
 				display: flex;
 				height: 50px;
 				line-height: 50px;
@@ -374,46 +374,56 @@ body, .ui-widget {
 .jeesl-breadcrumb-header {
 	@include jeesl-menu-bar;
 
-	.jeesl-menu-bar-list .jeesl-menu-bar-item {
-		&:not(:last-child) {
-			.jeesl-menu-bar-button {
-				padding-right: 36px;
-			
-				&:before, &:after {
-					border-width: 21px 1px 21px 21px;
-				}
-			}
-			
-			.jeesl-dropdown-list {
-				right: 0;
+	.jeesl-menu-bar-list {
+		.jeesl-subtitle {
+			line-height: $element-height-mobile;
+		}
+		
+		.jeesl-menu-bar-item {
+			&:not(:last-child) {
+				.jeesl-menu-bar-button {
+					padding-right: 36px;
 				
-				.jeesl-dropdown-item .jeesl-dropdown-item-label {
 					&:before, &:after {
-						display: none;
+						border-width: 21px 1px 21px 21px;
+					}
+				}
+				
+				.jeesl-dropdown-list {
+					right: 0;
+					
+					.jeesl-dropdown-item .jeesl-dropdown-item-label {
+						&:before, &:after {
+							display: none;
+						}
 					}
 				}
 			}
-		}
-		
-		.jeesl-menu-bar-button {
-			padding: 11px 15px 10px 15px;
 			
-			a.jeesl-menu-bar-button-label {
-				display: none;
+			.jeesl-menu-bar-button {
+				padding: 11px 15px 10px 15px;
+				
+				a.jeesl-menu-bar-button-label {
+					display: none;
+					
+					+ jeesl-menu-bar-button-label {
+						display: inline-block;
+					}
+				}
+				
+				&.jeesl-active {
+					background: $main-background-gradient 12500% 0 / 99% 100% no-repeat;
+				}
 			}
 			
-			&.jeesl-active {
-				background: $main-background-gradient 12500% 0 / 99% 100% no-repeat;
-			}
-		}
-		
-		@include jeesl-sb-dropdown(10);
-		
-		.jeesl-dropdown-list .jeesl-dropdown-item {
-			@include font-dropdown;
+			@include jeesl-sb-dropdown(10);
 			
-			&:first-child {
-				display: list-item;
+			.jeesl-dropdown-list .jeesl-dropdown-item {
+				@include font-dropdown;
+				
+				&:first-child {
+					display: list-item;
+				}
 			}
 		}
 	}
@@ -426,10 +436,6 @@ body, .ui-widget {
 	height: auto;
 	
 	.jeesl-menu-bar-list {
-		.jeesl-subtitle {
-			line-height: $element-height-mobile;
-		}
-		
 		.jeesl-menu-bar-item {
 			height: $sb-element-height-mobile;
 			
