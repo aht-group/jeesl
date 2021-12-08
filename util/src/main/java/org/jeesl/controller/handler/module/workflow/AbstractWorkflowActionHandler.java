@@ -87,7 +87,7 @@ public abstract class AbstractWorkflowActionHandler <WPD extends JeeslWorkflowDo
 		if(debugOnInfo) {logger.info("Performing Actions "+entity.toString());}
 		for(WA action : actions)
 		{
-			perform(user,entity,action);
+			entity = perform(user,entity,action);
 		}
 		callback.workflowCallback(entity);
 		if(bMessage!=null && transition!=null && transition.getConfirmation()!=null && transition.getConfirmation().containsKey(localeCode) && !transition.getConfirmation().get(localeCode).getLang().trim().isEmpty())
@@ -145,7 +145,6 @@ public abstract class AbstractWorkflowActionHandler <WPD extends JeeslWorkflowDo
 			EjbWithName ejb = (EjbWithName)entity;
 			ejb.setName(ejb.getName()+" "+rnd.nextInt(10));
 		}
-		
 	}
 
 	@Override public <W extends JeeslWithWorkflow<WF>> void abort(JeeslWithWorkflow<WF> entity)
