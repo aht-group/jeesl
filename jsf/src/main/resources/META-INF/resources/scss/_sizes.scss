@@ -5,6 +5,9 @@ $sb-element-height: 26px;
 $sb-element-height-mobile: 42px;
 $sb-vertical-padding: 6px;
 
+$bc-element-height: 30px;
+$bc-element-height-mobile: 42px;
+
 $ls-max-height: 200px;
 $ls-element-height: 26px;
 $ls-element-height-mobile: 50px;
@@ -61,5 +64,35 @@ $datepicker-input-width-mobile: 88px;
 	
 	@media (max-width: 768px) {
 		min-width: $min-button-width-mobile;
+	}
+}
+
+@mixin jeesl-burger-icon-size ($icon-size, $bar-width) {
+	.jeesl-burger-menu-icon {
+		height: $icon-size;
+		padding: calc(#{$icon-size - $bar-width} / 2) $wide-spacing;
+	    width: $icon-size;
+	
+		&:before {
+			margin-top: calc(-#{$icon-size} / 4);
+		}
+		
+		&:after {
+			margin-top: calc(#{$icon-size} / 4);
+		}
+		
+		&:before, &:after {
+		    height: $bar-width;
+		}
+		
+		&.jeesl-active {
+			&:before {
+				transform: translateY(calc(#{$icon-size} / 4)) rotate(-45deg);
+			}
+			
+			&:after {
+				transform: translateY(calc(-#{$icon-size} / 4)) rotate(45deg);
+			}
+		}
 	}
 }

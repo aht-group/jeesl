@@ -145,43 +145,24 @@ $enable-pointer-cursor-for-buttons: true;
 		background-clip: content-box;
 		cursor: pointer;
 		display: none;
-		height: 42px;
-		padding: 19px 15px 18px;
 		transition: .4s linear background;
 		vertical-align: top;
-	    width: 60px;
 
 		@media (max-width: 768px) {
 			display: inline-block;
-		}
-	
-		&:before {
-			margin-top: -11px;
-		}
-		
-		&:after {
-			margin-top: 16px;
 		}
 		
 		&:before, &:after {
 			background: $colour;
 		    content: '';
 			display: block;
-		    height: 5px;
+			position: absolute;
 		    transition: 0.4s;
-		    width: 30px;
+		    width: calc(100% - 2 * #{$wide-spacing});
 		}
 		
 		&.jeesl-active {
 			background-color: transparent;
-	
-			&:before {
-				transform: rotate(-45deg) translate(-8px, 6px);
-			}
-			
-			&:after {
-				transform: rotate(45deg) translate(-9px, -7px);
-			}
 		}
 	}
 }
@@ -200,7 +181,6 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	.jeesl-menu-bar-list {
-	    height: 100%;
 	    list-style: none;
 	    padding: 0;
 		pointer-events: none;
@@ -216,6 +196,7 @@ $enable-pointer-cursor-for-buttons: true;
 			height: 100%;
 		    margin: 0;
 		    padding: 0;
+			pointer-events: none;
 		    position: relative;
 		    top: 0;
 
@@ -228,11 +209,7 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 			> * {
-				font-size: $font-size;
-				
-				@media (max-width: 768px) {
-					font-size: $font-size-mobile;
-				}
+				font-size: 1rem;
 			}
 
 			.jeesl-menu-bar-button {
@@ -242,10 +219,12 @@ $enable-pointer-cursor-for-buttons: true;
 			    display: inline-block;
 			    height: 100%;
 				transition: background .2s linear;
+				pointer-events: all;
 			    position: relative;
 			    white-space: nowrap;
 
 				@media (max-width: 768px) {
+			    	height: $bc-element-height-mobile;
 					transition-duration: .4s;
 				}
 
@@ -290,6 +269,10 @@ $enable-pointer-cursor-for-buttons: true;
 						padding: 0 1px;
 					}
 				}
+			}
+			
+			.jeesl-dropdown-list {
+				pointer-events: all;
 			}
 		}
 	}
@@ -356,11 +339,16 @@ body, .ui-widget {
 	}
 	
 	@include jeesl-burger-icon($dark-colour);
+	@include jeesl-burger-icon-size($element-height-mobile, 5px);
 	
 	.jeesl-burger-menu-icon {
 		position: absolute;
 		right: 0;
 		top: 5px;
+		
+		@media (max-width: 768px) {
+			width: 60px;
+		}
 	}
 	
 	@include jeesl-sb-dropdown($anthracite, $white-100, $white-100, $bright-grey, 20);
@@ -655,6 +643,7 @@ body, .ui-widget {
 		
 		> .jeesl-right:last-child {
 			flex-grow: 1;
+			justify-content: end;
 			text-align: right;
 		}
 		
@@ -967,6 +956,7 @@ body, .ui-widget {
 				
 				> * {
 					height: 100%;
+					vertical-align: top;
 				}
 				
 				+ .jeesl-overlay-container {
@@ -1023,7 +1013,6 @@ body, .ui-widget {
 									.jeesl-field-tip-content {
 										cursor: default;
 										opacity: 1;
-										padding: $half-spacing;
 										pointer-events: all;
 									}
 								}
@@ -1131,7 +1120,7 @@ body, .ui-widget {
 		
 		.jeesl-menu-bar-calendar-item {
 			display: flex;
-			height: $sb-element-height;
+			height: 100%;
 			
 			@media (max-width: 768px) {
 				height: $sb-element-height-mobile;
@@ -1174,7 +1163,6 @@ body, .ui-widget {
 					
 					.jeesl-menu-bar-button {
 						cursor: text;
-						padding: 0;
 
 						.ui-inputfield {
 							background: transparent;
@@ -1231,25 +1219,29 @@ body, .ui-widget {
 }
 
 @mixin jeesl-titlebar {
+	align-items: center;
 	display: flex;	
 	flex-wrap: wrap;
 	height: auto;
 	margin-bottom: 2px;
+	min-height: $element-height;
 	padding: 0;
-//    padding: 0 0 0 10px;
+	position: relative;
 	
 	@media (max-width: 768px) {
-//		border: 0 solid $dark-colour;
-//		border-bottom-width: 4px;
-		border: none;
+		border-width: 0;
 		border-radius: $border-radius-top;
+		margin: 0;
+		min-height: $element-height-mobile;
 	}
 	
 	&:after {
 		background: $dark-colour;
+		bottom: 0;
 		content: '';
 		display: none;
 		height: 4px;
+		position: absolute;
 		width: 100%;
 		
 		@media (max-width: 768px) {
@@ -1262,11 +1254,11 @@ body, .ui-widget {
 	@include font-header;
 	
 	flex-grow: 1;
-	line-height: 22px;
+	//line-height: 22px;
 	padding-left: $regular-spacing;
 
 	@media (max-width: 768px) {
-	    line-height: 42px;
+	    //line-height: 42px;
 	}
 }
 
@@ -1342,6 +1334,85 @@ body, .ui-widget {
 		
 		.pf-datatable-header-actions {
 			@include jeesl-titlebar-actions;
+		}
+	}
+}
+
+@mixin jeesl-tabs-titlebar {
+	.ui-tabs-nav {
+		@include jeesl-titlebar;
+		
+		height: auto;
+			
+		@media (max-width: 768px) {
+			padding-top: 3px !important;
+			
+			&:after {
+				margin-left: -3px;
+				width: 100%;
+			}
+		}
+		
+		.ui-tabs-header {
+			align-items: center;
+			background: linear-gradient(to bottom, $light-grey 87%, $soft-grey 100%);
+			border-width: $border-width;
+			box-shadow: inset 0 1px 0 $white-100;
+			display: flex;
+			min-height: $element-height;
+			padding: 0;
+			
+			@media (max-width: 768px) {
+				border-width: $border-width;
+				margin: 0 3px 0 0;
+				min-height: $element-height-mobile;
+				top: 0 !important;
+			}
+			
+			&:hover {
+				background: linear-gradient(to bottom, #f2f2f2 87%, #c4c4c4 100%);
+			}
+			
+			&.ui-tabs-selected {
+				background: linear-gradient(to bottom, $white-100, $panel-background);
+				padding-bottom: 1px;
+				
+				@media (max-width: 768px) {
+				    border: 0;
+					padding: 1px;
+				}
+				
+				&:before {
+				    position: absolute;
+				    background: linear-gradient(to bottom, $medium-colour, $dark-colour);
+				    width: 100%;
+				    height: 100%;
+				    border-radius: inherit;
+				    left: 0;
+				    top: 0;
+				    box-shadow: inset 0 1px 0 $bright-colour;
+
+					@media (max-width: 768px) {
+						content: '';
+					}
+				}
+				
+				> a {
+					position: relative;
+					
+					@media (max-width: 768px) {
+						color: $white-100;
+						text-shadow: none;
+					}
+				}
+			}
+			
+			> a {
+				@include jeesl-titlebar-title;
+				
+				color: $anthracite;
+				padding: 0 $regular-spacing;
+			}
 		}
 	}
 }
@@ -1805,6 +1876,8 @@ body, .ui-widget {
 		@include input-grid;
 		@include image-gallery;
 		
+		overflow: auto;
+		
 		.ui-galleria {
 			border: 0;
 			margin: -6px -10px -4px;
@@ -1846,6 +1919,27 @@ body, .ui-widget {
 	} 
 }
 
+.jeesl-content-container, .jeesl-overlay-container {
+	line-height: 1.25em;
+	
+	@for $i from 1 to 13 {
+		.jeesl-grid-#{$i} {
+			width: calc((100% / 12) * #{$i} - 10px);
+			display: inline-block;
+			vertical-align: top;
+			
+			> *:not(.jeesl-dialog) {
+				width: 100%;
+			}
+			
+	
+			@media (max-width: 768px) {
+				width: calc(100% - 10px);
+			}
+		}
+	}
+}
+
 .jeesl-content {
 	display: flex;
 	float: none;
@@ -1859,23 +1953,6 @@ body, .ui-widget {
 	.jeesl-content-container {
 		padding: 0;
 		width: 100%;
-		
-		@for $i from 1 to 13 {
-			.jeesl-grid-#{$i} {
-				width: calc((100% / 12) * #{$i} - 10px);
-				display: inline-block;
-				vertical-align: top;
-				
-				> *:not(.jeesl-dialog) {
-					width: 100%;
-				}
-				
-
-				@media (max-width: 768px) {
-					width: calc(100% - 10px);
-				}
-			}
-		}
 		
 		.jeesl-grid {
 			position: relative;
@@ -2004,6 +2081,8 @@ body, .ui-widget {
 }
 
 .jeesl-tabs {
+	@include jeesl-tabs-titlebar;
+		
 	background: $panel-background;
 	padding: $slim-spacing;
 	
@@ -2049,80 +2128,10 @@ body, .ui-widget {
 			}
 		}
 	}
-
-	.ui-tabs-nav {
-		@include jeesl-titlebar;
-		
-		display: block;
-		height: auto;
-			
-		@media (max-width: 768px) {
-			padding-top: 3px !important;
-			
-			&:after {
-				margin-left: -3px;
-				width: calc(100% + 6px);
-			}
-		}
-		
-		.ui-tabs-header {
-			@include jeesl-titlebar-title;
-			
-			background: linear-gradient(to bottom, $light-grey 87%, $soft-grey 100%);
-			box-shadow: inset 0 1px 0 $white-100;
-//			height: 22px;
-			margin: 0 2px 0;
-			padding: 0;
-			
-			@media (max-width: 768px) {
-				height: 37px;
-				line-height: 37px;
-				top: 0 !important;
-			}
-			
-			&:hover {
-				background: linear-gradient(to bottom, #f2f2f2 87%, #c4c4c4 100%);
-			}
-			
-			&.ui-tabs-selected {
-				background: linear-gradient(to bottom, $white-100, $panel-background);
-				padding-bottom: 1px;
-				
-				@media (max-width: 768px) {
-				    border: 0;
-					padding: 1px;
-				}
-				
-				&:before {
-				    position: absolute;
-				    background: linear-gradient(to bottom, $medium-colour, $dark-colour);
-				    width: 100%;
-				    height: 100%;
-				    border-radius: inherit;
-				    left: 0;
-				    top: 0;
-				    box-shadow: inset 0 1px 0 $bright-colour;
-
-					@media (max-width: 768px) {
-						content: '';
-					}
-				}
-				
-				a {
-					position: relative;
-					
-					@media (max-width: 768px) {
-						color: $white-100;
-						text-shadow: none;
-					}
-				}
-			}
-			
-			a {
-				color: $anthracite;
-				padding: 0 $regular-spacing;
-			}
-		}
+	
+	.ui-tabs-panel {
+		overflow: auto;
+		padding: $half-spacing $regular-spacing;
 	}
 }
 

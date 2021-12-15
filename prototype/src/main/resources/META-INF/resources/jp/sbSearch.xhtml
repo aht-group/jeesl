@@ -19,7 +19,7 @@
 	<composite:implementation>
 	<h:outputStylesheet library="sbSearch" name="sbSearch.css" target="head" />
 	
-	<div class="sbSearch jeesl-menu-bar-item jeesl-left">
+	<div class="sbSearch jeesl-menu-bar-item jeesl-menu-bar-search jeesl-left">
 		<div class="ui-inputgroup">
 			<p:commandButton icon="ui-icon ui-icon-search fa fa-search" styleClass="search-btn-light ui-corner-left"  disabled="true" />
 			<p:inputText id="searchText" value="#{cc.attrs.handler.searchText}"  placeholder="Search" styleClass="search-box">
@@ -31,7 +31,7 @@
 		<h:panelGroup id="searchResults" layout="block" styleClass="auContainer jeesl-overlay-container">
 			<script>
 				function toggleDetails(eventArgs) {
-					let currentListItem = $(this);
+					let currentListItem = $(this).parent();
 					let closeRequested = currentListItem.children('.jeesl-field-tip').eq(0).height() > 0;
 					
 					eventArgs.data.overlay.find('.ui-selectonemenu-item').removeClass('jeesl-active');
@@ -48,7 +48,7 @@
 					let overlay = $('##{cc.clientId}:searchResults'.replaceAll(':','\\:'));
 					input.val() ? overlay.addClass('jeesl-visible') : overlay.removeClass('jeesl-visible');
 					
-					overlay.find('.ui-selectonemenu-item').click({ overlay: overlay }, toggleDetails);
+					overlay.find('.ui-selectonemenu-item-text').click({ overlay: overlay }, toggleDetails);
 				}
 			</script>
 			<div class="jeesl-overlay-wrapper">
