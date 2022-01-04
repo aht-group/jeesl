@@ -10,6 +10,7 @@ import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.auth.BasicScheme;
@@ -31,6 +32,10 @@ public class JeeslRestClient
 	private HttpClientContext context;
 	
 	public JeeslRestClient(SsiCrendentials credentials)
+	{
+		this(credentials,10*60*1000);
+	}
+	public JeeslRestClient(SsiCrendentials credentials, int timeout)
 	{	
 		context = HttpClientContext.create();
 		
@@ -47,7 +52,15 @@ public class JeeslRestClient
 			context.setAuthCache(authCache);
 		}
 		
-		client = HttpClientBuilder.create().build();
+		RequestConfig config = RequestConfig.custom()
+		  .setConnectTimeout(timeout)
+		  .setConnectionRequestTimeout(timeout)
+		  .setSocketTimeout(timeout).build();
+		
+		client = HttpClientBuilder.create()
+					.setDefaultRequestConfig(config)
+					.build();
+
 	}
 	
 	public String plain(String url) throws ClientProtocolException, IOException

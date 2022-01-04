@@ -12,6 +12,7 @@ import org.jeesl.interfaces.bean.sb.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.tree.cache.JeeslTree1Cache;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
+import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -199,7 +200,7 @@ public class SbSingleHandler <T extends EjbWithId> implements Serializable,SbSin
 	
 	public <E extends Enum<E>> void  setDefault(E code)
 	{
-		if(EjbWithCode.class.isAssignableFrom(c))
+		if(EjbWithCode.class.isAssignableFrom(c) || EjbWithNonUniqueCode.class.isAssignableFrom(c))
 		{
 			for(T t : list)
 			{

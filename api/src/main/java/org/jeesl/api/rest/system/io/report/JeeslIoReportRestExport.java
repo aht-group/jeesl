@@ -38,8 +38,6 @@ public interface JeeslIoReportRestExport
 	@GET @Path("/system/io/report/templates") @Produces(MediaType.APPLICATION_XML)
 	Templates exportSystemIoReportTemplates();
 	
-
-	
 	@JeeslRestSecured
 	@GET @Path("/system/io/report/style/alignment") @Produces(MediaType.APPLICATION_XML)
 	Container exportSystemIoReportStyleAlignment();
