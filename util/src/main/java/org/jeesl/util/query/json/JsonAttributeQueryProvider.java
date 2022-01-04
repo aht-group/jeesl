@@ -10,7 +10,6 @@ import org.jeesl.model.json.module.attribute.JsonAttributeItem;
 import org.jeesl.model.json.module.attribute.JsonAttributeOption;
 import org.jeesl.model.json.module.attribute.JsonAttributeSet;
 import org.jeesl.model.json.module.attribute.JsonAttributeType;
-import org.jeesl.model.json.system.status.JsonType;
 
 public class JsonAttributeQueryProvider
 {
