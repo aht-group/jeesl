@@ -9,6 +9,8 @@ import org.jeesl.model.json.module.attribute.JsonAttributeData;
 import org.jeesl.model.json.module.attribute.JsonAttributeItem;
 import org.jeesl.model.json.module.attribute.JsonAttributeOption;
 import org.jeesl.model.json.module.attribute.JsonAttributeSet;
+import org.jeesl.model.json.module.attribute.JsonAttributeType;
+import org.jeesl.model.json.system.status.JsonType;
 
 public class JsonAttributeQueryProvider
 {
@@ -40,11 +42,18 @@ public class JsonAttributeQueryProvider
 		json.setAllowEmpty(true);
 		json.setLabel("");
 		json.setDescription("");
-		json.setType(JsonStatusQueryProvider.typeCode());
+		json.setType(JsonAttributeQueryProvider.typeCode());
 		
 		json.setOptions(new ArrayList<>());
 		json.getOptions().add(option());
 		return json;
+	}
+	
+	public static JsonAttributeType typeCode()
+	{				
+		JsonAttributeType xml = new JsonAttributeType();
+		xml.setCode("");
+		return xml;
 	}
 	
 	public static JsonAttributeOption option()

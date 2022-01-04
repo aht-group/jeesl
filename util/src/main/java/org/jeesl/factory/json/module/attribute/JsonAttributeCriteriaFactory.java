@@ -37,14 +37,14 @@ public class JsonAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDe
 	private final String localeCode;
 	private final JsonAttributeCriteria q;
 	
-	private JsonTypeFactory<L,D,TYPE> jfType;
+	private JsonAttributeTypeFactory<L,D,TYPE> jfType;
 	private JsonAttributeOptionFactory<L,D,OPTION> jfOption;
 	
 	public JsonAttributeCriteriaFactory(String localeCode, JsonAttributeCriteria q)
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(q.getType()!=null) {jfType = new JsonTypeFactory<>(localeCode,q.getType());}
+		if(q.getType()!=null) {jfType = new JsonAttributeTypeFactory<>(localeCode,q.getType());}
 		if(q.getOptions()!=null && !q.getOptions().isEmpty()) {jfOption = new JsonAttributeOptionFactory<>(localeCode,q.getOptions().get(0));}
 	}
 	

@@ -17,4 +17,5 @@ public interface JeeslAttributeType <L extends JeeslLang, D extends JeeslDescrip
 		extends Serializable,EjbPersistable,JeeslOptionRestDownload,JeeslStatusFixedCode,EjbWithCodeGraphic<G>
 {
 	public enum Code{text,email,bool,intNumber,doubleNumber,date,selectOne,selectMany,remark}
+	public enum Html5{select}
 }

@@ -47,9 +47,9 @@ public class JsonAttributeCriteria implements Serializable
 	public void setDescription(String description) {this.description = description;}
 	
 	@JsonProperty("type")
-	private JsonType type;
-	public JsonType getType() {return type;}
-	public void setType(JsonType type) {this.type = type;}
+	private JsonAttributeType type;
+	public JsonAttributeType getType() {return type;}
+	public void setType(JsonAttributeType type) {this.type = type;}
 	
 	@JsonProperty("options")
 	private List<JsonAttributeOption> options;
