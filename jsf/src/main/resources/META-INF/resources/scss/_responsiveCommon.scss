@@ -246,12 +246,10 @@ $border: $border-width solid $border-colour;
 	border-radius: $border-radius;
     box-shadow: none;
 	height: $ls-element-height;
-	line-height: calc(#{$ls-element-height} - (2 * #{$half-spacing}));
-    padding: $half-spacing $slim-spacing;
+    padding: $half-spacing $regular-spacing !important;
 
 	@media (max-width: 768px) {
 		height: $ls-element-height-mobile;
-		line-height: calc(#{$ls-element-height-mobile} - 2 * (#{$half-spacing}));
 	}
 	
 	&.ui-state-focus {
@@ -898,6 +896,10 @@ $border: $border-width solid $border-colour;
 	
 		.ql-editor {
 			background: $white-100;
+			
+			@media (max-width: 768px) {
+				min-height: $element-height-mobile;
+			}
 		}
 	}
 }
@@ -923,7 +925,7 @@ $border: $border-width solid $border-colour;
 		&.p-field {
 			align-items: center;
 		    margin: 0;
-		    padding: $half-spacing 0;
+		    padding: $slim-spacing 0;
 		}
 	}
 	

@@ -473,9 +473,13 @@ html, body, .ui-widget {
 			
 				.jeesl-menu-bar-button-label {
 					font-size: $font-size-status;
-					line-height: calc(#{$element-height-mobile} - (2 * #{$ls-element-padding-vertical}));
+					height: 100%;
 					min-width: $element-height-mobile;
 					text-align: center;
+					
+					.jeesl-menu-bar-button-calendar {
+						
+					}
 				}
 			}
 			
@@ -618,11 +622,26 @@ html, body, .ui-widget {
 		.jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list {
 			.jeesl-calendar-icon {
 				height: $element-height-mobile;
+				
+				> img {
+					margin: 0 -#{$half-spacing};
+				}
 			}
 			
-			.jeesl-menu-bar-item .jeesl-menu-bar-button .ui-inputfield {
-				max-height: $element-height-mobile;
-				width: 120px;
+			.jeesl-menu-bar-item {
+				&:first-child .jeesl-menu-bar-button-label {
+					padding-right: 0;
+				}
+				
+				&:last-child .jeesl-menu-bar-button-label {
+					padding-left: 0;
+				}
+			
+				.jeesl-menu-bar-button .ui-inputfield {
+					height: 100%;
+					letter-spacing: -.5px;
+					width: 135px;
+				}
 			}
 		}
 	}
@@ -640,8 +659,8 @@ html, body, .ui-widget {
 }
 
 @mixin jeesl-titlebar-title {
-	//font-size: $font-size-header;
-	//letter-spacing: -.5px;
+	font-size: $font-size-header;
+	letter-spacing: -.5px;
 }
 
 @mixin jeesl-titlebar-actions {
@@ -720,12 +739,12 @@ html, body, .ui-widget {
 @mixin input-grid {
 	.ui-fluid .p-grid {
 		display: block;
-		padding: 4px 0 0;
+		padding: 0;
 		
 		.p-col {
 			&.ui-outputlabel {
 				left: 50%;
-				line-height: 14px;
+				line-height: normal;
 				padding: 0;
 				position: absolute;
 				top: 0;
@@ -746,15 +765,14 @@ html, body, .ui-widget {
 			}
 			
 			&:not(.ui-outputlabel) {
-				height: 56px;
-			    line-height: 50px;
-			    padding: 3px 0;
+				line-height: normal;
+				padding: .5em 0 $slim-spacing 0;
 
 				// Overriding inline css
 				width: 100% !important;
 
 				> * {
-					padding-left: 0;
+					padding: 0 $regular-spacing;
 					width: 100%;
 					
 					> .ui-inputfield {
@@ -763,7 +781,9 @@ html, body, .ui-widget {
 				}
 				
 				> span {
+					align-items: center;
 					background: $light-grey;
+					display: flex;
 				}
 			}
 		}
@@ -772,11 +792,33 @@ html, body, .ui-widget {
 
 @mixin jeesl-editor-layout {
 	.ui-texteditor {
-		margin-left: -$regular-spacing;
-		margin-right: -$regular-spacing;
+		margin-left: -$wide-spacing;
+		margin-right: -$wide-spacing;
+		
+		&:first-child {
+			margin-top: -$regular-spacing;
+		}
 		
 		&:last-child {
-			margin-bottom: -$half-spacing;
+			margin-bottom: -$regular-spacing;
+		}
+		
+		.ql-toolbar {
+			padding: 0;
+			
+			button {
+				height: $element-height-mobile;
+				padding: $wide-spacing;
+				width: $element-height-mobile;
+			}
+		}
+		
+		.ql-container {
+			font-size: 1em;
+			
+			.ql-editor {
+				min-height: $element-height-mobile;
+			}
 		}
 	}
 }
@@ -787,16 +829,30 @@ html, body, .ui-widget {
 			
 	padding: 0;
 	
-	.ui-panelgrid .ui-datatable {
-		@include jeesl-table-titlebar;
+	.ui-panelgrid {
+		&:last-child .ui-panelgrid-cell .ui-datatable {
+			margin-bottom: -$half-spacing;
+		}
+		
+		.ui.panelgrid-cell .ui-datatable {
+			margin: 0 -#{$regular-spacing};
+			width: calc(100% + (2 * #{$regular-spacing}));
+		}
+		
+		.ui-datatable {
+			@include jeesl-table-titlebar;
+			
+			.ui-datatable-header .pf-datatable-header-title {
+				font-size: 1.2em;
+			}
+		}
 	}
 	
 	.ui-tree .ui-treenode .ui-treenode-content {
 		@include font-interactable;
 		
 		border-bottom: 2px solid $soft-grey;
-		height: 50px;
-		line-height: 50px;
+		height: $element-height-mobile;
 		
 		&.ui-droppable {
 			height: 46px;
@@ -812,7 +868,7 @@ html, body, .ui-widget {
 		}
 		
 		.ui-tree-toggler {
-			width: 40px;
+			min-width: $min-button-width-mobile;
 			
 			&:after {
 				border-width: 8px 0 8px 8px;
@@ -822,22 +878,30 @@ html, body, .ui-widget {
 	
 	.jeesl-tabs {
 		border-top: $border;
-		margin: $half-spacing (-$regular-spacing);
+		margin: $half-spacing (-$wide-spacing);
 		
 		&:last-child {
-			margin-bottom: -$half-spacing;
+			margin-bottom: -$regular-spacing;
 		}
 	}
 	
 	.ui-panel-content {
 		@include input-grid;
 		
-		padding: $regular-spacing $wide-spacing !important;
+		//&:not(.html-container-panel) {
+		//	padding: $regular-spacing $wide-spacing !important;
+		//}
+		
+		.ui-galleria {
+			margin: -$half-spacing -#{$wide-spacing} -#{$regular-spacing};
+			max-width: calc(100% + (2 * #{$wide-spacing}));
+			width: calc(100% + (2 * #{$wide-spacing})) !important;
+		}
 		
 		.ui-separator {
 			background: $light-grey;
 			height: 2px;
-			margin: 6px 0;
+			margin: 6px -#{$regular-spacing};
 		}
 	}
 	
@@ -851,6 +915,18 @@ html, body, .ui-widget {
 	@include jeesl-panel;
 }
 
+.ui-datatable {
+	@include jeesl-table-titlebar;
+	
+	table thead th, table tbody tr {
+		height: $element-height-mobile;
+	}
+	
+	.ui-datatable-header {
+		border-width: $border-width $border-width 0;
+	}
+}
+
 .jeesl-content .jeesl-content-container {
 	@for $i from 1 to 13 {
 		.jeesl-grid-#{$i} {
@@ -860,6 +936,11 @@ html, body, .ui-widget {
 	
 	.ui-panel {
 		@include jeesl-panel;
+	}
+
+	.height-balance-container > .jeesl-grid {
+		margin: 0;
+		width: 100%;
 	}
 }
 
@@ -887,8 +968,6 @@ html, body, .ui-widget {
 		}
 		
 		.html-container {
-			font-size: 1rem;
-			
 			> div > section {
 				padding: 0;
 			}
@@ -900,15 +979,8 @@ html, body, .ui-widget {
 	padding: 0;
 	
 	&.jeesl-editor {
-		@include jeesl-editor-layout;
-		
-		.ui-tabs-panel .ui-texteditor {
-			margin-left: 0;
-			margin-right: 0;
-			
-			&:last-child {
-				margin-bottom: 0;
-			}
+		.ui-tabs-panel {
+			@include jeesl-editor-layout;
 		}
 	}
 	
@@ -919,9 +991,11 @@ html, body, .ui-widget {
 	.ui-tabs-nav {
 		@include jeesl-tabs-titlebar;
 		
+		border: none;
 		padding-top: 3px;
 		
 		&:after {
+			display: block;
 			margin-left: -3px;
 			width: 100%;
 		}
@@ -953,5 +1027,41 @@ html, body, .ui-widget {
 	
 	.fc-day-header > span {
 		@include jeesl-titlebar-title;
+	}
+}
+
+.ui-panelgrid {
+	.ui-panelgrid-cell {
+		> * {
+			min-height: $element-height-mobile;
+		}
+	}
+}
+
+.input-grid {
+	.p-field {
+		.p-col {
+			&:not(.ui-outputlabel) {
+				> * {
+					min-height: $element-height-mobile;
+				}
+			}
+		}
+	}
+}
+
+.html-container-panel {
+	.html-container {
+		font-size: 1rem;
+		
+		> div > section {
+			h1:first-child {
+				@include jeesl-titlebar;
+				@include jeesl-titlebar-title;
+				
+				margin: -$regular-spacing;
+				margin-bottom: $regular-spacing;
+			}
+		}
 	}
 }

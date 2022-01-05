@@ -1328,6 +1328,8 @@ body, .ui-widget {
 	.ui-datatable-header {
 		@include jeesl-titlebar;
 		
+		margin-bottom: 0;
+		
 		.pf-datatable-header-title {
 			@include jeesl-titlebar-title;
 		}
@@ -1397,12 +1399,17 @@ body, .ui-widget {
 					}
 				}
 				
-				> a {
+				> * {
 					position: relative;
 					
 					@media (max-width: 768px) {
 						color: $white-100;
 						text-shadow: none;
+					}
+					
+					> a {
+						color: inherit;
+						text-shadow: inherit;
 					}
 				}
 			}
@@ -1467,19 +1474,22 @@ body, .ui-widget {
 
 @mixin input-grid {
 	.ui-fluid {
+		display: flex;
+		flex-direction: column;
+		
 		.p-grid {
 			position: relative;
 			
 			@media (max-width: 768px) {
 				display: block;
-				padding: 4px 0 0;
+				padding: 0;
 			}
 			
 			.p-col {
 				&.ui-outputlabel {
 					@media (max-width: 768px) {
 						left: 50%;
-						line-height: 14px;
+						line-height: normal;
 						padding: 0;
 						position: absolute;
 						top: 0;
@@ -1502,9 +1512,8 @@ body, .ui-widget {
 				
 				&:not(.ui-outputlabel) {
 					@media (max-width: 768px) {
-						height: 56px;
-					    line-height: 50px;
-					    padding: 3px 0;
+						line-height: normal;
+					    padding: .5em 0 $slim-spacing 0;
 
 						// Overriding inline css
 						width: 100% !important;
@@ -1516,12 +1525,8 @@ body, .ui-widget {
 						
 						@media (max-width: 768px) {
 //							font-size: 18px !important;
-							padding-left: 0;
+							padding: 0 $regular-spacing;
 							width: 100%;
-							
-							> .ui-inputfield {
-								padding-left: $regular-spacing;
-							}
 						}
 					}
 					
@@ -1529,7 +1534,9 @@ body, .ui-widget {
 						display: inline-block;
 						
 						@media (max-width: 768px) {
+							align-items: center;
 							background: $light-grey;
+							display: flex;
 						}
 					}
 				}
@@ -1696,19 +1703,71 @@ body, .ui-widget {
 		padding: 0;
 	}
 	
+	&.jeesl-editor {
+		.ui-panel-content {
+			overflow: visible;
+		}
+	}
+	
 	&:last-child {
 		margin-bottom: 0;
 	}
 	
 	.ui-panelgrid {
+		@media (max-width: 768px) {
+			.ui-panelgrid-cell {
+				.ui-datatable {
+					margin: 0 -#{$regular-spacing};
+					width: calc(100% + (2 * #{$regular-spacing}));
+				}
+			}
+			
+
+			&:last-child {
+				.ui-panelgrid-cell {
+					.ui-datatable {
+						margin-bottom: -$half-spacing;
+					}
+				}
+			}
+		}
+		
 		.ui-datatable {
 			@include jeesl-table-titlebar;
 			
 			margin: 0;
+			
+			.ui-datatable-header .pf-datatable-header-title {
+				font-size: 1.2em;
+			}
+			
+			@media (max-width: 768px) {
+				table {
+					tr {
+						&:last-child {
+							td {
+								border-bottom: 0;
+							}
+						}
+						
+						th, td {
+							&:first-child {
+								border-left: 0;
+							}
+							
+							&:last-child {
+								border-right: 0;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	
 	.ui-outputlabel {
+		align-items: center;
+		display: flex;
 		font-weight: bold;
 	}
 	
@@ -1728,18 +1787,18 @@ body, .ui-widget {
 			.ui-treenode-content {
 				@include font-interactable;
 				
+				align-items: center;
 				display: flex;
 				width: 100%;
 				
 				@media (max-width: 768px) {
 					border-bottom: 2px solid $soft-grey;
-					height: 50px;
-					line-height: 50px;
+					min-height: $ls-element-height-mobile;
 				}
 				
 				&.ui-droppable {
 					@media (max-width: 768px) {
-						height: 46px;
+						min-height: 46px;
 						line-height: 42px;
 					}
 				}
@@ -1764,6 +1823,7 @@ body, .ui-widget {
 				}
 				
 				.ui-tree-toggler {
+					align-self: stretch;
 					background: none;
 					height: auto;
 					text-align: center;
@@ -1876,8 +1936,6 @@ body, .ui-widget {
 		@include input-grid;
 		@include image-gallery;
 		
-		overflow: auto;
-		
 		.ui-galleria {
 			border: 0;
 			margin: -6px -10px -4px;
@@ -1907,16 +1965,52 @@ body, .ui-widget {
 }
 
 .ui-datatable {
+	@include jeesl-table-titlebar;
+	
+	border-radius: $border-radius-top;
+	
 	table {
 		height: 100%;
 		table-layout: auto;
 		
+		@media (max-width: 768px) {
+			thead th, tbody tr {
+				height: $element-height-mobile;
+			}
+		}
+		
+		tbody {
+			tr, .cell-select > label {
+				transition: background .2s linear;
+			}
+			
+			.ui-state-hover, .cell-select > label:not(.selected):hover {
+				background: $light-grey;
+				box-shadow: none;
+			}
+			
+			.ui-state-highlight, .cell-select > label.selected {
+				background: $dark-colour;
+				color: $white-100;
+				font-weight: 500;
+				text-shadow: none;
+			}
+		}
+		
 		.cell-select {
 			label {
+				align-items: center;
+				display: flex;
 				height: 100%;
 			}
 		}
-	} 
+	}
+	
+	@media (max-width: 768px) {
+		.ui-datatable-header {
+			border-width: $border-width $border-width 0;
+		}
+	}
 }
 
 .jeesl-content-container, .jeesl-overlay-container {
@@ -2105,8 +2199,8 @@ body, .ui-widget {
 				margin-right: -$slim-spacing;
 				
 				@media (max-width: 768px) {
-					margin-left: 0;
-					margin-right: 0;
+					margin-left: -$regular-spacing;
+					margin-right: -$regular-spacing;
 				}
 				
 				&:first-child {
@@ -2118,7 +2212,7 @@ body, .ui-widget {
 					margin-bottom: -$slim-spacing;
 				
 					@media (max-width: 768px) {
-						margin-bottom: 0;
+						margin-bottom: -$half-spacing;
 					}
 				
 					.ql-container {
@@ -2130,8 +2224,13 @@ body, .ui-widget {
 	}
 	
 	.ui-tabs-panel {
-		overflow: auto;
-		padding: $half-spacing $regular-spacing;
+		> pre:last-child {
+			margin-bottom: 0;
+		}
+		
+		@media (max-width: 768px) {
+			padding: $half-spacing $regular-spacing;
+		}
 	}
 }
 
@@ -2206,3 +2305,33 @@ body, .ui-widget {
 	max-width: $max-content-width;
 	padding: 0 $regular-spacing;
 }
+
+.ui-panelgrid {
+	.ui-panelgrid-cell {
+		> * {
+			min-height: $element-height;
+			
+			@media (max-width: 768px) {
+				min-height: $element-height-mobile;
+			}
+		}
+	}
+}
+
+.input-grid {
+	.p-field {
+		.p-col {
+			&:not(.ui-outputlabel) {
+				> * {
+					min-height: $element-height;
+					
+					@media (max-width: 768px) {
+						min-height: $element-height-mobile;
+					}
+				}
+			}
+		}
+	}
+}
+
+@import '_responsiveHtmlRender';

@@ -1,0 +1,24 @@
+.html-container-panel {
+	.html-container {
+		> div > section {
+			padding: $regular-spacing;
+			
+			h1:first-child {
+				@include jeesl-titlebar;
+				@include jeesl-titlebar-title;
+				
+				margin: -#{$regular-spacing} + #{$slim-spacing};
+				margin-bottom: $slim-spacing;
+				
+				@media (max-width: 768px) {
+					margin: -$regular-spacing;
+					margin-bottom: $slim-spacing;
+				}
+				
+				&:after {
+					left: 0;
+				}
+			}
+		}
+	}
+}
