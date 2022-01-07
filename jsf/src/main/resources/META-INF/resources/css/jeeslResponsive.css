@@ -3142,6 +3142,8 @@ body, .ui-widget {
     @media (max-width: 768px) {
       .ui-datatable table thead th, .ui-datatable table tbody tr {
         height: 42px; } }
+    .ui-datatable table thead th .ui-column-title .ui-widget {
+      font-weight: 700; }
     .ui-datatable table tbody tr, .ui-datatable table tbody .cell-select > label {
       transition: background .2s linear; }
     .ui-datatable table tbody .ui-state-hover, .ui-datatable table tbody .cell-select > label:not(.selected):hover {

@@ -1978,6 +1978,10 @@ body, .ui-widget {
 			}
 		}
 		
+		thead th .ui-column-title .ui-widget {
+			font-weight: 700;
+		}
+		
 		tbody {
 			tr, .cell-select > label {
 				transition: background .2s linear;
