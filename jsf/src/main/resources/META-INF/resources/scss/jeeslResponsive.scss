@@ -1,5 +1,7 @@
 @import '_colours';
+@import '_sizes';
 
 @include setColours(hsla(154,100%,33%,1), hsla(154,100%,27%,1), hsla(154,100%,24%,1), hsla(154,100%,20%,1), hsla(154,100%,18%,1));
+@include setContainerWidth(982px);
 
 @import '_responsive';

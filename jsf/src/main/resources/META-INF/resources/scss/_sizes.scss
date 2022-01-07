@@ -96,3 +96,7 @@ $datepicker-input-width-mobile: 88px;
 		}
 	}
 }
+
+@mixin setContainerWidth($width) {
+	$max-content-width: $width;
+}

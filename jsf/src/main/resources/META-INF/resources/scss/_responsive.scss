@@ -1,5 +1,4 @@
 @import '_fonts';
-@import '_sizes';
 
 $enable-pointer-cursor-for-buttons: true;
 
@@ -2018,17 +2017,23 @@ body, .ui-widget {
 	
 	@for $i from 1 to 13 {
 		.jeesl-grid-#{$i} {
-			width: calc((100% / 12) * #{$i} - 10px);
+			width: calc((100% / 12) * #{$i} - (2 * #{$half-spacing}));
 			display: inline-block;
 			vertical-align: top;
 			
-			> *:not(.jeesl-dialog) {
+			> *:not(.jeesl-dialog):not([class^="jeesl-grid-"]):not([class*=" jeesl-grid-"]) {
 				width: 100%;
 			}
 			
 	
 			@media (max-width: 768px) {
 				width: calc(100% - 10px);
+			}
+		}
+		
+		.height-balance-container {
+			.jeesl-grid-#{$i} {
+				width: calc((100% / 12) * #{$i} - #{$half-spacing});
 			}
 		}
 	}
@@ -2110,6 +2115,7 @@ body, .ui-widget {
 				    position: relative;
 				    text-align: right;
 					text-indent: 0;
+					white-space: nowrap;
 					
 					&:hover {
 						text-decoration: none;
