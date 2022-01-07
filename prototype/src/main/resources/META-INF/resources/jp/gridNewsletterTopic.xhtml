@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:ofx="http://www.openfuxml.org/jsf"
+	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	
+	<composite:interface>
+		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="langKeys" required="false" default="#{appTranslationBean.langKeys}"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sTopics" width="4">
+			<h:form id="fTopics">
+				<p:dataTable var="t" value="#{cc.attrs.bean.topics}" draggableRows="false"
+								selection="#{cc.attrs.bean.topic}" selectionMode="single" rowKey="#{t.id}" sortBy="#{t.position}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslNewsletterTopics}">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addTopic()}" update=":#{cc.id}:sTopic" library="jeeslGfx"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTopic()}" update=":#{cc.id}:sTopic"/>
+					<p:column>
+						<h:outputText value="#{t.position}"/>
+					</p:column>
+					<p:column headerText="#{msg.jeeslNewsletterCategory}">
+						<h:outputText value="#{t.category.name[localeCode].lang}"/>
+					</p:column>
+					<p:column headerText="#{msg.jeeslNewsletterTopic}">  
+						<h:outputText value="#{t.name[localeCode].lang}"/>
+					</p:column>
+			   	</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sTopic" width="8">
+			<h:form id="fTopic" rendered="#{not empty cc.attrs.bean.topic}">
+				<p:panel header="#{msg.jeeslNewsletterTopic}" styleClass="jeeslPanel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancel()}" update=":#{cc.id}:grid" mayDispappear="true" tooltip="#{msg.jeeslTtCancel}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveTopic()}" update=":#{cc.id}:grid" library="jeeslGfx" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmTopic()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" library="jeeslGfx"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" >
+						
+						<p:outputLabel value="#{msg.aupOptionCode}"/>
+						<p:inputText value="#{cc.attrs.bean.topic.code}"/>
+						
+						<p:outputLabel value="#{msg.aupOptionPosition}"/>
+						<p:inputText value="#{cc.attrs.bean.topic.position}"/>
+
+						<jtp:label entity="NewsletterCategory"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.topic.category}" rendered="#{not empty cc.attrs.bean.sbhCategory}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.bean.sbhCategory.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
+						</p:selectOneMenu>
+
+					</p:panelGrid>
+					<aht:tabTranslationEditor value="#{cc.attrs.bean.topic}" keys="#{cc.attrs.langKeys}" withDescription="true"/>
+						
+				</p:panel>
+				
+			</h:form>			
+		</j:slot>
+	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>

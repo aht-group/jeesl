@@ -3,14 +3,15 @@ package org.jeesl.web.mbean.prototype.io.mail;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.module.JeeslHdFacade;
+import org.jeesl.api.facade.io.JeeslIoNewsletterFacade;
 import org.jeesl.controller.handler.sb.SbSingleHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
-import org.jeesl.factory.builder.module.HdFactoryBuilder;
+import org.jeesl.factory.builder.io.IoNewsletterFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.SbSingleBean;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterCategory;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterTopic;
@@ -20,7 +21,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
-import org.primefaces.push.Status.STATUS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,57 +37,97 @@ public abstract class AbstractNewsletterTopicBean <L extends JeeslLang, D extend
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractNewsletterTopicBean.class);
 	
-//	protected final HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd;
+	protected final IoNewsletterFactoryBuilder<L,D,R,CAT,TOPIC,?,?> fbNewsletter;
 
-//	protected JeeslHdFacade<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd;
+	protected JeeslIoNewsletterFacade<L,D,LOC,R,CAT,TOPIC,?,?> fNewsletter;
 	
-	//TODO final
-	protected SbSingleHandler<CAT> sbhCategory; public SbSingleHandler<CAT> getSbhCategory() {return sbhCategory;}
+
+	protected final SbSingleHandler<CAT> sbhCategory; public SbSingleHandler<CAT> getSbhCategory() {return sbhCategory;}
 	
 	protected final List<TOPIC> topics;  public List<TOPIC> getTopics() {return topics;}
 	
 	protected R realm;
 	protected RREF rref;
 	protected TOPIC topic; public TOPIC getTopic() {return topic;} public void setTopic(TOPIC topic) {this.topic = topic;}
-
-	public AbstractNewsletterTopicBean(
-//			HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd
-			)
+	
+	public AbstractNewsletterTopicBean(IoNewsletterFactoryBuilder<L,D,R,CAT,TOPIC,?,?> fbNewsletter)
 	{
-		super(null,null); //TOOD Create own NewsletterFactoryBuilder
-//		super(fbHd.getClassL(),fbHd.getClassD());
-//		this.fbHd=fbHd;
-		
+		super(fbNewsletter.getClassL(),fbNewsletter.getClassD());
+		this.fbNewsletter=fbNewsletter;
 
-//		sbhCategory = new SbSingleHandler<>(fbHd.getClassCategory(),this);
+		sbhCategory = new SbSingleHandler<>(fbNewsletter.getClassCategory(),this);
 		topics = new ArrayList<>();
 	}
 
 	protected void postConstructNewsletter(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-//									JeeslHdFacade<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd,
+									JeeslIoNewsletterFacade<L,D,LOC,R,CAT,TOPIC,?,?> fNewsletter,
 									R realm)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
-//		this.fHd=fHd;
-		//Create own JeeslNewsletterFacade
+		this.fNewsletter=fNewsletter;
 		this.realm=realm;
 	}
 	
 	protected void updateRealmReference(RREF rref)
 	{
 		this.rref=rref;
-		
-//		sbhCategory.setList(fHd.all(fbHd.getClassCategory(),realm,rref)); /later
-//		sbhCategory.setList(fHd.all(fbHd.getClassCategory()));
+
+		sbhCategory.setList(fNewsletter.all(fbNewsletter.getClassCategory(), realm, rref));
 		sbhCategory.setDefault();
 		
 		updatedRealmReference();
 	}
-	protected abstract void updatedRealmReference();
+	protected void updatedRealmReference()
+	{
+		reloadTopics();
+	}
 	
 	public void selectTopic() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info(AbstractLogMessage.selectEntity(topic));
-//		ticket = fHd.find(fbHd.getClassTicket(),ticket);
+		topic = fNewsletter.find(fbNewsletter.getClassTopic(), topic);
+		topic = efLang.persistMissingLangs(fNewsletter, langs, topic);
+		topic = efDescription.persistMissingLangs(fNewsletter, langs, topic);
+	}
+	
+	public void addTopic()
+	{
+		topic = fbNewsletter.ejbTopic().build(realm, rref);
+		topic.setName(efLang.createEmpty(langs));
+		topic.setDescription(efDescription.createEmpty(langs));
+	}
+	
+	public void saveTopic() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		topic = fNewsletter.save(topic);
+		reloadTopics();
+	}
+	
+	public void rmTopic() throws JeeslConstraintViolationException
+	{
+		fNewsletter.rm(topic);
+		cancel();
+		reloadTopics();
+	}
+	
+	public void cancel()
+	{
+		topic = null;
+	}
+	
+	public void reloadTopics()
+	{
+		topics.clear();
+		// TODO: filter method in facade
+		topics.addAll(fNewsletter.all(fbNewsletter.getClassTopic()).stream().filter(i->i.getCategory().equals(sbhCategory.getSelection())).collect(Collectors.toList()));
+	}
+	
+	@Override
+	public void selectSbSingle(EjbWithId item)
+	{
+		if(fbNewsletter.getClassCategory().isAssignableFrom(item.getClass()))
+		{
+			reloadTopics();
+		}
 	}
 }
