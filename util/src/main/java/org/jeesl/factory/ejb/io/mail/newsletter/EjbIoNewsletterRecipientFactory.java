@@ -3,12 +3,14 @@ package org.jeesl.factory.ejb.io.mail.newsletter;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterCategory;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterRecipient;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterRegistration;
+import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoNewsletterRecipientFactory <CAT extends JeeslNewsletterCategory<?,?,?,CAT,?>,
-												RCP extends JeeslNewsletterRecipient<CAT,REG>,
-												REG extends JeeslNewsletterRegistration<?,?,REG,?>>
+												RCP extends JeeslNewsletterRecipient<CAT,REG,TOPIC>,
+												REG extends JeeslNewsletterRegistration<?,?,REG,?>,
+												TOPIC extends JeeslNewsletterTopic<?,?,?,CAT>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoNewsletterRecipientFactory.class);
 	

@@ -17,7 +17,7 @@ public class IoNewsletterFactoryBuilder<L extends JeeslLang,D extends JeeslDescr
 								R extends JeeslTenantRealm<L,D,R,?>,
 								CAT extends JeeslNewsletterCategory<L,D,R,CAT,?>,
 								TOPIC extends JeeslNewsletterTopic<L,D,R,CAT>,
-								RCP extends JeeslNewsletterRecipient<CAT,REG>,
+								RCP extends JeeslNewsletterRecipient<CAT,REG,TOPIC>,
 								REG extends JeeslNewsletterRegistration<L,D,REG,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
@@ -39,7 +39,7 @@ public class IoNewsletterFactoryBuilder<L extends JeeslLang,D extends JeeslDescr
 		this.cTopic=cTopic;
 	}
 	
-	public EjbIoNewsletterRecipientFactory<CAT,RCP,REG> mail()
+	public EjbIoNewsletterRecipientFactory<CAT,RCP,REG,TOPIC> mail()
 	{
 		return new EjbIoNewsletterRecipientFactory<>(cRecipient);
 	}

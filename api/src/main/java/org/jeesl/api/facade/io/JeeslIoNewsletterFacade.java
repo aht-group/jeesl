@@ -14,8 +14,8 @@ public interface JeeslIoNewsletterFacade <L extends JeeslLang, D extends JeeslDe
 								R extends JeeslTenantRealm<L,D,R,?>,
 								CAT extends JeeslNewsletterCategory<L,D,R,CAT,?>,
 								TOPIC extends JeeslNewsletterTopic<L,D,R,CAT>,
-								RCP extends JeeslNewsletterRecipient<CAT,REG>,
-								REG extends JeeslNewsletterRegistration<L,D,REG,?>>
+								RCP extends JeeslNewsletterRecipient<CAT,REGS,TOPIC>,
+								REGS extends JeeslNewsletterRegistration<L,D,REGS,?>>
 			extends JeeslFacade
 {
 	

@@ -8,19 +8,25 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 
 public interface JeeslNewsletterRecipient <C extends JeeslNewsletterCategory<?,?,?,C,?>,
-											R extends JeeslNewsletterRegistration<?,?,R,?>>
+											RS extends JeeslNewsletterRegistration<?,?,RS,?>,
+											TOPIC extends JeeslNewsletterTopic<?,?,?,C>>
 			extends Serializable,EjbSaveable,EjbRemoveable,
 					JeeslSimpleUser,JeeslWithCategory<C> 
 {
 	public enum Attributes{recordCreated,recordConfirmed}
 	
-	R getRegistration();
-	void setRegistration(R registration);
+	RS getRegistration();
+	void setRegistration(RS registration);
 	
+	//Next step for recipient management
+//	List<TOPIC> getSubscriptions();
+//	void getSubscriptions(List<TOPIC> subscriptions);
+	
+	
+	// Will be added later
 //	LocalDateTime getRecordCreated();
 //	void setRecordCreated(LocalDateTime recordCreated);
 //
 //	LocalDateTime getRecordConfirmed();
 //	void setRecordConfirmed(LocalDateTime recordConfirmed);
-	
 }

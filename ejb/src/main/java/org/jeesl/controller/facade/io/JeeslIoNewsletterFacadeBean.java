@@ -20,18 +20,18 @@ public class JeeslIoNewsletterFacadeBean<L extends JeeslLang, D extends JeeslDes
 										R extends JeeslTenantRealm<L,D,R,?>,
 										CAT extends JeeslNewsletterCategory<L,D,R,CAT,?>,
 										TOPIC extends JeeslNewsletterTopic<L,D,R,CAT>,
-										RCP extends JeeslNewsletterRecipient<CAT,REG>,
-										REG extends JeeslNewsletterRegistration<L,D,REG,?>> 
+										RCP extends JeeslNewsletterRecipient<CAT,REGS,TOPIC>,
+										REGS extends JeeslNewsletterRegistration<L,D,REGS,?>> 
 				extends JeeslFacadeBean 
-				implements JeeslIoNewsletterFacade<L,D,LOC,R,CAT,TOPIC,RCP,REG>
+				implements JeeslIoNewsletterFacade<L,D,LOC,R,CAT,TOPIC,RCP,REGS>
 {
 	private static final long serialVersionUID = 1L;
 	
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoNewsletterFacadeBean.class);
 	
-	private final IoNewsletterFactoryBuilder<L,D,R,CAT,TOPIC,RCP,REG> fbNewsletter;
+	private final IoNewsletterFactoryBuilder<L,D,R,CAT,TOPIC,RCP,REGS> fbNewsletter;
 	
-	public JeeslIoNewsletterFacadeBean(EntityManager em, final IoNewsletterFactoryBuilder<L,D,R,CAT,TOPIC,RCP,REG> fbNewsletter)
+	public JeeslIoNewsletterFacadeBean(EntityManager em, final IoNewsletterFactoryBuilder<L,D,R,CAT,TOPIC,RCP,REGS> fbNewsletter)
 	{
 		super(em);
 		this.fbNewsletter=fbNewsletter;
