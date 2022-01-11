@@ -260,7 +260,7 @@ $border: $border-width solid $border-colour;
 @mixin icon {
 	background: none;	
 	display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
+	font-family: "Font Awesome 5 Free";
     font-size: inherit;
 	height: auto;
 	left: 0;
