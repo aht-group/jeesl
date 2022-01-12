@@ -10,9 +10,7 @@
 		<composite:attribute name="bean" required="false" default="#{menu3Bean}"/>
 	</composite:interface>
 	
-	<composite:implementation>
-		<h:outputStylesheet library="aupCss" name="aupBreadcrumb.css" target="head"/>
-		
+	<composite:implementation>		
 		<ul class="aupHeadlineBreadcrumb jeesl-menu-bar-list">
 	    <c:forEach var="m" items="#{cc.attrs.bean.breadcrumb(cc.attrs.value.pageCode)}">
 	    	<li class="jeesl-menu-bar-item">
