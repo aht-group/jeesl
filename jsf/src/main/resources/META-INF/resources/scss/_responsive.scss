@@ -606,6 +606,24 @@ body, .ui-widget {
 	}
 }
 
+.status-bar-wrapper {
+	display: flex;
+	
+	form {
+		&:last-child {
+			flex-grow: 1;
+		}
+		
+		&:not(:first-child) .jeesl-status-bar {
+			margin-left: 0;
+		}
+		
+		&:not(:last-child) .jeesl-status-bar {
+			margin-right: 0;
+		}
+	}
+}
+
 .jeesl-status-bar {
 	@include jeesl-menu-bar;
 	
@@ -1168,12 +1186,13 @@ body, .ui-widget {
 							color: $white-100;
 							height: auto;
 							padding: 0 !important;
+							text-align: center;
 							text-shadow: none;
 							width: 55px;
 							
 							@media (max-width: 768px) {
 								max-height: $sb-element-height-mobile;
-								width: 88px;
+								width: 71px;
 							}
 						}
 					}

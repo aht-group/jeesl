@@ -27,7 +27,7 @@
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectEvent()}" update=":#{cc.id}:grid"/>
 					<p:column headerText="#{msg.jeeslAssetEventDate}">
-						<h:panelGroup styleClass="jeeslNbsc">
+						<h:panelGroup styleClass="jeesl-nbsc">
 							<jtp:symbolizer value="#{e.status}" marginRight="5"/>
 							<jp:outputDate value="#{e.record}" withMinute="false"/>
 						</h:panelGroup>

@@ -1478,6 +1478,9 @@ template {
   .input-grid .p-field .p-col:first-child {
     padding-left: 0; }
 
+.jeesl-nbsc {
+  white-space: nowrap; }
+
 html, body {
   font-size: 11px;
   height: 100%; }
@@ -1988,6 +1991,15 @@ body, .ui-widget {
         @media (max-width: 768px) {
           .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:first-child {
             display: list-item; } }
+
+.status-bar-wrapper {
+  display: flex; }
+  .status-bar-wrapper form:last-child {
+    flex-grow: 1; }
+  .status-bar-wrapper form:not(:first-child) .jeesl-status-bar {
+    margin-left: 0; }
+  .status-bar-wrapper form:not(:last-child) .jeesl-status-bar {
+    margin-right: 0; }
 
 .jeesl-status-bar {
   color: white;
@@ -2634,12 +2646,13 @@ body, .ui-widget {
             color: white;
             height: auto;
             padding: 0 !important;
+            text-align: center;
             text-shadow: none;
             width: 55px; }
             @media (max-width: 768px) {
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list .jeesl-menu-bar-item .jeesl-menu-bar-button .ui-inputfield {
                 max-height: 42px;
-                width: 88px; } }
+                width: 71px; } }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover {
       background: transparent;
       display: flex;
