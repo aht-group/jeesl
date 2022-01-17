@@ -26,17 +26,20 @@ public class IoNewsletterFactoryBuilder<L extends JeeslLang,D extends JeeslDescr
 	private final Class<RCP> cRecipient;  public Class<RCP> getClassRecipient(){return cRecipient;}
 	private final Class<CAT> cCategory; public Class<CAT> getClassCategory(){return cCategory;}
 	private final Class<TOPIC> cTopic; public Class<TOPIC> getClassTopic(){return cTopic;}
+	private final Class<REG> cRegistration; public Class<REG> getClassRegistration(){return cRegistration;}
 	
 	public IoNewsletterFactoryBuilder(final Class<L> cL, final Class<D> cD,
 										final Class<RCP> cRecipient, 
 										final Class<CAT> cCategory, 
-										final Class<TOPIC> cTopic
+										final Class<TOPIC> cTopic,
+										final Class<REG> cRegistration
 										)
 	{
 		super(cL,cD);
 		this.cRecipient=cRecipient;
 		this.cCategory=cCategory;
 		this.cTopic=cTopic;
+		this.cRegistration=cRegistration;
 	}
 	
 	public EjbIoNewsletterRecipientFactory<CAT,RCP,REG,TOPIC> mail()

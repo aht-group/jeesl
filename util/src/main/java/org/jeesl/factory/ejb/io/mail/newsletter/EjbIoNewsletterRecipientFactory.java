@@ -35,4 +35,17 @@ public class EjbIoNewsletterRecipientFactory <CAT extends JeeslNewsletterCategor
 		
 		return ejb;
 	}
+	
+	public RCP build()
+	{
+		RCP ejb = null;
+		
+		try 
+		{
+			ejb = cRecipient.newInstance();
+		} 
+		catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
+		
+		return ejb;
+	}
 }

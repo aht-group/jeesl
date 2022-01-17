@@ -1,6 +1,7 @@
 package org.jeesl.interfaces.model.io.mail.newsletter;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -19,8 +20,8 @@ public interface JeeslNewsletterRecipient <C extends JeeslNewsletterCategory<?,?
 	void setRegistration(RS registration);
 	
 	//Next step for recipient management
-//	List<TOPIC> getSubscriptions();
-//	void getSubscriptions(List<TOPIC> subscriptions);
+	List<TOPIC> getSubscriptions();
+	void setSubscriptions(List<TOPIC> subscriptions);
 	
 	
 	// Will be added later

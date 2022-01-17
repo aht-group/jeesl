@@ -18,5 +18,5 @@ public interface JeeslIoNewsletterFacade <L extends JeeslLang, D extends JeeslDe
 								REGS extends JeeslNewsletterRegistration<L,D,REGS,?>>
 			extends JeeslFacade
 {
-	
+	RCP load(Class<RCP> cRecipient, RCP recipient);
 }

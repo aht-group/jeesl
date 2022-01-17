@@ -23,7 +23,7 @@
 				<p:dataTable var="t" value="#{cc.attrs.bean.topics}" draggableRows="false"
 								selection="#{cc.attrs.bean.topic}" selectionMode="single" rowKey="#{t.id}" sortBy="#{t.position}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslNewsletterTopics}">
+						<j:dtHeader entity="NewsletterTopic" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addTopic()}" update=":#{cc.id}:sTopic" library="jeeslGfx"/>
 						</j:dtHeader>
 					</f:facet>
@@ -31,10 +31,12 @@
 					<p:column>
 						<h:outputText value="#{t.position}"/>
 					</p:column>
-					<p:column headerText="#{msg.jeeslNewsletterCategory}">
+					<p:column>
+						<f:facet name="header"><jtp:label entity="NewsletterCategory"/></f:facet>  
 						<h:outputText value="#{t.category.name[localeCode].lang}"/>
 					</p:column>
-					<p:column headerText="#{msg.jeeslNewsletterTopic}">  
+					<p:column>  
+						<f:facet name="header"><jtp:label entity="NewsletterTopic" code="name"/></f:facet>  
 						<h:outputText value="#{t.name[localeCode].lang}"/>
 					</p:column>
 			   	</p:dataTable>
@@ -42,7 +44,8 @@
 		</j:slot>
 		<j:slot id="sTopic" width="8">
 			<h:form id="fTopic" rendered="#{not empty cc.attrs.bean.topic}">
-				<p:panel header="#{msg.jeeslNewsletterTopic}" styleClass="jeeslPanel">
+				<p:panel styleClass="jeeslPanel">
+					<f:facet name="header"><jtp:label entity="NewsletterTopic"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancel()}" update=":#{cc.id}:grid" mayDispappear="true" tooltip="#{msg.jeeslTtCancel}"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveTopic()}" update=":#{cc.id}:grid" library="jeeslGfx" />
@@ -50,10 +53,10 @@
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" >
 						
-						<p:outputLabel value="#{msg.aupOptionCode}"/>
+						<jtp:label entity="NewsletterTopic" code="code"/>
 						<p:inputText value="#{cc.attrs.bean.topic.code}"/>
 						
-						<p:outputLabel value="#{msg.aupOptionPosition}"/>
+						<jtp:label entity="NewsletterTopic" code="position"/>
 						<p:inputText value="#{cc.attrs.bean.topic.position}"/>
 
 						<jtp:label entity="NewsletterCategory"/>

@@ -36,4 +36,11 @@ public class JeeslIoNewsletterFacadeBean<L extends JeeslLang, D extends JeeslDes
 		super(em);
 		this.fbNewsletter=fbNewsletter;
 	}
+	
+	@Override public RCP load(Class<RCP> cRecipient, RCP recipient)
+	{
+		recipient = em.find(cRecipient, recipient.getId());
+		recipient.getSubscriptions().size();
+		return recipient;
+	}
 }
