@@ -650,7 +650,7 @@ html, body, .ui-widget {
 @mixin jeesl-titlebar {
 	border-radius: $border-radius-top;
 	border-width: 0;
-	margin: 0;
+	margin: 0 0 4px 0;
 	min-height: $element-height-mobile;
 	
 	&:after {

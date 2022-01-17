@@ -104,7 +104,7 @@ $border: $border-width solid $border-colour;
 		}
 				
 		&.ui-state-highlight {
-			background: $dark-colour;
+			background: $highlight-colour;
 			
 			&:after {
 				@media (max-width: 768px) {
@@ -232,7 +232,7 @@ $border: $border-width solid $border-colour;
 		text-shadow: none;
 		
 		&:before {
-			background: $dark-colour;
+			background: $highlight-colour;
 		}
 	}
 	
@@ -245,12 +245,7 @@ $border: $border-width solid $border-colour;
 	border: none;
 	border-radius: $border-radius;
     box-shadow: none;
-	height: $ls-element-height;
     padding: $half-spacing $regular-spacing !important;
-
-	@media (max-width: 768px) {
-		height: $ls-element-height-mobile;
-	}
 	
 	&.ui-state-focus {
 		box-shadow: none;
@@ -279,6 +274,10 @@ $border: $border-width solid $border-colour;
 			font-size: 2em;
 		}
 	}
+}
+
+.timeline-event-box.ui-state-default {
+	@include button;
 }
 
 .ui-button.ui-state-default {
@@ -327,10 +326,6 @@ $border: $border-width solid $border-colour;
 		.ui-icon-check:before {
 			content: "\1F5F8";
 			display: inline-block;
-			
-			@media (max-width: 768px) {
-				padding: 7px 2px 0 0;
-			}
 		}
 	}
 }
@@ -371,6 +366,11 @@ $border: $border-width solid $border-colour;
 			
 			border-radius: $border-radius-left;
 			width: calc(85% + 6px);
+		}
+		
+		.#{$class}-label {
+			align-items: center;
+			display: flex;
 		}
 		
 		.#{$class}-trigger {
@@ -758,7 +758,7 @@ $border: $border-width solid $border-colour;
 				}
 				
 				&.ui-state-active {
-					background: $dark-colour;
+					background: $highlight-colour;
 					color: $white-100;
 					
 					&:after {
@@ -766,7 +766,7 @@ $border: $border-width solid $border-colour;
 					}
 					
 					&.ui-state-hover {
-						background: $dark-colour;
+						background: $highlight-colour;
 					}
 				}
 			}

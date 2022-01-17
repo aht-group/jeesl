@@ -40,6 +40,8 @@ $panel-header-gradient: linear-gradient(to bottom, $bright-grey, $soft-grey);
 $overlay-shadow: 0 3px 3px $black-40;
 $highlight-shadow: 0 -1px inset $white-80;
 
+$highlight-colour: $bright-colour;
+
 @function statusBackgroundGradient($height) {
 	@return repeating-linear-gradient(to bottom, $dark-colour, $medium-colour $height);
 }
@@ -56,4 +58,10 @@ $highlight-shadow: 0 -1px inset $white-80;
 
 	$main-background-gradient: linear-gradient(to right, $dark-colour, $bright-colour);
 	$breadcrumb-background-gradient: linear-gradient(to right, $white-0, $bright-colour);
+	
+	$highlight-colour: $bright-colour;
+}
+
+@mixin setHighlightColour($highlight) {
+	$highlight-colour: $highlight;
 }

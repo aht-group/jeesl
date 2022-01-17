@@ -536,7 +536,7 @@ html, body, .ui-widget {
   .jeesl-panel .ui-panel-titlebar {
     border-radius: 3px 3px 0 0;
     border-width: 0;
-    margin: 0;
+    margin: 0 0 4px 0;
     min-height: 84px; }
     .jeesl-panel .ui-panel-titlebar:after {
       display: block; }
@@ -558,7 +558,7 @@ html, body, .ui-widget {
   .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
     border-radius: 3px 3px 0 0;
     border-width: 0;
-    margin: 0;
+    margin: 0 0 4px 0;
     min-height: 84px; }
     .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
       display: block; }
@@ -643,7 +643,7 @@ html, body, .ui-widget {
 .ui-datatable .ui-datatable-header {
   border-radius: 3px 3px 0 0;
   border-width: 0;
-  margin: 0;
+  margin: 0 0 4px 0;
   min-height: 84px; }
   .ui-datatable .ui-datatable-header:after {
     display: block; }
@@ -708,7 +708,7 @@ html, body, .ui-widget {
   .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar {
     border-radius: 3px 3px 0 0;
     border-width: 0;
-    margin: 0;
+    margin: 0 0 4px 0;
     min-height: 84px; }
     .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar:after {
       display: block; }
@@ -730,7 +730,7 @@ html, body, .ui-widget {
   .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
     border-radius: 3px 3px 0 0;
     border-width: 0;
-    margin: 0;
+    margin: 0 0 4px 0;
     min-height: 84px; }
     .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
       display: block; }
@@ -821,7 +821,7 @@ html, body, .ui-widget {
 .ui-dialog .ui-dialog-titlebar {
   border-radius: 3px 3px 0 0;
   border-width: 0;
-  margin: 0;
+  margin: 0 0 4px 0;
   min-height: 84px;
   pointer-events: none; }
   .ui-dialog .ui-dialog-titlebar:after {
@@ -921,7 +921,7 @@ html, body, .ui-widget {
     .jeesl-tabs .ui-tabs-nav .ui-tabs-header {
       border-radius: 3px 3px 0 0;
       border-width: 0;
-      margin: 0;
+      margin: 0 0 4px 0;
       min-height: 84px; }
       .jeesl-tabs .ui-tabs-nav .ui-tabs-header:after {
         display: block; }
@@ -948,7 +948,7 @@ html, body, .ui-widget {
 .fc .fc-head {
   border-radius: 3px 3px 0 0;
   border-width: 0;
-  margin: 0;
+  margin: 0 0 4px 0;
   min-height: 84px; }
   .fc .fc-head:after {
     display: block; }
@@ -967,7 +967,7 @@ html, body, .ui-widget {
   .html-container-panel .html-container > div > section h1:first-child {
     border-radius: 3px 3px 0 0;
     border-width: 0;
-    margin: 0;
+    margin: 0 0 4px 0;
     min-height: 84px;
     font-size: 1.4em;
     letter-spacing: -.5px;

@@ -266,19 +266,19 @@ template {
 .jeesl-greyscale {
   filter: grayscale(1); }
 
-.ui-corner-all, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before {
+.ui-corner-all, .timeline-event-box.ui-state-default.ui-corner-all:before, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before {
   border-radius: 3px; }
 
-.ui-corner-top, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before {
+.ui-corner-top, .timeline-event-box.ui-state-default.ui-corner-top:before, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before {
   border-radius: 3px 3px 0 0; }
 
-.ui-corner-bottom, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before {
+.ui-corner-bottom, .timeline-event-box.ui-state-default.ui-corner-bottom:before, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before {
   border-radius: 0 0 3px 3px; }
 
-.ui-corner-left, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before {
+.ui-corner-left, .timeline-event-box.ui-state-default.ui-corner-left:before, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before {
   border-radius: 3px 0 0 3px; }
 
-.ui-corner-right, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before {
+.ui-corner-right, .timeline-event-box.ui-state-default.ui-corner-right:before, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before {
   border-radius: 0 3px 3px 0; }
 
 .ui-input-overlay {
@@ -300,6 +300,64 @@ template {
   .ui-input-overlay .jeesl-overlay-wrapper {
     color: #333333;
     overflow: auto; }
+
+.timeline-event-box.ui-state-default {
+  height: 22px;
+  min-width: 15px;
+  background: linear-gradient(to bottom, #ededed, #c4c4c4);
+  border: 1px solid #ababab;
+  box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
+  color: #333333;
+  line-height: normal;
+  padding: 0 5px;
+  transition: border-color 0.2s linear, color 0.2s linear, text-shadow 0.2s linear;
+  z-index: 0; }
+  @media (max-width: 768px) {
+    .timeline-event-box.ui-state-default {
+      height: 42px; } }
+  @media (max-width: 768px) {
+    .timeline-event-box.ui-state-default {
+      min-width: 30px; } }
+  .timeline-event-box.ui-state-default:after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle; }
+  .timeline-event-box.ui-state-default > * {
+    display: inline-block;
+    vertical-align: middle; }
+  @media (max-width: 768px) {
+    .timeline-event-box.ui-state-default {
+      padding: 0 10px; } }
+  .timeline-event-box.ui-state-default:before {
+    background: #c4c4c4;
+    content: '';
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: background 0.2s linear, opacity 0.2s linear;
+    width: 100%;
+    z-index: -1; }
+  .timeline-event-box.ui-state-default.ui-button-icon-only .ui-button-text {
+    display: none; }
+  .timeline-event-box.ui-state-default.ui-state-active, .timeline-event-box.ui-state-default.ui-state-hover {
+    background: linear-gradient(to bottom, #ededed, #c4c4c4);
+    border-color: #ababab;
+    box-shadow: none;
+    color: #333333; }
+    .timeline-event-box.ui-state-default.ui-state-active:before, .timeline-event-box.ui-state-default.ui-state-hover:before {
+      opacity: 1;
+      transition: background 0.2s linear, opacity 0.2s linear; }
+  .timeline-event-box.ui-state-default.ui-state-active {
+    border-color: #00663a;
+    color: white;
+    text-shadow: none; }
+    .timeline-event-box.ui-state-default.ui-state-active:before {
+      background: #008a4e; }
+  .timeline-event-box.ui-state-default .ui-button-text {
+    line-height: normal; }
 
 .ui-button.ui-state-default {
   height: 22px;
@@ -355,7 +413,7 @@ template {
     color: white;
     text-shadow: none; }
     .ui-button.ui-state-default.ui-state-active:before {
-      background: #00663a; }
+      background: #008a4e; }
   .ui-button.ui-state-default .ui-button-text {
     line-height: normal; }
   .ui-button.ui-state-default.ui-state-disabled {
@@ -443,7 +501,7 @@ template {
     color: white;
     text-shadow: none; }
     .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-active:before {
-      background: #00663a; }
+      background: #008a4e; }
   .ui-chkbox .ui-chkbox-box.ui-state-default .ui-button-text {
     line-height: normal; }
   @media (max-width: 768px) {
@@ -474,19 +532,12 @@ template {
   .ui-chkbox .ui-chkbox-box.ui-state-default .ui-icon-check:before {
     content: "\1F5F8";
     display: inline-block; }
-    @media (max-width: 768px) {
-      .ui-chkbox .ui-chkbox-box.ui-state-default .ui-icon-check:before {
-        padding: 7px 2px 0 0; } }
 
 .ui-inputfield.ui-state-default {
   border: none;
   border-radius: 3px;
   box-shadow: none;
-  height: 26px;
   padding: 5px 10px !important; }
-  @media (max-width: 768px) {
-    .ui-inputfield.ui-state-default {
-      height: 50px; } }
   .ui-inputfield.ui-state-default.ui-state-focus {
     box-shadow: none; }
 
@@ -512,15 +563,14 @@ template {
     border: none;
     border-radius: 3px;
     box-shadow: none;
-    height: 26px;
     padding: 5px 10px !important;
     border-radius: 3px 0 0 3px;
     width: calc(85% + 6px); }
-    @media (max-width: 768px) {
-      .ui-selectonemenu.ui-state-default .ui-inputfield {
-        height: 50px; } }
     .ui-selectonemenu.ui-state-default .ui-inputfield.ui-state-focus {
       box-shadow: none; }
+  .ui-selectonemenu.ui-state-default .ui-selectonemenu-label {
+    align-items: center;
+    display: flex; }
   .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger {
     height: 22px;
     min-width: 15px;
@@ -580,7 +630,7 @@ template {
       color: white;
       text-shadow: none; }
       .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-active:before {
-        background: #00663a; }
+        background: #008a4e; }
     .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-button-text {
       line-height: normal; }
     .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger:after {
@@ -677,7 +727,7 @@ template {
         .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight):after, .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight):after {
           border-color: #00663a; }
       .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight {
-        background: #00663a; }
+        background: #008a4e; }
         @media (max-width: 768px) {
           .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight:after {
             border-color: rgba(255, 255, 255, 0); } }
@@ -695,15 +745,14 @@ template {
     border: none;
     border-radius: 3px;
     box-shadow: none;
-    height: 26px;
     padding: 5px 10px !important;
     border-radius: 3px 0 0 3px;
     width: calc(85% + 6px); }
-    @media (max-width: 768px) {
-      .ui-selectcheckboxmenu.ui-state-default .ui-inputfield {
-        height: 50px; } }
     .ui-selectcheckboxmenu.ui-state-default .ui-inputfield.ui-state-focus {
       box-shadow: none; }
+  .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-label {
+    align-items: center;
+    display: flex; }
   .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger {
     height: 22px;
     min-width: 15px;
@@ -763,7 +812,7 @@ template {
       color: white;
       text-shadow: none; }
       .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active:before {
-        background: #00663a; }
+        background: #008a4e; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger .ui-button-text {
       line-height: normal; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger:after {
@@ -860,7 +909,7 @@ template {
         .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-hover:not(.ui-state-highlight):after, .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:hover:not(.ui-state-highlight):after {
           border-color: #00663a; }
       .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-highlight {
-        background: #00663a; }
+        background: #008a4e; }
         @media (max-width: 768px) {
           .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-highlight:after {
             border-color: rgba(255, 255, 255, 0); } }
@@ -927,7 +976,7 @@ template {
       color: white;
       text-shadow: none; }
       .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active:before {
-        background: #00663a; }
+        background: #008a4e; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-button-text {
       line-height: normal; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-selectcheckboxmenu-token-label {
@@ -1262,12 +1311,12 @@ template {
               .ui-datepicker .ui-datepicker-calendar > tbody .ui-state-default.ui-state-hover:after {
                 background: none; } }
         .ui-datepicker .ui-datepicker-calendar > tbody .ui-state-default.ui-state-active {
-          background: #00663a;
+          background: #008a4e;
           color: white; }
           .ui-datepicker .ui-datepicker-calendar > tbody .ui-state-default.ui-state-active:after {
             border-color: #00663a; }
           .ui-datepicker .ui-datepicker-calendar > tbody .ui-state-default.ui-state-active.ui-state-hover {
-            background: #00663a; }
+            background: #008a4e; }
   .ui-datepicker .ui-timepicker-div dl, .ui-datepicker .ui-timepicker-div dl dt, .ui-datepicker .ui-timepicker-div dl dd {
     float: none;
     margin: 0;
@@ -1385,7 +1434,7 @@ template {
       color: white;
       text-shadow: none; }
       .ui-slider .ui-slider-handle.ui-state-default.ui-state-active:before {
-        background: #00663a; }
+        background: #008a4e; }
     .ui-slider .ui-slider-handle.ui-state-default .ui-button-text {
       line-height: normal; }
     .ui-slider .ui-slider-handle.ui-state-default.ui-state-hover {
@@ -2001,6 +2050,15 @@ body, .ui-widget {
   .status-bar-wrapper form:not(:last-child) .jeesl-status-bar {
     margin-right: 0; }
 
+#fStatusBarHelp .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item:after {
+  border-left: 1px solid #008a4e;
+  content: '';
+  display: inline-block;
+  height: calc(100% - 14px);
+  margin: 7px 0;
+  position: initial;
+  vertical-align: top; }
+
 .jeesl-status-bar {
   color: white;
   padding: 0;
@@ -2486,7 +2544,7 @@ body, .ui-widget {
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight):after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight):after {
                 border-color: #00663a; }
             .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight {
-              background: #00663a; }
+              background: #008a4e; }
               @media (max-width: 768px) {
                 .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight:after {
                   border-color: rgba(255, 255, 255, 0); } }
@@ -2718,18 +2776,19 @@ body, .ui-widget {
     position: relative; }
     @media (max-width: 768px) {
       .jeesl-panel .ui-panel-titlebar {
-        border-width: 0;
         border-radius: 3px 3px 0 0;
-        margin: 0;
+        border-width: 0;
+        margin: 0 0 4px 0;
         min-height: 42px; } }
     .jeesl-panel .ui-panel-titlebar:after {
       background: #00663a;
-      bottom: 0;
+      bottom: -4px;
       content: '';
       display: none;
       height: 4px;
+      margin-left: -1px;
       position: absolute;
-      width: 100%; }
+      width: calc(100% + 2px); }
       @media (max-width: 768px) {
         .jeesl-panel .ui-panel-titlebar:after {
           display: block; } }
@@ -2806,18 +2865,19 @@ body, .ui-widget {
       margin-bottom: 0; }
       @media (max-width: 768px) {
         .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
-          border-width: 0;
           border-radius: 3px 3px 0 0;
-          margin: 0;
+          border-width: 0;
+          margin: 0 0 4px 0;
           min-height: 42px; } }
       .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
         background: #00663a;
-        bottom: 0;
+        bottom: -4px;
         content: '';
         display: none;
         height: 4px;
+        margin-left: -1px;
         position: absolute;
-        width: 100%; }
+        width: calc(100% + 2px); }
         @media (max-width: 768px) {
           .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
             display: block; } }
@@ -3091,18 +3151,19 @@ body, .ui-widget {
     margin-bottom: 0; }
     @media (max-width: 768px) {
       .ui-datatable .ui-datatable-header {
-        border-width: 0;
         border-radius: 3px 3px 0 0;
-        margin: 0;
+        border-width: 0;
+        margin: 0 0 4px 0;
         min-height: 42px; } }
     .ui-datatable .ui-datatable-header:after {
       background: #00663a;
-      bottom: 0;
+      bottom: -4px;
       content: '';
       display: none;
       height: 4px;
+      margin-left: -1px;
       position: absolute;
-      width: 100%; }
+      width: calc(100% + 2px); }
       @media (max-width: 768px) {
         .ui-datatable .ui-datatable-header:after {
           display: block; } }
@@ -3156,15 +3217,19 @@ body, .ui-widget {
     @media (max-width: 768px) {
       .ui-datatable table thead th, .ui-datatable table tbody tr {
         height: 42px; } }
-    .ui-datatable table thead th .ui-column-title .ui-widget {
-      font-weight: 700; }
+    .ui-datatable table thead th {
+      border-top: 0; }
+      .ui-datatable table thead th .ui-column-title .ui-widget {
+        font-weight: 700; }
     .ui-datatable table tbody tr, .ui-datatable table tbody .cell-select > label {
       transition: background .2s linear; }
+    .ui-datatable table tbody td {
+      padding: 5px 10px; }
     .ui-datatable table tbody .ui-state-hover, .ui-datatable table tbody .cell-select > label:not(.selected):hover {
       background: #dedede;
       box-shadow: none; }
     .ui-datatable table tbody .ui-state-highlight, .ui-datatable table tbody .cell-select > label.selected {
-      background: #00663a;
+      background: #008a4e;
       color: white;
       font-weight: 500;
       text-shadow: none; }
@@ -3358,18 +3423,19 @@ body, .ui-widget {
         position: relative; }
         @media (max-width: 768px) {
           .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar {
-            border-width: 0;
             border-radius: 3px 3px 0 0;
-            margin: 0;
+            border-width: 0;
+            margin: 0 0 4px 0;
             min-height: 42px; } }
         .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar:after {
           background: #00663a;
-          bottom: 0;
+          bottom: -4px;
           content: '';
           display: none;
           height: 4px;
+          margin-left: -1px;
           position: absolute;
-          width: 100%; }
+          width: calc(100% + 2px); }
           @media (max-width: 768px) {
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar:after {
               display: block; } }
@@ -3446,18 +3512,19 @@ body, .ui-widget {
           margin-bottom: 0; }
           @media (max-width: 768px) {
             .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
-              border-width: 0;
               border-radius: 3px 3px 0 0;
-              margin: 0;
+              border-width: 0;
+              margin: 0 0 4px 0;
               min-height: 42px; } }
           .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
             background: #00663a;
-            bottom: 0;
+            bottom: -4px;
             content: '';
             display: none;
             height: 4px;
+            margin-left: -1px;
             position: absolute;
-            width: 100%; }
+            width: calc(100% + 2px); }
             @media (max-width: 768px) {
               .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
                 display: block; } }
@@ -3771,18 +3838,19 @@ body, .ui-widget {
     position: relative; }
     @media (max-width: 768px) {
       .ui-dialog .ui-dialog-titlebar {
-        border-width: 0;
         border-radius: 3px 3px 0 0;
-        margin: 0;
+        border-width: 0;
+        margin: 0 0 4px 0;
         min-height: 42px; } }
     .ui-dialog .ui-dialog-titlebar:after {
       background: #00663a;
-      bottom: 0;
+      bottom: -4px;
       content: '';
       display: none;
       height: 4px;
+      margin-left: -1px;
       position: absolute;
-      width: 100%; }
+      width: calc(100% + 2px); }
       @media (max-width: 768px) {
         .ui-dialog .ui-dialog-titlebar:after {
           display: block; } }
@@ -4007,18 +4075,19 @@ body, .ui-widget {
     height: auto; }
     @media (max-width: 768px) {
       .jeesl-tabs .ui-tabs-nav {
-        border-width: 0;
         border-radius: 3px 3px 0 0;
-        margin: 0;
+        border-width: 0;
+        margin: 0 0 4px 0;
         min-height: 42px; } }
     .jeesl-tabs .ui-tabs-nav:after {
       background: #00663a;
-      bottom: 0;
+      bottom: -4px;
       content: '';
       display: none;
       height: 4px;
+      margin-left: -1px;
       position: absolute;
-      width: 100%; }
+      width: calc(100% + 2px); }
       @media (max-width: 768px) {
         .jeesl-tabs .ui-tabs-nav:after {
           display: block; } }
@@ -4162,18 +4231,19 @@ body, .ui-widget {
   padding: 0; }
   @media (max-width: 768px) {
     .fc .fc-head {
-      border-width: 0;
       border-radius: 3px 3px 0 0;
-      margin: 0;
+      border-width: 0;
+      margin: 0 0 4px 0;
       min-height: 42px; } }
   .fc .fc-head:after {
     background: #00663a;
-    bottom: 0;
+    bottom: -4px;
     content: '';
     display: none;
     height: 4px;
+    margin-left: -1px;
     position: absolute;
-    width: 100%; }
+    width: calc(100% + 2px); }
     @media (max-width: 768px) {
       .fc .fc-head:after {
         display: block; } }
@@ -4233,18 +4303,19 @@ body, .ui-widget {
     margin-bottom: 2px; }
     @media (max-width: 768px) {
       .html-container-panel .html-container > div > section h1:first-child {
-        border-width: 0;
         border-radius: 3px 3px 0 0;
-        margin: 0;
+        border-width: 0;
+        margin: 0 0 4px 0;
         min-height: 42px; } }
     .html-container-panel .html-container > div > section h1:first-child:after {
       background: #00663a;
-      bottom: 0;
+      bottom: -4px;
       content: '';
       display: none;
       height: 4px;
+      margin-left: -1px;
       position: absolute;
-      width: 100%; }
+      width: calc(100% + 2px); }
       @media (max-width: 768px) {
         .html-container-panel .html-container > div > section h1:first-child:after {
           display: block; } }
