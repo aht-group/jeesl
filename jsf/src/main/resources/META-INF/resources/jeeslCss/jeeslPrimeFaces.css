@@ -185,8 +185,8 @@ input[class="ui-spinner-input ui-inputfield ui-state-default ui-corner-all ui-st
 input[class="ui-spinner-input ui-inputfield ui-state-default ui-corner-all ui-state-hover ui-state-focus"]{text-align:left;width: 96% !important;}
 input[class="ui-spinner-input ui-inputfield ui-state-default ui-corner-all ui-state-focus ui-state-hover"]{text-align:left;width: 96% !important;}
 
-.jeeslDtHighlightNone{background-color: rgb(255, 255, 255);}
-.jeeslDtHighlightLight{background-color: rgb(221, 226, 239);}
+.jeeslDtHighlightNone{background-color: rgb(255, 255, 255); color: hsla(0,0%,31%,1);}
+.jeeslDtHighlightLight{background-color: rgb(221, 226, 239); color: hsla(0,0%,31%,1);}
 .jeeslDtHighlightStrong{background-color: rgb(121, 126, 139);}
 
 .jeeslDtCellTable {}
