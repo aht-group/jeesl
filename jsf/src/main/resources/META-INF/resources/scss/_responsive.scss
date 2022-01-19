@@ -1277,6 +1277,8 @@ body, .ui-widget {
 @mixin jeesl-titlebar-title {
 	@include font-header;
 	
+	align-items: center;
+	display: flex;
 	flex-grow: 1;
 	//line-height: 22px;
 	padding-left: $regular-spacing;
@@ -2183,6 +2185,52 @@ body, .ui-widget {
 			}
 		}
 	}
+	
+	&.jeesl-table-dialog {
+		.ui-dialog-titlebar {
+			margin: 0;
+			
+			@media (max-width: 768px) {
+				margin-bottom: 4px;
+			}
+		}
+		
+		.ui-widget-content {
+			padding: 0;
+			
+			table {
+				thead, tbody {
+					border: 0;
+					
+					tr {
+						border: 0;
+						
+						th, td {
+							border: $border;
+							
+							&:first-child {
+								border-left: 0;
+							}
+							
+							&:last-child {
+								border-right: 0;
+							}
+						}
+					}
+				}
+				
+				thead tr:first-child th {
+					@media (max-width: 768px) {
+						border-top: 0;
+					}
+				}
+				
+				tbody tr:last-child, tbody tr:last-child td {
+					border-bottom: 0;
+				}
+			}
+		}
+	}
 
 	.ui-dialog-content {
 		padding: $half-spacing $regular-spacing;
@@ -2374,6 +2422,12 @@ body, .ui-widget {
 				}
 			}
 		}
+	}
+}
+
+@media (max-width: 768px) {
+	.pf-action-icon img {
+		height: $element-height-mobile;
 	}
 }
 

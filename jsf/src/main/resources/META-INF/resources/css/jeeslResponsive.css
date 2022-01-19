@@ -2794,6 +2794,8 @@ body, .ui-widget {
           display: block; } }
     .jeesl-panel .ui-panel-titlebar .ui-panel-title {
       font-weight: 700;
+      align-items: center;
+      display: flex;
       flex-grow: 1;
       padding-left: 10px; }
       @media (max-width: 768px) {
@@ -2883,6 +2885,8 @@ body, .ui-widget {
             display: block; } }
       .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
         font-weight: 700;
+        align-items: center;
+        display: flex;
         flex-grow: 1;
         padding-left: 10px; }
         @media (max-width: 768px) {
@@ -3169,6 +3173,8 @@ body, .ui-widget {
           display: block; } }
     .ui-datatable .ui-datatable-header .pf-datatable-header-title {
       font-weight: 700;
+      align-items: center;
+      display: flex;
       flex-grow: 1;
       padding-left: 10px; }
       @media (max-width: 768px) {
@@ -3441,6 +3447,8 @@ body, .ui-widget {
               display: block; } }
         .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-title {
           font-weight: 700;
+          align-items: center;
+          display: flex;
           flex-grow: 1;
           padding-left: 10px; }
           @media (max-width: 768px) {
@@ -3530,6 +3538,8 @@ body, .ui-widget {
                 display: block; } }
           .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
             font-weight: 700;
+            align-items: center;
+            display: flex;
             flex-grow: 1;
             padding-left: 10px; }
             @media (max-width: 768px) {
@@ -3863,6 +3873,8 @@ body, .ui-widget {
       flex-grow: 1; }
       .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-title {
         font-weight: 700;
+        align-items: center;
+        display: flex;
         flex-grow: 1;
         padding-left: 10px; }
         @media (max-width: 768px) {
@@ -4039,6 +4051,28 @@ body, .ui-widget {
         left: 15px !important;
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
+  .ui-dialog.jeesl-table-dialog .ui-dialog-titlebar {
+    margin: 0; }
+    @media (max-width: 768px) {
+      .ui-dialog.jeesl-table-dialog .ui-dialog-titlebar {
+        margin-bottom: 4px; } }
+  .ui-dialog.jeesl-table-dialog .ui-widget-content {
+    padding: 0; }
+    .ui-dialog.jeesl-table-dialog .ui-widget-content table thead, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody {
+      border: 0; }
+      .ui-dialog.jeesl-table-dialog .ui-widget-content table thead tr, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr {
+        border: 0; }
+        .ui-dialog.jeesl-table-dialog .ui-widget-content table thead tr th, .ui-dialog.jeesl-table-dialog .ui-widget-content table thead tr td, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr th, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr td {
+          border: 1px solid #ababab; }
+          .ui-dialog.jeesl-table-dialog .ui-widget-content table thead tr th:first-child, .ui-dialog.jeesl-table-dialog .ui-widget-content table thead tr td:first-child, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr th:first-child, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr td:first-child {
+            border-left: 0; }
+          .ui-dialog.jeesl-table-dialog .ui-widget-content table thead tr th:last-child, .ui-dialog.jeesl-table-dialog .ui-widget-content table thead tr td:last-child, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr th:last-child, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr td:last-child {
+            border-right: 0; }
+    @media (max-width: 768px) {
+      .ui-dialog.jeesl-table-dialog .ui-widget-content table thead tr:first-child th {
+        border-top: 0; } }
+    .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr:last-child, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr:last-child td {
+      border-bottom: 0; }
   .ui-dialog .ui-dialog-content {
     padding: 5px 10px;
     margin-bottom: 0;
@@ -4143,6 +4177,8 @@ body, .ui-widget {
             text-shadow: inherit; }
       .jeesl-tabs .ui-tabs-nav .ui-tabs-header > a {
         font-weight: 700;
+        align-items: center;
+        display: flex;
         flex-grow: 1;
         padding-left: 10px;
         color: #333333;
@@ -4249,6 +4285,8 @@ body, .ui-widget {
         display: block; } }
   .fc .fc-head .fc-day-header > span {
     font-weight: 700;
+    align-items: center;
+    display: flex;
     flex-grow: 1;
     padding-left: 10px; }
     @media (max-width: 768px) {
@@ -4285,6 +4323,9 @@ body, .ui-widget {
     .input-grid .p-field .p-col:not(.ui-outputlabel) > * {
       min-height: 42px; } }
 
+@media (max-width: 768px) {
+  .pf-action-icon img {
+    height: 42px; } }
 .html-container-panel .html-container > div > section {
   padding: 10px; }
   .html-container-panel .html-container > div > section h1:first-child {
@@ -4297,6 +4338,8 @@ body, .ui-widget {
     padding: 0;
     position: relative;
     font-weight: 700;
+    align-items: center;
+    display: flex;
     flex-grow: 1;
     padding-left: 10px;
     margin: -10px + 2px;

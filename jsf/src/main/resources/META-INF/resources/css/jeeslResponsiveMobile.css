@@ -886,6 +886,8 @@ html, body, .ui-widget {
   left: 15px !important;
   transform: translate(0, -50%);
   width: calc(100% - 30px) !important; }
+.ui-dialog.jeesl-table-dialog .ui-dialog-titlebar {
+  margin-bottom: 4px; }
 .ui-dialog .ui-dialog-content {
   padding: 15px;
   margin: 0; }
@@ -975,3 +977,6 @@ html, body, .ui-widget {
     margin-bottom: 10px; }
     .html-container-panel .html-container > div > section h1:first-child:after {
       display: block; }
+
+.pf-action-icon img {
+  height: 84px; }

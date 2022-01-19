@@ -958,6 +958,10 @@ html, body, .ui-widget {
 			width: calc(100% - 30px) !important;
 		}
 	}
+	
+	&.jeesl-table-dialog .ui-dialog-titlebar {
+		margin-bottom: 4px;
+	}
 
 	.ui-dialog-content {
 		padding: $wide-spacing;
@@ -1064,4 +1068,8 @@ html, body, .ui-widget {
 			}
 		}
 	}
+}
+
+.pf-action-icon img {
+	height: $element-height-mobile;
 }
