@@ -5,10 +5,8 @@
 
 $border: $border-width solid $border-colour;
 
-$font-size-mobile: 22px;
+$font-size-mobile: 26px;
 $element-height-mobile: 84px;
-
-
 
 @mixin font-dropdown {
 	font-size: $font-size-interactable;
@@ -664,16 +662,20 @@ html, body, .ui-widget {
 }
 
 @mixin jeesl-titlebar-actions {
+	img {
+		height: calc(#{$element-height-mobile} - 2 * #{$ls-element-padding-vertical});
+		padding: 0 $ls-element-padding-vertical;
+	}
+	
+	> img {
+		margin: $ls-element-padding-vertical 0;
+	}
+		
 	.pf-action-icon, .jeesl-action-icon {
 		padding: $ls-element-padding-vertical 0;
 		
 		&:before {
-		    border-left: 1px solid #a8a8a8;
-		}
-		
-		img {
-			height: calc(#{$element-height-mobile} - 2 * #{$ls-element-padding-vertical});
-			padding: 0 $ls-element-padding-vertical;
+		    border-left: $border;
 		}
 	}
 }
@@ -922,6 +924,11 @@ html, body, .ui-widget {
 		height: $element-height-mobile;
 	}
 	
+	img {
+		height: auto;
+		max-height: calc(#{$element-height-mobile} - 2 * #{$regular-spacing});
+	}
+	
 	.ui-datatable-header {
 		border-width: $border-width $border-width 0;
 	}
@@ -1057,14 +1064,17 @@ html, body, .ui-widget {
 .html-container-panel {
 	.html-container {
 		font-size: 1rem;
+		line-height: 1.25em;
 		
 		> div > section {
+			padding: $wide-spacing;
+			
 			h1:first-child {
 				@include jeesl-titlebar;
 				@include jeesl-titlebar-title;
 				
-				margin: -$regular-spacing;
-				margin-bottom: $regular-spacing;
+				margin: -$wide-spacing;
+				margin-bottom: $wide-spacing;
 			}
 		}
 	}
