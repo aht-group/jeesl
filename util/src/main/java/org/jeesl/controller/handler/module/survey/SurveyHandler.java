@@ -330,7 +330,13 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 		fSurvey.save(matrixToSave);
 		
 		if(SurveyHandler.debug){logger.warn("Load Matrix");try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
-		for(MATRIX m : fSurvey.fCells(new ArrayList<ANSWER>(answers.values())))
+		
+		List<ANSWER> listAnswers = new ArrayList<ANSWER>(answers.values());
+		logger.info("Loading ... for "+listAnswers.size());
+		List<MATRIX> cellList = fSurvey.fCells(listAnswers);
+		logger.info("Got: "+cellList.size());
+		
+		for(MATRIX m : cellList)
 		{
 			matrix.put(m.getAnswer().getQuestion().getId(),m.getRow().getId(),m.getColumn().getId(),m);
 		}

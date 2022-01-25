@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -23,6 +24,8 @@ import javax.persistence.criteria.Root;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.json.system.io.db.tuple.JsonTupleFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.facade.ParentPredicate;
 import org.jeesl.interfaces.model.marker.EjbEquals;
@@ -68,6 +71,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithContext;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
+import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1422,6 +1426,24 @@ public class JeeslFacadeBean implements JeeslFacade
 		TypedQuery<T> tQ = em.createQuery(select);
 		logger.info(tQ.unwrap(org.hibernate.Query.class).getQueryString());
 		return tQ.getResultList();
+	}
+	
+	@Override public <W extends JeeslWithType<T>, T extends JeeslStatus<?, ?, T>> Json1Tuples<T> tpcWithType(Class<W> cWith, Class<T> cType) 
+	{
+		Json1TuplesFactory<T> jtf = new Json1TuplesFactory<>(cType);
+		jtf.setfUtils(this);
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<W> item = cQ.from(cWith);
+		
+		Expression<Long> eCount = cB.count(item.<Long>get("id"));
+		Path<T> pStatus = item.get("type");
+		
+		cQ.groupBy(pStatus.get("id"));
+		cQ.multiselect(pStatus.get("id"),eCount);
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+        return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 
 }

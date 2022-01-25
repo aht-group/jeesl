@@ -48,6 +48,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithContext;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
+import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 
 public interface JeeslFacade extends JeeslIdFacade
 {
@@ -163,4 +164,5 @@ public interface JeeslFacade extends JeeslIdFacade
 	<T extends EjbWithEmail> T fByEmail(Class<T> clazz, String email) throws JeeslNotFoundException;
 	<L extends JeeslLang,T extends EjbWithId> List<T> fByNameAndLang(Class<T> type, Class<L> langType,  String lang, String name ) throws JeeslNotFoundException;
 
+	<W extends JeeslWithType<T>, T extends JeeslStatus<?,?,T>> Json1Tuples<T> tpcWithType(Class<W> cWith, Class<T> cType);
 }
