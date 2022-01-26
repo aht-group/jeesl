@@ -80,6 +80,8 @@ $enable-pointer-cursor-for-buttons: true;
 			padding: 0;
 		    pointer-events: all;
 		    transition: opacity 0s .2s;
+
+			-webkit-tap-highlight-color: $bright-colour;
 			
 			@media (max-width: 768px) {
 				display: list-item;
@@ -146,6 +148,8 @@ $enable-pointer-cursor-for-buttons: true;
 		display: none;
 		transition: .4s linear background;
 		vertical-align: top;
+		
+		-webkit-tap-highlight-color: $bright-colour;
 
 		@media (max-width: 768px) {
 			display: inline-block;
@@ -221,6 +225,8 @@ $enable-pointer-cursor-for-buttons: true;
 				pointer-events: all;
 			    position: relative;
 			    white-space: nowrap;
+
+				-webkit-tap-highlight-color: $bright-colour;
 
 				@media (max-width: 768px) {
 			    	height: $bc-element-height-mobile;
@@ -1293,6 +1299,25 @@ body, .ui-widget {
 	flex-direction: row-reverse;
 	float: none;
 	height: auto;
+	
+	img {
+		height: 12px;
+		padding: 0 4px;
+			
+		@media (max-width: 768px) {
+			height: 29px;
+			padding: 0 $ls-element-padding-vertical;
+		}
+	}
+	
+	> img {
+		border-left: $border;
+		margin: 4px 0;
+		
+		@media (max-width: 768px) {
+			margin: $ls-element-padding-vertical 0;
+		}
+	}
 		
 	.pf-action-icon, .jeesl-action-icon {
 		@include vertical-center(before);
@@ -1307,7 +1332,7 @@ body, .ui-widget {
 			padding: 7px 0 6px;
 			
 			&:before {
-			    border-left: 1px solid #a8a8a8;
+			    border-left: $border;
 			}
 		}
 		
@@ -1316,19 +1341,8 @@ body, .ui-widget {
 		}
 		
 		img {
-			height: 12px;
-			padding: 0 4px;
 			vertical-align: middle;
-			
-			@media (max-width: 768px) {
-				height: 29px;
-				padding: 0 6px;
-			}
 		}
-	}
-	
-	img {
-		height: 100%;
 	}
 }
 
@@ -2045,6 +2059,11 @@ body, .ui-widget {
 	}
 	
 	@media (max-width: 768px) {
+		img {
+			height: auto;
+			max-height: calc(#{$element-height-mobile} - 2 * #{$half-spacing});
+		}
+		
 		.ui-datatable-header {
 			border-width: $border-width $border-width 0;
 		}
