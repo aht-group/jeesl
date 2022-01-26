@@ -180,19 +180,6 @@
 								        </f:facet>
 								    </p:textEditor>
 								</p:panel>
-								<h:outputScript>
-									window.onload = function(evt) {
-										var quill = PF('editorWidget1').editor;
-										var Delta = Quill.import('delta');
-										quill.clipboard.addMatcher(Node.ELEMENT_NODE, function (node, delta) {
-											var plaintext = $(node).text();
-											console.log(plaintext);
-											var dlta = new Delta();
-											dlta.insert(plaintext);
-											return dlta;
-										});
-									}
-								</h:outputScript>
 							</h:form>
 							<jp:ioFrFiles handler="#{cc.attrs.bean.hFileRepository}" allowDelete="true" rendered="#{(cc.attrs.bean.element.type.code eq 'image')}" componentPrefix="#{cc.id}"/>
 							
@@ -317,20 +304,7 @@
 											</span>
 								        </f:facet>
 								    </p:textEditor>
-								</p:panel>
-								<h:outputScript>
-									window.onload = function(evt) {
-										var quill = PF('editorWidget1').editor;
-										var Delta = Quill.import('delta');
-										quill.clipboard.addMatcher(Node.ELEMENT_NODE, function (node, delta) {
-											var plaintext = $(node).text();
-											console.log(plaintext);
-											var dlta = new Delta();
-											dlta.insert(plaintext);
-											return dlta;
-										});
-									}
-								</h:outputScript>
+								</p:panel>	
 							</h:form>
 							<jp:ioFrFiles handler="#{cc.attrs.bean.hFileRepository}" allowDelete="true" rendered="#{(cc.attrs.bean.element.type.code eq 'image')}" componentPrefix="#{cc.id}" update=":#{cc.id}:sRow"/>
 							
