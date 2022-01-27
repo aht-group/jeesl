@@ -12,6 +12,9 @@
 	
 	<composite:implementation>		
 		<ul class="aupHeadlineBreadcrumb jeesl-menu-bar-list">
+		<li class="jeesl-subtitle">
+			<h:outputText value="#{sessionTenantBean.context.name[localeCode].lang}" />
+		</li>
 	    <c:forEach var="m" items="#{cc.attrs.bean.breadcrumb(cc.attrs.value.pageCode)}">
 	    	<li class="jeesl-menu-bar-item">
 	    		<label class="jeesl-menu-bar-button jeesl-menu-bar-dropdown">

@@ -163,13 +163,13 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	{
 		super.updateUiForCategory();
 		
-		supportsUpload = JeeslOptionUploadable.class.isAssignableFrom(cStatus);
+		supportsUpload = JeeslOptionUploadable.class.isAssignableFrom(optionClass);
 		
-		supportsDescription = JeeslOptionRestDescription.class.isAssignableFrom(cStatus);
-		supportsImage = JeeslStatusWithImage.class.isAssignableFrom(cStatus);
-		supportsGraphic = EjbWithGraphic.class.isAssignableFrom(cStatus);
+		supportsDescription = JeeslOptionRestDescription.class.isAssignableFrom(optionClass);
+		supportsImage = JeeslStatusWithImage.class.isAssignableFrom(optionClass);
+		supportsGraphic = EjbWithGraphic.class.isAssignableFrom(optionClass);
 		
-		supportsFigure = EjbWithGraphicFigure.class.isAssignableFrom(cStatus);
+		supportsFigure = EjbWithGraphicFigure.class.isAssignableFrom(optionClass);
 		
 	}
 
@@ -225,10 +225,10 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 		sb.append(" allowAdditionalElements:").append(allowAdditionalElements.get(((EjbWithId)category).getId()));
 		logger.info(sb.toString());
 
-		cStatus = Class.forName(((EjbWithImage)category).getImage());
+		optionClass = Class.forName(((EjbWithImage)category).getImage());
 		updateUiForCategory();
 
-		try {entity = fGraphic.fByCode(fbRevision.getClassEntity(), cStatus.getName());}
+		try {entity = fGraphic.fByCode(fbRevision.getClassEntity(), optionClass.getName());}
 		catch (JeeslNotFoundException e) {}
 
 		uiAllowAdd = allowAdditionalElements.get(((EjbWithId)category).getId()) || hasDeveloperAction;
@@ -237,7 +237,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 		{
             clParent = Class.forName(((EjbWithImageAlt)category).getImageAlt()).asSubclass(fbStatus.getClassStatus());
             parents = fGraphic.all(clParent);
-            logger.info(cStatus.getSimpleName()+" "+parents.size());
+            logger.info(optionClass.getSimpleName()+" "+parents.size());
 		}
 		else
 		{
@@ -252,7 +252,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	@SuppressWarnings("unchecked")
 	protected void reloadStatusEntries()
 	{
-		items = fGraphic.allOrderedPosition(cStatus);
+		items = fGraphic.allOrderedPosition(optionClass);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -261,7 +261,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 		logger.debug("add");
 		uiAllowCode=true;
 
-		status = cStatus.newInstance();
+		status = optionClass.newInstance();
 		((EjbWithId)status).setId(0);
 		((EjbWithCode)status).setCode("enter code");
 		((EjbWithLang<L>)status).setName(efLang.createEmpty(localeCodes));
@@ -280,8 +280,8 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	public void selectStatus() throws JeeslConstraintViolationException, JeeslNotFoundException, JeeslLockingException
 	{
 		figures = null; figure=null;
-		status = fGraphic.find(cStatus,(EjbWithId)status);
-		status = fGraphic.loadGraphic(cStatus,(EjbWithId)status);
+		status = fGraphic.find(optionClass,(EjbWithId)status);
+		status = fGraphic.loadGraphic(optionClass,(EjbWithId)status);
 		logger.debug("selectStatus");
 		status = efLang.persistMissingLangs(fGraphic,localeCodes,(EjbWithLang)status);
 		status = efDescription.persistMissingLangs(fGraphic,localeCodes,(EjbWithDescription)status);
@@ -343,7 +343,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
         	if(debugSave){logger.info("Saving "+status.getClass().getSimpleName()+" "+status.toString());}
 			status = fGraphic.save((EjbSaveable)status);
-			status = fGraphic.loadGraphic(cStatus,(EjbWithId)status);
+			status = fGraphic.loadGraphic(optionClass,(EjbWithId)status);
 			if(supportsGraphic)
 			{
 				graphic = ((EjbWithGraphic<G>)status).getGraphic();
