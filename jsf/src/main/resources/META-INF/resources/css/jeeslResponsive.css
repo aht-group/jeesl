@@ -3192,7 +3192,10 @@ body, .ui-widget {
           display: block; } }
     @media (max-width: 768px) {
       .ui-fieldset .ui-fieldset-legend {
-        font-size: 1.4em; } }
+        border-width: 1px;
+        font-size: 1.4em; }
+        .ui-fieldset .ui-fieldset-legend:after {
+          margin-left: -11px; } }
     .ui-fieldset .ui-fieldset-legend.ui-state-focus {
       background: linear-gradient(to bottom, #ededed, #c4c4c4);
       border: 1px solid #ababab;
@@ -3225,6 +3228,9 @@ body, .ui-widget {
             font-size: 2em; } }
       .ui-fieldset .ui-fieldset-legend .ui-fieldset-toggler:before {
         content: "\f067"; }
+        @media (max-width: 768px) {
+          .ui-fieldset .ui-fieldset-legend .ui-fieldset-toggler:before {
+            font-size: 1em; } }
 
 .ui-datatable {
   border-radius: 3px 3px 0 0; }
