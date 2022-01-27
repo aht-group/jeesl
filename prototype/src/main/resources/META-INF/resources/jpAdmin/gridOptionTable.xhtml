@@ -106,6 +106,9 @@
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" styleClass="auCleanPanelGrid">
+								<p:outputLabel value="#{msg.jeeslOptionClass}"/>
+								<h:outputText value="#{cc.attrs.bean.optionClass.simpleName}"/>
+								
 								<p:outputLabel value="#{msg.aupOptionCode}"/>
 								<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}" autocomplete="off"/>
 								<h:outputText rendered="#{not cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}"/>

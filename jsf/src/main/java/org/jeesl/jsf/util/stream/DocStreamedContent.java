@@ -17,10 +17,9 @@ public class DocStreamedContent extends DefaultStreamedContent implements Stream
 	{
 		super(is,mimeType,fileName);
 	}
-	/*	
+		
 	public DocStreamedContent(InputStream is, String fileName)
 	{
-		this(is,JeeslXlsReport.mimeType,fileName);
+		this(is,JeeslDocReport.mimeType,fileName);
 	}
-	*/
 }

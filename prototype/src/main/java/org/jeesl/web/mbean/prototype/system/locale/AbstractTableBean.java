@@ -70,12 +70,10 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected final EjbGraphicFactory<L,D,G,GT,F,FS> efGraphic;
 	protected final EjbGraphicFigureFactory<L,D,G,GT,F,FS> efFigure;
 
-	
-
 	protected F figure; public F getFigure() {return figure;} public void setFigure(F figure) {this.figure = figure;}
 
 	@SuppressWarnings("rawtypes")
-	protected Class cStatus;
+	protected Class optionClass; public Class<?> getOptionClass() {return optionClass;}
 	
 	protected long index;
 	protected Map<Long,Boolean> allowAdditionalElements; public Map<Long, Boolean> getAllowAdditionalElements(){return allowAdditionalElements;}
@@ -136,10 +134,9 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	
 	protected void updateUiForCategory()
 	{
-		supportsSymbol = JeeslStatusWithSymbol.class.isAssignableFrom(cStatus);
-		supportsLocked = EjbWithLocked.class.isAssignableFrom(cStatus);
-		supportsDownload = JeeslOptionRestDownload.class.isAssignableFrom(cStatus);
-		supportsColour = JeeslStatusWithColour.class.isAssignableFrom(cStatus);
-	}
-	
+		supportsSymbol = JeeslStatusWithSymbol.class.isAssignableFrom(optionClass);
+		supportsLocked = EjbWithLocked.class.isAssignableFrom(optionClass);
+		supportsDownload = JeeslOptionRestDownload.class.isAssignableFrom(optionClass);
+		supportsColour = JeeslStatusWithColour.class.isAssignableFrom(optionClass);
+	}	
 }

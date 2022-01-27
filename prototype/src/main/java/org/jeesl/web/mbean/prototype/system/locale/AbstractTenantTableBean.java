@@ -197,10 +197,10 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 		sb.append(fqcn);
 		logger.info(sb.toString());
 
-		cStatus = Class.forName(fqcn);
+		optionClass = Class.forName(fqcn);
 		updateUiForCategory();
 
-		try {entity = fGraphic.fByCode(fbRevision.getClassEntity(), cStatus.getName());}
+		try {entity = fGraphic.fByCode(fbRevision.getClassEntity(), optionClass.getName());}
 		catch (JeeslNotFoundException e) {}
 
 		uiAllowAdd = allowAdditionalElements.get(((EjbWithId)category).getId()) || hasDeveloperAction;
@@ -213,7 +213,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 	@SuppressWarnings("unchecked")
 	protected void reloadStatusEntries()
 	{
-		items = fGraphic.all(cStatus,realm,rref);
+		items = fGraphic.all(optionClass,realm,rref);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -222,7 +222,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 		logger.debug("add");
 		uiAllowCode=true;
 
-		status = cStatus.newInstance();
+		status = optionClass.newInstance();
 		((EjbWithId)status).setId(0);
 		((EjbWithCode)status).setCode("enter code");
 		((EjbWithLang<L>)status).setName(efLang.createEmpty(localeCodes));
@@ -240,8 +240,8 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 	public void selectStatus() throws JeeslConstraintViolationException, JeeslNotFoundException, JeeslLockingException
 	{
 		figures = null; figure=null;
-		status = fGraphic.find(cStatus,(EjbWithId)status);
-		status = fGraphic.loadGraphic(cStatus,(EjbWithId)status);
+		status = fGraphic.find(optionClass,(EjbWithId)status);
+		status = fGraphic.loadGraphic(optionClass,(EjbWithId)status);
 		logger.debug("selectStatus");
 		status = efLang.persistMissingLangs(fGraphic,localeCodes,(EjbWithLang)status);
 		status = efDescription.persistMissingLangs(fGraphic,localeCodes,(EjbWithDescription)status);
@@ -286,7 +286,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 
         	if(logOnInfo){logger.info("Saving "+status.getClass().getSimpleName()+" "+status.toString()+" rref:"+rref+" realm:"+realm.toString());}
 			status = fGraphic.save((EjbSaveable)status);
-			status = fGraphic.loadGraphic(cStatus,(EjbWithId)status);
+			status = fGraphic.loadGraphic(optionClass,(EjbWithId)status);
 
 			graphic = ((EjbWithGraphic<G>)status).getGraphic();
 			if(logOnInfo){logger.info("Saved "+graphic.getClass().getSimpleName()+" "+graphic.toString());}
@@ -411,7 +411,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 
 		JeeslDbMcsStatusUpdater<L,D,LOC,R,RREF,G,GT> updater = new JeeslDbMcsStatusUpdater<L,D,LOC,R,RREF,G,GT>(fbStatus,fbSvg,fGraphic,lp);
 		updater.initMcs(realm,rref);
-		updater.iStatus(cStatus,xml);
+		updater.iStatus(optionClass,xml);
 
         selectCategory();
 	}
