@@ -18,7 +18,7 @@
 	<!-- Deprecated, use jeesl:tabTranslationEditor -->
         
   <composite:implementation>
-  	<p:tabView id="tabView" var="t" value="#{cc.attrs.keys}">  
+  	<p:tabView id="tabView" var="t" value="#{cc.attrs.keys}" styleClass="jeesl-tabs">  
   		<p:tab title="#{t}">
   			<c:if test="#{cc.attrs.withName}">
 	  			<p:outputLabel value="#{cc.attrs.labelTranslation}"/>
