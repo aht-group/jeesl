@@ -922,7 +922,16 @@ html, body, .ui-widget {
 .ui-fieldset .ui-fieldset-legend {
 	@include jeesl-titlebar;
 	
+	border-width: $border-width;
 	font-size: $font-size-header;
+	
+	&:after {
+		margin-left: -1px - $regular-spacing;
+	}
+	
+	.ui-fieldset-toggler:before {
+		font-size: 1em;
+	}
 }
 
 .ui-datatable {

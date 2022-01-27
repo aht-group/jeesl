@@ -2016,7 +2016,12 @@ body, .ui-widget {
 		transition: background .2s linear, color .2s linear;
 		
 		@media (max-width: 768px) {
+			border-width: $border-width;
 			font-size: $font-size-header;
+			
+			&:after {
+				margin-left: -1px - $regular-spacing;
+			}
 		}
 		
 		&.ui-state-focus {
@@ -2040,6 +2045,10 @@ body, .ui-widget {
 			
 			&:before {
 				content: "\f067";
+				
+				@media (max-width: 768px) {
+					font-size: 1em;
+				}
 			}
 		}
 	}
