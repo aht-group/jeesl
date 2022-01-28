@@ -890,6 +890,8 @@ html, body, .ui-widget {
 	.ui-panel-content {
 		@include input-grid;
 		
+		padding: $regular-spacing $wide-spacing;
+		
 		//&:not(.html-container-panel) {
 		//	padding: $regular-spacing $wide-spacing !important;
 		//}
@@ -915,6 +917,21 @@ html, body, .ui-widget {
 
 .jeesl-panel {
 	@include jeesl-panel;
+}
+
+.ui-fieldset .ui-fieldset-legend {
+	@include jeesl-titlebar;
+	
+	border-width: $border-width;
+	font-size: $font-size-header;
+	
+	&:after {
+		margin-left: -1px - $regular-spacing;
+	}
+	
+	.ui-fieldset-toggler:before {
+		font-size: 1em;
+	}
 }
 
 .ui-datatable {

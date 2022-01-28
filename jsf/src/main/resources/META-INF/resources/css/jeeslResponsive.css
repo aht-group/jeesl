@@ -3157,6 +3157,81 @@ body, .ui-widget {
       margin: 5px 0 0;
       border-width: 4px 0 0; } }
 
+.ui-fieldset {
+  background: #f0f0f0;
+  margin-bottom: 10px; }
+  .ui-fieldset .ui-fieldset-legend {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    margin-bottom: 2px;
+    min-height: 22px;
+    padding: 0;
+    position: relative;
+    font-size: 1em;
+    padding: 0 10px;
+    transition: background .2s linear, color .2s linear; }
+    @media (max-width: 768px) {
+      .ui-fieldset .ui-fieldset-legend {
+        border-radius: 3px 3px 0 0;
+        border-width: 0;
+        margin: 0 0 4px 0;
+        min-height: 42px; } }
+    .ui-fieldset .ui-fieldset-legend:after {
+      background: #00663a;
+      bottom: -4px;
+      content: '';
+      display: none;
+      height: 4px;
+      margin-left: -1px;
+      position: absolute;
+      width: calc(100% + 2px); }
+      @media (max-width: 768px) {
+        .ui-fieldset .ui-fieldset-legend:after {
+          display: block; } }
+    @media (max-width: 768px) {
+      .ui-fieldset .ui-fieldset-legend {
+        border-width: 1px;
+        font-size: 1.4em; }
+        .ui-fieldset .ui-fieldset-legend:after {
+          margin-left: -11px; } }
+    .ui-fieldset .ui-fieldset-legend.ui-state-focus {
+      background: linear-gradient(to bottom, #ededed, #c4c4c4);
+      border: 1px solid #ababab;
+      box-shadow: none; }
+    .ui-fieldset .ui-fieldset-legend.ui-state-hover {
+      background: #008a4e;
+      border-color: #00663a;
+      box-shadow: none;
+      color: white;
+      text-shadow: none; }
+    .ui-fieldset .ui-fieldset-legend .ui-fieldset-toggler {
+      background: none;
+      display: inline-block;
+      font-family: "Font Awesome 5 Free";
+      font-size: inherit;
+      height: auto;
+      left: 0;
+      margin: 0;
+      position: relative;
+      text-indent: 0;
+      text-rendering: auto;
+      top: 0;
+      width: auto;
+      -webkit-font-smoothing: antialiased;
+      margin-right: 5px; }
+      .ui-fieldset .ui-fieldset-legend .ui-fieldset-toggler:before {
+        vertical-align: top; }
+        @media (max-width: 768px) {
+          .ui-fieldset .ui-fieldset-legend .ui-fieldset-toggler:before {
+            font-size: 2em; } }
+      .ui-fieldset .ui-fieldset-legend .ui-fieldset-toggler:before {
+        content: "\f067"; }
+        @media (max-width: 768px) {
+          .ui-fieldset .ui-fieldset-legend .ui-fieldset-toggler:before {
+            font-size: 1em; } }
+
 .ui-datatable {
   border-radius: 3px 3px 0 0; }
   .ui-datatable .ui-datatable-header {
@@ -3269,7 +3344,8 @@ body, .ui-widget {
       height: auto;
       max-height: calc(42px - 2 * 5px); }
     .ui-datatable .ui-datatable-header {
-      border-width: 1px 1px 0; } }
+      border-width: 1px 1px 0;
+      padding: 0 10px; } }
 
 .jeesl-content-container, .jeesl-overlay-container {
   line-height: 1.25em; }
