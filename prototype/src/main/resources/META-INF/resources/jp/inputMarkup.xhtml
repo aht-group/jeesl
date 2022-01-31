@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="id" />
+		<composite:attribute name="value" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		<p:inputTextarea value="#{value.content}" style="w100" rendered="#{value.type.code eq 'text'}"/>
+
+		<p:textEditor value="#{value.content}" rendered="#{value.type.code eq 'xhtml'}">
+		<f:facet name="toolbar">
+			<span class="ql-formats">
+				<button class="ql-bold"></button>
+				<button class="ql-italic"></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-list" value="ordered"></button>
+				<button class="ql-list" value="bullet"></button>
+			</span>
+			<span class="ql-formats">
+				<button class="ql-script" value="sub"></button>
+				<button class="ql-script" value="super"></button>
+			</span>
+
+		</f:facet>
+	    </p:textEditor>
+	</composite:implementation>
+</html>

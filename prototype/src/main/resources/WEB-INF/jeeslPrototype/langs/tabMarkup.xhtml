@@ -8,7 +8,7 @@
 	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 >	
 	<ui:fragment rendered="#{locales.size() eq 1}">
-  		<jtp:inputMarkup value="#{value[locales[0].code]}"/>
+  		<jtp:inputMarkup widgetId="myId2" value="#{value[locales[0].code]}"/>
   	</ui:fragment>
 
 	<p:tabView var="l" value="#{locales}" rendered="#{locales.size() gt 1}">  
@@ -17,7 +17,7 @@
                 <f:selectItems value="#{markups}" var="m" itemLabel="#{m.name[localeCode].lang}" itemValue="#{m}"/>
             </p:selectOneMenu>
   		
-  			<jtp:inputMarkup value="#{value[l.code]}"/>
+  			<jtp:inputMarkup widgetId="myId" value="#{value[l.code]}"/>
   			
   		</p:tab>  
   	</p:tabView>
