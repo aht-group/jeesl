@@ -15,7 +15,7 @@ public interface JeeslBbPost<THREAD extends JeeslBbThread<?>,
 						extends Serializable,
 								EjbSaveable,EjbWithRecord,EjbWithParentAttributeResolver
 {	
-	public enum Attributes{thread,markup}
+	public enum Attributes{thread,markup,user,record}
 	
 	THREAD getThread();
 	void setThread(THREAD thread);

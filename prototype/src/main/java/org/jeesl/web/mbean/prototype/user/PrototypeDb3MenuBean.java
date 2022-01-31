@@ -110,7 +110,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	public List<M> subMenu(String key)
 	{
-		logger.info("SubMenu "+key);
+		if(debugOnInfo) {logger.info("SubMenu "+key);}
 		return cacheSub.get(key);
 	}
 	private List<M> buildSub(String key)
@@ -143,7 +143,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	public List<M> breadcrumb(String key)
 	{
-		logger.info("breadcrumb "+key);
+		if(debugOnInfo) {logger.info("breadcrumb "+key);}
 		return cacheBreadcrumb.get(key);
 	}
 	private List<M> buildBreadcrumb(String key)
@@ -185,8 +185,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		list.add(m);
 		if(m.getParent()!=null) {traverseParent(list,m.getParent());}
 	}
-	
-
 	
 	public void updateLocale(String localeCode) {}
 
@@ -235,15 +233,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			for(M m : list)
 			{
 				mapRoot.put(m.getView().getCode(),efMenu.toRoot(m));
-//				if(debugOnInfo)
-//				{
-//					logger.info("View: "+m.getView().getCode());
-//					logger.info("\t\tm.getView().isVisible() "+m.getView().isVisible());
-//					logger.info("\t\tm.getView().getAccessPublic() "+m.getView().getAccessPublic());
-//					logger.info("\t\tidentity.isLoggedIn() "+identity.isLoggedIn());
-//					logger.info("\t\tm.getView().getAccessLogin() "+m.getView().getAccessLogin());
-//					logger.info("\t\tidentity.hasView(m.getView()) "+identity.hasView(m.getView()));
-//				}
 
 				boolean visible = m.getView().isVisible() && (m.getView().getAccessPublic() || (identity.isLoggedIn() && (m.getView().getAccessLogin() || identity.hasView(m.getView()))));
 				boolean developer = identity.getRoleCodeWithAccessToAllPages()!=null && identity.hasRole(identity.getRoleCodeWithAccessToAllPages());

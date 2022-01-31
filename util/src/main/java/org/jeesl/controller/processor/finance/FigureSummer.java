@@ -28,6 +28,7 @@ public class FigureSummer
 		return XmlFinanceFactory.create(resultCode, sum);
 	}
 	
+	public static <E extends Enum<E>> void add(Figures figures, E code, Integer value) {FigureSummer.add(figures, code.toString(), value);}
 	public static void add(Figures figures, String code, Integer value)
 	{
 		if(value!=null)
@@ -38,6 +39,8 @@ public class FigureSummer
 			}
 		}
 	}
+	
+	public static <E extends Enum<E>> void add(Figures figures, E code, Double value) {FigureSummer.add(figures, code.toString(), value);}
 	public static void add(Figures figures, String code, Double value)
 	{
 		if(value!=null)

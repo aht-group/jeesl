@@ -2004,6 +2004,56 @@ body, .ui-widget {
 	@include jeesl-panel;
 }
 
+.ui-fieldset {
+	background: $panel-background;
+	margin-bottom: $regular-spacing;
+	
+	.ui-fieldset-legend {
+		@include jeesl-titlebar;
+		
+		font-size: 1em;
+		padding: 0 $regular-spacing;
+		transition: background .2s linear, color .2s linear;
+		
+		@media (max-width: 768px) {
+			border-width: $border-width;
+			font-size: $font-size-header;
+			
+			&:after {
+				margin-left: -1px - $regular-spacing;
+			}
+		}
+		
+		&.ui-state-focus {
+			background: $panel-header-gradient;
+			border: $border;
+			box-shadow: none;
+		}
+		
+		&.ui-state-hover {
+			background: $highlight-colour;
+			border-color: $dark-colour;
+			box-shadow: none;
+			color: $white-100;
+			text-shadow: none;
+		}
+		
+		.ui-fieldset-toggler {
+			@include icon;
+			
+			margin-right: $half-spacing;
+			
+			&:before {
+				content: "\f067";
+				
+				@media (max-width: 768px) {
+					font-size: 1em;
+				}
+			}
+		}
+	}
+}
+
 .ui-datatable {
 	@include jeesl-table-titlebar;
 	
@@ -2066,6 +2116,7 @@ body, .ui-widget {
 		
 		.ui-datatable-header {
 			border-width: $border-width $border-width 0;
+			padding: 0 $regular-spacing;
 		}
 	}
 }
