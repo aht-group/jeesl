@@ -396,6 +396,7 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 	
 	@Override public List<ANSWER> fAnswers(List<DATA> datas)
 	{
+		if(datas==null || datas.isEmpty()) {return new ArrayList<ANSWER>();}
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ANSWER> cQ = cB.createQuery(fbCore.getClassAnswer());

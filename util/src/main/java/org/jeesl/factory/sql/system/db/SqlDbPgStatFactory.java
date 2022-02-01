@@ -38,7 +38,7 @@ public class SqlDbPgStatFactory
 		return XmlQueryFactory.build(tsTransaction,tsQuery,tsState,state,query);
 	}
 	
-	public static String statements(String userName)
+	public static String statements10(String userName)
 	{
 		List<String> fileds = new ArrayList<String>();
 		fileds.add("pd.datname");
@@ -54,6 +54,27 @@ public class SqlDbPgStatFactory
 		sb.append(" INNER JOIN pg_database AS pd");
 		sb.append("            ON pss.dbid=pd.oid");
 		sb.append(" ORDER BY pss.mean_time DESC ");
+		sb.append(" LIMIT 200;");
+		
+		return sb.toString();
+	}
+	
+	public static String statements14(String userName)
+	{
+		List<String> fileds = new ArrayList<String>();
+		fileds.add("pd.datname");
+		fileds.add("pss.query AS SQLQuery");
+		fileds.add("pss.rows AS TotalRowCount");
+		fileds.add("calls");
+		fileds.add("pss.total_exec_time");
+		fileds.add("pss.mean_exec_time");
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ").append(StringUtils.join(fileds,","));
+		sb.append(" FROM pg_stat_statements AS pss");
+		sb.append(" INNER JOIN pg_database AS pd");
+		sb.append("            ON pss.dbid=pd.oid");
+		sb.append(" ORDER BY pss.mean_exec_time DESC ");
 		sb.append(" LIMIT 200;");
 		
 		return sb.toString();

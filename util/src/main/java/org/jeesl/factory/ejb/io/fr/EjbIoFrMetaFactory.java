@@ -85,4 +85,14 @@ public class EjbIoFrMetaFactory<CONTAINER extends JeeslFileContainer<?,META>,
 		}
 		return map;
 	}
+	public Map<Long,List<META>> toMapIdMeta(List<META> metas)
+	{
+		Map<Long,List<META>> map = new HashMap<>();
+		for(META meta : metas)
+		{
+			if(!map.containsKey(meta.getContainer().getId())){map.put(meta.getContainer().getId(),new ArrayList<>());}
+			map.get(meta.getContainer().getId()).add(meta);
+		}
+		return map;
+	}
 }

@@ -17,6 +17,20 @@ public class EjbIoFrContainerFactory<STORAGE extends JeeslFileStorage<?,?,?,?,?>
         this.cContainer = cContainer;
 	}
 	
+	public CONTAINER build(long id)
+	{
+		CONTAINER ejb = null;
+		try
+		{
+			 ejb = cContainer.newInstance();
+			 ejb.setId(id);
+		}
+		catch (InstantiationException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+		
+		return ejb;
+	} 
+	
 	public CONTAINER build(STORAGE storage)
 	{
 		CONTAINER ejb = null;

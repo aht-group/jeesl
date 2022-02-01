@@ -309,10 +309,18 @@ public class JeeslSecurityFacadeBean<L extends JeeslLang,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override
-	public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
+	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
 		List<S> fStaffUR(Class<S> clStaff, USER user, R role)
 	{return allForParent(clStaff, "user", user, "role",role);}
+	
+	@Override
+	public <S extends JeeslStaff<R, USER, D1, D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffUR(Class<S> cStaff, USER user, List<R> roles)
+	{
+		if(roles==null || roles.isEmpty()){return new ArrayList<S>();}
+		List<USER> users = new ArrayList<USER>(Arrays.asList(user)); 
+		List<D1> domains = null;
+		return fStaffURD(cStaff,users,roles,domains);
+	}
 	
 	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
 		List<S> fStaffUD(Class<S> cStaff, USER user, D1 domain)
@@ -474,4 +482,6 @@ public class JeeslSecurityFacadeBean<L extends JeeslLang,
 		}
 		return result;
 	}
+
+	
 }
