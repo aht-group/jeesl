@@ -19,9 +19,13 @@
 	</composite:interface>
 
 <composite:implementation>
-	<p:dialog id="dXpath" widgetVar="#{cc.attrs.widgetVar}" modal="true">
-		<h:form>
-			<aht:slot width="8">
+	<h:form>
+	
+	<p:dialog id="dXpath" header="Select" widgetVar="#{cc.attrs.widgetVar}" modal="true" styleClass="jeesl-table-dialog">
+		<f:facet name="actions">
+			<j:svg type="jeeslCancel" listener="#{dialogBean.save()}" update="@form" library="jeeslGfx"/>
+		</f:facet>
+			
 				<p:dataTable id="dtOpEntity" var="var" value="#{cc.attrs.handler.lazy}" lazy="true"
 					 	selection="#{cc.attrs.handler.op}" selectionMode="single" rowKey="#{var.id}"
 					 	rows="#{cc.attrs.opRows}" rowsPerPageTemplate="#{cc.attrs.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">>
@@ -70,8 +74,9 @@
 					</p:column>
 					
 				</p:dataTable>
-			</aht:slot>
-		</h:form>
+			
+		
 	</p:dialog>
+	</h:form>
 </composite:implementation>
 </html>

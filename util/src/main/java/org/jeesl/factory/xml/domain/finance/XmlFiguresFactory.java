@@ -29,6 +29,8 @@ public class XmlFiguresFactory
 		this.decimals=decimals;
 	}
 	
+	public static Figures build(Finance f){Figures xml = XmlFiguresFactory.build(); xml.getFinance().add(f); return xml;}
+	
 	public static Figures build(long id){return build(id,null,null);}
 	public static <E extends Enum<E>> Figures build(E code){return build(code.toString());}
 	public static Figures build(String code){return (build(null,code,null));}

@@ -94,7 +94,6 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	@SuppressWarnings("rawtypes")
 	protected Class clParent;
 
-//	private final Map<EjbWithPosition,RE> mapEntity; public Map<EjbWithPosition, RE> getMapEntity() {return mapEntity;}
 //	protected final List<EjbWithPosition> categories; public List<EjbWithPosition> getCategories(){return categories;}
 	protected List<EjbWithPosition> parents; public List<EjbWithPosition> getParents(){return parents;}
 //	protected List<EjbWithPosition> items; public List<EjbWithPosition> getItems() {return items;}
@@ -133,7 +132,6 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 //		status = null;
 //		allowAdditionalElements = new Hashtable<Long,Boolean>();
 //
-//		mapEntity = new HashMap<>();
 //		categories = new ArrayList<EjbWithPosition>();
 	}
 
@@ -191,20 +189,6 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 			logger.info("\t"+JeeslOptionUploadable.class.getSimpleName()+"? "+supportsUpload);
 		}
 	}
-
-//	protected void loadEntities()
-//	{
-//		for(EjbWithPosition p : categories)
-//		{
-//			try
-//			{
-//				String fqcn = ((EjbWithImage)p).getImage();
-//				RE e = fGraphic.fByCode(fbRevision.getClassEntity(),fqcn);
-//				mapEntity.put(p,e);
-//			}
-//			catch (JeeslNotFoundException e) {}
-//		}
-//	}
 
 	public void toggleDescription()
 	{

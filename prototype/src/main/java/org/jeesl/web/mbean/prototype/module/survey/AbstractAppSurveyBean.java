@@ -207,7 +207,6 @@ public abstract class AbstractAppSurveyBean <L extends JeeslLang, D extends Jees
 		}
 		logger.info(ffSurvey.getClassQuestion().getSimpleName()+" loaded in "+AbstractLogMessage.postConstruct(ptt));
 	}
-
 	
 	@Override public void updateSection(SECTION section)
 	{

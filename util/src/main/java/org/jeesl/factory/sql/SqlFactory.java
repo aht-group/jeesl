@@ -37,6 +37,17 @@ public class SqlFactory
 		newLine(newLine,sb);
 	}
 	
+	public static <E extends Enum<E>> void updateD(StringBuilder sb, Class<?> c, String alias, E attribute, Double value, boolean newLine)
+	{
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		sb.append("UPDATE ").append(c.getAnnotation(Table.class).name());
+		if(alias!=null) {sb.append(" "+alias);}
+		sb.append(" SET ").append(path(alias,attribute)).append("=");
+		if(value!=null) {sb.append(value);}
+		else {sb.append("NULL");}
+		newLine(newLine,sb);
+	}
+	
 	public static <E extends Enum<E>> void updateS(StringBuilder sb, Class<?> c, String alias, E attribute, String value, boolean newLine)
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}

@@ -371,7 +371,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 		mapOfx.clear();
 		for(E e : elements)
 		{
-			logger.info("Rendering deactivated");
+			logger.info("Rendering deactivated "+e.toString());
 //			Section s = bCache.buildByElement(sbhLocale.getSelection().getCode(),e);
 //			JaxbUtil.info(s);
 //			mapOfx.put(e,s);
