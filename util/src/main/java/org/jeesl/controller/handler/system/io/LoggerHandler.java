@@ -138,7 +138,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	}
 	public <E extends Enum<E>> String loopEnd(E code, Integer elements)
 	{
-		if(!loops.containsKey(code.toString())) {logger.warn("Loop not started");}
+		if(!loops.containsKey(code.toString())) {logger.warn("Loop not started"); return "Loop not started";}
 		else
 		{
 			LOOP loop = loops.get(code.toString());
@@ -147,10 +147,17 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 			
 			Instant timeBefore = mapLoopInstant.get(code.toString());
 			Instant timeNow = Instant.now();
-			loop.setMilliTotal(loop.getMilliTotal()+ChronoUnit.MILLIS.between(timeBefore,timeNow));
+			long duration = ChronoUnit.MILLIS.between(timeBefore,timeNow);
+			loop.setMilliTotal(loop.getMilliTotal()+duration);
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("Loop");
+			sb.append(" ").append(loop.getCode());
+			if(elements!=null) {sb.append(" ").append(elements);}
+			sb.append(" in ").append(duration);
+			
+			return sb.toString();
 		}
-		
-		return "";
 	}
 	
 	public void count(String code)

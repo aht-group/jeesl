@@ -7,7 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 import org.jeesl.model.xml.text.Remark;
 
 
@@ -32,6 +34,7 @@ import org.jeesl.model.xml.text.Remark;
  *       &lt;attribute name="valueBoolean" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="valueNumber" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="valueDouble" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
+ *       &lt;attribute name="valueDate" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
  *       &lt;attribute name="score" type="{http://www.w3.org/2001/XMLSchema}double" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -75,6 +78,9 @@ public class Answer
     protected Integer valueNumber;
     @XmlAttribute(name = "valueDouble")
     protected Double valueDouble;
+    @XmlAttribute(name = "valueDate")
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar valueDate;
     @XmlAttribute(name = "score")
     protected Double score;
 
@@ -372,6 +378,34 @@ public class Answer
 
     public void unsetValueDouble() {
         this.valueDouble = null;
+    }
+
+    /**
+     * Gets the value of the valueDate property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getValueDate() {
+        return valueDate;
+    }
+
+    /**
+     * Sets the value of the valueDate property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setValueDate(XMLGregorianCalendar value) {
+        this.valueDate = value;
+    }
+
+    public boolean isSetValueDate() {
+        return (this.valueDate!= null);
     }
 
     /**

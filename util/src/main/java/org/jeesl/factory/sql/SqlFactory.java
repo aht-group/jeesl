@@ -270,6 +270,15 @@ public class SqlFactory
 		newLine(newLine,sb);
 	}
 	
+	public static <T extends EjbWithId> String in(List<T> list)
+	{
+		List<Long> ids = new ArrayList<>();
+		for(T id : list) {ids.add(id.getId());}
+		StringBuilder sb = new StringBuilder();
+		sb.append(" (").append(StringUtils.join(ids,",")).append(")");
+		return sb.toString();
+	}
+	
 	public static void semicolon(StringBuilder sb) {SqlFactory.semicolon(sb,false);}
 	public static void semicolon(StringBuilder sb, boolean newLine)
 	{
@@ -287,4 +296,6 @@ public class SqlFactory
 		sb.append("COMMIT");
 		semicolon(sb,newLine);
 	}
+	
+	
 }

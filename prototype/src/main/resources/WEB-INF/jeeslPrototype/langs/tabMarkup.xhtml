@@ -11,14 +11,15 @@
   		<jtp:inputMarkup widgetId="myId2" value="#{value[locales[0].code]}"/>
   	</ui:fragment>
 
-	<p:tabView var="l" value="#{locales}" rendered="#{locales.size() gt 1}">  
+	<p:tabView var="l" value="#{locales}" rendered="#{locales.size() gt 1}" styleClass="jeesl-tabs jeesl-editor">  
   		<p:tab title="#{l.code}">
-  			<p:selectOneMenu value="#{value[l.code].type}" effect="fade" rendered="false">  
-                <f:selectItems value="#{markups}" var="m" itemLabel="#{m.name[localeCode].lang}" itemValue="#{m}"/>
-            </p:selectOneMenu>
-  		
+  			<ui:remove>
+  				<!-- This was planned for selecting the type, e.g. XHTML or Markdown ... -->
+  					<p:selectOneMenu value="#{value[l.code].type}" effect="fade" rendered="false">  
+                	<f:selectItems value="#{markups}" var="m" itemLabel="#{m.name[localeCode].lang}" itemValue="#{m}"/>
+            	</p:selectOneMenu>
+  			</ui:remove>
   			<jtp:inputMarkup widgetId="myId" value="#{value[l.code]}"/>
-  			
   		</p:tab>  
   	</p:tabView>
   	

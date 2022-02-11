@@ -291,6 +291,7 @@ public class XmlSurveyQuery
 		xml.setValueBoolean(true);
 		xml.setValueNumber(0);
 		xml.setValueDouble(0);
+		xml.setValueDate(DateUtil.toXmlGc(new Date()));
 		xml.setScore(0);
 		xml.setAnswer(net.sf.ahtutils.factory.xml.text.XmlAnswerFactory.build(""));
 		xml.setRemark(XmlRemarkFactory.build(""));

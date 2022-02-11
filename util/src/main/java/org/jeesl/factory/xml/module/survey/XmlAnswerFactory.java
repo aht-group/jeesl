@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.aht.Query;
+import net.sf.exlp.util.DateUtil;
 
 public class XmlAnswerFactory<L extends JeeslLang,D extends JeeslDescription,
 								SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,
@@ -87,6 +88,8 @@ public class XmlAnswerFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetValueBoolean() && ejb.getQuestion().getShowBoolean() && ejb.getValueBoolean()!=null){xml.setValueBoolean(ejb.getValueBoolean());}
 		if(q.isSetValueNumber() && ejb.getQuestion().getShowInteger() && ejb.getValueNumber()!=null){xml.setValueNumber(ejb.getValueNumber());}
 		if(q.isSetValueDouble() && ejb.getQuestion().getShowDouble() && ejb.getValueDouble()!=null){xml.setValueDouble(ejb.getValueDouble());}
+		if(q.isSetValueDate() && BooleanComparator.active(ejb.getQuestion().getShowDate()) && ejb.getValueDate()!=null){xml.setValueDate(DateUtil.toXmlGc(ejb.getValueDate()));}
+		
 		if(q.isSetScore() && BooleanComparator.active(ejb.getQuestion().getShowScore()) && ejb.getScore()!=null){xml.setScore(ejb.getScore());}
 		if(q.isSetAnswer() && ejb.getQuestion().getShowText() && ejb.getValueText()!=null){xml.setAnswer(net.sf.ahtutils.factory.xml.text.XmlAnswerFactory.build(ejb.getValueText()));}
 		if(q.isSetRemark() && ejb.getQuestion().getShowRemark() && ejb.getRemark()!=null){xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}

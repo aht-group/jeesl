@@ -183,6 +183,7 @@
 			<xsd:attribute name="valueBoolean" type="xsd:boolean"/>
 			<xsd:attribute name="valueNumber" type="xsd:int"/>
 			<xsd:attribute name="valueDouble" type="xsd:double"/>
+			<xsd:attribute name="valueDate" type="xsd:date"/>
 			<xsd:attribute name="score" type="xsd:double"/>
 		</xsd:complexType>
    </xsd:element>
