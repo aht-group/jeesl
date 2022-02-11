@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<survey:template xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:t="http://ahtutils.aht-group.com/text" xmlns:survey="http://ahtutils.aht-group.com/survey" id="123" code="myCode">
-    <s:description version="1" key="myKey">myValue</s:description>
-    <s:category id="123" code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
-    <s:status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
-    <t:remark version="1" key="myKey">myValue</t:remark>
+<survey:template xmlns:js="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:text="http://www.jeesl.org/text" xmlns:survey="http://www.jeesl.org/survey" xmlns:t="http://ahtutils.aht-group.com/text" xmlns:jf="http://www.jeesl.org/finance" id="123" code="myCode">
+    <js:description version="1" key="myKey">myValue</js:description>
+    <js:category id="123" code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
+    <js:status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
+    <text:remark version="1" key="myKey">myValue</text:remark>
     <survey:section id="123" position="2" code="myCode" visible="true"/>
     <survey:section id="123" position="2" code="myCode" visible="true"/>
 </survey:template>

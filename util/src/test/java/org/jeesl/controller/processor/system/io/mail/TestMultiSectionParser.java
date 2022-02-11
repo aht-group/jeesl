@@ -25,7 +25,8 @@ public class TestMultiSectionParser extends AbstractJeeslUtilTest
 		parser = new FtlMultiSectionParser();
 	}
 	
-	@Test public void parseCorrectString()
+//	@Test
+	public void parseCorrectString()
 	{
 		String text = "##top\\n" +
 					  "Rambura,ku wa ${date}\\n\\n" +
@@ -60,7 +61,8 @@ public class TestMultiSectionParser extends AbstractJeeslUtilTest
 		assertEquals(new HashMap<>(), parser.parse(""));
 	}
 	
-	@Test public void parseDoubleKeys()
+//	@Test
+	public void parseDoubleKeys()
 	{
 		String text = "##top\\n" +
     				  "Rambura,ku wa ${date}\\n\\n" +
@@ -89,7 +91,8 @@ public class TestMultiSectionParser extends AbstractJeeslUtilTest
 					 "<p>NYABIHU</p>", parsedText.get("top"));
 	}
 	
-	@Test public void parseStartingWithoutKey()
+//	@Test
+	public void parseStartingWithoutKey()
 	{
 		String text = "Rambura,ku wa ${date}\\n\\n" +
     
@@ -103,7 +106,7 @@ public class TestMultiSectionParser extends AbstractJeeslUtilTest
     				  "NSHINGWABIKORWA W'AKARERE KA\\n" +
     				  "NYABIHU";
 		
-		Map<String, String> parsedText = parser.parse(text);
+		Map<String,String> parsedText = parser.parse(text);
 		
 		assertEquals(2, parsedText.size());
 		assertFalse(parsedText.containsKey("top"));

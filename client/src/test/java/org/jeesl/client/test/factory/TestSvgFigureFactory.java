@@ -22,6 +22,7 @@ import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.svg.SvgFigureFactory;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
+import org.junit.Test;
 import org.openfuxml.media.transcode.Svg2SvgTranscoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +74,8 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 		f9	 = efFigure.build(    null, styleTriangle,	 false,  7,		colorRed,	6, 0,  90);		f9.setId(9);
 		f10  = efFigure.build(    null, styleTriangle,	 false,  6, 	colorGreen,	7, 0, 105);	  f10.setId(10);
 	}
+	
+	@Test public void dummy() {}
 	
 	public void testF1()
 	{

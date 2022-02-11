@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<survey:score xmlns:survey="http://ahtutils.aht-group.com/survey" min="0.1" max="9.9"/>
+<survey:score xmlns:survey="http://www.jeesl.org/survey" min="0.1" max="9.9"/>

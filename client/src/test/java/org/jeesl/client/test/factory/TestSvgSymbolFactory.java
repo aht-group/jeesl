@@ -17,6 +17,7 @@ import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.client.test.AbstractJeeslClientTest;
 import org.jeesl.factory.svg.SvgSymbolFactory;
+import org.junit.Test;
 import org.openfuxml.media.transcode.Svg2SvgTranscoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,8 @@ public class TestSvgSymbolFactory extends AbstractJeeslClientTest
 		}
 	}
 	
+    @Test public void dummy() {}
+	
 	public void square() throws IOException, TranscoderException
 	{
 		Graphic rule = new Graphic();
@@ -60,8 +63,9 @@ public class TestSvgSymbolFactory extends AbstractJeeslClientTest
 	
 	public static void main(String[] args) throws TranscoderException, IOException, ParserConfigurationException
 	{
-		AbstractJeeslTest.initTargetDirectory();
 		JeeslBootstrap.init();
+		AbstractJeeslTest.initTargetDirectory();
+		
 		TestSvgSymbolFactory test = new TestSvgSymbolFactory();
 		AbstractJeeslTest.initTargetDirectory();
 		

@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.jeesl.doc.word.EntityWordRenderer;
 import org.jeesl.model.xml.system.revision.Entities;
 import org.jeesl.model.xml.system.revision.Entity;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,6 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestEntityWordRederer extends AbstractWordCli
 {
-	
 	final static Logger logger = LoggerFactory.getLogger(TestEntityWordRederer.class);
 	
 	private static String xmlEntities = "../util/src/test/resources/data/xml/word/entity.xml";
@@ -24,8 +24,10 @@ public class TestEntityWordRederer extends AbstractWordCli
 	
 	public TestEntityWordRederer() throws Exception 
 	{
-			this.templateDoc = new Document("../util/src/test/resources/data/docx/templates/entity.dotx");
+//			this.templateDoc = new Document("../util/src/test/resources/data/docx/templates/entity.dotx");
 	}
+	
+	@Test public void dummy() {}
 	
 	public void renderEntities() throws IOException, Exception
 	{

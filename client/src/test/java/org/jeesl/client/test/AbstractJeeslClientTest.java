@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +32,7 @@ public class AbstractJeeslClientTest extends AbstractJeeslTest
 		if(!LoggerInit.isLog4jInited())
 		{
 			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.addAltPath("jeesl/test/config");
+			loggerInit.addAltPath("jeesl/client/config");
 			loggerInit.init();
 		}
     }
@@ -41,6 +42,8 @@ public class AbstractJeeslClientTest extends AbstractJeeslTest
 	{
 //		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
 	}
+	
+	@Test public void dummy() {}
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{

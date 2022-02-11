@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<survey:surveys xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:text="http://ahtutils.aht-group.com/text" xmlns:survey="http://ahtutils.aht-group.com/survey">
+<survey:surveys xmlns:js="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:text="http://www.jeesl.org/text" xmlns:survey="http://www.jeesl.org/survey" xmlns:t="http://ahtutils.aht-group.com/text" xmlns:jf="http://www.jeesl.org/finance">
     <survey:survey id="123" name="myName" validFrom="2011-11-11" validTo="2011-11-11"/>
     <survey:survey id="123" name="myName" validFrom="2011-11-11" validTo="2011-11-11"/>
 </survey:surveys>

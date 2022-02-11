@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<survey:option xmlns:survey="http://ahtutils.aht-group.com/survey" id="123" code="myCode" label="myLabel"/>
+<survey:option xmlns:survey="http://www.jeesl.org/survey" id="123" code="myCode" label="myLabel"/>

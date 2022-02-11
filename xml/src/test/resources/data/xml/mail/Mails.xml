@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<mail:mails xmlns:mail="http://www.jeesl.org/io/mail" xmlns:io="http://exlp.sf.net/io" dir="myDir" queue="5">
+<mail:mails xmlns:mail="http://www.jeesl.org/io/mail" xmlns:io="http://exlp.sf.net/io" xmlns:text="http://www.jeesl.org/text" dir="myDir" queue="5">
     <mail:mail id="123" code="myCode" lang="myLang" type="myType" msgId="myMsgID" dir="myDir" test="true">
-        <example>myExample</example>
+        <text:example version="1" key="myKey">myValue</text:example>
     </mail:mail>
 </mail:mails>

@@ -23,12 +23,11 @@ public class TestJsBuilder extends AbstractUtilsMavenTst
 	{	
 		File src = new File("src/test/resources/data/factory/js");
 		String[] libOrder = new String[0];
-		jsFactory = new JsFactory(src, libOrder);
-		jsFactory.write(null);
+//		jsFactory = new JsFactory(src, libOrder);
+//		jsFactory.write(null);
 	}
 	
-	@Test
-	public void dummy(){}
+	@Test public void dummy(){}
 		
 	public static void main(String[] args) throws Exception
     {

@@ -22,9 +22,6 @@ public class TestXmlSrs extends AbstractXmlSrsTest<Srs>
     		xml.setMeta(TestXmlMeta.create(false));
     		xml.setActors(TestXmlActors.create(false));
     		xml.setReleases(TestXmlReleases.create(false));
-    		
-    		xml.getChapter().add(TestXmlChapter.create(false));
-    		xml.getChapter().add(TestXmlChapter.create(false));
     	}
     	
     	return xml;

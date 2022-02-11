@@ -61,8 +61,8 @@
 
 	<scm>
 		<url>https://github.com/aht-group/jeesl.git</url>
-		<connection>scm:git:git://github.com/aht-group/jeesl.git</connection>
-		<developerConnection>scm:git:git@github.com/aht-group/jeesl.git</developerConnection>
+		<connection>scm:git:ssh://git@github.com/aht-group/jeesl.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/aht-group/jeesl.git</developerConnection>
 	</scm>
 	
 	<developers>
@@ -99,7 +99,28 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
+                     <groupId>org.apache.maven.plugins</groupId>
+                     <artifactId>maven-release-plugin</artifactId>
+                     <version>2.5</version>
+                     <configuration>
+                          <useReleaseProfile>false</useReleaseProfile>
+                          <releaseProfiles>release</releaseProfiles>
+                          <goals>deploy</goals>
+                     </configuration>
+                </plugin>
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>1.6.3</version>
+					<extensions>true</extensions>
+					<configuration>
+						<serverId>ossrh</serverId>
+						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+						<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
 				</plugin>
@@ -233,7 +254,7 @@
             </repository>
 	</repositories>
   
-  	<distributionManagement>
+	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
@@ -258,18 +279,6 @@
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.5</version>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals><goal>sign</goal></goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
 						<version>2.2.1</version>
 						<executions>
@@ -291,15 +300,16 @@
 						</executions>
 					</plugin>
 					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.7</version>
-						<extensions>true</extensions>
-						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>false</autoReleaseAfterClose>
-						</configuration>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.5</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals><goal>sign</goal></goals>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>

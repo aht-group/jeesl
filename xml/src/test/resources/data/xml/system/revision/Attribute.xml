@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<rev:attribute xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:t="http://ahtutils.aht-group.com/text" xmlns:rev="http://www.jeesl.org/revision" id="123" position="2" code="myCode" xpath="myXPath" web="true" print="true" name="true" enclosure="true" ui="true" bean="true" construction="true">
-    <s:type id="123" key="myKey" code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
-    <s:langs/>
-    <s:descriptions/>
-    <t:remark version="1" key="myKey">myValue</t:remark>
+<rev:attribute xmlns:js="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:text="http://www.jeesl.org/text" xmlns:rev="http://www.jeesl.org/revision" id="123" position="2" code="myCode" xpath="myXPath" web="true" print="true" name="true" enclosure="true" ui="true" bean="true" construction="true">
+    <js:type id="123" key="myKey" code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
+    <js:langs/>
+    <js:descriptions/>
+    <text:remark version="1" key="myKey">myValue</text:remark>
 </rev:attribute>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<f:figures xmlns:text="http://ahtutils.aht-group.com/text" xmlns:f="http://www.jeesl.org/finance" id="123" code="myCode" label="myLabel">
+<jf:figures xmlns:text="http://www.jeesl.org/text" xmlns:jf="http://www.jeesl.org/finance" xmlns:js="http://ahtutils.aht-group.com/status" id="123" code="myCode" label="myLabel">
     <text:remark version="1" key="myKey">myValue</text:remark>
     <text:remark version="1" key="myKey">myValue</text:remark>
-    <f:finance id="123" nr="1" code="myCode" label="myLabel" value="567.89" symbol="mySymbol"/>
-    <f:finance id="123" nr="1" code="myCode" label="myLabel" value="567.89" symbol="mySymbol"/>
-    <f:time id="123" nr="1" code="myCode" label="myLabel" record="2011-11-11"/>
-    <f:time id="123" nr="1" code="myCode" label="myLabel" record="2011-11-11"/>
-    <f:counter id="123" code="myCode" label="myLabel" counter="2345"/>
-    <f:counter id="123" code="myCode" label="myLabel" counter="2345"/>
-    <f:figures id="123" code="myCode" label="myLabel"/>
-    <f:figures id="123" code="myCode" label="myLabel"/>
-</f:figures>
+    <jf:finance id="123" nr="1" code="myCode" label="myLabel" value="567.89" symbol="mySymbol"/>
+    <jf:finance id="123" nr="1" code="myCode" label="myLabel" value="567.89" symbol="mySymbol"/>
+    <jf:time id="123" nr="1" code="myCode" label="myLabel" record="2011-11-11"/>
+    <jf:time id="123" nr="1" code="myCode" label="myLabel" record="2011-11-11"/>
+    <jf:counter id="123" code="myCode" label="myLabel" counter="2345"/>
+    <jf:counter id="123" code="myCode" label="myLabel" counter="2345"/>
+    <jf:figures id="123" code="myCode" label="myLabel"/>
+    <jf:figures id="123" code="myCode" label="myLabel"/>
+</jf:figures>

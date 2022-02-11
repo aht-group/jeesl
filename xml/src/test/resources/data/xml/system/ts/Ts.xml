@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ts:ts xmlns:js="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:text="http://www.jeesl.org/text" xmlns:ts="http://www.jeesl.org/timeseries">
+    <ts:entity id="123" code="myCode"/>
+    <ts:data id="123" record="2011-11-11T11:11:11" value="234.56"/>
+    <ts:data id="123" record="2011-11-11T11:11:11" value="234.56"/>
+</ts:ts>
