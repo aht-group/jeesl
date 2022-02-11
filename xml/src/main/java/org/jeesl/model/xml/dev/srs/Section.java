@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -51,7 +51,7 @@ public class Section implements Serializable
     @XmlAttribute(name = "title")
     protected String title;
 
-    /**
+    /*
      * Gets the rest of the content model. 
      * 
      * <p>
@@ -91,7 +91,7 @@ public class Section implements Serializable
         return this.content;
     }
 
-    /**
+    /*
      * Gets the value of the title property.
      * 
      * @return
@@ -103,7 +103,7 @@ public class Section implements Serializable
         return title;
     }
 
-    /**
+    /*
      * Sets the value of the title property.
      * 
      * @param value

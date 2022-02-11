@@ -4,7 +4,7 @@ package net.sf.ahtutils.doc.loc;
  * Class chooses the specific Counter
  *
  * @author Thorsten Kisner
- * extended from jloc (MANISH SHARMA & Ekkehard Blanz)
+ * extended from jloc (MANISH SHARMA / Ekkehard Blanz)
  */
 public class CounterSelector
 { 
@@ -55,7 +55,7 @@ public class CounterSelector
         return result;
     }
     
-    /** Method to find out whether the filename has an extension.
+    /* Method to find out whether the filename has an extension.
      */
     public boolean StemOnly() {
         int intSlash;
@@ -71,7 +71,7 @@ public class CounterSelector
         return intDot <= intSlash;
     }
     
-    /** Method to add an extension to a filename.
+    /* Method to add an extension to a filename.
      * @param Extension String containing the extension
      */
     public void AddExtension(String Extension) {
@@ -82,7 +82,7 @@ public class CounterSelector
         }
     }
     
-    /** Method to abbreviate the root of a long filename with ellipses.
+    /* Method to abbreviate the root of a long filename with ellipses.
      * @param strRoot String containing the root
      */
     public void AbbrevRoot(String strRoot){

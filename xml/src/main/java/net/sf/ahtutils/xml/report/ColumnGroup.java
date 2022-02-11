@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -75,7 +75,7 @@ public class ColumnGroup implements Serializable
     @XmlAttribute(name = "query")
     protected String query;
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -87,7 +87,7 @@ public class ColumnGroup implements Serializable
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -103,7 +103,7 @@ public class ColumnGroup implements Serializable
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -115,7 +115,7 @@ public class ColumnGroup implements Serializable
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -131,7 +131,7 @@ public class ColumnGroup implements Serializable
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the layout property.
      * 
      * @return
@@ -143,7 +143,7 @@ public class ColumnGroup implements Serializable
         return layout;
     }
 
-    /**
+    /*
      * Sets the value of the layout property.
      * 
      * @param value
@@ -175,7 +175,7 @@ public class ColumnGroup implements Serializable
         this.xlsColumn = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -187,7 +187,7 @@ public class ColumnGroup implements Serializable
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -203,7 +203,7 @@ public class ColumnGroup implements Serializable
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -215,7 +215,7 @@ public class ColumnGroup implements Serializable
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -235,7 +235,7 @@ public class ColumnGroup implements Serializable
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -247,7 +247,7 @@ public class ColumnGroup implements Serializable
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -267,7 +267,7 @@ public class ColumnGroup implements Serializable
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the showLabel property.
      * 
      * @return
@@ -279,7 +279,7 @@ public class ColumnGroup implements Serializable
         return showLabel;
     }
 
-    /**
+    /*
      * Sets the value of the showLabel property.
      * 
      * @param value
@@ -299,7 +299,7 @@ public class ColumnGroup implements Serializable
         this.showLabel = null;
     }
 
-    /**
+    /*
      * Gets the value of the showWeb property.
      * 
      * @return
@@ -311,7 +311,7 @@ public class ColumnGroup implements Serializable
         return showWeb;
     }
 
-    /**
+    /*
      * Sets the value of the showWeb property.
      * 
      * @param value
@@ -331,7 +331,7 @@ public class ColumnGroup implements Serializable
         this.showWeb = null;
     }
 
-    /**
+    /*
      * Gets the value of the query property.
      * 
      * @return
@@ -343,7 +343,7 @@ public class ColumnGroup implements Serializable
         return query;
     }
 
-    /**
+    /*
      * Sets the value of the query property.
      * 
      * @param value

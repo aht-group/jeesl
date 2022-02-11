@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -104,7 +104,7 @@ public class Types
         this.subType = null;
     }
 
-    /**
+    /*
      * Gets the value of the group property.
      * 
      * @return
@@ -116,7 +116,7 @@ public class Types
         return group;
     }
 
-    /**
+    /*
      * Sets the value of the group property.
      * 
      * @param value

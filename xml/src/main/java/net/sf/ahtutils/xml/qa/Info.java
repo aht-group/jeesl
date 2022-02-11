@@ -13,7 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.sf.ahtutils.xml.status.Status;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -56,7 +56,7 @@ public class Info
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar record;
 
-    /**
+    /*
      * Gets the value of the status property.
      * 
      * @return
@@ -68,7 +68,7 @@ public class Info
         return status;
     }
 
-    /**
+    /*
      * Sets the value of the status property.
      * 
      * @param value
@@ -84,7 +84,7 @@ public class Info
         return (this.status!= null);
     }
 
-    /**
+    /*
      * Gets the value of the comment property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class Info
         return comment;
     }
 
-    /**
+    /*
      * Sets the value of the comment property.
      * 
      * @param value
@@ -112,7 +112,7 @@ public class Info
         return (this.comment!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -124,7 +124,7 @@ public class Info
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -144,7 +144,7 @@ public class Info
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the record property.
      * 
      * @return
@@ -156,7 +156,7 @@ public class Info
         return record;
     }
 
-    /**
+    /*
      * Sets the value of the record property.
      * 
      * @param value

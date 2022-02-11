@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.text.Remark;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -152,7 +152,7 @@ public class Figures
         this.figures = null;
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -164,7 +164,7 @@ public class Figures
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -184,7 +184,7 @@ public class Figures
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -196,7 +196,7 @@ public class Figures
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -212,7 +212,7 @@ public class Figures
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -224,7 +224,7 @@ public class Figures
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -240,7 +240,7 @@ public class Figures
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the flagged property.
      * 
      * @return
@@ -252,7 +252,7 @@ public class Figures
         return flagged;
     }
 
-    /**
+    /*
      * Sets the value of the flagged property.
      * 
      * @param value

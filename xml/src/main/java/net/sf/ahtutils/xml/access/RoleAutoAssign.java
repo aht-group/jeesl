@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -77,7 +77,7 @@ public class RoleAutoAssign
         return add;
     }
 
-    /**
+    /*
      * Sets the value of the add property.
      * 
      * @param value
@@ -93,7 +93,7 @@ public class RoleAutoAssign
         return (this.add!= null);
     }
 
-    /**
+    /*
      * Gets the value of the rm property.
      * 
      * @return
@@ -105,7 +105,7 @@ public class RoleAutoAssign
         return rm;
     }
 
-    /**
+    /*
      * Sets the value of the rm property.
      * 
      * @param value
@@ -121,7 +121,7 @@ public class RoleAutoAssign
         return (this.rm!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -133,7 +133,7 @@ public class RoleAutoAssign
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -150,7 +150,7 @@ public class RoleAutoAssign
     }
 
 
-    /**
+    /*
      * <p>Java class for anonymous complex type.
      * 
      * <p>The following schema fragment specifies the expected content contained within this class.
@@ -200,7 +200,7 @@ public class RoleAutoAssign
     }
 
 
-    /**
+    /*
      * <p>Java class for anonymous complex type.
      * 
      * <p>The following schema fragment specifies the expected content contained within this class.
@@ -250,7 +250,7 @@ public class RoleAutoAssign
             this.group = null;
         }
 
-        /**
+        /*
          * Gets the value of the immediate property.
          * 
          * @return
@@ -262,7 +262,7 @@ public class RoleAutoAssign
             return immediate;
         }
 
-        /**
+        /*
          * Sets the value of the immediate property.
          * 
          * @param value

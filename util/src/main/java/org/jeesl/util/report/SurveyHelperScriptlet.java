@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-/**
+/*
  * Contains methods to process data needed when creating reports using JasperReports
  * e.g. to create lists of options used for answering a question
  */
@@ -24,7 +24,7 @@ public class SurveyHelperScriptlet extends JRDefaultScriptlet {
     long pageInitTime = 0; 
     final static Logger logger = LoggerFactory.getLogger(SurveyHelperScriptlet.class);
 
-	/**
+	/*
 	 * Demo method for testing the availability of the SurveyHelperScriptlet in reports
 	 * @return a demo text
 	 */
@@ -33,7 +33,7 @@ public class SurveyHelperScriptlet extends JRDefaultScriptlet {
 		return "SCRIPTLET Welcomes you";
 	}
     
-	/**
+	/*
 	 * This method helps to convert an ISO time String to a Java Date
 	 * @param isoTimeString The ISO time String representation of the date
 	 * @return the Java Date representation of the date
@@ -45,7 +45,7 @@ public class SurveyHelperScriptlet extends JRDefaultScriptlet {
 		return cal.getTime();
     }
 	
-	/**
+	/*
 	 * For a survey question, create a list of all options without tickable field
 	 * @return The list of options for the given question as comma separated list
 	 * @throws Exception
@@ -55,7 +55,7 @@ public class SurveyHelperScriptlet extends JRDefaultScriptlet {
 		return getOptionsAsList(false);
 	}
 	
-	/**
+	/*
 	 * For a survey question, create a list of all options
 	 * @param addTickField also renders a [ ] to be ticked on paper
 	 * @return The list of options for the given question as comma separated list

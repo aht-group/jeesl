@@ -13,7 +13,7 @@ public class Tree<T>
 	public static enum TraversalMode { UP, DOWN, ANY, FULL };
 	
 	private List<Tree<T>> children = new ArrayList<Tree<T>>();
-	/**
+	/*
 	 * Returns an unmodifiable list of all the children attached below this tree node.
 	 * 
 	 * NOTE: Must be immutable in order to maintain synchronicity between children and parents. Use setParent and/or add/removeChild functions to modify the tree data.
@@ -41,12 +41,12 @@ public class Tree<T>
     
     private T data = null; public T getData() { return this.data; } public void setData(T data) { this.data = data; }
 
-    /**
+    /*
      * Creates a new tree structure with an empty data entry.
      */
     public Tree() { }
     
-    /**
+    /*
      * Creates a new tree structure with this node as root.
      * @param data The data the new node shall represent.
      */
@@ -55,7 +55,7 @@ public class Tree<T>
         this.data = data;
     }
 
-    /**
+    /*
      * Creates a new tree structure below the passed parent node.
      * @param data The data the new node shall represent.
      * @param parent The parent node this node is to be child of.
@@ -66,7 +66,7 @@ public class Tree<T>
         parent.addChild(this);
     }
 
-    /**
+    /*
      * Checks whether this node is the root node of the tree.
      * @return Value indicating whether this node has a parent. True if it does not have a parent, false otherwise.
      */
@@ -75,7 +75,7 @@ public class Tree<T>
         return (this.parent == null);
     }
 
-    /**
+    /*
      * Checks whether this node contains no children.
      * @return Value indicating whether this node has any children. True if at least one child is present, false otherwise.
      */
@@ -84,7 +84,7 @@ public class Tree<T>
         return this.children.size() == 0;
     }
     
-    /**
+    /*
      * Adds a new child with the passed data below this tree node.
      * @param data The data to be stored in the node.
      */
@@ -93,7 +93,7 @@ public class Tree<T>
     	new Tree<T>(data, this);
     }
     
-    /**
+    /*
      * Adds a child below this tree node if not present yet.
      * @param node The child node, which is to be added. Does no changes if the child is already present or is null.
      */
@@ -105,7 +105,7 @@ public class Tree<T>
     	this.children.add(node);
     }
     
-    /**
+    /*
      * Adds multiple nodes as child to this tree node.
      * @param dataWithStructure A list of either data elements or Tree elements to be added as children.
      */
@@ -114,7 +114,7 @@ public class Tree<T>
     	nodes.forEach(node -> addChild(node));
     }
     
-    /**
+    /*
      * Removes a child from this tree node if present.
      * @param child The child node, which is to be removed. Does no changes if the child cannot be found or is null.
      */
@@ -126,7 +126,7 @@ public class Tree<T>
 		this.children.remove(child);
     }
     
-    /**
+    /*
      * Removes a number of children from this tree node.
      * @param children A list of child nodes, which are to be removed.
      */
@@ -135,7 +135,7 @@ public class Tree<T>
     	children.forEach(child -> removeChild(child));
     }
     
-    /**
+    /*
      * Counts the number of child elements.
      * @param directOnly If true, counts only direct children, otherwise all descendants will be counted.
      * @return The number of children.
@@ -149,7 +149,7 @@ public class Tree<T>
     	return this.children.size() + this.children.stream().mapToInt(child -> child.countChildren(directOnly)).sum();
     }
     
-    /**
+    /*
      * Traverses the tree according to the given traversal mode to find every node whose data meets the condition imposed by the given expression.
      * 
      * NOTE: Does not return the tree nodes themselves but the data stored within.
@@ -194,7 +194,7 @@ public class Tree<T>
     	return findResult;
     }
     
-    /**
+    /*
      * Traverses the tree and executes the passed functor on the data element of each node included in the given traversal mode.
      * @param functor Provides the function, which will be executed on the data element.
      * @param traversalMode Defines how the tree will be iterated and what parts will be included in the execution.

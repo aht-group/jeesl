@@ -33,7 +33,7 @@ public class JsonSource
 
 
 
-    /**
+    /*
      * Gets the value of the id property.
      *
      * @return
@@ -45,7 +45,7 @@ public class JsonSource
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      *
      * @param value
@@ -65,7 +65,7 @@ public class JsonSource
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      *
      * @return
@@ -77,7 +77,7 @@ public class JsonSource
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      *
      * @param value
@@ -93,7 +93,7 @@ public class JsonSource
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the group property.
      *
      * @return
@@ -105,7 +105,7 @@ public class JsonSource
         return group;
     }
 
-    /**
+    /*
      * Sets the value of the group property.
      *
      * @param value
@@ -121,7 +121,7 @@ public class JsonSource
         return (this.group!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      *
      * @return
@@ -133,7 +133,7 @@ public class JsonSource
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      *
      * @param value
@@ -149,7 +149,7 @@ public class JsonSource
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      *
      * @return
@@ -161,7 +161,7 @@ public class JsonSource
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      *
      * @param value
@@ -181,7 +181,7 @@ public class JsonSource
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the image property.
      *
      * @return
@@ -193,7 +193,7 @@ public class JsonSource
         return image;
     }
 
-    /**
+    /*
      * Sets the value of the image property.
      *
      * @param value
@@ -209,7 +209,7 @@ public class JsonSource
         return (this.image!= null);
     }
 
-    /**
+    /*
      * Gets the value of the style property.
      *
      * @return
@@ -221,7 +221,7 @@ public class JsonSource
         return style;
     }
 
-    /**
+    /*
      * Sets the value of the style property.
      *
      * @param value
@@ -237,7 +237,7 @@ public class JsonSource
         return (this.style!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      *
      * @return
@@ -249,7 +249,7 @@ public class JsonSource
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      *
      * @param value

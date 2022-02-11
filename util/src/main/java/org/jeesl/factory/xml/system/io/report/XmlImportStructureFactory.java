@@ -51,8 +51,8 @@ public class XmlImportStructureFactory <L extends JeeslLang,D extends JeeslDescr
 {
     final static Logger logger = LoggerFactory.getLogger(XmlImportStructureFactory.class);
 
-    /**
-    * Creates an import structure for the given target class and the data associations.
+    /*
+    * Createsan import structure for the given target class and the data associations.
     * @param targetClass The class to hold the properties to be imported from spreadsheet
     * @param associations Definitions of what information will be imported to which property using which strategy and validation method
     * @return Initialized import structure

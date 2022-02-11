@@ -18,7 +18,7 @@ public class SignatureTranscoder
 	private static final int SIGNATURE_HEIGHT = 50;
 	private static final int SIGNATURE_WIDTH = 100;
 	
-	/**
+	/*
 	* A point along a line within a signature. */
 	private static class Point
 	{
@@ -29,7 +29,7 @@ public class SignatureTranscoder
 		}
 	}
 	
-	/**
+	/*
 	* Extract a signature from its JSON encoding and redraw it as an image. *
 	* @param jsonEncoding the JSON representation of the signature
 	* @param output the destination stream for the image
@@ -40,7 +40,7 @@ public class SignatureTranscoder
 		output.close();
 	}
 	
-	/**
+	/*
 	* Extract the signature lines and points from the JSON encoding. *
 	* @param jsonEncoding the JSON representation of the signature
 	* @return the retrieved lines and points */
@@ -60,7 +60,7 @@ public class SignatureTranscoder
 		return lines;
 	}
 	
-	/**
+	/*
 	* Redraw the signature from its lines definition. *
 	* @param lines the individual lines in the signature
 	* @return the corresponding signature image

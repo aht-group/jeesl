@@ -9,13 +9,13 @@ package net.sf.ahtutils.doc.loc.counter;
 import java.io.File;
 
 
-/**
+/*
  * An implementation of ILineCounter which can be used to process Makefiles.
  * @author Ekkehard Blanz
  */
 public class MakefileCounter extends SimpleCounter implements LineCounter {
     
-    /** Creates a new instance of MakefileCounter */
+    /* Creates a new instance of MakefileCounter */
     public MakefileCounter(File f) {
         super(f, "#");
     }

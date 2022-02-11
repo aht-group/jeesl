@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.security.Staffs;
 import net.sf.ahtutils.xml.security.User;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -61,7 +61,7 @@ public class QuerySecurity
     @XmlAttribute(name = "localeCode")
     protected String localeCode;
 
-    /**
+    /*
      * Gets the value of the user property.
      * 
      * @return
@@ -73,7 +73,7 @@ public class QuerySecurity
         return user;
     }
 
-    /**
+    /*
      * Sets the value of the user property.
      * 
      * @param value
@@ -89,7 +89,7 @@ public class QuerySecurity
         return (this.user!= null);
     }
 
-    /**
+    /*
      * Gets the value of the staff property.
      * 
      * @return
@@ -101,7 +101,7 @@ public class QuerySecurity
         return staff;
     }
 
-    /**
+    /*
      * Sets the value of the staff property.
      * 
      * @param value
@@ -117,7 +117,7 @@ public class QuerySecurity
         return (this.staff!= null);
     }
 
-    /**
+    /*
      * Gets the value of the staffs property.
      * 
      * @return
@@ -129,7 +129,7 @@ public class QuerySecurity
         return staffs;
     }
 
-    /**
+    /*
      * Sets the value of the staffs property.
      * 
      * @param value
@@ -145,7 +145,7 @@ public class QuerySecurity
         return (this.staffs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the role property.
      * 
      * @return
@@ -157,7 +157,7 @@ public class QuerySecurity
         return role;
     }
 
-    /**
+    /*
      * Sets the value of the role property.
      * 
      * @param value
@@ -173,7 +173,7 @@ public class QuerySecurity
         return (this.role!= null);
     }
 
-    /**
+    /*
      * Gets the value of the localeCode property.
      * 
      * @return
@@ -185,7 +185,7 @@ public class QuerySecurity
         return localeCode;
     }
 
-    /**
+    /*
      * Sets the value of the localeCode property.
      * 
      * @param value

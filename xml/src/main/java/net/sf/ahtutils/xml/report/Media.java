@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -68,7 +68,7 @@ public class Media
     @XmlAttribute(name = "type")
     protected String type;
 
-    /**
+    /*
      * Gets the value of the template property.
      * 
      * @return
@@ -80,7 +80,7 @@ public class Media
         return template;
     }
 
-    /**
+    /*
      * Sets the value of the template property.
      * 
      * @param value
@@ -112,7 +112,7 @@ public class Media
         this.jr = null;
     }
 
-    /**
+    /*
      * Gets the value of the refId property.
      * 
      * @return
@@ -124,7 +124,7 @@ public class Media
         return refId;
     }
 
-    /**
+    /*
      * Sets the value of the refId property.
      * 
      * @param value
@@ -144,7 +144,7 @@ public class Media
         this.refId = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -156,7 +156,7 @@ public class Media
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -172,7 +172,7 @@ public class Media
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the dir property.
      * 
      * @return
@@ -184,7 +184,7 @@ public class Media
         return dir;
     }
 
-    /**
+    /*
      * Sets the value of the dir property.
      * 
      * @param value
@@ -200,7 +200,7 @@ public class Media
         return (this.dir!= null);
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -212,7 +212,7 @@ public class Media
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -51,7 +51,7 @@ public class XlsWorkbook
     @XmlAttribute(name = "code")
     protected String code;
 
-    /**
+    /*
      * Gets the value of the xlsSheets property.
      * 
      * @return
@@ -63,7 +63,7 @@ public class XlsWorkbook
         return xlsSheets;
     }
 
-    /**
+    /*
      * Sets the value of the xlsSheets property.
      * 
      * @param value
@@ -95,7 +95,7 @@ public class XlsWorkbook
         this.xlsSheet = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -107,7 +107,7 @@ public class XlsWorkbook
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value

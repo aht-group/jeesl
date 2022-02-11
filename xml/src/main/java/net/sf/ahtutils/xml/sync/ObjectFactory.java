@@ -4,7 +4,7 @@ package net.sf.ahtutils.xml.sync;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/**
+/*
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the net.sf.ahtutils.xml.sync package. 
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
+    /*
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.ahtutils.xml.sync
      * 
      */

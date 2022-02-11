@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -47,7 +47,7 @@ public class TimeSeries
     @XmlElement(required = true)
     protected List<Data> data;
 
-    /**
+    /*
      * Gets the value of the entity property.
      * 
      * @return
@@ -59,7 +59,7 @@ public class TimeSeries
         return entity;
     }
 
-    /**
+    /*
      * Sets the value of the entity property.
      * 
      * @param value
@@ -75,7 +75,7 @@ public class TimeSeries
         return (this.entity!= null);
     }
 
-    /**
+    /*
      * Gets the value of the data property.
      * 
      * <p>

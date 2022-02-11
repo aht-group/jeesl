@@ -51,7 +51,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.engine.xml.JRXmlTemplateLoader;
 
-/**
+/*
  * @author helgehemmer
  *
  */
@@ -68,7 +68,7 @@ public class ReportHandler
 	
 	public enum Format {pdf, xls};
 	
-	/**
+	/*
 	 * This class contains methods to work with the elements configured in reports.xml,
 	 * resources.xml and templates.xml - Additional functionality needs to be implemented
 	 * in dedicated classes (e.g. working with specific data XML files, report)
@@ -127,7 +127,7 @@ public class ReportHandler
 		}
 	}
 	
-	/**
+	/*
 	 * This class contains methods to work with the elements configured in reports.xml, resources.xml and templates.xml - Additional functionality needs to be implemented in dedicated classes (e.g. working with specific data XML files, report)
 	 * @param reports Reports object
 	 * @param resources Resources object
@@ -142,7 +142,7 @@ public class ReportHandler
 		this.templates = templates;
 	}
 
-	/**
+	/*
 	 * This class contains methods to work with the elements configured in reports.xml, resources.xml and templates.xml - Additional functionality needs to be implemented in dedicated classes (e.g. working with specific data XML files, report)
 	 * @param reports
 	 * @throws ReportException
@@ -184,7 +184,7 @@ public class ReportHandler
 		}
 	}
 	
-	/**
+	/*
 	 * Validating the report resources increases performance hence no compilation logic is executed without the needed files
 	 * @throws ReportException
 	 */
@@ -218,7 +218,7 @@ public class ReportHandler
 		}
 	}
 	
-	/**
+	/*
 	 * Get the master report associated with the given report. The JasperDesign object will be loaded from a .jrxml file. 
 	 * @param id
 	 * @param subreport
@@ -272,7 +272,7 @@ public class ReportHandler
 		return design;
 	}
 	
-	/**
+	/*
 	 * Compile a JasperDesign to a JasperReport
 	 * @param jasperDesign
 	 * @return 
@@ -290,7 +290,7 @@ public class ReportHandler
 		return report;
 	}
 	
-	/**
+	/*
 	 * Compile a JasperDesign to a JasperReport
 	 * @param reportId
 	 * @param subreport
@@ -346,7 +346,7 @@ public class ReportHandler
 		return reportCompiled;
 	}
 	
-	/**
+	/*
 	 * Get a Map of all standard parameters plus the given locale and the included data XML file 
 	 * @param doc
 	 * @param locale
@@ -405,7 +405,7 @@ public class ReportHandler
 		return mapReportParameter;
 	}
 	
-	/**
+	/*
 	 * Get a Map of all standard parameters plus the given locale and the included data XML file 
 	 * @param doc
 	 * @param locale
@@ -509,7 +509,7 @@ public class ReportHandler
 	}
 	
 
-	/**
+	/*
 	 * Get a Map of all standard parameters plus the given locale and the included data XML file
 	 * @param reportId
 	 * @param format
@@ -529,7 +529,7 @@ public class ReportHandler
 		return mapReportParameter;
 	}
 	
-	/**
+	/*
 	 * Get the JasperPrint object for a given JasperReport along with parameter map
 	 * @param report
 	 * @param mapReportParameter
@@ -547,7 +547,7 @@ public class ReportHandler
 		return print;
 	}
 	
-	/**
+	/*
 	 * Exports the given JasperPrint to an MS Excel xls sheet as ByteArrayOutputStream
 	 * @param jPrint
 	 * @return
@@ -576,7 +576,7 @@ public class ReportHandler
 		return os;
 	}
 	
-	/**
+	/*
 	 * Exports the given JasperPrint to an PDF format as ByteArrayOutputStream
 	 * @param jPrint to be exported
 	 * @return
@@ -597,7 +597,7 @@ public class ReportHandler
 		return baos;
 	}	
 	
-	/**
+	/*
 	 * Method encapsulating the classical JasperReports workflow of JasperDesign -> JasperReport -> JasperPrint -> PDF/XLS export
 	 * @param reportId identifier of the requested report
 	 * @param doc XML data object
@@ -619,7 +619,7 @@ public class ReportHandler
 		return exportToPdf(print);
 	}
 	
-	/**
+	/*
 	 * Method adding the usage of JRConcurrentSwapFile to report generation. Avoids OoM exceptions on large reports but may slow down generation.
 	 *
 	 */
@@ -634,7 +634,7 @@ public class ReportHandler
 		return createUsingJDom(reportId,doc,format,locale,false); 
 	}
 	
-	/**
+	/*
 	 * Method encapsulating the classical JasperReports workflow of JasperDesign -> JasperReport -> JasperPrint -> PDF/XLS export
 	 * @param reportId identifier of the requested report
 	 * @param doc XML data object

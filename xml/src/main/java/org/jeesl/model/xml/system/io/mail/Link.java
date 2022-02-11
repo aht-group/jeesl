@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -65,7 +65,7 @@ public class Link
     @XmlAttribute(name = "refId")
     protected Long refId;
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -77,7 +77,7 @@ public class Link
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -93,7 +93,7 @@ public class Link
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the url property.
      * 
      * @return
@@ -105,7 +105,7 @@ public class Link
         return url;
     }
 
-    /**
+    /*
      * Sets the value of the url property.
      * 
      * @param value
@@ -121,7 +121,7 @@ public class Link
         return (this.url!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -133,7 +133,7 @@ public class Link
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -153,7 +153,7 @@ public class Link
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -165,7 +165,7 @@ public class Link
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -181,7 +181,7 @@ public class Link
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the refId property.
      * 
      * @return
@@ -193,7 +193,7 @@ public class Link
         return refId;
     }
 
-    /**
+    /*
      * Sets the value of the refId property.
      * 
      * @param value

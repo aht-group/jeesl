@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -43,7 +43,7 @@ public class Parent
     @XmlAttribute(name = "position")
     protected Integer position;
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -55,7 +55,7 @@ public class Parent
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -75,7 +75,7 @@ public class Parent
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -87,7 +87,7 @@ public class Parent
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -103,7 +103,7 @@ public class Parent
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -115,7 +115,7 @@ public class Parent
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value

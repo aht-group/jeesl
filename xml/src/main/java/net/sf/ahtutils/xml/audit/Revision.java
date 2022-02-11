@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Revision
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar date;
 
-    /**
+    /*
      * Gets the value of the user property.
      * 
      * @return
@@ -69,7 +69,7 @@ public class Revision
         return user;
     }
 
-    /**
+    /*
      * Sets the value of the user property.
      * 
      * @param value
@@ -101,7 +101,7 @@ public class Revision
         this.scope = null;
     }
 
-    /**
+    /*
      * Gets the value of the rev property.
      * 
      * @return
@@ -113,7 +113,7 @@ public class Revision
         return rev;
     }
 
-    /**
+    /*
      * Sets the value of the rev property.
      * 
      * @param value
@@ -133,7 +133,7 @@ public class Revision
         this.rev = null;
     }
 
-    /**
+    /*
      * Gets the value of the date property.
      * 
      * @return
@@ -145,7 +145,7 @@ public class Revision
         return date;
     }
 
-    /**
+    /*
      * Sets the value of the date property.
      * 
      * @param value

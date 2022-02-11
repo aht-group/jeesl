@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.text.Markups;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -49,7 +49,7 @@ public class Entity
     @XmlAttribute(name = "code")
     protected String code;
 
-    /**
+    /*
      * Gets the value of the markups property.
      * 
      * @return
@@ -61,7 +61,7 @@ public class Entity
         return markups;
     }
 
-    /**
+    /*
      * Sets the value of the markups property.
      * 
      * @param value
@@ -77,7 +77,7 @@ public class Entity
         return (this.markups!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -89,7 +89,7 @@ public class Entity
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -109,7 +109,7 @@ public class Entity
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -121,7 +121,7 @@ public class Entity
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value

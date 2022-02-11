@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -46,7 +46,7 @@ public class Counter
     @XmlAttribute(name = "counter")
     protected Integer counter;
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -58,7 +58,7 @@ public class Counter
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -78,7 +78,7 @@ public class Counter
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -90,7 +90,7 @@ public class Counter
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -106,7 +106,7 @@ public class Counter
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -118,7 +118,7 @@ public class Counter
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -134,7 +134,7 @@ public class Counter
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the counter property.
      * 
      * @return
@@ -146,7 +146,7 @@ public class Counter
         return counter;
     }
 
-    /**
+    /*
      * Sets the value of the counter property.
      * 
      * @param value

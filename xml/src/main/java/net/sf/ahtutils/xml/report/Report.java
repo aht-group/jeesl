@@ -16,7 +16,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import org.jeesl.model.xml.module.ts.Ts;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -120,7 +120,7 @@ public class Report
         this.media = null;
     }
 
-    /**
+    /*
      * Gets the value of the example property.
      * 
      * @return
@@ -132,7 +132,7 @@ public class Report
         return example;
     }
 
-    /**
+    /*
      * Sets the value of the example property.
      * 
      * @param value
@@ -148,7 +148,7 @@ public class Report
         return (this.example!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -160,7 +160,7 @@ public class Report
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -176,7 +176,7 @@ public class Report
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -188,7 +188,7 @@ public class Report
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -204,7 +204,7 @@ public class Report
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the category property.
      * 
      * @return
@@ -216,7 +216,7 @@ public class Report
         return category;
     }
 
-    /**
+    /*
      * Sets the value of the category property.
      * 
      * @param value
@@ -232,7 +232,7 @@ public class Report
         return (this.category!= null);
     }
 
-    /**
+    /*
      * Gets the value of the xlsWorkbook property.
      * 
      * @return
@@ -244,7 +244,7 @@ public class Report
         return xlsWorkbook;
     }
 
-    /**
+    /*
      * Sets the value of the xlsWorkbook property.
      * 
      * @param value
@@ -260,7 +260,7 @@ public class Report
         return (this.xlsWorkbook!= null);
     }
 
-    /**
+    /*
      * Gets the value of the ts property.
      * 
      * @return
@@ -272,7 +272,7 @@ public class Report
         return ts;
     }
 
-    /**
+    /*
      * Sets the value of the ts property.
      * 
      * @param value
@@ -288,7 +288,7 @@ public class Report
         return (this.ts!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -300,7 +300,7 @@ public class Report
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -316,7 +316,7 @@ public class Report
         return (this.id!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -328,7 +328,7 @@ public class Report
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -344,7 +344,7 @@ public class Report
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -356,7 +356,7 @@ public class Report
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -376,7 +376,7 @@ public class Report
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -388,7 +388,7 @@ public class Report
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -408,7 +408,7 @@ public class Report
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the dir property.
      * 
      * @return
@@ -420,7 +420,7 @@ public class Report
         return dir;
     }
 
-    /**
+    /*
      * Sets the value of the dir property.
      * 
      * @param value
@@ -436,7 +436,7 @@ public class Report
         return (this.dir!= null);
     }
 
-    /**
+    /*
      * Gets the value of the ltr property.
      * 
      * @return
@@ -448,7 +448,7 @@ public class Report
         return ltr;
     }
 
-    /**
+    /*
      * Sets the value of the ltr property.
      * 
      * @param value
@@ -468,7 +468,7 @@ public class Report
         this.ltr = null;
     }
 
-    /**
+    /*
      * Gets the value of the rtl property.
      * 
      * @return
@@ -480,7 +480,7 @@ public class Report
         return rtl;
     }
 
-    /**
+    /*
      * Sets the value of the rtl property.
      * 
      * @param value
@@ -500,7 +500,7 @@ public class Report
         this.rtl = null;
     }
 
-    /**
+    /*
      * Gets the value of the test property.
      * 
      * @return
@@ -512,7 +512,7 @@ public class Report
         return test;
     }
 
-    /**
+    /*
      * Sets the value of the test property.
      * 
      * @param value
@@ -528,7 +528,7 @@ public class Report
         return (this.test!= null);
     }
 
-    /**
+    /*
      * Gets the value of the xmlExample property.
      * 
      * @return
@@ -540,7 +540,7 @@ public class Report
         return xmlExample;
     }
 
-    /**
+    /*
      * Sets the value of the xmlExample property.
      * 
      * @param value

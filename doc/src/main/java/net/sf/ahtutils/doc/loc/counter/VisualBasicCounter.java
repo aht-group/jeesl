@@ -9,14 +9,14 @@ package net.sf.ahtutils.doc.loc.counter;
 import java.io.File;
 
 
-/**
+/*
  * An implementation of ILineCounter which can be used to process Visual Basic
  * source files.
  * @author Ekkehard Blanz
  */
 public class VisualBasicCounter extends SimpleCounter implements LineCounter {
     
-    /** Creates a new instance of VisualBasicCounter */
+    /* Creates a new instance of VisualBasicCounter */
     public VisualBasicCounter(File f) {
         super(f, "'");
     }

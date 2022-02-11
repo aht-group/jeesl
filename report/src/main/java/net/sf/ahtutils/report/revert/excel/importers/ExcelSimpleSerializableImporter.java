@@ -41,7 +41,7 @@ public class ExcelSimpleSerializableImporter <S extends Serializable, I extends 
 		// Initialize the Abstract class with the given inputstream
 		super(definition, is);
 	}		
-	/**
+	/*
 	* Because the ExcelStatusImporter is highly parameterized with classes to implement certain aspects, this method
 	* can be used to get an instance that is configured correctly according to your use case
 	*

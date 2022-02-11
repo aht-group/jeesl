@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -105,7 +105,7 @@ public class XlsColumn implements Serializable
     @XmlAttribute(name = "width")
     protected Integer width;
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -117,7 +117,7 @@ public class XlsColumn implements Serializable
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -133,7 +133,7 @@ public class XlsColumn implements Serializable
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -145,7 +145,7 @@ public class XlsColumn implements Serializable
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -161,7 +161,7 @@ public class XlsColumn implements Serializable
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the dataType property.
      * 
      * @return
@@ -173,7 +173,7 @@ public class XlsColumn implements Serializable
         return dataType;
     }
 
-    /**
+    /*
      * Sets the value of the dataType property.
      * 
      * @param value
@@ -189,7 +189,7 @@ public class XlsColumn implements Serializable
         return (this.dataType!= null);
     }
 
-    /**
+    /*
      * Gets the value of the queries property.
      * 
      * @return
@@ -201,7 +201,7 @@ public class XlsColumn implements Serializable
         return queries;
     }
 
-    /**
+    /*
      * Sets the value of the queries property.
      * 
      * @param value
@@ -217,7 +217,7 @@ public class XlsColumn implements Serializable
         return (this.queries!= null);
     }
 
-    /**
+    /*
      * Gets the value of the layout property.
      * 
      * @return
@@ -229,7 +229,7 @@ public class XlsColumn implements Serializable
         return layout;
     }
 
-    /**
+    /*
      * Sets the value of the layout property.
      * 
      * @param value
@@ -245,7 +245,7 @@ public class XlsColumn implements Serializable
         return (this.layout!= null);
     }
 
-    /**
+    /*
      * Gets the value of the styles property.
      * 
      * @return
@@ -257,7 +257,7 @@ public class XlsColumn implements Serializable
         return styles;
     }
 
-    /**
+    /*
      * Sets the value of the styles property.
      * 
      * @param value
@@ -273,7 +273,7 @@ public class XlsColumn implements Serializable
         return (this.styles!= null);
     }
 
-    /**
+    /*
      * Gets the value of the xlsTransformation property.
      * 
      * @return
@@ -285,7 +285,7 @@ public class XlsColumn implements Serializable
         return xlsTransformation;
     }
 
-    /**
+    /*
      * Sets the value of the xlsTransformation property.
      * 
      * @param value
@@ -301,7 +301,7 @@ public class XlsColumn implements Serializable
         return (this.xlsTransformation!= null);
     }
 
-    /**
+    /*
      * Gets the value of the dataAssociation property.
      * 
      * @return
@@ -313,7 +313,7 @@ public class XlsColumn implements Serializable
         return dataAssociation;
     }
 
-    /**
+    /*
      * Sets the value of the dataAssociation property.
      * 
      * @param value
@@ -329,7 +329,7 @@ public class XlsColumn implements Serializable
         return (this.dataAssociation!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -341,7 +341,7 @@ public class XlsColumn implements Serializable
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -357,7 +357,7 @@ public class XlsColumn implements Serializable
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -369,7 +369,7 @@ public class XlsColumn implements Serializable
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -389,7 +389,7 @@ public class XlsColumn implements Serializable
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -401,7 +401,7 @@ public class XlsColumn implements Serializable
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -421,7 +421,7 @@ public class XlsColumn implements Serializable
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the showLabel property.
      * 
      * @return
@@ -433,7 +433,7 @@ public class XlsColumn implements Serializable
         return showLabel;
     }
 
-    /**
+    /*
      * Sets the value of the showLabel property.
      * 
      * @param value
@@ -453,7 +453,7 @@ public class XlsColumn implements Serializable
         this.showLabel = null;
     }
 
-    /**
+    /*
      * Gets the value of the showWeb property.
      * 
      * @return
@@ -465,7 +465,7 @@ public class XlsColumn implements Serializable
         return showWeb;
     }
 
-    /**
+    /*
      * Sets the value of the showWeb property.
      * 
      * @param value
@@ -485,7 +485,7 @@ public class XlsColumn implements Serializable
         this.showWeb = null;
     }
 
-    /**
+    /*
      * Gets the value of the column property.
      * 
      * @return
@@ -497,7 +497,7 @@ public class XlsColumn implements Serializable
         return column;
     }
 
-    /**
+    /*
      * Sets the value of the column property.
      * 
      * @param value
@@ -513,7 +513,7 @@ public class XlsColumn implements Serializable
         return (this.column!= null);
     }
 
-    /**
+    /*
      * Gets the value of the required property.
      * 
      * @return
@@ -525,7 +525,7 @@ public class XlsColumn implements Serializable
         return required;
     }
 
-    /**
+    /*
      * Sets the value of the required property.
      * 
      * @param value
@@ -545,7 +545,7 @@ public class XlsColumn implements Serializable
         this.required = null;
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -557,7 +557,7 @@ public class XlsColumn implements Serializable
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -573,7 +573,7 @@ public class XlsColumn implements Serializable
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the example property.
      * 
      * @return
@@ -585,7 +585,7 @@ public class XlsColumn implements Serializable
         return example;
     }
 
-    /**
+    /*
      * Sets the value of the example property.
      * 
      * @param value
@@ -601,7 +601,7 @@ public class XlsColumn implements Serializable
         return (this.example!= null);
     }
 
-    /**
+    /*
      * Gets the value of the autoWidth property.
      * 
      * @return
@@ -613,7 +613,7 @@ public class XlsColumn implements Serializable
         return autoWidth;
     }
 
-    /**
+    /*
      * Sets the value of the autoWidth property.
      * 
      * @param value
@@ -633,7 +633,7 @@ public class XlsColumn implements Serializable
         this.autoWidth = null;
     }
 
-    /**
+    /*
      * Gets the value of the width property.
      * 
      * @return
@@ -645,7 +645,7 @@ public class XlsColumn implements Serializable
         return width;
     }
 
-    /**
+    /*
      * Sets the value of the width property.
      * 
      * @param value

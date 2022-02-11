@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.ofx.Section;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Chapter implements Serializable
     @XmlAttribute(name = "title")
     protected String title;
 
-    /**
+    /*
      * Gets the value of the content property.
      * 
      * <p>
@@ -99,7 +99,7 @@ public class Chapter implements Serializable
         this.content = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -111,7 +111,7 @@ public class Chapter implements Serializable
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -127,7 +127,7 @@ public class Chapter implements Serializable
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the title property.
      * 
      * @return
@@ -139,7 +139,7 @@ public class Chapter implements Serializable
         return title;
     }
 
-    /**
+    /*
      * Sets the value of the title property.
      * 
      * @param value

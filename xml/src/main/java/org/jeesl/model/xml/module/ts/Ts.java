@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.status.Interval;
 import net.sf.ahtutils.xml.status.Scope;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -73,7 +73,7 @@ public class Ts
     @XmlElement(required = true)
     protected List<Ds> ds;
 
-    /**
+    /*
      * Gets the value of the scope property.
      * 
      * @return
@@ -85,7 +85,7 @@ public class Ts
         return scope;
     }
 
-    /**
+    /*
      * Sets the value of the scope property.
      * 
      * @param value
@@ -101,7 +101,7 @@ public class Ts
         return (this.scope!= null);
     }
 
-    /**
+    /*
      * Gets the value of the interval property.
      * 
      * @return
@@ -113,7 +113,7 @@ public class Ts
         return interval;
     }
 
-    /**
+    /*
      * Sets the value of the interval property.
      * 
      * @param value
@@ -129,7 +129,7 @@ public class Ts
         return (this.interval!= null);
     }
 
-    /**
+    /*
      * Gets the value of the entity property.
      * 
      * @return
@@ -141,7 +141,7 @@ public class Ts
         return entity;
     }
 
-    /**
+    /*
      * Sets the value of the entity property.
      * 
      * @param value
@@ -157,7 +157,7 @@ public class Ts
         return (this.entity!= null);
     }
 
-    /**
+    /*
      * Gets the value of the bridge property.
      * 
      * @return
@@ -169,7 +169,7 @@ public class Ts
         return bridge;
     }
 
-    /**
+    /*
      * Sets the value of the bridge property.
      * 
      * @param value
@@ -185,7 +185,7 @@ public class Ts
         return (this.bridge!= null);
     }
 
-    /**
+    /*
      * Gets the value of the statistic property.
      * 
      * @return
@@ -197,7 +197,7 @@ public class Ts
         return statistic;
     }
 
-    /**
+    /*
      * Sets the value of the statistic property.
      * 
      * @param value
@@ -213,7 +213,7 @@ public class Ts
         return (this.statistic!= null);
     }
 
-    /**
+    /*
      * Gets the value of the transaction property.
      * 
      * <p>
@@ -250,7 +250,7 @@ public class Ts
         this.transaction = null;
     }
 
-    /**
+    /*
      * Gets the value of the data property.
      * 
      * <p>
@@ -287,7 +287,7 @@ public class Ts
         this.data = null;
     }
 
-    /**
+    /*
      * Gets the value of the ds property.
      * 
      * <p>

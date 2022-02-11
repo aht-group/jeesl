@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.system.navigation.Menu;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Security
     @XmlElement(required = true)
     protected List<Category> category;
 
-    /**
+    /*
      * Gets the value of the menu property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Security
         return menu;
     }
 
-    /**
+    /*
      * Sets the value of the menu property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class Security
         return (this.menu!= null);
     }
 
-    /**
+    /*
      * Gets the value of the roles property.
      * 
      * @return
@@ -92,7 +92,7 @@ public class Security
         return roles;
     }
 
-    /**
+    /*
      * Sets the value of the roles property.
      * 
      * @param value

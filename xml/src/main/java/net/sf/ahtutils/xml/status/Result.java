@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -77,7 +77,7 @@ public class Result
     @XmlAttribute(name = "position")
     protected Integer position;
 
-    /**
+    /*
      * Gets the value of the transistions property.
      * 
      * @return
@@ -89,7 +89,7 @@ public class Result
         return transistions;
     }
 
-    /**
+    /*
      * Sets the value of the transistions property.
      * 
      * @param value
@@ -105,7 +105,7 @@ public class Result
         return (this.transistions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -117,7 +117,7 @@ public class Result
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -133,7 +133,7 @@ public class Result
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -145,7 +145,7 @@ public class Result
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -177,7 +177,7 @@ public class Result
         this.lang = null;
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -189,7 +189,7 @@ public class Result
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -209,7 +209,7 @@ public class Result
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the group property.
      * 
      * @return
@@ -221,7 +221,7 @@ public class Result
         return group;
     }
 
-    /**
+    /*
      * Sets the value of the group property.
      * 
      * @param value
@@ -237,7 +237,7 @@ public class Result
         return (this.group!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -249,7 +249,7 @@ public class Result
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -265,7 +265,7 @@ public class Result
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -277,7 +277,7 @@ public class Result
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -293,7 +293,7 @@ public class Result
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -305,7 +305,7 @@ public class Result
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -325,7 +325,7 @@ public class Result
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the image property.
      * 
      * @return
@@ -337,7 +337,7 @@ public class Result
         return image;
     }
 
-    /**
+    /*
      * Sets the value of the image property.
      * 
      * @param value
@@ -353,7 +353,7 @@ public class Result
         return (this.image!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -365,7 +365,7 @@ public class Result
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value

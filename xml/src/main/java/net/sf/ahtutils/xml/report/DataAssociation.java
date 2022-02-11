@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class DataAssociation
     @XmlAttribute(name = "type")
     protected ImportType type;
 
-    /**
+    /*
      * Gets the value of the column property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class DataAssociation
         return column;
     }
 
-    /**
+    /*
      * Sets the value of the column property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class DataAssociation
         return (this.column!= null);
     }
 
-    /**
+    /*
      * Gets the value of the property property.
      * 
      * @return
@@ -92,7 +92,7 @@ public class DataAssociation
         return property;
     }
 
-    /**
+    /*
      * Sets the value of the property property.
      * 
      * @param value
@@ -108,7 +108,7 @@ public class DataAssociation
         return (this.property!= null);
     }
 
-    /**
+    /*
      * Gets the value of the targetClass property.
      * 
      * @return
@@ -120,7 +120,7 @@ public class DataAssociation
         return targetClass;
     }
 
-    /**
+    /*
      * Sets the value of the targetClass property.
      * 
      * @param value
@@ -136,7 +136,7 @@ public class DataAssociation
         return (this.targetClass!= null);
     }
 
-    /**
+    /*
      * Gets the value of the handledBy property.
      * 
      * @return
@@ -148,7 +148,7 @@ public class DataAssociation
         return handledBy;
     }
 
-    /**
+    /*
      * Sets the value of the handledBy property.
      * 
      * @param value
@@ -164,7 +164,7 @@ public class DataAssociation
         return (this.handledBy!= null);
     }
 
-    /**
+    /*
      * Gets the value of the validatedBy property.
      * 
      * @return
@@ -176,7 +176,7 @@ public class DataAssociation
         return validatedBy;
     }
 
-    /**
+    /*
      * Sets the value of the validatedBy property.
      * 
      * @param value
@@ -192,7 +192,7 @@ public class DataAssociation
         return (this.validatedBy!= null);
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -204,7 +204,7 @@ public class DataAssociation
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value

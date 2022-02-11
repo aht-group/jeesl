@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -40,7 +40,7 @@ public class ProcessingResult
     @XmlAttribute(name = "label")
     protected String label;
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -52,7 +52,7 @@ public class ProcessingResult
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -68,7 +68,7 @@ public class ProcessingResult
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -80,7 +80,7 @@ public class ProcessingResult
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import net.sf.ahtutils.doc.loc.BasicFileInfo;
 
-/**
+/*
  * A basic implementation of ILineCounter which can be used to process C, C++,
  * and JAVA source files ("common" source files).
  * @author MANISH SHARMA & Ekkehard Blanz
@@ -16,7 +16,7 @@ import net.sf.ahtutils.doc.loc.BasicFileInfo;
 public class CommonCounter extends SimpleCounter implements LineCounter {
     
     
-    /** Creates a new instance of CommonCounter.  This counter overwrites the
+    /* Creates a new instance of CommonCounter.  This counter overwrites the
      * countline method of its parent with one that not only recognizes single
      * line comments but also those that can span several lines.
      */
@@ -24,7 +24,7 @@ public class CommonCounter extends SimpleCounter implements LineCounter {
         super(f, "//");
     }
     
-    /** Counts net LOCs, blank lines, comment lines and gross LOCs in "common"
+    /* Counts net LOCs, blank lines, comment lines and gross LOCs in "common"
      * files.
      *
      * @return BasicFileInfo object containing filename and all counts

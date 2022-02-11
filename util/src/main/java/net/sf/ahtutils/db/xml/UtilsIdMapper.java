@@ -175,7 +175,7 @@ public class UtilsIdMapper
 		return o;
 	}
 	
-	/**
+	/*
 	 * Add an object with given code to the mapping
 	 * @param code  Code to be used for identification
 	 * @param o     Object to be mapped with the given code
@@ -198,7 +198,7 @@ public class UtilsIdMapper
                 }
 	}
 	
-	/**
+	/*
 	 * Add an object with given id to the mapping
 	 * @param id    Id to be used for identification
 	 * @param o     Object to be mapped with the given id

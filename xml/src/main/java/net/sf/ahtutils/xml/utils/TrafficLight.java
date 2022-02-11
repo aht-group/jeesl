@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import net.sf.ahtutils.xml.status.Scope;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -65,7 +65,7 @@ public class TrafficLight
     @XmlAttribute(name = "colorBackground")
     protected String colorBackground;
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -77,7 +77,7 @@ public class TrafficLight
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -93,7 +93,7 @@ public class TrafficLight
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -105,7 +105,7 @@ public class TrafficLight
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -121,7 +121,7 @@ public class TrafficLight
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the scope property.
      * 
      * @return
@@ -133,7 +133,7 @@ public class TrafficLight
         return scope;
     }
 
-    /**
+    /*
      * Sets the value of the scope property.
      * 
      * @param value
@@ -149,7 +149,7 @@ public class TrafficLight
         return (this.scope!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -161,7 +161,7 @@ public class TrafficLight
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -181,7 +181,7 @@ public class TrafficLight
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the threshold property.
      * 
      * @return
@@ -193,7 +193,7 @@ public class TrafficLight
         return threshold;
     }
 
-    /**
+    /*
      * Sets the value of the threshold property.
      * 
      * @param value
@@ -213,7 +213,7 @@ public class TrafficLight
         this.threshold = null;
     }
 
-    /**
+    /*
      * Gets the value of the colorText property.
      * 
      * @return
@@ -225,7 +225,7 @@ public class TrafficLight
         return colorText;
     }
 
-    /**
+    /*
      * Sets the value of the colorText property.
      * 
      * @param value
@@ -241,7 +241,7 @@ public class TrafficLight
         return (this.colorText!= null);
     }
 
-    /**
+    /*
      * Gets the value of the colorBackground property.
      * 
      * @return
@@ -253,7 +253,7 @@ public class TrafficLight
         return colorBackground;
     }
 
-    /**
+    /*
      * Sets the value of the colorBackground property.
      * 
      * @param value

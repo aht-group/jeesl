@@ -17,7 +17,7 @@ import net.sf.ahtutils.xml.status.Implementation;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -101,7 +101,7 @@ public class XlsSheet
         this.content = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -113,7 +113,7 @@ public class XlsSheet
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -129,7 +129,7 @@ public class XlsSheet
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -141,7 +141,7 @@ public class XlsSheet
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -161,7 +161,7 @@ public class XlsSheet
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -173,7 +173,7 @@ public class XlsSheet
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -193,7 +193,7 @@ public class XlsSheet
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the query property.
      * 
      * @return
@@ -205,7 +205,7 @@ public class XlsSheet
         return query;
     }
 
-    /**
+    /*
      * Sets the value of the query property.
      * 
      * @param value
@@ -221,7 +221,7 @@ public class XlsSheet
         return (this.query!= null);
     }
 
-    /**
+    /*
      * Gets the value of the primaryKey property.
      * 
      * @return
@@ -233,7 +233,7 @@ public class XlsSheet
         return primaryKey;
     }
 
-    /**
+    /*
      * Sets the value of the primaryKey property.
      * 
      * @param value

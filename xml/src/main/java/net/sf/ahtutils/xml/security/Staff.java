@@ -15,7 +15,7 @@ import net.sf.ahtutils.xml.status.Status;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -74,7 +74,7 @@ public class Staff
     @XmlAttribute(name = "id")
     protected Long id;
 
-    /**
+    /*
      * Gets the value of the role property.
      * 
      * @return
@@ -86,7 +86,7 @@ public class Staff
         return role;
     }
 
-    /**
+    /*
      * Sets the value of the role property.
      * 
      * @param value
@@ -102,7 +102,7 @@ public class Staff
         return (this.role!= null);
     }
 
-    /**
+    /*
      * Gets the value of the user property.
      * 
      * @return
@@ -114,7 +114,7 @@ public class Staff
         return user;
     }
 
-    /**
+    /*
      * Sets the value of the user property.
      * 
      * @param value
@@ -130,7 +130,7 @@ public class Staff
         return (this.user!= null);
     }
 
-    /**
+    /*
      * Gets the value of the domain property.
      * 
      * @return
@@ -142,7 +142,7 @@ public class Staff
         return domain;
     }
 
-    /**
+    /*
      * Sets the value of the domain property.
      * 
      * @param value
@@ -158,7 +158,7 @@ public class Staff
         return (this.domain!= null);
     }
 
-    /**
+    /*
      * Gets the value of the status property.
      * 
      * @return
@@ -170,7 +170,7 @@ public class Staff
         return status;
     }
 
-    /**
+    /*
      * Sets the value of the status property.
      * 
      * @param value
@@ -186,7 +186,7 @@ public class Staff
         return (this.status!= null);
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -198,7 +198,7 @@ public class Staff
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -214,7 +214,7 @@ public class Staff
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the responsible property.
      * 
      * @return
@@ -226,7 +226,7 @@ public class Staff
         return responsible;
     }
 
-    /**
+    /*
      * Sets the value of the responsible property.
      * 
      * @param value
@@ -242,7 +242,7 @@ public class Staff
         return (this.responsible!= null);
     }
 
-    /**
+    /*
      * Gets the value of the level property.
      * 
      * @return
@@ -254,7 +254,7 @@ public class Staff
         return level;
     }
 
-    /**
+    /*
      * Sets the value of the level property.
      * 
      * @param value
@@ -270,7 +270,7 @@ public class Staff
         return (this.level!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -282,7 +282,7 @@ public class Staff
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value

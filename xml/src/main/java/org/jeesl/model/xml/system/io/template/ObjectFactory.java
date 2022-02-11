@@ -4,7 +4,7 @@ package org.jeesl.model.xml.system.io.template;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/**
+/*
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.system.io.template package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
+    /*
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.system.io.template
      * 
      */
     public ObjectFactory() {
     }
 
-    /**
+    /*
      * Create an instance of {@link Templates }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Templates();
     }
 
-    /**
+    /*
      * Create an instance of {@link Template }
      * 
      */
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new Template();
     }
 
-    /**
+    /*
      * Create an instance of {@link Tokens }
      * 
      */
@@ -53,7 +53,7 @@ public class ObjectFactory {
         return new Tokens();
     }
 
-    /**
+    /*
      * Create an instance of {@link Token }
      * 
      */
@@ -61,7 +61,7 @@ public class ObjectFactory {
         return new Token();
     }
 
-    /**
+    /*
      * Create an instance of {@link Definitions }
      * 
      */
@@ -69,7 +69,7 @@ public class ObjectFactory {
         return new Definitions();
     }
 
-    /**
+    /*
      * Create an instance of {@link Definition }
      * 
      */

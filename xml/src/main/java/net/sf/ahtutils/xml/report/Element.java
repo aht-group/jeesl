@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -48,7 +48,7 @@ public class Element
     @XmlAttribute(name = "file")
     protected String file;
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -60,7 +60,7 @@ public class Element
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -76,7 +76,7 @@ public class Element
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the file property.
      * 
      * @return
@@ -88,7 +88,7 @@ public class Element
         return file;
     }
 
-    /**
+    /*
      * Sets the value of the file property.
      * 
      * @param value

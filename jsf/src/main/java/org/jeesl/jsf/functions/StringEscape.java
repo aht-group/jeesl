@@ -10,7 +10,7 @@ public final class StringEscape
 	 }
 
   //--------------------------------------------------------------------------
-    /**
+    /*
      * <p>Escapes the characters in a <code>String</code> using Java String rules.</p>
      *
      * <p>Deals correctly with quotes and control-chars (tab, backslash, cr, ff, etc.) </p>
@@ -41,7 +41,7 @@ public final class StringEscape
 		return StringEscapeUtils.escapeHtml4(value);
 	 }
 
-	 /**
+	 /*
      * <p>Escapes the characters in a <code>String</code> to be suitable to pass to
      * an SQL query.</p>
      *

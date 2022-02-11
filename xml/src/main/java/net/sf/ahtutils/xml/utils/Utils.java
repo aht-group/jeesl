@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.access.Category;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.

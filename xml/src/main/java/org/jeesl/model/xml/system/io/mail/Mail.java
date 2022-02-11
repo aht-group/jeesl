@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.text.Example;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -94,7 +94,7 @@ public class Mail
     @XmlAttribute(name = "test")
     protected Boolean test;
 
-    /**
+    /*
      * Gets the value of the mail property.
      * 
      * @return
@@ -106,7 +106,7 @@ public class Mail
         return mail;
     }
 
-    /**
+    /*
      * Sets the value of the mail property.
      * 
      * @param value
@@ -122,7 +122,7 @@ public class Mail
         return (this.mail!= null);
     }
 
-    /**
+    /*
      * Gets the value of the header property.
      * 
      * @return
@@ -134,7 +134,7 @@ public class Mail
         return header;
     }
 
-    /**
+    /*
      * Sets the value of the header property.
      * 
      * @param value
@@ -150,7 +150,7 @@ public class Mail
         return (this.header!= null);
     }
 
-    /**
+    /*
      * Gets the value of the template property.
      * 
      * <p>
@@ -187,7 +187,7 @@ public class Mail
         this.template = null;
     }
 
-    /**
+    /*
      * Gets the value of the text property.
      * 
      * @return
@@ -199,7 +199,7 @@ public class Mail
         return text;
     }
 
-    /**
+    /*
      * Sets the value of the text property.
      * 
      * @param value
@@ -215,7 +215,7 @@ public class Mail
         return (this.text!= null);
     }
 
-    /**
+    /*
      * Gets the value of the html property.
      * 
      * @return
@@ -227,7 +227,7 @@ public class Mail
         return html;
     }
 
-    /**
+    /*
      * Sets the value of the html property.
      * 
      * @param value
@@ -243,7 +243,7 @@ public class Mail
         return (this.html!= null);
     }
 
-    /**
+    /*
      * Gets the value of the attachment property.
      * 
      * <p>
@@ -280,7 +280,7 @@ public class Mail
         this.attachment = null;
     }
 
-    /**
+    /*
      * Gets the value of the image property.
      * 
      * <p>
@@ -317,7 +317,7 @@ public class Mail
         this.image = null;
     }
 
-    /**
+    /*
      * Gets the value of the example property.
      * 
      * @return
@@ -329,7 +329,7 @@ public class Mail
         return example;
     }
 
-    /**
+    /*
      * Sets the value of the example property.
      * 
      * @param value
@@ -345,7 +345,7 @@ public class Mail
         return (this.example!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -357,7 +357,7 @@ public class Mail
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -377,7 +377,7 @@ public class Mail
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -389,7 +389,7 @@ public class Mail
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -405,7 +405,7 @@ public class Mail
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the lang property.
      * 
      * @return
@@ -417,7 +417,7 @@ public class Mail
         return lang;
     }
 
-    /**
+    /*
      * Sets the value of the lang property.
      * 
      * @param value
@@ -433,7 +433,7 @@ public class Mail
         return (this.lang!= null);
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -445,7 +445,7 @@ public class Mail
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -461,7 +461,7 @@ public class Mail
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the msgId property.
      * 
      * @return
@@ -473,7 +473,7 @@ public class Mail
         return msgId;
     }
 
-    /**
+    /*
      * Sets the value of the msgId property.
      * 
      * @param value
@@ -489,7 +489,7 @@ public class Mail
         return (this.msgId!= null);
     }
 
-    /**
+    /*
      * Gets the value of the dir property.
      * 
      * @return
@@ -501,7 +501,7 @@ public class Mail
         return dir;
     }
 
-    /**
+    /*
      * Sets the value of the dir property.
      * 
      * @param value
@@ -517,7 +517,7 @@ public class Mail
         return (this.dir!= null);
     }
 
-    /**
+    /*
      * Gets the value of the test property.
      * 
      * @return
@@ -529,7 +529,7 @@ public class Mail
         return test;
     }
 
-    /**
+    /*
      * Sets the value of the test property.
      * 
      * @param value

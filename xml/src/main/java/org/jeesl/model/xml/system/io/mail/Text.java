@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -38,7 +38,7 @@ public class Text
     @XmlValue
     protected String value;
 
-    /**
+    /*
      * Gets the value of the value property.
      * 
      * @return
@@ -50,7 +50,7 @@ public class Text
         return value;
     }
 
-    /**
+    /*
      * Sets the value of the value property.
      * 
      * @param value

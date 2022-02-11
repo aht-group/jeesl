@@ -14,19 +14,19 @@ import java.io.IOException;
 
 import net.sf.ahtutils.doc.loc.BasicFileInfo;
 
-/**
+/*
  * An implementation of ILineCounter which can be used to process .bat source
  * files.
  * @author Ekkehard Blanz
  */
 public class BatCounter extends SimpleCounter implements LineCounter {
     
-    /** Creates a new instance of BatCounter */
+    /* Creates a new instance of BatCounter */
     public BatCounter(File f) {
         super(f, "::");
     }
     
-    /** Overwrites the method countlines to count LOCs in .bat files as .bat 
+    /* Overwrites the method countlines to count LOCs in .bat files as .bat 
      * files need some special treatment.  It then sets up and returns the
      * BasicFileInfo as its paent would.
      * @return BasicFileInfo object containing filename and all counts

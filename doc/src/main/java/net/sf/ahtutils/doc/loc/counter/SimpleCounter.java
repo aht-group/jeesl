@@ -13,7 +13,7 @@ import java.io.IOException;
 
 import net.sf.ahtutils.doc.loc.BasicFileInfo;
 
-/**
+/*
  * This counter can be used directly for all languages that don't allow comments
  * to span several lines and use a particular string to indicate the beginning
  * of a comment.
@@ -24,7 +24,7 @@ public class SimpleCounter implements LineCounter {
     protected File inputfile;
     protected String CommentHeader;
     
-    /** Creates a new instance of SimpleCounter.
+    /* Creates a new instance of SimpleCounter.
      * @param f File to be counted
      * @param Header String containing the comment header for a given language
      */
@@ -34,7 +34,7 @@ public class SimpleCounter implements LineCounter {
     }
     
     
-    /** Counts net LOCs, blank lines, comment lines and gross LOCs in source
+    /* Counts net LOCs, blank lines, comment lines and gross LOCs in source
      * files.
      * @return BasicFileInfo object containing filename and all counts
      */

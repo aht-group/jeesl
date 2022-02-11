@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.status.Status;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -40,7 +40,7 @@ public class Font
     @XmlAttribute(name = "italic")
     protected Boolean italic;
 
-    /**
+    /*
      * Gets the value of the bold property.
      * 
      * @return
@@ -52,7 +52,7 @@ public class Font
         return bold;
     }
 
-    /**
+    /*
      * Sets the value of the bold property.
      * 
      * @param value
@@ -72,7 +72,7 @@ public class Font
         this.bold = null;
     }
 
-    /**
+    /*
      * Gets the value of the italic property.
      * 
      * @return
@@ -84,7 +84,7 @@ public class Font
         return italic;
     }
 
-    /**
+    /*
      * Sets the value of the italic property.
      * 
      * @param value

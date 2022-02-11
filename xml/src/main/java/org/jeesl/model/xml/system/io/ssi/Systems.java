@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -43,7 +43,7 @@ public class Systems
     @XmlElement(required = true)
     protected List<System> system;
 
-    /**
+    /*
      * Gets the value of the system property.
      * 
      * <p>

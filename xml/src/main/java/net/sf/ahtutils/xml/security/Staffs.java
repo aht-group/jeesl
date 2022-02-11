@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Domain;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -60,7 +60,7 @@ public class Staffs
     @XmlAttribute(name = "label")
     protected String label;
 
-    /**
+    /*
      * Gets the value of the domain property.
      * 
      * @return
@@ -72,7 +72,7 @@ public class Staffs
         return domain;
     }
 
-    /**
+    /*
      * Sets the value of the domain property.
      * 
      * @param value
@@ -88,7 +88,7 @@ public class Staffs
         return (this.domain!= null);
     }
 
-    /**
+    /*
      * Gets the value of the role property.
      * 
      * @return
@@ -100,7 +100,7 @@ public class Staffs
         return role;
     }
 
-    /**
+    /*
      * Sets the value of the role property.
      * 
      * @param value
@@ -148,7 +148,7 @@ public class Staffs
         this.staffs = null;
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -160,7 +160,7 @@ public class Staffs
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value

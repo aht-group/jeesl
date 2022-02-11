@@ -13,14 +13,14 @@ import java.io.IOException;
 import net.sf.ahtutils.doc.loc.BasicFileInfo;
 
 
-/**
+/*
  * An implementation of ILineCounter which can be used to process Visual Basic
  * source files.
  * @author Ekkehard Blanz
  */
 public class UnknownCounter extends SimpleCounter implements LineCounter {
     
-    /** Creates a new instance of VisualBasicCounter */
+    /* Creates a new instance of VisualBasicCounter */
     public UnknownCounter(File f)
     {
         super(f, "'");

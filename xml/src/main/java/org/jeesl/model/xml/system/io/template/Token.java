@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import org.jeesl.model.xml.text.Example;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -65,7 +65,7 @@ public class Token
     @XmlAttribute(name = "visible")
     protected Boolean visible;
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -77,7 +77,7 @@ public class Token
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -93,7 +93,7 @@ public class Token
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -105,7 +105,7 @@ public class Token
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -121,7 +121,7 @@ public class Token
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the example property.
      * 
      * @return
@@ -133,7 +133,7 @@ public class Token
         return example;
     }
 
-    /**
+    /*
      * Sets the value of the example property.
      * 
      * @param value
@@ -149,7 +149,7 @@ public class Token
         return (this.example!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -161,7 +161,7 @@ public class Token
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -181,7 +181,7 @@ public class Token
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -193,7 +193,7 @@ public class Token
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -209,7 +209,7 @@ public class Token
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -221,7 +221,7 @@ public class Token
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -241,7 +241,7 @@ public class Token
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -253,7 +253,7 @@ public class Token
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value

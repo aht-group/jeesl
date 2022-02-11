@@ -19,7 +19,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -87,7 +87,7 @@ public class Constraint
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -103,7 +103,7 @@ public class Constraint
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -115,7 +115,7 @@ public class Constraint
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -131,7 +131,7 @@ public class Constraint
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -143,7 +143,7 @@ public class Constraint
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -175,7 +175,7 @@ public class Constraint
         this.constraintAttribute = null;
     }
 
-    /**
+    /*
      * Gets the value of the lang property.
      * 
      * @return
@@ -187,7 +187,7 @@ public class Constraint
         return lang;
     }
 
-    /**
+    /*
      * Sets the value of the lang property.
      * 
      * @param value
@@ -203,7 +203,7 @@ public class Constraint
         return (this.lang!= null);
     }
 
-    /**
+    /*
      * Gets the value of the description property.
      * 
      * @return
@@ -215,7 +215,7 @@ public class Constraint
         return description;
     }
 
-    /**
+    /*
      * Sets the value of the description property.
      * 
      * @param value
@@ -231,7 +231,7 @@ public class Constraint
         return (this.description!= null);
     }
 
-    /**
+    /*
      * Gets the value of the constraintSolution property.
      * 
      * @return
@@ -243,7 +243,7 @@ public class Constraint
         return constraintSolution;
     }
 
-    /**
+    /*
      * Sets the value of the constraintSolution property.
      * 
      * @param value
@@ -259,7 +259,7 @@ public class Constraint
         return (this.constraintSolution!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -271,7 +271,7 @@ public class Constraint
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -287,7 +287,7 @@ public class Constraint
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the since property.
      * 
      * @return
@@ -299,7 +299,7 @@ public class Constraint
         return since;
     }
 
-    /**
+    /*
      * Sets the value of the since property.
      * 
      * @param value

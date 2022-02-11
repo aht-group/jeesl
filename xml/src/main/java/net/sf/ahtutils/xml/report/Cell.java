@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -60,7 +60,7 @@ public class Cell
     @XmlAttribute(name = "colNr")
     protected Integer colNr;
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -72,7 +72,7 @@ public class Cell
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -88,7 +88,7 @@ public class Cell
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -100,7 +100,7 @@ public class Cell
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -116,7 +116,7 @@ public class Cell
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -128,7 +128,7 @@ public class Cell
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -144,7 +144,7 @@ public class Cell
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -156,7 +156,7 @@ public class Cell
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -176,7 +176,7 @@ public class Cell
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the rowNr property.
      * 
      * @return
@@ -188,7 +188,7 @@ public class Cell
         return rowNr;
     }
 
-    /**
+    /*
      * Sets the value of the rowNr property.
      * 
      * @param value
@@ -208,7 +208,7 @@ public class Cell
         this.rowNr = null;
     }
 
-    /**
+    /*
      * Gets the value of the colNr property.
      * 
      * @return
@@ -220,7 +220,7 @@ public class Cell
         return colNr;
     }
 
-    /**
+    /*
      * Sets the value of the colNr property.
      * 
      * @param value

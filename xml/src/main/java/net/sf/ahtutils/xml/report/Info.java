@@ -16,7 +16,7 @@ import net.sf.ahtutils.xml.finance.Signatures;
 import net.sf.exlp.xml.io.Data;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -129,7 +129,7 @@ public class Info
         return title;
     }
 
-    /**
+    /*
      * Sets the value of the title property.
      * 
      * @param value
@@ -145,7 +145,7 @@ public class Info
         return (this.title!= null);
     }
 
-    /**
+    /*
      * Gets the value of the record property.
      * 
      * @return
@@ -157,7 +157,7 @@ public class Info
         return record;
     }
 
-    /**
+    /*
      * Sets the value of the record property.
      * 
      * @param value
@@ -173,7 +173,7 @@ public class Info
         return (this.record!= null);
     }
 
-    /**
+    /*
      * Gets the value of the subtitle property.
      * 
      * @return
@@ -185,7 +185,7 @@ public class Info
         return subtitle;
     }
 
-    /**
+    /*
      * Sets the value of the subtitle property.
      * 
      * @param value
@@ -201,7 +201,7 @@ public class Info
         return (this.subtitle!= null);
     }
 
-    /**
+    /*
      * Gets the value of the footer property.
      * 
      * @return
@@ -213,7 +213,7 @@ public class Info
         return footer;
     }
 
-    /**
+    /*
      * Sets the value of the footer property.
      * 
      * @param value
@@ -261,7 +261,7 @@ public class Info
         this.jr = null;
     }
 
-    /**
+    /*
      * Gets the value of the file property.
      * 
      * @return
@@ -273,7 +273,7 @@ public class Info
         return file;
     }
 
-    /**
+    /*
      * Sets the value of the file property.
      * 
      * @param value
@@ -289,7 +289,7 @@ public class Info
         return (this.file!= null);
     }
 
-    /**
+    /*
      * Gets the value of the hash property.
      * 
      * @return
@@ -301,7 +301,7 @@ public class Info
         return hash;
     }
 
-    /**
+    /*
      * Sets the value of the hash property.
      * 
      * @param value
@@ -317,7 +317,7 @@ public class Info
         return (this.hash!= null);
     }
 
-    /**
+    /*
      * Gets the value of the user property.
      * 
      * @return
@@ -329,7 +329,7 @@ public class Info
         return user;
     }
 
-    /**
+    /*
      * Sets the value of the user property.
      * 
      * @param value
@@ -345,7 +345,7 @@ public class Info
         return (this.user!= null);
     }
 
-    /**
+    /*
      * Gets the value of the footers property.
      * 
      * @return
@@ -357,7 +357,7 @@ public class Info
         return footers;
     }
 
-    /**
+    /*
      * Sets the value of the footers property.
      * 
      * @param value
@@ -373,7 +373,7 @@ public class Info
         return (this.footers!= null);
     }
 
-    /**
+    /*
      * Gets the value of the labels property.
      * 
      * @return
@@ -385,7 +385,7 @@ public class Info
         return labels;
     }
 
-    /**
+    /*
      * Sets the value of the labels property.
      * 
      * @param value
@@ -401,7 +401,7 @@ public class Info
         return (this.labels!= null);
     }
 
-    /**
+    /*
      * Gets the value of the signatures property.
      * 
      * @return
@@ -413,7 +413,7 @@ public class Info
         return signatures;
     }
 
-    /**
+    /*
      * Sets the value of the signatures property.
      * 
      * @param value
@@ -429,7 +429,7 @@ public class Info
         return (this.signatures!= null);
     }
 
-    /**
+    /*
      * Gets the value of the data property.
      * 
      * @return
@@ -441,7 +441,7 @@ public class Info
         return data;
     }
 
-    /**
+    /*
      * Sets the value of the data property.
      * 
      * @param value
@@ -458,7 +458,7 @@ public class Info
     }
 
 
-    /**
+    /*
      * <p>Java class for anonymous complex type.
      * 
      * <p>The following schema fragment specifies the expected content contained within this class.
@@ -486,7 +486,7 @@ public class Info
         @XmlValue
         protected String value;
 
-        /**
+        /*
          * Gets the value of the value property.
          * 
          * @return
@@ -498,7 +498,7 @@ public class Info
             return value;
         }
 
-        /**
+        /*
          * Sets the value of the value property.
          * 
          * @param value
@@ -517,7 +517,7 @@ public class Info
     }
 
 
-    /**
+    /*
      * <p>Java class for anonymous complex type.
      * 
      * <p>The following schema fragment specifies the expected content contained within this class.
@@ -546,7 +546,7 @@ public class Info
         @XmlSchemaType(name = "dateTime")
         protected XMLGregorianCalendar value;
 
-        /**
+        /*
          * Gets the value of the value property.
          * 
          * @return
@@ -558,7 +558,7 @@ public class Info
             return value;
         }
 
-        /**
+        /*
          * Sets the value of the value property.
          * 
          * @param value
@@ -577,7 +577,7 @@ public class Info
     }
 
 
-    /**
+    /*
      * <p>Java class for anonymous complex type.
      * 
      * <p>The following schema fragment specifies the expected content contained within this class.
@@ -605,7 +605,7 @@ public class Info
         @XmlValue
         protected String value;
 
-        /**
+        /*
          * Gets the value of the value property.
          * 
          * @return
@@ -617,7 +617,7 @@ public class Info
             return value;
         }
 
-        /**
+        /*
          * Sets the value of the value property.
          * 
          * @param value
@@ -636,7 +636,7 @@ public class Info
     }
 
 
-    /**
+    /*
      * <p>Java class for anonymous complex type.
      * 
      * <p>The following schema fragment specifies the expected content contained within this class.
@@ -664,7 +664,7 @@ public class Info
         @XmlValue
         protected String value;
 
-        /**
+        /*
          * Gets the value of the value property.
          * 
          * @return
@@ -676,7 +676,7 @@ public class Info
             return value;
         }
 
-        /**
+        /*
          * Sets the value of the value property.
          * 
          * @param value

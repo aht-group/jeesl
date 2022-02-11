@@ -78,7 +78,7 @@ public abstract class AbstractMenuXmlBean implements Serializable
 		return mapMenu.get(code);
 	}
 	
-	/**
+	/*
 	 * Breadcrumb
 	 */
 	public Breadcrumb breadcrumb(MenuXmlBuilder mf,String code){return breadcrumb(mf,false,code,false,false);}

@@ -4,7 +4,7 @@ package org.jeesl.model.xml.module.ts;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/**
+/*
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.module.ts package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
+    /*
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.module.ts
      * 
      */
     public ObjectFactory() {
     }
 
-    /**
+    /*
      * Create an instance of {@link Ts }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Ts();
     }
 
-    /**
+    /*
      * Create an instance of {@link Entity }
      * 
      */
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new Entity();
     }
 
-    /**
+    /*
      * Create an instance of {@link Bridge }
      * 
      */
@@ -53,7 +53,7 @@ public class ObjectFactory {
         return new Bridge();
     }
 
-    /**
+    /*
      * Create an instance of {@link Statistic }
      * 
      */
@@ -61,7 +61,7 @@ public class ObjectFactory {
         return new Statistic();
     }
 
-    /**
+    /*
      * Create an instance of {@link Transaction }
      * 
      */
@@ -69,7 +69,7 @@ public class ObjectFactory {
         return new Transaction();
     }
 
-    /**
+    /*
      * Create an instance of {@link Data }
      * 
      */
@@ -77,7 +77,7 @@ public class ObjectFactory {
         return new Data();
     }
 
-    /**
+    /*
      * Create an instance of {@link Points }
      * 
      */
@@ -85,7 +85,7 @@ public class ObjectFactory {
         return new Points();
     }
 
-    /**
+    /*
      * Create an instance of {@link Point }
      * 
      */
@@ -93,7 +93,7 @@ public class ObjectFactory {
         return new Point();
     }
 
-    /**
+    /*
      * Create an instance of {@link Ds }
      * 
      */
@@ -101,7 +101,7 @@ public class ObjectFactory {
         return new Ds();
     }
 
-    /**
+    /*
      * Create an instance of {@link TsCollection }
      * 
      */
@@ -109,7 +109,7 @@ public class ObjectFactory {
         return new TsCollection();
     }
 
-    /**
+    /*
      * Create an instance of {@link TimeSeries }
      * 
      */

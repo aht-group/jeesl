@@ -16,7 +16,7 @@ import java.io.File;
  */
 public class AllCounter extends SimpleCounter implements LineCounter {
     
-    /** Creates a new instance of VisualBasicCounter */
+    /* Creates a new instance of VisualBasicCounter */
     public AllCounter(File f) {
         super(f, "XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
     }

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Navigation
     @XmlAttribute(name = "package")
     protected String _package;
 
-    /**
+    /*
      * Gets the value of the viewPattern property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Navigation
         return viewPattern;
     }
 
-    /**
+    /*
      * Sets the value of the viewPattern property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class Navigation
         return (this.viewPattern!= null);
     }
 
-    /**
+    /*
      * Gets the value of the urlMapping property.
      * 
      * @return
@@ -92,7 +92,7 @@ public class Navigation
         return urlMapping;
     }
 
-    /**
+    /*
      * Sets the value of the urlMapping property.
      * 
      * @param value
@@ -108,7 +108,7 @@ public class Navigation
         return (this.urlMapping!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -120,7 +120,7 @@ public class Navigation
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -136,7 +136,7 @@ public class Navigation
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the package property.
      * 
      * @return
@@ -148,7 +148,7 @@ public class Navigation
         return _package;
     }
 
-    /**
+    /*
      * Sets the value of the package property.
      * 
      * @param value

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -69,7 +69,7 @@ public class Reports
         this.report = null;
     }
 
-    /**
+    /*
      * Gets the value of the dir property.
      * 
      * @return
@@ -81,7 +81,7 @@ public class Reports
         return dir;
     }
 
-    /**
+    /*
      * Sets the value of the dir property.
      * 
      * @param value
@@ -97,7 +97,7 @@ public class Reports
         return (this.dir!= null);
     }
 
-    /**
+    /*
      * Gets the value of the resources property.
      * 
      * @return
@@ -109,7 +109,7 @@ public class Reports
         return resources;
     }
 
-    /**
+    /*
      * Sets the value of the resources property.
      * 
      * @param value
@@ -125,7 +125,7 @@ public class Reports
         return (this.resources!= null);
     }
 
-    /**
+    /*
      * Gets the value of the templates property.
      * 
      * @return
@@ -137,7 +137,7 @@ public class Reports
         return templates;
     }
 
-    /**
+    /*
      * Sets the value of the templates property.
      * 
      * @param value

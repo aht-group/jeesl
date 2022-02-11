@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Group
     @XmlAttribute(name = "code")
     protected String code;
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -71,7 +71,7 @@ public class Group
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -87,7 +87,7 @@ public class Group
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -99,7 +99,7 @@ public class Group
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -115,7 +115,7 @@ public class Group
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the views property.
      * 
      * @return
@@ -127,7 +127,7 @@ public class Group
         return views;
     }
 
-    /**
+    /*
      * Sets the value of the views property.
      * 
      * @param value
@@ -143,7 +143,7 @@ public class Group
         return (this.views!= null);
     }
 
-    /**
+    /*
      * Gets the value of the groups property.
      * 
      * @return
@@ -155,7 +155,7 @@ public class Group
         return groups;
     }
 
-    /**
+    /*
      * Sets the value of the groups property.
      * 
      * @param value
@@ -171,7 +171,7 @@ public class Group
         return (this.groups!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -183,7 +183,7 @@ public class Group
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value

@@ -47,7 +47,7 @@ public class XmlDataAssociationFactory <L extends JeeslLang,D extends JeeslDescr
 {
     final static Logger logger = LoggerFactory.getLogger(XmlDataAssociationFactory.class);
 
-    /**
+    /*
     * Add a simple data association to import property from column.
     * @param column The column nr in spreadsheet, starting with 0
     * @param property The property of the target class
@@ -61,7 +61,7 @@ public class XmlDataAssociationFactory <L extends JeeslLang,D extends JeeslDescr
         return association;
     }
 
-    /**
+    /*
     * Add a data association for import of property in given column that is handled by the given class.
     * @param column The column nr in spreadsheet, starting with 0
     * @param property The property of the target class
@@ -77,7 +77,7 @@ public class XmlDataAssociationFactory <L extends JeeslLang,D extends JeeslDescr
         return association;
     }
     
-    /**
+    /*
     * Add a validation by the given class.
     * @param handler The handler class that implements the ValidationStrategy interface
     * @return Data association with validation parameter set

@@ -16,7 +16,7 @@ import net.sf.ahtutils.xml.finance.Figures;
 import net.sf.ahtutils.xml.status.Status;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -86,7 +86,7 @@ public class Survey
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar validTo;
 
-    /**
+    /*
      * Gets the value of the templates property.
      * 
      * @return
@@ -98,7 +98,7 @@ public class Survey
         return templates;
     }
 
-    /**
+    /*
      * Sets the value of the templates property.
      * 
      * @param value
@@ -114,7 +114,7 @@ public class Survey
         return (this.templates!= null);
     }
 
-    /**
+    /*
      * Gets the value of the template property.
      * 
      * @return
@@ -126,7 +126,7 @@ public class Survey
         return template;
     }
 
-    /**
+    /*
      * Sets the value of the template property.
      * 
      * @param value
@@ -142,7 +142,7 @@ public class Survey
         return (this.template!= null);
     }
 
-    /**
+    /*
      * Gets the value of the status property.
      * 
      * @return
@@ -154,7 +154,7 @@ public class Survey
         return status;
     }
 
-    /**
+    /*
      * Sets the value of the status property.
      * 
      * @param value
@@ -170,7 +170,7 @@ public class Survey
         return (this.status!= null);
     }
 
-    /**
+    /*
      * Gets the value of the data property.
      * 
      * <p>
@@ -207,7 +207,7 @@ public class Survey
         this.data = null;
     }
 
-    /**
+    /*
      * Gets the value of the figures property.
      * 
      * @return
@@ -219,7 +219,7 @@ public class Survey
         return figures;
     }
 
-    /**
+    /*
      * Sets the value of the figures property.
      * 
      * @param value
@@ -235,7 +235,7 @@ public class Survey
         return (this.figures!= null);
     }
 
-    /**
+    /*
      * Gets the value of the section property.
      * 
      * <p>
@@ -272,7 +272,7 @@ public class Survey
         this.section = null;
     }
 
-    /**
+    /*
      * Gets the value of the question property.
      * 
      * <p>
@@ -309,7 +309,7 @@ public class Survey
         this.question = null;
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -321,7 +321,7 @@ public class Survey
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -341,7 +341,7 @@ public class Survey
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the name property.
      * 
      * @return
@@ -353,7 +353,7 @@ public class Survey
         return name;
     }
 
-    /**
+    /*
      * Sets the value of the name property.
      * 
      * @param value
@@ -369,7 +369,7 @@ public class Survey
         return (this.name!= null);
     }
 
-    /**
+    /*
      * Gets the value of the validFrom property.
      * 
      * @return
@@ -381,7 +381,7 @@ public class Survey
         return validFrom;
     }
 
-    /**
+    /*
      * Sets the value of the validFrom property.
      * 
      * @param value
@@ -397,7 +397,7 @@ public class Survey
         return (this.validFrom!= null);
     }
 
-    /**
+    /*
      * Gets the value of the validTo property.
      * 
      * @return
@@ -409,7 +409,7 @@ public class Survey
         return validTo;
     }
 
-    /**
+    /*
      * Sets the value of the validTo property.
      * 
      * @param value

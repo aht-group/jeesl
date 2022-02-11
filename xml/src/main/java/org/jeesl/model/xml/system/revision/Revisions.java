@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -51,7 +51,7 @@ public class Revisions
     @XmlAttribute(name = "code")
     protected String code;
 
-    /**
+    /*
      * Gets the value of the revisions property.
      * 
      * <p>
@@ -88,7 +88,7 @@ public class Revisions
         this.revisions = null;
     }
 
-    /**
+    /*
      * Gets the value of the revision property.
      * 
      * <p>
@@ -125,7 +125,7 @@ public class Revisions
         this.revision = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -137,7 +137,7 @@ public class Revisions
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value

@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Result;
 import net.sf.ahtutils.xml.status.Status;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -54,7 +54,7 @@ public class Sync
     @XmlAttribute(name = "serverId")
     protected Long serverId;
 
-    /**
+    /*
      * Gets the value of the status property.
      * 
      * @return
@@ -66,7 +66,7 @@ public class Sync
         return status;
     }
 
-    /**
+    /*
      * Sets the value of the status property.
      * 
      * @param value
@@ -82,7 +82,7 @@ public class Sync
         return (this.status!= null);
     }
 
-    /**
+    /*
      * Gets the value of the result property.
      * 
      * @return
@@ -94,7 +94,7 @@ public class Sync
         return result;
     }
 
-    /**
+    /*
      * Sets the value of the result property.
      * 
      * @param value
@@ -110,7 +110,7 @@ public class Sync
         return (this.result!= null);
     }
 
-    /**
+    /*
      * Gets the value of the clientId property.
      * 
      * @return
@@ -122,7 +122,7 @@ public class Sync
         return clientId;
     }
 
-    /**
+    /*
      * Sets the value of the clientId property.
      * 
      * @param value
@@ -142,7 +142,7 @@ public class Sync
         this.clientId = null;
     }
 
-    /**
+    /*
      * Gets the value of the serverId property.
      * 
      * @return
@@ -154,7 +154,7 @@ public class Sync
         return serverId;
     }
 
-    /**
+    /*
      * Sets the value of the serverId property.
      * 
      * @param value

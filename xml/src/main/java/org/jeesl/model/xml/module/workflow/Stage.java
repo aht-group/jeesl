@@ -15,7 +15,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -86,7 +86,7 @@ public class Stage
     @XmlAttribute(name = "progress")
     protected Double progress;
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -98,7 +98,7 @@ public class Stage
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -114,7 +114,7 @@ public class Stage
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -126,7 +126,7 @@ public class Stage
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -142,7 +142,7 @@ public class Stage
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -154,7 +154,7 @@ public class Stage
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -170,7 +170,7 @@ public class Stage
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the permissions property.
      * 
      * @return
@@ -182,7 +182,7 @@ public class Stage
         return permissions;
     }
 
-    /**
+    /*
      * Sets the value of the permissions property.
      * 
      * @param value
@@ -198,7 +198,7 @@ public class Stage
         return (this.permissions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the process property.
      * 
      * @return
@@ -210,7 +210,7 @@ public class Stage
         return process;
     }
 
-    /**
+    /*
      * Sets the value of the process property.
      * 
      * @param value
@@ -226,7 +226,7 @@ public class Stage
         return (this.process!= null);
     }
 
-    /**
+    /*
      * Gets the value of the transition property.
      * 
      * <p>
@@ -263,7 +263,7 @@ public class Stage
         this.transition = null;
     }
 
-    /**
+    /*
      * Gets the value of the activity property.
      * 
      * @return
@@ -275,7 +275,7 @@ public class Stage
         return activity;
     }
 
-    /**
+    /*
      * Sets the value of the activity property.
      * 
      * @param value
@@ -291,7 +291,7 @@ public class Stage
         return (this.activity!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -303,7 +303,7 @@ public class Stage
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -323,7 +323,7 @@ public class Stage
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -335,7 +335,7 @@ public class Stage
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -355,7 +355,7 @@ public class Stage
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -367,7 +367,7 @@ public class Stage
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -383,7 +383,7 @@ public class Stage
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -395,7 +395,7 @@ public class Stage
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -411,7 +411,7 @@ public class Stage
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the progress property.
      * 
      * @return
@@ -423,7 +423,7 @@ public class Stage
         return progress;
     }
 
-    /**
+    /*
      * Sets the value of the progress property.
      * 
      * @param value

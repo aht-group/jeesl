@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -47,7 +47,7 @@ public class Jobs
     @XmlAttribute(name = "queue")
     protected Integer queue;
 
-    /**
+    /*
      * Gets the value of the job property.
      * 
      * <p>
@@ -84,7 +84,7 @@ public class Jobs
         this.job = null;
     }
 
-    /**
+    /*
      * Gets the value of the queue property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class Jobs
         return queue;
     }
 
-    /**
+    /*
      * Sets the value of the queue property.
      * 
      * @param value

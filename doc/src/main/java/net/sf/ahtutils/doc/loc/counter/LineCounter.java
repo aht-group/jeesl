@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import net.sf.ahtutils.doc.loc.BasicFileInfo;
 
-/**
+/*
  * @author Thorsten Kisner
  */
 public interface LineCounter

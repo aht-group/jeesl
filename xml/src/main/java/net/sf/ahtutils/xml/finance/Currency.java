@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -55,7 +55,7 @@ public class Currency
     @XmlAttribute(name = "label")
     protected String label;
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -67,7 +67,7 @@ public class Currency
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -83,7 +83,7 @@ public class Currency
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -95,7 +95,7 @@ public class Currency
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -115,7 +115,7 @@ public class Currency
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -127,7 +127,7 @@ public class Currency
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -143,7 +143,7 @@ public class Currency
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the symbol property.
      * 
      * @return
@@ -155,7 +155,7 @@ public class Currency
         return symbol;
     }
 
-    /**
+    /*
      * Sets the value of the symbol property.
      * 
      * @param value
@@ -171,7 +171,7 @@ public class Currency
         return (this.symbol!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -183,7 +183,7 @@ public class Currency
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value

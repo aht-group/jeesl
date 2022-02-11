@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.status.Type;
 import org.jeesl.model.xml.text.Markup;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Message
     @XmlAttribute(name = "subject")
     protected String subject;
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -69,7 +69,7 @@ public class Message
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -85,7 +85,7 @@ public class Message
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the markup property.
      * 
      * @return
@@ -97,7 +97,7 @@ public class Message
         return markup;
     }
 
-    /**
+    /*
      * Sets the value of the markup property.
      * 
      * @param value
@@ -113,7 +113,7 @@ public class Message
         return (this.markup!= null);
     }
 
-    /**
+    /*
      * Gets the value of the date property.
      * 
      * @return
@@ -125,7 +125,7 @@ public class Message
         return date;
     }
 
-    /**
+    /*
      * Sets the value of the date property.
      * 
      * @param value
@@ -141,7 +141,7 @@ public class Message
         return (this.date!= null);
     }
 
-    /**
+    /*
      * Gets the value of the subject property.
      * 
      * @return
@@ -153,7 +153,7 @@ public class Message
         return subject;
     }
 
-    /**
+    /*
      * Sets the value of the subject property.
      * 
      * @param value

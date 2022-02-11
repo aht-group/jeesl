@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -69,7 +69,7 @@ public class Implementation implements Serializable
     @XmlAttribute(name = "position")
     protected Integer position;
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -81,7 +81,7 @@ public class Implementation implements Serializable
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -97,7 +97,7 @@ public class Implementation implements Serializable
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -109,7 +109,7 @@ public class Implementation implements Serializable
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -125,7 +125,7 @@ public class Implementation implements Serializable
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -137,7 +137,7 @@ public class Implementation implements Serializable
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -157,7 +157,7 @@ public class Implementation implements Serializable
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -169,7 +169,7 @@ public class Implementation implements Serializable
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -185,7 +185,7 @@ public class Implementation implements Serializable
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the group property.
      * 
      * @return
@@ -197,7 +197,7 @@ public class Implementation implements Serializable
         return group;
     }
 
-    /**
+    /*
      * Sets the value of the group property.
      * 
      * @param value
@@ -213,7 +213,7 @@ public class Implementation implements Serializable
         return (this.group!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -225,7 +225,7 @@ public class Implementation implements Serializable
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -241,7 +241,7 @@ public class Implementation implements Serializable
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -253,7 +253,7 @@ public class Implementation implements Serializable
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -273,7 +273,7 @@ public class Implementation implements Serializable
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the image property.
      * 
      * @return
@@ -285,7 +285,7 @@ public class Implementation implements Serializable
         return image;
     }
 
-    /**
+    /*
      * Sets the value of the image property.
      * 
      * @param value
@@ -301,7 +301,7 @@ public class Implementation implements Serializable
         return (this.image!= null);
     }
 
-    /**
+    /*
      * Gets the value of the style property.
      * 
      * @return
@@ -313,7 +313,7 @@ public class Implementation implements Serializable
         return style;
     }
 
-    /**
+    /*
      * Sets the value of the style property.
      * 
      * @param value
@@ -329,7 +329,7 @@ public class Implementation implements Serializable
         return (this.style!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -341,7 +341,7 @@ public class Implementation implements Serializable
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value

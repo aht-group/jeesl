@@ -22,7 +22,7 @@ public class ShapeSimpleSerializableImporter <S extends Serializable, I extends 
 	    super(definition, shapeFileDirectory);
 	}
 	
-	/**
+	/*
 	* Build a new Shape File Importer
 	*
 	* @return New instance of ShapeFileImporter

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -80,7 +80,7 @@ public class Context
     @XmlAttribute(name = "position")
     protected Integer position;
 
-    /**
+    /*
      * Gets the value of the transistions property.
      * 
      * @return
@@ -92,7 +92,7 @@ public class Context
         return transistions;
     }
 
-    /**
+    /*
      * Sets the value of the transistions property.
      * 
      * @param value
@@ -108,7 +108,7 @@ public class Context
         return (this.transistions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -120,7 +120,7 @@ public class Context
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -136,7 +136,7 @@ public class Context
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -148,7 +148,7 @@ public class Context
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -179,7 +179,7 @@ public class Context
         this.lang = null;
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -191,7 +191,7 @@ public class Context
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -211,7 +211,7 @@ public class Context
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -223,7 +223,7 @@ public class Context
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -239,7 +239,7 @@ public class Context
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the group property.
      * 
      * @return
@@ -251,7 +251,7 @@ public class Context
         return group;
     }
 
-    /**
+    /*
      * Sets the value of the group property.
      * 
      * @param value
@@ -267,7 +267,7 @@ public class Context
         return (this.group!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -279,7 +279,7 @@ public class Context
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -295,7 +295,7 @@ public class Context
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -307,7 +307,7 @@ public class Context
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -327,7 +327,7 @@ public class Context
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the image property.
      * 
      * @return
@@ -339,7 +339,7 @@ public class Context
         return image;
     }
 
-    /**
+    /*
      * Sets the value of the image property.
      * 
      * @param value
@@ -355,7 +355,7 @@ public class Context
         return (this.image!= null);
     }
 
-    /**
+    /*
      * Gets the value of the style property.
      * 
      * @return
@@ -367,7 +367,7 @@ public class Context
         return style;
     }
 
-    /**
+    /*
      * Sets the value of the style property.
      * 
      * @param value
@@ -383,7 +383,7 @@ public class Context
         return (this.style!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -395,7 +395,7 @@ public class Context
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value

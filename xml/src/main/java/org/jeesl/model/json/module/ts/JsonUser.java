@@ -26,7 +26,7 @@ public class JsonUser
     protected String email;
 
 
-    /**
+    /*
      * Gets the value of the id property.
      *
      * @return
@@ -38,7 +38,7 @@ public class JsonUser
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      *
      * @param value
@@ -58,7 +58,7 @@ public class JsonUser
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the firstName property.
      *
      * @return
@@ -70,7 +70,7 @@ public class JsonUser
         return firstName;
     }
 
-    /**
+    /*
      * Sets the value of the firstName property.
      *
      * @param value
@@ -86,7 +86,7 @@ public class JsonUser
         return (this.firstName!= null);
     }
 
-    /**
+    /*
      * Gets the value of the lastName property.
      *
      * @return
@@ -98,7 +98,7 @@ public class JsonUser
         return lastName;
     }
 
-    /**
+    /*
      * Sets the value of the lastName property.
      *
      * @param value
@@ -114,7 +114,7 @@ public class JsonUser
         return (this.lastName!= null);
     }
 
-    /**
+    /*
      * Gets the value of the name property.
      *
      * @return
@@ -126,7 +126,7 @@ public class JsonUser
         return name;
     }
 
-    /**
+    /*
      * Sets the value of the name property.
      *
      * @param value
@@ -142,7 +142,7 @@ public class JsonUser
         return (this.name!= null);
     }
 
-    /**
+    /*
      * Gets the value of the email property.
      *
      * @return
@@ -154,7 +154,7 @@ public class JsonUser
         return email;
     }
 
-    /**
+    /*
      * Sets the value of the email property.
      *
      * @param value

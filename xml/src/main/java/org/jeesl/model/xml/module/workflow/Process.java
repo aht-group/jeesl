@@ -15,7 +15,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -71,7 +71,7 @@ public class Process
     @XmlAttribute(name = "label")
     protected String label;
 
-    /**
+    /*
      * Gets the value of the context property.
      * 
      * @return
@@ -83,7 +83,7 @@ public class Process
         return context;
     }
 
-    /**
+    /*
      * Sets the value of the context property.
      * 
      * @param value
@@ -99,7 +99,7 @@ public class Process
         return (this.context!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -111,7 +111,7 @@ public class Process
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -127,7 +127,7 @@ public class Process
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -139,7 +139,7 @@ public class Process
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -155,7 +155,7 @@ public class Process
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the stage property.
      * 
      * <p>
@@ -192,7 +192,7 @@ public class Process
         this.stage = null;
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -204,7 +204,7 @@ public class Process
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -224,7 +224,7 @@ public class Process
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -236,7 +236,7 @@ public class Process
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -256,7 +256,7 @@ public class Process
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -268,7 +268,7 @@ public class Process
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -284,7 +284,7 @@ public class Process
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -296,7 +296,7 @@ public class Process
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value

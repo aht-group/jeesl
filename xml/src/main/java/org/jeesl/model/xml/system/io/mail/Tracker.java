@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -56,7 +56,7 @@ public class Tracker
     @XmlAttribute(name = "retryCounter")
     protected Integer retryCounter;
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -68,7 +68,7 @@ public class Tracker
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -88,7 +88,7 @@ public class Tracker
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the refId property.
      * 
      * @return
@@ -100,7 +100,7 @@ public class Tracker
         return refId;
     }
 
-    /**
+    /*
      * Sets the value of the refId property.
      * 
      * @param value
@@ -120,7 +120,7 @@ public class Tracker
         this.refId = null;
     }
 
-    /**
+    /*
      * Gets the value of the created property.
      * 
      * @return
@@ -132,7 +132,7 @@ public class Tracker
         return created;
     }
 
-    /**
+    /*
      * Sets the value of the created property.
      * 
      * @param value
@@ -148,7 +148,7 @@ public class Tracker
         return (this.created!= null);
     }
 
-    /**
+    /*
      * Gets the value of the sent property.
      * 
      * @return
@@ -160,7 +160,7 @@ public class Tracker
         return sent;
     }
 
-    /**
+    /*
      * Sets the value of the sent property.
      * 
      * @param value
@@ -176,7 +176,7 @@ public class Tracker
         return (this.sent!= null);
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -188,7 +188,7 @@ public class Tracker
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -204,7 +204,7 @@ public class Tracker
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the retryCounter property.
      * 
      * @return
@@ -216,7 +216,7 @@ public class Tracker
         return retryCounter;
     }
 
-    /**
+    /*
      * Sets the value of the retryCounter property.
      * 
      * @param value

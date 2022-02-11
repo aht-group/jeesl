@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -56,7 +56,7 @@ public class Relation
     @XmlAttribute(name = "docOptionsInline")
     protected Boolean docOptionsInline;
 
-    /**
+    /*
      * Gets the value of the entity property.
      * 
      * @return
@@ -68,7 +68,7 @@ public class Relation
         return entity;
     }
 
-    /**
+    /*
      * Sets the value of the entity property.
      * 
      * @param value
@@ -84,7 +84,7 @@ public class Relation
         return (this.entity!= null);
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class Relation
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -112,7 +112,7 @@ public class Relation
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the owner property.
      * 
      * @return
@@ -124,7 +124,7 @@ public class Relation
         return owner;
     }
 
-    /**
+    /*
      * Sets the value of the owner property.
      * 
      * @param value
@@ -144,7 +144,7 @@ public class Relation
         this.owner = null;
     }
 
-    /**
+    /*
      * Gets the value of the docOptionsTable property.
      * 
      * @return
@@ -156,7 +156,7 @@ public class Relation
         return docOptionsTable;
     }
 
-    /**
+    /*
      * Sets the value of the docOptionsTable property.
      * 
      * @param value
@@ -176,7 +176,7 @@ public class Relation
         this.docOptionsTable = null;
     }
 
-    /**
+    /*
      * Gets the value of the docOptionsInline property.
      * 
      * @return
@@ -188,7 +188,7 @@ public class Relation
         return docOptionsInline;
     }
 
-    /**
+    /*
      * Sets the value of the docOptionsInline property.
      * 
      * @param value

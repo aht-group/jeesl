@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -43,7 +43,7 @@ public class DataHandler
     @XmlAttribute(name = "validatedBy")
     protected String validatedBy;
 
-    /**
+    /*
      * Gets the value of the clazz property.
      * 
      * @return
@@ -55,7 +55,7 @@ public class DataHandler
         return clazz;
     }
 
-    /**
+    /*
      * Sets the value of the clazz property.
      * 
      * @param value
@@ -71,7 +71,7 @@ public class DataHandler
         return (this.clazz!= null);
     }
 
-    /**
+    /*
      * Gets the value of the handledBy property.
      * 
      * @return
@@ -83,7 +83,7 @@ public class DataHandler
         return handledBy;
     }
 
-    /**
+    /*
      * Sets the value of the handledBy property.
      * 
      * @param value
@@ -99,7 +99,7 @@ public class DataHandler
         return (this.handledBy!= null);
     }
 
-    /**
+    /*
      * Gets the value of the validatedBy property.
      * 
      * @return
@@ -111,7 +111,7 @@ public class DataHandler
         return validatedBy;
     }
 
-    /**
+    /*
      * Sets the value of the validatedBy property.
      * 
      * @param value

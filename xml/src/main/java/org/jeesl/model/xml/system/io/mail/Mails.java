@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -50,7 +50,7 @@ public class Mails
     @XmlAttribute(name = "queue")
     protected Integer queue;
 
-    /**
+    /*
      * Gets the value of the mail property.
      * 
      * <p>
@@ -87,7 +87,7 @@ public class Mails
         this.mail = null;
     }
 
-    /**
+    /*
      * Gets the value of the dir property.
      * 
      * @return
@@ -99,7 +99,7 @@ public class Mails
         return dir;
     }
 
-    /**
+    /*
      * Sets the value of the dir property.
      * 
      * @param value
@@ -115,7 +115,7 @@ public class Mails
         return (this.dir!= null);
     }
 
-    /**
+    /*
      * Gets the value of the queue property.
      * 
      * @return
@@ -127,7 +127,7 @@ public class Mails
         return queue;
     }
 
-    /**
+    /*
      * Sets the value of the queue property.
      * 
      * @param value

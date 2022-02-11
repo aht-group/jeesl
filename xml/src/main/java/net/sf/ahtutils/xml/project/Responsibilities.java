@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.security.Roles;
 import net.sf.ahtutils.xml.security.User;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -49,7 +49,7 @@ public class Responsibilities
     @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
     protected List<User> user;
 
-    /**
+    /*
      * Gets the value of the roles property.
      * 
      * @return
@@ -61,7 +61,7 @@ public class Responsibilities
         return roles;
     }
 
-    /**
+    /*
      * Sets the value of the roles property.
      * 
      * @param value

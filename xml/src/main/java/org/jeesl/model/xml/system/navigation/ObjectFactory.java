@@ -4,7 +4,7 @@ package org.jeesl.model.xml.system.navigation;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/**
+/*
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.system.navigation package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
+    /*
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.system.navigation
      * 
      */
     public ObjectFactory() {
     }
 
-    /**
+    /*
      * Create an instance of {@link Navigation }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Navigation();
     }
 
-    /**
+    /*
      * Create an instance of {@link ViewPattern }
      * 
      */
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new ViewPattern();
     }
 
-    /**
+    /*
      * Create an instance of {@link UrlMapping }
      * 
      */
@@ -53,7 +53,7 @@ public class ObjectFactory {
         return new UrlMapping();
     }
 
-    /**
+    /*
      * Create an instance of {@link Menu }
      * 
      */
@@ -61,7 +61,7 @@ public class ObjectFactory {
         return new Menu();
     }
 
-    /**
+    /*
      * Create an instance of {@link MenuItem }
      * 
      */
@@ -69,7 +69,7 @@ public class ObjectFactory {
         return new MenuItem();
     }
 
-    /**
+    /*
      * Create an instance of {@link Breadcrumb }
      * 
      */

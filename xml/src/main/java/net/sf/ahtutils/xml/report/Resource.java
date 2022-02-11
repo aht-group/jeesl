@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -64,7 +64,7 @@ public class Resource
     @XmlSchemaType(name = "anySimpleType")
     protected String name;
 
-    /**
+    /*
      * Gets the value of the value property.
      * 
      * @return
@@ -76,7 +76,7 @@ public class Resource
         return value;
     }
 
-    /**
+    /*
      * Sets the value of the value property.
      * 
      * @param value
@@ -92,7 +92,7 @@ public class Resource
         return (this.value!= null);
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -104,7 +104,7 @@ public class Resource
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -120,7 +120,7 @@ public class Resource
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the name property.
      * 
      * @return
@@ -132,7 +132,7 @@ public class Resource
         return name;
     }
 
-    /**
+    /*
      * Sets the value of the name property.
      * 
      * @param value
@@ -149,7 +149,7 @@ public class Resource
     }
 
 
-    /**
+    /*
      * <p>Java class for anonymous complex type.
      * 
      * <p>The following schema fragment specifies the expected content contained within this class.
@@ -177,7 +177,7 @@ public class Resource
         @XmlValue
         protected String value;
 
-        /**
+        /*
          * Gets the value of the value property.
          * 
          * @return
@@ -189,7 +189,7 @@ public class Resource
             return value;
         }
 
-        /**
+        /*
          * Sets the value of the value property.
          * 
          * @param value

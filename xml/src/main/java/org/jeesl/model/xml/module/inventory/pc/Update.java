@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Update
     @XmlAttribute(name = "description")
     protected String description;
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -69,7 +69,7 @@ public class Update
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -89,7 +89,7 @@ public class Update
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the uuid property.
      * 
      * @return
@@ -101,7 +101,7 @@ public class Update
         return uuid;
     }
 
-    /**
+    /*
      * Sets the value of the uuid property.
      * 
      * @param value
@@ -117,7 +117,7 @@ public class Update
         return (this.uuid!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -129,7 +129,7 @@ public class Update
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -145,7 +145,7 @@ public class Update
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the record property.
      * 
      * @return
@@ -157,7 +157,7 @@ public class Update
         return record;
     }
 
-    /**
+    /*
      * Sets the value of the record property.
      * 
      * @param value
@@ -173,7 +173,7 @@ public class Update
         return (this.record!= null);
     }
 
-    /**
+    /*
      * Gets the value of the version property.
      * 
      * @return
@@ -185,7 +185,7 @@ public class Update
         return version;
     }
 
-    /**
+    /*
      * Sets the value of the version property.
      * 
      * @param value
@@ -201,7 +201,7 @@ public class Update
         return (this.version!= null);
     }
 
-    /**
+    /*
      * Gets the value of the description property.
      * 
      * @return
@@ -213,7 +213,7 @@ public class Update
         return description;
     }
 
-    /**
+    /*
      * Sets the value of the description property.
      * 
      * @param value

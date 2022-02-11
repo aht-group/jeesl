@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Mapper
     @XmlAttribute(name = "code")
     protected String code;
 
-    /**
+    /*
      * Gets the value of the oldId property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Mapper
         return oldId;
     }
 
-    /**
+    /*
      * Sets the value of the oldId property.
      * 
      * @param value
@@ -84,7 +84,7 @@ public class Mapper
         this.oldId = null;
     }
 
-    /**
+    /*
      * Gets the value of the newId property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class Mapper
         return newId;
     }
 
-    /**
+    /*
      * Sets the value of the newId property.
      * 
      * @param value
@@ -116,7 +116,7 @@ public class Mapper
         this.newId = null;
     }
 
-    /**
+    /*
      * Gets the value of the clazz property.
      * 
      * @return
@@ -128,7 +128,7 @@ public class Mapper
         return clazz;
     }
 
-    /**
+    /*
      * Sets the value of the clazz property.
      * 
      * @param value
@@ -144,7 +144,7 @@ public class Mapper
         return (this.clazz!= null);
     }
 
-    /**
+    /*
      * Gets the value of the oldCode property.
      * 
      * @return
@@ -156,7 +156,7 @@ public class Mapper
         return oldCode;
     }
 
-    /**
+    /*
      * Sets the value of the oldCode property.
      * 
      * @param value
@@ -172,7 +172,7 @@ public class Mapper
         return (this.oldCode!= null);
     }
 
-    /**
+    /*
      * Gets the value of the newCode property.
      * 
      * @return
@@ -184,7 +184,7 @@ public class Mapper
         return newCode;
     }
 
-    /**
+    /*
      * Sets the value of the newCode property.
      * 
      * @param value
@@ -200,7 +200,7 @@ public class Mapper
         return (this.newCode!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -212,7 +212,7 @@ public class Mapper
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value

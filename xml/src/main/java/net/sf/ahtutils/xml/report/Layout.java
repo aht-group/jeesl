@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.symbol.Color;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -60,7 +60,7 @@ public class Layout
     @XmlElement(required = true)
     protected Styles styles;
 
-    /**
+    /*
      * Gets the value of the font property.
      * 
      * @return
@@ -72,7 +72,7 @@ public class Layout
         return font;
     }
 
-    /**
+    /*
      * Sets the value of the font property.
      * 
      * @param value
@@ -88,7 +88,7 @@ public class Layout
         return (this.font!= null);
     }
 
-    /**
+    /*
      * Gets the value of the offset property.
      * 
      * @return
@@ -100,7 +100,7 @@ public class Layout
         return offset;
     }
 
-    /**
+    /*
      * Sets the value of the offset property.
      * 
      * @param value
@@ -148,7 +148,7 @@ public class Layout
         this.color = null;
     }
 
-    /**
+    /*
      * Gets the value of the styles property.
      * 
      * @return
@@ -160,7 +160,7 @@ public class Layout
         return styles;
     }
 
-    /**
+    /*
      * Sets the value of the styles property.
      * 
      * @param value

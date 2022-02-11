@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.module.calendar.Item;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -46,7 +46,7 @@ public class QueryCalendar
     @XmlAttribute(name = "localeCode")
     protected String localeCode;
 
-    /**
+    /*
      * Gets the value of the item property.
      * 
      * @return
@@ -58,7 +58,7 @@ public class QueryCalendar
         return item;
     }
 
-    /**
+    /*
      * Sets the value of the item property.
      * 
      * @param value
@@ -74,7 +74,7 @@ public class QueryCalendar
         return (this.item!= null);
     }
 
-    /**
+    /*
      * Gets the value of the localeCode property.
      * 
      * @return
@@ -86,7 +86,7 @@ public class QueryCalendar
         return localeCode;
     }
 
-    /**
+    /*
      * Sets the value of the localeCode property.
      * 
      * @param value

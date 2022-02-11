@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -42,7 +42,7 @@ public class Score
     @XmlAttribute(name = "max")
     protected Double max;
 
-    /**
+    /*
      * Gets the value of the min property.
      * 
      * @return
@@ -54,7 +54,7 @@ public class Score
         return min;
     }
 
-    /**
+    /*
      * Sets the value of the min property.
      * 
      * @param value
@@ -74,7 +74,7 @@ public class Score
         this.min = null;
     }
 
-    /**
+    /*
      * Gets the value of the max property.
      * 
      * @return
@@ -86,7 +86,7 @@ public class Score
         return max;
     }
 
-    /**
+    /*
      * Sets the value of the max property.
      * 
      * @param value

@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Definition
     @XmlAttribute(name = "visible")
     protected Boolean visible;
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -69,7 +69,7 @@ public class Definition
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -85,7 +85,7 @@ public class Definition
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -97,7 +97,7 @@ public class Definition
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -113,7 +113,7 @@ public class Definition
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -125,7 +125,7 @@ public class Definition
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -145,7 +145,7 @@ public class Definition
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -157,7 +157,7 @@ public class Definition
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -177,7 +177,7 @@ public class Definition
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -189,7 +189,7 @@ public class Definition
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value

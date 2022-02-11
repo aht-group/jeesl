@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -60,7 +60,7 @@ public class Exception
     @XmlAttribute(name = "message")
     protected String message;
 
-    /**
+    /*
      * Gets the value of the exception property.
      * 
      * @return
@@ -72,7 +72,7 @@ public class Exception
         return exception;
     }
 
-    /**
+    /*
      * Sets the value of the exception property.
      * 
      * @param value
@@ -88,7 +88,7 @@ public class Exception
         return (this.exception!= null);
     }
 
-    /**
+    /*
      * Gets the value of the record property.
      * 
      * @return
@@ -100,7 +100,7 @@ public class Exception
         return record;
     }
 
-    /**
+    /*
      * Sets the value of the record property.
      * 
      * @param value
@@ -116,7 +116,7 @@ public class Exception
         return (this.record!= null);
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -128,7 +128,7 @@ public class Exception
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -144,7 +144,7 @@ public class Exception
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the className property.
      * 
      * @return
@@ -156,7 +156,7 @@ public class Exception
         return className;
     }
 
-    /**
+    /*
      * Sets the value of the className property.
      * 
      * @param value
@@ -172,7 +172,7 @@ public class Exception
         return (this.className!= null);
     }
 
-    /**
+    /*
      * Gets the value of the line property.
      * 
      * @return
@@ -184,7 +184,7 @@ public class Exception
         return line;
     }
 
-    /**
+    /*
      * Sets the value of the line property.
      * 
      * @param value
@@ -204,7 +204,7 @@ public class Exception
         this.line = null;
     }
 
-    /**
+    /*
      * Gets the value of the message property.
      * 
      * @return
@@ -216,7 +216,7 @@ public class Exception
         return message;
     }
 
-    /**
+    /*
      * Sets the value of the message property.
      * 
      * @param value

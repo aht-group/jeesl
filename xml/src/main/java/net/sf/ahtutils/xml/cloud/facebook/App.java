@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.exlp.xml.net.Url;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -64,7 +64,7 @@ public class App
     @XmlAttribute(name = "secret")
     protected String secret;
 
-    /**
+    /*
      * Gets the value of the redirect property.
      * 
      * @return
@@ -76,7 +76,7 @@ public class App
         return redirect;
     }
 
-    /**
+    /*
      * Sets the value of the redirect property.
      * 
      * @param value
@@ -92,7 +92,7 @@ public class App
         return (this.redirect!= null);
     }
 
-    /**
+    /*
      * Gets the value of the appId property.
      * 
      * @return
@@ -104,7 +104,7 @@ public class App
         return appId;
     }
 
-    /**
+    /*
      * Sets the value of the appId property.
      * 
      * @param value
@@ -120,7 +120,7 @@ public class App
         return (this.appId!= null);
     }
 
-    /**
+    /*
      * Gets the value of the scope property.
      * 
      * @return
@@ -132,7 +132,7 @@ public class App
         return scope;
     }
 
-    /**
+    /*
      * Sets the value of the scope property.
      * 
      * @param value
@@ -148,7 +148,7 @@ public class App
         return (this.scope!= null);
     }
 
-    /**
+    /*
      * Gets the value of the secret property.
      * 
      * @return
@@ -160,7 +160,7 @@ public class App
         return secret;
     }
 
-    /**
+    /*
      * Sets the value of the secret property.
      * 
      * @param value

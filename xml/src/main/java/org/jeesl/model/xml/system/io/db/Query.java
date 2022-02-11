@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Status;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -53,7 +53,7 @@ public class Query
     @XmlAttribute(name = "statement")
     protected String statement;
 
-    /**
+    /*
      * Gets the value of the times property.
      * 
      * @return
@@ -65,7 +65,7 @@ public class Query
         return times;
     }
 
-    /**
+    /*
      * Sets the value of the times property.
      * 
      * @param value
@@ -81,7 +81,7 @@ public class Query
         return (this.times!= null);
     }
 
-    /**
+    /*
      * Gets the value of the status property.
      * 
      * @return
@@ -93,7 +93,7 @@ public class Query
         return status;
     }
 
-    /**
+    /*
      * Sets the value of the status property.
      * 
      * @param value
@@ -109,7 +109,7 @@ public class Query
         return (this.status!= null);
     }
 
-    /**
+    /*
      * Gets the value of the pid property.
      * 
      * @return
@@ -121,7 +121,7 @@ public class Query
         return pid;
     }
 
-    /**
+    /*
      * Sets the value of the pid property.
      * 
      * @param value
@@ -141,7 +141,7 @@ public class Query
         this.pid = null;
     }
 
-    /**
+    /*
      * Gets the value of the statement property.
      * 
      * @return
@@ -153,7 +153,7 @@ public class Query
         return statement;
     }
 
-    /**
+    /*
      * Sets the value of the statement property.
      * 
      * @param value

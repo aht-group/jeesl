@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -51,7 +51,7 @@ public class Attribute
     @XmlAttribute(name = "bool")
     protected Boolean bool;
 
-    /**
+    /*
      * Gets the value of the option property.
      * 
      * @return
@@ -63,7 +63,7 @@ public class Attribute
         return option;
     }
 
-    /**
+    /*
      * Sets the value of the option property.
      * 
      * @param value
@@ -79,7 +79,7 @@ public class Attribute
         return (this.option!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -91,7 +91,7 @@ public class Attribute
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -107,7 +107,7 @@ public class Attribute
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -119,7 +119,7 @@ public class Attribute
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -135,7 +135,7 @@ public class Attribute
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the bool property.
      * 
      * @return
@@ -147,7 +147,7 @@ public class Attribute
         return bool;
     }
 
-    /**
+    /*
      * Sets the value of the bool property.
      * 
      * @param value

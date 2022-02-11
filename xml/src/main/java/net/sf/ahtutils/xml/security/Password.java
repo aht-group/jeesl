@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -62,7 +62,7 @@ public class Password
         this.rule = null;
     }
 
-    /**
+    /*
      * Gets the value of the valid property.
      * 
      * @return
@@ -74,7 +74,7 @@ public class Password
         return valid;
     }
 
-    /**
+    /*
      * Sets the value of the valid property.
      * 
      * @param value

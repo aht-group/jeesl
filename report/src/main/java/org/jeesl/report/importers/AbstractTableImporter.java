@@ -98,7 +98,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
         }
     }
 
-    /**
+    /*
      * Execute the import process - iterate through the table, read and process values and setters
      * @param skipTitle Indicates that the header row should be skipped (as in many standard tables)
      * @return The LinkedHashMap contains the actual entities that were imported as keys (can be accessed as list using keySet()) and for every entity imported a list of properties for which the validation failed. That is important e.g. to mark them in a preview table as wrong.
@@ -125,7 +125,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
         return importedEntities;
     }
 
-    /**
+    /*
      * Iterate through the columns of the row, read the data and process it and call the respected setter on the created entity
      * @param row   The row number
      * @throws Exception
@@ -206,7 +206,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
         importedEntities.put(entity, failedValidations);
     }
 	
-    /**
+    /*
      * Prepare the data to be set, validate it and add it including the result to the result Map
      * @param property      The name of the property (e.g. Name or Country)
      * @param parameters    The value to be set as first element of the parameters Array
@@ -345,7 +345,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
     // SPECIFIC IMPLEMENTATIONs TO BE OVERWRITTEN IN CONCRETE CLASSES
     // ************************************************************************************************************
 
-    /**
+    /*
      * The custom methods to read the value from the cell at the given row and column needs to be overwritten in concrete class
      * This could be Apache POI based like for Excel worksheets for example
      * @param row    The row number
@@ -358,7 +358,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
         return "Debugging mode - override method in concrete class";
     }
     
-    /**
+    /*
      * Tests if a row is empty - if so it will be skipped when processing the table
      * @param row   The row number
      * @return True if the row exists and has content in it
@@ -369,7 +369,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
         return true;
     }
     
-    /**
+    /*
      * The boundaries of the iteration of rows and columns shall be set here.
      * @param skipTitle If true, it indicates that the first row should be skipped. It can be useful for many tables to ignore their header row
      */
@@ -378,7 +378,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
         logger.error("Override this method in the concrete implentation (e.g. Excel or Shape File import) or leave as is for debugging");
     }
     
-    /**
+    /*
      * Get the headers of the columns (e.g. first row in Excel or property names in Shape files)
      */
     public Map<Short, String> getColumnTitles()
@@ -387,7 +387,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
 	return new HashMap<Short, String>();
     }
     
-    /**
+    /*
      * Get a preview of the contained data
      */
     public Map<Short, String> getPreview()

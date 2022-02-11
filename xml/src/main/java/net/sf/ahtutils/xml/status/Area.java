@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.symbol.Graphic;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -96,7 +96,7 @@ public class Area
     @XmlAttribute(name = "position")
     protected Integer position;
 
-    /**
+    /*
      * Gets the value of the parent property.
      * 
      * @return
@@ -108,7 +108,7 @@ public class Area
         return parent;
     }
 
-    /**
+    /*
      * Sets the value of the parent property.
      * 
      * @param value
@@ -124,7 +124,7 @@ public class Area
         return (this.parent!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -136,7 +136,7 @@ public class Area
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -152,7 +152,7 @@ public class Area
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -164,7 +164,7 @@ public class Area
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -196,7 +196,7 @@ public class Area
         this.lang = null;
     }
 
-    /**
+    /*
      * Gets the value of the transistions property.
      * 
      * @return
@@ -208,7 +208,7 @@ public class Area
         return transistions;
     }
 
-    /**
+    /*
      * Sets the value of the transistions property.
      * 
      * @param value
@@ -240,7 +240,7 @@ public class Area
         this.tracked = null;
     }
 
-    /**
+    /*
      * Gets the value of the graphic property.
      * 
      * @return
@@ -252,7 +252,7 @@ public class Area
         return graphic;
     }
 
-    /**
+    /*
      * Sets the value of the graphic property.
      * 
      * @param value
@@ -268,7 +268,7 @@ public class Area
         return (this.graphic!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -280,7 +280,7 @@ public class Area
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -300,7 +300,7 @@ public class Area
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -312,7 +312,7 @@ public class Area
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -328,7 +328,7 @@ public class Area
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the group property.
      * 
      * @return
@@ -340,7 +340,7 @@ public class Area
         return group;
     }
 
-    /**
+    /*
      * Sets the value of the group property.
      * 
      * @param value
@@ -356,7 +356,7 @@ public class Area
         return (this.group!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -368,7 +368,7 @@ public class Area
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -384,7 +384,7 @@ public class Area
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the symbol property.
      * 
      * @return
@@ -396,7 +396,7 @@ public class Area
         return symbol;
     }
 
-    /**
+    /*
      * Sets the value of the symbol property.
      * 
      * @param value
@@ -412,7 +412,7 @@ public class Area
         return (this.symbol!= null);
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -424,7 +424,7 @@ public class Area
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -444,7 +444,7 @@ public class Area
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the image property.
      * 
      * @return
@@ -456,7 +456,7 @@ public class Area
         return image;
     }
 
-    /**
+    /*
      * Sets the value of the image property.
      * 
      * @param value
@@ -472,7 +472,7 @@ public class Area
         return (this.image!= null);
     }
 
-    /**
+    /*
      * Gets the value of the style property.
      * 
      * @return
@@ -484,7 +484,7 @@ public class Area
         return style;
     }
 
-    /**
+    /*
      * Sets the value of the style property.
      * 
      * @param value
@@ -500,7 +500,7 @@ public class Area
         return (this.style!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -512,7 +512,7 @@ public class Area
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value

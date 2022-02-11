@@ -25,7 +25,7 @@ public class JsonTransaction implements Serializable
     @JsonProperty("record")
     protected Date record;
 
-    /**
+    /*
      * Gets the value of the user property.
      *
      * @return
@@ -37,7 +37,7 @@ public class JsonTransaction implements Serializable
         return user;
     }
 
-    /**
+    /*
      * Sets the value of the user property.
      *
      * @param value
@@ -53,7 +53,7 @@ public class JsonTransaction implements Serializable
         return (this.user!= null);
     }
 
-    /**
+    /*
      * Gets the value of the source property.
      *
      * @return
@@ -65,7 +65,7 @@ public class JsonTransaction implements Serializable
         return source;
     }
 
-    /**
+    /*
      * Sets the value of the source property.
      *
      * @param value
@@ -81,7 +81,7 @@ public class JsonTransaction implements Serializable
         return (this.source!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      *
      * @return
@@ -93,7 +93,7 @@ public class JsonTransaction implements Serializable
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      *
      * @param value

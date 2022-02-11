@@ -72,7 +72,7 @@ public class ReflectionUtil
         return parameter;
      }
 
-    /**
+    /*
      * First skeleton for traversing through .-separated methods (get or create/set)
      * NOT READY YET!
      * @param parent      The parent Object
@@ -113,7 +113,7 @@ public class ReflectionUtil
         }
     }
 
-    /**
+    /*
     * Invoke a method on a given object
     * @param methodName   Method to be invoked (e.g. "setId")
     * @param parameters   Array of parameters to be used as they appear in the method (e.g. [Long id])

@@ -13,7 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.sf.ahtutils.xml.status.Descriptions;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Release
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar date;
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Release
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class Release
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the version property.
      * 
      * @return
@@ -92,7 +92,7 @@ public class Release
         return version;
     }
 
-    /**
+    /*
      * Sets the value of the version property.
      * 
      * @param value
@@ -108,7 +108,7 @@ public class Release
         return (this.version!= null);
     }
 
-    /**
+    /*
      * Gets the value of the date property.
      * 
      * @return
@@ -120,7 +120,7 @@ public class Release
         return date;
     }
 
-    /**
+    /*
      * Sets the value of the date property.
      * 
      * @param value

@@ -10,14 +10,14 @@ package net.sf.ahtutils.doc.loc.counter;
 import java.io.File;
 
 
-/**
+/*
  * An implementation of ILineCounter which can be used to process SQL source
  * files.
  * @author Ekkehard Blanz
  */
 public class SqlCounter extends CommonCounter implements LineCounter {
     
-    /** Creates a new instance of SqlCounter */
+    /* Creates a new instance of SqlCounter */
     public SqlCounter(File f) {
         super(f);
         super.CommentHeader = "--";

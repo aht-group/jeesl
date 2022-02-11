@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Type;
 import net.sf.exlp.xml.io.File;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Graphic
     @XmlAttribute(name = "id")
     protected Long id;
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -71,7 +71,7 @@ public class Graphic
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -87,7 +87,7 @@ public class Graphic
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the file property.
      * 
      * @return
@@ -99,7 +99,7 @@ public class Graphic
         return file;
     }
 
-    /**
+    /*
      * Sets the value of the file property.
      * 
      * @param value
@@ -115,7 +115,7 @@ public class Graphic
         return (this.file!= null);
     }
 
-    /**
+    /*
      * Gets the value of the symbol property.
      * 
      * @return
@@ -127,7 +127,7 @@ public class Graphic
         return symbol;
     }
 
-    /**
+    /*
      * Sets the value of the symbol property.
      * 
      * @param value
@@ -143,7 +143,7 @@ public class Graphic
         return (this.symbol!= null);
     }
 
-    /**
+    /*
      * Gets the value of the figures property.
      * 
      * @return
@@ -155,7 +155,7 @@ public class Graphic
         return figures;
     }
 
-    /**
+    /*
      * Sets the value of the figures property.
      * 
      * @param value
@@ -171,7 +171,7 @@ public class Graphic
         return (this.figures!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -183,7 +183,7 @@ public class Graphic
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value

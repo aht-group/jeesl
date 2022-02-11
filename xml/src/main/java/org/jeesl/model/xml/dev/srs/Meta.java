@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -41,7 +41,7 @@ public class Meta
     @XmlElement(required = true)
     protected Product product;
 
-    /**
+    /*
      * Gets the value of the product property.
      * 
      * @return
@@ -53,7 +53,7 @@ public class Meta
         return product;
     }
 
-    /**
+    /*
      * Sets the value of the product property.
      * 
      * @param value

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -63,7 +63,7 @@ public class XlsSheets
         this.xlsSheet = null;
     }
 
-    /**
+    /*
      * Gets the value of the query property.
      * 
      * @return
@@ -75,7 +75,7 @@ public class XlsSheets
         return query;
     }
 
-    /**
+    /*
      * Sets the value of the query property.
      * 
      * @param value

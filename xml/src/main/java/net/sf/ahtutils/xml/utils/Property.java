@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -45,7 +45,7 @@ public class Property
     @XmlAttribute(name = "frozen")
     protected Boolean frozen;
 
-    /**
+    /*
      * Gets the value of the value property.
      * 
      * @return
@@ -57,7 +57,7 @@ public class Property
         return value;
     }
 
-    /**
+    /*
      * Sets the value of the value property.
      * 
      * @param value
@@ -73,7 +73,7 @@ public class Property
         return (this.value!= null);
     }
 
-    /**
+    /*
      * Gets the value of the key property.
      * 
      * @return
@@ -85,7 +85,7 @@ public class Property
         return key;
     }
 
-    /**
+    /*
      * Sets the value of the key property.
      * 
      * @param value
@@ -101,7 +101,7 @@ public class Property
         return (this.key!= null);
     }
 
-    /**
+    /*
      * Gets the value of the frozen property.
      * 
      * @return
@@ -113,7 +113,7 @@ public class Property
         return frozen;
     }
 
-    /**
+    /*
      * Sets the value of the frozen property.
      * 
      * @param value

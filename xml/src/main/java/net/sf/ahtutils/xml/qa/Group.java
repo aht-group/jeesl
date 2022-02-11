@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.security.Staff;
 import net.sf.ahtutils.xml.status.Description;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Group
     @XmlAttribute(name = "name")
     protected String name;
 
-    /**
+    /*
      * Gets the value of the description property.
      * 
      * @return
@@ -71,7 +71,7 @@ public class Group
         return description;
     }
 
-    /**
+    /*
      * Sets the value of the description property.
      * 
      * @param value
@@ -103,7 +103,7 @@ public class Group
         this.staff = null;
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -115,7 +115,7 @@ public class Group
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -135,7 +135,7 @@ public class Group
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -147,7 +147,7 @@ public class Group
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -167,7 +167,7 @@ public class Group
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the name property.
      * 
      * @return
@@ -179,7 +179,7 @@ public class Group
         return name;
     }
 
-    /**
+    /*
      * Sets the value of the name property.
      * 
      * @param value

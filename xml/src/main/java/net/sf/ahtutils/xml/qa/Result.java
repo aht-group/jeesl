@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.security.Staff;
 import net.sf.ahtutils.xml.status.Status;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -65,7 +65,7 @@ public class Result
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar record;
 
-    /**
+    /*
      * Gets the value of the staff property.
      * 
      * @return
@@ -77,7 +77,7 @@ public class Result
         return staff;
     }
 
-    /**
+    /*
      * Sets the value of the staff property.
      * 
      * @param value
@@ -93,7 +93,7 @@ public class Result
         return (this.staff!= null);
     }
 
-    /**
+    /*
      * Gets the value of the status property.
      * 
      * @return
@@ -105,7 +105,7 @@ public class Result
         return status;
     }
 
-    /**
+    /*
      * Sets the value of the status property.
      * 
      * @param value
@@ -121,7 +121,7 @@ public class Result
         return (this.status!= null);
     }
 
-    /**
+    /*
      * Gets the value of the comment property.
      * 
      * @return
@@ -133,7 +133,7 @@ public class Result
         return comment;
     }
 
-    /**
+    /*
      * Sets the value of the comment property.
      * 
      * @param value
@@ -149,7 +149,7 @@ public class Result
         return (this.comment!= null);
     }
 
-    /**
+    /*
      * Gets the value of the actual property.
      * 
      * @return
@@ -161,7 +161,7 @@ public class Result
         return actual;
     }
 
-    /**
+    /*
      * Sets the value of the actual property.
      * 
      * @param value
@@ -177,7 +177,7 @@ public class Result
         return (this.actual!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -189,7 +189,7 @@ public class Result
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -209,7 +209,7 @@ public class Result
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the record property.
      * 
      * @return
@@ -221,7 +221,7 @@ public class Result
         return record;
     }
 
-    /**
+    /*
      * Sets the value of the record property.
      * 
      * @param value

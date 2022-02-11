@@ -4,7 +4,7 @@ package org.jeesl.model.xml.module.job;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/**
+/*
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.module.job package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
+    /*
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.module.job
      * 
      */
     public ObjectFactory() {
     }
 
-    /**
+    /*
      * Create an instance of {@link Jobs }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Jobs();
     }
 
-    /**
+    /*
      * Create an instance of {@link Job }
      * 
      */
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new Job();
     }
 
-    /**
+    /*
      * Create an instance of {@link Template }
      * 
      */

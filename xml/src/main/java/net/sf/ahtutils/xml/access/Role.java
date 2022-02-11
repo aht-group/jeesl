@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -69,7 +69,7 @@ public class Role
     @XmlAttribute(name = "documentation")
     protected Boolean documentation;
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -81,7 +81,7 @@ public class Role
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -97,7 +97,7 @@ public class Role
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -109,7 +109,7 @@ public class Role
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -125,7 +125,7 @@ public class Role
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the views property.
      * 
      * @return
@@ -137,7 +137,7 @@ public class Role
         return views;
     }
 
-    /**
+    /*
      * Sets the value of the views property.
      * 
      * @param value
@@ -153,7 +153,7 @@ public class Role
         return (this.views!= null);
     }
 
-    /**
+    /*
      * Gets the value of the actions property.
      * 
      * @return
@@ -165,7 +165,7 @@ public class Role
         return actions;
     }
 
-    /**
+    /*
      * Sets the value of the actions property.
      * 
      * @param value
@@ -181,7 +181,7 @@ public class Role
         return (this.actions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the usecases property.
      * 
      * @return
@@ -193,7 +193,7 @@ public class Role
         return usecases;
     }
 
-    /**
+    /*
      * Sets the value of the usecases property.
      * 
      * @param value
@@ -209,7 +209,7 @@ public class Role
         return (this.usecases!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -221,7 +221,7 @@ public class Role
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -237,7 +237,7 @@ public class Role
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the name property.
      * 
      * @return
@@ -249,7 +249,7 @@ public class Role
         return name;
     }
 
-    /**
+    /*
      * Sets the value of the name property.
      * 
      * @param value
@@ -265,7 +265,7 @@ public class Role
         return (this.name!= null);
     }
 
-    /**
+    /*
      * Gets the value of the documentation property.
      * 
      * @return
@@ -277,7 +277,7 @@ public class Role
         return documentation;
     }
 
-    /**
+    /*
      * Sets the value of the documentation property.
      * 
      * @param value

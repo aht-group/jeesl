@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.status.Type;
 import org.jeesl.model.xml.text.Remark;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -95,7 +95,7 @@ public class Attribute
     @XmlAttribute(name = "construction")
     protected Boolean construction;
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -107,7 +107,7 @@ public class Attribute
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -123,7 +123,7 @@ public class Attribute
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -135,7 +135,7 @@ public class Attribute
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -151,7 +151,7 @@ public class Attribute
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -163,7 +163,7 @@ public class Attribute
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -179,7 +179,7 @@ public class Attribute
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the remark property.
      * 
      * @return
@@ -191,7 +191,7 @@ public class Attribute
         return remark;
     }
 
-    /**
+    /*
      * Sets the value of the remark property.
      * 
      * @param value
@@ -207,7 +207,7 @@ public class Attribute
         return (this.remark!= null);
     }
 
-    /**
+    /*
      * Gets the value of the relation property.
      * 
      * @return
@@ -219,7 +219,7 @@ public class Attribute
         return relation;
     }
 
-    /**
+    /*
      * Sets the value of the relation property.
      * 
      * @param value
@@ -235,7 +235,7 @@ public class Attribute
         return (this.relation!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -247,7 +247,7 @@ public class Attribute
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -267,7 +267,7 @@ public class Attribute
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -279,7 +279,7 @@ public class Attribute
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -299,7 +299,7 @@ public class Attribute
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -311,7 +311,7 @@ public class Attribute
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -327,7 +327,7 @@ public class Attribute
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the xpath property.
      * 
      * @return
@@ -339,7 +339,7 @@ public class Attribute
         return xpath;
     }
 
-    /**
+    /*
      * Sets the value of the xpath property.
      * 
      * @param value
@@ -355,7 +355,7 @@ public class Attribute
         return (this.xpath!= null);
     }
 
-    /**
+    /*
      * Gets the value of the web property.
      * 
      * @return
@@ -367,7 +367,7 @@ public class Attribute
         return web;
     }
 
-    /**
+    /*
      * Sets the value of the web property.
      * 
      * @param value
@@ -387,7 +387,7 @@ public class Attribute
         this.web = null;
     }
 
-    /**
+    /*
      * Gets the value of the print property.
      * 
      * @return
@@ -399,7 +399,7 @@ public class Attribute
         return print;
     }
 
-    /**
+    /*
      * Sets the value of the print property.
      * 
      * @param value
@@ -419,7 +419,7 @@ public class Attribute
         this.print = null;
     }
 
-    /**
+    /*
      * Gets the value of the name property.
      * 
      * @return
@@ -431,7 +431,7 @@ public class Attribute
         return name;
     }
 
-    /**
+    /*
      * Sets the value of the name property.
      * 
      * @param value
@@ -451,7 +451,7 @@ public class Attribute
         this.name = null;
     }
 
-    /**
+    /*
      * Gets the value of the enclosure property.
      * 
      * @return
@@ -463,7 +463,7 @@ public class Attribute
         return enclosure;
     }
 
-    /**
+    /*
      * Sets the value of the enclosure property.
      * 
      * @param value
@@ -483,7 +483,7 @@ public class Attribute
         this.enclosure = null;
     }
 
-    /**
+    /*
      * Gets the value of the ui property.
      * 
      * @return
@@ -495,7 +495,7 @@ public class Attribute
         return ui;
     }
 
-    /**
+    /*
      * Sets the value of the ui property.
      * 
      * @param value
@@ -515,7 +515,7 @@ public class Attribute
         this.ui = null;
     }
 
-    /**
+    /*
      * Gets the value of the bean property.
      * 
      * @return
@@ -527,7 +527,7 @@ public class Attribute
         return bean;
     }
 
-    /**
+    /*
      * Sets the value of the bean property.
      * 
      * @param value
@@ -547,7 +547,7 @@ public class Attribute
         this.bean = null;
     }
 
-    /**
+    /*
      * Gets the value of the construction property.
      * 
      * @return
@@ -559,7 +559,7 @@ public class Attribute
         return construction;
     }
 
-    /**
+    /*
      * Sets the value of the construction property.
      * 
      * @param value

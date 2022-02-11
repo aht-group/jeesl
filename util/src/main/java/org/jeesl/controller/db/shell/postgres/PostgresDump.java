@@ -26,7 +26,7 @@ public class PostgresDump extends AbstractPostgresShell implements UtilsDbShell
 		configurationParamter.getParameter().add(pDbShell);
 	}
 	
-	/**
+	/*
 	 * added 2nd constructor for different db's
 	 * @config normal config file
 	 * @db String for db declaration / wis=mopwh

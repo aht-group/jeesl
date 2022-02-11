@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -48,7 +48,7 @@ public class Hardware
     @XmlAttribute(name = "serial")
     protected String serial;
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -60,7 +60,7 @@ public class Hardware
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class Hardware
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the manufacturer property.
      * 
      * @return
@@ -92,7 +92,7 @@ public class Hardware
         return manufacturer;
     }
 
-    /**
+    /*
      * Sets the value of the manufacturer property.
      * 
      * @param value
@@ -108,7 +108,7 @@ public class Hardware
         return (this.manufacturer!= null);
     }
 
-    /**
+    /*
      * Gets the value of the model property.
      * 
      * @return
@@ -120,7 +120,7 @@ public class Hardware
         return model;
     }
 
-    /**
+    /*
      * Sets the value of the model property.
      * 
      * @param value
@@ -136,7 +136,7 @@ public class Hardware
         return (this.model!= null);
     }
 
-    /**
+    /*
      * Gets the value of the serial property.
      * 
      * @return
@@ -148,7 +148,7 @@ public class Hardware
         return serial;
     }
 
-    /**
+    /*
      * Sets the value of the serial property.
      * 
      * @param value

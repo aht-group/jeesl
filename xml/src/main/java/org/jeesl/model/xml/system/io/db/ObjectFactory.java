@@ -4,7 +4,7 @@ package org.jeesl.model.xml.system.io.db;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/**
+/*
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.system.io.db package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
+    /*
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.system.io.db
      * 
      */
     public ObjectFactory() {
     }
 
-    /**
+    /*
      * Create an instance of {@link Db }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Db();
     }
 
-    /**
+    /*
      * Create an instance of {@link Seed }
      * 
      */
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new Seed();
     }
 
-    /**
+    /*
      * Create an instance of {@link Query }
      * 
      */
@@ -53,7 +53,7 @@ public class ObjectFactory {
         return new Query();
     }
 
-    /**
+    /*
      * Create an instance of {@link Times }
      * 
      */
@@ -61,7 +61,7 @@ public class ObjectFactory {
         return new Times();
     }
 
-    /**
+    /*
      * Create an instance of {@link Time }
      * 
      */

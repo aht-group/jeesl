@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -49,7 +49,7 @@ public class Size
     @XmlAttribute(name = "value")
     protected Integer value;
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -61,7 +61,7 @@ public class Size
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -77,7 +77,7 @@ public class Size
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -89,7 +89,7 @@ public class Size
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -105,7 +105,7 @@ public class Size
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the value property.
      * 
      * @return
@@ -117,7 +117,7 @@ public class Size
         return value;
     }
 
-    /**
+    /*
      * Sets the value of the value property.
      * 
      * @param value

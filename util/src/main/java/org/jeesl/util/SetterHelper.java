@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class SetterHelper
 {
 	
-    /**
+    /*
      * Uses reflection to set a property. The parameter will be casted as needed.
      * @param propertyName The objects property, e.g. name or age
      * @param targetObject The object for which the parameter should be set
@@ -38,7 +38,7 @@ public class SetterHelper
 
     }
 
-    /**
+    /*
      * Performs the type cast to match the required class
      * Often, the exact class might not be the right class for the setter to be called (e.g. having a Double for setting an int setter)
      * @param parameter The value
@@ -130,7 +130,7 @@ public class SetterHelper
         return correctParameter;
     }
 
-    /**
+    /*
      * In some cases, the simple use of PropertyUtils is not sufficient to find the correct set___ method,
      * so here also the superclass is included when searching for it
      * @param o         The Object that you want to invoke the setter on

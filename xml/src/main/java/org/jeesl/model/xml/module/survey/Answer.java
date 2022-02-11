@@ -13,7 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.jeesl.model.xml.text.Remark;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -84,7 +84,7 @@ public class Answer
     @XmlAttribute(name = "score")
     protected Double score;
 
-    /**
+    /*
      * Gets the value of the data property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class Answer
         return data;
     }
 
-    /**
+    /*
      * Sets the value of the data property.
      * 
      * @param value
@@ -112,7 +112,7 @@ public class Answer
         return (this.data!= null);
     }
 
-    /**
+    /*
      * Gets the value of the question property.
      * 
      * @return
@@ -124,7 +124,7 @@ public class Answer
         return question;
     }
 
-    /**
+    /*
      * Sets the value of the question property.
      * 
      * @param value
@@ -140,7 +140,7 @@ public class Answer
         return (this.question!= null);
     }
 
-    /**
+    /*
      * Gets the value of the answer property.
      * 
      * @return
@@ -152,7 +152,7 @@ public class Answer
         return answer;
     }
 
-    /**
+    /*
      * Sets the value of the answer property.
      * 
      * @param value
@@ -168,7 +168,7 @@ public class Answer
         return (this.answer!= null);
     }
 
-    /**
+    /*
      * Gets the value of the remark property.
      * 
      * @return
@@ -180,7 +180,7 @@ public class Answer
         return remark;
     }
 
-    /**
+    /*
      * Sets the value of the remark property.
      * 
      * @param value
@@ -196,7 +196,7 @@ public class Answer
         return (this.remark!= null);
     }
 
-    /**
+    /*
      * Gets the value of the option property.
      * 
      * @return
@@ -208,7 +208,7 @@ public class Answer
         return option;
     }
 
-    /**
+    /*
      * Sets the value of the option property.
      * 
      * @param value
@@ -224,7 +224,7 @@ public class Answer
         return (this.option!= null);
     }
 
-    /**
+    /*
      * Gets the value of the matrix property.
      * 
      * @return
@@ -236,7 +236,7 @@ public class Answer
         return matrix;
     }
 
-    /**
+    /*
      * Sets the value of the matrix property.
      * 
      * @param value
@@ -252,7 +252,7 @@ public class Answer
         return (this.matrix!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -264,7 +264,7 @@ public class Answer
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -284,7 +284,7 @@ public class Answer
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the valueBoolean property.
      * 
      * @return
@@ -296,7 +296,7 @@ public class Answer
         return valueBoolean;
     }
 
-    /**
+    /*
      * Sets the value of the valueBoolean property.
      * 
      * @param value
@@ -316,7 +316,7 @@ public class Answer
         this.valueBoolean = null;
     }
 
-    /**
+    /*
      * Gets the value of the valueNumber property.
      * 
      * @return
@@ -328,7 +328,7 @@ public class Answer
         return valueNumber;
     }
 
-    /**
+    /*
      * Sets the value of the valueNumber property.
      * 
      * @param value
@@ -348,7 +348,7 @@ public class Answer
         this.valueNumber = null;
     }
 
-    /**
+    /*
      * Gets the value of the valueDouble property.
      * 
      * @return
@@ -360,7 +360,7 @@ public class Answer
         return valueDouble;
     }
 
-    /**
+    /*
      * Sets the value of the valueDouble property.
      * 
      * @param value
@@ -380,7 +380,7 @@ public class Answer
         this.valueDouble = null;
     }
 
-    /**
+    /*
      * Gets the value of the valueDate property.
      * 
      * @return
@@ -392,7 +392,7 @@ public class Answer
         return valueDate;
     }
 
-    /**
+    /*
      * Sets the value of the valueDate property.
      * 
      * @param value
@@ -408,7 +408,7 @@ public class Answer
         return (this.valueDate!= null);
     }
 
-    /**
+    /*
      * Gets the value of the score property.
      * 
      * @return
@@ -420,7 +420,7 @@ public class Answer
         return score;
     }
 
-    /**
+    /*
      * Sets the value of the score property.
      * 
      * @param value

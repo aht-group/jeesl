@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -51,7 +51,7 @@ public class Token
     @XmlAttribute(name = "expiresIn")
     protected Integer expiresIn;
 
-    /**
+    /*
      * Gets the value of the value property.
      * 
      * @return
@@ -63,7 +63,7 @@ public class Token
         return value;
     }
 
-    /**
+    /*
      * Sets the value of the value property.
      * 
      * @param value
@@ -79,7 +79,7 @@ public class Token
         return (this.value!= null);
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -91,7 +91,7 @@ public class Token
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -107,7 +107,7 @@ public class Token
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the expires property.
      * 
      * @return
@@ -119,7 +119,7 @@ public class Token
         return expires;
     }
 
-    /**
+    /*
      * Sets the value of the expires property.
      * 
      * @param value
@@ -135,7 +135,7 @@ public class Token
         return (this.expires!= null);
     }
 
-    /**
+    /*
      * Gets the value of the expiresIn property.
      * 
      * @return
@@ -147,7 +147,7 @@ public class Token
         return expiresIn;
     }
 
-    /**
+    /*
      * Sets the value of the expiresIn property.
      * 
      * @param value

@@ -4,7 +4,7 @@ package org.jeesl.model.xml.module.bb;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/**
+/*
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.module.bb package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
+    /*
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.module.bb
      * 
      */
     public ObjectFactory() {
     }
 
-    /**
+    /*
      * Create an instance of {@link Messages }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Messages();
     }
 
-    /**
+    /*
      * Create an instance of {@link Message }
      * 
      */

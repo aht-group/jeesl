@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.security.Staff;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -48,7 +48,7 @@ public class Checklist
     @XmlElement(required = true)
     protected List<Category> category;
 
-    /**
+    /*
      * Gets the value of the staff property.
      * 
      * @return
@@ -60,7 +60,7 @@ public class Checklist
         return staff;
     }
 
-    /**
+    /*
      * Sets the value of the staff property.
      * 
      * @param value

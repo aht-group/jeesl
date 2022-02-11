@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -86,7 +86,7 @@ public class Roles
         this.role = null;
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -98,7 +98,7 @@ public class Roles
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -114,7 +114,7 @@ public class Roles
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -126,7 +126,7 @@ public class Roles
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value

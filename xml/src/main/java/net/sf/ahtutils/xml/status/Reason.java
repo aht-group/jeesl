@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -76,7 +76,7 @@ public class Reason
     @XmlAttribute(name = "position")
     protected Integer position;
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -88,7 +88,7 @@ public class Reason
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -104,7 +104,7 @@ public class Reason
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -116,7 +116,7 @@ public class Reason
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -148,7 +148,7 @@ public class Reason
         this.tracked = null;
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -160,7 +160,7 @@ public class Reason
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -180,7 +180,7 @@ public class Reason
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -192,7 +192,7 @@ public class Reason
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -208,7 +208,7 @@ public class Reason
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the group property.
      * 
      * @return
@@ -220,7 +220,7 @@ public class Reason
         return group;
     }
 
-    /**
+    /*
      * Sets the value of the group property.
      * 
      * @param value
@@ -236,7 +236,7 @@ public class Reason
         return (this.group!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -248,7 +248,7 @@ public class Reason
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value
@@ -264,7 +264,7 @@ public class Reason
         return (this.label!= null);
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -276,7 +276,7 @@ public class Reason
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -296,7 +296,7 @@ public class Reason
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the image property.
      * 
      * @return
@@ -308,7 +308,7 @@ public class Reason
         return image;
     }
 
-    /**
+    /*
      * Sets the value of the image property.
      * 
      * @param value
@@ -324,7 +324,7 @@ public class Reason
         return (this.image!= null);
     }
 
-    /**
+    /*
      * Gets the value of the style property.
      * 
      * @return
@@ -336,7 +336,7 @@ public class Reason
         return style;
     }
 
-    /**
+    /*
      * Sets the value of the style property.
      * 
      * @param value
@@ -352,7 +352,7 @@ public class Reason
         return (this.style!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -364,7 +364,7 @@ public class Reason
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value

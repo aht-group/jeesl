@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -51,7 +51,7 @@ public class Attributes
     @XmlAttribute(name = "code")
     protected String code;
 
-    /**
+    /*
      * Gets the value of the attribute property.
      * 
      * <p>
@@ -88,7 +88,7 @@ public class Attributes
         this.attribute = null;
     }
 
-    /**
+    /*
      * Gets the value of the attributes property.
      * 
      * <p>
@@ -125,7 +125,7 @@ public class Attributes
         this.attributes = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -137,7 +137,7 @@ public class Attributes
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value

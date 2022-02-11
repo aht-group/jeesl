@@ -179,7 +179,7 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		return json;
 	}
 	
-	/**
+	/*
 	* Build Json2Tuples from jpa.Tupes
 	* @deprecated
 	* <p> Use {@link build(List<Tuple> tuples, JsonTupleFactory.Type...types)} instead.
@@ -198,7 +198,7 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		return json;
 	}
 	
-	/**
+	/*
 	* Build Json2Tuples from jpa.Tupes
 	* @deprecated
 	* <p> Use {@link build(List<Tuple> tuples, JsonTupleFactory.Type...types)} instead.

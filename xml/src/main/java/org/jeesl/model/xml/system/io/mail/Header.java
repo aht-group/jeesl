@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -62,7 +62,7 @@ public class Header
     @XmlElement(namespace = "", required = true)
     protected String subject;
 
-    /**
+    /*
      * Gets the value of the from property.
      * 
      * @return
@@ -74,7 +74,7 @@ public class Header
         return from;
     }
 
-    /**
+    /*
      * Sets the value of the from property.
      * 
      * @param value
@@ -90,7 +90,7 @@ public class Header
         return (this.from!= null);
     }
 
-    /**
+    /*
      * Gets the value of the to property.
      * 
      * @return
@@ -102,7 +102,7 @@ public class Header
         return to;
     }
 
-    /**
+    /*
      * Sets the value of the to property.
      * 
      * @param value
@@ -118,7 +118,7 @@ public class Header
         return (this.to!= null);
     }
 
-    /**
+    /*
      * Gets the value of the cc property.
      * 
      * @return
@@ -130,7 +130,7 @@ public class Header
         return cc;
     }
 
-    /**
+    /*
      * Sets the value of the cc property.
      * 
      * @param value
@@ -146,7 +146,7 @@ public class Header
         return (this.cc!= null);
     }
 
-    /**
+    /*
      * Gets the value of the bcc property.
      * 
      * @return
@@ -158,7 +158,7 @@ public class Header
         return bcc;
     }
 
-    /**
+    /*
      * Sets the value of the bcc property.
      * 
      * @param value
@@ -174,7 +174,7 @@ public class Header
         return (this.bcc!= null);
     }
 
-    /**
+    /*
      * Gets the value of the subject property.
      * 
      * @return
@@ -186,7 +186,7 @@ public class Header
         return subject;
     }
 
-    /**
+    /*
      * Sets the value of the subject property.
      * 
      * @param value

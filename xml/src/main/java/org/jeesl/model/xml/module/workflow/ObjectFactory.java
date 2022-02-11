@@ -4,7 +4,7 @@ package org.jeesl.model.xml.module.workflow;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/**
+/*
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.module.workflow package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
+    /*
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.module.workflow
      * 
      */
     public ObjectFactory() {
     }
 
-    /**
+    /*
      * Create an instance of {@link Process }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Process();
     }
 
-    /**
+    /*
      * Create an instance of {@link Stage }
      * 
      */
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new Stage();
     }
 
-    /**
+    /*
      * Create an instance of {@link Permissions }
      * 
      */
@@ -53,7 +53,7 @@ public class ObjectFactory {
         return new Permissions();
     }
 
-    /**
+    /*
      * Create an instance of {@link Permission }
      * 
      */
@@ -61,7 +61,7 @@ public class ObjectFactory {
         return new Permission();
     }
 
-    /**
+    /*
      * Create an instance of {@link Transition }
      * 
      */
@@ -69,7 +69,7 @@ public class ObjectFactory {
         return new Transition();
     }
 
-    /**
+    /*
      * Create an instance of {@link Activity }
      * 
      */
@@ -77,7 +77,7 @@ public class ObjectFactory {
         return new Activity();
     }
 
-    /**
+    /*
      * Create an instance of {@link Workflow }
      * 
      */
@@ -85,7 +85,7 @@ public class ObjectFactory {
         return new Workflow();
     }
 
-    /**
+    /*
      * Create an instance of {@link Processes }
      * 
      */
@@ -93,7 +93,7 @@ public class ObjectFactory {
         return new Processes();
     }
 
-    /**
+    /*
      * Create an instance of {@link Activities }
      * 
      */

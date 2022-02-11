@@ -28,7 +28,7 @@ import org.jeesl.model.xml.module.survey.Templates;
 import org.jeesl.model.xml.system.revision.Entity;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -131,7 +131,7 @@ public class Query
     @XmlAttribute(name = "lang")
     protected String lang;
 
-    /**
+    /*
      * Gets the value of the role property.
      * 
      * @return
@@ -143,7 +143,7 @@ public class Query
         return role;
     }
 
-    /**
+    /*
      * Sets the value of the role property.
      * 
      * @param value
@@ -159,7 +159,7 @@ public class Query
         return (this.role!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -171,7 +171,7 @@ public class Query
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -187,7 +187,7 @@ public class Query
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the status property.
      * 
      * @return
@@ -199,7 +199,7 @@ public class Query
         return status;
     }
 
-    /**
+    /*
      * Sets the value of the status property.
      * 
      * @param value
@@ -215,7 +215,7 @@ public class Query
         return (this.status!= null);
     }
 
-    /**
+    /*
      * Gets the value of the type property.
      * 
      * @return
@@ -227,7 +227,7 @@ public class Query
         return type;
     }
 
-    /**
+    /*
      * Sets the value of the type property.
      * 
      * @param value
@@ -243,7 +243,7 @@ public class Query
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the model property.
      * 
      * @return
@@ -255,7 +255,7 @@ public class Query
         return model;
     }
 
-    /**
+    /*
      * Sets the value of the model property.
      * 
      * @param value
@@ -271,7 +271,7 @@ public class Query
         return (this.model!= null);
     }
 
-    /**
+    /*
      * Gets the value of the test property.
      * 
      * @return
@@ -283,7 +283,7 @@ public class Query
         return test;
     }
 
-    /**
+    /*
      * Sets the value of the test property.
      * 
      * @param value
@@ -299,7 +299,7 @@ public class Query
         return (this.test!= null);
     }
 
-    /**
+    /*
      * Gets the value of the category property.
      * 
      * @return
@@ -311,7 +311,7 @@ public class Query
         return category;
     }
 
-    /**
+    /*
      * Sets the value of the category property.
      * 
      * @param value
@@ -327,7 +327,7 @@ public class Query
         return (this.category!= null);
     }
 
-    /**
+    /*
      * Gets the value of the staff property.
      * 
      * @return
@@ -339,7 +339,7 @@ public class Query
         return staff;
     }
 
-    /**
+    /*
      * Sets the value of the staff property.
      * 
      * @param value
@@ -355,7 +355,7 @@ public class Query
         return (this.staff!= null);
     }
 
-    /**
+    /*
      * Gets the value of the report property.
      * 
      * @return
@@ -367,7 +367,7 @@ public class Query
         return report;
     }
 
-    /**
+    /*
      * Sets the value of the report property.
      * 
      * @param value
@@ -383,7 +383,7 @@ public class Query
         return (this.report!= null);
     }
 
-    /**
+    /*
      * Gets the value of the entity property.
      * 
      * @return
@@ -395,7 +395,7 @@ public class Query
         return entity;
     }
 
-    /**
+    /*
      * Sets the value of the entity property.
      * 
      * @param value
@@ -411,7 +411,7 @@ public class Query
         return (this.entity!= null);
     }
 
-    /**
+    /*
      * Gets the value of the templates property.
      * 
      * @return
@@ -423,7 +423,7 @@ public class Query
         return templates;
     }
 
-    /**
+    /*
      * Sets the value of the templates property.
      * 
      * @param value
@@ -439,7 +439,7 @@ public class Query
         return (this.templates!= null);
     }
 
-    /**
+    /*
      * Gets the value of the template property.
      * 
      * @return
@@ -451,7 +451,7 @@ public class Query
         return template;
     }
 
-    /**
+    /*
      * Sets the value of the template property.
      * 
      * @param value
@@ -467,7 +467,7 @@ public class Query
         return (this.template!= null);
     }
 
-    /**
+    /*
      * Gets the value of the surveys property.
      * 
      * @return
@@ -479,7 +479,7 @@ public class Query
         return surveys;
     }
 
-    /**
+    /*
      * Sets the value of the surveys property.
      * 
      * @param value
@@ -495,7 +495,7 @@ public class Query
         return (this.surveys!= null);
     }
 
-    /**
+    /*
      * Gets the value of the survey property.
      * 
      * @return
@@ -507,7 +507,7 @@ public class Query
         return survey;
     }
 
-    /**
+    /*
      * Sets the value of the survey property.
      * 
      * @param value
@@ -523,7 +523,7 @@ public class Query
         return (this.survey!= null);
     }
 
-    /**
+    /*
      * Gets the value of the answer property.
      * 
      * @return
@@ -535,7 +535,7 @@ public class Query
         return answer;
     }
 
-    /**
+    /*
      * Sets the value of the answer property.
      * 
      * @param value
@@ -551,7 +551,7 @@ public class Query
         return (this.answer!= null);
     }
 
-    /**
+    /*
      * Gets the value of the graphic property.
      * 
      * @return
@@ -563,7 +563,7 @@ public class Query
         return graphic;
     }
 
-    /**
+    /*
      * Sets the value of the graphic property.
      * 
      * @param value
@@ -579,7 +579,7 @@ public class Query
         return (this.graphic!= null);
     }
 
-    /**
+    /*
      * Gets the value of the trafficLight property.
      * 
      * @return
@@ -591,7 +591,7 @@ public class Query
         return trafficLight;
     }
 
-    /**
+    /*
      * Sets the value of the trafficLight property.
      * 
      * @param value
@@ -607,7 +607,7 @@ public class Query
         return (this.trafficLight!= null);
     }
 
-    /**
+    /*
      * Gets the value of the trafficLights property.
      * 
      * @return
@@ -619,7 +619,7 @@ public class Query
         return trafficLights;
     }
 
-    /**
+    /*
      * Sets the value of the trafficLights property.
      * 
      * @param value
@@ -635,7 +635,7 @@ public class Query
         return (this.trafficLights!= null);
     }
 
-    /**
+    /*
      * Gets the value of the lang property.
      * 
      * @return
@@ -647,7 +647,7 @@ public class Query
         return lang;
     }
 
-    /**
+    /*
      * Sets the value of the lang property.
      * 
      * @param value

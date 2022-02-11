@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.finance.Finance;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -46,7 +46,7 @@ public class QueryFinance
     @XmlAttribute(name = "localeCode")
     protected String localeCode;
 
-    /**
+    /*
      * Gets the value of the finance property.
      * 
      * @return
@@ -58,7 +58,7 @@ public class QueryFinance
         return finance;
     }
 
-    /**
+    /*
      * Sets the value of the finance property.
      * 
      * @param value
@@ -74,7 +74,7 @@ public class QueryFinance
         return (this.finance!= null);
     }
 
-    /**
+    /*
      * Gets the value of the localeCode property.
      * 
      * @return
@@ -86,7 +86,7 @@ public class QueryFinance
         return localeCode;
     }
 
-    /**
+    /*
      * Sets the value of the localeCode property.
      * 
      * @param value

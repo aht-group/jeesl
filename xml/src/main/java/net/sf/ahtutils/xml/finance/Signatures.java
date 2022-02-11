@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Levels;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Signatures
     @XmlAttribute(name = "label")
     protected String label;
 
-    /**
+    /*
      * Gets the value of the levels property.
      * 
      * @return
@@ -71,7 +71,7 @@ public class Signatures
         return levels;
     }
 
-    /**
+    /*
      * Sets the value of the levels property.
      * 
      * @param value
@@ -119,7 +119,7 @@ public class Signatures
         this.signature = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -131,7 +131,7 @@ public class Signatures
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -147,7 +147,7 @@ public class Signatures
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -159,7 +159,7 @@ public class Signatures
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value

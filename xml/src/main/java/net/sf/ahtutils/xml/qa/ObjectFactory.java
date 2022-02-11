@@ -4,7 +4,7 @@ package net.sf.ahtutils.xml.qa;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/**
+/*
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the net.sf.ahtutils.xml.qa package. 

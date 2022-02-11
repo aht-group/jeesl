@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.module.inventory.pc.Computer;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -44,7 +44,7 @@ public class Inventory
     @XmlElement(namespace = "http://www.jeesl.org/inventory/pc", required = true)
     protected List<Computer> computer;
 
-    /**
+    /*
      * Gets the value of the computer property.
      * 
      * <p>

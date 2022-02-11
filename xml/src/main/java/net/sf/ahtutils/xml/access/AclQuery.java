@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -42,7 +42,7 @@ public class AclQuery
     @XmlAttribute(name = "delQueryAfterProcessing")
     protected Boolean delQueryAfterProcessing;
 
-    /**
+    /*
      * Gets the value of the lang property.
      * 
      * @return
@@ -54,7 +54,7 @@ public class AclQuery
         return lang;
     }
 
-    /**
+    /*
      * Sets the value of the lang property.
      * 
      * @param value
@@ -70,7 +70,7 @@ public class AclQuery
         return (this.lang!= null);
     }
 
-    /**
+    /*
      * Gets the value of the delQueryAfterProcessing property.
      * 
      * @return
@@ -82,7 +82,7 @@ public class AclQuery
         return delQueryAfterProcessing;
     }
 
-    /**
+    /*
      * Sets the value of the delQueryAfterProcessing property.
      * 
      * @param value

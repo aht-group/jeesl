@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.exlp.xml.identity.User;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -48,7 +48,7 @@ public class Transmission
     @XmlElement(required = true)
     protected List<DataSet> dataSet;
 
-    /**
+    /*
      * Gets the value of the user property.
      * 
      * @return
@@ -60,7 +60,7 @@ public class Transmission
         return user;
     }
 
-    /**
+    /*
      * Sets the value of the user property.
      * 
      * @param value

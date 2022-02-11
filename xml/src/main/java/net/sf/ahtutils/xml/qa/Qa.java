@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.security.Staff;
 import org.jeesl.model.xml.module.survey.Survey;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -103,7 +103,7 @@ public class Qa
         this.staff = null;
     }
 
-    /**
+    /*
      * Gets the value of the survey property.
      * 
      * @return
@@ -115,7 +115,7 @@ public class Qa
         return survey;
     }
 
-    /**
+    /*
      * Sets the value of the survey property.
      * 
      * @param value
@@ -131,7 +131,7 @@ public class Qa
         return (this.survey!= null);
     }
 
-    /**
+    /*
      * Gets the value of the groups property.
      * 
      * @return
@@ -143,7 +143,7 @@ public class Qa
         return groups;
     }
 
-    /**
+    /*
      * Sets the value of the groups property.
      * 
      * @param value
@@ -175,7 +175,7 @@ public class Qa
         this.checklist = null;
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -187,7 +187,7 @@ public class Qa
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -207,7 +207,7 @@ public class Qa
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the client property.
      * 
      * @return
@@ -219,7 +219,7 @@ public class Qa
         return client;
     }
 
-    /**
+    /*
      * Sets the value of the client property.
      * 
      * @param value
@@ -235,7 +235,7 @@ public class Qa
         return (this.client!= null);
     }
 
-    /**
+    /*
      * Gets the value of the developer property.
      * 
      * @return
@@ -247,7 +247,7 @@ public class Qa
         return developer;
     }
 
-    /**
+    /*
      * Sets the value of the developer property.
      * 
      * @param value

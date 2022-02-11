@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -86,7 +86,7 @@ public class Role
     @XmlAttribute(name = "label")
     protected String label;
 
-    /**
+    /*
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -98,7 +98,7 @@ public class Role
         return descriptions;
     }
 
-    /**
+    /*
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -114,7 +114,7 @@ public class Role
         return (this.descriptions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -126,7 +126,7 @@ public class Role
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -142,7 +142,7 @@ public class Role
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the category property.
      * 
      * @return
@@ -154,7 +154,7 @@ public class Role
         return category;
     }
 
-    /**
+    /*
      * Sets the value of the category property.
      * 
      * @param value
@@ -170,7 +170,7 @@ public class Role
         return (this.category!= null);
     }
 
-    /**
+    /*
      * Gets the value of the views property.
      * 
      * @return
@@ -182,7 +182,7 @@ public class Role
         return views;
     }
 
-    /**
+    /*
      * Sets the value of the views property.
      * 
      * @param value
@@ -198,7 +198,7 @@ public class Role
         return (this.views!= null);
     }
 
-    /**
+    /*
      * Gets the value of the actions property.
      * 
      * @return
@@ -210,7 +210,7 @@ public class Role
         return actions;
     }
 
-    /**
+    /*
      * Sets the value of the actions property.
      * 
      * @param value
@@ -226,7 +226,7 @@ public class Role
         return (this.actions!= null);
     }
 
-    /**
+    /*
      * Gets the value of the usecases property.
      * 
      * @return
@@ -238,7 +238,7 @@ public class Role
         return usecases;
     }
 
-    /**
+    /*
      * Sets the value of the usecases property.
      * 
      * @param value
@@ -254,7 +254,7 @@ public class Role
         return (this.usecases!= null);
     }
 
-    /**
+    /*
      * Gets the value of the staffs property.
      * 
      * @return
@@ -266,7 +266,7 @@ public class Role
         return staffs;
     }
 
-    /**
+    /*
      * Sets the value of the staffs property.
      * 
      * @param value
@@ -282,7 +282,7 @@ public class Role
         return (this.staffs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -294,7 +294,7 @@ public class Role
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -314,7 +314,7 @@ public class Role
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -326,7 +326,7 @@ public class Role
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -342,7 +342,7 @@ public class Role
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the position property.
      * 
      * @return
@@ -354,7 +354,7 @@ public class Role
         return position;
     }
 
-    /**
+    /*
      * Sets the value of the position property.
      * 
      * @param value
@@ -374,7 +374,7 @@ public class Role
         this.position = null;
     }
 
-    /**
+    /*
      * Gets the value of the visible property.
      * 
      * @return
@@ -386,7 +386,7 @@ public class Role
         return visible;
     }
 
-    /**
+    /*
      * Sets the value of the visible property.
      * 
      * @param value
@@ -406,7 +406,7 @@ public class Role
         this.visible = null;
     }
 
-    /**
+    /*
      * Gets the value of the documentation property.
      * 
      * @return
@@ -418,7 +418,7 @@ public class Role
         return documentation;
     }
 
-    /**
+    /*
      * Sets the value of the documentation property.
      * 
      * @param value
@@ -438,7 +438,7 @@ public class Role
         this.documentation = null;
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -450,7 +450,7 @@ public class Role
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value

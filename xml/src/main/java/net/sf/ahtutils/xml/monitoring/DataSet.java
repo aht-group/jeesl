@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -61,7 +61,7 @@ public class DataSet
     @XmlAttribute(name = "label")
     protected String label;
 
-    /**
+    /*
      * Gets the value of the indicator property.
      * 
      * @return
@@ -73,7 +73,7 @@ public class DataSet
         return indicator;
     }
 
-    /**
+    /*
      * Sets the value of the indicator property.
      * 
      * @param value
@@ -89,7 +89,7 @@ public class DataSet
         return (this.indicator!= null);
     }
 
-    /**
+    /*
      * Gets the value of the observer property.
      * 
      * @return
@@ -101,7 +101,7 @@ public class DataSet
         return observer;
     }
 
-    /**
+    /*
      * Sets the value of the observer property.
      * 
      * @param value
@@ -133,7 +133,7 @@ public class DataSet
         this.data = null;
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -145,7 +145,7 @@ public class DataSet
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -165,7 +165,7 @@ public class DataSet
         this.id = null;
     }
 
-    /**
+    /*
      * Gets the value of the code property.
      * 
      * @return
@@ -177,7 +177,7 @@ public class DataSet
         return code;
     }
 
-    /**
+    /*
      * Sets the value of the code property.
      * 
      * @param value
@@ -193,7 +193,7 @@ public class DataSet
         return (this.code!= null);
     }
 
-    /**
+    /*
      * Gets the value of the label property.
      * 
      * @return
@@ -205,7 +205,7 @@ public class DataSet
         return label;
     }
 
-    /**
+    /*
      * Sets the value of the label property.
      * 
      * @param value

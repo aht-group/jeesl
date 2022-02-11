@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/**
+/*
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -73,7 +73,7 @@ public class XlsMultiColumn implements Serializable
         this.xlsColumn = null;
     }
 
-    /**
+    /*
      * Gets the value of the langs property.
      * 
      * @return
@@ -85,7 +85,7 @@ public class XlsMultiColumn implements Serializable
         return langs;
     }
 
-    /**
+    /*
      * Sets the value of the langs property.
      * 
      * @param value
@@ -101,7 +101,7 @@ public class XlsMultiColumn implements Serializable
         return (this.langs!= null);
     }
 
-    /**
+    /*
      * Gets the value of the id property.
      * 
      * @return
@@ -113,7 +113,7 @@ public class XlsMultiColumn implements Serializable
         return id;
     }
 
-    /**
+    /*
      * Sets the value of the id property.
      * 
      * @param value
@@ -129,7 +129,7 @@ public class XlsMultiColumn implements Serializable
         return (this.id!= null);
     }
 
-    /**
+    /*
      * Gets the value of the columnLabel property.
      * 
      * @return
@@ -141,7 +141,7 @@ public class XlsMultiColumn implements Serializable
         return columnLabel;
     }
 
-    /**
+    /*
      * Sets the value of the columnLabel property.
      * 
      * @param value
@@ -157,7 +157,7 @@ public class XlsMultiColumn implements Serializable
         return (this.columnLabel!= null);
     }
 
-    /**
+    /*
      * Gets the value of the query property.
      * 
      * @return
@@ -169,7 +169,7 @@ public class XlsMultiColumn implements Serializable
         return query;
     }
 
-    /**
+    /*
      * Sets the value of the query property.
      * 
      * @param value
