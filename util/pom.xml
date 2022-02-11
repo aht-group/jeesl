@@ -19,7 +19,7 @@
             <dependency>
 				<groupId>org.jeesl.bom</groupId>
 				<artifactId>bom-core</artifactId>
-				<version>${project.version}</version>
+				<version>${maven.version.jeesl.bom}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>

@@ -16,7 +16,24 @@
 	<properties>
 		<version.jetty>9.2.12.v20150709</version.jetty>
 		<version.jdk>1.7</version.jdk>
-	</properties>	
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>      	         
+			<dependency>
+				<groupId>org.jeesl.bom</groupId>
+				<artifactId>bom-core</artifactId>
+				<version>${maven.version.jeesl.bom}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.annotation</groupId>
+				<artifactId>javax.annotation-api</artifactId>
+				<version>1.2</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	
 	<dependencies>
 		<dependency>
@@ -160,23 +177,6 @@
 			<artifactId>commons-lang</artifactId>
 		</dependency>
 	</dependencies>
-	
-	<dependencyManagement>
-		<dependencies>      	         
-			<dependency>
-				<groupId>org.jeesl.bom</groupId>
-				<artifactId>bom-core</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>javax.annotation-api</artifactId>
-				<version>1.2</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	
 	<build>
     	<plugins>

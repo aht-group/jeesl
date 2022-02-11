@@ -12,7 +12,19 @@
     <artifactId>jeesl-prototype</artifactId>
     <name>JEESL - Prototype</name>
 	<packaging>jar</packaging>
-		
+	
+	<dependencyManagement>
+		<dependencies>      	         
+			<dependency>
+				<groupId>org.jeesl.bom</groupId>
+				<artifactId>bom-core</artifactId>
+				<version>${maven.version.jeesl.bom}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.jeesl</groupId>
@@ -172,18 +184,6 @@
   <scope>provided</scope>
 </dependency>
 	</dependencies>
-		
-	<dependencyManagement>
-		<dependencies>      	         
-			<dependency>
-				<groupId>org.jeesl.bom</groupId>
-				<artifactId>bom-core</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 	
 	<build>
         <plugins>
