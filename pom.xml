@@ -5,7 +5,7 @@
 	<groupId>org.jeesl</groupId>
 	<artifactId>jeesl</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2.6-SNAPSHOT</version>
+	<version>0.2.6</version>
     
 	<name>JEESL (JavaEE Support Library)</name>
 	<url>https://github.com/aht-group/jeesl</url>
@@ -63,7 +63,8 @@
 		<url>https://github.com/aht-group/jeesl.git</url>
 		<connection>scm:git:ssh://git@github.com/aht-group/jeesl.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/aht-group/jeesl.git</developerConnection>
-	</scm>
+	  <tag>jeesl-0.2.6</tag>
+  </scm>
 	
 	<developers>
 		<developer>
@@ -443,7 +444,7 @@
 												<versionRange>[2.9,)</versionRange>
 												<goals><goal>descriptor</goal></goals>
 											</pluginExecutionFilter>
-											<action><ignore/></action>
+											<action><ignore /></action>
 										</pluginExecution>
 										<pluginExecution>
 											<pluginExecutionFilter>
@@ -452,7 +453,7 @@
 												<versionRange>[0.1,)</versionRange>
 												<goals><goal>mvnVersionIgnore</goal></goals>
 											</pluginExecutionFilter>
-											<action><ignore/></action>
+											<action><ignore /></action>
 										</pluginExecution>
 									</pluginExecutions>
 								</lifecycleMappingMetadata>
