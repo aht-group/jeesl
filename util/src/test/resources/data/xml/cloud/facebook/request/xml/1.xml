@@ -1,5 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<fb:signedRequest xmlns:fb="http://ahtutils.aht-group.com/cloud/facebook" issuedAt="2011-05-11T09:45:55.000Z" expires="2011-05-11T11:00:00.000Z">
-    <fb:user id="100002131036798"/>
-    <fb:oauth token="168855173165583|2.cUyzLDDbOzrrWFHy19CWSQ__.3600.1305111600.1-100002131036798|YrNYNZPm-76DH7t3b4zY9SLkx2k"/>
-</fb:signedRequest>
+<fb:signedRequest xmlns:fb="http://ahtutils.aht-group.com/cloud/facebook"/>
