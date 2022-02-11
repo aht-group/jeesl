@@ -5,7 +5,7 @@
 	<groupId>org.jeesl</groupId>
 	<artifactId>jeesl</artifactId>
 	<packaging>pom</packaging>
-	<version>0.2.6</version>
+	<version>0.2.7-SNAPSHOT</version>
     
 	<name>JEESL (JavaEE Support Library)</name>
 	<url>https://github.com/aht-group/jeesl</url>
@@ -63,7 +63,7 @@
 		<url>https://github.com/aht-group/jeesl.git</url>
 		<connection>scm:git:ssh://git@github.com/aht-group/jeesl.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/aht-group/jeesl.git</developerConnection>
-	  <tag>jeesl-0.2.6</tag>
+	  <tag>HEAD</tag>
   </scm>
 	
 	<developers>
