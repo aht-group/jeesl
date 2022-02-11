@@ -29,98 +29,60 @@ public class ObjectFactory {
     public ObjectFactory() {
     }
 
-    /**
-     * Create an instance of {@link Srs }
-     * 
-     */
+
     public Srs createSrs() {
         return new Srs();
     }
 
-    /**
-     * Create an instance of {@link Version }
-     * 
-     */
+
     public Version createVersion() {
         return new Version();
     }
 
-    /**
-     * Create an instance of {@link Meta }
-     * 
-     */
+
     public Meta createMeta() {
         return new Meta();
     }
 
-    /**
-     * Create an instance of {@link Product }
-     * 
-     */
+
     public Product createProduct() {
         return new Product();
     }
 
-    /**
-     * Create an instance of {@link Actors }
-     * 
-     */
+
     public Actors createActors() {
         return new Actors();
     }
 
-    /**
-     * Create an instance of {@link Actor }
-     * 
-     */
+
     public Actor createActor() {
         return new Actor();
     }
 
-    /**
-     * Create an instance of {@link Releases }
-     * 
-     */
+
     public Releases createReleases() {
         return new Releases();
     }
 
-    /**
-     * Create an instance of {@link Release }
-     * 
-     */
+
     public Release createRelease() {
         return new Release();
     }
 
-    /**
-     * Create an instance of {@link Frs }
-     * 
-     */
     public Frs createFrs() {
         return new Frs();
     }
 
-    /**
-     * Create an instance of {@link Fr }
-     * 
-     */
+
     public Fr createFr() {
         return new Fr();
     }
 
-    /**
-     * Create an instance of {@link Module }
-     * 
-     */
     public Module createModule() {
         return new Module();
     }
 
-    /**
-     * Create an instance of {@link Chapter }
-     * 
-     */
+ 
     public Chapter createChapter() {
         return new Chapter();
     }

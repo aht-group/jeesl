@@ -108,28 +108,7 @@ public class Security
         return (this.roles!= null);
     }
 
-    /**
-     * Gets the value of the category property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the category property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCategory().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Category }
-     * 
-     * 
-     */
+   
     public List<Category> getCategory() {
         if (category == null) {
             category = new ArrayList<Category>();

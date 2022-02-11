@@ -43,28 +43,7 @@ public class Colors
     @XmlElement(required = true)
     protected List<Color> color;
 
-    /**
-     * Gets the value of the color property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the color property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getColor().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Color }
-     * 
-     * 
-     */
+
     public List<Color> getColor() {
         if (color == null) {
             color = new ArrayList<Color>();

@@ -29,74 +29,46 @@ public class ObjectFactory {
     public ObjectFactory() {
     }
 
-    /**
-     * Create an instance of {@link Container }
-     * 
-     */
+
     public Container createContainer() {
         return new Container();
     }
 
-    /**
-     * Create an instance of {@link QuerySurvey }
-     * 
-     */
+
     public QuerySurvey createQuerySurvey() {
         return new QuerySurvey();
     }
 
-    /**
-     * Create an instance of {@link QueryAttribute }
-     * 
-     */
+
     public QueryAttribute createQueryAttribute() {
         return new QueryAttribute();
     }
 
-    /**
-     * Create an instance of {@link QueryFinance }
-     * 
-     */
+
     public QueryFinance createQueryFinance() {
         return new QueryFinance();
     }
 
-    /**
-     * Create an instance of {@link QueryTs }
-     * 
-     */
+
     public QueryTs createQueryTs() {
         return new QueryTs();
     }
 
-    /**
-     * Create an instance of {@link QueryWf }
-     * 
-     */
+
     public QueryWf createQueryWf() {
         return new QueryWf();
     }
 
-    /**
-     * Create an instance of {@link QueryCalendar }
-     * 
-     */
+
     public QueryCalendar createQueryCalendar() {
         return new QueryCalendar();
     }
 
-    /**
-     * Create an instance of {@link QueryRevision }
-     * 
-     */
+  
     public QueryRevision createQueryRevision() {
         return new QueryRevision();
     }
 
-    /**
-     * Create an instance of {@link QuerySecurity }
-     * 
-     */
     public QuerySecurity createQuerySecurity() {
         return new QuerySecurity();
     }

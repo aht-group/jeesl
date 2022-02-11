@@ -43,28 +43,7 @@ public class Usecases
     @XmlElement(required = true)
     protected List<Usecase> usecase;
 
-    /**
-     * Gets the value of the usecase property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the usecase property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getUsecase().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Usecase }
-     * 
-     * 
-     */
+   
     public List<Usecase> getUsecase() {
         if (usecase == null) {
             usecase = new ArrayList<Usecase>();

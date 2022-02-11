@@ -49,14 +49,7 @@ public class Translation
     @XmlAttribute(name = "key")
     protected String key;
 
-    /**
-     * Gets the value of the langs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Langs }
-     *     
-     */
+
     public Langs getLangs() {
         return langs;
     }

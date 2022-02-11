@@ -71,28 +71,7 @@ public class Qa
     @XmlAttribute(name = "developer")
     protected String developer;
 
-    /**
-     * Gets the value of the category property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the category property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCategory().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Category }
-     * 
-     * 
-     */
+
     public List<Category> getCategory() {
         if (category == null) {
             category = new ArrayList<Category>();
@@ -108,28 +87,7 @@ public class Qa
         this.category = null;
     }
 
-    /**
-     * Gets the value of the staff property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the staff property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getStaff().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Staff }
-     * 
-     * 
-     */
+
     public List<Staff> getStaff() {
         if (staff == null) {
             staff = new ArrayList<Staff>();
@@ -201,28 +159,7 @@ public class Qa
         return (this.groups!= null);
     }
 
-    /**
-     * Gets the value of the checklist property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the checklist property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getChecklist().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Checklist }
-     * 
-     * 
-     */
+   
     public List<Checklist> getChecklist() {
         if (checklist == null) {
             checklist = new ArrayList<Checklist>();

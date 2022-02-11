@@ -43,28 +43,7 @@ public class XlsDefinition
     @XmlElement(required = true)
     protected List<XlsWorkbook> xlsWorkbook;
 
-    /**
-     * Gets the value of the xlsWorkbook property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the xlsWorkbook property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getXlsWorkbook().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link XlsWorkbook }
-     * 
-     * 
-     */
+
     public List<XlsWorkbook> getXlsWorkbook() {
         if (xlsWorkbook == null) {
             xlsWorkbook = new ArrayList<XlsWorkbook>();

@@ -42,28 +42,7 @@ public class Queries implements Serializable
     @XmlElement(required = true)
     protected List<Query> query;
 
-    /**
-     * Gets the value of the query property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the query property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getQuery().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Query }
-     * 
-     * 
-     */
+
     public List<Query> getQuery() {
         if (query == null) {
             query = new ArrayList<Query>();

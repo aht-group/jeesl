@@ -99,28 +99,7 @@ public class DataUpdate
         return (this.result!= null);
     }
 
-    /**
-     * Gets the value of the mapper property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the mapper property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getMapper().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Mapper }
-     * 
-     * 
-     */
+
     public List<Mapper> getMapper() {
         if (mapper == null) {
             mapper = new ArrayList<Mapper>();
@@ -164,28 +143,7 @@ public class DataUpdate
         return (this.type!= null);
     }
 
-    /**
-     * Gets the value of the sync property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sync property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSync().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Sync }
-     * 
-     * 
-     */
+
     public List<Sync> getSync() {
         if (sync == null) {
             sync = new ArrayList<Sync>();

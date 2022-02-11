@@ -88,28 +88,7 @@ public class Scope
         return (this.revision!= null);
     }
 
-    /**
-     * Gets the value of the change property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the change property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getChange().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Change }
-     * 
-     * 
-     */
+   
     public List<Change> getChange() {
         if (change == null) {
             change = new ArrayList<Change>();

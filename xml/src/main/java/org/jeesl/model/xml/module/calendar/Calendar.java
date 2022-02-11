@@ -80,7 +80,7 @@ public class Calendar
         return (this.type!= null);
     }
 
-    /**
+    /*
      * Gets the value of the item property.
      * 
      * <p>

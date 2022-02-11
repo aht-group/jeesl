@@ -85,28 +85,7 @@ public class Category
         return (this.qa!= null);
     }
 
-    /**
-     * Gets the value of the test property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the test property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTest().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Test }
-     * 
-     * 
-     */
+
     public List<Test> getTest() {
         if (test == null) {
             test = new ArrayList<Test>();

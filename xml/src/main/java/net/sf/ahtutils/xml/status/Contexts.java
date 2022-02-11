@@ -50,28 +50,7 @@ public class Contexts
     @XmlAttribute(name = "size")
     protected Integer size;
 
-    /**
-     * Gets the value of the context property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the context property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getContext().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Context }
-     * 
-     * 
-     */
+   
     public List<Context> getContext() {
         if (context == null) {
             context = new ArrayList<Context>();

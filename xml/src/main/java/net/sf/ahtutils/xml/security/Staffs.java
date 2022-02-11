@@ -116,28 +116,7 @@ public class Staffs
         return (this.role!= null);
     }
 
-    /**
-     * Gets the value of the staff property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the staff property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getStaff().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Staff }
-     * 
-     * 
-     */
+   
     public List<Staff> getStaff() {
         if (staff == null) {
             staff = new ArrayList<Staff>();
@@ -153,28 +132,7 @@ public class Staffs
         this.staff = null;
     }
 
-    /**
-     * Gets the value of the staffs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the staffs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getStaffs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Staffs }
-     * 
-     * 
-     */
+  
     public List<Staffs> getStaffs() {
         if (staffs == null) {
             staffs = new ArrayList<Staffs>();

@@ -29,58 +29,37 @@ public class ObjectFactory {
     public ObjectFactory() {
     }
 
-    /**
-     * Create an instance of {@link Currency }
-     * 
-     */
+ 
     public Currency createCurrency() {
         return new Currency();
     }
 
-    /**
-     * Create an instance of {@link Figures }
-     * 
-     */
+
     public Figures createFigures() {
         return new Figures();
     }
 
-    /**
-     * Create an instance of {@link Finance }
-     * 
-     */
+
     public Finance createFinance() {
         return new Finance();
     }
 
-    /**
-     * Create an instance of {@link Time }
-     * 
-     */
+
     public Time createTime() {
         return new Time();
     }
 
-    /**
-     * Create an instance of {@link Counter }
-     * 
-     */
+
     public Counter createCounter() {
         return new Counter();
     }
 
-    /**
-     * Create an instance of {@link Signatures }
-     * 
-     */
+
     public Signatures createSignatures() {
         return new Signatures();
     }
 
-    /**
-     * Create an instance of {@link Signature }
-     * 
-     */
+
     public Signature createSignature() {
         return new Signature();
     }

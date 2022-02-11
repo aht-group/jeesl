@@ -43,28 +43,7 @@ public class AclContainer
     @XmlElement(required = true)
     protected List<RoleAutoAssign> roleAutoAssign;
 
-    /**
-     * Gets the value of the roleAutoAssign property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the roleAutoAssign property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRoleAutoAssign().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RoleAutoAssign }
-     * 
-     * 
-     */
+  
     public List<RoleAutoAssign> getRoleAutoAssign() {
         if (roleAutoAssign == null) {
             roleAutoAssign = new ArrayList<RoleAutoAssign>();

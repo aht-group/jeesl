@@ -22,73 +22,45 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.ahtutils.xml.symbol
-     * 
-     */
+
     public ObjectFactory() {
     }
 
-    /**
-     * Create an instance of {@link Graphic }
-     * 
-     */
+
     public Graphic createGraphic() {
         return new Graphic();
     }
 
-    /**
-     * Create an instance of {@link Symbol }
-     * 
-     */
+
     public Symbol createSymbol() {
         return new Symbol();
     }
 
-    /**
-     * Create an instance of {@link Colors }
-     * 
-     */
+
     public Colors createColors() {
         return new Colors();
     }
 
-    /**
-     * Create an instance of {@link Color }
-     * 
-     */
+
     public Color createColor() {
         return new Color();
     }
 
-    /**
-     * Create an instance of {@link Sizes }
-     * 
-     */
+
     public Sizes createSizes() {
         return new Sizes();
     }
 
-    /**
-     * Create an instance of {@link Size }
-     * 
-     */
+
     public Size createSize() {
         return new Size();
     }
 
-    /**
-     * Create an instance of {@link Figures }
-     * 
-     */
+
     public Figures createFigures() {
         return new Figures();
     }
 
-    /**
-     * Create an instance of {@link Figure }
-     * 
-     */
     public Figure createFigure() {
         return new Figure();
     }

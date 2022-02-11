@@ -73,28 +73,7 @@ public class Figures
     @XmlAttribute(name = "flagged")
     protected Boolean flagged;
 
-    /**
-     * Gets the value of the remark property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the remark property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRemark().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Remark }
-     * 
-     * 
-     */
+
     public List<Remark> getRemark() {
         if (remark == null) {
             remark = new ArrayList<Remark>();
@@ -110,28 +89,6 @@ public class Figures
         this.remark = null;
     }
 
-    /**
-     * Gets the value of the finance property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the finance property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFinance().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Finance }
-     * 
-     * 
-     */
     public List<Finance> getFinance() {
         if (finance == null) {
             finance = new ArrayList<Finance>();
@@ -147,28 +104,7 @@ public class Figures
         this.finance = null;
     }
 
-    /**
-     * Gets the value of the time property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the time property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTime().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Time }
-     * 
-     * 
-     */
+
     public List<Time> getTime() {
         if (time == null) {
             time = new ArrayList<Time>();
@@ -184,28 +120,7 @@ public class Figures
         this.time = null;
     }
 
-    /**
-     * Gets the value of the counter property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the counter property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCounter().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Counter }
-     * 
-     * 
-     */
+
     public List<Counter> getCounter() {
         if (counter == null) {
             counter = new ArrayList<Counter>();
@@ -221,28 +136,7 @@ public class Figures
         this.counter = null;
     }
 
-    /**
-     * Gets the value of the figures property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the figures property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFigures().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Figures }
-     * 
-     * 
-     */
+
     public List<Figures> getFigures() {
         if (figures == null) {
             figures = new ArrayList<Figures>();

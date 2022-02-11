@@ -87,28 +87,7 @@ public class Signatures
         return (this.levels!= null);
     }
 
-    /**
-     * Gets the value of the signatures property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the signatures property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSignatures().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Signatures }
-     * 
-     * 
-     */
+
     public List<Signatures> getSignatures() {
         if (signatures == null) {
             signatures = new ArrayList<Signatures>();
@@ -124,28 +103,7 @@ public class Signatures
         this.signatures = null;
     }
 
-    /**
-     * Gets the value of the signature property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the signature property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSignature().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Signature }
-     * 
-     * 
-     */
+
     public List<Signature> getSignature() {
         if (signature == null) {
             signature = new ArrayList<Signature>();

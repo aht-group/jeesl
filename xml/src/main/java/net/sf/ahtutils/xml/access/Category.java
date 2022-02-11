@@ -335,14 +335,7 @@ public class Category
         this.position = null;
     }
 
-    /**
-     * Gets the value of the visible property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
+
     public boolean isVisible() {
         return visible;
     }

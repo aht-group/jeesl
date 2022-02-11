@@ -22,49 +22,31 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.ahtutils.xml.audit
-     * 
-     */
+
     public ObjectFactory() {
     }
 
-    /**
-     * Create an instance of {@link Revisions }
-     * 
-     */
+
     public Revisions createRevisions() {
         return new Revisions();
     }
 
-    /**
-     * Create an instance of {@link Revision }
-     * 
-     */
+
     public Revision createRevision() {
         return new Revision();
     }
 
-    /**
-     * Create an instance of {@link User }
-     * 
-     */
+
     public User createUser() {
         return new User();
     }
 
-    /**
-     * Create an instance of {@link Scope }
-     * 
-     */
+
     public Scope createScope() {
         return new Scope();
     }
 
-    /**
-     * Create an instance of {@link Change }
-     * 
-     */
+
     public Change createChange() {
         return new Change();
     }

@@ -29,10 +29,7 @@ public class ObjectFactory {
     public ObjectFactory() {
     }
 
-    /**
-     * Create an instance of {@link Responsibilities }
-     * 
-     */
+
     public Responsibilities createResponsibilities() {
         return new Responsibilities();
     }

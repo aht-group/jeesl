@@ -124,14 +124,7 @@ public class Info
     @XmlElement(namespace = "http://exlp.sf.net/io", required = true)
     protected Data data;
 
-    /**
-     * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Info.Title }
-     *     
-     */
+
     public Info.Title getTitle() {
         return title;
     }
@@ -236,28 +229,7 @@ public class Info
         return (this.footer!= null);
     }
 
-    /**
-     * Gets the value of the media property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the media property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getMedia().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Media }
-     * 
-     * 
-     */
+
     public List<Media> getMedia() {
         if (media == null) {
             media = new ArrayList<Media>();
@@ -273,28 +245,7 @@ public class Info
         this.media = null;
     }
 
-    /**
-     * Gets the value of the jr property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the jr property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getJr().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Jr }
-     * 
-     * 
-     */
+
     public List<Jr> getJr() {
         if (jr == null) {
             jr = new ArrayList<Jr>();

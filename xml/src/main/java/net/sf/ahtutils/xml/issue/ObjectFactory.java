@@ -22,25 +22,16 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.ahtutils.xml.issue
-     * 
-     */
+
     public ObjectFactory() {
     }
 
-    /**
-     * Create an instance of {@link Tasks }
-     * 
-     */
+
     public Tasks createTasks() {
         return new Tasks();
     }
 
-    /**
-     * Create an instance of {@link Task }
-     * 
-     */
+
     public Task createTask() {
         return new Task();
     }

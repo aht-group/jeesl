@@ -54,28 +54,7 @@ public class Roles
     @XmlAttribute(name = "label")
     protected String label;
 
-    /**
-     * Gets the value of the roles property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the roles property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRoles().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Roles }
-     * 
-     * 
-     */
+  
     public List<Roles> getRoles() {
         if (roles == null) {
             roles = new ArrayList<Roles>();
@@ -91,28 +70,7 @@ public class Roles
         this.roles = null;
     }
 
-    /**
-     * Gets the value of the role property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the role property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRole().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Role }
-     * 
-     * 
-     */
+
     public List<Role> getRole() {
         if (role == null) {
             role = new ArrayList<Role>();

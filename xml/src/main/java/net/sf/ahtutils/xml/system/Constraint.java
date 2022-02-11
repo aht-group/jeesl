@@ -82,14 +82,7 @@ public class Constraint
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar since;
 
-    /**
-     * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Type }
-     *     
-     */
+
     public Type getType() {
         return type;
     }
@@ -166,28 +159,7 @@ public class Constraint
         return (this.descriptions!= null);
     }
 
-    /**
-     * Gets the value of the constraintAttribute property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the constraintAttribute property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getConstraintAttribute().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ConstraintAttribute }
-     * 
-     * 
-     */
+   
     public List<ConstraintAttribute> getConstraintAttribute() {
         if (constraintAttribute == null) {
             constraintAttribute = new ArrayList<ConstraintAttribute>();

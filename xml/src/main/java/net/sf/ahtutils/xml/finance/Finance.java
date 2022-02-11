@@ -69,28 +69,7 @@ public class Finance
     @XmlAttribute(name = "flagged")
     protected Boolean flagged;
 
-    /**
-     * Gets the value of the finance property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the finance property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFinance().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Finance }
-     * 
-     * 
-     */
+
     public List<Finance> getFinance() {
         if (finance == null) {
             finance = new ArrayList<Finance>();

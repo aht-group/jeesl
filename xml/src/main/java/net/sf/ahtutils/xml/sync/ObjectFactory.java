@@ -29,66 +29,39 @@ public class ObjectFactory {
     public ObjectFactory() {
     }
 
-    /**
-     * Create an instance of {@link DataUpdate }
-     * 
-     */
+
     public DataUpdate createDataUpdate() {
         return new DataUpdate();
     }
 
-    /**
-     * Create an instance of {@link Result }
-     * 
-     */
+
     public Result createResult() {
         return new Result();
     }
 
-    /**
-     * Create an instance of {@link Mapper }
-     * 
-     */
+
     public Mapper createMapper() {
         return new Mapper();
     }
 
-    /**
-     * Create an instance of {@link Sync }
-     * 
-     */
+
     public Sync createSync() {
         return new Sync();
     }
 
-    /**
-     * Create an instance of {@link Exceptions }
-     * 
-     */
+
     public Exceptions createExceptions() {
         return new Exceptions();
     }
 
-    /**
-     * Create an instance of {@link Exception }
-     * 
-     */
     public Exception createException() {
         return new Exception();
     }
 
-    /**
-     * Create an instance of {@link Mappings }
-     * 
-     */
     public Mappings createMappings() {
         return new Mappings();
     }
 
-    /**
-     * Create an instance of {@link Entity }
-     * 
-     */
     public Entity createEntity() {
         return new Entity();
     }

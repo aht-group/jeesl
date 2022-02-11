@@ -54,28 +54,7 @@ public class Aht
     @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
     protected List<User> user;
 
-    /**
-     * Gets the value of the status property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the status property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getStatus().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Status }
-     * 
-     * 
-     */
+  
     public List<Status> getStatus() {
         if (status == null) {
             status = new ArrayList<Status>();
@@ -91,28 +70,7 @@ public class Aht
         this.status = null;
     }
 
-    /**
-     * Gets the value of the currency property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the currency property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCurrency().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Currency }
-     * 
-     * 
-     */
+   
     public List<Currency> getCurrency() {
         if (currency == null) {
             currency = new ArrayList<Currency>();
@@ -128,28 +86,7 @@ public class Aht
         this.currency = null;
     }
 
-    /**
-     * Gets the value of the user property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the user property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getUser().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link User }
-     * 
-     * 
-     */
+   
     public List<User> getUser() {
         if (user == null) {
             user = new ArrayList<User>();

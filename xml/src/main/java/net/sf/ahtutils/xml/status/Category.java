@@ -161,28 +161,7 @@ public class Category
         return (this.descriptions!= null);
     }
 
-    /**
-     * Gets the value of the lang property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the lang property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLang().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Lang }
-     * 
-     * 
-     */
+   
     public List<Lang> getLang() {
         if (lang == null) {
             lang = new ArrayList<Lang>();

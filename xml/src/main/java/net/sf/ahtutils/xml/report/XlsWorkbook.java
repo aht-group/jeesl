@@ -79,28 +79,7 @@ public class XlsWorkbook
         return (this.xlsSheets!= null);
     }
 
-    /**
-     * Gets the value of the xlsSheet property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the xlsSheet property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getXlsSheet().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link XlsSheet }
-     * 
-     * 
-     */
+
     public List<XlsSheet> getXlsSheet() {
         if (xlsSheet == null) {
             xlsSheet = new ArrayList<XlsSheet>();
