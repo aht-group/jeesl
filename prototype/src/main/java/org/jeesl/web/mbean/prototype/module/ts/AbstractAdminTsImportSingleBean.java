@@ -76,8 +76,8 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 											STAT extends JeeslTsStatistic<L,D,STAT,?>,
 											DATA extends JeeslTsData<TS,TRANSACTION,SAMPLE,POINT,WS>,
 											POINT extends JeeslTsDataPoint<DATA,MP>,
-											SAMPLE extends JeeslTsSample, 
-											USER extends EjbWithId, 
+											SAMPLE extends JeeslTsSample,
+											USER extends EjbWithId,
 											WS extends JeeslStatus<L,D,WS>,
 											QAF extends JeeslStatus<L,D,QAF>,
 											CRON extends JeeslTsCron<SCOPE,INT,STAT>>
@@ -86,17 +86,17 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminTsImportSingleBean.class);
-	
+
 	private List<SCOPE> scopes; public List<SCOPE> getScopes() {return scopes;}
 	private List<EC> classes; public List<EC> getClasses() {return classes;}
 	private List<INT> intervals; public List<INT> getIntervals() {return intervals;}
 	private List<WS> workspaces; public List<WS> getWorkspaces() {return workspaces;}
 	private List<SOURCE> sources; public List<SOURCE> getSources() {return sources;}
-	
+
 	private List<EjbWithId> entities; public List<EjbWithId> getEntities() {return entities;}
 	private Map<EjbWithId,String> mapLabels; public Map<EjbWithId,String> getMapLabels() {return mapLabels;}
 	private EjbWithId entity; public EjbWithId getEntity() {return entity;} public void setEntity(EjbWithId entity) {this.entity = entity;}
-	
+
 	private CAT category;public CAT getCategory() {return category;}public void setCategory(CAT category) {this.category = category;}
 	private SCOPE scope; public SCOPE getScope() {return scope;} public void setScope(SCOPE scope) {this.scope = scope;}
 	private EC clas; public EC getClas() {return clas;} public void setClas(EC clas) {this.clas = clas;}
@@ -104,33 +104,33 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 	private WS workspace; public WS getWorkspace() {return workspace;} public void setWorkspace(WS workspace) {this.workspace = workspace;}
 	protected USER transactionUser;
 	private TRANSACTION transaction; public TRANSACTION getTransaction() {return transaction;} public void setTransaction(TRANSACTION transaction) {this.transaction = transaction;}
-	
+
 	private TimeSeries timeSeries; public TimeSeries getTimeSeries() {return timeSeries;} public void setTimeSeries(TimeSeries timeSeries) {this.timeSeries = timeSeries;}
 	private Ds chartDs; public Ds getChartDs(){return chartDs;}
-	
+
 	protected UtilsXlsDefinitionResolver xlsResolver;
 	protected File importRoot;
-	
+
 	private Comparator<Data> cTsData;
-	
+
 	public AbstractAdminTsImportSingleBean(final TsFactoryBuilder<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs) {super(fbTs);}
-	
+
 	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs, UtilsXlsDefinitionResolver xlsResolver)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		this.xlsResolver=xlsResolver;
-		
+
 		cTsData = TsDataComparator.factory(TsDataComparator.Type.date);
 		sources = fTs.all(fbTs.getClassSource());
 	}
-	
+
 	protected void initLists()
 	{
 		workspaces = fTs.all(fbTs.getClassWorkspace());
 		category = null; if(categories.size()>0){category = categories.get(0);}
 		changeCategory();
 	}
-	
+
 	public void changeCategory()
 	{
 		scope=null;
@@ -145,7 +145,7 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 			changeScope();
 		}
 	}
-	
+
 	public void changeScope()
 	{
 		clas=null;
@@ -154,15 +154,15 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 		{
 			scope = fTs.find(fbTs.getClassScope(), scope);
 			if(debugOnInfo){logger.info(AbstractLogMessage.selectOneMenuChange(scope));}
-			
+
 			classes = scope.getClasses();
 			if(classes.size()>0){clas=classes.get(0);}
-			
+
 			intervals = scope.getIntervals();
 			if(intervals.size()>0){interval=intervals.get(0);}
 		}
 	}
-	
+
 	public void changeClass()
 	{
 		if(clas!=null)
@@ -171,7 +171,7 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 			if(debugOnInfo){logger.info(AbstractLogMessage.selectOneMenuChange(clas));}
 		}
 	}
-	
+
 	public void changeInterval()
 	{
 		if(interval!=null)
@@ -180,28 +180,28 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 			if(debugOnInfo){logger.info(AbstractLogMessage.selectOneMenuChange(interval));}
 		}
 	}
-	
+
 	/**
-	 * Import Excel time series to XML objects. 
+	 * Import Excel time series to XML objects.
 	 * Excel file is stored locally, then loaded into a Apache POI object.
 	 * Then AHTUtils ExcelImporter system is configured (what information is to be put where) and used to import Excel data linewise to XML object representation.
 	 * @param event The PrimeFaces FileUpload event that contains the uploaded data and meta information
 	 * @throws java.io.FileNotFoundException
-	 */	
+	 */
 	public void uploadData(FileUploadEvent event) throws FileNotFoundException, IOException, ClassNotFoundException, Exception
 	{
-		// Store the uploaded data locally (is overwritten without asking for files with the same name) 
+		// Store the uploaded data locally (is overwritten without asking for files with the same name)
 		// and save the filename for use in log messages when saving to database
 		String filename = event.getFile().getFileName();
 		File f = new File(importRoot,filename);
 		FileOutputStream out = new FileOutputStream(f);
-		IOUtils.copy(event.getFile().getInputstream(), out);
-		
+		IOUtils.copy(event.getFile().getInputStream(), out);
+
 		// Create a new TimeSeries
 		setTimeSeries(XmlTsFactory.buildOld());
-		
+
 		// Get a new Resolver that gives you the XlsWorkbook by asking the reports.xml registry for the file
-		
+
 		// Instantiate and configure the importer
 		// ATTENTION: Do not use the primary key option here (would cause bad results)
 		ExcelSimpleSerializableImporter<Data,ImportStrategy> statusImporter = ExcelSimpleSerializableImporter.factory(xlsResolver, "TimeSeriesReport", f.getAbsolutePath());
@@ -209,9 +209,9 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 		statusImporter.setFacade(fTs);
 		statusImporter.getTempPropertyStore().put("createEntityForUnknown", true);
 		statusImporter.getTempPropertyStore().put("lookup", false);
-		  
+
 		Map<Data,ArrayList<String>> data  = statusImporter.execute(true);
-		
+
 		if(debugOnInfo){logger.info("Loaded " +data.size() +" time series data entries to be saved in the database.");}
 		timeSeries.getData().addAll(data.keySet());
 		Collections.sort(timeSeries.getData(), cTsData);
@@ -219,37 +219,37 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 		// To add the source file use this one
 		// Set the transaction
 		//setTransaction(efTransaction.build(transactionUser,getSources().get(0), excelFile));
-				
+
 		transaction = fbTs.ejbTransaction().build(transactionUser,sources.get(0), f.getName());
 		preview();
 	}
-	
+
 	public void random()
 	{
 		DateTime dt = new DateTime(new Date());
 		Random rnd = new Random();
-		
+
 		timeSeries = XmlTsFactory.buildOld();
 		for(int i=0;i<5;i++)
 		{
 			timeSeries.getData().add(XmlDataFactory.build(dt.plusDays(i).toDate(), rnd.nextInt(10)*rnd.nextDouble()));
 		}
-		
+
 		entity=null;
 		preview();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void preview()
 	{
 		entities = new ArrayList<EjbWithId>();
 		mapLabels = new HashMap<EjbWithId,String>();
-		
+
 		chartDs = McTimeSeriesFactory.build2(timeSeries);
 		try
 		{
 			Class<EjbWithId> c = (Class<EjbWithId>)Class.forName(clas.getCode()).asSubclass(EjbWithId.class);
-			
+
 			for(EjbWithId e : fTs.all(c))
 			{
 				entities.add(e);
@@ -259,35 +259,35 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 		}
 		catch (ClassNotFoundException e) {e.printStackTrace();}
 	}
-	
+
 	public void selectEntity()
 	{
 		logger.info(AbstractLogMessage.selectEntity(entity));
 	}
-	
+
 	public void importData()
 	{
 		workspace = fTs.find(fbTs.getClassWorkspace(), workspace);
 		logger.info("Import Data to "+workspace);
-		
+
 		try
 		{
 			STAT statistic = fTs.fByEnum(fbTs.getClassStat(), JeeslTsStatistic.Code.raw);
 			BRIDGE bridge = fTs.fcBridge(fbTs.getClassBridge(), clas, entity);
 			TS ts = fTs.fcTimeSeries(scope,interval,statistic,bridge);
 			logger.info("Using TS "+ts.toString());
-			
+
 			if(transaction.getSource()!=null){transaction.setSource(fTs.find(fbTs.getClassSource(),transaction.getSource()));}
 			transaction.setRecord(new Date());
 			transaction = fTs.save(transaction);
-			
+
 			List<DATA> datas = new ArrayList<DATA>();
 			for(Data data : timeSeries.getData())
 			{
 				datas.add(efData.build(workspace,ts,transaction,data));
 			}
 			fTs.save(datas);
-			
+
 			entities=null;
 			entity=null;
 			timeSeries=null;

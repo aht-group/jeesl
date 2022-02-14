@@ -43,7 +43,7 @@
 						</p:tab>
 						<p:tab id="wUpload" title="Upload Excel File">
 						    <p:panel id="pUpload" rendered="#{empty cc.attrs.bean.forbiddenScopes}" header="#{msg.aupTsUpload}" styleClass="jeeslPanel">
-								<p:fileUpload oncomplete="PF('forbiddenScopes').show();" fileUploadListener="#{cc.attrs.bean.uploadData}" mode="advanced" dragDropSupport="false"
+								<p:fileUpload oncomplete="PF('forbiddenScopes').show();" listener="#{cc.attrs.bean.uploadData}" mode="advanced" dragDropSupport="false"
                                                             update="@form" sizeLimit="10000000"  process="@form" fileLimit="1" allowTypes="/(\.|\/)(xlsx)$/" />
 						    </p:panel>
 							<p:panel id="pScopeProblemsSummary" header="#{msg.validationSummary}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.forbiddenScopes or not empty cc.attrs.bean.failedScopes}">

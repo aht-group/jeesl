@@ -119,7 +119,7 @@
 		</h:form>
 		<h:form id="fUploadInline" rendered="#{not cc.attrs.overlay}">
 			<p:fileUpload id="pfUploadOverlay" rendered="#{cc.attrs.handler.showInlineUpload}"
-				fileUploadListener="#{cc.attrs.handler.handleFileUpload}" mode="advanced" auto="true"
+				listener="#{cc.attrs.handler.handleFileUpload}" mode="advanced" auto="true"
 				dragDropSupport="false" update="#{cc.attrs.componentPrefix}:#{cc.id}:fConfirmInline #{cc.attrs.componentPrefix}:#{cc.id}:fUploadInline" multiple="false"
 				sizeLimit="#{cc.attrs.handler.storage.fileSizeLimit}" fileLimit="100">
 				<c:if test="#{not empty cc.attrs.allowTypes}"><f:attribute name="allowTypes" value="#{cc.attrs.allowTypes}"/></c:if>
@@ -162,7 +162,7 @@
 				<ui:remove>Primefaces 7</ui:remove>
 					<h:form id="fUploadOverlay">
 						<p:fileUpload id="pfUploadOverlay"	
-							fileUploadListener="#{cc.attrs.handler.handleFileUpload}" mode="advanced" auto="true"
+							listener="#{cc.attrs.handler.handleFileUpload}" mode="advanced" auto="true"
 							dragDropSupport="false" update="#{cc.attrs.componentPrefix}:#{cc.id}:fConfirm" multiple="false"
 							sizeLimit="#{cc.attrs.handler.storage.fileSizeLimit}" fileLimit="100">
 							<c:if test="#{not empty cc.attrs.allowTypes}"><f:attribute name="allowTypes" value="#{cc.attrs.allowTypes}"/></c:if>

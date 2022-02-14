@@ -177,7 +177,7 @@
 					<h:form id="fUpload" enctype="multipart/form-data">
 						<p:fileUpload styleClass="jeeslFileUpload" previewWidth="80" 
 							rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0) and cc.attrs.bean.editStage}"
-							fileUploadListener="#{cc.attrs.bean.handleFileUpload}" update=":#{cc.id}:grid"
+							listener="#{cc.attrs.bean.handleFileUpload}" update=":#{cc.id}:grid"
 							mode="advanced" dragDropSupport="false" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/" />
 					</h:form>
 					
@@ -262,7 +262,7 @@
 								<h:outputText value="#{n.role.name[localeCode].lang}"/>  
 							</p:column>
 							<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationScope}">  
-								<h:outputText value="#{n.scope.name[localeCode].lang}"/>
+								<h:outputText value="#{n.scope.name[localeCode].lang}"/>+
 							</p:column>
 							<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationTemplate}">  
 								<h:outputText value="#{n.template.name[localeCode].lang}"/>

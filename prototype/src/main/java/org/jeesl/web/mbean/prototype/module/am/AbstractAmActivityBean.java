@@ -144,7 +144,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 		if(Objects.isNull(root)) {root = efActivity.build(project, null); root.setName(project.getName());}
 
 		tree = new DefaultTreeNode(root, null);
-		List<ACTIVITY> activities = fAm.allOrderedPositionParent(fbAm.getClassActivity(),root);
+		List<ACTIVITY> activities = fAm.allOrderedPositionParent(fbAm.getClassActivity(),root,true);
 		buildTree(tree,activities);
 	}
 
@@ -153,7 +153,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 		for(ACTIVITY s : activities)
 		{
 			TreeNode n = new DefaultTreeNode(s, parent);
-			List<ACTIVITY> childActivities = fAm.allOrderedPositionParent(fbAm.getClassActivity(),s);
+			List<ACTIVITY> childActivities = fAm.allOrderedPositionParent(fbAm.getClassActivity(),s,true);
 			if(!childActivities.isEmpty()) {buildTree(n,childActivities);}
 		}
 	}
@@ -198,6 +198,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbAm.getClassActivity()));}
 		activity = efActivity.build(project.getRoot());
+		activity.setStructural(true);
 		activity.setName(efLang.createEmpty(localeCodes));
 		activity.setDescription(efDescription.createEmpty(localeCodes));
 	}

@@ -37,7 +37,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,23 +62,23 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAomViewBean.class);
-	
+
 	private JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset;
-	
+
 	@SuppressWarnings("unused")
 	private JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic;
 
 	@SuppressWarnings("unused")
 	private JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
-	
+
 	private final SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg;
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fbAsset;
-	
+
     private REALM realm;
     private RREF rref;
-    
+
     private final List<ALEVEL> levels; public List<ALEVEL> getLevels() {return levels;}
- 
+
     private ALEVEL level; public ALEVEL getLevel() {return level;} public void setLevel(ALEVEL level) {this.level = level;}
 
 	public AbstractAomViewBean(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fbAsset, SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg)
@@ -89,7 +89,7 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 
 		levels = new ArrayList<>();
 	}
-	
+
 	protected void postConstructAomView(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 									JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
 									JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
@@ -102,44 +102,44 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 		this.fGraphic=fGraphic;
 		this.realm=realm;
 	}
-	
+
 	protected void updateRealmReference(RREF rref)
 	{
 		this.rref=rref;
 		reload();
 	}
-	
+
 	private void reload()
 	{
 		levels.clear();
 		levels.addAll(fAsset.fAomViews(realm,rref));
 	}
-	
+
 	private void reset(boolean rLevel)
 	{
 		if(rLevel) {level=null;}
 	}
-	
+
 	public void selectLevel()
 	{
 		level = efLang.persistMissingLangs(fAsset, bTranslation.getLocales(),level);
 		level = efDescription.persistMissingLangs(fAsset, bTranslation.getLocales(),level);
 	}
-	
+
 	public void addLevel()
 	{
 		level = fbAsset.ejbLevel().build(realm,rref,levels);
 		level.setName(efLang.createEmpty(bTranslation.getLocales()));
 		level.setDescription(efDescription.createEmpty(bTranslation.getLocales()));
 	}
-	
+
 	public void saveLevel() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		level = fAsset.save(level);
 		reload();
 //		bCache.update(realm, rref, type);
 	}
-	
+
 	public void deleteLevel() throws JeeslLockingException
 	{
 		try
@@ -151,7 +151,7 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationInUse();}
 	}
-    
+
 	public void handleFileUpload(FileUploadEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		UploadedFile file = event.getFile();
@@ -163,7 +163,7 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 			g = fAsset.save(g);
 			level.setGraphic(g);
 			level = fAsset.save(level);
-			level.getGraphic().setData(file.getContents());
+			level.getGraphic().setData(file.getContent());
 			level = fAsset.save(level);
 		}
 		else
@@ -177,6 +177,6 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 //			catch (JeeslNotFoundException e) {e.printStackTrace();}
 		}
 	}
-	
+
 	public void reorder() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fAsset,levels);}
 }

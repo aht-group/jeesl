@@ -71,7 +71,7 @@ import org.metachart.processor.graph.ColorSchemeManager;
 import org.metachart.processor.graph.Graph2DotConverter;
 import org.metachart.xml.graph.Graph;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -467,7 +467,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 			stage = fWorkflow.save(stage);
 		}
 
-		graphic.setData(file.getContents());
+		graphic.setData(file.getContent());
 		graphic = fWorkflow.save(graphic);
 	}
 

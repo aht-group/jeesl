@@ -47,7 +47,7 @@ import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.TreeDragDropEvent;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,17 +72,17 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAssetTypeBean.class);
-	
+
 	private JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset;
 	private JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic;
-	
+
 	private JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,ETYPE,UP> bCache;
-	
+
 	private final SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg;
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fbAsset;
 
 	private final SbSingleHandler<VIEW> sbhView; public SbSingleHandler<VIEW> getSbhView() {return sbhView;}
-	
+
 	private TreeNode tree; public TreeNode getTree() {return tree;}
     private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
 
@@ -93,13 +93,13 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 
 	public AbstractAssetTypeBean(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fbAsset, SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg)
 	{
-		super(fbAsset.getClassL(),fbAsset.getClassD());	
+		super(fbAsset.getClassL(),fbAsset.getClassD());
 		this.fbAsset=fbAsset;
 		this.fbSvg=fbSvg;
 		sbhView = new SbSingleHandler<>(fbAsset.getClassAssetLevel(),this);
-		
+
 	}
-	
+
 	protected void postConstructAssetType(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 									JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,ETYPE,UP> bCache,
 									JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
@@ -112,7 +112,7 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 		this.fGraphic=fGraphic;
 		this.realm=realm;
 	}
-	
+
 	protected void updateRealmReference(RREF rref)
 	{
 		this.rref=rref;
@@ -125,31 +125,31 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 		sbhView.setDefault();
 		reloadTree();
 	}
-	
+
 	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadTree();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void reloadTree()
 	{
 		List<Long> expandedNodes = TreeHelper.findNodes(this.tree, node -> node.isExpanded()).stream().map(node -> (ATYPE)node.getData()).filter(data -> data != null).map(data -> data.getId()).collect(Collectors.toList());
-		
+
 		root = fAsset.fcAomRootType(realm,rref,sbhView.getSelection());
-		
+
 		tree = new DefaultTreeNode();
 		this.type = null;
 		TreeHelper.buildTree(this.fAsset, this.tree, this.fAsset.allForParent(this.fbAsset.getClassAssetType(), this.root), this.fbAsset.getClassAssetType());
-		
+
 		TreeHelper.findNodes(this.tree, node -> node.getData() != null && expandedNodes.contains(((ATYPE)node.getData()).getId())).forEach(node -> node.setExpanded(true));
 	}
-	
+
 	private void reset(boolean rType)
 	{
 		if(rType) {type=null;}
 	}
-	
+
 	public void addType()
 	{
 		ATYPE parent=null; if(type!=null) {parent = type;} else {parent = root;}
@@ -157,7 +157,7 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 		type.setName(efLang.createEmpty(bTranslation.getLocales()));
 		type.setDescription(efDescription.createEmpty(bTranslation.getLocales()));
 	}
-	
+
 	public void cancelType()
 	{
 		if (this.node != null)
@@ -166,14 +166,14 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 		}
 		this.type = null;
 	}
-	
+
 	public void saveType() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		type = fAsset.save(type);
 		reloadTree();
 		bCache.update(realm,rref,sbhView.getSelection(),type);
 	}
-	
+
 	public void deleteType() throws JeeslLockingException
 	{
 		try
@@ -185,10 +185,10 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationInUse();}
 	}
-	
+
 	public void onNodeExpand(NodeExpandEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}
     public void onNodeCollapse(NodeCollapseEvent event) {if(debugOnInfo) {logger.info("Collapsed "+event.getTreeNode().toString());}}
-	
+
 	@SuppressWarnings("unchecked")
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
@@ -217,7 +217,7 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 		type = efLang.persistMissingLangs(fAsset,bTranslation.getLocales(),type);
 		type = efDescription.persistMissingLangs(fAsset,bTranslation.getLocales(),type);
     }
-    
+
 	public void handleFileUpload(FileUploadEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		UploadedFile file = event.getFile();
@@ -229,7 +229,7 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 			g = fAsset.save(g);
 			type.setGraphic(g);
 			type = fAsset.save(type);
-			type.getGraphic().setData(file.getContents());
+			type.getGraphic().setData(file.getContent());
 			type = fAsset.save(type);
 		}
 		else
@@ -237,7 +237,7 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 			try
 			{
 				G g = fGraphic.fGraphic(fbAsset.getClassAssetType(),type);
-				g.setData(file.getContents());
+				g.setData(file.getContent());
 				fAsset.save(g);
 			}
 			catch (JeeslNotFoundException e) {e.printStackTrace();}

@@ -33,13 +33,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithImage;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.system.option.JeeslOptionRest;
 import org.jeesl.interfaces.model.system.option.JeeslOptionRestDescription;
 import org.jeesl.interfaces.model.system.option.JeeslOptionRestDownload;
 import org.jeesl.interfaces.model.system.option.JeeslOptionUploadable;
 import org.jeesl.interfaces.model.with.parent.EjbWithParent;
-import org.jeesl.interfaces.model.with.primitive.bool.EjbWithLocked;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
@@ -56,7 +54,7 @@ import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.db.updater.JeeslDbGraphicUpdater;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -157,18 +155,19 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 		super.updateSecurity2(jsfSecurityHandler, viewCode);
 	}
 
+	@Override
 	protected void updateUiForCategory()
 	{
 		super.updateUiForCategory();
-		
+
 		supportsUpload = JeeslOptionUploadable.class.isAssignableFrom(optionClass);
-		
+
 		supportsDescription = JeeslOptionRestDescription.class.isAssignableFrom(optionClass);
 		supportsImage = JeeslStatusWithImage.class.isAssignableFrom(optionClass);
 		supportsGraphic = EjbWithGraphic.class.isAssignableFrom(optionClass);
-		
+
 		supportsFigure = EjbWithGraphicFigure.class.isAssignableFrom(optionClass);
-		
+
 	}
 
 	@Override
@@ -388,7 +387,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	{
 		UploadedFile file = event.getFile();
 		logger.info("Received file with a size of " +file.getSize());
-		((EjbWithGraphic<G>)status).getGraphic().setData(file.getContents());
+		((EjbWithGraphic<G>)status).getGraphic().setData(file.getContent());
 	}
 
 //	@Override

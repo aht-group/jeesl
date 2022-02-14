@@ -55,7 +55,7 @@
 				<aht:slot id="sImport" width="7">
 					<h:form id="fUpload" rendered="#{(not empty cc.attrs.bean.clas) and (not empty cc.attrs.bean.interval)}">
 						<p:panel id="pLang" header="#{msg.aupTsUpload}" styleClass="jeeslPanel">
-							<p:fileUpload fileUploadListener="#{cc.attrs.bean.uploadData}" mode="advanced" dragDropSupport="false"
+							<p:fileUpload listener="#{cc.attrs.bean.uploadData}" mode="advanced" dragDropSupport="false"
                                update=":#{cc.id}:rowVis :#{cc.id}:sImport" sizeLimit="10000000" process="@form" fileLimit="1" allowTypes="/(\.|\/)(xlsx)$/" />
 						</p:panel>
 					</h:form>

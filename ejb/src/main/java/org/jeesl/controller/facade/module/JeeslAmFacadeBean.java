@@ -1,5 +1,6 @@
 package org.jeesl.controller.facade.module;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
@@ -7,6 +8,7 @@ import java.util.Stack;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
@@ -20,6 +22,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,6 +80,32 @@ public class JeeslAmFacadeBean<L extends JeeslLang,D extends JeeslDescription,LO
 				prepareDeleteStack(childActivity,stack);
 			}
 		}
+	}
+
+	@Override
+	public <T extends EjbWithPositionParent, P extends EjbWithId> List<T> allOrderedPositionParent(Class<T> cl, P parent, boolean structural)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<T> cQ = cB.createQuery(cl);
+		Root<T> from = cQ.from(cl);
+
+		CriteriaQuery<T> select = cQ.select(from);
+
+		Path<Object> pathVisible = from.get("visible");
+		Path<Boolean> pathStructural = from.get("structural");
+		Expression<Date> eOrder = from.get("position");
+		select.orderBy(cB.asc(eOrder));
+
+		try
+		{
+			T prototype = cl.newInstance();
+			Path<Object> p1Path = from.get(prototype.resolveParentAttribute());
+			select.where(cB.and(cB.equal(p1Path, parent.getId()),cB.equal(pathVisible, true), cB.equal(pathStructural, structural)));
+		}
+		catch (InstantiationException e) {e.printStackTrace();}
+		catch (IllegalAccessException e) {e.printStackTrace();}
+
+		return em.createQuery(select).getResultList();
 	}
 
 	@Override

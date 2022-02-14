@@ -5,7 +5,7 @@ import org.primefaces.model.TreeNode;
 
 public interface JeeslTreeReport <REPORT extends JeeslIoReport<?,?,?,?>>
 			extends JeeslReport<REPORT>
-{		
+{
 	void buildTree();
 	TreeNode getTree();
 }

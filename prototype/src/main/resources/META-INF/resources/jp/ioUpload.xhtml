@@ -18,7 +18,7 @@
 	<composite:implementation>
 		<aht:slot width="7">
 			<h:form id="fUpload">
-				<p:fileUpload fileUploadListener="#{cc.attrs.bean.handleFileUpload}" mode="advanced" auto="true"
+				<p:fileUpload listener="#{cc.attrs.bean.handleFileUpload}" mode="advanced" auto="true"
 				dragDropSupport="false" update=":#{cc.id}:fConfirm" multiple="false"
 				sizeLimit="10000000" fileLimit="100" allowTypes="#{lcfUploadBean.allowedUploadTypes}" />
 			</h:form>

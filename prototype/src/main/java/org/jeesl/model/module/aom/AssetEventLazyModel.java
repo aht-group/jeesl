@@ -17,6 +17,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.jsf.util.JeeslLazyListHandler;
+import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
@@ -35,11 +36,11 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 
 	private final List<EVENT> list;
 	private final JeeslLazyListHandler<EVENT> llh;
-	
+
 	private final Comparator<EVENT> cpEvent;
 	private final ThMultiFilterHandler<ETYPE> thfEventType;
 	private final SbMultiHandler<ETYPE> sbEventType;
-	
+
 	public AssetEventLazyModel(Comparator<EVENT> cpEvent, ThMultiFilterHandler<ETYPE> thfEventType, SbMultiHandler<ETYPE> sbEventType)
 	{
 		this.cpEvent=cpEvent;
@@ -48,11 +49,11 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
         llh = new JeeslLazyListHandler<>();
         list = new ArrayList<>();
 	}
-	
+
 	@Override public EVENT getRowData(String rowKey){return llh.getRowData(list,rowKey);}
     @Override public Object getRowKey(EVENT account) {return llh.getRowKey(account);}
     public void clear() {list.clear();}
-	
+
     public void reloadScope(JeeslAssetFacade<?,?,?,?,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,USER,?,?> fAsset, ASSET asset)
     {
 		this.clear();
@@ -72,7 +73,7 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 		}
     }
 
-	@Override public List<EVENT> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,Object> filters)
+	@Override public List<EVENT> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
 	{
 		llh.clear();
 		for(EVENT event : list)
@@ -84,10 +85,10 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 //			if(filter.matches(filters,item))
 			if(thfTypeMatches || sbhTypeMatches){llh.add(event);}
 		}
-		
+
 		if(sortField != null)
 		{
-          
+
 		}
 		else
 		{
@@ -96,7 +97,7 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 		}
 
 		this.setRowCount(llh.size());
-		
+
 		List<EVENT> x = llh.paginator(first,pageSize);
 		logger.info("Rows "+this.getRowCount()+" x:"+x.size());
 		return x;

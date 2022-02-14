@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
-import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
+import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.date.EjbWithDateRange;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
@@ -20,10 +20,10 @@ public interface JeeslAmActivity <L extends JeeslLang, D extends JeeslDescriptio
 							REALM extends JeeslTenantRealm<L,D,REALM,?>,
 							ACTIVITY extends JeeslAmActivity<L,D,REALM,ACTIVITY,PROJ>,
 							PROJ extends JeesAmProject<L,D,REALM,ACTIVITY,PROJ>>
-			extends Serializable,EjbSaveable,EjbRemoveable,
+			extends Serializable,EjbSaveable,EjbRemoveable,EjbWithCode,
 					EjbWithPosition,EjbWithParentAttributeResolver,
 					EjbWithLang<L>,EjbWithDescription<D>,EjbWithDateRange,
-					EjbWithNonUniqueCode,EjbWithPositionParent
+					EjbWithPositionParent
 
 {
 	public enum Attributes{realm,parent}
@@ -39,9 +39,10 @@ public interface JeeslAmActivity <L extends JeeslLang, D extends JeeslDescriptio
 	void setParent(ACTIVITY parent);
 	PROJ getProject();
 	void setProject(PROJ project);
+	public Boolean getStructural();
+	public void setStructural(Boolean structural);
 	Date getPlannedStartDate();
 	void setPlannedStartDate(Date plannedStartDate);
 	Date getPlannedEndDate();
 	void setPlannedEndDate(Date plannedEndDate);
-
 }

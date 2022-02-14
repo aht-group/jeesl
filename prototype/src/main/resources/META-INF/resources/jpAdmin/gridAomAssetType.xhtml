@@ -56,7 +56,7 @@
 			</h:form>
 			<h:form id="fUpload" enctype="multipart/form-data" rendered="#{(not empty cc.attrs.bean.type) and (cc.attrs.bean.type.id gt 0)}">
 				<p:fileUpload styleClass="jeeslFileUpload"
-								fileUploadListener="#{cc.attrs.bean.handleFileUpload}" mode="advanced" dragDropSupport="false"
+								listener="#{cc.attrs.bean.handleFileUpload}" mode="advanced" dragDropSupport="false"
 								update=":#{cc.id}:sType" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/" />
 			</h:form>
 		</j:slot>

@@ -33,12 +33,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.status.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.system.option.JeeslOptionRest;
-import org.jeesl.interfaces.model.system.option.JeeslOptionRestDownload;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
-import org.jeesl.interfaces.model.with.primitive.bool.EjbWithLocked;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
@@ -50,7 +47,7 @@ import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.db.updater.JeeslDbMcsStatusUpdater;
 import org.primefaces.event.FileUploadEvent;
-import org.primefaces.model.UploadedFile;
+import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -151,6 +148,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 //		if(rEntity) {entity=null;}
 //	}
 
+	@Override
 	protected void updateUiForCategory()
 	{
 		super.updateUiForCategory();
@@ -344,7 +342,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 	{
 		UploadedFile file = event.getFile();
 		logger.info("Received file with a size of " +file.getSize());
-		((EjbWithGraphic<G>)status).getGraphic().setData(file.getContents());
+		((EjbWithGraphic<G>)status).getGraphic().setData(file.getContent());
 	}
 
 	@SuppressWarnings("unchecked")
