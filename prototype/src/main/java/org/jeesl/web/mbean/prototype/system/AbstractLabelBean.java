@@ -71,7 +71,6 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	{
 		th = new TranslationHandler<>(fRevision, fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
 		th.reloadFromDb();
-		th.saveToFile(fTmpCache);
 				
 		if(fbRevision!=null)
 		{
@@ -81,13 +80,8 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	
 	protected void postConstructFile(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, File fTmpCache)
 	{
-		th = new TranslationHandler<>(fRevision, fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
-		th.reloadFromDb();
-		
-		if(fbRevision!=null)
-		{
-			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);
-		}
+		this.postConstructDb(fRevision,fTmpCache);
+		// This is only for caompatibility during PF8
 	}
 
 	protected void addLocales(List<LOC> locs) {for(LOC loc : locs) {addLocale(loc);}}

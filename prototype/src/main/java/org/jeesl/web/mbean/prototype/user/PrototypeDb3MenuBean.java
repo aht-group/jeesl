@@ -175,7 +175,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 				}
 			}
 		}
-		logger.info("Key: "+key+" list "+list.size());
 		Collections.reverse(list);
 		return list;
 	}
