@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,12 +17,14 @@ import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.JeeslLogFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.LogFactoryBuilder;
 import org.jeesl.interfaces.model.module.diary.JeeslLogBook;
 import org.jeesl.interfaces.model.module.diary.JeeslLogConfidentiality;
 import org.jeesl.interfaces.model.module.diary.JeeslLogImpact;
 import org.jeesl.interfaces.model.module.diary.JeeslLogItem;
 import org.jeesl.interfaces.model.module.diary.JeeslLogScope;
+import org.jeesl.interfaces.model.module.diary.JeeslWithDiary;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -50,6 +53,21 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 	{
 		super(em);
 		this.fbLog=fbLog;
+	}
+	
+	public <OWNER extends JeeslWithDiary<LOG>> OWNER fDiaryOwner(Class<OWNER> cOwner, LOG diary) throws JeeslNotFoundException
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<OWNER> cQ = cB.createQuery(cOwner);
+		Root<OWNER> owner = cQ.from(cOwner);
+        
+        Path<LOG> pDiary = owner.get(JeeslWithDiary.Attributes.log.toString());   
+        CriteriaQuery<OWNER> select = cQ.select(owner);
+	    select.where(cB.equal(pDiary,diary));
+
+		TypedQuery<OWNER> q = em.createQuery(cQ); 
+		try	{return q.getSingleResult();}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+cOwner.getSimpleName()+" found for code:"+owner.toString());}
 	}
 	
 	@Override
