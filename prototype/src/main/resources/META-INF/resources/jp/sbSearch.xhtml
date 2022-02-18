@@ -58,11 +58,11 @@
 							<p:outputPanel class="ui-selectonemenu-item-text">
 								<composite:renderFacet name="resultList"/>
 							</p:outputPanel>
-							<div class="jeesl-field-tip">
+							<h:panelGroup layout="block" styleClass="jeesl-field-tip" rendered="#{not empty cc.facets.resultDetail}">
 		            			<div class="jeesl-field-tip-content">
 									<composite:renderFacet name="resultDetail"/>
 								</div>
-							</div>
+							</h:panelGroup>
 						</li>
 		        	</ui:repeat>
 				</ul>

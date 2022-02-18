@@ -279,6 +279,68 @@ $enable-pointer-cursor-for-buttons: true;
 			.jeesl-dropdown-list {
 				pointer-events: all;
 			}
+
+			.ui-inputgroup {
+				pointer-events: all;
+			}
+					
+			.jeesl-overlay-container {
+				@include overlay;
+				
+				pointer-events: all;
+				top: 100%;
+				
+				.jeesl-overlay-wrapper .ui-selectonemenu-list {
+					@include select-list(ui-selectonemenu);
+					
+					overflow: hidden;
+				
+					.ui-selectonemenu-item {
+						height: auto;
+						
+						&.jeesl-active {
+							.ui-selectonemenu-item-text {
+								background: statusBackgroundGradient($element-height);
+							}
+						}
+						
+						&:after {
+							margin: 0;
+						}
+						
+						.ui-selectonemenu-item-text {
+							font-weight: $font-weight-bold;
+							height: $element-height;
+							line-height: $element-height;
+						}
+					
+						.jeesl-field-tip {
+							font-size: $font-size;
+							height: 0;
+							margin-top: 0;
+							overflow: hidden;
+							position: relative;
+							transition: height .2s linear;
+							width: 100%;
+							
+							.jeesl-field-tip-content {
+								@include overlay;
+								
+								box-shadow: none;
+								padding: 0 $wide-spacing;
+								position: relative;
+								opacity: 1;
+								top: 0;
+								
+								.jeesl-grid {
+									margin: 0;
+									padding-bottom: 5px;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }
