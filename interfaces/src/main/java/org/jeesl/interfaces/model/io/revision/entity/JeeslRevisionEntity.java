@@ -29,6 +29,9 @@ public interface JeeslRevisionEntity<L extends JeeslLang, D extends JeeslDescrip
 {
 	public enum Attributes {category,attributes}
 
+//	String getJscn();
+//	void setJscn();
+	
 	RC getCategory();
 	void setCategory(RC category);
 

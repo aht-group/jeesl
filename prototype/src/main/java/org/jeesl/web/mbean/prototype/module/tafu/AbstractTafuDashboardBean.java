@@ -87,9 +87,6 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	private SC emptyScope;
 	private LocalDate ldBegin,ldEnd;
 	
-	private Date tmpShow; public Date getTmpShow() {return tmpShow;}public void setTmpShow(Date tmpShow) {this.tmpShow = tmpShow;}
-	private Date tmpDue; public Date getTmpDue() {return tmpDue;} public void setTmpDue(Date tmpDue) {this.tmpDue = tmpDue;}
-	
 	public AbstractTafuDashboardBean(TafuFactoryBuilder<L,D,R,T,TS,SC,VP,DOW,M,MT> fbTafu)
 	{
 		super(fbTafu.getClassL(),fbTafu.getClassD());	
@@ -226,8 +223,6 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	public void selectTask()
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(task));}
-		tmpShow = java.sql.Date.valueOf(task.getRecordShow());
-		tmpDue=null; if(task.getRecordDue()!=null) {tmpDue = java.sql.Date.valueOf(task.getRecordDue());}
 		
 		if(task.getMarkup()==null)
 		{
@@ -257,15 +252,11 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 		task = efTask.build(realm,rref,type);
 		task.setStatus(fTafu.fByEnum(fbTafu.getClassStatus(),JeeslTafuStatus.Code.open));
-		tmpShow = java.sql.Date.valueOf(task.getRecordShow());
-		tmpDue=null; if(task.getRecordDue()!=null) {tmpDue = java.sql.Date.valueOf(task.getRecordDue());}
 	}
 	
 	public void saveTask() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(task));}
-		task.setRecordShow(tmpShow.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-		task.setRecordDue(null); if(tmpDue!=null) {task.setRecordDue(tmpDue.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());}
 		
 		efTask.converter(fTafu,task);
 		efTask.preSave(fTafu,task);
