@@ -23,4 +23,14 @@ public interface JeeslIoSsiMapping <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	public ENTITY getJson();
 	public void setJson(ENTITY json);
+	
+	
+	public ENTITY getClassA();
+	public void setClassA(ENTITY classA);
+	
+	public ENTITY getClassB();
+	public void setClassB(ENTITY classB);
+	
+	public ENTITY getClassC();
+	public void setClassC(ENTITY classC);
 }

@@ -41,7 +41,7 @@
 						<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiMappingClass}"/></f:facet>
 						<h:outputText value="#{m.entity.name[localeCode].lang}"/>
 					</p:column>
-				    <p:columns var="l" value="#{cc.attrs.bean.thLink.listB}" columnIndexVar="colIndex" styleClass="jeeslCenter">
+				    <p:columns var="l" value="#{cc.attrs.bean.links}" columnIndexVar="colIndex" styleClass="jeeslCenter">
 						<f:facet name="header">
 							<h:outputText value="#{l.name[localeCode].lang}"/>
 							<br/>

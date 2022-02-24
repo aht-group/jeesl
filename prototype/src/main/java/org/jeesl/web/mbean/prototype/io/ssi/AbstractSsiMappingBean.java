@@ -46,13 +46,16 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	private final JsonTuple2Handler<MAPPING,LINK> thLink; public JsonTuple2Handler<MAPPING,LINK> getThLink() {return thLink;}
 	
 	private final List<MAPPING> mappings; public List<MAPPING> getMappings() {return mappings;}
-
+	private final List<LINK> links; public List<LINK> getLinks() {return links;}
+	
 	private MAPPING mapping; public MAPPING getMapping() {return mapping;} public void setMapping(MAPPING mapping) {this.mapping = mapping;}
 
 	public AbstractSsiMappingBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi)
 	{
 		this.fbSsi=fbSsi;
-		mappings = new ArrayList<MAPPING>();
+		mappings = new ArrayList<>();
+		links = new ArrayList<>();
+		
 		thMapping = new JsonTuple1Handler<>(fbSsi.getClassMapping());
 		thLink = new JsonTuple2Handler<>(fbSsi.getClassMapping(),fbSsi.getClassLink());
 	}
@@ -60,6 +63,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	public void postConstructSsiMapping(JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST> fSsi)
 	{
 		this.fSsi=fSsi;
+		links.addAll(fSsi.all(fbSsi.getClassLink()));
 		reload();
 	}
 
@@ -68,12 +72,12 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 		mappings.clear();
 		mappings.addAll(fSsi.all(fbSsi.getClassMapping()));
 		
-		thMapping.init(fSsi.tpMapping());
-		thLink.init(fSsi.tpMappingLink());
-		for(LINK  l: thLink.getListB())
-		{
-			logger.info(l.getCode());
-		}
+//		thMapping.init(fSsi.tpMapping());
+//		thLink.init(fSsi.tpMappingLink());
+//		for(LINK  l : thLink.getListB())
+//		{
+//			logger.info(l.getCode());
+//		}
 	}
 	
 	public void selectMapping()
