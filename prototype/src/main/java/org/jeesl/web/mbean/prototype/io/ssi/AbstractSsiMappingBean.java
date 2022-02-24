@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
+import org.jeesl.controller.handler.system.io.log.DebugLoggerHandler;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
+import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
@@ -39,12 +44,15 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiMappingBean.class);
 	
+	protected JeeslLogger jogger;
+	
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi;
 	private JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST> fSsi;
 	
 	private final JsonTuple1Handler<MAPPING> thMapping; public JsonTuple1Handler<MAPPING> getThMapping() {return thMapping;}
 	private final JsonTuple2Handler<MAPPING,LINK> thLink; public JsonTuple2Handler<MAPPING,LINK> getThLink() {return thLink;}
 	
+	private final List<ENTITY> entities; public List<ENTITY> getEntities() {return entities;}
 	private final List<MAPPING> mappings; public List<MAPPING> getMappings() {return mappings;}
 	private final List<LINK> links; public List<LINK> getLinks() {return links;}
 	
@@ -55,15 +63,23 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 		this.fbSsi=fbSsi;
 		mappings = new ArrayList<>();
 		links = new ArrayList<>();
+		entities = new ArrayList<>();
 		
 		thMapping = new JsonTuple1Handler<>(fbSsi.getClassMapping());
 		thLink = new JsonTuple2Handler<>(fbSsi.getClassMapping(),fbSsi.getClassLink());
+		
+		jogger = DebugLoggerHandler.instance(this.getClass());
 	}
 
 	public void postConstructSsiMapping(JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST> fSsi)
-	{
+	{	
 		this.fSsi=fSsi;
 		links.addAll(fSsi.all(fbSsi.getClassLink()));
+		jogger.milestone(fbSsi.getClassLink().getSimpleName(),null,links.size());
+		
+		entities.addAll(fSsi.all(fbSsi.getClassEntity()));
+		jogger.milestone(fbSsi.getClassEntity().getSimpleName(),null,entities.size());
+		
 		reload();
 	}
 
@@ -71,6 +87,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	{
 		mappings.clear();
 		mappings.addAll(fSsi.all(fbSsi.getClassMapping()));
+		jogger.milestone(fbSsi.getClassMapping().getSimpleName(),null,mappings.size());
 		
 //		thMapping.init(fSsi.tpMapping());
 //		thLink.init(fSsi.tpMappingLink());
@@ -88,5 +105,12 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	public void addMapping()
 	{
 		mapping = fbSsi.ejbMapping().build(null);
+	}
+	
+	public void saveMapping() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		fbSsi.ejbMapping().converter(fSsi,mapping);
+		mapping = fSsi.save(mapping);
+		EjbIdFactory.replace(mappings,mapping);
 	}
 }

@@ -173,4 +173,10 @@ public class EjbIdFactory
 		else if(a==null && b!=null) {return false;}
 		else {return a.equals(b);}
 	}
+	
+	public static <T extends EjbWithId> void replace(List<T> list, T ejb)
+	{
+		int index = list.indexOf(ejb);
+		if(index>=0) {list.set(index,ejb);}
+	}
 }

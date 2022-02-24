@@ -26,27 +26,43 @@
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectMapping()}" update=":#{cc.id}:rowDetail"/>
-					<p:column styleClass="jeeslRight">
-				    	<h:outputText value="#{cc.attrs.bean.thMapping.mapA[m].count}"><f:convertNumber type="number"/></h:outputText>
-				    </p:column>
-					<p:column>
-						<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiSystem}"/></f:facet>
-						<h:outputText value="#{m.system.code}"/>
-					</p:column>
-					<p:column>
-						<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiJsonClass}"/></f:facet>
-						<h:outputText value="#{m.json.name[localeCode].lang}"/>
-					</p:column>
-					<p:column>
-						<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiMappingClass}"/></f:facet>
-						<h:outputText value="#{m.entity.name[localeCode].lang}"/>
-					</p:column>
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column colspan="4"><f:facet name="header"></f:facet></p:column>
+							<p:column colspan="3"><f:facet name="header"><h:outputText value="Grouping"/></f:facet></p:column>
+							<p:column colspan="#{cc.attrs.bean.links.size()}"><f:facet name="header"><h:outputText value="#{msg.jeeslCount}"/></f:facet></p:column>
+                   		</p:row>
+                   		<p:row>
+							<p:column colspan="1"><f:facet name="header"></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiSystem}"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiJsonClass}"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiMappingClass}"/></f:facet></p:column>
+							
+							<p:column colspan="1"><f:facet name="header"><h:outputText value="A"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><h:outputText value="B"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><h:outputText value="C"/></f:facet></p:column>
+							
+							<p:columns var="l" value="#{cc.attrs.bean.links}" columnIndexVar="colIndex" styleClass="jeeslCenter">
+								<f:facet name="header">
+									<h:outputText value="#{l.name[localeCode].lang}"/>
+									<br/>
+									<jtp:symbolizer value="#{l}"/>
+								</f:facet>
+							</p:columns>
+                   		</p:row>
+      			     </p:columnGroup>
+      			     
+					<p:column styleClass="jeeslRight"><h:outputText value="#{cc.attrs.bean.thMapping.mapA[m].count}"><f:convertNumber type="number"/></h:outputText></p:column>
+					<p:column><h:outputText value="#{m.system.code}"/></p:column>
+					<p:column><h:outputText value="#{m.json.name[localeCode].lang}"/></p:column>
+					<p:column><h:outputText value="#{m.entity.name[localeCode].lang}"/></p:column>
+					
+					<p:column><h:outputText value="#{m.classA.name[localeCode].lang}"/></p:column>
+					<p:column><h:outputText value="#{m.classB.name[localeCode].lang}"/></p:column>
+					<p:column><h:outputText value="#{m.classC.name[localeCode].lang}"/></p:column>
+					
+					
 				    <p:columns var="l" value="#{cc.attrs.bean.links}" columnIndexVar="colIndex" styleClass="jeeslCenter">
-						<f:facet name="header">
-							<h:outputText value="#{l.name[localeCode].lang}"/>
-							<br/>
-							<jtp:symbolizer value="#{l}"/>
-						</f:facet>
 						<h:outputText value="#{cc.attrs.bean.thLink.map[m][l].count1}"/>
 					</p:columns>
 				</p:dataTable>
@@ -78,6 +94,25 @@
 						
 						<p:outputLabel value="Entity.code"/>
 						<h:outputText value="#{cc.attrs.bean.mapping.entity.code}"/>
+						
+						<p:outputLabel value="#{msg.jeeslRevisionEntity}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.mapping.classA}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
+									<f:selectItem itemLabel="--"/>
+							<f:selectItems value="#{cc.attrs.bean.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
+							<p:column>
+								<h:outputText value="#{var.category.position}.#{var.position}" />
+							</p:column>
+							<p:column headerText="#{msg.aupCategory}">
+								<h:outputText value="#{var.category.name[localeCode].lang}" />
+							</p:column>
+							<p:column headerText="#{msg.jeeslRevisionDiagramShort}">
+								<h:outputText value="#{var.diagram.name[localeCode].lang}" />
+							</p:column>
+							<p:column headerText="#{msg.jeeslRevisionEntity}">
+								<h:outputText value="#{var.name[localeCode].lang}" />
+							</p:column>
+		
+						</p:selectOneMenu>
 					</p:panelGrid>
 					
 				</p:panel>

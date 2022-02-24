@@ -1,5 +1,7 @@
 package org.jeesl.factory.ejb.io.ssi.data;
 
+import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
+import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
@@ -8,11 +10,11 @@ public class EjbIoSsiMappingFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
 										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 {
-	private final Class<MAPPING> cMapping;
+	private final IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,ENTITY,?> fbSsi;
 
-	public EjbIoSsiMappingFactory(final Class<MAPPING> cMapping)
+	public EjbIoSsiMappingFactory(IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,ENTITY,?> fbSsi)
 	{
-        this.cMapping = cMapping;
+        this.fbSsi = fbSsi;
 	}
 	
 	public MAPPING build(SYSTEM system)
@@ -20,12 +22,19 @@ public class EjbIoSsiMappingFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		MAPPING ejb = null;
 		try
 		{
-			ejb = cMapping.newInstance();
+			ejb = fbSsi.getClassMapping().newInstance();
 			ejb.setSystem(system);
 	       
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		return ejb;
+	}
+	
+	public void converter(JeeslFacade facade, MAPPING ejb)
+	{
+		if(ejb.getClassA()!=null) {ejb.setClassA(facade.find(fbSsi.getClassEntity(),ejb.getClassA()));}
+		if(ejb.getClassB()!=null) {ejb.setClassB(facade.find(fbSsi.getClassEntity(),ejb.getClassB()));}
+		if(ejb.getClassC()!=null) {ejb.setClassC(facade.find(fbSsi.getClassEntity(),ejb.getClassC()));}
 	}
 }

@@ -49,7 +49,7 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 		this.cCleaning=cCleaning;
 	}
 
-	public EjbIoSsiMappingFactory<SYSTEM,MAPPING,ENTITY> ejbMapping() {return new EjbIoSsiMappingFactory<>(cMapping);}
+	public EjbIoSsiMappingFactory<SYSTEM,MAPPING,ENTITY> ejbMapping() {return new EjbIoSsiMappingFactory<>(this);}
 	public EjbIoSsiAttributeFactory<MAPPING,ATTRIBUTE,ENTITY> ejbAttribute() {return new EjbIoSsiAttributeFactory<>(cAttribute);}
 	public EjbIoSsiDataFactory<MAPPING,DATA,LINK> ejbData() {return new EjbIoSsiDataFactory<>(cData);}
 }
