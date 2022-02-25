@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.factory.ejb.util.EjbPositionFactory;
+import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionViewMapping;
@@ -93,5 +95,35 @@ public class EjbRevisionEntityFactory<L extends JeeslLang,D extends JeeslDescrip
 		Set<ERD> sDiagrams = new HashSet<>();
 		for(RE re : entities) {if(re.getDiagram()!=null && !sDiagrams.contains(re.getDiagram())) {sDiagrams.add(re.getDiagram());}}
 		return new ArrayList<ERD>(sDiagrams);
+	}
+	
+	
+	public void applyJscn(JeeslFacade facade, List<RE> list)
+	{
+		List<RE> jscn = new ArrayList<>();
+		for(RE re : list)
+		{
+			if(re.getJscn()==null) {jscn.add(re);}
+		}
+		logger.info("applyJscn re:"+list.size()+" jscn:"+jscn.size());
+		
+		if(!jscn.isEmpty())
+		{
+			logger.info("Applying JSDN for "+jscn.size());
+			for(RE re : list)
+			{
+				try
+				{
+					Class<?> c = Class.forName(re.getCode());
+					re.setJscn(c.getSimpleName());
+					facade.save(re);
+				}
+				catch (ClassNotFoundException e) {logger.error(e.getMessage());}
+				catch (JeeslConstraintViolationException e) {logger.error(e.getMessage());}
+				catch (JeeslLockingException e) {logger.error(e.getMessage());}
+			}
+			
+		}
+
 	}
 }

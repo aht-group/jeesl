@@ -13,6 +13,7 @@ import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.handler.system.TranslationHandler;
 import org.jeesl.controller.provider.FacadeTranslationProvider;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
+import org.jeesl.factory.ejb.io.revision.EjbRevisionEntityFactory;
 import org.jeesl.interfaces.controller.handler.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
@@ -65,6 +66,9 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		{
 			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);
 		}
+		
+		fbRevision.ejbEntity().applyJscn(fRevision,th.allEntities());
+		
 	}
 	
 	protected void postConstructDb(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, File fTmpCache)
@@ -76,6 +80,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		{
 			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);
 		}
+		fbRevision.ejbEntity().applyJscn(fRevision,th.allEntities());
 	}
 	
 	protected void postConstructFile(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, File fTmpCache)

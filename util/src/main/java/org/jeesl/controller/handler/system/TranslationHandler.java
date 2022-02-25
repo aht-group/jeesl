@@ -131,6 +131,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 			Class<?> c = Class.forName(re.getCode());
 
 			re = fRevision.load(cRE, re);
+			mapEntities.put(c.getSimpleName(),re);
 			if(entities.containsKey(c.getSimpleName())){logger.warn("Duplicate classs in Revisions "+re.getCode());}
 
 			entities.put(c.getSimpleName(), re.getName());
