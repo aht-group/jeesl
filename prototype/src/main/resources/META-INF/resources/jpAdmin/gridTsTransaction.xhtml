@@ -21,7 +21,7 @@
 <composite:implementation>
 	<jp:grid id="grid">
 		<aht:row>
-			<aht:slot id="sTransactions" width="5">
+			<aht:slot id="sTransactions" width="6">
 				<h:form id="fTransactions">
 					<p:dataTable id="dtTransactions" var="t" value="#{cc.attrs.bean.transactions}" 
 							selection="#{cc.attrs.bean.transaction}" selectionMode="single" rowKey="#{t.id}">
