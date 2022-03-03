@@ -26,6 +26,7 @@ public class BucketSizeCounter
 	
 	private long loop;
 	
+	public static BucketSizeCounter instance() {return new BucketSizeCounter();}
 	public BucketSizeCounter(){this("Default Category");}
 	public BucketSizeCounter(String category)
 	{

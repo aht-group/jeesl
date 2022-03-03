@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
+import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
@@ -48,6 +49,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 	protected final EjbCodeCache<LINK> cacheLink; public EjbCodeCache<LINK> getCacheLink() {return cacheLink;}
 		
 	protected MAPPING mapping; @Override public MAPPING getMapping() {return mapping;}
+	protected BucketSizeCounter jec; public void setJec(BucketSizeCounter jec) {this.jec = jec;}
 
 	public AbstractSsiDomainProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi,
 									JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,?> fSsi)
@@ -55,6 +57,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 		this.fSsi=fSsi;
 		this.fbSsi=fbSsi;
 		
+		jec = BucketSizeCounter.instance();
 		cacheLink = new EjbCodeCache<>(fbSsi.getClassLink(),fSsi);
 		
 		efData = fbSsi.ejbData();

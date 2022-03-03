@@ -35,6 +35,7 @@ public class JsonXlsCellFactory
 		{
 			case NUMERIC: json.setValueString(cell.getStringCellValue()); break;
 			case STRING: json.setValueString(cell.getStringCellValue()); break;
+			case BLANK: break;
 			default: logger.error("You need to handle "+type);System.exit(-1);
 		}
 		
