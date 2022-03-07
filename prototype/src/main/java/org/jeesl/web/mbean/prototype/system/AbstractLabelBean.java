@@ -13,7 +13,6 @@ import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.handler.system.TranslationHandler;
 import org.jeesl.controller.provider.FacadeTranslationProvider;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionEntityFactory;
 import org.jeesl.interfaces.controller.handler.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
@@ -43,7 +42,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	public Map<String, Map<String, Map<String,L>>> getLabels() {return th.getLabels();}
 	public Map<String, Map<String, Map<String,D>>> getDescriptions() {return th.getDescriptions();}
 
-	public Map<String,RE> getMapEntities() {return th.getMapEntities();}
+	public Map<String,RE> getMapEntities() {return th.getMissingLabelHandler().getMapEntities();}
 	@Override public List<RE> allEntities() {return th.allEntities();}
 
 	private final List<LOC> locales; public List<LOC> getLocales() {return locales;}
@@ -60,29 +59,29 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	protected void postConstruct(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision)
 	{
 		th = new TranslationHandler<>(fRevision,fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
-		th.reloadFromDb();
-		
+		//th.reloadFromDb();
+
 		if(fbRevision!=null)
 		{
 			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);
 		}
-		
+
 		fbRevision.ejbEntity().applyJscn(fRevision,th.allEntities());
-		
+
 	}
-	
+
 	protected void postConstructDb(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, File fTmpCache)
 	{
 		th = new TranslationHandler<>(fRevision, fbRevision.getClassEntity(), fbRevision.getClassL(),fbRevision.getClassMissingRevision());
-		th.reloadFromDb();
-				
+		//th.reloadFromDb();
+
 		if(fbRevision!=null)
 		{
 			ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);
 		}
 		fbRevision.ejbEntity().applyJscn(fRevision,th.allEntities());
 	}
-	
+
 	protected void postConstructFile(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision, File fTmpCache)
 	{
 		this.postConstructDb(fRevision,fTmpCache);
@@ -106,13 +105,13 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	@Override
 	public <E extends Enum<E>> String xpAttribute(String localeCode, Class<?> c, E code)
 	{
-		if(!th.getMapEntities().containsKey(c.getSimpleName()))
+		if(!th.getMissingLabelHandler().getMapEntities().containsKey(c.getSimpleName()))
 		{
 			logger.warn("Entity not handled in Engine: "+c.getSimpleName());
 			return "@id";
 		}
 
-		RE re = th.getMapEntities().get(c.getSimpleName());
+		RE re = th.getMissingLabelHandler().getMapEntities().get(c.getSimpleName());
 		if(!mapXpath.containsKey(re)) {mapXpath.put(re, new HashMap<MultiKey,String>());}
 
 		MultiKey key = new MultiKey(localeCode,code.toString());
@@ -127,20 +126,20 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	public String tlEntity(String localeCode, Class<?> c)
 	{
 //		logger.info("Getting entity ["+localeCode+"] for "+c.getSimpleName());
-		if(!th.getMapEntities().containsKey(c.getSimpleName()))
+		if(!th.getMissingLabelHandler().getMapEntities().containsKey(c.getSimpleName()))
 		{
 			logger.warn("Entity not handled in Engine: "+c.getSimpleName());
 			return "-NO.TRANSLATION-";
 		}
 
-		return th.getMapEntities().get(c.getSimpleName()).getName().get(localeCode).getLang();
+		return th.getMissingLabelHandler().getMapEntities().get(c.getSimpleName()).getName().get(localeCode).getLang();
 	}
 
 	public void updateMissingLabels()
 	{
 		if(th != null)
 		{
-			this.th.updateMissingLabels();
+			this.th.getMissingLabelHandler().updateMissingLabels();
 		}
 	}
 

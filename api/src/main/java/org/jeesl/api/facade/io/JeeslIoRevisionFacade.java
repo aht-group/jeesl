@@ -64,6 +64,7 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 
 	void addMissingLabel(RML rML);
 	void cleanMissingLabels(Class<RML> cRml);
+	RE fRevisionEntity(String jscn) throws JeeslNotFoundException;
 
 
 }

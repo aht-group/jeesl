@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Table;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -288,9 +289,6 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		sb.append("c.missingCode");
 		sb.append("=:refMissingCode");
 		sb.append(" and ");
-		//sb.append(" (c.missingCode IS EMPTY OR c.missingCode");
-		//sb.append("=:refMissingCode");
-		//sb.append( " ) and " );
 		sb.append("c.missingLocal");
 		sb.append("=:refMissingLocal");
 
@@ -305,5 +303,22 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 			return false;
 		}
 		catch (NoResultException ex){return false;}
+	}
+
+	@Override
+	public RE fRevisionEntity(String jscn) throws JeeslNotFoundException
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		logger.info(fbRevision.getClassEntity().getName());
+        CriteriaQuery<RE> cQ = cB.createQuery(fbRevision.getClassEntity());
+        Root<RE> root = cQ.from(fbRevision.getClassEntity());
+        cQ = cQ.where(root.<RE>get("jscn").in(jscn));
+
+		TypedQuery<RE> q = em.createQuery(cQ);
+		logger.info(q.unwrap(org.hibernate.Query.class).getQueryString());
+
+		try	{return q.getSingleResult();}
+		catch (NoResultException ex){throw new JeeslNotFoundException("Nothing found "+fbRevision.getClassEntity().getSimpleName()+" for jscn="+jscn);}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbRevision.getClassEntity().getSimpleName()+" and jscn="+jscn+" not unique");}
 	}
 }
