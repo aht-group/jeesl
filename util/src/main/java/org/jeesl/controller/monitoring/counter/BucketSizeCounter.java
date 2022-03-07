@@ -45,6 +45,7 @@ public class BucketSizeCounter
 	public <C extends EjbWithCode> void add(C ejb){add(ejb.getCode(),1);}
 	public <C extends EjbWithCode> void add(C ejb, long size){add(ejb.getCode(),size);}
 	public <E extends Enum<E>> void add(E event, long size){add(event.toString(),size);}
+	public void add(String event) {this.add(event,1);}
 	public void add(String event, long size)
 	{
 		if(!map.containsKey(event)){map.put(event, 0l);}

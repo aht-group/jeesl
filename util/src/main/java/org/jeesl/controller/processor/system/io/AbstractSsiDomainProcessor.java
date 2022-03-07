@@ -34,8 +34,8 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 										DATA extends JeeslIoSsiData<MAPPING,LINK>,
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
-										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>
-,	JSON extends Object
+										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
+										JSON extends Object
 >
 						implements SsiMappingProcessor<MAPPING,DATA,JSON>
 {
@@ -49,7 +49,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 	protected final EjbCodeCache<LINK> cacheLink; public EjbCodeCache<LINK> getCacheLink() {return cacheLink;}
 		
 	protected MAPPING mapping; @Override public MAPPING getMapping() {return mapping;}
-	protected BucketSizeCounter jec; public void setJec(BucketSizeCounter jec) {this.jec = jec;}
+	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
 
 	public AbstractSsiDomainProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi,
 									JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,?> fSsi)

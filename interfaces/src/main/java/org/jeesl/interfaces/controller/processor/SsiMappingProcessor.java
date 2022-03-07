@@ -11,6 +11,7 @@ public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiMapping<?,?>,
 ,JSON extends Object
 										>
 {
+	
 	MAPPING getMapping();
 	
 	void initMappings() throws JeeslNotFoundException;
