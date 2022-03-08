@@ -57,7 +57,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 		 */
         entities = new HashMap<String,Map<String,L>>()
         {
-			private static final long serialVersionUID = 1L;
+			//private static final long serialVersionUID = 1L;
 			/**
 			 * Override default get function
 			 * so that we can load revision entity (Load translation for entity) on demand
@@ -73,6 +73,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 				{
 					if(Objects.isNull(m) && !isLoadedRevisionEntity(entityJscn))
 					{
+						logger.info("searching" + entityJscn);
 						RE re =  fRevision.fRevisionEntity(key.toString());
 						load(re);
 					}
@@ -85,6 +86,11 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 					}
 				}
 				catch (JeeslNotFoundException e)  {missingLabelHandler.updateMissingRevisionEntity(entityJscn);}
+				catch (AbstractMethodError e)
+				{
+					logger.info("check if you have duplication of revision facade, for example fRevisionEntity methode define 2 or more times in project");
+					missingLabelHandler.updateMissingRevisionEntity(entityJscn);
+				}
 				return getLangMap(entityJscn,null);
 			}
         };
