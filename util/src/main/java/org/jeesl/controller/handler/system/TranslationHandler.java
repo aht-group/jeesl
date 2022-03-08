@@ -128,7 +128,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 
         descriptions = new HashMap<String,Map<String,Map<String,D>>>();
 	}
-/*
+
 	public void reloadFromDb()
 	{
 		List<RE> list = fRevision.all(cRE);
@@ -139,7 +139,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 			load(re);
 		}
 	}
-*/
+
 	@Override public void reload(RE re)
 	{
 		try
