@@ -63,7 +63,7 @@
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectStatus}" update=":#{cc.id}:sLang"/>
 							<p:column styleClass="aupPfDtColCentered">  
 								<j:duoCheckmark value="#{s.visible}"/>
-				            </p:column>>
+				            </p:column>
 							<p:column rendered="#{not empty cc.attrs.bean.parents}">
 					            <f:facet name="header">#{msg.jeeslStatusSuperior}</f:facet>
 					            <h:outputText value="#{s.parent.name[localeCode].lang}" />
