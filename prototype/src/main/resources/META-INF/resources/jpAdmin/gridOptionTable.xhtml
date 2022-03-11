@@ -106,7 +106,7 @@
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 							
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" styleClass="auCleanPanelGrid">
-								<p:outputLabel value="#{msg.jeeslOptionClass}"/>
+								<jtp:label entity="RevisionEntity" code="jscn"/>
 								<h:outputText value="#{cc.attrs.bean.optionClass.simpleName}"/>
 								
 								<p:outputLabel value="#{msg.aupOptionCode}"/>
