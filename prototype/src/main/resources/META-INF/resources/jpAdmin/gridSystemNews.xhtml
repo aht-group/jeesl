@@ -14,7 +14,7 @@
 	
 	<composite:interface>
 		<composite:attribute name="bean" required="false" default="#{adminNewsBean}"/>
-		<composite:attribute name="localeKeys" required="false" default="#{translationBean.langKeys}"/>
+		<composite:attribute name="localeKeys" required="false" default="#{appTranslationBean.langKeys}"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -78,7 +78,7 @@
 								</h:panelGroup>
 								
 							</p:panelGrid>
-							<aht:tabTranslationEditor value="#{cc.attrs.bean.news}" withDescription="true"
+							<j:tabTranslationEditor value="#{cc.attrs.bean.news}" withDescription="true"
 									labelTranslation="#{msg.Name}" labelDescription="#{msg.Description}" keys="#{cc.attrs.localeKeys}" />
 						</p:panel>
 					</h:form>
