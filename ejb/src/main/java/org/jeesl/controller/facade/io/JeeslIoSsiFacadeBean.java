@@ -33,6 +33,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 import org.jeesl.interfaces.model.io.ssi.maintenance.EjbWithSsiDataCleaning;
+import org.jeesl.interfaces.model.system.job.EjbWithMigrationJob1;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -47,7 +48,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 									CRED extends JeeslIoSsiCredential<SYSTEM>,
 									MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
 									ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-									DATA extends JeeslIoSsiData<MAPPING,LINK>,
+									DATA extends JeeslIoSsiData<MAPPING,LINK,JOB>,
 									LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 									CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
@@ -59,10 +60,10 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoSsiFacadeBean.class);
 		
-	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi;
+	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi;
 	
 	public JeeslIoSsiFacadeBean(EntityManager em,
-								IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi)
+								IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi)
 	{
 		super(em);
 		this.fbSsi = fbSsi;
@@ -310,5 +311,30 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
         return jtf.buildCount(tQ.getResultList());
+	}
+
+	@Override public List<DATA> fSsiDataWithPendingJob1(int maxResult, boolean includeNull, Long refA, Long refB, Long refC)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<DATA> cQ = cB.createQuery(fbSsi.getClassData());
+		Root<DATA> item = cQ.from(fbSsi.getClassData());
+		
+		Expression<JOB> eJob = item.get(EjbWithMigrationJob1.Attributes.job1.toString());
+		JOB queue = this.fByEnum(fbSsi.getClassJob(),JeeslJobStatus.Code.queue);
+		if(includeNull) {predicates.add(cB.or(cB.isNull(eJob),cB.equal(eJob, queue)));}
+		else {predicates.add(cB.equal(eJob,queue));}
+		
+		if(refA!=null) {predicates.add(cB.equal(item.get(JeeslIoSsiData.Attributes.refA.toString()),refA));}
+		if(refB!=null) {predicates.add(cB.equal(item.get(JeeslIoSsiData.Attributes.refB.toString()),refB));}
+		if(refC!=null) {predicates.add(cB.equal(item.get(JeeslIoSsiData.Attributes.refC.toString()),refC));}
+		
+
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(item);
+
+		TypedQuery<DATA> tQ = em.createQuery(cQ);
+		tQ.setMaxResults(maxResult);
+		return tQ.getResultList();
 	}
 }

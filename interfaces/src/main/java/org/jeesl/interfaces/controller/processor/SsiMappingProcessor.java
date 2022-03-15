@@ -7,8 +7,8 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 
 public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiMapping<?,?>,
-										DATA extends JeeslIoSsiData<MAPPING,?>
-,JSON extends Object
+										DATA extends JeeslIoSsiData<MAPPING,?,?>,
+										JSON extends Object
 										>
 {
 	

@@ -12,6 +12,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -21,10 +22,11 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
 								MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
 								ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-								DATA extends JeeslIoSsiData<MAPPING,LINK>,
+								DATA extends JeeslIoSsiData<MAPPING,LINK,?>,
 								LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 								ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
-								CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>>
+								CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
+								JOB extends JeeslJobStatus<L,D,JOB,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(IoSsiDataFactoryBuilder.class);
@@ -35,11 +37,13 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 	private final Class<LINK> cLink; public Class<LINK> getClassLink(){return cLink;}
 	private final Class<ENTITY> cEntity; public Class<ENTITY> getClassEntity(){return cEntity;}
 	private final Class<CLEANING> cCleaning; public Class<CLEANING> getClassCleaning(){return cCleaning;}
+	private final Class<JOB> cJob; public Class<JOB> getClassJob(){return cJob;}
 	
 	public IoSsiDataFactoryBuilder(final Class<L> cL, final Class<D> cD,
 								final Class<MAPPING> cMapping, final Class<ATTRIBUTE> cAttribute,
 								final Class<DATA> cData, final Class<LINK> cLink, final Class<ENTITY> cEntity,
-								final Class<CLEANING> cCleaning)
+								final Class<CLEANING> cCleaning, final Class<JOB> cJob
+								)
 	{
 		super(cL,cD);
 		this.cMapping=cMapping;
@@ -48,6 +52,7 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 		this.cLink=cLink;
 		this.cEntity=cEntity;
 		this.cCleaning=cCleaning;
+		this.cJob=cJob;
 	}
 
 	public EjbIoSsiMappingFactory<SYSTEM,MAPPING,ENTITY> ejbMapping() {return new EjbIoSsiMappingFactory<>(this);}

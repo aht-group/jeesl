@@ -39,7 +39,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 										CRED extends JeeslIoSsiCredential<SYSTEM>,
 										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
 										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-										DATA extends JeeslIoSsiData<MAPPING,LINK>,
+										DATA extends JeeslIoSsiData<MAPPING,LINK,JOB>,
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
@@ -51,7 +51,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiAttributeBean.class);
 
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,?> fbSsiCore;
-	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsiData;
+	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsiData;
 	private final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,ENTITY,?,?,?,?,?,?> fbRevision;
 
 	private JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi;
@@ -71,7 +71,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 
 
 	public AbstractSsiAttributeBean(final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,?> fbSsiCore,
-									final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsiData,
+									final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsiData,
 									final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,ENTITY,?,?,?,?,?,?> fbRevision)
 	{
 		this.fbSsiCore=fbSsiCore;

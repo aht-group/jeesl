@@ -21,9 +21,9 @@ public class AbstractSsiCacheBean <L extends JeeslLang,D extends JeeslDescriptio
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiCacheBean.class);
 	
-	private final IoSsiDataFactoryBuilder<L,D,?,?,?,?,LINK,?,CLEANING> fbSsi;
+	private final IoSsiDataFactoryBuilder<L,D,?,?,?,?,LINK,?,CLEANING,?> fbSsi;
 	
-	public AbstractSsiCacheBean(final IoSsiDataFactoryBuilder<L,D,?,?,?,?,LINK,?,CLEANING> fbSsi)
+	public AbstractSsiCacheBean(final IoSsiDataFactoryBuilder<L,D,?,?,?,?,LINK,?,CLEANING,?> fbSsi)
 	{
 		this.fbSsi=fbSsi;
 

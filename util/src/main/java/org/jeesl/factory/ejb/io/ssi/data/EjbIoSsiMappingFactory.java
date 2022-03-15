@@ -10,9 +10,9 @@ public class EjbIoSsiMappingFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
 										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 {
-	private final IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,ENTITY,?> fbSsi;
+	private final IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,ENTITY,?,?> fbSsi;
 
-	public EjbIoSsiMappingFactory(IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,ENTITY,?> fbSsi)
+	public EjbIoSsiMappingFactory(IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,ENTITY,?,?> fbSsi)
 	{
         this.fbSsi = fbSsi;
 	}

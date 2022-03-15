@@ -11,7 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import net.sf.exlp.util.io.JsonUtil;
 
 public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiMapping<?,?>,
-									DATA extends JeeslIoSsiData<MAPPING,LINK>,
+									DATA extends JeeslIoSsiData<MAPPING,LINK,?>,
 									LINK extends JeeslStatus<?,?,LINK>>
 {
 	private final Class<DATA> cData;
