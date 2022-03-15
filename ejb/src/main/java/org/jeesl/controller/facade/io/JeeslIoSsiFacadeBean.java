@@ -313,12 +313,14 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
         return jtf.buildCount(tQ.getResultList());
 	}
 
-	@Override public List<DATA> fSsiDataWithPendingJob1(int maxResult, boolean includeNull, Long refA, Long refB, Long refC)
+	@Override public List<DATA> fSsiDataWithPendingJob1(MAPPING mapping, int maxResult, boolean includeNull, Long refA, Long refB, Long refC)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbSsi.getClassData());
 		Root<DATA> item = cQ.from(fbSsi.getClassData());
+		
+		predicates.add(cB.equal(item.get(JeeslIoSsiData.Attributes.mapping.toString()),mapping));
 		
 		Expression<JOB> eJob = item.get(EjbWithMigrationJob1.Attributes.job1.toString());
 		JOB queue = this.fByEnum(fbSsi.getClassJob(),JeeslJobStatus.Code.queue);
