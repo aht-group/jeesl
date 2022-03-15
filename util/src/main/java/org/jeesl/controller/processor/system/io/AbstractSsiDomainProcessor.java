@@ -18,6 +18,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.util.db.cache.EjbCodeCache;
@@ -35,6 +36,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
+										JOB extends JeeslJobStatus<L,D,JOB,?>,
 										JSON extends Object
 >
 						implements SsiMappingProcessor<MAPPING,DATA,JSON>
@@ -42,7 +44,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiDomainProcessor.class);
 	
 	protected final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi;
-	protected final JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,?> fSsi;
+	protected final JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi;
 	
 	protected final EjbIoSsiDataFactory<MAPPING,DATA,LINK> efData;
 	
@@ -52,7 +54,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
 
 	public AbstractSsiDomainProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi,
-									JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,?> fSsi)
+									JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi)
 	{
 		this.fSsi=fSsi;
 		this.fbSsi=fbSsi;

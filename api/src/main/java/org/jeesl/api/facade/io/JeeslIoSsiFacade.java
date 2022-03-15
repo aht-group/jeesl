@@ -14,6 +14,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 import org.jeesl.interfaces.model.io.ssi.maintenance.EjbWithSsiDataCleaning;
+import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -29,6 +30,7 @@ public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescriptio
 									LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 									CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
+									JOB extends JeeslJobStatus<L,D,JOB,?>,
 									HOST extends JeeslIoSsiHost<L,D,SYSTEM>
 									>
 			extends JeeslFacade

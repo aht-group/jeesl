@@ -19,6 +19,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
+										JOB extends JeeslJobStatus<L,D,JOB,?>,
 										HOST extends JeeslIoSsiHost<L,D,SYSTEM>
 ,JSON extends Object
 										>
@@ -45,7 +47,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi;
 	
-	protected JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST> fSsi;
+	protected JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi;
 	
 	protected final SbMultiHandler<LINK> sbhLink; public SbMultiHandler<LINK> getSbhLink() {return sbhLink;}
 	protected final JsonTuple1Handler<LINK> thLink; public JsonTuple1Handler<LINK> getThLink() {return thLink;}
@@ -63,7 +65,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		datas = new ArrayList<>();
 	}
 
-	public void postConstructSsi(JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST> fSsi)
+	public void postConstructSsi(JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi)
 	{
 		this.fSsi=fSsi;
 		sbhLink.setList(fSsi.allOrderedPositionVisible(fbSsi.getClassLink()));

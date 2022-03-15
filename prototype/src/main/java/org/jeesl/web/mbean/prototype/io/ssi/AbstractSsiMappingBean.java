@@ -22,6 +22,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -38,6 +39,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
+										JOB extends JeeslJobStatus<L,D,JOB,?>,
 										HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
 						implements Serializable
 {
@@ -47,7 +49,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	protected JeeslLogger jogger;
 	
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING> fbSsi;
-	private JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST> fSsi;
+	private JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi;
 	
 	private final JsonTuple1Handler<MAPPING> thMapping; public JsonTuple1Handler<MAPPING> getThMapping() {return thMapping;}
 	private final JsonTuple2Handler<MAPPING,LINK> thLink; public JsonTuple2Handler<MAPPING,LINK> getThLink() {return thLink;}
@@ -71,7 +73,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 		jogger = DebugLoggerHandler.instance(this.getClass());
 	}
 
-	public void postConstructSsiMapping(JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST> fSsi)
+	public void postConstructSsiMapping(JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi)
 	{	
 		this.fSsi=fSsi;
 		links.addAll(fSsi.all(fbSsi.getClassLink()));

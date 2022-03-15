@@ -33,6 +33,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 import org.jeesl.interfaces.model.io.ssi.maintenance.EjbWithSsiDataCleaning;
+import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -50,9 +51,10 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 									LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 									CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
+									JOB extends JeeslJobStatus<L,D,JOB,?>,
 									HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
 					extends JeeslFacadeBean
-					implements JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST>
+					implements JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoSsiFacadeBean.class);

@@ -19,6 +19,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -37,6 +38,7 @@ public class AbstractSsiSystemBean <L extends JeeslLang, D extends JeeslDescript
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
+										JOB extends JeeslJobStatus<L,D,JOB,?>,
 										HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
 						extends AbstractAdminBean<L,D,LOC>
 						implements Serializable
@@ -44,7 +46,7 @@ public class AbstractSsiSystemBean <L extends JeeslLang, D extends JeeslDescript
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiSystemBean.class);
 	
-	private JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST> fSsi;
+	private JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi;
 	
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsiCore;
 	
@@ -63,7 +65,7 @@ public class AbstractSsiSystemBean <L extends JeeslLang, D extends JeeslDescript
 	}
 
 	protected void postConstructSsiSystem(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-										JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,HOST> fSsi)
+										JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fSsi=fSsi;
