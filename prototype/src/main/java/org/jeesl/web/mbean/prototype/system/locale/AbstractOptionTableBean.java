@@ -218,8 +218,11 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 		if(((EjbWithImageAlt)category).getImageAlt()!=null)
 		{
-            clParent = Class.forName(((EjbWithImageAlt)category).getImageAlt()).asSubclass(fbStatus.getClassStatus());
-            parents = fGraphic.all(clParent);
+            clParent = Class.forName(((EjbWithImageAlt)category).getImageAlt()).asSubclass(fbStatus.getClassStatus()).asSubclass(EjbWithPosition.class);
+            
+//            PositionComparator<EjbWithPosition> c = new PositionComparator<>();
+//            Collections.sort(parents,c);
+            parents = fGraphic.allOrderedPosition(clParent);
             logger.info(optionClass.getSimpleName()+" "+parents.size());
 		}
 		else
