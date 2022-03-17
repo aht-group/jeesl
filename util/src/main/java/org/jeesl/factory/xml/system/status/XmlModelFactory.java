@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.xml.aht.Query;
 import net.sf.ahtutils.xml.status.Model;
 import net.sf.ahtutils.xml.status.Parent;
+import net.sf.ahtutils.xml.status.Status;
 
 public class XmlModelFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
 {
@@ -22,7 +23,6 @@ public class XmlModelFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang, 
 	
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
-	
 	
 	public XmlModelFactory(Query query){this(query.getLang(),query.getModel());}
 	public XmlModelFactory(String localeCode, Model q)
@@ -59,6 +59,14 @@ public class XmlModelFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang, 
 	{
 		Model xml = new Model();
 		xml.setCode(code);
+		return xml;
+	}
+	
+	public static Model label(String code, String label)
+	{
+		Model xml = new Model();
+		xml.setCode(code);
+		xml.setLabel(label);
 		return xml;
 	}
 }

@@ -54,7 +54,7 @@ public abstract class AbstractAdminIoAttributeBean <L extends JeeslLang, D exten
 	
 	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
 	
-	protected final SbMultiHandler<CATEGORY> sbhCategory; public SbMultiHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
+//	protected final SbMultiHandler<CATEGORY> sbhCategory; public SbMultiHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
 	protected final SbMultiHandler<CAT> sbhCat; public SbMultiHandler<CAT> getSbhCat() {return sbhCat;}
 	
 	protected final EjbAttributeCriteriaFactory<L,D,R,CAT,CATEGORY,CRITERIA,TYPE> efCriteria;
@@ -80,7 +80,7 @@ public abstract class AbstractAdminIoAttributeBean <L extends JeeslLang, D exten
 		
 		cpCriteria = (new AttributeCriteriaComparator<CAT,CATEGORY,CRITERIA>()).factory(AttributeCriteriaComparator.Type.position);
 		
-		sbhCategory = new SbMultiHandler<CATEGORY>(fbAttribute.getClassCategory(),this);
+//		sbhCategory = new SbMultiHandler<CATEGORY>(fbAttribute.getClassCategory(),this);
 		sbhCat = new SbMultiHandler<CAT>(fbAttribute.getClassCat(),this);
 	}
 	

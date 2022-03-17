@@ -76,14 +76,14 @@ public abstract class AbstractAdminIoAttributeSetBean <L extends JeeslLang, D ex
 		super.postConstructAttribute(realm,bTranslation,bMessage,bAttribute,fAttribute);
 	}
 	
-	@Deprecated
-	protected void initAttributeSet(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-									JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
-									JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
-	{
-		super.initAttribute(bTranslation,bMessage,bAttribute,fAttribute);
-		reloadSets();
-	}
+//	@Deprecated
+//	protected void initAttributeSet1(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+//									JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
+//									JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
+//	{
+//		super.initAttribute(bTranslation,bMessage,bAttribute,fAttribute);
+//		reloadSets();
+//	}
 	
 	protected void updateRealm(RREF rref)
 	{
@@ -118,11 +118,8 @@ public abstract class AbstractAdminIoAttributeSetBean <L extends JeeslLang, D ex
 	{
 		sets.clear();
 		if(realm!=null && rref!=null) {sets.addAll(fAttribute.fAttributeSets(realm,rref,sbhCat.getSelected()));}
-		if(refId<0){}
-		else
-		{
-			sets.addAll(fAttribute.fAttributeSets(sbhCategory.getSelected(), refId));
-		}
+//		if(refId<0){}
+//		else {sets.addAll(fAttribute.fAttributeSets(sbhCategory.getSelected(), refId));}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassSet(),sets));}
 	}
 	

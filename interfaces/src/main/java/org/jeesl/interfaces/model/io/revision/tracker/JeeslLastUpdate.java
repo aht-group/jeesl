@@ -11,6 +11,10 @@ public interface JeeslLastUpdate <USER extends JeeslUser<?>>
 	public Date getLastUpdateAt();
 	public void setLastUpdateAt(Date record);
 	
+//	public LocalDateTime getLastUpdateAt();
+//	public void setLastUpdateAt(LocalDateTime ldt);
+	
 	public USER getLastUpdateBy();
 	public void setLastUpdateBy(USER user);
+	
 }

@@ -69,7 +69,7 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 		super.postConstructAttribute(realm,bTranslation,bMessage,bAttribute,fAttribute);
 	}
 	
-	protected void initAttributePool(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+	protected void initAttributePool2(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 									JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
 									JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
 	{
@@ -92,7 +92,6 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 		{
 			reloadCriterias();
 		}
-		sbhCategory.debug(true);
 	}
 	
 	protected void reloadCategories()
@@ -121,8 +120,8 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 	{
 		criterias.clear();
 		if(realm!=null && rref!=null) {criterias.addAll(fAttribute.fAttributeCriteria(realm,rref,sbhCat.getSelected()));}
-		else if(refId<0) {}
-		else {criterias.addAll(fAttribute.fAttributeCriteria(sbhCategory.getSelected(),refId));}
+//		else if(refId<0) {}
+//		else {criterias.addAll(fAttribute.fAttributeCriteria(sbhCategory.getSelected(),refId));}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassCriteria(),criterias));}
 	}
 	
