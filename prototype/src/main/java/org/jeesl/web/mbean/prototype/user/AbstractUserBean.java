@@ -113,4 +113,10 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 		try{FacesContext.getCurrentInstance().getExternalContext().redirect(forwardedUri);}
 		catch (IOException e) {e.printStackTrace();}
 	}
+	
+	protected void redirectToUrl(String uri)
+	{
+		try{FacesContext.getCurrentInstance().getExternalContext().redirect(uri);}
+		catch (IOException e) {e.printStackTrace();}
+	}
 }

@@ -164,7 +164,7 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		return true;
 	}
 	
-	protected boolean validAge(int maxDays, List<HISTORY> histories)
+	public boolean validAge(int maxDays, List<HISTORY> histories)
 	{
 		if(histories.isEmpty()) {return true;}
 		DateTime dtNow = new DateTime();

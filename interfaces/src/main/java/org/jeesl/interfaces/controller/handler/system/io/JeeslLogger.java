@@ -8,6 +8,7 @@ public interface JeeslLogger extends Serializable
 	String start(String log);
 	
 	String milestone(String milestone);
+	String milestone(String milestone, String message);
 	String milestone(String milestone, String message, Integer elements);
 	
 	

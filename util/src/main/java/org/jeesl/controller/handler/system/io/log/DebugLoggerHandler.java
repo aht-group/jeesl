@@ -21,6 +21,7 @@ public class DebugLoggerHandler implements JeeslLogger
 	@Override public String start(String log) {return log;}
 	
 	@Override public String milestone(String milestone) {return milestone;}
+	@Override public String milestone(String milestone, String message) {return milestone;}
 	@Override public String milestone(String milestone, String message, Integer elements) {return milestone;}
 	
 	@Override public <E extends Enum<E>> String loopStart(E code) {return code.toString();}
@@ -29,4 +30,5 @@ public class DebugLoggerHandler implements JeeslLogger
 	@Override public void ofxMilestones(OutputStream os) {}
 
 	@Override public void ofxLoops(OutputStream os) {}
+	
 }
