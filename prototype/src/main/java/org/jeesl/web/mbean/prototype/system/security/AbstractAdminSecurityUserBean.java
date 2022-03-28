@@ -155,6 +155,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 		{
 			if(debugOnInfo){logger.info(AbstractLogMessage.saveEntity(user));}
 			boolean changedPassword = checkPwd();
+			if(debugOnInfo){logger.info("Changed Password: "+changedPassword);}
 			preSave();
 			user = fUtilsUser.saveTransaction(user);
 			postSave(changedPassword);
@@ -203,8 +204,8 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 					bMessage.growlSuccess("fmPwdChanged");
 					
 					EjbWithPwd ejb = (EjbWithPwd)user;
-					if(!useSaltedHash) {ejb.setPwd(pwd1);}
-					else {ejb.setPwd(TxtUserFactory.toHash(pwd1,user.getSalt()));}
+					if(useSaltedHash) {ejb.setPwd(TxtUserFactory.toHash(pwd1,user.getSalt()));}
+					else {ejb.setPwd(pwd1);}
 					return true;
 				}
 				else

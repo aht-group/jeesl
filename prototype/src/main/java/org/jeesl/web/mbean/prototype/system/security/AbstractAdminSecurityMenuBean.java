@@ -209,13 +209,14 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 	    if(debugOnInfo) {logger.info("Reloaded Menu with "+list.size()+" elements. sbhContext.isSelected():"+sbhContext.isSelected()+" disabledMenuImportFromDefaultContext:"+disabledMenuImportFromDefaultContext);}
     }
 
-	public void importFromDefaultContext(){
+	public void importFromDefaultContext()
+	{
 		try
 		{
 			if(sbhContext.isSelected())
 			{
 				CTX defaultCtx = fSecurity.fByCode(fbSecurity.getClassContext(), "core");
-				CTX currentCtx =sbhContext.getSelection();
+				CTX currentCtx = sbhContext.getSelection();
 				List<M> list = new ArrayList<>();
 				list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.context,defaultCtx));
 				Map<M,List<M>> map = efMenu.toMapChild(list);
@@ -233,6 +234,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 					defaultVsCurrentMap.put(m, newMenu);
 				}
 				logger.info("copying menu items....done");
+				
 				logger.info("Updating menu parents....");
 				for (Map.Entry<M,List<M>> defautlMenuEntry : map.entrySet())
 				{

@@ -83,10 +83,10 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		logger.info("strength:"+(strength==null));
 		rating = fJeesl.fByCode(cRating,JeeslSecurityPasswordRating.codePrefix+""+strength.getScore());
 		
-		analyseComplexity1(rules,pwd,rating);
+		analyseComplexity(rules,pwd,rating);
 	}
 	
-	public void analyseComplexity1(List<RULE> rules, String pwd, RATING rating)
+	public void analyseComplexity(List<RULE> rules, String pwd, RATING rating)
 	{
 		for(RULE r : rules)
 		{
@@ -114,8 +114,18 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		for(RULE r : rules)
 		{
 			Integer value = Integer.valueOf(r.getSymbol());
-			if(r.getCode().equals(JeeslSecurityPasswordRule.Code.history.toString())) {mapResult.put(r, validHistory(value,hash,histories));}
-			else if(r.getCode().equals(JeeslSecurityPasswordRule.Code.age.toString())) {mapResult.put(r, validAge(value,histories));}
+			if(r.getCode().equals(JeeslSecurityPasswordRule.Code.history.toString()))
+			{
+				boolean isValidHistory = validHistory(value,hash,histories);
+				logger.info("Valid History: "+isValidHistory);
+				mapResult.put(r,isValidHistory);
+			}
+			else if(r.getCode().equals(JeeslSecurityPasswordRule.Code.age.toString()))
+			{
+				boolean isValidAge = validAge(value,histories);
+				logger.info("Valid Age: "+isValidAge);
+				mapResult.put(r, isValidAge);
+			}
 		}
 	}
 	
@@ -152,7 +162,10 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	protected boolean validHistory(int maxMonths, String hash, List<HISTORY> histories)
 	{
 		DateTime dtNow = new DateTime();
-		for(HISTORY h : histories)
+		
+		if(histories==null || histories.size()>=1) {return true;}
+		
+		for(HISTORY h : histories.subList(1,histories.size()))
 		{
 			DateTime dt = new DateTime(h.getRecord());
 			int months = Months.monthsBetween(dt,dtNow).getMonths();
@@ -170,7 +183,10 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		DateTime dtNow = new DateTime();
 		DateTime dt = new DateTime(histories.get(0).getRecord());
 		int days = Days.daysBetween(dt,dtNow).getDays();
-		if(days>=maxDays) {return false;}
-		else {return true;}
+		
+		boolean ageIsValid = false;
+		if(days<maxDays) {ageIsValid = true;}
+		
+		return ageIsValid;
 	}
 }

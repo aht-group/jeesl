@@ -46,9 +46,7 @@
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteSet()}" update=":#{cc.id}:grid" rendered="#{(cc.attrs.bean.set.id gt 0) and (cc.attrs.bean.items.isEmpty())}" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-						<p:outputLabel value="Will be removed"/>
-						<h:outputText value="#{cc.attrs.bean.set.category.name[localeCode].lang}"/>
-					
+						
 						<p:outputLabel value="#{msg.jeeslCategory}" rendered="#{cc.attrs.bean.sbhCat.hasMore}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.set.category2}"  rendered="#{cc.attrs.bean.sbhCat.hasMore}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.bean.sbhCat.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
