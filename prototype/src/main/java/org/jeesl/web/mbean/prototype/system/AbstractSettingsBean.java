@@ -34,6 +34,8 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 	protected String title; public String getTitle() {return title;}
 	protected String titlePrefix; public String getTitlePrefix() {return titlePrefix;}
 	
+	protected boolean indexWithSubmenuDescription; public boolean isIndexWithSubmenuDescription() {return indexWithSubmenuDescription;}
+	
 	private final String cssTimestamp; @Override public String getCssTimestamp() {return cssTimestamp;}
 
 	public AbstractSettingsBean()
@@ -52,6 +54,8 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 		allowUploadJesslGraphicType = "/(\\.|\\/)(svg|png)$/";
 		
 		cssTimestamp = Long.valueOf(Instant.now().getEpochSecond()).toString();
+		
+		indexWithSubmenuDescription = true;
 	}
 	
 	protected String datePattern; @Override public String getDatePattern(){return datePattern;}
