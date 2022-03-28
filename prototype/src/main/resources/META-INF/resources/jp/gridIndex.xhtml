@@ -19,13 +19,13 @@
 	<composite:implementation>
 		<jp:grid>
 			<f:facet name="#{appSettingsBean.positionSideMenu}"><jp:menuSide code="#{cc.attrs.bean.security.pageCode}"/></f:facet>
-			<j:row>
+			<j:row rendered="#{appSettingsBean.indexWithSubmenuDescription}">
         		<j:slot width="4">
         			<h:outputText value="#{cc.attrs.bean.security.view.name[localeCode].lang}"/><br/>
         			<h:outputText value="#{cc.attrs.bean.security.view.description[localeCode].lang}"/>
         		</j:slot>
         		<j:slot width="1"/>
-        		<j:slot width="7" rendered="#{appSettingsBean.indexWithSubmenuDescription}">
+        		<j:slot width="7">
         			<ui:repeat var="v" value="#{cc.attrs.bean.subViews}">
         				<p:panel header="#{v.name[localeCode].lang}" styleClass="jeeslPanel">
         					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
@@ -34,6 +34,16 @@
         				</p:panel>
         			</ui:repeat>
         			<composite:insertChildren/>
+        		</j:slot>
+			</j:row>
+			<j:row rendered="#{not appSettingsBean.indexWithSubmenuDescription}">
+        		<j:slot width="7">
+        			<p:panel header="#{cc.attrs.bean.security.view.name[localeCode].lang}" styleClass="jeeslPanel">
+       					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
+       						<h:outputText value="#{cc.attrs.bean.security.view.description[localeCode].lang}"/>
+       					</p:panelGrid>
+       				</p:panel>
+       				<composite:insertChildren/>
         		</j:slot>
 			</j:row>
 		</jp:grid>
