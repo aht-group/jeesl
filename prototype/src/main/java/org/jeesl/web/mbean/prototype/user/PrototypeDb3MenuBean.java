@@ -143,7 +143,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	public List<M> breadcrumb(String key)
 	{
-		if(debugOnInfo) {logger.info("breadcrumb "+key);}
+		if(debugOnInfo) {logger.info("Generating breadcrum for ("+key+")");}
 		return cacheBreadcrumb.get(key);
 	}
 	private List<M> buildBreadcrumb(String key)

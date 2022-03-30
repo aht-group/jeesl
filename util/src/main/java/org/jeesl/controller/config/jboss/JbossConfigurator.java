@@ -285,6 +285,7 @@ public class JbossConfigurator
 		request.get("pool-name").set(name);
 		request.get("use-java-context").set(true);
 		request.get("use-ccm").set(true);
+		request.get("statistics-enabled").set(true);
 	}
 	
 	private void connection(ModelNode request, String type, String host, String port, String db, String jdbcParamter)
