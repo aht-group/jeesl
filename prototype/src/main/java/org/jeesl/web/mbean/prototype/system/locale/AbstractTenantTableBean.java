@@ -33,7 +33,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.status.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
-import org.jeesl.interfaces.model.system.option.JeeslOptionRest;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
@@ -43,6 +42,7 @@ import org.jeesl.interfaces.model.with.primitive.text.EjbWithSymbol;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.rest.JeeslInterfaceRestCode;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.db.updater.JeeslDbMcsStatusUpdater;
@@ -385,11 +385,11 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 
 	//JEESL REST DATA
 	@SuppressWarnings("unchecked")
-	public <REST extends JeeslOptionRest, Y extends JeeslMcsStatus<L,D,R,Y,G>, X extends JeeslStatus<L,D,X>> void downloadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
+	public <REST extends JeeslInterfaceRestCode, Y extends JeeslMcsStatus<L,D,R,Y,G>, X extends JeeslStatus<L,D,X>> void downloadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
 	{
 		logger.info("Downloading REST");
 
-		Class<REST> cRest = (Class<REST>)Class.forName(((EjbWithSymbol)category).getSymbol()).asSubclass(JeeslOptionRest.class);
+		Class<REST> cRest = (Class<REST>)Class.forName(((EjbWithSymbol)category).getSymbol()).asSubclass(JeeslInterfaceRestCode.class);
 //		Class<S> cS = (Class<S>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslStatus.class);
 //		Class<W> cW = (Class<W>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(EjbWithCodeGraphic.class);
 		REST rest = cRest.newInstance();

@@ -21,10 +21,10 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.locale.option.JeeslRestDownloadOption;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithColour;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
-import org.jeesl.interfaces.model.system.option.JeeslOptionRestDownload;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithLocked;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
@@ -137,7 +137,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	{
 		supportsSymbol = JeeslStatusWithSymbol.class.isAssignableFrom(optionClass);
 		supportsLocked = EjbWithLocked.class.isAssignableFrom(optionClass);
-		supportsDownload = JeeslOptionRestDownload.class.isAssignableFrom(optionClass);
+		supportsDownload = JeeslRestDownloadOption.class.isAssignableFrom(optionClass);
 		supportsColour = JeeslStatusWithColour.class.isAssignableFrom(optionClass);
 	}	
 }

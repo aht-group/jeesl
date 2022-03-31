@@ -9,14 +9,15 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.option.JeeslRestDownloadOption;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
-import org.jeesl.interfaces.model.system.option.JeeslOptionRestDownload;
 
 public interface JeeslRevisionEntityRelation <L extends JeeslLang, D extends JeeslDescription,
 												S extends JeeslStatus<L,D,S>,
 												G extends JeeslGraphic<L,D,?,?,?>>
 		extends Serializable,EjbPersistable,JeeslStatusWithSymbol,
-					JeeslOptionRestDownload,EjbWithCodeGraphic<G>,
+					JeeslRestDownloadOption,
+					EjbWithCodeGraphic<G>,
 					JeeslStatusFixedCode,JeeslStatus<L,D,S>
 {	
 	public enum Code{MtoO,OtoO,OtoM,MtoM}

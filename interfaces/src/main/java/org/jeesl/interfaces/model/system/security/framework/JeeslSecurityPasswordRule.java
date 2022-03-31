@@ -9,8 +9,8 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.option.JeeslRestDownloadOption;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
-import org.jeesl.interfaces.model.system.option.JeeslOptionRestDownload;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 
 public interface JeeslSecurityPasswordRule <L extends JeeslLang, D extends JeeslDescription,
@@ -18,7 +18,7 @@ public interface JeeslSecurityPasswordRule <L extends JeeslLang, D extends Jeesl
 											G extends JeeslGraphic<L,D,?,?,?>>
 		extends Serializable,EjbPersistable,
 					EjbWithCode,JeeslStatusFixedCode,JeeslStatusWithSymbol,
-					JeeslOptionRestDownload,EjbWithCodeGraphic<G>,
+					JeeslRestDownloadOption,EjbWithCodeGraphic<G>,
 					JeeslStatus<L,D,S>
 {
 	public enum Code{length,digit,lower,upper,symbol,rating,history,age}

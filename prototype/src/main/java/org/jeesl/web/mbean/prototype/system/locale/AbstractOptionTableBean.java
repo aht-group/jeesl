@@ -19,6 +19,7 @@ import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
+import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -30,13 +31,11 @@ import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.locale.option.JeeslOptionUploadable;
+import org.jeesl.interfaces.model.system.locale.option.JeeslRestDownloadOption;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithImage;
-import org.jeesl.interfaces.model.system.option.JeeslOptionRest;
-import org.jeesl.interfaces.model.system.option.JeeslOptionRestDescription;
-import org.jeesl.interfaces.model.system.option.JeeslOptionRestDownload;
-import org.jeesl.interfaces.model.system.option.JeeslOptionUploadable;
 import org.jeesl.interfaces.model.with.parent.EjbWithParent;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -47,6 +46,7 @@ import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImageAlt;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.rest.JeeslInterfaceRestCode;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.jeesl.Container;
@@ -162,7 +162,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 		supportsUpload = JeeslOptionUploadable.class.isAssignableFrom(optionClass);
 
-		supportsDescription = JeeslOptionRestDescription.class.isAssignableFrom(optionClass);
+		supportsDescription = JeeslRestDownloadEntityDescription.class.isAssignableFrom(optionClass);
 		supportsImage = JeeslStatusWithImage.class.isAssignableFrom(optionClass);
 		supportsGraphic = EjbWithGraphic.class.isAssignableFrom(optionClass);
 
@@ -183,8 +183,8 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 			logger.info("\tSymbol? "+supportsSymbol);
 			logger.info("\tFigure? "+supportsFigure);
 			logger.info("\tLocked? "+supportsLocked);
-			logger.info("\t"+JeeslOptionRestDownload.class.getSimpleName()+"? "+supportsDownload);
-			logger.info("\t"+JeeslOptionRestDescription.class.getSimpleName()+"? "+supportsDescription);
+			logger.info("\t"+JeeslRestDownloadOption.class.getSimpleName()+"? "+supportsDownload);
+			logger.info("\t"+JeeslRestDownloadEntityDescription.class.getSimpleName()+"? "+supportsDescription);
 			logger.info("\t"+JeeslOptionUploadable.class.getSimpleName()+"? "+supportsUpload);
 		}
 	}
@@ -441,11 +441,11 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 	//JEESL REST DATA
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <X extends JeeslOptionRest, S extends JeeslStatus, W extends EjbWithCodeGraphic<G>> void downloadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
+	public <X extends JeeslInterfaceRestCode, S extends JeeslStatus, W extends EjbWithCodeGraphic<G>> void downloadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
 	{
 		logger.info("Downloading REST");
 
-		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslOptionRest.class);
+		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslInterfaceRestCode.class);
 		Class<S> cS = (Class<S>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslStatus.class);
 		Class<W> cW = (Class<W>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(EjbWithCodeGraphic.class);
 		X x = cX.newInstance();
@@ -488,11 +488,11 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 	//JEESL REST Description
 	@SuppressWarnings({ "unchecked"})
-	public <X extends JeeslOptionRest> void downloadDescription() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
+	public <X extends JeeslInterfaceRestCode> void downloadDescription() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
 	{
 		logger.info("Downloading REST");
 
-		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslOptionRest.class);
+		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslInterfaceRestCode.class);
 
 		X x = cX.newInstance();
 

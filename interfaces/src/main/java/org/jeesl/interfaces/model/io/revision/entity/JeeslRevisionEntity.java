@@ -25,7 +25,8 @@ public interface JeeslRevisionEntity<L extends JeeslLang, D extends JeeslDescrip
 									ERD extends JeeslRevisionDiagram<L,D,RC>>
 		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 				EjbWithCode,EjbWithPositionVisible,EjbWithParentAttributeResolver,EjbWithPositionParent,
-				EjbWithLang<L>,EjbWithDescription<D>,EjbWithRevisionAttributes<RA>
+				EjbWithLang<L>,EjbWithDescription<D>,EjbWithRevisionAttributes<RA>,
+				JeeslRestDownloadEntity
 {
 	public enum Attributes {category,attributes}
 
