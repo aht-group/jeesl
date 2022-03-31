@@ -59,6 +59,7 @@
 						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.criteria.id gt 0}" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
+					<p:messages showDetail="true" autoUpdate="true" closable="true" />
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						
 						<p:outputLabel value="#{msg.jeeslCategory}"/>
