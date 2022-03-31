@@ -110,11 +110,12 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	public List<M> subMenu(String key)
 	{
-		if(debugOnInfo) {logger.info("SubMenu "+key);}
+//		if(debugOnInfo) {logger.info("SubMenu "+key);}
 		return cacheSub.get(key);
 	}
 	private List<M> buildSub(String key)
 	{
+		if(debugOnInfo) {logger.info("Generating buildSub for ("+key+")");}
 		List<M> list = new ArrayList<>();
 		if(bSecurity==null)
 		{
@@ -143,11 +144,12 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	public List<M> breadcrumb(String key)
 	{
-		if(debugOnInfo) {logger.info("Generating breadcrum for ("+key+")");}
+//		if(debugOnInfo) {logger.info("Requesting breadcrum for ("+key+")");}
 		return cacheBreadcrumb.get(key);
 	}
 	private List<M> buildBreadcrumb(String key)
 	{
+		if(debugOnInfo) {logger.info("Generating buildBreadcrumb for ("+key+")");}
 		List<M> list = new ArrayList<>();
 		if(bSecurity==null)
 		{

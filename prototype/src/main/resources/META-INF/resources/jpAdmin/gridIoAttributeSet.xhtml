@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-
-	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
-	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	
+		xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
+	
 	xmlns:aupAdmin="http://ahtutils.sourceforge.net/prototype/admin"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
@@ -54,7 +55,7 @@
 						<p:outputLabel value="#{msg.jeeslCode}"/>
 						<p:inputText  value="#{cc.attrs.bean.set.code}" autocomplete="off"/>
 					</p:panelGrid>
-					<aht:tabTranslationEditor value="#{cc.attrs.bean.set}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.set}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
 				</p:panel>
 			</h:form>
 		</j:slot>
@@ -69,6 +70,19 @@
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderItems()}" update="@form"/>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectItem()}" update=":#{cc.id}:sItems"/>
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column colspan="3"><f:facet name="header"></f:facet></p:column>
+							<p:column colspan="2"><f:facet name="header"><jtp:label entity="IoAttributeItem" code="code"/></f:facet></p:column>
+                   		</p:row>
+                   		<p:row>
+							<p:column colspan="1"><f:facet name="header"></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoAttributeItem"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoAttributeItem" code="codePool"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoAttributeItem" code="codeItem"/></f:facet></p:column>
+                   		</p:row>
+					</p:columnGroup>
 					<p:column>  
 						<h:graphicImage rendered="#{not i.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
                    		<h:outputText rendered="#{i.visible}" value="#{i.position}" />	
@@ -76,11 +90,14 @@
 				    <p:column>  
 						<h:graphicImage rendered="#{i.tableHeader}" name="12/ui/system/io/attribute/table.png"  library="jeeslPrototypeGfx"/>
 				    </p:column>
-					<p:column headerText="#{msg.jeeslIoAttributeItem}">  
+					<p:column>  
 						<h:outputText value="#{i.criteria.name[localeCode].lang}"/>
 					</p:column>
-					<p:column headerText="#{msg.jeeslCode}">  
+					<p:column>
 						<h:outputText value="#{i.criteria.code}"/>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{i.code}"/>
 					</p:column>
 			   	</p:dataTable>
 			</h:form>
@@ -99,15 +116,21 @@
 						<p:outputLabel value="#{msg.jeeslIoAttributeItemTableHeader}"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.item.tableHeader}"/>
 						
-						
 						<p:outputLabel value="#{msg.jeeslIoAttributeSetShort}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.item.itemSet}" effect="fade" autoWidth="false">
 							<f:selectItems value="#{cc.attrs.bean.sets}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
+						
 						<p:outputLabel value="#{msg.jeeslIoAttribute}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.item.criteria}" effect="fade" autoWidth="false">
-							<f:selectItems value="#{cc.attrs.bean.criterias}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
+							<f:selectItems value="#{cc.attrs.bean.criterias}" var="c" itemLabel="#{c.code} - #{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
+						
+						<jtp:label entity="IoAttributeItem" code="code"/>
+						<p:inputText  value="#{cc.attrs.bean.item.code}" autocomplete="off"/>
+						
+						<jtp:label entity="IoAttributeItem" code="remark"/>
+						<jtp:inputRemark  value="#{cc.attrs.bean.item.remark}"/>
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
