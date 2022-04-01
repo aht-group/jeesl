@@ -25,14 +25,18 @@ import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.facade.system.JeeslExportRestFacade;
+import org.jeesl.api.rest.system.JeeslSystemRest;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionViewMapping;
 import org.jeesl.interfaces.model.io.revision.data.JeeslRevisionScope;
+import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntity;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntityMapping;
@@ -41,6 +45,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
@@ -48,6 +53,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											RC extends JeeslRevisionCategory<L,D,RC,?>,
@@ -57,7 +63,8 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 											RST extends JeeslStatus<L,D,RST>,
 											RE extends JeeslRevisionEntity<L,D,RC,REM,RA,ERD>,
 											REM extends JeeslRevisionEntityMapping<RS,RST,RE>,
-											RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>, RER extends JeeslStatus<L,D,RER>,
+											RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>,
+											RER extends JeeslStatus<L,D,RER>,
 											RAT extends JeeslStatus<L,D,RAT>,
 											ERD extends JeeslRevisionDiagram<L,D,RC>>
 					extends AbstractAdminRevisionBean<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD>
@@ -77,10 +84,13 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 	private String className; public String getClassName() {return className;}
 	private Map<String, List<String>> mapEntitesCodeToAttribustes;
 
-	public AbstractAdminRevisionEntityBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision){
+	private boolean supportsJeeslAttributeDownload; public boolean isSupportsJeeslAttributeDownload() {return supportsJeeslAttributeDownload;}
+	
+	public AbstractAdminRevisionEntityBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision)
+	{
 		super(fbRevision);
 		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
-		}
+	}
 
 	protected void postConstructRevisionEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
 	{
@@ -131,6 +141,11 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 			}
 		}
 		cancelEntity();
+	}
+	
+	private void reset(boolean rEntity)
+	{
+		if(rEntity) {supportsJeeslAttributeDownload=false;}
 	}
 
 	private void reloadEntities()
@@ -257,10 +272,13 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		}
 	}
 
-	public void selectMissingEntityAttribute(String missingEntityCode, String attributeCode) {
+	public void selectMissingEntityAttribute(String missingEntityCode, String attributeCode)
+	{
 		selectMissingEntity(missingEntityCode);
-		for (RA ra : attributes) {
-			if(ra.getCode().equals(attributeCode)) {
+		for (RA ra : attributes)
+		{
+			if(ra.getCode().equals(attributeCode))
+			{
 				this.attribute = ra;
 			}
 		}
@@ -268,6 +286,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 
 	public void addEntity() throws JeeslNotFoundException
 	{
+		reset(true);
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassEntity()));}
 		entity = efEntity.build(null,entities);
 		entity.setName(efLang.createEmpty(langs));
@@ -281,10 +300,13 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		entity = fRevision.load(fbRevision.getClassEntity(), entity);
 		attributes = entity.getAttributes();
 		entityMappings = entity.getMaps();
+		supportsJeeslAttributeDownload=false;
 		try
 		{
 			Class<?> c = Class.forName(entity.getCode());
+			supportsJeeslAttributeDownload = JeeslRestDownloadEntity.class.isAssignableFrom(c);
 			className = c.getSimpleName();
+			logger.info(c.getName()+" supportsJeeslAttributeDownload:"+supportsJeeslAttributeDownload);
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -554,4 +576,36 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 			logger.info(uiAllowSave+" allowSave ("+actionDeveloper+")");
 		}
 	}
+	
+	//JEESL REST DATA
+
+	public <X extends JeeslEntityRestCode> void jeeslAttributeDownload()
+	{
+		logger.info("Downloading REST");
+		
+		try
+		{
+			Class<X> cX = (Class<X>)Class.forName(entity.getCode()).asSubclass(JeeslEntityRestCode.class);
+			X x = cX.newInstance();
+			String code = x.getRestCode();
+			
+			StringBuilder url = new StringBuilder();
+			if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
+			else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
+
+			ResteasyClient client = new ResteasyClientBuilder().build();
+			ResteasyWebTarget restTarget = client.target(url.toString());
+			JeeslSystemRest<L,D,?,?> rest = restTarget.proxy(JeeslSystemRest.class);
+			org.jeesl.model.xml.system.revision.Entity xml = rest.exportRevisionEntity(code);
+			JaxbUtil.info(xml);
+		}
+		catch (ClassNotFoundException | UtilsConfigurationException | InstantiationException | IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	
+	}
+	
 }

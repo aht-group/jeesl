@@ -5,7 +5,9 @@ import java.util.List;
 
 public interface JeeslLocaleProvider<LOC extends JeeslLocale<?,?,LOC,?>> extends Serializable
 {	
-	String getPrimaryLocaleCode();
+	void addLocale(LOC loc);
 	List<String> getLocaleCodes();
+	
+	String getPrimaryLocaleCode();
 	boolean hasLocale(String localeCode);
 }

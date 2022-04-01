@@ -7,10 +7,10 @@ import java.util.Map;
 
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
+import org.jeesl.interfaces.model.system.locale.JeeslDescription;
+import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,6 +36,12 @@ public class GenericLocaleProvider <L extends JeeslLang, D extends JeeslDescript
 		this.setLocales(locales);
 	}
 	
+	@Override public void addLocale(LOC loc)
+	{
+		localeCodes.add(loc.getCode());
+		mapLocales.put(loc.getCode(),loc);
+	}
+	
 	public void setLocales(List<LOC> locales)
 	{
 		localeCodes.clear();
@@ -52,4 +58,5 @@ public class GenericLocaleProvider <L extends JeeslLang, D extends JeeslDescript
 		if(!localeCodes.isEmpty()) {return localeCodes.get(0);}
 		return null;
 	}
+	
 }

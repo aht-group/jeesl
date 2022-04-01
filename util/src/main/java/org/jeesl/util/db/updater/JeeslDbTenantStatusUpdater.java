@@ -24,12 +24,12 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.status.Status;
 
-public class JeeslDbMcsStatusUpdater <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,G>,
+public class JeeslDbTenantStatusUpdater <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,G>,
 										R extends JeeslTenantRealm<L,D,R,G>, RREF extends EjbWithId,
 //										S extends JeeslMcsStatus<L,D,R,S,G>,
 										G extends JeeslGraphic<L,D,GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>>
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslDbMcsStatusUpdater.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslDbTenantStatusUpdater.class);
 	
 	private final JeeslGraphicFacade<?,?,?,G,GT,?,?> fGraphic;
 	private final LocaleFactoryBuilder<L,D,?> fbLocale;
@@ -39,7 +39,7 @@ public class JeeslDbMcsStatusUpdater <L extends JeeslLang, D extends JeeslDescri
 	private R realm;
 	private RREF rref;
 	
-	public JeeslDbMcsStatusUpdater(LocaleFactoryBuilder<L,D,LOC> fbLocale, SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg,
+	public JeeslDbTenantStatusUpdater(LocaleFactoryBuilder<L,D,LOC> fbLocale, SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg,
 										JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic, JeeslLocaleProvider<LOC> lp)
 	{
 		this.fbLocale=fbLocale;

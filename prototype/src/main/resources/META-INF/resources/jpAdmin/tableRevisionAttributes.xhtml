@@ -23,7 +23,8 @@
 			selection="#{cc.attrs.bean.attribute}" selectionMode="single" rowKey="#{a.id}">
 			<f:facet name="header">
 				<j:dtHeader title="#{msg.jeeslRevisionAttributes}">
-					<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}" tooltip="#{msg.ttNew}"/>
+					<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}"/>
+					<j:icon type="jeeslDownload" listener="#{cc.attrs.bean.jeeslAttributeDownload()}" update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.bean.supportsJeeslAttributeDownload}"/>
 				</j:dtHeader>
 			</f:facet>
 			<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAttributes()}" update="@form"/>

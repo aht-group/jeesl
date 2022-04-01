@@ -45,7 +45,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.jeesl.Container;
-import org.jeesl.util.db.updater.JeeslDbMcsStatusUpdater;
+import org.jeesl.util.db.updater.JeeslDbTenantStatusUpdater;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
@@ -407,7 +407,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 		}
 		JaxbUtil.trace(xml);
 
-		JeeslDbMcsStatusUpdater<L,D,LOC,R,RREF,G,GT> updater = new JeeslDbMcsStatusUpdater<L,D,LOC,R,RREF,G,GT>(fbStatus,fbSvg,fGraphic,lp);
+		JeeslDbTenantStatusUpdater<L,D,LOC,R,RREF,G,GT> updater = new JeeslDbTenantStatusUpdater<L,D,LOC,R,RREF,G,GT>(fbStatus,fbSvg,fGraphic,lp);
 		updater.initMcs(realm,rref);
 		updater.iStatus(optionClass,xml);
 
