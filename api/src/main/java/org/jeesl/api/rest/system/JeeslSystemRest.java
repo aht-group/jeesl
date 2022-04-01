@@ -1,4 +1,4 @@
-package org.jeesl.api.rest;
+package org.jeesl.api.rest.system;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,13 +12,14 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
+import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 import org.jeesl.model.xml.system.revision.Entity;
 
 @Path("/rest/jeesl/export")
-public interface JeeslExportRest <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslSystemRest <L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
 									G extends JeeslGraphic<L,D,?,?,?>>
-								extends org.jeesl.interfaces.rest.JeeslExportRest<L,D,R,G>
+								extends JeeslSystemRestInterface<L,D,R,G>
 {	
 	@GET @Path("/status/{code}") @Produces(MediaType.APPLICATION_XML)
 	<X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.jeesl.Container exportStatus(@PathParam("code") String code) throws UtilsConfigurationException;

@@ -10,7 +10,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
-import org.jeesl.api.rest.JeeslExportRest;
+import org.jeesl.api.rest.system.JeeslSystemRest;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -46,7 +46,7 @@ import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImageAlt;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
-import org.jeesl.interfaces.rest.JeeslInterfaceRestCode;
+import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.jeesl.Container;
@@ -441,11 +441,11 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 	//JEESL REST DATA
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <X extends JeeslInterfaceRestCode, S extends JeeslStatus, W extends EjbWithCodeGraphic<G>> void downloadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
+	public <X extends JeeslEntityRestCode, S extends JeeslStatus, W extends EjbWithCodeGraphic<G>> void downloadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
 	{
 		logger.info("Downloading REST");
 
-		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslInterfaceRestCode.class);
+		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslEntityRestCode.class);
 		Class<S> cS = (Class<S>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslStatus.class);
 		Class<W> cW = (Class<W>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(EjbWithCodeGraphic.class);
 		X x = cX.newInstance();
@@ -482,17 +482,17 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget restTarget = client.target(url.toString());
-		JeeslExportRest<L,D,?,G> rest = restTarget.proxy(JeeslExportRest.class);
+		JeeslSystemRest<L,D,?,G> rest = restTarget.proxy(JeeslSystemRest.class);
 		return rest.exportStatus(code);
 	}
 
 	//JEESL REST Description
 	@SuppressWarnings({ "unchecked"})
-	public <X extends JeeslInterfaceRestCode> void downloadDescription() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
+	public <X extends JeeslEntityRestCode> void downloadDescription() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
 	{
 		logger.info("Downloading REST");
 
-		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslInterfaceRestCode.class);
+		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslEntityRestCode.class);
 
 		X x = cX.newInstance();
 
@@ -534,7 +534,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget restTarget = client.target(url.toString());
-		JeeslExportRest<L,D,?,G> rest = restTarget.proxy(JeeslExportRest.class);
+		JeeslSystemRest<L,D,?,G> rest = restTarget.proxy(JeeslSystemRest.class);
 		return rest.exportRevisionEntity(code);
 	}
 }

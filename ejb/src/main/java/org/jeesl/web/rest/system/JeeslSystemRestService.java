@@ -26,7 +26,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
-import org.jeesl.interfaces.rest.JeeslExportRest;
+import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.query.xml.SymbolQuery;
 import org.jeesl.util.query.xml.system.io.XmlRevisionQuery;
@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.status.Status;
 
-public class JeeslRestService <L extends JeeslLang,D extends JeeslDescription,
+public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,G>,
 								S extends EjbWithId,
 								G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
@@ -49,9 +49,9 @@ public class JeeslRestService <L extends JeeslLang,D extends JeeslDescription,
 								RAT extends JeeslStatus<L,D,RAT>,
 								ERD extends JeeslRevisionDiagram<L,D,RC>>
 					extends AbstractJeeslRestService<L,D>
-					implements JeeslExportRest<L,D,R,G>
+					implements JeeslSystemRestInterface<L,D,R,G>
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslRestService.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslSystemRestService.class);
 
 	protected final IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision;
 
@@ -61,7 +61,7 @@ public class JeeslRestService <L extends JeeslLang,D extends JeeslDescription,
 	private final XmlGraphicFactory<L,D,G,GT,F,FS> xfGraphic;
 	private final XmlEntityFactory<L,D,RC,REM,RE,RA,RER,RAT,ERD> xfEntity;
 
-	private JeeslRestService(IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision,
+	private JeeslSystemRestService(IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision,
 							JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic,
 							JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision)
 	{
@@ -85,12 +85,12 @@ public class JeeslRestService <L extends JeeslLang,D extends JeeslDescription,
 						RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>,
 						RAT extends JeeslStatus<L,D,RAT>,
 						ERD extends JeeslRevisionDiagram<L,D,RC>>
-	JeeslRestService<L,D,R,S,G,GT,F,FS,RC,REM,RE,RA,RER,RAT,ERD>
+	JeeslSystemRestService<L,D,R,S,G,GT,F,FS,RC,REM,RE,RA,RER,RAT,ERD>
 		factory(IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision,
 				JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic,
 				JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision)
 	{
-		return new JeeslRestService<L,D,R,S,G,GT,F,FS,RC,REM,RE,RA,RER,RAT,ERD>(fbRevision,fGraphic,fRevision);
+		return new JeeslSystemRestService<L,D,R,S,G,GT,F,FS,RC,REM,RE,RA,RER,RAT,ERD>(fbRevision,fGraphic,fRevision);
 	}
 
 

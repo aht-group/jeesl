@@ -9,7 +9,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
-import org.jeesl.api.rest.JeeslExportRest;
+import org.jeesl.api.rest.system.JeeslSystemRest;
 import org.jeesl.controller.provider.GenericLocaleProvider;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -42,7 +42,7 @@ import org.jeesl.interfaces.model.with.primitive.text.EjbWithSymbol;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
-import org.jeesl.interfaces.rest.JeeslInterfaceRestCode;
+import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.db.updater.JeeslDbMcsStatusUpdater;
@@ -385,11 +385,11 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 
 	//JEESL REST DATA
 	@SuppressWarnings("unchecked")
-	public <REST extends JeeslInterfaceRestCode, Y extends JeeslMcsStatus<L,D,R,Y,G>, X extends JeeslStatus<L,D,X>> void downloadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
+	public <REST extends JeeslEntityRestCode, Y extends JeeslMcsStatus<L,D,R,Y,G>, X extends JeeslStatus<L,D,X>> void downloadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
 	{
 		logger.info("Downloading REST");
 
-		Class<REST> cRest = (Class<REST>)Class.forName(((EjbWithSymbol)category).getSymbol()).asSubclass(JeeslInterfaceRestCode.class);
+		Class<REST> cRest = (Class<REST>)Class.forName(((EjbWithSymbol)category).getSymbol()).asSubclass(JeeslEntityRestCode.class);
 //		Class<S> cS = (Class<S>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslStatus.class);
 //		Class<W> cW = (Class<W>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(EjbWithCodeGraphic.class);
 		REST rest = cRest.newInstance();
@@ -423,7 +423,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget restTarget = client.target(url.toString());
-		JeeslExportRest<L,D,?,G> rest = restTarget.proxy(JeeslExportRest.class);
+		JeeslSystemRest<L,D,?,G> rest = restTarget.proxy(JeeslSystemRest.class);
 		return rest.exportStatus(code);
 	}
 }
