@@ -81,10 +81,14 @@ public class JeeslMissingLabelsHandler<L extends JeeslLang,D extends JeeslDescri
 	{
 		for(RML rml : missingLabelCollection)
 		{
-			if(Objects.equals(rml.getMissingEntity(), missingEntity) && Objects.equals(rml.getMissingCode(), missingCode) && Objects.equals(rml.getMissingLocal(),localString))
+			try
 			{
-				return true;
+				if(Objects.nonNull(rml) && Objects.equals(rml.getMissingEntity(), missingEntity) && Objects.equals(rml.getMissingCode(), missingCode) && Objects.equals(rml.getMissingLocal(),localString))
+				{
+					return true;
+				}
 			}
+			catch(NullPointerException e) {logger.info("Null revision missing label found : " + e.getMessage());}
 		}
 		return false;
 	}
