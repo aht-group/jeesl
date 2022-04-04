@@ -507,7 +507,7 @@ body, .ui-widget {
 		align-items: stretch;
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: end;
+		justify-content: flex-end;
 		margin-bottom: 0;
 	    right: 0;
 	    top: 0;
@@ -732,7 +732,7 @@ body, .ui-widget {
 		
 		> .jeesl-right:last-child {
 			flex-grow: 1;
-			justify-content: end;
+			justify-content: flex-end;
 			text-align: right;
 		}
 		
@@ -1292,6 +1292,7 @@ body, .ui-widget {
 			    display: inline-block;
 			    height: 100%;
 			    opacity: 1;
+				padding: 0;
 			    position: inherit;
 				visibility: visible;
 				
