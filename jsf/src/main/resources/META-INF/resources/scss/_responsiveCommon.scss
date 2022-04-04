@@ -634,7 +634,7 @@ $border: $border-width solid $border-colour;
 				&:after {
 					bottom: 0;
 					position: absolute;
-					width: calc(100% - (2 * $wide-spacing));
+					width: calc(100% - (2 * #{$wide-spacing}));
 				}
 				
 				label {
