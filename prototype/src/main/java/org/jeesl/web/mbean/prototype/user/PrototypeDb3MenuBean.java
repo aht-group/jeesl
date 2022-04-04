@@ -5,8 +5,10 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.JeeslMenuBean;
@@ -59,12 +61,15 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private final PositionComparator<M> cpMenu;
 
 	private final Map<String,M> mapRoot; public Map<String,M> getMapRoot() {return mapRoot;}
+	private final Set<Long> setAllowed;
 	
 	private final LoadingCache<String,List<M>> cacheSub;
 	private final LoadingCache<String,List<M>> cacheBreadcrumb;
 	
+	
 	private final List<M> mainMenu; public List<M> getMainMenu() {if(setupRequired) {this.setup();} return mainMenu;}
 
+	
 	private I identity;
 	private CTX context;
 	
@@ -90,7 +95,9 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 //			       .removalListener((String key, String graph, RemovalCause cause) -> System.out.printf("Key %s was removed (%s)%n", key, cause))
 			       .build(key -> buildBreadcrumb(key));
 	
+		
 		mapRoot = new HashMap<>();
+		setAllowed = new HashSet<>();
 		
 		mainMenu = new ArrayList<>();
 
@@ -115,7 +122,8 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	}
 	private List<M> buildSub(String key)
 	{
-		if(debugOnInfo) {logger.info("Generating buildSub for ("+key+")");}
+		boolean withContext = context!=null;
+		if(debugOnInfo) {logger.info("Generating buildSub for ("+key+") withContext:"+context);}
 		List<M> list = new ArrayList<>();
 		if(bSecurity==null)
 		{
@@ -123,19 +131,19 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			return list;
 		}
 		
-		if(context==null)
+		if(withContext)
 		{
 			list.addAll(bSecurity.getMenus()
-					.stream()
-					.filter(m -> m.getParent()!=null && m.getParent().getView().getCode().equals(key))
-					.collect(Collectors.toList()));
+				.stream()
+				.filter(m -> m.getContext().equals(context) && m.getParent()!=null && m.getParent().getView().getCode().equals(key) && setAllowed.contains(m.getId()))
+				.collect(Collectors.toList()));
 		}
 		else
 		{
 			list.addAll(bSecurity.getMenus()
-						.stream()
-						.filter(m -> m.getContext().equals(context) && m.getParent()!=null && m.getParent().getView().getCode().equals(key))
-						.collect(Collectors.toList()));
+				.stream()
+				.filter(m -> m.getParent()!=null && m.getParent().getView().getCode().equals(key) && setAllowed.contains(m.getId()))
+				.collect(Collectors.toList()));
 		}
 		logger.info("Key: "+key+" list "+list.size());
 		Collections.sort(list,cpMenu);
@@ -193,8 +201,14 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	{
 		if(debugOnInfo) {logger.info("Resettings Menu");}
 		mapRoot.clear();
+		setAllowed.clear();
 		mainMenu.clear();
-		cacheSub.invalidateAll(); cacheSub.cleanUp();
+		
+		cacheSub.invalidateAll();
+		cacheSub.cleanUp();
+		cacheBreadcrumb.invalidateAll();
+		cacheBreadcrumb.cleanUp();
+		
 		setupRequired = true;
 	}
 	
@@ -240,7 +254,8 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 				
 				if(debugOnInfo) {logger.info("\t\t"+m.getView().getCode()+" visible:"+visible+" developer:"+developer);}
 				if(visible || developer)
-				{					
+				{	
+					setAllowed.add(m.getId());
 					if(m.getParent()==null) {mainMenu.add(m);}
 					
 				}

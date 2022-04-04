@@ -23,5 +23,4 @@ public interface JeeslNewsletterTopic <L extends JeeslLang, D extends JeeslDescr
 									,EjbWithLangDescription<L,D>,EjbWithPosition
 {
 	public enum Attributes{x}
-	
 }
