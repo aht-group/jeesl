@@ -66,10 +66,8 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private final LoadingCache<String,List<M>> cacheSub;
 	private final LoadingCache<String,List<M>> cacheBreadcrumb;
 	
-	
 	private final List<M> mainMenu; public List<M> getMainMenu() {if(setupRequired) {this.setup();} return mainMenu;}
 
-	
 	private I identity;
 	private CTX context;
 	
@@ -106,8 +104,8 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	}
 	
 	public void postConstructMenu(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
-			JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity,
-			CTX context, I identity)
+									JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity,
+									CTX context, I identity)
 	{
 		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
@@ -123,7 +121,8 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private List<M> buildSub(String key)
 	{
 		boolean withContext = context!=null;
-		if(debugOnInfo) {logger.info("Generating buildSub for ("+key+") withContext:"+context);}
+		if(debugOnInfo) {logger.info("Generating buildSub for ("+key+") withContext:"+context+" setup:"+setupRequired);}
+		if(setupRequired) {this.setup();}
 		List<M> list = new ArrayList<>();
 		if(bSecurity==null)
 		{
@@ -157,7 +156,8 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	}
 	private List<M> buildBreadcrumb(String key)
 	{
-		if(debugOnInfo) {logger.info("Generating buildBreadcrumb for ("+key+")");}
+		if(debugOnInfo) {logger.info("Generating buildBreadcrumb for ("+key+") setup:"+setupRequired);}
+		if(setupRequired) {this.setup();}
 		List<M> list = new ArrayList<>();
 		if(bSecurity==null)
 		{
@@ -206,6 +206,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		
 		cacheSub.invalidateAll();
 		cacheSub.cleanUp();
+		
 		cacheBreadcrumb.invalidateAll();
 		cacheBreadcrumb.cleanUp();
 		
@@ -231,20 +232,21 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			}
 			
 			List<M> list = new ArrayList<>();
-			if(context==null)
+			if(context!=null)
 			{
-				if(bSecurity==null) {list.addAll(fSecurity.all(fbSecurity.getClassMenu()));}
-				else {list.addAll(bSecurity.getMenus());}
-				if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size());}
+				if(bSecurity!=null) {list.addAll(bSecurity.getMenus().stream().filter(m -> m.getContext().equals(context)).collect(Collectors.toList()));}
+				else {list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(),JeeslSecurityMenu.Attributes.context,context));}
+				if(debugOnInfo) {logger.info("\t"+fbSecurity.getClassMenu().getSimpleName()+": "+list.size()+" in context "+context.getCode());}
 			}
 			else
 			{
-				if(bSecurity==null) {list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(),JeeslSecurityMenu.Attributes.context,context));}
-				else {list.addAll(bSecurity.getMenus().stream().filter(m -> m.getContext().equals(context)).collect(Collectors.toList()));}
-				if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size()+" in context "+context.getCode());}
+				if(bSecurity!=null) {list.addAll(bSecurity.getMenus());}
+				else {list.addAll(fSecurity.all(fbSecurity.getClassMenu()));}
+				if(debugOnInfo) {logger.info("\t"+fbSecurity.getClassMenu().getSimpleName()+": "+list.size());}
 			}
 			Collections.sort(list,cpMenu);
 			
+			setAllowed.clear();
 			for(M m : list)
 			{
 				mapRoot.put(m.getView().getCode(),efMenu.toRoot(m));
@@ -257,9 +259,9 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 				{	
 					setAllowed.add(m.getId());
 					if(m.getParent()==null) {mainMenu.add(m);}
-					
 				}
 			}
+			logger.info("\tAllowd Pages "+setAllowed.size());
 			setupRequired = false;
 		}
 	}
