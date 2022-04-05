@@ -1,18 +1,24 @@
 package org.jeesl.web.mbean.system;
 
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.jeesl.interfaces.model.system.graphic.core.JeeslIcon;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
+import org.jeesl.model.xml.jeesl.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.jsf.filter.UtilsStatusFilter;
+import net.sf.ahtutils.xml.status.Status;
+import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractIconBean implements Serializable
 {
@@ -179,29 +185,25 @@ public class AbstractIconBean implements Serializable
 
 	protected void jeesl()
 	{
-		mapStatic.put("jeeslAdd", "ui/jeesl/control/add.png");							svg.put("jeeslAdd","ui/control/add.svg");
-		mapStatic.put("jeeslCancel", "ui/jeesl/control/cancel.png");					svg.put("jeeslCancel","ui/control/cancel.svg");
-		mapStatic.put("jeeslClone", "ui/jeesl/control/clone.png");						svg.put("jeeslClone","ui/control/clone.svg");
-		mapStatic.put("jeeslDelete", "ui/jeesl/control/delete.png");					svg.put("jeeslDelete","ui/control/delete.svg");
-		mapStatic.put("jeeslEdit", "ui/jeesl/control/edit.png");						svg.put("jeeslEdit","ui/control/edit.svg");
+		mapStatic.put("jeeslAdd", "ui/jeesl/control/add.png");							
+		mapStatic.put("jeeslCancel", "ui/jeesl/control/cancel.png");					
+		mapStatic.put("jeeslClone", "ui/jeesl/control/clone.png");						
+		mapStatic.put("jeeslDelete", "ui/jeesl/control/delete.png");					
+		mapStatic.put("jeeslEdit", "ui/jeesl/control/edit.png");
 		mapStatic.put("jeeslEditGrey", "ui/jeesl/control/editGrey.png");
-		mapStatic.put("jeeslFilter", "ui/jeesl/control/filter.png");					svg.put("jeeslFilter","ui/control/calc/filter.svg");
+		mapStatic.put("jeeslFilter", "ui/jeesl/control/filter.png");					
 		mapStatic.put("jeeslMove", "ui/jeesl/control/move.png");
-		mapStatic.put("jeeslRemove", "ui/jeesl/control/remove.png");					svg.put("jeeslRemove","ui/control/remove.svg");
+		mapStatic.put("jeeslRemove", "ui/jeesl/control/remove.png");					
 		mapStatic.put("jeeslRefresh", "ui/jeesl/control/refresh.png");					svg.put("jeeslRefresh","ui/control/refresh.svg");
 		mapStatic.put("jeeslClean", "ui/jeesl/control/clean.png");
-		mapStatic.put("jeeslSave", "ui/jeesl/control/save.png");						svg.put("jeeslSave","ui/control/save.svg");
+		mapStatic.put("jeeslSave", "ui/jeesl/control/save.png");						
 		mapStatic.put("jeeslSearch", "ui/jeesl/control/search.png");					svg.put("jeeslSearch","ui/control/search.svg");
-		mapStatic.put("jeeslDownload", "ui/jeesl/control/download.png");				svg.put("jeeslDownload","ui/control/download.svg");
-		mapStatic.put("jeeslUpload", "ui/jeesl/control/upload.png");					svg.put("jeeslUpload","ui/control/upload.svg");
-		mapStatic.put("jeeslGenerate", "ui/jeesl/control/gear.png");					svg.put("jeeslUpload","ui/control/gear.svg");
+		mapStatic.put("jeeslDownload", "ui/jeesl/control/download.png");				
+		mapStatic.put("jeeslUpload", "ui/jeesl/control/upload.png");					
+		mapStatic.put("jeeslGenerate", "ui/jeesl/control/gear.png");					svg.put("jeeslGenerate","ui/control/gear.svg");
 																						svg.put("jeeslWizard","ui/control/wizard/wand.svg");
 																						svg.put("jeeslCalendar","ui/control/calendar.svg");
 																						
-		svg.put("jeeslArrowUp","ui/control/arrow/blue/up.svg");
-		svg.put("jeeslArrowDown","ui/control/arrow/blue/down.svg");
-		svg.put("jeeslArrowLeft","ui/control/arrow/blue/left.svg");
-		svg.put("jeeslArrowRight","ui/control/arrow/blue/right.svg");
 
 		mapStatic.put("jeeslInvisible", "ui/jeesl/generic/ghost.png");
 		mapStatic.put("jeeslUnsaved", "ui/jeesl/generic/unsaved.png");
@@ -231,7 +233,6 @@ public class AbstractIconBean implements Serializable
 		svg.put("jeeslOnlineHelp", "ui/info/help.svg");
 		svg.put("jeeslReport", "ui/info/report.svg");
 		
-		svg.put("jeeslAddressBook", "/ui/system/person/addressbook.svg");
 	}
 
 	protected void jeeslRevision()
@@ -284,5 +285,20 @@ public class AbstractIconBean implements Serializable
 		mapStatic.put("reportPdf", "ui/jeesl/system/io/file/pdf.png");	svg.put("reportPdf","ui/io/fr/type/pdf.svg");
 		mapStatic.put("reportXls", "ui/jeesl/system/io/file/xls.png");	svg.put("reportXls","ui/io/fr/type/xls.svg");
 		mapStatic.put("reportDoc", "ui/jeesl/system/io/file/doc.png");	svg.put("reportDoc","ui/io/fr/type/doc.svg");
+	}
+	
+	protected void jeeslIconLibrary()
+	{
+		try
+		{
+			Container xml = JaxbUtil.loadJAXB(JeeslIcon.jeeslLibIcons,Container.class);
+			for(Status s : xml.getStatus())
+			{
+				logger.info("Jeesl Icon Library: "+s.getCode()+" "+s.getSymbol());
+				if(svg.containsKey(s.getCode())) {logger.warn("Icon already defined !!!");}
+				else {svg.put(s.getCode(),s.getSymbol());}
+			}
+		}
+		catch (FileNotFoundException e) {e.printStackTrace();}
 	}
 }

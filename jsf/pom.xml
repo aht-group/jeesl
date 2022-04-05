@@ -315,24 +315,7 @@
 								<resource>
 									<directory>${project.basedir}/../doc/src/main/resources/jeesl/svg/icon/ui</directory>
 									<includes>
-										<include>control/*.*</include>
-										<include>control/calc/*.*</include>
-										<include>control/checkbox/*.*</include>
-										<include>control/tree/*.*</include>
-										<include>control/email/*.*</include>
-										<include>control/arrow/blue/*.*</include>
-										<include>control/wizard/*.*</include>
-										<include>info/*.*</include>
-										<include>info/ejb/*.*</include>
-										<include>info/mark/*.*</include>
-										<include>system/io/cms/*.*</include>
-										<include>io/fr/type/*.*</include>
-										<include>io/logging/*.*</include>
-										<include>io/revision/**/*.*</include>
-										<include>module/survey/*.*</include>
-										<include>system/io/revision/*.*</include>
-										<include>security/*.*</include>
-										<include>system/**/*.*</include>
+										<include>**/*.*</include>
 									</includes>
 								</resource>
 							</resources>              
