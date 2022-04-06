@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="views" required="true"/>
+		<composite:attribute name="update" required="true"/>
+		<composite:attribute name="withRemove" required="false" default="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		<p:dataTable id="dtViews" var="v" value="#{cc.attrs.views}"
+						 selection="#{cc.attrs.bean.tblView}" selectionMode="single" rowKey="#{v.id}">
+			<f:facet name="header">
+				<j:dtHeader id="dth" title="#{msg.aupSecurityViews}">
+					<j:svg type="jeeslAdd" onstart="PF('wvOpViewSelection').show();" library="jeeslGfx"/>
+                    <j:svg type="jeeslRemove" listener="#{cc.attrs.bean.opRmView()}" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblView)}" update="#{cc.attrs.update}" library="jeeslGfx"/>
+				</j:dtHeader>
+			</f:facet>
+			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblView}"/>
+			<p:column>
+				<h:outputText value="#{v.category.position}.#{v.position}"/>
+			</p:column>
+			<p:column>
+				<f:facet name="header"><jtp:label entity="SecurityView" code="category"/></f:facet>
+				<h:outputText value="#{v.category.name[userBean.localeCode].lang}" />
+			</p:column>
+			<p:column headerText="#{msg.jeeslSecurityCode}">
+				<h:outputText value="#{v.code}" />
+			</p:column>
+			<p:column headerText="#{msg.aupSecurityView}">
+				<h:outputText value="#{v.name[userBean.localeCode].lang}" />
+			</p:column>
+		</p:dataTable>				  
+		<p:overlayPanel widgetVar="wvOpViewSelection" appendToBody="false">
+			<p:dataTable id="dtOpSector" var="v" value="#{cc.attrs.bean.opViews}" rowKey="#{v.id}"
+                         selection="#{cc.attrs.bean.opView}" selectionMode="single"
+                         filteredValue="#{cc.attrs.bean.opFvViews}"
+                         rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddView}" oncomplete="PF('wvOpViewSelection').hide();"/>
+				<p:column>
+					<h:outputText value="#{v.category.position}.#{v.position}"/>
+				</p:column>
+				<p:column sortBy="#{v.category.name[localeCode].lang}" filterBy="#{v.category.name[localeCode].lang}" filterMatchMode="contains">
+					<f:facet name="header"><jtp:label entity="SecurityView" code="category"/></f:facet>
+					<h:outputText value="#{v.category.name[userBean.localeCode].lang}" />
+				</p:column>
+				<p:column headerText="#{msg.aupSecurityView}" sortBy="#{v.name[localeCode].lang}" filterBy="#{v.name[localeCode].lang}" filterMatchMode="contains">
+					<h:outputText value="#{v.name[userBean.localeCode].lang}" />
+				</p:column>
+			</p:dataTable>
+		</p:overlayPanel>
+	</composite:implementation>
+</html>

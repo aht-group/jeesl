@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:jpSec="http://jsf.jeesl.org/prototype/security"
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
@@ -84,9 +80,9 @@
 						</p:panel>	
 						
 					</h:form>
-					<h:form id="fViews"><aupSec:addViews rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
+					<h:form id="fViews"><jpSec:addViews rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
 					<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
-					<h:form id="fUsecase"><aupSec:addUsecases rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fUsecase" usecases="#{cc.attrs.bean.usecases}"/></h:form>
+					<h:form id="fUsecase"><jpSec:addUsecases rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fUsecase" usecases="#{cc.attrs.bean.usecases}"/></h:form>
 				</aht:slot>
 			</aht:row>
 		</aup:grid>

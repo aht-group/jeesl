@@ -75,7 +75,7 @@
 			</h:form>
 		</aht:slot>
 		<j:slot id="sUsecase" width="6" renderChildren="#{not empty cc.attrs.bean.usecase}">
-			<h:form id="fViews"><aupSec:addViews rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
+			<h:form id="fViews"><jpSec:addViews rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
 			<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
 			
 			<p:dataTable var="r" value="#{cc.attrs.bean.roles}" rendered="#{not empty cc.attrs.bean.usecase}">
