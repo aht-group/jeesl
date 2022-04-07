@@ -194,33 +194,21 @@ public class AbstractIconBean implements Serializable
 		mapStatic.put("jeeslFilter", "ui/jeesl/control/filter.png");					
 		mapStatic.put("jeeslMove", "ui/jeesl/control/move.png");
 		mapStatic.put("jeeslRemove", "ui/jeesl/control/remove.png");					
-		mapStatic.put("jeeslRefresh", "ui/jeesl/control/refresh.png");					svg.put("jeeslRefresh","ui/control/refresh.svg");
+		mapStatic.put("jeeslRefresh", "ui/jeesl/control/refresh.png");			svg.put("jeeslRefresh","ui/control/refresh.svg");
 		mapStatic.put("jeeslClean", "ui/jeesl/control/clean.png");
 		mapStatic.put("jeeslSave", "ui/jeesl/control/save.png");						
-		mapStatic.put("jeeslSearch", "ui/jeesl/control/search.png");					svg.put("jeeslSearch","ui/control/search.svg");
+		mapStatic.put("jeeslSearch", "ui/jeesl/control/search.png");			svg.put("jeeslSearch","ui/control/search.svg");
 		mapStatic.put("jeeslDownload", "ui/jeesl/control/download.png");				
 		mapStatic.put("jeeslUpload", "ui/jeesl/control/upload.png");					
-		mapStatic.put("jeeslGenerate", "ui/jeesl/control/gear.png");					svg.put("jeeslGenerate","ui/control/gear.svg");
-																						svg.put("jeeslWizard","ui/control/wizard/wand.svg");
-																						svg.put("jeeslCalendar","ui/control/calendar.svg");
+		mapStatic.put("jeeslGenerate", "ui/jeesl/control/gear.png");			svg.put("jeeslGenerate","ui/control/gear.svg");
+																				svg.put("jeeslWizard","ui/control/wizard/wand.svg");
+																				svg.put("jeeslCalendar","ui/control/calendar.svg");
 																						
-
 		mapStatic.put("jeeslInvisible", "ui/jeesl/generic/ghost.png");
 		mapStatic.put("jeeslUnsaved", "ui/jeesl/generic/unsaved.png");
 
-		svg.put("jeeslHome", "ui/system/home.svg");
-		svg.put("jeeslLanguageSelect", "ui/system/language-select.svg");
-		
-		svg.put("jeeslSbLogging", "svg/jeesl/icon/ui/ui/io/logging/sbLogging.svg");
-
 		svg.put("jeeslEmail","ui/control/email/email.svg");
 		svg.put("jeeslEmailSend","ui/control/email/send.svg");
-
-		svg.put("jeeslTreeExpandTwo", "ui/control/tree/expand-2.svg");
-		svg.put("jeeslTreeExpandThree", "ui/control/tree/expand-3.svg");
-		svg.put("jeeslTreeExpandAll", "ui/control/tree/expand-all.svg");
-		svg.put("jeeslTreeExpandRelevant", "ui/control/tree/expand-relevant.svg");
-		svg.put("jeeslTreeCollapseAll", "ui/control/tree/collapse-all.svg");
 
 		svg.put("jeeslExclamationMark", "ui/info/mark/exclamation.svg");
 		svg.put("jeeslCheckMark", "ui/info/mark/check.svg");
@@ -230,7 +218,6 @@ public class AbstractIconBean implements Serializable
 		svg.put("jeeslCheckbox", "ui/control/checkbox/bright-unchecked.svg");
 		svg.put("jeeslCheckboxChecked", "ui/control/checkbox/bright-checked.svg");
 
-		svg.put("jeeslOnlineHelp", "ui/info/help.svg");
 		svg.put("jeeslReport", "ui/info/report.svg");
 		
 	}
