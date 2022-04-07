@@ -1843,8 +1843,7 @@ body, .ui-widget {
         opacity: 0;
         transition: opacity .2s linear;
         z-index: 1000;
-        pointer-events: all;
-        top: 100%; }
+        pointer-events: all; }
         @media (max-width: 768px) {
           .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container {
             border: none;
@@ -1920,10 +1919,8 @@ body, .ui-widget {
               font-size: 11px;
               height: 0;
               margin-top: 0;
-              overflow: hidden;
               position: relative;
-              transition: height .2s linear;
-              width: 100%; }
+              transition: height .2s linear; }
               .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content {
                 background: white;
                 border: 1px solid #ababab;
@@ -1936,7 +1933,8 @@ body, .ui-widget {
                 padding: 0 15px;
                 position: relative;
                 opacity: 1;
-                top: 0; }
+                top: 0;
+                width: 200%; }
                 @media (max-width: 768px) {
                   .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content {
                     border: none;
@@ -2278,8 +2276,7 @@ body, .ui-widget {
         opacity: 0;
         transition: opacity .2s linear;
         z-index: 1000;
-        pointer-events: all;
-        top: 100%; }
+        pointer-events: all; }
         @media (max-width: 768px) {
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container {
             border: none;
@@ -2355,10 +2352,8 @@ body, .ui-widget {
               font-size: 11px;
               height: 0;
               margin-top: 0;
-              overflow: hidden;
               position: relative;
-              transition: height .2s linear;
-              width: 100%; }
+              transition: height .2s linear; }
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content {
                 background: white;
                 border: 1px solid #ababab;
@@ -2371,7 +2366,8 @@ body, .ui-widget {
                 padding: 0 15px;
                 position: relative;
                 opacity: 1;
-                top: 0; }
+                top: 0;
+                width: 200%; }
                 @media (max-width: 768px) {
                   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content {
                     border: none;
