@@ -381,6 +381,7 @@ body, .ui-widget {
     padding: 3px 0 0;
 	position: relative;
 	width: 100%;
+	z-index: 1;
 	
 	@media (max-width: 768px) {
 		border-color: transparent;
@@ -1998,6 +1999,10 @@ body, .ui-widget {
 			@media (max-width: 768px) {
 				margin-bottom: -$half-spacing;
 			}
+		}
+		
+		.ui-tabs-panels {
+			padding: $half-spacing $regular-spacing;
 		}
 	
 //		&.jeesl-editor {

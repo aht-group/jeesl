@@ -1561,7 +1561,8 @@ body, .ui-widget {
   height: 41px;
   padding: 3px 0 0;
   position: relative;
-  width: 100%; }
+  width: 100%;
+  z-index: 1; }
   @media (max-width: 768px) {
     .jeesl-header {
       border-color: transparent; } }
@@ -3276,6 +3277,8 @@ body, .ui-widget {
       @media (max-width: 768px) {
         .jeesl-panel .jeesl-tabs:last-child {
           margin-bottom: -5px; } }
+    .jeesl-panel .jeesl-tabs .ui-tabs-panels {
+      padding: 5px 10px; }
   .jeesl-panel .ui-panel-content .ui-fluid {
     display: flex;
     flex-direction: column; }
@@ -4023,6 +4026,8 @@ body, .ui-widget {
           @media (max-width: 768px) {
             .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs:last-child {
               margin-bottom: -5px; } }
+        .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs .ui-tabs-panels {
+          padding: 5px 10px; }
       .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid {
         display: flex;
         flex-direction: column; }
