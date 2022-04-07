@@ -296,7 +296,11 @@ public class AbstractIconBean implements Serializable
 			{
 				logger.info("Jeesl Icon Library: "+s.getCode()+" "+s.getSymbol());
 				if(svg.containsKey(s.getCode())) {logger.warn("Icon already defined !!!");}
-				else {svg.put(s.getCode(),s.getSymbol());}
+				else
+				{
+					svg.put(s.getCode(),s.getSymbol());
+					library.put(s.getCode(),"jeeslGfx");
+				}
 			}
 		}
 		catch (FileNotFoundException e) {e.printStackTrace();}

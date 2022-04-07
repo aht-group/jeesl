@@ -18,4 +18,5 @@
     <js:status code="jeeslArrowDown" symbol="ui/control/arrow/blue/down.svg"/>
     <js:status code="jeeslArrowLeft" symbol="ui/control/arrow/blue/left.svg"/>
     <js:status code="jeeslArrowRight" symbol="ui/control/arrow/blue/right.svg"/>
+    <js:status code="jeeslWorkflow" symbol="ui/control/wizard/workflow.svg"/>
 </jeesl:container>

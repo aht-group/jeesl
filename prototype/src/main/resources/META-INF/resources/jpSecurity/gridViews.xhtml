@@ -29,9 +29,8 @@
 		</j:slot>
 		<j:slot id="sViews" width="4">
 			<h:form id="fViews">
-				<p:dataTable var="v" value="#{cc.attrs.bean.views}" draggableRows="true"
-					rendered="#{not empty cc.attrs.bean.category}"
-					selection="#{cc.attrs.bean.view}" selectionMode="single" rowKey="#{v.id}">
+				<p:dataTable var="v" value="#{cc.attrs.bean.views}" draggableRows="true" rendered="#{not empty cc.attrs.bean.category}"
+							selection="#{cc.attrs.bean.view}" selectionMode="single" rowKey="#{v.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.aupSecurityViews}">
 							<j:svg type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttAdd}"/>
@@ -56,16 +55,22 @@
 			</h:form>
 			<p:dataTable var="u" value="#{cc.attrs.bean.usecases}" rendered="#{not empty cc.attrs.bean.view}">
 				<f:facet name="header"><j:dtHeader title="#{msg.jeeslSecurityViewAppliedToUsecase}"/></f:facet>
-				<p:column><h:outputText value="#{u.category.position}.#{u.position}" /></p:column>  
-	            <p:column headerText="#{msg.jeeslSecurityRole}">
+				<p:column>
+					<h:outputText value="#{u.category.position}.#{u.position}"/>
+				</p:column>  
+	            <p:column>
+	            	<f:facet name="header"><jtp:label entity="SecurityUsecase"/></f:facet>
 	            	<h:outputText value="#{u.category.name[localeCode].lang}" styleClass="jeeslItalic"/><br/>
 					<h:outputText value="#{u.name[localeCode].lang}"/>
 				</p:column>
 			</p:dataTable>
 			<p:dataTable var="r" value="#{cc.attrs.bean.roles}" rendered="#{not empty cc.attrs.bean.view}">
 				<f:facet name="header"><j:dtHeader title="#{msg.aupSecurityViewAppliedToRole}"/></f:facet>
-				<p:column><h:outputText value="#{r.category.position}.#{r.position}" /></p:column>  
-	         	<p:column headerText="#{msg.jeeslSecurityRole}">
+				<p:column>
+					<h:outputText value="#{r.category.position}.#{r.position}" />
+				</p:column>  
+	         	<p:column>
+	         		<f:facet name="header"><jtp:label entity="SecurityRole"/></f:facet>
 	         		<h:outputText value="#{r.category.name[localeCode].lang}" styleClass="jeeslItalic"/><br/>
 	         		<h:outputText value="#{r.name[localeCode].lang}" />
 	         	</p:column>
@@ -81,7 +86,7 @@
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-						<p:outputLabel value="#{msg.jeeslSecurityCategory}"/>
+						<jtp:label entity="SecurityView" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.view.category}" effect="fade" autoWidth="false">
 							<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
