@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pe="http://primefaces.org/ui/extensions"
-	xmlns:jp="http://jsf.jeesl.org/prototype"
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
-	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 
 	<composite:interface>
@@ -19,10 +13,10 @@
 	<composite:implementation>
 		<jp:sbItem rendered="#{identity.loggedIn}" orientation="left" styleClass="jeesl-menu-bar-dropdown">
 	    	<f:facet name="label">
-				<h:graphicImage library="jeeslPrototypeGfx"
-								name="12/sb/home.svg"
-								styleClass="jeesl-menu-bar-button-icon"/>
-				<pe:gravatar rendered="false" id="gravatar" value="#{identity.user.email}" notFound="identicon"/>
+				<h:graphicImage library="jeeslPrototypeGfx" name="12/sb/home.svg" styleClass="jeesl-menu-bar-button-icon"/>
+				<ui:remove>
+					<pe:gravatar rendered="false" id="gravatar" value="#{identity.user.email}" notFound="identicon"/>
+				</ui:remove>
 			</f:facet>
 			<f:facet name="top">
 				<ui:fragment>

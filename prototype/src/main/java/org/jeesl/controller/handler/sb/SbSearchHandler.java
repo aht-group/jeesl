@@ -47,7 +47,7 @@ public class SbSearchHandler <T extends EjbWithId> extends SbSingleHandler<T>
 		this.reset();
 		if(searchText != "")
 		{
-			list.addAll(acHandler.acListByQuery(c,searchText));
+			list.addAll(acHandler.autoCompleteListByQuery(c,searchText));
 			bean.triggerSbSearch();
 		}
 	}
