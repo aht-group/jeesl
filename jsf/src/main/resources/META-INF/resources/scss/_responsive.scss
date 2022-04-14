@@ -1811,6 +1811,23 @@ body, .ui-widget {
 		}
 	}
 	
+	&.jeesl-map {
+		.ui-panel-titlebar {
+			margin-bottom: 2 * $slim-spacing;
+			
+			+ .ui-panel-content {
+				border-radius: 0 0 $border-radius $border-radius;
+			}
+		}
+		
+		.ui-panel-content {
+			border-radius: $border-radius;
+			margin: -$slim-spacing;
+			overflow: hidden;
+			padding: 0 !important;
+		}
+	}
+	
 	&:last-child {
 		margin-bottom: 0;
 	}
@@ -2233,6 +2250,10 @@ body, .ui-widget {
 			
 			form {
 				margin-bottom: $regular-spacing;
+			}
+			
+			.jeesl-panel form {
+				margin-bottom: 0;
 			}
 		}
 		
