@@ -258,4 +258,27 @@ public class ReflectionUtil
         }
 	return type.getRawType().getClass();
     }
+
+	public static Class getTypeOfMapValues(Object object, String property) throws NoSuchFieldException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
+    {
+		Field field = object.getClass().getDeclaredField(property); 
+		ParameterizedType type = (ParameterizedType) field.getGenericType();
+
+		Class c = null;
+
+		// !!! This needs to be solved more robust later instead of using this String based approach
+        for (Type typeArgument : type.getActualTypeArguments())
+        {
+            if (logger.isTraceEnabled()){logger.trace("  " + typeArgument);}
+			String stringRepresentation = type.toString();
+			String secondParameter		= type.toString().substring(stringRepresentation.indexOf(", ")+2, stringRepresentation.length()-1);
+			try 
+			{
+				c = Class.forName(secondParameter);
+			} catch (ClassNotFoundException ex) {
+				logger.error("Could not create class for the name " +secondParameter);
+			}
+        }
+		return c;
+    }
 }
