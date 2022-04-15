@@ -55,6 +55,12 @@
             <component-type>org.jeesl.jsf.components.html.Label</component-type>
         </component>
     </tag>
+	<tag>
+        <tag-name>style</tag-name>
+        <component>
+            <component-type>org.jeesl.jsf.components.html.Style</component-type>
+        </component>
+    </tag>
 	
 	<tag>
         <tag-name>outputXpath</tag-name>

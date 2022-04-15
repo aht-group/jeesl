@@ -34,6 +34,9 @@ public interface JeeslSecurityContext<L extends JeeslLang, D extends JeeslDescri
 	String getPageLogo();
 	void setPageLogo(String pageLogo);
 	
+	String getPageBackground();
+	void setPageBackground(String pageBackground);
+	
 	String getLinkImpressum();
 	void setLinkImpressum(String linkImpressum);
 	
