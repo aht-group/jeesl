@@ -35,9 +35,8 @@
 			selection="#{cc.attrs.handler.tb}" selectionMode="single" rowKey="#{p.id}">
 		<f:facet name="header">
 			<j:dtHeader id="dth" title="#{cc.attrs.tableHeader}">
-				<h:graphicImage id="giProjectSelection" rendered="#{cc.attrs.allowAdd}" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAdd']}"/>
-				<p:tooltip for="giProjectSelection" value="#{msg.ttAdd}"/>
-				<j:icon type="jeeslRemove" rendered="#{(not empty cc.attrs.handler.tb) and (cc.attrs.allowRemove)}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}"/>
+				<j:svg type="jeeslAdd" onstart="PF('wv-#{cc.clientId}').show();" library="jeeslGfx"/>
+				<j:svg type="jeeslRemove" rendered="#{(not empty cc.attrs.handler.tb) and (cc.attrs.allowRemove)}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}" library="jeeslGfx"/>
 			</j:dtHeader>
 		</f:facet>
 		<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.selectTb}"/>
@@ -51,7 +50,7 @@
 			<h:outputText value="#{p.name[cc.attrs.localeCode].lang}" />
 		</p:column>
 	</p:dataTable>
-	<p:overlayPanel for=":#{cc.clientId}:dtProject:dth:giProjectSelection" widgetVar="wv-#{cc.clientId}" appendToBody="false">
+	<p:overlayPanel widgetVar="wv-#{cc.clientId}" appendToBody="false">
 		<p:dataTable id="dtOpContact" var="var" value="#{cc.attrs.handler.opList}"
 					 selection="#{cc.attrs.handler.op}" selectionMode="single" rowKey="#{var.id}"
 					 rows="#{cc.attrs.opRows}" rowsPerPageTemplate="#{cc.attrs.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">>
