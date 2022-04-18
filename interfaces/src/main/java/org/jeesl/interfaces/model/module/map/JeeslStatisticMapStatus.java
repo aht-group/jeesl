@@ -16,9 +16,9 @@ public interface JeeslStatisticMapStatus <L extends JeeslLang, D extends JeeslDe
 											S extends JeeslStatus<L,D,S>,
 											G extends JeeslGraphic<L,D,?,?,?>>
 									extends Serializable,EjbPersistable,
-									EjbWithCode,JeeslStatusFixedCode,
-									JeeslRestDownloadOption,EjbWithCodeGraphic<G>,
-									JeeslStatus<L,D,S>
+											EjbWithCode,JeeslStatusFixedCode,
+											JeeslRestDownloadOption,EjbWithCodeGraphic<G>,
+											JeeslStatus<L,D,S>
 {
 	public static enum Code{ready};
 }
