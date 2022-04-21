@@ -21,7 +21,7 @@
 						<p:dataTable var="faq" value="#{cc.attrs.bean.faqs}" draggableRows="false"
 										selection="#{cc.attrs.bean.faq}" selectionMode="single" rowKey="#{faq.id}">
 							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslHdFaqs}">
+								<j:dtHeader entity="HdFaq" code="listOf" title="#{msg.jeeslHdFaqs}">
 									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addFaq()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
 								</j:dtHeader>
 							</f:facet>
@@ -63,7 +63,9 @@
 		                        </p:selectOneMenu>
 							
 							</p:panelGrid>
-							<j:tabTranslationEditor value="#{cc.attrs.bean.faq}" withDescription="true" labelDescription="#{msg.jeeslHdFaqInternalComment}"/>
+							<j:tabTranslationEditor value="#{cc.attrs.bean.faq}" 
+										labelTranslation="#{appLabelBean.labels['HdFaq']['labelQuestion'][localeCode].lang}"
+										withDescription="true" labelDescription="#{appLabelBean.labels['HdFaq']['labelInternalComment'][localeCode].lang}"/>
 						</p:panel>
 					</h:form>
 					<h:form id="fAnswers" rendered="#{(not empty cc.attrs.bean.faq) and (cc.attrs.bean.faq.id gt 0)}">
@@ -95,7 +97,8 @@
 						<p:ajax listener="#{cc.attrs.bean.onHelpDrop}" update=":#{cc.id}:fAnswers" />  
 					</p:droppable>
 					<h:form id="fHelp" rendered="#{not empty cc.attrs.bean.helpTree}">
-						<p:panel header="#{msg.jeeslSecurityHelp}" styleClass="jeeslTree">
+						<p:panel styleClass="jeeslTree">
+							<f:facet name="header"><j:pHeader entity="HdFaq"/></f:facet>
 							<f:facet id="fHelpActions" name="actions">
 								<p:outputPanel id="cHelpActions">
 									<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandHelp()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}" library="jeeslGfx"/>

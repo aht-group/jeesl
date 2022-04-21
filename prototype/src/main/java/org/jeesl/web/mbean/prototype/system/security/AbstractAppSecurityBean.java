@@ -189,10 +189,11 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		}
 	}
 	
-	public void reloadMenu()
+	public void reloadMenu() {reloadMenu(fSecurity);}
+	public void reloadMenu(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fProvidedSecurity)
 	{
 		menus.clear();
-		menus.addAll(fSecurity.all(fbSecurity.getClassMenu()));
+		menus.addAll(fProvidedSecurity.all(fbSecurity.getClassMenu()));
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassMenu().getSimpleName(),"Loaded", menus.size());}
 	}
 	
