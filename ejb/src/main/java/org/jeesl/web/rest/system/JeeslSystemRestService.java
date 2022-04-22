@@ -27,6 +27,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
+import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.query.xml.SymbolQuery;
 import org.jeesl.util.query.xml.system.io.XmlRevisionQuery;
@@ -119,6 +120,13 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 		}
 		catch (ClassNotFoundException e) {throw new UtilsConfigurationException(e.getMessage());}
 		catch (JeeslNotFoundException e) {throw new UtilsConfigurationException(e.getMessage());}
+	}
+	
+	@Override
+	public <X extends JeeslStatus<L, D, X>> Container updateTranslation(String code, Container xml) throws UtilsConfigurationException
+	{
+		logger.info("updateTranslation");
+		return exportStatus(code);
 	}
 
 	@SuppressWarnings("unchecked")

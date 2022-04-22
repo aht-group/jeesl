@@ -19,6 +19,7 @@ import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
+import org.jeesl.factory.xml.jeesl.XmlContainerFactory;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -79,10 +80,9 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	protected boolean allowSvg; public boolean isAllowSvg() {return allowSvg;}
 	private boolean showDescription; public boolean isShowDescription() {return showDescription;}
 
-	private boolean supportsUpload; public boolean getSupportsUpload(){return supportsUpload;}
-//	private boolean supportsDownload; public boolean getSupportsDownload(){return supportsDownload;}
+	private boolean supportsUpload; public boolean getSupportsUpload(){return supportsUpload;}	
 	private boolean supportsDescription; public boolean getSupportsDescription(){return supportsDescription;}
-//	protected boolean supportsSymbol; public boolean getSupportsSymbol(){return supportsSymbol;}
+
 	protected boolean supportsImage; public boolean getSupportsImage() {return supportsImage;}
 	protected boolean supportsGraphic; public boolean getSupportsGraphic() {return supportsGraphic;}
 	protected boolean supportsFigure; public boolean isSupportsFigure() {return supportsFigure;}
@@ -167,7 +167,6 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 		supportsGraphic = EjbWithGraphic.class.isAssignableFrom(optionClass);
 
 		supportsFigure = EjbWithGraphicFigure.class.isAssignableFrom(optionClass);
-
 	}
 
 	@Override
@@ -441,6 +440,23 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 	//JEESL REST DATA
 	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <X extends JeeslEntityRestCode, S extends JeeslStatus, W extends EjbWithCodeGraphic<G>> void uploadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
+	{
+		logger.info("Uploading REST");
+		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslEntityRestCode.class);
+		X x = cX.newInstance();
+
+		Container xml = XmlContainerFactory.build();
+		xml = this.downloadOptionsFromRest(x.getRestCode());
+
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		ResteasyWebTarget restTarget = client.target(this.toUrl(x.getRestCode()));
+		JeeslSystemRest<L,D,?,G> rest = restTarget.proxy(JeeslSystemRest.class);
+		rest.updateTranslation(x.getRestCode(),xml);
+	}
+	
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <X extends JeeslEntityRestCode, S extends JeeslStatus, W extends EjbWithCodeGraphic<G>> void downloadData() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
 	{
 		logger.info("Downloading REST");
@@ -528,13 +544,17 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	@SuppressWarnings("unchecked")
 	private Entity downloadRevisionFromRest(String code) throws UtilsConfigurationException
 	{
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		ResteasyWebTarget restTarget = client.target(this.toUrl(code));
+		JeeslSystemRest<L,D,?,G> rest = restTarget.proxy(JeeslSystemRest.class);
+		return rest.exportRevisionEntity(code);
+	}
+	
+	private String toUrl(String code)
+	{
 		StringBuilder url = new StringBuilder();
 		if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
 		else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
-
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(url.toString());
-		JeeslSystemRest<L,D,?,G> rest = restTarget.proxy(JeeslSystemRest.class);
-		return rest.exportRevisionEntity(code);
+		return url.toString();
 	}
 }

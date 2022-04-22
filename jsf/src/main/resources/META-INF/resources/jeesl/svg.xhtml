@@ -38,7 +38,7 @@
 				
 				<h:graphicImage id="image2"
 								rendered="#{not cc.attrs.disabled}"
-								library="#{cc.attrs.library}"
+								library="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type] }"
 								name="#{appIconBean.svg[cc.attrs.type]}">
 					<f:attribute name="height" value="12"/>
 				</h:graphicImage>
@@ -61,7 +61,7 @@
 				
 				<h:graphicImage id="image2"
 								rendered="#{not cc.attrs.disabled}"
-								library="#{cc.attrs.library}"
+								library="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type] }"
 								name="#{appIconBean.svg[cc.attrs.type]}">
 					<f:attribute name="height" value="12"/>
 				</h:graphicImage>
