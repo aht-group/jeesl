@@ -12,23 +12,13 @@ public class JsonXlsColumn implements Serializable
 
 	@JsonProperty("nr")
 	private Integer nr;
-	
-	public Integer getNr() {
-		return nr;
-	}
-	public void setNr(Integer nr) {
-		this.nr = nr;
-	}
+	public Integer getNr() {return nr;}
+	public void setNr(Integer nr) {this.nr = nr;}
 	
 	@JsonProperty("key")
 	private String key;
-	
-	public String getKey() {
-		return key;
-	}
-	public void setKey(String key) {
-		this.key = key;
-	}
+	public String getKey() {return key;}
+	public void setKey(String key) {this.key = key;}
 
 	@JsonProperty("code")
 	private String code;

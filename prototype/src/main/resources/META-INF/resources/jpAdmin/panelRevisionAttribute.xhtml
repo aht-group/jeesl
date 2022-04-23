@@ -45,11 +45,11 @@
 				<p:outputLabel value="#{msg.jeeslRevisionAttributeConstruction}"/>
 			</p:panelGrid>
 			<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-				<p:outputLabel value="#{msg.jeeslCode}"/>
-				<h:inputText autocomplete="off" value="#{cc.attrs.bean.attribute.code}" styleClass="aupW100"/>
-				<p:outputLabel value="#{msg.jeeslXpath}"/>
-				<h:inputText autocomplete="off" value="#{cc.attrs.bean.attribute.xpath}" styleClass="aupW100"/>
-				<p:outputLabel value="#{msg.aupType}"/>
+				<jtp:label entity="RevisionAttribute" code="code"/>
+				<p:inputText autocomplete="off" value="#{cc.attrs.bean.attribute.code}" styleClass="aupW100"/>
+				<jtp:label entity="RevisionAttribute" code="xpath"/>
+				<p:inputText autocomplete="off" value="#{cc.attrs.bean.attribute.xpath}" styleClass="aupW100"/>
+				<jtp:label entity="RevisionAttribute" code="type"/>
 				<p:selectOneMenu value="#{cc.attrs.bean.attribute.type}" effect="fade" autoWidth="false">
 					<f:selectItems value="#{cc.attrs.bean.types}" var="u" itemLabel="#{u.name[userBean.localeCode].lang}" itemValue="#{u}"/>
 				</p:selectOneMenu>

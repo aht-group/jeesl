@@ -106,6 +106,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	
 	public void addMapping()
 	{
+		logger.info(AbstractLogMessage.addEntity(fbSsi.getClassMapping()));
 		mapping = fbSsi.ejbMapping().build(null);
 	}
 	

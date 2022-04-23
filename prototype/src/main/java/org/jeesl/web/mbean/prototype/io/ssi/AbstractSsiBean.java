@@ -1,8 +1,11 @@
 package org.jeesl.web.mbean.prototype.io.ssi;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.sb.SbMultiHandler;
@@ -26,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
+import net.sf.exlp.util.io.JsonUtil;
 
 public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescription,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
@@ -37,8 +41,8 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 										JOB extends JeeslJobStatus<L,D,JOB,?>,
-										HOST extends JeeslIoSsiHost<L,D,SYSTEM>
-,JSON extends Object
+										HOST extends JeeslIoSsiHost<L,D,SYSTEM>,
+										JSON extends Object
 										>
 						implements Serializable,SbToggleBean
 {
@@ -53,15 +57,20 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	protected final JsonTuple1Handler<LINK> thLink; public JsonTuple1Handler<LINK> getThLink() {return thLink;}
 	protected SsiMappingProcessor<MAPPING,DATA,JSON> ssiProcessor;
 	
+	protected final Map<DATA,JSON> mapData; public Map<DATA,JSON> getMapData() {return mapData;}
+	
 	protected final List<DATA> datas; public List<DATA> getDatas() {return datas;}
 	protected List<DATA> selection; public List<DATA> getSelection() {return selection;} public void setSelection(List<DATA> selection) {this.selection = selection;}
 
+	private final Class<JSON> cJson;
 	
-	public AbstractSsiBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi)
+	public AbstractSsiBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi, final Class<JSON> cJson)
 	{
 		this.fbSsi=fbSsi;
+		this.cJson=cJson;
 		sbhLink = new SbMultiHandler<LINK>(fbSsi.getClassLink(),this);
 		thLink = new JsonTuple1Handler<LINK>(fbSsi.getClassLink());
+		mapData = new HashMap<>();
 		datas = new ArrayList<>();
 	}
 
@@ -78,7 +87,6 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		if(fbSsi.getClassLink().isAssignableFrom(c)){reloadData();}
 	}
 	
-	protected abstract void reloadData();
 	protected abstract boolean constraintEmptySelectionFailed();
 	
 	public void selectItems()
@@ -107,5 +115,24 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		logger.info("Linking selection");
 		ssiProcessor.linkData(selection);
 		reloadData();
+	}
+	
+//	@Override
+	protected void reloadData()
+	{
+		datas.clear();
+		thLink.clear();
+		
+		datas.addAll(fSsi.fIoSsiData(ssiProcessor.getMapping(),sbhLink.getSelected()));
+		thLink.init(fSsi.tpIoSsiLinkForMapping(ssiProcessor.getMapping()));
+		
+//		logger.info("List: "+AbstractLogMessage.reloaded(cJson, datas));
+		for(DATA d : datas)
+		{	
+			try {mapData.put(d,JsonUtil.read(d.getJson(), cJson));}
+			catch (IOException e) {e.printStackTrace();}
+		}
+		
+//		logger.info("Map "+AbstractLogMessage.reloaded(IoSsiData.class, mapData.keySet()));	
 	}
 }

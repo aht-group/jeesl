@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf"
-	xmlns:jp="http://jsf.jeesl.org/prototype"
-	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	
+	
+	
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
@@ -22,8 +20,8 @@
 				<p:dataTable var="s" value="#{cc.attrs.bean.systems}"
 							 selection="#{cc.attrs.bean.system}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslIoSsiSystems}">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addSystem()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
+						<j:dtHeader entity="IoSsiSystem" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addSystem()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectSystem()}" update=":#{cc.id}:sSystem"/>
@@ -40,13 +38,17 @@
 		</j:slot>
 		<j:slot id="sSystem" width="6">
 			<h:form id="fSystem" rendered="#{not empty cc.attrs.bean.system}">
-				<p:panel id="pView" header="#{msg.jeeslIoSsiSystem}" styleClass="jeeslPanel">
+				<p:panel id="pView" styleClass="jeeslPanel">
+					<f:facet name="header"><j:pHeader entity="IoSsiSystem"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelSystem()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
 						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveSystem()}"   update=":#{cc.id}:grid" library="jeeslGfx"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteSystem()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.system.id gt 0}" library="jeeslGfx"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						
+						<jtp:label entity="IoSsiSystem" code="id"/>
+						<h:outputText value="#{cc.attrs.bean.system.id}"/>
 						
 						<p:outputLabel value="#{msg.jeeslIoSsiSystemCode}"/>
 						<p:inputText value="#{cc.attrs.bean.system.code}" autocomplete="off"/>

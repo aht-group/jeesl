@@ -21,8 +21,10 @@
 				<p:dataTable var="m" value="#{cc.attrs.bean.mappings}"
 							 selection="#{cc.attrs.bean.mapping}" selectionMode="single" rowKey="#{m.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslIoSsiMappings}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:sMapping" rendered="false"/>
+						<j:dtHeader entity="IoSsiMapping" code="listOf">
+							<j:security actionSuffix="create" handler="#{cc.attrs.bean.security}">
+								<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:sMapping"/>
+							</j:security>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectMapping()}" update=":#{cc.id}:rowDetail"/>
@@ -72,11 +74,12 @@
 	<j:row id="rowDetail">
 		<j:slot id="sMapping" width="12">
 			<h:form id="fMapping" rendered="#{not empty cc.attrs.bean.mapping}">
-				<p:panel id="pView" header="#{msg.jeeslIoSsiMapping}" styleClass="jeeslPanel">
+				<p:panel id="pView" styleClass="jeeslPanel">
+					<f:facet name="header"><j:pHeader entity="IoSsiMapping"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelMapping()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveMapping()}"   update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteMapping()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.mapping.id gt 0}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelMapping()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveMapping()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteMapping()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.mapping.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGRid80">
 						

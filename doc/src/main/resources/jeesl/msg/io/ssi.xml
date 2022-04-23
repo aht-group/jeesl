@@ -21,34 +21,14 @@
     		<s:lang key="fr" translation="Code"/>
     	</s:langs>
     </s:translation>
-	<s:translation key="jeeslIoSsiMappings">
-    	<s:langs>
-    		<s:lang key="de" translation="Mappings"/>
-    		<s:lang key="en" translation="Mappings"/>
-    		<s:lang key="fr" translation="Mappings"/>
-    	</s:langs>
-    </s:translation>
-    <s:translation key="jeeslIoSsiMapping">
-    	<s:langs>
-    		<s:lang key="de" translation="Mapping"/>
-    		<s:lang key="en" translation="Mapping"/>
-    		<s:lang key="fr" translation="Mapping"/>
-    	</s:langs>
-    </s:translation>
-        <s:translation key="jeeslIoSsiMappingId">
+    <s:translation key="jeeslIoSsiMappingId">
     	<s:langs>
     		<s:lang key="de" translation="Mapping ID"/>
     		<s:lang key="en" translation="Mapping ID"/>
     		<s:lang key="fr" translation="Mapping ID"/>
     	</s:langs>
 	</s:translation>
-	<s:translation key="jeeslIoSsiSystems">
-    	<s:langs>
-    		<s:lang key="de" translation="Systeme"/>
-    		<s:lang key="en" translation="Systems"/>
-    		<s:lang key="fr" translation="Systems"/>
-    	</s:langs>
-	</s:translation>
+	
 	<s:translation key="jeeslIoSsiSystem">
     	<s:langs>
     		<s:lang key="de" translation="System"/>
