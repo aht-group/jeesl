@@ -228,7 +228,7 @@
 				<plugin>
 					<groupId>net.sf.exlp</groupId>
 					<artifactId>exlp-maven</artifactId>
-					<version>0.1.14</version>
+					<version>0.1.15-SNAPSHOT</version>
 				</plugin>
 				<plugin>
 			        <groupId>org.codehaus.mojo</groupId>

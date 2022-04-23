@@ -6,7 +6,10 @@
         <resource-root path="geolatte-geom-1.3.0.jar"/>
         <resource-root path="jts-core-1.14.0.jar"/>
         
-        <!-- This is for testing of Hibernate JSON Type --> 
+        <!--
+        	This is for testing of Hibernate JSON Type 
+        	https://vladmihalcea.com/map-string-jpa-property-json-column-hibernate/
+        --> 
 	 	<resource-root path="hibernate-commons-annotations-5.1.0.Final.jar"/>
     </resources>
 

@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0
 							http://mojo.codehaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd">
 <rules>
+	<rule groupId="commons-beanutils" comparisonMethod="maven">
+		<ignoreVersions>
+			<ignoreVersion>1.9.4.redhat-00001</ignoreVersion>
+			<ignoreVersion>1.9.4.redhat-00002</ignoreVersion>
+		</ignoreVersions>
+	</rule>
 	<rule groupId="com.sun.faces" comparisonMethod="maven">
 		<ignoreVersions>
 		 
@@ -211,7 +217,6 @@
       	<ignoreVersion>4.0.0.Beta6</ignoreVersion>
       </ignoreVersions>
     </rule>
-
    
     <rule groupId="org.postgresql" comparisonMethod="maven">
       <ignoreVersions>
