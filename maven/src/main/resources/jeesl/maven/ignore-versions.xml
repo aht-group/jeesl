@@ -56,8 +56,13 @@
         <ignoreVersion>2.6.0.redhat-4</ignoreVersion>
         <ignoreVersion>2.6.0.redhat-5</ignoreVersion>
         <ignoreVersion>2.6.0.redhat-6</ignoreVersion>
-        <ignoreVersion>2.6.0.redhat-7</ignoreVersion>
-      </ignoreVersions>
+			<ignoreVersion>2.6.0.redhat-7</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+	<rule groupId="org.apache.commons" comparisonMethod="maven">
+		<ignoreVersions>
+			<ignoreVersion>3.12.0.redhat-00001</ignoreVersion>
+		</ignoreVersions>
     </rule>
     <rule groupId="javax.xml.bind" comparisonMethod="maven">
       <ignoreVersions>
@@ -150,6 +155,12 @@
         <ignoreVersion>1.8.0-beta4</ignoreVersion>
         <ignoreVersion>2.0.0-alpha0</ignoreVersion>
         <ignoreVersion>2.0.0-alpha1</ignoreVersion>
+        <ignoreVersion>2.0.0-alpha2</ignoreVersion>
+        <ignoreVersion>2.0.0-alpha3</ignoreVersion>
+        <ignoreVersion>2.0.0-alpha4</ignoreVersion>
+        <ignoreVersion>2.0.0-alpha5</ignoreVersion>
+        <ignoreVersion>2.0.0-alpha6</ignoreVersion>
+        <ignoreVersion>2.0.0-alpha7</ignoreVersion>
       </ignoreVersions>
     </rule>
     <rule groupId="com.sun.faces" comparisonMethod="maven">
