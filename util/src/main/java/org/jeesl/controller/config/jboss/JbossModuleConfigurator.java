@@ -19,6 +19,8 @@ public class JbossModuleConfigurator
 	
 	public static enum Product {eap}
 	
+	private final String versionPostgres = "42.3.4";
+	
 	private MultiResourceLoader mrl;
 	
 	private Product product;
@@ -52,27 +54,27 @@ public class JbossModuleConfigurator
 		if(version.equals("6.3"))
 		{
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgis:postgis-jdbc:1.5.3"),moduleMain);
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.0.0"),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
 		}
 		else if(version.equals("7.0"))
 		{
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgis:postgis-jdbc:1.5.3"),moduleMain);
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.1.4"),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
 		}
 		else if(version.equals("7.1"))
 		{
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgis:postgis-jdbc:1.5.3"),moduleMain);
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.1.4"),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
 		}
 		else if(version.equals("7.2"))
 		{
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.2.14"),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("net.postgis:postgis-jdbc:2.5.0"),moduleMain);
 
 		}
 		else if(version.equals("7.3"))
 		{
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.2.18"),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("net.postgis:postgis-jdbc:2.5.0"),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("net.postgis:postgis-geometry:2.5.0"),moduleMain);
 
