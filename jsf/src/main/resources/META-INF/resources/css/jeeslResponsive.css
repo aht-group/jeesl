@@ -2705,9 +2705,13 @@ body, .ui-widget {
                 font-size: 1.2em;
                 line-height: 19px; } }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup {
+        border: 1px solid #008a4e;
+        border-radius: 3px;
         display: inline-block;
-        height: 100%;
-        padding: 2px 5px; }
+        height: calc(100% - 2 * 2px);
+        margin: 2px;
+        padding: 0;
+        position: relative; }
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup > * {
           height: 100%;
           vertical-align: top; }
@@ -2719,6 +2723,37 @@ body, .ui-widget {
             .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup + .jeesl-overlay-container {
               margin: -2px 0 0;
               position: absolute; } }
+        .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .ui-inputfield {
+          background: none;
+          color: white;
+          text-indent: 0;
+          text-shadow: none;
+          transition: width .3s ease-in-out;
+          width: 80px; }
+          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .ui-inputfield.ui-state-focus, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .ui-inputfield.ui-state-filled {
+            width: 160px; }
+          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .ui-inputfield::placeholder {
+            color: #00a85f;
+            font-style: italic; }
+        .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light {
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          color: #00a85f;
+          opacity: 0;
+          pointer-events: none;
+          position: absolute;
+          right: 0;
+          text-shadow: none;
+          top: 0;
+          transition: background .2s linear, opacity .2s linear; }
+          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light:hover {
+            background: #00663a; }
+          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light:before, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light:after {
+            display: none; }
+          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light.ui-state-visible {
+            opacity: 1;
+            pointer-events: all; }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container {
         background: white;
         border: 1px solid #ababab;

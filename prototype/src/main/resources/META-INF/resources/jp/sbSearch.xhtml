@@ -22,11 +22,10 @@
 	
 	<div class="sbSearch jeesl-menu-bar-item jeesl-menu-bar-search jeesl-left">
 		<div class="ui-inputgroup">
-			<p:commandButton icon="ui-icon ui-icon-search fa fa-search" styleClass="search-btn-light ui-corner-left"  disabled="true" />
 			<p:inputText id="searchText" value="#{cc.attrs.handler.searchText}"  placeholder="Search" styleClass="search-box">
 				<p:ajax event="keyup" update="searchResults" process="searchText" listener="#{cc.attrs.handler.handleKeyEvent}" oncomplete="showResults()"/>
 			</p:inputText>
-			<p:commandButton icon="ui-icon ui-icon-close fa fa-times" styleClass="search-btn-light ui-corner-right" onclick="cancelSearch()" update="searchResults" action="#{cc.attrs.handler.cancelEvent}"/>
+			<p:commandButton icon="ui-icon ui-icon-close fa fa-times" styleClass="search-btn-light ui-corner-right" update="searchResults" action="#{cc.attrs.handler.cancelEvent}"/>
 		</div>
 		
 		<h:panelGroup id="searchResults" layout="block" styleClass="auContainer jeesl-overlay-container">

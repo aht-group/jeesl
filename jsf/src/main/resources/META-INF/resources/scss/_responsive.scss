@@ -1038,9 +1038,13 @@ body, .ui-widget {
 			}
 			
 			.ui-inputgroup {
+				border: $border-width solid $bright-colour;
+				border-radius: $border-radius;
 				display: inline-block;
-				height: 100%;
-				padding: $slim-spacing $half-spacing;
+				height: calc(100% - 2 * #{$slim-spacing});
+				margin: $slim-spacing;
+				padding: 0;
+				position: relative;
 				
 				> * {
 					height: 100%;
@@ -1055,6 +1059,51 @@ body, .ui-widget {
 					@media (max-width: 768px) {
 						margin: -$slim-spacing 0 0;
 						position: absolute;
+					}
+				}
+				
+				.ui-inputfield {
+					background: none;
+					color: $white-100;
+					text-indent: 0;
+					text-shadow: none;
+					transition: width .3s ease-in-out;
+					width: 80px;
+					
+					&.ui-state-focus, &.ui-state-filled {
+						width: 160px;
+					}
+					
+					&::placeholder {
+						color: $brighter-colour;
+						font-style: italic;
+					}
+				}
+				
+				.search-btn-light {
+					background: transparent;
+					border: none;
+					box-shadow: none;
+					color: $brighter-colour;
+					opacity: 0;
+					pointer-events: none;
+					position: absolute;
+					right: 0;
+					text-shadow: none;
+					top: 0;
+					transition: background .2s linear, opacity .2s linear;
+					
+					&:hover {
+						background: $dark-colour;
+					}
+					
+					&:before, &:after {
+						display: none;
+					}
+					
+					&.ui-state-visible {
+						opacity: 1;
+						pointer-events: all;
 					}
 				}
 			}
