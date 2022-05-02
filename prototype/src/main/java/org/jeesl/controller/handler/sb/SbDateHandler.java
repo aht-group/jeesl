@@ -21,7 +21,10 @@ public class SbDateHandler implements Serializable
 
 	private Date date1; public Date getDate1() {return date1;}
 	private Date date2; public Date getDate2() {return date2;}
+	
+	//Date 3 is (rarely used as a maxDate)
 	private Date date3; public Date getDate3() {return date3;}
+	
 	private LocalDateTime localDate1; public LocalDateTime getLocalDate1() {return localDate1;}
 	private LocalDateTime localDate2; public LocalDateTime getLocalDate2() {return localDate2;}
 	private LocalDateTime localDate3; public LocalDateTime getLocalDate3() {return localDate3;}

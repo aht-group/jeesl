@@ -1,6 +1,8 @@
 package org.jeesl.api.handler.sb;
 
-public interface SbDateIntervalSelection
+import java.io.Serializable;
+
+public interface SbDateIntervalSelection extends Serializable
 {
 	void callbackDateChanged();
 }
