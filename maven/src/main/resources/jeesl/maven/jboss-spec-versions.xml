@@ -14,11 +14,13 @@
     </rule>
 	<rule groupId="org.jboss.spec.javax.ejb" comparisonMethod="maven">
       <ignoreVersions>
-      
       	<ignoreVersion>1.0.2.Final</ignoreVersion>
       	<ignoreVersion>1.0.2.Final-redhat-1</ignoreVersion>
       	<ignoreVersion>1.0.2.Final-redhat-2</ignoreVersion>
       	<ignoreVersion>1.0.2.Final-redhat-3</ignoreVersion>
+      	
+      	<ignoreVersion>2.0.0.CR1</ignoreVersion>
+      	<ignoreVersion>2.0.0.CR2</ignoreVersion>
       </ignoreVersions>
     </rule>
 	<rule groupId="org.jboss.spec.javax.el" comparisonMethod="maven">
@@ -35,6 +37,9 @@
       	<ignoreVersion>1.0.5.Final</ignoreVersion>
       	<ignoreVersion>1.0.6.Final-redhat-1</ignoreVersion>
       	<ignoreVersion>1.0.6.Final</ignoreVersion>
+      	<ignoreVersion>1.0.6.Final-redhat-1</ignoreVersion>
+      	
+      	<ignoreVersion>2.0.0.CR2</ignoreVersion>
       </ignoreVersions>
     </rule>
     <rule groupId="org.jboss.spec.javax.enterprise.deploy" comparisonMethod="maven">
@@ -73,6 +78,7 @@
       	<ignoreVersion>1.0.2.Final-redhat-1</ignoreVersion>
       	<ignoreVersion>2.0.0.CR1</ignoreVersion>
       	<ignoreVersion>2.0.0.Final</ignoreVersion>
+      	<ignoreVersion>2.0.0.Final-redhat-00001</ignoreVersion>
       </ignoreVersions>
     </rule>
     <rule groupId="org.jboss.spec.javax.resource" comparisonMethod="maven">
@@ -208,7 +214,7 @@
       	<ignoreVersion>1.0.2.Final</ignoreVersion>
       	<ignoreVersion>1.0.2.Final-redhat-1</ignoreVersion>
       	<ignoreVersion>2.0.0.CR1</ignoreVersion>
-      	<ignoreVersion>2.0.0.Final</ignoreVersion>
+      	<ignoreVersion>2.0.0.Final-redhat-00001</ignoreVersion>
       </ignoreVersions>
     </rule>
 	<rule groupId="org.jboss.spec.javax.xml.soap" comparisonMethod="maven">

@@ -26,6 +26,7 @@
     <js:status code="jeeslArrowDown" symbol="ui/control/arrow/blue/down.svg"/>
     <js:status code="jeeslArrowLeft" symbol="ui/control/arrow/blue/left.svg"/>
     <js:status code="jeeslArrowRight" symbol="ui/control/arrow/blue/right.svg"/>
+    <js:status code="jeeslOnlineHelp" symbol="ui/info/help.svg"/>
     <js:status code="jeeslWorkflow" symbol="ui/control/wizard/workflow.svg"/>
     <js:status code="jeeslSbLogging" symbol="ui/io/logging/sbLogging.svg"/>
     <js:status code="jeeslSecurityUser" symbol="ui/system/security/user.svg"/>

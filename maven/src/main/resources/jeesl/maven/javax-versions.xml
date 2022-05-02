@@ -1,0 +1,122 @@
+<ruleset comparisonMethod="maven"
+         xmlns="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0
+							http://mojo.codehaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd">
+<rules>
+	<rule groupId="com.sun.faces" comparisonMethod="maven">
+		<ignoreVersions>
+		 
+
+			<ignoreVersion>2.2.12-jbossorg-1</ignoreVersion>
+			<ignoreVersion>2.2.12-jbossorg-2</ignoreVersion>
+			<ignoreVersion>2.3.3-b02</ignoreVersion>
+			<ignoreVersion>2.3.3.SP1</ignoreVersion>
+			<ignoreVersion>2.3.5.SP1</ignoreVersion>
+			<ignoreVersion>2.3.5.SP2</ignoreVersion>
+			<ignoreVersion>2.3.5.SP3</ignoreVersion>
+			
+			<ignoreVersion>2.3.5.SP2-redhat-00001</ignoreVersion>
+			<ignoreVersion>2.3.5.SP3-redhat-00001</ignoreVersion>
+			<ignoreVersion>2.3.5.SP3-redhat-00002</ignoreVersion>
+			<ignoreVersion>2.3.5.SP3-redhat-00003</ignoreVersion>
+			<ignoreVersion>2.3.9.SP01</ignoreVersion>
+			<ignoreVersion>2.3.9.SP01-redhat-00001</ignoreVersion>
+			<ignoreVersion>2.3.9.SP02</ignoreVersion>
+			<ignoreVersion>2.3.9.SP02-redhat-00001</ignoreVersion>
+			<ignoreVersion>2.3.9.SP03</ignoreVersion>
+			<ignoreVersion>2.3.9.SP04</ignoreVersion>
+			<ignoreVersion>2.3.9.SP05</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+	<rule groupId="javax.activation" comparisonMethod="maven">
+		<ignoreVersions>
+		
+			<ignoreVersion>1.1.1-redhat-1</ignoreVersion>
+			<ignoreVersion>1.1.1-redhat-2</ignoreVersion>
+			<ignoreVersion>1.1.1.redhat-4</ignoreVersion>
+			<ignoreVersion>1.1.1.redhat-5</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+    <rule groupId="javax.el" comparisonMethod="maven">
+		<ignoreVersions>
+			
+				
+			<ignoreVersion>3.0.0.redhat-00001</ignoreVersion>
+			<ignoreVersion>3.0.1-b01</ignoreVersion>
+			<ignoreVersion>3.0.1-b02</ignoreVersion>
+			<ignoreVersion>3.0.1-b03</ignoreVersion>
+			<ignoreVersion>3.0.1-b04</ignoreVersion>
+			<ignoreVersion>3.0.1-b06</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+    <rule groupId="javax.enterprise" comparisonMethod="maven">
+		<ignoreVersions>
+		
+			<ignoreVersion>2.0-EDR1</ignoreVersion>
+			<ignoreVersion>2.0-EDR2</ignoreVersion>
+			<ignoreVersion>2.0-PFD</ignoreVersion>
+			<ignoreVersion>2.0-PFD2</ignoreVersion>
+			<ignoreVersion>2.0.Alpha1</ignoreVersion>
+			<ignoreVersion>2.0.Alpha2</ignoreVersion>
+			<ignoreVersion>2.0.Alpha3</ignoreVersion>
+			<ignoreVersion>2.0.Alpha4</ignoreVersion>
+			<ignoreVersion>2.0.Alpha4a</ignoreVersion>
+			<ignoreVersion>2.0.Alpha5</ignoreVersion>
+			<ignoreVersion>2.0.Alpha6</ignoreVersion>
+			<ignoreVersion>2.0.Beta1</ignoreVersion>
+			<ignoreVersion>2.0.SP1</ignoreVersion>
+			<ignoreVersion>2.0.0.redhat-1</ignoreVersion>
+			<ignoreVersion>2.0.0.SP1-redhat-00001</ignoreVersion>
+			<ignoreVersion>2.0.0.SP1-redhat-00004</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+	<rule groupId="javax.faces" comparisonMethod="maven">
+		<ignoreVersions>
+			
+			<ignoreVersion>2.3-edr1</ignoreVersion>
+			<ignoreVersion>2.3-pfd</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+	<rule groupId="javax.inject" comparisonMethod="maven">
+		<ignoreVersions>
+		
+			<ignoreVersion>1.0-PFD-1</ignoreVersion>
+			<ignoreVersion>1-redhat-1</ignoreVersion>
+			<ignoreVersion>1-redhat-2</ignoreVersion>
+			<ignoreVersion>1-redhat-3</ignoreVersion>
+			<ignoreVersion>1.redhat-4</ignoreVersion>
+			<ignoreVersion>1.0.0.redhat-5</ignoreVersion>
+			<ignoreVersion>1.0.0.redhat-6</ignoreVersion>
+			
+			<ignoreVersion>1.0.0.redhat-00008</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+	<rule groupId="javax.jws" comparisonMethod="maven">
+		<ignoreVersions>
+			<ignoreVersion>1.0-MR1-redhat-1</ignoreVersion>
+			<ignoreVersion>1.0-MR1-redhat-2</ignoreVersion>
+			<ignoreVersion>1.0-MR1-redhat-3</ignoreVersion>
+			<ignoreVersion>1.0-MR1-redhat-6</ignoreVersion>
+			<ignoreVersion>1.0.0.MR1-redhat-7</ignoreVersion>
+			<ignoreVersion>1.0.0.MR1-redhat-8</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+   
+    <rule groupId="javax.mail" comparisonMethod="maven">
+		<ignoreVersions>
+			<ignoreVersion>1.5.0-b01</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+    <rule groupId="javax.servlet" comparisonMethod="maven">
+		<ignoreVersions>
+			<ignoreVersion>3.0-alpha-1</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+    <rule groupId="javax.validation" comparisonMethod="maven">
+		<ignoreVersions>
+			<ignoreVersion>2.0.1.Final-redhat-1</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+</rules>
+</ruleset>

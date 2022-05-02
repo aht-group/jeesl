@@ -20,6 +20,7 @@
 		<composite:attribute name="styleClass" required="false"/>
 		<composite:attribute name="toggled" required="false"/>
 		<composite:attribute name="tooltip" required="false"/>
+		<composite:attribute name="library" required="false" default="jeeslGfx" shortDescription="The library attribute which is passed to h:graphicImage. For JEESL icons, jeeslGfx has to be used."/>
 		<composite:attribute name="udpate" required="false"/>
 	</composite:interface>
 
@@ -32,7 +33,7 @@
 					<c:if test="#{not empty cc.attrs.onclick}"><f:attribute name="onclick" value="#{cc.attrs.onclick}"/></c:if>
 					
 					<h:graphicImage name="#{appIconBean.svg[cc.attrs.icon]}"
-									library="jeeslGfx"
+									library="#{empty appIconBean.library[cc.attrs.icon] ? cc.attrs.library : appIconBean.library[cc.attrs.icon] }"
 									rendered="#{not empty cc.attrs.icon}"
 									class="jeesl-menu-bar-button-icon"/>
 					<h:outputText value="#{cc.attrs.label}"

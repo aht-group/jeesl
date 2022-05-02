@@ -1,0 +1,19 @@
+<ruleset comparisonMethod="maven"
+         xmlns="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0
+							http://mojo.codehaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd">
+<rules>
+	<rule groupId="jakarta.enterprise" comparisonMethod="maven">
+      <ignoreVersions>
+      	<ignoreVersion>2.0.2.redhat-00003</ignoreVersion>
+    	<ignoreVersion>2.0.2.redhat-00004</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+    <rule groupId="jakarta.inject" comparisonMethod="maven">
+      <ignoreVersions>
+      	<ignoreVersion>2.0.1.MR</ignoreVersion>
+      </ignoreVersions>
+    </rule>
+</rules>
+</ruleset>

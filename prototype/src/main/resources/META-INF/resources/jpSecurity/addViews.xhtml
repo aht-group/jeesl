@@ -16,8 +16,8 @@
 						 selection="#{cc.attrs.bean.tblView}" selectionMode="single" rowKey="#{v.id}">
 			<f:facet name="header">
 				<j:dtHeader id="dth" title="#{msg.aupSecurityViews}">
-					<j:svg type="jeeslAdd" onstart="PF('wvOpViewSelection').show();" library="jeeslGfx"/>
-                    <j:svg type="jeeslRemove" listener="#{cc.attrs.bean.opRmView()}" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblView)}" update="#{cc.attrs.update}" library="jeeslGfx"/>
+					<j:svg type="jeeslAdd" onstart="PF('wvOpViewSelection').show();"/>
+                    <j:svg type="jeeslRemove" listener="#{cc.attrs.bean.opRmView()}" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblView)}" update="#{cc.attrs.update}"/>
 				</j:dtHeader>
 			</f:facet>
 			<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblView}"/>
