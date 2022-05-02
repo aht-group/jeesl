@@ -7,7 +7,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
-import org.jeesl.controller.handler.sb.SbDateHandler;
+import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -58,7 +58,7 @@ public class AbstractAdminJobQueueBean <L extends JeeslLang, D extends JeeslDesc
 	
 	private JOB job; public JOB getJob() {return job;} public void setJob(JOB job) {this.job = job;}
 	
-	private SbDateHandler sbhDate; public SbDateHandler getSbhDate() {return sbhDate;}
+	private SbDateIntervalHandler sbhDate; public SbDateIntervalHandler getSbhDate() {return sbhDate;}
 
 	public AbstractAdminJobQueueBean(JobFactoryBuilder<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,USER> fbJob){super(fbJob);}
 	
@@ -66,7 +66,7 @@ public class AbstractAdminJobQueueBean <L extends JeeslLang, D extends JeeslDesc
 	{
 		super.postConstructAbstractJob(bTranslation,bMessage,fJob);
 		
-		sbhDate = new SbDateHandler(this);
+		sbhDate = new SbDateIntervalHandler(this);
 		sbhDate.initWeeksToNow(2);
 		
 		try

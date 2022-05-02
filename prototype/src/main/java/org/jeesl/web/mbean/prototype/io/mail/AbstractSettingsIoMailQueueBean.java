@@ -10,7 +10,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
-import org.jeesl.controller.handler.sb.SbDateHandler;
+import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
 import org.jeesl.controller.handler.sb.SbMultiHandler;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -59,7 +59,7 @@ public class AbstractSettingsIoMailQueueBean <L extends JeeslLang,D extends Jees
 	protected final SbMultiHandler<CATEGORY> sbhCategory; public SbMultiHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
 	protected final SbMultiHandler<STATUS> sbhStatus; public SbMultiHandler<STATUS> getSbhStatus() {return sbhStatus;}
 	protected final SbMultiHandler<RETENTION> sbhRetention; public SbMultiHandler<RETENTION> getSbhRetention() {return sbhRetention;}
-	private final SbDateHandler sbhDate; public SbDateHandler getSbhDate() {return sbhDate;}
+	private final SbDateIntervalHandler sbhDate; public SbDateIntervalHandler getSbhDate() {return sbhDate;}
 	
 	private final Map<String,JsonTuple1Handler<STATUS>> mapTh; public Map<String, JsonTuple1Handler<STATUS>> getMapTh() {return mapTh;}
 	private final JsonTuple1Handler<STATUS> thToday,thDay30;
@@ -68,7 +68,7 @@ public class AbstractSettingsIoMailQueueBean <L extends JeeslLang,D extends Jees
 	{
 		super(fbMail.getClassL(),fbMail.getClassD());
 		this.fbMail=fbMail;
-		sbhDate = new SbDateHandler(this);
+		sbhDate = new SbDateIntervalHandler(this);
 		sbhDate.setEnforceStartOfDay(true);
 		sbhDate.initWeeksToNow(2);
 		

@@ -11,9 +11,9 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SbDateHandler implements Serializable
+public class SbDateIntervalHandler implements Serializable
 {
-	final static Logger logger = LoggerFactory.getLogger(SbDateHandler.class);
+	final static Logger logger = LoggerFactory.getLogger(SbDateIntervalHandler.class);
 	private static final long serialVersionUID = 1L;
 
 	private SbDateIntervalSelection bean;
@@ -29,16 +29,16 @@ public class SbDateHandler implements Serializable
 	private LocalDateTime localDate2; public LocalDateTime getLocalDate2() {return localDate2;}
 	private LocalDateTime localDate3; public LocalDateTime getLocalDate3() {return localDate3;}
 
-	public SbDateHandler(){this(null);}
+	public SbDateIntervalHandler(){this(null);}
 
-	public SbDateHandler(SbDateIntervalSelection bean)
+	public SbDateIntervalHandler(SbDateIntervalSelection bean)
 	{
 		this.bean=bean;
 		enforceStartOfDay = true;
 	}
 
-	public static SbDateHandler build() {return new SbDateHandler();}
-	public SbDateHandler enforceStartOfDay(boolean enforce) {this.setEnforceStartOfDay(enforce);return this;}
+	public static SbDateIntervalHandler build() {return new SbDateIntervalHandler();}
+	public SbDateIntervalHandler enforceStartOfDay(boolean enforce) {this.setEnforceStartOfDay(enforce);return this;}
 
 	public void initToday()
 	{

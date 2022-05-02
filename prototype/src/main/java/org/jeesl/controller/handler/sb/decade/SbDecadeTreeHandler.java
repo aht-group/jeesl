@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
-import org.jeesl.controller.handler.sb.SbDateHandler;
+import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
 import org.jeesl.controller.handler.sb.tree.SbTree2Handler;
 import org.jeesl.controller.handler.tree.TreeUpdateParameter;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
@@ -35,10 +35,10 @@ public class SbDecadeTreeHandler<HD extends JeeslHydroDecade, HY extends JeeslHy
 	public HD getDecade() {return l1;}
 	public HY getYear() {return l2;}
 
-	private SbDateHandler sbDateHandler;
+	private SbDateIntervalHandler sbDateHandler;
 	private HydroCodeComparator<HD> cpHydroDecade;
 	private HydroCodeComparator<HY> cpHydroYear;
-	public SbDateHandler getSbDateHandler() {return sbDateHandler;}
+	public SbDateIntervalHandler getSbDateHandler() {return sbDateHandler;}
 
 	public SbDecadeTreeHandler(JeeslTreeSelected callback, JeeslFacade fUtils, final Class<HD> cDecade, final Class<HY> cYear)
 	{
@@ -51,7 +51,7 @@ public class SbDecadeTreeHandler<HD extends JeeslHydroDecade, HY extends JeeslHy
 		xpath1 = OutputXpathPattern.multiLang;
 		xpath2 = OutputXpathPattern.multiLang;
 
-		sbDateHandler = new SbDateHandler(this);
+		sbDateHandler = new SbDateIntervalHandler(this);
 		cpHydroDecade = new  HydroCodeComparator<>();
 		cpHydroYear = new  HydroCodeComparator<>();
 	}

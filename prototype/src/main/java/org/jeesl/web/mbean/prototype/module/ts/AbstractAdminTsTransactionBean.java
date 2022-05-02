@@ -13,7 +13,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
-import org.jeesl.controller.handler.sb.SbDateHandler;
+import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
 import org.jeesl.controller.handler.ui.helper.CodeConfirmationHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
@@ -70,7 +70,7 @@ public class AbstractAdminTsTransactionBean <L extends JeeslLang, D extends Jees
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminTsTransactionBean.class);
 	
-	private SbDateHandler sbDateHandler; public SbDateHandler getSbDateHandler() {return sbDateHandler;}
+	private SbDateIntervalHandler sbDateHandler; public SbDateIntervalHandler getSbDateHandler() {return sbDateHandler;}
 	
 	private Map<EC,Map<Long,EjbWithId>> map; public Map<EC, Map<Long, EjbWithId>> getMap() {return map;}
 	private List<TRANSACTION> transactions; public List<TRANSACTION> getTransactions() {return transactions;}
@@ -85,7 +85,7 @@ public class AbstractAdminTsTransactionBean <L extends JeeslLang, D extends Jees
 	public AbstractAdminTsTransactionBean(final TsFactoryBuilder<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
-		sbDateHandler = new SbDateHandler(this);
+		sbDateHandler = new SbDateIntervalHandler(this);
 		sbDateHandler.setEnforceStartOfDay(true);
 		sbDateHandler.initMonthsToNow(2);
 	}

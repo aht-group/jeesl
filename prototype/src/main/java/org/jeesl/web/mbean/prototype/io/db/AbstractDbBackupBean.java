@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
-import org.jeesl.controller.handler.sb.SbDateHandler;
+import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
 import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
 import org.jeesl.interfaces.model.io.db.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.JeeslDbDumpFile;
@@ -42,7 +42,7 @@ public class AbstractDbBackupBean <L extends JeeslLang,D extends JeeslDescriptio
 	private JeeslIoDbFacade<L,D,SYSTEM,DUMP,DF,DH,DS> fDb;
 	private final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb;
 	
-	private SbDateHandler sbDateHandler; public SbDateHandler getSbDateHandler() {return sbDateHandler;}
+	private SbDateIntervalHandler sbDateHandler; public SbDateIntervalHandler getSbDateHandler() {return sbDateHandler;}
 	protected Chart chart; public Chart getChart() {return chart;}
 
 	private List<DUMP> dumps; public List<DUMP> getDumps(){return dumps;}
@@ -58,7 +58,7 @@ public class AbstractDbBackupBean <L extends JeeslLang,D extends JeeslDescriptio
 		this.fbDb=fbDb;
 		
 		hosts = new ArrayList<>();
-		sbDateHandler = new SbDateHandler(this);
+		sbDateHandler = new SbDateIntervalHandler(this);
 		sbDateHandler.setEnforceStartOfDay(true);
 		sbDateHandler.initWeeksToNow(2);
 	}
