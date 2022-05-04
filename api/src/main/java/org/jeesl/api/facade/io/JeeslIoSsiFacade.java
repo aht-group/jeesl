@@ -50,7 +50,7 @@ public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescriptio
 	<A extends EjbWithId, B extends EjbWithId> Json1Tuples<LINK> tpIoSsiLinkForMapping(MAPPING mapping, A a, B b);
 	
 	Json1Tuples<MAPPING> tpMapping();
-	Json2Tuples<MAPPING,LINK> tpMappingLink();
+	Json2Tuples<MAPPING,LINK> tpMappingLink(List<MAPPING> list);
 	<A extends EjbWithId, B extends EjbWithId> Json2Tuples<LINK,B> tpMappingB(Class<B> classB, MAPPING mapping, A a);
 	
 	<T extends EjbWithSsiDataCleaning<CLEANING>> List<T> fEntitiesWithoutSsiDataCleaning(Class<T> c, int maxResult);

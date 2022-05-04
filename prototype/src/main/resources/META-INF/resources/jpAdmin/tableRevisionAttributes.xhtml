@@ -24,7 +24,7 @@
 			<f:facet name="header">
 				<j:dtHeader title="#{msg.jeeslRevisionAttributes}">
 					<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}"/>
-					<j:icon type="jeeslDownload" listener="#{cc.attrs.bean.jeeslAttributeDownload()}" update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.bean.supportsJeeslAttributeDownload}"/>
+					<j:svg type="jeeslDownload" listener="#{cc.attrs.bean.jeeslAttributeDownload()}" update="#{cc.attrs.updateAdd}" rendered="#{cc.attrs.bean.supportsJeeslAttributeDownload}"/>
 				</j:dtHeader>
 			</f:facet>
 			<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAttributes()}" update="@form"/>

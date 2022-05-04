@@ -56,6 +56,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	
 	private final List<ENTITY> entities; public List<ENTITY> getEntities() {return entities;}
 	private final List<MAPPING> mappings; public List<MAPPING> getMappings() {return mappings;}
+	private final List<MAPPING> tupleMappings;
 	private final List<LINK> links; public List<LINK> getLinks() {return links;}
 	
 	private MAPPING mapping; public MAPPING getMapping() {return mapping;} public void setMapping(MAPPING mapping) {this.mapping = mapping;}
@@ -64,6 +65,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	{
 		this.fbSsi=fbSsi;
 		mappings = new ArrayList<>();
+		tupleMappings = new ArrayList<>();
 		links = new ArrayList<>();
 		entities = new ArrayList<>();
 		
@@ -102,6 +104,10 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	public void selectMapping()
 	{
 		logger.info(AbstractLogMessage.selectEntity(mapping));
+		if(tupleMappings.contains(mapping)) {tupleMappings.remove(mapping);}
+		else {tupleMappings.add(mapping);}
+		
+		thLink.init(fSsi.tpMappingLink(tupleMappings));
 	}
 	
 	public void addMapping()
