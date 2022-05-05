@@ -233,7 +233,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
         return jtf.buildCount(tQ.getResultList());
 	}
 	
-	@Override public Json2Tuples<MAPPING, LINK> tpMappingLink()
+	@Override public Json2Tuples<MAPPING,LINK> tpMappingLink(List<MAPPING> list)
 	{
 		Json2TuplesFactory<MAPPING,LINK> jtf = new Json2TuplesFactory<>(this,fbSsi.getClassMapping(),fbSsi.getClassLink());
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -243,6 +243,10 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		Expression<Long> eCount = cB.count(item.<Long>get("id"));
 		Join<DATA,MAPPING> jMapping = item.join(JeeslIoSsiData.Attributes.mapping.toString());
 		Join<DATA,LINK> jLink = item.join(JeeslIoSsiData.Attributes.link.toString());
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		predicates.add(jMapping.in(list));
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		
 		cQ.groupBy(jMapping.get("id"),jLink.get("id"));
 		cQ.multiselect(jMapping.get("id"),jLink.get("id"),eCount);

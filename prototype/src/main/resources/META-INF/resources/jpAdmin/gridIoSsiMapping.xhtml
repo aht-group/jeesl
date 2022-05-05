@@ -27,7 +27,7 @@
 							</j:security>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectMapping()}" update=":#{cc.id}:rowDetail"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectMapping()}" update="@form :#{cc.id}:rowDetail"/>
 					<p:columnGroup type="header">
 						<p:row>
 							<p:column colspan="4"><f:facet name="header"></f:facet></p:column>
@@ -54,7 +54,10 @@
                    		</p:row>
       			     </p:columnGroup>
       			     
-					<p:column styleClass="jeeslRight"><h:outputText value="#{cc.attrs.bean.thMapping.mapA[m].count}"><f:convertNumber type="number"/></h:outputText></p:column>
+					<p:column styleClass="jeeslRight">
+						<h:outputText value="#{m.id}"/>
+						<h:outputText value="#{cc.attrs.bean.thMapping.mapA[m].count}"><f:convertNumber type="number"/></h:outputText>
+					</p:column>
 					<p:column><h:outputText value="#{m.system.code}"/></p:column>
 					<p:column><h:outputText value="#{m.json.name[localeCode].lang}"/></p:column>
 					<p:column><h:outputText value="#{m.entity.name[localeCode].lang}"/></p:column>

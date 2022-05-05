@@ -11,7 +11,7 @@ import org.jeesl.api.bean.module.aom.JeeslAssetCacheBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
-import org.jeesl.controller.handler.sb.SbDateHandler;
+import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
 import org.jeesl.controller.handler.sb.SbMultiHandler;
 import org.jeesl.controller.handler.ui.UiSlotWidthHandler;
 import org.jeesl.controller.handler.ui.helper.UiHelperAsset;
@@ -74,7 +74,7 @@ public abstract class AbstractAssetMaintenanceBean <L extends JeeslLang, D exten
 	private final Comparator<ASSET> cpAsset;
 	private final Comparator<EVENT> cpEvent;
 	
-	private SbDateHandler sbDateHandler; public SbDateHandler getSbDateHandler() {return sbDateHandler;}
+	private SbDateIntervalHandler sbDateHandler; public SbDateIntervalHandler getSbDateHandler() {return sbDateHandler;}
 	private final SbMultiHandler<ESTATUS> sbhEventStatus; public SbMultiHandler<ESTATUS> getSbhEventStatus() {return sbhEventStatus;}
 	private final UiSlotWidthHandler slotHandler; public UiSlotWidthHandler getSlotHandler() {return slotHandler;}
 	private final UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> uiHelper; public UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> getUiHelper() {return uiHelper;}
@@ -102,7 +102,7 @@ public abstract class AbstractAssetMaintenanceBean <L extends JeeslLang, D exten
 		slotHandler.set(12);
 		
 		sbhEventStatus = new SbMultiHandler<>(fbAsset.getClassEventStatus(),this);
-		sbDateHandler = new SbDateHandler(this);
+		sbDateHandler = new SbDateIntervalHandler(this);
 		sbDateHandler.setEnforceStartOfDay(true);
 		sbDateHandler.initWeeks(0,4);
 		

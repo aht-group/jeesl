@@ -1,6 +1,13 @@
 package org.jeesl.factory.xml.module.ts;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
 
 import org.jeesl.model.xml.module.ts.Data;
 import org.jeesl.model.xml.module.ts.Points;
@@ -44,6 +51,27 @@ public class XmlDataFactory
 	{
 		Data xml = new Data();
 		if(record!=null){xml.setRecord(DateUtil.toXmlGc(record));}
+		xml.setPoints(points);
+		return xml;
+	}
+	
+	public static Data build(LocalDateTime ldt, Points points)
+	{
+		Data xml = new Data();
+		if(ldt!=null)
+		{
+			try
+			{
+				ZonedDateTime zoneDateTime = ZonedDateTime.of(ldt, ZoneId.systemDefault());
+				GregorianCalendar gregorianCalendar = GregorianCalendar.from(zoneDateTime);
+				xml.setRecord(DatatypeFactory.newInstance().newXMLGregorianCalendar(gregorianCalendar));
+			}
+			catch (DatatypeConfigurationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
 		xml.setPoints(points);
 		return xml;
 	}

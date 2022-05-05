@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <jeesl:container xmlns:js="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:jeesl="http://www.jeesl.org">
-    <js:status code="jeeslLanguageSelect" symbol="ui/system/language-select.svg"/>
     <js:status code="jeeslHome" symbol="ui/system/home.svg"/>
+    <js:status code="jeeslLanguageSelect" symbol="ui/system/language-select.svg"/>
     <js:status code="jeeslDelete" symbol="ui/control/crud/delete.svg"/>
     <js:status code="jeeslReset" symbol="ui/control/crud/reset.svg"/>
     <js:status code="jeeslCancel" symbol="ui/control/crud/cancel.svg"/>
     <js:status code="jeeslClone" symbol="ui/control/crud/clone.svg"/>
     <js:status code="jeeslRemove" symbol="ui/control/crud/remove.svg"/>
     <js:status code="jeeslSave" symbol="ui/control/crud/save.svg"/>
+    <js:status code="jeeslSearch" symbol="ui/control/crud/search.svg"/>
     <js:status code="jeeslFilter" symbol="ui/control/calc/filter.svg"/>
+    <js:status code="jeeslReload" symbol="ui/control/crud/reload.svg"/>
     <js:status code="jeeslAddressBook" symbol="/ui/system/person/addressbook.svg"/>
     <js:status code="jeeslAdd" symbol="ui/control/crud/add.svg"/>
     <js:status code="jeeslEdit" symbol="ui/control/edit/pencil.svg"/>
@@ -26,6 +28,7 @@
     <js:status code="jeeslArrowDown" symbol="ui/control/arrow/blue/down.svg"/>
     <js:status code="jeeslArrowLeft" symbol="ui/control/arrow/blue/left.svg"/>
     <js:status code="jeeslArrowRight" symbol="ui/control/arrow/blue/right.svg"/>
+    <js:status code="jeeslOnlineHelp" symbol="ui/info/help.svg"/>
     <js:status code="jeeslWorkflow" symbol="ui/control/wizard/workflow.svg"/>
     <js:status code="jeeslSbLogging" symbol="ui/io/logging/sbLogging.svg"/>
     <js:status code="jeeslSecurityUser" symbol="ui/system/security/user.svg"/>
