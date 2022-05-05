@@ -25,40 +25,21 @@
 			<p:inputText id="searchText" value="#{cc.attrs.handler.searchText}"  placeholder="Search" styleClass="search-box">
 				<p:ajax event="keyup" update="searchResults" process="searchText" listener="#{cc.attrs.handler.handleKeyEvent}" oncomplete="showResults()"/>
 			</p:inputText>
-			<p:commandButton icon="ui-icon ui-icon-close fa fa-times" styleClass="search-btn-light ui-corner-right" update="searchResults" action="#{cc.attrs.handler.cancelEvent}"/>
+			<p:commandButton icon="ui-icon ui-icon-close fa fa-times" styleClass="search-btn-light ui-corner-right" update="searchResults" action="#{cc.attrs.handler.cancelEvent}" oncomplete="showResults()"/>
 		</div>
 		
-		<h:panelGroup id="searchResults" layout="block" styleClass="auContainer jeesl-overlay-container">
-			<script>
-				function toggleDetails(eventArgs) {
-					let currentListItem = $(this).parent();
-					let closeRequested = currentListItem.children('.jeesl-field-tip').eq(0).height() > 0;
-					
-					eventArgs.data.overlay.find('.ui-selectonemenu-item').removeClass('jeesl-active');
-					eventArgs.data.overlay.find('.jeesl-field-tip').height(0);
-					if (!closeRequested) {
-						currentListItem.addClass('jeesl-active');
-						let fieldTip = currentListItem.children('.jeesl-field-tip').eq(0);
-						fieldTip.height(fieldTip.children('.jeesl-field-tip-content').eq(0).height());
-					}
-				}
-			
-				function showResults() {
-					let input = $('##{cc.clientId}:searchText'.replaceAll(':','\\:'));
-					let overlay = $('##{cc.clientId}:searchResults'.replaceAll(':','\\:'));
-					input.val() ? overlay.addClass('jeesl-visible') : overlay.removeClass('jeesl-visible');
-					
-					overlay.find('.ui-selectonemenu-item-text').click({ overlay: overlay }, toggleDetails);
-				}
-			</script>
-			<div class="jeesl-overlay-wrapper">
+		<h:panelGroup layout="block" styleClass="auContainer jeesl-overlay-container">
+			<h:panelGroup id="searchResults" layout="block" styleClass="jeesl-overlay-wrapper">
 				<ul class="ui-selectonemenu-list">
 					<ui:repeat var="var" value="#{cc.attrs.handler.list}" varStatus="loop">
 						<li class="ui-selectonemenu-item">
-							<p:outputPanel class="ui-selectonemenu-item-text">
+							<h:commandLink class="ui-selectonemenu-item-text">
 								<composite:insertChildren/>
-							</p:outputPanel>
+								<p:ajax event="click" listener="#{cc.attrs.handler.selectSbSearch(var)}"/>
+							</h:commandLink>
+							
 							<h:panelGroup layout="block" styleClass="jeesl-field-tip" rendered="#{not empty cc.facets.resultDetail}">
+		            			<h:outputText value="" styleClass="jeesl-field-tip-icon fa fa-info-circle"></h:outputText>
 		            			<div class="jeesl-field-tip-content">
 									<composite:renderFacet name="resultDetail"/>
 								</div>
@@ -66,10 +47,21 @@
 						</li>
 		        	</ui:repeat>
 				</ul>
-			</div>
+			</h:panelGroup>
 		</h:panelGroup>
 	</div>
 		
+	<script>
+		let requestQuery = '##{cc.clientId}:searchText';
+		let resultQuery = '##{cc.clientId}:searchResults';
+		
+		let listItemHeight = 50;
+	</script>
+	<c:if test="#{mobileBrowserBean.isMobile}">
+		<script>
+			listItemHeight = 84;
+		</script>
+	</c:if>
 	<h:outputScript library="sbSearch" name="sbSearch.js"/>
 		
 	</composite:implementation>

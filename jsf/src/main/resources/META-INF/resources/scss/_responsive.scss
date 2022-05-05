@@ -288,19 +288,29 @@ $enable-pointer-cursor-for-buttons: true;
 				@include overlay;
 				
 				pointer-events: all;
+				transition: none;
 				
 				.jeesl-overlay-wrapper .ui-selectonemenu-list {
-					@include select-list(ui-selectonemenu);
+//					@include select-list(ui-selectonemenu);
 					
 					overflow: hidden;
+					
+					&:before, &:after {
+						content: '';
+					    display: list-item;
+					    height: 15px;
+					    width: 100%;
+					}
+					
+					&:before {
+						background: $dark-colour;
+					}
 				
 					.ui-selectonemenu-item {
 						height: auto;
 						
-						&.jeesl-active {
-							.ui-selectonemenu-item-text {
-								background: statusBackgroundGradient($element-height);
-							}
+						&:hover {
+							background: $dark-colour;
 						}
 						
 						&:after {
@@ -328,7 +338,7 @@ $enable-pointer-cursor-for-buttons: true;
 								position: relative;
 								opacity: 1;
 								top: 0;
-								width: 200%;
+								width: $field-tip-width;
 								
 								.jeesl-grid {
 									margin: 0;
@@ -1109,32 +1119,49 @@ body, .ui-widget {
 			}
 			
 			.jeesl-overlay-container {
-				@include overlay;
+//				@include overlay;
+
+				background: $medium-colour;
+				border: none;
+				border-radius: 0;
+				box-shadow: none;
+				margin: 0 4px;
+				width: calc(100% - 8px);
 				
 				.jeesl-overlay-wrapper {
 					.ui-selectonemenu-list {
-						@include select-list(ui-selectonemenu);
+//						@include select-list(ui-selectonemenu);
 						
 						@media (max-width: 768px) {
 							overflow: hidden;
 						}
 					
 						.ui-selectonemenu-item {
+							display: flex;
+							flex-direction: column;
 							padding: 0;
 							
 							@media (max-width:768px) {
 								height: auto;
+								padding: 0 $wide-spacing;
 							}
 							
 							&.jeesl-active {
+								.ui-selectonemenu-item-text {
+									color: $white-100;
+								}
+								
+								&:hover {
+									.ui-selectonemenu-item-text {
+										color: $white-100;
+									}
+								}
+								
 								&:after {
 									border-color: $dark-colour;
 								}
 								
-								.ui-selectonemenu-item-text {
-									background: statusBackgroundGradient($ls-element-height-mobile);
-									color: $white-100;
-								}
+								background: linear-gradient(to bottom, #{$dark-colour}, #{$medium-colour} #{$ls-element-height-mobile});
 							}
 							
 							&:after {
@@ -1143,9 +1170,62 @@ body, .ui-widget {
 								margin: 0 $wide-spacing;
 							}
 							
-							&:hover {
-								.jeesl-field-tip {
-									color: $body-foreground;
+							.ui-selectonemenu-item-text {
+//								color: $body-foreground;
+								flex-grow: 1;
+								height: $ls-element-height;
+//								line-height: $ls-element-height;
+//								padding: 0 $wide-spacing;
+								position: relative;
+//								transition: background .2s linear, color .2s linear;
+								
+								color: $white-100;
+								font-weight: 400;
+								line-height: 14px;
+								padding: 6px 7px;
+								
+//								&:hover {
+//									color: $dark-colour;
+//								}
+							
+								@media (max-width: 768px) {
+									font-weight: $font-weight-bold;
+									font-size: $font-size-ls-mobile;
+									height: $ls-element-height-mobile + $separator-thickness-mobile;
+									line-height: $ls-element-height-mobile;
+									padding: 0 $regular-spacing;
+								}
+							}
+						
+							.jeesl-field-tip {
+								border-bottom: 0 solid $dark-colour;
+								color: $body-foreground;
+								height: $ls-element-height;
+//								margin-top: -$ls-element-height;
+								position: absolute;
+//								width: calc(100% - (2 * #{$half-spacing}));
+								font-weight: $font-weight-base;
+								
+								cursor: default;
+								font-size: $font-size;
+								right: 7px;
+								
+								@media (max-width: 768px) {
+									border-bottom-width: $separator-thickness-mobile;
+									height: $ls-element-height-mobile + $separator-thickness-mobile;
+									margin-top: -$ls-element-height-mobile - $separator-thickness-mobile;
+									overflow: hidden;
+									pointer-events: none;
+									position: relative;
+									right: 0;
+									transition: height .2s linear;
+									width: 100%;
+								}
+							
+								&:hover {
+									.jeesl-field-tip-icon {
+										color: $bright-colour;
+									}
 									
 									.jeesl-field-tip-content {
 										cursor: default;
@@ -1153,43 +1233,31 @@ body, .ui-widget {
 										pointer-events: all;
 									}
 								}
-							}
-							
-							.ui-selectonemenu-item-text {
-								height: $ls-element-height;
-								padding: 0 $wide-spacing;
-								transition: background .2s linear, color .2s linear;
-							
-								@media (max-width: 768px) {
-									font-weight: $font-weight-bold;
-									font-size: $font-size-ls-mobile;
-									height: $ls-element-height-mobile;
-								}
-							}
-						
-							.jeesl-field-tip {
-								height: $ls-element-height;
-								margin-top: -$ls-element-height;
-								position: absolute;
-								width: calc(100% - (2 * #{$half-spacing}));
-								font-size: $font-size;
-								font-weight: $font-weight-base;
 								
-								@media (max-width: 768px) {
-									font-size: $font-size-mobile;
-									height: 0;
-									margin-top: 0;
-									overflow: hidden;
-									position: relative;
-									transition: height .2s linear;
-									width: 100%;
+								.jeesl-field-tip-icon {
+									color: $brighter-colour;
+									cursor: pointer;
+									font-size: 16px;
+									line-height: $ls-element-height;
+									
+									@media (max-width: 768px) {
+										cursor: pointer;
+										display: block;
+										font-size: 35px;
+										height: $ls-element-height-mobile;
+										line-height: $ls-element-height-mobile;
+										margin-left: calc(100% - #{$ls-element-height-mobile} - #{$slim-spacing});
+										pointer-events: all;
+										text-align: center;
+										width: $ls-element-height-mobile;
+									}
 								}
 								
 								.jeesl-field-tip-content {
 									@include overlay;
 									
 									display: block;
-									left: 100%;
+									left: calc(100% + #{$half-spacing});
 									opacity: 0;
 									pointer-events: none;
 									position: absolute;
@@ -1197,8 +1265,11 @@ body, .ui-widget {
 									transition: opacity .2s linear;
 									
 									@media (max-width: 768px) {
+										background: none;
 										box-shadow: none;
-										padding: 0 $wide-spacing;
+										color: $white-100;
+										font-size: $font-size-mobile;
+										padding: $half-spacing $wide-spacing;
 										position: relative;
 										opacity: 1;
 										top: 0;
@@ -1210,6 +1281,11 @@ body, .ui-widget {
 										left: -9px;
 										margin-top: -8px;
 										top: calc(#{$ls-element-height} - #{$border-width});
+										
+										@media (max-width: 768px) {
+											height: calc(100% + 10px);
+											top: 0;
+										}
 									}
 									
 									&:after {
