@@ -82,7 +82,11 @@ public class SbTree5Handler <L1 extends EjbWithId, L2 extends EjbWithId, L3 exte
 	}
 	
 	// Selection from UI and cascading of event
-	public void uiSelect5(L5 ejb) {cascade5(ejb,TreeUpdateParameter.build(false,true,true,true,true));}
+	public void uiSelect5(L5 ejb)
+	{
+//		if(store5!=null) {store5.setLastLevel(5);}
+		cascade5(ejb,TreeUpdateParameter.build(false,true,true,true,true));
+	}
 	protected void cascade5(L5 ejb, TreeUpdateParameter tup)
 	{
 		if(debugOnInfo) {logger.info("cascade5 "+ejb.getClass().getSimpleName()+": ["+ejb.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}

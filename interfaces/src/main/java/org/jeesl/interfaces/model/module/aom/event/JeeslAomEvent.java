@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.io.fr.JeeslWithFileRepositoryContainer;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
+import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.primitive.date.EjbWithRecord;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
@@ -19,6 +20,7 @@ public interface JeeslAomEvent <COMPANY extends JeeslAomCompany<?,?>,
 								ASSET extends JeeslAomAsset<?,ASSET,COMPANY,?,?>,
 								ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
 								ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>,
+								M extends JeeslMarkup<?>,
 								USER extends JeeslSimpleUser,
 								FRC extends JeeslFileContainer<?,?>>
 			extends Serializable,EjbSaveable,
@@ -36,4 +38,7 @@ public interface JeeslAomEvent <COMPANY extends JeeslAomCompany<?,?>,
 	
 	Double getAmount();
 	void setAmount(Double amount);
+	
+	M getMarkup();
+	public void setMarkup(M markup);
 }

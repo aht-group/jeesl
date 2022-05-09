@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
@@ -17,6 +18,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -29,9 +31,11 @@ public interface JeeslAssetFacade <L extends JeeslLang, D extends JeeslDescripti
 									STATUS extends JeeslAomAssetStatus<L,D,STATUS,?>,
 									ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,?>,
 									VIEW extends JeeslAomView<L,D,REALM,?>,
-									EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,USER,FRC>,
+									EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
 									ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
 									ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
+									M extends JeeslMarkup<MT>,
+									MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
 									USER extends JeeslSimpleUser,
 									FRC extends JeeslFileContainer<?,?>,
 									UP extends JeeslAomEventUpload<L,D,UP,?>>
@@ -50,4 +54,6 @@ public interface JeeslAssetFacade <L extends JeeslLang, D extends JeeslDescripti
 	
 	List<EVENT> fAssetEvents(ASSET asset);
 	<RREF extends EjbWithId> List<EVENT> fAssetEvents(REALM realm, RREF rref, List<ESTATUS> status);
+	
+	EVENT loadAomEvent(EVENT event);
 }

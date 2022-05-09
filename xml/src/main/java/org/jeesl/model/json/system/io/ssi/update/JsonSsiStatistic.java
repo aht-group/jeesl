@@ -2,8 +2,6 @@ package org.jeesl.model.json.system.io.ssi.update;
 
 import java.io.Serializable;
 
-import org.jeesl.model.json.system.job.JsonJob;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -21,10 +19,11 @@ public class JsonSsiStatistic implements Serializable
 	
 	@JsonProperty("success")
 	private Integer success;
-	public Integer getSuccess() {
-		return success;
-	}
-	public void setSuccess(Integer success) {
-		this.success = success;
-	}
+	public Integer getSuccess() {return success;}
+	public void setSuccess(Integer success) {this.success = success;}
+	
+	@JsonProperty("obsolete")
+	private Integer obsolete;
+	public Integer getObsolete() {return obsolete;}
+	public void setObsolete(Integer obsolete) {this.obsolete = obsolete;}
 }

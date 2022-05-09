@@ -2,12 +2,15 @@ package org.jeesl.web.mbean.prototype.io.ssi;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.system.io.log.DebugLoggerHandler;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
+import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
@@ -54,9 +57,10 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	private final JsonTuple1Handler<MAPPING> thMapping; public JsonTuple1Handler<MAPPING> getThMapping() {return thMapping;}
 	private final JsonTuple2Handler<MAPPING,LINK> thLink; public JsonTuple2Handler<MAPPING,LINK> getThLink() {return thLink;}
 	
+	private final Map<MAPPING,Boolean> mapTuples; public Map<MAPPING, Boolean> getMapTuples() {return mapTuples;}
+	
 	private final List<ENTITY> entities; public List<ENTITY> getEntities() {return entities;}
 	private final List<MAPPING> mappings; public List<MAPPING> getMappings() {return mappings;}
-	private final List<MAPPING> tupleMappings;
 	private final List<LINK> links; public List<LINK> getLinks() {return links;}
 	
 	private MAPPING mapping; public MAPPING getMapping() {return mapping;} public void setMapping(MAPPING mapping) {this.mapping = mapping;}
@@ -64,8 +68,8 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	public AbstractSsiMappingBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi)
 	{
 		this.fbSsi=fbSsi;
+		mapTuples = new HashMap<>();
 		mappings = new ArrayList<>();
-		tupleMappings = new ArrayList<>();
 		links = new ArrayList<>();
 		entities = new ArrayList<>();
 		
@@ -101,13 +105,28 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 //		}
 	}
 	
+	public void considerTuple(MAPPING m)
+	{
+		if(!mapTuples.containsKey(m)) {mapTuples.put(m,false);}
+		mapTuples.put(m,!mapTuples.get(m));
+	}
+	
+	public void reloadNumbers()
+	{
+		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
+		List<MAPPING> tupleMappings = new ArrayList<>();
+		for(MAPPING m : mappings)
+		{
+			if(mapTuples.containsKey(m) && mapTuples.get(m)) {tupleMappings.add(m);}
+		}
+		thLink.init(fSsi.tpMappingLink(tupleMappings));
+		logger.info(AbstractLogMessage.reloaded(fbSsi.getClassMapping(),ptt,tupleMappings));
+	}
+	
 	public void selectMapping()
 	{
 		logger.info(AbstractLogMessage.selectEntity(mapping));
-		if(tupleMappings.contains(mapping)) {tupleMappings.remove(mapping);}
-		else {tupleMappings.add(mapping);}
 		
-		thLink.init(fSsi.tpMappingLink(tupleMappings));
 	}
 	
 	public void addMapping()

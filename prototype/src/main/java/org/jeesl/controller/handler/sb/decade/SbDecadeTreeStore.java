@@ -14,7 +14,6 @@ public class SbDecadeTreeStore<HD extends JeeslHydroDecade, HY extends JeeslHydr
 	final static Logger logger = LoggerFactory.getLogger(SbDecadeTreeStore.class);
 	private static final long serialVersionUID = 1L;
 
-
 	public SbDecadeTreeStore()
 	{
 
@@ -22,4 +21,6 @@ public class SbDecadeTreeStore<HD extends JeeslHydroDecade, HY extends JeeslHydr
 
 	@Override public void storeTreeLevel1(HD l1) {}
 	@Override public void storeTreeLevel2(HY l2) {}
+	
+//	@Override public void setLastLevel(int level) {}
 }

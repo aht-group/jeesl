@@ -25,16 +25,18 @@
 							<j:security actionSuffix="create" handler="#{cc.attrs.bean.security}">
 								<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:sMapping"/>
 							</j:security>
+							<j:svg type="jeeslReload" listener="#{cc.attrs.bean.reloadNumbers()}" update="@form"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectMapping()}" update="@form :#{cc.id}:rowDetail"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectMapping()}" update=":#{cc.id}:rowDetail"/>
 					<p:columnGroup type="header">
 						<p:row>
-							<p:column colspan="4"><f:facet name="header"></f:facet></p:column>
+							<p:column colspan="5"><f:facet name="header"></f:facet></p:column>
 							<p:column colspan="3"><f:facet name="header"><h:outputText value="Grouping"/></f:facet></p:column>
 							<p:column colspan="#{cc.attrs.bean.links.size()}"><f:facet name="header"><h:outputText value="#{msg.jeeslCount}"/></f:facet></p:column>
                    		</p:row>
                    		<p:row>
+                   			<p:column colspan="1"><f:facet name="header"></f:facet></p:column>
 							<p:column colspan="1"><f:facet name="header"></f:facet></p:column>
 							<p:column colspan="1"><f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiSystem}"/></f:facet></p:column>
 							<p:column colspan="1"><f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiJsonClass}"/></f:facet></p:column>
@@ -53,6 +55,15 @@
 							</p:columns>
                    		</p:row>
       			     </p:columnGroup>
+      			     
+      			    <p:column>
+						<h:graphicImage rendered="#{cc.attrs.bean.mapTuples[m]}" name="#{appIconBean.svg['jeeslRoleAssinged']}" library="jeeslGfx" height="12">
+							<p:ajax update="@form" event="click" listener="#{cc.attrs.bean.considerTuple(m)}"/>
+						</h:graphicImage>
+						<h:graphicImage rendered="#{not cc.attrs.bean.mapTuples[m]}" name="#{appIconBean.svg['jeeslRoleUnassinged']}" library="jeeslGfx" height="12">
+							<p:ajax update="@form" event="click" listener="#{cc.attrs.bean.considerTuple(m)}"/>
+						</h:graphicImage>
+					</p:column>
       			     
 					<p:column styleClass="jeeslRight">
 						<h:outputText value="#{m.id}"/>

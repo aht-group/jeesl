@@ -19,6 +19,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -33,9 +34,10 @@ public class UiHelperAsset <L extends JeeslLang, D extends JeeslDescription,
 								ASTATUS extends JeeslAomAssetStatus<L,D,ASTATUS,?>,
 								ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,ALEVEL,?>,
 								ALEVEL extends JeeslAomView<L,D,REALM,?>,
-								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,USER,FRC>,
+								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
 								ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
 								ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
+								M extends JeeslMarkup<?>,
 								USER extends JeeslSimpleUser,
 								FRC extends JeeslFileContainer<?,?>,
 								UP extends JeeslAomEventUpload<L,D,UP,?>>

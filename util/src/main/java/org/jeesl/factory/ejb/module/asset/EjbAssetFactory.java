@@ -23,9 +23,9 @@ public class EjbAssetFactory<REALM extends JeeslTenantRealm<?,?,REALM,?>,
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAssetFactory.class);
 	
-	private final AomFactoryBuilder<?,?,?,COMPANY,SCOPE,ASSET,STATUS,TYPE,?,?,?,?,?,?,?> fbAsset;
+	private final AomFactoryBuilder<?,?,?,COMPANY,SCOPE,ASSET,STATUS,TYPE,?,?,?,?,?,?,?,?,?> fbAsset;
 	
-    public EjbAssetFactory(final AomFactoryBuilder<?,?,?,COMPANY,SCOPE,ASSET,STATUS,TYPE,?,?,?,?,?,?,?> fbAsset)
+    public EjbAssetFactory(final AomFactoryBuilder<?,?,?,COMPANY,SCOPE,ASSET,STATUS,TYPE,?,?,?,?,?,?,?,?,?> fbAsset)
     {
         this.fbAsset = fbAsset;
     }

@@ -9,7 +9,7 @@
 	
 	<composite:interface>
 		<composite:attribute name="bean" required="true"/>
-		<composite:attribute name="cache" required="false" default="#{appAssetCacheBean}"/>
+		<composite:attribute name="cache" required="false" default="#{appAomCacheBean}"/>
 		<composite:attribute name="withCode" required="false" default="true"/>
 	</composite:interface>
 	
@@ -68,9 +68,9 @@
 			<h:form id="fEvent">
 				<p:panel id="pEvent" header="#{msg.jeeslAssetEvent}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.event}">
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelEvent()}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveEvent()}"   update=":#{cc.id}:grid"/>
-						<j:icon type="jeeslClone"  listener="#{cc.attrs.bean.cloneEvent()}"  update=":#{cc.id}:sEvent"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelEvent()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveEvent()}"   update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslClone" listener="#{cc.attrs.bean.cloneEvent()}"  update=":#{cc.id}:sEvent"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
@@ -108,9 +108,6 @@
 						<p:outputLabel value="#{msg.jeeslAssetEventName}" />
 						<jtp:inputText value="#{cc.attrs.bean.event.name}"/>
 						
-						<p:outputLabel value="#{msg.jeeslAssetEventRemark}" />
-						<jtp:inputRemark value="#{cc.attrs.bean.event.remark}"/>
-						
 						<p:outputLabel value="#{msg.jeeslAssetEventAmount}" rendered="#{cc.attrs.bean.uiHelper.showAmount}"/>
                         <jtp:inputText value="#{cc.attrs.bean.nnb.a}" rendered="#{cc.attrs.bean.uiHelper.showAmount}"/>
                         
@@ -120,6 +117,9 @@
                         	<f:selectItems value="#{cc.attrs.bean.uiHelper.companies}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
                         </p:selectOneMenu>            
                         
+					</p:panelGrid>
+					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
+						<jtp:inputMarkup value="#{cc.attrs.bean.event.markup}"/>
 					</p:panelGrid>
 				</p:panel>
 			</h:form>

@@ -5,43 +5,53 @@ import java.util.Date;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbAssetEventFactory<COMPANY extends JeeslAomCompany<?,?>,
 								ASSET extends JeeslAomAsset<?,ASSET,COMPANY,?,?>,
-								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,USER,FRC>,
+								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
 								ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
 								ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>,
+								M extends JeeslMarkup<MT>,
+								MT extends JeeslIoCmsMarkupType<?,?,MT,?>,
 								USER extends JeeslSimpleUser,
 								FRC extends JeeslFileContainer<?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAssetEventFactory.class);
 	
-	private final AomFactoryBuilder<?,?,?,COMPANY,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,USER,FRC,?> fbAsset;
+	private final AomFactoryBuilder<?,?,?,COMPANY,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,?> fbAsset;
 	
-    public EjbAssetEventFactory(final AomFactoryBuilder<?,?,?,COMPANY,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,USER,FRC,?> fbAsset)
+    public EjbAssetEventFactory(final AomFactoryBuilder<?,?,?,COMPANY,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,?> fbAsset)
     {
         this.fbAsset = fbAsset;
     }
 	
-	public EVENT build(ASSET asset, ETYPE type)
+	public EVENT build(ASSET asset, ETYPE type, MT markupType)
 	{
 		try
 		{
+			M markup = fbAsset.getClassMarkup().newInstance();
+			markup.setLkey(JeeslLocale.none);
+			markup.setType(markupType);
+			
 			EVENT ejb = fbAsset.getClassEvent().newInstance();
 			ejb.getAssets().add(asset);
 			ejb.setRecord(new Date());
 			ejb.setName("");
 			ejb.setRemark("");
 			ejb.setType(type);
+			ejb.setMarkup(markup);
 		    return ejb;
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
@@ -49,10 +59,14 @@ public class EjbAssetEventFactory<COMPANY extends JeeslAomCompany<?,?>,
 		return null;
     }
 	
-	public EVENT clone(EVENT event)
+	public EVENT clone(EVENT event, MT markupType)
 	{
 		try
 		{
+			M markup = fbAsset.getClassMarkup().newInstance();
+			markup.setLkey(JeeslLocale.none);
+			markup.setType(markupType);
+			
 			EVENT ejb = fbAsset.getClassEvent().newInstance();
 			ejb.getAssets().addAll(event.getAssets());
 			ejb.setType(event.getType());
@@ -60,6 +74,7 @@ public class EjbAssetEventFactory<COMPANY extends JeeslAomCompany<?,?>,
 			ejb.setRecord(new Date());
 			ejb.setName("CLONE "+event.getName());
 			ejb.setRemark(event.getRemark());
+			ejb.setMarkup(markup);
 			ejb.setCompany(event.getCompany());
 		    return ejb;
 		}

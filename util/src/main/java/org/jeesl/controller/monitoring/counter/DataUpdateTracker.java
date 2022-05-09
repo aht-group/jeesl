@@ -34,11 +34,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	private final Map<String,Integer> createSuccess,createFail;
 	
 	public static DataUpdateTracker instance() {return new DataUpdateTracker();}
-	
-	public DataUpdateTracker()
-	{
-		this(false);
-	}
+	public DataUpdateTracker(){this(false);}
 	public DataUpdateTracker(boolean autoStart)
 	{
 		update = new DataUpdate();
@@ -81,6 +77,13 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		update.getResult().setSuccess(update.getResult().getSuccess()+1);
 		if(json.getStatistic().getSuccess()==null) {json.getStatistic().setSuccess(1);}
 		else {json.getStatistic().setSuccess(json.getStatistic().getSuccess()+1);}
+		total();
+	}
+	
+	public void obsolete()
+	{
+		if(json.getStatistic().getObsolete()==null) {json.getStatistic().setObsolete(1);}
+		else {json.getStatistic().setObsolete(json.getStatistic().getObsolete()+1);}
 		total();
 	}
 	

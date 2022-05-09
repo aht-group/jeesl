@@ -14,7 +14,6 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 import org.jeesl.interfaces.model.io.ssi.maintenance.EjbWithSsiDataCleaning;
-import org.jeesl.interfaces.model.system.job.EjbWithMigrationJob1;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -56,5 +55,5 @@ public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescriptio
 	<T extends EjbWithSsiDataCleaning<CLEANING>> List<T> fEntitiesWithoutSsiDataCleaning(Class<T> c, int maxResult);
 	<T extends EjbWithSsiDataCleaning<CLEANING>> Json1Tuples<CLEANING> tpcSsiDataCleaning(Class<T> c);
 	
-	List<DATA> fSsiDataWithPendingJob1(MAPPING mapping, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
+	List<DATA> fSsiDataWithPendingJob1(MAPPING mapping, LINK link, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
 }

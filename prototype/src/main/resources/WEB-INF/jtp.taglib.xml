@@ -39,7 +39,7 @@
         <tag-name>inputMarkup</tag-name>
         <source>jeeslPrototype/langs/markup.xhtml</source>
     </tag>
-        <tag>
+	<tag>
         <tag-name>inputTabMarkup</tag-name>
         <source>jeeslPrototype/langs/tabMarkup.xhtml</source>
     </tag>
@@ -47,6 +47,11 @@
         <tag-name>inputTabText</tag-name>
         <source>jeeslPrototype/langs/tabText.xhtml</source>
     </tag>
+     <tag>
+        <tag-name>inputXhtml</tag-name>
+        <source>jeeslPrototype/input/markup/xhtml.xhtml</source>
+    </tag>
+    
     <tag>
         <tag-name>inputAttribute</tag-name>
         <source>jeeslPrototype/input/attribute.xhtml</source>

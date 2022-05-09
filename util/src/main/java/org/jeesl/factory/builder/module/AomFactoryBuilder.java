@@ -8,6 +8,7 @@ import org.jeesl.factory.ejb.module.asset.EjbAssetEventFactory;
 import org.jeesl.factory.ejb.module.asset.EjbAssetFactory;
 import org.jeesl.factory.ejb.module.asset.EjbAssetLevelFactory;
 import org.jeesl.factory.ejb.module.asset.EjbAssetTypeFactory;
+import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
@@ -21,6 +22,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.util.comparator.ejb.module.asset.EjbAssetComparator;
@@ -36,9 +38,11 @@ public class AomFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								ASTATUS extends JeeslAomAssetStatus<L,D,ASTATUS,?>,
 								ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,?>,
 								VIEW extends JeeslAomView<L,D,REALM,?>,
-								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,USER,FRC>,
+								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
 								ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
 								ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
+								M extends JeeslMarkup<MT>,
+								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
 								USER extends JeeslSimpleUser,
 								FRC extends JeeslFileContainer<?,?>,
 								UP extends JeeslAomEventUpload<L,D,UP,?>>
@@ -56,6 +60,8 @@ public class AomFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 	private final Class<EVENT> cEvent; public Class<EVENT> getClassEvent() {return cEvent;}
 	private final Class<ETYPE> cEventType; public Class<ETYPE> getClassEventType() {return cEventType;}
 	private final Class<ESTATUS> cEventStatus; public Class<ESTATUS> getClassEventStatus() {return cEventStatus;}
+	private final Class<M> cMarkup; public Class<M> getClassMarkup() {return cMarkup;}
+	private final Class<MT> cMarkupType; public Class<MT> getClassMarkupType() {return cMarkupType;}
 	private final Class<UP> cUpload; public Class<UP> getClassUpload() {return cUpload;}
 	
 	public AomFactoryBuilder(final Class<L> cL,final Class<D> cD,
@@ -69,6 +75,8 @@ public class AomFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								final Class<EVENT> cEvent,
 								final Class<ETYPE> cEventType,
 								final Class<ESTATUS> cEventStatus,
+								final Class<M> cMarkup,
+								final Class<MT> cMarkupType,
 								final Class<UP> cUpload)
 	{       
 		super(cL,cD);
@@ -82,6 +90,8 @@ public class AomFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 		this.cEvent=cEvent;
 		this.cEventType=cEventType;
 		this.cEventStatus=cEventStatus;
+		this.cMarkup=cMarkup;
+		this.cMarkupType=cMarkupType;
 		this.cUpload=cUpload;
 	}
 	
@@ -89,7 +99,7 @@ public class AomFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 	public EjbAssetTypeFactory<REALM,ATYPE,VIEW> ejbType() {return new EjbAssetTypeFactory<>(cAssetType);}
 	public EjbAssetLevelFactory<REALM,VIEW> ejbLevel() {return new EjbAssetLevelFactory<>(cView);}
 	public EjbAssetFactory<REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE> ejbAsset() {return new EjbAssetFactory<>(this);}
-	public EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,USER,FRC> ejbEvent() {return new EjbAssetEventFactory<>(this);}
+	public EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC> ejbEvent() {return new EjbAssetEventFactory<>(this);}
 	
 	public Comparator<ASSET> cpAsset(EjbAssetComparator.Type type){return new EjbAssetComparator<ASSET>().factory(type);}
 	public Comparator<EVENT> cpEvent(EjbEventComparator.Type type){return new EjbEventComparator<EVENT>().factory(type);}

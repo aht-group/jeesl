@@ -60,7 +60,6 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
 	private final List<THREAD> threads; public List<THREAD> getThreads() {return threads;}
 	private final List<POST> postings; public List<POST> getPostings() {return postings;}
 	
-
 	protected long refId;
 	private USER user;
 	protected MT markupType;

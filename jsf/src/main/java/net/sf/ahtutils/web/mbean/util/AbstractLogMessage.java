@@ -76,10 +76,14 @@ public class AbstractLogMessage <L extends JeeslLang,D extends JeeslDescription,
 	
 	public static String ptt(ProcessingTimeTracker ptt)
 	{
-		ptt.stop();
-		StringBuffer sb = new StringBuffer();
-		sb.append(" in "+ptt.toTotalTime());
-		return sb.toString();
+		if(ptt!=null)
+		{
+			ptt.stop();
+			StringBuffer sb = new StringBuffer();
+			sb.append(" in "+ptt.toTotalTime());
+			return sb.toString();
+		}
+		return "";
 	}
 	
 	public static <USER extends JeeslUser<?>> String preDestroy(USER user)
@@ -299,16 +303,19 @@ public class AbstractLogMessage <L extends JeeslLang,D extends JeeslDescription,
 		return sb.toString();
 	}
 	
-	public static <T extends EjbWithId> String reloaded(Class<T> c, List<T> list){return reloaded(c,list,null);}
-	public static <T extends EjbWithId> String reloaded(Class<T> c, Set<T> list){return reloaded(c,new ArrayList<T>(list),null);}
-	public static <T extends EjbWithId> String reloaded(Class<T> c, Collection<T> list){return reloaded(c,new ArrayList<T>(list),null);}
-	public static <T extends EjbWithId> String reloaded(Class<T> c, List<T> list, EjbWithId ejb)
+	public static <T extends EjbWithId> String reloaded(Class<T> c, List<T> list){return AbstractLogMessage.reloaded(c,list,null);}
+	public static <T extends EjbWithId> String reloaded(Class<T> c, ProcessingTimeTracker ptt, List<T> list){return AbstractLogMessage.reloaded(c,ptt,list,null);}
+	public static <T extends EjbWithId> String reloaded(Class<T> c, Set<T> list){return AbstractLogMessage.reloaded(c,new ArrayList<T>(list),null);}
+	public static <T extends EjbWithId> String reloaded(Class<T> c, Collection<T> list){return AbstractLogMessage.reloaded(c,new ArrayList<T>(list),null);}
+	public static <T extends EjbWithId> String reloaded(Class<T> c, List<T> list, EjbWithId ejb){return AbstractLogMessage.reloaded(c,null,new ArrayList<T>(list),null);}
+	public static <T extends EjbWithId> String reloaded(Class<T> c, ProcessingTimeTracker ptt, List<T> list, EjbWithId ejb)
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("Reloaded List ");
 		sb.append(c.getSimpleName());
 		sb.append(" with ").append(list.size()).append(" elements");
 		if(ejb!=null) {sb.append(" for "+ejb.toString());}
+		sb.append(ptt(ptt));
 		return sb.toString();
 	}
 	

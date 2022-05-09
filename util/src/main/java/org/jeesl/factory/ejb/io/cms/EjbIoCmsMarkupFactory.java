@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.io.cms;
 
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class EjbIoCmsMarkupFactory<M extends JeeslMarkup<MT>,
 		try
 		{
 			markup = cMarkup.newInstance();
-	    	markup.setLkey("none");
+	    	markup.setLkey(JeeslLocale.none);
 	    	markup.setType(type);
 	    	markup.setContent("");
 		}

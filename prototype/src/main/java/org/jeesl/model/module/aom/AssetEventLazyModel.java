@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
-									EVENT extends JeeslAomEvent<?,ASSET,ETYPE,ESTATUS,USER,?>,
+									EVENT extends JeeslAomEvent<?,ASSET,ETYPE,ESTATUS,?,USER,?>,
 									ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
 									ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>,
 									USER extends JeeslSimpleUser>
@@ -54,7 +54,7 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
     @Override public Object getRowKey(EVENT account) {return llh.getRowKey(account);}
     public void clear() {list.clear();}
 
-    public void reloadScope(JeeslAssetFacade<?,?,?,?,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,USER,?,?> fAsset, ASSET asset)
+    public void reloadScope(JeeslAssetFacade<?,?,?,?,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,?,?,USER,?,?> fAsset, ASSET asset)
     {
 		this.clear();
 		list.addAll(fAsset.fAssetEvents(asset));

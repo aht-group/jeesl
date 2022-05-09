@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbEventComparator<EVENT extends JeeslAomEvent<?,?,?,?,?,?>>
+public class EjbEventComparator<EVENT extends JeeslAomEvent<?,?,?,?,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbEventComparator.class);
 
