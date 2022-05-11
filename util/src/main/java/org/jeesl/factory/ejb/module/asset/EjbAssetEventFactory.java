@@ -64,6 +64,12 @@ public class EjbAssetEventFactory<COMPANY extends JeeslAomCompany<?,?>,
 		try
 		{
 			M markup = fbAsset.getClassMarkup().newInstance();
+			if(event.getMarkup()!=null)
+			{
+				markup.setLkey(event.getMarkup().getLkey());
+				markup.setType(event.getMarkup().getType());
+				markup.setContent(event.getMarkup().getContent());
+			}
 			markup.setLkey(JeeslLocale.none);
 			markup.setType(markupType);
 			

@@ -17,7 +17,7 @@ public interface JeeslIoSsiData <MAPPING extends JeeslIoSsiMapping<?,?>,
 		extends EjbWithId,EjbSaveable,EjbRemoveable,EjbWithCode,EjbWithParentAttributeResolver,
 						EjbWithMigrationJob1<JOB>
 {	
-	public enum Attributes{mapping,code,link,targetId,localId,refA,refB,refC}
+	public enum Attributes{mapping,code,link,targetId,localId,refA,refB,refC,job1}
 	
 	public MAPPING getMapping();
 	public void setMapping(MAPPING mapping);
