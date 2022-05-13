@@ -18,6 +18,10 @@
 		<composite:attribute name="graphicStyles" required="false" default="#{appUtilsBean.graphicStyles}"/>
 		
 		<composite:facet name="revision" required="false"/>
+		<composite:facet name="inputImageLabel" required="false"/>
+		<composite:facet name="inputImageInput" required="false"/>
+		<composite:facet name="inputSymbolLabel" required="false"/>
+		<composite:facet name="inputSymbolInput" required="false"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -117,8 +121,18 @@
 							</p:panelGrid>
 							
 							<p:panelGrid rendered="#{cc.attrs.bean.supportsSymbol}" columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-								<p:outputLabel  value="#{msg.aupOptionSymbol}"/>
-								<p:inputText value="#{cc.attrs.bean.status.symbol}" autocomplete="off"/>
+								<c:if test="#{empty cc.facets.inputSymbolLabel}" >
+									<p:outputLabel  value="#{msg.aupOptionSymbol}"/>
+								</c:if>
+								<c:if test="#{not empty cc.facets.inputSymbolLabel}">
+									<composite:renderFacet name="inputSymbolLabel"/>
+								</c:if>
+								<c:if test="#{empty cc.facets.inputSymbolInput}" >
+									<p:inputText value="#{cc.attrs.bean.status.symbol}" autocomplete="off"/>
+								</c:if>
+								<c:if test="#{not empty cc.facets.inputSymbolInput}">
+									<composite:renderFacet name="inputSymbolInput"/>
+								</c:if>
 							</p:panelGrid>
 							
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
@@ -136,8 +150,18 @@
 									<f:selectItems value="#{cc.attrs.bean.parents}" var="p" itemLabel="#{p.name[localeCode].lang}" itemValue="#{p.id}"/>
 								</p:selectOneMenu>
 								
-								<p:outputLabel value="#{msg.aupStatusImageResource}" rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}"/>
-								<p:inputText value="#{cc.attrs.bean.status.image}" rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}" autocomplete="off"/>
+								<c:if test="#{empty cc.facets.inputImageLabel}" >
+									<p:outputLabel value="#{msg.aupStatusImageResource}" rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}"/>
+								</c:if>
+								<c:if test="#{not empty cc.facets.inputImageLabel}">
+									<composite:renderFacet rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}" name="inputImageLabel"/>
+								</c:if>
+								<c:if test="#{empty cc.facets.inputImageInput}" >
+									<p:inputText value="#{cc.attrs.bean.status.image}" rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}" autocomplete="off"/>
+								</c:if>
+								<c:if test="#{not empty cc.facets.inputImageInput}">
+									<composite:renderFacet rendered="#{(cc.attrs.bean.supportsImage) and (cc.attrs.bean.hasDeveloperAction)}" name="inputImageInput"/>
+								</c:if>
 								
 								<p:outputLabel value="#{msg.aupGraphicColor}" rendered="#{cc.attrs.bean.supportsColour}"/>
 								<p:colorPicker value="#{cc.attrs.bean.status.color}" rendered="#{cc.attrs.bean.supportsColour}"/>
