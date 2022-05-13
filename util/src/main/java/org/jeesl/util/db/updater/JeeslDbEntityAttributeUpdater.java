@@ -111,6 +111,7 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 				{
 					if (lang.getKey().equals(locale))
 					{	
+						if (ejbAttribute.getName()==null) {ejbAttribute.setName(new HashMap<>());}
 						ejbAttribute.getName().put(locale, efLang.createLang(lang) );
 					}
 				}
