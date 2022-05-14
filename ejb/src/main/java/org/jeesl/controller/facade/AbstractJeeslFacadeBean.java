@@ -201,5 +201,14 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	
 	@Override public <W extends JeeslWithType<T>, T extends JeeslStatus<?, ?, T>> Json1Tuples<T> tpcWithType(Class<W> cWith,Class<T> cType) {return fJeesl.tpcWithType(cWith,cType);}
 
+	@Override
+	public <T extends EjbWithId> T loadEntityWithGraph(Class<T> clazz, String graphName, long parentId)
+	{
+	 //   EntityGraph graph = this.em.getEntityGraph(graphName);
+	 //   Map<String, Object> hints = new HashMap<>();
+	 //   hints.put("javax.persistence.fetchgraph", graph);
+	    return null;
+	}
+	
 	//@Override public <L extends UtilsLang, D extends UtilsDescription, C extends UtilsSecurityCategory<L, D, C, R, V, U, A, USER>, R extends UtilsSecurityRole<L, D, C, R, V, U, A, USER>, V extends UtilsSecurityView<L, D, C, R, V, U, A, USER>, U extends UtilsSecurityUsecase<L, D, C, R, V, U, A, USER>, A extends UtilsSecurityAction<L, D, C, R, V, U, A, USER>, USER extends UtilsUser<L, D, C, R, V, U, A, USER>> List<USER> likeNameFirstLast(Class<USER> c, String query) {return fUtils.likeNameFirstLast(c,query);}
 }
