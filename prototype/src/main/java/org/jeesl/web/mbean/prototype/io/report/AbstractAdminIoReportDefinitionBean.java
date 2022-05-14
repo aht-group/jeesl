@@ -213,7 +213,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	}
 	
 	//*************************************************************************************
-	private void reloadReports()
+	protected void reloadReports()
 	{
 		reports = fReport.fReports(sbhCategory.getSelected(), true);
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbReport.getClassReport(),reports));}
