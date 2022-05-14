@@ -1445,5 +1445,14 @@ public class JeeslFacadeBean implements JeeslFacade
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
         return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
+	
+	@Override
+	public <T extends EjbWithId> T loadEntityWithGraph(Class<T> clazz, String graphName, long parentId)
+	{
+	 //   EntityGraph graph = this.em.getEntityGraph(graphName);
+	 //   Map<String, Object> hints = new HashMap<>();
+	 //   hints.put("javax.persistence.fetchgraph", graph);
+	    return em.find(clazz, parentId);
+	}
 
 }

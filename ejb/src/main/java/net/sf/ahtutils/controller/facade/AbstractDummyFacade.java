@@ -583,5 +583,14 @@ public class AbstractDummyFacade implements JeeslFacade
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public <T extends EjbWithId> T loadEntityWithGraph(Class<T> clazz, String graphName, long parentId)
+	{
+	 //   EntityGraph graph = this.em.getEntityGraph(graphName);
+	 //   Map<String, Object> hints = new HashMap<>();
+	 //   hints.put("javax.persistence.fetchgraph", graph);
+	    return null;
+	}
 
 }
