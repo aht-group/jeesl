@@ -21,5 +21,7 @@ public interface JeeslIdFacade extends Serializable
 	<T extends EjbWithId> List<T> find(Class<T> c, List<Long> ids);
 	<T extends EjbWithId> List<T> find(Class<T> c, Set<Long> ids);
 	<T extends EjbWithId> long maxId(Class<T> c);
+	
+	<T extends EjbWithId>T loadEntityWithGraph(Class<T> clazz, String graphName, long parentId);
 }
 //jeesl.highlight:interface
