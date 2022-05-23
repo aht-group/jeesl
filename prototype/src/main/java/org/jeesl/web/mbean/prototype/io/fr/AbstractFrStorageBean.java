@@ -73,7 +73,7 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 		this.fbFr=fbFr;
 		sbhStorageType = new SbMultiHandler<>(fbFr.getClassStorageType(),this);
 		thSize = new JsonTuple1Handler<STORAGE>(fbFr.getClassStorage());
-		thCount = new JsonTuple2Handler<STORAGE,FTYPE>(fbFr.getClassStorage(),fbFr.getClassType());
+		thCount = new JsonTuple2Handler<>(fbFr.getClassStorage(),fbFr.getClassType());
 		thCount.setComparatorProviderB(jcpB);
 	}
 	

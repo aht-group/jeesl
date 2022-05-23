@@ -31,6 +31,8 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 	protected String rowsPerPageTemplate; @Override public String getRowsPerPageTemplate(){return rowsPerPageTemplate;}
 	
 	protected String filterStyle; public String getFilterStyle() {return filterStyle;}
+	protected String filterStyleCode; public String getFilterStyleCode() {return filterStyleCode;}
+	
 	protected String title; public String getTitle() {return title;}
 	protected String titlePrefix; public String getTitlePrefix() {return titlePrefix;}
 	
@@ -48,7 +50,9 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 		paginatorTemplate = "{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}";
 		paginatorPosition = "bottom";
 		rowsPerPageTemplate = "5,20,50,100";
+		
 		filterStyle = "width: 75px;";
+		filterStyleCode = "width: 50px;";
 		
 		allowUploadSvg = "/(\\.|\\/)(svg)$/";
 		allowUploadJesslGraphicType = "/(\\.|\\/)(svg|png)$/";

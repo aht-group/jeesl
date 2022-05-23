@@ -80,10 +80,6 @@
         <tag-name>reportDomain</tag-name>
         <source>jeeslPrototype/report/domain.xhtml</source>
     </tag>
-	<tag>
-        <tag-name>sbDateInterval</tag-name>
-        <source>jeeslPrototype/sbDateInterval.xhtml</source>
-    </tag>
     <tag>
         <tag-name>sbMulti</tag-name>
         <source>jeeslPrototype/sb/multi.xhtml</source>
