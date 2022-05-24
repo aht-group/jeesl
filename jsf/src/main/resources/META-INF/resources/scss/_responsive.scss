@@ -265,6 +265,7 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				.jeesl-menu-bar-button-selected-items {
 					padding: 0 5px;
+					position: relative;
 					
 					@media (max-width: 768px) {
 						display: none;
