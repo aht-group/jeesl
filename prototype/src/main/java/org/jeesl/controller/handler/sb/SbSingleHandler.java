@@ -1,6 +1,5 @@
 package org.jeesl.controller.handler.sb;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringUtil;
 
-public class SbSingleHandler <T extends EjbWithId> implements Serializable,SbSingleBean
+public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 {
 	final static Logger logger = LoggerFactory.getLogger(SbSingleHandler.class);
 	private static final long serialVersionUID = 1L;

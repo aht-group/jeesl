@@ -7,17 +7,20 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.interfaces.bean.sb.SbSearchBean;
 import org.jeesl.interfaces.controller.handler.JeeslAutoCompleteHandler;
+import org.jeesl.interfaces.controller.handler.JeeslHandler;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SbSearchHandler <T extends EjbWithId> extends SbSingleHandler<T>
+public class SbSearchHandler <T extends EjbWithId> implements JeeslHandler
 {
 	final static Logger logger = LoggerFactory.getLogger(SbMultiHandler.class);
 	private static final long serialVersionUID = 1L;
 
 	private final SbSearchBean bean;
 	private final JeeslAutoCompleteHandler<T> acHandler;
+	
+	private final Class<T> c;
 	
 	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear();this.list.addAll(list);}
 
@@ -26,7 +29,7 @@ public class SbSearchHandler <T extends EjbWithId> extends SbSingleHandler<T>
 	
 	public SbSearchHandler(Class<T> c, SbSearchBean bean, JeeslAutoCompleteHandler<T> acHandler)
 	{
-		super(c,bean);
+		this.c=c;
 		this.bean=bean;
 		this.acHandler=acHandler;
 		
@@ -55,7 +58,7 @@ public class SbSearchHandler <T extends EjbWithId> extends SbSingleHandler<T>
 	public void selectSbSearch(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info("selectSbSearch");
-		bean.selectSbSingle(item);
+		bean.selectSbSearch(this,item);
 	}
 
 	public void cancelEvent()
