@@ -20,7 +20,8 @@
         		<j:slot width="1"/>
         		<j:slot width="7">
         			<ui:repeat var="m" value="#{cc.attrs.beanMenu.subMenu(cc.attrs.bean.security.pageCode)}">
-		      			<p:panel header="#{m.view.name[localeCode].lang}" styleClass="jeeslPanel">
+		      			<p:panel styleClass="jeeslPanel">
+		      				<f:facet name="header"><j:pHeader title="#{m.view.name[localeCode].lang}" link="#{request.contextPath}#{m.view.urlMapping}"/></f:facet>
         					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
         						<h:outputText value="#{m.view.description[localeCode].lang}"/>
         					</p:panelGrid>

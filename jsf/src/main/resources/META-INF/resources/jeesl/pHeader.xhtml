@@ -10,6 +10,7 @@
 		<composite:attribute name="title" required="false"/>
 		<composite:attribute name="entity" required="false"/>
 		<composite:attribute name="code" required="false"/>
+		<composite:attribute name="link" required="false" default=""/>
 		<composite:facet name="header" required="false"/>
 	</composite:interface>
         
@@ -20,7 +21,15 @@
 	 	<c:set var="titleText" value="#{not empty cc.attrs.title ? cc.attrs.title : not empty cc.attrs.entity ? not empty evaluatedEntityCodeValue ? evaluatedEntityCodeValue : defaultEntityCodeValue :'myTitle'}"/>
     	
     	<c:if test="#{empty cc.facets.header}">
-        	<h:outputText value="#{titleText}"/>
+    		<c:if test="#{empty cc.attrs.link}">
+        		<h:outputText value="#{titleText}"/>
+        	</c:if>
+        	<c:if test="#{not empty cc.attrs.link}">
+        		<h:outputLink value="#{cc.attrs.link}">
+					<h:outputText value="#{titleText}"/>
+				</h:outputLink>
+        	</c:if>
+        	
         </c:if>
         <c:if test="#{not empty cc.facets.header}">
 			<composite:renderFacet name="header"/>
