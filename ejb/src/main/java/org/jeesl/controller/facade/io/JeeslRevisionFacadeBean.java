@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -318,7 +319,37 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		logger.info(q.unwrap(org.hibernate.Query.class).getQueryString());
 
 		try	{return q.getSingleResult();}
-		catch (NoResultException ex){throw new JeeslNotFoundException("Nothing found "+fbRevision.getClassEntity().getSimpleName()+" for jscn="+jscn);}
+		catch (NoResultException ex)
+		{
+			//Update jscn from fully qualified class name from code field
+			return updateJscnFromCode(jscn);
+		}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbRevision.getClassEntity().getSimpleName()+" and jscn="+jscn+" not unique");}
+	}
+
+	private RE updateJscnFromCode(String jscn) throws JeeslNotFoundException
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		logger.info(fbRevision.getClassEntity().getName());
+        CriteriaQuery<RE> cQ = cB.createQuery(fbRevision.getClassEntity());
+        Root<RE> root = cQ.from(fbRevision.getClassEntity());
+        Expression<String> literal = cB.literal("%."+jscn);
+	    Expression<String> eCode = root.get("code");
+
+	    CriteriaQuery<RE> select = cQ.select(root);
+	    select.where(cB.like(eCode,literal));
+
+		TypedQuery<RE> q = em.createQuery(select);
+		logger.info(q.unwrap(org.hibernate.Query.class).getQueryString());
+
+		try
+		{
+			RE revEntity =  q.getSingleResult();
+			revEntity.setJscn(jscn);
+			revEntity = this.save(revEntity);
+			return revEntity;
+		}
+		catch (NoResultException ex) {throw new JeeslNotFoundException("Nothing found "+fbRevision.getClassEntity().getSimpleName()+" for jscn="+jscn);}
+		catch (JeeslConstraintViolationException| JeeslLockingException | NonUniqueResultException ex) {throw new JeeslNotFoundException("Results for "+fbRevision.getClassEntity().getSimpleName()+" and jscn="+jscn+" not unique");}
 	}
 }

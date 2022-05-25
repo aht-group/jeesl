@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionMissingLabel;
@@ -100,11 +101,30 @@ public class JeeslMissingLabelsHandler<L extends JeeslLang,D extends JeeslDescri
 			fRevision.addMissingLabel(rml);
 		}
 	}
+
 	public void updateMissingRevisionEntity(String entityJscn)
 	{
 		mapEntities.put(entityJscn, null);
 		updateMissingTranslation(entityJscn,"","");
 	}
+	
+	/*
+	 Alternative imp
+	{
+		//Check if Revision Entity are really Missing in Revision
+		try
+		{
+			RE re =  fRevision.fRevisionEntity(entityJscn);
+		}
+		catch (JeeslNotFoundException e)
+		{
+			//If Not found put it in Missing revision table
+			mapEntities.put(entityJscn, null);
+			updateMissingTranslation(entityJscn,"","");
+			e.printStackTrace();
+		}
+	}
+	*/
 
 	public void load(RE re)
 	{
