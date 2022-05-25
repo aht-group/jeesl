@@ -14,7 +14,10 @@
         <tag-name>description</tag-name>
         <source>jeeslPrototype/output/description.xhtml</source>
     </tag>
-    
+    <tag>
+    	<tag-name>outputMarkup</tag-name>
+    	<source>jeeslPrototype/output/markup.xhtml</source>
+    </tag>
     <tag>
         <tag-name>inputRemark</tag-name>
         <source>jeeslPrototype/input/remark.xhtml</source>
