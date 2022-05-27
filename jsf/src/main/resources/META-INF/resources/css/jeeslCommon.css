@@ -113,8 +113,7 @@ html, body {
     font-weight: normal;
     overflow: hidden;
     padding: 4px 2px;
-    text-align: left;
-    width: 85%; }
+    text-align: left; }
 
 .jeesl-tree {
   background-color: #f1f1f1; }

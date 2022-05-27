@@ -36,16 +36,18 @@ $element-height-mobile: 84px;
 		border-radius: 0;
 		font-size: 1.2em;
 	    font-weight: 700;
-		height: $ls-element-height-mobile;
-	    line-height: calc(#{$ls-element-height-mobile} - #{$separator-thickness-mobile});
-		margin: 0;
-	    padding: 0 $wide-spacing;
+		min-height: $ls-element-height-mobile;
+	    margin: 0;
+	    padding: calc(#{$regular-spacing} - #{$separator-thickness-mobile}) $wide-spacing $regular-spacing;
 		text-shadow: none;
 		
 		&:after {
 			border-bottom: $separator-thickness-mobile solid $bright-grey;
+			bottom: 0;
 			content: '';
 			display: block;
+			position: absolute;
+			width: calc(100% - 2 * #{$wide-spacing});
 		}
 		
 		&.ui-state-hover, &:hover {
@@ -77,6 +79,7 @@ html, body, .ui-widget {
 @mixin inputfield {
 	height: $element-height-mobile;
 	line-height: calc(#{$element-height-mobile} - 2 * (#{$half-spacing}));
+	padding: $regular-spacing !important;
 }
 
 @mixin icon {
@@ -786,6 +789,10 @@ html, body, .ui-widget {
 					align-items: center;
 					background: $light-grey;
 					display: flex;
+				}
+				
+				> .ui-selectonemenu {
+					padding: 0;
 				}
 			}
 		}

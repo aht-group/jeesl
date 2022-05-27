@@ -60,30 +60,36 @@ $border: $border-width solid $border-colour;
 	}
 	
 	.#{$class}-item {
+		align-items: center;
 		background: transparent;
 		border: none;
 		border-radius: 0;
 		cursor: pointer;
-		line-height: $ls-element-height;
-		padding: 0 $half-spacing;
+		display: flex;
+		min-height: $ls-element-height;
+		padding: $slim-spacing $half-spacing;
+		position: relative;
 		transition: background .2s linear;
+		white-space: normal;
 		
 		@media (max-width: 768px) {
 			border-radius: 0;
-			font-size: 1.2em;
+			font-size: 1.1em;
 		    font-weight: 700;
-			height: $ls-element-height-mobile;
-		    line-height: calc(#{$ls-element-height-mobile} - #{$separator-thickness-mobile});
+			min-height: $ls-element-height-mobile;
 			margin: 0;
-		    padding: 0 $wide-spacing;
+		    padding: calc(#{$regular-spacing} - #{$separator-thickness-mobile}) $wide-spacing $regular-spacing;
 			text-shadow: none;
 		}
 		
 		&:after {
 			@media (max-width: 768px) {
 				border-bottom: $separator-thickness-mobile solid $bright-grey;
+				bottom: 0;
 				content: '';
 				display: block;
+				position: absolute;
+				width: calc(100% - 2 * #{$wide-spacing});
 			}
 		}
 		
@@ -246,9 +252,15 @@ $border: $border-width solid $border-colour;
 	border-radius: $border-radius;
     box-shadow: none;
     padding: $half-spacing $regular-spacing !important;
+	white-space: normal;
+	width: 100%;
 	
 	&.ui-state-focus {
 		box-shadow: none;
+	}
+	
+	@media (max-width: 768px) {
+		padding: $regular-spacing !important;
 	}
 }
 
@@ -599,7 +611,7 @@ $border: $border-width solid $border-colour;
 			}
 			
 			.ui-icon {
-				flex: .25;
+				flex: .15;
 			}
 		}
 		
@@ -925,7 +937,7 @@ $border: $border-width solid $border-colour;
 		&.p-field {
 			align-items: center;
 		    margin: 0;
-		    padding: $slim-spacing 0;
+		    padding: $half-spacing 0;
 		}
 	}
 	
@@ -935,7 +947,6 @@ $border: $border-width solid $border-colour;
 		}
 		
 		.p-col {
-			line-height: $ls-element-height;
 			padding: 0 $regular-spacing;
 			
 			&:first-child {

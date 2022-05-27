@@ -537,9 +537,14 @@ template {
   border: none;
   border-radius: 3px;
   box-shadow: none;
-  padding: 5px 10px !important; }
+  padding: 5px 10px !important;
+  white-space: normal;
+  width: 100%; }
   .ui-inputfield.ui-state-default.ui-state-focus {
     box-shadow: none; }
+  @media (max-width: 768px) {
+    .ui-inputfield.ui-state-default {
+      padding: 10px !important; } }
 
 .ui-inputgroup {
   align-items: stretch;
@@ -564,10 +569,15 @@ template {
     border-radius: 3px;
     box-shadow: none;
     padding: 5px 10px !important;
+    white-space: normal;
+    width: 100%;
     border-radius: 3px 0 0 3px;
     width: calc(85% + 6px); }
     .ui-selectonemenu.ui-state-default .ui-inputfield.ui-state-focus {
       box-shadow: none; }
+    @media (max-width: 768px) {
+      .ui-selectonemenu.ui-state-default .ui-inputfield {
+        padding: 10px !important; } }
   .ui-selectonemenu.ui-state-default .ui-selectonemenu-label {
     align-items: center;
     display: flex; }
@@ -695,28 +705,34 @@ template {
         width: calc(100% - (2 * 15px));
         margin: 0 15px; } }
     .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item {
+      align-items: center;
       background: transparent;
       border: none;
       border-radius: 0;
       cursor: pointer;
-      line-height: 26px;
-      padding: 0 5px;
-      transition: background .2s linear; }
+      display: flex;
+      min-height: 26px;
+      padding: 2px 5px;
+      position: relative;
+      transition: background .2s linear;
+      white-space: normal; }
       @media (max-width: 768px) {
         .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item {
           border-radius: 0;
-          font-size: 1.2em;
+          font-size: 1.1em;
           font-weight: 700;
-          height: 50px;
-          line-height: calc(50px - 2px);
+          min-height: 50px;
           margin: 0;
-          padding: 0 15px;
+          padding: calc(10px - 2px) 15px 10px;
           text-shadow: none; } }
       @media (max-width: 768px) {
         .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:after {
           border-bottom: 2px solid #ededed;
+          bottom: 0;
           content: '';
-          display: block; } }
+          display: block;
+          position: absolute;
+          width: calc(100% - 2 * 15px); } }
       .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight) {
         background: #dedede;
         box-shadow: none;
@@ -746,10 +762,15 @@ template {
     border-radius: 3px;
     box-shadow: none;
     padding: 5px 10px !important;
+    white-space: normal;
+    width: 100%;
     border-radius: 3px 0 0 3px;
     width: calc(85% + 6px); }
     .ui-selectcheckboxmenu.ui-state-default .ui-inputfield.ui-state-focus {
       box-shadow: none; }
+    @media (max-width: 768px) {
+      .ui-selectcheckboxmenu.ui-state-default .ui-inputfield {
+        padding: 10px !important; } }
   .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-label {
     align-items: center;
     display: flex; }
@@ -877,28 +898,34 @@ template {
         width: calc(100% - (2 * 15px));
         margin: 0 15px; } }
     .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item {
+      align-items: center;
       background: transparent;
       border: none;
       border-radius: 0;
       cursor: pointer;
-      line-height: 26px;
-      padding: 0 5px;
-      transition: background .2s linear; }
+      display: flex;
+      min-height: 26px;
+      padding: 2px 5px;
+      position: relative;
+      transition: background .2s linear;
+      white-space: normal; }
       @media (max-width: 768px) {
         .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item {
           border-radius: 0;
-          font-size: 1.2em;
+          font-size: 1.1em;
           font-weight: 700;
-          height: 50px;
-          line-height: calc(50px - 2px);
+          min-height: 50px;
           margin: 0;
-          padding: 0 15px;
+          padding: calc(10px - 2px) 15px 10px;
           text-shadow: none; } }
       @media (max-width: 768px) {
         .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:after {
           border-bottom: 2px solid #ededed;
+          bottom: 0;
           content: '';
-          display: block; } }
+          display: block;
+          position: absolute;
+          width: calc(100% - 2 * 15px); } }
       .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:hover:not(.ui-state-highlight) {
         background: #dedede;
         box-shadow: none;
@@ -1110,7 +1137,7 @@ template {
       .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-filter-container .ui-inputfield {
         flex: .85; }
       .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-filter-container .ui-icon {
-        flex: .25; }
+        flex: .15; }
     .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-close {
       background: transparent;
       border-radius: 0;
@@ -1518,11 +1545,10 @@ template {
   .input-grid .p-grid.p-field {
     align-items: center;
     margin: 0;
-    padding: 2px 0; }
+    padding: 5px 0; }
 .input-grid .p-field > label {
   margin-bottom: 0; }
 .input-grid .p-field .p-col {
-  line-height: 26px;
   padding: 0 10px; }
   .input-grid .p-field .p-col:first-child {
     padding-left: 0; }
@@ -3255,8 +3281,7 @@ body, .ui-widget {
           padding: 0.5em 0 2px 0;
           width: 100% !important; } }
       .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-        border-radius: 3px;
-        height: 100%; }
+        border-radius: 3px; }
         @media (max-width: 768px) {
           .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
             padding: 0 10px;
@@ -3268,6 +3293,9 @@ body, .ui-widget {
             align-items: center;
             background: #dedede;
             display: flex; } }
+      @media (max-width: 768px) {
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
+          padding: 0; } }
   .jeesl-panel .ui-panel-content .ui-galleria {
     width: 100% !important; }
     .jeesl-panel .ui-panel-content .ui-galleria .ui-galleria-panel-wrapper {
@@ -4015,8 +4043,7 @@ body, .ui-widget {
               padding: 0.5em 0 2px 0;
               width: 100% !important; } }
           .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-            border-radius: 3px;
-            height: 100%; }
+            border-radius: 3px; }
             @media (max-width: 768px) {
               .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
                 padding: 0 10px;
@@ -4028,6 +4055,9 @@ body, .ui-widget {
                 align-items: center;
                 background: #dedede;
                 display: flex; } }
+          @media (max-width: 768px) {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
+              padding: 0; } }
       .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria {
         width: 100% !important; }
         .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-galleria-panel-wrapper {
@@ -4626,7 +4656,8 @@ body, .ui-widget {
       min-height: 42px; } }
 
 .input-grid .p-field .p-col:not(.ui-outputlabel) > * {
-  min-height: 22px; }
+  min-height: 22px;
+  min-width: auto !important; }
   @media (max-width: 768px) {
     .input-grid .p-field .p-col:not(.ui-outputlabel) > * {
       min-height: 42px; } }

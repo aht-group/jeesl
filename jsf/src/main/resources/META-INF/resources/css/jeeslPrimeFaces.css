@@ -65,12 +65,10 @@
   padding-top: 0; }
 .ui-panel-content .ui-fluid:last-child .p-field:last-child {
   padding-bottom: 0; }
-.ui-panel-content .ui-fluid .p-field .p-col {
-  line-height: 22px; }
-  .ui-panel-content .ui-fluid .p-field .p-col:first-child {
-    padding-left: 0; }
-  .ui-panel-content .ui-fluid .p-field .p-col:last-child, .ui-panel-content .ui-fluid .p-field .p-col:not(.ui-outputlabel) {
-    padding-right: 0; }
+.ui-panel-content .ui-fluid .p-field .p-col:first-child {
+  padding-left: 0; }
+.ui-panel-content .ui-fluid .p-field .p-col:last-child, .ui-panel-content .ui-fluid .p-field .p-col:not(.ui-outputlabel) {
+  padding-right: 0; }
 
 .ui-selectbooleancheckbox {
   cursor: pointer; }
