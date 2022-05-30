@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
@@ -133,10 +135,21 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		Map<V,List<AR>> mapArea = fbSecurity.ejbArea().toMapView(areas);
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassArea().getSimpleName(),"Loaded and put to Map", areas.size());}
 		
+		
 		for(V v : views)
 		{
+			if(mapUrlPattern.containsKey(v.getViewPattern()))
+			{
+				logger.error("Duplicate View Pattern: "+mapUrlPattern.get(v.getViewPattern()).getCode()+":"+v.getCode());
+			}
+			if(mapUrlMapping.containsKey(v.getUrlMapping()))
+			{
+				logger.error("Duplicate URL Mapping: "+mapUrlMapping.get(v.getUrlMapping()).getCode()+":"+v.getCode());
+			}
 			update(v,mapAction.get(v),mapArea.get(v));
 		}
+		
+		
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),"Updated", views.size());}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassView(), views));}
 	}

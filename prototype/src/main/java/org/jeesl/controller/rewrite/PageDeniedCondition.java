@@ -58,14 +58,14 @@ public class PageDeniedCondition <L extends JeeslLang, D extends JeeslDescriptio
 
 		if(debugOnInfo)
 	 	{
-	    	 	logger.info(event.getContextPath());
-	    	 	logger.info(event.getAddress().toString());
-	    	 	logger.info(event.getInboundAddress().toString());
-	    	 	logger.info("pageActive: "+url);
-	    		if(view!=null) {logger.info("View: "+view.getCode()+" "+view.isVisible());}
-	    		else {logger.warn("View not found");}
+	    	 logger.info(event.getContextPath());
+	    	 logger.info(event.getAddress().toString());
+	    	 logger.info(event.getInboundAddress().toString());
+	    	 logger.info("pageActive: "+url);
+	    	 if(view!=null) {logger.info("View: "+view.getCode()+" "+view.isVisible());}
+	    	 else {logger.warn("View not found");}
 	 	}
-		
+
 		if(view!=null)
 		{
 			if(BooleanComparator.active(view.getAccessPublic())) {return false;}

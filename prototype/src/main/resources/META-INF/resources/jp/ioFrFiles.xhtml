@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:h="http://java.sun.com/jsf/html"
+	
 	xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
     xmlns:j="http://www.jeesl.org/jsf"
@@ -16,12 +16,12 @@
 		<composite:attribute name="handler" required="true"/>
 		<composite:attribute name="update" required="true"/>
 		<composite:attribute name="componentPrefix" required="false" default=""/>
+		
 		<composite:attribute name="allowUpload" required="false" default="true"/>
 		<composite:attribute name="allowDelete" required="false" default="false"/>
-		<composite:attribute name="allowTypes" required="false"/>
+		<composite:attribute name="allowTypes" required="false" shortDescription="A list of allowed file type. This will directly passed to p:fileUpload"/>
 		
 		<composite:attribute name="withPosition" required="false" default="false"/>
-		
 		<composite:attribute name="withDescription" required="false" default="false"/>
 		
 		<composite:attribute name="withCategory" required="false" default="false"/>
