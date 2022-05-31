@@ -111,19 +111,30 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 				{
 					if (lang.getKey().equals(locale))
 					{	
-						if (ejbAttribute.getName()==null) {ejbAttribute.setName(new HashMap<>());}
-						ejbAttribute.getName().put(locale, efLang.createLang(lang) );
+						if (ejbAttribute.getName()==null) 
+						{
+							logger.info("No Name Matrix present for " +ejbAttribute.getCode() +". Creating a new one");
+							ejbAttribute.setName(new HashMap<>());
+						}
+						if (ejbAttribute.getName().containsKey(locale))
+						{
+							ejbAttribute.getName().get(locale).setLang(lang.getTranslation());
+						} else
+						{
+							ejbAttribute.getName().put(locale,efLang.createLang(lang));
+						}
 					}
 				}
 			}
 			try {
-				efLang.persistMissingLangsForCode(fRevision, lp.getLocaleCodes(), entity);
+				ejbAttribute.setEntity(entity);
+				efLang.persistMissingLangsForCode(fRevision, lp.getLocaleCodes(), ejbAttribute);
 				dbuLang.handle(fRevision, ejbAttribute, lp.getLocaleCodes().toArray(languageCodes));
 				fRevision.save(fbRevision.getClassEntity(), entity, ejbAttribute); 
 				fRevision.save(entity);
 				
 				logger.info("EJB Attribute: " +ejbAttribute.toString() +" has been updated in database");
-			} catch(JeeslLockingException e)
+			} catch(Exception e)
 			{
 				logger.error("EJB Attribute: " +ejbAttribute.toString() +" has not been updated in database. Reason: " +e.getMessage());
 			}
