@@ -1365,6 +1365,14 @@ body, .ui-widget {
 						height: $sb-element-height-mobile;
 					}
 					
+					&:first-child {
+						padding-left: $sb-vertical-padding;
+					}
+					
+					&:last-child {
+						padding-right: $sb-vertical-padding;
+					}
+					
 					> * {
 						height: 100%;
 					}

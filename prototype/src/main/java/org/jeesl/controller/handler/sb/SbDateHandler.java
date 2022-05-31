@@ -13,10 +13,14 @@ public class SbDateHandler implements SbDateSelection
 	private static final long serialVersionUID = 1L;
 
 	private SbDateSelectionBean bean;
-
 	private LocalDate dateFrom; public LocalDate getDateFrom() {return dateFrom;} public void setDateFrom(LocalDate dateFrom) {this.dateFrom = dateFrom;}
 	private LocalDate dateTo; public LocalDate getDateTo() {return dateTo;} public void setDateTo(LocalDate dateTo) {this.dateTo = dateTo;}
-	
+
+	private LocalDate dateFromMin; public LocalDate getDateFromMin() {return dateFromMin;} public void setDateFromMin(LocalDate dateFromMin) {this.dateFromMin = dateFromMin;}
+	private LocalDate dateToMin; public LocalDate getDateToMin() {return dateToMin;} public void setDateToMin(LocalDate dateToMin) {this.dateToMin = dateToMin;}
+
+	private LocalDate dateFromMax; public LocalDate getDateFromMax() {return dateFromMax;} public void setDateFromMax(LocalDate dateFromMax) {this.dateFromMax = dateFromMax;}
+	private LocalDate dateToMax; public LocalDate getDateToMax() {return dateToMax;} public void setDateToMax(LocalDate dateToMax) {this.dateToMax = dateToMax;}
 	
 	public static SbDateHandler instance(SbDateSelectionBean bean) {return new SbDateHandler(bean);}
 	
@@ -29,6 +33,9 @@ public class SbDateHandler implements SbDateSelection
 	{
 		dateFrom = LocalDate.now();
 		dateTo = LocalDate.now();
+		
+		dateFromMin = LocalDate.now().minusDays(2);
+		dateFromMax = LocalDate.now().plusDays(5);
 		return this;
 	}
 
