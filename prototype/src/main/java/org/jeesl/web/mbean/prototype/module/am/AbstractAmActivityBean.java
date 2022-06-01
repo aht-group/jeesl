@@ -145,7 +145,10 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 
 		tree = new DefaultTreeNode(root, null);
 		List<ACTIVITY> activities = fAm.allOrderedPositionParent(fbAm.getClassActivity(),root,true);
-		buildTree(tree,activities);
+		if(Objects.nonNull(tree) && Objects.nonNull(activities))
+		{
+			buildTree(tree,activities);
+		}
 	}
 
 	private void buildTree(TreeNode parent, List<ACTIVITY> activities)
