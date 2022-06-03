@@ -88,6 +88,15 @@ public class SqlFactory
 		return sb.toString();
 	}
 	
+	public static <T extends EjbWithId> void select(StringBuilder sb, Class<T> c, String alias, boolean newLine)
+	{
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		sb.append("SELECT id FROM ");
+		sb.append(c.getAnnotation(Table.class).name());
+		if(alias!=null) {sb.append(" "+alias);}
+		newLine(newLine,sb);
+	}
+	
 	public static <T extends EjbWithId> void count(StringBuilder sb, Class<T> c, boolean newLine)
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
@@ -157,6 +166,15 @@ public class SqlFactory
 		sb.append(")");
 		newLine(newLine,sb);
 		return sb.toString();
+	}
+	
+	public static <T extends EjbWithId> void from2(StringBuilder sb, Class<T> t, String alias, boolean newLine)
+	{
+		if(t.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		sb.append(" FROM ");
+		sb.append(t.getAnnotation(Table.class).name());
+		if(alias!=null) {sb.append(" ").append(alias);}
+		newLine(newLine,sb);
 	}
 	
 	public static <T extends EjbWithId> void from(StringBuilder sb, Class<T> c, String alias, boolean newLine)
@@ -296,6 +314,8 @@ public class SqlFactory
 		sb.append("COMMIT");
 		semicolon(sb,newLine);
 	}
+
+	
 	
 	
 }

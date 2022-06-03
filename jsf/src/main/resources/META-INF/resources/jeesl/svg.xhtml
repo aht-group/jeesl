@@ -15,8 +15,8 @@
 		<composite:attribute name="type" required="true"/>
 		<composite:attribute name="tooltip" required="false"/>
 		<composite:attribute name="immediate" required="false" default="false"/>
-		<composite:attribute name="library" required="false" default="gfx" shortDescription="The library attribute which is passed to h:graphicImage. For JEESL icons, jeeslGfx has to be used."/>
-		<composite:attribute name="ejb" required="false" default="" shortDescription="A java.util.Date from which the elapsed time should be calculated"/>
+		<composite:attribute name="library" required="false" default="gfx" shortDescription="The library attribute which is passed to h:graphicImage, can be empty for JEESL icons. Project specific icons can be overridden here or centrally in AppIconBean."/>
+		<composite:attribute name="ejb" required="false" default="" shortDescription="The related entity-ejb which will be evaluated for the ejbRendered attribute"/>
 		<composite:attribute name="ejbRendered" required="false" default=""/>
 	</composite:interface>
 
