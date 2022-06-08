@@ -498,7 +498,7 @@ public class ReportHandler
 					mapReportParameter.put(res.getName(), vector);
 				}
 				// The next case is handling SVG images. They need to be encoded as Base64 String.
-				else if (res.getType().equals("vectorImage"))
+				else if (res.getType().equals("svg"))
 				{
 					byte[] byteArrayOfVectorImage = null;
 					try 
