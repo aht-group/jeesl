@@ -144,7 +144,7 @@ public class AbstractJeeslReportTest
 			sb.append(reportId);
 		}
 		sb.append(".pdf");
-		
+		System.out.println("Writing PDF demo to " +sb.toString());
 		OutputStream outputStream = new FileOutputStream (sb.toString());
 		pdf.writeTo(outputStream);
 	}
