@@ -30,11 +30,18 @@ public class JeeslSelectManyCodeHandler <T extends EjbWithCode>
 		if(codes!=null) {codes.clear();}
 	}
 	
+
+	
 	public void init(List<T> ejbs)
 	{
 		clear();
 		if(codes==null) {codes = new ArrayList<>();}
 		for(T t : ejbs) {codes.add(t.getCode());}
+	}
+	
+	public void selectAll()
+	{
+		this.init(list);
 	}
 	
 	public List<T> toEjb()

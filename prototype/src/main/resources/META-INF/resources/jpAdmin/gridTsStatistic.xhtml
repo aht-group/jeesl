@@ -24,7 +24,7 @@
 				<j:slot>
 					<mcp:pivotTable data="#{cc.attrs.bean.jsonStream}">
 						<mcp:renderer type="Table"/>
-						<mcp:renderer type="Excel Export"/>
+						<mcp:renderer type="TSV Export"/>
 						<mcp:aggregator type="SUM" parameters="Count" label="#{msg.mcPivotCount}"/>
 						<mcp:field name="Entity" row="true"/>
 						<mcp:field name="Interval" col="true"/>

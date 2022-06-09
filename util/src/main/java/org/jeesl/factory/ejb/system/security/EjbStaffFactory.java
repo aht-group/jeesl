@@ -95,6 +95,20 @@ public class EjbStaffFactory <R extends JeeslSecurityRole<?,?,?,?,?,?,USER>,
 	}
     
     public static <R extends JeeslSecurityRole<?,?,?,?,?,?,USER>,
+					USER extends JeeslUser<R>,
+					STAFF extends JeeslStaff<R,USER,D1,D2>,
+					D1 extends EjbWithId, D2 extends EjbWithId>
+			List<R> toRoles(List<STAFF> staffs)
+	{
+		Set<R> set = new HashSet<>();
+		for(STAFF staff : staffs)
+		{
+			if(!set.contains(staff.getRole())){set.add(staff.getRole());}
+		}
+		return new ArrayList<R>(set);
+	}
+    
+    public static <R extends JeeslSecurityRole<?,?,?,?,?,?,USER>,
 			USER extends JeeslUser<R>,
 			STAFF extends JeeslStaff<R,USER,D1,D2>,
 			D1 extends EjbWithId, D2 extends EjbWithId>
