@@ -11,12 +11,13 @@ import net.sf.ahtutils.report.exception.ReportException;
 import net.sf.ahtutils.test.AbstractAhtUtilsReportTest;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
+import org.junit.Before;
 
 public class TestReportRenderer extends AbstractAhtUtilsReportTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestReportRenderer.class);
     
-//	@Before
+	@Before
 	public void initExample() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException, FileNotFoundException, ReportException
 	{
 		initHandler();
@@ -25,7 +26,7 @@ public class TestReportRenderer extends AbstractAhtUtilsReportTest
 	
 	@Test public void dummy() {}
 	
-//	@Test
+	@Test
 	public void emptyPages() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException, ReportException, IOException
 	{
 		createPdf();

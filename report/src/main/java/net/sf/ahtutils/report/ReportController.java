@@ -6,9 +6,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
+import static net.sf.ahtutils.report.ReportHandler.logger;
 
 import net.sf.ahtutils.report.exception.ReportException;
 import net.sf.ahtutils.xml.report.Reports;
@@ -67,6 +72,7 @@ public class ReportController extends AbstractReportControl
 		catch (JRException e) {e.printStackTrace();}
 	}
 		
+	@Deprecated
 	public void fillParameterMap(Document doc)
 	{	
 		mapReportParameter.put(JRXPathQueryExecuterFactory.PARAMETER_XML_DATA_DOCUMENT, doc);
@@ -81,17 +87,31 @@ public class ReportController extends AbstractReportControl
 		{
 			logger.info("Adding resource of type " +res.getType() +" with id='" +res.getName() +"' loaded from " +res.getValue().getValue());
 			if (res.getType().equals("image"))
-				
+			{
+				BufferedImage image = null;
+				try {
+					String imgLocation = reportRoot +"/resources/" +res.getType() +"/" +res.getValue().getValue();
+					logger.info("Including image resource: " +imgLocation);
+					image = ImageIO.read(mrl.searchIs(imgLocation));} 
+				catch (FileNotFoundException e) {logger.error(e.getMessage());}
+				catch (IOException e) {logger.error(e.getMessage());}
+				mapReportParameter.put(res.getName(), image);
+			}
+			// The next case is handling SVG images. They need to be encoded as Base64 String.
+			if (res.getType().equals("vectorImage"))
+			{
+				byte[] byteArrayOfVectorImage = null;
+				try 
 				{
-					BufferedImage image = null;
-					try {
-						String imgLocation = reportRoot +"/resources/" +res.getType() +"/" +res.getValue().getValue();
-						logger.info("Including image resource: " +imgLocation);
-						image = ImageIO.read(mrl.searchIs(imgLocation));} 
-					catch (FileNotFoundException e) {logger.error(e.getMessage());}
-					catch (IOException e) {logger.error(e.getMessage());}
-					mapReportParameter.put(res.getName(), image);
-				}
+					String imgLocation = reportRoot +"/resources/" +res.getType() +"/" +res.getValue().getValue();
+					Path pathToImage   = Paths.get(imgLocation);
+					System.out.println("Including vector Image resource: " +imgLocation + " as base64 encoded String. Available as $P{"+ res.getName() +"}");
+					byteArrayOfVectorImage = Files.readAllBytes(pathToImage);
+				} 
+				catch (FileNotFoundException e ) {logger.error(e.getMessage());}
+				catch (IOException e) {logger.error(e.getMessage());}
+				mapReportParameter.put(res.getName(), Base64.getEncoder().encodeToString(byteArrayOfVectorImage));
+			}
 		}
 	}
 	

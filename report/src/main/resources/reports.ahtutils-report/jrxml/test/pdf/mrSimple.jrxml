@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mrTest" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mrTest" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d5f08377-65bd-4ee2-a5e7-f9b021c935ce">
+	<import value="net.sf.jasperreports.renderers.SimpleRenderToImageAwareDataRenderer"/>
+	<import value="net.sf.jasperreports.renderers.SimpleDataRenderer"/>
+	<import value="org.apache.commons.codec.binary.Base64"/>
 	<parameter name="logo" class="java.awt.Image"/>
 	<parameter name="srCharts" class="java.lang.Object"/>
+	<parameter name="svg" class="java.lang.String">
+		
+	</parameter>
 	<parameter name="testChart" class="java.awt.Image"/>
 	<queryString language="xPath">
 		<![CDATA[//item]]>
@@ -33,81 +37,85 @@
 	<title>
 		<band height="61">
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="30" width="365" height="13"/>
+				<reportElement x="0" y="30" width="365" height="13" uuid="9528938c-595a-4a8c-aa38-9e2a60d07925"/>
 				<textElement>
 					<font size="9" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{subtitle}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{subtitle}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="15" width="365" height="15"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="15" width="365" height="15" uuid="548dbb1b-1d90-40d0-a5bc-780fb9227a64"/>
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="470" y="10" width="40" height="43" uuid="d10ce868-9e73-4aae-bc7e-0cc9718b2949"/>
+				<imageExpression><![CDATA[net.sf.jasperreports.renderers.BatikRenderer.getInstanceFromText(new String(Base64.decodeBase64($P{svg})))]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>
 		<band height="11" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="48" height="11" isRemoveLineWhenBlank="true"/>
+				<reportElement x="0" y="0" width="48" height="11" isRemoveLineWhenBlank="true" uuid="3df89861-7eb1-4d83-8107-c3d2b0434583"/>
 				<textElement>
 					<font fontName="SansSerif" size="9"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{item}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{item}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="13">
 			<textField>
-				<reportElement x="415" y="3" width="22" height="10"/>
+				<reportElement x="415" y="3" width="22" height="10" uuid="b441fb86-798e-4749-82f6-380ccb0993a5"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right">
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$V{PAGE_NUMBER} +"/"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} +"/"]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd.MM.yyyy HH:mm">
-				<reportElement positionType="Float" x="337" y="3" width="78" height="10"/>
+				<reportElement positionType="Float" x="337" y="3" width="78" height="10" uuid="bb2784aa-6b65-4225-8915-7d911808a8ce"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Right">
 					<font fontName="SansSerif" size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[javax.xml.bind.DatatypeConverter.parseDateTime($F{generated}).getTime()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[javax.xml.bind.DatatypeConverter.parseDateTime($F{generated}).getTime()]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="437" y="3" width="14" height="10"/>
+				<reportElement x="437" y="3" width="14" height="10" uuid="ba5e0ce7-be20-48d3-b74c-2f1729054d17"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font fontName="SansSerif" size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement positionType="Float" x="0" y="3" width="337" height="10"/>
+				<reportElement positionType="Float" x="0" y="3" width="337" height="10" uuid="2adb422b-9256-416a-b1b0-666d4174a2d5"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
 				<textElement>
 					<font fontName="SansSerif" size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{footer}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{footer}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<summary>
 		<band height="240">
 			<image hAlign="Right">
-				<reportElement x="117" y="0" width="320" height="240"/>
-				<imageExpression class="java.awt.Image"><![CDATA[$P{testChart}]]></imageExpression>
+				<reportElement x="117" y="0" width="320" height="240" uuid="7c72f8fb-aca6-497a-a1d1-0298d9bc7946"/>
+				<imageExpression><![CDATA[$P{testChart}]]></imageExpression>
 			</image>
 		</band>
 	</summary>

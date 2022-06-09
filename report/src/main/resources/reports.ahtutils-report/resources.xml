@@ -3,4 +3,7 @@
     <r:resource type="image" name="logo">
         <value>ahtutils-logo.png</value>
     </r:resource>
+	<r:resource type="svg" name="svg">
+        <value>svg.svg</value>
+    </r:resource>
 </r:resources>
