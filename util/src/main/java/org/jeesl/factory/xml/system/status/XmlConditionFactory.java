@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.status.Condition;
 import net.sf.ahtutils.xml.status.Outcome;
 import net.sf.ahtutils.xml.status.Status;
 
-public class XmlConditionFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
+public class XmlConditionFactory<L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlConditionFactory.class);
 	

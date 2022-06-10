@@ -40,7 +40,7 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 		tmp = new ArrayList<T>();
 		mapFilter = new HashMap<String,JsonTranslation>();
 
-		debugOnInfo = true;
+		debugOnInfo = false;
 	}
 
 	public void updateFiler(List<JsonTranslation> columns)

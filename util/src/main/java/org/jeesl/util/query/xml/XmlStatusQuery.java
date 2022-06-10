@@ -17,6 +17,7 @@ import net.sf.ahtutils.xml.status.Reason;
 import net.sf.ahtutils.xml.status.Result;
 import net.sf.ahtutils.xml.status.Scope;
 import net.sf.ahtutils.xml.status.Scopes;
+import net.sf.ahtutils.xml.status.Source;
 import net.sf.ahtutils.xml.status.Status;
 import net.sf.ahtutils.xml.status.SubType;
 import net.sf.ahtutils.xml.status.Type;
@@ -131,6 +132,15 @@ public class XmlStatusQuery
 	{		
 		Condition xml = new Condition();
 //		xml.setId(0);
+		xml.setCode("");
+		xml.setLabel("");
+		return xml;
+	}
+	
+	public static Source sourceLabel()
+	{		
+		Source xml = new Source();
+		xml.setId(0);
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;
