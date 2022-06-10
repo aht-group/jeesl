@@ -3,7 +3,7 @@ package org.jeesl.util.comparator.ejb.system.io.report;
 import java.util.Comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

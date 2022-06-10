@@ -1,8 +1,8 @@
-package org.jeesl.interfaces.model.io.report.xlsx;
+package org.jeesl.interfaces.model.io.report.row;
 
 import java.io.Serializable;
 
-import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportSheet;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -20,7 +20,7 @@ public interface JeeslReportRow<L extends JeeslLang,D extends JeeslDescription,
 									SHEET extends JeeslReportSheet<L,D,?,?,?,?>,
 									TEMPLATE extends JeeslReportTemplate<L,D,?>,
 									CDT extends JeeslStatus<L,D,CDT>,
-									RT extends JeeslStatus<L,D,RT>>
+									RT extends JeeslReportRowType<L,D,RT,?>>
 
 		extends Serializable,EjbRemoveable,EjbPersistable,EjbWithId,EjbSaveable,
 				EjbWithCode,EjbWithPositionVisible,EjbWithPositionParent,
@@ -46,4 +46,7 @@ public interface JeeslReportRow<L extends JeeslLang,D extends JeeslDescription,
 	
 	TEMPLATE getTemplate();
 	void setTemplate(TEMPLATE template);
+	
+	String getJrxml();
+	void setJrxml(String jrxml);
 }

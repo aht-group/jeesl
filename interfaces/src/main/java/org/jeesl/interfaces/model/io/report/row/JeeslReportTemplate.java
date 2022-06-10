@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.report.data;
+package org.jeesl.interfaces.model.io.report.row;
 
 import java.io.Serializable;
 import java.util.List;

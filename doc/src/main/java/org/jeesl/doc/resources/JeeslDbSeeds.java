@@ -1,7 +1,7 @@
 package org.jeesl.doc.resources;
 
 import org.jeesl.factory.xml.system.io.db.XmlSeedFactory;
-import org.jeesl.interfaces.model.io.report.setting.JeeslReportRowType;
+import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.system.constraint.JeeslConstraintLevel;

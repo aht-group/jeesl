@@ -3,6 +3,7 @@ package org.jeesl.interfaces.model.io.report.xlsx;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;

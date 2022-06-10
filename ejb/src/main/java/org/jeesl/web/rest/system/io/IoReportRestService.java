@@ -27,12 +27,13 @@ import org.jeesl.factory.xml.system.io.report.XmlTemplatesFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
-import org.jeesl.interfaces.model.io.report.data.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
+import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
+import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumnGroup;
-import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportSheet;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportWorkbook;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -73,7 +74,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 									STYLE extends JeeslReportStyle<L,D>,
 									CDT extends JeeslStatus<L,D,CDT>,
 									CW extends JeeslStatus<L,D,CW>,
-									RT extends JeeslStatus<L,D,RT>,
+									RT extends JeeslReportRowType<L,D,RT,?>,
 									RCAT extends JeeslStatus<L,D,RCAT>,
 									ENTITY extends EjbWithId,
 									ATTRIBUTE extends EjbWithId,
@@ -164,7 +165,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 					CELL extends JeeslReportCell<L,D,TEMPLATE>,
 					STYLE extends JeeslReportStyle<L,D>,
 					CDT extends JeeslStatus<L,D,CDT>,CW extends JeeslStatus<L,D,CW>,
-					RT extends JeeslStatus<L,D,RT>,
+					RT extends JeeslReportRowType<L,D,RT,?>,
 					RCAT extends JeeslStatus<L,D,RCAT>,
 					ENTITY extends EjbWithId,
 					ATTRIBUTE extends EjbWithId,

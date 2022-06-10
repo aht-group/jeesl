@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.report.setting;
+package org.jeesl.interfaces.model.io.report.row;
 
 import java.io.Serializable;
 
@@ -21,5 +21,5 @@ public interface JeeslReportRowType <L extends JeeslLang, D extends JeeslDescrip
 											JeeslRestDownloadOption,JeeslRestDownloadEntityDescription,
 											EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {
-	public static enum Code{label,labelValue,table,template}
+	public static enum Code{label,labelValue,table,template,jrxml}
 }
