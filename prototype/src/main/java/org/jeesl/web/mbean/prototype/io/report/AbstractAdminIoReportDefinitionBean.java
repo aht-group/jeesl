@@ -542,6 +542,8 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	public void changeRowType()
 	{
 		efRow.converter(fReport, row);
+		if(row.getType()!=null){row.setType(fReport.find(fbReport.getClassRowType(), row.getType()));}
+		logger.info(AbstractLogMessage.selectEntity(row.getType()));
 	}
 	
 	public void saveRow() throws JeeslLockingException

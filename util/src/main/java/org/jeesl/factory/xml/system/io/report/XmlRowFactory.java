@@ -58,7 +58,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlTypeFactory<L,D,RT> xfType;
 	private XmlDataTypeFactory<CDT,L,D> xfDataType;
-	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE> xfLayout;
+	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,ENTITY,ATTRIBUTE> xfLayout;
 	private XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfTemplate;
 	
 	public XmlRowFactory(String localeCode, Row q)

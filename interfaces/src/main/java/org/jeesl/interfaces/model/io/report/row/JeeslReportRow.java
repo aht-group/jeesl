@@ -47,6 +47,9 @@ public interface JeeslReportRow<L extends JeeslLang,D extends JeeslDescription,
 	TEMPLATE getTemplate();
 	void setTemplate(TEMPLATE template);
 	
+	String getJrxmlCode();
+	void setJrxmlCode(String jrXmlCode);
+	
 	String getJrxml();
 	void setJrxml(String jrxml);
 }

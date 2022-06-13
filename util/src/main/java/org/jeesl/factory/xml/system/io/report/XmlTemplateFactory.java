@@ -56,7 +56,7 @@ public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 	
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
-	private XmlCellFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfCell;
+	private XmlCellFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,ENTITY,ATTRIBUTE,TL,TLS> xfCell;
 	
 	public XmlTemplateFactory(Template q){this(null,q);}
 	public XmlTemplateFactory(String localeCode, Template q)
@@ -67,7 +67,7 @@ public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetCell())
 		{
 			comparatorCell = new IoReportCellComparator<TEMPLATE,CELL>().factory(IoReportCellComparator.Type.position);
-			xfCell = new XmlCellFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(q.getCell().get(0));
+			xfCell = new XmlCellFactory<>(q.getCell().get(0));
 		}
 	}
 	
