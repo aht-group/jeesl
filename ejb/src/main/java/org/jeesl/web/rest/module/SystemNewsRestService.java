@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.news.JeeslSystemNews;
+import org.jeesl.interfaces.model.system.news.JeeslSystemNewsCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
 import org.slf4j.Logger;
@@ -19,7 +20,7 @@ import net.sf.ahtutils.xml.status.Status;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SystemNewsRestService <L extends JeeslLang,D extends JeeslDescription,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+									CATEGORY extends JeeslSystemNewsCategory<L,D,CATEGORY,?>,
 									NEWS extends JeeslSystemNews<L,D,CATEGORY,NEWS,USER>,
 									USER extends EjbWithId>
 					extends AbstractUtilsRest<L,D>
@@ -44,7 +45,7 @@ public class SystemNewsRestService <L extends JeeslLang,D extends JeeslDescripti
 	}
 	
 	public static <L extends JeeslLang,D extends JeeslDescription,
-					CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+					CATEGORY extends JeeslSystemNewsCategory<L,D,CATEGORY,?>,
 					NEWS extends JeeslSystemNews<L,D,CATEGORY,NEWS,USER>,
 					USER extends EjbWithId>
 		SystemNewsRestService<L,D,CATEGORY,NEWS,USER>

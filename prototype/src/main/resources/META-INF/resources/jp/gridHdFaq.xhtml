@@ -21,7 +21,7 @@
 						<p:dataTable var="faq" value="#{cc.attrs.bean.faqs}" draggableRows="false"
 										selection="#{cc.attrs.bean.faq}" selectionMode="single" rowKey="#{faq.id}">
 							<f:facet name="header">
-								<j:dtHeader entity="HdFaq" code="listOf" title="#{msg.jeeslHdFaqs}">
+								<j:dtHeader entity="HdFaq" code="listOf">
 									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addFaq()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
 								</j:dtHeader>
 							</f:facet>
@@ -37,7 +37,7 @@
 								</h:panelGroup>
 							</p:column>
 							<p:column>
-								<f:facet name="header"><jtp:label entity="HdFaq" code="name"/></f:facet>
+								<f:facet name="header"><jtp:label entity="HdFaq" code="labelQuestion"/></f:facet>
 								<h:outputText value="#{faq.name[localeCode].lang}"/>
 							</p:column>
 					   	</p:dataTable>
@@ -45,7 +45,8 @@
 				</j:slot>
 				<j:slot id="sFaq" width="6">
 					<h:form id="fTicket" rendered="#{not empty cc.attrs.bean.faq}">
-						<p:panel header="#{msg.jeeslHdFaqTopic}" styleClass="jeeslPanel">
+						<p:panel styleClass="jeeslPanel">
+							<f:facet name="header"><j:pHeader entity="HdFaq"/></f:facet>
 							<f:facet name="actions">
 								<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveFaq()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
 								<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteFaq()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
@@ -72,7 +73,7 @@
 						<p:dataTable var="a" value="#{cc.attrs.bean.answers}" draggableRows="true"
 										selection="#{cc.attrs.bean.fga}" selectionMode="single" rowKey="#{a.id}">
 							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslHdFgas}">
+								<j:dtHeader entity="HdFga" code="listOf">
 									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAnswer()}" update=":#{cc.id}:fAnswers :#{cc.id}:fAnswer" library="jeeslGfx"/>
 							    	<p:separator/>
 									<ui:repeat var="d" value="#{cc.attrs.bean.sbhDocuments.getList()}">
@@ -85,10 +86,12 @@
 							<p:column>  
 								<h:outputText value="#{a.position}"/>
 							</p:column>
-							<p:column headerText="#{msg.jeeslHdFgaDocument}" rendered="#{cc.attrs.bean.sbhDocuments.hasMore}">  
+							<p:column rendered="#{cc.attrs.bean.sbhDocuments.hasMore}">
+								<f:facet name="header"><jtp:label entity="HdFga" code="document"/></f:facet>  
 								<h:outputText value="#{a.document.name[localeCode].lang}"/>
 							</p:column>
-							<p:column headerText="#{msg.jeeslHdFgaSection}">  
+							<p:column>
+								<f:facet name="header"><jtp:label entity="HdFga" code="section"/></f:facet>  
 								<h:outputText value="#{a.section.name[localeCode].lang}"/>
 							</p:column>
 					   	</p:dataTable>
@@ -120,20 +123,21 @@
 						</p:panel>
 					</h:form>
 					<h:form id="fAnswer" rendered="#{not empty cc.attrs.bean.faq}">
-						<p:panel header="#{msg.jeeslHdFga}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.fga}">
+						<p:panel styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.fga}">
+							<f:facet name="header"><j:pHeader entity="HdFga"/></f:facet>
 							<f:facet name="actions">
 								<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveAnswer()}" update=":#{cc.id}:fAnswers :#{cc.id}:fAnswer" library="jeeslGfx"/>
 								<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteAnswer()}" update=":#{cc.id}:fAnswers :#{cc.id}:fAnswer" library="jeeslGfx"/>
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								
-								<p:outputLabel value="#{msg.jeeslHdFgaDocument}"/>
+								<jtp:label entity="HdFga" code="document"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.fga.document}" effect="fade" autoWidth="false">
 		                        	<f:selectItems value="#{cc.attrs.bean.sbhDocuments.list}" var="d" itemLabel="#{d.name[localeCode].lang}" itemValue="#{d}"/>
 		                        	<p:ajax listener="#{cc.attrs.bean.onDocumentChanged()}" update=":#{cc.id}:fAnswer"/>
 		                        </p:selectOneMenu>
 		                        
-		                        <p:outputLabel value="#{msg.jeeslHdFgaSection}"/>
+		                       <jtp:label entity="HdFga" code="section"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.fga.section}" effect="fade" autoWidth="false">
 		                        	<f:selectItems value="#{cc.attrs.bean.sections}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 		                        </p:selectOneMenu>
