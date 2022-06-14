@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.el.MethodExpression;
 import javax.faces.component.FacesComponent;
 import javax.faces.component.NamingContainer;
 import javax.faces.component.UIInput;
@@ -16,7 +15,6 @@ import javax.faces.component.UINamingContainer;
 import javax.faces.context.FacesContext;
 import net.sf.exlp.util.io.JsonUtil;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.jeesl.util.SetterHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,103 +23,83 @@ public class JsonPropertyEditor extends UIInput implements NamingContainer
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonPropertyEditor.class);
 	
-	private Map<String, Object> properties;
-	public Map<String, Object> getProperties() {return properties;}
-	public void setProperties(Map<String, Object> properties) {this.properties = properties;}
-	
-	private List<String> propertyNames;
-	public List<String> getPropertyNames() {return propertyNames;}
-	public void setPropertyNames(List<String> propertyNames) {this.propertyNames = propertyNames;}
-	
-	private Object jsonObject;
-	public Object getJsonObject() {return jsonObject;}
-	public void setJsonObject(Object jsonObject) {this.jsonObject = jsonObject;}
-	
-	private String value;
-	public String getValue() {return value;}
-	public void setValue(String value) {this.value = value;}
+	private Map<String, Object> properties; public Map<String, Object> getProperties() {return properties;} public void setProperties(Map<String, Object> properties) {this.properties = properties;}
+	private List<String> propertyNames; public List<String> getPropertyNames() {return propertyNames;} public void setPropertyNames(List<String> propertyNames) {this.propertyNames = propertyNames;}
+	private Object jsonObject; public Object getJsonObject() {return jsonObject;} public void setJsonObject(Object jsonObject) {this.jsonObject = jsonObject;}
+	private String value; public void setValue(String value) {this.value = value;}
 	
 	@Override
-    public String getFamily() {
+    public String getFamily() 
+	{
         return UINamingContainer.COMPONENT_FAMILY;
     }
 	
     public void init() throws IOException
     {
 		try {
-			logger.info("Initiating JSON property editor component");
 			Class targetClass = Class.forName(getAttributes().get("for").toString());
 			if (jsonObject == null)
 			{
-				logger.info("No object present - constructing new one.");
+				//logger.info("No object present - constructing new one.");
 				jsonObject = (Object) targetClass.newInstance();
-			}
+				//logger.info("JSON Object is of type: " +jsonObject);
+				properties = new HashMap<>();
+				propertyNames = new ArrayList<>();
+				for (PropertyDescriptor desc : PropertyUtils.getPropertyDescriptors(jsonObject))
+				{
+					if (desc.getWriteMethod() != null)
+					{
+						Object currentValue = "";
+						try {
+							currentValue = desc.getReadMethod().invoke(jsonObject);
+						} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+							logger.error(ex.getMessage());
+						}
+						if (currentValue == null) {currentValue="";}
+						properties.put(desc.getName(), currentValue);
+						propertyNames.add(desc.getName());
+					}
+					else
+					{
+						logger.warn("No SETTER available for property " +desc.getName() +" - skipping");
+					}
+				}
+			}	
 			else
 			{
-				logger.info("State restored.");
+			//	logger.info("State restored.");
 			}
-			logger.info("JSON Object is of type: " +jsonObject);
-			properties = new HashMap<String, Object>();
-			propertyNames = new ArrayList<String>();
-			for (PropertyDescriptor desc : PropertyUtils.getPropertyDescriptors(jsonObject))
-			{
-				if (desc.getWriteMethod() != null)
-				{
-					Object currentValue = null;
-					try {
-						currentValue = desc.getReadMethod().invoke(jsonObject);
-					} catch (IllegalAccessException ex) {
-						logger.debug(ex.getMessage());
-					} catch (IllegalArgumentException ex) {
-						logger.debug(ex.getMessage());
-					} catch (InvocationTargetException ex) {
-						logger.debug(ex.getMessage());
-					}
-					properties.put(desc.getName(), currentValue);
-					propertyNames.add(desc.getName());
-				}
-				else
-				{
-					logger.warn("No SETTER available for property " +desc.getName() +" - skipping");
-				}
-			}
-			logger.info("Properties has " +properties.size() +" items: " +properties.toString());
-		} catch (ClassNotFoundException ex) {
-			logger.debug(ex.getMessage());
-		} catch (InstantiationException ex) {
-			logger.debug(ex.getMessage());
-		} catch (IllegalAccessException ex) {
-			logger.debug(ex.getMessage());
+			//logger.info("Properties has " +properties.size() +" items: " +properties.toString());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+			logger.error(ex.getMessage());
 		}
 	}
 	
-	
     @Override
-    public Object getSubmittedValue() {
+    public Object getSubmittedValue() 
+	{
         return value;
     }
 
     @Override
-    protected Object getConvertedValue(FacesContext context, Object submittedValue) {
-        	logger.info("Converterd Value: " +submittedValue.toString());
-            return submittedValue;
+    protected Object getConvertedValue(FacesContext context, Object submittedValue) 
+	{
+		return submittedValue;
     }
-	
+
 	public void process(javax.faces.event.AjaxBehaviorEvent event) throws JsonProcessingException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
 	{
 		for (String propertyName : properties.keySet())
 		{
-			logger.info("Processing " +propertyName);
-			Object argument = new Object();
+			Object argument = null;
 			try {
 				argument = properties.get(propertyName);
 				if (argument!=null)
 				{
-					logger.info("Saving " +argument.toString());
-					SetterHelper.set(propertyName, jsonObject, argument);
+					PropertyUtils.setProperty(jsonObject, propertyName, argument);
 				}
 			}
-			catch (Exception e)
+			catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException e)
 			{
 				logger.error(e.getStackTrace().toString());
 				logger.error(e.getMessage());
@@ -129,23 +107,7 @@ public class JsonPropertyEditor extends UIInput implements NamingContainer
 		}
 		value = JsonUtil.toString(jsonObject);
 		this.getAttributes().put("value", value);
-		logger.info("Value set to " +this.getAttributes().get("value").toString());
 	}	
-	
-	
-    public void listener(javax.faces.event.ActionEvent e)
-    {
-        FacesContext context = FacesContext.getCurrentInstance();
-        MethodExpression ajaxEventListener = (MethodExpression) getAttributes().get("listener");
-        ajaxEventListener.invoke(context.getELContext(), new Object[] {});
-    }
-    
-    public void listener()
-    {
-        FacesContext context = FacesContext.getCurrentInstance();
-        MethodExpression ajaxEventListener = (MethodExpression) getAttributes().get("listener");
-        ajaxEventListener.invoke(context.getELContext(), new Object[] {});
-    }
 	
 	@Override
 	public Object saveState(FacesContext context)
@@ -157,6 +119,10 @@ public class JsonPropertyEditor extends UIInput implements NamingContainer
 			rtrn[1] = value;
 			rtrn[2] = properties;
 		}
+		if (properties==null)
+		{
+			logger.error("NULL in properties");
+		}
 		return rtrn;
 	}
 	
@@ -167,8 +133,7 @@ public class JsonPropertyEditor extends UIInput implements NamingContainer
 		if(this.isRendered())
 		{
 			Object[] storedState = (Object[]) state;
-		    logger.debug("Restoring state.");
-			try
+		    try
 			{
 				jsonObject       = (Object)					storedState[0];
 				value			 = (String)					storedState[1];
@@ -178,6 +143,7 @@ public class JsonPropertyEditor extends UIInput implements NamingContainer
 			{
 				logger.error("Exception when restoring: " +e.getMessage());
 			}
+			//logger.info("RESTORE Properties has " +properties.size() +" items: " +properties.toString());
 		}
 	}
 }
