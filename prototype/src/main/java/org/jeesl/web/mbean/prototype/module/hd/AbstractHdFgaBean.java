@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public abstract class AbstractHdFaqBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 								TICKET extends JeeslHdTicket<R,EVENT,M,FRC>,
 								CAT extends JeeslHdTicketCategory<L,D,R,CAT,?>,
@@ -73,7 +73,7 @@ public abstract class AbstractHdFaqBean <L extends JeeslLang, D extends JeeslDes
 					implements Serializable//,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractHdFaqBean.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractHdFgaBean.class);
 	
 	private final IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?> fbCms;
 	
@@ -88,7 +88,7 @@ public abstract class AbstractHdFaqBean <L extends JeeslLang, D extends JeeslDes
 	private FAQ faq; public FAQ getFaq() {return faq;} public void setFaq(FAQ faq) {this.faq = faq;}
 	private FGA fga; public FGA getFga() {return fga;} public void setFga(FGA fga) {this.fga = fga;}
 	
-	public AbstractHdFaqBean(HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd,
+	public AbstractHdFgaBean(HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd,
 								IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbHd);
