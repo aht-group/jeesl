@@ -2,38 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:j="http://www.jeesl.org/jsf"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
-	<composite:interface componentType="org.jeesl.jsf.components.JsonPropertyEditor">
-		<composite:attribute name="value" required="true" type="java.lang.String"/>
-		<composite:attribute name="for" required="true" type="java.lang.String"/>
+	<composite:interface		componentType="org.jeesl.jsf.components.JsonPropertyEditor">
+		<composite:attribute	name="value"	required="true" type="java.lang.String"/>
+		<composite:attribute	name="for"		required="true" type="java.lang.String"/>
 	</composite:interface>
 
 	<composite:implementation>
 		<f:event type="postAddToView" listener="#{cc.init}" />
-		<p:panel header="Json Magic">
-			<f:facet name="actions"/>
-			
-			<div class="ui-fluid">
-				<ui:repeat value="#{cc.propertyNames}" var="propertyDescriptor">
-					<div class="p-field p-grid">
-						<p:outputLabel for="propertyName" styleClass="p-col p-md-3" value="#{propertyDescriptor}"/>
-						<div class="p-col p-md-9">
-							<p:inputText id="propertyName" value="#{cc.properties[propertyDescriptor]}">
-								<p:ajax event="change" update="#{cc.attrs.clientId}:preview" listener="#{cc.process}"/>
-							</p:inputText>
-						</div>
-					</div>
-				</ui:repeat>
-		    </div>
-		</p:panel>
-		
-		<p:panel rendered="false" header="Json Object Result" styleClass="jeeslPanel" id="preview">
-			<h:outputText value="#{cc.value}"/>
-			<h:outputText value="#{cc.attrs.value}"/>
-		</p:panel>
+		<ui:repeat value="#{cc.propertyNames}" var="propertyDescriptor">
+			<p:panelGrid columns="2">
+				<p:outputLabel for="propertyName" styleClass="p-col p-md-3" value="#{propertyDescriptor}"/>
+				<p:inputText id="propertyName" value="#{cc.properties[propertyDescriptor]}">
+					<p:ajax event="keyup" process="#{cc.clientId}" listener="#{cc.process}"/>
+				</p:inputText>
+			</p:panelGrid>
+		</ui:repeat>
 	</composite:implementation>
 </html>
