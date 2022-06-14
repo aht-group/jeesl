@@ -16,8 +16,8 @@ import org.jeesl.factory.ejb.system.EjbSystemNewsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.news.JeeslSystemNews;
+import org.jeesl.interfaces.model.system.news.JeeslSystemNewsCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractAdminSystemNewsBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+									CATEGORY extends JeeslSystemNewsCategory<L,D,CATEGORY,?>,
 									NEWS extends JeeslSystemNews<L,D,CATEGORY,NEWS,USER>,
 									USER extends EjbWithId>
 					extends AbstractAdminBean<L,D,LOC>

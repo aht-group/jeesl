@@ -142,20 +142,7 @@
     		<s:lang key="fr" translation="Answer"/>
     	</s:langs>
     </s:translation>
-    <s:translation key="jeeslHdFgaDocument">
-    	<s:langs>
-    		<s:lang key="de" translation="Dokument"/>
-    		<s:lang key="en" translation="Document"/>
-    		<s:lang key="fr" translation="Document"/>
-    	</s:langs>
-    </s:translation>
-    <s:translation key="jeeslHdFgaSection">
-    	<s:langs>
-    		<s:lang key="de" translation="Abschnitt"/>
-    		<s:lang key="en" translation="Section"/>
-    		<s:lang key="fr" translation="Section"/>
-    	</s:langs>
-    </s:translation>
+
     <s:translation key="jeeslHdFaqNotFound">
     	<s:langs>
     		<s:lang key="de" translation="Faq not found"/>
