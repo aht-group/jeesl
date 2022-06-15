@@ -216,6 +216,38 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
         return jtf.buildCount(tQ.getResultList());
 	}
 	
+	@Override
+	public <A extends EjbWithId, B extends EjbWithId> Json2Tuples<LINK, JOB> tpcIoSsiLinkJobForMapping(MAPPING mapping, A a, B b)
+	{
+		Json2TuplesFactory<LINK,JOB> jtf = new Json2TuplesFactory<>(this,fbSsi.getClassLink(),fbSsi.getClassJob());
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<DATA> data = cQ.from(fbSsi.getClassData());
+		
+		Expression<Long> cCount = cB.count(data);
+		
+		Path<LINK> pLink = data.get(JeeslIoSsiData.Attributes.link.toString());
+		Path<LINK> pJob = data.get(JeeslIoSsiData.Attributes.job1.toString());
+		Join<DATA,MAPPING> jMapping = data.join(JeeslIoSsiData.Attributes.mapping.toString());
+		predicates.add(jMapping.in(mapping));
+		
+		Path<Long> pA = data.get(JeeslIoSsiData.Attributes.refA.toString());
+		if(a==null) {predicates.add(cB.isNull(pA));}
+		else {predicates.add(cB.equal(pA,a.getId()));}
+		
+		Path<Long> pB = data.get(JeeslIoSsiData.Attributes.refB.toString());
+		if(b==null) {predicates.add(cB.isNull(pB));}
+		else {predicates.add(cB.equal(pB,b.getId()));}
+		
+		cQ.groupBy(pLink.get("id"),pJob.get("id"));
+		cQ.multiselect(pLink.get("id"),pJob.get("id"),cCount);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+        return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
+	}
+	
 	@Override public Json1Tuples<MAPPING> tpMapping()
 	{
 		Json1TuplesFactory<MAPPING> jtf = new Json1TuplesFactory<>(this,fbSsi.getClassMapping());
@@ -349,4 +381,6 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		tQ.setMaxResults(maxResult);
 		return tQ.getResultList();
 	}
+
+	
 }
