@@ -382,5 +382,4 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return tQ.getResultList();
 	}
 
-	
 }
