@@ -56,5 +56,5 @@ public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescriptio
 	<T extends EjbWithSsiDataCleaning<CLEANING>> List<T> fEntitiesWithoutSsiDataCleaning(Class<T> c, int maxResult);
 	<T extends EjbWithSsiDataCleaning<CLEANING>> Json1Tuples<CLEANING> tpcSsiDataCleaning(Class<T> c);
 	
-	List<DATA> fSsiDataWithPendingJob1(MAPPING mapping, LINK link, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
+	List<DATA> fSsiDataWithJob1(MAPPING mapping, LINK link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
 }

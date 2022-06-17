@@ -349,7 +349,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
         return jtf.buildCount(tQ.getResultList());
 	}
 
-	@Override public List<DATA> fSsiDataWithPendingJob1(MAPPING mapping, LINK link, int maxResult, boolean includeNull, Long refA, Long refB, Long refC)
+	@Override public List<DATA> fSsiDataWithJob1(MAPPING mapping, LINK link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -359,9 +359,9 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		predicates.add(cB.equal(item.get(JeeslIoSsiData.Attributes.mapping.toString()),mapping));
 		
 		Expression<JOB> eJob = item.get(EjbWithMigrationJob1.Attributes.job1.toString());
-		JOB queue = this.fByEnum(fbSsi.getClassJob(),JeeslJobStatus.Code.queue);
-		if(includeNull) {predicates.add(cB.or(cB.isNull(eJob),cB.equal(eJob, queue)));}
-		else {predicates.add(cB.equal(eJob,queue));}
+		
+		if(includeNull) {predicates.add(cB.or(cB.isNull(eJob),cB.equal(eJob,job)));}
+		else {predicates.add(cB.equal(eJob,job));}
 		
 		if(link!=null)
 		{
