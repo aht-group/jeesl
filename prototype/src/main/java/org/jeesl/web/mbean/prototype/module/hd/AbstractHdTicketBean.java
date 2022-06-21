@@ -76,7 +76,6 @@ public abstract class AbstractHdTicketBean <L extends JeeslLang, D extends Jeesl
 	
 	private final UiEditSavedHandler<TICKET> editHandler; public UiEditSavedHandler<TICKET> getEditHandler() {return editHandler;}
 
-	
 	private final List<FAQ> faqs; public List<FAQ> getFaqs() {return faqs;}
 	private final List<FGA> answers; public List<FGA> getAnswers() {return answers;}
 	private final List<SEC> sections; public List<SEC> getSections() {return sections;}
