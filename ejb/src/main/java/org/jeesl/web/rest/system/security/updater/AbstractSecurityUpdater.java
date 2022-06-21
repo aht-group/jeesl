@@ -68,7 +68,7 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 
         this.fSecurity=fAcl;
 		
-		efLang = EjbLangFactory.factory(fbSecurity.getClassL());
+		efLang = EjbLangFactory.instance(fbSecurity.getClassL());
 		efDescription = EjbDescriptionFactory.factory(fbSecurity.getClassD());
 		
 		dbCleanerCategory = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassCategory());

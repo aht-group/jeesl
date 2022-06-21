@@ -37,7 +37,7 @@ public class EjbIoTemplateTokenFactory<L extends JeeslLang,D extends JeeslDescri
 	public EjbIoTemplateTokenFactory(final Class<L> cL,final Class<D> cD,final Class<TOKEN> cToken)
 	{       
         this.cToken = cToken;
-		efLang = EjbLangFactory.factory(cL);
+		efLang = EjbLangFactory.instance(cL);
 		efDescription = EjbDescriptionFactory.factory(cD);
 	}
 		

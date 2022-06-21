@@ -58,7 +58,7 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;
 		
-		efLang = EjbLangFactory.factory(fbRevision.getClassL());
+		efLang = EjbLangFactory.instance(fbRevision.getClassL());
 		dbuLang = JeeslDbLangUpdater.factory(fbRevision.getClassAttribute(),fbRevision.getClassL());
         
 	}

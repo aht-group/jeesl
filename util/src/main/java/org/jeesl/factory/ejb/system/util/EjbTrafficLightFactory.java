@@ -27,7 +27,7 @@ public class EjbTrafficLightFactory<L extends JeeslLang,D extends JeeslDescripti
 	{       
         this.cLight = cLight;
         
-        efLang = EjbLangFactory.factory(cLang);
+        efLang = EjbLangFactory.instance(cLang);
         efDescription = EjbDescriptionFactory.factory(cDescription);
 	}
 	

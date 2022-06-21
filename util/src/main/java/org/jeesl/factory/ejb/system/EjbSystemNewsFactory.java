@@ -29,7 +29,7 @@ public class EjbSystemNewsFactory<L extends JeeslLang,D extends JeeslDescription
 	{  
 		this.localeCodes=localeCodes;
         this.cNews = cNews;
-		efLang = EjbLangFactory.factory(cL);
+		efLang = EjbLangFactory.instance(cL);
 		efDescription = EjbDescriptionFactory.factory(cD);
 	}
     

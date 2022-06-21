@@ -94,7 +94,7 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
 		xfContainer = new XmlContainerFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());
 		xfEntity = new XmlEntityFactory<>(XmlRevisionQuery.get(XmlRevisionQuery.Key.xEntity));
 
-		efLang = EjbLangFactory.factory(fbRevision.getClassL());
+		efLang = EjbLangFactory.instance(fbRevision.getClassL());
 		efDescription = EjbDescriptionFactory.factory(fbRevision.getClassD());
 		efEntity = fbRevision.ejbEntity();
 		efAttribute = EjbRevisionAttributeFactory.factory(fbRevision.getClassAttribute());

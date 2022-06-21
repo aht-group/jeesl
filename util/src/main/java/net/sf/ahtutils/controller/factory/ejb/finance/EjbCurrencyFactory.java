@@ -24,7 +24,7 @@ public class EjbCurrencyFactory<C extends UtilsCurrency<L>, L extends JeeslLang>
         this.clCurrency = clCurrency;
         this.langClass = langClass;
         
-        ejbLangFactory = EjbLangFactory.factory(langClass);
+        ejbLangFactory = EjbLangFactory.instance(langClass);
     } 
     
     public static <C extends UtilsCurrency<L>, L extends JeeslLang> EjbCurrencyFactory<C, L>

@@ -36,7 +36,7 @@ public class EjbIoTemplateFactory<L extends JeeslLang,D extends JeeslDescription
 	public EjbIoTemplateFactory(final Class<L> cL,final Class<D> cD,final Class<TEMPLATE> cTemplate)
 	{       
         this.cTemplate = cTemplate;
-		efLang = EjbLangFactory.factory(cL);
+		efLang = EjbLangFactory.instance(cL);
 		efDescription = EjbDescriptionFactory.factory(cD);
 	}
 	

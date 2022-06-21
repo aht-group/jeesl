@@ -46,7 +46,7 @@ public class EjbRevisionEntityFactory<L extends JeeslLang,D extends JeeslDescrip
 	public EjbRevisionEntityFactory(final Class<L> cL,final Class<D> cD,final Class<RE> cEntity)
 	{       
         this.cEntity = cEntity;
-		efLang = EjbLangFactory.factory(cL);
+		efLang = EjbLangFactory.instance(cL);
 		efDescription = EjbDescriptionFactory.factory(cD);
 	}
 	

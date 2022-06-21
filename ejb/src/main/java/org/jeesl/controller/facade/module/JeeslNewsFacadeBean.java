@@ -29,9 +29,9 @@ public class JeeslNewsFacadeBean<L extends JeeslLang, D extends JeeslDescription
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslNewsFacadeBean.class);
 	
-	private final NewsFactoryBuilder<L,D,R,CATEGORY,ITEM,USER> fbNews;
+	private final NewsFactoryBuilder<L,D,LOC,R,CATEGORY,ITEM,USER> fbNews;
 	
-	public JeeslNewsFacadeBean(EntityManager em, NewsFactoryBuilder<L,D,R,CATEGORY,ITEM,USER> fbNews)
+	public JeeslNewsFacadeBean(EntityManager em, NewsFactoryBuilder<L,D,LOC,R,CATEGORY,ITEM,USER> fbNews)
 	{
 		super(em);
 		this.fbNews=fbNews;

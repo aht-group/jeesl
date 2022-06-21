@@ -21,10 +21,10 @@
 								selection="#{cc.attrs.bean.item}" selectionMode="single" rowKey="#{news.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="NewsItem" code="listOf">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addNews()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addItem()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectNews()}" update=":#{cc.id}:sFaq"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectItem()}" update=":#{cc.id}:sFaq"/>
 					
 					<p:column>
 						<f:facet name="header"><jtp:label entity="NewsItem" code="name"/></f:facet>
@@ -37,6 +37,9 @@
 			<h:form id="fTicket" rendered="#{not empty cc.attrs.bean.item}">
 				<p:panel styleClass="jeeslPanel">
 					<f:facet name="header"><j:pHeader entity="NewsItem"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:grid"/>
+					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						
 						<jtp:label entity="NewsItem" code="category"/>
@@ -45,7 +48,7 @@
 						</p:selectOneMenu>
 						
 						<jtp:label entity="NewsItem" code="labelQuestion"/>
-						<h:outputText value="#{cc.attrs.bean.item.name[localeCode].lang}"/>
+						<p:inputText value="#{cc.attrs.bean.item.name[localeCode].lang}"/>
 						
 					</p:panelGrid>
 				</p:panel>

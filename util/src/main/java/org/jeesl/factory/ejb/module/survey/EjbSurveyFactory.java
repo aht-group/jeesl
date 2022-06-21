@@ -33,7 +33,7 @@ public class EjbSurveyFactory<L extends JeeslLang, D extends JeeslDescription,
 	{       
         this.cSurvey = cSurvey;
         
-        efLang = EjbLangFactory.factory(cL);
+        efLang = EjbLangFactory.instance(cL);
         efDescription = EjbDescriptionFactory.factory(cD);
 	}
 	    

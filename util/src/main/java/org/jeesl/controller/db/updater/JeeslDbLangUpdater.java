@@ -31,7 +31,7 @@ public class JeeslDbLangUpdater<C extends EjbWithLang<L>, L extends JeeslLang>
         this.cEjb = cEjb;
         this.cL = cL;
         
-        efLang = EjbLangFactory.factory(cL);
+        efLang = EjbLangFactory.instance(cL);
     } 
 	
 	public static <C extends EjbWithLang<L>, L extends JeeslLang> JeeslDbLangUpdater<C,L> factory(final Class<C> cEjb, final Class<L> cL)

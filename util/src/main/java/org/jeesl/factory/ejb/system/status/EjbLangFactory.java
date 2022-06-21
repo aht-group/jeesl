@@ -32,7 +32,7 @@ public class EjbLangFactory<L extends JeeslLang>
         this.cL = cL;
     }
 
-    public static <L extends JeeslLang> EjbLangFactory<L> factory(final Class<L> cL)
+    public static <L extends JeeslLang> EjbLangFactory<L> instance(final Class<L> cL)
     {
         return new EjbLangFactory<L>(cL);
     }

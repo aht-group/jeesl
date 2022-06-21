@@ -142,7 +142,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDes
 		debugOnInfo = false;
 		developmentMode = false;
 		
-		efLang = EjbLangFactory.factory(fbReport.getClassL());
+		efLang = EjbLangFactory.instance(fbReport.getClassL());
 		efGroup = fbReport.group();
 		efColumn = fbReport.column();
 		

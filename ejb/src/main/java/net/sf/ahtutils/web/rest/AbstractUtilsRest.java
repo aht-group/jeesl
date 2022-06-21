@@ -44,7 +44,7 @@ public class AbstractUtilsRest <L extends JeeslLang, D extends JeeslDescription>
 		this.cL=cL;
 		this.cD=cD;
 		
-        efLang = EjbLangFactory.factory(cL);
+        efLang = EjbLangFactory.instance(cL);
         efDescription = EjbDescriptionFactory.factory(cD);
         
         mapGroups = new Hashtable<Class<?>, String>();

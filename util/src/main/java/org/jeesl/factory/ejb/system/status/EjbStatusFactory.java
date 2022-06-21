@@ -38,7 +38,7 @@ public class EjbStatusFactory<S extends JeeslStatus<L,D,S>, L extends JeeslLang,
         this.cStatus = cStatus;
         this.cD = cD;
         
-        efLang = EjbLangFactory.factory(cL);
+        efLang = EjbLangFactory.instance(cL);
         efDescription = EjbDescriptionFactory.factory(cD);
     }
     
@@ -48,7 +48,7 @@ public class EjbStatusFactory<S extends JeeslStatus<L,D,S>, L extends JeeslLang,
         this.cStatus = cStatus;
         this.cD = cD;
         
-        efLang = EjbLangFactory.factory(cL);
+        efLang = EjbLangFactory.instance(cL);
         efDescription = EjbDescriptionFactory.factory(cD);
     }
     
