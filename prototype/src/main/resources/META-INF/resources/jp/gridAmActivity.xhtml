@@ -20,13 +20,13 @@
 						<h:form id="fTree" >
 							<p:panel header="#{msg.jeeslAmActivitiesStructure}" styleClass="jeeslTree" >
 								<f:facet name="actions">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addActivity()}" update=":#{cc.id}:sActivity" tooltip="#{msg.jeeslTtAdd}"/>
+									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addActivity()}" update=":#{cc.id}:sActivity :#{cc.id}:sActivityDetails" tooltip="#{msg.jeeslTtAdd}"/>
 								</f:facet>
 								<p:tree id="tree1" value="#{cc.attrs.bean.tree}" var="node" 
 										selection="#{cc.attrs.bean.node}" selectionMode="single"
 										draggable="true" droppable="true" dragdropScope="demo">
-						            <p:ajax event="dragdrop" listener="#{cc.attrs.bean.onDragDrop}" update=":#{cc.id}:sActivity"/>
-						            <p:ajax event="select" listener="#{cc.attrs.bean.onActivitySelect}" update=":#{cc.id}:sActivity"/>
+						            <p:ajax event="dragdrop" listener="#{cc.attrs.bean.onDragDrop}" update=":#{cc.id}:sActivity :#{cc.id}:sActivityDetails"/>
+						            <p:ajax event="select" listener="#{cc.attrs.bean.onActivitySelect}" update=":#{cc.id}:sActivity :#{cc.id}:sActivityDetails"/>
 						            <p:ajax event="expand" listener="#{cc.attrs.bean.onNodeExpand}" />
 									<p:ajax event="collapse" listener="#{cc.attrs.bean.onNodeCollapse}" />
 						            <p:treeNode>
@@ -40,22 +40,39 @@
 						<h:form id="fActivity" rendered="#{not empty cc.attrs.bean.activity}">
 							<p:panel header="#{msg.jeeslAmActivity}" styleClass="jeeslPanel">
 								<f:facet name="actions">
-									<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelActivity()}" update=":#{cc.id}:sActivity" tooltip="#{msg.jeeslTtCancel}"/>
-									<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveActivity()}" update=":#{cc.id}:fTree :#{cc.id}:sActivity" rendered="#{not empty cc.attrs.bean.activity}" tooltip="#{msg.ttSave}"/>
-									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmActivity()}" update=":#{cc.id}:fTree :#{cc.id}:sActivity" rendered="#{cc.attrs.bean.project.id gt 0}" tooltip="#{msg.ttDelete}"/>
+									<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelActivity()}" update=":#{cc.id}:sActivity :#{cc.id}:sActivityDetails" tooltip="#{msg.jeeslTtCancel}"/>
+									<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveActivity()}" update=":#{cc.id}:fTree :#{cc.id}:sActivity :#{cc.id}:sActivityDetails" rendered="#{not empty cc.attrs.bean.activity}" tooltip="#{msg.ttSave}"/>
+									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmActivity()}" update=":#{cc.id}:fTree :#{cc.id}:sActivity :#{cc.id}:sActivityDetails" rendered="#{cc.attrs.bean.project.id gt 0}" tooltip="#{msg.ttDelete}"/>
 								</f:facet>
-								<p:panelGrid columns="2" columnClasses="jeeslGrid10,jeeslGrid60" >
+								<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 									<jtp:label entity="AmActivity" code="visible"/>
 									<p:selectBooleanCheckbox value="#{cc.attrs.bean.activity.visible}"/>	
-									<jtp:label entity="AmActivity" code="code"/>
-									<jtp:inputText value="#{cc.attrs.bean.activity.code}"/>
-								</p:panelGrid>
-								<p:panelGrid columns="2" columnClasses="jeeslGrid10,jeeslGrid90" >
+									<ui:remove>
+										<jtp:label entity="AmActivity" code="code"/>
+										<jtp:inputText value="#{cc.attrs.bean.activity.code}"/>
+									</ui:remove>
 									<jtp:label entity="AmActivity" code="name"/>
 									<jtp:inputText value="#{cc.attrs.bean.activity.name[localeCode].lang}"/>
 								</p:panelGrid>
 							</p:panel>
 						</h:form>
+					</j:slot>
+					
+					<j:slot id="sActivityDetails" width="5">
+						<p:dataTable var="a" value="#{cc.attrs.bean.activityItems}" draggableRows="false">
+							<p:column>
+								<f:facet name="header"><jtp:label entity="AmActivity" code="name"/></f:facet>
+								<h:outputText value="#{a.name[localeCode].lang}"/>  
+				            </p:column>
+							<p:column>
+								<f:facet name="header"><jtp:label entity="AmActivity" code="plannedStartDate"/></f:facet>
+								<jp:outputDate value="#{a.plannedStartDate}"/> 
+				            </p:column>
+							<p:column>
+								<f:facet name="header"><jtp:label entity="AmActivity" code="plannedEndDate"/></f:facet>
+								<jp:outputDate value="#{a.plannedEndDate}"/>
+				            </p:column>
+				       	</p:dataTable>
 					</j:slot>
 				</j:row>
 	    </jp:grid>
