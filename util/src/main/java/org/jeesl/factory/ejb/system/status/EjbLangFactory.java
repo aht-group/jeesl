@@ -27,14 +27,13 @@ public class EjbLangFactory<L extends JeeslLang>
 
     final Class<L> cL;
 
-    public EjbLangFactory(final Class<L> cL)
-    {
-        this.cL = cL;
-    }
-
     public static <L extends JeeslLang> EjbLangFactory<L> instance(final Class<L> cL)
     {
         return new EjbLangFactory<L>(cL);
+    }
+    private EjbLangFactory(final Class<L> cL)
+    {
+        this.cL = cL;
     }
 
 	public Map<String,L> getLangMap(Langs langs) throws JeeslConstraintViolationException

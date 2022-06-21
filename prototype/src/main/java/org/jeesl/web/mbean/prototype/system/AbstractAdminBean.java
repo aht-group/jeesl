@@ -55,7 +55,7 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription
 		
 		locales = new ArrayList<LOC>();
 		
-		efLang = new EjbLangFactory<L>(cL);
+		efLang = EjbLangFactory.instance(cL);
 		efDescription = new EjbDescriptionFactory<D>(cD);
 		
 		debugOnInfo = false;
@@ -97,7 +97,7 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription
 		this.langs=langs;
 		this.bMessage=bMessage;
 		
-		efLang = new EjbLangFactory<L>(cL);
+		efLang = EjbLangFactory.instance(cL);
 		efDescription = new EjbDescriptionFactory<D>(cD);
 	}
 	

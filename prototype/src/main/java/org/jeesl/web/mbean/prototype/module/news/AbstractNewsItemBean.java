@@ -12,11 +12,13 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.NewsFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.SbSingleBean;
+import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.module.news.JeeslNewsCategory;
 import org.jeesl.interfaces.model.module.news.JeeslNewsItem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
@@ -28,16 +30,18 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class AbstractNewsItemBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 									CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
-									ITEM extends JeeslNewsItem<L,D,R,CATEGORY,USER>,
-									USER extends EjbWithId>
+									ITEM extends JeeslNewsItem<L,D,R,CATEGORY,USER,M>,
+									USER extends EjbWithId,
+									M extends JeeslMarkup<MT>,
+									MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
 					extends AbstractAdminBean<L,D,LOC>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractNewsItemBean.class);
 	
-	protected JeeslNewsFacade<L,D,R,CATEGORY,ITEM,USER> fNews;
-	private final NewsFactoryBuilder<L,D,LOC,R,CATEGORY,ITEM,USER> fbNews;
+	protected JeeslNewsFacade<L,D,R,CATEGORY,ITEM,USER,M,MT> fNews;
+	private final NewsFactoryBuilder<L,D,LOC,R,CATEGORY,ITEM,USER,M,MT> fbNews;
 	
 	protected final SbSingleHandler<CATEGORY> sbhCategory; public SbSingleHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
@@ -46,9 +50,10 @@ public class AbstractNewsItemBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	protected R realm;
 	protected RREF rref;
+	private USER author;
 	private ITEM item; public ITEM getItem() {return item;} public void setItem(ITEM item) {this.item = item;}
 
-	public AbstractNewsItemBean(NewsFactoryBuilder<L,D,LOC,R,CATEGORY,ITEM,USER> fbNews)
+	public AbstractNewsItemBean(NewsFactoryBuilder<L,D,LOC,R,CATEGORY,ITEM,USER,M,MT> fbNews)
 	{
 		super(fbNews.getClassL(),fbNews.getClassD());
 		this.fbNews=fbNews;
@@ -58,13 +63,14 @@ public class AbstractNewsItemBean <L extends JeeslLang, D extends JeeslDescripti
 	}
 
 	protected void postConstructNews(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-										JeeslNewsFacade<L,D,R,CATEGORY,ITEM,USER> fNews,
+										JeeslNewsFacade<L,D,R,CATEGORY,ITEM,USER,M,MT> fNews,
 										R realm,
-										USER reporter)
+										USER author)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fNews=fNews;
 		this.realm=realm;
+		this.author=author;
 		
 		sbhLocale.setList(bTranslation.getLocales());
 		sbhLocale.setDefault();
@@ -105,7 +111,8 @@ public class AbstractNewsItemBean <L extends JeeslLang, D extends JeeslDescripti
 	public void addItem() throws JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbNews.getClassItem()));}
-		item = fbNews.ejbItem().build(realm,rref,sbhLocale.getList());
+		MT markupType = fNews.fByEnum(fbNews.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+		item = fbNews.ejbItem().build(realm,rref,sbhLocale.getList(),markupType,author);
 //		news.setName(efLang.createEmpty(localeCodes));
 //		news.setDescription(efDescription.createEmpty(localeCodes));
 	}

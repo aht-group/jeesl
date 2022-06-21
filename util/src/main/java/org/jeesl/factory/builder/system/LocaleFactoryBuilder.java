@@ -28,7 +28,7 @@ public class LocaleFactoryBuilder<L extends JeeslLang,
 		this.cStatus=cStatus;
 	}
 	
-	public EjbLangFactory<L> ejbLang(){return new EjbLangFactory<L>(cL);}
+	public EjbLangFactory<L> ejbLang(){return EjbLangFactory.instance(cL);}
 	public EjbDescriptionFactory<D> ejbDescription(){return new EjbDescriptionFactory<D>(cD);}
 	
 	public <S extends JeeslStatus<L,D,S>> EjbStatusFactory<S,L,D> ejbStatus(final Class<S> cS) {return new EjbStatusFactory<S,L,D>(cS,cL,cD);}
