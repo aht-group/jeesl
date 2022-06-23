@@ -1,6 +1,7 @@
 package org.jeesl.web.mbean.prototype.module.am;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,6 +64,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 
 	protected PROJ project; public PROJ getProject() {return project;} public void setProject(PROJ project) {this.project = project;}
 	private ACTIVITY activity; public ACTIVITY getActivity() {return activity;} public void setActivity(ACTIVITY activity) {this.activity = activity;}
+	private List<ACTIVITY> activityItems; public List<ACTIVITY> getActivityItems() {return activityItems;} public void setActivityItems(List<ACTIVITY> activityItems) {this.activityItems = activityItems;}
 
 
 	private TreeNode tree; public TreeNode getTree() {return tree;}
@@ -81,6 +83,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 		sbhProject = new SbSingleHandler<>(fbAm.getClassProject(),this);
 		sbhLocale = new SbSingleHandler<>(fbAm.getClassLocale(),this);
 
+		activityItems = new ArrayList<>();
 	}
 
 	protected void postConstructAm(JeeslTranslationBean<L,D,LOC> bTranslation, String currentLocaleCode,
@@ -216,7 +219,19 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 		reloadActivity();
 	}
 
-	protected void reloadActivity(){}
+	protected void reloadActivity()
+	{
+		List<ACTIVITY> activityItemstest = fAm.allForParent(fbAm.getClassActivity(), activity);
+		activityItems.clear();
+
+		for (ACTIVITY activityItem : activityItemstest)
+		{
+			if(!activityItem.getStructural())
+			{
+				activityItems.add(activityItem);
+			}
+		}
+	}
 
 	public void rmActivity()
 	{
