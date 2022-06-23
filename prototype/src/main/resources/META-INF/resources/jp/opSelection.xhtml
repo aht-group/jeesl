@@ -35,8 +35,8 @@
 			selection="#{cc.attrs.handler.tb}" selectionMode="single" rowKey="#{p.id}">
 		<f:facet name="header">
 			<j:dtHeader id="dth" title="#{cc.attrs.tableHeader}">
-				<j:svg type="jeeslAdd" onstart="PF('wv-#{cc.clientId}').show();" library="jeeslGfx"/>
-				<j:svg type="jeeslRemove" rendered="#{(not empty cc.attrs.handler.tb) and (cc.attrs.allowRemove)}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}" library="jeeslGfx"/>
+				<j:svg type="jeeslAdd" onstart="PF('wv-#{cc.clientId}').show();"/>
+				<j:svg type="jeeslRemove" rendered="#{(not empty cc.attrs.handler.tb) and (cc.attrs.allowRemove)}" listener="#{cc.attrs.handler.removeEntity()}" update="#{cc.attrs.update}"/>
 			</j:dtHeader>
 		</f:facet>
 		<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.selectTb}"/>

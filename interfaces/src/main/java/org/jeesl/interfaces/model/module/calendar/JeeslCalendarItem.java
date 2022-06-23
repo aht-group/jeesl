@@ -3,10 +3,12 @@ package org.jeesl.interfaces.model.module.calendar;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslCalendarItem <L extends JeeslLang, D extends JeeslDescription,
@@ -17,7 +19,7 @@ public interface JeeslCalendarItem <L extends JeeslLang, D extends JeeslDescript
 									IT extends JeeslStatus<L,D,IT>
 									>
 		extends  Serializable,EjbWithId,
-					EjbSaveable
+					EjbSaveable,EjbRemoveable,EjbWithParentAttributeResolver
 {
 	public enum Attributes {calendar,startDate,endDate}
 	

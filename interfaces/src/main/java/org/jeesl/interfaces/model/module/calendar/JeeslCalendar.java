@@ -1,5 +1,7 @@
 package org.jeesl.interfaces.model.module.calendar;
 
+import java.io.Serializable;
+
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -12,7 +14,7 @@ public interface JeeslCalendar <L extends JeeslLang, D extends JeeslDescription,
 								ITEM extends JeeslCalendarItem<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
 								IT extends JeeslStatus<L,D,IT>
 								>
-		extends EjbWithId
+		extends Serializable,EjbWithId
 {
-	
+//	void test();
 }

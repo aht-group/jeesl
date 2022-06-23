@@ -1,4 +1,4 @@
-package org.jeesl.web.mbean.prototype.system;
+package org.jeesl.web.mbean.prototype.module.calendar;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -22,6 +22,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.util.comparator.ejb.module.TimeZoneComparator;
+import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +45,7 @@ public class AbstractSettingsSystemTimeZoneBean <L extends JeeslLang, D extends 
 	
 	private ZONE zone; public ZONE getZone() {return zone;} public void setZone(ZONE zone) {this.zone = zone;}
 	
-	private Comparator<ZONE> comparatorTimeZone;
+	private Comparator<ZONE> cpZone;
 	private EjbTimeZoneFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> efZone;
 	
 	public AbstractSettingsSystemTimeZoneBean(final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar)
@@ -60,7 +61,7 @@ public class AbstractSettingsSystemTimeZoneBean <L extends JeeslLang, D extends 
 
 		efZone = fbCalendar.ejbZone();
 		
-		comparatorTimeZone = (new TimeZoneComparator<L,D,CALENDAR,ZONE,CT,ITEM,IT>()).factory(TimeZoneComparator.Type.offset);
+		cpZone = (new TimeZoneComparator<L,D,CALENDAR,ZONE,CT,ITEM,IT>()).factory(TimeZoneComparator.Type.offset);
 		reload();	
 	}
 	
@@ -68,7 +69,7 @@ public class AbstractSettingsSystemTimeZoneBean <L extends JeeslLang, D extends 
 	private void reload()
 	{
 		zones  = fCalendar.all(fbCalendar.getClassZone());
-		Collections.sort(zones,comparatorTimeZone);
+		Collections.sort(zones,cpZone);
 	}
 	
 	public void selectZone() throws JeeslNotFoundException

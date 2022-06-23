@@ -53,6 +53,9 @@
 						<jtp:label entity="NewsItem" code="name"/>
 						<p:inputText value="#{cc.attrs.bean.item.name[localeCode].lang}"/>
 						
+						<jtp:label entity="NewsItem" code="validFrom"/>
+						<jp:inputCalendar value="#{cc.attrs.bean.item.validFrom}" pattern="#{appSettingsBean.patternDateHour}"/>
+						
 						<jtp:label entity="NewsItem" code="markup"/>
 						<jtp:inputMarkup value="#{cc.attrs.bean.item.markup[localeCode]}"/>
 						
