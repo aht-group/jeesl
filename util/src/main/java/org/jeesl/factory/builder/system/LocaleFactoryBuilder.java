@@ -19,13 +19,16 @@ public class LocaleFactoryBuilder<L extends JeeslLang,
 	final static Logger logger = LoggerFactory.getLogger(LocaleFactoryBuilder.class);
 	
 	private final Class<LOC> cLoc; public Class<LOC> getClassLocale(){return cLoc;}
-	private final Class<?> cStatus; public Class<?> getClassStatus(){return cStatus;}
+	private final Class<?> cStatusGlobal; public Class<?> getClassStatusGlobal(){return cStatusGlobal;}
+	private final Class<?> cStatusTenant; public Class<?> getClassStatusTenant(){return cStatusTenant;}
 	
-	public LocaleFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<LOC> cLoc, final Class<?> cStatus)
+	public LocaleFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<LOC> cLoc,
+								final Class<?> cStatusGlobal, final Class<?> cStatusTenant)
 	{       
 		super(cL,cD);
 		this.cLoc = cLoc;
-		this.cStatus=cStatus;
+		this.cStatusGlobal=cStatusGlobal;
+		this.cStatusTenant=cStatusTenant;
 	}
 	
 	public EjbLangFactory<L> ejbLang(){return EjbLangFactory.instance(cL);}

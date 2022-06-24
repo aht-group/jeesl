@@ -52,16 +52,12 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected final Map<EjbWithPosition,RE> mapEntity; public Map<EjbWithPosition, RE> getMapEntity() {return mapEntity;}
 	
 	protected final List<EjbWithPosition> categories; public List<EjbWithPosition> getCategories(){return categories;}
+	protected List<EjbWithPosition> parents; public List<EjbWithPosition> getParents(){return parents;}
 	protected List<EjbWithPosition> items; public List<EjbWithPosition> getItems() {return items;}
 	protected List<GT> graphicTypes; public List<GT> getGraphicTypes() {return graphicTypes;}
 	protected List<FS> graphicStyles; public List<FS> getGraphicStyles() {return graphicStyles;}
 	protected List<F> figures; public List<F> getFigures() {return figures;}
 	
-	protected Object category; public Object getCategory() {return category;} public void setCategory(Object category) {this.category = category;}
-	protected Object status; public Object getStatus() {return status;} public void setStatus(Object status) {this.status = status;}
-	protected G graphic; public G getGraphic() {return graphic;} public void setGraphic(G graphic) {this.graphic = graphic;}
-	protected RE entity; public RE getEntity() {return entity;}
-
 	protected boolean supportsSymbol; public boolean getSupportsSymbol(){return supportsSymbol;}
 	protected boolean supportsLocked; public boolean isSupportsLocked() {return supportsLocked;}
 	protected boolean supportsDownload; public boolean getSupportsDownload(){return supportsDownload;}
@@ -71,6 +67,13 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected final EjbGraphicFactory<L,D,G,GT,F,FS> efGraphic;
 	protected final EjbGraphicFigureFactory<L,D,G,GT,F,FS> efFigure;
 
+	@SuppressWarnings("rawtypes") protected Class clParent;
+	protected long parentId; public long getParentId(){return parentId;} public void setParentId(long parentId) {this.parentId = parentId;}
+	
+	protected Object category; public Object getCategory() {return category;} public void setCategory(Object category) {this.category = category;}
+	protected Object status; public Object getStatus() {return status;} public void setStatus(Object status) {this.status = status;}
+	protected G graphic; public G getGraphic() {return graphic;} public void setGraphic(G graphic) {this.graphic = graphic;}
+	protected RE entity; public RE getEntity() {return entity;}
 	protected F figure; public F getFigure() {return figure;} public void setFigure(F figure) {this.figure = figure;}
 
 	@SuppressWarnings("rawtypes")

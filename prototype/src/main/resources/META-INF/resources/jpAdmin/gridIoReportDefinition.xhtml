@@ -39,7 +39,7 @@
 				<p:panel header="#{msg.jeeslIoReport}" rendered="#{(not empty cc.attrs.bean.report) and cc.attrs.bean.uiHelper.showPanelReport}" styleClass="jeeslPanel">
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelReport()}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslSave"rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveReport()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveReport()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.report.id gt 0}" listener="#{cc.attrs.bean.rmReport()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslDownload" rendered="#{(cc.attrs.bean.report.id gt 0) and (not empty cc.attrs.bean.restUrl)}" listener="#{cc.attrs.bean.download()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslClone" listener="#{cc.attrs.bean.cloneReport()}" process="@this" update=":#{cc.id}:grid"/>

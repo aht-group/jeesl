@@ -58,6 +58,10 @@
 					<p:column styleClass="aupPfDtColCentered">  
 						<j:duoCheckmark value="#{s.visible}"/>
 		            </p:column>
+		            <p:column rendered="#{cc.attrs.bean.supportsParent}">
+						<f:facet name="header">#{msg.jeeslStatusSuperior}</f:facet>
+					    <h:outputText value="#{s.parent.name[localeCode].lang}" />
+					</p:column>
 					
 					<p:column>
 			             <f:facet name="header">#{msg.jeeslCode}</f:facet>
@@ -87,7 +91,16 @@
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					
+					<j:inputGrid rendered="#{cc.attrs.bean.supportsParent}">
+						<p:outputLabel value="#{msg.jeeslStatusSuperior}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.parentId}" effect="fade" >
+							<f:selectItems value="#{cc.attrs.bean.parents}" var="p" itemLabel="#{p.name[localeCode].lang}" itemValue="#{p.id}"/>
+						</p:selectOneMenu>
+					</j:inputGrid>
+					
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					
+					
 						<p:outputLabel value="#{msg.aupOptionCode}"/>
 						<p:inputText value="#{cc.attrs.bean.status.code}" autocomplete="off"/>
 						

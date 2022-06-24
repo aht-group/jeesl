@@ -83,28 +83,10 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	private boolean supportsUpload; public boolean getSupportsUpload(){return supportsUpload;}	
 	private boolean supportsDescription; public boolean getSupportsDescription(){return supportsDescription;}
 
+
 	protected boolean supportsImage; public boolean getSupportsImage() {return supportsImage;}
 	protected boolean supportsGraphic; public boolean getSupportsGraphic() {return supportsGraphic;}
 	protected boolean supportsFigure; public boolean isSupportsFigure() {return supportsFigure;}
-
-
-
-	@SuppressWarnings("rawtypes")
-	protected Class clParent;
-
-//	protected final List<EjbWithPosition> categories; public List<EjbWithPosition> getCategories(){return categories;}
-	protected List<EjbWithPosition> parents; public List<EjbWithPosition> getParents(){return parents;}
-//	protected List<EjbWithPosition> items; public List<EjbWithPosition> getItems() {return items;}
-//	private List<GT> graphicTypes; public List<GT> getGraphicTypes() {return graphicTypes;}
-//	private List<FS> graphicStyles; public List<FS> getGraphicStyles() {return graphicStyles;}
-//	private List<F> figures; public List<F> getFigures() {return figures;}
-
-//	private F figure; public F getFigure() {return figure;} public void setFigure(F figure) {this.figure = figure;}
-
-	protected long parentId; public long getParentId(){return parentId;}public void setParentId(long parentId){this.parentId = parentId;}
-
-//	protected final EjbGraphicFactory<L,D,G,GT,F,FS> efGraphic;
-//	private final EjbGraphicFigureFactory<L,D,G,GT,F,FS> efFigure;
 
 	public AbstractOptionTableBean(LocaleFactoryBuilder<L,D,LOC> fbStatus,
 									SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg,
@@ -217,7 +199,9 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 
 		if(((EjbWithImageAlt)category).getImageAlt()!=null)
 		{
-            clParent = Class.forName(((EjbWithImageAlt)category).getImageAlt()).asSubclass(fbStatus.getClassStatus()).asSubclass(EjbWithPosition.class);
+            clParent = Class.forName(((EjbWithImageAlt)category).getImageAlt())
+            				.asSubclass(fbStatus.getClassStatusGlobal())
+            				.asSubclass(EjbWithPosition.class);
             
 //            PositionComparator<EjbWithPosition> c = new PositionComparator<>();
 //            Collections.sort(parents,c);
