@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithDateRange;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithDateRange;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslIoLog<L extends JeeslLang, D extends JeeslDescription,

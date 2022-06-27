@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithRecord;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslHydroRatingPoint <L extends JeeslLang, D extends JeeslDescription,

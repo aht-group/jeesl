@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.with.primitive.time;
+package org.jeesl.interfaces.model.with.date.jt;
 
 import java.time.LocalDate;
 

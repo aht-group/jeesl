@@ -10,7 +10,7 @@ import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithRecord;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithRemark;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;

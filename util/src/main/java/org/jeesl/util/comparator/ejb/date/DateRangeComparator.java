@@ -3,7 +3,7 @@ package org.jeesl.util.comparator.ejb.date;
 import java.util.Comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithDateRange;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithDateRange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

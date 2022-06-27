@@ -3,7 +3,7 @@ package net.sf.ahtutils.model.interfaces.tracker;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithRecord;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.user.EjbWithUser;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

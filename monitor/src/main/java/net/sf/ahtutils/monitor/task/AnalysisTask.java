@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import org.jeesl.api.facade.module.JeeslMonitoringFacade;
 import org.jeesl.controller.monitoring.result.net.IcmpResult;
 import org.jeesl.exception.processing.UtilsProcessingException;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithRecord;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.MutableDateTime;

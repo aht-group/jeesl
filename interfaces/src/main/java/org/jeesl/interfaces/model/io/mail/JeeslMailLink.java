@@ -7,8 +7,8 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithValidUntil;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithValidUntil;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslMailLink<L extends JeeslLang, D extends JeeslDescription,

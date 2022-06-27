@@ -6,7 +6,7 @@ import java.util.List;
 import org.jeesl.interfaces.model.marker.crud.EjbCrudWithParent;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithDateRange;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithDateRange;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 

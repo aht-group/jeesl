@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithRecord;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 import net.sf.ahtutils.interfaces.controller.monitoring.MonitoringResult;

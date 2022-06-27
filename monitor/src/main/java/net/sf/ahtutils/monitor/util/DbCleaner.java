@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.module.JeeslMonitoringFacade;
 import org.jeesl.controller.monitoring.result.net.IcmpResult;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithRecord;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

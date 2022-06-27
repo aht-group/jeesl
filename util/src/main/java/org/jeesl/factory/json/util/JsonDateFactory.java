@@ -2,12 +2,12 @@ package org.jeesl.factory.json.util;
 
 import java.util.Date;
 
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithYear;
-import org.jeesl.interfaces.model.with.primitive.date.EntityWithDate;
-import org.jeesl.interfaces.model.with.primitive.date.EntityWithDay;
-import org.jeesl.interfaces.model.with.primitive.date.EntityWithMonth;
-import org.jeesl.interfaces.model.with.primitive.date.EntityWithQuarter;
-import org.jeesl.interfaces.model.with.primitive.date.EntityWithWeek;
+import org.jeesl.interfaces.model.with.date.primitive.EjbWithYear;
+import org.jeesl.interfaces.model.with.date.primitive.EntityWithDate;
+import org.jeesl.interfaces.model.with.date.primitive.EntityWithDay;
+import org.jeesl.interfaces.model.with.date.primitive.EntityWithMonth;
+import org.jeesl.interfaces.model.with.date.primitive.EntityWithQuarter;
+import org.jeesl.interfaces.model.with.date.primitive.EntityWithWeek;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithValidFromUntil;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithValidFromUntil;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 
 public interface JeeslMdcCollection <R extends JeeslTenantRealm<?,?,R,?>,

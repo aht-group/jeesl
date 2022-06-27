@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyData;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.with.primitive.date.EjbWithDateRange;
+import org.jeesl.interfaces.model.with.date.ju.EjbWithDateRange;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
