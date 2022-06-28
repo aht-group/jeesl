@@ -46,7 +46,7 @@ public class AbstractSettingsSystemTimeZoneBean <L extends JeeslLang, D extends 
 	private ZONE zone; public ZONE getZone() {return zone;} public void setZone(ZONE zone) {this.zone = zone;}
 	
 	private Comparator<ZONE> cpZone;
-	private EjbTimeZoneFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> efZone;
+	private EjbTimeZoneFactory<ZONE,ITEM> efZone;
 	
 	public AbstractSettingsSystemTimeZoneBean(final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar)
 	{

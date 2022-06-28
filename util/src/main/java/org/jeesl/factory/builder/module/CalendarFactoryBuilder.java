@@ -36,7 +36,7 @@ public class CalendarFactoryBuilder<L extends JeeslLang,
         this.cItemType = cItemType;
 	}
 	
-	public EjbTimeZoneFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> ejbZone(){return new EjbTimeZoneFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT>(cZone);}
+	public EjbTimeZoneFactory<ZONE,ITEM> ejbZone(){return new EjbTimeZoneFactory<>(cZone);}
 	
 	public TxtCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> txtItem() {return new TxtCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT>();}
 	
