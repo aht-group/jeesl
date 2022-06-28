@@ -30,7 +30,7 @@
 							</f:facet>
 							<p:column>
 								<f:facet name="header"><h:outputText value="#{msg.jeeslDate} / #{msg.jeeslUser}"/></f:facet>
-								<jp:outputDate value="#{a.record}" withSecond="true"/>
+								<jp:outputDate type="both" value="#{a.record}" withSecond="true"/>
 								<br/>
 								<h:outputText value="#{a.user.firstName} #{a.user.lastName}"/>
 							</p:column>
@@ -94,7 +94,7 @@
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 								<jtp:label entity="WorkflowDelegate" code="recordRequest"/>
-								<jp:outputDate value="#{cc.attrs.handler.delegate.recordRequest}" withSecond="true"/>
+								<jp:outputDate type="both" value="#{cc.attrs.handler.delegate.recordRequest}" withSecond="true"/>
 								<jtp:label entity="WorkflowDelegate" code="userRequest"/>
 								<h:outputText value="#{cc.attrs.handler.delegate.userRequest.firstName} #{cc.attrs.handler.delegate.userRequest.lastName}" />
 								<jtp:label entity="WorkflowDelegate" code="remarkRequest"/>

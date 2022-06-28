@@ -17,7 +17,7 @@
 		<h:outputText value="#{attributeHandler.data[criteria].valueString}" rendered="#{criteria.type.code eq 'text'}"/>
 		<jtp:inputRemark value="#{attributeHandler.data[criteria].valueString}" rendered="#{criteria.type.code eq 'remark'}"/>
 		
-		<jp:outputDate value="#{attributeHandler.data[criteria].valueRecord}" rendered="#{criteria.type.code eq 'date'}"/>
+		<jp:outputDate type="both" value="#{attributeHandler.data[criteria].valueRecord}" rendered="#{criteria.type.code eq 'date'}"/>
 		
 		<h:outputText value="#{attributeHandler.data[criteria].valueInteger}" rendered="#{criteria.type.code eq 'intNumber'}"/>
 		

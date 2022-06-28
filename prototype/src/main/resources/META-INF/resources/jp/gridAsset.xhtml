@@ -118,7 +118,7 @@
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectEvent()}" update=":#{cc.id}:sAsset"/>
 					<p:column headerText="#{msg.jeeslAssetEventStatus}">
 						<jtp:symbolizer value="#{e.status}" marginRight="5"/>
-						<jp:outputDate value="#{e.record}"/>
+						<jp:outputDate type="both" value="#{e.record}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslAssetEventType}">
 						<f:facet name="header"><jp:thFilter handler="#{cc.attrs.bean.thfEventType}"/></f:facet>

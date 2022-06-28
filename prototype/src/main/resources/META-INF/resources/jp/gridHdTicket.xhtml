@@ -30,7 +30,7 @@
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTicket()}" update=":#{cc.id}:sTicket :#{cc.id}:sFaqs :#{cc.id}:sAnswers"/>
 					<p:column headerText="#{msg.jeeslHdRecord}">
 						<jtp:symbolizer value="#{t.lastEvent.status}" marginRight="5"/>
-						<jp:outputDate value="#{t.firstEvent.record}"/>
+						<jp:outputDate type="both" value="#{t.firstEvent.record}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslHdStatus}" styleClass="jeeslCenter" rendered="false">  
 						<jtp:symbolizer value="#{t.lastEvent.status}"/>
@@ -56,7 +56,7 @@
 						<h:outputText value="#{cc.attrs.bean.ticket.code}"/>
 						
 						<jtp:label entity="HdEvent" code="record"/>
-						<jp:outputDate value="#{cc.attrs.bean.firstEvent.record}" withSecond="true"/>
+						<jp:outputDate type="both" value="#{cc.attrs.bean.firstEvent.record}" withSecond="true"/>
 						
 						<jtp:label entity="HdCategory"/>
 						<ui:fragment>

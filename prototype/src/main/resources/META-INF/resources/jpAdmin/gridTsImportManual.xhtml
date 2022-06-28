@@ -61,7 +61,7 @@
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
                            <p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
                                <p:outputLabel value="#{msg.jeeslDate}"/>
-                               <jp:outputDate value="#{cc.attrs.bean.transaction.record}"/>
+                               <jp:outputDate type="both" value="#{cc.attrs.bean.transaction.record}"/>
                                
                                <p:outputLabel value="#{msg.jeeslRemark}" />
                                <jtp:inputRemark value="#{cc.attrs.bean.transaction.remark}" rendered="#{cc.attrs.bean.transaction.id eq 0}"/>
@@ -109,7 +109,7 @@
                             <p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectData()}" update=":#{cc.id}:sTs"/>
                             <p:column rendered="true">
                                 <f:facet name="header">#{msg.aupDate}</f:facet>
-                                <jp:outputDate value="#{t.record}"/>
+                                <jp:outputDate type="both" value="#{t.record}"/>
                             </p:column>
                             <p:column rendered="true" filterBy="#{t.value}" filterMatchMode="contains" filterStyle="width: 100px;">
                                 <f:facet name="header">#{msg.jeeslValue}</f:facet>

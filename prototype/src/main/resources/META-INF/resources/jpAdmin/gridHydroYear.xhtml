@@ -42,9 +42,9 @@
 								<h:outputText value="#{y.name[localeCode].lang}"/>
 				            </p:column>
 				            <p:column headerText="#{msg.jeeslHydroPeriod}">
-								<jp:outputDate value="#{y.validFrom}"/>
+								<jp:outputDate type="both" value="#{y.validFrom}"/>
 								<h:outputText value=" - "/>
-								<jp:outputDate value="#{y.validUntil}"/>
+								<jp:outputDate type="both" value="#{y.validUntil}"/>
 				            </p:column>
 						</p:dataTable>
 					</h:form>

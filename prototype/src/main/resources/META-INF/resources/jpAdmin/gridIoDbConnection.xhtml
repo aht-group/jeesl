@@ -20,15 +20,15 @@
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['transaction'].name[localeCode].lang}"/></f:facet>
-							<jp:outputDate value="#{c.transaction}" withSecond="true"/>
+							<jp:outputDate type="both" value="#{c.transaction}" withSecond="true"/>
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['query'].name[localeCode].lang}"/></f:facet>
-							<jp:outputDate value="#{c.query}" withSecond="true"/>
+							<jp:outputDate type="both" value="#{c.query}" withSecond="true"/>
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['change'].name[localeCode].lang}"/></f:facet>
-							<jp:outputDate value="#{c.change}" withSecond="true"/>
+							<jp:outputDate type="both" value="#{c.change}" withSecond="true"/>
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['state'].name[localeCode].lang}"/></f:facet>

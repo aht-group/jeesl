@@ -65,11 +65,11 @@
 					         </p:column>
 					         <p:column>
 					         	<f:facet name="header"><jtp:label entity="LfTimeGroup" code="startDate"/></f:facet>    
-								 <jp:outputDate value="#{c.startDate}"/>
+								 <jp:outputDate type="both" value="#{c.startDate}"/>
 					         </p:column>
 					         <p:column headerText="#{msg.jeeslEndDate}">
 					         	<f:facet name="header"><jtp:label entity="LfTimeGroup" code="endDate"/></f:facet>    
-								 <jp:outputDate value="#{c.endDate}"/>
+								 <jp:outputDate type="both" value="#{c.endDate}"/>
 					         </p:column>
 					   	</p:dataTable>
 					</h:form>
@@ -99,9 +99,9 @@
 								<p:outputLabel  value="#{cc.attrs.bean.timeGroup.values}" rendered="#{cc.attrs.bean.uiGenerate or cc.attrs.bean.timeGroup.values gt 0}" />
 							
 								<jtp:label entity="LfTimeGroup" code="startDate" rendered="#{cc.attrs.bean.uiGenerate or not empty cc.attrs.bean.timeGroup.startDate}" />
-								<jp:outputDate  value="#{cc.attrs.bean.timeGroup.startDate}" rendered="#{cc.attrs.bean.uiGenerate or not empty cc.attrs.bean.timeGroup.startDate}" />
+								<jp:outputDate type="both"  value="#{cc.attrs.bean.timeGroup.startDate}" rendered="#{cc.attrs.bean.uiGenerate or not empty cc.attrs.bean.timeGroup.startDate}" />
 								<jtp:label entity="LfTimeGroup" code="endDate" rendered="#{cc.attrs.bean.uiGenerate or not empty cc.attrs.bean.timeGroup.endDate}"/>
-								<jp:outputDate  value="#{cc.attrs.bean.timeGroup.endDate}" rendered="#{cc.attrs.bean.uiGenerate or not empty cc.attrs.bean.timeGroup.endDate}"/>
+								<jp:outputDate type="both"  value="#{cc.attrs.bean.timeGroup.endDate}" rendered="#{cc.attrs.bean.uiGenerate or not empty cc.attrs.bean.timeGroup.endDate}"/>
 							</p:panelGrid>
 						</p:panel>
 						<p:panel id="pViewGenerate" rendered="#{not empty cc.attrs.bean.timeGroup and cc.attrs.bean.uiGenerate}" styleClass="jeeslPanel">
@@ -151,7 +151,7 @@
 							</p:column>
 							<p:column> 
 								<f:facet name="header"><jtp:label entity="LfTimeElement" code="record"/></f:facet>
-								<jp:outputDate value="#{o.record}"/>
+								<jp:outputDate type="both" value="#{o.record}"/>
 					     	</p:column>
 					   	</p:dataTable>
 					</h:form>

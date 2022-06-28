@@ -29,7 +29,7 @@
 					<p:column headerText="#{msg.jeeslAssetEventDate}">
 						<h:panelGroup styleClass="jeesl-nbsc">
 							<jtp:symbolizer value="#{e.status}" marginRight="5"/>
-							<jp:outputDate value="#{e.record}" withMinute="false"/>
+							<jp:outputDate type="both" value="#{e.record}" withMinute="false"/>
 						</h:panelGroup>
 					</p:column>
 					<p:column rendered="false" headerText="#{msg.jeeslAssetEventType}">

@@ -66,11 +66,11 @@
 				            </p:column>
 							<p:column>
 								<f:facet name="header"><jtp:label entity="AmActivity" code="plannedStartDate"/></f:facet>
-								<jp:outputDate value="#{a.plannedStartDate}"/> 
+								<jp:outputDate type="both" value="#{a.plannedStartDate}"/> 
 				            </p:column>
 							<p:column>
 								<f:facet name="header"><jtp:label entity="AmActivity" code="plannedEndDate"/></f:facet>
-								<jp:outputDate value="#{a.plannedEndDate}"/>
+								<jp:outputDate type="both" value="#{a.plannedEndDate}"/>
 				            </p:column>
 				       	</p:dataTable>
 					</j:slot>

@@ -37,7 +37,7 @@
 						<h:outputText value="#{cc.attrs.bean.n2Data.m[d.collectionContainer][i.criteria].valueBoolean}" rendered="#{i.criteria.type.code eq 'bool'}"/>
 						<h:outputText value="#{cc.attrs.bean.n2Data.m[d.collectionContainer][i.criteria].valueInteger}" rendered="#{i.criteria.type.code eq 'intNumber'}"/>
 						<h:outputText value="#{cc.attrs.bean.n2Data.m[d.collectionContainer][i.criteria].valueDouble}" rendered="#{i.criteria.type.code eq 'doubleNumber'}"/>
-						<jp:outputDate value="#{cc.attrs.bean.n2Data.m[d.collectionContainer][i.criteria].valueRecord}" rendered="#{i.criteria.type.code eq 'date'}"/>
+						<jp:outputDate type="both" value="#{cc.attrs.bean.n2Data.m[d.collectionContainer][i.criteria].valueRecord}" rendered="#{i.criteria.type.code eq 'date'}"/>
 						<h:outputText value="#{cc.attrs.bean.n2Data.m[d.collectionContainer][i.criteria].valueOption.name[localeCode].lang}" rendered="#{i.criteria.type.code eq 'selectOne'}"/>
 						<ui:fragment rendered="#{i.criteria.type.code eq 'selectMany'}">
 							<ui:repeat var="o" value="#{cc.attrs.bean.n2Data.m[d.collectionContainer][i.criteria].valueOptions}">
