@@ -10,9 +10,14 @@
 	<composite:interface>
 		<composite:attribute name="value" required="true" />
 		<composite:attribute name="styleClass" required="false" />
+		
+		<composite:attribute name="type" required="false" default="both"/>
+		
 		<composite:attribute name="withDate" required="false" default="true"/>
-		<composite:attribute name="withTime" required="false" default="false"/>
 		<composite:attribute name="withMinute" required="false" default="false"/>
+		<composite:attribute name="withSecond" required="false" default="false"/>
+		
+		
 		<composite:attribute name="bean" required="false" default="#{appSettingsBean}"/>
 	</composite:interface>
 
@@ -20,19 +25,29 @@
 		<h:outputText value="#{cc.attrs.value}">
 			<c:if test="#{not empty cc.attrs.styleClass}"><f:attribute name="styleClass" value="#{cc.attrs.styleClass}"/></c:if>
 			
-			<c:if test="#{cc.attrs.withDate and (not (cc.attrs.withTime or cc.attrs.withMinute))}">
-				<f:convertDateTime pattern="#{cc.attrs.bean.patternDate}"/>
+			<c:if test="#{cc.attrs.withDate}">
+				<c:choose>
+					<c:when test="${cc.attrs.withSecond}">
+						<f:convertDateTime pattern="#{cc.attrs.bean.patternDateSecond}" type="#{cc.attrs.type}"/>
+					</c:when>
+					<c:when test="${cc.attrs.withMinute}">
+						<f:convertDateTime pattern="#{cc.attrs.bean.patternDateMinute}" type="#{cc.attrs.type}"/>
+					</c:when>
+					<c:otherwise>
+						<f:convertDateTime pattern="#{cc.attrs.bean.patternDate}" type="#{cc.attrs.type}"/>
+					</c:otherwise>
+				</c:choose>
 			</c:if>
 			
-			<c:if test="#{cc.attrs.withDate and cc.attrs.withMinute}">
-				<f:convertDateTime pattern="#{cc.attrs.bean.patternDateMinute}"/>
-			</c:if>
-			<c:if test="#{cc.attrs.withDate and cc.attrs.withTime}">
-				<f:convertDateTime pattern="#{cc.attrs.bean.patternDateSecond}" />
-			</c:if>
-			
-			<c:if test="#{(not cc.attrs.withDate) and cc.attrs.withTime and cc.attrs.withMinute}">
-				<f:convertDateTime pattern="#{cc.attrs.bean.patternTimeSecond}" />
+			<c:if test="#{not cc.attrs.withDate}">
+				<c:choose>
+					<c:when test="${cc.attrs.withSecond}">
+						<f:convertDateTime pattern="#{cc.attrs.bean.patternTimeSecond}" type="#{cc.attrs.type}"/>
+					</c:when>
+					<c:when test="${cc.attrs.withMinute}">
+						<f:convertDateTime pattern="#{cc.attrs.bean.patternTimeMinute}" type="#{cc.attrs.type}"/>
+					</c:when>
+				</c:choose>
 			</c:if>
 		</h:outputText>
 	</composite:implementation>

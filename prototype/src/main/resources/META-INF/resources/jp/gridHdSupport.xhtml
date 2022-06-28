@@ -113,7 +113,7 @@
 					</j:dtHeader>
 				</f:facet>
 				<p:column headerText="#{msg.jeeslHdRecord}">  
-					<jp:outputDate value="#{e.record}" withTime="true"/>
+					<jp:outputDate value="#{e.record}" withSecond="true"/>
 					<br/>
 					<h:outputText value="#{e.initiator.firstName} #{e.initiator.lastName}" />
 				</p:column>
@@ -168,7 +168,7 @@
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{cc.attrs.bean.editHandler.deny}">
 						
 						<jtp:label entity="HdMessage" code="record"/>
-						<jp:outputDate value="#{cc.attrs.bean.message.record}" withTime="true"/>
+						<jp:outputDate value="#{cc.attrs.bean.message.record}" withSecond="true"/>
 						
 						<jtp:label entity="HdMessage" code="scope"/>
 						<ui:fragment>
@@ -178,7 +178,7 @@
 					</p:panelGrid>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{cc.attrs.bean.editHandler.allow}">
 						<p:outputLabel value="#{msg.jeeslHdRecord}"/>
-						<jp:outputDate value="#{cc.attrs.bean.message.record}" withTime="true"/>
+						<jp:outputDate value="#{cc.attrs.bean.message.record}" withSecond="true"/>
 						
 						<p:outputLabel value="#{msg.jeeslHdScope}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.message.scope}" effect="fade" autoWidth="false">
@@ -197,7 +197,7 @@
 			<p:repeat var="m" value="#{cc.attrs.bean.messages}">
 				<p:panel styleClass="jeeslPanel" >
 					<f:facet name="header">
-						<jp:outputDate value="#{m.record}" withTime="true"/>
+						<jp:outputDate value="#{m.record}" withSecond="true"/>
 						<h:outputText value=": "/>
 						<h:outputText value="#{m.user.firstName} #{m.user.lastName}"/>
 						<h:outputText value=" (#{m.scope.name[localeCode].lang})"/>

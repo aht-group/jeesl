@@ -40,7 +40,7 @@
 							<h:outputText value="#{t.user.firstName} #{t.user.lastName}"/>
 			            </p:column>
 		                <p:column rendered="true" headerText="#{msg.jeeslTsTransactionRecord}" filterBy="#{t.record}" filterMatchMode="contains">
-							<jp:outputDate value="#{t.record}" withTime="true"/>
+							<jp:outputDate value="#{t.record}" withSecond="true"/>
 			            </p:column>
 			       	</p:dataTable>
 				</h:form>
@@ -62,7 +62,7 @@
 					        <div class="p-field p-grid">
 					            <p:outputLabel for="tRecord" styleClass="p-col p-md-3" value="#{msg.jeeslTsTransactionRecord}" />
 					            <div class="p-col p-md-9">
-									<jp:outputDate id="tRecord" value="#{cc.attrs.bean.transaction.record}" withTime="true"/>
+									<jp:outputDate id="tRecord" value="#{cc.attrs.bean.transaction.record}" withSecond="true"/>
 					            </div>
 					        </div>
 					        <div class="p-field p-grid">
@@ -93,7 +93,7 @@
                                </j:dtHeader>
                            </f:facet>
                            <p:column rendered="true" headerText="#{msg.jeeslTsTransactionRecord}">
-                               <jp:outputDate value="#{d.record}" withTime="true"/>
+                               <jp:outputDate value="#{d.record}" withSecond="true"/>
                            </p:column>
                            <p:column rendered="true" headerText="#{msg.jeeslTsValue}">
 							<h:outputText value="#{d.value}"/>

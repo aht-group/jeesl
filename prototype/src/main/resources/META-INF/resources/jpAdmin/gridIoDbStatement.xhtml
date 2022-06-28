@@ -19,15 +19,15 @@
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['rows'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.rows}" withTime="true"/>
+							<h:outputText value="#{s.rows}" withSecond="true"/>
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['calls'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.calls}" withTime="true"/>
+							<h:outputText value="#{s.calls}" withSecond="true"/>
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['average'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.average}" withTime="true"/>
+							<h:outputText value="#{s.average}" withSecond="true"/>
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['total'].name[localeCode].lang}"/></f:facet>

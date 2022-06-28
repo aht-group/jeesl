@@ -49,7 +49,7 @@
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslBbMessageDate}"/>
-								<jp:outputDate value="#{cc.attrs.bean.thread.record}" withTime="true"/>
+								<jp:outputDate value="#{cc.attrs.bean.thread.record}" withSecond="true"/>
 								<p:outputLabel value="#{msg.jeeslBbTopic}"/>
 								<p:inputText value="#{cc.attrs.bean.thread.name}"/>
 								<p:outputLabel value="#{msg.jeeslBbMessage}"/>
@@ -78,7 +78,7 @@
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslBbMessageDate}"/>
-								<jp:outputDate value="#{cc.attrs.bean.posting.record}" withTime="true"/>
+								<jp:outputDate value="#{cc.attrs.bean.posting.record}" withSecond="true"/>
 								<p:outputLabel value="#{msg.jeeslBbTopic}"/>
 								<h:outputText value="#{cc.attrs.bean.thread.name}"/>
 							</p:panelGrid>
@@ -91,7 +91,7 @@
 							</f:facet>
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 								<p:outputLabel value="#{msg.jeeslBbMessageDate}"/>
-								<jp:outputDate value="#{cc.attrs.bean.posting.record}" withTime="true"/>
+								<jp:outputDate value="#{cc.attrs.bean.posting.record}" withSecond="true"/>
 								<p:outputLabel value="#{msg.jeeslBbMessage}"/>
 								<jtp:inputMarkup value="#{cc.attrs.bean.posting.markup}"/>
 							</p:panelGrid>
@@ -105,7 +105,7 @@
 								</j:dtHeader>
 							</f:facet>
 							<p:column>  
-								<jp:outputDate value="#{p.record}" withTime="true"/>
+								<jp:outputDate value="#{p.record}" withSecond="true"/>
 							</p:column>
 							<p:column>  
 								<h:outputText value="#{p.user.firstName} #{p.user.lastName}"/>
