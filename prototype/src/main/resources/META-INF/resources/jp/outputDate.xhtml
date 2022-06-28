@@ -20,11 +20,20 @@
 		<h:outputText value="#{cc.attrs.value}">
 			<c:if test="#{not empty cc.attrs.styleClass}"><f:attribute name="styleClass" value="#{cc.attrs.styleClass}"/></c:if>
 			
-			<c:if test="#{cc.attrs.withDate and (not (cc.attrs.withTime or cc.attrs.withMinute))}"><f:convertDateTime pattern="#{cc.attrs.bean.datePattern}"/></c:if>
-			<c:if test="#{cc.attrs.withDate and cc.attrs.withMinute}"><f:convertDateTime pattern="#{cc.attrs.bean.patternMinute}"/></c:if>
-			<c:if test="#{cc.attrs.withDate and cc.attrs.withTime}"><f:convertDateTime pattern="#{cc.attrs.bean.dateTimePattern}" /></c:if>
+			<c:if test="#{cc.attrs.withDate and (not (cc.attrs.withTime or cc.attrs.withMinute))}">
+				<f:convertDateTime pattern="#{cc.attrs.bean.patternDate}"/>
+			</c:if>
 			
-			<c:if test="#{(not cc.attrs.withDate) and cc.attrs.withTime and cc.attrs.withMinute}"><f:convertDateTime pattern="#{cc.attrs.bean.patternTimeMinute}" /></c:if>
+			<c:if test="#{cc.attrs.withDate and cc.attrs.withMinute}">
+				<f:convertDateTime pattern="#{cc.attrs.bean.patternDateMinute}"/>
+			</c:if>
+			<c:if test="#{cc.attrs.withDate and cc.attrs.withTime}">
+				<f:convertDateTime pattern="#{cc.attrs.bean.patternDateSecond}" />
+			</c:if>
+			
+			<c:if test="#{(not cc.attrs.withDate) and cc.attrs.withTime and cc.attrs.withMinute}">
+				<f:convertDateTime pattern="#{cc.attrs.bean.patternTimeSecond}" />
+			</c:if>
 		</h:outputText>
 	</composite:implementation>
 </html>

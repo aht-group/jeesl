@@ -14,15 +14,7 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 	
 	protected String positionSideMenu;public String getPositionSideMenu() {return positionSideMenu;}
 	protected String positionMenu2;public String getPositionMenu2() {return positionMenu2;}
-	protected String calendarFormat; public String getCalendarFormat(){return calendarFormat;}
-	protected String timeFormat; public String getTimeFormat(){return timeFormat;}
 	
-	protected String patternDate; public String getPatternDate() {return patternDate;}
-	protected String patternDateHour; public String getPatternDateHour() {return patternDateHour;}
-	protected String patternMinute; public String getPatternMinute() {return patternMinute;}
-	protected String patternHour; public String getPatternHour() {return patternHour;}
-	protected String patternTimeMinute; public String getPatternTimeMinute() {return patternTimeMinute;}
-
 	protected String allowUploadSvg; public String getAllowUploadSvg() {return allowUploadSvg;}
 	protected String allowUploadJesslGraphicType; public String getAllowUploadJesslGraphicType() {return allowUploadJesslGraphicType;}
 	
@@ -44,8 +36,6 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 	{
 		positionMenu2="right";
 		positionSideMenu="right";
-		calendarFormat = "dd.MM.yyyy";
-		timeFormat = "dd.MM.yyyy HH:mm";
 		initCalendarPattern();
 		paginatorTemplate = "{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}";
 		paginatorPosition = "bottom";
@@ -61,20 +51,23 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 		
 		indexWithSubmenuDescription = true;
 	}
+
+//jeesl.highlight:datetime
+	protected String patternDate; @Override public String getPatternDate() {return patternDate;}
+	protected String patternDateMinute; @Override public String getPatternDateMinute() {return patternDateMinute;}
+	protected String patternDateSecond; @Override public String getPatternDateSecond() {return patternDateSecond;}	
 	
-	protected String datePattern; @Override public String getDatePattern(){return datePattern;}
-	protected String dateTimePattern; @Override public String getDateTimePattern(){return dateTimePattern;}
+	protected String patternTimeMinute; public String getPatternTimeMinute() {return patternTimeMinute;}
+	protected String patternTimeSecond; public String getPatternTimeSecond() {return patternTimeSecond;}
 	
 	private void initCalendarPattern()
 	{
 		patternDate = "dd.MM.yyyy";
-		patternDateHour = "dd.MM.yyyy HH:mm";
-		patternMinute = "dd.MM.yyyy HH:mm";
-		patternHour = "HH:mm";
-		patternTimeMinute = "HH:mm:ss";
-		
-//		Deprecated below
-		datePattern = "dd.MM.yyyy";
-		dateTimePattern = "dd.MM.yyyy HH:mm:ss";
+		patternDateMinute = "dd.MM.yyyy HH:mm";
+		patternDateSecond = "dd.MM.yyyy HH:mm:ss";
+
+		patternTimeMinute = "HH:mm";
+		patternTimeSecond = "HH:mm:ss";
 	}
+//jeesl.highlight:datetime
 }
