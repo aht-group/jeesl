@@ -3,11 +3,11 @@ package org.jeesl.factory.xml.module.calendar;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.module.calendar.Calendar;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class XmlCalendarFactory <L extends JeeslLang, D extends JeeslDescription
 									ZONE extends JeeslCalendarTimeZone<L,D>,
 									CT extends JeeslCalendarType<L,D,CT,?>,
 									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-									IT extends JeeslStatus<L,D,IT>
+									IT extends JeeslCalendarItemType<L,D,?,IT,?>
 									>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlCalendarFactory.class);

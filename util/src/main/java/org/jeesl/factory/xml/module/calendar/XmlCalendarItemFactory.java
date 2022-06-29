@@ -6,6 +6,7 @@ import org.jeesl.controller.processor.TimeZoneProcessor;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -23,7 +24,7 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 									ZONE extends JeeslCalendarTimeZone<L,D>,
 									CT extends JeeslCalendarType<L,D,CT,?>,
 									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-									IT extends JeeslStatus<L,D,IT>
+									IT extends JeeslCalendarItemType<L,D,?,IT,?>
 									>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlCalendarItemFactory.class);
@@ -44,7 +45,7 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 					ZONE extends JeeslCalendarTimeZone<L,D>,
 					CT extends JeeslCalendarType<L,D,CT,?>,
 					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-					IT extends JeeslStatus<L,D,IT>
+					IT extends JeeslCalendarItemType<L,D,?,IT,?>
 					>
 	XmlCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> instance(String localeCode, XmlCalendarQuery.Key key)
 	{
@@ -54,7 +55,7 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 	public Item build(ITEM item)
 	{
 		Item xml = build();		
-		if(q.isSetType()){xml.setType(xfType.build(item.getType()));}
+		if(q.isSetType()){xml.setType(xfType.build(item.getType2()));}
 		
 		
 		if(tzp==null){xml.setStart(DateUtil.getXmlGc4D(item.getStartDate()));}

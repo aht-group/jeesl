@@ -5,6 +5,7 @@ import org.jeesl.api.rest.module.calendar.JeeslCalendarRestExport;
 import org.jeesl.api.rest.module.calendar.JeeslCalendarRestImport;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -22,7 +23,7 @@ public class CalendarRestService <L extends JeeslLang, D extends JeeslDescriptio
 								ZONE extends JeeslCalendarTimeZone<L,D>,
 								CT extends JeeslCalendarType<L,D,CT,?>,
 								ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-								IT extends JeeslStatus<L,D,IT>
+								IT extends JeeslCalendarItemType<L,D,?,IT,?>
 								>
 					extends AbstractJeeslRestService<L,D>
 					implements JeeslCalendarRestExport,JeeslCalendarRestImport
@@ -48,7 +49,7 @@ public class CalendarRestService <L extends JeeslLang, D extends JeeslDescriptio
 					ZONE extends JeeslCalendarTimeZone<L,D>,
 					CT extends JeeslCalendarType<L,D,CT,?>,
 					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-					IT extends JeeslStatus<L,D,IT>>
+					IT extends JeeslCalendarItemType<L,D,?,IT,?>>
 			CalendarRestService<L,D,CALENDAR,ZONE,CT,ITEM,IT>
 			factory(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar,final Class<L> cL, final Class<D> cD, final Class<CT> cType, final Class<IT> cItemType)
 	{

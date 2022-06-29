@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslCalendarItem <CALENDAR extends JeeslCalendar<ZONE,?>,
 									ZONE extends JeeslCalendarTimeZone<?,?>,
-									IT extends JeeslStatus<?,?,IT>
+									IT extends JeeslCalendarItemType<?,?,?,IT,?>
 									>
 		extends  Serializable,EjbWithId,
 					EjbSaveable,EjbRemoveable,EjbWithParentAttributeResolver,
@@ -21,8 +21,8 @@ public interface JeeslCalendarItem <CALENDAR extends JeeslCalendar<ZONE,?>,
 {
 	public enum Attributes {calendar,startDate,endDate}
 	
-	IT getType();
-	void setType(IT type);
+	IT getType2();
+	void setType2(IT type);
 
 	ZONE getStartZone();
 	void setStartZone(ZONE startZone);
