@@ -18,10 +18,10 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class CalendarRestService <L extends JeeslLang, D extends JeeslDescription,
-								CALENDAR extends JeeslCalendar<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+								CALENDAR extends JeeslCalendar<ZONE,CT>,
 								ZONE extends JeeslCalendarTimeZone<L,D>,
 								CT extends JeeslCalendarType<L,D,CT,?>,
-								ITEM extends JeeslCalendarItem<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+								ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
 								IT extends JeeslStatus<L,D,IT>
 								>
 					extends AbstractJeeslRestService<L,D>
@@ -44,9 +44,10 @@ public class CalendarRestService <L extends JeeslLang, D extends JeeslDescriptio
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
-					CALENDAR extends JeeslCalendar<L,D,CALENDAR,ZONE,CT,ITEM,IT>, ZONE extends JeeslCalendarTimeZone<L,D>,
+					CALENDAR extends JeeslCalendar<ZONE,CT>,
+					ZONE extends JeeslCalendarTimeZone<L,D>,
 					CT extends JeeslCalendarType<L,D,CT,?>,
-					ITEM extends JeeslCalendarItem<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
 					IT extends JeeslStatus<L,D,IT>>
 			CalendarRestService<L,D,CALENDAR,ZONE,CT,ITEM,IT>
 			factory(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar,final Class<L> cL, final Class<D> cD, final Class<CT> cType, final Class<IT> cItemType)

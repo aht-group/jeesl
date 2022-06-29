@@ -19,10 +19,10 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.DateUtil;
 
 public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescription,
-									CALENDAR extends JeeslCalendar<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+									CALENDAR extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarTimeZone<L,D>,
 									CT extends JeeslCalendarType<L,D,CT,?>,
-									ITEM extends JeeslCalendarItem<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
 									IT extends JeeslStatus<L,D,IT>
 									>
 {
@@ -40,10 +40,10 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
-					CALENDAR extends JeeslCalendar<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+					CALENDAR extends JeeslCalendar<ZONE,CT>,
 					ZONE extends JeeslCalendarTimeZone<L,D>,
 					CT extends JeeslCalendarType<L,D,CT,?>,
-					ITEM extends JeeslCalendarItem<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
 					IT extends JeeslStatus<L,D,IT>
 					>
 	XmlCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> instance(String localeCode, XmlCalendarQuery.Key key)

@@ -27,10 +27,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescription,
-									CALENDAR extends JeeslCalendar<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+									CALENDAR extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarTimeZone<L,D>,
 									CT extends JeeslCalendarType<L,D,CT,?>,
-									ITEM extends JeeslCalendarItem<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
 									IT extends JeeslStatus<L,D,IT>
 									>
 					extends JeeslFacadeBean

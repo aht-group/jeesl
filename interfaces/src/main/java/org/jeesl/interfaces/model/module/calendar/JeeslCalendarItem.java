@@ -11,12 +11,9 @@ import org.jeesl.interfaces.model.with.date.jt.JeeslWithTimeline;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslCalendarItem <L extends JeeslLang, D extends JeeslDescription,
-									CALENDAR extends JeeslCalendar<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
-									ZONE extends JeeslCalendarTimeZone<L,D>,
-									CT extends JeeslCalendarType<L,D,CT,?>,
-									ITEM extends JeeslCalendarItem<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
-									IT extends JeeslStatus<L,D,IT>
+public interface JeeslCalendarItem <CALENDAR extends JeeslCalendar<ZONE,?>,
+									ZONE extends JeeslCalendarTimeZone<?,?>,
+									IT extends JeeslStatus<?,?,IT>
 									>
 		extends  Serializable,EjbWithId,
 					EjbSaveable,EjbRemoveable,EjbWithParentAttributeResolver,

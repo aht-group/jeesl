@@ -13,10 +13,10 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescription,
-										CALENDAR extends JeeslCalendar<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+										CALENDAR extends JeeslCalendar<ZONE,CT>,
 										ZONE extends JeeslCalendarTimeZone<L,D>,
 										CT extends JeeslCalendarType<L,D,CT,?>,
-										ITEM extends JeeslCalendarItem<L,D,CALENDAR,ZONE,CT,ITEM,IT>,
+										ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
 										IT extends JeeslStatus<L,D,IT>
 										>
 			extends JeeslFacade
