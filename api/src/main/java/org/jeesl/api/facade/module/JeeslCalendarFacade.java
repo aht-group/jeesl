@@ -1,6 +1,6 @@
 package org.jeesl.api.facade.module;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -21,6 +21,6 @@ public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescri
 										>
 			extends JeeslFacade
 {	
-	List<ITEM> fCalendarItems(CALENDAR calendar, Date from, Date to);
-	List<ITEM> fCalendarItems(List<CALENDAR> calendars, Date from, Date to);
+	List<ITEM> fCalendarItems(CALENDAR calendar, LocalDateTime from, LocalDateTime to);
+	List<ITEM> fCalendarItems(List<CALENDAR> calendars, LocalDateTime from, LocalDateTime to);
 }

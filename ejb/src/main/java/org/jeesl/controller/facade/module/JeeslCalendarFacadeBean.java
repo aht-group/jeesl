@@ -1,5 +1,7 @@
 package org.jeesl.controller.facade.module;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,7 +50,7 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 
 	//JEESL Calendar
 	@Override
-	public List<ITEM> fCalendarItems(CALENDAR calendar, Date from, Date to)
+	public List<ITEM> fCalendarItems(CALENDAR calendar, LocalDateTime from, LocalDateTime to)
 	{
 		List<CALENDAR> calendars = new ArrayList<CALENDAR>();
 		calendars.add(calendar);
@@ -56,8 +58,12 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 	}
 	
 	@Override
-	public List<ITEM> fCalendarItems(List<CALENDAR> calendars, Date from, Date to)
+	public List<ITEM> fCalendarItems(List<CALENDAR> calendars, LocalDateTime startLocalDate, LocalDateTime endLocalDate)
 	{
+		
+		Date start = Date.from(startLocalDate.atZone(ZoneId.systemDefault()).toInstant());
+		Date end = Date.from(endLocalDate.atZone(ZoneId.systemDefault()).toInstant());
+		
 		if(calendars==null || calendars.isEmpty()){return new ArrayList<ITEM>();}
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -68,14 +74,14 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		Expression<Date> dEnd   = root.get(JeeslCalendarItem.Attributes.endDate.toString());
 		
 		//After
-	    Predicate startAfterFrom = cB.greaterThanOrEqualTo(dStart, from);
-	    Predicate endAfterFrom = cB.greaterThanOrEqualTo(dEnd, from);
-	    Predicate endAfterTo = cB.greaterThanOrEqualTo(dEnd, to);
+	    Predicate startAfterFrom = cB.greaterThanOrEqualTo(dStart, start);
+	    Predicate endAfterFrom = cB.greaterThanOrEqualTo(dEnd, start);
+	    Predicate endAfterTo = cB.greaterThanOrEqualTo(dEnd, end);
 	    
 	    //Before
-	    Predicate startBeforeTo = cB.lessThan(dStart, to);
-	    Predicate startBeforeFrom = cB.lessThan(dStart, from);
-	    Predicate endBeforeTo = cB.lessThan(dEnd, to);
+	    Predicate startBeforeTo = cB.lessThan(dStart, end);
+	    Predicate startBeforeFrom = cB.lessThan(dStart, start);
+	    Predicate endBeforeTo = cB.lessThan(dEnd, end);
 		
 		Predicate pOnlyStartAndStartInRange = cB.and(cB.isNull(dEnd),startAfterFrom,startBeforeTo);
 		Predicate pStartAndEndInRange = cB.and(cB.isNotNull(dEnd),startAfterFrom,endBeforeTo);
