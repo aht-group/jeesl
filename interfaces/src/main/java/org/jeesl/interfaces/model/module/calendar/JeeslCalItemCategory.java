@@ -6,11 +6,12 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 
-public interface JeeslCalendarItemType <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslCalItemCategory <L extends JeeslLang, D extends JeeslDescription,
 										R extends JeeslTenantRealm<L,D,R,G>,
 										S extends JeeslMcsStatus<L,D,R,S,G>,
 										G extends JeeslGraphic<L,D,?,?,?>>
-							extends JeeslMcsStatus<L,D,R,S,G>
+			extends JeeslMcsStatus<L,D,R,S,G>
+					
 {
 	public enum Attributes{realm,rref}
 }
