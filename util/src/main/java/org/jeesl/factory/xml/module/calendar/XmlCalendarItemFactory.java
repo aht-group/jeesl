@@ -55,7 +55,7 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 	public Item build(ITEM item)
 	{
 		Item xml = build();		
-		if(q.isSetType()){xml.setType(xfType.build(item.getType2()));}
+		if(q.isSetType()){xml.setType(xfType.build(item.getType()));}
 		
 		
 		if(tzp==null){xml.setStart(DateUtil.getXmlGc4D(item.getStartDate()));}

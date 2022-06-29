@@ -21,8 +21,8 @@ public interface JeeslCalendarItem <CALENDAR extends JeeslCalendar<ZONE,?>,
 {
 	public enum Attributes {calendar,startDate,endDate}
 	
-	IT getType2();
-	void setType2(IT type);
+	IT getType();
+	void setType(IT type);
 
 	ZONE getStartZone();
 	void setStartZone(ZONE startZone);

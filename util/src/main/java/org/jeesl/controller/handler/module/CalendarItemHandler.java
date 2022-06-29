@@ -72,7 +72,7 @@ public class CalendarItemHandler <L extends JeeslLang, D extends JeeslDescriptio
 		}
 		
 		item = efZone.toUtc(item);
-		item.setType2(fCalendar.find(fbCalendar.getClassItemType(),item.getType2()));
+		item.setType(fCalendar.find(fbCalendar.getClassItemType(),item.getType()));
 		item = fCalendar.save(item);
 		
 		if(debug)
