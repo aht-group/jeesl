@@ -1,6 +1,11 @@
 package org.jeesl.factory.xml.module.calendar;
 
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.jeesl.controller.processor.TimeZoneProcessor;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
@@ -11,7 +16,6 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.module.calendar.Item;
 import org.jeesl.util.query.xml.module.XmlCalendarQuery;
 import org.slf4j.Logger;
@@ -58,11 +62,13 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 		if(q.isSetType()){xml.setType(xfType.build(item.getType()));}
 		
 		
-		if(tzp==null){xml.setStart(DateUtil.getXmlGc4D(item.getStartDate()));}
-		else{xml.setStart(DateUtil.getXmlGc4D(tzp.project(item.getStartDate())));}
+		logger.error("NYI XML Date conversion");
 		
-		if(tzp==null){xml.setEnd(DateUtil.getXmlGc4D(item.getEndDate()));}
-		else{xml.setEnd(DateUtil.getXmlGc4D(tzp.project(item.getEndDate())));}
+//		if(tzp==null){xml.setStart(DateUtil.getXmlGc4D(item.getStartDate()));}
+//		else{xml.setStart(DateUtil.getXmlGc4D(tzp.project(item.getStartDate())));}
+//		
+//		if(tzp==null){xml.setEnd(DateUtil.getXmlGc4D(item.getEndDate()));}
+//		else{xml.setEnd(DateUtil.getXmlGc4D(tzp.project(item.getEndDate())));}
 		
 		xml.setAllDay(item.isAllDay());
 		

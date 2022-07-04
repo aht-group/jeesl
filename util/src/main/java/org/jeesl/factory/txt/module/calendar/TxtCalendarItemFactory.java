@@ -32,7 +32,8 @@ public class TxtCalendarItemFactory<L extends JeeslLang, D extends JeeslDescript
 		StringBuffer sb = new StringBuffer();
 		
 		sb.append("[").append(item.getId()).append("]");
-		sb.append(" ").append(debug(item.getStartDate(),item.getEndDate()));
+//		sb.append(" ").append(debug(item.getStartDate(),item.getEndDate()));
+		sb.append("NYI");
 		
 		return sb.toString();
 	}

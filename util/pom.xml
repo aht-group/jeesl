@@ -131,13 +131,12 @@
             </exclusions>
         </dependency>
       
-        <!-- 
+        <!-- JSF -->
         <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <scope>provided</scope>
         </dependency>
-         -->
 		
 		<!-- Apache Commons -->
 	 	<dependency>

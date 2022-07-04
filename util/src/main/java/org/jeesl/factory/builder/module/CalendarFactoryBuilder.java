@@ -1,7 +1,7 @@
 package org.jeesl.factory.builder.module;
 
 import org.jeesl.api.facade.module.JeeslCalendarFacade;
-import org.jeesl.controller.handler.module.CalendarItemHandler;
+import org.jeesl.controller.handler.module.calendar.JeeslCalendarHandler;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.calendar.EjbTimeZoneFactory;
 import org.jeesl.factory.txt.module.calendar.TxtCalendarItemFactory;
@@ -40,5 +40,5 @@ public class CalendarFactoryBuilder<L extends JeeslLang,
 	
 	public TxtCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> txtItem() {return new TxtCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT>();}
 	
-	public CalendarItemHandler<L,D,CALENDAR,ZONE,CT,ITEM,IT> itemHandler(final JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar){return new CalendarItemHandler<L,D,CALENDAR,ZONE,CT,ITEM,IT>(fCalendar,this);}
+	public JeeslCalendarHandler<L,D,CALENDAR,ZONE,CT,ITEM,IT> itemHandler(final JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar){return new JeeslCalendarHandler<L,D,CALENDAR,ZONE,CT,ITEM,IT>(fCalendar,this);}
 }

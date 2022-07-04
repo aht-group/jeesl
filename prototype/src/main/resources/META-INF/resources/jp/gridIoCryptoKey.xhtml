@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+		
+	<composite:interface>
+		<composite:attribute name="bean" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sKeys" width="8">
+			<h:form id="fKeys">
+				<p:dataTable var="k" value="#{cc.attrs.bean.keys}" draggableRows="false"
+								selection="#{cc.attrs.bean.key}" selectionMode="single" rowKey="#{k.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="CryptoKey" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addKey()}" update=":#{cc.id}:grid"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectKey()}" update=":#{cc.id}:sKey"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="CryptoKey" code="record"/></f:facet>
+						<jp:outputDate value="#{k.record}" withSecond="true"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="CryptoKey" code="name"/></f:facet>
+						<h:outputText value="#{k.name}"/>
+					</p:column>
+			   	</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sKey" width="4">
+			<h:form id="fKey" rendered="#{not empty cc.attrs.bean.key}">
+				<p:panel styleClass="jeeslPanel">
+					<f:facet name="header"><j:pHeader entity="CryptoKey"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelKey()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveKey()}" update=":#{cc.id}:grid" />
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+						<jtp:label entity="CryptoKey" code="record"/>
+						<jp:outputDate value="#{cc.attrs.bean.key.record}" withSecond="true"/>
+						
+						<jtp:label entity="CryptoKey" code="name"/>
+						<p:inputText value="#{cc.attrs.bean.key.name}"/>
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>

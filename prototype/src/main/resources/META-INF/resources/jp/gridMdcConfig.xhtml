@@ -22,7 +22,7 @@
 								selection="#{cc.attrs.bean.activity}" selectionMode="single" rowKey="#{a.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="MdcCollection" code="listOf">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addActivity()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addActivity()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectActivity()}" update=":#{cc.id}:sActivity"/>
