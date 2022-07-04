@@ -15,8 +15,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CalendarFactoryBuilder<L extends JeeslLang,
-									D extends JeeslDescription,
+public class CalendarFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 									CALENDAR extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarTimeZone<L,D>,
 									CT extends JeeslCalendarType<L,D,CT,?>,
@@ -27,12 +26,14 @@ public class CalendarFactoryBuilder<L extends JeeslLang,
 	final static Logger logger = LoggerFactory.getLogger(CalendarFactoryBuilder.class);
 	
 	private final Class<ZONE> cZone; public Class<ZONE> getClassZone()	{return cZone;}
+	private final Class<ITEM> cItem; public Class<ITEM> getClassItem()	{return cItem;}
 	private final Class<IT> cItemType; public Class<IT> getClassItemType()	{return cItemType;}
 
-	public CalendarFactoryBuilder(final Class<L> cL,final Class<D> cD,final Class<ZONE> cZone, final Class<IT> cItemType)
+	public CalendarFactoryBuilder(final Class<L> cL,final Class<D> cD,final Class<ZONE> cZone, final Class<ITEM> cItem, final Class<IT> cItemType)
 	{       
 		super(cL,cD);
         this.cZone = cZone;
+        this.cItem=cItem;
         this.cItemType = cItemType;
 	}
 	

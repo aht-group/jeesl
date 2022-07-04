@@ -3,39 +3,39 @@ package org.jeesl.factory.json.system.status;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.json.system.status.JsonStatus;
+import org.jeesl.model.json.system.status.JsonSector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonStatusFactory<L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>>
+public class JsonSectorFactory<L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>>
 {
-	final static Logger logger = LoggerFactory.getLogger(JsonStatusFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(JsonSectorFactory.class);
 	
 	private final String localeCode;
-	private final JsonStatus q;
+	private final JsonSector q;
 	
-	public static <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>> JsonStatusFactory<L,D,S> instance(String localeCode, JsonStatus q)
+	public static <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>> JsonSectorFactory<L,D,S> instance(String localeCode, JsonSector q)
 	{
-		return new JsonStatusFactory<>(localeCode,q);
+		return new JsonSectorFactory<>(localeCode,q);
 	}
 	
-	public JsonStatusFactory(String localeCode, JsonStatus q)
+	public JsonSectorFactory(String localeCode, JsonSector q)
 	{
 		this.localeCode=localeCode;
 		this.q=q;
 	}
 		
-	public static JsonStatus build(String code, String label)
+	public static JsonSector build(String code, String label)
 	{
-		JsonStatus json = new JsonStatus();
+		JsonSector json = new JsonSector();
 		json.setCode(code);
 		json.setLabel(label);
 		return json;
 	}
 	
-	public JsonStatus build(S ejb)
+	public JsonSector build(S ejb)
 	{
-		JsonStatus json = new JsonStatus();
+		JsonSector json = new JsonSector();
 	
 		if(q.getId()!=null){json.setId(ejb.getId());}
 		if(q.isSetCode()){json.setCode(ejb.getCode());}

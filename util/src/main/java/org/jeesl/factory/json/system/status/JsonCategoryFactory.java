@@ -14,6 +14,10 @@ public class JsonCategoryFactory<L extends JeeslLang, D extends JeeslDescription
 	private final String localeCode;
 	private final JsonCategory q;
 	
+	public static <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>> JsonCategoryFactory<L,D,S> instance(String localeCode, JsonCategory q)
+	{
+		return new JsonCategoryFactory<>(localeCode,q);
+	}
 	public JsonCategoryFactory(String localeCode, JsonCategory q)
 	{
 		this.localeCode=localeCode;

@@ -1,5 +1,6 @@
 package org.jeesl.controller.provider;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -121,5 +122,11 @@ public class FacadeTranslationProvider <L extends JeeslLang, D extends JeeslDesc
 	public void setLanguages(List<LOC> locales) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String toDate(String localeCode, LocalDate record) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

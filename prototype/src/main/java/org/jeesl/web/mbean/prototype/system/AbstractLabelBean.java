@@ -1,6 +1,7 @@
 package org.jeesl.web.mbean.prototype.system;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -173,12 +174,19 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		logger.warn("NYI");
 		return null;
 	}
-	@Override
-	public String toDate(String localeCode, Date record)
+	
+	@Override public String toDate(String localeCode, LocalDate record)
 	{
 		logger.warn("NYI");
 		return null;
 	}
+	
+	@Override public String toDate(String localeCode, Date record)
+	{
+		logger.warn("NYI");
+		return null;
+	}
+	
 	@Override
 	public String toTime(String localeCode, Date record)
 	{

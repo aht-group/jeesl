@@ -65,7 +65,7 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 		if(item.isAllDay())
 		{
 			item.setLocalStart(ldStart.atStartOfDay());
-			item.setLocalEnd(ldStart.atStartOfDay());
+			item.setLocalEnd(ldEnd.atStartOfDay());
 		}
 		
 		item = fCalendar.save(item);

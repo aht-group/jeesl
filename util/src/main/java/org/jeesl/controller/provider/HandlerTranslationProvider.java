@@ -3,6 +3,7 @@ package org.jeesl.controller.provider;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -12,9 +13,9 @@ import java.util.Set;
 import org.jeesl.controller.handler.system.TranslationHandler;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
 import org.jeesl.interfaces.controller.handler.JeeslTranslationProvider;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionMissingLabel;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionMissingLabel;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -79,6 +80,12 @@ public class HandlerTranslationProvider <L extends JeeslLang, D extends JeeslDes
 
 	@Override public boolean hasLocale(String localeCode) {return setLocaleCodes.contains(localeCode);}
 
+	@Override public String toDate(String locleCode, LocalDate record)
+	{
+		if(record==null){return "";}
+		return sdfDate.format(record);
+	}
+	
 	@Override public String toDate(String locleCode, Date record)
 	{
 		if(record==null){return "";}
