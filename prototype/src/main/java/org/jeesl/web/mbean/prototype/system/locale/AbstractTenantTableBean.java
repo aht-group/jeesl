@@ -42,7 +42,6 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithStyle;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithSymbol;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
-import org.jeesl.interfaces.model.with.system.graphic.EjbWithImageAlt;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;

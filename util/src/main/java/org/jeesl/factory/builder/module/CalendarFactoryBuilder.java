@@ -3,6 +3,7 @@ package org.jeesl.factory.builder.module;
 import org.jeesl.api.facade.module.JeeslCalendarFacade;
 import org.jeesl.controller.handler.module.calendar.JeeslCalendarHandler;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
+import org.jeesl.factory.ejb.module.calendar.EjbCalItemFactory;
 import org.jeesl.factory.ejb.module.calendar.EjbTimeZoneFactory;
 import org.jeesl.factory.txt.module.calendar.TxtCalendarItemFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
@@ -38,6 +39,7 @@ public class CalendarFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	}
 	
 	public EjbTimeZoneFactory<ZONE,ITEM> ejbZone(){return new EjbTimeZoneFactory<>(cZone);}
+	public EjbCalItemFactory<ZONE,ITEM,IT> ejbItem(){return new EjbCalItemFactory<>(cZone,cItemType);}
 	
 	public TxtCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> txtItem() {return new TxtCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT>();}
 	
