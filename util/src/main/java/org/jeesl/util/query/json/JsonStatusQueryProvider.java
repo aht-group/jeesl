@@ -9,12 +9,13 @@ import org.jeesl.model.json.system.status.JsonWorkspace;
 
 public class JsonStatusQueryProvider
 {
-	public static JsonStatus statusExport()
+	public static JsonStatus statusIdCodeLabel()
 	{				
-		JsonStatus xml = new JsonStatus();
-		xml.setId(Long.valueOf(0));
-		xml.setCode("");
-		return xml;
+		JsonStatus json = new JsonStatus();
+		json.setId(Long.valueOf(0));
+		json.setCode("");
+		json.setLabel("");
+		return json;
 	}
 	
 	public static JsonCategory categoryCodeLabel()
@@ -49,6 +50,15 @@ public class JsonStatusQueryProvider
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;
+	}
+	
+	public static JsonSector sectorIdCodeLabel()
+	{				
+		JsonSector json = new JsonSector();
+		json.setId(Long.valueOf(0));
+		json.setCode("");
+		json.setLabel("");
+		return json;
 	}
 	
 	public static JsonType typeCode()

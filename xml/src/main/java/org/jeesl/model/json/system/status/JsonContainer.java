@@ -16,15 +16,22 @@ public class JsonContainer implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	public JsonContainer() {}
+	
 	@JsonProperty("status")
 	private List<JsonStatus> status;
-	public List<JsonStatus> getStatus() {return status;} //{if(status==null){status = new ArrayList<JsonStatus>();}return status;}
+	public List<JsonStatus> getStatus() {return status;}
 	public void setStatus(List<JsonStatus> status) {this.status = status;}
 	
 	@JsonProperty("categories")
 	private List<JsonCategory> categories;
 	public List<JsonCategory> getCategories() {return categories;}
 	public void setCategories(List<JsonCategory> categories) {this.categories = categories;}
+	
+	@JsonProperty("sectors")
+	private List<JsonSector> sectors;
+	public List<JsonSector> getSectors() {return sectors;}
+	public void setSectors(List<JsonSector> sectors) {this.sectors = sectors;}
 	
 	@JsonProperty("translations")
 	private List<JsonTranslation> translations;

@@ -65,7 +65,7 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
         CriteriaQuery<OWNER> select = cQ.select(owner);
 	    select.where(cB.equal(pDiary,diary));
 
-		TypedQuery<OWNER> q = em.createQuery(cQ); 
+		TypedQuery<OWNER> q = em.createQuery(cQ);
 		try	{return q.getSingleResult();}
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+cOwner.getSimpleName()+" found for code:"+owner.toString());}
 	}

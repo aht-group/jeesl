@@ -173,7 +173,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		this.cCorrelation=cCorrelation;
 	
 		String localeCode = "en";
-		jfContainer = new JsonContainerFactory(localeCode,JsonStatusQueryProvider.statusExport());
+		jfContainer = new JsonContainerFactory(localeCode,JsonStatusQueryProvider.statusIdCodeLabel());
 		jfAnswer = fbCore.jsonAnswer(localeCode,JsonSurveyQueryProvider.answers());
 		
 		xfContainer = new XmlContainerFactory(XmlStatusQuery.get(XmlStatusQuery.Key.StatusExport).getStatus());

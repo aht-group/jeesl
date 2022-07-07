@@ -3,12 +3,14 @@ package org.jeesl.api.facade.module;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
+import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 
@@ -20,7 +22,9 @@ public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescri
 										IT extends JeeslCalendarItemType<L,D,?,IT,?>
 										>
 			extends JeeslFacade
-{	
+{
+	<OWNER extends JeeslWithCalendar<CALENDAR>> CALENDAR fCalendar(Class<OWNER> cOwner, OWNER owner) throws JeeslNotFoundException;
+	
 	List<ITEM> fCalendarItems(CALENDAR calendar, LocalDateTime from, LocalDateTime to);
 	List<ITEM> fCalendarItems(List<CALENDAR> calendars, LocalDateTime from, LocalDateTime to);
 }

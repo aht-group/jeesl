@@ -1,26 +1,30 @@
 package org.jeesl.controller.facade.module;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.JeeslCalendarFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.builder.module.CalendarFactoryBuilder;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
+import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -39,18 +43,34 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslCalendarFacadeBean.class);
+
 	
-	private final Class<ITEM> cItem;
+	private final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar;
 	
-	public JeeslCalendarFacadeBean(EntityManager em, final Class<ITEM> cItem)
+	public JeeslCalendarFacadeBean(EntityManager em, CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar)
 	{
 		super(em);
-		this.cItem=cItem;
+		this.fbCalendar=fbCalendar;
+	}
+	
+	@Override public <OWNER extends JeeslWithCalendar<CALENDAR>> CALENDAR fCalendar(Class<OWNER> cOwner, OWNER owner) throws JeeslNotFoundException
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<CALENDAR> cQ = cB.createQuery(fbCalendar.getClassCalendar());
+		Root<OWNER> root = cQ.from(cOwner);
+		
+		Path<CALENDAR> pathCalendar = root.get("calendar");
+		Path<Long> pId = root.get("id");
+		
+		cQ.where(cB.equal(pId,owner.getId()));
+		cQ.select(pathCalendar);
+		
+		try	{return em.createQuery(cQ).getSingleResult();}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No Graphic found for status.id"+owner);}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple Results for status.id"+owner);}
 	}
 
-	//JEESL Calendar
-	@Override
-	public List<ITEM> fCalendarItems(CALENDAR calendar, LocalDateTime from, LocalDateTime to)
+	@Override public List<ITEM> fCalendarItems(CALENDAR calendar, LocalDateTime from, LocalDateTime to)
 	{
 		List<CALENDAR> calendars = new ArrayList<CALENDAR>();
 		calendars.add(calendar);
@@ -67,8 +87,8 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		if(calendars==null || calendars.isEmpty()){return new ArrayList<ITEM>();}
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<ITEM> cQ = cB.createQuery(cItem);
-		Root<ITEM> root = cQ.from(cItem);
+		CriteriaQuery<ITEM> cQ = cB.createQuery(fbCalendar.getClassItem());
+		Root<ITEM> root = cQ.from(fbCalendar.getClassItem());
 		
 		Expression<LocalDateTime> dStart = root.get(JeeslCalendarItem.Attributes.utcStart.toString());
 		Expression<LocalDateTime> dEnd   = root.get(JeeslCalendarItem.Attributes.utcEnd.toString());
