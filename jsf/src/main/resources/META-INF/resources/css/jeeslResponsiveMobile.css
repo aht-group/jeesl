@@ -280,6 +280,11 @@ html, body, .ui-widget {
         display: inline-block; }
       .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-selected-items {
         display: none; }
+    .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list:before, .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list:after {
+      content: '';
+      display: list-item;
+      height: 15px;
+      width: 100%; }
   .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-subtitle {
     line-height: 84px; }
   .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item:not(:last-child) .jeesl-menu-bar-button {
@@ -355,6 +360,11 @@ html, body, .ui-widget {
         display: inline-block; }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-selected-items {
         display: none; }
+    .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list:before, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list:after {
+      content: '';
+      display: list-item;
+      height: 15px;
+      width: 100%; }
   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item {
     height: 84px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item.jeesl-menu-bar-search {

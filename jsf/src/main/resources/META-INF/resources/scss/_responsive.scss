@@ -36,7 +36,6 @@ $enable-pointer-cursor-for-buttons: true;
 	    position: absolute;
 	    right: 0;
 	    text-align: right;
-	    transition: opacity .2s 0s, visibility 0s .2s;
 	    z-index: $zindex;
 	    visibility: hidden;
 		
@@ -206,6 +205,12 @@ $enable-pointer-cursor-for-buttons: true;
 			@media (max-width: 768px) {
 				position: initial;
 			}
+			
+			&:hover {
+				.jeesl-dropdown-list {
+					transition: opacity .2s, visibility 0s;
+				}
+			}
 
 			&.jeesl-active.ui-commandlink {
 				text-decoration: none;
@@ -279,6 +284,7 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.jeesl-dropdown-list {
 				pointer-events: all;
+	    		transition: opacity .2s 0s, visibility 0s .2s;
 			}
 
 			.ui-inputgroup {
@@ -296,11 +302,13 @@ $enable-pointer-cursor-for-buttons: true;
 					
 					overflow: hidden;
 					
-					&:before, &:after {
-						content: '';
-					    display: list-item;
-					    height: 15px;
-					    width: 100%;
+					@media (max-width: 768px) {
+						&:before, &:after {
+							content: '';
+						    display: list-item;
+						    height: 15px;
+						    width: 100%;
+						}
 					}
 					
 					&:before {
@@ -704,6 +712,68 @@ body, .ui-widget {
 
 #fStatusBarHelp .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item:after {
 	@include jeesl-sb-separator;
+}
+
+.jeesl-footer {
+	@include jeesl-menu-bar;
+	
+	color: $body-foreground;
+	
+	.jeesl-menu-bar-list {
+		.jeesl-menu-bar-item {
+			@include jeesl-sb-dropdown($white-100, $medium-colour, $dark-colour, $dark-colour);
+			
+			height: $sb-element-height;
+			
+			&:hover {
+				.jeesl-menu-bar-button {
+					background: $dark-colour;
+					
+					&:not(.jeesl-menu-bar-dropdown).jeesl-active {
+						background: $bright-colour;
+					}
+						
+					&.jeesl-disabled {
+						background: transparent;
+					}
+				}
+				
+				.jeesl-dropdown-list {
+					opacity: 1;
+					visibility: visible;
+				}
+			}
+			
+			.jeesl-menu-bar-button {
+				padding: $sb-vertical-padding 0;
+				
+				.jeesl-menu-bar-button-icon {
+					padding: 0 $sb-vertical-padding;
+				}
+			}
+				
+			.jeesl-dropdown-list {
+				bottom: 100%;
+				
+				.jeesl-dropdown-item {
+					.jeesl-dropdown-item-label {
+						display: flex;
+						flex-direction: row-reverse;
+						height: $ls-element-height;
+						padding: $ls-element-padding;
+						
+						.jeesl-dropdown-item-label-icon {
+							margin: 0;
+						
+							&:not(:last-child) {
+								margin-left: $half-spacing;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 .jeesl-status-bar {
