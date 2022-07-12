@@ -6,6 +6,7 @@ import java.io.Serializable;
 public interface JeeslLogger extends Serializable
 {
 	String start(String log);
+	void reset();
 	
 	String milestone(String milestone);
 	String milestone(String milestone, String message);

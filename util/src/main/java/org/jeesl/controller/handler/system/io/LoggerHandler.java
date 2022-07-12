@@ -70,11 +70,12 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		mapCount = new HashMap<>();
 	}
 	
-	private void reset()
+	@Override public void reset()
 	{
 		milestones.clear();
 		loops.clear();
 		mapLoopInstant.clear();
+		mapCount.clear();
 	}
 	
 	@Override public String start(String log) {return start(log,null,null);}

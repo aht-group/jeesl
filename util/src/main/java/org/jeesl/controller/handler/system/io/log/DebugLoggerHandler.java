@@ -19,6 +19,7 @@ public class DebugLoggerHandler implements JeeslLogger
 	}
 	
 	@Override public String start(String log) {return log;}
+	@Override public void reset() {}
 	
 	@Override public String milestone(String milestone) {return milestone;}
 	@Override public String milestone(String milestone, String message) {return milestone;}
@@ -30,5 +31,6 @@ public class DebugLoggerHandler implements JeeslLogger
 	@Override public void ofxMilestones(OutputStream os) {}
 
 	@Override public void ofxLoops(OutputStream os) {}
+	
 	
 }
