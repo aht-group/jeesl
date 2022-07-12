@@ -7,9 +7,12 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 
-public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser>
-						extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable
+public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser,
+									STATUS extends JeeslIoCryptoKeyStatus<?,?,STATUS,?>>
+						extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
+									JeeslWithStatus<STATUS>
 								
 {	
 	public enum Attributes{user}
@@ -19,4 +22,16 @@ public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser>
 	
 	LocalDateTime getRecord();
 	void setRecord(LocalDateTime record);
+	
+	String getPwdSalt();
+	void setPwdSalt(String pwdSalt);
+	
+	String getMemoIv();
+	void setMemoIv(String memoIv);
+	
+	String getMemoText();
+	void setMemoText(String memoText);
+	
+	String getMemoCypher();
+	void setMemoCypher(String memoCypher);
 }

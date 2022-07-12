@@ -45,7 +45,7 @@ public class CalendarFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	
 	public EjbCalCalendarFactory<CAL,ZONE,CT> ejbCalendar(){return new EjbCalCalendarFactory<>(cCalendar,cZone,cCalType);}
 	public EjbTimeZoneFactory<ZONE,ITEM> ejbZone(){return new EjbTimeZoneFactory<>(cZone);}
-	public EjbCalItemFactory<ZONE,ITEM,IT> ejbItem(){return new EjbCalItemFactory<>(cZone,cItemType);}
+	public EjbCalItemFactory<CAL,ZONE,ITEM,IT> ejbItem(){return new EjbCalItemFactory<>(cZone,cItem,cItemType);}
 	
 	public TxtCalendarItemFactory<L,D,CAL,ZONE,CT,ITEM,IT> txtItem() {return new TxtCalendarItemFactory<L,D,CAL,ZONE,CT,ITEM,IT>();}
 	

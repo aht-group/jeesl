@@ -18,6 +18,13 @@ public class JsonStatusQueryProvider
 		return json;
 	}
 	
+	public static JsonCategory categoryId()
+	{				
+		JsonCategory json = new JsonCategory();
+		json.setId(Long.valueOf(0));
+		return json;
+	}
+	
 	public static JsonCategory categoryCodeLabel()
 	{				
 		JsonCategory json = new JsonCategory();
@@ -35,12 +42,26 @@ public class JsonStatusQueryProvider
 		return json;
 	}
 	
+	public static JsonStatus statusId()
+	{				
+		JsonStatus xml = new JsonStatus();
+		xml.setId(Long.valueOf(0));
+		return xml;
+	}
+	
 	public static JsonStatus statusLabel()
 	{				
 		JsonStatus xml = new JsonStatus();
 //		xml.setId(Long.valueOf(0));
 		xml.setCode("");
 		xml.setLabel("");
+		return xml;
+	}
+	
+	public static JsonSector sectorId()
+	{				
+		JsonSector xml = new JsonSector();
+		xml.setId(Long.valueOf(0));
 		return xml;
 	}
 	

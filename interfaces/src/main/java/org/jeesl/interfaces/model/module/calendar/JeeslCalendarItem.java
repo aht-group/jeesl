@@ -5,11 +5,10 @@ import java.time.LocalDateTime;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.with.date.jt.JeeslWithTimeline;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslCalendarItem <CALENDAR extends JeeslCalendar<ZONE,?>,
+public interface JeeslCalendarItem <CAL extends JeeslCalendar<ZONE,?>,
 									ZONE extends JeeslCalendarTimeZone<?,?>,
 									IT extends JeeslCalendarItemType<?,?,?,IT,?>
 									>
@@ -18,6 +17,9 @@ public interface JeeslCalendarItem <CALENDAR extends JeeslCalendar<ZONE,?>,
 //					,JeeslWithTimeline
 {
 	public enum Attributes {calendar,utcStart,utcEnd}
+	
+	CAL getCalendar();
+	void setCalendar(CAL calendar);
 	
 	IT getType();
 	void setType(IT type);
@@ -39,6 +41,9 @@ public interface JeeslCalendarItem <CALENDAR extends JeeslCalendar<ZONE,?>,
 	
 	LocalDateTime getUtcEnd();
 	void setUtcEnd(LocalDateTime utcEnd);
+	
+	String getTitle();
+	void setTitle(String title);
 	
 	public boolean isAllDay();
 	public void setAllDay(boolean allDay);

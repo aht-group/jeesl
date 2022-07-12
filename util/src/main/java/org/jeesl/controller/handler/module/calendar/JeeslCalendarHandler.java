@@ -7,6 +7,7 @@ import org.jeesl.api.facade.module.JeeslCalendarFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.CalendarFactoryBuilder;
+import org.jeesl.factory.ejb.module.calendar.EjbCalItemFactory;
 import org.jeesl.factory.txt.module.calendar.TxtCalendarItemFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
@@ -32,7 +33,9 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
 	protected final JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar;
-	private final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar;
+	protected final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar;
+	
+	protected EjbCalItemFactory<CALENDAR,ZONE,ITEM,IT> efItem;
 	
 	private final TxtCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> tfItem;
 	
@@ -52,6 +55,12 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 		debugOnInfo = false;
 		
 		tfItem=fbCalendar.txtItem();
+		efItem = fbCalendar.ejbItem();
+	}
+	
+	public void cancelItem()
+	{
+		item=null;
 	}
 	
 	public void saveItem() throws JeeslConstraintViolationException, JeeslLockingException
