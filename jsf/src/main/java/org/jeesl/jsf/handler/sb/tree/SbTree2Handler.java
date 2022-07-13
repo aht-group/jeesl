@@ -76,13 +76,13 @@ public class SbTree2Handler <L1 extends EjbWithId, L2 extends EjbWithId> extends
 		{
 			L2 ejb = new ArrayList<L2>(allowChild2).get(0);
 			if(debugOnInfo) {logger.info("selectSecurity2 "+ejb.getClass().getSimpleName()+" "+ejb.toString());}
-			cascade2(ejb,TreeUpdateParameter.build(true,true,true,true,true));
+			cascade2(ejb,TreeUpdateParameter.build(true,true,true,true));
 		}
 		else {selectSecurity1();}
 	}
 	
 	// Selection from UI and cascading of event
-	public void uiSelect2(L2 ejb) {cascade2(ejb,TreeUpdateParameter.build(false,true,true,true,true));}
+	public void uiSelect2(L2 ejb) {cascade2(ejb,TreeUpdateParameter.build(false,true,true,true));}
 	protected void cascade2(L2 ejb, TreeUpdateParameter tup)
 	{
 		if(debugOnInfo) {logger.info("cascade2 "+ejb.getClass().getSimpleName()+": ["+ejb.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}

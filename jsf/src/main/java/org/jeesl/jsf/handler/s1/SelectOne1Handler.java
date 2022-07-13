@@ -68,14 +68,14 @@ public class SelectOne1Handler <L1 extends EjbWithId> implements JeeslSelectOneT
 	}
 		
 	// Selection from UI and cascading of event
-	public void uiSelect1() {cascade1(TreeUpdateParameter.build(false,true,true,true,true));}
-	protected void cascade1(TreeUpdateParameter tup)
+	public void uiSelect1() {cascade1(l1, TreeUpdateParameter.build(false,true,true,true));}
+	protected void cascade1(L1 ejb, TreeUpdateParameter tup)
 	{
-		if(debugOnInfo) {logger.info("cascade1 "+l1.getClass().getSimpleName()+": ["+l1.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
+		if(debugOnInfo) {logger.info("cascade1 "+ejb.getClass().getSimpleName()+": ["+l1.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
 
 		clearL2List();
 			
-		if(tup.isFillParent()) {fill1List();}
+		if(tup.isFillParent()) {}
 		if(tup.isFillChilds()) {fillL2List();}
 		if(tup.isSelectChild()) {selectDefaultL2(tup.copy().callback(false).fillParent(false));}
 		if(tup.isCallback() && callback!=null) {callback.s1TreeSelected(this);}

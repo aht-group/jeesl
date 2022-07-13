@@ -81,13 +81,13 @@ public class SbTree3Handler <L1 extends EjbWithId, L2 extends EjbWithId, L3 exte
 		{
 			L3 ejb = new ArrayList<L3>(allowChild3).get(0);
 			if(debugOnInfo) {logger.info("selectSecurity3 "+ejb.getClass().getSimpleName()+" "+ejb.toString());}
-			cascade3(ejb,TreeUpdateParameter.build(true,true,true,true,true));
+			cascade3(ejb,TreeUpdateParameter.build(true,true,true,true));
 		}
 		else {selectSecurity2();}
 	}
 	
 	// Selection from UI and cascading of event
-	public void uiSelect3(L3 ejb) {cascade3(ejb,TreeUpdateParameter.build(false,true,true,true,true));}
+	public void uiSelect3(L3 ejb) {cascade3(ejb,TreeUpdateParameter.build(false,true,true,true));}
 	protected void cascade3(L3 ejb, TreeUpdateParameter tup)
 	{
 		if(debugOnInfo) {logger.info("cascade3 "+ejb.getClass().getSimpleName()+": ["+ejb.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}

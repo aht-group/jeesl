@@ -23,18 +23,17 @@ public class TreeUpdateParameter implements Cloneable
 	public boolean isCallback() {return callback;}
 	public void setCallback(boolean callback) {this.callback = callback;}
 	
-	private boolean fireEvent;
-	public boolean isFireEvent() {return fireEvent;}
-	public void setFireEvent(boolean fireEvent) {this.fireEvent = fireEvent;}
+//	private boolean fireEvent;
+//	public boolean isFireEvent() {return fireEvent;}
+//	public void setFireEvent(boolean fireEvent) {this.fireEvent = fireEvent;}
 	
-	public static TreeUpdateParameter build(boolean fillParent, boolean fillChilds, boolean selectChild, boolean callback, boolean fireEvent)
+	public static TreeUpdateParameter build(boolean fillParent, boolean fillChilds, boolean selectChild, boolean callback)
 	{
 		TreeUpdateParameter hlup = new TreeUpdateParameter();
 		hlup.setFillParent(fillParent);
 		hlup.setFillChilds(fillChilds);
 		hlup.setSelectChild(selectChild);
 		hlup.setCallback(callback);
-		hlup.setFireEvent(fireEvent);
 		return hlup;
 	}
 	
@@ -45,7 +44,6 @@ public class TreeUpdateParameter implements Cloneable
 		next.setFillChilds(this.isFillChilds());
 		next.setSelectChild(this.isSelectChild());
 		next.setCallback(this.isCallback());
-		next.setFireEvent(this.isFireEvent());
 		return next;
 	}
 	
@@ -67,11 +65,6 @@ public class TreeUpdateParameter implements Cloneable
 		return this;
 	}
 	
-	public TreeUpdateParameter fireEvent(boolean value)
-	{
-		setFireEvent(value);
-		return this;
-	}
 	
 	public String toString()
 	{
@@ -80,7 +73,6 @@ public class TreeUpdateParameter implements Cloneable
 		sb.append(" fillChilds:").append(fillChilds);
 		sb.append(" selectChild:").append(selectChild);
 		sb.append(" callback:").append(callback);
-		sb.append(" fireEvent:").append(fireEvent);
 		return sb.toString();
 	}
 }

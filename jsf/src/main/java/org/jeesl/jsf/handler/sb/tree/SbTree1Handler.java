@@ -92,12 +92,12 @@ public class SbTree1Handler <L1 extends EjbWithId>
 		{
 			L1 ejb = new ArrayList<L1>(allowChild1).get(0);
 			if(debugOnInfo) {logger.info("selectSecurity1 "+ejb.getClass().getSimpleName()+" "+ejb.toString());}
-			cascade1(ejb,TreeUpdateParameter.build(true,true,true,true,true));
+			cascade1(ejb,TreeUpdateParameter.build(true,true,true,true));
 		}
 	}
 	
 	// Selection from UI and cascading of event
-	public void uiSelect1(L1 province) {cascade1(province,TreeUpdateParameter.build(false,true,true,true,true));}
+	public void uiSelect1(L1 province) {cascade1(province,TreeUpdateParameter.build(false,true,true,true));}
 	protected void cascade1(L1 ejb, TreeUpdateParameter tup)
 	{
 		if(debugOnInfo) {logger.info("cascade1 "+ejb.getClass().getSimpleName()+": ["+ejb.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
@@ -109,7 +109,6 @@ public class SbTree1Handler <L1 extends EjbWithId>
 		if(tup.isFillChilds()) {fillL2List();}
 		if(tup.isSelectChild()) {selectDefaultL2(tup.copy().callback(false).fillParent(false));}
 		if(tup.isCallback() && callback!=null) {callback.sbTreeSelected();}
-//		if(tup.isFireEvent()) {fireEvent();}
 	}
 	
 	private void fillThis()
