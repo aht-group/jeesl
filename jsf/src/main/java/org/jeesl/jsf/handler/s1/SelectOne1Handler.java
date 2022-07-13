@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.jeesl.controller.handler.tree.TreeUpdateParameter;
 import org.jeesl.interfaces.controller.handler.tree.bean.JeeslS1TreeBean;
-import org.jeesl.interfaces.controller.handler.tree.bean.JeeslTreeSelected;
+import org.jeesl.interfaces.controller.handler.tree.bean.JeeslSbTreeBean;
 import org.jeesl.interfaces.controller.handler.tree.cache.JeeslTree1Cache;
 import org.jeesl.interfaces.controller.handler.tree.implementation.JeeslSelectOneTreeHandler;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -66,12 +66,20 @@ public class SelectOne1Handler <L1 extends EjbWithId> implements JeeslSelectOneT
 			
 		}
 	}
+	
+	protected void selectDefaultL1(TreeUpdateParameter tup)
+	{
+		if(debugOnInfo) {logger.info("selectDefaultL1 "+tup.toString());}
+		reset1();
+		if(!list1.isEmpty()) {cascade1(list1.get(0),tup);}
+	}
 		
 	// Selection from UI and cascading of event
 	public void uiSelect1() {cascade1(l1, TreeUpdateParameter.build(false,true,true,true));}
 	protected void cascade1(L1 ejb, TreeUpdateParameter tup)
 	{
-		if(debugOnInfo) {logger.info("cascade1 "+ejb.getClass().getSimpleName()+": ["+l1.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
+		l1 = ejb;
+		if(debugOnInfo) {logger.info("cascade1 "+ejb.getClass().getSimpleName()+": ["+ejb.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
 
 		clearL2List();
 			
@@ -100,7 +108,7 @@ public class SelectOne1Handler <L1 extends EjbWithId> implements JeeslSelectOneT
 	protected boolean evaluateToAddChild(EjbWithId ejb,
 											boolean isCascade,			// element is used in the cascade
 											boolean isAllowed,			// element is explicitly Allowed
-											boolean isInPath,		// element is in path
+											boolean isInPath,			// element is in path
 											boolean isParentsAllowed,	// element.parents is explicitly allowed
 											boolean isNotIgnore			// element is not on ignore list
 											)
@@ -110,11 +118,11 @@ public class SelectOne1Handler <L1 extends EjbWithId> implements JeeslSelectOneT
 		if(debugOnInfo)
 		{
 			logger.info("\t"+ejb.toString()+" Final:"+result);
-			logger.info("\t\tisCascade:"+isCascade);
-			logger.info("\t\tisAllow:"+isAllowed);
-			logger.info("\t\tisInPath:"+isInPath);
-			logger.info("\t\tisParentsAllowed:"+isParentsAllowed);
-			logger.info("\t\tisNotIgnore2:"+isNotIgnore);
+//			logger.info("\t\tisCascade:"+isCascade);
+//			logger.info("\t\tisAllow:"+isAllowed);
+//			logger.info("\t\tisInPath:"+isInPath);
+//			logger.info("\t\tisParentsAllowed:"+isParentsAllowed);
+//			logger.info("\t\tisNotIgnore2:"+isNotIgnore);
 		}
 		return result;
 	}

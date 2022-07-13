@@ -28,7 +28,7 @@ public class SelectOne2Handler <L1 extends EjbWithId, L2 extends EjbWithId> exte
 	protected final List<L2> list2; public List<L2> getList2() {return list2;}
 	
 	protected L2 l2; public L2 getL2() {return l2;} public void setL2(L2 l2) {this.l2 = l2;}
-	protected String xpath2; public String getXpath2() {return xpath1;}
+	protected String xpath2; public String getXpath2() {return xpath2;}
 	
 	public SelectOne2Handler(JeeslS1TreeBean callback, JeeslTree2Cache<L1,L2> cache2)
 	{
@@ -58,18 +58,6 @@ public class SelectOne2Handler <L1 extends EjbWithId, L2 extends EjbWithId> exte
 		}
 	}
 		
-	// Selection from UI and cascading of event
-	public void uiSelect2() {cascade2(l2,TreeUpdateParameter.build(false,true,true,true));}
-	protected void cascade2(L2 ejb, TreeUpdateParameter tup)
-	{
-		if(debugOnInfo) {logger.info("cascade1 "+ejb.getClass().getSimpleName()+": ["+l1.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
-		clearL3List();
-		if(tup.isFillParent()) {cascade1(getParentForL2(l2),tup.copy().selectChild(false).callback(false));}
-		if(tup.isFillChilds()) {fillL3List();}
-		if(tup.isSelectChild()) {selectDefaultL3(tup.copy().fillParent(false).callback(false));}
-		if(tup.isCallback() && callback!=null) {callback.s1TreeSelected(this);}
-	}
-	
 	@Override protected void selectDefaultL2(TreeUpdateParameter tup)
 	{
 		if(debugOnInfo) {logger.info("selectDefaultL2 "+tup.toString());}
@@ -77,13 +65,29 @@ public class SelectOne2Handler <L1 extends EjbWithId, L2 extends EjbWithId> exte
 		if(!list2.isEmpty()) {cascade2(list2.get(0),tup);}
 	}
 	
+	public void uiSelect2() {cascade2(l2,TreeUpdateParameter.build(false,true,true,true));}
+	protected void cascade2(L2 ejb, TreeUpdateParameter tup)
+	{
+		l2 = ejb;
+		if(debugOnInfo) {logger.info("cascade2 "+ejb.getClass().getSimpleName()+": ["+l1.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
+		
+		clearL3List();
+		
+		if(tup.isFillParent()) {cascade1(getParentForL2(l2),tup.copy().selectChild(false).callback(false));}
+		if(tup.isFillChilds()) {fillL3List();}
+		if(tup.isSelectChild()) {selectDefaultL3(tup.copy().fillParent(false).callback(false));}
+		if(tup.isCallback() && callback!=null) {callback.s1TreeSelected(this);}
+	}
+	
 	@Override protected void fillL2List()
 	{
+		
 		List<L2> childs = cache2.getCachedChildsForL1(l1);
 		if(debugOnInfo) {logger.info("Filling Level-2-List, Checking "+childs.size()+" elements");}
+		list2.clear();
 		for(L2 ejb : childs)
 		{
-			L1 parent = getParentForL2(ejb);
+//			L1 parent = getParentForL2(ejb);
 			boolean isCascade = ejb.equals(l2);
 			boolean isAllow = true;//allowChild2.contains(ejb);
 			boolean isInPath = true;//allowPath2.contains(ejb);
@@ -95,9 +99,7 @@ public class SelectOne2Handler <L1 extends EjbWithId, L2 extends EjbWithId> exte
 	
 	//Methods need to be implemented in next Level
 	protected L1 getParentForL2(L2 l2) {logger.warn("getParentForL2 "+SelectOne1Handler.warnMessageOverrideImplementation);return null;}
-	protected void clearL3List() {logger.warn(warnMessageOverrideNextLevel);}
-	protected void fillL3List() {logger.warn(warnMessageOverrideNextLevel);}
-	protected void selectDefaultL3(TreeUpdateParameter tup) {logger.warn(warnMessageOverrideNextLevel);}
-	
-	
+	protected void clearL3List() {logger.warn("clearL3List "+warnMessageOverrideNextLevel);}
+	protected void fillL3List() {logger.warn("fillL3List "+warnMessageOverrideNextLevel);}
+	protected void selectDefaultL3(TreeUpdateParameter tup) {logger.warn("selectDefaultL3 "+warnMessageOverrideNextLevel);}
 }

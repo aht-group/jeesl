@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.jeesl.controller.handler.tree.TreeUpdateParameter;
-import org.jeesl.interfaces.controller.handler.tree.bean.JeeslTreeSelected;
+import org.jeesl.interfaces.controller.handler.tree.bean.JeeslSbTreeBean;
 import org.jeesl.interfaces.controller.handler.tree.cache.JeeslTree5Cache;
 import org.jeesl.interfaces.controller.handler.tree.store.JeeslTree5Store;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -29,7 +29,7 @@ public class SbTree5Handler <L1 extends EjbWithId, L2 extends EjbWithId, L3 exte
 	protected L5 l5; public L5 getL5(){return l5;} public void setL5(L5 l5){this.l5 = l5;}
 	protected String xpath5; public String getXpath5() {return xpath5;}
 	
-	public SbTree5Handler(JeeslTreeSelected callback, JeeslTree5Cache<L1,L2,L3,L4,L5> cache5, JeeslTree5Store<L1,L2,L3,L4,L5> store5)
+	public SbTree5Handler(JeeslSbTreeBean callback, JeeslTree5Cache<L1,L2,L3,L4,L5> cache5, JeeslTree5Store<L1,L2,L3,L4,L5> store5)
 	{
 		super(callback,cache5,store5);
 		this.cache5=cache5;

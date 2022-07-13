@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.jeesl.controller.handler.tree.TreeUpdateParameter;
-import org.jeesl.interfaces.controller.handler.tree.bean.JeeslTreeSelected;
+import org.jeesl.interfaces.controller.handler.tree.bean.JeeslSbTreeBean;
 import org.jeesl.interfaces.controller.handler.tree.cache.JeeslTree1Cache;
 import org.jeesl.interfaces.controller.handler.tree.store.JeeslTree1Store;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -20,7 +20,7 @@ public class SbTree1Handler <L1 extends EjbWithId>
 	protected static final String warnMessageOverrideNextLevel = "This should not be caleld here, @Override this method in the next hierarchy level!";
 	protected static final String warnMessageOverrideImplementation = "This should not be caleld here, @Override this method in final implementation class!";
 	
-	protected final JeeslTreeSelected callback;
+	protected final JeeslSbTreeBean callback;
 	private final JeeslTree1Cache<L1> cache1;
 	private final JeeslTree1Store<L1> store1;
 	
@@ -42,7 +42,7 @@ public class SbTree1Handler <L1 extends EjbWithId>
 	protected L1 l1; public L1 getL1(){return l1;} public void setL1(L1 district){this.l1 = district;}
 	protected String xpath1; public String getXpath1() {return xpath1;}
 	
-	public SbTree1Handler(JeeslTreeSelected callback, JeeslTree1Cache<L1> cache1, JeeslTree1Store<L1> store1)
+	public SbTree1Handler(JeeslSbTreeBean callback, JeeslTree1Cache<L1> cache1, JeeslTree1Store<L1> store1)
 	{
 		this.callback=callback;
 		this.cache1=cache1;

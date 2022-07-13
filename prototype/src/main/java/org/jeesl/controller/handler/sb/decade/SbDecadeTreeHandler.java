@@ -11,7 +11,7 @@ import org.jeesl.controller.handler.tree.TreeUpdateParameter;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.controller.handler.OutputXpathPattern;
-import org.jeesl.interfaces.controller.handler.tree.bean.JeeslTreeSelected;
+import org.jeesl.interfaces.controller.handler.tree.bean.JeeslSbTreeBean;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.hydro.JeeslHydroDecade;
 import org.jeesl.interfaces.model.module.hydro.JeeslHydroYear;
@@ -40,7 +40,7 @@ public class SbDecadeTreeHandler<HD extends JeeslHydroDecade, HY extends JeeslHy
 	private HydroCodeComparator<HY> cpHydroYear;
 	public SbDateIntervalHandler getSbDateHandler() {return sbDateHandler;}
 
-	public SbDecadeTreeHandler(JeeslTreeSelected callback, JeeslFacade fUtils, final Class<HD> cDecade, final Class<HY> cYear)
+	public SbDecadeTreeHandler(JeeslSbTreeBean callback, JeeslFacade fUtils, final Class<HD> cDecade, final Class<HY> cYear)
 	{
 		super(callback,new SbDecadeTreeCache<HD,HY>(fUtils,cDecade,cYear),new SbDecadeTreeStore<HD,HY>());
 		this.fUtils=fUtils;
