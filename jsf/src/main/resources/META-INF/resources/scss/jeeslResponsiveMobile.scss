@@ -335,6 +335,15 @@ html, body, .ui-widget {
 				display: none;
 			}
 		}
+		
+		.jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list {
+			&:before, &:after {
+				content: '';
+				display: list-item;
+				height: 15px;
+				width: 100%;
+			}
+		}
 	}
 }
 
