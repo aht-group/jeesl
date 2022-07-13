@@ -264,4 +264,10 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		if(debugOnInfo) {logger.info(AbstractLogMessage.savedEntity(task));}
 		reload();
 	}
+	
+	public void moveTask(int delta) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		task.setRecordShow(LocalDate.now().plusDays(delta));
+		this.saveTask();
+	}
 }

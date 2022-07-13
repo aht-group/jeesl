@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.sb.tree;
+package org.jeesl.jsf.handler.sb.tree;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.jeesl.controller.handler.tree.TreeUpdateParameter;
-import org.jeesl.interfaces.controller.handler.tree.JeeslTreeSelected;
+import org.jeesl.interfaces.controller.handler.tree.bean.JeeslTreeSelected;
 import org.jeesl.interfaces.controller.handler.tree.cache.JeeslTree4Cache;
 import org.jeesl.interfaces.controller.handler.tree.store.JeeslTree4Store;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;

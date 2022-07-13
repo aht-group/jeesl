@@ -7,15 +7,15 @@ import java.util.List;
 
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
 import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
-import org.jeesl.controller.handler.sb.tree.SbTree2Handler;
 import org.jeesl.controller.handler.tree.TreeUpdateParameter;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.controller.handler.OutputXpathPattern;
-import org.jeesl.interfaces.controller.handler.tree.JeeslTreeSelected;
+import org.jeesl.interfaces.controller.handler.tree.bean.JeeslTreeSelected;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.hydro.JeeslHydroDecade;
 import org.jeesl.interfaces.model.module.hydro.JeeslHydroYear;
+import org.jeesl.jsf.handler.sb.tree.SbTree2Handler;
 import org.jeesl.util.comparator.ejb.component.sb.HydroCodeComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

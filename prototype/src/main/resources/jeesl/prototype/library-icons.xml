@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <jeesl:container xmlns:js="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:jeesl="http://www.jeesl.org">
-    <js:status code="jeeslRevision" symbol="ui/io/revision/envers/revision.svg"/>
-    <js:status code="jeeslRevisionDel" symbol="ui/io/revision/envers/del.svg"/>
-    <js:status code="jeeslRevisionMod" symbol="ui/io/revision/envers/mod.svg"/>
     <js:status code="jeeslRevisionAdd" symbol="ui/io/revision/envers/add.svg"/>
+    <js:status code="jeeslTafu0" symbol="ui/module/tafu/calendar0.svg"/>
+    <js:status code="jeeslTafu1" symbol="ui/module/tafu/calendar1.svg"/>
+    <js:status code="jeeslTafu2" symbol="ui/module/tafu/calendar2.svg"/>
+    <js:status code="jeeslTafu3" symbol="ui/module/tafu/calendar3.svg"/>
+    <js:status code="jeeslTafu4" symbol="ui/module/tafu/calendar4.svg"/>
+    <js:status code="jeeslTafu5" symbol="ui/module/tafu/calendar5.svg"/>
+    <js:status code="jeeslRevision" symbol="ui/io/revision/envers/revision.svg"/>
+    <js:status code="jeeslRevisionMod" symbol="ui/io/revision/envers/mod.svg"/>
+    <js:status code="jeeslRevisionDel" symbol="ui/io/revision/envers/del.svg"/>
     <js:status code="jeeslHome" symbol="ui/system/home.svg"/>
     <js:status code="jeeslLanguageSelect" symbol="ui/system/language-select.svg"/>
     <js:status code="jeeslDelete" symbol="ui/control/crud/delete.svg"/>

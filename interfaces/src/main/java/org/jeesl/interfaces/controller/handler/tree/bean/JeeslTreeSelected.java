@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.controller.handler.tree;
+package org.jeesl.interfaces.controller.handler.tree.bean;
 
 import java.io.Serializable;
 

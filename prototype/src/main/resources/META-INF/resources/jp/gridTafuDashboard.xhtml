@@ -69,12 +69,11 @@
 		</j:slot>
 	</j:row>
 	<h:form id="fTask">
-		<j:dialog id="dTask" widgetVar="testWidget" header="#{appLabelBean.entities['TafuTask'][localeCode]}">
+		<j:dialog id="dTask" widgetVar="testWidget" header="#{appLabelBean.entities['TafuTask'][localeCode].lang}">
 			<f:facet name="actions">
 				<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveTask()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
 				<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelTask()}" update=":#{cc.id}:fTask" library="jeeslGfx"/>
 			</f:facet>
-			
 				<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{not empty cc.attrs.bean.task}">
 					<jtp:label entity="TafuTask" code="id"/>
 					<h:outputText value="#{cc.attrs.bean.task.id}"/>
@@ -94,7 +93,17 @@
 					<jtp:inputText value="#{cc.attrs.bean.task.name}"/>
 					
 					<jtp:label entity="TafuTask" code="recordShow"/>
-					<jp:inputCalendar  value="#{cc.attrs.bean.task.recordShow}"/>
+					<ui:fragment>
+						<jp:inputCalendar  value="#{cc.attrs.bean.task.recordShow}"/>
+						<j:svg type="jeeslTafu5" listener="#{cc.attrs.bean.moveTask(5)}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslTafu4" listener="#{cc.attrs.bean.moveTask(4)}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslTafu3" listener="#{cc.attrs.bean.moveTask(3)}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslTafu2" listener="#{cc.attrs.bean.moveTask(2)}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslTafu1" listener="#{cc.attrs.bean.moveTask(1)}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslTafu0" listener="#{cc.attrs.bean.moveTask(0)}" update=":#{cc.id}:grid"/>
+					</ui:fragment>
+
+					
 					
 					<jtp:label entity="TafuTask" code="recordDue"/>
 					<jp:inputCalendar  value="#{cc.attrs.bean.task.recordDue}"/>
