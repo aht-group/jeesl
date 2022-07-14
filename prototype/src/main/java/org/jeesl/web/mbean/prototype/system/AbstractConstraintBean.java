@@ -131,7 +131,7 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 
     public void init(String artifact) throws FileNotFoundException
     {
-		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
+		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();;
 
 		constraints = new Hashtable<String,Constraint>();
 		scopes = new Hashtable<String,ConstraintScope>();
@@ -160,7 +160,7 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
     
     public void init2(String artifact) throws FileNotFoundException
     {
-		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
+		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();;
 
 		constraints = new Hashtable<String,Constraint>();
 		scopes = new Hashtable<String,ConstraintScope>();

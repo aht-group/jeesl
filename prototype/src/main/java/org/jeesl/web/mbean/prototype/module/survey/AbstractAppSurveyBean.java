@@ -195,7 +195,7 @@ public abstract class AbstractAppSurveyBean <L extends JeeslLang, D extends Jees
 	private void reloadQuestions()
 	{
 		// A similar method is available in EjbQuestionFactory
-		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
+		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();;
 		mapQuestion.clear();
 		mapOption.clear();
 		for(QUESTION q : fSurvey.allOrderedPosition(ffSurvey.getClassQuestion()))

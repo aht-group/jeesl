@@ -210,7 +210,7 @@ public class MenuXmlBuilder implements MenuBuilder
 		Menu result = new Menu();
 		
 		ProcessingTimeTracker ptt = null;
-		if(logger.isTraceEnabled()){ptt = new ProcessingTimeTracker(true);}
+		if(logger.isTraceEnabled()){ptt = ProcessingTimeTracker.instance().start();;}
 		try
 		{
 			if(oldImplementation){result.getMenuItem().addAll(processChildsOld(1,rootNode,codeCurrent,isLoggedIn));}

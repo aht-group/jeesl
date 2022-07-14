@@ -50,10 +50,10 @@ public class SelectOne3Handler <L1 extends EjbWithId, L2 extends EjbWithId, L3 e
 	// Adding Allowed elements, e.g. defined by a Security Context
 	protected void addAllowedL3(List<L3> list)
 	{
-		for(L3 ejb : list)
-		{
-
-		}
+//		for(L3 ejb : list)
+//		{
+//			ejb!=null;
+//		}
 	}
 		
 	protected void selectDefaultL3(TreeUpdateParameter tup)
@@ -67,7 +67,7 @@ public class SelectOne3Handler <L1 extends EjbWithId, L2 extends EjbWithId, L3 e
 	protected void cascade3(L3 ejb, TreeUpdateParameter tup)
 	{
 		l3 = ejb;
-		if(debugOnInfo) {logger.info("cascade3 "+ejb.getClass().getSimpleName()+": ["+l3.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
+		if(debugOnInfo) {logger.info(toCascadeDebug(3,ejb,tup));}
 		
 		clearL3List();
 		
@@ -79,8 +79,8 @@ public class SelectOne3Handler <L1 extends EjbWithId, L2 extends EjbWithId, L3 e
 	
 	@Override protected void fillL3List()
 	{
-		
-		List<L3> childs = cache3.getCachedChildsForL2(l2);
+		List<L3> childs = new ArrayList<>();
+		if(l2!=null) {childs.addAll(cache3.getCachedChildsForL2(l2));}
 		if(debugOnInfo) {logger.info("Filling Level-3-List, Checking "+childs.size()+" elements");}
 		list3.clear();
 		for(L3 ejb : childs)
@@ -90,7 +90,7 @@ public class SelectOne3Handler <L1 extends EjbWithId, L2 extends EjbWithId, L3 e
 			boolean isAllow = true;//allowChild2.contains(ejb);
 			boolean isInPath = true;//allowPath2.contains(ejb);
 			boolean isParentsAllowed = true;//allowChild1.contains(parent);
-			boolean isNotIgnore = !ignore2.contains(ejb);	
+			boolean isNotIgnore = !ignore3.contains(ejb);	
 			if(evaluateToAddChild(ejb,isCascade,isAllow,isInPath,isParentsAllowed,isNotIgnore)) {list3.add(ejb);}
 		}
 	}

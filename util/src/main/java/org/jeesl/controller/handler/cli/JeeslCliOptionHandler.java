@@ -60,7 +60,6 @@ public class JeeslCliOptionHandler
 		options.addOption(oConfig);
 	}
 	
-	// *** HELP ***
 	public void handleHelp(CommandLine line)
 	{
 		if(line.hasOption(oHelp.getOpt())) {help();}

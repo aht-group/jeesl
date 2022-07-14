@@ -7,10 +7,8 @@ import java.util.Set;
 
 import org.jeesl.controller.handler.tree.TreeUpdateParameter;
 import org.jeesl.interfaces.controller.handler.tree.bean.JeeslS1TreeBean;
-import org.jeesl.interfaces.controller.handler.tree.cache.JeeslTree1Cache;
 import org.jeesl.interfaces.controller.handler.tree.cache.JeeslTree2Cache;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.jsf.handler.sb.tree.SbTree1Handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,10 +50,10 @@ public class SelectOne2Handler <L1 extends EjbWithId, L2 extends EjbWithId> exte
 	// Adding Allowed elements, e.g. defined by a Security Context
 	protected void addAllowedL2(List<L2> list)
 	{
-		for(L2 ejb : list)
-		{
-
-		}
+//		for(L2 ejb : list)
+//		{
+//
+//		}
 	}
 		
 	@Override protected void selectDefaultL2(TreeUpdateParameter tup)
@@ -69,7 +67,7 @@ public class SelectOne2Handler <L1 extends EjbWithId, L2 extends EjbWithId> exte
 	protected void cascade2(L2 ejb, TreeUpdateParameter tup)
 	{
 		l2 = ejb;
-		if(debugOnInfo) {logger.info("cascade2 "+ejb.getClass().getSimpleName()+": ["+l1.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
+		if(debugOnInfo) {logger.info(toCascadeDebug(2,ejb,tup));}
 		
 		clearL3List();
 		
@@ -81,8 +79,8 @@ public class SelectOne2Handler <L1 extends EjbWithId, L2 extends EjbWithId> exte
 	
 	@Override protected void fillL2List()
 	{
-		
-		List<L2> childs = cache2.getCachedChildsForL1(l1);
+		List<L2> childs = new ArrayList<>();
+		if(l1!=null) {childs.addAll(cache2.getCachedChildsForL1(l1));}
 		if(debugOnInfo) {logger.info("Filling Level-2-List, Checking "+childs.size()+" elements");}
 		list2.clear();
 		for(L2 ejb : childs)

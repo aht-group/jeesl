@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.jeesl.controller.handler.tree.TreeUpdateParameter;
 import org.jeesl.interfaces.controller.handler.tree.bean.JeeslS1TreeBean;
-import org.jeesl.interfaces.controller.handler.tree.bean.JeeslSbTreeBean;
 import org.jeesl.interfaces.controller.handler.tree.cache.JeeslTree1Cache;
 import org.jeesl.interfaces.controller.handler.tree.implementation.JeeslSelectOneTreeHandler;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -61,17 +60,18 @@ public class SelectOne1Handler <L1 extends EjbWithId> implements JeeslSelectOneT
 	protected void addAllowedChildL1(List<L1> list)
 	{
 		logger.warn("NYI");
-		for(L1 p : list)
-		{
-			
-		}
+//		for(L1 p : list)
+//		{
+//			
+//		}
 	}
 	
 	protected void selectDefaultL1(TreeUpdateParameter tup)
 	{
 		if(debugOnInfo) {logger.info("selectDefaultL1 "+tup.toString());}
 		reset1();
-		if(!list1.isEmpty()) {cascade1(list1.get(0),tup);}
+		L1 ejb = null; if(!list1.isEmpty()) {list1.get(0);}
+		cascade1(ejb,tup);
 	}
 		
 	// Selection from UI and cascading of event
@@ -79,7 +79,7 @@ public class SelectOne1Handler <L1 extends EjbWithId> implements JeeslSelectOneT
 	protected void cascade1(L1 ejb, TreeUpdateParameter tup)
 	{
 		l1 = ejb;
-		if(debugOnInfo) {logger.info("cascade1 "+ejb.getClass().getSimpleName()+": ["+ejb.toString()+"] "+TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");}
+		if(debugOnInfo) {logger.info(toCascadeDebug(1,ejb,tup));}
 
 		clearL2List();
 			
@@ -131,6 +131,20 @@ public class SelectOne1Handler <L1 extends EjbWithId> implements JeeslSelectOneT
 	protected void clearL2List() {logger.warn(warnMessageOverrideNextLevel);}
 	protected void fillL2List() {logger.warn(warnMessageOverrideNextLevel);}
 	protected void selectDefaultL2(TreeUpdateParameter hlup) {logger.warn(warnMessageOverrideNextLevel);}
+	
+	protected String toCascadeDebug(int level, EjbWithId ejb, TreeUpdateParameter tup)
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("cascade").append(level);
+		if(ejb!=null)
+		{
+			sb.append(ejb.getClass().getSimpleName());
+			sb.append(": [").append(ejb.toString()).append("]");
+		}
+		sb.append(TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");
+		return sb.toString();
+	}
 	
 	public void debug(boolean debug)
 	{

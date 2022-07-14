@@ -68,7 +68,7 @@ public abstract class AbstractMenuXmlBean implements Serializable
 		if(!mapMenu.containsKey(code))
 		{
 			ProcessingTimeTracker ptt = null;
-			if(logger.isTraceEnabled()){ptt = new ProcessingTimeTracker(true);}
+			if(logger.isTraceEnabled()){ptt = ProcessingTimeTracker.instance().start();;}
 			synchronized(mf)
 			{
 				mapMenu.put(code, mf.build(mapViewAllowed,code,loggedIn));
@@ -88,7 +88,7 @@ public abstract class AbstractMenuXmlBean implements Serializable
 		if(!mapBreadcrumb.containsKey(code))
 		{
 			ProcessingTimeTracker ptt = null;
-			if(logger.isTraceEnabled()){ptt = new ProcessingTimeTracker(true);}
+			if(logger.isTraceEnabled()){ptt = ProcessingTimeTracker.instance().start();;}
 			synchronized(mf)
 			{
 				boolean mapMenuContainsCode = mapMenu.containsKey(code);
@@ -146,7 +146,7 @@ public abstract class AbstractMenuXmlBean implements Serializable
 		if(!mapSubContaines)
 		{
 			ProcessingTimeTracker ptt=null;
-			if(logger.isTraceEnabled()){ptt = new ProcessingTimeTracker(true);}
+			if(logger.isTraceEnabled()){ptt = ProcessingTimeTracker.instance().start();;}
 			synchronized(mf)
 			{
 				if(!mapMenu.containsKey(code))

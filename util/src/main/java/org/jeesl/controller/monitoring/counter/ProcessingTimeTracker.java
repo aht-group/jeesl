@@ -29,7 +29,7 @@ public class ProcessingTimeTracker implements ProgressTimeTracker
 	private Map<String,Long> bucketStart;
 	
 	public ProcessingTimeTracker() {this(false);}
-	public ProcessingTimeTracker(boolean autoStart)
+	private ProcessingTimeTracker(boolean autoStart)
 	{
 		counter=0;
 		start=0;

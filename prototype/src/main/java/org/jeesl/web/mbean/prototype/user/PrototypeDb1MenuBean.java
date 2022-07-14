@@ -48,7 +48,7 @@ public class PrototypeDb1MenuBean implements Serializable
 	public void initAccess(String views, String menu, String localeCode)
     {
 		this.localeCode=localeCode;
-		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
+		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();;
 		
 		try
 		{
@@ -103,7 +103,7 @@ public class PrototypeDb1MenuBean implements Serializable
 		if(!mapMenu.containsKey(code))
 		{
 			ProcessingTimeTracker ptt = null;
-			if(logger.isTraceEnabled()){ptt = new ProcessingTimeTracker(true);}
+			if(logger.isTraceEnabled()){ptt = ProcessingTimeTracker.instance().start();;}
 			synchronized(mf)
 			{
 				Menu m = mf.build(mapViewAllowed,code,loggedIn);
@@ -129,7 +129,7 @@ public class PrototypeDb1MenuBean implements Serializable
 		if(!mapBreadcrumb.containsKey(code))
 		{
 			ProcessingTimeTracker ptt = null;
-			if(logger.isTraceEnabled()){ptt = new ProcessingTimeTracker(true);}
+			if(logger.isTraceEnabled()){ptt = ProcessingTimeTracker.instance().start();;}
 			synchronized(mf)
 			{
 				boolean mapMenuContainsCode = mapMenu.containsKey(code);
@@ -188,7 +188,7 @@ public class PrototypeDb1MenuBean implements Serializable
 		if(!mapSubContaines)
 		{
 			ProcessingTimeTracker ptt=null;
-			if(debugOnInfo && logger.isInfoEnabled()){ptt = new ProcessingTimeTracker(true);}
+			if(debugOnInfo && logger.isInfoEnabled()){ptt = ProcessingTimeTracker.instance().start();;}
 			synchronized(mf)
 			{
 				if(!mapMenu.containsKey(code))

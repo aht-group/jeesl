@@ -58,7 +58,7 @@ public class SbDecadeTreeHandler<HD extends JeeslHydroDecade, HY extends JeeslHy
 
 	public void update() throws JeeslNotFoundException
 	{
-		ProcessingTimeTracker ptt = new ProcessingTimeTracker(true);
+		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();;
 		reset2();
 		viewIsGlobal = true;//identity.hasSystemView(view.getCode());
 
