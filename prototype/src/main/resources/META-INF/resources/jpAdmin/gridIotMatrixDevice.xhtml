@@ -11,9 +11,64 @@
 	<composite:implementation>
 <jp:grid id="grid">
 	<j:row>
-		<j:slot id="sIssues" width="7">
-			<h:form id="fTree" >
-				
+		<j:slot id="sDevices" width="7">
+			<h:form id="fDevices">
+				<p:dataTable var="d" value="#{cc.attrs.bean.devices}" draggableRows="true"
+						selection="#{cc.attrs.bean.device}" selectionMode="single" rowKey="#{d.id}"
+						paginator="true" rows="5" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">>
+					<f:facet name="header">
+						<j:dtHeader entity="IotMatrixDevice" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addDevice()}" update=":#{cc.id}:grid"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderDevices()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectDevice()}" update=":#{cc.id}:sDevice"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IotMatrixDevice" code="id"/></f:facet>
+						<h:outputText value="#{d.id}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IotMatrixDevice" code="code"/></f:facet>
+						<h:outputText value="#{d.code}"/>
+					</p:column>
+			   	</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sDevice" width="5">
+			<h:form id="fSystem" rendered="#{not empty cc.attrs.bean.device}">
+				<p:panel id="pView" styleClass="jeeslPanel">
+					<f:facet name="header"><j:pHeader entity="IotMatrixDevice"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelDevice()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveDevice()}"   update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteDevice()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.device.id gt 0}"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						
+						<jtp:label entity="IotMatrixDevice" code="id"/>
+						<h:outputText value="#{cc.attrs.bean.device.id}"/>
+						
+						<jtp:label entity="IotMatrixDevice" code="visible"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.device.visible}" />
+						
+						<jtp:label entity="IotMatrixDevice" code="code"/>
+						<jtp:inputText value="#{cc.attrs.bean.device.code}"/>
+						
+					</p:panelGrid>
+					<p:panelGrid columns="3" columnClasses="jeeslGrid30,jeeslGrid30,jeeslGrid30">
+						<jtp:inputText value="#{cc.attrs.bean.device.marginLeft}" entity="IotMatrixDevice" code="marginLeft"/>
+						<jtp:inputText value="#{cc.attrs.bean.device.totalCols}" entity="IotMatrixDevice" code="totalCols"/>
+						<jtp:inputText value="#{cc.attrs.bean.device.marginRight}" entity="IotMatrixDevice" code="marginRight"/>
+						<jtp:inputText value="#{cc.attrs.bean.device.marginTop}" entity="IotMatrixDevice" code="marginTop"/>
+						<jtp:inputText value="#{cc.attrs.bean.device.totalRows}" entity="IotMatrixDevice" code="totalRows"/>
+						<jtp:inputText value="#{cc.attrs.bean.device.marginBottom}" entity="IotMatrixDevice" code="marginBottom"/>
+					</p:panelGrid>
+					
+					<ui:remove>
+						<j:tabTranslationEditor value="#{cc.attrs.bean.system}" withDescription="true"/>
+					</ui:remove>
+					
+				</p:panel>
 			</h:form>
 		</j:slot>
 	</j:row>

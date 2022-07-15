@@ -22,172 +22,172 @@
 	</composite:interface>
 	
 <composite:implementation>
-	<jp:grid id="grid">
-		<aht:row>
-			<aht:slot id="sCategories" width="5">
-				<h:form id="fCategories">
-					<p:dataTable var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
-							selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}"
-							paginator="true" rows="5" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">>
-						<f:facet name="header">
-							<j:dtHeader title="#{msg.jeeslIoTemplates}">
-								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTokens :#{cc.id}:row2"/>
-								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" rendered="#{not cc.attrs.bean.editTemplate}"/>
-								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.editTemplate}"/>
-							</j:dtHeader>
-						</f:facet>
-						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>
-						<p:ajax event="rowSelect" update=":#{cc.id}:sTokens :#{cc.id}:row2" listener="#{cc.attrs.bean.selectTemplate()}"/>
-						<p:column rendered="#{cc.attrs.withLongPositions}">  
-							<h:graphicImage rendered="#{not t.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
-							<h:outputText rendered="#{t.visible}" value="#{t.category.position}.#{t.position}"/>
-				         </p:column>
-				         <p:column rendered="#{cc.attrs.withShortPositions}">  
-				         	<h:graphicImage rendered="#{not t.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
-							<h:outputText rendered="#{t.visible}" value="#{t.position}"/>
-				         </p:column>
-				         <p:column rendered="#{cc.attrs.withCategory}" headerText="#{msg.aupCategory}">  
-								<h:outputText value="#{t.category.name[userBean.localeCode].lang}"/>
-				         </p:column>
-				         <p:column rendered="#{cc.attrs.withScope}" headerText="#{msg.jeeslScope}">  
-								<h:outputText value="#{t.scope.name[userBean.localeCode].lang}"/>
-				         </p:column>
-				         <p:column headerText="#{msg.jeeslIoTemplate}">  
-								<h:outputText value="#{t.name[userBean.localeCode].lang}"/>
-				         </p:column>
-						<p:column rendered="false" styleClass="aupPfDtColCentered">  
-							<j:duoCheckmark value="#{t.visible}"/>
-				         </p:column>
-				   	</p:dataTable>
-				</h:form>
-			</aht:slot>
-			<aht:slot id="sTokens" width="7">
-				<h:form id="fView" rendered="#{cc.attrs.bean.editTemplate}">
-					<p:panel id="pView" header="#{msg.jeeslIoTemplate}"
-								rendered="#{not empty cc.attrs.bean.template}" styleClass="jeeslPanel">
-						<f:facet name="actions">
-							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid"/>
-							<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid" />
-							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.template.id gt 0}" listener="#{cc.attrs.bean.rmTemplate()}" update=":#{cc.id}:grid"/>
-						</f:facet>
-						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-							<p:outputLabel value="#{msg.aupCategory}"/>
-							<p:selectOneMenu value="#{cc.attrs.bean.template.category}" effect="fade" >
-								<f:selectItems value="#{cc.attrs.bean.sbhCategory.selected}" var="c" itemLabel="#{c.position}. #{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
-							</p:selectOneMenu>
-							<p:outputLabel value="#{msg.jeeslScope}"/>
-							<p:selectOneMenu value="#{cc.attrs.bean.template.scope}" effect="fade" >
-								<f:selectItem itemLabel="---"/>
-								<f:selectItems value="#{cc.attrs.bean.scopes}" var="s" itemLabel="#{s.name[userBean.localeCode].lang}" itemValue="#{s}"/>
-							</p:selectOneMenu>
-							<p:outputLabel value="#{msg.aupSecurityVisible}"/>
-							<p:selectBooleanCheckbox value="#{cc.attrs.bean.template.visible}"/>
-							<p:outputLabel value="#{msg.aupCode}"/>
-							<h:inputText autocomplete="off" value="#{cc.attrs.bean.template.code}" styleClass="w100"/>
-						</p:panelGrid>
-						<aht:tabTranslationEditor value="#{cc.attrs.bean.template}" withDescription="true" keys="#{cc.attrs.localeCodes}" />
-					</p:panel>
-				</h:form>
-				<h:form id="fTokens" rendered="#{(not empty cc.attrs.bean.template) and (cc.attrs.bean.template.id gt 0)}">
-					<p:dataTable var="token" value="#{cc.attrs.bean.tokens}" draggableRows="true"
-						selection="#{cc.attrs.bean.token}" selectionMode="single" rowKey="#{token.id}">
-						<f:facet name="header">
-							<j:dtHeader title="#{msg.jeeslIoTokens}">
-								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addToken()}" update=":#{cc.id}:fTokens :#{cc.id}:fToken"/>
-							</j:dtHeader>
-						</f:facet>
-						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTokens()}" update="@form"/>
-						<p:ajax event="rowSelect" update=":#{cc.id}:fToken" listener="#{cc.attrs.bean.selectToken()}"/>
-				        <p:column rendered="true">  
-							<h:outputText value="#{token.position}"/>
-				         </p:column>
-				         <p:column headerText="#{msg.jeeslCode}">
-				         	<jtp:symbolizer value="#{token.type}" marginRight="5"/>
-								<h:outputText value="#{token.code}"/>
-				         </p:column>
-				         <p:column headerText="#{msg.jeeslName}">  
-								<h:outputText value="#{token.name[userBean.localeCode].lang}"/>
-				         </p:column>
-				         <p:column rendered="true" headerText="#{msg.jeeslTemplateExample}">  
-							<h:outputText value="#{token.example}" rendered="#{token.type.code eq 'text'}"/>
-							<h:outputText value="#{of:abbreviate(token.example,15)}" rendered="#{token.type.code eq 'xml'}"/>
-				         </p:column>
-				      </p:dataTable>
-				</h:form>
-				<h:form id="fToken">
-					<p:panel header="#{msg.jeeslIoToken}" rendered="#{not empty cc.attrs.bean.token}" styleClass="jeeslPanel">
-						<f:facet name="actions">
-							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelToken()}" update=":#{cc.id}:sTokens"/>
-							<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveToken()}" update=":#{cc.id}:sTokens"/>
-							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.token.id gt 0}" listener="#{cc.attrs.bean.rmToken()}" update=":#{cc.id}:sTokens"/>
-						</f:facet>
-						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-							<p:outputLabel value="#{msg.aupSecurityVisible}"/>
-							<p:selectBooleanCheckbox value="#{cc.attrs.bean.token.visible}"/>
-							
-							<p:outputLabel value="#{msg.jeeslType}"/>
-							<p:selectOneMenu value="#{cc.attrs.bean.token.type}" effect="fade" >
-								<f:selectItems value="#{cc.attrs.bean.tokenTypes}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-							</p:selectOneMenu>
-							
-							<p:outputLabel value="#{msg.jeeslCode}"/>
-							<p:inputText autocomplete="off" value="#{cc.attrs.bean.token.code}" />
-							
-							<p:outputLabel value="#{msg.jeeslTemplateExample}"/>
-							<p:inputText autocomplete="off" value="#{cc.attrs.bean.token.example}"/>
-							
-						</p:panelGrid>
-						<aht:tabTranslationEditor value="#{cc.attrs.bean.token}" withName="true" withDescription="true" keys="#{cc.attrs.localeCodes}" />
-					</p:panel>
-				</h:form>
-			</aht:slot>
-		</aht:row>
-		<aht:row id="row2">
-			<aht:slot id="sDefinitions" width="2" rendered="#{(not empty cc.attrs.bean.template) and (cc.attrs.bean.template.id gt 0)}">
-				<h:form id="fDefinitions">
-					<p:dataTable var="d" value="#{cc.attrs.bean.definitions}" draggableRows="false"
-						selection="#{cc.attrs.bean.definition}" selectionMode="single" rowKey="#{d.id}">
-						<f:facet name="header">
-							<j:dtHeader title="#{msg.jeeslIoTemplateDefinitions}">
-								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addDefinition()}" update=":#{cc.id}:row2"/>
-							</j:dtHeader>
-						</f:facet>
-						<p:ajax event="rowSelect" update=":#{cc.id}:sDefinition" listener="#{cc.attrs.bean.selectDefinition()}"/>
-			         <p:column headerText="#{msg.jeeslType}">  
-							<h:outputText value="#{d.type.name[userBean.localeCode].lang}"/>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sCategories" width="5">
+			<h:form id="fCategories">
+				<p:dataTable var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
+						selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}"
+						paginator="true" rows="5" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">>
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslIoTemplates}">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTokens :#{cc.id}:row2"/>
+							<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" rendered="#{not cc.attrs.bean.editTemplate}"/>
+							<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleTemplateEdit()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.editTemplate}"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>
+					<p:ajax event="rowSelect" update=":#{cc.id}:sTokens :#{cc.id}:row2" listener="#{cc.attrs.bean.selectTemplate()}"/>
+					<p:column rendered="#{cc.attrs.withLongPositions}">  
+						<h:graphicImage rendered="#{not t.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
+						<h:outputText rendered="#{t.visible}" value="#{t.category.position}.#{t.position}"/>
+			         </p:column>
+			         <p:column rendered="#{cc.attrs.withShortPositions}">  
+			         	<h:graphicImage rendered="#{not t.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
+						<h:outputText rendered="#{t.visible}" value="#{t.position}"/>
+			         </p:column>
+			         <p:column rendered="#{cc.attrs.withCategory}" headerText="#{msg.aupCategory}">  
+							<h:outputText value="#{t.category.name[userBean.localeCode].lang}"/>
+			         </p:column>
+			         <p:column rendered="#{cc.attrs.withScope}" headerText="#{msg.jeeslScope}">  
+							<h:outputText value="#{t.scope.name[userBean.localeCode].lang}"/>
+			         </p:column>
+			         <p:column headerText="#{msg.jeeslIoTemplate}">  
+							<h:outputText value="#{t.name[userBean.localeCode].lang}"/>
+			         </p:column>
+					<p:column rendered="false" styleClass="aupPfDtColCentered">  
+						<j:duoCheckmark value="#{t.visible}"/>
 			         </p:column>
 			   	</p:dataTable>
-				</h:form>
-			</aht:slot>
-			<j:slot id="sDefinition" width="10" rendered="#{(not empty cc.attrs.bean.template) and (cc.attrs.bean.template.id gt 0)}">
-				<h:form id="fDefinition">
-					<p:panel header="#{msg.jeeslIoTemplateDefinition}" rendered="#{not empty cc.attrs.bean.definition}" styleClass="jeeslPanel">
-						<f:facet name="actions">
-							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelDefinition()}" update=":#{cc.id}:row2"/>
-							<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveDefinition()}" update=":#{cc.id}:row2"/>
-							<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.definition.id gt 0}" listener="#{cc.attrs.bean.rmDefinition()}" update=":#{cc.id}:row2"/>
-						</f:facet>
-						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-							<p:outputLabel value="#{msg.aupType}"/>
-							<p:selectOneMenu value="#{cc.attrs.bean.definition.type}" effect="fade" >
-								<f:selectItems value="#{cc.attrs.bean.types}" var="u" itemLabel="#{u.name[userBean.localeCode].lang}" itemValue="#{u}"/>
-							</p:selectOneMenu>
-						</p:panelGrid>
-						<p:tabView id="tabView" var="t" value="#{cc.attrs.localeCodes}" activeIndex="#{cc.attrs.bean.tabIndex}">
-							<p:ajax event="tabChange" listener="#{cc.attrs.bean.definitonTabChange}" update=":#{cc.id}:pPreview"/>  
-					  		<p:tab title="#{t}">
-					  			<p:inputTextarea value="#{cc.attrs.bean.definition.header[t].lang}" autocomplete="off" style="width:100%" autoResize="true"/>
-					  			<p:inputTextarea value="#{cc.attrs.bean.definition.description[t].lang}" autocomplete="off" style="width:100%" autoResize="true"/>
-					  		</p:tab>  
-					  	</p:tabView> 
-					</p:panel>
-				</h:form>
-				<p:panel id="pPreview" header="#{cc.attrs.bean.previewHeader}" rendered="#{not empty cc.attrs.bean.definition}" styleClass="jeeslPanel">
-					<pre style="white-space: pre-wrap;">#{cc.attrs.bean.previewBody}</pre>
+			</h:form>
+		</j:slot>
+		<j:slot id="sTokens" width="7">
+			<h:form id="fView" rendered="#{cc.attrs.bean.editTemplate}">
+				<p:panel id="pView" header="#{msg.jeeslIoTemplate}"
+							rendered="#{not empty cc.attrs.bean.template}" styleClass="jeeslPanel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid" />
+						<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.template.id gt 0}" listener="#{cc.attrs.bean.rmTemplate()}" update=":#{cc.id}:grid"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.aupCategory}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.template.category}" effect="fade" >
+							<f:selectItems value="#{cc.attrs.bean.sbhCategory.selected}" var="c" itemLabel="#{c.position}. #{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
+						</p:selectOneMenu>
+						<p:outputLabel value="#{msg.jeeslScope}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.template.scope}" effect="fade" >
+							<f:selectItem itemLabel="---"/>
+							<f:selectItems value="#{cc.attrs.bean.scopes}" var="s" itemLabel="#{s.name[userBean.localeCode].lang}" itemValue="#{s}"/>
+						</p:selectOneMenu>
+						<p:outputLabel value="#{msg.aupSecurityVisible}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.template.visible}"/>
+						<p:outputLabel value="#{msg.aupCode}"/>
+						<h:inputText autocomplete="off" value="#{cc.attrs.bean.template.code}" styleClass="w100"/>
+					</p:panelGrid>
+					<aht:tabTranslationEditor value="#{cc.attrs.bean.template}" withDescription="true" keys="#{cc.attrs.localeCodes}" />
 				</p:panel>
-			</j:slot>
-		</aht:row>
-    </jp:grid>
+			</h:form>
+			<h:form id="fTokens" rendered="#{(not empty cc.attrs.bean.template) and (cc.attrs.bean.template.id gt 0)}">
+				<p:dataTable var="token" value="#{cc.attrs.bean.tokens}" draggableRows="true"
+					selection="#{cc.attrs.bean.token}" selectionMode="single" rowKey="#{token.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslIoTokens}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addToken()}" update=":#{cc.id}:fTokens :#{cc.id}:fToken"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTokens()}" update="@form"/>
+					<p:ajax event="rowSelect" update=":#{cc.id}:fToken" listener="#{cc.attrs.bean.selectToken()}"/>
+			        <p:column rendered="true">  
+						<h:outputText value="#{token.position}"/>
+			         </p:column>
+			         <p:column headerText="#{msg.jeeslCode}">
+			         	<jtp:symbolizer value="#{token.type}" marginRight="5"/>
+							<h:outputText value="#{token.code}"/>
+			         </p:column>
+			         <p:column headerText="#{msg.jeeslName}">  
+							<h:outputText value="#{token.name[userBean.localeCode].lang}"/>
+			         </p:column>
+			         <p:column rendered="true" headerText="#{msg.jeeslTemplateExample}">  
+						<h:outputText value="#{token.example}" rendered="#{token.type.code eq 'text'}"/>
+						<h:outputText value="#{of:abbreviate(token.example,15)}" rendered="#{token.type.code eq 'xml'}"/>
+			         </p:column>
+			      </p:dataTable>
+			</h:form>
+			<h:form id="fToken">
+				<p:panel header="#{msg.jeeslIoToken}" rendered="#{not empty cc.attrs.bean.token}" styleClass="jeeslPanel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelToken()}" update=":#{cc.id}:sTokens"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveToken()}" update=":#{cc.id}:sTokens"/>
+						<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.token.id gt 0}" listener="#{cc.attrs.bean.rmToken()}" update=":#{cc.id}:sTokens"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.aupSecurityVisible}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.token.visible}"/>
+						
+						<p:outputLabel value="#{msg.jeeslType}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.token.type}" effect="fade" >
+							<f:selectItems value="#{cc.attrs.bean.tokenTypes}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslCode}"/>
+						<p:inputText autocomplete="off" value="#{cc.attrs.bean.token.code}" />
+						
+						<p:outputLabel value="#{msg.jeeslTemplateExample}"/>
+						<p:inputText autocomplete="off" value="#{cc.attrs.bean.token.example}"/>
+						
+					</p:panelGrid>
+					<aht:tabTranslationEditor value="#{cc.attrs.bean.token}" withName="true" withDescription="true" keys="#{cc.attrs.localeCodes}" />
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+	<j:row id="row2">
+		<j:slot id="sDefinitions" width="2" rendered="#{(not empty cc.attrs.bean.template) and (cc.attrs.bean.template.id gt 0)}">
+			<h:form id="fDefinitions">
+				<p:dataTable var="d" value="#{cc.attrs.bean.definitions}" draggableRows="false"
+					selection="#{cc.attrs.bean.definition}" selectionMode="single" rowKey="#{d.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslIoTemplateDefinitions}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addDefinition()}" update=":#{cc.id}:row2"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" update=":#{cc.id}:sDefinition" listener="#{cc.attrs.bean.selectDefinition()}"/>
+		         <p:column headerText="#{msg.jeeslType}">  
+						<h:outputText value="#{d.type.name[userBean.localeCode].lang}"/>
+		         </p:column>
+		   	</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sDefinition" width="10" rendered="#{(not empty cc.attrs.bean.template) and (cc.attrs.bean.template.id gt 0)}">
+			<h:form id="fDefinition">
+				<p:panel header="#{msg.jeeslIoTemplateDefinition}" rendered="#{not empty cc.attrs.bean.definition}" styleClass="jeeslPanel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelDefinition()}" update=":#{cc.id}:row2"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveDefinition()}" update=":#{cc.id}:row2"/>
+						<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.definition.id gt 0}" listener="#{cc.attrs.bean.rmDefinition()}" update=":#{cc.id}:row2"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.aupType}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.definition.type}" effect="fade" >
+							<f:selectItems value="#{cc.attrs.bean.types}" var="u" itemLabel="#{u.name[userBean.localeCode].lang}" itemValue="#{u}"/>
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:tabView id="tabView" var="t" value="#{cc.attrs.localeCodes}" activeIndex="#{cc.attrs.bean.tabIndex}">
+						<p:ajax event="tabChange" listener="#{cc.attrs.bean.definitonTabChange}" update=":#{cc.id}:pPreview"/>  
+				  		<p:tab title="#{t}">
+				  			<p:inputTextarea value="#{cc.attrs.bean.definition.header[t].lang}" autocomplete="off" style="width:100%" autoResize="true"/>
+				  			<p:inputTextarea value="#{cc.attrs.bean.definition.description[t].lang}" autocomplete="off" style="width:100%" autoResize="true"/>
+				  		</p:tab>  
+				  	</p:tabView> 
+				</p:panel>
+			</h:form>
+			<p:panel id="pPreview" header="#{cc.attrs.bean.previewHeader}" rendered="#{not empty cc.attrs.bean.definition}" styleClass="jeeslPanel">
+				<pre style="white-space: pre-wrap;">#{cc.attrs.bean.previewBody}</pre>
+			</p:panel>
+		</j:slot>
+	</j:row>
+</jp:grid>
 </composite:implementation>
 </html>

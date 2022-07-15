@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.iot.led;
+package org.jeesl.interfaces.model.io.iot.matrix;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.system.locale.option.JeeslRestDownloadOption;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 
-public interface JeeslIotLedMatrixLayout <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslIotMatrixLayout <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<L,D,?,?,?>>
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,
