@@ -49,6 +49,7 @@ import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
+import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -143,11 +144,12 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		cancelEntity();
 	}
 	
-	private void reset(boolean rEntity)
+	private void reset(boolean rEntity, boolean rAttribute)
 	{
 		if(rEntity) {supportsJeeslAttributeDownload=false;}
+		if(rAttribute) {attribute=null;}
 	}
-
+	
 	private void reloadEntities()
 	{
 //		if(debugOnInfo) {logger.info("fRevision==null?"+(fRevision==null)+" sbhCategory==null?"+(sbhCategory==null)+" sbhCategory.getSelected()==null?"+(sbhCategory.getSelected()==null));}
@@ -286,7 +288,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 
 	public void addEntity() throws JeeslNotFoundException
 	{
-		reset(true);
+		reset(true,true);
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassEntity()));}
 		entity = efEntity.build(null,entities);
 		entity.setName(efLang.createEmpty(langs));
@@ -579,15 +581,16 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 	
 	//JEESL REST DATA
 
+	@SuppressWarnings("unchecked")
 	public <X extends JeeslEntityRestCode> void jeeslAttributeDownload()
 	{
-		logger.info("Downloading REST");
-		
+		reset(false,true);
 		try
 		{
 			Class<X> cX = (Class<X>)Class.forName(entity.getCode()).asSubclass(JeeslEntityRestCode.class);
 			X x = cX.newInstance();
 			String code = x.getRestCode();
+			logger.info("Downloading "+fbRevision.getClassAttribute().getSimpleName()+" for "+code);
 			
 			StringBuilder url = new StringBuilder();
 			if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
@@ -598,14 +601,15 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 			JeeslSystemRest<L,D,?,?> rest = restTarget.proxy(JeeslSystemRest.class);
 			org.jeesl.model.xml.system.revision.Entity xml = rest.exportRevisionEntity(code);
 			JaxbUtil.info(xml);
+			
+			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
+
+			updater.updateAttributes(entity,bTranslation.getLangKeys(),xml);
+			reloadEntity();
 		}
-		catch (ClassNotFoundException | UtilsConfigurationException | InstantiationException | IllegalAccessException e)
+		catch (ClassNotFoundException | UtilsConfigurationException | InstantiationException | IllegalAccessException | JeeslConstraintViolationException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
 	}
-	
 }

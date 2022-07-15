@@ -148,7 +148,7 @@ public class EjbLangFactory<L extends JeeslLang>
 	{
 		return persistMissingLangs(fUtils,TxtStatusFactory.toCodes(locales).toArray(new String[0]),ejb);
 	}
-	public <T extends EjbWithLang<L>, LOC extends JeeslStatus<L,D,LOC>, D extends JeeslDescription> T persistMissingLangsForCode(JeeslFacade fUtils, List<String> codes, T ejb)
+	public <T extends EjbWithLang<L>> T persistMissingLangsForCode(JeeslFacade fUtils, List<String> codes, T ejb)
 	{
 		String[] localeCodes = new String[codes.size()];
 		for(int i=0;i<codes.size();i++)

@@ -20,7 +20,8 @@ public interface JeeslRevisionAttribute<L extends JeeslLang, D extends JeeslDesc
 										RAT extends JeeslStatus<L,D,RAT>>
 		extends Serializable,EjbRemoveable,EjbPersistable,JeeslStatusWithSymbol,EjbWithId,
 				EjbWithCode,EjbWithPosition,
-				EjbWithLang<L>,EjbWithDescription<D>
+				EjbWithLang<L>,EjbWithDescription<D>,
+				JeeslRestDownloadEntity
 {
 	public enum Attributes{entity};
 	public static enum Type{text,number,date,amount,bool}

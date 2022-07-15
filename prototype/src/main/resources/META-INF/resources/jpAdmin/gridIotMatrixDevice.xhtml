@@ -64,6 +64,13 @@
 						<jtp:inputText value="#{cc.attrs.bean.device.marginBottom}" entity="IotMatrixDevice" code="marginBottom"/>
 					</p:panelGrid>
 					
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						
+						<jtp:label entity="IotMatrixDevice" code="brightness"/>
+						<h:outputText value="#{cc.attrs.bean.device.brightness}"/>
+						
+					</p:panelGrid>
+					
 					<ui:remove>
 						<j:tabTranslationEditor value="#{cc.attrs.bean.system}" withDescription="true"/>
 					</ui:remove>

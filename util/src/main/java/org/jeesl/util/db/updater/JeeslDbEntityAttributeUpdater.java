@@ -1,6 +1,7 @@
 package org.jeesl.util.db.updater;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
@@ -60,13 +61,12 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 		
 		efLang = EjbLangFactory.instance(fbRevision.getClassL());
 		dbuLang = JeeslDbLangUpdater.factory(fbRevision.getClassAttribute(),fbRevision.getClassL());
-        
 	}
 	
-	public void updateAttributes(RE entity, JeeslLocaleProvider<LOC> lp, Entity xml) throws JeeslConstraintViolationException
+	public void updateAttributes(RE entity, List<String> localeCodes, Entity xml) throws JeeslConstraintViolationException
 	{
-		logger.info("Creating/Updating Attributes of "+entity.toString()+ entity.getCode() +" for "+lp.getLocaleCodes());
-		JaxbUtil.info(xml);
+		logger.info("Creating/Updating Attributes of "+entity.toString()+ entity.getCode() +" for "+localeCodes.toString());
+		JaxbUtil.trace(xml);
 
 		// Init the lazy loading of EJB properties
 		entity = fRevision.load(fbRevision.getClassEntity(), entity);
@@ -75,8 +75,6 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 		Map<String,Attribute> xmlAttributes				= new HashMap<>();
 		Map<String,RA> ejbAttributes	= new HashMap<>();
 
-		// Prepare the help object for Array conversion
-		String[] languageCodes = new String[lp.getLocaleCodes().size()];
 
 		// Load data into the maps
 		for (Attribute attribute : xml.getAttribute())
@@ -105,7 +103,7 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 			}
 
 			// Iterate through all language codes and update/add the translations
-			for (String locale : lp.getLocaleCodes())
+			for (String locale : localeCodes)
 			{
 				for (Lang lang : xmlAttribute.getLangs().getLang())
 				{
@@ -126,10 +124,11 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 					}
 				}
 			}
-			try {
+			try
+			{
 				ejbAttribute.setEntity(entity);
-				efLang.persistMissingLangsForCode(fRevision, lp.getLocaleCodes(), ejbAttribute);
-				dbuLang.handle(fRevision, ejbAttribute, lp.getLocaleCodes().toArray(languageCodes));
+				efLang.persistMissingLangsForCode(fRevision, localeCodes, ejbAttribute);
+				dbuLang.handle(fRevision, ejbAttribute, localeCodes);
 				fRevision.save(fbRevision.getClassEntity(), entity, ejbAttribute); 
 				fRevision.save(entity);
 				

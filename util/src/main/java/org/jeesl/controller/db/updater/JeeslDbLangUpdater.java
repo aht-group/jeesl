@@ -39,7 +39,7 @@ public class JeeslDbLangUpdater<C extends EjbWithLang<L>, L extends JeeslLang>
 		return new JeeslDbLangUpdater<C,L>(cEjb,cL);
 	}
 
-	public C handle(JeeslFacade fUtils,C ejb, Langs langs) throws JeeslConstraintViolationException, JeeslLockingException
+	public C handle(JeeslFacade fUtils, C ejb, Langs langs) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(ejb.getName()==null)
 		{
@@ -54,12 +54,10 @@ public class JeeslDbLangUpdater<C extends EjbWithLang<L>, L extends JeeslLang>
 		return ejb;
 	}
 	
-	public C handle(JeeslFacade fUtils, C ejb, String[] localeCodes)
-	{
-		return efLang.persistMissingLangs(fUtils, localeCodes, ejb);
-	}
+	public C handle(JeeslFacade fUtils, C ejb, List<String> localeCodes) {return efLang.persistMissingLangsForCode(fUtils, localeCodes, ejb);}
+	public C handle(JeeslFacade fUtils, C ejb, String[] localeCodes) {return efLang.persistMissingLangs(fUtils, localeCodes, ejb);}
 	
-	private C remove(JeeslFacade fUtils,C ejb, Langs langs) throws JeeslConstraintViolationException
+	private C remove(JeeslFacade fUtils, C ejb, Langs langs) throws JeeslConstraintViolationException
 	{
 		Set<String> actualInXml = new HashSet<String>();
 		List<String> obsoleteInEjb = new ArrayList<String>();
@@ -83,7 +81,7 @@ public class JeeslDbLangUpdater<C extends EjbWithLang<L>, L extends JeeslLang>
 		return ejb;
 	}
 	
-	private C add(JeeslFacade fUtils,C ejb, Langs langs) throws JeeslConstraintViolationException
+	private C add(JeeslFacade fUtils, C ejb, Langs langs) throws JeeslConstraintViolationException
 	{
 		Set<String> actualInXml = new HashSet<String>();
 		for(Lang lang : langs.getLang()){actualInXml.add(lang.getKey());}
