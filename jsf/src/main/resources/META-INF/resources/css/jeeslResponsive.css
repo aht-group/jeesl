@@ -36,7 +36,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 15px; }
+  margin-bottom: 7px; }
 
 abbr[title],
 abbr[data-original-title] {
@@ -1597,6 +1597,7 @@ body, .ui-widget {
     margin: 5px 0 0 10px;
     width: 170px; }
     .jeesl-header > a .logo {
+      height: 43px;
       margin: 0;
       pointer-events: none; }
   .jeesl-header ul li {

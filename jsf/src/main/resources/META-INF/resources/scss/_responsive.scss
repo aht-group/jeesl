@@ -409,9 +409,10 @@ body, .ui-widget {
 	> a {
 		display: inline-block;
 		margin: 5px 0 0 10px;
-		width: 170px;
+		width: $header-logo-width;
 		
 		.logo {
+			height: $header-logo-height;
 			margin: 0;
 			pointer-events: none;
 		}
