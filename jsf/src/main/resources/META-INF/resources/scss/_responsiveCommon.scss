@@ -360,6 +360,17 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+.ui-float-label > .ui-inputfield {
+	padding-top: 1.2em !important;
+	
+	&:focus, &.ui-state-filled {
+		~ .ui-outputlabel {
+			font-size: 1em;
+			top: .75em;
+		}
+	}
+}
+
 @mixin jeesl-select($class) {
 	.#{$class}.ui-state-default {
 		background: $panel-header-gradient;
