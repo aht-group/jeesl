@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 		
@@ -34,10 +35,20 @@
 						<f:facet name="header"><jtp:label entity="IoCryptoKey" code="name"/></f:facet>
 						<h:outputText value="#{k.name}"/>
 					</p:column>
-					<p:column>
-						<f:facet name="header"><jtp:label entity="IoCryptoKey" code="state"/></f:facet>
-						<jtp:symbolizer value="#{cc.attrs.app.mapState[k]}"/>
+					<p:column styleClass="jeeslCenter" rendered="false">
+						<f:facet name="header">
+							<h:outputText value="#{cc.attrs.bean.sessionKeystore.type.name[localeCode].lang}"/>
+							<br/><jtp:symbolizer value="#{cc.attrs.bean.sessionKeystore.type}"/>
+						</f:facet>
+						<jtp:symbolizer value="#{cc.attrs.bean.sessionKeystore.mapState[k]}"/>
 					</p:column>
+					<p:columns var="s" value="#{cc.attrs.bean.stores}" columnIndexVar="colIndex" styleClass="jeeslCenter">
+						<f:facet name="header">
+							<h:outputText value="#{s.type.name[localeCode].lang}"/>
+							<br/><jtp:symbolizer value="#{s.type}"/>
+						</f:facet>
+						<jtp:symbolizer value="#{s.mapState[k]}"/>
+					</p:columns>
 			   	</p:dataTable>
 			</h:form>
 		</j:slot>
@@ -64,25 +75,41 @@
 					
 					<p:separator/>
 					
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<p:panelGrid columns="2" columnClasses="jeeslGrid40,jeeslGrid60">
 						
 						<jtp:label entity="IoCryptoKey" code="memoIv"/>
-						<h:outputText value="#{cc.attrs.bean.key.memoIv}"/>
+						<h:outputText value="#{of:abbreviate(cc.attrs.bean.key.memoIv,20)}"/>
 						
 						<jtp:label entity="IoCryptoKey" code="memoText"/>
-						<p:inputText value="#{cc.attrs.bean.key.memoText}"/>
+						<h:outputText value="#{of:abbreviate(cc.attrs.bean.key.memoText,20)}"/>
 						
 						<jtp:label entity="IoCryptoKey" code="memoCypher"/>
-						<h:outputText value="#{cc.attrs.bean.key.memoCypher}"/>
+						<h:outputText value="#{of:abbreviate(cc.attrs.bean.key.memoCypher,20)}"/>
 					</p:panelGrid>
 					
 					<p:separator/>
 					
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-						
-						<jtp:label entity="IoCryptoKey" code="pwd"/>
-						<p:inputText value="#{cc.attrs.bean.pwd}"/>
+					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
+						<jtp:inputText value="#{cc.attrs.bean.pwd}" entity="IoCryptoKey" code="pwd"/>
 					</p:panelGrid>
+					
+					<p:separator/>
+					
+					<ui:repeat var="store" value="#{cc.attrs.bean.stores}">
+						<p:panelGrid columns="2" columnClasses="jeeslGrid40">
+							<ui:fragment>
+								<jtp:symbolizer value="#{store.type}" marginRight="5"/>
+								<h:outputText value="#{store.type.name[localeCode].lang}"/>
+							</ui:fragment>
+							<ui:fragment>
+								<ui:repeat var="state" value="#{cc.attrs.app.keyState}">
+									<jp:icon value="#{state}" listener="#{cc.attrs.bean.activateState(store,state)}">
+									
+									</jp:icon>
+								</ui:repeat>
+							</ui:fragment>
+						</p:panelGrid>
+					</ui:repeat>
 				</p:panel>
 			</h:form>
 		</j:slot>

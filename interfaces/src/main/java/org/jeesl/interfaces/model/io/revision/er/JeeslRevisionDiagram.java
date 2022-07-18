@@ -3,6 +3,7 @@ package org.jeesl.interfaces.model.io.revision.er;
 import java.io.Serializable;
 
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
+import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -17,7 +18,8 @@ public interface JeeslRevisionDiagram <L extends JeeslLang, D extends JeeslDescr
 										C extends JeeslRevisionCategory<L,D,C,?>>
 		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 							EjbWithCode,EjbWithPositionParent,
-							EjbWithLang<L>,EjbWithDescription<D>
+							EjbWithLang<L>,EjbWithDescription<D>,
+							JeeslRestDownloadEntity
 {
 	public enum Attributes {category}
 	

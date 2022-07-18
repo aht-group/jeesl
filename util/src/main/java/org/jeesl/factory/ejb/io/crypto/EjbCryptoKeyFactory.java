@@ -1,6 +1,8 @@
 package org.jeesl.factory.ejb.io.crypto;
 
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 import org.jeesl.factory.txt.io.crypto.TxtCryptoFactory;
 import org.jeesl.factory.txt.system.security.TxtUserFactory;
@@ -32,11 +34,14 @@ public class EjbCryptoKeyFactory <KEY extends JeeslIoCryptoKey<USER,KS>,
 			ejb = cKey.newInstance();
 			ejb.setUser(user);
 			ejb.setRecord(LocalDateTime.now());
-			
 			ejb.setPwdSalt(TxtUserFactory.buildSalt());
-			
+
 			ejb.setMemoIv(TxtCryptoFactory.buildIv());
 			
+			byte[] clear = new byte[128];
+			new SecureRandom().nextBytes(clear);
+			ejb.setMemoText(Base64.getEncoder().encodeToString(clear));
+			logger.info("String size: "+ejb.getMemoText().length());
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}

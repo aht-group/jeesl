@@ -1,6 +1,10 @@
 
 package org.jeesl.controller.facade.io;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
+import javax.crypto.SecretKey;
 import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.io.JeeslIoCryptoFacade;
@@ -10,27 +14,46 @@ import org.jeesl.factory.builder.io.IoCryptoFactoryBuilder;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyStatus;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.security.user.JeeslKeyStore;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.model.ejb.system.security.AbstractSessionKeystore;
 
 public class JeeslIoCryptoFacadeBean <L extends JeeslLang,D extends JeeslDescription,
-KEY extends JeeslIoCryptoKey<USER,KS>,
-KS extends JeeslIoCryptoKeyStatus<L,D,KS,?>,
-KT extends JeeslIoCryptoKeyState<L,D,KT,?>,
-USER extends JeeslSimpleUser>
-		extends JeeslFacadeBean implements JeeslIoCryptoFacade<L,D,KEY,KS,KT,USER>
+										KEY extends JeeslIoCryptoKey<USER,KS>,
+										KS extends JeeslIoCryptoKeyStatus<L,D,KS,?>,
+										KT extends JeeslIoCryptoKeyState<L,D,KT,?>,
+										ST extends JeeslIoCryptoStoreType<L,D,ST,?>,
+										USER extends JeeslSimpleUser>
+		extends JeeslFacadeBean implements JeeslIoCryptoFacade<L,D,KEY,KS,KT,ST,USER>
 {
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("unused")
-	private final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,USER> fbCrypto;
+	private final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,ST,USER> fbCrypto;
 	
-	public JeeslIoCryptoFacadeBean(EntityManager em, IoCryptoFactoryBuilder<L,D,KEY,KS,KT,USER> fbCrypto)
+	public JeeslIoCryptoFacadeBean(EntityManager em, IoCryptoFactoryBuilder<L,D,KEY,KS,KT,ST,USER> fbCrypto)
 	{
 		super(em);
 		this.fbCrypto=fbCrypto;
 	}
 	
-	@Override public void cryptoMemoryStoreUnlockKey(KEY key, String pwd) {JeeslMemoryKeyStore.instance().unlock(key,pwd);}
+	@Override public void cryptoMemoryStoreUnlockKey(KEY key, String pwd)
+	{
+		SecretKey secret;
+		KT state = null;
+		try
+		{
+			secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getPwdSalt());
+			state = this.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.unlocked);
+		}
+		catch (NoSuchAlgorithmException | InvalidKeySpecException e)
+		{
+			secret = null;
+			state = this.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.locked);
+		}
+		JeeslKeyStore<KEY,KT,ST> memory = JeeslMemoryKeyStore.instance();
+		memory.update(key,state,secret);
+	}
 }

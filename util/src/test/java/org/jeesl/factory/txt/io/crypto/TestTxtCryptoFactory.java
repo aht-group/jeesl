@@ -12,7 +12,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
 import org.jeesl.JeeslBootstrap;
-import org.jeesl.model.ejb.AbstractKeyStore;
+import org.jeesl.model.ejb.system.security.AbstractSessionKeystore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,11 +31,11 @@ public class TestTxtCryptoFactory
 	    String memoIv = TxtCryptoFactory.buildIv();
 	    memoIv = "BNrK91cdNzYTy9BszXkkpQ==";
 	    
-	    SecretKey key = AbstractKeyStore.getKeyFromPassword(pwdSecret,pwdSalt);
+	    SecretKey key = AbstractSessionKeystore.getKeyFromPassword(pwdSecret,pwdSalt);
 	    IvParameterSpec iv = TxtCryptoFactory.buildIv(memoIv);
 	    
-	    String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.algorithm,plainText,key,iv);
-	    String decryptedCipherText = TxtCryptoFactory.decrypt(TxtCryptoFactory.algorithm,cipherText,key,iv);
+	    String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm,plainText,key,iv);
+	    String decryptedCipherText = TxtCryptoFactory.decrypt(TxtCryptoFactory.encrpytionAlgorithm,cipherText,key,iv);
 	  
 	    logger.info(memoIv);
 	    logger.info(cipherText);

@@ -18,6 +18,11 @@ public class JsonCryptoContainer implements Serializable
 	public String getIv() {return iv;}
 	public void setIv(String iv) {this.iv = iv;}
 	
+	@JsonProperty("hash")
+	private String hash;
+	public String getHash() {return hash;}
+	public void setHash(String hash) {this.hash = hash;}
+	
 	@JsonProperty("datas")
 	private List<JsonCryptoData> datas;
 	public List<JsonCryptoData> getDatas() {return datas;}

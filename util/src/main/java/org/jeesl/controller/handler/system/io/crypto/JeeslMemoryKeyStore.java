@@ -1,20 +1,25 @@
 package org.jeesl.controller.handler.system.io.crypto;
 
 import java.io.Serializable;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.crypto.SecretKey;
 
+import org.jeesl.interfaces.bean.system.io.crypto.JeeslIoCryptoOptionBean;
+import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.jeesl.interfaces.model.system.security.user.JeeslKeyStore;
-import org.jeesl.model.ejb.AbstractKeyStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslMemoryKeyStore<KEY extends JeeslIoCryptoKey<?,?>> implements Serializable,JeeslKeyStore<KEY>
+public class JeeslMemoryKeyStore<KEY extends JeeslIoCryptoKey<?,?>,
+									KT extends JeeslIoCryptoKeyState<?,?,KT,?>,
+									ST extends JeeslIoCryptoStoreType<?,?,ST,?>>
+							implements Serializable,JeeslKeyStore<KEY,KT,ST>
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -22,22 +27,37 @@ public class JeeslMemoryKeyStore<KEY extends JeeslIoCryptoKey<?,?>> implements S
 
 	private static final Map<Long,SecretKey> map = new HashMap<>();
 	
-	public static <KEY extends JeeslIoCryptoKey<?,?>> JeeslMemoryKeyStore<KEY> instance(){return new JeeslMemoryKeyStore<>();}
-	public JeeslMemoryKeyStore()
+	private Map<KEY,KT> mapState; @Override public Map<KEY,KT> getMapState() {return mapState;}
+	
+	private ST type; @Override public ST getType() {return type;}
+	
+	public static <KEY extends JeeslIoCryptoKey<?,?>,
+					KT extends JeeslIoCryptoKeyState<?,?,KT,?>,
+					ST extends JeeslIoCryptoStoreType<?,?,ST,?>>
+			JeeslMemoryKeyStore<KEY,KT,ST> instance(){return new JeeslMemoryKeyStore<>();}
+	private JeeslMemoryKeyStore()
 	{
 		
 	}
 	
-	
-	@Override public void unlock(KEY key, String pwd)
-	{	
-		
-		try
+	public JeeslMemoryKeyStore<KEY,KT,ST> init(JeeslIoCryptoOptionBean<KT,ST> bCrypto, List<KEY> keys)
+	{
+		logger.info("Checking state for "+keys.size()+" Keys");
+		type = bCrypto.getTypeMemory();
+		mapState = new HashMap<>();
+		for(KEY key : keys)
 		{
-			SecretKey secret = AbstractKeyStore.getKeyFromPassword(pwd,key.getPwdSalt());
-			map.put(key.getId(),secret);
+			if(map.containsKey(key.getId())) {mapState.put(key,bCrypto.getStateUnlocked());}
+			else {mapState.put(key,bCrypto.getStateLocked());}
+			
+			logger.info(key.toString()+" "+mapState.get(key).getCode());
 		}
-		catch (NoSuchAlgorithmException | InvalidKeySpecException e) {e.printStackTrace();}
+		return this;
+	}
+	
+	@Override public void update(KEY key, KT state, SecretKey secret)
+	{
+		if(secret!=null) {map.put(key.getId(),secret);}
 	}
 
 	@Override public SecretKey getSecretKey(KEY key)
@@ -45,5 +65,4 @@ public class JeeslMemoryKeyStore<KEY extends JeeslIoCryptoKey<?,?>> implements S
 		if(map.containsKey(key.getId())) {return map.get(key.getId());}
 		return null;
 	}
-	
 }

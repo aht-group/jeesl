@@ -23,16 +23,16 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoCryptoFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.io.crypto.TxtCryptoFactory;
-import org.jeesl.interfaces.bean.system.JeeslIoCryptoBean;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyStatus;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.user.JeeslKeyStore;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.model.ejb.AbstractKeyStore;
+import org.jeesl.model.ejb.system.security.AbstractSessionKeystore;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +43,7 @@ public abstract class AbstractCryptoKeyBean <L extends JeeslLang, D extends Jees
 											KEY extends JeeslIoCryptoKey<USER,KS>,
 											KS extends JeeslIoCryptoKeyStatus<L,D,KS,?>,
 											KT extends JeeslIoCryptoKeyState<L,D,KT,?>,
+											ST extends JeeslIoCryptoStoreType<L,D,ST,?>,
 											USER extends JeeslSimpleUser>
 					extends AbstractAdminBean<L,D,LOC>
 					implements Serializable
@@ -50,19 +51,18 @@ public abstract class AbstractCryptoKeyBean <L extends JeeslLang, D extends Jees
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractCryptoKeyBean.class);
 
-	protected JeeslIoCryptoFacade<L,D,KEY,KS,KT,USER> fCrypto;
-	protected final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,USER> fbCrypto;
-	private JeeslIoCryptoBean<L,D,KEY,KS,KT,USER> bCrypto;
+	protected JeeslIoCryptoFacade<L,D,KEY,KS,KT,ST,USER> fCrypto;
+	protected final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,ST,USER> fbCrypto;
 	
 	private final List<KEY> keys; public List<KEY> getKeys() {return keys;}
-	private final List<JeeslKeyStore<KEY>> stores;
-
+	private final List<JeeslKeyStore<KEY,KT,ST>> stores; public List<JeeslKeyStore<KEY, KT, ST>> getStores() {return stores;}
+	
 	private USER user;
 	private KEY key; public KEY getKey() {return key;} public void setKey(KEY key) {this.key = key;}
-
+	private JeeslKeyStore<KEY,KT,ST> sessionKeystore; public JeeslKeyStore<KEY, KT, ST> getSessionKeystore() {return sessionKeystore;}
 	private String pwd; public String getPwd() {return pwd;} public void setPwd(String pwd) {this.pwd = pwd;}
 
-	public AbstractCryptoKeyBean(final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,USER> fbCrypto)
+	public AbstractCryptoKeyBean(final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,ST,USER> fbCrypto)
 	{
 		super(fbCrypto.getClassL(),fbCrypto.getClassD());
 		this.fbCrypto=fbCrypto;
@@ -73,40 +73,46 @@ public abstract class AbstractCryptoKeyBean <L extends JeeslLang, D extends Jees
 	}
 
 	protected void postConstructCryptoKey(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-										JeeslIoCryptoBean<L,D,KEY,KS,KT,USER> bCrypto,
-										JeeslIoCryptoFacade<L,D,KEY,KS,KT,USER> fCrypto,
-										USER user)
+										JeeslIoCryptoFacade<L,D,KEY,KS,KT,ST,USER> fCrypto,
+										USER user,
+										JeeslKeyStore<KEY,KT,ST> sessionKeystore)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fCrypto=fCrypto;
-		this.bCrypto=bCrypto;
 		this.user=user;
-
+		this.sessionKeystore=sessionKeystore;
+		stores.add(sessionKeystore);
 		reloadKeys();
 	}
 	
-	protected void addStore(JeeslKeyStore<KEY> store)
+	protected void addStore(JeeslKeyStore<KEY,KT,ST> store)
 	{
 		stores.add(store);
+	}
+	
+	public void cancelKey() {reset(true,true);}
+	private void reset(boolean rKey,  boolean rPwd)
+	{
+		if(rKey) {key = null;}
+		if(rPwd) {pwd = null;}
 	}
 
 	private void reloadKeys()
 	{
 		keys.clear();
 		keys.addAll(fCrypto.all(fbCrypto.getClassKey()));
-		bCrypto.initKeys(keys);
 	}
 
 	public void addKey() throws JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbCrypto.getClassKey()));}
-		key = fbCrypto.ejbKEy().build(user);
-		key.setMemoText("The quick brown fox jumps over the lazy dog");
-		
+		this.reset(true,true);
+		key = fbCrypto.ejbKey().build(user);
 	}
 
 	public void selectKey() throws JeeslNotFoundException
 	{
+		this.reset(false,true);
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(key));}
 //		attribute = fRevision.find(fbRevision.getClassAttribute(), attribute);
 //		attribute = efLang.persistMissingLangs(fRevision,langs,attribute);
@@ -116,49 +122,38 @@ public abstract class AbstractCryptoKeyBean <L extends JeeslLang, D extends Jees
 	public void saveKey() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException, NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, NoSuchPaddingException, InvalidAlgorithmParameterException, BadPaddingException, IllegalBlockSizeException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(key));}
-		fbCrypto.ejbKEy().converter(fCrypto,key);
+		fbCrypto.ejbKey().converter(fCrypto,key);
 
 		logger.info("Unsaved: "+EjbIdFactory.isUnSaved(key));
 		if(EjbIdFactory.isUnSaved(key))
 		{
-			boolean pwdValid = pwd!=null && pwd.length()>0;
-			boolean memoValid = key.getMemoText()!=null && key.getMemoText().length()>0; 
-			if(pwdValid && memoValid)
+			if(pwd!=null && pwd.length()>0)
 			{
-				 SecretKey secret = AbstractKeyStore.getKeyFromPassword(pwd,key.getPwdSalt());
+				 SecretKey secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getPwdSalt());
 				 IvParameterSpec iv = TxtCryptoFactory.buildIv(key.getMemoIv());
-				 String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.algorithm,key.getMemoText(),secret,iv);
+				 String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm,key.getMemoText(),secret,iv);
 				 key.setMemoCypher(cipherText);
 				 key = fCrypto.save(key);
-				 this.unlock(key,pwd);
+				 sessionKeystore.update(key,fCrypto.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.unlocked), secret);
 			}
-			else {return;}
+			else
+			{
+				return;
+			}
 		}
 		else
 		{
-			SecretKey secret = AbstractKeyStore.getKeyFromPassword(pwd,key.getPwdSalt());
+			SecretKey secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getPwdSalt());
 			IvParameterSpec iv = TxtCryptoFactory.buildIv(key.getMemoIv());
-			String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.algorithm,key.getMemoText(),secret,iv);
-			if(cipherText.equals(key.getMemoCypher())) {this.unlock(key,pwd);}
-			else {bCrypto.lock(key);}
-			key = fCrypto.save(key);
+			String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm,key.getMemoText(),secret,iv);
+			
+			if(cipherText.equals(key.getMemoCypher()))
+			{
+				sessionKeystore.update(key,fCrypto.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.unlocked), secret);
+				key = fCrypto.save(key);
+			}
 		}
-		
+		this.reset(false,true);
 		reloadKeys();
-	}
-	
-	private void unlock(KEY key, String pwd)
-	{
-		logger.info("Now Unlocking "+key);
-		bCrypto.unlock(key);
-		for(JeeslKeyStore<KEY> store : stores)
-		{
-			store.unlock(key, pwd);
-		}
-	}
-
-	public void cancelAttribute()
-	{
-//		attribute=null;
 	}
 }
