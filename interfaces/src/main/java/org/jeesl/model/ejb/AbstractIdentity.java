@@ -33,7 +33,7 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 	private final Map<String,Boolean> mapUsecases,mapRoles,mapActions;
 	
 	private Map<String,Boolean> mapSystemViews; //Only systems views, domain views not included
-	private Map<String,Boolean> mapViews;
+	private Map<String,Boolean> mapViews; public Map<String,Boolean> getMapSystemViews() {return mapSystemViews;} public void setMapSystemViews(Map<String, Boolean> mapSystemViews) {this.mapSystemViews = mapSystemViews;}
 	
 	private boolean loggedIn; public boolean isLoggedIn() {return loggedIn;}  public void setLoggedIn(boolean loggedIn) {this.loggedIn = loggedIn;}
 
@@ -52,7 +52,7 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 	public void allowUsecase(U usecase) {mapUsecases.put(usecase.getCode(), true);}
 	public void allowView(V view) {mapViews.put(view.getCode(), true);}
 	public void allowRole(R role) {mapRoles.put(role.getCode(), true);}
-	public void allowAction(A action) {mapActions.put(action.toCode(), true);}
+	public void allowAction(A action) {mapActions.put(JeeslSecurityAction.toCode(action), true);}
 	
 	public boolean hasUsecase(String code)
 	{
@@ -109,9 +109,8 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 	public Map<String,Boolean> getMapRoles() {return mapRoles;}
 	public Map<String,Boolean> getMapActions() {return mapActions;}
 	
-	public Map<String, Boolean> getMapViews() {return mapViews;}
-	public Map<String, Boolean> getMapSystemViews() {return mapSystemViews;}
-	public void setMapSystemViews(Map<String, Boolean> mapSystemViews) {this.mapSystemViews = mapSystemViews;}
+	public Map<String,Boolean> getMapViews() {return mapViews;}
+	
 	
 	@Override public String getRoleCodeWithAccessToAllPages() {return null;}
 	
@@ -122,5 +121,14 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 		sb.append(" loggedIn:"+loggedIn);
 		
 		return sb.toString();
+	}
+	
+	public void debug()
+	{
+		logger.info("Actions:");
+		for(String s : mapActions.keySet())
+		{
+			logger.info("\t"+s+": "+mapActions.get(s));
+		}
 	}
 }

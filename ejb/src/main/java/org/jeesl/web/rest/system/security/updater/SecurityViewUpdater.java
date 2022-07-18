@@ -195,7 +195,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 				}
 			}
 			
-			ejb=fSecurity.update(ejb);
+			ejb=fSecurity.save(ejb);
 
 			logger.trace("Actions: "+view.getCode()+" "+view.isSetActions());
 			if(view.isSetActions() && view.getActions().isSetAction())
@@ -273,7 +273,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 				}
 			}
 			
-			ejb=fSecurity.update(ejb);
+			ejb=fSecurity.save(ejb);
 
 			logger.trace("Actions: "+view.getCode()+" "+view.isSetActions());
 			if(view.isSetActions() && view.getActions().isSetAction())
@@ -321,7 +321,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 			ebj.setName(efLang.getLangMap(action.getLangs()));
 			ebj.setDescription(efDescription.create(action.getDescriptions()));
 			ebj.setView(ejbView);
-			ebj=fSecurity.update(ebj);
+			ebj=fSecurity.save(ebj);
 		}
 		catch (JeeslConstraintViolationException e) {logger.error("Action.Code:"+action.getCode(),e);}
 		catch (JeeslLockingException e) {logger.error("",e);}
@@ -357,7 +357,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 			ebj.setName(efLang.getLangMap(action.getLangs()));
 			ebj.setDescription(efDescription.create(action.getDescriptions()));
 			ebj.setView(ejbView);
-			ebj=fSecurity.update(ebj);
+			ebj=fSecurity.save(ebj);
 		}
 		catch (JeeslConstraintViolationException e) {logger.error("Action.Code:"+action.getCode(),e);}
 		catch (JeeslLockingException e) {logger.error("",e);}

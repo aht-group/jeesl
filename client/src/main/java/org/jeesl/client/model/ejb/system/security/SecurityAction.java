@@ -36,36 +36,36 @@ public class SecurityAction implements JeeslSecurityAction<Lang,Description,Secu
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	public long getId() {return id;}
-	public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 	
 	@Override public String resolveParentAttribute() {return JeeslSecurityAction.Attributes.view.toString();}
 	@NotNull @ManyToOne
 	private SecurityView view;
-	public SecurityView getView() {return view;}
-	public void setView(SecurityView view) {this.view = view;}
+	@Override public SecurityView getView() {return view;}
+	@Override public void setView(SecurityView view) {this.view = view;}
 	
 	@ManyToOne
 	private SecurityActionTemplate template;
-	public SecurityActionTemplate getTemplate() {return template;}
-	public void setTemplate(SecurityActionTemplate template) {this.template = template;}
+	@Override public SecurityActionTemplate getTemplate() {return template;}
+	@Override public void setTemplate(SecurityActionTemplate template) {this.template = template;}
 		
 	@NotNull
 	private String code;
-	public String getCode() {return code;}
-	public void setCode(String code) {this.code = code;}
+	@Override public String getCode() {return code;}
+	@Override public void setCode(String code) {this.code = code;}
 	
-	public String toCode()
-	{
-		StringBuffer sb = new StringBuffer();
-		if(template==null){sb.append(code);}
-		else
-		{
-	    	sb.append(view.getCode());
-	    	sb.append(template.getCode().substring(template.getCode().lastIndexOf("."), template.getCode().length()));
-		}
-		return sb.toString();
-	}
+//	@Override public String toCode2()
+//	{
+//		StringBuffer sb = new StringBuffer();
+//		if(template==null){sb.append(code);}
+//		else
+//		{
+//	    	sb.append(view.getCode());
+//	    	sb.append(template.getCode().substring(template.getCode().lastIndexOf("."), template.getCode().length()));
+//		}
+//		return sb.toString();
+//	}
 	public Map<String,Lang> toName()
 	{
 		if(template==null){return name;}

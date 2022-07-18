@@ -126,7 +126,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 			ejb.setName(efLang.getLangMap(role.getLangs()));
 			ejb.setDescription(efDescription.create(role.getDescriptions()));
 			ejb.setCategory(category);
-			ejb = fSecurity.update(ejb);
+			ejb = fSecurity.save(ejb);
 
 			ejb = fSecurity.load(ejb,false);
 			ejb = iuListViewsSecurity(ejb, role.getViews());
@@ -141,7 +141,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 	private R iuUsecasesForRole(R ejb, Usecases usecases) throws JeeslConstraintViolationException, JeeslNotFoundException, JeeslLockingException
 	{
 		ejb.getUsecases().clear();
-		ejb = fSecurity.update(ejb);
+		ejb = fSecurity.save(ejb);
 		if(usecases!=null)
 		{
 			for(Usecase usecase : usecases.getUsecase())
@@ -149,7 +149,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 				U ejbUsecase = fSecurity.fByCode(fbSecurity.getClassUsecase(), usecase.getCode());
 				ejb.getUsecases().add(ejbUsecase);
 			}
-			ejb = fSecurity.update(ejb);
+			ejb = fSecurity.save(ejb);
 		}
 		return ejb;
 	}

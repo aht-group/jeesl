@@ -21,6 +21,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.Session;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -28,6 +29,7 @@ import org.jeesl.factory.json.system.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.facade.ParentPredicate;
+import org.jeesl.interfaces.model.io.crypto.JeeslWithCrypto;
 import org.jeesl.interfaces.model.marker.EjbEquals;
 import org.jeesl.interfaces.model.marker.jpa.EjbMergeable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -93,31 +95,15 @@ public class JeeslFacadeBean implements JeeslFacade
 		this.handleTransaction=handleTransaction;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override public <L extends JeeslLang, D extends JeeslDescription,
-						S extends EjbWithId,
-						G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-						F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
-					S loadGraphic(Class<S> cS, S status)
-	{
-		status = em.find(cS, status.getId());
-		if(EjbWithGraphic.class.isAssignableFrom(cS))
-		{
-			if(((EjbWithGraphic<G>)status).getGraphic()!=null){((EjbWithGraphic<G>)status).getGraphic().getId();}
-		}
-
-		return status;
-	}
-
 	//Persist
-	@Override public <T extends EjbSaveable> T saveTransaction(T o) throws JeeslConstraintViolationException, JeeslLockingException{return saveProtected(o);}
 	@Override public <T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException,JeeslLockingException {return saveProtected(o);}
+	@Override public <T extends EjbSaveable> T save2(T o) throws JeeslConstraintViolationException,JeeslLockingException {return saveProtected2(o);}
+	@Override public <T extends EjbSaveable> T saveTransaction(T o) throws JeeslConstraintViolationException, JeeslLockingException{return saveProtected(o);}
 
 	@Override public <T extends EjbSaveable> void save(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException {for(T t : list){saveProtected(t);}}
 	@Override public <T extends EjbSaveable> void saveTransaction(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException {for(T t : list){saveProtected(t);}}
 
-	@Override
-	public <E extends EjbEquals<T>, T extends EjbWithId> boolean equalsAttributes(Class<T> c, E object)
+	@Override public <E extends EjbEquals<T>, T extends EjbWithId> boolean equalsAttributes(Class<T> c, E object)
 	{
 		if(object.getId()==0){return false;}
 		else {return object.equalsAttributes(em.find(c,object.getId()));}
@@ -127,15 +113,19 @@ public class JeeslFacadeBean implements JeeslFacade
 	@Override public <T extends EjbMergeable> T merge(T o) throws JeeslConstraintViolationException, JeeslLockingException {return this.update(o);}
 
 
-
 	public <T extends EjbWithId> T saveProtected(T o) throws JeeslConstraintViolationException, JeeslLockingException
 	{
+		if(o instanceof JeeslWithCrypto) {throw new JeeslConstraintViolationException("A "+JeeslWithCrypto.class.getSimpleName()+" has to be saved with saveCrypto()");}
 		if(o.getId()==0){return this.persist(o);}
 		else{return this.update(o);}
 	}
+	private <T extends EjbWithId> T saveProtected2(T o) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		if(o.getId()==0){return this.persist(o);}
+		else{return this.update2(o);}
+	}
 
-	@Override
-	public <T extends Object> T persist(T o) throws JeeslConstraintViolationException
+	@Override public <T extends Object> T persist(T o) throws JeeslConstraintViolationException
 	{
 		try
 		{
@@ -199,7 +189,59 @@ public class JeeslFacadeBean implements JeeslFacade
 		try
 		{
 			if(handleTransaction){em.getTransaction().begin();}
+			
+//			logger.info(em.getClass().getName());
+//			em.unwrap(Session.class).update(o);
 			em.merge(o);
+			
+			em.flush();
+			if(handleTransaction){em.getTransaction().commit();}
+		}
+		catch (Exception e)
+		{
+			if(handleTransaction){em.getTransaction().rollback();}
+//			System.out.println("Exception in update");
+//			e.printStackTrace();
+
+//			System.err.println(javax.validation.ConstraintViolationException.class.getSimpleName()+" "+(e instanceof javax.validation.ConstraintViolationException));
+//			System.err.println(javax.persistence.PersistenceException.class.getSimpleName()+" "+(e instanceof javax.persistence.PersistenceException));
+//			System.err.println(javax.persistence.OptimisticLockException.class.getSimpleName()+" "+(e instanceof javax.persistence.OptimisticLockException));
+
+			if(e instanceof javax.validation.ConstraintViolationException)
+			{
+				throw new JeeslConstraintViolationException(e.getMessage());
+			}
+			if(e instanceof javax.persistence.OptimisticLockException)
+			{
+				throw new JeeslLockingException(e.getMessage());
+			}
+			if(e instanceof javax.persistence.PersistenceException)
+			{
+				if(e.getCause() instanceof org.hibernate.exception.ConstraintViolationException)
+				{
+					throw new JeeslConstraintViolationException(e.getCause().getMessage());
+				}
+				else
+				{
+					System.err.println("This Error is not handled: "+e.getClass().getName());
+					e.printStackTrace();
+				}
+			}
+
+			System.err.println("(end) This Error is not handled: "+e.getClass().getName());
+			e.printStackTrace();
+		}
+		return o;
+	}
+	
+	public <T extends Object> T update2(T o) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		try
+		{
+			if(handleTransaction){em.getTransaction().begin();}
+
+			em.unwrap(Session.class).update(o);
+			
 			em.flush();
 			if(handleTransaction){em.getTransaction().commit();}
 		}
@@ -240,14 +282,12 @@ public class JeeslFacadeBean implements JeeslFacade
 		return o;
 	}
 
-	@Override
-	public <T extends EjbWithId> T find(Class<T> type, T t)
+	@Override public <T extends EjbWithId> T find(Class<T> type, T t)
 	{
 		T o = em.find(type,t.getId());
 		return o;
 	}
-	@Override
-	public <T extends Object> T find(Class<T> type, long id) throws JeeslNotFoundException
+	@Override public <T extends Object> T find(Class<T> type, long id) throws JeeslNotFoundException
 	{
 		T o = em.find(type,id);
 		if(o==null){throw new JeeslNotFoundException("No entity "+type+" with id="+id);}
@@ -1455,4 +1495,19 @@ public class JeeslFacadeBean implements JeeslFacade
 	    return em.find(clazz, parentId);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override public <L extends JeeslLang, D extends JeeslDescription,
+						S extends EjbWithId,
+						G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+						F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+					S loadGraphic(Class<S> cS, S status)
+	{
+		status = em.find(cS, status.getId());
+		if(EjbWithGraphic.class.isAssignableFrom(cS))
+		{
+			if(((EjbWithGraphic<G>)status).getGraphic()!=null){((EjbWithGraphic<G>)status).getGraphic().getId();}
+		}
+
+		return status;
+	}
 }

@@ -57,11 +57,12 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	protected String pageCode; public String getPageCode() {return pageCode;}
 	protected V view; public V getView() {return view;}
 
-	protected TxtSecurityActionFactory<L,D,C,R,V,U,A,AT,USER> txtAction;
+	protected TxtSecurityActionFactory<L,D,V,A,AT> txtAction;
 	protected Comparator<A> comparatorAction;
 	
 	protected final Map<R,Boolean> mapHasRole; @Override public Map<R,Boolean> getMapHasRole() {return mapHasRole;}
 	protected final Map<String,Boolean> mapAllow; public Map<String,Boolean> getMapAllow(){return mapAllow;}
+	protected final Map<Long,Boolean> mapIdAllow; public Map<Long,Boolean> getMapIdAllow(){return mapIdAllow;}
 	protected final Map<String,Boolean> mapArea; public Map<String,Boolean> getMapArea() {return mapArea;}
 	
 	protected boolean noActions; public boolean isNoActions() {return noActions;}
@@ -86,6 +87,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		noRoles=true;
 		
 		mapAllow = new HashMap<>();
+		mapIdAllow = new HashMap<>();
 		mapArea = new HashMap<>();
 		mapHasRole = new HashMap<>();
 		actions = new ArrayList<A>();
@@ -95,7 +97,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		cfAction.factory(SecurityActionComparator.Type.position);
 		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
 		
-		txtAction = new TxtSecurityActionFactory<L,D,C,R,V,U,A,AT,USER>();
+		txtAction = new TxtSecurityActionFactory<>();
 		
 		try
 		{
@@ -133,7 +135,8 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		noActions=true;
 		noRoles=true;
 		
-		mapAllow = new HashMap<String,Boolean>();
+		mapAllow = new HashMap<>();
+		mapIdAllow = new HashMap<>();
 		mapArea = new HashMap<>();
 		mapHasRole = new HashMap<R,Boolean>();
 		actions = new ArrayList<A>();
@@ -142,7 +145,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		cfAction.factory(SecurityActionComparator.Type.position);
 		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
 		
-		txtAction = new TxtSecurityActionFactory<L,D,C,R,V,U,A,AT,USER>();
+		txtAction = new TxtSecurityActionFactory<>();
 		
 		roles = bSecurity.fRoles(view);
 		areas = bSecurity.fAreas(view);
@@ -157,11 +160,14 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		List<A> actions = new ArrayList<>();
 		if(bSecurity!=null) {actions.addAll(bSecurity.fActions(view));}
 		else {actions.addAll(fSecurity.allForParent(fbSecurity.getClassAction(),view));}
+		
 		if(debugOnInfo) {logger.info("Checking assignment of "+actions.size()+" "+fbSecurity.getClassAction().getSimpleName()+" for user");}
 		for(A action : actions)
 		{
 			boolean allow = false;
-			if(identity!=null){allow=identity.hasAction(action.toCode());}
+			String code = JeeslSecurityAction.toCode(action);
+			if(identity!=null){allow=identity.hasAction(code);}
+			if(debugOnInfo) {logger.info("   - "+code+":"+allow);}
 			addActionWithSecurity(action,allow);
 		}
 		checkIcon();
@@ -173,6 +179,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 //		areas.clear();
 		
 		mapAllow.clear();
+		mapIdAllow.clear();
 		mapArea.clear();
 		mapHasRole.clear();
 		
@@ -208,8 +215,10 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	protected void addActionWithSecurity(A action, boolean allow)
 	{
 		actions.add(action);
-		mapAllow.put(action.toCode(), override(allow));
-		logger.trace(action.toString() + " " + allow(action.toCode()));
+		mapAllow.put(JeeslSecurityAction.toCode(action), override(allow));
+		mapIdAllow.put(action.getId(), override(allow));
+		
+		logger.trace(action.toString() + " " + allow(JeeslSecurityAction.toCode(action)));
 	}
 	
 	private boolean override(boolean allow)
@@ -297,7 +306,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		
 		for(A action : actions)
 		{
-			boolean allowSystem = identity.hasAction(action.toCode());
+			boolean allowSystem = identity.hasAction(JeeslSecurityAction.toCode(action));
 			boolean allowDomain = hasDomainRole(action,staffRoles);
 
 			boolean allow = allowSystem || allowDomain;

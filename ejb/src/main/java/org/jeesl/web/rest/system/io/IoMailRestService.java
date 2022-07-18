@@ -97,12 +97,12 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 				if(eMail.getCounter()>5)
 				{
 					eMail.setStatus(fMail.fByCode(cStatus, JeeslMailStatus.Code.failed));
-					eMail = fMail.update(eMail);
+					eMail = fMail.save(eMail);
 				}
 				else
 				{
 					eMail.setStatus(fMail.fByCode(cStatus, JeeslMailStatus.Code.spooling));
-					eMail = fMail.update(eMail);
+					eMail = fMail.save(eMail);
 					Mail xMail = JaxbUtil.loadJAXB(IOUtils.toInputStream(eMail.getXml(), "UTF-8"), Mail.class);
 					xMail.setId(eMail.getId());
 					xml.getMail().add(xMail);

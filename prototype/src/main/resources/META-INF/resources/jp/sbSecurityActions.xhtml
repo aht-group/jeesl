@@ -21,8 +21,7 @@
 				<f:attribute name="styleClass" value="jeesl-disabled"/>
 			</c:if>
 			<f:facet name="label">
-				<h:graphicImage id="sbGiSecurity"
-								library="jeeslPrototypeGfx"
+				<h:graphicImage id="sbGiSecurity" library="jeeslPrototypeGfx"
 								name="12/sb/shield-green.svg"
 								styleClass="jeesl-menu-bar-button-icon">
 					<c:if test="#{cc.attrs.handler.noActions}">
@@ -34,9 +33,10 @@
 				</c:if>
 			</f:facet>
 			<span class="jeesl-dropdown-item-label">
-				<aup:sbCheckmark value="#{cc.attrs.handler.mapAllow[var.code]}"/>
+				<aup:sbCheckmark value="#{cc.attrs.handler.mapIdAllow[var.id]}"/>
 				<span class="jeesl-dropdown-item-label-text">
-					<h:outputText value="#{var.name[localeCode].lang}"/>
+					<h:outputText rendered="#{empty var.template}" value="#{var.name[localeCode].lang}"/>
+					<h:outputText rendered="#{not empty var.template}" value="#{var.template.name[localeCode].lang}"/>
 				</span>
 			</span>
 		</jp:sbItem>

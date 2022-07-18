@@ -125,7 +125,7 @@ public class IoDbRestService<L extends JeeslLang,D extends JeeslDescription,
 			{
 				if(setExisting.contains(eFile)){setExisting.remove(eFile);}
 				eFile.setStatus(eStatusStored);
-				eFile = fDb.update(eFile);
+				eFile = fDb.save(eFile);
 			}
 			catch (JeeslConstraintViolationException e) {dut.fail(e,true);return dut.toDataUpdate();}
 			catch (JeeslLockingException e) {dut.fail(e,true);return dut.toDataUpdate();}
@@ -136,7 +136,7 @@ public class IoDbRestService<L extends JeeslLang,D extends JeeslDescription,
 			try
 			{
 				f.setStatus(eStatusDeleted);
-				f = fDb.update(f);
+				f = fDb.save(f);
 			}
 			catch (JeeslConstraintViolationException e) {dut.fail(e,true);}
 			catch (JeeslLockingException e) {dut.fail(e,true);}

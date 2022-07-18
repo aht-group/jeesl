@@ -26,7 +26,8 @@ public interface JeeslSecurityAction<L extends JeeslLang, D extends JeeslDescrip
 {	
 	public enum Attributes{view}
 	
-	public String toCode();
+//	public String toCode2();
+	
 	public Map<String,L> toName();
 	
 	public V getView();
@@ -43,4 +44,19 @@ public interface JeeslSecurityAction<L extends JeeslLang, D extends JeeslDescrip
 	
 	public AT getTemplate();
 	public void setTemplate(AT template);
+	
+	
+    public static String toCode(JeeslSecurityAction<?,?,?,?,?,?> action)
+    {
+	    	StringBuilder sb = new StringBuilder();
+	    	if(action.getTemplate()==null) {sb.append(action.getCode());}
+	    	else
+	    	{
+	    		sb.append(action.getView().getCode());
+//	    		sb.append(".");
+	    		sb.append(action.getTemplate().getCode().substring(action.getTemplate().getCode().lastIndexOf("."), action.getTemplate().getCode().length()));
+	    	}
+	    	
+	    	return sb.toString();
+    }
 }
