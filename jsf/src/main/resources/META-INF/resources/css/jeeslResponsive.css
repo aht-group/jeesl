@@ -555,6 +555,12 @@ template {
   .ui-inputgroup .ui-button {
     width: auto; }
 
+.ui-float-label > .ui-inputfield {
+  padding-top: 1.2em !important; }
+  .ui-float-label > .ui-inputfield:focus ~ .ui-outputlabel, .ui-float-label > .ui-inputfield.ui-state-filled ~ .ui-outputlabel {
+    font-size: 1em;
+    top: .75em; }
+
 .ui-selectonemenu.ui-state-default {
   background: linear-gradient(to bottom, #ededed, #c4c4c4);
   border: none;
@@ -1581,6 +1587,9 @@ body, .ui-widget {
   max-width: 982px;
   padding: 0 0 15px 0;
   width: auto; }
+  @media (min-width: 100%) {
+    #container {
+      max-width: 100%; } }
 
 .jeesl-header {
   border-bottom: 2px solid #ededed;
@@ -4934,6 +4943,9 @@ body, .ui-widget {
   margin: 10px auto;
   max-width: 982px;
   padding: 0 10px; }
+  @media (min-width: 100%) {
+    .jeesl-footer {
+      max-width: 100%; } }
 
 .ui-panelgrid .ui-panelgrid-cell > * {
   min-height: 22px; }

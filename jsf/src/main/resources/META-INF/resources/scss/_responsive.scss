@@ -389,9 +389,13 @@ body, .ui-widget {
 	background: $white-100;
 	box-shadow: 0 0 $regular-spacing $medium-grey;
 	margin: 0 auto;
-	max-width: $max-content-width;
+	max-width: $min-fixed-container-width;
 	padding: 0 0 $wide-spacing 0;
 	width: auto;
+	
+	@media (min-width: $max-fixed-container-width) {
+		max-width: 100%;
+	}
 }
 
 .jeesl-header {
@@ -2536,13 +2540,13 @@ body, .ui-widget {
 .ui-dialog {
 	@include jeesl-dialog-titlebar;
 
-	max-width: $max-content-width;
+	max-width: $min-fixed-container-width;
 	
 	@for $i from 1 to 13 {
 		&.jeesl-dialog-#{$i} {
-			width: calc(#{$max-content-width} * (#{$i} / 12)) !important;
+			width: calc(#{$min-fixed-container-width} * (#{$i} / 12)) !important;
 			
-			@media (max-width: $max-content-width) {
+			@media (max-width: $min-fixed-container-width) {
 				width: calc(100% * (#{$i} / 12)) !important;
 			}
 	
@@ -2761,8 +2765,12 @@ body, .ui-widget {
     display: flex;
     justify-content: space-between;
     margin: $regular-spacing auto;
-	max-width: $max-content-width;
+	max-width: $min-fixed-container-width;
 	padding: 0 $regular-spacing;
+	
+	@media (min-width: $max-fixed-container-width) {
+		max-width: 100%;
+	}
 }
 
 .ui-panelgrid {
