@@ -41,7 +41,8 @@ $paragraph-margin-bottom: 7px;
 $table-cell-padding: $regular-spacing;
 $label-margin-bottom: 0;
 
-$max-content-width: 982px;
+$min-fixed-container-width: 968px;
+$max-fixed-container-width: 100%;
 $min-content-width: 400px;
 
 $border-radius: 3px;
@@ -103,6 +104,7 @@ $field-tip-width: 300px;
 	}
 }
 
-@mixin setContainerWidth($width) {
-	$max-content-width: $width;
+@mixin setContainerWidth($minimum, $maximum: 100%) {
+	$min-fixed-container-width: $minimum;
+	$max-fixed-container-width: $maximum;
 }
