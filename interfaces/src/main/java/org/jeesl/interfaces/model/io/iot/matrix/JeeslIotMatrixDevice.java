@@ -9,12 +9,16 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
+import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 
 public interface JeeslIotMatrixDevice <L extends JeeslLang, D extends JeeslDescription,
 										LAYOUT extends JeeslIotMatrixLayout<L,D,LAYOUT,?>>
-		extends Serializable,EjbWithId,EjbSaveable,EjbWithPositionVisible,EjbWithCode,
+		extends Serializable,EjbWithId,EjbSaveable,EjbWithPositionVisible,EjbWithCode,EjbWithName,
 				JeeslRestDownloadEntity
 {
+	
+	LAYOUT getLayout();
+	void setLayout(LAYOUT layout);
 
 	int getTotalRows();
 	void setTotalRows(int totalRows);

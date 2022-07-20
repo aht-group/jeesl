@@ -3,6 +3,7 @@ package org.jeesl.interfaces.model.module.calendar;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
@@ -13,7 +14,8 @@ public interface JeeslCalendarItem <CAL extends JeeslCalendar<ZONE,?>,
 									IT extends JeeslCalendarItemType<?,?,?,IT,?>
 									>
 		extends  Serializable,EjbWithId,
-					EjbSaveable,EjbRemoveable,EjbWithParentAttributeResolver
+					EjbSaveable,EjbRemoveable,EjbWithParentAttributeResolver,
+					JeeslRestDownloadEntity
 //					,JeeslWithTimeline
 {
 	public enum Attributes {calendar,utcStart,utcEnd}

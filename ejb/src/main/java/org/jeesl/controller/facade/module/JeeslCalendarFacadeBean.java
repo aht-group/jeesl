@@ -69,6 +69,22 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		catch (NoResultException ex){throw new JeeslNotFoundException("No Graphic found for status.id"+owner);}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple Results for status.id"+owner);}
 	}
+	
+	@Override public <OWNER extends JeeslWithCalendar<CALENDAR>> OWNER fCalendarOwner(Class<OWNER> cOwner, CALENDAR calendar) throws JeeslNotFoundException
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<OWNER> cQ = cB.createQuery(cOwner);
+		Root<OWNER> root = cQ.from(cOwner);
+		
+		Path<CALENDAR> pathCalendar = root.get("calendar");
+		
+		cQ.where(cB.equal(pathCalendar,calendar));
+		cQ.select(root);
+		
+		try	{return em.createQuery(cQ).getSingleResult();}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+cOwner.getSimpleName()+" found for calendar="+calendar);}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple Results for status.id"+calendar);}
+	}
 
 	@Override public List<ITEM> fCalendarItems(CALENDAR calendar, LocalDateTime from, LocalDateTime to)
 	{

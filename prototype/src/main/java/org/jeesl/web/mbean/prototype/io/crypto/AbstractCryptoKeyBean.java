@@ -32,6 +32,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.user.JeeslKeyStore;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.ejb.system.security.AbstractSessionKeystore;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
@@ -156,4 +157,6 @@ public abstract class AbstractCryptoKeyBean <L extends JeeslLang, D extends Jees
 		this.reset(false,true);
 		reloadKeys();
 	}
+	
+	public void reorderKeys() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fCrypto,keys); if(EjbIdFactory.isSaved(key)) {key = fCrypto.find(fbCrypto.getClassKey(), key);}}
 }

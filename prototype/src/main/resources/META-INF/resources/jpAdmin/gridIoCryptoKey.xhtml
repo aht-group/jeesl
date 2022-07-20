@@ -15,13 +15,14 @@
 	<j:row>
 		<j:slot id="sKeys" width="8">
 			<h:form id="fKeys">
-				<p:dataTable var="k" value="#{cc.attrs.bean.keys}" draggableRows="false"
+				<p:dataTable var="k" value="#{cc.attrs.bean.keys}" draggableRows="true"
 								selection="#{cc.attrs.bean.key}" selectionMode="single" rowKey="#{k.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoCryptoKey" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addKey()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderKeys()}" update=":#{cc.id}:grid"/>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectKey()}" update=":#{cc.id}:sKey"/>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoCryptoKey" code="status"/></f:facet>

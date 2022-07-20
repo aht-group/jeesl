@@ -1,11 +1,15 @@
 package org.jeesl.factory.json.util;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import org.jeesl.model.json.util.time.JsonDay;
 import org.joda.time.DateTime;
@@ -23,6 +27,8 @@ public class JsonDayFactory
 	
 	private final DateTime now;
 
+	public static <E extends Enum<E>> JsonDayFactory instance (E localeCode) {return new JsonDayFactory(localeCode.toString());}
+	public static JsonDayFactory instance (String localeCode) {return new JsonDayFactory(localeCode);}
 	public JsonDayFactory(String localeCode)
 	{
 		if(localeCode.equals("de")){locale = Locale.GERMAN;}
@@ -56,6 +62,21 @@ public class JsonDayFactory
 		return json;
 	}
 	
+	public JsonDay build(LocalDate ld)
+	{		
+		JsonDay json = build();
+		json.setNr(ld.getDayOfMonth());
+		json.setWeekend(ld.getDayOfWeek().getValue()>5);
+		json.setMonth(ld.getMonth().getValue());
+		json.setYear(ld.getYear());
+		
+		json.setName(ld.getDayOfWeek().getDisplayName(TextStyle.FULL,locale));
+		json.setCode(ld.getDayOfWeek().getDisplayName(TextStyle.SHORT,locale));
+		json.setToday(LocalDate.now().isEqual(ld));
+		
+		return json;
+	}
+	
 	public List<JsonDay> build(Date from, Date to)
 	{
 		DateTime dtFrom = new DateTime(from).withTimeAtStartOfDay();
@@ -79,25 +100,45 @@ public class JsonDayFactory
 		return list;
 	}
 	
+	public List<JsonDay> build(LocalDate start, int size)
+	{
+		List<JsonDay> list = new ArrayList<>();
+
+		for(int i=0;i<size;i++)
+		{
+			JsonDay day = build(start.plusDays(i));
+			day.setId(i+1);
+			list.add(day);
+		}
+		
+		return list;
+	}
+	
 	public List<JsonDay> buildMonth(int year, int month)
 	{
-		DateTime dt1 = new DateTime(year,month,1,12,0,0,0);
-		int maxDays = dt1.dayOfMonth().getMaximumValue();
+		LocalDate ld = LocalDate.of(year,month,1);
+		int maxDaysNew = ld.plusMonths(1).minusDays(1).getDayOfMonth();
 		
 		List<JsonDay> days = new ArrayList<JsonDay>();
-		for(int i=0;i<maxDays;i++)
+		for(int i=0;i<maxDaysNew;i++)
 		{
-			JsonDay day = build(dt1.plusDays(i));
+			JsonDay day = build(ld.plusDays(i));
 			day.setId(i+1);
 			days.add(day);
 		}
 		return days;
 	}
 	
-	public static Map<Integer,JsonDay> toMap(List<JsonDay> list)
+	public static Map<Integer,JsonDay> toMapDayNr(List<JsonDay> list)
 	{
 		Map<Integer,JsonDay> map = new HashMap<>();
 		for(JsonDay day : list) {map.put(day.getNr(),day);}
+		return map;
+	}
+	public static Map<LocalDate,JsonDay> toMapLd(List<JsonDay> list)
+	{
+		Map<LocalDate,JsonDay> map = new HashMap<>();
+		for(JsonDay day : list) {map.put(LocalDate.of(day.getYear(),day.getMonth(),day.getNr()),day);}
 		return map;
 	}
 	
@@ -108,8 +149,8 @@ public class JsonDayFactory
 	
 	public static List<Integer> toIntegerDayNr(List<JsonDay> days)
 	{
-		List<Integer> list = new ArrayList<>();
-		for(JsonDay day : days) {list.add(day.getNr());}
-		return list;
+		Set<Integer> set = new HashSet<>();
+		for(JsonDay day : days) {set.add(day.getNr());}
+		return new ArrayList<>(set);
 	}
 }

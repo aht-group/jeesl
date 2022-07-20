@@ -24,6 +24,7 @@ public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescri
 			extends JeeslFacade
 {
 	<OWNER extends JeeslWithCalendar<CALENDAR>> CALENDAR fCalendar(Class<OWNER> cOwner, OWNER owner) throws JeeslNotFoundException;
+	<OWNER extends JeeslWithCalendar<CALENDAR>> OWNER fCalendarOwner(Class<OWNER> cOwner, CALENDAR calendar) throws JeeslNotFoundException;
 	
 	List<ITEM> fCalendarItems(CALENDAR calendar, LocalDateTime from, LocalDateTime to);
 	List<ITEM> fCalendarItems(List<CALENDAR> calendars, LocalDateTime from, LocalDateTime to);

@@ -2,6 +2,7 @@ package org.jeesl.controller.handler.module.calendar;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.jeesl.api.facade.module.JeeslCalendarFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -16,6 +17,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,6 +63,16 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 	public void cancelItem()
 	{
 		item=null;
+	}
+	
+	public void onDateSelect(SelectEvent<LocalDateTime> selectEvent)
+	{
+		 if(debugOnInfo) {logger.info("onDateSelect: ");}
+		 LocalDateTime ldt = selectEvent.getObject();
+		 ldStart = ldt.toLocalDate();
+		 ldEnd = ldt.toLocalDate();
+		 
+		 this.setItem(efItem.build(null,null,"test",ldt,ldt));
 	}
 	
 	public void saveItem() throws JeeslConstraintViolationException, JeeslLockingException

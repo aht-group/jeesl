@@ -9,12 +9,13 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 
 public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser,
 									STATUS extends JeeslIoCryptoKeyStatus<?,?,STATUS,?>>
 						extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
-								JeeslWithStatus<STATUS>,EjbWithParentAttributeResolver,
+								EjbWithPosition,JeeslWithStatus<STATUS>,EjbWithParentAttributeResolver,
 								JeeslRestDownloadEntity
 								
 {	

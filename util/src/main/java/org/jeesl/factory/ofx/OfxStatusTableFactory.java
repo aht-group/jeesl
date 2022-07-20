@@ -27,9 +27,9 @@ public class OfxStatusTableFactory <L extends JeeslLang, D extends JeeslDescript
 	
 	public static <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>, E extends Enum<E>>
 					OfxStatusTableFactory<L,D,S> instance(Class<S> c, Enum<E> e)
-					{
+	{
 						return new OfxStatusTableFactory<>(e.toString(),c);
-					}
+	}
 	public OfxStatusTableFactory(String localeCode, Class<S> c)
 	{
 		this.localeCode=localeCode;
