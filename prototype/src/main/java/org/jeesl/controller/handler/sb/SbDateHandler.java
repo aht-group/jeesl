@@ -1,6 +1,7 @@
 package org.jeesl.controller.handler.sb;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.jeesl.api.handler.sb.SbDateSelection;
 import org.jeesl.api.handler.sb.SbDateSelectionBean;
@@ -16,15 +17,17 @@ public class SbDateHandler implements SbDateSelection
 	private LocalDate dateFrom; public LocalDate getDateFrom() {return dateFrom;} public void setDateFrom(LocalDate dateFrom) {this.dateFrom = dateFrom;}
 	private LocalDate dateTo; public LocalDate getDateTo() {return dateTo;} public void setDateTo(LocalDate dateTo) {this.dateTo = dateTo;}
 
-	private LocalDate dateFromMin; public LocalDate getDateFromMin() {return dateFromMin;} public void setDateFromMin(LocalDate dateFromMin) {this.dateFromMin = dateFromMin;}
-	private LocalDate dateToMin; public LocalDate getDateToMin() {return dateToMin;} public void setDateToMin(LocalDate dateToMin) {this.dateToMin = dateToMin;}
+	private LocalDate minFrom; public LocalDate getMinFrom() {return minFrom;} public void setMinFrom(LocalDate minFrom) {this.minFrom = minFrom;}
+	private LocalDate minTo; public LocalDate getMinTo() {return minTo;} public void setMinTo(LocalDate minTo) {this.minTo = minTo;}
 
-	private LocalDate dateFromMax; public LocalDate getDateFromMax() {return dateFromMax;} public void setDateFromMax(LocalDate dateFromMax) {this.dateFromMax = dateFromMax;}
-	private LocalDate dateToMax; public LocalDate getDateToMax() {return dateToMax;} public void setDateToMax(LocalDate dateToMax) {this.dateToMax = dateToMax;}
+	private LocalDate maxFrom; public LocalDate getMaxFrom() {return maxFrom;} public void setMaxFrom(LocalDate maxFrom) {this.maxFrom = maxFrom;}
+	private LocalDate maxTo; public LocalDate getMaxTo() {return maxTo;} public void setMaxTo(LocalDate maxTo) {this.maxTo = maxTo;}
+	
+	public LocalDateTime getDateFromLdt() {if(dateFrom==null) {return null;} else {return dateFrom.atStartOfDay();}}
+	public LocalDateTime getDateToLdt() {if(dateTo==null) {return null;} else {return dateTo.atStartOfDay().plusDays(1);}}
 	
 	public static SbDateHandler instance(SbDateSelectionBean bean) {return new SbDateHandler(bean);}
-	
-	public SbDateHandler(SbDateSelectionBean bean)
+	private SbDateHandler(SbDateSelectionBean bean)
 	{
 		this.bean=bean;
 	}
@@ -33,13 +36,17 @@ public class SbDateHandler implements SbDateSelection
 	{
 		dateFrom = LocalDate.now();
 		dateTo = LocalDate.now();
-		
-		dateFromMin = LocalDate.now().minusDays(2);
-		dateFromMax = LocalDate.now().plusDays(5);
 		return this;
 	}
 
-
+	public SbDateHandler initMonths(int before, int after)
+	{
+		dateFrom = LocalDate.now().withDayOfMonth(1).minusMonths(before);
+		dateTo = LocalDate.now().withDayOfMonth(1).plusMonths(after).plusMonths(1).minusDays(1);
+		return this;
+	}
+	
+	
 	public void dateChanged()
 	{
 		StringBuffer sb = new StringBuffer();

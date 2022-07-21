@@ -94,13 +94,10 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 	}
 	
 	@Override
-	public List<ITEM> fCalendarItems(List<CALENDAR> calendars, LocalDateTime startLocalDate, LocalDateTime endLocalDate)
-	{
-		
-//		Date start = Date.from(startLocalDate.atZone(ZoneId.systemDefault()).toInstant());
-//		Date end = Date.from(endLocalDate.atZone(ZoneId.systemDefault()).toInstant());
-		
+	public List<ITEM> fCalendarItems(List<CALENDAR> calendars, LocalDateTime ldtStart, LocalDateTime ldtEnd)
+	{	
 		if(calendars==null || calendars.isEmpty()){return new ArrayList<ITEM>();}
+
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ITEM> cQ = cB.createQuery(fbCalendar.getClassItem());
@@ -110,14 +107,14 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		Expression<LocalDateTime> dEnd   = root.get(JeeslCalendarItem.Attributes.utcEnd.toString());
 		
 		//After
-	    Predicate startAfterFrom = cB.greaterThanOrEqualTo(dStart, startLocalDate);
-	    Predicate endAfterFrom = cB.greaterThanOrEqualTo(dEnd, startLocalDate);
-	    Predicate endAfterTo = cB.greaterThanOrEqualTo(dEnd, endLocalDate);
+	    Predicate startAfterFrom = cB.greaterThanOrEqualTo(dStart, ldtStart);
+	    Predicate endAfterFrom = cB.greaterThanOrEqualTo(dEnd, ldtStart);
+	    Predicate endAfterTo = cB.greaterThanOrEqualTo(dEnd, ldtEnd);
 	    
 	    //Before
-	    Predicate startBeforeTo = cB.lessThan(dStart, endLocalDate);
-	    Predicate startBeforeFrom = cB.lessThan(dStart, startLocalDate);
-	    Predicate endBeforeTo = cB.lessThan(dEnd, endLocalDate);
+	    Predicate startBeforeTo = cB.lessThan(dStart, ldtEnd);
+	    Predicate startBeforeFrom = cB.lessThan(dStart, ldtStart);
+	    Predicate endBeforeTo = cB.lessThan(dEnd, ldtEnd);
 		
 		Predicate pOnlyStartAndStartInRange = cB.and(cB.isNull(dEnd),startAfterFrom,startBeforeTo);
 		Predicate pStartAndEndInRange = cB.and(cB.isNotNull(dEnd),startAfterFrom,endBeforeTo);
@@ -127,7 +124,7 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		predicates.add(cB.or(pOnlyStartAndStartInRange,pStartAndEndInRange,pStartOutsideEndInRange,pStartInRangeEndOutside,pStartBeforeRangeEndAfterRange));
 		
 		Join<ITEM,CALENDAR> jCalendar = root.join(JeeslCalendarItem.Attributes.calendar.toString());
-		predicates.add(cB.isTrue(jCalendar.in(calendars)));
+		predicates.add(jCalendar.in(calendars));
 				    
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(root);

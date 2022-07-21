@@ -14,6 +14,8 @@
 	<composite:interface>
 		<composite:attribute name="handler" required="true"/>
 		<composite:attribute name="update"/>
+		
+		<composite:attribute name="appBean" required="false" default="#{appSettingsBean}"/>
 	</composite:interface>
 
 	<composite:implementation>
@@ -22,7 +24,11 @@
 				<c:if test="#{not empty cc.attrs.handler.dateFrom}">
 					<jp:sbItem orientation="left">
 						<f:facet name="label">
-							<p:calendar styleClass="aupStatusBarCalendar aupStatusBarDpFirst jeesl-menu-bar-button-label jeesl-menu-bar-button-calendar" value="#{cc.attrs.handler.dateFrom}" pattern="dd.MM.yyyy" mindate="#{cc.attrs.handler.dateFromMin}" maxdate="#{cc.attrs.handler.dateFromMax}">
+							<p:calendar styleClass="aupStatusBarCalendar aupStatusBarDpFirst jeesl-menu-bar-button-label jeesl-menu-bar-button-calendar"
+											value="#{cc.attrs.handler.dateFrom}"
+											pattern="#{cc.attrs.appBean.patternDate}"
+											mindate="#{cc.attrs.handler.minFrom}"
+											maxdate="#{cc.attrs.handler.maxFrom}">
 		                        <p:ajax update="#{cc.attrs.update}" event="dateSelect" listener="#{cc.attrs.handler.dateChanged()}"/>
 		                        <p:ajax update="#{cc.attrs.update}" event="change" listener="#{cc.attrs.handler.dateChanged()}"/>
 		                    </p:calendar>
@@ -35,7 +41,11 @@
 				<c:if test="#{not empty cc.attrs.handler.dateTo}">
 					<jp:sbItem orientation="left">
 						<f:facet name="label">
-		                    <p:calendar styleClass="aupStatusBarCalendar jeesl-menu-bar-button-label jeesl-menu-bar-button-calendar" value="#{cc.attrs.handler.dateTo}" pattern="dd.MM.yyyy" mindate="#{cc.attrs.handler.dateToMin}" maxdate="#{cc.attrs.handler.dateToMax}">
+		                    <p:calendar styleClass="aupStatusBarCalendar jeesl-menu-bar-button-label jeesl-menu-bar-button-calendar"
+		                    			value="#{cc.attrs.handler.dateTo}"
+		                    			pattern="#{cc.attrs.appBean.patternDate}"
+		                    			mindate="#{cc.attrs.handler.minTo}"
+		                    			maxdate="#{cc.attrs.handler.maxTo}">
 		                        <p:ajax update="#{cc.attrs.update}" event="dateSelect" listener="#{cc.attrs.handler.dateChanged()}"/>
 		                        <p:ajax update="#{cc.attrs.update}" event="change" listener="#{cc.attrs.handler.dateChanged()}"/>
 		                    </p:calendar>

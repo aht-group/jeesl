@@ -34,7 +34,8 @@
 				<h:outputText value="#{a.view.name[userBean.localeCode].lang}" />
 			</p:column>
 			<p:column headerText="#{msg.jeeslSecurityCode}">
-				<h:outputText value="#{a.toCode()}" />
+				<h:outputText rendered="#{not empty a.template}" value="#{a.view.code}.#{fn:substringAfter(a.template.code,'.')}"/>
+				<h:outputText rendered="#{empty a.template}" value="#{a.code}"/>
 			</p:column>
 			<p:column headerText="#{msg.jeeslSecurityAction}">
 				<h:outputText value="#{a.toName()[userBean.localeCode].lang}" />
@@ -49,13 +50,14 @@
 				<p:column>
 					<h:outputText value="#{a.view.category.position}.#{a.view.position}.#{a.position}"/>
 				</p:column>
-				<p:column headerText="#{msg.aupSecurityView}" sortBy="#{a.view.name[userBean.localeCode].lang}" filterBy="#{a.view.name[userBean.localeCode].lang}" filterMatchMode="contains">
+				<p:column headerText="#{msg.aupSecurityView}" sortBy="#{a.view.name[localeCode].lang}" filterBy="#{a.view.name[userBean.localeCode].lang}" filterMatchMode="contains">
 					<h:outputText value="#{a.view.name[userBean.localeCode].lang}" />
 				</p:column>
 				<p:column headerText="#{msg.jeeslSecurityCode}">
-					<h:outputText value="#{a.toCode()}" />
+					<h:outputText rendered="#{not empty a.template}" value="#{a.view.code}.#{fn:substringAfter(a.template.code,'.')}"/>
+					<h:outputText rendered="#{empty a.template}" value="#{a.code}"/>
 				</p:column>
-				<p:column headerText="#{msg.jeeslSecurityAction}" sortBy="#{a.view.toName[userBean.localeCode].lang}" filterBy="#{a.toName()[userBean.localeCode].lang}" filterMatchMode="contains">
+				<p:column headerText="#{msg.jeeslSecurityAction}" sortBy="#{a.view.toName[localeCode].lang}" filterBy="#{a.toName()[userBean.localeCode].lang}" filterMatchMode="contains">
 					<h:outputText value="#{a.toName()[userBean.localeCode].lang}" />
 				</p:column>
 			</p:dataTable>
