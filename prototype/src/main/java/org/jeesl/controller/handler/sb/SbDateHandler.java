@@ -3,8 +3,8 @@ package org.jeesl.controller.handler.sb;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.jeesl.api.handler.sb.SbDateSelection;
-import org.jeesl.api.handler.sb.SbDateSelectionBean;
+import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
+import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

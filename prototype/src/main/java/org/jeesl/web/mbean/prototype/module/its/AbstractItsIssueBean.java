@@ -11,7 +11,7 @@ import org.jeesl.api.facade.module.JeeslItsFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.ItsFactoryBuilder;
-import org.jeesl.interfaces.bean.sb.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.module.its.config.JeeslItsConfig;
 import org.jeesl.interfaces.model.module.its.config.JeeslItsConfigOption;
 import org.jeesl.interfaces.model.module.its.issue.JeeslItsIssue;

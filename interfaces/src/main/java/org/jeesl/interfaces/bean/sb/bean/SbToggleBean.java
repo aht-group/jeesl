@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.bean.sb;
+package org.jeesl.interfaces.bean.sb.bean;
 
 import java.io.Serializable;
 

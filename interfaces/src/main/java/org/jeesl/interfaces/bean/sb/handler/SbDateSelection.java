@@ -1,4 +1,4 @@
-package org.jeesl.api.handler.sb;
+package org.jeesl.interfaces.bean.sb.handler;
 
 import java.io.Serializable;
 

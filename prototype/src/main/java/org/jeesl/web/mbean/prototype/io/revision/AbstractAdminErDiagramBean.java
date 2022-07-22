@@ -14,7 +14,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.io.revision.EjbRevisionDiagramFactory;
-import org.jeesl.interfaces.bean.sb.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionViewMapping;

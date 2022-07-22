@@ -11,7 +11,7 @@ import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.sb.SbMultiHandler;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
-import org.jeesl.interfaces.bean.sb.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.controller.processor.SsiMappingProcessor;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;

@@ -30,7 +30,7 @@ import org.jeesl.factory.json.system.translation.JsonTranslationFactory;
 import org.jeesl.factory.mc.graph.GraphWorkflowFactory;
 import org.jeesl.factory.xml.module.workflow.XmlProcessFactory;
 import org.jeesl.interfaces.bean.op.OpEntityBean;
-import org.jeesl.interfaces.bean.sb.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;

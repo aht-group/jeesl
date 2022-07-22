@@ -20,7 +20,7 @@ import org.jeesl.factory.builder.io.IoTemplateFactoryBuilder;
 import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateDefinitionFactory;
 import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateFactory;
 import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateTokenFactory;
-import org.jeesl.interfaces.bean.sb.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateDefinition;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateToken;

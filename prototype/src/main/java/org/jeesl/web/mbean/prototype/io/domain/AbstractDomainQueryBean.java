@@ -16,7 +16,7 @@ import org.jeesl.factory.ejb.io.domain.EjbSurveyDomainFactory;
 import org.jeesl.factory.ejb.io.domain.EjbSurveyDomainPathFactory;
 import org.jeesl.factory.ejb.io.domain.EjbSurveyDomainQueryFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
-import org.jeesl.interfaces.bean.sb.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.domain.JeeslDomain;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainItem;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainPath;

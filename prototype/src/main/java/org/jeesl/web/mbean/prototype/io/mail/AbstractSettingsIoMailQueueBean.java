@@ -15,7 +15,7 @@ import org.jeesl.controller.handler.sb.SbMultiHandler;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
-import org.jeesl.interfaces.bean.sb.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
 import org.jeesl.interfaces.model.io.mail.core.JeeslMailRetention;

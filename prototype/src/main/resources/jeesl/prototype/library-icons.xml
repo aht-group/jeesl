@@ -7,6 +7,8 @@
     <js:status code="jeeslTafu3" symbol="ui/module/tafu/calendar3.svg"/>
     <js:status code="jeeslTafu4" symbol="ui/module/tafu/calendar4.svg"/>
     <js:status code="jeeslTafu5" symbol="ui/module/tafu/calendar5.svg"/>
+    <js:status code="jeeslTafu6" symbol="ui/module/tafu/calendar6.svg"/>
+    <js:status code="jeeslTafu7" symbol="ui/module/tafu/calendar7.svg"/>
     <js:status code="jeeslRevision" symbol="ui/io/revision/envers/revision.svg"/>
     <js:status code="jeeslRevisionMod" symbol="ui/io/revision/envers/mod.svg"/>
     <js:status code="jeeslRevisionDel" symbol="ui/io/revision/envers/del.svg"/>
@@ -19,9 +21,11 @@
     <js:status code="jeeslRemove" symbol="ui/control/crud/remove.svg"/>
     <js:status code="jeeslSave" symbol="ui/control/crud/save.svg"/>
     <js:status code="jeeslSearch" symbol="ui/control/crud/search.svg"/>
-    <js:status code="jeeslFilter" symbol="ui/control/calc/filter.svg"/>
     <js:status code="jeeslReload" symbol="ui/control/crud/reload.svg"/>
-    <js:status code="jeeslAddressBook" symbol="/ui/system/person/addressbook.svg"/>
+    <js:status code="jeeslFilter" symbol="ui/control/calc/filter.svg"/>
+    <js:status code="jeeslCalcMinus" symbol="ui/control/calc/minus.svg"/>
+    <js:status code="jeeslCalcPlus" symbol="ui/control/calc/plus.svg"/>
+    <js:status code="jeeslAddressBook" symbol="ui/system/person/addressbook.svg"/>
     <js:status code="jeeslAdd" symbol="ui/control/crud/add.svg"/>
     <js:status code="jeeslEdit" symbol="ui/control/edit/pencil.svg"/>
     <js:status code="ejbUnsaved" symbol="ui/info/ejb/unsaved.svg"/>

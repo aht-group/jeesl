@@ -13,7 +13,7 @@ import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
 import org.jeesl.factory.builder.io.IoDmsFactoryBuilder;
 import org.jeesl.factory.ejb.io.dms.EjbIoDmsFactory;
 import org.jeesl.factory.ejb.io.dms.EjbIoDmsViewFactory;
-import org.jeesl.interfaces.bean.sb.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDms;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsDocument;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsLayer;

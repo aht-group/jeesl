@@ -18,7 +18,7 @@ import org.jeesl.factory.ejb.io.revision.EjbRevisionMappingEntityFactory;
 import org.jeesl.factory.ejb.io.revision.EjbRevisionMappingViewFactory;
 import org.jeesl.factory.ejb.io.revision.EjbRevisionScopeFactory;
 import org.jeesl.factory.ejb.io.revision.EjbRevisionViewFactory;
-import org.jeesl.interfaces.bean.sb.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionViewMapping;

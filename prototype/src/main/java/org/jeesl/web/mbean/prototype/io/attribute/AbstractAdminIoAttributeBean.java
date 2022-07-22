@@ -13,7 +13,7 @@ import org.jeesl.factory.ejb.io.attribute.EjbAttributeCriteriaFactory;
 import org.jeesl.factory.ejb.io.attribute.EjbAttributeItemFactory;
 import org.jeesl.factory.ejb.io.attribute.EjbAttributeOptionFactory;
 import org.jeesl.factory.ejb.io.attribute.EjbAttributeSetFactory;
-import org.jeesl.interfaces.bean.sb.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeContainer;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;

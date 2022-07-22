@@ -12,7 +12,7 @@ import org.jeesl.controller.handler.sb.SbSingleHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoNewsletterFactoryBuilder;
-import org.jeesl.interfaces.bean.sb.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterCategory;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterRecipient;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterRegistration;

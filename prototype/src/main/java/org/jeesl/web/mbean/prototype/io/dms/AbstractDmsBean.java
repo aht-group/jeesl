@@ -11,7 +11,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoDmsFactoryBuilder;
 import org.jeesl.factory.ejb.io.dms.EjbIoDmsDocumentFactory;
 import org.jeesl.factory.ejb.io.dms.EjbIoDmsSectionFactory;
-import org.jeesl.interfaces.bean.sb.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDms;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsDocument;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsLayer;

@@ -95,6 +95,8 @@
 					<jtp:label entity="TafuTask" code="recordShow"/>
 					<ui:fragment>
 						<jp:inputCalendar  value="#{cc.attrs.bean.task.recordShow}"/>
+						<j:svg type="jeeslTafu7" listener="#{cc.attrs.bean.moveTask(7)}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslTafu6" listener="#{cc.attrs.bean.moveTask(6)}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslTafu5" listener="#{cc.attrs.bean.moveTask(5)}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslTafu4" listener="#{cc.attrs.bean.moveTask(4)}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslTafu3" listener="#{cc.attrs.bean.moveTask(3)}" update=":#{cc.id}:grid"/>

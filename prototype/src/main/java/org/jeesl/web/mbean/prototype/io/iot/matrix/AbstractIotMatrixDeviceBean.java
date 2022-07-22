@@ -9,7 +9,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.iot.IotMatrixFactoryBuilder;
 import org.jeesl.factory.ejb.io.iot.matrix.EjbMatrixDeviceFactory;
-import org.jeesl.interfaces.bean.sb.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.iot.matrix.JeeslIotMatrixDevice;
 import org.jeesl.interfaces.model.io.iot.matrix.JeeslIotMatrixLayout;
