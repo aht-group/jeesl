@@ -1,6 +1,9 @@
 package org.jeesl.controller.facade.module;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,18 +89,20 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple Results for status.id"+calendar);}
 	}
 
-	@Override public List<ITEM> fCalendarItems(CALENDAR calendar, LocalDateTime from, LocalDateTime to)
+	@Override public List<ITEM> fCalendarItems(ZONE zone, CALENDAR calendar, LocalDate from, LocalDate to)
 	{
 		List<CALENDAR> calendars = new ArrayList<CALENDAR>();
 		calendars.add(calendar);
-		return fCalendarItems(calendars,from,to);
+		return fCalendarItems(zone,calendars,from,to);
 	}
 	
-	@Override
-	public List<ITEM> fCalendarItems(List<CALENDAR> calendars, LocalDateTime ldtStart, LocalDateTime ldtEnd)
+	@Override public List<ITEM> fCalendarItems(ZONE zone, List<CALENDAR> calendars, LocalDate ldStart, LocalDate ldEnd)
 	{	
 		if(calendars==null || calendars.isEmpty()){return new ArrayList<ITEM>();}
-
+		
+		LocalDateTime ldtStart = ldStart.atStartOfDay(ZoneId.of(zone.getCode())).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
+		LocalDateTime ldtEnd = ldEnd.atStartOfDay(ZoneId.of(zone.getCode())).plusDays(1).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
+		
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ITEM> cQ = cB.createQuery(fbCalendar.getClassItem());

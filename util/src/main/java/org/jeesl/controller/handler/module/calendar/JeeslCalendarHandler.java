@@ -48,8 +48,7 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 	protected LocalDate ldStart; public LocalDate getLdStart() {return ldStart;} public void setLdStart(LocalDate ldStart) {this.ldStart = ldStart;}
 	protected LocalDate ldEnd; public LocalDate getLdEnd() {return ldEnd;} public void setLdEnd(LocalDate ldEnd) {this.ldEnd = ldEnd;}
 
-	public JeeslCalendarHandler(final JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar,
-			CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar)
+	public JeeslCalendarHandler(final JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar, CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar)
 	{
 		this.fCalendar=fCalendar;
 		this.fbCalendar=fbCalendar;
@@ -73,6 +72,16 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 		 ldEnd = ldt.toLocalDate();
 		 
 		 this.setItem(efItem.build(null,null,"test",ldt,ldt));
+	}
+	
+	public void selectItem()
+	{
+		if(debugOnInfo) {logger.info("selectItem: "+item.toString());}
+		if(item.isAllDay())
+		{
+			ldStart = item.getLocalStart().toLocalDate();
+			ldEnd = item.getLocalEnd().toLocalDate();
+		}
 	}
 	
 	public void saveItem() throws JeeslConstraintViolationException, JeeslLockingException

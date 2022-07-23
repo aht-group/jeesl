@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,6 +45,12 @@ public class SbDateHandler implements SbDateSelection
 		dateFrom = LocalDate.now().withDayOfMonth(1).minusMonths(before);
 		dateTo = LocalDate.now().withDayOfMonth(1).plusMonths(after).plusMonths(1).minusDays(1);
 		return this;
+	}
+	
+	public void shiftToFirstLastDayofMonth()
+	{
+		dateFrom = dateFrom.withDayOfMonth(1);
+		dateTo = dateTo.withDayOfMonth(1).plusMonths(1).minusDays(1);
 	}
 	
 	

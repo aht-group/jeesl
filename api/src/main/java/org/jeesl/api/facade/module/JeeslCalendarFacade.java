@@ -1,6 +1,6 @@
 package org.jeesl.api.facade.module;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -26,6 +26,6 @@ public interface JeeslCalendarFacade <L extends JeeslLang, D extends JeeslDescri
 	<OWNER extends JeeslWithCalendar<CALENDAR>> CALENDAR fCalendar(Class<OWNER> cOwner, OWNER owner) throws JeeslNotFoundException;
 	<OWNER extends JeeslWithCalendar<CALENDAR>> OWNER fCalendarOwner(Class<OWNER> cOwner, CALENDAR calendar) throws JeeslNotFoundException;
 	
-	List<ITEM> fCalendarItems(CALENDAR calendar, LocalDateTime from, LocalDateTime to);
-	List<ITEM> fCalendarItems(List<CALENDAR> calendars, LocalDateTime from, LocalDateTime to);
+	List<ITEM> fCalendarItems(ZONE zone, CALENDAR calendar, LocalDate from, LocalDate to);
+	List<ITEM> fCalendarItems(ZONE zone, List<CALENDAR> calendars, LocalDate from, LocalDate to);
 }
