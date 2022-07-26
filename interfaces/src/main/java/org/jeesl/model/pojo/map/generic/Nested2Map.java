@@ -92,4 +92,18 @@ public class Nested2Map <L1 extends EjbWithId, L2 extends EjbWithId, VALUE exten
 		}
 		return new ArrayList<L2>(set);
 	}
+	
+	public void putAll(Nested2Map<L1,L2,VALUE> other)
+	{
+		for(L1 l1 : other.toL1())
+		{
+			for(L2 l2 : other.toL2())
+			{
+				if(other.containsKey(l1,l2))
+				{
+					this.put(l1, l2,other.get(l1,l2));
+				}
+			}
+		}
+	}
 }

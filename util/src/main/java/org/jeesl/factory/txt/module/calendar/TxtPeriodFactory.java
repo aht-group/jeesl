@@ -1,4 +1,4 @@
-package org.jeesl.factory.txt.util;
+package org.jeesl.factory.txt.module.calendar;
 
 import org.joda.time.DurationFieldType;
 import org.joda.time.Period;
@@ -14,7 +14,7 @@ public class TxtPeriodFactory
 	
 	public static enum UNITS{hourMinute,minuteSecondMilli}
 	
-	private final PeriodFormatter periodFormatter;
+	private PeriodFormatter periodFormatter;
 	
 	PeriodType pt;
 	
@@ -54,5 +54,80 @@ public class TxtPeriodFactory
 	{
 		Period p = Period.millis(Long.valueOf(millies).intValue());
 		return periodFormatter.print(p.normalizedStandard(pt));
+	}
+	
+	
+	// The following ist without JODA!
+    
+	private String localeCode; 
+	
+	public TxtPeriodFactory(String localeCode)
+	{  
+		this.localeCode=localeCode;
+	}
+	    
+	public String build(java.time.Period period)
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		int years = period.getYears();
+		int months = period.getMonths();
+		int days = period.getDays();
+		
+		if(years>0) {year(sb,years);}
+		if(months>0)
+		{
+			if(sb.length()>0) {sb.append(", ");}
+			month(sb,months);
+		}
+		if(days>0)
+		{
+			if(sb.length()>0) {sb.append(", ");}
+			day(sb,days);
+		}
+		
+		return sb.toString();
+	}
+
+	private void year(StringBuilder sb, int years)
+	{
+		sb.append(years);
+		sb.append(" ");
+		if(years==1)
+		{
+			if(localeCode.equals("de")) {sb.append("Jahr");}
+		}
+		else
+		{
+			if(localeCode.equals("de")) {sb.append("Jahre");}
+		}
+	}
+	
+	private void month(StringBuilder sb, int value)
+	{
+		sb.append(value);
+		sb.append(" ");
+		if(value==1)
+		{
+			if(localeCode.equals("de")) {sb.append("Monat");}
+		}
+		else
+		{
+			if(localeCode.equals("de")) {sb.append("Monate");}
+		}
+	}
+	
+	private void day(StringBuilder sb, int value)
+	{
+		sb.append(value);
+		sb.append(" ");
+		if(value==1)
+		{
+			if(localeCode.equals("de")) {sb.append("Tag");}
+		}
+		else
+		{
+			if(localeCode.equals("de")) {sb.append("Tage");}
+		}
 	}
 }

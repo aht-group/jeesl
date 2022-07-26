@@ -269,17 +269,14 @@
 					<p:panel header="#{msg.jeeslGraphicPreview}" rendered="#{(not empty cc.attrs.bean.status) and (cc.attrs.bean.supportsGraphic)}">
 						<p:panelGrid columns="4" columnClasses="jeeslGrid25,jeeslGrid25,jeeslGrid25,jeeslGrid25">
 							<p:outputLabel value="12px"/>
-							<jtp:symbolizer value="#{cc.attrs.bean.status}" height="12"/>
 							<p:outputLabel value="14px"/>
-							<jtp:symbolizer value="#{cc.attrs.bean.status}" height="14"/>
 							<p:outputLabel value="18px"/>
-							<jtp:symbolizer value="#{cc.attrs.bean.status}" height="18"/>
 							<p:outputLabel value="24px"/>
+							<jtp:symbolizer value="#{cc.attrs.bean.status}" height="12"/>
+							<jtp:symbolizer value="#{cc.attrs.bean.status}" height="14"/>
+							<jtp:symbolizer value="#{cc.attrs.bean.status}" height="18"/>
 							<jtp:symbolizer value="#{cc.attrs.bean.status}" height="24"/>
 						</p:panelGrid>
-				
-						</p:outputPanel>
-						
 					</p:panel>
 					
 					<h:form id="fUpload" enctype="multipart/form-data" rendered="#{(not empty cc.attrs.bean.status) and cc.attrs.bean.supportsGraphic}">

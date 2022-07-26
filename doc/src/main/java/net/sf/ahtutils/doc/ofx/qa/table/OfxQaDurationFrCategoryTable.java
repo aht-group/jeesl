@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
-import org.jeesl.factory.txt.util.TxtPeriodFactory;
+import org.jeesl.factory.txt.module.calendar.TxtPeriodFactory;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.table.Body;

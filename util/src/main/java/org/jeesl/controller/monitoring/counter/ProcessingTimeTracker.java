@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jeesl.factory.txt.util.TxtPeriodFactory;
+import org.jeesl.factory.txt.module.calendar.TxtPeriodFactory;
 import org.jeesl.interfaces.controller.ProgressTimeTracker;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
