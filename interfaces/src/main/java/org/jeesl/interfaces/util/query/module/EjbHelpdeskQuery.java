@@ -63,8 +63,8 @@ public class EjbHelpdeskQuery<L extends JeeslLang,D extends JeeslDescription,
 	}
 	
 	//LocalDate
-	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ldFrom1(LocalDate ldFrom1) {this.ldFrom1 = ldFrom1; return this;}
-	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ldTo1(LocalDate ldTo1) {this.ldTo1 = ldTo1; return this;}
+	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
+	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
 	
 	private List<R> realms; public List<R> getRealm() {return realms;}
 	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> add(R realm) {if(realms==null) {realms = new ArrayList<R>();} realms.add(realm); return this;}

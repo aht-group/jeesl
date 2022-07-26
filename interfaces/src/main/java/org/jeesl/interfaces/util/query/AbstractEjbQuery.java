@@ -58,13 +58,13 @@ public abstract class AbstractEjbQuery implements Serializable,JeeslQuery
 	public void setToDate3(Date toDate3) {this.toDate3 = toDate3;}
 	
 	//LocalDate
-	protected LocalDate ldFrom1;
-	public LocalDate getLdFrom1() {return ldFrom1;}
-	public abstract AbstractEjbQuery ldFrom1(LocalDate ldFrom1);
+	protected LocalDate ld1;
+	public LocalDate getLd1() {return ld1;}
+	public abstract AbstractEjbQuery ld1(LocalDate ld1);
 	
-	protected LocalDate ldTo1;
-	public LocalDate getLdTo1() {return ldTo1;}
-	public abstract AbstractEjbQuery ldTo1(LocalDate ldTo1);
+	protected LocalDate ld2;
+	public LocalDate getLd2() {return ld2;}
+	public abstract AbstractEjbQuery ld2(LocalDate ld2);
 	
 	//Strings
 	private String string1;
