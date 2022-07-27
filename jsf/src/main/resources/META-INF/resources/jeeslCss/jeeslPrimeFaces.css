@@ -141,9 +141,6 @@
 /*Timeline fixes*/
 div.timeline-content {position: absolute !important;}
 div.timeline-frame {background-color: #f1f1f1; margin-left: -14px; margin-top: -6px; margin-bottom: -8px; width: 100% !important ; padding-right: 27px;} 
-[class*="ui-panel ui-widget ui-widget-content ui-corner-all jeeslTimeline"] {background-color: #f1f1f1 !important;}
-/* [class*="ui-panel ui-widget ui-widget-content ui-corner-all jeeslTimeline"]>[class*="ui-panel-titlebar ui-widget-header ui-helper-clearfix ui-corner-all"] {margin-right: -4px; margin-left: -3px; margin-top: -3px; margin-bottom: -1px;} */
-
 
 .auPfTcLeft {text-align:left}
 .jeeslPfTcCenter {text-align:center}
