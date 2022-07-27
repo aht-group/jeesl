@@ -2059,6 +2059,14 @@ body, .ui-widget {
 		margin-bottom: 0;
 	}
 	
+	.jeesl-tabs.jeesl-editor {
+		.ui-tabs-panel {
+			.ui-texteditor {
+				@include justified-panel-content;
+			}
+		}
+	}
+	
 	.ui-panelgrid {
 		@media (max-width: 768px) {
 			.ui-panelgrid-cell {

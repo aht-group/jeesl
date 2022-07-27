@@ -3360,6 +3360,20 @@ body, .ui-widget {
     padding: 0 !important; }
   .jeesl-panel:last-child {
     margin-bottom: 0; }
+  .jeesl-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
+    margin-left: -12px;
+    margin-right: -12px; }
+    @media (max-width: 768px) {
+      .jeesl-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
+        margin-left: -10px;
+        margin-right: -10px; } }
+    .jeesl-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:first-child {
+      margin-top: -7px; }
+    .jeesl-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:last-child {
+      margin-bottom: -7px; }
+      @media (max-width: 768px) {
+        .jeesl-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:last-child {
+          margin-bottom: -5px; } }
   @media (max-width: 768px) {
     .jeesl-panel .ui-panelgrid .ui-panelgrid-cell .ui-datatable {
       margin: 0 -10px;
@@ -4127,6 +4141,20 @@ body, .ui-widget {
         padding: 0 !important; }
       .jeesl-content .jeesl-content-container .ui-panel:last-child {
         margin-bottom: 0; }
+      .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
+        margin-left: -12px;
+        margin-right: -12px; }
+        @media (max-width: 768px) {
+          .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
+            margin-left: -10px;
+            margin-right: -10px; } }
+        .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:first-child {
+          margin-top: -7px; }
+        .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:last-child {
+          margin-bottom: -7px; }
+          @media (max-width: 768px) {
+            .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:last-child {
+              margin-bottom: -5px; } }
       @media (max-width: 768px) {
         .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-panelgrid-cell .ui-datatable {
           margin: 0 -10px;
