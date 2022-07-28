@@ -7,9 +7,10 @@
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
-		<composite:attribute name="title" required="false"/>
 		<composite:attribute name="entity" required="false"/>
 		<composite:attribute name="code" required="false"/>
+		<composite:attribute name="title" required="false"/>
+		<composite:attribute name="suffix" required="false"/>
 		<composite:facet name="header" required="false"/>
 	</composite:interface>
         
@@ -20,9 +21,9 @@
 	 	<c:set var="titleText" value="#{not empty cc.attrs.title ? cc.attrs.title : not empty cc.attrs.entity ? not empty evaluatedEntityCodeValue ? evaluatedEntityCodeValue : defaultEntityCodeValue :'myTitle'}"/>
     	
     	<c:if test="#{empty cc.facets.header}">
-        	<h:outputText value="#{titleText}" class="pf-datatable-header-title"/>
+        	<h:outputText value="#{titleText}#{suffix}" class="pf-datatable-header-title"/>
         </c:if>
-        <c:if test="#{!empty cc.facets.header}">
+        <c:if test="#{not empty cc.facets.header}">
         	<h:outputText value="" class="pf-datatable-header-title"/>
 			<composite:renderFacet name="header"/>
 		</c:if>
