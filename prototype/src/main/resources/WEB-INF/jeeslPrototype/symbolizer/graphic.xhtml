@@ -1,5 +1,4 @@
-<ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -10,14 +9,21 @@
 	<c:set var="height"  value="#{not empty height ? height : 12}" />
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
 
-	<p:graphicImage rendered="#{rendered and (not empty value)}"
+
+		<p:graphicImage rendered="#{rendered and (not empty value)}"
 						height="#{height}" 
 						value="/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}">
-		<c:if test="#{not empty marginRight}"><f:attribute name="style" value="margin-right: #{marginRight}px;"/></c:if>
-		<c:if test="#{not empty marginLeft}"><f:attribute name="style" value="margin-left: #{marginLeft}px;"/></c:if>
-		<c:if test="#{not empty marginLeftRight}"><f:attribute name="style" value="margin-left: #{marginLeftRight}px; margin-right: #{marginLeftRight}px;"/></c:if>
-		<c:if test="#{not empty style}"><f:attribute name="style" value="#{style}"/></c:if>
-		<c:if test="#{not empty styleClass}"><f:attribute name="styleClass" value="#{styleClass}"/></c:if>
-	</p:graphicImage>
+			<c:if test="#{not empty marginRight}"><f:attribute name="style" value="margin-right: #{marginRight}px;"/></c:if>
+			<c:if test="#{not empty marginLeft}"><f:attribute name="style" value="margin-left: #{marginLeft}px;"/></c:if>
+			<c:if test="#{not empty marginLeftRight}"><f:attribute name="style" value="margin-left: #{marginLeftRight}px; margin-right: #{marginLeftRight}px;"/></c:if>
+			<c:if test="#{not empty style}"><f:attribute name="style" value="#{style}"/></c:if>
+			<c:if test="#{not empty styleClass}"><f:attribute name="styleClass" value="#{styleClass}"/></c:if>
+		</p:graphicImage>
+
+	
+	<ui:remove>
+		<img src = "#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}" />
+	</ui:remove> 
+	
 	
 </ui:composition>

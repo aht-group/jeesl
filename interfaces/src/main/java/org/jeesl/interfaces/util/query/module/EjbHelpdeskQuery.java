@@ -1,5 +1,6 @@
 package org.jeesl.interfaces.util.query.module;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +62,10 @@ public class EjbHelpdeskQuery<L extends JeeslLang,D extends JeeslDescription,
 		status=null;
 	}
 	
+	//LocalDate
+	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
+	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
+	
 	private List<R> realms; public List<R> getRealm() {return realms;}
 	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> add(R realm) {if(realms==null) {realms = new ArrayList<R>();} realms.add(realm); return this;}
 
@@ -70,5 +75,4 @@ public class EjbHelpdeskQuery<L extends JeeslLang,D extends JeeslDescription,
 	private List<STATUS> status; public List<STATUS> getStatus() {return status;}
 	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> addStatus(List<STATUS> list) {if(status==null) {status = new ArrayList<>();} this.status.addAll(list); return this;}
 	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> nullStatus() {if(status==null) {status = new ArrayList<>();} status.clear(); return this;}
-	
 }

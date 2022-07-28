@@ -39,7 +39,7 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 		initCalendarPattern();
 		paginatorTemplate = "{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}";
 		paginatorPosition = "bottom";
-		rowsPerPageTemplate = "5,20,50,100";
+		rowsPerPageTemplate = "5,10,20,50,100,200,500,1000,2000,5000";
 		
 		filterStyle = "width: 75px;";
 		filterStyleCode = "width: 50px;";

@@ -44,6 +44,8 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	private final SvgSymbolFactory<L,D,G,GT,F,FS> fSvgGraphic;
 	private final SvgFigureFactory<L,D,G,GT,F,FS> fSvgFigure;
 	
+	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
+
 	public AbstractGraphicSymbolizerServlet(SvgFactoryBuilder<L,D,G,GT,F,FS> fbStatus)
 	{
 		this.cF = fbStatus.getClassFigure();
@@ -72,7 +74,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	   	{
 	    	String cacheKey = EjbGraphicFactory.toCacheKey(m);
 	    	boolean inCache = this.cacheContainsKey(cacheKey);
-			logger.trace("Using cached value: "+inCache+" ("+cacheKey+")");
+			if(debugOnInfo) {logger.info("Using cached value: "+inCache+" ("+cacheKey+")");}
 	    	if(inCache)
 	    	{	
 	    		try

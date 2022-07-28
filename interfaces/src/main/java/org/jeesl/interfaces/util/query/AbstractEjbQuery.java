@@ -1,6 +1,7 @@
 package org.jeesl.interfaces.util.query;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -55,6 +56,15 @@ public abstract class AbstractEjbQuery implements Serializable,JeeslQuery
 	private Date toDate3;
 	public Date getToDate3() {return toDate3;}
 	public void setToDate3(Date toDate3) {this.toDate3 = toDate3;}
+	
+	//LocalDate
+	protected LocalDate ld1;
+	public LocalDate getLd1() {return ld1;}
+	public abstract AbstractEjbQuery ld1(LocalDate ld1);
+	
+	protected LocalDate ld2;
+	public LocalDate getLd2() {return ld2;}
+	public abstract AbstractEjbQuery ld2(LocalDate ld2);
 	
 	//Strings
 	private String string1;

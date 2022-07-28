@@ -1,7 +1,7 @@
 package net.sf.ahtutils.factory.txt;
 
 import org.jeesl.JeeslUtilTestBootstrap;
-import org.jeesl.factory.txt.util.TxtPeriodFactory;
+import org.jeesl.factory.txt.module.calendar.TxtPeriodFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;

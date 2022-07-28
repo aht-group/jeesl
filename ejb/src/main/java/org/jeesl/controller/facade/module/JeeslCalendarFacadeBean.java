@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -136,5 +137,26 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		cQ.orderBy(cB.asc(dStart));
 		
 		return em.createQuery(cQ).getResultList();
+	}
+	
+	public static Predicate dateRangeInRange(CriteriaBuilder cB, Expression<LocalDate> dStart, Expression<LocalDate> dEnd, LocalDate from, LocalDate to)
+	{
+		//After
+	    Predicate startAfterFrom = cB.greaterThanOrEqualTo(dStart, from);
+	    Predicate endAfterFrom = cB.greaterThanOrEqualTo(dEnd, from);
+	    Predicate endAfterTo = cB.greaterThanOrEqualTo(dEnd, to);
+
+	    //Before
+	    Predicate startBeforeTo = cB.lessThanOrEqualTo(dStart, to);
+	    Predicate startBeforeFrom = cB.lessThanOrEqualTo(dStart, from);
+	    Predicate endBeforeTo = cB.lessThanOrEqualTo(dEnd, to);
+
+		Predicate pOnlyStartAndStartInRange = cB.and(cB.isNull(dEnd),startAfterFrom,startBeforeTo);
+		Predicate pStartAndEndInRange = cB.and(cB.isNotNull(dEnd),startAfterFrom,endBeforeTo);
+		Predicate pStartOutsideEndInRange = cB.and(cB.isNotNull(dEnd),startBeforeFrom,endAfterFrom,endBeforeTo);
+		Predicate pStartInRangeEndOutside = cB.and(cB.isNotNull(dEnd),startAfterFrom,startBeforeTo,endAfterTo);
+		Predicate pStartBeforeRangeEndAfterRange = cB.and(cB.isNotNull(dEnd),startBeforeFrom,endAfterTo);
+
+		return cB.or(pOnlyStartAndStartInRange,pStartAndEndInRange,pStartOutsideEndInRange,pStartInRangeEndOutside,pStartBeforeRangeEndAfterRange);
 	}
 }
