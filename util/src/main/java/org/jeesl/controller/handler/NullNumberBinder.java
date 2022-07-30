@@ -23,6 +23,8 @@ public class NullNumberBinder
 		g = "";
 		h = "";
 		i = "";
+		j = "";
+		k = "";
 	}
 	
 	private String a; 
