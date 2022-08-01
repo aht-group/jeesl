@@ -47,11 +47,11 @@ public class JeeslGraphicFacadeBean<L extends JeeslLang, D extends JeeslDescript
 		CriteriaQuery<G> cQ = cB.createQuery(cG);
 		Root<S> root = cQ.from(cStatus);
 		
-		Path<G> pathProject = root.get("graphic");
+		Path<G> pGraphic = root.get("graphic");
 		Path<Long> pId = root.get("id");
 		
 		cQ.where(cB.equal(pId,ejbId));
-		cQ.select(pathProject);
+		cQ.select(pGraphic);
 		
 		try	{return em.createQuery(cQ).getSingleResult();}
 		catch (NoResultException ex){throw new JeeslNotFoundException("No Graphic found for status.id"+ejbId);}

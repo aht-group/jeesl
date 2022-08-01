@@ -41,26 +41,6 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		jtf = new Json4TupleFactory<A,B,C,D>();
 	}
 	
-	public Json4Tuples<A,B,C,D> build4Sum(List<Tuple> tuples)
-	{
-		Json4Tuples<A,B,C,D> json = new Json4Tuples<A,B,C,D>();
-		for(Tuple t : tuples)
-        {
-        	json.getTuples().add(jtf.buildSum(t));
-        }
-		return json;
-	}
-	
-	public Json4Tuples<A,B,C,D> build4Count(List<Tuple> tuples)
-	{
-		Json4Tuples<A,B,C,D> json = new Json4Tuples<A,B,C,D>();
-		for(Tuple t : tuples)
-        {
-        	json.getTuples().add(jtf.buildCount(t));
-        }
-		return json;
-	}
-	
 	protected void clear()
 	{
 		super.clear();
@@ -87,5 +67,25 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		mapB.putAll(EjbIdFactory.toIdMap(fUtils.find(cB, setB)));
 		mapC.putAll(EjbIdFactory.toIdMap(fUtils.find(cC, setC)));
 		mapD.putAll(EjbIdFactory.toIdMap(fUtils.find(cD, setId4)));
+	}
+	
+	public Json4Tuples<A,B,C,D> build4Sum(List<Tuple> tuples)
+	{
+		Json4Tuples<A,B,C,D> json = new Json4Tuples<A,B,C,D>();
+		for(Tuple t : tuples)
+        {
+        	json.getTuples().add(jtf.buildSum(t));
+        }
+		return json;
+	}
+	
+	public Json4Tuples<A,B,C,D> build4Count(List<Tuple> tuples)
+	{
+		Json4Tuples<A,B,C,D> json = new Json4Tuples<A,B,C,D>();
+		for(Tuple t : tuples)
+        {
+        	json.getTuples().add(jtf.buildCount(t));
+        }
+		return json;
 	}
 }

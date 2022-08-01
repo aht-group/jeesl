@@ -117,6 +117,14 @@ public class NullNumberBinder
 	public Integer kToInteger() {return integerFromString(k);}
 	public Double kToDouble() {return doubleFromString(k);}
 	
+	private String l;
+	public String getL() {return l;}
+	public void setL(String l) {this.l = l;}
+	public void integerToL(Integer value) {l = toString(value);}
+	public void doubleToL(Double value) {l = toString(value);}
+	public Integer lToInteger() {return integerFromString(l);}
+	public Double lToDouble() {return doubleFromString(l);}
+	
 	private String toString(Integer i)
 	{
 		StringBuffer sb = new StringBuffer();

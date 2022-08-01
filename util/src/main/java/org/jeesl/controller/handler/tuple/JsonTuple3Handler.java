@@ -47,14 +47,6 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 		dimension = 3;
 	}
 	
-	public boolean contains(A a, B b, C c) {return map3.containsKey(a) && map3.get(a).containsKey(b) &&  map3.get(a).get(b).containsKey(c);}
-	
-	public JsonTuple value(A a, B b, C c)
-	{
-		Json3Tuple<A,B,C> json = map3.get(a).get(b).get(c);
-		return JsonTupleFactory.build(json);
-	}
-	
 	public void clear()
 	{
 		super.clear();
@@ -137,5 +129,13 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 			}
 		}
 		return result;
+	}
+	
+	public boolean contains(A a, B b, C c) {return map3.containsKey(a) && map3.get(a).containsKey(b) &&  map3.get(a).get(b).containsKey(c);}
+	
+	public JsonTuple value(A a, B b, C c)
+	{
+		Json3Tuple<A,B,C> json = map3.get(a).get(b).get(c);
+		return JsonTupleFactory.build(json);
 	}
 }
