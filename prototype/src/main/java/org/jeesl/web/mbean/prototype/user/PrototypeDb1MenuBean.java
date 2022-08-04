@@ -37,7 +37,7 @@ public class PrototypeDb1MenuBean implements Serializable
 	
 	protected String localeCode;
 
-	public PrototypeDb1MenuBean()
+	private PrototypeDb1MenuBean()
 	{
 		userLoggedIn = false;
 		localeCode = "en";

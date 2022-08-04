@@ -70,7 +70,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	@Deprecated //Use the other constructure with caching features of JeeslSecurityBean!
+	@Deprecated //Use the next constructor with caching features of JeeslSecurityBean!
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
 									I identity,
 									JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
@@ -116,6 +116,48 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 	}
 	
+	
+	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
+										JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
+										JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity,
+										I identity,
+										V view
+//										,CTX ctx
+										)
+	{
+		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
+		this.fbSecurity=fbSecurity;
+		this.identity=identity;
+		this.fSecurity=fSecurity;
+		this.bSecurity=bSecurity;
+		
+		this.view=view;
+		this.pageCode=view.getCode();
+		
+		debugOnInfo = false;
+		noActions=true;
+		noRoles=true;
+		
+		mapAllow = new HashMap<>();
+		mapIdAllow = new HashMap<>();
+		mapArea = new HashMap<>();
+		mapHasRole = new HashMap<R,Boolean>();
+		actions = new ArrayList<A>();
+		
+		SecurityActionComparator<L,D,C,R,V,U,A,AT,USER> cfAction = new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>();
+		cfAction.factory(SecurityActionComparator.Type.position);
+		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
+		
+		txtAction = new TxtSecurityActionFactory<>();
+		
+		roles = bSecurity.fRoles(view);
+		areas = bSecurity.fAreas(view);
+		
+		noRoles = roles.size()==0;
+		update();
+	}
+	
+	@Deprecated //Use the next constructor with support of SecurityContext
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
 										JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
 										JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity,

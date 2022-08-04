@@ -118,10 +118,10 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 //		if(debugOnInfo) {logger.info("SubMenu "+key);}
 		return cacheSub.get(key);
 	}
-	private List<M> buildSub(String key)
+	private List<M> buildSub(String viewCode)
 	{
 		boolean withContext = context!=null;
-		if(debugOnInfo) {logger.info("Generating buildSub for ("+key+") withContext:"+context+" setup:"+setupRequired);}
+		if(debugOnInfo) {logger.info("Generating buildSub for ("+viewCode+") withContext:"+context+" setup:"+setupRequired);}
 		if(setupRequired) {this.setup();}
 		List<M> list = new ArrayList<>();
 		if(bSecurity==null)
@@ -134,17 +134,17 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		{
 			list.addAll(bSecurity.getMenus()
 				.stream()
-				.filter(m -> m.getContext().equals(context) && m.getParent()!=null && m.getParent().getView().getCode().equals(key) && setAllowed.contains(m.getId()))
+				.filter(m -> m.getContext().equals(context) && m.getParent()!=null && m.getParent().getView().getCode().equals(viewCode) && setAllowed.contains(m.getId()))
 				.collect(Collectors.toList()));
 		}
 		else
 		{
 			list.addAll(bSecurity.getMenus()
 				.stream()
-				.filter(m -> m.getParent()!=null && m.getParent().getView().getCode().equals(key) && setAllowed.contains(m.getId()))
+				.filter(m -> m.getParent()!=null && m.getParent().getView().getCode().equals(viewCode) && setAllowed.contains(m.getId()))
 				.collect(Collectors.toList()));
 		}
-		logger.info("Key: "+key+" list "+list.size());
+		logger.info("Key: "+viewCode+" list "+list.size());
 		Collections.sort(list,cpMenu);
 		return list;
 	}
