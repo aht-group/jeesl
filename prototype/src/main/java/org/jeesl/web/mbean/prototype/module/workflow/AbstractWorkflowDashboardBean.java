@@ -84,7 +84,7 @@ public abstract class AbstractWorkflowDashboardBean <L extends JeeslLang, D exte
 											FRC extends JeeslFileContainer<?,?>,
 											WCS extends JeeslConstraint<L,D,?,?,?,?,?,?>,
 											USER extends JeeslUser<SR>,
-											ID extends JeeslIdentity<SR,?,?,?,USER>>
+											ID extends JeeslIdentity<SR,?,?,?,?,USER>>
 				extends AbstractAdminBean<L,D,LOC>
 				implements Serializable,SbSingleBean
 {

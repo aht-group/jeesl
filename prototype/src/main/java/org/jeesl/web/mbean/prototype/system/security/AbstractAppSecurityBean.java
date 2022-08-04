@@ -11,6 +11,7 @@ import java.util.Map;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
+import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -26,6 +27,7 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplat
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.slf4j.Logger;
@@ -36,18 +38,18 @@ import net.sf.exlp.util.io.ObjectIO;
 import net.sf.exlp.util.io.StringUtil;
 
 public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescription,
-											C extends JeeslSecurityCategory<L,D>,
-											R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-											V extends JeeslSecurityView<L,D,C,R,U,A>,
-											U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-											A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-											AT extends JeeslSecurityTemplate<L,D,C>,
-											CTX extends JeeslSecurityContext<L,D>,
-											M extends JeeslSecurityMenu<L,V,CTX,M>,
-											AR extends JeeslSecurityArea<L,D,V>,
-											OT extends JeeslSecurityOnlineTutorial<L,D,V>,
-											OH extends JeeslSecurityOnlineHelp<V,?,?>,
-											USER extends JeeslUser<R>>
+										C extends JeeslSecurityCategory<L,D>,
+										R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
+										V extends JeeslSecurityView<L,D,C,R,U,A>,
+										U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
+										A extends JeeslSecurityAction<L,D,R,V,U,AT>,
+										AT extends JeeslSecurityTemplate<L,D,C>,
+										CTX extends JeeslSecurityContext<L,D>,
+										M extends JeeslSecurityMenu<L,V,CTX,M>,
+										AR extends JeeslSecurityArea<L,D,V>,
+										OT extends JeeslSecurityOnlineTutorial<L,D,V>,
+										OH extends JeeslSecurityOnlineHelp<V,?,?>,
+										USER extends JeeslUser<R>>
 					implements JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER>
 {
 	private static final long serialVersionUID = 1L;
@@ -56,13 +58,22 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	protected enum JoggerLoop {loadView}
 	
 	protected JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
+	
 	protected final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
+	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
+	protected JeeslLogger jogger;
+	
+	private final Comparator<R> cpRole;
+	private final PositionComparator<M> cpMenu;
+	
 	private final List<V> views; @Override public List<V> getViews() {return views;}
 	private final List<R> roles; public List<R> getRoles() {return roles;}
 
 	private final Map<CTX,List<M>> mapMenuAll;
 	private final Map<CTX,List<M>> mapMenuRoot;
+	private final Nested2Map<CTX,V,M> n2mMenu;
+	private final Map<M,M> mapRoot; public Map<M,M> getMapRoot() {return mapRoot;}
 	
 	private final Map<String,V> mapUrlPattern;
 	private final Map<String,V> mapUrlMapping;
@@ -80,11 +91,6 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	private final Map<R,List<A>> mapActionsByRole;
 	private final Map<U,List<A>> mapActionsByUsecase;
 	
-	private final Comparator<R> cpRole;
-	private final PositionComparator<M> cpMenu;
-	
-	protected JeeslLogger jogger;
-	
 	protected File dirCaching; protected void activateCaching(File dirCaching) {this.dirCaching=dirCaching;}
 	private boolean cachingFilesSaved;
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
@@ -94,10 +100,17 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	{
 		this.fbSecurity=fbSecurity;
 		
+		efMenu = fbSecurity.ejbMenu();
+		cpRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
+		cpMenu = new PositionComparator<M>();
+		
 		views = new ArrayList<>();
 		roles = new ArrayList<>();
+	
 		mapMenuAll = new HashMap<>();
 		mapMenuRoot = new HashMap<>();
+		mapRoot = new HashMap<>();
+		n2mMenu = new Nested2Map<>();
 		
 		mapUrlPattern = new HashMap<>();
 		mapUrlMapping = new HashMap<>();
@@ -116,9 +129,6 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		debugOnInfo = false;
 		cachingFilesSaved = false;
 		nullCtx = fbSecurity.ejbContext().build();
-		
-		cpRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
-		cpMenu = new PositionComparator<M>();
 	}
 	
 	public void postConstructDb(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
@@ -210,6 +220,8 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	{
 		mapMenuAll.clear();
 		mapMenuRoot.clear();
+		n2mMenu.clear();
+		mapRoot.clear();
 			
 		for(M m : fProvidedSecurity.all(fbSecurity.getClassMenu()))
 		{
@@ -222,12 +234,40 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 			
 			mapMenuAll.get(ctx).add(m);
 			if(m.getParent()==null) {mapMenuRoot.get(ctx).add(m);}
+			n2mMenu.put(ctx,m.getView(),m);
+			mapRoot.put(m,efMenu.toRoot(m));
 		}
 		
 		for(CTX ctx : mapMenuAll.keySet()) {Collections.sort(mapMenuAll.get(ctx),cpMenu);}
 		for(CTX ctx : mapMenuRoot.keySet()) {Collections.sort(mapMenuRoot.get(ctx),cpMenu);}
 		
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassMenu().getSimpleName(),"Loaded Contexts", mapMenuAll.size());}
+	}
+	
+	@Override public M getMenu(CTX ctx, V view)
+	{
+		logger.info("CTX: "+(ctx!=null));
+		logger.info("V: "+(view!=null));
+		
+		if(ctx==null && n2mMenu.containsKey(nullCtx,view))
+		{
+			logger.info("A");
+			return n2mMenu.get(nullCtx,view);
+		}
+		else if(ctx!=null && n2mMenu.containsKey(ctx,view)) 
+		{
+			logger.info("B .. n2m contains "+ctx.toString()+" "+view.toString());
+			
+			M m = n2mMenu.get(ctx, view);
+			logger.info(m.toString());
+			return m;
+		}
+		else
+		{
+			logger.info("C");
+			return null;
+		}
+		
 	}
 	
 	@Override public List<M> getAllMenus(CTX ctx)

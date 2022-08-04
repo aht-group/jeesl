@@ -42,9 +42,9 @@ public class PageDeniedCondition <L extends JeeslLang, D extends JeeslDescriptio
 	private boolean debugOnInfo;
 	
 	private final JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
-	private final JeeslIdentity<R,V,U,A,USER> identity;
+	private final JeeslIdentity<R,V,U,A,CTX,USER> identity;
 	
-	public PageDeniedCondition(boolean debugOnInfo, JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, JeeslIdentity<R,V,U,A,USER> identity)
+	public PageDeniedCondition(boolean debugOnInfo, JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, JeeslIdentity<R,V,U,A,CTX,USER> identity)
 	{
 		this.debugOnInfo=debugOnInfo;
 		this.bSecurity=bSecurity;

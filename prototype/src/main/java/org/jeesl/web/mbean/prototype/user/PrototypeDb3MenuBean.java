@@ -41,7 +41,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 									CTX extends JeeslSecurityContext<L,D>,
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									USER extends JeeslUser<R>,
-									I extends JeeslIdentity<R,V,U,A,USER>>
+									I extends JeeslIdentity<R,V,U,A,CTX,USER>>
 						implements JeeslMenuBean<V,CTX,M>
 {
 	final static Logger logger = LoggerFactory.getLogger(PrototypeDb3MenuBean.class);

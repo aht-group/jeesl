@@ -36,6 +36,7 @@ public interface JeeslSecurityBean<L extends JeeslLang,D extends JeeslDescriptio
 	List<V> getViews();
 	List<M> getAllMenus(CTX ctx);
 	List<M> getRootMenus(CTX ctx);
+	M getMenu(CTX ctx, V view);
 	
 	V findViewByCode(String cdoe);
 	V findViewByHttpPattern(String pattern);
