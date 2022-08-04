@@ -8,8 +8,11 @@
 	<c:set var="value" value="#{value}"/>
 	<c:set var="height"  value="#{not empty height ? height : 12}" />
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
+	<c:set var="marginRight" value="#{marginRight}"/>
+	<c:set var="marginLeft" value="#{marginLeft}"/>
 
 
+	<ui:remove>
 		<p:graphicImage rendered="#{rendered and (not empty value)}"
 						height="#{height}" 
 						value="/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}">
@@ -19,11 +22,8 @@
 			<c:if test="#{not empty style}"><f:attribute name="style" value="#{style}"/></c:if>
 			<c:if test="#{not empty styleClass}"><f:attribute name="styleClass" value="#{styleClass}"/></c:if>
 		</p:graphicImage>
-
-	
-	<ui:remove>
-		<img src = "#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}" />
 	</ui:remove> 
 	
+	<img src = "#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}" height="#{height}" style="#{not empty marginRight ? 'margin-right: '.concat(marginRight).concat('px;') : ''}#{not empty marginLeft ? 'margin-left: '.concat(marginLeft).concat('px;') : ''}"/>
 	
 </ui:composition>
