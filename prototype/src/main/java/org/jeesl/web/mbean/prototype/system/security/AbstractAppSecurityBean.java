@@ -1,15 +1,12 @@
 package org.jeesl.web.mbean.prototype.system.security;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
@@ -29,6 +26,7 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplat
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +48,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 											OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 											OH extends JeeslSecurityOnlineHelp<V,?,?>,
 											USER extends JeeslUser<R>>
-					implements Serializable,JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER>
+					implements JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppSecurityBean.class);
@@ -62,7 +60,9 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 
 	private final List<V> views; @Override public List<V> getViews() {return views;}
 	private final List<R> roles; public List<R> getRoles() {return roles;}
-	private final List<M> menus; @Override public List<M> getMenus() {return menus;}
+
+	private final Map<CTX,List<M>> mapMenuAll;
+	private final Map<CTX,List<M>> mapMenuRoot;
 	
 	private final Map<String,V> mapUrlPattern;
 	private final Map<String,V> mapUrlMapping;
@@ -81,12 +81,14 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	private final Map<U,List<A>> mapActionsByUsecase;
 	
 	private final Comparator<R> cpRole;
+	private final PositionComparator<M> cpMenu;
 	
 	protected JeeslLogger jogger;
 	
 	protected File dirCaching; protected void activateCaching(File dirCaching) {this.dirCaching=dirCaching;}
 	private boolean cachingFilesSaved;
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
+	private final CTX nullCtx;
 
 	public AbstractAppSecurityBean(final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
@@ -94,7 +96,8 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		
 		views = new ArrayList<>();
 		roles = new ArrayList<>();
-		menus = new ArrayList<>();
+		mapMenuAll = new HashMap<>();
+		mapMenuRoot = new HashMap<>();
 		
 		mapUrlPattern = new HashMap<>();
 		mapUrlMapping = new HashMap<>();
@@ -112,8 +115,10 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		
 		debugOnInfo = false;
 		cachingFilesSaved = false;
+		nullCtx = fbSecurity.ejbContext().build();
 		
 		cpRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
+		cpMenu = new PositionComparator<M>();
 	}
 	
 	public void postConstructDb(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
@@ -125,7 +130,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		roles.addAll(fSecurity.all(fbSecurity.getClassRole()));
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassRole().getSimpleName(),"Loaded", roles.size());}
 		
-		this.reloadMenu();
+		this.reloadMenu(fSecurity);
 		
 		List<A> actions = fSecurity.all(fbSecurity.getClassAction());
 		Map<V,List<A>> mapAction = fbSecurity.ejbAction().toMapView(actions);
@@ -149,7 +154,6 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 			update(v,mapAction.get(v),mapArea.get(v));
 		}
 		
-		
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),"Updated", views.size());}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassView(), views));}
 	}
@@ -161,7 +165,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		
 		views.addAll((List<V>)ObjectIO.load(new File(dirCaching,"views.ser")));
 		roles.addAll((List<R>)ObjectIO.load(new File(dirCaching,"roles.ser")));
-		menus.addAll((List<M>)ObjectIO.load(new File(dirCaching,"menus.ser")));
+//		menus.addAll((List<M>)ObjectIO.load(new File(dirCaching,"menus.ser")));
 		
 		mapUrlPattern.putAll((Map<String,V>)ObjectIO.load(new File(dirCaching,"mapUrlPattern.ser")));
 		mapUrlMapping.putAll((Map<String,V>)ObjectIO.load(new File(dirCaching,"mapUrlMapping.ser")));
@@ -183,7 +187,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		{
 			ObjectIO.save(new File(dirCaching,"views.ser"),views);
 			ObjectIO.save(new File(dirCaching,"roles.ser"),roles);
-			ObjectIO.save(new File(dirCaching,"menus.ser"),menus);
+//			ObjectIO.save(new File(dirCaching,"menus.ser"),menus);
 			
 			ObjectIO.save(new File(dirCaching,"mapUrlPattern.ser"),mapUrlPattern);
 			ObjectIO.save(new File(dirCaching,"mapUrlMapping.ser"),mapUrlMapping);
@@ -202,12 +206,42 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		}
 	}
 	
-	public void reloadMenu() {reloadMenu(fSecurity);}
 	public void reloadMenu(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fProvidedSecurity)
 	{
-		menus.clear();
-		menus.addAll(fProvidedSecurity.all(fbSecurity.getClassMenu()));
-		if(jogger!=null) {jogger.milestone(fbSecurity.getClassMenu().getSimpleName(),"Loaded", menus.size());}
+		mapMenuAll.clear();
+		mapMenuRoot.clear();
+			
+		for(M m : fProvidedSecurity.all(fbSecurity.getClassMenu()))
+		{
+			CTX ctx = null;
+			if(m.getContext()==null){ctx = nullCtx;}
+			else {ctx = m.getContext();}
+			
+			if(!mapMenuAll.containsKey(ctx)) {mapMenuAll.put(ctx,new ArrayList<>());}
+			if(!mapMenuRoot.containsKey(ctx)) {mapMenuRoot.put(ctx,new ArrayList<>());}
+			
+			mapMenuAll.get(ctx).add(m);
+			if(m.getParent()==null) {mapMenuRoot.get(ctx).add(m);}
+		}
+		
+		for(CTX ctx : mapMenuAll.keySet()) {Collections.sort(mapMenuAll.get(ctx),cpMenu);}
+		for(CTX ctx : mapMenuRoot.keySet()) {Collections.sort(mapMenuRoot.get(ctx),cpMenu);}
+		
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassMenu().getSimpleName(),"Loaded Contexts", mapMenuAll.size());}
+	}
+	
+	@Override public List<M> getAllMenus(CTX ctx)
+	{
+		if(ctx==null && mapMenuAll.containsKey(nullCtx)) {return mapMenuAll.get(nullCtx);}
+		else if(mapMenuAll.containsKey(ctx))  {return mapMenuAll.get(ctx);}
+		else {return new ArrayList<>();}
+	}
+	
+	@Override public List<M> getRootMenus(CTX ctx)
+	{
+		if(ctx==null && mapMenuRoot.containsKey(nullCtx)) {return mapMenuRoot.get(nullCtx);}
+		else if(mapMenuRoot.containsKey(ctx))  {return mapMenuRoot.get(ctx);}
+		else {return new ArrayList<>();}
 	}
 	
 	public void update(V view)

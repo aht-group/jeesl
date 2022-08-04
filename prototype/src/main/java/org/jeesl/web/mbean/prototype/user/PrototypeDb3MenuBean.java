@@ -1,19 +1,16 @@
 package org.jeesl.web.mbean.prototype.user;
 
-import java.io.Serializable;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.JeeslMenuBean;
 import org.jeesl.api.bean.JeeslSecurityBean;
-import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -28,14 +25,11 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslIdentity;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescription,
 									C extends JeeslSecurityCategory<L,D>,
@@ -48,20 +42,16 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									USER extends JeeslUser<R>,
 									I extends JeeslIdentity<R,V,U,A,USER>>
-		implements Serializable,JeeslMenuBean<V,CTX,M>
+						implements JeeslMenuBean<V,CTX,M>
 {
 	final static Logger logger = LoggerFactory.getLogger(PrototypeDb3MenuBean.class);
 	private static final long serialVersionUID = 1L;
 
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity;
-	private JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
 	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
 
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
-	private final PositionComparator<M> cpMenu;
 
 	private final Map<String,M> mapRoot; public Map<String,M> getMapRoot() {return mapRoot;}
-	private final Set<Long> setAllowed;
 	
 	private final LoadingCache<String,List<M>> cacheSub;
 	private final LoadingCache<String,List<M>> cacheBreadcrumb;
@@ -75,11 +65,8 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 
 	public PrototypeDb3MenuBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity)
-	{
-		this.fbSecurity=fbSecurity;
-		
+	{		
 		efMenu = fbSecurity.ejbMenu();
-		cpMenu = new PositionComparator<M>();
 		
 		cacheSub = Caffeine.newBuilder()
 			       .maximumSize(100)
@@ -95,7 +82,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	
 		
 		mapRoot = new HashMap<>();
-		setAllowed = new HashSet<>();
+//		setAllowed = new HashSet<>();
 		
 		mainMenu = new ArrayList<>();
 
@@ -103,57 +90,46 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		setupRequired = true;
 	}
 	
-	public void postConstructMenu(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
-									JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity,
-									CTX context, I identity)
+	public void postConstructMenu(JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, CTX context, I identity)
 	{
-		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
 		this.context=context;
+		
+		if(bSecurity==null)
+		{
+			
+			logger.error("Implementation for a empty bSecurity is deprecated");
+		}
+		
 		prepare(identity);
 	}
 	
-	public List<M> subMenu(String key)
-	{
-//		if(debugOnInfo) {logger.info("SubMenu "+key);}
-		return cacheSub.get(key);
-	}
+	public List<M> subMenu(String key) {return cacheSub.get(key);}
 	private List<M> buildSub(String viewCode)
 	{
-		boolean withContext = context!=null;
 		if(debugOnInfo) {logger.info("Generating buildSub for ("+viewCode+") withContext:"+context+" setup:"+setupRequired);}
 		if(setupRequired) {this.setup();}
+		List<M> tmp = new ArrayList<>();
+		tmp.addAll(bSecurity.getAllMenus(context)
+				.stream()
+				.filter(m -> m.getParent()!=null && m.getParent().getView().getCode().equals(viewCode))
+				.collect(Collectors.toList()));
+
 		List<M> list = new ArrayList<>();
-		if(bSecurity==null)
+		for(M m : tmp)
 		{
-			logger.error("Implementation for a empty bSecurity is not forseen");
-			return list;
+			if(userHasAccessTo(m))
+			{	
+				list.add(m);
+			}
 		}
 		
-		if(withContext)
-		{
-			list.addAll(bSecurity.getMenus()
-				.stream()
-				.filter(m -> m.getContext().equals(context) && m.getParent()!=null && m.getParent().getView().getCode().equals(viewCode) && setAllowed.contains(m.getId()))
-				.collect(Collectors.toList()));
-		}
-		else
-		{
-			list.addAll(bSecurity.getMenus()
-				.stream()
-				.filter(m -> m.getParent()!=null && m.getParent().getView().getCode().equals(viewCode) && setAllowed.contains(m.getId()))
-				.collect(Collectors.toList()));
-		}
 		logger.info("Key: "+viewCode+" list "+list.size());
-		Collections.sort(list,cpMenu);
+//		Collections.sort(list,cpMenu);
 		return list;
 	}
 	
-	public List<M> breadcrumb(String key)
-	{
-//		if(debugOnInfo) {logger.info("Requesting breadcrum for ("+key+")");}
-		return cacheBreadcrumb.get(key);
-	}
+	public List<M> breadcrumb(String key) {return cacheBreadcrumb.get(key);}
 	private List<M> buildBreadcrumb(String key)
 	{
 		if(debugOnInfo) {logger.info("Generating buildBreadcrumb for ("+key+") setup:"+setupRequired);}
@@ -165,26 +141,14 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			return list;
 		}
 		
-		if(context==null)
+		for(M m : bSecurity.getAllMenus(context))
 		{
-			for(M m : bSecurity.getMenus())
+			if(m.getView().getCode().equals(key))
 			{
-				if(m.getView().getCode().equals(key))
-				{
-					traverseParent(list,m);
-				}
+				traverseParent(list,m);
 			}
 		}
-		else
-		{
-			for(M m : bSecurity.getMenus())
-			{
-				if(m.getContext().equals(context) && m.getView().getCode().equals(key))
-				{
-					traverseParent(list,m);
-				}
-			}
-		}
+		
 		Collections.reverse(list);
 		return list;
 	}
@@ -201,8 +165,9 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	{
 		if(debugOnInfo) {logger.info("Resettings Menu");}
 		mapRoot.clear();
-		setAllowed.clear();
+
 		mainMenu.clear();
+		for(M m : bSecurity.getRootMenus(context)) {if(userHasAccessTo(m)) {mainMenu.add(m);}}
 		
 		cacheSub.invalidateAll();
 		cacheSub.cleanUp();
@@ -218,50 +183,26 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		this.identity=identity;
 		reset();
 	}
+	
+	private boolean userHasAccessTo(M m)
+	{
+		boolean visible = m.getView().isVisible() && (m.getView().getAccessPublic() || (identity.isLoggedIn() && (m.getView().getAccessLogin() || identity.hasView(m.getView()))));
+		boolean developer = identity.getRoleCodeWithAccessToAllPages()!=null && identity.hasRole(identity.getRoleCodeWithAccessToAllPages());
+		return (visible || developer);
+	}
 
 	private synchronized void setup()
 	{
 		if(setupRequired)
 		{
-			if(debugOnInfo)
-			{
-				logger.info(StringUtil.stars());
-				logger.info("Setup Menu");
-				logger.info("\tUsing "+JeeslSecurityBean.class.getSimpleName()+" "+(bSecurity!=null));
-				logger.info("\tUsing "+fbSecurity.getClassContext().getSimpleName()+" "+(context!=null));
-			}
+			ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 			
-			List<M> list = new ArrayList<>();
-			if(context!=null)
-			{
-				if(bSecurity!=null) {list.addAll(bSecurity.getMenus().stream().filter(m -> m.getContext().equals(context)).collect(Collectors.toList()));}
-				else {list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(),JeeslSecurityMenu.Attributes.context,context));}
-				if(debugOnInfo) {logger.info("\t"+fbSecurity.getClassMenu().getSimpleName()+": "+list.size()+" in context "+context.getCode());}
-			}
-			else
-			{
-				if(bSecurity!=null) {list.addAll(bSecurity.getMenus());}
-				else {list.addAll(fSecurity.all(fbSecurity.getClassMenu()));}
-				if(debugOnInfo) {logger.info("\t"+fbSecurity.getClassMenu().getSimpleName()+": "+list.size());}
-			}
-			Collections.sort(list,cpMenu);
-			
-			setAllowed.clear();
+			List<M> list = bSecurity.getAllMenus(context);
 			for(M m : list)
 			{
 				mapRoot.put(m.getView().getCode(),efMenu.toRoot(m));
-
-				boolean visible = m.getView().isVisible() && (m.getView().getAccessPublic() || (identity.isLoggedIn() && (m.getView().getAccessLogin() || identity.hasView(m.getView()))));
-				boolean developer = identity.getRoleCodeWithAccessToAllPages()!=null && identity.hasRole(identity.getRoleCodeWithAccessToAllPages());
-				
-				if(debugOnInfo) {logger.info("\t\t"+m.getView().getCode()+" visible:"+visible+" developer:"+developer);}
-				if(visible || developer)
-				{	
-					setAllowed.add(m.getId());
-					if(m.getParent()==null) {mainMenu.add(m);}
-				}
 			}
-			logger.info("\tAllowd Pages "+setAllowed.size());
+			logger.info("Setup completed in "+ptt.toTotalPeriod());
 			setupRequired = false;
 		}
 	}

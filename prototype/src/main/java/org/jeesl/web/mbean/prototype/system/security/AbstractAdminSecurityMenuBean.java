@@ -1,6 +1,5 @@
 package org.jeesl.web.mbean.prototype.system.security;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +68,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 											DS extends JeeslIoCmsSection<L,DS>,
 											USER extends JeeslUser<R>>
 		extends AbstractAdminSecurityBean<L,D,LOC,C,R,V,U,A,AT,CTX,M,AR,OT,OH,USER>
-		implements Serializable,SbSingleBean
+		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityMenuBean.class);

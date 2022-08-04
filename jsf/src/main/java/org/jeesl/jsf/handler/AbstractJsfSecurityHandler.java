@@ -17,6 +17,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
@@ -36,6 +38,8 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 													U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
 													A extends JeeslSecurityAction<L,D,R,V,U,AT>,
 													AT extends JeeslSecurityTemplate<L,D,C>,
+													CTX extends JeeslSecurityContext<L,D>,
+													M extends JeeslSecurityMenu<L,V,CTX,M>,
 													AR extends JeeslSecurityArea<L,D,V>,
 													USER extends JeeslUser<R>,
 													I extends JeeslIdentity<R,V,U,A,USER>>
@@ -115,48 +119,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 	}
-	
-	
-	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
-										JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
-										JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity,
-										I identity,
-										V view
-//										,CTX ctx
-										)
-	{
-		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
-		this.fbSecurity=fbSecurity;
-		this.identity=identity;
-		this.fSecurity=fSecurity;
-		this.bSecurity=bSecurity;
 		
-		this.view=view;
-		this.pageCode=view.getCode();
-		
-		debugOnInfo = false;
-		noActions=true;
-		noRoles=true;
-		
-		mapAllow = new HashMap<>();
-		mapIdAllow = new HashMap<>();
-		mapArea = new HashMap<>();
-		mapHasRole = new HashMap<R,Boolean>();
-		actions = new ArrayList<A>();
-		
-		SecurityActionComparator<L,D,C,R,V,U,A,AT,USER> cfAction = new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>();
-		cfAction.factory(SecurityActionComparator.Type.position);
-		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
-		
-		txtAction = new TxtSecurityActionFactory<>();
-		
-		roles = bSecurity.fRoles(view);
-		areas = bSecurity.fAreas(view);
-		
-		noRoles = roles.size()==0;
-		update();
-	}
-	
 	@Deprecated //Use the next constructor with support of SecurityContext
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
 										JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
@@ -195,6 +158,46 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		noRoles = roles.size()==0;
 		update();
 	}
+	
+	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
+			JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
+			JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity,
+			I identity,
+			V view
+//			,CTX ctx
+			)
+	{
+		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
+		this.fbSecurity=fbSecurity;
+		this.identity=identity;
+		this.fSecurity=fSecurity;
+		this.bSecurity=bSecurity;
+		
+		this.view=view;
+		this.pageCode=view.getCode();
+		
+		debugOnInfo = false;
+		noActions=true;
+		noRoles=true;
+		
+		mapAllow = new HashMap<>();
+		mapIdAllow = new HashMap<>();
+		mapArea = new HashMap<>();
+		mapHasRole = new HashMap<R,Boolean>();
+		actions = new ArrayList<A>();
+		
+		SecurityActionComparator<L,D,C,R,V,U,A,AT,USER> cfAction = new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>();
+		cfAction.factory(SecurityActionComparator.Type.position);
+		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
+		
+		txtAction = new TxtSecurityActionFactory<>();
+		
+		roles = bSecurity.fRoles(view);
+		areas = bSecurity.fAreas(view);
+		
+		noRoles = roles.size()==0;
+		update();
+		}
 	
 	protected void update()
 	{

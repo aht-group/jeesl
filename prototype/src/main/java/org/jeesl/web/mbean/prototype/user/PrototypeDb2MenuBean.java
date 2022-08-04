@@ -1,12 +1,10 @@
 package org.jeesl.web.mbean.prototype.user;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.JeeslMenuBean;
 import org.jeesl.api.bean.JeeslSecurityBean;
@@ -50,7 +48,7 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									USER extends JeeslUser<R>,
 									I extends JeeslIdentity<R,V,U,A,USER>>
-		implements Serializable,JeeslMenuBean<V,CTX,M>
+					implements JeeslMenuBean<V,CTX,M>
 {
 	final static Logger logger = LoggerFactory.getLogger(PrototypeDb2MenuBean.class);
 	private static final long serialVersionUID = 1L;
@@ -146,13 +144,13 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			if(context==null)
 			{
 				if(bSecurity==null) {list.addAll(fSecurity.all(fbSecurity.getClassMenu()));}
-				else {list.addAll(bSecurity.getMenus());}
+				else {list.addAll(bSecurity.getAllMenus(context));}
 				if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size());}
 			}
 			else
 			{
 				if(bSecurity==null) {list.addAll(fSecurity.allForParent(fbSecurity.getClassMenu(),JeeslSecurityMenu.Attributes.context,context));}
-				else {list.addAll(bSecurity.getMenus().stream().filter(m -> m.getContext().equals(context)).collect(Collectors.toList()));}
+				else {list.addAll(bSecurity.getAllMenus(context));}
 				if(debugOnInfo) {logger.info(fbSecurity.getClassMenu().getSimpleName()+": "+list.size()+" in context "+context.getCode());}
 			}
 			Collections.sort(list,new PositionComparator<M>());
