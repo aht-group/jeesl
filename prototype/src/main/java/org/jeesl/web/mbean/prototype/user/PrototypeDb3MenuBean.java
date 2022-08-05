@@ -90,14 +90,13 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		setupRequired = true;
 	}
 	
-	public void postConstructMenu(JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, CTX context, I identity)
+	public void postConstructMenu(JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, I identity)
 	{
 		this.bSecurity=bSecurity;
-		this.context=context;
+		this.context=identity.getContext();
 		
 		if(bSecurity==null)
 		{
-			
 			logger.error("Implementation for a empty bSecurity is deprecated");
 		}
 		

@@ -123,7 +123,6 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		
 	@Deprecated //Use the next constructor with support of SecurityView
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
-										JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
 										JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity,
 										I identity,
 										String viewCode)
@@ -131,7 +130,6 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
 		this.fbSecurity=fbSecurity;
 		this.identity=identity;
-		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
 		
 		this.view=bSecurity.findViewByCode(viewCode);
@@ -160,22 +158,20 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		update();
 	}
 	
-	@Deprecated //Use the next constructor with support of SecurityContext
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
-			JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
-			JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity,
+			JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
 			I identity,
 			V view
 			)
 	{
 		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
 		this.fbSecurity=fbSecurity;
-		this.identity=identity;
-		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
-		
+		this.identity=identity;
+
 		this.view=view;
 		this.pageCode=view.getCode();
+		menu = bSecurity.getMenu(identity.getContext(),view);
 		
 		debugOnInfo = false;
 		noActions=true;
@@ -200,45 +196,6 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		update();
 	}
 	
-	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
-			JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
-			JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity,
-			I identity,
-			M menu
-			)
-	{
-		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
-		this.fbSecurity=fbSecurity;
-		this.identity=identity;
-		this.fSecurity=fSecurity;
-		this.bSecurity=bSecurity;
-		
-		this.menu=menu;
-		this.view=menu.getView();
-		this.pageCode=view.getCode();
-		
-		debugOnInfo = false;
-		noActions=true;
-		noRoles=true;
-		
-		mapAllow = new HashMap<>();
-		mapIdAllow = new HashMap<>();
-		mapArea = new HashMap<>();
-		mapHasRole = new HashMap<R,Boolean>();
-		actions = new ArrayList<A>();
-		
-		SecurityActionComparator<L,D,C,R,V,U,A,AT,USER> cfAction = new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>();
-		cfAction.factory(SecurityActionComparator.Type.position);
-		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
-		
-		txtAction = new TxtSecurityActionFactory<>();
-		
-		roles = bSecurity.fRoles(view);
-		areas = bSecurity.fAreas(view);
-		
-		noRoles = roles.size()==0;
-		update();
-	}
 	
 	protected void update()
 	{

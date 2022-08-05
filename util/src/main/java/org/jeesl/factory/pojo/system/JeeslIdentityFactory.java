@@ -51,18 +51,21 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 	   			   A extends JeeslSecurityAction<?,?,R,V,U,?>,
 	   			   CTX extends JeeslSecurityContext<?,?>,
 	   			   USER extends JeeslUser<R>>
-	JeeslIdentityFactory<I,R,V,U,A,CTX,USER> factory(SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity,final Class<I> cIdentity)
+		JeeslIdentityFactory<I,R,V,U,A,CTX,USER> factory(SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity,final Class<I> cIdentity)
 	{
 		return new JeeslIdentityFactory<>(fbSecurity,cIdentity);
 	}
 	
-	public I build()
-	{		
+	public I build(CTX context)
+	{	
+		if(context==null) {logger.warn("Context is null, you will get into some trouble with Menu features ...");}
+		
 		I identity = null;
 		
 		try
 		{
 			identity = cIdentity.newInstance();
+			identity.setContext(context);
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
@@ -70,13 +73,13 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 		return identity;
 	}
 
-	public I create(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, USER user) {return build(fSecurity,null,user);}
-	public I build(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, USER user)
+	public I build(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, USER user, CTX context)
 	{		
 		I identity = null;
 		try
 		{
-			identity = cIdentity.newInstance();
+			identity = this.build(context);
+			if(identity==null) {throw new InstantiationException("Object can not be build");}
 			identity.setUser(user);
 			
 			List<R> roles = fSecurity.allRolesForUser(user);
@@ -93,7 +96,6 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 			
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
-		catch (IllegalAccessException e) {e.printStackTrace();}
 		
 		return identity;
 	}

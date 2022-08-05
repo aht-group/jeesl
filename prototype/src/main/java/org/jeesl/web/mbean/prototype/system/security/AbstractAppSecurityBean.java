@@ -246,25 +246,16 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	
 	@Override public M getMenu(CTX ctx, V view)
 	{
-		logger.info("CTX: "+(ctx!=null));
-		logger.info("V: "+(view!=null));
-		
 		if(ctx==null && n2mMenu.containsKey(nullCtx,view))
 		{
-			logger.info("A");
 			return n2mMenu.get(nullCtx,view);
 		}
 		else if(ctx!=null && n2mMenu.containsKey(ctx,view)) 
 		{
-			logger.info("B .. n2m contains "+ctx.toString()+" "+view.toString());
-			
-			M m = n2mMenu.get(ctx, view);
-			logger.info(m.toString());
-			return m;
+			return n2mMenu.get(ctx, view);
 		}
 		else
 		{
-			logger.info("C");
 			return null;
 		}
 		

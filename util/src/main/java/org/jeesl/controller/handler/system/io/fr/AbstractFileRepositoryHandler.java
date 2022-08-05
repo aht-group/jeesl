@@ -26,7 +26,9 @@ import org.jeesl.factory.ejb.io.fr.EjbIoFrContainerFactory;
 import org.jeesl.factory.ejb.io.fr.EjbIoFrMetaFactory;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.factory.txt.system.io.mail.core.TxtMimeTypeFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
+import org.jeesl.interfaces.controller.report.JeeslZipReport;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileReplication;
@@ -41,6 +43,9 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -405,6 +410,34 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	{
 		return download(meta);
 	}
+	
+	public final void handleFileUpload(FileUploadEvent event) throws JeeslNotFoundException
+	{
+		if(debugOnInfo) {logger.info("Handling FileUpload: "+event.getFile().getFileName());}
+		xmlFile.setName(event.getFile().getFileName());
+		xmlFile.setSize(event.getFile().getSize());
+		xmlFile.setData(XmlDataFactory.build(event.getFile().getContent()));
+		meta = efMeta.build(container,event.getFile().getFileName(),event.getFile().getSize(),new Date());
+		meta.setType(fFr.fByCode(fbFile.getClassType(), JeeslFileType.Code.unknown));
+		
+		this.handledFileUpload();
+    }
+	
+	public final StreamedContent fileStream() throws Exception
+	{
+		InputStream is = this.toInputStream();
+		return DefaultStreamedContent.builder().contentType(TxtMimeTypeFactory.build(meta.getFileName())).stream(()->is).name(meta.getFileName()).build();
+	}
+	
+	public final StreamedContent zipStream() throws Exception
+	{
+		InputStream is = new ByteArrayInputStream(this.zip());
+		return DefaultStreamedContent.builder().contentType(JeeslZipReport.mimeType).stream(()->is).name(this.getZipName()).build();
+	}
+
+
+	
+	
 	
 	public void copyTo(JeeslFileRepositoryHandler<STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
