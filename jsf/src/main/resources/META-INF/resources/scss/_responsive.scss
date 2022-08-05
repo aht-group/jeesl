@@ -73,12 +73,41 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 		}
 		
+		&.jeesl-dropdown-sub {
+			background: $main-background-gradient;
+			min-width: 100%;
+			opacity: 0;
+			position: absolute;
+			top: 100%;
+			transition: opacity $transition-duration linear, visibility 0s $transition-duration linear;
+			visibility: hidden;
+			
+			.jeesl-dropdown-item {
+				display: block;
+				transition: background $transition-duration linear;
+				
+				&:hover {
+					background: $dark-colour;
+				}
+				
+				.jeesl-dropdown-item-label {
+					border: none;
+					color: white;
+					float: none;
+					font-size: 1.3rem;
+					letter-spacing: -1px;
+				}
+			}
+		}
+		
 		.jeesl-dropdown-item {
 			background: $background;
+			display: inline-block;
 			opacity: 1;
 			padding: 0;
 		    pointer-events: all;
-		    transition: opacity 0s .2s;
+			position: relative;
+		    transition: opacity 0s $transition-duration;
 
 			-webkit-tap-highlight-color: $bright-colour;
 			
@@ -92,6 +121,12 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			&:hover {
 				background: $hover;
+				
+				.jeesl-dropdown-sub {
+					opacity: 1;
+					transition: opacity $transition-duration linear, visibility 0s 0s linear;
+					visibility: visible;
+				}
 			}
 			
 			.jeesl-dropdown-item-label {
@@ -404,7 +439,7 @@ body, .ui-widget {
     padding: 3px 0 0;
 	position: relative;
 	width: 100%;
-	z-index: 1;
+	z-index: 10;
 	
 	@media (max-width: 768px) {
 		border-color: transparent;
@@ -424,7 +459,7 @@ body, .ui-widget {
 	
 	ul {
 		li {
-			display: inline;
+			display: inline-block;
 		}
 	}
 	
@@ -462,20 +497,22 @@ body, .ui-widget {
 			}
 		}
 		
-		.jeesl-dropdown-item {
-			background: transparent;
-			
-			&:hover {
-				.jeesl-dropdown-item-label {
+		&:not(.jeesl-dropdown-sub) {
+			> .jeesl-dropdown-item:hover {
+				> .jeesl-dropdown-item-label {
 					border-bottom: 2px solid $dark-colour;
 					color: $dark-colour;
 				}
 			}
+		}
+		
+		.jeesl-dropdown-item {
+			background: transparent;
 			
 			&.jeesl-active {
 				background: $dark-colour;
 				
-				.jeesl-dropdown-item-label {
+				> .jeesl-dropdown-item-label {
 					color: $dark-colour;
 					border-bottom: 2px solid $dark-colour;
 						
