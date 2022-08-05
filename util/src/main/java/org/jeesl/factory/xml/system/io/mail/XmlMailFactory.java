@@ -36,14 +36,6 @@ public class XmlMailFactory
     	return mail;
     }
     
-    @Deprecated public static Mail create(Header header, String content)
-    {   	   	
-    	Mail mail = new Mail();
-    	mail.setHeader(header);
-    	mail.setExample(XmlExampleFactory.build(content));
-    	return mail;
-    }
-    
     public static Mail build(Header header, String text)
     {   	   	
     	Mail mail = new Mail();

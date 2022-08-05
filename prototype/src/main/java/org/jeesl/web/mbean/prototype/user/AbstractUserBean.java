@@ -69,6 +69,7 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 		this.fSecurity=fSecurity;
 	}
 
+	@Deprecated
 	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<L,D,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslMenuBean<V,?,?> bMenu)
 	{
 //		this.fUser=fUser;
