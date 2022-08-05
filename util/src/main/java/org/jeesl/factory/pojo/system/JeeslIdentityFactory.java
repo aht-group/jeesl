@@ -10,6 +10,7 @@ import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
@@ -18,11 +19,12 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
+public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 								   R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
 								   V extends JeeslSecurityView<?,?,?,R,U,A>,
 								   U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 								   A extends JeeslSecurityAction<?,?,R,V,U,?>,
+								   CTX extends JeeslSecurityContext<?,?>,
 								   USER extends JeeslUser<R>>
 {
 
@@ -42,24 +44,28 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
 		debugOnInfo = false;
 	} 
 
-	public static <I extends JeeslIdentity<R,V,U,A,USER>,
+	public static <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 	   			   R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
 	   			   V extends JeeslSecurityView<?,?,?,R,U,A>,
 	   			   U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 	   			   A extends JeeslSecurityAction<?,?,R,V,U,?>,
-	   			USER extends JeeslUser<R>>
-	JeeslIdentityFactory<I,R,V,U,A,USER> factory(SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity,final Class<I> cIdentity)
+	   			   CTX extends JeeslSecurityContext<?,?>,
+	   			   USER extends JeeslUser<R>>
+		JeeslIdentityFactory<I,R,V,U,A,CTX,USER> factory(SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity,final Class<I> cIdentity)
 	{
-		return new JeeslIdentityFactory<I,R,V,U,A,USER>(fbSecurity,cIdentity);
+		return new JeeslIdentityFactory<>(fbSecurity,cIdentity);
 	}
 	
-	public I build()
-	{		
+	public I build(CTX context)
+	{	
+		if(context==null) {logger.warn("Context is null, you will get into some trouble with Menu features ...");}
+		
 		I identity = null;
 		
 		try
 		{
 			identity = cIdentity.newInstance();
+			identity.setContext(context);
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
@@ -67,13 +73,13 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
 		return identity;
 	}
 
-	public I create(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, USER user) {return build(fSecurity,null,user);}
-	public I build(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, USER user)
+	public I build(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, USER user, CTX context)
 	{		
 		I identity = null;
 		try
 		{
-			identity = cIdentity.newInstance();
+			identity = this.build(context);
+			if(identity==null) {throw new InstantiationException("Object can not be build");}
 			identity.setUser(user);
 			
 			List<R> roles = fSecurity.allRolesForUser(user);
@@ -90,7 +96,6 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,USER>,
 			
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
-		catch (IllegalAccessException e) {e.printStackTrace();}
 		
 		return identity;
 	}

@@ -12,18 +12,22 @@
 	<c:set var="marginLeft" value="#{marginLeft}"/>
 
 
-	<ui:remove>
-		<p:graphicImage rendered="#{rendered and (not empty value)}"
-						height="#{height}" 
-						value="/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}">
-			<c:if test="#{not empty marginRight}"><f:attribute name="style" value="margin-right: #{marginRight}px;"/></c:if>
-			<c:if test="#{not empty marginLeft}"><f:attribute name="style" value="margin-left: #{marginLeft}px;"/></c:if>
-			<c:if test="#{not empty marginLeftRight}"><f:attribute name="style" value="margin-left: #{marginLeftRight}px; margin-right: #{marginLeftRight}px;"/></c:if>
-			<c:if test="#{not empty style}"><f:attribute name="style" value="#{style}"/></c:if>
-			<c:if test="#{not empty styleClass}"><f:attribute name="styleClass" value="#{styleClass}"/></c:if>
-		</p:graphicImage>
-	</ui:remove> 
 	
-	<img src = "#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}" height="#{height}" style="#{not empty marginRight ? 'margin-right: '.concat(marginRight).concat('px;') : ''}#{not empty marginLeft ? 'margin-left: '.concat(marginLeft).concat('px;') : ''}"/>
+	<p:graphicImage rendered="#{rendered and (not empty value)}"
+					height="#{height}" 
+					value="/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}">
+		<c:if test="#{not empty marginRight}"><f:attribute name="style" value="margin-right: #{marginRight}px;"/></c:if>
+		<c:if test="#{not empty marginLeft}"><f:attribute name="style" value="margin-left: #{marginLeft}px;"/></c:if>
+		<c:if test="#{not empty marginLeftRight}"><f:attribute name="style" value="margin-left: #{marginLeftRight}px; margin-right: #{marginLeftRight}px;"/></c:if>
+		<c:if test="#{not empty style}"><f:attribute name="style" value="#{style}"/></c:if>
+		<c:if test="#{not empty styleClass}"><f:attribute name="styleClass" value="#{styleClass}"/></c:if>
+	</p:graphicImage>
 	
+<ui:remove>
+	<ui:fragment rendered="#{rendered and (not empty value)}">
+			<img src="#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}"
+				height="#{height}"
+				style="#{not empty marginRight ? 'margin-right: '.concat(marginRight).concat('px;') : ''}#{not empty marginLeft ? 'margin-left: '.concat(marginLeft).concat('px;') : ''}"/>
+	</ui:fragment>
+</ui:remove> 
 </ui:composition>

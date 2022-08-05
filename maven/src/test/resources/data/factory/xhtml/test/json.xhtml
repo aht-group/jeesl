@@ -8,8 +8,8 @@
    xmlns:j="http://www.jeesl.org/jsf"
    xmlns:jp="http://jsf.jeesl.org/prototype"
    template="/WEB-INF/templates/jeesl.xhtml">
-<ui:define name="menu"><jp:menuMain code="#{componentDataJsonBean.security.pageCode}"/></ui:define>
-<ui:define name="headline"><jp:breadcrumbHeader code="#{componentDataJsonBean.security.pageCode}"/></ui:define>
+<ui:define name="menu"><jp:menuMain3 value="#{componentDataJsonBean.security}"/></ui:define>
+<ui:define name="headline"><jp:menuBreadcrumb3 value="#{componentDataJsonBean.security}"/></ui:define>
 <ui:define name="content">
 	<jp:grid id="grid">
 		<j:row>

@@ -24,29 +24,11 @@ public class UtilsBatchException extends Exception implements Serializable
 		errors = new ArrayList<String>();
 		exceptions = new ArrayList<Exception>();
 	}
-	
-	@Deprecated
-	public boolean isErrors()
-	{
-		return hasErrors();
-	}
-	
+		
 	public boolean hasErrors()
 	{
 		if(errors.size()>0 || exceptions.size()>0){return true;}
 		return false;
-	}
-	
-	@Deprecated
-	public void addError(String txt)
-	{
-		errors.add(txt);
-	}
-	
-	@Deprecated
-	public List<String> getErrors()
-	{
-		return errors;
 	}
 	
 	public void addAll(List<Exception> exceptions)

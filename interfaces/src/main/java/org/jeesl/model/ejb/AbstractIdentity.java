@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
@@ -16,12 +17,17 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 								   V extends JeeslSecurityView<?,?,?,R,U,A>,
 								   U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 								   A extends JeeslSecurityAction<?,?,R,V,U,?>,
+								   CTX extends JeeslSecurityContext<?,?>,
 								   USER extends JeeslUser<R>>
-						implements JeeslIdentity<R,V,U,A,USER>
+						implements JeeslIdentity<R,V,U,A,CTX,USER>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractIdentity.class);
 	public static final long serialVersionUID=1;
 	
+	private CTX context;
+	@Override public CTX getContext() {return context;}
+	@Override public void setContext(CTX context) {this.context = context;}
+
 	private String loginName;
 	@Override public String getLoginName() {return loginName;}
 	public void setLoginName(String loginName) {this.loginName = loginName;}

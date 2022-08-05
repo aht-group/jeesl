@@ -11,7 +11,6 @@ import org.jeesl.factory.builder.system.LightFactoryBuilder;
 import org.jeesl.factory.ejb.system.util.EjbTrafficLightFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.slf4j.Logger;

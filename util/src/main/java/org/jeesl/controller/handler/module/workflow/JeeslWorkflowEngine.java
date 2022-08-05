@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
-import org.jeesl.exception.JeeslWorkflowException;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.exception.processing.JeeslWorkflowException;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;

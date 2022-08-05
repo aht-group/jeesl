@@ -1,5 +1,6 @@
 package org.jeesl.interfaces.web;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public interface JeeslJsfSecurityHandler <R extends JeeslSecurityRole<?,?,?,V,U,
 											AR extends JeeslSecurityArea<?,?,V>,
 											USER extends JeeslUser<R>
 										>
-			extends JeeslSecurityHandler
+			extends Serializable,JeeslSecurityHandler
 {
 	List<R> getRoles();
 	

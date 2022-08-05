@@ -1,5 +1,6 @@
 package org.jeesl.api.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -26,13 +27,16 @@ public interface JeeslSecurityBean<L extends JeeslLang,D extends JeeslDescriptio
 									CTX extends JeeslSecurityContext<L,D>,
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									USER extends JeeslUser<R>>
+					extends Serializable
 {	
 	void update(V view);
 	void update(R role);
 	void update(U usecase);
 	
 	List<V> getViews();
-	List<M> getMenus();
+	List<M> getAllMenus(CTX ctx);
+	List<M> getRootMenus(CTX ctx);
+	M getMenu(CTX ctx, V view);
 	
 	V findViewByCode(String cdoe);
 	V findViewByHttpPattern(String pattern);

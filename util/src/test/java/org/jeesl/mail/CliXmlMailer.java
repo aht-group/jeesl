@@ -57,7 +57,7 @@ public class CliXmlMailer
 		Mail container = new Mail();
 		
 		Header header = XmlHeaderFactory.create(CliXmlMailer.class.getSimpleName()+" "+i, from, to);
-		Mail mail = XmlMailFactory.create(header, "test only");
+		Mail mail = XmlMailFactory.build(header, "test only");
 		mail.setLang("de");
 		mail.setCode("test");
 		

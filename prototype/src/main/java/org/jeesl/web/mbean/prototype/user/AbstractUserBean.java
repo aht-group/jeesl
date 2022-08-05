@@ -19,6 +19,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
@@ -33,17 +34,18 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 											V extends JeeslSecurityView<L,D,?,R,U,A>,
 											U extends JeeslSecurityUsecase<L,D,?,R,V,A>,
 											A extends JeeslSecurityAction<L,D,R,V,U,?>,
+											CTX extends JeeslSecurityContext<?,?>,
 											USER extends JeeslUser<R>,
-											I extends JeeslIdentity<R,V,U,A,USER>>
+											I extends JeeslIdentity<R,V,U,A,CTX,USER>>
 				extends AbstractAdminBean<L,D,LOC>
 				implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractUserBean.class);
 
-	private JeeslUserFacade<USER> fUser;
+//	private JeeslUserFacade<USER> fUser;
 	protected JeeslSecurityFacade<L,D,?,R,V,U,A,?,?,?,USER> fSecurity;
-	protected JeeslIdentityFactory<I,R,V,U,A,USER> fId;
+	protected JeeslIdentityFactory<I,R,V,U,A,CTX,USER> fId;
 	private JeeslMenuBean<V,?,?> bMenu;
 
 	protected JeeslLogger jogger;
@@ -63,13 +65,14 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 
 	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<L,D,?,R,V,U,A,?,?,?,USER> fSecurity)
 	{
-		this.fUser=fUser;
+//		this.fUser=fUser;
 		this.fSecurity=fSecurity;
 	}
 
+	@Deprecated
 	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<L,D,?,R,V,U,A,?,?,?,USER> fSecurity, JeeslMenuBean<V,?,?> bMenu)
 	{
-		this.fUser=fUser;
+//		this.fUser=fUser;
 		this.fSecurity=fSecurity;
 		this.bMenu=bMenu;
 	}

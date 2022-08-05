@@ -17,6 +17,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
@@ -36,9 +38,11 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 													U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
 													A extends JeeslSecurityAction<L,D,R,V,U,AT>,
 													AT extends JeeslSecurityTemplate<L,D,C>,
+													CTX extends JeeslSecurityContext<L,D>,
+													M extends JeeslSecurityMenu<L,V,CTX,M>,
 													AR extends JeeslSecurityArea<L,D,V>,
 													USER extends JeeslUser<R>,
-													I extends JeeslIdentity<R,V,U,A,USER>>
+													I extends JeeslIdentity<R,V,U,A,CTX,USER>>
 								implements JeeslJsfSecurityHandler<R,V,U,A,AR,USER>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractJsfSecurityHandler.class);
@@ -56,6 +60,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	
 	protected String pageCode; public String getPageCode() {return pageCode;}
 	protected V view; public V getView() {return view;}
+	private M menu; public M getMenu() {return menu;}
 
 	protected TxtSecurityActionFactory<L,D,V,A,AT> txtAction;
 	protected Comparator<A> comparatorAction;
@@ -70,7 +75,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	@Deprecated //Use the other constructure with caching features of JeeslSecurityBean!
+	@Deprecated //Use the next constructor with caching features of JeeslSecurityBean!
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
 									I identity,
 									JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
@@ -115,9 +120,9 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 	}
-	
+		
+	@Deprecated //Use the next constructor with support of SecurityView
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
-										JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
 										JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity,
 										I identity,
 										String viewCode)
@@ -125,7 +130,6 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
 		this.fbSecurity=fbSecurity;
 		this.identity=identity;
-		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
 		
 		this.view=bSecurity.findViewByCode(viewCode);
@@ -153,6 +157,45 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		noRoles = roles.size()==0;
 		update();
 	}
+	
+	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
+			JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
+			I identity,
+			V view
+			)
+	{
+		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
+		this.fbSecurity=fbSecurity;
+		this.bSecurity=bSecurity;
+		this.identity=identity;
+
+		this.view=view;
+		this.pageCode=view.getCode();
+		menu = bSecurity.getMenu(identity.getContext(),view);
+		
+		debugOnInfo = false;
+		noActions=true;
+		noRoles=true;
+		
+		mapAllow = new HashMap<>();
+		mapIdAllow = new HashMap<>();
+		mapArea = new HashMap<>();
+		mapHasRole = new HashMap<R,Boolean>();
+		actions = new ArrayList<A>();
+		
+		SecurityActionComparator<L,D,C,R,V,U,A,AT,USER> cfAction = new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>();
+		cfAction.factory(SecurityActionComparator.Type.position);
+		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
+		
+		txtAction = new TxtSecurityActionFactory<>();
+		
+		roles = bSecurity.fRoles(view);
+		areas = bSecurity.fAreas(view);
+		
+		noRoles = roles.size()==0;
+		update();
+	}
+	
 	
 	protected void update()
 	{
