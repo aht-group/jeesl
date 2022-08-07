@@ -1,7 +1,6 @@
 package org.jeesl.web.mbean.prototype.system.locale;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -24,9 +23,9 @@ import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntityDesc
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicStyle;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -66,7 +65,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
+										F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>
 >
 			extends AbstractTableBean<L,D,LOC,G,GT,F,FS,RE>
@@ -239,7 +238,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 		if(supportsGraphic)
 		{
 			GT type = fGraphic.fByCode(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol.toString());
-			FS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicStyle.Code.circle.toString());
+			FS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle.toString());
 			graphic = efGraphic.buildSymbol(type, style);
 			((EjbWithGraphic<G>)status).setGraphic(graphic);
 		}
@@ -266,7 +265,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 			{
 				logger.info("Need to create a graphic entity for this status");
 				GT type = fGraphic.fByCode(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol);
-				FS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicStyle.Code.circle);
+				FS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
 				graphic = fGraphic.persist(efGraphic.buildSymbol(type, style));
 				((EjbWithGraphic<G>)status).setGraphic(graphic);
 				status = fGraphic.update(status);

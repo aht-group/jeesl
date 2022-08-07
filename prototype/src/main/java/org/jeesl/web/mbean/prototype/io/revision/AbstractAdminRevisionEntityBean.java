@@ -336,6 +336,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		{
 			if(entity.getCategory()!=null){entity.setCategory(fRevision.find(fbRevision.getClassCategory(), entity.getCategory()));}
 			if(entity.getDiagram()!=null){entity.setDiagram(fRevision.find(fbRevision.getClassDiagram(), entity.getDiagram()));}
+			entity.setJscn(entity.getCode().substring(entity.getCode().lastIndexOf(".")+1,entity.getCode().length()));
 			entity = fRevision.save(entity);
 			reloadEntities();
 			reloadEntity();

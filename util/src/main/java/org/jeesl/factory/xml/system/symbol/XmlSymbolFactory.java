@@ -2,9 +2,9 @@ package org.jeesl.factory.xml.system.symbol;
 
 import org.jeesl.factory.xml.system.status.XmlStyleFactory;
 import org.jeesl.factory.xml.system.status.XmlStylesFactory;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicStyle;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -17,7 +17,7 @@ import net.sf.ahtutils.xml.symbol.Symbol;
 
 public class XmlSymbolFactory <L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSymbolFactory.class);
 		
@@ -43,7 +43,7 @@ public class XmlSymbolFactory <L extends JeeslLang, D extends JeeslDescription,
 		{
 			Styles styles = XmlStylesFactory.build();
 			
-			if(graphic.getStyle()!=null){styles.getStyle().add(xfStyle.build(JeeslGraphicStyle.Group.outer,graphic.getStyle()));}
+			if(graphic.getStyle()!=null){styles.getStyle().add(xfStyle.build(JeeslGraphicShape.Group.outer,graphic.getStyle()));}
 			
 			xml.setStyles(styles);
 		}

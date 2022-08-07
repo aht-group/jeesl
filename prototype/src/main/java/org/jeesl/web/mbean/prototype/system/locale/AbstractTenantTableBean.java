@@ -22,9 +22,9 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicStyle;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -59,7 +59,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,G>,
 										R extends JeeslTenantRealm<L,D,R,G>, RREF extends EjbWithId,
 										G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
+										F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>>
 					extends AbstractTableBean<L,D,LOC,G,GT,F,FS,RE> implements Serializable
 {
@@ -220,7 +220,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 		((JeeslWithTenantSupport<R>)status).setRref(rref.getId());
 
 		GT type = fGraphic.fByEnum(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol);
-		FS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicStyle.Code.circle);
+		FS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
 		graphic = efGraphic.buildSymbol(type, style);
 		((EjbWithGraphic<G>)status).setGraphic(graphic);
 	}
@@ -239,7 +239,7 @@ public class AbstractTenantTableBean <L extends JeeslLang, D extends JeeslDescri
 		{
 			logger.info("Need to create a graphic entity for this status");
 			GT type = fGraphic.fByEnum(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol);
-			FS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicStyle.Code.circle);
+			FS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
 			graphic = fGraphic.persist(efGraphic.buildSymbol(type, style));
 			((EjbWithGraphic<G>)status).setGraphic(graphic);
 			status = fGraphic.update(status);

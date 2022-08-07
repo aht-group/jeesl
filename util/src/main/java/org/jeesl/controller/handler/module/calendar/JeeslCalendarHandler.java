@@ -88,9 +88,7 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 	{
 		if(debugOnInfo) {logger.info("saveItem "+item.toString());}
 
-		item.setStartZone(fCalendar.find(fbCalendar.getClassZone(),item.getStartZone()));
-		item.setEndZone(fCalendar.find(fbCalendar.getClassZone(),item.getEndZone()));
-		item.setType(fCalendar.find(fbCalendar.getClassItemType(),item.getType()));
+		efItem.converter(fCalendar,item);
 		
 		if(item.isAllDay())
 		{

@@ -1,21 +1,16 @@
 package org.jeesl.client.model.ejb.system.graphic;
 
-import java.io.Serializable;
-
 import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
-import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
-import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 
 import net.sf.ahtutils.model.qualifier.EjbErNode;
 
 @EjbErNode(name="Figure",category="symbol",subset="symbol")
-public class GraphicFigure implements EjbRemoveable,Serializable,EjbPersistable,
-								JeeslGraphicFigure<Lang,Description,Graphic,GraphicType,GraphicFigure,GraphicStyle>
+public class GraphicFigure implements JeeslGraphicComponent<Lang,Description,Graphic,GraphicType,GraphicFigure,GraphicStyle>
 {
 	public static final long serialVersionUID=1;
 
@@ -24,7 +19,7 @@ public class GraphicFigure implements EjbRemoveable,Serializable,EjbPersistable,
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 	
-	@Override public String resolveParentAttribute() {return JeeslGraphicFigure.Attributes.graphic.toString();}
+	@Override public String resolveParentAttribute() {return JeeslGraphicComponent.Attributes.graphic.toString();}
 	@ManyToOne
 	private Graphic graphic;
 	@Override public Graphic getGraphic() {return graphic;}

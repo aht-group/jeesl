@@ -49,7 +49,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	public static final long serialVersionUID=1;
 
 	private SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity;
-	protected JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity;
+	private JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity;
 	protected JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity;
 	
 	protected I identity;
@@ -180,11 +180,11 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		mapAllow = new HashMap<>();
 		mapIdAllow = new HashMap<>();
 		mapArea = new HashMap<>();
-		mapHasRole = new HashMap<R,Boolean>();
-		actions = new ArrayList<A>();
+		mapHasRole = new HashMap<>();
+		actions = new ArrayList<>();
 		
 		SecurityActionComparator<L,D,C,R,V,U,A,AT,USER> cfAction = new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>();
-		cfAction.factory(SecurityActionComparator.Type.position);
+//		cfAction.factory(SecurityActionComparator.Type.position);
 		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
 		
 		txtAction = new TxtSecurityActionFactory<>();
@@ -196,10 +196,9 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		update();
 	}
 	
-	
 	protected void update()
 	{
-		clear();
+		this.clear();
 		List<A> actions = new ArrayList<>();
 		if(bSecurity!=null) {actions.addAll(bSecurity.fActions(view));}
 		else {actions.addAll(fSecurity.allForParent(fbSecurity.getClassAction(),view));}
@@ -352,8 +351,10 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 			boolean allowSystem = identity.hasAction(JeeslSecurityAction.toCode(action));
 			boolean allowDomain = hasDomainRole(action,staffRoles);
 
+			if(debugOnInfo) {logger.info("\t\t"+action.getCode()+" system:"+allowSystem+" domain:"+allowDomain);}
+			
 			boolean allow = allowSystem || allowDomain;
-			addActionWithSecurity(action,allow);
+			this.addActionWithSecurity(action,allow);
 		}
 		checkIcon();
 	}

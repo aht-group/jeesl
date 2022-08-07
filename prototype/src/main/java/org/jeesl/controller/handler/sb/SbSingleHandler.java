@@ -167,7 +167,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	}
 	public void add(T item)
 	{
-		if(!list.contains(item)) {list.add(item);}
+		if(item!=null && !list.contains(item)) {list.add(item);}
 	}
 
 	public void clear()
@@ -193,7 +193,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	
 	public void setDefault(T t)
 	{
-		if(list.contains(t)) {selection = t;}
+		if(t!=null && list.contains(t)) {selection = t;}
 		else {setDefault();}
 	}
 	
@@ -211,7 +211,6 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 			}
 		}
 	}
-	
 	
 	public void selectNext() throws JeeslLockingException, JeeslConstraintViolationException
 	{
@@ -238,7 +237,11 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 		logger.info(StringUtil.stars());
 		for(T t : list)
 		{
-			logger.info(t.toString()+" "+(t.equals(selection)));
+			StringBuilder sb = new StringBuilder();
+			if(t!=null) {sb.append(t.toString());} else {sb.append("null");}
+			sb.append(" ");
+			sb.append(t.equals(selection));
+			logger.info(sb.toString());
 		}
 	}
 }

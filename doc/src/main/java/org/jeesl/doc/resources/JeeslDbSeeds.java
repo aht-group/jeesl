@@ -6,7 +6,7 @@ import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.system.constraint.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.JeeslConstraintType;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicStyle;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.model.xml.system.io.db.Db;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class JeeslDbSeeds
 	private static void applyGraphic(Db db)
 	{
 		db.getSeed().add(XmlSeedFactory.build(JeeslGraphicType.class.getName(),"jeesl/db/system/graphic/type.xml"));
-		db.getSeed().add(XmlSeedFactory.build(JeeslGraphicStyle.class.getName(),"jeesl/db/system/graphic/style.xml"));
+		db.getSeed().add(XmlSeedFactory.build(JeeslGraphicShape.class.getName(),"jeesl/db/system/graphic/style.xml"));
 	}
 	
 	private static void applyRevision(Db db)

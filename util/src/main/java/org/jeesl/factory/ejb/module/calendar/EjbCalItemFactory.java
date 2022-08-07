@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.module.calendar;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.jeesl.interfaces.facade.JeeslFacade;

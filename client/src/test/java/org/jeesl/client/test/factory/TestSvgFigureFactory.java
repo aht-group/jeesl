@@ -21,7 +21,7 @@ import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.svg.SvgFigureFactory;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.junit.Test;
 import org.openfuxml.media.transcode.Svg2SvgTranscoder;
 import org.slf4j.Logger;
@@ -59,9 +59,9 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	
 	public void init()
 	{
-		styleCircle = efStyle.build(JeeslGraphicFigure.Style.circle); styleCircle.setId(1);
-		styleSquare = efStyle.build(JeeslGraphicFigure.Style.square); styleSquare.setId(2);
-		styleTriangle = efStyle.build(JeeslGraphicFigure.Style.triangle); styleTriangle.setId(3);
+		styleCircle = efStyle.build(JeeslGraphicShape.Code.circle); styleCircle.setId(1);
+		styleSquare = efStyle.build(JeeslGraphicShape.Code.square); styleSquare.setId(2);
+		styleTriangle = efStyle.build(JeeslGraphicShape.Code.triangle); styleTriangle.setId(3);
 		
 		f1 	 = efFigure.build(    null,   styleCircle,	 true, 	15, 	colorGreen, 0, 0,   0);		f1.setId(1);
 		f2   = efFigure.build( 	  null,   styleCircle,	 false, 14, 	colorBlue, -5, 0,   0);		f2.setId(2);

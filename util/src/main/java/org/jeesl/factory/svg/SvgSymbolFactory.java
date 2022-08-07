@@ -8,9 +8,9 @@ import java.awt.geom.Rectangle2D;
 
 import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicStyle;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -26,7 +26,7 @@ import net.sf.ahtutils.xml.symbol.Symbol;
 
 public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgSymbolFactory.class);
 		
@@ -39,7 +39,7 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 	
     public static <L extends JeeslLang, D extends JeeslDescription,
 				    G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+					F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
     	SvgSymbolFactory<L,D,G,GT,F,FS> factory()
 	{
 	    return new SvgSymbolFactory<L,D,G,GT,F,FS>();
@@ -74,10 +74,10 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		int size = 5; if(rule.getSize()!=null){size = rule.getSize();}
 		String color = "000000";if(rule.getColor()!=null){color = rule.getColor();}
 		
-		JeeslGraphicStyle.Code style = JeeslGraphicStyle.Code.circle;
+		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.circle;
 		if(rule.getStyle()!=null && rule.getStyle().getCode()!=null)
 		{
-			style = JeeslGraphicStyle.Code.valueOf(rule.getStyle().getCode());
+			style = JeeslGraphicShape.Code.valueOf(rule.getStyle().getCode());
 		}
 		
 		return build(impl,canvasSize,style,size,color);
@@ -88,10 +88,10 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		int size = 5; if(rule.getSize()!=null){size = rule.getSize();}
 		String color = "000000"; if(rule.getColor()!=null){color = rule.getColor();}
 		
-		JeeslGraphicStyle.Code style = JeeslGraphicStyle.Code.square;
+		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.square;
 		if(rule.getStyle()!=null && rule.getStyle().getCode()!=null)
 		{
-			style = JeeslGraphicStyle.Code.valueOf(rule.getStyle().getCode());
+			style = JeeslGraphicShape.Code.valueOf(rule.getStyle().getCode());
 		}
 		
 		return test(impl,canvasSize,style,size,color);
@@ -106,7 +106,7 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		{
 			for(Size s : rule.getSizes().getSize())
 			{
-				if(s.getGroup().equals(JeeslGraphicStyle.Size.outer.toString()))
+				if(s.getGroup().equals(JeeslGraphicShape.Size.outer.toString()))
 				{
 					size = s.getValue();
 				}
@@ -118,21 +118,21 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		{
 			for(net.sf.ahtutils.xml.symbol.Color c : rule.getColors().getColor())
 			{
-				if(c.getGroup().equals(JeeslGraphicStyle.Color.outer.toString()))
+				if(c.getGroup().equals(JeeslGraphicShape.Color.outer.toString()))
 				{
 					color = c.getValue();
 				}
 			}
 		}
 		
-		JeeslGraphicStyle.Code style = JeeslGraphicStyle.Code.circle;
+		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.circle;
 		if(rule.isSetStyles() && rule.getStyles().isSetStyle())
 		{
 			for(Style s : rule.getStyles().getStyle())
 			{
-				if(s.getGroup().equals(JeeslGraphicStyle.Group.outer.toString()))
+				if(s.getGroup().equals(JeeslGraphicShape.Group.outer.toString()))
 				{
-					style = JeeslGraphicStyle.Code.valueOf(s.getCode());
+					style = JeeslGraphicShape.Code.valueOf(s.getCode());
 				}
 			}
 		}
@@ -140,7 +140,7 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		return build(impl,canvasSize,style,size,color);
 	}
 	
-	private static SVGGraphics2D build(DOMImplementation impl, int canvasSize, JeeslGraphicStyle.Code style, int size, String color)
+	private static SVGGraphics2D build(DOMImplementation impl, int canvasSize, JeeslGraphicShape.Code style, int size, String color)
 	{
 		SVGDocument doc = (SVGDocument) impl.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, "svg", null);
 		SVGGraphics2D g = new SVGGraphics2D(doc);
@@ -166,7 +166,7 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		return g;
 	}
 	
-	private static SVGGraphics2D test(DOMImplementation impl, int canvasSize, JeeslGraphicStyle.Code style, int size, String color)
+	private static SVGGraphics2D test(DOMImplementation impl, int canvasSize, JeeslGraphicShape.Code style, int size, String color)
 	{
 		SVGDocument doc = (SVGDocument) impl.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, "svg", null);
 		SVGGraphics2D g = new SVGGraphics2D(doc);

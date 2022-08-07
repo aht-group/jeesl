@@ -13,9 +13,9 @@ import java.util.List;
 import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.ext.awt.geom.Polygon2D;
 import org.apache.batik.svggen.SVGGraphics2D;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicStyle;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -27,7 +27,7 @@ import org.w3c.dom.svg.SVGDocument;
 
 public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgFigureFactory.class);
 	
@@ -40,7 +40,7 @@ public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
 	
     public static <L extends JeeslLang, D extends JeeslDescription,
     			G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-    			F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+    			F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
 		SvgFigureFactory<L,D,G,GT,F,FS> factory()
 	{
     	return new SvgFigureFactory<L,D,G,GT,F,FS>();
@@ -59,7 +59,7 @@ public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
 			g.create();
 			Shape shape = null;
 			g.setPaint(Color.decode("#" + f.getColor()));
-			switch (JeeslGraphicStyle.Code.valueOf(f.getStyle().getCode()))
+			switch (JeeslGraphicShape.Code.valueOf(f.getStyle().getCode()))
 			{
 				case circle:
 					shape = new Ellipse2D.Double(f.getOffsetX(), f.getOffsetY(), f.getSize(), f.getSize());

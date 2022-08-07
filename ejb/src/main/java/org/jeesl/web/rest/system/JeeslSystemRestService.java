@@ -16,8 +16,8 @@ import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntityMapping;
 import org.jeesl.interfaces.model.io.revision.er.JeeslRevisionDiagram;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
-import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicFigure;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -41,7 +41,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 								R extends JeeslTenantRealm<L,D,R,G>,
 								S extends EjbWithId,
 								G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
+								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
 								RC extends JeeslRevisionCategory<L,D,RC,?>,
 								REM extends JeeslRevisionEntityMapping<?,?,?>,
 								RE extends JeeslRevisionEntity<L,D,RC,REM,RA,ERD>,
@@ -78,7 +78,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 						R extends JeeslTenantRealm<L,D,R,G>,
 						S extends EjbWithId,
 						G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-						F extends JeeslGraphicFigure<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
+						F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
 						RC extends JeeslRevisionCategory<L,D,RC,?>,
 						REM extends JeeslRevisionEntityMapping<?,?,?>,
 						RE extends JeeslRevisionEntity<L,D,RC,REM,RA,ERD>,
