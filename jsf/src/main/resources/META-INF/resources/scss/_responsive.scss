@@ -83,7 +83,6 @@ $enable-pointer-cursor-for-buttons: true;
 			visibility: hidden;
 			
 			.jeesl-dropdown-item {
-				display: block;
 				transition: background $transition-duration linear;
 				
 				&:hover {
@@ -102,7 +101,7 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.jeesl-dropdown-item {
 			background: $background;
-			display: inline-block;
+			display: block;
 			opacity: 1;
 			padding: 0;
 		    pointer-events: all;
@@ -498,10 +497,14 @@ body, .ui-widget {
 		}
 		
 		&:not(.jeesl-dropdown-sub) {
-			> .jeesl-dropdown-item:hover {
-				> .jeesl-dropdown-item-label {
-					border-bottom: 2px solid $dark-colour;
-					color: $dark-colour;
+			> .jeesl-dropdown-item {
+				display: inline-block;
+				
+				&:hover {
+					> .jeesl-dropdown-item-label {
+						border-bottom: 2px solid $dark-colour;
+						color: $dark-colour;
+					}
 				}
 			}
 		}
@@ -510,8 +513,6 @@ body, .ui-widget {
 			background: transparent;
 			
 			&.jeesl-active {
-				background: $dark-colour;
-				
 				> .jeesl-dropdown-item-label {
 					color: $dark-colour;
 					border-bottom: 2px solid $dark-colour;
