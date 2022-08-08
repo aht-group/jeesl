@@ -16,4 +16,10 @@ public class BooleanComparator
         if(b==null){return false;}
         else {return b;}
     }
+    
+    public static int emptyInt(Object o)
+    {
+    	if(o==null) {return 0;}
+    	else {return 1;}
+    }
 }

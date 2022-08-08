@@ -22,6 +22,8 @@ public interface JeeslIcon <L extends JeeslLang, D extends JeeslDescription,
 	public enum Network {download,upload}
 	public static enum CodeTreeFilter{tfCollapseAll,tfExpandAll,tfExpandTwo,tfExpandThree,tfExpandRelevant}
 	public enum Ejb{ejbUnsaved,ejbInvisible}
+	public enum Crud{jeeslDelete}
+	public enum Arrow{jeeslArrowLeft}
 	
 	public static final String jeeslLibIcons = "jeesl/prototype/library-icons.xml";
 }
