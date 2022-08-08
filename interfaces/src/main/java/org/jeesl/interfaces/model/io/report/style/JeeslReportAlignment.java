@@ -2,7 +2,7 @@ package org.jeesl.interfaces.model.io.report.style;
 
 import java.io.Serializable;
 
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntityDescription;
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;

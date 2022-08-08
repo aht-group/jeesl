@@ -14,8 +14,8 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
 
 public interface JeeslGraphicComponent<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+								G extends JeeslGraphic<L,D,GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<L,D,G,GT,GC,GS>, GS extends JeeslStatus<L,D,GS>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithPositionVisible,EjbWithParentAttributeResolver
 {
 	public enum Attributes{graphic}
@@ -23,8 +23,8 @@ public interface JeeslGraphicComponent<L extends JeeslLang, D extends JeeslDescr
 	G getGraphic();
 	void setGraphic(G graphic);
 	
-	FS getStyle();
-	void setStyle(FS style);
+	GS getStyle();
+	void setStyle(GS style);
 	
 	boolean isCss();
 	void setCss(boolean css);

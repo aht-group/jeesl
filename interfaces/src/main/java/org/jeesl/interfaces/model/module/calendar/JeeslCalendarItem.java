@@ -3,7 +3,7 @@ package org.jeesl.interfaces.model.module.calendar;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntity;
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
@@ -13,15 +13,21 @@ public interface JeeslCalendarItem <CAL extends JeeslCalendar<ZONE,?>,
 									ZONE extends JeeslCalendarTimeZone<?,?>,
 									IT extends JeeslCalendarItemType<?,?,?,IT,?>
 									>
-		extends  Serializable,EjbWithId,
-					EjbSaveable,EjbRemoveable,EjbWithParentAttributeResolver,
-					JeeslRestDownloadEntity
+		extends  Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
+					EjbWithParentAttributeResolver,
+					JeeslRestDownloadEntityAttributes
 //					,JeeslWithTimeline
 {
 	public enum Attributes {calendar,utcStart,utcEnd}
 	
 	CAL getCalendar();
 	void setCalendar(CAL calendar);
+	
+	String getTitle();
+	void setTitle(String title);
+	
+	String getPlace();
+	void setPlace(String place);
 	
 	IT getType();
 	void setType(IT type);
@@ -43,9 +49,6 @@ public interface JeeslCalendarItem <CAL extends JeeslCalendar<ZONE,?>,
 	
 	LocalDateTime getUtcEnd();
 	void setUtcEnd(LocalDateTime utcEnd);
-	
-	String getTitle();
-	void setTitle(String title);
 	
 	public boolean isAllDay();
 	public void setAllDay(boolean allDay);

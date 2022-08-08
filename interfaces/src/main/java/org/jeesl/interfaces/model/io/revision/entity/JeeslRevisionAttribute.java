@@ -2,6 +2,7 @@ package org.jeesl.interfaces.model.io.revision.entity;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -21,7 +22,7 @@ public interface JeeslRevisionAttribute<L extends JeeslLang, D extends JeeslDesc
 		extends Serializable,EjbRemoveable,EjbPersistable,JeeslStatusWithSymbol,EjbWithId,
 				EjbWithCode,EjbWithPosition,
 				EjbWithLang<L>,EjbWithDescription<D>,
-				JeeslRestDownloadEntity
+				JeeslRestDownloadEntityAttributes
 {
 	public enum Attributes{entity};
 	public static enum Type{text,number,date,amount,bool}

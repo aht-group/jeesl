@@ -2,7 +2,7 @@ package org.jeesl.interfaces.model.io.iot.matrix;
 
 import java.io.Serializable;
 
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntity;
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 public interface JeeslIotMatrixDevice <L extends JeeslLang, D extends JeeslDescription,
 										LAYOUT extends JeeslIotMatrixLayout<L,D,LAYOUT,?>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbWithPositionVisible,EjbWithCode,EjbWithName,
-				JeeslRestDownloadEntity
+				JeeslRestDownloadEntityAttributes
 {
 	
 	LAYOUT getLayout();

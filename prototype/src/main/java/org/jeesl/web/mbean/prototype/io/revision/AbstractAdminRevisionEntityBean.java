@@ -32,11 +32,11 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionViewMapping;
 import org.jeesl.interfaces.model.io.revision.data.JeeslRevisionScope;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntity;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntityMapping;
@@ -306,7 +306,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		try
 		{
 			Class<?> c = Class.forName(entity.getCode());
-			supportsJeeslAttributeDownload = JeeslRestDownloadEntity.class.isAssignableFrom(c);
+			supportsJeeslAttributeDownload = JeeslRestDownloadEntityAttributes.class.isAssignableFrom(c);
 			className = c.getSimpleName();
 			logger.info(c.getName()+" supportsJeeslAttributeDownload:"+supportsJeeslAttributeDownload);
 		}

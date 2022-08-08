@@ -19,7 +19,7 @@ import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.xml.jeesl.XmlContainerFactory;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRestDownloadEntityDescription;
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;

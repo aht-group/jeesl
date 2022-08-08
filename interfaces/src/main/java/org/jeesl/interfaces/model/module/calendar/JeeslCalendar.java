@@ -2,6 +2,7 @@ package org.jeesl.interfaces.model.module.calendar;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -12,6 +13,7 @@ public interface JeeslCalendar <
 								CT extends JeeslCalendarType<?,?,CT,?>
 								>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
+					JeeslRestDownloadEntityAttributes,
 					JeeslWithType<CT>
 {
 //	void test();
