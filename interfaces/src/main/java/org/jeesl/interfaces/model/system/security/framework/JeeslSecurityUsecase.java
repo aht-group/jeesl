@@ -3,6 +3,7 @@ package org.jeesl.interfaces.model.system.security.framework;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -28,8 +29,8 @@ public interface JeeslSecurityUsecase<L extends JeeslLang, D extends JeeslDescri
 					EjbWithLang<L>,EjbWithDescription<D>,
 					JeeslSecurityWithCategory<C>,
 					JeeslSecurityWithViews<V>,
-					JeeslSecurityWithActions<A>
-//					UtilsSecurityWithActionTemplates<L,D,C,R,V,U,A,AT,USER>
+					JeeslSecurityWithActions<A>,
+					JeeslRestDownloadEntityAttributes
 {
 	public static final String extractId = "securityUsecases";
 	
