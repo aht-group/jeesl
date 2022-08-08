@@ -61,7 +61,6 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 		if(context==null) {logger.warn("Context is null, you will get into some trouble with Menu features ...");}
 		
 		I identity = null;
-		
 		try
 		{
 			identity = cIdentity.newInstance();
