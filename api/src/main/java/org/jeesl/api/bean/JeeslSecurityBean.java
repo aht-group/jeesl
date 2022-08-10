@@ -2,6 +2,7 @@ package org.jeesl.api.bean;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -37,6 +38,7 @@ public interface JeeslSecurityBean<L extends JeeslLang,D extends JeeslDescriptio
 	List<M> getAllMenus(CTX ctx);
 	List<M> getRootMenus(CTX ctx);
 	M getMenu(CTX ctx, V view);
+	Map<M,M> getMapRoot();
 	
 	V findViewByCode(String cdoe);
 	V findViewByHttpPattern(String pattern);

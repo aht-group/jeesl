@@ -49,14 +49,16 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 
 	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
 
-	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
+//	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
-	private final Map<String,M> mapRoot; public Map<String,M> getMapRoot() {return mapRoot;}
+//	private final Map<String,M> mapRoot; public Map<String,M> getMapRoot() {return mapRoot;}
 	
 	private final LoadingCache<String,List<M>> cacheSub;
 	private final LoadingCache<String,List<M>> cacheBreadcrumb;
 	
-	private final List<M> mainMenu; public List<M> getMainMenu() {if(setupRequired) {this.setup();} return mainMenu;}
+	private final List<M> mainMenu; public List<M> getMainMenu() {
+//	if(setupRequired) {this.setup();}
+	return mainMenu;}
 
 	private I identity;
 	private CTX context;
@@ -66,7 +68,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 
 	public PrototypeDb3MenuBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity)
 	{		
-		efMenu = fbSecurity.ejbMenu();
+//		efMenu = fbSecurity.ejbMenu();
 		
 		cacheSub = Caffeine.newBuilder()
 			       .maximumSize(100)
@@ -81,7 +83,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			       .build(key -> buildBreadcrumb(key));
 	
 		
-		mapRoot = new HashMap<>();
+//		mapRoot = new HashMap<>();
 //		setAllowed = new HashSet<>();
 		
 		mainMenu = new ArrayList<>();
@@ -107,7 +109,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private List<M> buildSub(String viewCode)
 	{
 		if(debugOnInfo) {logger.info("Generating buildSub for ("+viewCode+") withContext:"+context+" setup:"+setupRequired);}
-		if(setupRequired) {this.setup();}
+//		if(setupRequired) {this.setup();}
 		List<M> tmp = new ArrayList<>();
 		tmp.addAll(bSecurity.getAllMenus(context)
 				.stream()
@@ -124,7 +126,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		}
 		
 		logger.info("Key: "+viewCode+" list "+list.size());
-//		Collections.sort(list,cpMenu);
 		return list;
 	}
 	
@@ -132,13 +133,9 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private List<M> buildBreadcrumb(String key)
 	{
 		if(debugOnInfo) {logger.info("Generating buildBreadcrumb for ("+key+") setup:"+setupRequired);}
-		if(setupRequired) {this.setup();}
+//		if(setupRequired) {this.setup();}
 		List<M> list = new ArrayList<>();
-		if(bSecurity==null)
-		{
-			logger.error("Implementation for a empty bSecurity is not forseen");
-			return list;
-		}
+		if(bSecurity==null) {logger.error("Implementation for a empty bSecurity is not forseen"); return list;}
 		
 		for(M m : bSecurity.getAllMenus(context))
 		{
@@ -163,7 +160,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	public void reset()
 	{
 		if(debugOnInfo) {logger.info("Resettings Menu");}
-		mapRoot.clear();
+//		mapRoot.clear();
 
 		mainMenu.clear();
 		for(M m : bSecurity.getRootMenus(context)) {if(userHasAccessTo(m)) {mainMenu.add(m);}}
@@ -190,19 +187,19 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		return (visible || developer);
 	}
 
-	private synchronized void setup()
-	{
-		if(setupRequired)
-		{
-			ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
-			
-			List<M> list = bSecurity.getAllMenus(context);
-			for(M m : list)
-			{
-				mapRoot.put(m.getView().getCode(),efMenu.toRoot(m));
-			}
-			logger.info("Setup completed in "+ptt.toTotalPeriod());
-			setupRequired = false;
-		}
-	}
+//	private synchronized void setup()
+//	{
+//		if(setupRequired)
+//		{
+//			ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
+//			
+//			List<M> list = bSecurity.getAllMenus(context);
+//			for(M m : list)
+//			{
+//				mapRoot.put(m.getView().getCode(),efMenu.toRoot(m));
+//			}
+//			logger.info("Setup completed in "+ptt.toTotalPeriod());
+//			setupRequired = false;
+//		}
+//	}
 }

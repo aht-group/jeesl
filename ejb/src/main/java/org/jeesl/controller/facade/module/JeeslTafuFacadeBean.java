@@ -16,6 +16,7 @@ import org.jeesl.api.facade.module.JeeslTafuFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.factory.builder.module.TafuFactoryBuilder;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarDayOfWeek;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuScope;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuStatus;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuTask;
@@ -25,7 +26,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
-import org.jeesl.interfaces.model.system.time.JeeslTimeDayOfWeek;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ public class JeeslTafuFacadeBean<L extends JeeslLang, D extends JeeslDescription
 								TS extends JeeslTafuStatus<L,D,TS,?>,
 								SC extends JeeslTafuScope<L,D,R,SC,?>,
 								VP extends JeeslTafuViewport<L,D,VP,?>,
-								DOW extends JeeslTimeDayOfWeek<L,D,DOW,?>,
+								DOW extends JeeslCalendarDayOfWeek<L,D,DOW,?>,
 								M extends JeeslMarkup<MT>,
 								MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
 					extends JeeslFacadeBean

@@ -73,7 +73,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	private final Map<CTX,List<M>> mapMenuAll;
 	private final Map<CTX,List<M>> mapMenuRoot;
 	private final Nested2Map<CTX,V,M> n2mMenu;
-	private final Map<M,M> mapRoot; public Map<M,M> getMapRoot() {return mapRoot;}
+	private final Map<M,M> mapRoot; @Override public Map<M,M> getMapRoot() {return mapRoot;}
 	
 	private final Map<String,V> mapUrlPattern;
 	private final Map<String,V> mapUrlMapping;
@@ -149,7 +149,6 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		List<AR> areas = fSecurity.all(fbSecurity.getClassArea());	
 		Map<V,List<AR>> mapArea = fbSecurity.ejbArea().toMapView(areas);
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassArea().getSimpleName(),"Loaded and put to Map", areas.size());}
-		
 		
 		for(V v : views)
 		{

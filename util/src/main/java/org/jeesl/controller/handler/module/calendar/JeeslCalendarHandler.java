@@ -101,6 +101,13 @@ public class JeeslCalendarHandler <L extends JeeslLang, D extends JeeslDescripti
 		if(debugOnInfo) {logger.info("saveItem completed "+tfItem.debug(item));}
 	}
 	
+	public void deleteItem() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		if(debugOnInfo) {logger.info("deleteItem "+item.toString());}
+		fCalendar.rm(item);
+		item = null;
+	}
+	
 	 public void toggleAllDay()
 	 {
 		 logger.info("toggleAllDay "+item.isAllDay());	 

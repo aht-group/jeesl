@@ -95,17 +95,23 @@
 					<jtp:label entity="TafuTask" code="recordShow"/>
 					<ui:fragment>
 						<jp:inputCalendar  value="#{cc.attrs.bean.task.recordShow}"/>
-						<j:svg type="jeeslTafu7" listener="#{cc.attrs.bean.moveTask(7)}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslTafu6" listener="#{cc.attrs.bean.moveTask(6)}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslTafu5" listener="#{cc.attrs.bean.moveTask(5)}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslTafu4" listener="#{cc.attrs.bean.moveTask(4)}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslTafu3" listener="#{cc.attrs.bean.moveTask(3)}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslTafu2" listener="#{cc.attrs.bean.moveTask(2)}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslTafu1" listener="#{cc.attrs.bean.moveTask(1)}" update=":#{cc.id}:grid"/>
+						
+						<ui:repeat var="p" value="#{cc.attrs.bean.postpone}">
+							<jp:icon value="#{p}" listener="#{cc.attrs.bean.postpone(p)}" update=":#{cc.id}:grid"/>
+						</ui:repeat>
+						
+						<ui:remove>
+							<j:svg type="jeeslTafu7" listener="#{cc.attrs.bean.moveTask(7)}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslTafu6" listener="#{cc.attrs.bean.moveTask(6)}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslTafu5" listener="#{cc.attrs.bean.moveTask(5)}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslTafu4" listener="#{cc.attrs.bean.moveTask(4)}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslTafu3" listener="#{cc.attrs.bean.moveTask(3)}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslTafu2" listener="#{cc.attrs.bean.moveTask(2)}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslTafu1" listener="#{cc.attrs.bean.moveTask(1)}" update=":#{cc.id}:grid"/>
+						</ui:remove>
 						<j:svg type="jeeslTafu0" listener="#{cc.attrs.bean.moveTask(0)}" update=":#{cc.id}:grid"/>
+						
 					</ui:fragment>
-
-					
 					
 					<jtp:label entity="TafuTask" code="recordDue"/>
 					<jp:inputCalendar  value="#{cc.attrs.bean.task.recordDue}"/>

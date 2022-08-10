@@ -19,9 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringUtil;
 
-public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription
-, LOC extends JeeslLocale<L,D,LOC,?>
->implements Serializable
+public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>> implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminBean.class);

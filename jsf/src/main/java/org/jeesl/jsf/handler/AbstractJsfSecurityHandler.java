@@ -120,43 +120,6 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 	}
-		
-	@Deprecated //Use the next constructor with support of SecurityView
-	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
-										JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,?,?,USER> bSecurity,
-										I identity,
-										String viewCode)
-	{
-		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
-		this.fbSecurity=fbSecurity;
-		this.identity=identity;
-		this.bSecurity=bSecurity;
-		
-		this.view=bSecurity.findViewByCode(viewCode);
-		this.pageCode=view.getCode();
-		
-		debugOnInfo = false;
-		noActions=true;
-		noRoles=true;
-		
-		mapAllow = new HashMap<>();
-		mapIdAllow = new HashMap<>();
-		mapArea = new HashMap<>();
-		mapHasRole = new HashMap<R,Boolean>();
-		actions = new ArrayList<A>();
-		
-		SecurityActionComparator<L,D,C,R,V,U,A,AT,USER> cfAction = new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>();
-		cfAction.factory(SecurityActionComparator.Type.position);
-		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
-		
-		txtAction = new TxtSecurityActionFactory<>();
-		
-		roles = bSecurity.fRoles(view);
-		areas = bSecurity.fAreas(view);
-		
-		noRoles = roles.size()==0;
-		update();
-	}
 	
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
 			JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,

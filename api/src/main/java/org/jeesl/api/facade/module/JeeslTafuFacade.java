@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarDayOfWeek;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuScope;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuStatus;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuTask;
@@ -12,7 +13,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
-import org.jeesl.interfaces.model.system.time.JeeslTimeDayOfWeek;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslTafuFacade <L extends JeeslLang, D extends JeeslDescription,
@@ -21,7 +21,7 @@ public interface JeeslTafuFacade <L extends JeeslLang, D extends JeeslDescriptio
 									TS extends JeeslTafuStatus<L,D,TS,?>,
 									SC extends JeeslTafuScope<L,D,R,SC,?>,
 									VP extends JeeslTafuViewport<L,D,VP,?>,
-									DOW extends JeeslTimeDayOfWeek<L,D,DOW,?>,
+									DOW extends JeeslCalendarDayOfWeek<L,D,DOW,?>,
 									M extends JeeslMarkup<?>>
 			extends JeeslFacade
 {	

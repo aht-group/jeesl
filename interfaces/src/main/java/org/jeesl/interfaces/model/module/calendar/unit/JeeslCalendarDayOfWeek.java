@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.time;
+package org.jeesl.interfaces.model.module.calendar.unit;
 
 import java.io.Serializable;
 
@@ -12,11 +12,13 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 
-public interface JeeslTimeDayOfWeek <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>, G extends JeeslGraphic<L,D,?,?,?>>
+public interface JeeslCalendarDayOfWeek <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>, G extends JeeslGraphic<L,D,?,?,?>>
 									extends Serializable,EjbPersistable,
 										EjbWithCode,JeeslStatusFixedCode,
 										JeeslRestDownloadOption,EjbWithCodeGraphic<G>,
 										JeeslStatus<L,D,S>
 {
 	public static enum Code{mon,tue,wed,thu,fri,sat,sun};
+	
+//	public void test();
 }
