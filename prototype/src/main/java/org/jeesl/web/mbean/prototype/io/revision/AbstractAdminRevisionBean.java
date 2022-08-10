@@ -1,6 +1,5 @@
 package org.jeesl.web.mbean.prototype.io.revision;
 
-import java.io.Serializable;
 import java.util.Comparator;
 import java.util.List;
 
@@ -8,6 +7,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.handler.sb.SbMultiHandler;
+import org.jeesl.controller.handler.sb.SbSingleHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -18,6 +18,7 @@ import org.jeesl.factory.ejb.io.revision.EjbRevisionMappingEntityFactory;
 import org.jeesl.factory.ejb.io.revision.EjbRevisionMappingViewFactory;
 import org.jeesl.factory.ejb.io.revision.EjbRevisionScopeFactory;
 import org.jeesl.factory.ejb.io.revision.EjbRevisionViewFactory;
+import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
@@ -31,6 +32,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.util.comparator.ejb.io.revision.RevisionDiagramComparator;
 import org.jeesl.util.comparator.ejb.io.revision.RevisionEntityComparator;
 import org.jeesl.util.comparator.ejb.io.revision.RevisionScopeComparator;
@@ -53,7 +55,7 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 											RAT extends JeeslStatus<L,D,RAT>,
 											ERD extends JeeslRevisionDiagram<L,D,RC>>
 					extends AbstractAdminBean<L,D,LOC>
-					implements Serializable,SbToggleBean
+					implements SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminRevisionBean.class);
@@ -61,8 +63,8 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 	protected JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision;
 	protected final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
 
-	protected SbMultiHandler<RC> sbhCategory; public SbMultiHandler<RC> getSbhCategory() {return sbhCategory;}
-	protected final SbMultiHandler<ERD> sbhDiagram; public SbMultiHandler<ERD> getSbhDiagram() {return sbhDiagram;}
+
+//	protected final SbMultiHandler<ERD> sbhDiagram; public SbMultiHandler<ERD> getSbhDiagram() {return sbhDiagram;}
 
 	protected final Comparator<RS> comparatorScope;
 	protected final Comparator<RE> cpEntity;
@@ -79,7 +81,7 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 	protected List<RC> categories; public List<RC> getCategories() {return categories;}
 	protected List<RS> scopes; public List<RS> getScopes() {return scopes;}
 	protected List<RST> scopeTypes; public List<RST> getScopeTypes() {return scopeTypes;}
-	protected List<RE> entities; public List<RE> getEntities() {return entities;}
+	
 	protected List<REM> entityMappings; public List<REM> getEntityMappings() {return entityMappings;}
 	protected List<RAT> types; public List<RAT> getTypes() {return types;}
 	protected List<RER> relations; public List<RER> getrelations() {return relations;}
@@ -90,8 +92,8 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 	{
 		super(fbRevision.getClassL(),fbRevision.getClassD());
 		this.fbRevision=fbRevision;
-
-		sbhDiagram = new SbMultiHandler<>(fbRevision.getClassDiagram(),this);
+		
+//		sbhDiagram = new SbMultiHandler<>(fbRevision.getClassDiagram(),this);
 
 		cpEntity = fbRevision.cpEjbEntity(RevisionEntityComparator.Type.position);
 		comparatorScope = (new RevisionScopeComparator<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>()).factory(RevisionScopeComparator.Type.position);
@@ -111,19 +113,21 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fRevision=fRevision;
 
-
 		if(fRevision==null) {logger.warn(JeeslIoRevisionFacade.class.getSimpleName()+" is NULL");}
 		if(fbRevision==null) {logger.warn(IoRevisionFactoryBuilder.class.getSimpleName()+" is NULL");}
 		if(fbRevision.getClassCategory()==null) {logger.warn(IoRevisionFactoryBuilder.class.getSimpleName()+".getClassCategory() is NULL");}
 
 		categories = fRevision.allOrderedPositionVisible(fbRevision.getClassCategory());
-		sbhCategory = new SbMultiHandler<RC>(fbRevision.getClassCategory(),categories,this);
 	}
 
 	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 
 	}
+	
+	
+	
+	public abstract void callbackAfterSbSelection();
 
 	public void addAttribute() throws JeeslNotFoundException
 	{

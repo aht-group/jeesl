@@ -148,7 +148,7 @@ public class JeeslIoReportFacadeBean<L extends JeeslLang,D extends JeeslDescript
         CriteriaQuery<SHEET> select = cQ.select(sheet);
 	    select.where(cB.and(cB.equal(pWorkbook,workbook),cB.equal(eCode,code)));
 
-		TypedQuery<SHEET> q = em.createQuery(cQ); 
+		TypedQuery<SHEET> q = em.createQuery(cQ);
 		try	{return q.getSingleResult();}
 		catch (NoResultException ex){throw new JeeslNotFoundException("Nothing found "+cSheet.getSimpleName()+" workbook:"+workbook.toString()+" code:"+code);}
 	}

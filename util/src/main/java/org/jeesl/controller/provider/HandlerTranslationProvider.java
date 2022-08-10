@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jeesl.controller.handler.system.TranslationHandler;
+import org.jeesl.controller.handler.io.label.JeeslTranslationHandler;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
 import org.jeesl.interfaces.controller.handler.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
@@ -35,11 +35,11 @@ public class HandlerTranslationProvider <L extends JeeslLang, D extends JeeslDes
 
 	private final SimpleDateFormat sdfDate;
 	private final SimpleDateFormat sdfTime;
-	private final TranslationHandler<L,D,RE,RA,RML> th;
+	private final JeeslTranslationHandler<L,D,RE,RA,RML> th;
 
 	private DecimalFormat dfCurrency;
 
-	public HandlerTranslationProvider(TranslationHandler<L,D,RE,RA,RML> th)
+	public HandlerTranslationProvider(JeeslTranslationHandler<L,D,RE,RA,RML> th)
 	{
 		this.th=th;
 		setLocaleCodes = new HashSet<String>();

@@ -27,9 +27,6 @@
 						<p:column rendered="true">  
 							<h:outputText value="#{e.category.position}.#{e.position}"/>
 			            </p:column>
-			            <p:column headerText="#{msg.jeeslCategory}" rendered="#{cc.attrs.bean.sbhCategory.hasSelectedMore}">  
-							<h:outputText value="#{e.category.name[userBean.localeCode].lang}"/>
-			            </p:column>
 			            <p:column rendered="true">  
 							<h:outputText value="#{e.diagram.category.position}.#{e.diagram.position}" rendered="#{not empty e.diagram}"/>
 			            </p:column>

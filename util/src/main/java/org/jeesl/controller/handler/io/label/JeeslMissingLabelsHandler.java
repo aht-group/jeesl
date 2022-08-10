@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.system;
+package org.jeesl.controller.handler.io.label;
 
 import java.io.Serializable;
 import java.util.ArrayList;

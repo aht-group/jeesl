@@ -1,6 +1,5 @@
-package org.jeesl.controller.handler.system;
+package org.jeesl.controller.handler.io.label;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +11,7 @@ import java.util.Objects;
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionMissingLabel;
@@ -20,60 +20,53 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
-								RE extends JeeslRevisionEntity<L,D,?,?,RA,?>,
-								RA extends JeeslRevisionAttribute<L,D,RE,?,?>,
-								RML extends JeeslRevisionMissingLabel>
-	implements Serializable,JeeslLabelBean<RE>
+public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescription,
+									RE extends JeeslRevisionEntity<L,D,?,?,RA,?>,
+									RA extends JeeslRevisionAttribute<L,D,RE,?,?>,
+									RML extends JeeslRevisionMissingLabel>
+						implements JeeslLabelBean<RE>
 {
-	final static Logger logger = LoggerFactory.getLogger(TranslationHandler.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslTranslationHandler.class);
 	private static final long serialVersionUID = 1L;
 
+	protected IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fbRevision;
 	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision;
 
-	private final Class<RE> cRE;
-	private final Class<L> cL;
 
 	private final Map<String,Map<String,L>> entities; public Map<String,Map<String,L>> getEntities() {return entities;}
 	private final Map<String,Map<String,Map<String,L>>> labels; public Map<String, Map<String, Map<String,L>>> getLabels() {return labels;}
 	private final Map<String,Map<String,Map<String,D>>> descriptions; public Map<String, Map<String, Map<String,D>>> getDescriptions() {return descriptions;}
 	private JeeslMissingLabelsHandler<L,D,RE,RA,RML> missingLabelHandler; public JeeslMissingLabelsHandler<L,D,RE,RA,RML> getMissingLabelHandler(){return missingLabelHandler;}
 
+	private String entityJscn;	//2022-08-10 Unclear why we need this
 
-	public String entityJscn;
-
-	public TranslationHandler(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision,
-			final Class<RE> cRE, final Class<L> cL, final Class<RML> cRml)
+	public JeeslTranslationHandler(IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fbRevision,
+										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision)
 	{
+		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;
-		this.cRE = cRE;
-		this.cL = cL;
-		missingLabelHandler = new JeeslMissingLabelsHandler<>(fRevision, cRE, cL, cRml);
+		missingLabelHandler = new JeeslMissingLabelsHandler<>(fRevision, fbRevision.getClassEntity(), fbRevision.getClassL(), fbRevision.getClassMissingRevision());
 
-		entityJscn ="";
-
-		/**
-		 * Customised entities hashMap (override get function)
-		 */
         entities = new HashMap<String,Map<String,L>>()
         {
-			//private static final long serialVersionUID = 1L;
+			private static final long serialVersionUID = 1L;
+			
 			/**
 			 * Override default get function
 			 * so that we can load revision entity (Load translation for entity) on demand
 			 * with key is java simple class name of revision entity
 			 */
-			@Override public Map<String, L> get(Object key)
+			@Override public Map<String,L> get(Object key)
 			{
 				//search entities map with key is java simple class name of revision entity
 				Map<String,L> m = super.get(key);
-				entityJscn = (String)key;
-
+				String jscn = (String)key;
+				entityJscn=jscn;
 				try
 				{
-					if(Objects.isNull(m) && !isLoadedRevisionEntity(entityJscn))
+					if(Objects.isNull(m) && !isLoadedRevisionEntity(jscn))
 					{
-						logger.info("searching" + entityJscn);
+						logger.info("searching" + jscn);
 						RE re =  fRevision.fRevisionEntity(key.toString());
 						load(re);
 					}
@@ -81,38 +74,37 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 					m = super.get(key);
 					if (Objects.nonNull(m))
 					{
-						missingLabelHandler.checkMissingTranslationInMap(m, entityJscn,"");
+						missingLabelHandler.checkMissingTranslationInMap(m, jscn,"");
 						return m;
 					}
 				}
-				catch (JeeslNotFoundException e)  {missingLabelHandler.updateMissingRevisionEntity(entityJscn);}
+				catch (JeeslNotFoundException e)  {missingLabelHandler.updateMissingRevisionEntity(jscn);}
 				catch (AbstractMethodError e)
 				{
 					logger.info("check if you have duplication of revision facade, for example fRevisionEntity methode define 2 or more times in project");
-					missingLabelHandler.updateMissingRevisionEntity(entityJscn);
+					missingLabelHandler.updateMissingRevisionEntity(jscn);
 				}
-				return getLangMap(entityJscn,null);
+				return getLangMap(jscn,null);
 			}
         };
 
-        /**
-		 * Customised labels hashMap  (override get function)
-		 */
+
         labels = new HashMap<String,Map<String,Map<String,L>>>()
         {
         	private static final long serialVersionUID = 1L;
 
-			@Override
-			public  Map<String, Map<String, L>> get(Object key)
+			@Override public  Map<String,Map<String,L>> get(Object key)
 			{
 				//search label map with  entity key is java simple class name of revision entity
 				Map<String, Map<String, L>> m = super.get(key);
-				entityJscn = (String)key;
+				String jscn = (String)key;
+				entityJscn=jscn;
+				
 				try
 				{
-					if(Objects.isNull(m) && !isLoadedRevisionEntity(entityJscn))
+					if(Objects.isNull(m) && !isLoadedRevisionEntity(jscn))
 					{
-						RE re =  fRevision.fRevisionEntity(entityJscn);
+						RE re =  fRevision.fRevisionEntity(jscn);
 						load(re);
 					}
 					m = super.get(key);
@@ -121,7 +113,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 				        return m;
 				    }
 				}
-				catch(JeeslNotFoundException e) {missingLabelHandler.updateMissingRevisionEntity(entityJscn);}
+				catch(JeeslNotFoundException e) {missingLabelHandler.updateMissingRevisionEntity(jscn);}
 				return getTempLabelHashtable();
 			}
         };
@@ -131,7 +123,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 
 	public void reloadFromDb()
 	{
-		List<RE> list = fRevision.all(cRE);
+		List<RE> list = fRevision.all(fbRevision.getClassEntity());
         logger.info("building "+list.size());
 
 		for(RE re : list)
@@ -166,7 +158,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 		{
 			Class<?> c = Class.forName(re.getCode());
 
-			re = fRevision.load(cRE, re);
+			re = fRevision.load(fbRevision.getClassEntity(),re);
 			missingLabelHandler.load(re);
 			if(entities.containsKey(c.getSimpleName())){logger.warn("Duplicate classs in Revisions "+re.getCode());}
 
@@ -248,8 +240,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 		return new Hashtable<String,Map<String,L>>()
 		{
 			final static long serialVersionUID = 1L;
-			@Override
-			public   Map<String, L> get(Object key)
+			@Override public Map<String, L> get(Object key)
 			{
 				String missingCode = (String)key;
 				Map<String, L> m = super.get(key);
@@ -263,7 +254,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 		};
 	}
 
-	private Map<String, L> getLangMap(String missingEntity, String missingCode)
+	private Map<String,L> getLangMap(String missingEntity, String missingCode)
 	{
 		return new HashMap<String, L>()
 		{
@@ -281,7 +272,7 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 					missingLabelHandler.updateMissingTranslation(missingEntity,missingCode,(String)key);
 					try
 					{
-						L l = cL.newInstance();
+						L l = fbRevision.getClassL().newInstance();
 						l.setLkey((String)key);
 						return l;
 					}
@@ -293,6 +284,4 @@ public class TranslationHandler<L extends JeeslLang,D extends JeeslDescription,
 			}
     	};
     }
-
-
 }

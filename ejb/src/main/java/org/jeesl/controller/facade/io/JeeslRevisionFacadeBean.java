@@ -14,6 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -113,49 +114,69 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		return allForOrParents(fbRevision.getClassScope(),ppCategory);
 	}
 
-
-	@Override public List<RE> findRevisionEntities(List<RC> categories, boolean withAttributes)
+	@Override public List<RE> findLabelEntities(RC category, ERD diagram)
 	{
-		List<ParentPredicate<RC>> ppCategory = ParentPredicate.createFromList(fbRevision.getClassCategory(),"category",categories);
-		if(withAttributes)
-		{
-			List<ParentPredicate<RC>> lAnd = ParentPredicate.empty();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaQuery<RE> cQ = cB.createQuery(fbRevision.getClassEntity());
+		Root<RE> root = cQ.from(fbRevision.getClassEntity());
+		
+		Path<RC> pCategory = root.get(JeeslRevisionEntity.Attributes.category.toString());
+		Path<ERD> pDiagram = root.get(JeeslRevisionEntity.Attributes.diagram.toString());
 
-			CriteriaBuilder cB = em.getCriteriaBuilder();
-			CriteriaQuery<RE> criteriaQuery = cB.createQuery(fbRevision.getClassEntity());
-
-			Root<RE> revisionEntity = criteriaQuery.from(fbRevision.getClassEntity());
-			revisionEntity.fetch(JeeslRevisionEntity.Attributes.attributes.toString(), JoinType.LEFT);
-
-			Predicate pOr = cB.or(ParentPredicate.array(cB, revisionEntity, ppCategory));
-			Predicate pAnd = cB.and(ParentPredicate.array(cB, revisionEntity, lAnd));
-
-			CriteriaQuery<RE> select = criteriaQuery.select(revisionEntity);
-			if(ppCategory==null || ppCategory.size()==0)
-			{
-				if(lAnd==null || lAnd.size()==0)
-				{
-					return new ArrayList<RE>();
-				}
-				else
-				{
-					select.where(pAnd).distinct(true);
-				}
-			}
-			else
-			{
-				select.where(cB.and(pAnd,pOr)).distinct(true);
-			}
-
-			TypedQuery<RE> q = em.createQuery(select);
-
-			return q.getResultList();
-		}
-		else
-		{
-			return allForOrParents(fbRevision.getClassEntity(),ppCategory);
-		}
+		predicates.add(cB.equal(pCategory,category));
+		
+		if(diagram==null) {predicates.add(cB.isNull(pDiagram));}
+		else {predicates.add(cB.equal(pDiagram,diagram));}
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(root);
+		
+		return em.createQuery(cQ).getResultList();
 	}
+	
+//	@Override public List<RE> findRevisionEntities(List<RC> categories, boolean withAttributes)
+//	{
+//		List<ParentPredicate<RC>> ppCategory = ParentPredicate.createFromList(fbRevision.getClassCategory(),"category",categories);
+//		if(withAttributes)
+//		{
+//			List<ParentPredicate<RC>> lAnd = ParentPredicate.empty();
+//
+//			CriteriaBuilder cB = em.getCriteriaBuilder();
+//			CriteriaQuery<RE> criteriaQuery = cB.createQuery(fbRevision.getClassEntity());
+//
+//			Root<RE> revisionEntity = criteriaQuery.from(fbRevision.getClassEntity());
+//			revisionEntity.fetch(JeeslRevisionEntity.Attributes.attributes.toString(), JoinType.LEFT);
+//
+//			Predicate pOr = cB.or(ParentPredicate.array(cB, revisionEntity, ppCategory));
+//			Predicate pAnd = cB.and(ParentPredicate.array(cB, revisionEntity, lAnd));
+//
+//			CriteriaQuery<RE> select = criteriaQuery.select(revisionEntity);
+//			if(ppCategory==null || ppCategory.size()==0)
+//			{
+//				if(lAnd==null || lAnd.size()==0)
+//				{
+//					return new ArrayList<RE>();
+//				}
+//				else
+//				{
+//					select.where(pAnd).distinct(true);
+//				}
+//			}
+//			else
+//			{
+//				select.where(cB.and(pAnd,pOr)).distinct(true);
+//			}
+//
+//			TypedQuery<RE> q = em.createQuery(select);
+//
+//			return q.getResultList();
+//		}
+//		else
+//		{
+//			return allForOrParents(fbRevision.getClassEntity(),ppCategory);
+//		}
+//	}
 
 
 	@Override public void rm(Class<RVM> cMappingView, RVM mapping) throws JeeslConstraintViolationException
@@ -306,25 +327,26 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		catch (NoResultException ex){return false;}
 	}
 
-	@Override
-	public RE fRevisionEntity(String jscn) throws JeeslNotFoundException
+	@Override public RE fRevisionEntity(String jscn) throws JeeslNotFoundException
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		logger.info(fbRevision.getClassEntity().getName());
         CriteriaQuery<RE> cQ = cB.createQuery(fbRevision.getClassEntity());
         Root<RE> root = cQ.from(fbRevision.getClassEntity());
-        cQ = cQ.where(root.<RE>get("jscn").in(jscn));
+        
+        Expression<String> eCode = root.get(JeeslRevisionEntity.Attributes.jscn.toString());
+        cQ = cQ.where(cB.equal(eCode,jscn));
 
 		TypedQuery<RE> q = em.createQuery(cQ);
-		logger.info(q.unwrap(org.hibernate.Query.class).getQueryString());
-
+		logger.info(fbRevision.getClassEntity().getName()+": "+q.unwrap(org.hibernate.Query.class).getQueryString());
+		
 		try	{return q.getSingleResult();}
 		catch (NoResultException ex)
 		{
 			//Update jscn from fully qualified class name from code field
-			return updateJscnFromCode(jscn);
+//			return updateJscnFromCode(jscn);
+			throw new JeeslNotFoundException("No "+fbRevision.getClassEntity().getSimpleName()+" for "+JeeslRevisionEntity.Attributes.jscn+"="+jscn);
 		}
-		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbRevision.getClassEntity().getSimpleName()+" and jscn="+jscn+" not unique");}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbRevision.getClassEntity().getSimpleName()+" and "+JeeslRevisionEntity.Attributes.jscn+"="+jscn+" not unique");}
 	}
 
 	private RE updateJscnFromCode(String jscn) throws JeeslNotFoundException

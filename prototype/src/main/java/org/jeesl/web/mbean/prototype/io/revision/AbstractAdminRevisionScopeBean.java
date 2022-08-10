@@ -6,6 +6,7 @@ import java.util.Collections;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.controller.handler.sb.SbMultiHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -45,6 +46,8 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminRevisionScopeBean.class);
 
+	protected SbMultiHandler<RC> sbhCategory; public SbMultiHandler<RC> getSbhCategory() {return sbhCategory;}
+	
 	private RS scope; public RS getScope() {return scope;} public void setScope(RS scope) {this.scope = scope;}
 
 	public AbstractAdminRevisionScopeBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision){super(fbRevision);}
@@ -53,6 +56,9 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 											JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision)
 	{
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
+		
+		sbhCategory = new SbMultiHandler<RC>(fbRevision.getClassCategory(),categories,this);
+		
 		types = fRevision.allOrderedPositionVisible(fbRevision.getClassAttributeType());
 		reloadScopes();
 	}
@@ -63,6 +69,11 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 		logger.info(AbstractLogMessage.toggled(c));
 		reloadScopes();
 		cancel();
+	}
+	
+	@Override public void callbackAfterSbSelection()
+	{
+		reloadScopes();
 	}
 
 	public void reloadScopes()

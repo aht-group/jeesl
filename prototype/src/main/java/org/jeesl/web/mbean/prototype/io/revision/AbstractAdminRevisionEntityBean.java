@@ -1,6 +1,5 @@
 package org.jeesl.web.mbean.prototype.io.revision;
 
-import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -9,13 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Objects;
-
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
@@ -27,11 +19,13 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.api.rest.system.JeeslSystemRest;
+import org.jeesl.controller.handler.sb.SbSingleHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
@@ -45,6 +39,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
@@ -56,7 +51,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											RC extends JeeslRevisionCategory<L,D,RC,?>,
 											RV extends JeeslRevisionView<L,D,RVM>,
 											RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -69,13 +64,17 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 											RAT extends JeeslStatus<L,D,RAT>,
 											ERD extends JeeslRevisionDiagram<L,D,RC>>
 					extends AbstractAdminRevisionBean<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD>
-					implements Serializable
+					implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminRevisionEntityBean.class);
 
 	private JeeslLabelBean<RE> bLabel;
 
+	protected final SbSingleHandler<RC> sbhCategory; public SbSingleHandler<RC> getSbhCategory() {return sbhCategory;}
+	protected final SbSingleHandler<ERD> sbhDiagram; public SbSingleHandler<ERD> getSbhDiagram() {return sbhDiagram;}
+	
+	protected final List<RE> entities; public List<RE> getEntities() {return entities;}
 	private List<RE> links; public List<RE> getLinks() {return links;}
 	private List<ERD> diagrams; public List<ERD> getDiagrams() {return diagrams;}
 
@@ -90,7 +89,13 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 	public AbstractAdminRevisionEntityBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision)
 	{
 		super(fbRevision);
+		
+		sbhCategory = new SbSingleHandler<>(fbRevision.getClassCategory(),this);
+		sbhDiagram = new SbSingleHandler<>(fbRevision.getClassDiagram(),this);
+		
 		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
+		
+		entities = new ArrayList<>();
 	}
 
 	protected void postConstructRevisionEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
@@ -98,6 +103,12 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		if(jogger!=null) {jogger.start("postConstructRevisionEntity");}
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
 		this.bLabel=bLabel;
+		
+		sbhCategory.setList(fRevision.allOrderedPositionVisible(fbRevision.getClassCategory()));
+		sbhCategory.setDefault();
+		
+		sbhDiagram.setList(fRevision.allForParent(fbRevision.getClassDiagram(),sbhCategory.getSelection()));
+		sbhDiagram.setDefault();
 
 		scopes = fRevision.all(fbRevision.getClassScope());									if(jogger!=null) {jogger.milestone(fbRevision.getClassScope().getSimpleName(), null, scopes.size());}
 		types = fRevision.allOrderedPositionVisible(fbRevision.getClassAttributeType());	if(jogger!=null) {jogger.milestone(fbRevision.getClassAttributeType().getSimpleName(), null, types.size());}
@@ -112,36 +123,21 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 
 		reloadEntities();
 	}
-
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	
+	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.toggled(c));
-		super.toggled(c);
-
-		if(c.isAssignableFrom(fbRevision.getClassCategory()))
+		if(item.getClass().isAssignableFrom(fbRevision.getClassCategory()))
 		{
-			reloadEntities();
-			logger.info(AbstractLogMessage.reloaded(fbRevision.getClassEntity(),entities));
-			sbhDiagram.selectNone();
+			logger.info(AbstractLogMessage.selectEntity(sbhCategory.getSelection()));
+			sbhDiagram.setList(fRevision.allForParent(fbRevision.getClassDiagram(),sbhCategory.getSelection()));
+			sbhDiagram.setDefault();
+			callbackAfterSbSelection();
 		}
-		else if(c.isAssignableFrom(fbRevision.getClassDiagram()))
+		if(item.getClass().isAssignableFrom(fbRevision.getClassDiagram()))
 		{
-			logger.info(AbstractLogMessage.reloaded(fbRevision.getClassDiagram(),diagrams));
-			if(sbhDiagram.hasSelected())
-			{
-				Iterator<RE> i = entities.iterator();
-
-				while (i.hasNext())
-				{
-					RE re = i.next();
-			        if (re.getDiagram()==null || !sbhDiagram.getSelected().contains(re.getDiagram()))
-			        {
-			        	i.remove();
-			        }
-				}
-			}
+			logger.info(AbstractLogMessage.selectEntity(sbhDiagram.getSelection()));
+			callbackAfterSbSelection();
 		}
-		cancelEntity();
 	}
 	
 	private void reset(boolean rEntity, boolean rAttribute)
@@ -150,141 +146,139 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		if(rAttribute) {attribute=null;}
 	}
 	
+	@Override public void callbackAfterSbSelection()
+	{
+		reloadEntities();
+	}
+	
 	private void reloadEntities()
 	{
-//		if(debugOnInfo) {logger.info("fRevision==null?"+(fRevision==null)+" sbhCategory==null?"+(sbhCategory==null)+" sbhCategory.getSelected()==null?"+(sbhCategory.getSelected()==null));}
-		entities = fRevision.findRevisionEntities(sbhCategory.getSelected(), true);
+		entities.clear();
+		
+		entities.addAll(fRevision.findLabelEntities(sbhCategory.getSelection(),null));
+		if(sbhDiagram.isSelected()) {entities.addAll(fRevision.findLabelEntities(sbhCategory.getSelection(),sbhDiagram.getSelection()));}
 
 		if(jogger!=null) {jogger.milestone(fbRevision.getClassEntity().getSimpleName(),"Entities", entities.size());}
-
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbRevision.getClassEntity(),entities));}
 		Collections.sort(entities,cpEntity);
-
-		sbhDiagram.clear();
-		sbhDiagram.setList(efEntity.toDiagrams(entities));
-		Collections.sort(sbhDiagram.getList(),cpDiagram);
-		sbhDiagram.selectAll();
-		if(jogger!=null) {jogger.milestone(fbRevision.getClassDiagram().getSimpleName(),null, sbhDiagram.getList().size());}
-		prepareEntitiesCodeMap();
-		if(jogger!=null) {jogger.milestone(fbRevision.getClassAttribute().getSimpleName(),"prepareEntitiesCodeMap", mapEntitesCodeToAttribustes.size());}
 	}
 
-	private void prepareEntitiesCodeMap()
-	{
-		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
-		if(!sbhCategory.getHasSelected())
-		{
-			for (Iterator<RE> iterator = entities.iterator(); iterator.hasNext();)
-			{
-				RE re = iterator.next();
+//	private void prepareEntitiesCodeMap()
+//	{
+//		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
+//		if(!sbhCategory.getHasSelected())
+//		{
+//			for(Iterator<RE> iterator = entities.iterator(); iterator.hasNext();)
+//			{
+//				RE re = iterator.next();
+//
+//				ArrayList<String> raCodes = new ArrayList<String>();
+//				for(RA ra : re.getAttributes())
+//				{
+//					raCodes.add(ra.getCode());
+//				}
+//				mapEntitesCodeToAttribustes.put(re.getCode(), raCodes);
+//			}
+//		}
+//	}
 
-				ArrayList<String> raCodes = new ArrayList<String>();
-				for(RA ra : re.getAttributes())
-				{
-					raCodes.add(ra.getCode());
-				}
-				mapEntitesCodeToAttribustes.put(re.getCode(), raCodes);
-			}
-		}
-	}
+//	public boolean hasEntitiesWithShortCode(String missingEntityCode)
+//	{
+//		for (Iterator<String> iterator = mapEntitesCodeToAttribustes.keySet().iterator(); iterator.hasNext();)
+//		{
+//			String code = iterator.next();
+//			if(code.endsWith("." + missingEntityCode))
+//			{
+//				//logger.info("code ends with" + missingEntityCode);
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 
-	public boolean hasEntitiesWithShortCode(String missingEntityCode)
-	{
-		for (Iterator<String> iterator = mapEntitesCodeToAttribustes.keySet().iterator(); iterator.hasNext();)
-		{
-			String code = iterator.next();
-			if(code.endsWith("." + missingEntityCode))
-			{
-				//logger.info("code ends with" + missingEntityCode);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean hasEntitiesWithShortCodeAndAttribute(String missingEntityCode, String missingAttributeCode)
-	{
-		for (Entry<String, List<String>> entry : mapEntitesCodeToAttribustes.entrySet())
-		{
-			if(entry.getKey().endsWith("." + missingEntityCode))
-			{
-				for (Iterator<String> iterator = entry.getValue().iterator(); iterator.hasNext();)
-				{
-					String raCode = iterator.next();
-					if(raCode.equals(missingAttributeCode))
-					{
-						//logger.info("attribute code ends with" + missingAttributeCode);
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
+//	public boolean hasEntitiesWithShortCodeAndAttribute(String missingEntityCode, String missingAttributeCode)
+//	{
+//		for (Entry<String, List<String>> entry : mapEntitesCodeToAttribustes.entrySet())
+//		{
+//			if(entry.getKey().endsWith("." + missingEntityCode))
+//			{
+//				for (Iterator<String> iterator = entry.getValue().iterator(); iterator.hasNext();)
+//				{
+//					String raCode = iterator.next();
+//					if(raCode.equals(missingAttributeCode))
+//					{
+//						//logger.info("attribute code ends with" + missingAttributeCode);
+//						return true;
+//					}
+//				}
+//			}
+//		}
+//		return false;
+//	}
 
 //ToDo: Sachin : test these methods call these method from hasEntitiesWithShortCode and hasEntitiesWithShortCodeAndAttribute
-	public void updateWithAutomatedTranslation(String missingEntityCode, String missingAttributeCode, String defaultLangCode, String langCode)
-	{
-		selectMissingEntityAttribute(missingEntityCode, missingAttributeCode);
-		if(Objects.isNull(missingAttributeCode))
-		{
-			String defaultLangText = entity.getName().get(defaultLangCode).getLang();
-			String automatedTranslatedText = callRemoteWebserviceForTranslation(defaultLangText,defaultLangCode,langCode);
-			entity.getName().get(defaultLangCode).setLang(automatedTranslatedText);
-		}
-		entity=null;
-		attributes=null;
-		attribute=null;
-
-	}
-
-	private String callRemoteWebserviceForTranslation(String defaultLangText, String defaultLangCode, String langCode)
-	{
-		Form form = new Form();
-		form
-		 .param("q", defaultLangText)
-		 .param("source", defaultLangCode)
-		 .param("target", langCode);
-		Entity<Form> entity = Entity.form(form);
-
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget target = client.target("https://libretranslate.com/translate");
-		Response response = target.request(MediaType.APPLICATION_JSON).post(entity);
-		String value = response.readEntity(String.class);
-        response.close();  // You should close connections!
-
-        return value;
-	}
-
-	public void selectMissingEntity(String missingEntityCode)
-	{
-		entity=null;
-		attributes=null;
-		attribute=null;
-		for (String code : mapEntitesCodeToAttribustes.keySet()) {
-			if(code.endsWith("." + missingEntityCode)) {
-				try {
-					entity = fRevision.fByCode(fbRevision.getClassEntity(), code);
-					entity = fRevision.load(fbRevision.getClassEntity(), entity);
-					attributes = entity.getAttributes();
-				} catch (JeeslNotFoundException e) {
-					logger.info(code + "not found");
-				}
-			}
-		}
-	}
-
-	public void selectMissingEntityAttribute(String missingEntityCode, String attributeCode)
-	{
-		selectMissingEntity(missingEntityCode);
-		for (RA ra : attributes)
-		{
-			if(ra.getCode().equals(attributeCode))
-			{
-				this.attribute = ra;
-			}
-		}
-	}
+//	public void updateWithAutomatedTranslation(String missingEntityCode, String missingAttributeCode, String defaultLangCode, String langCode)
+//	{
+//		selectMissingEntityAttribute(missingEntityCode, missingAttributeCode);
+//		if(Objects.isNull(missingAttributeCode))
+//		{
+//			String defaultLangText = entity.getName().get(defaultLangCode).getLang();
+//			String automatedTranslatedText = callRemoteWebserviceForTranslation(defaultLangText,defaultLangCode,langCode);
+//			entity.getName().get(defaultLangCode).setLang(automatedTranslatedText);
+//		}
+//		entity=null;
+//		attributes=null;
+//		attribute=null;
+//	}
+//
+//	private String callRemoteWebserviceForTranslation(String defaultLangText, String defaultLangCode, String langCode)
+//	{
+//		Form form = new Form();
+//		form.param("q", defaultLangText)
+//			.param("source", defaultLangCode)
+//			.param("target", langCode);
+//		Entity<Form> entity = Entity.form(form);
+//
+//		ResteasyClient client = new ResteasyClientBuilder().build();
+//		ResteasyWebTarget target = client.target("https://libretranslate.com/translate");
+//		Response response = target.request(MediaType.APPLICATION_JSON).post(entity);
+//		String value = response.readEntity(String.class);
+//        response.close();  // You should close connections!
+//
+//        return value;
+//	}
+//
+//	public void selectMissingEntity(String missingEntityCode)
+//	{
+//		entity=null;
+//		attributes=null;
+//		attribute=null;
+//		for (String code : mapEntitesCodeToAttribustes.keySet())
+//		{
+//			if(code.endsWith("." + missingEntityCode))
+//			{
+//				try
+//				{
+//					entity = fRevision.fByCode(fbRevision.getClassEntity(), code);
+//					entity = fRevision.load(fbRevision.getClassEntity(), entity);
+//					attributes = entity.getAttributes();
+//				}
+//				catch (JeeslNotFoundException e) {logger.info(code + "not found");}
+//			}
+//		}
+//	}
+//
+//	public void selectMissingEntityAttribute(String missingEntityCode, String attributeCode)
+//	{
+//		selectMissingEntity(missingEntityCode);
+//		for (RA ra : attributes)
+//		{
+//			if(ra.getCode().equals(attributeCode))
+//			{
+//				this.attribute = ra;
+//			}
+//		}
+//	}
 
 	public void addEntity() throws JeeslNotFoundException
 	{
@@ -313,7 +307,6 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		catch (ClassNotFoundException e)
 		{
 			className = "CLASS NOT FOUND";
-
 		}
 	}
 
@@ -367,7 +360,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		mapping=null;
 	}
 
-	//*************************************************************************************
+
 
 	public void saveAttribute() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
@@ -391,7 +384,7 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		updatePerformed();
 	}
 
-	//*************************************************************************************
+
 
 	public void addMapping() throws JeeslNotFoundException
 	{
@@ -515,27 +508,25 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		try
 		{
 			return getClasssHierarchy(classes,c.getSuperclass());
-
 		}
 		catch (NullPointerException e) {return classes;}
 	}
 
-	private void addPulledField(Field f) throws InstantiationException, IllegalAccessException, JeeslLockingException, JeeslConstraintViolationException {
+	private void addPulledField(Field f) throws InstantiationException, IllegalAccessException, JeeslLockingException, JeeslConstraintViolationException
+	{
 		attribute = efAttribute.build(null);
 		attribute.setCode(f.getName());
 		attribute.setName(efLang.createLangMap("en",StringUtils.capitalize(f.getName())));
 		attribute.setDescription(efDescription.createEmpty(langs));
 		attribute.setEntity(entity);
 		attribute.setBean(true);
-		//logger.info("size:" +types.size() + types.get(0).getCode() + types.get(0).getId());
 		attribute.setType(getAttributeTypeFromeCode(f.getType().getSimpleName().toString()));
-		//logger.info("entity:" + entity.getId());
 		attribute = fRevision.save(fbRevision.getClassEntity(),entity,attribute);
 	}
 
 	private RAT getAttributeTypeFromeCode(String code)
 	{
-		for (Iterator iterator = types.iterator(); iterator.hasNext();)
+		for(Iterator iterator = types.iterator(); iterator.hasNext();)
 		{
 			RAT type = (RAT) iterator.next();
 			if(type.getCode().equals(code)) {return type;}
@@ -555,7 +546,8 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 		try {c.getDeclaredMethod("is"+ StringUtils.capitalize(f.getName()));} catch (Exception e2) {return false;}}
 
 		//check if field is already saved
-		for (Iterator iterator = attributes.iterator(); iterator.hasNext();) {
+		for (Iterator iterator = attributes.iterator(); iterator.hasNext();)
+		{
 			RA ra = (RA) iterator.next();
 			if(ra.getCode().equals(f.getName())) {return true;}
 		}
@@ -573,7 +565,6 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 	@Override protected void updateSecurity2(JeeslJsfSecurityHandler jsfSecurityHandler, String actionDeveloper)
 	{
 		uiAllowSave = jsfSecurityHandler.allow(actionDeveloper);
-
 		if(logger.isTraceEnabled())
 		{
 			logger.info(uiAllowSave+" allowSave ("+actionDeveloper+")");
@@ -581,7 +572,6 @@ public class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends Jee
 	}
 	
 	//JEESL REST DATA
-
 	@SuppressWarnings("unchecked")
 	public <X extends JeeslEntityRestCode> void jeeslAttributeDownload()
 	{

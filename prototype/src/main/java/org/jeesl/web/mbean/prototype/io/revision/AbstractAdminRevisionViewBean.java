@@ -1,6 +1,7 @@
 package org.jeesl.web.mbean.prototype.io.revision;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
@@ -47,19 +48,30 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminRevisionViewBean.class);
 
+	protected final List<RE> entities; public List<RE> getEntities() {return entities;}
 	private List<RV> views; public List<RV> getViews() {return views;}
 	private List<RVM> viewMappings; public List<RVM> getViewMappings() {return viewMappings;}
 
 	private RV rv; public RV getRv() {return rv;} public void setRv(RV rv) {this.rv = rv;}
 	private RVM mapping; public RVM getMapping() {return mapping;}public void setMapping(RVM mapping) {this.mapping = mapping;}
 
-	public AbstractAdminRevisionViewBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision){super(fbRevision);}
+	public AbstractAdminRevisionViewBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision)
+	{
+		super(fbRevision);
+		
+		entities = new ArrayList<>();
+	}
 
 	protected void postConstructRevisionView(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 							JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision)
 	{
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
-		entities = fRevision.all(fbRevision.getClassEntity());
+		entities.addAll(fRevision.all(fbRevision.getClassEntity()));
+		reloadViews();
+	}
+	
+	@Override public void callbackAfterSbSelection()
+	{
 		reloadViews();
 	}
 

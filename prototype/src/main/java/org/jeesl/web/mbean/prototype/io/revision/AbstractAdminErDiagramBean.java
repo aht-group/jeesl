@@ -51,6 +51,8 @@ public class AbstractAdminErDiagramBean <L extends JeeslLang, D extends JeeslDes
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminErDiagramBean.class);
 
+	protected SbMultiHandler<RC> sbhCategory; public SbMultiHandler<RC> getSbhCategory() {return sbhCategory;}
+	
 	private EjbRevisionDiagramFactory<L,D,RC,ERD> efErDiagram;
 
 	private final Comparator<ERD> cpDiagram;
@@ -63,6 +65,9 @@ public class AbstractAdminErDiagramBean <L extends JeeslLang, D extends JeeslDes
 	public AbstractAdminErDiagramBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision)
 	{
 		super(fbRevision);
+		
+		sbhCategory = new SbMultiHandler<RC>(fbRevision.getClassCategory(),this);
+		
 		cpDiagram = (new RevisionDiagramComparator<RC,ERD>()).factory(RevisionDiagramComparator.Type.category);
 		efErDiagram = fbRevision.ejbDiagram();
 	}
@@ -70,7 +75,14 @@ public class AbstractAdminErDiagramBean <L extends JeeslLang, D extends JeeslDes
 	protected void postConstructRevisionDiagram(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision)
 	{
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
+		
+		sbhCategory.setList(fRevision.allOrderedPositionVisible(fbRevision.getClassCategory()));
 		sbhCategory.selectAll();
+		reloadDiagrams();
+	}
+	
+	@Override public void callbackAfterSbSelection()
+	{
 		reloadDiagrams();
 	}
 
@@ -102,6 +114,8 @@ public class AbstractAdminErDiagramBean <L extends JeeslLang, D extends JeeslDes
 		diagram = efDescription.persistMissingLangs(fRevision,localeCodes,diagram);
 		reloadDiagram();
 	}
+	
+	
 
 	private void reloadDiagram()
 	{
@@ -143,4 +157,5 @@ public class AbstractAdminErDiagramBean <L extends JeeslLang, D extends JeeslDes
 		reloadDiagrams();
 //	Collections.sort(diagrams,cpDiagram);
 	}
+	
 }

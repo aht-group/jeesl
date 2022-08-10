@@ -52,6 +52,11 @@ public class AbstractAdminRevisionConsistencyBean <L extends JeeslLang, D extend
 		categories.clear();
 		index = 1;
 	}
+	
+	@Override public void callbackAfterSbSelection()
+	{
+		
+	}
 
 	protected void build(Class<?> c)
 	{

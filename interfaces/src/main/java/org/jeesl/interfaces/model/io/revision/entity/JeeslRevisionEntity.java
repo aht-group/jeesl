@@ -29,7 +29,7 @@ public interface JeeslRevisionEntity<L extends JeeslLang, D extends JeeslDescrip
 				EjbWithLang<L>,EjbWithDescription<D>,EjbWithRevisionAttributes<RA>,
 				JeeslRestDownloadEntityAttributes
 {
-	public enum Attributes {category,attributes}
+	public enum Attributes {category,diagram,attributes,jscn}
 
 	String getJscn();
 	void setJscn(String jscn);
@@ -37,6 +37,9 @@ public interface JeeslRevisionEntity<L extends JeeslLang, D extends JeeslDescrip
 	RC getCategory();
 	void setCategory(RC category);
 
+	ERD getDiagram();
+	void setDiagram(ERD diagram);
+	
 	Boolean getTimeseries();
 	void setTimeseries(Boolean timeseries);
 
@@ -49,6 +52,5 @@ public interface JeeslRevisionEntity<L extends JeeslLang, D extends JeeslDescrip
 	String getDeveloperInfo();
 	void setDeveloperInfo(String developerInfo);
 
-	ERD getDiagram();
-	void setDiagram(ERD diagram);
+
 }
