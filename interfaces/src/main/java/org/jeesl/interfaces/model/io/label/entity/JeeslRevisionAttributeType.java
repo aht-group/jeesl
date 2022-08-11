@@ -2,6 +2,7 @@ package org.jeesl.interfaces.model.io.label.entity;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
@@ -17,7 +18,7 @@ public interface JeeslRevisionAttributeType <L extends JeeslLang, D extends Jees
 										G extends JeeslGraphic<L,D,?,?,?>>
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,JeeslStatusWithSymbol,
 				JeeslStatus<L,D,S>,JeeslStatusFixedCode,
-				JeeslRestDownloadOption
+				JeeslRestDownloadEntityDescription,JeeslRestDownloadOption
 {
 	public enum Code{text}
 }

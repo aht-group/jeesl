@@ -6,19 +6,15 @@ import java.util.List;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.controller.handler.sb.SbMultiHandler;
-import org.jeesl.controller.handler.sb.SbSingleHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.io.label.EjbLabelAttributeFactory;
-import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelMappingEntityFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelMappingViewFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelScopeFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelViewFactory;
-import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
@@ -26,13 +22,13 @@ import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionEntityMapping;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScope;
+import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScopeType;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMapping;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.util.comparator.ejb.io.revision.RevisionDiagramComparator;
 import org.jeesl.util.comparator.ejb.io.revision.RevisionEntityComparator;
 import org.jeesl.util.comparator.ejb.io.revision.RevisionScopeComparator;
@@ -47,7 +43,7 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 											RV extends JeeslRevisionView<L,D,RVM>,
 											RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
 											RS extends JeeslRevisionScope<L,D,RC,RA>,
-											RST extends JeeslStatus<L,D,RST>,
+											RST extends JeeslRevisionScopeType<L,D,RST,?>,
 											RE extends JeeslRevisionEntity<L,D,RC,REM,RA,ERD>,
 											REM extends JeeslRevisionEntityMapping<RS,RST,RE>,
 											RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>,

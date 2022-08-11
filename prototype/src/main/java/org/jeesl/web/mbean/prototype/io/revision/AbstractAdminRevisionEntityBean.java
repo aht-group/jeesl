@@ -26,14 +26,17 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
+import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionEntityMapping;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScope;
+import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScopeType;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMapping;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -44,12 +47,14 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
+import net.sf.ahtutils.xml.status.Lang;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
@@ -57,7 +62,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 											RV extends JeeslRevisionView<L,D,RVM>,
 											RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
 											RS extends JeeslRevisionScope<L,D,RC,RA>,
-											RST extends JeeslStatus<L,D,RST>,
+											RST extends JeeslRevisionScopeType<L,D,RST,?>,
 											RE extends JeeslRevisionEntity<L,D,RC,REM,RA,ERD>,
 											REM extends JeeslRevisionEntityMapping<RS,RST,RE>,
 											RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>,
@@ -87,6 +92,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 	private String className; public String getClassName() {return className;}
 	private Map<String, List<String>> mapEntitesCodeToAttribustes;
 
+	private boolean supportsJeeslDownloadTranslation; public boolean isSupportsJeeslDownloadTranslation(){return supportsJeeslDownloadTranslation;}
 	private boolean supportsJeeslAttributeDownload; public boolean isSupportsJeeslAttributeDownload() {return supportsJeeslAttributeDownload;}
 	
 	public AbstractAdminRevisionEntityBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision)
@@ -317,9 +323,12 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		try
 		{
 			Class<?> c = Class.forName(entity.getCode());
+			supportsJeeslDownloadTranslation = JeeslRestDownloadEntityDescription.class.isAssignableFrom(c);
 			supportsJeeslAttributeDownload = JeeslRestDownloadEntityAttributes.class.isAssignableFrom(c);
+			
 			className = c.getSimpleName();
-			logger.info(c.getName()+" supportsJeeslAttributeDownload:"+supportsJeeslAttributeDownload);
+			logger.info(c.getName()+" supportsJeeslDownloadTranslation: "+supportsJeeslDownloadTranslation);
+			logger.info(c.getName()+" supportsJeeslAttributeDownload: "+supportsJeeslAttributeDownload);
 		}
 		catch (ClassNotFoundException e)
 		{
@@ -355,7 +364,20 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			updatePerformed();
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+	}
+	
+	public void downloadJeeslTranslations() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
+	{
+		String code = AbstractAdminRevisionEntityBean.toRestCode(entity.getCode());
+		Entity xml = AbstractAdminRevisionEntityBean.rest(code).exportRevisionEntity(code);
 
+		if(xml==null){logger.warn("No Result from REST !!");}
+		else
+		{
+			efLang.update(entity,xml.getLangs());
+			efDescription.update(entity,xml.getDescriptions());
+			saveEntity();
+		}
 	}
 
 	public void rmEntity() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
@@ -589,25 +611,15 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 	}
 	
 	//JEESL REST DATA
-	@SuppressWarnings("unchecked")
-	public <X extends JeeslEntityRestCode> void jeeslAttributeDownload()
+	public <X extends JeeslEntityRestCode> void downloadJeeslAttributes()
 	{
 		reset(false,true);
 		try
 		{
-			Class<X> cX = (Class<X>)Class.forName(entity.getCode()).asSubclass(JeeslEntityRestCode.class);
-			X x = cX.newInstance();
-			String code = x.getRestCode();
-			logger.info("Downloading "+fbRevision.getClassAttribute().getSimpleName()+" for "+code);
+			String code = AbstractAdminRevisionEntityBean.toRestCode(entity.getCode());
+			logger.info("downloadJeeslAttributes "+fbRevision.getClassAttribute().getSimpleName()+" for "+code);
 			
-			StringBuilder url = new StringBuilder();
-			if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
-			else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
-
-			ResteasyClient client = new ResteasyClientBuilder().build();
-			ResteasyWebTarget restTarget = client.target(url.toString());
-			JeeslSystemRest<L,D,?,?> rest = restTarget.proxy(JeeslSystemRest.class);
-			org.jeesl.model.xml.system.revision.Entity xml = rest.exportRevisionEntity(code);
+			org.jeesl.model.xml.system.revision.Entity xml = AbstractAdminRevisionEntityBean.rest(code).exportRevisionEntity(code);
 			JaxbUtil.info(xml);
 			
 			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
@@ -619,5 +631,27 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <X extends JeeslEntityRestCode> String toRestCode(String fqcn) throws InstantiationException, IllegalAccessException, ClassNotFoundException
+	{
+		Class<X> cX = (Class<X>)Class.forName(fqcn).asSubclass(JeeslEntityRestCode.class);
+		X x = cX.newInstance();
+		String code = x.getRestCode();
+		return code;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static <L extends JeeslLang, D extends JeeslDescription> JeeslSystemRest<L,D,?,?> rest(String code)
+	{
+		StringBuilder url = new StringBuilder();
+		if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
+		else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
+
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		ResteasyWebTarget restTarget = client.target(url.toString());
+		JeeslSystemRest<L,D,?,?> rest = restTarget.proxy(JeeslSystemRest.class);
+		return rest;
 	}
 }

@@ -49,9 +49,10 @@
 					<p:panel id="pView" rendered="#{not empty cc.attrs.bean.entity}" styleClass="jeeslPanel">
 						<f:facet name="header"><j:pHeader entity="RevisionEntity"/></f:facet>
 						<f:facet name="actions">
-							<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.jeeslTtCancel}"/>
-							<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
+							<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.jeeslTtCancel}"/>
+							<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
 							<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmEntity()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.entity.id gt 0}"/>
+							<j:svg type="jeeslDownload" listener="#{cc.attrs.bean.downloadJeeslTranslations()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.supportsJeeslDownloadTranslation}"/>
 						</f:facet>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 						<p:messages for="entity" redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -105,7 +106,7 @@
 						selection="#{cc.attrs.bean.mapping}" selectionMode="single" rowKey="#{m.id}">
 						<f:facet name="header">
 							<j:dtHeader title="#{msg.aupRevisionMappings}">
-								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMappings :#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
+								<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addMapping()}" update=":#{cc.id}:fMappings :#{cc.id}:fMapping" tooltip="#{msg.ttNew}"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderMappings()}" update="@form"/>

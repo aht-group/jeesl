@@ -2,6 +2,7 @@ package org.jeesl.interfaces.model.io.label.entity;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
@@ -17,7 +18,7 @@ public interface JeeslRevisionCategory <L extends JeeslLang, D extends JeeslDesc
 							extends Serializable,EjbPersistable,
 									EjbWithCode,
 //									UtilsStatusFixedCode,
-//									JeeslOptionRestDownload,
+									JeeslRestDownloadEntityDescription,
 									EjbWithPosition,
 									EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	

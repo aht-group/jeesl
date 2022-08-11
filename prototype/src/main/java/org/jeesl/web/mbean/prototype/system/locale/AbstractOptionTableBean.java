@@ -2,14 +2,10 @@ package org.jeesl.web.mbean.prototype.system.locale;
 
 import java.io.Serializable;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
-import org.jeesl.api.rest.system.JeeslSystemRest;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -18,8 +14,6 @@ import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
-import org.jeesl.factory.xml.jeesl.XmlContainerFactory;
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -50,15 +44,14 @@ import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.jeesl.Container;
-import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.db.updater.JeeslDbGraphicUpdater;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
+import org.jeesl.web.mbean.prototype.io.revision.AbstractAdminRevisionEntityBean;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Description;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -80,8 +73,6 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	private boolean showDescription; public boolean isShowDescription() {return showDescription;}
 
 	private boolean supportsUpload; public boolean getSupportsUpload(){return supportsUpload;}	
-	private boolean supportsDescription; public boolean getSupportsDescription(){return supportsDescription;}
-
 
 	protected boolean supportsImage; public boolean getSupportsImage() {return supportsImage;}
 	protected boolean supportsGraphic; public boolean getSupportsGraphic() {return supportsGraphic;}
@@ -142,8 +133,6 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 		super.updateUiForCategory();
 
 		supportsUpload = JeeslOptionUploadable.class.isAssignableFrom(optionClass);
-
-		supportsDescription = JeeslRestDownloadEntityDescription.class.isAssignableFrom(optionClass);
 		supportsImage = JeeslStatusWithImage.class.isAssignableFrom(optionClass);
 		supportsGraphic = EjbWithGraphic.class.isAssignableFrom(optionClass);
 
@@ -164,7 +153,6 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 			logger.info("\tFigure? "+supportsFigure);
 			logger.info("\tLocked? "+supportsLocked);
 			logger.info("\t"+JeeslRestDownloadOption.class.getSimpleName()+"? "+supportsDownload);
-			logger.info("\t"+JeeslRestDownloadEntityDescription.class.getSimpleName()+"? "+supportsDescription);
 			logger.info("\t"+JeeslOptionUploadable.class.getSimpleName()+"? "+supportsUpload);
 		}
 	}
@@ -428,14 +416,11 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 		logger.info("Uploading REST");
 		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslEntityRestCode.class);
 		X x = cX.newInstance();
+		
+		String restCode = AbstractAdminRevisionEntityBean.toRestCode(((EjbWithImage)category).getImage());
 
-		Container xml = XmlContainerFactory.build();
-		xml = this.downloadOptionsFromRest(x.getRestCode());
-
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(this.toUrl(x.getRestCode()));
-		JeeslSystemRest<L,D,?,G> rest = restTarget.proxy(JeeslSystemRest.class);
-		rest.updateTranslation(x.getRestCode(),xml);
+		Container xml = AbstractAdminRevisionEntityBean.rest(restCode).exportStatus(restCode);
+		AbstractAdminRevisionEntityBean.rest(restCode).updateTranslation(x.getRestCode(),xml);
 	}
 	
 	
@@ -444,10 +429,13 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 	{
 		logger.info("Downloading REST");
 
-		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslEntityRestCode.class);
-		Class<S> cS = (Class<S>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslStatus.class);
-		Class<W> cW = (Class<W>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(EjbWithCodeGraphic.class);
+		String fqcn = ((EjbWithImage)category).getImage();
+		Class<X> cX = (Class<X>)Class.forName(fqcn).asSubclass(JeeslEntityRestCode.class);
+		Class<S> cS = (Class<S>)Class.forName(fqcn).asSubclass(JeeslStatus.class);
+		Class<W> cW = (Class<W>)Class.forName(fqcn).asSubclass(EjbWithCodeGraphic.class);
 		X x = cX.newInstance();
+		
+		String restCode = AbstractAdminRevisionEntityBean.toRestCode(fqcn);
 
 		Container xml;
 		if(fGraphic instanceof JeeslExportRestFacade)
@@ -458,7 +446,7 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
 		else
 		{
 			logger.info("Using Direct Connection (JBoss EAP7) "+x.getRestCode());
-			xml = this.downloadOptionsFromRest(x.getRestCode());
+			xml = AbstractAdminRevisionEntityBean.rest(restCode).exportStatus(restCode);
 		}
 
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
@@ -471,73 +459,5 @@ public class AbstractOptionTableBean <L extends JeeslLang, D extends JeeslDescri
         dbuGraphic.update(cW,xml.getStatus());
 
         selectCategory();
-	}
-	@SuppressWarnings("unchecked")
-	private Container downloadOptionsFromRest(String code) throws UtilsConfigurationException
-	{
-		StringBuilder url = new StringBuilder();
-		if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
-		else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
-
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(url.toString());
-		JeeslSystemRest<L,D,?,G> rest = restTarget.proxy(JeeslSystemRest.class);
-		return rest.exportStatus(code);
-	}
-
-	//JEESL REST Description
-	@SuppressWarnings({ "unchecked"})
-	public <X extends JeeslEntityRestCode> void downloadDescription() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException
-	{
-		logger.info("Downloading REST");
-
-		Class<X> cX = (Class<X>)Class.forName(((EjbWithImage)category).getImage()).asSubclass(JeeslEntityRestCode.class);
-
-		X x = cX.newInstance();
-
-		Entity xml = null;
-		if(fGraphic instanceof JeeslExportRestFacade)
-		{
-			logger.info("Using Facade Connection for JBoss EAP6 ("+fGraphic.getClass().getSimpleName()+" implements "+JeeslExportRestFacade.class.getSimpleName()+"): "+x.getRestCode());
-			xml = ((JeeslExportRestFacade)fGraphic).exportJeeslReferenceRevisionEntity(x.getRestCode());
-		}
-		else
-		{
-			logger.info("Using Direct Connection (JBoss EAP7) "+x.getRestCode());
-			xml = downloadRevisionFromRest(x.getRestCode());
-			JaxbUtil.info(xml);
-		}
-
-		if(xml!=null && xml.isSetDescriptions())
-		{
-			try
-			{
-				for(Description d : xml.getDescriptions().getDescription())
-				{
-					if(entity.getDescription().containsKey(d.getKey()))
-					{
-						entity.getDescription().get(d.getKey()).setLang(d.getValue());
-					}
-				}
-				entity = fGraphic.save(entity);
-			}
-			catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
-		}
-	}
-	@SuppressWarnings("unchecked")
-	private Entity downloadRevisionFromRest(String code) throws UtilsConfigurationException
-	{
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(this.toUrl(code));
-		JeeslSystemRest<L,D,?,G> rest = restTarget.proxy(JeeslSystemRest.class);
-		return rest.exportRevisionEntity(code);
-	}
-	
-	private String toUrl(String code)
-	{
-		StringBuilder url = new StringBuilder();
-		if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
-		else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
-		return url.toString();
 	}
 }

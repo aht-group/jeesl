@@ -210,4 +210,18 @@ public class EjbLangFactory<L extends JeeslLang>
 			catch (JeeslConstraintViolationException e) {logger.error("",e);}
 		}
 	}
+	
+	public <W extends EjbWithLang<L>> void update(W ejb, Langs langs)
+	{
+		if(langs!=null)
+		{
+			for(Lang xml : langs.getLang())
+			{
+				if(ejb.getName().containsKey(xml.getKey()))
+				{
+					ejb.getName().get(xml.getKey()).setLang(xml.getTranslation());
+				}
+			}
+		}
+	}
 }

@@ -11,19 +11,20 @@ import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionEntityMapping;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScope;
+import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScopeType;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMapping;
 import org.jeesl.interfaces.model.io.label.revision.envers.JeeslRevision;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +33,7 @@ public class RevisionEngineAttributeResolver<L extends JeeslLang,D extends Jeesl
 							RV extends JeeslRevisionView<L,D,RVM>,
 							RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
 							RS extends JeeslRevisionScope<L,D,RC,RA>,
-							RST extends JeeslStatus<L,D,RST>,
+							RST extends JeeslRevisionScopeType<L,D,RST,?>,
 							RE extends JeeslRevisionEntity<L,D,RC,REM,RA,?>,
 							REM extends JeeslRevisionEntityMapping<RS,RST,RE>,
 							RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>, RER extends JeeslStatus<L,D,RER>,

@@ -43,9 +43,6 @@
 				<j:slot id="sCategory" width="6">
 					<h:form id="fEntity" rendered="#{(not empty cc.attrs.bean.entity)}">
 						<p:panel id="pLang" header="#{cc.attrs.bean.entity.name[localeCode].lang}" styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:icon type="jeeslDownload" listener="#{cc.attrs.bean.downloadDescription()}" update=":#{cc.id}:fEntity" rendered="#{cc.attrs.bean.supportsDescription}"/>
-							</f:facet>
 							<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 								<h:outputText value="#{cc.attrs.bean.entity.description[localeCode].lang}"/>
 							</p:panelGrid>

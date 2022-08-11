@@ -3,6 +3,7 @@ package org.jeesl.interfaces.model.io.label.revision.core;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -17,7 +18,8 @@ public interface JeeslRevisionView<L extends JeeslLang, D extends JeeslDescripti
 									RVM extends JeeslRevisionViewMapping<?,?,?>>
 		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 				EjbWithCode,EjbWithPositionVisible,
-				EjbWithLang<L>,EjbWithDescription<D>
+				EjbWithLang<L>,EjbWithDescription<D>,
+				JeeslRestDownloadEntityDescription
 {					
 	List<RVM> getMaps();
 	void setMaps(List<RVM> maps);

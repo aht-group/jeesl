@@ -15,11 +15,14 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
+import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.status.Description;
 import net.sf.ahtutils.xml.status.Descriptions;
+import net.sf.ahtutils.xml.status.Lang;
+import net.sf.ahtutils.xml.status.Langs;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class EjbDescriptionFactory<D extends JeeslDescription>
@@ -211,5 +214,19 @@ public class EjbDescriptionFactory<D extends JeeslDescription>
 			}
 		}
 		return map;
+	}
+	
+	public <W extends EjbWithDescription<D>> void update(W ejb, Descriptions descriptions)
+	{
+		if(descriptions!=null)
+		{
+			for(Description xml : descriptions.getDescription())
+			{
+				if(ejb.getDescription().containsKey(xml.getKey()))
+				{
+					ejb.getDescription().get(xml.getKey()).setLang(xml.getValue());
+				}
+			}
+		}
 	}
 }

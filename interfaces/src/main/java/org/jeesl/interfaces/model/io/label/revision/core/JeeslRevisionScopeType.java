@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.label.er;
+package org.jeesl.interfaces.model.io.label.revision.core;
 
 import java.io.Serializable;
 
@@ -13,13 +13,13 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 
-public interface JeeslRevisionEntityRelation <L extends JeeslLang, D extends JeeslDescription,
-												S extends JeeslStatus<L,D,S>,
-												G extends JeeslGraphic<L,D,?,?,?>>
-		extends Serializable,EjbPersistable,JeeslStatusWithSymbol,
-					JeeslRestDownloadEntityDescription,JeeslRestDownloadOption,
-					EjbWithCodeGraphic<G>,
-					JeeslStatusFixedCode,JeeslStatus<L,D,S>
-{	
-	public enum Code{MtoO,OtoO,OtoM,MtoM}
+public interface JeeslRevisionScopeType <L extends JeeslLang, D extends JeeslDescription,
+									S extends JeeslStatus<L,D,S>,
+									G extends JeeslGraphic<L,D,?,?,?>>
+					extends Serializable,EjbPersistable,JeeslStatusWithSymbol,
+							JeeslRestDownloadEntityDescription,JeeslRestDownloadOption,
+							EjbWithCodeGraphic<G>,
+							JeeslStatusFixedCode,JeeslStatus<L,D,S>
+{					
+	public static enum Scope{xpath,jpql}
 }

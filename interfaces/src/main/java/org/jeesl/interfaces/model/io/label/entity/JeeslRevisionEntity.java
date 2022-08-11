@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionEntityMapping;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
@@ -26,7 +27,7 @@ public interface JeeslRevisionEntity<L extends JeeslLang, D extends JeeslDescrip
 		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 				EjbWithCode,EjbWithPositionVisible,EjbWithParentAttributeResolver,EjbWithPositionParent,
 				EjbWithLang<L>,EjbWithDescription<D>,EjbWithRevisionAttributes<RA>,
-				JeeslRestDownloadEntityAttributes
+				JeeslRestDownloadEntityDescription,JeeslRestDownloadEntityAttributes
 {
 	public enum Attributes {category,diagram,attributes,jscn}
 

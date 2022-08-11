@@ -2,18 +2,19 @@ package org.jeesl.interfaces.model.io.label.revision.core;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
 
 public interface JeeslRevisionEntityMapping<RS extends JeeslRevisionScope<?,?,?,?>,
-											RST extends JeeslStatus<?,?,RST>,
+											RST extends JeeslRevisionScopeType<?,?,RST,?>,
 											RE extends JeeslRevisionEntity<?,?,?,?,?,?>>
 		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
-				EjbWithPositionVisible
+				EjbWithPositionVisible,
+				JeeslRestDownloadEntityDescription
 {			
 	public static enum Type{xpath,jpqlTree}
 	
