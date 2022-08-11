@@ -1,12 +1,11 @@
-package org.jeesl.interfaces.model.io.revision.entity;
+package org.jeesl.interfaces.model.io.label.entity;
 
 import java.io.Serializable;
 import java.util.List;
 
 import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
-import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
-import org.jeesl.interfaces.model.io.revision.data.EjbWithRevisionAttributes;
-import org.jeesl.interfaces.model.io.revision.er.JeeslRevisionDiagram;
+import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
+import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionEntityMapping;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;

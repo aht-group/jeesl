@@ -28,14 +28,14 @@ import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
-import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
-import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
-import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionViewMapping;
-import org.jeesl.interfaces.model.io.revision.data.JeeslRevisionScope;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntityMapping;
-import org.jeesl.interfaces.model.io.revision.er.JeeslRevisionDiagram;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
+import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionEntityMapping;
+import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScope;
+import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionView;
+import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMapping;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -300,7 +300,8 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 	{
 		reset(true,true);
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassEntity()));}
-		entity = efEntity.build(null,entities);
+		entity = efEntity.build(sbhCategory.getSelection(),entities);
+		entity.setDiagram(sbhDiagram.getSelection());
 		entity.setName(efLang.createEmpty(langs));
 		entity.setDescription(efDescription.createEmpty(langs));
 		attribute=null;

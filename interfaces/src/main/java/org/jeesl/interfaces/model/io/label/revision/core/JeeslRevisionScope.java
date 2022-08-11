@@ -1,8 +1,9 @@
-package org.jeesl.interfaces.model.io.revision.data;
+package org.jeesl.interfaces.model.io.label.revision.core;
 
 import java.io.Serializable;
 
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
+import org.jeesl.interfaces.model.io.label.entity.EjbWithRevisionAttributes;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;

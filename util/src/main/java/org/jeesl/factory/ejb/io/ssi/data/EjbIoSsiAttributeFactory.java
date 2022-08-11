@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 

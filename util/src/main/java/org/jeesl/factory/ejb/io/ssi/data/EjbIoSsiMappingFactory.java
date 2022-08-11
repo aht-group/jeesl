@@ -2,7 +2,7 @@ package org.jeesl.factory.ejb.io.ssi.data;
 
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 

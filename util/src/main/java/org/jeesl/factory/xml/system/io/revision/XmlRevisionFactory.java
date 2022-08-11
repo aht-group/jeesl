@@ -3,8 +3,8 @@ package org.jeesl.factory.xml.system.io.revision;
 import java.util.Date;
 
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
-import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionContainer;
-import org.jeesl.interfaces.model.io.revision.data.JeeslRevision;
+import org.jeesl.interfaces.model.io.label.revision.envers.JeeslRevision;
+import org.jeesl.interfaces.model.io.label.revision.envers.JeeslRevisionContainer;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.model.xml.system.revision.Revision;
 import org.jeesl.util.query.xml.system.io.XmlRevisionQuery;

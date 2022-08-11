@@ -1,11 +1,11 @@
 package org.jeesl.factory.xml.system.io.revision;
 
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
-import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntityMapping;
-import org.jeesl.interfaces.model.io.revision.er.JeeslRevisionDiagram;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
+import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionEntityMapping;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;

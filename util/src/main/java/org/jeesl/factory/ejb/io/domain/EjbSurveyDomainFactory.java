@@ -3,7 +3,7 @@ package org.jeesl.factory.ejb.io.domain;
 import java.util.List;
 
 import org.jeesl.interfaces.model.io.domain.JeeslDomain;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;

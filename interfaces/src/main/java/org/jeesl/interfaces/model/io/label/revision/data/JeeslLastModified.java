@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.label.revision;
+package org.jeesl.interfaces.model.io.label.revision.data;
 
 import java.time.LocalDateTime;
 

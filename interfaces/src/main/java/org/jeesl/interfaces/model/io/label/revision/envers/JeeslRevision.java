@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.revision.data;
+package org.jeesl.interfaces.model.io.label.revision.envers;
 
 import java.util.Date;
 

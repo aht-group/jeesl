@@ -6,8 +6,8 @@ import java.util.Set;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainPath;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.module.survey.JsonSurveyValue;
 import org.slf4j.Logger;

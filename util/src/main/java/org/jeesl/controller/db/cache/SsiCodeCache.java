@@ -6,7 +6,7 @@ import java.util.Map;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;

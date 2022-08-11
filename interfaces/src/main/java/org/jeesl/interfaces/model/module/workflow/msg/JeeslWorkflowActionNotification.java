@@ -1,8 +1,8 @@
 package org.jeesl.interfaces.model.module.workflow.msg;
 
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransition;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 

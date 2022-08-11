@@ -1,9 +1,8 @@
-package org.jeesl.interfaces.model.io.revision.core;
+package org.jeesl.interfaces.model.io.label.revision.envers;
 
 import java.io.Serializable;
 
 import org.hibernate.envers.RevisionType;
-import org.jeesl.interfaces.model.io.revision.data.JeeslRevision;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 

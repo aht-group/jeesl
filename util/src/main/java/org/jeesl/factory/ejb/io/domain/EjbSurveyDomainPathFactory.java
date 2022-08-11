@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.jeesl.interfaces.model.io.domain.JeeslDomainPath;
 import org.jeesl.interfaces.model.io.domain.JeeslDomainQuery;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;

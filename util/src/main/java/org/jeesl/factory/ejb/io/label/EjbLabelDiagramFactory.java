@@ -1,7 +1,7 @@
 package org.jeesl.factory.ejb.io.label;
 
-import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
-import org.jeesl.interfaces.model.io.revision.er.JeeslRevisionDiagram;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
+import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.revision.tracker;
+package org.jeesl.interfaces.model.io.label.revision.data;
 
 import java.util.Date;
 

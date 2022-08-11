@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.revision.entity;
+package org.jeesl.interfaces.model.io.label.entity;
 
 import java.io.Serializable;
 

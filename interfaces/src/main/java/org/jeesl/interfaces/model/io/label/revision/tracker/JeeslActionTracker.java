@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.revision.tracker;
+package org.jeesl.interfaces.model.io.label.revision.tracker;
 
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;

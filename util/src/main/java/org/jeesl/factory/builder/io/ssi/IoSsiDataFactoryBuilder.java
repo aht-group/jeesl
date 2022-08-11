@@ -5,7 +5,7 @@ import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiAttributeFactory;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiDataFactory;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiMappingFactory;
 import org.jeesl.factory.txt.io.ssi.data.TxtIoSsiMappingFactory;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;

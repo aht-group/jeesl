@@ -2,7 +2,7 @@ package net.sf.ahtutils.controller.factory.ejb.tracker;
 
 import java.util.Date;
 
-import org.jeesl.interfaces.model.io.revision.tracker.JeeslActionTracker;
+import org.jeesl.interfaces.model.io.label.revision.tracker.JeeslActionTracker;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

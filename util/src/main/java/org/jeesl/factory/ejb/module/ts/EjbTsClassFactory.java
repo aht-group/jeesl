@@ -1,6 +1,6 @@
 package org.jeesl.factory.ejb.module.ts;
 
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.slf4j.Logger;

@@ -3,8 +3,8 @@ package org.jeesl.factory.json.system.translation;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionAttribute;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.model.json.system.translation.JsonTranslation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -15,7 +15,7 @@ import org.jeesl.factory.json.module.ts.JsonTsScopeFactory;
 import org.jeesl.factory.json.module.ts.JsonTsSeriesFactory;
 import org.jeesl.factory.json.system.status.JsonIntervalFactory;
 import org.jeesl.factory.json.system.status.JsonWorkspaceFactory;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;

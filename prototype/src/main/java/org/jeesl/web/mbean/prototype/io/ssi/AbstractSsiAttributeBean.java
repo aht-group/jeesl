@@ -15,7 +15,7 @@ import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiAttributeFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
-import org.jeesl.interfaces.model.io.revision.entity.JeeslRevisionEntity;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;

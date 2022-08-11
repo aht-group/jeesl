@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.revision.entity;
+package org.jeesl.interfaces.model.io.label.entity;
 
 import java.io.Serializable;
 
@@ -12,13 +12,12 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.option.JeeslRestDownloadOption;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 
-public interface JeeslRevisionEntityRelation <L extends JeeslLang, D extends JeeslDescription,
-												S extends JeeslStatus<L,D,S>,
-												G extends JeeslGraphic<L,D,?,?,?>>
-		extends Serializable,EjbPersistable,JeeslStatusWithSymbol,
-					JeeslRestDownloadOption,
-					EjbWithCodeGraphic<G>,
-					JeeslStatusFixedCode,JeeslStatus<L,D,S>
-{	
-	public enum Code{MtoO,OtoO,OtoM,MtoM}
+public interface JeeslRevisionAttributeType <L extends JeeslLang, D extends JeeslDescription,
+										S extends JeeslStatus<L,D,S>,
+										G extends JeeslGraphic<L,D,?,?,?>>
+		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,JeeslStatusWithSymbol,
+				JeeslStatus<L,D,S>,JeeslStatusFixedCode,
+				JeeslRestDownloadOption
+{
+	public enum Code{text}
 }
