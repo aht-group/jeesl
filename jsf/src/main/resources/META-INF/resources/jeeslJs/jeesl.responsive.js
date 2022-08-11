@@ -64,6 +64,26 @@ function reloadStatusBar() {
 	newButtons.click(toggleMenu);
 }
 
+function toggleSubmenu(eventArgs) {
+	let currentSubmenu = $(this).parent();
+	let currentListItem = currentSubmenu.parent();
+	let closeRequested = currentListItem.children('.jeesl-submenu').eq(0).height() > listItemHeight;
+	let overlay = currentListItem.parent();
+	
+	overlay.height('auto');
+	
+	let submenus = overlay.find('.jeesl-submenu');
+	
+	if (!closeRequested) { currentSubmenu.addClass('jeesl-open'); }
+	submenus.each(function() {
+		$(this).stop().animate({ height: $(this).parent().is(currentListItem) && !closeRequested ? $(this).children('.jeesl-dropdown-sub').eq(0).outerHeight() + listItemHeight : listItemHeight }, 400);
+	});
+	$.when(submenus).then(() => {
+		submenus.each(function() { $(this).toggleClass('jeesl-open', $(this).is(currentSubmenu) && !closeRequested); });
+		overlay.height(overlay.children().map((index, child) => $(child).outerHeight()).toArray().reduce((previous, current) => previous + current, 0) + 30);
+	});
+}
+
 $(function() {
 	menuHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
 	treeHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
@@ -75,4 +95,7 @@ $(function() {
 	menuButtons.click(toggleMenu);
 	
 	$('.ui-tree-toggler').click(toggleTreeItem);
+	
+	let overlay = $('.jeesl-header .jeesl-dropdown-list');
+	overlay.find('.jeesl-submenu-icon').click({ overlay: overlay }, toggleSubmenu);
 });

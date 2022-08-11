@@ -262,10 +262,12 @@ html, body, .ui-widget {
     .jeesl-header .jeesl-dropdown-list.jeesl-active {
       opacity: 1;
       visibility: visible; }
-    .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-active .jeesl-dropdown-item-label {
-      color: white; }
-    .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
-      float: none; }
+    .jeesl-header .jeesl-dropdown-list:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item {
+      display: block; }
+    .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item {
+      display: block; }
+      .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
+        float: none; }
 
 .jeesl-breadcrumb-header {
   margin: 0 10px; }
