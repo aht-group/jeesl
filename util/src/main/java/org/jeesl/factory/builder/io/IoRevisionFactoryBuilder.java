@@ -3,13 +3,13 @@ package org.jeesl.factory.builder.io;
 import java.util.Comparator;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionAttributeFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionDiagramFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionEntityFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionMappingEntityFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionMappingViewFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionScopeFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionViewFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelAttributeFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelDiagramFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelMappingEntityFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelMappingViewFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelScopeFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelViewFactory;
 import org.jeesl.factory.xml.system.io.revision.XmlDiagramFactory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
@@ -88,34 +88,34 @@ public class IoRevisionFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 		this.cMr = cMr;
 	}
 
-	public EjbRevisionViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbView()
+	public EjbLabelViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbView()
 	{
-		return new EjbRevisionViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cView);
+		return new EjbLabelViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cView);
 	}
 
-	public EjbRevisionMappingViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbMappingView()
+	public EjbLabelMappingViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbMappingView()
 	{
-		return new EjbRevisionMappingViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cViewMapping);
+		return new EjbLabelMappingViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cViewMapping);
 	}
 
-	public EjbRevisionScopeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbScope()
+	public EjbLabelScopeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbScope()
 	{
-		return new EjbRevisionScopeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cScope);
+		return new EjbLabelScopeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cScope);
 	}
 
-	public EjbRevisionEntityFactory<L,D,RC,RV,RVM,RE,REM,RA,RER,RAT,ERD> ejbEntity() {return new EjbRevisionEntityFactory<>(cL,cD,cEntity);}
+	public EjbLabelEntityFactory<L,D,RC,RV,RVM,RE,REM,RA,RER,RAT,ERD> ejbEntity() {return new EjbLabelEntityFactory<>(cL,cD,cEntity);}
 
-	public EjbRevisionMappingEntityFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbMappingEntity()
+	public EjbLabelMappingEntityFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbMappingEntity()
 	{
-		return new EjbRevisionMappingEntityFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cMappingEntity);
+		return new EjbLabelMappingEntityFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cMappingEntity);
 	}
 
-	public EjbRevisionAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbAttribute()
+	public EjbLabelAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> ejbAttribute()
 	{
-		return new EjbRevisionAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cAttribute);
+		return new EjbLabelAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cAttribute);
 	}
 
-	public EjbRevisionDiagramFactory<L,D,RC,ERD> ejbDiagram(){return new EjbRevisionDiagramFactory<>(cErd);}
+	public EjbLabelDiagramFactory<L,D,RC,ERD> ejbDiagram(){return new EjbLabelDiagramFactory<>(cErd);}
 
 	public XmlDiagramFactory<L,D,RC,ERD> xmlDiagram(QueryRevision q){return new XmlDiagramFactory<>(q);}
 

@@ -25,6 +25,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
+import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
@@ -74,6 +75,8 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 	protected final SbSingleHandler<RC> sbhCategory; public SbSingleHandler<RC> getSbhCategory() {return sbhCategory;}
 	protected final SbSingleHandler<ERD> sbhDiagram; public SbSingleHandler<ERD> getSbhDiagram() {return sbhDiagram;}
 	
+	protected final EjbLabelEntityFactory<L,D,RC,RV,RVM,RE,REM,RA,RER,RAT,ERD> efEntity;
+	
 	protected final List<RE> entities; public List<RE> getEntities() {return entities;}
 	private List<RE> links; public List<RE> getLinks() {return links;}
 	private List<ERD> diagrams; public List<ERD> getDiagrams() {return diagrams;}
@@ -92,6 +95,8 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		
 		sbhCategory = new SbSingleHandler<>(fbRevision.getClassCategory(),this);
 		sbhDiagram = new SbSingleHandler<>(fbRevision.getClassDiagram(),this);
+		
+		efEntity = fbRevision.ejbEntity();
 		
 		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
 		
@@ -155,12 +160,23 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 	{
 		entities.clear();
 		
-		entities.addAll(fRevision.findLabelEntities(sbhCategory.getSelection(),null));
-		if(sbhDiagram.isSelected()) {entities.addAll(fRevision.findLabelEntities(sbhCategory.getSelection(),sbhDiagram.getSelection()));}
+		entities.addAll(fRevision.findLabelEntities(sbhCategory.getSelection(),sbhDiagram.getSelection()));
 
 		if(jogger!=null) {jogger.milestone(fbRevision.getClassEntity().getSimpleName(),"Entities", entities.size());}
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbRevision.getClassEntity(),entities));}
 		Collections.sort(entities,cpEntity);
+	}
+	
+	public void searchMisconfigured()
+	{
+		entities.clear();
+		for(RE ejb : fRevision.all(fbRevision.getClassEntity()))
+		{
+			if(efEntity.checkMisconfiguration(ejb))
+			{		
+				entities.add(ejb);
+			}
+		}
 	}
 
 //	private void prepareEntitiesCodeMap()

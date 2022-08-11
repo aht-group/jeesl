@@ -12,12 +12,12 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionAttributeFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionEntityFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionMappingEntityFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionMappingViewFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionScopeFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionViewFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelAttributeFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelMappingEntityFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelMappingViewFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelScopeFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelViewFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
@@ -70,12 +70,12 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 	protected final Comparator<RE> cpEntity;
 	protected final Comparator<ERD> cpDiagram;
 
-	protected final EjbRevisionViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efView;
-	protected final EjbRevisionMappingViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efMappingView;
-	protected final EjbRevisionScopeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efScope;
-	protected final EjbRevisionEntityFactory<L,D,RC,RV,RVM,RE,REM,RA,RER,RAT,ERD> efEntity;
-	protected final EjbRevisionMappingEntityFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efMappingEntity;
-	protected final EjbRevisionAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efAttribute;
+	protected final EjbLabelViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efView;
+	protected final EjbLabelMappingViewFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efMappingView;
+	protected final EjbLabelScopeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efScope;
+	
+	protected final EjbLabelMappingEntityFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efMappingEntity;
+	protected final EjbLabelAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efAttribute;
 
 	protected List<RA> attributes; public List<RA> getAttributes() {return attributes;}
 	protected List<RC> categories; public List<RC> getCategories() {return categories;}
@@ -102,7 +102,6 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 		efView = fbRevision.ejbView();
 		efMappingView = fbRevision.ejbMappingView();
 		efScope = fbRevision.ejbScope();
-		efEntity = fbRevision.ejbEntity();
 		efMappingEntity = fbRevision.ejbMappingEntity();
 		efAttribute = fbRevision.ejbAttribute();
 	}

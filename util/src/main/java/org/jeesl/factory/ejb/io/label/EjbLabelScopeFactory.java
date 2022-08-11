@@ -1,4 +1,4 @@
-package org.jeesl.factory.ejb.io.revision;
+package org.jeesl.factory.ejb.io.label;
 
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbRevisionScopeFactory<L extends JeeslLang,D extends JeeslDescription,
+public class EjbLabelScopeFactory<L extends JeeslLang,D extends JeeslDescription,
 									RC extends JeeslRevisionCategory<L,D,RC,?>,
 									RV extends JeeslRevisionView<L,D,RVM>,
 									RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -24,11 +24,11 @@ public class EjbRevisionScopeFactory<L extends JeeslLang,D extends JeeslDescript
 									RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>, RER extends JeeslStatus<L,D,RER>,
 									RAT extends JeeslStatus<L,D,RAT>>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbRevisionScopeFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbLabelScopeFactory.class);
 	
 	final Class<RS> cScope;
     
-	public EjbRevisionScopeFactory(final Class<RS> cScope)
+	public EjbLabelScopeFactory(final Class<RS> cScope)
 	{       
         this.cScope = cScope;
 	}

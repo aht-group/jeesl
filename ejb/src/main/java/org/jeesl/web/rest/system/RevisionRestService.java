@@ -14,8 +14,8 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionAttributeFactory;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionEntityFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelAttributeFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
@@ -82,8 +82,8 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
 
 	private EjbLangFactory<L> efLang;
 	private EjbDescriptionFactory<D> efDescription;
-	private EjbRevisionEntityFactory<L,D,RC,RV,RVM,RE,REM,RA,RER,RAT,ERD> efEntity;
-	private EjbRevisionAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efAttribute;
+	private EjbLabelEntityFactory<L,D,RC,RV,RVM,RE,REM,RA,RER,RAT,ERD> efEntity;
+	private EjbLabelAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efAttribute;
 
 	public RevisionRestService(IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision,
 								JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision)
@@ -97,7 +97,7 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
 		efLang = EjbLangFactory.instance(fbRevision.getClassL());
 		efDescription = EjbDescriptionFactory.factory(fbRevision.getClassD());
 		efEntity = fbRevision.ejbEntity();
-		efAttribute = EjbRevisionAttributeFactory.factory(fbRevision.getClassAttribute());
+		efAttribute = EjbLabelAttributeFactory.factory(fbRevision.getClassAttribute());
 		xfDiagram = fbRevision.xmlDiagram(XmlRevisionQuery.get(XmlRevisionQuery.Key.xDiagram));
 	}
 

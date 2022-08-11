@@ -13,7 +13,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
-import org.jeesl.factory.ejb.io.revision.EjbRevisionDiagramFactory;
+import org.jeesl.factory.ejb.io.label.EjbLabelDiagramFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
@@ -53,7 +53,7 @@ public class AbstractAdminErDiagramBean <L extends JeeslLang, D extends JeeslDes
 
 	protected SbMultiHandler<RC> sbhCategory; public SbMultiHandler<RC> getSbhCategory() {return sbhCategory;}
 	
-	private EjbRevisionDiagramFactory<L,D,RC,ERD> efErDiagram;
+	private EjbLabelDiagramFactory<L,D,RC,ERD> efErDiagram;
 
 	private final Comparator<ERD> cpDiagram;
 

@@ -19,7 +19,8 @@
 								selection="#{cc.attrs.bean.entity}" selectionMode="single" rowKey="#{e.id}">
 						<f:facet name="header">
 							<j:dtHeader entity="RevisionEntity" code="listOf">
-								<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.ttNew}"/>
+								<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.ttNew}"/>
+								<j:svg type="jeeslSearch" listener="#{cc.attrs.bean.searchMisconfigured()}" update=":#{cc.id}:grid" tooltip="Search Misconfigured"/>
 							</j:dtHeader>
 						</f:facet>
 						<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderEntites()}" update="@form"/>

@@ -1,4 +1,4 @@
-package org.jeesl.factory.ejb.io.revision;
+package org.jeesl.factory.ejb.io.label;
 
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringUtil;
 
-public class EjbRevisionAttributeFactory<L extends JeeslLang,D extends JeeslDescription,
+public class EjbLabelAttributeFactory<L extends JeeslLang,D extends JeeslDescription,
 									RC extends JeeslRevisionCategory<L,D,RC,?>,
 									RV extends JeeslRevisionView<L,D,RVM>,
 									RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -27,11 +27,11 @@ public class EjbRevisionAttributeFactory<L extends JeeslLang,D extends JeeslDesc
 									RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>, RER extends JeeslStatus<L,D,RER>,
 									RAT extends JeeslStatus<L,D,RAT>>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbRevisionAttributeFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbLabelAttributeFactory.class);
 	
 	final Class<RA> cAttribute;
     
-	public EjbRevisionAttributeFactory(final Class<RA> cAttribute)
+	public EjbLabelAttributeFactory(final Class<RA> cAttribute)
 	{       
         this.cAttribute = cAttribute;
 	}
@@ -46,9 +46,9 @@ public class EjbRevisionAttributeFactory<L extends JeeslLang,D extends JeeslDesc
 					REM extends JeeslRevisionEntityMapping<RS,RST,RE>,
 					RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>, RER extends JeeslStatus<L,D,RER>,
 					RAT extends JeeslStatus<L,D,RAT>>
-	EjbRevisionAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> factory(final Class<RA> cAttribute)
+	EjbLabelAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> factory(final Class<RA> cAttribute)
 	{
-		return new EjbRevisionAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cAttribute);
+		return new EjbLabelAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>(cAttribute);
 	}
     
 	public RA build(RAT type, Attribute xml)

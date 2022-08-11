@@ -1,4 +1,4 @@
-package org.jeesl.factory.ejb.io.revision;
+package org.jeesl.factory.ejb.io.label;
 
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionView;
@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbRevisionViewFactory<L extends JeeslLang,D extends JeeslDescription,
+public class EjbLabelMappingEntityFactory<L extends JeeslLang,D extends JeeslDescription,
 									RC extends JeeslRevisionCategory<L,D,RC,?>,
 									RV extends JeeslRevisionView<L,D,RVM>,
 									RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -24,23 +24,26 @@ public class EjbRevisionViewFactory<L extends JeeslLang,D extends JeeslDescripti
 									RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>, RER extends JeeslStatus<L,D,RER>,
 									RAT extends JeeslStatus<L,D,RAT>>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbRevisionViewFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbLabelMappingEntityFactory.class);
 	
-	final Class<RV> cView;
+	final Class<REM> cMapping;
     
-	public EjbRevisionViewFactory(final Class<RV> cView)
+	public EjbLabelMappingEntityFactory(final Class<REM> cMapping)
 	{       
-        this.cView = cView;
+        this.cMapping = cMapping;
 	}
     
-	public RV build()
+	public REM build (RE entity, RS scope, RST type)
 	{
-		RV ejb = null;
+		REM ejb = null;
 		try
 		{
-			ejb = cView.newInstance();
+			ejb = cMapping.newInstance();
 			ejb.setPosition(1);
 			ejb.setVisible(true);
+			ejb.setEntity(entity);
+			ejb.setScope(scope);
+			ejb.setType(type);
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}

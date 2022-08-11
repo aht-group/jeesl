@@ -1,4 +1,4 @@
-package org.jeesl.factory.ejb.io.revision;
+package org.jeesl.factory.ejb.io.label;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,7 +25,9 @@ import org.jeesl.model.xml.system.revision.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbRevisionEntityFactory<L extends JeeslLang,D extends JeeslDescription,
+import net.sf.exlp.util.io.StringUtil;
+
+public class EjbLabelEntityFactory<L extends JeeslLang,D extends JeeslDescription,
 									RC extends JeeslRevisionCategory<L,D,RC,?>,
 									RV extends JeeslRevisionView<L,D,RVM>,
 									RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -36,14 +38,14 @@ public class EjbRevisionEntityFactory<L extends JeeslLang,D extends JeeslDescrip
 									RAT extends JeeslStatus<L,D,RAT>,
 									ERD extends JeeslRevisionDiagram<L,D,RC>>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbRevisionEntityFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbLabelEntityFactory.class);
 	
 	final Class<RE> cEntity;
 	
 	private EjbLangFactory<L> efLang;
 	private EjbDescriptionFactory<D> efDescription;
     
-	public EjbRevisionEntityFactory(final Class<L> cL,final Class<D> cD,final Class<RE> cEntity)
+	public EjbLabelEntityFactory(final Class<L> cL,final Class<D> cD,final Class<RE> cEntity)
 	{       
         this.cEntity = cEntity;
 		efLang = EjbLangFactory.instance(cL);
@@ -124,6 +126,45 @@ public class EjbRevisionEntityFactory<L extends JeeslLang,D extends JeeslDescrip
 			}
 			
 		}
-
+	}
+	
+	public boolean checkMisconfiguration(RE ejb)
+	{
+		boolean isClassNotFound = false;
+		boolean isDiagramMissing = false;
+		boolean isCategoryMissing = false;
+		boolean isCategoryMismatch = false;
+		boolean isJscnMismatch = false;
+		
+		try
+		{
+			Class<?> c = Class.forName(ejb.getCode());
+			isJscnMismatch = !c.getSimpleName().equals(ejb.getJscn());
+		}
+		catch (ClassNotFoundException e) {isClassNotFound = true;}
+		
+		if(ejb.getCategory()==null) {isCategoryMissing = true;}
+		{
+			if(ejb.getDiagram()==null){isDiagramMissing = true;}
+			else
+			{
+				isCategoryMismatch = (ejb.getCategory()!=ejb.getDiagram().getCategory());
+			}
+		}
+		
+		boolean isMisconfigured = (isClassNotFound || isDiagramMissing || isCategoryMissing || isCategoryMismatch || isJscnMismatch);
+		
+		if(isMisconfigured)
+		{
+			logger.info(StringUtil.stars());
+			logger.info(ejb.getCode());
+			logger.info("isClassNotFound: "+isClassNotFound);
+			logger.info("isDiagramMissing: "+isDiagramMissing);
+			logger.info("isCategoryMissing: "+isCategoryMissing);
+			logger.info("isCategoryMismatch: "+isCategoryMismatch);
+			logger.info("isJscnMismatch: "+isJscnMismatch);
+		}
+		
+		return isMisconfigured;
 	}
 }

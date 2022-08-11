@@ -1,4 +1,4 @@
-package org.jeesl.factory.ejb.io.revision;
+package org.jeesl.factory.ejb.io.label;
 
 import org.jeesl.interfaces.model.io.revision.core.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.revision.er.JeeslRevisionDiagram;
@@ -7,15 +7,15 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbRevisionDiagramFactory<L extends JeeslLang, D extends JeeslDescription,
+public class EjbLabelDiagramFactory<L extends JeeslLang, D extends JeeslDescription,
 								C extends JeeslRevisionCategory<L,D,C,?>,
 								ERD extends JeeslRevisionDiagram<L,D,C>>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbRevisionDiagramFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbLabelDiagramFactory.class);
 
 	final Class<ERD> cErDiagram;
 
-	public EjbRevisionDiagramFactory(final Class<ERD> cErDiagram)
+	public EjbLabelDiagramFactory(final Class<ERD> cErDiagram)
 	{
         this.cErDiagram = cErDiagram;
 	}
