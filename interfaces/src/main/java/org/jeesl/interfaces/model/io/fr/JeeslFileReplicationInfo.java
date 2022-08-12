@@ -7,7 +7,9 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
 public interface JeeslFileReplicationInfo<META extends JeeslFileMeta<?,?,?,?>,
 										REPLICATION extends JeeslFileReplication<?,?,?,?,?>,
 										RSTATUS extends JeeslFileStatus<?,?,RSTATUS,?>>

@@ -2,28 +2,29 @@ package org.jeesl.interfaces.model.io.label.entity;
 
 import java.io.Serializable;
 
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslRevisionAttribute<L extends JeeslLang, D extends JeeslDescription,
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										RER extends JeeslStatus<L,D,RER>,
 										RAT extends JeeslStatus<L,D,RAT>>
 		extends Serializable,EjbRemoveable,EjbPersistable,JeeslStatusWithSymbol,EjbWithId,
 				EjbWithCode,EjbWithPosition,
-				EjbWithLang<L>,EjbWithDescription<D>,
-				JeeslRestDownloadEntityDescription,JeeslRestDownloadEntityAttributes
+				EjbWithLang<L>,EjbWithDescription<D>
 {
 	public enum Attributes{entity};
 	public static enum Type{text,number,date,amount,bool}

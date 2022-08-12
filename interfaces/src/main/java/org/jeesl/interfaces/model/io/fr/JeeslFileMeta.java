@@ -15,7 +15,9 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
 public interface JeeslFileMeta<D extends JeeslDescription,
 								CONTAINER extends JeeslFileContainer<?,?>,
 								TYPE extends JeeslFileType<?,D,TYPE,?>,

@@ -33,7 +33,7 @@ import net.sf.ahtutils.model.qualifier.EjbErNode;
 public class SecurityRole implements JeeslSecurityRole<Lang,Description,SecurityCategory,SecurityView,SecurityUsecase,SecurityAction,User>
 {	
 	public static final long serialVersionUID=1;
-	@Override public String getRestCode() {return JeeslSecurityRole.class.getName();}
+	
 
 	public static enum Code {systemAht}
 	public static enum CodeRegion {regionalManager,regionalEditor}

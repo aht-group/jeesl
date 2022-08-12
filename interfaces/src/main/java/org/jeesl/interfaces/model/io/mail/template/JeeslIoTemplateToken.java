@@ -15,7 +15,9 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
 public interface JeeslIoTemplateToken<L extends JeeslLang,D extends JeeslDescription,
 								TEMPLATE extends JeeslIoTemplate<L,D,?,?,?,?>,
 								TOKENTYPE extends JeeslStatus<L,D,TOKENTYPE>>

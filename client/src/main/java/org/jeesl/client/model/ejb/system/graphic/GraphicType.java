@@ -63,11 +63,7 @@ public class GraphicType implements JeeslGraphicType<Lang,Description,GraphicTyp
 			sb.append(id);
 		return sb.toString();
 	}
-	@Override
-	public String getRestCode() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	@Override
 	public List<String> getFixedCodes() {
 		// TODO Auto-generated method stub

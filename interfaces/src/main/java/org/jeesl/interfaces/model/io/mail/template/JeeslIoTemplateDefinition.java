@@ -10,7 +10,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
 public interface JeeslIoTemplateDefinition<D extends JeeslDescription,
 								CHANNEL extends JeeslTemplateChannel<?,D,CHANNEL,?>,
 								TEMPLATE extends JeeslIoTemplate<?,D,?,?,?,?>

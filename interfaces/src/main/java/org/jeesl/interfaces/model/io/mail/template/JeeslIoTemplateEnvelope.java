@@ -6,7 +6,9 @@ import java.util.Map;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
 public class JeeslIoTemplateEnvelope<L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 								CHANNEL extends JeeslTemplateChannel<L,D,CHANNEL,?>,

@@ -26,10 +26,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
-import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -44,18 +41,19 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.rest.system.JeeslEntityRestCode;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
+import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											RC extends JeeslRevisionCategory<L,D,RC,?>,
@@ -323,8 +321,8 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		try
 		{
 			Class<?> c = Class.forName(entity.getCode());
-			supportsJeeslDownloadTranslation = JeeslRestDownloadEntityDescription.class.isAssignableFrom(c);
-			supportsJeeslAttributeDownload = JeeslRestDownloadEntityAttributes.class.isAssignableFrom(c);
+			supportsJeeslDownloadTranslation = JeeslInterfaceAnnotationQuery.isAnnotationPresent(DownloadJeeslDescription.class,c);
+			supportsJeeslAttributeDownload = JeeslInterfaceAnnotationQuery.isAnnotationPresent(DownloadJeeslAttributes.class,c);
 			
 			className = c.getSimpleName();
 			logger.info(c.getName()+" supportsJeeslDownloadTranslation: "+supportsJeeslDownloadTranslation);
@@ -366,18 +364,24 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
 	}
 	
-	public void downloadJeeslTranslations() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
+	public void downloadJeeslTranslations() throws InstantiationException, IllegalAccessException, UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
 	{
-		String code = AbstractAdminRevisionEntityBean.toRestCode(entity.getCode());
-		Entity xml = AbstractAdminRevisionEntityBean.rest(code).exportRevisionEntity(code);
-
-		if(xml==null){logger.warn("No Result from REST !!");}
-		else
+		try
 		{
-			efLang.update(entity,xml.getLangs());
-			efDescription.update(entity,xml.getDescriptions());
-			saveEntity();
+			Class<?> c = Class.forName(entity.getCode());
+			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslData.class,c);
+			
+			Entity xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportRevisionEntity(i.getName());
+
+			if(xml==null){logger.warn("No Result from REST !!");}
+			else
+			{
+				efLang.update(entity,xml.getLangs());
+				efDescription.update(entity,xml.getDescriptions());
+				saveEntity();
+			}
 		}
+		catch (ClassNotFoundException e){e.printStackTrace();}
 	}
 
 	public void rmEntity() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
@@ -422,8 +426,24 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		reloadEntity();
 		updatePerformed();
 	}
+	
+	public void downloadJeeslAttributes() throws UtilsConfigurationException, JeeslConstraintViolationException
+	{
+		reset(false,true);
+		
+		try
+		{
+			Class<?> c = Class.forName(entity.getCode());
+			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslData.class,c);
+			
+			Entity xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportRevisionEntity(i.getName());
 
-
+			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
+			updater.updateAttributes(entity,bTranslation.getLangKeys(),xml);
+			reloadEntity();
+		}
+		catch (ClassNotFoundException e){e.printStackTrace();}
+	}
 
 	public void addMapping() throws JeeslNotFoundException
 	{
@@ -608,38 +628,6 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		{
 			logger.info(uiAllowSave+" allowSave ("+actionDeveloper+")");
 		}
-	}
-	
-	//JEESL REST DATA
-	public <X extends JeeslEntityRestCode> void downloadJeeslAttributes()
-	{
-		reset(false,true);
-		try
-		{
-			String code = AbstractAdminRevisionEntityBean.toRestCode(entity.getCode());
-			logger.info("downloadJeeslAttributes "+fbRevision.getClassAttribute().getSimpleName()+" for "+code);
-			
-			org.jeesl.model.xml.system.revision.Entity xml = AbstractAdminRevisionEntityBean.rest(code).exportRevisionEntity(code);
-			JaxbUtil.info(xml);
-			
-			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
-
-			updater.updateAttributes(entity,bTranslation.getLangKeys(),xml);
-			reloadEntity();
-		}
-		catch (ClassNotFoundException | UtilsConfigurationException | InstantiationException | IllegalAccessException | JeeslConstraintViolationException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static <X extends JeeslEntityRestCode> String toRestCode(String fqcn) throws InstantiationException, IllegalAccessException, ClassNotFoundException
-	{
-		Class<X> cX = (Class<X>)Class.forName(fqcn).asSubclass(JeeslEntityRestCode.class);
-		X x = cX.newInstance();
-		String code = x.getRestCode();
-		return code;
 	}
 	
 	@SuppressWarnings("unchecked")

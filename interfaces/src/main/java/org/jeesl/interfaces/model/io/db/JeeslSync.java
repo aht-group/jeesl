@@ -12,7 +12,9 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
 public interface JeeslSync<L extends JeeslLang, D extends JeeslDescription,
 							STATUS extends JeeslStatus<L,D,STATUS>,
 							CATEGORY extends JeeslStatus<L,D,CATEGORY>>

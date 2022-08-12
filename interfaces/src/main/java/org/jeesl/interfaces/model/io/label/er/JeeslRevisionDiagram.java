@@ -2,8 +2,6 @@ package org.jeesl.interfaces.model.io.label.er;
 
 import java.io.Serializable;
 
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -14,13 +12,16 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslRevisionDiagram <L extends JeeslLang, D extends JeeslDescription,
 										C extends JeeslRevisionCategory<L,D,C,?>>
 		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 							EjbWithCode,EjbWithPositionParent,
-							EjbWithLang<L>,EjbWithDescription<D>,
-							JeeslRestDownloadEntityDescription,JeeslRestDownloadEntityAttributes
+							EjbWithLang<L>,EjbWithDescription<D>
 {
 	public enum Attributes {category}
 	

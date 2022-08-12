@@ -21,13 +21,15 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.option.JeeslRestDownloadOption;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithColour;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithLocked;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,7 +142,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	{
 		supportsSymbol = JeeslStatusWithSymbol.class.isAssignableFrom(optionClass);
 		supportsLocked = EjbWithLocked.class.isAssignableFrom(optionClass);
-		supportsDownload = JeeslRestDownloadOption.class.isAssignableFrom(optionClass);
+		supportsDownload = JeeslInterfaceAnnotationQuery.isAnnotationPresent(DownloadJeeslData.class,optionClass);
 		supportsColour = JeeslStatusWithColour.class.isAssignableFrom(optionClass);
 	}	
 }

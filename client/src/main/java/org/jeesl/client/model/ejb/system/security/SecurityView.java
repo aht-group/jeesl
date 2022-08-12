@@ -31,7 +31,7 @@ import net.sf.ahtutils.model.qualifier.EjbErNode;
 
 public class SecurityView implements JeeslSecurityView<Lang,Description,SecurityCategory,SecurityRole,SecurityUsecase,SecurityAction>
 {
-	@Override public String getRestCode() {return JeeslSecurityView.class.getName();}
+	
 	
 	public static enum Code {welcome}
 	public static enum CodeSeries {seriesAll,series,season,episode}

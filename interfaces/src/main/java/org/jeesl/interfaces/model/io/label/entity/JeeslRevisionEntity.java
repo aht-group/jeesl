@@ -3,8 +3,6 @@ package org.jeesl.interfaces.model.io.label.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityDescription;
 import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionEntityMapping;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
@@ -18,7 +16,11 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslRevisionEntity<L extends JeeslLang, D extends JeeslDescription,
 									RC extends JeeslRevisionCategory<L,D,RC,?>,
 									REM extends JeeslRevisionEntityMapping<?,?,?>,
@@ -26,8 +28,7 @@ public interface JeeslRevisionEntity<L extends JeeslLang, D extends JeeslDescrip
 									ERD extends JeeslRevisionDiagram<L,D,RC>>
 		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 				EjbWithCode,EjbWithPositionVisible,EjbWithParentAttributeResolver,EjbWithPositionParent,
-				EjbWithLang<L>,EjbWithDescription<D>,EjbWithRevisionAttributes<RA>,
-				JeeslRestDownloadEntityDescription,JeeslRestDownloadEntityAttributes
+				EjbWithLang<L>,EjbWithDescription<D>,EjbWithRevisionAttributes<RA>
 {
 	public enum Attributes {category,diagram,attributes,jscn}
 

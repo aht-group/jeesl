@@ -3,7 +3,6 @@ package org.jeesl.interfaces.model.io.crypto;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import org.jeesl.interfaces.model.io.label.download.JeeslRestDownloadEntityAttributes;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
@@ -11,12 +10,13 @@ import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 
+@DownloadJeeslAttributes
 public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser,
 									STATUS extends JeeslIoCryptoKeyStatus<?,?,STATUS,?>>
 						extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
-								EjbWithPosition,JeeslWithStatus<STATUS>,EjbWithParentAttributeResolver,
-								JeeslRestDownloadEntityAttributes
+								EjbWithPosition,JeeslWithStatus<STATUS>,EjbWithParentAttributeResolver
 								
 {	
 	public enum Attributes{user}

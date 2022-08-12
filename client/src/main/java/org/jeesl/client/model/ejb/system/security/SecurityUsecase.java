@@ -32,7 +32,7 @@ import net.sf.ahtutils.model.qualifier.EjbErNode;
 public class SecurityUsecase implements JeeslSecurityUsecase<Lang,Description,SecurityCategory,SecurityRole,SecurityView,SecurityAction>
 {
 	public static final long serialVersionUID=1;
-	@Override public String getRestCode() {return JeeslSecurityUsecase.class.getName();}
+	
 	
 	public static enum Code {test}
 	
