@@ -3,7 +3,7 @@ package org.jeesl.interfaces.model.module.mdc.collection;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslMcsStatus;
+import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 
 public interface JeeslMdcScope <L extends JeeslLang, D extends JeeslDescription,

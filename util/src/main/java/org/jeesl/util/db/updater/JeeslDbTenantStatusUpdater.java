@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.system.locale.status.JeeslMcsStatus;
+import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.jeesl.Container;
@@ -49,7 +49,7 @@ public class JeeslDbTenantStatusUpdater <L extends JeeslLang, D extends JeeslDes
 		uGraphic.setFacade(fGraphic);
 	}
 	
-	public void initMcs(R realm, RREF rref)
+	public void initTenant(R realm, RREF rref)
 	{
 		this.realm = realm;
 		this.rref = rref;

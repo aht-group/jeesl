@@ -11,7 +11,9 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser,
 									STATUS extends JeeslIoCryptoKeyStatus<?,?,STATUS,?>>

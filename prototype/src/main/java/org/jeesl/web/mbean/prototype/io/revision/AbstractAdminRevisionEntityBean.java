@@ -364,12 +364,12 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
 	}
 	
-	public void downloadJeeslTranslations() throws InstantiationException, IllegalAccessException, UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
+	public void downloadJeeslTranslations() throws UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
 	{
 		try
 		{
 			Class<?> c = Class.forName(entity.getCode());
-			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslData.class,c);
+			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslDescription.class,c);
 			
 			Entity xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportRevisionEntity(i.getName());
 
@@ -403,8 +403,6 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		mapping=null;
 	}
 
-
-
 	public void saveAttribute() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.saveEntity(attribute));}
@@ -434,7 +432,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		try
 		{
 			Class<?> c = Class.forName(entity.getCode());
-			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslData.class,c);
+			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslAttributes.class,c);
 			
 			Entity xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportRevisionEntity(i.getName());
 

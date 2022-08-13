@@ -6,7 +6,7 @@ import org.jeesl.interfaces.model.with.primitive.text.EjbWithStyle;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithSymbol;
 
 public interface JeeslTenantStatus <REALM extends JeeslTenantRealm<?,?,REALM,?>>
-						extends JeeslWithTenantSupport<REALM>,
+									extends JeeslWithTenantSupport<REALM>,
 									EjbWithPositionVisible,EjbWithStyle,EjbWithNonUniqueCode,EjbWithSymbol
 {	
 //		void x();

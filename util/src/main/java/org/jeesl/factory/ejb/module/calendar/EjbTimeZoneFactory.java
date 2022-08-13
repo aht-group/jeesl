@@ -1,9 +1,7 @@
 package org.jeesl.factory.ejb.module.calendar;
 
-import java.util.Date;
 import java.util.TimeZone;
 
-import org.jeesl.controller.processor.TimeZoneProcessor;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.slf4j.Logger;

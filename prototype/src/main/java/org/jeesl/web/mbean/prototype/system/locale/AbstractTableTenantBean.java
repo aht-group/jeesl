@@ -30,9 +30,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.system.locale.status.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
+import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.parent.EjbWithParent;
@@ -406,7 +406,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		JaxbUtil.trace(xml);
 
 		JeeslDbTenantStatusUpdater<L,D,LOC,R,RREF,G,GT> updater = new JeeslDbTenantStatusUpdater<L,D,LOC,R,RREF,G,GT>(fbStatus,fbSvg,fGraphic,lp);
-		updater.initMcs(realm,rref);
+		updater.initTenant(realm,rref);
 		updater.iStatus(optionClass,xml);
 
         selectCategory();

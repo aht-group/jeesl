@@ -10,6 +10,7 @@
 	
 	<composite:interface>
 		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="app" required="false" default="#{appCalendarBean}"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -17,7 +18,7 @@
 	<j:row id="row1">
 		<j:slot id="sProperties" width="7">
 			<h:form id="fZones">
-				<p:dataTable var="z" value="#{cc.attrs.bean.zones}"
+				<p:dataTable var="z" value="#{cc.attrs.app.zones}"
 						selection="#{cc.attrs.bean.zone}" selectionMode="single" rowKey="#{z.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="CalTimeZone" code="listOf">
@@ -39,16 +40,18 @@
 		<j:slot id="sZone" width="5">
 			<h:form id="fZone" rendered="#{not empty cc.attrs.bean.zone}">
 				<p:panel styleClass="jeeslPanel">
+					<f:facet name="header"><j:pHeader entity="CalTimeZone"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveZone()}" update=":#{cc.id}:grid"/>
 					</f:facet>
-					<f:facet name="header"><j:pHeader entity="CalTimeZone"/></f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<jtp:label entity="CalTimeZone" code="code"/>
 						<p:inputText value="#{cc.attrs.bean.zone.code}"/>
 					</p:panelGrid>
-					<aht:tabTranslationEditor value="#{cc.attrs.bean.zone}" withDescription="false" labelTranslation="#{msg.Name}" keys="#{cc.attrs.bean.localeCodes}" />
+					<j:tabTranslationEditor value="#{cc.attrs.bean.zone}"
+											withDescription="false"
+											keys="#{cc.attrs.bean.localeCodes}" />
 				</p:panel>
 			</h:form>
 		</j:slot>

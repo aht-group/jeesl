@@ -56,8 +56,8 @@
 			<p:dataTable var="c" value="#{cc.attrs.bean.credentials}"
 						 selection="#{cc.attrs.bean.credential}" selectionMode="single" rowKey="#{c.id}">
 				<f:facet name="header">
-					<j:dtHeader title="#{msg.jeeslIoSsiCredentials}">
-						<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential" library="jeeslGfx"/>
+					<j:dtHeader entity="IoSsiCredential" code="listOf">
+						<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential"/>
 					</j:dtHeader>
 				</f:facet>
 				<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCredential()}" update=":#{cc.id}:fCredential"/>
@@ -65,40 +65,41 @@
 					<h:outputText value="#{c.position}"/>
 				</p:column>
 				<p:column>
-					<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiSystemCode}"/></f:facet>
+					<f:facet name="header"><jtp:label entity="IoSsiCredential" code="code"/></f:facet>
 					<h:outputText value="#{c.code}"/>
 				</p:column>
 				<p:column>
-					<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiCredentialUser}"/></f:facet>
+					<f:facet name="header"><jtp:label entity="IoSsiCredential" code="user"/></f:facet>
 					<h:outputText value="#{c.user}"/>
 				</p:column>
 			</p:dataTable>
 		</h:form>
 		<h:form id="fCredential" >
-			<p:panel id="pView" header="#{msg.jeeslIoSsiCredential}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.credential}">
+			<p:panel id="pView" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.credential}">
+				<f:facet name="header"><j:pHeader entity="IoSsiCredential"/></f:facet>
 				<f:facet name="actions">
-					<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential"  library="jeeslGfx"/>
-					<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveCredential()}"   update=":#{cc.id}:fCredentials :#{cc.id}:fCredential"  library="jeeslGfx"/>
-					<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential" rendered="#{cc.attrs.bean.credential.id gt 0}"  library="jeeslGfx"/>
+					<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential"/>
+					<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveCredential()}"   update=":#{cc.id}:fCredentials :#{cc.id}:fCredential"/>
+					<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential" rendered="#{cc.attrs.bean.credential.id gt 0}"/>
 				</f:facet>
 				<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 					
-					<p:outputLabel value="#{msg.jeeslIoSsiCredentialCode}"/>
+					<jtp:label entity="IoSsiCredential" code="code"/>
 					<p:inputText value="#{cc.attrs.bean.credential.code}" autocomplete="off"/>
 					
-					<p:outputLabel value="#{msg.jeeslIoSsiCredentialUser}"/>
+					<jtp:label entity="IoSsiCredential" code="user"/>
 					<p:inputText value="#{cc.attrs.bean.credential.user}" autocomplete="off"/>
 					
-					<p:outputLabel value="#{msg.jeeslIoSsiCredentialPwd}"/>
+					<jtp:label entity="IoSsiCredential" code="pwd"/>
 					<p:inputText value="#{cc.attrs.bean.credential.pwd}" autocomplete="off"/>
 					
-					<p:outputLabel value="#{msg.jeeslIoSsiCredentialToken}"/>
+					<jtp:label entity="IoSsiCredential" code="token"/>
 					<p:inputText value="#{cc.attrs.bean.credential.token}" autocomplete="off"/>
 					
-					<p:outputLabel value="#{msg.jeeslIoSsiCredentialUrl}"/>
+					<jtp:label entity="IoSsiCredential" code="url"/>
 					<p:inputText value="#{cc.attrs.bean.credential.url}" autocomplete="off"/>
 					
-					<p:outputLabel value="#{msg.jeeslIoSsiCredentialEncrypted}"/>
+					<jtp:label entity="IoSsiCredential" code="encrypted"/>
 					<p:selectBooleanCheckbox value="#{cc.attrs.bean.credential.encrypted}" />
 				
 				</p:panelGrid>

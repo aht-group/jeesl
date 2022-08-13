@@ -8,10 +8,16 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslCalendarTimeZone <L extends JeeslLang, D extends JeeslDescription>
 						extends Serializable,EjbSaveable,EjbRemoveable,EjbWithCode,EjbWithLang<L>
 {
+	public enum Attributes{calendar}
+	
 	public static String tzUtc = "UTC";
 	public static String tzBerlin = "Europe/Berlin";
 }
