@@ -50,7 +50,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiAttributeBean.class);
 
-	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,?> fbSsiCore;
+	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,?> fbSsiCore;
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsiData;
 	private final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,ENTITY,?,?,?,?,?,?> fbRevision;
 
@@ -70,7 +70,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 	private ATTRIBUTE attribute; public ATTRIBUTE getAttribute() {return attribute;} public void setAttribute(ATTRIBUTE attribute) {this.attribute = attribute;}
 
 
-	public AbstractSsiAttributeBean(final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,?> fbSsiCore,
+	public AbstractSsiAttributeBean(final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,?> fbSsiCore,
 									final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsiData,
 									final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,ENTITY,?,?,?,?,?,?> fbRevision)
 	{

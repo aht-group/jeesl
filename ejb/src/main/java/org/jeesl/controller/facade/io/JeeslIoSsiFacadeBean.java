@@ -19,6 +19,7 @@ import javax.persistence.criteria.Root;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.json.system.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
@@ -59,14 +60,39 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoSsiFacadeBean.class);
-		
+
+	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsiCore;
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi;
 	
 	public JeeslIoSsiFacadeBean(EntityManager em,
+								IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsiCore,
 								IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi)
 	{
 		super(em);
+		this.fbSsiCore = fbSsiCore;
 		this.fbSsi = fbSsi;
+	}
+	
+	@Override
+	public <E extends Enum<E>> CRED fSsiCredential(SYSTEM system, E code) throws JeeslNotFoundException
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<CRED> cQ = cB.createQuery(fbSsiCore.getClassCredential());
+		Root<CRED> data = cQ.from(fbSsiCore.getClassCredential());
+		
+		Path<SYSTEM> pSystem = data.get(JeeslIoSsiCredential.Attributes.system.toString());
+		Path<String> eCode = data.get(JeeslIoSsiCredential.Attributes.code.toString());
+		predicates.add(cB.equal(pSystem,system));
+		predicates.add(cB.equal(eCode,code.toString()));
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(data);
+
+		TypedQuery<CRED> tQ = em.createQuery(cQ);
+		try	{return tQ.getSingleResult();}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbSsiCore.getClassCredential().getSimpleName()+" found for system"+system.toString()+" and code="+code);}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" not unique for system"+system.toString()+" and code="+code);}
 	}
 	
 	@Override
@@ -132,7 +158,6 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.select(data);
 
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
-		
 		try	{return tQ.getSingleResult();}
 		catch (NoResultException ex){throw new JeeslNotFoundException("Nothing found "+fbSsi.getClassData().getSimpleName()+" for "+mapping.toString()+" for code="+code);}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" and code="+code+" not unique");}
@@ -381,5 +406,4 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		tQ.setMaxResults(maxResult);
 		return tQ.getResultList();
 	}
-
 }

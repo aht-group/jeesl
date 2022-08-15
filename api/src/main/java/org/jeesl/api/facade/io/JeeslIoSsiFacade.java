@@ -35,6 +35,7 @@ public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescriptio
 									>
 			extends JeeslFacade
 {	
+	<E extends Enum<E>> CRED fSsiCredential(SYSTEM system, E code) throws JeeslNotFoundException;
 	MAPPING fMapping(Class<?> json, Class<?> ejb) throws JeeslNotFoundException;
 	DATA fIoSsiData(MAPPING mapping, String code) throws JeeslNotFoundException;
 	<A extends EjbWithId> DATA fIoSsiData(MAPPING mapping, String code, A a) throws JeeslNotFoundException;

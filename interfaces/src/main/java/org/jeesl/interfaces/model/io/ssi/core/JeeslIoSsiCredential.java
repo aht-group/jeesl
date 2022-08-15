@@ -6,7 +6,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisibleMigration;
-import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
+import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
@@ -16,10 +16,10 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslIoSsiCredential <SYSTEM extends JeeslIoSsiSystem<?,?>>
 								extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
-										EjbWithCode,EjbWithPosition,EjbWithParentAttributeResolver,
+										EjbWithNonUniqueCode,EjbWithPosition,EjbWithParentAttributeResolver,
 										EjbWithVisibleMigration
 {	
-	public enum Attributes {system}
+	public enum Attributes {system,code}
 	
 	public SYSTEM getSystem();
 	public void setSystem(SYSTEM system);

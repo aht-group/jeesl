@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-public interface JeeslMarkup <T extends JeeslIoCmsMarkupType<?,?,T,?>> 
-		extends Serializable,EjbSaveable 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
+public interface JeeslMarkup <T extends JeeslIoCmsMarkupType<?,?,T,?>>  extends Serializable,EjbSaveable 
 {	
 	T getType();
 	void setType(T type);
