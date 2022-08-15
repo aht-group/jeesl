@@ -5,13 +5,13 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbCalCalendarFactory<CAL extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarTimeZone<?,?>,
-									CT extends JeeslCalendarType<?,?,CT,?>>
+									CT extends JeeslCalendarScope<?,?,CT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbCalCalendarFactory.class);
 	

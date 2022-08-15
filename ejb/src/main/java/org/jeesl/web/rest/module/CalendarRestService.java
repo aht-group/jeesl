@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -21,7 +21,7 @@ import net.sf.ahtutils.xml.sync.DataUpdate;
 public class CalendarRestService <L extends JeeslLang, D extends JeeslDescription,
 								CALENDAR extends JeeslCalendar<ZONE,CT>,
 								ZONE extends JeeslCalendarTimeZone<L,D>,
-								CT extends JeeslCalendarType<L,D,CT,?>,
+								CT extends JeeslCalendarScope<L,D,CT,?>,
 								ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
 								IT extends JeeslCalendarItemType<L,D,?,IT,?>
 								>
@@ -47,7 +47,7 @@ public class CalendarRestService <L extends JeeslLang, D extends JeeslDescriptio
 	public static <L extends JeeslLang, D extends JeeslDescription,
 					CALENDAR extends JeeslCalendar<ZONE,CT>,
 					ZONE extends JeeslCalendarTimeZone<L,D>,
-					CT extends JeeslCalendarType<L,D,CT,?>,
+					CT extends JeeslCalendarScope<L,D,CT,?>,
 					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
 					IT extends JeeslCalendarItemType<L,D,?,IT,?>>
 			CalendarRestService<L,D,CALENDAR,ZONE,CT,ITEM,IT>

@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
-public interface JeeslCalendarType <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslCalendarScope <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<L,D,?,?,?>>
 		extends Serializable,EjbPersistable,EjbWithCode,EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>

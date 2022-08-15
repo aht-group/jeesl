@@ -15,7 +15,11 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionTypeVis
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslSecurityCategory<L extends JeeslLang, D extends JeeslDescription>
 			extends Serializable,EjbWithCode,EjbRemoveable,EjbPersistable,
 				EjbWithId,EjbWithTypeCode,

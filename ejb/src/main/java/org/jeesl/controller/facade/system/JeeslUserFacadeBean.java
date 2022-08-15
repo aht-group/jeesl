@@ -35,7 +35,7 @@ public class JeeslUserFacadeBean<USER extends JeeslUser<?>>
 		return user;
 	}
 
-	@Override public  List<USER> likeNameFirstLast(String query)
+	@Override public List<USER> likeNameFirstLast(String query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 	    CriteriaQuery<USER> criteriaQuery = cB.createQuery(fbSecurity.getClassUser());
@@ -43,8 +43,8 @@ public class JeeslUserFacadeBean<USER extends JeeslUser<?>>
 	    Root<USER> fromType = criteriaQuery.from(fbSecurity.getClassUser());
 	    
 	    Expression<String> literal = cB.upper(cB.literal("%"+query+"%"));
-	    Expression<String> eFirst = fromType.get("firstName");
-	    Expression<String> eLast = fromType.get("lastName");
+	    Expression<String> eFirst = fromType.get(JeeslUser.Attributes.firstName.toString());
+	    Expression<String> eLast = fromType.get(JeeslUser.Attributes.lastName.toString());
 	    
 	    CriteriaQuery<USER> select = criteriaQuery.select(fromType);
 	    select.where(cB.or(cB.like(cB.upper(eFirst),literal),cB.like(cB.upper(eLast),literal)));

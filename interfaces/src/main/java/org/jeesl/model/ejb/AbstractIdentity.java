@@ -129,12 +129,15 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 		return sb.toString();
 	}
 	
-	public void debug()
+	public void debug(boolean debug)
 	{
-		logger.info("Actions:");
-		for(String s : mapActions.keySet())
+		if(debug)
 		{
-			logger.info("\t"+s+": "+mapActions.get(s));
+			logger.info("Actions:");
+			for(String s : mapActions.keySet())
+			{
+				logger.info("\t"+s+": "+mapActions.get(s));
+			}
 		}
 	}
 }

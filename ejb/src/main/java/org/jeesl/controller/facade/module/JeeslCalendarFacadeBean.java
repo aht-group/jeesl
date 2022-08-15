@@ -5,8 +5,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -23,11 +24,12 @@ import org.jeesl.api.facade.module.JeeslCalendarFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.CalendarFactoryBuilder;
+import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
 import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -37,7 +39,7 @@ import org.slf4j.LoggerFactory;
 public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									CALENDAR extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarTimeZone<L,D>,
-									CT extends JeeslCalendarType<L,D,CT,?>,
+									CT extends JeeslCalendarScope<L,D,CT,?>,
 									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
 									IT extends JeeslCalendarItemType<L,D,?,IT,?>
 									>
@@ -88,6 +90,50 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		try	{return em.createQuery(cQ).getSingleResult();}
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+cOwner.getSimpleName()+" found for calendar="+calendar);}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple Results for status.id"+calendar);}
+	}
+	
+	@Override public <OWNER extends JeeslWithCalendar<CALENDAR>> Map<OWNER,CALENDAR> fCalendarOwners(Class<OWNER> cOwner, List<OWNER> owners)
+	{
+		Map<OWNER,CALENDAR> map = new HashMap<>();
+		if(owners==null || owners.isEmpty()) {return map;}
+		
+		List<OWNER> list = this.find(cOwner,EjbIdFactory.toIds(owners));
+		for(OWNER o : list)
+		{
+			if(o.getCalendar()!=null)
+			{
+				CALENDAR calendar = o.getCalendar();
+				calendar.getId();
+				map.put(o,calendar);
+			}
+		}
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+//		 
+//		Root<AhtUser> user = cQ.from(AhtUser.class);
+//		predicates.add(user.in(users));
+//		
+//		Join<AhtUser,ErpUserBox> jBox = user.join(AhtUser.Attributes.box.toString());
+//		Join<ErpUserBox,CalCalendar> jCalendar = jBox.join(ErpUserBox.Attributes.calendar.toString());
+//
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.multiselect(user.get("id"),jCalendar.get("id"));
+//		
+//		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+//        List<Tuple> tuples = tQ.getResultList();
+//        
+//        for(Tuple t : tuples)
+//        {
+//        	long userId = (Long)t.get(0);
+//        	long calendarId = (Long)t.get(1);
+//        	try
+//        	{
+//				map.put(this.find(AhtUser.class,userId),this.find(CalCalendar.class, calendarId));
+//			}
+//        	catch (JeeslNotFoundException e) {e.printStackTrace();}
+//        }
+		
+		return map;
 	}
 
 	@Override public List<ITEM> fCalendarItems(ZONE zone, CALENDAR calendar, LocalDate from, LocalDate to)

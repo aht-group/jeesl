@@ -3,16 +3,12 @@ package org.jeesl.web.mbean.prototype.user;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.JeeslMenuBean;
 import org.jeesl.api.bean.JeeslSecurityBean;
-import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
-import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
@@ -48,17 +44,11 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private static final long serialVersionUID = 1L;
 
 	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
-
-//	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
-
-//	private final Map<String,M> mapRoot; public Map<String,M> getMapRoot() {return mapRoot;}
 	
 	private final LoadingCache<String,List<M>> cacheSub;
 	private final LoadingCache<String,List<M>> cacheBreadcrumb;
 	
-	private final List<M> mainMenu; public List<M> getMainMenu() {
-//	if(setupRequired) {this.setup();}
-	return mainMenu;}
+	private final List<M> mainMenu; public List<M> getMainMenu() {return mainMenu;}
 
 	private I identity;
 	private CTX context;
@@ -67,9 +57,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 
 	public PrototypeDb3MenuBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity)
-	{		
-//		efMenu = fbSecurity.ejbMenu();
-		
+	{				
 		cacheSub = Caffeine.newBuilder()
 			       .maximumSize(100)
 			       .expireAfterWrite(Duration.ofMinutes(15))
@@ -81,11 +69,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			       .expireAfterWrite(Duration.ofMinutes(15))
 //			       .removalListener((String key, String graph, RemovalCause cause) -> System.out.printf("Key %s was removed (%s)%n", key, cause))
 			       .build(key -> buildBreadcrumb(key));
-	
-		
-//		mapRoot = new HashMap<>();
-//		setAllowed = new HashSet<>();
-		
+
 		mainMenu = new ArrayList<>();
 
 		debugOnInfo = false;
@@ -109,7 +93,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private List<M> buildSub(String viewCode)
 	{
 		if(debugOnInfo) {logger.info("Generating buildSub for ("+viewCode+") withContext:"+context+" setup:"+setupRequired);}
-//		if(setupRequired) {this.setup();}
 		List<M> tmp = new ArrayList<>();
 		tmp.addAll(bSecurity.getAllMenus(context)
 				.stream()
@@ -124,8 +107,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 				list.add(m);
 			}
 		}
-		
-		logger.info("Key: "+viewCode+" list "+list.size());
 		return list;
 	}
 	
@@ -133,7 +114,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private List<M> buildBreadcrumb(String key)
 	{
 		if(debugOnInfo) {logger.info("Generating buildBreadcrumb for ("+key+") setup:"+setupRequired);}
-//		if(setupRequired) {this.setup();}
 		List<M> list = new ArrayList<>();
 		if(bSecurity==null) {logger.error("Implementation for a empty bSecurity is not forseen"); return list;}
 		
@@ -157,13 +137,18 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	public void updateLocale(String localeCode) {}
 
+	public void prepare(I identity)
+	{
+		this.identity=identity;
+		reset();
+	}
+
 	public void reset()
 	{
 		if(debugOnInfo) {logger.info("Resettings Menu");}
-//		mapRoot.clear();
 
 		mainMenu.clear();
-		for(M m : bSecurity.getRootMenus(context)) {if(userHasAccessTo(m)) {mainMenu.add(m);}}
+		for(M m : bSecurity.getRootMenus(context)) {if(this.userHasAccessTo(m)) {mainMenu.add(m);}}
 		
 		cacheSub.invalidateAll();
 		cacheSub.cleanUp();
@@ -173,33 +158,11 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		
 		setupRequired = true;
 	}
-	
-	public void prepare(I identity)
-	{
-		this.identity=identity;
-		reset();
-	}
-	
+
 	private boolean userHasAccessTo(M m)
 	{
 		boolean visible = m.getView().isVisible() && (m.getView().getAccessPublic() || (identity.isLoggedIn() && (m.getView().getAccessLogin() || identity.hasView(m.getView()))));
 		boolean developer = identity.getRoleCodeWithAccessToAllPages()!=null && identity.hasRole(identity.getRoleCodeWithAccessToAllPages());
 		return (visible || developer);
 	}
-
-//	private synchronized void setup()
-//	{
-//		if(setupRequired)
-//		{
-//			ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
-//			
-//			List<M> list = bSecurity.getAllMenus(context);
-//			for(M m : list)
-//			{
-//				mapRoot.put(m.getView().getCode(),efMenu.toRoot(m));
-//			}
-//			logger.info("Setup completed in "+ptt.toTotalPeriod());
-//			setupRequired = false;
-//		}
-//	}
 }

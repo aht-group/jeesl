@@ -101,7 +101,9 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 	
 	private void processViews(JeeslSecurityFacade<?,?,?,R,V,U,A,?,?,?,USER> fSecurity, USER user, I identity)
 	{
-		for(V v : fSecurity.allViewsForUser(user)){identity.allowView(v);}
+		List<V> views = fSecurity.allViewsForUser(user);
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),JeeslSecurityFacade.class.getSimpleName(),views.size());}
+		for(V v : views){identity.allowView(v);}
 	}
 	private void processViews(JeeslSecurityBean<?,?,?,R,V,U,A,?,?,?,?,USER> bSecurity, List<R> roles, I identity)
 	{	
@@ -121,6 +123,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 			}
 		}
 		List<V> views = new ArrayList<V>(map.values());
+		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),JeeslSecurityBean.class.getSimpleName(),views.size());}
 		
 		for(V v : views){identity.allowView(v);}
 	}

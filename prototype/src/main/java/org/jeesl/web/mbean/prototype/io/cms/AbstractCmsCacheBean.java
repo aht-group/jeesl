@@ -117,9 +117,6 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 			if(debugOnInfo) {logger.info("Requesting "+localeCode+" "+section.toString());}
 			if(!mapSection.containsKey(section)) {mapSection.put(section, new HashMap<String,Section>());}
 			
-//			logger.info("Cached section:"+mapSection.containsKey(section));
-//			logger.info("Cached locale:"+mapSection.get(section).containsKey(localeCode));
-			
 			if(mapSection.get(section).containsKey(localeCode)) {return mapSection.get(section).get(localeCode);}
 			else
 			{
@@ -161,7 +158,7 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 				GenericLocaleProvider<L,D,LOC> lp = new GenericLocaleProvider<L,D,LOC>();
 				lp.setLocales(Arrays.asList(locale));
 
-				return ofx.build(lp, localeCode, element);
+				return ofx.build(lp,localeCode,element);
 			}
 			catch (JeeslNotFoundException | OfxAuthoringException e) {e.printStackTrace();}
 			

@@ -318,7 +318,6 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	
 	@Override public V findViewByHttpPattern(String pattern)
 	{
-//		logger.info("findViewByHttpPattern: "+pattern);
 		if(mapUrlPattern.containsKey(pattern)) {return mapUrlPattern.get(pattern);}
 		else if(pattern.endsWith(".jsf"))
 		{

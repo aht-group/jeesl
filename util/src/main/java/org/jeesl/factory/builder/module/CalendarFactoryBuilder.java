@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarType;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 public class CalendarFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 									CAL extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarTimeZone<L,D>,
-									CT extends JeeslCalendarType<L,D,CT,?>,
+									CT extends JeeslCalendarScope<L,D,CT,?>,
 									ITEM extends JeeslCalendarItem<CAL,ZONE,IT>,
 									IT extends JeeslCalendarItemType<L,D,?,IT,?>>
 	extends AbstractFactoryBuilder<L,D>

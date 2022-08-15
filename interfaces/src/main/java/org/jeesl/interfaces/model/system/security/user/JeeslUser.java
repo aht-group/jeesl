@@ -14,7 +14,9 @@ public interface JeeslUser <R extends JeeslSecurityRole<?,?,?,?,?,?,?>
 //							REGISTRATION extends JeeslRegistrationStatus<L,D,USER,?>
 >
 		extends Serializable,EjbWithId,EjbPersistable,EjbSaveable,EjbRemoveable
-{	
+{
+	public enum Attributes{firstName,lastName}
+	
 	String getFirstName();
 	void setFirstName(String firstName);
 	

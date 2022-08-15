@@ -20,19 +20,22 @@
 								selection="#{cc.attrs.bean.ticket}" selectionMode="single" rowKey="#{t.id}"
 								rows="20" paginator="true" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslHdTickets}">
+						<j:dtHeader entity="HdTicket" code="listOf">
 							<j:svg rendered="false" type="jeeslAdd" listener="#{cc.attrs.bean.addTicket()}" update=":#{cc.id}:sTicket :#{cc.id}:sMessage" library="jeeslGfx"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTicket()}" update=":#{cc.id}:sTicket :#{cc.id}:sMessage"/>
-					<p:column headerText="#{msg.jeeslHdRecord}">
+					<p:column>
+						<jtp:label entity="HdTicket" code="createdAt"/>
 						<jtp:symbolizer value="#{t.lastEvent.status}" marginRight="5"/>
 						<jp:outputDate type="both" value="#{t.firstEvent.record}"/>
 					</p:column>
-					<p:column headerText="#{msg.jeeslHdStatus}" styleClass="jeeslCenter" rendered="false">  
+					<p:column styleClass="jeeslCenter" rendered="false">
+						<jtp:label entity="HdEvent" code="status"/>
 						<jtp:symbolizer value="#{t.lastEvent.status}"/>
 					</p:column>
-					<p:column headerText="#{msg.jeeslHdReporter}">
+					<p:column>
+						<jtp:label entity="HdEvent" code="reporter"/>
 						<jtp:symbolizer value="#{t.firstEvent.reporterPriority}" marginRight="5"/>
 						<h:outputText value="#{t.firstEvent.reporter.firstName}"/>
 					</p:column>
@@ -63,13 +66,13 @@
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 					
-						<p:outputLabel value="#{msg.jeeslHdRecord}"/>
+						<jtp:label entity="HdTicket" code="createdAt"/>
 						<h:outputText value="#{cc.attrs.bean.firstEvent.record}"/>
 						
-						<p:outputLabel value="#{msg.jeeslHdReporter}"/>
+						<jtp:label entity="HdEvent" code="reporter"/>
 						<h:outputText value="#{cc.attrs.bean.lastEvent.reporter.firstName} #{cc.attrs.bean.lastEvent.reporter.lastName}"/>
 						
-						<p:outputLabel value="#{msg.jeeslHdStatus}"/>
+						<jtp:label entity="HdEvent" code="status"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.lastEvent.status}" effect="fade" autoWidth="false">
                         	<f:selectItems value="#{cc.attrs.bean.sbhStatus.list}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
                         </p:selectOneMenu>
