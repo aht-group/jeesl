@@ -53,7 +53,7 @@ function setTreeHeight(node) {
 function toggleMenu() {
 	$('.jeesl-menu-bar-dropdown').filter((index, button) => button !== this).removeClass('jeesl-active').siblings('.jeesl-dropdown-list').removeClass('jeesl-active');
 	
-	$(this).filter(current => $(current).find('.jeesl-greyscale')).toggleClass('jeesl-active').siblings('.jeesl-dropdown-list').toggleClass('jeesl-active');
+	$(this).filter(current => $(current).find('.jeesl-greyscale')).toggleClass('jeesl-active').siblings('.jeesl-dropdown-list').removeAttr('style').toggleClass('jeesl-active');
 }
 
 function reloadStatusBar() {
