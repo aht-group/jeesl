@@ -47,6 +47,13 @@ public class SbDateHandler implements SbDateSelection
 		return this;
 	}
 	
+	public SbDateHandler initWeeks(int before, int after)
+	{
+		dateFrom = LocalDate.now().minusWeeks(before);
+		dateTo = LocalDate.now().plusWeeks(after);
+		return this;
+	}
+	
 	public void shiftToFirstLastDayofMonth()
 	{
 		dateFrom = dateFrom.withDayOfMonth(1);

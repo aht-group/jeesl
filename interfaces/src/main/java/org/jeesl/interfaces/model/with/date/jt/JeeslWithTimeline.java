@@ -9,4 +9,6 @@ public interface JeeslWithTimeline extends EjbWithId
 {	
 	public boolean isAllDay();
 	public void setAllDay(boolean allDay);
+	
+	void x();
 }

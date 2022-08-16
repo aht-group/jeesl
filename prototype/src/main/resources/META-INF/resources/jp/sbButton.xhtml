@@ -16,6 +16,8 @@
 		<composite:attribute name="icon" required="false"/>
 		<composite:attribute name="label" required="false"/>
 		<composite:attribute name="onclick" required="false"/>
+		<composite:attribute name="oncomplete" required="false"/>
+		
 		<composite:attribute name="orientation" required="false" default="left"/>
 		<composite:attribute name="styleClass" required="false"/>
 		<composite:attribute name="toggled" required="false"/>
@@ -31,6 +33,7 @@
 					<c:if test="#{not empty cc.attrs.listener}"><f:attribute name="listener" value="#{cc.attrs.listener}"/></c:if>
 					<c:if test="#{not empty cc.attrs.update}"><f:attribute name="update" value="#{cc.attrs.update}"/></c:if>
 					<c:if test="#{not empty cc.attrs.onclick}"><f:attribute name="onclick" value="#{cc.attrs.onclick}"/></c:if>
+					<c:if test="#{not empty cc.attrs.oncomplete}"><f:attribute name="oncomplete" value="#{cc.attrs.oncomplete}"/></c:if>
 					
 					<h:graphicImage name="#{appIconBean.svg[cc.attrs.icon]}"
 									library="#{empty appIconBean.library[cc.attrs.icon] ? cc.attrs.library : appIconBean.library[cc.attrs.icon] }"

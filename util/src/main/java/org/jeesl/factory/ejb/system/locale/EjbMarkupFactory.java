@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.locale;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class EjbMarkupFactory<LOC extends JeeslLocale<?,?,LOC,?>,
         this.cM = cM;
     }
 
+    public Map<String,M> build(LOC locale, MT type){return this.build(Arrays.asList(locale), type);}
 	public Map<String,M> build(List<LOC> locales, MT type)
 	{
 		Map<String,M> map = new HashMap<>();

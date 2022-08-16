@@ -41,12 +41,17 @@ public abstract class AbstractAppCalendarBean <L extends JeeslLang, D extends Je
 	private final List<ZONE> zones; @Override public List<ZONE> getZones() {return zones;}
 	
 	private ZONE zoneDefault; @Override public ZONE getZoneDefault() {return zoneDefault;}
+	private long timeLineWeekday; public long getTimeLineWeekday() {return timeLineWeekday;} 
+	private long timeLineDecade; public long getTimeLineDecade() {return timeLineDecade;}
 	
 	public AbstractAppCalendarBean(final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar)
 	{
 		this.fbCalendar=fbCalendar;
 		cpZone = (new TimeZoneComparator<L,D,CALENDAR,ZONE,CT,ITEM,IT>()).factory(TimeZoneComparator.Type.offset);
 		zones = new ArrayList<>();
+		
+		timeLineWeekday =   1000000000l;
+		timeLineDecade  = 300000000000l;
 	}
 	
 	public void postConstructTimeZone(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar)
