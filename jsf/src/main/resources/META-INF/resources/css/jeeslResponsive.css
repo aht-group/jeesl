@@ -266,19 +266,19 @@ template {
 .jeesl-greyscale {
   filter: grayscale(1); }
 
-.ui-corner-all, .timeline-event-box.ui-state-default.ui-corner-all:before, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before {
+.ui-corner-all, .timeline-event-box.ui-state-default.ui-corner-all:before, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before, .fc .fc-button.ui-corner-all:before {
   border-radius: 3px; }
 
-.ui-corner-top, .timeline-event-box.ui-state-default.ui-corner-top:before, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before {
+.ui-corner-top, .timeline-event-box.ui-state-default.ui-corner-top:before, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before, .fc .fc-button.ui-corner-top:before {
   border-radius: 3px 3px 0 0; }
 
-.ui-corner-bottom, .timeline-event-box.ui-state-default.ui-corner-bottom:before, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before {
+.ui-corner-bottom, .timeline-event-box.ui-state-default.ui-corner-bottom:before, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before, .fc .fc-button.ui-corner-bottom:before {
   border-radius: 0 0 3px 3px; }
 
-.ui-corner-left, .timeline-event-box.ui-state-default.ui-corner-left:before, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before {
+.ui-corner-left, .timeline-event-box.ui-state-default.ui-corner-left:before, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before, .fc .fc-button.ui-corner-left:before {
   border-radius: 3px 0 0 3px; }
 
-.ui-corner-right, .timeline-event-box.ui-state-default.ui-corner-right:before, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before {
+.ui-corner-right, .timeline-event-box.ui-state-default.ui-corner-right:before, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before, .fc .fc-button.ui-corner-right:before {
   border-radius: 0 3px 3px 0; }
 
 .ui-input-overlay {
@@ -342,18 +342,24 @@ template {
     z-index: -1; }
   .timeline-event-box.ui-state-default.ui-button-icon-only .ui-button-text {
     display: none; }
-  .timeline-event-box.ui-state-default.ui-state-active, .timeline-event-box.ui-state-default.ui-state-hover {
+  .timeline-event-box.ui-state-default.ui-state-active:before, .timeline-event-box.ui-state-default.ui-state-hover:before, .timeline-event-box.ui-state-default:hover:before {
+    opacity: 1;
+    transition: background 0.2s linear, opacity 0.2s linear; }
+  .timeline-event-box.ui-state-default.ui-state-hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .timeline-event-box.ui-state-default:hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled) {
     background: linear-gradient(to bottom, #ededed, #c4c4c4);
     border-color: #ababab;
     box-shadow: none;
     color: #333333; }
-    .timeline-event-box.ui-state-default.ui-state-active:before, .timeline-event-box.ui-state-default.ui-state-hover:before {
-      opacity: 1;
-      transition: background 0.2s linear, opacity 0.2s linear; }
+  .timeline-event-box.ui-state-default.ui-state-disabled, .timeline-event-box.ui-state-default:disabled {
+    background: linear-gradient(to bottom, #ededed, #dedede);
+    color: #c4c4c4;
+    opacity: 1; }
   .timeline-event-box.ui-state-default.ui-state-active {
     border-color: #00663a;
     color: white;
     text-shadow: none; }
+    .timeline-event-box.ui-state-default.ui-state-active:focus {
+      box-shadow: none; }
     .timeline-event-box.ui-state-default.ui-state-active:before {
       background: #008a4e; }
   .timeline-event-box.ui-state-default .ui-button-text {
@@ -400,26 +406,28 @@ template {
     z-index: -1; }
   .ui-button.ui-state-default.ui-button-icon-only .ui-button-text {
     display: none; }
-  .ui-button.ui-state-default.ui-state-active, .ui-button.ui-state-default.ui-state-hover {
+  .ui-button.ui-state-default.ui-state-active:before, .ui-button.ui-state-default.ui-state-hover:before, .ui-button.ui-state-default:hover:before {
+    opacity: 1;
+    transition: background 0.2s linear, opacity 0.2s linear; }
+  .ui-button.ui-state-default.ui-state-hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .ui-button.ui-state-default:hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled) {
     background: linear-gradient(to bottom, #ededed, #c4c4c4);
     border-color: #ababab;
     box-shadow: none;
     color: #333333; }
-    .ui-button.ui-state-default.ui-state-active:before, .ui-button.ui-state-default.ui-state-hover:before {
-      opacity: 1;
-      transition: background 0.2s linear, opacity 0.2s linear; }
+  .ui-button.ui-state-default.ui-state-disabled, .ui-button.ui-state-default:disabled {
+    background: linear-gradient(to bottom, #ededed, #dedede);
+    color: #c4c4c4;
+    opacity: 1; }
   .ui-button.ui-state-default.ui-state-active {
     border-color: #00663a;
     color: white;
     text-shadow: none; }
+    .ui-button.ui-state-default.ui-state-active:focus {
+      box-shadow: none; }
     .ui-button.ui-state-default.ui-state-active:before {
       background: #008a4e; }
   .ui-button.ui-state-default .ui-button-text {
     line-height: normal; }
-  .ui-button.ui-state-default.ui-state-disabled {
-    background: linear-gradient(to bottom, #ededed, #dedede);
-    color: #c4c4c4;
-    opacity: 1; }
   .ui-button.ui-state-default .ui-icon {
     background: none;
     display: inline-block;
@@ -488,18 +496,24 @@ template {
     z-index: -1; }
   .ui-chkbox .ui-chkbox-box.ui-state-default.ui-button-icon-only .ui-button-text {
     display: none; }
-  .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-active, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-hover {
+  .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-active:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-hover:before, .ui-chkbox .ui-chkbox-box.ui-state-default:hover:before {
+    opacity: 1;
+    transition: background 0.2s linear, opacity 0.2s linear; }
+  .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .ui-chkbox .ui-chkbox-box.ui-state-default:hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled) {
     background: linear-gradient(to bottom, #ededed, #c4c4c4);
     border-color: #ababab;
     box-shadow: none;
     color: #333333; }
-    .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-active:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-hover:before {
-      opacity: 1;
-      transition: background 0.2s linear, opacity 0.2s linear; }
+  .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-disabled, .ui-chkbox .ui-chkbox-box.ui-state-default:disabled {
+    background: linear-gradient(to bottom, #ededed, #dedede);
+    color: #c4c4c4;
+    opacity: 1; }
   .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-active {
     border-color: #00663a;
     color: white;
     text-shadow: none; }
+    .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-active:focus {
+      box-shadow: none; }
     .ui-chkbox .ui-chkbox-box.ui-state-default.ui-state-active:before {
       background: #008a4e; }
   .ui-chkbox .ui-chkbox-box.ui-state-default .ui-button-text {
@@ -633,18 +647,24 @@ template {
       z-index: -1; }
     .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-button-icon-only .ui-button-text {
       display: none; }
-    .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-active, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-hover {
+    .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-active:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-hover:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger:hover:before {
+      opacity: 1;
+      transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger:hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled) {
       background: linear-gradient(to bottom, #ededed, #c4c4c4);
       border-color: #ababab;
       box-shadow: none;
       color: #333333; }
-      .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-active:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-hover:before {
-        opacity: 1;
-        transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-disabled, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger:disabled {
+      background: linear-gradient(to bottom, #ededed, #dedede);
+      color: #c4c4c4;
+      opacity: 1; }
     .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-active {
       border-color: #00663a;
       color: white;
       text-shadow: none; }
+      .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-active:focus {
+        box-shadow: none; }
       .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-state-active:before {
         background: #008a4e; }
     .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger .ui-button-text {
@@ -826,18 +846,24 @@ template {
       z-index: -1; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-button-icon-only .ui-button-text {
       display: none; }
-    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-hover {
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-hover:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger:hover:before {
+      opacity: 1;
+      transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger:hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled) {
       background: linear-gradient(to bottom, #ededed, #c4c4c4);
       border-color: #ababab;
       box-shadow: none;
       color: #333333; }
-      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-hover:before {
-        opacity: 1;
-        transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-disabled, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger:disabled {
+      background: linear-gradient(to bottom, #ededed, #dedede);
+      color: #c4c4c4;
+      opacity: 1; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active {
       border-color: #00663a;
       color: white;
       text-shadow: none; }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active:focus {
+        box-shadow: none; }
       .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-state-active:before {
         background: #008a4e; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger .ui-button-text {
@@ -996,18 +1022,24 @@ template {
       z-index: -1; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-button-icon-only .ui-button-text {
       display: none; }
-    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-hover {
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-hover:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token:hover:before {
+      opacity: 1;
+      transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token:hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled) {
       background: linear-gradient(to bottom, #ededed, #c4c4c4);
       border-color: #ababab;
       box-shadow: none;
       color: #333333; }
-      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-hover:before {
-        opacity: 1;
-        transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-disabled, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token:disabled {
+      background: linear-gradient(to bottom, #ededed, #dedede);
+      color: #c4c4c4;
+      opacity: 1; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active {
       border-color: #00663a;
       color: white;
       text-shadow: none; }
+      .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active:focus {
+        box-shadow: none; }
       .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-state-active:before {
         background: #008a4e; }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token .ui-button-text {
@@ -1454,18 +1486,24 @@ template {
       z-index: -1; }
     .ui-slider .ui-slider-handle.ui-state-default.ui-button-icon-only .ui-button-text {
       display: none; }
-    .ui-slider .ui-slider-handle.ui-state-default.ui-state-active, .ui-slider .ui-slider-handle.ui-state-default.ui-state-hover {
+    .ui-slider .ui-slider-handle.ui-state-default.ui-state-active:before, .ui-slider .ui-slider-handle.ui-state-default.ui-state-hover:before, .ui-slider .ui-slider-handle.ui-state-default:hover:before {
+      opacity: 1;
+      transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-slider .ui-slider-handle.ui-state-default.ui-state-hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .ui-slider .ui-slider-handle.ui-state-default:hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled) {
       background: linear-gradient(to bottom, #ededed, #c4c4c4);
       border-color: #ababab;
       box-shadow: none;
       color: #333333; }
-      .ui-slider .ui-slider-handle.ui-state-default.ui-state-active:before, .ui-slider .ui-slider-handle.ui-state-default.ui-state-hover:before {
-        opacity: 1;
-        transition: background 0.2s linear, opacity 0.2s linear; }
+    .ui-slider .ui-slider-handle.ui-state-default.ui-state-disabled, .ui-slider .ui-slider-handle.ui-state-default:disabled {
+      background: linear-gradient(to bottom, #ededed, #dedede);
+      color: #c4c4c4;
+      opacity: 1; }
     .ui-slider .ui-slider-handle.ui-state-default.ui-state-active {
       border-color: #00663a;
       color: white;
       text-shadow: none; }
+      .ui-slider .ui-slider-handle.ui-state-default.ui-state-active:focus {
+        box-shadow: none; }
       .ui-slider .ui-slider-handle.ui-state-default.ui-state-active:before {
         background: #008a4e; }
     .ui-slider .ui-slider-handle.ui-state-default .ui-button-text {
@@ -1494,6 +1532,72 @@ template {
       @media (max-width: 768px) {
         .ui-texteditor .ql-container .ql-editor {
           min-height: 42px; } }
+
+.fc .fc-button {
+  height: 22px;
+  min-width: 15px;
+  background: linear-gradient(to bottom, #ededed, #c4c4c4);
+  border: 1px solid #ababab;
+  box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
+  color: #333333;
+  line-height: normal;
+  padding: 0 5px;
+  transition: border-color 0.2s linear, color 0.2s linear, text-shadow 0.2s linear;
+  z-index: 0; }
+  @media (max-width: 768px) {
+    .fc .fc-button {
+      height: 42px; } }
+  @media (max-width: 768px) {
+    .fc .fc-button {
+      min-width: 30px; } }
+  .fc .fc-button:after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle; }
+  .fc .fc-button > * {
+    display: inline-block;
+    vertical-align: middle; }
+  @media (max-width: 768px) {
+    .fc .fc-button {
+      padding: 0 10px; } }
+  .fc .fc-button:before {
+    background: #c4c4c4;
+    content: '';
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: background 0.2s linear, opacity 0.2s linear;
+    width: 100%;
+    z-index: -1; }
+  .fc .fc-button.ui-button-icon-only .ui-button-text {
+    display: none; }
+  .fc .fc-button.fc-button-active:before, .fc .fc-button.ui-state-hover:before, .fc .fc-button:hover:before {
+    opacity: 1;
+    transition: background 0.2s linear, opacity 0.2s linear; }
+  .fc .fc-button.ui-state-hover:not(.fc-button-active):not(.ui-state-disabled):not(:disabled), .fc .fc-button:hover:not(.fc-button-active):not(.ui-state-disabled):not(:disabled) {
+    background: linear-gradient(to bottom, #ededed, #c4c4c4);
+    border-color: #ababab;
+    box-shadow: none;
+    color: #333333; }
+  .fc .fc-button.ui-state-disabled, .fc .fc-button:disabled {
+    background: linear-gradient(to bottom, #ededed, #dedede);
+    color: #c4c4c4;
+    opacity: 1; }
+  .fc .fc-button.fc-button-active {
+    border-color: #00663a;
+    color: white;
+    text-shadow: none; }
+    .fc .fc-button.fc-button-active:focus {
+      box-shadow: none; }
+    .fc .fc-button.fc-button-active:before {
+      background: #008a4e; }
+  .fc .fc-button .ui-button-text {
+    line-height: normal; }
+.fc .fc-center {
+  margin: 0 10px; }
 
 .p-md-1 {
   flex: 0 0 auto;

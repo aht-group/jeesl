@@ -163,7 +163,7 @@ $border: $border-width solid $border-colour;
 	@include overlay;
 }
 
-@mixin button {
+@mixin button($active-class: ui-state-active) {
 	@include element-height;
 	@include min-button-width;
 	@include vertical-center(after);
@@ -220,22 +220,36 @@ $border: $border-width solid $border-colour;
 		@extend .ui-corner-right;
 	}
 	
-	&.ui-state-active, &.ui-state-hover {
-		background: $panel-header-gradient;
-		border-color: $medium-grey;
-		box-shadow: none;
-		color: $anthracite;
-		
+	&.#{$active-class}, &.ui-state-hover, &:hover {
 		&:before {
 			opacity: 1;
 			transition: background $transition-duration linear, opacity $transition-duration linear;
 		}
 	}
 	
-	&.ui-state-active {
+	&.ui-state-hover, &:hover {
+		&:not(.#{$active-class}):not(.ui-state-disabled):not(:disabled) {
+			background: $panel-header-gradient;
+			border-color: $medium-grey;
+			box-shadow: none;
+			color: $anthracite;
+		}
+	}
+	
+	&.ui-state-disabled, &:disabled {
+		background: linear-gradient(to bottom, $bright-grey, $light-grey);
+		color: $soft-grey;
+		opacity: 1;
+	}
+	
+	&.#{$active-class} {
 		border-color: $dark-colour;
 		color: $white-100;
 		text-shadow: none;
+	
+		&:focus {
+			box-shadow: none;
+		}
 		
 		&:before {
 			background: $highlight-colour;
@@ -294,12 +308,6 @@ $border: $border-width solid $border-colour;
 
 .ui-button.ui-state-default {
 	@include button;
-	
-	&.ui-state-disabled {
-		background: linear-gradient(to bottom, $bright-grey, $light-grey);
-		color: $soft-grey;
-		opacity: 1;
-	}
 	
 	.ui-icon {
 		@include icon;
@@ -924,6 +932,16 @@ $border: $border-width solid $border-colour;
 				min-height: $element-height-mobile;
 			}
 		}
+	}
+}
+
+.fc {
+	.fc-button {
+		@include button(fc-button-active);
+	}
+	
+	.fc-center {
+		margin: 0 $regular-spacing;
 	}
 }
 
