@@ -19,6 +19,10 @@
     	<source>jeeslPrototype/output/markup.xhtml</source>
     </tag>
     <tag>
+    	<tag-name>image360</tag-name>
+    	<source>jeeslPrototype/output/image360.xhtml</source>
+    </tag>
+    <tag>
         <tag-name>inputRemark</tag-name>
         <source>jeeslPrototype/input/remark.xhtml</source>
     </tag>

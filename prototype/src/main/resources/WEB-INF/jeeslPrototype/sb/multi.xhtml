@@ -19,7 +19,7 @@
 		<f:facet name="label">
 			<jtp:symbolizer rendered="#{not empty icon}" value="#{icon}" styleClass="jeesl-menu-bar-button-icon" height="12"/>
 			<h:outputText value="#{label}" rendered="#{not empty label}" styleClass="jeesl-menu-bar-button-label"/>
-			<h:outputText rendered="#{counter}" value="(#{fn:length(handler.selected)}/#{fn:length(handler.list)})"/>
+			<h:outputText rendered="#{counter}" value="(#{fn:length(handler.selected)}/#{fn:length(handler.list)})" styleClass="jeesl-menu-bar-button-info"/>
 			<h:panelGroup id="summary" styleClass="jeesl-menu-bar-button-summary">(#{fn:length(handler.selected)}/#{fn:length(handler.list)})</h:panelGroup>
 			<h:panelGroup styleClass="jeesl-menu-bar-button-selected-items">
 				<ui:fragment rendered="#{headerIcons}">
