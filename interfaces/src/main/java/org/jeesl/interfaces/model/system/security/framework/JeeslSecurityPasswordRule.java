@@ -11,7 +11,6 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
-import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 

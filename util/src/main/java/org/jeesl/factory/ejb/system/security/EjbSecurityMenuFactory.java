@@ -31,30 +31,25 @@ public class EjbSecurityMenuFactory <V extends JeeslSecurityView<?,?,?,?,?,?>,
     
     public M build()
     {
-	    	M ejb = null;
+    	M ejb = null;
 	    	
-	    	try
-	    	{
+    	try
+    	{
 			ejb = cM.newInstance();
+			ejb.setVisible(true);
 		}
-	    	catch (InstantiationException e) {e.printStackTrace();}
-	    	catch (IllegalAccessException e) {e.printStackTrace();}
+    	catch (InstantiationException e) {e.printStackTrace();}
+    	catch (IllegalAccessException e) {e.printStackTrace();}
 	    	
-	    	return ejb;
+    	return ejb;
     }
     
     public M build(V view)
     {
-		M ejb = null;
-    	
-    	try
-    	{
-			ejb = cM.newInstance();
-			ejb.setView(view);
-		}
-    	catch (InstantiationException e) {e.printStackTrace();}
-    	catch (IllegalAccessException e) {e.printStackTrace();}
-    	
+		M ejb = build();
+		if(ejb==null) {return ejb;}
+		
+		ejb.setView(view);
     	return ejb;
     }
     
@@ -73,10 +68,10 @@ public class EjbSecurityMenuFactory <V extends JeeslSecurityView<?,?,?,?,?,?>,
     
     public List<M> toListRoot(List<M> list)
     {
-    		List<M> result = new ArrayList<M>();
-    		for(M m : list) {if(m.getParent()==null) {result.add(m);}}
-    		Collections.sort(result,comparator);
-    		return result;
+    	List<M> result = new ArrayList<M>();
+    	for(M m : list) {if(m.getParent()==null) {result.add(m);}}
+    	Collections.sort(result,comparator);
+    	return result;
     }
     
     public M toRoot(M menu)

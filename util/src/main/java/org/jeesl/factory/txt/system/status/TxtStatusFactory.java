@@ -52,14 +52,11 @@ public class TxtStatusFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang,
 		return ejb.getName().get(lang).getLang();
 	}
 	
-	
-	
-	public static <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
-		List<String> toCodes(Collection<S> list)
+	public static <S extends JeeslStatus<?,?,S>> List<String> toCodes(Collection<S> list)
 	{
 		List<String> result = new ArrayList<String>();
 		for(S ejb : list){result.add(ejb.getCode());}
-		return toCodes(new ArrayList<S>(list));
+		return result;
 	}
 	
 	public static <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
