@@ -122,9 +122,14 @@
         <source>jeeslPrototype/calendar/schedule.xhtml</source>
     </tag>
     
-    	<tag>
+	<tag>
         <tag-name>footerLocale</tag-name>
         <source>jeeslPrototype/footer/locale.xhtml</source>
+	</tag>
+	
+	<tag>
+        <tag-name>pFooterLast</tag-name>
+        <source>jeeslPrototype/footer/panel/last.xhtml</source>
 	</tag>
     
     <tag>
