@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.jxpath.JXPathNotFoundException;
-import org.jeesl.interfaces.controller.handler.JeeslTranslationProvider;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;

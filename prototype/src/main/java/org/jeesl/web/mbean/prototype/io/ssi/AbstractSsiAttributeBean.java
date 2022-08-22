@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
-import org.jeesl.controller.handler.sb.SbSingleHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
@@ -28,6 +27,7 @@ import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.util.comparator.ejb.io.revision.RevisionEntityComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

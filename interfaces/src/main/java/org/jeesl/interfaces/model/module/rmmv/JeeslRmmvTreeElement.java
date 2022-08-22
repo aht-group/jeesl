@@ -1,0 +1,31 @@
+package org.jeesl.interfaces.model.module.rmmv;
+
+import java.io.Serializable;
+
+import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
+import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
+import org.jeesl.interfaces.model.util.JeeslTreeElement;
+import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
+import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
+public interface JeeslRmmvTreeElement<L extends JeeslLang,
+										R extends JeeslTenantRealm<L,?,R,?>,
+										TE extends JeeslRmmvTreeElement<L,R,TE>>
+						extends Serializable,EjbSaveable,
+								EjbWithId,EjbWithNonUniqueCode,
+								EjbWithPositionVisible,
+								JeeslTreeElement<TE>,EjbWithLang<L>,
+								JeeslWithTenantSupport<R>
+								
+{	
+//	E getParent();
+//	void setParent(E parent);
+}

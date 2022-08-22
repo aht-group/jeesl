@@ -21,11 +21,11 @@
 				<p:panel id="pTree" header="#{msg.jeeslCmsDocumentStructure}" styleClass="jeeslTree" >
 					<f:facet id="fActions" name="actions">
 						<p:outputPanel id="cActions">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAsset()}" update=":#{cc.id}:sAsset" tooltip="#{msg.jeeslTtAdd}" marginLeft="5" library="jeeslGfx" rendered="#{cc.attrs.bean.sbhView.selection.tree eq 'hierarchy'}"/>
-							<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}" library="jeeslGfx"/>
-							<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseTree()}" update="@form" rendered="#{cc.attrs.bean.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}" library="jeeslGfx"/>
-							<j:svg type="jeeslTreeExpandThree" listener="#{cc.attrs.bean.expandTree(3)}" update="@form" tooltip="#{msg.jeeslTtExpandThree}" library="jeeslGfx"/>
-							<j:svg type="jeeslTreeExpandTwo" listener="#{cc.attrs.bean.expandTree(2)}" update="@form" tooltip="#{msg.jeeslTtExpandTwo}" library="jeeslGfx"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAsset()}" update=":#{cc.id}:sAsset" tooltip="#{msg.jeeslTtAdd}" marginLeft="5" rendered="#{cc.attrs.bean.sbhView.selection.tree eq 'hierarchy'}"/>
+							<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}"/>
+							<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseTree()}" update="@form" rendered="#{cc.attrs.bean.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}"/>
+							<j:svg type="jeeslTreeExpandThree" listener="#{cc.attrs.bean.expandTree(3)}" update="@form" tooltip="#{msg.jeeslTtExpandThree}"/>
+							<j:svg type="jeeslTreeExpandTwo" listener="#{cc.attrs.bean.expandTree(2)}" update="@form" tooltip="#{msg.jeeslTtExpandTwo}"/>
 						</p:outputPanel>
 					</f:facet>
 					<p:tree id="tTree" value="#{cc.attrs.bean.tree}" var="node" 
@@ -49,9 +49,9 @@
 			<h:form id="fType" rendered="#{not empty cc.attrs.bean.asset}">
 				<p:panel header="#{msg.jeeslAsset}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelAsset()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
-						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveAsset()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteAsset()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.asset.id gt 0}" library="jeeslGfx"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelAsset()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveAsset()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteAsset()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.asset.id gt 0}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">

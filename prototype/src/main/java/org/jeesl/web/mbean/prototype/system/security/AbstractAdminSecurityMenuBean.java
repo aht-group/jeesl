@@ -12,7 +12,6 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
-import org.jeesl.controller.handler.sb.SbSingleHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -39,6 +38,7 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.primefaces.event.DragDropEvent;
 import org.primefaces.event.NodeCollapseEvent;
@@ -255,9 +255,6 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 			logger.info("import of menu item failed : " + e.getMessage());
 		}
 	}
-
-
-
 	private void buildTree(TreeNode parent, List<M> items, Map<M,List<M>> map)
 	{
 		for(M menu : items)

@@ -12,7 +12,7 @@ import java.util.Set;
 
 import org.jeesl.controller.handler.io.label.JeeslTranslationHandler;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
-import org.jeesl.interfaces.controller.handler.JeeslTranslationProvider;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionMissingLabel;

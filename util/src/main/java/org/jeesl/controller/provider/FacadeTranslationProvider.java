@@ -7,7 +7,7 @@ import java.util.List;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
-import org.jeesl.interfaces.controller.handler.JeeslTranslationProvider;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

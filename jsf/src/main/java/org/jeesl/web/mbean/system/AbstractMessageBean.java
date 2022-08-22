@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.jsf.util.FacesContextMessage;
 
 public class AbstractMessageBean <L extends JeeslLang, D extends JeeslDescription,
-									LOC extends JeeslStatus<L,D,LOC>>
+									LOC extends JeeslLocale<L,D,LOC,?>>
 								implements Serializable
 {
 	private static final long serialVersionUID = 1;

@@ -9,7 +9,6 @@ import java.util.Map;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslTsFacade;
-import org.jeesl.controller.handler.sb.SbSingleHandler;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -38,6 +37,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

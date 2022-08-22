@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.controller.handler;
+package org.jeesl.interfaces.controller.handler.system.locales;
 
 import java.util.List;
 
