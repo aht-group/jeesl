@@ -673,6 +673,7 @@ html, body, .ui-widget {
 @mixin jeesl-titlebar-title {
 	font-size: $font-size-header;
 	letter-spacing: -.5px;
+	padding: $half-spacing $regular-spacing;
 }
 
 @mixin jeesl-titlebar-actions {
@@ -1109,7 +1110,7 @@ html, body, .ui-widget {
 				@include jeesl-titlebar-title;
 				
 				margin: -$wide-spacing;
-				margin-bottom: $wide-spacing;
+				margin-bottom: #{$wide-spacing} + #{$header-element-underline};
 			}
 		}
 	}

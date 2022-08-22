@@ -482,3 +482,13 @@ template {
 [hidden] {
   display: none !important;
 }
+
+// Overriding aupGeometry and jeeslGenerated rules conflicting with responsive.
+// Should be replaced one day.
+.header ul li a {
+	float: none;
+	
+	&:hover {
+		border: none;
+	}
+}

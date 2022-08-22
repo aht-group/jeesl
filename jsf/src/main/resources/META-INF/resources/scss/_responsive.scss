@@ -512,10 +512,14 @@ body, .ui-widget {
 		margin: 5px 0 0 10px;
 		width: $header-logo-width;
 		
-		.logo {
+		.jeesl-logo {
 			height: $header-logo-height;
 			margin: 0;
 			pointer-events: none;
+			
+			&.jeesl-floating-logo {
+				height: $header-floating-logo-height;
+			}
 		}
 	}
 	
@@ -1649,7 +1653,7 @@ body, .ui-widget {
 	display: flex;	
 	flex-wrap: wrap;
 	height: auto;
-	margin-bottom: 2px;
+	margin-bottom: $slim-spacing;
 	min-height: $element-height;
 	padding: 0;
 	position: relative;
@@ -1657,19 +1661,19 @@ body, .ui-widget {
 	@media (max-width: 768px) {
 		border-radius: $border-radius-top;
 		border-width: 0;
-		margin: 0 0 4px 0;
+		margin: 0 0 $header-element-underline 0;
 		min-height: $element-height-mobile;
 	}
 	
 	&:after {
 		background: $dark-colour;
-		bottom: -4px;
+		bottom: -$header-element-underline;
 		content: '';
 		display: none;
-		height: 4px;
-		margin-left: -1px;
+		height: $header-element-underline;
+		margin-left: -$border-width;
 		position: absolute;
-		width: calc(100% + 2px);
+		width: calc(100% + 2 * #{$border-width});
 		
 		@media (max-width: 768px) {
 			display: block;
@@ -1683,11 +1687,11 @@ body, .ui-widget {
 	align-items: center;
 	display: flex;
 	flex-grow: 1;
-	//line-height: 22px;
-	padding-left: $regular-spacing;
+	line-height: 1em;
+	padding: $slim-spacing $regular-spacing;
 
 	@media (max-width: 768px) {
-	    //line-height: 42px;
+		padding: $half-spacing $regular-spacing;
 	}
 }
 
@@ -2150,7 +2154,10 @@ body, .ui-widget {
 @mixin jeesl-panel {
 	@include jeesl-editor-layout;
 	@include jeesl-panel-titlebar;
-			
+	
+	background: $bright-grey;
+	display: flex;
+	flex-direction: column;
 	margin-bottom: 10px;
 	padding: $slim-spacing;
 	
@@ -2430,6 +2437,12 @@ body, .ui-widget {
 		@include input-grid;
 		@include image-gallery;
 		
+		background: transparent;
+		border: 0;
+		flex: 1;
+		overflow-x: auto;
+		padding: $half-spacing $regular-spacing;
+		
 		.ui-galleria {
 			border: 0;
 			margin: -6px -10px -4px;
@@ -2456,6 +2469,14 @@ body, .ui-widget {
 
 .jeesl-panel {
 	@include jeesl-panel;
+}
+
+.jeesl-tree {
+	background: $bright-grey;
+	
+	.ui-widget-content {
+		background: transparent;
+	}
 }
 
 .ui-fieldset {
@@ -2617,6 +2638,7 @@ body, .ui-widget {
 		width: 100%;
 		
 		.jeesl-grid {
+			margin: $regular-spacing $half-spacing 0;
 			position: relative;
 			
 			form {

@@ -257,6 +257,11 @@ template {
 [hidden] {
   display: none !important; }
 
+.header ul li a {
+  float: none; }
+  .header ul li a:hover {
+    border: none; }
+
 .jeesl-left {
   float: left; }
 
@@ -1709,10 +1714,12 @@ body, .ui-widget {
     display: inline-block;
     margin: 5px 0 0 10px;
     width: 170px; }
-    .jeesl-header > a .logo {
+    .jeesl-header > a .jeesl-logo {
       height: 43px;
       margin: 0;
       pointer-events: none; }
+      .jeesl-header > a .jeesl-logo.jeesl-floating-logo {
+        height: 31px; }
   .jeesl-header ul li {
     display: inline-block; }
   .jeesl-header .jeesl-burger-menu-icon {
@@ -3610,6 +3617,9 @@ body, .ui-widget {
  ******************/
 /******************/
 .jeesl-panel {
+  background: #ededed;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
   padding: 2px; }
   .jeesl-panel .ui-texteditor, .jeesl-panel .jeesl-timeline {
@@ -3657,7 +3667,7 @@ body, .ui-widget {
       height: 4px;
       margin-left: -1px;
       position: absolute;
-      width: calc(100% + 2px); }
+      width: calc(100% + 2 * 1px); }
       @media (max-width: 768px) {
         .jeesl-panel .ui-panel-titlebar:after {
           display: block; } }
@@ -3666,11 +3676,15 @@ body, .ui-widget {
       align-items: center;
       display: flex;
       flex-grow: 1;
-      padding-left: 10px; }
+      line-height: 1em;
+      padding: 2px 10px; }
       @media (max-width: 768px) {
         .jeesl-panel .ui-panel-titlebar .ui-panel-title {
           font-size: 1.4em;
           letter-spacing: -.5px; } }
+      @media (max-width: 768px) {
+        .jeesl-panel .ui-panel-titlebar .ui-panel-title {
+          padding: 5px 10px; } }
     .jeesl-panel .ui-panel-titlebar .ui-panel-actions {
       display: flex;
       flex-direction: row-reverse;
@@ -3776,7 +3790,7 @@ body, .ui-widget {
         height: 4px;
         margin-left: -1px;
         position: absolute;
-        width: calc(100% + 2px); }
+        width: calc(100% + 2 * 1px); }
         @media (max-width: 768px) {
           .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
             display: block; } }
@@ -3785,11 +3799,15 @@ body, .ui-widget {
         align-items: center;
         display: flex;
         flex-grow: 1;
-        padding-left: 10px; }
+        line-height: 1em;
+        padding: 2px 10px; }
         @media (max-width: 768px) {
           .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
             font-size: 1.4em;
             letter-spacing: -.5px; } }
+        @media (max-width: 768px) {
+          .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+            padding: 5px 10px; } }
       .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions {
         display: flex;
         flex-direction: row-reverse;
@@ -3937,121 +3955,132 @@ body, .ui-widget {
       padding: 5px 10px; }
   .jeesl-panel .vis-timeline {
     border: none; }
-  .jeesl-panel .ui-panel-content .ui-fluid {
-    display: flex;
-    flex-direction: column; }
-    .jeesl-panel .ui-panel-content .ui-fluid .p-grid {
-      position: relative; }
-      @media (max-width: 768px) {
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid {
-          display: block;
-          padding: 0; } }
-      @media (max-width: 768px) {
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
-          left: 50%;
-          line-height: normal;
-          padding: 0;
-          position: absolute;
-          top: 0;
-          transform: translate(-50%, 0);
-          width: auto;
-          z-index: 1; }
-          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
-            left: 15px;
-            transform: none; }
-          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
-            left: auto;
-            right: 15px;
-            transform: none; } }
-      @media (max-width: 768px) {
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
-          line-height: normal;
-          padding: 0.5em 0 2px 0;
-          width: 100% !important; } }
-      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-        border-radius: 3px; }
-        @media (max-width: 768px) {
-          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-            padding: 0 10px;
-            width: 100%; } }
-      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
-        display: inline-block; }
-        @media (max-width: 768px) {
-          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
-            align-items: center;
-            background: #dedede;
-            display: flex; } }
-      @media (max-width: 768px) {
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
-          padding: 0; } }
-  .jeesl-panel .ui-panel-content .ui-galleria {
-    width: 100% !important; }
-    .jeesl-panel .ui-panel-content .ui-galleria .ui-galleria-panel-wrapper {
-      margin: 0 auto; }
-    .jeesl-panel .ui-panel-content .ui-galleria .ui-galleria-filmstrip-wrapper {
-      height: 50px !important;
-      margin: 0;
-      width: 100% !important; }
-    .jeesl-panel .ui-panel-content .ui-galleria .ui-icon {
-      background-image: none;
-      bottom: 0 !important;
-      height: 50px;
-      width: 42px;
-      text-align: center;
-      text-indent: initial;
-      transition: background .2s linear; }
-      .jeesl-panel .ui-panel-content .ui-galleria .ui-icon:hover {
-        background: #c4c4c4; }
-      .jeesl-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-w {
-        left: 0; }
-        .jeesl-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-w:before {
-          border-color: transparent #545454 transparent transparent;
-          border-style: solid;
-          border-width: 8px 8px 8px 0;
-          content: '';
-          position: absolute;
-          top: 0;
-          margin-top: 0;
-          display: block;
-          display: inline-block;
-          position: relative;
-          vertical-align: middle; }
-      .jeesl-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-e {
-        right: 0; }
-        .jeesl-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-e:before {
-          border-color: transparent transparent transparent #545454;
-          border-style: solid;
-          border-width: 8px 0 8px 8px;
-          content: '';
-          position: absolute;
-          top: 0;
-          margin-top: 0;
-          display: block;
-          display: inline-block;
-          position: relative;
-          vertical-align: middle; }
-      .jeesl-panel .ui-panel-content .ui-galleria .ui-icon:after {
-        content: '';
-        display: inline-block;
-        height: 100%;
-        position: relative;
-        vertical-align: middle; }
-    .jeesl-panel .ui-panel-content .ui-galleria .ui-galleria-caption {
-      width: 100% !important; }
-  .jeesl-panel .ui-panel-content .ui-galleria {
+  .jeesl-panel .ui-panel-content {
+    background: transparent;
     border: 0;
-    margin: -6px -10px -4px;
-    max-width: calc(100% + 20px);
-    width: calc(100% + 20px) !important; }
-  @media (max-width: 768px) {
-    .jeesl-panel .ui-panel-content .ui-separator {
-      background: #dedede;
-      height: 2px;
-      margin: 6px 0; } }
+    flex: 1;
+    overflow-x: auto;
+    padding: 5px 10px; }
+    .jeesl-panel .ui-panel-content .ui-fluid {
+      display: flex;
+      flex-direction: column; }
+      .jeesl-panel .ui-panel-content .ui-fluid .p-grid {
+        position: relative; }
+        @media (max-width: 768px) {
+          .jeesl-panel .ui-panel-content .ui-fluid .p-grid {
+            display: block;
+            padding: 0; } }
+        @media (max-width: 768px) {
+          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
+            left: 50%;
+            line-height: normal;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            transform: translate(-50%, 0);
+            width: auto;
+            z-index: 1; }
+            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
+              left: 15px;
+              transform: none; }
+            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
+              left: auto;
+              right: 15px;
+              transform: none; } }
+        @media (max-width: 768px) {
+          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
+            line-height: normal;
+            padding: 0.5em 0 2px 0;
+            width: 100% !important; } }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+          border-radius: 3px; }
+          @media (max-width: 768px) {
+            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+              padding: 0 10px;
+              width: 100%; } }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+          display: inline-block; }
+          @media (max-width: 768px) {
+            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+              align-items: center;
+              background: #dedede;
+              display: flex; } }
+        @media (max-width: 768px) {
+          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
+            padding: 0; } }
+    .jeesl-panel .ui-panel-content .ui-galleria {
+      width: 100% !important; }
+      .jeesl-panel .ui-panel-content .ui-galleria .ui-galleria-panel-wrapper {
+        margin: 0 auto; }
+      .jeesl-panel .ui-panel-content .ui-galleria .ui-galleria-filmstrip-wrapper {
+        height: 50px !important;
+        margin: 0;
+        width: 100% !important; }
+      .jeesl-panel .ui-panel-content .ui-galleria .ui-icon {
+        background-image: none;
+        bottom: 0 !important;
+        height: 50px;
+        width: 42px;
+        text-align: center;
+        text-indent: initial;
+        transition: background .2s linear; }
+        .jeesl-panel .ui-panel-content .ui-galleria .ui-icon:hover {
+          background: #c4c4c4; }
+        .jeesl-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-w {
+          left: 0; }
+          .jeesl-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-w:before {
+            border-color: transparent #545454 transparent transparent;
+            border-style: solid;
+            border-width: 8px 8px 8px 0;
+            content: '';
+            position: absolute;
+            top: 0;
+            margin-top: 0;
+            display: block;
+            display: inline-block;
+            position: relative;
+            vertical-align: middle; }
+        .jeesl-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-e {
+          right: 0; }
+          .jeesl-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-e:before {
+            border-color: transparent transparent transparent #545454;
+            border-style: solid;
+            border-width: 8px 0 8px 8px;
+            content: '';
+            position: absolute;
+            top: 0;
+            margin-top: 0;
+            display: block;
+            display: inline-block;
+            position: relative;
+            vertical-align: middle; }
+        .jeesl-panel .ui-panel-content .ui-galleria .ui-icon:after {
+          content: '';
+          display: inline-block;
+          height: 100%;
+          position: relative;
+          vertical-align: middle; }
+      .jeesl-panel .ui-panel-content .ui-galleria .ui-galleria-caption {
+        width: 100% !important; }
+    .jeesl-panel .ui-panel-content .ui-galleria {
+      border: 0;
+      margin: -6px -10px -4px;
+      max-width: calc(100% + 20px);
+      width: calc(100% + 20px) !important; }
+    @media (max-width: 768px) {
+      .jeesl-panel .ui-panel-content .ui-separator {
+        background: #dedede;
+        height: 2px;
+        margin: 6px 0; } }
   @media (max-width: 768px) {
     .jeesl-panel .ui-panel-footer {
       margin: 5px 0 0;
       border-width: 4px 0 0; } }
+
+.jeesl-tree {
+  background: #ededed; }
+  .jeesl-tree .ui-widget-content {
+    background: transparent; }
 
 .ui-fieldset {
   background: #f0f0f0;
@@ -4082,7 +4111,7 @@ body, .ui-widget {
       height: 4px;
       margin-left: -1px;
       position: absolute;
-      width: calc(100% + 2px); }
+      width: calc(100% + 2 * 1px); }
       @media (max-width: 768px) {
         .ui-fieldset .ui-fieldset-legend:after {
           display: block; } }
@@ -4154,7 +4183,7 @@ body, .ui-widget {
       height: 4px;
       margin-left: -1px;
       position: absolute;
-      width: calc(100% + 2px); }
+      width: calc(100% + 2 * 1px); }
       @media (max-width: 768px) {
         .ui-datatable .ui-datatable-header:after {
           display: block; } }
@@ -4163,11 +4192,15 @@ body, .ui-widget {
       align-items: center;
       display: flex;
       flex-grow: 1;
-      padding-left: 10px; }
+      line-height: 1em;
+      padding: 2px 10px; }
       @media (max-width: 768px) {
         .ui-datatable .ui-datatable-header .pf-datatable-header-title {
           font-size: 1.4em;
           letter-spacing: -.5px; } }
+      @media (max-width: 768px) {
+        .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+          padding: 5px 10px; } }
     .ui-datatable .ui-datatable-header .pf-datatable-header-actions {
       display: flex;
       flex-direction: row-reverse;
@@ -4389,12 +4422,16 @@ body, .ui-widget {
     padding: 0;
     width: 100%; }
     .jeesl-content .jeesl-content-container .jeesl-grid {
+      margin: 10px 5px 0;
       position: relative; }
       .jeesl-content .jeesl-content-container .jeesl-grid form {
         margin-bottom: 10px; }
       .jeesl-content .jeesl-content-container .jeesl-grid .jeesl-panel form {
         margin-bottom: 0; }
     .jeesl-content .jeesl-content-container .ui-panel {
+      background: #ededed;
+      display: flex;
+      flex-direction: column;
       margin-bottom: 10px;
       padding: 2px; }
       .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor, .jeesl-content .jeesl-content-container .ui-panel .jeesl-timeline {
@@ -4442,7 +4479,7 @@ body, .ui-widget {
           height: 4px;
           margin-left: -1px;
           position: absolute;
-          width: calc(100% + 2px); }
+          width: calc(100% + 2 * 1px); }
           @media (max-width: 768px) {
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar:after {
               display: block; } }
@@ -4451,11 +4488,15 @@ body, .ui-widget {
           align-items: center;
           display: flex;
           flex-grow: 1;
-          padding-left: 10px; }
+          line-height: 1em;
+          padding: 2px 10px; }
           @media (max-width: 768px) {
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-title {
               font-size: 1.4em;
               letter-spacing: -.5px; } }
+          @media (max-width: 768px) {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-title {
+              padding: 5px 10px; } }
         .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions {
           display: flex;
           flex-direction: row-reverse;
@@ -4561,7 +4602,7 @@ body, .ui-widget {
             height: 4px;
             margin-left: -1px;
             position: absolute;
-            width: calc(100% + 2px); }
+            width: calc(100% + 2 * 1px); }
             @media (max-width: 768px) {
               .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
                 display: block; } }
@@ -4570,11 +4611,15 @@ body, .ui-widget {
             align-items: center;
             display: flex;
             flex-grow: 1;
-            padding-left: 10px; }
+            line-height: 1em;
+            padding: 2px 10px; }
             @media (max-width: 768px) {
               .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
                 font-size: 1.4em;
                 letter-spacing: -.5px; } }
+            @media (max-width: 768px) {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+                padding: 5px 10px; } }
           .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions {
             display: flex;
             flex-direction: row-reverse;
@@ -4722,117 +4767,123 @@ body, .ui-widget {
           padding: 5px 10px; }
       .jeesl-content .jeesl-content-container .ui-panel .vis-timeline {
         border: none; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid {
-        display: flex;
-        flex-direction: column; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid {
-          position: relative; }
-          @media (max-width: 768px) {
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid {
-              display: block;
-              padding: 0; } }
-          @media (max-width: 768px) {
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
-              left: 50%;
-              line-height: normal;
-              padding: 0;
-              position: absolute;
-              top: 0;
-              transform: translate(-50%, 0);
-              width: auto;
-              z-index: 1; }
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
-                left: 15px;
-                transform: none; }
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
-                left: auto;
-                right: 15px;
-                transform: none; } }
-          @media (max-width: 768px) {
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
-              line-height: normal;
-              padding: 0.5em 0 2px 0;
-              width: 100% !important; } }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-            border-radius: 3px; }
-            @media (max-width: 768px) {
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-                padding: 0 10px;
-                width: 100%; } }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
-            display: inline-block; }
-            @media (max-width: 768px) {
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
-                align-items: center;
-                background: #dedede;
-                display: flex; } }
-          @media (max-width: 768px) {
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
-              padding: 0; } }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria {
-        width: 100% !important; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-galleria-panel-wrapper {
-          margin: 0 auto; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-galleria-filmstrip-wrapper {
-          height: 50px !important;
-          margin: 0;
-          width: 100% !important; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon {
-          background-image: none;
-          bottom: 0 !important;
-          height: 50px;
-          width: 42px;
-          text-align: center;
-          text-indent: initial;
-          transition: background .2s linear; }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon:hover {
-            background: #c4c4c4; }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-w {
-            left: 0; }
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-w:before {
-              border-color: transparent #545454 transparent transparent;
-              border-style: solid;
-              border-width: 8px 8px 8px 0;
-              content: '';
-              position: absolute;
-              top: 0;
-              margin-top: 0;
-              display: block;
-              display: inline-block;
-              position: relative;
-              vertical-align: middle; }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-e {
-            right: 0; }
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-e:before {
-              border-color: transparent transparent transparent #545454;
-              border-style: solid;
-              border-width: 8px 0 8px 8px;
-              content: '';
-              position: absolute;
-              top: 0;
-              margin-top: 0;
-              display: block;
-              display: inline-block;
-              position: relative;
-              vertical-align: middle; }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon:after {
-            content: '';
-            display: inline-block;
-            height: 100%;
-            position: relative;
-            vertical-align: middle; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-galleria-caption {
-          width: 100% !important; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria {
+      .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content {
+        background: transparent;
         border: 0;
-        margin: -6px -10px -4px;
-        max-width: calc(100% + 20px);
-        width: calc(100% + 20px) !important; }
-      @media (max-width: 768px) {
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-separator {
-          background: #dedede;
-          height: 2px;
-          margin: 6px 0; } }
+        flex: 1;
+        overflow-x: auto;
+        padding: 5px 10px; }
+        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid {
+          display: flex;
+          flex-direction: column; }
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid {
+            position: relative; }
+            @media (max-width: 768px) {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid {
+                display: block;
+                padding: 0; } }
+            @media (max-width: 768px) {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
+                left: 50%;
+                line-height: normal;
+                padding: 0;
+                position: absolute;
+                top: 0;
+                transform: translate(-50%, 0);
+                width: auto;
+                z-index: 1; }
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
+                  left: 15px;
+                  transform: none; }
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
+                  left: auto;
+                  right: 15px;
+                  transform: none; } }
+            @media (max-width: 768px) {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
+                line-height: normal;
+                padding: 0.5em 0 2px 0;
+                width: 100% !important; } }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+              border-radius: 3px; }
+              @media (max-width: 768px) {
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+                  padding: 0 10px;
+                  width: 100%; } }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+              display: inline-block; }
+              @media (max-width: 768px) {
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+                  align-items: center;
+                  background: #dedede;
+                  display: flex; } }
+            @media (max-width: 768px) {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
+                padding: 0; } }
+        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria {
+          width: 100% !important; }
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-galleria-panel-wrapper {
+            margin: 0 auto; }
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-galleria-filmstrip-wrapper {
+            height: 50px !important;
+            margin: 0;
+            width: 100% !important; }
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon {
+            background-image: none;
+            bottom: 0 !important;
+            height: 50px;
+            width: 42px;
+            text-align: center;
+            text-indent: initial;
+            transition: background .2s linear; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon:hover {
+              background: #c4c4c4; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-w {
+              left: 0; }
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-w:before {
+                border-color: transparent #545454 transparent transparent;
+                border-style: solid;
+                border-width: 8px 8px 8px 0;
+                content: '';
+                position: absolute;
+                top: 0;
+                margin-top: 0;
+                display: block;
+                display: inline-block;
+                position: relative;
+                vertical-align: middle; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-e {
+              right: 0; }
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon.ui-icon-circle-triangle-e:before {
+                border-color: transparent transparent transparent #545454;
+                border-style: solid;
+                border-width: 8px 0 8px 8px;
+                content: '';
+                position: absolute;
+                top: 0;
+                margin-top: 0;
+                display: block;
+                display: inline-block;
+                position: relative;
+                vertical-align: middle; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-icon:after {
+              content: '';
+              display: inline-block;
+              height: 100%;
+              position: relative;
+              vertical-align: middle; }
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria .ui-galleria-caption {
+            width: 100% !important; }
+        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria {
+          border: 0;
+          margin: -6px -10px -4px;
+          max-width: calc(100% + 20px);
+          width: calc(100% + 20px) !important; }
+        @media (max-width: 768px) {
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-separator {
+            background: #dedede;
+            height: 2px;
+            margin: 6px 0; } }
       @media (max-width: 768px) {
         .jeesl-content .jeesl-content-container .ui-panel .ui-panel-footer {
           margin: 5px 0 0;
@@ -4904,7 +4955,7 @@ body, .ui-widget {
       height: 4px;
       margin-left: -1px;
       position: absolute;
-      width: calc(100% + 2px); }
+      width: calc(100% + 2 * 1px); }
       @media (max-width: 768px) {
         .ui-dialog .ui-dialog-titlebar:after {
           display: block; } }
@@ -4920,11 +4971,15 @@ body, .ui-widget {
         align-items: center;
         display: flex;
         flex-grow: 1;
-        padding-left: 10px; }
+        line-height: 1em;
+        padding: 2px 10px; }
         @media (max-width: 768px) {
           .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-title {
             font-size: 1.4em;
             letter-spacing: -.5px; } }
+        @media (max-width: 768px) {
+          .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-title {
+            padding: 5px 10px; } }
       .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions {
         display: flex;
         flex-direction: row-reverse;
@@ -5170,7 +5225,7 @@ body, .ui-widget {
       height: 4px;
       margin-left: -1px;
       position: absolute;
-      width: calc(100% + 2px); }
+      width: calc(100% + 2 * 1px); }
       @media (max-width: 768px) {
         .jeesl-tabs .ui-tabs-nav:after {
           display: block; } }
@@ -5229,13 +5284,17 @@ body, .ui-widget {
         align-items: center;
         display: flex;
         flex-grow: 1;
-        padding-left: 10px;
+        line-height: 1em;
+        padding: 2px 10px;
         color: #333333;
         padding: 0 10px; }
         @media (max-width: 768px) {
           .jeesl-tabs .ui-tabs-nav .ui-tabs-header > a {
             font-size: 1.4em;
             letter-spacing: -.5px; } }
+        @media (max-width: 768px) {
+          .jeesl-tabs .ui-tabs-nav .ui-tabs-header > a {
+            padding: 5px 10px; } }
   @media (max-width: 768px) {
     .jeesl-tabs {
       padding: 0; } }
@@ -5331,7 +5390,7 @@ body, .ui-widget {
     height: 4px;
     margin-left: -1px;
     position: absolute;
-    width: calc(100% + 2px); }
+    width: calc(100% + 2 * 1px); }
     @media (max-width: 768px) {
       .fc .fc-head:after {
         display: block; } }
@@ -5340,11 +5399,15 @@ body, .ui-widget {
     align-items: center;
     display: flex;
     flex-grow: 1;
-    padding-left: 10px; }
+    line-height: 1em;
+    padding: 2px 10px; }
     @media (max-width: 768px) {
       .fc .fc-head .fc-day-header > span {
         font-size: 1.4em;
         letter-spacing: -.5px; } }
+    @media (max-width: 768px) {
+      .fc .fc-head .fc-day-header > span {
+        padding: 5px 10px; } }
 .fc .fc-scroller {
   min-height: 312px; }
 
@@ -5384,7 +5447,7 @@ body, .ui-widget {
     height: 42px; } }
 .html-container-panel .html-container > div > section {
   padding: 10px; }
-  .html-container-panel .html-container > div > section h1:first-child {
+  .html-container-panel .html-container > div > section > h1:first-child {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -5397,16 +5460,16 @@ body, .ui-widget {
     align-items: center;
     display: flex;
     flex-grow: 1;
-    padding-left: 10px;
-    margin: -10px + 2px;
-    margin-bottom: 2px; }
+    line-height: 1em;
+    padding: 2px 10px;
+    margin: -10px -10px 10px; }
     @media (max-width: 768px) {
-      .html-container-panel .html-container > div > section h1:first-child {
+      .html-container-panel .html-container > div > section > h1:first-child {
         border-radius: 3px 3px 0 0;
         border-width: 0;
         margin: 0 0 4px 0;
         min-height: 42px; } }
-    .html-container-panel .html-container > div > section h1:first-child:after {
+    .html-container-panel .html-container > div > section > h1:first-child:after {
       background: #00663a;
       bottom: -4px;
       content: '';
@@ -5414,17 +5477,20 @@ body, .ui-widget {
       height: 4px;
       margin-left: -1px;
       position: absolute;
-      width: calc(100% + 2px); }
+      width: calc(100% + 2 * 1px); }
       @media (max-width: 768px) {
-        .html-container-panel .html-container > div > section h1:first-child:after {
+        .html-container-panel .html-container > div > section > h1:first-child:after {
           display: block; } }
     @media (max-width: 768px) {
-      .html-container-panel .html-container > div > section h1:first-child {
+      .html-container-panel .html-container > div > section > h1:first-child {
         font-size: 1.4em;
         letter-spacing: -.5px; } }
     @media (max-width: 768px) {
-      .html-container-panel .html-container > div > section h1:first-child {
+      .html-container-panel .html-container > div > section > h1:first-child {
+        padding: 5px 10px; } }
+    @media (max-width: 768px) {
+      .html-container-panel .html-container > div > section > h1:first-child {
         margin: -10px;
-        margin-bottom: 2px; } }
-    .html-container-panel .html-container > div > section h1:first-child:after {
+        margin-bottom: 10px + 4px; } }
+    .html-container-panel .html-container > div > section > h1:first-child:after {
       left: 0; }

@@ -3,16 +3,15 @@
 		> div > section {
 			padding: $regular-spacing;
 			
-			h1:first-child {
+			> h1:first-child {
 				@include jeesl-titlebar;
 				@include jeesl-titlebar-title;
 				
-				margin: -#{$regular-spacing} + #{$slim-spacing};
-				margin-bottom: $slim-spacing;
+				margin: -#{$regular-spacing} -#{$regular-spacing} #{$regular-spacing};
 				
 				@media (max-width: 768px) {
 					margin: -$regular-spacing;
-					margin-bottom: $slim-spacing;
+					margin-bottom: #{$regular-spacing} + #{$header-element-underline};
 				}
 				
 				&:after {

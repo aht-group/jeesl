@@ -563,7 +563,8 @@ html, body, .ui-widget {
       display: block; }
     .jeesl-panel .ui-panel-titlebar .ui-panel-title {
       font-size: 1.4em;
-      letter-spacing: -.5px; }
+      letter-spacing: -.5px;
+      padding: 5px 10px; }
     .jeesl-panel .ui-panel-titlebar .ui-panel-actions img {
       height: calc(84px - 2 * 6px);
       padding: 0 6px; }
@@ -587,7 +588,8 @@ html, body, .ui-widget {
       display: block; }
     .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
       font-size: 1.4em;
-      letter-spacing: -.5px; }
+      letter-spacing: -.5px;
+      padding: 5px 10px; }
     .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
       height: calc(84px - 2 * 6px);
       padding: 0 6px; }
@@ -692,7 +694,8 @@ html, body, .ui-widget {
     display: block; }
   .ui-datatable .ui-datatable-header .pf-datatable-header-title {
     font-size: 1.4em;
-    letter-spacing: -.5px; }
+    letter-spacing: -.5px;
+    padding: 5px 10px; }
   .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
     height: calc(84px - 2 * 6px);
     padding: 0 6px; }
@@ -762,7 +765,8 @@ html, body, .ui-widget {
       display: block; }
     .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-title {
       font-size: 1.4em;
-      letter-spacing: -.5px; }
+      letter-spacing: -.5px;
+      padding: 5px 10px; }
     .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions img {
       height: calc(84px - 2 * 6px);
       padding: 0 6px; }
@@ -786,7 +790,8 @@ html, body, .ui-widget {
       display: block; }
     .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
       font-size: 1.4em;
-      letter-spacing: -.5px; }
+      letter-spacing: -.5px;
+      padding: 5px 10px; }
     .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
       height: calc(84px - 2 * 6px);
       padding: 0 6px; }
@@ -884,7 +889,8 @@ html, body, .ui-widget {
     display: block; }
   .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-title {
     font-size: 1.4em;
-    letter-spacing: -.5px; }
+    letter-spacing: -.5px;
+    padding: 5px 10px; }
   .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions {
     pointer-events: all; }
     .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions img {
@@ -987,7 +993,8 @@ html, body, .ui-widget {
         display: block; }
       .jeesl-tabs .ui-tabs-nav .ui-tabs-header > a, .jeesl-tabs .ui-tabs-nav .ui-tabs-header > span {
         font-size: 1.4em;
-        letter-spacing: -.5px; }
+        letter-spacing: -.5px;
+        padding: 5px 10px; }
     .jeesl-tabs .ui-tabs-nav:after {
       display: block;
       margin-left: -3px;
@@ -1014,7 +1021,8 @@ html, body, .ui-widget {
     display: block; }
   .fc .fc-head .fc-day-header > span {
     font-size: 1.4em;
-    letter-spacing: -.5px; }
+    letter-spacing: -.5px;
+    padding: 5px 10px; }
 
 .ui-panelgrid .ui-panelgrid-cell > * {
   min-height: 84px; }
@@ -1034,8 +1042,9 @@ html, body, .ui-widget {
       min-height: 84px;
       font-size: 1.4em;
       letter-spacing: -.5px;
+      padding: 5px 10px;
       margin: -15px;
-      margin-bottom: 15px; }
+      margin-bottom: 15px + 4px; }
       .html-container-panel .html-container > div > section h1:first-child:after {
         display: block; }
 
