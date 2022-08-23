@@ -11,6 +11,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.web.rest.AbstractJeeslRestService;
 import org.slf4j.Logger;
@@ -22,20 +23,21 @@ public class CalendarRestService <L extends JeeslLang, D extends JeeslDescriptio
 								CALENDAR extends JeeslCalendar<ZONE,CT>,
 								ZONE extends JeeslCalendarTimeZone<L,D>,
 								CT extends JeeslCalendarScope<L,D,CT,?>,
-								ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-								IT extends JeeslCalendarItemType<L,D,?,IT,?>
+								ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
+								IT extends JeeslCalendarItemType<L,D,?,IT,?>,
+								USER extends JeeslSimpleUser
 								>
 					extends AbstractJeeslRestService<L,D>
 					implements JeeslCalendarRestExport,JeeslCalendarRestImport
 {
 	final static Logger logger = LoggerFactory.getLogger(CalendarRestService.class);
 	
-	private final JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar;
+	private final JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar;
 	
 	private final Class<CT> cType;
 	private final Class<IT> cItemType;
 	
-	private CalendarRestService(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar,final Class<L> cL, final Class<D> cD, final Class<CT> cType, final Class<IT> cItemType)
+	private CalendarRestService(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar,final Class<L> cL, final Class<D> cD, final Class<CT> cType, final Class<IT> cItemType)
 	{
 		super(fCalendar,cL,cD);
 		this.fCalendar=fCalendar;
@@ -48,12 +50,13 @@ public class CalendarRestService <L extends JeeslLang, D extends JeeslDescriptio
 					CALENDAR extends JeeslCalendar<ZONE,CT>,
 					ZONE extends JeeslCalendarTimeZone<L,D>,
 					CT extends JeeslCalendarScope<L,D,CT,?>,
-					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-					IT extends JeeslCalendarItemType<L,D,?,IT,?>>
-			CalendarRestService<L,D,CALENDAR,ZONE,CT,ITEM,IT>
-			factory(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar,final Class<L> cL, final Class<D> cD, final Class<CT> cType, final Class<IT> cItemType)
+					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
+					IT extends JeeslCalendarItemType<L,D,?,IT,?>,
+					USER extends JeeslSimpleUser>
+			CalendarRestService<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER>
+			factory(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar,final Class<L> cL, final Class<D> cD, final Class<CT> cType, final Class<IT> cItemType)
 	{
-		return new CalendarRestService<L,D,CALENDAR,ZONE,CT,ITEM,IT>(fCalendar,cL,cD,cType,cItemType);
+		return new CalendarRestService<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER>(fCalendar,cL,cD,cType,cItemType);
 	}
 	
 	@Override public Container exportCalendarType() {return xfContainer.build(fCalendar.allOrderedPosition(cType));}

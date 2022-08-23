@@ -10,10 +10,11 @@ import org.jeesl.factory.txt.module.calendar.TxtCalendarItemFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +22,9 @@ public class CalendarFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									CAL extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarTimeZone<L,D>,
 									CT extends JeeslCalendarScope<L,D,CT,?>,
-									ITEM extends JeeslCalendarItem<CAL,ZONE,IT>,
-									IT extends JeeslCalendarItemType<L,D,?,IT,?>>
+									ITEM extends JeeslCalendarItem<CAL,ZONE,IT,USER>,
+									IT extends JeeslCalendarItemType<L,D,?,IT,?>,
+									USER extends JeeslSimpleUser>
 	extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(CalendarFactoryBuilder.class);
@@ -49,5 +51,5 @@ public class CalendarFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	
 	public TxtCalendarItemFactory<L,D,CAL,ZONE,CT,ITEM,IT> txtItem() {return new TxtCalendarItemFactory<L,D,CAL,ZONE,CT,ITEM,IT>();}
 	
-	public JeeslCalendarHandler<L,D,CAL,ZONE,CT,ITEM,IT> itemHandler(final JeeslCalendarFacade<L,D,CAL,ZONE,CT,ITEM,IT> fCalendar){return new JeeslCalendarHandler<>(fCalendar,this);}
+	public JeeslCalendarHandler<L,D,CAL,ZONE,CT,ITEM,IT,USER> itemHandler(final JeeslCalendarFacade<L,D,CAL,ZONE,CT,ITEM,IT,USER> fCalendar){return new JeeslCalendarHandler<>(fCalendar,this);}
 }

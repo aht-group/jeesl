@@ -1,6 +1,5 @@
 package org.jeesl.factory.ejb.module.calendar;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -13,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public class EjbCalItemFactory<CAL extends JeeslCalendar<ZONE,?>,
 								ZONE extends JeeslCalendarTimeZone<?,?>,
-								ITEM extends JeeslCalendarItem<CAL,ZONE,IT>,
+								ITEM extends JeeslCalendarItem<CAL,ZONE,IT,?>,
 								IT extends JeeslCalendarItemType<?,?,?,IT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbCalItemFactory.class);

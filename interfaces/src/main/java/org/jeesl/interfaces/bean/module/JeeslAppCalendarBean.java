@@ -11,13 +11,15 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 
 public interface JeeslAppCalendarBean<L extends JeeslLang, D extends JeeslDescription,
 										CALENDAR extends JeeslCalendar<ZONE,CT>,
 										ZONE extends JeeslCalendarTimeZone<L,D>,
 										CT extends JeeslCalendarScope<L,D,CT,?>,
-										ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-										IT extends JeeslCalendarItemType<L,D,?,IT,?>>
+										ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
+										IT extends JeeslCalendarItemType<L,D,?,IT,?>,
+										USER extends JeeslSimpleUser>
 								extends Serializable
 {
 	List<ZONE> getZones();

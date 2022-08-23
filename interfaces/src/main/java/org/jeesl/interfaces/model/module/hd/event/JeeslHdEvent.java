@@ -1,6 +1,7 @@
 package org.jeesl.interfaces.model.module.hd.event;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -28,11 +29,11 @@ public interface JeeslHdEvent<TICKET extends JeeslHdTicket<?,?,?,?>,
 								LEVEL extends JeeslHdLevel<?,?,?,LEVEL,?>,
 								PRIORITY extends JeeslHdPriority<?,?,?,PRIORITY,?>,
 								USER extends JeeslSimpleUser>
-						extends Serializable,EjbSaveable,
-								EjbWithId,
-								EjbWithParentAttributeResolver,
-								EjbWithRecord,
-								JeeslWithCategory<CAT>,JeeslWithStatus<STATUS>,JeeslWithLevel<LEVEL>
+			extends Serializable,EjbSaveable,
+					EjbWithId,
+					EjbWithParentAttributeResolver,
+					EjbWithRecord,
+					JeeslWithCategory<CAT>,JeeslWithStatus<STATUS>,JeeslWithLevel<LEVEL>
 {	
 	public enum Attributes{ticket,reporter,status}
 	
@@ -56,4 +57,8 @@ public interface JeeslHdEvent<TICKET extends JeeslHdTicket<?,?,?,?>,
 	
 	PRIORITY getSupporterPriority();
 	void setSupporterPriority(PRIORITY supporterPriority);
+	
+	//This is introduced for a migration
+//	LocalDateTime getRecord2();
+//	void setRecord2(LocalDateTime record2);
 }

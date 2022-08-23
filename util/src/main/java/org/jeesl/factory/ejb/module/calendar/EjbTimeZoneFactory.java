@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbTimeZoneFactory<ZONE extends JeeslCalendarTimeZone<?,?>,
-								ITEM extends JeeslCalendarItem<?,ZONE,?>>
+								ITEM extends JeeslCalendarItem<?,ZONE,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbTimeZoneFactory.class);
 	

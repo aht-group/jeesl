@@ -14,11 +14,12 @@ import org.jeesl.interfaces.bean.module.JeeslAppCalendarBean;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,30 +28,31 @@ public abstract class AbstractCalendarTimeZoneBean <L extends JeeslLang, D exten
 											CALENDAR extends JeeslCalendar<ZONE,CT>,
 											ZONE extends JeeslCalendarTimeZone<L,D>,
 											CT extends JeeslCalendarScope<L,D,CT,?>,
-											ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-											IT extends JeeslCalendarItemType<L,D,?,IT,?>>
+											ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
+											IT extends JeeslCalendarItemType<L,D,?,IT,?>,
+											USER extends JeeslSimpleUser>
 		extends AbstractAdminBean<L,D,LOC>
 		implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractCalendarTimeZoneBean.class);
 	
-	private JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar;
-	private JeeslAppCalendarBean<L,D,CALENDAR,ZONE,CT,ITEM,IT> bCalendar;
+	private JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar;
+	private JeeslAppCalendarBean<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> bCalendar;
 	
-	private final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar;
+	private final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar;
 	private EjbTimeZoneFactory<ZONE,ITEM> efZone;
 	
 	private ZONE zone; public ZONE getZone() {return zone;} public void setZone(ZONE zone) {this.zone = zone;}
 	
-	public AbstractCalendarTimeZoneBean(final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar)
+	public AbstractCalendarTimeZoneBean(final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar)
 	{
 		super(fbCalendar.getClassL(),fbCalendar.getClassD());
 		this.fbCalendar=fbCalendar;
 	}
 	
-	public void postConstructTimeZone(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT> fCalendar,
-										JeeslAppCalendarBean<L,D,CALENDAR,ZONE,CT,ITEM,IT> bCalendar,
+	public void postConstructTimeZone(JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fCalendar,
+										JeeslAppCalendarBean<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> bCalendar,
 										JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);

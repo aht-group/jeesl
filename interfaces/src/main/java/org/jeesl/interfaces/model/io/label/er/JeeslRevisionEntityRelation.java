@@ -13,7 +13,6 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-
 @DownloadJeeslDescription
 @DownloadJeeslData
 public interface JeeslRevisionEntityRelation <L extends JeeslLang, D extends JeeslDescription,

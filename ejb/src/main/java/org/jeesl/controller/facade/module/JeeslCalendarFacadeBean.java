@@ -33,6 +33,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,20 +41,18 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 									CALENDAR extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarTimeZone<L,D>,
 									CT extends JeeslCalendarScope<L,D,CT,?>,
-									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-									IT extends JeeslCalendarItemType<L,D,?,IT,?>
-									>
+									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
+									IT extends JeeslCalendarItemType<L,D,?,IT,?>,
+									USER extends JeeslSimpleUser>
 					extends JeeslFacadeBean
-					implements JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT>
+					implements JeeslCalendarFacade<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER>
 {	
 	private static final long serialVersionUID = 1L;
-
 	final static Logger logger = LoggerFactory.getLogger(JeeslCalendarFacadeBean.class);
 
+	private final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar;
 	
-	private final CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar;
-	
-	public JeeslCalendarFacadeBean(EntityManager em, CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT> fbCalendar)
+	public JeeslCalendarFacadeBean(EntityManager em, CalendarFactoryBuilder<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> fbCalendar)
 	{
 		super(em);
 		this.fbCalendar=fbCalendar;

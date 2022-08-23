@@ -3,8 +3,10 @@ package org.jeesl.interfaces.model.module.calendar;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.jeesl.interfaces.model.io.label.revision.data.JeeslLastModified;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
@@ -14,11 +16,11 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslCalendarItem <CAL extends JeeslCalendar<ZONE,?>,
 									ZONE extends JeeslCalendarTimeZone<?,?>,
-									IT extends JeeslCalendarItemType<?,?,?,IT,?>
-									>
+									IT extends JeeslCalendarItemType<?,?,?,IT,?>,
+									USER extends JeeslSimpleUser>
 		extends  Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
-					EjbWithParentAttributeResolver
-//					,JeeslWithTimeline
+					EjbWithParentAttributeResolver,
+					JeeslLastModified<USER>
 {
 	public enum Attributes {calendar,utcStart,utcEnd}
 	

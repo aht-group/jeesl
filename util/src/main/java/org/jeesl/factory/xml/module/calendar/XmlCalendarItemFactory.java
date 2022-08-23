@@ -1,21 +1,17 @@
 package org.jeesl.factory.xml.module.calendar;
 
-import java.time.ZoneId;
 import java.util.Date;
-import java.util.GregorianCalendar;
-
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.jeesl.controller.processor.TimeZoneProcessor;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.model.xml.module.calendar.Item;
 import org.jeesl.util.query.xml.module.XmlCalendarQuery;
 import org.slf4j.Logger;
@@ -27,9 +23,9 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 									CALENDAR extends JeeslCalendar<ZONE,CT>,
 									ZONE extends JeeslCalendarTimeZone<L,D>,
 									CT extends JeeslCalendarScope<L,D,CT,?>,
-									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-									IT extends JeeslCalendarItemType<L,D,?,IT,?>
-									>
+									ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
+									IT extends JeeslCalendarItemType<L,D,?,IT,?>,
+									USER extends JeeslSimpleUser>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlCalendarItemFactory.class);
 	
@@ -48,10 +44,11 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 					CALENDAR extends JeeslCalendar<ZONE,CT>,
 					ZONE extends JeeslCalendarTimeZone<L,D>,
 					CT extends JeeslCalendarScope<L,D,CT,?>,
-					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
-					IT extends JeeslCalendarItemType<L,D,?,IT,?>
+					ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,USER>,
+					IT extends JeeslCalendarItemType<L,D,?,IT,?>,
+					USER extends JeeslSimpleUser
 					>
-	XmlCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT> instance(String localeCode, XmlCalendarQuery.Key key)
+	XmlCalendarItemFactory<L,D,CALENDAR,ZONE,CT,ITEM,IT,USER> instance(String localeCode, XmlCalendarQuery.Key key)
 	{
 		return new XmlCalendarItemFactory<>(localeCode,XmlCalendarQuery.get(key, localeCode).getItem(),null);
 	}

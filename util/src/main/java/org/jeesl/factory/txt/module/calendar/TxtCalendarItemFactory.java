@@ -17,7 +17,7 @@ public class TxtCalendarItemFactory<L extends JeeslLang, D extends JeeslDescript
 								CALENDAR extends JeeslCalendar<ZONE,CT>,
 								ZONE extends JeeslCalendarTimeZone<L,D>,
 								CT extends JeeslCalendarScope<L,D,CT,?>,
-								ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT>,
+								ITEM extends JeeslCalendarItem<CALENDAR,ZONE,IT,?>,
 								IT extends JeeslCalendarItemType<L,D,?,IT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtCalendarItemFactory.class);

@@ -26,7 +26,7 @@
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTicket()}" update=":#{cc.id}:sTicket :#{cc.id}:sMessage"/>
 					<p:column>
-						<jtp:label entity="HdTicket" code="createdAt"/>
+						<f:facet name="header"><jtp:label entity="HdTicket" code="createdAt"/></f:facet>
 						<jtp:symbolizer value="#{t.lastEvent.status}" marginRight="5"/>
 						<jp:outputDate type="both" value="#{t.firstEvent.record}"/>
 					</p:column>
@@ -35,17 +35,17 @@
 						<jtp:symbolizer value="#{t.lastEvent.status}"/>
 					</p:column>
 					<p:column>
-						<jtp:label entity="HdEvent" code="reporter"/>
+						<f:facet name="header"><jtp:label entity="HdEvent" code="reporter"/></f:facet>
 						<jtp:symbolizer value="#{t.firstEvent.reporterPriority}" marginRight="5"/>
 						<h:outputText value="#{t.firstEvent.reporter.firstName}"/>
 					</p:column>
-					<p:column headerText="#{msg.jeeslHdIssue}">  
+					<p:column> 
+						<f:facet name="header"><jtp:label entity="HdTicket" code="name"/></f:facet>
 						<jtp:symbolizer value="#{t.lastEvent.category}" marginRight="5"/>
 						<p:commandLink update=":#{cc.id}:grid" 
 		                		action="#{cc.attrs.bean.selectTicket(t)}" style="text-decoration: underline; color: blue; margin-right:10px;">
 								<h:outputText value="#{of:abbreviate(t.name,30)}"/>
 					   	</p:commandLink>
-						
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="HdTicket" code="supporter"/></f:facet>
@@ -77,13 +77,13 @@
                         	<f:selectItems value="#{cc.attrs.bean.sbhStatus.list}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
                         </p:selectOneMenu>
                         
-                        <p:outputLabel value="#{msg.jeeslHdSupporter}"/>
+                        <jtp:label entity="HdEvent" code="supporter"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.lastEvent.supporter}" effect="fade" autoWidth="false">
 							<f:selectItem itemLabel="--"/>
                         	<f:selectItems value="#{cc.attrs.bean.supporters}" var="u" itemLabel="#{u.firstName} #{u.lastName}" itemValue="#{u}"/>
                         </p:selectOneMenu>
                         
-                        <jtp:label entity="HdLevel"/>
+                        <jtp:label entity="HdEvent" code="level"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.lastEvent.level}" effect="fade" autoWidth="false">
                         	<f:selectItems value="#{cc.attrs.bean.levels}" var="l" itemLabel="#{l.name[localeCode].lang}" itemValue="#{l}"/>
                         </p:selectOneMenu>
@@ -98,7 +98,7 @@
                         	<f:selectItems value="#{cc.attrs.bean.priorities}" var="p" itemLabel="#{p.name[localeCode].lang}" itemValue="#{p}"/>
                         </p:selectOneMenu>
                            
-                        <p:outputLabel value="#{msg.jeeslHdTicketName}"/>
+						<jtp:label entity="HdTicket" code="name"/>
 						<h:outputText value="#{cc.attrs.bean.ticket.name}"/>
 					</p:panelGrid>
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
@@ -111,11 +111,12 @@
 			<p:dataTable var="e" value="#{cc.attrs.bean.events}" draggableRows="false" rendered="#{not empty cc.attrs.bean.ticket}"
 						rows="5" paginator="true" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 				<f:facet name="header">
-					<j:dtHeader title="#{msg.jeeslHdEvents}">
+					<j:dtHeader entity="HdEvent" code="listOf">
 						
 					</j:dtHeader>
 				</f:facet>
-				<p:column headerText="#{msg.jeeslHdRecord}">  
+				<p:column>
+					<f:facet name="header"><jtp:label entity="HdEvent" code="record"/></f:facet>
 					<jp:outputDate type="both" value="#{e.record}" withSecond="true"/>
 					<br/>
 					<h:outputText value="#{e.initiator.firstName} #{e.initiator.lastName}" />
@@ -126,7 +127,8 @@
 					</ui:remove>
 					<h:outputText value="#{of:abbreviate(e.initiator.firstName,1)}#{of:abbreviate(e.initiator.lastName,1)}" />
 				</p:column>
-				<p:column headerText="#{msg.jeeslHdEventChange}">
+				<p:column>
+					<f:facet name="header"><jtp:label entity="HdEvent" code="change"/></f:facet>
 					<ui:repeat var="t" value="#{e.types}">
 						<jtp:symbolizer value="#{t}" marginRight="2"/>
 						<h:outputText value=": "/>
@@ -180,10 +182,10 @@
 						</ui:fragment>
 					</p:panelGrid>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{cc.attrs.bean.editHandler.allow}">
-						<p:outputLabel value="#{msg.jeeslHdRecord}"/>
+						<jtp:label entity="HdMessage" code="record"/>
 						<jp:outputDate type="both" value="#{cc.attrs.bean.message.record}" withSecond="true"/>
 						
-						<p:outputLabel value="#{msg.jeeslHdScope}"/>
+						<jtp:label entity="HdMessage" code="scope"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.message.scope}" effect="fade" autoWidth="false">
                         	<f:selectItems value="#{cc.attrs.bean.scopes}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
                         </p:selectOneMenu>
