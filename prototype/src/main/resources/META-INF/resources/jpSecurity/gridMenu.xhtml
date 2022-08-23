@@ -19,7 +19,7 @@
 						<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}" library="jeeslGfx"/>
 						<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseTree()}" update="@form" rendered="#{cc.attrs.bean.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}" library="jeeslGfx"/>
 					</f:facet>
-					<p:tree id="tree1" value="#{cc.attrs.bean.tree}" var="node" 
+					<p:tree id="tree1" var="node" value="#{cc.attrs.bean.tree}" 
 						selection="#{cc.attrs.bean.node}" selectionMode="single"
 		                draggable="true" droppable="true" dragdropScope="demo">
 		                <p:ajax event="select" listener="#{cc.attrs.bean.onNodeSelect}" update=":#{cc.id}:sView"/>
@@ -27,7 +27,8 @@
 			            <p:ajax event="expand" listener="#{cc.attrs.bean.onNodeExpand}" />
 						<p:ajax event="collapse" listener="#{cc.attrs.bean.onNodeCollapse}" />
 			            <p:treeNode>
-			                <h:outputText value="#{node.view.category.position}.#{node.view.position} #{node.view.name[localeCode].lang}" />
+			                <h:outputText value="#{node.view.category.position}.#{node.view.position} #{node.view.name[localeCode].lang}"
+			                			style="#{not node.visible? 'opacity: 0.5; font-style: italic;':''}"/>
 			            </p:treeNode>
 			        </p:tree>
 				</p:panel>
@@ -38,22 +39,34 @@
 			</h:form>
 		</j:slot>
 		<j:slot id="sView" width="7">
-			<p:panel header="#{msg.jeeslSecurityMenu}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.menu}">
-				<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-					<p:outputLabel value="#{msg.jeeslCategory}"/>
-					<h:outputText value="#{cc.attrs.bean.menu.view.category.name[localeCode].lang}"/>
-					<p:outputLabel value="#{msg.jeeslCode}"/>
-					<h:outputText value="#{cc.attrs.bean.menu.view.code}"/>
-					<p:outputLabel value="#{msg.aupSecurityView}"/>
-					<h:outputText value="#{cc.attrs.bean.menu.view.name[localeCode].lang}"/>
-					<p:outputLabel value="#{msg.aupSecurityViewPattern}"/>
-					<h:outputText value="#{cc.attrs.bean.menu.view.viewPattern}"/>
-					<p:outputLabel value="#{msg.jeeslSecurityViewMapping}"/>
-					<h:outputText value="#{cc.attrs.bean.menu.view.urlMapping}"/>
-					<p:outputLabel value="#{msg.jeeslDescription}"/>
-					<h:outputText value="#{cc.attrs.bean.menu.view.description[localeCode].lang}"/>
-				</p:panelGrid>
-			</p:panel>
+			<h:form id="fMenu">
+				<p:panel header="#{msg.jeeslSecurityMenu}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.menu}">
+					<f:facet name="header"><j:pHeader entity="SecurityMenu"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveMenu()}" update="@form"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<jtp:label entity="SecurityMenu" code="visible"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.menu.visible}"/>
+						
+						<p:outputLabel value="#{msg.jeeslCategory}"/>
+						<h:outputText value="#{cc.attrs.bean.menu.view.category.name[localeCode].lang}"/>
+						<p:outputLabel value="#{msg.jeeslCode}"/>
+						<h:outputText value="#{cc.attrs.bean.menu.view.code}"/>
+						<p:outputLabel value="#{msg.aupSecurityView}"/>
+						<h:outputText value="#{cc.attrs.bean.menu.view.name[localeCode].lang}"/>
+						<p:outputLabel value="#{msg.aupSecurityViewPattern}"/>
+						<h:outputText value="#{cc.attrs.bean.menu.view.viewPattern}"/>
+						<p:outputLabel value="#{msg.jeeslSecurityViewMapping}"/>
+						<h:outputText value="#{cc.attrs.bean.menu.view.urlMapping}"/>
+						
+						<jtp:label entity="SecurityView" code="description"/>
+						<h:outputText value="#{cc.attrs.bean.menu.view.description[localeCode].lang}"/>
+						
+						
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
 			<h:form id="fHelps" rendered="#{not empty cc.attrs.bean.menu}">
 				<p:dataTable var="h" value="#{cc.attrs.bean.helps}" draggableRows="true"
 					selection="#{cc.attrs.bean.help}" selectionMode="single" rowKey="#{h.id}">

@@ -305,6 +305,13 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 
 		reloadHelps();
     }
+    
+    public void saveMenu() throws JeeslConstraintViolationException, JeeslLockingException
+    {
+    	logger.info(AbstractLogMessage.saveEntity(menu));
+    	menu = fSecurity.save(menu);
+    	propagateChanges();
+    }
 
     private void reloadHelps()
     {
@@ -313,7 +320,6 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
     }
 
     // Handler Tree-Select
-
 	private TreeNode helpTree; public TreeNode getHelpTree() {return helpTree;}
 	private TreeNode helpNode; public TreeNode getHelpNode() {return helpNode;} public void setHelpNode(TreeNode helpNode) {this.helpNode = helpNode;}
 

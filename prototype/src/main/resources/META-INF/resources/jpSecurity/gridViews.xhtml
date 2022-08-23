@@ -148,11 +148,11 @@
 		            </p:column>
 		       	</p:dataTable>
 			</h:form>
-			<h:form id="fAction">						
+			<h:form id="fAction">					
 				<p:panel rendered="#{not empty cc.attrs.bean.action}" header="#{msg.jeeslSecurityAction}" styleClass="jeeslPanel">
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttSave}"/>
-						<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.hasDeveloperAction}" listener="#{cc.attrs.bean.rmAction()}" update=":#{cc.id}:sView" tooltip="#{msg.ttDelete}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttSave}"/>
+						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.hasDeveloperAction}" listener="#{cc.attrs.bean.rmAction()}" update=":#{cc.id}:sView"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<p:outputLabel value="#{msg.jeeslSecurityActionTemplate}"/>

@@ -102,7 +102,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		List<M> list = new ArrayList<>();
 		for(M m : tmp)
 		{
-			if(userHasAccessTo(m))
+			if(userHasAccessTo(m) && (m.getVisible()==null || m.getVisible()))
 			{	
 				list.add(m);
 			}
