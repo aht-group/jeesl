@@ -11,7 +11,6 @@ import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
-import org.jeesl.factory.txt.system.security.TxtSecurityActionFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
@@ -62,8 +61,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	protected V view; public V getView() {return view;}
 	private M menu; public M getMenu() {return menu;}
 
-	protected TxtSecurityActionFactory<L,D,V,A,AT> txtAction;
-	protected Comparator<A> comparatorAction;
+	private Comparator<A> comparatorAction;
 	
 	protected final Map<R,Boolean> mapHasRole; @Override public Map<R,Boolean> getMapHasRole() {return mapHasRole;}
 	protected final Map<String,Boolean> mapAllow; public Map<String,Boolean> getMapAllow(){return mapAllow;}
@@ -98,11 +96,9 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		actions = new ArrayList<A>();
 		areas = new ArrayList<AR>();
 		
-		SecurityActionComparator<L,D,C,R,V,U,A,AT,USER> cfAction = new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>();
+		SecurityActionComparator<C,V,A,AT> cfAction = new SecurityActionComparator<>();
 		cfAction.factory(SecurityActionComparator.Type.position);
 		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
-		
-		txtAction = new TxtSecurityActionFactory<>();
 		
 		try
 		{
@@ -124,8 +120,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
 			JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
 			I identity,
-			V view
-			)
+			V view)
 	{
 		logger.trace(this.getClass().getSimpleName()+" with "+JeeslSecurityBean.class.getSimpleName());
 		this.fbSecurity=fbSecurity;
@@ -146,11 +141,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 		mapHasRole = new HashMap<>();
 		actions = new ArrayList<>();
 		
-		SecurityActionComparator<L,D,C,R,V,U,A,AT,USER> cfAction = new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>();
-//		cfAction.factory(SecurityActionComparator.Type.position);
-		comparatorAction = cfAction.factory(SecurityActionComparator.Type.position);
-		
-		txtAction = new TxtSecurityActionFactory<>();
+		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
 		
 		roles = bSecurity.fRoles(view);
 		areas = bSecurity.fAreas(view);

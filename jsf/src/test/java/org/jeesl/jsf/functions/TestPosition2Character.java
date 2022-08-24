@@ -1,5 +1,6 @@
 package org.jeesl.jsf.functions;
 
+import org.jeesl.jsf.function.Position2Character;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

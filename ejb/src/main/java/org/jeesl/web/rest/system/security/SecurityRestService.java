@@ -119,7 +119,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 		comparatorRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
 		comparatorView = (new SecurityViewComparator<V>()).factory(SecurityViewComparator.Type.position);
 		comparatorUsecase = (new SecurityUsecaseComparator<L,D,C,R,V,U,A,AT,USER>()).factory(SecurityUsecaseComparator.Type.position);
-		comparatorAction = (new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>()).factory(SecurityActionComparator.Type.position);
+		comparatorAction = (new SecurityActionComparator<C,V,A,AT>()).factory(SecurityActionComparator.Type.position);
 		
 		viewUpdater = new SecurityViewUpdater<>(fbSecurity,fSecurity);
 		initTemplates = new SecurityTemplateUpdater<>(fbSecurity,fSecurity);

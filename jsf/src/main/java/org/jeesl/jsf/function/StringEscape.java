@@ -1,4 +1,4 @@
-package org.jeesl.jsf.functions;
+package org.jeesl.jsf.function;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 

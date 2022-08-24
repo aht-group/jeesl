@@ -1,4 +1,4 @@
-package org.jeesl.jsf.functions;
+package org.jeesl.jsf.function;
 
 public final class HumanFileSize
 {

@@ -1,5 +1,7 @@
 package org.jeesl.factory.builder.system;
 
+import java.util.Comparator;
+
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityActionFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityActionTemplateFactory;
@@ -36,6 +38,7 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.util.comparator.ejb.system.security.SecurityActionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -130,4 +133,6 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 	public JsonPagesFactory<L,D,C,R,V,U,A,AT,CTX,M,AR,USER> jsonPages() {return new JsonPagesFactory<>(this);}
 	
 	public SqlUserFactory<USER> sqlUser() {return new SqlUserFactory<>();}
+	
+	public Comparator<A> comparatorAction(SecurityActionComparator.Type type) {return (new SecurityActionComparator<C,V,A,AT>()).factory(type);}
 }

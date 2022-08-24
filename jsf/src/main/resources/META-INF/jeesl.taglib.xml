@@ -98,27 +98,27 @@
 	</function>
 	<function>
 		<function-name>humanFileSize</function-name>
-		<function-class>org.jeesl.jsf.functions.HumanFileSize</function-class>
+		<function-class>org.jeesl.jsf.function.HumanFileSize</function-class>
 		<function-signature>java.lang.String humanFileSize(java.lang.Long)</function-signature>
 	</function>
 	<function>
 		<function-name>posToChar</function-name>
-		<function-class>org.jeesl.jsf.functions.Position2Character</function-class>
+		<function-class>org.jeesl.jsf.function.Position2Character</function-class>
 		<function-signature>java.lang.String toChar(java.lang.Integer)</function-signature>
 	</function>
 	<function>
 		<function-name>escapeJavaScript</function-name>
-		<function-class>org.jeesl.jsf.functions.StringEscape</function-class>
+		<function-class>org.jeesl.jsf.function.StringEscape</function-class>
 		<function-signature>java.lang.String escapeJavaScript(java.lang.String)</function-signature>
 	</function>
 	<function>
 		<function-name>escapeJava</function-name>
-		<function-class>org.jeesl.jsf.functions.StringEscape</function-class>
+		<function-class>org.jeesl.jsf.function.StringEscape</function-class>
 		<function-signature>java.lang.String escapeJava(java.lang.String)</function-signature>
 	</function>
 	<function>
 		<function-name>escapeHtml</function-name>
-		<function-class>org.jeesl.jsf.functions.StringEscape</function-class>
+		<function-class>org.jeesl.jsf.function.StringEscape</function-class>
 		<function-signature>java.lang.String escapeHtml(java.lang.String)</function-signature>
 	</function>
 		<function>

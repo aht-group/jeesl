@@ -113,7 +113,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		comparatorRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
 		comparatorView = (new SecurityViewComparator<V>()).factory(SecurityViewComparator.Type.position);
 		comparatorUsecase = (new SecurityUsecaseComparator<L,D,C,R,V,U,A,AT,USER>()).factory(SecurityUsecaseComparator.Type.position);
-		comparatorAction = (new SecurityActionComparator<L,D,C,R,V,U,A,AT,USER>()).factory(SecurityActionComparator.Type.position);
+		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
 	}
 	
 	public void postConstructSecurity(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
