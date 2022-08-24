@@ -10,7 +10,7 @@
 	
 	<composite:implementation>
 		
-		<p:panel header="#{msg.jeeslSecurityLogin}" styleClass="jeeslPanel">
+		<p:panel header="#{msg.jeeslSecurityLogin}" styleClass="jeeslPanel jeesl-panel">
 			<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 				<p:outputLabel for="name" value="#{msg.jeeslSecurityEmail}"/>
 				<p:inputText id="name" value="#{cc.attrs.bean.identity.loginName}"/>

@@ -565,7 +565,9 @@ $border: $border-width solid $border-colour;
 	
 	.#{$class}-header {
 		align-items: center;
-		background: statusBackgroundGradient($ls-element-height);
+		background-image: $status-bar-background-gradient;
+		background-repeat: repeat;
+		background-size: 100% $ls-element-height;
 		border: 0;
 		border-radius: 0;
 		color: $white-100;
@@ -576,7 +578,7 @@ $border: $border-width solid $border-colour;
 		text-shadow: none;
 		
 		@media (max-height: 768px) {
-			background: statusBackgroundGradient($ls-element-height-mobile);
+			background-size: 100% $ls-element-height-mobile;
 		}
 		
 		.#{$class}-title {
