@@ -131,7 +131,7 @@ html, body, .ui-widget {
 .ui-selectcheckboxmenu-panel {
   padding: 15px 0; }
   .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header {
-    background: repeating-linear-gradient(to bottom, #00663a, #007a45 84px); }
+    background-size: 100% 84px; }
     .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-title {
       line-height: 84px; }
     .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon:before {
@@ -146,7 +146,7 @@ html, body, .ui-widget {
 .ui-datepicker {
   padding: 15px 0; }
   .ui-datepicker .ui-datepicker-header {
-    background: repeating-linear-gradient(to bottom, #00663a, #007a45 84px); }
+    background-size: 100% 84px; }
     .ui-datepicker .ui-datepicker-header .ui-datepicker-title {
       line-height: 84px; }
     .ui-datepicker .ui-datepicker-header .ui-icon:before {
@@ -250,6 +250,8 @@ html, body, .ui-widget {
       transform: translateY(calc(84px / 4)) rotate(-45deg); }
     .jeesl-header .jeesl-burger-menu-icon.jeesl-active:after {
       transform: translateY(calc(-84px / 4)) rotate(45deg); }
+  .jeesl-header > a .jeesl-logo {
+    height: 76px; }
   .jeesl-header .jeesl-burger-menu-icon {
     display: inline-block;
     top: 0; }
@@ -348,7 +350,7 @@ html, body, .ui-widget {
       display: list-item; }
 
 .jeesl-status-bar {
-  background: repeating-linear-gradient(to bottom, #00663a, #007a45 84px);
+  background-size: 100% 84px;
   height: auto;
   margin-top: 0; }
   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item {
@@ -493,7 +495,7 @@ html, body, .ui-widget {
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item {
           height: auto; }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.jeesl-active .ui-selectonemenu-item-text {
-            background: repeating-linear-gradient(to bottom, #00663a, #007a45 84px); }
+            background-size: 100% 84px; }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:after {
             margin: 0; }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .ui-selectonemenu-item-text {
@@ -623,50 +625,48 @@ html, body, .ui-widget {
     margin: 5px -15px; }
     .jeesl-panel .jeesl-tabs:last-child {
       margin-bottom: -10px; }
-  .jeesl-panel .ui-panel-content {
-    padding: 10px 15px; }
-    .jeesl-panel .ui-panel-content .ui-fluid .p-grid {
-      display: block;
-      padding: 0; }
-      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
-        left: 50%;
-        line-height: normal;
-        padding: 0;
-        position: absolute;
-        top: 0;
-        transform: translate(-50%, 0);
-        width: auto;
-        z-index: 1; }
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
-          left: 15px;
-          transform: none; }
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
-          left: auto;
-          right: 15px;
-          transform: none; }
-      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
-        line-height: normal;
-        padding: 0.5em 0 2px 0;
-        width: 100% !important; }
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-          padding: 0 10px;
-          width: 100%; }
-          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * > .ui-inputfield {
-            padding-left: 10px; }
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
-          align-items: center;
-          background: #dedede;
-          display: flex; }
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
-          padding: 0; }
-    .jeesl-panel .ui-panel-content .ui-galleria {
-      margin: -5px -15px -10px;
-      max-width: calc(100% + (2 * 15px));
-      width: calc(100% + (2 * 15px)) !important; }
-    .jeesl-panel .ui-panel-content .ui-separator {
-      background: #dedede;
-      height: 2px;
-      margin: 6px -10px; }
+  .jeesl-panel .ui-panel-content .ui-fluid .p-grid {
+    display: block;
+    padding: 0; }
+    .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
+      left: 50%;
+      line-height: normal;
+      padding: 0;
+      position: absolute;
+      top: 0;
+      transform: translate(-50%, 0);
+      width: auto;
+      z-index: 1; }
+      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
+        left: 15px;
+        transform: none; }
+      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
+        left: auto;
+        right: 15px;
+        transform: none; }
+    .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
+      line-height: normal;
+      padding: 0.5em 0 2px 0;
+      width: 100% !important; }
+      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+        padding: 0 10px;
+        width: 100%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * > .ui-inputfield {
+          padding-left: 10px; }
+      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+        align-items: center;
+        background: #dedede;
+        display: flex; }
+      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
+        padding: 0; }
+  .jeesl-panel .ui-panel-content .ui-galleria {
+    margin: -5px -15px -10px;
+    max-width: calc(100% + (2 * 15px));
+    width: calc(100% + (2 * 15px)) !important; }
+  .jeesl-panel .ui-panel-content .ui-separator {
+    background: #dedede;
+    height: 2px;
+    margin: 6px -10px; }
   .jeesl-panel .ui-panel-footer {
     margin: 5px 0 0;
     border-width: 4px 0 0; }
@@ -737,139 +737,137 @@ html, body, .ui-widget {
   width: calc(100% - 10px); }
 .jeesl-content .jeesl-content-container .jeesl-grid-12 {
   width: calc(100% - 10px); }
-.jeesl-content .jeesl-content-container .ui-panel {
+.jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) {
   padding: 0; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor {
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-texteditor {
     margin-left: -15px;
     margin-right: -15px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor:first-child {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-texteditor:first-child {
       margin-top: -10px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor:last-child {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-texteditor:last-child {
       margin-bottom: -10px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor .ql-toolbar {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-texteditor .ql-toolbar {
       padding: 0; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor .ql-toolbar button {
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-texteditor .ql-toolbar button {
         height: 84px;
         padding: 15px;
         width: 84px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor .ql-container {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-texteditor .ql-container {
       font-size: 1em; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor .ql-container .ql-editor {
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-texteditor .ql-container .ql-editor {
         min-height: 84px; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar {
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar {
     border-radius: 3px 3px 0 0;
     border-width: 0;
     margin: 0 0 4px 0;
     min-height: 84px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar:after {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar:after {
       display: block; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-title {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-title {
       font-size: 1.4em;
       letter-spacing: -.5px;
       padding: 5px 10px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions img {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions img {
       height: calc(84px - 2 * 6px);
       padding: 0 6px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions > img {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions > img {
       margin: 6px 0; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions .jeesl-action-icon {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions .jeesl-action-icon {
       padding: 6px 0; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-actions .jeesl-action-icon:before {
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions .jeesl-action-icon:before {
         border-left: 1px solid #ababab; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid:last-child .ui-panelgrid-cell .ui-datatable {
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid:last-child .ui-panelgrid-cell .ui-datatable {
     margin-bottom: -5px; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui.panelgrid-cell .ui-datatable {
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui.panelgrid-cell .ui-datatable {
     margin: 0 -10px;
     width: calc(100% + (2 * 10px)); }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header {
     border-radius: 3px 3px 0 0;
     border-width: 0;
     margin: 0 0 4px 0;
     min-height: 84px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header:after {
       display: block; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
       font-size: 1.4em;
       letter-spacing: -.5px;
       padding: 5px 10px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
       height: calc(84px - 2 * 6px);
       padding: 0 6px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
       margin: 6px 0; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
       padding: 6px 0; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
         border-left: 1px solid #ababab; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
     font-size: 1.2em; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content {
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-tree .ui-treenode .ui-treenode-content {
     border-bottom: 2px solid #c4c4c4;
     height: 84px; }
     @media (max-width: 768px) {
-      .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content {
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-tree .ui-treenode .ui-treenode-content {
         font-size: 1.1em; } }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content.ui-droppable {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-tree .ui-treenode .ui-treenode-content.ui-droppable {
       height: 46px;
       line-height: 42px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-leaf-icon {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-leaf-icon {
       display: none; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-leaf-icon ~ .ui-treenode-label {
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-leaf-icon ~ .ui-treenode-label {
         padding-left: 43px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
       min-width: 30px; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler:after {
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler:after {
         border-width: 8px 0 8px 8px; }
-  .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs {
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .jeesl-tabs {
     border-top: 1px solid #ababab;
     margin: 5px -15px; }
-    .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs:last-child {
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .jeesl-tabs:last-child {
       margin-bottom: -10px; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content {
-    padding: 10px 15px; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid {
-      display: block;
-      padding: 0; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
-        left: 50%;
-        line-height: normal;
-        padding: 0;
-        position: absolute;
-        top: 0;
-        transform: translate(-50%, 0);
-        width: auto;
-        z-index: 1; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
-          left: 15px;
-          transform: none; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
-          left: auto;
-          right: 15px;
-          transform: none; }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
-        line-height: normal;
-        padding: 0.5em 0 2px 0;
-        width: 100% !important; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-          padding: 0 10px;
-          width: 100%; }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * > .ui-inputfield {
-            padding-left: 10px; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
-          align-items: center;
-          background: #dedede;
-          display: flex; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
-          padding: 0; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria {
-      margin: -5px -15px -10px;
-      max-width: calc(100% + (2 * 15px));
-      width: calc(100% + (2 * 15px)) !important; }
-    .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-separator {
-      background: #dedede;
-      height: 2px;
-      margin: 6px -10px; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-panel-footer {
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid {
+    display: block;
+    padding: 0; }
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
+      left: 50%;
+      line-height: normal;
+      padding: 0;
+      position: absolute;
+      top: 0;
+      transform: translate(-50%, 0);
+      width: auto;
+      z-index: 1; }
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
+        left: 15px;
+        transform: none; }
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
+        left: auto;
+        right: 15px;
+        transform: none; }
+    .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
+      line-height: normal;
+      padding: 0.5em 0 2px 0;
+      width: 100% !important; }
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+        padding: 0 10px;
+        width: 100%; }
+        .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * > .ui-inputfield {
+          padding-left: 10px; }
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+        align-items: center;
+        background: #dedede;
+        display: flex; }
+      .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu {
+        padding: 0; }
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-galleria {
+    margin: -5px -15px -10px;
+    max-width: calc(100% + (2 * 15px));
+    width: calc(100% + (2 * 15px)) !important; }
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-separator {
+    background: #dedede;
+    height: 2px;
+    margin: 6px -10px; }
+  .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-footer {
     margin: 5px 0 0;
     border-width: 4px 0 0; }
 .jeesl-content .jeesl-content-container .height-balance-container > .jeesl-grid {

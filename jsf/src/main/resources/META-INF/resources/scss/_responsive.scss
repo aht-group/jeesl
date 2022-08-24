@@ -908,13 +908,15 @@ body, .ui-widget {
 .jeesl-status-bar {
 	@include jeesl-menu-bar;
 	
-	background: statusBackgroundGradient($sb-element-height);
+	background-image: linear-gradient(to bottom, $dark-colour, $medium-colour);
+	background-repeat: repeat;
+	background-size: 100% $sb-element-height;
     height: auto;
 	line-height: normal;
     margin: -10px 10px 10px;
 
 	@media (max-width: 768px) {
-		background: statusBackgroundGradient($sb-element-height-mobile);
+		background-size: 100% $sb-element-height-mobile;
 		height: auto;
 	}
 
@@ -2165,6 +2167,14 @@ body, .ui-widget {
 		padding: 0;
 	}
 	
+	&:not(.html-container-panel) .ui-panel-content {
+		background: transparent;
+		border: 0;
+		flex: 1;
+		overflow-x: auto;
+		padding: $half-spacing $regular-spacing;
+	}
+	
 	&.jeesl-editor {
 		.ui-panel-content {
 			overflow: visible;
@@ -2437,12 +2447,6 @@ body, .ui-widget {
 		@include input-grid;
 		@include image-gallery;
 		
-		background: transparent;
-		border: 0;
-		flex: 1;
-		overflow-x: auto;
-		padding: $half-spacing $regular-spacing;
-		
 		.ui-galleria {
 			border: 0;
 			margin: -6px -10px -4px;
@@ -2476,6 +2480,13 @@ body, .ui-widget {
 	
 	.ui-widget-content {
 		background: transparent;
+		
+		.ui-treenode.jeesl-disabled {
+			> .ui-treenode-content > .ui-treenode-label {
+			    font-style: italic;
+				opacity: .5;
+			}
+		}
 	}
 }
 
