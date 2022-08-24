@@ -10,7 +10,11 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslIoSsiHost <L extends JeeslLang, D extends JeeslDescription,
 									SYSTEM extends JeeslIoSsiSystem<?,?>>
 							extends Serializable,EjbSaveable,

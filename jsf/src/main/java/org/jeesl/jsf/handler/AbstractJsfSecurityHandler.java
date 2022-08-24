@@ -76,7 +76,7 @@ public abstract class AbstractJsfSecurityHandler <L extends JeeslLang, D extends
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
 	@Deprecated //Use the next constructor with caching features of JeeslSecurityBean!
-	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
+	private AbstractJsfSecurityHandler(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
 									I identity,
 									JeeslSecurityFacade<L,D,C,R,V,U,A,AT,?,?,USER> fSecurity,
 									String pageCode)
