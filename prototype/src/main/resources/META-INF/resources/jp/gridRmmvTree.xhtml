@@ -51,6 +51,44 @@
 				</p:panelGrid>
 			</p:panel>
 		</h:form>
+		<h:form id="fConfigs">
+			<p:dataTable var="c" value="#{cc.attrs.controller.configs}" draggableRows="false"
+							selection="#{cc.attrs.controller.config}" selectionMode="single" rowKey="#{c.id}"
+							rendered="#{not empty cc.attrs.controller.element}">
+				<f:facet name="header">
+					<j:dtHeader entity="RmmvConfig" code="listOf">
+						<j:svg type="jeeslAdd" listener="#{cc.attrs.controller.addConfig()}" update="@form :#{cc.id}:fConfig"/>
+					</j:dtHeader>
+				</f:facet>
+				<p:ajax event="rowSelect" listener="#{cc.attrs.controller.selectConfig()}" update=":#{cc.id}:fConfig"/>
+				<p:column>
+					<jtp:symbolizer value="#{c.module}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header"><jtp:label entity="RmmvConfig" code="module"/></f:facet>
+					<h:outputText value="#{c.module.name[localeCode].lang}"/>
+				</p:column>
+		   	</p:dataTable>
+		</h:form>
+		<h:form id="fConfig">
+			<p:panel styleClass="jeeslPanel" rendered="#{not empty cc.attrs.controller.config}">
+				<f:facet name="header"><j:pHeader entity="RmmvConfig"/></f:facet>
+				<f:facet name="actions">
+					<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveConfig()}" update=":#{cc.id}:fConfigs @form"/>
+				</f:facet>
+				<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					
+					<jtp:label entity="RmmvConfig" code="element"/>
+					<p:inputText value="#{cc.attrs.controller.config.element.name[cc.attrs.controller.sbhLocale.selection.code].lang}"/>
+					
+					<jtp:label entity="RmmvConfig" code="module"/>
+					<p:selectOneMenu value="#{cc.attrs.controller.config.module}" effect="fade" autoWidth="false" dynamic="true">
+						<f:selectItems value="#{cc.attrs.controller.modules}" var="c" itemLabel="#{c.name[cc.attrs.controller.sbhLocale.selection.code].lang}" itemValue="#{c}"/>
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
 	</j:slot>
 </jp:grid>
 	</composite:implementation>
