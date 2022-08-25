@@ -2,33 +2,31 @@ package org.jeesl.factory.ejb.module.rmmv;
 
 import java.util.UUID;
 
-import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvElement;
+import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvClassification;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbRmmvTreeElementFactory<L extends JeeslLang,
+public class EjbRmmvClassificationFactory<L extends JeeslLang,
 								R extends JeeslTenantRealm<L,?,R,?>, 
-								EH extends JeeslRmmvElement<L,R,EH>>
+								EC extends JeeslRmmvClassification<L,R,EC,?>>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbRmmvTreeElementFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbRmmvClassificationFactory.class);
 	
-//	private final EjbIoCmsMarkupFactory<M,MT> efMarkup;
-	
-	private final Class<EH> cElement;
+	private final Class<EC> cClassification;
 
-    public EjbRmmvTreeElementFactory(final Class<EH> cElement)
+    public EjbRmmvClassificationFactory(final Class<EC> cClassification)
     {
-        this.cElement = cElement;
+        this.cClassification = cClassification;
     }
 	
-	public <RREF extends EjbWithId> EH build(R realm, RREF rref)
+	public <RREF extends EjbWithId> EC build(R realm, RREF rref)
 	{
 		try
 		{
-			EH ejb = cElement.newInstance();
+			EC ejb = cClassification.newInstance();
 			ejb.setRealm(realm);
 			ejb.setRref(rref.getId());
 			ejb.setCode(UUID.randomUUID().toString());

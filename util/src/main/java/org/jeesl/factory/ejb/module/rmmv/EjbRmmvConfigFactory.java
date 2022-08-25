@@ -5,11 +5,11 @@ import java.util.List;
 import org.jeesl.factory.ejb.util.EjbPositionFactory;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModule;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModuleConfig;
-import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvTreeElement;
+import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbRmmvConfigFactory<TE extends JeeslRmmvTreeElement<?,?,TE>,
+public class EjbRmmvConfigFactory<TE extends JeeslRmmvElement<?,?,TE>,
 									MOD extends JeeslRmmvModule<?,?,MOD,?>,
 									MC extends JeeslRmmvModuleConfig<TE,MOD>>
 {

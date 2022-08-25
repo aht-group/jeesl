@@ -16,9 +16,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslRmmvTreeElement<L extends JeeslLang,
+public interface JeeslRmmvElement<L extends JeeslLang,
 										R extends JeeslTenantRealm<L,?,R,?>,
-										TE extends JeeslRmmvTreeElement<L,R,TE>>
+										TE extends JeeslRmmvElement<L,R,TE>>
 						extends Serializable,EjbSaveable,
 								EjbWithId,EjbWithNonUniqueCode,
 								EjbWithPositionVisible,
@@ -26,6 +26,5 @@ public interface JeeslRmmvTreeElement<L extends JeeslLang,
 								JeeslWithTenantSupport<R>
 								
 {	
-//	E getParent();
-//	void setParent(E parent);
+//	void x();
 }

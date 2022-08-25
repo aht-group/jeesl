@@ -5,7 +5,7 @@ import org.jeesl.factory.ejb.module.rmmv.EjbRmmvConfigFactory;
 import org.jeesl.factory.ejb.module.rmmv.EjbRmmvTreeElementFactory;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModule;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModuleConfig;
-import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvTreeElement;
+import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvElement;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class RmmvFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								R extends JeeslTenantRealm<L,D,R,?>, 
-								TE extends JeeslRmmvTreeElement<L,R,TE>,
+								TE extends JeeslRmmvElement<L,R,TE>,
 								MOD extends JeeslRmmvModule<?,?,MOD,?>,
 								MC extends JeeslRmmvModuleConfig<TE,MOD>>
 	extends AbstractFactoryBuilder<L,D>
@@ -36,6 +36,7 @@ public class RmmvFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 		this.cConfig = cConfig;
 	}
 	
+//	public EjbRmmvClassificationFactory<L,R,TE> ejbClassification(){return new EjbRmmvClassificationFactory<>(cElement);}
 	public EjbRmmvTreeElementFactory<L,R,TE> ejbElement(){return new EjbRmmvTreeElementFactory<>(cElement);}
 	public EjbRmmvConfigFactory<TE,MOD,MC> ejbConfig(){return new EjbRmmvConfigFactory<>(cConfig);}
 }

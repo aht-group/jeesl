@@ -16,7 +16,7 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.controller.web.module.rmmv.JeeslRmmvElementCallback;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModule;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModuleConfig;
-import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvTreeElement;
+import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvElement;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -34,23 +34,22 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslRmmvTreeElementController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
-											TE extends JeeslRmmvTreeElement<L,R,TE>,
+											TE extends JeeslRmmvElement<L,R,TE>,
 											MOD extends JeeslRmmvModule<?,?,MOD,?>,
 											MC extends JeeslRmmvModuleConfig<TE,MOD>>
 		extends AbstractJeeslWebController<L,D,LOC>
 		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslRmmvTreeElementController.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslRmmvElementController.class);
 	
+	@SuppressWarnings("unused")
 	private final JeeslRmmvElementCallback callback;
 	private JeeslRmmvFacade<L,D,R,TE> fRmmv;
-//	private JeeslAppCalendarBean<L,D,CALENDAR,ZONE,CT,ITEM,IT> bCalendar;
 	
 	private final RmmvFactoryBuilder<L,D,LOC,R,TE,MOD,MC> fbRmmv;
-//	private EjbTimeZoneFactory<ZONE,ITEM> efZone;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
 	
@@ -63,12 +62,11 @@ public class JeeslRmmvTreeElementController <L extends JeeslLang, D extends Jees
 	protected RREF rref;
 	private TreeNode tree; public TreeNode getTree() {return tree;}
 	private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
-//	private ZONE zone; public ZONE getZone() {return zone;} public void setZone(ZONE zone) {this.zone = zone;}
 	
 	private TE element; public TE getElement() {return element;} public void setElement(TE element) {this.element = element;}
 	private MC config; public MC getConfig() {return config;} public void setConfig(MC config) {this.config = config;}
 	
-	public JeeslRmmvTreeElementController(final JeeslRmmvElementCallback callback, final RmmvFactoryBuilder<L,D,LOC,R,TE,MOD,MC> fbRmmv)
+	public JeeslRmmvElementController(final JeeslRmmvElementCallback callback, final RmmvFactoryBuilder<L,D,LOC,R,TE,MOD,MC> fbRmmv)
 	{
 		super(fbRmmv.getClassL(),fbRmmv.getClassD());
 		this.callback=callback;
@@ -83,7 +81,6 @@ public class JeeslRmmvTreeElementController <L extends JeeslLang, D extends Jees
 	}
 	
 	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,TE> fRmmv,
-//										JeeslAppCalendarBean<L,D,CALENDAR,ZONE,CT,ITEM,IT> bCalendar,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{
@@ -186,29 +183,4 @@ public class JeeslRmmvTreeElementController <L extends JeeslLang, D extends Jees
 		reloadConfgs();
 		
 	}
-	
-//	public void selectZone()
-//	{
-//		zone = fCalendar.find(fbCalendar.getClassZone(),zone);
-//	}
-//	
-//	public void addZone()
-//	{
-//		zone = efZone.build();
-//		zone.setName(efLang.createEmpty(langs));
-//	}
-//	
-//	public void saveZone() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
-//	{
-//		if(EjbTimeZoneFactory.supportedCode(zone.getCode()))
-//		{
-//			zone = fCalendar.save(zone);
-//			bCalendar.reloadZones(fCalendar);
-//			bMessage.growlSuccessSaved();
-//		}
-//		else
-//		{
-//			bMessage.errorText("TS not supported");
-//		}
-//	}
 }
