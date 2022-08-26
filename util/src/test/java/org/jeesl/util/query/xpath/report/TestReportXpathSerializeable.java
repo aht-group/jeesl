@@ -27,15 +27,25 @@ public class TestReportXpathSerializeable extends AbstractJeeslUtilTest
 	@Before
 	public void init()
 	{
-		list = new ArrayList<Serializable>();
+		list = new ArrayList<>();
 		langs = XmlLangsFactory.build();
 	}
 	
 	@Test
-	public void langs() throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
+	public void langs() throws ExlpXpathNotFoundException
 	{
 		list.add("a");
 		list.add(langs);
+		list.add("b");
+		
+		Langs actual = ReportXpath.getFirstLangs(list);
+		Assert.assertEquals(langs,actual);
+	}
+
+	@Test( expected = ExlpXpathNotFoundException.class )
+	public void langsNotFound() throws ExlpXpathNotFoundException
+	{
+		list.add("a");
 		list.add("b");
 		
 		Langs actual = ReportXpath.getFirstLangs(list);
