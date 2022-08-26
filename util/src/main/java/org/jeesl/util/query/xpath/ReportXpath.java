@@ -57,7 +57,7 @@ public class ReportXpath
 		
 		@SuppressWarnings("unchecked")
 		List<Media> listResult = (List<Media>)context.selectNodes("media[@type='"+type+"']");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Media.class.getSimpleName()+" for type="+type);}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+Media.class.getSimpleName()+" for type="+type);}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+Media.class.getSimpleName()+" for type="+type);}
 		return listResult.get(0);
 	}
@@ -68,39 +68,36 @@ public class ReportXpath
 		
 		@SuppressWarnings("unchecked")
 		List<Report> listResult = (List<Report>)context.selectNodes("report[@id='"+id+"']");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Report.class.getSimpleName()+" for id="+id);}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+Report.class.getSimpleName()+" for id="+id);}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+Report.class.getSimpleName()+" for id="+id);}
 		return listResult.get(0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized ArrayList<Jr> getSubreports(Reports reports, String id, String format)
 	{
 		JXPathContext context = JXPathContext.newContext(reports);
-		ArrayList<Jr> subReports = new ArrayList<Jr>();
+		ArrayList<Jr> subReports = new ArrayList<>();
 		subReports.addAll((ArrayList<Jr>) context.selectNodes("//jr[parent::media/parent::report/@id='" +id +"' and parent::media/@type='" +format +"' and @type='sr']"));
 		return subReports;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized Jr getMr(Reports reports, String id, String format) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("//jr[@type='mr' ");
 		sb.append("and parent::media/parent::report/@id='").append(id).append("' ");
 		sb.append("and parent::media/@type='").append(format).append("']");
 		
 		JXPathContext context = JXPathContext.newContext(reports);
 		List<Jr> listResult = (List<Jr>)context.selectNodes(sb.toString());
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Report.class.getSimpleName()+" for id="+id+" and format="+format);}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+Report.class.getSimpleName()+" for id="+id+" and format="+format);}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+Report.class.getSimpleName()+" for id="+id+" and format="+format);}
 		return listResult.get(0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized Jr getSr(Reports reports, String id, String subreport, String format) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("//jr[@type='sr' ");
 		sb.append("and parent::media/parent::report/@id='").append(id).append("' ");
 		sb.append("and @name='").append(subreport).append("' ");
@@ -108,17 +105,16 @@ public class ReportXpath
 		
 		JXPathContext context = JXPathContext.newContext(reports);
 		List<Jr> listResult = (List<Jr>)context.selectNodes(sb.toString());
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Report.class.getSimpleName()+" for id="+id);}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+Report.class.getSimpleName()+" for id="+id);}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+Report.class.getSimpleName()+" for id="+id);}
 		return listResult.get(0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized Template getTemplate(Templates templates, String id) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(templates);
 		List<Template> listResult = (List<Template>)context.selectNodes("//template[@id='" +id +"']");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Template.class.getSimpleName()+" for id="+id);}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+Template.class.getSimpleName()+" for id="+id);}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+Template.class.getSimpleName()+" for id="+id);}
 		return listResult.get(0);
 	}
@@ -133,43 +129,40 @@ public class ReportXpath
 		return info;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized XlsWorkbook getWorkbook(XlsDefinition definition, String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(definition);
 		List<XlsWorkbook> listResult = (List<XlsWorkbook>)context.selectNodes("//xlsWorkbook[@code='" +code +"']");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+XlsWorkbook.class.getSimpleName()+" for code="+code);}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+XlsWorkbook.class.getSimpleName()+" for code="+code);}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+XlsWorkbook.class.getSimpleName()+" for code="+code);}
 		return listResult.get(0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized DataHandler getDataHandler(XlsSheet definition, String clazz) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(definition);
 		List<DataHandler> listResult = (List<DataHandler>)context.selectNodes("//dataHandler[@class='" +clazz +"']");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+DataHandler.class.getSimpleName()+" for class="+clazz);}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+DataHandler.class.getSimpleName()+" for class="+clazz);}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+DataHandler.class.getSimpleName()+" for code="+clazz);}
 		return listResult.get(0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized DataAssociation getDataAssociation(XlsSheet definition, String property) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(definition);
 		List<DataAssociation> listResult = (List<DataAssociation>)context.selectNodes("//dataAssociation[@property='" +property +"']");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+DataAssociation.class.getSimpleName()+" for property="+property);}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+DataAssociation.class.getSimpleName()+" for property="+property);}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+DataAssociation.class.getSimpleName()+" for code="+property);}
 		return listResult.get(0);
 	}
 	
-	public static synchronized Langs getFirstLangs(List<Serializable> contentList)
+	public static synchronized Langs getFirstLangs(List<Serializable> contentList) throws ExlpXpathNotFoundException
 	{
 		for(Object o : contentList)
 		{
 			if (o instanceof Langs) {return (Langs) o;}
 		}
-		return null;
+		throw new ExlpXpathNotFoundException("No matching instance of Langs found in content list");
 	}
 	
 	public static synchronized ImportStructure getImportStructure(List<Serializable> contentList) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
@@ -181,40 +174,36 @@ public class ReportXpath
 		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized List<Lang> getLang(Langs definition) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(definition);
 		List<Lang> listResult = (List<Lang>)context.selectNodes("//lang");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Lang.class.getSimpleName()+" are set");}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+Lang.class.getSimpleName()+" are set");}
 		return listResult;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized List<XlsColumn> getColumns(XlsSheet definition) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(definition);
 		List<XlsColumn> listResult = (List<XlsColumn>)context.selectNodes("//xlsColumn");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+XlsColumn.class.getSimpleName()+" are set");}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+XlsColumn.class.getSimpleName()+" are set");}
 		return listResult;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized ImportStructure getImportStructure(XlsSheet definition) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(definition);
 		List<ImportStructure> listResult = (List<ImportStructure>)context.selectNodes("//importStructure");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+ImportStructure.class.getSimpleName()+" is set");}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+ImportStructure.class.getSimpleName()+" is set");}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+ImportStructure.class.getSimpleName()+" are set");}
 		return listResult.get(0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static synchronized String getPrimaryKey(XlsSheet definition) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(definition);
 		List<String> listResult = (List<String>)context.selectNodes("@primaryKey");
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+ImportStructure.class.getSimpleName()+" is set");}
+		if(listResult.isEmpty()){throw new ExlpXpathNotFoundException("No "+ImportStructure.class.getSimpleName()+" is set");}
 		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+ImportStructure.class.getSimpleName()+" are set");}
 		return listResult.get(0);
 	}
