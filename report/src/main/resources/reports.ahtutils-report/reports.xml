@@ -16,7 +16,7 @@
         </ns2:media>
         <example>src/test/resources/data/xml/report/testData.xml</example>
     </ns2:report>
-    <ns2:report id="sectest" dir="sectest" ltr="true">
+    <ns2:report id="Sectest" dir="sectest" ltr="true">
         <ns2:media type="pdf">
             <ns2:jr type="mr" name="sectest"/>
         </ns2:media>
