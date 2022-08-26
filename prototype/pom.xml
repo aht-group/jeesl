@@ -91,6 +91,11 @@
    			<artifactId>primefaces</artifactId>
    			<scope>provided</scope>
 		</dependency>
+		<dependency>  
+   			<groupId>org.primefaces.extensions</groupId>  
+   			<artifactId>primefaces-extensions</artifactId>
+   			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
