@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbRmmvConfigFactory<TE extends JeeslRmmvElement<?,?,TE>,
+public class EjbRmmvConfigFactory<TE extends JeeslRmmvElement<?,?,TE,?>,
 									MOD extends JeeslRmmvModule<?,?,MOD,?>,
 									MC extends JeeslRmmvModuleConfig<TE,MOD>>
 {

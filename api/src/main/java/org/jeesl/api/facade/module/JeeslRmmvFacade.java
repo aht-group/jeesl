@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 
 public interface JeeslRmmvFacade <L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>, 
-								EH extends JeeslRmmvElement<L,R,EH>>
+								EH extends JeeslRmmvElement<L,R,EH,?>>
 			extends JeeslFacade
 {	
 	

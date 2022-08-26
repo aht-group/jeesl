@@ -18,7 +18,8 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslRmmvElement<L extends JeeslLang,
 										R extends JeeslTenantRealm<L,?,R,?>,
-										TE extends JeeslRmmvElement<L,R,TE>>
+										TE extends JeeslRmmvElement<L,R,TE,EC>,
+										EC extends JeeslRmmvClassification<L,R,EC,?>>
 						extends Serializable,EjbSaveable,
 								EjbWithId,EjbWithNonUniqueCode,
 								EjbWithPositionVisible,
@@ -26,5 +27,6 @@ public interface JeeslRmmvElement<L extends JeeslLang,
 								JeeslWithTenantSupport<R>
 								
 {	
-//	void x();
+	EC getClassification1();
+	void setClassification1(EC classification1);
 }

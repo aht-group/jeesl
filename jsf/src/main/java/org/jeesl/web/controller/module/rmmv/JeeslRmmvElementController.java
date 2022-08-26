@@ -16,6 +16,7 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.controller.web.module.rmmv.JeeslRmmvElementCallback;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModule;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModuleConfig;
+import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvClassification;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvElement;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -36,7 +37,8 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
-											TE extends JeeslRmmvElement<L,R,TE>,
+											TE extends JeeslRmmvElement<L,R,TE,EC>,
+											EC extends JeeslRmmvClassification<L,R,EC,?>,
 											MOD extends JeeslRmmvModule<?,?,MOD,?>,
 											MC extends JeeslRmmvModuleConfig<TE,MOD>>
 		extends AbstractJeeslWebController<L,D,LOC>
@@ -46,10 +48,10 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	final static Logger logger = LoggerFactory.getLogger(JeeslRmmvElementController.class);
 	
 	@SuppressWarnings("unused")
-	private final JeeslRmmvElementCallback callback;
+	private final JeeslRmmvElementCallback<MC> callback;
 	private JeeslRmmvFacade<L,D,R,TE> fRmmv;
 	
-	private final RmmvFactoryBuilder<L,D,LOC,R,TE,MOD,MC> fbRmmv;
+	private final RmmvFactoryBuilder<L,D,LOC,R,TE,EC,MOD,MC> fbRmmv;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
 	
@@ -57,6 +59,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	
 	private final List<MOD> modules; public List<MOD> getModules() {return modules;}
 	private final List<MC> configs; public List<MC> getConfigs() {return configs;}
+	private final List<EC> classifications; public List<EC> getClassifications() {return classifications;}
 
 	protected R realm;
 	protected RREF rref;
@@ -66,7 +69,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	private TE element; public TE getElement() {return element;} public void setElement(TE element) {this.element = element;}
 	private MC config; public MC getConfig() {return config;} public void setConfig(MC config) {this.config = config;}
 	
-	public JeeslRmmvElementController(final JeeslRmmvElementCallback callback, final RmmvFactoryBuilder<L,D,LOC,R,TE,MOD,MC> fbRmmv)
+	public JeeslRmmvElementController(final JeeslRmmvElementCallback<MC> callback, final RmmvFactoryBuilder<L,D,LOC,R,TE,EC,MOD,MC> fbRmmv)
 	{
 		super(fbRmmv.getClassL(),fbRmmv.getClassD());
 		this.callback=callback;
@@ -78,6 +81,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 		
 		modules = new ArrayList<>();
 		configs = new ArrayList<>();
+		classifications = new ArrayList<>();
 	}
 	
 	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,TE> fRmmv,
@@ -91,7 +95,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 		sbhLocale.setList(lp.getLocales());
 		sbhLocale.setDefault();
 		
-		modules.addAll(fRmmv.all(fbRmmv.getClassModule()));
+		modules.addAll(fRmmv.allOrderedPositionVisible(fbRmmv.getClassModule()));
 	}
 	
 	public void updateRealmReference(RREF rref)
@@ -100,6 +104,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 		tree = new DefaultTreeNode("Root", null);
 	
 		reloadTree();
+		classifications.addAll(fRmmv.all(fbRmmv.getClassClasification(),realm,rref));
 	}
 	
 	@Override
@@ -168,6 +173,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	public void selectConfig()
 	{
 		logger.info(AbstractLogMessage.selectEntity(config));
+		callback.postConfigSelect(config);
 	}
 	
 	public void addConfig()
@@ -181,6 +187,6 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 		logger.info(AbstractLogMessage.saveEntity(config));
 		config = fRmmv.save(config);
 		reloadConfgs();
-		
+		callback.postConfigSave(config);
 	}
 }

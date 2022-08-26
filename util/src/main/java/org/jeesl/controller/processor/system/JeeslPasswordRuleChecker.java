@@ -163,7 +163,7 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	{
 		DateTime dtNow = new DateTime();
 		
-		if(histories==null || histories.size()>=1) {return true;}
+		if(histories==null || histories.isEmpty() || histories.size()>=1) {return true;}
 		
 		for(HISTORY h : histories.subList(1,histories.size()))
 		{

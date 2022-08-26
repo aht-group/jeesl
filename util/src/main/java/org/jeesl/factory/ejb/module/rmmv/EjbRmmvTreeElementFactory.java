@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 public class EjbRmmvTreeElementFactory<L extends JeeslLang,
 								R extends JeeslTenantRealm<L,?,R,?>, 
-								EH extends JeeslRmmvElement<L,R,EH>>
+								EH extends JeeslRmmvElement<L,R,EH,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbRmmvTreeElementFactory.class);
 	

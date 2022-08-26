@@ -10,7 +10,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslRmmvModuleConfig<TE extends JeeslRmmvElement<?,?,TE>,
+public interface JeeslRmmvModuleConfig<TE extends JeeslRmmvElement<?,?,TE,?>,
 								MOD extends JeeslRmmvModule<?,?,MOD,?>>
 						extends Serializable,EjbSaveable,
 								EjbWithParentAttributeResolver,EjbWithPositionVisible
