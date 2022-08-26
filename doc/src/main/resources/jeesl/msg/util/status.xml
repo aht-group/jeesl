@@ -5,6 +5,7 @@
 	    		<s:lang key="de" translation="Status"/>
 	    		<s:lang key="en" translation="Status"/>
 	    		<s:lang key="fr" translation="Status"/>
+			<s:lang key="in" translation="Status"/>
 		</s:langs>
 	</s:translation>
 	<s:translation key="jeeslCode">
@@ -12,6 +13,7 @@
 	    		<s:lang key="de" translation="Code"/>
 	    		<s:lang key="en" translation="Code"/>
 	    		<s:lang key="fr" translation="Code"/>
+			<s:lang key="in" translation="Kode"/>
 		</s:langs>
 	</s:translation>
 	<s:translation key="jeeslName">
@@ -19,13 +21,15 @@
 	    		<s:lang key="de" translation="Name"/>
 	    		<s:lang key="en" translation="Name"/>
 	    		<s:lang key="fr" translation="Name"/>
+			<s:lang key="in" translation="Nama"/>
 	    	</s:langs>
     </s:translation>
     	<s:translation key="jeeslDescription">
 		<s:langs>
-    		<s:lang key="de" translation="Beschreibung"/>
-    		<s:lang key="en" translation="Description"/>
-    		<s:lang key="fr" translation="Description"/>
+		    <s:lang key="de" translation="Beschreibung"/>
+		    <s:lang key="en" translation="Description"/>
+		    <s:lang key="fr" translation="Description"/>
+		    <s:lang key="in" translation="Deskripsi"/>
 		</s:langs>
 	</s:translation>
     <s:translation key="jeeslOptionTables">
@@ -33,7 +37,7 @@
 	    		<s:lang key="de" translation="Tabellen"/>
 	    		<s:lang key="en" translation="Tables"/>
 	    		<s:lang key="fr" translation="Tables"/>
-				<s:lang key="id" translation="Jadwal" />
+			<s:lang key="in" translation="Jadwal" />
 	    	</s:langs>
     </s:translation>
     	<s:translation key="jeeslStatusSuperior">
@@ -49,6 +53,7 @@
     		<s:lang key="de" translation="Code"/>
     		<s:lang key="en" translation="Code"/>
     		<s:lang key="fr" translation="Code"/>
+		<s:lang key="in" translation="Kode"/>
     	</s:langs>
     </s:translation>
 	<s:translation key="jeeslCode">
@@ -56,6 +61,7 @@
     		<s:lang key="de" translation="Code"/>
     		<s:lang key="en" translation="Code"/>
     		<s:lang key="fr" translation="Code"/>
+		<s:lang key="in" translation="Kode"/>
     	</s:langs>
     </s:translation>
     <s:translation key="aupExternalCode">
@@ -70,6 +76,7 @@
     		<s:lang key="de" translation="Position"/>
     		<s:lang key="en" translation="Position"/>
     		<s:lang key="fr" translation="Position"/>
+		<s:lang key="fr" translation="Posisi"/>
     	</s:langs>
     </s:translation>
 	<s:translation key="aupDirection">
@@ -109,16 +116,18 @@
     </s:translation>
 	<s:translation key="aupType">
     	<s:langs>
-    		<s:lang key="de" translation="Type"/>
+    		<s:lang key="de" translation="Typ"/>
     		<s:lang key="en" translation="Type"/>
     		<s:lang key="fr" translation="Type"/>
+		<s:lang key="in" translation="Macam"/>
     	</s:langs>
     </s:translation>
     <s:translation key="jeeslType">
 	    	<s:langs>
 	    		<s:lang key="de" translation="Type"/>
 	    		<s:lang key="en" translation="Type"/>
-	    		<s:lang key="fr" translation="Type"/>
+	    		<s:lang key="fr" translation="Type"/>		
+			<s:lang key="in" translation="Macam"/>
 	    	</s:langs>
     </s:translation>
 	<s:translation key="jeeslElement">
@@ -126,6 +135,7 @@
 	    		<s:lang key="de" translation="Element"/>
 	    		<s:lang key="en" translation="Element"/>
 	    		<s:lang key="fr" translation="Element"/>
+			<s:lang key="in" translation="Elemen"/>
 	    	</s:langs>
     </s:translation>
     <s:translation key="aupSubType">
@@ -147,6 +157,7 @@
     		<s:lang key="de" translation="Unit"/>
     		<s:lang key="en" translation="Unit"/>
     		<s:lang key="fr" translation="Unit"/>
+		<s:lang key="in" translation="Unit"/>
     	</s:langs>
     </s:translation>
 	<s:translation key="aupStatusImageResource">
@@ -168,6 +179,7 @@
     		<s:lang key="de" translation="Status"/>
     		<s:lang key="en" translation="Status"/>
     		<s:lang key="fr" translation="Status"/>
+		<s:lang key="in" translation="Status"/>
     	</s:langs>
     </s:translation>
 	<s:translation key="aupGraphicStyle">
@@ -218,6 +230,7 @@
     		<s:lang key="en" translation="Category"/>
     		<s:lang key="kin" translation="Category"/>
     		<s:lang key="fr" translation="Category"/>
+		<s:lang key="in" translation="Kategori"/>
     	</s:langs>
     </s:translation>
 	<s:translation key="jeeslCategories">
@@ -239,6 +252,7 @@
 	    		<s:lang key="de" translation="Category"/>
 	    		<s:lang key="en" translation="Category"/>
 	    		<s:lang key="fr" translation="Category"/>
+			<s:lang key="in" translation="Kategori"/>
 	    	</s:langs>
     </s:translation>
 	<s:translation key="aupStage">
