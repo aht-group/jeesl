@@ -54,6 +54,7 @@ import net.sf.jasperreports.engine.util.JRConcurrentSwapFile;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.engine.xml.JRXmlTemplateLoader;
+import org.apache.commons.io.IOUtils;
 
 /*
  * @author helgehemmer
@@ -390,7 +391,8 @@ public class ReportHandler
 				byte[] byteArrayOfVectorImage = null;
 				try 
 				{
-					String imgLocation = reportRoot +"/resources/" +res.getType() +"/" +res.getValue().getValue();
+					// reportRoot includes the / already
+					String imgLocation = reportRoot +"resources/" +res.getType() +"/" +res.getValue().getValue();
 					Path pathToImage   = Paths.get(imgLocation);
 					System.out.println("Including vector Image resource: " +imgLocation + " as base64 encoded String. Available as ${"+ res.getName() +"}");
 					byteArrayOfVectorImage = Files.readAllBytes(pathToImage);
@@ -503,10 +505,12 @@ public class ReportHandler
 					byte[] byteArrayOfVectorImage = null;
 					try 
 					{
-						String imgLocation = reportRoot +"/resources/" +res.getType() +"/" +res.getValue().getValue();
+						String imgLocation = "resources/" +res.getType() +"/" +res.getValue().getValue();
 						Path pathToImage   = Paths.get(imgLocation);
 						System.out.println("Including vector Image resource: " +imgLocation + " as base64 encoded String. Available as ${"+ res.getName() +"}");
-						byteArrayOfVectorImage = Files.readAllBytes(pathToImage);
+						
+						// byteArrayOfVectorImage = Files.readAllBytes(pathToImage);
+						byteArrayOfVectorImage = IOUtils.toByteArray(mrl.searchIs(imgLocation));
 					} 
 					catch (FileNotFoundException e ) {logger.error(e.getMessage());}
 					catch (IOException e) {logger.error(e.getMessage());}
