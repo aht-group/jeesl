@@ -22,7 +22,6 @@ public class TestReportCreator extends AbstractAhtUtilsReportTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestReportCreator.class);
     
-	@Ignore
 	@Test
 	public void createReport() throws JRException, TemplateException, IOException, ExlpXpathNotFoundException, ExlpXpathNotUniqueException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{
@@ -31,8 +30,9 @@ public class TestReportCreator extends AbstractAhtUtilsReportTest
 		creator.setTemplateFile("src/main/resources/reports.ahtutils-report/templates.xml");
 		creator.setResourcesFile("src/main/resources/reports.ahtutils-report/resources.xml");
 		creator.setJrxmlDir("src/main/resources/reports.ahtutils-report/jrxml");
-		creator.setReportId("sectest");
+		creator.setReportId("Sectest");
 		creator.setTestPackage("net.sf.ahtutils.test.report");
+		creator.setAbstractTestclass("net.sf.ahtutils.test.AbstractAhtUtilsReportTest");
 		creator.setProductive(false);
 		creator.execute();
 	}
