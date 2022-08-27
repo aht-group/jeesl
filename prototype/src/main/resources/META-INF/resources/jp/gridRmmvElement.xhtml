@@ -44,6 +44,9 @@
 				</f:facet>
 				<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 				<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					<jtp:label entity="RmmvElement" code="id"/>
+					<h:outputText value="#{cc.attrs.controller.element.id}"/>
+					
 					<jtp:label entity="RmmvElement" code="code" rendered="#{cc.attrs.withCode}"/>
 					<jtp:inputText value="#{cc.attrs.controller.element.code}" rendered="#{cc.attrs.withCode}"/>
 				

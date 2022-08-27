@@ -200,10 +200,10 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	public void deleteView() throws JeeslConstraintViolationException, JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.rmEntity(view));
-		
-		try
+
+		List<M> menus = fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.view.toString(),view,-1);
+		for(M m : menus)
 		{
-			M m = fSecurity.oneForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.view.toString(), view);
 			List<M> childs = fSecurity.allForParent(fbSecurity.getClassMenu(), m);
 			if(!childs.isEmpty())
 			{
@@ -215,7 +215,6 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 				fSecurity.rm(m);
 			}
 		}
-		catch (JeeslNotFoundException e) {}
 		
 		fSecurity.rm(view);
 		reset(true,true,true);

@@ -78,7 +78,7 @@
 		</j:slot>
 		<j:slot id="sView" width="4" renderChildren="#{not empty cc.attrs.bean.view}">
 			<h:form id="fView">
-				<p:panel rendered="#{not empty cc.attrs.bean.view}" header="#{msg.aupSecurityView}" styleClass="jeeslPanel">
+				<p:panel rendered="#{not empty cc.attrs.bean.view}" header="#{msg.aupSecurityView}" styleClass="jeesl-panel">
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttSave}"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" rendered="#{cc.attrs.bean.hasDeveloperAction}" tooltip="#{msg.ttDelete}"/>
