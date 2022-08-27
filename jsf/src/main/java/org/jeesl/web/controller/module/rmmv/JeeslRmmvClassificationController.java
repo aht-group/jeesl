@@ -42,10 +42,10 @@ import org.slf4j.LoggerFactory;
 public class JeeslRmmvClassificationController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											G extends JeeslGraphic<L,D,GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>,
 											R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
-											TE extends JeeslRmmvElement<L,R,TE,EC>,
+											E extends JeeslRmmvElement<L,R,E,EC>,
 											EC extends JeeslRmmvClassification<L,R,EC,G>,
 											MOD extends JeeslRmmvModule<?,?,MOD,?>,
-											MC extends JeeslRmmvModuleConfig<TE,MOD>>
+											MC extends JeeslRmmvModuleConfig<E,MOD>>
 		extends AbstractJeeslWebController<L,D,LOC>
 		implements SbSingleBean
 {
@@ -55,10 +55,10 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 	@SuppressWarnings("unused")
 	private final JeeslRmmvClassificationCallback callback;
 	
-	private JeeslRmmvFacade<L,D,R,TE> fRmmv;
+	private JeeslRmmvFacade<L,D,R,E,EC,MOD,MC> fRmmv;
 	private JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
 	
-	private final RmmvFactoryBuilder<L,D,LOC,R,TE,EC,MOD,MC> fbRmmv;
+	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC> fbRmmv;
 	private final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
@@ -73,7 +73,7 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 	private EC classification;  public EC getClassification() {return classification;} public void setClassification(EC classification) {this.classification = classification;}
 
 	public JeeslRmmvClassificationController(final JeeslRmmvClassificationCallback callback,
-												final RmmvFactoryBuilder<L,D,LOC,R,TE,EC,MOD,MC> fbRmmv,
+												final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC> fbRmmv,
 												final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg)
 	{
 		super(fbRmmv.getClassL(),fbRmmv.getClassD());
@@ -86,7 +86,8 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 		treePath = new HashSet<>();
 	}
 	
-	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,TE> fRmmv, JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,MOD,MC> fRmmv,
+									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{

@@ -38,26 +38,25 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
-											TE extends JeeslRmmvElement<L,R,TE,EC>,
+											E extends JeeslRmmvElement<L,R,E,EC>,
 											EC extends JeeslRmmvClassification<L,R,EC,?>,
 											MOD extends JeeslRmmvModule<?,?,MOD,?>,
-											MC extends JeeslRmmvModuleConfig<TE,MOD>>
+											MC extends JeeslRmmvModuleConfig<E,MOD>>
 		extends AbstractJeeslWebController<L,D,LOC>
 		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslRmmvElementController.class);
 	
-	@SuppressWarnings("unused")
 	private final JeeslRmmvElementCallback<MC> callback;
-	private JeeslRmmvFacade<L,D,R,TE> fRmmv;
+	private JeeslRmmvFacade<L,D,R,E,EC,MOD,MC> fRmmv;
 	
-	private final RmmvFactoryBuilder<L,D,LOC,R,TE,EC,MOD,MC> fbRmmv;
-	private final EjbRmmvConfigFactory<TE,MOD,MC> efConfig;
+	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC> fbRmmv;
+	private final EjbRmmvConfigFactory<E,MOD,MC> efConfig;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
 	
-	private final Set<TE> treePath;
+	private final Set<E> treePath;
 	
 	private final List<MOD> modules; public List<MOD> getModules() {return modules;}
 	private final List<MC> configs; public List<MC> getConfigs() {return configs;}
@@ -68,10 +67,10 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	private TreeNode tree; public TreeNode getTree() {return tree;}
 	private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
 	
-	private TE element; public TE getElement() {return element;} public void setElement(TE element) {this.element = element;}
+	private E element; public E getElement() {return element;} public void setElement(E element) {this.element = element;}
 	private MC config; public MC getConfig() {return config;} public void setConfig(MC config) {this.config = config;}
 	
-	public JeeslRmmvElementController(final JeeslRmmvElementCallback<MC> callback, final RmmvFactoryBuilder<L,D,LOC,R,TE,EC,MOD,MC> fbRmmv)
+	public JeeslRmmvElementController(final JeeslRmmvElementCallback<MC> callback, final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC> fbRmmv)
 	{
 		super(fbRmmv.getClassL(),fbRmmv.getClassD());
 		this.callback=callback;
@@ -88,7 +87,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 		classifications = new ArrayList<>();
 	}
 	
-	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,TE> fRmmv,
+	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,MOD,MC> fRmmv,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{
@@ -127,7 +126,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	private void reloadTree()
 	{
 		tree.getChildren().clear();
-		List<TE> list = fRmmv.all(fbRmmv.getClassTreeElement(),realm,rref);
+		List<E> list = fRmmv.all(fbRmmv.getClassTreeElement(),realm,rref);
 		logger.debug(fbRmmv.getClassTreeElement().getSimpleName()+" "+list.size());
 		TreeHelper.buildTree(tree,list,treePath);
 	}
@@ -161,7 +160,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	{
 		this.reset(true,true,true);
 		logger.info("Selected "+event.getTreeNode().toString());
-		element = (TE)event.getTreeNode().getData();
+		element = (E)event.getTreeNode().getData();
 		element = fRmmv.find(fbRmmv.getClassTreeElement(),element);
 		element = efLang.persistMissingLangs(fRmmv,lp.getLocales(),element);
 		
