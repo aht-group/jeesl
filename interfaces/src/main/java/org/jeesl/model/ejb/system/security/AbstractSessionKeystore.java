@@ -16,14 +16,14 @@ import javax.crypto.spec.SecretKeySpec;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
-import org.jeesl.interfaces.model.system.security.user.JeeslKeyStore;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractSessionKeystore <KEY extends JeeslIoCryptoKey<?,?>,
 												KT extends JeeslIoCryptoKeyState<?,?,KT,?>,
 												ST extends JeeslIoCryptoStoreType<?,?,ST,?>>
-						implements JeeslKeyStore<KEY,KT,ST>
+						implements JeeslIoCryptoStore<KEY,KT,ST>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractSessionKeystore.class);
 	public static final long serialVersionUID=1;

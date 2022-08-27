@@ -1,15 +1,11 @@
-package org.jeesl.interfaces.model.system.security.user;
+package org.jeesl.interfaces.model.io.crypto;
 
 import java.io.Serializable;
 import java.util.Map;
 
 import javax.crypto.SecretKey;
 
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
-
-public interface JeeslKeyStore <KEY extends JeeslIoCryptoKey<?,?>,
+public interface JeeslIoCryptoStore <KEY extends JeeslIoCryptoKey<?,?>,
 								KT extends JeeslIoCryptoKeyState<?,?,KT,?>,
 								ST extends JeeslIoCryptoStoreType<?,?,ST,?>
 								>

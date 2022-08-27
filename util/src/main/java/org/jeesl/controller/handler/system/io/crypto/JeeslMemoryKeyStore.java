@@ -12,14 +12,14 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
-import org.jeesl.interfaces.model.system.security.user.JeeslKeyStore;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslMemoryKeyStore<KEY extends JeeslIoCryptoKey<?,?>,
 									KT extends JeeslIoCryptoKeyState<?,?,KT,?>,
 									ST extends JeeslIoCryptoStoreType<?,?,ST,?>>
-							implements Serializable,JeeslKeyStore<KEY,KT,ST>
+							implements Serializable,JeeslIoCryptoStore<KEY,KT,ST>
 {
 	private static final long serialVersionUID = 1L;
 	

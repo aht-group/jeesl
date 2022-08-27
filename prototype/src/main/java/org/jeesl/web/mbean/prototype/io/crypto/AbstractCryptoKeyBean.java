@@ -27,10 +27,10 @@ import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyStatus;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStore;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.security.user.JeeslKeyStore;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.ejb.system.security.AbstractSessionKeystore;
@@ -56,11 +56,11 @@ public abstract class AbstractCryptoKeyBean <L extends JeeslLang, D extends Jees
 	protected final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,ST,USER> fbCrypto;
 	
 	private final List<KEY> keys; public List<KEY> getKeys() {return keys;}
-	private final List<JeeslKeyStore<KEY,KT,ST>> stores; public List<JeeslKeyStore<KEY, KT, ST>> getStores() {return stores;}
+	private final List<JeeslIoCryptoStore<KEY,KT,ST>> stores; public List<JeeslIoCryptoStore<KEY, KT, ST>> getStores() {return stores;}
 	
 	private USER user;
 	private KEY key; public KEY getKey() {return key;} public void setKey(KEY key) {this.key = key;}
-	private JeeslKeyStore<KEY,KT,ST> sessionKeystore; public JeeslKeyStore<KEY, KT, ST> getSessionKeystore() {return sessionKeystore;}
+	private JeeslIoCryptoStore<KEY,KT,ST> sessionKeystore; public JeeslIoCryptoStore<KEY, KT, ST> getSessionKeystore() {return sessionKeystore;}
 	private String pwd; public String getPwd() {return pwd;} public void setPwd(String pwd) {this.pwd = pwd;}
 
 	public AbstractCryptoKeyBean(final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,ST,USER> fbCrypto)
@@ -76,7 +76,7 @@ public abstract class AbstractCryptoKeyBean <L extends JeeslLang, D extends Jees
 	protected void postConstructCryptoKey(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 										JeeslIoCryptoFacade<L,D,KEY,KS,KT,ST,USER> fCrypto,
 										USER user,
-										JeeslKeyStore<KEY,KT,ST> sessionKeystore)
+										JeeslIoCryptoStore<KEY,KT,ST> sessionKeystore)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fCrypto=fCrypto;
@@ -86,7 +86,7 @@ public abstract class AbstractCryptoKeyBean <L extends JeeslLang, D extends Jees
 		reloadKeys();
 	}
 	
-	protected void addStore(JeeslKeyStore<KEY,KT,ST> store)
+	protected void addStore(JeeslIoCryptoStore<KEY,KT,ST> store)
 	{
 		stores.add(store);
 	}

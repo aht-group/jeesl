@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.jeesl.factory.sql.SqlFactory;
 import org.jeesl.interfaces.model.system.security.user.JeeslPasswordUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslUserSaltPassword;
+import org.jeesl.interfaces.model.system.security.user.identity.JeeslIdentityLogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,5 +86,10 @@ public class TxtUserFactory <USER extends JeeslUser<?>>
 		SqlFactory.semicolon(sb);
 		
 		return sb.toString();
+	}
+	
+	public static boolean providedPasswordMatchesSalt(JeeslIdentityLogin identity, JeeslUserSaltPassword user)
+	{
+		return identity.getLoginPassword()!=null && user.getSalt()!=null && user.getPwd()!=null && user.getPwd().equals(TxtUserFactory.toHash(identity.getLoginPassword(),user.getSalt()));
 	}
 }
