@@ -18,8 +18,7 @@ import javax.validation.constraints.NotNull;
 
 import org.jeesl.client.model.ejb.system.security.SecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-
-import net.sf.ahtutils.model.qualifier.EjbErNode;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="UtilsMeis", uniqueConstraints={@UniqueConstraint(name="unique-email", columnNames = {"email"})})

@@ -1,4 +1,4 @@
-package net.sf.ahtutils.model.qualifier;
+package org.jeesl.interfaces.qualifier.er;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

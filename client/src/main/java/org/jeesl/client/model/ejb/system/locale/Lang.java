@@ -13,8 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-
-import net.sf.ahtutils.model.qualifier.EjbErNode;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name = "UtilsLang")

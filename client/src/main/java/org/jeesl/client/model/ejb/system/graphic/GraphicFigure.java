@@ -6,8 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
-
-import net.sf.ahtutils.model.qualifier.EjbErNode;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @EjbErNode(name="Figure",category="symbol",subset="symbol")
 public class GraphicFigure implements JeeslGraphicComponent<Lang,Description,Graphic,GraphicType,GraphicFigure,GraphicStyle>

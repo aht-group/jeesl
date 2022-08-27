@@ -7,8 +7,7 @@ import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
-
-import net.sf.ahtutils.model.qualifier.EjbErNode;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @EjbErNode(name="Type",category="symbol",subset="symbol",level=3)
 public class GraphicType implements JeeslGraphicType<Lang,Description,GraphicType,Graphic>

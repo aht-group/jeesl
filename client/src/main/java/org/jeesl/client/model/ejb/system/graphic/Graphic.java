@@ -10,8 +10,7 @@ import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
-
-import net.sf.ahtutils.model.qualifier.EjbErNode;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @EjbErNode(name="Graphic",category="symbol",subset="symbol")
 public class Graphic implements EjbRemoveable,Serializable,EjbPersistable,

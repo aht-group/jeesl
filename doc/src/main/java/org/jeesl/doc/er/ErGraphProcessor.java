@@ -15,6 +15,8 @@ import java.util.Set;
 
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.io.filefilter.IOFileFilter;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
+import org.jeesl.interfaces.qualifier.er.EjbErParent;
 import org.jeesl.model.xml.system.revision.Entities;
 import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.ReflectionUtil;
@@ -31,8 +33,6 @@ import org.metachart.xml.graph.Nodes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.model.qualifier.EjbErNode;
-import net.sf.ahtutils.model.qualifier.EjbErParent;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.io.ClassUtil;

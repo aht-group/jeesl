@@ -24,8 +24,7 @@ import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.client.model.ejb.user.User;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
-
-import net.sf.ahtutils.model.qualifier.EjbErNode;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"code"}))

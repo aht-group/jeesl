@@ -24,8 +24,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
-
-import net.sf.ahtutils.model.qualifier.EjbErNode;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
