@@ -13,6 +13,7 @@ import org.jeesl.factory.builder.module.NewsFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.module.news.JeeslNewsCategory;
+import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
 import org.jeesl.interfaces.model.module.news.JeeslNewsItem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -29,6 +30,7 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractNewsItemBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
+									FEED extends JeeslNewsFeed<L,D,R>,
 									CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
 									ITEM extends JeeslNewsItem<L,D,R,CATEGORY,USER,M>,
 									USER extends EjbWithId,
@@ -40,8 +42,8 @@ public class AbstractNewsItemBean <L extends JeeslLang, D extends JeeslDescripti
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractNewsItemBean.class);
 	
-	protected JeeslNewsFacade<L,D,R,CATEGORY,ITEM,USER,M,MT> fNews;
-	private final NewsFactoryBuilder<L,D,LOC,R,CATEGORY,ITEM,USER,M,MT> fbNews;
+	protected JeeslNewsFacade<L,D,R,FEED,CATEGORY,ITEM,USER,M,MT> fNews;
+	private final NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews;
 	
 	protected final SbSingleHandler<CATEGORY> sbhCategory; public SbSingleHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
@@ -53,7 +55,7 @@ public class AbstractNewsItemBean <L extends JeeslLang, D extends JeeslDescripti
 	private USER author;
 	private ITEM item; public ITEM getItem() {return item;} public void setItem(ITEM item) {this.item = item;}
 
-	public AbstractNewsItemBean(NewsFactoryBuilder<L,D,LOC,R,CATEGORY,ITEM,USER,M,MT> fbNews)
+	public AbstractNewsItemBean(NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews)
 	{
 		super(fbNews.getClassL(),fbNews.getClassD());
 		this.fbNews=fbNews;
@@ -63,7 +65,7 @@ public class AbstractNewsItemBean <L extends JeeslLang, D extends JeeslDescripti
 	}
 
 	protected void postConstructNews(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-										JeeslNewsFacade<L,D,R,CATEGORY,ITEM,USER,M,MT> fNews,
+										JeeslNewsFacade<L,D,R,FEED,CATEGORY,ITEM,USER,M,MT> fNews,
 										R realm,
 										USER author)
 	{

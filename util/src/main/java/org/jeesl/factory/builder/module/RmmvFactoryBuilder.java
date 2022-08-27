@@ -45,5 +45,5 @@ public class RmmvFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	
 	public EjbRmmvClassificationFactory<L,R,EC> ejbClassification(){return new EjbRmmvClassificationFactory<>(cClassification);}
 	public EjbRmmvTreeElementFactory<L,R,TE> ejbElement(){return new EjbRmmvTreeElementFactory<>(cElement);}
-	public EjbRmmvConfigFactory<TE,MOD,MC> ejbConfig(){return new EjbRmmvConfigFactory<>(cConfig);}
+	public EjbRmmvConfigFactory<TE,MOD,MC> ejbConfig(){return new EjbRmmvConfigFactory<>(cModule,cConfig);}
 }

@@ -34,6 +34,7 @@ import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,15 +65,15 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		CriteriaQuery<CALENDAR> cQ = cB.createQuery(fbCalendar.getClassCalendar());
 		Root<OWNER> root = cQ.from(cOwner);
 		
-		Path<CALENDAR> pathCalendar = root.get("calendar");
-		Path<Long> pId = root.get("id");
+		Path<CALENDAR> pathCalendar = root.get(JeeslWithCalendar.Attributes.calendar.toString());
+		Path<Long> pId = root.get(EjbWithId.attribute);
 		
 		cQ.where(cB.equal(pId,owner.getId()));
 		cQ.select(pathCalendar);
 		
 		try	{return em.createQuery(cQ).getSingleResult();}
-		catch (NoResultException ex){throw new JeeslNotFoundException("No Graphic found for status.id"+owner);}
-		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple Results for status.id"+owner);}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbCalendar.getClassCalendar()+" found for owner "+owner);}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple "+fbCalendar.getClassCalendar()+" found for owner "+owner);}
 	}
 	
 	@Override public <OWNER extends JeeslWithCalendar<CALENDAR>> OWNER fCalendarOwner(Class<OWNER> cOwner, CALENDAR calendar) throws JeeslNotFoundException

@@ -10,6 +10,7 @@ import org.jeesl.api.facade.module.JeeslRmmvFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.RmmvFactoryBuilder;
+import org.jeesl.factory.ejb.module.rmmv.EjbRmmvConfigFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -52,6 +53,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	private JeeslRmmvFacade<L,D,R,TE> fRmmv;
 	
 	private final RmmvFactoryBuilder<L,D,LOC,R,TE,EC,MOD,MC> fbRmmv;
+	private final EjbRmmvConfigFactory<TE,MOD,MC> efConfig;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
 	
@@ -75,6 +77,8 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 		this.callback=callback;
 		this.fbRmmv=fbRmmv;
         
+		efConfig = fbRmmv.ejbConfig();
+		
 		sbhLocale = new SbSingleHandler<>(fbRmmv.getClassLocale(),this);
 		
 		treePath = new HashSet<>();
@@ -185,6 +189,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	public void saveConfig() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info(AbstractLogMessage.saveEntity(config));
+		efConfig.converter(fRmmv,config);
 		config = fRmmv.save(config);
 		reloadConfgs();
 		callback.postConfigSave(config);
