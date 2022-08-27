@@ -9,10 +9,10 @@ import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.factory.sql.SqlFactory;
-import org.jeesl.interfaces.model.system.security.user.JeeslPasswordUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.user.JeeslUserSaltPassword;
 import org.jeesl.interfaces.model.system.security.user.identity.JeeslIdentityLogin;
+import org.jeesl.interfaces.model.system.security.user.pwd.JeeslUserPassword;
+import org.jeesl.interfaces.model.system.security.user.pwd.JeeslUserPasswordSalt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,14 +81,14 @@ public class TxtUserFactory <USER extends JeeslUser<?>>
 	public String updatePwd(USER user)
 	{
 		StringBuilder sb = new StringBuilder();
-		SqlFactory.updateS(sb, user.getClass(), null, JeeslPasswordUser.Attributes.pwd, "xy", false);
+		SqlFactory.updateS(sb, user.getClass(), null, JeeslUserPassword.Attributes.pwd, "xy", false);
 		SqlFactory.whereId(sb, null, user, false);
 		SqlFactory.semicolon(sb);
 		
 		return sb.toString();
 	}
 	
-	public static boolean providedPasswordMatchesSalt(JeeslIdentityLogin identity, JeeslUserSaltPassword user)
+	public static boolean providedPasswordMatchesSalt(JeeslIdentityLogin identity, JeeslUserPasswordSalt user)
 	{
 		return identity.getLoginPassword()!=null && user.getSalt()!=null && user.getPwd()!=null && user.getPwd().equals(TxtUserFactory.toHash(identity.getLoginPassword(),user.getSalt()));
 	}

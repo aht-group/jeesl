@@ -29,7 +29,7 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplat
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithPwd;
+import org.jeesl.interfaces.model.system.security.user.pwd.JeeslWithPwd;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -188,7 +188,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	
 	protected boolean checkPwd()
 	{
-		if(performPasswordCheck && EjbWithPwd.class.isAssignableFrom(fbSecurity.getClassUser()))
+		if(performPasswordCheck && JeeslWithPwd.class.isAssignableFrom(fbSecurity.getClassUser()))
 		{
 			if(debugOnInfo) {logger.info("Checking PWD");}
 			if(pwd1.length()!=pwd2.length())
@@ -203,7 +203,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 				{
 					bMessage.growlSuccess("fmPwdChanged");
 					
-					EjbWithPwd ejb = (EjbWithPwd)user;
+					JeeslWithPwd ejb = (JeeslWithPwd)user;
 					if(useSaltedHash) {ejb.setPwd(TxtUserFactory.toHash(pwd1,user.getSalt()));}
 					else {ejb.setPwd(pwd1);}
 					return true;

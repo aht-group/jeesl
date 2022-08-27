@@ -83,14 +83,14 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	{
     		String type = config.getString("db."+key+".type");
         	DbType dbType = DbType.valueOf(type);
-        	String ds=null;
+        	String logMsg=null;
         	switch(dbType)
         	{
-        		case mariadb: ds = jbossConfig.createMariaDbDatasource(config,key); break;
-        		case mysql: ds = jbossConfig.createMysqlDatasource(config,key); break;		
-        		case postgres: ds = jbossConfig.createPostgresDatasource(config,key);break;
+        		case mariadb: logMsg = jbossConfig.createMariaDbDatasource(config,key); break;
+        		case mysql: logMsg = jbossConfig.createMysqlDatasource(config,key); break;		
+        		case postgres: logMsg = jbossConfig.createPostgresDatasource(config,key);break;
         	}
-        	if(ds!=null) {getLog().info("DS: "+ds);}
+        	if(logMsg!=null) {getLog().info("DS: "+logMsg);}
     	}
     }
     
