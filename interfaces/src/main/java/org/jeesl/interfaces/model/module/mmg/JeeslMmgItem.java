@@ -10,7 +10,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisible;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslMmgImage<L extends JeeslLang,D extends JeeslDescription,
+public interface JeeslMmgItem<L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithVisible
 {

@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.module.rmmv;
+package org.jeesl.interfaces.model.module.mmg;
 
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -9,11 +9,11 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslRmmvClassification<L extends JeeslLang,
+public interface JeeslMmgClassification<L extends JeeslLang,
 										R extends JeeslTenantRealm<L,?,R,?>,
-										C extends JeeslRmmvClassification<L,R,C,G>,
+										C extends JeeslMmgClassification<L,R,C,G>,
 										G extends JeeslGraphic<L,?,?,?,?>>
-						extends JeeslTreeClassification<L,R,C,G>
+							extends JeeslTreeClassification<L,R,C,G>					
 {	
 
 }
