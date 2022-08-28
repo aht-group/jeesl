@@ -18,9 +18,7 @@ public interface JeeslFileRepositoryHandler <STORAGE extends JeeslFileStorage<?,
 		extends Serializable
 {
 	void setDebugOnInfo(boolean debugOnInfo);
-	
-//	void reset();
-	
+
 	STORAGE getStorage();
 	void setStorage(STORAGE storage);
 	
@@ -31,11 +29,15 @@ public interface JeeslFileRepositoryHandler <STORAGE extends JeeslFileStorage<?,
 	<W extends JeeslWithFileRepositoryContainer<CONTAINER>> void init(W with) throws JeeslConstraintViolationException, JeeslLockingException;
 	<W extends JeeslWithFileRepositoryContainer<CONTAINER>> void init(STORAGE storage, W with) throws JeeslConstraintViolationException, JeeslLockingException;
 	
+	void addFile(String name, byte[] bytes, String category);
+	
 	InputStream download(META meta) throws JeeslNotFoundException;
 	
+	void saveFile()  throws JeeslConstraintViolationException, JeeslLockingException;
+	void saveThreadsafe(CONTAINER container, String name, byte[] bytes, String category) throws JeeslConstraintViolationException, JeeslLockingException;
 	<W extends JeeslWithFileRepositoryContainer<CONTAINER>> void saveDeferred(W with) throws JeeslConstraintViolationException, JeeslLockingException;
-	void copyTo(JeeslFileRepositoryHandler<STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException;
 	
+	void copyTo(JeeslFileRepositoryHandler<STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException;
 	void deleteFile() throws JeeslConstraintViolationException, JeeslLockingException;
 	
 //	StreamedContent fileStream() throws Exception;

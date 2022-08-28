@@ -39,6 +39,7 @@ public class JeeslFileTypeHandler<META extends JeeslFileMeta<?,?,TYPE,?>,
 		else if(fileName.endsWith(".zip") || fileName.endsWith(".rar")){return JeeslFileType.Code.zip;}
 		else if(fileName.endsWith(".jpeg") || fileName.endsWith(".jpg")){return JeeslFileType.Code.jpg;}
 		else if(fileName.endsWith(".png")){return JeeslFileType.Code.png;}
+		else if(fileName.endsWith(".heic")){return JeeslFileType.Code.heic;}
 		return JeeslFileType.Code.unknown;
 	}
 }

@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -248,7 +250,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	public void addFileInline()
 	{
 		if(debugOnInfo) {logger.info("Adding File Inline");}
-		addFile();
+		this.addFile();
 		showInlineUpload = true;
 	}
 	
@@ -257,12 +259,12 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		if(debugOnInfo) {logger.info("Adding File");}
 		xmlFile = XmlFileFactory.build("");
 	}
-	
-	public void addFile(java.io.File f) throws JeeslNotFoundException, FileNotFoundException, IOException {addFile(f.getName(), IOUtils.toByteArray(new FileInputStream(f)), null);}
-	public void addFile(String name, byte[] bytes) throws JeeslNotFoundException {addFile(name, bytes, null);}
-	public void addFile(String name, byte[] bytes, String category) throws JeeslNotFoundException
+	public void addFile(Path path) throws IOException {addFile(path.getFileName().toString(), Files.readAllBytes(path), null);}
+	public void addFile(java.io.File f) throws FileNotFoundException, IOException {addFile(f.getName(), IOUtils.toByteArray(new FileInputStream(f)), null);}
+	public void addFile(String name, byte[] bytes) {addFile(name, bytes, null);}
+	@Override public void addFile(String name, byte[] bytes, String category)
 	{
-		addFile();
+		this.addFile();
 		xmlFile.setName(name);
 		xmlFile.setSize(bytes.length);
 		xmlFile.setData(XmlDataFactory.build(bytes));
@@ -272,6 +274,17 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		fth.updateType(meta);
 	}
 	
+	public final void handleFileUpload(FileUploadEvent event) throws JeeslNotFoundException
+	{
+		if(debugOnInfo) {logger.info("Handling FileUpload: "+event.getFile().getFileName());}
+		xmlFile.setName(event.getFile().getFileName());
+		xmlFile.setSize(event.getFile().getSize());
+		xmlFile.setData(XmlDataFactory.build(event.getFile().getContent()));
+		meta = efMeta.build(container,event.getFile().getFileName(),event.getFile().getSize(),new Date());
+		meta.setType(fFr.fByCode(fbFile.getClassType(), JeeslFileType.Code.unknown));
+		
+		this.handledFileUpload();
+    }
 	protected void handledFileUpload()
 	{
 		if(debugOnInfo) {logger.info("handledFileUpload (start): "+meta.toString());}
@@ -287,9 +300,9 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		meta = efDescription.persistMissingLangs(fFr,locales,meta);
 	}
 	
-	public void saveFile() throws JeeslConstraintViolationException, JeeslLockingException
+	@Override public void saveFile() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo) {logger.info("Saving: "+xmlFile.getName()+" Mode:"+Mode.directSave);}
+		if(debugOnInfo) {logger.info("Saving: "+xmlFile.getName()+" Mode:"+mode);}
 		if(mode.equals(Mode.directSave))
 		{
 			if(debugOnInfo) {logger.info("Saving to FR "+storage.toString());}
@@ -306,6 +319,35 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		
 		reset(true);
     }
+	public void saveMeta() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		if(debugOnInfo) {logger.info("save meta "+meta.toString());}
+		if(FilenameUtils.getExtension(fileName).equals(FilenameUtils.getExtension(meta.getFileName())))
+		{
+			meta.setFileName(fileName);
+		}
+		else {meta.setFileName(fileName+"."+FilenameUtils.getExtension(meta.getFileName()));}
+		
+		if(mode.equals(Mode.directSave))
+		{
+			meta = fFr.save(meta);
+		}
+		else
+		{
+			if(metas.contains(meta)) {metas.remove(meta);}
+			metas.add(meta);
+		}
+		
+		fileName = meta.getFileName();
+		reload();
+	}
+	@Override public void saveThreadsafe(CONTAINER c, String name, byte[] bytes, String category) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		META m = efMeta.build(c,name,bytes.length,new Date());
+		m.setCategory(category);
+		fth.updateType(m);
+		m = fFr.saveToFileRepository(m,bytes);
+	}
 	
 	public <W extends JeeslWithFileRepositoryContainer<CONTAINER>> void saveDeferred(W with) throws JeeslConstraintViolationException, JeeslLockingException
 	{
@@ -336,29 +378,6 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		reload(true);
 	}
 	
-	public void saveMeta() throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		if(debugOnInfo) {logger.info("save meta "+meta.toString());}
-		if(FilenameUtils.getExtension(fileName).equals(FilenameUtils.getExtension(meta.getFileName())))
-		{
-			meta.setFileName(fileName);
-		}
-		else {meta.setFileName(fileName+"."+FilenameUtils.getExtension(meta.getFileName()));}
-		
-		if(mode.equals(Mode.directSave))
-		{
-			meta = fFr.save(meta);
-		}
-		else
-		{
-			if(metas.contains(meta)) {metas.remove(meta);}
-			metas.add(meta);
-		}
-		
-		fileName = meta.getFileName();
-		reload();
-	}
-	
 	@Override public void deleteFile() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info("DELETING: "+meta.toString());}
@@ -387,7 +406,6 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 			zof.write(fFr.loadFromFileRepository(m));
 
 			zof.closeEntry();
-			
 		}
 		zof.close();
 		bos.close();
@@ -411,18 +429,6 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		return download(meta);
 	}
 	
-	public final void handleFileUpload(FileUploadEvent event) throws JeeslNotFoundException
-	{
-		if(debugOnInfo) {logger.info("Handling FileUpload: "+event.getFile().getFileName());}
-		xmlFile.setName(event.getFile().getFileName());
-		xmlFile.setSize(event.getFile().getSize());
-		xmlFile.setData(XmlDataFactory.build(event.getFile().getContent()));
-		meta = efMeta.build(container,event.getFile().getFileName(),event.getFile().getSize(),new Date());
-		meta.setType(fFr.fByCode(fbFile.getClassType(), JeeslFileType.Code.unknown));
-		
-		this.handledFileUpload();
-    }
-	
 	public final StreamedContent fileStream() throws Exception
 	{
 		InputStream is = this.toInputStream();
@@ -435,10 +441,6 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		return DefaultStreamedContent.builder().contentType(JeeslZipReport.mimeType).stream(()->is).name(this.getZipName()).build();
 	}
 
-
-	
-	
-	
 	public void copyTo(JeeslFileRepositoryHandler<STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		logger.info("Copy To");

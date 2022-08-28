@@ -380,9 +380,6 @@ public class AbstractAomAssetBean <L extends JeeslLang, D extends JeeslDescripti
 			event = fAsset.save(event);
 		}
 	}
-    
-    
-    
   
 	@Override public void callbackFrContainerSaved(EjbWithId id) throws JeeslConstraintViolationException, JeeslLockingException
 	{

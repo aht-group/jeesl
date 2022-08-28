@@ -22,6 +22,8 @@ public interface JeeslFileType <L extends JeeslLang, D extends JeeslDescription,
 									EjbWithCode,JeeslStatusFixedCode,
 									EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	
-	public enum Code{pdf,docx,xlsx,xml,csv,txt,jpg,png,zip,unknown}
+	public enum Code{pdf,docx,xlsx,xml,csv,txt,
+					jpg,png,zip,heic,
+					unknown}
 	public enum Attributes{position,code}
 }

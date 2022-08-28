@@ -19,6 +19,7 @@ import org.jeesl.interfaces.model.module.mmg.JeeslMmgQuality;
 import org.jeesl.interfaces.model.module.mmg.JeeslWithMmgGallery;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
@@ -27,18 +28,19 @@ import org.slf4j.LoggerFactory;
 public class JeeslMmgFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>, 
 								MG extends JeeslMmgGallery<L>,
-								MI extends JeeslMmgItem<L,MG>,
+								MI extends JeeslMmgItem<L,MG,?,USER>,
 								MC extends JeeslMmgClassification<L,R,MC,?>,
-								MQ extends JeeslMmgQuality<L,D,MQ,?>>
+								MQ extends JeeslMmgQuality<L,D,MQ,?>,
+								USER extends JeeslSimpleUser>
 					extends JeeslFacadeBean
-					implements JeeslMmgFacade<L,D,R,MG,MI,MC,MQ>
+					implements JeeslMmgFacade<L,D,R,MG,MI,MC,MQ,USER>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslMmgFacadeBean.class);
 
-	private final MmgFactoryBuilder<L,D,?,R,MG,MI,MC,MQ> fbMmg;
+	private final MmgFactoryBuilder<L,D,?,R,MG,MI,MC,MQ,USER> fbMmg;
 	
-	public JeeslMmgFacadeBean(EntityManager em, MmgFactoryBuilder<L,D,?,R,MG,MI,MC,MQ> fbMmg)
+	public JeeslMmgFacadeBean(EntityManager em, MmgFactoryBuilder<L,D,?,R,MG,MI,MC,MQ,USER> fbMmg)
 	{
 		super(em);
 		this.fbMmg=fbMmg;

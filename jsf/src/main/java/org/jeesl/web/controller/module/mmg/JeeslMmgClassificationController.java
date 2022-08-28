@@ -10,6 +10,7 @@ import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.module.mmg.JeeslMmgClassificationCallback;
+import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgClassification;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgGallery;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgItem;
@@ -19,6 +20,7 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.web.controller.util.tree.AbstractTreeClassificationController;
@@ -29,9 +31,11 @@ public class JeeslMmgClassificationController <L extends JeeslLang, D extends Je
 												G extends JeeslGraphic<L,D,GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>,
 												R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 												MG extends JeeslMmgGallery<L>,
-												MI extends JeeslMmgItem<L,MG>,
+												MI extends JeeslMmgItem<L,MG,FRC,USER>,
 												MC extends JeeslMmgClassification<L,R,MC,G>,
-												MQ extends JeeslMmgQuality<L,D,MQ,?>>
+												MQ extends JeeslMmgQuality<L,D,MQ,?>,
+												FRC extends JeeslFileContainer<?,?>,
+												USER extends JeeslSimpleUser>
 		extends AbstractTreeClassificationController<L,D,LOC,G,GT,R,RREF,MC> 
 		implements SbSingleBean
 {
@@ -41,10 +45,10 @@ public class JeeslMmgClassificationController <L extends JeeslLang, D extends Je
 	@SuppressWarnings("unused")
 	private final JeeslMmgClassificationCallback callback;
 
-	private final MmgFactoryBuilder<L,D,LOC,R,MG,MI,MC,MQ> fbMmg;
+	private final MmgFactoryBuilder<L,D,LOC,R,MG,MI,MC,MQ,USER> fbMmg;
 
 	public JeeslMmgClassificationController(final JeeslMmgClassificationCallback callback,
-												final MmgFactoryBuilder<L,D,LOC,R,MG,MI,MC,MQ> fbMmg,
+												final MmgFactoryBuilder<L,D,LOC,R,MG,MI,MC,MQ,USER> fbMmg,
 												final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg)
 	{
 		super(fbSvg,fbMmg.getClassLocale(),fbMmg.getClassClassification());
@@ -52,7 +56,7 @@ public class JeeslMmgClassificationController <L extends JeeslLang, D extends Je
 		this.fbMmg=fbMmg;
 	}
 	
-	public void postConstructTreeElement(JeeslMmgFacade<L,D,R,MG,MI,MC,MQ> fMmg,
+	public void postConstructTreeElement(JeeslMmgFacade<L,D,R,MG,MI,MC,MQ,USER> fMmg,
 									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)

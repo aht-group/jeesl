@@ -1,9 +1,12 @@
 package org.jeesl.factory.builder.module;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
+import org.jeesl.factory.ejb.io.fr.EjbIoFrContainerFactory;
 import org.jeesl.factory.ejb.module.mmg.EjbMmgClassificationFactory;
 import org.jeesl.factory.ejb.module.mmg.EjbMmgGalleryFactory;
 import org.jeesl.factory.ejb.module.mmg.EjbMmgItemFactory;
+import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
+import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgClassification;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgGallery;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgItem;
@@ -11,6 +14,7 @@ import org.jeesl.interfaces.model.module.mmg.JeeslMmgQuality;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +22,10 @@ import org.slf4j.LoggerFactory;
 public class MmgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								R extends JeeslTenantRealm<L,D,R,?>, 
 								MG extends JeeslMmgGallery<L>,
-								MI extends JeeslMmgItem<L,MG>,
+								MI extends JeeslMmgItem<L,MG,?,USER>,
 								MC extends JeeslMmgClassification<L,R,MC,?>,
-								MQ extends JeeslMmgQuality<L,D,MQ,?>>
+								MQ extends JeeslMmgQuality<L,D,MQ,?>,
+								USER extends JeeslSimpleUser>
 	extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(MmgFactoryBuilder.class);
@@ -45,5 +50,5 @@ public class MmgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, 
 	
 	public EjbMmgClassificationFactory<L,R,MC> ejbClassification(){return new EjbMmgClassificationFactory<>(cClassification);}
 	public EjbMmgGalleryFactory<L,MG> ejbGallery(){return new EjbMmgGalleryFactory<>(cGallery);}
-	public EjbMmgItemFactory<L,MC,MG,MI> ejbItem(){return new EjbMmgItemFactory<>(cItem);}
+	public EjbMmgItemFactory<L,MC,MG,MI,USER> ejbItem(){return new EjbMmgItemFactory<>(cItem);}
 }
