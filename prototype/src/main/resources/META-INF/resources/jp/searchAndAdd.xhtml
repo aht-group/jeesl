@@ -29,7 +29,7 @@
 		.selectAndAdd{
 			float: left;
 			margin-right: 5px;
-			width:inherit;
+			width:inherit;		
 		}
 
 		.selectAndAdd .ui-selectlistbox-listcontainer{
@@ -47,53 +47,54 @@
 	</h:outputStylesheet>
   
 	<p:column>
-		<p:selectOneListbox prependId="false" id="#{cc.attrs.id}" value="#{cc.attrs.value}"  
-		styleClass="selectAndAdd" var="t" filter="true" filterMatchMode="contains" onBlur="addFilterText();">
-			<f:selectItems value="#{cc.attrs.selectItems}" var="s" itemLabel="#{s.name}" itemValue="#{s}"/>
- 		   <p:column>
-                <h:outputText value="#{t.name}" />
-            </p:column>
-		</p:selectOneListbox>
-		<p:inputText value="#{cc.attrs.strFilterText}" id="filterText" type="hidden" />
-		<script type="text/javascript">
-			// <![CDATA[
-			$(function () {
-				$('##{combinedComponetClientId}_filter').bind("keyup", function(){
-												var txtInput = $('##{combinedComponetClientId}_filter').val();
-												var sel = $('##{combinedComponetClientId}_input')[0];
-												var selectedIndex;
-												for(i = 0; i < sel.options.length; i++) {
-															optItem = sel.options[i];
-															if (optItem.text.toUpperCase() === txtInput.toUpperCase()) {
-																optItem.selected = true;
-																selectedIndex = i + 1;
-																sel.value = optItem.value;
+		
+			<p:selectOneListbox prependId="false" id="#{cc.attrs.id}" value="#{cc.attrs.value}"  
+				styleClass="selectAndAdd" var="t" filter="true" filterMatchMode="contains" onBlur="addFilterText();">
+				<f:selectItems value="#{cc.attrs.selectItems}" var="s" itemLabel="#{s.name}" itemValue="#{s}"/>
+				<p:column>
+					<h:outputText value="#{t.name}" />
+				</p:column>
+			</p:selectOneListbox>
+			<p:inputText value="#{cc.attrs.strFilterText}" id="filterText" type="hidden" />
+			<script type="text/javascript">
+				// <![CDATA[
+				$(function () {
+					$('##{combinedComponetClientId}_filter').bind("keyup", function(){
+													var txtInput = $('##{combinedComponetClientId}_filter').val();
+													var sel = $('##{combinedComponetClientId}_input')[0];
+													var selectedIndex;
+													for(i = 0; i < sel.options.length; i++) {
+																optItem = sel.options[i];
+																if (optItem.text.toUpperCase() === txtInput.toUpperCase()) {
+																	optItem.selected = true;
+																	selectedIndex = i + 1;
+																	sel.value = optItem.value;
+																}
 															}
-														}
-												if(sel.selectedIndex > 0){
-													entitySelector = $('##{combinedComponetClientId}').find(".ui-selectlistbox-item:nth-child(" + selectedIndex +")");
-													entitySelector.addClass("ui-state-highlight");
-												}
-												});
-												
+													if(sel.selectedIndex > 0){
+														entitySelector = $('##{combinedComponetClientId}').find(".ui-selectlistbox-item:nth-child(" + selectedIndex +")");
+														entitySelector.addClass("ui-state-highlight");
+													}
+													});
+													
 
-				$('##{combinedComponetClientId}_input').bind("change", function(){
-												var sel = $('##{combinedComponetClientId}_input')[0];
-												$('##{combinedComponetClientId}_filter').val(sel.options[sel.selectedIndex].text);
+					$('##{combinedComponetClientId}_input').bind("change", function(){
+													var sel = $('##{combinedComponetClientId}_input')[0];
+													$('##{combinedComponetClientId}_filter').val(sel.options[sel.selectedIndex].text);
+					});
 				});
-			});
+				
+				function addText(){
+						var txtInput = $('##{combinedComponetClientId}_filter').val();
+						$('##{componetClientId}\\:filterText').val(txtInput);
+						txtInput = $('##{componetClientId}\\:filterText').val();
+					}
+				// ]]>
+			</script>
+			<p:commandButton  prependId="false" id="buttonAddAction" value="Add New" update="@form" onstart="addText();"  style="visibility: hidden;">
+				<f:actionListener binding="#{cc.attrs.addActionListner}"/>
+			</p:commandButton>
 			
-			function addText(){
-					var txtInput = $('##{combinedComponetClientId}_filter').val();
-					$('##{componetClientId}\\:filterText').val(txtInput);
-					txtInput = $('##{componetClientId}\\:filterText').val();
-				}
-			// ]]>
-		</script>
-
-		<p:commandButton  prependId="false" id="buttonAddAction" value="Add" update="@form" onstart="addText();" >
-			<f:actionListener binding="#{cc.attrs.addActionListner}"/>
-		</p:commandButton>
 	</p:column>
 	</composite:implementation>
 </html>
