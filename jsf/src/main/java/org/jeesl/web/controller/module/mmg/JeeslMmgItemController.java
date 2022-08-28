@@ -7,6 +7,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslMmgFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.MmgFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -15,6 +16,7 @@ import org.jeesl.interfaces.model.module.mmg.JeeslMmgClassification;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgGallery;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgItem;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgQuality;
+import org.jeesl.interfaces.model.module.mmg.JeeslWithMmgGallery;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -27,8 +29,8 @@ import org.slf4j.LoggerFactory;
 
 public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
-											G extends JeeslMmgGallery<L>,
-											I extends JeeslMmgItem<L,D,R>,
+											MG extends JeeslMmgGallery<L>,
+											I extends JeeslMmgItem<L,MG>,
 											C extends JeeslMmgClassification<L,R,C,?>,
 											Q extends JeeslMmgQuality<L,D,Q,?>>
 		extends AbstractJeeslWebController<L,D,LOC>
@@ -37,10 +39,11 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslMmgItemController.class);
 	
+	@SuppressWarnings("unused")
 	private final JeeslMmgItemCallback callback;
-	private JeeslMmgFacade<L,D,R,G,I,C,Q> fRmmv;
+	private JeeslMmgFacade<L,D,R,MG,I,C,Q> fRmmv;
 	
-	private final MmgFactoryBuilder<L,D,LOC,R,G,I,C,Q> fbMmg;
+	private final MmgFactoryBuilder<L,D,LOC,R,MG,I,C,Q> fbMmg;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
 	
@@ -50,8 +53,9 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 	
 	protected R realm;
 	protected RREF rref;
+	private MG gallery;
 	
-	public JeeslMmgItemController(final JeeslMmgItemCallback callback, final MmgFactoryBuilder<L,D,LOC,R,G,I,C,Q> fbRmmv)
+	public JeeslMmgItemController(final JeeslMmgItemCallback callback, final MmgFactoryBuilder<L,D,LOC,R,MG,I,C,Q> fbRmmv)
 	{
 		super(fbRmmv.getClassL(),fbRmmv.getClassD());
 		this.callback=callback;
@@ -63,7 +67,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 		classifications = new ArrayList<>();
 	}
 	
-	public void postConstructTreeElement(JeeslMmgFacade<L,D,R,G,I,C,Q> fRmmv,
+	public void postConstructMmgItem(JeeslMmgFacade<L,D,R,MG,I,C,Q> fRmmv,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{
@@ -80,6 +84,18 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 		this.rref=rref;
 		
 		classifications.addAll(fRmmv.all(fbMmg.getClassClassification(),realm,rref));
+	}
+	
+	public <OWNER extends JeeslWithMmgGallery<MG>> void updateGallery(Class<OWNER> cOwner, OWNER owner) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		try {gallery = fRmmv.fMmgGallery(cOwner,owner);}
+		catch (JeeslNotFoundException e)
+		{
+			gallery = fbMmg.ejbGallery().build();
+			gallery = fRmmv.save(gallery);
+			owner.setMmgGallery(gallery);
+			fRmmv.save(owner);
+		}
 	}
 	
 	@Override

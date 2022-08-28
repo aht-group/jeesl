@@ -29,7 +29,7 @@ public class JeeslMmgClassificationController <L extends JeeslLang, D extends Je
 												G extends JeeslGraphic<L,D,GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>,
 												R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 												MG extends JeeslMmgGallery<L>,
-												MI extends JeeslMmgItem<L,D,R>,
+												MI extends JeeslMmgItem<L,MG>,
 												MC extends JeeslMmgClassification<L,R,MC,G>,
 												MQ extends JeeslMmgQuality<L,D,MQ,?>>
 		extends AbstractTreeClassificationController<L,D,LOC,G,GT,R,RREF,MC> 
