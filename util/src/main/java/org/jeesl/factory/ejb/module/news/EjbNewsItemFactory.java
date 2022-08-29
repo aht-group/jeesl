@@ -8,6 +8,7 @@ import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.module.news.JeeslNewsCategory;
+import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
 import org.jeesl.interfaces.model.module.news.JeeslNewsItem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -20,8 +21,9 @@ import org.slf4j.LoggerFactory;
 
 public class EjbNewsItemFactory<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									R extends JeeslTenantRealm<L,D,R,?>,
+									FEED extends JeeslNewsFeed<L,D,R>,
 									CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
-									ITEM extends JeeslNewsItem<L,D,R,CATEGORY,USER,M>,
+									ITEM extends JeeslNewsItem<L,FEED,CATEGORY,USER,M>,
 									USER extends EjbWithId,
 									M extends JeeslMarkup<MT>,
 									MT extends JeeslIoCmsMarkupType<L,D,MT,?>>

@@ -47,13 +47,11 @@ public class AbstractErDiagram
 	private Entities entities;
 	private boolean showErDiagramLabel;
 
-	private OfxMultiLangLatexWriter ofxWriter;
 	private JeeslRevisionRestImport restUpload; public void setRest(JeeslRevisionRestImport restUpload) {this.restUpload = restUpload;}
 	private JeeslRevisionRestExport restDownload; public void setRest(JeeslRevisionRestExport restDownload) {this.restDownload = restDownload;}
 
-	public AbstractErDiagram(Configuration config,OfxMultiLangLatexWriter ofxWriter)
+	public AbstractErDiagram(Configuration config, OfxMultiLangLatexWriter ofxWriter)
 	{
-		this.ofxWriter=ofxWriter;
 		localeCode = "en";
 		fTmp = new File(config.getString(ConfigKey.dirTmp));
 		showErDiagramLabel = true;

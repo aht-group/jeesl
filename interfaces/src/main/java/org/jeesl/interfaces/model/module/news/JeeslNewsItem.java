@@ -5,18 +5,16 @@ import java.time.LocalDateTime;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
-import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisible;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithMarkup;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
-public interface JeeslNewsItem<L extends JeeslLang,D extends JeeslDescription,
-								R extends JeeslTenantRealm<L,D,R,?>,
-								CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
+public interface JeeslNewsItem<L extends JeeslLang,
+								FEED extends JeeslNewsFeed<L,?,?>,
+								CATEGORY extends JeeslNewsCategory<L,?,?,CATEGORY,?>,
 								USER extends EjbWithId,
 								M extends JeeslMarkup<?>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithVisible,

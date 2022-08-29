@@ -257,7 +257,6 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		{
 			return null;
 		}
-		
 	}
 	
 	@Override public List<M> getAllMenus(CTX ctx)
@@ -300,6 +299,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		mapViewsByRole.put(role,role.getViews());
 		mapUsecasesByRole.put(role,role.getUsecases());
 		mapActionsByRole.put(role,role.getActions());
+		if(debugOnInfo) {logger.info("Completed ");}
 	}
 	
 	public void update(U usecase)

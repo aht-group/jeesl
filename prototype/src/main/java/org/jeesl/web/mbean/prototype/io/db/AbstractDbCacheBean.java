@@ -26,7 +26,9 @@ public class AbstractDbCacheBean <L extends JeeslLang, D extends JeeslDescriptio
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbCacheBean.class);
 	
+	@SuppressWarnings("unused")
 	private JeeslIoDbFacade<L,D,?,?,?,?,?> fDb;
+	@SuppressWarnings("unused")
 	private final IoDbFactoryBuilder<L,D,?,?,?,?,?,?,SC,?,?,?> fbDb;
 	
 	private final Map<String,JsonDbCacheStatistic> systemStatistic; public Map<String,JsonDbCacheStatistic> getSystemStatistic() {return systemStatistic;}

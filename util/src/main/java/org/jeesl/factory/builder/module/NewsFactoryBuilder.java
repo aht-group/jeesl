@@ -20,7 +20,7 @@ public class NewsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>,
 								FEED extends JeeslNewsFeed<L,D,R>,
 								CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
-								ITEM extends JeeslNewsItem<L,D,R,CATEGORY,USER,M>,
+								ITEM extends JeeslNewsItem<L,FEED,CATEGORY,USER,M>,
 								USER extends EjbWithId,
 								M extends JeeslMarkup<MT>,
 								MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
@@ -53,5 +53,5 @@ public class NewsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	}
 
 	public EjbNewsFeedFactory<L,D,R,FEED> ejbFeed() {return new EjbNewsFeedFactory<>(cFeed);}
-	public EjbNewsItemFactory<L,D,LOC,R,CATEGORY,ITEM,USER,M,MT> ejbItem() {return new EjbNewsItemFactory<>(cL,cItem,cMarkup);}
+	public EjbNewsItemFactory<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> ejbItem() {return new EjbNewsItemFactory<>(cL,cItem,cMarkup);}
 }

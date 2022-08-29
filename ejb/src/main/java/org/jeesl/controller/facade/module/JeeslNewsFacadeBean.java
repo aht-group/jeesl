@@ -15,7 +15,6 @@ import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.NewsFactoryBuilder;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
-import org.jeesl.interfaces.model.module.calendar.JeeslWithCalendar;
 import org.jeesl.interfaces.model.module.news.JeeslNewsCategory;
 import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
 import org.jeesl.interfaces.model.module.news.JeeslNewsItem;
@@ -32,21 +31,20 @@ import org.slf4j.LoggerFactory;
 public class JeeslNewsFacadeBean<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 								FEED extends JeeslNewsFeed<L,D,R>,
-								CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
-								ITEM extends JeeslNewsItem<L,D,R,CATEGORY,USER,M>,
+								CAT extends JeeslNewsCategory<L,D,R,CAT,?>,
+								ITEM extends JeeslNewsItem<L,FEED,CAT,USER,M>,
 								USER extends EjbWithId,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
+								M extends JeeslMarkup<MT>, MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
 					extends JeeslFacadeBean
-					implements JeeslNewsFacade<L,D,R,FEED,CATEGORY,ITEM,USER,M,MT>
+					implements JeeslNewsFacade<L,D,R,FEED,CAT,ITEM,USER,M,MT>
 {	
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslNewsFacadeBean.class);
 	
-	private final NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews;
+	private final NewsFactoryBuilder<L,D,LOC,R,FEED,CAT,ITEM,USER,M,MT> fbNews;
 	
-	public JeeslNewsFacadeBean(EntityManager em, NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews)
+	public JeeslNewsFacadeBean(EntityManager em, NewsFactoryBuilder<L,D,LOC,R,FEED,CAT,ITEM,USER,M,MT> fbNews)
 	{
 		super(em);
 		this.fbNews=fbNews;
@@ -69,7 +67,6 @@ public class JeeslNewsFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbNews.getClassFeed()+" found for owner "+owner);}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple "+fbNews.getClassFeed()+" found for owner "+owner);}
 	}
-	
 
 	@Override public List<ITEM> fNewsActive()
 	{

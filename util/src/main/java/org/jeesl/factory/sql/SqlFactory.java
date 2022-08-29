@@ -147,6 +147,13 @@ public class SqlFactory
 		return sb.toString();
 	}
 	
+	public static void from(StringBuilder sb, Class<?> c, boolean newLine)
+	{
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		sb.append(" FROM ").append(c.getAnnotation(Table.class).name());
+		newLine(newLine,sb);
+	}
+	
 	public static String from(String table, String as, boolean newLine)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -288,6 +295,13 @@ public class SqlFactory
 		newLine(newLine,sb);
 	}
 	
+	public static <T extends EjbWithId> void in(StringBuilder sb, List<T> list)
+	{
+		List<Long> ids = new ArrayList<>();
+		for(T id : list) {ids.add(id.getId());}
+		sb.append(" (").append(StringUtils.join(ids,",")).append(")");
+	}
+	@Deprecated
 	public static <T extends EjbWithId> String in(List<T> list)
 	{
 		List<Long> ids = new ArrayList<>();

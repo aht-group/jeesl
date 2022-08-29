@@ -19,7 +19,7 @@ public interface JeeslNewsFacade <L extends JeeslLang, D extends JeeslDescriptio
 								R extends JeeslTenantRealm<L,D,R,?>,
 								FEED extends JeeslNewsFeed<L,D,R>,
 								CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
-								ITEM extends JeeslNewsItem<L,D,R,CATEGORY,USER,M>,
+								ITEM extends JeeslNewsItem<L,FEED,CATEGORY,USER,M>,
 								USER extends EjbWithId,
 								M extends JeeslMarkup<MT>,
 								MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
