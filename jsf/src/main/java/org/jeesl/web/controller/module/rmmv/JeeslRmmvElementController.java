@@ -41,8 +41,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 											E extends JeeslRmmvElement<L,R,E,EC>,
 											EC extends JeeslRmmvClassification<L,R,EC,?>,
 											MOD extends JeeslRmmvModule<?,?,MOD,?>,
-											MC extends JeeslRmmvModuleConfig<E,MOD>,
-											USER extends EjbWithId>
+											MC extends JeeslRmmvModuleConfig<E,MOD>>
 		extends AbstractJeeslWebController<L,D,LOC>
 		implements SbSingleBean
 {
@@ -52,7 +51,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	private final JeeslRmmvElementCallback<MC> callback;
 	private JeeslRmmvFacade<L,D,R,E,EC,MOD,MC> fRmmv;
 	
-	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,USER> fbRmmv;
+	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,?,?,?> fbRmmv;
 	private final EjbRmmvConfigFactory<E,MOD,MC> efConfig;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
@@ -72,7 +71,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	private MC config; public MC getConfig() {return config;} public void setConfig(MC config) {this.config = config;}
 	
 	public JeeslRmmvElementController(final JeeslRmmvElementCallback<MC> callback,
-										final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,USER> fbRmmv)
+										final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,?,?,?> fbRmmv)
 	{
 		super(fbRmmv.getClassL(),fbRmmv.getClassD());
 		this.callback=callback;

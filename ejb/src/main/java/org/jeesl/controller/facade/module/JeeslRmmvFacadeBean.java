@@ -19,6 +19,8 @@ import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvClassification;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvElement;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModule;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModuleConfig;
+import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvSubscription;
+import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvSubscriptionItem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
@@ -33,6 +35,8 @@ public class JeeslRmmvFacadeBean<L extends JeeslLang, D extends JeeslDescription
 									EC extends JeeslRmmvClassification<L,R,EC,?>,
 									MOD extends JeeslRmmvModule<L,D,MOD,?>,
 									MC extends JeeslRmmvModuleConfig<E,MOD>,
+									SUB extends JeeslRmmvSubscription<R,USER>,
+									SI extends JeeslRmmvSubscriptionItem<SUB,MC>,
 									USER extends EjbWithId>
 					extends JeeslFacadeBean
 					implements JeeslRmmvFacade<L,D,R,E,EC,MOD,MC>
@@ -40,9 +44,9 @@ public class JeeslRmmvFacadeBean<L extends JeeslLang, D extends JeeslDescription
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslRmmvFacadeBean.class);
 
-	private final RmmvFactoryBuilder<L,D,?,R,E,EC,MOD,MC,USER> fbRmmv;
+	private final RmmvFactoryBuilder<L,D,?,R,E,EC,MOD,MC,SUB,SI,USER> fbRmmv;
 	
-	public JeeslRmmvFacadeBean(EntityManager em, RmmvFactoryBuilder<L,D,?,R,E,EC,MOD,MC,USER> fbRmmv)
+	public JeeslRmmvFacadeBean(EntityManager em, RmmvFactoryBuilder<L,D,?,R,E,EC,MOD,MC,SUB,SI,USER> fbRmmv)
 	{
 		super(em);
 		this.fbRmmv=fbRmmv;

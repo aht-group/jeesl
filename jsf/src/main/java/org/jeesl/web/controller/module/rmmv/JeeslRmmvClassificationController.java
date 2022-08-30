@@ -31,8 +31,7 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 											E extends JeeslRmmvElement<L,R,E,EC>,
 											EC extends JeeslRmmvClassification<L,R,EC,G>,
 											MOD extends JeeslRmmvModule<?,?,MOD,?>,
-											MC extends JeeslRmmvModuleConfig<E,MOD>,
-											USER extends EjbWithId>
+											MC extends JeeslRmmvModuleConfig<E,MOD>>
 		extends AbstractTreeClassificationController<L,D,LOC,G,GT,R,RREF,EC>
 		implements SbSingleBean
 {
@@ -42,10 +41,10 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 	@SuppressWarnings("unused")
 	private final JeeslRmmvClassificationCallback callback;
 
-	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,USER> fbRmmv;
+	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,?,?,?> fbRmmv;
 
 	public JeeslRmmvClassificationController(final JeeslRmmvClassificationCallback callback,
-												final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,USER> fbRmmv,
+												final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,?,?,?> fbRmmv,
 												final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg)
 	{
 		super(fbSvg,fbRmmv.getClassLocale(),fbRmmv.getClassClasification());
