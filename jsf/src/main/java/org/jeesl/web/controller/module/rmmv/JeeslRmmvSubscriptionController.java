@@ -41,16 +41,17 @@ public class JeeslRmmvSubscriptionController <L extends JeeslLang, D extends Jee
 	@SuppressWarnings("unused")
 	private final JeeslRmmvSubscriptionCallback callback;
 
-	private final RmmvFactoryBuilder<L,D,LOC,R,?,?,?,MC,?,?,?> fbRmmv;
+	private final RmmvFactoryBuilder<L,D,LOC,R,?,?,?,MC,SUB,SI,USER> fbRmmv;
 
 	private final List<SUB> subscriptions; public List<SUB> getSubscriptions() {return subscriptions;}
 
 	private R realm;
 	private RREF rref;
+	private USER user;
 	private SUB subscription; public SUB getSubscription() {return subscription;} public void setSubscription(SUB subscription) {this.subscription = subscription;}
 
 	public JeeslRmmvSubscriptionController(final JeeslRmmvSubscriptionCallback callback,
-											final RmmvFactoryBuilder<L,D,LOC,R,?,?,?,MC,?,?,?> fbRmmv)
+											final RmmvFactoryBuilder<L,D,LOC,R,?,?,?,MC,SUB,SI,USER> fbRmmv)
 	{
 		super(fbRmmv.getClassL(),fbRmmv.getClassD());
 		this.callback=callback;
@@ -71,7 +72,7 @@ public class JeeslRmmvSubscriptionController <L extends JeeslLang, D extends Jee
 	public void updateRealmReference(RREF rref, USER user)
 	{
 		this.rref=rref;
-		
+		this.user=user;
 		subscriptions.clear();
 	}
 	
@@ -88,6 +89,6 @@ public class JeeslRmmvSubscriptionController <L extends JeeslLang, D extends Jee
 	public void addSubscription()
 	{
 		this.reset(true);
-		
+		subscription = fbRmmv.ejbSubscription().build(realm,rref,user);
 	}	
 }
