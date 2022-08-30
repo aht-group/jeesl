@@ -5,6 +5,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface EjbWithUser <USER extends JeeslUser<?>> extends EjbWithId
 {
-	public USER getUser();
-	public void setUser(USER user);
+	USER getUser();
+	void setUser(USER user);
 }

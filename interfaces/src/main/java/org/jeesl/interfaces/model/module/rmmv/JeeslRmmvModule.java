@@ -25,5 +25,5 @@ public interface JeeslRmmvModule <L extends JeeslLang, D extends JeeslDescriptio
 								EjbWithCodeGraphic<G>,
 								JeeslStatus<L,D,S>
 {	
-	public enum Code{calendar,gallery,news}
+	public enum Code{calendar,gallery,news,security}
 }

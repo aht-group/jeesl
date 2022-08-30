@@ -12,15 +12,17 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RmmvFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-								R extends JeeslTenantRealm<L,D,R,?>, 
+								R extends JeeslTenantRealm<L,D,R,?>,
 								TE extends JeeslRmmvElement<L,R,TE,EC>,
 								EC extends JeeslRmmvClassification<L,R,EC,?>,
 								MOD extends JeeslRmmvModule<?,?,MOD,?>,
-								MC extends JeeslRmmvModuleConfig<TE,MOD>>
+								MC extends JeeslRmmvModuleConfig<TE,MOD>,
+								USER extends EjbWithId>
 	extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(RmmvFactoryBuilder.class);

@@ -32,16 +32,17 @@ public class JeeslRmmvFacadeBean<L extends JeeslLang, D extends JeeslDescription
 									E extends JeeslRmmvElement<L,R,E,EC>,
 									EC extends JeeslRmmvClassification<L,R,EC,?>,
 									MOD extends JeeslRmmvModule<L,D,MOD,?>,
-									MC extends JeeslRmmvModuleConfig<E,MOD>>
+									MC extends JeeslRmmvModuleConfig<E,MOD>,
+									USER extends EjbWithId>
 					extends JeeslFacadeBean
 					implements JeeslRmmvFacade<L,D,R,E,EC,MOD,MC>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslRmmvFacadeBean.class);
 
-	private final RmmvFactoryBuilder<L,D,?,R,E,EC,MOD,MC> fbRmmv;
+	private final RmmvFactoryBuilder<L,D,?,R,E,EC,MOD,MC,USER> fbRmmv;
 	
-	public JeeslRmmvFacadeBean(EntityManager em, RmmvFactoryBuilder<L,D,?,R,E,EC,MOD,MC> fbRmmv)
+	public JeeslRmmvFacadeBean(EntityManager em, RmmvFactoryBuilder<L,D,?,R,E,EC,MOD,MC,USER> fbRmmv)
 	{
 		super(em);
 		this.fbRmmv=fbRmmv;

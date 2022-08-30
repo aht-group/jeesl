@@ -133,9 +133,9 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		super.updateUiForCategory();
 
 		supportsUpload = JeeslOptionUploadable.class.isAssignableFrom(optionClass);
+		
 		supportsImage = JeeslStatusWithImage.class.isAssignableFrom(optionClass);
 		supportsGraphic = EjbWithGraphic.class.isAssignableFrom(optionClass);
-
 		supportsFigure = EjbWithGraphicFigure.class.isAssignableFrom(optionClass);
 	}
 
