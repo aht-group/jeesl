@@ -64,7 +64,7 @@
 		<h:form id="fConfigs">
 			<p:dataTable var="c" value="#{cc.attrs.controller.configs}" draggableRows="false"
 							selection="#{cc.attrs.controller.config}" selectionMode="single" rowKey="#{c.id}"
-							rendered="#{not empty cc.attrs.controller.element}">
+							rendered="#{(not empty cc.attrs.controller.element) and (cc.attrs.controller.element.id gt 0)}">
 				<f:facet name="header">
 					<j:dtHeader entity="RmmvModuleConfig" code="listOf">
 						<j:svg type="jeeslAdd" listener="#{cc.attrs.controller.addConfig()}" update="@form :#{cc.id}:fConfig"/>

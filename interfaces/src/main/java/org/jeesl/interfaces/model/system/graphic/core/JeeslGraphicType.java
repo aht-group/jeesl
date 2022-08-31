@@ -8,6 +8,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
+import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
+import org.jeesl.interfaces.model.with.primitive.text.EjbWithSymbol;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 
 @DownloadJeeslData
@@ -15,7 +17,7 @@ public interface JeeslGraphicType <L extends JeeslLang, D extends JeeslDescripti
 									S extends JeeslStatus<L,D,S>,
 									G extends JeeslGraphic<L,D,?,?,?>>
 						extends Serializable,EjbPersistable,
-							
+								EjbWithSymbol,JeeslStatusWithSymbol,
 								JeeslStatusFixedCode,EjbWithCodeGraphic<G>,
 								JeeslStatus<L,D,S>
 {
