@@ -46,7 +46,7 @@
 			</j:slot>
 			<j:slot id="sView" width="3">
 				<h:form id="fView">
-					<p:panel id="pView" rendered="#{not empty cc.attrs.bean.entity}" styleClass="jeeslPanel">
+					<p:panel id="pView" rendered="#{not empty cc.attrs.bean.entity}" styleClass="jeesl-panel">
 						<f:facet name="header"><j:pHeader entity="RevisionEntity"/></f:facet>
 						<f:facet name="actions">
 							<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelEntity()}" update=":#{cc.id}:sView :#{cc.id}:sAttributes" tooltip="#{msg.jeeslTtCancel}"/>
@@ -120,7 +120,7 @@
 			       	</p:dataTable>
 				</h:form>
 				<h:form id="fMapping">
-					<p:panel header="#{msg.aupRevisionMapping}" rendered="#{not empty cc.attrs.bean.mapping}" styleClass="jeeslPanel">
+					<p:panel header="#{msg.aupRevisionMapping}" rendered="#{not empty cc.attrs.bean.mapping}" styleClass="jeesl-panel">
 						<f:facet name="actions">
 							<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelMapping()}" update=":#{cc.id}:sAttributes"/>
 							<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveMapping()}" update=":#{cc.id}:sAttributes" rendered="#{cc.attrs.bean.uiAllowSave}"/>
