@@ -39,7 +39,7 @@ import org.jeesl.model.json.module.ts.JsonTsData;
 import org.jeesl.model.json.module.ts.JsonTsSeries;
 import org.jeesl.util.query.json.JsonStatusQueryProvider;
 import org.jeesl.util.query.json.JsonTsQueryProvider;
-import org.jeesl.web.rest.AbstractJeeslRestService;
+import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +65,7 @@ public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 							WS extends JeeslStatus<L,D,WS>,
 							QAF extends JeeslStatus<L,D,QAF>,
 							CRON extends JeeslTsCron<SCOPE,INT,STAT>>
-					extends AbstractJeeslRestService<L,D>
+					extends AbstractJeeslRestHandler<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(TsRestHandler.class);
 	

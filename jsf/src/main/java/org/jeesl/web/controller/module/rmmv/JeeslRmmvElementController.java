@@ -49,7 +49,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	final static Logger logger = LoggerFactory.getLogger(JeeslRmmvElementController.class);
 	
 	private final JeeslRmmvElementCallback<MC> callback;
-	private JeeslRmmvFacade<L,D,R,E,EC,MOD,MC> fRmmv;
+	private JeeslRmmvFacade<L,D,R,E,EC,MOD,MC,?,?,?> fRmmv;
 	
 	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,?,?,?> fbRmmv;
 	private final EjbRmmvConfigFactory<E,MOD,MC> efConfig;
@@ -88,7 +88,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 		classifications = new ArrayList<>();
 	}
 	
-	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,MOD,MC> fRmmv,
+	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,MOD,MC,?,?,?> fRmmv,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{

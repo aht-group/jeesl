@@ -22,7 +22,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.module.job.Jobs;
-import org.jeesl.web.rest.AbstractJeeslRestService;
+import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +43,7 @@ public class SystemJobRestService <L extends JeeslLang,D extends JeeslDescriptio
 							CONTAINER extends JeeslFileContainer<?,?>,
 							USER extends EjbWithEmail
 							>
-					extends AbstractJeeslRestService<L,D>
+					extends AbstractJeeslRestHandler<L,D>
 					implements JeeslJobRestExport,JeeslJobRestImport,JeeslJobRest
 {
 	final static Logger logger = LoggerFactory.getLogger(SystemJobRestService.class);

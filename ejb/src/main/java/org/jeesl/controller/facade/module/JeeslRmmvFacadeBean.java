@@ -35,11 +35,11 @@ public class JeeslRmmvFacadeBean<L extends JeeslLang, D extends JeeslDescription
 									EC extends JeeslRmmvClassification<L,R,EC,?>,
 									MOD extends JeeslRmmvModule<L,D,MOD,?>,
 									MC extends JeeslRmmvModuleConfig<E,MOD>,
-									SUB extends JeeslRmmvSubscription<R,USER>,
+									SUB extends JeeslRmmvSubscription<R,MOD,USER>,
 									SI extends JeeslRmmvSubscriptionItem<SUB,MC>,
 									USER extends EjbWithId>
 					extends JeeslFacadeBean
-					implements JeeslRmmvFacade<L,D,R,E,EC,MOD,MC>
+					implements JeeslRmmvFacade<L,D,R,E,EC,MOD,MC,SUB,SI,USER>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslRmmvFacadeBean.class);

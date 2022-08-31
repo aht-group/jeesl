@@ -18,7 +18,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.jeesl.Container;
-import org.jeesl.web.rest.AbstractJeeslRestService;
+import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,7 @@ public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescript
 									LEVEL extends JeeslStatus<L,D,LEVEL>,
 									TYPE extends JeeslStatus<L,D,TYPE>,
 									RESOLUTION extends JeeslConstraintResolution<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>>
-		extends AbstractJeeslRestService<L,D>
+		extends AbstractJeeslRestHandler<L,D>
 		implements JeeslConstraintRestExport,JeeslConstraintRestImport
 {
 	final static Logger logger = LoggerFactory.getLogger(ConstraintRestService.class);

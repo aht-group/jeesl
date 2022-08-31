@@ -52,7 +52,7 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 		this.fbRmmv=fbRmmv;
 	}
 	
-	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,MOD,MC> fRmmv,
+	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,MOD,MC,?,?,?> fRmmv,
 									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
@@ -71,5 +71,5 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 		this.reset(true);
 		classification = fbRmmv.ejbClassification().build(realm,rref);
 		classification.setName(efLang.createEmpty(lp.getLocales()));
-	}	
+	}
 }

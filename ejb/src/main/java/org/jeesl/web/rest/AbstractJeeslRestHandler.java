@@ -15,9 +15,9 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.xml.status.Status;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
-public abstract class AbstractJeeslRestService <L extends JeeslLang,D extends JeeslDescription>
+public abstract class AbstractJeeslRestHandler <L extends JeeslLang,D extends JeeslDescription>
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslRestService.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslRestHandler.class);
 	
 	private final JeeslFacade fUtils;
 	
@@ -26,7 +26,7 @@ public abstract class AbstractJeeslRestService <L extends JeeslLang,D extends Je
 	
 	protected final XmlContainerFactory xfContainer;
 
-	public AbstractJeeslRestService(final JeeslFacade fUtils,final Class<L> cL, final Class<D> cD)
+	public AbstractJeeslRestHandler(final JeeslFacade fUtils,final Class<L> cL, final Class<D> cD)
 	{
 		this.fUtils=fUtils;
 		this.cL=cL;

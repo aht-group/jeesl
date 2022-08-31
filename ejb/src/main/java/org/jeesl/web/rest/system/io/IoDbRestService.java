@@ -24,7 +24,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.xml.jeesl.Container;
-import org.jeesl.web.rest.AbstractJeeslRestService;
+import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +39,7 @@ public class IoDbRestService<L extends JeeslLang,D extends JeeslDescription,
 							FILE extends JeeslDbDumpFile<DUMP,HOST,STATUS>,
 							HOST extends JeeslIoSsiHost<L,D,SYSTEM>,
 							STATUS extends JeeslDbDumpStatus<L,D,STATUS,?>>
-					extends AbstractJeeslRestService<L,D>
+					extends AbstractJeeslRestHandler<L,D>
 					implements JeeslIoDbRestInterface,JeeslIoDbRestExport,JeeslIoDbRestImport
 {
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestService.class);

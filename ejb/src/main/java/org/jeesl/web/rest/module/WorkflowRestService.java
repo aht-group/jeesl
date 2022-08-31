@@ -40,7 +40,7 @@ import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.module.workflow.Processes;
 import org.jeesl.model.xml.module.workflow.Workflow;
 import org.jeesl.util.query.xml.module.XmlWorkflowQuery;
-import org.jeesl.web.rest.AbstractJeeslRestService;
+import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,7 +71,7 @@ public class WorkflowRestService <L extends JeeslLang, D extends JeeslDescriptio
 									WD extends JeeslWorkflowDelegate<WY,USER>,
 									FRC extends JeeslFileContainer<?,?>,
 									USER extends JeeslUser<SR>>
-					extends AbstractJeeslRestService<L,D>
+					extends AbstractJeeslRestHandler<L,D>
 					implements JeeslWorkflowRestExportInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(WorkflowRestService.class);

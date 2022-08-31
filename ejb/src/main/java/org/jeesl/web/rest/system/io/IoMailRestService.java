@@ -25,7 +25,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.io.mail.Mail;
 import org.jeesl.model.xml.system.io.mail.Mails;
-import org.jeesl.web.rest.AbstractJeeslRestService;
+import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 								STATUS extends JeeslMailStatus<L,D,STATUS,?>,
 								RETENTION extends JeeslMailRetention<L,D,RETENTION,?>,
 								FRC extends JeeslFileContainer<?,?>>
-					extends AbstractJeeslRestService<L,D>
+					extends AbstractJeeslRestHandler<L,D>
 					implements JeeslIoMailRestInterface,JeeslIoMailRestExport,JeeslIoMailRestImport
 {
 	final static Logger logger = LoggerFactory.getLogger(IoMailRestService.class);

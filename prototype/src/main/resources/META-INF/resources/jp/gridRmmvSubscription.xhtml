@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="controller" required="true"/>
+		<composite:attribute name="withCode" required="false" default="false"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:slot width="3">
+		<h:form id="fSubscriptions">
+			<p:dataTable var="s" value="#{cc.attrs.controller.subscriptions}" draggableRows="false"
+							selection="#{cc.attrs.controller.subscription}" selectionMode="single" rowKey="#{s.id}">
+				<f:facet name="header">
+					<j:dtHeader entity="RmmvSubscription" code="listOf">
+						<j:svg type="jeeslAdd" listener="#{cc.attrs.controller.addSubscription()}" update="@form :#{cc.id}:sSubscription"/>
+					</j:dtHeader>
+				</f:facet>
+				<p:ajax event="rowSelect" listener="#{cc.attrs.controller.selectSubscription()}" update=":#{cc.id}:sSubscription"/>
+				<p:column>
+					<jtp:symbolizer value="#{s.module}"/>
+				</p:column>
+				<p:column>
+					<f:facet name="header"><jtp:label entity="RmmvSubscription" code="name"/></f:facet>
+					<h:outputText value="#{s.name}"/>
+				</p:column>
+		   	</p:dataTable>
+		</h:form>
+	</j:slot>
+	<j:slot id="sSubscription" width="9">
+		<h:form id="fType" rendered="#{not empty cc.attrs.controller.subscription}">
+			<p:panel styleClass="jeeslPanel">
+				<f:facet name="header"><j:pHeader entity="RmmvSubscription" /></f:facet>
+				<f:facet name="actions">
+					<j:svg type="jeeslCancel" listener="#{cc.attrs.controller.cancelSubscription()}" update=":#{cc.id}:grid"/>
+					<j:svg type="jeeslSave"   listener="#{cc.attrs.controller.saveSubscription()}" update=":#{cc.id}:grid"/>
+					<j:svg type="jeeslDelete" listener="#{cc.attrs.controller.deleteSubscription()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.controller.subscription.id gt 0}" />
+				</f:facet>
+				<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+				<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					<jtp:label entity="RmmvSubscription" code="id"/>
+					<h:outputText value="#{cc.attrs.controller.subscription.id}"/>
+					
+					<jtp:label entity="RmmvSubscription" code="code"/>
+					<h:outputText value="#{cc.attrs.controller.subscription.code}"/>
+				
+					<jtp:label entity="RmmvSubscription" code="name"/>
+					<jtp:inputText value="#{cc.attrs.controller.subscription.name}"/>
+					
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+		<h:form id="fItems" rendered="#{not empty cc.attrs.controller.subscription and cc.attrs.controller.subscription.id gt 0}">
+			<p:dataTable var="i" value="#{cc.attrs.controller.items}" draggableRows="false"
+							selection="#{cc.attrs.controller.item}" selectionMode="single" rowKey="#{i.id}">
+				<f:facet name="header">
+					<j:dtHeader entity="RmmvSubscriptionItem" code="listOf">
+						<j:svg type="jeeslAdd" listener="#{cc.attrs.controller.addItem()}" update="@form :#{cc.id}:fItem"/>
+					</j:dtHeader>
+				</f:facet>
+				<p:ajax event="rowSelect" listener="#{cc.attrs.controller.selectItem()}" update=":#{cc.id}:fItem"/>
+				<p:column>
+					<f:facet name="header"><jtp:label entity="RmmvElement"/></f:facet>
+					<h:outputText value="#{i.config.element.name[cc.attrs.controller.sbhLocale.selection.code].lang}"/>
+				</p:column>
+		   	</p:dataTable>
+		</h:form>
+		<h:form id="fItem">
+			<p:panel styleClass="jeeslPanel" rendered="#{not empty cc.attrs.controller.item}">
+				<f:facet name="header"><j:pHeader entity="RmmvSubscriptionItem"/></f:facet>
+				<f:facet name="actions">
+					<j:svg type="jeeslSave" listener="#{cc.attrs.controller.saveItem()}" update="@form :#{cc.id}:fItems"/>
+					<j:svg type="jeeslDelete" listener="#{cc.attrs.controller.deleteItem()}" update="@form :#{cc.id}:fItems" rendered="#{cc.attrs.controller.item.id gt 0}"/>
+				</f:facet>
+				<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					
+					<jtp:label entity="RmmvModuleConfig" code="module"/>
+					<p:selectOneMenu value="#{cc.attrs.controller.item.config}" effect="fade" autoWidth="false" dynamic="true" disabled="#{cc.attrs.controller.item.id gt 0}">
+						<f:selectItems value="#{cc.attrs.controller.configs}" var="c" itemLabel="#{c.element.name[cc.attrs.controller.sbhLocale.selection.code].lang}" itemValue="#{c}"/>
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</j:slot>
+</jp:grid>
+	</composite:implementation>
+</html>

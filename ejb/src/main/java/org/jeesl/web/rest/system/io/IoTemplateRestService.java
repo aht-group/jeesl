@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.io.template.Templates;
-import org.jeesl.web.rest.AbstractJeeslRestService;
+import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +27,7 @@ public class IoTemplateRestService <L extends JeeslLang,D extends JeeslDescripti
 									DEFINITION extends JeeslIoTemplateDefinition<D,CHANNEL,TEMPLATE>,
 									TOKEN extends JeeslIoTemplateToken<L,D,TEMPLATE,TOKENTYPE>,
 									TOKENTYPE extends JeeslStatus<L,D,TOKENTYPE>>
-		extends AbstractJeeslRestService<L,D>
+		extends AbstractJeeslRestHandler<L,D>
 		implements JeeslIoTemplateRestExport,JeeslIoTemplateRestImport
 {
 	final static Logger logger = LoggerFactory.getLogger(IoTemplateRestService.class);

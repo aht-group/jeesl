@@ -15,12 +15,16 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslRmmvSubscription<R extends JeeslTenantRealm<?,?,R,?>,
+								MOD extends JeeslRmmvModule<?,?,MOD,?>,
 								USER extends EjbWithId>
 						extends Serializable,EjbSaveable,
 								EjbWithCode,EjbWithPositionVisible,EjbWithName,
 								JeeslWithTenantSupport<R>
 {
 	public enum Attributes{user}
+	
+	MOD getModule();
+	void setModule(MOD module);
 	
 	USER getUser();
 	void setUser(USER user);

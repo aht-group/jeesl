@@ -47,7 +47,7 @@ import org.jeesl.util.comparator.ejb.system.io.report.IoReportComparator;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportStyleComparator;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportTemplateComparator;
 import org.jeesl.util.query.xml.system.io.XmlReportQuery;
-import org.jeesl.web.rest.AbstractJeeslRestService;
+import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,7 +83,7 @@ public class IoReportRestService <L extends JeeslLang, D extends JeeslDescriptio
 									FILLING extends JeeslStatus<L,D,FILLING>,
 									TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>,
 									AGGREGATION extends JeeslStatus<L,D,AGGREGATION>>
-					extends AbstractJeeslRestService<L,D>
+					extends AbstractJeeslRestHandler<L,D>
 					implements JeeslIoReportRestExport,JeeslIoReportRestImport
 {
 	final static Logger logger = LoggerFactory.getLogger(IoReportRestService.class);

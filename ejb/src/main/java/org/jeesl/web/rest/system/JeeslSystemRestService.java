@@ -31,7 +31,7 @@ import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.query.xml.SymbolQuery;
 import org.jeesl.util.query.xml.system.io.XmlRevisionQuery;
-import org.jeesl.web.rest.AbstractJeeslRestService;
+import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +49,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 								RER extends JeeslStatus<L,D,RER>,
 								RAT extends JeeslStatus<L,D,RAT>,
 								ERD extends JeeslRevisionDiagram<L,D,RC>>
-					extends AbstractJeeslRestService<L,D>
+					extends AbstractJeeslRestHandler<L,D>
 					implements JeeslSystemRestInterface<L,D,R,G>
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslSystemRestService.class);
