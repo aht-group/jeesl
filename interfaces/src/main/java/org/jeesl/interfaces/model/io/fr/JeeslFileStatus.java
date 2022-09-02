@@ -24,5 +24,5 @@ public interface JeeslFileStatus <L extends JeeslLang, D extends JeeslDescriptio
 									EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	
 	public enum Code{unknown,exists,missing,md5Verified,md5Failed}
-	public enum Attributes{position,code}
+	public enum Attributes{position,code,name}
 }

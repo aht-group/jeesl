@@ -25,58 +25,54 @@
 		<f:facet name="actions">
 			<j:svg type="jeeslCancel" listener="#{dialogBean.save()}" update="@form" library="jeeslGfx"/>
 		</f:facet>
-			
-				<p:dataTable id="dtOpEntity" var="var" value="#{cc.attrs.handler.lazy}" lazy="true"
-					 	selection="#{cc.attrs.handler.op}" selectionMode="single" rowKey="#{var.id}"
-					 	rows="#{cc.attrs.opRows}" rowsPerPageTemplate="#{cc.attrs.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">>
-					<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.addEntity()}" oncomplete="PF('#{cc.attrs.widgetVar}').hide();"/>
-					
-					<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 0}">
-						<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterBy" value="#{var.column0}"/></c:if>
-						<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
-						<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
-						<f:facet name="header">
-							<h:outputText value="#{appLabelBean.entities[cc.attrs.handler.columns[0].entity][cc.attrs.localeCode].lang}" rendered="#{empty cc.attrs.handler.columns[0].code}"/>
-							<h:outputText value="#{appLabelBean.labels[cc.attrs.handler.columns[0].entity][cc.attrs.handler.columns[0].code][cc.attrs.localeCode].lang}" rendered="#{not empty cc.attrs.handler.columns[0].code}"/>
-						</f:facet>
-						<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[0].xpath}" localeCode="#{localeCode}"/>
-					</p:column>
-					<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 1}">
-						<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterBy" value="#{var.column1}"/></c:if>
-						<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
-						<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
-						<f:facet name="header">
-							<h:outputText value="#{appLabelBean.entities[cc.attrs.handler.columns[1].entity][cc.attrs.localeCode].lang}" rendered="#{empty cc.attrs.handler.columns[1].code}"/>
-							<h:outputText value="#{appLabelBean.labels[cc.attrs.handler.columns[1].entity][cc.attrs.handler.columns[1].code][cc.attrs.localeCode].lang}" rendered="#{not empty cc.attrs.handler.columns[1].code}"/>
-						</f:facet>
-						<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[1].xpath}" localeCode="#{localeCode}"/>
-					</p:column>
-					<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 2}">
-						<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterBy" value="#{var.column2}"/></c:if>
-						<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
-						<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
-						<f:facet name="header">
-							<h:outputText value="#{appLabelBean.entities[cc.attrs.handler.columns[2].entity][cc.attrs.localeCode].lang}" rendered="#{empty cc.attrs.handler.columns[2].code}"/>
-							<h:outputText value="#{appLabelBean.labels[cc.attrs.handler.columns[2].entity][cc.attrs.handler.columns[2].code][cc.attrs.localeCode].lang}" rendered="#{not empty cc.attrs.handler.columns[2].code}"/>
-						</f:facet>
-						<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[2].xpath}" localeCode="#{localeCode}"/>
-					</p:column>
-					
-					<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 3}">
-						<c:if test="#{not empty cc.attrs.handler.columns[3].filterBy}"><f:attribute name="filterBy" value="#{var.column3}"/></c:if>
-						<c:if test="#{not empty cc.attrs.handler.columns[3].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
-						<c:if test="#{not empty cc.attrs.handler.columns[3].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
-						<f:facet name="header">
-							<h:outputText value="#{appLabelBean.entities[cc.attrs.handler.columns[3].entity][cc.attrs.localeCode].lang}" rendered="#{empty cc.attrs.handler.columns[3].code}"/>
-							<h:outputText value="#{appLabelBean.labels[cc.attrs.handler.columns[3].entity][cc.attrs.handler.columns[3].code][cc.attrs.localeCode].lang}" rendered="#{not empty cc.attrs.handler.columns[3].code}"/>
-						</f:facet>
-						<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[3].xpath}" localeCode="#{localeCode}"/>
-					</p:column>
-					
-				</p:dataTable>
-			
-		
-	</p:dialog>
+			<p:dataTable id="dtOpEntity" var="var" value="#{cc.attrs.handler.lazy}" lazy="true"
+				 	selection="#{cc.attrs.handler.op}" selectionMode="single" rowKey="#{var.id}"
+				 	rows="#{cc.attrs.opRows}" rowsPerPageTemplate="#{cc.attrs.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">>
+				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.addEntity()}" oncomplete="PF('#{cc.attrs.widgetVar}').hide();"/>
+				
+				<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 0}">
+					<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterBy" value="#{var.column0}"/></c:if>
+					<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
+					<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
+					<f:facet name="header">
+						<h:outputText value="#{appLabelBean.entities[cc.attrs.handler.columns[0].entity][cc.attrs.localeCode].lang}" rendered="#{empty cc.attrs.handler.columns[0].code}"/>
+						<h:outputText value="#{appLabelBean.labels[cc.attrs.handler.columns[0].entity][cc.attrs.handler.columns[0].code][cc.attrs.localeCode].lang}" rendered="#{not empty cc.attrs.handler.columns[0].code}"/>
+					</f:facet>
+					<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[0].xpath}" localeCode="#{localeCode}"/>
+				</p:column>
+				<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 1}">
+					<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterBy" value="#{var.column1}"/></c:if>
+					<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
+					<c:if test="#{not empty cc.attrs.handler.columns[1].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
+					<f:facet name="header">
+						<h:outputText value="#{appLabelBean.entities[cc.attrs.handler.columns[1].entity][cc.attrs.localeCode].lang}" rendered="#{empty cc.attrs.handler.columns[1].code}"/>
+						<h:outputText value="#{appLabelBean.labels[cc.attrs.handler.columns[1].entity][cc.attrs.handler.columns[1].code][cc.attrs.localeCode].lang}" rendered="#{not empty cc.attrs.handler.columns[1].code}"/>
+					</f:facet>
+					<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[1].xpath}" localeCode="#{localeCode}"/>
+				</p:column>
+				<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 2}">
+					<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterBy" value="#{var.column2}"/></c:if>
+					<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
+					<c:if test="#{not empty cc.attrs.handler.columns[2].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
+					<f:facet name="header">
+						<h:outputText value="#{appLabelBean.entities[cc.attrs.handler.columns[2].entity][cc.attrs.localeCode].lang}" rendered="#{empty cc.attrs.handler.columns[2].code}"/>
+						<h:outputText value="#{appLabelBean.labels[cc.attrs.handler.columns[2].entity][cc.attrs.handler.columns[2].code][cc.attrs.localeCode].lang}" rendered="#{not empty cc.attrs.handler.columns[2].code}"/>
+					</f:facet>
+					<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[2].xpath}" localeCode="#{localeCode}"/>
+				</p:column>
+				
+				<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 3}">
+					<c:if test="#{not empty cc.attrs.handler.columns[3].filterBy}"><f:attribute name="filterBy" value="#{var.column3}"/></c:if>
+					<c:if test="#{not empty cc.attrs.handler.columns[3].filterBy}"><f:attribute name="filterMatchMode" value="contains"/></c:if>
+					<c:if test="#{not empty cc.attrs.handler.columns[3].filterBy}"><f:attribute name="filterStyle" value="width: 50px;"/></c:if>
+					<f:facet name="header">
+						<h:outputText value="#{appLabelBean.entities[cc.attrs.handler.columns[3].entity][cc.attrs.localeCode].lang}" rendered="#{empty cc.attrs.handler.columns[3].code}"/>
+						<h:outputText value="#{appLabelBean.labels[cc.attrs.handler.columns[3].entity][cc.attrs.handler.columns[3].code][cc.attrs.localeCode].lang}" rendered="#{not empty cc.attrs.handler.columns[3].code}"/>
+					</f:facet>
+					<j:outputXpath value="#{var}" xpath="#{cc.attrs.handler.columns[3].xpath}" localeCode="#{localeCode}"/>
+				</p:column>
+			</p:dataTable>
+		</p:dialog>
 	</h:form>
 </composite:implementation>
 </html>

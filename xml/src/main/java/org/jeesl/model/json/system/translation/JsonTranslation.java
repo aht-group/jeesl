@@ -47,7 +47,6 @@ public class JsonTranslation implements Serializable
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		
 		return sb.toString();
 	}
 }
