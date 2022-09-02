@@ -32,6 +32,7 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 {
 	final static Logger logger = LoggerFactory.getLogger(IoSsiDataFactoryBuilder.class);
 	
+	private final Class<SYSTEM> cSystem; public Class<SYSTEM> getClassSystem(){return cSystem;}
 	private final Class<MAPPING> cMapping; public Class<MAPPING> getClassMapping(){return cMapping;}
 	private final Class<ATTRIBUTE> cAttribute; public Class<ATTRIBUTE> getClassAttribute(){return cAttribute;}
 	private final Class<DATA> cData; public Class<DATA> getClassData(){return cData;}
@@ -41,12 +42,14 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 	private final Class<JOB> cJob; public Class<JOB> getClassJob(){return cJob;}
 	
 	public IoSsiDataFactoryBuilder(final Class<L> cL, final Class<D> cD,
+								final Class<SYSTEM> cSystem,
 								final Class<MAPPING> cMapping, final Class<ATTRIBUTE> cAttribute,
 								final Class<DATA> cData, final Class<LINK> cLink, final Class<ENTITY> cEntity,
 								final Class<CLEANING> cCleaning, final Class<JOB> cJob
 								)
 	{
 		super(cL,cD);
+		this.cSystem=cSystem;
 		this.cMapping=cMapping;
 		this.cAttribute=cAttribute;
 		this.cData=cData;

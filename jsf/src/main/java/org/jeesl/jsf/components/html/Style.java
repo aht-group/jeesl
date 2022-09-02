@@ -3,7 +3,6 @@ package org.jeesl.jsf.components.html;
 import java.io.IOException;
 
 import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
 import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
@@ -13,7 +12,7 @@ import net.sf.ahtutils.jsf.util.ComponentAttribute;
 @FacesComponent("org.jeesl.jsf.components.html.Style")
 public class Style extends UIPanel
 {	
-	private static enum Properties {rules}
+	private enum Properties {rules}
 	
 	@Override public boolean getRendersChildren(){return true;}
 	

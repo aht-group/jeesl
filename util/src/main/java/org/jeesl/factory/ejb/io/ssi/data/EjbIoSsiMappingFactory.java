@@ -10,9 +10,9 @@ public class EjbIoSsiMappingFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
 										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 {
-	private final IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,ENTITY,?,?> fbSsi;
+	private final IoSsiDataFactoryBuilder<?,?,SYSTEM,MAPPING,?,?,?,ENTITY,?,?> fbSsi;
 
-	public EjbIoSsiMappingFactory(IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,ENTITY,?,?> fbSsi)
+	public EjbIoSsiMappingFactory(IoSsiDataFactoryBuilder<?,?,SYSTEM,MAPPING,?,?,?,ENTITY,?,?> fbSsi)
 	{
         this.fbSsi = fbSsi;
 	}
@@ -33,6 +33,7 @@ public class EjbIoSsiMappingFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	public void converter(JeeslFacade facade, MAPPING ejb)
 	{
+		if(ejb.getSystem()!=null) {ejb.setSystem(facade.find(fbSsi.getClassSystem(),ejb.getSystem()));}
 		if(ejb.getClassA()!=null) {ejb.setClassA(facade.find(fbSsi.getClassEntity(),ejb.getClassA()));}
 		if(ejb.getClassB()!=null) {ejb.setClassB(facade.find(fbSsi.getClassEntity(),ejb.getClassB()));}
 		if(ejb.getClassC()!=null) {ejb.setClassC(facade.find(fbSsi.getClassEntity(),ejb.getClassC()));}

@@ -59,6 +59,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	
 	private final Map<MAPPING,Boolean> mapTuples; public Map<MAPPING, Boolean> getMapTuples() {return mapTuples;}
 	
+	private final List<SYSTEM> systems; public List<SYSTEM> getSystems() {return systems;}
 	private final List<ENTITY> entities; public List<ENTITY> getEntities() {return entities;}
 	private final List<MAPPING> mappings; public List<MAPPING> getMappings() {return mappings;}
 	private final List<LINK> links; public List<LINK> getLinks() {return links;}
@@ -69,6 +70,8 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	{
 		this.fbSsi=fbSsi;
 		mapTuples = new HashMap<>();
+		
+		systems = new ArrayList<>();
 		mappings = new ArrayList<>();
 		links = new ArrayList<>();
 		entities = new ArrayList<>();
@@ -82,7 +85,10 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	public void postConstructSsiMapping(JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi)
 	{	
 		this.fSsi=fSsi;
+		
+		systems.addAll(fSsi.all(fbSsi.getClassSystem()));
 		links.addAll(fSsi.all(fbSsi.getClassLink()));
+		
 		jogger.milestone(fbSsi.getClassLink().getSimpleName(),null,links.size());
 		
 		entities.addAll(fSsi.all(fbSsi.getClassEntity()));

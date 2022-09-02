@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="controller" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:slot width="7">
+		<p:treeTable var="node" value="#{cc.attrs.controller.tree}"
+						selectionMode="single" selection="#{cc.attrs.controller.node}" style="margin-top:0">
+	        <f:facet name="header">
+	            Single
+	        </f:facet>
+	        <p:column headerText="Name">
+	            <h:outputText value="#{node.name[cc.attrs.controller.sbhLocale.selection.code].lang}" />
+	        </p:column>
+	        <p:column headerText="Size">
+	            <h:outputText value="#{node.code}" />
+	        </p:column>
+	        <p:column headerText="Type">
+	            <h:outputText value="#{node.id}" />
+	        </p:column>
+	    </p:treeTable>
+	
+		
+	</j:slot>
+	<j:slot id="sElement" width="5">
+		
+	</j:slot>
+</jp:grid>
+	</composite:implementation>
+</html>

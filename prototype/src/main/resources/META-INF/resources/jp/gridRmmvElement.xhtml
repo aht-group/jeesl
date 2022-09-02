@@ -54,8 +54,14 @@
 					<jtp:inputText value="#{cc.attrs.controller.element.name[cc.attrs.controller.sbhLocale.selection.code].lang}"/>
 					
 					<jtp:label entity="RmmvElement" code="classification1"/>
-					<p:selectOneMenu value="#{cc.attrs.controller.element.classification1}" effect="fade" autoWidth="false" dynamic="true">
+					<p:selectOneMenu var="t" value="#{cc.attrs.controller.element.classification1}" effect="fade" autoWidth="false" dynamic="true">
 						<f:selectItems value="#{cc.attrs.controller.classifications}" var="c" itemLabel="#{c.name[cc.attrs.controller.sbhLocale.selection.code].lang}" itemValue="#{c}"/>
+						<p:column>
+			                <jtp:symbolizer value="#{t}"/>
+			            </p:column>
+			            <p:column>
+			                <h:outputText value="#{t.name[cc.attrs.controller.sbhLocale.selection.code].lang}"/>
+			            </p:column>
 					</p:selectOneMenu>
 					
 				</p:panelGrid>
