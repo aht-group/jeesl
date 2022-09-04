@@ -91,7 +91,7 @@ public class AccessTokenFactory
 		Token token = new Token();
 		token.setExpiresIn(seconds);
 		token.setValue(httpToken.substring(indexTstart, indexTend));
-		token.setExpires(DateUtil.getXmlGc4D(gc.getTime()));
+		token.setExpires(DateUtil.toXmlGc(gc.getTime()));
 		return token;
 	}
 	

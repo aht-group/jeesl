@@ -257,7 +257,12 @@
 	      <scope>test</scope>
 	    </dependency>
 		
-		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<!--2022-09-03 tk Trying to remove -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>

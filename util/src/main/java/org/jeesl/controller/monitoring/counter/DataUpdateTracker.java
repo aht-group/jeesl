@@ -59,14 +59,14 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	
 	public DataUpdateTracker start()
 	{
-		update.setBegin(DateUtil.getXmlGc4D(new Date(), true));
+		update.setBegin(DateUtil.toXmlGc(new Date()));
 		json.getJob().setStart(LocalDateTime.now());
 		return this;
 	}
 	
 	public void stop()
 	{
-		update.setFinished(DateUtil.getXmlGc4D(new Date(), true));
+		update.setFinished(DateUtil.toXmlGc(new Date()));
 		update.getResult().setTotal(update.getResult().getSuccess()+update.getResult().getFail());
 		
 		if(json.getJob().getEnd()==null) {json.getJob().setEnd(LocalDateTime.now());}

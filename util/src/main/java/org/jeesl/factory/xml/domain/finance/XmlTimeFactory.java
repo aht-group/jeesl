@@ -28,7 +28,7 @@ public class XmlTimeFactory
 	{
 		Time xml = new Time();
 		xml.setCode(code);
-		xml.setRecord(DateUtil.getXmlGc4D(record));
+		xml.setRecord(DateUtil.toXmlGc(record));
 		return xml;
 	}
 	
@@ -36,7 +36,7 @@ public class XmlTimeFactory
 	{
 		Time xml = new Time();
 		xml.setNr(nr);
-		xml.setRecord(DateUtil.getXmlGc4D(record));
+		xml.setRecord(DateUtil.toXmlGc(record));
 		return xml;
 	}
 	

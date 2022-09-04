@@ -81,8 +81,8 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 	public static Item build(Date date)
 	{
 		Item xml = build();		
-		xml.setStart(DateUtil.getXmlGc4D(date));
-		xml.setEnd(DateUtil.getXmlGc4D(date));
+		xml.setStart(DateUtil.toXmlGc(date));
+		xml.setEnd(DateUtil.toXmlGc(date));
 		xml.setAllDay(true);
 		return xml;
 	}

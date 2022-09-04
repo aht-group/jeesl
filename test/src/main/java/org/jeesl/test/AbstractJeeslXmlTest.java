@@ -54,7 +54,7 @@ public class AbstractJeeslXmlTest<T extends Object>
 	
 	protected static XMLGregorianCalendar getDefaultXmlDate()
 	{
-		return DateUtil.getXmlGc4D(DateUtil.getDateFromInt(2011, 11, 11, 11, 11, 11));
+		return DateUtil.toXmlGc(DateUtil.getDateFromInt(2011, 11, 11, 11, 11, 11));
 	}
 	
 	protected void saveReferenceXml()

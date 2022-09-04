@@ -44,7 +44,7 @@ public class XmlTransactionFactory<L extends JeeslLang,D extends JeeslDescriptio
 		Transaction xml = new Transaction();
 
 		if(q.isSetId()) {xml.setId(ejb.getId());}
-		if(q.isSetRecord()) {xml.setRecord(DateUtil.getXmlGc4D(ejb.getRecord()));}
+		if(q.isSetRecord()) {xml.setRecord(DateUtil.toXmlGc(ejb.getRecord()));}
 		if(q.isSetUser()) {xml.setUser(xfUser.build(ejb.getUser()));}
 		
 		if(q.isSetRemark()) {xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}

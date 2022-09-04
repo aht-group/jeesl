@@ -175,7 +175,7 @@ public class ReportUtilCreator
 		info.addContent(footer);
 		
 		Element record = new Element("record");
-		XMLGregorianCalendar greg = DateUtil.getXmlGc4D(new Date());
+		XMLGregorianCalendar greg = DateUtil.toXmlGc(new Date());
 		record.setText(greg.toString());
 		info.addContent(record);
 		

@@ -30,8 +30,8 @@ public class XmlTrackerFactory
     	if(q.isSetId()){xml.setId(ejb.getId());}
     	if(q.isSetRefId()){xml.setRefId(ejb.getRefId());}
     	if(q.isSetType()){xml.setType(ejb.getType().getCode());}
-    	if(q.isSetCreated()){xml.setCreated(DateUtil.getXmlGc4D(ejb.getRecordCreated()));}
-    	if(q.isSetSent()){xml.setSent(DateUtil.getXmlGc4D(ejb.getRecordSent()));}
+    	if(q.isSetCreated()){xml.setCreated(DateUtil.toXmlGc(ejb.getRecordCreated()));}
+    	if(q.isSetSent()){xml.setSent(DateUtil.toXmlGc(ejb.getRecordSent()));}
     	if(q.isSetRetryCounter()){xml.setRetryCounter(ejb.getRetryCounter());}
     	
     	return xml;

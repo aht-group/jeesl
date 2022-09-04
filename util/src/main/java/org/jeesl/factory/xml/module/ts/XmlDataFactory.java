@@ -26,7 +26,12 @@ public class XmlDataFactory
 	public static Data buildWithGmt(Date record, Double value)
 	{
 		Data xml = build(null,record,value);
-		if(record!=null){xml.setRecord(DateUtil.toXmlGc(record,true));}
+		if(record!=null)
+		{
+			LocalDateTime ldt = DateUtil.toLocalDateTime(record);
+			ZonedDateTime zdt = ZonedDateTime.of(ldt,ZoneId.of("UTC"));
+			xml.setRecord(DateUtil.toXmlGc(zdt));
+		}
 		return xml;
 	}
 	public static Data build(Long id, Date record, Double value)

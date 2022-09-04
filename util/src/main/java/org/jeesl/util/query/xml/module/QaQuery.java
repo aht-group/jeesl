@@ -100,7 +100,7 @@ public class QaQuery
 		Result xml = new Result();
 		xml.setId(0);
 		xml.setStaff(staff);
-		xml.setRecord(DateUtil.getXmlGc4D(new Date()));
+		xml.setRecord(DateUtil.toXmlGc(new Date()));
 		xml.setStatus(status);
 		xml.setActual(XmlResultFactory.buildActual(""));
 		xml.setComment(XmlResultFactory.buildComment(""));
