@@ -1500,7 +1500,7 @@ public class JeeslFacadeBean implements JeeslFacade
 	@Override public <L extends JeeslLang, D extends JeeslDescription,
 						S extends EjbWithId,
 						G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-						F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+						F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 					S loadGraphic(Class<S> cS, S status)
 	{
 		status = em.find(cS, status.getId());

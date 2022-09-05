@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @EjbErNode(name="Graphic",category="symbol",subset="symbol")
-public class Graphic implements JeeslGraphic<GraphicType,GraphicFigure,GraphicStyle>
+public class Graphic implements JeeslGraphic<GraphicType,GraphicComponent,GraphicStyle>
 {
 	public static final long serialVersionUID=1;
 
@@ -50,9 +50,9 @@ public class Graphic implements JeeslGraphic<GraphicType,GraphicFigure,GraphicSt
 	public String getColorBorder() {return colorBorder;}
 	public void setColorBorder(String colorBorder) {this.colorBorder = colorBorder;}
 	
-	private List<GraphicFigure> figures;
-	public List<GraphicFigure> getFigures() {return figures;}
-	public void setFigures(List<GraphicFigure> figures) {this.figures = figures;}
+	private List<GraphicComponent> figures;
+	public List<GraphicComponent> getFigures() {return figures;}
+	public void setFigures(List<GraphicComponent> figures) {this.figures = figures;}
 	
 	public String toString()
 	{

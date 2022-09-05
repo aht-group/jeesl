@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslGraphic <GT extends JeeslGraphicType<?,?,GT,?>,
-								F extends JeeslGraphicComponent<?,?,?,GT,F,GS>,
+								F extends JeeslGraphicComponent<?,GT,F,GS>,
 								GS extends JeeslGraphicShape<?,?,GS,?>>
 		extends Serializable,EjbWithId,EjbSaveable
 {		

@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.symbol.Colors;
 
 public class XmlColorsFactory <L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlColorsFactory.class);
 		

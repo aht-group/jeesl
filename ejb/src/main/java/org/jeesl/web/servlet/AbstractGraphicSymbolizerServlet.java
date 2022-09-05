@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends JeeslDescription,
 												S extends EjbWithId,
 												G extends JeeslGraphic<GT,F,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-												F extends JeeslGraphicComponent<L,D,G,GT,F,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+												F extends JeeslGraphicComponent<G,GT,F,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 	extends AbstractSymbolizerServlet<L,D,G,GT,F,GS>
 	implements Serializable
 {

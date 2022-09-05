@@ -26,7 +26,7 @@ import org.w3c.dom.svg.SVGDocument;
 
 public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgFigureFactory.class);
 	
@@ -39,7 +39,7 @@ public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
 	
     public static <L extends JeeslLang, D extends JeeslDescription,
     			G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-    			F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+    			F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 		SvgFigureFactory<L,D,G,GT,F,FS> factory()
 	{
     	return new SvgFigureFactory<L,D,G,GT,F,FS>();

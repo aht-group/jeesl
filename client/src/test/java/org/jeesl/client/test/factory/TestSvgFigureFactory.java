@@ -11,7 +11,7 @@ import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.graphic.Graphic;
-import org.jeesl.client.model.ejb.system.graphic.GraphicFigure;
+import org.jeesl.client.model.ejb.system.graphic.GraphicComponent;
 import org.jeesl.client.model.ejb.system.graphic.GraphicStyle;
 import org.jeesl.client.model.ejb.system.graphic.GraphicType;
 import org.jeesl.client.model.ejb.system.locale.Description;
@@ -34,8 +34,8 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	final static Logger logger = LoggerFactory.getLogger(TestSvgFigureFactory.class);
 
 	private EjbStatusFactory<GraphicStyle,Lang,Description> efStyle;
-	private EjbGraphicFigureFactory<Lang,Description,Graphic,GraphicType,GraphicFigure,GraphicStyle> efFigure;
-	private static SvgFigureFactory<Lang,Description,Graphic,GraphicType,GraphicFigure,GraphicStyle> svgF;
+	private EjbGraphicFigureFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicStyle> efFigure;
+	private static SvgFigureFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicStyle> svgF;
 	
 	private String colorRed = "FF0000";
 	private String colorBlue = "0000FF";
@@ -45,11 +45,11 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	private String colorPink = "FF88FF";
 	
 	private GraphicStyle styleCircle,styleSquare,styleTriangle;
-	private GraphicFigure f1, f2, f3, f4, f5, f6, f7, f8, f9, f10;
+	private GraphicComponent f1, f2, f3, f4, f5, f6, f7, f8, f9, f10;
 	
 	public TestSvgFigureFactory()
 	{
-		SvgFactoryBuilder<Lang,Description,Graphic,GraphicType,GraphicFigure,GraphicStyle> ffSvg = SvgFactoryBuilder.factory(Lang.class,Description.class,Graphic.class,GraphicType.class,GraphicFigure.class,GraphicStyle.class);
+		SvgFactoryBuilder<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicStyle> ffSvg = SvgFactoryBuilder.factory(Lang.class,Description.class,Graphic.class,GraphicType.class,GraphicComponent.class,GraphicStyle.class);
 		efFigure = ffSvg.efFigure();
 		efStyle = ffSvg.style();
 		svgF = SvgFigureFactory.factory();
@@ -85,7 +85,7 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	
 	public void testA() throws IOException, TranscoderException
 	{
-		List<GraphicFigure> list = Arrays.asList(f1,f4,f5,f6,f7,f8);
+		List<GraphicComponent> list = Arrays.asList(f1,f4,f5,f6,f7,f8);
 		SVGGraphics2D g = svgF.build(list, 20);
 		
 		File f = new File(fTarget,"a.svg");
@@ -94,7 +94,7 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	
 	public void testB() throws IOException, TranscoderException
 	{
-		List<GraphicFigure> list = Arrays.asList(f1,f2,f3);
+		List<GraphicComponent> list = Arrays.asList(f1,f2,f3);
 		SVGGraphics2D g = svgF.build(list,20);
 		
 		File f = new File(fTarget,"b.svg");
@@ -103,7 +103,7 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	
 	public void testC() throws IOException, TranscoderException
 	{
-		List<GraphicFigure> list = Arrays.asList(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10);
+		List<GraphicComponent> list = Arrays.asList(f1,f2,f3,f4,f5,f6,f7,f8,f9,f10);
 		SVGGraphics2D g = svgF.build(list,20);
 		
 		File f = new File(fTarget,"c.svg");

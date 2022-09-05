@@ -10,7 +10,7 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.apache.commons.io.FileUtils;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.graphic.Graphic;
-import org.jeesl.client.model.ejb.system.graphic.GraphicFigure;
+import org.jeesl.client.model.ejb.system.graphic.GraphicComponent;
 import org.jeesl.client.model.ejb.system.graphic.GraphicStyle;
 import org.jeesl.client.model.ejb.system.graphic.GraphicType;
 import org.jeesl.client.model.ejb.system.locale.Description;
@@ -28,7 +28,7 @@ public class TestSvgSymbolFactory extends AbstractJeeslClientTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestSvgSymbolFactory.class);
 
-	private SvgSymbolFactory<Lang,Description,Graphic,GraphicType,GraphicFigure,GraphicStyle> svgF;
+	private SvgSymbolFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicStyle> svgF;
 	
 	public TestSvgSymbolFactory()
 	{

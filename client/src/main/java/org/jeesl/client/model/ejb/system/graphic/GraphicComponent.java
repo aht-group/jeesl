@@ -3,13 +3,11 @@ package org.jeesl.client.model.ejb.system.graphic;
 import javax.persistence.ManyToOne;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.client.model.ejb.system.locale.Description;
-import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @EjbErNode(name="Figure",category="symbol",subset="symbol")
-public class GraphicFigure implements JeeslGraphicComponent<Lang,Description,Graphic,GraphicType,GraphicFigure,GraphicStyle>
+public class GraphicComponent implements JeeslGraphicComponent<Graphic,GraphicType,GraphicComponent,GraphicStyle>
 {
 	public static final long serialVersionUID=1;
 
@@ -68,6 +66,6 @@ public class GraphicFigure implements JeeslGraphicComponent<Lang,Description,Gra
 		return sb.toString();
 	}
 	
-	@Override public boolean equals(Object object){return (object instanceof GraphicFigure) ? id == ((GraphicFigure) object).getId() : (object == this);}
+	@Override public boolean equals(Object object){return (object instanceof GraphicComponent) ? id == ((GraphicComponent) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(35,39).append(id).toHashCode();}
 }
