@@ -14,7 +14,6 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
@@ -26,7 +25,7 @@ import net.sf.ahtutils.xml.symbol.Symbol;
 
 public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgSymbolFactory.class);
 		
@@ -39,7 +38,7 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 	
     public static <L extends JeeslLang, D extends JeeslDescription,
 				    G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+					F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
     	SvgSymbolFactory<L,D,G,GT,F,FS> factory()
 	{
 	    return new SvgSymbolFactory<L,D,G,GT,F,FS>();

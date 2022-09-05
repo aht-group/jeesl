@@ -14,11 +14,11 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.factory.svg.SvgFigureFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.media.transcode.Svg2SvgTranscoder;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 public class AbstractFigureSymbolizerServlet<L extends JeeslLang, D extends JeeslDescription,
 												G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-												F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+												F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 	extends AbstractSymbolizerServlet<L,D,G,GT,F,FS>
 	implements Serializable
 {

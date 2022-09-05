@@ -17,11 +17,11 @@ import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
 import org.jeesl.factory.svg.SvgFigureFactory;
 import org.jeesl.factory.svg.SvgSymbolFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.openfuxml.content.media.Image;
@@ -31,9 +31,9 @@ import org.slf4j.LoggerFactory;
 
 public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends JeeslDescription,
 												S extends EjbWithId,
-												G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-												F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
-	extends AbstractSymbolizerServlet<L,D,G,GT,F,FS>
+												G extends JeeslGraphic<L,D,GT,F,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+												F extends JeeslGraphicComponent<L,D,G,GT,F,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+	extends AbstractSymbolizerServlet<L,D,G,GT,F,GS>
 	implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -41,12 +41,12 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	
 	private final Class<F> cF;
 	
-	private final SvgSymbolFactory<L,D,G,GT,F,FS> fSvgGraphic;
-	private final SvgFigureFactory<L,D,G,GT,F,FS> fSvgFigure;
+	private final SvgSymbolFactory<L,D,G,GT,F,GS> fSvgGraphic;
+	private final SvgFigureFactory<L,D,G,GT,F,GS> fSvgFigure;
 	
 	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	public AbstractGraphicSymbolizerServlet(SvgFactoryBuilder<L,D,G,GT,F,FS> fbStatus)
+	public AbstractGraphicSymbolizerServlet(SvgFactoryBuilder<L,D,G,GT,F,GS> fbStatus)
 	{
 		this.cF = fbStatus.getClassFigure();
 		fSvgGraphic = fbStatus.symbol();
@@ -61,7 +61,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void symbolizer(JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic , HttpServletRequest request, HttpServletResponse response) throws IOException
+	protected void symbolizer(JeeslGraphicFacade<L,D,S,G,GT,F,GS> fGraphic, HttpServletRequest request, HttpServletResponse response) throws IOException
     {
 		Image m = super.getGraphicInfo(request,response);
 		
@@ -132,7 +132,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	    }
 	}
 	
-	protected void process(HttpServletRequest request, HttpServletResponse response, JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic, G graphic, Image image) throws IOException, TranscoderException, UtilsProcessingException
+	protected void process(HttpServletRequest request, HttpServletResponse response, JeeslGraphicFacade<L,D,S,G,GT,F,GS> fGraphic, G graphic, Image image) throws IOException, TranscoderException, UtilsProcessingException
     {
 		byte[] bytes = null;
     	

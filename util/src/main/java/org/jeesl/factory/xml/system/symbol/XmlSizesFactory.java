@@ -15,7 +15,7 @@ import net.sf.ahtutils.xml.symbol.Sizes;
 
 public class XmlSizesFactory <L extends JeeslLang, D extends JeeslDescription,
 							G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-							F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>>
+							F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSizesFactory.class);
 		

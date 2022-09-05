@@ -1,19 +1,15 @@
 package org.jeesl.client.model.ejb.system.graphic;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
-import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
-import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @EjbErNode(name="Style",category="symbol",subset="symbol",level=3)
-public class GraphicStyle implements Serializable,EjbRemoveable,EjbPersistable,
-								JeeslStatus<Lang,Description,GraphicStyle>
+public class GraphicStyle implements JeeslGraphicShape<Lang,Description,GraphicStyle,Graphic>
 {
 	public static enum Code {welcome}
 	public static final long serialVersionUID=1;
@@ -61,6 +57,10 @@ public class GraphicStyle implements Serializable,EjbRemoveable,EjbPersistable,
 	@Override public <P extends EjbWithCode> P getParent() {return null;}
 	@Override public <P extends EjbWithCode> void setParent(P parent) {}
 	
+	private Graphic graphic;
+	@Override public Graphic getGraphic() {return graphic;}
+	@Override public void setGraphic(Graphic graphic) {this.graphic=graphic;}
+	
 	public boolean equals(Object object)
 	{
         return (object instanceof GraphicStyle) ? id == ((GraphicStyle) object).getId() : (object == this);
@@ -73,4 +73,5 @@ public class GraphicStyle implements Serializable,EjbRemoveable,EjbPersistable,
 		sb.append(" ").append(code);
 		return sb.toString();
 	}
+	
 }

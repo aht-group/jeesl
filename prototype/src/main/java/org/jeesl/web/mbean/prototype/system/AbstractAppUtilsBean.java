@@ -5,17 +5,17 @@ import java.util.List;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractAppUtilsBean<L extends JeeslLang, D extends JeeslDescription,
 											G extends JeeslGraphic<L,D,GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-											GC extends JeeslGraphicComponent<L,D,G,GT,GC,FS>, FS extends JeeslStatus<L,D,FS>>
+											GC extends JeeslGraphicComponent<L,D,G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 	implements Serializable
 {
 	private static final long serialVersionUID = 1L;

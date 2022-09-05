@@ -14,6 +14,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbMergeable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -479,8 +480,7 @@ public class AbstractDummyFacade implements JeeslFacade
 	}
 
 	@Override
-	public <L extends JeeslLang, D extends JeeslDescription, S extends EjbWithId, G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>> S loadGraphic(
-			Class<S> cS, S status) {
+	public <L extends JeeslLang, D extends JeeslDescription, S extends EjbWithId, G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>> S loadGraphic(Class<S> cS, S status) {
 		// TODO Auto-generated method stub
 		return null;
 	}

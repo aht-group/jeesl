@@ -2,14 +2,9 @@ package org.jeesl.web.mbean.prototype.system.locale;
 
 import java.io.Serializable;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
-import org.jeesl.api.rest.system.JeeslSystemRest;
 import org.jeesl.controller.provider.GenericLocaleProvider;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -61,7 +56,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,G>,
 										R extends JeeslTenantRealm<L,D,R,G>, RREF extends EjbWithId,
 										G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
+										F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>>
 					extends AbstractTableBean<L,D,LOC,G,GT,F,FS,RE> implements Serializable
 {

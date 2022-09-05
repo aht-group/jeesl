@@ -16,19 +16,18 @@ import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
 import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
+import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithColour;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithLocked;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
-import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
@@ -36,7 +35,7 @@ import org.slf4j.LoggerFactory;
 
 public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslStatus<L,D,FS>,
+								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
 								RE extends JeeslRevisionEntity<L,D,?,?,?,?>
 >
 			extends AbstractAdminBean<L,D,LOC>

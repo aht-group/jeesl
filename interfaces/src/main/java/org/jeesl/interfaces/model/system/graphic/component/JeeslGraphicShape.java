@@ -13,7 +13,8 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslGraphicShape <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription,G extends JeeslGraphic<L,D,?,?,?>>
+public interface JeeslGraphicShape <L extends JeeslLang, D extends JeeslDescription,
+									S extends JeeslStatus<L,D,S>, G extends JeeslGraphic<L,D,?,?,?>>
 							extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,
 									JeeslStatus<L,D,S>
 {

@@ -8,14 +8,13 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
 
 public interface JeeslGraphicComponent<L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<L,D,GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								GC extends JeeslGraphicComponent<L,D,G,GT,GC,GS>, GS extends JeeslStatus<L,D,GS>>
+								GC extends JeeslGraphicComponent<L,D,G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithPositionVisible,EjbWithParentAttributeResolver
 {
 	public enum Attributes{graphic}
