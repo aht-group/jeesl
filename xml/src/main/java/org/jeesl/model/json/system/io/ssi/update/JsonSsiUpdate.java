@@ -1,6 +1,7 @@
 package org.jeesl.model.json.system.io.ssi.update;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.jeesl.model.json.system.job.JsonJob;
 import org.jeesl.model.json.system.security.JsonSecurityUser;
@@ -30,6 +31,11 @@ public class JsonSsiUpdate implements Serializable
 	public JsonSsiStatistic getStatistic() {return statistic;}
 	public void setStatistic(JsonSsiStatistic statistic) {this.statistic = statistic;}
 	
+	@JsonProperty("messages")
+	private List<JsonSsiMessage> messages;
+	public List<JsonSsiMessage> getMessages() {return messages;}
+	public void setMessages(List<JsonSsiMessage> messages) {this.messages = messages;}
+
 	@JsonProperty("user")
 	private JsonSecurityUser user;
 	public JsonSecurityUser getUser() {return user;}

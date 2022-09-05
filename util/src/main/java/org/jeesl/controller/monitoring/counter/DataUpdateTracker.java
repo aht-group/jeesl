@@ -1,6 +1,7 @@
 package org.jeesl.controller.monitoring.counter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
 import org.jeesl.factory.xml.system.io.sync.XmlExceptionFactory;
 import org.jeesl.factory.xml.system.io.sync.XmlExceptionsFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
+import org.jeesl.model.json.system.io.ssi.update.JsonSsiMessage;
 import org.jeesl.model.json.system.io.ssi.update.JsonSsiStatistic;
 import org.jeesl.model.json.system.job.JsonJob;
 import org.slf4j.Logger;
@@ -41,7 +43,6 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		json = new org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate();
 		json.setJob(new JsonJob());
 		json.setStatistic(new JsonSsiStatistic());
-		
 		
 		update.setResult(new Result());
 		update.getResult().setSuccess(0);
@@ -93,6 +94,13 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		else {json.getStatistic().setTotal(json.getStatistic().getTotal()+1);}
 	}
 	
+	private void error()
+	{
+		if(json.getStatistic().getError()==null) {json.getStatistic().setError(1);}
+		else {json.getStatistic().setError(json.getStatistic().getError()+1);}
+		total();
+	}
+	
 	public void skip()
 	{
 		update.getResult().setSkip(update.getResult().getSkip()+1);
@@ -118,6 +126,16 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	{
 		if(!updateFail.containsKey(c.getName())){updateFail.put(c.getName(), 0);}
 		updateFail.put(c.getName(), updateFail.get(c.getName())+1);
+	}
+	
+	public void error(Throwable t)
+	{
+		error();
+		if(json.getMessages()==null) {json.setMessages(new ArrayList<>());}
+		
+		JsonSsiMessage m = new JsonSsiMessage();
+		m.setMessage(t.getMessage());
+		json.getMessages().add(m);
 	}
 	
 	public void fail(Throwable t, boolean printStackTrace)
@@ -188,7 +206,6 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	public org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate toJson()
 	{
 		this.stop();
-		
 		return json;
 	}
 }

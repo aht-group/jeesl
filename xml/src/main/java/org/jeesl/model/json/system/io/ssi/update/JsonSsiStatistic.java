@@ -12,6 +12,11 @@ public class JsonSsiStatistic implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	@JsonProperty("expected")
+	private Integer expected;
+	public Integer getExpected() {return expected;}
+	public void setExpected(Integer expected) {this.expected = expected;}
+
 	@JsonProperty("total")
 	private Integer total;
 	public Integer getTotal() {return total;}
@@ -26,4 +31,13 @@ public class JsonSsiStatistic implements Serializable
 	private Integer obsolete;
 	public Integer getObsolete() {return obsolete;}
 	public void setObsolete(Integer obsolete) {this.obsolete = obsolete;}
+	
+	@JsonProperty("error")
+	private Integer error;
+	public Integer getError() {
+		return error;
+	}
+	public void setError(Integer error) {
+		this.error = error;
+	}
 }
