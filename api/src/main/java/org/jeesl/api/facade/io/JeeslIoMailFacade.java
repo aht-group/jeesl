@@ -1,5 +1,6 @@
 package org.jeesl.api.facade.io;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -29,5 +30,5 @@ public interface JeeslIoMailFacade <L extends JeeslLang,D extends JeeslDescripti
 	
 	void queueMail(CATEGORY category, RETENTION retention, Mail mail) throws JeeslConstraintViolationException;
 	
-	Json1Tuples<STATUS> tpcIoMailByStatus(Date from, Date to, List<CATEGORY> categories);
+	Json1Tuples<STATUS> tpcIoMailByStatus(LocalDate from, LocalDate to, List<CATEGORY> categories);
 }

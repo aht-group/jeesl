@@ -138,10 +138,6 @@
    	   				<groupId>de.rrze</groupId>
    	   			</exclusion>
    	   			<exclusion>
-   	   				<artifactId>joda-time</artifactId>
-   	   				<groupId>joda-time</groupId>
-   	   			</exclusion>
-   	   			<exclusion>
    	   				<artifactId>json</artifactId>
    	   				<groupId>org.json</groupId>
    	   			</exclusion>
@@ -257,11 +253,11 @@
 	      <scope>test</scope>
 	    </dependency>
 		
-		<!--2022-09-03 tk Trying to remove -->
+		<!--2022-09-04 tk Preparing removal  --> 
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-		</dependency>
+		</dependency>   
 
 		<dependency>
 			<groupId>commons-beanutils</groupId>

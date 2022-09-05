@@ -1,6 +1,7 @@
 package org.jeesl.web.mbean.prototype.io.mail;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -128,9 +129,8 @@ public class AbstractSettingsIoMailQueueBean <L extends JeeslLang,D extends Jees
 	
 	private void reloadStatistic()
 	{
-		DateTime now = new DateTime();
-		thToday.init(fMail.tpcIoMailByStatus(now.withTimeAtStartOfDay().toDate(),now.toDate(),sbhCategory.getSelected()));
-		thDay30.init(fMail.tpcIoMailByStatus(now.minusDays(30).withTimeAtStartOfDay().toDate(),now.toDate(),sbhCategory.getSelected()));
+		thToday.init(fMail.tpcIoMailByStatus(LocalDate.now(),LocalDate.now(),sbhCategory.getSelected()));
+		thDay30.init(fMail.tpcIoMailByStatus(LocalDate.now().minusDays(30),LocalDate.now(),sbhCategory.getSelected()));
 		
 		mapTh.put(Statistic.today.toString(),thToday);
 		mapTh.put(Statistic.day30.toString(),thDay30);

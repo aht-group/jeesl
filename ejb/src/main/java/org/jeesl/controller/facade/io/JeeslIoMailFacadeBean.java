@@ -1,5 +1,6 @@
 package org.jeesl.controller.facade.io;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +35,8 @@ import org.jeesl.model.xml.system.io.mail.Mail;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
 
 public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescription,
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
@@ -171,7 +174,7 @@ public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescriptio
 		return tQ.getResultList();
 	}
 	
-	@Override public Json1Tuples<STATUS> tpcIoMailByStatus(Date from, Date to, List<CATEGORY> categories)
+	@Override public Json1Tuples<STATUS> tpcIoMailByStatus(LocalDate from, LocalDate to, List<CATEGORY> categories)
 	{		
 		Json1TuplesFactory<STATUS> jtf = new Json1TuplesFactory<>(this,fbMail.getClassStatus());
 		jtf.setfUtils(this);
@@ -184,8 +187,8 @@ public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescriptio
 				
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		Expression<Date> eRecord = item.get(JeeslIoMail.Attributes.recordCreation.toString());
-		if(from!=null) {predicates.add(cB.greaterThanOrEqualTo(eRecord,from));}
-		if(to!=null){predicates.add(cB.lessThan(eRecord,to));}
+		if(from!=null) {predicates.add(cB.greaterThanOrEqualTo(eRecord,DateUtil.toDate(from)));}
+		if(to!=null){predicates.add(cB.lessThan(eRecord,DateUtil.toDate(to.plusDays(1))));}
 		if(categories!=null)
 		{
 			Path<CATEGORY> pCategory = item.get(JeeslIoMail.Attributes.category.toString());

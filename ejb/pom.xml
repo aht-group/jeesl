@@ -121,6 +121,12 @@
 			<type>pom</type>
 			<scope>provided</scope>
 	  	</dependency>
+	  	
+	  	<!--2022-09-04 tk Preparing removal -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency> 
          
 		<!-- E-Mail -->
 		<dependency>

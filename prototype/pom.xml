@@ -43,10 +43,6 @@
 					<groupId>commons-io</groupId>
 				</exclusion>
 				<exclusion>
-					<artifactId>joda-time</artifactId>
-					<groupId>joda-time</groupId>
-				</exclusion>
-				<exclusion>
 					<artifactId>json</artifactId>
 					<groupId>org.json</groupId>
 				</exclusion>
@@ -79,7 +75,6 @@
 			<artifactId>jeesl-report</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
 		
 		<dependency>
 	   		<groupId>com.sun.faces</groupId>

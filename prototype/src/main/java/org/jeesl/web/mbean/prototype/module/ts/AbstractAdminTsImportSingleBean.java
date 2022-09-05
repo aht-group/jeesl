@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -50,7 +51,6 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.model.xml.module.ts.Data;
 import org.jeesl.model.xml.module.ts.TimeSeries;
 import org.jeesl.util.comparator.xml.ts.TsDataComparator;
-import org.joda.time.DateTime;
 import org.metachart.xml.chart.Ds;
 import org.primefaces.event.FileUploadEvent;
 import org.slf4j.Logger;
@@ -59,6 +59,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.interfaces.controller.report.UtilsXlsDefinitionResolver;
 import net.sf.ahtutils.report.revert.excel.importers.ExcelSimpleSerializableImporter;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
+import net.sf.exlp.util.DateUtil;
 
 public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CAT extends JeeslTsCategory<L,D,CAT,?>,
@@ -226,13 +227,13 @@ public class AbstractAdminTsImportSingleBean <L extends JeeslLang, D extends Jee
 
 	public void random()
 	{
-		DateTime dt = new DateTime(new Date());
+		LocalDateTime ldt = LocalDateTime.now();
 		Random rnd = new Random();
 
 		timeSeries = XmlTsFactory.buildOld();
 		for(int i=0;i<5;i++)
 		{
-			timeSeries.getData().add(XmlDataFactory.build(dt.plusDays(i).toDate(), rnd.nextInt(10)*rnd.nextDouble()));
+			timeSeries.getData().add(XmlDataFactory.build(DateUtil.toDate(ldt.plusDays(i)), rnd.nextInt(10)*rnd.nextDouble()));
 		}
 
 		entity=null;

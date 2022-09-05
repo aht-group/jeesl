@@ -178,16 +178,7 @@
         		<artifactId>jeesl-io-locale</artifactId>
         		<version>${project.version}</version>
         	</dependency>
-		
-		<!-- 
-			<dependency>
-	            <groupId>org.antlr</groupId>
-	            <artifactId>antlr4</artifactId>
-	            <type>jar</type>
-	            <scope>compile</scope>
-	            <version>4.5.3</version>
-	        </dependency>
- -->
+
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jaxb-provider</artifactId>

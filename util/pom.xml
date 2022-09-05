@@ -283,11 +283,11 @@
             <scope>provided</scope>
         </dependency>
 
-		<!--2022-09-03 tk Trying to remove -->
+		<!--2022-09-03 tk Trying to remove 
         <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-        </dependency> 
+            <groupId>jola-time</groupId>
+            <artifactId>jola-time</artifactId>
+        </dependency>  -->
 
 		<!-- FR Access to AWS-S3 -->
 		<dependency>
