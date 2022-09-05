@@ -11,7 +11,7 @@ import org.jeesl.model.xml.system.revision.Entity;
 
 public interface JeeslSystemRestInterface <L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
-									G extends JeeslGraphic<L,D,?,?,?>>
+									G extends JeeslGraphic<?,?,?>>
 {	
 	<X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.jeesl.Container exportStatus(String code) throws UtilsConfigurationException;
 	<X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.jeesl.Container updateTranslation(String code, Container xml) throws UtilsConfigurationException;

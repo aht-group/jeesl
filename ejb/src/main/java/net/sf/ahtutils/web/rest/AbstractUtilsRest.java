@@ -83,7 +83,7 @@ public class AbstractUtilsRest <L extends JeeslLang, D extends JeeslDescription>
 		return xml;
 	}
 	
-	protected <S extends JeeslStatus<L,D,S>, P extends JeeslStatus<L,D,P>, G extends JeeslGraphic<L,D,?,?,?>> DataUpdate importStatus(Class<S> cS, Class<P> cP, Aht container)
+	protected <S extends JeeslStatus<L,D,S>, P extends JeeslStatus<L,D,P>, G extends JeeslGraphic<?,?,?>> DataUpdate importStatus(Class<S> cS, Class<P> cP, Aht container)
 	{
 		for(Status xml : container.getStatus()){xml.setGroup(cS.getSimpleName());}
 		JeeslDbStatusUpdater<L,D,S,G> asdi = new JeeslDbStatusUpdater<L,D,S,G>();

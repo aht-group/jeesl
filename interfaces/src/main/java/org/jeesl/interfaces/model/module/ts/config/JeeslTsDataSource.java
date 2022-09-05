@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 
 public interface JeeslTsDataSource <L extends JeeslLang, D extends JeeslDescription,
 									S extends JeeslStatus<L,D,S>,
-									G extends JeeslGraphic<L,D,?,?,?>>
+									G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
 								EjbWithCode,
 								EjbWithCodeGraphic<G>,

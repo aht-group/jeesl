@@ -27,7 +27,7 @@ import net.sf.ahtutils.xml.status.Status;
 public class JeeslDbTenantStatusUpdater <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,G>,
 										R extends JeeslTenantRealm<L,D,R,G>, RREF extends EjbWithId,
 //										S extends JeeslMcsStatus<L,D,R,S,G>,
-										G extends JeeslGraphic<L,D,GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>>
+										G extends JeeslGraphic<GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbTenantStatusUpdater.class);
 	

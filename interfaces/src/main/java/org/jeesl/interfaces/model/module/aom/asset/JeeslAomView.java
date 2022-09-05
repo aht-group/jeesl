@@ -16,7 +16,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 
 public interface JeeslAomView <L extends JeeslLang, D extends JeeslDescription,
 								REALM extends JeeslTenantRealm<L,D,REALM,?>,
-								G extends JeeslGraphic<L,D,?,?,?>>
+								G extends JeeslGraphic<?,?,?>>
 						extends Serializable,EjbSaveable,EjbRemoveable,
 								EjbWithNonUniqueCode,EjbWithPosition,EjbWithVisible,
 								EjbWithLangDescription<L,D>,EjbWithCodeGraphic<G>		

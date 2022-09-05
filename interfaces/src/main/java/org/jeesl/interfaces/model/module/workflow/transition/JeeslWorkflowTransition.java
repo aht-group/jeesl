@@ -25,7 +25,7 @@ public interface JeeslWorkflowTransition <L extends JeeslLang, D extends JeeslDe
 									WS extends JeeslWorkflowStage<L,D,?,?,?,?,?>,
 									WTT extends JeeslWorkflowTransitionType<L,D,WTT,?>,
 									SR extends JeeslSecurityRole<L,D,?,?,?,?,?>,
-									G extends JeeslGraphic<L,D,?,?,?>
+									G extends JeeslGraphic<?,?,?>
 									>
 		extends Serializable,EjbPersistable,EjbRemoveable,EjbSaveable,
 				EjbWithId,EjbWithPosition,EjbWithParentAttributeResolver,

@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 
 @DownloadJeeslData
-public interface JeeslQaResultStatus <S extends JeeslStatus<L,D,S>,L extends JeeslLang,D extends JeeslDescription,G extends JeeslGraphic<L,D,?,?,?>>
+public interface JeeslQaResultStatus <S extends JeeslStatus<L,D,S>,L extends JeeslLang,D extends JeeslDescription,G extends JeeslGraphic<?,?,?>>
 									extends Serializable,EjbPersistable,JeeslStatusFixedCode,
 									EjbWithCodeGraphic<G>,
 									JeeslStatus<L,D,S>

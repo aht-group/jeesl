@@ -24,7 +24,7 @@ public interface JeeslWorkflowStage <L extends JeeslLang, D extends JeeslDescrip
 									WST extends JeeslWorkflowStageType<L,D,WST,?>,
 									WSP extends JeeslWorkflowStagePermission<?,?,?,?>,
 									WT extends JeeslWorkflowTransition<L,D,?,?,?,?,?>,
-									G extends JeeslGraphic<L,D,?,?,?>
+									G extends JeeslGraphic<?,?,?>
 									>
 		extends Serializable,EjbPersistable,EjbRemoveable,EjbSaveable,
 				EjbWithId,EjbWithCode,EjbWithPosition,EjbWithParentAttributeResolver,

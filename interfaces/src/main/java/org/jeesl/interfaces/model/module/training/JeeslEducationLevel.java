@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 
 
 @DownloadJeeslData
-public interface JeeslEducationLevel <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription,G extends JeeslGraphic<L,D,?,?,?>>
+public interface JeeslEducationLevel <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription,G extends JeeslGraphic<?,?,?>>
 									extends Serializable,EjbPersistable,
 									EjbWithCode,//UtilsStatusFixedCode,
 									EjbWithCodeGraphic<G>,

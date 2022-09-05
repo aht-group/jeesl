@@ -19,7 +19,7 @@ public interface JeeslAomAssetType <L extends JeeslLang, D extends JeeslDescript
 							REALM extends JeeslTenantRealm<L,D,REALM,?>,
 							ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,G>,
 							VIEW extends JeeslAomView<L,D,REALM,G>,
-							G extends JeeslGraphic<L,D,?,?,?>>
+							G extends JeeslGraphic<?,?,?>>
 			extends Serializable,EjbSaveable,EjbRemoveable,
 					EjbWithParentAttributeResolver,
 					EjbWithNonUniqueCode,EjbWithPosition,EjbWithLangDescription<L,D>,

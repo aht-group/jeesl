@@ -67,7 +67,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	protected JeeslFacadeBean fJeesl;
 	
 	@Override public <E extends EjbEquals<T>, T extends EjbWithId> boolean equalsAttributes(Class<T> c,E object){return fJeesl.equalsAttributes(c,object);}
-	@Override public <L extends JeeslLang,D extends JeeslDescription, S extends EjbWithId,G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>> S loadGraphic(Class<S> cS, S status){return fJeesl.loadGraphic(cS,status);}
+	@Override public <L extends JeeslLang,D extends JeeslDescription, S extends EjbWithId,G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>> S loadGraphic(Class<S> cS, S status){return fJeesl.loadGraphic(cS,status);}
 	
 	// Persist
 	@Override public <T extends EjbSaveable> void save(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException {fJeesl.save(list);}

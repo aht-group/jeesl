@@ -12,7 +12,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 public interface JeeslRmmvClassification<L extends JeeslLang,
 										R extends JeeslTenantRealm<L,?,R,?>,
 										C extends JeeslRmmvClassification<L,R,C,G>,
-										G extends JeeslGraphic<L,?,?,?,?>>
+										G extends JeeslGraphic<?,?,?>>
 						extends JeeslTreeClassification<L,R,C,G>
 {	
 

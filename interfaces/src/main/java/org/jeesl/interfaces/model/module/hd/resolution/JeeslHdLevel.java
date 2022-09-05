@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslTenant;
 public interface JeeslHdLevel <L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,G>,
 									S extends JeeslMcsStatus<L,D,R,S,G>,
-									G extends JeeslGraphic<L,D,?,?,?>>
+									G extends JeeslGraphic<?,?,?>>
 					extends JeeslMcsStatus<L,D,R,S,G>
 {	
 

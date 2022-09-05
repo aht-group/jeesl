@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslMmgClassificationController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-												G extends JeeslGraphic<L,D,GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>,
+												G extends JeeslGraphic<GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>,
 												R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 												MG extends JeeslMmgGallery<L>,
 												MI extends JeeslMmgItem<L,MG,FRC,USER>,

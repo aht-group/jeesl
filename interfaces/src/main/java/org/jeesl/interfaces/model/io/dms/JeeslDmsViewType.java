@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 @DownloadJeeslData
 public interface JeeslDmsViewType <S extends JeeslStatus<L,D,S>,
 										L extends JeeslLang, D extends JeeslDescription,
-										G extends JeeslGraphic<L,D,?,?,?>>
+										G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,JeeslStatusFixedCode,EjbWithCodeGraphic<G>
 {
 	public enum Code{tree}

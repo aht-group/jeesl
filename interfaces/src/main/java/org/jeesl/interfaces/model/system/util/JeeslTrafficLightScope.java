@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 
 public interface JeeslTrafficLightScope <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
-										G extends JeeslGraphic<L,D,?,?,?>>
+										G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,
 				JeeslStatusFixedCode,
 				EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>

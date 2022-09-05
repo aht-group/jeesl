@@ -18,7 +18,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslData
 public interface JeeslIcon <L extends JeeslLang, D extends JeeslDescription,
 									S extends JeeslStatus<L,D,S>,
-									G extends JeeslGraphic<L,D,?,?,?>>
+									G extends JeeslGraphic<?,?,?>>
 						extends Serializable,EjbPersistable,
 								EjbWithCode,EjbWithSymbol,JeeslStatusWithSymbol,
 								JeeslStatusFixedCode,EjbWithCodeGraphic<G>,

@@ -16,7 +16,7 @@ import net.sf.ahtutils.xml.status.Styles;
 import net.sf.ahtutils.xml.symbol.Symbol;
 
 public class XmlSymbolFactory <L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
 								F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSymbolFactory.class);

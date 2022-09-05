@@ -19,7 +19,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslData
 public interface JeeslIoDashboardResolution <L extends JeeslLang, D extends JeeslDescription,
 									S extends JeeslStatus<L,D,S>,
-									G extends JeeslGraphic<L,D,?,?,?>>
+									G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,EjbWithCode,JeeslStatusFixedCode,EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {
 	public enum Code{uhd,fhd,hd}

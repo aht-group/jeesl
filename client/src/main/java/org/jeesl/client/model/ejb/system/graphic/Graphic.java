@@ -1,20 +1,14 @@
 package org.jeesl.client.model.ejb.system.graphic;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.ManyToOne;
 
-import org.jeesl.client.model.ejb.system.locale.Description;
-import org.jeesl.client.model.ejb.system.locale.Lang;
-import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
-import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @EjbErNode(name="Graphic",category="symbol",subset="symbol")
-public class Graphic implements EjbRemoveable,Serializable,EjbPersistable,
-								JeeslGraphic<Lang,Description,GraphicType,GraphicFigure,GraphicStyle>
+public class Graphic implements JeeslGraphic<GraphicType,GraphicFigure,GraphicStyle>
 {
 	public static final long serialVersionUID=1;
 

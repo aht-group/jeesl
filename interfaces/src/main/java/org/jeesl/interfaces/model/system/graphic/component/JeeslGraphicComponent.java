@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
 
 public interface JeeslGraphicComponent<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<L,D,GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
 								GC extends JeeslGraphicComponent<L,D,G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithPositionVisible,EjbWithParentAttributeResolver
 {

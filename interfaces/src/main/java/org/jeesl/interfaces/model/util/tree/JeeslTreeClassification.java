@@ -17,7 +17,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 public interface JeeslTreeClassification<L extends JeeslLang,
 										R extends JeeslTenantRealm<L,?,R,?>,
 										C extends JeeslTreeClassification<L,R,C,G>,
-										G extends JeeslGraphic<L,?,?,?,?>>
+										G extends JeeslGraphic<?,?,?>>
 						extends Serializable,EjbSaveable,
 								EjbWithId,EjbWithNonUniqueCode,
 								EjbWithPositionVisible,

@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 public interface JeeslPropertyCategory <L extends JeeslLang, D extends JeeslDescription,
 								S extends JeeslStatus<L,D,S>,
-								G extends JeeslGraphic<L,D,?,?,?>>
+								G extends JeeslGraphic<?,?,?>>
 						extends Serializable,EjbSaveable,JeeslStatusFixedCode,
 								EjbWithCodeGraphic<G>,
 								JeeslStatus<L,D,S>

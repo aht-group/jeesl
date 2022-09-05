@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 public interface JeeslIndicatorType <L extends JeeslLang, D extends JeeslDescription,
 //									R extends JeeslMcsRealm<L,D,R,G>,
 									S extends JeeslStatus<L,D,S>,
-									G extends JeeslGraphic<L,D,?,?,?>>
+									G extends JeeslGraphic<?,?,?>>
 								extends Serializable,EjbPersistable,
 										EjbWithCode,JeeslStatusFixedCode,
 										EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>

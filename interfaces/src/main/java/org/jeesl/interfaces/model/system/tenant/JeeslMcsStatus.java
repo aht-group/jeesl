@@ -17,7 +17,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 public interface JeeslMcsStatus<L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>,
 								S extends JeeslMcsStatus<L,D,R,S,G>,
-								G extends JeeslGraphic<L,D,?,?,?>>
+								G extends JeeslGraphic<?,?,?>>
 					extends EjbWithId,EjbRemoveable,Serializable,EjbSaveable,
 							EjbWithNonUniqueCode,EjbWithPositionVisible,
 							EjbWithLangDescription<L,D>,EjbWithGraphic<G>,

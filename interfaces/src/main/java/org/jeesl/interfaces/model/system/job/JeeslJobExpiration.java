@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 @DownloadJeeslData
 public interface JeeslJobExpiration <L extends JeeslLang,D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
-										G extends JeeslGraphic<L,D,?,?,?>>
+										G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,
 							JeeslStatus<L,D,S>
 {

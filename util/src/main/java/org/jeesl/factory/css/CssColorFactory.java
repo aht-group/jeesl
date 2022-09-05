@@ -19,7 +19,7 @@ public class CssColorFactory
     
 	public static String colorGrey = "#F8F8FF";
 	    
-	public static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+	public static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 		String build(F figure)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -27,19 +27,19 @@ public class CssColorFactory
 		return sb.toString();
 	}
 	
-	public static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+	public static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 		String firstCss(G graphic)
 	{
 		return css(0,graphic.getFigures(),"");
 	}
 	
-	public static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+	public static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 		String css(int index, G graphic, String fallback)
 	{
 		return css(index,graphic.getFigures(),fallback);
 	}
 	
-	private static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+	private static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 		String css(int index, List<F> figures, String fallback)
 	{
 		if(figures.size()>index)

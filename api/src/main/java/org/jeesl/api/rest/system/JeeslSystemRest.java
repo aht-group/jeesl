@@ -21,7 +21,7 @@ import org.jeesl.model.xml.system.revision.Entity;
 @Path("/rest/jeesl/export")
 public interface JeeslSystemRest <L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
-									G extends JeeslGraphic<L,D,?,?,?>>
+									G extends JeeslGraphic<?,?,?>>
 								extends JeeslSystemRestInterface<L,D,R,G>
 {	
 	@GET @Path("/status/{code}") @Produces(MediaType.APPLICATION_XML)

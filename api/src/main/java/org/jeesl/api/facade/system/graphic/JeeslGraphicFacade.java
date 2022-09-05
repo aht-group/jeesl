@@ -15,7 +15,7 @@ import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 
 public interface JeeslGraphicFacade <L extends JeeslLang, D extends JeeslDescription,
 									S extends EjbWithId,
-									G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+									G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
 									F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 			extends JeeslFacade
 {	

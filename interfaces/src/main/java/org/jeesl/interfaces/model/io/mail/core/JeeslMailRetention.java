@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 @DownloadJeeslData
-public interface JeeslMailRetention <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>, G extends JeeslGraphic<L,D,?,?,?>>
+public interface JeeslMailRetention <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>, G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
 								
 								JeeslStatusFixedCode,

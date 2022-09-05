@@ -6,14 +6,11 @@ import java.util.List;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslGraphic<L extends JeeslLang, D extends JeeslDescription,
-								GT extends JeeslGraphicType<L,D,GT,?>,
-								F extends JeeslGraphicComponent<L,D,?,GT,F,GS>,
-								GS extends JeeslGraphicShape<L,D,GS,?>>
+public interface JeeslGraphic <GT extends JeeslGraphicType<?,?,GT,?>,
+								F extends JeeslGraphicComponent<?,?,?,GT,F,GS>,
+								GS extends JeeslGraphicShape<?,?,GS,?>>
 		extends Serializable,EjbWithId,EjbSaveable
 {		
 	Long getVersionLock();

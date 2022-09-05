@@ -53,7 +53,7 @@ import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 
 public interface JeeslFacade extends JeeslIdFacade
 {
-	<L extends JeeslLang,D extends JeeslDescription, S extends EjbWithId,G extends JeeslGraphic<L,D,GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>> S loadGraphic(Class<S> cS, S status);
+	<L extends JeeslLang,D extends JeeslDescription, S extends EjbWithId, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<L,D,G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>> S loadGraphic(Class<S> cS, S status);
 	
 	//NAME
 	<T extends EjbWithName> T fByName(Class<T> type, String name) throws JeeslNotFoundException;

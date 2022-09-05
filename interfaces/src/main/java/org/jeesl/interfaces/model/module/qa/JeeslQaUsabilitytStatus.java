@@ -12,7 +12,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 @DownloadJeeslData
-public interface JeeslQaUsabilitytStatus <S extends JeeslStatus<L,D,S>,L extends JeeslLang,D extends JeeslDescription,G extends JeeslGraphic<L,D,?,?,?>>
+public interface JeeslQaUsabilitytStatus <S extends JeeslStatus<L,D,S>,L extends JeeslLang,D extends JeeslDescription,G extends JeeslGraphic<?,?,?>>
 									extends Serializable,EjbPersistable,JeeslStatusFixedCode,EjbWithCodeGraphic<G>
 {	
 	public static enum Code{unread,discussion,accepted,rejected}
