@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-@Deprecated // Use JeeslLabelEntityController instead
+//@Deprecated // Use JeeslLabelEntityController instead
 public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											RC extends JeeslRevisionCategory<L,D,RC,?>,
 											RV extends JeeslRevisionView<L,D,RVM>,
@@ -623,17 +623,4 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			logger.info(uiAllowSave+" allowSave ("+actionDeveloper+")");
 		}
 	}
-	
-//	@SuppressWarnings("unchecked")
-//	public static <L extends JeeslLang, D extends JeeslDescription> JeeslSystemRest<L,D,?,?> rest(String code)
-//	{
-//		StringBuilder url = new StringBuilder();
-//		if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
-//		else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
-//
-//		ResteasyClient client = new ResteasyClientBuilder().build();
-//		ResteasyWebTarget restTarget = client.target(url.toString());
-//		JeeslSystemRest<L,D,?,?> rest = restTarget.proxy(JeeslSystemRest.class);
-//		return rest;
-//	}
 }

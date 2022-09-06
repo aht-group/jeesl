@@ -13,6 +13,7 @@ import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.handler.io.label.JeeslTranslationHandler;
 import org.jeesl.controller.provider.FacadeTranslationProvider;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -28,7 +29,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 								RA extends JeeslRevisionAttribute<L,D,RE,?,?>,
 								RML extends JeeslRevisionMissingLabel>
 
-					implements JeeslLabelBean<RE>,JeeslTranslationProvider<LOC>
+					implements JeeslLabelBean<RE>,JeeslTranslationProvider<LOC>,JeeslLocaleProvider<LOC>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractLabelBean.class);
@@ -46,7 +47,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	public Map<String,RE> getMapEntities() {return th.getMissingLabelHandler().getMapEntities();}
 	@Override public List<RE> allEntities() {return th.allEntities();}
 
-	private final List<LOC> locales; public List<LOC> getLocales() {return locales;}
+	private final List<LOC> locales; @Override public List<LOC> getLocales() {return locales;}
 	private final Map<String,LOC> mapLocales; public Map<String, LOC> getMapLocales() {return mapLocales;}
 
 	public AbstractLabelBean(IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fbRevision)
