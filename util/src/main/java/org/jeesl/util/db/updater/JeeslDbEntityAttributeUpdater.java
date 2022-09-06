@@ -1,5 +1,6 @@
 package org.jeesl.util.db.updater;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.jeesl.controller.db.updater.JeeslDbLangUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
+import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -62,6 +64,10 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 		dbuLang = JeeslDbLangUpdater.factory(fbRevision.getClassAttribute(),fbRevision.getClassL());
 	}
 	
+	public void updateAttributes2(RE entity, List<LOC> locales, Entity xml) throws JeeslConstraintViolationException
+	{
+		updateAttributes(entity,EjbCodeFactory.toListCode(locales),xml);
+	}
 	public void updateAttributes(RE entity, List<String> localeCodes, Entity xml) throws JeeslConstraintViolationException
 	{
 		logger.info("Creating/Updating Attributes of "+entity.toString()+ entity.getCode() +" for "+localeCodes.toString());

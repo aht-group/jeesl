@@ -26,16 +26,16 @@
 	</dependencyManagement>
 	
 	<dependencies>
-		<dependency>
+	   	<dependency>
+   	   		<groupId>org.jeesl</groupId>
+   	   		<artifactId>jeesl-ejb</artifactId>
+   	   	</dependency>
+   	   	<dependency>
         	<groupId>org.jeesl</groupId>
         	<artifactId>jeesl-api</artifactId>
         	<type>jar</type>
         	<scope>provided</scope>
 	    </dependency>
-	   	<dependency>
-   	   		<groupId>org.jeesl</groupId>
-   	   		<artifactId>jeesl-ejb</artifactId>
-   	   	</dependency>
    	   	
    	   	<!-- Jakarta EE -->
    	   	<dependency>
@@ -44,24 +44,9 @@
 			<version>3.0.0.SP04-redhat-00001</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- 
-		<dependency>
-   	   		<groupId>com.sun.faces</groupId>
-   	   		<artifactId>jsf-api</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
-	 	-->
+		
 	
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-     		<dependency>
-   	   		<groupId>org.slf4j</groupId>
-   	   		<artifactId>slf4j-log4j12</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
+		
    	   	<dependency>
    	   		<groupId>net.sf.exlp</groupId>
    	   		<artifactId>exlp-util</artifactId>
@@ -73,17 +58,7 @@
    	   			</exclusion>
    	   		</exclusions>
    	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>junit</groupId>
-   	   		<artifactId>junit</artifactId>
-   	   		<type>jar</type>
-   	   		<scope>test</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>log4j</groupId>
-   	   		<artifactId>log4j</artifactId>
-   	   		<scope>test</scope>
-   	   	</dependency>
+   	   	
    	   	<dependency>
    	   		<groupId>org.jeesl</groupId>
    	   		<artifactId>jeesl-xml</artifactId>
@@ -170,6 +145,19 @@
 
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>3.0.1.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>jaxrs-api</artifactId>
+			<version>3.0.1.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
 			<scope>provided</scope>
 			<exclusions>
@@ -182,12 +170,9 @@
 					<groupId>commons-codec</groupId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.jeesl</groupId>
-			<artifactId>jeesl-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+		</dependency> -->
+		
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -205,12 +190,13 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!--2022-09-06 tk Preparing removal 
 		<dependency>
 			<groupId>org.jgrapht</groupId>
 			<artifactId>jgrapht-core</artifactId>
 			<version>0.9.1</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		
 		<!--2022-09-06 tk Preparing removal   
 		<dependency>
@@ -273,6 +259,36 @@
 					<groupId>commons-codec</groupId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		
+		<!--Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+     		<dependency>
+   	   		<groupId>org.slf4j</groupId>
+   	   		<artifactId>slf4j-log4j12</artifactId>
+   	   		<scope>test</scope>
+   	   	</dependency>
+   	   		<dependency>
+   	   		<groupId>log4j</groupId>
+   	   		<artifactId>log4j</artifactId>
+   	   		<scope>test</scope>
+   	   	</dependency>
+		
+		<!-- Test -->
+		<dependency>
+   	   		<groupId>junit</groupId>
+   	   		<artifactId>junit</artifactId>
+   	   		<type>jar</type>
+   	   		<scope>test</scope>
+   	   	</dependency>
+   	   	<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>
