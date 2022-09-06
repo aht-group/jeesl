@@ -45,6 +45,7 @@ import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.db.updater.JeeslDbGraphicUpdater;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
+import org.jeesl.web.controller.io.label.JeeslLabelEntityController;
 import org.jeesl.web.mbean.prototype.io.revision.AbstractAdminRevisionEntityBean;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
@@ -422,7 +423,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		Class<S> cS = (Class<S>)Class.forName(fqcn).asSubclass(JeeslStatus.class);
 		Class<W> cW = (Class<W>)Class.forName(fqcn).asSubclass(EjbWithCodeGraphic.class);
 
-		Container xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportStatus(i.getName());;
+		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());;
 
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
         asdi.setStatusEjbFactory(EjbStatusFactory.createFactory(cS,cL,cD,bTranslation.getLangKeys()));
@@ -444,7 +445,6 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		Class<?> c = Class.forName(entity.getCode());
 		Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslData.class,c);
 
-		Container xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportStatus(i.getName());
-//		AbstractAdminRevisionEntityBean.rest(restCode).updateTranslation(x.getRestCode(),xml);
+		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());
 	}
 }

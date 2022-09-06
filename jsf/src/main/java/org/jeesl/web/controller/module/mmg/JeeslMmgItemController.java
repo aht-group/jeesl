@@ -97,7 +97,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{
-		super.postConstructWebController(lp);
+		super.postConstructWebController(lp,bMessage);
 		this.fMmg=fRmmv;
 		this.realm=realm;
 		

@@ -44,7 +44,7 @@ import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.db.updater.JeeslDbTenantStatusUpdater;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
-import org.jeesl.web.mbean.prototype.io.revision.AbstractAdminRevisionEntityBean;
+import org.jeesl.web.controller.io.label.JeeslLabelEntityController;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
@@ -396,7 +396,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		Class<?> c = Class.forName(fqcn);
 		Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslData.class,c);
 		
-		Container xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportStatus(i.getName());;
+		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());;
 		
 		JaxbUtil.trace(xml);
 

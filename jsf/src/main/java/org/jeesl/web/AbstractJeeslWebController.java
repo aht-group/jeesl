@@ -49,8 +49,7 @@ public class AbstractJeeslWebController <L extends JeeslLang, D extends JeeslDes
 		debugOnInfo = false;
 	}
 	
-	protected void postConstructWebController(JeeslLocaleProvider<LOC> lp
-//			, JeeslFacesMessageBean bMessage
+	protected void postConstructWebController(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage
 			)
 	{
 		this.lp=lp;

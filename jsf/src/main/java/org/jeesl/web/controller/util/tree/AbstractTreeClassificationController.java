@@ -78,7 +78,7 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{
-		super.postConstructWebController(lp);
+		super.postConstructWebController(lp,bMessage);
 		this.facade=facade;
 		this.fGraphic=fGraphic;
 		

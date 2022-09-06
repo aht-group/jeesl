@@ -10,15 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.api.facade.system.JeeslExportRestFacade;
-import org.jeesl.api.rest.system.JeeslSystemRest;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -41,7 +36,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
-import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
@@ -50,11 +44,13 @@ import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
+import org.jeesl.web.controller.io.label.JeeslLabelEntityController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
+@Deprecated // Use JeeslLabelEntityController instead
 public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											RC extends JeeslRevisionCategory<L,D,RC,?>,
 											RV extends JeeslRevisionView<L,D,RVM>,
@@ -371,7 +367,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			Class<?> c = Class.forName(entity.getCode());
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslDescription.class,c);
 			
-			Entity xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportRevisionEntity(i.getName());
+			Entity xml = JeeslLabelEntityController.rest(i.getName()).exportRevisionEntity(i.getName());
 
 			if(xml==null){logger.warn("No Result from REST !!");}
 			else
@@ -434,7 +430,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			Class<?> c = Class.forName(entity.getCode());
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslAttributes.class,c);
 			
-			Entity xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportRevisionEntity(i.getName());
+			Entity xml = JeeslLabelEntityController.rest(i.getName()).exportRevisionEntity(i.getName());
 
 			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
 			updater.updateAttributes(entity,bTranslation.getLangKeys(),xml);
@@ -628,16 +624,16 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static <L extends JeeslLang, D extends JeeslDescription> JeeslSystemRest<L,D,?,?> rest(String code)
-	{
-		StringBuilder url = new StringBuilder();
-		if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
-		else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
-
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(url.toString());
-		JeeslSystemRest<L,D,?,?> rest = restTarget.proxy(JeeslSystemRest.class);
-		return rest;
-	}
+//	@SuppressWarnings("unchecked")
+//	public static <L extends JeeslLang, D extends JeeslDescription> JeeslSystemRest<L,D,?,?> rest(String code)
+//	{
+//		StringBuilder url = new StringBuilder();
+//		if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
+//		else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
+//
+//		ResteasyClient client = new ResteasyClientBuilder().build();
+//		ResteasyWebTarget restTarget = client.target(url.toString());
+//		JeeslSystemRest<L,D,?,?> rest = restTarget.proxy(JeeslSystemRest.class);
+//		return rest;
+//	}
 }

@@ -29,6 +29,7 @@ import org.jeesl.factory.ejb.io.label.EjbLabelAttributeFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelMappingEntityFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -44,9 +45,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
-import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
-import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.model.xml.system.revision.Entity;
@@ -60,7 +59,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											RC extends JeeslRevisionCategory<L,D,RC,?>,
 											RV extends JeeslRevisionView<L,D,RVM>,
 											RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -76,7 +75,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractAdminRevisionEntityBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslLabelEntityController.class);
 
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
 	
@@ -115,8 +114,9 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 
 	private boolean supportsJeeslDownloadTranslation; public boolean isSupportsJeeslDownloadTranslation(){return supportsJeeslDownloadTranslation;}
 	private boolean supportsJeeslAttributeDownload; public boolean isSupportsJeeslAttributeDownload() {return supportsJeeslAttributeDownload;}
-	
-	public AbstractAdminRevisionEntityBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision)
+	private boolean uiAllowSave; public boolean isUiAllowSave() {return uiAllowSave;}
+
+	public JeeslLabelEntityController(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision)
 	{
 		super(fbRevision.getClassL(),fbRevision.getClassD());
 		this.fbRevision=fbRevision;
@@ -133,12 +133,14 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
 		
 		entities = new ArrayList<>();
+		
+		uiAllowSave = true;
 	}
 
-	protected void postConstructRevisionEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
+	public void postConstructRevisionEntity(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
 	{
 		if(jogger!=null) {jogger.start("postConstructRevisionEntity");}
-		super.postConstructWebController(lp);
+		super.postConstructWebController(lp,bMessage);
 		this.fRevision=fRevision;
 		this.bLabel=bLabel;
 		
@@ -395,7 +397,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			Class<?> c = Class.forName(entity.getCode());
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslDescription.class,c);
 			
-			Entity xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportRevisionEntity(i.getName());
+			Entity xml = JeeslLabelEntityController.rest(i.getName()).exportRevisionEntity(i.getName());
 
 			if(xml==null){logger.warn("No Result from REST !!");}
 			else
@@ -403,6 +405,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 				efLang.update(entity,xml.getLangs());
 				efDescription.update(entity,xml.getDescriptions());
 				saveEntity();
+				bLabel.reload(entity);
 			}
 		}
 		catch (ClassNotFoundException e){e.printStackTrace();}
@@ -425,6 +428,27 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		entity = null;
 		attribute=null;
 		mapping=null;
+	}
+	
+	public void addAttribute() throws JeeslNotFoundException
+	{
+		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassAttribute()));}
+		attribute = efAttribute.build(null);
+		attribute.setName(efLang.createEmpty(lp.getLocales()));
+		attribute.setDescription(efDescription.createEmpty(lp.getLocales()));
+	}
+
+	public void selectAttribute() throws JeeslNotFoundException
+	{
+		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(attribute));}
+		attribute = fRevision.find(fbRevision.getClassAttribute(), attribute);
+		attribute = efLang.persistMissingLangs(fRevision,lp.getLocales(),attribute);
+		attribute = efDescription.persistMissingLangs(fRevision,lp.getLocales(),attribute);
+	}
+
+	public void cancelAttribute()
+	{
+		attribute=null;
 	}
 
 	public void saveAttribute() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
@@ -458,13 +482,15 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			Class<?> c = Class.forName(entity.getCode());
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslAttributes.class,c);
 			
-			Entity xml = AbstractAdminRevisionEntityBean.rest(i.getName()).exportRevisionEntity(i.getName());
+			Entity xml = JeeslLabelEntityController.rest(i.getName()).exportRevisionEntity(i.getName());
 
 			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
 			updater.updateAttributes2(entity,lp.getLocales(),xml);
 			reloadEntity();
+			bLabel.reload(entity);
 		}
 		catch (ClassNotFoundException e){e.printStackTrace();}
+		
 	}
 
 	public void addMapping() throws JeeslNotFoundException
@@ -547,7 +573,8 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 
 	protected void updatePerformed(){}
 
-	public void initMissingLables() {
+	public void initMissingLables()
+	{
 		entity=null;
 		mapping=null;
 		attribute=null;

@@ -62,7 +62,7 @@
 						
 							<jtp:label entity="RevisionEntity" code="category"/>
 							<p:selectOneMenu value="#{cc.attrs.bean.entity.category}" effect="fade" autoWidth="false">
-								<f:selectItems value="#{cc.attrs.bean.categories}" var="u" itemLabel="#{u.name[localeCode].lang}" itemValue="#{u}"/>
+								<f:selectItems value="#{cc.attrs.bean.sbhCategory.list}" var="u" itemLabel="#{u.name[localeCode].lang}" itemValue="#{u}"/>
 							</p:selectOneMenu>
 							
 							<jtp:label entity="RevisionEntity" code="diagram"/>

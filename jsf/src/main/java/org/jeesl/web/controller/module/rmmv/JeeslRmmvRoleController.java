@@ -87,7 +87,7 @@ public class JeeslRmmvRoleController <L extends JeeslLang, D extends JeeslDescri
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{
-		super.postConstructWebController(lp);
+		super.postConstructWebController(lp,bMessage);
 		this.fRmmv=fRmmv;
 		this.realm=realm;
 		
