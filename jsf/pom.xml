@@ -212,11 +212,12 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!--2022-09-06 tk Preparing removal   
 		<dependency>
    			<groupId>commons-lang</groupId>
    			<artifactId>commons-lang</artifactId>
    			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
    			<groupId>org.apache.commons</groupId>
    			<artifactId>commons-lang3</artifactId>
