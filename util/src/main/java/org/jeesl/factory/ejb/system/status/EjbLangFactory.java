@@ -7,11 +7,11 @@ import java.util.Map;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.slf4j.Logger;
@@ -54,7 +54,7 @@ public class EjbLangFactory<L extends JeeslLang>
 		return map;
 	}
 
-	public <LOC extends JeeslLocale<L,?,LOC,?>> Map<String,L> build(JeeslLocaleProvider<LOC> lp, Langs xLangs) throws JeeslConstraintViolationException
+	public <LOC extends JeeslLocale<L,?,LOC,?>> Map<String,L> build(JeeslLocaleManager<LOC> lp, Langs xLangs) throws JeeslConstraintViolationException
 	{
 		Map<String,L> map = new Hashtable<String,L>();
 		if(xLangs!=null && !xLangs.getLang().isEmpty())

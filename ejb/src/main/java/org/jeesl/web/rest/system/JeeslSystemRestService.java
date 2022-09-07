@@ -36,6 +36,9 @@ import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfoList;
+import io.github.classgraph.ScanResult;
 import net.sf.ahtutils.xml.status.Status;
 
 public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescription,
@@ -178,5 +181,21 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 			return xfEntity.build(entity);
 		}
 		catch (JeeslNotFoundException e) {throw new UtilsConfigurationException(e.getMessage());}
+	}
+	
+	public static Class<?> classForInterface(String basePackage, String code) throws UtilsConfigurationException
+	{
+		try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(basePackage).scan())
+		{
+			ClassInfoList list = scanResult.getClassesImplementing(code);
+			if(list.getNames().isEmpty()) {throw new UtilsConfigurationException("No implementing class found for "+code+" using "+ClassGraph.class.getSimpleName());}
+			else
+			{
+				String fqcn = list.getNames().get(0);
+				Class<?> c = Class.forName(fqcn);
+				return c;
+			}
+		}
+		catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Class found for "+code+" using "+ClassGraph.class.getSimpleName()+", but CNFE");}
 	}
 }

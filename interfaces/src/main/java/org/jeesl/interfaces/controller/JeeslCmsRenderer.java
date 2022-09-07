@@ -1,5 +1,6 @@
 package org.jeesl.interfaces.controller;
 
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsContent;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
@@ -10,7 +11,6 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -32,6 +32,6 @@ public interface JeeslCmsRenderer <L extends JeeslLang,D extends JeeslDescriptio
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslCmsRenderer.class);
 	
-	Section build(JeeslLocaleProvider<LOC> lp, String localeCode, S section) throws OfxAuthoringException;
-	Section build(JeeslLocaleProvider<LOC> lp, String localeCode, E element) throws OfxAuthoringException;
+	Section build(JeeslLocaleManager<LOC> lp, String localeCode, S section) throws OfxAuthoringException;
+	Section build(JeeslLocaleManager<LOC> lp, String localeCode, E element) throws OfxAuthoringException;
 }

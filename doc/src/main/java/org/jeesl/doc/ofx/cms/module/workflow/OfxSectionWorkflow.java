@@ -5,10 +5,10 @@ import java.io.IOException;
 
 import org.jeesl.doc.ofx.cms.generic.AbstractJeeslOfxFactory;
 import org.jeesl.factory.mc.graph.GraphWorkflowFactory;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.model.xml.module.workflow.Processes;
 import org.jeesl.model.xml.module.workflow.Workflow;
 import org.metachart.factory.xml.graph.XmlClusterFactory;
@@ -55,7 +55,7 @@ public class OfxSectionWorkflow <L extends JeeslLang, LOC extends JeeslLocale<L,
 		gfw = new GraphFileWriter("dot");
 	}
 	
-	public Section build(JeeslLocaleProvider<LOC> lp, E element) throws OfxAuthoringException
+	public Section build(JeeslLocaleManager<LOC> lp, E element) throws OfxAuthoringException
 	{
 //		try
 //		{
@@ -70,7 +70,7 @@ public class OfxSectionWorkflow <L extends JeeslLang, LOC extends JeeslLocale<L,
 		return null;
 	}
 
-	public Section build(JeeslLocaleProvider<LOC> lp, Workflow workflow)
+	public Section build(JeeslLocaleManager<LOC> lp, Workflow workflow)
 	{
 		
 		Section xml = XmlSectionFactory.build();
@@ -85,7 +85,7 @@ public class OfxSectionWorkflow <L extends JeeslLang, LOC extends JeeslLocale<L,
 		return xml;
 	}
 	
-	public org.openfuxml.content.list.List contextList(JeeslLocaleProvider<LOC> lp, Contexts contexts)
+	public org.openfuxml.content.list.List contextList(JeeslLocaleManager<LOC> lp, Contexts contexts)
 	{
 
 		org.openfuxml.content.list.List list = XmlListFactory.description();
@@ -99,7 +99,7 @@ public class OfxSectionWorkflow <L extends JeeslLang, LOC extends JeeslLocale<L,
 		return list;
 	}
 	
-	private Section build(JeeslLocaleProvider<LOC> lp, Context context, Processes processes)
+	private Section build(JeeslLocaleManager<LOC> lp, Context context, Processes processes)
 	{
 		Section xml = XmlSectionFactory.build();
 		xml.getContent().addAll(ofxMultiLocale.titles(lp, context.getLangs()));
@@ -114,7 +114,7 @@ public class OfxSectionWorkflow <L extends JeeslLang, LOC extends JeeslLocale<L,
 		return xml;
 	}
 	
-	private Section build(JeeslLocaleProvider<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
+	private Section build(JeeslLocaleManager<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
 	{
 		Section sub = XmlSectionFactory.build();
 		sub.getContent().addAll(ofxMultiLocale.titles(lp, process.getLangs()));
@@ -124,7 +124,7 @@ public class OfxSectionWorkflow <L extends JeeslLang, LOC extends JeeslLocale<L,
 		return sub;
 	}
 	
-	private Image graph(JeeslLocaleProvider<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
+	private Image graph(JeeslLocaleManager<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
 	{
 		logger.trace("Building Image ");
 		Image image = XmlImageFactory.centerPercent(process.getId(), 80);

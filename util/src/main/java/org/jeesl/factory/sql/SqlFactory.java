@@ -59,11 +59,6 @@ public class SqlFactory
 		newLine(newLine,sb);
 	}
 	
-	public static void newLine(boolean newLine, StringBuilder sb)
-	{
-		if(newLine){sb.append("\n");}
-	}
-	
 	public static <E extends Enum<E>> String sum(String item, E attribute, String as, boolean newLine)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -187,8 +182,27 @@ public class SqlFactory
 	public static <T extends EjbWithId> void from(StringBuilder sb, Class<T> c, String alias, boolean newLine)
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
-		sb.append("FROM ").append(c.getAnnotation(Table.class).name());
+		sb.append(" FROM ").append(c.getAnnotation(Table.class).name());
 		sb.append(" AS ").append(alias);
+		newLine(newLine,sb);
+	}
+	
+	public static <T extends EjbWithId, E extends Enum<E>> void joinOnwerJ(StringBuilder sb, Class<T> c, String aliasOwner, String aliasOther, E attribute, boolean newLine)
+	{
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		sb.append(" JOIN ").append(c.getAnnotation(Table.class).name());
+		sb.append(" ").append(aliasOther);
+		sb.append(" ON ");
+		sb.append(aliasOwner).append(".id = ").append(aliasOther).append(".").append(attribute.toString()).append("_id");
+		newLine(newLine,sb);
+	}
+	public static <T extends EjbWithId, E extends Enum<E>> void joinOnwerOther(StringBuilder sb, Class<T> c, String aliasOwner, String aliasOther, E attribute, boolean newLine)
+	{
+		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
+		sb.append(" JOIN ").append(c.getAnnotation(Table.class).name());
+		sb.append(" ").append(aliasOther);
+		sb.append(" ON ");
+		sb.append(aliasOther).append(".id = ").append(aliasOwner).append(".").append(attribute.toString()).append("_id");
 		newLine(newLine,sb);
 	}
 	
@@ -199,19 +213,6 @@ public class SqlFactory
 		sb.append(" IN (").append(JeeslSqlQuery.inIdList(ids)).append(")");
 		newLine(newLine,sb);
 		return sb.toString();
-	}
-	
-	public static void limit(StringBuilder sb, int limit, boolean newLine)
-	{
-		limit(sb,true,limit,newLine);
-	}
-	public static void limit(StringBuilder sb, boolean apply, int limit, boolean newLine)
-	{
-		if(apply)
-		{
-			sb.append(" LIMIT ").append(limit);
-			newLine(newLine,sb);
-		}
 	}
 	
 	public static <T extends EjbWithId> void valueId(boolean first, StringBuilder sb, T id)
@@ -235,8 +236,12 @@ public class SqlFactory
 		if(!first) {sb.append(",");}
 		sb.append("'").append(value).append("'");
 	}
-	
 
+	public static <E extends Enum<E>, T extends EjbWithId> void where(StringBuilder sb, String alias, boolean negate, E attribute, T where, boolean newLine)
+	{
+		sb.append(" WHERE ");
+		whereAndOrAttribute(sb,alias,negate,attribute,where,newLine);
+	}
 	public static <E extends Enum<E>, T extends EjbWithId> void whereId(StringBuilder sb, String alias, T where, boolean newLine)
 	{
 		sb.append(" WHERE ");
@@ -244,11 +249,6 @@ public class SqlFactory
 		sb.append("id=");
 		sb.append(where.getId());
 		newLine(newLine,sb);
-	}
-	public static <E extends Enum<E>, T extends EjbWithId> void where(StringBuilder sb, String alias, boolean negate, E attribute, T where, boolean newLine)
-	{
-		sb.append(" WHERE ");
-		whereAndOrAttribute(sb,alias,negate,attribute,where,newLine);
 	}
 	public static <E extends Enum<E>, T extends EjbWithId> void whereAnd(StringBuilder sb, String alias, boolean negate, E attribute, T where, boolean newLine)
 	{
@@ -311,11 +311,29 @@ public class SqlFactory
 		return sb.toString();
 	}
 	
+	public static void limit(StringBuilder sb, int limit, boolean newLine)
+	{
+		limit(sb,true,limit,newLine);
+	}
+	public static void limit(StringBuilder sb, boolean apply, int limit, boolean newLine)
+	{
+		if(apply)
+		{
+			sb.append(" LIMIT ").append(limit);
+			newLine(newLine,sb);
+		}
+	}
+	
 	public static void semicolon(StringBuilder sb) {SqlFactory.semicolon(sb,false);}
 	public static void semicolon(StringBuilder sb, boolean newLine)
 	{
 		sb.append(";");
 		newLine(newLine,sb);
+	}
+	
+	public static void newLine(boolean newLine, StringBuilder sb)
+	{
+		if(newLine){sb.append("\n");}
 	}
 	
 	public static void transactionBegin(StringBuilder sb, boolean newLine)

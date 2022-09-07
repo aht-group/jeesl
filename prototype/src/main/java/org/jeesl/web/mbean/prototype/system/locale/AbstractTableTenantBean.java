@@ -13,6 +13,7 @@ import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -24,7 +25,6 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
@@ -63,7 +63,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableTenantBean.class);
 	private static final long serialVersionUID = 1L;
 
-	private JeeslLocaleProvider<LOC> lp;
+	private JeeslLocaleManager<LOC> lp;
 
 	protected boolean supportsParent; public boolean isSupportsParent() {return supportsParent;}
 

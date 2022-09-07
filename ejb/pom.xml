@@ -153,6 +153,13 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- Class Graph -->
+		<dependency>
+			<groupId>io.github.classgraph</groupId>
+			<artifactId>classgraph</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

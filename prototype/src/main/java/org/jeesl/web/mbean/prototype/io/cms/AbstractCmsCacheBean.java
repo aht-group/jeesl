@@ -126,7 +126,7 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 				try
 				{
 					LOC locale = fCms.fByCode(fbCms.getClassLocale(), localeCode);
-					GenericLocaleProvider<L,D,LOC> lp = new GenericLocaleProvider<L,D,LOC>();
+					GenericLocaleProvider<LOC> lp = new GenericLocaleProvider<LOC>();
 					lp.setLocales(Arrays.asList(locale));
 					
 					ofxSection = ofx.build(lp,localeCode,section);
@@ -155,7 +155,7 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 			try
 			{
 				LOC locale = fCms.fByCode(fbCms.getClassLocale(), localeCode);
-				GenericLocaleProvider<L,D,LOC> lp = new GenericLocaleProvider<L,D,LOC>();
+				GenericLocaleProvider<LOC> lp = new GenericLocaleProvider<>();
 				lp.setLocales(Arrays.asList(locale));
 
 				return ofx.build(lp,localeCode,element);

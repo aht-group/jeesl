@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.json.system.translation.JsonTranslation;
 import org.openfuxml.content.ofx.Paragraph;
@@ -54,7 +54,7 @@ public class AbstractJeeslOfxTableFactory<L extends JeeslLang, LOC extends Jeesl
 		json.setCode(code.toString());
 		tableHeaders.add(json);
 	}
-	protected void addHeaderMulti(JeeslLocaleProvider<LOC> lp, Map<String,L> multiLang)
+	protected void addHeaderMulti(JeeslLocaleManager<LOC> lp, Map<String,L> multiLang)
 	{
 		JsonTranslation json = new JsonTranslation();
 		
@@ -98,7 +98,7 @@ public class AbstractJeeslOfxTableFactory<L extends JeeslLang, LOC extends Jeesl
 		return XmlHeadFactory.build(row);
 	}
 	
-	protected Head buildTableHeader(JeeslLocaleProvider<LOC> lp)
+	protected Head buildTableHeader(JeeslLocaleManager<LOC> lp)
 	{
 		Row row = new Row();
 //		logger.info("Building Head with headers:"+tableHeaders.size()+" locales:"+tp.getLocaleCodes().size());

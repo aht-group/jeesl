@@ -8,11 +8,11 @@ import java.util.Map;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
@@ -41,7 +41,7 @@ public class EjbDescriptionFactory<D extends JeeslDescription>
         return new EjbDescriptionFactory<D>(cD);
     }
     
-    public <LOC extends JeeslLocale<?,D,LOC,?>> Map<String,D> build(JeeslLocaleProvider<LOC> lp, Descriptions xDescriptions) throws JeeslConstraintViolationException
+    public <LOC extends JeeslLocale<?,D,LOC,?>> Map<String,D> build(JeeslLocaleManager<LOC> lp, Descriptions xDescriptions) throws JeeslConstraintViolationException
 	{
 		Map<String,D> map = new Hashtable<String,D>();
 		if(xDescriptions!=null && !xDescriptions.getDescription().isEmpty())

@@ -3,9 +3,9 @@ package org.jeesl.doc.ofx.cms.module.workflow;
 import java.util.List;
 
 import org.jeesl.doc.ofx.cms.generic.AbstractJeeslOfxTableFactory;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.model.xml.module.workflow.Permission;
 import org.jeesl.model.xml.module.workflow.Permissions;
 import org.jeesl.model.xml.module.workflow.Stage;
@@ -47,7 +47,7 @@ public class OfxTableWorkflowProcess <L extends JeeslLang, LOC extends JeeslLoca
 		super(tp);
 	}
 	
-	public Table build(JeeslLocaleProvider<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
+	public Table build(JeeslLocaleManager<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
 	{
 		tableHeaders.clear();
 		super.addHeader("Stage");
@@ -70,7 +70,7 @@ public class OfxTableWorkflowProcess <L extends JeeslLang, LOC extends JeeslLoca
 		return table;
 	}
 	
-	private Table toOfx(JeeslLocaleProvider<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
+	private Table toOfx(JeeslLocaleManager<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
 	{
 		Table table = new Table();
 		table.setSpecification(createSpecifications());
@@ -93,7 +93,7 @@ public class OfxTableWorkflowProcess <L extends JeeslLang, LOC extends JeeslLoca
 		return specification;
 	}
 	
-	private Content createContent(JeeslLocaleProvider<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
+	private Content createContent(JeeslLocaleManager<LOC> lp, org.jeesl.model.xml.module.workflow.Process process)
 	{
 		Body body = XmlBodyFactory.build();
 		
@@ -105,7 +105,7 @@ public class OfxTableWorkflowProcess <L extends JeeslLang, LOC extends JeeslLoca
 		return XmlContentFactory.build(super.buildTableHeader(lp),body);
 	}
 	
-	private Row createRow(JeeslLocaleProvider<LOC> lp, org.jeesl.model.xml.module.workflow.Process process, Stage stage)
+	private Row createRow(JeeslLocaleManager<LOC> lp, org.jeesl.model.xml.module.workflow.Process process, Stage stage)
 	{		
 		Row row = XmlRowFactory.build();
 		row.getCell().add(ofxMultiLocale.cell(lp, stage.getLangs()));
@@ -119,7 +119,7 @@ public class OfxTableWorkflowProcess <L extends JeeslLang, LOC extends JeeslLoca
 		return row;
 	}
 	
-	private org.openfuxml.content.list.List permissions(JeeslLocaleProvider<LOC> lp, Permissions permissions)
+	private org.openfuxml.content.list.List permissions(JeeslLocaleManager<LOC> lp, Permissions permissions)
 	{
 		org.openfuxml.content.list.List list = XmlListFactory.unordered();
 		for(Permission permission : permissions.getPermission())
@@ -138,7 +138,7 @@ public class OfxTableWorkflowProcess <L extends JeeslLang, LOC extends JeeslLoca
 		return list;
 	}
 	
-	private org.openfuxml.content.list.List transitions(JeeslLocaleProvider<LOC> lp, org.jeesl.model.xml.module.workflow.Process process, List<Transition> transitions)
+	private org.openfuxml.content.list.List transitions(JeeslLocaleManager<LOC> lp, org.jeesl.model.xml.module.workflow.Process process, List<Transition> transitions)
 	{
 		org.openfuxml.content.list.List list = XmlListFactory.unordered();
 		for(Transition t : transitions)

@@ -5,17 +5,14 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.bean.JeeslLabelBean;
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
@@ -110,7 +107,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	private REM mapping; public REM getMapping() {return mapping;}public void setMapping(REM mapping) {this.mapping = mapping;}
 
 	private String className; public String getClassName() {return className;}
-	private Map<String, List<String>> mapEntitesCodeToAttribustes;
+//	private Map<String, List<String>> mapEntitesCodeToAttribustes;
 
 	private boolean supportsJeeslDownloadTranslation; public boolean isSupportsJeeslDownloadTranslation(){return supportsJeeslDownloadTranslation;}
 	private boolean supportsJeeslAttributeDownload; public boolean isSupportsJeeslAttributeDownload() {return supportsJeeslAttributeDownload;}
@@ -130,7 +127,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		efMappingEntity = fbRevision.ejbMappingEntity();
 		efAttribute = fbRevision.ejbAttribute();
 		
-		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
+//		mapEntitesCodeToAttribustes = new HashMap<String,List<String>>();
 		
 		entities = new ArrayList<>();
 		

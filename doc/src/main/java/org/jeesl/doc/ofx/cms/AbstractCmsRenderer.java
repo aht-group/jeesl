@@ -10,6 +10,7 @@ import org.jeesl.doc.ofx.cms.module.workflow.OfxSectionWorkflow;
 import org.jeesl.doc.ofx.cms.system.status.JeeslCmsStatusListFactory;
 import org.jeesl.doc.ofx.cms.system.status.JeeslCmsStatusTableFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsCategory;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsContent;
@@ -23,7 +24,6 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.openfuxml.content.ofx.Section;
@@ -77,7 +77,7 @@ public abstract class AbstractCmsRenderer <L extends JeeslLang, D extends JeeslD
 		ofxWorkflow = new OfxSectionWorkflow<>(tp);
 	}
 	
-	public Sections build(JeeslLocaleProvider<LOC> lp, String localeCode, CMS cms) throws OfxAuthoringException
+	public Sections build(JeeslLocaleManager<LOC> lp, String localeCode, CMS cms) throws OfxAuthoringException
 	{
 		logger.info("Rendering "+cms.toString());
 		S root = fCms.load(cms.getRoot(),true);
@@ -93,13 +93,13 @@ public abstract class AbstractCmsRenderer <L extends JeeslLang, D extends JeeslD
 		return xml;
 	}
 	
-	public Section build(JeeslLocaleProvider<LOC> lp, String localeCode, S section) throws OfxAuthoringException
+	public Section build(JeeslLocaleManager<LOC> lp, String localeCode, S section) throws OfxAuthoringException
 	{
 		S root = fCms.load(section,true);
 		return buildSection(lp,localeCode,root);
 	}
  
-	private Section buildSection(JeeslLocaleProvider<LOC> lp, String localeCode, S section) throws OfxAuthoringException
+	private Section buildSection(JeeslLocaleManager<LOC> lp, String localeCode, S section) throws OfxAuthoringException
 	{
 		Section xml = XmlSectionFactory.build();
 		if(section.getName().containsKey(localeCode)) {xml.getContent().add(XmlTitleFactory.build(section.getName().get(localeCode).getLang()));}
@@ -122,17 +122,17 @@ public abstract class AbstractCmsRenderer <L extends JeeslLang, D extends JeeslD
 		return xml;
 	}
 	
-	public Section build(JeeslLocaleProvider<LOC> lp, String localeCode, E element) throws OfxAuthoringException
+	public Section build(JeeslLocaleManager<LOC> lp, String localeCode, E element) throws OfxAuthoringException
 	{
 		Section xml = XmlSectionFactory.build();
 		build(lp, localeCode,xml.getContent(),element);
 		return xml;
 	}
 	
-	protected abstract void build(JeeslLocaleProvider<LOC> lp, String localeCode, List<Serializable> list, E element) throws OfxAuthoringException;
+	protected abstract void build(JeeslLocaleManager<LOC> lp, String localeCode, List<Serializable> list, E element) throws OfxAuthoringException;
 	
 	//Here we are handling all types which are available as generic renderer in JEESL 
-	protected void buildJeesl(JeeslLocaleProvider<LOC> lp, String localeCode, List<Serializable> list, E element) throws OfxAuthoringException
+	protected void buildJeesl(JeeslLocaleManager<LOC> lp, String localeCode, List<Serializable> list, E element) throws OfxAuthoringException
 	{
 		if(element.getType().getCode().equals(JeeslIoCmsElement.Type.paragraph.toString())) {list.addAll(ofParagraph.build(localeCode,element).getContent());}
 		else if(element.getType().getCode().equals(JeeslIoCmsElement.Type.image.toString())) {list.add(ofImage.build(localeCode,element));}

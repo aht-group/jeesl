@@ -151,8 +151,6 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		}
 	}
 	
-	
-	
 	@Override public List<ASSET> allAssets(ASSET root)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();

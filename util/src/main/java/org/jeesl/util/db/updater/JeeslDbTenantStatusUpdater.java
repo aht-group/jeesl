@@ -8,12 +8,12 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -33,14 +33,14 @@ public class JeeslDbTenantStatusUpdater <L extends JeeslLang, D extends JeeslDes
 	
 	private final JeeslGraphicFacade<?,?,?,G,GT,?,?> fGraphic;
 	private final LocaleFactoryBuilder<L,D,?> fbLocale;
-	private final JeeslLocaleProvider<LOC> lp;
+	private final JeeslLocaleManager<LOC> lp;
 	private JeeslDbGraphicUpdater<G,GT> uGraphic;
 
 	private R realm;
 	private RREF rref;
 	
 	public JeeslDbTenantStatusUpdater(LocaleFactoryBuilder<L,D,LOC> fbLocale, SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg,
-										JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic, JeeslLocaleProvider<LOC> lp)
+										JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic, JeeslLocaleManager<LOC> lp)
 	{
 		this.fbLocale=fbLocale;
 		this.fGraphic=fGraphic;

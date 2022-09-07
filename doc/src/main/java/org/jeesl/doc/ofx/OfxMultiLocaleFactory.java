@@ -3,10 +3,10 @@ package org.jeesl.doc.ofx;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.list.Item;
@@ -34,8 +34,8 @@ public class OfxMultiLocaleFactory<L extends JeeslLang, LOC extends JeeslLocale<
 		
 	}
 	
-	public Cell cell(JeeslLocaleProvider<LOC> lp, Langs langs) {return XmlCellFactory.build(paragraphs(lp,langs,false));}
-	public <S extends JeeslStatus<L,D,S>, D extends JeeslDescription> Cell cellLabel(JeeslLocaleProvider<LOC> lp, JeeslStatus<L,D,S> status)
+	public Cell cell(JeeslLocaleManager<LOC> lp, Langs langs) {return XmlCellFactory.build(paragraphs(lp,langs,false));}
+	public <S extends JeeslStatus<L,D,S>, D extends JeeslDescription> Cell cellLabel(JeeslLocaleManager<LOC> lp, JeeslStatus<L,D,S> status)
 	{
 		Cell cell = XmlCellFactory.build();
 //		if(font!=null){cell.getContent().add(font);}
@@ -43,7 +43,7 @@ public class OfxMultiLocaleFactory<L extends JeeslLang, LOC extends JeeslLocale<
 		return cell;
 	}
 	
-	private <S extends JeeslStatus<L,D,S>, D extends JeeslDescription> List<Paragraph> paragraphLabels(JeeslLocaleProvider<LOC> lp, JeeslStatus<L,D,S> status)
+	private <S extends JeeslStatus<L,D,S>, D extends JeeslDescription> List<Paragraph> paragraphLabels(JeeslLocaleManager<LOC> lp, JeeslStatus<L,D,S> status)
 	{
 		List<Paragraph> paragraphs = new ArrayList<Paragraph>();
 		
@@ -59,8 +59,8 @@ public class OfxMultiLocaleFactory<L extends JeeslLang, LOC extends JeeslLocale<
 		return paragraphs;
 	}
 	
-	public <S extends JeeslStatus<L,D,S>, D extends JeeslDescription> Title title(JeeslLocaleProvider<LOC> lp, JeeslStatus<L,D,S> status) {return title(lp,status,null);}
-	public <S extends JeeslStatus<L,D,S>, D extends JeeslDescription> Title title(JeeslLocaleProvider<LOC> lp, JeeslStatus<L,D,S> status, String suffix)
+	public <S extends JeeslStatus<L,D,S>, D extends JeeslDescription> Title title(JeeslLocaleManager<LOC> lp, JeeslStatus<L,D,S> status) {return title(lp,status,null);}
+	public <S extends JeeslStatus<L,D,S>, D extends JeeslDescription> Title title(JeeslLocaleManager<LOC> lp, JeeslStatus<L,D,S> status, String suffix)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(status.getName().get(lp.getPrimaryLocaleCode()).getLang());
@@ -68,7 +68,7 @@ public class OfxMultiLocaleFactory<L extends JeeslLang, LOC extends JeeslLocale<
 		
 		return XmlTitleFactory.build(lp.getPrimaryLocaleCode(), sb.toString());
 	}
-	public Title title(JeeslLocaleProvider<LOC> lp, Langs langs)
+	public Title title(JeeslLocaleManager<LOC> lp, Langs langs)
 	{
 		try
 		{
@@ -79,7 +79,7 @@ public class OfxMultiLocaleFactory<L extends JeeslLang, LOC extends JeeslLocale<
 			return XmlTitleFactory.build(e.getMessage());
 		}
 	}
-	public List<Title> titles(JeeslLocaleProvider<LOC> lp, Langs langs)
+	public List<Title> titles(JeeslLocaleManager<LOC> lp, Langs langs)
 	{
 		List<Title> titles = new ArrayList<Title>();
 		for(String localeCode : lp.getLocaleCodes())
@@ -92,7 +92,7 @@ public class OfxMultiLocaleFactory<L extends JeeslLang, LOC extends JeeslLocale<
 		return titles;
 	}
 	
-	public List<Item> listDescription(JeeslLocaleProvider<LOC> lp, Langs langs, Descriptions descriptions)
+	public List<Item> listDescription(JeeslLocaleManager<LOC> lp, Langs langs, Descriptions descriptions)
 	{
 		List<Item> items = new ArrayList<>();
 		for(String localeCode : lp.getLocaleCodes())
@@ -112,7 +112,7 @@ public class OfxMultiLocaleFactory<L extends JeeslLang, LOC extends JeeslLocale<
 		}
 		return items;
 	}
-	public List<Item> listItem(JeeslLocaleProvider<LOC> lp, Langs langs)
+	public List<Item> listItem(JeeslLocaleManager<LOC> lp, Langs langs)
 	{
 		List<Item> items = new ArrayList<>();
 		for(String localeCode : lp.getLocaleCodes())
@@ -129,7 +129,7 @@ public class OfxMultiLocaleFactory<L extends JeeslLang, LOC extends JeeslLocale<
 		return items;
 	}
 	
-	public List<Paragraph> paragraphs(JeeslLocaleProvider<LOC> lp, Descriptions descriptions, boolean includeEmpty)
+	public List<Paragraph> paragraphs(JeeslLocaleManager<LOC> lp, Descriptions descriptions, boolean includeEmpty)
 	{
 		List<Paragraph> list = new ArrayList<>();
 		for(String localeCode : lp.getLocaleCodes())
@@ -147,7 +147,7 @@ public class OfxMultiLocaleFactory<L extends JeeslLang, LOC extends JeeslLocale<
 		}
 		return list;
 	}
-	public List<Paragraph> paragraphs(JeeslLocaleProvider<LOC> lp, Langs langs, boolean includeEmpty)
+	public List<Paragraph> paragraphs(JeeslLocaleManager<LOC> lp, Langs langs, boolean includeEmpty)
 	{
 		List<Paragraph> list = new ArrayList<>();
 		for(String localeCode : lp.getLocaleCodes())

@@ -106,7 +106,7 @@ public abstract class AbstractHelpCacheBean <L extends JeeslLang,D extends Jeesl
 				try
 				{
 					LOC locale = fCms.fByCode(fbCms.getClassLocale(), localeCode);
-					GenericLocaleProvider<L,D,LOC> lp = new GenericLocaleProvider<L,D,LOC>();
+					GenericLocaleProvider<LOC> lp = new GenericLocaleProvider<>();
 					lp.setLocales(Arrays.asList(locale));
 					
 					S eSection = help.getSection();
