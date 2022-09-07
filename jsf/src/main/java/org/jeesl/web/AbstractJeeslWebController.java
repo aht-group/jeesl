@@ -20,20 +20,21 @@ public class AbstractJeeslWebController <L extends JeeslLang, D extends JeeslDes
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslWebController.class);
 	
-	protected Class<L> cL;
-	protected Class<D> cD;
+
 	
 	protected JeeslFacesMessageBean bMessage;
 	protected JeeslLocaleProvider<LOC> lp;
 	protected JeeslLogger jogger;
 	
-	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;}
-
 	private final List<LOC> locales; public List<LOC> getLocales() {return locales;}
 	
 	protected final EjbLangFactory<L> efLang;
 	protected final EjbDescriptionFactory<D> efDescription;
 	
+	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;}
+	protected Class<L> cL;
+	protected Class<D> cD;
+
 //	protected NullNumberBinder nnb; public NullNumberBinder getNnb() {return nnb;} public void setNnb(NullNumberBinder nnb) {this.nnb = nnb;}
 
 	public AbstractJeeslWebController(final Class<L> cL, final Class<D> cD)
