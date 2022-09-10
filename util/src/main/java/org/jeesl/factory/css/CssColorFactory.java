@@ -13,39 +13,31 @@ import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CssColorFactory
+public class CssColorFactory <G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(CssColorFactory.class);
     
 	public static String colorGrey = "#F8F8FF";
 	    
-	public static <GC extends JeeslGraphicComponent<?,?,GC,?>> String build(GC figure)
+	private String build(GC figure)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("#").append(figure.getColor()); 
 		return sb.toString();
 	}
 	
-	public static <L extends JeeslLang, D extends JeeslDescription,
-					G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-		String firstCss(G graphic)
+	public String firstCss(G graphic)
 	{
 		return css(0,graphic.getFigures(),"");
 	}
 	
-	public static <L extends JeeslLang, D extends JeeslDescription,
-					G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-		String css(int index, G graphic, String fallback)
+	public String css(int index, G graphic, String fallback)
 	{
 		return css(index,graphic.getFigures(),fallback);
 	}
 	
-	private static <L extends JeeslLang, D extends JeeslDescription,
-					G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-		String css(int index, List<GC> figures, String fallback)
+	private String css(int index, List<GC> figures, String fallback)
 	{
 		if(figures.size()>index)
 		{

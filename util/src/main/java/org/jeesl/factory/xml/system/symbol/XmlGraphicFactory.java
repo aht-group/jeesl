@@ -15,15 +15,15 @@ import net.sf.ahtutils.xml.symbol.Graphic;
 import net.sf.exlp.factory.xml.io.XmlFileFactory;
 
 public class XmlGraphicFactory <L extends JeeslLang,D extends JeeslDescription,
-								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlGraphicFactory.class);
 	
 	private Graphic q;
 	
 	private XmlTypeFactory<L,D,GT> xfType;
-	private XmlSymbolFactory<L,D,G,GT,FS> xfSymbol;
+	private XmlSymbolFactory<L,D,G,GT,GS> xfSymbol;
 	
 	public XmlGraphicFactory(Query query){this(query.getLang(),query.getGraphic());}
 	public XmlGraphicFactory(String localeCode, Graphic q)

@@ -17,8 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SvgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 	extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgFactoryBuilder.class);
@@ -26,9 +26,10 @@ public class SvgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	private final Class<G> cG; public Class<G> getClassGraphic(){return cG;}
 	private final Class<GT> cType; public Class<GT> getClassGraphicType(){return cType;}
 	private final Class<GC> cF; public Class<GC> getClassFigure(){return cF;}
-	private final Class<FS> cFs; public Class<FS> getClassFigureStyle(){return cFs;}
+	private final Class<GS> cFs; public Class<GS> getClassFigureStyle(){return cFs;}
 	
-	public SvgFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<G> cG, final Class<GT> cType, final Class<GC> cF, final Class<FS> cFs)
+	public SvgFactoryBuilder(final Class<L> cL, final Class<D> cD,
+								final Class<G> cG, final Class<GT> cType, final Class<GC> cF, final Class<GS> cFs)
 	{       
 		super(cL,cD);
 		this.cG = cG;
@@ -38,17 +39,17 @@ public class SvgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
-					G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-		SvgFactoryBuilder<L,D,G,GT,GC,FS> factory(final Class<L> cL, final Class<D> cD, final Class<G> cG, final Class<GT> cGT, final Class<GC> cF, final Class<FS> cFs)
+					G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+					GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+		SvgFactoryBuilder<L,D,G,GT,GC,GS> factory(final Class<L> cL, final Class<D> cD, final Class<G> cG, final Class<GT> cGT, final Class<GC> cF, final Class<GS> cFs)
 	{
-		return new SvgFactoryBuilder<L,D,G,GT,GC,FS>(cL,cD,cG,cGT,cF,cFs);
+		return new SvgFactoryBuilder<L,D,G,GT,GC,GS>(cL,cD,cG,cGT,cF,cFs);
 	}
 	
-    public EjbGraphicFactory<L,D,G,GT,FS> efGraphic() {return new EjbGraphicFactory<>(cG,cType,cFs);}
-    public EjbGraphicFigureFactory<L,D,G,GT,GC,FS> efFigure() {return new EjbGraphicFigureFactory<>(cF);}
-	public EjbStatusFactory<FS,L,D> style() {return EjbStatusFactory.createFactory(cFs,cL,cD);}
+    public EjbGraphicFactory<L,D,G,GT,GS> efGraphic() {return new EjbGraphicFactory<>(cG,cType,cFs);}
+    public EjbGraphicFigureFactory<L,D,G,GC,GS> efFigure() {return new EjbGraphicFigureFactory<>(cF);}
+	public EjbStatusFactory<GS,L,D> style() {return EjbStatusFactory.createFactory(cFs,cL,cD);}
 	
-	public SvgSymbolFactory<L,D,G,GT,GC,FS> symbol() {return SvgSymbolFactory.factory();}
-	public SvgFigureFactory<L,D,G,GT,GC,FS> figure() {return SvgFigureFactory.factory();}
+	public SvgSymbolFactory<L,D,G,GT,GC,GS> symbol() {return SvgSymbolFactory.factory();}
+	public SvgFigureFactory<L,D,G,GT,GC,GS> figure() {return SvgFigureFactory.factory();}
 }

@@ -24,8 +24,8 @@ import net.sf.ahtutils.xml.symbol.Size;
 import net.sf.ahtutils.xml.symbol.Symbol;
 
 public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgSymbolFactory.class);
 		
@@ -37,11 +37,11 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 	}
 	
     public static <L extends JeeslLang, D extends JeeslDescription,
-				    G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-    	SvgSymbolFactory<L,D,G,GT,GC,FS> factory()
+				    G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+					GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+    	SvgSymbolFactory<L,D,G,GT,GC,GS> factory()
 	{
-	    return new SvgSymbolFactory<L,D,G,GT,GC,FS>();
+	    return new SvgSymbolFactory<L,D,G,GT,GC,GS>();
 	}
     
 	public static SVGGraphics2D build()

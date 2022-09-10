@@ -16,8 +16,8 @@ import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class UtilsRestService <L extends JeeslLang,
 							D extends JeeslDescription,
-							G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-							GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+							G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+							GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 	extends AbstractUtilsRest<L,D>
 	implements UtilsStatusRestImport
 {
@@ -26,9 +26,9 @@ public class UtilsRestService <L extends JeeslLang,
     @SuppressWarnings("unused")
 	private final Class<G> cGraphic;
     private final Class<GT> cGraphicType;
-    private final Class<FS> cGraphicStyle;
+    private final Class<GS> cGraphicStyle;
     
-    public UtilsRestService(JeeslFacade fUtils, String[] localeCodes, final Class<L> cLang, final Class<D> cDescription, final Class<G> cGraphic,final Class<GT> cGraphicType, final Class<FS> cGraphicStyle)
+    private UtilsRestService(JeeslFacade fUtils, String[] localeCodes, final Class<L> cLang, final Class<D> cDescription, final Class<G> cGraphic,final Class<GT> cGraphicType, final Class<GS> cGraphicStyle)
 	{   
     	super(fUtils,localeCodes,cLang,cDescription);
         
@@ -40,12 +40,12 @@ public class UtilsRestService <L extends JeeslLang,
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
-					G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>> 
-		UtilsRestService<L,D,G,GT,GC,FS>
-		factory(JeeslFacade fUtils,String[] localeCodes,final Class<L> cL, final Class<D> cD, final Class<G> cGraphic,final Class<GT> cGraphicType, final Class<FS> cGraphicStyle)
+					G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+					GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>> 
+		UtilsRestService<L,D,G,GT,GC,GS>
+		factory(JeeslFacade fUtils,String[] localeCodes,final Class<L> cL, final Class<D> cD, final Class<G> cGraphic,final Class<GT> cGraphicType, final Class<GS> cGraphicStyle)
 	{
-		return new UtilsRestService<L,D,G,GT,GC,FS>(fUtils,localeCodes,cL,cD,cGraphic,cGraphicType,cGraphicStyle);
+		return new UtilsRestService<L,D,G,GT,GC,GS>(fUtils,localeCodes,cL,cD,cGraphic,cGraphicType,cGraphicStyle);
 	}
 
 	@Override public DataUpdate importUtilsSymbolGraphicTypes(Aht types) {return super.importStatus(cGraphicType, null, types);}

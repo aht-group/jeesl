@@ -55,10 +55,10 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,G>,
 										R extends JeeslTenantRealm<L,D,R,G>, RREF extends EjbWithId,
-										G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
+										G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+										GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>,
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>>
-					extends AbstractTableBean<L,D,LOC,G,GT,GC,FS,RE> implements Serializable
+					extends AbstractTableBean<L,D,LOC,G,GT,GC,GS,RE> implements Serializable
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableTenantBean.class);
 	private static final long serialVersionUID = 1L;
@@ -71,7 +71,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 	private RREF rref; public RREF getRref() {return rref;}
 	
 	public AbstractTableTenantBean(LocaleFactoryBuilder<L,D,LOC> fbStatus,
-									SvgFactoryBuilder<L,D,G,GT,GC,FS> fbSvg,
+									SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbStatus,fbSvg,fbRevision);
@@ -96,7 +96,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 	}
 
 	protected void postConstructOptionTable(JeeslTranslationBean<L,D,LOC> bTranslation,
-											JeeslGraphicFacade<L,D,?,G,GT,GC,FS> fGraphic,
+											JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic,
 											JeeslFacesMessageBean bMessage,
 											R realm)
 	{
@@ -217,7 +217,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		((JeeslWithTenantSupport<R>)status).setRref(rref.getId());
 
 		GT type = fGraphic.fByEnum(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol);
-		FS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
+		GS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
 		graphic = efGraphic.buildSymbol(type, style);
 		((EjbWithGraphic<G>)status).setGraphic(graphic);
 	}
@@ -236,7 +236,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		{
 			logger.info("Need to create a graphic entity for this status");
 			GT type = fGraphic.fByEnum(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol);
-			FS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
+			GS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
 			graphic = fGraphic.persist(efGraphic.buildSymbol(type, style));
 			((EjbWithGraphic<G>)status).setGraphic(graphic);
 			status = fGraphic.update(status);

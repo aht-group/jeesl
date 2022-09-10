@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.xml.symbol.Figure;
 
 public class XmlFigureFactory <L extends JeeslLang,D extends JeeslDescription,
-								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlFigureFactory.class);
 		
@@ -22,7 +22,7 @@ public class XmlFigureFactory <L extends JeeslLang,D extends JeeslDescription,
 	private final Figure q;
 	
 	@SuppressWarnings("unused")
-	private XmlStyleFactory<L,D,FS> xfStyle;
+	private XmlStyleFactory<L,D,GS> xfStyle;
 	
 //	public XmlFigureFactory(Query query){this(query.getLang(),query.getGraphic());}
 	public XmlFigureFactory(String localeCode, Figure q)

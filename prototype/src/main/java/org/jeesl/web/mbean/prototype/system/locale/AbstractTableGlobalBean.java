@@ -57,10 +57,10 @@ import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-										G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
+										G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+										GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>,
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>>
-			extends AbstractTableBean<L,D,LOC,G,GT,GC,FS,RE>
+			extends AbstractTableBean<L,D,LOC,G,GT,GC,GS,RE>
 			implements Serializable
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableGlobalBean.class);
@@ -78,7 +78,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 	protected boolean supportsComponents; public boolean isSupportsComponents() {return supportsComponents;}
 
 	public AbstractTableGlobalBean(LocaleFactoryBuilder<L,D,LOC> fbStatus,
-									SvgFactoryBuilder<L,D,G,GT,GC,FS> fbSvg,
+									SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbStatus,fbSvg,fbRevision);
@@ -107,7 +107,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 	protected abstract void test();
 
 	protected void postConstructOptionTable(JeeslTranslationBean<L,D,LOC> bTranslation,
-											JeeslGraphicFacade<L,D,?,G,GT,GC,FS> fGraphic,
+											JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic,
 											JeeslFacesMessageBean bMessage)
 	{
 		super.initJeeslAdmin(bTranslation, bMessage);
@@ -225,7 +225,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		if(supportsGraphic)
 		{
 			GT type = fGraphic.fByCode(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol.toString());
-			FS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle.toString());
+			GS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle.toString());
 			graphic = efGraphic.buildSymbol(type, style);
 			((EjbWithGraphic<G>)status).setGraphic(graphic);
 		}
@@ -252,7 +252,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 			{
 				logger.info("Need to create a graphic entity for this status");
 				GT type = fGraphic.fByCode(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol);
-				FS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
+				GS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
 				graphic = fGraphic.persist(efGraphic.buildSymbol(type, style));
 				((EjbWithGraphic<G>)status).setGraphic(graphic);
 				status = fGraphic.update(status);

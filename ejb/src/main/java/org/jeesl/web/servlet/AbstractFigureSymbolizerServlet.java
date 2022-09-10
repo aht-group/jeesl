@@ -25,15 +25,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AbstractFigureSymbolizerServlet<L extends JeeslLang, D extends JeeslDescription,
-												G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-												GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-	extends AbstractSymbolizerServlet<L,D,G,GT,GC,FS>
+												G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+												GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+	extends AbstractSymbolizerServlet<L,D,G,GT,GC,GS>
 	implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractFigureSymbolizerServlet.class);
 	
-	private SvgFigureFactory<L,D,G,GT,GC,FS> svgF;
+	private SvgFigureFactory<L,D,G,GT,GC,GS> svgF;
 	
 	private AbstractFigureSymbolizerServlet()
 	{

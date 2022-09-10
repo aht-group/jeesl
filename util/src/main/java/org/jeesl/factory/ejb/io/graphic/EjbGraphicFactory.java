@@ -12,7 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbGraphicFactory<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<GT,?,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								G extends JeeslGraphic<GT,?,GS>,
+								GT extends JeeslGraphicType<L,D,GT,G>,
 								GS extends JeeslGraphicShape<L,D,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbGraphicFactory.class);

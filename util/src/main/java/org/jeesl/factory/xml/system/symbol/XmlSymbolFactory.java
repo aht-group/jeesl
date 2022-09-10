@@ -16,14 +16,14 @@ import net.sf.ahtutils.xml.status.Styles;
 import net.sf.ahtutils.xml.symbol.Symbol;
 
 public class XmlSymbolFactory <L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<GT,?,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								FS extends JeeslGraphicShape<L,D,FS,G>>
+								G extends JeeslGraphic<GT,?,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GS extends JeeslGraphicShape<L,D,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSymbolFactory.class);
 		
 	private Symbol q;
 	
-	private XmlStyleFactory<L,D,FS> xfStyle;
+	private XmlStyleFactory<L,D,GS> xfStyle;
 	private XmlColorsFactory<G> xfColors;
 	private XmlSizesFactory<G> xfSizes;
 	

@@ -34,7 +34,7 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	final static Logger logger = LoggerFactory.getLogger(TestSvgFigureFactory.class);
 
 	private EjbStatusFactory<GraphicStyle,Lang,Description> efStyle;
-	private EjbGraphicFigureFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicStyle> efFigure;
+	private EjbGraphicFigureFactory<Lang,Description,Graphic,GraphicComponent,GraphicStyle> efFigure;
 	private static SvgFigureFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicStyle> svgF;
 	
 	private String colorRed = "FF0000";
