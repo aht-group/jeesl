@@ -42,7 +42,7 @@
 		</j:slot>
 		<j:slot id="sCategory" width="6">
 			<h:form id="fEntity" rendered="#{(not empty cc.attrs.bean.entity)}">
-				<p:panel id="pLang" header="#{cc.attrs.bean.entity.name[localeCode].lang}" styleClass="jeeslPanel">
+				<p:panel id="pLang" header="#{cc.attrs.bean.entity.name[localeCode].lang}" styleClass="jeesl-panel">
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 						<h:outputText value="#{cc.attrs.bean.entity.description[localeCode].lang}"/>
 					</p:panelGrid>
@@ -100,7 +100,7 @@
 		</j:slot>
 		<j:slot id="sLang" width="4">
 			<h:form id="fLang">
-				<p:panel id="pLang" header="#{msg.aupOptionDetails}" rendered="#{not empty cc.attrs.bean.status}" styleClass="jeeslPanel">
+				<p:panel id="pLang" header="#{msg.aupOptionDetails}" rendered="#{not empty cc.attrs.bean.status}" styleClass="jeesl-panel">
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDispappear="true" tooltip="#{msg.jeeslTtCancel}"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
@@ -195,12 +195,12 @@
 				</p:panel>
 			</h:form>
 			
-			<h:form id="fFigures" rendered="#{(not empty cc.attrs.bean.status) and cc.attrs.bean.supportsFigure}">
+			<h:form id="fComponents" rendered="#{(not empty cc.attrs.bean.status) and cc.attrs.bean.supportsComponents}">
 				<p:dataTable var="f" value="#{cc.attrs.bean.figures}" draggableRows="#{cc.attrs.bean.uiAllowReorder}"
 			          selection="#{cc.attrs.bean.figure}" selectionMode="single" rowKey="#{f.id}">
 					<f:facet name="header">
 			          	<j:dtHeader title="#{msg.jeeslOptionGraphicFigures}">
-			          		<j:svg type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addFigure()}" update=":#{cc.id}:fFigure" tooltip="#{msg.ttNew}"/>
+			          		<j:svg type="jeeslAdd" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addFigure()}" update=":#{cc.id}:fFigure"/>
 			          	</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderFigures()}" update="@form"/>
@@ -210,24 +210,25 @@
 			             <j:duoCheckmark value="#{f.css}"/>
 					</p:column>
 					<p:column>
-			             <f:facet name="header">#{msg.aupGraphicStyle}</f:facet>  
-			             <h:outputText value="#{f.style.name[localeCode].lang}"/>
+			             <f:facet name="header"><jtp:label entity="IoGraphicComponent" code="style"/></f:facet>
+			             <jtp:symbolizer value="#{f.style}"/>
+			             <h:outputText value="#{f.style.name[localeCode].lang}" rendered="false"/>
 					</p:column>
 					<p:column>
 			             <f:facet name="header">#{msg.jeeslOptionGraphicFigureSize}</f:facet>  
 			             <h:outputText value="#{f.size}"/>
 					</p:column>
-					<p:column rendered="#{cc.attrs.bean.supportsGraphic}" styleClass="aupPfDtColCentered">
+					<p:column rendered="#{cc.attrs.bean.supportsGraphic}">
 						<jtp:symbolizer value="#{f}"/>
 					</p:column>
 				</p:dataTable>
 			</h:form>
 			<h:form id="fFigure">
-				<p:panel id="pLang" header="#{msg.jeeslOptionGraphicFigure}" rendered="#{not empty cc.attrs.bean.figure}" styleClass="jeeslPanel">
+				<p:panel id="pLang" header="#{msg.jeeslOptionGraphicFigure}" rendered="#{not empty cc.attrs.bean.figure}" styleClass="jeesl-panel">
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" tooltip="#{msg.jeeslTtCancel}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveFigure()}"   update=":#{cc.id}:fFigures :#{cc.id}:fFigure" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteFigure()}" update=":#{cc.id}:fFigures :#{cc.id}:fFigure" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelFigure()}" update=":#{cc.id}:fComponents :#{cc.id}:fFigure" tooltip="#{msg.jeeslTtCancel}"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveFigure()}"   update=":#{cc.id}:fComponents :#{cc.id}:fFigure" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteFigure()}" update=":#{cc.id}:fComponents :#{cc.id}:fFigure" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.uiAllowRemove and cc.attrs.bean.uiAllowCode}" />
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					
@@ -263,7 +264,7 @@
 				</p:panel>
 			</h:form>
 			
-			<p:panel header="#{msg.jeeslGraphicPreview}" rendered="#{(not empty cc.attrs.bean.status) and (cc.attrs.bean.supportsGraphic)}">
+			<p:panel header="#{msg.jeeslGraphicPreview}" rendered="#{(not empty cc.attrs.bean.status) and (cc.attrs.bean.supportsGraphic)}" styleClass="jeesl-panel">
 				<p:panelGrid columns="4" columnClasses="jeeslGrid25,jeeslGrid25,jeeslGrid25,jeeslGrid25">
 					<p:outputLabel value="12px"/>
 					<p:outputLabel value="14px"/>

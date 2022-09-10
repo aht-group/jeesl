@@ -35,7 +35,7 @@ public class AbstractFigureSymbolizerServlet<L extends JeeslLang, D extends Jees
 	
 	private SvgFigureFactory<L,D,G,GT,F,FS> svgF;
 	
-	public AbstractFigureSymbolizerServlet()
+	private AbstractFigureSymbolizerServlet()
 	{
 		svgF = SvgFigureFactory.factory();
 	}

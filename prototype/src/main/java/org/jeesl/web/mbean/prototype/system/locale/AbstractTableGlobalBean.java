@@ -75,7 +75,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 
 	protected boolean supportsImage; public boolean getSupportsImage() {return supportsImage;}
 	protected boolean supportsGraphic; public boolean getSupportsGraphic() {return supportsGraphic;}
-	protected boolean supportsFigure; public boolean isSupportsFigure() {return supportsFigure;}
+	protected boolean supportsComponents; public boolean isSupportsComponents() {return supportsComponents;}
 
 	public AbstractTableGlobalBean(LocaleFactoryBuilder<L,D,LOC> fbStatus,
 									SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg,
@@ -137,7 +137,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		
 		supportsImage = JeeslStatusWithImage.class.isAssignableFrom(optionClass);
 		supportsGraphic = EjbWithGraphic.class.isAssignableFrom(optionClass);
-		supportsFigure = EjbWithGraphicFigure.class.isAssignableFrom(optionClass);
+		supportsComponents = EjbWithGraphicFigure.class.isAssignableFrom(optionClass);
 	}
 
 	@Override
@@ -151,7 +151,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 			logger.info("\tImage? "+supportsImage);
 			logger.info("\tGraphic? "+supportsGraphic);
 			logger.info("\tSymbol? "+supportsSymbol);
-			logger.info("\tFigure? "+supportsFigure);
+			logger.info("\tComponents? "+supportsComponents);
 			logger.info("\tLocked? "+supportsLocked);
 			logger.info("\tsupportsDownload? "+supportsDownload);
 			logger.info("\t"+JeeslOptionUploadable.class.getSimpleName()+"? "+supportsUpload);
@@ -191,8 +191,6 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
             				.asSubclass(fbStatus.getClassStatusGlobal())
             				.asSubclass(EjbWithPosition.class);
             
-//            PositionComparator<EjbWithPosition> c = new PositionComparator<>();
-//            Collections.sort(parents,c);
             parents = fGraphic.allOrderedPosition(clParent);
             logger.info(optionClass.getSimpleName()+" "+parents.size());
 		}
@@ -261,7 +259,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 			}
 			graphic = ((EjbWithGraphic<G>)status).getGraphic();
 
-			if(supportsFigure){reloadFigures();}
+			if(supportsComponents){reloadFigures();}
 		}
 
 		uiAllowCode = hasDeveloperAction || hasAdministratorAction;
@@ -306,7 +304,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 				graphic = ((EjbWithGraphic<G>)status).getGraphic();
 				if(debugSave){logger.info("Saved "+graphic.getClass().getSimpleName()+" "+graphic.toString());}
 			}
-			if(supportsFigure){reloadFigures();}
+			if(supportsComponents){reloadFigures();}
 			if(debugSave){logger.info("Saved "+status.getClass().getSimpleName()+" "+status.toString());}
 
 
