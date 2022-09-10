@@ -31,29 +31,29 @@ import org.slf4j.LoggerFactory;
 
 public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends JeeslDescription,
 												S extends EjbWithId,
-												G extends JeeslGraphic<GT,F,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-												F extends JeeslGraphicComponent<G,GT,F,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
-	extends AbstractSymbolizerServlet<L,D,G,GT,F,GS>
+												G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+												GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+	extends AbstractSymbolizerServlet<L,D,G,GT,GC,GS>
 	implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractGraphicSymbolizerServlet.class);
 	
-	private final Class<F> cF;
+	private final Class<GC> cF;
 	
-	private final SvgSymbolFactory<L,D,G,GT,F,GS> fSvgGraphic;
-	private final SvgFigureFactory<L,D,G,GT,F,GS> fSvgFigure;
+	private final SvgSymbolFactory<L,D,G,GT,GC,GS> fSvgGraphic;
+	private final SvgFigureFactory<L,D,G,GT,GC,GS> fSvgFigure;
 	
 	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	public AbstractGraphicSymbolizerServlet(SvgFactoryBuilder<L,D,G,GT,F,GS> fbStatus)
+	public AbstractGraphicSymbolizerServlet(SvgFactoryBuilder<L,D,G,GT,GC,GS> fbStatus)
 	{
 		this.cF = fbStatus.getClassFigure();
 		fSvgGraphic = fbStatus.symbol();
 		fSvgFigure = fbStatus.figure();
 	}
 	
-	public AbstractGraphicSymbolizerServlet(final Class<F> cF)
+	public AbstractGraphicSymbolizerServlet(final Class<GC> cF)
 	{
 		this.cF=cF;
 		fSvgGraphic = SvgSymbolFactory.factory();
@@ -61,7 +61,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void symbolizer(JeeslGraphicFacade<L,D,S,G,GT,F,GS> fGraphic, HttpServletRequest request, HttpServletResponse response) throws IOException
+	protected void symbolizer(JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic, HttpServletRequest request, HttpServletResponse response) throws IOException
     {
 		Image m = super.getGraphicInfo(request,response);
 		
@@ -132,7 +132,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	    }
 	}
 	
-	protected void process(HttpServletRequest request, HttpServletResponse response, JeeslGraphicFacade<L,D,S,G,GT,F,GS> fGraphic, G graphic, Image image) throws IOException, TranscoderException, UtilsProcessingException
+	protected void process(HttpServletRequest request, HttpServletResponse response, JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic, G graphic, Image image) throws IOException, TranscoderException, UtilsProcessingException
     {
 		byte[] bytes = null;
     	
@@ -144,7 +144,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	    if(graphic.getType().getCode().equals(JeeslGraphicType.Code.symbol.toString()))
 		{
 	    	if(debugOnInfo){logger.info("Build SVG: size " + size + " id:" + id);}
-	    	List<F> figures = fGraphic.allForParent(cF,graphic);
+	    	List<GC> figures = fGraphic.allForParent(cF,graphic);
 			if(figures.isEmpty())
 			{
 		    	SVGGraphics2D g = fSvgGraphic.build(size,graphic);

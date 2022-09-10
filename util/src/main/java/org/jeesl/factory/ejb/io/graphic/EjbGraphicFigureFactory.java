@@ -10,21 +10,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbGraphicFigureFactory<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbGraphicFigureFactory.class);
 	
-	private final Class<F> cF;
+	private final Class<GC> cF;
 	
-    public EjbGraphicFigureFactory(final Class<F> cF)
+    public EjbGraphicFigureFactory(final Class<GC> cF)
     {
         this.cF = cF;
     } 
         
-	public F build(G graphic, FS style, boolean css, double size, String color, double offsetX, double offsetY, double rotation)
+	public GC build(G graphic, FS style, boolean css, double size, String color, double offsetX, double offsetY, double rotation)
 	{
-        F ejb = null;
+		GC ejb = null;
         try
         {
 			ejb=cF.newInstance();
@@ -44,9 +44,9 @@ public class EjbGraphicFigureFactory<L extends JeeslLang, D extends JeeslDescrip
         return ejb;
     }
 	
-	public F build(G graphic)
+	public GC build(G graphic)
 	{
-        F ejb = null;
+		GC ejb = null;
         try
         {
 			ejb=cF.newInstance();

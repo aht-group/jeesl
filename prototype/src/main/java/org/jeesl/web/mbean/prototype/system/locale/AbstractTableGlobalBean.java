@@ -57,10 +57,10 @@ import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-										G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
+										G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+										GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>>
-			extends AbstractTableBean<L,D,LOC,G,GT,F,FS,RE>
+			extends AbstractTableBean<L,D,LOC,G,GT,GC,FS,RE>
 			implements Serializable
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableGlobalBean.class);
@@ -78,7 +78,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 	protected boolean supportsComponents; public boolean isSupportsComponents() {return supportsComponents;}
 
 	public AbstractTableGlobalBean(LocaleFactoryBuilder<L,D,LOC> fbStatus,
-									SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg,
+									SvgFactoryBuilder<L,D,G,GT,GC,FS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbStatus,fbSvg,fbRevision);
@@ -107,7 +107,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 	protected abstract void test();
 
 	protected void postConstructOptionTable(JeeslTranslationBean<L,D,LOC> bTranslation,
-											JeeslGraphicFacade<L,D,?,G,GT,F,FS> fGraphic,
+											JeeslGraphicFacade<L,D,?,G,GT,GC,FS> fGraphic,
 											JeeslFacesMessageBean bMessage)
 	{
 		super.initJeeslAdmin(bTranslation, bMessage);

@@ -15,22 +15,22 @@ import net.sf.ahtutils.xml.symbol.Graphic;
 import net.sf.exlp.factory.xml.io.XmlFileFactory;
 
 public class XmlGraphicFactory <L extends JeeslLang,D extends JeeslDescription,
-								G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlGraphicFactory.class);
 	
 	private Graphic q;
 	
 	private XmlTypeFactory<L,D,GT> xfType;
-	private XmlSymbolFactory<L,D,G,GT,F,FS> xfSymbol;
+	private XmlSymbolFactory<L,D,G,GT,FS> xfSymbol;
 	
 	public XmlGraphicFactory(Query query){this(query.getLang(),query.getGraphic());}
 	public XmlGraphicFactory(String localeCode, Graphic q)
 	{
 		this.q=q;
 		if(q.isSetType()){xfType = new XmlTypeFactory<>(q.getType());}
-		if(q.isSetSymbol()){xfSymbol = new XmlSymbolFactory<L,D,G,GT,F,FS>(localeCode,q.getSymbol());}
+		if(q.isSetSymbol()){xfSymbol = new XmlSymbolFactory<>(localeCode,q.getSymbol());}
 	}
 	
 	public Graphic build(G graphic)

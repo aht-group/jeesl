@@ -55,10 +55,10 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,G>,
 										R extends JeeslTenantRealm<L,D,R,G>, RREF extends EjbWithId,
-										G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
+										G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+										GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>>
-					extends AbstractTableBean<L,D,LOC,G,GT,F,FS,RE> implements Serializable
+					extends AbstractTableBean<L,D,LOC,G,GT,GC,FS,RE> implements Serializable
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableTenantBean.class);
 	private static final long serialVersionUID = 1L;
@@ -71,7 +71,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 	private RREF rref; public RREF getRref() {return rref;}
 	
 	public AbstractTableTenantBean(LocaleFactoryBuilder<L,D,LOC> fbStatus,
-									SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg,
+									SvgFactoryBuilder<L,D,G,GT,GC,FS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbStatus,fbSvg,fbRevision);
@@ -96,7 +96,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 	}
 
 	protected void postConstructOptionTable(JeeslTranslationBean<L,D,LOC> bTranslation,
-											JeeslGraphicFacade<L,D,?,G,GT,F,FS> fGraphic,
+											JeeslGraphicFacade<L,D,?,G,GT,GC,FS> fGraphic,
 											JeeslFacesMessageBean bMessage,
 											R realm)
 	{

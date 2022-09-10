@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XmlStyleFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
+public class XmlStyleFactory<L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlStyleFactory.class);
 		

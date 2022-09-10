@@ -44,8 +44,8 @@ import net.sf.ahtutils.xml.status.Status;
 public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,G>,
 								S extends EjbWithId,
-								G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
+								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
 								RC extends JeeslRevisionCategory<L,D,RC,?>,
 								REM extends JeeslRevisionEntityMapping<?,?,?>,
 								RE extends JeeslRevisionEntity<L,D,RC,REM,RA,ERD>,
@@ -60,14 +60,14 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 
 	protected final IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision;
 
-	private final JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic;
+	private final JeeslGraphicFacade<L,D,S,G,GT,GC,FS> fGraphic;
 	private final JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision;
 
-	private final XmlGraphicFactory<L,D,G,GT,F,FS> xfGraphic;
+	private final XmlGraphicFactory<L,D,G,GT,GC,FS> xfGraphic;
 	private final XmlEntityFactory<L,D,RC,REM,RE,RA,RER,RAT,ERD> xfEntity;
 
 	private JeeslSystemRestService(IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision,
-							JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic,
+							JeeslGraphicFacade<L,D,S,G,GT,GC,FS> fGraphic,
 							JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision)
 	{
 		super(fGraphic,fbRevision.getClassL(),fbRevision.getClassD());
@@ -81,8 +81,8 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 	public static <L extends JeeslLang,D extends JeeslDescription,
 						R extends JeeslTenantRealm<L,D,R,G>,
 						S extends EjbWithId,
-						G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-						F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
+						G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+						GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
 						RC extends JeeslRevisionCategory<L,D,RC,?>,
 						REM extends JeeslRevisionEntityMapping<?,?,?>,
 						RE extends JeeslRevisionEntity<L,D,RC,REM,RA,ERD>,
@@ -90,12 +90,12 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 						RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>,
 						RAT extends JeeslStatus<L,D,RAT>,
 						ERD extends JeeslRevisionDiagram<L,D,RC>>
-	JeeslSystemRestService<L,D,R,S,G,GT,F,FS,RC,REM,RE,RA,RER,RAT,ERD>
+	JeeslSystemRestService<L,D,R,S,G,GT,GC,FS,RC,REM,RE,RA,RER,RAT,ERD>
 		factory(IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision,
-				JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic,
+				JeeslGraphicFacade<L,D,S,G,GT,GC,FS> fGraphic,
 				JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision)
 	{
-		return new JeeslSystemRestService<L,D,R,S,G,GT,F,FS,RC,REM,RE,RA,RER,RAT,ERD>(fbRevision,fGraphic,fRevision);
+		return new JeeslSystemRestService<L,D,R,S,G,GT,GC,FS,RC,REM,RE,RA,RER,RAT,ERD>(fbRevision,fGraphic,fRevision);
 	}
 
 

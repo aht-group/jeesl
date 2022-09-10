@@ -480,7 +480,7 @@ public class AbstractDummyFacade implements JeeslFacade
 	}
 
 	@Override
-	public <L extends JeeslLang, D extends JeeslDescription, S extends EjbWithId, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>> S loadGraphic(Class<S> cS, S status) {
+	public <L extends JeeslLang, D extends JeeslDescription, S extends EjbWithId, G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>, GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>> S loadGraphic(Class<S> cS, S status) {
 		// TODO Auto-generated method stub
 		return null;
 	}

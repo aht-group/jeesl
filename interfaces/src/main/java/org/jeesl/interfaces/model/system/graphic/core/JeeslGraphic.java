@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslGraphic <GT extends JeeslGraphicType<?,?,GT,?>,
-								F extends JeeslGraphicComponent<?,GT,F,GS>,
+								GC extends JeeslGraphicComponent<?,GT,GC,GS>,
 								GS extends JeeslGraphicShape<?,?,GS,?>>
 		extends Serializable,EjbWithId,EjbSaveable
 {		
@@ -40,6 +40,6 @@ public interface JeeslGraphic <GT extends JeeslGraphicType<?,?,GT,?>,
 	String getColorBorder();
 	void setColorBorder(String color);
 	
-	List<F> getFigures();
-	void setFigures(List<F> figures);
+	List<GC> getFigures();
+	void setFigures(List<GC> figures);
 }

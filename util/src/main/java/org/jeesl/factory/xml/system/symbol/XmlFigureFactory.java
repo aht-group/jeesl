@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.xml.symbol.Figure;
 
 public class XmlFigureFactory <L extends JeeslLang,D extends JeeslDescription,
-								G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlFigureFactory.class);
 		
@@ -22,16 +22,16 @@ public class XmlFigureFactory <L extends JeeslLang,D extends JeeslDescription,
 	private final Figure q;
 	
 	@SuppressWarnings("unused")
-	private XmlStyleFactory<FS,L,D> xfStyle;
+	private XmlStyleFactory<L,D,FS> xfStyle;
 	
 //	public XmlFigureFactory(Query query){this(query.getLang(),query.getGraphic());}
 	public XmlFigureFactory(String localeCode, Figure q)
 	{
 		this.q=q;
-		if(q.isSetStyle()){xfStyle = new XmlStyleFactory<FS,L,D>(localeCode,q.getStyle());}
+		if(q.isSetStyle()){xfStyle = new XmlStyleFactory<>(localeCode,q.getStyle());}
 	}
 	
-	public Figure build(F figure)
+	public Figure build(GC figure)
 	{
 		Figure xml = build();
 		

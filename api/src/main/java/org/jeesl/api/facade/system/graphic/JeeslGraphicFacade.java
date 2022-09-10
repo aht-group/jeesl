@@ -15,8 +15,8 @@ import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 
 public interface JeeslGraphicFacade <L extends JeeslLang, D extends JeeslDescription,
 									S extends EjbWithId,
-									G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-									F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+									G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+									GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 			extends JeeslFacade
 {	
 	G fGraphicForStatus(long statusId) throws JeeslNotFoundException;

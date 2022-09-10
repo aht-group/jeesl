@@ -19,28 +19,33 @@ public class CssColorFactory
     
 	public static String colorGrey = "#F8F8FF";
 	    
-	public static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-		String build(F figure)
+	public static <GC extends JeeslGraphicComponent<?,?,GC,?>> String build(GC figure)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("#").append(figure.getColor()); 
 		return sb.toString();
 	}
 	
-	public static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+	public static <L extends JeeslLang, D extends JeeslDescription,
+					G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+					GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 		String firstCss(G graphic)
 	{
 		return css(0,graphic.getFigures(),"");
 	}
 	
-	public static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+	public static <L extends JeeslLang, D extends JeeslDescription,
+					G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+					GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 		String css(int index, G graphic, String fallback)
 	{
 		return css(index,graphic.getFigures(),fallback);
 	}
 	
-	private static <L extends JeeslLang, D extends JeeslDescription, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>, F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-		String css(int index, List<F> figures, String fallback)
+	private static <L extends JeeslLang, D extends JeeslDescription,
+					G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+					GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+		String css(int index, List<GC> figures, String fallback)
 	{
 		if(figures.size()>index)
 		{
@@ -49,7 +54,9 @@ public class CssColorFactory
 		return fallback;
 	}
 	
-	public static <L extends JeeslLang,D extends JeeslDescription, LIGHT extends JeeslTrafficLight<L,D,SCOPE>, SCOPE extends JeeslTrafficLightScope<L,D,SCOPE,?>>
+	public static <L extends JeeslLang,D extends JeeslDescription,
+					LIGHT extends JeeslTrafficLight<L,D,SCOPE>,
+					SCOPE extends JeeslTrafficLightScope<L,D,SCOPE,?>>
 		void appendColor(StringBuilder sb, LIGHT light)
 	{
 		if(sb!=null && light!=null)

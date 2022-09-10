@@ -1,7 +1,6 @@
 package org.jeesl.factory.ejb.io.graphic;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
@@ -13,8 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbGraphicFactory<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<GT,F,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<G,GT,F,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+								G extends JeeslGraphic<GT,?,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GS extends JeeslGraphicShape<L,D,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbGraphicFactory.class);
 	

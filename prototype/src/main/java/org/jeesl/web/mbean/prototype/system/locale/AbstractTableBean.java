@@ -34,8 +34,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-								G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
+								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
 								RE extends JeeslRevisionEntity<L,D,?,?,?,?>
 >
 			extends AbstractAdminBean<L,D,LOC>
@@ -44,10 +44,10 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableBean.class);
 	private static final long serialVersionUID = 1L;
 	
-	protected JeeslGraphicFacade<L,D,?,G,GT,F,FS> fGraphic;
+	protected JeeslGraphicFacade<L,D,?,G,GT,GC,FS> fGraphic;
 	
 	protected final LocaleFactoryBuilder<L,D,LOC> fbStatus;
-	protected final SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg;
+	protected final SvgFactoryBuilder<L,D,G,GT,GC,FS> fbSvg;
 	protected final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision;
 
 	protected final Map<EjbWithPosition,RE> mapEntity; public Map<EjbWithPosition, RE> getMapEntity() {return mapEntity;}
@@ -57,7 +57,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected List<EjbWithPosition> items; public List<EjbWithPosition> getItems() {return items;}
 	protected List<GT> graphicTypes; public List<GT> getGraphicTypes() {return graphicTypes;}
 	protected List<FS> graphicStyles; public List<FS> getGraphicStyles() {return graphicStyles;}
-	protected List<F> figures; public List<F> getFigures() {return figures;}
+	protected List<GC> figures; public List<GC> getFigures() {return figures;}
 	
 	protected boolean supportsSymbol; public boolean getSupportsSymbol(){return supportsSymbol;}
 	protected boolean supportsLocked; public boolean isSupportsLocked() {return supportsLocked;}
@@ -65,8 +65,8 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected boolean supportsColour; public boolean getSupportsColour(){return supportsColour;}
 	protected boolean logOnInfo; public boolean isLogOnInfo() {return logOnInfo;} public void setLogOnInfo(boolean logOnInfo) {this.logOnInfo = logOnInfo;}
 	
-	protected final EjbGraphicFactory<L,D,G,GT,F,FS> efGraphic;
-	protected final EjbGraphicFigureFactory<L,D,G,GT,F,FS> efFigure;
+	protected final EjbGraphicFactory<L,D,G,GT,FS> efGraphic;
+	protected final EjbGraphicFigureFactory<L,D,G,GT,GC,FS> efFigure;
 
 	@SuppressWarnings("rawtypes") protected Class clParent;
 	protected long parentId; public long getParentId(){return parentId;} public void setParentId(long parentId) {this.parentId = parentId;}
@@ -75,7 +75,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected Object status; public Object getStatus() {return status;} public void setStatus(Object status) {this.status = status;}
 	protected G graphic; public G getGraphic() {return graphic;} public void setGraphic(G graphic) {this.graphic = graphic;}
 	protected RE entity; public RE getEntity() {return entity;}
-	protected F figure; public F getFigure() {return figure;} public void setFigure(F figure) {this.figure = figure;}
+	protected GC figure; public GC getFigure() {return figure;} public void setFigure(GC figure) {this.figure = figure;}
 
 	@SuppressWarnings("rawtypes")
 	protected Class optionClass; public Class<?> getOptionClass() {return optionClass;}
@@ -84,7 +84,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected Map<Long,Boolean> allowAdditionalElements; public Map<Long, Boolean> getAllowAdditionalElements(){return allowAdditionalElements;}
 
 	public AbstractTableBean(LocaleFactoryBuilder<L,D,LOC> fbStatus,
-									SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg,
+									SvgFactoryBuilder<L,D,G,GT,GC,FS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbStatus.getClassL(),fbStatus.getClassD());

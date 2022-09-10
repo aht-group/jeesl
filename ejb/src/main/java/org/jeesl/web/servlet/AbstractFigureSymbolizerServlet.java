@@ -25,22 +25,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AbstractFigureSymbolizerServlet<L extends JeeslLang, D extends JeeslDescription,
-												G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-												F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-	extends AbstractSymbolizerServlet<L,D,G,GT,F,FS>
+												G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+												GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+	extends AbstractSymbolizerServlet<L,D,G,GT,GC,FS>
 	implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractFigureSymbolizerServlet.class);
 	
-	private SvgFigureFactory<L,D,G,GT,F,FS> svgF;
+	private SvgFigureFactory<L,D,G,GT,GC,FS> svgF;
 	
 	private AbstractFigureSymbolizerServlet()
 	{
 		svgF = SvgFigureFactory.factory();
 	}
 		
-	protected void process(HttpServletRequest request, HttpServletResponse response, F figure, Image image) throws ServletException, IOException, TranscoderException, UtilsProcessingException
+	protected void process(HttpServletRequest request, HttpServletResponse response, GC figure, Image image) throws ServletException, IOException, TranscoderException, UtilsProcessingException
     {
 		byte[] bytes = null;
     	
@@ -49,7 +49,7 @@ public class AbstractFigureSymbolizerServlet<L extends JeeslLang, D extends Jees
 		
 		if(figure==null){throw new UtilsProcessingException("graphic is null");}
     	
-		List<F> figures = new ArrayList<F>();
+		List<GC> figures = new ArrayList<>();
 		figures.add(figure);
 		
 		logger.info("Build SVG: size " + size + " id:" + id);

@@ -26,7 +26,7 @@ public class JeeslDbGraphicUpdater <G extends JeeslGraphic<GT,?,?>, GT extends J
 	private static boolean debugOnInfo = true;
 	
 	private SvgFactoryBuilder<?,?,G,GT,?,?> fbGraphic;
-	private EjbGraphicFactory<?,?,G,GT,?,?> efGraphic;
+	private EjbGraphicFactory<?,?,G,GT,?> efGraphic;
 	
 	public JeeslDbGraphicUpdater(SvgFactoryBuilder<?,?,G,GT,?,?> fbGraphic)
 	{

@@ -25,8 +25,8 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.svg.SVGDocument;
 
 public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+								G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+								GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgFigureFactory.class);
 	
@@ -38,21 +38,21 @@ public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
 	}
 	
     public static <L extends JeeslLang, D extends JeeslDescription,
-    			G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-    			F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
-		SvgFigureFactory<L,D,G,GT,F,FS> factory()
+    			G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+    			GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+		SvgFigureFactory<L,D,G,GT,GC,FS> factory()
 	{
-    	return new SvgFigureFactory<L,D,G,GT,F,FS>();
+    	return new SvgFigureFactory<L,D,G,GT,GC,FS>();
 	}
 	
-	public SVGGraphics2D build(List<F> list, int canvasSize)
+	public SVGGraphics2D build(List<GC> list, int canvasSize)
 	{
 		SVGDocument doc = (SVGDocument) impl.createDocument(SVGDOMImplementation.SVG_NAMESPACE_URI, "svg", null);
 		SVGGraphics2D g = new SVGGraphics2D(doc);
 		
 		g.translate(canvasSize / 2, canvasSize / 2);
 		
-		for (F f : list)
+		for (GC f : list)
 		{
 			boolean triangleForm = false;
 			g.create();

@@ -44,8 +44,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-										S extends EjbWithId, G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
+										S extends EjbWithId, G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+										GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
 										COMPANY extends JeeslAomCompany<REALM,SCOPE>,
 										SCOPE extends JeeslAomScope<L,D,SCOPE,?>,
@@ -70,12 +70,12 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 	private JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fAsset;
 
 	@SuppressWarnings("unused")
-	private JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic;
+	private JeeslGraphicFacade<L,D,S,G,GT,GC,FS> fGraphic;
 
 	@SuppressWarnings("unused")
 	private JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
 
-	private final SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg;
+	private final SvgFactoryBuilder<L,D,G,GT,GC,FS> fbSvg;
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 
     private REALM realm;
@@ -85,7 +85,7 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 
     private ALEVEL level; public ALEVEL getLevel() {return level;} public void setLevel(ALEVEL level) {this.level = level;}
 
-	public AbstractAomViewBean(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset, SvgFactoryBuilder<L,D,G,GT,F,FS> fbSvg)
+	public AbstractAomViewBean(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset, SvgFactoryBuilder<L,D,G,GT,GC,FS> fbSvg)
 	{
 		super(fbAsset.getClassL(),fbAsset.getClassD());
 		this.fbAsset=fbAsset;
@@ -97,7 +97,7 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 	protected void postConstructAomView(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 									JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
 									JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fAsset,
-									JeeslGraphicFacade<L,D,S,G,GT,F,FS> fGraphic,
+									JeeslGraphicFacade<L,D,S,G,GT,GC,FS> fGraphic,
 									REALM realm)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);

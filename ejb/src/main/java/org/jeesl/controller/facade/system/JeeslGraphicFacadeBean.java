@@ -24,10 +24,10 @@ import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 
 public class JeeslGraphicFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									S extends EjbWithId,
-									G extends JeeslGraphic<GT,F,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
-									F extends JeeslGraphicComponent<G,GT,F,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
+									G extends JeeslGraphic<GT,GC,FS>, GT extends JeeslGraphicType<L,D,GT,G>,
+									GC extends JeeslGraphicComponent<G,GT,GC,FS>, FS extends JeeslGraphicShape<L,D,FS,G>>
 					extends JeeslFacadeBean
-					implements JeeslGraphicFacade<L,D,S,G,GT,F,FS>
+					implements JeeslGraphicFacade<L,D,S,G,GT,GC,FS>
 {	
 	private static final long serialVersionUID = 1L;
 	
