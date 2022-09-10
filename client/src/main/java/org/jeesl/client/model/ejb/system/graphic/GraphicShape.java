@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @EjbErNode(name="Style",category="symbol",subset="symbol",level=3)
-public class GraphicStyle implements JeeslGraphicShape<Lang,Description,GraphicStyle,Graphic>
+public class GraphicShape implements JeeslGraphicShape<Lang,Description,GraphicShape,Graphic>
 {
 	public static enum Code {welcome}
 	public static final long serialVersionUID=1;
@@ -63,7 +63,7 @@ public class GraphicStyle implements JeeslGraphicShape<Lang,Description,GraphicS
 	
 	public boolean equals(Object object)
 	{
-        return (object instanceof GraphicStyle) ? id == ((GraphicStyle) object).getId() : (object == this);
+        return (object instanceof GraphicShape) ? id == ((GraphicShape) object).getId() : (object == this);
     }
 	
 	public String toString()

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class EjbGraphicFigureFactory<L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<?,GC,GS>,
-								GC extends JeeslGraphicComponent<G,?,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbGraphicFigureFactory.class);
 	

@@ -17,7 +17,7 @@ import net.sf.ahtutils.xml.sync.DataUpdate;
 public class UtilsRestService <L extends JeeslLang,
 							D extends JeeslDescription,
 							G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-							GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+							GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 	extends AbstractUtilsRest<L,D>
 	implements UtilsStatusRestImport
 {
@@ -41,7 +41,7 @@ public class UtilsRestService <L extends JeeslLang,
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
 					G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>> 
+					GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>> 
 		UtilsRestService<L,D,G,GT,GC,GS>
 		factory(JeeslFacade fUtils,String[] localeCodes,final Class<L> cL, final Class<D> cD, final Class<G> cGraphic,final Class<GT> cGraphicType, final Class<GS> cGraphicStyle)
 	{

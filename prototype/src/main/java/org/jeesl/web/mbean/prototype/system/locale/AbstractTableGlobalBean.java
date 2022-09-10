@@ -58,7 +58,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>,
+										GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>,
 										RE extends JeeslRevisionEntity<L,D,?,?,?,?>>
 			extends AbstractTableBean<L,D,LOC,G,GT,GC,GS,RE>
 			implements Serializable

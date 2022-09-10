@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @EjbErNode(name="Graphic",category="symbol",subset="symbol")
-public class Graphic implements JeeslGraphic<GraphicType,GraphicComponent,GraphicStyle>
+public class Graphic implements JeeslGraphic<GraphicType,GraphicComponent,GraphicShape>
 {
 	public static final long serialVersionUID=1;
 
@@ -26,9 +26,9 @@ public class Graphic implements JeeslGraphic<GraphicType,GraphicComponent,Graphi
 	public void setType(GraphicType type) {this.type = type;}
 
 	@ManyToOne
-	private GraphicStyle style;
-	public GraphicStyle getStyle() {return style;}
-	public void setStyle(GraphicStyle style) {this.style = style;}
+	private GraphicShape style;
+	public GraphicShape getStyle() {return style;}
+	public void setStyle(GraphicShape style) {this.style = style;}
 	
 	private byte[] data;
     @Override public byte[] getData() {return data;}

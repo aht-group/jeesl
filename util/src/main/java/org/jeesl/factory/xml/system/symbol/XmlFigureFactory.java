@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.symbol.Figure;
 
 public class XmlFigureFactory <L extends JeeslLang,D extends JeeslDescription,
 								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlFigureFactory.class);
 		

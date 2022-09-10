@@ -12,7 +12,7 @@ import org.apache.batik.transcoder.TranscoderException;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.graphic.Graphic;
 import org.jeesl.client.model.ejb.system.graphic.GraphicComponent;
-import org.jeesl.client.model.ejb.system.graphic.GraphicStyle;
+import org.jeesl.client.model.ejb.system.graphic.GraphicShape;
 import org.jeesl.client.model.ejb.system.graphic.GraphicType;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
@@ -33,9 +33,9 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestSvgFigureFactory.class);
 
-	private EjbStatusFactory<GraphicStyle,Lang,Description> efStyle;
-	private EjbGraphicFigureFactory<Lang,Description,Graphic,GraphicComponent,GraphicStyle> efFigure;
-	private static SvgFigureFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicStyle> svgF;
+	private EjbStatusFactory<GraphicShape,Lang,Description> efStyle;
+	private EjbGraphicFigureFactory<Lang,Description,Graphic,GraphicComponent,GraphicShape> efFigure;
+	private static SvgFigureFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicShape> svgF;
 	
 	private String colorRed = "FF0000";
 	private String colorBlue = "0000FF";
@@ -44,12 +44,12 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 	private String colorBlack = "000000";
 	private String colorPink = "FF88FF";
 	
-	private GraphicStyle styleCircle,styleSquare,styleTriangle;
+	private GraphicShape styleCircle,styleSquare,styleTriangle;
 	private GraphicComponent f1, f2, f3, f4, f5, f6, f7, f8, f9, f10;
 	
 	public TestSvgFigureFactory()
 	{
-		SvgFactoryBuilder<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicStyle> ffSvg = SvgFactoryBuilder.factory(Lang.class,Description.class,Graphic.class,GraphicType.class,GraphicComponent.class,GraphicStyle.class);
+		SvgFactoryBuilder<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicShape> ffSvg = SvgFactoryBuilder.factory(Lang.class,Description.class,Graphic.class,GraphicType.class,GraphicComponent.class,GraphicShape.class);
 		efFigure = ffSvg.efFigure();
 		efStyle = ffSvg.style();
 		svgF = SvgFigureFactory.factory();

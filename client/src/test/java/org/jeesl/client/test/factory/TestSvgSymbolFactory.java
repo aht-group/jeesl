@@ -11,7 +11,7 @@ import org.apache.commons.io.FileUtils;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.graphic.Graphic;
 import org.jeesl.client.model.ejb.system.graphic.GraphicComponent;
-import org.jeesl.client.model.ejb.system.graphic.GraphicStyle;
+import org.jeesl.client.model.ejb.system.graphic.GraphicShape;
 import org.jeesl.client.model.ejb.system.graphic.GraphicType;
 import org.jeesl.client.model.ejb.system.locale.Description;
 import org.jeesl.client.model.ejb.system.locale.Lang;
@@ -28,7 +28,7 @@ public class TestSvgSymbolFactory extends AbstractJeeslClientTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestSvgSymbolFactory.class);
 
-	private SvgSymbolFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicStyle> svgF;
+	private SvgSymbolFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicShape> svgF;
 	
 	public TestSvgSymbolFactory()
 	{

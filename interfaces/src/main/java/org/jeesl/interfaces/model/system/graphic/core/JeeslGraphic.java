@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslGraphic <GT extends JeeslGraphicType<?,?,GT,?>,
-								GC extends JeeslGraphicComponent<?,GT,GC,GS>,
+								GC extends JeeslGraphicComponent<?,GC,GS>,
 								GS extends JeeslGraphicShape<?,?,GS,?>>
 		extends Serializable,EjbWithId,EjbSaveable
 {		

@@ -30,7 +30,7 @@ import net.sf.exlp.util.io.StringUtil;
 
 public abstract class AbstractSymbolizerServlet<L extends JeeslLang, D extends JeeslDescription,
 												G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-												GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+												GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 	extends HttpServlet
 	implements Serializable
 {

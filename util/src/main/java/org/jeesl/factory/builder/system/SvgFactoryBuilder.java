@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 public class SvgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 	extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgFactoryBuilder.class);
@@ -40,7 +40,7 @@ public class SvgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
 					G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+					GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 		SvgFactoryBuilder<L,D,G,GT,GC,GS> factory(final Class<L> cL, final Class<D> cD, final Class<G> cG, final Class<GT> cGT, final Class<GC> cF, final Class<GS> cFs)
 	{
 		return new SvgFactoryBuilder<L,D,G,GT,GC,GS>(cL,cD,cG,cGT,cF,cFs);

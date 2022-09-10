@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CssColorFactory <G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
-								GC extends JeeslGraphicComponent<G,GT,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
+								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(CssColorFactory.class);
     
