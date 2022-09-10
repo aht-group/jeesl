@@ -34,8 +34,8 @@ public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription,
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	
-	private XmlViewsFactory<L,D,C,R,V,U,A,AT,USER> xfView;
-	private XmlActionsFactory<L,D,C,R,V,U,A,AT,USER> xfAction;
+	private XmlViewsFactory<L,D,C,R,V,U> xfView;
+	private XmlActionsFactory<L,D,C,R,V,U,A,AT> xfAction;
 	private XmlUsecasesFactory<L,D,C,R,V,U,A,AT,USER> xfUsecase;
 	
 	public XmlRoleFactory(Role q){this(null,q);}
@@ -46,8 +46,8 @@ public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(q.isSetDescriptions()) {xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetViews()) {xfView = new XmlViewsFactory<L,D,C,R,V,U,A,AT,USER>(q.getViews());}
-		if(q.isSetActions()) {xfAction = new XmlActionsFactory<L,D,C,R,V,U,A,AT,USER>(q.getActions());}
+		if(q.isSetViews()) {xfView = new XmlViewsFactory<>(q.getViews());}
+		if(q.isSetActions()) {xfAction = new XmlActionsFactory<>(q.getActions());}
 		if(q.isSetUsecases()) {xfUsecase = new XmlUsecasesFactory<L,D,C,R,V,U,A,AT,USER>(q.getUsecases());}
 	}
 	

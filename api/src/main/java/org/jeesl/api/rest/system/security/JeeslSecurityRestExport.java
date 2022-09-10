@@ -17,11 +17,6 @@ public interface JeeslSecurityRestExport
 	@Produces(MediaType.APPLICATION_XML)
 	Security exportSecurityViews();
 	
-	@Deprecated
-	@GET @Path("/security/views/old")
-	@Produces(MediaType.APPLICATION_XML)
-	Security exportSecurityViewsOld();
-	
 	@GET @Path("/security/roles")
 	@Produces(MediaType.APPLICATION_XML)
 	Security exportSecurityRoles();

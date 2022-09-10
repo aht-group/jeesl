@@ -1,4 +1,4 @@
-package org.jeesl.factory.xml.system.io.mail;
+package org.jeesl.factory.xml.io.mail;
 
 import net.sf.ahtutils.interfaces.model.system.mail.UtilsMailTracker;
 import net.sf.exlp.util.DateUtil;

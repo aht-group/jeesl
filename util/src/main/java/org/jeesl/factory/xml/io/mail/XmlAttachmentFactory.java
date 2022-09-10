@@ -1,4 +1,4 @@
-package org.jeesl.factory.xml.system.io.mail;
+package org.jeesl.factory.xml.io.mail;
 
 import java.io.File;
 import java.io.FileInputStream;

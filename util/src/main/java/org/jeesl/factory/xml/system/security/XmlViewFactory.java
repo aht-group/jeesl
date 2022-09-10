@@ -19,12 +19,8 @@ import net.sf.ahtutils.xml.security.View;
 
 public class XmlViewFactory <L extends JeeslLang, D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,
-								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-								V extends JeeslSecurityView<L,D,C,R,U,A>,
-								U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-								A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-								AT extends JeeslSecurityTemplate<L,D,C>,
-								USER extends JeeslUser<R>>
+								R extends JeeslSecurityRole<L,D,C,V,?,?,?>,
+								V extends JeeslSecurityView<L,D,C,R,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlViewFactory.class);
 		

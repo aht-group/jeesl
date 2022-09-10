@@ -1,4 +1,4 @@
-package org.jeesl.factory.xml.system.io.mail;
+package org.jeesl.factory.xml.io.mail;
 
 import javax.mail.Address;
 import javax.mail.Message;

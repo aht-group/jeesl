@@ -18,23 +18,22 @@ import net.sf.ahtutils.xml.security.Actions;
 
 public class XmlActionsFactory <L extends JeeslLang, D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,
-								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
+								R extends JeeslSecurityRole<L,D,C,V,U,A,?>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
 								U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
 								A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-								AT extends JeeslSecurityTemplate<L,D,C>,
-								USER extends JeeslUser<R>>
+								AT extends JeeslSecurityTemplate<L,D,C>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlActionsFactory.class);
 		
 	private Actions q;
 	
-	private XmlActionFactory<L,D,C,R,V,U,A,AT,USER> xfAction;
+	private XmlActionFactory<L,D,C,R,V,U,A,AT> xfAction;
 	
 	public XmlActionsFactory(Actions q)
 	{
 		this.q=q;
-		if(q.isSetAction()) {xfAction = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(q.getAction().get(0));}
+		if(q.isSetAction()) {xfAction = new XmlActionFactory<>(q.getAction().get(0));}
 	}
 
 	public Actions build(List<A> actions)

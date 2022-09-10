@@ -39,10 +39,10 @@ import org.jeesl.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.jeesl.util.comparator.ejb.system.security.SecurityUsecaseComparator;
 import org.jeesl.util.comparator.ejb.system.security.SecurityViewComparator;
 import org.jeesl.util.query.xml.system.SecurityQuery;
-import org.jeesl.web.rest.system.security.updater.SecurityViewUpdater;
+import org.jeesl.web.rest.system.security.updater.SecurityRoleUpdater;
 import org.jeesl.web.rest.system.security.updater.SecurityTemplateUpdater;
 import org.jeesl.web.rest.system.security.updater.SecurityUsecaseUpdater;
-import org.jeesl.web.rest.system.security.updater.SecurityRoleUpdater;
+import org.jeesl.web.rest.system.security.updater.SecurityViewUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,9 +82,11 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 	
 	
 	private XmlCategoryFactory<L,D,C,R,V,U,A,AT,USER> fCategory;
-	private org.jeesl.factory.xml.system.security.XmlViewFactory<L,D,C,R,V,U,A,AT,USER> xfView,xfViewOld;
+	private org.jeesl.factory.xml.system.security.XmlViewFactory<L,D,C,R,V> xfView;
+	private org.jeesl.factory.xml.system.security.XmlViewFactory<L,D,C,R,V> xfViewOld;
 	private XmlRoleFactory<L,D,C,R,V,U,A,AT,USER> xfRole,fRoleDescription;
-	private XmlActionFactory<L,D,C,R,V,U,A,AT,USER> xfAction,xfActionOld,xfActionDoc;
+	private XmlActionFactory<L,D,C,R,V,U,A,AT> xfAction,xfActionDoc;
+
 	private XmlTemplateFactory<L,D,C,AT> fTemplate;
 	private XmlUsecaseFactory<L,D,C,R,V,U,A,AT,USER> fUsecase,fUsecaseDoc;
 	
@@ -105,13 +107,12 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 		this.fbSecurity=fbSecurity;
 		
 		fCategory = new XmlCategoryFactory<L,D,C,R,V,U,A,AT,USER>(null,SecurityQuery.exCategory());
-		xfView = new org.jeesl.factory.xml.system.security.XmlViewFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exView());
+		xfView = new org.jeesl.factory.xml.system.security.XmlViewFactory<>(SecurityQuery.exView());
 		xfViewOld = new org.jeesl.factory.xml.system.security.XmlViewFactory<>(SecurityQuery.exViewOld());
 		xfRole = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exRole());
 		fRoleDescription = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.role());
-		xfAction = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exAction());
-		xfActionOld = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exActionAcl());
-		xfActionDoc = new XmlActionFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.docActionAcl());
+		xfAction = new XmlActionFactory<L,D,C,R,V,U,A,AT>(SecurityQuery.exAction());
+		xfActionDoc = new XmlActionFactory<>(SecurityQuery.docActionAcl());
 		fTemplate = new XmlTemplateFactory<>(SecurityQuery.exTemplate());
 		fUsecase = new XmlUsecaseFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exUsecase());
 		fUsecaseDoc = new XmlUsecaseFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.docUsecase());
@@ -191,38 +192,6 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 							xView.getActions().getAction().add(xAction);
 						}					
 						xCategory.getTmp().getView().add(xView);
-					}
-					
-					xml.getCategory().add(xCategory);
-				}
-				catch (JeeslNotFoundException e) {e.printStackTrace();}
-			}
-		}		
-		return xml;
-	}
-	
-	@Override public Security exportSecurityViewsOld()
-	{
-		Security xml = XmlSecurityFactory.build();		
-		for(C category : fSecurity.allOrderedPosition(fbSecurity.getClassCategory()))
-		{
-			if(category.getType().equals(JeeslSecurityCategory.Type.view.toString()))
-			{
-				try
-				{
-					net.sf.ahtutils.xml.security.Category xCategory = fCategory.build(category);
-					xCategory.setViews(XmlViewsFactory.build());
-					for(V eView : fSecurity.allForCategory(fbSecurity.getClassView(), fbSecurity.getClassCategory(), category.getCode()))
-					{
-						eView = fSecurity.load(fbSecurity.getClassView(),eView);
-						View xView = xfViewOld.create(eView);
-						xView.setActions(XmlActionsFactory.create());
-						for(A action : eView.getActions())
-						{
-							net.sf.ahtutils.xml.access.Action xAction = xfActionOld.create(action);							
-							xView.getActions().getAction().add(xAction);
-						}						
-						xCategory.getViews().getView().add(xView);
 					}
 					
 					xml.getCategory().add(xCategory);

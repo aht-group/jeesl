@@ -2,15 +2,14 @@ package org.jeesl.factory.xml.system.security;
 
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,12 +19,11 @@ import net.sf.ahtutils.xml.status.Langs;
 
 public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,
-								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
+								R extends JeeslSecurityRole<L,D,C,V,U,A,?>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
 								U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
 								A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-								AT extends JeeslSecurityTemplate<L,D,C>,
-								USER extends JeeslUser<R>>
+								AT extends JeeslSecurityTemplate<L,D,C>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlActionFactory.class);
 		
@@ -34,7 +32,7 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 	
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescription;
-	private XmlViewFactory<L,D,C,R,V,U,A,AT,USER> xfView;
+	private XmlViewFactory<L,D,C,R,V> xfView;
 	private XmlTemplateFactory<L,D,C,AT> xfTemplate;
 	
 	public XmlActionFactory(net.sf.ahtutils.xml.security.Action q)
@@ -42,7 +40,7 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 		this.q=q;
 		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(q.isSetDescriptions()) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetView()) {xfView = new XmlViewFactory<L,D,C,R,V,U,A,AT,USER>(q.getView());}
+		if(q.isSetView()) {xfView = new XmlViewFactory<>(q.getView());}
 		if(q.isSetTemplate()){xfTemplate= new XmlTemplateFactory<>(q.getTemplate());}
 	}
 	public XmlActionFactory(net.sf.ahtutils.xml.access.Action qAcl)

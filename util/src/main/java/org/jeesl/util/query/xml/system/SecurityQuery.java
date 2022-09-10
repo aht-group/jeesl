@@ -232,18 +232,18 @@ public class SecurityQuery
 		return xml;
 	}
 	
-	@Deprecated public static net.sf.ahtutils.xml.access.Action exActionAcl()
-	{
-		net.sf.ahtutils.xml.security.Template template = new net.sf.ahtutils.xml.security.Template();
-		template.setCode("");
-		
-		net.sf.ahtutils.xml.access.Action xml = new net.sf.ahtutils.xml.access.Action();
-		xml.setCode("");
-		xml.setLangs(XmlStatusQuery.langs());
-		xml.setDescriptions(XmlStatusQuery.descriptions());
-		xml.setTemplate(template);
-		return xml;
-	}
+//	@Deprecated private static net.sf.ahtutils.xml.access.Action exActionAcl()
+//	{
+//		net.sf.ahtutils.xml.security.Template template = new net.sf.ahtutils.xml.security.Template();
+//		template.setCode("");
+//		
+//		net.sf.ahtutils.xml.access.Action xml = new net.sf.ahtutils.xml.access.Action();
+//		xml.setCode("");
+//		xml.setLangs(XmlStatusQuery.langs());
+//		xml.setDescriptions(XmlStatusQuery.descriptions());
+//		xml.setTemplate(template);
+//		return xml;
+//	}
 	
 	public static net.sf.ahtutils.xml.security.Action exAction()
 	{

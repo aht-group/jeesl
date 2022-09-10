@@ -58,13 +58,13 @@ public class XmlUsecaseFactory <L extends JeeslLang,
 		
 		if(q.isSetViews())
 		{
-			XmlViewsFactory<L,D,C,R,V,U,A,AT,USER> f = new XmlViewsFactory<L,D,C,R,V,U,A,AT,USER>(q.getViews());
+			XmlViewsFactory<L,D,C,R,V,U> f = new XmlViewsFactory<>(q.getViews());
 			xml.setViews(f.build(usecase.getViews()));
 		}
 		
 		if(q.isSetActions())
 		{
-			XmlActionsFactory<L,D,C,R,V,U,A,AT,USER> f = new XmlActionsFactory<L,D,C,R,V,U,A,AT,USER>(q.getActions());
+			XmlActionsFactory<L,D,C,R,V,U,A,AT> f = new XmlActionsFactory<>(q.getActions());
 			xml.setActions(f.build(usecase.getActions()));
 		}
 		
