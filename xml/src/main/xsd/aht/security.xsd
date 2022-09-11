@@ -27,7 +27,7 @@
                 <xsd:element ref="sec:templates" maxOccurs="1"/>
                 <xsd:element ref="sec:usecases" maxOccurs="1"/>
                 <xsd:element ref="sec:tmp" maxOccurs="1"/>
-                <xsd:element ref="a:views" maxOccurs="1"/>
+                <xsd:element ref="sec:views" maxOccurs="1"/>
                 <xsd:element ref="sec:staffs" maxOccurs="unbounded"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>

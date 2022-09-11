@@ -4,19 +4,16 @@ package org.jeesl.model.xml.system.navigation;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.jeesl.model.xml.text.Description;
-
 import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
+import org.jeesl.model.xml.text.Description;
 
 
 /**
@@ -32,7 +29,7 @@ import net.sf.ahtutils.xml.status.Langs;
  *         &lt;element ref="{http://ahtutils.aht-group.com/navigation}menuItem" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/access}view"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}view"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/text}description"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -67,7 +64,7 @@ public class MenuItem
     protected Descriptions descriptions;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Langs langs;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/access", required = true)
+    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
     protected View view;
     @XmlElement(namespace = "http://www.jeesl.org/text", required = true)
     protected Description description;

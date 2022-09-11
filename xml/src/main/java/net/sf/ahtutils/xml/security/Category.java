@@ -4,14 +4,12 @@ package net.sf.ahtutils.xml.security;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
@@ -33,7 +31,7 @@ import net.sf.ahtutils.xml.status.Langs;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}templates"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}usecases"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}tmp"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/access}views"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}views"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}staffs" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -80,7 +78,7 @@ public class Category
     protected Usecases usecases;
     @XmlElement(required = true)
     protected Tmp tmp;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/access", required = true)
+    @XmlElement(required = true)
     protected Views views;
     @XmlElement(required = true)
     protected List<Staffs> staffs;

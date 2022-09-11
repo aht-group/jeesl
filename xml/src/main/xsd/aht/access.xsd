@@ -13,7 +13,7 @@
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="a:category" maxOccurs="unbounded"/>
-            </xsd:sequence>
+            </xsd:sequence> 
         </xsd:complexType>
     </xsd:element>
    
@@ -23,7 +23,7 @@
                 <xsd:element ref="s:langs" maxOccurs="1"/>
                 <xsd:element ref="s:descriptions" maxOccurs="1"/>
                 <xsd:element ref="sec:roles" maxOccurs="1"/>
-                <xsd:element ref="a:views" maxOccurs="1"/>
+                <xsd:element ref="sec:views" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="label" type="xsd:string"/>
@@ -32,33 +32,6 @@
             <xsd:attribute name="documentation" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
-   
-   
-    <xsd:element name="views">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="a:view" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="view">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:descriptions" maxOccurs="1"/>
-                <xsd:element ref="s:langs" maxOccurs="1"/>
-                <xsd:element ref="sec:actions" maxOccurs="1"/>
-                <xsd:element ref="sec:roles" maxOccurs="1"/>
-                <xsd:element ref="n:navigation" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="code" type="xsd:string"/>
-            <xsd:attribute name="public" type="xsd:boolean"/>
-            <xsd:attribute name="onlyLoginRequired" type="xsd:boolean"/>
-            <xsd:attribute name="urlParameter" type="xsd:string"/>
-            <xsd:attribute name="label" type="xsd:string"/>
-            <xsd:attribute name="position" type="xsd:int"/>
-            <xsd:attribute name="visible" type="xsd:boolean"/>
-            <xsd:attribute name="documentation" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
+ 
  
 </xsd:schema>

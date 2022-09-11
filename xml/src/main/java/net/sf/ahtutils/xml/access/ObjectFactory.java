@@ -3,9 +3,6 @@ package net.sf.ahtutils.xml.access;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
-import net.sf.ahtutils.xml.security.View;
-import net.sf.ahtutils.xml.security.Views;
-
 
 /**
  * This object contains factory methods for each 
@@ -30,22 +27,6 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link Views }
-     * 
-     */
-    public Views createViews() {
-        return new Views();
-    }
-
-    /**
-     * Create an instance of {@link View }
-     * 
-     */
-    public View createView() {
-        return new View();
     }
 
     /**
