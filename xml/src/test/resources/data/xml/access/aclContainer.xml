@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<acl:aclContainer xmlns:s="http://ahtutils.aht-group.com/status" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:ns4="http://ahtutils.aht-group.com/navigation">
-    <acl:roleAutoAssign code="myCode"/>
-</acl:aclContainer>

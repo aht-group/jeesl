@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<acl:role xmlns:s="http://ahtutils.aht-group.com/status" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:ns3="http://ahtutils.aht-group.com/navigation" code="myCode" name="myName">
-    <s:descriptions/>
-    <s:langs/>
-    <acl:views/>
-    <acl:actions/>
-    <acl:usecases/>
-</acl:role>
