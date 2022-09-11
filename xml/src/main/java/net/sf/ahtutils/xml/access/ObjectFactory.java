@@ -3,6 +3,8 @@ package net.sf.ahtutils.xml.access;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
+import net.sf.ahtutils.xml.security.Roles;
+
 
 /**
  * This object contains factory methods for each 
@@ -69,12 +71,6 @@ public class ObjectFactory {
         return new Roles();
     }
 
-    /**
-     * Create an instance of {@link Usecase }
-     * 
-     */
-    public Usecase createUsecase() {
-        return new Usecase();
-    }
+  
 
 }
