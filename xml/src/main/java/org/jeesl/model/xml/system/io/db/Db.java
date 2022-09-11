@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Db
     @XmlAttribute(name = "pathExport")
     protected String pathExport;
 
-    /*
+    /**
      * Gets the value of the seed property.
      * 
      * <p>
@@ -94,7 +94,7 @@ public class Db
         this.seed = null;
     }
 
-    /*
+    /**
      * Gets the value of the query property.
      * 
      * <p>
@@ -131,7 +131,7 @@ public class Db
         this.query = null;
     }
 
-    /*
+    /**
      * Gets the value of the pathIde property.
      * 
      * @return
@@ -143,7 +143,7 @@ public class Db
         return pathIde;
     }
 
-    /*
+    /**
      * Sets the value of the pathIde property.
      * 
      * @param value
@@ -159,7 +159,7 @@ public class Db
         return (this.pathIde!= null);
     }
 
-    /*
+    /**
      * Gets the value of the pathIdeSvg property.
      * 
      * @return
@@ -171,7 +171,7 @@ public class Db
         return pathIdeSvg;
     }
 
-    /*
+    /**
      * Sets the value of the pathIdeSvg property.
      * 
      * @param value
@@ -187,7 +187,7 @@ public class Db
         return (this.pathIdeSvg!= null);
     }
 
-    /*
+    /**
      * Gets the value of the pathExport property.
      * 
      * @return
@@ -199,7 +199,7 @@ public class Db
         return pathExport;
     }
 
-    /*
+    /**
      * Sets the value of the pathExport property.
      * 
      * @param value

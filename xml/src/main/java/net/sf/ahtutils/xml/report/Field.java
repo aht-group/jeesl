@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -53,7 +53,7 @@ public class Field
     @XmlAttribute(name = "className")
     protected String className;
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -65,7 +65,7 @@ public class Field
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -81,7 +81,7 @@ public class Field
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the expression property.
      * 
      * @return
@@ -93,7 +93,7 @@ public class Field
         return expression;
     }
 
-    /*
+    /**
      * Sets the value of the expression property.
      * 
      * @param value
@@ -109,7 +109,7 @@ public class Field
         return (this.expression!= null);
     }
 
-    /*
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -121,7 +121,7 @@ public class Field
         return name;
     }
 
-    /*
+    /**
      * Sets the value of the name property.
      * 
      * @param value
@@ -137,7 +137,7 @@ public class Field
         return (this.name!= null);
     }
 
-    /*
+    /**
      * Gets the value of the className property.
      * 
      * @return
@@ -149,7 +149,7 @@ public class Field
         return className;
     }
 
-    /*
+    /**
      * Sets the value of the className property.
      * 
      * @param value

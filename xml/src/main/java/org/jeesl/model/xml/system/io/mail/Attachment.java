@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import net.sf.exlp.xml.io.File;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -54,7 +54,7 @@ public class Attachment
     @XmlElement(namespace = "http://exlp.sf.net/io", required = true)
     protected File file;
 
-    /*
+    /**
      * Gets the value of the data property.
      * 
      * @return
@@ -66,7 +66,7 @@ public class Attachment
         return data;
     }
 
-    /*
+    /**
      * Sets the value of the data property.
      * 
      * @param value
@@ -82,7 +82,7 @@ public class Attachment
         return (this.data!= null);
     }
 
-    /*
+    /**
      * Gets the value of the file property.
      * 
      * @return
@@ -94,7 +94,7 @@ public class Attachment
         return file;
     }
 
-    /*
+    /**
      * Sets the value of the file property.
      * 
      * @param value

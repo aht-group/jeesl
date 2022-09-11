@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.security.Role;
 import net.sf.ahtutils.xml.status.Level;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Signature
     @XmlAttribute(name = "label")
     protected String label;
 
-    /*
+    /**
      * Gets the value of the role property.
      * 
      * @return
@@ -69,7 +69,7 @@ public class Signature
         return role;
     }
 
-    /*
+    /**
      * Sets the value of the role property.
      * 
      * @param value
@@ -85,7 +85,7 @@ public class Signature
         return (this.role!= null);
     }
 
-    /*
+    /**
      * Gets the value of the level property.
      * 
      * @return
@@ -97,7 +97,7 @@ public class Signature
         return level;
     }
 
-    /*
+    /**
      * Sets the value of the level property.
      * 
      * @param value
@@ -113,7 +113,7 @@ public class Signature
         return (this.level!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -125,7 +125,7 @@ public class Signature
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -145,7 +145,7 @@ public class Signature
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -157,7 +157,7 @@ public class Signature
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -173,7 +173,7 @@ public class Signature
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -185,7 +185,7 @@ public class Signature
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value

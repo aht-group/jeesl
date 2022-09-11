@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Rule
     @XmlAttribute(name = "actual")
     protected Integer actual;
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Rule
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class Rule
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -92,7 +92,7 @@ public class Rule
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -108,7 +108,7 @@ public class Rule
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the valid property.
      * 
      * @return
@@ -120,7 +120,7 @@ public class Rule
         return valid;
     }
 
-    /*
+    /**
      * Sets the value of the valid property.
      * 
      * @param value
@@ -140,7 +140,7 @@ public class Rule
         this.valid = null;
     }
 
-    /*
+    /**
      * Gets the value of the min property.
      * 
      * @return
@@ -152,7 +152,7 @@ public class Rule
         return min;
     }
 
-    /*
+    /**
      * Sets the value of the min property.
      * 
      * @param value
@@ -172,7 +172,7 @@ public class Rule
         this.min = null;
     }
 
-    /*
+    /**
      * Gets the value of the max property.
      * 
      * @return
@@ -184,7 +184,7 @@ public class Rule
         return max;
     }
 
-    /*
+    /**
      * Sets the value of the max property.
      * 
      * @param value
@@ -204,7 +204,7 @@ public class Rule
         this.max = null;
     }
 
-    /*
+    /**
      * Gets the value of the actual property.
      * 
      * @return
@@ -216,7 +216,7 @@ public class Rule
         return actual;
     }
 
-    /*
+    /**
      * Sets the value of the actual property.
      * 
      * @param value

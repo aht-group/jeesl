@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import org.jeesl.model.xml.system.navigation.Navigation;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -79,7 +79,7 @@ public class View
     @XmlAttribute(name = "documentation")
     protected Boolean documentation;
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -91,7 +91,7 @@ public class View
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -107,7 +107,7 @@ public class View
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -119,7 +119,7 @@ public class View
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -135,7 +135,7 @@ public class View
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the access property.
      * 
      * @return
@@ -147,7 +147,7 @@ public class View
         return access;
     }
 
-    /*
+    /**
      * Sets the value of the access property.
      * 
      * @param value
@@ -163,7 +163,7 @@ public class View
         return (this.access!= null);
     }
 
-    /*
+    /**
      * Gets the value of the navigation property.
      * 
      * @return
@@ -175,7 +175,7 @@ public class View
         return navigation;
     }
 
-    /*
+    /**
      * Sets the value of the navigation property.
      * 
      * @param value
@@ -191,7 +191,7 @@ public class View
         return (this.navigation!= null);
     }
 
-    /*
+    /**
      * Gets the value of the actions property.
      * 
      * @return
@@ -203,7 +203,7 @@ public class View
         return actions;
     }
 
-    /*
+    /**
      * Sets the value of the actions property.
      * 
      * @param value
@@ -219,7 +219,7 @@ public class View
         return (this.actions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -231,7 +231,7 @@ public class View
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -251,7 +251,7 @@ public class View
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -263,7 +263,7 @@ public class View
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -279,7 +279,7 @@ public class View
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -291,7 +291,7 @@ public class View
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value
@@ -307,7 +307,7 @@ public class View
         return (this.label!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -319,7 +319,7 @@ public class View
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -339,7 +339,7 @@ public class View
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -351,7 +351,7 @@ public class View
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -371,7 +371,7 @@ public class View
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the documentation property.
      * 
      * @return
@@ -383,7 +383,7 @@ public class View
         return documentation;
     }
 
-    /*
+    /**
      * Sets the value of the documentation property.
      * 
      * @param value

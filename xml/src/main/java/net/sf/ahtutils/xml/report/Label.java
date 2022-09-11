@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -43,7 +43,7 @@ public class Label
     @XmlAttribute(name = "value")
     protected String value;
 
-    /*
+    /**
      * Gets the value of the scope property.
      * 
      * @return
@@ -55,7 +55,7 @@ public class Label
         return scope;
     }
 
-    /*
+    /**
      * Sets the value of the scope property.
      * 
      * @param value
@@ -71,7 +71,7 @@ public class Label
         return (this.scope!= null);
     }
 
-    /*
+    /**
      * Gets the value of the key property.
      * 
      * @return
@@ -83,7 +83,7 @@ public class Label
         return key;
     }
 
-    /*
+    /**
      * Sets the value of the key property.
      * 
      * @param value
@@ -99,7 +99,7 @@ public class Label
         return (this.key!= null);
     }
 
-    /*
+    /**
      * Gets the value of the value property.
      * 
      * @return
@@ -111,7 +111,7 @@ public class Label
         return value;
     }
 
-    /*
+    /**
      * Sets the value of the value property.
      * 
      * @param value

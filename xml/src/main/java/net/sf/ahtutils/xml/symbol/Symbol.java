@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Styles;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -50,7 +50,7 @@ public class Symbol
     @XmlElement(required = true)
     protected Sizes sizes;
 
-    /*
+    /**
      * Gets the value of the styles property.
      * 
      * @return
@@ -62,7 +62,7 @@ public class Symbol
         return styles;
     }
 
-    /*
+    /**
      * Sets the value of the styles property.
      * 
      * @param value
@@ -78,7 +78,7 @@ public class Symbol
         return (this.styles!= null);
     }
 
-    /*
+    /**
      * Gets the value of the colors property.
      * 
      * @return
@@ -90,7 +90,7 @@ public class Symbol
         return colors;
     }
 
-    /*
+    /**
      * Sets the value of the colors property.
      * 
      * @param value
@@ -106,7 +106,7 @@ public class Symbol
         return (this.colors!= null);
     }
 
-    /*
+    /**
      * Gets the value of the sizes property.
      * 
      * @return
@@ -118,7 +118,7 @@ public class Symbol
         return sizes;
     }
 
-    /*
+    /**
      * Sets the value of the sizes property.
      * 
      * @param value

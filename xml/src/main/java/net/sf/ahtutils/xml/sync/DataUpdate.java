@@ -15,7 +15,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -71,7 +71,7 @@ public class DataUpdate
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar finished;
 
-    /*
+    /**
      * Gets the value of the result property.
      * 
      * @return
@@ -83,7 +83,7 @@ public class DataUpdate
         return result;
     }
 
-    /*
+    /**
      * Sets the value of the result property.
      * 
      * @param value
@@ -99,7 +99,28 @@ public class DataUpdate
         return (this.result!= null);
     }
 
-
+    /**
+     * Gets the value of the mapper property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the mapper property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getMapper().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Mapper }
+     * 
+     * 
+     */
     public List<Mapper> getMapper() {
         if (mapper == null) {
             mapper = new ArrayList<Mapper>();
@@ -115,7 +136,7 @@ public class DataUpdate
         this.mapper = null;
     }
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -127,7 +148,7 @@ public class DataUpdate
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -143,7 +164,28 @@ public class DataUpdate
         return (this.type!= null);
     }
 
-
+    /**
+     * Gets the value of the sync property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the sync property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSync().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Sync }
+     * 
+     * 
+     */
     public List<Sync> getSync() {
         if (sync == null) {
             sync = new ArrayList<Sync>();
@@ -159,7 +201,7 @@ public class DataUpdate
         this.sync = null;
     }
 
-    /*
+    /**
      * Gets the value of the exceptions property.
      * 
      * @return
@@ -171,7 +213,7 @@ public class DataUpdate
         return exceptions;
     }
 
-    /*
+    /**
      * Sets the value of the exceptions property.
      * 
      * @param value
@@ -187,7 +229,7 @@ public class DataUpdate
         return (this.exceptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the begin property.
      * 
      * @return
@@ -199,7 +241,7 @@ public class DataUpdate
         return begin;
     }
 
-    /*
+    /**
      * Sets the value of the begin property.
      * 
      * @param value
@@ -215,7 +257,7 @@ public class DataUpdate
         return (this.begin!= null);
     }
 
-    /*
+    /**
      * Gets the value of the finished property.
      * 
      * @return
@@ -227,7 +269,7 @@ public class DataUpdate
         return finished;
     }
 
-    /*
+    /**
      * Sets the value of the finished property.
      * 
      * @param value

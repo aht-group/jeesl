@@ -13,7 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.sf.ahtutils.xml.security.User;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Activity
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar record;
 
-    /*
+    /**
      * Gets the value of the user property.
      * 
      * @return
@@ -71,7 +71,7 @@ public class Activity
         return user;
     }
 
-    /*
+    /**
      * Sets the value of the user property.
      * 
      * @param value
@@ -87,7 +87,7 @@ public class Activity
         return (this.user!= null);
     }
 
-    /*
+    /**
      * Gets the value of the transition property.
      * 
      * @return
@@ -99,7 +99,7 @@ public class Activity
         return transition;
     }
 
-    /*
+    /**
      * Sets the value of the transition property.
      * 
      * @param value
@@ -115,7 +115,7 @@ public class Activity
         return (this.transition!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -127,7 +127,7 @@ public class Activity
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -147,7 +147,7 @@ public class Activity
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -159,7 +159,7 @@ public class Activity
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -179,7 +179,7 @@ public class Activity
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the record property.
      * 
      * @return
@@ -191,7 +191,7 @@ public class Activity
         return record;
     }
 
-    /*
+    /**
      * Sets the value of the record property.
      * 
      * @param value

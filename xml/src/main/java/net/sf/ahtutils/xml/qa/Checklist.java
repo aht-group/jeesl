@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.security.Staff;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -48,7 +48,7 @@ public class Checklist
     @XmlElement(required = true)
     protected List<Category> category;
 
-    /*
+    /**
      * Gets the value of the staff property.
      * 
      * @return
@@ -60,7 +60,7 @@ public class Checklist
         return staff;
     }
 
-    /*
+    /**
      * Sets the value of the staff property.
      * 
      * @param value
@@ -76,7 +76,28 @@ public class Checklist
         return (this.staff!= null);
     }
 
-   
+    /**
+     * Gets the value of the category property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the category property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCategory().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Category }
+     * 
+     * 
+     */
     public List<Category> getCategory() {
         if (category == null) {
             category = new ArrayList<Category>();

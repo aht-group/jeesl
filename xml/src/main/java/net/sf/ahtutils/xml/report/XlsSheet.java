@@ -17,7 +17,7 @@ import net.sf.ahtutils.xml.status.Implementation;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -63,14 +63,14 @@ public class XlsSheet
     @XmlElementRefs({
         @XmlElementRef(name = "xlsMultiColumn", namespace = "http://ahtutils.aht-group.com/report", type = XlsMultiColumn.class),
         @XmlElementRef(name = "importStructure", namespace = "http://ahtutils.aht-group.com/report", type = ImportStructure.class),
-        @XmlElementRef(name = "langs", namespace = "http://ahtutils.aht-group.com/status", type = Langs.class),
         @XmlElementRef(name = "xlsColumn", namespace = "http://ahtutils.aht-group.com/report", type = XlsColumn.class),
         @XmlElementRef(name = "descriptions", namespace = "http://ahtutils.aht-group.com/status", type = Descriptions.class),
-        @XmlElementRef(name = "queries", namespace = "http://ahtutils.aht-group.com/report", type = Queries.class),
+        @XmlElementRef(name = "xlsColumns", namespace = "http://ahtutils.aht-group.com/report", type = XlsColumns.class),
         @XmlElementRef(name = "rows", namespace = "http://ahtutils.aht-group.com/report", type = Rows.class),
-        @XmlElementRef(name = "columnGroup", namespace = "http://ahtutils.aht-group.com/report", type = ColumnGroup.class),
+        @XmlElementRef(name = "langs", namespace = "http://ahtutils.aht-group.com/status", type = Langs.class),
+        @XmlElementRef(name = "queries", namespace = "http://ahtutils.aht-group.com/report", type = Queries.class),
         @XmlElementRef(name = "implementation", namespace = "http://ahtutils.aht-group.com/status", type = Implementation.class),
-        @XmlElementRef(name = "xlsColumns", namespace = "http://ahtutils.aht-group.com/report", type = XlsColumns.class)
+        @XmlElementRef(name = "columnGroup", namespace = "http://ahtutils.aht-group.com/report", type = ColumnGroup.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -85,7 +85,38 @@ public class XlsSheet
     @XmlAttribute(name = "primaryKey")
     protected String primaryKey;
 
-
+    /**
+     * Gets the value of the content property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the content property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContent().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link XlsMultiColumn }
+     * {@link ImportStructure }
+     * {@link String }
+     * {@link XlsColumn }
+     * {@link Descriptions }
+     * {@link XlsColumns }
+     * {@link Rows }
+     * {@link Langs }
+     * {@link Queries }
+     * {@link Implementation }
+     * {@link ColumnGroup }
+     * 
+     * 
+     */
     public List<Serializable> getContent() {
         if (content == null) {
             content = new ArrayList<Serializable>();
@@ -101,7 +132,7 @@ public class XlsSheet
         this.content = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -113,7 +144,7 @@ public class XlsSheet
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -129,7 +160,7 @@ public class XlsSheet
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -141,7 +172,7 @@ public class XlsSheet
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -161,7 +192,7 @@ public class XlsSheet
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -173,7 +204,7 @@ public class XlsSheet
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -193,7 +224,7 @@ public class XlsSheet
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the query property.
      * 
      * @return
@@ -205,7 +236,7 @@ public class XlsSheet
         return query;
     }
 
-    /*
+    /**
      * Sets the value of the query property.
      * 
      * @param value
@@ -221,7 +252,7 @@ public class XlsSheet
         return (this.query!= null);
     }
 
-    /*
+    /**
      * Gets the value of the primaryKey property.
      * 
      * @return
@@ -233,7 +264,7 @@ public class XlsSheet
         return primaryKey;
     }
 
-    /*
+    /**
      * Sets the value of the primaryKey property.
      * 
      * @param value

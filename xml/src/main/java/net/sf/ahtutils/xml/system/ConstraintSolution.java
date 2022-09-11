@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Descriptions;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -42,7 +42,7 @@ public class ConstraintSolution
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Descriptions descriptions;
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -54,7 +54,7 @@ public class ConstraintSolution
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Category
     @XmlAttribute(name = "code")
     protected String code;
 
-    /*
+    /**
      * Gets the value of the qa property.
      * 
      * @return
@@ -69,7 +69,7 @@ public class Category
         return qa;
     }
 
-    /*
+    /**
      * Sets the value of the qa property.
      * 
      * @param value
@@ -85,7 +85,28 @@ public class Category
         return (this.qa!= null);
     }
 
-
+    /**
+     * Gets the value of the test property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the test property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getTest().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Test }
+     * 
+     * 
+     */
     public List<Test> getTest() {
         if (test == null) {
             test = new ArrayList<Test>();
@@ -101,7 +122,7 @@ public class Category
         this.test = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -113,7 +134,7 @@ public class Category
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -133,7 +154,7 @@ public class Category
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -145,7 +166,7 @@ public class Category
         return name;
     }
 
-    /*
+    /**
      * Sets the value of the name property.
      * 
      * @param value
@@ -161,7 +182,7 @@ public class Category
         return (this.name!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -173,7 +194,7 @@ public class Category
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -54,7 +54,7 @@ public class Cell
     @XmlAttribute(name = "valueText")
     protected String valueText;
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -66,7 +66,7 @@ public class Cell
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value
@@ -82,7 +82,7 @@ public class Cell
         return (this.label!= null);
     }
 
-    /*
+    /**
      * Gets the value of the valueOption property.
      * 
      * @return
@@ -94,7 +94,7 @@ public class Cell
         return valueOption;
     }
 
-    /*
+    /**
      * Sets the value of the valueOption property.
      * 
      * @param value
@@ -110,7 +110,7 @@ public class Cell
         return (this.valueOption!= null);
     }
 
-    /*
+    /**
      * Gets the value of the valueBoolean property.
      * 
      * @return
@@ -122,7 +122,7 @@ public class Cell
         return valueBoolean;
     }
 
-    /*
+    /**
      * Sets the value of the valueBoolean property.
      * 
      * @param value
@@ -142,7 +142,7 @@ public class Cell
         this.valueBoolean = null;
     }
 
-    /*
+    /**
      * Gets the value of the valueNumber property.
      * 
      * @return
@@ -154,7 +154,7 @@ public class Cell
         return valueNumber;
     }
 
-    /*
+    /**
      * Sets the value of the valueNumber property.
      * 
      * @param value
@@ -174,7 +174,7 @@ public class Cell
         this.valueNumber = null;
     }
 
-    /*
+    /**
      * Gets the value of the valueDouble property.
      * 
      * @return
@@ -186,7 +186,7 @@ public class Cell
         return valueDouble;
     }
 
-    /*
+    /**
      * Sets the value of the valueDouble property.
      * 
      * @param value
@@ -206,7 +206,7 @@ public class Cell
         this.valueDouble = null;
     }
 
-    /*
+    /**
      * Gets the value of the valueText property.
      * 
      * @return
@@ -218,7 +218,7 @@ public class Cell
         return valueText;
     }
 
-    /*
+    /**
      * Sets the value of the valueText property.
      * 
      * @param value

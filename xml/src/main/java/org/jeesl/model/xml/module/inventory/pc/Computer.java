@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -58,7 +58,7 @@ public class Computer
     @XmlAttribute(name = "uuid")
     protected String uuid;
 
-    /*
+    /**
      * Gets the value of the hardware property.
      * 
      * @return
@@ -70,7 +70,7 @@ public class Computer
         return hardware;
     }
 
-    /*
+    /**
      * Sets the value of the hardware property.
      * 
      * @param value
@@ -86,7 +86,7 @@ public class Computer
         return (this.hardware!= null);
     }
 
-    /*
+    /**
      * Gets the value of the software property.
      * 
      * @return
@@ -98,7 +98,7 @@ public class Computer
         return software;
     }
 
-    /*
+    /**
      * Sets the value of the software property.
      * 
      * @param value
@@ -114,7 +114,7 @@ public class Computer
         return (this.software!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -126,7 +126,7 @@ public class Computer
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -146,7 +146,7 @@ public class Computer
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -158,7 +158,7 @@ public class Computer
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -174,7 +174,7 @@ public class Computer
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -186,7 +186,7 @@ public class Computer
         return name;
     }
 
-    /*
+    /**
      * Sets the value of the name property.
      * 
      * @param value
@@ -202,7 +202,7 @@ public class Computer
         return (this.name!= null);
     }
 
-    /*
+    /**
      * Gets the value of the uuid property.
      * 
      * @return
@@ -214,7 +214,7 @@ public class Computer
         return uuid;
     }
 
-    /*
+    /**
      * Sets the value of the uuid property.
      * 
      * @param value

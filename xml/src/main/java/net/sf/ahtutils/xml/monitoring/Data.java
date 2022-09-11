@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -64,7 +64,7 @@ public class Data
     @XmlAttribute(name = "range")
     protected Long range;
 
-    /*
+    /**
      * Gets the value of the indicator property.
      * 
      * @return
@@ -76,7 +76,7 @@ public class Data
         return indicator;
     }
 
-    /*
+    /**
      * Sets the value of the indicator property.
      * 
      * @param value
@@ -92,7 +92,7 @@ public class Data
         return (this.indicator!= null);
     }
 
-    /*
+    /**
      * Gets the value of the observer property.
      * 
      * @return
@@ -104,7 +104,7 @@ public class Data
         return observer;
     }
 
-    /*
+    /**
      * Sets the value of the observer property.
      * 
      * @param value
@@ -120,7 +120,28 @@ public class Data
         return (this.observer!= null);
     }
 
-
+    /**
+     * Gets the value of the value property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the value property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getValue().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Value }
+     * 
+     * 
+     */
     public List<Value> getValue() {
         if (value == null) {
             value = new ArrayList<Value>();
@@ -136,7 +157,7 @@ public class Data
         this.value = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -148,7 +169,7 @@ public class Data
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -168,7 +189,7 @@ public class Data
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the record property.
      * 
      * @return
@@ -180,7 +201,7 @@ public class Data
         return record;
     }
 
-    /*
+    /**
      * Sets the value of the record property.
      * 
      * @param value
@@ -196,7 +217,7 @@ public class Data
         return (this.record!= null);
     }
 
-    /*
+    /**
      * Gets the value of the range property.
      * 
      * @return
@@ -208,7 +229,7 @@ public class Data
         return range;
     }
 
-    /*
+    /**
      * Sets the value of the range property.
      * 
      * @param value

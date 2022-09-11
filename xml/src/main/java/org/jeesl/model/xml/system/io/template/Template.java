@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -73,7 +73,7 @@ public class Template
     @XmlAttribute(name = "visible")
     protected Boolean visible;
 
-    /*
+    /**
      * Gets the value of the category property.
      * 
      * @return
@@ -85,7 +85,7 @@ public class Template
         return category;
     }
 
-    /*
+    /**
      * Sets the value of the category property.
      * 
      * @param value
@@ -101,7 +101,7 @@ public class Template
         return (this.category!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -113,7 +113,7 @@ public class Template
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -129,7 +129,7 @@ public class Template
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -141,7 +141,7 @@ public class Template
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -157,7 +157,7 @@ public class Template
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the tokens property.
      * 
      * @return
@@ -169,7 +169,7 @@ public class Template
         return tokens;
     }
 
-    /*
+    /**
      * Sets the value of the tokens property.
      * 
      * @param value
@@ -185,7 +185,7 @@ public class Template
         return (this.tokens!= null);
     }
 
-    /*
+    /**
      * Gets the value of the definitions property.
      * 
      * @return
@@ -197,7 +197,7 @@ public class Template
         return definitions;
     }
 
-    /*
+    /**
      * Sets the value of the definitions property.
      * 
      * @param value
@@ -213,7 +213,7 @@ public class Template
         return (this.definitions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -225,7 +225,7 @@ public class Template
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -245,7 +245,7 @@ public class Template
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -257,7 +257,7 @@ public class Template
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -273,7 +273,7 @@ public class Template
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -285,7 +285,7 @@ public class Template
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -305,7 +305,7 @@ public class Template
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -317,7 +317,7 @@ public class Template
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value

@@ -14,7 +14,7 @@ import org.jeesl.model.xml.module.survey.Question;
 import org.jeesl.model.xml.module.survey.Template;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -61,7 +61,7 @@ public class QuerySurvey
     @XmlAttribute(name = "localeCode")
     protected String localeCode;
 
-    /*
+    /**
      * Gets the value of the template property.
      * 
      * @return
@@ -73,7 +73,7 @@ public class QuerySurvey
         return template;
     }
 
-    /*
+    /**
      * Sets the value of the template property.
      * 
      * @param value
@@ -89,7 +89,7 @@ public class QuerySurvey
         return (this.template!= null);
     }
 
-    /*
+    /**
      * Gets the value of the question property.
      * 
      * @return
@@ -101,7 +101,7 @@ public class QuerySurvey
         return question;
     }
 
-    /*
+    /**
      * Sets the value of the question property.
      * 
      * @param value
@@ -117,7 +117,7 @@ public class QuerySurvey
         return (this.question!= null);
     }
 
-    /*
+    /**
      * Gets the value of the data property.
      * 
      * @return
@@ -129,7 +129,7 @@ public class QuerySurvey
         return data;
     }
 
-    /*
+    /**
      * Sets the value of the data property.
      * 
      * @param value
@@ -145,7 +145,7 @@ public class QuerySurvey
         return (this.data!= null);
     }
 
-    /*
+    /**
      * Gets the value of the answer property.
      * 
      * @return
@@ -157,7 +157,7 @@ public class QuerySurvey
         return answer;
     }
 
-    /*
+    /**
      * Sets the value of the answer property.
      * 
      * @param value
@@ -173,7 +173,7 @@ public class QuerySurvey
         return (this.answer!= null);
     }
 
-    /*
+    /**
      * Gets the value of the localeCode property.
      * 
      * @return
@@ -185,7 +185,7 @@ public class QuerySurvey
         return localeCode;
     }
 
-    /*
+    /**
      * Sets the value of the localeCode property.
      * 
      * @param value

@@ -15,7 +15,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -94,7 +94,7 @@ public class Category
     @XmlAttribute(name = "documentation")
     protected Boolean documentation;
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -106,7 +106,7 @@ public class Category
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -122,7 +122,7 @@ public class Category
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -134,7 +134,7 @@ public class Category
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -150,7 +150,7 @@ public class Category
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the roles property.
      * 
      * @return
@@ -162,7 +162,7 @@ public class Category
         return roles;
     }
 
-    /*
+    /**
      * Sets the value of the roles property.
      * 
      * @param value
@@ -178,7 +178,7 @@ public class Category
         return (this.roles!= null);
     }
 
-    /*
+    /**
      * Gets the value of the actions property.
      * 
      * @return
@@ -190,7 +190,7 @@ public class Category
         return actions;
     }
 
-    /*
+    /**
      * Sets the value of the actions property.
      * 
      * @param value
@@ -206,7 +206,7 @@ public class Category
         return (this.actions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the templates property.
      * 
      * @return
@@ -218,7 +218,7 @@ public class Category
         return templates;
     }
 
-    /*
+    /**
      * Sets the value of the templates property.
      * 
      * @param value
@@ -234,7 +234,7 @@ public class Category
         return (this.templates!= null);
     }
 
-    /*
+    /**
      * Gets the value of the usecases property.
      * 
      * @return
@@ -246,7 +246,7 @@ public class Category
         return usecases;
     }
 
-    /*
+    /**
      * Sets the value of the usecases property.
      * 
      * @param value
@@ -262,7 +262,7 @@ public class Category
         return (this.usecases!= null);
     }
 
-    /*
+    /**
      * Gets the value of the tmp property.
      * 
      * @return
@@ -274,7 +274,7 @@ public class Category
         return tmp;
     }
 
-    /*
+    /**
      * Sets the value of the tmp property.
      * 
      * @param value
@@ -290,7 +290,7 @@ public class Category
         return (this.tmp!= null);
     }
 
-    /*
+    /**
      * Gets the value of the views property.
      * 
      * @return
@@ -302,7 +302,7 @@ public class Category
         return views;
     }
 
-    /*
+    /**
      * Sets the value of the views property.
      * 
      * @param value
@@ -318,6 +318,28 @@ public class Category
         return (this.views!= null);
     }
 
+    /**
+     * Gets the value of the staffs property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the staffs property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getStaffs().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Staffs }
+     * 
+     * 
+     */
     public List<Staffs> getStaffs() {
         if (staffs == null) {
             staffs = new ArrayList<Staffs>();
@@ -333,7 +355,7 @@ public class Category
         this.staffs = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -345,7 +367,7 @@ public class Category
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -361,7 +383,7 @@ public class Category
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -373,7 +395,7 @@ public class Category
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value
@@ -389,7 +411,7 @@ public class Category
         return (this.label!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -401,7 +423,7 @@ public class Category
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -421,7 +443,7 @@ public class Category
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -433,7 +455,7 @@ public class Category
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -453,7 +475,7 @@ public class Category
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the documentation property.
      * 
      * @return
@@ -465,7 +487,7 @@ public class Category
         return documentation;
     }
 
-    /*
+    /**
      * Sets the value of the documentation property.
      * 
      * @param value

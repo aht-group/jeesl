@@ -13,7 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Item
     @XmlAttribute(name = "allDay")
     protected Boolean allDay;
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -71,7 +71,7 @@ public class Item
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -87,7 +87,7 @@ public class Item
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -99,7 +99,7 @@ public class Item
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -119,7 +119,7 @@ public class Item
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the start property.
      * 
      * @return
@@ -131,7 +131,7 @@ public class Item
         return start;
     }
 
-    /*
+    /**
      * Sets the value of the start property.
      * 
      * @param value
@@ -147,7 +147,7 @@ public class Item
         return (this.start!= null);
     }
 
-    /*
+    /**
      * Gets the value of the end property.
      * 
      * @return
@@ -159,7 +159,7 @@ public class Item
         return end;
     }
 
-    /*
+    /**
      * Sets the value of the end property.
      * 
      * @param value
@@ -175,7 +175,7 @@ public class Item
         return (this.end!= null);
     }
 
-    /*
+    /**
      * Gets the value of the allDay property.
      * 
      * @return
@@ -187,7 +187,7 @@ public class Item
         return allDay;
     }
 
-    /*
+    /**
      * Sets the value of the allDay property.
      * 
      * @param value

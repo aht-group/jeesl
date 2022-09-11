@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -47,7 +47,7 @@ public class Menu
     @XmlAttribute(name = "code")
     protected String code;
 
-    /*
+    /**
      * Gets the value of the menuItem property.
      * 
      * <p>
@@ -84,7 +84,7 @@ public class Menu
         this.menuItem = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class Menu
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value

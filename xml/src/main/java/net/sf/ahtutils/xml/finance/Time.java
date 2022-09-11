@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Time
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar record;
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Time
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -84,7 +84,7 @@ public class Time
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the nr property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class Time
         return nr;
     }
 
-    /*
+    /**
      * Sets the value of the nr property.
      * 
      * @param value
@@ -116,7 +116,7 @@ public class Time
         this.nr = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -128,7 +128,7 @@ public class Time
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -144,7 +144,7 @@ public class Time
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -156,7 +156,7 @@ public class Time
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value
@@ -172,7 +172,7 @@ public class Time
         return (this.label!= null);
     }
 
-    /*
+    /**
      * Gets the value of the record property.
      * 
      * @return
@@ -184,7 +184,7 @@ public class Time
         return record;
     }
 
-    /*
+    /**
      * Sets the value of the record property.
      * 
      * @param value

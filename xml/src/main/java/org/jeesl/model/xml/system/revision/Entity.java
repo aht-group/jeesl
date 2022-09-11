@@ -16,7 +16,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import org.jeesl.model.xml.text.Remark;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -86,7 +86,7 @@ public class Entity
     @XmlAttribute(name = "documentation")
     protected Boolean documentation;
 
-    /*
+    /**
      * Gets the value of the category property.
      * 
      * @return
@@ -98,7 +98,7 @@ public class Entity
         return category;
     }
 
-    /*
+    /**
      * Sets the value of the category property.
      * 
      * @param value
@@ -114,7 +114,7 @@ public class Entity
         return (this.category!= null);
     }
 
-    /*
+    /**
      * Gets the value of the diagram property.
      * 
      * @return
@@ -126,7 +126,7 @@ public class Entity
         return diagram;
     }
 
-    /*
+    /**
      * Sets the value of the diagram property.
      * 
      * @param value
@@ -142,7 +142,7 @@ public class Entity
         return (this.diagram!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -154,7 +154,7 @@ public class Entity
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -170,7 +170,7 @@ public class Entity
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -182,7 +182,7 @@ public class Entity
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -198,7 +198,7 @@ public class Entity
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the remark property.
      * 
      * @return
@@ -210,7 +210,7 @@ public class Entity
         return remark;
     }
 
-    /*
+    /**
      * Sets the value of the remark property.
      * 
      * @param value
@@ -226,7 +226,7 @@ public class Entity
         return (this.remark!= null);
     }
 
-    /*
+    /**
      * Gets the value of the attribute property.
      * 
      * <p>
@@ -263,7 +263,7 @@ public class Entity
         this.attribute = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -275,7 +275,7 @@ public class Entity
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -295,7 +295,7 @@ public class Entity
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -307,7 +307,7 @@ public class Entity
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -323,7 +323,7 @@ public class Entity
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -335,7 +335,7 @@ public class Entity
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -355,7 +355,7 @@ public class Entity
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -367,7 +367,7 @@ public class Entity
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -387,7 +387,7 @@ public class Entity
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the timeseries property.
      * 
      * @return
@@ -399,7 +399,7 @@ public class Entity
         return timeseries;
     }
 
-    /*
+    /**
      * Sets the value of the timeseries property.
      * 
      * @param value
@@ -419,7 +419,7 @@ public class Entity
         this.timeseries = null;
     }
 
-    /*
+    /**
      * Gets the value of the documentation property.
      * 
      * @return
@@ -431,7 +431,7 @@ public class Entity
         return documentation;
     }
 
-    /*
+    /**
      * Sets the value of the documentation property.
      * 
      * @param value

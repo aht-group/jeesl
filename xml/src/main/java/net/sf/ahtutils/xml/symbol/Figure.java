@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Style;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -64,7 +64,7 @@ public class Figure
     @XmlAttribute(name = "offsetY")
     protected Integer offsetY;
 
-    /*
+    /**
      * Gets the value of the style property.
      * 
      * @return
@@ -76,7 +76,7 @@ public class Figure
         return style;
     }
 
-    /*
+    /**
      * Sets the value of the style property.
      * 
      * @param value
@@ -92,7 +92,7 @@ public class Figure
         return (this.style!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -104,7 +104,7 @@ public class Figure
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -124,7 +124,7 @@ public class Figure
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the css property.
      * 
      * @return
@@ -136,7 +136,7 @@ public class Figure
         return css;
     }
 
-    /*
+    /**
      * Sets the value of the css property.
      * 
      * @param value
@@ -156,7 +156,7 @@ public class Figure
         this.css = null;
     }
 
-    /*
+    /**
      * Gets the value of the color property.
      * 
      * @return
@@ -168,7 +168,7 @@ public class Figure
         return color;
     }
 
-    /*
+    /**
      * Sets the value of the color property.
      * 
      * @param value
@@ -184,7 +184,7 @@ public class Figure
         return (this.color!= null);
     }
 
-    /*
+    /**
      * Gets the value of the size property.
      * 
      * @return
@@ -196,7 +196,7 @@ public class Figure
         return size;
     }
 
-    /*
+    /**
      * Sets the value of the size property.
      * 
      * @param value
@@ -216,7 +216,7 @@ public class Figure
         this.size = null;
     }
 
-    /*
+    /**
      * Gets the value of the rotation property.
      * 
      * @return
@@ -228,7 +228,7 @@ public class Figure
         return rotation;
     }
 
-    /*
+    /**
      * Sets the value of the rotation property.
      * 
      * @param value
@@ -248,7 +248,7 @@ public class Figure
         this.rotation = null;
     }
 
-    /*
+    /**
      * Gets the value of the offsetX property.
      * 
      * @return
@@ -260,7 +260,7 @@ public class Figure
         return offsetX;
     }
 
-    /*
+    /**
      * Sets the value of the offsetX property.
      * 
      * @param value
@@ -280,7 +280,7 @@ public class Figure
         this.offsetX = null;
     }
 
-    /*
+    /**
      * Gets the value of the offsetY property.
      * 
      * @return
@@ -292,7 +292,7 @@ public class Figure
         return offsetY;
     }
 
-    /*
+    /**
      * Sets the value of the offsetY property.
      * 
      * @param value

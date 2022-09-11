@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Messages
     @XmlElement(required = true)
     protected List<Message> message;
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Messages
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class Messages
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the messages property.
      * 
      * <p>
@@ -117,7 +117,7 @@ public class Messages
         this.messages = null;
     }
 
-    /*
+    /**
      * Gets the value of the message property.
      * 
      * <p>

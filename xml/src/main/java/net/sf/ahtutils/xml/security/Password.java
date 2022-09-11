@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -47,6 +47,28 @@ public class Password
     @XmlAttribute(name = "valid")
     protected Boolean valid;
 
+    /**
+     * Gets the value of the rule property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the rule property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRule().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Rule }
+     * 
+     * 
+     */
     public List<Rule> getRule() {
         if (rule == null) {
             rule = new ArrayList<Rule>();
@@ -62,7 +84,7 @@ public class Password
         this.rule = null;
     }
 
-    /*
+    /**
      * Gets the value of the valid property.
      * 
      * @return
@@ -74,7 +96,7 @@ public class Password
         return valid;
     }
 
-    /*
+    /**
      * Sets the value of the valid property.
      * 
      * @param value

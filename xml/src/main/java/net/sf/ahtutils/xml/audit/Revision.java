@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Revision
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar date;
 
-    /*
+    /**
      * Gets the value of the user property.
      * 
      * @return
@@ -69,7 +69,7 @@ public class Revision
         return user;
     }
 
-    /*
+    /**
      * Sets the value of the user property.
      * 
      * @param value
@@ -85,7 +85,28 @@ public class Revision
         return (this.user!= null);
     }
 
-   
+    /**
+     * Gets the value of the scope property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the scope property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getScope().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Scope }
+     * 
+     * 
+     */
     public List<Scope> getScope() {
         if (scope == null) {
             scope = new ArrayList<Scope>();
@@ -101,7 +122,7 @@ public class Revision
         this.scope = null;
     }
 
-    /*
+    /**
      * Gets the value of the rev property.
      * 
      * @return
@@ -113,7 +134,7 @@ public class Revision
         return rev;
     }
 
-    /*
+    /**
      * Sets the value of the rev property.
      * 
      * @param value
@@ -133,7 +154,7 @@ public class Revision
         this.rev = null;
     }
 
-    /*
+    /**
      * Gets the value of the date property.
      * 
      * @return
@@ -145,7 +166,7 @@ public class Revision
         return date;
     }
 
-    /*
+    /**
      * Sets the value of the date property.
      * 
      * @param value

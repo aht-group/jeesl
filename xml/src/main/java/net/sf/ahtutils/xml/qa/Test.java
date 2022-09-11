@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Statement;
 import net.sf.ahtutils.xml.status.Status;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -95,7 +95,7 @@ public class Test
     @XmlAttribute(name = "visible")
     protected Boolean visible;
 
-    /*
+    /**
      * Gets the value of the status property.
      * 
      * @return
@@ -107,7 +107,7 @@ public class Test
         return status;
     }
 
-    /*
+    /**
      * Sets the value of the status property.
      * 
      * @param value
@@ -123,7 +123,7 @@ public class Test
         return (this.status!= null);
     }
 
-    /*
+    /**
      * Gets the value of the statement property.
      * 
      * @return
@@ -135,7 +135,7 @@ public class Test
         return statement;
     }
 
-    /*
+    /**
      * Sets the value of the statement property.
      * 
      * @param value
@@ -151,7 +151,7 @@ public class Test
         return (this.statement!= null);
     }
 
-    /*
+    /**
      * Gets the value of the reference property.
      * 
      * @return
@@ -163,7 +163,7 @@ public class Test
         return reference;
     }
 
-    /*
+    /**
      * Sets the value of the reference property.
      * 
      * @param value
@@ -179,7 +179,7 @@ public class Test
         return (this.reference!= null);
     }
 
-    /*
+    /**
      * Gets the value of the description property.
      * 
      * @return
@@ -191,7 +191,7 @@ public class Test
         return description;
     }
 
-    /*
+    /**
      * Sets the value of the description property.
      * 
      * @param value
@@ -207,7 +207,7 @@ public class Test
         return (this.description!= null);
     }
 
-    /*
+    /**
      * Gets the value of the preCondition property.
      * 
      * @return
@@ -219,7 +219,7 @@ public class Test
         return preCondition;
     }
 
-    /*
+    /**
      * Sets the value of the preCondition property.
      * 
      * @param value
@@ -235,7 +235,7 @@ public class Test
         return (this.preCondition!= null);
     }
 
-    /*
+    /**
      * Gets the value of the steps property.
      * 
      * @return
@@ -247,7 +247,7 @@ public class Test
         return steps;
     }
 
-    /*
+    /**
      * Sets the value of the steps property.
      * 
      * @param value
@@ -263,7 +263,7 @@ public class Test
         return (this.steps!= null);
     }
 
-    /*
+    /**
      * Gets the value of the expected property.
      * 
      * @return
@@ -275,7 +275,7 @@ public class Test
         return expected;
     }
 
-    /*
+    /**
      * Sets the value of the expected property.
      * 
      * @param value
@@ -291,7 +291,7 @@ public class Test
         return (this.expected!= null);
     }
 
-    /*
+    /**
      * Gets the value of the results property.
      * 
      * @return
@@ -303,7 +303,7 @@ public class Test
         return results;
     }
 
-    /*
+    /**
      * Sets the value of the results property.
      * 
      * @param value
@@ -319,7 +319,7 @@ public class Test
         return (this.results!= null);
     }
 
-    /*
+    /**
      * Gets the value of the info property.
      * 
      * @return
@@ -331,7 +331,7 @@ public class Test
         return info;
     }
 
-    /*
+    /**
      * Sets the value of the info property.
      * 
      * @param value
@@ -347,7 +347,7 @@ public class Test
         return (this.info!= null);
     }
 
-    /*
+    /**
      * Gets the value of the groups property.
      * 
      * @return
@@ -359,7 +359,7 @@ public class Test
         return groups;
     }
 
-    /*
+    /**
      * Sets the value of the groups property.
      * 
      * @param value
@@ -375,7 +375,7 @@ public class Test
         return (this.groups!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -387,7 +387,7 @@ public class Test
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -407,7 +407,7 @@ public class Test
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -419,7 +419,7 @@ public class Test
         return name;
     }
 
-    /*
+    /**
      * Sets the value of the name property.
      * 
      * @param value
@@ -435,7 +435,7 @@ public class Test
         return (this.name!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -447,7 +447,7 @@ public class Test
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -463,7 +463,7 @@ public class Test
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the duration property.
      * 
      * @return
@@ -475,7 +475,7 @@ public class Test
         return duration;
     }
 
-    /*
+    /**
      * Sets the value of the duration property.
      * 
      * @param value
@@ -495,7 +495,7 @@ public class Test
         this.duration = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -507,7 +507,7 @@ public class Test
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value

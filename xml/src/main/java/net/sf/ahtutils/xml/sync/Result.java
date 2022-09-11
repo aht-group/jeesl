@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Status;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -55,7 +55,7 @@ public class Result
     @XmlAttribute(name = "fail")
     protected Long fail;
 
-    /*
+    /**
      * Gets the value of the status property.
      * 
      * @return
@@ -67,7 +67,7 @@ public class Result
         return status;
     }
 
-    /*
+    /**
      * Sets the value of the status property.
      * 
      * @param value
@@ -83,7 +83,7 @@ public class Result
         return (this.status!= null);
     }
 
-    /*
+    /**
      * Gets the value of the total property.
      * 
      * @return
@@ -95,7 +95,7 @@ public class Result
         return total;
     }
 
-    /*
+    /**
      * Sets the value of the total property.
      * 
      * @param value
@@ -115,7 +115,7 @@ public class Result
         this.total = null;
     }
 
-    /*
+    /**
      * Gets the value of the success property.
      * 
      * @return
@@ -127,7 +127,7 @@ public class Result
         return success;
     }
 
-    /*
+    /**
      * Sets the value of the success property.
      * 
      * @param value
@@ -147,7 +147,7 @@ public class Result
         this.success = null;
     }
 
-    /*
+    /**
      * Gets the value of the skip property.
      * 
      * @return
@@ -159,7 +159,7 @@ public class Result
         return skip;
     }
 
-    /*
+    /**
      * Sets the value of the skip property.
      * 
      * @param value
@@ -179,7 +179,7 @@ public class Result
         this.skip = null;
     }
 
-    /*
+    /**
      * Gets the value of the fail property.
      * 
      * @return
@@ -191,7 +191,7 @@ public class Result
         return fail;
     }
 
-    /*
+    /**
      * Sets the value of the fail property.
      * 
      * @param value

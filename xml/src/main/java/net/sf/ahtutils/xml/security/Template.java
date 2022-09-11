@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -66,7 +66,7 @@ public class Template
     @XmlAttribute(name = "label")
     protected String label;
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -78,7 +78,7 @@ public class Template
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -94,7 +94,7 @@ public class Template
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -106,7 +106,7 @@ public class Template
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -122,7 +122,7 @@ public class Template
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -134,7 +134,7 @@ public class Template
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -154,7 +154,7 @@ public class Template
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -166,7 +166,7 @@ public class Template
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -182,7 +182,7 @@ public class Template
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -194,7 +194,7 @@ public class Template
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -214,7 +214,7 @@ public class Template
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -226,7 +226,7 @@ public class Template
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -246,7 +246,7 @@ public class Template
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the documentation property.
      * 
      * @return
@@ -258,7 +258,7 @@ public class Template
         return documentation;
     }
 
-    /*
+    /**
      * Sets the value of the documentation property.
      * 
      * @param value
@@ -278,7 +278,7 @@ public class Template
         this.documentation = null;
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -290,7 +290,7 @@ public class Template
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value

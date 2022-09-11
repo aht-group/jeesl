@@ -4,7 +4,7 @@ package org.jeesl.model.xml.system.io.mail;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/*
+/**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.system.io.mail package. 
@@ -22,74 +22,110 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /*
+    /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.system.io.mail
      * 
      */
     public ObjectFactory() {
     }
 
-
+    /**
+     * Create an instance of {@link Mails }
+     * 
+     */
     public Mails createMails() {
         return new Mails();
     }
 
-
+    /**
+     * Create an instance of {@link Mail }
+     * 
+     */
     public Mail createMail() {
         return new Mail();
     }
 
-
+    /**
+     * Create an instance of {@link Header }
+     * 
+     */
     public Header createHeader() {
         return new Header();
     }
 
-
+    /**
+     * Create an instance of {@link From }
+     * 
+     */
     public From createFrom() {
         return new From();
     }
 
-
+    /**
+     * Create an instance of {@link EmailAddress }
+     * 
+     */
     public EmailAddress createEmailAddress() {
         return new EmailAddress();
     }
 
-
+    /**
+     * Create an instance of {@link To }
+     * 
+     */
     public To createTo() {
         return new To();
     }
 
-
+    /**
+     * Create an instance of {@link Cc }
+     * 
+     */
     public Cc createCc() {
         return new Cc();
     }
 
-
+    /**
+     * Create an instance of {@link Bcc }
+     * 
+     */
     public Bcc createBcc() {
         return new Bcc();
     }
 
-
+    /**
+     * Create an instance of {@link Template }
+     * 
+     */
     public Template createTemplate() {
         return new Template();
     }
 
-
+    /**
+     * Create an instance of {@link Text }
+     * 
+     */
     public Text createText() {
         return new Text();
     }
 
-
+    /**
+     * Create an instance of {@link Html }
+     * 
+     */
     public Html createHtml() {
         return new Html();
     }
 
-
+    /**
+     * Create an instance of {@link Attachment }
+     * 
+     */
     public Attachment createAttachment() {
         return new Attachment();
     }
 
-    /*
+    /**
      * Create an instance of {@link Image }
      * 
      */
@@ -97,7 +133,7 @@ public class ObjectFactory {
         return new Image();
     }
 
-    /*
+    /**
      * Create an instance of {@link Tracker }
      * 
      */
@@ -105,7 +141,7 @@ public class ObjectFactory {
         return new Tracker();
     }
 
-    /*
+    /**
      * Create an instance of {@link Link }
      * 
      */

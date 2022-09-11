@@ -4,7 +4,7 @@ package org.jeesl.model.xml.module.survey;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/*
+/**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.module.survey package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /*
+    /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.module.survey
      * 
      */
     public ObjectFactory() {
     }
 
-    /*
+    /**
      * Create an instance of {@link Templates }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Templates();
     }
 
-    /*
+    /**
      * Create an instance of {@link Template }
      * 
      */
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new Template();
     }
 
-    /*
+    /**
      * Create an instance of {@link Section }
      * 
      */
@@ -53,7 +53,7 @@ public class ObjectFactory {
         return new Section();
     }
 
-    /*
+    /**
      * Create an instance of {@link Question }
      * 
      */
@@ -61,7 +61,7 @@ public class ObjectFactory {
         return new Question();
     }
 
-    /*
+    /**
      * Create an instance of {@link Score }
      * 
      */
@@ -69,7 +69,7 @@ public class ObjectFactory {
         return new Score();
     }
 
-    /*
+    /**
      * Create an instance of {@link Answer }
      * 
      */
@@ -77,7 +77,7 @@ public class ObjectFactory {
         return new Answer();
     }
 
-    /*
+    /**
      * Create an instance of {@link Data }
      * 
      */
@@ -85,7 +85,7 @@ public class ObjectFactory {
         return new Data();
     }
 
-    /*
+    /**
      * Create an instance of {@link Survey }
      * 
      */
@@ -93,7 +93,7 @@ public class ObjectFactory {
         return new Survey();
     }
 
-    /*
+    /**
      * Create an instance of {@link Correlation }
      * 
      */
@@ -101,7 +101,7 @@ public class ObjectFactory {
         return new Correlation();
     }
 
-    /*
+    /**
      * Create an instance of {@link Option }
      * 
      */
@@ -109,7 +109,7 @@ public class ObjectFactory {
         return new Option();
     }
 
-    /*
+    /**
      * Create an instance of {@link Matrix }
      * 
      */
@@ -117,7 +117,7 @@ public class ObjectFactory {
         return new Matrix();
     }
 
-    /*
+    /**
      * Create an instance of {@link Row }
      * 
      */
@@ -125,7 +125,7 @@ public class ObjectFactory {
         return new Row();
     }
 
-    /*
+    /**
      * Create an instance of {@link Column }
      * 
      */
@@ -133,7 +133,7 @@ public class ObjectFactory {
         return new Column();
     }
 
-    /*
+    /**
      * Create an instance of {@link Cell }
      * 
      */
@@ -141,7 +141,7 @@ public class ObjectFactory {
         return new Cell();
     }
 
-    /*
+    /**
      * Create an instance of {@link Options }
      * 
      */
@@ -149,7 +149,7 @@ public class ObjectFactory {
         return new Options();
     }
 
-    /*
+    /**
      * Create an instance of {@link Surveys }
      * 
      */

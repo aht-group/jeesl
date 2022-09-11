@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Contexts;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -54,7 +54,7 @@ public class Workflow
     @XmlElement(required = true)
     protected Stage stage;
 
-    /*
+    /**
      * Gets the value of the contexts property.
      * 
      * @return
@@ -66,7 +66,7 @@ public class Workflow
         return contexts;
     }
 
-    /*
+    /**
      * Sets the value of the contexts property.
      * 
      * @param value
@@ -82,7 +82,7 @@ public class Workflow
         return (this.contexts!= null);
     }
 
-    /*
+    /**
      * Gets the value of the processes property.
      * 
      * @return
@@ -94,7 +94,7 @@ public class Workflow
         return processes;
     }
 
-    /*
+    /**
      * Sets the value of the processes property.
      * 
      * @param value
@@ -110,7 +110,7 @@ public class Workflow
         return (this.processes!= null);
     }
 
-    /*
+    /**
      * Gets the value of the activities property.
      * 
      * @return
@@ -122,7 +122,7 @@ public class Workflow
         return activities;
     }
 
-    /*
+    /**
      * Sets the value of the activities property.
      * 
      * @param value
@@ -138,7 +138,7 @@ public class Workflow
         return (this.activities!= null);
     }
 
-    /*
+    /**
      * Gets the value of the stage property.
      * 
      * @return
@@ -150,7 +150,7 @@ public class Workflow
         return stage;
     }
 
-    /*
+    /**
      * Sets the value of the stage property.
      * 
      * @param value

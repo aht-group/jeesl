@@ -13,7 +13,7 @@ import org.jeesl.model.xml.module.workflow.Stage;
 import org.jeesl.model.xml.module.workflow.Transition;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -56,7 +56,7 @@ public class QueryWf
     @XmlAttribute(name = "localeCode")
     protected String localeCode;
 
-    /*
+    /**
      * Gets the value of the process property.
      * 
      * @return
@@ -68,7 +68,7 @@ public class QueryWf
         return process;
     }
 
-    /*
+    /**
      * Sets the value of the process property.
      * 
      * @param value
@@ -84,7 +84,7 @@ public class QueryWf
         return (this.process!= null);
     }
 
-    /*
+    /**
      * Gets the value of the stage property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class QueryWf
         return stage;
     }
 
-    /*
+    /**
      * Sets the value of the stage property.
      * 
      * @param value
@@ -112,7 +112,7 @@ public class QueryWf
         return (this.stage!= null);
     }
 
-    /*
+    /**
      * Gets the value of the transition property.
      * 
      * @return
@@ -124,7 +124,7 @@ public class QueryWf
         return transition;
     }
 
-    /*
+    /**
      * Sets the value of the transition property.
      * 
      * @param value
@@ -140,7 +140,7 @@ public class QueryWf
         return (this.transition!= null);
     }
 
-    /*
+    /**
      * Gets the value of the localeCode property.
      * 
      * @return
@@ -152,7 +152,7 @@ public class QueryWf
         return localeCode;
     }
 
-    /*
+    /**
      * Sets the value of the localeCode property.
      * 
      * @param value

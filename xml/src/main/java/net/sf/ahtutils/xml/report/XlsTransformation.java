@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * 
  * 					This is for xlsTransformation
  * 				
@@ -50,7 +50,7 @@ public class XlsTransformation
     @XmlAttribute(name = "xPath")
     protected String xPath;
 
-    /*
+    /**
      * Gets the value of the dataClass property.
      * 
      * @return
@@ -62,7 +62,7 @@ public class XlsTransformation
         return dataClass;
     }
 
-    /*
+    /**
      * Sets the value of the dataClass property.
      * 
      * @param value
@@ -78,7 +78,7 @@ public class XlsTransformation
         return (this.dataClass!= null);
     }
 
-    /*
+    /**
      * Gets the value of the formatPattern property.
      * 
      * @return
@@ -90,7 +90,7 @@ public class XlsTransformation
         return formatPattern;
     }
 
-    /*
+    /**
      * Sets the value of the formatPattern property.
      * 
      * @param value
@@ -106,7 +106,7 @@ public class XlsTransformation
         return (this.formatPattern!= null);
     }
 
-    /*
+    /**
      * Gets the value of the beanProperty property.
      * 
      * @return
@@ -118,7 +118,7 @@ public class XlsTransformation
         return beanProperty;
     }
 
-    /*
+    /**
      * Sets the value of the beanProperty property.
      * 
      * @param value
@@ -134,7 +134,7 @@ public class XlsTransformation
         return (this.beanProperty!= null);
     }
 
-    /*
+    /**
      * Gets the value of the xPath property.
      * 
      * @return
@@ -146,7 +146,7 @@ public class XlsTransformation
         return xPath;
     }
 
-    /*
+    /**
      * Sets the value of the xPath property.
      * 
      * @param value

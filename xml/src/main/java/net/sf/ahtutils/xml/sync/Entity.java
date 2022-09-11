@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -45,7 +45,7 @@ public class Entity
     @XmlAttribute(name = "version")
     protected Long version;
 
-    /*
+    /**
      * Gets the value of the value property.
      * 
      * @return
@@ -57,7 +57,7 @@ public class Entity
         return value;
     }
 
-    /*
+    /**
      * Sets the value of the value property.
      * 
      * @param value
@@ -73,7 +73,7 @@ public class Entity
         return (this.value!= null);
     }
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -85,7 +85,7 @@ public class Entity
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -101,7 +101,7 @@ public class Entity
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the version property.
      * 
      * @return
@@ -113,7 +113,7 @@ public class Entity
         return version;
     }
 
-    /*
+    /**
      * Sets the value of the version property.
      * 
      * @param value

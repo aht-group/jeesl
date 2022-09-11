@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Levels;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Signatures
     @XmlAttribute(name = "label")
     protected String label;
 
-    /*
+    /**
      * Gets the value of the levels property.
      * 
      * @return
@@ -71,7 +71,7 @@ public class Signatures
         return levels;
     }
 
-    /*
+    /**
      * Sets the value of the levels property.
      * 
      * @param value
@@ -87,7 +87,28 @@ public class Signatures
         return (this.levels!= null);
     }
 
-
+    /**
+     * Gets the value of the signatures property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the signatures property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSignatures().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Signatures }
+     * 
+     * 
+     */
     public List<Signatures> getSignatures() {
         if (signatures == null) {
             signatures = new ArrayList<Signatures>();
@@ -103,7 +124,28 @@ public class Signatures
         this.signatures = null;
     }
 
-
+    /**
+     * Gets the value of the signature property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the signature property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSignature().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Signature }
+     * 
+     * 
+     */
     public List<Signature> getSignature() {
         if (signature == null) {
             signature = new ArrayList<Signature>();
@@ -119,7 +161,7 @@ public class Signatures
         this.signature = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -131,7 +173,7 @@ public class Signatures
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -147,7 +189,7 @@ public class Signatures
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -159,7 +201,7 @@ public class Signatures
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value

@@ -4,7 +4,7 @@ package org.jeesl.model.xml.text;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/*
+/**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.text package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /*
+    /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.text
      * 
      */
     public ObjectFactory() {
     }
 
-    /*
+    /**
      * Create an instance of {@link Markups }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Markups();
     }
 
-    /*
+    /**
      * Create an instance of {@link Markup }
      * 
      */
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new Markup();
     }
 
-    /*
+    /**
      * Create an instance of {@link Description }
      * 
      */
@@ -53,7 +53,7 @@ public class ObjectFactory {
         return new Description();
     }
 
-    /*
+    /**
      * Create an instance of {@link Reference }
      * 
      */
@@ -61,7 +61,7 @@ public class ObjectFactory {
         return new Reference();
     }
 
-    /*
+    /**
      * Create an instance of {@link Remark }
      * 
      */
@@ -69,7 +69,7 @@ public class ObjectFactory {
         return new Remark();
     }
 
-    /*
+    /**
      * Create an instance of {@link Remarks }
      * 
      */
@@ -77,7 +77,7 @@ public class ObjectFactory {
         return new Remarks();
     }
 
-    /*
+    /**
      * Create an instance of {@link Label }
      * 
      */
@@ -85,7 +85,7 @@ public class ObjectFactory {
         return new Label();
     }
 
-    /*
+    /**
      * Create an instance of {@link Challenge }
      * 
      */
@@ -93,7 +93,7 @@ public class ObjectFactory {
         return new Challenge();
     }
 
-    /*
+    /**
      * Create an instance of {@link Achievement }
      * 
      */
@@ -101,7 +101,7 @@ public class ObjectFactory {
         return new Achievement();
     }
 
-    /*
+    /**
      * Create an instance of {@link Solution }
      * 
      */
@@ -109,7 +109,7 @@ public class ObjectFactory {
         return new Solution();
     }
 
-    /*
+    /**
      * Create an instance of {@link Example }
      * 
      */
@@ -117,7 +117,7 @@ public class ObjectFactory {
         return new Example();
     }
 
-    /*
+    /**
      * Create an instance of {@link Location }
      * 
      */
@@ -125,7 +125,7 @@ public class ObjectFactory {
         return new Location();
     }
 
-    /*
+    /**
      * Create an instance of {@link Period }
      * 
      */
@@ -133,7 +133,7 @@ public class ObjectFactory {
         return new Period();
     }
 
-    /*
+    /**
      * Create an instance of {@link Finding }
      * 
      */
@@ -141,7 +141,7 @@ public class ObjectFactory {
         return new Finding();
     }
 
-    /*
+    /**
      * Create an instance of {@link Team }
      * 
      */

@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -67,7 +67,7 @@ public class Style
     @XmlAttribute(name = "visible")
     protected Boolean visible;
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -79,7 +79,7 @@ public class Style
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -95,7 +95,7 @@ public class Style
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -107,7 +107,7 @@ public class Style
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -123,7 +123,7 @@ public class Style
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the layout property.
      * 
      * @return
@@ -135,7 +135,7 @@ public class Style
         return layout;
     }
 
-    /*
+    /**
      * Sets the value of the layout property.
      * 
      * @param value
@@ -151,7 +151,7 @@ public class Style
         return (this.layout!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -163,7 +163,7 @@ public class Style
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -183,7 +183,7 @@ public class Style
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -195,7 +195,7 @@ public class Style
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -211,7 +211,7 @@ public class Style
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -223,7 +223,7 @@ public class Style
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -239,7 +239,7 @@ public class Style
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -251,7 +251,7 @@ public class Style
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -271,7 +271,7 @@ public class Style
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -283,7 +283,7 @@ public class Style
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value

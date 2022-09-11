@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -47,7 +47,28 @@ public class Constraints
     @XmlElement(required = true)
     protected List<ConstraintAttribute> constraintAttribute;
 
-  
+    /**
+     * Gets the value of the constraintScope property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the constraintScope property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getConstraintScope().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ConstraintScope }
+     * 
+     * 
+     */
     public List<ConstraintScope> getConstraintScope() {
         if (constraintScope == null) {
             constraintScope = new ArrayList<ConstraintScope>();
@@ -63,7 +84,28 @@ public class Constraints
         this.constraintScope = null;
     }
 
-   
+    /**
+     * Gets the value of the constraintAttribute property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the constraintAttribute property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getConstraintAttribute().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ConstraintAttribute }
+     * 
+     * 
+     */
     public List<ConstraintAttribute> getConstraintAttribute() {
         if (constraintAttribute == null) {
             constraintAttribute = new ArrayList<ConstraintAttribute>();

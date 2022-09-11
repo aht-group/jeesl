@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Ds
     @XmlAttribute(name = "label")
     protected String label;
 
-    /*
+    /**
      * Gets the value of the data property.
      * 
      * <p>
@@ -94,7 +94,7 @@ public class Ds
         this.data = null;
     }
 
-    /*
+    /**
      * Gets the value of the ds property.
      * 
      * <p>
@@ -131,7 +131,7 @@ public class Ds
         this.ds = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -143,7 +143,7 @@ public class Ds
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -163,7 +163,7 @@ public class Ds
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -175,7 +175,7 @@ public class Ds
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -191,7 +191,7 @@ public class Ds
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -203,7 +203,7 @@ public class Ds
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value

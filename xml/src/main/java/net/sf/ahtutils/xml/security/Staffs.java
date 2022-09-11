@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Domain;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -60,7 +60,7 @@ public class Staffs
     @XmlAttribute(name = "label")
     protected String label;
 
-    /*
+    /**
      * Gets the value of the domain property.
      * 
      * @return
@@ -72,7 +72,7 @@ public class Staffs
         return domain;
     }
 
-    /*
+    /**
      * Sets the value of the domain property.
      * 
      * @param value
@@ -88,7 +88,7 @@ public class Staffs
         return (this.domain!= null);
     }
 
-    /*
+    /**
      * Gets the value of the role property.
      * 
      * @return
@@ -100,7 +100,7 @@ public class Staffs
         return role;
     }
 
-    /*
+    /**
      * Sets the value of the role property.
      * 
      * @param value
@@ -116,7 +116,28 @@ public class Staffs
         return (this.role!= null);
     }
 
-   
+    /**
+     * Gets the value of the staff property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the staff property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getStaff().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Staff }
+     * 
+     * 
+     */
     public List<Staff> getStaff() {
         if (staff == null) {
             staff = new ArrayList<Staff>();
@@ -132,7 +153,28 @@ public class Staffs
         this.staff = null;
     }
 
-  
+    /**
+     * Gets the value of the staffs property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the staffs property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getStaffs().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Staffs }
+     * 
+     * 
+     */
     public List<Staffs> getStaffs() {
         if (staffs == null) {
             staffs = new ArrayList<Staffs>();
@@ -148,7 +190,7 @@ public class Staffs
         this.staffs = null;
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -160,7 +202,7 @@ public class Staffs
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value

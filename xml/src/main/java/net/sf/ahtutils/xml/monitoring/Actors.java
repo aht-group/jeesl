@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -53,7 +53,28 @@ public class Actors
     @XmlAttribute(name = "name")
     protected String name;
 
-
+    /**
+     * Gets the value of the actor property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the actor property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getActor().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Actor }
+     * 
+     * 
+     */
     public List<Actor> getActor() {
         if (actor == null) {
             actor = new ArrayList<Actor>();
@@ -69,7 +90,7 @@ public class Actors
         this.actor = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -81,7 +102,7 @@ public class Actors
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -101,7 +122,7 @@ public class Actors
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -113,7 +134,7 @@ public class Actors
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -129,7 +150,7 @@ public class Actors
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -141,7 +162,7 @@ public class Actors
         return name;
     }
 
-    /*
+    /**
      * Sets the value of the name property.
      * 
      * @param value

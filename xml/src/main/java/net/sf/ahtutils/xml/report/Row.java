@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -83,7 +83,7 @@ public class Row
     @XmlAttribute(name = "visible")
     protected Boolean visible;
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -95,7 +95,7 @@ public class Row
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -111,7 +111,7 @@ public class Row
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -123,7 +123,7 @@ public class Row
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -139,7 +139,7 @@ public class Row
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -151,7 +151,7 @@ public class Row
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -167,7 +167,7 @@ public class Row
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the dataType property.
      * 
      * @return
@@ -179,7 +179,7 @@ public class Row
         return dataType;
     }
 
-    /*
+    /**
      * Sets the value of the dataType property.
      * 
      * @param value
@@ -195,7 +195,7 @@ public class Row
         return (this.dataType!= null);
     }
 
-    /*
+    /**
      * Gets the value of the template property.
      * 
      * @return
@@ -207,7 +207,7 @@ public class Row
         return template;
     }
 
-    /*
+    /**
      * Sets the value of the template property.
      * 
      * @param value
@@ -223,7 +223,7 @@ public class Row
         return (this.template!= null);
     }
 
-    /*
+    /**
      * Gets the value of the queries property.
      * 
      * @return
@@ -235,7 +235,7 @@ public class Row
         return queries;
     }
 
-    /*
+    /**
      * Sets the value of the queries property.
      * 
      * @param value
@@ -251,7 +251,7 @@ public class Row
         return (this.queries!= null);
     }
 
-    /*
+    /**
      * Gets the value of the styles property.
      * 
      * @return
@@ -263,7 +263,7 @@ public class Row
         return styles;
     }
 
-    /*
+    /**
      * Sets the value of the styles property.
      * 
      * @param value
@@ -279,7 +279,7 @@ public class Row
         return (this.styles!= null);
     }
 
-    /*
+    /**
      * Gets the value of the layout property.
      * 
      * @return
@@ -291,7 +291,7 @@ public class Row
         return layout;
     }
 
-    /*
+    /**
      * Sets the value of the layout property.
      * 
      * @param value
@@ -307,7 +307,7 @@ public class Row
         return (this.layout!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -319,7 +319,7 @@ public class Row
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -335,7 +335,7 @@ public class Row
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -347,7 +347,7 @@ public class Row
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -367,7 +367,7 @@ public class Row
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -379,7 +379,7 @@ public class Row
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value

@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -54,7 +54,7 @@ public class ConstraintAttribute
     @XmlAttribute(name = "attribute")
     protected String attribute;
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -66,7 +66,7 @@ public class ConstraintAttribute
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -82,7 +82,7 @@ public class ConstraintAttribute
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -94,7 +94,7 @@ public class ConstraintAttribute
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -110,7 +110,7 @@ public class ConstraintAttribute
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the clazz property.
      * 
      * @return
@@ -122,7 +122,7 @@ public class ConstraintAttribute
         return clazz;
     }
 
-    /*
+    /**
      * Sets the value of the clazz property.
      * 
      * @param value
@@ -138,7 +138,7 @@ public class ConstraintAttribute
         return (this.clazz!= null);
     }
 
-    /*
+    /**
      * Gets the value of the attribute property.
      * 
      * @return
@@ -150,7 +150,7 @@ public class ConstraintAttribute
         return attribute;
     }
 
-    /*
+    /**
      * Sets the value of the attribute property.
      * 
      * @param value

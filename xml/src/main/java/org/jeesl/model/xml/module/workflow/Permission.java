@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.status.Level;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Permission
     @XmlAttribute(name = "position")
     protected Integer position;
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -71,7 +71,7 @@ public class Permission
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -87,7 +87,7 @@ public class Permission
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the level property.
      * 
      * @return
@@ -99,7 +99,7 @@ public class Permission
         return level;
     }
 
-    /*
+    /**
      * Sets the value of the level property.
      * 
      * @param value
@@ -115,7 +115,7 @@ public class Permission
         return (this.level!= null);
     }
 
-    /*
+    /**
      * Gets the value of the role property.
      * 
      * @return
@@ -127,7 +127,7 @@ public class Permission
         return role;
     }
 
-    /*
+    /**
      * Sets the value of the role property.
      * 
      * @param value
@@ -143,7 +143,7 @@ public class Permission
         return (this.role!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -155,7 +155,7 @@ public class Permission
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -175,7 +175,7 @@ public class Permission
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -187,7 +187,7 @@ public class Permission
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value

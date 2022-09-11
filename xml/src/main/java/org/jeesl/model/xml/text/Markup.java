@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -48,7 +48,7 @@ public class Markup
     @XmlAttribute(name = "code")
     protected String code;
 
-    /*
+    /**
      * Gets the value of the description property.
      * 
      * @return
@@ -60,7 +60,7 @@ public class Markup
         return description;
     }
 
-    /*
+    /**
      * Sets the value of the description property.
      * 
      * @param value
@@ -76,7 +76,7 @@ public class Markup
         return (this.description!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -88,7 +88,7 @@ public class Markup
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -108,7 +108,7 @@ public class Markup
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -120,7 +120,7 @@ public class Markup
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value

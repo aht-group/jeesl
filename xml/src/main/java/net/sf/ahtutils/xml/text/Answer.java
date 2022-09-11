@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -45,7 +45,7 @@ public class Answer
     @XmlAttribute(name = "key")
     protected String key;
 
-    /*
+    /**
      * Gets the value of the value property.
      * 
      * @return
@@ -57,7 +57,7 @@ public class Answer
         return value;
     }
 
-    /*
+    /**
      * Sets the value of the value property.
      * 
      * @param value
@@ -73,7 +73,7 @@ public class Answer
         return (this.value!= null);
     }
 
-    /*
+    /**
      * Gets the value of the version property.
      * 
      * @return
@@ -85,7 +85,7 @@ public class Answer
         return version;
     }
 
-    /*
+    /**
      * Sets the value of the version property.
      * 
      * @param value
@@ -105,7 +105,7 @@ public class Answer
         this.version = null;
     }
 
-    /*
+    /**
      * Gets the value of the key property.
      * 
      * @return
@@ -117,7 +117,7 @@ public class Answer
         return key;
     }
 
-    /*
+    /**
      * Sets the value of the key property.
      * 
      * @param value

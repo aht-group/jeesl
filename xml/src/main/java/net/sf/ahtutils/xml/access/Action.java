@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -64,7 +64,7 @@ public class Action
     @XmlAttribute(name = "documentation")
     protected Boolean documentation;
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -76,7 +76,7 @@ public class Action
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -92,7 +92,7 @@ public class Action
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -104,7 +104,7 @@ public class Action
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -120,7 +120,7 @@ public class Action
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the roles property.
      * 
      * @return
@@ -132,7 +132,7 @@ public class Action
         return roles;
     }
 
-    /*
+    /**
      * Sets the value of the roles property.
      * 
      * @param value
@@ -148,7 +148,7 @@ public class Action
         return (this.roles!= null);
     }
 
-    /*
+    /**
      * Gets the value of the template property.
      * 
      * @return
@@ -160,7 +160,7 @@ public class Action
         return template;
     }
 
-    /*
+    /**
      * Sets the value of the template property.
      * 
      * @param value
@@ -176,7 +176,7 @@ public class Action
         return (this.template!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -188,7 +188,7 @@ public class Action
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -204,7 +204,7 @@ public class Action
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the documentation property.
      * 
      * @return
@@ -216,7 +216,7 @@ public class Action
         return documentation;
     }
 
-    /*
+    /**
      * Sets the value of the documentation property.
      * 
      * @param value

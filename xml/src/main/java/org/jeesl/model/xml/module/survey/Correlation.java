@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -50,7 +50,7 @@ public class Correlation
     @XmlAttribute(name = "type")
     protected String type;
 
-    /*
+    /**
      * Gets the value of the correlation property.
      * 
      * <p>
@@ -87,7 +87,7 @@ public class Correlation
         this.correlation = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -99,7 +99,7 @@ public class Correlation
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -119,7 +119,7 @@ public class Correlation
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -131,7 +131,7 @@ public class Correlation
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value

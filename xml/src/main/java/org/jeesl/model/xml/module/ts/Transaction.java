@@ -16,7 +16,7 @@ import org.jeesl.model.xml.text.Reference;
 import org.jeesl.model.xml.text.Remark;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -67,7 +67,7 @@ public class Transaction
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar record;
 
-    /*
+    /**
      * Gets the value of the user property.
      * 
      * @return
@@ -79,7 +79,7 @@ public class Transaction
         return user;
     }
 
-    /*
+    /**
      * Sets the value of the user property.
      * 
      * @param value
@@ -95,7 +95,7 @@ public class Transaction
         return (this.user!= null);
     }
 
-    /*
+    /**
      * Gets the value of the source property.
      * 
      * @return
@@ -107,7 +107,7 @@ public class Transaction
         return source;
     }
 
-    /*
+    /**
      * Sets the value of the source property.
      * 
      * @param value
@@ -123,7 +123,7 @@ public class Transaction
         return (this.source!= null);
     }
 
-    /*
+    /**
      * Gets the value of the reference property.
      * 
      * @return
@@ -135,7 +135,7 @@ public class Transaction
         return reference;
     }
 
-    /*
+    /**
      * Sets the value of the reference property.
      * 
      * @param value
@@ -151,7 +151,7 @@ public class Transaction
         return (this.reference!= null);
     }
 
-    /*
+    /**
      * Gets the value of the remark property.
      * 
      * @return
@@ -163,7 +163,7 @@ public class Transaction
         return remark;
     }
 
-    /*
+    /**
      * Sets the value of the remark property.
      * 
      * @param value
@@ -179,7 +179,7 @@ public class Transaction
         return (this.remark!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -191,7 +191,7 @@ public class Transaction
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -211,7 +211,7 @@ public class Transaction
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the record property.
      * 
      * @return
@@ -223,7 +223,7 @@ public class Transaction
         return record;
     }
 
-    /*
+    /**
      * Sets the value of the record property.
      * 
      * @param value

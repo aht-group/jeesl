@@ -16,7 +16,7 @@ import net.sf.ahtutils.xml.status.Status;
 import org.jeesl.model.xml.text.Remark;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -70,7 +70,7 @@ public class Template
     @XmlAttribute(name = "code")
     protected String code;
 
-    /*
+    /**
      * Gets the value of the description property.
      * 
      * @return
@@ -82,7 +82,7 @@ public class Template
         return description;
     }
 
-    /*
+    /**
      * Sets the value of the description property.
      * 
      * @param value
@@ -98,7 +98,7 @@ public class Template
         return (this.description!= null);
     }
 
-    /*
+    /**
      * Gets the value of the category property.
      * 
      * @return
@@ -110,7 +110,7 @@ public class Template
         return category;
     }
 
-    /*
+    /**
      * Sets the value of the category property.
      * 
      * @param value
@@ -126,7 +126,7 @@ public class Template
         return (this.category!= null);
     }
 
-    /*
+    /**
      * Gets the value of the status property.
      * 
      * @return
@@ -138,7 +138,7 @@ public class Template
         return status;
     }
 
-    /*
+    /**
      * Sets the value of the status property.
      * 
      * @param value
@@ -154,7 +154,7 @@ public class Template
         return (this.status!= null);
     }
 
-    /*
+    /**
      * Gets the value of the remark property.
      * 
      * @return
@@ -166,7 +166,7 @@ public class Template
         return remark;
     }
 
-    /*
+    /**
      * Sets the value of the remark property.
      * 
      * @param value
@@ -182,7 +182,7 @@ public class Template
         return (this.remark!= null);
     }
 
-    /*
+    /**
      * Gets the value of the section property.
      * 
      * <p>
@@ -219,7 +219,7 @@ public class Template
         this.section = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -231,7 +231,7 @@ public class Template
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -251,7 +251,7 @@ public class Template
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -263,7 +263,7 @@ public class Template
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value

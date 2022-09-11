@@ -16,7 +16,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import org.jeesl.model.xml.text.Description;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -79,7 +79,7 @@ public class MenuItem
     @XmlAttribute(name = "visible")
     protected Boolean visible;
 
-    /*
+    /**
      * Gets the value of the menuItem property.
      * 
      * <p>
@@ -116,7 +116,7 @@ public class MenuItem
         this.menuItem = null;
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -128,7 +128,7 @@ public class MenuItem
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -144,7 +144,7 @@ public class MenuItem
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -156,7 +156,7 @@ public class MenuItem
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -172,7 +172,7 @@ public class MenuItem
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the view property.
      * 
      * @return
@@ -184,7 +184,7 @@ public class MenuItem
         return view;
     }
 
-    /*
+    /**
      * Sets the value of the view property.
      * 
      * @param value
@@ -200,7 +200,7 @@ public class MenuItem
         return (this.view!= null);
     }
 
-    /*
+    /**
      * Gets the value of the description property.
      * 
      * @return
@@ -212,7 +212,7 @@ public class MenuItem
         return description;
     }
 
-    /*
+    /**
      * Sets the value of the description property.
      * 
      * @param value
@@ -228,7 +228,7 @@ public class MenuItem
         return (this.description!= null);
     }
 
-    /*
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -240,7 +240,7 @@ public class MenuItem
         return name;
     }
 
-    /*
+    /**
      * Sets the value of the name property.
      * 
      * @param value
@@ -256,7 +256,7 @@ public class MenuItem
         return (this.name!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -268,7 +268,7 @@ public class MenuItem
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -284,7 +284,7 @@ public class MenuItem
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the href property.
      * 
      * @return
@@ -296,7 +296,7 @@ public class MenuItem
         return href;
     }
 
-    /*
+    /**
      * Sets the value of the href property.
      * 
      * @param value
@@ -312,7 +312,7 @@ public class MenuItem
         return (this.href!= null);
     }
 
-    /*
+    /**
      * Gets the value of the active property.
      * 
      * @return
@@ -324,7 +324,7 @@ public class MenuItem
         return active;
     }
 
-    /*
+    /**
      * Sets the value of the active property.
      * 
      * @param value
@@ -344,7 +344,7 @@ public class MenuItem
         this.active = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -356,7 +356,7 @@ public class MenuItem
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value

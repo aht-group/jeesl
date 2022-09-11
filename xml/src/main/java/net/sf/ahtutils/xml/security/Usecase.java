@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -74,7 +74,7 @@ public class Usecase
     @XmlAttribute(name = "label")
     protected String label;
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -86,7 +86,7 @@ public class Usecase
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -102,7 +102,7 @@ public class Usecase
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -114,7 +114,7 @@ public class Usecase
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -130,7 +130,7 @@ public class Usecase
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the actions property.
      * 
      * @return
@@ -142,7 +142,7 @@ public class Usecase
         return actions;
     }
 
-    /*
+    /**
      * Sets the value of the actions property.
      * 
      * @param value
@@ -158,7 +158,7 @@ public class Usecase
         return (this.actions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the views property.
      * 
      * @return
@@ -170,7 +170,7 @@ public class Usecase
         return views;
     }
 
-    /*
+    /**
      * Sets the value of the views property.
      * 
      * @param value
@@ -186,7 +186,7 @@ public class Usecase
         return (this.views!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -198,7 +198,7 @@ public class Usecase
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -218,7 +218,7 @@ public class Usecase
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -230,7 +230,7 @@ public class Usecase
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -246,7 +246,7 @@ public class Usecase
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -258,7 +258,7 @@ public class Usecase
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -278,7 +278,7 @@ public class Usecase
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -290,7 +290,7 @@ public class Usecase
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -310,7 +310,7 @@ public class Usecase
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the documentation property.
      * 
      * @return
@@ -322,7 +322,7 @@ public class Usecase
         return documentation;
     }
 
-    /*
+    /**
      * Sets the value of the documentation property.
      * 
      * @param value
@@ -342,7 +342,7 @@ public class Usecase
         this.documentation = null;
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -354,7 +354,7 @@ public class Usecase
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value

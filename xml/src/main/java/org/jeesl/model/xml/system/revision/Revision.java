@@ -15,7 +15,7 @@ import net.sf.ahtutils.xml.status.Status;
 import org.jeesl.model.xml.text.Remark;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -62,7 +62,7 @@ public class Revision
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar record;
 
-    /*
+    /**
      * Gets the value of the user property.
      * 
      * @return
@@ -74,7 +74,7 @@ public class Revision
         return user;
     }
 
-    /*
+    /**
      * Sets the value of the user property.
      * 
      * @param value
@@ -90,7 +90,7 @@ public class Revision
         return (this.user!= null);
     }
 
-    /*
+    /**
      * Gets the value of the status property.
      * 
      * @return
@@ -102,7 +102,7 @@ public class Revision
         return status;
     }
 
-    /*
+    /**
      * Sets the value of the status property.
      * 
      * @param value
@@ -118,7 +118,7 @@ public class Revision
         return (this.status!= null);
     }
 
-    /*
+    /**
      * Gets the value of the remark property.
      * 
      * @return
@@ -130,7 +130,7 @@ public class Revision
         return remark;
     }
 
-    /*
+    /**
      * Sets the value of the remark property.
      * 
      * @param value
@@ -146,7 +146,7 @@ public class Revision
         return (this.remark!= null);
     }
 
-    /*
+    /**
      * Gets the value of the version property.
      * 
      * @return
@@ -158,7 +158,7 @@ public class Revision
         return version;
     }
 
-    /*
+    /**
      * Sets the value of the version property.
      * 
      * @param value
@@ -178,7 +178,7 @@ public class Revision
         this.version = null;
     }
 
-    /*
+    /**
      * Gets the value of the record property.
      * 
      * @return
@@ -190,7 +190,7 @@ public class Revision
         return record;
     }
 
-    /*
+    /**
      * Sets the value of the record property.
      * 
      * @param value

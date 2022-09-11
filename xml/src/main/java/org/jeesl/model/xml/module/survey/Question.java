@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.status.Unit;
 import org.jeesl.model.xml.text.Remark;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -105,7 +105,7 @@ public class Question
     @XmlAttribute(name = "showSelectOne")
     protected Boolean showSelectOne;
 
-    /*
+    /**
      * Gets the value of the question property.
      * 
      * @return
@@ -117,7 +117,7 @@ public class Question
         return question;
     }
 
-    /*
+    /**
      * Sets the value of the question property.
      * 
      * @param value
@@ -133,7 +133,7 @@ public class Question
         return (this.question!= null);
     }
 
-    /*
+    /**
      * Gets the value of the remark property.
      * 
      * @return
@@ -145,7 +145,7 @@ public class Question
         return remark;
     }
 
-    /*
+    /**
      * Sets the value of the remark property.
      * 
      * @param value
@@ -161,7 +161,7 @@ public class Question
         return (this.remark!= null);
     }
 
-    /*
+    /**
      * Gets the value of the unit property.
      * 
      * @return
@@ -173,7 +173,7 @@ public class Question
         return unit;
     }
 
-    /*
+    /**
      * Sets the value of the unit property.
      * 
      * @param value
@@ -189,7 +189,7 @@ public class Question
         return (this.unit!= null);
     }
 
-    /*
+    /**
      * Gets the value of the score property.
      * 
      * @return
@@ -201,7 +201,7 @@ public class Question
         return score;
     }
 
-    /*
+    /**
      * Sets the value of the score property.
      * 
      * @param value
@@ -217,7 +217,7 @@ public class Question
         return (this.score!= null);
     }
 
-    /*
+    /**
      * Gets the value of the answer property.
      * 
      * @return
@@ -229,7 +229,7 @@ public class Question
         return answer;
     }
 
-    /*
+    /**
      * Sets the value of the answer property.
      * 
      * @param value
@@ -245,7 +245,7 @@ public class Question
         return (this.answer!= null);
     }
 
-    /*
+    /**
      * Gets the value of the options property.
      * 
      * @return
@@ -257,7 +257,7 @@ public class Question
         return options;
     }
 
-    /*
+    /**
      * Sets the value of the options property.
      * 
      * @param value
@@ -273,7 +273,7 @@ public class Question
         return (this.options!= null);
     }
 
-    /*
+    /**
      * Gets the value of the figures property.
      * 
      * @return
@@ -285,7 +285,7 @@ public class Question
         return figures;
     }
 
-    /*
+    /**
      * Sets the value of the figures property.
      * 
      * @param value
@@ -301,7 +301,7 @@ public class Question
         return (this.figures!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -313,7 +313,7 @@ public class Question
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -333,7 +333,7 @@ public class Question
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -345,7 +345,7 @@ public class Question
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -365,7 +365,7 @@ public class Question
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -377,7 +377,7 @@ public class Question
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -397,7 +397,7 @@ public class Question
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -409,7 +409,7 @@ public class Question
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -425,7 +425,7 @@ public class Question
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the topic property.
      * 
      * @return
@@ -437,7 +437,7 @@ public class Question
         return topic;
     }
 
-    /*
+    /**
      * Sets the value of the topic property.
      * 
      * @param value
@@ -453,7 +453,7 @@ public class Question
         return (this.topic!= null);
     }
 
-    /*
+    /**
      * Gets the value of the showBoolean property.
      * 
      * @return
@@ -465,7 +465,7 @@ public class Question
         return showBoolean;
     }
 
-    /*
+    /**
      * Sets the value of the showBoolean property.
      * 
      * @param value
@@ -485,7 +485,7 @@ public class Question
         this.showBoolean = null;
     }
 
-    /*
+    /**
      * Gets the value of the showInteger property.
      * 
      * @return
@@ -497,7 +497,7 @@ public class Question
         return showInteger;
     }
 
-    /*
+    /**
      * Sets the value of the showInteger property.
      * 
      * @param value
@@ -517,7 +517,7 @@ public class Question
         this.showInteger = null;
     }
 
-    /*
+    /**
      * Gets the value of the showDouble property.
      * 
      * @return
@@ -529,7 +529,7 @@ public class Question
         return showDouble;
     }
 
-    /*
+    /**
      * Sets the value of the showDouble property.
      * 
      * @param value
@@ -549,7 +549,7 @@ public class Question
         this.showDouble = null;
     }
 
-    /*
+    /**
      * Gets the value of the showText property.
      * 
      * @return
@@ -561,7 +561,7 @@ public class Question
         return showText;
     }
 
-    /*
+    /**
      * Sets the value of the showText property.
      * 
      * @param value
@@ -581,7 +581,7 @@ public class Question
         this.showText = null;
     }
 
-    /*
+    /**
      * Gets the value of the showScore property.
      * 
      * @return
@@ -593,7 +593,7 @@ public class Question
         return showScore;
     }
 
-    /*
+    /**
      * Sets the value of the showScore property.
      * 
      * @param value
@@ -613,7 +613,7 @@ public class Question
         this.showScore = null;
     }
 
-    /*
+    /**
      * Gets the value of the showRemark property.
      * 
      * @return
@@ -625,7 +625,7 @@ public class Question
         return showRemark;
     }
 
-    /*
+    /**
      * Sets the value of the showRemark property.
      * 
      * @param value
@@ -645,7 +645,7 @@ public class Question
         this.showRemark = null;
     }
 
-    /*
+    /**
      * Gets the value of the showSelectOne property.
      * 
      * @return
@@ -657,7 +657,7 @@ public class Question
         return showSelectOne;
     }
 
-    /*
+    /**
      * Sets the value of the showSelectOne property.
      * 
      * @param value

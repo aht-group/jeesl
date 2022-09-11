@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -60,7 +60,7 @@ public class Scope
     @XmlAttribute(name = "entity")
     protected String entity;
 
-    /*
+    /**
      * Gets the value of the revision property.
      * 
      * @return
@@ -72,7 +72,7 @@ public class Scope
         return revision;
     }
 
-    /*
+    /**
      * Sets the value of the revision property.
      * 
      * @param value
@@ -88,7 +88,28 @@ public class Scope
         return (this.revision!= null);
     }
 
-   
+    /**
+     * Gets the value of the change property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the change property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getChange().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Change }
+     * 
+     * 
+     */
     public List<Change> getChange() {
         if (change == null) {
             change = new ArrayList<Change>();
@@ -104,7 +125,7 @@ public class Scope
         this.change = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -116,7 +137,7 @@ public class Scope
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -136,7 +157,7 @@ public class Scope
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the clazz property.
      * 
      * @return
@@ -148,7 +169,7 @@ public class Scope
         return clazz;
     }
 
-    /*
+    /**
      * Sets the value of the clazz property.
      * 
      * @param value
@@ -164,7 +185,7 @@ public class Scope
         return (this.clazz!= null);
     }
 
-    /*
+    /**
      * Gets the value of the category property.
      * 
      * @return
@@ -176,7 +197,7 @@ public class Scope
         return category;
     }
 
-    /*
+    /**
      * Sets the value of the category property.
      * 
      * @param value
@@ -192,7 +213,7 @@ public class Scope
         return (this.category!= null);
     }
 
-    /*
+    /**
      * Gets the value of the entity property.
      * 
      * @return
@@ -204,7 +225,7 @@ public class Scope
         return entity;
     }
 
-    /*
+    /**
      * Sets the value of the entity property.
      * 
      * @param value

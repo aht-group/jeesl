@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -47,7 +47,28 @@ public class Resources
     @XmlAttribute(name = "dir")
     protected String dir;
 
-
+    /**
+     * Gets the value of the resource property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the resource property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getResource().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Resource }
+     * 
+     * 
+     */
     public List<Resource> getResource() {
         if (resource == null) {
             resource = new ArrayList<Resource>();
@@ -63,7 +84,7 @@ public class Resources
         this.resource = null;
     }
 
-    /*
+    /**
      * Gets the value of the dir property.
      * 
      * @return
@@ -75,7 +96,7 @@ public class Resources
         return dir;
     }
 
-    /*
+    /**
      * Sets the value of the dir property.
      * 
      * @param value

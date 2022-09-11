@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -47,7 +47,28 @@ public class Levels
     @XmlAttribute(name = "group")
     protected String group;
 
-   
+    /**
+     * Gets the value of the level property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the level property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLevel().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Level }
+     * 
+     * 
+     */
     public List<Level> getLevel() {
         if (level == null) {
             level = new ArrayList<Level>();
@@ -63,7 +84,7 @@ public class Levels
         this.level = null;
     }
 
-    /*
+    /**
      * Gets the value of the group property.
      * 
      * @return
@@ -75,7 +96,7 @@ public class Levels
         return group;
     }
 
-    /*
+    /**
      * Sets the value of the group property.
      * 
      * @param value

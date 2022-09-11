@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import net.sf.exlp.xml.io.File;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -58,7 +58,7 @@ public class Image
     @XmlAttribute(name = "cid")
     protected String cid;
 
-    /*
+    /**
      * Gets the value of the data property.
      * 
      * @return
@@ -70,7 +70,7 @@ public class Image
         return data;
     }
 
-    /*
+    /**
      * Sets the value of the data property.
      * 
      * @param value
@@ -86,7 +86,7 @@ public class Image
         return (this.data!= null);
     }
 
-    /*
+    /**
      * Gets the value of the file property.
      * 
      * @return
@@ -98,7 +98,7 @@ public class Image
         return file;
     }
 
-    /*
+    /**
      * Sets the value of the file property.
      * 
      * @param value
@@ -114,7 +114,7 @@ public class Image
         return (this.file!= null);
     }
 
-    /*
+    /**
      * Gets the value of the cid property.
      * 
      * @return
@@ -126,7 +126,7 @@ public class Image
         return cid;
     }
 
-    /*
+    /**
      * Sets the value of the cid property.
      * 
      * @param value

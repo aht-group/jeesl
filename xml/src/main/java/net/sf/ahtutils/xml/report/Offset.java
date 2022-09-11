@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -42,7 +42,7 @@ public class Offset
     @XmlAttribute(name = "columns")
     protected Integer columns;
 
-    /*
+    /**
      * Gets the value of the rows property.
      * 
      * @return
@@ -54,7 +54,7 @@ public class Offset
         return rows;
     }
 
-    /*
+    /**
      * Sets the value of the rows property.
      * 
      * @param value
@@ -74,7 +74,7 @@ public class Offset
         this.rows = null;
     }
 
-    /*
+    /**
      * Gets the value of the columns property.
      * 
      * @return
@@ -86,7 +86,7 @@ public class Offset
         return columns;
     }
 
-    /*
+    /**
      * Sets the value of the columns property.
      * 
      * @param value

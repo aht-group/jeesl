@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -40,7 +40,7 @@ public class Access
     @XmlAttribute(name = "authenticatedUser")
     protected Boolean authenticatedUser;
 
-    /*
+    /**
      * Gets the value of the publicUser property.
      * 
      * @return
@@ -52,7 +52,7 @@ public class Access
         return publicUser;
     }
 
-    /*
+    /**
      * Sets the value of the publicUser property.
      * 
      * @param value
@@ -72,7 +72,7 @@ public class Access
         this.publicUser = null;
     }
 
-    /*
+    /**
      * Gets the value of the authenticatedUser property.
      * 
      * @return
@@ -84,7 +84,7 @@ public class Access
         return authenticatedUser;
     }
 
-    /*
+    /**
      * Sets the value of the authenticatedUser property.
      * 
      * @param value

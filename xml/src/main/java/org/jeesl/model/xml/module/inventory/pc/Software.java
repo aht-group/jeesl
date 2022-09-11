@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -45,7 +45,7 @@ public class Software
     @XmlAttribute(name = "id")
     protected Long id;
 
-    /*
+    /**
      * Gets the value of the updates property.
      * 
      * @return
@@ -57,7 +57,7 @@ public class Software
         return updates;
     }
 
-    /*
+    /**
      * Sets the value of the updates property.
      * 
      * @param value
@@ -73,7 +73,7 @@ public class Software
         return (this.updates!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -85,7 +85,7 @@ public class Software
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value

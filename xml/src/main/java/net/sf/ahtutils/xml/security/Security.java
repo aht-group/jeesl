@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.system.navigation.Menu;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Security
     @XmlElement(required = true)
     protected List<Category> category;
 
-    /*
+    /**
      * Gets the value of the menu property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Security
         return menu;
     }
 
-    /*
+    /**
      * Sets the value of the menu property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class Security
         return (this.menu!= null);
     }
 
-    /*
+    /**
      * Gets the value of the roles property.
      * 
      * @return
@@ -92,7 +92,7 @@ public class Security
         return roles;
     }
 
-    /*
+    /**
      * Sets the value of the roles property.
      * 
      * @param value
@@ -108,7 +108,28 @@ public class Security
         return (this.roles!= null);
     }
 
-   
+    /**
+     * Gets the value of the category property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the category property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCategory().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Category }
+     * 
+     * 
+     */
     public List<Category> getCategory() {
         if (category == null) {
             category = new ArrayList<Category>();

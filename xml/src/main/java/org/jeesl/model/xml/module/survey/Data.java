@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -59,7 +59,7 @@ public class Data
     @XmlAttribute(name = "id")
     protected Long id;
 
-    /*
+    /**
      * Gets the value of the survey property.
      * 
      * @return
@@ -71,7 +71,7 @@ public class Data
         return survey;
     }
 
-    /*
+    /**
      * Sets the value of the survey property.
      * 
      * @param value
@@ -87,7 +87,7 @@ public class Data
         return (this.survey!= null);
     }
 
-    /*
+    /**
      * Gets the value of the correlation property.
      * 
      * @return
@@ -99,7 +99,7 @@ public class Data
         return correlation;
     }
 
-    /*
+    /**
      * Sets the value of the correlation property.
      * 
      * @param value
@@ -115,7 +115,7 @@ public class Data
         return (this.correlation!= null);
     }
 
-    /*
+    /**
      * Gets the value of the answer property.
      * 
      * <p>
@@ -152,7 +152,7 @@ public class Data
         this.answer = null;
     }
 
-    /*
+    /**
      * Gets the value of the section property.
      * 
      * <p>
@@ -189,7 +189,7 @@ public class Data
         this.section = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -201,7 +201,7 @@ public class Data
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value

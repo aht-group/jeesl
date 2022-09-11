@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -51,7 +51,7 @@ public class Task
     @XmlAttribute(name = "name")
     protected String name;
 
-    /*
+    /**
      * Gets the value of the tasks property.
      * 
      * @return
@@ -63,7 +63,7 @@ public class Task
         return tasks;
     }
 
-    /*
+    /**
      * Sets the value of the tasks property.
      * 
      * @param value
@@ -79,7 +79,7 @@ public class Task
         return (this.tasks!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -91,7 +91,7 @@ public class Task
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -111,7 +111,7 @@ public class Task
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -123,7 +123,7 @@ public class Task
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -139,7 +139,7 @@ public class Task
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -151,7 +151,7 @@ public class Task
         return name;
     }
 
-    /*
+    /**
      * Sets the value of the name property.
      * 
      * @param value

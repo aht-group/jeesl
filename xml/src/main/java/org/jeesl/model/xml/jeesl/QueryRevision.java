@@ -13,7 +13,7 @@ import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.model.xml.system.revision.Revision;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -56,7 +56,7 @@ public class QueryRevision
     @XmlAttribute(name = "localeCode")
     protected String localeCode;
 
-    /*
+    /**
      * Gets the value of the entity property.
      * 
      * @return
@@ -68,7 +68,7 @@ public class QueryRevision
         return entity;
     }
 
-    /*
+    /**
      * Sets the value of the entity property.
      * 
      * @param value
@@ -84,7 +84,7 @@ public class QueryRevision
         return (this.entity!= null);
     }
 
-    /*
+    /**
      * Gets the value of the diagram property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class QueryRevision
         return diagram;
     }
 
-    /*
+    /**
      * Sets the value of the diagram property.
      * 
      * @param value
@@ -112,7 +112,7 @@ public class QueryRevision
         return (this.diagram!= null);
     }
 
-    /*
+    /**
      * Gets the value of the revision property.
      * 
      * @return
@@ -124,7 +124,7 @@ public class QueryRevision
         return revision;
     }
 
-    /*
+    /**
      * Sets the value of the revision property.
      * 
      * @param value
@@ -140,7 +140,7 @@ public class QueryRevision
         return (this.revision!= null);
     }
 
-    /*
+    /**
      * Gets the value of the localeCode property.
      * 
      * @return
@@ -152,7 +152,7 @@ public class QueryRevision
         return localeCode;
     }
 
-    /*
+    /**
      * Sets the value of the localeCode property.
      * 
      * @param value

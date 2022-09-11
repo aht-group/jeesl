@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -84,7 +84,7 @@ public class SubProgram
     @XmlAttribute(name = "position")
     protected Integer position;
 
-    /*
+    /**
      * Gets the value of the transistions property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class SubProgram
         return transistions;
     }
 
-    /*
+    /**
      * Sets the value of the transistions property.
      * 
      * @param value
@@ -112,7 +112,7 @@ public class SubProgram
         return (this.transistions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -124,7 +124,7 @@ public class SubProgram
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -140,7 +140,7 @@ public class SubProgram
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -152,7 +152,7 @@ public class SubProgram
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -168,7 +168,28 @@ public class SubProgram
         return (this.descriptions!= null);
     }
 
-   
+    /**
+     * Gets the value of the lang property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the lang property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLang().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Lang }
+     * 
+     * 
+     */
     public List<Lang> getLang() {
         if (lang == null) {
             lang = new ArrayList<Lang>();
@@ -184,7 +205,7 @@ public class SubProgram
         this.lang = null;
     }
 
-    /*
+    /**
      * Gets the value of the parent property.
      * 
      * @return
@@ -196,7 +217,7 @@ public class SubProgram
         return parent;
     }
 
-    /*
+    /**
      * Sets the value of the parent property.
      * 
      * @param value
@@ -212,7 +233,7 @@ public class SubProgram
         return (this.parent!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -224,7 +245,7 @@ public class SubProgram
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -244,7 +265,7 @@ public class SubProgram
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the key property.
      * 
      * @return
@@ -256,7 +277,7 @@ public class SubProgram
         return key;
     }
 
-    /*
+    /**
      * Sets the value of the key property.
      * 
      * @param value
@@ -272,7 +293,7 @@ public class SubProgram
         return (this.key!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -284,7 +305,7 @@ public class SubProgram
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -300,7 +321,7 @@ public class SubProgram
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the group property.
      * 
      * @return
@@ -312,7 +333,7 @@ public class SubProgram
         return group;
     }
 
-    /*
+    /**
      * Sets the value of the group property.
      * 
      * @param value
@@ -328,7 +349,7 @@ public class SubProgram
         return (this.group!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -340,7 +361,7 @@ public class SubProgram
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value
@@ -356,7 +377,7 @@ public class SubProgram
         return (this.label!= null);
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -368,7 +389,7 @@ public class SubProgram
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -388,7 +409,7 @@ public class SubProgram
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the image property.
      * 
      * @return
@@ -400,7 +421,7 @@ public class SubProgram
         return image;
     }
 
-    /*
+    /**
      * Sets the value of the image property.
      * 
      * @param value
@@ -416,7 +437,7 @@ public class SubProgram
         return (this.image!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -428,7 +449,7 @@ public class SubProgram
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value

@@ -4,7 +4,7 @@ package net.sf.ahtutils.xml.aht;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/*
+/**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the net.sf.ahtutils.xml.aht package. 
@@ -22,20 +22,33 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-
+    /**
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.ahtutils.xml.aht
+     * 
+     */
     public ObjectFactory() {
     }
 
-
+    /**
+     * Create an instance of {@link Aht }
+     * 
+     */
     public Aht createAht() {
         return new Aht();
     }
 
-
+    /**
+     * Create an instance of {@link Container }
+     * 
+     */
     public Container createContainer() {
         return new Container();
     }
 
+    /**
+     * Create an instance of {@link Query }
+     * 
+     */
     public Query createQuery() {
         return new Query();
     }

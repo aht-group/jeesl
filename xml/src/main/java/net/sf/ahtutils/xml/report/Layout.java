@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.symbol.Color;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -60,7 +60,7 @@ public class Layout
     @XmlElement(required = true)
     protected Styles styles;
 
-    /*
+    /**
      * Gets the value of the font property.
      * 
      * @return
@@ -72,7 +72,7 @@ public class Layout
         return font;
     }
 
-    /*
+    /**
      * Sets the value of the font property.
      * 
      * @param value
@@ -88,7 +88,7 @@ public class Layout
         return (this.font!= null);
     }
 
-    /*
+    /**
      * Gets the value of the offset property.
      * 
      * @return
@@ -100,7 +100,7 @@ public class Layout
         return offset;
     }
 
-    /*
+    /**
      * Sets the value of the offset property.
      * 
      * @param value
@@ -116,7 +116,28 @@ public class Layout
         return (this.offset!= null);
     }
 
-
+    /**
+     * Gets the value of the size property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the size property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSize().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Size }
+     * 
+     * 
+     */
     public List<Size> getSize() {
         if (size == null) {
             size = new ArrayList<Size>();
@@ -132,7 +153,28 @@ public class Layout
         this.size = null;
     }
 
-
+    /**
+     * Gets the value of the color property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the color property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getColor().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Color }
+     * 
+     * 
+     */
     public List<Color> getColor() {
         if (color == null) {
             color = new ArrayList<Color>();
@@ -148,7 +190,7 @@ public class Layout
         this.color = null;
     }
 
-    /*
+    /**
      * Gets the value of the styles property.
      * 
      * @return
@@ -160,7 +202,7 @@ public class Layout
         return styles;
     }
 
-    /*
+    /**
      * Sets the value of the styles property.
      * 
      * @param value

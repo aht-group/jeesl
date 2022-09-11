@@ -8,13 +8,7 @@
     <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../jeesl/status.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="security.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/navigation" schemaLocation="navigation.xsd"/>
-    <xsd:element name="aclContainer">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="a:roleAutoAssign" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
+   
     <xsd:element name="access">
         <xsd:complexType>
             <xsd:sequence>
@@ -22,23 +16,14 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="aclQuery">
-        <xsd:complexType>
-            <xsd:sequence>
-            </xsd:sequence>
-            <xsd:attribute name="lang" type="xsd:string"/>
-            <xsd:attribute name="delQueryAfterProcessing" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
+   
     <xsd:element name="category">
         <xsd:complexType>
             <xsd:sequence>
                 <xsd:element ref="s:langs" maxOccurs="1"/>
                 <xsd:element ref="s:descriptions" maxOccurs="1"/>
-                <xsd:element ref="a:groups" maxOccurs="1"/>
                 <xsd:element ref="a:roles" maxOccurs="1"/>
                 <xsd:element ref="a:views" maxOccurs="1"/>
-                <xsd:element ref="a:usecases" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="label" type="xsd:string"/>
@@ -47,46 +32,8 @@
             <xsd:attribute name="documentation" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="roleAutoAssign">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element name="add" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:sequence>
-                            <xsd:element ref="a:group" maxOccurs="unbounded"/>
-                        </xsd:sequence>
-                    </xsd:complexType>
-                </xsd:element>
-                <xsd:element name="rm" maxOccurs="1">
-                    <xsd:complexType>
-                        <xsd:sequence>
-                            <xsd:element ref="a:group" maxOccurs="unbounded"/>
-                        </xsd:sequence>
-                        <xsd:attribute name="immediate" type="xsd:boolean"/>
-                    </xsd:complexType>
-                </xsd:element>
-            </xsd:sequence>
-            <xsd:attribute name="code" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="groups">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="a:group" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    <xsd:element name="group">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:descriptions" maxOccurs="1"/>
-                <xsd:element ref="s:langs" maxOccurs="1"/>
-                <xsd:element ref="a:views" maxOccurs="1"/>
-                <xsd:element ref="a:groups" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="code" type="xsd:string"/>
-        </xsd:complexType>
-    </xsd:element>
+   
+   
     <xsd:element name="views">
         <xsd:complexType>
             <xsd:sequence>
@@ -127,20 +74,13 @@
                 <xsd:element ref="s:langs" maxOccurs="1"/>
                 <xsd:element ref="a:views" maxOccurs="1"/>
                 <xsd:element ref="a:actions" maxOccurs="1"/>
-                <xsd:element ref="a:usecases" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
             <xsd:attribute name="documentation" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
-        <xsd:element name="usecases">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="a:usecase" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
+       
     <xsd:element name="usecase">
         <xsd:complexType>
             <xsd:sequence>

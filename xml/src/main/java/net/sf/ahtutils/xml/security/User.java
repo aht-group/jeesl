@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class User
     @XmlAttribute(name = "email")
     protected String email;
 
-    /*
+    /**
      * Gets the value of the staffs property.
      * 
      * @return
@@ -69,7 +69,7 @@ public class User
         return staffs;
     }
 
-    /*
+    /**
      * Sets the value of the staffs property.
      * 
      * @param value
@@ -85,7 +85,7 @@ public class User
         return (this.staffs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -97,7 +97,7 @@ public class User
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -117,7 +117,7 @@ public class User
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the firstName property.
      * 
      * @return
@@ -129,7 +129,7 @@ public class User
         return firstName;
     }
 
-    /*
+    /**
      * Sets the value of the firstName property.
      * 
      * @param value
@@ -145,7 +145,7 @@ public class User
         return (this.firstName!= null);
     }
 
-    /*
+    /**
      * Gets the value of the lastName property.
      * 
      * @return
@@ -157,7 +157,7 @@ public class User
         return lastName;
     }
 
-    /*
+    /**
      * Sets the value of the lastName property.
      * 
      * @param value
@@ -173,7 +173,7 @@ public class User
         return (this.lastName!= null);
     }
 
-    /*
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -185,7 +185,7 @@ public class User
         return name;
     }
 
-    /*
+    /**
      * Sets the value of the name property.
      * 
      * @param value
@@ -201,7 +201,7 @@ public class User
         return (this.name!= null);
     }
 
-    /*
+    /**
      * Gets the value of the email property.
      * 
      * @return
@@ -213,7 +213,7 @@ public class User
         return email;
     }
 
-    /*
+    /**
      * Sets the value of the email property.
      * 
      * @param value

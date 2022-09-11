@@ -13,7 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.sf.ahtutils.xml.security.User;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -61,7 +61,7 @@ public class Tracked
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar record;
 
-    /*
+    /**
      * Gets the value of the user property.
      * 
      * @return
@@ -73,7 +73,7 @@ public class Tracked
         return user;
     }
 
-    /*
+    /**
      * Sets the value of the user property.
      * 
      * @param value
@@ -89,7 +89,7 @@ public class Tracked
         return (this.user!= null);
     }
 
-    /*
+    /**
      * Gets the value of the status property.
      * 
      * @return
@@ -101,7 +101,7 @@ public class Tracked
         return status;
     }
 
-    /*
+    /**
      * Sets the value of the status property.
      * 
      * @param value
@@ -117,7 +117,7 @@ public class Tracked
         return (this.status!= null);
     }
 
-    /*
+    /**
      * Gets the value of the statement property.
      * 
      * @return
@@ -129,7 +129,7 @@ public class Tracked
         return statement;
     }
 
-    /*
+    /**
      * Sets the value of the statement property.
      * 
      * @param value
@@ -145,7 +145,7 @@ public class Tracked
         return (this.statement!= null);
     }
 
-    /*
+    /**
      * Gets the value of the declaration property.
      * 
      * @return
@@ -157,7 +157,7 @@ public class Tracked
         return declaration;
     }
 
-    /*
+    /**
      * Sets the value of the declaration property.
      * 
      * @param value
@@ -173,7 +173,7 @@ public class Tracked
         return (this.declaration!= null);
     }
 
-    /*
+    /**
      * Gets the value of the record property.
      * 
      * @return
@@ -185,7 +185,7 @@ public class Tracked
         return record;
     }
 
-    /*
+    /**
      * Sets the value of the record property.
      * 
      * @param value

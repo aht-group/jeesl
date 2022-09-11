@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.exlp.xml.net.Url;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -64,7 +64,7 @@ public class App
     @XmlAttribute(name = "secret")
     protected String secret;
 
-    /*
+    /**
      * Gets the value of the redirect property.
      * 
      * @return
@@ -76,7 +76,7 @@ public class App
         return redirect;
     }
 
-    /*
+    /**
      * Sets the value of the redirect property.
      * 
      * @param value
@@ -92,7 +92,7 @@ public class App
         return (this.redirect!= null);
     }
 
-    /*
+    /**
      * Gets the value of the appId property.
      * 
      * @return
@@ -104,7 +104,7 @@ public class App
         return appId;
     }
 
-    /*
+    /**
      * Sets the value of the appId property.
      * 
      * @param value
@@ -120,7 +120,7 @@ public class App
         return (this.appId!= null);
     }
 
-    /*
+    /**
      * Gets the value of the scope property.
      * 
      * @return
@@ -132,7 +132,7 @@ public class App
         return scope;
     }
 
-    /*
+    /**
      * Sets the value of the scope property.
      * 
      * @param value
@@ -148,7 +148,7 @@ public class App
         return (this.scope!= null);
     }
 
-    /*
+    /**
      * Gets the value of the secret property.
      * 
      * @return
@@ -160,7 +160,7 @@ public class App
         return secret;
     }
 
-    /*
+    /**
      * Sets the value of the secret property.
      * 
      * @param value
@@ -177,7 +177,25 @@ public class App
     }
 
 
-
+    /**
+     * <p>Java class for anonymous complex type.
+     * 
+     * <p>The following schema fragment specifies the expected content contained within this class.
+     * 
+     * <pre>
+     * &lt;complexType&gt;
+     *   &lt;complexContent&gt;
+     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+     *       &lt;sequence&gt;
+     *         &lt;element ref="{http://exlp.sf.net/net}url" maxOccurs="unbounded"/&gt;
+     *       &lt;/sequence&gt;
+     *     &lt;/restriction&gt;
+     *   &lt;/complexContent&gt;
+     * &lt;/complexType&gt;
+     * </pre>
+     * 
+     * 
+     */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
         "url"
@@ -190,7 +208,28 @@ public class App
         @XmlElement(namespace = "http://exlp.sf.net/net", required = true)
         protected List<Url> url;
 
-       
+        /**
+         * Gets the value of the url property.
+         * 
+         * <p>
+         * This accessor method returns a reference to the live list,
+         * not a snapshot. Therefore any modification you make to the
+         * returned list will be present inside the JAXB object.
+         * This is why there is not a <CODE>set</CODE> method for the url property.
+         * 
+         * <p>
+         * For example, to add a new item, do as follows:
+         * <pre>
+         *    getUrl().add(newItem);
+         * </pre>
+         * 
+         * 
+         * <p>
+         * Objects of the following type(s) are allowed in the list
+         * {@link Url }
+         * 
+         * 
+         */
         public List<Url> getUrl() {
             if (url == null) {
                 url = new ArrayList<Url>();

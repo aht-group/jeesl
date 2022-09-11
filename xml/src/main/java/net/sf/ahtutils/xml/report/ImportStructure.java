@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -44,7 +44,7 @@ public class ImportStructure implements Serializable
     @XmlAttribute(name = "targetClass")
     protected String targetClass;
 
-    /*
+    /**
      * Gets the value of the dataAssociations property.
      * 
      * @return
@@ -56,7 +56,7 @@ public class ImportStructure implements Serializable
         return dataAssociations;
     }
 
-    /*
+    /**
      * Sets the value of the dataAssociations property.
      * 
      * @param value
@@ -72,7 +72,7 @@ public class ImportStructure implements Serializable
         return (this.dataAssociations!= null);
     }
 
-    /*
+    /**
      * Gets the value of the targetClass property.
      * 
      * @return
@@ -84,7 +84,7 @@ public class ImportStructure implements Serializable
         return targetClass;
     }
 
-    /*
+    /**
      * Sets the value of the targetClass property.
      * 
      * @param value

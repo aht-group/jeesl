@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -24,10 +24,8 @@ import net.sf.ahtutils.xml.status.Langs;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/access}groups"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/access}roles"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/access}views"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/access}usecases"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -45,10 +43,8 @@ import net.sf.ahtutils.xml.status.Langs;
 @XmlType(name = "", propOrder = {
     "langs",
     "descriptions",
-    "groups",
     "roles",
-    "views",
-    "usecases"
+    "views"
 })
 @XmlRootElement(name = "category")
 public class Category
@@ -60,12 +56,10 @@ public class Category
     protected Langs langs;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Descriptions descriptions;
-
     @XmlElement(required = true)
     protected Roles roles;
     @XmlElement(required = true)
     protected Views views;
-
     @XmlAttribute(name = "code")
     protected String code;
     @XmlAttribute(name = "label")
@@ -77,7 +71,7 @@ public class Category
     @XmlAttribute(name = "documentation")
     protected Boolean documentation;
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -89,7 +83,7 @@ public class Category
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -105,7 +99,7 @@ public class Category
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -117,7 +111,7 @@ public class Category
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -133,17 +127,7 @@ public class Category
         return (this.descriptions!= null);
     }
 
-    /*
-     * Gets the value of the groups property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Groups }
-     *     
-     */
-
-
-    /*
+    /**
      * Gets the value of the roles property.
      * 
      * @return
@@ -155,7 +139,7 @@ public class Category
         return roles;
     }
 
-    /*
+    /**
      * Sets the value of the roles property.
      * 
      * @param value
@@ -171,7 +155,7 @@ public class Category
         return (this.roles!= null);
     }
 
-    /*
+    /**
      * Gets the value of the views property.
      * 
      * @return
@@ -183,7 +167,7 @@ public class Category
         return views;
     }
 
-    /*
+    /**
      * Sets the value of the views property.
      * 
      * @param value
@@ -199,8 +183,7 @@ public class Category
         return (this.views!= null);
     }
 
-  
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -212,7 +195,7 @@ public class Category
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -228,7 +211,7 @@ public class Category
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -240,7 +223,7 @@ public class Category
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value
@@ -256,7 +239,7 @@ public class Category
         return (this.label!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -268,7 +251,7 @@ public class Category
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -288,12 +271,19 @@ public class Category
         this.position = null;
     }
 
-
+    /**
+     * Gets the value of the visible property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
     public boolean isVisible() {
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -313,7 +303,7 @@ public class Category
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the documentation property.
      * 
      * @return
@@ -325,7 +315,7 @@ public class Category
         return documentation;
     }
 
-    /*
+    /**
      * Sets the value of the documentation property.
      * 
      * @param value

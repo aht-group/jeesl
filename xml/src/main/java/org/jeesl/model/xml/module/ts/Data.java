@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -60,7 +60,7 @@ public class Data
     @XmlAttribute(name = "y")
     protected Double y;
 
-    /*
+    /**
      * Gets the value of the points property.
      * 
      * @return
@@ -72,7 +72,7 @@ public class Data
         return points;
     }
 
-    /*
+    /**
      * Sets the value of the points property.
      * 
      * @param value
@@ -88,7 +88,7 @@ public class Data
         return (this.points!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -100,7 +100,7 @@ public class Data
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -120,7 +120,7 @@ public class Data
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the record property.
      * 
      * @return
@@ -132,7 +132,7 @@ public class Data
         return record;
     }
 
-    /*
+    /**
      * Sets the value of the record property.
      * 
      * @param value
@@ -148,7 +148,7 @@ public class Data
         return (this.record!= null);
     }
 
-    /*
+    /**
      * Gets the value of the value property.
      * 
      * @return
@@ -160,7 +160,7 @@ public class Data
         return value;
     }
 
-    /*
+    /**
      * Sets the value of the value property.
      * 
      * @param value
@@ -180,7 +180,7 @@ public class Data
         this.value = null;
     }
 
-    /*
+    /**
      * Gets the value of the x property.
      * 
      * @return
@@ -192,7 +192,7 @@ public class Data
         return x;
     }
 
-    /*
+    /**
      * Sets the value of the x property.
      * 
      * @param value
@@ -212,7 +212,7 @@ public class Data
         this.x = null;
     }
 
-    /*
+    /**
      * Gets the value of the y property.
      * 
      * @return
@@ -224,7 +224,7 @@ public class Data
         return y;
     }
 
-    /*
+    /**
      * Sets the value of the y property.
      * 
      * @param value

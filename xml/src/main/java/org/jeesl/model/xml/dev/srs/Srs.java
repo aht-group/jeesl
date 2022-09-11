@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -67,7 +67,7 @@ public class Srs
     @XmlAttribute(name = "code")
     protected String code;
 
-    /*
+    /**
      * Gets the value of the version property.
      * 
      * @return
@@ -79,7 +79,7 @@ public class Srs
         return version;
     }
 
-    /*
+    /**
      * Sets the value of the version property.
      * 
      * @param value
@@ -95,7 +95,7 @@ public class Srs
         return (this.version!= null);
     }
 
-    /*
+    /**
      * Gets the value of the meta property.
      * 
      * @return
@@ -107,7 +107,7 @@ public class Srs
         return meta;
     }
 
-    /*
+    /**
      * Sets the value of the meta property.
      * 
      * @param value
@@ -123,7 +123,7 @@ public class Srs
         return (this.meta!= null);
     }
 
-    /*
+    /**
      * Gets the value of the actors property.
      * 
      * @return
@@ -135,7 +135,7 @@ public class Srs
         return actors;
     }
 
-    /*
+    /**
      * Sets the value of the actors property.
      * 
      * @param value
@@ -151,7 +151,7 @@ public class Srs
         return (this.actors!= null);
     }
 
-    /*
+    /**
      * Gets the value of the releases property.
      * 
      * @return
@@ -163,7 +163,7 @@ public class Srs
         return releases;
     }
 
-    /*
+    /**
      * Sets the value of the releases property.
      * 
      * @param value
@@ -179,7 +179,7 @@ public class Srs
         return (this.releases!= null);
     }
 
-    /*
+    /**
      * Gets the value of the frs property.
      * 
      * @return
@@ -191,7 +191,7 @@ public class Srs
         return frs;
     }
 
-    /*
+    /**
      * Sets the value of the frs property.
      * 
      * @param value
@@ -207,7 +207,7 @@ public class Srs
         return (this.frs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the chapter property.
      * 
      * <p>
@@ -244,7 +244,7 @@ public class Srs
         this.chapter = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -256,7 +256,7 @@ public class Srs
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value

@@ -13,7 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -49,7 +49,7 @@ public class Uptime
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar since;
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -61,7 +61,7 @@ public class Uptime
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -77,7 +77,7 @@ public class Uptime
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the since property.
      * 
      * @return
@@ -89,7 +89,7 @@ public class Uptime
         return since;
     }
 
-    /*
+    /**
      * Sets the value of the since property.
      * 
      * @param value

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,7 @@ public class Docker
     @XmlAttribute(name = "label")
     protected String label;
 
-    /*
+    /**
      * Gets the value of the system property.
      * 
      * @return
@@ -69,7 +69,7 @@ public class Docker
         return system;
     }
 
-    /*
+    /**
      * Sets the value of the system property.
      * 
      * @param value
@@ -85,7 +85,7 @@ public class Docker
         return (this.system!= null);
     }
 
-    /*
+    /**
      * Gets the value of the container property.
      * 
      * <p>
@@ -122,7 +122,7 @@ public class Docker
         this.container = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -134,7 +134,7 @@ public class Docker
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -154,7 +154,7 @@ public class Docker
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -166,7 +166,7 @@ public class Docker
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -182,7 +182,7 @@ public class Docker
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -194,7 +194,7 @@ public class Docker
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value

@@ -14,7 +14,7 @@ import net.sf.ahtutils.xml.status.Description;
 import org.jeesl.model.xml.text.Remark;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -70,7 +70,7 @@ public class Section
     @XmlAttribute(name = "visible")
     protected Boolean visible;
 
-    /*
+    /**
      * Gets the value of the description property.
      * 
      * @return
@@ -82,7 +82,7 @@ public class Section
         return description;
     }
 
-    /*
+    /**
      * Sets the value of the description property.
      * 
      * @param value
@@ -98,7 +98,7 @@ public class Section
         return (this.description!= null);
     }
 
-    /*
+    /**
      * Gets the value of the remark property.
      * 
      * @return
@@ -110,7 +110,7 @@ public class Section
         return remark;
     }
 
-    /*
+    /**
      * Sets the value of the remark property.
      * 
      * @param value
@@ -126,7 +126,7 @@ public class Section
         return (this.remark!= null);
     }
 
-    /*
+    /**
      * Gets the value of the section property.
      * 
      * <p>
@@ -163,7 +163,7 @@ public class Section
         this.section = null;
     }
 
-    /*
+    /**
      * Gets the value of the question property.
      * 
      * <p>
@@ -200,7 +200,7 @@ public class Section
         this.question = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -212,7 +212,7 @@ public class Section
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -232,7 +232,7 @@ public class Section
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -244,7 +244,7 @@ public class Section
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -264,7 +264,7 @@ public class Section
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -276,7 +276,7 @@ public class Section
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -292,7 +292,7 @@ public class Section
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -304,7 +304,7 @@ public class Section
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value

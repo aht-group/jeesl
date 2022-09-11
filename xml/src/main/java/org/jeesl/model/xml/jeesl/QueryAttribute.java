@@ -12,7 +12,7 @@ import org.jeesl.model.xml.system.io.attribute.Attribute;
 import org.jeesl.model.xml.system.io.attribute.Attributes;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -51,7 +51,7 @@ public class QueryAttribute
     @XmlAttribute(name = "localeCode")
     protected String localeCode;
 
-    /*
+    /**
      * Gets the value of the attributes property.
      * 
      * @return
@@ -63,7 +63,7 @@ public class QueryAttribute
         return attributes;
     }
 
-    /*
+    /**
      * Sets the value of the attributes property.
      * 
      * @param value
@@ -79,7 +79,7 @@ public class QueryAttribute
         return (this.attributes!= null);
     }
 
-    /*
+    /**
      * Gets the value of the attribute property.
      * 
      * @return
@@ -91,7 +91,7 @@ public class QueryAttribute
         return attribute;
     }
 
-    /*
+    /**
      * Sets the value of the attribute property.
      * 
      * @param value
@@ -107,7 +107,7 @@ public class QueryAttribute
         return (this.attribute!= null);
     }
 
-    /*
+    /**
      * Gets the value of the localeCode property.
      * 
      * @return
@@ -119,7 +119,7 @@ public class QueryAttribute
         return localeCode;
     }
 
-    /*
+    /**
      * Sets the value of the localeCode property.
      * 
      * @param value

@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -57,7 +57,28 @@ public class XlsMultiColumn implements Serializable
     @XmlAttribute(name = "query")
     protected String query;
 
-
+    /**
+     * Gets the value of the xlsColumn property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the xlsColumn property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getXlsColumn().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link XlsColumn }
+     * 
+     * 
+     */
     public List<XlsColumn> getXlsColumn() {
         if (xlsColumn == null) {
             xlsColumn = new ArrayList<XlsColumn>();
@@ -73,7 +94,7 @@ public class XlsMultiColumn implements Serializable
         this.xlsColumn = null;
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -85,7 +106,7 @@ public class XlsMultiColumn implements Serializable
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -101,7 +122,7 @@ public class XlsMultiColumn implements Serializable
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -113,7 +134,7 @@ public class XlsMultiColumn implements Serializable
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -129,7 +150,7 @@ public class XlsMultiColumn implements Serializable
         return (this.id!= null);
     }
 
-    /*
+    /**
      * Gets the value of the columnLabel property.
      * 
      * @return
@@ -141,7 +162,7 @@ public class XlsMultiColumn implements Serializable
         return columnLabel;
     }
 
-    /*
+    /**
      * Sets the value of the columnLabel property.
      * 
      * @param value
@@ -157,7 +178,7 @@ public class XlsMultiColumn implements Serializable
         return (this.columnLabel!= null);
     }
 
-    /*
+    /**
      * Gets the value of the query property.
      * 
      * @return
@@ -169,7 +190,7 @@ public class XlsMultiColumn implements Serializable
         return query;
     }
 
-    /*
+    /**
      * Sets the value of the query property.
      * 
      * @param value

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -43,7 +43,7 @@ public class Seed
     @XmlAttribute(name = "content")
     protected String content;
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -55,7 +55,7 @@ public class Seed
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -71,7 +71,7 @@ public class Seed
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the template property.
      * 
      * @return
@@ -83,7 +83,7 @@ public class Seed
         return template;
     }
 
-    /*
+    /**
      * Sets the value of the template property.
      * 
      * @param value
@@ -99,7 +99,7 @@ public class Seed
         return (this.template!= null);
     }
 
-    /*
+    /**
      * Gets the value of the content property.
      * 
      * @return
@@ -111,7 +111,7 @@ public class Seed
         return content;
     }
 
-    /*
+    /**
      * Sets the value of the content property.
      * 
      * @param value

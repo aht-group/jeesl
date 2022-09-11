@@ -16,7 +16,7 @@ import net.sf.ahtutils.xml.status.Lang;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -73,7 +73,7 @@ public class ConstraintScope
     @XmlAttribute(name = "code")
     protected String code;
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -85,7 +85,7 @@ public class ConstraintScope
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -101,7 +101,7 @@ public class ConstraintScope
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -113,7 +113,7 @@ public class ConstraintScope
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -129,7 +129,28 @@ public class ConstraintScope
         return (this.descriptions!= null);
     }
 
-  
+    /**
+     * Gets the value of the constraint property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the constraint property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getConstraint().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Constraint }
+     * 
+     * 
+     */
     public List<Constraint> getConstraint() {
         if (constraint == null) {
             constraint = new ArrayList<Constraint>();
@@ -145,7 +166,7 @@ public class ConstraintScope
         this.constraint = null;
     }
 
-    /*
+    /**
      * Gets the value of the lang property.
      * 
      * @return
@@ -157,7 +178,7 @@ public class ConstraintScope
         return lang;
     }
 
-    /*
+    /**
      * Sets the value of the lang property.
      * 
      * @param value
@@ -173,7 +194,7 @@ public class ConstraintScope
         return (this.lang!= null);
     }
 
-    /*
+    /**
      * Gets the value of the description property.
      * 
      * @return
@@ -185,7 +206,7 @@ public class ConstraintScope
         return description;
     }
 
-    /*
+    /**
      * Sets the value of the description property.
      * 
      * @param value
@@ -201,7 +222,7 @@ public class ConstraintScope
         return (this.description!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -213,7 +234,7 @@ public class ConstraintScope
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -233,7 +254,7 @@ public class ConstraintScope
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the category property.
      * 
      * @return
@@ -245,7 +266,7 @@ public class ConstraintScope
         return category;
     }
 
-    /*
+    /**
      * Sets the value of the category property.
      * 
      * @param value
@@ -261,7 +282,7 @@ public class ConstraintScope
         return (this.category!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -273,7 +294,7 @@ public class ConstraintScope
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value

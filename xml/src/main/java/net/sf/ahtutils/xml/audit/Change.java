@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -54,7 +54,7 @@ public class Change
     @XmlAttribute(name = "text")
     protected String text;
 
-    /*
+    /**
      * Gets the value of the scope property.
      * 
      * @return
@@ -66,7 +66,7 @@ public class Change
         return scope;
     }
 
-    /*
+    /**
      * Sets the value of the scope property.
      * 
      * @param value
@@ -82,7 +82,7 @@ public class Change
         return (this.scope!= null);
     }
 
-    /*
+    /**
      * Gets the value of the aid property.
      * 
      * @return
@@ -94,7 +94,7 @@ public class Change
         return aid;
     }
 
-    /*
+    /**
      * Sets the value of the aid property.
      * 
      * @param value
@@ -114,7 +114,7 @@ public class Change
         this.aid = null;
     }
 
-    /*
+    /**
      * Gets the value of the action property.
      * 
      * @return
@@ -126,7 +126,7 @@ public class Change
         return action;
     }
 
-    /*
+    /**
      * Sets the value of the action property.
      * 
      * @param value
@@ -142,7 +142,7 @@ public class Change
         return (this.action!= null);
     }
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -154,7 +154,7 @@ public class Change
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -170,7 +170,7 @@ public class Change
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the text property.
      * 
      * @return
@@ -182,7 +182,7 @@ public class Change
         return text;
     }
 
-    /*
+    /**
      * Sets the value of the text property.
      * 
      * @param value

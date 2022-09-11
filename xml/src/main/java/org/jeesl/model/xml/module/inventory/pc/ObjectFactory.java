@@ -4,7 +4,7 @@ package org.jeesl.model.xml.module.inventory.pc;
 import javax.xml.bind.annotation.XmlRegistry;
 
 
-/*
+/**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
  * generated in the org.jeesl.model.xml.module.inventory.pc package. 
@@ -22,14 +22,14 @@ import javax.xml.bind.annotation.XmlRegistry;
 public class ObjectFactory {
 
 
-    /*
+    /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.module.inventory.pc
      * 
      */
     public ObjectFactory() {
     }
 
-    /*
+    /**
      * Create an instance of {@link Computer }
      * 
      */
@@ -37,7 +37,7 @@ public class ObjectFactory {
         return new Computer();
     }
 
-    /*
+    /**
      * Create an instance of {@link Hardware }
      * 
      */
@@ -45,7 +45,7 @@ public class ObjectFactory {
         return new Hardware();
     }
 
-    /*
+    /**
      * Create an instance of {@link Software }
      * 
      */
@@ -53,7 +53,7 @@ public class ObjectFactory {
         return new Software();
     }
 
-    /*
+    /**
      * Create an instance of {@link Updates }
      * 
      */
@@ -61,7 +61,7 @@ public class ObjectFactory {
         return new Updates();
     }
 
-    /*
+    /**
      * Create an instance of {@link Update }
      * 
      */

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -41,7 +41,7 @@ public class From
     @XmlElement(required = true)
     protected EmailAddress emailAddress;
 
-    /*
+    /**
      * Gets the value of the emailAddress property.
      * 
      * @return
@@ -53,7 +53,7 @@ public class From
         return emailAddress;
     }
 
-    /*
+    /**
      * Sets the value of the emailAddress property.
      * 
      * @param value

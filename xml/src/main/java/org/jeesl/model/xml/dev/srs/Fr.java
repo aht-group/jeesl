@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.openfuxml.content.ofx.Sections;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Fr implements Serializable
     @XmlAttribute(name = "name")
     protected String name;
 
-    /*
+    /**
      * Gets the value of the module property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Fr implements Serializable
         return module;
     }
 
-    /*
+    /**
      * Sets the value of the module property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class Fr implements Serializable
         return (this.module!= null);
     }
 
-    /*
+    /**
      * Gets the value of the sections property.
      * 
      * @return
@@ -92,7 +92,7 @@ public class Fr implements Serializable
         return sections;
     }
 
-    /*
+    /**
      * Sets the value of the sections property.
      * 
      * @param value
@@ -108,7 +108,7 @@ public class Fr implements Serializable
         return (this.sections!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -120,7 +120,7 @@ public class Fr implements Serializable
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -136,7 +136,7 @@ public class Fr implements Serializable
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the name property.
      * 
      * @return
@@ -148,7 +148,7 @@ public class Fr implements Serializable
         return name;
     }
 
-    /*
+    /**
      * Sets the value of the name property.
      * 
      * @param value

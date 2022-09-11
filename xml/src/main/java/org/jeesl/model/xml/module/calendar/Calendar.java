@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -52,7 +52,7 @@ public class Calendar
     @XmlAttribute(name = "id")
     protected Long id;
 
-    /*
+    /**
      * Gets the value of the type property.
      * 
      * @return
@@ -64,7 +64,7 @@ public class Calendar
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -80,7 +80,7 @@ public class Calendar
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the item property.
      * 
      * <p>
@@ -117,7 +117,7 @@ public class Calendar
         this.item = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -129,7 +129,7 @@ public class Calendar
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value

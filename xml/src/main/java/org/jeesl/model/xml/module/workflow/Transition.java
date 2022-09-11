@@ -12,7 +12,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -61,7 +61,7 @@ public class Transition
     @XmlAttribute(name = "label")
     protected String label;
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -73,7 +73,7 @@ public class Transition
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -89,7 +89,7 @@ public class Transition
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -101,7 +101,7 @@ public class Transition
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -117,7 +117,7 @@ public class Transition
         return (this.descriptions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the stage property.
      * 
      * @return
@@ -129,7 +129,7 @@ public class Transition
         return stage;
     }
 
-    /*
+    /**
      * Sets the value of the stage property.
      * 
      * @param value
@@ -145,7 +145,7 @@ public class Transition
         return (this.stage!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -157,7 +157,7 @@ public class Transition
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -177,7 +177,7 @@ public class Transition
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -189,7 +189,7 @@ public class Transition
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value
@@ -209,7 +209,7 @@ public class Transition
         this.position = null;
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -221,7 +221,7 @@ public class Transition
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value

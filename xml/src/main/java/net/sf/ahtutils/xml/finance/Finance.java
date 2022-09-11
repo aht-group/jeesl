@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -69,7 +69,28 @@ public class Finance
     @XmlAttribute(name = "flagged")
     protected Boolean flagged;
 
-
+    /**
+     * Gets the value of the finance property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the finance property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getFinance().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Finance }
+     * 
+     * 
+     */
     public List<Finance> getFinance() {
         if (finance == null) {
             finance = new ArrayList<Finance>();
@@ -85,7 +106,7 @@ public class Finance
         this.finance = null;
     }
 
-    /*
+    /**
      * Gets the value of the currency property.
      * 
      * @return
@@ -97,7 +118,7 @@ public class Finance
         return currency;
     }
 
-    /*
+    /**
      * Sets the value of the currency property.
      * 
      * @param value
@@ -113,7 +134,7 @@ public class Finance
         return (this.currency!= null);
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -125,7 +146,7 @@ public class Finance
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -145,7 +166,7 @@ public class Finance
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the nr property.
      * 
      * @return
@@ -157,7 +178,7 @@ public class Finance
         return nr;
     }
 
-    /*
+    /**
      * Sets the value of the nr property.
      * 
      * @param value
@@ -177,7 +198,7 @@ public class Finance
         this.nr = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -189,7 +210,7 @@ public class Finance
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -205,7 +226,7 @@ public class Finance
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -217,7 +238,7 @@ public class Finance
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value
@@ -233,7 +254,7 @@ public class Finance
         return (this.label!= null);
     }
 
-    /*
+    /**
      * Gets the value of the value property.
      * 
      * @return
@@ -245,7 +266,7 @@ public class Finance
         return value;
     }
 
-    /*
+    /**
      * Sets the value of the value property.
      * 
      * @param value
@@ -265,7 +286,7 @@ public class Finance
         this.value = null;
     }
 
-    /*
+    /**
      * Gets the value of the symbol property.
      * 
      * @return
@@ -277,7 +298,7 @@ public class Finance
         return symbol;
     }
 
-    /*
+    /**
      * Sets the value of the symbol property.
      * 
      * @param value
@@ -293,7 +314,7 @@ public class Finance
         return (this.symbol!= null);
     }
 
-    /*
+    /**
      * Gets the value of the flagged property.
      * 
      * @return
@@ -305,7 +326,7 @@ public class Finance
         return flagged;
     }
 
-    /*
+    /**
      * Sets the value of the flagged property.
      * 
      * @param value

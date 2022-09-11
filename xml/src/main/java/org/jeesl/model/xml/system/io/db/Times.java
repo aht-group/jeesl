@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -50,7 +50,7 @@ public class Times
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar reference;
 
-    /*
+    /**
      * Gets the value of the time property.
      * 
      * <p>
@@ -87,7 +87,7 @@ public class Times
         this.time = null;
     }
 
-    /*
+    /**
      * Gets the value of the reference property.
      * 
      * @return
@@ -99,7 +99,7 @@ public class Times
         return reference;
     }
 
-    /*
+    /**
      * Sets the value of the reference property.
      * 
      * @param value

@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.module.ts.Transaction;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -46,7 +46,7 @@ public class QueryTs
     @XmlAttribute(name = "localeCode")
     protected String localeCode;
 
-    /*
+    /**
      * Gets the value of the transaction property.
      * 
      * @return
@@ -58,7 +58,7 @@ public class QueryTs
         return transaction;
     }
 
-    /*
+    /**
      * Sets the value of the transaction property.
      * 
      * @param value
@@ -74,7 +74,7 @@ public class QueryTs
         return (this.transaction!= null);
     }
 
-    /*
+    /**
      * Gets the value of the localeCode property.
      * 
      * @return
@@ -86,7 +86,7 @@ public class QueryTs
         return localeCode;
     }
 
-    /*
+    /**
      * Sets the value of the localeCode property.
      * 
      * @param value

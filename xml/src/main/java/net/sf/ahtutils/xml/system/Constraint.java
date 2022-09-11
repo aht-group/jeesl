@@ -19,7 +19,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import net.sf.ahtutils.xml.status.Type;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -82,12 +82,19 @@ public class Constraint
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar since;
 
-
+    /**
+     * Gets the value of the type property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Type }
+     *     
+     */
     public Type getType() {
         return type;
     }
 
-    /*
+    /**
      * Sets the value of the type property.
      * 
      * @param value
@@ -103,7 +110,7 @@ public class Constraint
         return (this.type!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -115,7 +122,7 @@ public class Constraint
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -131,7 +138,7 @@ public class Constraint
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -143,7 +150,7 @@ public class Constraint
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -159,7 +166,28 @@ public class Constraint
         return (this.descriptions!= null);
     }
 
-   
+    /**
+     * Gets the value of the constraintAttribute property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the constraintAttribute property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getConstraintAttribute().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ConstraintAttribute }
+     * 
+     * 
+     */
     public List<ConstraintAttribute> getConstraintAttribute() {
         if (constraintAttribute == null) {
             constraintAttribute = new ArrayList<ConstraintAttribute>();
@@ -175,7 +203,7 @@ public class Constraint
         this.constraintAttribute = null;
     }
 
-    /*
+    /**
      * Gets the value of the lang property.
      * 
      * @return
@@ -187,7 +215,7 @@ public class Constraint
         return lang;
     }
 
-    /*
+    /**
      * Sets the value of the lang property.
      * 
      * @param value
@@ -203,7 +231,7 @@ public class Constraint
         return (this.lang!= null);
     }
 
-    /*
+    /**
      * Gets the value of the description property.
      * 
      * @return
@@ -215,7 +243,7 @@ public class Constraint
         return description;
     }
 
-    /*
+    /**
      * Sets the value of the description property.
      * 
      * @param value
@@ -231,7 +259,7 @@ public class Constraint
         return (this.description!= null);
     }
 
-    /*
+    /**
      * Gets the value of the constraintSolution property.
      * 
      * @return
@@ -243,7 +271,7 @@ public class Constraint
         return constraintSolution;
     }
 
-    /*
+    /**
      * Sets the value of the constraintSolution property.
      * 
      * @param value
@@ -259,7 +287,7 @@ public class Constraint
         return (this.constraintSolution!= null);
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -271,7 +299,7 @@ public class Constraint
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -287,7 +315,7 @@ public class Constraint
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the since property.
      * 
      * @return
@@ -299,7 +327,7 @@ public class Constraint
         return since;
     }
 
-    /*
+    /**
      * Sets the value of the since property.
      * 
      * @param value

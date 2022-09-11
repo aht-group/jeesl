@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -43,7 +43,7 @@ public class Lang
     @XmlAttribute(name = "translation")
     protected String translation;
 
-    /*
+    /**
      * Gets the value of the version property.
      * 
      * @return
@@ -55,7 +55,7 @@ public class Lang
         return version;
     }
 
-    /*
+    /**
      * Sets the value of the version property.
      * 
      * @param value
@@ -75,7 +75,7 @@ public class Lang
         this.version = null;
     }
 
-    /*
+    /**
      * Gets the value of the key property.
      * 
      * @return
@@ -87,7 +87,7 @@ public class Lang
         return key;
     }
 
-    /*
+    /**
      * Sets the value of the key property.
      * 
      * @param value
@@ -103,7 +103,7 @@ public class Lang
         return (this.key!= null);
     }
 
-    /*
+    /**
      * Gets the value of the translation property.
      * 
      * @return
@@ -115,7 +115,7 @@ public class Lang
         return translation;
     }
 
-    /*
+    /**
      * Sets the value of the translation property.
      * 
      * @param value

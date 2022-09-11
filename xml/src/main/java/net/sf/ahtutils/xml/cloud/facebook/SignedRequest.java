@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -56,7 +56,7 @@ public class SignedRequest
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar expires;
 
-    /*
+    /**
      * Gets the value of the user property.
      * 
      * @return
@@ -68,7 +68,7 @@ public class SignedRequest
         return user;
     }
 
-    /*
+    /**
      * Sets the value of the user property.
      * 
      * @param value
@@ -84,7 +84,7 @@ public class SignedRequest
         return (this.user!= null);
     }
 
-    /*
+    /**
      * Gets the value of the oauth property.
      * 
      * @return
@@ -96,7 +96,7 @@ public class SignedRequest
         return oauth;
     }
 
-    /*
+    /**
      * Sets the value of the oauth property.
      * 
      * @param value
@@ -112,7 +112,7 @@ public class SignedRequest
         return (this.oauth!= null);
     }
 
-    /*
+    /**
      * Gets the value of the issuedAt property.
      * 
      * @return
@@ -124,7 +124,7 @@ public class SignedRequest
         return issuedAt;
     }
 
-    /*
+    /**
      * Sets the value of the issuedAt property.
      * 
      * @param value
@@ -140,7 +140,7 @@ public class SignedRequest
         return (this.issuedAt!= null);
     }
 
-    /*
+    /**
      * Gets the value of the expires property.
      * 
      * @return
@@ -152,7 +152,7 @@ public class SignedRequest
         return expires;
     }
 
-    /*
+    /**
      * Sets the value of the expires property.
      * 
      * @param value

@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -77,7 +77,7 @@ public class Call
     @XmlAttribute(name = "position")
     protected Integer position;
 
-    /*
+    /**
      * Gets the value of the transistions property.
      * 
      * @return
@@ -89,7 +89,7 @@ public class Call
         return transistions;
     }
 
-    /*
+    /**
      * Sets the value of the transistions property.
      * 
      * @param value
@@ -105,7 +105,7 @@ public class Call
         return (this.transistions!= null);
     }
 
-    /*
+    /**
      * Gets the value of the langs property.
      * 
      * @return
@@ -117,7 +117,7 @@ public class Call
         return langs;
     }
 
-    /*
+    /**
      * Sets the value of the langs property.
      * 
      * @param value
@@ -133,7 +133,7 @@ public class Call
         return (this.langs!= null);
     }
 
-    /*
+    /**
      * Gets the value of the descriptions property.
      * 
      * @return
@@ -145,7 +145,7 @@ public class Call
         return descriptions;
     }
 
-    /*
+    /**
      * Sets the value of the descriptions property.
      * 
      * @param value
@@ -161,7 +161,28 @@ public class Call
         return (this.descriptions!= null);
     }
 
-
+    /**
+     * Gets the value of the lang property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the lang property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLang().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Lang }
+     * 
+     * 
+     */
     public List<Lang> getLang() {
         if (lang == null) {
             lang = new ArrayList<Lang>();
@@ -177,7 +198,7 @@ public class Call
         this.lang = null;
     }
 
-    /*
+    /**
      * Gets the value of the id property.
      * 
      * @return
@@ -189,7 +210,7 @@ public class Call
         return id;
     }
 
-    /*
+    /**
      * Sets the value of the id property.
      * 
      * @param value
@@ -209,7 +230,7 @@ public class Call
         this.id = null;
     }
 
-    /*
+    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -221,7 +242,7 @@ public class Call
         return code;
     }
 
-    /*
+    /**
      * Sets the value of the code property.
      * 
      * @param value
@@ -237,7 +258,7 @@ public class Call
         return (this.code!= null);
     }
 
-    /*
+    /**
      * Gets the value of the group property.
      * 
      * @return
@@ -249,7 +270,7 @@ public class Call
         return group;
     }
 
-    /*
+    /**
      * Sets the value of the group property.
      * 
      * @param value
@@ -265,7 +286,7 @@ public class Call
         return (this.group!= null);
     }
 
-    /*
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -277,7 +298,7 @@ public class Call
         return label;
     }
 
-    /*
+    /**
      * Sets the value of the label property.
      * 
      * @param value
@@ -293,7 +314,7 @@ public class Call
         return (this.label!= null);
     }
 
-    /*
+    /**
      * Gets the value of the visible property.
      * 
      * @return
@@ -305,7 +326,7 @@ public class Call
         return visible;
     }
 
-    /*
+    /**
      * Sets the value of the visible property.
      * 
      * @param value
@@ -325,7 +346,7 @@ public class Call
         this.visible = null;
     }
 
-    /*
+    /**
      * Gets the value of the image property.
      * 
      * @return
@@ -337,7 +358,7 @@ public class Call
         return image;
     }
 
-    /*
+    /**
      * Sets the value of the image property.
      * 
      * @param value
@@ -353,7 +374,7 @@ public class Call
         return (this.image!= null);
     }
 
-    /*
+    /**
      * Gets the value of the position property.
      * 
      * @return
@@ -365,7 +386,7 @@ public class Call
         return position;
     }
 
-    /*
+    /**
      * Sets the value of the position property.
      * 
      * @param value

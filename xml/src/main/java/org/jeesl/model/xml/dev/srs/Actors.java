@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
-/*
+/**
  * <p>Java class for anonymous complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
@@ -51,7 +51,7 @@ public class Actors
     @XmlAttribute(name = "module")
     protected String module;
 
-    /*
+    /**
      * Gets the value of the actors property.
      * 
      * <p>
@@ -88,7 +88,7 @@ public class Actors
         this.actors = null;
     }
 
-    /*
+    /**
      * Gets the value of the actor property.
      * 
      * <p>
@@ -125,7 +125,7 @@ public class Actors
         this.actor = null;
     }
 
-    /*
+    /**
      * Gets the value of the module property.
      * 
      * @return
@@ -137,7 +137,7 @@ public class Actors
         return module;
     }
 
-    /*
+    /**
      * Sets the value of the module property.
      * 
      * @param value
