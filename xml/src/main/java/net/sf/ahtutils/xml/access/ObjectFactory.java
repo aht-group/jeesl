@@ -3,8 +3,6 @@ package net.sf.ahtutils.xml.access;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
-import net.sf.ahtutils.xml.security.Role;
-
 
 /**
  * This object contains factory methods for each 
@@ -45,14 +43,6 @@ public class ObjectFactory {
      */
     public View createView() {
         return new View();
-    }
-
-    /**
-     * Create an instance of {@link Role }
-     * 
-     */
-    public Role createRole() {
-        return new Role();
     }
 
     /**

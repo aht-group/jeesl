@@ -2,21 +2,12 @@
 package net.sf.ahtutils.xml.aht;
 
 import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.jeesl.model.xml.module.survey.Answer;
-import org.jeesl.model.xml.module.survey.Survey;
-import org.jeesl.model.xml.module.survey.Surveys;
-import org.jeesl.model.xml.module.survey.Template;
-import org.jeesl.model.xml.module.survey.Templates;
-import org.jeesl.model.xml.system.revision.Entity;
-
 import net.sf.ahtutils.xml.qa.Test;
 import net.sf.ahtutils.xml.report.Report;
 import net.sf.ahtutils.xml.security.Category;
@@ -29,6 +20,12 @@ import net.sf.ahtutils.xml.status.Type;
 import net.sf.ahtutils.xml.symbol.Graphic;
 import net.sf.ahtutils.xml.utils.TrafficLight;
 import net.sf.ahtutils.xml.utils.TrafficLights;
+import org.jeesl.model.xml.module.survey.Answer;
+import org.jeesl.model.xml.module.survey.Survey;
+import org.jeesl.model.xml.module.survey.Surveys;
+import org.jeesl.model.xml.module.survey.Template;
+import org.jeesl.model.xml.module.survey.Templates;
+import org.jeesl.model.xml.system.revision.Entity;
 
 
 /**
@@ -41,7 +38,7 @@ import net.sf.ahtutils.xml.utils.TrafficLights;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/access}role"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}role"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}status"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}type"/&gt;
@@ -95,7 +92,7 @@ public class Query
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/access", required = true)
+    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
     protected Role role;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Langs langs;

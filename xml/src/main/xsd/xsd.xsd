@@ -109,7 +109,7 @@
     <xsd:element name="query">
         <xsd:complexType>
         	<xsd:sequence>
-                <xsd:element ref="a:role" maxOccurs="1"/>
+                <xsd:element ref="sec:role" maxOccurs="1"/>
         	    <xsd:element ref="s:langs" maxOccurs="1"/>
         	    <xsd:element ref="s:status" maxOccurs="1"/>
         	    <xsd:element ref="s:type" maxOccurs="1"/>
