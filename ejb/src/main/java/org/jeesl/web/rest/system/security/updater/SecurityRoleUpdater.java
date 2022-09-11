@@ -24,12 +24,12 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplat
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.xml.system.security.Security;
+import org.jeesl.model.xml.system.security.Usecase;
+import org.jeesl.model.xml.system.security.Usecases;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Security;
-import net.sf.ahtutils.xml.security.Usecase;
-import net.sf.ahtutils.xml.security.Usecases;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription, 
@@ -57,11 +57,11 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
         super(fbSecurity,fSecurity);
 	}
 	
-	@Override protected void iuChilds(C aclCategory, net.sf.ahtutils.xml.security.Category category) throws UtilsConfigurationException
+	@Override protected void iuChilds(C aclCategory, org.jeesl.model.xml.system.security.Category category) throws UtilsConfigurationException
 	{
 		if(category.isSetRoles() && category.getRoles().isSetRole())
 		{
-			for(net.sf.ahtutils.xml.security.Role role : category.getRoles().getRole())
+			for(org.jeesl.model.xml.system.security.Role role : category.getRoles().getRole())
 			{
 				updateRole.handled(role.getCode());
 				iuRole(aclCategory, role);
@@ -94,7 +94,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 	
 
 	
-	private void iuRole(C category, net.sf.ahtutils.xml.security.Role role) throws UtilsConfigurationException
+	private void iuRole(C category, org.jeesl.model.xml.system.security.Role role) throws UtilsConfigurationException
 	{
 		R ejb;
 		try

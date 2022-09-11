@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.security;
+package org.jeesl.model.xml.system.security;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}usecase" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}action" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,52 +32,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "usecase"
+    "action"
 })
-@XmlRootElement(name = "usecases")
-public class Usecases
+@XmlRootElement(name = "actions")
+public class Actions
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Usecase> usecase;
+    protected List<Action> action;
 
     /**
-     * Gets the value of the usecase property.
+     * Gets the value of the action property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the usecase property.
+     * This is why there is not a <CODE>set</CODE> method for the action property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getUsecase().add(newItem);
+     *    getAction().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Usecase }
+     * {@link Action }
      * 
      * 
      */
-    public List<Usecase> getUsecase() {
-        if (usecase == null) {
-            usecase = new ArrayList<Usecase>();
+    public List<Action> getAction() {
+        if (action == null) {
+            action = new ArrayList<Action>();
         }
-        return this.usecase;
+        return this.action;
     }
 
-    public boolean isSetUsecase() {
-        return ((this.usecase!= null)&&(!this.usecase.isEmpty()));
+    public boolean isSetAction() {
+        return ((this.action!= null)&&(!this.action.isEmpty()));
     }
 
-    public void unsetUsecase() {
-        this.usecase = null;
+    public void unsetAction() {
+        this.action = null;
     }
 
 }

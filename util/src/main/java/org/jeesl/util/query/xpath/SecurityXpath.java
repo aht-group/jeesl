@@ -3,14 +3,14 @@ package org.jeesl.util.query.xpath;
 import java.util.List;
 
 import org.apache.commons.jxpath.JXPathContext;
+import org.jeesl.model.xml.system.security.Roles;
+import org.jeesl.model.xml.system.security.Security;
+import org.jeesl.model.xml.system.security.Staffs;
+import org.jeesl.model.xml.system.security.View;
+import org.jeesl.model.xml.system.security.Views;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Roles;
-import net.sf.ahtutils.xml.security.Security;
-import net.sf.ahtutils.xml.security.Staffs;
-import net.sf.ahtutils.xml.security.View;
-import net.sf.ahtutils.xml.security.Views;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
@@ -74,7 +74,7 @@ public class SecurityXpath
 		return listResult.get(0);
 	}
 
-	public static synchronized net.sf.ahtutils.xml.security.Category getCategory(Security security,String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
+	public static synchronized org.jeesl.model.xml.system.security.Category getCategory(Security security,String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(security);
 
@@ -82,12 +82,12 @@ public class SecurityXpath
 		sb.append("//category[@code='").append(code).append("']");
 
 		@SuppressWarnings("unchecked")
-		List<net.sf.ahtutils.xml.security.Category> listResult = context.selectNodes(sb.toString());
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+net.sf.ahtutils.xml.security.Category.class.getSimpleName()+" for code="+code);}
-		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+net.sf.ahtutils.xml.security.Category.class.getSimpleName()+" for code="+code);}
+		List<org.jeesl.model.xml.system.security.Category> listResult = context.selectNodes(sb.toString());
+		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+org.jeesl.model.xml.system.security.Category.class.getSimpleName()+" for code="+code);}
+		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+org.jeesl.model.xml.system.security.Category.class.getSimpleName()+" for code="+code);}
 		return listResult.get(0);
 	}
-	public static synchronized net.sf.ahtutils.xml.security.Role getRole(Security security,String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
+	public static synchronized org.jeesl.model.xml.system.security.Role getRole(Security security,String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(security);
 
@@ -95,9 +95,9 @@ public class SecurityXpath
 		sb.append("//role[@code='").append(code).append("']");
 
 		@SuppressWarnings("unchecked")
-		List<net.sf.ahtutils.xml.security.Role> listResult = context.selectNodes(sb.toString());
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+net.sf.ahtutils.xml.security.Role.class.getSimpleName()+" for code="+code);}
-		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+net.sf.ahtutils.xml.security.Role.class.getSimpleName()+" for code="+code);}
+		List<org.jeesl.model.xml.system.security.Role> listResult = context.selectNodes(sb.toString());
+		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+org.jeesl.model.xml.system.security.Role.class.getSimpleName()+" for code="+code);}
+		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+org.jeesl.model.xml.system.security.Role.class.getSimpleName()+" for code="+code);}
 		return listResult.get(0);
 	}
 
@@ -114,7 +114,7 @@ public class SecurityXpath
 		return listResult.get(0);
 	}
 
-	public static synchronized List<net.sf.ahtutils.xml.security.Role> getUseCaseRoles(Security security,String useCaseCode) throws ExlpXpathNotFoundException
+	public static synchronized List<org.jeesl.model.xml.system.security.Role> getUseCaseRoles(Security security,String useCaseCode) throws ExlpXpathNotFoundException
 	{
 		JXPathContext context = JXPathContext.newContext(security);
 
@@ -122,7 +122,7 @@ public class SecurityXpath
 		sb.append("//role[usecases/usecase[@code='").append(useCaseCode).append("']]");
 
 		@SuppressWarnings("unchecked")
-		List<net.sf.ahtutils.xml.security.Role> listResult = context.selectNodes(sb.toString());
+		List<org.jeesl.model.xml.system.security.Role> listResult = context.selectNodes(sb.toString());
 		return listResult;
 	}
 

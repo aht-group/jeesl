@@ -10,9 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.qa.Test;
 import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.Staff;
 import net.sf.ahtutils.xml.status.Langs;
 import net.sf.ahtutils.xml.status.Model;
 import net.sf.ahtutils.xml.status.Status;
@@ -26,6 +23,9 @@ import org.jeesl.model.xml.module.survey.Surveys;
 import org.jeesl.model.xml.module.survey.Template;
 import org.jeesl.model.xml.module.survey.Templates;
 import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.Staff;
 
 
 /**

@@ -1,11 +1,10 @@
 package org.jeesl.factory.xml.system.security;
 
 import org.jeesl.model.xml.system.navigation.Menu;
+import org.jeesl.model.xml.system.security.Roles;
+import org.jeesl.model.xml.system.security.Security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.security.Roles;
-import net.sf.ahtutils.xml.security.Security;
 
 public class XmlSecurityFactory
 {

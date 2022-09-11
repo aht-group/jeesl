@@ -10,11 +10,10 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategor
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.model.xml.system.security.Views;
 import org.jeesl.util.comparator.ejb.system.security.SecurityViewComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.security.Views;
 
 public class XmlViewsFactory <L extends JeeslLang,
 								D extends JeeslDescription, 

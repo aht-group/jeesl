@@ -10,11 +10,10 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.model.xml.jeesl.QuerySecurity;
+import org.jeesl.model.xml.system.security.Staff;
+import org.jeesl.model.xml.system.security.Staffs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.security.Staff;
-import net.sf.ahtutils.xml.security.Staffs;
 
 public class XmlStaffsFactory<L extends JeeslLang, D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,

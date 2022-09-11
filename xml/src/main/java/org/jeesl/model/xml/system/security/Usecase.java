@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.security;
+package org.jeesl.model.xml.system.security;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
-import org.jeesl.model.xml.system.navigation.Navigation;
 
 
 /**
@@ -25,20 +24,15 @@ import org.jeesl.model.xml.system.navigation.Navigation;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}access"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/navigation}navigation"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}actions"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}roles"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}views"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="visible" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="documentation" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="public" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="onlyLoginRequired" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
- *       &lt;attribute name="urlParameter" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -50,13 +44,11 @@ import org.jeesl.model.xml.system.navigation.Navigation;
 @XmlType(name = "", propOrder = {
     "descriptions",
     "langs",
-    "access",
-    "navigation",
     "actions",
-    "roles"
+    "views"
 })
-@XmlRootElement(name = "view")
-public class View
+@XmlRootElement(name = "usecase")
+public class Usecase
     implements Serializable
 {
 
@@ -66,31 +58,21 @@ public class View
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Langs langs;
     @XmlElement(required = true)
-    protected Access access;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/navigation", required = true)
-    protected Navigation navigation;
-    @XmlElement(required = true)
     protected Actions actions;
     @XmlElement(required = true)
-    protected Roles roles;
+    protected Views views;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "code")
     protected String code;
-    @XmlAttribute(name = "label")
-    protected String label;
     @XmlAttribute(name = "position")
     protected Integer position;
     @XmlAttribute(name = "visible")
     protected Boolean visible;
     @XmlAttribute(name = "documentation")
     protected Boolean documentation;
-    @XmlAttribute(name = "public")
-    protected Boolean _public;
-    @XmlAttribute(name = "onlyLoginRequired")
-    protected Boolean onlyLoginRequired;
-    @XmlAttribute(name = "urlParameter")
-    protected String urlParameter;
+    @XmlAttribute(name = "label")
+    protected String label;
 
     /**
      * Gets the value of the descriptions property.
@@ -149,62 +131,6 @@ public class View
     }
 
     /**
-     * Gets the value of the access property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Access }
-     *     
-     */
-    public Access getAccess() {
-        return access;
-    }
-
-    /**
-     * Sets the value of the access property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Access }
-     *     
-     */
-    public void setAccess(Access value) {
-        this.access = value;
-    }
-
-    public boolean isSetAccess() {
-        return (this.access!= null);
-    }
-
-    /**
-     * Gets the value of the navigation property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Navigation }
-     *     
-     */
-    public Navigation getNavigation() {
-        return navigation;
-    }
-
-    /**
-     * Sets the value of the navigation property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Navigation }
-     *     
-     */
-    public void setNavigation(Navigation value) {
-        this.navigation = value;
-    }
-
-    public boolean isSetNavigation() {
-        return (this.navigation!= null);
-    }
-
-    /**
      * Gets the value of the actions property.
      * 
      * @return
@@ -233,31 +159,31 @@ public class View
     }
 
     /**
-     * Gets the value of the roles property.
+     * Gets the value of the views property.
      * 
      * @return
      *     possible object is
-     *     {@link Roles }
+     *     {@link Views }
      *     
      */
-    public Roles getRoles() {
-        return roles;
+    public Views getViews() {
+        return views;
     }
 
     /**
-     * Sets the value of the roles property.
+     * Sets the value of the views property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Roles }
+     *     {@link Views }
      *     
      */
-    public void setRoles(Roles value) {
-        this.roles = value;
+    public void setViews(Views value) {
+        this.views = value;
     }
 
-    public boolean isSetRoles() {
-        return (this.roles!= null);
+    public boolean isSetViews() {
+        return (this.views!= null);
     }
 
     /**
@@ -318,34 +244,6 @@ public class View
 
     public boolean isSetCode() {
         return (this.code!= null);
-    }
-
-    /**
-     * Gets the value of the label property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getLabel() {
-        return label;
-    }
-
-    /**
-     * Sets the value of the label property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setLabel(String value) {
-        this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
     /**
@@ -445,95 +343,31 @@ public class View
     }
 
     /**
-     * Gets the value of the public property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public boolean isPublic() {
-        return _public;
-    }
-
-    /**
-     * Sets the value of the public property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setPublic(boolean value) {
-        this._public = value;
-    }
-
-    public boolean isSetPublic() {
-        return (this._public!= null);
-    }
-
-    public void unsetPublic() {
-        this._public = null;
-    }
-
-    /**
-     * Gets the value of the onlyLoginRequired property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public boolean isOnlyLoginRequired() {
-        return onlyLoginRequired;
-    }
-
-    /**
-     * Sets the value of the onlyLoginRequired property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setOnlyLoginRequired(boolean value) {
-        this.onlyLoginRequired = value;
-    }
-
-    public boolean isSetOnlyLoginRequired() {
-        return (this.onlyLoginRequired!= null);
-    }
-
-    public void unsetOnlyLoginRequired() {
-        this.onlyLoginRequired = null;
-    }
-
-    /**
-     * Gets the value of the urlParameter property.
+     * Gets the value of the label property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUrlParameter() {
-        return urlParameter;
+    public String getLabel() {
+        return label;
     }
 
     /**
-     * Sets the value of the urlParameter property.
+     * Sets the value of the label property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUrlParameter(String value) {
-        this.urlParameter = value;
+    public void setLabel(String value) {
+        this.label = value;
     }
 
-    public boolean isSetUrlParameter() {
-        return (this.urlParameter!= null);
+    public boolean isSetLabel() {
+        return (this.label!= null);
     }
 
 }

@@ -11,11 +11,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.model.xml.module.workflow.Permission;
+import org.jeesl.model.xml.system.security.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.factory.xml.status.XmlLevelFactory;
-import net.sf.ahtutils.xml.security.Role;
 
 public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescription,
 								WS extends JeeslWorkflowStage<L,D,?,?,WSP,?,?>,

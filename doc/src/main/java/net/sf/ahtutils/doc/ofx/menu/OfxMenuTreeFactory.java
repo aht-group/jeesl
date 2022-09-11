@@ -7,6 +7,8 @@ import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.system.navigation.Menu;
 import org.jeesl.model.xml.system.navigation.MenuItem;
+import org.jeesl.model.xml.system.security.Security;
+import org.jeesl.model.xml.system.security.View;
 import org.jeesl.util.query.xpath.SecurityXpath;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.graph.Node;
@@ -16,8 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.security.Security;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;

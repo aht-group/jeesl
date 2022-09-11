@@ -10,11 +10,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.sf.ahtutils.xml.project.Responsibilities;
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.Roles;
-import net.sf.ahtutils.xml.security.Staff;
-import net.sf.ahtutils.xml.security.Staffs;
-import net.sf.ahtutils.xml.security.User;
 
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -23,6 +18,11 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell.XWPFVertAlign;
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.Roles;
+import org.jeesl.model.xml.system.security.Staff;
+import org.jeesl.model.xml.system.security.Staffs;
+import org.jeesl.model.xml.system.security.User;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTextDirection;

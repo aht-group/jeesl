@@ -9,8 +9,8 @@ import org.jeesl.factory.xml.system.util.text.XmlReferenceFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
 import org.jeesl.model.xml.jeesl.QueryTs;
 import org.jeesl.model.xml.module.ts.Transaction;
+import org.jeesl.model.xml.system.security.User;
 
-import net.sf.ahtutils.xml.security.User;
 import net.sf.exlp.util.DateUtil;
 
 public class XmlTsQuery

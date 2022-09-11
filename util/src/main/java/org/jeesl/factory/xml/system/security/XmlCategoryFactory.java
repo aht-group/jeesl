@@ -5,6 +5,7 @@ import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
@@ -15,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.ahtutils.xml.security.Category;
 
 public class XmlCategoryFactory <L extends JeeslLang,D extends JeeslDescription,
 									C extends JeeslSecurityCategory<L,D>,
@@ -29,16 +29,16 @@ public class XmlCategoryFactory <L extends JeeslLang,D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(XmlRoleFactory.class);
 		
 	private String lang;
-	private net.sf.ahtutils.xml.security.Category q;
+	private org.jeesl.model.xml.system.security.Category q;
 	
 	public XmlCategoryFactory(Query q){this(q.getLang(),q.getCategory());}
-	public XmlCategoryFactory(String lang,net.sf.ahtutils.xml.security.Category q)
+	public XmlCategoryFactory(String lang,org.jeesl.model.xml.system.security.Category q)
 	{
 		this.lang=lang;
 		this.q=q;
 	}
 	
-	public net.sf.ahtutils.xml.security.Category build(C category)
+	public org.jeesl.model.xml.system.security.Category build(C category)
 	{
 		Category xml = new Category();
 		if(q.isSetCode()){xml.setCode(category.getCode());}
@@ -81,7 +81,7 @@ public class XmlCategoryFactory <L extends JeeslLang,D extends JeeslDescription,
 		return xml;
 	}
 	
-	public static net.sf.ahtutils.xml.security.Category build()
+	public static org.jeesl.model.xml.system.security.Category build()
 	{
 		Category xml = new Category();
 		

@@ -23,14 +23,14 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplat
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.Roles;
+import org.jeesl.model.xml.system.security.Security;
 import org.jeesl.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.Roles;
-import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.status.Descriptions;
 
 public class JeeslSecurityRoleReport <L extends JeeslLang, D extends JeeslDescription,

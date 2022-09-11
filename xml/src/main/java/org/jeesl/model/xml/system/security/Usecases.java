@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.security;
+package org.jeesl.model.xml.system.security;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}template" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}usecase" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,52 +32,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "template"
+    "usecase"
 })
-@XmlRootElement(name = "templates")
-public class Templates
+@XmlRootElement(name = "usecases")
+public class Usecases
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Template> template;
+    protected List<Usecase> usecase;
 
     /**
-     * Gets the value of the template property.
+     * Gets the value of the usecase property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the template property.
+     * This is why there is not a <CODE>set</CODE> method for the usecase property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTemplate().add(newItem);
+     *    getUsecase().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Template }
+     * {@link Usecase }
      * 
      * 
      */
-    public List<Template> getTemplate() {
-        if (template == null) {
-            template = new ArrayList<Template>();
+    public List<Usecase> getUsecase() {
+        if (usecase == null) {
+            usecase = new ArrayList<Usecase>();
         }
-        return this.template;
+        return this.usecase;
     }
 
-    public boolean isSetTemplate() {
-        return ((this.template!= null)&&(!this.template.isEmpty()));
+    public boolean isSetUsecase() {
+        return ((this.usecase!= null)&&(!this.usecase.isEmpty()));
     }
 
-    public void unsetTemplate() {
-        this.template = null;
+    public void unsetUsecase() {
+        this.usecase = null;
     }
 
 }

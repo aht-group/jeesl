@@ -25,14 +25,13 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithActions;
 import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithViews;
+import org.jeesl.model.xml.system.security.Actions;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.Security;
+import org.jeesl.model.xml.system.security.View;
+import org.jeesl.model.xml.system.security.Views;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.security.Actions;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.Security;
-import net.sf.ahtutils.xml.security.View;
-import net.sf.ahtutils.xml.security.Views;
 
 public class AbstractSecurityUpdater <L extends JeeslLang,
  								D extends JeeslDescription, 
@@ -130,7 +129,7 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 		
 		dbCleanerCategory.clear();dbCleanerCategory.dbEjbs(fSecurity.allForType(fbSecurity.getClassCategory(),type.toString()));
 
-		for(net.sf.ahtutils.xml.security.Category xCategory : security.getCategory())
+		for(org.jeesl.model.xml.system.security.Category xCategory : security.getCategory())
 		{
 			dbCleanerCategory.handled(xCategory.getCode());
 			
@@ -194,14 +193,14 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 		}
 		return ejb;
 	}
-	protected <T extends JeeslSecurityWithViews<V>> T iuListViewsSecurity(T ejb, net.sf.ahtutils.xml.security.Views views) throws JeeslConstraintViolationException, JeeslNotFoundException, JeeslLockingException
+	protected <T extends JeeslSecurityWithViews<V>> T iuListViewsSecurity(T ejb, org.jeesl.model.xml.system.security.Views views) throws JeeslConstraintViolationException, JeeslNotFoundException, JeeslLockingException
 	{
 //		ejb = fSecurity.load(cView, view);
 		ejb.getViews().clear();
 		ejb = fSecurity.update(ejb);
 		if(views!=null)
 		{
-			for(net.sf.ahtutils.xml.security.View view : views.getView())
+			for(org.jeesl.model.xml.system.security.View view : views.getView())
 			{
 				logger.trace("Adding view "+view.getCode()+" to "+ejb.toString());
 				V ejbView = fSecurity.fByCode(fbSecurity.getClassView(), view.getCode());
@@ -218,7 +217,7 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 		ejb = fSecurity.update(ejb);
 		if(actions!=null)
 		{
-			for(net.sf.ahtutils.xml.security.Action action : actions.getAction())
+			for(org.jeesl.model.xml.system.security.Action action : actions.getAction())
 			{
 				A ejbAction = fSecurity.fByCode(fbSecurity.getClassAction(), action.getCode());
 				ejb.getActions().add(ejbAction);

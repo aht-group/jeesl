@@ -13,11 +13,11 @@ import org.jeesl.model.xml.module.workflow.Permission;
 import org.jeesl.model.xml.module.workflow.Permissions;
 import org.jeesl.model.xml.module.workflow.Stage;
 import org.jeesl.model.xml.module.workflow.Transition;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.util.query.xml.XmlStatusQuery;
 
 import net.sf.ahtutils.factory.xml.status.XmlLevelFactory;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.Role;
 
 public class XmlWorkflowQuery
 {

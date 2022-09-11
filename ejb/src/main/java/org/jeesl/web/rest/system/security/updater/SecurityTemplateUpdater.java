@@ -12,6 +12,7 @@ import org.jeesl.factory.xml.system.io.sync.XmlDataUpdateFactory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.xml.system.security.Security;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
@@ -26,7 +27,6 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SecurityTemplateUpdater <L extends JeeslLang,
@@ -80,11 +80,11 @@ public class SecurityTemplateUpdater <L extends JeeslLang,
 		return du;
 	}
 	
-	@Override protected void iuChilds(C category, net.sf.ahtutils.xml.security.Category templates) throws UtilsConfigurationException
+	@Override protected void iuChilds(C category, org.jeesl.model.xml.system.security.Category templates) throws UtilsConfigurationException
 	{
 		if(templates.isSetTemplates() && templates.getTemplates().isSetTemplate())
 		{
-			for(net.sf.ahtutils.xml.security.Template template : templates.getTemplates().getTemplate())
+			for(org.jeesl.model.xml.system.security.Template template : templates.getTemplates().getTemplate())
 			{
 				updateRole.handled(template.getCode());
 				iuTemplate(category, template);
@@ -92,7 +92,7 @@ public class SecurityTemplateUpdater <L extends JeeslLang,
 		}
 	}
 	
-	private void iuTemplate(C category, net.sf.ahtutils.xml.security.Template role) throws UtilsConfigurationException
+	private void iuTemplate(C category, org.jeesl.model.xml.system.security.Template role) throws UtilsConfigurationException
 	{
 		AT ejb;
 		try

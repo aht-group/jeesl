@@ -6,8 +6,6 @@ import org.jeesl.model.xml.system.status.TestXmlLangs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Template;
-
 public class TestXmlTemplate extends AbstractXmlSecurityTest<Template>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlTemplate.class);

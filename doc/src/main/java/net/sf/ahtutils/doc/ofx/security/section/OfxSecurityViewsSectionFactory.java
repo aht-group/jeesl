@@ -8,6 +8,9 @@ import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.latex.builder.JeeslLatexAdminDocumentationBuilder;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.Security;
+import org.jeesl.model.xml.system.security.View;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Paragraph;
@@ -28,9 +31,6 @@ import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.security.list.OfxSecurityCategoryListFactory;
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityActionTableFactory;
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityViewTableFactory;
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.Security;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
@@ -79,7 +79,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		
 //		section.getContent().add(ofSecurityCategoryList.list(security.getCategory()));
 		
-		for(net.sf.ahtutils.xml.security.Category category : security.getCategory())
+		for(org.jeesl.model.xml.system.security.Category category : security.getCategory())
 		{
 			if(!category.isSetDocumentation()){category.setDocumentation(false);}
 			if(category.isDocumentation())
@@ -91,7 +91,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		return section;
 	}
 	
-	private Section build(net.sf.ahtutils.xml.security.Category category) throws OfxAuthoringException
+	private Section build(org.jeesl.model.xml.system.security.Category category) throws OfxAuthoringException
 	{
 		Section section = XmlSectionFactory.build();
 		section.getContent().add(OfxMultiLangFactory.title(langs, category.getLangs()));
@@ -114,7 +114,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		return section;
 	}
 	
-	private Section build(net.sf.ahtutils.xml.security.Category category, View view) throws OfxAuthoringException
+	private Section build(org.jeesl.model.xml.system.security.Category category, View view) throws OfxAuthoringException
 	{
 		Section section = XmlSectionFactory.build();
 		

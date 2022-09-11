@@ -16,9 +16,9 @@ import org.jeesl.model.xml.system.revision.Diagram;
 import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.model.xml.system.revision.Relation;
 import org.jeesl.model.xml.system.revision.Revision;
+import org.jeesl.model.xml.system.security.User;
 import org.jeesl.util.query.xml.XmlStatusQuery;
 
-import net.sf.ahtutils.xml.security.User;
 import net.sf.exlp.util.DateUtil;
 
 

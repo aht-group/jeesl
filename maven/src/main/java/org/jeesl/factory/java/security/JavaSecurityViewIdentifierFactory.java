@@ -10,12 +10,12 @@ import java.util.Set;
 
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.dir.DirChecker;
 import net.sf.exlp.util.io.dir.RecursiveFileFinder;
@@ -36,7 +36,7 @@ public class JavaSecurityViewIdentifierFactory extends AbstractJavaSecurityFileF
 	}
 	
 	
-	@Override protected void processCategories(List<net.sf.ahtutils.xml.security.Category> categories) throws UtilsConfigurationException
+	@Override protected void processCategories(List<org.jeesl.model.xml.system.security.Category> categories) throws UtilsConfigurationException
 	{
 		try{DirChecker.checkFileIsDirectory(fPackage);}
 		catch (ExlpConfigurationException e) {throw new UtilsConfigurationException(e.getMessage());}
@@ -55,7 +55,7 @@ public class JavaSecurityViewIdentifierFactory extends AbstractJavaSecurityFileF
 		}
 		catch (IOException e) {e.printStackTrace();}
 		
-		for(net.sf.ahtutils.xml.security.Category category : categories)
+		for(org.jeesl.model.xml.system.security.Category category : categories)
 		{
 			try {listCreatedFiles.addAll(create(category));}
 			catch (IOException e) {e.printStackTrace();}
@@ -78,7 +78,7 @@ public class JavaSecurityViewIdentifierFactory extends AbstractJavaSecurityFileF
 		}
 	}
 	
-	protected List<String> create(net.sf.ahtutils.xml.security.Category category) throws UtilsConfigurationException, IOException, TemplateException
+	protected List<String> create(org.jeesl.model.xml.system.security.Category category) throws UtilsConfigurationException, IOException, TemplateException
 	{
 		List<String> created = new ArrayList<String>();
 		File fCategory = new File(fPackage,buildPackageFile(category.getCode()));
@@ -96,7 +96,7 @@ public class JavaSecurityViewIdentifierFactory extends AbstractJavaSecurityFileF
 		
 		if(category.isSetViews())
 		{
-			for(net.sf.ahtutils.xml.security.View view : category.getTmp().getView())
+			for(org.jeesl.model.xml.system.security.View view : category.getTmp().getView())
 			{
 				File fProcessed = createIdentifier(fCategory,view,buildPackage(category.getCode()));
 				created.add(fProcessed.getAbsolutePath());

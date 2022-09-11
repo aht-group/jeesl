@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.factory.xml.system.security.XmlActionFactory;
+import org.jeesl.model.xml.system.security.Action;
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.View;
 import org.openfuxml.content.layout.Layout;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Columns;
@@ -24,9 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.security.Action;
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
 

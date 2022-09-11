@@ -1,9 +1,8 @@
 package org.jeesl.factory.xml.system.security;
 
+import org.jeesl.model.xml.system.security.Access;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.security.Access;
 
 public class XmlAccessFactory
 {

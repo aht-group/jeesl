@@ -9,6 +9,8 @@ import org.jeesl.factory.xml.dev.qa.XmlGroupsFactory;
 import org.jeesl.factory.xml.dev.qa.XmlResultFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.Staff;
 import org.jeesl.util.query.xml.system.SecurityQuery;
 
 import net.sf.ahtutils.factory.xml.status.XmlStatementFactory;
@@ -26,8 +28,6 @@ import net.sf.ahtutils.xml.qa.Result;
 import net.sf.ahtutils.xml.qa.Results;
 import net.sf.ahtutils.xml.qa.Steps;
 import net.sf.ahtutils.xml.qa.Test;
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.Staff;
 import net.sf.ahtutils.xml.status.Status;
 import net.sf.exlp.util.DateUtil;
 

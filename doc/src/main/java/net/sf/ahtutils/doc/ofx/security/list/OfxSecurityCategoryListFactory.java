@@ -5,6 +5,7 @@ import java.io.StringWriter;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
+import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.list.Item;
 import org.openfuxml.content.list.List;
@@ -21,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.status.Description;
 import net.sf.ahtutils.xml.status.Lang;
 import net.sf.ahtutils.xml.status.Translations;
@@ -57,7 +57,7 @@ public class OfxSecurityCategoryListFactory extends AbstractUtilsOfxDocumentatio
 		catch (IOException e) {throw new OfxAuthoringException(e.getMessage());}
 	}
 	
-	public String saveDescriptionSec(java.util.List<net.sf.ahtutils.xml.security.Category> categories) throws OfxAuthoringException
+	public String saveDescriptionSec(java.util.List<org.jeesl.model.xml.system.security.Category> categories) throws OfxAuthoringException
 	{
 		try
 		{
@@ -88,11 +88,11 @@ public class OfxSecurityCategoryListFactory extends AbstractUtilsOfxDocumentatio
 		return list;
 	}
 	
-	public List descriptionList(java.util.List<net.sf.ahtutils.xml.security.Category> categories) throws OfxAuthoringException
+	public List descriptionList(java.util.List<org.jeesl.model.xml.system.security.Category> categories) throws OfxAuthoringException
 	{
 		List list = XmlListFactory.description();
 		
-		for(net.sf.ahtutils.xml.security.Category category : categories)
+		for(org.jeesl.model.xml.system.security.Category category : categories)
 		{
 			list.getItem().addAll(OfxMultiLangFactory.items(langs, category.getLangs(), category.getDescriptions()));
 		}

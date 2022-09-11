@@ -4,8 +4,6 @@ import org.jeesl.JeeslXmlTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Security;
-
 public class TestXmlSecurity extends AbstractXmlSecurityTest<Security>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlSecurity.class);

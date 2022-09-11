@@ -1,12 +1,12 @@
 package net.sf.ahtutils.controller.db;
 
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.Security;
+import org.jeesl.model.xml.system.security.View;
 import org.jeesl.util.query.xpath.SecurityXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.Security;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
@@ -26,7 +26,7 @@ public class UtilsSecurityMerger
 		{
 			try
 			{
-				net.sf.ahtutils.xml.security.Category cRest = SecurityXpath.getCategory(securityRest,cFile.getCode());
+				org.jeesl.model.xml.system.security.Category cRest = SecurityXpath.getCategory(securityRest,cFile.getCode());
 				cFile.setLangs(cRest.getLangs());
 				cFile.setDescriptions(cRest.getDescriptions());
 				cFile.setPosition(cRest.getPosition());

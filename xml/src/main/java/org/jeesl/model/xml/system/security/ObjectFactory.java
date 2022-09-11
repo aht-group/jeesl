@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.security;
+package org.jeesl.model.xml.system.security;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

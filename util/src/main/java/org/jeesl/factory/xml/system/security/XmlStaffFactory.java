@@ -17,10 +17,10 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.jeesl.QuerySecurity;
+import org.jeesl.model.xml.system.security.Staff;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Staff;
 import net.sf.ahtutils.xml.status.Domain;
 
 public class XmlStaffFactory<L extends JeeslLang, D extends JeeslDescription,

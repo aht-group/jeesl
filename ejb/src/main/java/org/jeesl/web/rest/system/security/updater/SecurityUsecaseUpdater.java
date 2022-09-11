@@ -13,6 +13,7 @@ import org.jeesl.factory.xml.system.io.sync.XmlResultFactory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.xml.system.security.Security;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
@@ -27,7 +28,6 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SecurityUsecaseUpdater <L extends JeeslLang,
@@ -83,13 +83,13 @@ public class SecurityUsecaseUpdater <L extends JeeslLang,
 		return du;
 	}
 	
-	@Override protected void iuChilds(C aclCategory, net.sf.ahtutils.xml.security.Category category) throws UtilsConfigurationException
+	@Override protected void iuChilds(C aclCategory, org.jeesl.model.xml.system.security.Category category) throws UtilsConfigurationException
 	{
 		logger.trace("iuChilds "+category.getCode());
 		if(category.isSetUsecases() && category.getUsecases().isSetUsecase())
 		{
 			logger.trace("iuChilds "+category.getCode()+ " "+category.getUsecases().getUsecase().size());
-			for(net.sf.ahtutils.xml.security.Usecase usecase : category.getUsecases().getUsecase())
+			for(org.jeesl.model.xml.system.security.Usecase usecase : category.getUsecases().getUsecase())
 			{
 				updateUsecases.handled(usecase.getCode());
 				iuUsecase(aclCategory, usecase);
@@ -97,7 +97,7 @@ public class SecurityUsecaseUpdater <L extends JeeslLang,
 		}
 	}
 	
-	private void iuUsecase(C category, net.sf.ahtutils.xml.security.Usecase usecase) throws UtilsConfigurationException
+	private void iuUsecase(C category, org.jeesl.model.xml.system.security.Usecase usecase) throws UtilsConfigurationException
 	{
 		U ebj;
 		try

@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.security;
+package org.jeesl.model.xml.system.security;
 
 import java.io.Serializable;
 import java.util.ArrayList;

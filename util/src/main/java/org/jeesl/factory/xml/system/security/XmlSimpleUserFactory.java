@@ -1,10 +1,9 @@
 package org.jeesl.factory.xml.system.security;
 
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.model.xml.system.security.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.security.User;
 
 public class XmlSimpleUserFactory<USER extends JeeslSimpleUser>
 {

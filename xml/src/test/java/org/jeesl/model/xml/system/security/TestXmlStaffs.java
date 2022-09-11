@@ -5,8 +5,6 @@ import org.jeesl.model.xml.system.status.TestXmlDomain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Staffs;
-
 public class TestXmlStaffs extends AbstractXmlSecurityTest<Staffs>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlStaffs.class);

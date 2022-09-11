@@ -11,6 +11,7 @@ import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.xml.system.security.Staff;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -39,7 +40,6 @@ import net.sf.ahtutils.xml.qa.Category;
 import net.sf.ahtutils.xml.qa.Group;
 import net.sf.ahtutils.xml.qa.Qa;
 import net.sf.ahtutils.xml.qa.Test;
-import net.sf.ahtutils.xml.security.Staff;
 
 public class QaRestService <L extends JeeslLang, D extends JeeslDescription,
 							L2 extends JeeslLang, D2 extends JeeslDescription,

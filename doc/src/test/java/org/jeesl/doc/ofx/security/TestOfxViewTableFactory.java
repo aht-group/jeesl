@@ -10,6 +10,8 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.DefaultConfigurationBuilder;
 import org.jeesl.model.xml.system.security.TestXmlView;
+import org.jeesl.model.xml.system.security.View;
+import org.jeesl.model.xml.system.security.Views;
 import org.jeesl.model.xml.system.status.TestXmlDescription;
 import org.jeesl.model.xml.system.status.TestXmlLang;
 import org.junit.Before;
@@ -22,8 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityViewTableFactory;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
-import net.sf.ahtutils.xml.security.View;
-import net.sf.ahtutils.xml.security.Views;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
 

@@ -6,7 +6,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import net.sf.ahtutils.xml.security.Security;
+import org.jeesl.model.xml.system.security.Security;
+
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public interface JeeslSecurityRestTemplateImport

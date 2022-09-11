@@ -1,7 +1,6 @@
 package org.jeesl.factory.xml.system.security;
 
-import net.sf.ahtutils.xml.security.Rule;
-
+import org.jeesl.model.xml.system.security.Rule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

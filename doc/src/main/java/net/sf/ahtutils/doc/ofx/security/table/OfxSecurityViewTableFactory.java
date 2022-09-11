@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.View;
+import org.jeesl.model.xml.system.security.Views;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Columns;
 import org.openfuxml.content.table.Content;
@@ -19,9 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.View;
-import net.sf.ahtutils.xml.security.Views;
 import net.sf.ahtutils.xml.status.Translations;
 
 public class OfxSecurityViewTableFactory extends AbstractUtilsOfxDocumentationFactory
@@ -39,7 +39,7 @@ final static Logger logger = LoggerFactory.getLogger(OfxSecurityUsecaseTableFact
 		headerKeys.add("auTableHeadSecurityUsecaseDescription");
 	}
 	
-	public Table build(net.sf.ahtutils.xml.security.Category category) throws OfxAuthoringException
+	public Table build(org.jeesl.model.xml.system.security.Category category) throws OfxAuthoringException
 	{
 		Table table = new Table();
 //		table.setId("table.qa.nfr.questions."+section.getPosition());

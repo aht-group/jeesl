@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.dir.DirChecker;
 
@@ -34,7 +34,7 @@ public class JavaSecurityViewRestrictorFactory extends AbstractJavaSecurityFileF
 		this.viewQualifierBasePackage=viewQualifierBasePackage;
 	}
 	
-	@Override protected void processCategories(List<net.sf.ahtutils.xml.security.Category> lCategory) throws UtilsConfigurationException
+	@Override protected void processCategories(List<org.jeesl.model.xml.system.security.Category> lCategory) throws UtilsConfigurationException
 	{
 		try {DirChecker.checkParentIsAnDir(fJavaRestrictor);}
 		catch (ExlpConfigurationException e) {throw new UtilsConfigurationException(e.getMessage());}
@@ -46,11 +46,11 @@ public class JavaSecurityViewRestrictorFactory extends AbstractJavaSecurityFileF
 		freemarkerNodeModel.put("abstract", classAbstractRestrictor.substring(classAbstractRestrictor.lastIndexOf(".")+1,classAbstractRestrictor.length()));
 		
 		List<Map> lCodes = new ArrayList<Map>();
-		for(net.sf.ahtutils.xml.security.Category category : lCategory)
+		for(org.jeesl.model.xml.system.security.Category category : lCategory)
 		{
 			if(category.isSetTmp())
 			{
-				for(net.sf.ahtutils.xml.security.View view : category.getTmp().getView())
+				for(org.jeesl.model.xml.system.security.View view : category.getTmp().getView())
 				{
 					StringBuffer sb = new StringBuffer();
 					sb.append(viewQualifierBasePackage);

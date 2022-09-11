@@ -24,11 +24,10 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.model.xml.system.navigation.Menu;
 import org.jeesl.model.xml.system.navigation.MenuItem;
+import org.jeesl.model.xml.system.security.Security;
 import org.jeesl.util.comparator.ejb.system.security.SecurityViewComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.security.Security;
 
 public class JeeslMenuStructureReport <L extends JeeslLang,
 								D extends JeeslDescription,

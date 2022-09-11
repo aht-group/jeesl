@@ -17,7 +17,7 @@ public interface UtilsQualityAssuranceRest
 	
 	@GET @Path("/roles")
 	@Produces(MediaType.APPLICATION_XML)
-	net.sf.ahtutils.xml.security.Category qaRoles();
+	org.jeesl.model.xml.system.security.Category qaRoles();
 	
 	@GET @Path("/status/result")
 	@Produces(MediaType.APPLICATION_XML)

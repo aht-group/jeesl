@@ -14,16 +14,16 @@ import org.jeesl.factory.xml.system.security.XmlViewFactory;
 import org.jeesl.factory.xml.system.security.XmlViewsFactory;
 import org.jeesl.model.xml.jeesl.QuerySecurity;
 import org.jeesl.model.xml.system.navigation.Navigation;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.Staff;
+import org.jeesl.model.xml.system.security.Staffs;
+import org.jeesl.model.xml.system.security.Usecase;
+import org.jeesl.model.xml.system.security.User;
+import org.jeesl.model.xml.system.security.View;
 import org.jeesl.util.query.xml.XmlStatusQuery;
 
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.Staff;
-import net.sf.ahtutils.xml.security.Staffs;
-import net.sf.ahtutils.xml.security.Usecase;
-import net.sf.ahtutils.xml.security.User;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Domain;
 
 public class SecurityQuery
@@ -188,9 +188,9 @@ public class SecurityQuery
 		return xml;
 	}
 	
-	public static net.sf.ahtutils.xml.security.View exView()
+	public static org.jeesl.model.xml.system.security.View exView()
 	{
-		net.sf.ahtutils.xml.security.View xml = new net.sf.ahtutils.xml.security.View();
+		org.jeesl.model.xml.system.security.View xml = new org.jeesl.model.xml.system.security.View();
 		xml.setCode("");
 		xml.setPosition(0);
 		xml.setVisible(true);
@@ -223,9 +223,9 @@ public class SecurityQuery
 		return xml;
 	}
 	
-	public static net.sf.ahtutils.xml.security.Template exTemplate()
+	public static org.jeesl.model.xml.system.security.Template exTemplate()
 	{
-		net.sf.ahtutils.xml.security.Template xml = new net.sf.ahtutils.xml.security.Template();
+		org.jeesl.model.xml.system.security.Template xml = new org.jeesl.model.xml.system.security.Template();
 		xml.setCode("");
 		xml.setLangs(XmlStatusQuery.langs());
 		xml.setDescriptions(XmlStatusQuery.descriptions());
@@ -245,12 +245,12 @@ public class SecurityQuery
 //		return xml;
 //	}
 	
-	public static net.sf.ahtutils.xml.security.Action exAction()
+	public static org.jeesl.model.xml.system.security.Action exAction()
 	{
-		net.sf.ahtutils.xml.security.Template template = new net.sf.ahtutils.xml.security.Template();
+		org.jeesl.model.xml.system.security.Template template = new org.jeesl.model.xml.system.security.Template();
 		template.setCode("");
 		
-		net.sf.ahtutils.xml.security.Action xml = new net.sf.ahtutils.xml.security.Action();
+		org.jeesl.model.xml.system.security.Action xml = new org.jeesl.model.xml.system.security.Action();
 		xml.setCode("");
 		xml.setLangs(XmlStatusQuery.langs());
 		xml.setDescriptions(XmlStatusQuery.descriptions());
@@ -260,8 +260,8 @@ public class SecurityQuery
 	
 	public static Usecase exUsecase()
 	{
-		net.sf.ahtutils.xml.security.Action action = new net.sf.ahtutils.xml.security.Action();action.setCode("");
-		net.sf.ahtutils.xml.security.View view = new net.sf.ahtutils.xml.security.View();view.setCode("");
+		org.jeesl.model.xml.system.security.Action action = new org.jeesl.model.xml.system.security.Action();action.setCode("");
+		org.jeesl.model.xml.system.security.View view = new org.jeesl.model.xml.system.security.View();view.setCode("");
 		
 		Usecase xml = new Usecase();
 		xml.setCode("");
@@ -278,15 +278,15 @@ public class SecurityQuery
 	
 	public static Usecase docUsecase()
 	{
-		net.sf.ahtutils.xml.security.Template template = new net.sf.ahtutils.xml.security.Template();
+		org.jeesl.model.xml.system.security.Template template = new org.jeesl.model.xml.system.security.Template();
 		template.setCode("");
 		template.setLangs(XmlStatusQuery.langs());
 		template.setDescriptions(XmlStatusQuery.descriptions());
 		
-		net.sf.ahtutils.xml.security.View viewCode = new net.sf.ahtutils.xml.security.View();
+		org.jeesl.model.xml.system.security.View viewCode = new org.jeesl.model.xml.system.security.View();
 		viewCode.setCode("");
 		
-		net.sf.ahtutils.xml.security.Action action = new net.sf.ahtutils.xml.security.Action();
+		org.jeesl.model.xml.system.security.Action action = new org.jeesl.model.xml.system.security.Action();
 		action.setCode("");
 		action.setView(viewCode);
 		action.setLangs(XmlStatusQuery.langs());

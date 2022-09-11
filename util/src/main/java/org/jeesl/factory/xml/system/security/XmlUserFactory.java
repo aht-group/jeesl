@@ -3,10 +3,9 @@ package org.jeesl.factory.xml.system.security;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 import org.jeesl.model.xml.jeesl.QuerySecurity;
+import org.jeesl.model.xml.system.security.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.security.User;
 
 public class XmlUserFactory<USER extends JeeslUser<?>>
 {

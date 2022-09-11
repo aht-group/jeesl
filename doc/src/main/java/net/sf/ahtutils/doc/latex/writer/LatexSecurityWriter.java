@@ -10,6 +10,8 @@ import org.apache.commons.configuration.Configuration;
 import org.jeesl.api.rest.system.security.JeeslSecurityRestExport;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.system.navigation.Menu;
+import org.jeesl.model.xml.system.security.Security;
+import org.jeesl.model.xml.system.security.View;
 import org.openfuxml.content.graph.Node;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -26,8 +28,6 @@ import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityPagesSectionFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityRolesSectionFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityUsecasesSectionFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityViewsSectionFactory;
-import net.sf.ahtutils.xml.security.Security;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -180,7 +180,7 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 	{
 		Security security = rest.documentationSecurityPageActions();
 		
-		for(net.sf.ahtutils.xml.security.Category category : security.getCategory())
+		for(org.jeesl.model.xml.system.security.Category category : security.getCategory())
 		{
 			for(View view : category.getViews().getView())
 			{

@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.View;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,8 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.dir.DirChecker;
 

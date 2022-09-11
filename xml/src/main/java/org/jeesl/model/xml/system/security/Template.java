@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.security;
+package org.jeesl.model.xml.system.security;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -24,8 +24,6 @@ import net.sf.ahtutils.xml.status.Langs;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}actions"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}views"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -43,12 +41,10 @@ import net.sf.ahtutils.xml.status.Langs;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "descriptions",
-    "langs",
-    "actions",
-    "views"
+    "langs"
 })
-@XmlRootElement(name = "usecase")
-public class Usecase
+@XmlRootElement(name = "template")
+public class Template
     implements Serializable
 {
 
@@ -57,10 +53,6 @@ public class Usecase
     protected Descriptions descriptions;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Langs langs;
-    @XmlElement(required = true)
-    protected Actions actions;
-    @XmlElement(required = true)
-    protected Views views;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "code")
@@ -128,62 +120,6 @@ public class Usecase
 
     public boolean isSetLangs() {
         return (this.langs!= null);
-    }
-
-    /**
-     * Gets the value of the actions property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Actions }
-     *     
-     */
-    public Actions getActions() {
-        return actions;
-    }
-
-    /**
-     * Sets the value of the actions property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Actions }
-     *     
-     */
-    public void setActions(Actions value) {
-        this.actions = value;
-    }
-
-    public boolean isSetActions() {
-        return (this.actions!= null);
-    }
-
-    /**
-     * Gets the value of the views property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Views }
-     *     
-     */
-    public Views getViews() {
-        return views;
-    }
-
-    /**
-     * Sets the value of the views property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Views }
-     *     
-     */
-    public void setViews(Views value) {
-        this.views = value;
-    }
-
-    public boolean isSetViews() {
-        return (this.views!= null);
     }
 
     /**

@@ -9,6 +9,7 @@ import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.module.survey.Survey;
+import org.jeesl.model.xml.system.security.Staff;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -35,7 +36,6 @@ import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory.Code;
 import net.sf.ahtutils.xml.aht.Aht;
 import net.sf.ahtutils.xml.qa.Category;
 import net.sf.ahtutils.xml.qa.Qa;
-import net.sf.ahtutils.xml.security.Staff;
 import net.sf.ahtutils.xml.status.Translations;
 
 public class LatexQaWriter
@@ -98,7 +98,7 @@ public class LatexQaWriter
 		return keys;
 	}
 
-	public void writeQaRoles(net.sf.ahtutils.xml.security.Category securityCategory) throws OfxAuthoringException, IOException, UtilsConfigurationException
+	public void writeQaRoles(org.jeesl.model.xml.system.security.Category securityCategory) throws OfxAuthoringException, IOException, UtilsConfigurationException
 	{
 		Table table = ofRoles.build(securityCategory, buildHeaderKeys());
 		ofxMlw.table("qa/roles", table, "table");

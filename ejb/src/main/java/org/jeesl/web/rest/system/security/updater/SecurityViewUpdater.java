@@ -25,10 +25,10 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplat
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.xml.system.security.Security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SecurityViewUpdater <L extends JeeslLang,
@@ -111,12 +111,12 @@ public class SecurityViewUpdater <L extends JeeslLang,
 		return du;
 	}
 	
-	@Override protected void iuChilds(C eCategory, net.sf.ahtutils.xml.security.Category xCategory) throws UtilsConfigurationException
+	@Override protected void iuChilds(C eCategory, org.jeesl.model.xml.system.security.Category xCategory) throws UtilsConfigurationException
 	{
 		logger.info("iuChilds (security.views) "+xCategory.getTmp().getView().size());
 		if(xCategory.isSetTmp() && xCategory.getTmp().isSetView())
 		{
-			for(net.sf.ahtutils.xml.security.View view : xCategory.getTmp().getView())
+			for(org.jeesl.model.xml.system.security.View view : xCategory.getTmp().getView())
 			{
 				logger.trace("View: "+view.getCode());
 				dbCleanerView.handled(view.getCode());
@@ -125,7 +125,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 		}
 	}
 	
-	private void iuView(C category, net.sf.ahtutils.xml.security.View view) throws UtilsConfigurationException
+	private void iuView(C category, org.jeesl.model.xml.system.security.View view) throws UtilsConfigurationException
 	{
 		DataUpdateTracker dut = new DataUpdateTracker(true);
 		dut.setType(XmlTypeFactory.build(fbSecurity.getClassView().getName(),"DB Import/Update"));
@@ -192,7 +192,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 			logger.trace("Actions: "+view.getCode()+" "+view.isSetActions());
 			if(view.isSetActions() && view.getActions().isSetAction())
 			{
-				for(net.sf.ahtutils.xml.security.Action action : view.getActions().getAction())
+				for(org.jeesl.model.xml.system.security.Action action : view.getActions().getAction())
 				{
 					dbCleanerAction.handled(action.getCode());
 					iuAction(ejb, action);
@@ -205,7 +205,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 	}
 	
 	
-	private void iuAction(V ejbView, net.sf.ahtutils.xml.security.Action action) throws UtilsConfigurationException
+	private void iuAction(V ejbView, org.jeesl.model.xml.system.security.Action action) throws UtilsConfigurationException
 	{
 		A ebj;
 		try

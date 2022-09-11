@@ -5,12 +5,12 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.Security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.controller.factory.AbstractFreemarkerFileFactory;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.Security;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractJavaSecurityFileFactory extends AbstractFreemarkerFileFactory 
@@ -42,7 +42,7 @@ public class AbstractJavaSecurityFileFactory extends AbstractFreemarkerFileFacto
 	}
 	
 	protected void processCategoriesOld(List<Category> lCategory) throws UtilsConfigurationException {logger.warn("This needs to be overridden");}
-	protected void processCategories(List<net.sf.ahtutils.xml.security.Category> lCategory) throws UtilsConfigurationException {logger.warn("This needs to be overridden");}
+	protected void processCategories(List<org.jeesl.model.xml.system.security.Category> lCategory) throws UtilsConfigurationException {logger.warn("This needs to be overridden");}
 	
 	protected String createClassName(String code)
 	{

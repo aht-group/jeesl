@@ -8,10 +8,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.Staff;
-import net.sf.ahtutils.xml.security.Staffs;
-import net.sf.ahtutils.xml.security.User;
+
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.Staff;
+import org.jeesl.model.xml.system.security.Staffs;
+import org.jeesl.model.xml.system.security.User;
 
 
 /**

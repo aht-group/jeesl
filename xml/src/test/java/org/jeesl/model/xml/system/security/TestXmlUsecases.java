@@ -4,8 +4,6 @@ import org.jeesl.JeeslXmlTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Usecases;
-
 public class TestXmlUsecases extends AbstractXmlSecurityTest<Usecases>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlUsecases.class);

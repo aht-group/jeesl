@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.security;
+package org.jeesl.model.xml.system.security;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}view" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}template" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,52 +32,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "view"
+    "template"
 })
-@XmlRootElement(name = "tmp")
-public class Tmp
+@XmlRootElement(name = "templates")
+public class Templates
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<View> view;
+    protected List<Template> template;
 
     /**
-     * Gets the value of the view property.
+     * Gets the value of the template property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the view property.
+     * This is why there is not a <CODE>set</CODE> method for the template property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getView().add(newItem);
+     *    getTemplate().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link View }
+     * {@link Template }
      * 
      * 
      */
-    public List<View> getView() {
-        if (view == null) {
-            view = new ArrayList<View>();
+    public List<Template> getTemplate() {
+        if (template == null) {
+            template = new ArrayList<Template>();
         }
-        return this.view;
+        return this.template;
     }
 
-    public boolean isSetView() {
-        return ((this.view!= null)&&(!this.view.isEmpty()));
+    public boolean isSetTemplate() {
+        return ((this.template!= null)&&(!this.template.isEmpty()));
     }
 
-    public void unsetView() {
-        this.view = null;
+    public void unsetTemplate() {
+        this.template = null;
     }
 
 }

@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.jeesl.model.xml.module.survey.Correlation;
+import org.jeesl.model.xml.system.security.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.View;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

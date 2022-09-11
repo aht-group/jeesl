@@ -35,6 +35,15 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.system.security.Action;
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.Roles;
+import org.jeesl.model.xml.system.security.Security;
+import org.jeesl.model.xml.system.security.Staffs;
+import org.jeesl.model.xml.system.security.Template;
+import org.jeesl.model.xml.system.security.Tmp;
+import org.jeesl.model.xml.system.security.View;
+import org.jeesl.model.xml.system.security.Views;
 import org.jeesl.util.comparator.ejb.system.security.SecurityActionComparator;
 import org.jeesl.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.jeesl.util.comparator.ejb.system.security.SecurityUsecaseComparator;
@@ -48,15 +57,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.rest.security.UtilsSecurityViewImport;
-import net.sf.ahtutils.xml.security.Action;
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.Roles;
-import net.sf.ahtutils.xml.security.Security;
-import net.sf.ahtutils.xml.security.Staffs;
-import net.sf.ahtutils.xml.security.Template;
-import net.sf.ahtutils.xml.security.Tmp;
-import net.sf.ahtutils.xml.security.View;
-import net.sf.ahtutils.xml.security.Views;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription,
@@ -176,17 +176,17 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 			{
 				try
 				{
-					net.sf.ahtutils.xml.security.Category xCategory = fCategory.build(category);
+					org.jeesl.model.xml.system.security.Category xCategory = fCategory.build(category);
 					xCategory.setViews(XmlViewsFactory.build());
 					xCategory.setTmp(new Tmp());
 					for(V eView : fSecurity.allForCategory(fbSecurity.getClassView(), fbSecurity.getClassCategory(), category.getCode()))
 					{
 						eView = fSecurity.load(fbSecurity.getClassView(),eView);
-						net.sf.ahtutils.xml.security.View xView = xfView.build(eView);
+						org.jeesl.model.xml.system.security.View xView = xfView.build(eView);
 						xView.setActions(XmlActionsFactory.build());
 						for(A action : eView.getActions())
 						{
-							net.sf.ahtutils.xml.security.Action xAction = xfAction.build(action);							
+							org.jeesl.model.xml.system.security.Action xAction = xfAction.build(action);							
 							xView.getActions().getAction().add(xAction);
 						}					
 						xCategory.getTmp().getView().add(xView);
@@ -209,7 +209,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 			{
 				try
 				{
-					net.sf.ahtutils.xml.security.Category xCat = fCategory.build(category);
+					org.jeesl.model.xml.system.security.Category xCat = fCategory.build(category);
 					xCat.setRoles(XmlRolesFactory.build());
 					for(R role : fSecurity.allForCategory(fbSecurity.getClassRole(), fbSecurity.getClassCategory(), category.getCode()))
 					{
@@ -235,7 +235,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 			{
 				try
 				{
-					net.sf.ahtutils.xml.security.Category xmlCat = fCategory.build(category);
+					org.jeesl.model.xml.system.security.Category xmlCat = fCategory.build(category);
 					xmlCat.setTemplates(XmlTemplatesFactory.build());
 					for(AT template : fSecurity.allForCategory(fbSecurity.getClassTemplate(), fbSecurity.getClassCategory(), category.getCode()))
 					{
@@ -260,7 +260,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 			{
 				try
 				{
-					net.sf.ahtutils.xml.security.Category xmlCat = fCategory.build(category);
+					org.jeesl.model.xml.system.security.Category xmlCat = fCategory.build(category);
 					xmlCat.setUsecases(XmlUsecasesFactory.build());
 					for(U usecase : fSecurity.allForCategory(fbSecurity.getClassUsecase(), fbSecurity.getClassCategory(), category.getCode()))
 					{
@@ -286,7 +286,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 			{
 				try
 				{
-					net.sf.ahtutils.xml.security.Category xmlCat = fCategory.build(category);
+					org.jeesl.model.xml.system.security.Category xmlCat = fCategory.build(category);
 					xmlCat.setViews(XmlViewsFactory.build());
 					for(V view : fSecurity.allForCategory(fbSecurity.getClassView(), fbSecurity.getClassCategory(), category.getCode()))
 					{
@@ -349,7 +349,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 						views.getView().add(xView);
 					}
 					
-					net.sf.ahtutils.xml.security.Category xCategory = fCategory.build(category);
+					org.jeesl.model.xml.system.security.Category xCategory = fCategory.build(category);
 					xCategory.setViews(views);
 					xml.getCategory().add(xCategory);
 				}
@@ -369,7 +369,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 			{
 				try
 				{
-					net.sf.ahtutils.xml.security.Category xmlCat = fCategory.build(category);
+					org.jeesl.model.xml.system.security.Category xmlCat = fCategory.build(category);
 					xmlCat.setUsecases(XmlUsecasesFactory.build());
 					for(U usecase : fSecurity.allForCategory(fbSecurity.getClassUsecase(), fbSecurity.getClassCategory(), category.getCode()))
 					{

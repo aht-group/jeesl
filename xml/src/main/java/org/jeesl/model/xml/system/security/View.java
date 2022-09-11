@@ -1,9 +1,7 @@
 
-package net.sf.ahtutils.xml.security;
+package org.jeesl.model.xml.system.security;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -12,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
+import org.jeesl.model.xml.system.navigation.Navigation;
 
 
 /**
@@ -24,21 +23,22 @@ import net.sf.ahtutils.xml.status.Langs;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}roles"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}access"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/navigation}navigation"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}actions"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}templates"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}usecases"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}tmp"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}views"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}staffs" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}roles"/&gt;
  *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="visible" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="documentation" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="public" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="onlyLoginRequired" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="urlParameter" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -48,40 +48,33 @@ import net.sf.ahtutils.xml.status.Langs;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "langs",
     "descriptions",
-    "roles",
+    "langs",
+    "access",
+    "navigation",
     "actions",
-    "templates",
-    "usecases",
-    "tmp",
-    "views",
-    "staffs"
+    "roles"
 })
-@XmlRootElement(name = "category")
-public class Category
+@XmlRootElement(name = "view")
+public class View
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
-    protected Langs langs;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Descriptions descriptions;
+    @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
+    protected Langs langs;
     @XmlElement(required = true)
-    protected Roles roles;
+    protected Access access;
+    @XmlElement(namespace = "http://ahtutils.aht-group.com/navigation", required = true)
+    protected Navigation navigation;
     @XmlElement(required = true)
     protected Actions actions;
     @XmlElement(required = true)
-    protected Templates templates;
-    @XmlElement(required = true)
-    protected Usecases usecases;
-    @XmlElement(required = true)
-    protected Tmp tmp;
-    @XmlElement(required = true)
-    protected Views views;
-    @XmlElement(required = true)
-    protected List<Staffs> staffs;
+    protected Roles roles;
+    @XmlAttribute(name = "id")
+    protected Long id;
     @XmlAttribute(name = "code")
     protected String code;
     @XmlAttribute(name = "label")
@@ -92,34 +85,12 @@ public class Category
     protected Boolean visible;
     @XmlAttribute(name = "documentation")
     protected Boolean documentation;
-
-    /**
-     * Gets the value of the langs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Langs }
-     *     
-     */
-    public Langs getLangs() {
-        return langs;
-    }
-
-    /**
-     * Sets the value of the langs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Langs }
-     *     
-     */
-    public void setLangs(Langs value) {
-        this.langs = value;
-    }
-
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
+    @XmlAttribute(name = "public")
+    protected Boolean _public;
+    @XmlAttribute(name = "onlyLoginRequired")
+    protected Boolean onlyLoginRequired;
+    @XmlAttribute(name = "urlParameter")
+    protected String urlParameter;
 
     /**
      * Gets the value of the descriptions property.
@@ -150,31 +121,87 @@ public class Category
     }
 
     /**
-     * Gets the value of the roles property.
+     * Gets the value of the langs property.
      * 
      * @return
      *     possible object is
-     *     {@link Roles }
+     *     {@link Langs }
      *     
      */
-    public Roles getRoles() {
-        return roles;
+    public Langs getLangs() {
+        return langs;
     }
 
     /**
-     * Sets the value of the roles property.
+     * Sets the value of the langs property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Roles }
+     *     {@link Langs }
      *     
      */
-    public void setRoles(Roles value) {
-        this.roles = value;
+    public void setLangs(Langs value) {
+        this.langs = value;
     }
 
-    public boolean isSetRoles() {
-        return (this.roles!= null);
+    public boolean isSetLangs() {
+        return (this.langs!= null);
+    }
+
+    /**
+     * Gets the value of the access property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Access }
+     *     
+     */
+    public Access getAccess() {
+        return access;
+    }
+
+    /**
+     * Sets the value of the access property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Access }
+     *     
+     */
+    public void setAccess(Access value) {
+        this.access = value;
+    }
+
+    public boolean isSetAccess() {
+        return (this.access!= null);
+    }
+
+    /**
+     * Gets the value of the navigation property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Navigation }
+     *     
+     */
+    public Navigation getNavigation() {
+        return navigation;
+    }
+
+    /**
+     * Sets the value of the navigation property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Navigation }
+     *     
+     */
+    public void setNavigation(Navigation value) {
+        this.navigation = value;
+    }
+
+    public boolean isSetNavigation() {
+        return (this.navigation!= null);
     }
 
     /**
@@ -206,152 +233,63 @@ public class Category
     }
 
     /**
-     * Gets the value of the templates property.
+     * Gets the value of the roles property.
      * 
      * @return
      *     possible object is
-     *     {@link Templates }
+     *     {@link Roles }
      *     
      */
-    public Templates getTemplates() {
-        return templates;
+    public Roles getRoles() {
+        return roles;
     }
 
     /**
-     * Sets the value of the templates property.
+     * Sets the value of the roles property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Templates }
+     *     {@link Roles }
      *     
      */
-    public void setTemplates(Templates value) {
-        this.templates = value;
+    public void setRoles(Roles value) {
+        this.roles = value;
     }
 
-    public boolean isSetTemplates() {
-        return (this.templates!= null);
+    public boolean isSetRoles() {
+        return (this.roles!= null);
     }
 
     /**
-     * Gets the value of the usecases property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
-     *     {@link Usecases }
+     *     {@link Long }
      *     
      */
-    public Usecases getUsecases() {
-        return usecases;
+    public long getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the usecases property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Usecases }
+     *     {@link Long }
      *     
      */
-    public void setUsecases(Usecases value) {
-        this.usecases = value;
+    public void setId(long value) {
+        this.id = value;
     }
 
-    public boolean isSetUsecases() {
-        return (this.usecases!= null);
+    public boolean isSetId() {
+        return (this.id!= null);
     }
 
-    /**
-     * Gets the value of the tmp property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Tmp }
-     *     
-     */
-    public Tmp getTmp() {
-        return tmp;
-    }
-
-    /**
-     * Sets the value of the tmp property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Tmp }
-     *     
-     */
-    public void setTmp(Tmp value) {
-        this.tmp = value;
-    }
-
-    public boolean isSetTmp() {
-        return (this.tmp!= null);
-    }
-
-    /**
-     * Gets the value of the views property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Views }
-     *     
-     */
-    public Views getViews() {
-        return views;
-    }
-
-    /**
-     * Sets the value of the views property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Views }
-     *     
-     */
-    public void setViews(Views value) {
-        this.views = value;
-    }
-
-    public boolean isSetViews() {
-        return (this.views!= null);
-    }
-
-    /**
-     * Gets the value of the staffs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the staffs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getStaffs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Staffs }
-     * 
-     * 
-     */
-    public List<Staffs> getStaffs() {
-        if (staffs == null) {
-            staffs = new ArrayList<Staffs>();
-        }
-        return this.staffs;
-    }
-
-    public boolean isSetStaffs() {
-        return ((this.staffs!= null)&&(!this.staffs.isEmpty()));
-    }
-
-    public void unsetStaffs() {
-        this.staffs = null;
+    public void unsetId() {
+        this.id = null;
     }
 
     /**
@@ -504,6 +442,98 @@ public class Category
 
     public void unsetDocumentation() {
         this.documentation = null;
+    }
+
+    /**
+     * Gets the value of the public property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isPublic() {
+        return _public;
+    }
+
+    /**
+     * Sets the value of the public property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setPublic(boolean value) {
+        this._public = value;
+    }
+
+    public boolean isSetPublic() {
+        return (this._public!= null);
+    }
+
+    public void unsetPublic() {
+        this._public = null;
+    }
+
+    /**
+     * Gets the value of the onlyLoginRequired property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isOnlyLoginRequired() {
+        return onlyLoginRequired;
+    }
+
+    /**
+     * Sets the value of the onlyLoginRequired property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setOnlyLoginRequired(boolean value) {
+        this.onlyLoginRequired = value;
+    }
+
+    public boolean isSetOnlyLoginRequired() {
+        return (this.onlyLoginRequired!= null);
+    }
+
+    public void unsetOnlyLoginRequired() {
+        this.onlyLoginRequired = null;
+    }
+
+    /**
+     * Gets the value of the urlParameter property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUrlParameter() {
+        return urlParameter;
+    }
+
+    /**
+     * Sets the value of the urlParameter property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUrlParameter(String value) {
+        this.urlParameter = value;
+    }
+
+    public boolean isSetUrlParameter() {
+        return (this.urlParameter!= null);
     }
 
 }

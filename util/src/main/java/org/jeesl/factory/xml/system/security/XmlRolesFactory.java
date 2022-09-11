@@ -5,6 +5,8 @@ import java.util.List;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.model.xml.system.security.Role;
+import org.jeesl.model.xml.system.security.Roles;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
@@ -13,9 +15,6 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategor
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.security.Role;
-import net.sf.ahtutils.xml.security.Roles;
 
 public class XmlRolesFactory <L extends JeeslLang, D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,
@@ -66,9 +65,9 @@ public class XmlRolesFactory <L extends JeeslLang, D extends JeeslDescription,
 		return xml;
 	}
 	
-	public static net.sf.ahtutils.xml.security.Roles build2()
+	public static org.jeesl.model.xml.system.security.Roles build2()
 	{
-		net.sf.ahtutils.xml.security.Roles xml = build();
+		org.jeesl.model.xml.system.security.Roles xml = build();
 
 		return xml;
 	}

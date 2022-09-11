@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.security;
+package org.jeesl.model.xml.system.security;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -24,11 +24,9 @@ import net.sf.ahtutils.xml.status.Langs;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}category"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}views"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}actions"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}usecases"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}staffs"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}view"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}template"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}roles"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -47,14 +45,12 @@ import net.sf.ahtutils.xml.status.Langs;
 @XmlType(name = "", propOrder = {
     "descriptions",
     "langs",
-    "category",
-    "views",
-    "actions",
-    "usecases",
-    "staffs"
+    "view",
+    "template",
+    "roles"
 })
-@XmlRootElement(name = "role")
-public class Role
+@XmlRootElement(name = "action")
+public class Action
     implements Serializable
 {
 
@@ -64,15 +60,11 @@ public class Role
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Langs langs;
     @XmlElement(required = true)
-    protected Category category;
+    protected View view;
     @XmlElement(required = true)
-    protected Views views;
+    protected Template template;
     @XmlElement(required = true)
-    protected Actions actions;
-    @XmlElement(required = true)
-    protected Usecases usecases;
-    @XmlElement(required = true)
-    protected Staffs staffs;
+    protected Roles roles;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "code")
@@ -143,143 +135,87 @@ public class Role
     }
 
     /**
-     * Gets the value of the category property.
+     * Gets the value of the view property.
      * 
      * @return
      *     possible object is
-     *     {@link Category }
+     *     {@link View }
      *     
      */
-    public Category getCategory() {
-        return category;
+    public View getView() {
+        return view;
     }
 
     /**
-     * Sets the value of the category property.
+     * Sets the value of the view property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Category }
+     *     {@link View }
      *     
      */
-    public void setCategory(Category value) {
-        this.category = value;
+    public void setView(View value) {
+        this.view = value;
     }
 
-    public boolean isSetCategory() {
-        return (this.category!= null);
+    public boolean isSetView() {
+        return (this.view!= null);
     }
 
     /**
-     * Gets the value of the views property.
+     * Gets the value of the template property.
      * 
      * @return
      *     possible object is
-     *     {@link Views }
+     *     {@link Template }
      *     
      */
-    public Views getViews() {
-        return views;
+    public Template getTemplate() {
+        return template;
     }
 
     /**
-     * Sets the value of the views property.
+     * Sets the value of the template property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Views }
+     *     {@link Template }
      *     
      */
-    public void setViews(Views value) {
-        this.views = value;
+    public void setTemplate(Template value) {
+        this.template = value;
     }
 
-    public boolean isSetViews() {
-        return (this.views!= null);
+    public boolean isSetTemplate() {
+        return (this.template!= null);
     }
 
     /**
-     * Gets the value of the actions property.
+     * Gets the value of the roles property.
      * 
      * @return
      *     possible object is
-     *     {@link Actions }
+     *     {@link Roles }
      *     
      */
-    public Actions getActions() {
-        return actions;
+    public Roles getRoles() {
+        return roles;
     }
 
     /**
-     * Sets the value of the actions property.
+     * Sets the value of the roles property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Actions }
+     *     {@link Roles }
      *     
      */
-    public void setActions(Actions value) {
-        this.actions = value;
+    public void setRoles(Roles value) {
+        this.roles = value;
     }
 
-    public boolean isSetActions() {
-        return (this.actions!= null);
-    }
-
-    /**
-     * Gets the value of the usecases property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Usecases }
-     *     
-     */
-    public Usecases getUsecases() {
-        return usecases;
-    }
-
-    /**
-     * Sets the value of the usecases property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Usecases }
-     *     
-     */
-    public void setUsecases(Usecases value) {
-        this.usecases = value;
-    }
-
-    public boolean isSetUsecases() {
-        return (this.usecases!= null);
-    }
-
-    /**
-     * Gets the value of the staffs property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Staffs }
-     *     
-     */
-    public Staffs getStaffs() {
-        return staffs;
-    }
-
-    /**
-     * Sets the value of the staffs property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Staffs }
-     *     
-     */
-    public void setStaffs(Staffs value) {
-        this.staffs = value;
-    }
-
-    public boolean isSetStaffs() {
-        return (this.staffs!= null);
+    public boolean isSetRoles() {
+        return (this.roles!= null);
     }
 
     /**

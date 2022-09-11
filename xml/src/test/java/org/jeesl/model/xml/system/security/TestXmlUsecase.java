@@ -6,8 +6,6 @@ import org.jeesl.model.xml.system.status.TestXmlLangs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Usecase;
-
 public class TestXmlUsecase extends AbstractXmlSecurityTest<Usecase>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlUsecase.class);

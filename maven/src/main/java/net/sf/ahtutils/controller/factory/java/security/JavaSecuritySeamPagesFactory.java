@@ -10,12 +10,12 @@ import java.util.Map;
 
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.java.security.AbstractJavaSecurityFileFactory;
+import org.jeesl.model.xml.system.security.Category;
+import org.jeesl.model.xml.system.security.View;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
-import net.sf.ahtutils.xml.security.Category;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 @SuppressWarnings({"rawtypes","unchecked"})
@@ -25,7 +25,7 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		
 	private Map<String,String> mCategoryPackage;
 	private Map<String,List<View>> mapOldViews; protected Map<String, List<View>> getMapOldViews() {return mapOldViews;}
-	private Map<String,List<net.sf.ahtutils.xml.security.View>> mapViews; protected Map<String, List<net.sf.ahtutils.xml.security.View>> getMapViews() {return mapViews;}
+	private Map<String,List<org.jeesl.model.xml.system.security.View>> mapViews; protected Map<String, List<org.jeesl.model.xml.system.security.View>> getMapViews() {return mapViews;}
 	
 	private File srcDir;
 	private String sLoginView,sAccessDeniedView;
@@ -39,17 +39,17 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		this.sAccessDeniedView=sAccessDeniedView;
 		this.viewQualifierBasePackage=viewQualifierBasePackage;
 		mapOldViews = new Hashtable<String,List<View>>();
-		mapViews = new Hashtable<String,List<net.sf.ahtutils.xml.security.View>>();
+		mapViews = new Hashtable<String,List<org.jeesl.model.xml.system.security.View>>();
 		mCategoryPackage = new Hashtable<String,String>();
 	}
 	
-	@Override protected void processCategories(List<net.sf.ahtutils.xml.security.Category> lCategory) throws UtilsConfigurationException
+	@Override protected void processCategories(List<org.jeesl.model.xml.system.security.Category> lCategory) throws UtilsConfigurationException
 	{
-		for(net.sf.ahtutils.xml.security.Category category : lCategory)
+		for(org.jeesl.model.xml.system.security.Category category : lCategory)
 		{
 			if(category.isSetTmp())
 			{
-				for(net.sf.ahtutils.xml.security.View view : category.getTmp().getView())
+				for(org.jeesl.model.xml.system.security.View view : category.getTmp().getView())
 				{
 					if(!view.isSetAccess()){throw new UtilsConfigurationException("No access for view@code="+view.getCode());}
 					if(!view.getAccess().isSetPublicUser()){throw new UtilsConfigurationException("No access.publicUser for view@code="+view.getCode());}
@@ -78,7 +78,7 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		}
 	}
 	
-	private void createPages(File fPackage, List<net.sf.ahtutils.xml.security.View> lViews) throws IOException, TemplateException
+	private void createPages(File fPackage, List<org.jeesl.model.xml.system.security.View> lViews) throws IOException, TemplateException
 	{
 		logger.debug("Process ... "+lViews.size()+" "+fPackage.getAbsolutePath());
 		freemarkerNodeModel.clear();
@@ -90,7 +90,7 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		boolean onePrivate = false;
 		boolean oneOnlyLoggedIn = false;
 		List<Map> modelViews = new ArrayList<Map>();
-		for(net.sf.ahtutils.xml.security.View v : lViews)
+		for(org.jeesl.model.xml.system.security.View v : lViews)
 		{			
 			JaxbUtil.info(v);
 			
@@ -132,9 +132,9 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		this.createFile(fJava, "jeesl/freemarker/java/security/seamPages.ftl");
 	}
 	
-	private List<net.sf.ahtutils.xml.security.View> getViewForPackage(String packageName)
+	private List<org.jeesl.model.xml.system.security.View> getViewForPackage(String packageName)
 	{
-		if(!mapViews.containsKey(packageName)){mapViews.put(packageName, new ArrayList<net.sf.ahtutils.xml.security.View>());}
+		if(!mapViews.containsKey(packageName)){mapViews.put(packageName, new ArrayList<org.jeesl.model.xml.system.security.View>());}
 		return mapViews.get(packageName);
 	}
 	

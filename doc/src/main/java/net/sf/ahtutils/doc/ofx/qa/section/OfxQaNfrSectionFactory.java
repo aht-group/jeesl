@@ -11,6 +11,7 @@ import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.module.survey.Answer;
 import org.jeesl.model.xml.module.survey.Question;
 import org.jeesl.model.xml.module.survey.Survey;
+import org.jeesl.model.xml.system.security.Staff;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -28,7 +29,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaNfrQuestionTableFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaNfrResultTableFactory;
-import net.sf.ahtutils.xml.security.Staff;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
 

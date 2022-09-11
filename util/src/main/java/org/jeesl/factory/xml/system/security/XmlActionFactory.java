@@ -10,10 +10,10 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.model.xml.system.security.Action;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
 
@@ -27,14 +27,14 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlActionFactory.class);
 		
-	private net.sf.ahtutils.xml.security.Action q;
+	private org.jeesl.model.xml.system.security.Action q;
 	
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescription;
 	private XmlViewFactory<L,D,C,R,V> xfView;
 	private XmlTemplateFactory<L,D,C,AT> xfTemplate;
 	
-	public XmlActionFactory(net.sf.ahtutils.xml.security.Action q)
+	public XmlActionFactory(org.jeesl.model.xml.system.security.Action q)
 	{
 		this.q=q;
 		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
@@ -44,7 +44,7 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 	}
 	
 
-	public net.sf.ahtutils.xml.security.Action build(A action)
+	public org.jeesl.model.xml.system.security.Action build(A action)
 	{
 		Action xml = new Action();
 		if(q.isSetCode()){xml.setCode(action.getCode());}
@@ -60,22 +60,22 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 		return xml;
 	}
 	
-	public static net.sf.ahtutils.xml.security.Action build(String code)
+	public static org.jeesl.model.xml.system.security.Action build(String code)
 	{
-		net.sf.ahtutils.xml.security.Action xml = new net.sf.ahtutils.xml.security.Action();
+		org.jeesl.model.xml.system.security.Action xml = new org.jeesl.model.xml.system.security.Action();
 		xml.setCode(code);
 		return xml;
 	}
 	
 	
-	public static Langs toLangs(net.sf.ahtutils.xml.security.Action action)
+	public static Langs toLangs(org.jeesl.model.xml.system.security.Action action)
 	{		
 		if(action.getTemplate()==null) {return action.getLangs();}
 		else {return action.getTemplate().getLangs();}
 	}
 	
 
-	public static Descriptions toDescriptions(net.sf.ahtutils.xml.security.Action action)
+	public static Descriptions toDescriptions(org.jeesl.model.xml.system.security.Action action)
 	{		
 		if(action.getTemplate()==null) {return action.getDescriptions();}
 		else {return action.getTemplate().getDescriptions();}
