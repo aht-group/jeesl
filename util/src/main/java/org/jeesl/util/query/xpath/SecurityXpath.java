@@ -6,7 +6,6 @@ import org.apache.commons.jxpath.JXPathContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.access.Access;
 import net.sf.ahtutils.xml.security.Roles;
 import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.security.Staffs;
@@ -61,7 +60,7 @@ public class SecurityXpath
 		return listResult.get(0);
 	}
 
-	public static synchronized View getMenuItem(Access access,String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
+	public static synchronized View getMenuItem(Security access, String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(access);
 

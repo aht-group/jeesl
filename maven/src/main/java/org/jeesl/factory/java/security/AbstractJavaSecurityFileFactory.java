@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.controller.factory.AbstractFreemarkerFileFactory;
-import net.sf.ahtutils.xml.access.Access;
 import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.Security;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -33,7 +32,7 @@ public class AbstractJavaSecurityFileFactory extends AbstractFreemarkerFileFacto
 	
 	public void processViewsOld(String fXml) throws FileNotFoundException, UtilsConfigurationException
 	{
-		Access access = JaxbUtil.loadJAXB(fXml, Access.class);
+		Security access = JaxbUtil.loadJAXB(fXml, Security.class);
 		processCategoriesOld(access.getCategory());
 	}
 	public void processViews(String fXml) throws FileNotFoundException, UtilsConfigurationException

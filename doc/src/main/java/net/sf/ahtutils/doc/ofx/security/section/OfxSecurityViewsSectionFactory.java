@@ -28,8 +28,6 @@ import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.security.list.OfxSecurityCategoryListFactory;
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityActionTableFactory;
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityViewTableFactory;
-import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.Role;
 import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.security.View;
@@ -55,40 +53,6 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		ofSecurityActionTable = new OfxSecurityActionTableFactory(config,langs,translations);
 		
 		adminDocBuilder = new JeeslLatexAdminDocumentationBuilder(config,translations,langs,null);
-	}
-	
-	
-	@Deprecated
-	public Section build(Access security) throws OfxAuthoringException, UtilsConfigurationException
-	{
-		Section section = XmlSectionFactory.build();
-		section.getContent().add(XmlTitleFactory.build("Views & Actions"));
-		
-		Comment comment = XmlCommentFactory.build();
-		OfxCommentBuilder.doNotModify(comment);
-		section.getContent().add(comment);
-		
-		try
-		{
-			String source = adminDocBuilder.getOfxResource(JeeslLatexAdminDocumentationBuilder.SecurityCode.sActualViews);
-			Section intro = JaxbUtil.loadJAXB(source, Section.class);
-			
-			Comment cIntro = XmlCommentFactory.build();
-			DocumentationCommentBuilder.configKeyReference(cIntro, config, JeeslLatexAdminDocumentationBuilder.SecurityCode.sActualViews.toString(), "Source file");
-			intro.getContent().add(cIntro);
-			
-			section.getContent().add(intro);
-		}
-		catch (FileNotFoundException e) {throw new OfxAuthoringException(e.getMessage());}
-		
-//		section.getContent().add(ofSecurityCategoryList.list(security.getCategory()));
-		
-		for(Category category : security.getCategory())
-		{
-			section.getContent().add(build(category));
-		}
-		
-		return section;
 	}
 	
 	public Section build(Security security) throws OfxAuthoringException, UtilsConfigurationException

@@ -26,7 +26,6 @@ import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityPagesSectionFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityRolesSectionFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityUsecasesSectionFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityViewsSectionFactory;
-import net.sf.ahtutils.xml.access.Access;
 import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
@@ -86,7 +85,7 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 		{
 			logger.info("Creating menu trees from "+xmlMenu+" to LaTex");
 			Menu menu = JaxbUtil.loadJAXB(xmlMenu,Menu.class);
-			Access access = JaxbUtil.loadJAXB(xmlViews, Access.class);
+			Security access = JaxbUtil.loadJAXB(xmlViews, Security.class);
 			for(String lang : langs)
 			{
 				OfxMenuTreeFactory f = new OfxMenuTreeFactory(config,lang,translations);
@@ -113,7 +112,7 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 			try
 			{
 				logger.debug("Converting "+xmlFile+" to LaTex ("+f.getAbsolutePath());
-				Access access = JaxbUtil.loadJAXB(xmlFile, Access.class);
+				Security access = JaxbUtil.loadJAXB(xmlFile, Security.class);
 				OfxSecurityCategoryListFactory latexFactory = new OfxSecurityCategoryListFactory(config,lang,translations,cp);
 				String content = latexFactory.saveDescription(access.getCategory());
 				StringIO.writeTxt(f, content);
@@ -169,12 +168,7 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 	}
 	
 	public void views(int lvl, JeeslSecurityRestExport rest) throws OfxAuthoringException, OfxConfigurationException, IOException, UtilsConfigurationException{views(lvl,rest.documentationSecurityViews());}
-	public void views(Access security) throws UtilsConfigurationException, OfxAuthoringException, OfxConfigurationException, IOException{views(2,security);}
-	public void views(int lvl, Access security) throws UtilsConfigurationException, OfxAuthoringException, OfxConfigurationException, IOException
-	{
-		Section section = ofViews.build(security);
-		ofxMlw.section(lvl,"/admin/security/actual/views",section);
-	}
+	public void views(Security security) throws UtilsConfigurationException, OfxAuthoringException, OfxConfigurationException, IOException{views(2,security);}
 	public void views(int lvl, Security security) throws UtilsConfigurationException, OfxAuthoringException, OfxConfigurationException, IOException
 	{
 		JaxbUtil.trace(security);

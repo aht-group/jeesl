@@ -28,10 +28,7 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.Security;
-import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SecurityViewUpdater <L extends JeeslLang,
@@ -63,7 +60,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 		dbCleanerAction = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassAction());
 	}
 	
-	@Deprecated public DataUpdate iuViewsAccess(Access access)
+	@Deprecated public DataUpdate iuViewsAccess(Security access)
 	{
 		logger.trace("iuViews starting ...");
 		

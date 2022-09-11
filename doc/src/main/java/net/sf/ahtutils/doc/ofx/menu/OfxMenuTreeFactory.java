@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.access.Access;
+import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
@@ -35,7 +35,7 @@ public class OfxMenuTreeFactory extends AbstractUtilsOfxDocumentationFactory
 		super(config,langs,translations);
 	}
 	
-	public Tree build(Menu menu,Access access) throws OfxAuthoringException, UtilsConfigurationException
+	public Tree build(Menu menu, Security access) throws OfxAuthoringException, UtilsConfigurationException
 	{
 		Tree tree = new Tree();
 		
@@ -46,7 +46,7 @@ public class OfxMenuTreeFactory extends AbstractUtilsOfxDocumentationFactory
 		return tree;
 	}
 	
-	private List<Node> build(List<MenuItem> items,Access access) throws UtilsConfigurationException
+	private List<Node> build(List<MenuItem> items, Security access) throws UtilsConfigurationException
 	{
 		List<Node> nodes = new ArrayList<Node>();
 		for(MenuItem item : items)
@@ -58,7 +58,7 @@ public class OfxMenuTreeFactory extends AbstractUtilsOfxDocumentationFactory
 		return nodes;
 	}
 	
-	private Node build(MenuItem item,Access access) throws UtilsConfigurationException
+	private Node build(MenuItem item, Security access) throws UtilsConfigurationException
 	{
 		try
 		{

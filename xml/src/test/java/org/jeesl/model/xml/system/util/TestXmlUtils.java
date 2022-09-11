@@ -4,7 +4,6 @@ import org.jeesl.JeeslXmlTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.access.TestXmlCategory;
 import net.sf.ahtutils.xml.utils.Utils;
 
 public class TestXmlUtils extends AbstractXmlUtilsTest<Utils>
@@ -19,8 +18,7 @@ public class TestXmlUtils extends AbstractXmlUtilsTest<Utils>
     	Utils xml = new Utils();
         	
     	if(withChilds)
-    	{
-    		xml.getCategory().add(TestXmlCategory.create(false));xml.getCategory().add(TestXmlCategory.create(false));  		
+    	{ 		
     		xml.getProperty().add(TestXmlProperty.create(false));xml.getProperty().add(TestXmlProperty.create(false));
     	}
     	

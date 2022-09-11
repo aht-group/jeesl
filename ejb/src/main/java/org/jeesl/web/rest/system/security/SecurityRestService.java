@@ -48,7 +48,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.rest.security.UtilsSecurityViewImport;
-import net.sf.ahtutils.xml.access.Access;
 import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.security.Role;
 import net.sf.ahtutils.xml.security.Roles;
@@ -148,7 +147,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 	}
 	
 	public DataUpdate iuSecurityTemplates(Security templates){return initTemplates.iuSecurityTemplates(templates);}
-	public DataUpdate iuSecurityViews(Access views){return viewUpdater.iuViewsAccess(views);}
+	public DataUpdate iuSecurityViews(Security views){return viewUpdater.iuViewsAccess(views);}
 	public DataUpdate importSecurityViews(Security views){return viewUpdater.iuViews(views);}
 	
 	public DataUpdate iuSecurityRoles(Security roles){return initRoles.iuSecurityRoles(roles);}

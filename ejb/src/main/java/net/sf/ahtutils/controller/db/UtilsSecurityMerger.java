@@ -4,7 +4,6 @@ import org.jeesl.util.query.xpath.SecurityXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.access.Access;
 import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.security.View;
@@ -21,7 +20,7 @@ public class UtilsSecurityMerger
 
 	}
 	
-	public void mergeViews(Access fileVersion, Security securityRest)
+	public void mergeViews(Security fileVersion, Security securityRest)
 	{	
 		for(Category cFile : fileVersion.getCategory())
 		{

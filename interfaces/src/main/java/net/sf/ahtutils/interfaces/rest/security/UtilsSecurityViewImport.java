@@ -6,12 +6,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import net.sf.ahtutils.xml.access.Access;
+import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public interface UtilsSecurityViewImport
 {
 	@POST @Path("/admin/security/views")
 	@Produces(MediaType.APPLICATION_XML) @Consumes(MediaType.APPLICATION_XML)
-	DataUpdate iuSecurityViews(Access views);
+	DataUpdate iuSecurityViews(Security views);
 }

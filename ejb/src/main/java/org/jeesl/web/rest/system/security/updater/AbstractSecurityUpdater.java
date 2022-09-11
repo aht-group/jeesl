@@ -28,7 +28,6 @@ import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithViews;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.access.Access;
 import net.sf.ahtutils.xml.security.Actions;
 import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.Security;
@@ -73,7 +72,7 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 		dbCleanerCategory = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassCategory());
 	}
 	
-	@Deprecated protected void iuCategoryAccess(Access access, JeeslSecurityCategory.Type type) throws UtilsConfigurationException
+	@Deprecated protected void iuCategoryAccess(Security access, JeeslSecurityCategory.Type type) throws UtilsConfigurationException
 	{
 		logger.info("i/u "+type+" with "+access.getCategory().size()+" categories");
 		
