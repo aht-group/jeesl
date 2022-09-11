@@ -65,8 +65,7 @@ public class Category
     protected Roles roles;
     @XmlElement(required = true)
     protected Views views;
-    @XmlElement(required = true)
-    protected Usecases usecases;
+
     @XmlAttribute(name = "code")
     protected String code;
     @XmlAttribute(name = "label")
@@ -200,34 +199,7 @@ public class Category
         return (this.views!= null);
     }
 
-    /*
-     * Gets the value of the usecases property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Usecases }
-     *     
-     */
-    public Usecases getUsecases() {
-        return usecases;
-    }
-
-    /*
-     * Sets the value of the usecases property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Usecases }
-     *     
-     */
-    public void setUsecases(Usecases value) {
-        this.usecases = value;
-    }
-
-    public boolean isSetUsecases() {
-        return (this.usecases!= null);
-    }
-
+  
     /*
      * Gets the value of the code property.
      * 
