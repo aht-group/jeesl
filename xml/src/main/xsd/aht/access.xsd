@@ -22,7 +22,7 @@
             <xsd:sequence>
                 <xsd:element ref="s:langs" maxOccurs="1"/>
                 <xsd:element ref="s:descriptions" maxOccurs="1"/>
-                <xsd:element ref="a:roles" maxOccurs="1"/>
+                <xsd:element ref="sec:roles" maxOccurs="1"/>
                 <xsd:element ref="a:views" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
@@ -60,27 +60,5 @@
             <xsd:attribute name="documentation" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
-    <xsd:element name="roles">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="sec:role" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-    
-       
-    <xsd:element name="usecase">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:descriptions" maxOccurs="1"/>
-                <xsd:element ref="s:langs" maxOccurs="1"/>
-                <xsd:element ref="a:views" maxOccurs="1"/>
-                <xsd:element ref="sec:actions" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="code" type="xsd:string"/>
-            <xsd:attribute name="name" type="xsd:string"/>
-            <xsd:attribute name="documentation" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
-	
+ 
 </xsd:schema>
