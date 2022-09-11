@@ -3,8 +3,6 @@ package net.sf.ahtutils.xml.access;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
-import net.sf.ahtutils.xml.security.Category;
-
 
 /**
  * This object contains factory methods for each 
@@ -37,14 +35,6 @@ public class ObjectFactory {
      */
     public Access createAccess() {
         return new Access();
-    }
-
-    /**
-     * Create an instance of {@link Category }
-     * 
-     */
-    public Category createCategory() {
-        return new Category();
     }
 
 }
