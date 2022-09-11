@@ -180,6 +180,7 @@
                 <xsd:element ref="sec:access" maxOccurs="1"/>
                 <xsd:element ref="n:navigation" maxOccurs="1"/>
                 <xsd:element ref="sec:actions" maxOccurs="1"/>
+                <xsd:element ref="sec:roles" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="id" type="xsd:long"/>
             <xsd:attribute name="code" type="xsd:string"/>
@@ -187,6 +188,11 @@
 			<xsd:attribute name="position" type="xsd:int"/>
             <xsd:attribute name="visible" type="xsd:boolean"/>
             <xsd:attribute name="documentation" type="xsd:boolean"/>
+            
+            <xsd:attribute name="public" type="xsd:boolean"/>
+            <xsd:attribute name="onlyLoginRequired" type="xsd:boolean"/>
+            <xsd:attribute name="urlParameter" type="xsd:string"/>
+
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="access">

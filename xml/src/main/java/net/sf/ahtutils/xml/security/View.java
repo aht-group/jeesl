@@ -28,6 +28,7 @@ import org.jeesl.model.xml.system.navigation.Navigation;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}access"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/navigation}navigation"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}actions"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}roles"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -35,6 +36,9 @@ import org.jeesl.model.xml.system.navigation.Navigation;
  *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="visible" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
  *       &lt;attribute name="documentation" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="public" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="onlyLoginRequired" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="urlParameter" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -48,7 +52,8 @@ import org.jeesl.model.xml.system.navigation.Navigation;
     "langs",
     "access",
     "navigation",
-    "actions"
+    "actions",
+    "roles"
 })
 @XmlRootElement(name = "view")
 public class View
@@ -66,6 +71,8 @@ public class View
     protected Navigation navigation;
     @XmlElement(required = true)
     protected Actions actions;
+    @XmlElement(required = true)
+    protected Roles roles;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "code")
@@ -78,6 +85,12 @@ public class View
     protected Boolean visible;
     @XmlAttribute(name = "documentation")
     protected Boolean documentation;
+    @XmlAttribute(name = "public")
+    protected Boolean _public;
+    @XmlAttribute(name = "onlyLoginRequired")
+    protected Boolean onlyLoginRequired;
+    @XmlAttribute(name = "urlParameter")
+    protected String urlParameter;
 
     /**
      * Gets the value of the descriptions property.
@@ -217,6 +230,34 @@ public class View
 
     public boolean isSetActions() {
         return (this.actions!= null);
+    }
+
+    /**
+     * Gets the value of the roles property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Roles }
+     *     
+     */
+    public Roles getRoles() {
+        return roles;
+    }
+
+    /**
+     * Sets the value of the roles property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Roles }
+     *     
+     */
+    public void setRoles(Roles value) {
+        this.roles = value;
+    }
+
+    public boolean isSetRoles() {
+        return (this.roles!= null);
     }
 
     /**
@@ -401,6 +442,98 @@ public class View
 
     public void unsetDocumentation() {
         this.documentation = null;
+    }
+
+    /**
+     * Gets the value of the public property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isPublic() {
+        return _public;
+    }
+
+    /**
+     * Sets the value of the public property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setPublic(boolean value) {
+        this._public = value;
+    }
+
+    public boolean isSetPublic() {
+        return (this._public!= null);
+    }
+
+    public void unsetPublic() {
+        this._public = null;
+    }
+
+    /**
+     * Gets the value of the onlyLoginRequired property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public boolean isOnlyLoginRequired() {
+        return onlyLoginRequired;
+    }
+
+    /**
+     * Sets the value of the onlyLoginRequired property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setOnlyLoginRequired(boolean value) {
+        this.onlyLoginRequired = value;
+    }
+
+    public boolean isSetOnlyLoginRequired() {
+        return (this.onlyLoginRequired!= null);
+    }
+
+    public void unsetOnlyLoginRequired() {
+        this.onlyLoginRequired = null;
+    }
+
+    /**
+     * Gets the value of the urlParameter property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUrlParameter() {
+        return urlParameter;
+    }
+
+    /**
+     * Sets the value of the urlParameter property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUrlParameter(String value) {
+        this.urlParameter = value;
+    }
+
+    public boolean isSetUrlParameter() {
+        return (this.urlParameter!= null);
     }
 
 }
