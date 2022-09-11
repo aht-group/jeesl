@@ -2,14 +2,12 @@
 package net.sf.ahtutils.xml.access;
 
 import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import net.sf.ahtutils.xml.security.Actions;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
@@ -28,7 +26,7 @@ import net.sf.ahtutils.xml.status.Langs;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/access}views"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/access}actions"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}actions"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -59,7 +57,7 @@ public class Role
     protected Langs langs;
     @XmlElement(required = true)
     protected Views views;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
     protected Actions actions;
     @XmlAttribute(name = "code")
     protected String code;

@@ -2,20 +2,17 @@
 package net.sf.ahtutils.xml.access;
 
 import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.jeesl.model.xml.system.navigation.Navigation;
-
 import net.sf.ahtutils.xml.security.Actions;
 import net.sf.ahtutils.xml.security.Roles;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
+import org.jeesl.model.xml.system.navigation.Navigation;
 
 
 /**
@@ -30,7 +27,7 @@ import net.sf.ahtutils.xml.status.Langs;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/access}actions"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}actions"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}roles"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/navigation}navigation"/&gt;
  *       &lt;/sequence&gt;
@@ -67,7 +64,7 @@ public class View
     protected Descriptions descriptions;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Langs langs;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
     protected Actions actions;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
     protected Roles roles;

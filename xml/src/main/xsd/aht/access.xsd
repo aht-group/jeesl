@@ -46,7 +46,7 @@
             <xsd:sequence>
                 <xsd:element ref="s:descriptions" maxOccurs="1"/>
                 <xsd:element ref="s:langs" maxOccurs="1"/>
-                <xsd:element ref="a:actions" maxOccurs="1"/>
+                <xsd:element ref="sec:actions" maxOccurs="1"/>
                 <xsd:element ref="sec:roles" maxOccurs="1"/>
                 <xsd:element ref="n:navigation" maxOccurs="1"/>
             </xsd:sequence>
@@ -73,7 +73,7 @@
                 <xsd:element ref="s:descriptions" maxOccurs="1"/>
                 <xsd:element ref="s:langs" maxOccurs="1"/>
                 <xsd:element ref="a:views" maxOccurs="1"/>
-                <xsd:element ref="a:actions" maxOccurs="1"/>
+                <xsd:element ref="sec:actions" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
@@ -87,30 +87,12 @@
                 <xsd:element ref="s:descriptions" maxOccurs="1"/>
                 <xsd:element ref="s:langs" maxOccurs="1"/>
                 <xsd:element ref="a:views" maxOccurs="1"/>
-                <xsd:element ref="a:actions" maxOccurs="1"/>
+                <xsd:element ref="sec:actions" maxOccurs="1"/>
             </xsd:sequence>
             <xsd:attribute name="code" type="xsd:string"/>
             <xsd:attribute name="name" type="xsd:string"/>
             <xsd:attribute name="documentation" type="xsd:boolean"/>
         </xsd:complexType>
     </xsd:element>
-	<xsd:element name="actions">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="a:action" maxOccurs="unbounded"/>
-            </xsd:sequence>
-        </xsd:complexType>
-    </xsd:element>
-        <xsd:element name="action">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:descriptions" maxOccurs="1"/>
-                <xsd:element ref="s:langs" maxOccurs="1"/>
-                <xsd:element ref="sec:roles" maxOccurs="1"/>
-				<xsd:element ref="sec:template" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="code" type="xsd:string"/>
-            <xsd:attribute name="documentation" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
+	
 </xsd:schema>
