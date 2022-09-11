@@ -22,7 +22,7 @@ import org.jeesl.model.xml.system.security.Role;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}role"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}role"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}level"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
@@ -46,7 +46,7 @@ public class Signature
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Role role;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Level level;

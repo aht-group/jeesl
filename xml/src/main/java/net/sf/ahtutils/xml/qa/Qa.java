@@ -25,7 +25,7 @@ import org.jeesl.model.xml.system.security.Staff;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/qa}category" maxOccurs="unbounded"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}staff" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}staff" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/survey}survey"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/qa}groups"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/qa}checklist" maxOccurs="unbounded"/&gt;
@@ -56,7 +56,7 @@ public class Qa
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
     protected List<Category> category;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected List<Staff> staff;
     @XmlElement(namespace = "http://www.jeesl.org/survey", required = true)
     protected Survey survey;

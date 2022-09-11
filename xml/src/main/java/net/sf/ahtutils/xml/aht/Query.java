@@ -38,14 +38,14 @@ import org.jeesl.model.xml.system.security.Staff;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}role"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}role"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}status"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}type"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}model"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/qa}test"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}category"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}staff"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}category"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}staff"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/report}report"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/revision}entity"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/survey}templates"/&gt;
@@ -92,7 +92,7 @@ public class Query
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Role role;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Langs langs;
@@ -104,9 +104,9 @@ public class Query
     protected Model model;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/qa", required = true)
     protected Test test;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Category category;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Staff staff;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/report", required = true)
     protected Report report;

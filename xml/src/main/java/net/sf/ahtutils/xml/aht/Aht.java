@@ -26,7 +26,7 @@ import org.jeesl.model.xml.system.security.User;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}status" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/finance}currency" maxOccurs="unbounded"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}user" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}user" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -51,7 +51,7 @@ public class Aht
     protected List<Status> status;
     @XmlElement(namespace = "http://www.jeesl.org/finance", required = true)
     protected List<Currency> currency;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected List<User> user;
 
     /**

@@ -25,7 +25,7 @@ import org.jeesl.model.xml.system.security.Role;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}type"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}level"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}role"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}role"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
@@ -52,7 +52,7 @@ public class Permission
     protected Type type;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Level level;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Role role;
     @XmlAttribute(name = "id")
     protected Long id;

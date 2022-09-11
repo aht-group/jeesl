@@ -23,8 +23,8 @@ import org.jeesl.model.xml.system.security.User;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}roles"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}user" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}roles"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}user" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -44,9 +44,9 @@ public class Responsibilities
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Roles roles;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected List<User> user;
 
     /**

@@ -24,10 +24,10 @@ import org.jeesl.model.xml.system.security.User;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}user"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}staff"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}staffs"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}role"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}user"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}staff"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}staffs"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}role"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="localeCode" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
@@ -50,13 +50,13 @@ public class QuerySecurity
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected User user;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Staff staff;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Staffs staffs;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Role role;
     @XmlAttribute(name = "localeCode")
     protected String localeCode;

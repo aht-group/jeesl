@@ -23,7 +23,7 @@ import org.jeesl.model.xml.system.security.User;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}user"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}user"/&gt;
  *         &lt;element ref="{http://www.jeesl.org/workflow}transition"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
@@ -47,7 +47,7 @@ public class Activity
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected User user;
     @XmlElement(required = true)
     protected Transition transition;

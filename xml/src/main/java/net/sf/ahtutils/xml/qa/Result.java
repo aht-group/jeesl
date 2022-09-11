@@ -24,7 +24,7 @@ import org.jeesl.model.xml.system.security.Staff;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/security}staff"/&gt;
+ *         &lt;element ref="{https://www.jeesl.org/jeesl/xsd/system/security}staff"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}status"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/qa}comment"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/qa}actual"/&gt;
@@ -51,7 +51,7 @@ public class Result
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/security", required = true)
+    @XmlElement(namespace = "https://www.jeesl.org/jeesl/xsd/system/security", required = true)
     protected Staff staff;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Status status;
