@@ -26,6 +26,7 @@ import net.sf.ahtutils.xml.status.Langs;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}view"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/security}template"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/security}roles"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -45,7 +46,8 @@ import net.sf.ahtutils.xml.status.Langs;
     "descriptions",
     "langs",
     "view",
-    "template"
+    "template",
+    "roles"
 })
 @XmlRootElement(name = "action")
 public class Action
@@ -61,6 +63,8 @@ public class Action
     protected View view;
     @XmlElement(required = true)
     protected Template template;
+    @XmlElement(required = true)
+    protected Roles roles;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "code")
@@ -184,6 +188,34 @@ public class Action
 
     public boolean isSetTemplate() {
         return (this.template!= null);
+    }
+
+    /**
+     * Gets the value of the roles property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Roles }
+     *     
+     */
+    public Roles getRoles() {
+        return roles;
+    }
+
+    /**
+     * Sets the value of the roles property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Roles }
+     *     
+     */
+    public void setRoles(Roles value) {
+        this.roles = value;
+    }
+
+    public boolean isSetRoles() {
+        return (this.roles!= null);
     }
 
     /**
