@@ -18,6 +18,7 @@ import org.jeesl.factory.xml.system.security.XmlTemplateFactory;
 import org.jeesl.factory.xml.system.security.XmlTemplatesFactory;
 import org.jeesl.factory.xml.system.security.XmlUsecaseFactory;
 import org.jeesl.factory.xml.system.security.XmlUsecasesFactory;
+import org.jeesl.factory.xml.system.security.XmlViewsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
@@ -46,10 +47,8 @@ import org.jeesl.web.rest.system.security.updater.SecurityViewUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.controller.factory.xml.acl.XmlViewsFactory;
 import net.sf.ahtutils.interfaces.rest.security.UtilsSecurityViewImport;
 import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.access.Views;
 import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.security.Role;
 import net.sf.ahtutils.xml.security.Roles;
@@ -58,6 +57,7 @@ import net.sf.ahtutils.xml.security.Staffs;
 import net.sf.ahtutils.xml.security.Template;
 import net.sf.ahtutils.xml.security.Tmp;
 import net.sf.ahtutils.xml.security.View;
+import net.sf.ahtutils.xml.security.Views;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription,

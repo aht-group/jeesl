@@ -19,8 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.access.Views;
 import net.sf.ahtutils.xml.security.View;
+import net.sf.ahtutils.xml.security.Views;
 import net.sf.ahtutils.xml.status.Translations;
 
 public class OfxSecurityViewTableFactory extends AbstractUtilsOfxDocumentationFactory

@@ -4,6 +4,7 @@ package net.sf.ahtutils.xml.access;
 import javax.xml.bind.annotation.XmlRegistry;
 
 import net.sf.ahtutils.xml.security.View;
+import net.sf.ahtutils.xml.security.Views;
 
 
 /**
