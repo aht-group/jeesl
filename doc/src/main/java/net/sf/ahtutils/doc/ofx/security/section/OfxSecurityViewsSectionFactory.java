@@ -29,6 +29,7 @@ import net.sf.ahtutils.doc.ofx.security.list.OfxSecurityCategoryListFactory;
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityActionTableFactory;
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityViewTableFactory;
 import net.sf.ahtutils.xml.access.Access;
+import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.Role;
 import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.security.View;
@@ -82,7 +83,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		
 //		section.getContent().add(ofSecurityCategoryList.list(security.getCategory()));
 		
-		for(net.sf.ahtutils.xml.access.Category category : security.getCategory())
+		for(Category category : security.getCategory())
 		{
 			section.getContent().add(build(category));
 		}
@@ -126,30 +127,6 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		return section;
 	}
 	
-	@Deprecated
-	private Section build(net.sf.ahtutils.xml.access.Category category) throws OfxAuthoringException
-	{
-		Section section = XmlSectionFactory.build();
-		section.getContent().add(OfxMultiLangFactory.title(langs, category.getLangs()));
-		
-		section.getContent().addAll(OfxMultiLangFactory.paragraph(langs, category.getDescriptions()));
-		section.getContent().add(ofSecurityViewTable.build(category));
-		
-		if(category.isSetViews())
-		{
-			for(View view : category.getViews().getView())
-			{
-				if(!view.isSetDocumentation()){view.setDocumentation(false);}
-				if(view.isDocumentation() && view.isSetActions() && view.getActions().getAction().size()>0)
-				{
-					section.getContent().add(build(category, view));
-				}
-			}
-		}
-		
-		return section;
-	}
-	
 	private Section build(net.sf.ahtutils.xml.security.Category category) throws OfxAuthoringException
 	{
 		Section section = XmlSectionFactory.build();
@@ -169,33 +146,6 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 				}
 			}
 		}
-		
-		return section;
-	}
-	
-	@Deprecated
-	private Section build(net.sf.ahtutils.xml.access.Category category, View view) throws OfxAuthoringException
-	{
-		Section section = XmlSectionFactory.build();
-		
-		Title title = XmlTitleFactory.build();
-		for(String key : langs)
-		{
-			StringBuffer sb = new StringBuffer();
-			try
-			{
-				sb.append(StatusXpath.getLang(category.getLangs(),key).getTranslation());
-				sb.append(" - ");
-				sb.append(StatusXpath.getLang(view.getLangs(),key).getTranslation());
-			}
-			catch (ExlpXpathNotFoundException e) {throw new OfxAuthoringException(e.getMessage());}
-			catch (ExlpXpathNotUniqueException e) {throw new OfxAuthoringException(e.getMessage());}
-			title.getContent().add(OfxTextFactory.build(key,sb.toString()));
-		}
-		section.getContent().add(title);
-		section.getContent().addAll(OfxMultiLangFactory.paragraph(langs, view.getDescriptions()));
-		
-		section.getContent().add(ofSecurityActionTable.build(view));
 		
 		return section;
 	}

@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
+import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.View;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -137,9 +138,9 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		return mapViews.get(packageName);
 	}
 	
-	@Deprecated @Override protected void processCategoriesOld(List<net.sf.ahtutils.xml.access.Category> lCategory) throws UtilsConfigurationException
+	@Deprecated @Override protected void processCategoriesOld(List<Category> lCategory) throws UtilsConfigurationException
 	{
-		for(net.sf.ahtutils.xml.access.Category category : lCategory)
+		for(Category category : lCategory)
 		{
 			if(category.isSetViews())
 			{

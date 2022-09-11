@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
-import net.sf.ahtutils.xml.access.Category;
+import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.View;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.dir.DirChecker;

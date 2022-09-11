@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
+import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.View;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.dir.DirChecker;
@@ -73,7 +74,7 @@ public class JavaSecurityViewRestrictorFactory extends AbstractJavaSecurityFileF
 		catch (TemplateException e) {e.printStackTrace();}
 	}
 
-	@Deprecated @Override protected void processCategoriesOld(List<net.sf.ahtutils.xml.access.Category> lCategory) throws UtilsConfigurationException
+	@Deprecated @Override protected void processCategoriesOld(List<Category> lCategory) throws UtilsConfigurationException
 	{
 		try {DirChecker.checkParentIsAnDir(fJavaRestrictor);}
 		catch (ExlpConfigurationException e) {throw new UtilsConfigurationException(e.getMessage());}
@@ -85,7 +86,7 @@ public class JavaSecurityViewRestrictorFactory extends AbstractJavaSecurityFileF
 		freemarkerNodeModel.put("abstract", classAbstractRestrictor.substring(classAbstractRestrictor.lastIndexOf(".")+1,classAbstractRestrictor.length()));
 		
 		List<Map> lCodes = new ArrayList<Map>();
-		for(net.sf.ahtutils.xml.access.Category category : lCategory)
+		for(Category category : lCategory)
 		{
 			if(category.isSetViews())
 			{

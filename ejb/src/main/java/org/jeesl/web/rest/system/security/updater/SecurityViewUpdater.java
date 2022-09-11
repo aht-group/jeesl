@@ -29,8 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.access.Category;
-import net.sf.ahtutils.xml.security.Action;
+import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.sync.DataUpdate;
@@ -115,19 +114,6 @@ public class SecurityViewUpdater <L extends JeeslLang,
 		return du;
 	}
 	
-	@Deprecated @Override protected void iuChilds(C aclCategory, Category category) throws UtilsConfigurationException
-	{
-		logger.info("iuChilds (access.views) "+category.getViews().getView().size());
-		if(category.isSetViews() && category.getViews().isSetView())
-		{
-			for(View view : category.getViews().getView())
-			{
-				logger.trace("View: "+view.getCode());
-				dbCleanerView.handled(view.getCode());
-				iuView(aclCategory, view);
-			}
-		}
-	}
 	@Override protected void iuChilds(C eCategory, net.sf.ahtutils.xml.security.Category xCategory) throws UtilsConfigurationException
 	{
 		logger.info("iuChilds (security.views) "+xCategory.getTmp().getView().size());

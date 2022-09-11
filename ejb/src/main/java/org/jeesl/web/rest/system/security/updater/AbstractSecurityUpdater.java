@@ -29,8 +29,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.access.Category;
 import net.sf.ahtutils.xml.security.Actions;
+import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.security.Views;
@@ -175,11 +175,7 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 		logger.trace("initUpdateUsecaseCategories finished");
 	}
 	
-	@Deprecated protected void iuChilds(C aclCategory, Category category) throws UtilsConfigurationException
-	{
-		logger.error("This method *must* be overridden!");
-	}
-	protected void iuChilds(C eCategory, net.sf.ahtutils.xml.security.Category category) throws UtilsConfigurationException
+	protected void iuChilds(C eCategory, Category category) throws UtilsConfigurationException
 	{
 		logger.error("This method *must* be overridden!");
 	}

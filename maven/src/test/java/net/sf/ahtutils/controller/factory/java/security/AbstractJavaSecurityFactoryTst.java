@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.test.AbstractUtilsMavenTst;
-import net.sf.ahtutils.xml.access.Category;
+import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.security.Views;
 
