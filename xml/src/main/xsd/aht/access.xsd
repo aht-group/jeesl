@@ -12,26 +12,9 @@
     <xsd:element name="access">
         <xsd:complexType>
             <xsd:sequence>
-                <xsd:element ref="a:category" maxOccurs="unbounded"/>
+                <xsd:element ref="sec:category" maxOccurs="unbounded"/>
             </xsd:sequence> 
         </xsd:complexType>
     </xsd:element>
-   
-    <xsd:element name="category">
-        <xsd:complexType>
-            <xsd:sequence>
-                <xsd:element ref="s:langs" maxOccurs="1"/>
-                <xsd:element ref="s:descriptions" maxOccurs="1"/>
-                <xsd:element ref="sec:roles" maxOccurs="1"/>
-                <xsd:element ref="sec:views" maxOccurs="1"/>
-            </xsd:sequence>
-            <xsd:attribute name="code" type="xsd:string"/>
-            <xsd:attribute name="label" type="xsd:string"/>
-            <xsd:attribute name="position" type="xsd:int"/>
-            <xsd:attribute name="visible" type="xsd:boolean"/>
-            <xsd:attribute name="documentation" type="xsd:boolean"/>
-        </xsd:complexType>
-    </xsd:element>
- 
- 
+  
 </xsd:schema>
