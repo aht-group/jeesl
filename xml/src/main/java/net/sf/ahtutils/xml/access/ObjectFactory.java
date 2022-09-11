@@ -3,6 +3,8 @@ package net.sf.ahtutils.xml.access;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
+import net.sf.ahtutils.xml.security.Action;
+
 
 /**
  * This object contains factory methods for each 
@@ -45,13 +47,7 @@ public class ObjectFactory {
         return new View();
     }
 
-    /**
-     * Create an instance of {@link Actions }
-     * 
-     */
-    public Actions createActions() {
-        return new Actions();
-    }
+
 
     /**
      * Create an instance of {@link Action }

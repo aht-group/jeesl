@@ -28,7 +28,6 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(XmlActionFactory.class);
 		
 	private net.sf.ahtutils.xml.security.Action q;
-	private net.sf.ahtutils.xml.access.Action qAcl;
 	
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescription;
@@ -43,11 +42,7 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetView()) {xfView = new XmlViewFactory<>(q.getView());}
 		if(q.isSetTemplate()){xfTemplate= new XmlTemplateFactory<>(q.getTemplate());}
 	}
-	public XmlActionFactory(net.sf.ahtutils.xml.access.Action qAcl)
-	{
-		this.qAcl=qAcl;
-		if(qAcl.isSetTemplate()){xfTemplate = new XmlTemplateFactory<>(qAcl.getTemplate());}
-	}
+	
 
 	public net.sf.ahtutils.xml.security.Action build(A action)
 	{
@@ -65,30 +60,6 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 		return xml;
 	}
 	
-	public net.sf.ahtutils.xml.access.Action create(A action)
-	{
-		net.sf.ahtutils.xml.access.Action xml = new net.sf.ahtutils.xml.access.Action();
-		if(qAcl.isSetCode()){xml.setCode(action.getCode());}
-		
-		boolean processTemplate = action.getTemplate()!=null;
-		
-		if(qAcl.isSetLangs() && !processTemplate)
-		{
-			XmlLangsFactory<L> f = new XmlLangsFactory<L>(qAcl.getLangs());
-			xml.setLangs(f.getUtilsLangs(action.getName()));
-		}
-		
-		if(qAcl.isSetDescriptions() && !processTemplate)
-		{
-			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(qAcl.getDescriptions());
-			xml.setDescriptions(f.create(action.getDescription()));
-		}
-		
-		if(qAcl.isSetTemplate() && processTemplate) {xml.setTemplate(xfTemplate.build(action.getTemplate()));}
-		
-		return xml;
-	}
-	
 	public static net.sf.ahtutils.xml.security.Action build(String code)
 	{
 		net.sf.ahtutils.xml.security.Action xml = new net.sf.ahtutils.xml.security.Action();
@@ -96,22 +67,14 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 		return xml;
 	}
 	
-	public static Langs toLangs(net.sf.ahtutils.xml.access.Action action)
-	{		
-		if(action.getTemplate()==null) {return action.getLangs();}
-		else {return action.getTemplate().getLangs();}
-	}	
+	
 	public static Langs toLangs(net.sf.ahtutils.xml.security.Action action)
 	{		
 		if(action.getTemplate()==null) {return action.getLangs();}
 		else {return action.getTemplate().getLangs();}
 	}
 	
-	public static Descriptions toDescriptions(net.sf.ahtutils.xml.access.Action action)
-	{		
-		if(action.getTemplate()==null) {return action.getDescriptions();}
-		else {return action.getTemplate().getDescriptions();}
-	}
+
 	public static Descriptions toDescriptions(net.sf.ahtutils.xml.security.Action action)
 	{		
 		if(action.getTemplate()==null) {return action.getDescriptions();}

@@ -41,7 +41,6 @@ public class TestXmlUsecase extends AbstractXmlAccessTest
     	{
     		xml.setLangs(TestXmlLangs.create(false));
     		xml.setDescriptions(TestXmlDescriptions.create(false));
-    		xml.setActions(TestXmlActions.create(false));
     		xml.setViews(TestXmlViews.create(false));
     	}
     	return xml;

@@ -258,21 +258,6 @@ public class SecurityQuery
 		return xml;
 	}
 	
-	public static net.sf.ahtutils.xml.access.Action docActionAcl()
-	{
-		net.sf.ahtutils.xml.security.Template template = new net.sf.ahtutils.xml.security.Template();
-		template.setCode("");
-		template.setLangs(XmlStatusQuery.langs());
-		template.setDescriptions(XmlStatusQuery.descriptions());
-		
-		net.sf.ahtutils.xml.access.Action xml = new net.sf.ahtutils.xml.access.Action();
-		xml.setCode("");
-		xml.setLangs(XmlStatusQuery.langs());
-		xml.setDescriptions(XmlStatusQuery.descriptions());
-		xml.setTemplate(template);
-		return xml;
-	}
-	
 	public static Usecase exUsecase()
 	{
 		net.sf.ahtutils.xml.security.Action action = new net.sf.ahtutils.xml.security.Action();action.setCode("");

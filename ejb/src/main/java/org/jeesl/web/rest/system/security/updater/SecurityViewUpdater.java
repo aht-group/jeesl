@@ -29,8 +29,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.access.Action;
 import net.sf.ahtutils.xml.access.Category;
+import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
@@ -290,42 +290,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 		catch (JeeslLockingException e) {dut.fail(e,false); }
 	}
 	
-	@Deprecated private void iuAction(V ejbView, Action action) throws UtilsConfigurationException
-	{
-		A ebj;
-		try
-		{
-			ebj = fSecurity.fByCode(fbSecurity.getClassAction(),action.getCode());
-			efLang.rmLang(fSecurity,ebj);
-			efDescription.rmDescription(fSecurity,ebj);
-		}
-		catch (JeeslNotFoundException e)
-		{
-			try
-			{
-				ebj = fbSecurity.getClassAction().newInstance();
-				ebj.setView(ejbView);
-				ebj.setCode(action.getCode());
-				ebj = fSecurity.persist(ebj);
-			}
-			catch (InstantiationException e2) {throw new UtilsConfigurationException(e2.getMessage());}
-			catch (IllegalAccessException e2) {throw new UtilsConfigurationException(e2.getMessage());}
-			catch (JeeslConstraintViolationException e2) {throw new UtilsConfigurationException(e2.getMessage());}	
-		}
-		
-		try
-		{
-			ebj.setVisible(true);
-			ebj.setPosition(0);
-			
-			ebj.setName(efLang.getLangMap(action.getLangs()));
-			ebj.setDescription(efDescription.create(action.getDescriptions()));
-			ebj.setView(ejbView);
-			ebj=fSecurity.save(ebj);
-		}
-		catch (JeeslConstraintViolationException e) {logger.error("Action.Code:"+action.getCode(),e);}
-		catch (JeeslLockingException e) {logger.error("",e);}
-	}
+	
 	private void iuAction(V ejbView, net.sf.ahtutils.xml.security.Action action) throws UtilsConfigurationException
 	{
 		A ebj;

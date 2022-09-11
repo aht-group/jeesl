@@ -36,6 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
+import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.security.Role;
 import net.sf.ahtutils.xml.status.Description;
 import net.sf.ahtutils.xml.status.Lang;
@@ -86,7 +87,7 @@ public class OfxSecurityPagesSectionFactory extends AbstractUtilsOfxDocumentatio
 		{
 			section.getContent().addAll(introductionAction(view));
 			List list = XmlListFactory.unordered();
-			for(net.sf.ahtutils.xml.access.Action action : view.getActions().getAction())
+			for(Action action : view.getActions().getAction())
 			{
 				Item item = XmlListItemFactory.build();
 				

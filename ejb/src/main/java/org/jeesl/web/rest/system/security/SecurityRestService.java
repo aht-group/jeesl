@@ -49,9 +49,9 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.controller.factory.xml.acl.XmlViewsFactory;
 import net.sf.ahtutils.interfaces.rest.security.UtilsSecurityViewImport;
 import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.access.Action;
 import net.sf.ahtutils.xml.access.View;
 import net.sf.ahtutils.xml.access.Views;
+import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.security.Role;
 import net.sf.ahtutils.xml.security.Roles;
 import net.sf.ahtutils.xml.security.Security;
@@ -112,7 +112,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 		xfRole = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exRole());
 		fRoleDescription = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.role());
 		xfAction = new XmlActionFactory<L,D,C,R,V,U,A,AT>(SecurityQuery.exAction());
-		xfActionDoc = new XmlActionFactory<>(SecurityQuery.docActionAcl());
+		xfActionDoc = new XmlActionFactory<>(SecurityQuery.exAction());
 		fTemplate = new XmlTemplateFactory<>(SecurityQuery.exTemplate());
 		fUsecase = new XmlUsecaseFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exUsecase());
 		fUsecaseDoc = new XmlUsecaseFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.docUsecase());
@@ -294,10 +294,10 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 					{
 						view = fSecurity.load(fbSecurity.getClassView(),view);
 						View xView = xfViewOld.create(view);
-						xView.setActions(XmlActionsFactory.create());
+						xView.setActions(XmlActionsFactory.build());
 						for(A action : view.getActions())
 						{
-							net.sf.ahtutils.xml.access.Action xAction = xfActionDoc.create(action);
+							Action xAction = xfActionDoc.build(action);
 							xView.getActions().getAction().add(xAction);
 						}
 						
@@ -334,10 +334,10 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 					{
 						view = fSecurity.load(fbSecurity.getClassView(),view);
 						View xView = xfViewOld.create(view);
-						xView.setActions(XmlActionsFactory.create());
+						xView.setActions(XmlActionsFactory.build());
 						for(A action : view.getActions())
 						{
-							Action xAction = xfActionDoc.create(action);
+							Action xAction = xfActionDoc.build(action);
 							xView.getActions().getAction().add(xAction);
 						}
 						

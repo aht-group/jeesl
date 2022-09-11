@@ -29,11 +29,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.access.Action;
-import net.sf.ahtutils.xml.access.Actions;
 import net.sf.ahtutils.xml.access.Category;
 import net.sf.ahtutils.xml.access.View;
 import net.sf.ahtutils.xml.access.Views;
+import net.sf.ahtutils.xml.security.Action;
+import net.sf.ahtutils.xml.security.Actions;
 import net.sf.ahtutils.xml.security.Security;
 
 public class AbstractSecurityUpdater <L extends JeeslLang,
@@ -218,22 +218,7 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 		return ejb;
 	}
 	
-	@Deprecated protected <T extends JeeslSecurityWithActions<A>> T iuListActions(T ejb, Actions actions) throws JeeslConstraintViolationException, JeeslNotFoundException, JeeslLockingException
-	{
-		ejb.getActions().clear();
-		ejb = fSecurity.update(ejb);
-		if(actions!=null)
-		{
-			for(Action action : actions.getAction())
-			{
-				A ejbAction = fSecurity.fByCode(fbSecurity.getClassAction(), action.getCode());
-				ejb.getActions().add(ejbAction);
-			}
-			ejb = fSecurity.update(ejb);
-		}
-		return ejb;
-	}
-	protected <T extends JeeslSecurityWithActions<A>> T iuListActions(T ejb, net.sf.ahtutils.xml.security.Actions actions) throws JeeslConstraintViolationException, JeeslNotFoundException, JeeslLockingException
+	protected <T extends JeeslSecurityWithActions<A>> T iuListActions(T ejb, Actions actions) throws JeeslConstraintViolationException, JeeslNotFoundException, JeeslLockingException
 	{
 		ejb.getActions().clear();
 		ejb = fSecurity.update(ejb);
