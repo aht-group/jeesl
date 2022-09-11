@@ -6,10 +6,11 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.jeesl.exception.processing.UtilsProcessingException;
+import org.jeesl.factory.xls.system.io.report.XlsCellFactory;
+import org.jeesl.factory.xls.system.io.report.XlsColumnFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.controller.util.poi.PoiRowColNumerator;
 import net.sf.ahtutils.xml.finance.Figures;
 import net.sf.ahtutils.xml.finance.Time;
 import net.sf.exlp.util.DateUtil;
@@ -42,14 +43,14 @@ public class XmlTimeFactory
 	
 	public static Time create(Sheet sheet, int row, String col, String code, String label) throws UtilsProcessingException
 	{
-		return create(sheet, row, PoiRowColNumerator.translateNameToIndex(col), code, label);
+		return create(sheet, row, XlsColumnFactory.code2index(col), code, label);
 	}
 	public static Time create(Sheet sheet, int row, int col, String code, String label) throws UtilsProcessingException
 	{
 		Cell cell = sheet.getRow(row).getCell(col);
 		if(cell==null)
 		{
-			throw new UtilsProcessingException("The cell is null. No Date in "+PoiRowColNumerator.create(row, col));
+			throw new UtilsProcessingException("The cell is null. No Date in "+XlsCellFactory.debugPosition(row, col));
 		}
 		else if(cell.getCellTypeEnum()!=CellType.NUMERIC)
 		{
@@ -57,7 +58,7 @@ public class XmlTimeFactory
 			sb.append(XmlTimeFactory.class.getSimpleName());
 			sb.append(": Cell ");
 			if(label!=null){sb.append("(").append(label).append(") ");}
-			sb.append(PoiRowColNumerator.create(row, col));
+			sb.append(XlsCellFactory.debugPosition(row, col));
 			sb.append(" has wrong CellType.");
 			sb.append(" Expected: ").append(CellType.NUMERIC);//.append(PoiSsCellType.translate(0));
 			sb.append(" Actual:").append(cell.getCellTypeEnum());

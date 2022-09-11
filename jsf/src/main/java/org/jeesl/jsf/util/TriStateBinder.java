@@ -1,9 +1,8 @@
 package org.jeesl.jsf.util;
 
+import org.jeesl.jsf.handler.PrimeFacesTriStateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.controller.util.PrimeFacesTriStateUtil;
 
 public class TriStateBinder
 {

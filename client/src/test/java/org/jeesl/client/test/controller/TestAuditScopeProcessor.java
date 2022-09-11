@@ -14,6 +14,7 @@ import org.jeesl.client.model.ejb.system.security.SecurityRole;
 import org.jeesl.client.model.ejb.system.security.SecurityUsecase;
 import org.jeesl.client.model.ejb.system.security.SecurityView;
 import org.jeesl.client.model.ejb.user.User;
+import org.jeesl.controller.processor.io.label.revision.AuditScopeProcessor;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -21,7 +22,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.controller.audit.AuditScopeProcessor;
 import net.sf.ahtutils.factory.xml.audit.XmlChangeFactory;
 import net.sf.ahtutils.factory.xml.audit.XmlRevisionFactory;
 import net.sf.ahtutils.factory.xml.audit.XmlRevisionsFactory;

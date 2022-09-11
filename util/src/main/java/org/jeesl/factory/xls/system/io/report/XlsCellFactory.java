@@ -281,4 +281,12 @@ public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
 	{
 		build(xlsRow, columnNr, style, value, 1);
 	}
+	 
+	public static String debugPosition(int row, int col)
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("row:"+(row+1));
+		sb.append(" col:"+XlsColumnFactory.index2code(col));
+		return sb.toString();
+	}
 }

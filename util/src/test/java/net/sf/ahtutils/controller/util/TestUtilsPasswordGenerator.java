@@ -1,6 +1,7 @@
 package net.sf.ahtutils.controller.util;
 
 import org.jeesl.JeeslUtilTestBootstrap;
+import org.jeesl.factory.txt.system.security.user.TxtPasswordGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -15,14 +16,14 @@ public class TestUtilsPasswordGenerator
 	{
 		for(int i=5;i<15;i++)
 		{
-			String pwd = UtilsPasswordGenerator.random(i);
+			String pwd = TxtPasswordGenerator.random(i);
 			Assert.assertEquals(i, pwd.length());
 		}
 	}
 	
 	public void direct()
 	{
-		logger.debug(UtilsPasswordGenerator.random());
+		logger.debug(TxtPasswordGenerator.random());
 	}
 	
 	public static void main (String[] args) throws Exception
