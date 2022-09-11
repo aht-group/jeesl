@@ -53,9 +53,9 @@
     </jxb:bindings>
     
     
-    <jxb:bindings schemaLocation="../xsd/aht/security.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="../xsd/jeesl/system/security.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="net.sf.ahtutils.xml.security"/>
+            <jxb:package name="org.jeesl.model.xml.system.security"/>
         </jxb:schemaBindings>
     </jxb:bindings>    
     

@@ -49,7 +49,7 @@
     <xsd:import namespace="http://ahtutils.aht-group.com/text" schemaLocation="aht/text.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/report" schemaLocation="aht/report.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/project" schemaLocation="aht/project.xsd"/>
-    <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="aht/security.xsd"/>
+    <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="jeesl/system/security.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/finance" schemaLocation="jeesl/finance.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/dbseed" schemaLocation="aht/dbseed.xsd"/>
     

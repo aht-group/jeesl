@@ -4,7 +4,7 @@
 	xmlns:us="http://ahtutils.aht-group.com/status"
     xmlns:sec="http://ahtutils.aht-group.com/security"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="security.xsd"/>
+    <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="../jeesl/system/security.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../jeesl/status.xsd"/>
 	<xsd:element name="utils">
 		<xsd:complexType>

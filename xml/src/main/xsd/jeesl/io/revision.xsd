@@ -9,7 +9,7 @@
 	<xsd:import namespace="http://ahtutils.aht-group.com/status" 	schemaLocation="../status.xsd"/>
 	<xsd:import namespace="http://ahtutils.aht-group.com/text" 		schemaLocation="../../aht/text.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/text" 				schemaLocation="../text.xsd"/>
-	<xsd:import namespace="http://ahtutils.aht-group.com/security" 	schemaLocation="../../aht/security.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/security" 	schemaLocation="../system/security.xsd"/>
 	<xsd:element name="entities">
         <xsd:complexType>
         	<xsd:sequence>

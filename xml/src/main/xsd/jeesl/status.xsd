@@ -5,7 +5,7 @@
 	xmlns:io ="http://exlp.sf.net/io"
 	xmlns:symbol="http://www.jeesl.org/symbol"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="../aht/security.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="system/security.xsd"/>
 	<xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../exlp/xml/src/main/xsd/util/io.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/symbol" schemaLocation="../jeesl/symbol.xsd"/>
 	<xsd:element name="area">

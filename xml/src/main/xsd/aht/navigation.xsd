@@ -6,7 +6,7 @@
     xmlns:text="http://www.jeesl.org/text"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../jeesl/status.xsd"/>
-    <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="security.xsd"/>
+    <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="../jeesl/system/security.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/text" schemaLocation="../jeesl/text.xsd"/>
     <xsd:element name="navigation">
 	    <xsd:complexType>

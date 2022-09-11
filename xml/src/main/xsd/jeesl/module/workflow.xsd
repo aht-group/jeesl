@@ -5,7 +5,7 @@
 	xmlns:jt="http://www.jeesl.org/text"
 	xmlns:js="http://ahtutils.aht-group.com/status"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="../../aht/security.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="../system/security.xsd"/>
 	<xsd:import namespace="http://ahtutils.aht-group.com/status"   schemaLocation="../../jeesl/status.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/text" schemaLocation="../text.xsd"/>
 	

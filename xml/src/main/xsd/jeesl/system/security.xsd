@@ -4,8 +4,8 @@
     xmlns:js="http://ahtutils.aht-group.com/status"
     xmlns:n="http://ahtutils.aht-group.com/navigation"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../jeesl/status.xsd"/>
-    <xsd:import namespace="http://ahtutils.aht-group.com/navigation" schemaLocation="navigation.xsd"/>
+    <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../status.xsd"/>
+    <xsd:import namespace="http://ahtutils.aht-group.com/navigation" schemaLocation="../../aht/navigation.xsd"/>
 	<xsd:element name="security">
         <xsd:complexType>
             <xsd:sequence>
