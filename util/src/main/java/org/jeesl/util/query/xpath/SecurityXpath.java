@@ -76,20 +76,6 @@ public class SecurityXpath
 		return listResult.get(0);
 	}
 
-	public static synchronized Category getCategoryAcl(Access access,String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
-	{
-		JXPathContext context = JXPathContext.newContext(access);
-
-		StringBuffer sb = new StringBuffer();
-		sb.append("//category[@code='").append(code).append("']");
-
-		@SuppressWarnings("unchecked")
-		List<Category> listResult = context.selectNodes(sb.toString());
-		if(listResult.size()==0){throw new ExlpXpathNotFoundException("No "+Category.class.getSimpleName()+" for code="+code);}
-		else if(listResult.size()>1){throw new ExlpXpathNotUniqueException("Multiple "+Category.class.getSimpleName()+" for code="+code);}
-		return listResult.get(0);
-	}
-
 	public static synchronized net.sf.ahtutils.xml.security.Category getCategory(Security security,String code) throws ExlpXpathNotFoundException, ExlpXpathNotUniqueException
 	{
 		JXPathContext context = JXPathContext.newContext(security);
