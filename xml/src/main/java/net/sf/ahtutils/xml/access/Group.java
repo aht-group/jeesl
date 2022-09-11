@@ -54,8 +54,7 @@ public class Group
     protected Langs langs;
     @XmlElement(required = true)
     protected Views views;
-    @XmlElement(required = true)
-    protected Groups groups;
+
     @XmlAttribute(name = "code")
     protected String code;
 
@@ -143,33 +142,7 @@ public class Group
         return (this.views!= null);
     }
 
-    /*
-     * Gets the value of the groups property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Groups }
-     *     
-     */
-    public Groups getGroups() {
-        return groups;
-    }
-
-    /*
-     * Sets the value of the groups property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Groups }
-     *     
-     */
-    public void setGroups(Groups value) {
-        this.groups = value;
-    }
-
-    public boolean isSetGroups() {
-        return (this.groups!= null);
-    }
+  
 
     /*
      * Gets the value of the code property.

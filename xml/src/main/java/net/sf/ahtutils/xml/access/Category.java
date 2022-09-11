@@ -60,8 +60,7 @@ public class Category
     protected Langs langs;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Descriptions descriptions;
-    @XmlElement(required = true)
-    protected Groups groups;
+
     @XmlElement(required = true)
     protected Roles roles;
     @XmlElement(required = true)
@@ -143,25 +142,7 @@ public class Category
      *     {@link Groups }
      *     
      */
-    public Groups getGroups() {
-        return groups;
-    }
 
-    /*
-     * Sets the value of the groups property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Groups }
-     *     
-     */
-    public void setGroups(Groups value) {
-        this.groups = value;
-    }
-
-    public boolean isSetGroups() {
-        return (this.groups!= null);
-    }
 
     /*
      * Gets the value of the roles property.
