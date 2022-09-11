@@ -39,24 +39,6 @@ public class AclContainer
     implements Serializable
 {
 
-    private final static long serialVersionUID = 1L;
-    @XmlElement(required = true)
-    protected List<RoleAutoAssign> roleAutoAssign;
 
-  
-    public List<RoleAutoAssign> getRoleAutoAssign() {
-        if (roleAutoAssign == null) {
-            roleAutoAssign = new ArrayList<RoleAutoAssign>();
-        }
-        return this.roleAutoAssign;
-    }
-
-    public boolean isSetRoleAutoAssign() {
-        return ((this.roleAutoAssign!= null)&&(!this.roleAutoAssign.isEmpty()));
-    }
-
-    public void unsetRoleAutoAssign() {
-        this.roleAutoAssign = null;
-    }
 
 }
