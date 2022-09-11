@@ -21,7 +21,6 @@ import org.jeesl.model.xml.system.util.TestXmlTrafficLights;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.access.TestXmlRole;
 import net.sf.ahtutils.xml.aht.Query;
 
 public class TestXmlQuery extends AbstractXmlAhtTest<Query>
@@ -38,7 +37,7 @@ public class TestXmlQuery extends AbstractXmlAhtTest<Query>
     	
     	if(withChilds)
     	{
-    		xml.setRole(TestXmlRole.create(false));
+
     		xml.setLangs(TestXmlLangs.create(false));
     		xml.setStatus(TestXmlStatus.create(false));
     		xml.setType(TestXmlType.create(false));

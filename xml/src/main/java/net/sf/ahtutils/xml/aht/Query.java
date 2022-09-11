@@ -2,16 +2,25 @@
 package net.sf.ahtutils.xml.aht;
 
 import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import net.sf.ahtutils.xml.access.Role;
+
+import org.jeesl.model.xml.module.survey.Answer;
+import org.jeesl.model.xml.module.survey.Survey;
+import org.jeesl.model.xml.module.survey.Surveys;
+import org.jeesl.model.xml.module.survey.Template;
+import org.jeesl.model.xml.module.survey.Templates;
+import org.jeesl.model.xml.system.revision.Entity;
+
 import net.sf.ahtutils.xml.qa.Test;
 import net.sf.ahtutils.xml.report.Report;
 import net.sf.ahtutils.xml.security.Category;
+import net.sf.ahtutils.xml.security.Role;
 import net.sf.ahtutils.xml.security.Staff;
 import net.sf.ahtutils.xml.status.Langs;
 import net.sf.ahtutils.xml.status.Model;
@@ -20,12 +29,6 @@ import net.sf.ahtutils.xml.status.Type;
 import net.sf.ahtutils.xml.symbol.Graphic;
 import net.sf.ahtutils.xml.utils.TrafficLight;
 import net.sf.ahtutils.xml.utils.TrafficLights;
-import org.jeesl.model.xml.module.survey.Answer;
-import org.jeesl.model.xml.module.survey.Survey;
-import org.jeesl.model.xml.module.survey.Surveys;
-import org.jeesl.model.xml.module.survey.Template;
-import org.jeesl.model.xml.module.survey.Templates;
-import org.jeesl.model.xml.system.revision.Entity;
 
 
 /**

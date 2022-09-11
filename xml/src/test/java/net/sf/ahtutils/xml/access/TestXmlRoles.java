@@ -36,7 +36,7 @@ public class TestXmlRoles extends AbstractXmlAccessTest
     	
     	if(withChilds)
     	{
-    		xml.getRole().add(TestXmlRole.create(false));
+
     	}
     	return xml;
     }
