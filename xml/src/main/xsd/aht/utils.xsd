@@ -2,9 +2,9 @@
 <xsd:schema targetNamespace="http://ahtutils.aht-group.com/utils"
 	xmlns:u="http://ahtutils.aht-group.com/utils"
 	xmlns:us="http://ahtutils.aht-group.com/status"
-    xmlns:sec="http://ahtutils.aht-group.com/security"
+    xmlns:sec="https://www.jeesl.org/jeesl/xsd/system/security"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="../jeesl/system/security.xsd"/>
+    <xsd:import namespace="https://www.jeesl.org/jeesl/xsd/system/security" schemaLocation="../jeesl/system/security.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../jeesl/status.xsd"/>
 	<xsd:element name="utils">
 		<xsd:complexType>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://ahtutils.aht-group.com/status"
 	xmlns:js="http://ahtutils.aht-group.com/status"
- 	xmlns:sec="http://ahtutils.aht-group.com/security"
+ 	xmlns:sec="https://www.jeesl.org/jeesl/xsd/system/security"
 	xmlns:io ="http://exlp.sf.net/io"
 	xmlns:symbol="http://www.jeesl.org/symbol"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="system/security.xsd"/>
+	<xsd:import namespace="https://www.jeesl.org/jeesl/xsd/system/security" schemaLocation="system/security.xsd"/>
 	<xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../exlp/xml/src/main/xsd/util/io.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/symbol" schemaLocation="../jeesl/symbol.xsd"/>
 	<xsd:element name="area">

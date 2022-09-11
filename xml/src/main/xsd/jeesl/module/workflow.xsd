@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.jeesl.org/workflow"
 	xmlns:wf="http://www.jeesl.org/workflow"
-	xmlns:sec="http://ahtutils.aht-group.com/security"
+	xmlns:sec="https://www.jeesl.org/jeesl/xsd/system/security"
 	xmlns:jt="http://www.jeesl.org/text"
 	xmlns:js="http://ahtutils.aht-group.com/status"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	<xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="../system/security.xsd"/>
+	<xsd:import namespace="https://www.jeesl.org/jeesl/xsd/system/security" schemaLocation="../system/security.xsd"/>
 	<xsd:import namespace="http://ahtutils.aht-group.com/status"   schemaLocation="../../jeesl/status.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/text" schemaLocation="../text.xsd"/>
 	

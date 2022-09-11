@@ -21,16 +21,16 @@
 	xmlns:cal 		= "http://www.jeesl.org/calendar"
 	xmlns:inv		= "http://www.jeesl.org/inventory"
 	
-	xmlns:rev		="http://www.jeesl.org/revision"
-	xmlns:jatt		="http://www.jeesl.org/io/attribute"
-	xmlns:template	="http://www.jeesl.org/io/template"
-	xmlns:m 		="http://www.jeesl.org/io/mail"
-	xmlns:ssi 		="http://www.jeesl.org/io/ssi"
-	xmlns:text		="http://www.jeesl.org/text"
-	xmlns:symbol	="http://www.jeesl.org/symbol"
-	xmlns:srs		="http://www.jeesl.org/srs"
+	xmlns:rev		= "http://www.jeesl.org/revision"
+	xmlns:jatt		= "http://www.jeesl.org/io/attribute"
+	xmlns:template	= "http://www.jeesl.org/io/template"
+	xmlns:m 		= "http://www.jeesl.org/io/mail"
+	xmlns:ssi 		= "http://www.jeesl.org/io/ssi"
+	xmlns:text		= "http://www.jeesl.org/text"
+	xmlns:symbol	= "http://www.jeesl.org/symbol"
+	xmlns:srs		= "http://www.jeesl.org/srs"
 	
-	xmlns:sec="http://ahtutils.aht-group.com/security"
+	xmlns:sec="https://www.jeesl.org/jeesl/xsd/system/security"
 	
 	xmlns:sys="http://ahtutils.aht-group.com/system"
 	xmlns:survey="http://www.jeesl.org/survey"
@@ -49,7 +49,7 @@
     <xsd:import namespace="http://ahtutils.aht-group.com/text" schemaLocation="aht/text.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/report" schemaLocation="aht/report.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/project" schemaLocation="aht/project.xsd"/>
-    <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="jeesl/system/security.xsd"/>
+    <xsd:import namespace="https://www.jeesl.org/jeesl/xsd/system/security" schemaLocation="jeesl/system/security.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/finance" schemaLocation="jeesl/finance.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/dbseed" schemaLocation="aht/dbseed.xsd"/>
     

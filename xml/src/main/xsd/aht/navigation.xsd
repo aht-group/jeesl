@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://ahtutils.aht-group.com/navigation"
-	xmlns:sec="http://ahtutils.aht-group.com/security"
+	xmlns:sec="https://www.jeesl.org/jeesl/xsd/system/security"
     xmlns:n="http://ahtutils.aht-group.com/navigation"
     xmlns:s="http://ahtutils.aht-group.com/status"
     xmlns:text="http://www.jeesl.org/text"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../jeesl/status.xsd"/>
-    <xsd:import namespace="http://ahtutils.aht-group.com/security" schemaLocation="../jeesl/system/security.xsd"/>
+    <xsd:import namespace="https://www.jeesl.org/jeesl/xsd/system/security" schemaLocation="../jeesl/system/security.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/text" schemaLocation="../jeesl/text.xsd"/>
     <xsd:element name="navigation">
 	    <xsd:complexType>
