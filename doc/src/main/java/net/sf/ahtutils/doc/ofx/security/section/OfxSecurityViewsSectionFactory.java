@@ -31,6 +31,7 @@ import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityViewTableFactory;
 import net.sf.ahtutils.xml.access.Access;
 import net.sf.ahtutils.xml.security.Role;
 import net.sf.ahtutils.xml.security.Security;
+import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
@@ -136,7 +137,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		
 		if(category.isSetViews())
 		{
-			for(net.sf.ahtutils.xml.access.View view : category.getViews().getView())
+			for(View view : category.getViews().getView())
 			{
 				if(!view.isSetDocumentation()){view.setDocumentation(false);}
 				if(view.isDocumentation() && view.isSetActions() && view.getActions().getAction().size()>0)
@@ -159,7 +160,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		
 		if(category.isSetViews())
 		{
-			for(net.sf.ahtutils.xml.access.View view : category.getViews().getView())
+			for(View view : category.getViews().getView())
 			{
 				if(!view.isSetDocumentation()){view.setDocumentation(false);}
 				if(view.isDocumentation() && view.isSetActions() && view.getActions().getAction().size()>0)
@@ -173,7 +174,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 	}
 	
 	@Deprecated
-	private Section build(net.sf.ahtutils.xml.access.Category category, net.sf.ahtutils.xml.access.View view) throws OfxAuthoringException
+	private Section build(net.sf.ahtutils.xml.access.Category category, View view) throws OfxAuthoringException
 	{
 		Section section = XmlSectionFactory.build();
 		
@@ -199,7 +200,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		return section;
 	}
 	
-	private Section build(net.sf.ahtutils.xml.security.Category category, net.sf.ahtutils.xml.access.View view) throws OfxAuthoringException
+	private Section build(net.sf.ahtutils.xml.security.Category category, View view) throws OfxAuthoringException
 	{
 		Section section = XmlSectionFactory.build();
 		
@@ -230,7 +231,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		return section;
 	}
 	
-	private List<Paragraph> buildRoles(net.sf.ahtutils.xml.access.View view) throws OfxAuthoringException
+	private List<Paragraph> buildRoles(View view) throws OfxAuthoringException
 	{
 		List<Paragraph> content = new ArrayList<Paragraph>();
 		List<Role> roles = view.getRoles().getRole();

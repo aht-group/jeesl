@@ -15,7 +15,7 @@ import org.jeesl.model.xml.system.navigation.MenuItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.access.View;
+import net.sf.ahtutils.xml.security.View;
 
 public class XmlMenuItemFactory <L extends JeeslLang, D extends JeeslDescription,
 								C extends JeeslSecurityCategory<L,D>,

@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.security.Role;
+import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -44,7 +45,7 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 		headerKeys.add("auTableHeadSecurityUsecaseDescription");
 	}
 	
-	public Table build(net.sf.ahtutils.xml.access.View view) throws OfxAuthoringException
+	public Table build(View view) throws OfxAuthoringException
 	{
 		Table table = new Table();
 //		table.setId("table.qa.nfr.questions."+section.getPosition());
@@ -57,7 +58,7 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 		return table;
 	}
 	
-	private Specification createSpecifications(net.sf.ahtutils.xml.access.View view)
+	private Specification createSpecifications(View view)
 	{
 		int roles=0;
 		if(view.isSetRoles()){roles = view.getRoles().getRole().size();}
@@ -75,7 +76,7 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 		return spec;
 	}
 	
-	private Content createContent(net.sf.ahtutils.xml.access.View view) throws OfxAuthoringException
+	private Content createContent(View view) throws OfxAuthoringException
 	{
 		Head head = new Head();
 		head.getRow().add(createHeaderRow(headerKeys));
@@ -102,7 +103,7 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 	}
 	
 	@SuppressWarnings("unused")
-	private Row page(net.sf.ahtutils.xml.access.View view) throws OfxAuthoringException
+	private Row page(View view) throws OfxAuthoringException
 	{
 		Row row = new Row();
 		
@@ -123,7 +124,7 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 		return row;
 	}
 	
-	private Row createRow(net.sf.ahtutils.xml.access.View view, Action action) throws OfxAuthoringException
+	private Row createRow(View view, Action action) throws OfxAuthoringException
 	{
 		Row row = new Row();
 		JaxbUtil.trace(action);

@@ -8,18 +8,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import net.sf.ahtutils.xml.access.View;
-import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.io.dir.DirChecker;
-import net.sf.exlp.util.io.dir.RecursiveFileFinder;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
+import net.sf.ahtutils.xml.security.View;
+import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.exlp.util.io.dir.DirChecker;
+import net.sf.exlp.util.io.dir.RecursiveFileFinder;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JavaSecurityViewIdentifierFactory extends AbstractJavaSecurityFileFactory
 {
@@ -105,24 +104,6 @@ public class JavaSecurityViewIdentifierFactory extends AbstractJavaSecurityFileF
 		}
 		return created;
 	}
-	
-	private File createIdentifier(File fSub, net.sf.ahtutils.xml.security.View view,String subPackage) throws IOException, TemplateException
-	{	
-		JaxbUtil.trace(view);
-		
-		freemarkerNodeModel.clear();
-		freemarkerNodeModel.put("packageName", viewQualifierBasePackage+"."+buildPackage(subPackage));
-		freemarkerNodeModel.put("className", createClassName(view.getCode()));
-		
-		File fJava = new File(fSub,createFileName(view.getCode()));
-		fJava.createNewFile();
-		
-		logger.debug("Will create file: "+fJava.getAbsolutePath());
-		
-		this.createFile(fJava, "jeesl/freemarker/java/security/identifier.ftl");
-		return fJava;
-	}
-	
 
 	@Deprecated @Override protected void processCategoriesOld(List<net.sf.ahtutils.xml.access.Category> categories) throws UtilsConfigurationException
 	{

@@ -79,7 +79,7 @@ public class JeeslMenuStructureReport <L extends JeeslLang,
 	{
 		MenuItem item = XmlMenuItemFactory.build();
 		
-		item.setView(XmlViewFactory.create(view.getCategory().getPosition()+"."+view.getPosition()));
+		item.setView(XmlViewFactory.build(view.getCategory().getPosition()+"."+view.getPosition()));
 		item.getView().setLabel(view.getCategory().getName().get(localeCode).getLang());
 		
 		item.setCode(view.getCode());

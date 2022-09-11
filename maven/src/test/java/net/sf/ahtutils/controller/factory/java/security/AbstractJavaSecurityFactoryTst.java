@@ -5,11 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.test.AbstractUtilsMavenTst;
-import net.sf.ahtutils.xml.access.Category;
-import net.sf.ahtutils.xml.access.View;
-import net.sf.ahtutils.xml.access.Views;
-
 import org.apache.commons.io.FileUtils;
 import org.jeesl.model.xml.system.navigation.Navigation;
 import org.jeesl.model.xml.system.navigation.UrlMapping;
@@ -18,6 +13,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.test.AbstractUtilsMavenTst;
+import net.sf.ahtutils.xml.access.Category;
+import net.sf.ahtutils.xml.access.Views;
+import net.sf.ahtutils.xml.security.View;
 
 public class AbstractJavaSecurityFactoryTst extends AbstractUtilsMavenTst
 {

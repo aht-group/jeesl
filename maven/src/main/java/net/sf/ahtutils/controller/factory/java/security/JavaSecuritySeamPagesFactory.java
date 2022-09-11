@@ -8,14 +8,14 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.java.security.AbstractJavaSecurityFileFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
+import net.sf.ahtutils.xml.security.View;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 @SuppressWarnings({"rawtypes","unchecked"})
 public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactory
@@ -23,7 +23,7 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 	final static Logger logger = LoggerFactory.getLogger(JavaSecuritySeamPagesFactory.class);
 		
 	private Map<String,String> mCategoryPackage;
-	private Map<String,List<net.sf.ahtutils.xml.access.View>> mapOldViews; protected Map<String, List<net.sf.ahtutils.xml.access.View>> getMapOldViews() {return mapOldViews;}
+	private Map<String,List<View>> mapOldViews; protected Map<String, List<View>> getMapOldViews() {return mapOldViews;}
 	private Map<String,List<net.sf.ahtutils.xml.security.View>> mapViews; protected Map<String, List<net.sf.ahtutils.xml.security.View>> getMapViews() {return mapViews;}
 	
 	private File srcDir;
@@ -37,7 +37,7 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		this.sLoginView=sLoginView;
 		this.sAccessDeniedView=sAccessDeniedView;
 		this.viewQualifierBasePackage=viewQualifierBasePackage;
-		mapOldViews = new Hashtable<String,List<net.sf.ahtutils.xml.access.View>>();
+		mapOldViews = new Hashtable<String,List<View>>();
 		mapViews = new Hashtable<String,List<net.sf.ahtutils.xml.security.View>>();
 		mCategoryPackage = new Hashtable<String,String>();
 	}
@@ -143,7 +143,7 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		{
 			if(category.isSetViews())
 			{
-				for(net.sf.ahtutils.xml.access.View view : category.getViews().getView())
+				for(View view : category.getViews().getView())
 				{
 					if(!view.isSetPublic()){throw new UtilsConfigurationException("No @public view@code="+view.getCode());}
 					if(view.isSetNavigation())
@@ -169,7 +169,7 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		}
 	}
 	
-	@Deprecated private void createPagesOld(File fPackage, List<net.sf.ahtutils.xml.access.View> lViews) throws IOException, TemplateException
+	@Deprecated private void createPagesOld(File fPackage, List<View> lViews) throws IOException, TemplateException
 	{
 		logger.debug("Process ... "+lViews.size()+" "+fPackage.getAbsolutePath());
 		freemarkerNodeModel.clear();
@@ -181,7 +181,7 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		boolean onePrivate = false;
 		boolean oneOnlyLoggedIn = false;
 		List<Map> mViews = new ArrayList<Map>();
-		for(net.sf.ahtutils.xml.access.View v : lViews)
+		for(View v : lViews)
 		{
 			if(!v.isSetOnlyLoginRequired()){v.setOnlyLoginRequired(false);}
 			if(!v.isPublic()){onePrivate=true;}
@@ -221,9 +221,9 @@ public class JavaSecuritySeamPagesFactory extends AbstractJavaSecurityFileFactor
 		this.createFile(fJava, "ahtutils/freemarker/java/security/seamPages.ftl");
 	}
 	
-	@Deprecated private List<net.sf.ahtutils.xml.access.View> getViewForPackageOld(String packageName)
+	@Deprecated private List<View> getViewForPackageOld(String packageName)
 	{
-		if(!mapOldViews.containsKey(packageName)){mapOldViews.put(packageName, new ArrayList<net.sf.ahtutils.xml.access.View>());}
+		if(!mapOldViews.containsKey(packageName)){mapOldViews.put(packageName, new ArrayList<View>());}
 		return mapOldViews.get(packageName);
 	}
 }

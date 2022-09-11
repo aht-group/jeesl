@@ -22,8 +22,8 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.doc.ofx.security.table.OfxSecurityViewTableFactory;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 import net.sf.ahtutils.xml.access.TestXmlView;
-import net.sf.ahtutils.xml.access.View;
 import net.sf.ahtutils.xml.access.Views;
+import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
 

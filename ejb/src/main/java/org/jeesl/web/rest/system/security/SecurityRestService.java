@@ -49,7 +49,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.controller.factory.xml.acl.XmlViewsFactory;
 import net.sf.ahtutils.interfaces.rest.security.UtilsSecurityViewImport;
 import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.access.View;
 import net.sf.ahtutils.xml.access.Views;
 import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.security.Role;
@@ -58,6 +57,7 @@ import net.sf.ahtutils.xml.security.Security;
 import net.sf.ahtutils.xml.security.Staffs;
 import net.sf.ahtutils.xml.security.Template;
 import net.sf.ahtutils.xml.security.Tmp;
+import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription,
@@ -108,7 +108,6 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 		
 		fCategory = new XmlCategoryFactory<L,D,C,R,V,U,A,AT,USER>(null,SecurityQuery.exCategory());
 		xfView = new org.jeesl.factory.xml.system.security.XmlViewFactory<>(SecurityQuery.exView());
-		xfViewOld = new org.jeesl.factory.xml.system.security.XmlViewFactory<>(SecurityQuery.exViewOld());
 		xfRole = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.exRole());
 		fRoleDescription = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(SecurityQuery.role());
 		xfAction = new XmlActionFactory<L,D,C,R,V,U,A,AT>(SecurityQuery.exAction());
@@ -293,7 +292,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 					for(V view : fSecurity.allForCategory(fbSecurity.getClassView(), fbSecurity.getClassCategory(), category.getCode()))
 					{
 						view = fSecurity.load(fbSecurity.getClassView(),view);
-						View xView = xfViewOld.create(view);
+						View xView = xfViewOld.build(view);
 						xView.setActions(XmlActionsFactory.build());
 						for(A action : view.getActions())
 						{
@@ -333,7 +332,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 					for(V view : fSecurity.allForCategory(fbSecurity.getClassView(), fbSecurity.getClassCategory(), category.getCode()))
 					{
 						view = fSecurity.load(fbSecurity.getClassView(),view);
-						View xView = xfViewOld.create(view);
+						View xView = xfViewOld.build(view);
 						xView.setActions(XmlActionsFactory.build());
 						for(A action : view.getActions())
 						{

@@ -28,6 +28,7 @@ import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityUsecasesSectionFactor
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityViewsSectionFactory;
 import net.sf.ahtutils.xml.access.Access;
 import net.sf.ahtutils.xml.security.Security;
+import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -187,7 +188,7 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 		
 		for(net.sf.ahtutils.xml.security.Category category : security.getCategory())
 		{
-			for(net.sf.ahtutils.xml.access.View view : category.getViews().getView())
+			for(View view : category.getViews().getView())
 			{
 				StringBuffer sb = new StringBuffer();
 				sb.append("/admin/security/actual/pages");

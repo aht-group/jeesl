@@ -32,6 +32,7 @@ import net.sf.ahtutils.xml.access.Access;
 import net.sf.ahtutils.xml.access.Category;
 import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.security.Security;
+import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class SecurityViewUpdater <L extends JeeslLang,
@@ -119,7 +120,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 		logger.info("iuChilds (access.views) "+category.getViews().getView().size());
 		if(category.isSetViews() && category.getViews().isSetView())
 		{
-			for(net.sf.ahtutils.xml.access.View view : category.getViews().getView())
+			for(View view : category.getViews().getView())
 			{
 				logger.trace("View: "+view.getCode());
 				dbCleanerView.handled(view.getCode());
@@ -141,76 +142,6 @@ public class SecurityViewUpdater <L extends JeeslLang,
 		}
 	}
 	
-	@Deprecated private void iuView(C category, net.sf.ahtutils.xml.access.View view) throws UtilsConfigurationException
-	{
-		DataUpdateTracker dut = new DataUpdateTracker(true);
-		dut.setType(XmlTypeFactory.build(fbSecurity.getClassView().getName(),"DB Import/Update"));
-		
-		V ejb;
-		try
-		{
-			ejb = fSecurity.fByCode(fbSecurity.getClassView(),view.getCode());
-			efLang.rmLang(fSecurity,ejb);
-			efDescription.rmDescription(fSecurity,ejb);
-		}
-		catch (JeeslNotFoundException e)
-		{
-			try
-			{
-				ejb = fbSecurity.getClassView().newInstance();
-				ejb.setCategory(category);
-				ejb.setCode(view.getCode());
-				ejb = fSecurity.persist(ejb);
-			}
-			catch (InstantiationException e2) {throw new UtilsConfigurationException(e2.getMessage());}
-			catch (IllegalAccessException e2) {throw new UtilsConfigurationException(e2.getMessage());}
-			catch (JeeslConstraintViolationException e2) {throw new UtilsConfigurationException(e2.getMessage());}	
-		}
-		
-		try
-		{
-			if(view.isSetPublic()){ejb.setAccessPublic(view.isPublic());}else{ejb.setAccessPublic(false);}
-			if(view.isSetOnlyLoginRequired()){ejb.setAccessLogin(view.isOnlyLoginRequired());}else{ejb.setAccessLogin(false);}
-			if(view.isSetDocumentation()){ejb.setDocumentation(view.isDocumentation());}else{ejb.setDocumentation(false);}
-			if(view.isSetVisible()){ejb.setVisible(view.isVisible());}else{ejb.setVisible(true);}
-			if(view.isSetPosition()){ejb.setPosition(view.getPosition());}else{ejb.setPosition(0);}
-			
-			ejb.setName(efLang.getLangMap(view.getLangs()));
-			ejb.setDescription(efDescription.create(view.getDescriptions()));
-			ejb.setCategory(category);
-			
-			ejb.setPackageName(null);
-			ejb.setViewPattern(null);
-			ejb.setUrlBase(null);
-			ejb.setUrlMapping(null);	
-			
-			if(view.isSetNavigation())
-			{
-				if(view.getNavigation().isSetPackage()){ejb.setPackageName(view.getNavigation().getPackage());}
-				if(view.getNavigation().isSetViewPattern()){ejb.setViewPattern(view.getNavigation().getViewPattern().getValue());}
-				if(view.getNavigation().isSetUrlMapping())
-				{
-					ejb.setUrlMapping(view.getNavigation().getUrlMapping().getValue());
-					if(view.getNavigation().getUrlMapping().isSetUrl()){ejb.setUrlBase(view.getNavigation().getUrlMapping().getUrl());}
-				}
-			}
-			
-			ejb=fSecurity.save(ejb);
-
-			logger.trace("Actions: "+view.getCode()+" "+view.isSetActions());
-			if(view.isSetActions() && view.getActions().isSetAction())
-			{
-				for(Action action : view.getActions().getAction())
-				{
-					dbCleanerAction.handled(action.getCode());
-					iuAction(ejb, action);
-				}
-			}
-			dut.success();
-		}
-		catch (JeeslConstraintViolationException e) {dut.fail(e,false); }
-		catch (JeeslLockingException e) {dut.fail(e,false); }
-	}
 	private void iuView(C category, net.sf.ahtutils.xml.security.View view) throws UtilsConfigurationException
 	{
 		DataUpdateTracker dut = new DataUpdateTracker(true);

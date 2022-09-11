@@ -3,13 +3,6 @@ package net.sf.ahtutils.doc.ofx.menu;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.access.Access;
-import net.sf.ahtutils.xml.access.View;
-import net.sf.ahtutils.xml.status.Translations;
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.system.navigation.Menu;
@@ -21,6 +14,13 @@ import org.openfuxml.content.graph.Tree;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
+import net.sf.ahtutils.xml.access.Access;
+import net.sf.ahtutils.xml.security.View;
+import net.sf.ahtutils.xml.status.Translations;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 public class OfxMenuTreeFactory extends AbstractUtilsOfxDocumentationFactory
 {

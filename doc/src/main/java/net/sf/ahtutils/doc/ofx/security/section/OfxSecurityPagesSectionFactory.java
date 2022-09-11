@@ -38,6 +38,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.xml.security.Action;
 import net.sf.ahtutils.xml.security.Role;
+import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Description;
 import net.sf.ahtutils.xml.status.Lang;
 import net.sf.ahtutils.xml.status.Translations;
@@ -68,7 +69,7 @@ public class OfxSecurityPagesSectionFactory extends AbstractUtilsOfxDocumentatio
 		fMarginText = XmlFontFactory.relative(-3);
 	}
 	
-	public Section build(net.sf.ahtutils.xml.access.View view) throws OfxAuthoringException
+	public Section build(View view) throws OfxAuthoringException
 	{
 		if(view.getCode().equals("programBudget")){JaxbUtil.trace(view);}
 		Section section = XmlSectionFactory.build();
@@ -122,7 +123,7 @@ public class OfxSecurityPagesSectionFactory extends AbstractUtilsOfxDocumentatio
 		return section;
 	}
 	
-	private java.util.List<Serializable> introductionAction(net.sf.ahtutils.xml.access.View view)
+	private java.util.List<Serializable> introductionAction(View view)
 	{
 		java.util.List<Serializable> content = new ArrayList<Serializable>();
 		

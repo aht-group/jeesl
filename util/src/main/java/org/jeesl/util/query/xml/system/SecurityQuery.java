@@ -16,7 +16,6 @@ import org.jeesl.model.xml.jeesl.QuerySecurity;
 import org.jeesl.model.xml.system.navigation.Navigation;
 import org.jeesl.util.query.xml.XmlStatusQuery;
 
-import net.sf.ahtutils.xml.access.View;
 import net.sf.ahtutils.xml.aht.Query;
 import net.sf.ahtutils.xml.security.Category;
 import net.sf.ahtutils.xml.security.Role;
@@ -24,6 +23,7 @@ import net.sf.ahtutils.xml.security.Staff;
 import net.sf.ahtutils.xml.security.Staffs;
 import net.sf.ahtutils.xml.security.Usecase;
 import net.sf.ahtutils.xml.security.User;
+import net.sf.ahtutils.xml.security.View;
 import net.sf.ahtutils.xml.status.Domain;
 
 public class SecurityQuery

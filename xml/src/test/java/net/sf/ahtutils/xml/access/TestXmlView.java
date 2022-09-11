@@ -3,8 +3,6 @@ package net.sf.ahtutils.xml.access;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jeesl.JeeslXmlTestBootstrap;
 import org.jeesl.model.xml.navigation.TestXmlNavigation;
 import org.jeesl.model.xml.system.status.TestXmlDescriptions;
@@ -13,6 +11,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.security.View;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestXmlView extends AbstractXmlAccessTest
 {

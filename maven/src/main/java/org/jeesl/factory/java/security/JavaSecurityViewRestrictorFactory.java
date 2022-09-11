@@ -7,14 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.io.dir.DirChecker;
-
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import freemarker.template.TemplateException;
+import net.sf.ahtutils.xml.security.View;
+import net.sf.exlp.exception.ExlpConfigurationException;
+import net.sf.exlp.util.io.dir.DirChecker;
 
 @SuppressWarnings({"rawtypes","unchecked"})
 public class JavaSecurityViewRestrictorFactory extends AbstractJavaSecurityFileFactory
@@ -89,7 +89,7 @@ public class JavaSecurityViewRestrictorFactory extends AbstractJavaSecurityFileF
 		{
 			if(category.isSetViews())
 			{
-				for(net.sf.ahtutils.xml.access.View view : category.getViews().getView())
+				for(View view : category.getViews().getView())
 				{
 					StringBuffer sb = new StringBuffer();
 					sb.append(viewQualifierBasePackage);

@@ -25,16 +25,10 @@ public class XmlViewFactory <L extends JeeslLang, D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(XmlViewFactory.class);
 		
 	private View q;
-	private net.sf.ahtutils.xml.access.View qOld;
 	
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescription;
 	private XmlNavigationFactory<V> xfNavigation;
-	
-	public XmlViewFactory(net.sf.ahtutils.xml.access.View q)
-	{
-		this.qOld=q;
-	}
 	
 	public XmlViewFactory(View q)
 	{
@@ -63,40 +57,6 @@ public class XmlViewFactory <L extends JeeslLang, D extends JeeslDescription,
 	public static View build(String code)
 	{
 		View xml = new View();
-		xml.setCode(code);
-		return xml;
-	}
-	
-	public net.sf.ahtutils.xml.access.View create(V view)
-	{
-		net.sf.ahtutils.xml.access.View xml = new net.sf.ahtutils.xml.access.View();
-		
-		if(qOld.isSetCode()){xml.setCode(view.getCode());}
-		if(qOld.isSetPosition()){xml.setPosition(view.getPosition());}
-		if(qOld.isSetVisible()){xml.setVisible(view.isVisible());}
-		if(qOld.isSetDocumentation() && view.getDocumentation()!=null){xml.setDocumentation(view.getDocumentation());}
-		
-		if(qOld.isSetLangs())
-		{
-			XmlLangsFactory<L> f = new XmlLangsFactory<L>(qOld.getLangs());
-			xml.setLangs(f.getUtilsLangs(view.getName()));
-		}
-		
-		if(qOld.isSetDescriptions())
-		{
-			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(qOld.getDescriptions());
-			xml.setDescriptions(f.create(view.getDescription()));
-		}
-		
-		if(qOld.isSetPublic() && view.getAccessPublic()!=null){xml.setPublic(view.getAccessPublic());}
-		if(qOld.isSetOnlyLoginRequired() && view.getAccessLogin()!=null){xml.setOnlyLoginRequired(view.getAccessLogin());}
-		
-		return xml;
-	}
-	
-	public static net.sf.ahtutils.xml.access.View create(String code)
-	{
-		net.sf.ahtutils.xml.access.View xml = new net.sf.ahtutils.xml.access.View();
 		xml.setCode(code);
 		return xml;
 	}
