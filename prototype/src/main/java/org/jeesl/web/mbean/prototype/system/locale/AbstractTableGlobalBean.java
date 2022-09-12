@@ -225,7 +225,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		if(supportsGraphic)
 		{
 			GT type = fGraphic.fByCode(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol.toString());
-			GS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle.toString());
+			GS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.shapeCircle.toString());
 			graphic = efGraphic.buildSymbol(type, style);
 			((EjbWithGraphic<G>)status).setGraphic(graphic);
 		}
@@ -252,7 +252,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 			{
 				logger.info("Need to create a graphic entity for this status");
 				GT type = fGraphic.fByCode(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol);
-				GS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
+				GS style = fGraphic.fByCode(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.shapeCircle);
 				graphic = fGraphic.persist(efGraphic.buildSymbol(type, style));
 				((EjbWithGraphic<G>)status).setGraphic(graphic);
 				status = fGraphic.update(status);

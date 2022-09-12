@@ -1,5 +1,7 @@
 package org.jeesl.client.model.ejb.system.graphic;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.jeesl.client.model.ejb.system.locale.Description;
@@ -60,6 +62,13 @@ public class GraphicShape implements JeeslGraphicShape<Lang,Description,GraphicS
 	private Graphic graphic;
 	@Override public Graphic getGraphic() {return graphic;}
 	@Override public void setGraphic(Graphic graphic) {this.graphic=graphic;}
+	
+	@Override public List<String> getFixedCodes()
+	{
+		List<String> fixed = new ArrayList<String>();
+		for(JeeslGraphicShape.Code c : JeeslGraphicShape.Code.values()){fixed.add(c.toString());}
+		return fixed;
+	}
 	
 	public boolean equals(Object object)
 	{

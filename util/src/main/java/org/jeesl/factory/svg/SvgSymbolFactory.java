@@ -73,7 +73,7 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		int size = 5; if(rule.getSize()!=null){size = rule.getSize();}
 		String color = "000000";if(rule.getColor()!=null){color = rule.getColor();}
 		
-		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.circle;
+		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.shapeCircle;
 		if(rule.getStyle()!=null && rule.getStyle().getCode()!=null)
 		{
 			style = JeeslGraphicShape.Code.valueOf(rule.getStyle().getCode());
@@ -87,7 +87,7 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		int size = 5; if(rule.getSize()!=null){size = rule.getSize();}
 		String color = "000000"; if(rule.getColor()!=null){color = rule.getColor();}
 		
-		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.square;
+		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.shapeSquare;
 		if(rule.getStyle()!=null && rule.getStyle().getCode()!=null)
 		{
 			style = JeeslGraphicShape.Code.valueOf(rule.getStyle().getCode());
@@ -124,7 +124,7 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 			}
 		}
 		
-		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.circle;
+		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.shapeCircle;
 		if(rule.isSetStyles() && rule.getStyles().isSetStyle())
 		{
 			for(Style s : rule.getStyles().getStyle())
@@ -152,14 +152,14 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		Shape shape = null;
 		switch(style)
 		{
-			case circle:  shape = new Ellipse2D.Double(low, low, size, size);break;
-			case square:  shape = new Rectangle2D.Double(low, low, size, size);break;
-			case triangle: logger.warn("NYI: Triangle Shape !!"); break;
+			case shapeCircle:  shape = new Ellipse2D.Double(low, low, size, size);break;
+			case shapeSquare:  shape = new Rectangle2D.Double(low, low, size, size);break;
+			case shapeTriangle: logger.warn("NYI: Triangle Shape !!"); break;
 		}
 		    
 		g.setPaint(Color.decode("#"+color));
 		g.fill(shape);
-		      
+
 		g.setSVGCanvasSize(new Dimension(canvasSize, canvasSize));
 		    
 		return g;
@@ -178,9 +178,9 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		Shape shape = null;
 	    switch(style)
 	    {
-	    	case circle:  shape = new Ellipse2D.Double(low, low, size, size);break;
-	    	case square:  shape = new Rectangle2D.Double(low, low, size, size);break;
-	    	case triangle: logger.warn("NYI: Triangle Shape !!"); break;
+	    	case shapeCircle:  shape = new Ellipse2D.Double(low, low, size, size);break;
+	    	case shapeSquare:  shape = new Rectangle2D.Double(low, low, size, size);break;
+	    	case shapeTriangle: logger.warn("NYI: Triangle Shape !!"); break;
 	    }
 	    
 	    g.setPaint(Color.decode("#"+color));

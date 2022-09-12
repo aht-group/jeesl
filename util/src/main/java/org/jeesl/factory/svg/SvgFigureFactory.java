@@ -60,17 +60,17 @@ public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
 			g.setPaint(Color.decode("#" + f.getColor()));
 			switch (JeeslGraphicShape.Code.valueOf(f.getStyle().getCode()))
 			{
-				case circle:
+				case shapeCircle:
 					shape = new Ellipse2D.Double(f.getOffsetX(), f.getOffsetY(), f.getSize(), f.getSize());
 					g.translate(-(f.getSize() / 2), -(f.getSize() / 2));
 					break;
 				
-				case square:
+				case shapeSquare:
 					shape = new Rectangle2D.Double(f.getOffsetX(), f.getOffsetY(), f.getSize(), f.getSize());
 					g.translate(-(f.getSize() / 2), -(f.getSize() / 2));
 					break;
 				
-				case triangle:
+				case shapeTriangle:
 					triangleForm = true;
 					g.translate(-(canvasSize / 2) + (f.getOffsetY()), -(canvasSize / 2) + (f.getOffsetX()));
 					float[] xx = { (float) (canvasSize - ((float) f.getSize() * 2)),

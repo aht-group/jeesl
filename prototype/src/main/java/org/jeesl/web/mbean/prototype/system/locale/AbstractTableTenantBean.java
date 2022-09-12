@@ -217,7 +217,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		((JeeslWithTenantSupport<R>)status).setRref(rref.getId());
 
 		GT type = fGraphic.fByEnum(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol);
-		GS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
+		GS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.shapeCircle);
 		graphic = efGraphic.buildSymbol(type, style);
 		((EjbWithGraphic<G>)status).setGraphic(graphic);
 	}
@@ -236,7 +236,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		{
 			logger.info("Need to create a graphic entity for this status");
 			GT type = fGraphic.fByEnum(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.symbol);
-			GS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.circle);
+			GS style = fGraphic.fByEnum(fbSvg.getClassFigureStyle(), JeeslGraphicShape.Code.shapeCircle);
 			graphic = fGraphic.persist(efGraphic.buildSymbol(type, style));
 			((EjbWithGraphic<G>)status).setGraphic(graphic);
 			status = fGraphic.update(status);
