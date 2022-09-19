@@ -1,17 +1,18 @@
 package net.sf.ahtutils.test;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
-
-import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractJeeslTest
 {
@@ -79,10 +80,11 @@ public class AbstractJeeslTest
 	{
 		Assert.assertEquals(JaxbUtil.toString(ref),JaxbUtil.toString(test));
 	}
-	
+
 	protected static Date getDefaultDate()
 	{
-		return DateUtil.getDateFromInt(2011, 11, 11, 11, 11, 11);
+		LocalDateTime ldt = LocalDateTime.of(2011,11,11,11,11,11);
+		return DateUtil.toDate(ldt);
 	}
 	
 	protected static void setfTarget(File myTarget) {fTarget=myTarget;}

@@ -2,6 +2,7 @@ package org.jeesl.web.mbean.prototype.io.mail;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,11 +27,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
+import net.sf.exlp.util.DateUtil;
 
 public class AbstractSettingsIoMailQueueBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CATEGORY extends JeeslStatus<L,D,CATEGORY>,
@@ -156,9 +157,9 @@ public class AbstractSettingsIoMailQueueBean <L extends JeeslLang,D extends Jees
 	//*************************************************************************************
 	protected void reloadMails()
 	{
-		DateTime dt = new DateTime(sbhDate.getDate2());
+		LocalDateTime ldt = DateUtil.toLocalDateTime(sbhDate.getDate2());
 		
-		mails = fMail.fMails(sbhCategory.getSelected(),sbhStatus.getSelected(),sbhRetention.getSelected(),sbhDate.getDate1(),dt.plusDays(1).toDate(),null);
+		mails = fMail.fMails(sbhCategory.getSelected(),sbhStatus.getSelected(),sbhRetention.getSelected(),sbhDate.getDate1(),DateUtil.toDate(ldt.plusDays(1)),null);
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(cMail,mails));}
 //		Collections.sort(templates, comparatorTemplate);
 	}

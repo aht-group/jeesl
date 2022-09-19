@@ -4,13 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 
-import net.sf.ahtutils.controller.factory.xml.cloud.facebook.SignedRequestFactory;
-import net.sf.ahtutils.test.AbstractFileProcessingTest;
-import net.sf.ahtutils.xml.cloud.facebook.SignedRequest;
-import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jeesl.JeeslUtilTestBootstrap;
 import org.junit.After;
 import org.junit.Assert;
@@ -21,6 +14,12 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.controller.factory.xml.cloud.facebook.SignedRequestFactory;
+import net.sf.ahtutils.test.AbstractFileProcessingTest;
+import net.sf.ahtutils.xml.cloud.facebook.SignedRequest;
+import net.sf.exlp.util.io.StringIO;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 @RunWith(Parameterized.class)
 public class TestSignedRequestFactory extends AbstractFileProcessingTest
@@ -36,7 +35,7 @@ public class TestSignedRequestFactory extends AbstractFileProcessingTest
 	@BeforeClass
 	public static void initStatic()
 	{
-		DateUtil.ignoreTimeZone=true;
+		
 	}
 	
 	public TestSignedRequestFactory(File fTest)

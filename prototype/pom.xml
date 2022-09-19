@@ -177,6 +177,12 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!--2022-09-17 tk Preparing removal 
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency> -->
+		
 		<dependency>
   <groupId>com.github.ben-manes.caffeine</groupId>
   <artifactId>caffeine</artifactId>

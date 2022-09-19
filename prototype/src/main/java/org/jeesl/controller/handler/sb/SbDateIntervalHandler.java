@@ -2,14 +2,17 @@ package org.jeesl.controller.handler.sb;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+import org.exolab.castor.types.DateTime;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
 
 public class SbDateIntervalHandler implements Serializable
 {
@@ -42,63 +45,63 @@ public class SbDateIntervalHandler implements Serializable
 
 	public void initToday()
 	{
-		DateTime dt = new DateTime();
-		setDate1(dt.toDate());
-		setDate2(dt.toDate());
+		LocalDateTime ldt = LocalDateTime.now();
+		setDate1(DateUtil.toDate(ldt));
+		setDate2(DateUtil.toDate(ldt));
 	}
 
 	public void initMonthsToNow(int months)
 	{
-		DateTime dt = new DateTime();
-		setDate1(dt.minusMonths(months).toDate());
-		setDate2(dt.toDate());
+		LocalDateTime ldt = LocalDateTime.now();
+		setDate1(DateUtil.toDate(ldt.minusMonths(months)));
+		setDate2(DateUtil.toDate(ldt));
 	}
 
 	public void initMonths(int from, int to)
 	{
-		DateTime dt = new DateTime();
-		setDate1(dt.minusMonths(from).toDate());
-		setDate2(dt.plusMonths(to).toDate());
+		LocalDateTime ldt = LocalDateTime.now();
+		setDate1(DateUtil.toDate(ldt.minusMonths(from)));
+		setDate2(DateUtil.toDate(ldt.plusMonths(to)));
 	}
 
 	public void initWeeksToNow(int weeks)
 	{
-		DateTime dt = new DateTime();
-		setDate1(dt.minusWeeks(weeks).toDate());
-		setDate2(dt.toDate());
+		LocalDateTime ldt = LocalDateTime.now();
+		setDate1(DateUtil.toDate(ldt.minusWeeks(weeks)));
+		setDate2(DateUtil.toDate(ldt));
 	}
 
 	public void initDaysToNow(int days)
 	{
-		DateTime dt = new DateTime();
-		setDate1(dt.minusDays(days).toDate());
-		setDate2(dt.toDate());
+		LocalDateTime ldt = LocalDateTime.now();
+		setDate1(DateUtil.toDate(ldt.minusDays(days)));
+		setDate2(DateUtil.toDate(ldt));
 	}
 
 	public void initWeeks(int minus, int plus)
 	{
-		DateTime dt = new DateTime();
-		setDate1(dt.minusWeeks(minus).toDate());
-		setDate2(dt.plusWeeks(plus).toDate());
+		LocalDateTime ldt = LocalDateTime.now();
+		setDate1(DateUtil.toDate(ldt.minusWeeks(minus)));
+		setDate2(DateUtil.toDate(ldt.plusWeeks(plus)));
 	}
 
 	public void setDate1(Date date1)
 	{
 		if(enforceStartOfDay)
 		{
-			DateTime dt = new DateTime(date1);
-			this.date1 = dt.withTimeAtStartOfDay().toDate();
+			LocalDate ld = DateUtil.toLocalDate(date1);
+			this.date1 = DateUtil.toDate(ld.atStartOfDay());
 		}
 		else {this.date1 = date1;}
-		this.localDate1 =  Instant.ofEpochMilli(this.date1.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
+		this.localDate1 = Instant.ofEpochMilli(this.date1.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
 
 	public void setDate2(Date date2)
 	{
 		if(enforceStartOfDay)
 		{
-			DateTime dt = new DateTime(date2);
-			this.date2 = dt.withTimeAtStartOfDay().toDate();
+			LocalDate ld = DateUtil.toLocalDate(date2);
+			this.date2 = DateUtil.toDate(ld.atStartOfDay());
 		}
 		else {this.date2 = date2;}
 		this.localDate2 =  Instant.ofEpochMilli(this.date2.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
@@ -108,8 +111,8 @@ public class SbDateIntervalHandler implements Serializable
 	{
 		if(enforceStartOfDay)
 		{
-			DateTime dt = new DateTime(date3);
-			this.date3 = dt.withTimeAtStartOfDay().toDate();
+			LocalDate ld = DateUtil.toLocalDate(date3);
+			this.date3 = DateUtil.toDate(ld.atStartOfDay());
 		}
 		else {this.date3 = date3;}
 		this.localDate3 =  Instant.ofEpochMilli(this.date3.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
@@ -128,16 +131,16 @@ public class SbDateIntervalHandler implements Serializable
 
 	public void shiftToFirstLastDayofMonth()
 	{
-		DateTime dt1 = new DateTime(date1);
-		date1 = dt1.withTimeAtStartOfDay().withDayOfMonth(1).toDate();
+		LocalDate ld1 = DateUtil.toLocalDate(date1);
+		date1 = DateUtil.toDate(ld1.withDayOfMonth(1).atStartOfDay());
 
-		DateTime dt2 = new DateTime(date2);
-		date2 = dt2.withTimeAtStartOfDay().withDayOfMonth(1).plusMonths(1).minusDays(1).toDate();
+		LocalDate ld2 = DateUtil.toLocalDate(date2);
+		date2 = DateUtil.toDate(ld2.withDayOfMonth(1).plusMonths(1).minusDays(1).atStartOfDay());
 	}
 
 	public Date toDate2Plus1()
 	{
-		DateTime dt2 = new DateTime(date2);
-		return dt2.plusDays(1).toDate();
+		LocalDateTime ldt = DateUtil.toLocalDateTime(date2);
+		return DateUtil.toDate(ldt.plusDays(1));
 	}
 }

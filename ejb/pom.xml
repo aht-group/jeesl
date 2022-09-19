@@ -122,11 +122,12 @@
 			<scope>provided</scope>
 	  	</dependency>
 	  	
-	  	<!--2022-09-04 tk Preparing removal -->
+	  	<!--2022-09-04 tk Preparing removal 
 		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-		</dependency> 
+			<groupId>jda-time</groupId>
+			<artifactId>jda-time</artifactId>
+			<scope>provided</scope>
+		</dependency> -->
          
 		<!-- E-Mail -->
 		<dependency>

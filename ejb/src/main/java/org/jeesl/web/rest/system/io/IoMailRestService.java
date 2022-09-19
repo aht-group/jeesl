@@ -1,6 +1,7 @@
 package org.jeesl.web.rest.system.io;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,11 +27,11 @@ import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.io.mail.Mail;
 import org.jeesl.model.xml.system.io.mail.Mails;
 import org.jeesl.web.rest.AbstractJeeslRestHandler;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.sync.DataUpdate;
+import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
@@ -136,7 +137,8 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 
 	@Override public Mails discard(int days)
 	{
-		DateTime dt = new DateTime().minusDays(days);
+		LocalDate ld = LocalDate.now().minusDays(days);
+//		DateTime dt = new DateTime().minusDays(days);
 		
 		List<CATEGORY> categories = fMail.all(cCategory);
 		List<RETENTION> retentions = fMail.all(cRetention);
@@ -145,7 +147,7 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 		try {status.add(fMail.fByCode(cStatus,JeeslMailStatus.Code.queue));}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 		
-		List<MAIL> mails = fMail.fMails(categories, status, retentions, null, dt.toDate(), null);
+		List<MAIL> mails = fMail.fMails(categories, status, retentions, null, DateUtil.toDate(ld.atStartOfDay()), null);
 		
 		if(!mails.isEmpty())
 		{

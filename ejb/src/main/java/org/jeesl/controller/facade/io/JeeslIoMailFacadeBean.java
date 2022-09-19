@@ -1,6 +1,7 @@
 package org.jeesl.controller.facade.io;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +33,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 import org.jeesl.model.xml.system.io.mail.Mail;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -160,9 +160,9 @@ public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescriptio
 		Path<Date> pRecordCreation = mail.get(JeeslIoMail.Attributes.recordCreation.toString());
 		Path<Date> pRecordSpool = mail.get(JeeslIoMail.Attributes.recordSpool.toString());
 		
-		DateTime dt = new DateTime();
+		LocalDateTime ldt = LocalDateTime.now().minusMinutes(5);
 		predicates.add(cB.equal(pStatus,status));
-		predicates.add(cB.or(cB.isNull(pRecordSpool),cB.lessThanOrEqualTo(pRecordSpool, dt.minusMinutes(5).toDate())));
+		predicates.add(cB.or(cB.isNull(pRecordSpool),cB.lessThanOrEqualTo(pRecordSpool, DateUtil.toDate(ldt))));
 		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.orderBy(cB.desc(pRecordCreation));

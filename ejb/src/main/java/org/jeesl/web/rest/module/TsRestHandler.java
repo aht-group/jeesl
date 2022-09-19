@@ -1,5 +1,6 @@
 package org.jeesl.web.rest.module;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,9 +41,10 @@ import org.jeesl.model.json.module.ts.JsonTsSeries;
 import org.jeesl.util.query.json.JsonStatusQueryProvider;
 import org.jeesl.util.query.json.JsonTsQueryProvider;
 import org.jeesl.web.rest.AbstractJeeslRestHandler;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
 
 public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 							CAT extends JeeslTsCategory<L,D,CAT,?>,
@@ -98,7 +100,8 @@ public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 	
 	public JsonTsSeries jsonTs(WS workspace, SCOPE scope, INT interval, STAT statistic, BRIDGE bridge, int minutes)
 	{
-		DateTime dtNow = new DateTime();
+		LocalDateTime now = LocalDateTime.now();
+//		DateTime dtNow = new DateTime();
 		JsonTsSeries jSeries = JsonTsSeriesFactory.build();
 		
 		try
@@ -110,7 +113,7 @@ public class TsRestHandler <L extends JeeslLang, D extends JeeslDescription,
 			switch(JeeslTsScopeType.Code.valueOf(scope.getType().getCode()))
 			{
 				case ts: break; 
-				case mp: jSeries.setDatas(multiPoints(jSeries,workspace,ts,dtNow.minusMinutes(minutes).toDate(),dtNow.toDate())); break;
+				case mp: jSeries.setDatas(multiPoints(jSeries,workspace,ts,DateUtil.toDate(now.minusMinutes(minutes)),DateUtil.toDate(now))); break;
 			}	
 		}
 		catch (JeeslNotFoundException e) {logger.warn(e.getMessage());}

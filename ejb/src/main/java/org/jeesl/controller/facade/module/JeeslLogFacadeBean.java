@@ -1,5 +1,6 @@
 package org.jeesl.controller.facade.module;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,9 +29,10 @@ import org.jeesl.interfaces.model.module.diary.JeeslWithDiary;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
 
 public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									LOG extends JeeslLogBook<SCOPE,ITEM>,
@@ -114,8 +116,16 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		}
 		
 		Expression<Date> eRecord = item.get(JeeslLogItem.Attributes.record.toString());
-		if(startDate!=null) {predicates.add(cB.greaterThan(eRecord,new DateTime(startDate).withTimeAtStartOfDay().toDate()));}
-		if(endDate!=null) {predicates.add(cB.lessThan(eRecord,new DateTime(endDate).withTimeAtStartOfDay().plusDays(1).toDate()));}
+		if(startDate!=null)
+		{
+			LocalDate ldStart = DateUtil.toLocalDate(startDate);
+			predicates.add(cB.greaterThan(eRecord,DateUtil.toDate(ldStart.atStartOfDay())));
+		}
+		if(endDate!=null)
+		{
+			LocalDate ldEnd = DateUtil.toLocalDate(startDate).plusDays(1);
+			predicates.add(cB.lessThan(eRecord,DateUtil.toDate(ldEnd.atStartOfDay())));
+		}
 		
 //		ListJoin<ITEM,CONF> jConfidentiality = item.joinList(JeeslLogItem.Attributes.issues.toString());
 //		predicates.add(jConfidentiality.in(confidentialities));

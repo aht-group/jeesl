@@ -71,6 +71,13 @@
    	   		<artifactId>jaxb-impl</artifactId>
    	   		<scope>provided</scope>
    	   	</dependency>
+   	   	
+   	   	<!--2022-09-17 tk Preparing removal -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<scope>compile</scope>
+		</dependency> 
         
         <!-- Logging -->
         <dependency>

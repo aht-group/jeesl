@@ -1,12 +1,11 @@
 package org.jeesl;
 
-import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslXmlTestBootstrap
 {
@@ -19,6 +18,5 @@ public class JeeslXmlTestBootstrap
 		loggerInit.init();
 		
 		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
-        DateUtil.ignoreTimeZone=true;
 	}
 }

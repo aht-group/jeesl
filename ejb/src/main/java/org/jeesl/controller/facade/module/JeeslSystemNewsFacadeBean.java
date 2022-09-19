@@ -22,10 +22,10 @@ import org.jeesl.interfaces.model.system.news.JeeslSystemNewsCategory;
 import org.jeesl.interfaces.model.with.date.ju.EjbWithValidFrom;
 import org.jeesl.interfaces.model.with.date.ju.EjbWithValidUntil;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
 
 public class JeeslSystemNewsFacadeBean<L extends JeeslLang,D extends JeeslDescription,
 										CATEGORY extends JeeslSystemNewsCategory<L,D,CATEGORY,?>,
@@ -58,10 +58,10 @@ public class JeeslSystemNewsFacadeBean<L extends JeeslLang,D extends JeeslDescri
 		Expression<Date> dStart = news.get(EjbWithValidFrom.Attributes.validFrom.toString());
 		Expression<Date> dEnd   = news.get(EjbWithValidUntil.Attributes.validUntil.toString());
 		
-		LocalDate date = new LocalDateTime().toLocalDate();
+		java.time.LocalDateTime now = java.time.LocalDateTime.now();
 		predicates.add(cB.isTrue(pathVisible));
-		predicates.add(cB.lessThanOrEqualTo(dStart,date.toDate()));
-		predicates.add(cB.greaterThanOrEqualTo(dEnd,date.toDate()));
+		predicates.add(cB.lessThanOrEqualTo(dStart,DateUtil.toDate(now)));
+		predicates.add(cB.greaterThanOrEqualTo(dEnd,DateUtil.toDate(now)));
 		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(news);

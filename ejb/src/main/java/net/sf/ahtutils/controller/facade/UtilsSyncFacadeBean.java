@@ -1,5 +1,8 @@
 package net.sf.ahtutils.controller.facade;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -17,8 +20,8 @@ import org.jeesl.interfaces.model.io.db.JeeslSync;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.joda.time.DateTime;
-import org.joda.time.Seconds;
+
+import net.sf.exlp.util.DateUtil;
 
 public class UtilsSyncFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 									STATUS extends JeeslStatus<L,D,STATUS>,
@@ -83,10 +86,14 @@ public class UtilsSyncFacadeBean <L extends JeeslLang, D extends JeeslDescriptio
 	{
 		sync = em.find(cSync,sync.getId());
 		
-		DateTime dtSync = new DateTime(sync.getRecord());
-		DateTime dtNow = new DateTime(sync.getRecord());
+//		DateTime dtSync = new DateTime(sync.getRecord());
+//		DateTime dtNow = new DateTime(sync.getRecord());
 		
-		boolean diffOk = Seconds.secondsBetween(dtSync,dtNow).getSeconds()<seconds;
+		LocalDateTime ldtSync = DateUtil.toLocalDateTime(sync.getRecord());
+		LocalDateTime ldtNow = LocalDateTime.now();
+		
+//		boolean diffOk1 = Seconds.secondsBetween(dtSync,dtNow).getSeconds()<seconds;
+		boolean diffOk = ChronoUnit.SECONDS.between(ldtSync, ldtNow) < seconds;
 		boolean statusOk = sync.getStatus().getCode().equals(JeeslSync.Code.success.toString());
 		return (diffOk && statusOk);
 	}

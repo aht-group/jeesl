@@ -1,5 +1,6 @@
 package org.jeesl.controller.facade.system;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +46,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
-import org.joda.time.DateTime;
+
+import net.sf.exlp.util.DateUtil;
 
 public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescription,
 									TEMPLATE extends JeeslJobTemplate<L,D,CATEGORY,TYPE,PRIORITY,EXPIRE>,
@@ -148,8 +150,16 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		Path<PRIORITY> pPriority = job.get(JeeslJob.Attributes.priority.toString());
 		Path<Integer> pPosition = pPriority.get(JeeslJobPriority.Attributes.position.toString());
 		
-		if(from!=null){predicates.add(cB.greaterThanOrEqualTo(pRecordCreation, (new DateTime(from)).withTimeAtStartOfDay().toDate()));}
-		if(to!=null){predicates.add(cB.lessThan(pRecordCreation, (new DateTime(to)).withTimeAtStartOfDay().plusDays(1).toDate()));}
+		if(from!=null)
+		{
+			LocalDateTime ldt = DateUtil.toLocalDate(from).atStartOfDay();
+			predicates.add(cB.greaterThanOrEqualTo(pRecordCreation, DateUtil.toDate(ldt)));
+		}
+		if(to!=null)
+		{
+			LocalDateTime ldt = DateUtil.toLocalDate(to).atStartOfDay().plusDays(1);
+			predicates.add(cB.lessThan(pRecordCreation, DateUtil.toDate(ldt)));
+		}
 		
 		predicates.add(pCategory.in(categories));
 		predicates.add(pType.in(types));

@@ -1,12 +1,14 @@
 package org.jeesl.jsf.function;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
 
 public final class DateTimeFunction
 {
@@ -17,10 +19,10 @@ public final class DateTimeFunction
     public static Integer dateDifference(Date from, Date to)
     {
     	if(from==null || to==null){return null;}
-    	DateTime startDate = new DateTime(from); 
-		DateTime endDate = new DateTime(to);
-		Days diff = Days.daysBetween(startDate, endDate);
-		return diff.getDays();
+    	LocalDate ldStart = DateUtil.toLocalDate(from);
+    	LocalDate ldEnd = DateUtil.toLocalDate(to);
+
+		return Long.valueOf(ChronoUnit.DAYS.between(ldStart, ldEnd)).intValue();
     }
     
     public static Integer dayDeviation(Date from, Date to, Integer ref)
@@ -33,8 +35,8 @@ public final class DateTimeFunction
     public static Date plusDay(Date from, Integer days)
     {
     	if(from==null || days==null){return null;}
-    	DateTime dt = new DateTime(from);
-		return dt.plusDays(days).toDate();
+    	LocalDate ld = DateUtil.toLocalDate(from);
+		return DateUtil.toDate(ld.plusDays(days));
     }
     
     public static String seconds2Minutes(Integer seconds)

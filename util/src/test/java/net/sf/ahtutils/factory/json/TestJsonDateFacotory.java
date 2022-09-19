@@ -1,5 +1,6 @@
 package net.sf.ahtutils.factory.json;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.jeesl.AbstractJeeslUtilTest;
@@ -22,7 +23,7 @@ public class TestJsonDateFacotory extends AbstractJeeslUtilTest
     @Test public void values()
     {	
     	JsonDateYQMWD json = new JsonDateYQMWD();
-    	JsonDateFactory.build(json, DateUtil.getDateFromInt(2016, 5, 2));
+    	JsonDateFactory.build(json, DateUtil.toDate(LocalDate.of(2016,5,2)));
     	Assert.assertEquals(2016, json.getYear());
     	Assert.assertEquals("Q2",json.getQuarter());
     	Assert.assertEquals(5,json.getMonth());

@@ -3,8 +3,6 @@ package org.jeesl.maven.goal.report;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 
-import net.sf.ahtutils.report.ReportCompiler;
-
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.maven.plugin.AbstractMojo;
@@ -13,8 +11,9 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
+import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
+
+import net.sf.ahtutils.report.ReportCompiler;
 
 /**
  * Goal which compiles a set of JasperReports jrxml files to .jasper file. Creates a rtl language and a ltr language version of all reports.
@@ -43,14 +42,14 @@ public class JeeslReportPreCompilerGoal extends AbstractMojo
     	getLog().info("Using jrxml from " +source);
     	getLog().info("Compiling jasper to " +target);
     	
-    	DateTime start = new DateTime();
+    	ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
     	int[] counter;
-		try {
+		try
+		{
 			counter = ReportCompiler.execute(configFile, source, target);
-		} catch (FileNotFoundException e) {
-			throw new MojoExecutionException("Report file not found.");
 		}
-    	Period duration = new Period(start,new DateTime());
+		catch (FileNotFoundException e) {throw new MojoExecutionException("Report file not found.");}
+    	
     	
     	DecimalFormat df = new DecimalFormat("#00");
     	df.setDecimalSeparatorAlwaysShown(false);
@@ -58,7 +57,7 @@ public class JeeslReportPreCompilerGoal extends AbstractMojo
     	StringBuffer sb = new StringBuffer();
     	sb.append("Compiled ").append(counter[0]).append(" reports");
     	sb.append(" (media:"+counter[1]+" jr:"+counter[2]+")");
-    	sb.append(" in ").append(df.format(duration.getMinutes())).append(":").append(df.format(duration.getSeconds())).append(" minutes");
+    	sb.append(" in ").append(ptt.toTotalPeriod());
     	    	
     	getLog().info(sb.toString());
     }

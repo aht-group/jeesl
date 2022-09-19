@@ -188,6 +188,13 @@
 			</exclusions>
 		</dependency>
 		
+		<!--2022-09-17 tk Preparing removal 
+		<dependency>
+			<groupId>jda-time</groupId>
+			<artifactId>jda-time</artifactId>
+			<scope>compile</scope>
+		</dependency> -->
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>log4j</groupId>

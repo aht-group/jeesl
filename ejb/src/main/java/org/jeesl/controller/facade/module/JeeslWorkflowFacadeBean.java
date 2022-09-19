@@ -1,5 +1,6 @@
 package org.jeesl.controller.facade.module;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,9 +57,10 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 import org.jeesl.model.json.db.tuple.two.Json2Tuples;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
 
 public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
 									AX extends JeeslWorkflowContext<L,D,AX,?>,
@@ -366,10 +368,10 @@ public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		Join<WF,WS> jStage = jWorkflow.join(JeeslWorkflow.Attributes.currentStage.toString());
 		predicates.add(cB.equal(jStage,notifciation.getStage()));
 		
-		DateTime now = new DateTime();
+		LocalDateTime ldt = LocalDateTime.now().minusHours(notifciation.getOverdueHours());
 		Join<WF,WY> jActivity = jWorkflow.join(JeeslWorkflow.Attributes.lastActivity.toString());
 		Expression<Date> eRecord = jActivity.get(JeeslWorkflowActivity.Attributes.record.toString());
-		predicates.add(cB.lessThanOrEqualTo(eRecord, now.minusHours(notifciation.getOverdueHours()).toDate()));
+		predicates.add(cB.lessThanOrEqualTo(eRecord, DateUtil.toDate(ldt)));
 		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(link);
