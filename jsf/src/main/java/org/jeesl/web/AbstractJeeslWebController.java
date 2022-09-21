@@ -20,8 +20,6 @@ public class AbstractJeeslWebController <L extends JeeslLang, D extends JeeslDes
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslWebController.class);
 	
-
-	
 	protected JeeslFacesMessageBean bMessage;
 	protected JeeslLocaleProvider<LOC> lp;
 	protected JeeslLogger jogger;
@@ -31,7 +29,13 @@ public class AbstractJeeslWebController <L extends JeeslLang, D extends JeeslDes
 	protected final EjbLangFactory<L> efLang;
 	protected final EjbDescriptionFactory<D> efDescription;
 	
-	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;}
+	protected boolean debugOnInfo;
+	public void activateDebuggingOnInfo(JeeslLogger jogger)
+	{
+		this.debugOnInfo=true;
+		this.jogger=jogger;
+	}
+	
 	protected Class<L> cL;
 	protected Class<D> cD;
 

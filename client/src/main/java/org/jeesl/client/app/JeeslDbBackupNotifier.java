@@ -42,7 +42,6 @@ public class JeeslDbBackupNotifier
 	private String cfgUrl,cfgHost,cfgSystem;
 	private File cfgDirectory;
 	
-	
 	public JeeslDbBackupNotifier()
 	{
 		
@@ -76,8 +75,8 @@ public class JeeslDbBackupNotifier
         
         oUrl = Option.builder("url").required(true).hasArg(true).argName("URL").desc("URL Endpoint").build(); jco.getOptions().addOption(oUrl);
         oDirectory = Option.builder("dir").required(true).hasArg(true).argName("DIR").desc("Directory with .sql files").build(); jco.getOptions().addOption(oDirectory);
-        oHost = Option.builder("host").required(true).hasArg(true).argName("host").desc("Host identifier of storage server").build(); jco.getOptions().addOption(oHost);
-        oSystem = Option.builder("system").required(true).hasArg(true).argName("SYSTEM").desc("System identifier").build(); jco.getOptions().addOption(oHost);
+        oHost = Option.builder("host").required(true).hasArg(true).argName("HOST").desc("Host identifier of storage server").build(); jco.getOptions().addOption(oHost);
+        oSystem = Option.builder("system").required(true).hasArg(true).argName("SYSTEM").desc("System identifier").build(); jco.getOptions().addOption(oSystem);
 	}
 	
 	private void debugConfig()
@@ -121,11 +120,7 @@ public class JeeslDbBackupNotifier
 		JeeslCliOptionHandler jco = new JeeslCliOptionHandler(org.jeesl.Version.class.getPackage().getImplementationVersion());
 		jco.setLog4jPaths("jeesl/client/config");
 		
-		try
-		{
-			
-			notifier.parseArguments(jco,args);
-		}
+		try {notifier.parseArguments(jco,args);}
 		catch (ParseException e) {logger.error(e.getMessage());jco.help();}
 		catch (UtilsProcessingException e) {e.printStackTrace();}
 		catch (IOException e) {e.printStackTrace();}

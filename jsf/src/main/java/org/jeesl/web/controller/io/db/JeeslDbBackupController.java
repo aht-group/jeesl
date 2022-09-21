@@ -1,4 +1,4 @@
-package org.jeesl.web.mbean.prototype.io.db;
+package org.jeesl.web.controller.io.db;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.api.handler.sb.SbDateIntervalSelection;
-import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
 import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
+import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
 import org.jeesl.interfaces.model.io.db.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.JeeslDbDumpFile;
 import org.jeesl.interfaces.model.io.db.JeeslDbDumpStatus;
@@ -19,31 +19,31 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.util.comparator.ejb.RecordComparator;
-import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
+import org.jeesl.web.AbstractJeeslWebController;
 import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
+import net.sf.exlp.util.DateUtil;
 
-public class AbstractDbBackupBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,
 									DUMP extends JeeslDbDump<SYSTEM,DF>,
 									DF extends JeeslDbDumpFile<DUMP,DH,DS>,
 									DH extends JeeslIoSsiHost<L,D,?>,
 									DS extends JeeslDbDumpStatus<L,D,DS,?>>
-						extends AbstractAdminBean<L,D,LOC>
-						implements Serializable,SbDateIntervalSelection
+						extends AbstractJeeslWebController<L,D,LOC>
+						implements Serializable,SbDateSelectionBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractDbBackupBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslDbBackupController.class);
 	
 	private JeeslIoDbFacade<L,D,SYSTEM,DUMP,DF,DH,DS> fDb;
 	private final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb;
 	
-	private SbDateIntervalHandler sbDateHandler; public SbDateIntervalHandler getSbDateHandler() {return sbDateHandler;}
-	protected Chart chart; public Chart getChart() {return chart;}
+	private SbDateHandler sbhDate; public SbDateHandler getSbhDate() {return sbhDate;}
 
 	private List<DUMP> dumps; public List<DUMP> getDumps(){return dumps;}
 	protected final List<DH> hosts; public List<DH> getHosts() {return hosts;}
@@ -51,42 +51,50 @@ public class AbstractDbBackupBean <L extends JeeslLang,D extends JeeslDescriptio
 	
 	@SuppressWarnings("unused")
 	private SYSTEM system;
+	protected Chart chart; public void setChart(Chart chart) {this.chart = chart;} public Chart getChart() {return chart;}
 	
-	public AbstractDbBackupBean(final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb)
+	public JeeslDbBackupController(final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb=fbDb;
 		
 		hosts = new ArrayList<>();
-		sbDateHandler = new SbDateIntervalHandler(this);
-		sbDateHandler.setEnforceStartOfDay(true);
-		sbDateHandler.initWeeksToNow(2);
+		sbhDate = SbDateHandler.instance(this);
+		sbhDate.initWeeks(2,0);
 	}
 	
 	public void postConstructDbBackup(JeeslIoDbFacade<L,D,SYSTEM,DUMP,DF,DH,DS> fDb, SYSTEM system)
 	{
 		this.fDb=fDb;
 		this.system=system;
+		
+		if(jogger!=null) {jogger.start("postConstructDbBackup");}
 		reloadHosts();
-		refreshList(); 
+		refreshList();
+		if(jogger!=null) {jogger.ofxMilestones(System.out);}
 	}
 	
 	protected void reloadHosts()
 	{
-		hosts.addAll(fDb.all(fbDb.getClassDumpHost()));
-		logger.info(AbstractLogMessage.reloaded(fbDb.getClassDumpHost(),hosts)+" in abstract");
+		if(hosts.isEmpty())
+		{
+			hosts.addAll(fDb.all(fbDb.getClassDumpHost()));
+			if(jogger!=null) {jogger.milestone(fbDb.getClassDumpHost().getSimpleName(),"reloaded",hosts.size());}
+		}
 	}
 	
-	@Override public void callbackDateChanged()
+	@Override
+	public void callbackDateChanged(SbDateSelection handler)
 	{
-		refreshList();
+		refreshList();	
 	}
 	
 	protected void refreshList()
 	{		
-		dumps = fDb.inInterval(fbDb.getClassDump(),sbDateHandler.getDate1(),sbDateHandler.toDate2Plus1());
+		dumps = fDb.inInterval(fbDb.getClassDump(),DateUtil.toDate(sbhDate.getDateFrom()),DateUtil.toDate(sbhDate.getDateTo()));
 		Collections.sort(dumps,new RecordComparator<DUMP>());
 		Collections.reverse(dumps);
+		if(jogger!=null) {jogger.milestone(fbDb.getClassDump().getSimpleName(),"reloaded",dumps.size());}
 		
 		mapFiles = new HashMap<DUMP,Map<DH,DF>>();
 		for(DUMP d : dumps)
@@ -94,7 +102,8 @@ public class AbstractDbBackupBean <L extends JeeslLang,D extends JeeslDescriptio
 			mapFiles.put(d,new HashMap<DH,DF>());
 		}
 		
-		List<DF> files = fDb.all(fbDb.getClassDumpFile());
+		List<DF> files = fDb.allForParents(fbDb.getClassDumpFile(),dumps);
+		if(jogger!=null) {jogger.milestone(fbDb.getClassDumpFile().getSimpleName(),"reloaded",files.size());}
 		for(DF f : files)
 		{
 			if(mapFiles.containsKey(f.getDump()))

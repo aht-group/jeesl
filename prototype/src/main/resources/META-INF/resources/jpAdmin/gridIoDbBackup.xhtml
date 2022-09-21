@@ -7,37 +7,37 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
-		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="controller" required="true"/>
 		<composite:attribute name="dateTimePattern" required="false" default="dd.MM.yyyy"/>
 	</composite:interface>
 	
 	<composite:implementation>
 		<jp:grid id="grid">
 			<j:row>
-				<j:slot rendered="#{not empty cc.attrs.bean.chart}">
+				<j:slot rendered="#{not empty cc.attrs.controller.chart}">
 					<mcc:chart id="chart" type="line" zoomType="x" height="300">
-						<mc:title value="#{cc.attrs.bean.chart.title.label}"/>
+						<mc:title value="#{cc.attrs.controller.chart.title.label}"/>
 						<mcc:axis code="x" type="datetime"><mc:title value="Date"/></mcc:axis>
 						<mcc:axis code="y" min="0"><mc:title value="Size"/></mcc:axis>
 						<mcc:tooltip shared="true"/>
 						<mcc:plotOptions type="line" marker="false"/>
 						<mcc:series>
-							<mcc:ds value="#{cc.attrs.bean.chart.ds}"/>
+							<mcc:ds value="#{cc.attrs.controller.chart.ds}"/>
 						</mcc:series>
 					</mcc:chart>
 				</j:slot>
 				<j:slot id="sCriterias" width="12">
-					<p:dataTable var="d" value="#{cc.attrs.bean.dumps}">
+					<p:dataTable var="d" value="#{cc.attrs.controller.dumps}">
 						<p:columnGroup type="header">
 							<p:row>
 								<p:column colspan="3" headerText="#{msg.jeeslIoDbBackups}" />
-								<p:column colspan="#{cc.attrs.bean.hosts.size()}" headerText="#{msg.jeeslIoDbBackupStorageLocations}" />
+								<p:column colspan="#{cc.attrs.controller.hosts.size()}" headerText="#{msg.jeeslIoDbBackupStorageLocations}" />
 							</p:row>
 							<p:row>
 								<p:column colspan="1" headerText="#{msg.jeeslIoDbBackDateModified}"/>
 								<p:column colspan="1" headerText="#{msg.jeeslIoDbBackupSize}"/>
 								<p:column colspan="1" headerText="#{msg.jeeslIoDbBackupName}"/>
-								<p:columns var="h" value="#{cc.attrs.bean.hosts}" styleClass="jeeslCenter">
+								<p:columns var="h" value="#{cc.attrs.controller.hosts}" styleClass="jeeslCenter">
 					            	<f:facet name="header"><h:outputText value="#{h.name[localeCode].lang}" /></f:facet>
 								</p:columns>
 							</p:row>
@@ -46,9 +46,9 @@
 						<p:column><h:outputText value="#{d.record}"><f:convertDateTime pattern="#{cc.attrs.dateTimePattern}" /></h:outputText></p:column>
 						<p:column><h:outputText value="#{j:humanFileSize(d.size)}" /></p:column>
 			            <p:column><h:outputText value="#{d.name}"/></p:column>
-			            <p:columns var="h" value="#{cc.attrs.bean.hosts}" styleClass="jeeslCenter">
-			            	<h:outputText rendered="false" value="#{cc.attrs.bean.mapFiles[d][h].status.name[localeCode].lang}"/>
-			            	<jtp:symbolizer value="#{cc.attrs.bean.mapFiles[d][h].status}"/>
+			            <p:columns var="h" value="#{cc.attrs.controller.hosts}" styleClass="jeeslCenter">
+			            	<h:outputText rendered="false" value="#{cc.attrs.controller.mapFiles[d][h].status.name[localeCode].lang}"/>
+			            	<jtp:symbolizer value="#{cc.attrs.controller.mapFiles[d][h].status}"/>
 			            </p:columns>
 			       	</p:dataTable>
 				</j:slot>

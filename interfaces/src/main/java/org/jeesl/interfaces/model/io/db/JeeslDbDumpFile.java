@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
@@ -12,7 +13,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 public interface JeeslDbDumpFile<DUMP extends JeeslDbDump<?,?>,
 								HOST extends JeeslIoSsiHost<?,?,?>,
 								STATUS extends JeeslDbDumpStatus<?,?,STATUS,?>>
-					extends Serializable,EjbSaveable,EjbRemoveable,EjbWithId
+					extends Serializable,EjbSaveable,EjbRemoveable,EjbWithId,EjbWithParentAttributeResolver
 {
 	public static enum Attributes{dump,host,status}
 	public static enum Status{stored,flagged,deleted};

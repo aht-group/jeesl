@@ -1,5 +1,6 @@
 package org.jeesl.controller.processor.module.ts.system.io.db;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,7 @@ import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.exlp.util.DateUtil;
 import net.sf.exlp.xml.io.Dir;
 import net.sf.exlp.xml.io.File;
 
@@ -100,13 +102,13 @@ public class TsDbBackupSizeProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 	}
 	
-	public Chart build(String localeCode, Date begin, Date end, SYSTEM system) 
+	public Chart build(String localeCode, LocalDate begin, LocalDate end, SYSTEM system) 
 	{
 		Chart chart = mfTs.build(localeCode);
 		chart.setSubtitle(null);
 		try
 		{
-			chart.setDs(mfTs.singleData(localeCode,system,begin,end));
+			chart.setDs(mfTs.singleData(localeCode,system,DateUtil.toDate(begin),DateUtil.toDate(end)));
 		}
 		catch (JeeslNotFoundException e) {}
 		return chart;

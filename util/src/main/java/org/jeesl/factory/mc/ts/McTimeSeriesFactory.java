@@ -143,8 +143,11 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 	{
 		STAT statistic = fTs.fByEnum(fbTs.getClassStat(), JeeslTsStatistic.Code.raw);
 		TS ts = fTs.fTimeSeries(scope,interval,statistic,bridge);
+		
+		logger.info("fTs.fData ts:"+ts.toString()+" from:"+from+" to:"+to);
 		List<DATA> datas = fTs.fData(workspace,ts,JeeslTsData.QueryInterval.closedOpen,from,to);
-
+		logger.info(fbTs.getClassData().getSimpleName()+": "+datas.size());
+		
 		Ds xml = new Ds();
 		for(DATA d : datas)
 		{

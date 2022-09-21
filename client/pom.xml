@@ -67,6 +67,11 @@
         		</exclusion>
         	</exclusions>
 		</dependency>
+		<dependency>
+    		<groupId>commons-collections</groupId>
+    		<artifactId>commons-collections</artifactId>
+    		<version>3.2.2</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
@@ -144,6 +149,11 @@
 			<artifactId>log4j</artifactId>
 			<type>jar</type>
 		</dependency>
+		 <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<type>jar</type>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
@@ -168,17 +178,7 @@
             <artifactId>jeesl-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-    		<groupId>commons-collections</groupId>
-    		<artifactId>commons-collections</artifactId>
-    		<version>3.2.2</version>
-    		<scope>test</scope>
-		</dependency>
+       
 		<dependency>
     		<groupId>com.aspose</groupId>
     		<artifactId>aspose-words</artifactId>
