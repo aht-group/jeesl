@@ -21,7 +21,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.util.comparator.ejb.RecordComparator;
-import org.jeesl.web.AbstractJeeslWebController;
+import org.jeesl.web.controller.AbstractJeeslWebController;
 import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

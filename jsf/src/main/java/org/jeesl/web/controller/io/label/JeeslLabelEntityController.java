@@ -50,7 +50,7 @@ import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.comparator.ejb.io.revision.RevisionEntityComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
-import org.jeesl.web.AbstractJeeslWebController;
+import org.jeesl.web.controller.AbstractJeeslWebController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

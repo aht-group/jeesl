@@ -24,7 +24,7 @@ import org.jeesl.interfaces.model.util.tree.JeeslTreeClassification;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.TreeHelper;
-import org.jeesl.web.AbstractJeeslWebController;
+import org.jeesl.web.controller.AbstractJeeslWebController;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.TreeDragDropEvent;
