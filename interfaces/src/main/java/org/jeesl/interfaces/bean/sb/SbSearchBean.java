@@ -10,6 +10,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 public interface SbSearchBean extends Serializable
 {
 	void selectSbSearch(JeeslHandler handler, EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException;
+	void applySbSearch(JeeslHandler handler);
 	
-	@Deprecated void triggerSbSearch();
+//	@Deprecated void triggerSbSearch();
 }

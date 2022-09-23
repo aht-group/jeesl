@@ -51,7 +51,7 @@ public class SbSearchHandler <T extends EjbWithId> implements JeeslHandler
 		if(searchText != "")
 		{
 			list.addAll(acHandler.autoCompleteListByQuery(c,searchText));
-			bean.triggerSbSearch();
+//			bean.triggerSbSearch();
 		}
 	}
 	
@@ -59,6 +59,12 @@ public class SbSearchHandler <T extends EjbWithId> implements JeeslHandler
 	{
 		logger.info("selectSbSearch");
 		bean.selectSbSearch(this,item);
+	}
+	
+	public void applySbSearch()
+	{
+		logger.info("applySbSearch");
+		bean.applySbSearch(this);
 	}
 
 	public void cancelEvent()
