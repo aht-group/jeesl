@@ -93,7 +93,7 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		return tQ.getResultList();
 	}
 
-	@Override public List<ITEM> fLogItems(List<LOG> books, List<SCOPE> scopes, List<CONF> confidentialities, Date startDate, Date endDate)
+	@Override public List<ITEM> fLogItems(List<LOG> books, List<SCOPE> scopes, List<CONF> confidentialities, LocalDate startDate, LocalDate endDate)
 	{
 		if(books!=null && books.isEmpty()) {return new ArrayList<ITEM>();}
 		if(scopes!=null && scopes.isEmpty()) {return new ArrayList<ITEM>();}
@@ -118,13 +118,11 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		Expression<Date> eRecord = item.get(JeeslLogItem.Attributes.record.toString());
 		if(startDate!=null)
 		{
-			LocalDate ldStart = DateUtil.toLocalDate(startDate);
-			predicates.add(cB.greaterThan(eRecord,DateUtil.toDate(ldStart.atStartOfDay())));
+			predicates.add(cB.greaterThan(eRecord,DateUtil.toDate(startDate.atStartOfDay())));
 		}
 		if(endDate!=null)
 		{
-			LocalDate ldEnd = DateUtil.toLocalDate(startDate).plusDays(1);
-			predicates.add(cB.lessThan(eRecord,DateUtil.toDate(ldEnd.atStartOfDay())));
+			predicates.add(cB.lessThan(eRecord,DateUtil.toDate(endDate.atStartOfDay().plusDays(1))));
 		}
 		
 //		ListJoin<ITEM,CONF> jConfidentiality = item.joinList(JeeslLogItem.Attributes.issues.toString());

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -235,6 +236,26 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 
 		try	{return em.createQuery(select).getSingleResult();}
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbTs.getClassTs().getName()+" found for scope/interval/bridge");}
+	}
+	
+	@Override public DATA fDataLast(TS series) throws JeeslNotFoundException
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<DATA> cQ = cB.createQuery(fbTs.getClassData());
+		Root<DATA> root = cQ.from(fbTs.getClassData());
+
+		Path<TS> pSeries = root.get(JeeslTsData.Attributes.timeSeries.toString());
+		Expression<Date> eRecord = root.get(JeeslTsData.Attributes.record.toString());
+		
+		cQ.where(cB.equal(pSeries,series));
+		cQ.select(root);
+		cQ.orderBy(cB.desc(eRecord));
+		
+		TypedQuery<DATA> q = em.createQuery(cQ);
+		q.setMaxResults(1);
+		try	{return q.getSingleResult();}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+ fbTs.getClassData()+" found for series="+series.toString());}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbTs.getClassData()+" and series="+series.toString()+" not unique");}
 	}
 
 	@Override

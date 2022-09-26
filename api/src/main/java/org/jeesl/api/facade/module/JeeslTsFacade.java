@@ -62,6 +62,8 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	TS fTimeSeries(SCOPE scope, INT interval, STAT statistic, BRIDGE bridge) throws JeeslNotFoundException;
 	TS fcTimeSeries(SCOPE scope, INT interval, STAT statistic, BRIDGE bridge) throws JeeslConstraintViolationException;
 
+	DATA fDataLast(TS series) throws JeeslNotFoundException;
+	
 	List<TS> fTimeSeries(List<BRIDGE> bridges);
 	List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes);
 	List<TS> fTimeSeries(SCOPE scope, INT interval, EC entityClass);

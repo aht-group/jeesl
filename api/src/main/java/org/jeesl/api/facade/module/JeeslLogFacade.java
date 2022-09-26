@@ -1,6 +1,6 @@
 package org.jeesl.api.facade.module;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -27,5 +27,5 @@ public interface JeeslLogFacade <L extends JeeslLang, D extends JeeslDescription
 {	
 	<OWNER extends JeeslWithDiary<BOOK>> OWNER fDiaryOwner(Class<OWNER> cOwner, BOOK diary) throws JeeslNotFoundException;
 	List<ITEM> fLogItems(List<BOOK> books);
-	List<ITEM> fLogItems(List<BOOK> books, List<SCOPE> scopes, List<CONF> confidentialities, Date startDate, Date endDate);
+	List<ITEM> fLogItems(List<BOOK> books, List<SCOPE> scopes, List<CONF> confidentialities, LocalDate ldStart, LocalDate ldEnd);
 }
