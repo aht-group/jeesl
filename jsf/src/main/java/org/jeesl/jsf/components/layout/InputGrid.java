@@ -52,7 +52,7 @@ public class InputGrid extends UIPanel
 		responseWriter.writeAttribute("id",getClientId(context),"id");
 		
 		StringBuffer sbStyleClass = new StringBuffer();
-		sbStyleClass.append("ui-fluid input-grid");
+		sbStyleClass.append("ui-fluid jeesl-input-grid");
 		
 		if(map.containsKey(Properties.styleClass.toString()))
 		{
@@ -101,7 +101,8 @@ public class InputGrid extends UIPanel
 		if(rChildren)
 		{
 			counter = new AtomicInteger(0);
-			List<List<UIComponent>> childGroup = this.getChildren().stream().collect(Collectors.groupingBy(child -> classifyChildGroup())).values().stream().collect(Collectors.toList());
+			List<UIComponent> renderedChildren = this.getChildren().stream().filter(c -> c.isRendered()).collect(Collectors.toList());
+			List<List<UIComponent>> childGroup = this.getChildren().stream().filter(child -> child.isRendered()).collect(Collectors.groupingBy(child -> classifyChildGroup())).values().stream().collect(Collectors.toList());
 			
 			float inputWidth = (12 - labelWidth) / (columnCount - 1);
 			

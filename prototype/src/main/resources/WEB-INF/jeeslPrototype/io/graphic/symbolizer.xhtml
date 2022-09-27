@@ -4,10 +4,11 @@
 >
 
 	<c:set var="value" value="#{value}"/>
-	<c:set var="height"  value="#{not empty height ? height : 12}" />
+	<c:set var="height"  value="#{height ? height : 12}" />
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
 	<c:set var="marginRight" value="#{marginRight}"/>
 	<c:set var="marginLeft" value="#{marginLeft}"/>
+	<c:set var="styleClass" value="#{styleClass}"/>
 
 <ui:remove>	
 	<p:graphicImage rendered="#{rendered and (not empty value)}"
@@ -23,8 +24,9 @@
 
 	<ui:fragment rendered="#{rendered and (not empty value)}">
 			<img src="#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}"
-				height="#{height}"
-				style="#{not empty marginRight ? 'margin-right: '.concat(marginRight).concat('px;') : ''}#{not empty marginLeft ? 'margin-left: '.concat(marginLeft).concat('px;') : ''}"/>
+				 height="#{height}"
+				 class="#{styleClass}"
+				 style="#{not empty marginRight ? 'margin-right: '.concat(marginRight).concat('px;') : ''}#{not empty marginLeft ? 'margin-left: '.concat(marginLeft).concat('px;') : ''}"/>
 	</ui:fragment>
 
 </ui:composition>

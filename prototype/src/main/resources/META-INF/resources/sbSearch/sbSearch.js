@@ -37,13 +37,19 @@ function showResults() {
 	input.val() ? overlay.height(previousHeight).addClass('jeesl-visible').animate({ height: targetHeight }, 400, () => {
 		overlay.height('auto');
 		previousHeight = overlay.height();
-	}) : overlay.height(previousHeight).animate({ height: 0 }, 400, () => {
-		overlay.removeClass('jeesl-visible');
-		overlay.height('auto');
-		previousHeight = 0;
-	});
+	}) : hideResults(overlay);
 	
 //	input.val() ? overlay.addClass('jeesl-visible') : overlay.removeClass('jeesl-visible');
 	
 	overlay.find('.jeesl-field-tip-icon').click({ overlay: overlay }, toggleDetails);
+}
+
+function hideResults(overlay) {
+	overlay = overlay || $(resultQuery.replaceAll(':','\\:')).parent();
+	
+	overlay.height(previousHeight).animate({ height: 0 }, 400, () => {
+		overlay.removeClass('jeesl-visible');
+		overlay.height('auto');
+		previousHeight = 0;
+	});
 }

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" inkscape:version="0.48.4 r9939" inkscape:export-ydpi="4.2538862" inkscape:export-xdpi="4.2538862" inkscape:export-filename="C:\Users\Yann\Desktop\shield-green.png" sodipodi:docname="shield-green.svg"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="549.174px"
+	 height="531.391px" viewBox="0 0 549.174 531.391" enable-background="new 0 0 549.174 531.391" xml:space="preserve">
+<path fill="#595959" stroke="#383838" stroke-width="4.6705" d="M517.89,2.587H32.694C16.316,2.585,3.04,15.863,3.04,32.239v0.004
+	L3.037,32.24v467.415c0,16.376,13.275,29.651,29.654,29.651H76.03h441.858c16.38,0,29.656-13.275,29.656-29.652V32.239
+	C547.544,15.863,534.269,2.587,517.89,2.587z"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="18.0393" y1="265.9446" x2="532.5442" y2="265.9446">
+	<stop  offset="0" style="stop-color:#B4BBCC"/>
+	<stop  offset="1" style="stop-color:#DFE2EA"/>
+</linearGradient>
+<path fill="url(#SVGID_1_)" d="M517.889,17.585H32.694c-8.08,0-14.651,6.573-14.651,14.651v0.003l-0.003-0.003v467.414
+	c0,8.08,6.575,14.653,14.655,14.653h49.553H517.89c8.08,0,14.654-6.572,14.654-14.651V32.239
+	C532.544,24.158,525.969,17.585,517.889,17.585z"/>
+<linearGradient id="path13_1_" gradientUnits="userSpaceOnUse" x1="76.1223" y1="265.4314" x2="473.053" y2="265.4314">
+	<stop  offset="0" style="stop-color:#14A000"/>
+	<stop  offset="1" style="stop-color:#1ECC00"/>
+</linearGradient>
+<path id="path13" inkscape:connector-curvature="0" fill="url(#path13_1_)" d="M76.122,320.316c0,0,15.131-16.218,36.426-34.149
+	c21.295-17.933,51.557-45.953,51.557-45.953l84.059,126.65c0,0,50.751-115.74,117.701-201.743
+	C432.797,79.135,466.737,45.196,466.737,45.196s5.043,54.358,6.199,96.949c1.121,42.59-6.199,96.213-6.199,96.213
+	s-55.375,21.365-109.838,91.135c-69.891,89.558-102.01,156.175-102.01,156.175s-28.02-26.899-77.335-78.455
+	C128.24,355.656,76.122,320.316,76.122,320.316z"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="90.3801" y1="563.1877" x2="347.4898" y2="151.726" gradientTransform="matrix(1 0 0 -1 -0.0454 467.3813)">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+</linearGradient>
+<path fill="url(#SVGID_2_)" d="M517.889,17.585H32.694c-8.08,0-14.651,6.573-14.651,14.651V372.33
+	C166.899,247.104,357.964,203.825,532.544,220.94V32.239C532.544,24.158,525.969,17.585,517.889,17.585z"/>
+</svg>

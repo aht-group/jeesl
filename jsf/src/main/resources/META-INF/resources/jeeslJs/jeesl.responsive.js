@@ -53,7 +53,7 @@ function setTreeHeight(node) {
 function toggleMenu() {
 	$('.jeesl-menu-bar-dropdown').filter((index, button) => button !== this).removeClass('jeesl-active').siblings('.jeesl-dropdown-list').removeClass('jeesl-active');
 	
-	$(this).filter(current => $(current).find('.jeesl-greyscale')).toggleClass('jeesl-active').siblings('.jeesl-dropdown-list').removeAttr('style').toggleClass('jeesl-active');
+	$(this).filter(current => $(current).find('.jeesl-greyscale')).toggleClass('jeesl-active').siblings('.jeesl-dropdown-list').removeAttr('style').toggleClass('jeesl-active').find('.jeesl-open').delay(200).queue(function() { $(this).removeClass('jeesl-open').removeAttr('style').dequeue(); });
 }
 
 function reloadStatusBar() {
@@ -76,12 +76,34 @@ function toggleSubmenu(eventArgs) {
 	
 	if (!closeRequested) { currentSubmenu.addClass('jeesl-open'); }
 	submenus.each(function() {
-		$(this).stop().animate({ height: $(this).parent().is(currentListItem) && !closeRequested ? $(this).children('.jeesl-dropdown-sub').eq(0).outerHeight() + listItemHeight : listItemHeight }, 400);
+		let $this = $(this);
+		$this.stop().animate({ height: $this.parent().is(currentListItem) && !closeRequested ? $(this).children('.jeesl-dropdown-sub').eq(0).outerHeight() + listItemHeight : listItemHeight }, 400, function() {
+			if ($this.height() === listItemHeight) { $this.removeAttr('style'); }
+		});
 	});
 	$.when(submenus).then(() => {
 		submenus.each(function() { $(this).toggleClass('jeesl-open', $(this).is(currentSubmenu) && !closeRequested); });
 		overlay.height(overlay.children().map((index, child) => $(child).outerHeight()).toArray().reduce((previous, current) => previous + current, 0) + 30);
+		if (overlay.find('.jeesl-open').length === 0) { overlay.removeAttr('style'); }
 	});
+}
+
+function toggleDatatable(eventArgs) {
+	let panel = $(this).parent();
+	
+	if (panel.hasClass('jeesl-active')) {
+		panel.removeClass('jeesl-active');
+		panel.find('.ui-datatable-tablewrapper').animate({ height: 0 }, 400);
+	} else {
+		let tablewrapper = panel.find('.ui-datatable-tablewrapper');
+		
+		tablewrapper.css('height', 'auto');
+		let height = tablewrapper.height();
+		tablewrapper.height(0);
+		
+		panel.addClass('jeesl-active');
+		tablewrapper.animate({ height: height }, 400);
+	}
 }
 
 $(function() {
@@ -98,4 +120,8 @@ $(function() {
 	
 	let overlay = $('.jeesl-header .jeesl-dropdown-list');
 	overlay.find('.jeesl-submenu-icon').click({ overlay: overlay }, toggleSubmenu);
+	
+	let datatable = $('.jeesl-datatable-collapsible')
+	datatable.find('.ui-datatable-tablewrapper').height(0);
+	datatable.find('.ui-datatable-header').click(toggleDatatable);
 });

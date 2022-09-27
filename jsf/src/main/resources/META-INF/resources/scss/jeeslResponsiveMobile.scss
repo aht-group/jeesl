@@ -8,6 +8,10 @@ $border: $border-width solid $border-colour;
 $font-size-mobile: 26px;
 $element-height-mobile: 84px;
 
+$input-field-icon-height-mobile: 58px;
+
+$separator-thickness-mobile: 3px;
+
 @mixin font-dropdown {
 	font-size: $font-size-interactable;
 	font-weight: $font-weight-bold;
@@ -36,7 +40,7 @@ $element-height-mobile: 84px;
 		border-radius: 0;
 		font-size: 1.2em;
 	    font-weight: 700;
-		min-height: $ls-element-height-mobile;
+		min-height: $element-height-mobile;
 	    margin: 0;
 	    padding: calc(#{$regular-spacing} - #{$separator-thickness-mobile}) $wide-spacing $regular-spacing;
 		text-shadow: none;
@@ -77,8 +81,8 @@ html, body, .ui-widget {
 }
 
 @mixin inputfield {
-	height: $element-height-mobile;
-	line-height: calc(#{$element-height-mobile} - 2 * (#{$half-spacing}));
+	min-height: $element-height-mobile;
+	line-height: calc(#{$element-height-mobile} - 2 * (#{$regular-spacing}));
 	padding: $regular-spacing !important;
 }
 
@@ -187,8 +191,37 @@ html, body, .ui-widget {
 .ui-selectcheckboxmenu-panel {
 	@include headlined-overlay(ui-selectcheckboxmenu);
 	
-	.ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-close {
-		@include headlined-overlay-icon;
+	.ui-selectcheckboxmenu-header {
+		background-size: 100% #{$element-height-mobile + 2 * $regular-spacing};
+		padding: $regular-spacing $wide-spacing;
+		
+		.ui-selectcheckboxmenu-close {
+			display: none;
+		}
+	}
+	
+	.ui-chkbox {
+		order: 1;
+		
+		.ui-chkbox-box {
+			background: url('/jeesl/javax.faces.resource/ui/control/checkbox/dark-unchecked.svg.xhtml?ln=jeeslGfx&buildVersion=1663863647') content-box no-repeat 0 / 100% !important;
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+			padding: 12px;
+			
+			&:before, &:after {
+				display: none;
+			}
+			
+			&.ui-state-active {
+				background: url('/jeesl/javax.faces.resource/ui/control/checkbox/dark-checked.svg.xhtml?ln=jeeslGfx&buildVersion=1663863647') content-box no-repeat 0 / 100% !important;
+			}
+			
+			.ui-chkbox-icon:before {
+				display: none;
+			}
+		}
 	}
 }
 
@@ -289,12 +322,23 @@ html, body, .ui-widget {
 			width: 100%;
 		}
 		
+		&:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item > .jeesl-dropdown-item-label {
+			height: $element-height-mobile;
+			line-height: $element-height-mobile;
+		}
+		
 		.jeesl-dropdown-item {
+			@include jeesl-submenu(jeesl-submenu);
+			
 			display: list-item;
 		    opacity: 0;
 		    padding: 0 15px;
 		    transition: opacity 0s .4s;
 		    width: 100%;
+
+			&:after {
+				border-bottom-width: $separator-thickness-mobile;
+			}
 			
 			.jeesl-dropdown-item-label {
 				border-bottom-width: 2px;
@@ -315,9 +359,43 @@ html, body, .ui-widget {
 	}
 }
 
+@mixin jeesl-submenu($class) {
+	.#{$class} {
+		height: $element-height-mobile;
+		margin-top: -$element-height-mobile;
+		overflow: hidden;
+		pointer-events: none;
+		position: relative;
+		
+		.#{$class}-icon {
+			cursor: pointer;
+			display: inline-block;
+			font-size: 55px;
+			height: $element-height-mobile;
+			line-height: $element-height-mobile;
+			pointer-events: all;
+			text-align: center;
+			transition: transform $transition-duration ease-in-out;
+			width: $element-height-mobile;
+		}
+		
+		.jeesl-dropdown-sub {
+			height: auto;
+			opacity: 1;
+			position: relative;
+			top: 0;
+			visibility: visible;
+		}
+	}
+}
+
 @mixin jeesl-menu-bar {
 	.jeesl-menu-bar-list .jeesl-menu-bar-item {
 		position: initial;
+		
+		&:hover .jeesl-dropdown-list {
+			transition: opacity 0s .4s, height .4s ease-in-out, visibility 0s .4s;
+		}
 
 		> * {
 			font-size: $font-size-mobile;
@@ -396,7 +474,7 @@ html, body, .ui-widget {
 
 	.jeesl-menu-bar-list {
 		.jeesl-subtitle {
-			line-height: $element-height-mobile;
+			display: none;
 		}
 		
 		.jeesl-menu-bar-item {
@@ -436,7 +514,7 @@ html, body, .ui-widget {
 				}
 				
 				&.jeesl-active {
-					background: $main-background-gradient 12500% 0 / 99% 100% no-repeat;
+					background-position: 12500% 0;
 				}
 			}
 			
@@ -486,16 +564,32 @@ html, body, .ui-widget {
 				&.jeesl-menu-bar-popup-button {
 					z-index: 1001 !important;
 				}
+				
+				&.jeesl-menu-bar-button-gravatar {
+					$grav-border-mobile: 2px;
+					$grav-margin-mobile-h: 10px;
+					$grav-margin-mobile-v: 5px;
+					$grav-outline-mobile: 1px;
+					
+					img {
+						border: $grav-border-mobile solid $white-100;
+						height: calc(100% - 2 * #{$grav-margin-mobile-v});
+						margin: $grav-margin-mobile-v $grav-margin-mobile-h;
+						outline: $grav-outline-mobile solid hsla(0, 0%, 100%, .5);
+						
+						&.grav-shine {
+							height: calc(100% - (2 * #{$sb-vertical-padding} + 2 * #{$grav-margin-mobile-v} + 2 * #{$grav-border-mobile}));
+							top: $sb-vertical-padding + $grav-margin-mobile-v + $grav-border-mobile;
+							left: $grav-margin-mobile-h;
+						}
+					}
+				}
 			
 				.jeesl-menu-bar-button-label {
 					font-size: $font-size-status;
 					height: 100%;
 					min-width: $element-height-mobile;
 					text-align: center;
-					
-					.jeesl-menu-bar-button-calendar {
-						
-					}
 				}
 			}
 			
@@ -807,7 +901,7 @@ html, body, .ui-widget {
 					display: flex;
 				}
 				
-				> .ui-selectonemenu {
+				> .ui-selectonemenu, > .ui-selectcheckboxmenu {
 					padding: 0;
 				}
 			}
@@ -958,8 +1052,14 @@ html, body, .ui-widget {
 .ui-datatable {
 	@include jeesl-table-titlebar;
 	
-	table thead th, table tbody tr {
-		height: $element-height-mobile;
+	table {
+		thead th, tbody tr {
+			height: $element-height-mobile;
+		}
+		
+		thead th .ui-inputfield {
+			min-width: $element-height-mobile;
+		}
 	}
 	
 	img {
@@ -970,6 +1070,36 @@ html, body, .ui-widget {
 	.ui-datatable-header {
 		border-width: $border-width $border-width 0;
 	}
+	
+	.ui-paginator {
+		border-radius: $border-radius-bottom;
+		min-height: $element-height-mobile;
+		
+		.ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last {
+			height: $element-height-mobile;
+			width: $element-height-mobile;
+		}
+		
+		.ui-paginator-prev .ui-icon:before {
+			border-right: $border-width solid $border-colour;
+		}
+		
+		.ui-icon {
+			@include icon();
+			
+			height: calc(#{$element-height-mobile} - 13px);
+			margin: 7px 0 6px;
+			
+			&:before {
+				border-left: $border-width solid $border-colour;
+				font-size: 2.5em;
+			}
+		}
+		
+		.ui-paginator-current, .ui-paginator-rpp-options {
+			min-height: $element-height-mobile;
+		}
+	}
 }
 
 .jeesl-content .jeesl-content-container {
@@ -979,8 +1109,20 @@ html, body, .ui-widget {
 		}
 	}
 	
-	.ui-panel:not(.html-container-panel) {
-		@include jeesl-panel;
+	.ui-panel {
+		margin-bottom: $wide-spacing;
+		
+		&:not(.html-container-panel) {
+			@include jeesl-panel;
+		}
+		
+		&.jeesl-map .ui-panel-content {
+			margin: 0;
+		}
+	}
+	
+	.jeesl-grid {
+		margin-top: $wide-spacing;
 	}
 
 	.height-balance-container > .jeesl-grid {
@@ -1087,12 +1229,16 @@ html, body, .ui-widget {
 	}
 }
 
-.input-grid {
+.jeesl-input-grid {
 	.p-field {
 		.p-col {
 			&:not(.ui-outputlabel) {
 				> * {
 					min-height: $element-height-mobile;
+				}
+				
+				.jeesl-input-grid-icon {
+					height: $input-field-icon-height-mobile;
 				}
 			}
 		}
@@ -1111,8 +1257,8 @@ html, body, .ui-widget {
 				@include jeesl-titlebar;
 				@include jeesl-titlebar-title;
 				
-				margin: -$wide-spacing;
-				margin-bottom: #{$wide-spacing} + #{$header-element-underline};
+				margin: -#{$wide-spacing};
+				margin-bottom: #{$wide-spacing + $header-element-underline};
 			}
 		}
 	}
@@ -1120,4 +1266,8 @@ html, body, .ui-widget {
 
 .pf-action-icon img {
 	height: $element-height-mobile;
+}
+
+.jeesl-footer {
+	font-size: .75rem;
 }

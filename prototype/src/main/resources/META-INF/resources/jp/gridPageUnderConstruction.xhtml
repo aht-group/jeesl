@@ -20,13 +20,15 @@
 		<jp:grid id="grid">
 			<aht:row>
 				<aht:slot width="4">
-					<p:graphicImage library="jeeslPrototypeGfx" name="ui/underConstruction.svg"/>
+					<p:panel styleClass="jeesl-construction-wrapper">
+						<p:graphicImage library="jeeslPrototypeGfx" name="ui/construction-sign.svg" styleClass="jeesl-construction-icon"/>
+					</p:panel>
 				</aht:slot>
 				<aht:slot width="2">
 					
 				</aht:slot>
 				<aht:slot id="sDocuments" width="6">
-					<p:panel header="#{msg.jeeslDevUnderConstruction}" styleClass="jeeslPanel">
+					<p:panel header="#{msg.jeeslDevUnderConstruction}" styleClass="jeeslPanel jeesl-panel">
 						<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 							<p:outputLabel value="#{msg.aupSecurityView}"/>
 							<h:outputText value="#{cc.attrs.security.view.name[localeCode].lang}"/>

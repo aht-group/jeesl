@@ -42,20 +42,18 @@
 				</j:slot>
 				<j:slot id="sFaq" width="6">
 					<h:form id="fTicket" rendered="#{not empty cc.attrs.bean.faq}">
-						<p:panel styleClass="jeeslPanel">
+						<p:panel styleClass="jeeslPanel jeesl-panel">
 							<f:facet name="header"><j:pHeader entity="HdFaq"/></f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								
+							<j:inputGrid>
 								<jtp:label entity="HdFaq" code="category"/>
-								<ui:fragment>
-									<jtp:symbolizer value="#{cc.attrs.bean.faq.category}"  marginRight="5"/>
+								<h:panelGroup id="category">
+									<jtp:symbolizer value="#{cc.attrs.bean.faq.category}" styleClass="jeesl-input-grid-icon" marginRight="5"/>
 									<h:outputText value="#{cc.attrs.bean.faq.category.name[localeCode].lang}"/>
-								</ui:fragment>
+								</h:panelGroup>
 								
 								<jtp:label entity="HdFaq" code="labelQuestion"/>
 								<h:outputText value="#{cc.attrs.bean.faq.name[localeCode].lang}"/>
-								
-							</p:panelGrid>
+							</j:inputGrid>
 						</p:panel>
 					</h:form>
 					<ui:repeat var="a" value="#{cc.attrs.bean.answers}">
