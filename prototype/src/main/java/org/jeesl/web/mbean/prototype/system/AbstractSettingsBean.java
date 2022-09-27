@@ -23,6 +23,7 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 	protected String rowsPerPageTemplate; @Override public String getRowsPerPageTemplate(){return rowsPerPageTemplate;}
 	
 	protected String filterStyle; public String getFilterStyle() {return filterStyle;}
+	protected String filterStyle35; public String getFilterStyle35() {return filterStyle35;}
 	protected String filterStyleCode; public String getFilterStyleCode() {return filterStyleCode;}
 	
 	protected String title; public String getTitle() {return title;}
@@ -43,6 +44,7 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 		
 		filterStyle = "width: 75px;";
 		filterStyleCode = "width: 50px;";
+		filterStyle35 = "width: 35px;";
 		
 		allowUploadSvg = "/(\\.|\\/)(svg)$/";
 		allowUploadJesslGraphicType = "/(\\.|\\/)(svg|png)$/";

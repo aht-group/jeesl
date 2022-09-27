@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<jeesl:container xmlns:js="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:jeesl="http://www.jeesl.org">
+<jeesl:container xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:jeesl="http://www.jeesl.org">
     <js:status code="jeeslLink" symbol="ui/system/link.svg"/>
     <js:status code="jeeslFavorite" symbol="ui/system/favorite.svg"/>
     <js:status code="jeeslRevisionAdd" symbol="ui/io/revision/envers/add.svg"/>
@@ -39,8 +39,8 @@
     <js:status code="jeeslTreeExpandAll" symbol="ui/control/tree/expand-all.svg"/>
     <js:status code="jeeslTreeExpandTwo" symbol="ui/control/tree/expand-2.svg"/>
     <js:status code="jeeslTreeExpandThree" symbol="ui/control/tree/expand-3.svg"/>
-    <js:status code="jeeslTreeExpandRelevant" symbol="ui/control/tree/expand-relevant.svg"/>
     <js:status code="jeeslArrowUp" symbol="ui/control/arrow/blue/up.svg"/>
+    <js:status code="jeeslTreeExpandRelevant" symbol="ui/control/tree/expand-relevant.svg"/>
     <js:status code="jeeslArrowDown" symbol="ui/control/arrow/blue/down.svg"/>
     <js:status code="jeeslArrowLeft" symbol="ui/control/arrow/blue/left.svg"/>
     <js:status code="jeeslArrowRight" symbol="ui/control/arrow/blue/right.svg"/>

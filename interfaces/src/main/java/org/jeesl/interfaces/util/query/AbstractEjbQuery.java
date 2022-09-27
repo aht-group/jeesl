@@ -2,7 +2,9 @@ package org.jeesl.interfaces.util.query;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -97,6 +99,12 @@ public abstract class AbstractEjbQuery implements Serializable,JeeslQuery
 	}
 	@Override public boolean withSort(){return (sortBy!=null && sortBy.trim().length()>0);}
 
+	
+	//Fetches
+	protected List<String> rootFetches; public List<String> getRootFetches() {return rootFetches;}
+	public abstract <E extends Enum<E>> AbstractEjbQuery addRootFetch(E e);
+//	public <E extends Enum<E>> AbstractEjbQuery addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
+	
 
 	@Override public void debug(boolean debug){debug(debug,0);}
 	@Override public void debug(boolean debug, int ident)
