@@ -1331,12 +1331,11 @@ body, .ui-widget {
 				
 				+ .jeesl-overlay-container {
 					margin: -$slim-spacing $half-spacing 0;
-					position: relative;
-					width: calc(100% - (2 * #{$half-spacing}));
+					position: absolute;
+					min-width: calc(100% - (2 * #{$half-spacing}));
 					
 					@media (max-width: 768px) {
 						margin: -$slim-spacing 0 0;
-						position: absolute;
 					}
 				}
 				
@@ -1394,7 +1393,7 @@ body, .ui-widget {
 				border-radius: 0;
 				box-shadow: none;
 				margin: 0 4px;
-				width: calc(100% - 8px);
+				min-width: calc(100% - 8px);
 				
 				.jeesl-overlay-wrapper {
 					.ui-selectonemenu-list {

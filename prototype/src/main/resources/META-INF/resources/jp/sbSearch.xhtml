@@ -15,7 +15,6 @@
 		<composite:attribute name="handler" required="true"/>
 		<composite:facet name="resultList" required="false"/>
 		<composite:facet name="resultDetail" required="false"/>
-		<composite:facet name="update" required="false"/>
 	</composite:interface>
 
 	<composite:implementation>
@@ -34,11 +33,7 @@
 				<ul class="ui-selectonemenu-list">
 					<ui:repeat var="var" value="#{cc.attrs.handler.list}" varStatus="loop">
 						<li class="ui-selectonemenu-item">
-							<h:commandLink class="ui-selectonemenu-item-text">
-								<composite:insertChildren/>
-								<p:ajax event="click" listener="#{cc.attrs.handler.selectSbSearch(var)}" oncomplete="updateCommand();" />
-								<p:remoteCommand name="updateCommand" update="#{cc.attrs.update}"/>
-							</h:commandLink>
+							<composite:insertChildren/>
 							
 							<h:panelGroup layout="block" styleClass="jeesl-field-tip" rendered="#{not empty cc.facets.resultDetail}">
 		            			<h:outputText value="" styleClass="jeesl-field-tip-icon fa fa-info-circle"></h:outputText>

@@ -3388,12 +3388,11 @@ body, .ui-widget {
           vertical-align: top; }
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup + .jeesl-overlay-container {
           margin: -2px 5px 0;
-          position: relative;
-          width: calc(100% - (2 * 5px)); }
+          position: absolute;
+          min-width: calc(100% - (2 * 5px)); }
           @media (max-width: 768px) {
             .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup + .jeesl-overlay-container {
-              margin: -2px 0 0;
-              position: absolute; } }
+              margin: -2px 0 0; } }
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .ui-inputfield {
           background: none;
           color: white;
@@ -3431,7 +3430,7 @@ body, .ui-widget {
         border-radius: 0;
         box-shadow: none;
         margin: 0 4px;
-        width: calc(100% - 8px); }
+        min-width: calc(100% - 8px); }
         @media (max-width: 768px) {
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list {
             overflow: hidden; } }
