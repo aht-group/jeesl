@@ -2899,14 +2899,12 @@ body, .ui-widget {
 		padding: 0;
 		width: 100%;
 		
-		> div:first-child {
-			.jeesl-grid:first-child {
-				margin-top: 0;
-			}
+		.jeesl-row:not(:first-child) {
+			margin-top: $regular-spacing;
 		}
 		
 		.jeesl-grid {
-			margin: $regular-spacing $half-spacing 0;
+			margin: 0 $half-spacing;
 			position: relative;
 			
 			form {
