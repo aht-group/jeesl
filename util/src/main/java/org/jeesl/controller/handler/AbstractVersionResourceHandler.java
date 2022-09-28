@@ -5,8 +5,13 @@ import javax.faces.application.ResourceHandler;
 import javax.faces.application.ResourceHandlerWrapper;
 import javax.faces.application.ResourceWrapper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class AbstractVersionResourceHandler extends ResourceHandlerWrapper
 {
+	final static Logger logger = LoggerFactory.getLogger(AbstractVersionResourceHandler.class);
+	
 	private ResourceHandler wrapped;
 	private String cssTimeStamp;
 	public String getCssTimeStamp() {return cssTimeStamp;}
@@ -26,6 +31,7 @@ public class AbstractVersionResourceHandler extends ResourceHandlerWrapper
 	@Override
 	public Resource createResource(String resourceName, String libraryName)
 	{
+		logger.info("Requesting: "+libraryName+":"+resourceName);
 		return createResource(resourceName, libraryName, null);
 	}
 

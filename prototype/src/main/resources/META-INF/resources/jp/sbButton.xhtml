@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:c="http://java.sun.com/jsp/jstl/core"
-	  xmlns:f="http://java.sun.com/jsf/core"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
 	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:j="http://www.jeesl.org/jsf"
-	  xmlns:jp="http://jsf.jeesl.org/prototype"
-	  xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	  xmlns:aup="http://ahtutils.sourceforge.net/prototype"
+	  xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	  xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface componentType="org.jeesl.jsf.components.IconListener">
@@ -15,8 +10,9 @@
 		<composite:attribute name="disabled" required="false" default="false"/>
 		<composite:attribute name="icon" required="false"/>
 		<composite:attribute name="label" required="false"/>
-		<composite:attribute name="onclick" required="false"/>
-		<composite:attribute name="oncomplete" required="false"/>
+		
+		<composite:attribute name="onstart" required="false" shortDescription="JS execeuted immediatly after clicking."/>
+		<composite:attribute name="oncomplete" required="false" shortDescription="JS execeuted after listener is completed."/>
 		
 		<composite:attribute name="orientation" required="false" default="left"/>
 		<composite:attribute name="styleClass" required="false"/>
@@ -29,21 +25,34 @@
 	<composite:implementation>
 	    <jp:sbItem id="sbItem" orientation="#{cc.attrs.orientation}" styleClass="jeesl-menu-bar-button-wrapper #{cc.attrs.styleClass} #{cc.attrs.disabled ? 'jeesl-disabled' : ''}" toggled="#{cc.attrs.toggled}">
 	    	<f:facet name="label">
-				<p:commandLink id="buttonLink" styleClass="jeesl-menu-bar-button-link">
-					<c:if test="#{not empty cc.attrs.listener}"><f:attribute name="listener" value="#{cc.attrs.listener}"/></c:if>
-					<c:if test="#{not empty cc.attrs.update}"><f:attribute name="update" value="#{cc.attrs.update}"/></c:if>
-					<c:if test="#{not empty cc.attrs.onclick}"><f:attribute name="onclick" value="#{cc.attrs.onclick}"/></c:if>
-					<c:if test="#{not empty cc.attrs.oncomplete}"><f:attribute name="oncomplete" value="#{cc.attrs.oncomplete}"/></c:if>
-					
-					<h:graphicImage name="#{appIconBean.svg[cc.attrs.icon]}"
-									library="#{empty appIconBean.library[cc.attrs.icon] ? cc.attrs.library : appIconBean.library[cc.attrs.icon] }"
-									rendered="#{not empty cc.attrs.icon}"
-									class="jeesl-menu-bar-button-icon"/>
-					<h:outputText value="#{cc.attrs.label}"
-								  rendered="#{not empty cc.attrs.label}"
-								  class="jeesl-menu-bar-button-label"/>
-				</p:commandLink>
-				<p:tooltip for="buttonLink" value="#{cc.attrs.tooltip}" rendered="#{not empty cc.attrs.tooltip}" />
+	    		<c:if test="#{(not cc.attrs.disabled) and (cc.getValueExpression('listener') ne null)}">
+	    			<p:commandLink id="buttonLinkListener" styleClass="jeesl-menu-bar-button-link"
+	    							actionListener="#{cc.listener}"
+	    							update="#{cc.attrs.update}"
+									onstart="#{cc.attrs.onstart}"
+									oncomplete="#{cc.attrs.oncomplete}">
+						<h:graphicImage name="#{appIconBean.svg[cc.attrs.icon]}"
+										library="#{empty appIconBean.library[cc.attrs.icon] ? cc.attrs.library : appIconBean.library[cc.attrs.icon] }"
+										rendered="#{not empty cc.attrs.icon}"
+										styleClass="jeesl-menu-bar-button-icon"/>
+						<h:outputText value="#{cc.attrs.label}"
+									  rendered="#{not empty cc.attrs.label}"
+									  styleClass="jeesl-menu-bar-button-label"/>
+					</p:commandLink>
+					<p:tooltip for="buttonLinkListener" value="#{cc.attrs.tooltip}" rendered="#{not empty cc.attrs.tooltip}" />
+	    		</c:if>
+	    		<c:if test="#{not ((not cc.attrs.disabled) and (cc.getValueExpression('listener') ne null))}">
+	    			<p:commandLink id="buttonLinkListener" styleClass="jeesl-menu-bar-button-link">
+						<h:graphicImage name="#{appIconBean.svg[cc.attrs.icon]}"
+										library="#{empty appIconBean.library[cc.attrs.icon] ? cc.attrs.library : appIconBean.library[cc.attrs.icon] }"
+										rendered="#{not empty cc.attrs.icon}"
+										styleClass="jeesl-menu-bar-button-icon"/>
+						<h:outputText value="#{cc.attrs.label}"
+									  rendered="#{not empty cc.attrs.label}"
+									  styleClass="jeesl-menu-bar-button-label"/>
+					</p:commandLink>
+					<p:tooltip for="buttonLinkListener" value="#{cc.attrs.tooltip}" rendered="#{not empty cc.attrs.tooltip}" />
+	    		</c:if>
 			</f:facet>
 		</jp:sbItem>
 	</composite:implementation>
