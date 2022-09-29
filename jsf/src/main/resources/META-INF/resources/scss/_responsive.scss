@@ -1370,8 +1370,13 @@ body, .ui-widget {
 					top: 0;
 					transition: background .2s linear, opacity .2s linear;
 					
+					&:nth-last-child(2) {
+						right: calc(#{$regular-spacing} + 2 * #{$half-spacing});
+					}
+					
 					&:hover {
 						background: $dark-colour;
+						color: $brighter-colour;
 					}
 					
 					&:before, &:after {
@@ -1381,6 +1386,15 @@ body, .ui-widget {
 					&.ui-state-visible {
 						opacity: 1;
 						pointer-events: all;
+					}
+					
+					.ui-icon {
+						height: $regular-spacing;
+						width: $regular-spacing;
+						
+						&.ui-icon-apply {
+							transform: rotate(90deg);
+						}
 					}
 				}
 			}
