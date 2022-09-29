@@ -31,7 +31,7 @@ public class AbstractVersionResourceHandler extends ResourceHandlerWrapper
 	@Override
 	public Resource createResource(String resourceName, String libraryName)
 	{
-		logger.info("Requesting: "+libraryName+":"+resourceName);
+//		logger.info("Requesting: "+libraryName+":"+resourceName);
 		return createResource(resourceName, libraryName, null);
 	}
 

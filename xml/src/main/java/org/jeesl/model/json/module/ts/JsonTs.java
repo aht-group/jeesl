@@ -1,4 +1,5 @@
 package org.jeesl.model.json.module.ts;
+import java.io.Serializable;
 import java.util.List;
 
 import org.jeesl.model.json.system.status.JsonBridge;
@@ -7,8 +8,8 @@ import org.jeesl.model.json.system.status.JsonInterval;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JsonTs {
-
+public class JsonTs implements Serializable
+{
 	private final static long serialVersionUID = 1L;
 
 	@JsonProperty("scope")

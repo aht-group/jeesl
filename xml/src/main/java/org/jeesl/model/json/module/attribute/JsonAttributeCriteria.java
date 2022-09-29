@@ -4,8 +4,6 @@ package org.jeesl.model.json.module.attribute;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jeesl.model.json.system.status.JsonType;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
