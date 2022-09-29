@@ -27,7 +27,7 @@
 				<p:ajax event="keyup" update="searchResults" process="searchText" listener="#{cc.attrs.handler.handleKeyEvent}" oncomplete="showResults()"/>
 			</p:inputText>
 			<c:if test="#{not empty cc.attrs.applyList}">
-				<p:commandButton icon="ui-icon ui-icon-apply fa fa-level-down" styleClass="search-btn-light ui-corner-right" action="#{cc.attrs.handler.applySbSearch}"/>
+				<p:commandButton icon="ui-icon ui-icon-apply fa fa-level-down" styleClass="search-btn-light ui-corner-right" action="#{cc.attrs.handler.applySbSearch}" update="#{cc.attrs.applyList}"/>
 			</c:if>
 			<p:commandButton icon="ui-icon ui-icon-close fa fa-times" styleClass="search-btn-light ui-corner-right" update="searchResults" action="#{cc.attrs.handler.cancelEvent}" oncomplete="hideResults()"/>
 		</div>

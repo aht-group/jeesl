@@ -3417,13 +3417,21 @@ body, .ui-widget {
           text-shadow: none;
           top: 0;
           transition: background .2s linear, opacity .2s linear; }
+          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light:nth-last-child(2) {
+            right: calc(10px + 2 * 5px); }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light:hover {
-            background: #00663a; }
+            background: #00663a;
+            color: #00a85f; }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light:before, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light:after {
             display: none; }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light.ui-state-visible {
             opacity: 1;
             pointer-events: all; }
+          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light .ui-icon {
+            height: 10px;
+            width: 10px; }
+            .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light .ui-icon.ui-icon-apply {
+              transform: rotate(90deg); }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container {
         background: #007a45;
         border: none;
