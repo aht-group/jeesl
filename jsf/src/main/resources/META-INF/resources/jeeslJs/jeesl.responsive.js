@@ -122,6 +122,6 @@ $(function() {
 	overlay.find('.jeesl-submenu-icon').click({ overlay: overlay }, toggleSubmenu);
 	
 	let datatable = $('.jeesl-datatable-collapsible')
-	datatable.find('.ui-datatable-tablewrapper').height(0);
+	datatable.not('.jeesl-active').find('.ui-datatable-tablewrapper').height(0);
 	datatable.find('.ui-datatable-header').click(toggleDatatable);
 });
