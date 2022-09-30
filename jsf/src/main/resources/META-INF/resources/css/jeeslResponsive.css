@@ -4443,7 +4443,7 @@ body, .ui-widget {
       .ui-datatable .ui-paginator .ui-icon:before {
         align-items: center;
         display: flex;
-        font-size: 1.5em;
+        font-size: .9em;
         height: 100%;
         justify-content: center;
         vertical-align: middle;
@@ -4451,7 +4451,7 @@ body, .ui-widget {
         @media (max-width: 768px) {
           .ui-datatable .ui-paginator .ui-icon:before {
             border-left: 1px solid #ababab;
-            font-size: 2.5em; } }
+            font-size: 1.5em; } }
     .ui-datatable .ui-paginator .ui-icon-seek-first:before {
       content: "\f049"; }
     .ui-datatable .ui-paginator .ui-icon-seek-prev:before {

@@ -2794,7 +2794,7 @@ body, .ui-widget {
 			&:before {
 				align-items: center;
 				display: flex;
-				font-size: 1.5em;
+				font-size: .9em;
 				height: 100%;
 				justify-content: center;
 				vertical-align: middle;
@@ -2802,7 +2802,7 @@ body, .ui-widget {
 
 				@media (max-width: 768px) {
 					border-left: $border-width solid $border-colour;
-					font-size: 2.5em;
+					font-size: 1.5em;
 				}
 			}
 		}
