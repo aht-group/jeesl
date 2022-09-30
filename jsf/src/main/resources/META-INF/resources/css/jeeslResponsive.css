@@ -113,7 +113,8 @@ code,
 kbd,
 samp {
   font-family: monospace;
-  font-size: 1em; }
+  font-size: 1em;
+  tab-size: 4; }
 
 pre {
   margin-top: 0;
