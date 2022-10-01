@@ -31,10 +31,6 @@ public class Row extends UIPanel
 	{
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.endElement("div");
-		
-//		responseWriter.startElement("div", this);
-//		responseWriter.writeAttribute("class","clear",null);
-//		responseWriter.endElement("div");
 	}
 	
 	@Override public boolean getRendersChildren(){return true;}
