@@ -66,8 +66,8 @@ public abstract class AbstractAhtDbXmlExtract extends UtilsDbXmlSeedUtil
 	{
 		String jarName = null;//config.getString("db/prefix[@type='jar']/@file");
 		StringBuffer sb = new StringBuffer();
-			sb.append("Extracting "+jarName);
-			sb.append(" from jar to "+to);
+		sb.append("Extracting "+jarName);
+		sb.append(" from jar to "+to);
 		logger.info(sb.toString());
 		JarExtractor.extract(jarName, from,to);
 	}
