@@ -978,7 +978,7 @@ $border: $border-width solid $border-colour;
 		}
 		
 		.p-col {
-			padding: 0 $regular-spacing;
+			padding: $half-spacing $regular-spacing;
 			
 			&:first-child {
 				padding-left: 0;
@@ -987,6 +987,6 @@ $border: $border-width solid $border-colour;
 	}
 }
 
-.jeesl-nbsc {
+.jeesl-nowrap {
 	white-space: nowrap;
 }
