@@ -511,7 +511,10 @@
 							</p:column>
 						</p:dataTable>
 					</h:form>
-					<jp:xpathOverlayTable id="opRequired" widgetVar="wvRequired" handler="#{cc.attrs.bean.opDocument}" update=":#{cc.id}:fRequired"/>
+					<h:form id="opRequired">
+						<jp:xpathOverlayTable  widgetVar="wvRequired" handler="#{cc.attrs.bean.opDocument}" update=":#{cc.id}:fRequired"/>
+					</h:form>
+					
 					<h:form id="fCommunications" rendered="#{(not empty cc.attrs.bean.transition) and (cc.attrs.bean.transition.id gt 0)}">
 						<p:dataTable var="c" value="#{cc.attrs.bean.communications}" draggableRows="true"
 								selection="#{cc.attrs.bean.communication}" selectionMode="single" rowKey="#{c.id}">

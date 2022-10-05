@@ -1,4 +1,4 @@
-package net.sf.ahtutils.factory.xml.status;
+package org.jeesl.factory.xml.system.status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,22 +13,24 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.xml.status.Status;
 import net.sf.ahtutils.xml.status.SubType;
 
-public class XmlSubTypeFactory
+public class XmlSubTypeFactory<L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSubTypeFactory.class);
 		
-	private String lang;
+	private String localeCode;
 	private SubType q;
 	
-	public XmlSubTypeFactory(SubType q){this(null,q);}
-	public XmlSubTypeFactory(String lang,SubType q)
+	private XmlLangsFactory<L> xfLangs;
+	
+	public XmlSubTypeFactory(String localeCode, SubType q)
 	{
-		this.lang=lang;
+		this.localeCode=localeCode;
 		this.q=q;
+		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 	}
 	
-	public <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription> SubType build(S ejb){return build(ejb,null);}
-	public <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription> SubType build(S ejb, String group)
+	public SubType build(S ejb){return build(ejb,null);}
+	public SubType build(S ejb, String group)
 	{
 		SubType xml = new SubType();
 		if(q.isSetId()){xml.setId(ejb.getId());}
@@ -36,24 +38,20 @@ public class XmlSubTypeFactory
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
-		if(q.isSetLangs())
-		{
-			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
-			xml.setLangs(f.getUtilsLangs(ejb.getName()));
-		}
+		if(q.isSetLangs()) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(q.isSetDescriptions())
 		{
 
 		}
 		
-		if(q.isSetLabel() && lang!=null)
+		if(q.isSetLabel() && localeCode!=null)
 		{
 			if(ejb.getName()!=null)
 			{
-				if(ejb.getName().containsKey(lang)){xml.setLabel(ejb.getName().get(lang).getLang());}
+				if(ejb.getName().containsKey(localeCode)){xml.setLabel(ejb.getName().get(localeCode).getLang());}
 				else
 				{
-					String msg = "No translation "+lang+" available in "+ejb;
+					String msg = "No translation "+localeCode+" available in "+ejb;
 					logger.warn(msg);
 					xml.setLabel(msg);
 				}

@@ -30,6 +30,8 @@
 		<composite:attribute name="mapCategory" required="false" default=""/>
 		
 		<composite:attribute name="overlay" required="false" default="true"/>
+		
+		<composite:attribute name="labelTable" required="false" default="#{msg.jeeslIoFiles}"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -37,7 +39,7 @@
 			<p:dataTable id="dtJeeslFiles" var="meta" value="#{cc.attrs.handler.metas}" rowKey="#{meta.id}"
 						selection="#{cc.attrs.handler.meta}" selectionMode="single" draggableRows="true">
 				<f:facet name="header">
-					<j:dtHeader id="dthJeeslFiles" title="#{msg.jeeslIoFiles}">
+					<j:dtHeader id="dthJeeslFiles" title="#{cc.attrs.labelTable}">
 						<j:icon id="iconAdd" type="jeeslAdd"
 							listener="#{cc.attrs.handler.addFileOverlay()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:opUpload" oncomplete="PF('wvUpload').show();"
 							rendered="#{cc.attrs.allowUpload and cc.attrs.overlay}"/>

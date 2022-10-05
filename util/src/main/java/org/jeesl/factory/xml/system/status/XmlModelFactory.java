@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.xml.aht.Query;
 import net.sf.ahtutils.xml.status.Model;
 import net.sf.ahtutils.xml.status.Parent;
-import net.sf.ahtutils.xml.status.Status;
 
 public class XmlModelFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
 {
