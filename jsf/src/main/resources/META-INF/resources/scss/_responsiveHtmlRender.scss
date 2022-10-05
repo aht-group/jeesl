@@ -11,7 +11,7 @@
 				
 				@media (max-width: 768px) {
 					margin: -$regular-spacing;
-					margin-bottom: #{$regular-spacing} + #{$header-element-underline};
+					margin-bottom: $regular-spacing + $header-element-underline;
 				}
 				
 				&:after {

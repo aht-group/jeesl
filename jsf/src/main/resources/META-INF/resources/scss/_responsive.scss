@@ -2027,6 +2027,8 @@ body, .ui-widget {
 				}
 				
 				&:not(.ui-outputlabel) {
+					overflow-wrap: anywhere;
+					
 					@media (max-width: 768px) {
 						line-height: normal;
 					    padding: .5em 0 $slim-spacing 0;
@@ -2041,7 +2043,7 @@ body, .ui-widget {
 						
 						@media (max-width: 768px) {
 //							font-size: 18px !important;
-							padding: 0 $regular-spacing;
+							padding: $half-spacing $regular-spacing;
 							width: 100%;
 						}
 					}
@@ -2251,6 +2253,35 @@ body, .ui-widget {
 	&.jeesl-editor {
 		.ui-panel-content {
 			overflow: visible;
+		}
+	}
+	
+	&.jeesl-gallery {
+		.ui-panel-titlebar {
+			left: $slim-spacing;
+			position: absolute;
+			top: $slim-spacing;
+			width: calc(100% - 2 * #{$slim-spacing});
+			
+			@media (max-width: 768px) {
+				left: 0;
+				position: relative;
+				top: 0;
+				width: 100%;
+			}
+		}
+		
+		.ui-panel-content {
+			margin: -$slim-spacing;
+			padding: 0;
+			
+			@media (max-width: 768px) {
+				margin: 0;
+			}
+			
+			> img {
+				width: 100%;
+			}
 		}
 	}
 	
@@ -2673,10 +2704,6 @@ body, .ui-widget {
 		}
 	}
 	
-	.ui-datatable-header {
-		border-bottom: $border-width solid $border-colour;
-	}
-	
 	table {
 		height: 100%;
 		table-layout: auto;
@@ -2710,6 +2737,14 @@ body, .ui-widget {
 			
 			td {
 				padding: $half-spacing $regular-spacing;
+				
+				.jeesl-icon {
+					height: $table-icon-height;
+					
+					@media (max-width: 768px) {
+						height: $table-icon-height-mobile;
+					}
+				}
 			}
 			
 			.ui-state-hover, .cell-select > label:not(.selected):hover {
@@ -2732,6 +2767,10 @@ body, .ui-widget {
 				height: 100%;
 			}
 		}
+	}
+	
+	.ui-datatable-header {
+		border-bottom: $border-width solid $border-colour;
 	}
 	
 	.ui-paginator {
