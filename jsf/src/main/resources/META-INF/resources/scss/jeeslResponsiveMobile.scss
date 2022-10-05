@@ -948,6 +948,19 @@ html, body, .ui-widget {
 			
 	padding: 0;
 	
+	&.jeesl-gallery {
+		.ui-panel-titlebar {
+			left: 0;
+			position: relative;
+			top: 0;
+			width: 100%;
+		}
+		
+		.ui-panel-content {
+			margin: 0;
+		}
+	}
+	
 	.ui-panelgrid {
 		&:last-child .ui-panelgrid-cell .ui-datatable {
 			margin-bottom: -$half-spacing;

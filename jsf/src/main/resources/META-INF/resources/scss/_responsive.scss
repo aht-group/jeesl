@@ -2256,6 +2256,35 @@ body, .ui-widget {
 		}
 	}
 	
+	&.jeesl-gallery {
+		.ui-panel-titlebar {
+			left: $slim-spacing;
+			position: absolute;
+			top: $slim-spacing;
+			width: calc(100% - 2 * #{$slim-spacing});
+			
+			@media (max-width: 768px) {
+				left: 0;
+				position: relative;
+				top: 0;
+				width: 100%;
+			}
+		}
+		
+		.ui-panel-content {
+			margin: -$slim-spacing;
+			padding: 0;
+			
+			@media (max-width: 768px) {
+				margin: 0;
+			}
+			
+			> img {
+				width: 100%;
+			}
+		}
+	}
+	
 	&.jeesl-map {
 		.ui-panel-titlebar {
 			margin-bottom: 2 * $slim-spacing;

@@ -3802,6 +3802,25 @@ body, .ui-widget {
     padding: 5px 10px; }
   .jeesl-panel.jeesl-editor .ui-panel-content {
     overflow: visible; }
+  .jeesl-panel.jeesl-gallery .ui-panel-titlebar {
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: calc(100% - 2 * 2px); }
+    @media (max-width: 768px) {
+      .jeesl-panel.jeesl-gallery .ui-panel-titlebar {
+        left: 0;
+        position: relative;
+        top: 0;
+        width: 100%; } }
+  .jeesl-panel.jeesl-gallery .ui-panel-content {
+    margin: -2px;
+    padding: 0; }
+    @media (max-width: 768px) {
+      .jeesl-panel.jeesl-gallery .ui-panel-content {
+        margin: 0; } }
+    .jeesl-panel.jeesl-gallery .ui-panel-content > img {
+      width: 100%; }
   .jeesl-panel.jeesl-map .ui-panel-titlebar {
     margin-bottom: 4px; }
     .jeesl-panel.jeesl-map .ui-panel-titlebar + .ui-panel-content {
@@ -4778,6 +4797,25 @@ body, .ui-widget {
         padding: 5px 10px; }
       .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content {
         overflow: visible; }
+      .jeesl-content .jeesl-content-container .ui-panel.jeesl-gallery .ui-panel-titlebar {
+        left: 2px;
+        position: absolute;
+        top: 2px;
+        width: calc(100% - 2 * 2px); }
+        @media (max-width: 768px) {
+          .jeesl-content .jeesl-content-container .ui-panel.jeesl-gallery .ui-panel-titlebar {
+            left: 0;
+            position: relative;
+            top: 0;
+            width: 100%; } }
+      .jeesl-content .jeesl-content-container .ui-panel.jeesl-gallery .ui-panel-content {
+        margin: -2px;
+        padding: 0; }
+        @media (max-width: 768px) {
+          .jeesl-content .jeesl-content-container .ui-panel.jeesl-gallery .ui-panel-content {
+            margin: 0; } }
+        .jeesl-content .jeesl-content-container .ui-panel.jeesl-gallery .ui-panel-content > img {
+          width: 100%; }
       .jeesl-content .jeesl-content-container .ui-panel.jeesl-map .ui-panel-titlebar {
         margin-bottom: 4px; }
         .jeesl-content .jeesl-content-container .ui-panel.jeesl-map .ui-panel-titlebar + .ui-panel-content {
