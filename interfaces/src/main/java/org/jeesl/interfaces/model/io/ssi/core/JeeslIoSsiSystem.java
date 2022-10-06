@@ -20,5 +20,6 @@ public interface JeeslIoSsiSystem<L extends JeeslLang, D extends JeeslDescriptio
 				EjbWithId,EjbWithCode
 				,EjbWithLang<L>,EjbWithDescription<D>
 {	
-
+	String getFqdn();
+	void setFqdn(String fqdn);
 }

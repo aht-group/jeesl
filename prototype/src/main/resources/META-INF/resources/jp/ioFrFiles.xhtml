@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:c="http://java.sun.com/jsp/jstl/core"
-	  xmlns:f="http://java.sun.com/jsf/core"
-	  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-	  xmlns:p="http://primefaces.org/ui"
-	  xmlns:j="http://www.jeesl.org/jsf"
-	  xmlns:jeesl="http://www.jeesl.org/jsf"
-	  xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	  xmlns:aht="http://ahtutils.sourceforge.net/jsf"
-	  xmlns:composite="http://java.sun.com/jsf/composite">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:j="http://www.jeesl.org/jsf"
+    xmlns:jeesl="http://www.jeesl.org/jsf"
+    xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
 		<composite:attribute name="handler" required="true"/>
@@ -30,29 +30,23 @@
 		<composite:attribute name="mapCategory" required="false" default=""/>
 		
 		<composite:attribute name="overlay" required="false" default="true"/>
+		
+		<composite:attribute name="labelTable" required="false" default="#{msg.jeeslIoFiles}"/>
 	</composite:interface>
 	
 	<composite:implementation>
 		<h:form id="fFiles">
-			<p:dataTable id="dtJeeslFiles"
-						 var="meta"
-						 value="#{cc.attrs.handler.metas}"
-						 rowKey="#{meta.id}"
-						 selection="#{cc.attrs.handler.meta}"
-						 selectionMode="single"
-						 draggableRows="true">
+			<p:dataTable id="dtJeeslFiles" var="meta" value="#{cc.attrs.handler.metas}" rowKey="#{meta.id}"
+						selection="#{cc.attrs.handler.meta}" selectionMode="single" draggableRows="true">
 				<f:facet name="header">
-					<j:dtHeader id="dthJeeslFiles" title="#{msg.jeeslIoFiles}">
-						<j:svg type="jeeslAdd"
-							   listener="#{cc.attrs.handler.addFileOverlay()}"
-							   update="#{cc.attrs.componentPrefix}:#{cc.id}:opUpload"
-							   oncomplete="PF('wvUpload').show();"
-							   rendered="#{cc.attrs.allowUpload and cc.attrs.overlay}"/>
-						<j:svg type="jeeslAdd"
-							   listener="#{cc.attrs.handler.addFileInline()}"
-							   update="#{cc.attrs.componentPrefix}:#{cc.id}:fUploadInline"
-							   rendered="#{cc.attrs.allowUpload and (not cc.attrs.overlay)}"/>
-						<j:downloadIcon type="jeeslZip" value="#{cc.attrs.handler.zipStream()}" tooltip="#{msg.reportZip}"/>
+					<j:dtHeader id="dthJeeslFiles" title="#{cc.attrs.labelTable}">
+						<j:icon id="iconAdd" type="jeeslAdd"
+							listener="#{cc.attrs.handler.addFileOverlay()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:opUpload" oncomplete="PF('wvUpload').show();"
+							rendered="#{cc.attrs.allowUpload and cc.attrs.overlay}"/>
+						<j:icon id="iconRemove" type="jeeslAdd"
+							listener="#{cc.attrs.handler.addFileInline()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fUploadInline"
+							rendered="#{cc.attrs.allowUpload and (not cc.attrs.overlay)}"/>
+						<j:downloadIcon type="reportZip" value="#{cc.attrs.handler.zipStream()}" tooltip="#{msg.reportZip}"/>
 					</j:dtHeader>
 				</f:facet>
 				<p:ajax event="rowSelect" listener="#{cc.attrs.handler.selectFile()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fDownload #{cc.attrs.componentPrefix}:#{cc.id}:fFiles" />
@@ -63,9 +57,9 @@
 				<p:column rendered="false" styleClass="jeeslColumnCentered">
 					<jtp:symbolizer value="#{meta.type}"/>
 				</p:column>
-				<p:column styleClass="jeesl-nowrap">
+				<p:column>
 					<f:facet name="header"><h:outputText value="#{msg.jeeslIoFileSize}"/></f:facet>
-					<jtp:symbolizer value="#{meta.type}" marginRight="5" styleClass="jeesl-icon"/>
+					<jtp:symbolizer value="#{meta.type}" marginRight="5"/>
 					<h:outputText value="#{j:humanFileSize(meta.size)}"/>
 					<p:graphicImage style="margin-left: 5px;" name="ui/control/upload.svg" library="jeeslGfx" height="12" rendered="#{not empty cc.attrs.handler.mapDeferred[meta]}"/>
 				</p:column>
@@ -84,39 +78,34 @@
 		<h:form id="fDownload">
 			<p:panel header="#{msg.jeeslIoFile}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.handler.meta}">
 				<f:facet name="actions">
-					<j:svg type="jeeslCancel"
-						   listener="#{cc.attrs.handler.cancelMeta()}"
-						   update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload"/>
-					<j:svg type="jeeslSave"
-						   listener="#{cc.attrs.handler.saveMeta()}"
-						   update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload"/>
-					<j:svg type="jeeslDelete"
-						   listener="#{cc.attrs.handler.deleteFile()}"
-						   tooltip="#{msg.ttJeeslIoFileDelete}"
-						   update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload"
-						   rendered="#{(cc.attrs.allowDelete) and (not empty cc.attrs.handler.meta) and (cc.attrs.handler.meta.id gt 0)}"/>
+					<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.handler.cancelMeta()}"
+							update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload" />
+					<j:icon id="iconJeeslFileSave" type="jeeslSave" listener="#{cc.attrs.handler.saveMeta()}"
+							update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload" />
+					<j:icon type="jeeslDelete" listener="#{cc.attrs.handler.deleteFile()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload"
+								tooltip="#{msg.ttJeeslIoFileDelete}"
+								rendered="#{(cc.attrs.allowDelete) and (not empty cc.attrs.handler.meta) and (cc.attrs.handler.meta.id gt 0)}" />
 					<j:downloadIcon type="jeeslDownload" value="#{cc.attrs.handler.fileStream()}" />
 				</f:facet>
-				<j:inputGrid>
-					<p:outputLabel for="type" value="#{msg.jeeslIoFileType}"/>
-					<h:panelGroup id="type">
-						<jtp:symbolizer value="#{cc.attrs.handler.meta.type}" styleClass="jeesl-input-grid-icon" marginRight="5"/>
+				<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<p:outputLabel value="#{msg.jeeslIoFileType}"/>
+					<ui:fragment>
+						<jtp:symbolizer value="#{cc.attrs.handler.meta.type}" marginRight="5"/>
 						<h:outputText value="#{cc.attrs.handler.meta.type.name[localeCode].lang}"/>
-					</h:panelGroup>
+					</ui:fragment>
 					
 					<p:outputLabel value="#{msg.jeeslIoFileName}"/>
-					<h:outputText id="filenameRead" value="#{cc.attrs.handler.meta.fileName}" rendered="#{not (cc.attrs.allowUpload and cc.attrs.handler.allowChangeName)}"/>
-					<p:inputText id="filenameWrite" value="#{cc.attrs.handler.fileName}" rendered="#{cc.attrs.allowUpload and cc.attrs.handler.allowChangeName}"/>
+					<h:outputText value="#{cc.attrs.handler.meta.fileName}" rendered="#{not (cc.attrs.allowUpload and cc.attrs.handler.allowChangeName)}"/>
+					<p:inputText value="#{cc.attrs.handler.fileName}" rendered="#{cc.attrs.allowUpload and cc.attrs.handler.allowChangeName}"/>
 
-					<p:outputLabel for="size" value="#{msg.jeeslIoFileSize}"/>
-					<h:outputText id="size" value="#{j:humanFileSize(cc.attrs.handler.meta.size)}"/>
-					
-					<p:outputLabel for="date" value="#{msg.jeeslIoFileRecord}"/>
-					<h:outputText id="date" value="#{cc.attrs.handler.meta.record}">
+					<p:outputLabel value="#{msg.jeeslIoFileSize}"/>
+					<h:outputText value="#{j:humanFileSize(cc.attrs.handler.meta.size)}"/>
+					<p:outputLabel value="#{msg.jeeslIoFileRecord}"/>
+					<h:outputText value="#{cc.attrs.handler.meta.record}">
 						<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
 					</h:outputText>
 							
-				</j:inputGrid>
+				</p:panelGrid>
 				<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" rendered="#{cc.attrs.withDescription and (not empty cc.attrs.handler.locale)}">
 					<p:outputLabel value="#{msg.jeeslIoFileDescription}"/>
 					<jtp:inputRemark value="#{cc.attrs.handler.meta.description[cc.attrs.handler.locale.code].lang}" rendered="#{cc.attrs.allowUpload and cc.attrs.handler.allowChangeDescription}"/>
@@ -193,38 +182,37 @@
 				</ui:remove>
 				
 				<h:form id="fConfirm" >
-					<p:panel header="#{msg.jeeslIoFileUpload}" rendered="#{not empty cc.attrs.handler.meta}" styleClass="jeeslPanel jeesl-panel" >
+					<p:panel header="#{msg.jeeslIoFileUpload}" rendered="#{not empty cc.attrs.handler.meta}" styleClass="jeeslPanel" >
 						<f:facet name="actions">
 							<j:icon id="iconJeeslFileSave" type="jeeslSave" rendered="#{false and cc.attrs.handler.allowUpload}"
 								listener="#{cc.attrs.handler.saveFile()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles" oncomplete="PF('wvUpload').show();"/> 
 						</f:facet>
-						<j:inputGrid>
-							<p:outputLabel for="version" value="v"/>
-							<h:outputText id="version" value="4"/>
+						<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						
-							<p:outputLabel for="fileType" value="#{msg.jeeslIoFileType}"/>
-							<h:panelGroup id="fileType">
-								<jtp:symbolizer value="#{cc.attrs.handler.meta.type}" marginRight="5" styleClass="jeesl-input-grid-icon"/>
+							<h:outputText value="v"/>
+						<h:outputText value="4"/>
+						
+							<p:outputLabel value="#{msg.jeeslIoFileType}"/>
+							<ui:fragment>
+								<jtp:symbolizer value="#{cc.attrs.handler.meta.type}" marginRight="5"/>
 								<h:outputText value="#{cc.attrs.handler.meta.type.name[localeCode].lang}"/>
-							</h:panelGroup>
+							</ui:fragment>
+							<p:outputLabel value="#{msg.jeeslIoFileName}"/>
+							<h:outputText value="#{cc.attrs.handler.meta.fileName}"/>
 							
-							<p:outputLabel for="fileName" value="#{msg.jeeslIoFileName}"/>
-							<h:outputText id="fileName" value="#{cc.attrs.handler.meta.fileName}"/>
-							
-							<p:outputLabel for="fileSize" value="#{msg.jeeslIoFileSize}"/>
-							<h:outputText id="fileSize" value="#{j:humanFileSize(cc.attrs.handler.meta.size)}"/>
-							
-							<p:outputLabel for="fileDate" value="#{msg.jeeslIoFileRecord}"/>
-							<h:outputText id="fileDate" value="#{cc.attrs.handler.meta.record}">
+							<p:outputLabel value="#{msg.jeeslIoFileSize}"/>
+							<h:outputText value="#{j:humanFileSize(cc.attrs.handler.meta.size)}"/>
+							<p:outputLabel value="#{msg.jeeslIoFileRecord}"/>
+							<h:outputText value="#{cc.attrs.handler.meta.record}">
 								<f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" />
 							</h:outputText>
-						</j:inputGrid>
-						<j:inputGrid rendered="#{cc.attrs.withCategory}">
-							<p:outputLabel for="fileCategory" value="#{cc.attrs.labelCategory}"/>
-							<p:selectOneMenu id="fileCategory" value="#{cc.attrs.handler.meta.category}" effect="fade" autoWidth="false">
+						</p:panelGrid>
+						<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" rendered="#{cc.attrs.withCategory}">
+							<p:outputLabel value="#{cc.attrs.labelCategory}"/>
+							<p:selectOneMenu value="#{cc.attrs.handler.meta.category}" effect="fade" autoWidth="false">
 								<f:selectItems value="#{cc.attrs.mapCategory.values()}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t.code}"/>
 							</p:selectOneMenu>
-						</j:inputGrid>
+						</p:panelGrid>
 						<p:commandButton rendered="#{cc.attrs.handler.allowUpload}" value="Save"
 		                 action="#{cc.attrs.handler.saveFile}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles" oncomplete="PF('wvUpload').show();"/>
 						<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>

@@ -17,7 +17,6 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
-import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;

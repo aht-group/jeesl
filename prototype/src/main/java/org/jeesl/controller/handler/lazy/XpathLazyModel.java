@@ -64,7 +64,6 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 	public void addAll(List<T> items)
 	{
 		source.addAll(items);
-//		set.addAll(EjbVupBeneficiaryListItemFactory.toEligibilities(items));
 	}
 
 	public void add(T item)

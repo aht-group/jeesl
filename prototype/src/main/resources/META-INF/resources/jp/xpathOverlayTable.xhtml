@@ -19,8 +19,7 @@
 	</composite:interface>
 
 <composite:implementation>
-	<h:form>
-	
+
 	<p:dialog id="dXpath" header="Select" widgetVar="#{cc.attrs.widgetVar}" modal="true" styleClass="jeesl-table-dialog">
 		<f:facet name="actions">
 			<j:svg type="jeeslCancel" listener="#{dialogBean.save()}" update="@form" library="jeeslGfx"/>
@@ -73,6 +72,5 @@
 				</p:column>
 			</p:dataTable>
 		</p:dialog>
-	</h:form>
 </composite:implementation>
 </html>
