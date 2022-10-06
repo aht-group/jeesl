@@ -58,8 +58,8 @@
 .jeeslPanel .ui-panelgrid .ui-panelgrid-cell {border-style: none !important;}
 
 /* Remove the padding within the panel*/            
-.auPanelWithGrid .ui-panel-content {padding: 0 !important;}
-.jeeslPanel .ui-panel-content {padding: 0 !important;}
+/* .auPanelWithGrid .ui-panel-content {padding: 0 !important;} */
+/* .jeeslPanel .ui-panel-content {padding: 0 !important;} */
 
 /* Removes borders from PanelGrid rows */
 .auPanelWithGrid .ui-panelgrid .ui-widget-content {border-style: none !important;}

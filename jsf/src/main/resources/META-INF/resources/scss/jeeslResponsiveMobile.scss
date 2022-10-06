@@ -948,6 +948,10 @@ html, body, .ui-widget {
 			
 	padding: 0;
 	
+	&:not(.html-container-panel) .ui-panel-content {
+		padding: $regular-spacing $wide-spacing;
+	}
+	
 	&.jeesl-gallery {
 		.ui-panel-titlebar {
 			left: 0;

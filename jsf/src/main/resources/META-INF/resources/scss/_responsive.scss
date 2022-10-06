@@ -2965,7 +2965,13 @@ body, .ui-widget {
 			}
 			
 			.jeesl-panel form {
-				margin-bottom: 0;
+				&:last-child {
+					margin-bottom: 0;
+				}
+				
+				.jeesl-form-button {
+					margin-top: $regular-spacing;
+				}
 			}
 		}
 		
