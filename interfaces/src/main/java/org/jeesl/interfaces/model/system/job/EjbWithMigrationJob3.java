@@ -1,0 +1,9 @@
+package org.jeesl.interfaces.model.system.job;
+
+public interface EjbWithMigrationJob3 <STATUS extends JeeslJobStatus<?,?,?,?>>
+{
+	public enum Attributes{job3}
+	
+	STATUS getJob3();
+	void setJob3(STATUS job1);
+}

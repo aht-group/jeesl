@@ -30,6 +30,7 @@ import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.system.job.EjbWithMigrationJob1;
 import org.jeesl.interfaces.model.system.job.EjbWithMigrationJob2;
+import org.jeesl.interfaces.model.system.job.EjbWithMigrationJob3;
 import org.jeesl.interfaces.model.system.job.JeeslJob;
 import org.jeesl.interfaces.model.system.job.JeeslJobCache;
 import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
@@ -289,6 +290,25 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		tQ.setMaxResults(maxResult);
 		return tQ.getResultList();
 	}
+	@Override public <T extends EjbWithMigrationJob3<STATUS>> List<T> fEntitiesWithPendingJob3(Class<T> c, int maxResult, boolean includeNull)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<T> cQ = cB.createQuery(c);
+		Root<T> item = cQ.from(c);
+		
+		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob3.Attributes.job3.toString());
+		STATUS queue = this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue);
+		if(includeNull) {predicates.add(cB.or(cB.isNull(eStatus),cB.equal(eStatus, queue)));}
+		else {predicates.add(cB.equal(eStatus,queue));}
+
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(item);
+
+		TypedQuery<T> tQ = em.createQuery(cQ);
+		tQ.setMaxResults(maxResult);
+		return tQ.getResultList();
+	}
 	
 	@Override public <T extends EjbWithMigrationJob1<STATUS>> Json1Tuples<STATUS> tpcJob1Status(Class<T> c)
 	{
@@ -324,4 +344,22 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
         return jtf.buildCount(tQ.getResultList());
 	}
+	@Override public <T extends EjbWithMigrationJob3<STATUS>> Json1Tuples<STATUS> tpcJob3Status(Class<T> c)
+	{
+		Json1TuplesFactory<STATUS> jtf = new Json1TuplesFactory<>(fbJob.getClassStatus());
+		jtf.setfUtils(this);
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<T> item = cQ.from(c);
+		
+		Expression<Long> eCount = cB.count(item.<Long>get("id"));
+		Path<STATUS> pStatus = item.get(EjbWithMigrationJob3.Attributes.job3.toString());
+		
+		cQ.groupBy(pStatus.get("id"));
+		cQ.multiselect(pStatus.get("id"),eCount);
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+        return jtf.buildCount(tQ.getResultList());
+	}
+	
 }

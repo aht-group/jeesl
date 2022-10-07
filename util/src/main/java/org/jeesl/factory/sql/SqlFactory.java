@@ -265,8 +265,9 @@ public class SqlFactory
 		sb.append(id(alias,attribute));
 		if(where!=null)
 		{
-			if(negate) {logger.warn("NOT is NYI");}
-			sb.append("=").append(where.getId());
+			if(negate) {sb.append("!=");}
+			else {sb.append("=");}
+			sb.append(where.getId());
 		}
 		else
 		{
