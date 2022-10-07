@@ -4672,8 +4672,10 @@ body, .ui-widget {
       position: relative; }
       .jeesl-content .jeesl-content-container .jeesl-grid form {
         margin-bottom: 10px; }
-      .jeesl-content .jeesl-content-container .jeesl-grid .jeesl-panel form {
+      .jeesl-content .jeesl-content-container .jeesl-grid .jeesl-panel form:last-child {
         margin-bottom: 0; }
+      .jeesl-content .jeesl-content-container .jeesl-grid .jeesl-panel form .jeesl-form-button {
+        margin-top: 10px; }
     .jeesl-content .jeesl-content-container .ui-panel {
       background: #ededed;
       display: flex;

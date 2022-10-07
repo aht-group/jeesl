@@ -56,7 +56,6 @@ body {min-width: ${width}px;}
 ----------------------------------------------------------------------------------------------------*/
 [class*="auGrid"] {
   display: table;
-  float: left;
   margin-left: ${gutter}px;
   margin-right: ${gutter}px;
 }
