@@ -34,7 +34,6 @@ public interface JeeslIoAttributeFacade <L extends JeeslLang, D extends JeeslDes
 {	
 	SET load(SET set);
 	
-	
 	List<CRITERIA> fAttributeCriteria(List<CATEGORY> categories, long refId);
 	<RREF extends EjbWithId> List<CRITERIA> fAttributeCriteria(R realm, RREF rref, List<CAT> categories);
 	

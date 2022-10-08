@@ -208,11 +208,7 @@ public class AbstractDummyFacade implements JeeslFacade
 	}
 
 	@Override
-	public <T extends EjbWithId, I extends EjbWithId> T oneForParent(
-			Class<T> type, String p1Name, I p1) {
-
-		return null;
-	}
+	public <T extends EjbWithId, E extends Enum<E>, I extends EjbWithId> T oneForParent(Class<T> type, E attribute, I p1) {return null;}
 
 	@Override
 	public <T, I extends EjbWithId> List<T> allOrderedParent(Class<T> cl,
@@ -230,9 +226,7 @@ public class AbstractDummyFacade implements JeeslFacade
 	}
 
 	@Override
-	public <T extends EjbWithId, P extends EjbWithId> T oneForParents(
-			Class<T> cl, List<ParentPredicate<P>> parents)
-			throws JeeslNotFoundException {
+	public <T extends EjbWithId, P extends EjbWithId> T oneForParents(Class<T> cl, List<ParentPredicate<P>> parents) throws JeeslNotFoundException {
 
 		return null;
 	}

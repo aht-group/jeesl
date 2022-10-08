@@ -507,7 +507,7 @@ public class JeeslSurveyCoreFacadeBean <L extends JeeslLang, D extends JeeslDesc
 
 	@Override public DATA fData(CORRELATION correlation) throws JeeslNotFoundException
 	{
-		return this.oneForParent(fbCore.getClassData(), "correlation", correlation);
+		return this.oneForParent(fbCore.getClassData(),JeeslSurveyData.Attributes.correlation,correlation);
 	}
 	
 	@Override public List<DATA> fDatas(List<CORRELATION> correlations)
