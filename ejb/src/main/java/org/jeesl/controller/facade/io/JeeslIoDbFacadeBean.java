@@ -59,7 +59,7 @@ public class JeeslIoDbFacadeBean <L extends JeeslLang,D extends JeeslDescription
 	
 	@Override public DF fDumpFile(DUMP dump, DH host) throws JeeslNotFoundException
 	{
-		return this.oneForParents(fbDb.getClassDumpFile(), JeeslDbDumpFile.Attributes.dump.toString(), dump, JeeslDbDumpFile.Attributes.host.toString(), host);
+		return this.oneForParents(fbDb.getClassDumpFile(), JeeslDbDumpFile.Attributes.dump,dump, JeeslDbDumpFile.Attributes.host,host);
 	}
 	
 	@Override public String version()

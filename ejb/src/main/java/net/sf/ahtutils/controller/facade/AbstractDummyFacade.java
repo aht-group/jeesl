@@ -231,20 +231,8 @@ public class AbstractDummyFacade implements JeeslFacade
 		return null;
 	}
 
-	@Override
-	public <T extends EjbWithId, I extends EjbWithId> T oneForParents(
-			Class<T> cl, String p1Name, I p1, String p2Name, I p2)
-			throws JeeslNotFoundException {
-
-		return null;
-	}
-
-	@Override
-	public <T extends EjbWithRecord> List<T> inInterval(Class<T> clRecord,
-			Date from, Date to) {
-
-		return null;
-	}
+	@Override public <T extends EjbWithId, E1 extends Enum<E1>, E2 extends Enum<E2>, I extends EjbWithId> T oneForParents(Class<T> cl, E1 a1, I p1, E2 a2, I p2) throws JeeslNotFoundException {return null;}
+	@Override public <T extends EjbWithRecord> List<T> inInterval(Class<T> clRecord, Date from, Date to) {return null;}
 
 	@Override
 	public <T extends EjbWithTimeline> List<T>

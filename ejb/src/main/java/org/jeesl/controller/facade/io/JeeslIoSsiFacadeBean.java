@@ -100,7 +100,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	{
 		ENTITY eEjb = this.fByCode(fbSsi.getClassEntity(), ejb.getName());
 		ENTITY eJson = this.fByCode(fbSsi.getClassEntity(), json.getName());
-		return this.oneForParents(fbSsi.getClassMapping(), JeeslIoSsiMapping.Attributes.entity.toString(), eEjb, JeeslIoSsiMapping.Attributes.json.toString(), eJson);
+		return this.oneForParents(fbSsi.getClassMapping(), JeeslIoSsiMapping.Attributes.entity,eEjb, JeeslIoSsiMapping.Attributes.json,eJson);
 	}
 
 	@Override public List<DATA> fIoSsiData(MAPPING mapping, List<LINK> links){return fIoSsiData(mapping,links,null,null,null);}

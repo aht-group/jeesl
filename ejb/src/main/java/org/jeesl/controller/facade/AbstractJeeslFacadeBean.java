@@ -162,7 +162,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	public <T extends EjbWithId, E extends Enum<E>, I extends EjbWithId> T oneForParent(Class<T> cl, E attribute, I p1) throws JeeslNotFoundException {return fJeesl.oneForParent(cl,attribute,p1);}
 	public <T extends EjbWithNr, P extends EjbWithId> T fByNr(Class<T> type, String parentName, P parent, long nr) throws JeeslNotFoundException {return fJeesl.fByNr(type, parentName, parent, nr);}
 	public <T extends EjbWithId, P extends EjbWithId> T oneForParents(Class<T> cl, List<ParentPredicate<P>> parents) throws JeeslNotFoundException {return fJeesl.oneForParents(cl, parents);}
-	public <T extends EjbWithId, I extends EjbWithId> T oneForParents(Class<T> cl, String p1Name, I p1, String p2Name, I p2) throws JeeslNotFoundException {return fJeesl.oneForParents(cl, p1Name, p1, p2Name, p2);}
+	public <T extends EjbWithId, E1 extends Enum<E1>, E2 extends Enum<E2>, I extends EjbWithId> T oneForParents(Class<T> cl, E1 a1, I p1, E2 a2, I p2) throws JeeslNotFoundException {return fJeesl.oneForParents(cl, a1,p1, a2,p2);}
 	public <T extends EjbWithId, I extends EjbWithId> T oneForParents(Class<T> cl, String p1Name, I p1, String p2Name, I p2, String p3Name, I p3) throws JeeslNotFoundException {return fJeesl.oneForParents(cl,p1Name,p1,p2Name,p2,p3Name,p3);}
 	@Override public <T extends EjbWithId, P extends EjbWithId> List<T> allForOrParents(Class<T> cl, List<ParentPredicate<P>> parents) {return fJeesl.allForOrParents(cl, parents);}
 	@Override public <T extends EjbWithId, OR1 extends EjbWithId, OR2 extends EjbWithId> List<T> allForOrOrParents(Class<T> cl, List<ParentPredicate<OR1>> or1, List<ParentPredicate<OR2>> or2){return fJeesl.allForOrOrParents(cl, or1,or2);}

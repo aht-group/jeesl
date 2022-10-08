@@ -127,7 +127,7 @@ public class JeeslSurveyAnalysisFacadeBean <L extends JeeslLang, D extends Jeesl
 	
 	@Override public AQ fAnalysis(ANALYSIS analysis, QUESTION question) throws JeeslNotFoundException
 	{
-		return this.oneForParents(fbAnalyis.getClassAnalysisQuestion(), JeeslSurveyAnalysisQuestion.Attributes.analysis.toString(), analysis, JeeslSurveyAnalysisQuestion.Attributes.question.toString(), question);
+		return this.oneForParents(fbAnalyis.getClassAnalysisQuestion(), JeeslSurveyAnalysisQuestion.Attributes.analysis,analysis, JeeslSurveyAnalysisQuestion.Attributes.question,question);
 	}
 /*	
 	@Override
