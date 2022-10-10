@@ -127,7 +127,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 		reset(true,false);
 		if(sbhMapping.isSelected() && sbhEntity.isSelected())
 		{
-			attributes.addAll(fSsi.allForParent(fbSsiData.getClassAttribute(), JeeslIoSsiAttribute.Attributes.mapping.toString(), sbhMapping.getSelection(), JeeslIoSsiAttribute.Attributes.entity.toString(), sbhEntity.getSelection()));
+			attributes.addAll(fSsi.allForParent(fbSsiData.getClassAttribute(), JeeslIoSsiAttribute.Attributes.mapping, sbhMapping.getSelection(), JeeslIoSsiAttribute.Attributes.entity, sbhEntity.getSelection()));
 		}
 	}
 

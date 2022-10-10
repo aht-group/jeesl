@@ -123,18 +123,20 @@ public interface JeeslFacade extends JeeslIdFacade
 	
 	//Parent
 	<T extends EjbWithParentAttributeResolver, P extends EjbWithId> List<T> allForParent(Class<T> c, P parent);
+	<T extends EjbWithId, A1 extends Enum<A1>, P1 extends EjbWithId> List<T> allForParent(Class<T> type, A1 a1, P1 p1);
+	<T extends EjbWithId, I extends EjbWithId> List<T> allForParent(Class<T> type, String p1Name, I p1, int maxResults);
+	<T extends EjbWithId, A1 extends Enum<A1>, A2 extends Enum<A2>, I extends EjbWithId> List<T> allForParent(Class<T> c, A1 a1,I p1, A2 a2, I p2);
+	
 	<T extends JeeslWithParentAttributeStatus<STATUS>, P extends EjbWithId, STATUS extends JeeslStatus<?,?,STATUS>> List<T> allForParentStatus(Class<T> type, P parent, List<STATUS> status);
 	<T extends JeeslWithParentAttributeType<TYPE>, P extends EjbWithId, TYPE extends JeeslStatus<?,?,TYPE>> List<T> allForParentType(Class<T> c, P parent, List<TYPE> type);
 	<T extends EjbWithParentAttributeResolver, I extends EjbWithId> List<T> allForParents(Class<T> type, List<I> parents);
-//	<T extends EjbWithId, I extends EjbWithId, A1 extends Enum<A1>> List<T> allForParent(Class<T> type, String p1Name, I p1);
-	<T extends EjbWithId, A1 extends Enum<A1>, P1 extends EjbWithId> List<T> allForParent(Class<T> type, A1 a1, P1 p1);
-	<T extends EjbWithId, I extends EjbWithId> List<T> allForParent(Class<T> type, String p1Name, I p1, int maxResults);
+
 	<T extends EjbWithParentAttributeResolver, I extends EjbWithId> T oneForParent(Class<T> cl, I p1) throws JeeslNotFoundException;
 	<T extends EjbWithId, E extends Enum<E>, I extends EjbWithId> T oneForParent(Class<T> cl, E attribute, I p1) throws JeeslNotFoundException;
 	<T extends EjbWithId, E1 extends Enum<E1>,  E2 extends Enum<E2>, I extends EjbWithId> T oneForParents(Class<T> cl, E1 a1, I p1, E2 a2, I p2) throws JeeslNotFoundException;
 	<T extends EjbWithId, I extends EjbWithId> T oneForParents(Class<T> cl, String p1Name, I p1, String p2Name, I p2, String p3Name, I p3) throws JeeslNotFoundException;
 	<T extends EjbWithId, P extends EjbWithId> T oneForParents(Class<T> cl, List<ParentPredicate<P>> parents) throws JeeslNotFoundException;
-	<T extends EjbWithId, I extends EjbWithId> List<T> allForParent(Class<T> type, String p1Name, I p1, String p2Name, I p2);
+	
 	<T extends EjbWithId, P extends EjbWithId> List<T> allForOrParents(Class<T> cl, List<ParentPredicate<P>> parents);
 	<T extends EjbWithId, OR1 extends EjbWithId, OR2 extends EjbWithId> List<T> allForOrOrParents(Class<T> cl, List<ParentPredicate<OR1>> or1, List<ParentPredicate<OR2>> or2);
 	<T extends EjbWithId, OR extends EjbWithId, AND extends EjbWithId> List<T> fForAndOrParents(Class<T> queryClass, List<ParentPredicate<AND>> lpAnd, List<ParentPredicate<OR>> lpOr);

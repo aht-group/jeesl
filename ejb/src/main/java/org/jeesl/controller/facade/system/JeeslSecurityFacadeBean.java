@@ -311,7 +311,7 @@ public class JeeslSecurityFacadeBean<L extends JeeslLang,
 	
 	@Override public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId>
 		List<S> fStaffUR(Class<S> clStaff, USER user, R role)
-	{return allForParent(clStaff, "user", user, "role",role);}
+	{return allForParent(clStaff, JeeslStaff.Attributes.user,user, JeeslStaff.Attributes.role,role);}
 	
 	@Override
 	public <S extends JeeslStaff<R, USER, D1, D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffUR(Class<S> cStaff, USER user, List<R> roles)

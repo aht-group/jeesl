@@ -147,12 +147,7 @@ public class AbstractDummyFacade implements JeeslFacade
 
 
 
-	@Override
-	public <T extends EjbWithId, I extends EjbWithId> List<T> allForParent(
-			Class<T> type, String p1Name, I p1, String p2Name, I p2) {
-
-		return null;
-	}
+	@Override public <T extends EjbWithId, A1 extends Enum<A1>, A2 extends Enum<A2>, I extends EjbWithId> List<T> allForParent(Class<T> type, A1 p1Name, I p1, A2 p2Name, I p2) {return null;}
 
 	@Override
 	public <T extends EjbWithId, OR extends EjbWithId, AND extends EjbWithId> List<T> fForAndOrParents(

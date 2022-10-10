@@ -158,7 +158,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	@Override public <T extends EjbWithParentAttributeResolver, I extends EjbWithId> List<T> allForParents(Class<T> c, List<I> parents) {{return fJeesl.allForParents(c, parents);}}
 	@Override public <T extends EjbWithId, A1 extends Enum<A1>, P1 extends EjbWithId> List<T> allForParent(Class<T> type, A1 a1, P1 p1){return fJeesl.allForParent(type,a1,p1);}
 	@Override public <T extends EjbWithId, I extends EjbWithId> List<T> allForParent(Class<T> type, String p1Name, I p1, int maxResults) {return fJeesl.allForParent(type, p1Name, p1,maxResults);}
-	public <T extends EjbWithId, I extends EjbWithId> List<T> allForParent(Class<T> type, String p1Name, I p1, String p2Name, I p2){return fJeesl.allForParent(type, p1Name, p1, p2Name, p2);}
+	public <T extends EjbWithId, A1 extends Enum<A1>, A2 extends Enum<A2>, I extends EjbWithId> List<T> allForParent(Class<T> type, A1 a1, I p1, A2 a2, I p2){return fJeesl.allForParent(type, a1,p1, a2,p2);}
 	public <T extends EjbWithId, E extends Enum<E>, I extends EjbWithId> T oneForParent(Class<T> cl, E attribute, I p1) throws JeeslNotFoundException {return fJeesl.oneForParent(cl,attribute,p1);}
 	public <T extends EjbWithNr, P extends EjbWithId> T fByNr(Class<T> type, String parentName, P parent, long nr) throws JeeslNotFoundException {return fJeesl.fByNr(type, parentName, parent, nr);}
 	public <T extends EjbWithId, P extends EjbWithId> T oneForParents(Class<T> cl, List<ParentPredicate<P>> parents) throws JeeslNotFoundException {return fJeesl.oneForParents(cl, parents);}

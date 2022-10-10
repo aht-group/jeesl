@@ -140,7 +140,7 @@ public abstract class AbstractHdTicketBean <L extends JeeslLang, D extends Jeesl
 	{
 		SCOPE scope = fHd.fByEnum(fbHd.getClassScope(),JeeslHdScope.Code.user);
 		faqs.clear();
-		faqs.addAll(fHd.allForParent(fbHd.getClassFaq(), JeeslHdFaq.Attributes.category.toString(),category, JeeslHdFaq.Attributes.scope.toString(),scope));
+		faqs.addAll(fHd.allForParent(fbHd.getClassFaq(), JeeslHdFaq.Attributes.category,category, JeeslHdFaq.Attributes.scope,scope));
 	}
 
 	@Override

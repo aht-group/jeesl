@@ -823,7 +823,7 @@ public class JeeslFacadeBean implements JeeslFacade
 	}
 	@Override public <T extends EjbWithId,  E1 extends Enum<E1>, E2 extends Enum<E2>, I extends EjbWithId> T oneForParents(Class<T> cl, E1 a1, I p1, E2 a2, I p2) throws JeeslNotFoundException
 	{
-		List<T> list = allForParent(cl, a1.toString(), p1, a2.toString(), p2);
+		List<T> list = allForParent(cl, a1,p1, a2,p2);
 		if(list.size()>1){throw new JeeslNotFoundException("More than one "+cl.getSimpleName()+" found for "+a1+"={"+p1+"} and "+a2+"={"+p2+"}");}
 		if(list.size()==0){throw new JeeslNotFoundException("No "+cl.getSimpleName()+" found for "+a1+"={"+p1+"} and "+a2+"={"+p2+"}");}
 		return list.get(0);
@@ -1065,14 +1065,14 @@ public class JeeslFacadeBean implements JeeslFacade
 	// ************************************
 
 	@Override
-	public <T extends EjbWithId, I extends EjbWithId> List<T> allForParent(Class<T> c, String p1Name, I p1, String p2Name, I p2)
+	public <T extends EjbWithId, A1 extends Enum<A1>, A2 extends Enum<A2>, I extends EjbWithId> List<T> allForParent(Class<T> c, A1 a1, I p1, A2 a2, I p2)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 	    CriteriaQuery<T> criteriaQuery = cB.createQuery(c);
 
 	    Root<T> root = criteriaQuery.from(c);
-	    Path<Object> p1Path = root.get(p1Name);
-	    Path<Object> p2Path = root.get(p2Name);
+	    Path<Object> p1Path = root.get(a1.toString());
+	    Path<Object> p2Path = root.get(a2.toString());
 
 	    CriteriaQuery<T> select = criteriaQuery.select(root);
 	    select.where( cB.and(cB.equal(p1Path, p1.getId()),
