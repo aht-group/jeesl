@@ -21,6 +21,7 @@ import org.jeesl.factory.ejb.module.survey.EjbSurveyMatrixFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveyAnswerFactory;
 import org.jeesl.factory.txt.module.survey.TxtSurveySectionFactory;
+import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplateCategory;
@@ -59,6 +60,8 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(SurveyHandler.class);
 	private static final long serialVersionUID = 1L;
+	
+	private JeeslLogger jogger; public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
 	
 	private final JeeslFacesMessageBean bMessage;
 	private final JeeslSurveyBean<?,?,SURVEY,?,?,TEMPLATE,?,?,TC,SECTION,QUESTION,CONDITION,VALIDATION,?,?,?,ANSWER,MATRIX,DATA,?,OPTION,CORRELATION,?> bSurvey;
@@ -148,14 +151,29 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 	public void prepare(SURVEY survey, CORRELATION correlation)
 	{
 		buildControls(survey);
+		if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"buildControls");}
 		
 		showAssessment = true;
 		if(SurveyHandler.debug){logger.warn("prepare fData()");try {Thread.sleep(SurveyHandler.debugDelay);} catch (InterruptedException e) {e.printStackTrace();}}
-		try {surveyData = fSurvey.fData(correlation);}
-		catch (JeeslNotFoundException e){surveyData = efData.build(survey,correlation);}
+		try
+		{
+			surveyData = fSurvey.fData(correlation);
+			if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"fSurvey.fData(..)");}
+		}
+		catch (JeeslNotFoundException e)
+		{
+			surveyData = efData.build(survey,correlation);
+			if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"efData.build(..)");}
+		}
+		jogger.ofxMilestones(System.out);
+		
 		template = survey.getTemplate();
 		condition.init(template);
+		if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"condition.init(..)");}
+		
 		validation.init(template);
+		if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"validation.init(..)");}
+		
 		if(bSurvey.getMapSection().containsKey(template)){activeSections.addAll(bSurvey.getMapSection().get(template));}
 		if(SurveyHandler.debug){logger.warn("Preparing Survey for correlation:"+correlation.toString()+" and data:"+surveyData.toString());}
 	}
