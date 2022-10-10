@@ -9,8 +9,6 @@ import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,12 +24,13 @@ public class GenericLocaleProvider <LOC extends JeeslLocale<?,?,LOC,?>>
 	private final List<String> localeCodes; @Override public List<String> getLocaleCodes() {return localeCodes;}
 	private final Map<String,LOC> mapLocales;
 
+	public static <LOC extends JeeslLocale<?,?,LOC,?>> GenericLocaleProvider<LOC> instance(List<LOC> locales) {return new GenericLocaleProvider<>(locales);}
 	
 	public GenericLocaleProvider()
 	{
 		localeCodes = new ArrayList<>();
 		mapLocales = new HashMap<String,LOC>();
-		locales = new ArrayList<>();;
+		locales = new ArrayList<>();
 	}
 	public GenericLocaleProvider(List<LOC> locales)
 	{
@@ -63,5 +62,4 @@ public class GenericLocaleProvider <LOC extends JeeslLocale<?,?,LOC,?>>
 		if(!localeCodes.isEmpty()) {return localeCodes.get(0);}
 		return null;
 	}
-	
 }

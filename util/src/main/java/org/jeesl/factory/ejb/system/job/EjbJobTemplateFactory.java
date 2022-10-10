@@ -1,12 +1,11 @@
 package org.jeesl.factory.ejb.system.job;
 
-import org.jeesl.factory.builder.system.JobFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
-import org.jeesl.interfaces.model.system.job.JeeslJobExpiration;
 import org.jeesl.interfaces.model.system.job.JeeslJobPriority;
 import org.jeesl.interfaces.model.system.job.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.job.JeeslJobType;
+import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -21,11 +20,19 @@ public class EjbJobTemplateFactory <L extends JeeslLang,D extends JeeslDescripti
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbJobTemplateFactory.class);
 	
-	private final JobFactoryBuilder<?,?,TEMPLATE,CATEGORY,TYPE,EXPIRE,?,PRIORITY,?,?,?,?,?,?> fbJob;
+	private final Class<TEMPLATE> cTemplate;
+	private final Class<CATEGORY> cCategory;
+	private final Class<TYPE> cType;
+	private final Class<EXPIRE> cExpire;
+	private final Class<PRIORITY> cPriority;
 
-	public EjbJobTemplateFactory(JobFactoryBuilder<?,?,TEMPLATE,CATEGORY,TYPE,EXPIRE,?,PRIORITY,?,?,?,?,?,?> fbJob)
+	public EjbJobTemplateFactory(final Class<TEMPLATE> cTemplate, final Class<CATEGORY> cCategory, final Class<TYPE> cType, final Class<EXPIRE> cExpire, final Class<PRIORITY> cPriority)
 	{
-        this.fbJob = fbJob;
+		this.cTemplate=cTemplate;
+		this.cCategory=cCategory;
+		this.cType=cType;
+		this.cExpire=cExpire;
+		this.cPriority=cPriority;
 	}
  
 	public TEMPLATE build(CATEGORY category, TYPE type)
@@ -33,7 +40,7 @@ public class EjbJobTemplateFactory <L extends JeeslLang,D extends JeeslDescripti
 		TEMPLATE ejb = null;
 		try
 		{
-			ejb = fbJob.getClassTemplate().newInstance();
+			ejb = cTemplate.newInstance();
 			ejb.setCategory(category);
 			ejb.setType(type);
 		}
@@ -45,9 +52,9 @@ public class EjbJobTemplateFactory <L extends JeeslLang,D extends JeeslDescripti
 	
 	public void converter(JeeslFacade facade, TEMPLATE template)
 	{
-		if(template.getCategory()!=null) {template.setCategory(facade.find(fbJob.getClassCategory(),template.getCategory()));}
-		if(template.getType()!=null) {template.setType(facade.find(fbJob.getClassType(),template.getType()));}
-		if(template.getPriority()!=null) {template.setPriority(facade.find(fbJob.getClassPriority(),template.getPriority()));}
-		if(template.getExpiration()!=null) {template.setExpiration(facade.find(fbJob.getClassExpire(),template.getExpiration()));}
+		if(template.getCategory()!=null) {template.setCategory(facade.find(cCategory,template.getCategory()));}
+		if(template.getType()!=null) {template.setType(facade.find(cType,template.getType()));}
+		if(template.getPriority()!=null) {template.setPriority(facade.find(cPriority,template.getPriority()));}
+		if(template.getExpiration()!=null) {template.setExpiration(facade.find(cExpire,template.getExpiration()));}
 	}
 }

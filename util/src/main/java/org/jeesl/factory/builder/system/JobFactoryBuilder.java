@@ -6,16 +6,18 @@ import org.jeesl.factory.ejb.system.job.EjbJobFactory;
 import org.jeesl.factory.ejb.system.job.EjbJobRobotFactory;
 import org.jeesl.factory.ejb.system.job.EjbJobTemplateFactory;
 import org.jeesl.interfaces.model.system.job.JeeslJob;
-import org.jeesl.interfaces.model.system.job.JeeslJobCache;
 import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
-import org.jeesl.interfaces.model.system.job.JeeslJobExpiration;
-import org.jeesl.interfaces.model.system.job.JeeslJobFeedback;
-import org.jeesl.interfaces.model.system.job.JeeslJobFeedbackType;
 import org.jeesl.interfaces.model.system.job.JeeslJobPriority;
 import org.jeesl.interfaces.model.system.job.JeeslJobRobot;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.job.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.job.JeeslJobType;
+import org.jeesl.interfaces.model.system.job.cache.JeeslJobCache;
+import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
+import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
+import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedbackType;
+import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenance;
+import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
@@ -27,13 +29,15 @@ public class JobFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslJobCategory<L,D,CATEGORY,?>,
 								TYPE extends JeeslJobType<L,D,TYPE,?>,
 								EXPIRE extends JeeslJobExpiration<L,D,EXPIRE,?>,
-								JOB extends JeeslJob<TEMPLATE,PRIORITY,FEEDBACK,STATUS,USER>,
+								JOB extends JeeslJob<TEMPLATE,PRIORITY,FB,STATUS,USER>,
 								PRIORITY extends JeeslJobPriority<L,D,PRIORITY,?>,
-								FEEDBACK extends JeeslJobFeedback<JOB,FT,USER>,	
-								FT extends JeeslJobFeedbackType<L,D,FT,?>,
+								FB extends JeeslJobFeedback<JOB,FBT,USER>,	
+								FBT extends JeeslJobFeedbackType<L,D,FBT,?>,
 								STATUS extends JeeslJobStatus<L,D,STATUS,?>,
 								ROBOT extends JeeslJobRobot<L,D>,
 								CACHE extends JeeslJobCache<TEMPLATE,?>,
+								MNT extends JeeslJobMaintenance<L,D,MNT,?>,
+								MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
 								USER extends EjbWithEmail
 								>
 				extends AbstractFactoryBuilder<L,D>
@@ -66,12 +70,8 @@ public class JobFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 		this.cCache = cCache;
 	}
 		
-	public EjbJobTemplateFactory<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,PRIORITY> template() {return new EjbJobTemplateFactory<>(this);}
-	
-	public EjbJobFactory<L,D,TEMPLATE,CATEGORY,TYPE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,USER> job()
-	{
-		return new EjbJobFactory<L,D,TEMPLATE,CATEGORY,TYPE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,USER>(cJob);
-	}
+	public EjbJobTemplateFactory<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,PRIORITY> template() {return new EjbJobTemplateFactory<>(cTemplate,cCategory,cType,cExpire,cPriority);}
+	public EjbJobFactory<L,D,TEMPLATE,CATEGORY,TYPE,JOB,PRIORITY,FB,FBT,STATUS,ROBOT,CACHE,USER> job(){return new EjbJobFactory<>(cJob);}
 	
 	public EjbJobRobotFactory<ROBOT> robot(){return new EjbJobRobotFactory<>(cRobot);}
 	public EjbJobCacheFactory<TEMPLATE,CACHE> cache() {return new EjbJobCacheFactory<>(cCache);}

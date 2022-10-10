@@ -1,9 +1,10 @@
-package org.jeesl.interfaces.model.system.job;
+package org.jeesl.interfaces.model.system.job.feedback;
 
 import java.io.Serializable;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.system.job.JeeslJob;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 

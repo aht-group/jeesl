@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.job;
+package org.jeesl.interfaces.model.system.job.cache;
 
 import java.io.Serializable;
 

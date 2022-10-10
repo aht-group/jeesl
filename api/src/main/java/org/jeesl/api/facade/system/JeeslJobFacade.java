@@ -8,20 +8,22 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
-import org.jeesl.interfaces.model.system.job.EjbWithMigrationJob1;
-import org.jeesl.interfaces.model.system.job.EjbWithMigrationJob2;
-import org.jeesl.interfaces.model.system.job.EjbWithMigrationJob3;
 import org.jeesl.interfaces.model.system.job.JeeslJob;
-import org.jeesl.interfaces.model.system.job.JeeslJobCache;
 import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
-import org.jeesl.interfaces.model.system.job.JeeslJobExpiration;
-import org.jeesl.interfaces.model.system.job.JeeslJobFeedback;
-import org.jeesl.interfaces.model.system.job.JeeslJobFeedbackType;
 import org.jeesl.interfaces.model.system.job.JeeslJobPriority;
 import org.jeesl.interfaces.model.system.job.JeeslJobRobot;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.job.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.job.JeeslJobType;
+import org.jeesl.interfaces.model.system.job.cache.JeeslJobCache;
+import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
+import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
+import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedbackType;
+import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenance;
+import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
+import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob1;
+import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob2;
+import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob3;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
@@ -39,6 +41,8 @@ public interface JeeslJobFacade <L extends JeeslLang,D extends JeeslDescription,
 								STATUS extends JeeslJobStatus<L,D,STATUS,?>,
 								ROBOT extends JeeslJobRobot<L,D>,
 								CACHE extends JeeslJobCache<TEMPLATE,CONTAINER>,
+								MNT extends JeeslJobMaintenance<L,D,MNT,?>,
+								MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
 								CONTAINER extends JeeslFileContainer<?,?>,
 								USER extends EjbWithEmail
 								>

@@ -1,12 +1,9 @@
 package org.jeesl.factory.builder.module;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
-import org.jeesl.factory.ejb.io.fr.EjbIoFrContainerFactory;
 import org.jeesl.factory.ejb.module.mmg.EjbMmgClassificationFactory;
 import org.jeesl.factory.ejb.module.mmg.EjbMmgGalleryFactory;
 import org.jeesl.factory.ejb.module.mmg.EjbMmgItemFactory;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
-import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgClassification;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgGallery;
 import org.jeesl.interfaces.model.module.mmg.JeeslMmgItem;

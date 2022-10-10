@@ -11,7 +11,6 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 
-
 @DownloadJeeslData
 public interface JeeslJobStatus <L extends JeeslLang, D extends JeeslDescription,
 									S extends JeeslStatus<L,D,S>,G extends JeeslGraphic<?,?,?>>

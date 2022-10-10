@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
+import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
@@ -15,7 +16,7 @@ import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 public interface JeeslJob<TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 							PRIORITY extends JeeslStatus<?,?,PRIORITY>,
 							FEEDBACK extends JeeslJobFeedback<?,?,USER>,
-							STATUS extends JeeslStatus<?,?,STATUS>,
+							STATUS extends JeeslJobStatus<?,?,STATUS,?>,
 							USER extends EjbWithEmail>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithNonUniqueCode,EjbWithParentAttributeResolver
 {	
@@ -55,4 +56,5 @@ public interface JeeslJob<TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 	
 	String getJsonFilter();
 	void setJsonFilter(String jsonFilter);
+	
 }
