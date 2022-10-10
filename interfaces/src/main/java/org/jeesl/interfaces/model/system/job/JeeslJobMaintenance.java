@@ -9,14 +9,14 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
-import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-
-@DownloadJeeslData
-public interface JeeslJobStatus <L extends JeeslLang, D extends JeeslDescription,
-									S extends JeeslStatus<L,D,S>,G extends JeeslGraphic<?,?,?>>
+@DownloadJeeslDescription
+public interface JeeslJobMaintenance <L extends JeeslLang,D extends JeeslDescription,
+										S extends JeeslStatus<L,D,S>,
+										G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,
-					JeeslStatus<L,D,S>,JeeslStatusFixedCode
+							JeeslStatus<L,D,S>,JeeslStatusFixedCode
 {
-	public static enum Code{queue,timeout,working,completed,failed,obsolete};
+//	public static enum Code{none,email,box}
 }
