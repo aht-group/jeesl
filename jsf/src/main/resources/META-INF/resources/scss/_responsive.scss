@@ -359,30 +359,45 @@ $enable-pointer-cursor-for-buttons: true;
 					vertical-align: middle;
 				}
 				
-				.jeesl-menu-bar-button-summary {
-					display: none;
+				.jeesl-menu-bar-button-info {
 					font-style: italic;
-					margin-left: -.25em;
 					opacity: .5;
-					padding-right: 6px;
-					vertical-align: middle;
 					z-index: 2;
+					
+					&:last-child {
+						padding-right: 6px;
+					}
 					
 					@media (max-width: 768px) {
 						display: inline-block;
+						padding-right: 6px;
 					}
 				}
 				
-				.jeesl-menu-bar-button-selected-items {
-					padding: 0 5px;
-					position: relative;
+				.jeesl-menu-bar-button-summary {
+					height: 100%;
 					
-					@media (max-width: 768px) {
+					.jeesl-menu-bar-button-info {
 						display: none;
+						
+						@media (max-width: 768px) {
+							display: inline-block;
+						}
 					}
 					
-					img {
-						padding: 0 1px;
+					.jeesl-menu-bar-button-selected-items {
+						height: 100%;
+						padding: 0 5px;
+						position: relative;
+						
+						@media (max-width: 768px) {
+							display: none;
+						}
+						
+						img {
+							height: 100%;
+							padding: 0 1px;
+						}
 					}
 				}
 			}
@@ -1173,12 +1188,6 @@ body, .ui-widget {
 						padding-left: 6px;
 					}
 				}
-				
-				.jeesl-menu-bar-button-info {
-					font-style: italic;
-					opacity: .5;
-					position: relative;
-				}
 			}
 			
 			@include jeesl-sb-dropdown($white-100, $medium-colour, $dark-colour, $dark-colour);
@@ -1195,16 +1204,20 @@ body, .ui-widget {
 								border-top-width: 2px;
 							}
 							
+							&:hover {
+								background: transparent;
+							}
+							
 							&:before {
 								background: $dark-colour;
 								content: '';
-								height: $ls-element-height-mobile;
 								left: 0;
 								visibility: hidden;
 								position: absolute;
 								width: 100%;
 								
 								@media (max-width: 768px) {
+									height: $ls-element-height-mobile;
 									visibility: visible;
 								}
 							}
@@ -1725,13 +1738,18 @@ body, .ui-widget {
 
 @mixin jeesl-titlebar {
 	align-items: center;
+	background: $soft-grey linear-gradient(to bottom, $white-80, $white-0);
+	border: $border;
+	color: $foreground;
 	display: flex;	
 	flex-wrap: wrap;
+	font-weight: 700;
 	height: auto;
 	margin-bottom: $slim-spacing;
 	min-height: $element-height;
 	padding: 0;
 	position: relative;
+	text-shadow: $text-shadow;
 	
 	@media (max-width: 768px) {
 		border-radius: $border-radius-top;
@@ -2299,6 +2317,10 @@ body, .ui-widget {
 			margin: -$slim-spacing;
 			overflow: hidden;
 			padding: 0 !important;
+			
+			@media (max-width: 768px) {
+				margin: 0;
+			}
 		}
 	}
 	
@@ -2952,8 +2974,16 @@ body, .ui-widget {
 		padding: 0;
 		width: 100%;
 		
-		.jeesl-row:not(:first-child) {
-			margin-top: $regular-spacing;
+		.jeesl-row {
+			&:not(:first-child) {
+				margin-top: $regular-spacing;
+			}
+			
+			.jeesl-grid {
+				@media (max-width: 768px) {
+					margin-top: $regular-spacing;
+				}	
+			}
 		}
 		
 		.jeesl-grid {
@@ -2962,6 +2992,10 @@ body, .ui-widget {
 			
 			form {
 				margin-bottom: $regular-spacing;
+				
+				.jeesl-panel .jeesl-form-button {
+					margin-top: $regular-spacing;
+				}
 			}
 			
 			.jeesl-panel form {
@@ -3203,14 +3237,26 @@ body, .ui-widget {
 .fc {
 	.fc-toolbar {
 		display: flex;
+		flex-wrap: wrap;
+		margin: 0;
 		
 		.fc-left {
 			order: 1;
+			
+			@media (max-width: 768px) {
+				order: 2;
+			}
 		}
 		
 		.fc-center {
 			flex-grow: 1;
 			order: 2;
+			
+			@media (max-width: 768px) {
+				margin: 0 0 $wide-spacing;
+				order: 1;
+				width: 100%;
+			}
 		}
 		
 		.fc-right {
@@ -3219,6 +3265,7 @@ body, .ui-widget {
 		
 		.fc-left, .fc-center, .fc-right {
 			float: none;
+			margin-bottom: $wide-spacing;
 			
 			&:before {
 				content: '';
@@ -3238,16 +3285,74 @@ body, .ui-widget {
 	.fc-head {
 		@include jeesl-titlebar;
 		
+		border-radius: $border-radius-top;
 		margin: 0;
 		padding: 0;
 		
-		.fc-day-header > span {
-			@include jeesl-titlebar-title;
+		@media (max-width: 768px) {
+			border-width: $border-width $border-width 0;
+		}
+		
+		.fc-head-container {
+			border: none;
+			
+			.fc-row {
+				border: none;
+				margin: 0 !important;
+				
+				.fc-day-header {
+					border-color: $border-colour;
+					height: $element-height;
+					vertical-align: middle;
+					
+					@media (max-width: 768px) {
+						height: $element-height-mobile;
+					}
+					
+					> span {
+						@include jeesl-titlebar-title;
+					}
+				}
+			}
 		}
 	}
 	
-	.fc-scroller {
-		min-height: 312px;
+	.fc-body {
+		display: flex;
+		
+		td {
+			border: $border;
+			border-top: none;
+			background: $panel-background;
+		}
+		
+		.fc-scroller {
+			height: auto !important;
+			overflow: hidden !important;
+			
+			.fc-bg td {
+				border: $border;
+				border-color: $soft-grey;
+			}
+			
+			.fc-content-skeleton .fc-event {
+				background: $status-bar-background-gradient;
+				border: none;
+				font-size: 1em;
+				line-height: normal;
+				padding: $half-spacing;
+				
+				.fc-content {
+					display: -webkit-box;
+					line-clamp: 2;
+					overflow: hidden;	
+					text-overflow: ellipsis;
+					white-space: normal;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 2;
+				}
+			}
+		}
 	}
 }
 

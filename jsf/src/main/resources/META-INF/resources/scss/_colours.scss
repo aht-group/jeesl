@@ -1,4 +1,5 @@
 $white-0: hsla(0,0%,100%,0);
+$white-70: hsla(0,0%,100%,.7);
 $white-80: hsla(0,0%,100%,.8);
 $white-100: hsla(0,0%,100%,1);
 
@@ -40,6 +41,7 @@ $panel-header-gradient: linear-gradient(to bottom, $bright-grey, $soft-grey);
 
 $overlay-shadow: 0 3px 3px $black-40;
 $highlight-shadow: 0 -1px inset $white-80;
+$text-shadow: 0 1px 0 $white-70;
 
 $highlight-colour: $bright-colour;
 

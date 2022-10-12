@@ -324,9 +324,12 @@ html, body, .ui-widget {
     .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button {
       height: 84px;
       transition-duration: .4s; }
-      .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-summary {
+      .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-info {
+        display: inline-block;
+        padding-right: 6px; }
+      .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-summary .jeesl-menu-bar-button-info {
         display: inline-block; }
-      .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-selected-items {
+      .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-summary .jeesl-menu-bar-button-selected-items {
         display: none; }
     .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list:before, .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list:after {
       content: '';
@@ -433,9 +436,12 @@ html, body, .ui-widget {
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button {
       height: 84px;
       transition-duration: .4s; }
-      .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-summary {
+      .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-info {
+        display: inline-block;
+        padding-right: 6px; }
+      .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-summary .jeesl-menu-bar-button-info {
         display: inline-block; }
-      .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-selected-items {
+      .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-summary .jeesl-menu-bar-button-selected-items {
         display: none; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list:before, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list:after {
       content: '';
@@ -467,9 +473,7 @@ html, body, .ui-widget {
         left: 10px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-label {
       font-size: 1.1rem;
-      height: 100%;
-      min-width: 84px;
-      text-align: center; }
+      line-height: calc(84px - 2 * 6px); }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list {
       height: 0;
       opacity: 1;
@@ -531,6 +535,7 @@ html, body, .ui-widget {
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item:first-child {
       border-top-width: 2px; }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item:first-child:before {
+        height: 84px;
         visibility: visible; }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list.jeesl-dropdown-list-multi .jeesl-dropdown-item:first-child .jeesl-dropdown-item-label {
         padding: 0; }
@@ -552,12 +557,12 @@ html, body, .ui-widget {
           margin-right: 12px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-dropdown-multiline-item .jeesl-dropdown-item-title {
       font-size: 1.2em;
-      line-height: 19px;
-      height: 19px; }
+      line-height: 15px;
+      height: 15px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-dropdown-multiline-item .jeesl-dropdown-item-content {
       font-size: 1.2em;
-      line-height: 19px;
-      height: 19px; }
+      line-height: 15px;
+      height: 15px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup {
       padding: 5px;
       pointer-events: all; }
@@ -677,12 +682,12 @@ html, body, .ui-widget {
       letter-spacing: -.5px;
       padding: 5px 10px; }
     .jeesl-panel .ui-panel-titlebar .ui-panel-actions img {
-      height: calc(84px - 2 * 6px);
-      padding: 0 6px; }
+      height: calc(84px - 2 * 10px);
+      padding: 0 10px; }
     .jeesl-panel .ui-panel-titlebar .ui-panel-actions > img {
-      margin: 6px 0; }
+      margin: 10px 0; }
     .jeesl-panel .ui-panel-titlebar .ui-panel-actions .pf-action-icon, .jeesl-panel .ui-panel-titlebar .ui-panel-actions .jeesl-action-icon {
-      padding: 6px 0; }
+      padding: 10px 0; }
       .jeesl-panel .ui-panel-titlebar .ui-panel-actions .pf-action-icon:before, .jeesl-panel .ui-panel-titlebar .ui-panel-actions .jeesl-action-icon:before {
         border-left: 1px solid #ababab; }
   .jeesl-panel:not(.html-container-panel) .ui-panel-content {
@@ -711,12 +716,12 @@ html, body, .ui-widget {
       letter-spacing: -.5px;
       padding: 5px 10px; }
     .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
-      height: calc(84px - 2 * 6px);
-      padding: 0 6px; }
+      height: calc(84px - 2 * 10px);
+      padding: 0 10px; }
     .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
-      margin: 6px 0; }
+      margin: 10px 0; }
     .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
-      padding: 6px 0; }
+      padding: 10px 0; }
       .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
         border-left: 1px solid #ababab; }
   .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
@@ -767,7 +772,7 @@ html, body, .ui-widget {
       padding: 0.5em 0 2px 0;
       width: 100% !important; }
       .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-        padding: 0 10px;
+        padding: 10px;
         width: 100%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * > .ui-inputfield {
           padding-left: 10px; }
@@ -815,18 +820,22 @@ html, body, .ui-widget {
     letter-spacing: -.5px;
     padding: 5px 10px; }
   .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
-    height: calc(84px - 2 * 6px);
-    padding: 0 6px; }
+    height: calc(84px - 2 * 10px);
+    padding: 0 10px; }
   .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
-    margin: 6px 0; }
+    margin: 10px 0; }
   .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
-    padding: 6px 0; }
+    padding: 10px 0; }
     .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
       border-left: 1px solid #ababab; }
-.ui-datatable table thead th, .ui-datatable table tbody tr {
+.ui-datatable table thead th {
   height: 84px; }
-.ui-datatable table thead th .ui-inputfield {
-  min-width: 84px; }
+  .ui-datatable table thead th .ui-inputfield {
+    min-width: 84px; }
+.ui-datatable table tbody td {
+  height: 84px; }
+  .ui-datatable table tbody td .jeesl-icon {
+    height: calc(84px - 2 * 10px); }
 .ui-datatable img {
   height: auto;
   max-height: calc(84px - 2 * 10px); }
@@ -847,7 +856,7 @@ html, body, .ui-widget {
       font-size: 2em; }
     .ui-datatable .ui-paginator .ui-icon:before {
       border-left: 1px solid #ababab;
-      font-size: 2.5em; }
+      font-size: 1.5em; }
   .ui-datatable .ui-paginator .ui-paginator-current, .ui-datatable .ui-paginator .ui-paginator-rpp-options {
     min-height: 84px; }
 
@@ -908,12 +917,12 @@ html, body, .ui-widget {
         letter-spacing: -.5px;
         padding: 5px 10px; }
       .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions img {
-        height: calc(84px - 2 * 6px);
-        padding: 0 6px; }
+        height: calc(84px - 2 * 10px);
+        padding: 0 10px; }
       .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions > img {
-        margin: 6px 0; }
+        margin: 10px 0; }
       .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions .jeesl-action-icon {
-        padding: 6px 0; }
+        padding: 10px 0; }
         .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-titlebar .ui-panel-actions .jeesl-action-icon:before {
           border-left: 1px solid #ababab; }
     .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel):not(.html-container-panel) .ui-panel-content {
@@ -942,12 +951,12 @@ html, body, .ui-widget {
         letter-spacing: -.5px;
         padding: 5px 10px; }
       .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
-        height: calc(84px - 2 * 6px);
-        padding: 0 6px; }
+        height: calc(84px - 2 * 10px);
+        padding: 0 10px; }
       .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
-        margin: 6px 0; }
+        margin: 10px 0; }
       .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
-        padding: 6px 0; }
+        padding: 10px 0; }
         .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
           border-left: 1px solid #ababab; }
     .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
@@ -998,7 +1007,7 @@ html, body, .ui-widget {
         padding: 0.5em 0 2px 0;
         width: 100% !important; }
         .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
-          padding: 0 10px;
+          padding: 10px;
           width: 100%; }
           .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * > .ui-inputfield {
             padding-left: 10px; }
@@ -1019,6 +1028,8 @@ html, body, .ui-widget {
     .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) .ui-panel-footer {
       margin: 5px 0 0;
       border-width: 4px 0 0; }
+  .jeesl-content .jeesl-content-container .ui-panel.html-container-panel {
+    padding: 0; }
   .jeesl-content .jeesl-content-container .ui-panel.jeesl-map .ui-panel-content {
     margin: 0; }
 .jeesl-content .jeesl-content-container .jeesl-grid {
@@ -1045,12 +1056,12 @@ html, body, .ui-widget {
   .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions {
     pointer-events: all; }
     .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions img {
-      height: calc(84px - 2 * 6px);
-      padding: 0 6px; }
+      height: calc(84px - 2 * 10px);
+      padding: 0 10px; }
     .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions > img {
-      margin: 6px 0; }
+      margin: 10px 0; }
     .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions .pf-action-icon, .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions .jeesl-action-icon {
-      padding: 6px 0; }
+      padding: 10px 0; }
       .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions .pf-action-icon:before, .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-titlebar-actions .jeesl-action-icon:before {
         border-left: 1px solid #ababab; }
 .ui-dialog.jeesl-dialog-1 {
@@ -1163,17 +1174,38 @@ html, body, .ui-widget {
           color: white;
           text-shadow: none; }
 
+.fc .fc-toolbar .fc-left {
+  order: 2; }
+.fc .fc-toolbar .fc-center {
+  margin: 0 0 15px;
+  order: 1;
+  width: 100%; }
+.fc .fc-button {
+  border-radius: 3px;
+  height: 84px;
+  min-width: 84px; }
 .fc .fc-head {
   border-radius: 3px 3px 0 0;
   border-width: 0;
   margin: 0 0 4px 0;
-  min-height: 84px; }
+  min-height: 84px;
+  border-width: 1px 1px 0; }
   .fc .fc-head:after {
     display: block; }
-  .fc .fc-head .fc-day-header > span {
-    font-size: 1.4em;
-    letter-spacing: -.5px;
-    padding: 5px 10px; }
+  .fc .fc-head .fc-head-container .fc-row .fc-day-header {
+    height: 84px; }
+    .fc .fc-head .fc-head-container .fc-row .fc-day-header > span {
+      font-size: 1.4em;
+      letter-spacing: -.5px;
+      padding: 5px 10px; }
+.fc .fc-body {
+  display: flex; }
+  .fc .fc-body td {
+    border: 1px solid #ababab;
+    border-top: none;
+    background: #dedede; }
+  .fc .fc-body .fc-scroller .fc-content-skeleton thead {
+    font-size: .8em; }
 
 .ui-panelgrid .ui-panelgrid-cell > * {
   min-height: 84px; }
