@@ -24,7 +24,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
-import org.openfuxml.renderer.text.OfxTextSilentRenderer;
+import org.openfuxml.renderer.text.OfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -197,7 +197,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 			data.add(cell);
 		}
 		
-		OfxTextSilentRenderer.table(XmlTableFactory.build(c.getSimpleName(),header,data),os);
+		OfxTextRenderer.silent(XmlTableFactory.build(c.getSimpleName(),header,data),os);
 	}
 	
 	public void ofxLoops(OutputStream os)
@@ -225,7 +225,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 			data.add(cell);
 		}
 		
-		OfxTextSilentRenderer.table(XmlTableFactory.build(c.getSimpleName(),header,data),os);
+		OfxTextRenderer.silent(XmlTableFactory.build(c.getSimpleName(),header,data),os);
 	}
 	
 	public void ofxCount(OutputStream os)
@@ -246,6 +246,6 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 			data.add(cell);
 		}
 		
-		OfxTextSilentRenderer.table(XmlTableFactory.build(c.getSimpleName(),header,data),os);
+		OfxTextRenderer.silent(XmlTableFactory.build(c.getSimpleName(),header,data),os);
 	}
 }

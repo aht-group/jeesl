@@ -5,6 +5,7 @@ import org.jeesl.factory.ejb.system.job.EjbJobCacheFactory;
 import org.jeesl.factory.ejb.system.job.EjbJobFactory;
 import org.jeesl.factory.ejb.system.job.EjbJobRobotFactory;
 import org.jeesl.factory.ejb.system.job.EjbJobTemplateFactory;
+import org.jeesl.factory.ejb.system.job.mnt.EjbJobMaintenanceInfoFactory;
 import org.jeesl.interfaces.model.system.job.JeeslJob;
 import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
 import org.jeesl.interfaces.model.system.job.JeeslJobPriority;
@@ -53,10 +54,13 @@ public class JobFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 	private final Class<STATUS> cStatus; public Class<STATUS> getClassStatus(){return cStatus;}
 	private final Class<ROBOT> cRobot; public Class<ROBOT> getClassRobot(){return cRobot;}
 	private final Class<CACHE> cCache; public Class<CACHE> getClassCache(){return cCache;}
-	
+	private final Class<MNT> cMaintenance; public Class<MNT> getClassMaintenance() {return cMaintenance;}
+	private final Class<MNI> cMaintenanceInfo; public Class<MNI> getClassMaintenanceInfo() {return cMaintenanceInfo;}
+
 	public JobFactoryBuilder(final Class<L> cL, final Class<D> cD,
 			final Class<TEMPLATE> cTemplate, final Class<CATEGORY> cCategory, final Class<TYPE> cType, final Class<EXPIRE> cExpire,
-			final Class<JOB> cJob, final Class<PRIORITY> cPriority, final Class<STATUS> cStatus, final Class<ROBOT> cRobot, final Class<CACHE> cCache)
+			final Class<JOB> cJob, final Class<PRIORITY> cPriority, final Class<STATUS> cStatus, final Class<ROBOT> cRobot, final Class<CACHE> cCache,
+			final Class<MNT> cMaintenance, final Class<MNI> cMaintenanceInfo)
 	{
 		super(cL,cD);
 		this.cTemplate = cTemplate;
@@ -68,6 +72,8 @@ public class JobFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 		this.cStatus=cStatus;
 		this.cRobot = cRobot;
 		this.cCache = cCache;
+		this.cMaintenance = cMaintenance;
+		this.cMaintenanceInfo = cMaintenanceInfo;
 	}
 		
 	public EjbJobTemplateFactory<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,PRIORITY> template() {return new EjbJobTemplateFactory<>(cTemplate,cCategory,cType,cExpire,cPriority);}
@@ -75,4 +81,5 @@ public class JobFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 	
 	public EjbJobRobotFactory<ROBOT> robot(){return new EjbJobRobotFactory<>(cRobot);}
 	public EjbJobCacheFactory<TEMPLATE,CACHE> cache() {return new EjbJobCacheFactory<>(cCache);}
+	public EjbJobMaintenanceInfoFactory<STATUS,MNT,MNI> ejbMaintenanceInfo() {return new EjbJobMaintenanceInfoFactory<>(cStatus,cMaintenance,cMaintenanceInfo);}
 }

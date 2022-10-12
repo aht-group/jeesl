@@ -16,10 +16,10 @@
 		<j:slot id="sStorages" width="9">
 			<h:form id="fStorages">
 				<p:dataTable var="s" value="#{cc.attrs.bean.storages}" draggableRows="true"
-					selection="#{cc.attrs.bean.storage}" selectionMode="single" rowKey="#{s.id}">
+							selection="#{cc.attrs.bean.storage}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoFileStorages}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addStorage()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addStorage()}" update=":#{cc.id}:grid"/>
 							<jp:icon value="#{cc.attrs.bean.typeUnknown}" listener="#{cc.attrs.bean.fixType()}" update=":#{cc.id}:sStorages"/>
 						</j:dtHeader>
 					</f:facet>
@@ -49,9 +49,9 @@
 			<h:form id="fStorage">
 				<p:panel header="#{msg.jeeslIoFileStorage}" rendered="#{not empty cc.attrs.bean.storage}" styleClass="jeesl-panel">
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetStorage()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.storage.id gt 0}" tooltip="#{msg.ttDelete}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.resetStorage()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.storage.id gt 0}" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 					

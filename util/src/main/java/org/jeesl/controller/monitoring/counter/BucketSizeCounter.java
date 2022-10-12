@@ -11,7 +11,7 @@ import org.jeesl.factory.xml.domain.finance.XmlCounterFactory;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
-import org.openfuxml.renderer.text.OfxTextSilentRenderer;
+import org.openfuxml.renderer.text.OfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -91,7 +91,7 @@ public class BucketSizeCounter
 			data.add(numbers);
 		}
 		
-		OfxTextSilentRenderer.table(XmlTableFactory.build(category,header, data),os);
+		OfxTextRenderer.silent(XmlTableFactory.build(category,header, data),os);
 	}
 	
 	public void jira(OutputStream os)

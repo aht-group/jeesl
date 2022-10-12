@@ -2,50 +2,26 @@ package org.jeesl.web.controller.system.job;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.api.facade.system.JeeslJobFacade;
-import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
-import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
-import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
+import org.jeesl.factory.ejb.system.job.mnt.EjbJobMaintenanceInfoFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.io.db.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpFile;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpStatus;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
-import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
-import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.model.system.job.JeeslJob;
-import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
-import org.jeesl.interfaces.model.system.job.JeeslJobPriority;
-import org.jeesl.interfaces.model.system.job.JeeslJobRobot;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
-import org.jeesl.interfaces.model.system.job.JeeslJobTemplate;
-import org.jeesl.interfaces.model.system.job.JeeslJobType;
-import org.jeesl.interfaces.model.system.job.cache.JeeslJobCache;
-import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
-import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
-import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedbackType;
 import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenance;
 import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
-import org.jeesl.jsf.handler.sb.SbDateHandler;
-import org.jeesl.util.comparator.ejb.RecordComparator;
 import org.jeesl.web.controller.AbstractJeeslWebController;
-import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.DateUtil;
+import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslSystemJobMaintenanceController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 													STATUS extends JeeslJobStatus<L,D,STATUS,?>,
@@ -61,29 +37,88 @@ public class JeeslSystemJobMaintenanceController <L extends JeeslLang, D extends
 	protected JeeslJobFacade<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?,?> fJob;
 	protected final JobFactoryBuilder<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?> fbJob;
 	
-	private List<MNT> maintenances; public List<MNT> getMaintenances(){return maintenances;}
+	private final EjbJobMaintenanceInfoFactory<STATUS,MNT,MNI> efInfo;
+	
+	private final List<STATUS> stati; public List<STATUS> getStati(){return stati;}
+	private final List<MNT> maintenances; public List<MNT> getMaintenances(){return maintenances;}
+	private final List<MNI> infos; public List<MNI> getInfos(){return infos;}
 	
 	private MNT maintenance; public MNT getMaintenance() {return maintenance;} public void setMaintenance(MNT maintenance) {this.maintenance = maintenance;}
+	private MNI info; public MNI getInfo() {return info;} public void setInfo(MNI info) {this.info = info;}
 
 	public JeeslSystemJobMaintenanceController(final JobFactoryBuilder<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?> fbJob)
 	{
 		super(fbJob.getClassL(),fbJob.getClassD());
 		this.fbJob=fbJob;
 		
+		efInfo = fbJob.ejbMaintenanceInfo();
+		
+		stati = new ArrayList<>();
 		maintenances = new ArrayList<>();
+		infos = new ArrayList<>();
 	}
 	
 	public void postConstructJobMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslJobFacade<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?,?> fJob)
 	{
+		super.postConstructWebController(lp,bMessage);
 		this.fJob=fJob;
 	
-		reloadHosts();
+		stati.addAll(fJob.all(fbJob.getClassStatus()));
+		maintenances.addAll(fJob.all(fbJob.getClassMaintenance()));
+		
+		if(debugOnInfo)
+		{
+			logger.info(AbstractLogMessage.reloaded(fbJob.getClassStatus(), stati));
+			logger.info(AbstractLogMessage.reloaded(fbJob.getClassMaintenance(), maintenances));
+		}
 	}
 	
-	protected void reloadHosts()
+	private void reset(boolean rInfos, boolean rInfo)
 	{
-		maintenances.clear();
-//		maintenances.addAll(fJob.all(fbJob.getClass));
+		if(rInfos) {infos.clear();}
+		if(rInfo) {info=null;}
 	}
 	
+	public void selectMaintenance()
+	{
+		this.reset(true,true);
+		this.reloadInfos();
+	}
+	
+	protected void reloadInfos()
+	{
+		this.reset(true,false);
+		infos.addAll(fJob.allForParent(fbJob.getClassMaintenanceInfo(),maintenance));
+	}
+	
+	public void addInfo()
+	{
+		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbJob.getClassMaintenanceInfo()));}
+		this.reset(false,true);
+		info = efInfo.build(maintenance,null);
+		info.setDescription(efDescription.createEmpty(lp.getLocales()));
+	}
+	
+	public void selectInfo()
+	{
+		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(info));}
+		info = fJob.find(fbJob.getClassMaintenanceInfo(),info);
+		info = efDescription.persistMissingLangs(fJob,lp.getLocales(),info);
+	}
+	
+	public void saveInfo() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(info));}
+		efInfo.converter(fJob,info);
+		info = fJob.save(info);
+		this.reloadInfos();
+	}
+	
+	public void deleteInfo() throws JeeslConstraintViolationException
+	{
+		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(info));}
+		fJob.rm(info);
+		this.reset(false,true);
+		this.reloadInfos();
+	}
 }
