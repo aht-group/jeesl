@@ -21,5 +21,5 @@ public interface JeeslJobStatus <L extends JeeslLang, D extends JeeslDescription
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,
 					JeeslStatus<L,D,S>,JeeslStatusFixedCode
 {
-	public static enum Code{queue,timeout,working,completed,failed,obsolete};
+	public static enum Code{queue,deferred,constraint,timeout,working,completed,failed,obsolete};
 }

@@ -62,6 +62,9 @@
 					<p:messages showDetail="true" autoUpdate="true" closable="true" />
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						
+						<jtp:label entity="IoAttributeCriteria" code="id"/>
+						<h:outputText value="#{cc.attrs.bean.criteria.id}"/>
+						
 						<p:outputLabel value="#{msg.jeeslCategory}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.criteria.category2}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.bean.sbhCat.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
@@ -106,14 +109,18 @@
 			   	</p:dataTable>
 			</h:form>
 			<h:form id="fOption">
-				<p:panel id="pView" header="#{msg.jeeslIoAttributeOption}" rendered="#{not empty cc.attrs.bean.option}" styleClass="jeeslPanel">
+				<p:panel id="pView" rendered="#{not empty cc.attrs.bean.option}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoAttributeOption"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetOption()}" update=":#{cc.id}:sCriteria" tooltip="#{msg.jeeslTtCancel}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveOption()}" update=":#{cc.id}:sCriteria" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteOption()}" update=":#{cc.id}:sCriteria" rendered="#{cc.attrs.bean.option.id gt 0}" tooltip="#{msg.ttDelete}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.resetOption()}" update=":#{cc.id}:sCriteria"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveOption()}" update=":#{cc.id}:sCriteria" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteOption()}" update=":#{cc.id}:sCriteria" rendered="#{cc.attrs.bean.option.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-						<p:outputLabel value="#{msg.jeeslCode}"/>
+						<jtp:label entity="IoAttributeOption" code="id"/>
+						<h:outputText value="#{cc.attrs.bean.option.id}"/>
+						
+						<jtp:label entity="IoAttributeOption" code="code"/>
 						<p:inputText  value="#{cc.attrs.bean.option.code}" autocomplete="off"/>
 					</p:panelGrid>
 					<aht:tabTranslationEditor value="#{cc.attrs.bean.option}" withDescription="true" keys="#{cc.attrs.localeKeys}" />

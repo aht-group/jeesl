@@ -98,4 +98,14 @@ public class EjbAttributeDataFactory<CRITERIA extends JeeslAttributeCriteria<?,?
 		
 		return map;
 	}
+	
+	public Map<CRITERIA,DATA> toMapCriteriaData(List<CRITERIA> criterias, List<DATA> datas)
+	{
+		Map<CRITERIA,DATA> map = new HashMap<>();
+		for(DATA d : datas)
+		{
+			if(criterias.contains(d.getCriteria())){map.put(d.getCriteria(),d);}
+		}
+		return map;
+	}
 }
