@@ -2,6 +2,8 @@ package org.jeesl.web.controller.system.job;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -17,6 +19,7 @@ import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.util.comparator.ejb.system.job.JobMaintenanceInfoComparator;
 import org.jeesl.web.controller.AbstractJeeslWebController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +40,8 @@ public class JeeslSystemJobMaintenanceController <L extends JeeslLang, D extends
 	protected JeeslJobFacade<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?,?> fJob;
 	protected final JobFactoryBuilder<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?> fbJob;
 	
+	private final Comparator<MNI> cpInfo;
+	
 	private final EjbJobMaintenanceInfoFactory<STATUS,MNT,MNI> efInfo;
 	
 	private final List<STATUS> stati; public List<STATUS> getStati(){return stati;}
@@ -51,6 +56,7 @@ public class JeeslSystemJobMaintenanceController <L extends JeeslLang, D extends
 		super(fbJob.getClassL(),fbJob.getClassD());
 		this.fbJob=fbJob;
 		
+		cpInfo = fbJob.comparatorInfo(JobMaintenanceInfoComparator.Type.statusPosition);
 		efInfo = fbJob.ejbMaintenanceInfo();
 		
 		stati = new ArrayList<>();
@@ -64,7 +70,7 @@ public class JeeslSystemJobMaintenanceController <L extends JeeslLang, D extends
 		this.fJob=fJob;
 	
 		stati.addAll(fJob.all(fbJob.getClassStatus()));
-		maintenances.addAll(fJob.all(fbJob.getClassMaintenance()));
+		maintenances.addAll(fJob.allOrderedPosition(fbJob.getClassMaintenance()));
 		
 		if(debugOnInfo)
 		{
@@ -89,6 +95,7 @@ public class JeeslSystemJobMaintenanceController <L extends JeeslLang, D extends
 	{
 		this.reset(true,false);
 		infos.addAll(fJob.allForParent(fbJob.getClassMaintenanceInfo(),maintenance));
+		Collections.sort(infos,cpInfo);
 	}
 	
 	public void addInfo()

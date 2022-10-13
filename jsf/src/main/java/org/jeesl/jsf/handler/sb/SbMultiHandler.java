@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.sb;
+package org.jeesl.jsf.handler.sb;
 
 import java.io.Serializable;
 import java.util.ArrayList;

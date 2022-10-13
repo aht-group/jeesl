@@ -56,9 +56,6 @@ public class ConstraintFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	}
 
 
-	public EjbConstraintAlgorithmFactory<L,D,ALGCAT,ALGO> algorithm()
-	{
-		return new EjbConstraintAlgorithmFactory<L,D,ALGCAT,ALGO>(cAlgorithm);
-	}
+	public EjbConstraintAlgorithmFactory<L,D,ALGCAT,ALGO> algorithm() {return new EjbConstraintAlgorithmFactory<>(cAlgorithm);}
 
 }

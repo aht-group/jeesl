@@ -152,10 +152,7 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	public TxtSurveyQuestionFactory<L,D,QUESTION,OPTION> txtQuestion(String localeCode) {return new TxtSurveyQuestionFactory<>(localeCode);}
 	public TxtSurveyAnswerFactory<L,D,ANSWER,MATRIX,OPTION> txtAnswer() {return new TxtSurveyAnswerFactory<>();}
 	
-	public TxtOptionFactory<L,D,OPTION> txtOption(String localeCode)
-	{
-		return new TxtOptionFactory<L,D,OPTION>(localeCode);
-	}
+	public TxtOptionFactory<L,D,OPTION> txtOption(String localeCode) {return new TxtOptionFactory<L,D,OPTION>(localeCode);}
 	
 	public EjbSurveyAnswerFilter<SECTION,QUESTION,ANSWER> ejbFilterAnswer() {return new EjbSurveyAnswerFilter<>();}
 	

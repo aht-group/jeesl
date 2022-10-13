@@ -165,7 +165,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 			surveyData = efData.build(survey,correlation);
 			if(jogger!=null) {jogger.milestone(SurveyHandler.class.getSimpleName(),"efData.build(..)");}
 		}
-		jogger.ofxMilestones(System.out);
+//		jogger.ofxMilestones(System.out);
 		
 		template = survey.getTemplate();
 		condition.init(template);

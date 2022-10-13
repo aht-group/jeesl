@@ -1,5 +1,7 @@
 package org.jeesl.factory.builder.system;
 
+import java.util.Comparator;
+
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.system.job.EjbJobCacheFactory;
 import org.jeesl.factory.ejb.system.job.EjbJobFactory;
@@ -22,6 +24,7 @@ import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
+import org.jeesl.util.comparator.ejb.system.job.JobMaintenanceInfoComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,4 +85,6 @@ public class JobFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 	public EjbJobRobotFactory<ROBOT> robot(){return new EjbJobRobotFactory<>(cRobot);}
 	public EjbJobCacheFactory<TEMPLATE,CACHE> cache() {return new EjbJobCacheFactory<>(cCache);}
 	public EjbJobMaintenanceInfoFactory<STATUS,MNT,MNI> ejbMaintenanceInfo() {return new EjbJobMaintenanceInfoFactory<>(cStatus,cMaintenance,cMaintenanceInfo);}
+	
+	public Comparator<MNI> comparatorInfo(JobMaintenanceInfoComparator.Type type) {return (new JobMaintenanceInfoComparator<STATUS,MNI>()).factory(type);}
 }

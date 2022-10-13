@@ -1,8 +1,9 @@
-package org.jeesl.web.mbean.prototype.io.attribute;
+package org.jeesl.web.controller.io.attribute;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.bean.JeeslAttributeBean;
@@ -12,7 +13,10 @@ import org.jeesl.api.facade.io.JeeslIoAttributeFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
+import org.jeesl.factory.ejb.io.attribute.EjbAttributeCriteriaFactory;
+import org.jeesl.factory.ejb.io.attribute.EjbAttributeOptionFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeContainer;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
@@ -27,58 +31,74 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.util.comparator.ejb.system.io.attribute.AttributeCriteriaComparator;
+import org.jeesl.web.controller.AbstractJeeslWebController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-												R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
-												CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-												CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-												CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,CATEGORY,TYPE,OPTION>,
-												TYPE extends JeeslStatus<L,D,TYPE>,
-												OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
-												SET extends JeeslAttributeSet<L,D,R,CAT,CATEGORY,ITEM>,
-												ITEM extends JeeslAttributeItem<CRITERIA,SET>,
-												CONTAINER extends JeeslAttributeContainer<SET,DATA>,
-												DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
-					extends AbstractAdminIoAttributeBean<L,D,LOC,R,RREF,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA>
+public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+						R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
+						CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
+						CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+						CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,CATEGORY,TYPE,OPTION>,
+						TYPE extends JeeslStatus<L,D,TYPE>,
+						OPTION extends JeeslAttributeOption<L,D,CRITERIA>>
+					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractAdminIoAttributePoolBean.class);
-		
+	final static Logger logger = LoggerFactory.getLogger(JeeslAttributePoolController.class);
+	
+	protected JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute;
+	protected JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute;
+	
+	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute;
+	
+	protected final EjbAttributeCriteriaFactory<L,D,R,CAT,CATEGORY,CRITERIA,TYPE> efCriteria;
+	protected final EjbAttributeOptionFactory<CRITERIA,OPTION> efOption;
+	
+	protected final SbMultiHandler<CAT> sbhCat; public SbMultiHandler<CAT> getSbhCat() {return sbhCat;}
+	
 	private final List<CRITERIA> criterias; public List<CRITERIA> getCriterias() {return criterias;}
 	private List<OPTION> options; public List<OPTION> getOptions() {return options;}
 
 	private CRITERIA criteria; public CRITERIA getCriteria() {return criteria;} public void setCriteria(CRITERIA criteria) {this.criteria = criteria;}
 	private OPTION option; public OPTION getOption() {return option;} public void setOption(OPTION option) {this.option = option;}
 	
-	public AbstractAdminIoAttributePoolBean(IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
+	protected final Comparator<CRITERIA> cpCriteria;
+	protected R realm;
+	protected RREF rref;
+	protected long refId;
+	
+	public JeeslAttributePoolController(IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute)
 	{
-		super(fbAttribute);
+		super(fbAttribute.getClassL(),fbAttribute.getClassD());
+		this.fbAttribute=fbAttribute;
+		
+		efCriteria = fbAttribute.ejbCriteria();
+		efOption = fbAttribute.ejbOption();
+
+		cpCriteria = fbAttribute.cpCriteria(AttributeCriteriaComparator.Type.position);
+		
+		sbhCat = new SbMultiHandler<CAT>(fbAttribute.getClassCat(),this);
+		
 		criterias = new ArrayList<CRITERIA>();
 	}
 	
-	protected void postConstructAttributePool(R realm,
-								JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-								JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
-								JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
+	public void postConstruct(JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute,
+								JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute,
+								JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, R realm)
 	{
-		super.postConstructAttribute(realm,bTranslation,bMessage,bAttribute,fAttribute);
+		super.postConstructWebController(lp,bMessage);
+		this.realm=realm;
+		this.fAttribute=fAttribute;
+		this.bAttribute=bAttribute;
 	}
 	
-//	protected void initAttributePool3(JeeslTranslationBean<L,D,LOC> bTranslation,
-//									JeeslFacesMessageBean bMessage,
-//									JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
-//									JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
-//	{
-//		super.initAttribute(bTranslation,bMessage,bAttribute,fAttribute);
-//		reloadCriterias();
-//	}
-	
-	protected void updateRealm(RREF rref)
+	public void updateRealmReference(RREF rref)
 	{
 		this.reset(true,true,true);
 		this.rref=rref;
@@ -132,8 +152,8 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 		CAT c = null; if(!sbhCat.getSelected().isEmpty()) {c = sbhCat.getSelected().get(0);}
 		TYPE t = null; if(bAttribute!=null && bAttribute.getTypes()!=null && !bAttribute.getTypes().isEmpty()) {t = bAttribute.getTypes().get(0);}
 		criteria = efCriteria.build(realm,rref,c,t);
-		criteria.setName(efLang.createEmpty(localeCodes));
-		criteria.setDescription(efDescription.createEmpty(localeCodes));
+		criteria.setName(efLang.createEmpty(lp.getLocales()));
+		criteria.setDescription(efDescription.createEmpty(lp.getLocales()));
 		reset(false,false,true);
 	}
 	
@@ -150,8 +170,8 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 	public void selectCriteria()
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(criteria));}
-		criteria = efLang.persistMissingLangs(fAttribute,localeCodes,criteria);
-		criteria = efDescription.persistMissingLangs(fAttribute,localeCodes,criteria);
+		criteria = efLang.persistMissingLangs(fAttribute,lp.getLocales(),criteria);
+		criteria = efDescription.persistMissingLangs(fAttribute,lp.getLocales(),criteria);
 		reloadOptions();
 		reset(false,false,true);
 	}
@@ -178,15 +198,15 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbAttribute.getClassOption()));}
 		option = efOption.build(criteria,options);
-		option.setName(efLang.createEmpty(localeCodes));
-		option.setDescription(efDescription.createEmpty(localeCodes));
+		option.setName(efLang.createEmpty(lp.getLocales()));
+		option.setDescription(efDescription.createEmpty(lp.getLocales()));
 	}
 	
 	public void selectOption()
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(criteria));}
-		option = efLang.persistMissingLangs(fAttribute,localeCodes,option);
-		option = efDescription.persistMissingLangs(fAttribute,localeCodes,option);
+		option = efLang.persistMissingLangs(fAttribute,lp.getLocales(),option);
+		option = efDescription.persistMissingLangs(fAttribute,lp.getLocales(),option);
 	}
 	
 	public void saveOption() throws JeeslConstraintViolationException, JeeslLockingException

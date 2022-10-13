@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
-import org.jeesl.controller.handler.sb.SbMultiHandler;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
@@ -25,6 +24,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

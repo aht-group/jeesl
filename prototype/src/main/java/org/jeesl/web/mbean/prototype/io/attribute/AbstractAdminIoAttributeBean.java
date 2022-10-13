@@ -7,7 +7,6 @@ import org.jeesl.api.bean.JeeslAttributeBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoAttributeFacade;
-import org.jeesl.controller.handler.sb.SbMultiHandler;
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
 import org.jeesl.factory.ejb.io.attribute.EjbAttributeCriteriaFactory;
 import org.jeesl.factory.ejb.io.attribute.EjbAttributeItemFactory;
@@ -27,6 +26,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.util.comparator.ejb.system.io.attribute.AttributeCriteriaComparator;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
@@ -54,7 +54,6 @@ public abstract class AbstractAdminIoAttributeBean <L extends JeeslLang, D exten
 	
 	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
 	
-//	protected final SbMultiHandler<CATEGORY> sbhCategory; public SbMultiHandler<CATEGORY> getSbhCategory() {return sbhCategory;}
 	protected final SbMultiHandler<CAT> sbhCat; public SbMultiHandler<CAT> getSbhCat() {return sbhCat;}
 	
 	protected final EjbAttributeCriteriaFactory<L,D,R,CAT,CATEGORY,CRITERIA,TYPE> efCriteria;
@@ -78,7 +77,7 @@ public abstract class AbstractAdminIoAttributeBean <L extends JeeslLang, D exten
 		efSet = fbAttribute.ejbSet();
 		efItem = fbAttribute.ejbItem();
 		
-		cpCriteria = (new AttributeCriteriaComparator<CAT,CATEGORY,CRITERIA>()).factory(AttributeCriteriaComparator.Type.position);
+		cpCriteria = fbAttribute.cpCriteria(AttributeCriteriaComparator.Type.position);
 		
 //		sbhCategory = new SbMultiHandler<CATEGORY>(fbAttribute.getClassCategory(),this);
 		sbhCat = new SbMultiHandler<CAT>(fbAttribute.getClassCat(),this);

@@ -17,6 +17,8 @@ public class TxtOptionFactory <L extends JeeslLang, D extends JeeslDescription, 
 		this.localeCode=localeCode;
 	}
 	
+//	publi
+	
 	public String labels (List<OPTION> list)
 	{
 		if(list==null || list.isEmpty()){return null;}
@@ -24,4 +26,5 @@ public class TxtOptionFactory <L extends JeeslLang, D extends JeeslDescription, 
 		for(OPTION ejb : list){result.add(ejb.getName().get(localeCode).getLang());}
 		return StringUtils.join(result, ", ");
 	}
+	
 }
