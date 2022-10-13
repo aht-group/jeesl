@@ -8,8 +8,8 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:jp="http://jsf.jeesl.org/prototype"
   	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
->
+	xmlns:aup="http://ahtutils.sourceforge.net/prototype">
+	
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
 	<c:set var="counter"  value="#{not empty counter ? counter : false}" />
 	<c:set var="headerIcons"  value="#{not empty headerIcons ? headerIcons : false}" />
@@ -17,16 +17,17 @@
 
 	<jp:sbItem orientation="right" childs="#{handler.list}" styleClass="jeesl-menu-bar-dropdown" multi="true" rendered="#{rendered}">
 		<f:facet name="label">
-			<jtp:symbolizer rendered="#{not empty icon}" value="#{icon}" styleClass="jeesl-menu-bar-button-icon" height="12"/>
-			<h:outputText value="#{label}" rendered="#{not empty label}" styleClass="jeesl-menu-bar-button-label"/>
+			<jtp:symbolizer rendered="#{not empty icon}" value="#{icon}" styleClass="jeesl-menu-bar-button-icon"/>
+			<h:outputText rendered="#{not empty label}" value="#{label}" styleClass="jeesl-menu-bar-button-label"/>
 			<h:outputText rendered="#{counter}" value="(#{fn:length(handler.selected)}/#{fn:length(handler.list)})" styleClass="jeesl-menu-bar-button-info"/>
-			<h:panelGroup id="summary" styleClass="jeesl-menu-bar-button-summary">(#{fn:length(handler.selected)}/#{fn:length(handler.list)})</h:panelGroup>
-			<h:panelGroup styleClass="jeesl-menu-bar-button-selected-items">
-				<ui:fragment rendered="#{headerIcons}">
+			
+			<h:panelGroup rendered="#{headerIcons}" id="summary" styleClass="jeesl-menu-bar-button-summary">
+				<h:panelGroup rendered="#{not counter}" styleClass="jeesl-menu-bar-button-info">(#{fn:length(handler.selected)}/#{fn:length(handler.list)})</h:panelGroup>
+				<h:panelGroup styleClass="jeesl-menu-bar-button-selected-items">
 					<ui:repeat var="s" value="#{handler.selected}">
 						<jtp:symbolizer value="#{s}" height="15"/>
 					</ui:repeat>
-				</ui:fragment>
+				</h:panelGroup>
 			</h:panelGroup>
 		</f:facet>
 		

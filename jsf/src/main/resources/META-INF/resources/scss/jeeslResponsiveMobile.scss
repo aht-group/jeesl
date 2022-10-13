@@ -12,6 +12,8 @@ $input-field-icon-height-mobile: 58px;
 
 $separator-thickness-mobile: 3px;
 
+$ls-element-padding-vertical: 10px;
+
 @mixin font-dropdown {
 	font-size: $font-size-interactable;
 	font-weight: $font-weight-bold;
@@ -405,12 +407,19 @@ html, body, .ui-widget {
 			height: $element-height-mobile;
 			transition-duration: .4s;
 			
-			.jeesl-menu-bar-button-summary {
+			.jeesl-menu-bar-button-info {
 				display: inline-block;
+				padding-right: 6px;
 			}
 			
-			.jeesl-menu-bar-button-selected-items {
-				display: none;
+			.jeesl-menu-bar-button-summary {
+				.jeesl-menu-bar-button-info {
+					display: inline-block;
+				}
+				
+				.jeesl-menu-bar-button-selected-items {
+					display: none;
+				}
 			}
 		}
 		
@@ -587,9 +596,11 @@ html, body, .ui-widget {
 			
 				.jeesl-menu-bar-button-label {
 					font-size: $font-size-status;
-					height: 100%;
-					min-width: $element-height-mobile;
-					text-align: center;
+//					height: 100%;
+//					min-width: $element-height-mobile;
+//					text-align: center;
+					
+					line-height: calc(#{$element-height-mobile} - 2 * 6px);
 				}
 			}
 			
@@ -601,6 +612,7 @@ html, body, .ui-widget {
 						border-top-width: 2px;
 						
 						&:before {
+							height: $element-height-mobile;
 							visibility: visible;
 						}
 						
@@ -887,7 +899,7 @@ html, body, .ui-widget {
 				width: 100% !important;
 
 				> * {
-					padding: 0 $regular-spacing;
+					padding: $regular-spacing;
 					width: 100%;
 					
 					> .ui-inputfield {
@@ -1070,18 +1082,26 @@ html, body, .ui-widget {
 	@include jeesl-table-titlebar;
 	
 	table {
-		thead th, tbody tr {
+		thead th {
 			height: $element-height-mobile;
+			
+			.ui-inputfield {
+				min-width: $element-height-mobile;
+			}
 		}
 		
-		thead th .ui-inputfield {
-			min-width: $element-height-mobile;
+		tbody td {
+			height: $element-height-mobile;
+			
+			.jeesl-icon {
+				height: calc(#{$element-height-mobile} - 2 * #{$ls-element-padding-vertical});
+			}
 		}
 	}
 	
 	img {
 		height: auto;
-		max-height: calc(#{$element-height-mobile} - 2 * #{$regular-spacing});
+		max-height: calc(#{$element-height-mobile} - 2 * #{$ls-element-padding-vertical});
 	}
 	
 	.ui-datatable-header {
@@ -1109,7 +1129,7 @@ html, body, .ui-widget {
 			
 			&:before {
 				border-left: $border-width solid $border-colour;
-				font-size: 2.5em;
+				font-size: 1.5em;
 			}
 		}
 		
@@ -1131,6 +1151,10 @@ html, body, .ui-widget {
 		
 		&:not(.html-container-panel) {
 			@include jeesl-panel;
+		}
+		
+		&.html-container-panel {
+			padding: 0;
 		}
 		
 		&.jeesl-map .ui-panel-content {
@@ -1230,11 +1254,53 @@ html, body, .ui-widget {
 	}
 }
 
-.fc .fc-head {
-	@include jeesl-titlebar;
+.fc {
+	.fc-toolbar {
+		.fc-left {
+			order: 2;
+		}
+		
+		.fc-center {
+			margin: 0 0 $wide-spacing;
+			order: 1;
+			width: 100%;
+		}
+	}
 	
-	.fc-day-header > span {
-		@include jeesl-titlebar-title;
+	.fc-button {
+		border-radius: $border-radius;
+		height: $element-height-mobile;
+		min-width: $element-height-mobile;
+	}
+	
+	.fc-head {
+		@include jeesl-titlebar;
+		
+		border-width: $border-width $border-width 0;
+		
+		.fc-head-container .fc-row .fc-day-header {
+			height: $element-height-mobile;
+			
+			> span {
+				@include jeesl-titlebar-title;
+			}
+		}
+	}
+	
+	.fc-body {
+		display: flex;
+		
+		td {
+			border: $border;
+			border-top: none;
+			background: $body-background;
+		}
+		
+		.fc-scroller .fc-content-skeleton {
+			thead {
+				font-size: .8em;
+			}
+		}
 	}
 }
 
