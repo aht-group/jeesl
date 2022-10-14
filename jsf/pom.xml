@@ -235,15 +235,18 @@
 			<artifactId>ofx-core</artifactId>
 		</dependency>
 		
+		<!--2022-10-14 tk Preparing removal 
 		<dependency>
     		<groupId>de.sven-jacobs</groupId>
     		<artifactId>loremipsum</artifactId>
 		</dependency>
+		-->
+		
 		<dependency>
-	      <groupId>org.ehcache</groupId>
-	      <artifactId>ehcache</artifactId>
-	      <version>3.0.0.m3</version>
-	      <scope>test</scope>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>3.0.0.m3</version>
+			<scope>test</scope>
 	    </dependency>
 		
 		<!--2022-09-04 tk Preparing removal 
