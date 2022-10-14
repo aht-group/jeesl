@@ -26,16 +26,15 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslSystemJobMaintenanceController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslJobMaintenanceController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 													STATUS extends JeeslJobStatus<L,D,STATUS,?>,
 													MNT extends JeeslJobMaintenance<L,D,MNT,?>,
-													MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>
->
+													MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>>
 						extends AbstractJeeslWebController<L,D,LOC>
 						implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslSystemJobMaintenanceController.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslJobMaintenanceController.class);
 	
 	protected JeeslJobFacade<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?,?> fJob;
 	protected final JobFactoryBuilder<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?> fbJob;
@@ -51,7 +50,7 @@ public class JeeslSystemJobMaintenanceController <L extends JeeslLang, D extends
 	private MNT maintenance; public MNT getMaintenance() {return maintenance;} public void setMaintenance(MNT maintenance) {this.maintenance = maintenance;}
 	private MNI info; public MNI getInfo() {return info;} public void setInfo(MNI info) {this.info = info;}
 
-	public JeeslSystemJobMaintenanceController(final JobFactoryBuilder<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?> fbJob)
+	public JeeslJobMaintenanceController(final JobFactoryBuilder<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?> fbJob)
 	{
 		super(fbJob.getClassL(),fbJob.getClassD());
 		this.fbJob=fbJob;

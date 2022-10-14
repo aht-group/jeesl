@@ -237,19 +237,6 @@ public class AbstractLogMessage <L extends JeeslLang,D extends JeeslDescription,
 		sb.append(c.getSimpleName());
 		return sb.toString();
 	}
-	 
-	public static <T extends EjbWithId> void infoFilter(boolean debug, Class<?> c, T... entites)
-	{
-		if(debug)
-		{
-			logger.info("Appying Filter in "+c.getSimpleName());
-			for(T t : entites)
-			{
-				logger.info("\t"+t.getClass().getSimpleName()+" "+t.toString());
-			}
-		}
-		 
-	}
 
 	public static <T extends EjbWithId> String saveEntity(T t){return saveEntity(null,t);}
 	public static <USER extends JeeslUser<?>, T extends EjbWithId> String saveEntity(USER user, T t)

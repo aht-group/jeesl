@@ -13,8 +13,8 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
-		<composite:attribute name="bean" required="true"/>
-		<composite:attribute name="localeKeys" required="false" default="#{appTranslationBean.langKeys}"/>
+		<composite:attribute name="ctrl" required="true"/>
+		<composite:attribute name="locales" required="false" default="#{appLabelBean.locales}"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -22,33 +22,35 @@
 			<aht:row>
 				<aht:slot id="sRobots" width="8">
 					<h:form id="fTemplates">
-						<p:dataTable var="t" value="#{cc.attrs.bean.robots}" draggableRows="true"
-							selection="#{cc.attrs.bean.robot}" selectionMode="single" rowKey="#{t.id}">
+						<p:dataTable var="r" value="#{cc.attrs.ctrl.robots}" draggableRows="true"
+							selection="#{cc.attrs.ctrl.robot}" selectionMode="single" rowKey="#{r.id}">
 							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslJobRobots}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addRobot()}" update=":#{cc.id}:sRobot" tooltip="#{msg.ttNew}"/>
+								<j:dtHeader entity="SystemJobRobot" code="listOf">
+									<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addRobot()}" update=":#{cc.id}:sRobot" tooltip="#{msg.ttNew}"/>
 								</j:dtHeader>
 							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderConsumers()}" update="@form"/>
-							<p:ajax event="rowSelect" update=":#{cc.id}:sRobot" listener="#{cc.attrs.bean.selectRobot()}"/>
-							
-							<p:column headerText="#{msg.Name}"><h:outputText value="#{t.name[userBean.localeCode].lang}"/></p:column>
+							<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderConsumers()}" update="@form"/>
+							<p:ajax event="rowSelect" update=":#{cc.id}:sRobot" listener="#{cc.attrs.ctrl.selectRobot()}"/>
+							<p:column>
+								<f:facet name="header"><jtp:label entity="SystemJobRobot" code="name"/></f:facet>
+								<h:outputText value="#{r.name[userBean.localeCode].lang}"/>
+							</p:column>
 						</p:dataTable>
 					</h:form>
 				</aht:slot>
 				<aht:slot id="sRobot" width="4">
-					<h:form id="fConsumer">
-						<p:panel header="#{msg.jeeslJobRobot}" rendered="#{not empty cc.attrs.bean.robot}" styleClass="jeeslPanel">
+					<h:form id="fConsumer" rendered="#{not empty cc.attrs.ctrl.robot}">
+						<p:panel styleClass="jeesl-panel">
+							<f:facet name="header"><j:pHeader entity="SystemJobRobot"/></f:facet>
 							<f:facet name="actions">
-								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelRobot()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveConsumer()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteConsumer()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.robot.id gt 0}" />
+								<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelRobot()}" update=":#{cc.id}:grid"/>
+								<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveRobot()}" update=":#{cc.id}:grid" />
+								<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteRobot()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.robot.id gt 0}" />
 							</f:facet>
-							<p:panelGrid columns="2" columnClasses="auPwg20,auPwg80">
+							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 							
 							</p:panelGrid>
-							<aht:tabTranslationEditor value="#{cc.attrs.bean.robot}" withDescription="true"
-									labelTranslation="#{msg.Name}" labelDescription="#{msg.Description}" keys="#{cc.attrs.localeKeys}" />
+							<j:tabTranslationEditor value="#{cc.attrs.ctrl.robot}" withDescription="true" locales="#{cc.attrs.locales}" />
 						</p:panel>
 					</h:form>
 				</aht:slot>

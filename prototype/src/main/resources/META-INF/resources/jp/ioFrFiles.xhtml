@@ -49,7 +49,7 @@
 							   listener="#{cc.attrs.handler.addFileInline()}"
 							   update="#{cc.attrs.componentPrefix}:#{cc.id}:fUploadInline"
 							   rendered="#{cc.attrs.allowUpload and (not cc.attrs.overlay)}"/>
-						<j:downloadIcon type="jeeslZip" value="#{cc.attrs.handler.zipStream()}" tooltip="#{msg.reportZip}"/>
+						<j:downloadIcon type="jeeslZip" value="#{cc.attrs.handler.zipStream()}"/>
 					</j:dtHeader>
 				</f:facet>
 				<p:ajax event="rowSelect" listener="#{cc.attrs.handler.selectFile()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fDownload #{cc.attrs.componentPrefix}:#{cc.id}:fFiles" />

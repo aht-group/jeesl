@@ -1,13 +1,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:mc="http://www.metachart.org" xmlns:mcc="http://www.metachart.org/chart"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
 		<composite:attribute name="ctrl" required="true"/>
+		<composite:attribute name="locales" required="false" default="#{appLabelBean.locales}"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -73,7 +71,7 @@
 						</p:selectOneMenu>
 									
 					</p:panelGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.ctrl.info}" withName="false" withDescription="true" locales="#{appLabelBean.locales}"/>
+					<j:tabTranslationEditor value="#{cc.attrs.ctrl.info}" withName="false" withDescription="true" locales="#{cc.attrs.locales}"/>
 				</p:panel>
 			</h:form>
 		</j:slot>
