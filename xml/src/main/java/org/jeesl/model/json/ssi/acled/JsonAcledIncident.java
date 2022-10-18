@@ -13,6 +13,14 @@ public class JsonAcledIncident implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	@JsonProperty("data_id")
+	private Long id;
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
+	
+	
+	
+	
 	@JsonProperty("code")
 	private String code;
 	public String getCode() {return code;}

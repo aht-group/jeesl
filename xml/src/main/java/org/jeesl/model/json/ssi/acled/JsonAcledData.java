@@ -12,6 +12,8 @@ public class JsonAcledData implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	
+	
 	@JsonProperty("event_id_cnty")
 	private String code;
 	public String getCode() {return code;}
@@ -79,9 +81,9 @@ public class JsonAcledData implements Serializable
 	
 	
 	@JsonProperty("actor_type_id")
-	private int actorTypeCode;
-	public int getActorTypeCode() {return actorTypeCode;}
-	public void setActorTypeCode(int actorTypeCode) {this.actorTypeCode = actorTypeCode;}
+	private Integer actorTypeCode;
+	public Integer getActorTypeCode() {return actorTypeCode;}
+	public void setActorTypeCode(Integer actorTypeCode) {this.actorTypeCode = actorTypeCode;}
 
 	@JsonProperty("actor_type_name")
 	private String actorTypeName;
@@ -107,6 +109,11 @@ public class JsonAcledData implements Serializable
 	private String source;
 	public String getSource() {return source;}
 	public void setSource(String source) {this.source = source;}
+	
+	@JsonProperty("region_name")
+	private String region;
+	public String getRegion() {return region;}
+	public void setRegion(String region) {this.region = region;}
 	
 	@Override public String toString()
 	{

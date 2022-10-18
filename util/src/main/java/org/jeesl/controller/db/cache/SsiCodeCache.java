@@ -19,8 +19,6 @@ public class SsiCodeCache <MAPPING extends JeeslIoSsiMapping<?,ENTITY>,
 							T extends EjbWithCode>
 {
 	final static Logger logger = LoggerFactory.getLogger(SsiCodeCache.class);
-
-//	private final Class<T> cT;
 	
 	private final Map<String,T> map;
 	

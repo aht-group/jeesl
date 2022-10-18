@@ -29,6 +29,7 @@ public interface JeeslIcon <L extends JeeslLang, D extends JeeslDescription,
 	public enum Ejb{ejbUnsaved,ejbInvisible}
 	public enum Crud{jeeslDelete}
 	public enum Arrow{jeeslArrowLeft}
+	public enum Information{jeeslMegaphone}
 	
 	public static final String jeeslLibIcons = "jeesl/prototype/library-icons.xml";
 }

@@ -109,11 +109,13 @@ public class SqlFactory
 		return sb.toString();
 	}
 	
-	public static <T extends EjbWithId> void delete(StringBuilder sb, Class<T> c)
+	public static <T extends EjbWithId> void delete(StringBuilder sb, Class<T> c, String alias, boolean newLine)
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
 		sb.append("DELETE FROM ");
 		sb.append(c.getAnnotation(Table.class).name());
+		if(alias!=null) {sb.append(" "+alias);}
+		newLine(newLine,sb);
 	}
 	
 	public static <T extends EjbWithId> String delete(T t)

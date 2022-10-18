@@ -1,4 +1,4 @@
-package org.jeesl.web.mbean.prototype.io.ssi;
+package org.jeesl.web.controller.io.ssi;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,42 +17,34 @@ import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
-import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
-import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.web.controller.AbstractJeeslWebController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescription,
+public class JeeslSsiMappingController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
-										CRED extends JeeslIoSsiCredential<SYSTEM>,
+										
 										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
-										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-										DATA extends JeeslIoSsiData<MAPPING,LINK,JOB>,
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
-										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
-										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
-										JOB extends JeeslJobStatus<L,D,JOB,?>,
-										HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
+										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>>
+						extends AbstractJeeslWebController<L,D,LOC>
 						implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractSsiMappingBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslSsiMappingController.class);
 	
 	protected JeeslLogger jogger;
 	
-	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi;
-	private JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi;
+	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,?,?,LINK,ENTITY,?,?> fbSsi;
+	private JeeslIoSsiFacade<L,D,SYSTEM,?,MAPPING,?,?,LINK,ENTITY,?,?,?> fSsi;
 	
 	private final JsonTuple1Handler<MAPPING> thMapping; public JsonTuple1Handler<MAPPING> getThMapping() {return thMapping;}
 	private final JsonTuple2Handler<MAPPING,LINK> thLink; public JsonTuple2Handler<MAPPING,LINK> getThLink() {return thLink;}
@@ -66,8 +58,9 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 	
 	private MAPPING mapping; public MAPPING getMapping() {return mapping;} public void setMapping(MAPPING mapping) {this.mapping = mapping;}
 
-	public AbstractSsiMappingBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi)
+	public JeeslSsiMappingController(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,?,?,LINK,ENTITY,?,?> fbSsi)
 	{
+		super(fbSsi.getClassL(),fbSsi.getClassD());
 		this.fbSsi=fbSsi;
 		mapTuples = new HashMap<>();
 		
@@ -82,7 +75,7 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 		jogger = DebugLoggerHandler.instance(this.getClass());
 	}
 
-	public void postConstructSsiMapping(JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi)
+	public void postConstructSsiMapping(JeeslIoSsiFacade<L,D,SYSTEM,?,MAPPING,?,?,LINK,ENTITY,?,?,?> fSsi)
 	{	
 		this.fSsi=fSsi;
 		
@@ -102,13 +95,6 @@ public class AbstractSsiMappingBean <L extends JeeslLang,D extends JeeslDescript
 		mappings.clear();
 		mappings.addAll(fSsi.all(fbSsi.getClassMapping()));
 		jogger.milestone(fbSsi.getClassMapping().getSimpleName(),null,mappings.size());
-		
-//		thMapping.init(fSsi.tpMapping());
-//		thLink.init(fSsi.tpMappingLink());
-//		for(LINK  l : thLink.getListB())
-//		{
-//			logger.info(l.getCode());
-//		}
 	}
 	
 	public void considerTuple(MAPPING m)

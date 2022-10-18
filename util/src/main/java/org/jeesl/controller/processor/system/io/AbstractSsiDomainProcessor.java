@@ -7,6 +7,7 @@ import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiDataFactory;
 import org.jeesl.interfaces.controller.processor.SsiMappingProcessor;
@@ -63,6 +64,12 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 		cacheLink = new EjbCodeCache<>(fbSsi.getClassLink(),fSsi);
 		
 		efData = fbSsi.ejbData();
+	}
+	
+	@Override public void initMappings() throws JeeslNotFoundException
+	{
+		mapping = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
+		logger.info("Mappingx: "+mapping.toString());
 	}
 	
 	@Override public void ignoreData(List<DATA> datas)
