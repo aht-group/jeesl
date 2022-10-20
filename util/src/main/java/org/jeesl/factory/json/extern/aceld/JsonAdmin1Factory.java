@@ -1,8 +1,13 @@
 package org.jeesl.factory.json.extern.aceld;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.jeesl.model.json.ssi.acled.JsonAcledAdmin1;
-import org.jeesl.model.json.ssi.acled.JsonAcledCountry;
+import org.jeesl.model.json.ssi.acled.JsonAcledContainer;
 import org.jeesl.model.json.ssi.acled.JsonAcledData;
+import org.jeesl.model.json.ssi.acled.JsonAcledResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,11 +16,31 @@ public class JsonAdmin1Factory
 	final static Logger logger = LoggerFactory.getLogger(JsonAdmin1Factory.class);
 
 	public static JsonAcledAdmin1 build() {return new JsonAcledAdmin1();}
+	
+	public static JsonAcledContainer build(JsonAcledResponse response)
+    {
+		JsonAcledContainer json = JsonAcledContainerFactory.build();
+		json.setAdmin1(new ArrayList<>());
+    	Set<String> set = new HashSet<>();
 		
-    public static JsonAcledAdmin1 build(JsonAcledCountry country, JsonAcledData data)
+		for(JsonAcledData data : response.getData())
+		{
+			JsonAcledAdmin1 a1 = JsonAdmin1Factory.build(data);
+			String ssiCode = JsonAdmin1Factory.toSsiCode(a1);
+			if(!set.contains(ssiCode))
+			{
+				json.getAdmin1().add(a1);
+				set.add(ssiCode);
+			}
+		}
+		
+    	return json;
+    }
+	
+    private static JsonAcledAdmin1 build(JsonAcledData data)
     {
     	JsonAcledAdmin1 json = build();
-    	json.setCountry(country);
+    	json.setCountry(JsonCountryFactory.build(data));
     	json.setName(data.getAdmin1());
     	return json;
     }

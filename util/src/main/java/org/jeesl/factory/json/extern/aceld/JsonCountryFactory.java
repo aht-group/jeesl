@@ -23,6 +23,6 @@ public class JsonCountryFactory
     
     public static String toSsiCode(JsonAcledCountry json)
     {
-    	return json.getIso3();
+    	return json.getId().toString();
     }
 }

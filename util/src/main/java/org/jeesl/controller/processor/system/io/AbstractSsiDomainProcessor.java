@@ -69,7 +69,6 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 	@Override public void initMappings() throws JeeslNotFoundException
 	{
 		mapping = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
-		logger.info("Mappingx: "+mapping.toString());
 	}
 	
 	@Override public void ignoreData(List<DATA> datas)

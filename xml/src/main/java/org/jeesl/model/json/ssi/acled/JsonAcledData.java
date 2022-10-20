@@ -1,23 +1,47 @@
 package org.jeesl.model.json.ssi.acled;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="data")
+@JsonPropertyOrder({"id", "iso", "date", "year" })
 public class JsonAcledData implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	@JsonProperty("data_id")
+	private Long id;
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
+
+	@JsonProperty("iso")
+	private String iso;
+	public String getIso() {return iso;}
+	public void setIso(String iso) {this.iso = iso;}
+
+	@JsonProperty("event_date")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate date;
+	public LocalDate getDate() {return date;}
+	public void setDate(LocalDate date) {this.date = date;}
 	
-	
-	@JsonProperty("event_id_cnty")
-	private String code;
-	public String getCode() {return code;}
-	public void setCode(String code) {this.code = code;}
+	@JsonProperty("year")
+	private Integer year;
+	public Integer getYear() {return year;}
+	public void setYear(Integer year) {this.year = year;}
 	
 	@JsonProperty("event_type")
 	private String mainType;
@@ -28,6 +52,7 @@ public class JsonAcledData implements Serializable
 	private String subType;
 	public String getSubType() {return subType;}
 	public void setSubType(String subType) {this.subType = subType;}
+	
 	
 	@JsonProperty("location")
 	private String location;
@@ -44,10 +69,8 @@ public class JsonAcledData implements Serializable
 	public String getIso3() {return iso3;}
 	public void setIso3(String iso3) {this.iso3 = iso3;}
 	
-	@JsonProperty("iso")
-	private String iso;
-	public String getIso() {return iso;}
-	public void setIso(String iso) {this.iso = iso;}
+	
+	
 	
 	@JsonProperty("country")
 	private String country;
@@ -64,10 +87,7 @@ public class JsonAcledData implements Serializable
 	public int getCount() {return count;}
 	public void setCount(int count) {this.count = count;}
 	
-	@JsonProperty("event_date")
-	private String date;
-	public String getDate() {return date;}
-	public void setDate(String date) {this.date = date;}
+
 	
 	@JsonProperty("latitude")
 	private Double latitude;

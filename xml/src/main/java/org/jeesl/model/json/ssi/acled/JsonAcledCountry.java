@@ -16,7 +16,7 @@ public class JsonAcledCountry implements Serializable
 	private Long id;
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
-	
+
 	@JsonProperty("iso3")
 	private String iso3;
 	public String getIso3() {return iso3;}

@@ -16,7 +16,7 @@ public interface AcledExternRest
 	
     @GET @Path("/country/read")
 	@Produces(MediaType.APPLICATION_JSON)
-    JsonAcledResponse countriesFilterByIso3(@QueryParam("key") String key, @QueryParam("email") String email, @QueryParam("iso3") String iso3Filter);
+    JsonAcledResponse countriesByIso3(@QueryParam("key") String key, @QueryParam("email") String email, @QueryParam("iso3") String iso3Filter);
 	
 	
     @GET @Path("/region/read")
@@ -26,33 +26,10 @@ public interface AcledExternRest
     
     @GET @Path("/acled/read")
   	@Produces(MediaType.APPLICATION_JSON)
-	JsonAcledResponse incidents(@QueryParam("key") String key, @QueryParam("email") String email, @QueryParam("iso3") String iso3Filter);
-
-    
-    // Below max be deprecated
-    
-    
+	JsonAcledResponse incidentsByIso(@QueryParam("key") String key, @QueryParam("email") String email, @QueryParam("iso") String filterIso);
+        
     @GET @Path("/acled/read")
-	@Produces(MediaType.TEXT_PLAIN)
-    String sRead(@QueryParam("terms") String terms);
-    
-    @GET @Path("/acled/read")
-	@Produces(MediaType.APPLICATION_JSON)
-    JsonAcledResponse read(@QueryParam("terms") String terms, @QueryParam("limit") int limit);
-    
-    @GET @Path("/acled/read")
-	@Produces(MediaType.APPLICATION_JSON)
-    JsonAcledResponse incidents(@QueryParam("terms") String terms, @QueryParam("page") int p, @QueryParam("iso") Long iso);
-    
-    @GET @Path("/acled/read")
-	@Produces(MediaType.APPLICATION_JSON)
-    JsonAcledResponse incidents(@QueryParam("terms") String terms, @QueryParam("page") int p, @QueryParam("iso") Long iso, @QueryParam("admin1") String admin1);
-    
-    @GET @Path("/actor/read")
-	@Produces(MediaType.APPLICATION_JSON)
-    JsonAcledResponse actors(@QueryParam("terms") String terms, @QueryParam("limit") int limit);
-    
-    @GET @Path("/actortype/read")
-	@Produces(MediaType.APPLICATION_JSON)
-    JsonAcledResponse actorType(@QueryParam("terms") String terms);
+  	@Produces(MediaType.APPLICATION_JSON)
+	JsonAcledResponse incidentsByIsoBetween(@QueryParam("key") String key, @QueryParam("email") String email, @QueryParam("iso") String filterIso, @QueryParam("event_date") String dates, @QueryParam("event_date_where") String where);
+   
 }

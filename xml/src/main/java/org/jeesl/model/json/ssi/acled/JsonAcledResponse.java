@@ -18,6 +18,11 @@ public class JsonAcledResponse implements Serializable
 	public Integer getStatus() {return status;}
 	public void setStatus(Integer status) {this.status = status;}
 	
+	@JsonProperty("success")
+	private Boolean success;
+	public Boolean getSuccess() {return success;}
+	public void setSuccess(Boolean success) {this.success = success;}
+
 	@JsonProperty("count")
 	private Integer count;
 	public Integer getCount() {return count;}
