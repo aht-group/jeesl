@@ -33,7 +33,6 @@ public class JsonAdmin1Factory
 				set.add(ssiCode);
 			}
 		}
-		
     	return json;
     }
 	

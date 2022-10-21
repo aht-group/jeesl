@@ -36,6 +36,11 @@ public class JeeslEap71FacadeLookup implements JeeslFacadeLookup
 		host = "localhost";
 		port = 8080;
 	}
+	
+	public void debug()
+	{
+		logger.info("Connection: "+host+":"+port+" user:"+username+" pwd:"+password);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override public <F> F lookup(Class<F> facade) throws NamingException

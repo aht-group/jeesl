@@ -140,5 +140,9 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 			}
 		}
 	}
-	protected abstract void updateData(DATA data, JSON json);
+	
+	protected void updateData(DATA data, JSON json)
+	{
+		logger.warn("NYI");
+	}
 }

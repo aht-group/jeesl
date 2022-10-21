@@ -100,20 +100,20 @@ public class JsonAcledData implements Serializable
 	public void setLongitude(Double longitude) {this.longitude = longitude;}
 	
 	
-	@JsonProperty("actor_type_id")
-	private Integer actorTypeCode;
-	public Integer getActorTypeCode() {return actorTypeCode;}
-	public void setActorTypeCode(Integer actorTypeCode) {this.actorTypeCode = actorTypeCode;}
+//	@JsonProperty("actor_type_id")
+//	private Integer actorTypeCode;
+//	public Integer getActorTypeCode() {return actorTypeCode;}
+//	public void setActorTypeCode(Integer actorTypeCode) {this.actorTypeCode = actorTypeCode;}
 
-	@JsonProperty("actor_type_name")
-	private String actorTypeName;
-	public String getActorTypeName() {return actorTypeName;}
-	public void setActorTypeName(String actorTypeName) {this.actorTypeName = actorTypeName;}
-
-	@JsonProperty("actor_name")
-	private String actor;
-	public String getActor() {return actor;}
-	public void setActor(String actor) {this.actor = actor;}
+//	@JsonProperty("actor_type_name")
+//	private String actorTypeName;
+//	public String getActorTypeName() {return actorTypeName;}
+//	public void setActorTypeName(String actorTypeName) {this.actorTypeName = actorTypeName;}
+//
+//	@JsonProperty("actor_name")
+//	private String actor;
+//	public String getActor() {return actor;}
+//	public void setActor(String actor) {this.actor = actor;}
 	
 	@JsonProperty("actor1")
 	private String actor1;
