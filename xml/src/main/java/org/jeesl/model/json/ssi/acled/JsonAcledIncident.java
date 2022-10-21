@@ -1,11 +1,17 @@
 package org.jeesl.model.json.ssi.acled;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="response")
@@ -13,7 +19,7 @@ public class JsonAcledIncident implements Serializable
 {
 	public static final long serialVersionUID=1;
 
-	@JsonProperty("data_id")
+	@JsonProperty("id")
 	private Long id;
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}
@@ -43,19 +49,13 @@ public class JsonAcledIncident implements Serializable
 	public String getLocation() {return location;}
 	public void setLocation(String location) {this.location = location;}
 	
-	
-	
-	@JsonProperty("description")
-	private String description;
-	public String getDescription() {return description;}
-	public void setDescription(String description) {this.description = description;}
-	
-
-	
 	@JsonProperty("date")
-	private Date date;
-	public Date getDate() {return date;}
-	public void setDate(Date date) {this.date = date;}
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate date;
+	public LocalDate getDate() {return date;}
+	public void setDate(LocalDate date) {this.date = date;}
 	
 	@JsonProperty("latitude")
 	private Double latitude;
@@ -77,10 +77,15 @@ public class JsonAcledIncident implements Serializable
 	public JsonAcledActor getActor2() {return actor2;}
 	public void setActor2(JsonAcledActor actor2) {this.actor2 = actor2;}
 	
-	@JsonProperty("source")
-	private JsonAcledSource source;
-	public JsonAcledSource getSource() {return source;}
-	public void setSource(JsonAcledSource source) {this.source = source;}
+	@JsonProperty("sources")
+	private List<JsonAcledSource> sources;
+	public List<JsonAcledSource> getSources() {return sources;}
+	public void setSources(List<JsonAcledSource> sources) {this.sources = sources;}
+
+	@JsonProperty("description")
+	private String description;
+	public String getDescription() {return description;}
+	public void setDescription(String description) {this.description = description;}
 	
 	@Override public String toString()
 	{

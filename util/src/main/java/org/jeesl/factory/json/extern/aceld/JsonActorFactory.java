@@ -40,7 +40,7 @@ public class JsonActorFactory
     	return container;
     }
 	
-    public static List<JsonAcledActor> build(JsonAcledData data)
+    private static List<JsonAcledActor> build(JsonAcledData data)
     {
     	List<JsonAcledActor> list = new ArrayList<>(); 
     	if(data.getActor1()!=null && !data.getActor1().trim().isEmpty()) {list.add(JsonActorFactory.build(data.getActor1()));}

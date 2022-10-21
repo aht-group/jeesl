@@ -36,7 +36,7 @@ public class JsonAdmin1Factory
     	return json;
     }
 	
-    private static JsonAcledAdmin1 build(JsonAcledData data)
+    public static JsonAcledAdmin1 build(JsonAcledData data)
     {
     	JsonAcledAdmin1 json = build();
     	json.setCountry(JsonCountryFactory.build(data));
