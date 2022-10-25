@@ -43,7 +43,7 @@ public class DirectoryTreeHandler
 		{
 			name = name + padding;
 		}
-		logger.info(name);
+//		logger.info(name);
 		return build(0,baseDir,name);
 	}
 	
