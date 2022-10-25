@@ -88,7 +88,12 @@
             <component-type>org.jeesl.jsf.components.Security</component-type>
         </component>
     </tag>
-    
+	<tag>
+        <tag-name>qrCode</tag-name>
+        <component>
+            <component-type>org.jeesl.jsf.components.QrCode</component-type>
+        </component>
+    </tag>
     
     
 	<function>

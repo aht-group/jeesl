@@ -29,7 +29,7 @@ import net.sf.ahtutils.jsf.util.ComponentAttribute;
 public class QrCode extends UIOutput
 {
 	final static Logger logger = LoggerFactory.getLogger(QrCode.class);
-	private static enum Properties {styleClass,qr}
+	private static enum Properties {styleClass,qrValue}
 	
 	@Override public boolean getRendersChildren(){return true;}
 	
@@ -88,8 +88,8 @@ public class QrCode extends UIOutput
     		if (ComponentAttribute.available(Properties.styleClass, context, this)) {
     			responseWriter.writeAttribute("class", ComponentAttribute.get(Properties.styleClass.toString(), context, this), null);
     		}
-    		if (ComponentAttribute.available(Properties.qr, context, this)) {
-				encodePath(ComponentAttribute.get(Properties.qr.toString(), context, this), context);
+    		if (ComponentAttribute.available(Properties.qrValue, context, this)) {
+				encodePath(ComponentAttribute.get(Properties.qrValue.toString(), context, this), context);
     		}
 		}
 		catch (IOException | WriterException | JeeslNotFoundException e)
