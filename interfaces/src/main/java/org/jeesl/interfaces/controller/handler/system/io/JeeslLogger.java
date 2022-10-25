@@ -5,11 +5,14 @@ import java.io.Serializable;
 
 public interface JeeslLogger extends Serializable
 {
-	String start(String log);
 	void reset();
 	
+	String start(String log);
+	String start(String log, String message);
+
 	String milestone(String milestone);
 	String milestone(String milestone, String message);
+	String milestone(Class<?> c, String message, Integer elements);
 	String milestone(String milestone, String message, Integer elements);
 	
 	<E extends Enum<E>> String loopStart(E code);

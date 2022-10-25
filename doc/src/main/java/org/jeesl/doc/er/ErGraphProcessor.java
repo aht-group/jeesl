@@ -121,8 +121,9 @@ public class ErGraphProcessor
 		return graph;
 	}
 
-	private void createNode(File f,Set<String> subSet) throws ClassNotFoundException
+	private void createNode(File f, Set<String> subSet) throws ClassNotFoundException
 	{
+		logger.trace(f.getAbsolutePath());
 		Class<?> c = ClassUtil.forFile(fBase, f);
 		createNode(c,subSet);
 	}

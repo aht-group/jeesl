@@ -365,5 +365,26 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
         return jtf.buildCount(tQ.getResultList());
 	}
+
+	@Override public <T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithJob2In(Class<T> c, List<STATUS> list, Integer maxResults)
+	{
+		if(list==null || list.isEmpty()){return new ArrayList<>();}
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<T> cQ = cB.createQuery(c);
+		Root<T> root = cQ.from(c);
+		
+		Path<STATUS> pStatus = root.get(EjbWithMigrationJob2.Attributes.job2.toString());
+		predicates.add(pStatus.in(list));
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.orderBy(cB.desc(pPosition),cB.asc(pRecordCreation));
+		cQ.select(root);
+
+		TypedQuery<T> tQ = em.createQuery(cQ);
+		if(maxResults!=null) {tQ.setMaxResults(maxResults);}
+		return tQ.getResultList();
+	}
 	
 }

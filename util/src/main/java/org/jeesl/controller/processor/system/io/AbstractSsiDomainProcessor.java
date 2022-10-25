@@ -10,6 +10,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.ejb.io.ssi.data.EjbIoSsiDataFactory;
+import org.jeesl.factory.sql.SqlFactory;
 import org.jeesl.interfaces.controller.processor.SsiMappingProcessor;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
@@ -60,6 +61,9 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 		this.fSsi=fSsi;
 		this.fbSsi=fbSsi;
 		
+		try {this.initMappings();}
+		catch (JeeslNotFoundException e) {e.printStackTrace();}
+		
 		jec = BucketSizeCounter.instance();
 		cacheLink = new EjbCodeCache<>(fbSsi.getClassLink(),fSsi);
 		
@@ -69,6 +73,15 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 	@Override public void initMappings() throws JeeslNotFoundException
 	{
 		mapping = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
+	}
+	
+	public String sqlDeleteAll()
+	{
+		StringBuilder sb = new StringBuilder(); String alias=null; boolean newLine=false;
+		SqlFactory.delete(sb,fbSsi.getClassData(),alias,newLine);
+		SqlFactory.where(sb,alias,false,JeeslIoSsiData.Attributes.mapping,mapping, newLine);
+		SqlFactory.semicolon(sb,newLine);
+		return sb.toString();
 	}
 	
 	@Override public void ignoreData(List<DATA> datas)

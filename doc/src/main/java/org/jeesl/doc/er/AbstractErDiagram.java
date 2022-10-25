@@ -139,7 +139,5 @@ public class AbstractErDiagram
 		}
 	}
 
-	public void showErDiagramLabel(boolean show) {
-		showErDiagramLabel = show;
-	}
+	public void showErDiagramLabel(boolean show) {showErDiagramLabel = show;}
 }

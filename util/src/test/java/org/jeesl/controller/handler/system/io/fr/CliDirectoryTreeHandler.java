@@ -22,11 +22,18 @@ public class CliDirectoryTreeHandler
 		dth = new DirectoryTreeHandler(root.toPath(),2,3);
 	}
 	
-	private void test() throws IOException
+	public void test() throws IOException
 	{
 		String x = UUID.randomUUID().toString();
 		logger.info("Start: "+x);
 		Path p = dth.create(x);
+		logger.info(Path.class.getSimpleName()+" "+p.toString());
+	}
+	
+	private void padding()
+	{
+		String x = "abc";
+		Path p = dth.build(x);
 		logger.info(Path.class.getSimpleName()+" "+p.toString());
 	}
 	
@@ -35,6 +42,7 @@ public class CliDirectoryTreeHandler
 		JeeslBootstrap.init();
 		
 		CliDirectoryTreeHandler cli = new CliDirectoryTreeHandler();
-		cli.test();
+//		cli.test();
+		cli.padding();
 	}
 }

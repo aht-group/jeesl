@@ -22,9 +22,7 @@
 				   process="#{cc.attrs.process}" 
 				   immediate="#{cc.attrs.immediate}"
 				   styleClass="#{cc.attrs.handler.map[var] ? 'pf-action-icon' : 'pf-action-icon pf-inactive'}">
-				<h:graphicImage id="image"
-						height="#{cc.attrs.height}" 
-						value="/image/symbolizer/graphic/#{var.class.name}/#{cc.attrs.height}/#{var.id}">
+				<h:graphicImage id="image" height="#{cc.attrs.height}" value="/image/symbolizer/graphic/#{var.class.name}/#{cc.attrs.height}/#{var.id}">
 				</h:graphicImage>
 			</p:commandLink>
 		</ui:repeat>

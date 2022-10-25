@@ -97,6 +97,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	public String milestone(String milestone) {return milestone(milestone,null,null);}
 	public String milestone(String milestone, String message){return milestone(milestone,message,null);}
 	public String milestone(String milestone, Integer elements) {return milestone(milestone,null,elements);}
+	public String milestone(Class<?> c, String message, Integer elements) {return milestone(c.getSimpleName(),message,elements);}
 	public String milestone(String milestone, String message, Integer elements)
 	{
 		Instant timeNow = Instant.now();
@@ -137,6 +138,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		mapLoopInstant.put(loopCode,Instant.now());
 		return "";
 	}
+	public <E extends Enum<E>> String loopEnd(E code) {return loopEnd(code,null);}
 	public <E extends Enum<E>> String loopEnd(E code, Integer elements)
 	{
 		if(!loops.containsKey(code.toString())) {logger.warn("Loop not started"); return "Loop not started";}
