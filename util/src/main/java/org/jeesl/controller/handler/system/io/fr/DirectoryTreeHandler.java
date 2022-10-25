@@ -15,17 +15,19 @@ public class DirectoryTreeHandler
 	
 	private final int chunks;
 	private final int maxDepth;
+	private String padding;
 	
 	public DirectoryTreeHandler(Path baseDir, int chunks, int maxDepth)
 	{
 		this.baseDir=baseDir;
 		this.chunks=chunks;
 		this.maxDepth=maxDepth;
+		padding = "-";
 	}
 	
-	public Path create(String name) throws IOException
+	public Path create(String identifier) throws IOException
 	{
-		Path p = this.build(name);
+		Path p = this.build(identifier);
 		if(!Files.exists(p.getParent()))
 		{
 //			logger.info("Creating: "+p.getParent());
@@ -34,8 +36,14 @@ public class DirectoryTreeHandler
 		return p;
 	}
 	
-	public Path build(String name)
+	public Path build(String identifier)
 	{
+		String name = new String(identifier);
+		while(name.length()<(chunks*maxDepth))
+		{
+			name = name + padding;
+		}
+		logger.info(name);
 		return build(0,baseDir,name);
 	}
 	

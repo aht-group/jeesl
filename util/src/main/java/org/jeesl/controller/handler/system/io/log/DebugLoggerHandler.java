@@ -18,11 +18,14 @@ public class DebugLoggerHandler implements JeeslLogger
 		
 	}
 	
-	@Override public String start(String log) {return log;}
 	@Override public void reset() {}
 	
+	@Override public String start(String log) {return log;}
+	@Override public String start(String log, String message) {return log+" - "+message;}
+
 	@Override public String milestone(String milestone) {return milestone;}
 	@Override public String milestone(String milestone, String message) {return milestone;}
+	@Override public String milestone(Class<?> c, String message, Integer elements) {return milestone(c.getSimpleName(), message, elements);}
 	@Override public String milestone(String milestone, String message, Integer elements) {return milestone;}
 	
 	@Override public <E extends Enum<E>> String loopStart(E code) {return code.toString();}
@@ -32,5 +35,5 @@ public class DebugLoggerHandler implements JeeslLogger
 
 	@Override public void ofxLoops(OutputStream os) {}
 	
-	
+
 }
