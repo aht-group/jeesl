@@ -1,28 +1,28 @@
 package org.jeesl.controller.processor.system.io.iot.matrix;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.jeesl.model.json.io.iot.matrix.JsonMatrixDevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IotMatrixWeekdayProcessor
+public class IotMatrixHourProcessor
 {
-	final static Logger logger = LoggerFactory.getLogger(IotMatrixWeekdayProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(IotMatrixHourProcessor.class);
 	
 	public final static String colorDay = "010010010";
 	public final static String colorNow = "020010010";
 	
-	public IotMatrixWeekdayProcessor()
+	public IotMatrixHourProcessor()
 	{
 		
 	}
 	
-	public void build(JsonMatrixDevice device, LocalDate start, LocalDate now, int size)
+	public void build(JsonMatrixDevice device, LocalTime start, LocalTime now, int size)
 	{
 		for(int i=0;i<size;i++)
 		{
-			boolean isNow = start.plusDays(i).isEqual(now);
+			boolean isNow = start.plusHours(i).getHour()==now.getHour();
 			if(isNow) {device.getData().add(colorNow);}
 			else{device.getData().add(colorDay);}
 		}

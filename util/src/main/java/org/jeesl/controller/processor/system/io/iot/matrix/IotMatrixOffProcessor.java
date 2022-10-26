@@ -1,6 +1,6 @@
 package org.jeesl.controller.processor.system.io.iot.matrix;
 
-import org.jeesl.model.json.io.iot.matrix.MatrixDevice;
+import org.jeesl.model.json.io.iot.matrix.JsonMatrixDevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +10,7 @@ public class IotMatrixOffProcessor
 	
 	public final static String colorOff = "000000000";
 	
-	public void build(MatrixDevice device, int size)
+	public void build(JsonMatrixDevice device, int size)
 	{
 		for(int i=1;i<=size;i++)
 		{
@@ -18,7 +18,7 @@ public class IotMatrixOffProcessor
 		}
 	}
 	
-	public void padding(MatrixDevice device)
+	public void padding(JsonMatrixDevice device)
 	{
 		int size = device.getData().size();
 		int columns = device.getColumns();
@@ -30,7 +30,5 @@ public class IotMatrixOffProcessor
 		{
 			this.build(device,columns-mod);
 		}
-		
-		
 	}
 }

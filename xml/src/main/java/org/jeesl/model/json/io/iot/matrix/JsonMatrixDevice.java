@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="device")
-public class MatrixDevice implements Serializable
+public class JsonMatrixDevice implements Serializable
 {
 	public static final long serialVersionUID=1;
 

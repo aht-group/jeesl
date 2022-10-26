@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.collections4.ListUtils;
 import org.jeesl.factory.xls.system.io.report.XlsColumnFactory;
-import org.jeesl.model.json.io.iot.matrix.MatrixDevice;
+import org.jeesl.model.json.io.iot.matrix.JsonMatrixDevice;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Content;
 import org.openfuxml.content.table.Head;
@@ -33,7 +33,7 @@ public class OfxMatrixDeviceFactory
 		map = new HashMap<>();
 	}
 	
-	public Table build(MatrixDevice device)
+	public Table build(JsonMatrixDevice device)
 	{
 		map.clear();
 		
@@ -47,7 +47,7 @@ public class OfxMatrixDeviceFactory
 		return table;
 	}
 		
-	private static Head buildHead(MatrixDevice device)
+	private static Head buildHead(JsonMatrixDevice device)
 	{
 		Row row = new Row();
 		for(int i=0; i<device.getColumns(); i++)
@@ -57,7 +57,7 @@ public class OfxMatrixDeviceFactory
 		return XmlHeadFactory.build(row);
 	}
 	
-	private Body buildBody(MatrixDevice device)
+	private Body buildBody(JsonMatrixDevice device)
 	{
 		Body body = new Body();
 		List<List<String>> partitions = ListUtils.partition(device.getData(),device.getColumns());

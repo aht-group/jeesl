@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.collections4.ListUtils;
 import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixDevice;
 import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixLayout;
-import org.jeesl.model.json.io.iot.matrix.MatrixDevice;
+import org.jeesl.model.json.io.iot.matrix.JsonMatrixDevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,20 +17,20 @@ public class JsonMatrixDeviceFactory <DEVICE extends JeeslIotMatrixDevice<?,?,LA
 	final static Logger logger = LoggerFactory.getLogger(JsonMatrixDeviceFactory.class);
 
 	
-	private final MatrixDevice q;
+	private final JsonMatrixDevice q;
 
 	public static <DEVICE extends JeeslIotMatrixDevice<?,?,LAYOUT>,LAYOUT extends JeeslIotMatrixLayout<?,?,LAYOUT,?>>
-					JsonMatrixDeviceFactory<DEVICE,LAYOUT> instance(String localeCode, MatrixDevice q) {return new JsonMatrixDeviceFactory<>(localeCode,q);}
-	public JsonMatrixDeviceFactory(String localeCode, MatrixDevice q)
+					JsonMatrixDeviceFactory<DEVICE,LAYOUT> instance(String localeCode, JsonMatrixDevice q) {return new JsonMatrixDeviceFactory<>(localeCode,q);}
+	public JsonMatrixDeviceFactory(String localeCode, JsonMatrixDevice q)
 	{
 		this.q=q;
 	}
     
-    public static MatrixDevice build() {return new MatrixDevice();}
+    public static JsonMatrixDevice build() {return new JsonMatrixDevice();}
     
-    public MatrixDevice build(DEVICE ejb)
+    public JsonMatrixDevice build(DEVICE ejb)
 	{
-		MatrixDevice xml = build();
+		JsonMatrixDevice xml = build();
 		if(q.getId()!=null){xml.setId(ejb.getId());}
 		if(q.getCode()!=null){xml.setCode(ejb.getCode());}
 		if(q.getName()!=null){xml.setName(ejb.getName());}
@@ -40,7 +40,7 @@ public class JsonMatrixDeviceFactory <DEVICE extends JeeslIotMatrixDevice<?,?,LA
 		return xml;
 	}
 
-	public List<String> transform(DEVICE device, MatrixDevice json)
+	public List<String> transform(DEVICE device, JsonMatrixDevice json)
 	{
 		JeeslIotMatrixLayout.Code layout = JeeslIotMatrixLayout.Code.valueOf(device.getLayout().getCode());
 		List<String> result = new ArrayList<>();

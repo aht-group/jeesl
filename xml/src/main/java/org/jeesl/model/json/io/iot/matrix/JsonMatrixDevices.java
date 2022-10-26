@@ -9,14 +9,14 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="devices")
-public class MatrixDevices implements Serializable
+public class JsonMatrixDevices implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
 	@JsonProperty("devices")
-	private List<MatrixDevice> devices;
-	public List<MatrixDevice> getDevices() {return devices;}
-	public void setDevices(List<MatrixDevice> devices) {this.devices = devices;}
+	private List<JsonMatrixDevice> devices;
+	public List<JsonMatrixDevice> getDevices() {return devices;}
+	public void setDevices(List<JsonMatrixDevice> devices) {this.devices = devices;}
 
 
 	@Override public String toString()
