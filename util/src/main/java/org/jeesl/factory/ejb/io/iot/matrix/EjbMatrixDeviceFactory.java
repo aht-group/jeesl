@@ -1,7 +1,7 @@
 package org.jeesl.factory.ejb.io.iot.matrix;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.iot.matrix.JeeslIotMatrixDevice;
+import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixDevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

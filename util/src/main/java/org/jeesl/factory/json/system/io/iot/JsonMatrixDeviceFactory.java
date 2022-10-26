@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections4.ListUtils;
-import org.jeesl.interfaces.model.io.iot.matrix.JeeslIotMatrixDevice;
-import org.jeesl.interfaces.model.io.iot.matrix.JeeslIotMatrixLayout;
+import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixDevice;
+import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixLayout;
 import org.jeesl.model.json.io.iot.matrix.MatrixDevice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.iot.matrix;
+package org.jeesl.interfaces.model.iot.matrix;
 
 import java.io.Serializable;
 

@@ -2,8 +2,8 @@ package org.jeesl.factory.builder.io.iot;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.iot.matrix.EjbMatrixDeviceFactory;
-import org.jeesl.interfaces.model.io.iot.matrix.JeeslIotMatrixDevice;
-import org.jeesl.interfaces.model.io.iot.matrix.JeeslIotMatrixLayout;
+import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixDevice;
+import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixLayout;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
