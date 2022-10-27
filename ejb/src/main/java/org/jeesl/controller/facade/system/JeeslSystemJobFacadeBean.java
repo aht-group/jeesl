@@ -263,7 +263,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> item = cQ.from(c);
 		
-		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob1.Attributes.job1.toString());
+		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob1.Tmp.job1.toString());
 		STATUS queue = this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue);
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eStatus),cB.equal(eStatus, queue)));}
 		else {predicates.add(cB.equal(eStatus,queue));}
@@ -323,7 +323,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		Root<T> item = cQ.from(c);
 		
 		Expression<Long> eCount = cB.count(item.<Long>get("id"));
-		Path<STATUS> pStatus = item.get(EjbWithMigrationJob1.Attributes.job1.toString());
+		Path<STATUS> pStatus = item.get(EjbWithMigrationJob1.Tmp.job1.toString());
 		
 		cQ.groupBy(pStatus.get("id"));
 		cQ.multiselect(pStatus.get("id"),eCount);

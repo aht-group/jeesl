@@ -289,7 +289,7 @@
 	              </execution>
 	            </executions>
 	            <configuration>
-					<mainClass>org.jeesl.client.app.OpenligaRestWorker</mainClass>
+					<mainClass>org.jeesl.client.app.JeeslTest</mainClass>
 	            </configuration>
 	          </plugin>
 	        </plugins>

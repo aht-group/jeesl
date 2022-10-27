@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.th;
+package org.jeesl.jsf.handler.th;
 
 import java.io.Serializable;
 import java.util.ArrayList;

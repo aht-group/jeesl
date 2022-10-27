@@ -383,7 +383,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		predicates.add(cB.equal(item.get(JeeslIoSsiData.Attributes.mapping.toString()),mapping));
 		
-		Expression<JOB> eJob = item.get(EjbWithMigrationJob1.Attributes.job1.toString());
+		Expression<JOB> eJob = item.get(EjbWithMigrationJob1.Tmp.job1.toString());
 		
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eJob),cB.equal(eJob,job)));}
 		else {predicates.add(cB.equal(eJob,job));}

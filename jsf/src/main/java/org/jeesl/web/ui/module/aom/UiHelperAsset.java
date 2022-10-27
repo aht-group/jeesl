@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.ui.helper;
+package org.jeesl.web.ui.module.aom;
 
 import java.io.Serializable;
 import java.util.ArrayList;

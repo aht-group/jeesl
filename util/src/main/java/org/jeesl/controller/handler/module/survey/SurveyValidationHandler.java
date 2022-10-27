@@ -51,6 +51,8 @@ public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescrip
 	private final Map<QUESTION,List<VALIDATION>> validations; public Map<QUESTION,List<VALIDATION>> getValidations() {return validations;}
 	private final Map<QUESTION,Set<QUESTION>> triggers; public Map<QUESTION,Set<QUESTION>> getTriggers() {return triggers;}
 	
+	private boolean debugOnInfo;
+	
 	public SurveyValidationHandler(
 //			SurveyCoreFactoryBuilder<L,D,?,?,?,?,TEMPLATE,?,?,?,SECTION,QUESTION,?,VALIDATION,?,?,?,ANSWER,?,?,?,OPTION,?,?> fbCore,
 									JeeslSurveyCache<TEMPLATE,SECTION,QUESTION,?,VALIDATION> cache
@@ -64,6 +66,8 @@ public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescrip
 		triggers = new HashMap<QUESTION,Set<QUESTION>>();
 		
 		cpQuestion = new SurveyQuestionComparator<QUESTION>().factory(SurveyQuestionComparator.Type.position);
+		
+		debugOnInfo = false;
 	}
 	
 	public void clear()
@@ -102,13 +106,13 @@ public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescrip
 				try
 				{
 					Class<?> cAlgorithm = Class.forName(v.getAlgorithm().getCode()).asSubclass(SurveyValidator.class);
-					if(SurveyHandler.debug) {logger.info("Configuration of "+cAlgorithm.getSimpleName());}
+					if(debugOnInfo) {logger.info("Configuration of "+cAlgorithm.getSimpleName());}
 					SurveyValidator validator = (SurveyValidator)cAlgorithm.newInstance();
 					
 					if(v.getAlgorithm().getConfig()!=null && v.getAlgorithm().getConfig().trim().length()>0)
 					{
 						Class<?> cConfig = Class.forName(v.getAlgorithm().getConfig()).asSubclass(SurveyValidatorConfiguration.class);
-						if(SurveyHandler.debug) {logger.info("Config: "+v.getConfig());}
+						if(debugOnInfo) {logger.info("Config: "+v.getConfig());}
 						SurveyValidatorConfiguration config = (SurveyValidatorConfiguration)JsonUtil.read(v.getConfig(),cConfig);
 						JsonUtil.info(config);
 						validator.init(config);
@@ -160,7 +164,7 @@ public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescrip
 	private boolean validate(ANSWER answer)
 	{
 		QUESTION question = answer.getQuestion();
-		if(SurveyHandler.debug) {logger.info("Validating Question: "+question.toString());}
+		if(debugOnInfo) {logger.info("Validating Question: "+question.toString());}
 		for(VALIDATION v : validations.get(question))
 		{
 			SurveyValidator validator = validators.get(v);

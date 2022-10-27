@@ -13,7 +13,6 @@ import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
 import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
 import org.jeesl.controller.handler.ui.UiSlotWidthHandler;
-import org.jeesl.controller.handler.ui.helper.UiHelperAsset;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
@@ -42,6 +41,7 @@ import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.util.comparator.ejb.module.asset.EjbAssetComparator;
 import org.jeesl.util.comparator.ejb.module.asset.EjbEventComparator;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
+import org.jeesl.web.ui.module.aom.UiHelperAsset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
