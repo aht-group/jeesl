@@ -70,6 +70,6 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 	{
 		this.reset(true);
 		classification = fbRmmv.ejbClassification().build(realm,rref);
-		classification.setName(efLang.createEmpty(lp.getLocales()));
+		classification.setName(efLang.buildEmpty(lp.getLocales()));
 	}
 }

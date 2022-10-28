@@ -195,7 +195,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
     {
 		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbDms.getClassFile()));}
 		file = efFile.build(section, files);
-		file.setName(efLang.createEmpty(sbhLocale.getList()));
+		file.setName(efLang.buildEmpty(sbhLocale.getList()));
 		attributeHandler.prepare(file);
 		fileHandler.init(file);
     }

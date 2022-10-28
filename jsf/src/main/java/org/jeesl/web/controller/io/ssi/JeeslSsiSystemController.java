@@ -80,8 +80,8 @@ public class JeeslSsiSystemController <L extends JeeslLang, D extends JeeslDescr
 	{
 		reset(true);
 		system = fbSsiCore.ejbSystem().build();
-		system.setName(efLang.createEmpty(lp.getLocales()));
-		system.setDescription(efDescription.createEmpty(lp.getLocales()));
+		system.setName(efLang.buildEmpty(lp.getLocales()));
+		system.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
 	public void saveSystem() throws JeeslConstraintViolationException, JeeslLockingException

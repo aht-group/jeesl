@@ -10,6 +10,7 @@ import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
@@ -125,6 +126,21 @@ public class EjbStatusFactory<S extends JeeslStatus<L,D,S>, L extends JeeslLang,
         
         return s;
     }
+	public <LOC extends JeeslLocale<L,D,LOC,?>> S build(String code, List<LOC> locales)
+	{
+		S s;
+		try
+		{
+			s = cStatus.newInstance();
+			s.setCode(code);
+			s.setName(efLang.buildEmpty(locales));
+			s.setDescription(efDescription.buildEmpty(locales));
+		}
+		catch (InstantiationException e) {throw new RuntimeException(e);}
+		catch (IllegalAccessException e) {throw new RuntimeException(e);}
+        
+        return s;
+	}
 	
 	
 	public S id(int id) {return id((long)id);}

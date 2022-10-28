@@ -329,8 +329,8 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassEntity()));}
 		entity = efEntity.build(sbhCategory.getSelection(),entities);
 		entity.setDiagram(sbhDiagram.getSelection());
-		entity.setName(efLang.createEmpty(lp.getLocales()));
-		entity.setDescription(efDescription.createEmpty(lp.getLocales()));
+		entity.setName(efLang.buildEmpty(lp.getLocales()));
+		entity.setDescription(efDescription.buildEmpty(lp.getLocales()));
 		attribute=null;
 		mapping=null;
 	}
@@ -431,8 +431,8 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassAttribute()));}
 		attribute = efAttribute.build(null);
-		attribute.setName(efLang.createEmpty(lp.getLocales()));
-		attribute.setDescription(efDescription.createEmpty(lp.getLocales()));
+		attribute.setName(efLang.buildEmpty(lp.getLocales()));
+		attribute.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 
 	public void selectAttribute() throws JeeslNotFoundException
@@ -622,7 +622,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		attribute = efAttribute.build(null);
 		attribute.setCode(f.getName());
 		attribute.setName(efLang.createLangMap("en",StringUtils.capitalize(f.getName())));
-		attribute.setDescription(efDescription.createEmpty(lp.getLocales()));
+		attribute.setDescription(efDescription.buildEmpty(lp.getLocales()));
 		attribute.setEntity(entity);
 		attribute.setBean(true);
 		attribute.setType(getAttributeTypeFromeCode(f.getType().getSimpleName().toString()));

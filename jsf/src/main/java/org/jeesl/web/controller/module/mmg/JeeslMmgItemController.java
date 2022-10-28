@@ -187,7 +187,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 		if(debugOnInfo) {logger.info("Handling FileUpload: "+path.getFileName().toString());}
 		
 		MI i = fbMmg.ejbItem().build(gallery);
-		i.setName(efLang.createEmpty(lp.getLocales()));
+		i.setName(efLang.buildEmpty(lp.getLocales()));
 		for(String k : i.getName().keySet()) {i.getName().get(k).setLang(path.getFileName().toString());}
 		fbMmg.ejbItem().converter(fMmg,i);
 		EjbLastModifiedFactory.modified(currentUser,i);
@@ -201,7 +201,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 	public void handleFileUpload(FileUploadEvent event) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		MI i = fbMmg.ejbItem().build(gallery);
-		i.setName(efLang.createEmpty(lp.getLocales()));
+		i.setName(efLang.buildEmpty(lp.getLocales()));
 		for(String k : i.getName().keySet()) {i.getName().get(k).setLang(event.getFile().getFileName());}
 		fbMmg.ejbItem().converter(fMmg,i);
 		EjbLastModifiedFactory.modified(currentUser,i);

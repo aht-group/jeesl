@@ -15,14 +15,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
-import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.status.Description;
 import net.sf.ahtutils.xml.status.Descriptions;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Langs;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class EjbDescriptionFactory<D extends JeeslDescription>
@@ -112,7 +109,11 @@ public class EjbDescriptionFactory<D extends JeeslDescription>
 		return map;
 	}
 	
-	public <S extends JeeslStatus<L,D,S>, L extends JeeslLang> Map<String,D> createEmpty(List<S> locales)
+//	public <S extends JeeslStatus<L,D,S>, L extends JeeslLang> Map<String,D> createEmpty(List<S> locales)
+//	{
+//		return createEmpty(TxtStatusFactory.toCodes(locales).toArray(new String[0]));
+//	}
+	public <LOC extends JeeslLocale<?,D,LOC,?>> Map<String,D> buildEmpty(List<LOC> locales)
 	{
 		return createEmpty(TxtStatusFactory.toCodes(locales).toArray(new String[0]));
 	}

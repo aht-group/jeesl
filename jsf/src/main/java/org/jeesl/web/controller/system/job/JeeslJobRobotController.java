@@ -75,8 +75,8 @@ public class JeeslJobRobotController <L extends JeeslLang, D extends JeeslDescri
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbJob.getClassRobot()));}
 		robot = efRobot.build();
-		robot.setName(efLang.createEmpty(lp.getLocales()));
-		robot.setDescription(efDescription.createEmpty(lp.getLocales()));
+		robot.setName(efLang.buildEmpty(lp.getLocales()));
+		robot.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 		
 	public void selectRobot()
