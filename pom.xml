@@ -300,50 +300,55 @@
 	
 	<repositories>
 		<repository>
-			<!--Aspose for WordRendering -->
-			<id>AsposeJavaAPI</id>
-			<name>Aspose Java API</name>
-			<url>https://repository.aspose.com/repo/</url>
+		    <!--Aspose for WordRendering -->
+		    <id>AsposeJavaAPI</id>
+		    <name>Aspose Java API</name>
+		    <url>https://repository.aspose.com/repo/</url>
 		</repository>
 		<repository>
-			<id>aht.3rd</id>
-			<name>AHT Nexus Third Party</name>
-			<url>https://www.aht-group.com/nexus/content/repositories/thirdparty</url>
-			<releases><enabled>true</enabled></releases>
-			<snapshots><enabled>false</enabled></snapshots>
+		    <id>aht.3rd</id>
+		    <name>AHT Nexus Third Party</name>
+		    <url>https://www.aht-group.com/nexus/content/repositories/thirdparty</url>
+		    <releases><enabled>true</enabled></releases>
+		    <snapshots><enabled>false</enabled></snapshots>
 		</repository>
 		<repository>
-			<id>sonatype.snapshot</id>
-			<name>Sonatype Snapshot Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-			<releases><enabled>false</enabled></releases>
-			<snapshots><enabled>true</enabled></snapshots>
+		    <id>sonatype.snapshot</id>
+		    <name>Sonatype Snapshot Repository</name>
+		    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		    <releases><enabled>false</enabled></releases>
+		    <snapshots><enabled>true</enabled></snapshots>
 		</repository>
-        <repository>
-            <id>jboss.public</id>
-            <name>JBoss Repository</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public</url>
-            <releases><enabled>true</enabled></releases>
-			<snapshots><enabled>false</enabled></snapshots>
-        </repository>
-            <repository>
-                <id>redhat.ga</id>
-                <name>JBoss Repository</name>
-                <url>https://maven.repository.redhat.com/ga</url>
-                <releases><enabled>true</enabled></releases>
-                <snapshots><enabled>false</enabled></snapshots>
-            </repository>
-            <repository>
-                <id>osgeo</id>
-                <name>OSGeo Release Repository</name>
-                <url>https://repo.osgeo.org/repository/release/</url>
-                <releases>
-                    <enabled>true</enabled>
-                </releases>
-                <snapshots>
-                    <enabled>false</enabled>
-                </snapshots>
-            </repository>
+		<repository>
+		    <id>mvn.central</id>
+		    <name>MVN Central</name>
+		    <url>https://repo1.maven.org/maven2</url>
+		</repository>
+		 <repository>
+		    <id>jboss.public</id>
+		    <name>JBoss Repository</name>
+		    <url>https://repository.jboss.org/nexus/content/groups/public</url>
+		    <releases><enabled>true</enabled></releases>
+		    <snapshots><enabled>false</enabled></snapshots>
+		</repository>
+		<repository>
+		    <id>redhat.ga</id>
+		    <name>JBoss Repository</name>
+		    <url>https://maven.repository.redhat.com/ga</url>
+		    <releases><enabled>true</enabled></releases>
+		    <snapshots><enabled>false</enabled></snapshots>
+		</repository>
+		<repository>
+		    <id>osgeo</id>
+		    <name>OSGeo Release Repository</name>
+		    <url>https://repo.osgeo.org/repository/release/</url>
+		    <releases>
+			<enabled>true</enabled>
+		    </releases>
+		    <snapshots>
+			<enabled>false</enabled>
+		    </snapshots>
+		</repository>
 	</repositories>
   
 	<distributionManagement>
