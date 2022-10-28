@@ -18,7 +18,7 @@ import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.jeesl.model.json.system.io.ssi.SsiCrendentials;
+import org.jeesl.model.json.system.io.ssi.JsonSsiCredential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,11 +31,11 @@ public class JeeslRestClient
 	private HttpClient client;
 	private HttpClientContext context;
 	
-	public JeeslRestClient(SsiCrendentials credentials)
+	public JeeslRestClient(JsonSsiCredential credentials)
 	{
 		this(credentials,10*60*1000);
 	}
-	public JeeslRestClient(SsiCrendentials credentials, int timeout)
+	public JeeslRestClient(JsonSsiCredential credentials, int timeout)
 	{	
 		context = HttpClientContext.create();
 		

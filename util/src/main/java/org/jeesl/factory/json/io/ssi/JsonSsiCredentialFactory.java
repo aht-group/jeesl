@@ -1,13 +1,13 @@
 package org.jeesl.factory.json.io.ssi;
 
-import org.jeesl.model.json.system.io.ssi.SsiCrendentials;
+import org.jeesl.model.json.system.io.ssi.JsonSsiCredential;
 
 public class JsonSsiCredentialFactory
 {
-	public static SsiCrendentials build(String user, String pwd){return build(null,user,pwd);}
-	public static SsiCrendentials build(String host, String user, String pwd)
+	public static JsonSsiCredential build(String user, String pwd){return build(null,user,pwd);}
+	public static JsonSsiCredential build(String host, String user, String pwd)
 	{
-		SsiCrendentials json = new SsiCrendentials();
+		JsonSsiCredential json = new JsonSsiCredential();
 		json.setUser(user);
 		json.setPassword(pwd);
 		json.setHost("hmis.moh.gov.rw");
