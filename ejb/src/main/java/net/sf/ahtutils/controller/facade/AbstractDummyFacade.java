@@ -73,6 +73,7 @@ public class AbstractDummyFacade implements JeeslFacade
 	}
 
 	@Override public <T extends EjbWithCode, E extends Enum<E>> T fByEnum(Class<T> type, E code) {return null;}
+	@Override public <T extends EjbWithCode> T fByClass(Class<T> c, Class<?> fqcn) {return null;}
 	@Override public <T extends EjbWithCode, E extends Enum<E>> T fByCode(Class<T> type, E code) throws JeeslNotFoundException {return null;}
 	@Override public <T extends EjbWithCode> T fByCode(Class<T> type, String code) throws JeeslNotFoundException {return null;}
 
@@ -575,5 +576,7 @@ public class AbstractDummyFacade implements JeeslFacade
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }

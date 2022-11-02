@@ -69,7 +69,7 @@ public class EjbTsBridgeFactory<TS extends JeeslTimeSeries<?,TS,BRIDGE,?,?>,
 	
 	public <T extends EjbWithId> Map<T,BRIDGE> toMapEjbBridge(List<BRIDGE> bridges, List<T> ejbs)
 	{
-		Map<T,BRIDGE> map = new HashMap<T,BRIDGE>();
+		Map<T,BRIDGE> map = new HashMap<>();
 		Map<Long,T> idMap = EjbIdFactory.toIdMap(ejbs);
 		for(BRIDGE bridge : bridges)
 		{
@@ -80,7 +80,7 @@ public class EjbTsBridgeFactory<TS extends JeeslTimeSeries<?,TS,BRIDGE,?,?>,
 	
 	public <T extends EjbWithId> Map<T,DATA> toMapEjbData(List<T> ejbs, List<DATA> datas)
 	{
-		Map<T,DATA> map = new HashMap<T,DATA>();
+		Map<T,DATA> map = new HashMap<>();
 		Map<Long,T> idMap = EjbIdFactory.toIdMap(ejbs);
 		for(DATA data : datas)
 		{

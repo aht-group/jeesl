@@ -25,6 +25,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 
 public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
@@ -67,6 +68,7 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	List<TS> fTimeSeries(List<BRIDGE> bridges);
 	List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes);
 	List<TS> fTimeSeries(SCOPE scope, INT interval, EC entityClass);
+	List<TS> fTimeSeries(EjbTimeSeriesQuery<SCOPE,BRIDGE,INT,STAT> query);
 	
 	List<DATA> fData(TRANSACTION transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);

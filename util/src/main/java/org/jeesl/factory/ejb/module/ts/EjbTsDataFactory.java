@@ -57,9 +57,7 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		return ejb;
 	}
-	
-	
-	
+
 	public Set<Date> toSetDate(List<DATA> list)
 	{
 		Set<Date> set = new HashSet<Date>();
