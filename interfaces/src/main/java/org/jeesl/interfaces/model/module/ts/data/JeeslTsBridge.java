@@ -8,7 +8,11 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithRefId;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslTsBridge <EC extends JeeslTsEntityClass<?,?,?,?>>
 					extends Serializable,EjbRemoveable,EjbPersistable,EjbWithId,EjbWithRefId,EjbWithParentAttributeResolver
 {

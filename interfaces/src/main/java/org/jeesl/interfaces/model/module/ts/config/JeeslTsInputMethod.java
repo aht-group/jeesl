@@ -13,7 +13,6 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-
 @DownloadJeeslDescription
 @DownloadJeeslData
 public interface JeeslTsInputMethod <L extends JeeslLang, D extends JeeslDescription,

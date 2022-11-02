@@ -16,7 +16,11 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisibleParent;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslTsEntityClass <L extends JeeslLang, D extends JeeslDescription,
 									CAT extends JeeslTsCategory<L,D,CAT,?>
 									,ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>
