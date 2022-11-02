@@ -3,6 +3,7 @@ package org.jeesl.controller.facade.module;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -47,6 +48,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 
 public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
@@ -196,6 +198,33 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		predicates.add(cB.equal(ts.<INT>get(JeeslTimeSeries.Attributes.interval.toString()), interval));
 		predicates.add(cB.equal(jBridge.<EC>get(JeeslTsBridge.Attributes.entityClass.toString()), entityClass));
 
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(ts);
+		return em.createQuery(cQ).getResultList();
+	}
+	
+	@Override public List<TS> fTimeSeries(EjbTimeSeriesQuery<SCOPE,BRIDGE,INT,STAT> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<TS> cQ = cB.createQuery(fbTs.getClassTs());
+		Root<TS> ts = cQ.from(fbTs.getClassTs());
+		
+		int activeFilters=0;
+		if(Objects.nonNull(query.getBridges()) && !query.getBridges().isEmpty())
+		{
+			Path<BRIDGE> pBridge = ts.get(JeeslTimeSeries.Attributes.bridge.toString());
+			predicates.add(pBridge.in(query.getBridges()));
+			activeFilters++;
+		}
+		if(Objects.nonNull(query.getScopes()) && !query.getScopes().isEmpty())
+		{
+			Path<SCOPE> pScope = ts.get(JeeslTimeSeries.Attributes.scope.toString());
+			predicates.add(pScope.in(query.getScopes()));
+			activeFilters++;
+		}
+		if(activeFilters==0) {return new ArrayList<>();}
+		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(ts);
 		return em.createQuery(cQ).getResultList();

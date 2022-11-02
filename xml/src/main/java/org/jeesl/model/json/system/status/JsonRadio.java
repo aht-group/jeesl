@@ -8,11 +8,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="type")
-public class JsonType implements Serializable
+public class JsonRadio implements Serializable
 {
 	public static final long serialVersionUID=1;
 
-	public JsonType() {}
+	public JsonRadio() {}
 	
 	@JsonProperty("id")
 	private Long id;

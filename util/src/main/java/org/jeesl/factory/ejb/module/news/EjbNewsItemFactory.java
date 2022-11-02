@@ -47,7 +47,7 @@ public class EjbNewsItemFactory<L extends JeeslLang, D extends JeeslDescription,
 		try
 		{
 			ITEM ejb = cItem.newInstance();
-			ejb.setName(efLang.createEmpty(locales));
+			ejb.setName(efLang.buildEmpty(locales));
 			ejb.setMarkup(efMarkup.build(locales,markupType));
 			ejb.setAuthor(author);
 			ejb.setValidFrom(LocalDateTime.now());

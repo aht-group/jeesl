@@ -158,8 +158,8 @@ public abstract class AbstractAssetTypeBean <L extends JeeslLang, D extends Jees
 	{
 		ATYPE parent=null; if(type!=null) {parent = type;} else {parent = root;}
 		type = fbAsset.ejbType().build(realm,rref,sbhView.getSelection(),parent, UUID.randomUUID().toString());
-		type.setName(efLang.createEmpty(bTranslation.getLocales()));
-		type.setDescription(efDescription.createEmpty(bTranslation.getLocales()));
+		type.setName(efLang.buildEmpty(bTranslation.getLocales()));
+		type.setDescription(efDescription.buildEmpty(bTranslation.getLocales()));
 	}
 
 	public void cancelType()

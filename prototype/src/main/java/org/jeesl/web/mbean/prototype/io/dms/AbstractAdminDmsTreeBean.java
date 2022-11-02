@@ -145,8 +145,8 @@ public abstract class AbstractAdminDmsTreeBean <L extends JeeslLang,D extends Je
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbDms.getClassSection()));}
 		section = efSection.build(dm.getRoot());
-		section.setName(efLang.createEmpty(sbhLocale.getList()));
-		section.setDescription(efDescription.createEmpty(sbhLocale.getList()));
+		section.setName(efLang.buildEmpty(sbhLocale.getList()));
+		section.setDescription(efDescription.buildEmpty(sbhLocale.getList()));
 	}
 
 	public void saveSection() throws JeeslConstraintViolationException, JeeslLockingException

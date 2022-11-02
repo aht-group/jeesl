@@ -74,6 +74,6 @@ public class JeeslMmgClassificationController <L extends JeeslLang, D extends Je
 	{
 		this.reset(true);
 		classification = fbMmg.ejbClassification().build(realm,rref);
-		classification.setName(efLang.createEmpty(lp.getLocales()));
+		classification.setName(efLang.buildEmpty(lp.getLocales()));
 	}	
 }

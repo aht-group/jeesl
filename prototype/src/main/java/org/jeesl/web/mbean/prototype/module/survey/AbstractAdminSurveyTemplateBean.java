@@ -260,8 +260,8 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	{
 		logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassVersion()));
 		version = efVersion.build(refId);
-		version.setName(efLang.createEmpty(sbhLocale.getList()));
-		version.setDescription(efDescription.createEmpty(sbhLocale.getList()));
+		version.setName(efLang.buildEmpty(sbhLocale.getList()));
+		version.setDescription(efDescription.buildEmpty(sbhLocale.getList()));
 	}
 	
 	protected void reloadVersions()
@@ -325,8 +325,8 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	{
 		logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassSection()));
 		section = efSection.build(template,0);
-		section.setName(efLang.createEmpty(sbhLocale.getList()));
-		section.setDescription(efDescription.createEmpty(sbhLocale.getList()));
+		section.setName(efLang.buildEmpty(sbhLocale.getList()));
+		section.setDescription(efDescription.buildEmpty(sbhLocale.getList()));
 		nnb.doubleToA(section.getScoreLimit());
 		nnb.doubleToB(section.getScoreNormalize());
 	}
@@ -374,7 +374,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 		logger.info(AbstractLogMessage.addEntity(fbTemplate.getOptionSetClass()));
 		clear(false,false,true,true,true,true,true,false,true,true);
 		optionSet = efOptionSet.build(template,optionSets);
-		optionSet.setName(efLang.createEmpty(sbhLocale.getList()));
+		optionSet.setName(efLang.buildEmpty(sbhLocale.getList()));
 	}
 	
 	public void saveSet() throws JeeslConstraintViolationException, JeeslLockingException
@@ -407,9 +407,9 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	{
 		logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassQuestion()));
 		question = efQuestion.build(section,null);
-		question.setName(efLang.createEmpty(sbhLocale.getList()));
-		question.setText(efDescription.createEmpty(sbhLocale.getList()));
-		question.setDescription(efDescription.createEmpty(sbhLocale.getList()));
+		question.setName(efLang.buildEmpty(sbhLocale.getList()));
+		question.setText(efDescription.buildEmpty(sbhLocale.getList()));
+		question.setDescription(efDescription.buildEmpty(sbhLocale.getList()));
 	}
 	
 	public void selectQuestion()
@@ -417,7 +417,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(question));}
 		question = efLang.persistMissingLangs(fCore, sbhLocale.getList(), question);
 		question = efDescription.persistMissingLangs(fCore, sbhLocale.getList(), question);
-		if(question.getText()==null) {question.setText(efDescription.createEmpty(sbhLocale.getList()));}
+		if(question.getText()==null) {question.setText(efDescription.buildEmpty(sbhLocale.getList()));}
 		for(LOC loc : sbhLocale.getList())
 		{
 			if(!question.getText().containsKey(loc.getCode()))
@@ -483,8 +483,8 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassOption()));}
 		option = efOption.build(question,"");
-		option.setName(efLang.createEmpty(sbhLocale.getList()));
-		option.setDescription(efDescription.createEmpty(sbhLocale.getList()));
+		option.setName(efLang.buildEmpty(sbhLocale.getList()));
+		option.setDescription(efDescription.buildEmpty(sbhLocale.getList()));
 	}
 	
 	public void selectOption()
@@ -622,7 +622,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassValidation()));}
 
 		validation = efValidation.build(question,validations);
-		validation.setDescription(efDescription.createEmpty(sbhLocale.getList()));
+		validation.setDescription(efDescription.buildEmpty(sbhLocale.getList()));
 	}
 	
 	public void saveValidation() throws JeeslConstraintViolationException, JeeslLockingException

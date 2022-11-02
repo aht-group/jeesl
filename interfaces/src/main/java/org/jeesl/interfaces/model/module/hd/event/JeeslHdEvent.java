@@ -1,7 +1,6 @@
 package org.jeesl.interfaces.model.module.hd.event;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;

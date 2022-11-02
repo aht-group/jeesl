@@ -63,6 +63,7 @@ public interface JeeslFacade extends JeeslIdFacade
 	
 	//CODE
 	<T extends EjbWithCode, E extends Enum<E>> T fByEnum(Class<T> c, E code);
+	<T extends EjbWithCode> T fByClass(Class<T> c, Class<?> fqcn);
 	<T extends EjbWithCode, E extends Enum<E>> T fByCode(Class<T> c, E code) throws JeeslNotFoundException;
 	<T extends EjbWithCode> T fByCode(Class<T> c, String code) throws JeeslNotFoundException;
 	<T extends EjbWithNrString> T fByNr(Class<T> c, String nr) throws JeeslNotFoundException;

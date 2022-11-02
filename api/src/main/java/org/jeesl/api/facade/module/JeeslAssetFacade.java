@@ -42,6 +42,7 @@ public interface JeeslAssetFacade <L extends JeeslLang, D extends JeeslDescripti
 			extends JeeslFacade
 {	
 	<RREF extends EjbWithId> ASSET fcAssetRoot(REALM realm, RREF rref);
+	<RREF extends EjbWithId> List<ASSET> fAomAssets(REALM realm, RREF rref, ATYPE type1, ATYPE type2);
 	List<ASSET> allAssets(ASSET root);
 	
 	<RREF extends EjbWithId> VIEW fAomView(REALM realm, RREF rref, JeeslAomView.Tree tree) throws JeeslNotFoundException;

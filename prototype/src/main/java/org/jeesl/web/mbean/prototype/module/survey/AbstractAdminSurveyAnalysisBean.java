@@ -213,7 +213,7 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 	{
 		logger.info(AbstractLogMessage.addEntity(fbAnalysis.getClassAnalysis()));
 		analysis = efAnalysis.build(version.getTemplate(),analyses);
-		analysis.setName(efLang.createEmpty(sbhLocale.getList()));
+		analysis.setName(efLang.buildEmpty(sbhLocale.getList()));
 	}
 	
 	public void saveAnalysis() throws JeeslConstraintViolationException, JeeslLockingException
@@ -279,7 +279,7 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 		catch (JeeslNotFoundException e)
 		{
 			analysisQuestion = efAnalysisQuestion.build(analysis, question);
-			analysisQuestion.setName(efLang.createEmpty(sbhLocale.getList()));
+			analysisQuestion.setName(efLang.buildEmpty(sbhLocale.getList()));
 		}
 		reset(false,false,false,false,false,true);
 	}

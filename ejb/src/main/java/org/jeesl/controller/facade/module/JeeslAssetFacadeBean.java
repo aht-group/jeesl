@@ -96,10 +96,39 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 
 		TypedQuery<VIEW> tQ = em.createQuery(cQ);
 		try	{return tQ.getSingleResult();}
-		catch (NoResultException ex)
+		catch (NoResultException ex){throw new JeeslNotFoundException(ex.getMessage());}
+	}
+	
+	@Override
+	public <RREF extends EjbWithId> List<ASSET> fAomAssets(REALM realm, RREF rref, ATYPE type1, ATYPE type2)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<ASSET> cQ = cB.createQuery(fbAsset.getClassAsset());
+		Root<ASSET> root = cQ.from(fbAsset.getClassAsset());
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		Expression<Long> eRref = root.get(JeeslAomAsset.Attributes.realmIdentifier.toString());
+		Path<REALM> pRealm = root.get(JeeslAomAsset.Attributes.realm.toString());
+		
+		predicates.add(cB.equal(eRref,rref.getId()));
+		predicates.add(cB.equal(pRealm,realm));
+		
+		if(type1!=null)
 		{
-			throw new JeeslNotFoundException(ex.getMessage());
+			Path<ATYPE> pType = root.get(JeeslAomAsset.Attributes.type1.toString());
+			predicates.add(cB.equal(pType,type1));
 		}
+		if(type2!=null)
+		{
+			Path<ATYPE> pType = root.get(JeeslAomAsset.Attributes.type2.toString());
+			predicates.add(cB.equal(pType,type2));
+		}
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(root);
+
+		TypedQuery<ASSET> tQ = em.createQuery(cQ);
+		return tQ.getResultList();
 	}
 	
 	@Override public <RREF extends EjbWithId> VIEW fcAomView(REALM realm, RREF rref, JeeslAomView.Tree tree)

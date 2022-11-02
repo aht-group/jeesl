@@ -108,6 +108,8 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	@Override public <T extends EjbWithId> long maxId(Class<T> c) {return fJeesl.maxId(c);}
 	
 	//Code
+	@Override
+	public <T extends EjbWithCode> T fByClass(Class<T> c, Class<?> fqcn) {return fJeesl.fByClass(c,fqcn);}
 	@Override public <T extends EjbWithCode, E extends Enum<E>> T fByEnum(Class<T> c, E code) {return fJeesl.fByEnum(c,code);}
 	@Override public <T extends EjbWithCode, E extends Enum<E>> T fByCode(Class<T> c, E code) throws JeeslNotFoundException {return fJeesl.fByCode(c, code);}
 	@Override public <T extends EjbWithCode> T fByCode(Class<T> c, String code) throws JeeslNotFoundException {return fJeesl.fByCode(c, code);}

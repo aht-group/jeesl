@@ -152,8 +152,8 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 	{
 		logger.info(AbstractLogMessage.addEntity(fbHd.getClassFaq()));
 		faq = fbHd.ejbFaq().build(realm,rref,sbhCategory.getList().get(0),sbhScope.getList().get(0));
-		faq.setName(efLang.createEmpty(bTranslation.getLocales()));
-		faq.setDescription(efDescription.createEmpty(bTranslation.getLocales()));
+		faq.setName(efLang.buildEmpty(bTranslation.getLocales()));
+		faq.setDescription(efDescription.buildEmpty(bTranslation.getLocales()));
 	}
 	
 	public void saveFaq() throws JeeslConstraintViolationException, JeeslLockingException

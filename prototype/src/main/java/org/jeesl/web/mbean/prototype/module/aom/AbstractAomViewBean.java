@@ -133,8 +133,8 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 	public void addLevel()
 	{
 		level = fbAsset.ejbLevel().build(realm,rref,levels);
-		level.setName(efLang.createEmpty(bTranslation.getLocales()));
-		level.setDescription(efDescription.createEmpty(bTranslation.getLocales()));
+		level.setName(efLang.buildEmpty(bTranslation.getLocales()));
+		level.setDescription(efDescription.buildEmpty(bTranslation.getLocales()));
 	}
 
 	public void saveLevel() throws JeeslConstraintViolationException, JeeslLockingException

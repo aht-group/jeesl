@@ -5,8 +5,8 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-@JsonRootName(value="crendentials")
-public class SsiCrendentials implements Serializable
+@JsonRootName(value="crendential")
+public class JsonSsiCredential implements Serializable
 {
 	public static final long serialVersionUID=1;
 

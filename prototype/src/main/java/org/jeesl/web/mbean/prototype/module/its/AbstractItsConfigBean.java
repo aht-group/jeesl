@@ -78,8 +78,8 @@ public abstract class AbstractItsConfigBean <L extends JeeslLang, D extends Jees
 				try
 				{
 					C c = fbIts.ejbConfig().build(realm,rref,o);
-					c.setName(efLang.createEmpty(bTranslation.getLocales()));
-					c.setDescription(efDescription.createEmpty(bTranslation.getLocales()));
+					c.setName(efLang.buildEmpty(bTranslation.getLocales()));
+					c.setDescription(efDescription.buildEmpty(bTranslation.getLocales()));
 					configs.add(fIts.save(c));
 				}
 				catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}

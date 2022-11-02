@@ -147,8 +147,8 @@ public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslD
 		CAT c = null; if(!sbhCat.getSelected().isEmpty()) {c = sbhCat.getSelected().get(0);}
 		TYPE t = null; if(bAttribute!=null && bAttribute.getTypes()!=null && !bAttribute.getTypes().isEmpty()) {t = bAttribute.getTypes().get(0);}
 		criteria = efCriteria.build(realm,rref,c,t);
-		criteria.setName(efLang.createEmpty(lp.getLocales()));
-		criteria.setDescription(efDescription.createEmpty(lp.getLocales()));
+		criteria.setName(efLang.buildEmpty(lp.getLocales()));
+		criteria.setDescription(efDescription.buildEmpty(lp.getLocales()));
 		reset(false,false,true);
 	}
 	
@@ -193,8 +193,8 @@ public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslD
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbAttribute.getClassOption()));}
 		option = efOption.build(criteria,options);
-		option.setName(efLang.createEmpty(lp.getLocales()));
-		option.setDescription(efDescription.createEmpty(lp.getLocales()));
+		option.setName(efLang.buildEmpty(lp.getLocales()));
+		option.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
 	public void selectOption()

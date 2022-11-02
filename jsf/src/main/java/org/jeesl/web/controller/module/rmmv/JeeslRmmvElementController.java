@@ -136,7 +136,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	{
 		this.reset(true,true,true);
 		element = fbRmmv.ejbElement().build(realm,rref);
-		element.setName(efLang.createEmpty(lp.getLocales()));
+		element.setName(efLang.buildEmpty(lp.getLocales()));
 	}
 	
 	public void saveElement() throws JeeslConstraintViolationException, JeeslLockingException
