@@ -60,6 +60,7 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 	protected C classification;  public C getClassification() {return classification;} public void setClassification(C classification) {this.classification = classification;}
 	protected R realm;
 	protected RREF rref;
+	private boolean withIcon; public boolean isWithIcon() {return withIcon;} public void setWithIcon(boolean withIcon) {this.withIcon = withIcon;}
 	
 	public AbstractTreeClassificationController(final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg, final Class<LOC> cLocale, final Class<C> cClassification)
 	{
