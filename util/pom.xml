@@ -111,6 +111,7 @@
             <scope>provided</scope>
         </dependency>
         
+        <!--
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
@@ -130,6 +131,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        -->
       
         <!-- JSF -->
         <dependency>
