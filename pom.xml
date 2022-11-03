@@ -319,6 +319,7 @@
 		    <releases><enabled>false</enabled></releases>
 		    <snapshots><enabled>true</enabled></snapshots>
 		</repository>
+		<!-- May not be needed to be explicitely given -->
 		<repository>
 		    <id>mvn.central</id>
 		    <name>MVN Central</name>

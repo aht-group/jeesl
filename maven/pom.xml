@@ -79,6 +79,7 @@
 		<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-report</artifactId>
+			<!-- Version may not be needed, but did not work without it in a certain scenario -->
 			<version>0.3.0-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
