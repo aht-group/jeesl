@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-import org.exolab.castor.types.DateTime;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

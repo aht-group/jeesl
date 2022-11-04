@@ -202,13 +202,14 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 		else {setDefault();}
 	}
 	
-	public <E extends Enum<E>> void setDefault(E code)
+	public <E extends Enum<E>> void setDefault(E code) {this.setDefault(code.toString());}
+	public <E extends Enum<E>> void setDefault(String code)
 	{
 		if(EjbWithCode.class.isAssignableFrom(c) || EjbWithNonUniqueCode.class.isAssignableFrom(c))
 		{
 			for(T t : list)
 			{
-				if(((EjbWithCode)t).getCode().equals(code.toString()))
+				if(((EjbWithCode)t).getCode().equals(code))
 				{
 					setDefault(t);
 					break;

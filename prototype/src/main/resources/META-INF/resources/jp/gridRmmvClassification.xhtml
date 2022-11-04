@@ -8,6 +8,8 @@
 	<composite:interface>
 		<composite:attribute name="controller" required="true"/>
 		<composite:attribute name="withCode" required="false" default="false"/>
+		<composite:attribute name="withMultiLang" required="false" default="false"/>
+		<composite:attribute name="withIcon" required="false" default="false"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -27,7 +29,7 @@
 				<p:ajax event="dragdrop" listener="#{cc.attrs.controller.onDragDrop}" oncomplete="try{calculateTreeHeight();}catch(e){}"/>
 				<p:treeNode>
 					<h:outputText value="#{node.name[cc.attrs.controller.sbhLocale.selection.code].lang}" />
-					<jtp:symbolizer value="#{node}" marginLef="5"/>
+					<jtp:symbolizer value="#{node}" marginLeft="5" rendered="#{cc.attrs.withIcon}"/>
 				</p:treeNode>
 			</p:tree>
 		</p:panel>
@@ -46,15 +48,16 @@
 					<jtp:label entity="RmmvClassification" code="code" rendered="#{cc.attrs.withCode}"/>
 					<jtp:inputText value="#{cc.attrs.controller.classification.code}" rendered="#{cc.attrs.withCode}"/>
 				
-					<jtp:label entity="RmmvClassification" code="name"/>
-					<jtp:inputText value="#{cc.attrs.controller.classification.name[cc.attrs.controller.sbhLocale.selection.code].lang}"/>
+					<jtp:label entity="RmmvClassification" code="name" rendered="#{not cc.attrs.withMultiLang}"/>
+					<jtp:inputText value="#{cc.attrs.controller.classification.name[cc.attrs.controller.sbhLocale.selection.code].lang}" rendered="#{not cc.attrs.withMultiLang}"/>
 					
-					<jtp:label entity="RmmvClassification" code="graphic"/>
-					<jtp:symbolizer value="#{cc.attrs.controller.classification}" rendered="#{cc.attrs.controller.classification.id gt 0}"/>
+					<jtp:label entity="RmmvClassification" code="graphic" rendered="#{cc.attrs.withIcon}"/>
+					<jtp:symbolizer value="#{cc.attrs.controller.classification}" rendered="#{cc.attrs.withIcon and (cc.attrs.controller.classification.id gt 0)}"/>
 				</p:panelGrid>
+				<j:tabTranslationEditor value="#{cc.attrs.controller.classification}" withDescription="false" rendered="#{cc.attrs.withMultiLang}"/>
 			</p:panel>
 		</h:form>
-		<h:form id="fUpload" enctype="multipart/form-data" rendered="#{(not empty cc.attrs.controller.classification) and (cc.attrs.controller.classification.id gt 0)}">
+		<h:form id="fUpload" enctype="multipart/form-data" rendered="#{(cc.attrs.withIcon) and (not empty cc.attrs.controller.classification) and (cc.attrs.controller.classification.id gt 0)}">
 				<p:fileUpload styleClass="jeeslFileUpload"
 								listener="#{cc.attrs.controller.handleFileUpload}" mode="advanced" dragDropSupport="false"
 								update=":#{cc.id}:sElement" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/" />
