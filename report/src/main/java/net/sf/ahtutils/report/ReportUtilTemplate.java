@@ -127,7 +127,12 @@ public class ReportUtilTemplate
 		for (Element element : template.getElement())
 		{
 			InputStream is             = mrl.searchIs(reportRoot +"/templates/" +element.getFile() +".jrxml");
-			JRXmlLoader jlo            = new JRXmlLoader(JRXmlDigesterFactory.createDigester());
+			
+			logger.warn(ReportUtilTemplate.class.getSimpleName()+" code is commented out, will be fixed asap!");
+//			JRXmlLoader jlo            = new JRXmlLoader(JRXmlDigesterFactory.createDigester());
+			JRXmlLoader jlo = null;
+		
+			
 			JasperDesign elementDesign = jlo.loadXML(is); 
 			if (element.getType().equals("header"))
 			{
