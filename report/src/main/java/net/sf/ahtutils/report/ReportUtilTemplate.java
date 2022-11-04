@@ -15,6 +15,7 @@ import net.sf.ahtutils.xml.report.Reports;
 import net.sf.ahtutils.xml.report.Template;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.xml.JaxbUtil;
+import net.sf.jasperreports.engine.DefaultJasperReportsContext;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.design.JRDesignBand;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
@@ -23,9 +24,9 @@ import net.sf.jasperreports.engine.design.JRDesignParameter;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JRDesignTextField;
 import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlDigesterFactory;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.engine.xml.JRXmlWriter;
+import org.apache.commons.digester.Digester;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -127,7 +128,7 @@ public class ReportUtilTemplate
 		for (Element element : template.getElement())
 		{
 			InputStream is             = mrl.searchIs(reportRoot +"/templates/" +element.getFile() +".jrxml");
-			JRXmlLoader jlo            = new JRXmlLoader(JRXmlDigesterFactory.createDigester());
+			JRXmlLoader jlo            = new JRXmlLoader(DefaultJasperReportsContext.getInstance(),new Digester());
 			JasperDesign elementDesign = jlo.loadXML(is); 
 			if (element.getType().equals("header"))
 			{
