@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisible;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.system.io.cms.JeeslWithMultiMarkup;
+import org.jeesl.interfaces.model.with.system.io.cms.JeeslWithMarkupMulti;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslNewsItem<L extends JeeslLang,
@@ -18,7 +18,7 @@ public interface JeeslNewsItem<L extends JeeslLang,
 								USER extends EjbWithId,
 								M extends JeeslMarkup<?>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithVisible,
-				EjbWithLang<L>,JeeslWithMultiMarkup<M>
+				EjbWithLang<L>,JeeslWithMarkupMulti<M>
 {
 	public static enum Attributes{visible,validFrom}
 	

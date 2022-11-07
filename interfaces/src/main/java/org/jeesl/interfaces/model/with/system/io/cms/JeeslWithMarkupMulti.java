@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 
-public interface JeeslWithMultiMarkup <M extends JeeslMarkup<?>>
+public interface JeeslWithMarkupMulti <M extends JeeslMarkup<?>>
 {
 	Map<String,M> getMarkup();
 	void setMarkup(Map<String,M> translation);
