@@ -36,6 +36,9 @@ public interface JeeslIoSsiCredential <SYSTEM extends JeeslIoSsiSystem<?,?>>
 	String getUrl();
 	void setUrl(String url);
 	
+	String getHost();
+	void setHost(String host);
+	
 	boolean isEncrypted();
 	void setEncrypted(boolean encrypted);
 }
