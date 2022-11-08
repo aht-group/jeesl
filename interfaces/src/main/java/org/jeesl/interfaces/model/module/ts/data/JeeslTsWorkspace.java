@@ -23,5 +23,5 @@ public interface JeeslTsWorkspace <L extends JeeslLang, D extends JeeslDescripti
 //								JeeslOptionRestDownload,EjbWithCodeGraphic<G>,
 								JeeslStatus<L,D,S>
 {	
-	public enum Code{live}
+
 }
