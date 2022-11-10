@@ -32,6 +32,9 @@ public class IoLang implements JeeslLang
 	@Override public void setLang(String name) {this.lang = name;}
 	
 	
+	@Override public boolean equals(Object object) {return (object instanceof IoLang) ? id == ((IoLang) object).getId() : (object == this);}
+	@Override public int hashCode() {return new HashCodeBuilder(19,21).append(id).toHashCode();}
+	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
@@ -40,7 +43,4 @@ public class IoLang implements JeeslLang
 		sb.append(" "+lang);
 		return sb.toString();
 	}
-	
-	@Override public boolean equals(Object object) {return (object instanceof IoLang) ? id == ((IoLang) object).getId() : (object == this);}
-	@Override public int hashCode() {return new HashCodeBuilder(19,21).append(id).toHashCode();}
 }

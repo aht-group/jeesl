@@ -44,7 +44,6 @@
 		<p:overlayPanel widgetVar="wvOpActionSelection" appendToBody="false">
 			<p:dataTable id="dtOpSector" var="a" value="#{cc.attrs.bean.opActions}" rowKey="#{a.id}"
                          selection="#{cc.attrs.bean.opAction}" selectionMode="single"
-                         filteredValue="#{cc.attrs.bean.opFvActions}"
                          rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddAction}" oncomplete="PF('wvOpActionSelection').hide();"/>
 				<p:column>

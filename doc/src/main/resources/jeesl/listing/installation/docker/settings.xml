@@ -1,0 +1,20 @@
+<settings>
+
+	<pluginGroups>
+		<pluginGroup>org.jeesl</pluginGroup>
+	</pluginGroups>
+	
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation><activeByDefault>true</activeByDefault></activation>
+			<properties>
+				<my.build.directory>/root/maven/${project.groupId}/${project.artifactId}</my.build.directory>
+			</properties>
+		</profile>
+	</profiles>
+	
+	<activeProfiles>
+		<activeProfile>default</activeProfile>
+	</activeProfiles>
+</settings>

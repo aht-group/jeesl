@@ -45,7 +45,6 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription,
 	
 	protected NullNumberBinder nnb; public NullNumberBinder getNnb() {return nnb;} public void setNnb(NullNumberBinder nnb) {this.nnb = nnb;}
 
-	
 	public AbstractAdminBean(final Class<L> cL, final Class<D> cD)
 	{
 		this.cL = cL;

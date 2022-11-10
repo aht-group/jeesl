@@ -12,21 +12,21 @@ RUN cd /usr/lib/jvm \
 	&& apt install -y /usr/lib/jvm/zulu8.66.0.15-ca-jdk8.0.352-linux_arm64.deb \
 	&& rm /usr/lib/jvm/zulu8.66.0.15-ca-jdk8.0.352-linux_arm64.deb
 	
-#ENV PATH="${PATH}:/usr/lib/jvm/graalvm-ce-java11-22.3.0/bin"
-#ENV JAVA_HOME="/usr/lib/jvm/graalvm-ce-java11-22.3.0"
-#RUN update-alternatives --set java /usr/lib/jvm/graalvm-ce-java11-22.3.0/bin/java
+ENV PATH="${PATH}:/usr/lib/jvm/graalvm-ce-java11-22.3.0/bin"
+ENV JAVA_HOME="/usr/lib/jvm/graalvm-ce-java11-22.3.0"
+RUN update-alternatives --set java /usr/lib/jvm/graalvm-ce-java11-22.3.0/bin/java
+RUN gu install native-image
 
-# RUN echo gu install native-image
-
-RUN update-alternatives --set java /usr/lib/jvm/zulu-8-arm64/jre/bin/java
-ENV JAVA_HOME="/usr/lib/jvm/zulu-8-arm64"
 
 RUN cd /root \
-	&& mkdir native \
-	&& git clone https://github.com/aht-group/jeesl.git && cd jeesl && mvn clean install -DskipTests && cd /root
+	&& mkdir .m2 && mkdir .m2/repository \
+	&& mkdir git \
+	&& mkdir maven \
+	&& mkdir config
+
+COPY settings.xml /root/.m2
 	
 RUN update-alternatives --set java /usr/lib/jvm/graalvm-ce-java11-22.3.0/bin/java
 ENV JAVA_HOME="/usr/lib/jvm/graalvm-ce-java11-22.3.0"
 
-RUN cd /root \
-	&& cd jeesl/client && mvn -Pnative -DskipTests package && cd /root
+WORKDIR /root/git
