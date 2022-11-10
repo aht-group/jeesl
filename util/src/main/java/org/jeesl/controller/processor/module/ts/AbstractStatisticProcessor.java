@@ -34,13 +34,13 @@ public class AbstractStatisticProcessor <TS extends JeeslTimeSeries<?,TS,?,?,?>,
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractStatisticProcessor.class);
 	
-	protected final TsFactoryBuilder<?,?,?,?,?,?,?,TS,TRANSACTION,?,?,?,?,?,?,DATA,?,SAMPLE,?,WS,?,?> fbTs;
+	protected final TsFactoryBuilder<?,?,?,?,?,?,?,?,TS,TRANSACTION,?,?,?,?,?,?,DATA,?,SAMPLE,?,WS,?,?> fbTs;
 	
 	protected final EjbTsDataFactory<TS,TRANSACTION,DATA,WS> efData;
 	
 	protected Comparator<DATA> comparatorData;
 	
-	public AbstractStatisticProcessor(TsFactoryBuilder<?,?,?,?,?,?,?,TS,TRANSACTION,?,?,?,?,?,?,DATA,?,SAMPLE,?,WS,?,?> fbTs)
+	public AbstractStatisticProcessor(TsFactoryBuilder<?,?,?,?,?,?,?,?,TS,TRANSACTION,?,?,?,?,?,?,DATA,?,SAMPLE,?,WS,?,?> fbTs)
 	{
 		this.fbTs = fbTs;
 		efData = fbTs.ejbData();

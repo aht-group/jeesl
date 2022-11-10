@@ -47,7 +47,7 @@ public class TsPasswordRatinglProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 {
 	final static Logger logger = LoggerFactory.getLogger(TsPasswordRatinglProcessor.class);
 	
-	public TsPasswordRatinglProcessor(TsFactoryBuilder<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
+	public TsPasswordRatinglProcessor(TsFactoryBuilder<?,?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
 									JeeslTsFacade<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs)
 	{
 		super(fbTs,fTs);

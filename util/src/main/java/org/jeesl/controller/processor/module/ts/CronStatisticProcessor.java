@@ -51,7 +51,7 @@ public class CronStatisticProcessor <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT
 	protected WS workspace; public WS getWorkspace() {return workspace;} public void setWorkspace(WS workspace) {this.workspace=workspace;}
 	protected TRANSACTION transaction; public TRANSACTION getTransaction() {return transaction;} public void setTransaction(TRANSACTION transaction) {this.transaction=transaction;}
 	
-	public CronStatisticProcessor(TsFactoryBuilder<?,?,?,SCOPE,?,?,?,TS,TRANSACTION,?,BRIDGE,EC,?,INT,STAT,DATA,?,SAMPLE,?,WS,?,CRON> fbTs,
+	public CronStatisticProcessor(TsFactoryBuilder<?,?,?,?,SCOPE,?,?,?,TS,TRANSACTION,?,BRIDGE,EC,?,INT,STAT,DATA,?,SAMPLE,?,WS,?,CRON> fbTs,
 			JeeslTsFacade<?,?,?,SCOPE,?,?,?,TS,TRANSACTION,?,BRIDGE,EC,?,INT,STAT,DATA,?,SAMPLE,?,WS,?,CRON> fTs,
 			TRANSACTION transaction,
 			WS workspace)

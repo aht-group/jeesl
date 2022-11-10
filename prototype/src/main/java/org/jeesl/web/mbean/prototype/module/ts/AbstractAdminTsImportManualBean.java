@@ -105,7 +105,7 @@ public class AbstractAdminTsImportManualBean<L extends JeeslLang, D extends Jees
 	private List<DATA> datas; public List<DATA> getDatas() {return datas;}
 	private DATA data; public DATA getData() { return data; } public void setData(DATA data) { this.data = data; }
 
-	public AbstractAdminTsImportManualBean(final TsFactoryBuilder<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractAdminTsImportManualBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
 		entities = new ArrayList<EjbWithId>();

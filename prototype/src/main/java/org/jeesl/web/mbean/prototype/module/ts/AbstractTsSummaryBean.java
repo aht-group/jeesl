@@ -83,7 +83,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 	private TS ts; public TS getTs() {return ts;} public void setTs(TS ts) {this.ts = ts;}
 
 
-	public AbstractTsSummaryBean(final TsFactoryBuilder<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractTsSummaryBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
 		mapBridge = new HashMap<Long,EjbWithId>();

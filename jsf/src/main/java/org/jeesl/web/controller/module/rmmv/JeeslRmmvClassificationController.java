@@ -38,7 +38,6 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslRmmvClassificationController.class);
 	
-	@SuppressWarnings("unused")
 	private final JeeslRmmvClassificationCallback callback;
 
 	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,?,?,?> fbRmmv;
@@ -58,6 +57,7 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 									R realm)
 	{
 		super.postConstructTreeClassification(fRmmv,fGraphic,lp,bMessage,realm);
+		logger.trace("Callback: "+callback.toString());
 	}
 	
 	@Override

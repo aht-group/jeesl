@@ -82,7 +82,7 @@ public class AbstractAdminTsTransactionBean <L extends JeeslLang, D extends Jees
 
 	private CodeConfirmationHandler cch;
 
-	public AbstractAdminTsTransactionBean(final TsFactoryBuilder<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractAdminTsTransactionBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
 		sbDateHandler = new SbDateIntervalHandler(this);

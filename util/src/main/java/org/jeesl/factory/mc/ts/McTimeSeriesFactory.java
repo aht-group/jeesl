@@ -59,7 +59,7 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 
 	private final JeeslTsFacade<?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs;
 
-	private final TsFactoryBuilder<?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs;
+	private final TsFactoryBuilder<?,?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs;
 	private final EjbTsDataPointFactory<MP,DATA,POINT> efPoint;
 
 	private SCOPE scope; public SCOPE getScope() {return scope;} public void setScope(SCOPE scope) {this.scope = scope;}
@@ -67,7 +67,7 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 	private INT interval; public INT getInterval() {return interval;} public void setInterval(INT interval) {this.interval = interval;}
 	private WS workspace; public WS getWorkspace() {return workspace;} public void setWorkspace(WS workspace) {this.workspace = workspace;}
 
-	public McTimeSeriesFactory(TsFactoryBuilder<?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
+	public McTimeSeriesFactory(TsFactoryBuilder<?,?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
 							   JeeslTsFacade<?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs)
 	{
 		this.fbTs=fbTs;

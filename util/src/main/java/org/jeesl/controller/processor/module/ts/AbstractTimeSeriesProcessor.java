@@ -45,7 +45,7 @@ public class AbstractTimeSeriesProcessor<SCOPE extends JeeslTsScope<?,?,?,ST,?,E
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractTimeSeriesProcessor.class);
 	
-	protected final TsFactoryBuilder<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs;
+	protected final TsFactoryBuilder<?,?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs;
 	
 	protected final JeeslTsFacade<?,?,?,SCOPE,ST,?,?,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs;
 	
@@ -63,7 +63,7 @@ public class AbstractTimeSeriesProcessor<SCOPE extends JeeslTsScope<?,?,?,ST,?,E
 	protected boolean developmentMode; public void activateDevelopmentMode() {developmentMode=true;}
 	protected boolean debugOnInfo; public boolean isDebugOnInfo() {return debugOnInfo;} public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	public AbstractTimeSeriesProcessor(TsFactoryBuilder<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
+	public AbstractTimeSeriesProcessor(TsFactoryBuilder<?,?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
 									JeeslTsFacade<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs)
 	{
 		this.fbTs=fbTs;

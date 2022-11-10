@@ -54,7 +54,7 @@ public class TsDbCountProcessor<RE extends JeeslRevisionEntity<?,?,?,?,?,?>,
 	private final JeeslIoDbFacade<?,?,?,?,?,?,?> fDb;
 
 	public TsDbCountProcessor(IoRevisionFactoryBuilder<?,?,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision,
-									TsFactoryBuilder<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
+									TsFactoryBuilder<?,?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
 									JeeslIoDbFacade<?,?,?,?,?,?,?> fDb,
 									JeeslTsFacade<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs)
 	{

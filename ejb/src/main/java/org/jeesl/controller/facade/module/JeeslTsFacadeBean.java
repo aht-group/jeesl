@@ -77,12 +77,12 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 {
 	private static final long serialVersionUID = 1L;
 
-	private final TsFactoryBuilder<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
+	private final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
 
 	private final EjbTsFactory<SCOPE,UNIT,TS,SOURCE,BRIDGE,EC,INT,STAT> efTs;
 	private final SqlTimeSeriesFactory<TS,DATA> sqlFactory;
 
-	public JeeslTsFacadeBean(EntityManager em, final TsFactoryBuilder<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public JeeslTsFacadeBean(EntityManager em, final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(em);
 		this.fbTs=fbTs;

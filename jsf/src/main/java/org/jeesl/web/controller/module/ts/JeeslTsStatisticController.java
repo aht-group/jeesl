@@ -1,13 +1,15 @@
 package org.jeesl.web.controller.module.ts;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
+import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.module.ts.JeeslTsStatisticCallback;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -21,6 +23,8 @@ import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.model.json.module.ts.JsonTsStatistic;
 import org.jeesl.web.controller.AbstractJeeslWebController;
 import org.slf4j.Logger;
@@ -41,25 +45,28 @@ public class JeeslTsStatisticController <L extends JeeslLang, D extends JeeslDes
 											STAT extends JeeslTsStatistic<L,D,STAT,?>
 											>
 		extends AbstractJeeslWebController<L,D,LOC>
-		implements Serializable
+		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslTsStatisticController.class);
 	
 	private JeeslTsFacade<L,D,CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?,?> fTs;
 	
-	private final TsFactoryBuilder<L,D,CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?,?> fbTs;
+	private final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?,?> fbTs;
+	
+	private final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
 	
 	private final JsonTuple1Handler<TS> th; public JsonTuple1Handler<TS> getTh() {return th;}
 	private final JeeslTsStatisticCallback callback;
 	
 	protected String jsonStream; public String getJsonStream() {return jsonStream;}
 
-	public JeeslTsStatisticController(JeeslTsStatisticCallback callback, final TsFactoryBuilder<L,D,CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?,?> fbTs)
+	public JeeslTsStatisticController(JeeslTsStatisticCallback callback, final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?,?> fbTs)
 	{
 		super(fbTs.getClassL(),fbTs.getClassD());
 		this.fbTs=fbTs;
 		this.callback=callback;
+		sbhLocale = new SbSingleHandler<>(fbTs.getClassLocale(),this);
 		th = new JsonTuple1Handler<TS>(fbTs.getClassTs());
 	}
 	
@@ -68,8 +75,18 @@ public class JeeslTsStatisticController <L extends JeeslLang, D extends JeeslDes
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fTs=fTs;
+		
+		sbhLocale.setList(lp.getLocales());
+		sbhLocale.setDefault();
+		
 		reloadBridges();
 		logger.trace("Callback: "+callback.toString());
+	}
+	
+	@Override
+	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	{
+		// TODO Auto-generated method stub
 	}
 	
 	private void reloadBridges()
@@ -83,10 +100,10 @@ public class JeeslTsStatisticController <L extends JeeslLang, D extends JeeslDes
 			JsonTsStatistic json = new JsonTsStatistic();
 			if(th.contains(ts)){json.setCount(Long.valueOf(th.getMap1().get(ts).getCount()).intValue());}
 			else {json.setCount(0);}
-			json.setCategory(ts.getScope().getCategory().getName().get("en").getLang());
-			json.setScope(ts.getScope().getName().get("en").getLang());
-			json.setEntity(ts.getBridge().getEntityClass().getName().get("en").getLang());
-			json.setInterval(ts.getInterval().getName().get("en").getLang());
+			json.setCategory(ts.getScope().getCategory().getName().get(sbhLocale.getSelection().getCode()).getLang());
+			json.setScope(ts.getScope().getName().get(sbhLocale.getSelection().getCode()).getLang());
+			json.setEntity(ts.getBridge().getEntityClass().getName().get(sbhLocale.getSelection().getCode()).getLang());
+			json.setInterval(ts.getInterval().getName().get(sbhLocale.getSelection().getCode()).getLang());
 
 			list.add(json);
 		}

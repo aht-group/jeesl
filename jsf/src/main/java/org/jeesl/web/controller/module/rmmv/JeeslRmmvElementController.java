@@ -54,7 +54,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,?,?,?> fbRmmv;
 	private final EjbRmmvConfigFactory<E,MOD,MC> efConfig;
 	
-	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
+	private final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
 	
 	private final Set<E> treePath;
 	

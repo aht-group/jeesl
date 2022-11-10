@@ -31,6 +31,7 @@ import org.jeesl.interfaces.model.module.ts.stat.JeeslTsCron;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
@@ -40,7 +41,7 @@ import org.jeesl.util.comparator.ejb.module.ts.TsScopeComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
+public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								CAT extends JeeslTsCategory<L,D,CAT,?>,
 								SCOPE extends JeeslTsScope<L,D,CAT,ST,UNIT,EC,INT>,
 								ST extends JeeslTsScopeType<L,D,ST,?>,
@@ -65,6 +66,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(TsFactoryBuilder.class);
 	
+	private final Class<LOC> cLocale; public Class<LOC> getClassLocale() {return cLocale;}
 	private final Class<CAT> cCategory; public Class<CAT> getClassCategory() {return cCategory;}
 	private final Class<SCOPE> cScope; public Class<SCOPE> getClassScope() {return cScope;}
 	private final Class<ST> cScopeType; public Class<ST> getClassScopeType() {return cScopeType;}
@@ -82,7 +84,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	private final Class<WS> cWs; public Class<WS> getClassWorkspace() {return cWs;}
 	private final Class<CRON> cCron; public Class<CRON> getClassCron(){return cCron;}
 	
-	public TsFactoryBuilder(final Class<L> cL, final Class<D> cD,
+	public TsFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<LOC> cLocale,
 							final Class<CAT> cCategory,
 							final Class<SCOPE> cScope,
 							final Class<ST> cScopeType,
@@ -100,6 +102,7 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 							final Class<WS> cWs, final Class<CRON> cCron)
 	{
 		super(cL,cD);
+		this.cLocale=cLocale;
 		this.cCategory=cCategory;
 		this.cScope=cScope;
 		this.cScopeType=cScopeType;

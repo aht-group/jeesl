@@ -54,7 +54,7 @@ public class TsSessionProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 {
 	final static Logger logger = LoggerFactory.getLogger(TsSessionProcessor.class);
 	
-	public TsSessionProcessor(TsFactoryBuilder<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
+	public TsSessionProcessor(TsFactoryBuilder<?,?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
 									JeeslTsFacade<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs)
 	{
 		super(fbTs,fTs);
