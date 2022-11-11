@@ -195,7 +195,7 @@ public abstract class AbstractHdSupportBean <L extends JeeslLang, D extends Jees
 	
 	public void addMessage()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbHd.getClassMessage()));
+		logger.info(AbstractLogMessage.createEntity(fbHd.getClassMessage()));
 		MT type = fHd.fByEnum(fbHd.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 		SCOPE scope = fHd.fByEnum(fbHd.getClassScope(),JeeslHdScope.Code.suppport);
 		message = fbHd.ejbMessage().build(ticket,type,scope,supporter);

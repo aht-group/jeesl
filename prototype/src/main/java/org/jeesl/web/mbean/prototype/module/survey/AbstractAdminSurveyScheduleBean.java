@@ -132,7 +132,7 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 	
 	public void addSurvey() throws JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbCore.getClassSurvey()));
+		logger.info(AbstractLogMessage.createEntity(fbCore.getClassSurvey()));
 		TC category = sbhCategory.getList().get(0);
 		TS templateStatus = fCore.fByCode(fbTemplate.getClassTemplateStatus(),JeeslSurveyOption.Status.open);
 		template = efTemplate.build(category, templateStatus, "");

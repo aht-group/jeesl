@@ -95,7 +95,7 @@ public class AbstractIoDashComponentBean <L extends JeeslLang, D extends JeeslDe
 	}
 
 	public void addDashComponent() {
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbDashComponent.getClassDashComponent()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbDashComponent.getClassDashComponent()));}
 		dashComponent = efDashComponent.build(null);
 		dashComponent.setName(efLang.createEmpty(localeCodes));
 		dashComponent.setDescription(efDescription.createEmpty(localeCodes));

@@ -88,7 +88,7 @@ public abstract class AbstractLfConfigurationBean <L extends JeeslLang, D extend
 
 	public void addConfiguration()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbLf.getClassLFC()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbLf.getClassLFC()));}
 		configuration =  fbLf.ejbLfConfiguration().build();
 		configuration.setLogframe(logframe);
 	}

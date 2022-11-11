@@ -107,7 +107,7 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	
 	public void addScope() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbConstraint.getClassScope()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbConstraint.getClassScope()));}
 		scope = efScope.build(null);
 		scope.setName(efLang.createEmpty(localeCodes));
 		scope.setDescription(efDescription.createEmpty(localeCodes));
@@ -142,7 +142,7 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	
 	public void addConstraint() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbConstraint.getClassConstraint()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbConstraint.getClassConstraint()));}
 		constraint = efConstraint.build(scope,null);
 		constraint.setName(efLang.createEmpty(localeCodes));
 		constraint.setDescription(efDescription.createEmpty(localeCodes));

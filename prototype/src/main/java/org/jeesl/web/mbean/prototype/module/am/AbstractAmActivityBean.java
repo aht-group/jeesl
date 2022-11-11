@@ -202,7 +202,7 @@ public abstract class AbstractAmActivityBean <L extends JeeslLang,D extends Jees
 
 	public void addActivity()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbAm.getClassActivity()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbAm.getClassActivity()));}
 		activity = efActivity.build(project.getRoot());
 		activity.setStructural(true);
 		activity.setName(efLang.createEmpty(localeCodes));

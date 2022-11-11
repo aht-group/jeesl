@@ -99,7 +99,7 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 	
 	public void addInfo()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbJob.getClassMaintenanceInfo()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbJob.getClassMaintenanceInfo()));}
 		this.reset(false,true);
 		info = efInfo.build(maintenance,null);
 		info.setDescription(efDescription.buildEmpty(lp.getLocales()));

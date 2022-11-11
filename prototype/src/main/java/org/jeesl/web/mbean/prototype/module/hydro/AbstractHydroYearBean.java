@@ -118,7 +118,7 @@ public class AbstractHydroYearBean <L extends JeeslLang, D extends JeeslDescript
 	}
 
 	public void addHydroYear() {
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbHydroYear.getClassYear()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbHydroYear.getClassYear()));}
 		hydroYear = efHydroYear.build(null);
 		hydroYear.setName(efLang.createEmpty(localeCodes));
 		hydroYear.setDescription(efDescription.createEmpty(localeCodes));

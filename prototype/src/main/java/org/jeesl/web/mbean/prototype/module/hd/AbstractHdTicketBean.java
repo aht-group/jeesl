@@ -152,7 +152,7 @@ public abstract class AbstractHdTicketBean <L extends JeeslLang, D extends Jeesl
 
 	public void addTicket() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		logger.info("addTicket......" + AbstractLogMessage.addEntity(fbHd.getClassTicket()));
+		logger.info("addTicket......" + AbstractLogMessage.createEntity(fbHd.getClassTicket()));
 		MT type = fHd.fByEnum(fbHd.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 		ticket = fbHd.ejbTicket().build(realm,rref,type);
 		PRIORITY priority = getDefaultPriority();

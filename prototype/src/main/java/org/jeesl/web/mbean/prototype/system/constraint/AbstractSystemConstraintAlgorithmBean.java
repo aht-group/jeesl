@@ -91,7 +91,7 @@ public abstract class AbstractSystemConstraintAlgorithmBean <L extends JeeslLang
 	
 	public void addAlgorithm()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbConstraint.getClassAlgorithm()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbConstraint.getClassAlgorithm()));}
 		algorithm = efAlgorithm.build(null,algorithms);
 		algorithm.setName(efLang.createEmpty(localeCodes));
 		algorithm.setDescription(efDescription.createEmpty(localeCodes));

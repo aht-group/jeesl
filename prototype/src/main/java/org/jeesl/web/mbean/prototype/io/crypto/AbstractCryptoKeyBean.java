@@ -106,7 +106,7 @@ public abstract class AbstractCryptoKeyBean <L extends JeeslLang, D extends Jees
 
 	public void addKey() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbCrypto.getClassKey()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbCrypto.getClassKey()));}
 		this.reset(true,true);
 		key = fbCrypto.ejbKey().build(user);
 	}

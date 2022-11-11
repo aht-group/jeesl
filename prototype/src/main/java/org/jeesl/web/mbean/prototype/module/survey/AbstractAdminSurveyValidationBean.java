@@ -141,7 +141,7 @@ public abstract class AbstractAdminSurveyValidationBean <L extends JeeslLang, D 
 			
 	public void addAlgorithm()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbAnalysis.getClassAnalysis()));
+		logger.info(AbstractLogMessage.createEntity(fbAnalysis.getClassAnalysis()));
 		algorithm = efValidationAlgorithm.build(algorithms);
 		algorithm.setName(efLang.createEmpty(localeCodes));
 		algorithm.setDescription(efDescription.createEmpty(localeCodes));

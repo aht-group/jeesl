@@ -92,7 +92,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 
 	public void add() throws JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbRevision.getClassScope()));
+		logger.info(AbstractLogMessage.createEntity(fbRevision.getClassScope()));
 		scope = efScope.build();
 		scope.setName(efLang.createEmpty(langs));
 		scope.setDescription(efDescription.createEmpty(langs));

@@ -100,7 +100,7 @@ public class AbstractAssetCompanyBean <L extends JeeslLang, D extends JeeslDescr
 	
 	public void addManufacturer() throws JeeslNotFoundException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbAsset.getClassCompany()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbAsset.getClassCompany()));}
 		smh.clear();
 		company = fbAsset.ejbManufacturer().build(realm,rref);
 	}

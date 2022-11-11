@@ -195,14 +195,14 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
     
     public void addPosting()
     {
-    	logger.info(AbstractLogMessage.addEntity(fbBb.getClassPost()));
+    	logger.info(AbstractLogMessage.createEntity(fbBb.getClassPost()));
     	reset(false,false,true);
     	posting = fbBb.ejbPost().build(thread,markupType,user);
     }
     
     public void savePosting() throws JeeslConstraintViolationException, JeeslLockingException
     {
-    	logger.info(AbstractLogMessage.addEntity(fbBb.getClassPost()));
+    	logger.info(AbstractLogMessage.createEntity(fbBb.getClassPost()));
     	posting = fBb.save(posting);
     	reloadPostings();
     }

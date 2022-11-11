@@ -200,14 +200,14 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	//Add
 	public void addCategory() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassCategory()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassCategory()));
 		category = efCategory.create(null,JeeslSecurityCategory.Type.usecase.toString());
 		category.setName(efLang.buildEmpty(lp.getLocales()));
 		category.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	public void addUsecase() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassUsecase()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassUsecase()));
 		usecase = efUsecase.build(category,"");
 		usecase.setName(efLang.buildEmpty(lp.getLocales()));
 		usecase.setDescription(efDescription.buildEmpty(lp.getLocales()));

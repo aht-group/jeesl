@@ -117,7 +117,7 @@ public class AbstractAdminSecurityDomainBean <L extends JeeslLang, D extends Jee
 	
 	public void addStaff()
 	{
-		logger.info(AbstractLogMessage.addEntity(cStaff));
+		logger.info(AbstractLogMessage.createEntity(cStaff));
 		staff = efStaff.build(null,null,domain);
 	}
 	

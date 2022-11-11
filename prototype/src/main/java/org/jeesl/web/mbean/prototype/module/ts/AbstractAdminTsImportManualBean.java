@@ -216,7 +216,7 @@ public class AbstractAdminTsImportManualBean<L extends JeeslLang, D extends Jees
 
 	public void initTransaction()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTs.getClassData()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTs.getClassData()));}
 		uiAllowAdd=false;
 		uiAllowSave=false;
 		transaction = fbTs.ejbTransaction().build(transactionUser, sources.get(0));
@@ -225,7 +225,7 @@ public class AbstractAdminTsImportManualBean<L extends JeeslLang, D extends Jees
 
 	public void saveTransaction() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTs.getClassData()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTs.getClassData()));}
 		transaction.setSource(fTs.find(fbTs.getClassSource(),transaction.getSource()));
 		transaction = fTs.save(transaction);
 		uiAllowAdd=true;

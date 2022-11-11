@@ -127,7 +127,7 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 	
 	public void add() throws JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbTs.getClassScope()));
+		logger.info(AbstractLogMessage.createEntity(fbTs.getClassScope()));
 		scope = fbTs.ejbScope().build(null);
 		scope.setName(efLang.createEmpty(localeCodes));
 		scope.setDescription(efDescription.createEmpty(localeCodes));
@@ -236,7 +236,7 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 	
 	public void addMultiPoint()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTs.getClassMp()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTs.getClassMp()));}
 		multiPoint = fbTs.ejbMultiPoint().build(scope, multiPoints);
 		multiPoint.setName(efLang.createEmpty(localeCodes));
 		multiPoint.setDescription(efDescription.createEmpty(localeCodes));

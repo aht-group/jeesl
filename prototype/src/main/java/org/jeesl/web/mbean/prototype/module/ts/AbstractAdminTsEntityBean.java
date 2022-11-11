@@ -96,7 +96,7 @@ public class AbstractAdminTsEntityBean <L extends JeeslLang, D extends JeeslDesc
 	
 	public void add() throws JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbTs.getClassEntity()));
+		logger.info(AbstractLogMessage.createEntity(fbTs.getClassEntity()));
 		entity = fbTs.ejbEntityClass().build(null);
 		entity.setName(efLang.createEmpty(localeCodes));
 		entity.setDescription(efDescription.createEmpty(localeCodes));

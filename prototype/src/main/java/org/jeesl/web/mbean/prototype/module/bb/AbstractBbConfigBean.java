@@ -124,7 +124,7 @@ public class AbstractBbConfigBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	public void addBoard() throws JeeslNotFoundException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbBb.getClassBoard()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbBb.getClassBoard()));}
 		PUB publishing = fBb.fByCode(fbBb.getClassPublishing(), JeeslBbPublishingMode.Code.closed);
 		board = fbBb.bb().build(null,sbhScope.getSelection(),refId,publishing);
 	}

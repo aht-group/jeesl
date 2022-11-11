@@ -93,7 +93,7 @@ public class AbstractSsiDockerBean <L extends JeeslLang,D extends JeeslDescripti
 	
 	public void addInstance()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSsi.getClassInstance()));
+		logger.info(AbstractLogMessage.createEntity(fbSsi.getClassInstance()));
 		instance = fbSsi.ejbInstance().build(null);
 	}
 }

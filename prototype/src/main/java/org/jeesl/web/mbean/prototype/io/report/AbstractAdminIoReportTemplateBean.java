@@ -120,7 +120,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 	
 	public void addTemplate()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbReport.getClassTemplate()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassTemplate()));}
 		template = efTemplate.build();
 		template.setName(efLang.createEmpty(localeCodes));
 		template.setDescription(efDescription.createEmpty(localeCodes));
@@ -173,7 +173,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 
 	public void addCell()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbReport.getClassCell()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassCell()));}
 		cell = efCell.build(template);
 		cell.setName(efLang.createEmpty(localeCodes));
 		cell.setDescription(efDescription.createEmpty(localeCodes));

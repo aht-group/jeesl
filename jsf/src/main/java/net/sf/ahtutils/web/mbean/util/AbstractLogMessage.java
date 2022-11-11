@@ -94,20 +94,19 @@ public class AbstractLogMessage <L extends JeeslLang,D extends JeeslDescription,
 		return sb.toString();
 	}
 	
-	public static String addEntity(Class<?> c){return addEntity(null,c);}
-	public static <USER extends JeeslUser<?>> String addEntity(USER user, Class<?> cl)
+	public static String createEntity(Class<?> c){return createEntity(null,c);}
+	public static <USER extends JeeslUser<?>> String createEntity(USER user, Class<?> c)
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("Adding");
-		if(user!=null){sb.append(" {").append(user.toString()).append("}");}
-		sb.append(": ");
-		sb.append(cl.getSimpleName());
+		sb.append("Creating ");
+		sb.append(c.getSimpleName());
+		if(user!=null){sb.append(" (").append(user.toString()).append(")");}
 		return sb.toString();
 	}
+	
 
 	 public static <T extends EjbWithId> String addEntity(T t){return addEntity(null,t);}
-	 public static <USER extends JeeslUser<?>, T extends EjbWithId>
-	 		String addEntity(USER user,T t)
+	 public static <USER extends JeeslUser<?>, T extends EjbWithId> String addEntity(USER user, T t)
 	 {
 		 StringBuffer sb = new StringBuffer();
 		 sb.append("Adding ").append(t.getClass().getSimpleName());

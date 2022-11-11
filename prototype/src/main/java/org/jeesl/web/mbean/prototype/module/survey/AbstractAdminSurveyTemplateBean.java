@@ -258,7 +258,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	//Version
 	public void addVersion()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassVersion()));
+		logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassVersion()));
 		version = efVersion.build(refId);
 		version.setName(efLang.buildEmpty(sbhLocale.getList()));
 		version.setDescription(efDescription.buildEmpty(sbhLocale.getList()));
@@ -323,7 +323,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	//Section
 	public void addSection()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassSection()));
+		logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassSection()));
 		section = efSection.build(template,0);
 		section.setName(efLang.buildEmpty(sbhLocale.getList()));
 		section.setDescription(efDescription.buildEmpty(sbhLocale.getList()));
@@ -371,7 +371,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	//Option Sets
 	public void addSet()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbTemplate.getOptionSetClass()));
+		logger.info(AbstractLogMessage.createEntity(fbTemplate.getOptionSetClass()));
 		clear(false,false,true,true,true,true,true,false,true,true);
 		optionSet = efOptionSet.build(template,optionSets);
 		optionSet.setName(efLang.buildEmpty(sbhLocale.getList()));
@@ -405,7 +405,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	//Question
 	public void addQuestion()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassQuestion()));
+		logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassQuestion()));
 		question = efQuestion.build(section,null);
 		question.setName(efLang.buildEmpty(sbhLocale.getList()));
 		question.setText(efDescription.buildEmpty(sbhLocale.getList()));
@@ -481,7 +481,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	
 	public void addOption()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassOption()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassOption()));}
 		option = efOption.build(question,"");
 		option.setName(efLang.buildEmpty(sbhLocale.getList()));
 		option.setDescription(efDescription.buildEmpty(sbhLocale.getList()));
@@ -528,7 +528,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	//Scheme
 	public void addScheme()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassScheme()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassScheme()));}
 		scheme = efScheme.build(template, "", schemes);
 		scheme.setName(efLang.createEmpty(langs));
 		scheme.setDescription(efDescription.createEmpty(langs));
@@ -548,7 +548,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	
 	public void addScore()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassScore()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassScore()));}
 		score = efScore.build(question);
 	}
 	
@@ -569,7 +569,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	public void addCondition()
 	{
 		clear(false,false,false,false,true,true,true,true,false,true);
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassCondition()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassCondition()));}
 		QUESTION triggerQuestion = null; if(!triggerQuestions.isEmpty()) {triggerQuestion = triggerQuestions.get(0);}
 		QE element = null; if(!bSurvey.getElements().isEmpty()){element = bSurvey.getElements().get(0);}
 		condition = efCondition.build(question, element,triggerQuestion, conditions);
@@ -619,7 +619,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	public void addValidation()
 	{
 		clear(false,false,false,false,true,true,true,true,true,true);
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassValidation()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassValidation()));}
 
 		validation = efValidation.build(question,validations);
 		validation.setDescription(efDescription.buildEmpty(sbhLocale.getList()));

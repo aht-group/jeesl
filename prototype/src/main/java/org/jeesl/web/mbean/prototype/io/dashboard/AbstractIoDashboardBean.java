@@ -126,7 +126,7 @@ public class AbstractIoDashboardBean <L extends JeeslLang, D extends JeeslDescri
 	}
 
 	public void addDashboard() {
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbDashboard.getClassDashboard()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbDashboard.getClassDashboard()));}
 		dashboard = efDashboard.build(null);
 		dashboard.setName(efLang.createEmpty(localeCodes));
 		dashboard.setDescription(efDescription.createEmpty(localeCodes));
@@ -150,7 +150,7 @@ public class AbstractIoDashboardBean <L extends JeeslLang, D extends JeeslDescri
 
 	public void addDashboardComponent()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbDashboard.getClassDashComponentPosition()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbDashboard.getClassDashComponentPosition()));}
 		Set<DBCP> componentPositions = new HashSet<DBCP>();
 		if(dashboard.getComponentPositions() == null) {
 			dashboard.setComponentPositions(componentPositions);

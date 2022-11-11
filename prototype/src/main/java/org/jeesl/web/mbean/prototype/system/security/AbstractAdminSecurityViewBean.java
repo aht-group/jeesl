@@ -138,7 +138,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	//Add
 	public void addCategory() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassCategory()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassCategory()));
 		category = efCategory.create(null,JeeslSecurityCategory.Type.view.toString());
 		category.setName(efLang.createEmpty(localeCodes));
 		category.setDescription(efDescription.createEmpty(localeCodes));
@@ -147,7 +147,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	//VIEW
 	public void addView() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassView()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassView()));
 		view = efView.build(category,"",views);
 		view.setName(efLang.createEmpty(localeCodes));
 		view.setDescription(efDescription.createEmpty(localeCodes));
@@ -187,7 +187,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	
 	public void cloneView() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassView()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassView()));
 		V clone = efView.clone(view);
 		clone.setName(efLang.clone(view.getName()));
 		clone.setDescription(efDescription.clone(view.getDescription()));
@@ -226,7 +226,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	//ACTION
 	public void addAction() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassAction()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassAction()));
 		action = efAction.build(view,"",actions);
 		action.setName(efLang.createEmpty(localeCodes));
 		action.setDescription(efDescription.createEmpty(localeCodes));
@@ -291,7 +291,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	
 	public void addArea() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassArea()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassArea()));
 		area = fbSecurity.ejbArea().build(view,areas);
 		area.setName(efLang.createEmpty(localeCodes));
 		area.setDescription(efDescription.createEmpty(localeCodes));
@@ -308,7 +308,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	
 	public void selectArea() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassArea()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassArea()));
 		area = efLang.persistMissingLangs(fSecurity,localeCodes,area);
 		area = efDescription.persistMissingLangs(fSecurity,localeCodes,area);
 	}

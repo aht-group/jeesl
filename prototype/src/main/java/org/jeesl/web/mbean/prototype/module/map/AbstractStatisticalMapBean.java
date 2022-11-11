@@ -95,7 +95,7 @@ public abstract class AbstractStatisticalMapBean <L extends JeeslLang, D extends
 	
 	public void addMap() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbMap.getClassMap()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbMap.getClassMap()));}
 		map = fbMap.ejbMap().build(maps);
 		map.setName(efLang.createEmpty(localeCodes));
 		map.setDescription(efDescription.createEmpty(localeCodes));
@@ -137,7 +137,7 @@ public abstract class AbstractStatisticalMapBean <L extends JeeslLang, D extends
 	
 	public void addImplementation() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbMap.getClassImplementation()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbMap.getClassImplementation()));}
 		implementation = fbMap.ejbImplementation().build(map);
 	}
 	

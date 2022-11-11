@@ -86,7 +86,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 
 	public void add() throws JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbRevision.getClassView()));
+		logger.info(AbstractLogMessage.createEntity(fbRevision.getClassView()));
 		rv = efView.build();
 		rv.setName(efLang.createEmpty(langs));
 		rv.setDescription(efDescription.createEmpty(langs));
@@ -156,7 +156,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 
 	public void addMapping() throws JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbRevision.getClassViewMapping())+" entites:"+entities.size()+" empty:"+entities.isEmpty());
+		logger.info(AbstractLogMessage.createEntity(fbRevision.getClassViewMapping())+" entites:"+entities.size()+" empty:"+entities.isEmpty());
 		RE re = null;
 		if(!entities.isEmpty())
 		{

@@ -120,7 +120,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 
 	public void addUser() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassUser()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassUser()));}
 		user = efUser.build();
 		if(revision!=null){revision.pageFlowPrimaryAdd();}
 		postAdd();

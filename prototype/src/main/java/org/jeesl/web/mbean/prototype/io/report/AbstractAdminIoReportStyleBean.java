@@ -108,7 +108,7 @@ public class AbstractAdminIoReportStyleBean <L extends JeeslLang, D extends Jees
 	
 	public void addStyle()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbReport.getClassStyle()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassStyle()));}
 		style = efStyle.build();
 		style.setName(efLang.createEmpty(localeCodes));
 		style.setDescription(efDescription.createEmpty(localeCodes));

@@ -314,7 +314,7 @@ public class AbstractAomAssetBean <L extends JeeslLang, D extends JeeslDescripti
     
     public void addEvent() throws JeeslConstraintViolationException, JeeslLockingException
     {
-    	logger.info(AbstractLogMessage.addEntity(fbAsset.getClassEvent()));
+    	logger.info(AbstractLogMessage.createEntity(fbAsset.getClassEvent()));
     	
     	event = efEvent.build(asset,bCache.getEventType().get(0),markupType);
     	efEvent.ejb2nnb(event,nnb);

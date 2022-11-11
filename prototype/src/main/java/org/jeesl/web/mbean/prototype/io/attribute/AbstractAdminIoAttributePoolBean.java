@@ -128,7 +128,7 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 	
 	public void addCriteria()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbAttribute.getClassCriteria()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbAttribute.getClassCriteria()));}
 		CAT c = null; if(!sbhCat.getSelected().isEmpty()) {c = sbhCat.getSelected().get(0);}
 		TYPE t = null; if(bAttribute!=null && bAttribute.getTypes()!=null && !bAttribute.getTypes().isEmpty()) {t = bAttribute.getTypes().get(0);}
 		criteria = efCriteria.build(realm,rref,c,t);
@@ -176,7 +176,7 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 	
 	public void addOption()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbAttribute.getClassOption()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbAttribute.getClassOption()));}
 		option = efOption.build(criteria,options);
 		option.setName(efLang.createEmpty(localeCodes));
 		option.setDescription(efDescription.createEmpty(localeCodes));

@@ -65,7 +65,7 @@ public class JeeslIotMatrixRegistryController <L extends JeeslLang, D extends Je
 	
 	public void addDevice()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbMatrix.getClassDevice()));
+		logger.info(AbstractLogMessage.createEntity(fbMatrix.getClassDevice()));
 		device = efDevice.build();
 	}
 	

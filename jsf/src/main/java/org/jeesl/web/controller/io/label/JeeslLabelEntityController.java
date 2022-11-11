@@ -326,7 +326,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	public void addEntity() throws JeeslNotFoundException
 	{
 		reset(true,true);
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassEntity()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbRevision.getClassEntity()));}
 		entity = efEntity.build(sbhCategory.getSelection(),entities);
 		entity.setDiagram(sbhDiagram.getSelection());
 		entity.setName(efLang.buildEmpty(lp.getLocales()));
@@ -429,7 +429,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	
 	public void addAttribute() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassAttribute()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbRevision.getClassAttribute()));}
 		attribute = efAttribute.build(null);
 		attribute.setName(efLang.buildEmpty(lp.getLocales()));
 		attribute.setDescription(efDescription.buildEmpty(lp.getLocales()));
@@ -492,7 +492,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 
 	public void addMapping() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassEntityMapping()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbRevision.getClassEntityMapping()));}
 		RST rst = null; if(!scopeTypes.isEmpty()){rst=scopeTypes.get(0);}
 		mapping = efMappingEntity.build(entity,null,rst);
 		updateUi();

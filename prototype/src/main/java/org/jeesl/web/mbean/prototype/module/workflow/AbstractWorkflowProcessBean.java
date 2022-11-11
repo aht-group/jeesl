@@ -354,7 +354,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	public void addProcess() throws JeeslNotFoundException
 	{
 		reset(WorkflowProcesslResetHandler.build().all());
-		logger.info(AbstractLogMessage.addEntity(fbWorkflow.getClassProcess()));
+		logger.info(AbstractLogMessage.createEntity(fbWorkflow.getClassProcess()));
 		process = fbWorkflow.ejbProcess().build();
 		process.setName(efLang.createEmpty(localeCodes));
 		process.setDescription(efDescription.createEmpty(localeCodes));
@@ -413,7 +413,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	public void addDocument()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbWorkflow.getClassDocument()));
+		logger.info(AbstractLogMessage.createEntity(fbWorkflow.getClassDocument()));
 		document = fbWorkflow.ejbDocument().build(process,documents);
 		document.setName(efLang.createEmpty(localeCodes));
 		document.setDescription(efDescription.createEmpty(localeCodes));
@@ -434,7 +434,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	public void addStage()
 	{
 		reset(WorkflowProcesslResetHandler.build().all().stages(false));
-		logger.info(AbstractLogMessage.addEntity(fbWorkflow.getClassProcess()));
+		logger.info(AbstractLogMessage.createEntity(fbWorkflow.getClassProcess()));
 		stage = fbWorkflow.ejbStage().build(process,stages);
 		stage.setName(efLang.createEmpty(localeCodes));
 		stage.setDescription(efDescription.createEmpty(localeCodes));
@@ -507,7 +507,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	public void addPermission()
 	{
 		reset(WorkflowProcesslResetHandler.build().none().permission(true));
-		logger.info(AbstractLogMessage.addEntity(fbWorkflow.getClassPermission()));
+		logger.info(AbstractLogMessage.createEntity(fbWorkflow.getClassPermission()));
 		permission = fbWorkflow.ejbPermission().build(stage,permissions);
 	}
 
@@ -545,7 +545,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	public void addNotification()
 	{
 		reset(WorkflowProcesslResetHandler.build().none().notification(true));
-		logger.info(AbstractLogMessage.addEntity(fbWorkflow.getClassStageNotification()));
+		logger.info(AbstractLogMessage.createEntity(fbWorkflow.getClassStageNotification()));
 		notification = fbWorkflow.ejbNotification().build(stage,notifications);
 	}
 
@@ -596,7 +596,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	public void addTransition()
 	{
 		reset(WorkflowProcesslResetHandler.build().none().transistion(true));
-		logger.info(AbstractLogMessage.addEntity(fbWorkflow.getClassTransition()));
+		logger.info(AbstractLogMessage.createEntity(fbWorkflow.getClassTransition()));
 		transition = efTransition.build(stage,transitions);
 		transition.setName(efLang.createEmpty(localeCodes));
 		transition.setDescription(efDescription.createEmpty(localeCodes));
@@ -652,7 +652,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	public void addCommunication()
 	{
 		reset(WorkflowProcesslResetHandler.build().none().communication(true));
-		logger.info(AbstractLogMessage.addEntity(fbWorkflow.getClassTransition()));
+		logger.info(AbstractLogMessage.createEntity(fbWorkflow.getClassTransition()));
 		communication = fbWorkflow.ejbCommunication().build(transition,communications);
 	}
 
@@ -691,7 +691,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	public void addAction()
 	{
 		reset(WorkflowProcesslResetHandler.build().none().action(true));
-		logger.info(AbstractLogMessage.addEntity(fbWorkflow.getClassAction()));
+		logger.info(AbstractLogMessage.createEntity(fbWorkflow.getClassAction()));
 		action = fbWorkflow.ejbAction().build(transition,actions);
 		if(!bots.isEmpty()) {action.setBot(bots.get(0));}
 	}

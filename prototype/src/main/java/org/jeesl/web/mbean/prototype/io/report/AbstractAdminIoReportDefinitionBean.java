@@ -223,7 +223,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	
 	public void addReport()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbReport.getClassReport()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassReport()));}
 		report = efReport.build(null);
 		report.setName(efLang.createEmpty(localeCodes));
 		report.setDescription(efDescription.createEmpty(localeCodes));
@@ -299,7 +299,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 
 	public void addSheet()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbReport.getClassSheet()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassSheet()));}
 		sheet = efSheet.build(report.getWorkbook());
 		sheet.setName(efLang.createEmpty(localeCodes));
 		sheet.setDescription(efDescription.createEmpty(localeCodes));
@@ -373,7 +373,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 
 	public void addGroup()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbReport.getClassGroup()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassGroup()));}
 		group = efGroup.build(sheet,groups);
 		group.setName(efLang.createEmpty(localeCodes));
 		group.setDescription(efDescription.createEmpty(localeCodes));
@@ -443,7 +443,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 
 	public void addColumn()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbReport.getClassColumn()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassColumn()));}
 		column = efColumn.build(group,columns);
 		column.setName(efLang.createEmpty(localeCodes));
 		column.setDescription(efDescription.createEmpty(localeCodes));
@@ -521,7 +521,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	
 	public void addRow()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbReport.getClassRow()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbReport.getClassRow()));}
 		row = efRow.build(sheet);
 		row.setName(efLang.createEmpty(localeCodes));
 		row.setDescription(efDescription.createEmpty(localeCodes));

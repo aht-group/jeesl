@@ -146,7 +146,7 @@ public abstract class AbstractDomainQueryBean <L extends JeeslLang, D extends Je
 	
 	public void addDomain()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbDomain.getClassDomain()));
+		logger.info(AbstractLogMessage.createEntity(fbDomain.getClassDomain()));
 		domain = efDomain.build(null,sbhDomain.getList());
 		domain.setName(efLang.createEmpty(localeCodes));
 	}
@@ -177,7 +177,7 @@ public abstract class AbstractDomainQueryBean <L extends JeeslLang, D extends Je
 	
 	public void addQuery()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbDomain.getClassDomainQuery()));
+		logger.info(AbstractLogMessage.createEntity(fbDomain.getClassDomainQuery()));
 		query = efDomainQuery.build(domain, queries);
 		query.setName(efLang.createEmpty(localeCodes));
 		query.setDescription(efDescription.createEmpty(localeCodes));
@@ -245,7 +245,7 @@ public abstract class AbstractDomainQueryBean <L extends JeeslLang, D extends Je
 	
 	public void addPath()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbDomain.getClassDomainQuery()));
+		logger.info(AbstractLogMessage.createEntity(fbDomain.getClassDomainQuery()));
 		path = efDomainPath.build(query,entity,paths);
 		reloadAttributes();
 	}

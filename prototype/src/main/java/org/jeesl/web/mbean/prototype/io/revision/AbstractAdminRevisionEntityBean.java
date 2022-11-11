@@ -299,7 +299,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 	public void addEntity() throws JeeslNotFoundException
 	{
 		reset(true,true);
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassEntity()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbRevision.getClassEntity()));}
 		entity = efEntity.build(sbhCategory.getSelection(),entities);
 		entity.setDiagram(sbhDiagram.getSelection());
 		entity.setName(efLang.createEmpty(langs));
@@ -441,7 +441,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 
 	public void addMapping() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassEntityMapping()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbRevision.getClassEntityMapping()));}
 		RST rst = null; if(!scopeTypes.isEmpty()){rst=scopeTypes.get(0);}
 		mapping = efMappingEntity.build(entity,null,rst);
 		updateUi();

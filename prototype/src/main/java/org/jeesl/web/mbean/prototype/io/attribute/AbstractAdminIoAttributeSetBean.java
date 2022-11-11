@@ -125,7 +125,7 @@ public abstract class AbstractAdminIoAttributeSetBean <L extends JeeslLang, D ex
 	
 	public void addSet()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbAttribute.getClassCriteria()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbAttribute.getClassCriteria()));}
 		set = efSet.build(realm,rref,sbhCat.getSelected().get(0));
 		set.setName(efLang.createEmpty(localeCodes));
 		set.setDescription(efDescription.createEmpty(localeCodes));
@@ -165,7 +165,7 @@ public abstract class AbstractAdminIoAttributeSetBean <L extends JeeslLang, D ex
 	
 	public void addItem()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbAttribute.getClassItem()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbAttribute.getClassItem()));}
 		item = efItem.build(null,set,items);
 	}
 	

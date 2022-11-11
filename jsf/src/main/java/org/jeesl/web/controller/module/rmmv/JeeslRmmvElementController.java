@@ -182,7 +182,7 @@ public class JeeslRmmvElementController <L extends JeeslLang, D extends JeeslDes
 	
 	public void addConfig()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbRmmv.getClassConfig()));
+		logger.info(AbstractLogMessage.createEntity(fbRmmv.getClassConfig()));
 		config = fbRmmv.ejbConfig().build(element,configs);
 	}
 	

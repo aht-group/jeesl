@@ -102,7 +102,7 @@ public class AbstractAdminErDiagramBean <L extends JeeslLang, D extends JeeslDes
 
 	public void addErDiagram()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassDiagram()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbRevision.getClassDiagram()));}
 		diagram = efErDiagram.build(null,null,null);
 		diagram.setName(efLang.createEmpty(localeCodes));
 		diagram.setDescription(efDescription.createEmpty(localeCodes));

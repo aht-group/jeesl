@@ -211,7 +211,7 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 		
 	public void addAnalysis()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbAnalysis.getClassAnalysis()));
+		logger.info(AbstractLogMessage.createEntity(fbAnalysis.getClassAnalysis()));
 		analysis = efAnalysis.build(version.getTemplate(),analyses);
 		analysis.setName(efLang.buildEmpty(sbhLocale.getList()));
 	}

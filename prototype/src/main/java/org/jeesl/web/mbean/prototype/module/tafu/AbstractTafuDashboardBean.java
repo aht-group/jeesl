@@ -250,7 +250,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	
 	public void addTask()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbTafu.getClassTask()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbTafu.getClassTask()));}
 		
 		MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 		task = efTask.build(realm,rref,type);

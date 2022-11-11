@@ -118,7 +118,7 @@ public abstract class AbstractLfTimeBean <L extends JeeslLang, D extends JeeslDe
 
 	public void addTimeGroup()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbLf.getClassTG()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbLf.getClassTG()));}
 		timeGroup = fbLf.ejbTimeGroup().build();
 		elements = new ArrayList<>();
 		intervalCalendarHandler.initIntervalSize();
@@ -158,7 +158,7 @@ public abstract class AbstractLfTimeBean <L extends JeeslLang, D extends JeeslDe
 	public void reorderTimeGroups() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fLf, timeGroups);}
 	public void addElement()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbLf.getClassTE()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbLf.getClassTE()));}
 		if(element ==null || element.getId()!=0)
 		{
 			element = fbLf.ejbTimeElement().build();

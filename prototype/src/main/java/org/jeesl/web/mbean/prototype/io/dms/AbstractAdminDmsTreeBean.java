@@ -143,7 +143,7 @@ public abstract class AbstractAdminDmsTreeBean <L extends JeeslLang,D extends Je
 
 	public void addSection()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbDms.getClassSection()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbDms.getClassSection()));}
 		section = efSection.build(dm.getRoot());
 		section.setName(efLang.buildEmpty(sbhLocale.getList()));
 		section.setDescription(efDescription.buildEmpty(sbhLocale.getList()));

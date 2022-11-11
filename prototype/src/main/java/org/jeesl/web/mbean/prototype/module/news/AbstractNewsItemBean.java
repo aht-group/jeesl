@@ -112,7 +112,7 @@ public class AbstractNewsItemBean <L extends JeeslLang, D extends JeeslDescripti
 	
 	public void addItem() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbNews.getClassItem()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbNews.getClassItem()));}
 		MT markupType = fNews.fByEnum(fbNews.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 		item = fbNews.ejbItem().build(realm,rref,sbhLocale.getList(),markupType,author);
 //		news.setName(efLang.createEmpty(localeCodes));

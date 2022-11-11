@@ -72,7 +72,7 @@ public abstract class AbstractDomainSetBean <L extends JeeslLang, D extends Jees
 	
 	public void addSet()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbDomain.getClassDomainSet()));
+		logger.info(AbstractLogMessage.createEntity(fbDomain.getClassDomainSet()));
 		set = fbDomain.ejbSet().build(null,sets);
 		set.setName(efLang.createEmpty(localeCodes));
 		set.setDescription(efDescription.createEmpty(localeCodes));
@@ -105,7 +105,7 @@ public abstract class AbstractDomainSetBean <L extends JeeslLang, D extends Jees
 	
 	public void addItem()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbDomain.getClassDomainItem()));
+		logger.info(AbstractLogMessage.createEntity(fbDomain.getClassDomainItem()));
 		item = fbDomain.ejbItem().build(set,null,items);
 	}
 	

@@ -106,7 +106,7 @@ public class AbstractAdminJobTemplateBean <L extends JeeslLang, D extends JeeslD
 	
 	public void addTemplate()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbJob.getClassTemplate()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbJob.getClassTemplate()));}
 		template = efTemplate.build(null,null);
 		template.setName(efLang.createEmpty(localeCodes));
 		template.setDescription(efDescription.createEmpty(localeCodes));

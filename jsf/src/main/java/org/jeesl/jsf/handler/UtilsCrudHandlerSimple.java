@@ -42,7 +42,7 @@ public class UtilsCrudHandlerSimple <T extends EjbCrud>
 	
 	public void add()
 	{
-		logger.info(AbstractLogMessage.addEntity(cT));
+		logger.info(AbstractLogMessage.createEntity(cT));
 		if(bean!=null){entity = bean.crudBuild(cT);}
 		else {logger.warn("No Bean available!!");}
 	}

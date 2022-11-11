@@ -123,7 +123,7 @@ public class JeeslSsiMappingController <L extends JeeslLang, D extends JeeslDesc
 	
 	public void addMapping()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSsi.getClassMapping()));
+		logger.info(AbstractLogMessage.createEntity(fbSsi.getClassMapping()));
 		mapping = fbSsi.ejbMapping().build(null);
 	}
 	

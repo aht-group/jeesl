@@ -73,7 +73,7 @@ public class AbstractAdminSystemNewsBean <L extends JeeslLang, D extends JeeslDe
 	
 	public void addNews() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbNews.getClassNews()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbNews.getClassNews()));}
 		news = efNews.build(null,user);
 		news.setName(efLang.createEmpty(localeCodes));
 		news.setDescription(efDescription.createEmpty(localeCodes));

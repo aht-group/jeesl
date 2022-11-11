@@ -162,7 +162,7 @@ public abstract class AbstractLfDefinitionBean <L extends JeeslLang, D extends J
 	public void addIndicator()
 	{
 		slotHandler.set(8,4);
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbLf.getClassLF()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbLf.getClassLF()));}
 		indicator =  fbLf.ejbLfIndicator().build();
 		indicator.setLogframe(logframe);
 	}
@@ -215,7 +215,7 @@ public abstract class AbstractLfDefinitionBean <L extends JeeslLang, D extends J
 	public void addIndicatorValue()
 	{
 		slotHandler.set(8,4);
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbLf.getClassLF()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbLf.getClassLF()));}
 		indicatorValue =  fbLf.ejbLfIndicatorValue().build();
 		indicatorValue.setIndicator(indicator);
 	}

@@ -200,7 +200,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	protected abstract void addDocument();
 	public void addDocumentForCategory()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbCms.getClassCms()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbCms.getClassCms()));}
 		cms = efCms.build(sbhCategory.getSelection(),efS.build());
 		cms.setName(efLang.createEmpty(localeCodes));
 	}
@@ -347,7 +347,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
     
 	public void addSection() 
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbCms.getClassSection()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbCms.getClassSection()));}
 		section = efS.build(cms.getRoot());
 		section.setName(efLang.createEmpty(cmsLocales));
 		for(String k : section.getName().keySet()){section.getName().get(k).setLang("XXX");}
@@ -387,7 +387,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	
 	public void addElement() 
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbCms.getClassElement()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbCms.getClassElement()));}
 		element = efElement.build(section,elements);
 	}
 	

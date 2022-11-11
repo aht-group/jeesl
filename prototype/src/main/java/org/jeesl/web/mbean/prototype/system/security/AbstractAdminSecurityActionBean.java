@@ -94,7 +94,7 @@ public class AbstractAdminSecurityActionBean <L extends JeeslLang, D extends Jee
 	
 	public void addTemplate() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassTemplate()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassTemplate()));
 		template = efTemplate.build(category,"",templates);
 		template.setName(efLang.createEmpty(localeCodes));
 		template.setDescription(efDescription.createEmpty(localeCodes));

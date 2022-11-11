@@ -22,7 +22,6 @@ public class XmlDataFactory
 
 	public static Data build(long id){return build(id,null,null);}
 
-	public static Data build(Date record, Double value){return build(null,record,value);}
 	public static Data buildWithGmt(Date record, Double value)
 	{
 		Data xml = build(null,record,value);
@@ -34,6 +33,9 @@ public class XmlDataFactory
 		}
 		return xml;
 	}
+	
+	public static Data build(LocalDateTime ldt, Double value){return build(null,DateUtil.toDate(ldt),value);}
+	public static Data build(Date record, Double value){return build(null,record,value);}
 	public static Data build(Long id, Date record, Double value)
 	{
 		Data xml = new Data();

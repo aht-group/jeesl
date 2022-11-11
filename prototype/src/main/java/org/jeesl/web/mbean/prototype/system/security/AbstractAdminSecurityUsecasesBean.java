@@ -135,14 +135,14 @@ public class AbstractAdminSecurityUsecasesBean <L extends JeeslLang, D extends J
 	//Add
 	public void addCategory() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassCategory()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassCategory()));
 		category = efCategory.create(null,JeeslSecurityCategory.Type.usecase.toString());
 		category.setName(efLang.createEmpty(localeCodes));
 		category.setDescription(efDescription.createEmpty(localeCodes));
 	}
 	public void addUsecase() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassUsecase()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassUsecase()));
 		usecase = efUsecase.build(category,"");
 		usecase.setName(efLang.createEmpty(localeCodes));
 		usecase.setDescription(efDescription.createEmpty(localeCodes));

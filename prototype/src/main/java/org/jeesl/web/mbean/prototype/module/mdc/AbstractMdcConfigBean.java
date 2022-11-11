@@ -99,7 +99,7 @@ public abstract class AbstractMdcConfigBean <L extends JeeslLang, D extends Jees
 	
 	public void addActivity()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbMdc.getClassActivity()));
+		logger.info(AbstractLogMessage.createEntity(fbMdc.getClassActivity()));
 		activity = efActivity.build(realm,rref);
 	}
 	

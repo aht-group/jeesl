@@ -79,7 +79,7 @@ public class AbstractAdminTrafficLightBean <L extends JeeslLang, D extends Jeesl
 	
 	public void addTrafficLight() throws JeeslConstraintViolationException
 	{
-		logger.debug(AbstractLogMessage.addEntity(fbLight.getClassLight()));
+		logger.debug(AbstractLogMessage.createEntity(fbLight.getClassLight()));
 		trafficLight = efLight.build(defaultLangs,scope);
 	}
 	

@@ -93,7 +93,7 @@ public class AbstractAdminSecurityContextBean <L extends JeeslLang, D extends Je
 
 	public void addContext()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbSecurity.getClassRole()));
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassRole()));
 		context = efContext.build();
 		context.setName(efLang.createEmpty(localeCodes));
 		context.setDescription(efDescription.createEmpty(localeCodes));

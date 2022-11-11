@@ -150,7 +150,7 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 	
 	public void addFaq()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbHd.getClassFaq()));
+		logger.info(AbstractLogMessage.createEntity(fbHd.getClassFaq()));
 		faq = fbHd.ejbFaq().build(realm,rref,sbhCategory.getList().get(0),sbhScope.getList().get(0));
 		faq.setName(efLang.buildEmpty(bTranslation.getLocales()));
 		faq.setDescription(efDescription.buildEmpty(bTranslation.getLocales()));
@@ -187,7 +187,7 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 	
 	public void addAnswer()
 	{
-		logger.info(AbstractLogMessage.addEntity(fbHd.getClassFga()));
+		logger.info(AbstractLogMessage.createEntity(fbHd.getClassFga()));
 		reset(false,true,true);
 		if(sbhDocuments.getHasSome())
 		{

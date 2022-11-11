@@ -107,7 +107,7 @@ public abstract class AbstractAdminDmsConfigBean <L extends JeeslLang, D extends
 	
 	public void addDm()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbDms.getClassDms()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbDms.getClassDms()));}
 		dm = efDms.build();
 		dm.setName(efLang.createEmpty(localeCodes));
 //		dm.setDescription(efDescription.createEmpty(localeCodes));
@@ -150,7 +150,7 @@ public abstract class AbstractAdminDmsConfigBean <L extends JeeslLang, D extends
 	
 	public void addView()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbDms.getClassView()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbDms.getClassView()));}
 		dmsView = efView.build(dm, dmsViews);
 		dmsView.setName(efLang.createEmpty(localeCodes));
 	}

@@ -192,7 +192,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
 
     public void addFile() throws JeeslConstraintViolationException, JeeslLockingException
     {
-    		if(debugOnInfo) {logger.info(AbstractLogMessage.addEntity(fbDms.getClassFile()));}
+    		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbDms.getClassFile()));}
     		file = efFile.build(section, files);
     		file.setName(efLang.buildEmpty(sbhLocale.getList()));
     		attributeHandler.prepare(file);

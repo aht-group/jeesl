@@ -125,7 +125,7 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 
 	public void addAttribute() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbRevision.getClassAttribute()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbRevision.getClassAttribute()));}
 		attribute = efAttribute.build(null);
 		attribute.setName(efLang.createEmpty(langs));
 		attribute.setDescription(efDescription.createEmpty(langs));

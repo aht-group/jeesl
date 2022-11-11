@@ -169,7 +169,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 	
 	public void addTemplate() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassTemplate()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassTemplate()));}
 		reset(true,true);
 		template = efTemplate.build(null);
 		template.setName(efLang.createEmpty(langs));
@@ -233,7 +233,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 	
 	public void addToken() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassToken()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassToken()));}
 		token = efToken.build(template,tokens);
 		token.setName(efLang.createEmpty(langs));
 		token.setDescription(efDescription.createEmpty(langs));
@@ -277,7 +277,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 	//*************************************************************************************
 	public void addDefinition() throws JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbTemplate.getClassDefinition()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassDefinition()));}
 		definition = efDefinition.build(template,null);
 		definition.setDescription(efDescription.createEmpty(langs));
 		definition.setHeader(efDescription.createEmpty(langs));

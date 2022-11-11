@@ -97,7 +97,7 @@ public class AbstractAmProjectBean <L extends JeeslLang,D extends JeeslDescripti
 
 	public void addProject()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.addEntity(fbAm.getClassProject()));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbAm.getClassProject()));}
 		project = efProject.build();
 		project.setName(efLang.createEmpty(localeCodes));
 		project.setDescription(efDescription.createEmpty(localeCodes));
