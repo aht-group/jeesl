@@ -8,16 +8,22 @@ import java.util.Map;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
+import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbTsBridgeFactory<TS extends JeeslTimeSeries<?,TS,BRIDGE,?,?>,
+public class EjbTsBridgeFactory<
+								MP extends JeeslTsMultiPoint<?,?,?,?>,
+								TS extends JeeslTimeSeries<?,TS,BRIDGE,?,?>,
 								BRIDGE extends JeeslTsBridge<EC>,
 								EC extends JeeslTsEntityClass<?,?,?,?>,
-								DATA extends JeeslTsData<TS,?,?,?,?>
+								DATA extends JeeslTsData<TS,?,?,POINT,?>,
+								POINT extends JeeslTsDataPoint<DATA,MP>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbTsBridgeFactory.class);
@@ -88,5 +94,17 @@ public class EjbTsBridgeFactory<TS extends JeeslTimeSeries<?,TS,BRIDGE,?,?>,
 			if(idMap.containsKey(refId)) {map.put(idMap.get(refId),data);}
 		}
 		return map;
+	}
+	
+	public <T extends EjbWithId> Nested2Map<T,MP,POINT> toN2mPoint(List<T> ejbs, List<POINT> points)
+	{
+		Nested2Map<T,MP,POINT> n2m = new Nested2Map<>();
+		Map<Long,T> idMap = EjbIdFactory.toIdMap(ejbs);
+		for(POINT p : points)
+		{
+			long refId = p.getData().getTimeSeries().getBridge().getRefId();
+			if(idMap.containsKey(refId)) {n2m.put(idMap.get(refId),p.getMultiPoint(),p);}
+		}
+		return n2m;
 	}
 }

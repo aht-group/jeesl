@@ -51,7 +51,8 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 								CRON extends JeeslTsCron<SCOPE,INT,STAT>>
 			extends JeeslFacade
 {	
-	List<SCOPE> findScopes(Class<SCOPE> cScope, Class<CAT> cCategory, List<CAT> categories, boolean showInvisibleScopes);
+//	List<SCOPE> findScopes(Class<SCOPE> cScope, Class<CAT> cCategory, List<CAT> categories, boolean showInvisibleScopes);
+	List<SCOPE> fTsScopes(EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query);
 	List<EC> findClasses(Class<EC> cClass, Class<CAT> cCategory, List<CAT> categories, boolean showInvisibleClasses);
 	
 	<T extends EjbWithId> BRIDGE fBridge(EC entityClass, T ejb) throws JeeslNotFoundException;
@@ -68,7 +69,7 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	List<TS> fTimeSeries(List<BRIDGE> bridges);
 	List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes);
 	List<TS> fTimeSeries(SCOPE scope, INT interval, EC entityClass);
-	List<TS> fTimeSeries(EjbTimeSeriesQuery<SCOPE,BRIDGE,INT,STAT> query);
+	List<TS> fTimeSeries(EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query);
 	
 	List<DATA> fData(TRANSACTION transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);

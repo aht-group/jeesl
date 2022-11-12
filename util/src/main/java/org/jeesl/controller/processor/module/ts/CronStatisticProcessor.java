@@ -46,7 +46,7 @@ public class CronStatisticProcessor <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT
 	protected List<CRON> crons;
 	
 	protected EjbTsFactory<SCOPE,?,TS,?,BRIDGE,EC,INT,STAT> efTs;
-	protected EjbTsBridgeFactory<TS,BRIDGE,EC,DATA> efBridge;
+	protected EjbTsBridgeFactory<?,TS,BRIDGE,EC,DATA,?> efBridge;
 	
 	protected WS workspace; public WS getWorkspace() {return workspace;} public void setWorkspace(WS workspace) {this.workspace=workspace;}
 	protected TRANSACTION transaction; public TRANSACTION getTransaction() {return transaction;} public void setTransaction(TRANSACTION transaction) {this.transaction=transaction;}

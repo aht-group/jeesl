@@ -33,6 +33,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.slf4j.Logger;
@@ -115,13 +116,18 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 		if(rScope) {scope = null;}
 		if(rMultiPoint) {multiPoint = null;}
 	}
-	
+	 
 	protected void updatePerformed(){}
 	
 	public void reloadScopes()
 	{
 		if(debugOnInfo){logger.info("reloadScopes");}
-		scopes = fTs.findScopes(fbTs.getClassScope(),fbTs.getClassCategory(), sbhCategory.getSelected(), uiShowInvisible);
+//		scopes = fTs.fTsScopes(HrmTsQuery.instance().addCategories(sbhCategory.getSelected()));
+		
+		EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT>();
+		query.addCategories(sbhCategory.getSelected());
+		
+		scopes = fTs.fTsScopes(query);
 		Collections.sort(scopes, comparatorScope);
 	}
 	

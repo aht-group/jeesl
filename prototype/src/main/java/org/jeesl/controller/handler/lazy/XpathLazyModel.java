@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.jxpath.JXPathContext;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.util.JeeslLazyListHandler;
@@ -42,6 +43,9 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 
 		debugOnInfo = false;
 	}
+	
+	@Override public T getRowData(String rowKey){return llh.getRowData(source,rowKey);}
+    @Override public Object getRowKey(T account) {return llh.getRowKey(account);}
 
 	public void updateFiler(List<JsonTranslation> columns)
 	{
@@ -56,28 +60,16 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 		if(debugOnInfo) {logger.info("Filters updated "+mapFilter.size());}
 	}
 
-	public void clear()
-	{
-		source.clear();
-	}
-
-	public void addAll(List<T> items)
-	{
-		source.addAll(items);
-	}
-
-	public void add(T item)
-	{
-		source.add(item);
-//		set.addAll(EjbVupBeneficiaryListItemFactory.toEligibilities(items));
-	}
+	public void clear() {source.clear();}
+	public void addAll(List<T> items) {source.addAll(items);}
+	public void add(T item){source.add(item);}
 
 	@Override public List<T> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
 	{
 		tmp.clear();
 		for(T item : source)
 		{
-			if(matches(item,filters)) {tmp.add(item);}
+			if(this.matches(item,filters)) {tmp.add(item);}
 		}
 
 		//sort
@@ -89,21 +81,17 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 		//rowCount
 		this.setRowCount(tmp.size());
 
-
 		llh.paginator(tmp,first,pageSize,data);
 		return data;
 	}
 
-	@Override public T getRowData(String rowKey){return llh.getRowData(source,rowKey);}
-    @Override public Object getRowKey(T account) {return llh.getRowKey(account);}
-
-    private boolean matches(T item, Map<String, FilterMeta> filters)
+    private boolean matches(T item, Map<String,FilterMeta> filters)
 	{
     	if(debugOnInfo) {logger.info("Matching ... "+item.toString());}
-    	JXPathContext ctx = JXPathContext.newContext(item);
 		boolean match = true;
-		if(filters!=null)
+		if(ObjectUtils.isNotEmpty(filters))
 		{
+			JXPathContext ctx = JXPathContext.newContext(item);
 			for(String key : filters.keySet())
 			{
 				if(debugOnInfo) {logger.info("Filtering "+key);}

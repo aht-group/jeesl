@@ -36,6 +36,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
@@ -100,7 +101,10 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		super.toggled(c);
 		if(fbTs.getClassCategory().isAssignableFrom(c))
 		{
-			sbhScope.setList(fTs.findScopes(fbTs.getClassScope(), fbTs.getClassCategory(), sbhCategory.getSelected(), uiShowInvisible));
+			EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT>();
+			query.addCategories(sbhCategory.getSelected());
+			
+			sbhScope.setList(fTs.fTsScopes(query));
 			Collections.sort(sbhScope.getList(), comparatorScope);
 			if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbTs.getClassScope(),sbhScope.getList()));}
 			sbhScope.silentCallback();

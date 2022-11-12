@@ -16,6 +16,7 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisibleParent;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
@@ -31,8 +32,9 @@ public interface JeeslTsScope <L extends JeeslLang, D extends JeeslDescription,
 									>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithCode,
 				EjbWithPositionVisibleParent,EjbWithParentAttributeResolver,EjbWithPositionParent,
-				EjbWithLang<L>,EjbWithDescription<D>
+				EjbWithLang<L>,EjbWithDescription<D>,JeeslWithCategory<CAT>
 {
+	public enum Attributes{code,category,multiPoints}
 	public enum Statistic{none}
 	
 	CAT getCategory();
