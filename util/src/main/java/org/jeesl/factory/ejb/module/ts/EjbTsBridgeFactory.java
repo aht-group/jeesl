@@ -9,6 +9,7 @@ import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
+import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
@@ -17,9 +18,9 @@ import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbTsBridgeFactory<
+public class EjbTsBridgeFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,EC,?>,
 								MP extends JeeslTsMultiPoint<?,?,?,?>,
-								TS extends JeeslTimeSeries<?,TS,BRIDGE,?,?>,
+								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,?,?>,
 								BRIDGE extends JeeslTsBridge<EC>,
 								EC extends JeeslTsEntityClass<?,?,?,?>,
 								DATA extends JeeslTsData<TS,?,?,POINT,?>,
@@ -84,7 +85,7 @@ public class EjbTsBridgeFactory<
 		return map;
 	}
 	
-	public <T extends EjbWithId> Map<T,DATA> toMapEjbData(List<T> ejbs, List<DATA> datas)
+	public <T extends EjbWithId> Map<T,DATA> toMapEntityData(List<T> ejbs, List<DATA> datas)
 	{
 		Map<T,DATA> map = new HashMap<>();
 		Map<Long,T> idMap = EjbIdFactory.toIdMap(ejbs);
@@ -94,6 +95,18 @@ public class EjbTsBridgeFactory<
 			if(idMap.containsKey(refId)) {map.put(idMap.get(refId),data);}
 		}
 		return map;
+	}
+	
+	public <T extends EjbWithId> Nested2Map<T,SCOPE,DATA> toN2mEntityScopeData(List<T> ejbs, List<DATA> datas)
+	{
+		Nested2Map<T,SCOPE,DATA> n2m = new Nested2Map<>();
+		Map<Long,T> idMap = EjbIdFactory.toIdMap(ejbs);
+		for(DATA d : datas)
+		{
+			long refId = d.getTimeSeries().getBridge().getRefId();
+			if(idMap.containsKey(refId)) {n2m.put(idMap.get(refId),d.getTimeSeries().getScope(),d);}
+		}
+		return n2m;
 	}
 	
 	public <T extends EjbWithId> Nested2Map<T,MP,POINT> toN2mPoint(List<T> ejbs, List<POINT> points)

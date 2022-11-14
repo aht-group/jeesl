@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jeesl.model.json.util.time.JsonDay;
-import org.joda.time.DateTime;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,6 @@ public class JsonDayFactory
 	
 	private Locale locale;
 	
-	private final DateTime now;
 
 	public static <E extends Enum<E>> JsonDayFactory instance (E localeCode) {return new JsonDayFactory(localeCode.toString());}
 	public static JsonDayFactory instance (String localeCode) {return new JsonDayFactory(localeCode);}
@@ -34,8 +33,6 @@ public class JsonDayFactory
 		if(localeCode.equals("de")){locale = Locale.GERMAN;}
 		else if(localeCode.equals("fr")){locale = Locale.FRENCH;}
 		else {locale = Locale.ENGLISH;}
-		
-		now = new DateTime(new Date());
 	}
 	
 	public static JsonDay build()
@@ -45,22 +42,24 @@ public class JsonDayFactory
 		return json;
 	}
 	
-	public JsonDay build(DateTime dt)
-	{
-		JsonDay json = build();
-		json.setNr(dt.getDayOfMonth());
-		json.setWeekend(dt.getDayOfWeek()>5);
-		json.setMonth(dt.getMonthOfYear());
-		json.setYear(dt.getYear());
-		
-		DateTime.Property pDoW = dt.dayOfWeek();
-		json.setName(pDoW.getAsText(locale));
-		json.setCode(pDoW.getAsShortText(locale));
-		
-		json.setToday(now.getDayOfMonth()==dt.getDayOfMonth() && now.getMonthOfYear()==dt.getMonthOfYear() && now.getYear()==dt.getYear());
-		
-		return json;
-	}
+//	private JsonDay build(DateTime dt)
+//	{
+//		JsonDay json = build();
+//		json.setNr(dt.getDayOfMonth());
+//		json.setWeekend(dt.getDayOfWeek()>5);
+//		json.setMonth(dt.getMonthOfYear());
+//		json.setYear(dt.getYear());
+//		
+//		DateTime.Property pDoW = dt.dayOfWeek();
+//		json.setName(pDoW.getAsText(locale));
+//		json.setCode(pDoW.getAsShortText(locale));
+//		
+//		DateTime now = new DateTime(new Date());
+//		json.setToday(now.getDayOfMonth()==dt.getDayOfMonth() && now.getMonthOfYear()==dt.getMonthOfYear() && now.getYear()==dt.getYear());
+//		
+//		
+//		return json;
+//	}
 	
 	public JsonDay build(LocalDate ld)
 	{		
@@ -77,21 +76,42 @@ public class JsonDayFactory
 		return json;
 	}
 	
-	public List<JsonDay> build(Date from, Date to)
+//	public List<JsonDay> build(Date from, Date to)
+//	{
+//		DateTime dtFrom = new DateTime(from).withTimeAtStartOfDay();
+//		DateTime dtTo = new DateTime(to).withTimeAtStartOfDay();
+//		
+//		logger.info(dtFrom.toString()+" -> "+dtTo.toString());
+//		
+//		List<JsonDay> list = new ArrayList<>();
+//		
+//		boolean work = dtFrom.isBefore(dtTo) || dtFrom.isEqual(dtTo);
+//		int i = 0;
+//		while(work)
+//		{
+//			work = dtFrom.plusDays(i).isBefore(dtTo) || dtFrom.isEqual(dtTo);
+//			JsonDay day = build(dtFrom.plusDays(i));
+//			i++;
+//			day.setId(i);
+//			list.add(day);
+//		}
+//		
+//		return list;
+//	}
+	
+	public List<JsonDay> build(LocalDate ldtFrom, LocalDate ldtTo)
 	{
-		DateTime dtFrom = new DateTime(from).withTimeAtStartOfDay();
-		DateTime dtTo = new DateTime(to).withTimeAtStartOfDay();
-		
-		logger.info(dtFrom.toString()+" -> "+dtTo.toString());
+		logger.info(ldtFrom.toString()+" -> "+ldtTo.toString());
 		
 		List<JsonDay> list = new ArrayList<>();
 		
-		boolean work = dtFrom.isBefore(dtTo) || dtFrom.isEqual(dtTo);
+		boolean work = ldtFrom.isBefore(ldtTo) || ldtFrom.isEqual(ldtTo);
 		int i = 0;
 		while(work)
 		{
-			work = dtFrom.plusDays(i).isBefore(dtTo) || dtFrom.isEqual(dtTo);
-			JsonDay day = build(dtFrom.plusDays(i));
+			LocalDate ldt = ldtFrom.plusDays(i);
+			work = ldt.isBefore(ldtTo) || ldt.isEqual(ldtTo);
+			JsonDay day = build(ldt);
 			i++;
 			day.setId(i);
 			list.add(day);

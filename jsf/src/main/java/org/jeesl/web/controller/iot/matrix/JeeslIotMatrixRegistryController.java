@@ -1,4 +1,4 @@
-package org.jeesl.web.controller.io.t;
+package org.jeesl.web.controller.iot.matrix;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.iot.IotMatrixFactoryBuilder;
 import org.jeesl.factory.ejb.io.iot.matrix.EjbMatrixDeviceFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.iot.JeeslIotMatrixCallback;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixDevice;
 import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixLayout;
@@ -33,6 +34,9 @@ public class JeeslIotMatrixRegistryController <L extends JeeslLang, D extends Je
 	final static Logger logger = LoggerFactory.getLogger(JeeslIotMatrixRegistryController.class);
 	
 	private JeeslFacade facade;
+	
+	private final JeeslIotMatrixCallback callback;
+	
 	private final IotMatrixFactoryBuilder<L,D,DEVICE,LAYOUT> fbMatrix;
 	private final EjbMatrixDeviceFactory<DEVICE> efDevice;
 	
@@ -40,9 +44,10 @@ public class JeeslIotMatrixRegistryController <L extends JeeslLang, D extends Je
 
 	private DEVICE device; public DEVICE getDevice() {return device;} public void setDevice(DEVICE device) {this.device = device;}
 
-	public JeeslIotMatrixRegistryController(IotMatrixFactoryBuilder<L,D,DEVICE,LAYOUT> fbMatrix)
+	public JeeslIotMatrixRegistryController(final JeeslIotMatrixCallback callback, IotMatrixFactoryBuilder<L,D,DEVICE,LAYOUT> fbMatrix)
 	{
 		super(fbMatrix.getClassL(),fbMatrix.getClassD());
+		this.callback=callback;
 		this.fbMatrix=fbMatrix;
 		
 		efDevice = fbMatrix.ejbDevice();
@@ -72,6 +77,7 @@ public class JeeslIotMatrixRegistryController <L extends JeeslLang, D extends Je
 	public void selectDevice()
 	{
 		logger.info(AbstractLogMessage.selectEntity(device));
+		callback.callbackDeviceSelected();
 	}
 	
 	public void saveDevice() throws JeeslConstraintViolationException, JeeslLockingException

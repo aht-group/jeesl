@@ -76,7 +76,7 @@ public abstract class AbstractAdminTsBean <L extends JeeslLang, D extends JeeslD
 	protected List<CAT> categories; public List<CAT> getCategories() {return categories;}
 	
 	protected final EjbTsFactory<SCOPE,UNIT,TS,SOURCE,BRIDGE,EC,INT,STAT> efTs;
-	protected EjbTsBridgeFactory<MP,TS,BRIDGE,EC,DATA,POINT> efBridge;
+	protected EjbTsBridgeFactory<SCOPE,MP,TS,BRIDGE,EC,DATA,POINT> efBridge;
 	protected EjbTsDataFactory<TS,TRANSACTION,DATA,WS> efData;
 	protected EjbTsCronFactory<SCOPE,INT,STAT,CRON> efCron;
 	
