@@ -30,16 +30,8 @@ public class AbstractJeeslWebController <L extends JeeslLang, D extends JeeslDes
 	protected final EjbDescriptionFactory<D> efDescription;
 	
 	protected boolean debugOnInfo;
-	public void activateDebuggingOnInfo(JeeslLogger jogger)
-	{
-		this.debugOnInfo=true;
-		this.jogger=jogger;
-	}
-	
 	protected Class<L> cL;
 	protected Class<D> cD;
-
-//	protected NullNumberBinder nnb; public NullNumberBinder getNnb() {return nnb;} public void setNnb(NullNumberBinder nnb) {this.nnb = nnb;}
 
 	public AbstractJeeslWebController(final Class<L> cL, final Class<D> cD)
 	{
@@ -52,6 +44,12 @@ public class AbstractJeeslWebController <L extends JeeslLang, D extends JeeslDes
 		efDescription = new EjbDescriptionFactory<D>(cD);
 		
 		debugOnInfo = false;
+	}
+	
+	public void activateDebuggingOnInfo(JeeslLogger jogger)
+	{
+		this.debugOnInfo=true;
+		this.jogger=jogger;
 	}
 	
 	protected void postConstructWebController(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage

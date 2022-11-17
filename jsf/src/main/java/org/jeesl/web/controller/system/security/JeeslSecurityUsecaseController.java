@@ -273,5 +273,6 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		}
 	}
 	
+	public void reorderCategories() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity, categories);}
 	public void reorderUsecases() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity, usecases);}
 }

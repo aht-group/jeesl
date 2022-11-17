@@ -242,7 +242,7 @@ public class AbstractIconBean implements Serializable
 
 	protected void jeeslSecurity()
 	{
-		mapStatic.put("jeeslSecurityDocumentation", "ui/jeesl/security/documentation.png");
+//		mapStatic.put("jeeslSecurityDocumentation", "ui/jeesl/security/documentation.png");
 		mapStatic.put("jeeslSecurityVisible", "ui/jeesl/security/check-mark.png");
 		mapStatic.put("jeeslSecurityInvisible", "ui/jeesl/security/x-mark.png");
 

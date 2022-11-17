@@ -33,10 +33,10 @@
 						<h:outputText rendered="#{u.visible}" value="#{u.position}"/>
 		            </p:column>
 		            <p:column headerText="#{msg.aupSecurityUsecase}">  
-						<h:outputText value="#{u.name[userBean.localeCode].lang}" />  
+						<h:outputText value="#{u.name[localeCode].lang}" />  
 		            </p:column>
 					<p:column rendered="#{cc.attrs.bean.uiShowDocumentation}">  
-						<h:graphicImage rendered="#{u.documentation}" name="#{iconBean.icon12['aupSecurityDocumentation']}" library="gfx"/>
+						<j:svg type="jeeslSecurityDocumentation" rendered="#{u.documentation}"/>
 		            </p:column>
 		       	</p:dataTable>
 			</h:form>

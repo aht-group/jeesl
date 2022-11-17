@@ -44,7 +44,7 @@
                 <h:graphicImage rendered="#{not c.visible}" name="#{appIconBean.icon12['jeeslSecurityInvisible']}" library="gfx"/>
             </p:column>
             <p:column rendered="#{cc.attrs.bean.uiShowDocumentation}" styleClass="jeeslPfTcCenter">  
-				<h:graphicImage rendered="#{c.documentation}" name="#{appIconBean.icon12['jeeslSecurityDocumentation']}" library="gfx"/>
+				<j:svg type="jeeslSecurityDocumentation" rendered="#{u.documentation}"/>
             </p:column>
        	</p:dataTable>
 	</composite:implementation>
