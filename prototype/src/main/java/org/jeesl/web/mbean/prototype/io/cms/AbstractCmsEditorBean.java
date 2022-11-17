@@ -11,7 +11,6 @@ import org.jeesl.api.bean.cache.JeeslCmsCacheBean;
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
-import org.jeesl.controller.handler.op.OpStatusSelectionHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -21,9 +20,11 @@ import org.jeesl.factory.ejb.io.cms.EjbIoCmsElementFactory;
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsFactory;
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsSectionFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.factory.json.system.translation.JsonTranslationFactory;
 import org.jeesl.interfaces.bean.op.OpEntityBean;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.controller.handler.OutputXpathPattern;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsCategory;
@@ -41,6 +42,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.jsf.handler.op.OpEntitySelectionHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
@@ -94,7 +96,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	protected final SbSingleHandler<CMS> sbhCms; public SbSingleHandler<CMS> getSbhCms() {return sbhCms;}
 	protected final SbSingleHandler<CAT> sbhCategory; public SbSingleHandler<CAT> getSbhCategory() {return sbhCategory;}
 	private final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
-	private final OpStatusSelectionHandler<LOC> opLocale; public OpStatusSelectionHandler<LOC> getOpLocale() {return opLocale;}
+	private final OpEntitySelectionHandler<LOC> opLocale; public OpEntitySelectionHandler<LOC> getOpLocale() {return opLocale;}
 	private JeeslFileRepositoryHandler<FS,FC,FM> hFileRepository; public JeeslFileRepositoryHandler<FS,FC,FM> gethFileRepository() {return hFileRepository;}
 
 	private final Map<E,Section> mapOfx; public Map<E, Section> getMapOfx() {return mapOfx;}
@@ -129,7 +131,9 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 		sbhCategory = new SbSingleHandler<>(fbCms.getClassCategory(),this);
 		sbhCms = new SbSingleHandler<>(fbCms.getClassCms(),this);
 		sbhLocale = new SbSingleHandler<>(fbCms.getClassLocale(),this);
-		opLocale = new OpStatusSelectionHandler<>(this);
+		
+		opLocale = new OpEntitySelectionHandler<>(this);
+		opLocale.addColumn(JsonTranslationFactory.build(fbCms.getClassLocale(),JeeslLocale.Attributes.name,OutputXpathPattern.multiLang));
 		
 		mapOfx = new HashMap<>();
 		types = new ArrayList<ET>();
@@ -147,7 +151,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 		this.hFileRepository=hFileRepository;
 		
 		this.hFileRepository.setDebugOnInfo(debugOnInfo);
-		opLocale.setOpList(locales);
+		opLocale.setLazy(locales);
 		
 		elementCategories=fCms.allOrderedPositionVisible(fbCms.getClassElementCategory());
 		types.addAll(fCms.allOrderedPositionVisible(fbCms.getClassElementType()));

@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.lazy;
+package org.jeesl.jsf.handler.lazy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

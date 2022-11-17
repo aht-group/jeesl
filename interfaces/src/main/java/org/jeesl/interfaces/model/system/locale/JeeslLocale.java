@@ -20,4 +20,5 @@ public interface JeeslLocale <L extends JeeslLang, D extends JeeslDescription,
 								JeeslStatus<L,D,S>
 {
 	public static String none = "none";
+	public enum Attributes{name}
 }

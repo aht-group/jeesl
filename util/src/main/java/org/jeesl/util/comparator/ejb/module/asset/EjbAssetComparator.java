@@ -21,7 +21,7 @@ public class EjbAssetComparator<ASSET extends JeeslAomAsset<?,ASSET,?,?,?>>
         switch (type)
         {
             case position: c = factory.new PositionComparator();break;
-            case location: c = factory.new LocationComparator();break;
+            case location: c = factory.new TreePositionComparator();break;
         }
 
         return c;
@@ -38,7 +38,7 @@ public class EjbAssetComparator<ASSET extends JeeslAomAsset<?,ASSET,?,?,?>>
         }
     }
     
-    private class LocationComparator implements Comparator<ASSET>
+    private class TreePositionComparator implements Comparator<ASSET>
     {
         @Override public int compare(ASSET a, ASSET b)
         {
