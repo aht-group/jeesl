@@ -13,7 +13,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryStore;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
-import org.jeesl.model.json.system.io.fr.JsonFrAmazonS3;
+import org.jeesl.model.json.io.fr.JsonFrAmazonS3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

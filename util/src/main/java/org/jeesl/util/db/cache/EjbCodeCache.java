@@ -3,6 +3,7 @@ package org.jeesl.util.db.cache;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -67,6 +68,7 @@ public class EjbCodeCache <T extends EjbWithCode>
 	
 	public <E extends Enum<E>> boolean equals(T ejb, E code)
 	{
+		if(Objects.isNull(ejb) || Objects.isNull(code)) {return false;}
 		return ejb.equals(this.ejb(code));
 	}
 	

@@ -12,7 +12,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.interfaces.controller.handler.Expression;
 import org.jeesl.interfaces.controller.handler.Functor;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.util.JeeslTreeElement;
+import org.jeesl.interfaces.model.util.tree.JeeslTreeElement;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentId;
 import org.primefaces.event.TreeDragDropEvent;
@@ -125,7 +125,6 @@ public abstract class TreeHelper
     }
     
     // The following functions are from EH Module
-    
     public static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, List<T> list) {buildTree(treeParent,null,list,null);}
     public static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, List<T> list, Set<T> path) {buildTree(treeParent,null,list,path);}
 	private static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, T elementParent, List<T> list, Set<T> path)

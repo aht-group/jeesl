@@ -12,6 +12,8 @@
 	</composite:interface>
 	
 	<composite:implementation>
+		<h:outputText value="#{cc.attrs.withRemove}"/>
+		<h:outputText value="#{not empty cc.attrs.bean.tblView}"/>
 		<p:dataTable id="dtViews" var="v" value="#{cc.attrs.views}"
 						 selection="#{cc.attrs.bean.tblView}" selectionMode="single" rowKey="#{v.id}">
 			<f:facet name="header">

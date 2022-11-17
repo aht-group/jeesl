@@ -1,4 +1,4 @@
-package org.jeesl.model.json.system.io.fr;
+package org.jeesl.model.json.io.fr;
 
 import java.io.Serializable;
 

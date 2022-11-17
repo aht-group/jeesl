@@ -6,7 +6,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
-import org.jeesl.interfaces.model.util.JeeslTreeElement;
+import org.jeesl.interfaces.model.util.tree.JeeslTreeElement;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;

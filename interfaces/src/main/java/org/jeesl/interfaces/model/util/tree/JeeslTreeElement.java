@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.util;
+package org.jeesl.interfaces.model.util.tree;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentId;

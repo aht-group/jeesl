@@ -8,7 +8,6 @@ import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
-import org.jeesl.interfaces.model.util.JeeslTreeElement;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
@@ -19,8 +18,7 @@ public interface JeeslTreeClassification<L extends JeeslLang,
 										C extends JeeslTreeClassification<L,R,C,G>,
 										G extends JeeslGraphic<?,?,?>>
 						extends Serializable,EjbSaveable,
-								EjbWithId,EjbWithNonUniqueCode,
-								EjbWithPositionVisible,
+								EjbWithId,EjbWithNonUniqueCode,EjbWithPositionVisible,
 								JeeslWithTenantSupport<R>,EjbWithLang<L>,JeeslTreeElement<C>,
 								EjbWithCodeGraphic<G>								
 {	
