@@ -214,7 +214,6 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	}
 
 	//Save
-
 	public void saveUsecase() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.saveEntity(usecase));
@@ -225,7 +224,8 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		bSecurity.update(usecase);
 	}
 	
-	//OverlayPanel
+	//OP View
+	public void selectTblView() {logger.info(AbstractLogMessage.selectEntity(tblView));}
 	public void opAddView() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(!usecase.getViews().contains(opView))
@@ -237,19 +237,6 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 			bSecurity.update(usecase);
 		}
 	}
-	public void opAddAction() throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		if(!usecase.getActions().contains(opAction))
-		{
-			usecase.getActions().add(opAction);
-			usecase = fSecurity.save(usecase);
-			opAction = null;
-			selectUsecase();
-			bSecurity.update(usecase);
-		}
-	}
-	
-	//Overlay-Rm
 	public void opRmView() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(tblView!=null && usecase.getViews().contains(tblView))
@@ -257,6 +244,20 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 			usecase.getViews().remove(tblView);
 			usecase = fSecurity.save(usecase);
 			tblView = null;
+			selectUsecase();
+			bSecurity.update(usecase);
+		}
+	}
+	
+	//OP-Action
+	public void selectTblAction() {logger.info(AbstractLogMessage.selectEntity(tblAction));}
+	public void opAddAction() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		if(!usecase.getActions().contains(opAction))
+		{
+			usecase.getActions().add(opAction);
+			usecase = fSecurity.save(usecase);
+			opAction = null;
 			selectUsecase();
 			bSecurity.update(usecase);
 		}

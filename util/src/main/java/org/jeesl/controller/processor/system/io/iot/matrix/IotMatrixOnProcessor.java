@@ -8,7 +8,7 @@ public class IotMatrixOnProcessor
 {
 	final static Logger logger = LoggerFactory.getLogger(IotMatrixOnProcessor.class);
 	
-	public final String color = "200000000";
+	public final String color = "255255255";
 	
 	public IotMatrixOnProcessor()
 	{

@@ -224,6 +224,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 		{
 			int index = list.indexOf(selection);
 			int next = (index+1) % list.size();
+			if(debugOnInfo) {logger.info("selectNext: index="+index+" next="+next);}
 			this.selectSbSingle(list.get(next));
 		}
 	}
@@ -234,6 +235,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 			int index = list.indexOf(selection);
 			int next = (index-1);
 			if(next<0) {next=list.size();}
+			if(debugOnInfo) {logger.info("selectPrevious: index="+index+" next="+next);}
 			this.selectSbSingle(list.get(next));
 		}
 	}

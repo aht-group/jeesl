@@ -10,8 +10,8 @@ public class IotMatrixHourProcessor
 {
 	final static Logger logger = LoggerFactory.getLogger(IotMatrixHourProcessor.class);
 	
-	public final static String colorDay = "010010010";
-	public final static String colorNow = "020010010";
+	public final static String colorHour = "254254254";
+	public final static String colorNow = "255255000";
 	
 	public IotMatrixHourProcessor()
 	{
@@ -24,7 +24,7 @@ public class IotMatrixHourProcessor
 		{
 			boolean isNow = start.plusHours(i).getHour()==now.getHour();
 			if(isNow) {device.getData().add(colorNow);}
-			else{device.getData().add(colorDay);}
+			else{device.getData().add(colorHour);}
 		}
 	}
 }

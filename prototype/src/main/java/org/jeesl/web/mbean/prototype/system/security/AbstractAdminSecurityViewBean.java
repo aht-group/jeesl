@@ -116,6 +116,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		Collections.sort(roles,comparatorRole);
 		
 		usecases = view.getUsecases();
+		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassUsecase(),usecases,view));}
 		Collections.sort(usecases,comparatorUsecase);
 		
 		reloadAreas();

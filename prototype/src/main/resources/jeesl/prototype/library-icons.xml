@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <jeesl:container xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:jeesl="http://www.jeesl.org">
-    <js:status code="jeeslPrint" symbol="ui/system/print.svg"/>
-    <js:status code="jeeslLink" symbol="ui/system/link.svg"/>
-    <js:status code="jeeslFavorite" symbol="ui/system/favorite.svg"/>
-    <js:status code="jeeslRevisionAdd" symbol="ui/io/revision/envers/add.svg"/>
+    <js:status code="jeeslArrowUp" symbol="ui/control/arrow/blue/up.svg"/>
+    <js:status code="jeeslArrowDown" symbol="ui/control/arrow/blue/down.svg"/>
+    <js:status code="jeeslArrowLeft" symbol="ui/control/arrow/blue/left.svg"/>
+    <js:status code="jeeslArrowRight" symbol="ui/control/arrow/blue/right.svg"/>
+    <js:status code="jeeslUpload" symbol="ui/control/browser/upload.svg"/>
+    <js:status code="jeeslDownload" symbol="ui/control/browser/download.svg"/>
+    <js:status code="jeeslFilter" symbol="ui/control/calc/filter.svg"/>
+    <js:status code="jeeslCalcMinus" symbol="ui/control/calc/minus.svg"/>
+    <js:status code="jeeslCalcPlus" symbol="ui/control/calc/plus.svg"/>
     <js:status code="jeeslTafu0" symbol="ui/module/tafu/calendar0.svg"/>
     <js:status code="jeeslTafu1" symbol="ui/module/tafu/calendar1.svg"/>
     <js:status code="jeeslTafu2" symbol="ui/module/tafu/calendar2.svg"/>
@@ -12,46 +17,41 @@
     <js:status code="jeeslTafu5" symbol="ui/module/tafu/calendar5.svg"/>
     <js:status code="jeeslTafu6" symbol="ui/module/tafu/calendar6.svg"/>
     <js:status code="jeeslTafu7" symbol="ui/module/tafu/calendar7.svg"/>
-    <js:status code="jeeslRevision" symbol="ui/io/revision/envers/revision.svg"/>
-    <js:status code="jeeslRevisionMod" symbol="ui/io/revision/envers/mod.svg"/>
-    <js:status code="jeeslRevisionDel" symbol="ui/io/revision/envers/del.svg"/>
-    <js:status code="jeeslHome" symbol="ui/system/home.svg"/>
-    <js:status code="jeeslLanguageSelect" symbol="ui/system/language-select.svg"/>
-    <js:status code="jeeslDelete" symbol="ui/control/crud/delete.svg"/>
-    <js:status code="jeeslReset" symbol="ui/control/crud/reset.svg"/>
-    <js:status code="jeeslCancel" symbol="ui/control/crud/cancel.svg"/>
-    <js:status code="jeeslClone" symbol="ui/control/crud/clone.svg"/>
+    <js:status code="jeeslAdd" symbol="ui/control/crud/add.svg"/>
     <js:status code="jeeslRemove" symbol="ui/control/crud/remove.svg"/>
+    <js:status code="jeeslDelete" symbol="ui/control/crud/delete.svg"/>
+    <js:status code="jeeslCancel" symbol="ui/control/crud/cancel.svg"/>
     <js:status code="jeeslSave" symbol="ui/control/crud/save.svg"/>
+    <js:status code="jeeslReset" symbol="ui/control/crud/reset.svg"/>
+    <js:status code="jeeslClone" symbol="ui/control/crud/clone.svg"/>
     <js:status code="jeeslSearch" symbol="ui/control/crud/search.svg"/>
     <js:status code="jeeslReload" symbol="ui/control/crud/reload.svg"/>
-    <js:status code="jeeslFilter" symbol="ui/control/calc/filter.svg"/>
-    <js:status code="jeeslCalcMinus" symbol="ui/control/calc/minus.svg"/>
-    <js:status code="jeeslCalcPlus" symbol="ui/control/calc/plus.svg"/>
-    <js:status code="jeeslAddressBook" symbol="ui/system/person/addressbook.svg"/>
-    <js:status code="jeeslAdd" symbol="ui/control/crud/add.svg"/>
     <js:status code="jeeslEdit" symbol="ui/control/edit/pencil.svg"/>
+    <js:status code="jeeslAddressBook" symbol="ui/system/person/addressbook.svg"/>
+    <js:status code="jeeslFavorite" symbol="ui/system/favorite.svg"/>
     <js:status code="ejbUnsaved" symbol="ui/info/ejb/unsaved.svg"/>
     <js:status code="ejbInvisible" symbol="ui/info/ejb/invisible.svg"/>
-    <js:status code="jeeslUpload" symbol="ui/control/browser/upload.svg"/>
-    <js:status code="jeeslDownload" symbol="ui/control/browser/download.svg"/>
-    <js:status code="jeeslSecurityKey" symbol="ui/system/security/key.svg"/>
-    <js:status code="jeeslTreeCollapseAll" symbol="ui/control/tree/collapse-all.svg"/>
-    <js:status code="jeeslTreeExpandAll" symbol="ui/control/tree/expand-all.svg"/>
-    <js:status code="jeeslTreeExpandTwo" symbol="ui/control/tree/expand-2.svg"/>
-    <js:status code="jeeslTreeExpandThree" symbol="ui/control/tree/expand-3.svg"/>
-    <js:status code="jeeslArrowUp" symbol="ui/control/arrow/blue/up.svg"/>
-    <js:status code="jeeslTreeExpandRelevant" symbol="ui/control/tree/expand-relevant.svg"/>
-    <js:status code="jeeslArrowDown" symbol="ui/control/arrow/blue/down.svg"/>
-    <js:status code="jeeslArrowLeft" symbol="ui/control/arrow/blue/left.svg"/>
-    <js:status code="jeeslArrowRight" symbol="ui/control/arrow/blue/right.svg"/>
     <js:status code="jeeslInfo" symbol="/ui/info/info.svg"/>
     <js:status code="jeeslComment" symbol="/ui/info/comment.svg"/>
     <js:status code="jeeslMegaphone" symbol="/ui/info/megaphone.svg"/>
+    <js:status code="jeeslRevision" symbol="ui/io/revision/envers/revision.svg"/>
     <js:status code="jeeslOnlineHelp" symbol="ui/info/help.svg"/>
-    <js:status code="jeeslWizard" symbol="ui/control/wizard/wand.svg"/>
+    <js:status code="jeeslRevisionMod" symbol="ui/io/revision/envers/mod.svg"/>
+    <js:status code="jeeslRevisionAdd" symbol="ui/io/revision/envers/add.svg"/>
+    <js:status code="jeeslRevisionDel" symbol="ui/io/revision/envers/del.svg"/>
+    <js:status code="jeeslPrint" symbol="ui/system/print.svg"/>
     <js:status code="jeeslWorkflow" symbol="ui/control/wizard/workflow.svg"/>
     <js:status code="jeeslSbLogging" symbol="ui/io/logging/sbLogging.svg"/>
+    <js:status code="jeeslLink" symbol="ui/system/link.svg"/>
+    <js:status code="jeeslLanguageSelect" symbol="ui/system/language-select.svg"/>
+    <js:status code="jeeslHome" symbol="ui/system/home.svg"/>
+    <js:status code="jeeslWizard" symbol="ui/control/wizard/wand.svg"/>
+    <js:status code="jeeslSecurityKey" symbol="ui/system/security/key.svg"/>
     <js:status code="jeeslSecurityUser" symbol="ui/system/security/user.svg"/>
-    <js:status code="jeeslZip" symbol="ui/io/fr/zip.svg"/>
+    <js:status code="jeeslSecurityDocumentation" symbol="ui/system/security/documentation.svg"/>
+    <js:status code="jeeslTreeExpandTwo" symbol="ui/control/tree/expand-2.svg"/>
+    <js:status code="jeeslTreeExpandThree" symbol="ui/control/tree/expand-3.svg"/>
+    <js:status code="jeeslTreeExpandAll" symbol="ui/control/tree/expand-all.svg"/>
+    <js:status code="jeeslTreeExpandRelevant" symbol="ui/control/tree/expand-relevant.svg"/>
+    <js:status code="jeeslTreeCollapseAll" symbol="ui/control/tree/collapse-all.svg"/>
 </jeesl:container>
