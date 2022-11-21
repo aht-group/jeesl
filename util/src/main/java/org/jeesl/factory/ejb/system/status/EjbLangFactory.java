@@ -71,10 +71,6 @@ public class EjbLangFactory<L extends JeeslLang>
 		return map;
 	}
 
-//	private <S extends JeeslStatus<L,D,S>, D extends JeeslDescription> Map<String,L> createEmpty(List<S> locales)
-//	{
-//		return createEmpty(TxtStatusFactory.toCodes(locales).toArray(new String[0]));
-//	}
 	public <LOC extends JeeslLocale<L,?,LOC,?>> Map<String,L> buildEmpty(List<LOC> locales)
 	{
 		return createEmpty(TxtStatusFactory.toCodes(locales).toArray(new String[0]));

@@ -1,6 +1,9 @@
 package org.jeesl.factory.ejb.module.ts;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsMultiPoint;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
@@ -33,5 +36,16 @@ public class EjbTsMutliPointFactory<SCOPE extends JeeslTsScope<?,?,?,?,?,?,?>,
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		return ejb;
+	}
+	
+	public Map<SCOPE,List<MP>> toMapScope(List<MP> list)
+	{
+		Map<SCOPE,List<MP>> map = new HashMap<>();
+		for(MP mp : list)
+		{
+			if(!map.containsKey(mp.getScope())) {map.put(mp.getScope(),new ArrayList<>());}
+			map.get(mp.getScope()).add(mp);
+		}
+		return map;
 	}
 }

@@ -18,10 +18,10 @@
 		<p:panel styleClass="jeesl-tree">
 			<f:facet name="header"><j:pHeader entity="RmmvClassification" code="structure"/></f:facet>
 			<f:facet id="fActions" name="actions">
-					<p:outputPanel id="cActions">
-						<j:svg type="jeeslAdd" listener="#{cc.attrs.controller.addClassification()}" update=":#{cc.id}:sElement" marginLeft="5"/>
-					</p:outputPanel>
-				</f:facet>
+				<p:outputPanel id="cActions">
+					<j:svg type="jeeslAdd" listener="#{cc.attrs.controller.addClassification()}" update=":#{cc.id}:sElement" marginLeft="5"/>
+				</p:outputPanel>
+			</f:facet>
 			<p:tree var="node" value="#{cc.attrs.controller.tree}"
 					selection="#{cc.attrs.controller.node}" selectionMode="single"
 					draggable="true" droppable="true" dragdropScope="demo">
