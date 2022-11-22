@@ -168,4 +168,20 @@ public abstract class TreeHelper
     	path.add(element);
     	if(element.getParent()!=null) {fillPath(path,element.getParent());}
     }
+    
+    @SuppressWarnings("unchecked")
+    public static <T extends JeeslTreeElement<T>> TreeNode findNode(TreeNode tree, T ejb) throws JeeslConstraintViolationException, JeeslLockingException
+    {
+    	for(TreeNode node : tree.getChildren())
+    	{
+			T t = (T)node.getData();
+    		if(t.equals(ejb)) {return node;}
+    		else
+    		{
+    			TreeNode child = findNode(node,ejb);
+    			if(child!=null) {return child;}
+    		}
+    	}
+        return null;
+    }
 }

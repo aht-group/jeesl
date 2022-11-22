@@ -2,6 +2,7 @@ package org.jeesl.interfaces.model.util.tree;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
@@ -17,7 +18,7 @@ public interface JeeslTreeClassification<L extends JeeslLang,
 										R extends JeeslTenantRealm<L,?,R,?>,
 										C extends JeeslTreeClassification<L,R,C,G>,
 										G extends JeeslGraphic<?,?,?>>
-						extends Serializable,EjbSaveable,
+						extends Serializable,EjbSaveable,EjbRemoveable,
 								EjbWithId,EjbWithNonUniqueCode,EjbWithPositionVisible,
 								JeeslWithTenantSupport<R>,EjbWithLang<L>,JeeslTreeElement<C>,
 								EjbWithCodeGraphic<G>								

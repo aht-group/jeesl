@@ -72,4 +72,5 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 		classification = fbRmmv.ejbClassification().build(realm,rref);
 		classification.setName(efLang.buildEmpty(lp.getLocales()));
 	}
+	
 }

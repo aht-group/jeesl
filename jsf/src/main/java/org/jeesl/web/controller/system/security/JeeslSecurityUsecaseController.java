@@ -62,13 +62,15 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityUsecaseController.class);
 	
-	protected JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
+	public enum Action{Developer}
 	
-	protected JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
+	private JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
 	
-	protected final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
+	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
 	
-	JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
+	
+//	private JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security;
 	
 	protected final EjbSecurityCategoryFactory<C> efCategory;
 	protected final EjbSecurityUsecaseFactory<C,U> efUsecase;
@@ -122,16 +124,20 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		super.postConstructWebController(lp,bMessage);
 		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
-		this.security=security;
-		reloadCategories();
+//		this.security=security;
+		
 		opViews = fSecurity.all(fbSecurity.getClassView());
 		Collections.sort(opViews,comparatorView);
 		
 		opActions = new ArrayList<A>();
 		
+		// Page Security Settings
 		hasDeveloperAction = security.allow(security.getPageCode()+".Developer");
 		uiShowDocumentation = hasDeveloperAction;
 		uiShowInvisible = hasDeveloperAction;
+		if(debugOnInfo) {logger.info("Page security for "+security.getPageCode()+" hasDeveloperAction:"+hasDeveloperAction+" uiShowDocumentation:"+uiShowInvisible);}
+		
+		reloadCategories();
 	}
 	
 	protected void reloadCategories()

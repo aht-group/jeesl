@@ -61,6 +61,7 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 	protected R realm;
 	protected RREF rref;
 	private boolean withIcon; public boolean isWithIcon() {return withIcon;} public void setWithIcon(boolean withIcon) {this.withIcon = withIcon;}
+	private boolean hasChildren; public boolean isHasChildren() {return hasChildren;}
 	
 	public AbstractTreeClassificationController(final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg, final Class<LOC> cLocale, final Class<C> cClassification)
 	{
@@ -123,6 +124,18 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 		this.reloadTree();
 	}
 	
+	public void deleteClassification() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		TreeNode n = TreeHelper.findNode(tree,classification);
+		if(n.getChildCount()==0)
+		{
+			treePath.clear();TreeHelper.fillPath(treePath,classification);
+			facade.rm(classification);
+			this.reset(true);
+			this.reloadTree();
+		}
+	}
+	
 	public void onDragDrop(TreeDragDropEvent event) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		TreeHelper.persistDragDropEvent(facade,event);
@@ -132,8 +145,10 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 	public void onNodeSelect(NodeSelectEvent event)
 	{
 		this.reset(true);
-		logger.info("Selected "+event.getTreeNode().toString());
-		classification = (C)event.getTreeNode().getData();
+		TreeNode n = event.getTreeNode();
+		hasChildren = n.getChildCount()>0;
+		logger.info("Selected "+n.toString());
+		classification = (C)n.getData();
 		classification = facade.find(cClassification,classification);
 		classification = efLang.persistMissingLangs(facade,lp.getLocales(),classification);
 	}
@@ -163,4 +178,6 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 			catch (JeeslNotFoundException e) {e.printStackTrace();}
 		}
 	}
+	
+	
 }
