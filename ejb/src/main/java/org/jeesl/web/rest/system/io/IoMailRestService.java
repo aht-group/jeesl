@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
-import org.jeesl.api.rest.system.io.mail.JeeslIoMailRestExport;
-import org.jeesl.api.rest.system.io.mail.JeeslIoMailRestImport;
-import org.jeesl.api.rest.system.io.mail.JeeslIoMailRestInterface;
+import org.jeesl.api.rest.rs.io.mail.JeeslIoMailRestExport;
+import org.jeesl.api.rest.rs.io.mail.JeeslIoMailRestImport;
+import org.jeesl.api.rest.rs.io.mail.JeeslIoMailRestInterface;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;

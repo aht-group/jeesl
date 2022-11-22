@@ -2,7 +2,7 @@ package org.jeesl.controller.processor.system.io.db;
 
 import java.io.File;
 
-import org.jeesl.api.rest.system.io.db.JeeslIoDbRest;
+import org.jeesl.api.rest.rs.io.db.JeeslIoDbRest;
 import org.jeesl.util.query.xml.FileQuery;
 import org.jeesl.util.query.xml.IoQuery;
 

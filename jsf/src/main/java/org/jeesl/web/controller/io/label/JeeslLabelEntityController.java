@@ -16,7 +16,7 @@ import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
-import org.jeesl.api.rest.system.JeeslSystemRest;
+import org.jeesl.api.rest.rs.system.JeeslSystemRest;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;

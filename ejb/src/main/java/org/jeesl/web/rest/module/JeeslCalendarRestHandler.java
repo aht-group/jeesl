@@ -1,7 +1,7 @@
 package org.jeesl.web.rest.module;
 
 import org.jeesl.api.facade.module.JeeslCalendarFacade;
-import org.jeesl.api.rest.module.calendar.JeeslCalendarRest;
+import org.jeesl.api.rest.rs.module.calendar.JeeslCalendarRest;
 import org.jeesl.factory.builder.module.CalendarFactoryBuilder;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;

@@ -1,9 +1,9 @@
 package org.jeesl.web.rest.system;
 
 import org.jeesl.api.facade.system.JeeslJobFacade;
-import org.jeesl.api.rest.system.job.JeeslJobRest;
-import org.jeesl.api.rest.system.job.JeeslJobRestExport;
-import org.jeesl.api.rest.system.job.JeeslJobRestImport;
+import org.jeesl.api.rest.rs.system.job.JeeslJobRest;
+import org.jeesl.api.rest.rs.system.job.JeeslJobRestExport;
+import org.jeesl.api.rest.rs.system.job.JeeslJobRestImport;
 import org.jeesl.factory.xml.module.job.XmlJobsFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.system.job.JeeslJob;

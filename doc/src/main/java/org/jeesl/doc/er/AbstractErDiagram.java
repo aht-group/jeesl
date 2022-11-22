@@ -5,11 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.commons.configuration.Configuration;
-import org.jeesl.api.rest.system.io.revision.JeeslRevisionRestExport;
-import org.jeesl.api.rest.system.io.revision.JeeslRevisionRestImport;
+import org.jeesl.api.rest.rs.io.label.JeeslRevisionRestExport;
+import org.jeesl.api.rest.rs.io.label.JeeslRevisionRestImport;
 import org.jeesl.model.xml.system.revision.Diagram;
 import org.jeesl.model.xml.system.revision.Diagrams;
 import org.jeesl.model.xml.system.revision.Entities;
@@ -60,7 +61,11 @@ public class AbstractErDiagram
 
 	protected void loadEntites(String path)
 	{
-		try {entities = JaxbUtil.loadJAXB(fXmlEntities.getAbsoluteFile(), Entities.class);}
+		try
+		{
+			logger.info("Loading entities.xml "+path);
+			entities = JaxbUtil.loadJAXB(path, Entities.class);
+		}
 		catch (FileNotFoundException e) {e.printStackTrace();}
 	}
 
@@ -68,7 +73,7 @@ public class AbstractErDiagram
 	{
 		create(key,key,upload);
 	}
-	protected void create(String key, String label, boolean upload) throws ClassNotFoundException, IOException, TranscoderException
+	private void create(String key, String label, boolean upload) throws ClassNotFoundException, IOException, TranscoderException
 	{
 		List<String> subset = new ArrayList<String>();
 		subset.add(key);
@@ -83,7 +88,7 @@ public class AbstractErDiagram
 			Graph g = XmlGraphFactory.build(key);
 			g.setDot(XmlDotFactory.build(dotGraph));
 			JaxbUtil.info(g);
-			restUpload.importSystemRevisionDiagram(g);
+			if(Objects.nonNull(restUpload)) {restUpload.importSystemRevisionDiagram(g);}
 		}
 	}
 
@@ -96,7 +101,6 @@ public class AbstractErDiagram
 //		eap.addPackages(packages);
 
 		ErGraphProcessor egp = new ErGraphProcessor(fSrc, csm);
-
 		if(entities!=null) {egp.activateEntities(localeCode,entities);}
 		egp.addPackages(packages,subset);
 

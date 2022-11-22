@@ -13,7 +13,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
-import org.jeesl.api.rest.system.io.report.JeeslIoReportRestExport;
+import org.jeesl.api.rest.rs.io.report.JeeslIoReportRestExport;
 import org.jeesl.controller.handler.ui.helper.UiHelperIoReport;
 import org.jeesl.controller.report.JeeslReportUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;

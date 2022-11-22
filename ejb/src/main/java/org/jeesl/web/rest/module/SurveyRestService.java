@@ -7,10 +7,10 @@ import java.util.Map;
 
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
-import org.jeesl.api.rest.survey.JeeslSurveyJsonRest;
-import org.jeesl.api.rest.survey.JeeslSurveyRestExport;
-import org.jeesl.api.rest.survey.JeeslSurveyRestImport;
-import org.jeesl.api.rest.survey.JeeslSurveyXmlRest;
+import org.jeesl.api.rest.rs.module.survey.JeeslSurveyJsonRest;
+import org.jeesl.api.rest.rs.module.survey.JeeslSurveyRestExport;
+import org.jeesl.api.rest.rs.module.survey.JeeslSurveyRestImport;
+import org.jeesl.api.rest.rs.module.survey.JeeslSurveyXmlRest;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;

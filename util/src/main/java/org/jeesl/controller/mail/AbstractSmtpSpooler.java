@@ -3,7 +3,7 @@ package org.jeesl.controller.mail;
 import javax.mail.MessagingException;
 
 import org.apache.commons.cli.Option;
-import org.jeesl.api.rest.system.io.mail.JeeslIoMailRest;
+import org.jeesl.api.rest.rs.io.mail.JeeslIoMailRest;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.factory.txt.system.io.mail.core.TxtMailFactory;
 import org.jeesl.mail.smtp.TextMailSender;

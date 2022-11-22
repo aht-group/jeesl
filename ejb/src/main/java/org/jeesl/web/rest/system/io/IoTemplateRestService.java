@@ -1,8 +1,8 @@
 package org.jeesl.web.rest.system.io;
 
 import org.jeesl.api.facade.io.JeeslIoTemplateFacade;
-import org.jeesl.api.rest.system.io.template.JeeslIoTemplateRestExport;
-import org.jeesl.api.rest.system.io.template.JeeslIoTemplateRestImport;
+import org.jeesl.api.rest.rs.io.template.JeeslIoTemplateRestExport;
+import org.jeesl.api.rest.rs.io.template.JeeslIoTemplateRestImport;
 import org.jeesl.factory.xml.system.io.template.XmlTemplatesFactory;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateDefinition;

@@ -1,8 +1,8 @@
 package org.jeesl.web.rest.util;
 
 import org.jeesl.api.exception.xml.JeeslXmlStructureException;
-import org.jeesl.api.rest.system.traffic.JeeslTrafficLightRestExport;
-import org.jeesl.api.rest.system.traffic.JeeslTrafficLightRestImport;
+import org.jeesl.api.rest.rs.io.report.traffic.JeeslTrafficLightRestExport;
+import org.jeesl.api.rest.rs.io.report.traffic.JeeslTrafficLightRestImport;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;

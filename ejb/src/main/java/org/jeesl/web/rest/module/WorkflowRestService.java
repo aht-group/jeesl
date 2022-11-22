@@ -1,7 +1,7 @@
 package org.jeesl.web.rest.module;
 
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
-import org.jeesl.api.rest.module.workflow.JeeslWorkflowRestExportInterface;
+import org.jeesl.api.rest.rs.module.workflow.JeeslWorkflowRestExportInterface;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
 import org.jeesl.factory.xml.module.workflow.XmlProcessFactory;
 import org.jeesl.factory.xml.module.workflow.XmlProcessesFactory;

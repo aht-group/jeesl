@@ -1,8 +1,8 @@
 package org.jeesl.web.rest.module;
 
 import org.jeesl.api.facade.system.JeeslSystemNewsFacade;
-import org.jeesl.api.rest.module.news.JeeslNewsRestExport;
-import org.jeesl.api.rest.module.news.JeeslNewsRestImport;
+import org.jeesl.api.rest.rs.module.news.JeeslNewsRestExport;
+import org.jeesl.api.rest.rs.module.news.JeeslNewsRestImport;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;

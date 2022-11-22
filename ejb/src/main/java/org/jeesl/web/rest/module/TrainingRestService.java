@@ -1,8 +1,8 @@
 package org.jeesl.web.rest.module;
 
 import org.jeesl.api.facade.module.JeeslTrainingFacade;
-import org.jeesl.api.rest.module.training.JeeslTrainingRestExport;
-import org.jeesl.api.rest.module.training.JeeslTrainingRestImport;
+import org.jeesl.api.rest.rs.module.training.JeeslTrainingRestExport;
+import org.jeesl.api.rest.rs.module.training.JeeslTrainingRestImport;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;

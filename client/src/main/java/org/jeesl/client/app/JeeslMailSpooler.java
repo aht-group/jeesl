@@ -14,7 +14,7 @@ import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.api.rest.system.io.mail.JeeslIoMailRest;
+import org.jeesl.api.rest.rs.io.mail.JeeslIoMailRest;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.controller.mail.AbstractSmtpSpooler;

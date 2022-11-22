@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
-import org.jeesl.api.rest.system.security.JeeslSecurityRestExport;
+import org.jeesl.api.rest.rs.system.security.JeeslSecurityRestExport;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.system.navigation.Menu;
 import org.jeesl.model.xml.system.security.Security;

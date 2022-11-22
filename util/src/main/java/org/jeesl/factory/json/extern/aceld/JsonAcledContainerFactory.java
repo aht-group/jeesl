@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.jeesl.api.rest.ssi.acled.AcledExternRest;
+import org.jeesl.api.rest.extern.AcledExternRest;
 import org.jeesl.model.json.ssi.acled.JsonAcledActor;
 import org.jeesl.model.json.ssi.acled.JsonAcledAdmin1;
 import org.jeesl.model.json.ssi.acled.JsonAcledContainer;

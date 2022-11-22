@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
-import org.jeesl.api.rest.system.security.JeeslSecurityRestExport;
+import org.jeesl.api.rest.rs.system.security.JeeslSecurityRestExport;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.xml.system.security.XmlActionFactory;

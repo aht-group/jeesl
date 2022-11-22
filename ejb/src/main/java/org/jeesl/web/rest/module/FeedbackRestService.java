@@ -1,8 +1,8 @@
 package org.jeesl.web.rest.module;
 
 import org.jeesl.api.facade.module.JeeslFeedbackFacade;
-import org.jeesl.api.rest.module.feedback.JeeslFeedbackRestExport;
-import org.jeesl.api.rest.module.feedback.JeeslFeedbackRestImport;
+import org.jeesl.api.rest.rs.module.feedback.JeeslFeedbackRestExport;
+import org.jeesl.api.rest.rs.module.feedback.JeeslFeedbackRestImport;
 import org.jeesl.interfaces.model.module.feedback.JeeslFeedback;
 import org.jeesl.interfaces.model.module.feedback.JeeslFeedbackThread;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

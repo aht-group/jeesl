@@ -1,7 +1,7 @@
 package org.jeesl.web.rest.system.security.updater;
 
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
-import org.jeesl.api.rest.system.security.JeeslSecurityRestRoleImport;
+import org.jeesl.api.rest.rs.system.security.JeeslSecurityRestRoleImport;
 import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;

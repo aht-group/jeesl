@@ -128,7 +128,7 @@ public class ErGraphProcessor
 		createNode(c,subSet);
 	}
 
-	private void createNode(Class<?> c,Set<String> subSet)
+	private void createNode(Class<?> c, Set<String> subSet)
 	{
 		Annotation a = c.getAnnotation(EjbErNode.class);
 		if(a!=null)
@@ -147,7 +147,17 @@ public class ErGraphProcessor
 				}
 				catch (ExlpXpathNotFoundException | ExlpXpathNotUniqueException e){/*logger.warn(e.getMessage());*/}
 			}
-			if(node.getLabel()==null){node.setLabel("** "+er.name());}
+			if(node.getLabel()==null)
+			{
+				StringBuilder sb = new StringBuilder();
+				sb.append("No Translation of ").append(er.name());
+				sb.append(" localeCode:").append(localeCode);
+				if(entities==null) {sb.append(" entites:null");}
+				else {sb.append(" entties:").append(entities.getEntity().size());}
+				sb.append(" ").append(c.getName());
+				logger.warn(sb.toString());
+				node.setLabel("** "+er.name());
+			}
 
 			if(er.category().length()>0){node.setCategory(er.category());}
 

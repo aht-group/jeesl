@@ -3,7 +3,7 @@ package org.jeesl.controller.handler.module.aom;
 import java.util.List;
 
 import org.jeesl.api.facade.module.JeeslAssetFacade;
-import org.jeesl.api.rest.module.aom.JeeslAomRestInterface;
+import org.jeesl.api.rest.rs.module.aom.JeeslAomRestInterface;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;

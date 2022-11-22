@@ -1,8 +1,8 @@
 package org.jeesl.web.rest.system;
 
 import org.jeesl.api.facade.system.JeeslSystemPropertyFacade;
-import org.jeesl.api.rest.system.property.JeeslSystemPropertyRestExport;
-import org.jeesl.api.rest.system.property.JeeslSystemPropertyRestImport;
+import org.jeesl.api.rest.rs.system.property.JeeslSystemPropertyRestExport;
+import org.jeesl.api.rest.rs.system.property.JeeslSystemPropertyRestImport;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
