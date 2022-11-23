@@ -118,7 +118,7 @@ public class AbstractErDiagram
 
 		if(fPdf!=null)
 		{
-			logger.info("SVG-PDF");
+			logger.info("SVG to PDF (via "+Svg2PdfTranscoder.class.getSimpleName()+")");
 			Svg2PdfTranscoder.transcode(fDst,fPdf);
 			logger.info("SVG-PDF done");
 		}
