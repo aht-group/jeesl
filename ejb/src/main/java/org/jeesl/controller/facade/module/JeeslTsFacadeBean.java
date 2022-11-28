@@ -27,6 +27,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
 import org.jeesl.factory.ejb.module.ts.EjbTsFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.factory.json.system.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.sql.module.SqlTimeSeriesFactory;
 import org.jeesl.interfaces.facade.ParentPredicate;
@@ -169,21 +170,21 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		return scope.getIntervals().contains(interval) && scope.getClasses().contains(c);
 	}
 
-	@Override public List<TS> fTimeSeries(List<BRIDGE> bridges)
-	{
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<TS> cQ = cB.createQuery(fbTs.getClassTs());
-
-		Root<TS> ts = cQ.from(fbTs.getClassTs());
-		Join<TS,BRIDGE> jBridge = ts.join(JeeslTimeSeries.Attributes.bridge.toString());
-
-		predicates.add(jBridge.in(bridges));
-
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.select(ts);
-		return em.createQuery(cQ).getResultList();
-	}
+//	@Override public List<TS> fTimeSeries(List<BRIDGE> bridges)
+//	{
+//		List<Predicate> predicates = new ArrayList<Predicate>();
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<TS> cQ = cB.createQuery(fbTs.getClassTs());
+//
+//		Root<TS> ts = cQ.from(fbTs.getClassTs());
+//		Join<TS,BRIDGE> jBridge = ts.join(JeeslTimeSeries.Attributes.bridge.toString());
+//
+//		predicates.add(jBridge.in(bridges));
+//
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.select(ts);
+//		return em.createQuery(cQ).getResultList();
+//	}
 
 	@Override public List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes)
 	{
@@ -509,22 +510,25 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 
 	@Override public Json1Tuples<TS> tpCountRecordsByTs(List<TS> series)
 	{
+		if(ObjectUtils.isEmpty(series)) {return new Json1Tuples<>();}
 		Json1TuplesFactory<TS> jtf = new Json1TuplesFactory<TS>(this,fbTs.getClassTs());
+		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<DATA> data = cQ.from(fbTs.getClassData());
 
+		Path<TS> pTs = data.get(JeeslTsData.Attributes.timeSeries.toString());
+		predicates.add(pTs.in(series));
+		
 		Expression<Long> eCount = cB.count(data.<Long>get("id"));
 		Join<DATA,TS> jTs = data.join(JeeslTsData.Attributes.timeSeries.toString());
-//		Path<BRIDGE> pModule = jFr.get(ErpSrsFr.Attributes.module.toString());
-//		Path<ErpSrsRelease> pRelease = item.get(ErpSrsImplementation.Attributes.release.toString());
 
 		cQ.groupBy(jTs.get("id"));
 		cQ.multiselect(jTs.get("id"),eCount);
-//
-//		cQ.where(cB.and(ErpPredicateBuilder.srsImplementation(cB, query, item)));
-//
+
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildCount(tQ.getResultList());
+        return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 }

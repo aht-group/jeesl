@@ -118,6 +118,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		return json;
 	}
 	
+	@Deprecated
 	public Json1Tuples<A> buildCount(List<Tuple> tuples)
 	{
 		Json1Tuples<A> json = new Json1Tuples<A>();
@@ -179,8 +180,6 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		ejb1Load(json);
 		return json;
 	}
-	
-	
 	
 	private void ejb1Load(Json1Tuples<A> json)
 	{

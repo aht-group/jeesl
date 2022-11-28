@@ -34,10 +34,6 @@ public class JsonSsiStatistic implements Serializable
 	
 	@JsonProperty("error")
 	private Integer error;
-	public Integer getError() {
-		return error;
-	}
-	public void setError(Integer error) {
-		this.error = error;
-	}
+	public Integer getError() {return error;}
+	public void setError(Integer error) {this.error = error;}
 }

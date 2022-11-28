@@ -66,7 +66,7 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 
 	DATA fDataLast(TS series) throws JeeslNotFoundException;
 	
-	List<TS> fTimeSeries(List<BRIDGE> bridges);
+//	List<TS> fTimeSeries1(List<BRIDGE> bridges);
 	List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes);
 	List<TS> fTimeSeries(SCOPE scope, INT interval, EC entityClass);
 	List<TS> fTimeSeries(EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query);

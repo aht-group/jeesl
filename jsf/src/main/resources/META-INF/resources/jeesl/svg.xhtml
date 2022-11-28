@@ -12,12 +12,20 @@
 		<composite:attribute name="oncomplete" required="false"/>
 		<composite:attribute name="onstart" required="false"/>
 		<composite:attribute name="process" required="false" default=""/>
+		
 		<composite:attribute name="type" required="true"/>
-		<composite:attribute name="tooltip" required="false"/>
+		<composite:attribute name="height" required="false" default="12"/>
+		
+		
 		<composite:attribute name="immediate" required="false" default="false"/>
 		<composite:attribute name="library" required="false" default="gfx" shortDescription="The library attribute which is passed to h:graphicImage, can be empty for JEESL icons. Project specific icons can be overridden here or centrally in AppIconBean."/>
 		<composite:attribute name="ejb" required="false" default="" shortDescription="The related entity-ejb which will be evaluated for the ejbRendered attribute"/>
 		<composite:attribute name="ejbRendered" required="false" default=""/>
+		
+		<composite:attribute name="tooltip" required="false" shortDescription="Text for a tooltip which can either directly entered here or with a EL binding."/>
+		<composite:attribute name="ttEntity" required="false" shortDescription="A tooltip utilizing the labeling engine (together with ttCode)"/>
+		<composite:attribute name="ttCode" required="false" shortDescription="A tooltip utilizing the labeling engine (together with ttEntity"/>
+		
 	</composite:interface>
 
 	<composite:implementation>
@@ -40,9 +48,10 @@
 								rendered="#{not cc.attrs.disabled}"
 								library="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type] }"
 								name="#{appIconBean.svg[cc.attrs.type]}">
-					<f:attribute name="height" value="12"/>
+					<f:attribute name="height" value="#{cc.attrs.height}"/>
 				</h:graphicImage>
 				<p:tooltip for="image2" rendered="#{not empty cc.attrs.tooltip}" value="#{cc.attrs.tooltip}" showDelay="1500" hideEvent="mouseleave click"/>
+				<p:tooltip for="image2" rendered="#{(not empty cc.attrs.ttEntity) and (not empty cc.attrs.ttCode)}" value="#{appLabelBean.descriptions[cc.attrs.ttEntity][cc.attrs.ttCode][localeCode].lang}" showDelay="1500" hideEvent="mouseleave click"/>
 			</p:commandLink>
 		</c:if>
 		<c:if test="#{cc.getValueExpression('listener') eq null}">
@@ -63,7 +72,7 @@
 								rendered="#{not cc.attrs.disabled}"
 								library="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type] }"
 								name="#{appIconBean.svg[cc.attrs.type]}">
-					<f:attribute name="height" value="12"/>
+					<f:attribute name="height" value="#{cc.attrs.height} "/>
 				</h:graphicImage>
 				<p:tooltip for="image2" rendered="#{not empty cc.attrs.tooltip}" value="#{cc.attrs.tooltip}" showDelay="1500" hideEvent="mouseleave click"/>
 			</p:commandLink>

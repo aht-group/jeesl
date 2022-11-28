@@ -16,10 +16,12 @@ public class JsonSsiUpdate implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	public JsonSsiUpdate() {}
+	
 	@JsonProperty("success")
-	private boolean success;
-	public boolean isSuccess() {return success;}
-	public void setSuccess(boolean success) {this.success = success;}
+	private Boolean success;
+	public Boolean isSuccess() {return success;}
+	public void setSuccess(Boolean success) {this.success = success;}
 	
 	@JsonProperty("job")
 	private JsonJob job;

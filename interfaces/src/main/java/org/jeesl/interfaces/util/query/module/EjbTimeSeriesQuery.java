@@ -26,7 +26,15 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	
 	final static Logger logger = LoggerFactory.getLogger(EjbTimeSeriesQuery.class);
 	
-
+//	public static <CAT extends JeeslTsCategory<?,?,CAT,?>,
+//					SCOPE extends JeeslTsScope<?,?,CAT,?,?,?,INT>,
+//					BRIDGE extends JeeslTsBridge<?>,
+//					INT extends JeeslStatus<?,?,INT>,
+//					STAT extends JeeslTsStatistic<?,?,STAT,?>>
+//		EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> instance()
+//	{
+//		return new EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT>();
+//	}
 	public EjbTimeSeriesQuery()
 	{       
 		reset();

@@ -28,12 +28,15 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 	private JeeslComparatorProvider<C> jppC; public void setComparatorProviderC(JeeslComparatorProvider<C> jppC) {this.jppC = jppC;}
 	
 	private final Class<C> cC;
+	
 	protected final Map<Long,C> mapC;
-	private int sizeC; public int getSizeC() {return sizeC;}
-	private final List<C> listC; public List<C> getListC() {return listC;}
 	private final Map<A,Map<B,Map<C,Json3Tuple<A,B,C>>>> map3; public Map<A,Map<B,Map<C,Json3Tuple<A,B,C>>>> getMap3() {return map3;}
+	
+	private final List<C> listC; public List<C> getListC() {return listC;}
 	private final List<Json3Tuple<A,B,C>> tuples3; public List<Json3Tuple<A,B,C>> getTuples3() {return tuples3;}
 
+	private int sizeC; public int getSizeC() {return sizeC;}
+	
 	public JsonTuple3Handler(Class<A> cA, Class<B> cB, Class<C> cC)
 	{
 		super(cA,cB);

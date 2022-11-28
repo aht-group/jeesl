@@ -37,6 +37,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -130,7 +131,10 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		catch (ClassNotFoundException e) {e.printStackTrace();}
 		if(bridges.size() > 0)
 		{
-			series = fTs.fTimeSeries(bridges);
+			EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
+			query.addBridges(bridges);
+			
+			series = fTs.fTimeSeries(query);
 			mapTs.putAll(efTs.toMapBridgTsList(series));
 			th.init(fTs.tpCountRecordsByTs(series));
 		}

@@ -32,12 +32,14 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	private JeeslComparatorProvider<B> jcpB; public void setComparatorProviderB(JeeslComparatorProvider<B> jppB) {this.jcpB = jppB;}
 
 	protected final Class<B> cB;
+	
 	protected final Map<Long,B> mapB;
+	private final Map<A,Map<B,Json2Tuple<A,B>>> map; public Map<A,Map<B,Json2Tuple<A,B>>> getMap() {return map;}
+	
+	private final List<B> listB; public List<B> getListB() {return listB;}
+	private final List<Json2Tuple<A,B>> tuples2; public List<Json2Tuple<A,B>> getTuples2() {return tuples2;}
 	
 	private int sizeB; public int getSizeB() {return sizeB;}
-	private final List<B> listB; public List<B> getListB() {return listB;}
-	private final Map<A,Map<B,Json2Tuple<A,B>>> map; public Map<A,Map<B,Json2Tuple<A,B>>> getMap() {return map;}
-	private final List<Json2Tuple<A,B>> tuples2; public List<Json2Tuple<A,B>> getTuples2() {return tuples2;}
 	
 	public JsonTuple2Handler(Class<A> cA, Class<B> cB)
 	{

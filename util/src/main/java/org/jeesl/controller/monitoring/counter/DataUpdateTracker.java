@@ -42,6 +42,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		update = new DataUpdate();
 		json = new org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate();
 		json.setJob(new JsonJob());
+		json.getJob().setStart(LocalDateTime.now());
 		json.setStatistic(new JsonSsiStatistic());
 		
 		update.setResult(new Result());

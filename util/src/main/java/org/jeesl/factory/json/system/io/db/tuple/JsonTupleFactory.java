@@ -23,6 +23,7 @@ public class JsonTupleFactory
 	{
 		JsonTuple json = build();
 		json.setCount(tuple.getCount());
+		json.setCount1(tuple.getCount1());
 		json.setSum(tuple.getSum());
 		
 		json.setId1(tuple.getId());
