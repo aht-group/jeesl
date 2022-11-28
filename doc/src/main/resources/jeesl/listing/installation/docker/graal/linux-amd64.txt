@@ -1,0 +1,25 @@
+FROM debian:bullseye
+
+RUN apt-get update && apt-get install -y wget maven git tmux procps build-essential libz-dev
+
+RUN cd /usr/lib/jvm \
+	&& wget https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-22.3.0/graalvm-ce-java11-linux-amd64-22.3.0.tar.gz \
+	&& tar -xvzf graalvm-ce-java11-linux-amd64-22.3.0.tar.gz \
+	&& rm graalvm-ce-java11-linux-amd64-22.3.0.tar.gz \
+	&& update-alternatives --install /usr/bin/java java /usr/lib/jvm/graalvm-ce-java11-22.3.0/bin/java 1 \
+	&& cd /usr/lib/jvm
+	
+ENV PATH="$PATH:/usr/lib/jvm/graalvm-ce-java11-22.3.0/bin"
+ENV JAVA_HOME="/usr/lib/jvm/graalvm-ce-java11-22.3.0"
+RUN update-alternatives --set java /usr/lib/jvm/graalvm-ce-java11-22.3.0/bin/java
+RUN gu install native-image
+
+RUN cd /root \
+	&& mkdir .m2 && mkdir .m2/repository \
+	&& mkdir git \
+	&& mkdir maven \
+	&& mkdir config
+
+COPY settings.xml /root/.m2
+	
+WORKDIR /root/git
