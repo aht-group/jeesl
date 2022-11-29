@@ -1,0 +1,15 @@
+.heatmap {
+	display: flex;
+	gap: $slim-spacing;
+	
+	.heatmap-item {
+		background: $dark-colour;
+		height: $table-icon-height;
+		width: $table-icon-height;
+		
+		@media (max-width: 768px) {
+			height: $table-icon-height-mobile;
+			width: $table-icon-height-mobile;
+		}
+	}
+}

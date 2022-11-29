@@ -19,13 +19,13 @@ html, body {
   .jeeslPanel .ui-panel-content {
     flex: 1;
     /* Remove outer padding from input panel cells */ }
-    .jeeslPanel .ui-panel-content .ui-panelgrid:first-child .ui-widget-content:first-child .ui-panelgrid-cell {
+    .jeeslPanel .ui-panel-content .ui-panelgrid:not(.jeesl-datatable):first-child .ui-widget-content:first-child .ui-panelgrid-cell {
       padding-top: 0; }
-    .jeeslPanel .ui-panel-content .ui-panelgrid:last-child .ui-widget-content:last-child .ui-panelgrid-cell {
+    .jeeslPanel .ui-panel-content .ui-panelgrid:not(.jeesl-datatable):last-child .ui-widget-content:last-child .ui-panelgrid-cell {
       padding-bottom: 0; }
-    .jeeslPanel .ui-panel-content .ui-panelgrid .ui-widget-content .ui-panelgrid-cell:first-child {
+    .jeeslPanel .ui-panel-content .ui-panelgrid:not(.jeesl-datatable) .ui-widget-content .ui-panelgrid-cell:first-child {
       padding-left: 0; }
-    .jeeslPanel .ui-panel-content .ui-panelgrid .ui-widget-content .ui-panelgrid-cell:last-child {
+    .jeeslPanel .ui-panel-content .ui-panelgrid:not(.jeesl-datatable) .ui-widget-content .ui-panelgrid-cell:last-child {
       padding-right: 0; }
 
 .jeesl-tabs {
@@ -74,13 +74,13 @@ html, body {
   .jeesl-panel .ui-panel-content {
     flex: 1;
     /* Remove outer padding from input panel cells */ }
-    .jeesl-panel .ui-panel-content .ui-panelgrid:first-child .ui-widget-content:first-child .ui-panelgrid-cell {
+    .jeesl-panel .ui-panel-content .ui-panelgrid:not(.jeesl-datatable):first-child .ui-widget-content:first-child .ui-panelgrid-cell {
       padding-top: 0; }
-    .jeesl-panel .ui-panel-content .ui-panelgrid:last-child .ui-widget-content:last-child .ui-panelgrid-cell {
+    .jeesl-panel .ui-panel-content .ui-panelgrid:not(.jeesl-datatable):last-child .ui-widget-content:last-child .ui-panelgrid-cell {
       padding-bottom: 0; }
-    .jeesl-panel .ui-panel-content .ui-panelgrid .ui-widget-content .ui-panelgrid-cell:first-child {
+    .jeesl-panel .ui-panel-content .ui-panelgrid:not(.jeesl-datatable) .ui-widget-content .ui-panelgrid-cell:first-child {
       padding-left: 0; }
-    .jeesl-panel .ui-panel-content .ui-panelgrid .ui-widget-content .ui-panelgrid-cell:last-child {
+    .jeesl-panel .ui-panel-content .ui-panelgrid:not(.jeesl-datatable) .ui-widget-content .ui-panelgrid-cell:last-child {
       padding-right: 0; }
   .jeesl-panel .ui-panel-footer {
     margin: .5em -.2em 0;

@@ -21,6 +21,8 @@ body {
   color: #333333;
   text-align: left;
   background-color: #dedede; }
+  body .ui-widget {
+    font-family: "Arial", Verdana, Helvetica, sans-serif; }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important; }
@@ -436,6 +438,7 @@ template {
     line-height: normal; }
   .ui-button.ui-state-default .ui-icon {
     background: none;
+    color: #333333 !important;
     display: inline-block;
     font-family: "Font Awesome 5 Free";
     font-size: inherit;
@@ -532,6 +535,7 @@ template {
     border-radius: 0; }
   .ui-chkbox .ui-chkbox-box.ui-state-default .ui-icon {
     background: none;
+    color: #333333 !important;
     display: inline-block;
     font-family: "Font Awesome 5 Free";
     font-size: inherit;
@@ -554,6 +558,7 @@ template {
     display: inline-block; }
 
 .ui-inputfield.ui-state-default {
+  background: white;
   border: none;
   border-radius: 3px;
   box-shadow: none;
@@ -591,6 +596,7 @@ template {
     box-shadow: none;
     color: #333333; }
   .ui-selectonemenu.ui-state-default .ui-inputfield {
+    background: white;
     border: none;
     border-radius: 3px;
     box-shadow: none;
@@ -689,6 +695,7 @@ template {
         padding: 0; } }
   .ui-selectonemenu.ui-state-default .ui-icon {
     background: none;
+    color: #333333 !important;
     display: inline-block;
     font-family: "Font Awesome 5 Free";
     font-size: inherit;
@@ -709,7 +716,7 @@ template {
         .ui-selectonemenu.ui-state-default .ui-icon:before {
           font-size: 2em; } }
   .ui-selectonemenu.ui-state-default .ui-icon-triangle-1-s:before {
-    content: "\f0d7";
+    content: "\f0d7" !important;
     font-size: 1.5em; }
     @media (max-width: 768px) {
       .ui-selectonemenu.ui-state-default .ui-icon-triangle-1-s:before {
@@ -790,6 +797,7 @@ template {
     box-shadow: none;
     color: #333333; }
   .ui-selectcheckboxmenu.ui-state-default .ui-inputfield {
+    background: white;
     border: none;
     border-radius: 3px;
     box-shadow: none;
@@ -888,6 +896,7 @@ template {
         padding: 0; } }
   .ui-selectcheckboxmenu.ui-state-default .ui-icon {
     background: none;
+    color: #333333 !important;
     display: inline-block;
     font-family: "Font Awesome 5 Free";
     font-size: inherit;
@@ -908,7 +917,7 @@ template {
         .ui-selectcheckboxmenu.ui-state-default .ui-icon:before {
           font-size: 2em; } }
   .ui-selectcheckboxmenu.ui-state-default .ui-icon-triangle-1-s:before {
-    content: "\f0d7";
+    content: "\f0d7" !important;
     font-size: 1.5em; }
     @media (max-width: 768px) {
       .ui-selectcheckboxmenu.ui-state-default .ui-icon-triangle-1-s:before {
@@ -1084,6 +1093,7 @@ template {
   padding: 0; }
   .ui-calendar .ui-datepicker-trigger .ui-icon {
     background: none;
+    color: #333333 !important;
     display: inline-block;
     font-family: "Font Awesome 5 Free";
     font-size: inherit;
@@ -1136,6 +1146,7 @@ template {
           line-height: 50px; } }
     .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-icon {
       background: none;
+      color: #333333 !important;
       display: inline-block;
       font-family: "Font Awesome 5 Free";
       font-size: inherit;
@@ -1266,6 +1277,7 @@ template {
           line-height: 50px; } }
     .ui-datepicker .ui-datepicker-header .ui-icon {
       background: none;
+      color: #333333 !important;
       display: inline-block;
       font-family: "Font Awesome 5 Free";
       font-size: inherit;
@@ -1665,7 +1677,7 @@ template {
   .jeesl-input-grid .p-grid.p-field {
     align-items: center;
     margin: 0;
-    padding: 5px 0; }
+    padding: 0; }
 .jeesl-input-grid .p-field > label {
   margin-bottom: 0; }
 .jeesl-input-grid .p-field .p-col {
@@ -1675,6 +1687,22 @@ template {
 
 .jeesl-nowrap {
   white-space: nowrap; }
+
+/* Primefaces 12 fixes */
+body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
+  font-family: "Font Awesome 5 Free" !important; }
+
+.heatmap {
+  display: flex;
+  gap: 2px; }
+  .heatmap .heatmap-item {
+    background: #00663a;
+    height: 12px;
+    width: 12px; }
+    @media (max-width: 768px) {
+      .heatmap .heatmap-item {
+        height: 32px;
+        width: 32px; } }
 
 html, body {
   font-size: 11px;
@@ -3612,7 +3640,9 @@ body, .ui-widget {
                   padding-bottom: 5px; } }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item {
       display: flex;
-      height: 100%; }
+      height: 100%;
+      padding: 0;
+      top: 0; }
       @media (max-width: 768px) {
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item {
           height: 42px; } }
@@ -3877,14 +3907,14 @@ body, .ui-widget {
         .jeesl-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:last-child {
           margin-bottom: -5px; } }
   @media (max-width: 768px) {
-    .jeesl-panel .ui-panelgrid .ui-panelgrid-cell .ui-datatable {
+    .jeesl-panel .ui-panelgrid .ui-panelgrid-cell .jeesl-datatable {
       margin: 0 -10px;
       width: calc(100% + (2 * 10px)); }
-    .jeesl-panel .ui-panelgrid:last-child .ui-panelgrid-cell .ui-datatable {
+    .jeesl-panel .ui-panelgrid:last-child .ui-panelgrid-cell .jeesl-datatable {
       margin-bottom: -5px; } }
-  .jeesl-panel .ui-panelgrid .ui-datatable {
+  .jeesl-panel .ui-panelgrid .jeesl-datatable {
     margin: 0; }
-    .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
+    .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
       align-items: center;
       background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
       border: 1px solid #ababab;
@@ -3900,12 +3930,12 @@ body, .ui-widget {
       text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
       margin-bottom: 0; }
       @media (max-width: 768px) {
-        .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
+        .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
           border-radius: 3px 3px 0 0;
           border-width: 0;
           margin: 0 0 4px 0;
           min-height: 42px; } }
-      .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
+      .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header:after {
         background: #00663a;
         bottom: -4px;
         content: '';
@@ -3915,9 +3945,9 @@ body, .ui-widget {
         position: absolute;
         width: calc(100% + 2 * 1px); }
         @media (max-width: 768px) {
-          .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
+          .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header:after {
             display: block; } }
-      .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+      .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
         font-weight: 700;
         align-items: center;
         display: flex;
@@ -3925,61 +3955,61 @@ body, .ui-widget {
         line-height: 1em;
         padding: 2px 10px; }
         @media (max-width: 768px) {
-          .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+          .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
             font-size: 1.4em;
             letter-spacing: -.5px; } }
         @media (max-width: 768px) {
-          .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+          .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
             padding: 5px 10px; } }
-      .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions {
+      .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions {
         display: flex;
         flex-direction: row-reverse;
         float: none;
         height: auto; }
-        .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
+        .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
           height: 12px;
           padding: 0 4px; }
           @media (max-width: 768px) {
-            .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
+            .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
               height: 29px;
               padding: 0 6px; } }
-        .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
+        .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions > img {
           border-left: 1px solid #ababab;
           margin: 4px 0; }
           @media (max-width: 768px) {
-            .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
+            .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions > img {
               margin: 6px 0; } }
-        .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
+        .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
           align-items: center;
           display: flex;
           margin: 0;
           padding: 4px 0;
           transition: background .2s linear; }
-          .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
+          .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
             content: '';
             display: inline-block;
             height: 100%;
             vertical-align: middle; }
-          .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon > *, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon > * {
+          .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon > *, .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon > * {
             display: inline-block;
             vertical-align: middle; }
           @media (max-width: 768px) {
-            .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
+            .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
               padding: 7px 0 6px; }
-              .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
+              .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
                 border-left: 1px solid #ababab; } }
-          .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:hover, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:hover {
+          .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:hover, .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:hover {
             background: #c4c4c4; }
-          .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon img, .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon img {
+          .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon img, .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon img {
             vertical-align: middle; }
-    .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+    .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
       font-size: 1.2em; }
     @media (max-width: 768px) {
-      .jeesl-panel .ui-panelgrid .ui-datatable table tr:last-child td {
+      .jeesl-panel .ui-panelgrid .jeesl-datatable table tr:last-child td {
         border-bottom: 0; }
-      .jeesl-panel .ui-panelgrid .ui-datatable table tr th:first-child, .jeesl-panel .ui-panelgrid .ui-datatable table tr td:first-child {
+      .jeesl-panel .ui-panelgrid .jeesl-datatable table tr th:first-child, .jeesl-panel .ui-panelgrid .jeesl-datatable table tr td:first-child {
         border-left: 0; }
-      .jeesl-panel .ui-panelgrid .ui-datatable table tr th:last-child, .jeesl-panel .ui-panelgrid .ui-datatable table tr td:last-child {
+      .jeesl-panel .ui-panelgrid .jeesl-datatable table tr th:last-child, .jeesl-panel .ui-panelgrid .jeesl-datatable table tr td:last-child {
         border-right: 0; } }
   .jeesl-panel .ui-outputlabel {
     align-items: center;
@@ -4111,6 +4141,30 @@ body, .ui-widget {
             line-height: normal;
             padding: 0.5em 0 2px 0;
             width: 100% !important; } }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-1 {
+          width: 8%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-2 {
+          width: 17%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-3 {
+          width: 25%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-4 {
+          width: 33%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-5 {
+          width: 42%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-6 {
+          width: 50%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-7 {
+          width: 58%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-8 {
+          width: 67%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-9 {
+          width: 75%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-10 {
+          width: 83%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-11 {
+          width: 92%; }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-12 {
+          width: 100%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
           border-radius: 3px; }
           @media (max-width: 768px) {
@@ -4124,6 +4178,8 @@ body, .ui-widget {
               align-items: center;
               background: #dedede;
               display: flex; } }
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-button {
+          width: auto; }
         @media (max-width: 768px) {
           .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectcheckboxmenu {
             padding: 0; } }
@@ -4260,6 +4316,7 @@ body, .ui-widget {
       text-shadow: none; }
     .ui-fieldset .ui-fieldset-legend .ui-fieldset-toggler {
       background: none;
+      color: #333333 !important;
       display: inline-block;
       font-family: "Font Awesome 5 Free";
       font-size: inherit;
@@ -4284,9 +4341,10 @@ body, .ui-widget {
           .ui-fieldset .ui-fieldset-legend .ui-fieldset-toggler:before {
             font-size: 1em; } }
 
-.ui-datatable {
-  border-radius: 3px 3px 0 0; }
-  .ui-datatable .ui-datatable-header {
+.jeesl-datatable {
+  border: 1px solid #ababab;
+  border-radius: 3px; }
+  .jeesl-datatable .ui-datatable-header {
     align-items: center;
     background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
     border: 1px solid #ababab;
@@ -4302,12 +4360,12 @@ body, .ui-widget {
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
     margin-bottom: 0; }
     @media (max-width: 768px) {
-      .ui-datatable .ui-datatable-header {
+      .jeesl-datatable .ui-datatable-header {
         border-radius: 3px 3px 0 0;
         border-width: 0;
         margin: 0 0 4px 0;
         min-height: 42px; } }
-    .ui-datatable .ui-datatable-header:after {
+    .jeesl-datatable .ui-datatable-header:after {
       background: #00663a;
       bottom: -4px;
       content: '';
@@ -4317,9 +4375,9 @@ body, .ui-widget {
       position: absolute;
       width: calc(100% + 2 * 1px); }
       @media (max-width: 768px) {
-        .ui-datatable .ui-datatable-header:after {
+        .jeesl-datatable .ui-datatable-header:after {
           display: block; } }
-    .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+    .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
       font-weight: 700;
       align-items: center;
       display: flex;
@@ -4327,69 +4385,69 @@ body, .ui-widget {
       line-height: 1em;
       padding: 2px 10px; }
       @media (max-width: 768px) {
-        .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+        .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
           font-size: 1.4em;
           letter-spacing: -.5px; } }
       @media (max-width: 768px) {
-        .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+        .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
           padding: 5px 10px; } }
-    .ui-datatable .ui-datatable-header .pf-datatable-header-actions {
+    .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions {
       display: flex;
       flex-direction: row-reverse;
       float: none;
       height: auto; }
-      .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
+      .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
         height: 12px;
         padding: 0 4px; }
         @media (max-width: 768px) {
-          .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
+          .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
             height: 29px;
             padding: 0 6px; } }
-      .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
+      .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions > img {
         border-left: 1px solid #ababab;
         margin: 4px 0; }
         @media (max-width: 768px) {
-          .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
+          .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions > img {
             margin: 6px 0; } }
-      .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
+      .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
         align-items: center;
         display: flex;
         margin: 0;
         padding: 4px 0;
         transition: background .2s linear; }
-        .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
+        .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
           content: '';
           display: inline-block;
           height: 100%;
           vertical-align: middle; }
-        .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon > *, .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon > * {
+        .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon > *, .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon > * {
           display: inline-block;
           vertical-align: middle; }
         @media (max-width: 768px) {
-          .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
+          .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
             padding: 7px 0 6px; }
-            .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
+            .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
               border-left: 1px solid #ababab; } }
-        .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:hover, .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:hover {
+        .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:hover, .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:hover {
           background: #c4c4c4; }
-        .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon img, .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon img {
+        .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon img, .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon img {
           vertical-align: middle; }
-  .ui-datatable.jeesl-datatable-collapsible.jeesl-active .ui-datatable-header {
+  .jeesl-datatable.jeesl-datatable-collapsible.jeesl-active .ui-datatable-header {
     border-radius: 3px 3px 0 0;
     transition: border-radius 0s linear; }
-    .ui-datatable.jeesl-datatable-collapsible.jeesl-active .ui-datatable-header .pf-datatable-header-title:after {
+    .jeesl-datatable.jeesl-datatable-collapsible.jeesl-active .ui-datatable-header .pf-datatable-header-title:after {
       transform: rotate(180deg);
       text-shadow: 0 -1px white; }
-  .ui-datatable.jeesl-datatable-collapsible .ui-datatable-header {
+  .jeesl-datatable.jeesl-datatable-collapsible .ui-datatable-header {
     border-radius: 3px;
     cursor: pointer;
     transition: border-radius 0.2s 0.2s linear; }
     @media (max-width: 768px) {
-      .ui-datatable.jeesl-datatable-collapsible .ui-datatable-header {
+      .jeesl-datatable.jeesl-datatable-collapsible .ui-datatable-header {
         border-radius: 3px 3px 0 0; } }
-    .ui-datatable.jeesl-datatable-collapsible .ui-datatable-header:hover:before {
+    .jeesl-datatable.jeesl-datatable-collapsible .ui-datatable-header:hover:before {
       opacity: 1; }
-    .ui-datatable.jeesl-datatable-collapsible .ui-datatable-header:before {
+    .jeesl-datatable.jeesl-datatable-collapsible .ui-datatable-header:before {
       background: #c4c4c4;
       content: '';
       height: 100%;
@@ -4398,66 +4456,85 @@ body, .ui-widget {
       transition: opacity .2s linear;
       width: 100%;
       z-index: 1; }
-    .ui-datatable.jeesl-datatable-collapsible .ui-datatable-header .pf-datatable-header-title, .ui-datatable.jeesl-datatable-collapsible .ui-datatable-header .pf-datatable-header-actions {
+    .jeesl-datatable.jeesl-datatable-collapsible .ui-datatable-header .pf-datatable-header-title, .jeesl-datatable.jeesl-datatable-collapsible .ui-datatable-header .pf-datatable-header-actions {
       z-index: 2; }
-    .ui-datatable.jeesl-datatable-collapsible .ui-datatable-header .pf-datatable-header-title {
+    .jeesl-datatable.jeesl-datatable-collapsible .ui-datatable-header .pf-datatable-header-title {
       display: flex;
       justify-content: space-between; }
-      .ui-datatable.jeesl-datatable-collapsible .ui-datatable-header .pf-datatable-header-title:after {
+      .jeesl-datatable.jeesl-datatable-collapsible .ui-datatable-header .pf-datatable-header-title:after {
         content: '\f0d7';
         font-family: 'Font Awesome 5 Free';
         font-size: 2.5em;
         transition: transform .2s ease-in-out, text-shadow .2s; }
-  .ui-datatable table {
+  .jeesl-datatable table {
+    border-collapse: collapse;
+    border-style: hidden;
     height: 100%;
     table-layout: auto; }
     @media (max-width: 768px) {
-      .ui-datatable table thead th, .ui-datatable table tbody tr {
+      .jeesl-datatable table thead th, .jeesl-datatable table tbody tr {
         height: 42px; } }
-    .ui-datatable table thead th {
+    .jeesl-datatable table thead th {
       border-top: 0; }
-      .ui-datatable table thead th .ui-column-title .ui-widget {
+      .jeesl-datatable table thead th.jeesl-column-min-width {
+        white-space: nowrap; }
+      .jeesl-datatable table thead th .ui-column-title .ui-widget {
         font-weight: 700; }
-      .ui-datatable table thead th .ui-inputfield {
+      .jeesl-datatable table thead th .ui-inputfield {
         min-width: 22px; }
         @media (max-width: 768px) {
-          .ui-datatable table thead th .ui-inputfield {
+          .jeesl-datatable table thead th .ui-inputfield {
             min-width: 42px; } }
-    .ui-datatable table tbody tr, .ui-datatable table tbody .cell-select > label {
+    .jeesl-datatable table .cell-select label {
+      align-items: center;
+      display: flex;
+      height: 100%; }
+  .jeesl-datatable tbody {
+    background: #f0f0f0;
+    border: none; }
+    .jeesl-datatable tbody tr {
+      background: transparent;
+      border: none; }
+      .jeesl-datatable tbody tr:nth-child(2n) {
+        background: rgba(255, 255, 255, 0.5); }
+    .jeesl-datatable tbody tr, .jeesl-datatable tbody .cell-select > label {
       transition: background .2s linear; }
-    .ui-datatable table tbody td {
+    .jeesl-datatable tbody td {
+      border-color: #dedede;
+      border-width: 0 0 1px;
       padding: 5px 10px; }
-      .ui-datatable table tbody td .jeesl-icon {
+      .jeesl-datatable tbody td.jeesl-column-min-width {
+        width: 0; }
+      .jeesl-datatable tbody td .jeesl-icon {
         height: 12px; }
         @media (max-width: 768px) {
-          .ui-datatable table tbody td .jeesl-icon {
+          .jeesl-datatable tbody td .jeesl-icon {
             height: 32px; } }
-    .ui-datatable table tbody .ui-state-hover, .ui-datatable table tbody .cell-select > label:not(.selected):hover {
+    .jeesl-datatable tbody tr.ui-state-hover, .jeesl-datatable tbody .cell-select > label:not(.selected):hover {
       background: #dedede;
       box-shadow: none; }
-    .ui-datatable table tbody .ui-state-highlight, .ui-datatable table tbody .cell-select > label.selected {
+    .jeesl-datatable tbody .ui-state-highlight, .jeesl-datatable tbody .cell-select > label.selected {
       background: #008a4e;
       color: white;
       font-weight: 500;
       text-shadow: none; }
-    .ui-datatable table .cell-select label {
-      align-items: center;
-      display: flex;
-      height: 100%; }
-  .ui-datatable .ui-datatable-header {
+  .jeesl-datatable .ui-datatable-header {
+    border: none;
     border-bottom: 1px solid #ababab; }
-  .ui-datatable .ui-paginator {
+  .jeesl-datatable .ui-paginator {
     align-items: center;
+    border: 1px solid #ababab;
+    border-width: 1px 0 0;
     display: flex;
     flex-wrap: wrap;
     min-height: 22px;
     padding: 0;
     justify-content: center; }
     @media (max-width: 768px) {
-      .ui-datatable .ui-paginator {
+      .jeesl-datatable .ui-paginator {
         border-radius: 0 0 3px 3px;
         min-height: 42px; } }
-    .ui-datatable .ui-paginator .ui-paginator-first, .ui-datatable .ui-paginator .ui-paginator-prev, .ui-datatable .ui-paginator .ui-paginator-next, .ui-datatable .ui-paginator .ui-paginator-last {
+    .jeesl-datatable .ui-paginator .ui-paginator-first, .jeesl-datatable .ui-paginator .ui-paginator-prev, .jeesl-datatable .ui-paginator .ui-paginator-next, .jeesl-datatable .ui-paginator .ui-paginator-last {
       background: transparent;
       border: none;
       border-radius: 0;
@@ -4470,16 +4547,17 @@ body, .ui-widget {
       transition: background 0.2s linear;
       width: 22px; }
       @media (max-width: 768px) {
-        .ui-datatable .ui-paginator .ui-paginator-first, .ui-datatable .ui-paginator .ui-paginator-prev, .ui-datatable .ui-paginator .ui-paginator-next, .ui-datatable .ui-paginator .ui-paginator-last {
+        .jeesl-datatable .ui-paginator .ui-paginator-first, .jeesl-datatable .ui-paginator .ui-paginator-prev, .jeesl-datatable .ui-paginator .ui-paginator-next, .jeesl-datatable .ui-paginator .ui-paginator-last {
           height: 42px;
           width: 42px; } }
-      .ui-datatable .ui-paginator .ui-paginator-first.ui-state-hover, .ui-datatable .ui-paginator .ui-paginator-prev.ui-state-hover, .ui-datatable .ui-paginator .ui-paginator-next.ui-state-hover, .ui-datatable .ui-paginator .ui-paginator-last.ui-state-hover {
+      .jeesl-datatable .ui-paginator .ui-paginator-first.ui-state-hover, .jeesl-datatable .ui-paginator .ui-paginator-prev.ui-state-hover, .jeesl-datatable .ui-paginator .ui-paginator-next.ui-state-hover, .jeesl-datatable .ui-paginator .ui-paginator-last.ui-state-hover {
         background: #c4c4c4; }
     @media (max-width: 768px) {
-      .ui-datatable .ui-paginator .ui-paginator-prev .ui-icon:before {
+      .jeesl-datatable .ui-paginator .ui-paginator-prev .ui-icon:before {
         border-right: 1px solid #ababab; } }
-    .ui-datatable .ui-paginator .ui-icon {
+    .jeesl-datatable .ui-paginator .ui-icon {
       background: none;
+      color: #333333 !important;
       display: inline-block;
       font-family: "Font Awesome 5 Free";
       font-size: inherit;
@@ -4495,24 +4573,24 @@ body, .ui-widget {
       height: 100%;
       white-space: nowrap;
       width: 100%; }
-      .ui-datatable .ui-paginator .ui-icon:before {
+      .jeesl-datatable .ui-paginator .ui-icon:before {
         vertical-align: top; }
         @media (max-width: 768px) {
-          .ui-datatable .ui-paginator .ui-icon:before {
+          .jeesl-datatable .ui-paginator .ui-icon:before {
             font-size: 2em; } }
-      .ui-datatable .ui-paginator .ui-icon:after {
+      .jeesl-datatable .ui-paginator .ui-icon:after {
         content: '';
         display: inline-block;
         height: 100%;
         vertical-align: middle; }
-      .ui-datatable .ui-paginator .ui-icon > * {
+      .jeesl-datatable .ui-paginator .ui-icon > * {
         display: inline-block;
         vertical-align: middle; }
       @media (max-width: 768px) {
-        .ui-datatable .ui-paginator .ui-icon {
+        .jeesl-datatable .ui-paginator .ui-icon {
           height: calc(42px - 13px);
           margin: 7px 0 6px; } }
-      .ui-datatable .ui-paginator .ui-icon:before {
+      .jeesl-datatable .ui-paginator .ui-icon:before {
         align-items: center;
         display: flex;
         font-size: .9em;
@@ -4521,26 +4599,26 @@ body, .ui-widget {
         vertical-align: middle;
         width: 100%; }
         @media (max-width: 768px) {
-          .ui-datatable .ui-paginator .ui-icon:before {
+          .jeesl-datatable .ui-paginator .ui-icon:before {
             border-left: 1px solid #ababab;
             font-size: 1.5em; } }
-    .ui-datatable .ui-paginator .ui-icon-seek-first:before {
+    .jeesl-datatable .ui-paginator .ui-icon-seek-first:before {
       content: "\f049"; }
-    .ui-datatable .ui-paginator .ui-icon-seek-prev:before {
+    .jeesl-datatable .ui-paginator .ui-icon-seek-prev:before {
       content: "\f04a"; }
-    .ui-datatable .ui-paginator .ui-icon-seek-next:before {
+    .jeesl-datatable .ui-paginator .ui-icon-seek-next:before {
       content: "\f04e"; }
-    .ui-datatable .ui-paginator .ui-icon-seek-end:before {
+    .jeesl-datatable .ui-paginator .ui-icon-seek-end:before {
       content: "\f050"; }
-    .ui-datatable .ui-paginator .ui-paginator-current {
+    .jeesl-datatable .ui-paginator .ui-paginator-current {
       align-items: center;
       display: flex;
       margin: 0 5px;
       min-height: 22px; }
       @media (max-width: 768px) {
-        .ui-datatable .ui-paginator .ui-paginator-current {
+        .jeesl-datatable .ui-paginator .ui-paginator-current {
           min-height: 42px; } }
-    .ui-datatable .ui-paginator .ui-paginator-rpp-options {
+    .jeesl-datatable .ui-paginator .ui-paginator-rpp-options {
       background: transparent;
       border: none;
       border-radius: 0;
@@ -4551,18 +4629,18 @@ body, .ui-widget {
       outline: none;
       transition: background 0.2s linear; }
       @media (max-width: 768px) {
-        .ui-datatable .ui-paginator .ui-paginator-rpp-options {
+        .jeesl-datatable .ui-paginator .ui-paginator-rpp-options {
           height: 42px; } }
-      .ui-datatable .ui-paginator .ui-paginator-rpp-options.ui-state-hover, .ui-datatable .ui-paginator .ui-paginator-rpp-options:hover {
+      .jeesl-datatable .ui-paginator .ui-paginator-rpp-options.ui-state-hover, .jeesl-datatable .ui-paginator .ui-paginator-rpp-options:hover {
         background: #c4c4c4; }
-      .ui-datatable .ui-paginator .ui-paginator-rpp-options option {
+      .jeesl-datatable .ui-paginator .ui-paginator-rpp-options option {
         background: #00663a;
         color: white; }
   @media (max-width: 768px) {
-    .ui-datatable img {
+    .jeesl-datatable img {
       height: auto;
       max-height: calc(42px - 2 * 5px); }
-    .ui-datatable .ui-datatable-header {
+    .jeesl-datatable .ui-datatable-header {
       border-width: 1px 1px 0; } }
 
 .jeesl-content-container, .jeesl-overlay-container {
@@ -4902,14 +4980,14 @@ body, .ui-widget {
             .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor:last-child {
               margin-bottom: -5px; } }
       @media (max-width: 768px) {
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-panelgrid-cell .ui-datatable {
+        .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-panelgrid-cell .jeesl-datatable {
           margin: 0 -10px;
           width: calc(100% + (2 * 10px)); }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid:last-child .ui-panelgrid-cell .ui-datatable {
+        .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid:last-child .ui-panelgrid-cell .jeesl-datatable {
           margin-bottom: -5px; } }
-      .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable {
+      .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable {
         margin: 0; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
+        .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
           align-items: center;
           background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
           border: 1px solid #ababab;
@@ -4925,12 +5003,12 @@ body, .ui-widget {
           text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
           margin-bottom: 0; }
           @media (max-width: 768px) {
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
               border-radius: 3px 3px 0 0;
               border-width: 0;
               margin: 0 0 4px 0;
               min-height: 42px; } }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header:after {
             background: #00663a;
             bottom: -4px;
             content: '';
@@ -4940,9 +5018,9 @@ body, .ui-widget {
             position: absolute;
             width: calc(100% + 2 * 1px); }
             @media (max-width: 768px) {
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header:after {
                 display: block; } }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
             font-weight: 700;
             align-items: center;
             display: flex;
@@ -4950,61 +5028,61 @@ body, .ui-widget {
             line-height: 1em;
             padding: 2px 10px; }
             @media (max-width: 768px) {
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
                 font-size: 1.4em;
                 letter-spacing: -.5px; } }
             @media (max-width: 768px) {
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
                 padding: 5px 10px; } }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions {
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions {
             display: flex;
             flex-direction: row-reverse;
             float: none;
             height: auto; }
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
               height: 12px;
               padding: 0 4px; }
               @media (max-width: 768px) {
-                .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions img {
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions img {
                   height: 29px;
                   padding: 0 6px; } }
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions > img {
               border-left: 1px solid #ababab;
               margin: 4px 0; }
               @media (max-width: 768px) {
-                .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions > img {
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions > img {
                   margin: 6px 0; } }
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
               align-items: center;
               display: flex;
               margin: 0;
               padding: 4px 0;
               transition: background .2s linear; }
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
                 content: '';
                 display: inline-block;
                 height: 100%;
                 vertical-align: middle; }
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon > *, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon > * {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon > *, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon > * {
                 display: inline-block;
                 vertical-align: middle; }
               @media (max-width: 768px) {
-                .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon {
                   padding: 7px 0 6px; }
-                  .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
+                  .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:before {
                     border-left: 1px solid #ababab; } }
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:hover, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:hover {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon:hover, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon:hover {
                 background: #c4c4c4; }
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon img, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon img {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .pf-action-icon img, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-actions .jeesl-action-icon img {
                 vertical-align: middle; }
-        .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
+        .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
           font-size: 1.2em; }
         @media (max-width: 768px) {
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable table tr:last-child td {
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable table tr:last-child td {
             border-bottom: 0; }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable table tr th:first-child, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable table tr td:first-child {
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable table tr th:first-child, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable table tr td:first-child {
             border-left: 0; }
-          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable table tr th:last-child, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable table tr td:last-child {
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable table tr th:last-child, .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable table tr td:last-child {
             border-right: 0; } }
       .jeesl-content .jeesl-content-container .ui-panel .ui-outputlabel {
         align-items: center;
@@ -5136,6 +5214,30 @@ body, .ui-widget {
                 line-height: normal;
                 padding: 0.5em 0 2px 0;
                 width: 100% !important; } }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-1 {
+              width: 8%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-2 {
+              width: 17%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-3 {
+              width: 25%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-4 {
+              width: 33%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-5 {
+              width: 42%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-6 {
+              width: 50%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-7 {
+              width: 58%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-8 {
+              width: 67%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-9 {
+              width: 75%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-10 {
+              width: 83%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-11 {
+              width: 92%; }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-12 {
+              width: 100%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
               border-radius: 3px; }
               @media (max-width: 768px) {
@@ -5149,6 +5251,8 @@ body, .ui-widget {
                   align-items: center;
                   background: #dedede;
                   display: flex; } }
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-button {
+              width: auto; }
             @media (max-width: 768px) {
               .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectcheckboxmenu {
                 padding: 0; } }
@@ -5592,7 +5696,7 @@ body, .ui-widget {
           min-height: 42px;
           top: 0 !important; } }
       .jeesl-tabs .ui-tabs-nav .ui-tabs-header:hover {
-        background: linear-gradient(to bottom, #f2f2f2 87%, #c4c4c4 100%); }
+        background: linear-gradient(to bottom, #ededed 87%, #c4c4c4 100%); }
       .jeesl-tabs .ui-tabs-nav .ui-tabs-header.ui-tabs-selected {
         background: linear-gradient(to bottom, white, #f0f0f0);
         padding-bottom: 1px; }
@@ -5848,6 +5952,9 @@ body, .ui-widget {
 @media (max-width: 768px) {
   .pf-action-icon img {
     height: 42px; } }
+.jeesl-heatmap-entry {
+  fill: #00663a; }
+
 .html-container-panel .html-container > div > section {
   padding: 10px; }
   .html-container-panel .html-container > div > section > h1:first-child {

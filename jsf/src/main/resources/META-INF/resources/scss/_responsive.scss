@@ -4,6 +4,7 @@ $enable-pointer-cursor-for-buttons: true;
 
 @import '_reboot';
 @import '_responsiveCommon';
+@import '_responsiveCharts';
 
 @mixin triangle($colour: transparent, $width: 0) {
 	border-color: $colour;
@@ -1628,6 +1629,8 @@ body, .ui-widget {
 		.jeesl-menu-bar-calendar-item {
 			display: flex;
 			height: 100%;
+			padding: 0;
+			top: 0;
 			
 			@media (max-width: 768px) {
 				height: $sb-element-height-mobile;
@@ -1906,7 +1909,7 @@ body, .ui-widget {
 			}
 			
 			&:hover {
-				background: linear-gradient(to bottom, #f2f2f2 87%, #c4c4c4 100%);
+				background: linear-gradient(to bottom, $bright-grey 87%, $soft-grey 100%);
 			}
 			
 			&.ui-tabs-selected {
@@ -2054,6 +2057,12 @@ body, .ui-widget {
 						// Overriding inline css
 						width: 100% !important;
 					}
+					
+					@for $i from 1 to 13 {
+						&.p-md-#{$i} {
+							width: decimal-round(75 / 9 * $i) * 1%;
+						}
+					}
 
 					> * {
 						border-radius: $border-radius;
@@ -2074,6 +2083,10 @@ body, .ui-widget {
 							background: $light-grey;
 							display: flex;
 						}
+					}
+					
+					> .ui-button {
+						width: auto;
 					}
 					
 					> .ui-selectonemenu, > .ui-selectcheckboxmenu {
@@ -2339,7 +2352,7 @@ body, .ui-widget {
 	.ui-panelgrid {
 		@media (max-width: 768px) {
 			.ui-panelgrid-cell {
-				.ui-datatable {
+				.jeesl-datatable {
 					margin: 0 -#{$regular-spacing};
 					width: calc(100% + (2 * #{$regular-spacing}));
 				}
@@ -2348,14 +2361,14 @@ body, .ui-widget {
 
 			&:last-child {
 				.ui-panelgrid-cell {
-					.ui-datatable {
+					.jeesl-datatable {
 						margin-bottom: -$half-spacing;
 					}
 				}
 			}
 		}
 		
-		.ui-datatable {
+		.jeesl-datatable {
 			@include jeesl-table-titlebar;
 			
 			margin: 0;
@@ -2666,10 +2679,11 @@ body, .ui-widget {
 	}
 }
 
-.ui-datatable {
+.jeesl-datatable {
 	@include jeesl-table-titlebar;
 	
-	border-radius: $border-radius-top;
+	border: $border;
+	border-radius: $border-radius;
 	
 	&.jeesl-datatable-collapsible {
 		&.jeesl-active .ui-datatable-header {
@@ -2727,6 +2741,8 @@ body, .ui-widget {
 	}
 	
 	table {
+		border-collapse: collapse;
+		border-style: hidden;
 		height: 100%;
 		table-layout: auto;
 		
@@ -2738,6 +2754,10 @@ body, .ui-widget {
 		
 		thead th {
 			border-top: 0;
+			
+			&.jeesl-column-min-width {
+				white-space: nowrap;
+			}
 			
 			.ui-column-title .ui-widget {
 				font-weight: 700;
@@ -2752,36 +2772,6 @@ body, .ui-widget {
 			}
 		}
 		
-		tbody {
-			tr, .cell-select > label {
-				transition: background .2s linear;
-			}
-			
-			td {
-				padding: $half-spacing $regular-spacing;
-				
-				.jeesl-icon {
-					height: $table-icon-height;
-					
-					@media (max-width: 768px) {
-						height: $table-icon-height-mobile;
-					}
-				}
-			}
-			
-			.ui-state-hover, .cell-select > label:not(.selected):hover {
-				background: $light-grey;
-				box-shadow: none;
-			}
-			
-			.ui-state-highlight, .cell-select > label.selected {
-				background: $highlight-colour;
-				color: $white-100;
-				font-weight: 500;
-				text-shadow: none;
-			}
-		}
-		
 		.cell-select {
 			label {
 				align-items: center;
@@ -2790,13 +2780,64 @@ body, .ui-widget {
 			}
 		}
 	}
+		
+	tbody {
+		background: $panel-background;
+		border: none;
+		
+		tr {
+			background: transparent;
+			border: none;
+			
+			&:nth-child(2n) {
+				background: $white-50;
+			}
+		}
+		
+		tr, .cell-select > label {
+			transition: background .2s linear;
+		}
+		
+		td {
+			border-color: $light-grey;
+			border-width: 0 0 $border-width;
+			padding: $half-spacing $regular-spacing;
+			
+			&.jeesl-column-min-width {
+				width: 0;
+			}
+			
+			.jeesl-icon {
+				height: $table-icon-height;
+				
+				@media (max-width: 768px) {
+					height: $table-icon-height-mobile;
+				}
+			}
+		}
+		
+		tr.ui-state-hover, .cell-select > label:not(.selected):hover {
+			background: $light-grey;
+			box-shadow: none;
+		}
+		
+		.ui-state-highlight, .cell-select > label.selected {
+			background: $highlight-colour;
+			color: $white-100;
+			font-weight: 500;
+			text-shadow: none;
+		}
+	}
 	
 	.ui-datatable-header {
+		border: none;
 		border-bottom: $border-width solid $border-colour;
 	}
 	
 	.ui-paginator {
 		align-items: center;
+		border: $border;
+		border-width: $border-width 0 0;
 		display: flex;
 		flex-wrap: wrap;
 		min-height: $element-height;
@@ -3422,6 +3463,10 @@ body, .ui-widget {
 	.pf-action-icon img {
 		height: $element-height-mobile;
 	}
+}
+
+.jeesl-heatmap-entry {
+	fill: $dark-colour;
 }
 
 @import '_responsiveHtmlRender';

@@ -19,8 +19,13 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<p:dataTable var="c" value="#{cc.attrs.bean.categories}" draggableRows="true"
-			selection="#{cc.attrs.bean.category}" selectionMode="single" rowKey="#{c.id}">
+		<p:dataTable var="c"
+					 value="#{cc.attrs.bean.categories}"
+					 draggableRows="true"
+					 selection="#{cc.attrs.bean.category}"
+					 selectionMode="single"
+					 rowKey="#{c.id}"
+					 styleClass="jeesl-datatable">
 			<f:facet name="header">
 				<j:dtHeader title="#{msg.jeeslSecurityCategories}">
 					<j:svg type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.withAdd}" listener="#{cc.attrs.bean.addCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
