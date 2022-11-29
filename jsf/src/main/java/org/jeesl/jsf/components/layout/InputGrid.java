@@ -1,6 +1,8 @@
 package org.jeesl.jsf.components.layout;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,6 +17,7 @@ import javax.faces.context.ResponseWriter;
 import net.sf.ahtutils.jsf.util.ComponentAttribute;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.primefaces.component.blockui.BlockUIBase;
 import org.primefaces.component.outputlabel.OutputLabel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,12 +104,13 @@ public class InputGrid extends UIPanel
 		if(rChildren)
 		{
 			counter = new AtomicInteger(0);
-			List<UIComponent> renderedChildren = this.getChildren().stream().filter(c -> c.isRendered()).collect(Collectors.toList());
-			List<List<UIComponent>> childGroup = this.getChildren().stream().filter(child -> child.isRendered()).collect(Collectors.groupingBy(child -> classifyChildGroup())).values().stream().collect(Collectors.toList());
+			List<UIComponent> children = this.getChildren();
+			List<List<UIComponent>> childGroups = new ArrayList<List<UIComponent>>(children.stream().filter(child -> child.isRendered()).collect(Collectors.groupingBy(child -> classifyChildGroup())).values());
+			Collections.sort(childGroups, (a, b) -> children.indexOf(a.get(0)) - children.indexOf(b.get(0)));
 			
 			float inputWidth = (12 - labelWidth) / (columnCount - 1);
 			
-			for (List<UIComponent> group : childGroup)
+			for (List<UIComponent> group : childGroups)
 			{
 				UIPanel groupChild = new UIPanel();
 				ResponseWriter responseWriter = context.getResponseWriter();
@@ -126,9 +130,12 @@ public class InputGrid extends UIPanel
 						
 						child.encodeAll(context);
 					}
+					else if (child instanceof BlockUIBase)
+					{
+						child.encodeAll(context);
+					}
 					else
 					{
-						
         				UIPanel inputChild = new UIPanel();
         				responseWriter.startElement("div", inputChild);
         				responseWriter.writeAttribute("class", "p-col p-md-" + (int)inputWidth, null);
