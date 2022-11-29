@@ -52,6 +52,10 @@ body {
   color: $body-foreground;
   text-align: left; // 3
   background-color: $body-background; // 2
+
+  .ui-widget {
+	font-family: $font-family-base;
+  }
 }
 
 // Future-proof rule: in browsers that support :focus-visible, suppress the focus outline

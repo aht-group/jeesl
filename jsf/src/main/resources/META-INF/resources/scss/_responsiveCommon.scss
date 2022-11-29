@@ -262,6 +262,7 @@ $border: $border-width solid $border-colour;
 }
 
 @mixin inputfield {
+	background: $white-100;
 	border: none;
 	border-radius: $border-radius;
     box-shadow: none;
@@ -279,7 +280,8 @@ $border: $border-width solid $border-colour;
 }
 
 @mixin icon {
-	background: none;	
+	background: none;
+	color: $body-foreground !important; // Override primefaces 12 rule.
 	display: inline-block;
 	font-family: "Font Awesome 5 Free";
     font-size: inherit;
@@ -428,7 +430,7 @@ $border: $border-width solid $border-colour;
 		}
 		
 		.ui-icon-triangle-1-s:before {
-			content: "\f0d7";
+			content: "\f0d7" !important; // Override primefaces 12 rule.
 			font-size: 1.5em;
 			
 			@media (max-width: 768px) {
@@ -968,7 +970,7 @@ $border: $border-width solid $border-colour;
 		&.p-field {
 			align-items: center;
 		    margin: 0;
-		    padding: $half-spacing 0;
+		    padding: 0;
 		}
 	}
 	
@@ -989,4 +991,9 @@ $border: $border-width solid $border-colour;
 
 .jeesl-nowrap {
 	white-space: nowrap;
+}
+
+/* Primefaces 12 fixes */
+body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
+	font-family: "Font Awesome 5 Free" !important;
 }

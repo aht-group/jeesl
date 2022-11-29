@@ -20,11 +20,9 @@
         		<j:slot width="1"/>
         		<j:slot width="7">
         			<ui:repeat var="m" value="#{cc.attrs.beanMenu.subMenu(cc.attrs.bean.security.pageCode)}">
-		      			<p:panel styleClass="jeeslPanel">
+		      			<p:panel styleClass="jeeslPanel jeesl-panel">
 		      				<f:facet name="header"><j:pHeader title="#{m.view.name[localeCode].lang}" link="#{request.contextPath}#{m.view.urlMapping}"/></f:facet>
-        					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
-        						<h:outputText value="#{m.view.description[localeCode].lang}"/>
-        					</p:panelGrid>
+        					<h:outputText value="#{m.view.description[localeCode].lang}"/>
         				</p:panel>
 		      		</ui:repeat>
         			<composite:insertChildren/>
@@ -32,10 +30,8 @@
 			</j:row>
 			<j:row rendered="#{not appSettingsBean.indexWithSubmenuDescription}">
         		<j:slot width="7">
-        			<p:panel header="#{cc.attrs.bean.security.view.name[localeCode].lang}" styleClass="jeeslPanel">
-       					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
-       						<h:outputText value="#{cc.attrs.bean.security.view.description[localeCode].lang}"/>
-       					</p:panelGrid>
+        			<p:panel header="#{cc.attrs.bean.security.view.name[localeCode].lang}" styleClass="jeeslPanel jeesl-panel">
+       					<h:outputText value="#{cc.attrs.bean.security.view.description[localeCode].lang}"/>
        				</p:panel>
        				<composite:insertChildren/>
         		</j:slot>

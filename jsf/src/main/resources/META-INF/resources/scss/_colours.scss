@@ -1,16 +1,17 @@
 $white-0: hsla(0,0%,100%,0);
+$white-50: hsla(0,0%,100%,.5);
 $white-70: hsla(0,0%,100%,.7);
 $white-80: hsla(0,0%,100%,.8);
 $white-100: hsla(0,0%,100%,1);
 
 $black-40: hsla(0,0%,0%,.4);
 
-$bright-grey: hsla(0,0%,93%,1);
-$light-grey: hsla(0,0%,87%,1);
-$soft-grey: hsla(0,0%,77%,1);
-$medium-grey: hsla(0,0%,67%,1);
-$dark-grey: hsla(0,0%,33%,1);
-$anthracite: hsla(0,0%,20%,1);
+$bright-grey: hsl(0,0%,93%);
+$light-grey: hsl(0,0%,87%);
+$soft-grey: hsl(0,0%,77%);
+$medium-grey: hsl(0,0%,67%);
+$dark-grey: hsl(0,0%,33%);
+$anthracite: hsl(0,0%,20%);
 $black: $anthracite;
 $brighter-colour: hsla(154,100%,33%,1);
 $bright-colour: hsla(154,100%,27%,1);

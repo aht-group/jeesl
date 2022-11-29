@@ -29,8 +29,14 @@
 		</j:slot>
 		<j:slot id="sViews" width="4">
 			<h:form id="fViews">
-				<p:dataTable var="v" value="#{cc.attrs.bean.views}" draggableRows="true" rendered="#{not empty cc.attrs.bean.category}"
-							selection="#{cc.attrs.bean.view}" selectionMode="single" rowKey="#{v.id}">
+				<p:dataTable var="v"
+							 value="#{cc.attrs.bean.views}"
+							 draggableRows="true"
+							 selection="#{cc.attrs.bean.view}"
+							 selectionMode="single"
+							 rowKey="#{v.id}"
+							 styleClass="jeesl-datatable"
+							 rendered="#{not empty cc.attrs.bean.category}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.aupSecurityViews}">
 							<j:svg type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttAdd}"/>

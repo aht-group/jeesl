@@ -36,7 +36,7 @@ html, body {
 //		padding: 5px 10px !important;
 		
 		/* Remove outer padding from input panel cells */
-		.ui-panelgrid {
+		.ui-panelgrid:not(.jeesl-datatable) {
 			&:first-child {
 				.ui-widget-content:first-child {
 					.ui-panelgrid-cell {
@@ -139,7 +139,7 @@ html, body {
 //		padding: 5px 10px !important;
 		
 		/* Remove outer padding from input panel cells */
-		.ui-panelgrid {
+		.ui-panelgrid:not(.jeesl-datatable) {
 			&:first-child {
 				.ui-widget-content:first-child {
 					.ui-panelgrid-cell {
