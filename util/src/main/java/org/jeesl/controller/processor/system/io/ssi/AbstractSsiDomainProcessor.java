@@ -1,4 +1,4 @@
-package org.jeesl.controller.processor.system.io;
+package org.jeesl.controller.processor.system.io.ssi;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,7 +36,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
 										DATA extends JeeslIoSsiData<MAPPING,LINK,JOB>,
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
-										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
+										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 										JOB extends JeeslJobStatus<L,D,JOB,?>,
 										JSON extends Object

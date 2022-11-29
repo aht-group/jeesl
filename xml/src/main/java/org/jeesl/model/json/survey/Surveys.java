@@ -15,9 +15,9 @@ public class Surveys implements Serializable
 	public static final long serialVersionUID=1;
 	
 	@JsonProperty("survey")
-	private List<Survey> survey;
-	public List<Survey> getSurvey() {if(survey==null){survey = new ArrayList<Survey>();} return survey;}
-	public void setSurvey(List<Survey> survey) {this.survey = survey;}
+	private List<JsonSurvey> survey;
+	public List<JsonSurvey> getSurvey() {if(survey==null){survey = new ArrayList<JsonSurvey>();} return survey;}
+	public void setSurvey(List<JsonSurvey> survey) {this.survey = survey;}
 	
 	@Override public String toString()
 	{

@@ -23,7 +23,7 @@ public class JsonTsData implements Serializable
 	@JsonIgnore public boolean isSetId() {return id!=null;}
 
 	@JsonProperty("record")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSXXX")	//This is new, ISO 8601
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSXXX")	//ISO 8601
 	private Date record;
 	public Date getRecord() {return record;}
 	public void setRecord(Date record) {this.record = record;}

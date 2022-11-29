@@ -14,5 +14,5 @@ public interface JeeslSurveyJsonRest
 	JsonContainer surveyQuestionUnitsJson();
 	
 	@GET @Path("/json/structure/{locale}/{id:[1-9][0-9]*}") @Produces(MediaType.APPLICATION_JSON)
-	org.jeesl.model.json.survey.Survey surveyStructureJson(@PathParam("locale") String localeCode, @PathParam("id") long id);
+	org.jeesl.model.json.survey.JsonSurvey surveyStructureJson(@PathParam("locale") String localeCode, @PathParam("id") long id);
 }
