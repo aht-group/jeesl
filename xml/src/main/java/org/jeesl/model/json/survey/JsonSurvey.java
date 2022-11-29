@@ -7,13 +7,14 @@ import java.util.List;
 import org.jeesl.interfaces.model.survey.JeeslSimpleSurvey;
 import org.jeesl.model.json.system.status.JsonStatus;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="survey")
-public class Survey implements Serializable,JeeslSimpleSurvey
+public class JsonSurvey implements Serializable,JeeslSimpleSurvey
 {
 	public static final long serialVersionUID=1;
 
@@ -28,11 +29,13 @@ public class Survey implements Serializable,JeeslSimpleSurvey
 	public void setLabel(String label) {this.label = label;}
 	
 	@JsonProperty("dateStart")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSXXX")	//ISO 8601
 	private Date dateStart;
 	public Date getDateStart() {return dateStart;}
 	public void setDateStart(Date dateStart) {this.dateStart = dateStart;}
 
 	@JsonProperty("dateEnd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSSXXX")	//ISO 8601
 	private Date dateEnd;
 	public Date getDateEnd() {return dateEnd;}
 	public void setDateEnd(Date dateEnd) {this.dateEnd = dateEnd;}

@@ -5,7 +5,7 @@ import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.json.survey.Survey;
+import org.jeesl.model.json.survey.JsonSurvey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,19 +16,19 @@ public class JsonSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(JsonSurveyFactory.class);
 	
 	private final String localeCode;
-	private final Survey q;
+	private final JsonSurvey q;
 	private JsonStatusFactory<L,D,SS> jfStatus;
 	
-	public JsonSurveyFactory(String localeCode, Survey q)
+	public JsonSurveyFactory(String localeCode, JsonSurvey q)
 	{
 		this.localeCode=localeCode;
 		this.q=q;
 		if(q.getStatus()!=null){jfStatus = new JsonStatusFactory<L,D,SS>(localeCode,q.getStatus());}
 	}
 	
-	public Survey build(SURVEY survey)
+	public JsonSurvey build(SURVEY survey)
 	{
-		Survey json = build();
+		JsonSurvey json = build();
 		if(q.getId()!=0){json.setId(survey.getId());}
 		if(q.getLabel()!=null){json.setLabel(survey.getName().get(localeCode).getLang());}
 		if(q.getDateStart()!=null){json.setDateStart(survey.getStartDate());}
@@ -37,9 +37,9 @@ public class JsonSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 		return json;
 	}
 	
-	public static Survey build()
+	public static JsonSurvey build()
 	{
-		Survey json = new Survey();	
+		JsonSurvey json = new JsonSurvey();	
 		return json;
 	}
 }

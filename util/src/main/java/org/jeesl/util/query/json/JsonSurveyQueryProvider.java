@@ -16,7 +16,7 @@ import org.jeesl.model.json.survey.Matrix;
 import org.jeesl.model.json.survey.Option;
 import org.jeesl.model.json.survey.Question;
 import org.jeesl.model.json.survey.Section;
-import org.jeesl.model.json.survey.Survey;
+import org.jeesl.model.json.survey.JsonSurvey;
 import org.jeesl.model.json.survey.Template;
 import org.jeesl.model.json.survey.validation.Validation;
 import org.jeesl.model.json.survey.validation.ValidationAlgorithm;
@@ -24,9 +24,9 @@ import org.jeesl.model.json.system.status.JsonType;
 
 public class JsonSurveyQueryProvider
 {
-	public static Survey survey()
+	public static JsonSurvey survey()
 	{				
-		Survey json = new Survey();
+		JsonSurvey json = new JsonSurvey();
 		json.setId(Long.valueOf(1));
 		json.setLabel("");
 		json.setDateStart(new Date());

@@ -415,12 +415,12 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
 		return xml;
 	}
 	
-	@Override public org.jeesl.model.json.survey.Survey surveyStructureJson(String localeCode, long id)
+	@Override public org.jeesl.model.json.survey.JsonSurvey surveyStructureJson(String localeCode, long id)
 	{
 		JsonSurveyFactory<L,D,SURVEY,SS> jfSurvey = new JsonSurveyFactory<L,D,SURVEY,SS>(localeCode,JsonSurveyQueryProvider.survey());
 		JsonTemplateFactory<L,D,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> jfTemplate = new JsonTemplateFactory<L,D,SURVEY,SS,SCHEME,VALGORITHM,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,JsonSurveyQueryProvider.templateExport(),fbTemplate,fTemplate,fSurvey); 
 		
-		org.jeesl.model.json.survey.Survey jSurvey = JsonSurveyFactory.build();
+		org.jeesl.model.json.survey.JsonSurvey jSurvey = JsonSurveyFactory.build();
 		try
 		{
 			SURVEY eSurvey = fSurvey.find(fbCore.getClassSurvey(),id);

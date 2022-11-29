@@ -177,7 +177,7 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 	
 //	public JeeslSurveyCacheFacadeBean<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> cache();
 	
-	public JsonSurveyFactory<L,D,SURVEY,SS> surveyJson(String localeCode, org.jeesl.model.json.survey.Survey q)
+	public JsonSurveyFactory<L,D,SURVEY,SS> surveyJson(String localeCode, org.jeesl.model.json.survey.JsonSurvey q)
 	{
 		return new JsonSurveyFactory<L,D,SURVEY,SS>(localeCode,q);
 	}

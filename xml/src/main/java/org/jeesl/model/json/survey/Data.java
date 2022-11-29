@@ -23,9 +23,9 @@ public class Data implements Serializable,JeeslSimpleSurveyData
 	@Override public void setId(Long id) {this.id = id;}
 
 	@JsonProperty("survey")
-	private Survey survey;
-	public Survey getSurvey() {return survey;}
-	public void setSurvey(Survey survey) {this.survey = survey;}
+	private JsonSurvey survey;
+	public JsonSurvey getSurvey() {return survey;}
+	public void setSurvey(JsonSurvey survey) {this.survey = survey;}
 
 	@JsonProperty("record")
 	private Date record;
