@@ -1,3 +1,5 @@
+.ui-datatable table {
+  table-layout: auto; }
 .ui-datatable .ui-datatable-header {
   align-items: center;
   display: flex;
