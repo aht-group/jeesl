@@ -14,7 +14,8 @@
 		<j:slot id="sViews" width="7">
 			<h:form id="fRoles">
 				<p:dataTable var="c" value="#{cc.attrs.bean.contexts}" draggableRows="true"
-						selection="#{cc.attrs.bean.context}" selectionMode="single" rowKey="#{c.id}">
+						selection="#{cc.attrs.bean.context}" selectionMode="single" rowKey="#{c.id}"
+						styleClass="jeesl-datatable">
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityContext" code="listOf">
 							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addContext()}" update=":#{cc.id}:grid"/>
