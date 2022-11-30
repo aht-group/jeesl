@@ -205,7 +205,7 @@ public class JbossConfigurator
 			createPostgresDatasource(pDbDs,pDbHost,pDbPort,pDbName,null,pDbUser,pDbPwd);
 			StringBuilder sb = new StringBuilder();
 			sb.append(pDbDs);
-			sb.append(" ").append(pDbHost);
+			sb.append(" ").append(pDbHost).append(":").append(pDbPort);
 			return sb.toString();
 		}
 		return null;

@@ -3,6 +3,7 @@ package org.jeesl.controller.processor.system.io.ssi;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -29,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.JsonUtil;
 
-public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends JeeslDescription,
+public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDescription,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
 										CRED extends JeeslIoSsiCredential<SYSTEM>,
 										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
@@ -43,7 +44,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 >
 						implements SsiMappingProcessor<MAPPING,DATA,JSON>
 {
-	final static Logger logger = LoggerFactory.getLogger(AbstractSsiDomainProcessor.class);
+	final static Logger logger = LoggerFactory.getLogger(AbstractSsiProcessor.class);
 	
 	protected final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi;
 	protected final JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi;
@@ -55,7 +56,7 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 	protected MAPPING mapping; @Override public MAPPING getMapping() {return mapping;}
 	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
 
-	public AbstractSsiDomainProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi,
+	public AbstractSsiProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi,
 									JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi)
 	{
 		this.fSsi=fSsi;
@@ -158,4 +159,28 @@ public abstract class AbstractSsiDomainProcessor<L extends JeeslLang,D extends J
 	{
 		logger.warn("NYI");
 	}
+	
+	@Override public void evaluateData(List<DATA> datas)
+	{
+		if(ObjectUtils.isNotEmpty(datas))
+		{
+			for(DATA data : datas)
+			{
+				try
+				{
+					if(!data.getLink().equals(cacheLink.ejb(JeeslIoSsiLink.Code.linked)))
+					{
+						evaluate(data,JsonUtil.read(data.getJson(),this.getClassJson()));
+					}
+				}
+				catch (IOException e) {e.printStackTrace();}
+			}
+			try
+			{
+				fSsi.save(datas);
+			}
+			catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
+		}
+	}
+	protected abstract DATA evaluate(DATA data, JSON json);
 }

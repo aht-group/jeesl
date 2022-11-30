@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
@@ -63,6 +65,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	protected List<DATA> selection; public List<DATA> getSelection() {return selection;} public void setSelection(List<DATA> selection) {this.selection = selection;}
 
 	private final Class<JSON> cJson;
+	protected Long refA;
 	
 	public AbstractSsiBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi, final Class<JSON> cJson)
 	{
@@ -96,8 +99,11 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	
 	public void evaluateSelection()
 	{
-		if(constraintEmptySelectionFailed()) {return;}
+		boolean hasConstraintsFailed = constraintEmptySelectionFailed();
+		logger.info("evaluateSelection: "+selection.size()+" hasConstraintsFailed:"+hasConstraintsFailed);
+		if(hasConstraintsFailed) {return;}
 		ssiProcessor.evaluateData(selection);
+		if(ObjectUtils.isNotEmpty(selection)) {selection.clear();}
 		reloadData();
 	}
 	
@@ -105,15 +111,16 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	{
 		if(constraintEmptySelectionFailed()) {return;}
 		ssiProcessor.ignoreData(selection);
+		if(ObjectUtils.isNotEmpty(selection)) {selection.clear();}
 		reloadData();
 	}
 	
 	public void importSelection()
 	{
-		
 		if(constraintEmptySelectionFailed()) {return;}
 		logger.info("Linking selection");
 		ssiProcessor.linkData(selection);
+		if(ObjectUtils.isNotEmpty(selection)) {selection.clear();}
 		reloadData();
 	}
 	
@@ -123,8 +130,17 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		datas.clear();
 		thLink.clear();
 		
-		datas.addAll(fSsi.fIoSsiData(ssiProcessor.getMapping(),sbhLink.getSelected()));
-		thLink.init(fSsi.tpIoSsiLinkForMapping(ssiProcessor.getMapping()));
+		if(Objects.nonNull(refA))
+		{
+			ATTRIBUTE a = fbSsi.ejbAttribute().build(ssiProcessor.getMapping()); a.setId(refA);
+			datas.addAll(fSsi.fIoSsiData(ssiProcessor.getMapping(),sbhLink.getSelected(),a));
+			thLink.init(fSsi.tpIoSsiLinkForMapping(ssiProcessor.getMapping(),a));
+		}
+		else
+		{
+			datas.addAll(fSsi.fIoSsiData(ssiProcessor.getMapping(),sbhLink.getSelected()));
+			thLink.init(fSsi.tpIoSsiLinkForMapping(ssiProcessor.getMapping()));
+		}
 		
 //		logger.info("List: "+AbstractLogMessage.reloaded(cJson, datas));
 		for(DATA d : datas)

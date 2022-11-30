@@ -14,6 +14,11 @@ public class JsonInformRating implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	@JsonProperty("risk")
+	private JsonInformRisk risk;
+	public JsonInformRisk getRisk() {return risk;}
+	public void setRisk(JsonInformRisk risk) {this.risk = risk;}
+
 	@JsonProperty("value")
 	private Double value;
 	public Double getValue() {return value;}

@@ -8,6 +8,7 @@ import org.jeesl.model.json.ssi.acled.JsonAcledAdmin1;
 import org.jeesl.model.json.ssi.acled.JsonAcledContainer;
 import org.jeesl.model.json.ssi.acled.JsonAcledData;
 import org.jeesl.model.json.ssi.acled.JsonAcledResponse;
+import org.jeesl.model.json.ssi.inform.JsonInformRisk;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,5 +48,10 @@ public class JsonAdmin1Factory
     public static String toSsiCode(JsonAcledAdmin1 json)
     {
     	return json.getCountry().getIso3()+";"+json.getName();
+    }
+    
+    public static String toSsiCode(JsonInformRisk json)
+    {
+    	return json.getLocationCountry()+";"+json.getLocationArea();
     }
 }

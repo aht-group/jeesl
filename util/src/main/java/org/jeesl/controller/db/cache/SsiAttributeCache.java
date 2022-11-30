@@ -62,7 +62,6 @@ public class SsiAttributeCache <MAPPING extends JeeslIoSsiMapping<?,ENTITY>,
 		{
 			for(ATTRIBUTE a : fSsi.allForParent(fbSsi.getClassAttribute(),mapping))
 			{
-				
 				if(a.getRemoteCode().equals(remoteCode))
 				{
 					mapRemoteAttribute.put(remoteCode, a);
@@ -71,7 +70,7 @@ public class SsiAttributeCache <MAPPING extends JeeslIoSsiMapping<?,ENTITY>,
 			}
 		}
 		
-		String error = "No Attribute Mapping for remoteCode="+remoteCode;
+		String error = "No Attribute Mapping for "+cT.getSimpleName()+" remoteCode="+remoteCode;
 		mapRemoteError.put(remoteCode, error);
 		throw new JeeslNotFoundException(error);
 	}
@@ -91,7 +90,7 @@ public class SsiAttributeCache <MAPPING extends JeeslIoSsiMapping<?,ENTITY>,
 				}
 			}
 		}
-		String error = "No Attribute Mapping for localCode="+t.getCode();
+		String error = "No Attribute Mapping for "+cT.getSimpleName()+" and localCode="+t.getCode();
 		throw new JeeslNotFoundException(error);
 	}
 	
@@ -108,7 +107,7 @@ public class SsiAttributeCache <MAPPING extends JeeslIoSsiMapping<?,ENTITY>,
 			}
 			catch (JeeslNotFoundException e) {}
 		}
-		String error = "No local entity for mapped attribute with localCode="+attribute.getLocalCode();
+		String error = "No "+cT.getSimpleName()+" with remoteCode="+attribute.getRemoteCode()+" localCode="+attribute.getLocalCode();
 		mapRemoteError.put(attribute.getRemoteCode(), error);
 		throw new JeeslNotFoundException(error);
 	}

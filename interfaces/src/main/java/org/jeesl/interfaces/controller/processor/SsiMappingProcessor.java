@@ -24,6 +24,8 @@ public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiMapping<?,?>,
 	Class<?> getClassTarget();
 
 	void evaluateData(List<DATA> datas);
+//	DATA evaluate(DATA data, JSON json); Not possible, beacause often additional information required
+	
 	void linkData(List<DATA> datas);
 	void ignoreData(List<DATA> datas);
 	void unignoreData(List<DATA> datas);
