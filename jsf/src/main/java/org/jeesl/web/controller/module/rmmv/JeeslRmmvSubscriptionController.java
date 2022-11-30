@@ -141,6 +141,14 @@ public class JeeslRmmvSubscriptionController <L extends JeeslLang, D extends Jee
 		reloadItems();
 	}
 	
+	public void deleteSubscription() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		logger.info(AbstractLogMessage.saveEntity(subscription));
+		fRmmv.rm(subscription);
+		this.reset(false, true, true, true);
+		this.reloadSubscriptions();
+	}
+	
 	private void reloadItems()
 	{
 		this.reset(false, false, true, false);

@@ -183,4 +183,18 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		}
 	}
 	protected abstract DATA evaluate(DATA data, JSON json);
+	
+	@Override public void linkData(List<DATA> datas)
+	{
+		for(DATA data : datas)
+		{
+			
+			if(data.getLink().equals(cacheLink.ejb(JeeslIoSsiLink.Code.possible)))
+			{
+				try {importData(data,JsonUtil.read(data.getJson(),this.getClassJson()));}
+				catch (IOException | JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e){e.printStackTrace();}
+			}
+		}
+	}
+	protected abstract void importData(DATA data, JSON json) throws IOException,JeeslNotFoundException,JeeslConstraintViolationException,JeeslLockingException;
 }

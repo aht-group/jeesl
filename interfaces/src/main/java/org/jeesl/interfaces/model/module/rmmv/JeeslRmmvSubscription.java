@@ -2,6 +2,7 @@ package org.jeesl.interfaces.model.module.rmmv;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
@@ -17,7 +18,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 public interface JeeslRmmvSubscription<R extends JeeslTenantRealm<?,?,R,?>,
 								MOD extends JeeslRmmvModule<?,?,MOD,?>,
 								USER extends EjbWithId>
-						extends Serializable,EjbSaveable,
+						extends Serializable,EjbSaveable,EjbRemoveable,
 								EjbWithCode,EjbWithPositionVisible,EjbWithName,
 								JeeslWithTenantSupport<R>
 {

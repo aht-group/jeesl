@@ -1,19 +1,19 @@
 package org.jeesl.factory.json.io.ssi.domain.ssi.inform;
 
-import org.jeesl.model.json.ssi.inform.JsonInformRisk;
+import org.jeesl.model.json.ssi.inform.JsonInformCollection;
 
 public class JsonInformRiskFactory
 {
-	public static JsonInformRisk build()
+	public static JsonInformCollection build()
 	{
-		JsonInformRisk json = new JsonInformRisk();
+		JsonInformCollection json = new JsonInformCollection();
 		
 		return json;
 	}
 	
-	public static JsonInformRisk build(String locationName, String locationCountry, String locationArea, Integer year)
+	public static JsonInformCollection build(String locationName, String locationCountry, String locationArea, Integer year)
 	{
-		JsonInformRisk json = build();
+		JsonInformCollection json = build();
 		json.setLocationArea(locationArea);
 		json.setLocationCountry(locationCountry);
 		json.setLocationName(locationName);
