@@ -16,9 +16,9 @@
 		<composite:attribute name="type" required="true"/>
 		<composite:attribute name="tooltip" required="false"/>
 		<composite:attribute name="immediate" required="false" default="false"/>
-		<composite:attribute name="library" required="false" default="gfx"/>
-		<composite:attribute name="dialogHdr" required="false" default="#{msg.jeeslConfirmDialogDefaultHeader}"/>
-		<composite:attribute name="dialogMsg" required="false" default="#{msg.jeeslConfirmDialogDefaultMsg}"/>
+		<composite:attribute name="library" required="false" default="gfx" shortDescription="The library attribute which is passed to h:graphicImage, can be empty for JEESL icons. Project specific icons can be overridden here or centrally in AppIconBean."/>
+		<composite:attribute name="dialogHdr" required="false" default="#{appLabelBean.descriptions['JeeslCrudDialog']['confirmDialogHeader'][localeCode].lang}"/>
+		<composite:attribute name="dialogMsg" required="false" default="#{appLabelBean.descriptions['JeeslCrudDialog']['confirmDialogMessage'][localeCode].lang}"/>
 	</composite:interface>
 
 	<composite:implementation>
@@ -33,7 +33,7 @@
 						   	   immediate="#{cc.attrs.immediate}">
 					<h:graphicImage id="image2"
 									rendered="#{not cc.attrs.disabled}"
-									library="#{cc.attrs.library}"
+									library="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type] }"
 									name="#{appIconBean.svg[cc.attrs.type]}">
 						<f:attribute name="height" value="12"/>
 					</h:graphicImage>
@@ -53,7 +53,7 @@
 				   
 				<h:graphicImage id="image"
 								rendered="#{not cc.attrs.disabled}"
-								library="#{cc.attrs.library}"
+								library="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type] }"
 								name="#{appIconBean.svg[cc.attrs.type]}">
 					<f:attribute name="height" value="12"/>
 				</h:graphicImage>

@@ -183,7 +183,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 		catch (JeeslNotFoundException e) {throw new UtilsConfigurationException(e.getMessage());}
 	}
 	
-	public static Class<?> classForInterface(String basePackage, String code) throws UtilsConfigurationException
+	public static Class<?> classForInterface(String code, String... basePackage) throws UtilsConfigurationException
 	{
 		try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(basePackage).scan())
 		{

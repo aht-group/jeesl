@@ -77,21 +77,20 @@ public class IconConfirmListener extends IconListener implements ClientBehaviorH
 				confirmDialog.getAttributes().put("responsive", true);
 
 				CommandButton noButton = new CommandButton();
-				noButton.setValue(FacesContextUtil.evalAsString("#{msg.jeeslConfirmDialogNo}"));
+				noButton.setValue(FacesContextUtil.evalAsString("#{appLabelBean.descriptions['JeeslCrudDialog']['confirmDialogNo'][localeCode].lang}"));
 				//noButton.setId("dialog_no");
 				noButton.setType("button");
 				noButton.setStyleClass("ui-confirmdialog-no ui-button-flat");
 				confirmDialog.getChildren().add(noButton);
 
 				CommandButton yesButton = new CommandButton();
-				yesButton.setValue(FacesContextUtil.evalAsString("#{msg.jeeslConfirmDialogYes}"));
+				yesButton.setValue(FacesContextUtil.evalAsString("#{appLabelBean.descriptions['JeeslCrudDialog']['confirmDialogYes'][localeCode].lang}"));
 				//yesButton.setId("dialog_yes");
 				yesButton.setType("button");
 				yesButton.setStyleClass("ui-confirmdialog-yes");
 				confirmDialog.getChildren().add(yesButton);
 
 				parentForm.getChildren().add(confirmDialog);
-
 			}
     	}
     }
