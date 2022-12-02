@@ -11,10 +11,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 
 @Entity
-@Table(name="IoLang2")
+@Table(name="IoLang")
 public class IoLang implements JeeslLang
 {
 	public static final long serialVersionUID=1;
+	public static String[] defaultLocales = {"en"};
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -31,15 +32,15 @@ public class IoLang implements JeeslLang
 	@Override public String getLang() {return lang;}
 	@Override public void setLang(String name) {this.lang = name;}
 	
-	
 	@Override public boolean equals(Object object) {return (object instanceof IoLang) ? id == ((IoLang) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(19,21).append(id).toHashCode();}
+	
 	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("[").append(id).append("]");
-		sb.append(" (").append(lkey).append(")");
+		sb.append(id);
+		sb.append(" ["+lkey+"]");
 		sb.append(" "+lang);
 		return sb.toString();
 	}

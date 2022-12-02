@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 
 @Entity
-@Table(name="IoDescription2")
+@Table(name="IoDescription")
 public class IoDescription implements JeeslDescription
 {
 	public static final long serialVersionUID=1l;
