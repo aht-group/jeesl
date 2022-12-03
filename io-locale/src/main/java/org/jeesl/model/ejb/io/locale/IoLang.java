@@ -15,7 +15,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 public class IoLang implements JeeslLang
 {
 	public static final long serialVersionUID=1;
-	public static String[] defaultLocales = {"en"};
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
@@ -32,15 +31,15 @@ public class IoLang implements JeeslLang
 	@Override public String getLang() {return lang;}
 	@Override public void setLang(String name) {this.lang = name;}
 	
+	
 	@Override public boolean equals(Object object) {return (object instanceof IoLang) ? id == ((IoLang) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(19,21).append(id).toHashCode();}
-	
 	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append(id);
-		sb.append(" ["+lkey+"]");
+		sb.append("[").append(id).append("]");
+		sb.append(" "+lkey+":");
 		sb.append(" "+lang);
 		return sb.toString();
 	}
