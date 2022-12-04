@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
-@Table(name="IoGraphicFigure")
+@Table(name="IoGraphicComponent")
 @EjbErNode(name="Figure",level=3)
 public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGraphicComponent,IoGraphicShape>
 {
