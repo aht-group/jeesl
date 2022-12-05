@@ -318,6 +318,25 @@
         </xsd:complexType>
     </xsd:element>
     
+    <xsd:element name="mainProgram">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="js:transistions" maxOccurs="1"/>
+                <xsd:element ref="js:langs" maxOccurs="1"/>
+                <xsd:element ref="js:descriptions" maxOccurs="1"/>
+                <xsd:element ref="js:lang" maxOccurs="unbounded"/>
+                <xsd:element ref="js:parent" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:long"/>
+            <xsd:attribute name="key" type="xsd:string"/>
+            <xsd:attribute name="code" type="xsd:string"/>
+            <xsd:attribute name="group" type="xsd:string"/>
+            <xsd:attribute name="label" type="xsd:string"/>
+            <xsd:attribute name="visible" type="xsd:boolean"/>
+            <xsd:attribute name="image" type="xsd:string"/>
+            <xsd:attribute name="position" type="xsd:int"/>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="program">
         <xsd:complexType>
             <xsd:sequence>
