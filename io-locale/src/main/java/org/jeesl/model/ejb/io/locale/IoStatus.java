@@ -40,7 +40,7 @@ import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type")
 @DiscriminatorValue("generic")
-@SequenceGenerator(name="SequenceStatus", sequenceName="status_id_seq", allocationSize = 1)
+@SequenceGenerator(name="SequenceStatus", sequenceName="iostatus_id_seq", allocationSize = 1)
 public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveable,EjbSaveable,
 									EjbWithParent,EjbWithCode,EjbWithImage,EjbWithImageAlt,EjbWithPositionVisible,
 									EjbWithLangDescription<IoLang,IoDescription>
@@ -111,10 +111,10 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 	public IoGraphic getGraphic() {return graphic;}
 	public void setGraphic(IoGraphic graphic) {this.graphic = graphic;}
 	
-	public String toString()
+	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append(id);
+		sb.append("[").append(id).append("]");
 		sb.append(" code="+code);
 		return sb.toString();
 	}
