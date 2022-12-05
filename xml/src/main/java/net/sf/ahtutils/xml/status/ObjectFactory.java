@@ -326,6 +326,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link MainProgram }
+     * 
+     */
+    public MainProgram createMainProgram() {
+        return new MainProgram();
+    }
+
+    /**
      * Create an instance of {@link Program }
      * 
      */
