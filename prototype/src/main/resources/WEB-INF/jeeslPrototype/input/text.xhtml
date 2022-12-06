@@ -4,6 +4,7 @@
 				xmlns:c="http://java.sun.com/jsp/jstl/core"
 				xmlns:f="http://java.sun.com/jsf/core"
 				xmlns:p="http://primefaces.org/ui"
+				xmlns:o="http://omnifaces.org/ui"
 				xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
 				
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
@@ -21,7 +22,17 @@
 					 value="#{value}"
 					 autocomplete="off"
 					 required="#{required}">
-			<c:set var="id" value="#{id}" />
+			<ui:remove><c:if test="#{not empty id}">
+				<!-- Throws illegal argument exception if id is not empty, because f:attribute is not allowed for id.
+					 Setting the id merely as id="#{id}" throws exception if id is empty, because empty ids are not allowed.
+					 Found no way of setting the generated id as default (like cc.clientId) value to mitigate the latter
+					 problem. Why do we use composition instead of composite component? 
+					 
+					 This post https://stackoverflow.com/questions/11473983/jsf-conditionally-set-id describes the same issue
+					 but offers no solution beside using Omnifaces <o:tagAttribute>, but does not explain how. Instead of
+					 f:attribute it does nothing, above the c:set values the issue remains the same: exception on empty id. -->
+		        <f:attribute name="id" value="#{id}" />
+		    </c:if></ui:remove>
 		</p:inputText>
 		
 		<h:panelGroup rendered="#{rendered and ((not empty entity) or (not empty code))}" styleClass="ui-float-label">

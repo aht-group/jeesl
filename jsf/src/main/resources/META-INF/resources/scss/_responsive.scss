@@ -2097,6 +2097,10 @@ body, .ui-widget {
 				}
 			}
 		}
+		
+		.ui-button {
+			width: auto;
+		}
 	}
 }
 
@@ -2799,8 +2803,8 @@ body, .ui-widget {
 		}
 		
 		td {
-			border-color: $light-grey;
-			border-width: 0 0 $border-width;
+			border-color: $soft-grey $light-grey;
+			border-width: 0 0 $border-width $border-width;
 			padding: $half-spacing $regular-spacing;
 			
 			&.jeesl-column-min-width {
@@ -2821,8 +2825,8 @@ body, .ui-widget {
 			box-shadow: none;
 		}
 		
-		.ui-state-highlight, .cell-select > label.selected {
-			background: $highlight-colour;
+		tr.ui-state-highlight, .cell-select > label.selected {
+			background: $dark-colour;
 			color: $white-100;
 			font-weight: 500;
 			text-shadow: none;
@@ -3374,6 +3378,11 @@ body, .ui-widget {
 			.fc-bg td {
 				border: $border;
 				border-color: $soft-grey;
+			
+				&.fc-today {
+					background: $bright-colour;
+					opacity: .5;
+				}
 			}
 			
 			.fc-content-skeleton .fc-event {
@@ -3452,6 +3461,16 @@ body, .ui-widget {
 					
 					@media (max-width: 768px) {
 						height: $input-field-icon-height-mobile;
+					}
+					
+					&.jeesl-input-grid-locale-icon {
+						min-height: $input-field-icon-height;
+						opacity: .5;
+						pointer-events: none;
+						position: absolute;
+						right: $slim-spacing;
+						top: 50%;
+						transform: translateY(-50%);
 					}
 				}
 			}
