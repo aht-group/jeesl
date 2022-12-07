@@ -64,9 +64,8 @@
 							<f:facet name="actions">
 		                        	<j:svg type="jeeslCancel" library="jeeslGfx" process="@this" listener="#{cc.attrs.bean.cancel()}" update=":#{cc.id}:sUser" tooltip="#{msg.jeeslTtCancel}"/>
 		                        	<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-		                        	<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmStaff()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
-		                        	<h:graphicImage id="giContactSelection" styleClass="pf-action-icon" library="gfx" name="#{appIconBean.icon12['jeeslAddressBook']}"/>
-	                            	<p:tooltip for="giContactSelection" value="#{msg.ttAddressBook}"/>
+		                        	<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmStaff()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
+		                        	<j:svg type="jeeslAddressBook" id="giContactSelection"/>
 	                        </f:facet>
 	                        <composite:renderFacet name="domainDetail"/>
 	                        <p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
@@ -92,7 +91,7 @@
 	                        </p:panelGrid>
 	                        <p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 	                    </p:panel>
-	                    <aup:opUserSelection for=":#{cc.id}:fUser:giContactSelection" update=":#{cc.id}:sUser" contactHandler="#{cc.attrs.bean.opUserHandler}" linkAddContact="#{cc.attrs.linkAddContact}"/>
+	                    <aup:opUserSelection for=":#{cc.id}:fUser:giContactSelection:link" update=":#{cc.id}:sUser" contactHandler="#{cc.attrs.bean.opUserHandler}" linkAddContact="#{cc.attrs.linkAddContact}"/>
 		            </h:form>
 		        </aht:slot>
 	        </aht:row>

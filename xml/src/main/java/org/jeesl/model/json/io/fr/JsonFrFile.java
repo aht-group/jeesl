@@ -10,11 +10,26 @@ public class JsonFrFile implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	@JsonProperty("code")
+	private String code;
+	public String getCode() {return code;}
+	public void setCode(String code) {this.code = code;}
+
 	@JsonProperty("name")
 	private String name;
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
 	
+	@JsonProperty("size")
+	private Long size;
+	
+	public Long getSize() {
+		return size;
+	}
+	public void setSize(Long size) {
+		this.size = size;
+	}
+
 	@JsonProperty("content")
 	private byte[] content;
 	public byte[] getContent() {return content;}
