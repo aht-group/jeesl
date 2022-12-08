@@ -70,26 +70,29 @@ public class SelectOne1Handler <L1 extends EjbWithId> implements JeeslSelectOneT
 	{
 		if(debugOnInfo) {logger.info("selectDefaultL1 "+tup.toString());}
 		reset1();
-		L1 ejb = null; if(!list1.isEmpty()) {list1.get(0);}
+		L1 ejb = null; if(!list1.isEmpty()) {ejb=list1.get(0);}
 		cascade1(ejb,tup);
 	}
 		
 	// Selection from UI and cascading of event
-	public void uiSelect1() {cascade1(l1, TreeUpdateParameter.build(false,true,true,true));}
+	public void uiSelect1()
+	{
+		if(debugOnInfo) {logger.info(this.debugUiSelect(1, l1));}
+		cascade1(l1, TreeUpdateParameter.build(false,true,true,true));
+	}
 	protected void cascade1(L1 ejb, TreeUpdateParameter tup)
 	{
 		l1 = ejb;
 		if(debugOnInfo) {logger.info(toCascadeDebug(1,ejb,tup));}
 
 		clearL2List();
-			
 		if(tup.isFillParent()) {}
 		if(tup.isFillChilds()) {fillL2List();}
 		if(tup.isSelectChild()) {selectDefaultL2(tup.copy().callback(false).fillParent(false));}
 		if(tup.isCallback() && callback!=null) {callback.s1TreeSelected(this);}
-//		if(tup.isFireEvent()) {fireEvent();}
 	}
 	
+	public void clearL1List() {list1.clear();}
 	protected void fill1List()
 	{
 		List<L1> childs = cache1.getCachedL1();
@@ -132,17 +135,36 @@ public class SelectOne1Handler <L1 extends EjbWithId> implements JeeslSelectOneT
 	protected void fillL2List() {logger.warn(warnMessageOverrideNextLevel);}
 	protected void selectDefaultL2(TreeUpdateParameter hlup) {logger.warn(warnMessageOverrideNextLevel);}
 	
+	protected String debugUiSelect(int level, EjbWithId ejb)
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("uiSelect:").append(level);
+		sb.append(" ejb:");
+		if(ejb!=null)
+		{
+			
+			sb.append(ejb.getClass().getSimpleName());
+			sb.append(":[").append(ejb.toString()).append("]");
+		}
+		else {sb.append("null");}
+		sb.append(" now cascading");
+		return sb.toString();
+	}
 	protected String toCascadeDebug(int level, EjbWithId ejb, TreeUpdateParameter tup)
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("cascade").append(level);
+		sb.append("cascade:").append(level);
 		if(ejb!=null)
 		{
+			sb.append(" ");
 			sb.append(ejb.getClass().getSimpleName());
-			sb.append(": [").append(ejb.toString()).append("]");
+			sb.append(":[").append(ejb.toString()).append("]");
 		}
-		sb.append(TreeUpdateParameter.class.getSimpleName()+": ["+tup.toString()+"]");
+		sb.append(" ");
+		sb.append(TreeUpdateParameter.class.getSimpleName());
+		sb.append(":[").append(tup.toString()).append("]");
 		return sb.toString();
 	}
 	

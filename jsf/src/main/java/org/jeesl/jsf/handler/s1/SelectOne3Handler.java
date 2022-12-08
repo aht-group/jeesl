@@ -60,23 +60,28 @@ public class SelectOne3Handler <L1 extends EjbWithId, L2 extends EjbWithId, L3 e
 	{
 		if(debugOnInfo) {logger.info("selectDefaultL3 "+tup.toString());}
 		reset3();
-		if(!list2.isEmpty()) {cascade3(list3.get(0),tup);}
+		L3 ejb = null; if(!list3.isEmpty()) {ejb=list3.get(0);}
+		cascade3(ejb,tup);
 	}
 	
-	public void uiSelect3() {cascade3(l3,TreeUpdateParameter.build(false,true,true,true));}
+	public void uiSelect3()
+	{
+		if(debugOnInfo) {logger.info(super.debugUiSelect(3, l3));}
+		cascade3(l3,TreeUpdateParameter.build(false,true,true,true));
+	}
 	protected void cascade3(L3 ejb, TreeUpdateParameter tup)
 	{
 		l3 = ejb;
 		if(debugOnInfo) {logger.info(toCascadeDebug(3,ejb,tup));}
 		
-		clearL3List();
-		
+		clearL4List();
 		if(tup.isFillParent()) {cascade2(getParentForL3(l3),tup.copy().selectChild(false).callback(false));}
 		if(tup.isFillChilds()) {fillL4List();}
 		if(tup.isSelectChild()) {selectDefaultL4(tup.copy().fillParent(false).callback(false));}
 		if(tup.isCallback() && callback!=null) {callback.s1TreeSelected(this);}
 	}
 	
+	public void clearL3List() {list3.clear();}
 	@Override protected void fillL3List()
 	{
 		List<L3> childs = new ArrayList<>();
