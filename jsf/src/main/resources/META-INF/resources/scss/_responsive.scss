@@ -2064,7 +2064,7 @@ body, .ui-widget {
 						}
 					}
 
-					> * {
+					> *:not(.jeesl-input-grid-icon) {
 						border-radius: $border-radius;
 //						height: 100%;
 						
@@ -3471,6 +3471,12 @@ body, .ui-widget {
 						right: $slim-spacing;
 						top: 50%;
 						transform: translateY(-50%);
+						
+						@media (max-width: 768px) {
+							height: $input-field-icon-height-mobile;
+							top: calc(.5em + (100% - (2px + .5em)) / 2);
+							width: auto;
+						}
 					}
 				}
 			}

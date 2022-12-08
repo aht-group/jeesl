@@ -1322,6 +1322,12 @@ html, body, .ui-widget {
 				
 				.jeesl-input-grid-icon {
 					height: $input-field-icon-height-mobile;
+					
+					&.jees-input-grid-locale-icon {
+						height: $input-field-icon-height-mobile;
+						top: calc(.5em + (100% - (2px + .5em)) / 2);
+						width: auto;
+					}
 				}
 			}
 		}

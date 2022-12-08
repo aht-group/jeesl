@@ -4165,10 +4165,10 @@ body, .ui-widget {
           width: 92%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-12 {
           width: 100%; }
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > *:not(.jeesl-input-grid-icon) {
           border-radius: 3px; }
           @media (max-width: 768px) {
-            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > *:not(.jeesl-input-grid-icon) {
               padding: 5px 10px;
               width: 100%; } }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
@@ -5240,10 +5240,10 @@ body, .ui-widget {
               width: 92%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-md-12 {
               width: 100%; }
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > *:not(.jeesl-input-grid-icon) {
               border-radius: 3px; }
               @media (max-width: 768px) {
-                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > * {
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > *:not(.jeesl-input-grid-icon) {
                   padding: 5px 10px;
                   width: 100%; } }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
@@ -5963,6 +5963,11 @@ body, .ui-widget {
     right: 2px;
     top: 50%;
     transform: translateY(-50%); }
+    @media (max-width: 768px) {
+      .jeesl-input-grid .p-field .p-col:not(.ui-outputlabel) .jeesl-input-grid-icon.jeesl-input-grid-locale-icon {
+        height: 22px;
+        top: calc(.5em + (100% - (2px + .5em)) / 2);
+        width: auto; } }
 
 @media (max-width: 768px) {
   .pf-action-icon img {

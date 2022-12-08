@@ -1,15 +1,24 @@
-<ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:c="http://java.sun.com/jsp/jstl/core"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:h="http://java.sun.com/jsf/html"
+			    xmlns:ui="http://java.sun.com/jsf/facelets"
+			    xmlns:c="http://java.sun.com/jsp/jstl/core"
+			    xmlns:f="http://java.sun.com/jsf/core"
+			    xmlns:p="http://primefaces.org/ui"
+			    xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
     
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
 	<c:set var="rows"  value="#{not empty rows ? rows : 3}" />
+	
+	<c:set var="icon" value="#{icon}"/>
 
-	<p:inputTextarea rendered="#{rendered}"
-					rows="#{rows}" styleClass="w100" value="#{value}" autoResize="true" autocomplete="off">
-		<c:set var="id" value="#{id}" />
-	</p:inputTextarea>
+	<h:panelGroup>
+		<p:inputTextarea rendered="#{rendered}"
+						rows="#{rows}" styleClass="w100" value="#{value}" autoResize="true" autocomplete="off">
+			<c:set var="id" value="#{id}" />
+		</p:inputTextarea>
+		
+		<jtp:symbolizer rendered="#{not empty icon}"
+						value="#{icon}"
+						styleClass="jeesl-input-grid-icon jeesl-input-grid-locale-icon"/>
+	</h:panelGroup>
 </ui:composition>
