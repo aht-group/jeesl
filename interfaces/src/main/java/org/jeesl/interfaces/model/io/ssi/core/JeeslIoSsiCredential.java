@@ -24,6 +24,15 @@ public interface JeeslIoSsiCredential <SYSTEM extends JeeslIoSsiSystem<?,?>>
 	public SYSTEM getSystem();
 	public void setSystem(SYSTEM system);
 
+	String getHost();
+	void setHost(String host);
+	
+	Integer getPort();
+	void setPort(Integer port);
+	
+	String getUrl();
+	void setUrl(String url);
+	
 	String getUser();
 	void setUser(String user);
 	
@@ -32,13 +41,7 @@ public interface JeeslIoSsiCredential <SYSTEM extends JeeslIoSsiSystem<?,?>>
 	
 	String getToken();
 	void setToken(String token);
-	
-	String getUrl();
-	void setUrl(String url);
-	
-	String getHost();
-	void setHost(String host);
-	
+
 	boolean isEncrypted();
 	void setEncrypted(boolean encrypted);
 }

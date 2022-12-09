@@ -163,14 +163,14 @@ public abstract class TreeHelper
         }
     }
     
-    public static <T extends JeeslTreeElement<T>> void fillPath(Set<T> path, T element) throws JeeslConstraintViolationException, JeeslLockingException
+    public static <T extends JeeslTreeElement<T>> void fillPath(Set<T> path, T element)
     {
     	path.add(element);
     	if(element.getParent()!=null) {fillPath(path,element.getParent());}
     }
     
     @SuppressWarnings("unchecked")
-    public static <T extends JeeslTreeElement<T>> TreeNode findNode(TreeNode tree, T ejb) throws JeeslConstraintViolationException, JeeslLockingException
+    public static <T extends JeeslTreeElement<T>> TreeNode findNode(TreeNode tree, T ejb)
     {
     	for(TreeNode node : tree.getChildren())
     	{
