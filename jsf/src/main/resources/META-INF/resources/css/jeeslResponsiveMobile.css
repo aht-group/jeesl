@@ -1214,6 +1214,10 @@ html, body, .ui-widget {
   min-height: 84px; }
 .jeesl-input-grid .p-field .p-col:not(.ui-outputlabel) .jeesl-input-grid-icon {
   height: 58px; }
+  .jeesl-input-grid .p-field .p-col:not(.ui-outputlabel) .jeesl-input-grid-icon.jees-input-grid-locale-icon {
+    height: 58px;
+    top: calc(.5em + (100% - (2px + .5em)) / 2);
+    width: auto; }
 
 .html-container-panel .html-container {
   font-size: 1rem;
