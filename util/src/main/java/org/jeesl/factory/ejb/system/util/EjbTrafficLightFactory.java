@@ -39,7 +39,7 @@ public class EjbTrafficLightFactory<L extends JeeslLang,D extends JeeslDescripti
 		return new EjbTrafficLightFactory<L,D,SCOPE,LIGHT>(cLang,cDescription,cLight);
 	}
     
-	public LIGHT build(SCOPE scope,TrafficLight light)
+	public LIGHT build(SCOPE scope, TrafficLight light)
 	{
 		LIGHT ejb = null;
 		try
@@ -61,7 +61,7 @@ public class EjbTrafficLightFactory<L extends JeeslLang,D extends JeeslDescripti
         return ejb;
     }
 	
-	public LIGHT build(String[] langKeys,SCOPE scope)
+	public LIGHT build(SCOPE scope)
 	{
 		LIGHT ejb;
 		try
@@ -69,8 +69,6 @@ public class EjbTrafficLightFactory<L extends JeeslLang,D extends JeeslDescripti
 			ejb = cLight.newInstance();
 			ejb.setScope(scope);
 			ejb.setColorText("FFFFFF");
-			if(langKeys!=null){ejb.setName(efLang.createEmpty(langKeys));}
-			if(langKeys!=null){ejb.setDescription(efDescription.createEmpty(langKeys));}
 		}
 		catch (InstantiationException e) {throw new RuntimeException(e);}
 		catch (IllegalAccessException e) {throw new RuntimeException(e);}
