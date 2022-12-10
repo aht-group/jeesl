@@ -74,6 +74,10 @@ public class IoGraphic implements JeeslGraphic<IoGraphicType,IoGraphicComponent,
 	@Override public List<IoGraphicComponent> getFigures() {return figures;}
 	@Override public void setFigures(List<IoGraphicComponent> figures) {this.figures = figures;}
 	
+	
+	@Override public boolean equals(Object object) {return (object instanceof IoGraphic) ? id == ((IoGraphic) object).getId() : (object == this);}
+	@Override public int hashCode() {return new HashCodeBuilder(13,37).append(id).toHashCode();}
+	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
@@ -84,7 +88,4 @@ public class IoGraphic implements JeeslGraphic<IoGraphicType,IoGraphicComponent,
 		if(versionLock!=null){sb.append(" v:"+versionLock);}
 		return sb.toString();
 	}
-	
-	@Override public boolean equals(Object object) {return (object instanceof IoGraphic) ? id == ((IoGraphic) object).getId() : (object == this);}
-	@Override public int hashCode() {return new HashCodeBuilder(13,37).append(id).toHashCode();}
 }

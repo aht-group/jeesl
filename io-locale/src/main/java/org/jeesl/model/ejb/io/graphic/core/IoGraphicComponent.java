@@ -30,14 +30,14 @@ public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGra
 	@Override public IoGraphic getGraphic() {return graphic;}
 	@Override public void setGraphic(IoGraphic graphic) {this.graphic = graphic;}
 	
-	private boolean css;
-	@Override public boolean isCss() {return css;}
-	@Override public void setCss(boolean css) {this.css = css;}
-	
 	@ManyToOne
 	private IoGraphicShape style;
 	public IoGraphicShape getStyle() {return style;}
 	public void setStyle(IoGraphicShape style) {this.style = style;}
+	
+	private boolean css;
+	@Override public boolean isCss() {return css;}
+	@Override public void setCss(boolean css) {this.css = css;}
 	
 	private int position;
 	@Override public int getPosition() {return position;}
@@ -67,13 +67,14 @@ public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGra
 	@Override public double getRotation() {return rotation;}
 	@Override public void setRotation(double rotation) {this.rotation = rotation;}
 
+	
+	@Override public boolean equals(Object object){return (object instanceof IoGraphicComponent) ? id == ((IoGraphicComponent) object).getId() : (object == this);}
+	@Override public int hashCode(){return new HashCodeBuilder(35,39).append(id).toHashCode();}
+	
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append(id);
 		return sb.toString();
 	}
-	
-	@Override public boolean equals(Object object){return (object instanceof IoGraphicComponent) ? id == ((IoGraphicComponent) object).getId() : (object == this);}
-	@Override public int hashCode(){return new HashCodeBuilder(35,39).append(id).toHashCode();}
 }

@@ -21,6 +21,7 @@ public class JsonSsiCredentialFactory
 	{
 		JsonSsiCredential json = new JsonSsiCredential();
 		json.setHost(ejb.getHost());
+		json.setPort(ejb.getPort());
 		
 		json.setUser(ejb.getUser());
 		json.setPassword(ejb.getPwd());

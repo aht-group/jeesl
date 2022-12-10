@@ -20,8 +20,7 @@ public class IoGraphicType extends IoStatus implements JeeslGraphicType<IoLang,I
 {
 	public static final long serialVersionUID=1;
 
-	
-	
+
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();

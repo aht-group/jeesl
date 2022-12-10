@@ -20,6 +20,7 @@ public class IoGraphicShape extends IoStatus implements JeeslGraphicShape<IoLang
 {
 	public static final long serialVersionUID=1;
 
+
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();
