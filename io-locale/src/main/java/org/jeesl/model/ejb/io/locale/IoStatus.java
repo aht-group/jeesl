@@ -24,6 +24,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -62,7 +63,7 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 	@MapKey(name="lkey")
 	@JoinTable(name="IoStatusJtLang",joinColumns={@JoinColumn(name="status_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	protected Map<String,IoLang> name;
-	@Override public Map<String,IoLang> getName() {if(name==null){name=new HashMap<String,IoLang>();}return name;}
+	@Override public Map<String,IoLang> getName() {if(name==null) {name=new HashMap<>();} return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
@@ -99,8 +100,8 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 	public <P extends EjbWithCode> void setParent(P parent) {this.parent=(IoStatus)parent;}
 
 	protected String symbol;
-	public String getSymbol(){return symbol;}
-	public void setSymbol(String symbol){this.symbol = symbol;}
+	public String getSymbol() {return symbol;}
+	public void setSymbol(String symbol) {this.symbol = symbol;}
 	
 	protected Boolean locked;
 	public Boolean getLocked() {return locked;}
@@ -112,6 +113,9 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 	public void setGraphic(IoGraphic graphic) {this.graphic = graphic;}
 
 
+	@Override public boolean equals(Object object){return (object instanceof IoStatus) ? id == ((IoStatus) object).getId() : (object == this);}
+	@Override public int hashCode() {return new HashCodeBuilder(17, 53).append(id).toHashCode();}
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
@@ -120,3 +124,7 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 		return sb.toString();
 	}
 }
+
+// Discriminator
+//   SELECT type, length(type) as l from IoStatus where length(type) = (select max(length(type)) from IoStatus);
+//   ALTER TABLE public.iostatus ALTER COLUMN type TYPE character varying(31) COLLATE pg_catalog."default";
