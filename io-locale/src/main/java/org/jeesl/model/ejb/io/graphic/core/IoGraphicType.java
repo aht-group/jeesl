@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("ioGraphicType")
-@EjbErNode(name="Type",category="symbol",subset="sld",level=3)
+@EjbErNode(name="Type",category="io",subset="ioGraphic",level=3)
 public class IoGraphicType extends IoStatus implements JeeslGraphicType<IoLang,IoDescription,IoGraphicType,IoGraphic>
 {
 	public static final long serialVersionUID=1;

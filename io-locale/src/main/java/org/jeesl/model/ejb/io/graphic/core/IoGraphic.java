@@ -22,11 +22,11 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="IoGraphic")
-@EjbErNode(name="Graphic",category="symbol",subset="sld",level=3)
+@EjbErNode(name="Graphic",category="io",subset="ioGraphic",level=3)
 public class IoGraphic implements JeeslGraphic<IoGraphicType,IoGraphicComponent,IoGraphicShape>
 {
 	public static final long serialVersionUID=1;
-	
+
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;

@@ -13,7 +13,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="IoGraphicComponent")
-@EjbErNode(name="Figure",level=3)
+@EjbErNode(name="Component",category="io",subset="ioGraphic",level=3)
 public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGraphicComponent,IoGraphicShape>
 {
 	public static final long serialVersionUID=1;

@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("ioGraphicShape")
-@EjbErNode(name="Shape",category="symbol",subset="sld",level=3)
+@EjbErNode(name="Shape",category="io",subset="ioGraphic",level=3)
 public class IoGraphicShape extends IoStatus implements JeeslGraphicShape<IoLang,IoDescription,IoGraphicShape,IoGraphic>
 {
 	public static final long serialVersionUID=1;
