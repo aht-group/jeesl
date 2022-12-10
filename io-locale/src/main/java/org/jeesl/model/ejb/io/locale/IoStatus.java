@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,18 +38,17 @@ import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 
 @Entity
 @Table(name="IoStatus",uniqueConstraints=@UniqueConstraint(columnNames={"type","code"}))
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type", discriminatorType=DiscriminatorType.STRING, length=32)
 @DiscriminatorValue("generic")
-@SequenceGenerator(name="SequenceStatus", sequenceName="iostatus_id_seq", allocationSize = 1)
+@SequenceGenerator(name="SequenceStatus", sequenceName="iostatus_id_seq", allocationSize=1)
 public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveable,EjbSaveable,
 									EjbWithParent,EjbWithCode,EjbWithImage,EjbWithImageAlt,EjbWithPositionVisible,
 									EjbWithLangDescription<IoLang,IoDescription>
 {
 	private static final long serialVersionUID=1l;
-	
-	public static enum Group {xx};
-	
+
+
 	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SequenceStatus")
 	protected long id;
 	@Override public long getId() {return id;}
@@ -110,7 +110,8 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 	private IoGraphic graphic;
 	public IoGraphic getGraphic() {return graphic;}
 	public void setGraphic(IoGraphic graphic) {this.graphic = graphic;}
-	
+
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
