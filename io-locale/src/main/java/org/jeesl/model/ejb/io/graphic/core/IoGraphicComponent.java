@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
@@ -31,7 +32,7 @@ public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGra
 	@Override public IoGraphic getGraphic() {return graphic;}
 	@Override public void setGraphic(IoGraphic graphic) {this.graphic = graphic;}
 	
-	@ManyToOne
+	@NotNull @ManyToOne
 	@JoinColumn(name="shape_id")
 	private IoGraphicShape style;
 	public IoGraphicShape getStyle() {return style;}
