@@ -14,7 +14,8 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslGraphicComponent<G extends JeeslGraphic<?,GC,GS>,
-								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
+										GC extends JeeslGraphicComponent<G,GC,GS>,
+										GS extends JeeslGraphicShape<?,?,GS,G>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithPositionVisible,EjbWithParentAttributeResolver
 {
 	public enum Attributes{graphic}

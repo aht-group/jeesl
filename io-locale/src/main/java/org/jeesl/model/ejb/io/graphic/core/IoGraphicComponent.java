@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -31,6 +32,7 @@ public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGra
 	@Override public void setGraphic(IoGraphic graphic) {this.graphic = graphic;}
 	
 	@ManyToOne
+	@JoinColumn(name="shape_id")
 	private IoGraphicShape style;
 	public IoGraphicShape getStyle() {return style;}
 	public void setStyle(IoGraphicShape style) {this.style = style;}
