@@ -3,8 +3,8 @@ package org.jeesl.jsf.handler.op;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.api.handler.OpEntitySelection;
 import org.jeesl.interfaces.bean.op.OpEntityBean;
+import org.jeesl.interfaces.controller.handler.op.OpEntitySelection;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.lazy.XpathLazyModel;
 import org.jeesl.model.json.system.translation.JsonTranslation;

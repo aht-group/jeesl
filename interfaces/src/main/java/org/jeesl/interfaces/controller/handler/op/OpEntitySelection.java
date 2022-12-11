@@ -1,4 +1,4 @@
-package org.jeesl.api.handler;
+package org.jeesl.interfaces.controller.handler.op;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface OpEntitySelection <T extends EjbWithId>
+public interface OpEntitySelection <T extends EjbWithId> extends OpEntityHandler
 {
 	public static final long serialVersionUID=1;
 

@@ -3,11 +3,11 @@ package org.jeesl.jsf.handler.op;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.api.handler.OpEntitySelection;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.bean.op.OpEntityBean;
+import org.jeesl.interfaces.controller.handler.op.OpEntitySelection;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;

@@ -1,0 +1,6 @@
+package org.jeesl.interfaces.controller.handler.op;
+
+public interface OpEntityHandler
+{
+	
+}
