@@ -80,7 +80,7 @@ public abstract class AbstractOpSelectionHandler <T extends EjbWithId> implement
         if(op!=null && !tbList.contains(op))
         {
         	tbList.add(op);
-        	bean.addOpEntity(op);
+        	bean.addOpEntity(this,op);
         }
         reset(false,true,true);
     }
@@ -90,7 +90,7 @@ public abstract class AbstractOpSelectionHandler <T extends EjbWithId> implement
         if(tbList.contains(tb))
         {
         	tbList.remove(tb);
-        	bean.rmOpEntity(tb);
+        	bean.rmOpEntity(this,tb);
         }
         reset(false,true,true);
     }

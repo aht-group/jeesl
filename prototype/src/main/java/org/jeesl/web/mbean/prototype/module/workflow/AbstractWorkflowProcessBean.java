@@ -29,6 +29,7 @@ import org.jeesl.factory.mc.graph.GraphWorkflowFactory;
 import org.jeesl.factory.xml.module.workflow.XmlProcessFactory;
 import org.jeesl.interfaces.bean.op.OpEntityBean;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.controller.handler.op.OpEntityHandler;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -808,7 +809,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	}
 
     @SuppressWarnings("unchecked")
-	@Override public void addOpEntity(EjbWithId ejb) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void addOpEntity(OpEntityHandler handler, EjbWithId ejb) throws JeeslLockingException, JeeslConstraintViolationException
 	{
     	WPD d = (WPD)ejb;
     	if(!transition.getDocuments().contains(d))
@@ -820,7 +821,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	}
 
     @SuppressWarnings("unchecked")
-	@Override public void rmOpEntity(EjbWithId ejb) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void rmOpEntity(OpEntityHandler handler, EjbWithId ejb) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		WPD d = (WPD)ejb;
     	if(transition.getDocuments().contains(d))
