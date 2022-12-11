@@ -54,45 +54,45 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 	protected long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	protected String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
-	
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
 	@JoinTable(name="IoStatusJtLang",joinColumns={@JoinColumn(name="status_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	protected Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {if(name==null) {name=new HashMap<>();} return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
-	
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
 	@JoinTable(name="IoStatusJtDescription",joinColumns={@JoinColumn(name="status_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	protected Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
-		
+
 	protected boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
-	
+
 	protected String image;
 	@Override public String getImage() {return image;}
 	@Override public void setImage(String image) {this.image = image;}
-	
+
 	protected String imageAlt;
 	@Override public String getImageAlt() {return imageAlt;}
 	@Override public void setImageAlt(String imageAlt) {this.imageAlt=imageAlt;}
-	
+
 	protected String style;
 	public String getStyle() {return style;}
 	public void setStyle(String style) {this.style = style;}
-	
+
 	protected int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
-	
+
 	@ManyToOne
 	protected IoStatus parent;
 	@SuppressWarnings("unchecked")
@@ -102,11 +102,11 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 	protected String symbol;
 	public String getSymbol() {return symbol;}
 	public void setSymbol(String symbol) {this.symbol = symbol;}
-	
+
 	protected Boolean locked;
 	public Boolean getLocked() {return locked;}
 	public void setLocked(Boolean locked) {this.locked = locked;}
-	
+
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private IoGraphic graphic;
 	public IoGraphic getGraphic() {return graphic;}
