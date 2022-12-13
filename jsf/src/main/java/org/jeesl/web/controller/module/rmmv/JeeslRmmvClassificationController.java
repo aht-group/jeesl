@@ -12,8 +12,6 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.controller.web.module.rmmv.JeeslRmmvClassificationCallback;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvClassification;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvElement;
-import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModule;
-import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvModuleConfig;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -29,9 +27,7 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 											G extends JeeslGraphic<GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>,
 											R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 											E extends JeeslRmmvElement<L,R,E,EC>,
-											EC extends JeeslRmmvClassification<L,R,EC,G>,
-											MOD extends JeeslRmmvModule<?,?,MOD,?>,
-											MC extends JeeslRmmvModuleConfig<E,MOD>>
+											EC extends JeeslRmmvClassification<L,R,EC,G>>
 		extends AbstractTreeClassificationController<L,D,LOC,G,GT,R,RREF,EC>
 		implements SbSingleBean
 {
@@ -40,10 +36,10 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 	
 	private final JeeslRmmvClassificationCallback callback;
 
-	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,?,?,?> fbRmmv;
+	private final RmmvFactoryBuilder<L,D,LOC,R,E,EC,?,?,?,?,?> fbRmmv;
 
 	public JeeslRmmvClassificationController(final JeeslRmmvClassificationCallback callback,
-												final RmmvFactoryBuilder<L,D,LOC,R,E,EC,MOD,MC,?,?,?> fbRmmv,
+												final RmmvFactoryBuilder<L,D,LOC,R,E,EC,?,?,?,?,?> fbRmmv,
 												final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg)
 	{
 		super(fbSvg,fbRmmv.getClassLocale(),fbRmmv.getClassClasification());
@@ -51,7 +47,7 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 		this.fbRmmv=fbRmmv;
 	}
 	
-	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,MOD,MC,?,?,?> fRmmv,
+	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,?,?,?,?,?> fRmmv,
 									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
