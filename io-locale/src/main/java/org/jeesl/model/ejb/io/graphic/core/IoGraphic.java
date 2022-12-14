@@ -73,8 +73,8 @@ public class IoGraphic implements JeeslGraphic<IoGraphicType,IoGraphicComponent,
 	private List<IoGraphicComponent> figures;
 	@Override public List<IoGraphicComponent> getFigures() {return figures;}
 	@Override public void setFigures(List<IoGraphicComponent> figures) {this.figures = figures;}
-	
-	
+
+
 	@Override public boolean equals(Object object) {return (object instanceof IoGraphic) ? id == ((IoGraphic) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(13,37).append(id).toHashCode();}
 	
