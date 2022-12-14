@@ -1,6 +1,8 @@
 package org.jeesl.interfaces.util.query;
 
-public interface JeeslQuery
+import java.io.Serializable;
+
+public interface JeeslQuery extends Serializable
 {
 	public String getLocaleCode();
 	

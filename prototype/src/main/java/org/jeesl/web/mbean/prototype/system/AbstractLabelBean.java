@@ -13,6 +13,7 @@ import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.handler.io.label.JeeslTranslationHandler;
 import org.jeesl.controller.provider.FacadeTranslationProvider;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
+import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
@@ -116,10 +117,13 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 			this.th.getMissingLabelHandler().updateMissingLabels();
 		}
 	}
+	
+	//Method coming from  TranslationProvider ... but required!
+	@Override public List<String> getLocaleCodes() {return EjbCodeFactory.toListCode(locales);}
 
 	//This are some dummy-methods for the TranslationProvider .. not required here
 	@Override public boolean hasLocale(String localeCode) {logger.warn("NYI"); return false;}
-	@Override public List<String> getLocaleCodes() {return null;}
+	
 	@Override public String tlEntity(String localeCode, String key) {logger.warn("NYI"); return null;}
 	@Override public String tlAttribute(String localeCode, String key1, String key2) {logger.warn("NYI"); return null;}
 	@Override public <E extends Enum<E>> String tlAttribute(String localeCode, Class<?> c, E code) {logger.warn("NYI"); return null;}

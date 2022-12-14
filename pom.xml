@@ -28,6 +28,7 @@
 		<module>prototype</module>
 		
 		<module>io-locale</module>
+		<module>io-crypto</module>
 	</modules>
 
 	<properties>
@@ -79,7 +80,7 @@
 	
 	<dependencyManagement>
 		<dependencies>
-			        	<!-- JEESL -->
+			<!-- JEESL -->
 			<dependency>
 				<groupId>org.jeesl</groupId>
 				<artifactId>jeesl-api</artifactId>
@@ -176,6 +177,11 @@
 			<dependency>
         		<groupId>org.jeesl</groupId>
         		<artifactId>jeesl-io-locale</artifactId>
+        		<version>${project.version}</version>
+			</dependency>
+			<dependency>
+        		<groupId>org.jeesl</groupId>
+        		<artifactId>jeesl-io-crypto</artifactId>
         		<version>${project.version}</version>
         	</dependency>
 

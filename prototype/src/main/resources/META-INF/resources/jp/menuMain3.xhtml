@@ -26,7 +26,7 @@
 		      			<h:outputText value="" styleClass="jeesl-submenu-icon fa fa-chevron-circle-down"></h:outputText>
 		      			<ul class="jeesl-dropdown-list jeesl-dropdown-sub">
 					      <ui:repeat var="s" value="#{cc.attrs.bean.subMenu(m.view.code)}">
-					      	<li id="#{s.view.code}" class="jeesl-dropdown-item">
+					      	<li class="jeesl-dropdown-item">
 					      		<a class="jeesl-dropdown-item-label" href="#{facesContext.externalContext.requestContextPath}#{s.view.urlMapping}">#{s.view.name[localeCode].lang}</a>
 					      	</li>
 					      </ui:repeat>

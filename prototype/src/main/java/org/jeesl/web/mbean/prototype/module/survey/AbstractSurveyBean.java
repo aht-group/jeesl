@@ -182,7 +182,7 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 	protected abstract void initPageSettings();
 	
 	//JeeslTranslationBean<L,D,LOC> bTranslation,
-	protected void initSuperSurvey(List<String> localeCodes,  JeeslFacesMessageBean bMessage,
+	protected void initSuperSurvey(List<String> localeCodes, JeeslFacesMessageBean bMessage,
 			JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
 			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fCore,
 			JeeslSurveyAnalysisFacade<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,TOOL,ATT> fAnalysis,
