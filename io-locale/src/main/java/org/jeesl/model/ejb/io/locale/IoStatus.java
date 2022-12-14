@@ -127,4 +127,4 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 
 // Discriminator
 //   SELECT type, length(type) as l from IoStatus where length(type) = (select max(length(type)) from IoStatus);
-//   ALTER TABLE public.iostatus ALTER COLUMN type TYPE character varying(31) COLLATE pg_catalog."default";
+//   ALTER TABLE public.iostatus ALTER COLUMN type TYPE character varying(32) COLLATE pg_catalog."default";
