@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.ui.edit;
+package org.jeesl.jsf.handler.ui.edit;
 
 import java.util.ArrayList;
 import java.util.List;

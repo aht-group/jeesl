@@ -36,7 +36,7 @@
 	<j:slot id="sElement" width="5">
 		<h:form id="fType" rendered="#{not empty cc.attrs.controller.element}">
 			<p:panel styleClass="jeeslPanel">
-				<f:facet name="header"><j:pHeader entity="RmmvElement" /></f:facet>
+				<f:facet name="header"><j:pHeader entity="RmmvElement"/></f:facet>
 				<f:facet name="actions">
 					<j:svg type="jeeslCancel" listener="#{cc.attrs.controller.cancelElement()}" update=":#{cc.id}:grid"/>
 					<j:svg type="jeeslSave"   listener="#{cc.attrs.controller.saveElement()}" update=":#{cc.id}:grid"/>

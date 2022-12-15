@@ -47,7 +47,7 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 									EjbWithParent,EjbWithCode,EjbWithImage,EjbWithImageAlt,EjbWithPositionVisible,
 									EjbWithLangDescription<IoLang,IoDescription>
 {
-	private static final long serialVersionUID=1l;
+	private static final long serialVersionUID = 1l;
 
 
 	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SequenceStatus")

@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.ui.edit;
+package org.jeesl.jsf.handler.ui.edit;
 
 import java.io.Serializable;
 import java.util.HashSet;

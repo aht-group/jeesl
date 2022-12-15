@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.ui.edit;
+package org.jeesl.jsf.handler.ui.edit;
 
 import org.jeesl.interfaces.controller.handler.UiEditHandler;
 import org.slf4j.Logger;
