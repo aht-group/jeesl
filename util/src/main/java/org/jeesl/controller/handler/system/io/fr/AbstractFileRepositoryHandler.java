@@ -192,6 +192,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		{	// The reset is required for a special case in deferredMode
 			reset(true,true);
 		}
+		
 		if(with.getFrContainer()==null)
 		{
 			container = efContainer.build(initForStorage);
@@ -214,6 +215,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 			container = with.getFrContainer();
 			if(reset) {reload(true);}
 		}
+		if(debugOnInfo) {logger.info(with.toString()+" is inititialized with container:"+container.toString());}
 	}
 
 	public void cancelMeta() {reset(false,true);}

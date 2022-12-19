@@ -46,4 +46,9 @@ public class JsonSsiStatistic implements Serializable
 	private Integer created;
 	public Integer getCreated() {return created;}
 	public void setCreated(Integer created) {this.created = created;}
+	
+	@JsonProperty("deleted")
+	private Integer deleted;
+	public Integer getDeleted() {return deleted;}
+	public void setDeleted(Integer deleted) {this.deleted = deleted;}
 }

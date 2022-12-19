@@ -12,6 +12,9 @@ public class UiEditBooleanHandler implements UiEditHandler
 	
 	private boolean allow;
 	
+	public void setAllow(boolean allow) {
+		this.allow = allow;
+	}
 	public boolean isAllow() {return allow;}
 	public boolean isDeny() {return !allow;}
 
