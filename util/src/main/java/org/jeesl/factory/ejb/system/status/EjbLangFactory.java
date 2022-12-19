@@ -27,10 +27,7 @@ public class EjbLangFactory<L extends JeeslLang>
 
     final Class<L> cL;
 
-    public static <L extends JeeslLang> EjbLangFactory<L> instance(final Class<L> cL)
-    {
-        return new EjbLangFactory<L>(cL);
-    }
+    public static <L extends JeeslLang> EjbLangFactory<L> instance(final Class<L> cL) {return new EjbLangFactory<>(cL);}
     private EjbLangFactory(final Class<L> cL)
     {
         this.cL = cL;
@@ -95,7 +92,7 @@ public class EjbLangFactory<L extends JeeslLang>
 		}
 		return map;
 	}
-	public Map<String,L> createLangMap(String key, String translation) throws InstantiationException, IllegalAccessException
+	public Map<String,L> createLangMap(String key, String translation)
 	{
 		Map<String,L> map = new Hashtable<String,L>();
 		map.put(key, createLang(key, translation));

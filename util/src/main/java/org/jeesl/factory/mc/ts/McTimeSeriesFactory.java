@@ -55,7 +55,7 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 	final static Logger logger = LoggerFactory.getLogger(McTimeSeriesFactory.class);
 
 	private final boolean debugOnInfo = true;
-	private String localeCode;
+//	private String localeCode;
 
 	private final JeeslTsFacade<?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs;
 

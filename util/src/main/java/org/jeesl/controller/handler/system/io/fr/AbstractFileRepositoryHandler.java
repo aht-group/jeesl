@@ -190,8 +190,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	{
 		if(reset)
 		{	// The reset is required for a special case in deferredMode
-			metas.clear();
-			reset(true);
+			reset(true,true);
 		}
 		if(with.getFrContainer()==null)
 		{
@@ -217,10 +216,11 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		}
 	}
 
-	public void cancelMeta() {reset(true);}
-	public void reset() {reset(true);}
-	private void reset(boolean rMeta)
+	public void cancelMeta() {reset(false,true);}
+	public void reset() {reset(true,true);}
+	private void reset(boolean rMetas, boolean rMeta)
 	{
+		if(rMetas) {metas.clear();}
 		if(rMeta) {meta=null;}
 	}
 	
@@ -317,7 +317,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		
 		if(debugOnInfo) {logger.info("Saved");}
 		
-		reset(true);
+		reset(false,true);
     }
 	public void saveMeta() throws JeeslConstraintViolationException, JeeslLockingException
 	{
@@ -382,8 +382,8 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	{
 		if(debugOnInfo) {logger.info("DELETING: "+meta.toString());}
 		fFr.delteFileFromRepository(meta);
-		reload();
-		reset(true);
+		this.reset(true,true);
+		this.reload();
 	}
 	
 	public byte[] zip() throws Exception

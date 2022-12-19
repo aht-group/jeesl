@@ -89,17 +89,28 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		total();
 	}
 	
+	private void error()
+	{
+		if(json.getStatistic().getError()==null) {json.getStatistic().setError(1);}
+		else {json.getStatistic().setError(json.getStatistic().getError()+1);}
+		total();
+	}
+	
 	private void total()
 	{
 		if(json.getStatistic().getTotal()==null) {json.getStatistic().setTotal(1);}
 		else {json.getStatistic().setTotal(json.getStatistic().getTotal()+1);}
 	}
 	
-	private void error()
+	public void entityUpdated()
 	{
-		if(json.getStatistic().getError()==null) {json.getStatistic().setError(1);}
-		else {json.getStatistic().setError(json.getStatistic().getError()+1);}
-		total();
+		if(json.getStatistic().getUpdated()==null) {json.getStatistic().setUpdated(1);}
+		else {json.getStatistic().setUpdated(json.getStatistic().getUpdated()+1);}
+	}
+	public void entityCreated()
+	{
+		if(json.getStatistic().getCreated()==null) {json.getStatistic().setCreated(1);}
+		else {json.getStatistic().setCreated(json.getStatistic().getCreated()+1);}
 	}
 	
 	public void skip()

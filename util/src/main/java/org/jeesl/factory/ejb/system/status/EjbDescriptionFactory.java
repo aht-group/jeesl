@@ -28,6 +28,7 @@ public class EjbDescriptionFactory<D extends JeeslDescription>
 	
     private final Class<D> cD;
 	
+    public static <D extends JeeslDescription> EjbDescriptionFactory<D> instance(final Class<D> cD) {return new EjbDescriptionFactory<>(cD);}
     public EjbDescriptionFactory(final Class<D> cD)
     {
         this.cD = cD;

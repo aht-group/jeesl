@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractEjbQuery implements Serializable,JeeslQuery
+public abstract class AbstractEjbQuery implements JeeslQuery
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractEjbQuery.class);
 	private static final long serialVersionUID = 1;
