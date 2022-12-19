@@ -1403,6 +1403,7 @@ body, .ui-widget {
 					}
 					
 					.ui-icon {
+						color: $brighter-colour !important;
 						height: $regular-spacing;
 						width: $regular-spacing;
 						
@@ -2281,7 +2282,6 @@ body, .ui-widget {
 		background: transparent;
 		border: 0;
 		flex: 1;
-		overflow-x: auto;
 		padding: $half-spacing $regular-spacing;
 	}
 	
@@ -2809,6 +2809,14 @@ body, .ui-widget {
 			
 			&.jeesl-column-min-width {
 				width: 0;
+			}
+			
+			&.cell-select {
+				padding: 0;
+				
+				label {
+					padding: $half-spacing $regular-spacing;
+				}
 			}
 			
 			.jeesl-icon {

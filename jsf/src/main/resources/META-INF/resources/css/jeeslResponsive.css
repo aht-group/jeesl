@@ -3479,6 +3479,7 @@ body, .ui-widget {
             opacity: 1;
             pointer-events: all; }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light .ui-icon {
+            color: #00a85f !important;
             height: 10px;
             width: 10px; }
             .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup .search-btn-light .ui-icon.ui-icon-apply {
@@ -3855,7 +3856,6 @@ body, .ui-widget {
     background: transparent;
     border: 0;
     flex: 1;
-    overflow-x: auto;
     padding: 5px 10px; }
   .jeesl-panel.jeesl-editor .ui-panel-content {
     overflow: visible; }
@@ -4507,6 +4507,10 @@ body, .ui-widget {
       padding: 5px 10px; }
       .jeesl-datatable tbody td.jeesl-column-min-width {
         width: 0; }
+      .jeesl-datatable tbody td.cell-select {
+        padding: 0; }
+        .jeesl-datatable tbody td.cell-select label {
+          padding: 5px 10px; }
       .jeesl-datatable tbody td .jeesl-icon {
         height: 12px; }
         @media (max-width: 768px) {
@@ -4930,7 +4934,6 @@ body, .ui-widget {
         background: transparent;
         border: 0;
         flex: 1;
-        overflow-x: auto;
         padding: 5px 10px; }
       .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content {
         overflow: visible; }
