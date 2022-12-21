@@ -2095,6 +2095,77 @@ body, .ui-widget {
 							padding: 0;
 						}
 					}
+					
+					> .jeesl-ck-editor {
+						@media (max-width: 768px) {
+							margin: 0 -#{$regular-spacing};
+							padding: 0;
+							width: calc(100% + 2 * #{$regular-spacing});
+						}
+						
+						.cke {
+							box-sizing: border-box;
+							width: 100%;
+							
+							@media(max-width: 768px) {
+								border-width: $border-width 0;
+							}
+							
+							.cke_top {
+								padding: 0;
+								
+								.cke_toolbar {
+									display: flex;
+									float: none;
+										
+									.cke_toolgroup {
+										align-items: center;
+										display: flex;
+										margin: 0;
+											
+										.cke_button {
+											align-items: center;
+											box-sizing: border-box;
+											border: none;
+											display: flex;
+											height: $element-height;
+											justify-content: center;
+											padding: 0;
+											transition: background $transition-duration linear;
+											width: $element-height;
+											
+											@media (max-width: 768px) {
+												height: $element-height-mobile;
+												width: $element-height-mobile;
+											}
+												
+											&:hover {
+												background: $light-grey;
+												cursor: pointer;
+											}
+											
+											&.cke_button_on {
+												background: $dark-colour;
+												
+												.cke_button_icon {
+													filter: brightness(5);
+												}
+											}
+										}
+										
+										.cke_toolbar_separator {
+											height: $element-height;
+											margin: 0;
+											
+											@media (max-width: 768px) {
+												height: $element-height-mobile;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -2772,6 +2843,7 @@ body, .ui-widget {
 				
 				@media (max-width: 768px) {
 					min-width: $element-height-mobile;
+					width: 100% !important;
 				}
 			}
 		}
