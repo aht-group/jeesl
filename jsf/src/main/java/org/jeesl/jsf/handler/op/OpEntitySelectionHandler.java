@@ -49,9 +49,10 @@ public class OpEntitySelectionHandler <T extends EjbWithId> extends AbstractOpSe
 		lazy.updateFiler(columns);
     }
     
+    public void clearLazy() {lazy.clear();}
     public void setLazy(List<T> opEntites)
     {
-    	lazy.clear();
+    	this.clearLazy();
     	lazy.addAll(opEntites);
     }
     

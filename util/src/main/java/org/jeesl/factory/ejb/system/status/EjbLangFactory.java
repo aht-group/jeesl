@@ -186,7 +186,6 @@ public class EjbLangFactory<L extends JeeslLang>
 					map.put(loc.getCode(), l);
 				}
 				catch (JeeslConstraintViolationException e) {e.printStackTrace();}
-//				catch (UtilsLockingException e) {e.printStackTrace();}
 			}
 		}
 		return map;

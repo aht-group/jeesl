@@ -218,8 +218,9 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		if(debugOnInfo) {logger.info(with.toString()+" is inititialized with container:"+container.toString());}
 	}
 
-	public void cancelMeta() {reset(false,true);}
 	public void reset() {reset(true,true);}
+	public void cancelMeta() {reset(false,true);}
+	
 	private void reset(boolean rMetas, boolean rMeta)
 	{
 		if(rMetas) {metas.clear();}

@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.jsf.filter.UtilsStatusFilter;
 import net.sf.ahtutils.xml.status.Status;
-import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractIconBean implements Serializable

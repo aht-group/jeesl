@@ -1,7 +1,6 @@
 package org.jeesl.web.mbean.prototype.module.hydro;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -46,20 +45,11 @@ public class AbstractHydroYearBean <L extends JeeslLang, D extends JeeslDescript
 	private final SbMultiHandler<HD> sbhDecade; public SbMultiHandler<HD> getSbhDecade() {return sbhDecade;}
 	private final Comparator<HY> comparatorHydroYear;
 	private final Comparator<HD> comparatorHydroDecade;
-	private List<String> selectableYear;
 
 	protected List<HY> hydroYears; public List<HY> getHydroYears() {return hydroYears;}
 	protected List<HD> hydroDecades; public List<HD> getHydroDecades() {return hydroDecades;}
 
-	protected HY hydroYear;
-
-	public HY getHydroYear() {
-		return hydroYear;
-	}
-
-	public void setHydroYear(HY hydroYear) {
-		this.hydroYear = hydroYear;
-	}
+	protected HY hydroYear; public HY getHydroYear() {return hydroYear;} public void setHydroYear(HY hydroYear) {this.hydroYear = hydroYear;}
 
 	public AbstractHydroYearBean(final HydroFactoryBuilder<L,D,HD,HY> fbHydroYear)
 	{
@@ -69,9 +59,7 @@ public class AbstractHydroYearBean <L extends JeeslLang, D extends JeeslDescript
 		sbhDecade = new SbMultiHandler<HD>(fbHydroYear.getClassDecade(),this);
 		comparatorHydroYear = (new HydroYearComparator<L,D,HD,HY>()).factory(HydroYearComparator.Type.code);
 		comparatorHydroDecade = (new HydroDecadeComparator<L,D,HD>()).factory(HydroDecadeComparator.Type.code);
-		selectableYear = new ArrayList<>();
 	}
-
 
 	public void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslFacade fUtils)
 	{

@@ -54,7 +54,7 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 {
 	final static Logger logger = LoggerFactory.getLogger(McTimeSeriesFactory.class);
 
-	private final boolean debugOnInfo = true;
+	private final boolean debugOnInfo = false;
 //	private String localeCode;
 
 	private final JeeslTsFacade<?,?,?,SCOPE,?,?,MP,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs;
@@ -157,6 +157,8 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 	}
 
 	public <T extends EjbWithId> Ds multiPoints(String localeCode, T entity, Date from, Date to) throws JeeslNotFoundException {return multiPoints(null,localeCode,entity,from,to);}
+	
+	@SuppressWarnings("unchecked")
 	public <T extends EjbWithId, E extends Enum<E>> Ds multiPoints(String localeCode, T entity, Date from, Date to, E... onlyShowMp) throws JeeslNotFoundException
 	{
 		Set<String> set = new HashSet<>();

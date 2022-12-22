@@ -53,6 +53,7 @@ public class TsSessionProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	extends AbstractTimeSeriesProcessor<SCOPE,ST,MP,TS,TRANSACTION,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,WS>
 {
 	final static Logger logger = LoggerFactory.getLogger(TsSessionProcessor.class);
+	private final String localeCode = "en";
 	
 	public TsSessionProcessor(TsFactoryBuilder<?,?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fbTs,
 									JeeslTsFacade<?,?,?,SCOPE,ST,?,MP,TS,TRANSACTION,?,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,?,?,WS,?,?> fTs)
@@ -60,8 +61,9 @@ public class TsSessionProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 		super(fbTs,fTs);
 	}
 		
-	public void update(SYSTEM system, JeeslSessionRegistryBean<USER> bSession)
+	public String update(SYSTEM system, JeeslSessionRegistryBean<USER> bSession)
 	{
+		StringBuilder sb = new StringBuilder();
 		try
 		{
 			DateTime dt = new DateTime(new Date());
@@ -79,16 +81,19 @@ public class TsSessionProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 				{
 					POINT dp =  efPoint.build(data, mp, Integer.valueOf(bSession.activeSessions()).doubleValue());
 					fTs.save(dp);
+					sb.append(mp.getName().get(localeCode).getLang()).append(": ").append(dp.getValue());
 				}
 				else if(mp.getCode().equals("authenticated"))
 				{
 					POINT dp =  efPoint.build(data, mp, Integer.valueOf(bSession.authenticatedSessions()).doubleValue());
 					fTs.save(dp);
+					sb.append(mp.getName().get(localeCode).getLang()).append(": ").append(dp.getValue());
 				}
 			}
 			
 		}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
+		return sb.toString();
 	}
 	
 	public void update(SYSTEM system, TRANSACTION transaction, JsonTsSeries json)

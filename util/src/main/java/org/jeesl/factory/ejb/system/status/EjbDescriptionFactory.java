@@ -138,14 +138,23 @@ public class EjbDescriptionFactory<D extends JeeslDescription>
 		Map<String,D> map = new HashMap<String,D>();
 		for(String key : original.keySet())
 		{
-			try {
+			try
+			{
 				map.put(key, create(key, original.get(key).getLang()));
-			} catch (JeeslConstraintViolationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
+			catch (JeeslConstraintViolationException e) {e.printStackTrace();}
 		}
 		return map;
+	}
+	
+	public <L extends JeeslLang> Map<String,D> convert(Map<String,L> langs)
+	{
+		Map<String,D> descriptions = new HashMap<>(); 
+		for(String key : langs.keySet())
+		{
+			descriptions.put(key,this.build(key,langs.get(key).getLang()));
+		}
+		return descriptions;
 	}
 	
 	public <M extends EjbWithDescription<D>> void rmDescription(JeeslFacade fUtils, M ejb)

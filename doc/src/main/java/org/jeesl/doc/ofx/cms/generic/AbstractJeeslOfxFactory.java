@@ -14,7 +14,7 @@ public class AbstractJeeslOfxFactory<L extends JeeslLang, LOC extends JeeslLocal
 	
 	protected OfxTranslationProvider tp;
 	
-	private OfxMultiLangFactory<L> ofxMultiLang;
+	protected OfxMultiLangFactory<L> ofxMultiLang;
 	protected final OfxMultiLocaleFactory<L,LOC> ofxMultiLocale;
 	
 	public AbstractJeeslOfxFactory(OfxTranslationProvider tp)
