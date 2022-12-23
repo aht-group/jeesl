@@ -47,14 +47,14 @@
 		</j:slot>
 		<j:slot id="sAsset" width="8">
 			<h:form id="fType" rendered="#{not empty cc.attrs.bean.asset}">
-				<p:panel header="#{msg.jeeslAsset}" styleClass="jeeslPanel">
+				<p:panel header="#{msg.jeeslAsset}" styleClass="jeesl-panel">
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelAsset()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveAsset()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteAsset()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.asset.id gt 0}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					<j:inputGrid>
 						<p:outputLabel value="#{msg.jeeslCode}" rendered="#{cc.attrs.withCode}"/>
 						<jtp:inputText value="#{cc.attrs.bean.asset.code}" rendered="#{cc.attrs.withCode}"/>
 					
@@ -103,7 +103,7 @@
                         
                         <p:outputLabel value="#{msg.jeeslAssetRemark}"/>
                         <jtp:inputRemark value="#{cc.attrs.bean.asset.remark}"/>
-					</p:panelGrid>
+					</j:inputGrid>
 				</p:panel>
 			</h:form>
 			<h:form id="fEvents" rendered="#{not empty cc.attrs.bean.asset}">
