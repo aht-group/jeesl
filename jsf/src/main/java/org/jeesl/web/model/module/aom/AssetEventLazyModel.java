@@ -54,7 +54,7 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
     @Override public Object getRowKey(EVENT account) {return llh.getRowKey(account);}
     public void clear() {list.clear();}
 
-    public void reloadScope(JeeslAssetFacade<?,?,?,?,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,?,?,USER,?,?> fAsset, ASSET asset)
+    public void reloadScope(JeeslAssetFacade<?,?,?,?,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,USER,?,?> fAsset, ASSET asset)
     {
 		this.clear();
 		list.addAll(fAsset.fAssetEvents(asset));

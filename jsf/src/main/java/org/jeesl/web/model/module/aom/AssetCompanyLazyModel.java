@@ -1,4 +1,4 @@
-package org.jeesl.model.module.aom;
+package org.jeesl.web.model.module.aom;
 
 import java.util.List;
 import java.util.Map;

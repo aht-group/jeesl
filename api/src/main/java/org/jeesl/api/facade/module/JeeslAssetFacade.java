@@ -31,11 +31,9 @@ public interface JeeslAssetFacade <L extends JeeslLang, D extends JeeslDescripti
 									STATUS extends JeeslAomAssetStatus<L,D,STATUS,?>,
 									ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,?>,
 									VIEW extends JeeslAomView<L,D,REALM,?>,
-									EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
+									EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,?,USER,FRC>,
 									ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
 									ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
-									M extends JeeslMarkup<MT>,
-									MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
 									USER extends JeeslSimpleUser,
 									FRC extends JeeslFileContainer<?,?>,
 									UP extends JeeslAomEventUpload<L,D,UP,?>>
