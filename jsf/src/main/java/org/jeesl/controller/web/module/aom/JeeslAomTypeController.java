@@ -66,7 +66,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomTypeController.class);
 
-	private JeeslAssetFacade<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAsset;
+	private JeeslAssetFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAsset;
 	private JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic;
 
 	private JeeslAssetCacheBean<L,D,REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache;
@@ -96,7 +96,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 
 	public void postConstructAssetType(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAssetCacheBean<L,D,REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache,
-									JeeslAssetFacade<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAsset,
+									JeeslAssetFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAsset,
 									JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
 									REALM realm)
 	{

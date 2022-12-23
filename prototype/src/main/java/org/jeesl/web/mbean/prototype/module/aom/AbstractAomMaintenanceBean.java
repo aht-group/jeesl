@@ -69,7 +69,7 @@ public abstract class AbstractAomMaintenanceBean <L extends JeeslLang, D extends
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAomMaintenanceBean.class);
 	
-	protected JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset;
+	protected JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
@@ -116,7 +116,7 @@ public abstract class AbstractAomMaintenanceBean <L extends JeeslLang, D extends
 	}
 	
 	protected <E extends Enum<E>> void postConstructAssetMaintenance(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-									JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
+									JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
 									JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
 									E eRealm, RREF rref
 									)
@@ -151,7 +151,7 @@ public abstract class AbstractAomMaintenanceBean <L extends JeeslLang, D extends
     public void selectEvent()
     {
     	logger.info(AbstractLogMessage.selectEntity(event));
-    	event = fAsset.loadAomEvent(event);
+    	event = fAsset.load(event);
     	uiHelper.update(realm,rref,event);
     	efEvent.ejb2nnb(event,nnb);
     	Collections.sort(event.getAssets(),cpAsset);

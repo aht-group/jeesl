@@ -58,7 +58,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
 					extends JeeslFacadeBean
-					implements JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,ASSET,STATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,FRC,UP>
+					implements JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,STATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,FRC,UP>
 {	
 	private static final long serialVersionUID = 1L;
 
@@ -326,7 +326,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		return tQ.getResultList();
 	}
 
-	@Override public EVENT loadAomEvent(EVENT event)
+	@Override public EVENT load(EVENT event)
 	{
 		event = this.find(fbAsset.getClassEvent(),event);
 		if(event.getMarkup()!=null) {event.getMarkup().getId();}

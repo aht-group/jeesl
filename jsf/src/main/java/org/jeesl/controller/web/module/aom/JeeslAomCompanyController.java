@@ -35,7 +35,7 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomCompanyController.class);
 	
-	protected JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?> fAsset;
+	protected JeeslAssetFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAsset;
 	private JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,?,?,?,?,?,?> bCache;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?,?,?> fbAsset;
@@ -58,7 +58,7 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 
 	public void postConstructAssetCompany(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 													JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,?,?,?,?,?,?> bCache,
-													JeeslAssetFacade<L,D,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?> fAsset,
+													JeeslAssetFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAsset,
 													REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);
