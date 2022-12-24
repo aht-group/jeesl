@@ -17,7 +17,7 @@
     </properties>
 
 	<dependencyManagement>
-		<dependencies>      	         
+		<dependencies>    	         
 			<dependency>
 				<groupId>org.jeesl.bom</groupId>
 				<artifactId>bom-core</artifactId>

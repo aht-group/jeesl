@@ -10,7 +10,6 @@ import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
-import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
@@ -20,6 +19,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 
 public interface JeeslAssetFacade <L extends JeeslLang, D extends JeeslDescription,
 									REALM extends JeeslTenantRealm<L,D,REALM,?>,
@@ -48,7 +48,7 @@ public interface JeeslAssetFacade <L extends JeeslLang, D extends JeeslDescripti
 	
 	<RREF extends EjbWithId> ATYPE fcAomRootType(REALM realm, RREF rref, VIEW view);
 	
-	<RREF extends EjbWithId> List<COMPANY> fAssetCompanies(REALM realm, RREF rref);
+	<RREF extends EjbWithId> List<COMPANY> fAomCompanies(TenantIdentifier<REALM> identifier);
 	
 	List<EVENT> fAssetEvents(ASSET asset);
 	<RREF extends EjbWithId> List<EVENT> fAssetEvents(REALM realm, RREF rref, List<ESTATUS> status);

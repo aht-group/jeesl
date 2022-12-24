@@ -12,7 +12,7 @@ import javax.inject.Qualifier;
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface GraphicSymbolizerCache
+public @interface AomCompanyCache
 {
 	
 }

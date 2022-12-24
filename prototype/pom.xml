@@ -14,7 +14,14 @@
 	<packaging>jar</packaging>
 	
 	<dependencyManagement>
-		<dependencies>      	         
+		<dependencies>
+			<dependency>
+				<groupId>org.jeesl.bom</groupId>
+				<artifactId>bom-eap73</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>	         
 			<dependency>
 				<groupId>org.jeesl.bom</groupId>
 				<artifactId>bom-core</artifactId>
@@ -76,6 +83,14 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- Jakarta EE -->
+		<dependency>
+			<groupId>jakarta.enterprise</groupId>
+			<artifactId>jakarta.enterprise.cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<!-- JSF -->
 		<dependency>
 	   		<groupId>com.sun.faces</groupId>
 	   		<artifactId>jsf-api</artifactId>
@@ -91,11 +106,11 @@
    			<artifactId>primefaces-extensions</artifactId>
    			<scope>provided</scope>
 		</dependency>
-                 <dependency>
-                    <groupId>org.primefaces.extensions</groupId>
-                    <artifactId>resources-ckeditor</artifactId>
-                    <version>8.0</version>
-                </dependency>
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>resources-ckeditor</artifactId>
+			<version>8.0</version>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -110,10 +125,16 @@
 		<dependency>
 		    <groupId>org.ocpsoft.rewrite</groupId>
 		    <artifactId>rewrite-servlet</artifactId>
-		    <version>3.4.1.Final</version>
 		    <scope>provided</scope>
 		</dependency>
 		
+		<!-- Infinispan -->
+		<dependency>
+		  <groupId>org.infinispan</groupId>
+		  <artifactId>infinispan-core</artifactId>
+		  <scope>provided</scope>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.metachart</groupId>
@@ -189,11 +210,11 @@
 		</dependency> -->
 		
 		<dependency>
-  <groupId>com.github.ben-manes.caffeine</groupId>
-  <artifactId>caffeine</artifactId>
-  <version>2.8.4</version>
-  <scope>provided</scope>
-</dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+			<version>2.8.4</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	
 	<build>

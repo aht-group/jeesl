@@ -5,28 +5,25 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
-import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
+import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslAssetCacheBean <L extends JeeslLang, D extends JeeslDescription,
-										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
+public interface JeeslAssetCacheBean <REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId,
 										COMPANY extends JeeslAomCompany<REALM,SCOPE>,
-										SCOPE extends JeeslAomScope<L,D,SCOPE,?>,
+										SCOPE extends JeeslAomScope<?,?,SCOPE,?>,
 										ASSET extends JeeslAomAsset<REALM,ASSET,COMPANY,ASTATUS,ATYPE>,
-										ASTATUS extends JeeslAomAssetStatus<L,D,ASTATUS,?>,
-										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,?>,
-										VIEW extends JeeslAomView<L,D,REALM,?>,
-										ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
-										UP extends JeeslAomEventUpload<L,D,UP,?>>
+										ASTATUS extends JeeslAomAssetStatus<?,?,ASTATUS,?>,
+										ATYPE extends JeeslAomAssetType<?,?,REALM,ATYPE,VIEW,?>,
+										VIEW extends JeeslAomView<?,?,REALM,?>,
+										ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
+										UP extends JeeslAomEventUpload<?,?,UP,?>>
 								extends Serializable
 {
 //	void x();
@@ -36,7 +33,6 @@ public interface JeeslAssetCacheBean <L extends JeeslLang, D extends JeeslDescri
 	
 	List<ETYPE> getEventType();
 	
-	Map<RREF,List<COMPANY>> cachedCompany();
 	Map<RREF,List<COMPANY>> getMapVendor();
 	Map<RREF,List<COMPANY>> getMapMaintainer();
 	

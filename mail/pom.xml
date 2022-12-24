@@ -12,7 +12,19 @@
     <artifactId>jeesl-mail</artifactId>
     <packaging>jar</packaging>
     <name>JEESL - Mail</name>
-		
+	
+	<dependencyManagement>
+		<dependencies>      	         
+			<dependency>
+				<groupId>org.jeesl.bom</groupId>
+				<artifactId>bom-core</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.jeesl</groupId>
@@ -204,19 +216,7 @@
 		<!-- TEST -->
 	
 	</dependencies>
-	
-	<dependencyManagement>
-		<dependencies>      	         
-			<dependency>
-				<groupId>org.jeesl.bom</groupId>
-				<artifactId>bom-core</artifactId>
-				<version>${project.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	
+		
 	<build>
 		<plugins>
 			<plugin>

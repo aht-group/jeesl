@@ -4,6 +4,7 @@ import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,13 +21,13 @@ public class EjbAssetCompanyFactory<REALM extends JeeslTenantRealm<?,?,REALM,?>,
         this.cCompany = cCompany;
     }
 	
-	public <RREF extends EjbWithId> COMPANY build(REALM realm, RREF rref)
+	public <RREF extends EjbWithId> COMPANY build(TenantIdentifier<REALM> identifier)
 	{
 		try
 		{
 			COMPANY ejb = cCompany.newInstance();
-			ejb.setRealm(realm);
-			ejb.setRealmIdentifier(rref.getId());
+			ejb.setRealm(identifier.getRealm());
+			ejb.setRealmIdentifier(identifier.getId());
 		    return ejb;
 		}
 		catch (InstantiationException e) {e.printStackTrace();}

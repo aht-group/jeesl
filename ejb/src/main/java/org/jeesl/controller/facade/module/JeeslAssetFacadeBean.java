@@ -38,6 +38,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -264,7 +265,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		return em.createQuery(cQ).getResultList();
 	}
 
-	@Override public <RREF extends EjbWithId> List<COMPANY> fAssetCompanies(REALM realm, RREF realmReference)
+	@Override public <RREF extends EjbWithId> List<COMPANY> fAomCompanies(TenantIdentifier<REALM> identifier)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<COMPANY> cQ = cB.createQuery(fbAsset.getClassCompany());
@@ -272,10 +273,10 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
 		Expression<Long> eRefId = company.get(JeeslAomCompany.Attributes.realmIdentifier.toString());
-		predicates.add(cB.equal(eRefId,realmReference.getId()));
+		predicates.add(cB.equal(eRefId,identifier.getId()));
 		
 		Path<REALM> pRealm = company.get(JeeslAomCompany.Attributes.realm.toString());
-		predicates.add(cB.equal(pRealm,realm));
+		predicates.add(cB.equal(pRealm,identifier.getRealm()));
 		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(company);

@@ -78,7 +78,7 @@ public abstract class AbstractAomMaintenanceBean <L extends JeeslLang, D extends
 	private final Comparator<ASSET> cpAsset;
 	private final Comparator<EVENT> cpEvent;
 	
-	private SbDateIntervalHandler sbDateHandler; public SbDateIntervalHandler getSbDateHandler() {return sbDateHandler;}
+	private final SbDateIntervalHandler sbDateHandler; public SbDateIntervalHandler getSbDateHandler() {return sbDateHandler;}
 	private final SbMultiHandler<ESTATUS> sbhEventStatus; public SbMultiHandler<ESTATUS> getSbhEventStatus() {return sbhEventStatus;}
 	private final UiSlotWidthHandler slotHandler; public UiSlotWidthHandler getSlotHandler() {return slotHandler;}
 	private final UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,USER,FRC,UP> uiHelper; public UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,USER,FRC,UP> getUiHelper() {return uiHelper;}
@@ -117,7 +117,7 @@ public abstract class AbstractAomMaintenanceBean <L extends JeeslLang, D extends
 	
 	protected <E extends Enum<E>> void postConstructAssetMaintenance(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 									JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
-									JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
+									JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
 									E eRealm, RREF rref
 									)
 	{

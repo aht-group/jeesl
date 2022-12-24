@@ -1,14 +1,17 @@
 package org.jeesl.web.model.module.aom;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.bean.module.aom.JeeslAssetCacheBean;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.util.JeeslLazyListHandler;
+import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -27,31 +30,43 @@ public class AssetCompanyLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 	private final JeeslLazyListHandler<COMPANY> llh;
 //	private final JeeslEjbFilter<COMPANY> filter;
 
-	private JeeslAssetCacheBean<?,?,REALM,RREF,COMPANY,SCOPE,?,?,?,?,?,?> cache;
+	private JeeslAomCompanyCache<REALM,COMPANY> cache; public void setCache(JeeslAomCompanyCache<REALM,COMPANY> cache) {this.cache = cache;}
 
 	private RREF rref;
+	private TenantIdentifier<REALM> identifier;
 
 	public AssetCompanyLazyModel()
 	{
 		logger.info("instantiated: "+this.getClass().getSimpleName());
         llh = new JeeslLazyListHandler<>();
 	}
-
-	@Override public COMPANY getRowData(String rowKey){return llh.getRowData(cache.cachedCompany().get(rref),rowKey);}
-    @Override public Object getRowKey(COMPANY account) {return llh.getRowKey(account);}
-
-    public void setScope(JeeslAssetCacheBean<?,?,REALM,RREF,COMPANY,SCOPE,?,?,?,?,?,?> cache, RREF rref)
+	
+//    public void setScope(JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,?,?,?,?,?,?> bCache, RREF rref)
+//    {
+//    	this.bCache=bCache;
+//    	this.rref=rref;
+//    	llh.clear();
+//    }
+    public void updateIdentifier(TenantIdentifier<REALM> identifier)
     {
-    	this.cache=cache;
-    	this.rref=rref;
+    	this.identifier=identifier;
     	llh.clear();
     }
 
+	@Override public Object getRowKey(COMPANY account) {return llh.getRowKey(account);}
+	@Override public COMPANY getRowData(String rowKey)
+	{
+		return llh.getRowData(cache.getCachedCompanies().get(identifier), rowKey);
+	}
+   
     @Override
 	public List<COMPANY> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
 	{
 		llh.clear();
-		for(COMPANY item : cache.cachedCompany().get(rref))
+		List<COMPANY> list = new ArrayList<>();
+		list.addAll(cache.getCachedCompanies().get(identifier));
+		
+		for(COMPANY item : list)
 		{
 //			if(filter.matches(filters,item))
 			{llh.add(item);}

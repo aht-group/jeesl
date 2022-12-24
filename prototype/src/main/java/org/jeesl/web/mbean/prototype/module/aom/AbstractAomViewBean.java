@@ -73,7 +73,7 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 	private JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic;
 
 	@SuppressWarnings("unused")
-	private JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
+	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
 
 	private final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
@@ -95,7 +95,7 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 	}
 
 	protected void postConstructAomView(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-									JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
+									JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
 									JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
 									JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
 									REALM realm)

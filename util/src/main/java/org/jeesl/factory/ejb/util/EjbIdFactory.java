@@ -180,6 +180,13 @@ public class EjbIdFactory
 		if(index>=0) {list.set(index,ejb);}
 	}
 	
+	public static <T extends EjbWithId> void replaceOrAdd(List<T> list, T ejb)
+	{
+		int index = list.indexOf(ejb);
+		if(index>=0) {list.set(index,ejb);}
+		else {list.add(ejb);}
+	}
+	
 	public static <T extends EjbWithId> void remove(List<T> list, T ejb)
 	{
 		int index = list.indexOf(ejb);

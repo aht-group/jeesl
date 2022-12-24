@@ -17,18 +17,8 @@ import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
-import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
-import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
-import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
-import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
@@ -36,8 +26,6 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
@@ -69,7 +57,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	private JeeslAssetFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAsset;
 	private JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic;
 
-	private JeeslAssetCacheBean<L,D,REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache;
+	private JeeslAssetCacheBean<REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache;
 
 	private final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;
 	private final AomFactoryBuilder<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAsset;
@@ -95,7 +83,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	}
 
 	public void postConstructAssetType(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslAssetCacheBean<L,D,REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache,
+									JeeslAssetCacheBean<REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache,
 									JeeslAssetFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAsset,
 									JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
 									REALM realm)

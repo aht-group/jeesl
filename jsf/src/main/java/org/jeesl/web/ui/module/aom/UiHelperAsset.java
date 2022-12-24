@@ -46,7 +46,7 @@ public class UiHelperAsset <L extends JeeslLang, D extends JeeslDescription,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(UiHelperAsset.class);
 		
-	private JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache; public void setCacheBean(JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache) {this.bCache = bCache;}
+	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache; public void setCacheBean(JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache) {this.bCache = bCache;}
 	
 	private final List<COMPANY> companies; public List<COMPANY> getCompanies() {return companies;}
 	
@@ -82,7 +82,8 @@ public class UiHelperAsset <L extends JeeslLang, D extends JeeslDescription,
 		{
 			if(isQuote)
 			{
-				companies.addAll(bCache.cachedCompany().get(rref));
+				logger.warn("NYI companies for quote!");
+//				companies.addAll(bCache.cachedCompany().get(rref));
 			}
 			else if(isProcurement)
 			{

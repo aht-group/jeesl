@@ -10,6 +10,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
@@ -19,6 +20,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.many.JeeslSelectManyCodeHandler;
+import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.web.model.module.aom.AssetCompanyLazyModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +38,7 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomCompanyController.class);
 	
 	protected JeeslAssetFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAsset;
-	private JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,?,?,?,?,?,?> bCache;
+	private JeeslAomCompanyCache<REALM,COMPANY> cache;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?,?,?> fbAsset;
 	
@@ -44,8 +46,8 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 	
 	private AssetCompanyLazyModel<REALM,RREF,COMPANY,SCOPE> lazyCompany; public AssetCompanyLazyModel<REALM,RREF,COMPANY,SCOPE> getLazyCompany() {return lazyCompany;}
 
-    protected REALM realm; public REALM getRealm() {return realm;}
 	private RREF rref; public RREF getRref() {return rref;}
+	private TenantIdentifier<REALM> identifier;
 	private COMPANY company; public COMPANY getCompany() {return company;} public void setCompany(COMPANY company) {this.company = company;}
 
 	public JeeslAomCompanyController(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?,?,?> fbAsset)
@@ -56,36 +58,38 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 		lazyCompany = new AssetCompanyLazyModel<>();
 	}
 
-	public void postConstructAssetCompany(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-													JeeslAssetCacheBean<L,D,REALM,RREF,COMPANY,SCOPE,?,?,?,?,?,?> bCache,
-													JeeslAssetFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAsset,
-													REALM realm)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
+			JeeslAomCompanyCache<REALM,COMPANY> cache,
+			JeeslAssetFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAsset,
+			REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fAsset=fAsset;
-		this.bCache=bCache;
+		this.cache=cache;
+		lazyCompany.setCache(cache);
+		identifier = TenantIdentifier.instance(realm);
 		smh.updateList(fAsset.allOrderedPosition(fbAsset.getClassScope()));
-		this.realm=realm;
 	}
 	
 	public void updateRealmReference(RREF rref)
 	{
 		this.rref=rref;
-		lazyCompany.setScope(bCache,rref);
+		identifier.withRref(rref);
+		lazyCompany.updateIdentifier(identifier);
 	}
 	
 	public void addManufacturer() throws JeeslNotFoundException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbAsset.getClassCompany()));}
 		smh.clear();
-		company = fbAsset.ejbManufacturer().build(realm,rref);
+		company = fbAsset.ejbManufacturer().build(identifier);
 	}
 	
 	public void saveManufacturer() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		company.setScopes(smh.toEjb());
 		company = fAsset.save(company);
-		bCache.update(realm,rref,company);
+		cache.update(identifier,company);
 	}
 	
 	public void selectManufacturer() throws JeeslConstraintViolationException, JeeslLockingException
