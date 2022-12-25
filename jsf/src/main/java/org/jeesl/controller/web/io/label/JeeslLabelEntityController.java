@@ -82,7 +82,6 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	
 	private JeeslLabelBean<RE> bLabel;
 	
-
 	protected final SbSingleHandler<RC> sbhCategory; public SbSingleHandler<RC> getSbhCategory() {return sbhCategory;}
 	protected final SbSingleHandler<ERD> sbhDiagram; public SbSingleHandler<ERD> getSbhDiagram() {return sbhDiagram;}
 	
