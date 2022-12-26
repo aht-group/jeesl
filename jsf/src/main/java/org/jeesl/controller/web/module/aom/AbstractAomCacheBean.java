@@ -1,4 +1,4 @@
-package org.jeesl.web.mbean.prototype.module.aom;
+package org.jeesl.controller.web.module.aom;
 
 import java.util.HashMap;
 import java.util.List;

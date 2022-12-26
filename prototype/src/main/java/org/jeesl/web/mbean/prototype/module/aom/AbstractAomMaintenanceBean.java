@@ -9,14 +9,13 @@ import java.util.List;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
-import org.jeesl.api.handler.sb.SbDateIntervalSelection;
-import org.jeesl.controller.handler.sb.SbDateIntervalHandler;
-import org.jeesl.controller.handler.ui.UiSlotWidthHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.ejb.module.asset.EjbAssetEventFactory;
+import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
 import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
@@ -37,7 +36,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
 import org.jeesl.util.comparator.ejb.module.asset.EjbAssetComparator;
 import org.jeesl.util.comparator.ejb.module.asset.EjbEventComparator;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
@@ -64,7 +65,7 @@ public abstract class AbstractAomMaintenanceBean <L extends JeeslLang, D extends
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
 					extends AbstractAdminBean<L,D,LOC>
-					implements Serializable,SbToggleBean,SbDateIntervalSelection
+					implements Serializable,SbToggleBean,SbDateSelectionBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAomMaintenanceBean.class);
@@ -78,7 +79,7 @@ public abstract class AbstractAomMaintenanceBean <L extends JeeslLang, D extends
 	private final Comparator<ASSET> cpAsset;
 	private final Comparator<EVENT> cpEvent;
 	
-	private final SbDateIntervalHandler sbDateHandler; public SbDateIntervalHandler getSbDateHandler() {return sbDateHandler;}
+	private final SbDateHandler sbDateHandler; public SbDateHandler getSbDateHandler() {return sbDateHandler;}
 	private final SbMultiHandler<ESTATUS> sbhEventStatus; public SbMultiHandler<ESTATUS> getSbhEventStatus() {return sbhEventStatus;}
 	private final UiSlotWidthHandler slotHandler; public UiSlotWidthHandler getSlotHandler() {return slotHandler;}
 	private final UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,USER,FRC,UP> uiHelper; public UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,USER,FRC,UP> getUiHelper() {return uiHelper;}
@@ -108,8 +109,7 @@ public abstract class AbstractAomMaintenanceBean <L extends JeeslLang, D extends
 		slotHandler.set(12);
 		
 		sbhEventStatus = new SbMultiHandler<>(fbAsset.getClassEventStatus(),this);
-		sbDateHandler = new SbDateIntervalHandler(this);
-		sbDateHandler.setEnforceStartOfDay(true);
+		sbDateHandler = SbDateHandler.instance(this);
 		sbDateHandler.initWeeks(0,4);
 		
 		events = new ArrayList<>();
@@ -139,7 +139,7 @@ public abstract class AbstractAomMaintenanceBean <L extends JeeslLang, D extends
 	}
 	
 	@Override public void toggled(Class<?> c){reloadEvents();}
-	@Override public void callbackDateChanged(){reloadEvents();}
+	@Override public void callbackDateChanged(SbDateSelection handler) {reloadEvents();}
 	
 	private void reloadEvents()
 	{

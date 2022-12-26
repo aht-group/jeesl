@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.ui;
+package org.jeesl.jsf.handler.ui;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package org.jeesl.web.mbean.prototype.module.aom;
+package org.jeesl.controller.web.module.aom;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -7,11 +7,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
+import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -24,6 +24,7 @@ import org.jeesl.interfaces.bean.th.ThMultiFilter;
 import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
 import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
@@ -49,7 +50,6 @@ import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.jeesl.util.comparator.ejb.module.asset.EjbAssetComparator;
 import org.jeesl.util.comparator.ejb.module.asset.EjbEventComparator;
-import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.jeesl.web.model.module.aom.AssetEventLazyModel;
 import org.jeesl.web.ui.module.aom.UiHelperAsset;
 import org.primefaces.event.DragDropEvent;
@@ -64,7 +64,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class AbstractAomAssetBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
 										COMPANY extends JeeslAomCompany<REALM,SCOPE>,
 										SCOPE extends JeeslAomScope<L,D,SCOPE,?>,
@@ -80,11 +80,11 @@ public class AbstractAomAssetBean <L extends JeeslLang, D extends JeeslDescripti
 										USER extends JeeslSimpleUser,
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
-					extends AbstractAdminBean<L,D,LOC>
+					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable,ThMultiFilterBean,SbToggleBean,SbSingleBean,JeeslFileRepositoryCallback
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractAomAssetBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslAomAssetController.class);
 	
 	protected JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset;
 	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
@@ -101,7 +101,7 @@ public class AbstractAomAssetBean <L extends JeeslLang, D extends JeeslDescripti
     private final ThMultiFilterHandler<ETYPE> thfEventType; public ThMultiFilterHandler<ETYPE> getThfEventType() {return thfEventType;}
     private final SbMultiHandler<ETYPE> sbhEventType; public SbMultiHandler<ETYPE> getSbhEventType() {return sbhEventType;}
     private final SbSingleHandler<ALEVEL> sbhView; public SbSingleHandler<ALEVEL> getSbhView() {return sbhView;}
-    private JeeslFileRepositoryHandler<?,FRC,?> frh; public JeeslFileRepositoryHandler<?,FRC,?> getFrh() {return frh;}  protected void setFrh(JeeslFileRepositoryHandler<?,FRC,?> frh) {this.frh = frh;}
+    private JeeslFileRepositoryHandler<?,FRC,?> frh; public JeeslFileRepositoryHandler<?,FRC,?> getFrh() {return frh;}  public void setFrh(JeeslFileRepositoryHandler<?,FRC,?> frh) {this.frh = frh;}
     
     private final AssetEventLazyModel<ASSET,EVENT,ETYPE,ESTATUS,USER> lazyEvents; public AssetEventLazyModel<ASSET,EVENT,ETYPE,ESTATUS,USER> getLazyEvents() {return lazyEvents;}
     
@@ -118,7 +118,7 @@ public class AbstractAomAssetBean <L extends JeeslLang, D extends JeeslDescripti
     private EVENT event; public EVENT getEvent() {return event;} public void setEvent(EVENT event) {this.event = event;}
     private MT markupType;
     
-	public AbstractAomAssetBean(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset)
+	public JeeslAomAssetController(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset)
 	{
 		super(fbAsset.getClassL(),fbAsset.getClassD());
 		this.fbAsset=fbAsset;
@@ -139,12 +139,12 @@ public class AbstractAomAssetBean <L extends JeeslLang, D extends JeeslDescripti
 		sbhView = new SbSingleHandler<>(fbAsset.getClassAssetLevel(),this);
 	}
 	
-	protected void postConstructAsset(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+	public void postConstructAsset(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 						JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
 						JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
 						REALM realm)
 	{
-		super.initJeeslAdmin(bTranslation,bMessage);
+		super.postConstructWebController(lp,bMessage);
 		this.fAsset=fAsset;
 		this.bCache=bCache;
 		uiHelper.setCacheBean(bCache);
@@ -163,7 +163,7 @@ public class AbstractAomAssetBean <L extends JeeslLang, D extends JeeslDescripti
 								);
 	}
 	
-	protected void updateRealmReference(RREF rref)
+	public void updateRealmReference(RREF rref)
 	{
 		this.rref=rref;
 		sbhView.setList(fAsset.fAomViews(realm,rref));
