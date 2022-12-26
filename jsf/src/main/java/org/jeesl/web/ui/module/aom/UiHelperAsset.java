@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.api.bean.module.aom.JeeslAssetCacheBean;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;

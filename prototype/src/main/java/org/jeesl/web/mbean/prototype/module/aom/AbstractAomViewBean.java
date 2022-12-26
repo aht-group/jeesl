@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
-import org.jeesl.api.bean.module.aom.JeeslAssetCacheBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
@@ -13,6 +12,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
+import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;

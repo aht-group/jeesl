@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
-import org.jeesl.api.bean.module.aom.JeeslAssetCacheBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
@@ -23,6 +22,7 @@ import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.th.ThMultiFilter;
 import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
+import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;

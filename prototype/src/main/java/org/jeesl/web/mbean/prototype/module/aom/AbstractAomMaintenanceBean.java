@@ -7,7 +7,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
-import org.jeesl.api.bean.module.aom.JeeslAssetCacheBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.api.handler.sb.SbDateIntervalSelection;
@@ -18,6 +17,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.ejb.module.asset.EjbAssetEventFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;

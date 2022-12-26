@@ -1,4 +1,4 @@
-package org.jeesl.api.bean.module.aom;
+package org.jeesl.interfaces.cache.module.aom;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,8 +26,6 @@ public interface JeeslAssetCacheBean <REALM extends JeeslTenantRealm<?,?,REALM,?
 										UP extends JeeslAomEventUpload<?,?,UP,?>>
 								extends Serializable
 {
-//	void x();
-	
 	Map<REALM,Map<RREF,List<ATYPE>>> getMapAssetType1();
 	Map<REALM,Map<RREF,List<ATYPE>>> getMapAssetType2();
 	
@@ -35,8 +33,6 @@ public interface JeeslAssetCacheBean <REALM extends JeeslTenantRealm<?,?,REALM,?
 	
 	Map<RREF,List<COMPANY>> getMapVendor();
 	Map<RREF,List<COMPANY>> getMapMaintainer();
-	
-	void update(REALM realm, RREF rref, COMPANY company);
 	
 	void update(REALM realm, RREF rref, VIEW view, ATYPE type);
 	void delete(REALM realm, RREF rref, VIEW view, ATYPE type);

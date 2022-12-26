@@ -1,4 +1,4 @@
-package org.jeesl.controller.cache;
+package org.jeesl.controller.cache.module.aom;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -17,21 +17,21 @@ import org.slf4j.LoggerFactory;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 
-public class JeeslAomLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,?>,
+public class JeeslAomCompanyLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 									COMPANY extends JeeslAomCompany<REALM,?>>
 						implements JeeslAomCompanyCache<REALM,COMPANY>
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslAomLoadingCache.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslAomCompanyLoadingCache.class);
 	public static final long serialVersionUID=1;
 	
-	private JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom;
+//	private JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom;
 	
 	private LoadingCache<TenantIdentifier<REALM>,List<COMPANY>> cacheCompanies;
 	private Map<TenantIdentifier<REALM>,List<COMPANY>> cachedCompanies;
 	
-	public JeeslAomLoadingCache(JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom)
+	public JeeslAomCompanyLoadingCache(JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom)
 	{
-		this.fAom=fAom;
+//		this.fAom=fAom;
 		cacheCompanies = Caffeine.newBuilder()
 			    .maximumSize(10_000)
 			    .expireAfterWrite(Duration.ofMinutes(5))

@@ -2,6 +2,7 @@ package org.jeesl.factory.ejb.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -182,6 +183,7 @@ public class EjbIdFactory
 	
 	public static <T extends EjbWithId> void replaceOrAdd(List<T> list, T ejb)
 	{
+//		if(!Collections.replaceAll(mapCompany.get(rref),company,company)){mapCompany.get(rref).add(company);}
 		int index = list.indexOf(ejb);
 		if(index>=0) {list.set(index,ejb);}
 		else {list.add(ejb);}

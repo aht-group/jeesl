@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.jeesl.api.bean.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
+import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;

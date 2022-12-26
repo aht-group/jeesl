@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jeesl.api.bean.module.aom.JeeslAssetCacheBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
+import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
@@ -196,11 +196,6 @@ public abstract class AbstractAssetCacheBean <L extends JeeslLang, D extends Jee
 		}		
 	}
 	
-	@Override public void update(REALM realm, RREF rref, COMPANY company)
-	{
-		if(!Collections.replaceAll(mapCompany.get(rref),company,company)){mapCompany.get(rref).add(company);}
-		reloadCompanies(realm,rref);
-	}
 	@Override public void update(REALM realm, RREF rref, VIEW view, ATYPE type)
 	{
 		if(view.getTree().equals(JeeslAomView.Tree.hierarchy.toString()))

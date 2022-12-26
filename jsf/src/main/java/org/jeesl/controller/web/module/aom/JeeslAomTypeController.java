@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.jeesl.api.bean.module.aom.JeeslAssetCacheBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
@@ -16,6 +15,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
@@ -45,7 +45,6 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 										S extends EjbWithId, G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
 										GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
-										
 										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,G>,
 										VIEW extends JeeslAomView<L,D,REALM,G>>
 					extends AbstractJeeslWebController<L,D,LOC>
