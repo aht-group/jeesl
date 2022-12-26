@@ -46,7 +46,8 @@ public interface JeeslAssetFacade <L extends JeeslLang, D extends JeeslDescripti
 	<RREF extends EjbWithId> VIEW fcAomView(REALM realm, RREF rref, JeeslAomView.Tree tree);
 	<RREF extends EjbWithId> List<VIEW> fAomViews(REALM realm, RREF rref);
 	
-	<RREF extends EjbWithId> ATYPE fcAomRootType(REALM realm, RREF rref, VIEW view);
+	List<ATYPE> fAomAssetTypes(TenantIdentifier<REALM> identifier, VIEW view);
+//	<RREF extends EjbWithId> ATYPE fcAomRootType(REALM realm, RREF rref, VIEW view);
 	
 	<RREF extends EjbWithId> List<COMPANY> fAomCompanies(TenantIdentifier<REALM> identifier);
 	

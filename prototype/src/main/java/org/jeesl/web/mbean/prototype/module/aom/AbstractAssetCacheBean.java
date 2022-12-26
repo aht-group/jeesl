@@ -124,19 +124,21 @@ public abstract class AbstractAssetCacheBean <L extends JeeslLang, D extends Jee
 		{
 			mapAssetType1.get(realm).get(rref).clear();
 			VIEW view = fAsset.fcAomView(realm,rref,JeeslAomView.Tree.hierarchy);
-			ATYPE root = fAsset.fcAomRootType(realm,rref,view);
-			reloadTypes1(fAsset,realm,rref,fAsset.allForParent(fbAsset.getClassAssetType(),root));
+			
+			mapAssetType1.get(realm).get(rref).addAll(fAsset.fAomAssetTypes(TenantIdentifier.instance(realm).withRref(rref),view));
+//			ATYPE root = fAsset.fcAomRootType(realm,rref,view);
+//			reloadTypes1(fAsset,realm,rref,fAsset.allForParent(fbAsset.getClassAssetType(),root));
 			logger.info(AbstractLogMessage.reloaded(fbAsset.getClassAssetType(), mapAssetType1.get(realm).get(rref), rref)+" in realm "+realm.toString());
 		}
 	}
-	private void reloadTypes1(JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,?,UP> fAsset, REALM realm, RREF rref, List<ATYPE> types)
-	{
-		for(ATYPE type : types)
-		{
-			mapAssetType1.get(realm).get(rref).add(type);
-			reloadTypes1(fAsset,realm,rref,fAsset.allForParent(fbAsset.getClassAssetType(),type));
-		}
-	}
+//	private void reloadTypes1(JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,?,UP> fAsset, REALM realm, RREF rref, List<ATYPE> types)
+//	{
+//		for(ATYPE type : types)
+//		{
+//			mapAssetType1.get(realm).get(rref).add(type);
+//			reloadTypes1(fAsset,realm,rref,fAsset.allForParent(fbAsset.getClassAssetType(),type));
+//		}
+//	}
 	
 	private void reloadAssetTypes2(JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,?,UP> fAsset, REALM realm, RREF rref, boolean force)
 	{		
@@ -147,21 +149,22 @@ public abstract class AbstractAssetCacheBean <L extends JeeslLang, D extends Jee
 			try
 			{
 				VIEW view = fAsset.fAomView(realm,rref,JeeslAomView.Tree.type1);
-				ATYPE root = fAsset.fcAomRootType(realm,rref,view);
-				reloadTypes2(fAsset,realm,rref,fAsset.allForParent(fbAsset.getClassAssetType(),root));
+				mapAssetType2.get(realm).get(rref).addAll(fAsset.fAomAssetTypes(TenantIdentifier.instance(realm).withRref(rref),view));
+//				ATYPE root = fAsset.fcAomRootType(realm,rref,view);
+//				reloadTypes2(fAsset,realm,rref,fAsset.allForParent(fbAsset.getClassAssetType(),root));
 				logger.info(AbstractLogMessage.reloaded(fbAsset.getClassAssetType(), mapAssetType2.get(realm).get(rref), rref)+" in realm "+realm.toString());
 			}
 			catch (JeeslNotFoundException e) {}
 		}
 	}
-	private void reloadTypes2(JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,?,UP> fAsset, REALM realm, RREF rref, List<ATYPE> types)
-	{
-		for(ATYPE type : types)
-		{
-			mapAssetType2.get(realm).get(rref).add(type);
-			reloadTypes2(fAsset,realm,rref,fAsset.allForParent(fbAsset.getClassAssetType(),type));
-		}
-	}
+//	private void reloadTypes2(JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,?,UP> fAsset, REALM realm, RREF rref, List<ATYPE> types)
+//	{
+//		for(ATYPE type : types)
+//		{
+//			mapAssetType2.get(realm).get(rref).add(type);
+//			reloadTypes2(fAsset,realm,rref,fAsset.allForParent(fbAsset.getClassAssetType(),type));
+//		}
+//	}
 	
 	private void initMap(REALM realm, RREF rref, Map<REALM,Map<RREF,List<ATYPE>>> map)
 	{

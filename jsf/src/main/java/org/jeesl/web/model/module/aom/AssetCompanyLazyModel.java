@@ -30,7 +30,7 @@ public class AssetCompanyLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 	private final JeeslLazyListHandler<COMPANY> llh;
 //	private final JeeslEjbFilter<COMPANY> filter;
 
-	private JeeslAomCompanyCache<REALM,COMPANY> cache; public void setCache(JeeslAomCompanyCache<REALM,COMPANY> cache) {this.cache = cache;}
+	private JeeslAomCompanyCache<REALM,COMPANY,SCOPE> cache; public void setCache(JeeslAomCompanyCache<REALM,COMPANY,SCOPE> cache) {this.cache = cache;}
 
 	private RREF rref;
 	private TenantIdentifier<REALM> identifier;
@@ -56,7 +56,7 @@ public class AssetCompanyLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 	@Override public Object getRowKey(COMPANY account) {return llh.getRowKey(account);}
 	@Override public COMPANY getRowData(String rowKey)
 	{
-		return llh.getRowData(cache.getCachedCompanies().get(identifier), rowKey);
+		return llh.getRowData(cache.getCachedAllCompanies().get(identifier), rowKey);
 	}
    
     @Override
@@ -64,7 +64,7 @@ public class AssetCompanyLazyModel <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 	{
 		llh.clear();
 		List<COMPANY> list = new ArrayList<>();
-		list.addAll(cache.getCachedCompanies().get(identifier));
+		list.addAll(cache.getCachedAllCompanies().get(identifier));
 		
 		for(COMPANY item : list)
 		{

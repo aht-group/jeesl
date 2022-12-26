@@ -11,6 +11,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
+import org.jeesl.interfaces.model.with.parent.EjbWithParentId;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
@@ -21,7 +22,7 @@ public interface JeeslAomAssetType <L extends JeeslLang, D extends JeeslDescript
 							VIEW extends JeeslAomView<L,D,REALM,G>,
 							G extends JeeslGraphic<?,?,?>>
 			extends Serializable,EjbSaveable,EjbRemoveable,
-					EjbWithParentAttributeResolver,
+					EjbWithParentAttributeResolver,EjbWithParentId<ATYPE>,
 					EjbWithNonUniqueCode,EjbWithPosition,EjbWithLangDescription<L,D>,
 					EjbWithCodeGraphic<G>
 					

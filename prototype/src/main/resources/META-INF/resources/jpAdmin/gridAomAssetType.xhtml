@@ -16,9 +16,9 @@
 	<j:row>
 		<j:slot id="sAssets" width="7">
 			<h:form id="fTree" >
-				<p:panel header="#{msg.jeeslCmsDocumentStructure}" styleClass="jeeslTree" >
+				<p:panel header="#{msg.jeeslCmsDocumentStructure}" styleClass="jeesl-tree" >
 					<f:facet name="actions">
-						<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addType()}" update=":#{cc.id}:sType" tooltip="#{msg.jeeslAomTypeAdd}"/>
+						<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addType()}" update=":#{cc.id}:sType" tooltip="#{msg.jeeslAomTypeAdd}"/>
 					</f:facet>
 					<p:tree id="tree1" value="#{cc.attrs.bean.tree}" var="node" 
 							selection="#{cc.attrs.bean.node}" selectionMode="single"
@@ -37,20 +37,20 @@
 		</j:slot>
 		<j:slot id="sType" width="5">
 			<h:form id="fType" rendered="#{not empty cc.attrs.bean.type}">
-				<p:panel header="#{msg.jeeslAomType}" styleClass="jeeslPanel">
+				<p:panel header="#{msg.jeeslAomType}" styleClass="jeesl-panel">
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelType()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveType()}" update=":#{cc.id}:grid" />
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteType()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.type.id gt 0}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					<j:inputGrid>
 						<p:outputLabel value="#{msg.jeeslCode}"/>
 						<jtp:inputText value="#{cc.attrs.bean.type.code}"/>
 						
 						<p:outputLabel value="#{msg.jeeslIcon}" rendered="#{cc.attrs.bean.type.id gt 0}"/>
 						<jtp:symbolizer value="#{cc.attrs.bean.type}" rendered="#{cc.attrs.bean.type.id gt 0}"/>
-					</p:panelGrid>
+					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.bean.type}" withDescription="true"/>
 				</p:panel>
 			</h:form>

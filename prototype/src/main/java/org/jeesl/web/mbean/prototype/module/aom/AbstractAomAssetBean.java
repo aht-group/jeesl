@@ -255,9 +255,9 @@ public class AbstractAomAssetBean <L extends JeeslLang, D extends JeeslDescripti
 			sb.append(" alevel:");if(sbhView.getSelection()!=null) {sb.append(sbhView.getSelection());}else {sb.append("null");}
 			logger.info(sb.toString());
 		}
-		ATYPE type = fAsset.fcAomRootType(realm,rref,sbhView.getSelection());
+//		ATYPE type = fAsset.fcAomRootType(realm,rref,sbhView.getSelection());
 		reset(true,true,true);
-		asset = efAsset.build(realm,rref,parent,status,type);
+		asset = efAsset.build(realm,rref,parent,status,null);
 	}
 	
 	public void saveAsset() throws JeeslConstraintViolationException, JeeslLockingException

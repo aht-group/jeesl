@@ -10,7 +10,6 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
-import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
@@ -38,7 +37,7 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomCompanyController.class);
 	
 	protected JeeslAssetFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAsset;
-	private JeeslAomCompanyCache<REALM,COMPANY> cache;
+	private JeeslAomCompanyCache<REALM,COMPANY,SCOPE> cache;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?,?,?> fbAsset;
 	
@@ -46,7 +45,6 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 	
 	private AssetCompanyLazyModel<REALM,RREF,COMPANY,SCOPE> lazyCompany; public AssetCompanyLazyModel<REALM,RREF,COMPANY,SCOPE> getLazyCompany() {return lazyCompany;}
 
-	private RREF rref; public RREF getRref() {return rref;}
 	private TenantIdentifier<REALM> identifier;
 	private COMPANY company; public COMPANY getCompany() {return company;} public void setCompany(COMPANY company) {this.company = company;}
 
@@ -59,7 +57,7 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 	}
 
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslAomCompanyCache<REALM,COMPANY> cache,
+			JeeslAomCompanyCache<REALM,COMPANY,SCOPE> cache,
 			JeeslAssetFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAsset,
 			REALM realm)
 	{
@@ -73,7 +71,6 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 	
 	public void updateRealmReference(RREF rref)
 	{
-		this.rref=rref;
 		identifier.withRref(rref);
 		lazyCompany.updateIdentifier(identifier);
 	}
@@ -88,8 +85,8 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 	public void saveManufacturer() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		company.setScopes(smh.toEjb());
-		company = fAsset.save(company);
-		cache.update(identifier,company);
+		company = fAsset.saveTransaction(company);
+		cache.invalidateCompanyCache(identifier);
 	}
 	
 	public void selectManufacturer() throws JeeslConstraintViolationException, JeeslLockingException

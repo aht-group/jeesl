@@ -173,10 +173,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	public void clear()
 	{
 		list.clear();
-		logger.info("calling clear list done");
-		logger.info("" + list.size());
 		selection = null;
-		logger.info("calling clear selection done");
 	}
 
 	public boolean getHasNone(){return list.isEmpty();}

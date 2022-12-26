@@ -3,7 +3,6 @@ package org.jeesl.controller.web.module.aom;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
@@ -30,6 +29,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.TreeHelper;
+import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.NodeCollapseEvent;
 import org.primefaces.event.NodeExpandEvent;
@@ -66,9 +66,8 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	private TreeNode tree; public TreeNode getTree() {return tree;}
     private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
 
-    private REALM realm;
     private RREF rref;
-    private ATYPE root;
+    private TenantIdentifier<REALM> identifier;
     private ATYPE type;  public ATYPE getType() {return type;} public void setType(ATYPE type) {this.type = type;}
 
 	public JeeslAomTypeController(AomFactoryBuilder<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAsset,
@@ -91,14 +90,15 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 		this.bCache=bCache;
 		this.fAsset=fAsset;
 		this.fGraphic=fGraphic;
-		this.realm=realm;
+		identifier = TenantIdentifier.instance(realm);
 	}
 
 	public void updateRealmReference(RREF rref)
 	{
+		identifier.withRref(rref);
 		this.rref=rref;
 		sbhView.clear();
-		for(VIEW v : fAsset.fAomViews(realm,rref))
+		for(VIEW v : fAsset.fAomViews(identifier.getRealm(),rref))
 		{
 			if(v.getTree().equals(JeeslAomView.Tree.hierarchy.toString())) {sbhView.getList().add(v);}
 			else if(v.getTree().equals(JeeslAomView.Tree.type2.toString())) {sbhView.getList().add(v);}
@@ -112,18 +112,27 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 		reloadTree();
 	}
 
-	@SuppressWarnings("unchecked")
+//	@SuppressWarnings("unchecked")
 	private void reloadTree()
 	{
-		List<Long> expandedNodes = TreeHelper.findNodes(this.tree, node -> node.isExpanded()).stream().map(node -> (ATYPE)node.getData()).filter(data -> data != null).map(data -> data.getId()).collect(Collectors.toList());
+		this.type = null;
+//		List<Long> expandedNodes = TreeHelper.findNodes(this.tree, node -> node.isExpanded()).stream().map(node -> (ATYPE)node.getData()).filter(data -> data != null).map(data -> data.getId()).collect(Collectors.toList());
 
-		root = fAsset.fcAomRootType(realm,rref,sbhView.getSelection());
+//		root = fAsset.fcAomRootType(identifier.getRealm(),rref,sbhView.getSelection());
 
 		tree = new DefaultTreeNode();
-		this.type = null;
-		TreeHelper.buildTree(this.fAsset, this.tree, this.fAsset.allForParent(this.fbAsset.getClassAssetType(), this.root), this.fbAsset.getClassAssetType());
-
-		TreeHelper.findNodes(this.tree, node -> node.getData() != null && expandedNodes.contains(((ATYPE)node.getData()).getId())).forEach(node -> node.setExpanded(true));
+		tree.getChildren().clear();
+			
+		List<ATYPE> all = fAsset.fAomAssetTypes(identifier,sbhView.getSelection());
+		logger.info("List.All: "+all.size());
+		logger.debug(fbAsset.getClassAssetType().getSimpleName()+" "+all.size());
+		TreeHelper.buildTree(tree,all,null);
+		
+//		List<ATYPE> list = this.fAsset.allForParent(this.fbAsset.getClassAssetType(), this.root);
+//		logger.info("List: "+list.size());
+//		TreeHelper.buildTree(this.fAsset, this.tree, list , this.fbAsset.getClassAssetType());
+//
+//		TreeHelper.findNodes(this.tree, node -> node.getData()!=null && expandedNodes.contains(((ATYPE)node.getData()).getId())).forEach(node -> node.setExpanded(true));
 	}
 
 	private void reset(boolean rType)
@@ -133,8 +142,8 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 
 	public void addType()
 	{
-		ATYPE parent=null; if(type!=null) {parent = type;} else {parent = root;}
-		type = fbAsset.ejbType().build(realm,rref,sbhView.getSelection(),parent, UUID.randomUUID().toString());
+		ATYPE parent=null; if(type!=null) {parent = type;}
+		type = fbAsset.ejbType().build(identifier.getRealm(),rref,sbhView.getSelection(),parent, UUID.randomUUID().toString());
 		type.setName(efLang.buildEmpty(lp.getLocales()));
 		type.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
@@ -152,7 +161,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	{
 		type = fAsset.save(type);
 		reloadTree();
-		bCache.update(realm,rref,sbhView.getSelection(),type);
+		bCache.update(identifier.getRealm(),rref,sbhView.getSelection(),type);
 	}
 
 	public void deleteType() throws JeeslLockingException
@@ -160,7 +169,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 		try
 		{
 			fAsset.rm(type);
-			bCache.delete(realm,rref,sbhView.getSelection(),type);
+			bCache.delete(identifier.getRealm(),rref,sbhView.getSelection(),type);
 			reloadTree();
 			reset(true);
 		}

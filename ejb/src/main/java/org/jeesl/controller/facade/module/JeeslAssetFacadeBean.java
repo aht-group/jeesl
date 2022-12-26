@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
@@ -41,8 +41,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.StringUtil;
 
 public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>,
@@ -166,7 +164,9 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		catch (NoResultException ex)
 		{
 			VIEW view = this.fcAomView(realm, rref, JeeslAomView.Tree.hierarchy);
-			ATYPE type = this.fcAomRootType(realm,rref,view);
+			
+			List<ATYPE> list = this.fAomAssetTypes(TenantIdentifier.instance(realm).withRref(rref),view);
+			ATYPE type = list.get(0);
 			STATUS status = this.fByEnum(fbAsset.getClassStatus(), JeeslAomAssetStatus.Code.na);
 			ASSET result = fbAsset.ejbAsset().build(realm,rref, null, status, type);
 			try {return this.save(result);}
@@ -198,52 +198,75 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		TypedQuery<ASSET> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
 	}
-
-	@Override public <RREF extends EjbWithId> ATYPE fcAomRootType(REALM realm, RREF rref, VIEW view)
+	
+	@Override
+	public List<ATYPE> fAomAssetTypes(TenantIdentifier<REALM> identifier, VIEW view)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ATYPE> cQ = cB.createQuery(fbAsset.getClassAssetType());
 		Root<ATYPE> root = cQ.from(fbAsset.getClassAssetType());
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		Expression<Long> eRefId = root.get(JeeslAomAssetType.Attributes.realmIdentifier.toString());
 		Path<REALM> pRealm = root.get(JeeslAomAssetType.Attributes.realm.toString());
+		Expression<Long> eRefId = root.get(JeeslAomAssetType.Attributes.realmIdentifier.toString());
 		Path<VIEW> pView = root.get(JeeslAomAssetType.Attributes.view.toString());
-		Path<ASSET> pParent = root.get(JeeslAomAssetType.Attributes.parent.toString());
+		Expression<Integer> ePosition = root.get(JeeslAomView.Attributes.position.toString());
 		
-		predicates.add(cB.equal(eRefId,rref.getId()));
-		predicates.add(cB.equal(pRealm,realm));
+		predicates.add(cB.equal(pRealm,identifier.getRealm()));
+		predicates.add(cB.equal(eRefId,identifier.getId()));
 		predicates.add(cB.equal(pView,view));
-		predicates.add(cB.isNull(pParent));
 		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(root);
-
-		TypedQuery<ATYPE> tQ = em.createQuery(cQ);
-		try	{return tQ.getSingleResult();}
-		catch (NoResultException e1)
-		{
-			ATYPE result = fbAsset.ejbType().build(realm,rref,view, null, "root");
-			try {return this.save(result);}
-			catch (JeeslConstraintViolationException | JeeslLockingException e2)
-			{
-				return this.fcAomRootType(realm,rref,view);
-			}
-		}
-		catch (NonUniqueResultException e)
-		{
-			e.printStackTrace();
-			logger.error(StringUtil.stars());
-			logger.error("Realm: "+realm.toString());
-			logger.error("Rref: "+rref.toString());
-			logger.error("View: "+view.toString());
-			logger.error("Parent: null");
-			
-			logger.error(StringUtil.stars());
-			logger.warn("Return null");
-			return null;
-		}
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.orderBy(cB.asc(ePosition));
+		return em.createQuery(cQ).getResultList();
 	}
+
+//	@Override public <RREF extends EjbWithId> ATYPE fcAomRootType(REALM realm, RREF rref, VIEW view)
+//	{
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<ATYPE> cQ = cB.createQuery(fbAsset.getClassAssetType());
+//		Root<ATYPE> root = cQ.from(fbAsset.getClassAssetType());
+//		List<Predicate> predicates = new ArrayList<Predicate>();
+//		
+//		Expression<Long> eRefId = root.get(JeeslAomAssetType.Attributes.realmIdentifier.toString());
+//		Path<REALM> pRealm = root.get(JeeslAomAssetType.Attributes.realm.toString());
+//		Path<VIEW> pView = root.get(JeeslAomAssetType.Attributes.view.toString());
+//		Path<ASSET> pParent = root.get(JeeslAomAssetType.Attributes.parent.toString());
+//		
+//		predicates.add(cB.equal(eRefId,rref.getId()));
+//		predicates.add(cB.equal(pRealm,realm));
+//		predicates.add(cB.equal(pView,view));
+//		predicates.add(cB.isNull(pParent));
+//		
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.select(root);
+//
+//		TypedQuery<ATYPE> tQ = em.createQuery(cQ);
+//		try	{return tQ.getSingleResult();}
+//		catch (NoResultException e1)
+//		{
+//			ATYPE result = fbAsset.ejbType().build(realm,rref,view, null, "root");
+//			try {return this.save(result);}
+//			catch (JeeslConstraintViolationException | JeeslLockingException e2)
+//			{
+//				return this.fcAomRootType(realm,rref,view);
+//			}
+//		}
+//		catch (NonUniqueResultException e)
+//		{
+//			e.printStackTrace();
+//			logger.error(StringUtil.stars());
+//			logger.error("Realm: "+realm.toString());
+//			logger.error("Rref: "+rref.toString());
+//			logger.error("View: "+view.toString());
+//			logger.error("Parent: null");
+//			
+//			logger.error(StringUtil.stars());
+//			logger.warn("Return null");
+//			return null;
+//		}
+//	}
 	
 	@Override public <RREF extends EjbWithId> List<VIEW> fAomViews(REALM realm, RREF rref)
 	{
@@ -267,10 +290,12 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 
 	@Override public <RREF extends EjbWithId> List<COMPANY> fAomCompanies(TenantIdentifier<REALM> identifier)
 	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<COMPANY> cQ = cB.createQuery(fbAsset.getClassCompany());
 		Root<COMPANY> company = cQ.from(fbAsset.getClassCompany());
-		List<Predicate> predicates = new ArrayList<Predicate>();
+		company.fetch(JeeslAomCompany.Attributes.scopes.toString(), JoinType.LEFT);
+		
 		
 		Expression<Long> eRefId = company.get(JeeslAomCompany.Attributes.realmIdentifier.toString());
 		predicates.add(cB.equal(eRefId,identifier.getId()));
@@ -280,6 +305,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(company);
+		cQ.distinct(true);
 
 		return em.createQuery(cQ).getResultList();
 	}

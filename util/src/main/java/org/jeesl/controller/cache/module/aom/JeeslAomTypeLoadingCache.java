@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.module.JeeslAssetFacade;
-import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
@@ -19,7 +18,7 @@ import com.github.benmanes.caffeine.cache.LoadingCache;
 
 public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 									COMPANY extends JeeslAomCompany<REALM,?>>
-						implements JeeslAomCompanyCache<REALM,COMPANY>
+//						implements JeeslAomCompanyCache<REALM,COMPANY>
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomTypeLoadingCache.class);
 	public static final long serialVersionUID=1;
@@ -27,7 +26,8 @@ public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,
 //	private JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom;
 	
 	private LoadingCache<TenantIdentifier<REALM>,List<COMPANY>> cacheCompanies;
-	private Map<TenantIdentifier<REALM>,List<COMPANY>> cachedCompanies;
+	
+//	private Map<TenantIdentifier<REALM>,List<COMPANY>> cachedCompanies; @Override public Map<TenantIdentifier<REALM>, List<COMPANY>> getCachedCompanies() {return cachedCompanies;}
 	
 	public JeeslAomTypeLoadingCache(JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom)
 	{
@@ -38,7 +38,7 @@ public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,
 			    .refreshAfterWrite(Duration.ofMinutes(1))
 			    .build(key -> fAom.fAomCompanies(key));
 		
-		cachedCompanies = new CacheMapCompany();
+//		cachedCompanies = new CacheMapCompany();
 	}
 	
 	private class CacheMapCompany extends HashMap<TenantIdentifier<REALM>,List<COMPANY>>
@@ -48,6 +48,5 @@ public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,
 		@Override public List<COMPANY> get(Object key) {return cacheCompanies.get(((TenantIdentifier<REALM>)key));}
 	}
 
-	@Override public Map<TenantIdentifier<REALM>, List<COMPANY>> getCachedCompanies() {return cachedCompanies;}
-	@Override public void update(TenantIdentifier<REALM> identifier, COMPANY company) {EjbIdFactory.replaceOrAdd(cacheCompanies.get(identifier),company);}
+//	@Override public void invalidateCompanyCache(TenantIdentifier<REALM> identifier) {cacheCompanies.invalidate(identifier);}
 }

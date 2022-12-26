@@ -54,8 +54,8 @@ public class JeeslGraphicFacadeBean<L extends JeeslLang, D extends JeeslDescript
 		cQ.select(pGraphic);
 		
 		try	{return em.createQuery(cQ).getSingleResult();}
-		catch (NoResultException ex){throw new JeeslNotFoundException("No Graphic found for status.id"+ejbId);}
-		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple Results for status.id"+ejbId);}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+cG.getSimpleName()+" found for status.id="+ejbId+" ("+JeeslGraphicFacadeBean.class.getSimpleName()+".fGraphicForStatus)");}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple "+cG.getSimpleName()+" found for status.id="+ejbId+" ("+JeeslGraphicFacadeBean.class.getSimpleName()+".fGraphicForStatus)");}
 	}
 	
 	@Override public <W extends EjbWithGraphic<G>> G fGraphic(Class<W> c, W w) throws JeeslNotFoundException {return fGraphic(c,w.getId());}
@@ -72,8 +72,8 @@ public class JeeslGraphicFacadeBean<L extends JeeslLang, D extends JeeslDescript
 		cQ.select(pGraphic);
 		
 		try	{return em.createQuery(cQ).getSingleResult();}
-		catch (NoResultException ex){throw new JeeslNotFoundException("No Graphic found for status.id"+id);}
-		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple Results for status.id"+id);}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+cG.getSimpleName()+" found for "+c.getSimpleName()+"."+id+" ("+JeeslGraphicFacadeBean.class.getSimpleName()+".fGraphicForStatus)");}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple "+cG.getSimpleName()+" found for "+c.getSimpleName()+"."+id+" ("+JeeslGraphicFacadeBean.class.getSimpleName()+".fGraphicForStatus)");}
 	}
 
 	@Override public <T extends EjbWithGraphic<G>> List<T> allWithGraphicFigures(Class<T> c)

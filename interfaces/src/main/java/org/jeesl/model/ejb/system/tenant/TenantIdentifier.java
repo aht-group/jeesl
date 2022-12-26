@@ -1,5 +1,6 @@
 package org.jeesl.model.ejb.system.tenant;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -8,8 +9,8 @@ public class TenantIdentifier <REALM extends JeeslTenantRealm<?,?,REALM,?>> impl
 {
 	private static final long serialVersionUID = 1L;
 	
-	private long id; public long getId() {return id;} public void setId(long id) {this.id = id;}
-	private REALM realm; public REALM getRealm() {return realm;} private void setRealm(REALM realm) {this.realm = realm;}
+	protected long id; public long getId() {return id;} public void setId(long id) {this.id = id;}
+	protected REALM realm; public REALM getRealm() {return realm;} protected void setRealm(REALM realm) {this.realm = realm;}
 	
 	public static <REALM extends JeeslTenantRealm<?,?,REALM,?>> TenantIdentifier<REALM> instance(REALM realm)
 	{
@@ -17,7 +18,7 @@ public class TenantIdentifier <REALM extends JeeslTenantRealm<?,?,REALM,?>> impl
 		id.setRealm(realm);
 		return id;
 	}
-	private TenantIdentifier()
+	protected TenantIdentifier()
 	{
 		
 	}
@@ -28,7 +29,14 @@ public class TenantIdentifier <REALM extends JeeslTenantRealm<?,?,REALM,?>> impl
 		return this;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	@Override public boolean equals(Object object){return (object instanceof TenantIdentifier) ? id == ((TenantIdentifier) object).getId() : (object == this);}
-	@Override public int hashCode(){return new HashCodeBuilder(17,53).append(realm.getId()).append(id).toHashCode();}
+	@SuppressWarnings("unchecked")
+	@Override public boolean equals(Object object)
+	{
+	   if (object == null) {return false;}
+	   if (object == this) {return true;}
+	   if (object.getClass() != this.getClass()) {return false;}
+	   TenantIdentifier<REALM> other = (TenantIdentifier<REALM>) object;
+	   return new EqualsBuilder().append(id, other.getId()).append(realm.getId(), other.getRealm().getId()).isEquals();
+	}
+	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(realm.getId()).append(id).toHashCode();}
 }
