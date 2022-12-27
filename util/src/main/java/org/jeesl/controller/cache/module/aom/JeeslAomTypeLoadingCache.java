@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.module.JeeslAssetFacade;
-import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
-import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomTypeCache;
+import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
+import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
+import org.jeesl.model.ejb.module.aom.AomTypeCacheKey;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,35 +19,43 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 
 public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,?>,
-									COMPANY extends JeeslAomCompany<REALM,?>>
-//						implements JeeslAomCompanyCache<REALM,COMPANY>
+										ATYPE extends JeeslAomAssetType<?,?,REALM,ATYPE,VIEW,?>,
+										VIEW extends JeeslAomView<?,?,REALM,?>>
+						implements JeeslAomTypeCache<REALM,ATYPE,VIEW>
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomTypeLoadingCache.class);
 	public static final long serialVersionUID=1;
 	
-//	private JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom;
+	private JeeslAssetFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAom;
 	
-	private LoadingCache<TenantIdentifier<REALM>,List<COMPANY>> cacheCompanies;
+	private LoadingCache<AomTypeCacheKey,List<ATYPE>> cacheType;
 	
-//	private Map<TenantIdentifier<REALM>,List<COMPANY>> cachedCompanies; @Override public Map<TenantIdentifier<REALM>, List<COMPANY>> getCachedCompanies() {return cachedCompanies;}
+	private Map<AomTypeCacheKey,List<ATYPE>> cachedType; @Override public Map<AomTypeCacheKey,List<ATYPE>> getCachedType() {return cachedType;}
 	
-	public JeeslAomTypeLoadingCache(JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom)
+	public JeeslAomTypeLoadingCache(JeeslAssetFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAom)
 	{
-//		this.fAom=fAom;
-		cacheCompanies = Caffeine.newBuilder()
+		this.fAom=fAom;
+		cacheType = Caffeine.newBuilder()
 			    .maximumSize(10_000)
 			    .expireAfterWrite(Duration.ofMinutes(5))
 			    .refreshAfterWrite(Duration.ofMinutes(1))
-			    .build(key -> fAom.fAomCompanies(key));
+			    .build(key -> load(key));
 		
-//		cachedCompanies = new CacheMapCompany();
+		cachedType = new CacheMapCompany();
+	}
+	@SuppressWarnings("unchecked")
+	private List<ATYPE> load(Object oKey)
+	{
+		AomTypeCacheKey key = (AomTypeCacheKey)oKey; 
+		TenantIdentifier<REALM> identifier = TenantIdentifier.instance((REALM)key.getRealm()).withRref(key);
+		VIEW view = fAom.fcAomView((REALM)key.getRealm(),key,key.getTree());
+		return fAom.fAomAssetTypes(identifier,view);
 	}
 	
-	private class CacheMapCompany extends HashMap<TenantIdentifier<REALM>,List<COMPANY>>
+	private class CacheMapCompany extends HashMap<AomTypeCacheKey,List<ATYPE>>
 	{
 		private static final long serialVersionUID = 1L;
-		@SuppressWarnings("unchecked")
-		@Override public List<COMPANY> get(Object key) {return cacheCompanies.get(((TenantIdentifier<REALM>)key));}
+		@Override public List<ATYPE> get(Object key) {return cacheType.get(((AomTypeCacheKey)key));}
 	}
 
 //	@Override public void invalidateCompanyCache(TenantIdentifier<REALM> identifier) {cacheCompanies.invalidate(identifier);}

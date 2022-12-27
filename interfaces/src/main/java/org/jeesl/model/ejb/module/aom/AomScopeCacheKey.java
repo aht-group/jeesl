@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 
-public class CompanyScopeCacheIdentifier implements EjbWithId
+public class AomScopeCacheKey implements EjbWithId
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -16,19 +16,19 @@ public class CompanyScopeCacheIdentifier implements EjbWithId
 	private JeeslAomScope<?,?,?,?> scope; public JeeslAomScope<?,?,?,?> getScope() {return scope;}
 	
 	public static <REALM extends JeeslTenantRealm<?,?,REALM,?>>
-					CompanyScopeCacheIdentifier instance(TenantIdentifier<REALM> identifier)
+					AomScopeCacheKey instance(TenantIdentifier<REALM> identifier)
 	{
-		CompanyScopeCacheIdentifier id = new CompanyScopeCacheIdentifier();
+		AomScopeCacheKey id = new AomScopeCacheKey();
 		id.setRealm(identifier.getRealm());
 		id.setId(identifier.getId());
 		return id;
 	}
-	private CompanyScopeCacheIdentifier()
+	private AomScopeCacheKey()
 	{
 		
 	}
 	
-	public CompanyScopeCacheIdentifier withScope(JeeslAomScope<?,?,?,?> scope)
+	public AomScopeCacheKey withScope(JeeslAomScope<?,?,?,?> scope)
 	{
 		this.scope=scope;
 		return this;
@@ -39,7 +39,7 @@ public class CompanyScopeCacheIdentifier implements EjbWithId
 	   if (object == null) {return false;}
 	   if (object == this) {return true;}
 	   if (object.getClass() != this.getClass()) {return false;}
-	   CompanyScopeCacheIdentifier other = (CompanyScopeCacheIdentifier) object;
+	   AomScopeCacheKey other = (AomScopeCacheKey) object;
 	   return new EqualsBuilder().appendSuper(super.equals(object)).append(scope.getId(),other.getScope().getId()).isEquals();
 	}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(realm.getId()).append(id).append(scope.getId()).toHashCode();}

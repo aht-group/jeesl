@@ -11,7 +11,7 @@ import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
-import org.jeesl.model.ejb.module.aom.CompanyScopeCacheIdentifier;
+import org.jeesl.model.ejb.module.aom.AomScopeCacheKey;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +32,7 @@ public class JeeslAomCompanyLoadingCache <REALM extends JeeslTenantRealm<?,?,REA
 	private final LoadingCache<TenantIdentifier<REALM>,List<COMPANY>> cacheCompanies;
 
 	private final Map<TenantIdentifier<REALM>,List<COMPANY>> cachedAllCompanies;
-	private Map<CompanyScopeCacheIdentifier,List<COMPANY>> cachedScopeCompanies;
+	private Map<AomScopeCacheKey,List<COMPANY>> cachedScopeCompanies;
 	
 	public JeeslAomCompanyLoadingCache(JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom)
 	{
@@ -53,13 +53,13 @@ public class JeeslAomCompanyLoadingCache <REALM extends JeeslTenantRealm<?,?,REA
 		@SuppressWarnings("unchecked")
 		@Override public List<COMPANY> get(Object key) {return cacheCompanies.get(((TenantIdentifier<REALM>)key));}
 	}
-	private class CacheScopeCompanyMap extends HashMap<CompanyScopeCacheIdentifier,List<COMPANY>>
+	private class CacheScopeCompanyMap extends HashMap<AomScopeCacheKey,List<COMPANY>>
 	{
 		private static final long serialVersionUID = 1L;
 		@SuppressWarnings("unchecked")
 		@Override public List<COMPANY> get(Object key)
 		{
-			CompanyScopeCacheIdentifier identifier = (CompanyScopeCacheIdentifier)key;
+			AomScopeCacheKey identifier = (AomScopeCacheKey)key;
 			TenantIdentifier<REALM> id = TenantIdentifier.instance((REALM)identifier.getRealm()).withRref(identifier);
 //			logger.info(identifier.getScope().getCode());
 			return cachedAllCompanies.get(id).stream().filter(c -> c.getScopes().contains(identifier.getScope())).collect(Collectors.toList());
@@ -67,7 +67,7 @@ public class JeeslAomCompanyLoadingCache <REALM extends JeeslTenantRealm<?,?,REA
 	}
 
 	@Override public Map<TenantIdentifier<REALM>, List<COMPANY>> getCachedAllCompanies() {return cachedAllCompanies;}
-	@Override public Map<CompanyScopeCacheIdentifier, List<COMPANY>> getCachedScopeCompanies() {return cachedScopeCompanies;}
+	@Override public Map<AomScopeCacheKey, List<COMPANY>> getCachedScopeCompanies() {return cachedScopeCompanies;}
 	
 	@Override public void invalidateCompanyCache(TenantIdentifier<REALM> identifier) {cacheCompanies.invalidate(identifier);}
 	

@@ -1,18 +1,19 @@
-package org.jeesl.web.mbean.prototype.module.aom;
+package org.jeesl.controller.web.module.aom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAssetFacade;
 import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
+import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
@@ -37,13 +38,12 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
-import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										S extends EjbWithId, G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
 										GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
@@ -61,11 +61,11 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 										USER extends JeeslSimpleUser,
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
-					extends AbstractAdminBean<L,D,LOC>
+					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractAomViewBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslAomViewController.class);
 
 	private JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset;
 
@@ -85,7 +85,7 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 
     private ALEVEL level; public ALEVEL getLevel() {return level;} public void setLevel(ALEVEL level) {this.level = level;}
 
-	public AbstractAomViewBean(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset, SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg)
+	public JeeslAomViewController(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset, SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg)
 	{
 		super(fbAsset.getClassL(),fbAsset.getClassD());
 		this.fbAsset=fbAsset;
@@ -94,20 +94,20 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 		levels = new ArrayList<>();
 	}
 
-	protected void postConstructAomView(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+	public void postConstructAomView(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
 									JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
 									JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
 									REALM realm)
 	{
-		super.initJeeslAdmin(bTranslation,bMessage);
+		super.postConstructWebController(lp,bMessage);
 		this.bCache=bCache;
 		this.fAsset=fAsset;
 		this.fGraphic=fGraphic;
 		this.realm=realm;
 	}
 
-	protected void updateRealmReference(RREF rref)
+	public void updateRealmReference(RREF rref)
 	{
 		this.rref=rref;
 		reload();
@@ -126,15 +126,15 @@ public abstract class AbstractAomViewBean <L extends JeeslLang, D extends JeeslD
 
 	public void selectLevel()
 	{
-		level = efLang.persistMissingLangs(fAsset, bTranslation.getLocales(),level);
-		level = efDescription.persistMissingLangs(fAsset, bTranslation.getLocales(),level);
+		level = efLang.persistMissingLangs(fAsset, lp.getLocales(),level);
+		level = efDescription.persistMissingLangs(fAsset, lp.getLocales(),level);
 	}
 
 	public void addLevel()
 	{
 		level = fbAsset.ejbLevel().build(realm,rref,levels);
-		level.setName(efLang.buildEmpty(bTranslation.getLocales()));
-		level.setDescription(efDescription.buildEmpty(bTranslation.getLocales()));
+		level.setName(efLang.buildEmpty(lp.getLocales()));
+		level.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 
 	public void saveLevel() throws JeeslConstraintViolationException, JeeslLockingException

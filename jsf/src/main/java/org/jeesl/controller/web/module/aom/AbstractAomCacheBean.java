@@ -21,7 +21,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.qualifier.cache.local.AomCompanyCache;
-import org.jeesl.model.ejb.module.aom.CompanyScopeCacheIdentifier;
+import org.jeesl.model.ejb.module.aom.AomScopeCacheKey;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,10 +44,10 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 	protected JeeslAssetFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,?,?,?,ETYPE,ESTATUS,?,?,?> fAom;
 	
 	@Inject @AomCompanyCache protected Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheAllCompanies;
-	@Inject @AomCompanyCache protected Cache<CompanyScopeCacheIdentifier,List<COMPANY>> cacheCompanyScope;
+	@Inject @AomCompanyCache protected Cache<AomScopeCacheKey,List<COMPANY>> cacheCompanyScope;
 
 	protected final Map<TenantIdentifier<REALM>,List<COMPANY>> cachedCompanies; @Override public Map<TenantIdentifier<REALM>, List<COMPANY>> getCachedAllCompanies() {return cachedCompanies;}
-	protected final Map<CompanyScopeCacheIdentifier,List<COMPANY>> cachedCompanyScope; @Override public Map<CompanyScopeCacheIdentifier,List<COMPANY>> getCachedScopeCompanies() {return cachedCompanyScope;}
+	protected final Map<AomScopeCacheKey,List<COMPANY>> cachedCompanyScope; @Override public Map<AomScopeCacheKey,List<COMPANY>> getCachedScopeCompanies() {return cachedCompanyScope;}
 	
 	public AbstractAomCacheBean()
 	{
@@ -71,17 +71,17 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 		}
 	}
 	
-	private class CacheMapCompanyScope extends HashMap<CompanyScopeCacheIdentifier,List<COMPANY>>
+	private class CacheMapCompanyScope extends HashMap<AomScopeCacheKey,List<COMPANY>>
 	{
 		private static final long serialVersionUID = 1L;
 		@Override public List<COMPANY> get(Object key)
 		{
-			CompanyScopeCacheIdentifier identifier = (CompanyScopeCacheIdentifier)key;
+			AomScopeCacheKey identifier = (AomScopeCacheKey)key;
 			return cachedCompanyScope.computeIfAbsent(identifier, i -> scope(i));
 		}
 	}
 	@SuppressWarnings("unchecked")
-	private  List<COMPANY> scope(CompanyScopeCacheIdentifier identifier)
+	private  List<COMPANY> scope(AomScopeCacheKey identifier)
 	{
 		TenantIdentifier<REALM> id = TenantIdentifier.instance((REALM)identifier.getRealm()).withRref(identifier);
 		return cacheAllCompanies.get(id).stream().filter(c -> c.getScopes().contains(identifier.getScope())).collect(Collectors.toList());
