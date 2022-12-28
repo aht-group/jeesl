@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.module.JeeslAssetFacade;
+import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -42,7 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-										S extends EjbWithId, G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
+										G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
 										GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
 										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,G>,
@@ -53,8 +53,8 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomTypeController.class);
 
-	private JeeslAssetFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAsset;
-	private JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic;
+	private JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset;
+	private JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic;
 
 	private JeeslAssetCacheBean<REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache;
 
@@ -77,13 +77,12 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 		this.fbAsset=fbAsset;
 		this.fbSvg=fbSvg;
 		sbhView = new SbSingleHandler<>(fbAsset.getClassAssetLevel(),this);
-
 	}
 
 	public void postConstructAssetType(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAssetCacheBean<REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache,
-									JeeslAssetFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAsset,
-									JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
+									JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset,
+									JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic,
 									REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);
@@ -98,7 +97,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 		identifier.withRref(rref);
 		this.rref=rref;
 		sbhView.clear();
-		for(VIEW v : fAsset.fAomViews(identifier.getRealm(),rref))
+		for(VIEW v : fAsset.fAomViews(identifier))
 		{
 			if(v.getTree().equals(JeeslAomView.Tree.hierarchy.toString())) {sbhView.getList().add(v);}
 			else if(v.getTree().equals(JeeslAomView.Tree.type2.toString())) {sbhView.getList().add(v);}
@@ -118,15 +117,13 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 		this.type = null;
 //		List<Long> expandedNodes = TreeHelper.findNodes(this.tree, node -> node.isExpanded()).stream().map(node -> (ATYPE)node.getData()).filter(data -> data != null).map(data -> data.getId()).collect(Collectors.toList());
 
-//		root = fAsset.fcAomRootType(identifier.getRealm(),rref,sbhView.getSelection());
-
 		tree = new DefaultTreeNode();
 		tree.getChildren().clear();
 			
 		List<ATYPE> all = fAsset.fAomAssetTypes(identifier,sbhView.getSelection());
 		logger.info("List.All: "+all.size());
 		logger.debug(fbAsset.getClassAssetType().getSimpleName()+" "+all.size());
-		TreeHelper.buildTree(tree,all,null);
+		TreeHelper.buildTree(tree,all);
 		
 //		List<ATYPE> list = this.fAsset.allForParent(this.fbAsset.getClassAssetType(), this.root);
 //		logger.info("List: "+list.size());

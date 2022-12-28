@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.Tuple;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,12 +17,14 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.jeesl.api.facade.module.JeeslAssetFacade;
+import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
+import org.jeesl.factory.json.system.io.db.tuple.JsonTupleFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
@@ -39,6 +42,7 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
+import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +61,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
 					extends JeeslFacadeBean
-					implements JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,STATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,USER,FRC,UP>
+					implements JeeslAomFacade<L,D,REALM,COMPANY,ASSET,STATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,UP>
 {	
 	private static final long serialVersionUID = 1L;
 
@@ -268,7 +272,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 //		}
 //	}
 	
-	@Override public <RREF extends EjbWithId> List<VIEW> fAomViews(REALM realm, RREF rref)
+	@Override public List<VIEW> fAomViews(TenantIdentifier<REALM> identifier)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<VIEW> cQ = cB.createQuery(fbAsset.getClassAssetLevel());
@@ -279,8 +283,8 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		Path<REALM> pRealm = level.get(JeeslAomView.Attributes.realm.toString());
 		Expression<Integer> ePosition = level.get(JeeslAomView.Attributes.position.toString());
 		
-		predicates.add(cB.equal(eRefId,rref.getId()));
-		predicates.add(cB.equal(pRealm,realm));
+		predicates.add(cB.equal(eRefId,identifier.getId()));
+		predicates.add(cB.equal(pRealm,identifier.getRealm()));
 		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(level);
@@ -288,7 +292,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		return em.createQuery(cQ).getResultList();
 	}
 
-	@Override public <RREF extends EjbWithId> List<COMPANY> fAomCompanies(TenantIdentifier<REALM> identifier)
+	@Override public List<COMPANY> fAomCompanies(TenantIdentifier<REALM> identifier)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -358,5 +362,22 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		event = this.find(fbAsset.getClassEvent(),event);
 		if(event.getMarkup()!=null) {event.getMarkup().getId();}
 		return event;
+	}
+
+	@Override public Json1Tuples<VIEW> tpcTypeByView(TenantIdentifier<REALM> identifier)
+	{
+		Json1TuplesFactory<VIEW> jtf = new Json1TuplesFactory<>(this,fbAsset.getClassAssetLevel());
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<ATYPE> item = cQ.from(fbAsset.getClassAssetType());
+		
+		Expression<Long> eCount = cB.count(item.<Long>get("id"));
+		Path<VIEW> pView = item.get(JeeslAomAssetType.Attributes.view.toString());
+		
+		cQ.groupBy(pView.get("id"));
+		cQ.multiselect(pView.get("id"),eCount);
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+        return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 }

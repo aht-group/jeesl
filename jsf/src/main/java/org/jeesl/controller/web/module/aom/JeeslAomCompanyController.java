@@ -3,7 +3,7 @@ package org.jeesl.controller.web.module.aom;
 import java.io.Serializable;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.module.JeeslAssetFacade;
+import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -36,7 +36,7 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomCompanyController.class);
 	
-	protected JeeslAssetFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAsset;
+	protected JeeslAomFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?> fAsset;
 	private JeeslAomCompanyCache<REALM,COMPANY,SCOPE> cache;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?,?,?> fbAsset;
@@ -58,7 +58,7 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			JeeslAomCompanyCache<REALM,COMPANY,SCOPE> cache,
-			JeeslAssetFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAsset,
+			JeeslAomFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?> fAsset,
 			REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);

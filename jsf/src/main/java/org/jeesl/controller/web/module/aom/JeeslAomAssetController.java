@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.module.JeeslAssetFacade;
+import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -22,6 +22,7 @@ import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.th.ThMultiFilter;
 import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
 import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -48,6 +49,7 @@ import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
 import org.jeesl.jsf.helper.TreeHelper;
+import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.util.comparator.ejb.module.asset.EjbAssetComparator;
 import org.jeesl.util.comparator.ejb.module.asset.EjbEventComparator;
 import org.jeesl.web.model.module.aom.AssetEventLazyModel;
@@ -86,8 +88,9 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomAssetController.class);
 	
-	protected JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset;
+	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset;
 	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
+	private JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,ALEVEL> cache;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
@@ -96,7 +99,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	
 	private final Comparator<ASSET> cpAsset;
 	
-	private final UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,USER,FRC,UP> uiHelper; public UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,USER,FRC,UP> getUiHelper() {return uiHelper;}
+	private final UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS> uiHelper; public UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS> getUiHelper() {return uiHelper;}
     private final NullNumberBinder nnb; public NullNumberBinder getNnb() {return nnb;}
     private final ThMultiFilterHandler<ETYPE> thfEventType; public ThMultiFilterHandler<ETYPE> getThfEventType() {return thfEventType;}
     private final SbMultiHandler<ETYPE> sbhEventType; public SbMultiHandler<ETYPE> getSbhEventType() {return sbhEventType;}
@@ -110,7 +113,8 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	private TreeNode tree; public TreeNode getTree() {return tree;}
     private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
 
-	protected REALM realm; public REALM getRealm() {return realm;}
+    private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
+	private JeeslAomCacheKey<REALM,SCOPE,ATYPE,ALEVEL> key; public JeeslAomCacheKey<REALM, SCOPE, ATYPE, ALEVEL> getKey() {return key;}
 	protected RREF rref; public RREF getRref() {return rref;}
 
 	private ASSET root;
@@ -137,19 +141,23 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 		
 		path = new HashSet<>();
 		sbhView = new SbSingleHandler<>(fbAsset.getClassAssetLevel(),this);
+		key = new JeeslAomCacheKey<>();
 	}
 	
 	public void postConstructAsset(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-						JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
+						JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset,
 						JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
+						JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,ALEVEL> cache,
 						REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fAsset=fAsset;
 		this.bCache=bCache;
+		this.cache=cache;
 		uiHelper.setCacheBean(bCache);
 		
-		this.realm=realm;
+		identifier = TenantIdentifier.instance(realm);
+	
 		markupType = fAsset.fByEnum(fbAsset.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 		
 		thfEventType.getList().addAll(bCache.getEventType());
@@ -161,12 +169,16 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 								JeeslAomEventType.Code.renew,
 								JeeslAomEventType.Code.malfunction
 								);
+		
 	}
 	
 	public void updateRealmReference(RREF rref)
 	{
+		identifier.withRref(rref);
+		key.update(identifier,cache.getScopes());
 		this.rref=rref;
-		sbhView.setList(fAsset.fAomViews(realm,rref));
+		
+		sbhView.setList(fAsset.fAomViews(identifier));
 		sbhView.setDefault();
 		reloadTree();
 	}
@@ -195,8 +207,8 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	
 	private void reloadTree()
 	{
-		if(debugOnInfo) {logger.info("Loading root: realm:"+realm.toString()+" rref:"+rref);}
-		root = fAsset.fcAssetRoot(realm,rref);
+		if(debugOnInfo) {logger.info("Loading root: realm:"+identifier.getRealm().toString()+" rref:"+identifier.getId());}
+		root = fAsset.fcAssetRoot(identifier.getRealm(),identifier);
 		
 		tree = new DefaultTreeNode(root, null);
 		buildTree(tree,fAsset.allForParent(fbAsset.getClassAsset(), root));
@@ -250,14 +262,14 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.append("fcAomRootType ");
-			sb.append("realm:").append(realm.toString());
-			sb.append(" rref:").append(rref);
+			sb.append("realm:").append(identifier.getRealm().toString());
+			sb.append(" rref:").append(identifier.getId());
 			sb.append(" alevel:");if(sbhView.getSelection()!=null) {sb.append(sbhView.getSelection());}else {sb.append("null");}
 			logger.info(sb.toString());
 		}
 //		ATYPE type = fAsset.fcAomRootType(realm,rref,sbhView.getSelection());
 		reset(true,true,true);
-		asset = efAsset.build(realm,rref,parent,status,null);
+		asset = efAsset.build(identifier.getRealm(),identifier,parent,status,null);
 	}
 	
 	public void saveAsset() throws JeeslConstraintViolationException, JeeslLockingException
@@ -318,7 +330,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     	
     	event = efEvent.build(asset,bCache.getEventType().get(0),markupType);
     	efEvent.ejb2nnb(event,nnb);
-    	uiHelper.update(realm,rref,event);
+    	uiHelper.update(identifier.getRealm(),rref,event);
     	if(frh!=null) {frh.init(event);}
     }
     
@@ -328,7 +340,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     	event = fAsset.load(event);
     	efEvent.ejb2nnb(event,nnb);
     	Collections.sort(event.getAssets(),cpAsset);
-    	uiHelper.update(realm,rref,event);
+    	uiHelper.update(identifier.getRealm(),rref,event);
     	if(frh!=null) {frh.init(event);}
     }
     
@@ -341,7 +353,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     	thfEventType.memoryUpdate();
     	reloadEvents();
     	thfEventType.memoryApply();
-    	uiHelper.update(realm,rref,event);
+    	uiHelper.update(identifier.getRealm(),rref,event);
     	if(frh!=null) {frh.init(event);}
     }
     
@@ -358,7 +370,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     	efEvent.converter(fAsset,event);
     	event = efEvent.clone(event,markupType);
     	efEvent.ejb2nnb(event,nnb);
-    	uiHelper.update(realm,rref,event);
+    	uiHelper.update(identifier.getRealm(),rref,event);
     }
     
     @SuppressWarnings("unchecked")

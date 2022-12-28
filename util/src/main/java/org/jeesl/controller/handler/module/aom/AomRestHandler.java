@@ -2,7 +2,7 @@ package org.jeesl.controller.handler.module.aom;
 
 import java.util.List;
 
-import org.jeesl.api.facade.module.JeeslAssetFacade;
+import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.api.rest.rs.module.aom.JeeslAomRestInterface;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -53,7 +53,7 @@ public class AomRestHandler <L extends JeeslLang, D extends JeeslDescription, LO
 {
 	final static Logger logger = LoggerFactory.getLogger(AomRestHandler.class);
 	
-	protected final JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset;
+	protected final JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset;
 	
 	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
@@ -81,7 +81,7 @@ public class AomRestHandler <L extends JeeslLang, D extends JeeslDescription, LO
 //	}
 	
 	public AomRestHandler(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset,
-							JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset)
+							JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset)
 	{
 	
 		this.fbAsset=fbAsset;

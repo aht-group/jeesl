@@ -45,7 +45,10 @@
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<j:inputGrid>
-						<p:outputLabel value="#{msg.jeeslCode}"/>
+						<jtp:label entity="AomAssetType" code=id/>
+						<jtp:inputText value="#{cc.attrs.bean.type.id}"/>
+						
+						<jtp:label entity="AomAssetType" code="code"/>
 						<jtp:inputText value="#{cc.attrs.bean.type.code}"/>
 						
 						<p:outputLabel value="#{msg.jeeslIcon}" rendered="#{cc.attrs.bean.type.id gt 0}"/>

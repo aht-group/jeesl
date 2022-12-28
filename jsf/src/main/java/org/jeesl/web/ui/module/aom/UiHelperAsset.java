@@ -6,21 +6,17 @@ import java.util.List;
 
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
-import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
+import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
@@ -34,19 +30,16 @@ public class UiHelperAsset <L extends JeeslLang, D extends JeeslDescription,
 								ASTATUS extends JeeslAomAssetStatus<L,D,ASTATUS,?>,
 								ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,ALEVEL,?>,
 								ALEVEL extends JeeslAomView<L,D,REALM,?>,
-								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
+								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,?,?,?>,
 								ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
-								ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
-								M extends JeeslMarkup<?>,
-								USER extends JeeslSimpleUser,
-								FRC extends JeeslFileContainer<?,?>,
-								UP extends JeeslAomEventUpload<L,D,UP,?>>
+								ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(UiHelperAsset.class);
 		
-	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache; public void setCacheBean(JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache) {this.bCache = bCache;}
+	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,?> bCache;
+	public void setCacheBean(JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,?> bCache) {this.bCache = bCache;}
 	
 	private final List<COMPANY> companies; public List<COMPANY> getCompanies() {return companies;}
 	

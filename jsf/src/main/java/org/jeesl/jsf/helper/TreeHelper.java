@@ -125,8 +125,19 @@ public abstract class TreeHelper
     }
     
     // The following functions are from EH Module
-    public static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, List<T> list) {buildTree(treeParent,null,list,null);}
-    public static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, List<T> list, Set<T> path) {buildTree(treeParent,null,list,path);}
+    public static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, List<T> list) {buildTree(treeParent,list,null);}
+    public static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, List<T> list, Set<T> path)
+    {
+    	buildTree(treeParent,null,list,path);
+    	if(!list.isEmpty())
+    	{
+    		logger.info("Size "+list.size());
+    		for(T t : list)
+    		{
+    			new DefaultTreeNode(t,treeParent);
+    		}
+    	}
+    }
 	private static <T extends EjbWithParentId<T>> void buildTree(TreeNode treeParent, T elementParent, List<T> list, Set<T> path)
 	{
 		List<T> childs = list.stream()
@@ -139,7 +150,7 @@ public abstract class TreeHelper
 			TreeNode n = new DefaultTreeNode(t,treeParent);
 			if(path!=null && path.contains(t)) {n.setExpanded(true);}
 			TreeHelper.buildTree(n,t,list,path);
-		}	
+		}
 	}
     
     @SuppressWarnings("unchecked")

@@ -29,6 +29,14 @@ public class TenantIdentifier <REALM extends JeeslTenantRealm<?,?,REALM,?>> impl
 		return this;
 	}
 	
+	@Override public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("Realm:").append(realm.getCode());
+		sb.append(" rref:").append(id);
+		return sb.toString();
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override public boolean equals(Object object)
 	{

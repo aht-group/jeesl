@@ -15,10 +15,10 @@
 <jp:grid id="grid">
 	<j:row>
 		<j:slot id="sLevels" width="7">
-			<h:form id="fLevels">
-				<p:dataTable var="l" value="#{cc.attrs.bean.levels}" draggableRows="true"
-								selection="#{cc.attrs.bean.level}" selectionMode="single" rowKey="#{l.id}"
-								paginator="true" rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+			<h:form id="fViews">
+				<p:dataTable var="l" value="#{cc.attrs.bean.schemes}" draggableRows="true"
+							selection="#{cc.attrs.bean.level}" selectionMode="single" rowKey="#{l.id}"
+							paginator="true" rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslAomLevels}">
 							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addLevel()}" update=":#{cc.id}:grid"/>
@@ -35,20 +35,27 @@
 					<p:column headerText="#{msg.jeeslAomLevel}">
 						<h:outputText value="#{l.name[localeCode].lang}"/>
 					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="AomScheme" code="countTypeByView"/></f:facet>
+						<h:outputText value="#{cc.attrs.bean.thTypeByView.map1[l].count1}"/>
+					</p:column>
 			   	</p:dataTable>
 			</h:form>
 		</j:slot>
 		<j:slot id="sLevel" width="5">
 			<h:form id="fLevel" rendered="#{not empty cc.attrs.bean.level}">
-				<p:panel header="#{msg.jeeslAomLevel}" styleClass="jeeslPanel">
+				<p:panel header="#{msg.jeeslAomLevel}" styleClass="jeesl-panel">
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelLevel()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveLevel()}" update=":#{cc.id}:grid"/>
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteLevel()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.level.id gt 0}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-						<p:outputLabel value="#{msg.jeeslCode}"/>
+					<j:inputGrid>
+						<jtp:label entity="AomScheme" code="id"/>
+						<h:outputText value="#{cc.attrs.bean.level.id}"/>
+						
+						<jtp:label entity="AomScheme" code="code"/>
 						<jtp:inputText value="#{cc.attrs.bean.level.code}"/>
 						
 						<p:outputLabel value="#{msg.jeeslAomLevelTree}" />
@@ -58,7 +65,7 @@
 				            <f:selectItem itemLabel="Type 2" itemValue="type2" />
 				        </p:selectOneRadio>
 						
-					</p:panelGrid>
+					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.bean.level}" withDescription="true"/>
 				</p:panel>
 			</h:form>

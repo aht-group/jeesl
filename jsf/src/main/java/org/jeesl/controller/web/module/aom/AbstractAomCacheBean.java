@@ -1,5 +1,6 @@
 package org.jeesl.controller.web.module.aom;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,20 +9,24 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import org.infinispan.Cache;
-import org.jeesl.api.facade.module.JeeslAssetFacade;
-import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
+import org.jeesl.api.facade.module.JeeslAomFacade;
+import org.jeesl.factory.builder.module.AomFactoryBuilder;
+import org.jeesl.factory.ejb.util.EjbCodeFactory;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomTypeCache;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
+import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.qualifier.cache.local.AomCompanyCache;
 import org.jeesl.model.ejb.module.aom.AomScopeCacheKey;
+import org.jeesl.model.ejb.module.aom.AomTypeCacheKey;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,31 +38,62 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 										ASTATUS extends JeeslAomAssetStatus<?,?,ASTATUS,?>,
 										ATYPE extends JeeslAomAssetType<?,?,REALM,ATYPE,VIEW,?>,
 										VIEW extends JeeslAomView<?,?,REALM,?>,
-										EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,?,?,?>,
+										
 										ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
-										ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>>
-								implements JeeslAomCompanyCache<REALM,COMPANY,SCOPE>
+										ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>
+,
+										UC extends JeeslAomEventUpload<?,?,UC,?>
+>
+								implements JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW>,
+											JeeslAomTypeCache<REALM,ATYPE,VIEW>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAomCacheBean.class);
 	
-	protected JeeslAssetFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,?,?,?,ETYPE,ESTATUS,?,?,?> fAom;
+	private final AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?,?,?,?,UC> fbAom;
+	protected JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?> fAom;
 	
 	@Inject @AomCompanyCache protected Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheAllCompanies;
 	@Inject @AomCompanyCache protected Cache<AomScopeCacheKey,List<COMPANY>> cacheCompanyScope;
+	@Inject @AomCompanyCache protected Cache<AomTypeCacheKey,List<ATYPE>> cacheType;
 
 	protected final Map<TenantIdentifier<REALM>,List<COMPANY>> cachedCompanies; @Override public Map<TenantIdentifier<REALM>, List<COMPANY>> getCachedAllCompanies() {return cachedCompanies;}
 	protected final Map<AomScopeCacheKey,List<COMPANY>> cachedCompanyScope; @Override public Map<AomScopeCacheKey,List<COMPANY>> getCachedScopeCompanies() {return cachedCompanyScope;}
+	protected final Map<AomTypeCacheKey,List<ATYPE>> cachedType; @Override public Map<AomTypeCacheKey, List<ATYPE>> getCachedType() {return cachedType;}
 	
-	public AbstractAomCacheBean()
+	private final Map<String,UC> mapUploadCategory; public Map<String,UC> getMapUploadCategory() {return mapUploadCategory;}
+	
+	private final List<SCOPE> scopes; @Override public List<SCOPE> getScopes() {return scopes;}
+	private final List<ASTATUS> assetStatus; public List<ASTATUS> getAssetStatus() {return assetStatus;}
+	private final List<ETYPE> eventType; public List<ETYPE> getEventType() {return eventType;}
+	private final List<ESTATUS> eventStatus; public List<ESTATUS> getEventStatus() {return eventStatus;}
+	
+	public AbstractAomCacheBean(AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?,?,?,?,UC> fbAom)
 	{
+		this.fbAom=fbAom;
+		
 		cachedCompanies = new CacheMapCompany();
 		cachedCompanyScope = new CacheMapCompanyScope();
+		cachedType = new CacheMapType();
+		
+		mapUploadCategory = new HashMap<>();
+		
+		scopes = new ArrayList<>();
+		assetStatus = new ArrayList<>();
+		eventType = new ArrayList<>();
+		eventStatus = new ArrayList<>();
 	}
 	
-	public void postConstruct(JeeslAssetFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,?,?,?,ETYPE,ESTATUS,?,?,?> fAom)
+	public void postConstruct(JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?> fAom)
 	{
 		this.fAom=fAom;
+		
+		mapUploadCategory.putAll(EjbCodeFactory.toMapCode(fAom.allOrderedPositionVisible(fbAom.getClassUpload())));
+		
+		scopes.addAll(fAom.allOrderedPositionVisible(fbAom.getClassScope()));
+		assetStatus.addAll(fAom.allOrderedPositionVisible(fbAom.getClassStatus()));
+		eventType.addAll(fAom.allOrderedPositionVisible(fbAom.getClassEventType()));
+		eventStatus.addAll(fAom.allOrderedPositionVisible(fbAom.getClassEventStatus()));
 	}
 	
 	private class CacheMapCompany extends HashMap<TenantIdentifier<REALM>,List<COMPANY>>
@@ -81,14 +117,36 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 		}
 	}
 	@SuppressWarnings("unchecked")
-	private  List<COMPANY> scope(AomScopeCacheKey identifier)
+	private List<COMPANY> scope(AomScopeCacheKey identifier)
 	{
+//		if(Objects.isNull(identifier)) {logger.warn("Identifier ist null!");} else {logger.info(identifier.toString());}
 		TenantIdentifier<REALM> id = TenantIdentifier.instance((REALM)identifier.getRealm()).withRref(identifier);
-		return cacheAllCompanies.get(id).stream().filter(c -> c.getScopes().contains(identifier.getScope())).collect(Collectors.toList());
+//		logger.info(id.toString()+" cacheAllCompanies: "+Objects.nonNull(cachedCompanies));
+		return cachedCompanies.get(id).stream()
+				.filter(c -> 
+				c.getScopes().contains(identifier.getScope()))
+				.collect(Collectors.toList());
 	}
 
 	@Override public void invalidateCompanyCache(TenantIdentifier<REALM> identifier)
 	{
 		cacheAllCompanies.remove(identifier);
+	}
+	
+	private class CacheMapType extends HashMap<AomTypeCacheKey,List<ATYPE>>
+	{
+		private static final long serialVersionUID = 1L;
+		@Override public List<ATYPE> get(Object key)
+		{
+			AomTypeCacheKey identifier = (AomTypeCacheKey)key;
+			return cachedType.computeIfAbsent(identifier, i -> load(i));
+		}
+	}
+	@SuppressWarnings("unchecked")
+	private List<ATYPE> load(AomTypeCacheKey key)
+	{
+		TenantIdentifier<REALM> identifier = TenantIdentifier.instance((REALM)key.getRealm()).withRref(key);
+		VIEW view = fAom.fcAomView(identifier.getRealm(),identifier,key.getTree());
+		return fAom.fAomAssetTypes(identifier,view);
 	}
 }

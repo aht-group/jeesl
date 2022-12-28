@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jeesl.api.facade.module.JeeslAssetFacade;
+import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomTypeCache;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
@@ -26,13 +26,13 @@ public class JeeslAomTypeLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomTypeLoadingCache.class);
 	public static final long serialVersionUID=1;
 	
-	private JeeslAssetFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAom;
+	private JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAom;
 	
 	private LoadingCache<AomTypeCacheKey,List<ATYPE>> cacheType;
 	
 	private Map<AomTypeCacheKey,List<ATYPE>> cachedType; @Override public Map<AomTypeCacheKey,List<ATYPE>> getCachedType() {return cachedType;}
 	
-	public JeeslAomTypeLoadingCache(JeeslAssetFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?,?,?,?,?> fAom)
+	public JeeslAomTypeLoadingCache(JeeslAomFacade<?,?,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAom)
 	{
 		this.fAom=fAom;
 		cacheType = Caffeine.newBuilder()

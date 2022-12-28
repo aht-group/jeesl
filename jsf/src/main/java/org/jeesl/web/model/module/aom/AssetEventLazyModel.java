@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jeesl.api.facade.module.JeeslAssetFacade;
+import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
@@ -54,7 +54,7 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
     @Override public Object getRowKey(EVENT account) {return llh.getRowKey(account);}
     public void clear() {list.clear();}
 
-    public void reloadScope(JeeslAssetFacade<?,?,?,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,USER,?,?> fAsset, ASSET asset)
+    public void reloadScope(JeeslAomFacade<?,?,?,?,ASSET,?,?,?,EVENT,ETYPE,ESTATUS,?> fAsset, ASSET asset)
     {
 		this.clear();
 		list.addAll(fAsset.fAssetEvents(asset));

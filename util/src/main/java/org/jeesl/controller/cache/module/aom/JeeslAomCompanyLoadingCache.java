@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.jeesl.api.facade.module.JeeslAssetFacade;
+import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
@@ -34,7 +34,7 @@ public class JeeslAomCompanyLoadingCache <REALM extends JeeslTenantRealm<?,?,REA
 	private final Map<TenantIdentifier<REALM>,List<COMPANY>> cachedAllCompanies;
 	private Map<AomScopeCacheKey,List<COMPANY>> cachedScopeCompanies;
 	
-	public JeeslAomCompanyLoadingCache(JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom)
+	public JeeslAomCompanyLoadingCache(JeeslAomFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?> fAom)
 	{
 //		this.fAom=fAom;
 		cacheCompanies = Caffeine.newBuilder()

@@ -5,118 +5,96 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.module.JeeslAssetFacade;
+import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
+import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
-import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
-import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
-import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
-import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
-import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
-import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
-import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-										S extends EjbWithId, G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>,
-										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
-										COMPANY extends JeeslAomCompany<REALM,SCOPE>,
-										SCOPE extends JeeslAomScope<L,D,SCOPE,?>,
-										ASSET extends JeeslAomAsset<REALM,ASSET,COMPANY,ASTATUS,ATYPE>,
-										ASTATUS extends JeeslAomAssetStatus<L,D,ASTATUS,?>,
-										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,ALEVEL,G>,
-										ALEVEL extends JeeslAomView<L,D,REALM,G>,
-										EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
-										ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
-										ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
-										M extends JeeslMarkup<MT>,
-										MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
-										USER extends JeeslSimpleUser,
-										FRC extends JeeslFileContainer<?,?>,
-										UP extends JeeslAomEventUpload<L,D,UP,?>>
+										G extends JeeslGraphic<GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>,
+										REALM extends JeeslTenantRealm<L,D,REALM,?>,
+										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,G>,
+										VIEW extends JeeslAomView<L,D,REALM,G>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomViewController.class);
 
-	private JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset;
+	private JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAom;
+	private JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
 
 	@SuppressWarnings("unused")
-	private JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic;
+	private JeeslAssetCacheBean<REALM,?,?,?,?,?,ATYPE,VIEW,?,?> bCache;
 
-	@SuppressWarnings("unused")
-	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
+	private final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg;
+	private final AomFactoryBuilder<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAsset;
 
-	private final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;
-	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
+	private final JsonTuple1Handler<VIEW> thTypeByView; public JsonTuple1Handler<VIEW> getThTypeByView() {return thTypeByView;}
 
-    private REALM realm;
-    private RREF rref;
+	private final List<VIEW> schemes; public List<VIEW> getSchemes() {return schemes;}
 
-    private final List<ALEVEL> levels; public List<ALEVEL> getLevels() {return levels;}
+    private TenantIdentifier<REALM> identifier;
+    private VIEW level; public VIEW getLevel() {return level;} public void setLevel(VIEW level) {this.level = level;}
 
-    private ALEVEL level; public ALEVEL getLevel() {return level;} public void setLevel(ALEVEL level) {this.level = level;}
-
-	public JeeslAomViewController(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset, SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg)
+	public JeeslAomViewController(AomFactoryBuilder<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAom,
+								SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg)
 	{
-		super(fbAsset.getClassL(),fbAsset.getClassD());
-		this.fbAsset=fbAsset;
+		super(fbAom.getClassL(),fbAom.getClassD());
+		this.fbAsset=fbAom;
 		this.fbSvg=fbSvg;
+		
+		thTypeByView = new JsonTuple1Handler<>(fbAom.getClassAssetLevel());
 
-		levels = new ArrayList<>();
+		schemes = new ArrayList<>();
 	}
 
-	public void postConstructAomView(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
-									JeeslAssetFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,USER,FRC,UP> fAsset,
-									JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
+	public void postConstructView(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
+									JeeslAssetCacheBean<REALM,?,?,?,?,?,ATYPE,VIEW,?,?> bCache,
+									JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset,
+									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.bCache=bCache;
-		this.fAsset=fAsset;
+		this.fAom=fAsset;
 		this.fGraphic=fGraphic;
-		this.realm=realm;
+		identifier = TenantIdentifier.instance(realm);
 	}
 
-	public void updateRealmReference(RREF rref)
+	public <RREF extends EjbWithId> void updateRealmReference(RREF rref)
 	{
-		this.rref=rref;
+		identifier.withRref(rref);
 		reload();
 	}
 
 	private void reload()
 	{
-		levels.clear();
-		levels.addAll(fAsset.fAomViews(realm,rref));
+		schemes.clear();
+		schemes.addAll(fAom.fAomViews(identifier));
+		thTypeByView.init(fAom.tpcTypeByView(identifier));
 	}
 
 	private void reset(boolean rLevel)
@@ -126,20 +104,20 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 
 	public void selectLevel()
 	{
-		level = efLang.persistMissingLangs(fAsset, lp.getLocales(),level);
-		level = efDescription.persistMissingLangs(fAsset, lp.getLocales(),level);
+		level = efLang.persistMissingLangs(fAom, lp.getLocales(),level);
+		level = efDescription.persistMissingLangs(fAom, lp.getLocales(),level);
 	}
 
 	public void addLevel()
 	{
-		level = fbAsset.ejbLevel().build(realm,rref,levels);
+		level = fbAsset.ejbLevel().build(identifier.getRealm(),identifier,schemes);
 		level.setName(efLang.buildEmpty(lp.getLocales()));
 		level.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 
 	public void saveLevel() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		level = fAsset.save(level);
+		level = fAom.save(level);
 		reload();
 //		bCache.update(realm, rref, type);
 	}
@@ -148,7 +126,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 	{
 		try
 		{
-			fAsset.rm(level);
+			fAom.rm(level);
 //			bCache.delete(realm,rref,level);
 			reload();
 			reset(true);
@@ -162,25 +140,25 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 		logger.info("Received file with a size of " +file.getSize());
 		if(level.getGraphic()==null)
 		{
-			GT gt = fAsset.fByEnum(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.svg);
+			GT gt = fAom.fByEnum(fbSvg.getClassGraphicType(), JeeslGraphicType.Code.svg);
 			G g = fbSvg.efGraphic().build(gt);
-			g = fAsset.save(g);
+			g = fAom.save(g);
 			level.setGraphic(g);
-			level = fAsset.save(level);
+			level = fAom.save(level);
 			level.getGraphic().setData(file.getContent());
-			level = fAsset.save(level);
+			level = fAom.save(level);
 		}
 		else
 		{
-//			try
-//			{
-//				G g = fGraphic.fGraphic(fbAsset.getClassAssetLevel(),level);
-//				g.setData(file.getContents());
-//				fAsset.save(g);
-//			}
-//			catch (JeeslNotFoundException e) {e.printStackTrace();}
+			try
+			{
+				G g = fGraphic.fGraphic(fbAsset.getClassAssetLevel(),level);
+				g.setData(file.getContent());
+				fAom.save(g);
+			}
+			catch (JeeslNotFoundException e) {e.printStackTrace();}
 		}
 	}
 
-	public void reorder() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fAsset,levels);}
+	public void reorder() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fAom,schemes);}
 }

@@ -9,8 +9,9 @@
 	
 	<composite:interface>
 		<composite:attribute name="bean" required="true"/>
-		<composite:attribute name="cache" required="false" default="#{appAssetCacheBean}"/>
 		<composite:attribute name="withCode" required="false" default="true"/>
+		
+		<composite:attribute name="cache" required="false" default="#{appAomCacheBean}"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -66,7 +67,8 @@
 		</j:slot>
 		<j:slot id="sEvent" width="#{cc.attrs.bean.slotHandler.b}" rendered="#{cc.attrs.bean.slotHandler.showB}" >
 			<h:form id="fEvent">
-				<p:panel id="pEvent" header="#{msg.jeeslAssetEvent}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.event}">
+				<p:panel id="pEvent" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.event}">
+					<f:facet name="header"><j:pHeader entity="AomEvent"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelEvent()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveEvent()}"   update=":#{cc.id}:grid"/>
@@ -92,20 +94,20 @@
 					</p:panelGrid>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						
-						<p:outputLabel value="#{msg.jeeslAssetEventType}"/>
+						<jtp:label entity="AomEvent" code="type"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.event.type}" effect="fade" autoWidth="false">
                         	<f:selectItems value="#{cc.attrs.cache.eventType}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
                         </p:selectOneMenu>   
                         
-                        <p:outputLabel value="#{msg.jeeslAssetEventStatus}"/>
+                        <jtp:label entity="AomEvent" code="status"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.event.status}" effect="fade" autoWidth="false">
                         	<f:selectItems value="#{cc.attrs.cache.eventStatus}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
                         </p:selectOneMenu>
                         
-                        <p:outputLabel value="#{msg.jeeslAssetEventDate}" />
+                        <jtp:label entity="AomEvent" code="record"/>
 						<jp:inputCalendar value="#{cc.attrs.bean.event.record}" pattern="#{appSettingsBean.patternDateMinute}"/>
 						
-						<p:outputLabel value="#{msg.jeeslAssetEventName}" />
+						<jtp:label entity="AomEvent" code="name"/>
 						<jtp:inputText value="#{cc.attrs.bean.event.name}"/>
 						
 						<p:outputLabel value="#{msg.jeeslAssetEventAmount}" rendered="#{cc.attrs.bean.uiHelper.showAmount}"/>
