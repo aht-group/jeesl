@@ -14,7 +14,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
-import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomTypeCache;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
@@ -47,7 +47,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 	private JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
 
 	@SuppressWarnings("unused")
-	private JeeslAssetCacheBean<REALM,?,?,?,?,?,ATYPE,VIEW,?,?> bCache;
+	private JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache;
 
 	private final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg;
 	private final AomFactoryBuilder<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAsset;
@@ -72,7 +72,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 	}
 
 	public void postConstructView(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslAssetCacheBean<REALM,?,?,?,?,?,ATYPE,VIEW,?,?> bCache,
+									JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache,
 									JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset,
 									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									REALM realm)

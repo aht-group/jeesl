@@ -20,14 +20,14 @@ public interface JeeslIoLog<L extends JeeslLang, D extends JeeslDescription,
 				EjbWithDateRange
 {	
 	public static enum Attributes{status,retention,user};
-	
-	
+
+
 	STATUS getStatus();
 	void setStatus(STATUS status);
-	
+
 	RETENTION getRetention();
 	void setRetention(RETENTION retention);
-	
+
 	USER getUser();
 	void setUser(USER user);
 }

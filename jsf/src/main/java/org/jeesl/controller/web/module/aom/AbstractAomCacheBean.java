@@ -37,14 +37,11 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 										ASSET extends JeeslAomAsset<REALM,ASSET,COMPANY,ASTATUS,ATYPE>,
 										ASTATUS extends JeeslAomAssetStatus<?,?,ASTATUS,?>,
 										ATYPE extends JeeslAomAssetType<?,?,REALM,ATYPE,VIEW,?>,
-										VIEW extends JeeslAomView<?,?,REALM,?>,
-										
+										VIEW extends JeeslAomView<?,?,REALM,?>,				
 										ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
-										ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>
-,
-										UC extends JeeslAomEventUpload<?,?,UC,?>
->
-								implements JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW>,
+										ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>,
+										UC extends JeeslAomEventUpload<?,?,UC,?>>
+								implements JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW,ETYPE>,
 											JeeslAomTypeCache<REALM,ATYPE,VIEW>
 {
 	private static final long serialVersionUID = 1L;
@@ -65,7 +62,7 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 	
 	private final List<SCOPE> scopes; @Override public List<SCOPE> getScopes() {return scopes;}
 	private final List<ASTATUS> assetStatus; public List<ASTATUS> getAssetStatus() {return assetStatus;}
-	private final List<ETYPE> eventType; public List<ETYPE> getEventType() {return eventType;}
+	private final List<ETYPE> eventType; @Override public List<ETYPE> getEventType() {return eventType;}
 	private final List<ESTATUS> eventStatus; public List<ESTATUS> getEventStatus() {return eventStatus;}
 	
 	public AbstractAomCacheBean(AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?,?,?,?,UC> fbAom)
@@ -119,13 +116,8 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 	@SuppressWarnings("unchecked")
 	private List<COMPANY> scope(AomScopeCacheKey identifier)
 	{
-//		if(Objects.isNull(identifier)) {logger.warn("Identifier ist null!");} else {logger.info(identifier.toString());}
 		TenantIdentifier<REALM> id = TenantIdentifier.instance((REALM)identifier.getRealm()).withRref(identifier);
-//		logger.info(id.toString()+" cacheAllCompanies: "+Objects.nonNull(cachedCompanies));
-		return cachedCompanies.get(id).stream()
-				.filter(c -> 
-				c.getScopes().contains(identifier.getScope()))
-				.collect(Collectors.toList());
+		return cachedCompanies.get(id).stream().filter(c -> c.getScopes().contains(identifier.getScope())).collect(Collectors.toList());
 	}
 
 	@Override public void invalidateCompanyCache(TenantIdentifier<REALM> identifier)

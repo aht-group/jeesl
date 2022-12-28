@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jeesl.controller.web.module.aom.JeeslAomCacheKey;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
-import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
@@ -38,8 +39,8 @@ public class UiHelperAsset <L extends JeeslLang, D extends JeeslDescription,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(UiHelperAsset.class);
 		
-	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,?> bCache;
-	public void setCacheBean(JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,?> bCache) {this.bCache = bCache;}
+	private JeeslAomCompanyCache<REALM,COMPANY,SCOPE> cache;
+	public void setCacheBean(JeeslAomCompanyCache<REALM,COMPANY,SCOPE> cache) {this.cache = cache;}
 	
 	private final List<COMPANY> companies; public List<COMPANY> getCompanies() {return companies;}
 	
@@ -60,7 +61,7 @@ public class UiHelperAsset <L extends JeeslLang, D extends JeeslDescription,
 		showCompany = false;
 	}
 
-	public void update(REALM realm, RREF rref, EVENT event)
+	public void update(JeeslAomCacheKey<REALM,SCOPE> key, EVENT event)
 	{
 		reset();
 		boolean isQuote = event.getType().getCode().equals(JeeslAomEventType.Code.quote.toString());
@@ -71,7 +72,7 @@ public class UiHelperAsset <L extends JeeslLang, D extends JeeslDescription,
 		
 		showAmount = EjbIdFactory.isSaved(event) && (isQuote || isProcurement || isDeployment || isMaintenance || isRenew);
 		
-		if(EjbIdFactory.isSaved(event) && bCache!=null)
+		if(EjbIdFactory.isSaved(event) && cache!=null)
 		{
 			if(isQuote)
 			{
@@ -80,15 +81,15 @@ public class UiHelperAsset <L extends JeeslLang, D extends JeeslDescription,
 			}
 			else if(isProcurement)
 			{
-				companies.addAll(bCache.getMapVendor().get(rref));
+				companies.addAll(cache.getCachedScopeCompanies().get(key.getScopeVendor()));
 			}
 			else if(isDeployment)
 			{
-				companies.addAll(bCache.getMapMaintainer().get(rref));
+				companies.addAll(cache.getCachedScopeCompanies().get(key.getScopeMaintainer()));
 			}
 			else if(isMaintenance || isRenew)
 			{
-				companies.addAll(bCache.getMapMaintainer().get(rref));
+				companies.addAll(cache.getCachedScopeCompanies().get(key.getScopeMaintainer()));
 			}
 			showCompany = isQuote || isProcurement || isDeployment || isMaintenance || isRenew; 
 		}

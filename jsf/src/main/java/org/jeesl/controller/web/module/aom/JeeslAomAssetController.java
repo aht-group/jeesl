@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
@@ -23,7 +24,6 @@ import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.th.ThMultiFilter;
 import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
-import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
@@ -72,8 +72,8 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 										SCOPE extends JeeslAomScope<L,D,SCOPE,?>,
 										ASSET extends JeeslAomAsset<REALM,ASSET,COMPANY,ASTATUS,ATYPE>,
 										ASTATUS extends JeeslAomAssetStatus<L,D,ASTATUS,?>,
-										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,ALEVEL,?>,
-										ALEVEL extends JeeslAomView<L,D,REALM,?>,
+										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,?>,
+										VIEW extends JeeslAomView<L,D,REALM,?>,
 										EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
 										ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
 										ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
@@ -88,22 +88,22 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomAssetController.class);
 	
-	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset;
-	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
-	private JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,ALEVEL> cache;
+	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,UP> fAsset;
+//	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
+	private JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW,ETYPE> cache;
 	
-	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
+	private final AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset;
 	
 	private final EjbAssetFactory<REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE> efAsset;
 	private final EjbAssetEventFactory<COMPANY,ASSET,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC> efEvent;
 	
 	private final Comparator<ASSET> cpAsset;
 	
-	private final UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS> uiHelper; public UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS> getUiHelper() {return uiHelper;}
+	private final UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS> uiHelper; public UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS> getUiHelper() {return uiHelper;}
     private final NullNumberBinder nnb; public NullNumberBinder getNnb() {return nnb;}
     private final ThMultiFilterHandler<ETYPE> thfEventType; public ThMultiFilterHandler<ETYPE> getThfEventType() {return thfEventType;}
     private final SbMultiHandler<ETYPE> sbhEventType; public SbMultiHandler<ETYPE> getSbhEventType() {return sbhEventType;}
-    private final SbSingleHandler<ALEVEL> sbhView; public SbSingleHandler<ALEVEL> getSbhView() {return sbhView;}
+    private final SbSingleHandler<VIEW> sbhView; public SbSingleHandler<VIEW> getSbhView() {return sbhView;}
     private JeeslFileRepositoryHandler<?,FRC,?> frh; public JeeslFileRepositoryHandler<?,FRC,?> getFrh() {return frh;}  public void setFrh(JeeslFileRepositoryHandler<?,FRC,?> frh) {this.frh = frh;}
     
     private final AssetEventLazyModel<ASSET,EVENT,ETYPE,ESTATUS,USER> lazyEvents; public AssetEventLazyModel<ASSET,EVENT,ETYPE,ESTATUS,USER> getLazyEvents() {return lazyEvents;}
@@ -114,7 +114,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
 
     private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
-	private JeeslAomCacheKey<REALM,SCOPE,ATYPE,ALEVEL> key; public JeeslAomCacheKey<REALM, SCOPE, ATYPE, ALEVEL> getKey() {return key;}
+	private JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
 	protected RREF rref; public RREF getRref() {return rref;}
 
 	private ASSET root;
@@ -122,7 +122,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     private EVENT event; public EVENT getEvent() {return event;} public void setEvent(EVENT event) {this.event = event;}
     private MT markupType;
     
-	public JeeslAomAssetController(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset)
+	public JeeslAomAssetController(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset)
 	{
 		super(fbAsset.getClassL(),fbAsset.getClassD());
 		this.fbAsset=fbAsset;
@@ -145,31 +145,28 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	}
 	
 	public void postConstructAsset(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-						JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset,
-						JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
-						JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,ALEVEL> cache,
+						JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW,ETYPE> cache,
+						JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,UP> fAsset,
 						REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fAsset=fAsset;
-		this.bCache=bCache;
 		this.cache=cache;
-		uiHelper.setCacheBean(bCache);
+		uiHelper.setCacheBean(cache);
 		
 		identifier = TenantIdentifier.instance(realm);
 	
 		markupType = fAsset.fByEnum(fbAsset.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 		
-		thfEventType.getList().addAll(bCache.getEventType());
+		thfEventType.getList().addAll(cache.getEventType());
 		thfEventType.selectAll();
 		
-		sbhEventType.getList().addAll(bCache.getEventType());
+		sbhEventType.getList().addAll(cache.getEventType());
 		sbhEventType.preSelect(	JeeslAomEventType.Code.maintenance,
 								JeeslAomEventType.Code.check,
 								JeeslAomEventType.Code.renew,
 								JeeslAomEventType.Code.malfunction
 								);
-		
 	}
 	
 	public void updateRealmReference(RREF rref)
@@ -198,6 +195,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 		if(asset!=null) {lazyEvents.reloadScope(fAsset,asset);}
 	}
 	
+	public void cancelEvent() {this.reset(false,false,true);}
 	private void reset(boolean rAsset, boolean rEvents, boolean rEvent)
 	{
 		if(rAsset) {asset=null;}
@@ -207,11 +205,14 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	
 	private void reloadTree()
 	{
+		if(Objects.nonNull(jogger)) {jogger.start("reloadTree");}
 		if(debugOnInfo) {logger.info("Loading root: realm:"+identifier.getRealm().toString()+" rref:"+identifier.getId());}
 		root = fAsset.fcAssetRoot(identifier.getRealm(),identifier);
+		if(Objects.nonNull(jogger)) {jogger.milestone("root");}
 		
 		tree = new DefaultTreeNode(root, null);
 		buildTree(tree,fAsset.allForParent(fbAsset.getClassAsset(), root));
+		if(Objects.nonNull(jogger)) {jogger.milestone("tree");}
 	}
 	
 	private void buildTree(TreeNode parent, List<ASSET> assets)
@@ -267,7 +268,6 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 			sb.append(" alevel:");if(sbhView.getSelection()!=null) {sb.append(sbhView.getSelection());}else {sb.append("null");}
 			logger.info(sb.toString());
 		}
-//		ATYPE type = fAsset.fcAomRootType(realm,rref,sbhView.getSelection());
 		reset(true,true,true);
 		asset = efAsset.build(identifier.getRealm(),identifier,parent,status,null);
 	}
@@ -328,9 +328,9 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     {
     	logger.info(AbstractLogMessage.createEntity(fbAsset.getClassEvent()));
     	
-    	event = efEvent.build(asset,bCache.getEventType().get(0),markupType);
+    	event = efEvent.build(asset,cache.getEventType().get(0),markupType);
     	efEvent.ejb2nnb(event,nnb);
-    	uiHelper.update(identifier.getRealm(),rref,event);
+    	uiHelper.update(key,event);
     	if(frh!=null) {frh.init(event);}
     }
     
@@ -340,7 +340,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     	event = fAsset.load(event);
     	efEvent.ejb2nnb(event,nnb);
     	Collections.sort(event.getAssets(),cpAsset);
-    	uiHelper.update(identifier.getRealm(),rref,event);
+    	uiHelper.update(key,event);
     	if(frh!=null) {frh.init(event);}
     }
     
@@ -353,7 +353,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     	thfEventType.memoryUpdate();
     	reloadEvents();
     	thfEventType.memoryApply();
-    	uiHelper.update(identifier.getRealm(),rref,event);
+    	uiHelper.update(key,event);
     	if(frh!=null) {frh.init(event);}
     }
     
@@ -370,11 +370,11 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     	efEvent.converter(fAsset,event);
     	event = efEvent.clone(event,markupType);
     	efEvent.ejb2nnb(event,nnb);
-    	uiHelper.update(identifier.getRealm(),rref,event);
+    	uiHelper.update(key,event);
     }
     
     @SuppressWarnings("unchecked")
-	public void onDrop(DragDropEvent ddEvent) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
+	public void onDrop(DragDropEvent<ASSET> ddEvent) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
     	logger.info("DRAG "+ddEvent.getDragId());
 		logger.info("DROP "+ddEvent.getDropId());

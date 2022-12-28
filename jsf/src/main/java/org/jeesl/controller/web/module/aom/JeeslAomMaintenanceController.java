@@ -17,6 +17,7 @@ import org.jeesl.factory.ejb.module.asset.EjbAssetEventFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
 import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
@@ -41,6 +42,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
+import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.util.comparator.ejb.module.asset.EjbAssetComparator;
 import org.jeesl.util.comparator.ejb.module.asset.EjbEventComparator;
 import org.jeesl.web.ui.module.aom.UiHelperAsset;
@@ -87,7 +89,9 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 	private NullNumberBinder nnb; public NullNumberBinder getNnb() {return nnb;} public void setNnb(NullNumberBinder nnb) {this.nnb = nnb;}
 
 	private final List<EVENT> events; public List<EVENT> getEvents() {return events;}
-	    
+
+	 private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
+	private JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
 	private REALM realm; public REALM getRealm() {return realm;}
 	private RREF rref; public RREF getRref() {return rref;}
 	private MT markupType;
@@ -118,17 +122,20 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 	
 	public <E extends Enum<E>> void postConstructAssetMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset,
-									JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache,
+									JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,ALEVEL,ETYPE> cache,
 									E eRealm, RREF rref
 									)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fAsset=fAsset;
 		
-		uiHelper.setCacheBean(bCache);
+		uiHelper.setCacheBean(cache);
 		
 		markupType = fAsset.fByEnum(fbAsset.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
 		realm = fAsset.fByEnum(fbAsset.getClassRealm(),eRealm);
+		
+		identifier = TenantIdentifier.instance(realm);
+		key.update(identifier,cache.getScopes());
 		this.rref=rref;
 		
 		sbhEventStatus.setList(fAsset.all(fbAsset.getClassEventStatus()));
@@ -153,7 +160,7 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
     {
     	logger.info(AbstractLogMessage.selectEntity(event));
     	event = fAsset.load(event);
-    	uiHelper.update(realm,rref,event);
+    	uiHelper.update(key,event);
     	efEvent.ejb2nnb(event,nnb);
     	Collections.sort(event.getAssets(),cpAsset);
     	slotHandler.set(8,4);
@@ -164,7 +171,7 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
     	efEvent.converter(fAsset,event);
     	event = efEvent.clone(event,markupType);
     	efEvent.ejb2nnb(event,nnb);
-    	uiHelper.update(realm,rref,event);
+    	uiHelper.update(key,event);
     }
     
     public void saveEvent() throws JeeslConstraintViolationException, JeeslLockingException

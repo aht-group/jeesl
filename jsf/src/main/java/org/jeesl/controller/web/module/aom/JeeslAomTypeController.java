@@ -14,7 +14,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
-import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
+import org.jeesl.interfaces.cache.module.aom.JeeslAomTypeCache;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
@@ -56,7 +56,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	private JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset;
 	private JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic;
 
-	private JeeslAssetCacheBean<REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache;
+	private JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache;
 
 	private final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;
 	private final AomFactoryBuilder<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAsset;
@@ -80,7 +80,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	}
 
 	public void postConstructAssetType(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslAssetCacheBean<REALM,RREF,?,?,?,?,ATYPE,VIEW,?,?> bCache,
+									JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache,
 									JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset,
 									JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic,
 									REALM realm)
@@ -158,7 +158,8 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	{
 		type = fAsset.save(type);
 		reloadTree();
-		bCache.update(identifier.getRealm(),rref,sbhView.getSelection(),type);
+		logger.warn("NYI Cache Update");
+//		bCache.update(identifier.getRealm(),rref,sbhView.getSelection(),type);
 	}
 
 	public void deleteType() throws JeeslLockingException
@@ -166,7 +167,8 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 		try
 		{
 			fAsset.rm(type);
-			bCache.delete(identifier.getRealm(),rref,sbhView.getSelection(),type);
+			logger.warn("NYI Cache Delete");
+//			bCache.delete(identifier.getRealm(),rref,sbhView.getSelection(),type);
 			reloadTree();
 			reset(true);
 		}
