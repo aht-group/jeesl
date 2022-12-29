@@ -18,5 +18,7 @@ public interface JeeslAomCompanyCache <REALM extends JeeslTenantRealm<?,?,REALM,
 	Map<TenantIdentifier<REALM>,List<COMPANY>> getCachedAllCompanies();
 	Map<AomScopeCacheKey,List<COMPANY>> getCachedScopeCompanies();
 	
+	List<SCOPE> getScopes();
+	
 	void invalidateCompanyCache(TenantIdentifier<REALM> identifier);
 }

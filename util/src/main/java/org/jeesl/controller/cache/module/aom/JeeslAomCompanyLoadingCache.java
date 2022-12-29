@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.jeesl.api.facade.module.JeeslAomFacade;
+import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCompanyCache;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomScope;
@@ -27,16 +28,19 @@ public class JeeslAomCompanyLoadingCache <REALM extends JeeslTenantRealm<?,?,REA
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomCompanyLoadingCache.class);
 	public static final long serialVersionUID=1;
 	
-//	private JeeslAssetFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?,?,?> fAom;
+	private final JeeslAomFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?> fAom;
+	private final AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?,?,?> fbAom;
 	
 	private final LoadingCache<TenantIdentifier<REALM>,List<COMPANY>> cacheCompanies;
 
 	private final Map<TenantIdentifier<REALM>,List<COMPANY>> cachedAllCompanies;
 	private Map<AomScopeCacheKey,List<COMPANY>> cachedScopeCompanies;
 	
-	public JeeslAomCompanyLoadingCache(JeeslAomFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?> fAom)
+	public JeeslAomCompanyLoadingCache(AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,?,?,?,?,?,?,?,?,?,?,?,?> fbAom,
+										JeeslAomFacade<?,?,REALM,COMPANY,?,?,?,?,?,?,?,?> fAom)
 	{
-//		this.fAom=fAom;
+		this.fbAom=fbAom;
+		this.fAom=fAom;
 		cacheCompanies = Caffeine.newBuilder()
 			    .maximumSize(10_000)
 			    .expireAfterWrite(Duration.ofMinutes(5))
@@ -69,6 +73,9 @@ public class JeeslAomCompanyLoadingCache <REALM extends JeeslTenantRealm<?,?,REA
 	@Override public Map<TenantIdentifier<REALM>, List<COMPANY>> getCachedAllCompanies() {return cachedAllCompanies;}
 	@Override public Map<AomScopeCacheKey, List<COMPANY>> getCachedScopeCompanies() {return cachedScopeCompanies;}
 	
+	@Override public List<SCOPE> getScopes() {return fAom.allOrderedPositionVisible(fbAom.getClassScope());}
+	
 	@Override public void invalidateCompanyCache(TenantIdentifier<REALM> identifier) {cacheCompanies.invalidate(identifier);}
+	
 	
 }

@@ -183,10 +183,10 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 	
 	@Override public List<ASSET> allAssets(ASSET root)
 	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<ASSET> cQ = cB.createQuery(fbAsset.getClassAsset());
 		Root<ASSET> asset = cQ.from(fbAsset.getClassAsset());
-		List<Predicate> predicates = new ArrayList<Predicate>();
 		
 		Expression<Long> eRefId = asset.get(JeeslAomAsset.Attributes.realmIdentifier.toString());
 		Path<REALM> pRealm = asset.get(JeeslAomAsset.Attributes.realm.toString());
@@ -198,6 +198,26 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(asset);
+
+		TypedQuery<ASSET> tQ = em.createQuery(cQ);
+		return tQ.getResultList();
+	}
+	
+	@Override public List<ASSET> fAomAssets(TenantIdentifier<REALM> identifier)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<ASSET> cQ = cB.createQuery(fbAsset.getClassAsset());
+		Root<ASSET> root = cQ.from(fbAsset.getClassAsset());
+		
+		Expression<Long> eRefId = root.get(JeeslAomAsset.Attributes.realmIdentifier.toString());
+		Path<REALM> pRealm = root.get(JeeslAomAsset.Attributes.realm.toString());
+		
+		predicates.add(cB.equal(eRefId,identifier.getId()));
+		predicates.add(cB.equal(pRealm,identifier.getRealm()));
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(root);
 
 		TypedQuery<ASSET> tQ = em.createQuery(cQ);
 		return tQ.getResultList();

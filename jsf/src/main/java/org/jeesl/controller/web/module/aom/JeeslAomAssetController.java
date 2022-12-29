@@ -88,7 +88,9 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomAssetController.class);
 	
-	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,UP> fAsset;
+	private enum Loop{treeAllForParent}
+	
+	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,UP> fAom;
 //	private JeeslAssetCacheBean<REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,ETYPE,UP> bCache;
 	private JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,VIEW,ETYPE> cache;
 	
@@ -150,7 +152,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 						REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);
-		this.fAsset=fAsset;
+		this.fAom=fAsset;
 		this.cache=cache;
 		uiHelper.setCacheBean(cache);
 		
@@ -175,7 +177,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 		key.update(identifier,cache.getScopes());
 		this.rref=rref;
 		
-		sbhView.setList(fAsset.fAomViews(identifier));
+		sbhView.setList(fAom.fAomViews(identifier));
 		sbhView.setDefault();
 		reloadTree();
 	}
@@ -192,7 +194,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	
 	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		if(asset!=null) {lazyEvents.reloadScope(fAsset,asset);}
+		if(asset!=null) {lazyEvents.reloadScope(fAom,asset);}
 	}
 	
 	public void cancelEvent() {this.reset(false,false,true);}
@@ -207,11 +209,15 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	{
 		if(Objects.nonNull(jogger)) {jogger.start("reloadTree");}
 		if(debugOnInfo) {logger.info("Loading root: realm:"+identifier.getRealm().toString()+" rref:"+identifier.getId());}
-		root = fAsset.fcAssetRoot(identifier.getRealm(),identifier);
+		
+		root = fAom.fcAssetRoot(identifier.getRealm(),identifier);
 		if(Objects.nonNull(jogger)) {jogger.milestone("root");}
 		
+		List<ASSET> assets = fAom.fAomAssets(identifier);
+		if(Objects.nonNull(jogger)) {jogger.milestone(fbAsset.getClassAsset(),"fAomAssets(identifier)",assets.size());}
+		
 		tree = new DefaultTreeNode(root, null);
-		buildTree(tree,fAsset.allForParent(fbAsset.getClassAsset(), root));
+		buildTree(tree,fAom.allForParent(fbAsset.getClassAsset(), root));
 		if(Objects.nonNull(jogger)) {jogger.milestone("tree");}
 	}
 	
@@ -221,7 +227,9 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 		{
 			TreeNode n = new DefaultTreeNode(a,parent);
 			n.setExpanded(path.contains(a));
-			List<ASSET> childs = fAsset.allForParent(fbAsset.getClassAsset(),a);
+			if(Objects.nonNull(jogger)) {jogger.loopStart(Loop.treeAllForParent);}
+			List<ASSET> childs = fAom.allForParent(fbAsset.getClassAsset(),a);
+			if(Objects.nonNull(jogger)) {jogger.loopEnd(Loop.treeAllForParent,childs.size());}
 			if(!childs.isEmpty())
 			{
 				buildTree(n,childs);
@@ -258,7 +266,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	public void addAsset()
 	{
 		ASSET parent = null; if(asset!=null) {parent = asset;} else {parent = root;}
-		ASTATUS status = fAsset.fByEnum(fbAsset.getClassStatus(),JeeslAomAssetStatus.Code.na);
+		ASTATUS status = fAom.fByEnum(fbAsset.getClassStatus(),JeeslAomAssetStatus.Code.na);
 		if(debugOnInfo)
 		{
 			StringBuilder sb = new StringBuilder();
@@ -274,8 +282,8 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	
 	public void saveAsset() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		efAsset.converter(fAsset,asset);
-		asset = fAsset.save(asset);
+		efAsset.converter(fAom,asset);
+		asset = fAom.save(asset);
 		path.clear();addPath(asset);
 		
 		reloadTree();
@@ -305,7 +313,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     		ASSET child =(ASSET)n.getData();
     		child.setParent(parent);
     		child.setPosition(index);
-    		fAsset.save(child);
+    		fAom.save(child);
     		index++;
         }  
     }
@@ -321,7 +329,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     
 	private void reloadEvents()
 	{
-		lazyEvents.reloadScope(fAsset,asset);
+		lazyEvents.reloadScope(fAom,asset);
 	}
     
     public void addEvent() throws JeeslConstraintViolationException, JeeslLockingException
@@ -337,7 +345,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     public void selectEvent() throws JeeslConstraintViolationException, JeeslLockingException
     {
     	logger.info(AbstractLogMessage.selectEntity(event));
-    	event = fAsset.load(event);
+    	event = fAom.load(event);
     	efEvent.ejb2nnb(event,nnb);
     	Collections.sort(event.getAssets(),cpAsset);
     	uiHelper.update(key,event);
@@ -347,9 +355,9 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     public void saveEvent() throws JeeslConstraintViolationException, JeeslLockingException
     {
     	logger.info(AbstractLogMessage.saveEntity(event));
-    	efEvent.converter(fAsset,event);
+    	efEvent.converter(fAom,event);
     	efEvent.nnb2ejb(event,nnb);
-    	event = fAsset.save(event);
+    	event = fAom.save(event);
     	thfEventType.memoryUpdate();
     	reloadEvents();
     	thfEventType.memoryApply();
@@ -360,14 +368,14 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     public void removeEvent() throws JeeslConstraintViolationException, JeeslLockingException
     {
     	event.getAssets().remove(asset);
-    	fAsset.save(event);
+    	fAom.save(event);
     	reset(false,true,true);
     	reloadEvents();
     }
     
     public void cloneEvent()
     {
-    	efEvent.converter(fAsset,event);
+    	efEvent.converter(fAom,event);
     	event = efEvent.clone(event,markupType);
     	efEvent.ejb2nnb(event,nnb);
     	uiHelper.update(key,event);
@@ -389,14 +397,14 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 		if(!event.getAssets().contains(a))
 		{
 			event.getAssets().add(a);
-			event = fAsset.save(event);
+			event = fAom.save(event);
 		}
 	}
   
+    @Override public void callbackFrMetaSelected() {}
 	@Override public void callbackFrContainerSaved(EjbWithId id) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		event.setFrContainer(frh.getContainer());
-		event = fAsset.save(event);
+		event = fAom.save(event);
 	}
-	@Override public void callbackFrMetaSelected() {}
 }
