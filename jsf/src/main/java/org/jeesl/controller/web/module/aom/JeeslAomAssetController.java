@@ -83,7 +83,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
-					implements Serializable,ThMultiFilterBean,SbToggleBean,SbSingleBean,JeeslFileRepositoryCallback
+					implements ThMultiFilterBean,SbToggleBean,SbSingleBean,JeeslFileRepositoryCallback
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomAssetController.class);
@@ -118,7 +118,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
 	private JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
 
-	private ASSET root;
+//	private ASSET root;
     private ASSET asset; public ASSET getAsset() {return asset;} public void setAsset(ASSET asset) {this.asset = asset;}
     private EVENT event; public EVENT getEvent() {return event;} public void setEvent(EVENT event) {this.event = event;}
     private MT markupType;
@@ -208,15 +208,20 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 		if(Objects.nonNull(jogger)) {jogger.start("reloadTree");}
 		if(debugOnInfo) {logger.info("Loading root: realm:"+identifier.getRealm().toString()+" rref:"+identifier.getId());}
 		
-		root = fAom.fcAssetRoot(identifier.getRealm(),identifier);
-		if(Objects.nonNull(jogger)) {jogger.milestone("root");}
+
 		
 		List<ASSET> assets = fAom.fAomAssets(identifier);
 		if(Objects.nonNull(jogger)) {jogger.milestone(fbAsset.getClassAsset(),"fAomAssets(identifier)",assets.size());}
 		
-		tree = new DefaultTreeNode(root, null);
-		buildTree(tree,fAom.allForParent(fbAsset.getClassAsset(), root));
-		if(Objects.nonNull(jogger)) {jogger.milestone("tree");}
+		tree = new DefaultTreeNode();
+		TreeHelper.buildTree(tree,assets);
+		if(Objects.nonNull(jogger)) {jogger.milestone(tree.getClass(),"TreeHelper.buildTree",assets.size());}
+
+//		root = fAom.fcAssetRoot(identifier.getRealm(),identifier);
+//		if(Objects.nonNull(jogger)) {jogger.milestone("root");}
+		
+//		buildTree(tree,fAom.allForParent(fbAsset.getClassAsset(), root));
+//		if(Objects.nonNull(jogger)) {jogger.milestone("tree");}
 	}
 	
 	private void buildTree(TreeNode parent, List<ASSET> assets)
@@ -263,7 +268,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	
 	public void addAsset()
 	{
-		ASSET parent = null; if(asset!=null) {parent = asset;} else {parent = root;}
+		ASSET parent = null; if(asset!=null) {parent = asset;} //else {parent = root;}
 		ASTATUS status = fAom.fByEnum(fbAsset.getClassStatus(),JeeslAomAssetStatus.Code.na);
 		if(debugOnInfo)
 		{

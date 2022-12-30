@@ -35,7 +35,7 @@ public interface JeeslAomFacade <L extends JeeslLang, D extends JeeslDescription
 {
 	EVENT load(EVENT event);
 	
-	<RREF extends EjbWithId> ASSET fcAssetRoot(REALM realm, RREF rref);
+//	<RREF extends EjbWithId> ASSET fcAssetRoot(REALM realm, RREF rref);
 	<RREF extends EjbWithId> List<ASSET> fAomAssets(REALM realm, RREF rref, ATYPE type1, ATYPE type2);
 	List<ASSET> fAomAssets(TenantIdentifier<REALM> identifier);
 	List<ASSET> allAssets(ASSET root);

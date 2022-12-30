@@ -145,41 +145,41 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		}
 	}
 
-	@Override public <RREF extends EjbWithId> ASSET fcAssetRoot(REALM realm, RREF rref)
-	{
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<ASSET> cQ = cB.createQuery(fbAsset.getClassAsset());
-		Root<ASSET> root = cQ.from(fbAsset.getClassAsset());
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		
-		Expression<Long> eRefId = root.get(JeeslAomAsset.Attributes.realmIdentifier.toString());
-		Path<REALM> pRealm = root.get(JeeslAomAsset.Attributes.realm.toString());
-		Path<ASSET> pParent = root.get(JeeslAomAsset.Attributes.parent.toString());
-		
-		predicates.add(cB.equal(eRefId,rref.getId()));
-		predicates.add(cB.equal(pRealm,realm));
-		predicates.add(cB.isNull(pParent));
-		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.select(root);
-
-		TypedQuery<ASSET> tQ = em.createQuery(cQ);
-		try	{return tQ.getSingleResult();}
-		catch (NoResultException ex)
-		{
-			VIEW view = this.fcAomView(realm, rref, JeeslAomView.Tree.hierarchy);
-			
-			List<ATYPE> list = this.fAomAssetTypes(TenantIdentifier.instance(realm).withRref(rref),view);
-			ATYPE type = list.get(0);
-			STATUS status = this.fByEnum(fbAsset.getClassStatus(), JeeslAomAssetStatus.Code.na);
-			ASSET result = fbAsset.ejbAsset().build(realm,rref, null, status, type);
-			try {return this.save(result);}
-			catch (JeeslConstraintViolationException | JeeslLockingException e)
-			{
-				return this.fcAssetRoot(realm,rref);
-			}
-		}
-	}
+//	@Override public <RREF extends EjbWithId> ASSET fcAssetRoot(REALM realm, RREF rref)
+//	{
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<ASSET> cQ = cB.createQuery(fbAsset.getClassAsset());
+//		Root<ASSET> root = cQ.from(fbAsset.getClassAsset());
+//		List<Predicate> predicates = new ArrayList<Predicate>();
+//		
+//		Expression<Long> eRefId = root.get(JeeslAomAsset.Attributes.realmIdentifier.toString());
+//		Path<REALM> pRealm = root.get(JeeslAomAsset.Attributes.realm.toString());
+//		Path<ASSET> pParent = root.get(JeeslAomAsset.Attributes.parent.toString());
+//		
+//		predicates.add(cB.equal(eRefId,rref.getId()));
+//		predicates.add(cB.equal(pRealm,realm));
+//		predicates.add(cB.isNull(pParent));
+//		
+//		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.select(root);
+//
+//		TypedQuery<ASSET> tQ = em.createQuery(cQ);
+//		try	{return tQ.getSingleResult();}
+//		catch (NoResultException ex)
+//		{
+//			VIEW view = this.fcAomView(realm, rref, JeeslAomView.Tree.hierarchy);
+//			
+//			List<ATYPE> list = this.fAomAssetTypes(TenantIdentifier.instance(realm).withRref(rref),view);
+//			ATYPE type = list.get(0);
+//			STATUS status = this.fByEnum(fbAsset.getClassStatus(), JeeslAomAssetStatus.Code.na);
+//			ASSET result = fbAsset.ejbAsset().build(realm,rref, null, status, type);
+//			try {return this.save(result);}
+//			catch (JeeslConstraintViolationException | JeeslLockingException e)
+//			{
+//				return this.fcAssetRoot(realm,rref);
+//			}
+//		}
+//	}
 	
 	@Override public List<ASSET> allAssets(ASSET root)
 	{
