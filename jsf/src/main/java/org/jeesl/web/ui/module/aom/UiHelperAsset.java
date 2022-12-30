@@ -24,16 +24,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UiHelperAsset <L extends JeeslLang, D extends JeeslDescription,
-								REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
+								REALM extends JeeslTenantRealm<L,D,REALM,?>,
 								COMPANY extends JeeslAomCompany<REALM,SCOPE>,
 								SCOPE extends JeeslAomScope<L,D,SCOPE,?>,
-								ASSET extends JeeslAomAsset<REALM,ASSET,COMPANY,ASTATUS,ATYPE>,
-								ASTATUS extends JeeslAomAssetStatus<L,D,ASTATUS,?>,
-								ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,ALEVEL,?>,
-								ALEVEL extends JeeslAomView<L,D,REALM,?>,
-								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,?,?,?>,
-								ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
-								ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>>
+								EVENT extends JeeslAomEvent<COMPANY,?,ETYPE,?,?,?,?>,
+								ETYPE extends JeeslAomEventType<L,D,ETYPE,?>>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;

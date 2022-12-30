@@ -67,7 +67,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
+										REALM extends JeeslTenantRealm<L,D,REALM,?>,
 										COMPANY extends JeeslAomCompany<REALM,SCOPE>,
 										SCOPE extends JeeslAomScope<L,D,SCOPE,?>,
 										ASSET extends JeeslAomAsset<REALM,ASSET,COMPANY,ASTATUS,ATYPE>,
@@ -101,7 +101,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	
 	private final Comparator<ASSET> cpAsset;
 	
-	private final UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS> uiHelper; public UiHelperAsset<L,D,REALM,RREF,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS> getUiHelper() {return uiHelper;}
+	private final UiHelperAsset<L,D,REALM,COMPANY,SCOPE,EVENT,ETYPE> uiHelper; public UiHelperAsset<L,D,REALM,COMPANY,SCOPE,EVENT,ETYPE> getUiHelper() {return uiHelper;}
     private final NullNumberBinder nnb; public NullNumberBinder getNnb() {return nnb;}
     private final ThMultiFilterHandler<ETYPE> thfEventType; public ThMultiFilterHandler<ETYPE> getThfEventType() {return thfEventType;}
     private final SbMultiHandler<ETYPE> sbhEventType; public SbMultiHandler<ETYPE> getSbhEventType() {return sbhEventType;}
@@ -117,7 +117,6 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 
     private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
 	private JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
-	protected RREF rref; public RREF getRref() {return rref;}
 
 	private ASSET root;
     private ASSET asset; public ASSET getAsset() {return asset;} public void setAsset(ASSET asset) {this.asset = asset;}
@@ -171,11 +170,10 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 								);
 	}
 	
-	public void updateRealmReference(RREF rref)
+	public <RREF extends EjbWithId> void updateRealmReference(RREF rref)
 	{
 		identifier.withRref(rref);
 		key.update(identifier,cache.getScopes());
-		this.rref=rref;
 		
 		sbhView.setList(fAom.fAomViews(identifier));
 		sbhView.setDefault();

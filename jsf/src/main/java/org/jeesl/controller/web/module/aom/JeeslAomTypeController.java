@@ -42,8 +42,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-										G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-										GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>,
+										G extends JeeslGraphic<GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
 										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,G>,
 										VIEW extends JeeslAomView<L,D,REALM,G>>
@@ -54,11 +53,11 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomTypeController.class);
 
 	private JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset;
-	private JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic;
+	private JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
 
 	private JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache;
 
-	private final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;
+	private final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg;
 	private final AomFactoryBuilder<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAsset;
 
 	private final SbSingleHandler<VIEW> sbhView; public SbSingleHandler<VIEW> getSbhView() {return sbhView;}
@@ -71,7 +70,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
     private ATYPE type;  public ATYPE getType() {return type;} public void setType(ATYPE type) {this.type = type;}
 
 	public JeeslAomTypeController(AomFactoryBuilder<L,D,REALM,?,?,?,?,ATYPE,VIEW,?,?,?,?,?,?,?,?> fbAsset,
-									SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg)
+									SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg)
 	{
 		super(fbAsset.getClassL(),fbAsset.getClassD());
 		this.fbAsset=fbAsset;
@@ -82,7 +81,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	public void postConstructAssetType(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache,
 									JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset,
-									JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic,
+									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);
