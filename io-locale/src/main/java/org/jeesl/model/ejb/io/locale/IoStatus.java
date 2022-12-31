@@ -96,8 +96,8 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 	@ManyToOne
 	protected IoStatus parent;
 	@SuppressWarnings("unchecked")
-	public <P extends EjbWithCode> P getParent() {return (P)parent;}
-	public <P extends EjbWithCode> void setParent(P parent) {this.parent=(IoStatus)parent;}
+	@Override public <P extends EjbWithCode> P getParent() {return (P)parent;}
+	@Override public <P extends EjbWithCode> void setParent(P parent) {this.parent=(IoStatus)parent;}
 
 	protected String symbol;
 	public String getSymbol() {return symbol;}

@@ -38,10 +38,6 @@ public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGra
 	public IoGraphicShape getStyle() {return style;}
 	public void setStyle(IoGraphicShape style) {this.style = style;}
 	
-	private boolean css;
-	@Override public boolean isCss() {return css;}
-	@Override public void setCss(boolean css) {this.css = css;}
-	
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
@@ -49,6 +45,10 @@ public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGra
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
+	
+	private boolean css;
+	@Override public boolean isCss() {return css;}
+	@Override public void setCss(boolean css) {this.css = css;}
 	
 	double size;
 	@Override public double getSize() {return size;}
