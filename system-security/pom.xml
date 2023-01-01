@@ -8,9 +8,9 @@
     	<version>0.3.0-SNAPSHOT</version>
 	</parent>
 	
-    <artifactId>jeesl-io-locale</artifactId>
+    <artifactId>jeesl-system-security</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO Locale</name>
+    <name>JEESL - System Security</name>
 	
 	<dependencyManagement>
 		<dependencies>

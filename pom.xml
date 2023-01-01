@@ -29,6 +29,8 @@
 		
 		<module>io-locale</module>
 		<module>io-crypto</module>
+		
+		<module>system-security</module>
 	</modules>
 
 	<properties>
@@ -174,6 +176,7 @@
         		<artifactId>jeesl-monitor</artifactId>
         		<version>${project.version}</version>
         	</dependency>
+
 			<dependency>
         		<groupId>org.jeesl</groupId>
         		<artifactId>jeesl-io-locale</artifactId>
@@ -182,6 +185,12 @@
 			<dependency>
         		<groupId>org.jeesl</groupId>
         		<artifactId>jeesl-io-crypto</artifactId>
+        		<version>${project.version}</version>
+        	</dependency>
+
+        	<dependency>
+        		<groupId>org.jeesl</groupId>
+        		<artifactId>jeesl-system-security</artifactId>
         		<version>${project.version}</version>
         	</dependency>
 
@@ -291,6 +300,11 @@
           			</execution>
         		</executions>
 			</plugin>
+			<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <configuration><rulesUri>${maven.ignore.versions}</rulesUri></configuration>
+            </plugin>
 		</plugins>
 	</build>
 	
