@@ -39,6 +39,7 @@
     <js:status code="jeeslRevisionMod" symbol="ui/io/revision/envers/mod.svg"/>
     <js:status code="jeeslRevisionAdd" symbol="ui/io/revision/envers/add.svg"/>
     <js:status code="jeeslRevisionDel" symbol="ui/io/revision/envers/del.svg"/>
+    <js:status code="jeeslZip" symbol="ui/io/fr/zip.svg"/>
     <js:status code="jeeslPrint" symbol="ui/system/print.svg"/>
     <js:status code="jeeslWorkflow" symbol="ui/control/wizard/workflow.svg"/>
     <js:status code="jeeslSbLogging" symbol="ui/io/logging/sbLogging.svg"/>
