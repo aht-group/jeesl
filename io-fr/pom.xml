@@ -8,9 +8,9 @@
     	<version>0.3.0-SNAPSHOT</version>
 	</parent>
 	
-    <artifactId>jeesl-io-mail</artifactId>
+    <artifactId>jeesl-io-fr</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO Mail</name>
+    <name>JEESL - IO FileRepository</name>
 	
 	<dependencyManagement>
 		<dependencies>

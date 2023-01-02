@@ -30,6 +30,7 @@
 		<module>io-locale</module>
 		<module>io-crypto</module>
 		<module>io-mail</module>
+		<module>io-fr</module>
 		
 		<module>system-security</module>
 	</modules>
