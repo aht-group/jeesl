@@ -29,6 +29,7 @@
 		
 		<module>io-locale</module>
 		<module>io-crypto</module>
+		<module>io-mail</module>
 		
 		<module>system-security</module>
 	</modules>

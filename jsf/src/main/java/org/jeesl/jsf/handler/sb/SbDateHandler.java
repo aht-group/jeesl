@@ -14,6 +14,7 @@ public class SbDateHandler implements SbDateSelection
 	private static final long serialVersionUID = 1L;
 
 	private SbDateSelectionBean bean;
+	
 	private LocalDate dateFrom; public LocalDate getDateFrom() {return dateFrom;} public void setDateFrom(LocalDate dateFrom) {this.dateFrom = dateFrom;}
 	private LocalDate dateTo; public LocalDate getDateTo() {return dateTo;} public void setDateTo(LocalDate dateTo) {this.dateTo = dateTo;}
 
