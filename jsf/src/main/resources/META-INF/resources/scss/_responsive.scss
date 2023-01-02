@@ -2090,77 +2090,134 @@ body, .ui-widget {
 						width: auto;
 					}
 					
-					> .ui-selectonemenu, > .ui-selectcheckboxmenu {
-						@media (max-width: 768px) {
-							padding: 0;
-						}
+					> .ui-selectonemenu, > .ui-selectcheckboxmenu, > .ui-selectmanybutton, > .ui-chips {
+						padding: 0;
 					}
 					
 					> .jeesl-ck-editor {
 						@media (max-width: 768px) {
-							margin: 0 -#{$regular-spacing};
 							padding: 0;
-							width: calc(100% + 2 * #{$regular-spacing});
 						}
 						
 						.cke {
+							border: none;
+							border-radius: $border-radius;
 							box-sizing: border-box;
 							width: 100%;
 							
-							@media(max-width: 768px) {
-								border-width: $border-width 0;
-							}
+							.cke_inner {
+								border-radius: $border-radius;
 							
-							.cke_top {
-								padding: 0;
-								
-								.cke_toolbar {
-									display: flex;
-									float: none;
-										
-									.cke_toolgroup {
-										align-items: center;
+								.cke_top {
+									background: transparent;
+									border: none;
+									border-radius: $border-radius-top;
+									padding: 0;
+									
+									.cke_toolbar {
 										display: flex;
-										margin: 0;
+										float: none;
+											justify-content: right;
 											
-										.cke_button {
+										.cke_toolgroup {
 											align-items: center;
-											box-sizing: border-box;
-											border: none;
 											display: flex;
-											height: $element-height;
-											justify-content: center;
 											padding: 0;
-											transition: background $transition-duration linear;
-											width: $element-height;
-											
-											@media (max-width: 768px) {
-												height: $element-height-mobile;
-												width: $element-height-mobile;
-											}
+											margin: 0;
 												
-											&:hover {
-												background: $light-grey;
+											.cke_button {
+												@include button(cke_button_on);
+												
+												border: $border;
+												border-width: $border-width 0;
+												box-sizing: border-box;
 												cursor: pointer;
-											}
-											
-											&.cke_button_on {
-												background: $dark-colour;
+												
+												@media (max-width: 768px) {
+													width: $element-height-mobile;
+												}
+												
+												&:first-child {
+													border-left: $border;
+												}
+												
+												&:last-child {
+													border-right: $border;
+													border-top-right-radius: $border-radius;
+												}
+												
+												&:after {
+													position: relative;
+													margin: 0;
+												}
+												
+												.cke_button_label {
+													display: none;
+												}
 												
 												.cke_button_icon {
-													filter: brightness(5);
+													@include icon;
+													
+													background: none !important;
+													float: none;
+													font-size: 0;
+													font-weight: bold;
+													text-align: center;
+													
+													&:before {
+														font-size: 1rem;
+														
+														@media (max-width: 768px) {
+															font-size: 1.5rem;
+														}
+													}
+													
+													&.cke_button__bold_icon:before {
+														content: '\f032';
+													}
+													
+													&.cke_button__italic_icon:before {
+														content: '\f033';
+													}
+													
+													&.cke_button__bulletedlist_icon:before {
+														content: '\f0ca';
+													}
+													
+													&.cke_button__numberedlist_icon:before {
+														content: '\f0cb';
+													}
+													
+													&.cke_button__subscript_icon:before {
+														content: '\f12c';
+													}
+													
+													&.cke_button__superscript_icon:before {
+														content: '\f12b';
+													}
+												}
+											}
+											
+											.cke_toolbar_separator {
+												background: none;
+												border-left: $border;
+												height: $element-height;
+												margin: 0;
+												width: 0;
+												
+												@media (max-width: 768px) {
+													height: $element-height-mobile;
 												}
 											}
 										}
-										
-										.cke_toolbar_separator {
-											height: $element-height;
-											margin: 0;
-											
-											@media (max-width: 768px) {
-												height: $element-height-mobile;
-											}
-										}
+									}
+								}
+								
+								.cke_contents {
+									padding: $half-spacing $regular-spacing;
+									
+									@media (max-width: 768px) {
+										padding: $regular-spacing;
 									}
 								}
 							}
@@ -2906,7 +2963,7 @@ body, .ui-widget {
 		}
 		
 		tr.ui-state-highlight, .cell-select > label.selected {
-			background: $dark-colour;
+			background: $highlight-colour;
 			color: $white-100;
 			font-weight: 500;
 			text-shadow: none;

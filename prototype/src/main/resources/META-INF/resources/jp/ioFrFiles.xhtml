@@ -36,8 +36,14 @@
 	
 	<composite:implementation>
 		<h:form id="fFiles">
-			<p:dataTable id="dtJeeslFiles" var="meta" value="#{cc.attrs.handler.metas}"
-						 selection="#{cc.attrs.handler.meta}" rowKey="#{meta.id}" selectionMode="single"  draggableRows="true">
+			<p:dataTable id="dtJeeslFiles"
+						 var="meta"
+						 value="#{cc.attrs.handler.metas}"
+						 selection="#{cc.attrs.handler.meta}"
+						 rowKey="#{meta.id}"
+						 selectionMode="single"
+						 draggableRows="true"
+						 styleClass="jeesl-datatable">
 				<f:facet name="header">
 					<j:dtHeader id="dthJeeslFiles" title="#{cc.attrs.labelTable}">
 						<j:svg type="jeeslAdd"
