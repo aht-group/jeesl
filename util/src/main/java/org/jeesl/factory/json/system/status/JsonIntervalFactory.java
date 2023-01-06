@@ -20,7 +20,10 @@ public class JsonIntervalFactory<L extends JeeslLang, D extends JeeslDescription
 		this.localeCode=localeCode;
 		this.q=q;
 	}
-		
+	
+	public static JsonInterval build() {return new JsonInterval();}
+	public static <E extends Enum<E>> JsonInterval build(E code){JsonInterval json = build(); json.setCode(code.toString()); return json;}
+	
 	public JsonInterval build(S ejb)
 	{
 		JsonInterval json = new JsonInterval();

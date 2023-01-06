@@ -26,6 +26,7 @@ public class JsonTsScopeFactory<L extends JeeslLang, D extends JeeslDescription,
 	}
 	
 	public static JsonTsScope build(){return new JsonTsScope();}
+	public static <E extends Enum<E>> JsonTsScope build(E code){JsonTsScope json = build(); json.setCode(code.toString()); return json;}
 	
 	public JsonTsScope build(SCOPE ejb)
 	{

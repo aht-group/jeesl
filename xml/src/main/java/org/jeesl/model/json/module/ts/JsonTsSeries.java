@@ -28,6 +28,16 @@ public class JsonTsSeries implements Serializable
 	private JsonTsScope scope;
 	public JsonTsScope getScope() {return scope;}
 	public void setScope(JsonTsScope scope) {this.scope = scope;}
+	
+	@JsonProperty("bridge")
+	private JsonTsBridge bridge;
+
+	public JsonTsBridge getBridge() {
+		return bridge;
+	}
+	public void setBridge(JsonTsBridge bridge) {
+		this.bridge = bridge;
+	}
 
 	@JsonProperty("stat")
 	private JsonTsStat stat;

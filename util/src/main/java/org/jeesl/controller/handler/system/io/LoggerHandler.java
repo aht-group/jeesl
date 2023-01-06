@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.controller.processor.arithmetic.NullCalculator;
 import org.jeesl.controller.processor.finance.AmountRounder;
@@ -103,6 +104,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		Instant timeNow = Instant.now();
 		MILESTONE ejb = efMilestone.build(log);
 		ejb.setRecord(Date.from(timeNow));
+		if(Objects.isNull(timeStart)) {this.start("Implicit start");}
 		ejb.setMilliTotal(ChronoUnit.MILLIS.between(timeStart,timeNow));
 		ejb.setMilliStep(ChronoUnit.MILLIS.between(timeMilestone,timeNow));
 		
