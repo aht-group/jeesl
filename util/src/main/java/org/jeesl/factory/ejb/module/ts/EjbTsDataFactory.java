@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.module.ts;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,8 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.module.ts.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.DateUtil;
 
 public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 								TRANSACTION extends JeeslTsTransaction<?,DATA,?,?>,
@@ -41,6 +44,7 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 	
 	public DATA build() {return build(null,null,null,null,null);}
 	public DATA build(WS workspace, TS timeSeries) {return build(workspace,timeSeries,null,new Date(),null);}
+	public DATA build2(WS workspace, TS timeSeries, TRANSACTION transaction, LocalDateTime ldt, Double value) {return build(workspace,timeSeries, transaction,DateUtil.toDate(ldt),value);}
 	public DATA build(WS workspace, TS timeSeries, TRANSACTION transaction, Date date, Double value)
 	{
 		DATA ejb = null;

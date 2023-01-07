@@ -35,6 +35,8 @@ import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.exlp.util.DateUtil;
+
 public class TsSessionProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 									USER extends JeeslUser<?>,
 									SCOPE extends JeeslTsScope<?,?,?,ST,?,EC,INT>,
@@ -109,9 +111,9 @@ public class TsSessionProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 			
 			for(JsonTsData jData : json.getDatas())
 			{
-				if(!setDate.contains(jData.getRecord()))
+				if(!setDate.contains(DateUtil.toDate(jData.getRecord())))
 				{
-					DATA data = efData.build(ws,ts,transaction,jData.getRecord(),null);
+					DATA data = efData.build2(ws,ts,transaction,jData.getRecord(),null);
 					try {data = fTs.save(data);}
 					catch (JeeslConstraintViolationException | JeeslLockingException e) {}
 					

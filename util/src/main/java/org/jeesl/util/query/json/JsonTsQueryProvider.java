@@ -1,6 +1,6 @@
 package org.jeesl.util.query.json;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.jeesl.model.json.module.ts.JsonTsData;
 import org.jeesl.model.json.module.ts.JsonTsMultipoint;
@@ -27,7 +27,7 @@ public class JsonTsQueryProvider
 	public static JsonTsData data()
 	{				
 		JsonTsData json = new JsonTsData();
-		json.setRecord(new Date());
+		json.setRecord(LocalDateTime.now());
 		return json;
 	}
 	

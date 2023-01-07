@@ -1,6 +1,5 @@
 package org.jeesl.factory.json.module.ts;
 
-import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
 import org.jeesl.model.json.module.ts.JsonTsBridge;
 import org.jeesl.model.json.system.status.JsonEntity;
 import org.slf4j.Logger;

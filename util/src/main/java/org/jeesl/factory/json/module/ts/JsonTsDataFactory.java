@@ -28,7 +28,7 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 		JsonTsData json = new JsonTsData();
 	
 		if(q.isSetId()){json.setId(ejb.getId());}
-		if(q.isSetRecord()){json.setRecord(ejb.getRecord());}
+		if(Objects.nonNull(q.getRecord())){json.setRecord(DateUtil.toLocalDateTime(ejb.getRecord()));}
 		
 	
 		return json;
@@ -39,8 +39,8 @@ public class JsonTsDataFactory<DATA extends JeeslTsData<?,?,?,?,?>>
 		if(Objects.isNull(ts.getDatas())) {ts.setDatas(new ArrayList<>());}
 		
 		JsonTsData data = new JsonTsData();
-		data.setRecord(DateUtil.toDate(ldt));
-		data.setValue(1d);
+		data.setRecord(ldt);
+		data.setValue(value);
 		ts.getDatas().add(data);
 	}
 }
