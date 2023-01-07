@@ -4,36 +4,36 @@ package org.jeesl.model.json.module.ts;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.jeesl.model.json.system.security.JsonSecurityUser;
+import org.jeesl.model.json.system.status.JsonSource;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value = "transaction")
 public class JsonTransaction implements Serializable
 {
-
     private final static long serialVersionUID = 1L;
-    @JsonProperty("user")
-    protected JsonUser user;
+
     @JsonProperty("source")
     protected JsonSource source;
+   
     @JsonProperty("id")
-    protected Long id;
+    private Long id;
+    public Long getId() {return id;}
+    public void setId(Long value) {this.id = value;}
+    
+    
     @JsonProperty("record")
     protected Date record;
 
-    /*
-     * Gets the value of the user property.
-     *
-     * @return
-     *     possible object is
-     *     {@link JsonUser }
-     *
-     */
-    public JsonUser getUser() {
+
+    @JsonProperty("user")
+    protected JsonSecurityUser user;
+    public JsonSecurityUser getUser() {
         return user;
     }
 
@@ -45,7 +45,7 @@ public class JsonTransaction implements Serializable
      *     {@link User }
      *
      */
-    public void setUser(JsonUser value) {
+    public void setUser(JsonSecurityUser value) {
         this.user = value;
     }
 
@@ -89,21 +89,7 @@ public class JsonTransaction implements Serializable
      *     {@link Long }
      *
      */
-    public Long getId() {
-        return id;
-    }
-
-    /*
-     * Sets the value of the id property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *
-     */
-    public void setId(Long value) {
-        this.id = value;
-    }
+   
 
     @JsonIgnore public boolean isSetId() {
         return (this.id!= null);

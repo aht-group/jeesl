@@ -1,7 +1,7 @@
 package org.jeesl.factory.json.module.ts;
 
+import org.jeesl.model.json.io.label.JsonEntity;
 import org.jeesl.model.json.module.ts.JsonTsBridge;
-import org.jeesl.model.json.system.status.JsonEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

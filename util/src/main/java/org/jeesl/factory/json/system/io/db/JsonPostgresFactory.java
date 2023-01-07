@@ -1,6 +1,6 @@
 package org.jeesl.factory.json.system.io.db;
 
-import org.jeesl.model.json.system.io.db.JsonPostgres;
+import org.jeesl.model.json.io.db.pg.JsonPostgres;
 
 public class JsonPostgresFactory 
 {

@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.jboss.resteasy.spi.HttpRequest;
 import org.jboss.resteasy.spi.UnauthorizedException;
-import org.jeesl.model.json.system.io.ssi.mobile.Login;
+import org.jeesl.model.json.io.ssi.mobile.Login;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

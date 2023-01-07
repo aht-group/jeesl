@@ -26,8 +26,8 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.json.system.io.db.JsonPostgres;
-import org.jeesl.model.json.system.io.db.JsonPostgresReplication;
+import org.jeesl.model.json.io.db.pg.JsonPostgres;
+import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

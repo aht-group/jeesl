@@ -6,7 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jeesl.model.json.io.ssi.JsonSsiContainer;
+import org.jeesl.model.json.io.ssi.core.JsonSsiContainer;
 
 @Path("/rest/jeesl/io/ssi")
 public interface JeeslIoSsiVersionRest 

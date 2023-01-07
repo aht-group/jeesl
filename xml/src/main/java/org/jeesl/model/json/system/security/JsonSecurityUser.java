@@ -21,4 +21,14 @@ public class JsonSecurityUser implements Serializable
 	private String password;
 	public String getPassword() {return password;}
 	public void setPassword(String password) {this.password = password;}
+	
+    @JsonProperty("firstName")
+    protected String firstName;
+    public String getFirstName() {return firstName;}
+    public void setFirstName(String value) {this.firstName = value;}
+    
+    @JsonProperty("lastName")
+    protected String lastName;
+    public String getLastName() {return lastName;}
+    public void setLastName(String value) {this.lastName = value;}
 }

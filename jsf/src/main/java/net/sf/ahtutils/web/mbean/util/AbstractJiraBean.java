@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.property.JeeslProperty;
-import org.jeesl.model.json.system.jira.Issue;
+import org.jeesl.model.json.ssi.jira.Issue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -28,7 +28,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate;
+import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

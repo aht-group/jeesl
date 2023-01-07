@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.model.json.io.db.JsonDbCacheStatistic;
-import org.jeesl.model.json.system.io.db.JsonPostgresStatement;
+import org.jeesl.model.json.io.db.pg.JsonPostgresStatement;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

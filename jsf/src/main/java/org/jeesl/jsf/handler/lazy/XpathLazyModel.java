@@ -11,7 +11,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.util.JeeslLazyListHandler;
-import org.jeesl.model.json.system.translation.JsonTranslation;
+import org.jeesl.model.json.io.label.JsonTranslation;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;

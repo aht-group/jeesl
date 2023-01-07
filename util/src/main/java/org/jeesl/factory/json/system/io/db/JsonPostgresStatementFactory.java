@@ -3,7 +3,7 @@ package org.jeesl.factory.json.system.io.db;
 import java.math.BigInteger;
 
 import org.jeesl.controller.processor.finance.AmountRounder;
-import org.jeesl.model.json.system.io.db.JsonPostgresStatement;
+import org.jeesl.model.json.io.db.pg.JsonPostgresStatement;
 
 public class JsonPostgresStatementFactory
 {

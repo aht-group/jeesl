@@ -3,7 +3,7 @@ package org.jeesl.factory.json.system.io.db;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.jeesl.model.json.system.io.db.JsonPostgresConnection;
+import org.jeesl.model.json.io.db.pg.JsonPostgresConnection;
 
 public class JsonPostgresConnectionFactory 
 {

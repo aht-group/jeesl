@@ -3,8 +3,8 @@ package org.jeesl.doc.ofx.system.io;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.model.json.system.io.db.JsonPostgres;
-import org.jeesl.model.json.system.io.db.JsonPostgresConnection;
+import org.jeesl.model.json.io.db.pg.JsonPostgres;
+import org.jeesl.model.json.io.db.pg.JsonPostgresConnection;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.slf4j.Logger;

@@ -6,8 +6,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.json.ssi.acled.JsonAcledContainer;
-import org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate;
 
 @Path("/rest/ssi/acled")
 public interface AcledInternRest

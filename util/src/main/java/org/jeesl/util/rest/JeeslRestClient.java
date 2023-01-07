@@ -18,7 +18,7 @@ import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.jeesl.model.json.system.io.ssi.JsonSsiCredential;
+import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,6 +1,6 @@
 package org.jeesl.factory.json.io.ssi;
 
-import org.jeesl.model.json.io.ssi.JsonSsiVersion;
+import org.jeesl.model.json.io.ssi.core.JsonSsiVersion;
 
 public class JsonSsiVersionFactory
 {

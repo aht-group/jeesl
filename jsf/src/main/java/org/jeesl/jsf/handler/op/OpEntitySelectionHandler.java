@@ -7,7 +7,7 @@ import org.jeesl.interfaces.bean.op.OpEntityBean;
 import org.jeesl.interfaces.controller.handler.op.OpEntitySelection;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.lazy.XpathLazyModel;
-import org.jeesl.model.json.system.translation.JsonTranslation;
+import org.jeesl.model.json.io.label.JsonTranslation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

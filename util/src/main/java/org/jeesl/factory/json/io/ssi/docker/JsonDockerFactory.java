@@ -3,8 +3,8 @@ package org.jeesl.factory.json.io.ssi.docker;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.model.json.system.io.ssi.docker.JsonDockerContainer;
-import org.jeesl.model.json.system.io.ssi.docker.JsonDocker;
+import org.jeesl.model.json.io.ssi.docker.JsonDocker;
+import org.jeesl.model.json.io.ssi.docker.JsonDockerContainer;
 
 public class JsonDockerFactory
 {

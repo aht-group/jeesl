@@ -6,7 +6,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jeesl.model.json.system.jira.Issue;
+import org.jeesl.model.json.ssi.jira.Issue;
 
 @Path("/rest/api/2")
 public interface JiraRest

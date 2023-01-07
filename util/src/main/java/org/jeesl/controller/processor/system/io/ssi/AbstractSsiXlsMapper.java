@@ -9,8 +9,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
-import org.jeesl.model.json.system.io.report.xlsx.JsonXlsCell;
-import org.jeesl.model.json.system.io.report.xlsx.JsonXlsRow;
+import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
+import org.jeesl.model.json.io.report.xlsx.JsonXlsRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,6 +1,6 @@
 package org.jeesl.factory.json.system.io.report.xls;
 
-import org.jeesl.model.json.system.io.report.xlsx.JsonXlsColumn;
+import org.jeesl.model.json.io.report.xlsx.JsonXlsColumn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

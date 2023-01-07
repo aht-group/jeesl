@@ -1,6 +1,6 @@
 package org.jeesl.web.rest.auth;
 
-import org.jeesl.model.json.system.io.ssi.mobile.Login;
+import org.jeesl.model.json.io.ssi.mobile.Login;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

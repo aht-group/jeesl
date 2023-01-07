@@ -1,7 +1,7 @@
 package org.jeesl.controller.handler.system.io.ssi;
 
-import org.jeesl.model.json.io.ssi.JsonSsiContainer;
-import org.jeesl.model.json.io.ssi.JsonSsiVersion;
+import org.jeesl.model.json.io.ssi.core.JsonSsiContainer;
+import org.jeesl.model.json.io.ssi.core.JsonSsiVersion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

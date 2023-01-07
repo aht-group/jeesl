@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
-import org.jeesl.model.json.system.translation.JsonTranslation;
+import org.jeesl.model.json.io.label.JsonTranslation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

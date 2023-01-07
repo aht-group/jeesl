@@ -11,8 +11,8 @@ import java.util.Set;
 import org.jeesl.factory.xml.system.io.sync.XmlExceptionFactory;
 import org.jeesl.factory.xml.system.io.sync.XmlExceptionsFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
-import org.jeesl.model.json.system.io.ssi.update.JsonSsiMessage;
-import org.jeesl.model.json.system.io.ssi.update.JsonSsiStatistic;
+import org.jeesl.model.json.io.ssi.update.JsonSsiMessage;
+import org.jeesl.model.json.io.ssi.update.JsonSsiStatistic;
 import org.jeesl.model.json.system.job.JsonJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +30,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	public static enum Code {success,fail,partial}
 	
 	private DataUpdate update;
-	private final org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate json;
+	private final org.jeesl.model.json.io.ssi.update.JsonSsiUpdate json;
 	
 	private final Map<String,Integer> updateSuccess,updateFail;
 	private final Map<String,Integer> createSuccess,createFail;
@@ -40,7 +40,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	public DataUpdateTracker(boolean autoStart)
 	{
 		update = new DataUpdate();
-		json = new org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate();
+		json = new org.jeesl.model.json.io.ssi.update.JsonSsiUpdate();
 		json.setJob(new JsonJob());
 		json.getJob().setStart(LocalDateTime.now());
 		json.setStatistic(new JsonSsiStatistic());
@@ -220,7 +220,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		}
 	}
 	
-	public org.jeesl.model.json.system.io.ssi.update.JsonSsiUpdate toJson()
+	public org.jeesl.model.json.io.ssi.update.JsonSsiUpdate toJson()
 	{
 		this.stop();
 		return json;

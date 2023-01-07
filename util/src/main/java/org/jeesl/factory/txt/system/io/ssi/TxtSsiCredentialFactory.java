@@ -1,6 +1,6 @@
 package org.jeesl.factory.txt.system.io.ssi;
 
-import org.jeesl.model.json.system.io.ssi.JsonSsiCredential;
+import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

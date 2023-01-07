@@ -2,7 +2,7 @@ package org.jeesl.factory.json.io.ssi;
 
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.model.json.system.io.ssi.JsonSsiCredential;
+import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
 
 public class JsonSsiCredentialFactory
 {

@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.model.json.io.label.JsonTranslation;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.json.system.translation.JsonTranslation;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
 import org.openfuxml.content.table.Head;
