@@ -31,8 +31,8 @@ public class JsonTsData implements Serializable
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	private LocalDateTime localDateTime;
-	public LocalDateTime getRecord() {return localDateTime;}
-	public void setRecord(LocalDateTime localDateTime) {this.localDateTime = localDateTime;}
+	public LocalDateTime getLocalDateTime() {return localDateTime;}
+	public void setLocalDateTime(LocalDateTime localDateTime) {this.localDateTime = localDateTime;}
 	
 	//Here we may introduce other patterns if required, e.g.
 	// * zonedDateTime

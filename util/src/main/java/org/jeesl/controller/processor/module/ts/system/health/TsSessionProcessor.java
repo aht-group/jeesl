@@ -111,9 +111,9 @@ public class TsSessionProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 			
 			for(JsonTsData jData : json.getDatas())
 			{
-				if(!setDate.contains(DateUtil.toDate(jData.getRecord())))
+				if(!setDate.contains(DateUtil.toDate(jData.getLocalDateTime())))
 				{
-					DATA data = efData.build2(ws,ts,transaction,jData.getRecord(),null);
+					DATA data = efData.build2(ws,ts,transaction,jData.getLocalDateTime(),null);
 					try {data = fTs.save(data);}
 					catch (JeeslConstraintViolationException | JeeslLockingException e) {}
 					
