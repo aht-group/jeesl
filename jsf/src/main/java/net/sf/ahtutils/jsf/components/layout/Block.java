@@ -9,9 +9,8 @@ import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import net.sf.ahtutils.jsf.util.ComponentAttribute;
-
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.jsf.util.ComponentAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

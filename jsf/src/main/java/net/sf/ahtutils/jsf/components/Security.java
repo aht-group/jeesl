@@ -8,10 +8,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 
-import net.sf.ahtutils.jsf.util.ComponentAttribute;
-
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
+import org.jeesl.jsf.util.ComponentAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

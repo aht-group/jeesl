@@ -1,4 +1,4 @@
-package net.sf.ahtutils.jsf.util;
+package org.jeesl.jsf.util;
 
 import javax.el.ValueExpression;
 import javax.faces.component.UIComponent;

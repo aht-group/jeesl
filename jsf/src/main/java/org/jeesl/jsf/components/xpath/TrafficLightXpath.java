@@ -13,12 +13,11 @@ import org.apache.commons.jxpath.JXPathNotFoundException;
 import org.jeesl.factory.css.CssAlignmentFactory;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportColumn;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.jsf.util.ComponentAttribute;
 import org.jeesl.jsf.util.ComponentAttributeProcessor;
 import org.jeesl.jsf.util.TrafficLightProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.jsf.util.ComponentAttribute;
 
 @FacesComponent("org.jeesl.jsf.components.xpath.TrafficLightXpath")
 @SuppressWarnings("rawtypes")

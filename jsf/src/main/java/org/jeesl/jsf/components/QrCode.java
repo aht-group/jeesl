@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.jsf.util.ComponentAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +23,6 @@ import com.google.zxing.common.BitArray;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import net.sf.ahtutils.jsf.util.ComponentAttribute;
 
 @FacesComponent("org.jeesl.jsf.components.QrCode")
 public class QrCode extends UIOutput
