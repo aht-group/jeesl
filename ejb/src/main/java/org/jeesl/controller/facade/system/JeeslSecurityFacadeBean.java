@@ -408,7 +408,7 @@ public class JeeslSecurityFacadeBean<L extends JeeslLang,
 	@Override
 	public <S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> S fStaff(Class<S> clStaff, USER user, R role, D1 domain) throws JeeslNotFoundException
 	{
-		return oneForParents(clStaff,"user",user,"role",role,JeeslStaff.Attributes.domain.toString(),domain);
+		return oneForParents(clStaff,JeeslStaff.Attributes.user,user,JeeslStaff.Attributes.role,role,JeeslStaff.Attributes.domain,domain);
 	}
 	
 	@Override public void grantRole(Class<USER> clUser, Class<R> clRole, USER user, R role, boolean grant)

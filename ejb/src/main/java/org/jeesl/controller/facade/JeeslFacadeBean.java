@@ -836,11 +836,11 @@ public class JeeslFacadeBean implements JeeslFacade
 		if(list.size()==0){throw new JeeslNotFoundException("No "+cl.getSimpleName()+" found for "+a1+"={"+p1+"} and "+a2+"={"+p2+"}");}
 		return list.get(0);
 	}
-	@Override public <T extends EjbWithId, I extends EjbWithId> T oneForParents(Class<T> cl, String p1Name, I p1, String p2Name, I p2, String p3Name, I p3) throws JeeslNotFoundException
+	@Override public <T extends EjbWithId, E1 extends Enum<E1>,  E2 extends Enum<E2>, E3 extends Enum<E3>, I extends EjbWithId> T oneForParents(Class<T> cl, E1 e1, I p1, E2 e2, I p2, E3 e3, I p3) throws JeeslNotFoundException
 	{
-		List<T> list = allForParent(cl,p1Name,p1,p2Name,p2,p3Name,p3);
-		if(list.size()>1){throw new JeeslNotFoundException("More than one result found for "+cl.getSimpleName()+" and "+p1Name+"=="+p1+" and "+p2Name+"=="+p2+" and "+p3Name+"=="+p3);}
-		if(list.size()==0){throw new JeeslNotFoundException("No "+cl.getSimpleName()+" found for "+cl.getSimpleName()+" and "+p1Name+"=="+p1+" and "+p2Name+"=="+p2+" and "+p3Name+"=="+p3);}
+		List<T> list = allForParent(cl,e1.toString(),p1,e2.toString(),p2,e3.toString(),p3);
+		if(list.size()>1){throw new JeeslNotFoundException("More than one result found for "+cl.getSimpleName()+" and "+e1+"=="+p1+" and "+e2+"=="+p2+" and "+e3+"=="+p3);}
+		if(list.size()==0){throw new JeeslNotFoundException("No "+cl.getSimpleName()+" found for "+cl.getSimpleName()+" and "+e1+"=="+p1+" and "+e2+"=="+p2+" and "+e3+"=="+p3);}
 		return list.get(0);
 	}
 

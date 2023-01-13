@@ -32,17 +32,12 @@ public class TxtStatusFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang,
 		return sb.toString();
 	}
 	
-	public String labels (List<S> list)
-	{
-		return label(localeCode,list);
-	}
-		
-	public static <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
-		String label(String lang, List<S> list)
+	public String labels (List<S> list){return labels(localeCode,list);}
+	public static <S extends JeeslStatus<L,?,S>,L extends JeeslLang> String labels(String localeCode, List<S> list)
 	{
 		if(list==null || list.isEmpty()){return null;}
 		List<String> result = new ArrayList<String>();
-		for(S ejb : list){result.add(ejb.getName().get(lang).getLang());}
+		for(S ejb : list){result.add(ejb.getName().get(localeCode).getLang());}
 		return StringUtils.join(result, ", ");
 	}
 	
