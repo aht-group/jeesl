@@ -1059,6 +1059,33 @@ html, body, .ui-widget {
 	}
 }
 
+.jeesl-galleria {
+	.ui-galleria-caption {
+		left: 0;
+		margin-bottom: $header-element-underline !important;
+		overflow: visible !important;
+		position: relative;
+		top: 0;
+		width: 100% !important;
+	}
+	
+	.ui-icon {
+		width: $element-height-mobile;
+		
+		:before {
+			font-size: 1.8em;
+		}
+	}
+	
+	.ui-galleria-nav-prev:after {
+		border-right: $border;
+	}
+	
+	.ui-galleria-nav-next:after {
+		border-left: $border;
+	}
+}
+
 .jeesl-panel {
 	@include jeesl-panel;
 }
@@ -1143,6 +1170,18 @@ html, body, .ui-widget {
 	@for $i from 1 to 13 {
 		.jeesl-grid-#{$i} {
 			width: calc(100% - 10px);
+		}
+	}
+	
+	.jeesl-row {
+		display: block;
+		
+		.jeesl-grid {
+			margin-top: $regular-spacing;
+			
+			&.jeesl-grid-image {
+				max-width: 30%;
+			}
 		}
 	}
 	
