@@ -80,6 +80,11 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public String getString3() {return string3;}
 	@Override public void setString3(String string3) {this.string3 = string3;}
 
+	//Booleans
+	private Boolean bool1;
+	@Override public Boolean getBool1() {return bool1;}
+	@Override public void setBool1(Boolean bool1) {this.bool1 = bool1;}
+	
 	//Sorting
 	private String sortBy;
 	@Override public String getSortBy() {return sortBy;}

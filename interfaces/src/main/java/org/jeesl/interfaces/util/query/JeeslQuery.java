@@ -31,6 +31,8 @@ public interface JeeslQuery extends Serializable
 	void debug(boolean debug);
 	void debug(boolean debug, int ident);
 	
+	Boolean getBool1();
+	void setBool1(Boolean bool1);
 	
 	String getString1();
 	void setString1(String string1);
