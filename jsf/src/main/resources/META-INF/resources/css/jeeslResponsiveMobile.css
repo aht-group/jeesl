@@ -651,6 +651,22 @@ html, body, .ui-widget {
     letter-spacing: -.5px;
     width: 135px; }
 
+.jeesl-galleria .ui-galleria-caption {
+  left: 0;
+  margin-bottom: 4px !important;
+  overflow: visible !important;
+  position: relative;
+  top: 0;
+  width: 100% !important; }
+.jeesl-galleria .ui-icon {
+  width: 84px; }
+  .jeesl-galleria .ui-icon :before {
+    font-size: 1.8em; }
+.jeesl-galleria .ui-galleria-nav-prev:after {
+  border-right: 1px solid #ababab; }
+.jeesl-galleria .ui-galleria-nav-next:after {
+  border-left: 1px solid #ababab; }
+
 .jeesl-panel {
   padding: 0; }
   .jeesl-panel .ui-texteditor {
@@ -884,6 +900,12 @@ html, body, .ui-widget {
   width: calc(100% - 10px); }
 .jeesl-content .jeesl-content-container .jeesl-grid-12 {
   width: calc(100% - 10px); }
+.jeesl-content .jeesl-content-container .jeesl-row {
+  display: block; }
+  .jeesl-content .jeesl-content-container .jeesl-row .jeesl-grid {
+    margin-top: 10px; }
+    .jeesl-content .jeesl-content-container .jeesl-row .jeesl-grid.jeesl-grid-image {
+      max-width: 30%; }
 .jeesl-content .jeesl-content-container .ui-panel {
   margin-bottom: 15px; }
   .jeesl-content .jeesl-content-container .ui-panel:not(.html-container-panel) {

@@ -2078,6 +2078,7 @@ body, .ui-widget {
 					
 					> span {
 						display: inline-block;
+						padding: $half-spacing 0;
 						
 						@media (max-width: 768px) {
 							align-items: center;
@@ -2742,6 +2743,159 @@ body, .ui-widget {
 	}
 }
 
+.jeesl-galleria {
+	align-items: stretch;
+	background: $panel-background;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100% !important;
+	
+	.ui-galleria-caption {
+		@include jeesl-titlebar;
+		
+	    bottom: unset !important;
+		border-radius: $border-radius;
+		height: auto !important;
+		order: 0;
+		position: absolute;
+		top: $slim-spacing;
+	    width: calc(100% - #{2 * $slim-spacing}) !important;
+
+		@media (max-width: 768px) {
+			left: 0;
+			margin-bottom: $header-element-underline !important;
+			overflow: visible !important;
+			position: relative;
+			top: 0;
+			width: 100% !important;
+		}
+
+		> * {
+			margin: 0;
+		}
+
+		> h4 {
+			@include jeesl-titlebar-title;
+			
+			
+		}
+		
+		> p {
+			padding: 0 $regular-spacing;
+		}
+	}
+	
+	.ui-galleria-panel-wrapper {
+		aspect-ratio: 3/2;
+		height: auto !important;
+		order: 1;
+		width: 100% !important;
+	
+		.ui-galleria-panel {
+			align-items: center;
+			display: flex !important;
+			height: 100% !important;
+			justify-content: center;
+			width: 100% !important;
+			
+			img {
+				max-height: 100%;
+				max-width: 100%;
+			}
+		}
+	}
+	
+	.ui-galleria-filmstrip-wrapper {
+		background: $panel-header-gradient;
+		border-top: $border;
+		flex-grow: 1;
+		height: calc(40px + #{2 * $half-spacing}) !important;
+		margin: 0;
+		order: 3;
+		padding: $half-spacing $element-height;
+		width: auto !important;
+		
+		.ui-galleria-filmstrip {
+			display: flex;
+			height: calc(100% - #{2 * $half-spacing});
+			left: $element-height;
+			top: $half-spacing;
+		}
+	}
+	
+	.ui-icon {
+		@include icon;
+		
+		align-items: center;
+		background: $panel-header-gradient;
+		border-top: $border;
+		bottom: 0 !important;
+		display: flex;
+		justify-content: center;
+		width: $element-height;
+		
+		@media (max-width: 768px) {
+			width: $element-height-mobile;
+		}
+		
+		&:hover:before {
+			opacity: 1;
+		}
+		
+		&:before {
+			background: $soft-grey;
+			content: '';
+			font-size: 1.1em;
+			height: 100%;
+			left: 0;
+			opacity: 0;
+			position: absolute;
+			top: 0;
+			transition: opacity $transition-duration linear;
+			width: 100%;
+			
+			@media (max-width: 768px) {
+				font-size: 1.8em;
+			}
+		}
+		
+		&:after {
+			align-items: center;
+			display: flex;
+			height: calc(100% - 13px);
+			justify-content: center;
+			margin: 7px 0 6px;
+			position: relative;
+			text-align: center;
+			width: 100%;
+		}
+	}
+	
+	.ui-galleria-nav-prev {
+		order: 2;
+		
+		&:after {
+			content: '\f0d9';
+			
+			@media (max-width: 768px) {
+				border-right: $border;
+			}
+		}
+	}
+	
+	.ui-galleria-nav-next {
+		order: 4;
+		
+		&:after {
+			content: '\f0da';
+			
+			@media (max-width: 768px) {
+				border-left: $border;
+			}
+		}
+	}
+}
+
 .jeesl-panel {
 	@include jeesl-panel;
 }
@@ -3157,6 +3311,13 @@ body, .ui-widget {
 		width: 100%;
 		
 		.jeesl-row {
+			align-items: stretch;
+			display: flex;
+			
+			@media (max-width: 768px) {
+				display: block;
+			}
+			
 			&:not(:first-child) {
 				margin-top: $regular-spacing;
 			}
@@ -3164,13 +3325,34 @@ body, .ui-widget {
 			.jeesl-grid {
 				@media (max-width: 768px) {
 					margin-top: $regular-spacing;
-				}	
+				}
+				
+				&.jeesl-grid-image {
+					text-align: right;
+					
+					@media (max-width: 768px) {
+						max-width: 30%;
+					}
+					
+					> img {
+						height: auto;
+						max-height: 100%;
+						position: absolute;
+						right: 0;
+					}
+				}
 			}
 		}
 		
 		.jeesl-grid {
 			margin: 0 $half-spacing;
 			position: relative;
+			
+			&.jeesl-flow-layout > form {
+				display: flex;
+				flex-wrap: wrap;
+				row-gap: $regular-spacing;
+			}
 			
 			form {
 				margin-bottom: $regular-spacing;
