@@ -8,7 +8,7 @@ import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import net.sf.ahtutils.jsf.util.ComponentAttribute;
+import org.jeesl.jsf.util.ComponentAttribute;
 
 @FacesComponent("org.jeesl.jsf.components.html.Li")
 public class Li extends UIPanel

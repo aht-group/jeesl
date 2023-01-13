@@ -11,10 +11,9 @@ import javax.faces.context.FacesContext;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.interfaces.web.JeeslJsfWorkflowHandler;
+import org.jeesl.jsf.util.ComponentAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.jsf.util.ComponentAttribute;
 
 @FacesComponent("org.jeesl.jsf.components.Security")
 public class Security extends UIPanel
