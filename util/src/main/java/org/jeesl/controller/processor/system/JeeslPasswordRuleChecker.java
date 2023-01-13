@@ -40,7 +40,8 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	private JeeslFacade fJeesl;
 	
 	private final RecordComparator<HISTORY> cpHistory;
-	
+	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
+
 	public JeeslPasswordRuleChecker(JeeslFacade fJeesl, Class<RATING> cRating)
 	{		
 		this.fJeesl=fJeesl;
@@ -49,6 +50,7 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		mapResult = new HashMap<>();
 		
 		cpHistory = new RecordComparator<>();
+		debugOnInfo = false;
 	}
 	
 	public void clear()
@@ -79,8 +81,8 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		RATING rating = null;
 		Strength strength = zxcvbn.measure(pwd);
 		
-		logger.info("fJeesl:"+(fJeesl==null));
-		logger.info("strength:"+(strength==null));
+		if(debugOnInfo) {logger.info("fJeesl:"+(fJeesl==null));}
+		if(debugOnInfo) {logger.info("strength:"+(strength==null));}
 		rating = fJeesl.fByCode(cRating,JeeslSecurityPasswordRating.codePrefix+""+strength.getScore());
 		
 		analyseComplexity(rules,pwd,rating);
@@ -109,7 +111,7 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		Collections.sort(histories,cpHistory);
 		Collections.reverse(histories);
 		
-		for(HISTORY h : histories) {logger.info(h.toString());}
+		if(debugOnInfo) {for(HISTORY h : histories) {logger.info(h.toString());}}
 		
 		for(RULE r : rules)
 		{
@@ -117,13 +119,13 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 			if(r.getCode().equals(JeeslSecurityPasswordRule.Code.history.toString()))
 			{
 				boolean isValidHistory = validHistory(value,hash,histories);
-				logger.info("Valid History: "+isValidHistory);
+				if(debugOnInfo) {logger.info("Valid History: "+isValidHistory);}
 				mapResult.put(r,isValidHistory);
 			}
 			else if(r.getCode().equals(JeeslSecurityPasswordRule.Code.age.toString()))
 			{
 				boolean isValidAge = validAge(value,histories);
-				logger.info("Valid Age: "+isValidAge);
+				if(debugOnInfo) {logger.info("Valid Age: "+isValidAge);}
 				mapResult.put(r, isValidAge);
 			}
 		}
