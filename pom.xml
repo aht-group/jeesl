@@ -33,6 +33,7 @@
 		<module>io-fr</module>
 		
 		<module>system-security</module>
+		<module>system-property</module>
 	</modules>
 
 	<properties>
