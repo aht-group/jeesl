@@ -646,25 +646,27 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 
 		//check if field have getter methods
 		//non getters field are marked as available so that its not saved for automatic download
-		try {c.getDeclaredMethod("get"+ StringUtils.capitalize(f.getName()));}catch (Exception e) {
+		try {c.getDeclaredMethod("get"+ StringUtils.capitalize(f.getName()));} catch (Exception e){
 		try {c.getDeclaredMethod("is"+ StringUtils.capitalize(f.getName()));} catch (Exception e2) {return false;}}
 
 		//check if field is already saved
-		for (Iterator iterator = attributes.iterator(); iterator.hasNext();)
+		for (Iterator<RA> iterator = attributes.iterator(); iterator.hasNext();)
 		{
-			RA ra = (RA) iterator.next();
+			RA ra = iterator.next();
 			if(ra.getCode().equals(f.getName())) {return true;}
 		}
 		return false;
 	}
 
-	public boolean isEmptyEntityReloaded() {
+	public boolean isEmptyEntityReloaded()
+	{
 		if(entity.getCode()==null || entity.getCode().isEmpty()) {return true;}
 		if(className==null || className.isEmpty() || className.equals("CLASS NOT FOUND")) {
 			return true;
 		}
 		return false;
 	}
+	
 //	@SuppressWarnings("rawtypes")
 //	@Override protected void updateSecurity2(JeeslJsfSecurityHandler jsfSecurityHandler, String actionDeveloper)
 //	{
