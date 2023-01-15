@@ -87,7 +87,6 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 			
 			if(bSecurity==null) {processViews(fSecurity,user,identity);}
 			else {processViews(bSecurity,roles,identity);}
-			if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(), null, identity.sizeAllowedViews());}
 			
 			if(bSecurity==null) {processActions(fSecurity,user,identity);}
 			else {processActions(bSecurity,roles,identity);}

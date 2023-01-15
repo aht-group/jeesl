@@ -26,7 +26,7 @@ public class SbMultiHandler <T extends EjbWithId> implements Serializable
 	private final Class<T> cT;
 	private final SbToggleBean bean; 
 	
-	private List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list = list;}
+	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear(); this.list.addAll(list);}
 	private final List<T> selected; public List<T> getSelected() {return selected;}
 	private Map<T,Boolean> map; public Map<T,Boolean> getMap() {return map;}
 	
@@ -53,7 +53,6 @@ public class SbMultiHandler <T extends EjbWithId> implements Serializable
 	@SuppressWarnings("unchecked")
 	public <E extends Enum<E>, S extends EjbWithCode> void add(JeeslFacade fUtils, Class<S> c, String code)
 	{
-		if(list==null) {list = new ArrayList<T>();}
 		try
 		{
 			S status = fUtils.fByCode(c,code);
@@ -83,7 +82,7 @@ public class SbMultiHandler <T extends EjbWithId> implements Serializable
 	
 	public void fillAndSelect(List<T> items)
 	{
-		this.list=items;
+		this.list.addAll(items);
 		preSelect(items);
 	}
 	public void preSelect(List<T> items)

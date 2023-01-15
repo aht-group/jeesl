@@ -6,8 +6,10 @@
     
 	<composite:interface>
 		<composite:attribute name="value" required="true" />
+		
 		<composite:attribute name="mindate" required="false" />
 		<composite:attribute name="maxdate" required="false" />
+		
 		<composite:attribute name="required" required="false" default="false"/>
 		<composite:attribute name="update" required="false" />
 		<composite:attribute name="pattern" required="false" default="#{appSettingsBean.patternDate}"/>
