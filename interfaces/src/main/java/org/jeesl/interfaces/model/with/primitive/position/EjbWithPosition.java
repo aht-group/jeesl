@@ -6,8 +6,8 @@ public interface EjbWithPosition extends EjbWithId
 {
 	public enum Attribute{position}
 	
-	public static String attributePosition = "position";
+	public static String attributePosition1 = "position";
 	
-	public int getPosition();
-	public void setPosition(int position);
+	int getPosition();
+	void setPosition(int position);
 }

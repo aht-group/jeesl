@@ -6,8 +6,9 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface EjbWithRecord extends EjbWithId
 {
-	public static String attributeRecord = "record";
+	public enum Attribute{record}
+//	priv static String attributeRecord = "record";
 	
-	public Date getRecord();
-	public void setRecord(Date record);
+	Date getRecord();
+	void setRecord(Date record);
 }

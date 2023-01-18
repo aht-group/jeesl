@@ -402,7 +402,7 @@ public class JeeslFacadeBean implements JeeslFacade
 		TypedQuery<T> typedQuery = em.createQuery(select);
 		if(maxResults>0){typedQuery.setMaxResults(maxResults);}
 
-		if(EjbWithRecord.class.isAssignableFrom(type)){select.orderBy(cB.asc(from.get(EjbWithRecord.attributeRecord)));}
+		if(EjbWithRecord.class.isAssignableFrom(type)){select.orderBy(cB.asc(from.get(EjbWithRecord.Attribute.record.toString())));}
 		else if(EjbWithValidFrom.class.isAssignableFrom(type)){select.orderBy(cB.asc(from.get(EjbWithValidFrom.Attributes.validFrom.toString())));}
 
 
@@ -605,8 +605,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		CriteriaQuery<T> select = cQ.select(from);
 		select.where(cB.equal(pRealm,realm),cB.equal(eRref,rref.getId()));
 
-		if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithPosition.attributePosition)));}
-		else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithRecord.attributeRecord)));}
+		if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithPosition.Attribute.position.toString())));}
+		else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(from.get(EjbWithRecord.Attribute.record.toString())));}
 
 		return em.createQuery(select).getResultList();
 	}
@@ -687,8 +687,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		CriteriaQuery<W> select = cQ.select(root);
 		select.where(cB.equal(pCategory,context));
 
-	    if(EjbWithPosition.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-	    else if(EjbWithRecord.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+	    if(EjbWithPosition.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 
 		TypedQuery<W> tQ = em.createQuery(select);
 		return tQ.getResultList();
@@ -704,8 +704,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		CriteriaQuery<W> select = cQ.select(root);
 		select.where(cB.equal(pCategory,category));
 
-	    if(EjbWithPosition.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-	    else if(EjbWithRecord.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+	    if(EjbWithPosition.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 
 		TypedQuery<W> tQ = em.createQuery(select);
 		return tQ.getResultList();
@@ -722,8 +722,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		CriteriaQuery<W> select = cQ.select(root);
 		select.where(cB.equal(pType,type));
 
-	    if(EjbWithPosition.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-	    else if(EjbWithRecord.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+	    if(EjbWithPosition.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 
 		TypedQuery<W> tQ = em.createQuery(select);
 		return tQ.getResultList();
@@ -740,8 +740,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		CriteriaQuery<W> select = cQ.select(root);
 		select.where(cB.equal(pStatus,status));
 
-	    if(EjbWithPosition.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-	    else if(EjbWithRecord.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+	    if(EjbWithPosition.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(w)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 
 		TypedQuery<W> tQ = em.createQuery(select);
 		return tQ.getResultList();
@@ -869,8 +869,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		CriteriaQuery<T> select = cQ.select(root);
 		select.where(cB.isTrue(jComponent.in(parents)));
 
-	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 
 		TypedQuery<T> tQ = em.createQuery(select);
 		return tQ.getResultList();
@@ -901,8 +901,8 @@ public class JeeslFacadeBean implements JeeslFacade
 	    CriteriaQuery<T> select = cQ.select(root);
 	    select.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 
-	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 
 		TypedQuery<T> q = em.createQuery(select);
 		try	{return q.getResultList();}
@@ -934,8 +934,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		CriteriaQuery<T> select = cQ.select(root);
 		select.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 
-		if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-		else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+		if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+		else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 
 		TypedQuery<T> q = em.createQuery(select);
 		try	{return q.getResultList();}
@@ -959,8 +959,8 @@ public class JeeslFacadeBean implements JeeslFacade
 	    if(parent!=null) {select.where(cB.equal(p1Path,parent));}
 	    else {select.where(cB.isNull(p1Path));}
 
-	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 	    else if(EjbWithValidFrom.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithValidFrom.Attributes.validFrom.toString())));}
 
 		TypedQuery<T> q = em.createQuery(select);
@@ -980,7 +980,7 @@ public class JeeslFacadeBean implements JeeslFacade
 	    CriteriaQuery<T> select = criteriaQuery.select(root);
 	    select.where(cB.equal(p1Path, p1.getId()));
 
-	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
+	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
 	    else if(EjbWithValidFrom.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithValidFrom.Attributes.validFrom.toString())));}
 
 		TypedQuery<T> q = em.createQuery(select);
@@ -1086,8 +1086,8 @@ public class JeeslFacadeBean implements JeeslFacade
 	    select.where( cB.and(cB.equal(p1Path, p1.getId()),
 	    					 cB.equal(p2Path, p2.getId())));
 	    
-	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 
 		TypedQuery<T> q = em.createQuery(select);
 
@@ -1110,8 +1110,8 @@ public class JeeslFacadeBean implements JeeslFacade
 	    					 cB.equal(p2Path, p2.getId()),
 	    					 cB.equal(p3Path, p3.getId())));
 
-	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.attributePosition)));}
-	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.attributeRecord)));}
+	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
+	    else if(EjbWithRecord.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithRecord.Attribute.record.toString())));}
 	    
 		TypedQuery<T> q = em.createQuery(select);
 
