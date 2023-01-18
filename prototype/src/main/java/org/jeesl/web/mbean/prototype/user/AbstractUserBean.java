@@ -3,6 +3,7 @@ package org.jeesl.web.mbean.prototype.user;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
@@ -89,10 +90,10 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 		else if(localeCode.equals("id")){locale = new Locale("id", "ID");}
 		else if(localeCode.equals("in")){locale = new Locale("id", "ID");}
 
-		logger.info("localeCode:"+localeCode+" locale"+locale);
+		logger.debug("localeCode:"+localeCode+" locale:"+locale);
 		
 		FacesContext ctx = FacesContext.getCurrentInstance();
-		if(ctx!=null)
+		if(Objects.nonNull(ctx))
 		{
 			UIViewRoot root = ctx.getViewRoot();
 			if(root!=null) {root.setLocale(locale);}

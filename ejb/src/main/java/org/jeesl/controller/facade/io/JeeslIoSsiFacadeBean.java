@@ -238,7 +238,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildCount(tQ.getResultList());
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
 	@Override
@@ -287,7 +287,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.multiselect(jData.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildCount(tQ.getResultList());
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
 	@Override public Json2Tuples<MAPPING,LINK> tpMappingLink(List<MAPPING> list)
@@ -371,7 +371,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.multiselect(pCleaning.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildCount(tQ.getResultList());
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 
 	@Override public List<DATA> fSsiDataWithJob1(MAPPING mapping, LINK link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC)

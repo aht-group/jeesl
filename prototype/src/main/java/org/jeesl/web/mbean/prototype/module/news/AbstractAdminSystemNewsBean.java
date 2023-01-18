@@ -65,7 +65,7 @@ public class AbstractAdminSystemNewsBean <L extends JeeslLang, D extends JeeslDe
 	
 	private void reloadNews()
 	{
-		list = fNews.allOrdered(fbNews.getClassNews(),JeeslSystemNews.Attributes.validFrom.toString(),false);
+		list = fNews.allOrdered(fbNews.getClassNews(),JeeslSystemNews.Attributes.validFrom,false);
 		active.clear();
 		for(NEWS n : list){active.put(n,false);}
 		for(NEWS n : fNews.fActiveNews()){active.put(n,true);}	

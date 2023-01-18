@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Tuple;
@@ -24,7 +25,6 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 	final static Logger logger = LoggerFactory.getLogger(Json2TuplesFactory.class);
 	
 	private JeeslFacade fUtils; public JeeslFacade getfUtils() {return fUtils;} public void setfUtils(JeeslFacade fUtils) {this.fUtils = fUtils;}
-	private final Json2TupleFactory<A,B> jtf;
 	
 	private final Class<A> cA;
 	private final Class<B> cB;
@@ -38,6 +38,7 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 	protected final Map<A,Map<B,Json2Tuple<A,B>>> map2; public Map<A,Map<B,Json2Tuple<A, B>>> getMap2() {return map2;}
 	private Json2Tuples<A,B> tuples; public Json2Tuples<A,B> get2Tuples() {return tuples;} public void set2Tuples(Json2Tuples<A,B> tuples) {this.tuples = tuples;}
 
+	private boolean debugOnInfo = false;
 
 	public Json2TuplesFactory(Class<A> cA, Class<B> cY) {this(null,cA,cY);}
 	public Json2TuplesFactory(JeeslFacade fUtils, Class<A> cA, Class<B> cY)
@@ -53,7 +54,6 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		mapB = new HashMap<Long,B>();
 		
 		map2 = new HashMap<A,Map<B,Json2Tuple<A,B>>>();
-		jtf = new Json2TupleFactory<A,B>();
 	}
 	
 	protected void clear()
@@ -174,48 +174,24 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 	public Json2Tuples<A,B> build(List<Tuple> tuples, JsonTupleFactory.Type...types)
 	{
 		Json2Tuples<A,B> json = new Json2Tuples<A,B>();
-		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build2(t,types));}
+		for(Tuple t : tuples)
+		{
+			if(debugOnInfo)
+			{
+				Object[] a = t.toArray();
+				logger.info("Tuple Lenght: "+a.length);
+				for(int i=0;i<a.length;i++)
+				{
+					if(Objects.isNull(a[i])) {logger.info("\t"+i+": null");}
+					else {logger.info("\t"+i+": "+a[i].getClass().getSimpleName()+": "+a[i].toString());}
+				}
+			}
+			json.getTuples().add(JsonTupleFactory.build2(t,types));
+		}
 		ejb2Load(json);
 		return json;
 	}
 	
-	/*
-	* Build Json2Tuples from jpa.Tupes
-	* @deprecated
-	* <p> Use {@link build(List<Tuple> tuples, JsonTupleFactory.Type...types)} instead.
-	*/
-    @Deprecated public Json2Tuples<A,B> buildSum(List<Tuple> tuples)
-	{
-		Json2Tuples<A,B> json = new Json2Tuples<A,B>();
-		
-		for(Tuple t : tuples)
-        {
-        	json.getTuples().add(jtf.buildSum(t));
-        }
-		
-		ejb2Load(json);
-		
-		return json;
-	}
-	
-	/*
-	* Build Json2Tuples from jpa.Tupes
-	* @deprecated
-	* <p> Use {@link build(List<Tuple> tuples, JsonTupleFactory.Type...types)} instead.
-	*/
-	public Json2Tuples<A,B> buildCount(List<Tuple> tuples)
-	{
-		Json2Tuples<A,B> json = new Json2Tuples<A,B>();
-		
-		for(Tuple t : tuples)
-        {
-        	json.getTuples().add(jtf.buildCount(t));
-        }
-		
-		ejb2Load(json);
-		
-		return json;
-	}
 	
 	// This method is used if a third grouping is added to the query. Then it's counted on the unique id1-id2 combination
 	public Json2Tuples<A,B> countOnIds(List<Tuple> tuples)
@@ -225,7 +201,7 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		
 		for(Tuple t : tuples)
         {
-			Json2Tuple<A,B> j = jtf.buildCount(t);
+			Json2Tuple<A,B> j = JsonTupleFactory.build2(t,JsonTupleFactory.Type.count);
 			
 			MultiKey key = new MultiKey(j.getId1(),j.getId2());
 			if(!mapTuples.containsKey(key)) {mapTuples.put(key, j);}

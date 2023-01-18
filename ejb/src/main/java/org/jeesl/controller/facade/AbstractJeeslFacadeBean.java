@@ -141,7 +141,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	@Override public <T extends EjbWithPositionVisibleParent, P extends EjbWithId> List<T> allOrderedPositionVisibleParent(Class<T> cl, P parent) {return fJeesl.allOrderedPositionVisibleParent(cl,parent);}
 	@Override public <T extends EjbWithCode> List<T> allOrderedCode(Class<T> c) {return fJeesl.allOrderedCode(c);}
 	@Override public <T extends EjbWithName> List<T> allOrderedName(Class<T> c) {return fJeesl.allOrderedName(c);}
-	public <T extends Object> List<T> allOrdered(Class<T> cl, String by, boolean ascending) {return fJeesl.allOrdered(cl, by, ascending);}
+	@Override public <T extends Object, E extends Enum<E>> List<T> allOrdered(Class<T> cl, E by, boolean ascending) {return fJeesl.allOrdered(cl, by, ascending);}
 	public <T extends EjbWithRecord> List<T> allOrderedRecord(Class<T> type, boolean ascending) {return fJeesl.allOrderedRecord(type,ascending);}
 	@Override public <T extends EjbWithRecord, I extends EjbWithId> List<T> allOrderedParentRecordBetween(Class<T> cl, boolean ascending, String p1Name, I p1,Date from, Date to) {return fJeesl.allOrderedParentRecordBetween(cl, ascending, p1Name, p1, from, to);}
 	@Override public <T extends EjbWithRecord, P extends EjbWithId> List<T> allOrderedParentsRecordBetween(Class<T> c, boolean ascending, String p1Name, List<P> parents, Date from, Date to){return fJeesl.allOrderedParentsRecordBetween(c, ascending, p1Name, parents, from, to);}

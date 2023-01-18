@@ -66,8 +66,8 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
 				{
 					if(Objects.isNull(m) && !isLoadedRevisionEntity(jscn))
 					{
-						logger.info("searching" + jscn);
-						RE re =  fRevision.fRevisionEntity(key.toString());
+//						logger.info("Searching jscn:"+jscn);
+						RE re =  fRevision.fRevisionEntity(jscn);
 						load(re);
 					}
 					//search again after loading revision entity
@@ -191,7 +191,6 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
 							}
 						}
 					}
-
 				}
 			}
 			catch (SecurityException e) {logger.warn("SecurityException: "+e.getMessage());}
@@ -225,12 +224,9 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
 		catch (ClassNotFoundException e) {logger.warn("CNFE: "+re.getCode());}
 	}
 
-
-
 	private boolean isLoadedRevisionEntity(String jscnRe)
 	{
-		 boolean x = missingLabelHandler.mapEntities.containsKey(jscnRe)? true : false;
-		 return x;
+		 return missingLabelHandler.mapEntities.containsKey(jscnRe) ? true : false;
 	}
 
 	@Override public List<RE> allEntities() {return missingLabelHandler.allEntities();}

@@ -190,11 +190,7 @@ public class AbstractDummyFacade implements JeeslFacade
 		return null;
 	}
 
-	@Override
-	public <T> List<T> allOrdered(Class<T> cl, String by, boolean ascending) {
-
-		return null;
-	}
+	@Override public <T, E extends Enum<E>> List<T> allOrdered(Class<T> cl, E by, boolean ascending) {return null;}
 
 	@Override
 	public <T extends EjbWithPositionVisible> List<T> allOrderedPositionVisible(

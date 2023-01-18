@@ -49,7 +49,7 @@ public class AbstractAdminDbDumpBean <L extends JeeslLang,D extends JeeslDescrip
 	
 	protected void refreshList()
 	{
-		dumps = fDb.allOrdered(fbDb.getClassDump(),JeeslDbDump.Attributes.record.toString(),false);
+		dumps = fDb.allOrdered(fbDb.getClassDump(),JeeslDbDump.Attributes.record,false);
 		hosts = fDb.all(fbDb.getClassDumpHost());
 		
 		mapFiles = new HashMap<DUMP,Map<HOST,FILE>>();

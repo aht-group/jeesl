@@ -26,6 +26,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
 import org.jeesl.factory.ejb.system.job.EjbJobCacheFactory;
 import org.jeesl.factory.ejb.system.job.EjbJobFactory;
+import org.jeesl.factory.json.system.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.system.job.JeeslJob;
@@ -282,7 +283,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> item = cQ.from(c);
 		
-		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob2.Attributes.job2.toString());
+		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob2.Tmp.job2.toString());
 		STATUS queue = this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue);
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eStatus),cB.equal(eStatus, queue)));}
 		else {predicates.add(cB.equal(eStatus,queue));}
@@ -301,7 +302,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> item = cQ.from(c);
 		
-		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob3.Attributes.job3.toString());
+		Expression<STATUS> eStatus = item.get(EjbWithMigrationJob3.Tmp.job3.toString());
 		STATUS queue = this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue);
 		if(includeNull) {predicates.add(cB.or(cB.isNull(eStatus),cB.equal(eStatus, queue)));}
 		else {predicates.add(cB.equal(eStatus,queue));}
@@ -329,7 +330,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		cQ.multiselect(pStatus.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildCount(tQ.getResultList());
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	@Override public <T extends EjbWithMigrationJob2<STATUS>> Json1Tuples<STATUS> tpcJob2Status(Class<T> c)
 	{
@@ -340,13 +341,13 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		Root<T> item = cQ.from(c);
 		
 		Expression<Long> eCount = cB.count(item.<Long>get("id"));
-		Path<STATUS> pStatus = item.get(EjbWithMigrationJob2.Attributes.job2.toString());
+		Path<STATUS> pStatus = item.get(EjbWithMigrationJob2.Tmp.job2.toString());
 		
 		cQ.groupBy(pStatus.get("id"));
 		cQ.multiselect(pStatus.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildCount(tQ.getResultList());
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	@Override public <T extends EjbWithMigrationJob3<STATUS>> Json1Tuples<STATUS> tpcJob3Status(Class<T> c)
 	{
@@ -357,13 +358,13 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		Root<T> item = cQ.from(c);
 		
 		Expression<Long> eCount = cB.count(item.<Long>get("id"));
-		Path<STATUS> pStatus = item.get(EjbWithMigrationJob3.Attributes.job3.toString());
+		Path<STATUS> pStatus = item.get(EjbWithMigrationJob3.Tmp.job3.toString());
 		
 		cQ.groupBy(pStatus.get("id"));
 		cQ.multiselect(pStatus.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildCount(tQ.getResultList());
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 
 	@Override public <T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithJob2In(Class<T> c, List<STATUS> list, Integer maxResults)
@@ -375,7 +376,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		CriteriaQuery<T> cQ = cB.createQuery(c);
 		Root<T> root = cQ.from(c);
 		
-		Path<STATUS> pStatus = root.get(EjbWithMigrationJob2.Attributes.job2.toString());
+		Path<STATUS> pStatus = root.get(EjbWithMigrationJob2.Tmp.job2.toString());
 		predicates.add(pStatus.in(list));
 		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));

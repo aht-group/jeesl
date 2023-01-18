@@ -265,6 +265,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	public void addFile(Path path) throws IOException {addFile(path.getFileName().toString(), Files.readAllBytes(path), null);}
 	public void addFile(java.io.File f) throws FileNotFoundException, IOException {addFile(f.getName(), IOUtils.toByteArray(new FileInputStream(f)), null);}
 	public void addFile(String name, byte[] bytes) {addFile(name, bytes, null);}
+	public void addFile(String name, InputStream is, String category) throws FileNotFoundException, IOException {addFile(name, IOUtils.toByteArray(is), null);}
 	@Override public void addFile(String name, byte[] bytes, String category)
 	{
 		this.addFile();

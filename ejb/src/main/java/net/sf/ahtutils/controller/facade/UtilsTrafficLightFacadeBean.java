@@ -29,11 +29,11 @@ public class UtilsTrafficLightFacadeBean <L extends JeeslLang,D extends JeeslDes
 
 	public List<LIGHT> allOrderedTrafficLights(SCOPE scope)
 	{
-		return this.allOrderedParent(cLight, "threshold", true, "scope", scope);
+		return this.allOrderedParent(cLight, JeeslTrafficLight.Attributes.threshold.toString(), true, "scope", scope);
 	}
 	
 	public List<LIGHT> allOrderedTrafficLights()
 	{
-		return this.allOrdered(cLight, "threshold", true);
+		return this.allOrdered(cLight, JeeslTrafficLight.Attributes.threshold, true);
 	}
 }

@@ -444,7 +444,7 @@ public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		cQ.multiselect(pProcess.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildCount(tQ.getResultList());
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
 	@Override public Json2Tuples<WP,WST> tpcActivitiesByProcessType()

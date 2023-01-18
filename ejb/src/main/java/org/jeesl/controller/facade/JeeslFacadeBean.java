@@ -993,9 +993,9 @@ public class JeeslFacadeBean implements JeeslFacade
 	//******************** ORDERED *****************
 
 	@Override
-	public <T extends EjbWithPosition> List<T> allOrderedPosition(Class<T> cl) {return allOrdered(cl, "position", true);}
-	@Override public <T extends EjbWithCode> List<T> allOrderedCode(Class<T> cl) {return allOrdered(cl, "code", true);}
-	@Override public <T extends EjbWithName> List<T> allOrderedName(Class<T> cl) {return allOrdered(cl, "name", true);}
+	public <T extends EjbWithPosition> List<T> allOrderedPosition(Class<T> cl) {return allOrdered(cl, EjbWithPosition.Attribute.position, true);}
+	@Override public <T extends EjbWithCode> List<T> allOrderedCode(Class<T> cl) {return allOrdered(cl, EjbWithCode.Attribute.code, true);}
+	@Override public <T extends EjbWithName> List<T> allOrderedName(Class<T> cl) {return allOrdered(cl, EjbWithName.Attribute.name, true);}
 
 	@Override
 	public <T extends EjbWithRecord> List<T> allOrderedRecord(Class<T> cl, boolean ascending)
@@ -1011,10 +1011,10 @@ public class JeeslFacadeBean implements JeeslFacade
 		return em.createQuery(select).getResultList();
 	}
 
-	@Override public <T extends Object> List<T> allOrdered(Class<T> cl, String by, boolean ascending)
+	@Override public <T extends Object, E extends Enum<E>> List<T> allOrdered(Class<T> cl, E by, boolean ascending)
 	{
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<T> select = cqOrdered(cb, cl, by, ascending);
+		CriteriaQuery<T> select = cqOrdered(cb, cl, by.toString(), ascending);
 		return em.createQuery(select).getResultList();
 	}
 

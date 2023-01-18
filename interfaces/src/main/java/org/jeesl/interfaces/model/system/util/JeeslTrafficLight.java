@@ -15,6 +15,8 @@ public interface JeeslTrafficLight<L extends JeeslLang, D extends JeeslDescripti
 					JeeslWithScope<SCOPE>,
 					EjbWithLangDescription<L,D>
 {
+	public enum Attributes{threshold}
+	
 	double getThreshold();
 	void setThreshold(double threshold);
 	

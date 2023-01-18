@@ -35,7 +35,11 @@ public class JsonTupleFactory
 		JsonTuple json = build();
 		if(tuple.getCount1()!=null) {json.setCount(tuple.getCount1());}
 		else {json.setCount(tuple.getCount());}
+		
 		json.setSum(tuple.getSum());
+		json.setSum1(tuple.getSum1());
+		json.setSum2(tuple.getSum2());
+		json.setSum3(tuple.getSum3());
 		
 		json.setId1(tuple.getId1());
 		json.setId2(tuple.getId2());
@@ -54,12 +58,12 @@ public class JsonTupleFactory
 		return json;
 	}
 	
-	public static <A extends EjbWithId> Json1Tuple<A> build1(Tuple tuple)
-	{
-		Json1Tuple<A> json = new Json1Tuple<A>();
-		json.setId((Long)tuple.get(0));		
-    	return json;
-	}
+//	public static <A extends EjbWithId> Json1Tuple<A> build11(Tuple tuple)
+//	{
+//		Json1Tuple<A> json = new Json1Tuple<A>();
+//		json.setId((Long)tuple.get(0));		
+//    	return json;
+//	}
 	
 	public static <A extends EjbWithId> Json1Tuple<A> build1(Tuple tuple, JsonTupleFactory.Type...types)
 	{
@@ -101,8 +105,10 @@ public class JsonTupleFactory
 		{
 			switch(type)
 			{
-				case sum: 	if(index==1) {json.setSum1((Double)tuple.get(offset+index));json.setSum(json.getSum1());}
-							else if(index==2) {json.setSum2((Double)tuple.get(offset+index));}
+				case sum: 	if(index==1) {json.setSum1(JsonTupleFactory.toDouble(tuple,offset+index));json.setSum(json.getSum1());}
+							else if(index==2) {json.setSum2(JsonTupleFactory.toDouble(tuple,offset+index));}
+							else if(index==3) {json.setSum3(JsonTupleFactory.toDouble(tuple,offset+index));}
+							else if(index==4) {json.setSum4(JsonTupleFactory.toDouble(tuple,offset+index));}
 							else {logger.warn("NYI "+type+" for index="+index);}
 							break;
 				case count: if(index==1) {json.setCount1((Long)tuple.get(offset+index));json.setCount(json.getCount1());}
@@ -111,6 +117,19 @@ public class JsonTupleFactory
 							break;
 			}
 			index++;
+		}
+	}
+	
+	private static Double toDouble(Tuple tuple, int index)
+	{
+		Object o = tuple.get(index);
+		
+		if(o instanceof Double) {return ((Double)o);}
+		else if(o instanceof Long) {return (((Long)o).doubleValue());}
+		else
+		{
+			logger.warn("Type "+o.getClass().getSimpleName()+" NYI "+o.toString());
+			return (Double)o;
 		}
 	}
 }

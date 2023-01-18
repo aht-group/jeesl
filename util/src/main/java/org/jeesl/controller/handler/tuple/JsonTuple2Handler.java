@@ -115,6 +115,9 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		for(Json2Tuple<A,B> t : tuples.getTuples())
 		{
 			if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
+			if(t.getSum1()!=null) {t.setSum1(AmountRounder.two(t.getSum1()/sumDivider));}
+			if(t.getSum2()!=null) {t.setSum2(AmountRounder.two(t.getSum2()/sumDivider));}
+			if(t.getSum3()!=null) {t.setSum3(AmountRounder.two(t.getSum3()/sumDivider));}
 			
 			if(t.getEjb1()==null)
 			{
@@ -150,10 +153,10 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		tuples2.addAll(tuples.getTuples());
 	}
 	
-	protected void initListB(JeeslFacade fJeesl)
+	public void initListB(JeeslFacade fJeesl)
 	{
 		if(fJeesl==null){listB.addAll(mapB.values());}
-		else{listB.addAll(fJeesl.find(cB,new ArrayList<Long>(mapB.keySet())));}
+		else{listB.clear(); listB.addAll(fJeesl.find(cB,new ArrayList<Long>(mapB.keySet())));}
 		sizeB = listB.size();
 		if(jcpB!=null && jcpB.provides(cB)){Collections.sort(listB, jcpB.provide(cB));}
 	}

@@ -81,7 +81,7 @@ public interface JeeslFacade extends JeeslIdFacade
 	<L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>, W extends JeeslWithStatus<S>> List<W> allForStatus(Class<W> w, S status);
 	
 	// ORDERING
-	<T extends Object> List<T> allOrdered(Class<T> cl, String by, boolean ascending);
+	<T extends Object, E extends Enum<E>> List<T> allOrdered(Class<T> cl, E by, boolean ascending);
 	<T extends Object,I extends EjbWithId> List<T> allOrderedParent(Class<T> cl, String by, boolean ascending,String p1Name, I p1);
 	<T extends EjbWithCode> List<T> allOrderedCode(Class<T> cl);
 	<T extends EjbWithName> List<T> allOrderedName(Class<T> cl);

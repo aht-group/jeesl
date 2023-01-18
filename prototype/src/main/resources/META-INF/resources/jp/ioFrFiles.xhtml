@@ -19,6 +19,7 @@
 		
 		<composite:attribute name="allowUpload" required="false" default="true"/>
 		<composite:attribute name="allowDelete" required="false" default="false"/>
+		<composite:attribute name="allowSave" required="false" default="true"/>
 		<composite:attribute name="allowTypes" required="false" shortDescription="A list of allowed file type. This will directly passed to p:fileUpload"/>
 		
 		<composite:attribute name="withPosition" required="false" default="false"/>
@@ -93,7 +94,8 @@
 						   update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload"/>
 					<j:svg type="jeeslSave"
 						   listener="#{cc.attrs.handler.saveMeta()}"
-						   update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload"/>
+						   update="#{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.componentPrefix}:#{cc.id}:fDownload"
+						   rendered="#{cc.attrs.allowSave}"/>
 					<j:svg type="jeeslDelete"
 						   listener="#{cc.attrs.handler.deleteFile()}"
 						   tooltip="#{msg.ttJeeslIoFileDelete}"
