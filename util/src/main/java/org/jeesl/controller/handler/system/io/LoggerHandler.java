@@ -56,6 +56,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	private final Class<?> c;
 	private LOG log;
+	private static final String msgNotActive = "Jogger is not active";
 	
 	public LoggerHandler(IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog,
 					   Class<?> c)
@@ -73,11 +74,14 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	@Override public void reset()
 	{
+		timeStart = null;
 		milestones.clear();
 		loops.clear();
 		mapLoopInstant.clear();
 		mapCount.clear();
 	}
+	
+	private boolean isActive() {return Objects.nonNull(timeStart);}
 	
 	@Override public String start(String log) {return start(log,null,null);}
 	public String start(String log, USER user) {return start(log,null,user);}
@@ -95,74 +99,88 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		return sb.toString();
 	}
 	
+	public String milestone(Class<?> c) {return milestone(c.getSimpleName(),null,null);}
 	public String milestone(String milestone) {return milestone(milestone,null,null);}
+	
 	public String milestone(String milestone, String message){return milestone(milestone,message,null);}
 	public String milestone(String milestone, Integer elements) {return milestone(milestone,null,elements);}
 	public String milestone(Class<?> c, String message, Integer elements) {return milestone(c.getSimpleName(),message,elements);}
 	public String milestone(String milestone, String message, Integer elements)
 	{
-		Instant timeNow = Instant.now();
-		MILESTONE ejb = efMilestone.build(log);
-		ejb.setRecord(Date.from(timeNow));
-		if(Objects.isNull(timeStart)) {this.start("Implicit start");}
-		ejb.setMilliTotal(ChronoUnit.MILLIS.between(timeStart,timeNow));
-		ejb.setMilliStep(ChronoUnit.MILLIS.between(timeMilestone,timeNow));
+		if(isActive())
+		{
+			Instant timeNow = Instant.now();
+			MILESTONE ejb = efMilestone.build(log);
+			ejb.setRecord(Date.from(timeNow));
+			if(Objects.isNull(timeStart)) {this.start("Implicit start");}
+			ejb.setMilliTotal(ChronoUnit.MILLIS.between(timeStart,timeNow));
+			ejb.setMilliStep(ChronoUnit.MILLIS.between(timeMilestone,timeNow));
+			
+			if(elements!=null && elements.intValue()!=0) {ejb.setMilliRelative(ejb.getMilliStep()/elements);}
+			else {ejb.setMilliRelative(ejb.getMilliStep());}
+			
+			ejb.setName(milestone);
+			ejb.setMessage(message);
+			ejb.setElements(elements);
+			
+			milestones.add(ejb);
 		
-		if(elements!=null && elements.intValue()!=0) {ejb.setMilliRelative(ejb.getMilliStep()/elements);}
-		else {ejb.setMilliRelative(ejb.getMilliStep());}
-		
-		ejb.setName(milestone);
-		ejb.setMessage(message);
-		ejb.setElements(elements);
-		
-		milestones.add(ejb);
-	
-		StringBuilder sb = new StringBuilder();
-		sb.append("Milestone ");
-		sb.append(milestone);
-		if(message!=null) {sb.append(": ").append(message);}
-		
-		sb.append(" (");
-		if(elements!=null) {sb.append(elements).append(" ");}
-		sb.append("in ").append(ejb.getMilliStep()).append("ms)");
-		
-		timeMilestone = timeNow;
-		return sb.toString();
+			StringBuilder sb = new StringBuilder();
+			sb.append("Milestone ");
+			sb.append(milestone);
+			if(message!=null) {sb.append(": ").append(message);}
+			
+			sb.append(" (");
+			if(elements!=null) {sb.append(elements).append(" ");}
+			sb.append("in ").append(ejb.getMilliStep()).append("ms)");
+			
+			timeMilestone = timeNow;
+			return sb.toString();
+		}
+		else {return msgNotActive;}
 	}
 	
 	public <E extends Enum<E>> String loopStart(E code) {return loopStart(code.toString());}
 	private String loopStart(String loopCode)
 	{
-		if(!loops.containsKey(loopCode))
+		if(isActive())
 		{
-			loops.put(loopCode,fbLog.ejbLoop().build(log,loopCode));
+			if(!loops.containsKey(loopCode))
+			{
+				loops.put(loopCode,fbLog.ejbLoop().build(log,loopCode));
+			}
+			mapLoopInstant.put(loopCode,Instant.now());
 		}
-		mapLoopInstant.put(loopCode,Instant.now());
+		
 		return "";
 	}
 	public <E extends Enum<E>> String loopEnd(E code) {return loopEnd(code,null);}
 	public <E extends Enum<E>> String loopEnd(E code, Integer elements)
 	{
-		if(!loops.containsKey(code.toString())) {logger.warn("Loop not started"); return "Loop not started";}
-		else
+		if(isActive())
 		{
-			LOOP loop = loops.get(code.toString());
-			loop.setCounter(loop.getCounter()+1);
-			loop.setElements(NullCalculator.add(loop.getElements(),elements));
-			
-			Instant timeBefore = mapLoopInstant.get(code.toString());
-			Instant timeNow = Instant.now();
-			long duration = ChronoUnit.MILLIS.between(timeBefore,timeNow);
-			loop.setMilliTotal(loop.getMilliTotal()+duration);
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("Loop");
-			sb.append(" ").append(loop.getCode());
-			if(elements!=null) {sb.append(" ").append(elements);}
-			sb.append(" in ").append(duration);
-			
-			return sb.toString();
+			if(!loops.containsKey(code.toString())) {logger.warn("Loop not started"); return "Loop not started";}
+			else
+			{
+				LOOP loop = loops.get(code.toString());
+				loop.setCounter(loop.getCounter()+1);
+				loop.setElements(NullCalculator.add(loop.getElements(),elements));
+				
+				Instant timeBefore = mapLoopInstant.get(code.toString());
+				Instant timeNow = Instant.now();
+				long duration = ChronoUnit.MILLIS.between(timeBefore,timeNow);
+				loop.setMilliTotal(loop.getMilliTotal()+duration);
+				
+				StringBuilder sb = new StringBuilder();
+				sb.append("Loop");
+				sb.append(" ").append(loop.getCode());
+				if(elements!=null) {sb.append(" ").append(elements);}
+				sb.append(" in ").append(duration);
+				
+				return sb.toString();
+			}
 		}
+		else {return msgNotActive;}
 	}
 	
 	public void count(String code)
