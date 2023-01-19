@@ -18,7 +18,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 @Entity
-@DiscriminatorValue("ioMailC")
+@DiscriminatorValue("ioMailCategory")
 @EjbErNode(name="Category",category="system",subset="mail",level=3)
 public class IoMailCategory extends IoStatus
 								implements Serializable,EjbPersistable,EjbWithCode,JeeslStatusFixedCode,

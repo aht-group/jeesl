@@ -15,9 +15,8 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("ioMailS")
+@DiscriminatorValue("ioMailStatus")
 @EjbErNode(name="Status",category="system",subset="mail",level=3)
-
 public class IoMailStatus extends IoStatus implements JeeslMailStatus<IoLang,IoDescription,IoMailStatus,IoGraphic>
 {
 	public static final long serialVersionUID=1;

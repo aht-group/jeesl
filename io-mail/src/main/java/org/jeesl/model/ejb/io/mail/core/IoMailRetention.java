@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("ioMailR")
+@DiscriminatorValue("ioMailRetention")
 @EjbErNode(name="Retention",category="system",subset="mail",level=3)
 public class IoMailRetention extends IoStatus implements JeeslMailRetention<IoLang,IoDescription,IoMailRetention,IoGraphic>
 {
