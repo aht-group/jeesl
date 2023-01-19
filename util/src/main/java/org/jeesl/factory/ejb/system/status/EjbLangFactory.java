@@ -8,6 +8,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -174,6 +175,23 @@ public class EjbLangFactory<L extends JeeslLang>
 		return ejb;
 	}
 
+	public <LOC extends JeeslLocale<L,?,LOC,?>> Map<String,L> persistMissigLangs(JeeslFacade fUtils, JeeslLocaleProvider<LOC> lp, Map<String,L> map)
+	{
+		for(LOC loc : lp.getLocales())
+		{
+			if(!map.containsKey(loc.getCode()))
+			{
+				try
+				{
+					L l = fUtils.persist(createLang(loc.getCode(), ""));
+					map.put(loc.getCode(), l);
+				}
+				catch (JeeslConstraintViolationException e) {e.printStackTrace();}
+			}
+		}
+		return map;
+	}
+	
 	public <LOC extends JeeslStatus<L,?,LOC>> Map<String,L> checkMissigLangs(JeeslFacade fUtils, List<LOC> locales, Map<String,L> map)
 	{
 		for(LOC loc : locales)
