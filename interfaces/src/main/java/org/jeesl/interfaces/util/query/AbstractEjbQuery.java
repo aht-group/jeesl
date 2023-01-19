@@ -115,6 +115,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	{
 		if(debug)
 		{
+			
 			logger.info(StringUtils.repeat("\t",ident)+"distinct: "+distinct);
 			if(firstResult!=null){logger.info(StringUtils.repeat("\t",ident)+"firstResult: "+firstResult);}
 			if(maxResults!=null){logger.info(StringUtils.repeat("\t",ident)+"maxResults: "+maxResults);}

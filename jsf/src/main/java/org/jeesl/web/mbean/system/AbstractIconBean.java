@@ -273,7 +273,7 @@ public class AbstractIconBean implements Serializable
 			Container xml = JaxbUtil.loadJAXB(JeeslIcon.jeeslLibIcons,Container.class);
 			for(Status s : xml.getStatus())
 			{
-				logger.info("Jeesl Icon Library: "+s.getCode()+" "+s.getSymbol());
+				logger.trace("Jeesl Icon Library: "+s.getCode()+" "+s.getSymbol());
 				if(svg.containsKey(s.getCode())) {logger.warn("Icon already defined !!!");}
 				else
 				{

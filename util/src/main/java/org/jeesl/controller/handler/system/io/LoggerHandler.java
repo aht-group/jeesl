@@ -102,7 +102,10 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	public String milestone(Class<?> c) {return milestone(c.getSimpleName(),null,null);}
 	public String milestone(String milestone) {return milestone(milestone,null,null);}
 	
-	public String milestone(String milestone, String message){return milestone(milestone,message,null);}
+	@Override public String milestone(Class<?> c, String message){return milestone(c.getSimpleName(),message,null);}
+	@Override public String milestone(String milestone, String message){return milestone(milestone,message,null);}
+	
+	
 	public String milestone(String milestone, Integer elements) {return milestone(milestone,null,elements);}
 	public String milestone(Class<?> c, String message, Integer elements) {return milestone(c.getSimpleName(),message,elements);}
 	public String milestone(String milestone, String message, Integer elements)

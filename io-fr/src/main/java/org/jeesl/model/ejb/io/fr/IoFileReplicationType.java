@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("ioFrRT")
+@DiscriminatorValue("ioFrReplicationType")
 @EjbErNode(name="Category",category="system",subset="fr",level=3)
 public class IoFileReplicationType extends IoStatus implements JeeslFileReplicationType<IoLang,IoDescription,IoFileReplicationType,IoGraphic>
 {

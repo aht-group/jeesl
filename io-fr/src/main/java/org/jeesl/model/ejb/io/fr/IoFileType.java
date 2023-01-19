@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("ioFrT")
+@DiscriminatorValue("ioFrFileType")
 @EjbErNode(name="Category",category="system",subset="mail",level=3)
 public class IoFileType extends IoStatus implements JeeslFileType<IoLang,IoDescription,IoFileType,IoGraphic>
 {

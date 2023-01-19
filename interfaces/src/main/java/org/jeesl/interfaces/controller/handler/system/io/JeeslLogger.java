@@ -13,9 +13,10 @@ public interface JeeslLogger extends Serializable
 	String milestone(Class<?> c);
 	String milestone(String milestone);
 	
+	String milestone(Class<?> c, String message);
 	String milestone(String milestone, String message);
-	String milestone(Class<?> c, String message, Integer elements);
 	
+	String milestone(Class<?> c, String message, Integer elements);
 	String milestone(String milestone, String message, Integer elements);
 	
 	<E extends Enum<E>> String loopStart(E code);

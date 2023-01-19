@@ -26,7 +26,9 @@ public class DebugLoggerHandler implements JeeslLogger
 	@Override public String milestone(Class<?> c) {return milestone(c.getSimpleName(),null,null);}
 	@Override public String milestone(String milestone) {return milestone;}
 	
+	@Override public String milestone(Class<?> c, String message){return milestone(c.getSimpleName(),message,null);}
 	@Override public String milestone(String milestone, String message) {return milestone;}
+	
 	@Override public String milestone(Class<?> c, String message, Integer elements) {return milestone(c.getSimpleName(), message, elements);}
 	@Override public String milestone(String milestone, String message, Integer elements) {return milestone;}
 	
