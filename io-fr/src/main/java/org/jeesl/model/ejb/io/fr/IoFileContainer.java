@@ -15,9 +15,11 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="IoFileContainer")
+@EjbErNode(name="FR Container",category="elib",level=3,subset="elib")
 public class IoFileContainer implements JeeslFileContainer<IoFileStorage,IoFileMeta>
 {
 	public static final long serialVersionUID=1;
@@ -42,4 +44,11 @@ public class IoFileContainer implements JeeslFileContainer<IoFileStorage,IoFileM
 
 	@Override public boolean equals(Object object){return (object instanceof IoFileContainer) ? id == ((IoFileContainer) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
+
+	@Override public String toString()
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("[").append(id).append("]");
+		return sb.toString();
+	}
 }
