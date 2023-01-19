@@ -20,16 +20,14 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 public class IoFileType extends IoStatus implements JeeslFileType<IoLang,IoDescription,IoFileType,IoGraphic>
 {
 	public static final long serialVersionUID=1;
-	
-	
-	
+
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();
 		for(JeeslFileType.Code c : JeeslFileType.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoFileType) ? id == ((IoFileType) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(17,37).append(id).toHashCode();}
 }

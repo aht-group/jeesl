@@ -20,14 +20,14 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 public class IoFileReplicationType extends IoStatus implements JeeslFileReplicationType<IoLang,IoDescription,IoFileReplicationType,IoGraphic>
 {
 	public static final long serialVersionUID=1;
-	
+
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();
 		for(JeeslFileReplicationType.Code c : JeeslFileReplicationType.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoFileReplicationType) ? id == ((IoFileReplicationType) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(17,37).append(id).toHashCode();}
 }

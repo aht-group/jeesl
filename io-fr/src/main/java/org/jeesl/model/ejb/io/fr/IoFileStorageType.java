@@ -20,15 +20,14 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 public class IoFileStorageType extends IoStatus implements JeeslFileStorageType<IoLang,IoDescription,IoFileStorageType,IoGraphic>
 {
 	public static final long serialVersionUID=1;
-	
-	
+
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();
 		for(JeeslFileStorageType.Code c : JeeslFileStorageType.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoFileStorageType) ? id == ((IoFileStorageType) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(17,37).append(id).toHashCode();}
 }

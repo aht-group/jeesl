@@ -41,7 +41,7 @@
 		
 		<dependency>
 			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-io-locale</artifactId>
+    		<artifactId>jeesl-io-fr</artifactId>
     		<scope>compile</scope>
 		</dependency>
 	
