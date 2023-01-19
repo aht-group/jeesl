@@ -81,10 +81,8 @@ public class XlsStyleFactory<
         fontItalicBold.setBold(true);
 		
 		styleFallback = xlsWorkbook.createCellStyle();
-//        dateHeaderStyle.setDataFormat(createHelper.createDataFormat().getFormat("yyyy.MM"));
         styleFallback.setAlignment(HorizontalAlignment.LEFT);
         styleFallback.setVerticalAlignment(VerticalAlignment.CENTER);
- //       dateHeaderStyle.setFont(font);
         
         styleLabelCenter = xlsWorkbook.createCellStyle();
         styleLabelCenter.setAlignment(HorizontalAlignment.CENTER);
