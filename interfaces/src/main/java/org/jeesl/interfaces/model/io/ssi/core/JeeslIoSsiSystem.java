@@ -16,9 +16,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoSsiSystem<L extends JeeslLang, D extends JeeslDescription>
-		extends Serializable,EjbSaveable,EjbRemoveable,
-				EjbWithId,EjbWithCode
-				,EjbWithLang<L>,EjbWithDescription<D>
+						extends Serializable,EjbSaveable,EjbRemoveable,
+								EjbWithId,EjbWithCode,
+								EjbWithLang<L>,EjbWithDescription<D>
 {	
 	String getFqdn();
 	void setFqdn(String fqdn);

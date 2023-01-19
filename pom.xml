@@ -31,6 +31,7 @@
 		<module>io-crypto</module>
 		<module>io-mail</module>
 		<module>io-fr</module>
+		<module>io-ssi</module>
 		
 		<module>system-security</module>
 		<module>system-property</module>
