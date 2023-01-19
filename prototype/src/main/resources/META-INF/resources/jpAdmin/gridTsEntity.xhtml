@@ -55,15 +55,15 @@
 								<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.entity.id gt 0}" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+							<j:inputGrid>
 								<p:outputLabel value="#{msg.aupCode}"/>
 								<p:inputText value="#{cc.attrs.bean.entity.code}"/>
+								
 								<p:outputLabel value="#{msg.aupCategory}"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.entity.category}" effect="fade" >
 									<f:selectItems value="#{cc.attrs.bean.categories}" var="u" itemLabel="#{u.name[userBean.localeCode].lang}" itemValue="#{u}"/>
 								</p:selectOneMenu>
-							</p:panelGrid>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+							
 								<p:outputLabel value="#{msg.jeeslTsClassXpathParent}"/>
 								<p:inputText value="#{cc.attrs.bean.entity.xpathParent}"/>
 								
@@ -75,11 +75,11 @@
 								
 								<p:outputLabel value="#{msg.jeeslTsClassAttribute}"/>
 								<p:inputText value="#{cc.attrs.bean.entity.attribute}"/>
-							</p:panelGrid>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{cc.attrs.bean.uiShowInvisible}" >
+							</j:inputGrid>
+							<j:inputGrid rendered="#{cc.attrs.bean.uiShowInvisible}">
 								<p:outputLabel value="#{msg.aupSecurityVisible}"/>
 								<p:selectBooleanCheckbox value="#{cc.attrs.bean.entity.visible}"/>
-							</p:panelGrid>
+							</j:inputGrid>
 							<aht:tabTranslationEditor value="#{cc.attrs.bean.entity}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
 						</p:panel>
 					</h:form>
