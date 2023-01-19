@@ -1,4 +1,4 @@
-package org.jeesl.model.io.ssi.core;
+package org.jeesl.model.ejb.io.ssi.core;
 
 import java.util.Map;
 
