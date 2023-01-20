@@ -22,6 +22,7 @@ public class AbstractJeeslWebController <L extends JeeslLang, D extends JeeslDes
 	
 	protected JeeslFacesMessageBean bMessage;
 	protected JeeslLocaleProvider<LOC> lp;
+
 	protected JeeslLogger jogger;
 	
 	private final List<LOC> locales; public List<LOC> getLocales() {return locales;}

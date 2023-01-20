@@ -95,34 +95,6 @@
 		</s:langs>
 	</s:translation>
 	
-	<s:translation key="IoTemplateCategory">
-		<s:langs>
-			<s:lang key="de" translation="Vorlagen Kategorie"/>
-			<s:lang key="en" translation="Template Category"/>
-			<s:lang key="fr" translation="Template Category"/>
-		</s:langs>
-	</s:translation>
-	<s:translation key="IoTemplateType">
-		<s:langs>
-			<s:lang key="de" translation="Vorlagen Typ"/>
-			<s:lang key="en" translation="Template Type"/>
-			<s:lang key="fr" translation="Template Type"/>
-		</s:langs>
-	</s:translation>
-	<s:translation key="IoTemplateTokenType">
-		<s:langs>
-			<s:lang key="de" translation="Token Typ"/>
-			<s:lang key="en" translation="Token Type"/>
-			<s:lang key="fr" translation="Token Type"/>
-		</s:langs>
-	</s:translation>
-	<s:translation key="IoTemplateScope">
-		<s:langs>
-			<s:lang key="de" translation="Vorlagen Zweck"/>
-			<s:lang key="en" translation="Template Scope"/>
-			<s:lang key="fr" translation="Template Scope"/>
-		</s:langs>
-	</s:translation>
 	<s:translation key="IoDbDumpStatus">
 		<s:langs>
 			<s:lang key="de" translation="DB Sicherung Status"/>

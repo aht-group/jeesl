@@ -1,6 +1,5 @@
 package org.jeesl.interfaces.util.query;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
