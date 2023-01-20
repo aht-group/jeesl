@@ -13,7 +13,7 @@ public interface JeeslAttributeData <CRITERIA extends JeeslAttributeCriteria<?,?
 							CONTAINER extends JeeslAttributeContainer<?,?>>
 		extends Serializable,EjbSaveable,EjbRemoveable,Cloneable,EjbWithParentAttributeResolver
 {
-	public static enum Attributes{container,criteria,valueOption};
+	public static enum Attributes{container,criteria,valueOption,valueOptions};
 	
 	CONTAINER getContainer();
 	void setContainer(CONTAINER container);

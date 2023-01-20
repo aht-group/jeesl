@@ -51,6 +51,7 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	//LocalDate
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
+	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
 	private List<CAT> categories; public List<CAT> getCategories() {return categories;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> add(CAT category) {if(Objects.isNull(categories)) {categories = new ArrayList<>();} categories.add(category); return this;}

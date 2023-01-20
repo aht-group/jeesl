@@ -49,9 +49,6 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	
 	protected JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail;
 	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fbMail;
-	
-	private Class<MAIL> cMail;
-	private Class<STATUS> cStatus;
 
 	private List<CATEGORY> categories; public List<CATEGORY> getCategories() {return categories;}
 	private List<MAIL> mails; public List<MAIL> getMails() {return mails;}
@@ -87,27 +84,21 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	}
 	
 	public void postConstructMailQueue(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-											JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail, final Class<L> cLang, final Class<D> cDescription, Class<MAIL> cMail, Class<STATUS> cStatus)
+											JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fMail=fMail;
 		
-		this.cMail=cMail;
-		this.cStatus=cStatus;
-		
 		categories = fMail.allOrderedPositionVisible(fbMail.getClassCategory());
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbMail.getClassCategory(),categories));}
 
-		try
-		{
-			sbhRetention.setList(fMail.allOrderedPositionVisible(fbMail.getClassRetention()));
-			sbhRetention.selectAll();
-			
-			sbhStatus.setList(fMail.allOrderedPositionVisible(cStatus));
-			sbhStatus.select(fMail.fByCode(cStatus,JeeslMailStatus.Code.queue));
-			sbhStatus.select(fMail.fByCode(cStatus,JeeslMailStatus.Code.spooling));
-		}
-		catch (JeeslNotFoundException e) {logger.error(e.getMessage());}
+		sbhRetention.setList(fMail.allOrderedPositionVisible(fbMail.getClassRetention()));
+		sbhRetention.selectAll();
+		
+		sbhStatus.setList(fMail.allOrderedPositionVisible(fbMail.getClassStatus()));
+		sbhStatus.select(fMail.fByEnum(fbMail.getClassStatus(),JeeslMailStatus.Code.queue));
+		sbhStatus.select(fMail.fByEnum(fbMail.getClassStatus(),JeeslMailStatus.Code.spooling));
+		
 		initPageConfiguration();
 		reloadMails();
 		reloadStatistic();
@@ -123,7 +114,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 		if(fbMail.getClassCategory().isAssignableFrom(c)){logger.info(fbMail.getClassCategory().getName());reloadStatistic();}
-		else if(cStatus.isAssignableFrom(c)){logger.info(cStatus.getName());}
+		else if(fbMail.getClassStatus().isAssignableFrom(c)){logger.info(fbMail.getClassStatus().getName());}
 		reloadMails();
 		clear(true);
 	}
@@ -158,7 +149,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	protected void reloadMails()
 	{		
 		mails = fMail.fMails(sbhCategory.getSelected(),sbhStatus.getSelected(),sbhRetention.getSelected(),DateUtil.toDate(sbhDate.getDateFrom()),DateUtil.toDate(sbhDate.getDateTo()),null);
-		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(cMail,mails));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbMail.getClassMail(),mails));}
 //		Collections.sort(templates, comparatorTemplate);
 	}
 		

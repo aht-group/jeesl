@@ -9,10 +9,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoAttributeFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -204,6 +206,14 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		return em.createQuery(cQ).getResultList();
 	}
 
+	
+	@Override public DATA fAttributeData(CRITERIA criteria, CONTAINER container) throws JeeslNotFoundException
+	{
+		List<DATA> datas = fAttributeData(container);
+		for(DATA data : datas) {if(data.getCriteria().equals(criteria)) {return data;}}
+		throw new JeeslNotFoundException("no data for container");
+	}
+	
 	@Override public List<DATA> fAttributeData(CONTAINER container)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -221,21 +231,18 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		return tQ.getResultList();
 	}
 	
-	@Override public DATA fAttributeData(CRITERIA criteria, CONTAINER container) throws JeeslNotFoundException
-	{
-		List<DATA> datas = fAttributeData(container);
-		for(DATA data : datas) {if(data.getCriteria().equals(criteria)) {return data;}}
-		throw new JeeslNotFoundException("no data for container");
-	}
-	
 	@Override public List<DATA> fAttributeData(CRITERIA criteria, List<CONTAINER> containers)
 	{
-		if(containers==null || containers.isEmpty()) {return new ArrayList<>();}
+		if(ObjectUtils.isEmpty(containers)) {return new ArrayList<>();}
 		
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbAttribute.getClassData());
 		Root<DATA> data = cQ.from(fbAttribute.getClassData());
+		
+		data.fetch(JeeslAttributeData.Attributes.valueOption.toString(), JoinType.LEFT);
+		data.fetch(JeeslAttributeData.Attributes.valueOptions.toString(), JoinType.LEFT);
+		data.fetch(JeeslAttributeData.Attributes.container.toString(), JoinType.LEFT);
 		
 		Path<CONTAINER> pContainer = data.join(JeeslAttributeData.Attributes.container.toString());
 		predicates.add(pContainer.in(containers));
@@ -247,6 +254,7 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		cQ.select(data);
 
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
+		tQ.setHint("javax.persistence.query.timeout",200);
 		return tQ.getResultList();
 	}
 

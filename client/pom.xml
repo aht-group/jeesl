@@ -178,6 +178,29 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.6.0</version>
 		</dependency>
+		
+		<!-- Test for eap80 
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-spatial</artifactId>
+			<version>6.1.4.Final</version>
+		</dependency>		
+		<dependency>
+			<groupId>net.postgis</groupId>
+			<artifactId>postgis-jdbc</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.locationtech.jts</groupId>
+		    <artifactId>jts-core</artifactId>
+		    <version>1.18.0</version>
+		</dependency> -->
+
 	  	
 		<!-- Logging -->
 		<dependency>

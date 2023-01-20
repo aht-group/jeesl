@@ -1,8 +1,10 @@
 package org.jeesl.interfaces.util.query;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -66,6 +68,10 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	public LocalDate getLd2() {return ld2;}
 	public abstract AbstractEjbQuery ld2(LocalDate ld2);
 	
+	protected LocalDate ld3;
+	public LocalDate getLd3() {return ld3;}
+	public abstract AbstractEjbQuery ld3(LocalDate ld3);
+	
 	//Strings
 	private String string1;
 	@Override public String getString1() {return string1;}
@@ -114,10 +120,19 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	{
 		if(debug)
 		{
-			
 			logger.info(StringUtils.repeat("\t",ident)+"distinct: "+distinct);
 			if(firstResult!=null){logger.info(StringUtils.repeat("\t",ident)+"firstResult: "+firstResult);}
 			if(maxResults!=null){logger.info(StringUtils.repeat("\t",ident)+"maxResults: "+maxResults);}
+			if(Objects.nonNull(tupleLoad)) {logger.info("Tuple-Load: "+tupleLoad);}
 		}
+	}
+	
+	protected List<String> debugStrings()
+	{
+		List<String> list = new ArrayList<>();
+		if(firstResult!=null){list.add("firstResult: "+firstResult);}
+		if(maxResults!=null){list.add("maxResults: "+maxResults);}
+		if(Objects.nonNull(tupleLoad)) {list.add("Tuple-Load: "+tupleLoad);}
+		return list;
 	}
 }
