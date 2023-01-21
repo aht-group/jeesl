@@ -22,6 +22,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	private final Class<A> cA; public Class<A> getClassA() {return cA;}
 
 	private JeeslFacade fUtils; public void setfUtils(JeeslFacade fUtils) {this.fUtils = fUtils;}
+	public Json1TuplesFactory<A> facade(JeeslFacade facade){this.fUtils=facade; return this;}
 
 	private final Set<Long> setA;
 	private final Json1TupleFactory<A> jtf;
@@ -30,6 +31,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	
 	private Json1Tuples<A> tuples; public Json1Tuples<A> get1Tuples() {return tuples;} public void set1Tuples(Json1Tuples<A> tuples) {this.tuples = tuples;}
 
+	public static <A extends EjbWithId> Json1TuplesFactory<A> instance(Class<A> cA) {return new Json1TuplesFactory<>(cA);}
 	public Json1TuplesFactory(Class<A> cA) {this(null,cA);}
 	
 	@Deprecated //This should not be used, the Facade should be activated manually (via the query.isTupleLoad() or later in the TupleHandler

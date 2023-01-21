@@ -46,7 +46,6 @@ import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.db.updater.JeeslDbGraphicUpdater;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
-import org.jeesl.web.mbean.prototype.io.revision.AbstractAdminRevisionEntityBean;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;

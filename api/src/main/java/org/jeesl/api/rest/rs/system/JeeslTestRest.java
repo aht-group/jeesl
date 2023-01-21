@@ -5,16 +5,16 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.api.rest.i.system.JeeslTestRestInterface;
 import org.jeesl.interfaces.util.qualifier.JeeslRestSecured;
 
 @Path("/rest/test")
-public interface JeeslTestRest
+public interface JeeslTestRest extends JeeslTestRestInterface
 {
-	@GET @Path("time")
-	@Produces(MediaType.TEXT_PLAIN)
-	String getTime();
+	@GET @Path("/date/time/public") @Produces(MediaType.TEXT_PLAIN) 
+	String dateTimePublic();
 	
-	@GET @Path("secure")  @JeeslRestSecured
-	@Produces(MediaType.TEXT_PLAIN)
-	String getSecure();
+	@JeeslRestSecured
+	@GET @Path("/date/restricted") @Produces(MediaType.TEXT_PLAIN) 
+	String dateTimeRestricted();
 }
