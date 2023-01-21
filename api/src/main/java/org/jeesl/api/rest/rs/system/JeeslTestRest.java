@@ -7,6 +7,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.jeesl.api.rest.i.system.JeeslTestRestInterface;
 import org.jeesl.interfaces.util.qualifier.JeeslRestSecured;
+import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
+import org.jeesl.model.json.system.job.JsonSystemJob;
 
 @Path("/rest/test")
 public interface JeeslTestRest extends JeeslTestRestInterface
@@ -17,4 +19,11 @@ public interface JeeslTestRest extends JeeslTestRestInterface
 	@JeeslRestSecured
 	@GET @Path("/date/restricted") @Produces(MediaType.TEXT_PLAIN) 
 	String dateTimeRestricted();
+	
+	
+	@GET @Path("/json/update") @Produces(MediaType.APPLICATION_JSON) 
+	JsonSsiUpdate jsonUpdate();
+	
+	@GET @Path("/json/job") @Produces(MediaType.APPLICATION_JSON) 
+	JsonSystemJob jsonJob();
 }

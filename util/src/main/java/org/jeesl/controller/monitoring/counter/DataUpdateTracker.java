@@ -13,7 +13,7 @@ import org.jeesl.factory.xml.system.io.sync.XmlExceptionsFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.model.json.io.ssi.update.JsonSsiMessage;
 import org.jeesl.model.json.io.ssi.update.JsonSsiStatistic;
-import org.jeesl.model.json.system.job.JsonJob;
+import org.jeesl.model.json.system.job.JsonSystemJob;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +41,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	{
 		update = new DataUpdate();
 		json = new org.jeesl.model.json.io.ssi.update.JsonSsiUpdate();
-		json.setJob(new JsonJob());
+		json.setJob(new JsonSystemJob());
 		json.getJob().setStart(LocalDateTime.now());
 		json.setStatistic(new JsonSsiStatistic());
 		
