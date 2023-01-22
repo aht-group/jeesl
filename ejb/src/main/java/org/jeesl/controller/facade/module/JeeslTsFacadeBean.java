@@ -19,6 +19,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
@@ -511,24 +512,32 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 	@Override public Json1Tuples<TS> tpCountRecordsByTs(List<TS> series)
 	{
 		if(ObjectUtils.isEmpty(series)) {return new Json1Tuples<>();}
-		Json1TuplesFactory<TS> jtf = new Json1TuplesFactory<TS>(this,fbTs.getClassTs());
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
-		Root<DATA> data = cQ.from(fbTs.getClassData());
-
-		Path<TS> pTs = data.get(JeeslTsData.Attributes.timeSeries.toString());
-		predicates.add(pTs.in(series));
+		Json1TuplesFactory<TS> jtf = Json1TuplesFactory.instance(fbTs.getClassTs()).facade(this);
 		
-		Expression<Long> eCount = cB.count(data.<Long>get("id"));
-		Join<DATA,TS> jTs = data.join(JeeslTsData.Attributes.timeSeries.toString());
+		List<Tuple> tuples = new ArrayList<>();
+		List<List<TS>> partitions = ListUtils.partition(series,30000);
+		for(List<TS> partition : partitions)
+		{
+			List<Predicate> predicates = new ArrayList<Predicate>();
+			CriteriaBuilder cB = em.getCriteriaBuilder();
+			CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+			Root<DATA> data = cQ.from(fbTs.getClassData());
 
-		cQ.groupBy(jTs.get("id"));
-		cQ.multiselect(jTs.get("id"),eCount);
+			Path<TS> pTs = data.get(JeeslTsData.Attributes.timeSeries.toString());
+			predicates.add(pTs.in(partition));
+			
+			Expression<Long> eCount = cB.count(data.<Long>get("id"));
+			Join<DATA,TS> jTs = data.join(JeeslTsData.Attributes.timeSeries.toString());
 
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+			cQ.groupBy(jTs.get("id"));
+			cQ.multiselect(jTs.get("id"),eCount);
+
+			cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+			
+			TypedQuery<Tuple> tQ = em.createQuery(cQ);
+			tuples.addAll(tQ.getResultList());
+		}	
 		
-		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-        return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+        return jtf.buildV2(tuples,JsonTupleFactory.Type.count);
 	}
 }
