@@ -25,6 +25,7 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 	final static Logger logger = LoggerFactory.getLogger(Json2TuplesFactory.class);
 	
 	private JeeslFacade fUtils; public JeeslFacade getfUtils() {return fUtils;} public void setfUtils(JeeslFacade fUtils) {this.fUtils = fUtils;}
+	public Json2TuplesFactory<A,B> facade(JeeslFacade facade) {this.fUtils=facade; return this;}
 	
 	private final Class<A> cA;
 	private final Class<B> cB;
@@ -40,7 +41,10 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 
 	private boolean debugOnInfo = false;
 
+	public static <A extends EjbWithId, B extends EjbWithId> Json2TuplesFactory<A,B> instance(Class<A> cA, Class<B> cB) {return new Json2TuplesFactory<>(cA,cB);}
 	public Json2TuplesFactory(Class<A> cA, Class<B> cY) {this(null,cA,cY);}
+	
+	@Deprecated
 	public Json2TuplesFactory(JeeslFacade fUtils, Class<A> cA, Class<B> cY)
 	{
 		this.fUtils=fUtils;
