@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public abstract class JeeslIoCmsCacheController <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslIoCmsCacheController <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										CAT extends JeeslIoCmsCategory<L,D,CAT,?>,
 										CMS extends JeeslIoCms<L,D,LOC,CAT,S>,
 										V extends JeeslIoCmsVisiblity,
@@ -64,7 +64,7 @@ public abstract class JeeslIoCmsCacheController <L extends JeeslLang,D extends J
 	
 	private final List<MT> markupTypes; public List<MT> getMarkupTypes() {return markupTypes;}
 
-	private boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
+	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
 	public JeeslIoCmsCacheController(IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fbCms)
 	{
@@ -76,7 +76,7 @@ public abstract class JeeslIoCmsCacheController <L extends JeeslLang,D extends J
 		markupTypes = new ArrayList<>();
 	}
 	
-	protected void postConstructCms(JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fCms,
+	public void postConstructCms(JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fCms,
 									JeeslCmsRenderer<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC> ofx)
 	{
 		this.fCms=fCms;

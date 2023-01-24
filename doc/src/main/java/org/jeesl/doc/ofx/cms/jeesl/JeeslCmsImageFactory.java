@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.xmlbeans.impl.common.IOUtil;
 import org.jeesl.doc.ofx.cms.generic.JeeslMarkupFactory;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -36,7 +37,7 @@ public class JeeslCmsImageFactory<E extends JeeslIoCmsElement<?,?,?,?,C,FC>,
 								M extends JeeslMarkup<MT>,
 								MT extends JeeslIoCmsMarkupType<?,?,MT,?>,
 								FS extends JeeslFileStorage<?,?,?,?,?>,
-								FC extends JeeslFileContainer<FS,?>,
+								FC extends JeeslFileContainer<FS,FM>,
 								FM extends JeeslFileMeta<?,FC,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslCmsImageFactory.class);
@@ -53,7 +54,17 @@ public class JeeslCmsImageFactory<E extends JeeslIoCmsElement<?,?,?,?,C,FC>,
 	public Image build(String localeCode, E element)
 	{
 		logger.trace("Building Image ");
+
+		
 		Image xml = XmlImageFactory.centerPercent(element.getId(), 80);
+		xml.setMedia(XmlMediaFactory.build("a","/image/cms/"+element.getId()));
+		
+		if(ObjectUtils.isNotEmpty(element.getFrContainer().getMetas()))
+		{
+			FM meta = element.getFrContainer().getMetas().get(0);
+			xml.getMedia().setSrc(meta.getCode());
+		}
+		
 		
 		if(element.getContent().containsKey(localeCode))
 		{

@@ -49,7 +49,7 @@ public abstract class AbstractCmsRenderer <L extends JeeslLang, D extends JeeslD
 								M extends JeeslMarkup<MT>,
 								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
 								FS extends JeeslFileStorage<L,D,?,?,?>,
-								FC extends JeeslFileContainer<FS,?>,
+								FC extends JeeslFileContainer<FS,FM>,
 								FM extends JeeslFileMeta<D,FC,?,?>
 								>
 {
