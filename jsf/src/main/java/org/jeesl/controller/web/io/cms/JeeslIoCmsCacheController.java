@@ -1,4 +1,4 @@
-package org.jeesl.web.mbean.prototype.io.cms;
+package org.jeesl.controller.web.io.cms;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.io.StringUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public abstract class JeeslIoCmsCacheController <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										CAT extends JeeslIoCmsCategory<L,D,CAT,?>,
 										CMS extends JeeslIoCms<L,D,LOC,CAT,S>,
 										V extends JeeslIoCmsVisiblity,
@@ -51,7 +51,7 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 					implements Serializable,JeeslCmsCacheBean<S,E>
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractCmsCacheBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslIoCmsCacheController.class);
 	
 	private final IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fbCms;
 	
@@ -66,7 +66,7 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	public AbstractCmsCacheBean(IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fbCms)
+	public JeeslIoCmsCacheController(IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fbCms)
 	{
 		this.fbCms=fbCms;
 		

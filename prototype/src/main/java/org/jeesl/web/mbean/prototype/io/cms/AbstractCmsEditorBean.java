@@ -31,6 +31,7 @@ import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsCategory;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsContent;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
+import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElementType;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsVisiblity;
@@ -67,7 +68,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 										S extends JeeslIoCmsSection<L,S>,
 										E extends JeeslIoCmsElement<V,S,EC,ET,C,FC>,
 										EC extends JeeslStatus<L,D,EC>,
-										ET extends JeeslStatus<L,D,ET>,
+										ET extends JeeslIoCmsElementType<L,D,ET,?>,
 										C extends JeeslIoCmsContent<V,E,MT>,
 										MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
 										FS extends JeeslFileStorage<L,D,?,?,?>,
@@ -89,7 +90,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	private String currentLocaleCode;
 	protected String[] cmsLocales; public String[] getCmsLocales() {return cmsLocales;}
 	
-	protected final EjbIoCmsFactory<L,D,CAT,CMS,V,S,E,EC,ET,C,MT,LOC> efCms;
+	protected final EjbIoCmsFactory<L,D,CAT,CMS,V,S,C,MT,LOC> efCms;
 	private final EjbIoCmsSectionFactory<L,S,FM> efS;
 	private final EjbIoCmsElementFactory<L,S,E> efElement;
 	private final EjbIoCmsContentFactory<LOC,E,C,MT> efContent;

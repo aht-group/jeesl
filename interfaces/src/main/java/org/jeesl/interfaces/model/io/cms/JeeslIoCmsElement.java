@@ -16,7 +16,7 @@ public interface JeeslIoCmsElement<
 									V extends JeeslIoCmsVisiblity,
 									S extends JeeslIoCmsSection<?,S>,
 									EC extends JeeslStatus<?,?,EC>,
-									ET extends JeeslStatus<?,?,ET>,
+									ET extends JeeslIoCmsElementType<?,?,ET,?>,
 									C extends JeeslIoCmsContent<V,?,?>,
 									FC extends JeeslFileContainer<?,?>>
 		extends Serializable,EjbWithId,EjbPersistable,EjbSaveable,EjbWithPositionParent,
