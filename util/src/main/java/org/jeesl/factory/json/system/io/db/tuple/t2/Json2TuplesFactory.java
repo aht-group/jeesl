@@ -13,6 +13,7 @@ import javax.persistence.Tuple;
 import org.apache.commons.collections.keyvalue.MultiKey;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.system.io.db.tuple.JsonTupleFactory;
+import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.db.tuple.two.Json2Tuple;
@@ -61,6 +62,12 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		mapB = new HashMap<Long,B>();
 		
 		map2 = new HashMap<A,Map<B,Json2Tuple<A,B>>>();
+	}
+	
+	public Json2TuplesFactory<A,B> tupleLoad(JeeslFacade facade, boolean load)
+	{
+		if(load) {this.fUtils=facade;}
+		return this;
 	}
 	
 	protected void clear()

@@ -45,6 +45,12 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		jtf = new Json1TupleFactory<A>();
 	}
 	
+	public Json1TuplesFactory<A> tupleLoad(JeeslFacade facade, boolean load)
+	{
+		if(load) {this.fUtils=facade;}
+		return this;
+	}
+	
 	public void init(JeeslFacade fUtils, Json1Tuples<A> json)
 	{
 		clear();
