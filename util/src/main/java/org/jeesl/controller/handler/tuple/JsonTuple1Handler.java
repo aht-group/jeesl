@@ -35,6 +35,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler im
 	private final List<A> listA; public List<A> getListA() {return listA;}
 	private final Map<A,Json1Tuple<A>> map1; public Map<A,Json1Tuple<A>> getMapA() {return map1;} public Map<A,Json1Tuple<A>> getMap1() {return map1;}
 
+	public static <A extends EjbWithId> JsonTuple1Handler<A> instance(Class<A> cA) {return new JsonTuple1Handler<>(cA);}
 	public JsonTuple1Handler(Class<A> cA)
 	{
 		this.cA=cA;
@@ -55,7 +56,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler im
 		map1.clear();
 	}
 
-	public void init(Json1Tuples<A> tuples)
+	public JsonTuple1Handler<A> init(Json1Tuples<A> tuples)
 	{
 		clear();
 		for(Json1Tuple<A> t : tuples.getTuples())
@@ -81,6 +82,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler im
 			if(!map1.containsKey(t.getEjb())) {map1.put(t.getEjb(), t);}
 		}
 		initListA(null);
+		return this;
 	}
 	
 	protected void initListA(JeeslFacade fJeesl)

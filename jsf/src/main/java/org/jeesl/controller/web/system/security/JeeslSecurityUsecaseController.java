@@ -70,8 +70,6 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 	
-//	private JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security;
-	
 	protected final EjbSecurityCategoryFactory<C> efCategory;
 	protected final EjbSecurityUsecaseFactory<C,U> efUsecase;
 	
@@ -155,6 +153,15 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		reloadUsecases();
 		usecase=null;
 	}
+	
+	public void addCategory() throws JeeslConstraintViolationException
+	{
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassCategory()));
+		category = efCategory.create(null,JeeslSecurityCategory.Type.usecase.toString());
+		category.setName(efLang.buildEmpty(lp.getLocales()));
+		category.setDescription(efDescription.buildEmpty(lp.getLocales()));
+	}
+	
 	public void saveCategory() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info(AbstractLogMessage.saveEntity(category));
@@ -162,6 +169,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		reloadCategories();
 		reloadUsecases();
 	}
+	
 	
 	public void selectUsecase()
 	{
@@ -171,6 +179,14 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		usecase = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),usecase);
 		
 		reloadActions();
+	}
+	
+	public void addUsecase() throws JeeslConstraintViolationException
+	{
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassUsecase()));
+		usecase = efUsecase.build(category,"");
+		usecase.setName(efLang.buildEmpty(lp.getLocales()));
+		usecase.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
 	//Reload
@@ -204,20 +220,8 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	}
 	
 	//Add
-	public void addCategory() throws JeeslConstraintViolationException
-	{
-		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassCategory()));
-		category = efCategory.create(null,JeeslSecurityCategory.Type.usecase.toString());
-		category.setName(efLang.buildEmpty(lp.getLocales()));
-		category.setDescription(efDescription.buildEmpty(lp.getLocales()));
-	}
-	public void addUsecase() throws JeeslConstraintViolationException
-	{
-		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassUsecase()));
-		usecase = efUsecase.build(category,"");
-		usecase.setName(efLang.buildEmpty(lp.getLocales()));
-		usecase.setDescription(efDescription.buildEmpty(lp.getLocales()));
-	}
+
+
 
 	//Save
 	public void saveUsecase() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException

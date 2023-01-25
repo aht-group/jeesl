@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -75,7 +76,7 @@ public class JeeslIoCmsFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		if(element.getFrContainer()!=null)
 		{
 			List<FM> files = this.allForParent(fbCms.getClassFileMeta(),element.getFrContainer());
-			if(!files.isEmpty()) {throw new JeeslConstraintViolationException("There are still files");}
+			if(ObjectUtils.isNotEmpty(files)) {throw new JeeslConstraintViolationException("There are still files");}
 			else
 			{
 				FC container = element.getFrContainer();
@@ -84,15 +85,18 @@ public class JeeslIoCmsFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 				this.rm(container);
 			}
 		}
-		if(!element.getContent().isEmpty())
+		
+		if(ObjectUtils.isNotEmpty(element.getContent()))
 		{
-			List<C> list = new ArrayList<>(element.getContent().values());
+			List<C> list = this.allForParent(fbCms.getClassContent(),element);
 			for(C c : list)
 			{
 				c.getElement().getContent().remove(c.getLkey());
 				this.rm(c);
 			}
 		}
+		element.setContent(null);
+		element = this.save(element);
 		
 		this.rmProtected(element);
 	}

@@ -46,9 +46,7 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 	private final Class<E> cElement; public Class<E> getClassElement() {return cElement;}
 	private final Class<EC> cElementCategory; public Class<EC> getClassElementCategory() {return cElementCategory;}
 	private final Class<ET> cElementType; public Class<ET> getClassElementType() {return cElementType;}
-	
-	private final Class<C> cContent;
-	
+	private final Class<C> cContent; public Class<C> getClassContent() {return cContent;}
 	private final Class<MT> cMarkupType; public Class<MT> getClassMarkupType() {return cMarkupType;}
 	private final Class<FM> cFileMeta; public Class<FM> getClassFileMeta() {return cFileMeta;}
     

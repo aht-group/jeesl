@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.controller.processor.finance.AmountRounder;
@@ -20,6 +21,8 @@ import org.jeesl.model.json.db.tuple.two.Json2Tuple;
 import org.jeesl.model.json.db.tuple.two.Json2Tuples;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.JsonUtil;
 
 public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 							extends JsonTuple1Handler<A>
@@ -118,6 +121,7 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 			if(t.getSum1()!=null) {t.setSum1(AmountRounder.two(t.getSum1()/sumDivider));}
 			if(t.getSum2()!=null) {t.setSum2(AmountRounder.two(t.getSum2()/sumDivider));}
 			if(t.getSum3()!=null) {t.setSum3(AmountRounder.two(t.getSum3()/sumDivider));}
+			if(Objects.nonNull(t.getSum4())) {t.setSum4(AmountRounder.two(t.getSum4()/sumDivider));}
 			
 			if(t.getEjb1()==null)
 			{

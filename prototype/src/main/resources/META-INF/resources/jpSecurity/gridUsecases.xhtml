@@ -6,7 +6,7 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
-		<composite:attribute name="bean" required="false" default="#{adminSecurityUsecasesBean}"/>
+		<composite:attribute name="bean" required="true"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -18,12 +18,12 @@
 		</j:slot>
 		<j:slot id="sUsecases" width="3" renderChildren="#{(not empty cc.attrs.bean.category) and (cc.attrs.bean.category.id gt 0)}">
 			<h:form id="fUsecases">
-				<p:dataTable var="u" value="#{cc.attrs.bean.usecases}" draggableRows="true"
-					rendered="#{not empty cc.attrs.bean.category}"
-					selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
+				<p:dataTable rendered="#{not empty cc.attrs.bean.category}"
+								var="u" value="#{cc.attrs.bean.usecases}" draggableRows="true"
+								selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.aupSecurityUsecases}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectUsecase}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase"/>
@@ -44,16 +44,16 @@
 				<p:panel header="#{msg.aupSecurityUsecase}" styleClass="jeeslPanel"
 						 rendered="#{not empty cc.attrs.bean.usecase}">
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{msg.ttDelete}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
 					<j:inputGrid>
-					
-						<p:outputLabel value="#{msg.jeeslSecurityCategory}"/>
+						<jtp:label entity="SecurityUsecase" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.usecase.category}" effect="fade" >
-							<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
+							<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
-						<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
+						
+						<jtp:label entity="SecurityUsecase" code="code"/>
 						<p:inputText value="#{cc.attrs.bean.usecase.code}"/>
 						
 						<p:outputLabel rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{msg.aupSecurityVisible}"/>
@@ -62,7 +62,7 @@
 						<p:outputLabel rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{msg.aupSecurityIncludeInManual}"/>
 						<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{cc.attrs.bean.usecase.documentation}"/>
 					</j:inputGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.usecase}" keys="#{appTranslationBean.langKeys}" withDescription="true"/>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.usecase}" withDescription="true" locales="#{cc.attrs.bean.locales}"/>
 				</p:panel>
 			</h:form>
 		</j:slot>

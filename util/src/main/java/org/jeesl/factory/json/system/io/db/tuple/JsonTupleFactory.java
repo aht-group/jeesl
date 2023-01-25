@@ -22,9 +22,12 @@ public class JsonTupleFactory
 	public static <X extends EjbWithId> JsonTuple build(Json1Tuple<X> tuple)
 	{
 		JsonTuple json = build();
+		
 		json.setCount(tuple.getCount());
 		json.setCount1(tuple.getCount1());
+		
 		json.setSum(tuple.getSum());
+		json.setSum1(tuple.getSum1());
 		
 		json.setId1(tuple.getId());
 		return json;
@@ -40,6 +43,8 @@ public class JsonTupleFactory
 		json.setSum1(tuple.getSum1());
 		json.setSum2(tuple.getSum2());
 		json.setSum3(tuple.getSum3());
+		json.setSum4(tuple.getSum4());
+		json.setSum5(tuple.getSum5());
 		
 		json.setId1(tuple.getId1());
 		json.setId2(tuple.getId2());
@@ -100,15 +105,18 @@ public class JsonTupleFactory
 	
 	private static void build(Tuple tuple, int offset, AbstractJsonTuple json, JsonTupleFactory.Type...types)
 	{
+//		logger.info(StringUtil.stars());
 		int index=1;
 		for(JsonTupleFactory.Type type : types)
 		{
+//			logger.info("building Type:"+type);
 			switch(type)
 			{
-				case sum: 	if(index==1) {json.setSum1(JsonTupleFactory.toDouble(tuple,offset+index));json.setSum(json.getSum1());}
+				case sum: 	if(index==1)      {json.setSum1(JsonTupleFactory.toDouble(tuple,offset+index));json.setSum(json.getSum1());}
 							else if(index==2) {json.setSum2(JsonTupleFactory.toDouble(tuple,offset+index));}
 							else if(index==3) {json.setSum3(JsonTupleFactory.toDouble(tuple,offset+index));}
 							else if(index==4) {json.setSum4(JsonTupleFactory.toDouble(tuple,offset+index));}
+							else if(index==5) {json.setSum5(JsonTupleFactory.toDouble(tuple,offset+index));}
 							else {logger.warn("NYI "+type+" for index="+index);}
 							break;
 				case count: if(index==1) {json.setCount1((Long)tuple.get(offset+index));json.setCount(json.getCount1());}
