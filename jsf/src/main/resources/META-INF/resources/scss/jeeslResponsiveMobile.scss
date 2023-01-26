@@ -916,6 +916,59 @@ html, body, .ui-widget {
 				> .ui-selectonemenu, > .ui-selectcheckboxmenu {
 					padding: 0;
 				}
+				
+				> .jeesl-ck-editor {
+					padding: 0;
+					
+					.cke .cke_inner {
+						.cke_top .cke_toolbar .cke_toolgroup {
+							.cke_button {
+								@include button();
+								
+								min-width: $element-height-mobile;
+								
+								.cke_button_icon {
+									@include icon;
+								}
+							}
+							
+							.cke_toolar_separator {
+								height: $element-height-mobile;
+							}
+						}
+						
+						.cke_contents {
+							padding: $regular-spacing;
+						}
+					}
+				}
+				
+				> .jeesl-tabs {
+					.ui-tabs-nav {
+						border-width: $border-width $border-width 0;
+						padding: #{$regular-spacing - $border-width} $regular-spacing 0 !important;
+						
+						&:after {
+							margin-left: -#{$regular-spacing + $border-width};
+							width: calc(100% + #{2 * $border-width});
+						}
+						
+						.ui-tabs-header {
+							justify-content: center;
+							min-height: #{$element-height-mobile - $regular-spacing};
+							min-width: $element-height-mobile;
+							
+							&.ui-state-active {
+								min-height: #{$element-height-mobile - $regular-spacing};
+							}
+						}
+					}
+					
+					.ui-tabs-panels .ui-tabs-panel {
+						padding: 0;
+						margin-top: $header-element-underline;
+					}
+				}
 			}
 		}
 	}
