@@ -1762,12 +1762,11 @@ body, .ui-widget {
 }
 
 @mixin jeesl-titlebar {
-	align-items: flex-start;
+	align-items: center;
 	background: $soft-grey linear-gradient(to bottom, $white-80, $white-0);
 	border: $border;
 	color: $foreground;
 	display: flex;
-	flex-direction: column;
 	flex-wrap: wrap;
 	font-weight: 700;
 	height: auto;
@@ -2846,9 +2845,12 @@ body, .ui-widget {
 	.ui-galleria-caption {
 		@include jeesl-titlebar;
 		
+		align-items: flex-start;
 	    bottom: unset !important;
 		border-radius: $border-radius;
+		flex-direction: column;
 		height: auto !important;
+		justify-content: center;
 		order: 0;
 		position: absolute;
 		top: $slim-spacing;
@@ -2869,8 +2871,6 @@ body, .ui-widget {
 
 		> h4 {
 			@include jeesl-titlebar-title;
-			
-			
 		}
 		
 		> p {
@@ -3872,10 +3872,11 @@ body, .ui-widget {
 			&:not(.ui-outputlabel) {
 				> * {
 					min-height: $element-height;
-					min-width: auto !important;
+					min-width: $element-height !important;
 					
 					@media (max-width: 768px) {
 						min-height: $element-height-mobile;
+						min-width: $element-height-mobile !important;
 					}
 				}
 				
