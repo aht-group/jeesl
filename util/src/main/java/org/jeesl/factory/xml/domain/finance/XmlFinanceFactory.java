@@ -3,13 +3,16 @@ package org.jeesl.factory.xml.domain.finance;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.processor.finance.AmountRounder;
 import org.jeesl.interfaces.model.module.currency.UtilsCurrency;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.finance.EjbWithValue;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.json.db.tuple.JsonTuple;
 import org.jeesl.model.xml.jeesl.QueryFinance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +50,17 @@ public class XmlFinanceFactory <L extends JeeslLang, C extends UtilsCurrency<L>>
 		return xml;
 	}
 	
+	public static <E extends Enum<E>, A extends EjbWithId> Finance thSum(E code, double fallback, JsonTuple1Handler<A> th, int index, A a)
+	{
+		double value = fallback;
+		if(th.contains(a))
+		{
+			JsonTuple t = th.value(a);
+			if(index==1 && Objects.nonNull(t.getSum1())) {value = t.getSum1();}
+			else if(index==2 && Objects.nonNull(t.getSum2())) {value = t.getSum2();}
+		}
+		return create(code.toString(),value);
+	}
 	public static <C extends EjbWithCode> Finance build(C code, double value){return create(code.getCode(),value);}
 	public static <E extends Enum<E>> Finance build(E code, double value){return create(code.toString(),value);}
 	public static Finance create(String code, double value)
