@@ -22,8 +22,6 @@ import org.jeesl.model.json.db.tuple.two.Json2Tuples;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.JsonUtil;
-
 public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 							extends JsonTuple1Handler<A>
 							implements Serializable
@@ -45,6 +43,7 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	
 	private int sizeB; public int getSizeB() {return sizeB;}
 	
+	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple2Handler<A,B> instance(Class<A> cA, Class<B> cB) {return new JsonTuple2Handler<>(cA,cB);}
 	public JsonTuple2Handler(Class<A> cA, Class<B> cB)
 	{
 		super(cA);
@@ -117,6 +116,7 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	
 		for(Json2Tuple<A,B> t : tuples.getTuples())
 		{
+			size++;
 			if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
 			if(t.getSum1()!=null) {t.setSum1(AmountRounder.two(t.getSum1()/sumDivider));}
 			if(t.getSum2()!=null) {t.setSum2(AmountRounder.two(t.getSum2()/sumDivider));}

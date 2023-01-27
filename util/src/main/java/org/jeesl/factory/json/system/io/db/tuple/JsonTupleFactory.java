@@ -28,6 +28,10 @@ public class JsonTupleFactory
 		
 		json.setSum(tuple.getSum());
 		json.setSum1(tuple.getSum1());
+		json.setSum2(tuple.getSum2());
+		json.setSum3(tuple.getSum3());
+		json.setSum4(tuple.getSum4());
+		json.setSum5(tuple.getSum5());
 		
 		json.setId1(tuple.getId());
 		return json;
