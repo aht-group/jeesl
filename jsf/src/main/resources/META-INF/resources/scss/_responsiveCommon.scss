@@ -1018,13 +1018,18 @@ $border: $border-width solid $border-colour;
 			}
 		}
 	}
-}
 
-.ui-chips-input-token {
-	width: 100%;
-	
-	input {
+	.ui-chips-input-token {
+		min-height: $element-height;
 		width: 100%;
+		
+		@media (max-width: 768px) {
+			min-height: $element-height-mobile;
+		}
+		
+		input {
+			width: 100%;
+		}
 	}
 }
 
