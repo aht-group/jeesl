@@ -6,6 +6,23 @@ $enable-pointer-cursor-for-buttons: true;
 @import '_responsiveCommon';
 @import '_responsiveCharts';
 
+@mixin overlay() {
+	bottom: 0;
+	content: '';
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+@mixin background-overlay($background-color) {
+	@include overlay;
+	
+	background: $background-color;
+	opacity: 0;
+	transition: opacity $transition-duration ease-in-out;
+}
+
 @mixin triangle($colour: transparent, $width: 0) {
 	border-color: $colour;
     border-style: solid;
@@ -1137,18 +1154,22 @@ body, .ui-widget {
 				}
 				
 				&:before {
+					@include overlay();
+					
 					background: linear-gradient(to bottom, $dark-colour, transparent);
-				    content: '';
+//				    content: '';
 				    display: block;
-				    height: 100%;
-				    position: absolute;
-				    top: 0;
+//				    height: 100%;
+//				    position: absolute;
+//				    top: 0;
 				    transition: opacity .4s linear;
-				    width: 100%;
+//				    width: 100%;
 					z-index: 1;
 				}
 				
 				&:after {
+					@include background-overlay($dark-colour);
+					
 					background: $dark-colour;
 					position: absolute;
 					top: 0;
@@ -1741,11 +1762,12 @@ body, .ui-widget {
 }
 
 @mixin jeesl-titlebar {
-	align-items: center;
+	align-items: flex-start;
 	background: $soft-grey linear-gradient(to bottom, $white-80, $white-0);
 	border: $border;
 	color: $foreground;
-	display: flex;	
+	display: flex;
+	flex-direction: column;
 	flex-wrap: wrap;
 	font-weight: 700;
 	height: auto;
@@ -1784,6 +1806,7 @@ body, .ui-widget {
 	align-items: center;
 	display: flex;
 	flex-grow: 1;
+	justify-content: center;
 	line-height: 1em;
 	padding: $slim-spacing $regular-spacing;
 
@@ -1909,10 +1932,6 @@ body, .ui-widget {
 				top: 0 !important;
 			}
 			
-			&:hover {
-				background: linear-gradient(to bottom, $bright-grey 87%, $soft-grey 100%);
-			}
-			
 			&.ui-tabs-selected {
 				background: linear-gradient(to bottom, $white-100, $panel-background);
 				padding-bottom: 1px;
@@ -1923,17 +1942,14 @@ body, .ui-widget {
 				}
 				
 				&:before {
-				    position: absolute;
-				    background: linear-gradient(to bottom, $medium-colour, $dark-colour);
-				    width: 100%;
-				    height: 100%;
+					background: linear-gradient(to bottom, $medium-colour, $dark-colour);
 				    border-radius: inherit;
-				    left: 0;
-				    top: 0;
 				    box-shadow: inset 0 1px 0 $bright-colour;
+					display: none;
+					opacity: 1;
 
 					@media (max-width: 768px) {
-						content: '';
+						display: block;
 					}
 				}
 				
@@ -1951,12 +1967,21 @@ body, .ui-widget {
 					}
 				}
 			}
+	
+			&:hover:before {
+				opacity: 1;
+			}
+								
+			&:before {
+				@include background-overlay(linear-gradient(to bottom, $bright-grey 87%, $soft-grey 100%));
+			}
 			
 			> a {
 				@include jeesl-titlebar-title;
 				
 				color: $anthracite;
 				padding: 0 $regular-spacing;
+				position: relative;
 			}
 		}
 	}
@@ -2053,7 +2078,7 @@ body, .ui-widget {
 					
 					@media (max-width: 768px) {
 						line-height: normal;
-					    padding: .5em 0 $slim-spacing 0;
+					    padding: .6em 0 $slim-spacing 0;
 
 						// Overriding inline css
 						width: 100% !important;
@@ -2071,6 +2096,7 @@ body, .ui-widget {
 						
 						@media (max-width: 768px) {
 //							font-size: 18px !important;
+							margin: 0;
 							padding: $half-spacing $regular-spacing;
 							width: 100%;
 						}
@@ -2133,9 +2159,10 @@ body, .ui-widget {
 												border-width: $border-width 0;
 												box-sizing: border-box;
 												cursor: pointer;
+												min-width: $element-height;
 												
 												@media (max-width: 768px) {
-													width: $element-height-mobile;
+													min-width: $element-height-mobile;
 												}
 												
 												&:first-child {
@@ -2220,6 +2247,68 @@ body, .ui-widget {
 									@media (max-width: 768px) {
 										padding: $regular-spacing;
 									}
+								}
+							}
+						}
+					}
+					
+					> .jeesl-tabs {
+						margin: 0;
+						padding: 0;
+						
+						.ui-tabs-nav {
+							border-radius: $border-radius-top;
+							margin: 0;
+							
+							@media (max-width: 768px) {
+								border-width: $border-width $border-width 0;
+								padding: #{$regular-spacing - $border-width} $regular-spacing 0 !important;
+								
+								&:after {
+									margin-left: -#{$regular-spacing + $border-width};
+									width: calc(100% + #{2 * $border-width});
+								}
+							}
+							
+							.ui-tabs-header {
+								cursor: pointer;
+								min-height: #{$element-height - 2 * $border-width - $slim-spacing};
+								top: $border-width;
+								
+								@media (max-width: 768px) {
+									justify-content: center;
+									min-height: #{$element-height-mobile - $regular-spacing};
+									min-width: $element-height-mobile;
+								}
+								
+								&.ui-state-active {
+									background: linear-gradient(to bottom, $panel-background, $white-100);
+									cursor: default;
+									min-height: #{$element-height - $border-width - $slim-spacing};
+									
+									@media (max-width: 768px) {
+										min-height: #{$element-height-mobile - $regular-spacing};
+									}
+									
+									a {
+										cursor: default;
+									}
+								}
+							}
+						}
+							
+						.ui-tabs-panels {
+							padding: 0;
+							
+							.ui-tabs-panel {
+								@media (max-width: 768px) {
+									padding: 0;
+									margin-top: $header-element-underline;
+								}
+								
+								.ui-inputtextarea {
+									border-radius: $border-radius-bottom;
+									margin: 0;
 								}
 							}
 						}
@@ -2412,6 +2501,10 @@ body, .ui-widget {
 		border: 0;
 		flex: 1;
 		padding: $half-spacing $regular-spacing;
+		
+		.jeesl-construction-icon {
+			width: 100%;
+		}
 	}
 	
 	&.jeesl-editor {
@@ -2792,15 +2885,20 @@ body, .ui-widget {
 		width: 100% !important;
 	
 		.ui-galleria-panel {
-			align-items: center;
-			display: flex !important;
 			height: 100% !important;
-			justify-content: center;
 			width: 100% !important;
 			
-			img {
-				max-height: 100%;
-				max-width: 100%;
+			.jeesl-galleria-image-wrapper {
+				align-items: center;
+				display: flex;
+				height: 100%;
+				justify-content: center;
+				width: 100%;
+				
+				img {
+					max-height: 100%;
+					max-width: 100%;
+				}
 			}
 		}
 	}
@@ -2843,16 +2941,18 @@ body, .ui-widget {
 		}
 		
 		&:before {
-			background: $soft-grey;
-			content: '';
+			@include background-overlay($soft-grey);
+			
+//			background: $soft-grey;
+//			content: '';
 			font-size: 1.1em;
-			height: 100%;
-			left: 0;
-			opacity: 0;
-			position: absolute;
-			top: 0;
-			transition: opacity $transition-duration linear;
-			width: 100%;
+//			height: 100%;
+//			left: 0;
+//			opacity: 0;
+//			position: absolute;
+//			top: 0;
+//			transition: opacity $transition-duration linear;
+//			width: 100%;
 			
 			@media (max-width: 768px) {
 				font-size: 1.8em;
@@ -2998,13 +3098,15 @@ body, .ui-widget {
 			}
 			
 			&:before {
-				background: $soft-grey;
-				content: '';	
-				height: 100%;
-				opacity: 0;
-				position: absolute;
-				transition: opacity .2s linear;
-				width: 100%;
+				@include background-overlay($soft-grey);
+				
+//				background: $soft-grey;
+//				content: '';	
+//				height: 100%;
+//				opacity: 0;
+//				position: absolute;
+//				transition: opacity .2s linear;
+//				width: 100%;
 				z-index: 1;
 			}
 			
@@ -3406,13 +3508,15 @@ body, .ui-widget {
 				}
 
 				&:before {
-				    background: $dark-colour;
-					content: '';
-				    height: 100%;
-				    opacity: 0;
-				    position: absolute;
-				    transition: opacity .2s linear;
-				    width: 100%;
+					@include background-overlay($dark-colour);
+					
+//				    background: $dark-colour;
+//					content: '';
+//				    height: 100%;
+//				    opacity: 0;
+//				    position: absolute;
+//				    transition: opacity .2s linear;
+//				    width: 100%;
 				}
 
 				.jeesl-dropdown-item-label {
@@ -3550,7 +3654,7 @@ body, .ui-widget {
 		
 	&.ui-tabs-top {
 		.ui-tabs-nav {
-			padding: 2px 3px 0;
+			padding: #{$slim-spacing - $border-width} $slim-spacing 0;
 		}
 	}
 	

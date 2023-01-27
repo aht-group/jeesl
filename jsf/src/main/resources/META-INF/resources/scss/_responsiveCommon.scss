@@ -944,28 +944,40 @@ $border: $border-width solid $border-colour;
 }
 
 .ui-chips-container {
+	align-items: flex-start;
+	display: flex;
+	flex-wrap: wrap;
 	padding: $slim-spacing $half-spacing;
 	
 	.ui-chips-token {
 		@include button;
 		
+		align-items: center;
+		display: flex;
+		height: auto;
+		min-height: $element-height;
 		padding-right: #{$element-height - 2 * $border-width};
 		
 		@media (max-width: 768px) {
+			min-height: $element-height-mobile;
 			padding-right: #{$element-height-mobile - 2 * $border-width};
 		}
 		
 		.ui-chips-token-label {
 			display: inline-block;
+			max-width: 100%;
 			padding: 0 $half-spacing;
+			text-align: left;
+			white-space: break-spaces;
 		}
 		
 		.ui-chips-token-icon {
 			@include icon;
 			
 			color: $white-100 !important;
-			height: #{$element-height - 2 * $border-width};
+			height: 100%;
 			left: auto;
+			min-height: #{$element-height - 2 * $border-width};
 			position: absolute;
 			right: 0;
 			width: #{$element-height - 2 * $border-width};
