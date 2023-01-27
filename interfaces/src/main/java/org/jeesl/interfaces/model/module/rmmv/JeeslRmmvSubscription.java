@@ -22,7 +22,7 @@ public interface JeeslRmmvSubscription<R extends JeeslTenantRealm<?,?,R,?>,
 								EjbWithCode,EjbWithPositionVisible,EjbWithName,
 								JeeslWithTenantSupport<R>
 {
-	public enum Attributes{user}
+	public enum Attributes{user,module}
 	
 	MOD getModule();
 	void setModule(MOD module);

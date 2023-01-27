@@ -73,4 +73,28 @@ public class JeeslRmmvFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		
 		return em.createQuery(cQ).getResultList();
 	}
+
+	@Override
+	public <RREF extends EjbWithId> List<SUB> fRmmvSubscriptions(R realm, RREF rref, MOD module, USER user)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<SUB> cQ = cB.createQuery(fbRmmv.getClassSubscription());
+		Root<SUB> subscription = cQ.from(fbRmmv.getClassSubscription());
+
+		Path<R> pRealm = subscription.get(JeeslWithTenantSupport.Attributes.realm.toString());
+		Expression<Long> eRref = subscription.get(JeeslWithTenantSupport.Attributes.rref.toString());
+		Path<MOD> pModule = subscription.join(JeeslRmmvSubscription.Attributes.module.toString());
+		Path<USER> pUser = subscription.join(JeeslRmmvSubscription.Attributes.user.toString());
+		
+		predicates.add(cB.and(cB.equal(pRealm,realm),cB.equal(eRref,rref.getId())));
+		predicates.add(cB.equal(pModule,module));
+		predicates.add(cB.equal(pUser,user));
+	    
+		cQ.select(subscription);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		
+		return em.createQuery(cQ).getResultList();
+	}
 }

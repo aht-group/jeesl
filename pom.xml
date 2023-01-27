@@ -33,8 +33,9 @@
 		<module>io-fr</module>
 		<module>io-ssi</module>
 		
-		<module>system-security</module>
+		<module>system-constraint</module>
 		<module>system-property</module>
+		<module>system-security</module>
 	</modules>
 
 	<properties>

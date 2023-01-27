@@ -119,7 +119,7 @@ public class JeeslRmmvSubscriptionController <L extends JeeslLang, D extends Jee
 	private void reloadSubscriptions()
 	{
 		this.reset(true,false,false,false);
-		subscriptions.addAll(fRmmv.all(fbRmmv.getClassSubscription()));
+		subscriptions.addAll(fRmmv.fRmmvSubscriptions(realm, rref, sbhModule.getSelection(), user));
 	}
 
 	public void addSubscription()

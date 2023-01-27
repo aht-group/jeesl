@@ -26,4 +26,5 @@ public interface JeeslRmmvFacade <L extends JeeslLang, D extends JeeslDescriptio
 			extends JeeslFacade
 {	
 	<RREF extends EjbWithId> List<MC> fRmmvConfigs(R realm, RREF rref, MOD module);
+	<RREF extends EjbWithId> List<SUB> fRmmvSubscriptions(R realm, RREF rref, MOD module, USER user);
 }
