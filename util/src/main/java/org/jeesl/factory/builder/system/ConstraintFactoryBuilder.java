@@ -2,10 +2,10 @@ package org.jeesl.factory.builder.system;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.system.constraint.algorithm.EjbConstraintAlgorithmFactory;
-import org.jeesl.interfaces.model.system.constraint.JeeslConstraint;
-import org.jeesl.interfaces.model.system.constraint.JeeslConstraintResolution;
-import org.jeesl.interfaces.model.system.constraint.JeeslConstraintScope;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;

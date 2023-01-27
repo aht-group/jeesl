@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.constraint;
+package org.jeesl.interfaces.model.system.constraint.core;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;

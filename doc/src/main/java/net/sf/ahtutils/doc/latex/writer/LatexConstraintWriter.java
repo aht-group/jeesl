@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.constraints.OfxConstraintScopeSectionFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
-import org.jeesl.interfaces.model.system.constraint.JeeslConstraintType;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintType;
 import org.jeesl.model.xml.jeesl.Container;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;

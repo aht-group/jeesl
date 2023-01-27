@@ -40,7 +40,7 @@ import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStagePermis
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStageType;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransition;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransitionType;
-import org.jeesl.interfaces.model.system.constraint.JeeslConstraint;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;

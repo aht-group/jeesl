@@ -1,7 +1,7 @@
 package org.jeesl.api.bean.msg;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.interfaces.model.system.constraint.JeeslConstraint;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 import net.sf.ahtutils.xml.system.ConstraintScope;

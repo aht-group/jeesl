@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.constraint;
+package org.jeesl.interfaces.model.system.constraint.core;
 
 import java.io.Serializable;
 
@@ -10,18 +10,17 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
-import org.jeesl.interfaces.qualifier.rest.option.JeeslOptionUploadable;
 
 @DownloadJeeslData
-public interface JeeslConstraintType <L extends JeeslLang,D extends JeeslDescription,
+public interface JeeslConstraintLevel <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
-									extends Serializable,EjbPersistable,JeeslStatusFixedCode,
-												JeeslOptionUploadable,
+										extends Serializable,EjbPersistable,
+												JeeslStatusFixedCode,
 												EjbWithCodeGraphic<G>,
 												JeeslStatus<L,D,S>
 {
-	public static String xmlResourceContainer = "jeesl/db/system/constraint/type.xml";
+	public static String xmlResourceContainer = "jeesl/db/system/constraint/level.xml";
 	
-	public static enum Code{unique,precondition};
+	public static enum Code{error};
 }

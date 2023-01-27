@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.constraint;
+package org.jeesl.interfaces.model.system.constraint.core;
 
 import java.io.Serializable;
 

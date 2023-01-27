@@ -1,8 +1,8 @@
 package org.jeesl.factory.json.io.ssi.com;
 
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
-import org.jeesl.interfaces.model.system.constraint.JeeslConstraint;
-import org.jeesl.interfaces.model.system.constraint.JeeslConstraintScope;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
