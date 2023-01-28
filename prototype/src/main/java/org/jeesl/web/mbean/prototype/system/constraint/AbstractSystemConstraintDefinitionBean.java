@@ -36,12 +36,12 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										ALGCAT extends JeeslStatus<L,D,ALGCAT>,
 										ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
-										SCOPE extends JeeslConstraintScope<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
+										SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 										CONCAT extends JeeslStatus<L,D,CONCAT>,
 										CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 										LEVEL extends JeeslStatus<L,D,LEVEL>,
 										TYPE extends JeeslStatus<L,D,TYPE>,
-										RESOLUTION extends JeeslConstraintResolution<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>>
+										RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 					extends AbstractSystemConstraintBean<L,D,LOC,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
 					implements Serializable,SbToggleBean
 {
@@ -68,7 +68,7 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 	public AbstractSystemConstraintDefinitionBean(ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
 	{
 		super(fbConstraint);
-		cpScope = new ContraintScopeComparator<SCOPE>().factory(ContraintScopeComparator.Type.position);
+		cpScope = new ContraintScopeComparator<SCOPE,CONCAT>().factory(ContraintScopeComparator.Type.position);
 		ui2 = new UiTwiceClickHelper();
 		efScope = new EjbConstraintScopeFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(fbConstraint.getClassL(),fbConstraint.getClassD(),fbConstraint.getClassScope(),fbConstraint.getClassConstraintCategory());
 		efConstraint = new EjbConstraintFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(fbConstraint.getClassL(),fbConstraint.getClassD(),fbConstraint.getClassConstraint(),fbConstraint.getClassConstraintType());

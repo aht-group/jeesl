@@ -18,12 +18,12 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithLevel;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 
 public interface JeeslConstraint<L extends JeeslLang, D extends JeeslDescription,
-									SCOPE extends JeeslConstraintScope<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
+									SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 									LEVEL extends JeeslStatus<L,D,LEVEL>,
 									TYPE extends JeeslStatus<L,D,TYPE>,
-									RESOLUTION extends JeeslConstraintResolution<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>>
+									RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 			extends Serializable,EjbWithId,
 					EjbRemoveable,EjbPersistable,EjbSaveable,
 					EjbWithNonUniqueCode,EjbWithNrString,

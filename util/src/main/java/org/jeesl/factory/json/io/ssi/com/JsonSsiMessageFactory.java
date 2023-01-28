@@ -21,7 +21,7 @@ public class JsonSsiMessageFactory
 	
 	public static <E extends Enum<E>, LOC extends Enum<LOC>,
 				L extends JeeslLang, D extends JeeslDescription,
-				SCOPE extends JeeslConstraintScope<L,D,SCOPE,?,CONSTRAINT,LEVEL,TYPE,?>,
+				SCOPE extends JeeslConstraintScope<L,D,?>,
 				CONSTRAINT extends JeeslConstraint<L,D,SCOPE,?,CONSTRAINT,LEVEL,TYPE,?>,
 				LEVEL extends JeeslStatus<L,D,LEVEL>,
 				TYPE extends JeeslStatus<L,D,TYPE>>

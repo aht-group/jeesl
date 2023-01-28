@@ -16,11 +16,8 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 
 public interface JeeslConstraintScope<L extends JeeslLang, D extends JeeslDescription,
-									SCOPE extends JeeslConstraintScope<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>, LEVEL extends JeeslStatus<L,D,LEVEL>,
-									TYPE extends JeeslStatus<L,D,TYPE>,
-									RESOLUTION extends JeeslConstraintResolution<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>>
+									
+									CATEGORY extends JeeslStatus<L,D,CATEGORY>>
 			extends Serializable,EjbPersistable,EjbWithPosition,EjbWithId,EjbWithCode,
 					EjbSaveable,EjbRemoveable,
 					JeeslWithCategory<CATEGORY>,

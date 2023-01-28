@@ -4,10 +4,13 @@ import java.util.Comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
+import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ContraintScopeComparator<SCOPE extends JeeslConstraintScope<?,?,SCOPE,?,?,?,?,?>>
+public class ContraintScopeComparator<SCOPE extends JeeslConstraintScope<?,?,CAT>,
+										CAT extends JeeslStatus<?,?,CAT>>
 {
 	final static Logger logger = LoggerFactory.getLogger(ContraintScopeComparator.class);
 
@@ -21,7 +24,7 @@ public class ContraintScopeComparator<SCOPE extends JeeslConstraintScope<?,?,SCO
     public Comparator<SCOPE> factory(Type type)
     {
         Comparator<SCOPE> c = null;
-        ContraintScopeComparator<SCOPE> factory = new ContraintScopeComparator<SCOPE>();
+        ContraintScopeComparator<SCOPE,CAT> factory = new ContraintScopeComparator<>();
         switch (type)
         {
             case position: c = factory.new PositionComparator();break;

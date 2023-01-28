@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.system.constraint.resolution;
+package org.jeesl.model.ejb.system.constraint.algorithm;
 
 import java.io.Serializable;
 
@@ -18,15 +18,15 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("systemConstraintResolutionCat")
+@DiscriminatorValue("systemConstraintAlgorithmCat")
 @EjbErNode(name="Category",category="lcf",level=3,subset="lcf")
-public class SystemConstraintResolutionCategory extends IoStatus
+public class SystemConstraintAlgorithmCategory extends IoStatus
 								implements Serializable,EjbPersistable,EjbWithCode,EjbWithPositionVisible,
 											EjbWithGraphic<IoGraphic>,
-											JeeslStatus<IoLang,IoDescription,SystemConstraintResolutionCategory>
+											JeeslStatus<IoLang,IoDescription,SystemConstraintAlgorithmCategory>
 {
 	public static final long serialVersionUID=1;
 	
-	@Override public boolean equals(Object object){return (object instanceof SystemConstraintResolutionCategory) ? id == ((SystemConstraintResolutionCategory) object).getId() : (object == this);}
+	@Override public boolean equals(Object object){return (object instanceof SystemConstraintAlgorithmCategory) ? id == ((SystemConstraintAlgorithmCategory) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(23,43).append(id).toHashCode();}
 }

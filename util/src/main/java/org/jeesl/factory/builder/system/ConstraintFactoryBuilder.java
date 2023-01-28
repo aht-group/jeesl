@@ -15,12 +15,12 @@ import org.slf4j.LoggerFactory;
 public class ConstraintFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 									ALGCAT extends JeeslStatus<L,D,ALGCAT>,
 									ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
-									SCOPE extends JeeslConstraintScope<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
+									SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 									CONCAT extends JeeslStatus<L,D,CONCAT>,
 									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 									LEVEL extends JeeslStatus<L,D,LEVEL>,
 									TYPE extends JeeslStatus<L,D,TYPE>,
-									RESOLUTION extends JeeslConstraintResolution<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>>
+									RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 				extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(ConstraintFactoryBuilder.class);
