@@ -136,7 +136,8 @@ public class JsonTupleFactory
 	{
 		Object o = tuple.get(index);
 		
-		if(o instanceof Double) {return ((Double)o);}
+		if(o==null) {return null;}
+		else if(o instanceof Double) {return ((Double)o);}
 		else if(o instanceof Long) {return (((Long)o).doubleValue());}
 		else
 		{

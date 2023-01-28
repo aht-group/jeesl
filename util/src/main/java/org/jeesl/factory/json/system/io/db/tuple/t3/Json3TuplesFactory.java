@@ -38,6 +38,7 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 
 	private Json3Tuples<A,B,C> tuples; public Json3Tuples<A,B,C> get3Tuples() {return tuples;} public void set3Tuples(Json3Tuples<A, B, C> tuples) {this.tuples = tuples;}
 
+	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId> Json3TuplesFactory<A,B,C> instance(Class<A> cA, Class<B> cB, Class<C> cC) {return new Json3TuplesFactory<>(cA,cB,cC);}
 	public Json3TuplesFactory(Class<A> cA, Class<B> cB, Class<C> cC)
 	{
 //		super(cA,cB);
@@ -93,7 +94,6 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		else
 		{
 			// Here we really load the objects from the DB
-			
 			mapA.putAll(EjbIdFactory.toIdMap(fUtils.find(cA,setA)));
 			mapB.putAll(EjbIdFactory.toIdMap(fUtils.find(cB,setB)));
 			mapC.putAll(EjbIdFactory.toIdMap(fUtils.find(cC,setC)));

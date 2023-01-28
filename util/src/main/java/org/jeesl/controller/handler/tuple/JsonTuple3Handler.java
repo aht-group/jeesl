@@ -37,6 +37,7 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 
 	private int sizeC; public int getSizeC() {return sizeC;}
 	
+	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId> JsonTuple3Handler<A,B,C> instance(Class<A> cA, Class<B> cB, Class<C> cC) {return new JsonTuple3Handler<>(cA,cB,cC);}
 	public JsonTuple3Handler(Class<A> cA, Class<B> cB, Class<C> cC)
 	{
 		super(cA,cB);
@@ -67,6 +68,7 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 	
 		for(Json3Tuple<A,B,C> t : tuples.getTuples())
 		{
+			size++;
 			if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
 			
 			if(t.getEjb1()==null)
@@ -112,7 +114,7 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 		tuples3.addAll(tuples.getTuples());
 	}
 	
-	protected void initListC(JeeslFacade fJeesl)
+	public void initListC(JeeslFacade fJeesl)
 	{
 		if(fJeesl==null){listC.addAll(mapC.values());}
 		else{listC.addAll(fJeesl.find(cC,new ArrayList<Long>(mapC.keySet())));}
