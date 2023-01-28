@@ -18,15 +18,15 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("systemConstraintAlgorithmCat")
+@DiscriminatorValue("systemConstraintAlgorithmGroup")
 @EjbErNode(name="Category",category="lcf",level=3,subset="lcf")
-public class SystemConstraintAlgorithmCategory extends IoStatus
+public class SystemConstraintAlgorithmGroup extends IoStatus
 								implements Serializable,EjbPersistable,EjbWithCode,EjbWithPositionVisible,
 											EjbWithGraphic<IoGraphic>,
-											JeeslStatus<IoLang,IoDescription,SystemConstraintAlgorithmCategory>
+											JeeslStatus<IoLang,IoDescription,SystemConstraintAlgorithmGroup>
 {
 	public static final long serialVersionUID=1;
 	
-	@Override public boolean equals(Object object){return (object instanceof SystemConstraintAlgorithmCategory) ? id == ((SystemConstraintAlgorithmCategory) object).getId() : (object == this);}
+	@Override public boolean equals(Object object){return (object instanceof SystemConstraintAlgorithmGroup) ? id == ((SystemConstraintAlgorithmGroup) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(23,43).append(id).toHashCode();}
 }

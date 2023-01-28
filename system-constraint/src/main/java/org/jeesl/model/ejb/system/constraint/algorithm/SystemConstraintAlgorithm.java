@@ -24,7 +24,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Entity
 @Table(name="SystemConstraintAlgorithm",uniqueConstraints=@UniqueConstraint(columnNames={"code"}))
-public class SystemConstraintAlgorithm implements JeeslConstraintAlgorithm<IoLang,IoDescription,SystemConstraintAlgorithmCategory>
+public class SystemConstraintAlgorithm implements JeeslConstraintAlgorithm<IoLang,IoDescription,SystemConstraintAlgorithmGroup>
 {
 	public static final long serialVersionUID=1;
 
@@ -36,9 +36,9 @@ public class SystemConstraintAlgorithm implements JeeslConstraintAlgorithm<IoLan
 
 	@Override public String resolveParentAttribute() {return JeeslConstraintAlgorithm.Attributes.category.toString();}
 	@NotNull @ManyToOne
-	private SystemConstraintAlgorithmCategory category;
-	@Override public SystemConstraintAlgorithmCategory getCategory() {return category;}
-	@Override public void setCategory(SystemConstraintAlgorithmCategory category) {this.category = category;}
+	private SystemConstraintAlgorithmGroup category;
+	@Override public SystemConstraintAlgorithmGroup getCategory() {return category;}
+	@Override public void setCategory(SystemConstraintAlgorithmGroup category) {this.category = category;}
 	
 	private String code;
 	@Override public String getCode(){return code;}
