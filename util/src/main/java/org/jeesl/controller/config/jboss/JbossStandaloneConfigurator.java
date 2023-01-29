@@ -11,18 +11,18 @@ import org.jboss.dmr.ModelNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JbossConfigurator
+public class JbossStandaloneConfigurator
 {
-	final static Logger logger = LoggerFactory.getLogger(JbossConfigurator.class);
+	final static Logger logger = LoggerFactory.getLogger(JbossStandaloneConfigurator.class);
 	
 	private final ModelControllerClient client;
 	
-	public JbossConfigurator(InetAddress host, int port)
+	public JbossStandaloneConfigurator(InetAddress host, int port)
 	{
 		this(ModelControllerClient.Factory.create(host,9990));
 	}
 	
-	public JbossConfigurator(ModelControllerClient client)
+	public JbossStandaloneConfigurator(ModelControllerClient client)
 	{
 		this.client=client;
 	}

@@ -27,7 +27,7 @@ public class JbossModuleConfigurator
 	private String version;
 	private File jbossBaseDir;
 	
-	public JbossModuleConfigurator(Product product, String version,String jbossDir)
+	public JbossModuleConfigurator(Product product, String version, String jbossDir)
 	{
 		this.product=product;
 		this.version=version;

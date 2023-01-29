@@ -12,7 +12,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.jeesl.controller.config.jboss.JbossConfigurator;
+import org.jeesl.controller.config.jboss.JbossStandaloneConfigurator;
 import org.jeesl.controller.config.jboss.JbossModuleConfigurator;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
@@ -77,7 +77,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	return "";
     }
     
-    protected void dbDs(String[] keys, Configuration config, JbossConfigurator jbossConfig) throws IOException
+    protected void dbDs(String[] keys, Configuration config, JbossStandaloneConfigurator jbossConfig) throws IOException
     {
     	for(String key : keys)
     	{
@@ -94,7 +94,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	}
     }
     
-    protected void dbDrivers(String[] keys, Configuration config, JbossConfigurator jbossConfig) throws IOException
+    protected void dbDrivers(String[] keys, Configuration config, JbossStandaloneConfigurator jbossStandalone) throws IOException
     {
     	List<String> log = new ArrayList<String>();
     	for(String key : keys)
@@ -103,21 +103,22 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
         	DbType dbType = DbType.valueOf(type);
         	switch(dbType)
         	{
-        		case mariadb: if(!jbossConfig.driverExists("mariadb"))
+        		case mariadb: if(!jbossStandalone.driverExists("mariadb"))
 								{
-									jbossConfig.createMariadbDriver();
+									jbossStandalone.createMariadbDriver();
 									log.add("mariadb");
 								}
 								break;
-        		case mysql: if(!jbossConfig.driverExists("mysql"))
+        		case mysql: if(!jbossStandalone.driverExists("mysql"))
         					{
-        						jbossConfig.createMysqlDriver();
+        						jbossStandalone.createMysqlDriver();
         						log.add("mysql");
         					}
         					break;
-        		case postgres: if(!jbossConfig.driverExists("postgres"))
+        		case postgres:	getLog().info("DB Drivers: "+dbType+" exists:"+jbossStandalone.driverExists("postgres"));
+        						if(!jbossStandalone.driverExists("postgres"))
 							{
-								jbossConfig.createPostgresDriver();
+								jbossStandalone.createPostgresDriver();
 								log.add("postgres");
 							}
 							break;
@@ -126,7 +127,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	getLog().info("DB Drivers: "+StringUtils.join(log, ", "));
     }
     
-    protected void dbFiles(String[] keys, Configuration config, JbossModuleConfigurator jbossModule) throws IOException
+    protected void dbFiles(String[] keys, Configuration config, JbossModuleConfigurator jbConfigurator) throws IOException
     {
     	List<String> log = new ArrayList<String>();
     	for(String key : keys)
@@ -137,22 +138,22 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
         	{
 	        	case mariadb: if(!setFiles.contains(dbType))
 							{
-								jbossModule.mariaDB();
+								jbConfigurator.mariaDB();
 								log.add(dbType.toString());
 								setFiles.add(dbType);
 							}
 							break;
         		case mysql: if(!setFiles.contains(dbType))
         					{
-        						jbossModule.mysql();
+        						jbConfigurator.mysql();
         						log.add(dbType.toString());
         						setFiles.add(dbType);
         					}
         					break;
         		case postgres: if(!setFiles.contains(dbType))
 							{
-								jbossModule.postgres();
-								jbossModule.hibernate();
+								jbConfigurator.postgres();
+								jbConfigurator.hibernate();
 								log.add(dbType.toString());
 								setFiles.add(dbType);
 							}
