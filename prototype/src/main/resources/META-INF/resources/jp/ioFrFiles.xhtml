@@ -37,14 +37,9 @@
 	
 	<composite:implementation>
 		<h:form id="fFiles">
-			<p:dataTable id="dtJeeslFiles"
-						 var="meta"
-						 value="#{cc.attrs.handler.metas}"
-						 selection="#{cc.attrs.handler.meta}"
-						 rowKey="#{meta.id}"
-						 selectionMode="single"
-						 draggableRows="true"
-						 styleClass="jeesl-datatable">
+			<p:dataTable id="dtJeeslFiles" styleClass="jeesl-datatable"
+							var="meta" value="#{cc.attrs.handler.metas}" draggableRows="true"
+						 	selection="#{cc.attrs.handler.meta}" rowKey="#{meta.id}" selectionMode="single">
 				<f:facet name="header">
 					<j:dtHeader id="dthJeeslFiles" title="#{cc.attrs.labelTable}">
 						<j:svg type="jeeslAdd"
@@ -59,7 +54,7 @@
 						<j:downloadIcon type="jeeslZip" value="#{cc.attrs.handler.zipStream()}"/>
 					</j:dtHeader>
 				</f:facet>
-				<p:ajax event="rowSelect" listener="#{cc.attrs.handler.selectFile()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fDownload #{cc.attrs.componentPrefix}:#{cc.id}:fFiles" />
+				<p:ajax event="rowSelect" listener="#{cc.attrs.handler.selectFile()}" update="#{cc.attrs.componentPrefix}:#{cc.id}:fDownload #{cc.attrs.componentPrefix}:#{cc.id}:fFiles #{cc.attrs.update}" />
 				<p:ajax event="rowReorder" listener="#{cc.attrs.handler.reorderMetas()}" update="@form"/>
 				
 				<p:column rendered="#{cc.attrs.withPosition}">

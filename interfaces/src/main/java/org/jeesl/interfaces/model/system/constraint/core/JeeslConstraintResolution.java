@@ -8,7 +8,11 @@ import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslConstraintResolution<L extends JeeslLang, D extends JeeslDescription,
 									CONSTRAINT extends JeeslConstraint<L,D,?,?,CONSTRAINT,?,?,?>>
 			extends EjbWithId,

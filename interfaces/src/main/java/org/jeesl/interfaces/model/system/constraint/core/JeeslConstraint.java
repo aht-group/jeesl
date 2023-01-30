@@ -16,7 +16,11 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithLevel;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslConstraint<L extends JeeslLang, D extends JeeslDescription,
 									SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,

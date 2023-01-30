@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -302,6 +303,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		if(debugOnInfo) {logger.info("selectFile "+meta.toString());}
 		fileName = meta.getFileName();
 		meta = efDescription.persistMissingLangs(fFr,locales,meta);
+		if(Objects.nonNull(callback)) {callback.callbackFrMetaSelected();}
 	}
 	
 	@Override public void saveFile() throws JeeslConstraintViolationException, JeeslLockingException

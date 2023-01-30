@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -96,4 +97,13 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 
 	@Override public boolean equals(Object object){return (object instanceof IoFileMeta) ? id == ((IoFileMeta) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
+	
+	@Override public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("[").append(id).append("]");
+		sb.append(" type:");if(ObjectUtils.allNotNull(type,type.getCode())) {sb.append(type.getCode());} else {sb.append("--");}
+		sb.append(" code:").append(code);
+		return sb.toString();
+	}
 }
