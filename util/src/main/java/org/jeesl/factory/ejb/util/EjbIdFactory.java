@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -146,6 +147,12 @@ public class EjbIdFactory
 		if(ejb.getId()<0){ejb.setId(0);}
 	}
 	
+	public static <T extends EjbWithId> String toIdList(List<T> list)
+	{
+		List<Long> result = new ArrayList<>();
+		for(T l : list){result.add(l.getId());}
+		return StringUtils.join(result,",");
+	}
 	public static <T extends EjbWithId> List<EjbWithId> toEjbIdList(List<T> list)
 	{
 		List<EjbWithId> result = new ArrayList<EjbWithId>();
