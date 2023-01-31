@@ -54,20 +54,20 @@
 				</aht:slot>
 				<aht:slot id="sRole" width="6" renderChildren="#{not empty cc.attrs.bean.role}">
 					<h:form id="fRole">
-						<p:panel header="#{msg.jeeslSecurityRole}" styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.role}">
+						<p:panel header="#{msg.jeeslSecurityRole}" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.role}">
 							<f:facet name="actions">
 								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{msg.ttSave}"/>
 								<j:icon type="jeeslDelete" rendered="#{!cc.attrs.bean.denyRemove}" listener="#{cc.attrs.bean.rmRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{msg.ttDelete}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-								<p:outputLabel value="#{msg.jeeslSecurityCategory}"/>
+							<j:inputGrid>
+								<jtp:label entity="SecurityRole" code="category"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.role.category}" effect="fade" >
 									<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
 								</p:selectOneMenu>
 								
-								<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
-								<h:inputText rendered="#{cc.attrs.bean.uiAllowCode or (cc.attrs.bean.role.id eq 0)}" value="#{cc.attrs.bean.role.code}"/>
+								<jtp:label entity="SecurityRole" code="code"/>
+								<p:inputText rendered="#{cc.attrs.bean.uiAllowCode or (cc.attrs.bean.role.id eq 0)}" value="#{cc.attrs.bean.role.code}"/>
 								<h:outputText rendered="#{!(cc.attrs.bean.uiAllowCode or (cc.attrs.bean.role.id eq 0))}" value="#{cc.attrs.bean.role.code}"/>
 								
 								<p:outputLabel rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{msg.aupSecurityVisible}"/>
@@ -75,10 +75,9 @@
 								
 								<p:outputLabel rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{msg.aupSecurityIncludeInManual}"/>
 								<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{cc.attrs.bean.role.documentation}"/>
-							</p:panelGrid>
-							<aht:tabTranslationEditor value="#{cc.attrs.bean.role}" keys="#{appTranslationBean.langKeys}" withDescription="true"/>
+							</j:inputGrid>
+							<j:tabTranslationEditor value="#{cc.attrs.bean.role}" withDescription="true"/>
 						</p:panel>	
-						
 					</h:form>
 					<h:form id="fViews"><jpSec:addViews rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
 					<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
