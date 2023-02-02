@@ -86,10 +86,11 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler im
 		return this;
 	}
 	
-	protected void initListA(JeeslFacade fJeesl)
+	public void initListA(JeeslFacade facade)
 	{
-		if(fJeesl==null){listA.addAll(mapA.values());}
-		else{listA.addAll(fJeesl.find(cA,new ArrayList<Long>(mapA.keySet())));}
+		listA.clear();
+		if(facade==null){listA.addAll(mapA.values());}
+		else{listA.addAll(facade.find(cA,new ArrayList<Long>(mapA.keySet())));}
 		sizeA = listA.size();
 		if(jcpA!=null && jcpA.provides(cA)){Collections.sort(listA, jcpA.provide(cA));}
 	}

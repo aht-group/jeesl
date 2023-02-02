@@ -113,11 +113,11 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 		initListC(fJeesl);
 		tuples3.addAll(tuples.getTuples());
 	}
-	
-	public void initListC(JeeslFacade fJeesl)
+
+	public void initListC(JeeslFacade facade)
 	{
-		if(fJeesl==null){listC.addAll(mapC.values());}
-		else{listC.addAll(fJeesl.find(cC,new ArrayList<Long>(mapC.keySet())));}
+		if(facade==null){listC.addAll(mapC.values());}
+		else {listC.clear(); listC.addAll(facade.find(cC, new ArrayList<>(mapC.keySet())));}
 		
 		sizeC = listC.size();
 		if(jppC!=null && jppC.provides(cC)){Collections.sort(listC, jppC.provide(cC));}

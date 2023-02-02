@@ -31,7 +31,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
-import org.jeesl.model.json.db.tuple.JsonIdValue;
+import org.jeesl.model.json.db.tuple.JsonIdTuple;
 import org.jeesl.model.json.util.time.JsonYear;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.json.JsonYearComparator;
@@ -73,7 +73,7 @@ public class TsYearlyDataHandler <L extends JeeslLang, D extends JeeslDescriptio
 //	private JeeslComparatorProvider<T> jcpA; public void setComparatorProviderA(JeeslComparatorProvider<A> jcpA) {this.jcpA = jcpA;}
 	
 	private final Map<Integer,JsonYear> mapYears;
-	private final Nested2Map<EjbWithId,JsonYear,JsonIdValue> nestedMap; public Nested2Map<EjbWithId,JsonYear,JsonIdValue> getNestedMap() {return nestedMap;}
+	private final Nested2Map<EjbWithId,JsonYear,JsonIdTuple> nestedMap; public Nested2Map<EjbWithId,JsonYear,JsonIdTuple> getNestedMap() {return nestedMap;}
 	private final List<EjbWithId> domains; public List<EjbWithId> getDomains() {return domains;}
 	private final List<JsonYear> years; public List<JsonYear> getYears() {return years;}
 	
@@ -88,7 +88,7 @@ public class TsYearlyDataHandler <L extends JeeslLang, D extends JeeslDescriptio
 		this.fTs=fTs;
 		this.fbTs=fbTs;
 		
-		nestedMap = new Nested2Map<EjbWithId,JsonYear,JsonIdValue>();
+		nestedMap = new Nested2Map<EjbWithId,JsonYear,JsonIdTuple>();
 		mapYears = new HashMap<Integer,JsonYear>();
 		domains = new ArrayList<EjbWithId>();
 		years = new ArrayList<JsonYear>();
@@ -176,8 +176,9 @@ public class TsYearlyDataHandler <L extends JeeslLang, D extends JeeslDescriptio
 			
 			if(d.getValue()!=null)
 			{
-				JsonIdValue v = new JsonIdValue();
+				JsonIdTuple v = new JsonIdTuple();
 				v.setD1(d.getValue());
+				v.setSum1(d.getValue());
 				nestedMap.put(domain,year,v);
 			}
 		}

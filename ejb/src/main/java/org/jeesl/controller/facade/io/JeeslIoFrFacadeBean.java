@@ -137,14 +137,12 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		{
 			sourceRepo.delteFileFromRepository(meta);
 		}
-		
 		return container;
 	}
 
 	@Override public Json1Tuples<STORAGE> tpsIoFileByStorage()
 	{
-		Json1TuplesFactory<STORAGE> jtf = new Json1TuplesFactory<>(this,fbFile.getClassStorage());
-		jtf.setfUtils(this);
+
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<META> item = cQ.from(fbFile.getClassMeta());
@@ -157,13 +155,12 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		cQ.multiselect(pStorage.get("id"),eSum);
 
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		Json1TuplesFactory<STORAGE> jtf = Json1TuplesFactory.instance(fbFile.getClassStorage()).tupleLoad(this,true);
         return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
 	@Override public Json2Tuples<STORAGE,TYPE> tpcIoFileByStorageType()
 	{
-		Json2TuplesFactory<STORAGE,TYPE> jtf = new Json2TuplesFactory<>(this,fbFile.getClassStorage(),fbFile.getClassType());
-		jtf.setfUtils(this);
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<META> item = cQ.from(fbFile.getClassMeta());
@@ -177,6 +174,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		cQ.multiselect(pStorage.get("id"),pType.get("id"),eCount);
 
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		Json2TuplesFactory<STORAGE,TYPE> jtf = Json2TuplesFactory.instance(fbFile.getClassStorage(),fbFile.getClassType()).tupleLoad(this,true);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 

@@ -4,6 +4,7 @@ import javax.persistence.Tuple;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.db.tuple.AbstractJsonTuple;
+import org.jeesl.model.json.db.tuple.JsonIdTuple;
 import org.jeesl.model.json.db.tuple.JsonTuple;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
 import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
@@ -59,7 +60,13 @@ public class JsonTupleFactory
 	{
 		JsonTuple json = build();
 		json.setL1(tuple.getCount());
+		
 		json.setSum(tuple.getSum());
+		json.setSum1(tuple.getSum1());
+		json.setSum2(tuple.getSum2());
+		json.setSum3(tuple.getSum3());
+		json.setSum4(tuple.getSum4());
+		json.setSum5(tuple.getSum5());		
 		
 		json.setId1(tuple.getId1());
 		json.setId2(tuple.getId2());
@@ -144,5 +151,12 @@ public class JsonTupleFactory
 			logger.warn("Type "+o.getClass().getSimpleName()+" NYI "+o.toString());
 			return (Double)o;
 		}
+	}
+	
+	public static JsonIdTuple idSum1(Double value)
+	{
+		JsonIdTuple json = new JsonIdTuple();
+		json.setSum1(value);
+		return json;
 	}
 }

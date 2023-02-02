@@ -66,14 +66,25 @@ public class EjbCodeCache <T extends EjbWithCode>
 		}
 	}
 	
+	
 	public <E extends Enum<E>> boolean equals(T ejb, E code)
 	{
 		if(Objects.isNull(ejb) || Objects.isNull(code)) {return false;}
 		return ejb.equals(this.ejb(code));
 	}
-	
 	public <E extends Enum<E>> boolean equalsOr(T ejb, E a, E b)
 	{
 		return this.equals(ejb,a) || this.equals(ejb,b);
 	}
+	
+	public boolean equals(T ejb, String code)
+	{
+		if(Objects.isNull(ejb) || Objects.isNull(code)) {return false;}
+		return ejb.equals(this.ejb(code));
+	}
+	public boolean equalsOr(T ejb, String a, String b)
+	{
+		return this.equals(ejb,a) || this.equals(ejb,b);
+	}
+	
 }
