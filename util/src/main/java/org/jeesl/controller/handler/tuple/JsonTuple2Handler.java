@@ -109,7 +109,7 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		init(tuples);
 		
 	}
-	public void init(Json2Tuples<A,B> tuples) {init(null,tuples);}
+	public JsonTuple2Handler<A,B> init(Json2Tuples<A,B> tuples) {init(null,tuples); return this;}
 	public void init(JeeslFacade fJeesl, Json2Tuples<A,B> tuples)
 	{
 		clear();

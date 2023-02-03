@@ -1,6 +1,7 @@
 package org.jeesl.interfaces.util.query;
 
 import java.io.Serializable;
+import java.util.List;
 
 public interface JeeslQuery extends Serializable
 {
@@ -19,6 +20,8 @@ public interface JeeslQuery extends Serializable
 
 	Integer getMaxResults();
 	void setMaxResults(Integer maxResults);
+	
+	List<String> getRootFetches();
 	
 	String getSortBy();
 

@@ -33,7 +33,9 @@ public class TxtStatusFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang,
 	}
 	
 	public String labels (List<S> list){return labels(localeCode,list);}
-	public static <S extends JeeslStatus<L,?,S>,L extends JeeslLang> String labels(String localeCode, List<S> list)
+	
+	public static <L extends JeeslLang, S extends JeeslStatus<L,?,S>, E extends Enum<E>> String labels(E localeCode, List<S> list) {return TxtStatusFactory.labels(localeCode.toString(), list);}
+	public static <L extends JeeslLang, S extends JeeslStatus<L,?,S>> String labels(String localeCode, List<S> list)
 	{
 		if(list==null || list.isEmpty()){return null;}
 		List<String> result = new ArrayList<String>();

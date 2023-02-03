@@ -60,7 +60,7 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 		tuples3.clear();
 	}
 	
-	public void init(Json3Tuples<A,B,C> tuples) {init(null,tuples,false);}
+	public JsonTuple3Handler<A,B,C> init(Json3Tuples<A,B,C> tuples) {init(null,tuples,false); return this;}
 	public void init(JeeslFacade fJeesl, Json3Tuples<A,B,C> tuples, boolean load){init(fJeesl,tuples,true,true,true);}
 	public void init(JeeslFacade fJeesl, Json3Tuples<A,B,C> tuples, boolean loadA, boolean loadB, boolean loadC)
 	{
@@ -108,11 +108,15 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 			map3.get(t.getEjb1()).get(t.getEjb2()).put(t.getEjb3(), t);
 		}
 	
-		initListA(fJeesl);
-		initListB(fJeesl);
-		initListC(fJeesl);
+		super.initListA(fJeesl);
+		super.initListB(fJeesl);
+		this.initListC(fJeesl);
 		tuples3.addAll(tuples.getTuples());
 	}
+	
+	public void reloadABC(JeeslFacade facade) {super.initListA(facade); super.initListB(facade); this.initListC(facade);}
+	public void reloadBC(JeeslFacade facade) {super.initListB(facade); this.initListC(facade);}
+	public void reloadC(JeeslFacade facade) {this.initListC(facade);}
 
 	public void initListC(JeeslFacade facade)
 	{

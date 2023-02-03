@@ -105,7 +105,10 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 		try
 		{
 			Class<X> x = (Class<X>)Class.forName(code).asSubclass(JeeslStatus.class);
-			org.jeesl.model.xml.jeesl.Container xml = xfContainer.build(fGraphic.allOrderedPosition(x));
+			logger.info(x.getName());
+			logger.info("FG: "+(fGraphic!=null));
+			org.jeesl.model.xml.jeesl.Container xml = xfContainer.
+					build(fGraphic.allOrderedPosition(x));
 
 			if(EjbWithGraphic.class.isAssignableFrom(x))
 			{
@@ -185,17 +188,27 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 	
 	public static Class<?> classForInterface(String code, String... basePackage) throws UtilsConfigurationException
 	{
+		String fqcn = null;
 		try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(basePackage).scan())
 		{
 			ClassInfoList list = scanResult.getClassesImplementing(code);
 			if(list.getNames().isEmpty()) {throw new UtilsConfigurationException("No implementing class found for "+code+" using "+ClassGraph.class.getSimpleName());}
 			else
 			{
-				String fqcn = list.getNames().get(0);
+				if(list.getNames().size()>1)
+				{
+					logger.info("Multiple Results:");
+					for(String s : list.getNames())
+					{
+						logger.info("\t"+list.getNames().indexOf(s)+" "+s.toString());
+					}
+				}
+				
+				fqcn = list.getNames().get(0);
 				Class<?> c = Class.forName(fqcn);
 				return c;
 			}
 		}
-		catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Class found for "+code+" using "+ClassGraph.class.getSimpleName()+", but CNFE");}
+		catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Class found for interface "+code+" using "+ClassGraph.class.getSimpleName()+", but CNFE with "+fqcn);}
 	}
 }
