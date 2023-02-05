@@ -29,7 +29,7 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 
 	private final ThMultiFilterBean bean;
 
-	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear();this.list.addAll(list);}
+	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear(); this.list.addAll(list);}
 	private final List<T> selected; public List<T> getSelected() {return selected;}
 	private final List<T> memory;
 	private final Map<T,Boolean> map; public Map<T,Boolean> getMap() {return map;}

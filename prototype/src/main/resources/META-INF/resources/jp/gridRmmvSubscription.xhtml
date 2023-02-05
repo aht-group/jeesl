@@ -47,7 +47,9 @@
 					<h:outputText value="#{cc.attrs.controller.subscription.id}"/>
 					
 					<jtp:label entity="RmmvSubscription" code="code"/>
-					<h:outputText value="#{cc.attrs.controller.subscription.code}"/>
+					<h:outputLink value="#{cc.attrs.prefix}/#{cc.attrs.controller.subscription.code}">
+							<h:outputText value="#{cc.attrs.prefix}/#{cc.attrs.controller.subscription.code}" />
+						</h:outputLink>
 				
 					<jtp:label entity="RmmvSubscription" code="name"/>
 					<jtp:inputText value="#{cc.attrs.controller.subscription.name}"/>
