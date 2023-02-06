@@ -23,6 +23,7 @@
     <js:status code="jeeslCancel" symbol="ui/control/crud/cancel.svg"/>
     <js:status code="jeeslSave" symbol="ui/control/crud/save.svg"/>
     <js:status code="jeeslReset" symbol="ui/control/crud/reset.svg"/>
+    <js:status code="jeeslClean" symbol="ui/control/crud/clean.svg"/>
     <js:status code="jeeslClone" symbol="ui/control/crud/clone.svg"/>
     <js:status code="jeeslSearch" symbol="ui/control/crud/search.svg"/>
     <js:status code="jeeslReload" symbol="ui/control/crud/reload.svg"/>
@@ -39,7 +40,6 @@
     <js:status code="jeeslRevisionMod" symbol="ui/io/revision/envers/mod.svg"/>
     <js:status code="jeeslRevisionAdd" symbol="ui/io/revision/envers/add.svg"/>
     <js:status code="jeeslRevisionDel" symbol="ui/io/revision/envers/del.svg"/>
-    <js:status code="jeeslZip" symbol="ui/io/fr/zip.svg"/>
     <js:status code="jeeslPrint" symbol="ui/system/print.svg"/>
     <js:status code="jeeslWorkflow" symbol="ui/control/wizard/workflow.svg"/>
     <js:status code="jeeslSbLogging" symbol="ui/io/logging/sbLogging.svg"/>
