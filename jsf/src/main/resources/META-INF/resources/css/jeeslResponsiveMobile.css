@@ -681,6 +681,8 @@ html, body, .ui-widget {
     font-size: 1.4em;
     letter-spacing: -.5px;
     padding: 5px 10px; }
+.jeesl-galleria .ui-galleria-filmstrip-wrapper {
+  height: 84px !important; }
 .jeesl-galleria .ui-icon {
   height: 84px;
   width: 84px; }

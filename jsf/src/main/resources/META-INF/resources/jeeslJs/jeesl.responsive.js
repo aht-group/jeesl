@@ -106,6 +106,12 @@ function toggleDatatable(eventArgs) {
 	}
 }
 
+function initCollapsibleDatatable(parent) {
+	let datatable = !!parent ? $(parent).find('.jeesl-datatable-collapsible') : $('.jeesl-datatable-collapsible');
+	datatable.not('.jeesl-active').find('.ui-datatable-tablewrapper').height(0);
+	datatable.find('.ui-datatable-header').click(toggleDatatable);
+}
+
 $(function() {
 	menuHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
 	treeHeightStyle = $('<style>').prop('type', 'text/css').appendTo('head');
@@ -121,7 +127,5 @@ $(function() {
 	let overlay = $('.jeesl-header .jeesl-dropdown-list');
 	overlay.find('.jeesl-submenu-icon').click({ overlay: overlay }, toggleSubmenu);
 	
-	let datatable = $('.jeesl-datatable-collapsible')
-	datatable.not('.jeesl-active').find('.ui-datatable-tablewrapper').height(0);
-	datatable.find('.ui-datatable-header').click(toggleDatatable);
+	initCollapsibleDatatable();
 });

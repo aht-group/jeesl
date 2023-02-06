@@ -3921,20 +3921,14 @@ body, .ui-widget {
     .jeesl-galleria .ui-galleria-panel-wrapper .ui-galleria-panel {
       height: 100% !important;
       width: 100% !important; }
-      .jeesl-galleria .ui-galleria-panel-wrapper .ui-galleria-panel .jeesl-galleria-image-wrapper {
-        align-items: center;
-        display: flex;
-        height: 100%;
-        justify-content: center;
-        width: 100%; }
-        .jeesl-galleria .ui-galleria-panel-wrapper .ui-galleria-panel .jeesl-galleria-image-wrapper img {
-          max-height: 100%;
-          max-width: 100%; }
+      .jeesl-galleria .ui-galleria-panel-wrapper .ui-galleria-panel img {
+        max-height: 100%;
+        max-width: 100%; }
   .jeesl-galleria .ui-galleria-filmstrip-wrapper {
     background: linear-gradient(to bottom, #ededed, #c4c4c4);
     border-top: 1px solid #ababab;
     flex-grow: 1;
-    height: calc(40px + 10px) !important;
+    height: calc(40px + 10px);
     margin: 0;
     order: 3;
     padding: 5px 22px;
@@ -3944,6 +3938,16 @@ body, .ui-widget {
       height: calc(100% - 10px);
       left: 22px;
       top: 5px; }
+      .jeesl-galleria .ui-galleria-filmstrip-wrapper .ui-galleria-filmstrip .ui-galleria-frame {
+        aspect-ratio: 3/2;
+        height: 100% !important;
+        width: auto !important; }
+        .jeesl-galleria .ui-galleria-filmstrip-wrapper .ui-galleria-filmstrip .ui-galleria-frame .ui-galleria-frame-content {
+          height: 100% !important;
+          width: 100% !important; }
+          .jeesl-galleria .ui-galleria-filmstrip-wrapper .ui-galleria-filmstrip .ui-galleria-frame .ui-galleria-frame-content .ui-galleria-frame-image {
+            height: 100% !important;
+            width: 100% !important; }
   .jeesl-galleria .ui-icon {
     background: none;
     color: inherit;
