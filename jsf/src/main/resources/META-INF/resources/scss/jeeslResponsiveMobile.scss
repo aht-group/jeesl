@@ -1184,6 +1184,10 @@ html, body, .ui-widget {
 		}
 	}
 	
+	.ui-galleria-filmstrip-wrapper {
+		height: $element-height-mobile !important;
+	}
+	
 	.ui-icon {
 		height: $element-height-mobile;
 		width: $element-height-mobile;

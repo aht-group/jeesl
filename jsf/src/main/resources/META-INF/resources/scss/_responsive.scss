@@ -2888,18 +2888,18 @@ body, .ui-widget {
 			height: 100% !important;
 			width: 100% !important;
 			
-			.jeesl-galleria-image-wrapper {
-				align-items: center;
-				display: flex;
-				height: 100%;
-				justify-content: center;
-				width: 100%;
+//			.jeesl-galleria-image-wrapper {
+//				align-items: center;
+//				display: flex;
+//				height: 100%;
+//				justify-content: center;
+//				width: 100%;
 				
 				img {
 					max-height: 100%;
 					max-width: 100%;
 				}
-			}
+//			}
 		}
 	}
 	
@@ -2907,7 +2907,7 @@ body, .ui-widget {
 		background: $panel-header-gradient;
 		border-top: $border;
 		flex-grow: 1;
-		height: calc(40px + #{2 * $half-spacing}) !important;
+		height: calc(40px + #{2 * $half-spacing});
 		margin: 0;
 		order: 3;
 		padding: $half-spacing $element-height;
@@ -2918,6 +2918,22 @@ body, .ui-widget {
 			height: calc(100% - #{2 * $half-spacing});
 			left: $element-height;
 			top: $half-spacing;
+			
+			.ui-galleria-frame {
+				aspect-ratio: 3/2;
+				height: 100% !important;
+				width: auto !important;
+				
+				.ui-galleria-frame-content {
+					height: 100% !important;
+					width: 100% !important;
+					
+					.ui-galleria-frame-image {
+						height: 100% !important;
+						width: 100% !important;
+					}
+				}
+			}
 		}
 	}
 	
