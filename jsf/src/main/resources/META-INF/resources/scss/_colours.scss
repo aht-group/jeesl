@@ -5,6 +5,7 @@ $white-80: hsla(0,0%,100%,.8);
 $white-100: hsla(0,0%,100%,1);
 
 $black-40: hsla(0,0%,0%,.4);
+$black-80: hsla(0,0%,0%,.8);
 
 $bright-grey: hsl(0,0%,93%);
 $light-grey: hsl(0,0%,87%);
@@ -45,6 +46,8 @@ $highlight-shadow: 0 -1px inset $white-80;
 $text-shadow: 0 1px 0 $white-70;
 
 $highlight-colour: $bright-colour;
+
+$overlay-box-shadow: 0 5px 10px $black-80;
 
 @mixin setColours($brighter, $bright, $medium, $dark, $darker) {
 	$brighter-colour: $brighter;

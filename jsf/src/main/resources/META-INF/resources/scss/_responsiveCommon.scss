@@ -260,6 +260,7 @@ $border: $border-width solid $border-colour;
 	
 	.ui-button-text {
 		line-height: normal;
+		padding: $slim-spacing $regular-spacing;
 	}
 }
 

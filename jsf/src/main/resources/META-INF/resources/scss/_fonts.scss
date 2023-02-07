@@ -22,6 +22,8 @@ $table-th-font-weight: $font-weight-base;
 $link-decoration: none;
 $link-hover-decoration: underline;
 
+$icon-cancel: '\f05e';
+
 @mixin font-regular {
 	font-size: 1rem;
 	font-weight: normal;
