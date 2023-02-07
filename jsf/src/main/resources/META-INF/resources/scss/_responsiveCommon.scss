@@ -181,6 +181,7 @@ $border: $border-width solid $border-colour;
 	
 	@media (max-width: 768px) {
 		padding: 0 $regular-spacing;
+		width: auto;
 	}
 	
 	&:before {
