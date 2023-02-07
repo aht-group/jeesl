@@ -3186,13 +3186,14 @@ body, .ui-widget {
 		}
 	}
 		
-	tbody {
+	tbody, .ui-datatable-data {
 		background: $panel-background;
 		border: none;
 		
 		tr {
 			background: transparent;
 			border: none;
+			border-color: $soft-grey $light-grey;
 			
 			&:nth-child(2n) {
 				background: $white-50;
@@ -3204,7 +3205,7 @@ body, .ui-widget {
 		}
 		
 		td {
-			border-color: $soft-grey $light-grey;
+			border-color: inherit;
 			border-width: 0 0 $border-width $border-width;
 			padding: $half-spacing $regular-spacing;
 			
@@ -3232,10 +3233,12 @@ body, .ui-widget {
 		tr.ui-state-hover, .cell-select > label:not(.selected):hover {
 			background: $light-grey;
 			box-shadow: none;
+			border-color: $soft-grey $light-grey;
 		}
 		
 		tr.ui-state-highlight, .cell-select > label.selected {
 			background: $highlight-colour;
+			border-color: $dark-colour;
 			color: $white-100;
 			font-weight: 500;
 			text-shadow: none;

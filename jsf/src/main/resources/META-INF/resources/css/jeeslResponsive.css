@@ -338,7 +338,8 @@ template {
     vertical-align: middle; }
   @media (max-width: 768px) {
     .timeline-event-box.ui-state-default {
-      padding: 0 10px; } }
+      padding: 0 10px;
+      width: auto; } }
   .timeline-event-box.ui-state-default:before {
     background: #c4c4c4;
     content: '';
@@ -405,7 +406,8 @@ template {
     vertical-align: middle; }
   @media (max-width: 768px) {
     .ui-button.ui-state-default {
-      padding: 0 10px; } }
+      padding: 0 10px;
+      width: auto; } }
   .ui-button.ui-state-default:before {
     background: #c4c4c4;
     content: '';
@@ -450,7 +452,6 @@ template {
     font-size: inherit;
     font-weight: 700;
     height: auto;
-    left: 0;
     margin: 0;
     position: relative;
     text-indent: 0;
@@ -501,7 +502,8 @@ template {
     vertical-align: middle; }
   @media (max-width: 768px) {
     .ui-chkbox .ui-chkbox-box.ui-state-default {
-      padding: 0 10px; } }
+      padding: 0 10px;
+      width: auto; } }
   .ui-chkbox .ui-chkbox-box.ui-state-default:before {
     background: #c4c4c4;
     content: '';
@@ -552,7 +554,6 @@ template {
     font-size: inherit;
     font-weight: 700;
     height: auto;
-    left: 0;
     margin: 0;
     position: relative;
     text-indent: 0;
@@ -660,7 +661,8 @@ template {
       vertical-align: middle; }
     @media (max-width: 768px) {
       .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger {
-        padding: 0 10px; } }
+        padding: 0 10px;
+        width: auto; } }
     .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger:before {
       background: #c4c4c4;
       content: '';
@@ -717,7 +719,6 @@ template {
     font-size: inherit;
     font-weight: 700;
     height: auto;
-    left: 0;
     margin: 0;
     position: relative;
     text-indent: 0;
@@ -743,9 +744,18 @@ template {
     content: "\f00d"; }
 
 .ui-selectonemenu-panel {
-  opacity: 1; }
+  opacity: 1;
+  width: auto !important; }
   .ui-selectonemenu-panel.hide-disabled-items .ui-selectonemenu-item.ui-state-disabled {
     display: none; }
+  .ui-selectonemenu-panel .ui-selectonemenu-filter-container {
+    border-bottom: 1px solid #ababab; }
+    .ui-selectonemenu-panel .ui-selectonemenu-filter-container .ui-icon {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      pointer-events: none;
+      top: 0; }
   @media (max-width: 768px) {
     .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper {
       max-height: 400px !important; } }
@@ -866,7 +876,8 @@ template {
       vertical-align: middle; }
     @media (max-width: 768px) {
       .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger {
-        padding: 0 10px; } }
+        padding: 0 10px;
+        width: auto; } }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger:before {
       background: #c4c4c4;
       content: '';
@@ -923,7 +934,6 @@ template {
     font-size: inherit;
     font-weight: 700;
     height: auto;
-    left: 0;
     margin: 0;
     position: relative;
     text-indent: 0;
@@ -949,9 +959,18 @@ template {
     content: "\f00d"; }
 
 .ui-selectcheckboxmenu-panel {
-  opacity: 1; }
+  opacity: 1;
+  width: auto !important; }
   .ui-selectcheckboxmenu-panel.hide-disabled-items .ui-selectonemenu-item.ui-state-disabled {
     display: none; }
+  .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-filter-container {
+    border-bottom: 1px solid #ababab; }
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-filter-container .ui-icon {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      pointer-events: none;
+      top: 0; }
   @media (max-width: 768px) {
     .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper {
       max-height: 400px !important; } }
@@ -1048,7 +1067,8 @@ template {
       vertical-align: middle; }
     @media (max-width: 768px) {
       .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token {
-        padding: 0 10px; } }
+        padding: 0 10px;
+        width: auto; } }
     .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token:before {
       background: #c4c4c4;
       content: '';
@@ -1125,7 +1145,6 @@ template {
     font-size: inherit;
     font-weight: 700;
     height: auto;
-    left: 0;
     margin: 0;
     position: relative;
     text-indent: 0;
@@ -1180,7 +1199,6 @@ template {
       font-size: inherit;
       font-weight: 700;
       height: auto;
-      left: 0;
       margin: 0;
       position: relative;
       text-indent: 0;
@@ -1313,7 +1331,6 @@ template {
       font-size: inherit;
       font-weight: 700;
       height: auto;
-      left: 0;
       margin: 0;
       position: relative;
       text-indent: 0;
@@ -1528,7 +1545,8 @@ template {
       vertical-align: middle; }
     @media (max-width: 768px) {
       .ui-slider .ui-slider-handle.ui-state-default {
-        padding: 0 10px; } }
+        padding: 0 10px;
+        width: auto; } }
     .ui-slider .ui-slider-handle.ui-state-default:before {
       background: #c4c4c4;
       content: '';
@@ -1629,7 +1647,8 @@ template {
       vertical-align: middle; }
     @media (max-width: 768px) {
       .ui-chips-container .ui-chips-token {
-        padding: 0 10px; } }
+        padding: 0 10px;
+        width: auto; } }
     .ui-chips-container .ui-chips-token:before {
       background: #c4c4c4;
       content: '';
@@ -1684,7 +1703,6 @@ template {
       font-size: inherit;
       font-weight: 700;
       height: auto;
-      left: 0;
       margin: 0;
       position: relative;
       text-indent: 0;
@@ -1770,7 +1788,8 @@ template {
     vertical-align: middle; }
   @media (max-width: 768px) {
     .fc .fc-button {
-      padding: 0 10px; } }
+      padding: 0 10px;
+      width: auto; } }
   .fc .fc-button:before {
     background: #c4c4c4;
     content: '';
@@ -1876,6 +1895,30 @@ template {
 
 .jeesl-nowrap {
   white-space: nowrap; }
+
+.ui-icon {
+  background: none;
+  color: inherit;
+  display: inline-block;
+  font-family: "Font Awesome 5 Free";
+  font-size: inherit;
+  font-weight: 700;
+  height: auto;
+  margin: 0;
+  position: relative;
+  text-indent: 0;
+  text-rendering: auto;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+  top: 0;
+  width: auto;
+  -webkit-font-smoothing: antialiased; }
+  .ui-icon:before {
+    vertical-align: top; }
+    @media (max-width: 768px) {
+      .ui-icon:before {
+        font-size: 2em; } }
+  .ui-icon.ui-icon-search:before {
+    content: "\f002"; }
 
 /* Primefaces 12 fixes */
 body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
@@ -3965,7 +4008,6 @@ body, .ui-widget {
     font-size: inherit;
     font-weight: 700;
     height: auto;
-    left: 0;
     margin: 0;
     position: relative;
     text-indent: 0;
@@ -4543,7 +4585,8 @@ body, .ui-widget {
                       vertical-align: middle; }
                     @media (max-width: 768px) {
                       .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
-                        padding: 0 10px; } }
+                        padding: 0 10px;
+                        width: auto; } }
                     .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:before {
                       background: #c4c4c4;
                       content: '';
@@ -4601,7 +4644,6 @@ body, .ui-widget {
                       font-size: inherit;
                       font-weight: 700;
                       height: auto;
-                      left: 0;
                       margin: 0;
                       position: relative;
                       text-indent: 0;
@@ -4832,7 +4874,6 @@ body, .ui-widget {
       font-size: inherit;
       font-weight: 700;
       height: auto;
-      left: 0;
       margin: 0;
       position: relative;
       text-indent: 0;
@@ -5005,36 +5046,39 @@ body, .ui-widget {
       align-items: center;
       display: flex;
       height: 100%; }
-  .jeesl-datatable tbody {
+  .jeesl-datatable tbody, .jeesl-datatable .ui-datatable-data {
     background: #f0f0f0;
     border: none; }
-    .jeesl-datatable tbody tr {
+    .jeesl-datatable tbody tr, .jeesl-datatable .ui-datatable-data tr {
       background: transparent;
-      border: none; }
-      .jeesl-datatable tbody tr:nth-child(2n) {
+      border: none;
+      border-color: #c4c4c4 #dedede; }
+      .jeesl-datatable tbody tr:nth-child(2n), .jeesl-datatable .ui-datatable-data tr:nth-child(2n) {
         background: rgba(255, 255, 255, 0.5); }
-    .jeesl-datatable tbody tr, .jeesl-datatable tbody .cell-select > label {
+    .jeesl-datatable tbody tr, .jeesl-datatable tbody .cell-select > label, .jeesl-datatable .ui-datatable-data tr, .jeesl-datatable .ui-datatable-data .cell-select > label {
       transition: background .2s linear; }
-    .jeesl-datatable tbody td {
-      border-color: #c4c4c4 #dedede;
+    .jeesl-datatable tbody td, .jeesl-datatable .ui-datatable-data td {
+      border-color: inherit;
       border-width: 0 0 1px 1px;
       padding: 5px 10px; }
-      .jeesl-datatable tbody td.jeesl-column-min-width {
+      .jeesl-datatable tbody td.jeesl-column-min-width, .jeesl-datatable .ui-datatable-data td.jeesl-column-min-width {
         width: 0; }
-      .jeesl-datatable tbody td.cell-select {
+      .jeesl-datatable tbody td.cell-select, .jeesl-datatable .ui-datatable-data td.cell-select {
         padding: 0; }
-        .jeesl-datatable tbody td.cell-select label {
+        .jeesl-datatable tbody td.cell-select label, .jeesl-datatable .ui-datatable-data td.cell-select label {
           padding: 5px 10px; }
-      .jeesl-datatable tbody td .jeesl-icon {
+      .jeesl-datatable tbody td .jeesl-icon, .jeesl-datatable .ui-datatable-data td .jeesl-icon {
         height: 12px; }
         @media (max-width: 768px) {
-          .jeesl-datatable tbody td .jeesl-icon {
+          .jeesl-datatable tbody td .jeesl-icon, .jeesl-datatable .ui-datatable-data td .jeesl-icon {
             height: 32px; } }
-    .jeesl-datatable tbody tr.ui-state-hover, .jeesl-datatable tbody .cell-select > label:not(.selected):hover {
+    .jeesl-datatable tbody tr.ui-state-hover, .jeesl-datatable tbody .cell-select > label:not(.selected):hover, .jeesl-datatable .ui-datatable-data tr.ui-state-hover, .jeesl-datatable .ui-datatable-data .cell-select > label:not(.selected):hover {
       background: #dedede;
-      box-shadow: none; }
-    .jeesl-datatable tbody tr.ui-state-highlight, .jeesl-datatable tbody .cell-select > label.selected {
+      box-shadow: none;
+      border-color: #c4c4c4 #dedede; }
+    .jeesl-datatable tbody tr.ui-state-highlight, .jeesl-datatable tbody .cell-select > label.selected, .jeesl-datatable .ui-datatable-data tr.ui-state-highlight, .jeesl-datatable .ui-datatable-data .cell-select > label.selected {
       background: #008a4e;
+      border-color: #00663a;
       color: white;
       font-weight: 500;
       text-shadow: none; }
@@ -5083,7 +5127,6 @@ body, .ui-widget {
       font-size: inherit;
       font-weight: 700;
       height: auto;
-      left: 0;
       margin: 0;
       position: relative;
       text-indent: 0;
@@ -5860,7 +5903,8 @@ body, .ui-widget {
                           vertical-align: middle; }
                         @media (max-width: 768px) {
                           .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
-                            padding: 0 10px; } }
+                            padding: 0 10px;
+                            width: auto; } }
                         .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:before {
                           background: #c4c4c4;
                           content: '';
@@ -5918,7 +5962,6 @@ body, .ui-widget {
                           font-size: inherit;
                           font-weight: 700;
                           height: auto;
-                          left: 0;
                           margin: 0;
                           position: relative;
                           text-indent: 0;
