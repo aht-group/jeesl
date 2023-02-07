@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.jboss.resteasy.spi.HttpRequest;
 import org.jboss.resteasy.spi.UnauthorizedException;
-import org.jeesl.model.json.io.ssi.mobile.Login;
+import org.jeesl.model.json.io.ssi.mobile.JsonLogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ public class JeeslRestBasicAuthenticator
 	public static final String BASIC = "BASIC ";
 //	private boolean debugOnInfo = true;
 	
-	public static Login decodeResteasy(HttpRequest request) throws UnauthorizedException
+	public static JsonLogin decodeResteasy(HttpRequest request) throws UnauthorizedException
 	{
 		List<String> header = request.getHttpHeaders().getRequestHeader("Authorization");
     	if(header!=null && !header.isEmpty())
@@ -27,7 +27,7 @@ public class JeeslRestBasicAuthenticator
     	else{throw new UnauthorizedException("No Authorization Header available");}
 	}
 	
-	public static Login decode(String authorizationHeader)
+	public static JsonLogin decode(String authorizationHeader)
 	{
 		if(authorizationHeader.toUpperCase().startsWith("BASIC "))
 		{
@@ -43,7 +43,7 @@ public class JeeslRestBasicAuthenticator
         	else if(splitted.length>2) {throw new UnauthorizedException("The character ':' in username/password is not allowed in decoded authorisation token ("+token+"). https://www.ietf.org/rfc/rfc2617.txt");}
         	else
         	{
-        		Login login = new Login();
+        		JsonLogin login = new JsonLogin();
         		login.setUsername(splitted[0]);
         		login.setPassword(splitted[1]);
         		return login;
