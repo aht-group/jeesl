@@ -3,6 +3,8 @@ package org.jeesl.model.json.io.fr;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.jeesl.model.json.system.status.JsonType;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -30,6 +32,11 @@ public class JsonFrFile implements Serializable
 	private String category;
 	public String getCategory() {return category;}
 	public void setCategory(String category) {this.category = category;}
+	
+	@JsonProperty("type")
+	private JsonType type;
+	public JsonType getType() {return type;}
+	public void setType(JsonType type) {this.type = type;}
 
 	@JsonProperty("size")
 	private Long size;
