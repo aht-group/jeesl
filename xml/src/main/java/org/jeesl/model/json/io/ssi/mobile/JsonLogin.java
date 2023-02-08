@@ -31,4 +31,9 @@ public class JsonLogin implements Serializable
 	private String password;
 	public String getPassword() {return password;}
 	public void setPassword(String password) {this.password = password;}
+	
+	@JsonProperty("token")
+	private String token;
+	public String getToken() {return token;}
+	public void setToken(String token) {this.token = token;}
 }
