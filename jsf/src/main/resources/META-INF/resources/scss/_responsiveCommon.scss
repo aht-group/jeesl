@@ -181,6 +181,7 @@ $border: $border-width solid $border-colour;
 	
 	@media (max-width: 768px) {
 		padding: 0 $regular-spacing;
+		width: auto;
 	}
 	
 	&:before {
@@ -260,6 +261,7 @@ $border: $border-width solid $border-colour;
 	
 	.ui-button-text {
 		line-height: normal;
+		padding: $slim-spacing $regular-spacing;
 	}
 }
 
@@ -289,7 +291,7 @@ $border: $border-width solid $border-colour;
     font-size: inherit;
 	font-weight: 700;
 	height: auto;
-	left: 0;
+//	left: 0;
 	margin: 0;
 	position: relative;
     text-indent: 0;
@@ -449,10 +451,23 @@ $border: $border-width solid $border-colour;
 	
 	.#{$class}-panel {
 		opacity: 1;
+		width: auto !important;
 		
 		&.hide-disabled-items {
 			.ui-selectonemenu-item.ui-state-disabled {
 				display: none;
+			}
+		}
+		
+		.#{$class}-filter-container {
+			border-bottom: $border;
+			
+			.ui-icon {
+				align-items: center;
+				display: flex;
+				height: 100%;
+				pointer-events: none;
+				top: 0;
 			}
 		}
 		
@@ -1085,6 +1100,14 @@ $border: $border-width solid $border-colour;
 
 .jeesl-nowrap {
 	white-space: nowrap;
+}
+
+.ui-icon {
+	@include icon;
+	
+	&.ui-icon-search:before {
+		content: $icon-search;
+	}
 }
 
 /* Primefaces 12 fixes */

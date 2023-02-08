@@ -80,6 +80,7 @@ html, body, .ui-widget {
 	height: $element-height-mobile;
 	min-width: $min-button-width-mobile;
 	padding: 0 $regular-spacing;
+	width: auto;
 }
 
 @mixin inputfield {
