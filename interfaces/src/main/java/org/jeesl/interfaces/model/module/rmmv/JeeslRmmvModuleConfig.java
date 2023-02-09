@@ -22,4 +22,8 @@ public interface JeeslRmmvModuleConfig<TE extends JeeslRmmvElement<?,?,TE,?>,
 	
 	MOD getModule();
 	void setModule(MOD module);
+	
+	
+	String getColor();
+	void setColor(String color);
 }
