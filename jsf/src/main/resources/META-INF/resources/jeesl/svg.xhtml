@@ -7,7 +7,7 @@
 	<composite:interface componentType="org.jeesl.jsf.components.IconListener">
 		<composite:attribute name="listener" required="false" method-signature="java.lang.Void action(javax.faces.event.ActionEvent)"/>
 		<composite:attribute name="update"/>
-		<composite:attribute name="styleClass" required="false" default="pf-action-icon"/>
+		<composite:attribute name="styleClass" required="false" default=""/>
 		<composite:attribute name="disabled" required="false" default="false"/>
 		<composite:attribute name="oncomplete" required="false"/>
 		<composite:attribute name="onstart" required="false"/>
@@ -29,6 +29,8 @@
 	</composite:interface>
 
 	<composite:implementation>
+		<c:set var="styleClass" value="pf-action-icon #{cc.attrs.styleClass}" />
+	
 		<c:if test="#{cc.getValueExpression('listener') ne null}">
 		    <p:commandLink id="link" 
 						update="#{cc.attrs.update}"
@@ -36,7 +38,7 @@
 						process="#{cc.attrs.process}" 
 						onstart="#{cc.attrs.onstart}"
 						oncomplete="#{cc.attrs.oncomplete}"
-						styleClass="#{cc.attrs.styleClass}"
+						styleClass="#{styleClass}"
 						immediate="#{cc.attrs.immediate}"
 						rendered="#{(empty cc.attrs.ejb) or
 						(
@@ -60,7 +62,7 @@
 						process="#{cc.attrs.process}" 
 						onstart="#{cc.attrs.onstart}"
 						oncomplete="#{cc.attrs.oncomplete}"
-						styleClass="#{cc.attrs.styleClass}"
+						styleClass="#{styleClass}"
 						immediate="#{cc.attrs.immediate}"
 						rendered="#{(empty cc.attrs.ejb) or
 						(

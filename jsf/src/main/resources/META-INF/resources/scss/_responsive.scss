@@ -2103,12 +2103,31 @@ body, .ui-widget {
 					
 					> span {
 						display: inline-block;
-						padding: $half-spacing 0;
+						padding: 0;
 						
 						@media (max-width: 768px) {
 							align-items: center;
 							background: $light-grey;
 							display: flex;
+						}
+					}
+					
+					> .jeesl-input-container {
+						display: flex;
+						
+						.ui-inputtext, .ui-inputtextarea {
+							width: 85%;
+							
+							&:last-child {
+								width: 100%;
+							}
+						}
+						
+						.ui-commandlink {
+							height: auto;
+							margin-left: 6px;
+							padding: 0;
+							flex-grow: 1;
 						}
 					}
 					
@@ -2118,6 +2137,19 @@ body, .ui-widget {
 					
 					> .ui-selectonemenu, > .ui-selectcheckboxmenu, > .ui-selectmanybutton, > .ui-chips {
 						padding: 0;
+					}
+					
+					> .jeesl-datepicker {
+						display: flex;
+						
+						.ui-inputfield {
+							width: 85%;
+						}
+						
+						.ui-datepicker-trigger {
+							position: relative;
+							right: 0;
+						}
 					}
 					
 					> .jeesl-ck-editor {
@@ -3908,16 +3940,9 @@ body, .ui-widget {
 					
 					&.jeesl-input-grid-locale-icon {
 						min-height: $input-field-icon-height;
-						opacity: .5;
-						pointer-events: none;
-						position: absolute;
-						right: $slim-spacing;
-						top: 50%;
-						transform: translateY(-50%);
 						
 						@media (max-width: 768px) {
 							height: $input-field-icon-height-mobile;
-							top: calc(.5em + (100% - (2px + .5em)) / 2);
 							width: auto;
 						}
 					}

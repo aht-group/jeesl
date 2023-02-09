@@ -14,9 +14,9 @@
 	<c:set var="loc" value="#{not empty loc ? loc : localeCode}"/>
 	<c:set var="defaultValue" value="#{entity}:#{code}"/>
 	
-	<c:set var="icon" value="#{icon}"/>
+	<c:set var="handler" value="#{handler}"/>
 	
-	<h:panelGroup>
+	<h:panelGroup styleClass="jeesl-input-container">
 		<p:inputText rendered="#{rendered and (empty entity or empty code)}"
 					 rows="#{rows}"
 					 value="#{value}"
@@ -43,8 +43,9 @@
 										: (not empty appLabelBean.labels[entity][code][loc].lang ? appLabelBean.labels[entity][code][loc].lang : defaultValue)}"/>
 		</h:panelGroup>
 		
-		<jtp:symbolizer rendered="#{not empty icon}"
-						value="#{icon}"
-						styleClass="jeesl-input-grid-icon jeesl-input-grid-locale-icon"/>
+		<p:commandLink action="#{handler.selectNext}" update="#{update}" rendered="#{not empty handler}" styleClass="ui-button ui-state-default ui-corner-all">
+			<jtp:symbolizer value="#{handler.selection}"
+							styleClass="jeesl-input-grid-icon jeesl-input-grid-locale-icon"/>
+		</p:commandLink>
 	</h:panelGroup>
 </ui:composition>

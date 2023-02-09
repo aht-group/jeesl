@@ -69,7 +69,6 @@ html, body {
   .jeesl-panel .ui-inputfield, .jeesl-panel .ui-inputfield.ui-state-focus {
     box-shadow: none; }
   .jeesl-panel .ui-inputtextarea {
-    margin: 2.8px 0;
     vertical-align: middle; }
   .jeesl-panel .ui-panel-content {
     flex: 1;

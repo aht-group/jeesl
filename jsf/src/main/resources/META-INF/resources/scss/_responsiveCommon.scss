@@ -111,6 +111,8 @@ $border: $border-width solid $border-colour;
 				
 		&.ui-state-highlight {
 			background: $highlight-colour;
+			font-weight: 700;
+			text-shadow: none;
 			
 			&:after {
 				@media (max-width: 768px) {
@@ -318,7 +320,12 @@ $border: $border-width solid $border-colour;
 	@include button;
 	
 	.ui-icon {
-		@include icon;
+//		@include icon;
+
+		left: 0;
+		margin: 0;
+		position: relative;
+		top: 0;
 	}
 	
 	.ui-icon-circle-triangle-e:before {
@@ -459,15 +466,30 @@ $border: $border-width solid $border-colour;
 			}
 		}
 		
-		.#{$class}-filter-container {
-			border-bottom: $border;
+		.#{$class}-header .#{$class}-filter-container {
+			margin: 0 $half-spacing;
+			
+			.ui-inputfield {
+				font-size: 1rem;
+				line-height: normal;
+			}
 			
 			.ui-icon {
 				align-items: center;
 				display: flex;
 				height: 100%;
 				pointer-events: none;
+				opacity: .5;
+				position: absolute;
+				right: $half-spacing;
 				top: 0;
+				width: auto;
+				
+				&:before {
+					color: $body-foreground;
+					font-size: 1.2em;
+					text-shadow: none;
+				}
 			}
 		}
 		
@@ -486,51 +508,51 @@ $border: $border-width solid $border-colour;
 @include jeesl-select(ui-selectonemenu);
 @include jeesl-select(ui-selectcheckboxmenu);
 
-.ui-selectcheckboxmenu.ui-state-default {
-	.ui-selectcheckboxmenu-multiple-container {
-		height: auto;
-		min-height: $element-height;
-		padding: 0;
-		
-		.ui-selectcheckboxmenu-token {
-			@include button;
-			
-    		align-items: center;
-			display: flex;
-			height: $element-height - (2 * $slim-spacing);
-			padding: 0;
-			
-			.ui-selectcheckboxmenu-token-label {
-    			margin: 0 $half-spacing;
-				order: 1;
-				padding: 0;
-			}
-			
-			.ui-selectcheckboxmenu-token-icon {
-				@include vertical-center(after);
-				
-				height: 100%;
-				order: 2;
-				padding: 0 $half-spacing;
-				transition: background .2s linear;
-				
-				@media (max-width: 768px) {
-					margin-right: -$regular-spacing;
-					padding: 0 $regular-spacing;
-				}
-				
-				&:hover {
-					background: $bright-colour;
-				}
-				
-				&:before {
-					display: inline-block;
-					vertical-align: middle;
-				}
-			}
-		}
-	}
-}
+//.ui-selectcheckboxmenu.ui-state-default {
+//	.ui-selectcheckboxmenu-multiple-container {
+//		height: auto;
+//		min-height: $element-height;
+//		padding: 0;
+//		
+//		.ui-selectcheckboxmenu-token {
+//			@include button;
+//			
+//    		align-items: center;
+//			display: flex;
+//			height: $element-height - (2 * $slim-spacing);
+//			padding: 0;
+//			
+//			.ui-selectcheckboxmenu-token-label {
+//    			margin: 0 $half-spacing;
+//				order: 1;
+//				padding: 0;
+//			}
+//			
+//			.ui-selectcheckboxmenu-token-icon {
+//				@include vertical-center(after);
+//				
+//				height: 100%;
+//				order: 2;
+//				padding: 0 $half-spacing;
+//				transition: background .2s linear;
+//				
+//				@media (max-width: 768px) {
+//					margin-right: -$regular-spacing;
+//					padding: 0 $regular-spacing;
+//				}
+//				
+//				&:hover {
+//					background: $bright-colour;
+//				}
+//				
+//				&:before {
+//					display: inline-block;
+//					vertical-align: middle;
+//				}
+//			}
+//		}
+//	}
+//}
 
 .ui-autocomplete-panel {
 	opacity: 1;
@@ -639,6 +661,8 @@ $border: $border-width solid $border-colour;
 .ui-selectcheckboxmenu-panel {
 	@include headlined-overlay(ui-selectcheckboxmenu);
 	
+	background-size: auto;
+	
 	.ui-selectcheckboxmenu-header {
 		padding-left: $half-spacing;
 		
@@ -647,14 +671,6 @@ $border: $border-width solid $border-colour;
 		    display: flex;
 			flex: 1;
 		    height: 26px;
-
-			.ui-inputfield {
-				flex: .85;
-			}
-			
-			.ui-icon {
-				flex: .15;
-			}
 		}
 		
 		.ui-selectcheckboxmenu-close {
@@ -707,6 +723,19 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+.jeesl-datepicker {
+	display: flex;
+	
+	.ui-inputfield {
+		width: calc(100% + 6px);
+	}
+	
+	.ui-datepicker-trigger.ui-state-default {
+		position: relative;
+		right: 0;
+	}
+}
+
 .ui-datepicker {
 	@include headlined-overlay(ui-datepicker);
 	
@@ -717,6 +746,10 @@ $border: $border-width solid $border-colour;
 		
 		@media (max-width: 768px) {
 			margin: 0;
+		}
+		
+		.ui-icon {
+			left: 0;
 		}
 		
 		.ui-datepicker-prev {
@@ -958,27 +991,29 @@ $border: $border-width solid $border-colour;
 	}
 }
 
-.ui-chips-container {
+@mixin token-container($classname) {
 	align-items: flex-start;
 	display: flex;
 	flex-wrap: wrap;
+	gap: $slim-spacing;
 	padding: $slim-spacing $half-spacing;
 	
-	.ui-chips-token {
+	.#{$classname}-token {
 		@include button;
 		
 		align-items: center;
 		display: flex;
 		height: auto;
+		margin: 0;
 		min-height: $element-height;
-		padding-right: #{$element-height - 2 * $border-width};
+		padding: 0;
 		
 		@media (max-width: 768px) {
 			min-height: $element-height-mobile;
 			padding-right: #{$element-height-mobile - 2 * $border-width};
 		}
 		
-		.ui-chips-token-label {
+		.#{$classname}-token-label {
 			display: inline-block;
 			max-width: 100%;
 			padding: 0 $half-spacing;
@@ -986,14 +1021,16 @@ $border: $border-width solid $border-colour;
 			white-space: break-spaces;
 		}
 		
-		.ui-chips-token-icon {
+		.#{$classname}-token-icon {
 			@include icon;
 			
+			align-self: stretch;
 			color: $white-100 !important;
-			height: 100%;
+			flex-shrink: 0;
 			left: auto;
 			min-height: #{$element-height - 2 * $border-width};
-			position: absolute;
+			order: 2;
+			position: relative;
 			right: 0;
 			width: #{$element-height - 2 * $border-width};
 			
@@ -1033,8 +1070,8 @@ $border: $border-width solid $border-colour;
 			}
 		}
 	}
-
-	.ui-chips-input-token {
+	
+	.#{$classname}-input-token {
 		min-height: $element-height;
 		width: 100%;
 		
@@ -1046,6 +1083,14 @@ $border: $border-width solid $border-colour;
 			width: 100%;
 		}
 	}
+}
+
+.ui-chips-container {
+	@include token-container(ui-chips);
+}
+
+.ui-selectcheckboxmenu-multiple-container {
+	@include token-container(ui-selectcheckboxmenu);
 }
 
 .fc {
@@ -1113,4 +1158,9 @@ $border: $border-width solid $border-colour;
 /* Primefaces 12 fixes */
 body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
 	font-family: "Font Awesome 5 Free" !important;
+}
+
+/* Primefaces only sets dotted, which overrides both border width and color. It shouldn't, but it does.' */
+.fc-time-grid .fc-slats	.fc-minor td {
+	border: $border-width dotted $border-colour;
 }
