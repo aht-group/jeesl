@@ -1994,6 +1994,16 @@ template {
   .ui-icon.ui-icon-search:before {
     content: "\f002"; }
 
+.ui-colorpicker .ui-button .ui-button-text {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 0; }
+
 /* Primefaces 12 fixes */
 body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
   font-family: "Font Awesome 5 Free" !important; }
@@ -5130,6 +5140,17 @@ body, .ui-widget {
       border-top: 0; }
       .jeesl-datatable table thead th.jeesl-column-min-width {
         white-space: nowrap; }
+      .jeesl-datatable table thead th.jeesl-datatable-header-vertical {
+        text-align: center;
+        vertical-align: middle; }
+        .jeesl-datatable table thead th.jeesl-datatable-header-vertical .ui-column-title {
+          -ms-writing-mode: tb-rl;
+          -webkit-writing-mode: vertical-lr;
+          writing-mode: vertical-lr;
+          vertical-align: middle;
+          padding: 6px 0;
+          transform: rotate(180deg);
+          min-width: 12px; }
       .jeesl-datatable table thead th .ui-column-title .ui-widget {
         font-weight: 700; }
       .jeesl-datatable table thead th .ui-inputfield {

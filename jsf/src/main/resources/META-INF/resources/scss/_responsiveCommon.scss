@@ -1155,6 +1155,17 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+.ui-colorpicker .ui-button .ui-button-text {
+	align-items: center;
+	display: flex;
+	height: 100%;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	top: 0;
+}
+
 /* Primefaces 12 fixes */
 body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
 	font-family: "Font Awesome 5 Free" !important;

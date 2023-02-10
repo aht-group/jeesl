@@ -3195,6 +3195,19 @@ body, .ui-widget {
 				white-space: nowrap;
 			}
 			
+			&.jeesl-datatable-header-vertical {
+				text-align: center;
+				vertical-align: middle;
+				
+				.ui-column-title {
+					-ms-writing-mode: tb-rl;-webkit-writing-mode: vertical-lr;writing-mode: vertical-lr;
+					vertical-align: middle;
+					padding: 6px 0;
+					transform: rotate(180deg);
+					min-width: 12px;
+				}
+			}
+			
 			.ui-column-title .ui-widget {
 				font-weight: 700;
 			}
