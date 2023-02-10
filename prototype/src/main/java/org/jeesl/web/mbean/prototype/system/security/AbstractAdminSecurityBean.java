@@ -178,7 +178,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 			if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassCategory(),categories));}
 		}
 	}
-	
+
 	public void reorderCategories() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info("updateOrder "+categories.size());

@@ -81,13 +81,13 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	protected List<V> opViews; public List<V> getOpViews(){return opViews;}
 	protected List<A> opActions; public List<A> getOpActions(){return opActions;}
 	
-	protected List<C> categories; public List<C> getCategories() {return categories;}
+	private List<C> categories; public List<C> getCategories() {return categories;}
 	private List<U> usecases; public List<U> getUsecases() {return usecases;}
 	private List<R> roles; public List<R> getRoles(){return roles;}
 	private List<V> views; public List<V> getViews(){return views;}
 	private List<A> actions; public List<A> getActions(){return actions;}
 	
-	protected C category;public void setCategory(C category) {this.category = category;}public C getCategory() {return category;}
+	protected C category;public void setCategory(C category) {this.category = category;} public C getCategory() {return category;}
 	private U usecase; public U getUsecase(){return usecase;} public void setUsecase(U usecase){this.usecase = usecase;}
 	
 	protected V opView;public V getOpView(){return opView;}public void setOpView(V opView){this.opView = opView;}
@@ -122,7 +122,6 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		super.postConstructWebController(lp,bMessage);
 		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
-//		this.security=security;
 		
 		opViews = fSecurity.all(fbSecurity.getClassView());
 		Collections.sort(opViews,comparatorView);
@@ -170,6 +169,11 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		reloadUsecases();
 	}
 	
+	private void reloadUsecases() throws JeeslNotFoundException
+	{
+		usecases = fSecurity.allForCategory(fbSecurity.getClassUsecase(),fbSecurity.getClassCategory(),category.getCode());
+		logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassUsecase(), usecases));
+	}
 	
 	public void selectUsecase()
 	{
@@ -189,7 +193,6 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		usecase.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
-	//Reload
 	private void reloadUsecase()
 	{
 		usecase = fSecurity.load(fbSecurity.getClassUsecase(),usecase);
@@ -202,11 +205,6 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		Collections.sort(roles,comparatorRole);
 	}
 	
-	private void reloadUsecases() throws JeeslNotFoundException
-	{
-		logger.info("reloadUsecases");
-		usecases = fSecurity.allForCategory(fbSecurity.getClassUsecase(),fbSecurity.getClassCategory(),category.getCode());
-	}
 	private void reloadActions()
 	{
 		opActions.clear();

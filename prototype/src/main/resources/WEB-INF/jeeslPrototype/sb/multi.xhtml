@@ -53,7 +53,7 @@
 			<span class="jeesl-dropdown-item-label-text"><ui:insert /></span>
 			<jtp:symbolizer value="#{var}" height="12" rendered="#{listIcons}" styleClass="jeesl-dropdown-item-label-icon"/>
 			<aup:sbCheckmark value="#{handler.map[var]}"/>
-			<p:ajax event="click" listener="#{handler.toggle(var)}" update="#{update} @(.jeesl-menu-bar-button-summary, .jeesl-menu-bar-button-selected-items, .jeesl-dropdown-multi-summary, .jeesl-dropdown-item-label)" oncomplete="try{updateSb()}catch{}"/>
+			<p:ajax event="click" listener="#{handler.toggle(var)}" update="#{update} @(.jeesl-menu-bar-button-summary, .jeesl-menu-bar-button-selected-items, .jeesl-dropdown-multi-summary, .jeesl-dropdown-item-label)" oncomplete="try{updateSb()}catch{}; #{oncomplete}"/>
 		</h:commandLink>
 	</jp:sbItem>
 </ui:composition>
