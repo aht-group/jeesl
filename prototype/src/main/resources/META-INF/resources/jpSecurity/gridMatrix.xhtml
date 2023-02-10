@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:jpSec="http://jsf.jeesl.org/prototype/security"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sMatrix" width="12">
+			<h:form id="fRoles">
+				<p:dataTable var="r" value="#{cc.attrs.ctrl.roles}" draggableRows="false">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslSecurityRoles}">
+							
+						</j:dtHeader>
+					</f:facet>
+					<p:column>
+						<h:outputText value="#{r.category.name[localeCode].lang}"/>
+					</p:column>
+					<p:column >
+						<h:outputText value="#{r.name[localeCode].lang}"/>
+					</p:column>
+					<p:columns var="u" value="#{cc.attrs.ctrl.usecases}" styleClass="jeeslDtThVertical">
+						<f:facet name="header">
+							<h:outputText value="#{u.name[localeCode].lang}" />
+						</f:facet>
+						<j:duoCheckmark value="#{cc.attrs.ctrl.map[r][u]}" showFalse="false"/>
+					</p:columns>
+		       	</p:dataTable>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>

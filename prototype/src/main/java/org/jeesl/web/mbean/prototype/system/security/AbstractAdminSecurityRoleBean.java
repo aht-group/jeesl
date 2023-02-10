@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 import net.sf.exlp.util.io.StringUtil;
 
+@Deprecated //Use JeeslSecurityRoleController
 public class AbstractAdminSecurityRoleBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
 											R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,

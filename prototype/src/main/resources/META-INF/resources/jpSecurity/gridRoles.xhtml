@@ -1,89 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:jpSec="http://jsf.jeesl.org/prototype/security"
-	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
-	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
-	xmlns:aupSec="http://ahtutils.sourceforge.net/prototype/security"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
-		<composite:attribute name="bean" required="false" default="#{adminSecurityRolesBean}"/>
+		<composite:attribute name="bean" required="true"/>
 	</composite:interface>
 	
 	<composite:implementation>
-		<aup:grid id="grid">
-			<aht:row>
-				<aht:slot id="sCategories" width="3">
-					<h:form id="fCategories"><jpSec:tableCategories bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategory :#{cc.id}:fRoles :#{cc.id}:sRole" withAdd="true"/></h:form>
-					<h:form id="fCategory"><jpSec:panelCategory bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategories :#{cc.id}:fCategory" withAdd="true"/></h:form>
-				</aht:slot>
-				<aht:slot id="sViews" width="3">
-					<h:form id="fRoles">
-						<p:dataTable var="r" value="#{cc.attrs.bean.roles}" draggableRows="true"
-								selection="#{cc.attrs.bean.role}" selectionMode="single" rowKey="#{r.id}"
-								rendered="#{not empty cc.attrs.bean.category}">
-							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslSecurityRoles}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{cc.attrs.tooltip}"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole"/>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderRoles()}" update="@form"/>
-							<p:column rendered="true">
-								<h:graphicImage rendered="#{not r.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
-								<h:outputText rendered="#{r.visible}" value="#{r.position}"/>
-							</p:column>
-							<p:column rendered="false">  
-								<h:outputText value="#{r.position}" />  
-				            </p:column>
-				            <p:column headerText="#{msg.jeeslSecurityRole}">  
-								<h:outputText value="#{r.name[userBean.localeCode].lang}" />  
-				            </p:column>
-				            <p:column rendered="#{false and cc.attrs.bean.uiShowInvisible}">  
-								<h:graphicImage rendered="#{r.visible}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
-				                <h:graphicImage rendered="#{not r.visible}" name="#{appIconBean.icon12['jeeslSecurityInvisible']}" library="gfx"/>
-				            </p:column>
-				            <p:column rendered="#{cc.attrs.bean.uiShowDocumentation}">  
-								<h:graphicImage rendered="#{r.documentation}" name="#{appIconBean.icon12['jeeslSecurityDocumentation']}" library="gfx"/>
-				            </p:column>
-				       	</p:dataTable>
-					</h:form>
-				</aht:slot>
-				<aht:slot id="sRole" width="6" renderChildren="#{not empty cc.attrs.bean.role}">
-					<h:form id="fRole">
-						<p:panel header="#{msg.jeeslSecurityRole}" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.role}">
-							<f:facet name="actions">
-								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{msg.ttSave}"/>
-								<j:icon type="jeeslDelete" rendered="#{!cc.attrs.bean.denyRemove}" listener="#{cc.attrs.bean.rmRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{msg.ttDelete}"/>
-							</f:facet>
-							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-							<j:inputGrid>
-								<jtp:label entity="SecurityRole" code="category"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.role.category}" effect="fade" >
-									<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
-								</p:selectOneMenu>
-								
-								<jtp:label entity="SecurityRole" code="code"/>
-								<p:inputText rendered="#{cc.attrs.bean.uiAllowCode or (cc.attrs.bean.role.id eq 0)}" value="#{cc.attrs.bean.role.code}"/>
-								<h:outputText rendered="#{!(cc.attrs.bean.uiAllowCode or (cc.attrs.bean.role.id eq 0))}" value="#{cc.attrs.bean.role.code}"/>
-								
-								<p:outputLabel rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{msg.aupSecurityVisible}"/>
-								<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{cc.attrs.bean.role.visible}"/>
-								
-								<p:outputLabel rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{msg.aupSecurityIncludeInManual}"/>
-								<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{cc.attrs.bean.role.documentation}"/>
-							</j:inputGrid>
-							<j:tabTranslationEditor value="#{cc.attrs.bean.role}" withDescription="true"/>
-						</p:panel>	
-					</h:form>
-					<h:form id="fViews"><jpSec:addViews rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
-					<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
-					<h:form id="fUsecase"><jpSec:addUsecases rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fUsecase" usecases="#{cc.attrs.bean.usecases}"/></h:form>
-				</aht:slot>
-			</aht:row>
-		</aup:grid>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sCategories" width="3">
+			<h:form id="fCategories"><jpSec:tableCategories bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategory :#{cc.id}:fRoles :#{cc.id}:sRole" withAdd="true"/></h:form>
+			<h:form id="fCategory"><jpSec:panelCategory bean="#{cc.attrs.bean}" update=":#{cc.id}:fCategories :#{cc.id}:fCategory" withAdd="true"/></h:form>
+		</j:slot>
+		<j:slot id="sViews" width="3">
+			<h:form id="fRoles">
+				<p:dataTable var="r" value="#{cc.attrs.bean.roles}" draggableRows="true"
+						selection="#{cc.attrs.bean.role}" selectionMode="single" rowKey="#{r.id}"
+						rendered="#{not empty cc.attrs.bean.category}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslSecurityRoles}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{cc.attrs.tooltip}"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderRoles()}" update="@form"/>
+					<p:column rendered="true">
+						<h:graphicImage rendered="#{not r.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
+						<h:outputText rendered="#{r.visible}" value="#{r.position}"/>
+					</p:column>
+					<p:column rendered="false">  
+						<h:outputText value="#{r.position}" />  
+		            </p:column>
+		            <p:column headerText="#{msg.jeeslSecurityRole}">  
+						<h:outputText value="#{r.name[userBean.localeCode].lang}" />  
+		            </p:column>
+		            <p:column rendered="#{false and cc.attrs.bean.uiShowInvisible}">  
+						<h:graphicImage rendered="#{r.visible}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
+		                <h:graphicImage rendered="#{not r.visible}" name="#{appIconBean.icon12['jeeslSecurityInvisible']}" library="gfx"/>
+		            </p:column>
+		            <p:column rendered="#{cc.attrs.bean.uiShowDocumentation}">  
+						<h:graphicImage rendered="#{r.documentation}" name="#{appIconBean.icon12['jeeslSecurityDocumentation']}" library="gfx"/>
+		            </p:column>
+		       	</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sRole" width="6">
+			<h:form id="fRole" rendered="#{not empty cc.attrs.bean.role}">
+				<p:panel styleClass="jeesl-panel" >
+					<f:facet name="header"><j:pHeader entity="SecurityRole"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{msg.ttSave}"/>
+						<j:svg type="jeeslDelete" rendered="#{not cc.attrs.bean.denyRemove}" listener="#{cc.attrs.bean.rmRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{msg.ttDelete}"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="SecurityRole" code="category"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.role.category}" effect="fade" >
+							<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="SecurityRole" code="code"/>
+						<p:inputText rendered="#{cc.attrs.bean.uiAllowCode or (cc.attrs.bean.role.id eq 0)}" value="#{cc.attrs.bean.role.code}"/>
+						<h:outputText rendered="#{!(cc.attrs.bean.uiAllowCode or (cc.attrs.bean.role.id eq 0))}" value="#{cc.attrs.bean.role.code}"/>
+						
+						<p:outputLabel rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{msg.aupSecurityVisible}"/>
+						<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{cc.attrs.bean.role.visible}"/>
+						
+						<p:outputLabel rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{msg.aupSecurityIncludeInManual}"/>
+						<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{cc.attrs.bean.role.documentation}"/>
+					</j:inputGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.role}" withDescription="true"/>
+				</p:panel>	
+			</h:form>
+			<h:form id="fViews"><jpSec:addViews rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
+			<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
+			<h:form id="fUsecase"><jpSec:addUsecases rendered="#{cc.attrs.bean.role.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fUsecase" usecases="#{cc.attrs.bean.usecases}"/></h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
 	</composite:implementation>
 </html>
