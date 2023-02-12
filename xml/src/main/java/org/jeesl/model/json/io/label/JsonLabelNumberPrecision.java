@@ -23,6 +23,8 @@ public class JsonLabelNumberPrecision implements Serializable
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
+		sb.append("minFractionDigits: ").append(minFractionDigits);
+		sb.append(" maxFractionDigits: ").append(maxFractionDigits);
 		return sb.toString();
 	}
 }

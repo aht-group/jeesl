@@ -52,6 +52,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	protected final EjbIoSsiDataFactory<MAPPING,DATA,LINK> efData;
 	
 	protected final EjbCodeCache<LINK> cacheLink; public EjbCodeCache<LINK> getCacheLink() {return cacheLink;}
+	protected final EjbCodeCache<JOB> cacheJob; public EjbCodeCache<LINK> getCacheJob() {return cacheLink;}
 		
 	protected MAPPING mapping; @Override public MAPPING getMapping() {return mapping;}
 	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
@@ -67,6 +68,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		
 		jec = BucketSizeCounter.instance();
 		cacheLink = new EjbCodeCache<>(fbSsi.getClassLink(),fSsi);
+		cacheJob = new EjbCodeCache<>(fbSsi.getClassJob(),fSsi);
 		
 		efData = fbSsi.ejbData();
 	}

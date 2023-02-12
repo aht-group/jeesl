@@ -81,7 +81,7 @@
 		</j:slot>
 	</j:row>
 	<j:row id="rowDetail">
-		<j:slot id="sMapping" width="5">
+		<j:slot id="sMapping" width="8">
 			<h:form id="fMapping" rendered="#{not empty cc.attrs.ctrl.mapping}">
 				<p:panel id="pView" styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoSsiMapping"/></f:facet>
@@ -149,6 +149,42 @@
 						
 						<jtp:label entity="IoSsiMapping" code="classA"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.classA}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
+							<f:selectItem itemLabel="--"/>
+							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
+							<p:column>
+								<h:outputText value="#{var.category.position}.#{var.position}" />
+							</p:column>
+							<p:column headerText="#{msg.aupCategory}">
+								<h:outputText value="#{var.category.name[localeCode].lang}" />
+							</p:column>
+							<p:column headerText="#{msg.jeeslRevisionDiagramShort}">
+								<h:outputText value="#{var.diagram.name[localeCode].lang}" />
+							</p:column>
+							<p:column headerText="#{msg.jeeslRevisionEntity}">
+								<h:outputText value="#{var.name[localeCode].lang}" />
+							</p:column>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoSsiMapping" code="classB"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.classB}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
+							<f:selectItem itemLabel="--"/>
+							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
+							<p:column>
+								<h:outputText value="#{var.category.position}.#{var.position}" />
+							</p:column>
+							<p:column headerText="#{msg.aupCategory}">
+								<h:outputText value="#{var.category.name[localeCode].lang}" />
+							</p:column>
+							<p:column headerText="#{msg.jeeslRevisionDiagramShort}">
+								<h:outputText value="#{var.diagram.name[localeCode].lang}" />
+							</p:column>
+							<p:column headerText="#{msg.jeeslRevisionEntity}">
+								<h:outputText value="#{var.name[localeCode].lang}" />
+							</p:column>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoSsiMapping" code="classC"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.classC}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
 							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
 							<p:column>

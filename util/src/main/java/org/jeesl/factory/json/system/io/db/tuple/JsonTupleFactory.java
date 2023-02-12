@@ -9,6 +9,7 @@ import org.jeesl.model.json.db.tuple.JsonTuple;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
 import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
 import org.jeesl.model.json.db.tuple.two.Json2Tuple;
+import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -158,5 +159,11 @@ public class JsonTupleFactory
 		JsonIdTuple json = new JsonIdTuple();
 		json.setSum1(value);
 		return json;
+	}
+	
+	public static <A extends EjbWithId, B extends EjbWithId> Double toSum1(Nested2Map<A,B,JsonIdTuple> n2m, A a, B b)
+	{
+		if(n2m.containsKey(a,b)) {return n2m.get(a,b).getSum1();}
+		else {return null;}
 	}
 }

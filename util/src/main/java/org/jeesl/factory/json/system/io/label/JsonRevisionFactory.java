@@ -1,4 +1,4 @@
-package org.jeesl.factory.json.system.revision;
+package org.jeesl.factory.json.system.io.label;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

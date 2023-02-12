@@ -179,8 +179,25 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	public boolean getHasNone(){return list.isEmpty();}
 	public boolean getHasSome(){return !list.isEmpty();}
 	public boolean getHasMore(){return list.size()>1;}
-	public boolean isSelected(){return selection!=null;}
+	
 	public boolean getTwiceSelected() {return previous.equals(selection);}
+	
+	public boolean isSelected(){return selection!=null;}
+	public <E extends Enum<E>> boolean isSelected(E code)
+	{
+		if(!isSelected()) {return false;}
+		if(c.isAssignableFrom(EjbWithCode.class))
+		{
+			EjbWithCode w = (EjbWithCode)selection;
+			return w.getCode().equals(code.toString());
+		}
+		else
+		{
+			logger.error("The class "+c.getSimpleName()+" does not implement "+EjbWithCode.class.getSimpleName());
+			return false;
+		}
+		
+	}
 
 	public void setDefault()
 	{

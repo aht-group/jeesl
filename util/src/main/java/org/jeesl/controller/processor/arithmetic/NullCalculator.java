@@ -53,6 +53,18 @@ public class NullCalculator
 			return result.doubleValue();
 		}
 	}
+	public static Double subtract(Double a, Double b, Double c)
+	{
+		if(a==null && b==null) {return null;}
+		else
+		{
+			BigDecimal result = new BigDecimal(0);
+			if(a!=null) {result = result.add(new BigDecimal(a));}
+			if(b!=null) {result = result.subtract(new BigDecimal(b));}
+			if(c!=null) {result = result.subtract(new BigDecimal(c));}
+			return result.doubleValue();
+		}
+	}
 	
 	
 	public static Double multiply(Double a, Integer b)
