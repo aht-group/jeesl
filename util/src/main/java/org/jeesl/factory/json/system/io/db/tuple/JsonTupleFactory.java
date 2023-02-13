@@ -8,6 +8,7 @@ import org.jeesl.model.json.db.tuple.JsonIdTuple;
 import org.jeesl.model.json.db.tuple.JsonTuple;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
 import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
+import org.jeesl.model.json.db.tuple.t4.Json4Tuple;
 import org.jeesl.model.json.db.tuple.two.Json2Tuple;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
@@ -109,9 +110,18 @@ public class JsonTupleFactory
 		json.setId1((Long)tuple.get(0));
 		json.setId2((Long)tuple.get(1));
 		json.setId3((Long)tuple.get(2));
-
 		JsonTupleFactory.build(tuple,2,json,types);
-		
+    	return json;
+	}
+	
+	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId, D extends EjbWithId> Json4Tuple<A,B,C,D> build4(Tuple tuple, JsonTupleFactory.Type...types)
+	{
+		Json4Tuple<A,B,C,D> json = new Json4Tuple<A,B,C,D>();
+		json.setId1((Long)tuple.get(0));
+		json.setId2((Long)tuple.get(1));
+		json.setId3((Long)tuple.get(2));
+		json.setId4((Long)tuple.get(3));
+		JsonTupleFactory.build(tuple,3,json,types);
     	return json;
 	}
 	

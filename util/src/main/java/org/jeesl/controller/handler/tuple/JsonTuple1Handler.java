@@ -1,6 +1,5 @@
 package org.jeesl.controller.handler.tuple;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,7 +18,7 @@ import org.jeesl.util.comparator.json.Tuple1Comparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler implements Serializable
+public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 {
 	private static final long serialVersionUID = 1L;
 

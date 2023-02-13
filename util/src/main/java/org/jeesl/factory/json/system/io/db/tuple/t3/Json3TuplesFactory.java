@@ -57,6 +57,12 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		jtf = new Json3TupleFactory<A,B,C>();
 	}
 	
+	public Json3TuplesFactory<A,B,C> tupleLoad(JeeslFacade facade, boolean load)
+	{
+		if(load) {this.fUtils=facade;}
+		return this;
+	}
+	
 	protected void clear()
 	{
 		setA.clear();
@@ -66,6 +72,14 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		mapA.clear();
 		mapB.clear();
 		mapC.clear();
+	}
+	
+	public Json3Tuples<A,B,C> build(List<Tuple> tuples, JsonTupleFactory.Type...types)
+	{
+		Json3Tuples<A,B,C> json = new Json3Tuples<>();
+		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build3(t,types));}
+		ejb3Load(json);
+		return json;
 	}
 	
 	private void ejb3Load(Json3Tuples<A,B,C> json)
@@ -106,14 +120,6 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 			}
 		}
 		this.tuples=json;
-	}
-	
-	public Json3Tuples<A,B,C> build(List<Tuple> tuples, JsonTupleFactory.Type...types)
-	{
-		Json3Tuples<A,B,C> json = new Json3Tuples<>();
-		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build3(t,types));}
-		ejb3Load(json);
-		return json;
 	}
 	
 	public Json3Tuples<A,B,C> build3Sum(List<Tuple> tuples)
