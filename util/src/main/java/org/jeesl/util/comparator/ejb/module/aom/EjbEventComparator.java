@@ -1,4 +1,4 @@
-package org.jeesl.util.comparator.ejb.module.asset;
+package org.jeesl.util.comparator.ejb.module.aom;
 
 import java.util.Comparator;
 
