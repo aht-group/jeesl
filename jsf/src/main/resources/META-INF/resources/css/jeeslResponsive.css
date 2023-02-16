@@ -274,19 +274,19 @@ template {
 .jeesl-greyscale {
   filter: grayscale(1); }
 
-.ui-corner-all, .timeline-event-box.ui-state-default.ui-corner-all:before, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before, .ui-chips-container .ui-chips-token.ui-corner-all:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-all:before, .fc .fc-button.ui-corner-all:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-all:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-all:before {
+.ui-corner-all, .timeline-event-box.ui-state-default.ui-corner-all:before, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before, .ui-chips-container .ui-chips-token.ui-corner-all:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-all:before, .fc .fc-button.ui-corner-all:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-all:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-all:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-all:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-all:before {
   border-radius: 3px; }
 
-.ui-corner-top, .timeline-event-box.ui-state-default.ui-corner-top:before, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before, .ui-chips-container .ui-chips-token.ui-corner-top:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-top:before, .fc .fc-button.ui-corner-top:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-top:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-top:before {
+.ui-corner-top, .timeline-event-box.ui-state-default.ui-corner-top:before, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before, .ui-chips-container .ui-chips-token.ui-corner-top:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-top:before, .fc .fc-button.ui-corner-top:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-top:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-top:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-top:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-top:before {
   border-radius: 3px 3px 0 0; }
 
-.ui-corner-bottom, .timeline-event-box.ui-state-default.ui-corner-bottom:before, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before, .ui-chips-container .ui-chips-token.ui-corner-bottom:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-bottom:before, .fc .fc-button.ui-corner-bottom:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-bottom:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-bottom:before {
+.ui-corner-bottom, .timeline-event-box.ui-state-default.ui-corner-bottom:before, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before, .ui-chips-container .ui-chips-token.ui-corner-bottom:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-bottom:before, .fc .fc-button.ui-corner-bottom:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-bottom:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-bottom:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-bottom:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-bottom:before {
   border-radius: 0 0 3px 3px; }
 
-.ui-corner-left, .timeline-event-box.ui-state-default.ui-corner-left:before, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before, .ui-chips-container .ui-chips-token.ui-corner-left:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-left:before, .fc .fc-button.ui-corner-left:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-left:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-left:before {
+.ui-corner-left, .timeline-event-box.ui-state-default.ui-corner-left:before, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before, .ui-chips-container .ui-chips-token.ui-corner-left:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-left:before, .fc .fc-button.ui-corner-left:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-left:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-left:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-left:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-left:before {
   border-radius: 3px 0 0 3px; }
 
-.ui-corner-right, .timeline-event-box.ui-state-default.ui-corner-right:before, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before, .ui-chips-container .ui-chips-token.ui-corner-right:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-right:before, .fc .fc-button.ui-corner-right:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-right:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-right:before {
+.ui-corner-right, .timeline-event-box.ui-state-default.ui-corner-right:before, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before, .ui-chips-container .ui-chips-token.ui-corner-right:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-right:before, .fc .fc-button.ui-corner-right:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-right:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-right:before, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-right:before, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-right:before {
   border-radius: 0 3px 3px 0; }
 
 .ui-input-overlay {
@@ -560,6 +560,7 @@ template {
   border: none;
   border-radius: 3px;
   box-shadow: none;
+  outline: none;
   padding: 5px 10px !important;
   white-space: normal;
   width: 100%; }
@@ -598,6 +599,7 @@ template {
     border: none;
     border-radius: 3px;
     box-shadow: none;
+    outline: none;
     padding: 5px 10px !important;
     white-space: normal;
     width: 100%;
@@ -826,6 +828,7 @@ template {
     border: none;
     border-radius: 3px;
     box-shadow: none;
+    outline: none;
     padding: 5px 10px !important;
     white-space: normal;
     width: 100%;
@@ -2003,6 +2006,158 @@ template {
   padding: 0;
   position: relative;
   top: 0; }
+
+.ui-colorpicker-container {
+  background: white;
+  border: 1px solid #ababab;
+  border-radius: 3px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity .2s linear;
+  z-index: 1000;
+  background: #ededed;
+  opacity: 1; }
+  @media (max-width: 768px) {
+    .ui-colorpicker-container {
+      border: none;
+      border-radius: 0;
+      left: 0 !important;
+      width: 100% !important; } }
+  .ui-colorpicker-container.jeesl-visible {
+    opacity: 1; }
+  .ui-colorpicker-container .jeesl-overlay-wrapper {
+    color: #333333;
+    overflow: auto; }
+  .ui-colorpicker-container .ui-colorpicker_color, .ui-colorpicker-container .ui-colorpicker_hue, .ui-colorpicker-container .ui-colorpicker_new_color {
+    border: 1px solid #ababab; }
+  .ui-colorpicker-container .ui-colorpicker_hue {
+    background: linear-gradient(to bottom, red 0%, magenta calc(100%/6), blue calc(200%/6), cyan calc(300%/6), lime calc(400%/6), yellow calc(500%/6), red 100%);
+    margin: 0 8px;
+    width: 19px; }
+    .ui-colorpicker-container .ui-colorpicker_hue > div {
+      left: -9px;
+      margin-top: -6px; }
+  .ui-colorpicker-container .ui-colorpicker_new_color {
+    border-radius: 3px; }
+  .ui-colorpicker-container .ui-colorpicker_hex, .ui-colorpicker-container .ui-colorpicker_field {
+    background: transparent;
+    display: flex;
+    width: 60px; }
+    .ui-colorpicker-container .ui-colorpicker_hex:before, .ui-colorpicker-container .ui-colorpicker_field:before {
+      margin-right: 5px; }
+    .ui-colorpicker-container .ui-colorpicker_hex > input, .ui-colorpicker-container .ui-colorpicker_field > input {
+      background: white;
+      border: none;
+      border-radius: 3px;
+      box-shadow: none;
+      outline: none;
+      padding: 5px 10px !important;
+      white-space: normal;
+      width: 100%;
+      border-radius: 3px 0 0 3px;
+      left: 0;
+      height: auto;
+      padding: 5px 7px !important;
+      position: relative;
+      top: 0; }
+      .ui-colorpicker-container .ui-colorpicker_hex > input.ui-state-focus, .ui-colorpicker-container .ui-colorpicker_field > input.ui-state-focus {
+        box-shadow: none; }
+      @media (max-width: 768px) {
+        .ui-colorpicker-container .ui-colorpicker_hex > input, .ui-colorpicker-container .ui-colorpicker_field > input {
+          padding: 10px !important; } }
+    .ui-colorpicker-container .ui-colorpicker_hex > span, .ui-colorpicker-container .ui-colorpicker_field > span {
+      height: 22px;
+      min-width: 15px;
+      background: linear-gradient(to bottom, #ededed, #c4c4c4);
+      border: 1px solid #ababab;
+      box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
+      color: #333333;
+      line-height: normal;
+      padding: 0 5px;
+      text-align: center;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+      transition: border-color 0.2s linear, color 0.2s linear, text-shadow 0.2s linear;
+      z-index: 0;
+      border-radius: 0 3px 3px 0;
+      position: relative; }
+      @media (max-width: 768px) {
+        .ui-colorpicker-container .ui-colorpicker_hex > span, .ui-colorpicker-container .ui-colorpicker_field > span {
+          height: 42px; } }
+      @media (max-width: 768px) {
+        .ui-colorpicker-container .ui-colorpicker_hex > span, .ui-colorpicker-container .ui-colorpicker_field > span {
+          min-width: 30px; } }
+      .ui-colorpicker-container .ui-colorpicker_hex > span:after, .ui-colorpicker-container .ui-colorpicker_field > span:after {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle; }
+      .ui-colorpicker-container .ui-colorpicker_hex > span > *, .ui-colorpicker-container .ui-colorpicker_field > span > * {
+        display: inline-block;
+        vertical-align: middle; }
+      @media (max-width: 768px) {
+        .ui-colorpicker-container .ui-colorpicker_hex > span, .ui-colorpicker-container .ui-colorpicker_field > span {
+          padding: 0 10px;
+          width: auto; } }
+      .ui-colorpicker-container .ui-colorpicker_hex > span:before, .ui-colorpicker-container .ui-colorpicker_field > span:before {
+        background: #c4c4c4;
+        content: '';
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition: background 0.2s linear, opacity 0.2s linear;
+        width: 100%;
+        z-index: -1; }
+      .ui-colorpicker-container .ui-colorpicker_hex > span.ui-button-icon-only .ui-button-text, .ui-colorpicker-container .ui-colorpicker_field > span.ui-button-icon-only .ui-button-text {
+        display: none; }
+      .ui-colorpicker-container .ui-colorpicker_hex > span.ui-state-active:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-state-hover:before, .ui-colorpicker-container .ui-colorpicker_hex > span:hover:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-state-active:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-state-hover:before, .ui-colorpicker-container .ui-colorpicker_field > span:hover:before {
+        opacity: 1;
+        transition: background 0.2s linear, opacity 0.2s linear; }
+      .ui-colorpicker-container .ui-colorpicker_hex > span.ui-state-hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .ui-colorpicker-container .ui-colorpicker_hex > span:hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .ui-colorpicker-container .ui-colorpicker_field > span.ui-state-hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled), .ui-colorpicker-container .ui-colorpicker_field > span:hover:not(.ui-state-active):not(.ui-state-disabled):not(:disabled) {
+        background: linear-gradient(to bottom, #ededed, #c4c4c4);
+        border-color: #ababab;
+        box-shadow: none;
+        color: #333333; }
+      .ui-colorpicker-container .ui-colorpicker_hex > span.ui-state-disabled, .ui-colorpicker-container .ui-colorpicker_hex > span:disabled, .ui-colorpicker-container .ui-colorpicker_field > span.ui-state-disabled, .ui-colorpicker-container .ui-colorpicker_field > span:disabled {
+        background: linear-gradient(to bottom, #ededed, #dedede);
+        color: #c4c4c4;
+        opacity: 1; }
+      .ui-colorpicker-container .ui-colorpicker_hex > span.ui-state-active, .ui-colorpicker-container .ui-colorpicker_field > span.ui-state-active {
+        border-color: #00663a;
+        color: white;
+        text-shadow: none; }
+        .ui-colorpicker-container .ui-colorpicker_hex > span.ui-state-active:focus, .ui-colorpicker-container .ui-colorpicker_field > span.ui-state-active:focus {
+          box-shadow: none; }
+        .ui-colorpicker-container .ui-colorpicker_hex > span.ui-state-active:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-state-active:before {
+          background: #008a4e; }
+      .ui-colorpicker-container .ui-colorpicker_hex > span .ui-button-text, .ui-colorpicker-container .ui-colorpicker_field > span .ui-button-text {
+        line-height: normal;
+        padding: 2px 10px; }
+      .ui-colorpicker-container .ui-colorpicker_hex > span:after, .ui-colorpicker-container .ui-colorpicker_field > span:after {
+        align-items: center;
+        content: '\f0dc';
+        display: flex;
+        font-family: "Font Awesome 5 Free";
+        font-size: inherit;
+        font-weight: 700;
+        justify-content: center;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+        -webkit-font-smoothing: antialiased; }
+  .ui-colorpicker-container .ui-colorpicker_hex:before {
+    content: '#'; }
+  .ui-colorpicker-container .ui-colorpicker_rgb_r:before {
+    content: 'R'; }
+  .ui-colorpicker-container .ui-colorpicker_rgb_g:before {
+    content: 'G'; }
+  .ui-colorpicker-container .ui-colorpicker_rgb_b:before {
+    content: 'B'; }
+  .ui-colorpicker-container .ui-colorpicker_hsb_h:before {
+    content: 'H'; }
+  .ui-colorpicker-container .ui-colorpicker_hsb_s:before {
+    content: 'S'; }
+  .ui-colorpicker-container .ui-colorpicker_hsb_b:before {
+    content: 'B'; }
 
 /* Primefaces 12 fixes */
 body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
@@ -3980,7 +4135,7 @@ body, .ui-widget {
 /******************/
 .jeesl-galleria {
   align-items: stretch;
-  background: #f0f0f0;
+  background: #ededed;
   display: flex;
   flex-wrap: wrap;
   width: 100% !important; }
@@ -4557,6 +4712,7 @@ body, .ui-widget {
           top: 0;
           transform: translate(-50%, 0);
           width: auto;
+          word-break: break-word;
           z-index: 1; }
           .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
             left: 15px;
@@ -4822,7 +4978,7 @@ body, .ui-widget {
                   min-height: 32px;
                   min-width: 42px; } }
               .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-tabs .ui-tabs-nav .ui-tabs-header.ui-state-active {
-                background: linear-gradient(to bottom, #f0f0f0, white);
+                background: linear-gradient(to bottom, #ededed, white);
                 cursor: default;
                 min-height: 19px; }
                 @media (max-width: 768px) {
@@ -4919,7 +5075,7 @@ body, .ui-widget {
       opacity: .5; }
 
 .ui-fieldset {
-  background: #f0f0f0;
+  background: #ededed;
   margin-bottom: 10px; }
   .ui-fieldset .ui-fieldset-legend {
     align-items: center;
@@ -5164,7 +5320,7 @@ body, .ui-widget {
       display: flex;
       height: 100%; }
   .jeesl-datatable tbody, .jeesl-datatable .ui-datatable-data {
-    background: #f0f0f0;
+    background: #ededed;
     border: none; }
     .jeesl-datatable tbody tr, .jeesl-datatable .ui-datatable-data tr {
       background: transparent;
@@ -5904,6 +6060,7 @@ body, .ui-widget {
               top: 0;
               transform: translate(-50%, 0);
               width: auto;
+              word-break: break-word;
               z-index: 1; }
               .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
                 left: 15px;
@@ -6169,7 +6326,7 @@ body, .ui-widget {
                       min-height: 32px;
                       min-width: 42px; } }
                   .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-tabs .ui-tabs-nav .ui-tabs-header.ui-state-active {
-                    background: linear-gradient(to bottom, #f0f0f0, white);
+                    background: linear-gradient(to bottom, #ededed, white);
                     cursor: default;
                     min-height: 19px; }
                     @media (max-width: 768px) {
@@ -6575,7 +6732,7 @@ body, .ui-widget {
         margin-bottom: -5px; }
 
 .jeesl-tabs {
-  background: #f0f0f0;
+  background: #ededed;
   padding: 2px; }
   .jeesl-tabs .ui-tabs-nav {
     align-items: center;
@@ -6631,7 +6788,7 @@ body, .ui-widget {
           min-height: 42px;
           top: 0 !important; } }
       .jeesl-tabs .ui-tabs-nav .ui-tabs-header.ui-tabs-selected {
-        background: linear-gradient(to bottom, white, #f0f0f0);
+        background: linear-gradient(to bottom, white, #ededed);
         padding-bottom: 1px; }
         @media (max-width: 768px) {
           .jeesl-tabs .ui-tabs-nav .ui-tabs-header.ui-tabs-selected {
@@ -6836,7 +6993,7 @@ body, .ui-widget {
   .fc .fc-body td {
     border: 1px solid #ababab;
     border-top: none;
-    background: #f0f0f0; }
+    background: #ededed; }
   .fc .fc-body .fc-scroller {
     height: auto !important;
     overflow: hidden !important; }
@@ -6852,6 +7009,17 @@ body, .ui-widget {
       font-size: 1em;
       line-height: normal;
       padding: 5px; }
+      .fc .fc-body .fc-scroller .fc-content-skeleton .fc-event[class*='color-']:before {
+        opacity: 1; }
+      .fc .fc-body .fc-scroller .fc-content-skeleton .fc-event:before {
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.4));
+        bottom: 0;
+        content: '';
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        right: 0;
+        top: 0; }
       .fc .fc-body .fc-scroller .fc-content-skeleton .fc-event .fc-content {
         display: -webkit-box;
         line-clamp: 2;
@@ -6923,7 +7091,7 @@ body, .ui-widget {
       border-radius: 3px;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8); }
       .jeesl-upload-panel .jeesl-grid > form .ui-fileupload .ui-fileupload-content {
-        background: #f0f0f0;
+        background: #ededed;
         padding: 2px; }
         .jeesl-upload-panel .jeesl-grid > form .ui-fileupload .ui-fileupload-content .ui-fileupload-files {
           margin: 0;

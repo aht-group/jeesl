@@ -29,7 +29,7 @@ html, body {
       padding-right: 0; }
 
 .jeesl-tabs {
-  background: #f0f0f0; }
+  background: #ededed; }
   .jeesl-tabs .ui-tabs-nav {
     background: #c4c4c4 url(/jeesl/javax.faces.resource/images/ui-bg_highlight-soft_100_c4c4c4_1x100.png.xhtml?ln=primefaces-aristo) 50% 50% repeat-x;
     background: #c4c4c4 linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
@@ -38,14 +38,14 @@ html, body {
     border: 1px solid #ababab;
     border-radius: 3px; }
   .jeesl-tabs .ui-tabs-header.ui-state-active {
-    background: #f0f0f0;
+    background: #ededed;
     box-shadow: 0 1px white inset;
     margin-bottom: 0; }
   .jeesl-tabs .ui-tabs-panel {
     padding: 0; }
 
 .jeesl-panel {
-  background: #f0f0f0;
+  background: #ededed;
   display: flex;
   flex-direction: column;
   /* Padding should not have been removed from content panel.

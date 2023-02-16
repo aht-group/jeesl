@@ -16,8 +16,8 @@
 	
 	<c:set var="handler" value="#{handler}"/>
 	
-	<h:panelGroup styleClass="jeesl-input-container">
-		<p:inputText rendered="#{rendered and (empty entity or empty code)}"
+	<h:panelGroup styleClass="jeesl-input-container" rendered="#{rendered}">
+		<p:inputText rendered="#{empty entity or empty code}"
 					 rows="#{rows}"
 					 value="#{value}"
 					 autocomplete="off"
@@ -35,7 +35,7 @@
 		    </c:if></ui:remove>
 		</p:inputText>
 		
-		<h:panelGroup rendered="#{rendered and ((not empty entity) or (not empty code))}" styleClass="ui-float-label">
+		<h:panelGroup rendered="#{(not empty entity) or (not empty code)}" styleClass="ui-float-label">
 			<p:inputText value="#{value}" />
 			<p:outputLabel for="@previous"
 						   value="#{empty code

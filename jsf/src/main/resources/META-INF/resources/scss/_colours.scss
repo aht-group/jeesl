@@ -32,7 +32,7 @@ $border-colour: $medium-grey;
 $editor-background: $white-100;
 $error-foreground: hsla(0,100%,50%,1);
 $foreground: $anthracite;
-$panel-background: hsla(0,0%,94%,1);
+$panel-background: $bright-grey;
 $header-background-colour: $soft-grey;
 
 $main-background-gradient: linear-gradient(to right, $dark-colour, $bright-colour);
@@ -48,6 +48,8 @@ $text-shadow: 0 1px 0 $white-70;
 $highlight-colour: $bright-colour;
 
 $overlay-box-shadow: 0 5px 10px $black-80;
+
+$colour-spectrum: linear-gradient(to bottom, #ff0000 0%, #ff00ff calc(100%/6), #0000ff calc(200%/6), #00ffff calc(300%/6), #00ff00 calc(400%/6), #ffff00 calc(500%/6), #ff0000 100%);
 
 @mixin setColours($brighter, $bright, $medium, $dark, $darker) {
 	$brighter-colour: $brighter;
