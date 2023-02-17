@@ -272,6 +272,7 @@ $border: $border-width solid $border-colour;
 	border: none;
 	border-radius: $border-radius;
     box-shadow: none;
+	outline: none;
     padding: $half-spacing $regular-spacing !important;
 	white-space: normal;
 	width: 100%;
@@ -1164,6 +1165,100 @@ $border: $border-width solid $border-colour;
 	padding: 0;
 	position: relative;
 	top: 0;
+}
+
+.ui-colorpicker-container {
+	@include overlay;
+	
+	background: $panel-background;
+	opacity: 1;
+	
+	.ui-colorpicker_color, .ui-colorpicker_hue, .ui-colorpicker_new_color {
+		border: $border;
+	}
+	
+	.ui-colorpicker_hue {
+		background: $colour-spectrum;
+		margin: 0 8px;
+		width: 19px;
+		
+		> div {
+			left: -9px;
+			margin-top: -6px;
+		}
+	}
+	
+	.ui-colorpicker_new_color {
+		border-radius: $border-radius
+	}
+	
+	.ui-colorpicker_hex, .ui-colorpicker_field {
+		background: transparent;
+		display: flex;
+		width: 60px;
+		
+		&:before {
+			margin-right: $half-spacing;
+		}
+
+		> input {
+			@include inputfield;
+			
+			border-radius: $border-radius-left;
+			left: 0;
+			height: auto;
+			padding: $half-spacing 7px !important;
+			position: relative;
+			top: 0;
+		}
+		
+		> span {
+			@include button;
+			
+			border-radius: $border-radius-right;
+			position: relative;
+			
+			&:after {
+				align-items: center;
+				content: '\f0dc';
+				display: flex;
+				font-family: "Font Awesome 5 Free";
+			    font-size: inherit;
+				font-weight: 700;
+				justify-content: center;
+				text-shadow: $text-shadow;
+			    -webkit-font-smoothing: antialiased;
+			}
+		}
+	}
+	
+	.ui-colorpicker_hex:before {
+		content: '#';
+	}
+	
+	.ui-colorpicker_rgb_r:before {
+		content: 'R';
+	}
+	
+	.ui-colorpicker_rgb_g:before {
+		content: 'G';
+	}
+	
+	.ui-colorpicker_rgb_b:before {
+		content: 'B';
+	}
+	
+	.ui-colorpicker_hsb_h:before {
+		content: 'H';
+	}
+	
+	.ui-colorpicker_hsb_s:before {
+		content: 'S';
+	}
+	
+	.ui-colorpicker_hsb_b:before {
+		content: 'B';
+	}
 }
 
 /* Primefaces 12 fixes */

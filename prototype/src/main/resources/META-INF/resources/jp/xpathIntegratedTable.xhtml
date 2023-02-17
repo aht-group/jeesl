@@ -32,8 +32,13 @@
 </composite:interface>
 
 <composite:implementation>
-	<p:dataTable id="dtProject" var="p" value="#{cc.attrs.handler.tbList}"
-			selection="#{cc.attrs.handler.tb}" selectionMode="single" rowKey="#{p.id}">
+	<p:dataTable id="dtProject"
+				 var="p"
+				 value="#{cc.attrs.handler.tbList}"
+				 selection="#{cc.attrs.handler.tb}"
+				 selectionMode="single"
+				 rowKey="#{p.id}"
+				 styleClass="jeesl-datatable">
 		<f:facet name="header">
 			<j:dtHeader id="dth" title="#{cc.attrs.tableHeader}">
 				<j:svg id="giProjectSelection" type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.allowAdd}" />

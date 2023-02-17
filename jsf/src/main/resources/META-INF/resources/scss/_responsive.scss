@@ -2057,6 +2057,7 @@ body, .ui-widget {
 						top: 0;
 	    				transform: translate(-50%, 0);
 						width: auto;
+						word-break: break-word;
 						z-index: 1;
 						
 						&:first-child {
@@ -2517,7 +2518,7 @@ body, .ui-widget {
 	@include jeesl-editor-layout;
 	@include jeesl-panel-titlebar;
 	
-	background: $bright-grey;
+	background: $panel-background;
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 10px;
@@ -3049,7 +3050,7 @@ body, .ui-widget {
 }
 
 .jeesl-tree {
-	background: $bright-grey;
+	background: $panel-background;
 	
 	.ui-widget-content {
 		background: transparent;
@@ -3878,6 +3879,21 @@ body, .ui-widget {
 				font-size: 1em;
 				line-height: normal;
 				padding: $half-spacing;
+				
+				&[class*='color-']:before {
+					opacity: 1;
+				}
+				
+				&:before {
+					background: linear-gradient(to bottom, hsla(0, 0%, 0%, .3), hsla(0, 0%, 100%, .4));
+				    bottom: 0;
+				    content: '';
+				    left: 0;
+				    opacity: 0;
+				    position: absolute;
+				    right: 0;
+				    top: 0;
+				}
 				
 				.fc-content {
 					display: -webkit-box;
