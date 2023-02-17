@@ -79,5 +79,4 @@ public interface JeeslRevisionAttribute<L extends JeeslLang, D extends JeeslDesc
 	
 	Boolean getDocOptionsInline();
 	void setDocOptionsInline(Boolean docOptionsInline);
-	
 }

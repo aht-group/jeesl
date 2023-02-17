@@ -25,6 +25,7 @@
 				<j:svg type="jeeslSave" library="jeeslGfx"   rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.ttSave}"/>
 				<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.attribute.id gt 0}" listener="#{cc.attrs.bean.rmAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
 			</f:facet>
+			<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 			<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">
 				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.showWeb}"/>
 				<p:outputLabel value="#{msg.jeeslRevisionAttributeWeb}"/>
@@ -67,8 +68,9 @@
 				</p:selectOneMenu>
 				
 				<p:outputLabel value="#{msg.jeeslRevisionEntity}" rendered="#{not empty cc.attrs.bean.attribute.relation}"/>
-				<p:selectOneMenu value="#{cc.attrs.bean.attribute.entity}" effect="fade" autoWidth="false" rendered="#{not empty cc.attrs.bean.attribute.relation}"
-									filter="true" filterMatchMode="contains" var="entity">
+				<p:selectOneMenu value="#{cc.attrs.bean.attribute.entity}" effect="fade" autoWidth="false"
+							rendered="#{not empty cc.attrs.bean.attribute.relation}"
+							filter="true" filterMatchMode="contains" var="entity">
 					<f:selectItems value="#{cc.attrs.bean.links}" var="l" itemLabel="#{l.category.position}.#{l.position} #{l.name[localeCode].lang}" itemValue="#{l}"/>
 
 					<p:column>
