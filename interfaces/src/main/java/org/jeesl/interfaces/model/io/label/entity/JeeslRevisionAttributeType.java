@@ -13,7 +13,6 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-
 @DownloadJeeslDescription
 @DownloadJeeslData
 public interface JeeslRevisionAttributeType <L extends JeeslLang, D extends JeeslDescription,
@@ -22,5 +21,5 @@ public interface JeeslRevisionAttributeType <L extends JeeslLang, D extends Jees
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,JeeslStatusWithSymbol,
 				JeeslStatus<L,D,S>,JeeslStatusFixedCode
 {
-	public enum Code{text}
+	public enum Code{text,date}
 }
