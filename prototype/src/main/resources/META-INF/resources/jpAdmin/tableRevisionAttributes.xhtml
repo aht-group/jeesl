@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -22,8 +21,8 @@
 		<p:dataTable var="a" value="#{cc.attrs.bean.attributes}" draggableRows="true"
 			selection="#{cc.attrs.bean.attribute}" selectionMode="single" rowKey="#{a.id}">
 			<f:facet name="header">
-				<j:dtHeader title="#{msg.jeeslRevisionAttributes}">
-					<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}"/>
+				<j:dtHeader entity="RevisionAttribute" code="listOf">
+					<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}"/>
 					<j:svg type="jeeslDownload" listener="#{cc.attrs.bean.downloadJeeslAttributes()}" update="#{cc.attrs.updateAdd}" rendered="#{cc.attrs.bean.supportsJeeslAttributeDownload}"/>
 				</j:dtHeader>
 			</f:facet>
@@ -32,8 +31,11 @@
 			<p:column rendered="true">  
 				<h:outputText value="#{a.position}"/>
             </p:column>
-            <p:column headerText="#{msg.jeeslRevisionAttribute}">  
-				<h:outputText value="#{a.name[userBean.localeCode].lang}"/>
+            <p:column headerText="#{msg.jeeslRevisionAttribute}">
+            	<f:facet name="header"><jtp:label entity="RevisionAttribute"/></f:facet>
+            	<jtp:symbolizer value="#{a.type}" marginRight="5" rendered="#{empty a.relation}"/>
+            	<jtp:symbolizer value="#{a.relation}" marginRight="5" rendered="#{not empty a.relation}"/>
+				<h:outputText value="#{a.name[localeCode].lang}"/>
             </p:column>
             <p:column headerText="P" styleClass="aupPfDtColCentered">
             	<h:graphicImage rendered="#{a.showWeb}"			name="12/ui/system/revision/browser.png"		library="jeeslPrototypeGfx"/>
