@@ -12,7 +12,7 @@ import javax.persistence.Tuple;
 
 import org.apache.commons.collections.keyvalue.MultiKey;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
-import org.jeesl.factory.json.system.io.db.tuple.JsonTupleFactory;
+import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.db.tuple.two.Json2Tuple;
@@ -242,6 +242,7 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		{
 			Json2Tuple<A,B> t = mapTuples.get(key);
 			t.setCount(mapCount.get(key));
+			t.setCount1(t.getCount());
 			json.getTuples().add(t);
 		}
 		

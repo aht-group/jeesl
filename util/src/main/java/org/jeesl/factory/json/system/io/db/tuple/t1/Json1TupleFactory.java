@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.persistence.Tuple;
 
-import org.jeesl.factory.json.system.io.db.tuple.JsonTupleFactory;
+import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.JsonTuple;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
+import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.util.query.sql.SqlNativeQueryHelper;
 
 @Deprecated //Should be moved to JsonTupleFactory

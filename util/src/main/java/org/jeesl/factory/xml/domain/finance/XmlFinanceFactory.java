@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.finance.EjbWithValue;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.JsonTuple;
+import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.xml.jeesl.QueryFinance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

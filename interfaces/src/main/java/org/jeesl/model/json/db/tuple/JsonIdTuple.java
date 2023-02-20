@@ -3,6 +3,7 @@ package org.jeesl.model.json.db.tuple;
 import java.io.Serializable;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.json.io.db.tuple.AbstractJsonTuple;
 
 public class JsonIdTuple extends AbstractJsonTuple implements Serializable,EjbWithId
 {
