@@ -21,5 +21,5 @@ public interface JeeslRevisionAttributeType <L extends JeeslLang, D extends Jees
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,JeeslStatusWithSymbol,
 				JeeslStatus<L,D,S>,JeeslStatusFixedCode
 {
-	public enum Code{text,date}
+	public enum Code{text,date,idLong}
 }
