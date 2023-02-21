@@ -2179,6 +2179,10 @@ body .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
         height: 32px;
         width: 32px; } }
 
+/******************
+ * TREE ANIMATION *
+ ******************/
+/******************/
 html, body {
   font-size: 11px;
   height: 100%; }
@@ -4129,10 +4133,6 @@ body, .ui-widget {
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item .jeesl-menu-bar-radio-item-list .jeesl-menu-bar-item:last-child:after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item .jeesl-menu-bar-radio-item-list:hover .jeesl-menu-bar-item:last-child:after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover .jeesl-menu-bar-radio-item-list .jeesl-menu-bar-item:last-child:after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover .jeesl-menu-bar-radio-item-list:hover .jeesl-menu-bar-item:last-child:after {
           display: none; }
 
-/******************
- * TREE ANIMATION *
- ******************/
-/******************/
 .jeesl-galleria {
   align-items: stretch;
   background: #ededed;
@@ -7072,11 +7072,20 @@ body, .ui-widget {
         height: 22px;
         width: auto; } }
 
-@media (max-width: 768px) {
-  .pf-action-icon img {
-    height: 42px; } }
+.pf-action-icon {
+  float: none; }
+  @media (max-width: 768px) {
+    .pf-action-icon img {
+      height: 42px; } }
+
 .jeesl-heatmap-entry {
   fill: #00663a; }
+
+.jeesl-ellipsis {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; }
 
 .jeesl-upload-panel {
   background: transparent;
