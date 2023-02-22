@@ -2,11 +2,7 @@
 package org.jeesl.model.json.module.finance;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import org.jeesl.model.json.module.attribute.JsonAttributeSet;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -17,6 +13,7 @@ public class JsonAmount implements Serializable
 {
     private final static long serialVersionUID = 1L;
  
+    public JsonAmount() {}
 	
 	@JsonProperty("value")
 	private Double value;
@@ -25,13 +22,6 @@ public class JsonAmount implements Serializable
 	
 	@JsonProperty("currency")
 	private JsonCurrency currency;
-	public JsonCurrency getCurrency() {
-		return currency;
-	}
-	public void setCurrency(JsonCurrency currency) {
-		this.currency = currency;
-	}
-	
-	
-	
+	public JsonCurrency getCurrency() {return currency;}
+	public void setCurrency(JsonCurrency currency) {this.currency = currency;}
 }

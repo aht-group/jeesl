@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
     xmlns:c="http://java.sun.com/jsp/jstl/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
   <composite:interface componentType="org.jeesl.jsf.components.output.Highlight">
-    <composite:attribute name="resource" required="true"/>
+    <composite:attribute name="resource" required="false" shortDescription="A resource accessible from the classpath"/>
+    <composite:attribute name="value" required="false" shortDescription="A value binding to a String"/>
     
   	<composite:attribute name="between" required="false"/>
     <composite:attribute name="from" required="false" default="0"/>
@@ -27,11 +27,16 @@
 	  		hljs.initHighlightingOnLoad();
 		</script>
 	
- 		<c:if test="#{empty cc.attrs.between}">
-  			<pre><code class="#{cc.attrs.lang}"><h:outputText value="#{cc.text(cc.attrs.resource,cc.attrs.from,cc.attrs.to,cc.attrs.relativeTab)}" /></code></pre>  		
-  		</c:if>
-		<c:if test="#{not empty cc.attrs.between}">
-  			<pre><code class="#{cc.attrs.lang}"><h:outputText value="#{cc.between(cc.attrs.resource,cc.attrs.between,cc.attrs.relativeTab)}" /></code></pre>
+		<c:if test="#{not empty cc.attrs.resource}">
+			<c:if test="#{empty cc.attrs.between}">
+  				<pre><code class="#{cc.attrs.lang}"><h:outputText value="#{cc.text(cc.attrs.resource,cc.attrs.from,cc.attrs.to,cc.attrs.relativeTab)}" /></code></pre>  		
+	  		</c:if>
+			<c:if test="#{not empty cc.attrs.between}">
+	  			<pre><code class="#{cc.attrs.lang}"><h:outputText value="#{cc.between(cc.attrs.resource,cc.attrs.between,cc.attrs.relativeTab)}" /></code></pre>
+			</c:if>
+		</c:if>
+ 		<c:if test="#{not empty cc.attrs.value}">
+			<pre><code class="#{cc.attrs.lang}"><h:outputText value="#{cc.attrs.value}" /></code></pre>  
 		</c:if>
 
    </composite:implementation>
