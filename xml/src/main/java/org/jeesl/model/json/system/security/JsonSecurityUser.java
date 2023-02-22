@@ -12,6 +12,13 @@ public class JsonSecurityUser implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	public JsonSecurityUser() {}
+	
+	@JsonProperty("id")
+	private Long id;
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
+
 	@JsonProperty("email")
 	private String email;
 	public String getEmail() {return email;}
