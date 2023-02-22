@@ -7181,3 +7181,17 @@ body, .ui-widget {
             margin-bottom: 14px; } }
         .html-container-panel .html-container > div > section > h1:first-child:after {
           left: 0; }
+
+@media print {
+  body {
+    background: none;
+    padding: 0; }
+
+  .container {
+    box-shadow: none;
+    margin: 0;
+    max-width: 100%;
+    padding: 0; }
+
+  .jeesl-header, .jeesl-breadcrumb-header, .jeesl-status-bar, .jeesl-footer {
+    display: none; } }
