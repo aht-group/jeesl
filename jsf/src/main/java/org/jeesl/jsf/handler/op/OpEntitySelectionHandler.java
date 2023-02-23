@@ -2,6 +2,7 @@ package org.jeesl.jsf.handler.op;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.interfaces.bean.op.OpEntityBean;
 import org.jeesl.interfaces.controller.handler.op.OpEntitySelection;
@@ -18,6 +19,8 @@ public class OpEntitySelectionHandler <T extends EjbWithId> extends AbstractOpSe
 	
 	private final List<JsonTranslation> columns; public List<JsonTranslation> getColumns() {return columns;}
 	private XpathLazyModel<T> lazy; public XpathLazyModel<T> getLazy() {return lazy;}
+	
+	public void setLocaleCode(String localeCode) {if(Objects.nonNull(lazy)) {lazy.setLocaleCode(localeCode);}}
 	
 	public OpEntitySelectionHandler(OpEntityBean bean) {this(bean, new ArrayList<T>());}
     public OpEntitySelectionHandler(OpEntityBean bean, List<T> opEntites)

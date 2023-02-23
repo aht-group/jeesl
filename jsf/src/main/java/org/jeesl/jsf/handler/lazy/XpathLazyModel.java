@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jeesl.interfaces.controller.handler.OutputXpathPattern;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.util.JeeslLazyListHandler;
 import org.jeesl.model.json.io.label.JsonTranslation;
@@ -32,6 +33,7 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 
 	private final Map<String,JsonTranslation> mapFilter;
 	private boolean debugOnInfo;
+	private String localeCode; public String getLocaleCode() {return localeCode;} public void setLocaleCode(String localeCode) {this.localeCode = localeCode;}
 
 	public XpathLazyModel()
 	{
@@ -41,6 +43,7 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 		tmp = new ArrayList<T>();
 		mapFilter = new HashMap<String,JsonTranslation>();
 
+		localeCode = "en";
 		debugOnInfo = false;
 	}
 	
@@ -97,7 +100,9 @@ public class XpathLazyModel <T extends EjbWithId> extends LazyDataModel<T>
 				if(debugOnInfo) {logger.info("Filtering "+key);}
 				if(mapFilter.containsKey(key))
 				{
-					Object value = ctx.getValue(mapFilter.get(key).getXpath());
+					String filter = mapFilter.get(key).getXpath();
+					if(filter.equals(OutputXpathPattern.multiLang)) {filter=filter.replace("$localeCode$",localeCode);}
+					Object value = ctx.getValue(filter);
 					if(value==null || value.toString().trim().length()==0)
 					{
 						match = false;
