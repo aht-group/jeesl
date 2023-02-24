@@ -2896,6 +2896,7 @@ body, .ui-widget {
 		position: absolute;
 		top: $slim-spacing;
 	    width: calc(100% - #{2 * $slim-spacing}) !important;
+		z-index: 10;
 
 		@media (max-width: 768px) {
 			left: 0;
@@ -3029,6 +3030,7 @@ body, .ui-widget {
 	}
 	
 	.ui-galleria-nav-prev {
+		left: 0;
 		order: 2;
 		
 		&:after {
@@ -3042,6 +3044,7 @@ body, .ui-widget {
 	
 	.ui-galleria-nav-next {
 		order: 4;
+		right: 0;
 		
 		&:after {
 			content: '\f0da';
