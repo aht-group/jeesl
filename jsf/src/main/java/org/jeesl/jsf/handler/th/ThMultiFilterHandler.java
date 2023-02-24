@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -35,6 +36,7 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 	private final Map<T,Boolean> map; public Map<T,Boolean> getMap() {return map;}
 	public boolean toggleMode; public boolean isToggleMode() {return toggleMode;} public void setToggleMode(boolean toggleMode) {this.toggleMode = toggleMode;}
 	
+	public static <T extends EjbWithId> ThMultiFilterHandler<T> instance(ThMultiFilterBean callback) {return new ThMultiFilterHandler<>(callback);}
 	public ThMultiFilterHandler(ThMultiFilterBean bean)
 	{
 		this.bean=bean;
@@ -103,7 +105,7 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 		else {logger.error(cT.getSimpleName()+" is not a "+EjbWithCode.class.getSimpleName());}
 		refresh();
 	}
-	public <E extends Enum<E>> void preSelect(List<T> selection)
+	public void preSelect(List<T> selection)
 	{
 		for(T t : selection)
 		{
@@ -111,6 +113,12 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 		}
 		refresh();
 	}
+	public void preSelectOrAll(List<T> selection)
+	{
+		if(ObjectUtils.isNotEmpty(selection)) {this.preSelect(selection);}
+		else {selectAll();}
+	}
+	
 	
 	public void select(T t)
 	{
