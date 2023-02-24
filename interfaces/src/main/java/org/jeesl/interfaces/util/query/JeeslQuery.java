@@ -3,6 +3,11 @@ package org.jeesl.interfaces.util.query;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslQuery extends Serializable
 {
 	public String getLocaleCode();

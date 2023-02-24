@@ -22,7 +22,7 @@
 
 	<p:dialog id="dXpath" header="Select" widgetVar="#{cc.attrs.widgetVar}" modal="true" styleClass="jeesl-table-dialog">
 		<f:facet name="actions">
-			<j:svg type="jeeslCancel" listener="#{dialogBean.save()}" update="@form" library="jeeslGfx"/>
+			<j:svg type="jeeslCancel" listener="#{dialogBean.save()}" update="@form"/>
 		</f:facet>
 			<p:dataTable id="dtOpEntity" var="var" value="#{cc.attrs.handler.lazy}" lazy="true"
 				 	selection="#{cc.attrs.handler.op}" selectionMode="single" rowKey="#{var.id}"
