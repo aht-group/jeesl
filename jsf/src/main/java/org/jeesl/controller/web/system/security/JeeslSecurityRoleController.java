@@ -160,6 +160,14 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		role=null;
 	}
 	
+	public void saveCategory() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
+	{
+		logger.info(AbstractLogMessage.saveEntity(category));
+		category = fSecurity.save(category);
+		reloadCategories();
+		reloadRoles();
+	}
+	
 	private void reloadRoles() throws JeeslNotFoundException
 	{
 		roles.clear();
@@ -315,5 +323,6 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	public void selectTblView() {logger.info(AbstractLogMessage.selectEntity(tblView));}
 	public void selectTblUsecase() {logger.info(AbstractLogMessage.selectEntity(tblUsecase));}
 	
+	public void reorderCategories() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity, categories);}
 	public void reorderRoles() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity, roles);}
 }
