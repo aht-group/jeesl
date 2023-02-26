@@ -1,6 +1,7 @@
 package org.jeesl.model.json.module.ts;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="series")
@@ -31,13 +36,8 @@ public class JsonTsSeries implements Serializable
 	
 	@JsonProperty("bridge")
 	private JsonTsBridge bridge;
-
-	public JsonTsBridge getBridge() {
-		return bridge;
-	}
-	public void setBridge(JsonTsBridge bridge) {
-		this.bridge = bridge;
-	}
+	public JsonTsBridge getBridge() {return bridge;}
+	public void setBridge(JsonTsBridge bridge) {this.bridge = bridge;}
 
 	@JsonProperty("stat")
 	private JsonTsStat stat;
@@ -70,6 +70,22 @@ public class JsonTsSeries implements Serializable
 	private Date dateEnd;
 	public Date getDateEnd() {return dateEnd;}
 	public void setDateEnd(Date dateEnd) {this.dateEnd = dateEnd;}
+	
+	@JsonProperty("ldStart")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate ldStart;
+	public LocalDate getLdStart() {return ldStart;}
+	public void setLdStart(LocalDate ldStart) {this.ldStart = ldStart;}
+	
+	@JsonProperty("ldEnd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	private LocalDate ldEnd;
+	public LocalDate getLdEnd() {return ldEnd;}
+	public void setLdEnd(LocalDate ldEnd) {this.ldEnd = ldEnd;}
 
 	@JsonProperty("datas")
 	private List<JsonTsData> datas;

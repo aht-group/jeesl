@@ -75,6 +75,7 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	List<DATA> fData(WS workspace, TS timeSeries);
 	List<DATA> fData(WS workspace, TS timeSeries, int year);
 	List<DATA> fData(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
+	List<DATA> fDataFirst(List<TS> list);
 	List<DATA> fDataLast(List<TS> list);
 	
 	List<POINT> fPoints(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);

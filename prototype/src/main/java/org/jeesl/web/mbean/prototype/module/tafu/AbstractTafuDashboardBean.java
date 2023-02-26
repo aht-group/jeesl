@@ -136,7 +136,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		
 		sbhViewport.setList(fTafu.allOrderedPositionVisible(fbTafu.getClassViewport()));
 		sbhViewport.setDefault();
-		sbhViewport.debug();
+		sbhViewport.debug(false);
 		
 		ldBegin = LocalDate.now();		
 		logger.info("Start "+ldBegin+" "+ldBegin.getDayOfWeek().getValue());

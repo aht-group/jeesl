@@ -2,8 +2,10 @@ package org.jeesl.factory.ejb.module.ts;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
@@ -67,5 +69,12 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		Set<Date> set = new HashSet<Date>();
 		for(DATA d : list ) {set.add(d.getRecord());}
 		return set;
+	}
+	
+	public Map<TS,DATA> toMapSeriesSingleData(List<DATA> list)
+	{
+		Map<TS,DATA> map = new HashMap<>();
+		for(DATA d : list) {map.put(d.getTimeSeries(), d);}
+		return map;
 	}
 }

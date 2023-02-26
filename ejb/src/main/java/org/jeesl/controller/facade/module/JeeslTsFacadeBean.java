@@ -246,6 +246,12 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 			predicates.add(pScope.in(query.getScopes()));
 			activeFilters++;
 		}
+		if(ObjectUtils.isNotEmpty(query.getIntervals()))
+		{
+			Path<INT> pInterval = ts.get(JeeslTimeSeries.Attributes.interval.toString());
+			predicates.add(pInterval.in(query.getIntervals()));
+			activeFilters++;
+		}
 		if(activeFilters==0) {return new ArrayList<>();}
 		
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
@@ -387,12 +393,19 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		return em.createQuery(cQ).getResultList();
 	}
 
+	@Override public List<DATA> fDataFirst(List<TS> list)
+	{
+		if(list==null || list.isEmpty()) {return new ArrayList<>();}
+		List<Long> ids = this.listId(sqlFactory.firstData(list));
+		return this.list(fbTs.getClassData(),ids);
+	}
 	@Override public List<DATA> fDataLast(List<TS> list)
 	{
 		if(list==null || list.isEmpty()) {return new ArrayList<>();}
 		List<Long> ids = this.listId(sqlFactory.lastData(list));
 		return this.list(fbTs.getClassData(),ids);
 	}
+	
 
 	@Override public List<POINT> fPoints(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to)
 	{
@@ -540,4 +553,6 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		
         return jtf.buildV2(tuples,JsonTupleFactory.Type.count);
 	}
+
+	
 }

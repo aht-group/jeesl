@@ -2,7 +2,6 @@ package org.jeesl.model.json.module.finance;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,8 +35,7 @@ public class JsonCurrency implements Serializable
 	public String getLabel() {return label;}
 	public void setLabel(String label) {this.label = label;}
 
-	
-	
+
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

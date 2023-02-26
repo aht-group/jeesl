@@ -43,6 +43,7 @@ public class SbDateHandler implements SbDateSelection
 	public SbDateHandler initYears(int before, int after)
 	{
 		dateFrom = LocalDate.now().withDayOfMonth(1).minusYears(before);
+		dateTo = LocalDate.now();
 		if(after!=0) {dateTo = LocalDate.now().withDayOfMonth(1).plusYears(after).plusMonths(1).minusDays(1);}
 		return this;
 	}

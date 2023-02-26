@@ -26,15 +26,6 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	
 	final static Logger logger = LoggerFactory.getLogger(EjbTimeSeriesQuery.class);
 	
-//	public static <CAT extends JeeslTsCategory<?,?,CAT,?>,
-//					SCOPE extends JeeslTsScope<?,?,CAT,?,?,?,INT>,
-//					BRIDGE extends JeeslTsBridge<?>,
-//					INT extends JeeslStatus<?,?,INT>,
-//					STAT extends JeeslTsStatistic<?,?,STAT,?>>
-//		EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> instance()
-//	{
-//		return new EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT>();
-//	}
 	public EjbTimeSeriesQuery()
 	{       
 		reset();
@@ -60,6 +51,9 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	private List<SCOPE> scopes; public List<SCOPE> getScopes() {return scopes;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> add(SCOPE scope) {if(Objects.isNull(scopes)) {scopes = new ArrayList<>();} scopes.add(scope); return this;}
 
+	private List<INT> intervals; public List<INT> getIntervals() {return intervals;}
+	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> add(INT interval) {if(Objects.isNull(intervals)) {intervals = new ArrayList<>();} intervals.add(interval); return this;}
+	
 	private List<BRIDGE> bridges; public List<BRIDGE> getBridges() {return bridges;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> add(BRIDGE bridge) {if(Objects.isNull(bridges)) {bridges = new ArrayList<>();} bridges.add(bridge); return this;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> addBridges(List<BRIDGE> list) {if(Objects.isNull(bridges)) {bridges = new ArrayList<>();} bridges.addAll(list); return this;}

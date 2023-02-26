@@ -22,10 +22,12 @@ public class SqlTimeSeriesFactory <TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		this.cData=cData;
 	}
 	
-	public String lastData(List<TS> list)
+	
+	public String firstData(List<TS> list) {return firstLastData(list,"ASC");}
+	public String lastData(List<TS> list) {return firstLastData(list,"DESC");}
+	private String firstLastData(List<TS> list, String ordering)
 	{
-		boolean newLine = false;
-		String alias = "d";
+		String alias = "d"; boolean newLine = false; 
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT");
 		SqlFactory.distinct(sb,alias,newLine,JeeslTsData.Attributes.timeSeries);
@@ -40,7 +42,7 @@ public class SqlTimeSeriesFactory <TS extends JeeslTimeSeries<?,TS,?,?,?>,
 		sb.append(StringUtils.join(ids,",")).append(")");
 		
 		SqlFactory.newLine(newLine,sb);
-		sb.append(" ORDER BY d.timeSeries_id ASC, d.record DESC;");
+		sb.append(" ORDER BY d.timeSeries_id ASC, d.record ").append(ordering).append(";");
 		SqlFactory.newLine(newLine,sb);
 		return sb.toString();
 	}

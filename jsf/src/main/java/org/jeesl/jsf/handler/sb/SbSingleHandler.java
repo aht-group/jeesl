@@ -254,16 +254,19 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 		}
 	}
 	
-	public void debug()
+	public void debug(boolean debug)
 	{
-		logger.info(StringUtil.stars());
-		for(T t : list)
+		if(debug)
 		{
-			StringBuilder sb = new StringBuilder();
-			if(t!=null) {sb.append(t.toString());} else {sb.append("null");}
-			sb.append(" ");
-			sb.append(t.equals(selection));
-			logger.info(sb.toString());
+			logger.info(StringUtil.stars());
+			for(T t : list)
+			{
+				StringBuilder sb = new StringBuilder();
+				if(t!=null) {sb.append(t.toString());} else {sb.append("null");}
+				sb.append(" ");
+				sb.append(t.equals(selection));
+				logger.info(sb.toString());
+			}
 		}
 	}
 }
