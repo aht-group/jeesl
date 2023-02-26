@@ -9,59 +9,67 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
-		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="ctrl" required="true"/>
 	</composite:interface>
 	
 	<composite:implementation>
 <jp:grid id="grid">
 	<j:row>
-		<j:slot id="sFaqs" width="6">
+		<j:slot id="sFaqs" width="7">
 			<h:form id="fFaqs">
-				<p:dataTable var="item" value="#{cc.attrs.bean.items}" draggableRows="false"
-								selection="#{cc.attrs.bean.item}" selectionMode="single" rowKey="#{item.id}">
+				<p:dataTable var="item" value="#{cc.attrs.ctrl.items}" draggableRows="false"
+								selection="#{cc.attrs.ctrl.item}" selectionMode="single" rowKey="#{item.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="NewsItem" code="listOf">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addItem()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addItem()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectItem()}" update=":#{cc.id}:sFaq"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectItem()}" update=":#{cc.id}:sFaq"/>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="NewsItem" code="validFrom"/></f:facet>
-						<h:outputText value="#{item.validFrom}"/>
+						<jp:outputDate value="#{item.validFrom}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="NewsItem" code="validUntil"/></f:facet>
+						<jp:outputDate value="#{item.validUntil}"/>
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="NewsItem" code="name"/></f:facet>
-						<h:outputText value="#{item.name[localeCode].lang}"/>
+						<jtp:symbolizer value="#{item.category}" marginRight="5"/>
+						<h:outputText value="#{item.name[cc.attrs.ctrl.sbhLocale.selection.code].lang}"/>
 					</p:column>
 			   	</p:dataTable>
 			</h:form>
 		</j:slot>
-		<j:slot id="sFaq" width="6">
-			<h:form id="fTicket" rendered="#{not empty cc.attrs.bean.item}">
+		<j:slot id="sFaq" width="5">
+			<h:form id="fTicket" rendered="#{not empty cc.attrs.ctrl.item}">
 				<p:panel styleClass="jeeslPanel">
 					<f:facet name="header"><j:pHeader entity="NewsItem"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveItem()}" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						
 						<jtp:label entity="NewsItem" code="category"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.item.category}" effect="fade" autoWidth="false" dynamic="true">
-							<f:selectItems value="#{cc.attrs.bean.sbhCategory.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.item.category}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.sbhCategory.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
 						
 						<jtp:label entity="NewsItem" code="name"/>
-						<p:inputText value="#{cc.attrs.bean.item.name[localeCode].lang}"/>
+						<p:inputText value="#{cc.attrs.ctrl.item.name[cc.attrs.ctrl.sbhLocale.selection.code].lang}"/>
 						
 						<jtp:label entity="NewsItem" code="validFrom"/>
-						<jp:inputCalendar value="#{cc.attrs.bean.item.validFrom}" pattern="#{appSettingsBean.patternDateMinute}"/>
+						<jp:inputCalendar value="#{cc.attrs.ctrl.item.validFrom}" pattern="#{appSettingsBean.patternDateMinute}"/>
 						
 						<jtp:label entity="NewsItem" code="markup"/>
-						<jtp:inputMarkup value="#{cc.attrs.bean.item.markup[localeCode]}"/>
+						<jtp:inputMarkup value="#{cc.attrs.ctrl.item.markup[cc.attrs.ctrl.sbhLocale.selection.code]}"/>
 						
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
+			<jp:ioFrFiles componentPrefix="#{cc.id}"  rendered="#{cc.attrs.ctrl.item.id gt 0}"
+					handler="#{cc.attrs.ctrl.frh}" allowDelete="true"
+					withDescription="true"/>
 		</j:slot>
 	</j:row>
 </jp:grid>

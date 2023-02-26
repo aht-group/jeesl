@@ -45,7 +45,7 @@ import org.jeesl.interfaces.model.io.fr.JeeslWithFileRepositoryContainer;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -56,7 +56,7 @@ import net.sf.exlp.factory.xml.io.XmlDataFactory;
 import net.sf.exlp.factory.xml.io.XmlFileFactory;
 import net.sf.exlp.xml.io.File;
 
-public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
+public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,
 									STORAGE extends JeeslFileStorage<L,D,SYSTEM,STYPE,ENGINE>,
 									STYPE extends JeeslFileStorageType<L,D,STYPE,?>,
@@ -67,7 +67,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 									REPLICATION extends JeeslFileReplication<L,D,SYSTEM,STORAGE,RTYPE>,
 									RTYPE extends JeeslFileReplicationType<L,D,RTYPE,?>,
 									RSTATUS extends JeeslFileStatus<L,D,RSTATUS,?>>
-					implements JeeslFileRepositoryHandler<STORAGE,CONTAINER,META>
+					implements JeeslFileRepositoryHandler<LOC,STORAGE,CONTAINER,META>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractFileRepositoryHandler.class);
@@ -99,7 +99,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	private STORAGE storage; @Override public STORAGE getStorage() {return storage;} public void setStorage(STORAGE storage) {this.storage=storage;}
 	protected CONTAINER container; @Override public CONTAINER getContainer() {return container;}
 	protected META meta; public META getMeta() {return meta;} public void setMeta(META meta) {this.meta = meta;}
-	private LOC locale; public LOC getLocale() {return locale;}
+	private LOC locale; public LOC getLocale() {return locale;} @Override public void setLocale(LOC locale) {this.locale = locale;}
 	
 	protected File xmlFile;
 	private String fileName; public String getFileName() {return fileName;} public void setFileName(String fileName) {this.fileName = fileName;}
@@ -287,6 +287,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		xmlFile.setData(XmlDataFactory.build(event.getFile().getContent()));
 		meta = efMeta.build(container,event.getFile().getFileName(),event.getFile().getSize(),new Date());
 		meta.setType(fFr.fByCode(fbFile.getClassType(), JeeslFileType.Code.unknown));
+		meta.setDescription(efDescription.buildEmpty(locales));
 		
 		this.handledFileUpload();
     }
@@ -447,7 +448,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		return DefaultStreamedContent.builder().contentType(JeeslZipReport.mimeType).stream(()->is).name(this.getZipName()).build();
 	}
 
-	public void copyTo(JeeslFileRepositoryHandler<STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
+	public void copyTo(JeeslFileRepositoryHandler<LOC,STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		logger.info("Copy To");
 		for(META oldMeta : metas)

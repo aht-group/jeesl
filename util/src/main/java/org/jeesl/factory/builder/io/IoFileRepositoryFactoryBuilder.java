@@ -21,11 +21,11 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileType;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IoFileRepositoryFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
+public class IoFileRepositoryFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											SYSTEM extends JeeslIoSsiSystem<L,D>,
 											STORAGE extends JeeslFileStorage<L,D,SYSTEM,STYPE,SENGINE>,
 											STYPE extends JeeslFileStorageType<L,D,STYPE,?>,

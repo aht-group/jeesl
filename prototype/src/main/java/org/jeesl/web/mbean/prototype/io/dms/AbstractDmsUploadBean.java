@@ -96,7 +96,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
 	protected final SbSingleHandler<DMS> sbhDms; public SbSingleHandler<DMS> getSbhDms() {return sbhDms;}
 
 	private AttributeHandler<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> attributeHandler; public AttributeHandler<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> getAttributeHandler() {return attributeHandler;}
-	private JeeslFileRepositoryHandler<FSTORAGE,FCONTAINER,FMETA> fileHandler; public JeeslFileRepositoryHandler<FSTORAGE,FCONTAINER,FMETA> getFileHandler() {return fileHandler;}
+	private JeeslFileRepositoryHandler<LOC,FSTORAGE,FCONTAINER,FMETA> fileHandler; public JeeslFileRepositoryHandler<LOC,FSTORAGE,FCONTAINER,FMETA> getFileHandler() {return fileHandler;}
 
 	private List<FILE> files; public List<FILE> getFiles() {return files;} public void setFiles(List<FILE> files) {this.files = files;}
 
@@ -120,7 +120,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
 								JeeslIoFrFacade<L,D,?,FSTORAGE,?,FENGINE,FCONTAINER,FMETA,FTYPE,?,?,?> fFr,
 								JeeslIoAttributeFacade<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute,
 								JeeslAttributeBean<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> bAttribute,
-								JeeslFileRepositoryHandler<FSTORAGE,FCONTAINER,FMETA> fileHandler
+								JeeslFileRepositoryHandler<LOC,FSTORAGE,FCONTAINER,FMETA> fileHandler
 								)
 	{
 		super.initDms(bTranslation,bMessage,fDms);

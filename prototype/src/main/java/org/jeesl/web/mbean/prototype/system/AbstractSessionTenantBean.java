@@ -1,6 +1,7 @@
 package org.jeesl.web.mbean.prototype.system;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -26,15 +27,20 @@ public abstract class AbstractSessionTenantBean <CTX extends JeeslSecurityContex
 	
 		if(debugOnInfo)
 		{
-			if(fc==null) {logger.warn(FacesContext.class.getSimpleName()+" is null");}
-			if(fc.getExternalContext()==null) {logger.warn(ExternalContext.class.getSimpleName()+" is null");}
-			
-			logger.info("getRequestContextPath: "+FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
-//			logger.info("getApplicationContextPath: "+FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
-			logger.info("getRequestScheme: "+FacesContext.getCurrentInstance().getExternalContext().getRequestScheme());
-			logger.info("getRequestPathInfo: "+FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo());
-			logger.info("getRequestServerName: "+FacesContext.getCurrentInstance().getExternalContext().getRequestServerName());
-			logger.info("getRequestServletPath: "+FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath());
+			if(Objects.isNull(fc)){logger.warn(FacesContext.class.getSimpleName()+" is null");}
+			else
+			{
+				if(Objects.isNull(fc.getExternalContext())) {logger.warn(ExternalContext.class.getSimpleName()+" is null");}
+				else
+				{
+					logger.info("getRequestContextPath: "+FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
+//					logger.info("getApplicationContextPath: "+FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath());
+					logger.info("getRequestScheme: "+FacesContext.getCurrentInstance().getExternalContext().getRequestScheme());
+					logger.info("getRequestPathInfo: "+FacesContext.getCurrentInstance().getExternalContext().getRequestPathInfo());
+					logger.info("getRequestServerName: "+FacesContext.getCurrentInstance().getExternalContext().getRequestServerName());
+					logger.info("getRequestServletPath: "+FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath());
+				}
+			}
 		}
 	}
 }

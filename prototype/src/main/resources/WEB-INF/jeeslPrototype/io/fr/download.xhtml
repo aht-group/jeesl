@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"  xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+>
+
+	<c:set var="value" value="#{value}"/>
+	<c:set var="path" value="#{path}"/>
+	<c:set var="height"  value="#{not empty height ? height : '12'}" />
+	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
+	<c:set var="marginRight" value="#{marginRight}"/>
+	<c:set var="marginLeft" value="#{marginLeft}"/>
+	<c:set var="styleClass" value="#{styleClass}"/>
+
+
+	<a title="#{value.fileName}"
+		download="#{value.fileName}"
+		href="#{facesContext.externalContext.requestContextPath}#{path}/#{value.code}">
+    	<img alt="#{value.fileName}"
+    		height="#{height}"
+    		src="#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.type.class.name}/#{height}/#{value.type.id}"/>
+	</a>
+
+</ui:composition>

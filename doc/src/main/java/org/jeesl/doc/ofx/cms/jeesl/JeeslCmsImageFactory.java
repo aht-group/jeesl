@@ -42,10 +42,10 @@ public class JeeslCmsImageFactory<E extends JeeslIoCmsElement<?,?,?,?,C,FC>,
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslCmsImageFactory.class);
 	
-	private final JeeslFileRepositoryHandler<FS,FC,FM> frh;
+	private final JeeslFileRepositoryHandler<?,FS,FC,FM> frh;
 	private final JeeslMarkupFactory<M,MT> ofxMarkup;
 	
-	public JeeslCmsImageFactory(JeeslFileRepositoryHandler<FS,FC,FM> frh)
+	public JeeslCmsImageFactory(JeeslFileRepositoryHandler<?,FS,FC,FM> frh)
 	{
 		this.frh=frh;
 		ofxMarkup = new JeeslMarkupFactory<>();

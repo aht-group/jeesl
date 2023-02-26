@@ -11,14 +11,20 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
 import org.jeesl.interfaces.model.io.fr.JeeslWithFileRepositoryContainer;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 
-public interface JeeslFileRepositoryHandler <STORAGE extends JeeslFileStorage<?,?,?,?,?>,
-											CONTAINER extends JeeslFileContainer<STORAGE,?>,
+public interface JeeslFileRepositoryHandler <LOC extends JeeslLocale<?,?,LOC,?>,
+											STORAGE extends JeeslFileStorage<?,?,?,?,?>,
+											CONTAINER extends JeeslFileContainer<STORAGE,META>,
 											META extends JeeslFileMeta<?,CONTAINER,?,?>>
 		extends Serializable
 {
 	void setDebugOnInfo(boolean debugOnInfo);
-
+	void setLocales(List<LOC> locales);
+	void setLocale(LOC locale);
+	
+	void reset();
+	
 	STORAGE getStorage();
 	void setStorage(STORAGE storage);
 	
@@ -37,7 +43,7 @@ public interface JeeslFileRepositoryHandler <STORAGE extends JeeslFileStorage<?,
 	void saveThreadsafe(CONTAINER container, String name, byte[] bytes, String category) throws JeeslConstraintViolationException, JeeslLockingException;
 	<W extends JeeslWithFileRepositoryContainer<CONTAINER>> void saveDeferred(W with) throws JeeslConstraintViolationException, JeeslLockingException;
 	
-	void copyTo(JeeslFileRepositoryHandler<STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException;
+	void copyTo(JeeslFileRepositoryHandler<LOC,STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException;
 	void deleteFile() throws JeeslConstraintViolationException, JeeslLockingException;
 	
 //	StreamedContent fileStream() throws Exception;

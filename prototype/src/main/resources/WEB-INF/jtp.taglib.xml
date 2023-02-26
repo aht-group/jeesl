@@ -144,6 +144,10 @@
         <tag-name>ioUpload</tag-name>
         <source>jeeslPrototype/io/upload.xhtml</source>
     </tag>
+    <tag>
+        <tag-name>ioDownload</tag-name>
+        <source>jeeslPrototype/io/fr/download.xhtml</source>
+	</tag>
     
 	<tag>
         <tag-name>ioAttributeTableColumns</tag-name>

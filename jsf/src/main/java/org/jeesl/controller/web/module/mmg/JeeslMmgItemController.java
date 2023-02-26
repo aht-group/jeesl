@@ -49,7 +49,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 											MC extends JeeslMmgClassification<L,R,MC,?>,
 											MQ extends JeeslMmgQuality<L,D,MQ,?>,
 											FRS extends JeeslFileStorage<L,D,?,?,?>,
-											FRC extends JeeslFileContainer<FRS,?>,
+											FRC extends JeeslFileContainer<FRS,FRM>,
 											FRM extends JeeslFileMeta<D,FRC,?,?>,
 											USER extends JeeslSimpleUser>
 		extends AbstractJeeslWebController<L,D,LOC>
@@ -66,7 +66,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 	private final IoFileRepositoryFactoryBuilder<L,D,LOC,?,FRS,?,?,FRC,?,?,?,?,?> fbFile;
 	
 	protected final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
-	private JeeslFileRepositoryHandler<FRS,FRC,FRM> frh;
+	private JeeslFileRepositoryHandler<LOC,FRS,FRC,FRM> frh;
 	public long getFileSizeLimit() {return frh.getStorage().getFileSizeLimit();}
 	
 	private final List<MI> items; public List<MI> getItems() {return items;}
@@ -105,7 +105,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 		sbhLocale.setDefault();
 	}
 	
-	public void updateRealmReference(RREF rref, JeeslFileRepositoryHandler<FRS,FRC,FRM> frh)
+	public void updateRealmReference(RREF rref, JeeslFileRepositoryHandler<LOC,FRS,FRC,FRM> frh)
 	{
 		this.rref=rref;
 		this.frh=frh;

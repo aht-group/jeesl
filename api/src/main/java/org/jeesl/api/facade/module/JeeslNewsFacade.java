@@ -5,6 +5,7 @@ import java.util.List;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.news.JeeslNewsCategory;
 import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
 import org.jeesl.interfaces.model.module.news.JeeslNewsItem;
@@ -19,10 +20,11 @@ public interface JeeslNewsFacade <L extends JeeslLang, D extends JeeslDescriptio
 								R extends JeeslTenantRealm<L,D,R,?>,
 								FEED extends JeeslNewsFeed<L,D,R>,
 								CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
-								ITEM extends JeeslNewsItem<L,FEED,CATEGORY,USER,M>,
+								ITEM extends JeeslNewsItem<L,FEED,CATEGORY,USER,M,FRC>,
 								USER extends EjbWithId,
 								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
+								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+								FRC extends JeeslFileContainer<?,?>>
 			extends JeeslFacade
 {	
 	<OWNER extends JeeslWithNewsFeed<FEED>> FEED fNewsFeed(Class<OWNER> cOwner, OWNER owner) throws JeeslNotFoundException;

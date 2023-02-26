@@ -99,7 +99,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	protected final SbSingleHandler<CAT> sbhCategory; public SbSingleHandler<CAT> getSbhCategory() {return sbhCategory;}
 	private final SbSingleHandler<LOC> sbhLocale; public SbSingleHandler<LOC> getSbhLocale() {return sbhLocale;}
 	private final OpEntitySelectionHandler<LOC> opLocale; public OpEntitySelectionHandler<LOC> getOpLocale() {return opLocale;}
-	private JeeslFileRepositoryHandler<FS,FC,FM> hFileRepository; public JeeslFileRepositoryHandler<FS,FC,FM> gethFileRepository() {return hFileRepository;}
+	private JeeslFileRepositoryHandler<LOC,FS,FC,FM> hFileRepository; public JeeslFileRepositoryHandler<LOC,FS,FC,FM> gethFileRepository() {return hFileRepository;}
 
 	private final Map<E,Section> mapOfx; public Map<E, Section> getMapOfx() {return mapOfx;}
 
@@ -144,7 +144,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	protected void postConstructCms(JeeslTranslationBean<L,D,LOC> bTranslation, String currentLocaleCode,
 									List<LOC> locales, JeeslFacesMessageBean bMessage, JeeslCmsCacheBean<S,E> bCache,
 									JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fCms,
-									JeeslFileRepositoryHandler<FS,FC,FM> hFileRepository)
+									JeeslFileRepositoryHandler<LOC,FS,FC,FM> hFileRepository)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.bCache=bCache;

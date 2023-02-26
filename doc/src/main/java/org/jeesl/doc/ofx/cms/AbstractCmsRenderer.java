@@ -57,7 +57,7 @@ public abstract class AbstractCmsRenderer <L extends JeeslLang, D extends JeeslD
 	
 	protected final OfxTranslationProvider tp;
 	protected final JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fCms;
-	protected final JeeslFileRepositoryHandler<FS,FC,FM> frh;
+	protected final JeeslFileRepositoryHandler<LOC,FS,FC,FM> frh;
 	
 	private final JeeslCmsParagraphFactory<E,C> ofParagraph;
 	private final JeeslCmsStatusTableFactory<E,C> ofTableStatus;
@@ -65,7 +65,7 @@ public abstract class AbstractCmsRenderer <L extends JeeslLang, D extends JeeslD
 	private final JeeslCmsImageFactory<E,C,M,MT,FS,FC,FM> ofImage;
 	private final OfxSectionWorkflow<L,LOC,E> ofxWorkflow;
 	
-	public AbstractCmsRenderer(OfxTranslationProvider tp, JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fCms, JeeslFileRepositoryHandler<FS,FC,FM> frh)
+	public AbstractCmsRenderer(OfxTranslationProvider tp, JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fCms, JeeslFileRepositoryHandler<LOC,FS,FC,FM> frh)
 	{
 		this.tp=tp;
 		this.fCms = fCms;
