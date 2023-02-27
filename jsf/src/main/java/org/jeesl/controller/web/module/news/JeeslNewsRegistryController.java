@@ -167,8 +167,7 @@ public class JeeslNewsRegistryController <L extends JeeslLang, D extends JeeslDe
 	}
 
 	@Override public void callbackFrMetaSelected() {}
-	@Override
-	public void callbackFrContainerSaved(EjbWithId id) throws JeeslConstraintViolationException, JeeslLockingException
+	@Override public void callbackFrContainerSaved(EjbWithId id) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info("callbackFrContainerSaved: "+id.toString());}
 		item.setFrContainer(frh.getContainer());
