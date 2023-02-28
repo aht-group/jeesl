@@ -56,7 +56,6 @@ public class JeeslDbSeeds
 	
 	private static void applySystem(String prefix, Db db)
 	{
-		db.getSeed().add(XmlSeedFactory.build("SystemConstraintType",JeeslConstraintType.xmlResourceContainer));
 		db.getSeed().add(XmlSeedFactory.build("SystemConstraintLevel",JeeslConstraintLevel.xmlResourceContainer));
 		db.getSeed().add(XmlSeedFactory.build(prefix+"JobStatus","jeesl/db/system/job/status.xml"));
 		db.getSeed().add(XmlSeedFactory.build(prefix+"JobType","jeesl/db/system/job/type.xml"));

@@ -2,7 +2,7 @@ package org.jeesl.jsf.util.stream;
 
 import java.io.InputStream;
 
-import org.jeesl.interfaces.controller.report.JeeslDocReport;
+import org.jeesl.interfaces.controller.report.format.JeeslDocReport;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 

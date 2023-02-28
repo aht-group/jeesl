@@ -39,8 +39,10 @@ public class LatexConstraintWriter extends AbstractDocumentationLatexWriter
 		ofxMlw = new OfxMultiLangLatexWriter(baseDir,langs,cp);
 		
 		ofConstraint = new OfxConstraintScopeSectionFactory(config,langs,translations);
-		try{ofConstraint.setConstraintTypes(JaxbUtil.loadJAXB(JeeslConstraintType.xmlResourceContainer, Container.class));}
-		catch (FileNotFoundException e) {e.printStackTrace();}
+		logger.warn("Retrieve Constraint types");
+		
+//		try{ofConstraint.setConstraintTypes(JaxbUtil.loadJAXB(JeeslConstraintType.xmlResourceContainer, Container.class));}
+//		catch (FileNotFoundException e) {e.printStackTrace();}
 		
 	}
 	

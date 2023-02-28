@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.controller.report;
+package org.jeesl.interfaces.controller.report.format;
 
 import java.io.InputStream;
 

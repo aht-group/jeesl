@@ -7,7 +7,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintType;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
@@ -18,7 +17,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("systemConstraintType")
 @EjbErNode(name="Type",category="system",subset="mail",level=3)
-public class SystemConstraintType extends IoStatus implements JeeslConstraintLevel<IoLang,IoDescription,SystemConstraintType,IoGraphic>
+public class SystemConstraintType extends IoStatus implements JeeslConstraintType<IoLang,IoDescription,SystemConstraintType,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 

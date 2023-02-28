@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
-import org.jeesl.interfaces.controller.report.JeeslXlsReport;
+import org.jeesl.interfaces.controller.report.format.JeeslXlsReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.util.query.xpath.ReportXpath;
 import org.junit.Assert;

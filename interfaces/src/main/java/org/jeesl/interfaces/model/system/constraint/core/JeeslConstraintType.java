@@ -25,7 +25,7 @@ public interface JeeslConstraintType <L extends JeeslLang,D extends JeeslDescrip
 												EjbWithCodeGraphic<G>,
 												JeeslStatus<L,D,S>
 {
-	public static String xmlResourceContainer = "jeesl/db/system/constraint/type.xml";
+//	public static String xmlResourceContainer = "jeesl/db/system/constraint/type.xml";
 	
 	public static enum Code{unique,precondition};
 }

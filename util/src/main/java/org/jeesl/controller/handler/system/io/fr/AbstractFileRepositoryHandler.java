@@ -31,7 +31,7 @@ import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.system.io.mail.core.TxtMimeTypeFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
-import org.jeesl.interfaces.controller.report.JeeslZipReport;
+import org.jeesl.interfaces.controller.report.format.JeeslZipReport;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileReplication;

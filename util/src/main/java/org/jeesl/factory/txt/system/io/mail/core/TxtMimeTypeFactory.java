@@ -2,7 +2,7 @@ package org.jeesl.factory.txt.system.io.mail.core;
 
 import javax.activation.MimetypesFileTypeMap;
 
-import org.jeesl.interfaces.controller.report.JeeslPdfReport;
+import org.jeesl.interfaces.controller.report.format.JeeslPdfReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
