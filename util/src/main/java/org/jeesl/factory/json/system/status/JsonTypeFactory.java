@@ -24,6 +24,7 @@ public class JsonTypeFactory<L extends JeeslLang, D extends JeeslDescription,S e
 	public static JsonType build() {return new JsonType();}
 	public static <E extends Enum<E>> JsonType build(E code) {return build(code.toString());}
 	public static JsonType build(String code) {JsonType json=build(); json.setCode(code); return json;}
+	public static JsonType build(String code, String label) {JsonType json=build(code); json.setLabel(label); return json;}
 		
 	public JsonType build(S ejb)
 	{
