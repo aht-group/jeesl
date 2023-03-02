@@ -1,0 +1,33 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:jp="http://jsf.jeesl.org/prototype"
+    xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+>
+	<c:set var="bean" value="#{bean}" />
+	<c:set var="path"  value="#{path}" />
+	
+	<p:panel styleClass="jeesl-panel jeesl-galleria">
+		<h:panelGroup styleClass="jeesl-galleria-wrapper">
+			<ui:repeat var="image"
+				 	   value="#{bean.images}">
+				<h:panelGroup styleClass="jeesl-galleria-image-wrapper">
+					<div class="ui-panel-titlebar ui-widget-header ui-corner-all">
+						<h:outputLabel value="#{bean.mapDescription[image]}" styleClass="ui-panel-title"/>
+					</div>
+					<p:graphicImage value="#{path}#{image.code}" />
+				</h:panelGroup>
+			</ui:repeat>
+		</h:panelGroup>
+		<h:panelGroup styleClass="jeesl-galleria-filmstrip-wrapper">
+			<ui:repeat var="image"
+					   value="#{bean.images}">
+				<p:graphicImage value="#{path}#{image.code}" />
+			</ui:repeat>
+		</h:panelGroup>
+	</p:panel>
+</ui:composition>

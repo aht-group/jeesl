@@ -1154,6 +1154,10 @@ $border: $border-width solid $border-colour;
 	&.ui-icon-search:before {
 		content: $icon-search;
 	}
+	
+	&.ui-icon-plusthick:before {
+		content: $icon-plus;
+	}
 }
 
 .ui-colorpicker .ui-button .ui-button-text {

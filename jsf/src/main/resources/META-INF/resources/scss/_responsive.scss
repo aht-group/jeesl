@@ -503,38 +503,24 @@ $enable-pointer-cursor-for-buttons: true;
 @mixin jeesl-titlebar {
 	align-items: center;
 	background: $soft-grey linear-gradient(to bottom, $white-80, $white-0);
-	border: $border;
+	border-color: $dark-colour;
+	border-radius: $border-radius-top;
+	border-width: 0 0 $header-element-underline 0;
+	box-shadow: 0 -1px 0 inset $white-35;
 	color: $foreground;
 	display: flex;
 	flex-wrap: wrap;
 	font-weight: 700;
 	height: auto;
-	margin-bottom: $slim-spacing;
+	margin: 0;
 	min-height: $element-height;
 	padding: 0;
 	position: relative;
 	text-shadow: $text-shadow;
 	
 	@media (max-width: 768px) {
-		border-radius: $border-radius-top;
-		border-width: 0;
-		margin: 0 0 $header-element-underline 0;
+		border-bottom-width: $header-element-underline-mobile;
 		min-height: $element-height-mobile;
-	}
-	
-	&:after {
-		background: $dark-colour;
-		bottom: -$header-element-underline;
-		content: '';
-		display: none;
-		height: $header-element-underline;
-		margin-left: -$border-width;
-		position: absolute;
-		width: calc(100% + 2 * #{$border-width});
-		
-		@media (max-width: 768px) {
-			display: block;
-		}
 	}
 }
 
@@ -627,7 +613,12 @@ $enable-pointer-cursor-for-buttons: true;
 	.ui-datatable-header {
 		@include jeesl-titlebar;
 		
+		border-bottom: $header-element-underline solid $dark-colour; // Overriding primefaces selector.
 		margin-bottom: 0;
+		
+		@media (max-width: 768px) {
+			border-bottom-width: $header-element-underline-mobile;
+		}
 		
 		.pf-datatable-header-title {
 			@include jeesl-titlebar-title;
@@ -1072,9 +1063,11 @@ $enable-pointer-cursor-for-buttons: true;
 							padding: 0;
 							
 							.ui-tabs-panel {
+								margin-top: $header-element-underline;
+								
 								@media (max-width: 768px) {
 									padding: 0;
-									margin-top: $header-element-underline;
+									margin-top: $header-element-underline-mobile;
 								}
 								
 								.ui-inputtextarea {
@@ -1261,17 +1254,13 @@ $enable-pointer-cursor-for-buttons: true;
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 10px;
-	padding: $slim-spacing;
-	
-	@media (max-width: 768px) {
-		padding: 0;
-	}
+	padding: 0;
 	
 	&:not(.html-container-panel) .ui-panel-content {
 		background: transparent;
 		border: 0;
 		flex: 1;
-		padding: $half-spacing $regular-spacing;
+		padding: $regular-spacing $regular-spacing $half-spacing;
 		
 		.jeesl-construction-icon {
 			width: 100%;
@@ -1284,39 +1273,112 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
-	&.jeesl-gallery {
-		.ui-panel-titlebar {
-			left: $slim-spacing;
-			position: absolute;
-			top: $slim-spacing;
-			width: calc(100% - 2 * #{$slim-spacing});
-			
-			@media (max-width: 768px) {
-				left: 0;
-				position: relative;
-				top: 0;
-				width: 100%;
-			}
-		}
+	&.jeesl-galleria {
+		padding: 0;
 		
 		.ui-panel-content {
-			margin: -$slim-spacing;
 			padding: 0;
+			width: 100%;
 			
-			@media (max-width: 768px) {
-				margin: 0;
+			.jeesl-galleria-wrapper {
+				.jeesl-galleria-image-wrapper img {
+					width: 100%;
+				}
 			}
 			
-			> img {
-				width: 100%;
+			.jeesl-galleria-filmstrip-wrapper {
+				align-items: stretch;
+				background: $panel-header-gradient;
+				border-top: $border;
+				display: flex;
+				
+				.slick-list {
+					margin: $half-spacing;
+					
+					.slick-track {
+						display: flex;
+						
+						.slick-slide {
+							cursor: pointer;
+							height: auto;
+							margin: 0 #{$half-spacing / 2};
+						}
+					}
+				}
+				
+				.slick-prev, .slick-next {
+					align-items: center;
+					border-width: 0;
+					box-shadow: none;
+					display: flex;
+					flex-shrink: 0;
+					height: auto;
+					left: auto;
+					overflow: hidden;
+					padding: 0;
+					position: relative;
+					right: auto;
+					text-indent: 100%;
+					top: 0;
+					transform: none;
+					width: $element-height;
+	
+					@media (max-width: 768px) {
+						font-size: 2.5em;
+						width: $element-height-mobile;
+					}
+					
+					&:hover:after {
+						opacity: 1;
+					}
+					
+					&:before {
+						color: $body-foreground;
+						flex-shrink: 0;
+						font-family: 'Font Awesome 5 Free';
+						font-weight: 700;
+						opacity: 1;
+						text-indent: 0;
+						text-shadow: $text-shadow;
+						width: 100%;
+						z-index: 1;
+					}
+					
+					&:after {
+						content: '';
+					    position: absolute;
+					    top: 0;
+					    left: 0;
+					    width: 100%;
+					    height: 100%;
+					    background: $soft-grey;
+					    opacity: 0;
+					    transition: opacity $transition-duration ease-in-out;
+					    z-index: 0;
+					}
+				}
+				
+				.slick-prev {
+					border-right-width: $border-width;
+					
+					&:before {
+						content: "\f0d9";
+					}
+				}
+				
+				.slick-next {
+					border-left-width: $border-width;
+					
+					&:before {
+						content: "\f0da";
+					}
+				}
 			}
 		}
 	}
 	
 	&.jeesl-map {
 		.ui-panel-titlebar {
-			margin-bottom: 2 * $slim-spacing;
-			
 			+ .ui-panel-content {
 				border-radius: 0 0 $border-radius $border-radius;
 			}
@@ -1324,13 +1386,8 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.ui-panel-content {
 			border-radius: $border-radius;
-			margin: -$slim-spacing;
 			overflow: hidden;
 			padding: 0 !important;
-			
-			@media (max-width: 768px) {
-				margin: 0;
-			}
 		}
 	}
 	
@@ -2876,186 +2933,6 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-galleria {
-	align-items: stretch;
-	background: $panel-background;
-	display: flex;
-	flex-wrap: wrap;
-	width: 100% !important;
-	
-	.ui-galleria-caption {
-		@include jeesl-titlebar;
-		
-		align-items: flex-start;
-	    bottom: unset !important;
-		border-radius: $border-radius;
-		flex-direction: column;
-		height: auto !important;
-		justify-content: center;
-		order: 0;
-		position: absolute;
-		top: $slim-spacing;
-	    width: calc(100% - #{2 * $slim-spacing}) !important;
-		z-index: 10;
-
-		@media (max-width: 768px) {
-			left: 0;
-			margin-bottom: $header-element-underline !important;
-			overflow: visible !important;
-			position: relative;
-			top: 0;
-			width: 100% !important;
-		}
-
-		> * {
-			margin: 0;
-		}
-
-		> h4 {
-			@include jeesl-titlebar-title;
-		}
-		
-		> p {
-			padding: 0 $regular-spacing;
-		}
-	}
-	
-	.ui-galleria-panel-wrapper {
-		aspect-ratio: 3/2;
-		height: auto !important;
-		order: 1;
-		width: 100% !important;
-	
-		.ui-galleria-panel {
-			height: 100% !important;
-			width: 100% !important;
-			
-//			.jeesl-galleria-image-wrapper {
-//				align-items: center;
-//				display: flex;
-//				height: 100%;
-//				justify-content: center;
-//				width: 100%;
-				
-				img {
-					max-height: 100%;
-					max-width: 100%;
-				}
-//			}
-		}
-	}
-	
-	.ui-galleria-filmstrip-wrapper {
-		background: $panel-header-gradient;
-		border-top: $border;
-		flex-grow: 1;
-		height: calc(40px + #{2 * $half-spacing});
-		margin: 0;
-		order: 3;
-		padding: $half-spacing $element-height;
-		width: auto !important;
-		
-		.ui-galleria-filmstrip {
-			display: flex;
-			height: calc(100% - #{2 * $half-spacing});
-			left: $element-height;
-			top: $half-spacing;
-			
-			.ui-galleria-frame {
-				aspect-ratio: 3/2;
-				height: 100% !important;
-				width: auto !important;
-				
-				.ui-galleria-frame-content {
-					height: 100% !important;
-					width: 100% !important;
-					
-					.ui-galleria-frame-image {
-						height: 100% !important;
-						width: 100% !important;
-					}
-				}
-			}
-		}
-	}
-	
-	.ui-icon {
-		@include icon;
-		
-		align-items: center;
-		background: $panel-header-gradient;
-		border-top: $border;
-		bottom: 0 !important;
-		display: flex;
-		justify-content: center;
-		width: $element-height;
-		
-		@media (max-width: 768px) {
-			width: $element-height-mobile;
-		}
-		
-		&:hover:before {
-			opacity: 1;
-		}
-		
-		&:before {
-			@include background-overlay($soft-grey);
-			
-//			background: $soft-grey;
-//			content: '';
-			font-size: 1.1em;
-//			height: 100%;
-//			left: 0;
-//			opacity: 0;
-//			position: absolute;
-//			top: 0;
-//			transition: opacity $transition-duration linear;
-//			width: 100%;
-			
-			@media (max-width: 768px) {
-				font-size: 1.8em;
-			}
-		}
-		
-		&:after {
-			align-items: center;
-			display: flex;
-			height: calc(100% - 13px);
-			justify-content: center;
-			margin: 7px 0 6px;
-			position: relative;
-			text-align: center;
-			width: 100%;
-		}
-	}
-	
-	.ui-galleria-nav-prev {
-		left: 0;
-		order: 2;
-		
-		&:after {
-			content: '\f0d9';
-			
-			@media (max-width: 768px) {
-				border-right: $border;
-			}
-		}
-	}
-	
-	.ui-galleria-nav-next {
-		order: 4;
-		right: 0;
-		
-		&:after {
-			content: '\f0da';
-			
-			@media (max-width: 768px) {
-				border-left: $border;
-			}
-		}
-	}
-}
-
 .jeesl-panel {
 	@include jeesl-panel;
 }
@@ -3080,10 +2957,15 @@ body, .ui-widget {
 	margin-bottom: $regular-spacing;
 	
 	.ui-fieldset-legend {
-		@include jeesl-titlebar;
+		@include button;
 		
+		align-items: center;
+		display: flex;
 		font-size: 1em;
+		justify-content: center;
+		margin: 0;
 		padding: 0 $regular-spacing;
+		position: relative;
 		transition: background .2s linear, color .2s linear;
 		
 		@media (max-width: 768px) {
@@ -3095,31 +2977,13 @@ body, .ui-widget {
 			}
 		}
 		
-		&.ui-state-focus {
-			background: $panel-header-gradient;
-			border: $border;
-			box-shadow: none;
-		}
-		
-		&.ui-state-hover {
-			background: $highlight-colour;
-			border-color: $dark-colour;
-			box-shadow: none;
-			color: $white-100;
-			text-shadow: none;
-		}
-		
 		.ui-fieldset-toggler {
 			@include icon;
 			
 			margin-right: $half-spacing;
 			
 			&:before {
-				content: "\f067";
-				
-				@media (max-width: 768px) {
-					font-size: 1em;
-				}
+				font-size: 1em;
 			}
 		}
 	}
@@ -3202,6 +3066,7 @@ body, .ui-widget {
 		
 		thead th {
 			border-top: 0;
+			box-shadow: 0 -1px 0 inset $white-35;
 			
 			&.jeesl-column-min-width {
 				white-space: nowrap;
@@ -3302,15 +3167,11 @@ body, .ui-widget {
 		}
 	}
 	
-	.ui-datatable-header {
-		border: none;
-		border-bottom: $border-width solid $border-colour;
-	}
-	
 	.ui-paginator {
 		align-items: center;
 		border: $border;
 		border-width: $border-width 0 0;
+		box-shadow: 0 -1px 0 inset $white-35;
 		display: flex;
 		flex-wrap: wrap;
 		min-height: $element-height;
@@ -3533,7 +3394,9 @@ body, .ui-widget {
 			}
 			
 			form {
-				margin-bottom: $regular-spacing;
+				&:not(:last-child) {
+					margin-bottom: $regular-spacing;
+				}
 				
 				.jeesl-panel .jeesl-form-button {
 					margin-top: $regular-spacing;
