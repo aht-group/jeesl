@@ -145,7 +145,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 					}
 					else
 					{
-						JSON json = JsonUtil.read(data.getJson(),this.getClassJson());
+						JSON json = JsonUtil.read(this.getClassJson(),data.getJson());
 						updateData(data,json);
 					}
 				}
@@ -172,7 +172,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 				{
 					if(!data.getLink().equals(cacheLink.ejb(JeeslIoSsiLink.Code.linked)))
 					{
-						evaluate(data,JsonUtil.read(data.getJson(),this.getClassJson()));
+						evaluate(data,JsonUtil.read(this.getClassJson(),data.getJson()));
 					}
 				}
 				catch (IOException e) {e.printStackTrace();}
@@ -193,7 +193,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 			
 			if(data.getLink().equals(cacheLink.ejb(JeeslIoSsiLink.Code.possible)))
 			{
-				try {importData(data,JsonUtil.read(data.getJson(),this.getClassJson()));}
+				try {importData(data,JsonUtil.read(this.getClassJson(),data.getJson()));}
 				catch (IOException | JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e){e.printStackTrace();}
 			}
 		}

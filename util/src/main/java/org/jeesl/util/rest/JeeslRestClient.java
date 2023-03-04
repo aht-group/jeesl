@@ -77,7 +77,7 @@ public class JeeslRestClient
 //		logger.info(url);
 		HttpResponse httpRespnse = client.execute(httpGet,context);
 //		logger.info("Result: "+EntityUtils.toString(httpRespnse.getEntity()));
-		return JsonUtil.read(EntityUtils.toString(httpRespnse.getEntity(),"UTF-8"),c);
+		return JsonUtil.read(c,EntityUtils.toString(httpRespnse.getEntity(),"UTF-8"));
 	}
 	
 	private <T extends Object> T json(int counter, Class<T> c, String url) throws ClientProtocolException, IOException
@@ -103,7 +103,7 @@ public class JeeslRestClient
 		}
 		else
 		{
-			return JsonUtil.read(EntityUtils.toString(httpRespnse.getEntity(),"UTF-8"),c);
+			return JsonUtil.read(c,EntityUtils.toString(httpRespnse.getEntity(),"UTF-8"));
 		}		
 	}
 }

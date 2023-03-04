@@ -11,6 +11,8 @@
 		<composite:attribute name="entity" required="false"/>
 		<composite:attribute name="code" required="false"/>
 		<composite:attribute name="link" required="false" default=""/>
+		<composite:attribute name="suffix" required="false"/>
+		
 		<composite:facet name="header" required="false"/>
 	</composite:interface>
         
@@ -29,7 +31,9 @@
 					<h:outputText value="#{titleText}"/>
 				</h:outputLink>
         	</c:if>
-        	
+        	<c:if test="#{not empty cc.attrs.suffix}">
+        		<h:outputText value=" #{cc.attrs.suffix}"/>
+        	</c:if>
         </c:if>
         <c:if test="#{not empty cc.facets.header}">
 			<composite:renderFacet name="header"/>

@@ -25,6 +25,11 @@ public class JsonProgram implements Serializable
 	public String getCode() {return code;}
 	public void setCode(String code) {this.code = code;}
 	
+	@JsonProperty("visible")
+	private Boolean visible;
+	public Boolean getVisible() {return visible;}
+	public void setVisible(Boolean visible) {this.visible = visible;}
+
 	@JsonProperty("label")
 	private String label;
 	public String getLabel() {return label;}

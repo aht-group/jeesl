@@ -1,6 +1,7 @@
 package org.jeesl.interfaces.util.query;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
@@ -50,4 +51,8 @@ public interface JeeslQuery extends Serializable
 	
 	String getString3();
 	void setString3(String string3);
+	
+	LocalDate getLd1();
+	LocalDate getLd2();
+	LocalDate getLd3();
 }

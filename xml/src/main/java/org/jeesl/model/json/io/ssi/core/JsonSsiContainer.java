@@ -18,6 +18,11 @@ public class JsonSsiContainer implements Serializable
 	public List<JsonSsiVersion> getVersions() {return versions;}
 	public void setVersions(List<JsonSsiVersion> versions) {this.versions = versions;}
 
+	@JsonProperty("credentials")
+	private List<JsonSsiCredential> credentials;
+	public List<JsonSsiCredential> getCredentials() {return credentials;}
+	public void setCredentials(List<JsonSsiCredential> credentials) {this.credentials = credentials;}
+	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();	

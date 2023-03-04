@@ -145,7 +145,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 //		logger.info("List: "+AbstractLogMessage.reloaded(cJson, datas));
 		for(DATA d : datas)
 		{	
-			try {mapData.put(d,JsonUtil.read(d.getJson(), cJson));}
+			try {mapData.put(d,JsonUtil.read(cJson,d.getJson()));}
 			catch (IOException e) {e.printStackTrace();}
 		}
 		
