@@ -330,11 +330,11 @@ $border: $border-width solid $border-colour;
 	}
 	
 	.ui-icon-circle-triangle-e:before {
-		content: "\25ba";
+		content: $icon-next;
 	}
 	
 	.ui-icon-circle-triangle-w:before {
-		content: "\25c4";
+		content: $icon-previous;
 	}
 }
 

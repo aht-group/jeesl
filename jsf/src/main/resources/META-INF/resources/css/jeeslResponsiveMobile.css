@@ -693,8 +693,6 @@ html, body, .ui-widget {
   border-width: 0;
   margin: 0 0 4px 0;
   min-height: 84px; }
-  .jeesl-panel .ui-panel-titlebar:after {
-    display: block; }
   .jeesl-panel .ui-panel-titlebar .ui-panel-title {
     font-size: 1.4em;
     letter-spacing: -.5px;
@@ -723,8 +721,6 @@ html, body, .ui-widget {
   border-width: 0;
   margin: 0 0 4px 0;
   min-height: 84px; }
-  .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
-    display: block; }
   .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
     font-size: 1.4em;
     letter-spacing: -.5px;
@@ -826,7 +822,7 @@ html, body, .ui-widget {
             min-height: 69px; }
       .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-tabs .ui-tabs-panels .ui-tabs-panel {
         padding: 0;
-        margin-top: 2px; }
+        margin-top: 4px; }
 .jeesl-panel .ui-panel-content .ui-galleria {
   margin: -5px -15px -10px;
   max-width: calc(100% + (2 * 15px));
@@ -854,8 +850,6 @@ html, body, .ui-widget {
   border-width: 0;
   margin: 0 0 4px 0;
   min-height: 84px; }
-  .jeesl-datatable .ui-datatable-header:after {
-    display: block; }
   .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
     font-size: 1.4em;
     letter-spacing: -.5px;
@@ -956,8 +950,6 @@ html, body, .ui-widget {
   border-width: 0;
   margin: 0 0 4px 0;
   min-height: 84px; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar:after {
-    display: block; }
   .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-title {
     font-size: 1.4em;
     letter-spacing: -.5px;
@@ -986,8 +978,6 @@ html, body, .ui-widget {
   border-width: 0;
   margin: 0 0 4px 0;
   min-height: 84px; }
-  .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header:after {
-    display: block; }
   .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
     font-size: 1.4em;
     letter-spacing: -.5px;
@@ -1089,7 +1079,7 @@ html, body, .ui-widget {
             min-height: 69px; }
       .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-tabs .ui-tabs-panels .ui-tabs-panel {
         padding: 0;
-        margin-top: 2px; }
+        margin-top: 4px; }
 .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-galleria {
   margin: -5px -15px -10px;
   max-width: calc(100% + (2 * 15px));
@@ -1111,8 +1101,6 @@ html, body, .ui-widget {
   margin: 0 0 4px 0;
   min-height: 84px;
   pointer-events: none; }
-  .ui-dialog .ui-dialog-titlebar:after {
-    display: block; }
   .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-title {
     font-size: 1.4em;
     letter-spacing: -.5px;
@@ -1195,8 +1183,6 @@ html, body, .ui-widget {
     min-height: 84px;
     padding-top: 3px !important; }
     .jeesl-tabs .ui-tabs-nav:after {
-      display: block; }
-    .jeesl-tabs .ui-tabs-nav:after {
       margin-left: -3px;
       width: 100%; }
     .jeesl-tabs .ui-tabs-nav .ui-tabs-header {
@@ -1252,8 +1238,6 @@ html, body, .ui-widget {
   margin: 0 0 4px 0;
   min-height: 84px;
   border-width: 1px 1px 0; }
-  .fc .fc-head:after {
-    display: block; }
   .fc .fc-head .fc-head-container .fc-row .fc-day-header {
     height: 84px; }
     .fc .fc-head .fc-head-container .fc-row .fc-day-header > span {
@@ -1296,9 +1280,7 @@ html, body, .ui-widget {
       letter-spacing: -.5px;
       padding: 5px 10px;
       margin: -15px;
-      margin-bottom: 17px; }
-      .html-container-panel .html-container > div > section h1:first-child:after {
-        display: block; }
+      margin-bottom: 19px; }
 
 .pf-action-icon img {
   height: 84px; }
