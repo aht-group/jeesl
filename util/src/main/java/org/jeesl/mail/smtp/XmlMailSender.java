@@ -31,7 +31,6 @@ public class XmlMailSender extends AbstractMailSender
 	
 	private FreemarkerEngine fme;
 	
-	@Deprecated
 	public XmlMailSender(String smtpHost)
 	{
 		this(null,smtpHost);
