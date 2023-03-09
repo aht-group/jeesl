@@ -17,51 +17,30 @@
 		<composite:attribute name="tooltip" required="false"/>
 		<composite:attribute name="immediate" required="false" default="false"/>
 		<composite:attribute name="library" required="false" default="gfx" shortDescription="The library attribute which is passed to h:graphicImage, can be empty for JEESL icons. Project specific icons can be overridden here or centrally in AppIconBean."/>
-		<composite:attribute name="dialogHdr" required="false" default="#{appLabelBean.descriptions['JeeslCrudDialog']['confirmDialogHeader'][localeCode].lang}"/>
-		<composite:attribute name="dialogMsg" required="false" default="#{appLabelBean.descriptions['JeeslCrudDialog']['confirmDialogMessage'][localeCode].lang}"/>
+		<composite:attribute name="dialogHdr" required="false" default="#{msg.jeeslConfirmDialogDefaultHeader}"/>
+		<composite:attribute name="dialogMsg" required="false" default="#{msg.jeeslConfirmDialogDefaultMsg}"/>
 	</composite:interface>
 
 	<composite:implementation>
-	    <c:if test="#{not cc.attrs.blocks}">
-	    	 <p:commandLink id="link" 
-						   	   update="#{cc.attrs.update}"
+		<p:commandLink id="link"  styleClass="#{cc.attrs.styleClass}" type="button" onclick="PF('cdc').show()">
+			<h:graphicImage id="image2"
+							rendered="#{not cc.attrs.disabled}"
+							library="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type] }"
+							name="#{appIconBean.svg[cc.attrs.type]}">
+				<f:attribute name="height" value="12"/>
+			</h:graphicImage>
+		</p:commandLink>
+		<p:confirmDialog severity="alert" widgetVar="cdc"
+						header="#{cc.attrs.dialogHdr}" 
+						message="#{cc.attrs.dialogMsg}">
+			<p:commandButton value="#{msg.jeeslConfirmDialogYes}"  oncomplete="PF('cdc').hide();#{cc.attrs.oncomplete}"
+							   update="#{cc.attrs.update}"
 						   	   actionListener="#{cc.listener}"
 						   	   process="#{cc.attrs.process}" 
 						   	   onstart="#{cc.attrs.onstart}"
-						   	   oncomplete="#{cc.attrs.oncomplete}"
 							   styleClass="#{cc.attrs.styleClass}"
-						   	   immediate="#{cc.attrs.immediate}">
-					<h:graphicImage id="image2"
-									rendered="#{not cc.attrs.disabled}"
-									library="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type] }"
-									name="#{appIconBean.svg[cc.attrs.type]}">
-						<f:attribute name="height" value="12"/>
-					</h:graphicImage>
-					<p:tooltip for="image2" rendered="#{not empty cc.attrs.tooltip}" value="#{cc.attrs.tooltip}" showDelay="1500" hideEvent="mouseleave click"/>
-					<p:confirm header="#{cc.attrs.dialogHdr}" message="#{cc.attrs.dialogMsg}" icon="pi pi-exclamation-triangle"/>
-			</p:commandLink>
-		</c:if>
-		<c:if test="#{cc.attrs.blocks}">
-			<p:commandLink id="link" 
-						   update="#{cc.attrs.update}"
-						   actionListener="#{cc.listener}"
-						   process="#{cc.attrs.process}" 
-						   onstart="#{cc.attrs.onstart};document.getElementById('#{cc.clientId}:image').style.visibility='hidden';"
-						   oncomplete="#{cc.attrs.oncomplete};document.getElementById('#{cc.clientId}:image').style.visibility='visible';"
-						   styleClass="#{cc.attrs.styleClass}"
-						   immediate="#{cc.attrs.immediate}">
-				   
-				<h:graphicImage id="image"
-								rendered="#{not cc.attrs.disabled}"
-								library="#{empty appIconBean.library[cc.attrs.type] ? cc.attrs.library : appIconBean.library[cc.attrs.type] }"
-								name="#{appIconBean.svg[cc.attrs.type]}">
-					<f:attribute name="height" value="12"/>
-				</h:graphicImage>
-				<p:tooltip rendered="#{not empty cc.attrs.tooltip}" for="image" value="#{cc.attrs.tooltip}" hideEvent="mouseleave click"/>
-				<p:confirm header="#{cc.attrs.dialogHdr}" message="#{cc.attrs.dialogMsg}" icon="pi pi-exclamation-triangle"/>
-			</p:commandLink>
-
-			
-	    </c:if>
+						   	   immediate="#{cc.attrs.immediate}"/>
+			<p:commandButton value="#{msg.jeeslConfirmDialogNo}" onclick="PF('cdc').hide();" type="button" />
+		</p:confirmDialog>
 	</composite:implementation>
 </html>
