@@ -28,39 +28,35 @@ import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 public abstract class SecurityUser  implements EjbWithId,EjbWithEmail,JeeslSimpleUser
 {
 	public static final long serialVersionUID=1;
-	
+
+
 	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SequenceUser")
 	protected long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	@NotNull @Column(unique=true)
 	protected String email;
 	@Override public String getEmail() {return email;}
 	@Override public void setEmail(String email) {this.email = email;}
-	
-	
+
 	protected String firstName;
 	@Override public String getFirstName() {return firstName;}
 	@Override public void setFirstName(String firstName) {this.firstName = firstName;}
-	
+
 	protected String lastName;
 	@Override public String getLastName() {return lastName;}
 	@Override public void setLastName(String lastName) {this.lastName = lastName;}
-	
-	
-	protected String pwd;
-	 public String getPwd() {return pwd;}
-	 public void setPwd(String pwd) {this.pwd = pwd;}
-	
-	private String salt;
-	 public String getSalt() {return salt;}
-	 public void setSalt(String salt) {this.salt = salt;}
-	
-	private Boolean permitLogin;
-	 public Boolean getPermitLogin() {return permitLogin;}
-	 public void setPermitLogin(Boolean permitLogin) {this.permitLogin = permitLogin;}
-	
-//	public abstract void test();
 
+	protected String pwd;
+	public String getPwd() {return pwd;}
+	public void setPwd(String pwd) {this.pwd = pwd;}
+
+	private String salt;
+	public String getSalt() {return salt;}
+	public void setSalt(String salt) {this.salt = salt;}
+
+	private Boolean permitLogin;
+	public Boolean getPermitLogin() {return permitLogin;}
+	public void setPermitLogin(Boolean permitLogin) {this.permitLogin = permitLogin;}
 }

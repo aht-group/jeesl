@@ -70,11 +70,11 @@ public class IoGraphicComponent implements JeeslGraphicComponent<IoGraphic,IoGra
 	@Override public double getRotation() {return rotation;}
 	@Override public void setRotation(double rotation) {this.rotation = rotation;}
 
-	
+
 	@Override public boolean equals(Object object){return (object instanceof IoGraphicComponent) ? id == ((IoGraphicComponent) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(35,39).append(id).toHashCode();}
 	
-	public String toString()
+	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append(id);
