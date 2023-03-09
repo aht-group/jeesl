@@ -15,6 +15,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 public class IoLang implements JeeslLang
 {
 	public static final long serialVersionUID=1;
+	public enum Attributes {lkey,lang}
+	public static String fiMulitLang = "name[localeCode].lang";
+
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
