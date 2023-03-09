@@ -52,6 +52,15 @@ $overlay-box-shadow: 0 5px 10px $black-80;
 
 $colour-spectrum: linear-gradient(to bottom, #ff0000 0%, #ff00ff calc(100%/6), #0000ff calc(200%/6), #00ffff calc(300%/6), #00ff00 calc(400%/6), #ffff00 calc(500%/6), #ff0000 100%);
 
+$header-shadow: 0 -1px 0 inset $white-35;
+$header-underline: 2px solid $dark-colour;
+
+@mixin simplifyHeader() {
+	$header-shadow: none;
+	$header-underline: $border-width solid $border-colour;
+}
+
+
 @mixin setColours($brighter, $bright, $medium, $dark, $darker) {
 	$brighter-colour: $brighter;
 	$bright-colour: $bright;
@@ -67,6 +76,7 @@ $colour-spectrum: linear-gradient(to bottom, #ff0000 0%, #ff00ff calc(100%/6), #
 	$status-bar-background-gradient: linear-gradient(to bottom, $dark-colour, $medium-colour);
 	
 	$highlight-colour: $bright-colour;
+	$header-underline: 2px solid $dark-colour;
 }
 
 @mixin setHighlightColour($highlight) {

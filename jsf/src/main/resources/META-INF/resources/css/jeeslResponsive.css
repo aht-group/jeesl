@@ -4166,9 +4166,9 @@ body, .ui-widget {
   .jeesl-panel .ui-panel-titlebar {
     align-items: center;
     background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-    border-color: #00663a;
     border-radius: 3px 3px 0 0;
-    border-width: 0 0 2px 0;
+    border: none;
+    border-bottom: 2px solid #00663a;
     box-shadow: 0 -1px 0 inset rgba(255, 255, 255, 0.35);
     color: #333333;
     display: flex;
@@ -4384,9 +4384,9 @@ body, .ui-widget {
     .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
       align-items: center;
       background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-      border-color: #00663a;
       border-radius: 3px 3px 0 0;
-      border-width: 0 0 2px 0;
+      border: none;
+      border-bottom: 2px solid #00663a;
       box-shadow: 0 -1px 0 inset rgba(255, 255, 255, 0.35);
       color: #333333;
       display: flex;
@@ -4397,9 +4397,7 @@ body, .ui-widget {
       min-height: 22px;
       padding: 0;
       position: relative;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-      border-bottom: 2px solid #00663a;
-      margin-bottom: 0; }
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
       @media (max-width: 768px) {
         .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
           border-bottom-width: 4px;
@@ -5066,9 +5064,9 @@ body, .ui-widget {
   .jeesl-datatable .ui-datatable-header {
     align-items: center;
     background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-    border-color: #00663a;
     border-radius: 3px 3px 0 0;
-    border-width: 0 0 2px 0;
+    border: none;
+    border-bottom: 2px solid #00663a;
     box-shadow: 0 -1px 0 inset rgba(255, 255, 255, 0.35);
     color: #333333;
     display: flex;
@@ -5079,9 +5077,7 @@ body, .ui-widget {
     min-height: 22px;
     padding: 0;
     position: relative;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-    border-bottom: 2px solid #00663a;
-    margin-bottom: 0; }
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
     @media (max-width: 768px) {
       .jeesl-datatable .ui-datatable-header {
         border-bottom-width: 4px;
@@ -5590,9 +5586,9 @@ body, .ui-widget {
       .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar {
         align-items: center;
         background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-        border-color: #00663a;
         border-radius: 3px 3px 0 0;
-        border-width: 0 0 2px 0;
+        border: none;
+        border-bottom: 2px solid #00663a;
         box-shadow: 0 -1px 0 inset rgba(255, 255, 255, 0.35);
         color: #333333;
         display: flex;
@@ -5808,9 +5804,9 @@ body, .ui-widget {
         .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
           align-items: center;
           background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-          border-color: #00663a;
           border-radius: 3px 3px 0 0;
-          border-width: 0 0 2px 0;
+          border: none;
+          border-bottom: 2px solid #00663a;
           box-shadow: 0 -1px 0 inset rgba(255, 255, 255, 0.35);
           color: #333333;
           display: flex;
@@ -5821,9 +5817,7 @@ body, .ui-widget {
           min-height: 22px;
           padding: 0;
           position: relative;
-          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-          border-bottom: 2px solid #00663a;
-          margin-bottom: 0; }
+          text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7); }
           @media (max-width: 768px) {
             .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
               border-bottom-width: 4px;
@@ -6417,9 +6411,9 @@ body, .ui-widget {
   .ui-dialog .ui-dialog-titlebar {
     align-items: center;
     background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-    border-color: #00663a;
     border-radius: 3px 3px 0 0;
-    border-width: 0 0 2px 0;
+    border: none;
+    border-bottom: 2px solid #00663a;
     box-shadow: 0 -1px 0 inset rgba(255, 255, 255, 0.35);
     color: #333333;
     display: flex;
@@ -6681,9 +6675,9 @@ body, .ui-widget {
   .jeesl-tabs .ui-tabs-nav {
     align-items: center;
     background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-    border-color: #00663a;
     border-radius: 3px 3px 0 0;
-    border-width: 0 0 2px 0;
+    border: none;
+    border-bottom: 2px solid #00663a;
     box-shadow: 0 -1px 0 inset rgba(255, 255, 255, 0.35);
     color: #333333;
     display: flex;
@@ -6859,9 +6853,9 @@ body, .ui-widget {
 .fc .fc-head {
   align-items: center;
   background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-  border-color: #00663a;
   border-radius: 3px 3px 0 0;
-  border-width: 0 0 2px 0;
+  border: none;
+  border-bottom: 2px solid #00663a;
   box-shadow: 0 -1px 0 inset rgba(255, 255, 255, 0.35);
   color: #333333;
   display: flex;
@@ -7053,9 +7047,9 @@ body, .ui-widget {
       .html-container-panel .html-container > div > section > h1:first-child {
         align-items: center;
         background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-        border-color: #00663a;
         border-radius: 3px 3px 0 0;
-        border-width: 0 0 2px 0;
+        border: none;
+        border-bottom: 2px solid #00663a;
         box-shadow: 0 -1px 0 inset rgba(255, 255, 255, 0.35);
         color: #333333;
         display: flex;
