@@ -503,10 +503,12 @@ $enable-pointer-cursor-for-buttons: true;
 @mixin jeesl-titlebar {
 	align-items: center;
 	background: $soft-grey linear-gradient(to bottom, $white-80, $white-0);
-	border-color: $dark-colour;
+//	border-color: $dark-colour;
 	border-radius: $border-radius-top;
-	border-width: 0 0 $header-element-underline 0;
-	box-shadow: 0 -1px 0 inset $white-35;
+//	border-width: 0 0 $header-element-underline 0;
+	border: none;
+	border-bottom: $header-underline;
+	box-shadow: $header-shadow;
 	color: $foreground;
 	display: flex;
 	flex-wrap: wrap;
@@ -613,8 +615,8 @@ $enable-pointer-cursor-for-buttons: true;
 	.ui-datatable-header {
 		@include jeesl-titlebar;
 		
-		border-bottom: $header-element-underline solid $dark-colour; // Overriding primefaces selector.
-		margin-bottom: 0;
+//		border-bottom: $header-element-underline solid $dark-colour; // Overriding primefaces selector.
+//		margin-bottom: 0;
 		
 		@media (max-width: 768px) {
 			border-bottom-width: $header-element-underline-mobile;
