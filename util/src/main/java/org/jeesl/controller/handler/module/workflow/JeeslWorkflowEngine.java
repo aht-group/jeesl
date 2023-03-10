@@ -221,6 +221,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		workflow = fbWorkflow.ejbWorkflow().build(process);
 
 		WT transition = fWorkflow.fTransitionBegin(process);
+		if(Objects.isNull(transition)) {logger.info("No Begin-Transition defined!");}
 		workflow.setCurrentStage(transition.getDestination());
 		if(debugOnInfo) {logger.info("Using transition: "+transition.toString());}
 

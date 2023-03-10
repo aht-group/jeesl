@@ -28,6 +28,7 @@
 		<module>prototype</module>
 		
 		<module>io-locale</module>
+		<module>io-cms</module>
 		<module>io-crypto</module>
 		<module>io-mail</module>
 		<module>io-fr</module>
