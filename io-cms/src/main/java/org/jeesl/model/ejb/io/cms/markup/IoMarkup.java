@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 
 @Entity
-@Table(name="LocaleMarkup")
+@Table(name="IoMarkup")
 public class IoMarkup implements JeeslMarkup<IoMarkupType>
 {
 	public static final long serialVersionUID=1;

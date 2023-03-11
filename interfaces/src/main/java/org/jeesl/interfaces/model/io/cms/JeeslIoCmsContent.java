@@ -11,8 +11,8 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 public interface JeeslIoCmsContent<V extends JeeslIoCmsVisiblity,
 								E extends JeeslIoCmsElement<V,?,?,?,?,?>,
 								MT extends JeeslIoCmsMarkupType<?,?,MT,?>>
-		extends Serializable,EjbPersistable,
-					EjbWithId,EjbSaveable,EjbRemoveable,EjbWithParentAttributeResolver
+		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
+					EjbWithId,EjbWithParentAttributeResolver
 {	
 	public enum Attributes{element}
 	
