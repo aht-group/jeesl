@@ -18,6 +18,7 @@ public class IoMarkup implements JeeslMarkup<IoMarkupType>
 {
 	public static final long serialVersionUID=1;
 
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}
@@ -37,7 +38,8 @@ public class IoMarkup implements JeeslMarkup<IoMarkupType>
 	private IoMarkupType type;
 	@Override public IoMarkupType getType() {return type;}
 	@Override public void setType(IoMarkupType type) {this.type = type;}
-	
+
+
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
