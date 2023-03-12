@@ -85,14 +85,14 @@ public class TenantStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemov
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
-	@JoinTable(name="IoStatusMcsJtLang",joinColumns={@JoinColumn(name="status_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@JoinTable(name="TenantStatusJtLang",joinColumns={@JoinColumn(name="status_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	protected Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {if(name==null){name=new HashMap<String,IoLang>();}return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
-	@JoinTable(name="IoStatusMcsJtDescription",joinColumns={@JoinColumn(name="status_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@JoinTable(name="TenantStatusJtDescription",joinColumns={@JoinColumn(name="status_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	protected Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
