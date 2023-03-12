@@ -49,6 +49,7 @@ public class TenantStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemov
 {
 	private static final long serialVersionUID = 1;
 
+
 	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SequenceTenantStatus")
 	protected long id;
 	@Override public long getId() {return id;}
@@ -105,13 +106,13 @@ public class TenantStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemov
 	protected String style;
 	@Override public String getStyle() {return style;}
 	@Override public void setStyle(String style) {this.style=style;}
-	
+
 	@ManyToOne
 	protected TenantStatus parent;
 	@SuppressWarnings("unchecked")
 	public <P extends EjbWithCode> P getParent() {return (P)parent;}
 	public <P extends EjbWithCode> void setParent(P parent) {this.parent=(TenantStatus)parent;}
-	
+
 
 	public String getImage() {return null;}
 	public void setImage(String image) {}
@@ -120,8 +121,7 @@ public class TenantStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemov
 	public void setImageAlt(String image) {}
 
 
-	@Override
-	public String toString()
+	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append(id);
