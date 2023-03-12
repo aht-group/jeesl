@@ -8,9 +8,9 @@
     	<version>0.3.0-SNAPSHOT</version>
 	</parent>
 	
-    <artifactId>jeesl-system-bookmark</artifactId>
+    <artifactId>jeesl-system-tenant</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - System Bookmark</name>
+    <name>JEESL - System Tenant</name>
 	
 	<dependencyManagement>
 		<dependencies>
