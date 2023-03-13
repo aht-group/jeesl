@@ -40,6 +40,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-api</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
     		<scope>provided</scope>
 		</dependency>
@@ -71,6 +76,24 @@
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+  			<groupId>org.jboss.spec.javax.ws.rs</groupId>
+  			<artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+  			<scope>provided</scope>
+  		</dependency>
+		
+		<!-- JSON -->
+   	   	<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+		   <groupId>com.fasterxml.jackson.datatype</groupId>
+		   <artifactId>jackson-datatype-jsr310</artifactId>
+		   <scope>provided</scope>
+		</dependency>
 
 		<!-- Commons -->
 		<dependency>
@@ -78,6 +101,13 @@
    			<artifactId>commons-lang3</artifactId>
    			<scope>provided</scope>
 		</dependency>
+		
+		<!-- Logging -->
+		<dependency>
+	  		<groupId>org.slf4j</groupId>
+	  		<artifactId>slf4j-api</artifactId>
+	  		<scope>provided</scope>
+	  	</dependency>
 		
 	</dependencies>
 </project>
