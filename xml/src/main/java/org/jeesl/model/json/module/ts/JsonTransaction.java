@@ -2,114 +2,51 @@
 package org.jeesl.model.json.module.ts;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import org.jeesl.model.json.system.security.JsonSecurityUser;
 import org.jeesl.model.json.system.status.JsonSource;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-@JsonRootName(value = "transaction")
+@JsonRootName(value="transaction")
 public class JsonTransaction implements Serializable
 {
     private final static long serialVersionUID = 1L;
 
-    @JsonProperty("source")
-    protected JsonSource source;
-   
     @JsonProperty("id")
     private Long id;
     public Long getId() {return id;}
     public void setId(Long value) {this.id = value;}
     
+    @JsonProperty("localDateTime")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss.SSS")
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	private LocalDateTime localDateTime;
+	public LocalDateTime getLocalDateTime() {return localDateTime;}
+	public void setLocalDateTime(LocalDateTime localDateTime) {this.localDateTime = localDateTime;}
     
-    @JsonProperty("record")
-    protected Date record;
-
-
     @JsonProperty("user")
-    protected JsonSecurityUser user;
-    public JsonSecurityUser getUser() {
-        return user;
-    }
+    private JsonSecurityUser user;
+    public JsonSecurityUser getUser() {return user;}
+    public void setUser(JsonSecurityUser value) {this.user = value;}
 
-    /*
-     * Sets the value of the user property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link User }
-     *
-     */
-    public void setUser(JsonSecurityUser value) {
-        this.user = value;
-    }
-
-    @JsonIgnore public boolean isSetUser() {
-        return (this.user!= null);
-    }
-
-    /*
-     * Gets the value of the source property.
-     *
-     * @return
-     *     possible object is
-     *     {@link JsonSource }
-     *
-     */
-    public JsonSource getSource() {
-        return source;
-    }
-
-    /*
-     * Sets the value of the source property.
-     *
-     * @param value
-     *     allowed object is
-     *     {@link JsonSource }
-     *
-     */
-    public void setSource(JsonSource value) {
-        this.source = value;
-    }
-
-    @JsonIgnore public boolean isSetSource() {
-        return (this.source!= null);
-    }
-
-    /*
-     * Gets the value of the id property.
-     *
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *
-     */
-   
-
-    @JsonIgnore public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
-    }
-
-
-    public Date getRecord() {
-        return record;
-    }
-
-    public void setRecord(Date value) {
-        this.record = value;
-    }
-
-    @JsonIgnore public boolean isSetRecord() {
-        return (this.record!= null);
-    }
-
+    @JsonProperty("source")
+    private JsonSource source;
+    public JsonSource getSource() {return source;}
+    public void setSource(JsonSource source) {this.source = source;}
+    
+    private List<JsonTsSeries> series;
+	public List<JsonTsSeries> getSeries() {return series;}
+	public void setSeries(List<JsonTsSeries> series) {this.series = series;}
 }

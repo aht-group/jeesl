@@ -3,6 +3,7 @@ package org.jeesl.controller.handler.module.workflow;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -89,7 +90,7 @@ public abstract class AbstractWorkflowActionHandler <WPD extends JeeslWorkflowDo
 		{
 			entity = perform(user,entity,action);
 		}
-		callback.workflowCallback(entity);
+		if(Objects.nonNull(callback)) {callback.workflowCallback(entity);}
 		if(bMessage!=null && transition!=null && transition.getConfirmation()!=null && transition.getConfirmation().containsKey(localeCode) && !transition.getConfirmation().get(localeCode).getLang().trim().isEmpty())
 		{
 			bMessage.growlInfoText(transition.getConfirmation().get(localeCode).getLang());
