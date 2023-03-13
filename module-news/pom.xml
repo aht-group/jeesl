@@ -43,6 +43,17 @@
     		<artifactId>jeesl-io-locale</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-io-fr</artifactId>
+    		<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-system-tenant</artifactId>
+    		<scope>compile</scope>
+		</dependency>
+		
 	
 		<!-- JakartaEE -->
 		<dependency>
