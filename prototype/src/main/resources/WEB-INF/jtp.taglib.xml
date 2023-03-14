@@ -27,6 +27,10 @@
     	<source>jeeslPrototype/output/galleria.xhtml</source>
     </tag>
     <tag>
+    	<tag-name>imageWall</tag-name>
+    	<source>jeeslPrototype/output/imageWall.xhtml</source>
+    </tag>
+    <tag>
     	<tag-name>image360</tag-name>
     	<source>jeeslPrototype/output/image360.xhtml</source>
     </tag>

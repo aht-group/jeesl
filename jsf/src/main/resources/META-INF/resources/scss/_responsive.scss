@@ -1424,6 +1424,12 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
+	&.jeesl-image-wall {
+		.ui-panel-content {
+			padding: $half-spacing;
+		}
+	}
+	
 	&.jeesl-map {
 		.ui-panel-titlebar {
 			+ .ui-panel-content {
