@@ -14,10 +14,10 @@ import org.jeesl.model.ejb.io.locale.IoDescription;
 @Entity
 @DiscriminatorValue("ioLabelCategory")
 @EjbErNode(name="Category",category="revision",subset="revision",level=4)
-public class LabelCategory extends IoStatus implements JeeslRevisionCategory<IoLang,IoDescription,LabelCategory,IoGraphic>
+public class IoLabelCategory extends IoStatus implements JeeslRevisionCategory<IoLang,IoDescription,IoLabelCategory,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 
-	@Override public boolean equals(Object object) {return (object instanceof LabelCategory) ? id == ((LabelCategory) object).getId() : (object == this);}
+	@Override public boolean equals(Object object) {return (object instanceof IoLabelCategory) ? id == ((IoLabelCategory) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
 }
