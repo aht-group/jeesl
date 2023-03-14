@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+    	<groupId>org.jeesl</groupId>
+    	<artifactId>jeesl</artifactId>
+    	<version>0.3.0-SNAPSHOT</version>
+	</parent>
+	
+    <artifactId>jeesl-io-label</artifactId>
+    <packaging>jar</packaging>
+    <name>JEESL - IO Label</name>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+            	<groupId>org.jeesl.bom</groupId>
+            	<artifactId>bom-core</artifactId>
+            	<version>${maven.version.jeesl.bom}</version>
+            	<type>pom</type>
+            	<scope>import</scope>
+        	</dependency>	         
+        	<dependency>
+            	<groupId>org.jeesl.bom</groupId>
+            	<artifactId>bom-eap73</artifactId>
+            	<version>${maven.version.jeesl.bom}</version>
+            	<type>pom</type>
+            	<scope>import</scope>
+        	</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+	<dependencies>
+		<!-- JEESL -->
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-interfaces</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-io-locale</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+	
+		<!-- JakartaEE -->
+		<dependency>
+			<groupId>jakarta.enterprise</groupId>
+			<artifactId>jakarta.enterprise.cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Commons -->
+		<dependency>
+   			<groupId>org.apache.commons</groupId>
+   			<artifactId>commons-lang3</artifactId>
+   			<scope>provided</scope>
+		</dependency>
+		
+	</dependencies>
+</project>
