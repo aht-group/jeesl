@@ -54,9 +54,7 @@ public class JeeslCliOptionHandler
 	
 	public void buildConfig()
 	{
-		oConfig = Option.builder("config").required(false)
-				.hasArg(true).argName("FILE").desc("Use individual configuration FILE")
-				.build(); 
+		oConfig = Option.builder("config").required(false).hasArg(true).argName("FILE").desc("Use individual configuration FILE").build(); 
 		options.addOption(oConfig);
 	}
 	
@@ -119,6 +117,7 @@ public class JeeslCliOptionHandler
 				logger.error("Specified configuration does not exist: "+configFile);
 				System.exit(-1);
 			}
+			logger.info("Using "+Configuration.class.getSimpleName()+" "+configFile);
 			ConfigLoader.add(configFile);
 	    }
 		

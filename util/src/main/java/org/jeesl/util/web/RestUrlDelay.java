@@ -10,6 +10,12 @@ public class RestUrlDelay
 {
 	final static Logger logger = LoggerFactory.getLogger(RestUrlDelay.class);
 	
+	public static String getUrl(Configuration config, String key, boolean delay)
+	{
+		if(delay) {return RestUrlDelay.getUrl(config,key);}
+		else {return RestUrlDelay.getUrlNoDelay(config,key);}
+	}
+	
 	public static String getUrlNoDelay(Configuration config, String key)
 	{
 		String url = config.getString(key);
