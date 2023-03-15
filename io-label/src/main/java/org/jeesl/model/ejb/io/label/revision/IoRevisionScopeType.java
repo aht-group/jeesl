@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 
 @Entity
-@DiscriminatorValue("ioLabelScopeType")
+@DiscriminatorValue("ioRevisionScopeType")
 @EjbErNode(name="Type",category="revision",subset="revision",level=4)
 public class IoRevisionScopeType extends IoStatus implements JeeslRevisionScopeType<IoLang,IoDescription,IoRevisionScopeType,IoGraphic>
 {
