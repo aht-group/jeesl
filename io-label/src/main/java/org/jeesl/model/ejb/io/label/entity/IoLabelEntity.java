@@ -38,7 +38,6 @@ public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,I
 	public static final long serialVersionUID=1;	
 	
 	
-	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}

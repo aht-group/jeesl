@@ -3,12 +3,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionMissingLabel;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
-@EjbErNode(name="IoLabelMissing",category="revision",subset="revision",level=2)
+@Table(name="IoLabelMissing")
+@EjbErNode(name="Missing Label",category="revision",subset="revision",level=2)
 public class IoLabelMissing implements JeeslRevisionMissingLabel
 {
 	private static final long serialVersionUID = 1L;
