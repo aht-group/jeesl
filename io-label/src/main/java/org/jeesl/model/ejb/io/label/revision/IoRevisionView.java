@@ -73,7 +73,10 @@ public class IoRevisionView implements Serializable,EjbRemoveable,EjbPersistable
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
-	
+
+
+	@Override public boolean equals(Object object){return (object instanceof IoRevisionView) ? id == ((IoRevisionView) object).getId() : (object == this);}
+	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 	
 	@Override public String toString()
 	{
@@ -81,7 +84,4 @@ public class IoRevisionView implements Serializable,EjbRemoveable,EjbPersistable
 		sb.append("[").append(id).append("]");
 		return sb.toString();
 	}
-	
-	@Override public boolean equals(Object object){return (object instanceof IoRevisionView) ? id == ((IoRevisionView) object).getId() : (object == this);}
-	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 }

@@ -51,14 +51,14 @@ public class IoRevisionViewMapping implements JeeslRevisionViewMapping<IoRevisio
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
 
-
+	
+	@Override public boolean equals(Object object){return (object instanceof IoRevisionViewMapping) ? id == ((IoRevisionViewMapping) object).getId() : (object == this);}
+	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
+	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[").append(id).append("]");
 		return sb.toString();
 	}
-	
-	@Override public boolean equals(Object object){return (object instanceof IoRevisionViewMapping) ? id == ((IoRevisionViewMapping) object).getId() : (object == this);}
-	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 }
