@@ -112,16 +112,15 @@ public class IoLabelAttribute implements JeeslRevisionAttribute<IoLang,IoDescrip
 	@Override public void setDeveloperInfo(String developerInfo) {this.developerInfo=developerInfo;}
 
 	@ManyToOne
-	private IoLabelEntity entity;
-	@Override public IoLabelEntity getEntity() {return entity;}
-	@Override public void setEntity(IoLabelEntity entity) {this.entity = entity;}
-
-	@ManyToOne
 	private IoLabelEntityRelation relation;
 	@Override public IoLabelEntityRelation getRelation() {return relation;}
 	@Override public void setRelation(IoLabelEntityRelation relation) {this.relation = relation;}
 
-	
+	@ManyToOne
+	private IoLabelEntity entity;
+	@Override public IoLabelEntity getEntity() {return entity;}
+	@Override public void setEntity(IoLabelEntity entity) {this.entity = entity;}
+
 	private Boolean relationOwner;
 	@Override public Boolean getRelationOwner() {return relationOwner;}
 	@Override public void setRelationOwner(Boolean relationOwner) {this.relationOwner = relationOwner;}
