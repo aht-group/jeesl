@@ -27,7 +27,7 @@ public class IoLabelEntityRelation extends IoStatus implements JeeslRevisionEnti
 		for(JeeslRevisionEntityRelation.Code code : JeeslRevisionEntityRelation.Code.values()){fixed.add(code.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoLabelEntityRelation) ? id == ((IoLabelEntityRelation) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
 }

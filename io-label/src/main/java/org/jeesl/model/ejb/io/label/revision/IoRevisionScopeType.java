@@ -27,7 +27,7 @@ public class IoRevisionScopeType extends IoStatus implements JeeslRevisionScopeT
 		for(JeeslRevisionScopeType.Scope c : JeeslRevisionScopeType.Scope.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoRevisionScopeType) ? id == ((IoRevisionScopeType) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
 }

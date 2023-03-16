@@ -30,8 +30,8 @@ import org.jeesl.model.ejb.io.locale.IoDescription;
 public class IoLabelDiagram implements Serializable,JeeslRevisionDiagram<IoLang,IoDescription,IoLabelCategory>
 {
     public static final long serialVersionUID=1;
-   
-    
+
+
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     @Override public long getId() {return id;}
@@ -74,21 +74,21 @@ public class IoLabelDiagram implements Serializable,JeeslRevisionDiagram<IoLang,
     private String dotGraph;
     @Override public String getDotGraph() {return dotGraph;}
     @Override public void setDotGraph(String dotGraph) {this.dotGraph=dotGraph;}
-    
+
     private boolean dotManual;
     @Override public boolean isDotManual() {return dotManual;}
     @Override public void setDotManual(boolean dotManual) {this.dotManual = dotManual;}
 
-   
+
     @Override public boolean equals(Object object) {return (object instanceof IoLabelDiagram) ? id == ((IoLabelDiagram) object).getId() : (object == this);}
     @Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
-    
+
     @Override public String toString()
     {
-            StringBuffer sb = new StringBuffer();
-            sb.append("[").append(id).append("]");
-            sb.append(" ").append(code);
-            sb.append(":"+dotGraph);
-            return sb.toString();
+        StringBuffer sb = new StringBuffer();
+        sb.append("[").append(id).append("]");
+        sb.append(" ").append(code);
+        sb.append(":"+dotGraph);
+        return sb.toString();
     }
 }

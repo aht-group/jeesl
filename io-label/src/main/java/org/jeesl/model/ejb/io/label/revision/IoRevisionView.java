@@ -35,41 +35,41 @@ public class IoRevisionView implements Serializable,EjbRemoveable,EjbPersistable
 								JeeslRevisionView<IoLang,IoDescription,IoRevisionViewMapping>
 {
 	public static final long serialVersionUID=1;
-	
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	@NotNull
 	protected String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="view")
 	@OrderBy("position")
 	private List<IoRevisionViewMapping> maps;
 	@Override public List<IoRevisionViewMapping> getMaps() {if(maps==null){maps=new ArrayList<IoRevisionViewMapping>();}return maps;}
 	@Override public void setMaps(List<IoRevisionViewMapping> maps) {this.maps=maps;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name = "lkey")
 	@JoinTable(name="IoRevisionViewJtLang",joinColumns={@JoinColumn(name="view_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="IoRevisionViewJtDescription",joinColumns={@JoinColumn(name="view_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
-	
+
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
-	
+
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
@@ -77,7 +77,7 @@ public class IoRevisionView implements Serializable,EjbRemoveable,EjbPersistable
 
 	@Override public boolean equals(Object object){return (object instanceof IoRevisionView) ? id == ((IoRevisionView) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
