@@ -14,12 +14,12 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 public class IoLabelMissing implements JeeslRevisionMissingLabel
 {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	private String missingEntity;
 	@Override public String getMissingEntity() {return missingEntity;}
 	@Override public void setMissingEntity(String missingEntity) {this.missingEntity = missingEntity;}

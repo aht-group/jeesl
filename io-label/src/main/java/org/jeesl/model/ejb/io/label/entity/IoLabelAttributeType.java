@@ -21,15 +21,13 @@ public class IoLabelAttributeType extends IoStatus implements JeeslRevisionAttri
 {
 	public static final long serialVersionUID=1;
 
-	
-	
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();
 		for(JeeslRevisionAttributeType.Code c : JeeslRevisionAttributeType.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoLabelAttributeType) ? id == ((IoLabelAttributeType) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
 }

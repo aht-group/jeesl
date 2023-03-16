@@ -36,76 +36,75 @@ import org.jeesl.model.ejb.io.locale.IoDescription;
 public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,IoLabelCategory,IoRevisionEntityMapping,IoLabelAttribute,IoLabelDiagram>
 {
 	public static final long serialVersionUID=1;	
-	
-	
+
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	@Override public String resolveParentAttribute() {return "category";}
-//	@NotNull
-	@ManyToOne
+	@NotNull @ManyToOne
 	private IoLabelCategory category;
 	public IoLabelCategory getCategory() {return category;}
 	public void setCategory(IoLabelCategory category) {this.category = category;}
-	
+
 	@NotNull private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
-	
+
 	private String jscn;
 	@Override public String getJscn() {return jscn;}
 	@Override public void setJscn(String jscn) {this.jscn = jscn;}
-	
+
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
-	
+
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
-	
+
 	private Boolean timeseries;
 	@Override public Boolean getTimeseries() {return timeseries;}
 	@Override public void setTimeseries(Boolean timeseries) {this.timeseries = timeseries;}
-	
+
 	private Boolean documentation;
 	@Override public Boolean getDocumentation() {return documentation;}
 	@Override public void setDocumentation(Boolean documentation) {this.documentation = documentation;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
 	@JoinTable(name="IoLabelEntityJtLang",joinColumns={@JoinColumn(name="entity_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name = "lkey")
 	@JoinTable(name="IoLabelEntityJtDescription",joinColumns={@JoinColumn(name="entity_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
-	
+
 	@OneToMany(fetch=FetchType.LAZY)
 	@OrderBy("position")
 	@JoinTable(name="IoLabelEntityJtAttribute",joinColumns={@JoinColumn(name="entity_id")},inverseJoinColumns={@JoinColumn(name="attribute_id")})
 	private List<IoLabelAttribute> attributes;
 	@Override public List<IoLabelAttribute> getAttributes() {if(attributes==null){attributes=new ArrayList<IoLabelAttribute>();}return attributes;}
 	@Override public void setAttributes(List<IoLabelAttribute> attributes) {this.attributes = attributes;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="entity")
 	@OrderBy("position")
 	private List<IoRevisionEntityMapping> maps;
 	@Override public List<IoRevisionEntityMapping> getMaps() {if(maps==null){maps=new ArrayList<IoRevisionEntityMapping>();}return maps;}
 	@Override public void setMaps(List<IoRevisionEntityMapping> maps) {this.maps=maps;}
-	
+
 	@Basic @Column(columnDefinition = "text")
 	private String developerInfo;
 	@Override public String getDeveloperInfo() {return developerInfo;}
 	@Override public void setDeveloperInfo(String developerInfo) {this.developerInfo=developerInfo;}
-	
+
 	@ManyToOne
 	private IoLabelDiagram diagram;
 	@Override public IoLabelDiagram getDiagram() {return diagram;}
@@ -114,7 +113,7 @@ public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,I
 
 	@Override public boolean equals(Object object){return (object instanceof IoLabelEntity) ? id == ((IoLabelEntity) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
