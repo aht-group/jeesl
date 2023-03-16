@@ -22,10 +22,10 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionScope;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
-import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.label.entity.IoLabelAttribute;
 import org.jeesl.model.ejb.io.label.entity.IoLabelCategory;
 import org.jeesl.model.ejb.io.locale.IoDescription;
+import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Entity
 @Table(name="IoRevisionScope", uniqueConstraints=@UniqueConstraint(columnNames={"code"}))
@@ -51,14 +51,14 @@ public class IoRevisionScope implements JeeslRevisionScope<IoLang,IoDescription,
 	@Override public void setCode(String code) {this.code = code;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name = "lkey")
+	@MapKey(name="lkey")
 	@JoinTable(name="IoRevisionScopeJtLang",joinColumns={@JoinColumn(name="scope_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name = "lkey")
+	@MapKey(name="lkey")
 	@JoinTable(name="IoRevisionScopeJtDescription",joinColumns={@JoinColumn(name="scope_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}

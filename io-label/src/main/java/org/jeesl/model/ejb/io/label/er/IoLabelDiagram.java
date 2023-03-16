@@ -21,9 +21,9 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
-import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.label.entity.IoLabelCategory;
 import org.jeesl.model.ejb.io.locale.IoDescription;
+import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Entity
 @Table(name="IoLabelDiagram", uniqueConstraints=@UniqueConstraint(columnNames={"code"}))

@@ -49,6 +49,11 @@ public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,I
 	public IoLabelCategory getCategory() {return category;}
 	public void setCategory(IoLabelCategory category) {this.category = category;}
 
+	@ManyToOne
+	private IoLabelDiagram diagram;
+	@Override public IoLabelDiagram getDiagram() {return diagram;}
+	@Override public void setDiagram(IoLabelDiagram diagram) {this.diagram = diagram;}
+
 	@NotNull private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
@@ -73,14 +78,14 @@ public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,I
 	@Override public Boolean getDocumentation() {return documentation;}
 	@Override public void setDocumentation(Boolean documentation) {this.documentation = documentation;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
 	@JoinTable(name="IoLabelEntityJtLang",joinColumns={@JoinColumn(name="entity_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@MapKey(name = "lkey")
 	@JoinTable(name="IoLabelEntityJtDescription",joinColumns={@JoinColumn(name="entity_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	private Map<String,IoDescription> description;
@@ -88,8 +93,8 @@ public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,I
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
 	@OneToMany(fetch=FetchType.LAZY)
-	@OrderBy("position")
 	@JoinTable(name="IoLabelEntityJtAttribute",joinColumns={@JoinColumn(name="entity_id")},inverseJoinColumns={@JoinColumn(name="attribute_id")})
+	@OrderBy("position")
 	private List<IoLabelAttribute> attributes;
 	@Override public List<IoLabelAttribute> getAttributes() {if(attributes==null){attributes=new ArrayList<IoLabelAttribute>();}return attributes;}
 	@Override public void setAttributes(List<IoLabelAttribute> attributes) {this.attributes = attributes;}
@@ -104,11 +109,6 @@ public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,I
 	private String developerInfo;
 	@Override public String getDeveloperInfo() {return developerInfo;}
 	@Override public void setDeveloperInfo(String developerInfo) {this.developerInfo=developerInfo;}
-
-	@ManyToOne
-	private IoLabelDiagram diagram;
-	@Override public IoLabelDiagram getDiagram() {return diagram;}
-	@Override public void setDiagram(IoLabelDiagram diagram) {this.diagram = diagram;}
 
 
 	@Override public boolean equals(Object object){return (object instanceof IoLabelEntity) ? id == ((IoLabelEntity) object).getId() : (object == this);}

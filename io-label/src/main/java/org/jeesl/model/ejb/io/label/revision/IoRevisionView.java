@@ -1,6 +1,5 @@
 package org.jeesl.model.ejb.io.label.revision;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,19 +21,17 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionView;
-import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
-import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
-import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoDescription;
+import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Entity
 @Table(name="IoRevisionView", uniqueConstraints=@UniqueConstraint(columnNames={"code"}))
 @EjbErNode(name="View",category="revision",subset="revision")
-public class IoRevisionView implements Serializable,EjbRemoveable,EjbPersistable,
-								JeeslRevisionView<IoLang,IoDescription,IoRevisionViewMapping>
+public class IoRevisionView implements JeeslRevisionView<IoLang,IoDescription,IoRevisionViewMapping>
 {
 	public static final long serialVersionUID=1;
+
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;

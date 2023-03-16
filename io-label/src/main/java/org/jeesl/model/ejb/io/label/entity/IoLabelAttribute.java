@@ -21,9 +21,9 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
-import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.label.er.IoLabelEntityRelation;
 import org.jeesl.model.ejb.io.locale.IoDescription;
+import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Entity
 @Table(name="IoLabelAttribute")
@@ -49,8 +49,8 @@ public class IoLabelAttribute implements JeeslRevisionAttribute<IoLang,IoDescrip
 	@Override public void setType(IoLabelAttributeType type) {this.type = type;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="IoLabelAttributeJtLang",joinColumns={@JoinColumn(name="attribute_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
