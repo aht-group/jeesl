@@ -46,8 +46,8 @@ public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,I
 	@Override public String resolveParentAttribute() {return "category";}
 	@NotNull @ManyToOne
 	private IoLabelCategory category;
-	public IoLabelCategory getCategory() {return category;}
-	public void setCategory(IoLabelCategory category) {this.category = category;}
+	@Override public IoLabelCategory getCategory() {return category;}
+	@Override public void setCategory(IoLabelCategory category) {this.category = category;}
 
 	@ManyToOne
 	private IoLabelDiagram diagram;
@@ -79,15 +79,15 @@ public class IoLabelEntity implements JeeslRevisionEntity<IoLang,IoDescription,I
 	@Override public void setDocumentation(Boolean documentation) {this.documentation = documentation;}
 
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="IoLabelEntityJtLang",joinColumns={@JoinColumn(name="entity_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@MapKey(name = "lkey")
 	@JoinTable(name="IoLabelEntityJtDescription",joinColumns={@JoinColumn(name="entity_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}

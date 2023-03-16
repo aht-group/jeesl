@@ -53,15 +53,15 @@ public class IoLabelDiagram implements Serializable,JeeslRevisionDiagram<IoLang,
     @Override public void setPosition(int position) {this.position = position;}
 
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    @MapKey(name="lkey")
     @JoinTable(name="IoLabelDiagramJtLang",joinColumns={@JoinColumn(name="diagram_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+    @MapKey(name="lkey")
     private Map<String,IoLang> name;
     @Override public Map<String,IoLang> getName() {return name;}
     @Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
     @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    @MapKey(name="lkey")
     @JoinTable(name="IoLabelDiagramJtDescription",joinColumns={@JoinColumn(name="diagram_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+    @MapKey(name="lkey")
     private Map<String,IoDescription> description;
     @Override public Map<String,IoDescription> getDescription() {return description;}
     @Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}

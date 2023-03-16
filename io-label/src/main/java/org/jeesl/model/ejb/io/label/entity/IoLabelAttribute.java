@@ -48,14 +48,14 @@ public class IoLabelAttribute implements JeeslRevisionAttribute<IoLang,IoDescrip
 	@Override public IoLabelAttributeType getType() {return type;}
 	@Override public void setType(IoLabelAttributeType type) {this.type = type;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="IoLabelAttributeJtLang",joinColumns={@JoinColumn(name="attribute_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="IoLabelAttributeJtDescription",joinColumns={@JoinColumn(name="attribute_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
