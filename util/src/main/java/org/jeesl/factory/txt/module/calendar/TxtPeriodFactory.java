@@ -57,8 +57,7 @@ public class TxtPeriodFactory
 	}
 	
 	
-	// The following ist without JODA!
-    
+	// The following is without JODA!
 	private String localeCode; 
 	
 	public TxtPeriodFactory(String localeCode)
