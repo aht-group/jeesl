@@ -22,6 +22,7 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.status.JeeslAbstractStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
@@ -189,26 +190,40 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 	public static Class<?> classForInterface(String code, String... basePackage) throws UtilsConfigurationException
 	{
 		String fqcn = null;
-		try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(basePackage).scan())
+		if(code.equals(JeeslAbstractStatus.class.getName()))
 		{
-			ClassInfoList list = scanResult.getClassesImplementing(code);
-			if(list.getNames().isEmpty()) {throw new UtilsConfigurationException("No implementing class found for "+code+" using "+ClassGraph.class.getSimpleName());}
-			else
+			String cios = "org.jeesl.model.ejb.io.locale.IoStatus";
+			try
 			{
-				if(list.getNames().size()>1)
-				{
-					logger.info("Multiple Results:");
-					for(String s : list.getNames())
-					{
-						logger.info("\t"+list.getNames().indexOf(s)+" "+s.toString());
-					}
-				}
-				
-				fqcn = list.getNames().get(0);
-				Class<?> c = Class.forName(fqcn);
+				Class<?> c = Class.forName(cios);
 				return c;
 			}
+			catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Special Handling for  "+cios+" failed");}
 		}
-		catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Class found for interface "+code+" using "+ClassGraph.class.getSimpleName()+", but CNFE with "+fqcn);}
+		else
+		{
+			try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(basePackage).scan())
+			{
+				ClassInfoList list = scanResult.getClassesImplementing(code);
+				if(list.getNames().isEmpty()) {throw new UtilsConfigurationException("No implementing class found for "+code+" using "+ClassGraph.class.getSimpleName());}
+				else
+				{
+					if(list.getNames().size()>1)
+					{
+						logger.info("Multiple Results:");
+						for(String s : list.getNames())
+						{
+							logger.info("\t"+list.getNames().indexOf(s)+" "+s.toString());
+						}
+					}
+					
+					fqcn = list.getNames().get(0);
+					Class<?> c = Class.forName(fqcn);
+					return c;
+				}
+			}
+			catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Class found for interface "+code+" using "+ClassGraph.class.getSimpleName()+", but CNFE with "+fqcn);}
+		}
+		
 	}
 }

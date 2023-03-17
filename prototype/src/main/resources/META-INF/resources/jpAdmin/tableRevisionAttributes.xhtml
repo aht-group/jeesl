@@ -18,34 +18,35 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<p:dataTable var="a" value="#{cc.attrs.bean.attributes}" draggableRows="true"
-			selection="#{cc.attrs.bean.attribute}" selectionMode="single" rowKey="#{a.id}">
-			<f:facet name="header">
-				<j:dtHeader entity="RevisionAttribute" code="listOf">
-					<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}"/>
-					<j:svg type="jeeslDownload" listener="#{cc.attrs.bean.downloadJeeslAttributes()}" update="#{cc.attrs.updateAdd}" rendered="#{cc.attrs.bean.supportsJeeslAttributeDownload}"/>
-				</j:dtHeader>
-			</f:facet>
-			<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAttributes()}" update="@form"/>
-			<p:ajax event="rowSelect" update="#{cc.attrs.updateSelect}" listener="#{cc.attrs.bean.selectAttribute()}"/>
-			<p:column rendered="true">  
-				<h:outputText value="#{a.position}"/>
-            </p:column>
-            <p:column headerText="#{msg.jeeslRevisionAttribute}">
-            	<f:facet name="header"><jtp:label entity="RevisionAttribute"/></f:facet>
-            	<jtp:symbolizer value="#{a.type}" marginRight="5" rendered="#{empty a.relation}"/>
-            	<jtp:symbolizer value="#{a.relation}" marginRight="5" rendered="#{not empty a.relation}"/>
-				<h:outputText value="#{a.name[localeCode].lang}"/>
-            </p:column>
-            <p:column headerText="P" styleClass="aupPfDtColCentered">
-            	<h:graphicImage rendered="#{a.showWeb}"			name="12/ui/system/revision/browser.png"		library="jeeslPrototypeGfx"/>
-            	<h:graphicImage rendered="#{a.showPrint}"		name="12/ui/system/revision/print.png"			library="jeeslPrototypeGfx"/>
-            	<h:graphicImage rendered="#{a.showName}"		name="12/ui/system/revision/name.png"			library="jeeslPrototypeGfx"/>
-            	<h:graphicImage rendered="#{a.showEnclosure}"	name="12/ui/system/revision/enclosure.png"		library="jeeslPrototypeGfx"/>
-            	<h:graphicImage rendered="#{a.ui}"				name="12/ui/system/revision/label.png"			library="jeeslPrototypeGfx"/>
-            	<h:graphicImage rendered="#{a.bean}"			name="12/ui/system/revision/bean.png"			library="jeeslPrototypeGfx"/>
-            	<h:graphicImage rendered="#{a.construction}"	name="12/ui/system/revision/construction.png"	library="jeeslPrototypeGfx"/>
-            </p:column>
-       	</p:dataTable>
+<p:dataTable styleClass="jeesl-datatable"
+		var="a" value="#{cc.attrs.bean.attributes}" draggableRows="true"
+		selection="#{cc.attrs.bean.attribute}" selectionMode="single" rowKey="#{a.id}">
+	<f:facet name="header">
+		<j:dtHeader entity="IoLabelAttribute" code="listOf">
+			<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAttribute()}" update="#{cc.attrs.updateAdd}"/>
+			<j:svg type="jeeslDownload" listener="#{cc.attrs.bean.downloadJeeslAttributes()}" update="#{cc.attrs.updateAdd}" rendered="#{cc.attrs.bean.supportsJeeslAttributeDownload}"/>
+		</j:dtHeader>
+	</f:facet>
+	<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderAttributes()}" update="@form"/>
+	<p:ajax event="rowSelect" update="#{cc.attrs.updateSelect}" listener="#{cc.attrs.bean.selectAttribute()}"/>
+	<p:column rendered="true">  
+		<h:outputText value="#{a.position}"/>
+	</p:column>
+	<p:column headerText="#{msg.jeeslRevisionAttribute}">
+		<f:facet name="header"><jtp:label entity="IoLabelAttribute"/></f:facet>
+		<jtp:symbolizer value="#{a.type}" marginRight="5" rendered="#{empty a.relation}"/>
+		<jtp:symbolizer value="#{a.relation}" marginRight="5" rendered="#{not empty a.relation}"/>
+		<h:outputText value="#{a.name[localeCode].lang}"/>
+	</p:column>
+	<p:column headerText="P" styleClass="aupPfDtColCentered">
+       	<h:graphicImage rendered="#{a.showWeb}"			name="12/ui/system/revision/browser.png"		library="jeeslPrototypeGfx"/>
+       	<h:graphicImage rendered="#{a.showPrint}"		name="12/ui/system/revision/print.png"			library="jeeslPrototypeGfx"/>
+       	<h:graphicImage rendered="#{a.showName}"		name="12/ui/system/revision/name.png"			library="jeeslPrototypeGfx"/>
+       	<h:graphicImage rendered="#{a.showEnclosure}"	name="12/ui/system/revision/enclosure.png"		library="jeeslPrototypeGfx"/>
+       	<h:graphicImage rendered="#{a.ui}"				name="12/ui/system/revision/label.png"			library="jeeslPrototypeGfx"/>
+       	<h:graphicImage rendered="#{a.bean}"			name="12/ui/system/revision/bean.png"			library="jeeslPrototypeGfx"/>
+       	<h:graphicImage rendered="#{a.construction}"	name="12/ui/system/revision/construction.png"	library="jeeslPrototypeGfx"/>
+	</p:column>
+</p:dataTable>
 	</composite:implementation>
 </html>
