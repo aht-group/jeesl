@@ -29,11 +29,12 @@
 	<j:row>
 		<j:slot id="sCategories" width="2">
 			<h:form id="fProperties">
-				<p:dataTable id="dtProgram" var="c" value="#{cc.attrs.bean.categories}" rowKey="#{c.id}"
+				<p:dataTable id="dtProgram" styleClass="jeesl-datatable"
+						var="c" value="#{cc.attrs.bean.categories}" rowKey="#{c.id}"
 						selection="#{cc.attrs.bean.category}" selectionMode="single">
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCategory}" update=":#{cc.id}:sCategory :#{cc.id}:sLang"/>
 					<p:column>
-						<f:facet name="header">#{msg.jeeslOptionTables}</f:facet>
+						<f:facet name="header"><jtp:label entity="IoStatus" value="listOf"/></f:facet>
 						<h:outputText value="#{msg[c.code]}" rendered="#{empty cc.attrs.bean.mapEntity[c]}"/>
 						<h:outputText value="#{cc.attrs.bean.mapEntity[c].name[localeCode].lang}" rendered="#{not empty cc.attrs.bean.mapEntity[c]}"/>
 					</p:column>
@@ -42,15 +43,17 @@
 		</j:slot>
 		<j:slot id="sCategory" width="6">
 			<h:form id="fEntity" rendered="#{(not empty cc.attrs.bean.entity)}">
-				<p:panel id="pLang" header="#{cc.attrs.bean.entity.name[localeCode].lang}" styleClass="jeesl-panel">
+				<p:panel id="pLang" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader title="#{cc.attrs.bean.entity.name[localeCode].lang}"/></f:facet>
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 						<h:outputText value="#{cc.attrs.bean.entity.description[localeCode].lang}"/>
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
 			<h:form id="fCategory" rendered="#{not empty cc.attrs.bean.category}">
-				<p:dataTable var="s" value="#{cc.attrs.bean.items}" draggableRows="#{cc.attrs.bean.uiAllowReorder}"
-			          selection="#{cc.attrs.bean.status}" selectionMode="single" rowKey="#{s.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+							var="s" value="#{cc.attrs.bean.items}" 
+			          		selection="#{cc.attrs.bean.status}" selectionMode="single" rowKey="#{s.id}" draggableRows="#{cc.attrs.bean.uiAllowReorder}">
 					<f:facet name="header">
 			          	<j:dtHeader title="#{empty cc.attrs.bean.mapEntity[cc.attrs.bean.category] ? msg[cc.attrs.bean.category.code] : cc.attrs.bean.mapEntity[cc.attrs.bean.category].name[localeCode].lang}">
 			          		<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.uiAllowAdd}"/>
@@ -68,21 +71,21 @@
 						<j:duoCheckmark value="#{s.visible}"/>
 		            </p:column>
 					<p:column rendered="#{not empty cc.attrs.bean.parents}">
-			            <f:facet name="header">#{msg.jeeslStatusSuperior}</f:facet>
+						<f:facet name="header"><jtp:label entity="IoStatus" code="parent"/></f:facet>
 			            <h:outputText value="#{s.parent.name[localeCode].lang}" />
 					</p:column>
 					<p:column>
-			             <f:facet name="header">#{msg.jeeslCode}</f:facet>  
-			             <h:outputText value="#{of:abbreviate(s.code,15)}"/>
+						<f:facet name="header"><jtp:label entity="IoStatus" code="code"/></f:facet>
+						<h:outputText value="#{of:abbreviate(s.code,20)}"/>
 					</p:column>
-					<p:column>  
-			             <f:facet name="header">#{msg.aupTranslation}</f:facet>  
-			             <h:outputText value="#{s.name[localeCode].lang}" />
-			             <h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.bean.showDescription}"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoStatus" code="name"/></f:facet>
+						<h:outputText value="#{s.name[localeCode].lang}" />
+						<h:outputText value="&lt;br/&gt;" escape="false" rendered="#{cc.attrs.bean.showDescription}"/>
 						<h:outputText value="#{s.description[localeCode].lang}" rendered="#{cc.attrs.bean.showDescription}" styleClass="jeeslItalic"/>
 					</p:column>
 					<p:column rendered="#{cc.attrs.bean.supportsLocked}">
-						<f:facet name="header">#{msg.jeeslOptionLocked}</f:facet>  
+						<f:facet name="header"><jtp:label entity="IoStatus" code="locked"/></f:facet>
 						<h:outputText value="#{s.locked}" />
 					</p:column>
 					<p:column rendered="#{cc.attrs.bean.supportsGraphic}" styleClass="jeeslCenter">
@@ -92,7 +95,7 @@
 						<p:colorPicker value="#{s.color}"/>
 					</p:column>
 					<p:column rendered="#{cc.attrs.bean.supportsSymbol}">
-						<f:facet name="header">#{msg.aupOptionSymbol}</f:facet>  
+						<f:facet name="header"><jtp:label entity="IoStatus" code="symbol"/></f:facet>
 						<h:outputText value="#{s.symbol}" />
 					</p:column>
 				</p:dataTable>
@@ -101,6 +104,7 @@
 		<j:slot id="sLang" width="4">
 			<h:form id="fLang">
 				<p:panel id="pLang" header="#{msg.aupOptionDetails}" rendered="#{not empty cc.attrs.bean.status}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoStatus"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelStatus()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" mayDispappear="true" tooltip="#{msg.jeeslTtCancel}"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}"/>
@@ -108,16 +112,16 @@
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-						<jtp:label entity="RevisionEntity" code="jscn"/>
+					<j:inputGrid>
+						<jtp:label entity="IoLabelEntity" code="jscn"/>
 						<h:outputText value="#{cc.attrs.bean.optionClass.simpleName}"/>
 						
-						<p:outputLabel value="#{msg.aupOptionCode}"/>
+						<jtp:label entity="IoStatus" code="code"/>
 						<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}" autocomplete="off"/>
 						<h:outputText rendered="#{not cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}"/>
-					</p:panelGrid>
+					</j:inputGrid>
 					
-					<p:panelGrid rendered="#{cc.attrs.bean.supportsSymbol}" columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid rendered="#{cc.attrs.bean.supportsSymbol}" columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<c:if test="#{empty cc.facets.inputSymbolLabel}" >
 							<p:outputLabel  value="#{msg.aupOptionSymbol}"/>
 						</c:if>
@@ -130,9 +134,9 @@
 						<c:if test="#{not empty cc.facets.inputSymbolInput}">
 							<composite:renderFacet name="inputSymbolInput"/>
 						</c:if>
-					</p:panelGrid>
+					</j:inputGrid>
 					
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid>
 						<p:outputLabel rendered="#{cc.attrs.bean.uiAllowReorder}" value="#{msg.aupOptionPosition}"/>
 						<p:inputText rendered="#{cc.attrs.bean.uiAllowReorder}" value="#{cc.attrs.bean.status.position}"/>
 						
@@ -163,10 +167,10 @@
 						<p:outputLabel value="#{msg.aupGraphicColor}" rendered="#{cc.attrs.bean.supportsColour}"/>
 						<p:colorPicker value="#{cc.attrs.bean.status.color}" rendered="#{cc.attrs.bean.supportsColour}"/>
 
-					</p:panelGrid>
+					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.bean.status}" keys="#{cc.attrs.langKeys}" withDescription="true"/>
 								
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'symbol')}">
+					<j:inputGrid rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'symbol')}">
 						<p:outputLabel value="#{msg.aupGraphicStyle}"/>
 						<p:selectOneMenu styleClass="w100" value="#{cc.attrs.bean.graphic.style}" effect="fade">
 							<f:selectItems value="#{cc.attrs.bean.graphicStyles}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
@@ -177,15 +181,15 @@
 						
 						<p:outputLabel value="#{msg.aupGraphicColor}"/>
 						<p:colorPicker value="#{cc.attrs.bean.graphic.color}" />
-					</p:panelGrid>
+					</j:inputGrid>
 					
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70" rendered="#{cc.attrs.bean.supportsGraphic}">
-						<p:outputLabel value="#{msg.aupGraphicType}"/>
-						<p:selectOneMenu styleClass="w100" value="#{cc.attrs.bean.graphic.type}" effect="fade">
+					<j:inputGrid rendered="#{cc.attrs.bean.supportsGraphic}">
+						<jtp:label entity="IoGraohic" code="type"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.graphic.type}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.bean.graphicTypes}" var="type" itemLabel="#{type.name[localeCode].lang}" itemValue="#{type}"/>
 							<p:ajax event="change" listener="#{cc.attrs.bean.changeGraphicType()}" update="@form :#{cc.id}:fUpload"/>
 						</p:selectOneMenu>
-					</p:panelGrid>
+					</j:inputGrid>
 					
 					<c:if test="#{not empty cc.facets.revision}">
 			            <f:facet name="footer">
@@ -264,7 +268,8 @@
 				</p:panel>
 			</h:form>
 			
-			<p:panel header="#{msg.jeeslGraphicPreview}" rendered="#{(not empty cc.attrs.bean.status) and (cc.attrs.bean.supportsGraphic)}" styleClass="jeesl-panel">
+			<p:panel rendered="#{(not empty cc.attrs.bean.status) and (cc.attrs.bean.supportsGraphic)}" styleClass="jeesl-panel">
+				<f:facet name="header"><j:pHeader entity="IoGraphic" code="preview"/></f:facet>
 				<p:panelGrid columns="5" columnClasses="jeeslGrid20,jeeslGrid20,jeeslGrid20,jeeslGrid20">
 					<p:outputLabel value="8px"/>
 					<p:outputLabel value="12px"/>
