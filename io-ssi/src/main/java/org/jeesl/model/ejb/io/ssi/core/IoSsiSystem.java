@@ -39,21 +39,21 @@ public class IoSsiSystem implements JeeslIoSsiSystem<IoLang,IoDescription>
 	private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
-	
+
 	private String fqdn;
 	@Override public String getFqdn() {return fqdn;}
 	@Override public void setFqdn(String fqdn) {this.fqdn = fqdn;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="IoSsiSystemJtLang",joinColumns={@JoinColumn(name="system_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="IoSsiSystemJtDescription",joinColumns={@JoinColumn(name="system_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
@@ -61,7 +61,7 @@ public class IoSsiSystem implements JeeslIoSsiSystem<IoLang,IoDescription>
 
 	@Override public boolean equals(Object object){return (object instanceof IoSsiSystem) ? id == ((IoSsiSystem) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,57).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();

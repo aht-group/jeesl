@@ -57,8 +57,8 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 	@Override public void setFileName(String fileName) {this.fileName = fileName;}
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="IoFileMetaJtDescription",joinColumns={@JoinColumn(name="meta_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
