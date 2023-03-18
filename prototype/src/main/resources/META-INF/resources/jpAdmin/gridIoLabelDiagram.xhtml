@@ -20,7 +20,7 @@
 								selection="#{cc.attrs.bean.diagram}" selectionMode="single" rowKey="#{d.id}"
 								rows="50" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">>
 							<f:facet name="header">
-								<j:dtHeader entity="RevisionDiagram" code="listOf">
+								<j:dtHeader entity="IoLabelDiagram" code="listOf">
 									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addErDiagram()}" update=":#{cc.id}:grid"/>
 								</j:dtHeader>
 							</f:facet>
@@ -30,15 +30,15 @@
 								<h:outputText value="#{d.category.position}.#{d.position}"/>
 				            </p:column>
 				            <p:column>
-				            	<f:facet name="header"><jtp:label entity="RevisionDiagram" code="category"/></f:facet>
+				            	<f:facet name="header"><jtp:label entity="IoLabelDiagram" code="category"/></f:facet>
 								<h:outputText value="#{d.category.name[localeCode].lang}" />  
 				            </p:column>
 				            <p:column filterBy="#{d.code}" filterMatchMode="contains" filterStyle="width: 50px;">
-				            	<f:facet name="header"><jtp:label entity="RevisionDiagram" code="code"/></f:facet>
+				            	<f:facet name="header"><jtp:label entity="IoLabelDiagram" code="code"/></f:facet>
 								<h:outputText value="#{d.code}" />  
 				            </p:column>
 				            <p:column filterBy="#{d.name[localeCode].lang}" filterMatchMode="contains" filterStyle="width: 50px;">
-				            	<f:facet name="header"><jtp:label entity="RevisionDiagram" code="name"/></f:facet>  
+				            	<f:facet name="header"><jtp:label entity="IoLabelDiagram" code="name"/></f:facet>  
 								<h:outputText value="#{d.name[localeCode].lang}"/>
 				            </p:column>
 						</p:dataTable>
@@ -47,7 +47,7 @@
 				<j:slot id="sDiagram" width="5">
 					<h:form id="fERDiagram">
 						<p:panel rendered="#{not empty cc.attrs.bean.diagram}" styleClass="jeesl-panel">
-							<f:facet name="header"><j:pHeader entity="RevisionDiagram"/></f:facet>
+							<f:facet name="header"><j:pHeader entity="IoLabelDiagram"/></f:facet>
 							<f:facet name="actions">
 								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelDiagram()}" update=":#{cc.id}:sDiagram :#{cc.id}:sSvg" tooltip="#{msg.jeeslTtCancel}"/>
 								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveDiagram()}" update=":#{cc.id}:sDiagrams :#{cc.id}:sDiagram :#{cc.id}:sSvg"/>
@@ -56,18 +56,18 @@
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 							<j:inputGrid >
 							
-								<jtp:label entity="RevisionDiagram" code="category"/>
+								<jtp:label entity="IoLabelDiagram" code="category"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.diagram.category}" effect="fade" >
 									<f:selectItems value="#{cc.attrs.bean.sbhCategory.list}" var="t" itemLabel="#{t.name[userBean.localeCode].lang}" itemValue="#{t}"/>
 								</p:selectOneMenu>
 							
-								<jtp:label entity="RevisionDiagram" code="code"/>
+								<jtp:label entity="IoLabelDiagram" code="code"/>
                                 <p:inputText value="#{cc.attrs.bean.diagram.code}" autocomplete="off"/>
                                 
-                                <jtp:label entity="RevisionDiagram" code="dotManual"/>
+                                <jtp:label entity="IoLabelDiagram" code="dotManual"/>
 								<p:selectBooleanCheckbox value="#{cc.attrs.bean.diagram.dotManual}"/>
 								
-								<jtp:label entity="RevisionDiagram" code="documentation"/>
+								<jtp:label entity="IoLabelDiagram" code="documentation"/>
 								<p:selectBooleanCheckbox value="#{cc.attrs.bean.diagram.documentation}"/>
 								
 							</j:inputGrid >

@@ -61,25 +61,26 @@
 				</p:selectOneMenu>
 				
 				<jtp:label entity="IoLabelAttribute" code="entity" rendered="#{not empty cc.attrs.bean.attribute.relation}"/>
-				<p:selectOneMenu value="#{cc.attrs.bean.attribute.entity}" effect="fade" autoWidth="false" dynamic="true"
-							rendered="#{not empty cc.attrs.bean.attribute.relation}"
-							filter="true" filterMatchMode="contains" var="entity">
+				<p:selectOneMenu rendered="#{not empty cc.attrs.bean.attribute.relation}"
+							value="#{cc.attrs.bean.attribute.entity}" effect="fade" autoWidth="false"
+							var="entity" filter="true" filterMatchMode="contains" >
 					<f:selectItems value="#{cc.attrs.bean.links}" var="l" itemLabel="#{l.category.position}.#{l.position} #{l.name[localeCode].lang}" itemValue="#{l}"/>
-
 					<p:column>
 						<h:outputText value="#{entity.category.position}.#{entity.position}" />
 					</p:column>
-					<p:column headerText="#{msg.aupCategory}">
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoLabelEntity" code="category"/></f:facet>
 						<h:outputText value="#{entity.category.name[localeCode].lang}" />
 					</p:column>
-					<p:column headerText="#{msg.jeeslRevisionDiagramShort}">
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoLabelEntity" code="diagram"/></f:facet>
 						<h:outputText value="#{entity.diagram.name[localeCode].lang}" />
 					</p:column>
 					<p:column headerText="#{msg.jeeslRevisionEntity}">
+						<f:facet name="header"><jtp:label entity="IoLabelEntity"/></f:facet>
 						<h:outputText value="#{entity.name[localeCode].lang}" />
 					</p:column>
 				</p:selectOneMenu>
-				
 				<jtp:label entity="IoLabelAttribute" code="relationOwner" rendered="#{not empty cc.attrs.bean.attribute.relation}"/>
 				<p:selectBooleanCheckbox value="#{cc.attrs.bean.attribute.relationOwner}" rendered="#{not empty cc.attrs.bean.attribute.relation}"/>
 				

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
@@ -158,6 +159,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		if(jogger!=null) {jogger.milestone("Sorting",null,null);}
 
 		reloadEntities();
+		if(Objects.nonNull(jogger)) {jogger.ofxMilestones(System.out);}
 	}
 	
 	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
