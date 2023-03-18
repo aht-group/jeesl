@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
@@ -57,8 +56,8 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 											JeeslSecurityFacade<L,D,?,?,?,?,?,?,CTX,?,?> fSecurity)
 	{
 		super.postConstructWebController(lp,bMessage);
-		
-		reloadContexts();
+		this.fSecurity = fSecurity;
+		this.reloadContexts();
 	}
 	
 	private void reloadContexts()

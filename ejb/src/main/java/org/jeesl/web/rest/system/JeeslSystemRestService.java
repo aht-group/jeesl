@@ -189,7 +189,6 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 	
 	public static Class<?> classForInterface(String code, String... basePackage) throws UtilsConfigurationException
 	{
-		String fqcn = null;
 		if(code.equals(JeeslAbstractStatus.class.getName()))
 		{
 			String cios = "org.jeesl.model.ejb.io.locale.IoStatus";
@@ -202,12 +201,15 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 		}
 		else
 		{
+			logger.info("classForInterface: "+code);
 			try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(basePackage).scan())
 			{
 				ClassInfoList list = scanResult.getClassesImplementing(code);
+				
 				if(list.getNames().isEmpty()) {throw new UtilsConfigurationException("No implementing class found for "+code+" using "+ClassGraph.class.getSimpleName());}
 				else
 				{
+					Class<?> c = null;
 					if(list.getNames().size()>1)
 					{
 						logger.info("Multiple Results:");
@@ -217,12 +219,21 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 						}
 					}
 					
-					fqcn = list.getNames().get(0);
-					Class<?> c = Class.forName(fqcn);
-					return c;
+					for(String fqcn : list.getNames())
+					{
+						try
+						{
+							logger.info("Trying: "+fqcn);
+							c = Class.forName(fqcn);
+							return c;
+						}
+						catch (ClassNotFoundException e) {}
+					}
+					throw new UtilsConfigurationException("Even for multiple candidats no class with "+code+" found using "+ClassGraph.class.getSimpleName());
+					
 				}
 			}
-			catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Class found for interface "+code+" using "+ClassGraph.class.getSimpleName()+", but CNFE with "+fqcn);}
+//			catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Class found for interface "+code+" using "+ClassGraph.class.getSimpleName()+", but CNFE with "+fqcn);}
 		}
 		
 	}

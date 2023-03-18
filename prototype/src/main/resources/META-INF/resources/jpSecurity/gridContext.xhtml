@@ -13,9 +13,9 @@
 	<j:row>
 		<j:slot id="sViews" width="7">
 			<h:form id="fRoles">
-				<p:dataTable var="c" value="#{cc.attrs.bean.contexts}" draggableRows="true"
-						selection="#{cc.attrs.bean.context}" selectionMode="single" rowKey="#{c.id}"
-						styleClass="jeesl-datatable">
+				<p:dataTable var="c" value="#{cc.attrs.bean.contexts}" styleClass="jeesl-datatable"
+						selection="#{cc.attrs.bean.context}" selectionMode="single" rowKey="#{c.id}" draggableRows="true"
+						>
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityContext" code="listOf">
 							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addContext()}" update=":#{cc.id}:grid"/>
@@ -44,20 +44,21 @@
 		</j:slot>
 		<j:slot id="sRole" width="5">
 			<h:form id="fRole" rendered="#{not empty cc.attrs.bean.context}">
-				<p:panel header="#{appLabelBean.entities['SecurityContext'][localeCode].lang}" styleClass="jeeslPanel" >
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="SecurityContext"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveContext()}" update=":#{cc.id}:grid" />
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteContext()}" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid>
 						
 						<jtp:label entity="SecurityContext" code="code"/>
 						<p:inputText value="#{cc.attrs.bean.context.code}"/>
 						
-					</p:panelGrid>
+					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.bean.context}" withDescription="true" />
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid>
 						
 						<jtp:label entity="SecurityContext" code="serverName"/>
 						<p:inputText value="#{cc.attrs.bean.context.serverName}"/>
@@ -91,7 +92,7 @@
 						
 						<jtp:label entity="SecurityContext" code="contextId"/>
 						<p:inputText value="#{cc.attrs.bean.nnb.a}"/>
-					</p:panelGrid>
+					</j:inputGrid>
 				</p:panel>	
 				
 			</h:form>

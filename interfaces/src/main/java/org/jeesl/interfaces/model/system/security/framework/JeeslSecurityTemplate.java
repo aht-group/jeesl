@@ -25,6 +25,8 @@ public interface JeeslSecurityTemplate<L extends JeeslLang, D extends JeeslDescr
 					EjbWithLang<L>,EjbWithDescription<D>,
 					JeeslSecurityWithCategory<C>
 {
+	public enum Attributes {category}
+	
 	public boolean getDocumentation();
 	public void setDocumentation(boolean documentation);
 }

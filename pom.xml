@@ -179,11 +179,6 @@
         	</dependency>
         	<dependency>
         		<groupId>org.jeesl</groupId>
-        		<artifactId>jeesl-prototype</artifactId>
-        		<version>${project.version}</version>
-        	</dependency>
-        	<dependency>
-        		<groupId>org.jeesl</groupId>
         		<artifactId>jeesl-monitor</artifactId>
         		<version>${project.version}</version>
         	</dependency>

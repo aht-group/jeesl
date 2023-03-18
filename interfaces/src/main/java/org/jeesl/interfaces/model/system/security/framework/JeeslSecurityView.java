@@ -32,6 +32,7 @@ public interface JeeslSecurityView<L extends JeeslLang, D extends JeeslDescripti
 					JeeslSecurityWithCategory<C>,
 					JeeslSecurityWithActions<A>
 {
+	public enum Attributes{category}
 	public static final String extractId = "securityViews";
 	
 	public Boolean getAccessPublic();
