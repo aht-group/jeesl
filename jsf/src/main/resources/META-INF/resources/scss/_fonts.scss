@@ -22,11 +22,19 @@ $table-th-font-weight: $font-weight-base;
 $link-decoration: none;
 $link-hover-decoration: underline;
 
+$icon-calendar: '\f073';
 $icon-cancel: '\f05e';
-$icon-next: '\25ba';
+$icon-close: '\f00d';
 $icon-plus: '\f067';
-$icon-previous: '\25c4';
 $icon-search: '\f002';
+
+$icon-previous: '\25c4';
+$icon-next: '\25ba';
+
+$icon-start: '\f049';
+$icon-backward: '\f04a';
+$icon-forward: '\f04e';
+$icon-end: '\f050';
 
 @mixin font-regular {
 	font-size: 1rem;

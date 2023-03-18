@@ -28,7 +28,7 @@
 						<p:ajax event="collapse" listener="#{cc.attrs.bean.onNodeCollapse}" />
 			            <p:treeNode styleClass="#{not node.visible ? 'jeesl-disabled' : ''}">
 			                <h:outputText value="#{node.view.category.position}.#{node.view.position} #{node.view.name[localeCode].lang}"/>
-			                <j:svg type="jeeslCancel" rendered="#{not node.view.visible}"/>
+			                <h:panelGroup styleClass="ui-icon ui-icon-close" rendered="#{not node.view.visible}"/>
 			            </p:treeNode>
 			        </p:tree>
 				</p:panel>

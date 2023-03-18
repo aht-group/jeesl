@@ -107,8 +107,6 @@ public class InputGrid extends UIPanel
 			List<List<UIComponent>> childGroups = new ArrayList<List<UIComponent>>(children.stream().filter(child -> child.isRendered()).collect(Collectors.groupingBy(child -> classifyChildGroup())).values());
 			Collections.sort(childGroups, (a, b) -> children.indexOf(a.get(0)) - children.indexOf(b.get(0)));
 			
-			float inputWidth = (12 - labelWidth) / (columnCount - 1);
-			
 			for (List<UIComponent> group : childGroups)
 			{
 				UIPanel groupChild = new UIPanel();
@@ -137,7 +135,7 @@ public class InputGrid extends UIPanel
 					{
         				UIPanel inputChild = new UIPanel();
         				responseWriter.startElement("div", inputChild);
-        				responseWriter.writeAttribute("class", "p-col p-md-" + (int)inputWidth, null);
+        				responseWriter.writeAttribute("class", "p-col p-col-count-" + (columnCount - 1), null);
 						
         				child.encodeAll(context);
 				

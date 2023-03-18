@@ -287,24 +287,24 @@ $border: $border-width solid $border-colour;
 }
 
 @mixin icon {
-	background: none;
+	background-image: none !important; // Override primefaces 12 rule.
 	color: inherit; // !important; Override primefaces 12 rule.
 	display: inline-block;
 	font-family: "Font Awesome 5 Free";
     font-size: inherit;
 	font-weight: 700;
 	height: auto;
-//	left: 0;
 	margin: 0;
 	position: relative;
     text-indent: 0;
     text-rendering: auto;
-	text-shadow: $text-shadow;
+	transition: background $transition-duration linear;
 	top: 0;
 	width: auto;
     -webkit-font-smoothing: antialiased;
 	
 	&:before {
+		font-size: inherit;
 		vertical-align: top;
 		
 		@media (max-width: 768px) {
@@ -429,6 +429,7 @@ $border: $border-width solid $border-colour;
 			padding: 0;
 			position: relative;
 			text-align: center;
+			width: auto;
 			
 			@media (max-width: 768px) {
 				height: auto;
@@ -450,10 +451,6 @@ $border: $border-width solid $border-colour;
 			@media (max-width: 768px) {
 				font-size: 2.5em;
 			}
-		}
-		
-		.ui-icon-close:before {
-			content: "\f00d";
 		}
 	}
 	
@@ -566,10 +563,6 @@ $border: $border-width solid $border-colour;
 		.ui-icon {
 			@include icon;
 		}
-		
-		.ui-icon-calendar:before {
-			content: "\f073";
-		}
 	}
 }
 
@@ -647,7 +640,6 @@ $border: $border-width solid $border-colour;
 			&:before {
 				color: white;
 				display: inline-block;
-				font-size: 1.5em;
 				vertical-align: middle;
 				width: 100%;
 
@@ -678,16 +670,13 @@ $border: $border-width solid $border-colour;
 			@include headlined-overlay-icon;
 			
 			float: none;
+			font-size: 1.1em;
 			margin: 0;
 			padding: 0;
 		}
 		
 		.ui-icon {
 			float: none;
-		}
-		
-		.ui-icon-circle-close:before {
-			content: "\f00d";
 		}
 	}
 	
@@ -763,14 +752,6 @@ $border: $border-width solid $border-colour;
 		
 		.ui-datepicker-prev, .ui-datepicker-next {
 			@include headlined-overlay-icon;
-		}
-		
-		.ui-icon-circle-triangle-w:before {
-			content: "\f0d9";
-		}
-		
-		.ui-icon-circle-triangle-e:before {
-			content: "\f0da";
 		}
 	}
 	
@@ -1157,6 +1138,40 @@ $border: $border-width solid $border-colour;
 	
 	&.ui-icon-plusthick:before {
 		content: $icon-plus;
+	}
+		
+	&.ui-icon-seek-first:before {
+		content: $icon-start;
+	}
+	
+	&.ui-icon-seek-prev:before {
+		content: $icon-backward;
+	}
+	
+	&.ui-icon-seek-next:before {
+		content: $icon-forward;
+	}
+	
+	&.ui-icon-seek-end:before {
+		content: $icon-end;
+	}
+		
+	&.ui-icon-close, &.ui-icon-circle-close {
+		&:before {
+			content: $icon-close;
+		}
+	}
+		
+	&.ui-icon-calendar:before {
+		content: $icon-calendar;
+	}
+		
+	&.ui-icon-circle-triangle-w:before {
+		content: $icon-previous;
+	}
+	
+	&.ui-icon-circle-triangle-e:before {
+		content: $icon-next;
 	}
 }
 
