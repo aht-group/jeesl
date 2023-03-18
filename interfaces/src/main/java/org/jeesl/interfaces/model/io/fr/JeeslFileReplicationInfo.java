@@ -26,4 +26,6 @@ public interface JeeslFileReplicationInfo<META extends JeeslFileMeta<?,?,?,?>,
 	
 	META getMeta();
 	void setMeta(META meta);
+	
+//	void x();
 }
