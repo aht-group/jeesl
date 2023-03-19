@@ -13,7 +13,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("systemPropertyCategory")
-@EjbErNode(name="Category",level=3,subset="trafficLight")
+@EjbErNode(name="Category",level=3,subset="systemProperty")
 public class SystemPropertyCategory extends IoStatus implements JeeslPropertyCategory<IoLang,IoDescription,SystemPropertyCategory,IoGraphic>
 {
 	public static final long serialVersionUID=1;

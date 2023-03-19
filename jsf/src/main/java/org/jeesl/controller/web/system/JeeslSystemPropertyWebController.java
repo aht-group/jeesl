@@ -1,11 +1,13 @@
-package org.jeesl.web.mbean.prototype.system;
+package org.jeesl.controller.web.system;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSystemPropertyFacade;
+import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -13,6 +15,7 @@ import org.jeesl.factory.builder.system.PropertyFactoryBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.property.JeeslProperty;
 import org.jeesl.interfaces.model.system.property.JeeslPropertyCategory;
@@ -23,15 +26,14 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-@Deprecated //Use JeeslSystemPropertyWebController instead
-public class AbstractSystemPropertyBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslSystemPropertyWebController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslPropertyCategory<L,D,C,?>,
 											P extends JeeslProperty<L,D,C,P>>
-		extends AbstractAdminBean<L,D,LOC>
+		extends AbstractJeeslWebController<L,D,LOC>
 		implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractSystemPropertyBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslSystemPropertyWebController.class);
 	
 	private JeeslSystemPropertyFacade<L,D,C,P> fProperty;
 	private final PropertyFactoryBuilder<L,D,C,P> fbProperty;
@@ -43,7 +45,7 @@ public class AbstractSystemPropertyBean <L extends JeeslLang, D extends JeeslDes
 	
 	protected P prop; public P getProp() {return prop;} public void setProp(P prop) {this.prop = prop;}
 
-	public AbstractSystemPropertyBean(final PropertyFactoryBuilder<L,D,C,P> fbProperty)
+	public JeeslSystemPropertyWebController(final PropertyFactoryBuilder<L,D,C,P> fbProperty)
 	{
 		super(fbProperty.getClassL(),fbProperty.getClassD());
 		this.fbProperty = fbProperty;
@@ -51,8 +53,10 @@ public class AbstractSystemPropertyBean <L extends JeeslLang, D extends JeeslDes
 		comparatorProperty = (new PropertyComparator<L,D,C,P>()).factory(PropertyComparator.Type.category);
 	}
 	
-	public void initSuper(JeeslSystemPropertyFacade<L,D,C,P> fProperty)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
+							JeeslSystemPropertyFacade<L,D,C,P> fProperty)
 	{
+		super.postConstructWebController(lp,bMessage);
 		this.fProperty=fProperty;
 
 		sbhCategory.setList(fProperty.allOrderedPositionVisible(fbProperty.getClassCategory()));

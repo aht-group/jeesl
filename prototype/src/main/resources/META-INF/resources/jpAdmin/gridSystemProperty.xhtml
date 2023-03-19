@@ -22,16 +22,19 @@
 				<p:dataTable var="p" value="#{cc.attrs.bean.properties}"
 						selection="#{cc.attrs.bean.prop}" selectionMode="single" rowKey="#{p.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslProperties}"/>
+						<j:dtHeader entity="SystemProperty" code="listOf"/>
 					</f:facet>
 					<p:ajax event="rowSelect" update=":#{cc.id}:sProperties :#{cc.id}:sProperty" listener="#{cc.attrs.bean.selectProperty}"/>  
-		            <p:column headerText="#{msg.jeeslCategory}">  
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="SystemProperty" code="category"/></f:facet>
 						<h:outputText value="#{p.category.name[localeCode].lang}" />  
 		            </p:column>
-		            <p:column headerText="#{msg.jeeslPropertyKey}">  
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="SystemProperty" code="key"/></f:facet>
 						<h:outputText value="#{p.key}" />  
 		            </p:column>
-		            <p:column headerText="#{msg.jeeslPropertyValue}">  
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="SystemProperty" code="value"/></f:facet>
 						<h:outputText value="#{of:abbreviate(p.value, 40)}"/>
 		            </p:column>
 				</p:dataTable>
@@ -40,24 +43,24 @@
 		<j:slot id="sProperty" width="5">
 			<h:form id="fProperty">
 				<p:panel header="#{msg.jeeslProperty}" rendered="#{not empty cc.attrs.bean.prop}" styleClass="jeeslPanel">
+					<f:facet name="header"><j:pHeader entity="SystemProperty"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveProperty()}" update=":#{cc.id}:sProperties" tooltip="#{msg.ttSave}" library="jeeslGfx"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-					
-						<p:outputLabel value="#{msg.jeeslCategory}"/>
+					<j:inputGrid>
+						<jtp:label entity="SystemProperty" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.prop.category}" effect="fade" >
 							<f:selectItems value="#{cc.attrs.bean.sbhCategory.list}" var="t" itemLabel="#{t.name[userBean.localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
 					
-						<p:outputLabel value="#{msg.jeeslPropertyKey}"/>
+						<jtp:label entity="SystemProperty" code="key"/>
 						<h:outputText value="#{cc.attrs.bean.prop.key}"/>
 						
-						<p:outputLabel value="#{msg.jeeslPropertyValue}"/>
+						<jtp:label entity="SystemProperty" code="value"/>
 						<p:inputText rendered="#{!cc.attrs.bean.prop.frozen}" value="#{cc.attrs.bean.prop.value}"/>
 						<h:outputText rendered="#{cc.attrs.bean.prop.frozen}" value="#{cc.attrs.bean.prop.value}"/>
-					</p:panelGrid>
+					</j:inputGrid>
 				</p:panel>
 			</h:form>
 		</j:slot>
