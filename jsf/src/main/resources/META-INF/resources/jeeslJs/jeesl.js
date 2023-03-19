@@ -1,9 +1,15 @@
 function updateCellSelection(cell, rowCode, columnCode) {
-	$('.selected').removeClass('selected');
+	//find cell ancestor with class 'jeesl-datatable'
+	var tableId = $(cell).closest('.jeesl-datatable');
+	//find cell ancestor with class 'jeesl-datatable' and remove class 'selected'
+    tableId.find('.selected').removeClass('selected');
+
 	$(cell).addClass('selected');
+
 	selectCell([
 		{ name: 'rowCode', value: rowCode },
-		{ name: 'columnCode', value: columnCode }
+		{ name: 'columnCode', value: columnCode },
+		{ name: 'tableId', value: tableId },
 	]);
 }
 
