@@ -36,6 +36,7 @@
 		<module>io-ssi</module>
 		
 		<module>module-news</module>
+		<module>module-ts</module>
 		
 		<module>system-bookmark</module>
 		<module>system-constraint</module>
