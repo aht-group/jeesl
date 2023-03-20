@@ -17,7 +17,7 @@
 				<p:dataTable var="m" value="#{cc.attrs.ctrl.mappings}"
 							 selection="#{cc.attrs.ctrl.mapping}" selectionMode="single" rowKey="#{m.id}">
 					<f:facet name="header">
-						<j:dtHeader entity="IoSsiMapping" code="listOf">
+						<j:dtHeader entity="IoSsiContext" code="listOf">
 							<j:security actionSuffix="create" handler="#{cc.attrs.security}">
 								<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addMapping()}" update=":#{cc.id}:sMapping"/>
 							</j:security>
@@ -84,7 +84,7 @@
 		<j:slot id="sMapping" width="8">
 			<h:form id="fMapping" rendered="#{not empty cc.attrs.ctrl.mapping}">
 				<p:panel id="pView" styleClass="jeesl-panel">
-					<f:facet name="header"><j:pHeader entity="IoSsiMapping"/></f:facet>
+					<f:facet name="header"><j:pHeader entity="IoSsiContext"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelMapping()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveMapping()}" update=":#{cc.id}:grid"/>
@@ -92,16 +92,16 @@
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGRid80">
 						
-						<jtp:label entity="IoSsiMapping" code="id"/>
+						<jtp:label entity="IoSsiContext" code="id"/>
 						<h:outputText value="#{cc.attrs.ctrl.mapping.id}"/>
 						
-						<jtp:label entity="IoSsiMapping" code="system"/>
+						<jtp:label entity="IoSsiContext" code="system"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.system}" disabled="#{cc.attrs.ctrl.mapping.id gt 0}"
 											effect="fade" autoWidth="false" filter="true" filterMatchMode="contains">
 							<f:selectItems value="#{cc.attrs.ctrl.systems}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						
-						<jtp:label entity="IoSsiMapping" code="json"/>
+						<jtp:label entity="IoSsiContext" code="json"/>
 						<p:selectOneMenu var="var" value="#{cc.attrs.ctrl.mapping.json}" rendered="#{cc.attrs.ctrl.mapping.id eq 0}"
 											effect="fade" autoWidth="false" filter="true" filterMatchMode="contains">
 							<f:selectItem itemLabel="--"/>
@@ -124,7 +124,7 @@
 							<h:outputText value="#{cc.attrs.ctrl.mapping.json.code}"/>
 						</ui:fragment>
 						
-						<jtp:label entity="IoSsiMapping" code="entity"/>
+						<jtp:label entity="IoSsiContext" code="entity"/>
 						<p:selectOneMenu var="var" value="#{cc.attrs.ctrl.mapping.entity}" rendered="#{cc.attrs.ctrl.mapping.id eq 0}"
 									effect="fade" autoWidth="false" filter="true" filterMatchMode="contains">
 							<f:selectItem itemLabel="--"/>
@@ -147,7 +147,7 @@
 							<h:outputText value="#{cc.attrs.ctrl.mapping.entity.code}"/>
 						</ui:fragment>
 						
-						<jtp:label entity="IoSsiMapping" code="classA"/>
+						<jtp:label entity="IoSsiContext" code="classA"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.classA}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
 							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
@@ -165,7 +165,7 @@
 							</p:column>
 						</p:selectOneMenu>
 						
-						<jtp:label entity="IoSsiMapping" code="classB"/>
+						<jtp:label entity="IoSsiContext" code="classB"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.classB}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
 							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
@@ -183,7 +183,7 @@
 							</p:column>
 						</p:selectOneMenu>
 						
-						<jtp:label entity="IoSsiMapping" code="classC"/>
+						<jtp:label entity="IoSsiContext" code="classC"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.classC}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
 							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
