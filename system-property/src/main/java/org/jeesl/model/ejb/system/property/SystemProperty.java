@@ -30,23 +30,23 @@ public class SystemProperty implements JeeslProperty<IoLang,IoDescription,System
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-    @Override public long getId() {return id;}
-    @Override public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 
 	@ManyToOne @NotNull
 	private SystemPropertyCategory category;
 	@Override public SystemPropertyCategory getCategory() {return category;}
 	@Override public void setCategory(SystemPropertyCategory category) {this.category = category;}
-   
+
 	@NotNull
 	private String key;
-    @Override public String getKey() {return key;}
-    @Override public void setKey(String key) {this.key=key;}
-   
+	@Override public String getKey() {return key;}
+	@Override public void setKey(String key) {this.key=key;}
+
 	@NotNull
 	private String value;
-    @Override public String getValue() {return value;}
-    @Override public void setValue(String value) {this.value=value;}
+	@Override public String getValue() {return value;}
+	@Override public void setValue(String value) {this.value=value;}
    
     private boolean frozen;
 	@Override public boolean isFrozen(){return frozen;}
