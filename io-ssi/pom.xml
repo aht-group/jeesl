@@ -41,11 +41,16 @@
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-label</artifactId>
-    		<scope>compile</scope>
+    		<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-system-job</artifactId>
     		<scope>provided</scope>
 		</dependency>
 	
