@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.system.job.work;
+package org.jeesl.model.ejb.system.feedback;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
