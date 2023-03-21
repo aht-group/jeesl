@@ -2,8 +2,8 @@ package org.jeesl.factory.ejb.system.job;
 
 import java.util.Date;
 
-import org.jeesl.interfaces.model.system.job.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobCache;
+import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

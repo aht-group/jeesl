@@ -7,6 +7,7 @@ import java.util.List;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
+import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
