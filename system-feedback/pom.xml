@@ -8,9 +8,9 @@
     	<version>0.3.0-SNAPSHOT</version>
 	</parent>
 	
-    <artifactId>jeesl-system-job</artifactId>
+    <artifactId>jeesl-system-feedback</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - System Job</name>
+    <name>JEESL - System Feedback</name>
 	
 	<dependencyManagement>
 		<dependencies>
