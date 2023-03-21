@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.system.job;
+package org.jeesl.model.ejb.system.job.core;
 
 import java.util.ArrayList;
 import java.util.List;
