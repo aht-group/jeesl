@@ -12,18 +12,17 @@
 		<composite:attribute name="oncomplete" required="false"/>
 		<composite:attribute name="handler" required="true"/>
 		<composite:attribute name="label" required="false" default="Yes, remove permanently!"/>
-		<composite:attribute name="styleClass" required="false"/>
 	</composite:interface>
 
 	<composite:implementation>
-
-		<p:dialog id="dialog"
+		
+		<j:dialog id="dialog"
 				  header="#{cc.attrs.handler.workflow.process.context.name[localeCode].lang}: #{cc.attrs.handler.workflow.process.name[localeCode].lang}"
-				  widgetVar="#{cc.attrs.widgetVar}"
-				  modal="true"
-				  draggable="false"
-				  resizable="false"
-				  styleClass="#{cc.attrs.styleClass}">
+				  widgetVar="#{cc.attrs.widgetVar}">
+			<f:facet name="actions">
+				<j:svg type="jeeslCancel" library="jeeslGfx" oncomplete="PF('#{cc.attrs.widgetVar}').hide();"/>
+			</f:facet>
+			
 			<j:row>
 				<j:slot width="6">
 					<h:form id="fStages">
@@ -176,6 +175,6 @@
 					</h:form>
 				</j:slot>
 			</j:row>
-		</p:dialog>
+		</j:dialog>
 	</composite:implementation>
 </html>
