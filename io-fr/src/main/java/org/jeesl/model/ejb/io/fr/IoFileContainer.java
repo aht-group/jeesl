@@ -19,7 +19,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="IoFileContainer")
-@EjbErNode(name="FR Container",category="elib",level=3,subset="elib")
+@EjbErNode(name="FR Container",category="elib",level=3,subset="ioFr")
 public class IoFileContainer implements JeeslFileContainer<IoFileStorage,IoFileMeta>
 {
 	public static final long serialVersionUID=1;

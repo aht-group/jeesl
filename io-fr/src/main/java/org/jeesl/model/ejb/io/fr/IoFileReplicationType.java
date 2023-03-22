@@ -23,7 +23,7 @@ public class IoFileReplicationType extends IoStatus implements JeeslFileReplicat
 
 	@Override public List<String> getFixedCodes()
 	{
-		List<String> fixed = new ArrayList<String>();
+		List<String> fixed = new ArrayList<>();
 		for(JeeslFileReplicationType.Code c : JeeslFileReplicationType.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}

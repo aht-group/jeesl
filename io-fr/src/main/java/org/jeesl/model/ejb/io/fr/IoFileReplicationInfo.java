@@ -44,7 +44,7 @@ public class IoFileReplicationInfo implements JeeslFileReplicationInfo<IoFileMet
 
 	@Override public boolean equals(Object object){return (object instanceof IoFileReplicationInfo) ? id == ((IoFileReplicationInfo) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
