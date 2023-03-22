@@ -48,7 +48,12 @@
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-fr</artifactId>
-    		<scope>provided</scope>
+    		<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-system-security</artifactId>
+    		<scope>compile</scope>
 		</dependency>
 	
 		<!-- JakartaEE -->
