@@ -8,7 +8,7 @@
     	<version>0.3.0-SNAPSHOT</version>
 	</parent>
 	
-    <artifactId>jeesl-Cycle</artifactId>
+    <artifactId>jeesl-cycle</artifactId>
     <packaging>jar</packaging>
     <name>JEESL - Cycle Workaround</name>
 	
