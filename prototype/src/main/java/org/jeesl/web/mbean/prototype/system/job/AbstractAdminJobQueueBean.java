@@ -40,7 +40,7 @@ public class AbstractAdminJobQueueBean <L extends JeeslLang, D extends JeeslDesc
 									CATEGORY extends JeeslJobCategory<L,D,CATEGORY,?>,
 									TYPE extends JeeslJobType<L,D,TYPE,?>,
 									EXPIRE extends JeeslJobExpiration<L,D,EXPIRE,?>,
-									JOB extends JeeslJob<TEMPLATE,PRIORITY,FEEDBACK,STATUS,USER>,
+									JOB extends JeeslJob<TEMPLATE,PRIORITY,STATUS,USER>,
 									PRIORITY extends JeeslJobPriority<L,D,PRIORITY,?>,
 									FEEDBACK extends JeeslJobFeedback<JOB,FT,USER>,
 									FT extends JeeslJobFeedbackType<L,D,FT,?>,

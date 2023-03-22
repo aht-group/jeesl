@@ -16,7 +16,6 @@ import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 
 public interface JeeslJob<TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 							PRIORITY extends JeeslStatus<?,?,PRIORITY>,
-							FEEDBACK extends JeeslJobFeedback<?,?,USER>,
 							STATUS extends JeeslJobStatus<?,?,STATUS,?>,
 							USER extends EjbWithEmail>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithNonUniqueCode,EjbWithParentAttributeResolver
@@ -52,8 +51,8 @@ public interface JeeslJob<TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 	Integer getAttempts();
 	void setAttempts(Integer attempts);
 	
-	List<FEEDBACK> getFeedbacks();
-	void setFeedbacks(List<FEEDBACK> feedbacks);
+//	List<FEEDBACK> getFeedbacks();
+//	void setFeedbacks(List<FEEDBACK> feedbacks);
 	
 	String getJsonFilter();
 	void setJsonFilter(String jsonFilter);

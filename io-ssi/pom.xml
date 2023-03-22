@@ -57,7 +57,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-system-job</artifactId>
+    		<artifactId>jeesl-cycle</artifactId>
     		<scope>provided</scope>
 		</dependency>
 	
