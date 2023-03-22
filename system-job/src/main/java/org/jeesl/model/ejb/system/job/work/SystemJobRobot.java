@@ -65,8 +65,7 @@ public class SystemJobRobot implements JeeslJobRobot<IoLang,IoDescription>
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
-	
-	
+
 	@Override public boolean equals(Object object){return (object instanceof SystemJobRobot) ? id == ((SystemJobRobot) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(21,43).append(id).toHashCode();}
 }

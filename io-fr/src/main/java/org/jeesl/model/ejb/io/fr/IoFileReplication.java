@@ -21,6 +21,7 @@ public class IoFileReplication implements JeeslFileReplication<IoLang,IoDescript
 {
 	public static final long serialVersionUID=1;
 
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}

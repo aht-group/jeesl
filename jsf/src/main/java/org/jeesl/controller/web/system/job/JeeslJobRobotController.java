@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslJobRobotController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-									JOB extends JeeslJob<?,?,?,STATUS,?>,
+									JOB extends JeeslJob<?,?,STATUS,?>,
 									STATUS extends JeeslJobStatus<L,D,STATUS,?>,
 									ROBOT extends JeeslJobRobot<L,D>
 									>

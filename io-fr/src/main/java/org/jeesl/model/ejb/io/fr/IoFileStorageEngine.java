@@ -16,7 +16,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("ioFrEngine")
-@EjbErNode(name="Category",category="system",subset="mail",level=3)
+@EjbErNode(name="Category",category="io",subset="ioFr",level=3)
 public class IoFileStorageEngine extends IoStatus implements JeeslFileStorageEngine<IoLang,IoDescription,IoFileStorageEngine,IoGraphic>
 {
 	public static final long serialVersionUID=1;
@@ -24,7 +24,7 @@ public class IoFileStorageEngine extends IoStatus implements JeeslFileStorageEng
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<>();
-		for(IoFileStorageEngine.Code c : IoFileStorageEngine.Code.values()){fixed.add(c.toString());}
+		for(JeeslFileStorageEngine.Code c : JeeslFileStorageEngine.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
 

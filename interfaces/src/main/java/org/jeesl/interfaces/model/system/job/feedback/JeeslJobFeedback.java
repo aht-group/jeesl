@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.system.job.JeeslJob;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 
-public interface JeeslJobFeedback<JOB extends JeeslJob<?,?,?,?,USER>,
+public interface JeeslJobFeedback<JOB extends JeeslJob<?,?,?,USER>,
 								FT extends JeeslJobFeedbackType<?,?,FT,?>,
 							USER extends EjbWithEmail
 							>

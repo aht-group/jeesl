@@ -16,14 +16,14 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("ioFrStorageType")
-@EjbErNode(name="Category",category="system",subset="fr",level=3)
+@EjbErNode(name="Category",category="system",subset="ioFr",level=3)
 public class IoFileStorageType extends IoStatus implements JeeslFileStorageType<IoLang,IoDescription,IoFileStorageType,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 
 	@Override public List<String> getFixedCodes()
 	{
-		List<String> fixed = new ArrayList<String>();
+		List<String> fixed = new ArrayList<>();
 		for(JeeslFileStorageType.Code c : JeeslFileStorageType.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}

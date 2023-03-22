@@ -66,7 +66,7 @@ public class SystemJobTemplate implements JeeslJobTemplate<IoLang,IoDescription,
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
-	@JoinTable(name="JobTemplateJtDescription",joinColumns={@JoinColumn(name="template_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@JoinTable(name="SystemJobTemplateJtDescription",joinColumns={@JoinColumn(name="template_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}

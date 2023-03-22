@@ -35,7 +35,7 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	@NotNull
 	private String code;
 	@Override public String getCode() {return code;}
@@ -44,7 +44,7 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
-	
+
 	@Override public String resolveParentAttribute() {return JeeslFileMeta.Attributes.container.toString();}
 	@NotNull @ManyToOne
 	private IoFileContainer container;
@@ -55,23 +55,23 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 	private String fileName;
 	@Override public String getFileName() {return fileName;}
 	@Override public void setFileName(String fileName) {this.fileName = fileName;}
-	
+
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="IoFileMetaJtDescription",joinColumns={@JoinColumn(name="meta_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
-	
+
 	@NotNull
 	private Date record;
 	@Override public Date getRecord() {return record;}
 	@Override public void setRecord(Date record) {this.record = record;}
-	
+
 	private long size;
 	@Override public long getSize() {return size;}
 	@Override public void setSize(long size) {this.size = size;}
-	
+
 	private String md5Hash;
 	@Override public String getMd5Hash() {return md5Hash;}
 	@Override public void setMd5Hash(String md5Hash) {this.md5Hash = md5Hash;}
@@ -84,7 +84,7 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 	private String category;
 	@Override public String getCategory() {return category;}
 	@Override public void setCategory(String category) {this.category = category;}
-	
+
 	@ManyToOne
 	private IoFileStatus status;
 	@Override public IoFileStatus getStatus() {return status;}
@@ -97,7 +97,7 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 
 	@Override public boolean equals(Object object){return (object instanceof IoFileMeta) ? id == ((IoFileMeta) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();

@@ -23,7 +23,7 @@ public class IoFileStatus extends IoStatus implements JeeslFileStatus<IoLang,IoD
 
 	@Override public List<String> getFixedCodes()
 	{
-		List<String> fixed = new ArrayList<String>();
+		List<String> fixed = new ArrayList<>();
 		for(JeeslFileStatus.Code c : JeeslFileStatus.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
