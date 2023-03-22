@@ -21,7 +21,7 @@ import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.module.job.Jobs;
 import org.jeesl.web.rest.AbstractJeeslRestHandler;
@@ -45,7 +45,7 @@ public class SystemJobRestService <L extends JeeslLang,D extends JeeslDescriptio
 							MNT extends JeeslJobMaintenance<L,D,MNT,?>,
 							MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
 							CONTAINER extends JeeslFileContainer<?,?>,
-							USER extends EjbWithEmail
+							USER extends JeeslSimpleUser
 							>
 					extends AbstractJeeslRestHandler<L,D>
 					implements JeeslJobRestExport,JeeslJobRestImport,JeeslJobRest
@@ -84,7 +84,7 @@ public class SystemJobRestService <L extends JeeslLang,D extends JeeslDescriptio
 					MNT extends JeeslJobMaintenance<L,D,MNT,?>,
 					MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
 					CONTAINER extends JeeslFileContainer<?,?>,
-					USER extends EjbWithEmail
+					USER extends JeeslSimpleUser
 					>
 	SystemJobRestService<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER>
 		factory(JeeslJobFacade<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER> fJob,final Class<L> cL, final Class<D> cD, Class<CATEGORY> cCategory, final Class<TYPE> cType, final Class<FT> cFeedbackType, final Class<STATUS> cStatus)

@@ -26,7 +26,7 @@ import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob2;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob3;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 
 public interface JeeslJobFacade <L extends JeeslLang,D extends JeeslDescription,
@@ -44,7 +44,7 @@ public interface JeeslJobFacade <L extends JeeslLang,D extends JeeslDescription,
 								MNT extends JeeslJobMaintenance<L,D,MNT,?>,
 								MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
 								CONTAINER extends JeeslFileContainer<?,?>,
-								USER extends EjbWithEmail
+								USER extends JeeslSimpleUser
 								>
 			extends JeeslFacade
 {	

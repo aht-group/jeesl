@@ -48,7 +48,7 @@ import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob3;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 
 import net.sf.exlp.util.DateUtil;
@@ -68,7 +68,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 									MNT extends JeeslJobMaintenance<L,D,MNT,?>,
 									MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
 									CONTAINER extends JeeslFileContainer<?,?>,
-									USER extends EjbWithEmail
+									USER extends JeeslSimpleUser
 									>
 					extends JeeslFacadeBean
 					implements JeeslJobFacade<L,D,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER>

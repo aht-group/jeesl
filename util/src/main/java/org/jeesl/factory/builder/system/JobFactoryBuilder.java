@@ -23,7 +23,7 @@ import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.util.comparator.ejb.system.job.JobMaintenanceInfoComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public class JobFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								CACHE extends JeeslJobCache<TEMPLATE,?>,
 								MNT extends JeeslJobMaintenance<L,D,MNT,?>,
 								MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
-								USER extends EjbWithEmail
+								USER extends JeeslSimpleUser
 								>
 				extends AbstractFactoryBuilder<L,D>
 {

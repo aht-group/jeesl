@@ -5,12 +5,12 @@ import java.io.Serializable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.job.JeeslJob;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 
 public interface JeeslJobFeedback<JOB extends JeeslJob<?,?,?,USER>,
 								FT extends JeeslJobFeedbackType<?,?,FT,?>,
-							USER extends EjbWithEmail
+								USER extends JeeslSimpleUser
 							>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable
 {

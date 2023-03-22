@@ -21,12 +21,12 @@ import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedbackType;
 import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenance;
 import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
+import org.jeesl.interfaces.model.system.locale.JeeslDescription;
+import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +45,7 @@ public abstract class AbstractAdminJobBean <L extends JeeslLang, D extends Jeesl
 									MNT extends JeeslJobMaintenance<L,D,MNT,?>,
 									MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
 									CONTAINER extends JeeslFileContainer<?,?>,
-									USER extends EjbWithEmail
+									USER extends JeeslSimpleUser
 									>
 					extends AbstractAdminBean<L,D,LOC>
 					implements Serializable,SbToggleBean

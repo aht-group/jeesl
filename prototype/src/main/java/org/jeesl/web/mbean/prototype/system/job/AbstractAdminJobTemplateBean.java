@@ -27,7 +27,7 @@ import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +48,7 @@ public class AbstractAdminJobTemplateBean <L extends JeeslLang, D extends JeeslD
 									MNT extends JeeslJobMaintenance<L,D,MNT,?>,
 									MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>,
 									CONTAINER extends JeeslFileContainer<?,?>,
-									USER extends EjbWithEmail
+									USER extends JeeslSimpleUser
 									>
 					extends AbstractAdminJobBean<L,D,LOC,TEMPLATE,CATEGORY,TYPE,EXPIRE,JOB,PRIORITY,FEEDBACK,FT,STATUS,ROBOT,CACHE,MNT,MNI,CONTAINER,USER>
 					implements Serializable

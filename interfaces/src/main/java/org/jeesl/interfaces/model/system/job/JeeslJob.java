@@ -2,22 +2,20 @@ package org.jeesl.interfaces.model.system.job;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 
 public interface JeeslJob<TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 							PRIORITY extends JeeslStatus<?,?,PRIORITY>,
 							STATUS extends JeeslJobStatus<?,?,STATUS,?>,
-							USER extends EjbWithEmail>
+							USER extends JeeslSimpleUser>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithNonUniqueCode,EjbWithParentAttributeResolver
 {	
 	public static enum Attributes{template,status,priority,recordCreation,recordStart,code};
