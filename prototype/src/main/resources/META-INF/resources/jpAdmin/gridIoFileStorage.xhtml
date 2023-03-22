@@ -15,7 +15,7 @@
 	<j:row>
 		<j:slot id="sStorages" width="9">
 			<h:form id="fStorages">
-				<p:dataTable var="s" value="#{cc.attrs.bean.storages}" draggableRows="true"
+				<p:dataTable var="s" value="#{cc.attrs.bean.storages}" draggableRows="true" styleClass="jeesl-datatable"
 							selection="#{cc.attrs.bean.storage}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoFileStorages}">

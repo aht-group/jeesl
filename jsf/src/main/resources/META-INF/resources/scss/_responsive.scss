@@ -532,7 +532,6 @@ $enable-pointer-cursor-for-buttons: true;
 	align-items: center;
 	display: flex;
 	flex-grow: 1;
-	justify-content: center;
 	line-height: 1em;
 	padding: $slim-spacing $regular-spacing;
 
@@ -1187,8 +1186,8 @@ $enable-pointer-cursor-for-buttons: true;
 /******************/
 
 @mixin justified-panel-content {
-	margin-left: (-$regular-spacing - $slim-spacing);
-	margin-right: (-$regular-spacing - $slim-spacing);
+	margin-left: -$regular-spacing;
+	margin-right: -$regular-spacing;
 		
 	@media (max-width: 768px) {
 		margin-left: -$regular-spacing;
@@ -1196,15 +1195,11 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	&:first-child {
-		margin-top: -$half-spacing - $slim-spacing;
+		margin-top: -$regular-spacing;
 	}
 	
 	&:last-child {
-		margin-bottom: -$half-spacing - $slim-spacing;
-			
-		@media (max-width: 768px) {
-			margin-bottom: -$half-spacing;
-		}
+		margin-bottom: -$half-spacing;
 	}
 }
 
@@ -1261,7 +1256,6 @@ $enable-pointer-cursor-for-buttons: true;
 	background: $panel-background;
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 10px;
 	padding: 0;
 	
 	&:not(.html-container-panel) .ui-panel-content {
@@ -1452,10 +1446,6 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
-	&:last-child {
-		margin-bottom: 0;
-	}
-	
 	.jeesl-tabs.jeesl-editor {
 		.ui-tabs-panel {
 			.ui-texteditor {
@@ -1527,6 +1517,7 @@ $enable-pointer-cursor-for-buttons: true;
 			&.ui-droppable-active {
 				&.ui-state-hover {
 					background: $medium-colour;
+					box-shadow: none;
 					color: $white-100;
 				}
 			}
@@ -3378,6 +3369,7 @@ body, .ui-widget {
 			
 			> *:not(.jeesl-dialog):not([class^="jeesl-grid-"]):not([class*=" jeesl-grid-"]) {
 				width: 100%;
+				margin-bottom: $regular-spacing;
 			}
 			
 	
@@ -3412,13 +3404,10 @@ body, .ui-widget {
 		.jeesl-row {
 			align-items: stretch;
 			display: flex;
+			flex-wrap: wrap;
 			
 			@media (max-width: 768px) {
 				display: block;
-			}
-			
-			&:not(:first-child) {
-				margin-top: $regular-spacing;
 			}
 			
 			.jeesl-grid {
@@ -3454,10 +3443,6 @@ body, .ui-widget {
 			}
 			
 			form {
-				&:not(:last-child) {
-					margin-bottom: $regular-spacing;
-				}
-				
 				.jeesl-panel .jeesl-form-button {
 					margin-top: $regular-spacing;
 				}
@@ -3606,6 +3591,85 @@ body, .ui-widget {
 				tbody tr:last-child, tbody tr:last-child td {
 					border-bottom: 0;
 				}
+			}
+		}
+	}
+
+	&:not(.jeesl-dialog) {
+		.ui-dialog-titlebar {
+			.ui-dialog-title {
+				padding-left: $regular-spacing;
+			}
+			
+			.ui-dialog-titlebar-icon {
+				align-items: center;
+				background: transparent;
+				border: none;
+				box-shadow: none;
+				color: $body-foreground;
+				display: flex;
+				float: none;
+				padding: 0;
+				text-decoration: none;
+				transition: background $transition-duration linear;
+				width: $header-element-height;
+				
+				.ui-icon {
+					display: flex;
+					flex-grow: 1;
+					justify-content: center;
+					
+					&:hover {
+						background: $header-background-colour;
+					}
+					
+					&:before {
+						font-size: 1.3em;
+					}
+				}
+			}
+		}
+	}
+	
+	&.multi-panel-dialog {
+		background: none;
+		border: none;
+		box-shadow: none;
+		overflow: visible;
+		
+		.ui-dialog-titlebar {
+			background: none;
+			border: none;
+			box-shadow: none;
+			justify-content: flex-end;
+			margin-bottom: $regular-spacing;
+			
+			.ui-dialog-title {
+				color: $white-100;
+				display: none;
+				flex-grow: 0;
+				font-size: 1.1em;
+				text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+				text-transform: uppercase;
+			}
+			
+			.ui-dialog-titlebar-icon {
+				@include button;
+
+				border-radius: $border-radius;
+				box-shadow: $highlight-shadow, $overlay-shadow;
+				position: relative;
+				transition: box-shadow $transition-duration linear;
+			}
+		}
+		
+		.ui-dialog-content {
+			overflow: visible;
+			padding: 0;
+			
+			> .jeesl-row > * {
+				box-shadow: $overlay-shadow;
+				margin-bottom: $regular-spacing;
 			}
 		}
 	}

@@ -1156,7 +1156,7 @@ $border: $border-width solid $border-colour;
 		content: $icon-end;
 	}
 		
-	&.ui-icon-close, &.ui-icon-circle-close {
+	&.ui-icon-close, &.ui-icon-circle-close, &.ui-icon-closethick {
 		&:before {
 			content: $icon-close;
 		}
