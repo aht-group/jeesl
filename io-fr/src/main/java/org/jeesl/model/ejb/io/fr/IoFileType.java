@@ -16,14 +16,14 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("ioFrFileType")
-@EjbErNode(name="Category",category="system",subset="mail",level=3)
+@EjbErNode(name="Category",category="system",subset="ioFr",level=3)
 public class IoFileType extends IoStatus implements JeeslFileType<IoLang,IoDescription,IoFileType,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 
 	@Override public List<String> getFixedCodes()
 	{
-		List<String> fixed = new ArrayList<String>();
+		List<String> fixed = new ArrayList<>();
 		for(JeeslFileType.Code c : JeeslFileType.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}

@@ -29,7 +29,7 @@ public class IoFileContainer implements JeeslFileContainer<IoFileStorage,IoFileM
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	@Override public String resolveParentAttribute() {return JeeslFileContainer.Attributes.storage.toString();}
 	@NotNull @ManyToOne
 	private IoFileStorage storage;

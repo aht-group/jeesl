@@ -24,7 +24,7 @@ public class IoFileStorageEngine extends IoStatus implements JeeslFileStorageEng
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<>();
-		for(IoFileStorageEngine.Code c : JeeslFileStorageEngine.Code.values()){fixed.add(c.toString());}
+		for(JeeslFileStorageEngine.Code c : JeeslFileStorageEngine.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
 

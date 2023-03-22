@@ -82,7 +82,7 @@ public class IoFileStorage implements JeeslFileStorage<IoLang,IoDescription,IoSs
 	private Boolean keepRemoved;
 	@Override public Boolean getKeepRemoved() {return keepRemoved;}
 	@Override public void setKeepRemoved(Boolean keepRemoved) {this.keepRemoved = keepRemoved;}
-	
+
 
 	@Override public boolean equals(Object object){return (object instanceof IoFileStorage) ? id == ((IoFileStorage) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
