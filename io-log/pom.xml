@@ -43,10 +43,17 @@
     		<artifactId>jeesl-jsf</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		
+		<!-- JEESL Modules -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
     		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-system-security</artifactId>
+    		<scope>compile</scope>
 		</dependency>
 	
 		<!-- JakartaEE -->
