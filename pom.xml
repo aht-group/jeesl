@@ -28,10 +28,12 @@
 		<module>maven</module>
 		<module>prototype</module>
 		
-		<module>io-locale</module>
+		
 		<module>io-cms</module>
 		<module>io-crypto</module>
 		<module>io-label</module>
+		<module>io-locale</module>
+		<module>io-log</module>
 		<module>io-mail</module>
 		<module>io-fr</module>
 		<module>io-ssi</module>
