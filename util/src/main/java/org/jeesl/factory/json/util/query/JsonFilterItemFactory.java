@@ -25,6 +25,16 @@ public class JsonFilterItemFactory
 		return json;
 	}
 	
+	public static <T extends EjbWithId> JsonFilterItem build(T ejb) 
+	{
+		JsonFilterItem json = new JsonFilterItem();
+		json.setClassName(ejb.getClass().getName());
+		json.setType(JsonFilter.Type.idSingle.toString());
+		json.setIds(EjbIdFactory.toIds(ejb));
+		Collections.sort(json.getIds());
+		return json;
+	}
+	
 	public static JsonFilterItem build(String code, Date date) 
 	{
 		JsonFilterItem json = new JsonFilterItem();

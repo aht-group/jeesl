@@ -61,6 +61,12 @@ public class EjbIdFactory
 		}
 		return results;
 	}
+	public static <T extends EjbWithId> List<Long> toIds(T ejb)
+	{
+		List<Long> ids = new ArrayList<Long>();
+		if(EjbIdFactory.isSaved(ejb)) {ids.add(ejb.getId());}
+		return ids;
+	}
 	
 	public static <T extends EjbWithId> List<Long> toLongs(Collection<T> list)
 	{

@@ -29,13 +29,9 @@ public class JsonFilterItem implements Serializable
 	
 	@JsonProperty("date")
 	private Date date;
+	public Date getDate() {return date;}
+	public void setDate(Date date) {this.date = date;}
 	
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
