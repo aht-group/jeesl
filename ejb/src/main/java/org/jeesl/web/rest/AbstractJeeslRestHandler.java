@@ -40,7 +40,7 @@ public abstract class AbstractJeeslRestHandler <L extends JeeslLang,D extends Je
     {
     	for(Status xml : container.getStatus()){xml.setGroup(clStatus.getSimpleName());}
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
-        asdi.setStatusEjbFactory(EjbStatusFactory.createFactory(clStatus,cL,cD));
+        asdi.setStatusEjbFactory(EjbStatusFactory.instance(clStatus,cL,cD));
         asdi.setFacade(fUtils);
         DataUpdate dataUpdate = asdi.iuStatus(container.getStatus(), clStatus, cL, clParent);
         asdi.deleteUnusedStatus(clStatus, cL, cD);

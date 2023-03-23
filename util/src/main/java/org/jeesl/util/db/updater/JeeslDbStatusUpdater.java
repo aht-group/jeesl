@@ -38,7 +38,7 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 	private final Map<String,Set<Long>> mDbAvailableStatus;
 	private Set<Long> sDeleteLangs,sDeleteDescriptions;
 	
-	private EjbStatusFactory<S,L,D> statusEjbFactory; public void setStatusEjbFactory(EjbStatusFactory<S,L,D> statusEjbFactory) {this.statusEjbFactory = statusEjbFactory;}
+	private EjbStatusFactory<L,D,S> statusEjbFactory; public void setStatusEjbFactory(EjbStatusFactory<L,D,S> statusEjbFactory) {this.statusEjbFactory = statusEjbFactory;}
 	private JeeslFacade fStatus; public void setFacade(JeeslFacade fStatus){this.fStatus=fStatus;}
 
 	public JeeslDbStatusUpdater()

@@ -1,4 +1,4 @@
-package org.jeesl.controller.converter.forclass.system.property;
+package org.jeesl.controller.converter.fc.system.property;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;

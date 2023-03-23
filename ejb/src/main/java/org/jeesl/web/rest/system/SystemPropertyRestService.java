@@ -64,7 +64,7 @@ public class SystemPropertyRestService <L extends JeeslLang,D extends JeeslDescr
     {
     	for(Status xml : container.getStatus()){xml.setGroup(clStatus.getSimpleName());}
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
-        asdi.setStatusEjbFactory(EjbStatusFactory.createFactory(clStatus, cL, cD));
+        asdi.setStatusEjbFactory(EjbStatusFactory.instance(clStatus, cL, cD));
         asdi.setFacade(fProperty);
         DataUpdate dataUpdate = asdi.iuStatus(container.getStatus(), clStatus, cL, clParent);
         asdi.deleteUnusedStatus(clStatus, cL, cD);

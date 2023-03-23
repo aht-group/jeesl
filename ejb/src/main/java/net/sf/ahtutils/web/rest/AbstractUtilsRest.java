@@ -87,7 +87,7 @@ public class AbstractUtilsRest <L extends JeeslLang, D extends JeeslDescription>
 	{
 		for(Status xml : container.getStatus()){xml.setGroup(cS.getSimpleName());}
 		JeeslDbStatusUpdater<L,D,S,G> asdi = new JeeslDbStatusUpdater<L,D,S,G>();
-	    asdi.setStatusEjbFactory(EjbStatusFactory.createFactory(cS,cL,cD));
+	    asdi.setStatusEjbFactory(EjbStatusFactory.instance(cS,cL,cD));
 	    asdi.setFacade(fUtils);
 	    DataUpdate dataUpdate = asdi.iuStatus(container.getStatus(),cS,cL,cP);
 	    asdi.deleteUnusedStatus(cS,cL,cD);

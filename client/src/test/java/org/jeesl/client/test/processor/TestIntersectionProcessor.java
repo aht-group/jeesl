@@ -21,7 +21,7 @@ public class TestIntersectionProcessor extends AbstractJeeslClientTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestIntersectionProcessor.class);
 	
-	private static EjbStatusFactory<Status,Lang,Description> factory;
+	private static EjbStatusFactory<Lang,Description,Status> factory;
 	
 	private List<String> a,b,c;
 	private List<List<String>> ab,abc;
@@ -34,7 +34,7 @@ public class TestIntersectionProcessor extends AbstractJeeslClientTest
 	
 	@BeforeClass public static void initClass()
 	{
-		factory = EjbStatusFactory.createFactory(Status.class,Lang.class,Description.class);
+		factory = EjbStatusFactory.instance(Status.class,Lang.class,Description.class);
 	}
 	
 	@Before public void init()
@@ -46,7 +46,7 @@ public class TestIntersectionProcessor extends AbstractJeeslClientTest
 		ab = new ArrayList<List<String>>();ab.add(a);ab.add(b);
 		abc = new ArrayList<List<String>>();abc.add(a);abc.add(b);abc.add(c);
 
-		factory = EjbStatusFactory.createFactory(Status.class,Lang.class,Description.class); //within initClass() i got an NPE on .id(long l)
+		factory = EjbStatusFactory.instance(Status.class,Lang.class,Description.class); //within initClass() i got an NPE on .id(long l)
 		x = new ArrayList<Status>();
 		x.add(factory.id(1));x.add(factory.id(2));x.add(factory.id(3));
 		y = new ArrayList<Status>();

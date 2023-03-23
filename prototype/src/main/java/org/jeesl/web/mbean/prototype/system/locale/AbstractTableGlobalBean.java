@@ -423,7 +423,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());;
 
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
-        asdi.setStatusEjbFactory(EjbStatusFactory.createFactory(cS,cL,cD,bTranslation.getLangKeys()));
+        asdi.setStatusEjbFactory(EjbStatusFactory.instance(cS,cL,cD,bTranslation.getLangKeys()));
         asdi.setFacade(fGraphic);
         DataUpdate dataUpdate = asdi.iuStatus(xml.getStatus(),cS,cL,clParent);
         asdi.deleteUnusedStatus(cS, cL, cD);

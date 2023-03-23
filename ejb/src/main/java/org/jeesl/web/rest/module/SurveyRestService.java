@@ -320,7 +320,7 @@ public class SurveyRestService <L extends JeeslLang, D extends JeeslDescription,
     {
     	for(Status xml : container.getStatus()){xml.setGroup(clStatus.getSimpleName());}
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
-        asdi.setStatusEjbFactory(EjbStatusFactory.createFactory(clStatus, clLang, clDescription));
+        asdi.setStatusEjbFactory(EjbStatusFactory.instance(clStatus, clLang, clDescription));
         asdi.setFacade(fSurvey);
         DataUpdate dataUpdate = asdi.iuStatus(container.getStatus(), clStatus, clLang, clParent);
         asdi.deleteUnusedStatus(clStatus, clLang, clDescription);

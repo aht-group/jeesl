@@ -26,14 +26,14 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslSystemPropertyWebController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslSystemPropertyGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslPropertyCategory<L,D,C,?>,
 											P extends JeeslProperty<L,D,C,P>>
 		extends AbstractJeeslWebController<L,D,LOC>
 		implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslSystemPropertyWebController.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslSystemPropertyGwc.class);
 	
 	private JeeslSystemPropertyFacade<L,D,C,P> fProperty;
 	private final PropertyFactoryBuilder<L,D,C,P> fbProperty;
@@ -45,7 +45,7 @@ public class JeeslSystemPropertyWebController <L extends JeeslLang, D extends Je
 	
 	protected P prop; public P getProp() {return prop;} public void setProp(P prop) {this.prop = prop;}
 
-	public JeeslSystemPropertyWebController(final PropertyFactoryBuilder<L,D,C,P> fbProperty)
+	public JeeslSystemPropertyGwc(final PropertyFactoryBuilder<L,D,C,P> fbProperty)
 	{
 		super(fbProperty.getClassL(),fbProperty.getClassD());
 		this.fbProperty = fbProperty;

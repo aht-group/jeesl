@@ -23,7 +23,7 @@ import net.sf.ahtutils.xml.status.Langs;
 import net.sf.ahtutils.xml.status.Status;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class EjbStatusFactory<S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription>
+public class EjbStatusFactory<L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbStatusFactory.class);
 	
@@ -34,6 +34,18 @@ public class EjbStatusFactory<S extends JeeslStatus<L,D,S>, L extends JeeslLang,
     private final EjbLangFactory<L> efLang;
     private final EjbDescriptionFactory<D> efDescription;
 	
+    public static <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription> EjbStatusFactory<L,D,S>
+		instance(final Class<S> cStatus, final Class<L> cL, final Class<D> cD, List<String> localeCodes)
+	{
+		return new EjbStatusFactory<L,D,S>(cStatus,cL,cD,localeCodes);
+	}
+    public static <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription> EjbStatusFactory<L,D,S>
+		instance(final Class<S> cStatus, final Class<L> cLang, final Class<D> descriptionClass)
+	{
+    	return new EjbStatusFactory<L,D,S>(cStatus, cLang, descriptionClass);
+	}
+    
+    
     public EjbStatusFactory(final Class<S> cStatus, final Class<L> cL, final Class<D> cD)
     {
         this.cStatus = cStatus;
@@ -52,18 +64,6 @@ public class EjbStatusFactory<S extends JeeslStatus<L,D,S>, L extends JeeslLang,
         efLang = EjbLangFactory.instance(cL);
         efDescription = EjbDescriptionFactory.factory(cD);
     }
-    
-    public static <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription> EjbStatusFactory<S, L, D>
-    		createFactory(final Class<S> cStatus, final Class<L> cLang, final Class<D> descriptionClass)
-    {
-        return new EjbStatusFactory<S,L,D>(cStatus, cLang, descriptionClass);
-    }
-    
-    public static <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription> EjbStatusFactory<S, L, D>
-		createFactory(final Class<S> cStatus, final Class<L> cL, final Class<D> cD, List<String> localeCodes)
-	{
-    	return new EjbStatusFactory<S,L,D>(cStatus,cL,cD,localeCodes);
-	}
     
     public <E extends Enum<E>> S build(E code){return create(code.toString());}
     
@@ -186,7 +186,7 @@ public class EjbStatusFactory<S extends JeeslStatus<L,D,S>, L extends JeeslLang,
 	public static <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription>
 		S build(final Class<S> cStatus, final Class<L> cLang, final Class<D> descriptionClass, String[] localeCodes, long id, String code, String name)
 	{
-		EjbStatusFactory<S,L,D> f = EjbStatusFactory.createFactory(cStatus, cLang, descriptionClass);
+		EjbStatusFactory<L,D,S> f = EjbStatusFactory.instance(cStatus, cLang, descriptionClass);
 		S status = f.create(code, localeCodes);
 		status.setId(id);
 		for(String localeCode : localeCodes)

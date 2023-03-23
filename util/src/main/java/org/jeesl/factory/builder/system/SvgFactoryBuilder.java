@@ -47,7 +47,7 @@ public class SvgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	
     public EjbGraphicFactory<L,D,G,GT,GS> efGraphic() {return new EjbGraphicFactory<>(cG,cType,cFs);}
     public EjbGraphicFigureFactory<L,D,G,GC,GS> efFigure() {return new EjbGraphicFigureFactory<>(cF);}
-	public EjbStatusFactory<GS,L,D> style() {return EjbStatusFactory.createFactory(cFs,cL,cD);}
+	public EjbStatusFactory<L,D,GS> style() {return EjbStatusFactory.instance(cFs,cL,cD);}
 	
 	public SvgSymbolFactory<L,D,G,GT,GC,GS> symbol() {return SvgSymbolFactory.factory();}
 	public SvgFigureFactory<L,D,G,GT,GC,GS> figure() {return SvgFigureFactory.factory();}

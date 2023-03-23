@@ -21,13 +21,13 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestUtilsStatusEjbFactory.class);
 	
-	private EjbStatusFactory<Status,Lang,Description> facStatus;
+	private EjbStatusFactory<Lang,Description,Status> facStatus;
 	private net.sf.ahtutils.xml.status.Status status;
 	
 	@Before
 	public void init()
 	{
-		facStatus = EjbStatusFactory.createFactory(Status.class, Lang.class,Description.class);
+		facStatus = EjbStatusFactory.instance(Status.class, Lang.class,Description.class);
 		status = createStatus();
 	}
     

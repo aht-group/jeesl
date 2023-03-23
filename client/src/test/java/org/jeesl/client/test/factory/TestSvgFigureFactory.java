@@ -33,7 +33,7 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestSvgFigureFactory.class);
 
-	private EjbStatusFactory<GraphicShape,Lang,Description> efStyle;
+	private EjbStatusFactory<Lang,Description,GraphicShape> efStyle;
 	private EjbGraphicFigureFactory<Lang,Description,Graphic,GraphicComponent,GraphicShape> efFigure;
 	private static SvgFigureFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicShape> svgF;
 	
