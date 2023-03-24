@@ -56,7 +56,7 @@ public class Json2TuplesFactory <A extends EjbWithId, B extends EjbWithId>
 		map2 = new HashMap<A,Map<B,Json2Tuple<A,B>>>();
 	}
 	
-	@Deprecated
+	@Deprecated //use instanace().facade
 	public Json2TuplesFactory(JeeslFacade fUtils, Class<A> cA, Class<B> cY)
 	{
 		this.fUtils=fUtils;

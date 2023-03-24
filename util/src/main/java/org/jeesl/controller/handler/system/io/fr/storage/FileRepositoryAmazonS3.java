@@ -44,7 +44,7 @@ public class FileRepositoryAmazonS3<STORAGE extends JeeslFileStorage<?,?,?,?,?>,
 	{
 		try
 		{
-			json = JsonUtil.read(storage.getJson(),JsonFrAmazonS3.class);
+			json = JsonUtil.read(JsonFrAmazonS3.class,storage.getJson());
 			AWSCredentials credentials = new BasicAWSCredentials(json.getId(), json.getKey());
 			s3client = AmazonS3ClientBuilder
 					  .standard()

@@ -56,7 +56,7 @@ public class JobCodeProcessor
 	
 	public void init(String json) throws UtilsConfigurationException
 	{
-		try{this.json = JsonUtil.read(json,JsonFlatFigure.class);}
+		try{this.json = JsonUtil.read(JsonFlatFigure.class,json);}
 		catch (JsonParseException e) {throw new UtilsConfigurationException(e.getMessage());}
 		catch (JsonMappingException e) {throw new UtilsConfigurationException(e.getMessage());}
 		catch (IOException e) {throw new UtilsConfigurationException(e.getMessage());}

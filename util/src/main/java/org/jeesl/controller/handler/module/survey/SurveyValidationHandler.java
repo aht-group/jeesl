@@ -113,7 +113,7 @@ public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescrip
 					{
 						Class<?> cConfig = Class.forName(v.getAlgorithm().getConfig()).asSubclass(SurveyValidatorConfiguration.class);
 						if(debugOnInfo) {logger.info("Config: "+v.getConfig());}
-						SurveyValidatorConfiguration config = (SurveyValidatorConfiguration)JsonUtil.read(v.getConfig(),cConfig);
+						SurveyValidatorConfiguration config = (SurveyValidatorConfiguration)JsonUtil.read(cConfig,v.getConfig());
 						JsonUtil.info(config);
 						validator.init(config);
 					}
