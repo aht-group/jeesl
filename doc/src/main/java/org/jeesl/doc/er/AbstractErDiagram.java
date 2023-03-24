@@ -81,7 +81,7 @@ public class AbstractErDiagram
 
 		if(!showErDiagramLabel) {label = null;}
 
-		buildSvg("dot",label,subset,new File(fSvg,key+".svg"),fPdf);
+		this.buildSvg("dot",label,subset,new File(fSvg,key+".svg"),fPdf);
 
 		if(upload && restUpload!=null)
 		{
