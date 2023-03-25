@@ -2,10 +2,8 @@ package org.jeesl.factory.ejb.module.calendar;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarScope;
+import org.jeesl.interfaces.model.module.calendar.JeeslCalendarTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

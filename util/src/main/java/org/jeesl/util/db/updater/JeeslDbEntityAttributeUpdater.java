@@ -1,6 +1,5 @@
 package org.jeesl.util.db.updater;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

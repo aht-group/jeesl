@@ -1,7 +1,6 @@
 package org.jeesl.controller.processor;
 
 import org.jeesl.AbstractJeeslUtilTest;
-import org.jeesl.controller.processor.RestrictedCharacterProcessor;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;

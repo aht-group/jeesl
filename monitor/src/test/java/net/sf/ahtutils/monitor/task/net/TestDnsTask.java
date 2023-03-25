@@ -1,14 +1,13 @@
 package net.sf.ahtutils.monitor.task.net;
 
-import net.sf.ahtutils.monitor.task.net.DnsTask;
-import net.sf.ahtutils.test.UtilsMonitorTestBootstrap;
-
 import org.jeesl.controller.monitoring.result.net.DnsResult;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xbill.DNS.Lookup;
+
+import net.sf.ahtutils.test.UtilsMonitorTestBootstrap;
 
 public class TestDnsTask
 {

@@ -3,11 +3,6 @@ package net.sf.ahtutils.doc.latex.writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.doc.latex.writer.LatexTranslationStatisticWriter;
-import net.sf.ahtutils.model.pojo.status.TranslationStatistic;
-import net.sf.ahtutils.test.AbstractUtilsDocTest;
-import net.sf.ahtutils.xml.status.Langs;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
@@ -17,6 +12,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.model.pojo.status.TranslationStatistic;
+import net.sf.ahtutils.test.AbstractUtilsDocTest;
+import net.sf.ahtutils.xml.status.Langs;
 
 public class TestLatexTranslationStatFactory extends AbstractUtilsDocTest
 {
