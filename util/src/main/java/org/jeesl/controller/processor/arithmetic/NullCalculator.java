@@ -41,6 +41,17 @@ public class NullCalculator
 			return result.intValue();
 		}
 	}
+	public static Integer add(Integer a, Long b)
+	{
+		if(a==null && b==null) {return null;}
+		else
+		{
+			BigDecimal result = new BigDecimal(0);
+			if(a!=null) {result = result.add(new BigDecimal(a));}
+			if(b!=null) {result = result.add(new BigDecimal(b));}
+			return result.intValue();
+		}
+	}
 	
 	public static Double subtract(Double a, Double b)
 	{
