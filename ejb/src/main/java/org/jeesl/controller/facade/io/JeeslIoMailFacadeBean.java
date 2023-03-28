@@ -176,8 +176,7 @@ public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescriptio
 	
 	@Override public Json1Tuples<STATUS> tpcIoMailByStatus(LocalDate from, LocalDate to, List<CATEGORY> categories)
 	{		
-		Json1TuplesFactory<STATUS> jtf = new Json1TuplesFactory<>(this,fbMail.getClassStatus());
-		jtf.setfUtils(this);
+		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbMail.getClassStatus()).tupleLoad(this,true);
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<MAIL> item = cQ.from(fbMail.getClassMail());

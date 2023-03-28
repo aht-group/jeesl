@@ -35,14 +35,31 @@
 		<!-- JEESL -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-api</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-interfaces</artifactId>
     		<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-jsf</artifactId>
+    		<artifactId>jeesl-util</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-xml</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		
+		<!--
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-jsf</artifactId>
+    		<scope>provided</scope>
+		</dependency> -->
 		
 		<!-- JEESL Modules -->
 		<dependency>
@@ -77,12 +94,47 @@
 			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<!-- RestEasy -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<exclusions>
+            	<exclusion>
+            		<artifactId>commons-logging</artifactId>
+            		<groupId>commons-logging</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>slf4j-simple</artifactId>
+            		<groupId>org.slf4j</groupId>
+            	</exclusion>
+			</exclusions>
+		</dependency>
 
+		<!-- JSON -->
+   	   	<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+		   <groupId>com.fasterxml.jackson.datatype</groupId>
+		   <artifactId>jackson-datatype-jsr310</artifactId>
+		   <scope>provided</scope>
+		</dependency>
+		
 		<!-- Commons -->
 		<dependency>
    			<groupId>org.apache.commons</groupId>
    			<artifactId>commons-lang3</artifactId>
    			<scope>provided</scope>
+		</dependency>
+		
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		
 	</dependencies>

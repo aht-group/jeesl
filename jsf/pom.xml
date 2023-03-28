@@ -325,6 +325,7 @@
 	
 	<build>
 		<plugins>
+			<!--
          	<plugin>
 				<groupId>org.jeesl</groupId>
 				<artifactId>jeesl-maven</artifactId>
@@ -343,6 +344,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 			<plugin>
 		        <groupId>org.codehaus.mojo</groupId>
 			    <artifactId>versions-maven-plugin</artifactId>

@@ -2,8 +2,7 @@ package org.jeesl.maven.goal;
 
 import static com.github.ferstl.depgraph.dependency.NodeResolution.INCLUDED;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.function.Supplier;
@@ -20,10 +19,14 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectDependenciesResolver;
+import org.jeesl.factory.json.io.maven.JsonMavenGraphFactory;
+import org.jeesl.model.json.io.maven.JsonMavenGraph;
+import org.jeesl.model.json.ssi.maven.JsonMavenFerstlGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.ferstl.depgraph.GraphFormat;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.github.ferstl.depgraph.dependency.AggregatingGraphFactory;
 import com.github.ferstl.depgraph.dependency.DependencyNode;
 import com.github.ferstl.depgraph.dependency.DependencyNodeIdRenderer;
@@ -33,10 +36,14 @@ import com.github.ferstl.depgraph.dependency.MavenGraphAdapter;
 import com.github.ferstl.depgraph.dependency.json.JsonGraphStyleConfigurer;
 import com.github.ferstl.depgraph.graph.GraphBuilder;
 
-@Mojo(name="graph")
+import net.sf.exlp.util.io.JsonUtil;
+
+@Mojo(name="dependency")
 public class JeeslDependencyGoal extends AbstractMojo
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslDependencyGoal.class);
+	
+	@Component ProjectDependenciesResolver dependenciesResolver;
 	
 	public JeeslDependencyGoal()
 	{
@@ -48,13 +55,11 @@ public class JeeslDependencyGoal extends AbstractMojo
 	  
 	@Parameter(defaultValue = "${session}", readonly = true)
 	private MavenSession mavenSession;
-	  
-	@Component
-	ProjectDependenciesResolver dependenciesResolver;
 	
-	Supplier<Collection<MavenProject>> subProjectsInReactorOrder() {
+	private Supplier<Collection<MavenProject>> subProjectsInReactorOrder()
+	{
 	    return () -> this.mavenSession.getProjectDependencyGraph().getSortedProjects();
-	  }
+	}
 	
 	 public void execute() throws MojoExecutionException
 	{
@@ -64,18 +69,10 @@ public class JeeslDependencyGoal extends AbstractMojo
 	    	getLog().info("groupId:");
     	
 	    GraphStyleConfigurer graphStyleConfigurer = new JsonGraphStyleConfigurer();
-	    	    
-	    Path graphFilePath = Paths.get("/Volumes/ramdisk","test.json");
 
 	    ArtifactFilter globalFilter = new AndArtifactFilter();
 	    ArtifactFilter transitiveIncludeExcludeFilter = new AndArtifactFilter();
 	    ArtifactFilter targetFilter = new AndArtifactFilter();
-
-	    
-	    boolean showGroupIds = true;
-	    boolean showVersions = true;
-	    boolean showTypes = true;
-	    boolean showClassifiers = true;
 	    
 	    DependencyNodeIdRenderer nodeIdRenderer = DependencyNodeIdRenderer.versionlessId()
 	            .withClassifier(true)
@@ -85,8 +82,8 @@ public class JeeslDependencyGoal extends AbstractMojo
 	    GraphBuilder<DependencyNode> graphBuilder = graphStyleConfigurer
 	            .showGroupIds(true)
 	            .showArtifactIds(true)
-	            .showTypes(showTypes)
-	            .showClassifiers(showClassifiers)
+	            .showTypes(true)
+	            .showClassifiers(true)
 	            .showOptional(true)
 	            .showScope(true)
 	            .showVersionsOnNodes(true)
@@ -96,11 +93,22 @@ public class JeeslDependencyGoal extends AbstractMojo
 	    
 	    MavenGraphAdapter adapter = new MavenGraphAdapter(dependenciesResolver, transitiveIncludeExcludeFilter, targetFilter, EnumSet.of(INCLUDED));
 	     
-	    
 	    GraphFactory graphFactory = new AggregatingGraphFactory(adapter, subProjectsInReactorOrder(), globalFilter, graphBuilder,false,true);
-	      String dependencyGraph = graphFactory.createGraph(project);
+	    String dependencyGraph = graphFactory.createGraph(project);
 	    
-	      logger.info(dependencyGraph);
+	    logger.info(dependencyGraph);
+	      
+	    try
+	    {
+			JsonMavenFerstlGraph ferstl = JsonUtil.read(JsonMavenFerstlGraph.class, dependencyGraph);
+			JsonUtil.info(ferstl);
+			
+			JsonMavenGraph graph = JsonMavenGraphFactory.build(ferstl);
+			JsonUtil.info(graph);
+		}
+	    catch (JsonParseException e) {e.printStackTrace();}
+	    catch (JsonMappingException e) {e.printStackTrace();}
+	    catch (IOException e) {e.printStackTrace();}
+	      
 	}
-	
 }
