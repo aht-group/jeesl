@@ -30,7 +30,6 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										RC extends JeeslRevisionCategory<L,D,RC,?>,
-										
 										ERD extends JeeslRevisionDiagram<L,D,RC>>
 		extends AbstractJeeslWebController<L,D,LOC>
 		implements Serializable,SbToggleBean
@@ -62,7 +61,8 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 		efErDiagram = fbRevision.ejbDiagram();
 	}
 
-	public void postConstructRevisionDiagram(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
+	public void postConstructRevisionDiagram(JeeslLocaleProvider<LOC> lp,
+											JeeslFacesMessageBean bMessage,
 											JeeslIoRevisionFacade<L,D,RC,?,?,?,?,?,?,?,?,?,ERD,?> fRevision)
 	{
 		super.postConstructWebController(lp,bMessage);

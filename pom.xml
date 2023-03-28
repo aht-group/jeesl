@@ -35,6 +35,7 @@
 		<module>io-locale</module>
 		<module>io-log</module>
 		<module>io-mail</module>
+		<module>io-maven</module>
 		<module>io-fr</module>
 		<module>io-ssi</module>
 		

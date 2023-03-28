@@ -114,7 +114,10 @@
 					
 					<j:inputGrid>
 						<jtp:label entity="IoLabelEntity" code="jscn"/>
-						<h:outputText value="#{cc.attrs.bean.optionClass.simpleName}"/>
+						<ui:fragment>
+							<h:outputText value="#{cc.attrs.bean.optionClass.simpleName}"/>
+							<h:outputText value=" (#{cc.attrs.bean.status.id})"/>
+						</ui:fragment>
 						
 						<jtp:label entity="IoStatus" code="code"/>
 						<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}" autocomplete="off"/>

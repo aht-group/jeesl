@@ -50,6 +50,7 @@
         	<type>jar</type>
         	<scope>compile</scope>
 	    </dependency>
+	    
 	    <dependency>
 			<groupId>org.apache.maven.plugin-tools</groupId>
 			<artifactId>maven-plugin-annotations</artifactId>
@@ -90,6 +91,23 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
+		
+		<!-- Dependency Graph -->
+		<dependency>
+			<groupId>com.github.ferstl</groupId>
+			<artifactId>depgraph-maven-plugin</artifactId>
+			<version>4.0.2</version>
+			<scope>compile</scope>
+			<type>maven-plugin</type>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+			<version>3.8.6</version>
+			<scope>provided</scope>
+		</dependency>
+
+  
 		
 		<dependency>
 			<groupId>com.yahoo.platform.yui</groupId>
