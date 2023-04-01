@@ -38,6 +38,11 @@
     		<artifactId>jeesl-interfaces</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-util</artifactId>
+    		<scope>provided</scope>
+		</dependency>
 	
 		<!-- JakartaEE -->
 		<dependency>

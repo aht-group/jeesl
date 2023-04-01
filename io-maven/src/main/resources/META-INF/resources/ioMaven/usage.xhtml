@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+		
+		<composite:facet name="top" required="false"/>
+		<composite:facet name="bottom" required="false"/>
+	</composite:interface>
+	
+<composite:implementation>
+<jp:grid id="grid">
+	<j:row id="row1">
+		<j:slot id="sProperties" width="12">
+			<h:form id="fProperties">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="a" value="#{cc.attrs.ctrl.artifacts}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoMavenArtifact" code="listOf"/>
+					</f:facet>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet>
+						<h:outputText value="#{a.group.code}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact"/></f:facet>
+		            	<jtp:symbolizer value="#{a.suitability}" marginRight="5"/>
+						<h:outputText value="#{a.code}" />
+		            </p:column>
+		            <p:columns var="d" value="#{cc.attrs.ctrl.developments}">
+		            	<f:facet name="header">#{d.label}</f:facet>
+		            	<jtp:symbolizer value="#{cc.attrs.ctrl.n2m.m[a][d].version.outdate}" marginRight="5"/>
+						<h:outputText value="#{cc.attrs.ctrl.n2m.m[a][d].version.code}" rendered="#{empty cc.attrs.ctrl.n2m.m[a][d].version.label}"/>
+						<h:outputText value="#{cc.attrs.ctrl.n2m.m[a][d].version.label}" rendered="#{not empty cc.attrs.ctrl.n2m.m[a][d].version.label}"/>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.n2m.m[a][d].version.maintainer}" marginLeft="5"/>
+		            </p:columns>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sProperty" width="5">
+			
+		</j:slot>
+	</j:row>
+</jp:grid>
+</composite:implementation>
+</html>

@@ -45,6 +45,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-jsf</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-util</artifactId>
     		<scope>provided</scope>
 		</dependency>
@@ -95,10 +100,18 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- Primefaces -->
+		<dependency>  
+   			<groupId>org.primefaces</groupId>  
+   			<artifactId>primefaces</artifactId>
+   			<scope>provided</scope>
+		</dependency>
+		
 		<!-- RestEasy -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
+			<scope>provided</scope>
 			<exclusions>
             	<exclusion>
             		<artifactId>commons-logging</artifactId>

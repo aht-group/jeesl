@@ -1,0 +1,34 @@
+<facelet-taglib version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd">
+
+	<namespace>https://www.jeesl.org/j2</namespace>
+  
+	<tag>
+        <tag-name>gridIoMavenArtifact</tag-name>
+        <component>
+            <resource-id>ioMaven/artifact.xhtml</resource-id>
+        </component>
+	</tag>
+	<tag>
+        <tag-name>gridIoMavenUsage</tag-name>
+        <component>
+            <resource-id>ioMaven/usage.xhtml</resource-id>
+        </component>
+	</tag>
+	<tag>
+        <tag-name>gridIoMavenModule</tag-name>
+        <component>
+            <resource-id>ioMaven/module.xhtml</resource-id>
+        </component>
+	</tag>
+  
+	<tag>
+        <tag-name>gridSystemProperty</tag-name>
+        <component>
+            <resource-id>systemProperty/grid.xhtml</resource-id>
+        </component>
+	</tag>
+    
+</facelet-taglib>

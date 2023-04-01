@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.maven.dependency;
+package org.jeesl.interfaces.model.io.maven.classification;
 
 import java.io.Serializable;
 
@@ -13,12 +13,12 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 @DownloadJeeslData
-public interface JeeslMavenOutdate <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslMavenSuitability <L extends JeeslLang, D extends JeeslDescription,
 								S extends JeeslStatus<L,D,S>,
 								G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
 								JeeslStatusFixedCode,
 								EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
-{
-	public enum Code{latest,acceptable,outdate,critical};
+{	
+	public enum Code{unknown,removal};
 }

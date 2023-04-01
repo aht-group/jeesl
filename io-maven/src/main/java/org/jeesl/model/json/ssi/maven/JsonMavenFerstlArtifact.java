@@ -52,6 +52,11 @@ public class JsonMavenFerstlArtifact implements Serializable
 	public List<String> getTypes() {return types;}
 	public void setTypes(List<String> types) {this.types = types;}
 	
+	@JsonProperty("classifiers")
+	private List<String> classifiers;
+	public List<String> getClassifiers() {return classifiers;}
+	public void setClassifiers(List<String> classifiers) {this.classifiers = classifiers;}
+	
 	@Override
 	public String toString()
 	{
