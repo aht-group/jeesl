@@ -11,15 +11,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenDevelopment;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.maven.classification.IoMavenDevelopmentType;
 
 @Entity
-@Table(name="IoMavenDevelopment")
-@EjbErNode(name="Development",category="ioMaven",subset="ioMaven")
-public class IoMavenModule implements JeeslIoMavenDevelopment<IoMavenDevelopmentType,IoGraphic>
+@Table(name="IoMavenModule")
+@EjbErNode(name="Module",category="ioMaven",subset="ioMaven")
+public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenDevelopmentType,IoGraphic>
 {
 	public static final long serialVersionUID=1;	
 
@@ -29,6 +29,11 @@ public class IoMavenModule implements JeeslIoMavenDevelopment<IoMavenDevelopment
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 	
+	@ManyToOne
+	private IoMavenModule parent;
+	@Override public IoMavenModule getParent() {return parent;}
+	@Override public void setParent(IoMavenModule parent) {this.parent = parent;}
+
 	private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
@@ -39,8 +44,8 @@ public class IoMavenModule implements JeeslIoMavenDevelopment<IoMavenDevelopment
 
 	@ManyToOne
 	private IoMavenDevelopmentType type;
-	public IoMavenDevelopmentType getType() {return type;}
-	public void setType(IoMavenDevelopmentType type) {this.type = type;}
+	@Override public IoMavenDevelopmentType getType() {return type;}
+	@Override public void setType(IoMavenDevelopmentType type) {this.type = type;}
 
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private IoGraphic graphic;

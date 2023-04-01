@@ -14,7 +14,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoMavenUsage <VERSION extends JeeslIoMavenVersion<?,?,?>,
-									DEVELOPMENT extends JeeslIoMavenDevelopment>
+									DEVELOPMENT extends JeeslIoMavenModule>
 									extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
 											EjbWithParentAttributeResolver
 {

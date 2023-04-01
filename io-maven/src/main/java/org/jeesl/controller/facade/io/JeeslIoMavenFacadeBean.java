@@ -20,7 +20,7 @@ import org.jeesl.factory.builder.io.IoMavenFactoryBuilder;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
-import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenDevelopment;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 									GROUP extends JeeslIoMavenGroup,
 									ARTIFACT extends JeeslIoMavenArtifact<GROUP,?>,
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,?,?>,
-									DEVELOPMENT extends JeeslIoMavenDevelopment>
+									DEVELOPMENT extends JeeslIoMavenModule>
 	extends JeeslFacadeBean implements JeeslIoMavenFacade<L,D,GROUP,ARTIFACT,VERSION>
 {
 	private static final long serialVersionUID = 1L;

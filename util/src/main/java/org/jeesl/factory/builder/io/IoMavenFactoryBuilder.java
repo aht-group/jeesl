@@ -4,7 +4,7 @@ import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
-import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenDevelopment;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ public class IoMavenFactoryBuilder<L extends JeeslLang, D extends JeeslDescripti
 									GROUP extends JeeslIoMavenGroup,
 									ARTIFACT extends JeeslIoMavenArtifact<GROUP,?>,
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,?,?>,
-									DEVELOPMENT extends JeeslIoMavenDevelopment>
+									DEVELOPMENT extends JeeslIoMavenModule>
 			extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(IoMavenFactoryBuilder.class);

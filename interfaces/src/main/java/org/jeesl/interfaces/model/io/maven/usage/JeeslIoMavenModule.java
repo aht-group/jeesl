@@ -10,18 +10,24 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
+import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslIoMavenDevelopment <TYPE extends JeeslMavenType<?,?,TYPE,G>,
+public interface JeeslIoMavenModule <MODULE extends JeeslIoMavenModule<MODULE,TYPE,G>,
+										TYPE extends JeeslMavenType<?,?,TYPE,G>,
 										G extends JeeslGraphic<?,?,?>>
 								extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
+										JeeslWithType<TYPE>,
 												EjbWithCode,EjbWithGraphic<G>
 {	
 	
-	public static enum Attributes{code};
+	public static enum Attributes{parent,code};
+	
+	MODULE getParent();
+	void setParent(MODULE parent);
 	
 	String getLabel();
 	void setLabel(String label);
