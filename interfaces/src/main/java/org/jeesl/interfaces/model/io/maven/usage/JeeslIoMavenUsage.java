@@ -14,14 +14,14 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoMavenUsage <VERSION extends JeeslIoMavenVersion<?,?,?>,
-									DEVELOPMENT extends JeeslIoMavenModule>
+									MODULE extends JeeslIoMavenModule<MODULE,?,?>>
 									extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
 											EjbWithParentAttributeResolver
 {
-	public static enum Attributes{development,version};
+	public static enum Attributes{module,version};
 	
-	DEVELOPMENT getDevelopment();
-	void setDevelopment(DEVELOPMENT development);
+	MODULE getModule();
+	void setModule(MODULE module);
 	
 	VERSION getVersion();
 	void setVersion(VERSION version);

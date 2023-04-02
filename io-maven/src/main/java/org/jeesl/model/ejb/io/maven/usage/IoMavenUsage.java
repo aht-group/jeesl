@@ -26,11 +26,11 @@ public class IoMavenUsage implements JeeslIoMavenUsage<IoMavenVersion,IoMavenMod
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 
-	@Override public String resolveParentAttribute() {return JeeslIoMavenUsage.Attributes.development.toString();}
+	@Override public String resolveParentAttribute() {return JeeslIoMavenUsage.Attributes.module.toString();}
 	@ManyToOne @NotNull
-	private IoMavenModule development;
-	@Override public IoMavenModule getDevelopment() {return development;}
-	@Override public void setDevelopment(IoMavenModule development) {this.development = development;}
+	private IoMavenModule module;
+	@Override public IoMavenModule getModule() {return module;}
+	@Override public void setModule(IoMavenModule module) {this.module = module;}
 
 	@ManyToOne @NotNull
 	private IoMavenVersion version;

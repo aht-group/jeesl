@@ -10,18 +10,19 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionMigration;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoMavenVersion <ARTIFACT extends JeeslIoMavenArtifact<?,?>,
-									OUTDATE extends JeeslMavenOutdate<?,?,OUTDATE,?>,
-									MAINTAINER extends JeeslMavenMaintainer<?,?,MAINTAINER,?>>
+										OUTDATE extends JeeslMavenOutdate<?,?,OUTDATE,?>,
+										MAINTAINER extends JeeslMavenMaintainer<?,?,MAINTAINER,?>>
 									extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
-												EjbWithNonUniqueCode,EjbWithParentAttributeResolver
+												EjbWithParentAttributeResolver,
+												EjbWithNonUniqueCode,EjbWithPositionMigration
 {	
-	
 	public static enum Attributes{artifact,code,maintainer,label};
 	
 	String getLabel();
@@ -35,5 +36,4 @@ public interface JeeslIoMavenVersion <ARTIFACT extends JeeslIoMavenArtifact<?,?>
 	
 	MAINTAINER getMaintainer();
 	void setMaintainer(MAINTAINER maintainer);
-
 }

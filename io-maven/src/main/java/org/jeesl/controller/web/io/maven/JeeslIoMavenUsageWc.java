@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
@@ -20,12 +24,14 @@ import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
+import org.jeesl.model.ejb.io.maven.classification.IoMavenMaintainer;
+import org.jeesl.model.ejb.io.maven.classification.IoMavenOutdate;
+import org.jeesl.model.ejb.io.maven.classification.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.usage.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
-import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenArtifactComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,14 +44,14 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslWebController<IoLang,IoDes
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenUsageWc.class);
 	
-	private JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion> fMaven;
+	private JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final Comparator<IoMavenArtifact> cpArtifact;
 	
-	private final Nested2Map<IoMavenArtifact,IoMavenModule,IoMavenUsage> n2m; public Nested2Map<IoMavenArtifact, IoMavenModule, IoMavenUsage> getN2m() {return n2m;}
+	private final Map<IoMavenArtifact,Map<IoMavenModule,List<IoMavenVersion>>> mapVersion; public Map<IoMavenArtifact,Map<IoMavenModule,List<IoMavenVersion>>> getMapVersion() {return mapVersion;}
 	
 	private final List<IoMavenArtifact> artifacts; public List<IoMavenArtifact> getArtifacts() {return artifacts;}
-	private final List<IoMavenModule> developments;  public List<IoMavenModule> getDevelopments() {return developments;}
+	private final List<IoMavenModule> modules;  public List<IoMavenModule> getModules() {return modules;}
 
 	private IoMavenModule development; 
 	
@@ -54,13 +60,14 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslWebController<IoLang,IoDes
 		super(IoLang.class,IoDescription.class);
 		cpArtifact = EjbMavenArtifactComparator.instance(EjbMavenArtifactComparator.Type.code);
 		
-		n2m = new Nested2Map<>();
+		mapVersion = new HashMap<>();
+		
 		artifacts = new ArrayList<>();
-		developments = new ArrayList<>();
+		modules = new ArrayList<>();
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion> fMaven)
+							JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fMaven=fMaven;
@@ -71,17 +78,20 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslWebController<IoLang,IoDes
 	
 	private void reloadDevelopments()
 	{
-		developments.clear();
-		developments.addAll(fMaven.all(IoMavenModule.class));
+		modules.clear();
+		modules.addAll(fMaven.all(IoMavenModule.class).stream().filter(m -> Objects.isNull(m.getParent())).collect(Collectors.toList()));
 	}
 	
 	private void reloadUsages()
 	{
-		 List<IoMavenUsage> list = fMaven.allForParents(IoMavenUsage.class,developments);
-		 EjbMavenUsageFactory.add(n2m,list);
+		mapVersion.clear();
+		artifacts.clear();
+		
+		List<IoMavenUsage> list = fMaven.all(IoMavenUsage.class);
+		mapVersion.putAll(EjbMavenUsageFactory.toMapArtifactRootModuleUsages(list));
 		 
-		 artifacts.addAll(n2m.toL1());
-		 Collections.sort(artifacts,cpArtifact);
+		artifacts.addAll(mapVersion.keySet());
+		Collections.sort(artifacts,cpArtifact);
 	}
 	
 	@Override

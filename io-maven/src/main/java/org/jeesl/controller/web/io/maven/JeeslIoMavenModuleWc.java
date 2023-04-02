@@ -3,6 +3,8 @@ package org.jeesl.controller.web.io.maven;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
@@ -20,10 +22,14 @@ import org.jeesl.model.ejb.io.graphic.core.IoGraphicType;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
+import org.jeesl.model.ejb.io.maven.classification.IoMavenMaintainer;
+import org.jeesl.model.ejb.io.maven.classification.IoMavenOutdate;
+import org.jeesl.model.ejb.io.maven.classification.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.usage.IoMavenModule;
+import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
@@ -37,32 +43,46 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenModuleWc.class);
 	
-	private JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion> fMaven;
+	private JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
 
-	private final List<IoMavenModule> developments; public List<IoMavenModule> getDevelopments() {return developments;}
-
-	private IoMavenModule development; public IoMavenModule getDevelopment() {return development;} public void setDevelopment(IoMavenModule development) {this.development = development;}
+	private final List<IoMavenStructure> structures; public List<IoMavenStructure> getStructures() {return structures;}
+	private final List<IoMavenModule> modules; public List<IoMavenModule> getModules() {return modules;}
+	private final List<IoMavenModule> childs; public List<IoMavenModule> getChilds() {return childs;}
+	
+	
+	private IoMavenModule module; public IoMavenModule getModule() {return module;} public void setModule(IoMavenModule module) {this.module = module;}
+	private IoMavenModule child; public IoMavenModule getChild() {return child;} public void setChild(IoMavenModule child) {this.child = child;}
 	
 	public JeeslIoMavenModuleWc()
 	{
 		super(IoLang.class,IoDescription.class);
 		
-		developments = new ArrayList<>();
+		structures = new ArrayList<>();
+		modules = new ArrayList<>();
+		childs = new ArrayList<>();
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion> fMaven)
+							JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fMaven=fMaven;
+		
+		structures.addAll(fMaven.allOrderedPositionVisible(IoMavenStructure.class));
 
 		this.reloadDevelopments();
 	}
 	
 	private void reloadDevelopments()
 	{
-		developments.clear();
-		developments.addAll(fMaven.all(IoMavenModule.class));
+		modules.clear();
+		modules.addAll(fMaven.all(IoMavenModule.class).stream().filter(m -> Objects.isNull(m.getParent())).collect(Collectors.toList()));
+	}
+	
+	private void reset(boolean rChilds, boolean rChild)
+	{
+		if(rChilds) {childs.clear();}
+		if(rChild) {child=null;}
 	}
 	
 	@Override
@@ -73,20 +93,23 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	
 	public void selectDevelopment() throws JeeslNotFoundException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(development));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(module));}
+		this.reset(true, true);
+		this.reloadChilds();
 	}
 	
 	public void addDevelopment() throws JeeslNotFoundException
 	{
+		this.reset(true, true);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(IoMavenModule.class));}
-		development = EjbMavenModuleFactory.build();
+		module = EjbMavenModuleFactory.build();
 	}
 	
 	public void saveDevelopment() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(development));}
-		development = fMaven.save(development);
-		
+		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(module));}
+		EjbMavenModuleFactory.converter(fMaven, module);
+		module = fMaven.save(module);
 		this.reloadDevelopments();
 	}
 	
@@ -94,11 +117,37 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	{
 		UploadedFile file = event.getFile();
 		logger.info("Received file with a size of " +file.getSize());
-		if(development.getGraphic()==null)
+		if(module.getGraphic()==null)
 		{
 			IoGraphicType type = fMaven.fByCode(IoGraphicType.class,JeeslGraphicType.Code.svg);
-			development.setGraphic(IoLocaleFactoryBuilder.svg().efGraphic().build(type));
+			module.setGraphic(IoLocaleFactoryBuilder.svg().efGraphic().build(type));
 		}
-		development.getGraphic().setData(file.getContent());
+		module.getGraphic().setData(file.getContent());
+	}
+	
+	private void reloadChilds()
+	{
+		this.reset(true, false);
+		childs.addAll(fMaven.allForParent(IoMavenModule.class,module));
+	}
+	
+	public void addChild() throws JeeslNotFoundException
+	{
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(IoMavenModule.class));}
+		child = EjbMavenModuleFactory.build();
+		child.setParent(module);
+	}
+	
+	public void selectChild() throws JeeslNotFoundException
+	{
+		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(child));}
+	}
+	
+	public void saveChild() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
+	{
+		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(child));}
+		EjbMavenModuleFactory.converter(fMaven, child);
+		child = fMaven.save(child);
+		this.reloadChilds();
 	}
 }

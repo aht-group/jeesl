@@ -14,12 +14,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenDevelopmentType;
+import org.jeesl.model.ejb.io.maven.classification.IoMavenStructure;
 
 @Entity
 @Table(name="IoMavenModule")
 @EjbErNode(name="Module",category="ioMaven",subset="ioMaven")
-public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenDevelopmentType,IoGraphic>
+public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenStructure,IoGraphic>
 {
 	public static final long serialVersionUID=1;	
 
@@ -29,11 +29,16 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenDe
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 	
+	@Override public String resolveParentAttribute() {return JeeslIoMavenModule.Attributes.parent.toString();}
 	@ManyToOne
 	private IoMavenModule parent;
 	@Override public IoMavenModule getParent() {return parent;}
 	@Override public void setParent(IoMavenModule parent) {this.parent = parent;}
 
+	private Integer position;
+	@Override public Integer getPosition() {return position;}
+	@Override public void setPosition(Integer position) {this.position = position;}
+	
 	private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
@@ -43,9 +48,9 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenDe
 	@Override public void setLabel(String label) {this.label = label;}
 
 	@ManyToOne
-	private IoMavenDevelopmentType type;
-	@Override public IoMavenDevelopmentType getType() {return type;}
-	@Override public void setType(IoMavenDevelopmentType type) {this.type = type;}
+	private IoMavenStructure structure;
+	@Override public IoMavenStructure getStructure() {return structure;}
+	@Override public void setStructure(IoMavenStructure structure) {this.structure = structure;}
 
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private IoGraphic graphic;
@@ -62,4 +67,5 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenDe
 		sb.append("[").append(id).append("]");
 		return sb.toString();
 	}
+	
 }

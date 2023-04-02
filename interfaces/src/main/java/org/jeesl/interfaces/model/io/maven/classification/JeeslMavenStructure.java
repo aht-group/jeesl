@@ -13,12 +13,12 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 @DownloadJeeslData
-public interface JeeslMavenType <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslMavenStructure <L extends JeeslLang, D extends JeeslDescription,
 								S extends JeeslStatus<L,D,S>,
 								G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
 								JeeslStatusFixedCode,
 								EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	
-	public enum Code{library,single,multi};
+	public enum Code{mm,sm,sub};
 }

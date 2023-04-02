@@ -27,24 +27,24 @@ public class IoMavenVersion implements JeeslIoMavenVersion<IoMavenArtifact,IoMav
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 
-	private String code;
-	@Override public String getCode() {return code;}
-	@Override public void setCode(String code) {this.code = code;}
-	
-	private String label;
-	
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
-	}
 	@Override public String resolveParentAttribute() {return JeeslIoMavenVersion.Attributes.artifact.toString();}
 	@ManyToOne @NotNull
 	private IoMavenArtifact artifact;
 	@Override public IoMavenArtifact getArtifact() {return artifact;}
 	@Override public void setArtifact(IoMavenArtifact artifact) {this.artifact = artifact;}
-
+	
+	private Integer position;
+	@Override public Integer getPosition() {return position;}
+	@Override public void setPosition(Integer position) {this.position = position;}
+	
+	private String code;
+	@Override public String getCode() {return code;}
+	@Override public void setCode(String code) {this.code = code;}
+	
+	private String label;
+	@Override public String getLabel() {return label;}
+	@Override public void setLabel(String label) {this.label = label;}
+	
 	@ManyToOne @NotNull
 	private IoMavenOutdate outdate;
 	@Override public IoMavenOutdate getOutdate() {return outdate;}
@@ -54,7 +54,8 @@ public class IoMavenVersion implements JeeslIoMavenVersion<IoMavenArtifact,IoMav
 	private IoMavenMaintainer maintainer;
 	@Override public IoMavenMaintainer getMaintainer() {return maintainer;}
 	@Override public void setMaintainer(IoMavenMaintainer maintainer) {this.maintainer = maintainer;}
-	
+
+
 	@Override public boolean equals(Object object){return (object instanceof IoMavenVersion) ? id == ((IoMavenVersion) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 	

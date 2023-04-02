@@ -3,7 +3,7 @@ package org.jeesl.factory.ejb.io.maven;
 import java.util.Objects;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenDevelopmentType;
+import org.jeesl.model.ejb.io.maven.classification.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.usage.IoMavenModule;
 
 public class EjbMavenModuleFactory
@@ -17,6 +17,6 @@ public class EjbMavenModuleFactory
 	
 	public static void converter(JeeslFacade facade, IoMavenModule ejb)
 	{
-		if(Objects.nonNull(ejb.getType())) {ejb.setType(facade.find(IoMavenDevelopmentType.class,ejb.getType()));}
+		if(Objects.nonNull(ejb.getStructure())) {ejb.setStructure(facade.find(IoMavenStructure.class,ejb.getStructure()));}
 	}
 }
