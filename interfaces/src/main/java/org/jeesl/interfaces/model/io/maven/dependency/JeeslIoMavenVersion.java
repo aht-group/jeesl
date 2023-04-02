@@ -10,7 +10,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionMigration;
+import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
@@ -21,7 +21,7 @@ public interface JeeslIoMavenVersion <ARTIFACT extends JeeslIoMavenArtifact<?,?>
 										MAINTAINER extends JeeslMavenMaintainer<?,?,MAINTAINER,?>>
 									extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
 												EjbWithParentAttributeResolver,
-												EjbWithNonUniqueCode,EjbWithPositionMigration
+												EjbWithNonUniqueCode,EjbWithPosition
 {	
 	public static enum Attributes{artifact,code,maintainer,label};
 	

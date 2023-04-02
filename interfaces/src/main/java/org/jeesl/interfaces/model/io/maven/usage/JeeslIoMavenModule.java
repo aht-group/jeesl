@@ -10,7 +10,7 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionMigration;
+import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
@@ -21,7 +21,7 @@ public interface JeeslIoMavenModule <MODULE extends JeeslIoMavenModule<MODULE,ST
 										STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,G>,
 										G extends JeeslGraphic<?,?,?>>
 								extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
-										EjbWithCode,EjbWithPositionMigration,EjbWithParentAttributeResolver,
+										EjbWithCode,EjbWithPosition,EjbWithParentAttributeResolver,
 										EjbWithGraphic<G>
 									
 {	

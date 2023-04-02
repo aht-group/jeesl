@@ -35,9 +35,9 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenSt
 	@Override public IoMavenModule getParent() {return parent;}
 	@Override public void setParent(IoMavenModule parent) {this.parent = parent;}
 
-	private Integer position;
-	@Override public Integer getPosition() {return position;}
-	@Override public void setPosition(Integer position) {this.position = position;}
+	private int position;
+	@Override public int getPosition() {return position;}
+	@Override public void setPosition(int position) {this.position = position;}
 	
 	private String code;
 	@Override public String getCode() {return code;}

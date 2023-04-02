@@ -72,13 +72,14 @@
 			</h:form>
 			<h:form id="fVersions">
 				<p:dataTable rendered="#{not empty cc.attrs.ctrl.artifact}" styleClass="jeesl-datatable"
-						var="v" value="#{cc.attrs.ctrl.versions}"
+						var="v" value="#{cc.attrs.ctrl.versions}" draggableRows="true"
 						selection="#{cc.attrs.ctrl.version}" selectionMode="single" rowKey="#{v.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenVersion" code="listOf"/>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectVersion()}" update=":#{cc.id}:fVersion"/>
-					 <p:column>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderVersions()}" update="@form"/>
+					<p:column>
 		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="outdate"/></f:facet>
 		            	<jtp:symbolizer value="#{v.outdate}"/>
 		            </p:column>  

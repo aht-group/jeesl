@@ -18,7 +18,7 @@
 		<j:slot id="sDevelopments" width="7">
 			<h:form id="fDevelopments">
 				<p:dataTable styleClass="jeesl-datatable"
-						var="m" value="#{cc.attrs.ctrl.modules}"
+						var="m" value="#{cc.attrs.ctrl.modules}" draggableRows="true"
 						selection="#{cc.attrs.ctrl.module}" selectionMode="single" rowKey="#{m.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenModule" code="listOf">
@@ -26,6 +26,7 @@
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectDevelopment()}" update=":#{cc.id}:sDevelopment"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderModules()}" update="@form"/>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoMavenModule" code="structure"/></f:facet>
 		            	<jtp:symbolizer value="#{m.structure}"/>
@@ -71,7 +72,7 @@
 			</h:form>
 			<h:form id="fChilds">
 				<p:dataTable styleClass="jeesl-datatable" rendered="#{cc.attrs.ctrl.module.id gt 0}"
-						var="c" value="#{cc.attrs.ctrl.childs}"
+						var="c" value="#{cc.attrs.ctrl.childs}" draggableRows="true"
 						selection="#{cc.attrs.ctrl.child}" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenModule" code="childs">
@@ -79,6 +80,7 @@
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectChild()}" update=":#{cc.id}:fChild"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderChilds()}" update="@form"/>
 					<p:column>
 						<jtp:symbolizer value="#{c.structure}"/>
 		            </p:column>

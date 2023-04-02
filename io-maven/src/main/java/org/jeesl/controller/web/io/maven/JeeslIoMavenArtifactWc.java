@@ -18,6 +18,7 @@ import org.jeesl.factory.ejb.io.maven.EjbMavenUsageFactory;
 import org.jeesl.factory.ejb.io.maven.EjbMavenVersionFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
@@ -159,4 +160,6 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,Io
 		List<IoMavenUsage> usages = fMaven.fIoMavenUsages(JeeslIoMavenQuery.instance().addVersions(versions));
 		mapModule.putAll(EjbMavenUsageFactory.toMapVersionModules(usages));
 	}
+	
+	public void reorderVersions() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fMaven,versions); this.reloadVersions();}
 }

@@ -2,6 +2,7 @@ package org.jeesl.controller.web.io.maven;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -17,6 +18,7 @@ import org.jeesl.factory.ejb.io.maven.EjbMavenModuleFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
+import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphicType;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -30,6 +32,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.usage.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
+import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 import org.slf4j.Logger;
@@ -70,13 +73,14 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 		
 		structures.addAll(fMaven.allOrderedPositionVisible(IoMavenStructure.class));
 
-		this.reloadDevelopments();
+		this.reloadModules();
 	}
 	
-	private void reloadDevelopments()
+	private void reloadModules()
 	{
 		modules.clear();
 		modules.addAll(fMaven.all(IoMavenModule.class).stream().filter(m -> Objects.isNull(m.getParent())).collect(Collectors.toList()));
+		Collections.sort(modules,new PositionComparator<IoMavenModule>());
 	}
 	
 	private void reset(boolean rChilds, boolean rChild)
@@ -110,7 +114,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(module));}
 		EjbMavenModuleFactory.converter(fMaven, module);
 		module = fMaven.save(module);
-		this.reloadDevelopments();
+		this.reloadModules();
 	}
 	
 	public void handleFileUpload(FileUploadEvent event) throws JeeslNotFoundException
@@ -150,4 +154,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 		child = fMaven.save(child);
 		this.reloadChilds();
 	}
+	
+	public void reorderModules() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fMaven,modules); this.reloadModules();}
+	public void reorderChilds() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fMaven,childs); this.reloadChilds();}
 }

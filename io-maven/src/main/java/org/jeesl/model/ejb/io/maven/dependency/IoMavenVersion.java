@@ -33,9 +33,9 @@ public class IoMavenVersion implements JeeslIoMavenVersion<IoMavenArtifact,IoMav
 	@Override public IoMavenArtifact getArtifact() {return artifact;}
 	@Override public void setArtifact(IoMavenArtifact artifact) {this.artifact = artifact;}
 	
-	private Integer position;
-	@Override public Integer getPosition() {return position;}
-	@Override public void setPosition(Integer position) {this.position = position;}
+	private int position;
+	@Override public int getPosition() {return position;}
+	@Override public void setPosition(int position) {this.position = position;}
 	
 	private String code;
 	@Override public String getCode() {return code;}
