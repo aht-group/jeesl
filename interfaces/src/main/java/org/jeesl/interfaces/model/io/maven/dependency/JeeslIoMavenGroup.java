@@ -15,8 +15,5 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 public interface JeeslIoMavenGroup extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
 												EjbWithCode
 {	
-	
 	public static enum Attributes{code};
-	
-	
 }

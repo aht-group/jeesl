@@ -18,7 +18,7 @@ import net.sf.exlp.xml.io.Dir;
 @Mojo(name="msgBundle2")
 public class JeeslMsgGoal extends AbstractMojo
 {
-	@Parameter(defaultValue = "WARN")
+	@Parameter(defaultValue="WARN")
     private String log;
     
 	@Parameter(defaultValue="${project.groupId}")
@@ -47,27 +47,27 @@ public class JeeslMsgGoal extends AbstractMojo
     	
     public void execute() throws MojoExecutionException
     {
-	    	BasicConfigurator.configure();
-	    	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
+    	BasicConfigurator.configure();
+    	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
+	
+    	getLog().info("groupId: "+groupId);
+    	getLog().info("projectArtifactId: "+projectArtifactId);
+    	getLog().info("artifactId: "+artifactId);
+    	getLog().info("msgSource: "+msgSource);
+    	getLog().info("projectBuildDirectory: "+projectBuildDirectory);
+    	getLog().info("targetDir: "+targetDir);
+    	getLog().info("translationXml: ?? "+translationXml);
     	
-	    	getLog().info("groupId: "+groupId);
-	    	getLog().info("projectArtifactId: "+projectArtifactId);
-	    	getLog().info("artifactId: "+artifactId);
-	    	getLog().info("msgSource: "+msgSource);
-	    	getLog().info("projectBuildDirectory: "+projectBuildDirectory);
-	    	getLog().info("targetDir: "+targetDir);
-	    	getLog().info("translationXml: ?? "+translationXml);
-	    	
-	    	File fTarget = JeeslMsgGoal.createTargetDir(targetDir);
-	    	
-	    	File fRoot = new File(msgSource);
-	    	if(!fRoot.exists()){throw new MojoExecutionException("msg.bundle directory does not exist: "+fRoot.getAbsolutePath());}
-	    	
-	    	File fTranslationsXml = new File(fTarget,translationXml);
-	    	
-	    	getLog().info("Creating MessageBundle "+groupId+".msg_<lang>.txt from "+msgSource);
-	    	
-	    	TranslationFactory tFactory = new TranslationFactory();
+    	File fTarget = JeeslMsgGoal.createTargetDir(targetDir);
+    	
+    	File fRoot = new File(msgSource);
+    	if(!fRoot.exists()){throw new MojoExecutionException("msg.bundle directory does not exist: "+fRoot.getAbsolutePath());}
+    	
+    	File fTranslationsXml = new File(fTarget,translationXml);
+    	
+    	getLog().info("Creating MessageBundle "+groupId+".msg_<lang>.txt from "+msgSource);
+    	
+    	TranslationFactory tFactory = new TranslationFactory();
 		tFactory.setOutEncoding("UTF-8");
 		try
 		{

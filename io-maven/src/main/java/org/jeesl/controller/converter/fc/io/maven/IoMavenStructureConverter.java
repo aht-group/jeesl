@@ -1,0 +1,17 @@
+package org.jeesl.controller.converter.fc.io.maven;
+
+import javax.enterprise.context.RequestScoped;
+import javax.faces.convert.FacesConverter;
+
+import org.jeesl.jsf.converter.AbstractEjbIdConverter;
+import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
+
+@RequestScoped
+@FacesConverter(forClass=IoMavenStructure.class)
+public class IoMavenStructureConverter extends AbstractEjbIdConverter<IoMavenStructure>
+{
+	public IoMavenStructureConverter()
+	{
+		super(IoMavenStructure.class);
+	}
+}  

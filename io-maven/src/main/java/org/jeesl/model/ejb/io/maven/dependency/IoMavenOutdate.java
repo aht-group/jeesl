@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslMavenOutdate;
+import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;

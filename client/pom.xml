@@ -98,6 +98,7 @@
 			<artifactId>resteasy-jaxb-provider</artifactId>
 			<version>3.0.14.Final</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>

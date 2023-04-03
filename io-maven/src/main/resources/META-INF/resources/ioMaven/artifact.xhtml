@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+		
+		<composite:facet name="top" required="false"/>
+		<composite:facet name="bottom" required="false"/>
+	</composite:interface>
+	
+<composite:implementation>
+<jp:grid id="grid">
+	<j:row id="row1">
+		<j:slot id="sArtifacts" width="7">
+			<h:form id="fArtifacts">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="a" value="#{cc.attrs.ctrl.artifacts}"
+						selection="#{cc.attrs.ctrl.artifact}" selectionMode="single" rowKey="#{a.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoMavenArtifact" code="listOf"/>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectArtifact()}" update=":#{cc.id}:sArtifact"/>  
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet>
+						<h:outputText value="#{a.group.code}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact"/></f:facet>
+		            	<jtp:symbolizer value="#{a.suitability}" marginRight="5"/>
+						<h:outputText value="#{a.code}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="versions"/></f:facet>
+		            	<ui:repeat var="v" value="#{cc.attrs.ctrl.mapVersion[a]}">
+		            		<jtp:symbolizer value="#{v.outdate}" marginRight="5"/>
+						<h:outputText value="#{v.code}" rendered="#{empty v.label}"/>
+						<h:outputText value="#{v.label}" rendered="#{not empty v.label}"/>
+						<jtp:symbolizer value="#{v.maintainer}" marginLeft="5"/>
+		            		<br/>
+		            	</ui:repeat>
+						
+		            </p:column>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sArtifact" width="5">
+			<h:form id="fArtifact" rendered="#{not empty cc.attrs.ctrl.artifact}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoMavenArtifact"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveArtifact()}" update=":#{cc.id}:grid"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="IoMavenArtifact" code="group"/>
+						<h:outputText value="#{cc.attrs.ctrl.artifact.group.code}"/>
+						
+						<jtp:label entity="IoMavenArtifact"/>
+						<h:outputText value="#{cc.attrs.ctrl.artifact.code}"/>
+						
+						<jtp:label entity="IoMavenArtifact" code="suitability"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.artifact.suitability}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.suitabilities}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+					
+					</j:inputGrid>
+				</p:panel>
+			</h:form>
+			<h:form id="fVersions">
+				<p:dataTable rendered="#{not empty cc.attrs.ctrl.artifact}" styleClass="jeesl-datatable"
+						var="v" value="#{cc.attrs.ctrl.versions}" draggableRows="true"
+						selection="#{cc.attrs.ctrl.version}" selectionMode="single" rowKey="#{v.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoMavenVersion" code="listOf"/>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectVersion()}" update=":#{cc.id}:fVersion"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderVersions()}" update="@form"/>
+					<p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="outdate"/></f:facet>
+		            	<jtp:symbolizer value="#{v.outdate}"/>
+		            </p:column>  
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenVersion"/></f:facet>
+						<h:outputText value="#{v.code}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="label"/></f:facet>
+						<h:outputText value="#{v.label}" />
+						<jtp:symbolizer value="#{v.maintainer}" rendered="#{not empty v.maintainer}" marginLeft="5"/>
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="usedIn"/></f:facet>
+						<ui:repeat var="m" value="#{cc.attrs.ctrl.mapModule[v]}" varStatus="index">
+							<h:outputText value="#{m.label}"/>
+							<h:outputText value="#{index.last ? '' : ', '}"/>
+						</ui:repeat>
+		            </p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fVersion">
+				<p:panel styleClass="jeesl-panel" rendered="#{not empty cc.attrs.ctrl.version}">
+					<f:facet name="header"><j:pHeader entity="IoMavenVersion"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelVersion()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveVersion()}" update=":#{cc.id}:sArtifact"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="IoMavenArtifact" code="group"/>
+						<h:outputText value="#{cc.attrs.ctrl.version.artifact.group.code}"/>
+						
+						<jtp:label entity="IoMavenArtifact"/>
+						<h:outputText value="#{cc.attrs.ctrl.version.artifact.code}"/>
+						
+						<jtp:label entity="IoMavenVersion"/>
+						<h:outputText value="#{cc.attrs.ctrl.version.code}"/>
+						
+						<jtp:label entity="IoMavenVersion" code="label"/>
+						<p:inputText value="#{cc.attrs.ctrl.version.label}"/>
+						
+						<jtp:label entity="IoMavenVersion" code="maintainer"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.version.maintainer}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItem itemLabel="--"/>
+							<f:selectItems value="#{cc.attrs.ctrl.maintainers}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoMavenVersion" code="outdate"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.version.outdate}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.outdates}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+					
+					</j:inputGrid>
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+</composite:implementation>
+</html>

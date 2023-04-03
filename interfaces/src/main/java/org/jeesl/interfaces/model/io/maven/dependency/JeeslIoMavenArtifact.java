@@ -2,6 +2,7 @@ package org.jeesl.interfaces.model.io.maven.dependency;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenSuitability;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -12,7 +13,8 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslIoMavenArtifact <GROUP extends JeeslIoMavenGroup>
+public interface JeeslIoMavenArtifact <GROUP extends JeeslIoMavenGroup,
+										SUITABILITY extends JeeslMavenSuitability<?,?,SUITABILITY,?>>
 									extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
 												EjbWithNonUniqueCode
 {	
@@ -21,4 +23,7 @@ public interface JeeslIoMavenArtifact <GROUP extends JeeslIoMavenGroup>
 	
 	GROUP getGroup();
 	void setGroup(GROUP group);
+	
+	SUITABILITY getSuitability();
+	void setSuitability(SUITABILITY suitability);
 }

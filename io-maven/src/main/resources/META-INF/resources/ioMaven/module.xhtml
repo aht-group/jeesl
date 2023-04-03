@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+		
+		<composite:facet name="top" required="false"/>
+		<composite:facet name="bottom" required="false"/>
+	</composite:interface>
+	
+<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sDevelopments" width="7">
+			<h:form id="fDevelopments">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="m" value="#{cc.attrs.ctrl.modules}" draggableRows="true"
+						selection="#{cc.attrs.ctrl.module}" selectionMode="single" rowKey="#{m.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoMavenModule" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addDevelopment()}" update=":#{cc.id}:grid"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectDevelopment()}" update=":#{cc.id}:sDevelopment"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderModules()}" update="@form"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoMavenModule" code="structure"/></f:facet>
+		            	<jtp:symbolizer value="#{m.structure}"/>
+		            </p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoMavenModule" code="label"/></f:facet>
+		            	<jtp:symbolizer value="#{m}" marginRight="5"/>
+		            	<h:outputText value="#{m.label}" />
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="code"/></f:facet>
+		            	<jtp:symbolizer value="#{m.type}" marginRight="5"/>
+						<h:outputText value="#{m.code}" />
+		            </p:column>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sDevelopment" width="5">
+			<h:form id="fModule" rendered="#{not empty cc.attrs.ctrl.module}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoMavenModule"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveDevelopment()}" update=":#{cc.id}:grid"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="IoMavenModule" code="code"/>
+						<p:inputText value="#{cc.attrs.ctrl.module.code}"/>
+						
+						<jtp:label entity="IoMavenModule" code="label"/>
+						<p:inputText value="#{cc.attrs.ctrl.module.label}"/>
+						
+						<jtp:label entity="IoMavenModule" code="structure"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.module.structure}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.structures}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoMavenModule" code="type"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.module.type}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.types}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+					</j:inputGrid>
+				</p:panel>
+			</h:form>
+			<h:form id="fUpload" enctype="multipart/form-data" rendered="#{cc.attrs.ctrl.module.id gt 0}">
+				<p:fileUpload  styleClass="jeeslFileUpload" previewWidth="80" mode="advanced" dragDropSupport="false"
+					sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/"
+					listener="#{cc.attrs.ctrl.handleFileUpload}" update=":#{cc.id}:grid"/>
+			</h:form>
+			<h:form id="fChilds">
+				<p:dataTable styleClass="jeesl-datatable" rendered="#{cc.attrs.ctrl.module.id gt 0}"
+						var="c" value="#{cc.attrs.ctrl.childs}" draggableRows="true"
+						selection="#{cc.attrs.ctrl.child}" selectionMode="single" rowKey="#{c.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoMavenModule" code="childs">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addChild()}" update=":#{cc.id}:fChilds :#{cc.id}:fChild"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectChild()}" update=":#{cc.id}:fChild"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderChilds()}" update="@form"/>
+					<p:column>
+						<jtp:symbolizer value="#{c.structure}"/>
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="child"/></f:facet>
+						<h:outputText value="#{c.code}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="child"/></f:facet>
+						<h:outputText value="#{c.label}" />  
+		            </p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fChild">
+				<p:panel styleClass="jeesl-panel" rendered="#{not empty cc.attrs.ctrl.child}">
+					<f:facet name="header"><j:pHeader entity="IoMavenModule" code="child"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveChild()}" update=":#{cc.id}:fChilds :#{cc.id}:fChild"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="IoMavenModule" code="code"/>
+						<p:inputText value="#{cc.attrs.ctrl.child.code}"/>
+						
+						<jtp:label entity="IoMavenModule" code="label"/>
+						<p:inputText value="#{cc.attrs.ctrl.child.label}"/>
+						
+						<jtp:label entity="IoMavenModule" code="structure"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.child.structure}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.structures}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+					</j:inputGrid>
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+</composite:implementation>
+</html>

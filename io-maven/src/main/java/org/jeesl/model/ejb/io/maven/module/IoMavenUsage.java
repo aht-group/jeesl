@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.io.maven.usage;
+package org.jeesl.model.ejb.io.maven.module;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 @Entity
 @Table(name="IoMavenUsage")
 @EjbErNode(name="Usage",category="ioMaven",subset="ioMaven")
-public class IoMavenUsage implements JeeslIoMavenUsage<IoMavenVersion,IoMavenDevelopment>
+public class IoMavenUsage implements JeeslIoMavenUsage<IoMavenVersion,IoMavenModule>
 {
 	public static final long serialVersionUID=1;	
 
@@ -26,10 +26,11 @@ public class IoMavenUsage implements JeeslIoMavenUsage<IoMavenVersion,IoMavenDev
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 
+	@Override public String resolveParentAttribute() {return JeeslIoMavenUsage.Attributes.module.toString();}
 	@ManyToOne @NotNull
-	private IoMavenDevelopment development;
-	@Override public IoMavenDevelopment getDevelopment() {return development;}
-	@Override public void setDevelopment(IoMavenDevelopment development) {this.development = development;}
+	private IoMavenModule module;
+	@Override public IoMavenModule getModule() {return module;}
+	@Override public void setModule(IoMavenModule module) {this.module = module;}
 
 	@ManyToOne @NotNull
 	private IoMavenVersion version;
