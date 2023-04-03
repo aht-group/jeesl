@@ -46,35 +46,37 @@ html, body, .ui-widget {
 .ui-selectonemenu.ui-state-default .ui-icon-triangle-1-s:before {
   font-size: 2.5em; }
 
-.ui-selectonemenu-panel .ui-selectonemenu-items-wrapper {
-  max-height: 400px !important; }
-  .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list {
-    padding: 15px 0; }
-    .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list:before {
-      border-bottom: 3px solid #c4c4c4;
-      content: '';
-      display: block;
-      width: calc(100% - (2 * 15px));
-      margin: 0 15px; }
-    .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item {
-      border-radius: 0;
-      font-size: 1.2em;
-      font-weight: 700;
-      min-height: 84px;
-      margin: 0;
-      padding: calc(10px - 3px) 15px 10px;
-      text-shadow: none; }
-      .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:after {
-        border-bottom: 3px solid #ededed;
-        bottom: 0;
+.ui-selectonemenu-panel {
+  width: 100% !important; }
+  .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper {
+    max-height: 400px !important; }
+    .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list {
+      padding: 15px 0; }
+      .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list:before {
+        border-bottom: 3px solid #c4c4c4;
         content: '';
         display: block;
-        position: absolute;
-        width: calc(100% - 2 * 15px); }
-      .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight) {
-        background: none; }
-      .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight:after {
-        border-color: rgba(255, 255, 255, 0); }
+        width: calc(100% - (2 * 15px));
+        margin: 0 15px; }
+      .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item {
+        border-radius: 0;
+        font-size: 1.2em;
+        font-weight: 700;
+        min-height: 84px;
+        margin: 0;
+        padding: calc(10px - 3px) 15px 10px;
+        text-shadow: none; }
+        .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:after {
+          border-bottom: 3px solid #ededed;
+          bottom: 0;
+          content: '';
+          display: block;
+          position: absolute;
+          width: calc(100% - 2 * 15px); }
+        .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item:hover:not(.ui-state-highlight) {
+          background: none; }
+        .ui-selectonemenu-panel .ui-selectonemenu-items-wrapper .ui-selectonemenu-list .ui-selectonemenu-item.ui-state-highlight:after {
+          border-color: rgba(255, 255, 255, 0); }
 
 .ui-selectcheckboxmenu.ui-state-default .ui-inputfield {
   padding: 10px !important; }
@@ -90,35 +92,37 @@ html, body, .ui-widget {
 .ui-selectcheckboxmenu.ui-state-default .ui-icon-triangle-1-s:before {
   font-size: 2.5em; }
 
-.ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper {
-  max-height: 400px !important; }
-  .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list {
-    padding: 15px 0; }
-    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list:before {
-      border-bottom: 3px solid #c4c4c4;
-      content: '';
-      display: block;
-      width: calc(100% - (2 * 15px));
-      margin: 0 15px; }
-    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item {
-      border-radius: 0;
-      font-size: 1.2em;
-      font-weight: 700;
-      min-height: 84px;
-      margin: 0;
-      padding: calc(10px - 3px) 15px 10px;
-      text-shadow: none; }
-      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:after {
-        border-bottom: 3px solid #ededed;
-        bottom: 0;
+.ui-selectcheckboxmenu-panel {
+  width: 100% !important; }
+  .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper {
+    max-height: 400px !important; }
+    .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list {
+      padding: 15px 0; }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list:before {
+        border-bottom: 3px solid #c4c4c4;
         content: '';
         display: block;
-        position: absolute;
-        width: calc(100% - 2 * 15px); }
-      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:hover:not(.ui-state-highlight) {
-        background: none; }
-      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-highlight:after {
-        border-color: rgba(255, 255, 255, 0); }
+        width: calc(100% - (2 * 15px));
+        margin: 0 15px; }
+      .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item {
+        border-radius: 0;
+        font-size: 1.2em;
+        font-weight: 700;
+        min-height: 84px;
+        margin: 0;
+        padding: calc(10px - 3px) 15px 10px;
+        text-shadow: none; }
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:after {
+          border-bottom: 3px solid #ededed;
+          bottom: 0;
+          content: '';
+          display: block;
+          position: absolute;
+          width: calc(100% - 2 * 15px); }
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-hover:not(.ui-state-highlight), .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item:hover:not(.ui-state-highlight) {
+          background: none; }
+        .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper .ui-selectcheckboxmenu-list .ui-selectcheckboxmenu-item.ui-state-highlight:after {
+          border-color: rgba(255, 255, 255, 0); }
 
 .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token {
   height: 84px;
@@ -753,6 +757,8 @@ html, body, .ui-widget {
     min-width: 30px; }
     .jeesl-panel .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler:after {
       border-width: 8px 0 8px 8px; }
+  .jeesl-panel .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
+    height: 50px; }
 .jeesl-panel .jeesl-tabs {
   border-top: 1px solid #ababab;
   margin: 5px -15px; }
@@ -789,7 +795,8 @@ html, body, .ui-widget {
     .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
       align-items: center;
       background: #dedede;
-      display: flex; }
+      display: flex;
+      padding: 10px; }
     .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectcheckboxmenu {
       padding: 0; }
     .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor {
@@ -1010,6 +1017,8 @@ html, body, .ui-widget {
     min-width: 30px; }
     .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler:after {
       border-width: 8px 0 8px 8px; }
+  .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
+    height: 50px; }
 .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs {
   border-top: 1px solid #ababab;
   margin: 5px -15px; }
@@ -1046,7 +1055,8 @@ html, body, .ui-widget {
     .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
       align-items: center;
       background: #dedede;
-      display: flex; }
+      display: flex;
+      padding: 10px; }
     .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectonemenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-selectcheckboxmenu {
       padding: 0; }
     .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-ck-editor {

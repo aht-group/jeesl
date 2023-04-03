@@ -174,6 +174,7 @@ $border: $border-width solid $border-colour;
 	border: $border;
 	box-shadow: $highlight-shadow;
 	color: $foreground;
+	cursor: pointer;
 	line-height: normal;
 	padding: 0 $half-spacing;
 	text-align: center;
@@ -244,6 +245,7 @@ $border: $border-width solid $border-colour;
 	&.ui-state-disabled, &:disabled {
 		background: linear-gradient(to bottom, $bright-grey, $light-grey);
 		color: $soft-grey;
+		cursor: default;
 		opacity: 1;
 	}
 	
@@ -272,6 +274,8 @@ $border: $border-width solid $border-colour;
 	border: none;
 	border-radius: $border-radius;
     box-shadow: none;
+	line-height: normal;
+	min-height: $element-height;
 	outline: none;
     padding: $half-spacing $regular-spacing !important;
 	white-space: normal;
@@ -384,14 +388,30 @@ $border: $border-width solid $border-colour;
 	}
 }
 
-.ui-float-label > .ui-inputfield {
-	padding-top: 1.2em !important;
+.ui-float-label {
+	align-items: center;
+	background: $white-100;
+	border-radius: $border-radius;
+	display: flex;
 	
-	&:focus, &.ui-state-filled {
-		~ .ui-outputlabel {
-			font-size: 1em;
-			top: .75em;
+	> .ui-inputfield {
+		order: 2;
+
+		&:focus, &.ui-state-filled {
+			~ .ui-outputlabel {
+				font-size: 1em;
+				top: 50%;
+			}
 		}
+	}
+	
+	> .ui-outputlabel {
+		color: $foreground;
+		left: 0;
+		margin: 0;
+		opacity: .5;
+		padding-left: $regular-spacing;
+		position: relative;
 	}
 }
 
@@ -445,7 +465,7 @@ $border: $border-width solid $border-colour;
 		}
 		
 		.ui-icon-triangle-1-s:before {
-			content: "\f0d7" !important; // Override primefaces 12 rule.
+			content: $icon-down !important; // Override primefaces 12 rule.
 			font-size: 1.5em;
 			
 			@media (max-width: 768px) {
@@ -457,6 +477,10 @@ $border: $border-width solid $border-colour;
 	.#{$class}-panel {
 		opacity: 1;
 		width: auto !important;
+		
+		@media (max-width: 768px) {
+			width: 100% !important;
+		}
 		
 		&.hide-disabled-items {
 			.ui-selectonemenu-item.ui-state-disabled {
@@ -980,6 +1004,13 @@ $border: $border-width solid $border-colour;
 	gap: $slim-spacing;
 	padding: $slim-spacing $half-spacing;
 	
+	&:empty:after {
+		font-weight: 700;
+		opacity: .5;
+		padding: 0;
+		margin: 0;
+	}
+	
 	.#{$classname}-token {
 		@include button;
 		
@@ -1165,6 +1196,14 @@ $border: $border-width solid $border-colour;
 	&.ui-icon-calendar:before {
 		content: $icon-calendar;
 	}
+	
+	&.ui-icon-triangle-1-n:before {
+		content: $icon-up;
+	}
+	
+	&.ui-icon-triangle-1-s:before {
+		content: $icon-down;
+	}
 		
 	&.ui-icon-circle-triangle-w:before {
 		content: $icon-previous;
@@ -1172,6 +1211,43 @@ $border: $border-width solid $border-colour;
 	
 	&.ui-icon-circle-triangle-e:before {
 		content: $icon-next;
+	}
+}
+
+.ui-spinner {
+	display: grid;
+	grid-template: unquote("[row1-start] 'input btn-up' min-content [row1-end] [row2-start] 'input btn-down' min-content [row2-end] / calc(85% + 6px) 1fr");
+	
+	.ui-spinner-input {
+		grid-area: input;
+	}
+	
+	.ui-spinner-button {
+		height: #{$element-height / 2};
+		position: relative;
+		
+		&.ui-spinner-up {
+			box-shadow: none;
+		}
+		
+		&.ui-spinner-down {
+			border-top-width: 0;
+		}
+		
+		.ui-button-text {
+			display: block;
+			height: 100%;
+			padding: 0;
+			
+			.ui-icon {
+				left: 0 !important; // Overwrite primefaces rule.
+				top: -1px;
+				
+				&:before {
+					line-height: 9px;
+				}
+			}
+		}
 	}
 }
 

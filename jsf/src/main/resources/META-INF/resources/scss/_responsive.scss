@@ -127,7 +127,7 @@ $enable-pointer-cursor-for-buttons: true;
 			padding: 0;
 		    pointer-events: all;
 			position: relative;
-		    transition: opacity 0s $transition-duration;
+		    transition: opacity 0s $transition-duration, background $transition-duration linear;
 
 			-webkit-tap-highlight-color: $bright-colour;
 			
@@ -135,7 +135,7 @@ $enable-pointer-cursor-for-buttons: true;
 				display: list-item;
 			    opacity: 0;
 			    padding: 0 15px;
-			    transition: opacity 0s .4s;
+			    transition: opacity 0s .4s, background $transition-duration linear;
 			    width: 100%;
 			}
 			
@@ -638,7 +638,7 @@ $enable-pointer-cursor-for-buttons: true;
 		height: auto;
 			
 		@media (max-width: 768px) {
-			padding-top: 3px !important;
+			padding: 3px $regular-spacing 0 !important; // Overwrite primefaces style.
 			
 			&:after {
 				margin-left: -3px;
@@ -821,7 +821,7 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 					}
 
-					> *:not(.jeesl-input-grid-icon) {
+					> .ui-inputfield, .ui-selectonemenu, .ui-spinner, .ui-selectonemenu, .ui-selectcheckboxmenu, .ui-selectmanybutton, .ui-chips {
 						border-radius: $border-radius;
 //						height: 100%;
 						
@@ -841,6 +841,7 @@ $enable-pointer-cursor-for-buttons: true;
 							align-items: center;
 							background: $light-grey;
 							display: flex;
+							padding: $regular-spacing;
 						}
 					}
 					
@@ -1540,8 +1541,8 @@ $enable-pointer-cursor-for-buttons: true;
 				
 				&.ui-droppable {
 					@media (max-width: 768px) {
-						min-height: 46px;
-						line-height: 42px;
+						min-height: $ls-element-height-mobile;
+						line-height: $ls-element-height-mobile;
 					}
 				}
 				
@@ -1616,6 +1617,10 @@ $enable-pointer-cursor-for-buttons: true;
 					padding-left: $slim-spacing;
 					transition: background $transition-duration linear;
 					
+					@media(max-width: 768px) {
+						height: $ls-element-height-mobile;
+					}
+					
 					&.ui-state-hover {
 						background: $soft-grey;
 						box-shadow: none;
@@ -1659,10 +1664,6 @@ $enable-pointer-cursor-for-buttons: true;
 			@media (max-width: 768px) {
 				margin-bottom: -$half-spacing;
 			}
-		}
-		
-		.ui-tabs-panels {
-			padding: $half-spacing $regular-spacing;
 		}
 	
 //		&.jeesl-editor {
@@ -2999,6 +3000,10 @@ body, .ui-widget {
 	}
 }
 
+.jeesl-panel, .jeesl-tree, .jeesl-datatable, .html-container-panel {
+	margin-bottom: $regular-spacing;
+}
+
 .jeesl-panel {
 	@include jeesl-panel;
 }
@@ -3369,7 +3374,6 @@ body, .ui-widget {
 			
 			> *:not(.jeesl-dialog):not([class^="jeesl-grid-"]):not([class*=" jeesl-grid-"]) {
 				width: 100%;
-				margin-bottom: $regular-spacing;
 			}
 			
 	
@@ -3435,6 +3439,11 @@ body, .ui-widget {
 		.jeesl-grid {
 			margin: 0 $half-spacing;
 			position: relative;
+			
+			&.jeesl-height-master {
+				display: flex;
+				flex-wrap: wrap;
+			}
 			
 			&.jeesl-flow-layout > form {
 				display: flex;
@@ -3638,18 +3647,24 @@ body, .ui-widget {
 		overflow: visible;
 		
 		.ui-dialog-titlebar {
-			background: none;
+			background: $status-bar-background-gradient;
 			border: none;
+			border-radius: $border-radius;
 			box-shadow: none;
+			gap: $regular-spacing;
 			justify-content: flex-end;
 			margin-bottom: $regular-spacing;
+			padding: $half-spacing;
+			
+			&:after {
+				display: none;
+			}
 			
 			.ui-dialog-title {
 				color: $white-100;
-				display: none;
 				flex-grow: 0;
 				font-size: 1.1em;
-				text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+				text-shadow: none;
 				text-transform: uppercase;
 			}
 			
@@ -3756,13 +3771,11 @@ body, .ui-widget {
 		}
 	}
 	
-	.ui-tabs-panel {
-		> pre:last-child {
-			margin-bottom: 0;
-		}
+	.ui-tabs-panels {
+		padding: $half-spacing $regular-spacing;
 		
-		@media (max-width: 768px) {
-			padding: $half-spacing $regular-spacing;
+		.ui-tabs-panel > pre:last-child {
+			margin-bottom: 0;
 		}
 	}
 }

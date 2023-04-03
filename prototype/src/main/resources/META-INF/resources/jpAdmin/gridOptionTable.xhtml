@@ -114,17 +114,14 @@
 					
 					<j:inputGrid>
 						<jtp:label entity="IoLabelEntity" code="jscn"/>
-						<ui:fragment>
-							<h:outputText value="#{cc.attrs.bean.optionClass.simpleName}"/>
-							<h:outputText value=" (#{cc.attrs.bean.status.id})"/>
-						</ui:fragment>
+						<h:outputText id="jscn" value="#{cc.attrs.bean.optionClass.simpleName} (#{cc.attrs.bean.status.id})"/>
 						
 						<jtp:label entity="IoStatus" code="code"/>
 						<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}" autocomplete="off"/>
 						<h:outputText rendered="#{not cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.status.code}"/>
 					</j:inputGrid>
 					
-					<j:inputGrid rendered="#{cc.attrs.bean.supportsSymbol}" columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid rendered="#{cc.attrs.bean.supportsSymbol}">
 						<c:if test="#{empty cc.facets.inputSymbolLabel}" >
 							<p:outputLabel  value="#{msg.aupOptionSymbol}"/>
 						</c:if>
@@ -180,7 +177,9 @@
 						</p:selectOneMenu>
 						
 						<jtp:label entity="IoGraphic" code="size"/>
-						<p:spinner id="sSize" value="#{cc.attrs.bean.graphic.size}" min="0" max="100" />
+						<h:panelGroup layout="block" styleClass="jeesl-spinner">
+							<p:spinner id="sSize" value="#{cc.attrs.bean.graphic.size}" min="0" max="100" />
+						</h:panelGroup>
 						
 						<jtp:label entity="IoGraphic" code="color"/>
 						<p:colorPicker value="#{cc.attrs.bean.graphic.color}" />
