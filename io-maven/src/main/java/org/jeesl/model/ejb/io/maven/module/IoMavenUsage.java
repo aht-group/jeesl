@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.io.maven.usage;
+package org.jeesl.model.ejb.io.maven.module;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

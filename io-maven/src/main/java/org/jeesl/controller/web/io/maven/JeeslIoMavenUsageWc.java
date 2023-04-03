@@ -24,15 +24,17 @@ import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenMaintainer;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenOutdate;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
-import org.jeesl.model.ejb.io.maven.usage.IoMavenModule;
-import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
+import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
+import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
+import org.jeesl.model.ejb.io.maven.module.IoMavenType;
+import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenArtifactComparator;
+import org.jeesl.util.comparator.ejb.io.maven.EjbMavenUsageComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,9 +49,12 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslWebController<IoLang,IoDes
 	private JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final Comparator<IoMavenArtifact> cpArtifact;
+	private final Comparator<IoMavenUsage> cpUsage;
 	
+	private final Map<IoMavenType,List<IoMavenModule>> mapModule; public Map<IoMavenType,List<IoMavenModule>> getMapModule() {return mapModule;}
 	private final Map<IoMavenArtifact,Map<IoMavenModule,List<IoMavenVersion>>> mapVersion; public Map<IoMavenArtifact,Map<IoMavenModule,List<IoMavenVersion>>> getMapVersion() {return mapVersion;}
 	
+	private final List<IoMavenType> types; public List<IoMavenType> getTypes() {return types;}
 	private final List<IoMavenArtifact> artifacts; public List<IoMavenArtifact> getArtifacts() {return artifacts;}
 	private final List<IoMavenModule> modules;  public List<IoMavenModule> getModules() {return modules;}
 
@@ -59,9 +64,12 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslWebController<IoLang,IoDes
 	{
 		super(IoLang.class,IoDescription.class);
 		cpArtifact = EjbMavenArtifactComparator.instance(EjbMavenArtifactComparator.Type.code);
+		cpUsage = EjbMavenUsageComparator.instance(EjbMavenUsageComparator.Type.version);
 		
+		mapModule = new HashMap<>();
 		mapVersion = new HashMap<>();
 		
+		types = new ArrayList<>();
 		artifacts = new ArrayList<>();
 		modules = new ArrayList<>();
 	}
@@ -72,6 +80,8 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslWebController<IoLang,IoDes
 		super.postConstructWebController(lp,bMessage);
 		this.fMaven=fMaven;
 		
+		types.addAll(fMaven.allOrderedPositionVisible(IoMavenType.class));
+		
 		this.reloadDevelopments();
 		this.reloadUsages();
 	}
@@ -80,6 +90,21 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslWebController<IoLang,IoDes
 	{
 		modules.clear();
 		modules.addAll(fMaven.all(IoMavenModule.class).stream().filter(m -> Objects.isNull(m.getParent())).collect(Collectors.toList()));
+		
+		mapModule.clear();
+		mapModule.putAll(EjbMavenModuleFactory.toMapModule(modules));
+		
+		modules.clear();
+		for(IoMavenType t : types)
+		{
+			if(mapModule.containsKey(t))
+			{	
+				for(IoMavenModule m : mapModule.get(t))
+				{
+					modules.add(m);
+				}
+			}
+		}
 	}
 	
 	private void reloadUsages()
@@ -88,8 +113,11 @@ public class JeeslIoMavenUsageWc extends AbstractJeeslWebController<IoLang,IoDes
 		artifacts.clear();
 		
 		List<IoMavenUsage> list = fMaven.all(IoMavenUsage.class);
+		Collections.sort(list,cpUsage);
+//		Collections.reverse(list);
+		
 		mapVersion.putAll(EjbMavenUsageFactory.toMapArtifactRootModuleUsages(list));
-		 
+		
 		artifacts.addAll(mapVersion.keySet());
 		Collections.sort(artifacts,cpArtifact);
 	}

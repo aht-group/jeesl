@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.io.maven.usage;
+package org.jeesl.model.ejb.io.maven.module;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,12 +14,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenStructure;
 
 @Entity
 @Table(name="IoMavenModule")
 @EjbErNode(name="Module",category="ioMaven",subset="ioMaven")
-public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenStructure,IoGraphic>
+public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenStructure,IoMavenType,IoGraphic>
 {
 	public static final long serialVersionUID=1;	
 
@@ -51,7 +50,12 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenSt
 	private IoMavenStructure structure;
 	@Override public IoMavenStructure getStructure() {return structure;}
 	@Override public void setStructure(IoMavenStructure structure) {this.structure = structure;}
-
+	
+	@ManyToOne
+	private IoMavenType type;
+	@Override public IoMavenType getType() {return type;}
+	@Override public void setType(IoMavenType type) {this.type = type;}
+	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private IoGraphic graphic;
 	@Override public IoGraphic getGraphic() {return graphic;}

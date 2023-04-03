@@ -7,12 +7,12 @@ import java.util.Objects;
 
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenMaintainer;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenOutdate;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
+import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

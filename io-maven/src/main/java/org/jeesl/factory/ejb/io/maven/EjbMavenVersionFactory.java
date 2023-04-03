@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenMaintainer;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 
 public class EjbMavenVersionFactory

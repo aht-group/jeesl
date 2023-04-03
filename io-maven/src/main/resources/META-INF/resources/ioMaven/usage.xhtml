@@ -23,17 +23,30 @@
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenArtifact" code="listOf"/>
 					</f:facet>
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column colspan="2"><f:facet name="header">Maven</f:facet></p:column>
+							<p:columns var="t" value="#{cc.attrs.ctrl.types}" columnIndexVar="columnIndex">
+								<f:attribute name="colspan" value="#{cc.attrs.ctrl.mapModule[t].size()}"/>
+		            			<f:facet name="header"><f:facet name="header"><h:outputText value="#{t.name[localeCode].lang}"/></f:facet></f:facet>
+							</p:columns>
+                   		</p:row>
+                   		<p:row>
+                   			<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoMavenArtifact"/></f:facet></p:column>
+							<p:columns var="m" value="#{cc.attrs.ctrl.modules}">
+		            			<f:facet name="header">#{m.label}</f:facet>
+							</p:columns>
+                   		</p:row>
+					</p:columnGroup>
 		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet>
 						<h:outputText value="#{a.group.code}" />  
 		            </p:column>
 		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact"/></f:facet>
 		            	<jtp:symbolizer value="#{a.suitability}" marginRight="5"/>
 						<h:outputText value="#{a.code}" />
 		            </p:column>
 		            <p:columns var="m" value="#{cc.attrs.ctrl.modules}">
-		            	<f:facet name="header">#{m.label}</f:facet>
 		            	<ui:repeat var="v" value="#{cc.attrs.ctrl.mapVersion[a][m]}">
 		            		<jtp:symbolizer value="#{v.outdate}" marginRight="5"/>
 							<h:outputText value="#{v.code}" rendered="#{empty v.label}"/>

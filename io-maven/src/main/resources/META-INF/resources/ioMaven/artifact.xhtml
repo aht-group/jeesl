@@ -89,8 +89,8 @@
 		            </p:column>
 		            <p:column>
 		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="label"/></f:facet>
-		            	<jtp:symbolizer value="#{v.maintainer}" rendered="#{not empty v.maintainer}" marginRight="5"/>  
-						<h:outputText value="#{v.label}" />  
+						<h:outputText value="#{v.label}" />
+						<jtp:symbolizer value="#{v.maintainer}" rendered="#{not empty v.maintainer}" marginLeft="5"/>
 		            </p:column>
 		            <p:column>
 		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="usedIn"/></f:facet>

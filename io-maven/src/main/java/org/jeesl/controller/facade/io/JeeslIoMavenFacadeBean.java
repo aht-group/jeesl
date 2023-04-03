@@ -24,6 +24,7 @@ import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
+import org.jeesl.interfaces.model.io.maven.module.JeeslMavenType;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -38,8 +39,9 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,OUTDATE,MAINTAINER>,
 									OUTDATE extends JeeslMavenOutdate<?,?,OUTDATE,?>,
 									MAINTAINER extends JeeslMavenMaintainer<?,?,MAINTAINER,?>,
-									MODULE extends JeeslIoMavenModule<MODULE,?,?>,
+									MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,TYPE,?>,
 									STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>,
+									TYPE extends JeeslMavenType<L,D,TYPE,?>,
 									USAGE extends JeeslIoMavenUsage<VERSION,MODULE>>
 	extends JeeslFacadeBean implements JeeslIoMavenFacade<L,D,GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE,USAGE>
 {

@@ -11,8 +11,6 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenMaintainer;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenOutdate;
 
 @Entity
 @Table(name="IoMavenVersion")

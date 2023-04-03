@@ -15,7 +15,7 @@ public class IoMavenFactoryBuilder<L extends JeeslLang, D extends JeeslDescripti
 									GROUP extends JeeslIoMavenGroup,
 									ARTIFACT extends JeeslIoMavenArtifact<GROUP,?>,
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,?,?>,
-									MODULE extends JeeslIoMavenModule<MODULE,?,?>,
+									MODULE extends JeeslIoMavenModule<MODULE,?,?,?>,
 									USAGE extends JeeslIoMavenUsage<VERSION,MODULE>>
 			extends AbstractFactoryBuilder<L,D>
 {

@@ -4,7 +4,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;
 
 import org.jeesl.jsf.converter.AbstractEjbIdConverter;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenMaintainer;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
 
 @RequestScoped
 @FacesConverter(forClass=IoMavenMaintainer.class)

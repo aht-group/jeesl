@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.io.maven.classification;
+package org.jeesl.model.ejb.io.maven.dependency;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

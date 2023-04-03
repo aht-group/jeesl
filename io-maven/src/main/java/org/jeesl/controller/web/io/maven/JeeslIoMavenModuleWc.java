@@ -24,14 +24,15 @@ import org.jeesl.model.ejb.io.graphic.core.IoGraphicType;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenMaintainer;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenOutdate;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
-import org.jeesl.model.ejb.io.maven.usage.IoMavenModule;
-import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
+import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
+import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
+import org.jeesl.model.ejb.io.maven.module.IoMavenType;
+import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
@@ -49,6 +50,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	private JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final List<IoMavenStructure> structures; public List<IoMavenStructure> getStructures() {return structures;}
+	private final List<IoMavenType> types; public List<IoMavenType> getTypes() {return types;}
 	private final List<IoMavenModule> modules; public List<IoMavenModule> getModules() {return modules;}
 	private final List<IoMavenModule> childs; public List<IoMavenModule> getChilds() {return childs;}
 	
@@ -61,6 +63,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 		super(IoLang.class,IoDescription.class);
 		
 		structures = new ArrayList<>();
+		types = new ArrayList<>();
 		modules = new ArrayList<>();
 		childs = new ArrayList<>();
 	}
@@ -72,6 +75,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 		this.fMaven=fMaven;
 		
 		structures.addAll(fMaven.allOrderedPositionVisible(IoMavenStructure.class));
+		types.addAll(fMaven.allOrderedPositionVisible(IoMavenType.class));
 
 		this.reloadModules();
 	}

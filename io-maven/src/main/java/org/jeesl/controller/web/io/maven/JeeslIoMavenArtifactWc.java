@@ -23,15 +23,16 @@ import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenMaintainer;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenOutdate;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenStructure;
-import org.jeesl.model.ejb.io.maven.classification.IoMavenSuitability;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenSuitability;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
-import org.jeesl.model.ejb.io.maven.usage.IoMavenModule;
-import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
+import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
+import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
+import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
+import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenArtifactComparator;
 import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
 import org.slf4j.Logger;
@@ -48,6 +49,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,Io
 	private JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final Comparator<IoMavenArtifact> cpArtifact;
+	private final Comparator<IoMavenVersion> cpVersion;
 	
 	private final Map<IoMavenArtifact,List<IoMavenVersion>> mapVersion; public Map<IoMavenArtifact, List<IoMavenVersion>> getMapVersion() {return mapVersion;}
 	private final Map<IoMavenVersion,List<IoMavenModule>> mapModule; public Map<IoMavenVersion, List<IoMavenModule>> getMapModule() {return mapModule;}
@@ -66,6 +68,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,Io
 		super(IoLang.class,IoDescription.class);
 		
 		cpArtifact = EjbMavenArtifactComparator.instance(EjbMavenArtifactComparator.Type.code);
+		cpVersion = new PositionComparator<>();
 		
 		mapVersion = new HashMap<>();
 		mapModule = new HashMap<>();
@@ -106,6 +109,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,Io
 	private void reloadArtifacts()
 	{
 		List<IoMavenVersion> list = fMaven.all(IoMavenVersion.class);
+		Collections.sort(list,cpVersion);
 		mapVersion.clear();
 		mapVersion.putAll(EjbMavenVersionFactory.toMapArtifactVersion(list));
 		

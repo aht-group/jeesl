@@ -10,8 +10,8 @@ import java.util.Set;
 
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
-import org.jeesl.model.ejb.io.maven.usage.IoMavenModule;
-import org.jeesl.model.ejb.io.maven.usage.IoMavenUsage;
+import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
+import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 
 public class EjbMavenUsageFactory
