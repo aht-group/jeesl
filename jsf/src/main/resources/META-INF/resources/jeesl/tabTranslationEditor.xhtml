@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:c="http://java.sun.com/jsp/jstl/core"
-  xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:ui="http://java.sun.com/jsf/facelets"
-  xmlns:p="http://primefaces.org/ui"
-  xmlns:composite="http://java.sun.com/jsf/composite">
+	  xmlns:c="http://java.sun.com/jsp/jstl/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:j="http://www.jeesl.org/jsf"
+	  xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
 		<composite:attribute name="value" required="true"/>
@@ -19,14 +20,16 @@
   <composite:implementation>
   	<p:tabView id="tabViewKey" var="t" value="#{cc.attrs.keys}" rendered="#{empty cc.attrs.locales}" styleClass="jeesl-tabs">  
   		<p:tab title="#{t}">
-  			<c:if test="#{cc.attrs.withName}">
-	  			<p:outputLabel value="#{cc.attrs.labelTranslation}"/>
-	  			<p:inputTextarea value="#{cc.attrs.value.name[t].lang}" maxlength="254" style="width:100%" autocomplete="off"/>
-  			</c:if>
-  			<c:if test="#{cc.attrs.withDescription}">
-  				<p:outputLabel value="#{cc.attrs.labelDescription}"/>
-  				<p:inputTextarea value="#{cc.attrs.value.description[t].lang}" style="width:100%" autocomplete="off"/>
-  			</c:if>
+  			<j:inputGrid>
+	  			<c:if test="#{cc.attrs.withName}">
+		  			<p:outputLabel value="#{cc.attrs.labelTranslation}"/>
+		  			<p:inputTextarea value="#{cc.attrs.value.name[t].lang}" maxlength="254" style="width:100%" autocomplete="off"/>
+	  			</c:if>
+	  			<c:if test="#{cc.attrs.withDescription}">
+	  				<p:outputLabel value="#{cc.attrs.labelDescription}"/>
+	  				<p:inputTextarea value="#{cc.attrs.value.description[t].lang}" style="width:100%" autocomplete="off"/>
+	  			</c:if>
+  			</j:inputGrid>
   			<composite:insertChildren/>
   		</p:tab>  
   	</p:tabView> 

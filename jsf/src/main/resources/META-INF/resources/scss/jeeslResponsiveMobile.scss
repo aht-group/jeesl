@@ -146,11 +146,15 @@ html, body, .ui-widget {
 		}
 	}
 	
-	.#{$class}-panel .#{$class}-items-wrapper {
-		max-height: 400px !important;
+	.#{$class}-panel {
+		width: 100% !important;
 		
-		.#{$class}-list {
-			@include select-list($class);
+	 	.#{$class}-items-wrapper {
+			max-height: 400px !important;
+		
+			.#{$class}-list {
+				@include select-list($class);
+			}
 		}
 	}
 }
@@ -962,6 +966,7 @@ html, body, .ui-widget {
 					align-items: center;
 					background: $light-grey;
 					display: flex;
+					padding: $regular-spacing;
 				}
 				
 				> .ui-selectonemenu, > .ui-selectcheckboxmenu {
@@ -1119,6 +1124,10 @@ html, body, .ui-widget {
 			&:after {
 				border-width: 8px 0 8px 8px;
 			}
+		}
+		
+		.ui-treenode-label {
+			height: $ls-element-height-mobile;
 		}
 	}
 	
