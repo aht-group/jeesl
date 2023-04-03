@@ -4455,6 +4455,8 @@ body, .ui-widget {
     border-radius: 3px;
     overflow: hidden;
     padding: 0 !important; }
+  .jeesl-panel.jeesl-map .e-chart {
+    height: calc(100vh - 180px); }
   .jeesl-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
     margin-left: -10px;
     margin-right: -10px; }
@@ -5885,6 +5887,8 @@ body, .ui-widget {
         border-radius: 3px;
         overflow: hidden;
         padding: 0 !important; }
+      .jeesl-content .jeesl-content-container .ui-panel.jeesl-map .e-chart {
+        height: calc(100vh - 180px); }
       .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
         margin-left: -10px;
         margin-right: -10px; }
