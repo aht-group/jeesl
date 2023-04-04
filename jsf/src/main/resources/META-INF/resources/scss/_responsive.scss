@@ -1445,6 +1445,10 @@ $enable-pointer-cursor-for-buttons: true;
 			overflow: hidden;
 			padding: 0 !important;
 		}
+		
+		.e-chart {
+			height: calc(100vh - 180px);
+		}
 	}
 	
 	.jeesl-tabs.jeesl-editor {
