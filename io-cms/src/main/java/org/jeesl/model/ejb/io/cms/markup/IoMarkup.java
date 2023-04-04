@@ -12,9 +12,11 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
+import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="IoMarkup")
+@EjbErNode(name="Markup",category="ioCms",subset="ioCms")
 public class IoMarkup implements JeeslMarkup<IoMarkupType>
 {
 	public static final long serialVersionUID=1;
