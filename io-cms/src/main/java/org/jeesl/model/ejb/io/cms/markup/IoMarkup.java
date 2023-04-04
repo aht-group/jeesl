@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 
 @Entity
@@ -39,6 +40,9 @@ public class IoMarkup implements JeeslMarkup<IoMarkupType>
 	@Override public IoMarkupType getType() {return type;}
 	@Override public void setType(IoMarkupType type) {this.type = type;}
 
+
+	@Override public boolean equals(Object object) {return (object instanceof IoMarkup) ? id == ((IoMarkup) object).getId() : (object == this);}
+	@Override public int hashCode(){return new HashCodeBuilder(17,37).append(id).toHashCode();}
 
 	@Override public String toString()
 	{

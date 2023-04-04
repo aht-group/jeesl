@@ -16,7 +16,7 @@ import org.jeesl.model.ejb.io.locale.IoDescription;
 
 @Entity
 @DiscriminatorValue("ioCmsMarkupType")
-@EjbErNode(name="Type",category="system",subset="mail",level=3)
+@EjbErNode(name="Type",category="ioCms",subset="ioCms",level=3)
 public class IoMarkupType extends IoStatus implements JeeslIoCmsMarkupType<IoLang,IoDescription,IoMarkupType,IoGraphic>
 {
 	public static final long serialVersionUID=1;
