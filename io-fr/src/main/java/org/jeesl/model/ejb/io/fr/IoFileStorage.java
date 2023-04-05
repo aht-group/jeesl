@@ -86,4 +86,11 @@ public class IoFileStorage implements JeeslFileStorage<IoLang,IoDescription,IoSs
 
 	@Override public boolean equals(Object object){return (object instanceof IoFileStorage) ? id == ((IoFileStorage) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
+
+	@Override public String toString()
+	{
+		StringBuffer sb = new StringBuffer();
+		sb.append("[").append(id).append("]");
+		return sb.toString();
+	}
 }

@@ -36,6 +36,11 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 
+	@NotNull @Basic @Column(name="name",columnDefinition="text")
+	private String fileName;
+	@Override public String getFileName() {return fileName;}
+	@Override public void setFileName(String fileName) {this.fileName = fileName;}
+
 	@NotNull
 	private String code;
 	@Override public String getCode() {return code;}
@@ -50,11 +55,6 @@ public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,I
 	private IoFileContainer container;
 	@Override public IoFileContainer getContainer() {return container;}
 	@Override public void setContainer(IoFileContainer container) {this.container = container;}
-
-	@NotNull @Basic @Column(name="name",columnDefinition="text")
-	private String fileName;
-	@Override public String getFileName() {return fileName;}
-	@Override public void setFileName(String fileName) {this.fileName = fileName;}
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="IoFileMetaJtDescription",joinColumns={@JoinColumn(name="meta_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
