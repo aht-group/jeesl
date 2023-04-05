@@ -24,7 +24,7 @@ import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Entity
-@Table(name="IoSsiHost",uniqueConstraints={@UniqueConstraint(name="UK_IoSsiHost_system_code",columnNames={"system_id","code"})})
+@Table(name="IoSsiHost",uniqueConstraints={@UniqueConstraint(name="UC_IoSsiHost_system_code",columnNames={"system_id","code"})})
 @EjbErNode(name="Host")
 public class IoSsiHost implements JeeslIoSsiHost<IoLang,IoDescription,IoSsiSystem>
 {

@@ -15,7 +15,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
-@Table(name="IoSsiCredential",uniqueConstraints={@UniqueConstraint(name="UK_IoSsiCredential_system_code",columnNames={"system_id","code"})})
+@Table(name="IoSsiCredential",uniqueConstraints={@UniqueConstraint(name="UC_IoSsiCredential_system_code",columnNames={"system_id","code"})})
 @EjbErNode(name="Credential")
 public class IoSsiCredential implements JeeslIoSsiCredential<IoSsiSystem>
 {

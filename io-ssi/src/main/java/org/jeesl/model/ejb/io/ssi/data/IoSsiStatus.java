@@ -16,7 +16,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("ioSsiStatus")
-@EjbErNode(name="Link",category="ssi",subset="systemSsi")
+@EjbErNode(name="Status",category="ioSsi",subset="ioSsi")
 public class IoSsiStatus extends IoStatus implements JeeslIoSsiLink<IoLang,IoDescription,IoSsiStatus,IoGraphic>
 {
 	public static final long serialVersionUID=1;
