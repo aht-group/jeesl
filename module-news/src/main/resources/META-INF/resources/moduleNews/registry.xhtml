@@ -43,13 +43,13 @@
 		</j:slot>
 		<j:slot id="sFaq" width="5">
 			<h:form id="fTicket" rendered="#{not empty cc.attrs.ctrl.item}">
-				<p:panel styleClass="jeeslPanel">
+				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="NewsItem"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveItem()}" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					<j:inputGrid>
 						
 						<jtp:label entity="NewsItem" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.item.category}" effect="fade" autoWidth="false" dynamic="true">
@@ -65,7 +65,7 @@
 						<jtp:label entity="NewsItem" code="markup"/>
 						<jtp:inputMarkup value="#{cc.attrs.ctrl.item.markup[cc.attrs.ctrl.sbhLocale.selection.code]}"/>
 						
-					</p:panelGrid>
+					</j:inputGrid>
 				</p:panel>
 			</h:form>
 			<jp:ioFrFiles componentPrefix="#{cc.id}"  rendered="#{cc.attrs.ctrl.item.id gt 0}"

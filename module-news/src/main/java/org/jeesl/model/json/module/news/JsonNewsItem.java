@@ -51,6 +51,11 @@ public class JsonNewsItem implements Serializable
 	public String getHeadline() {return headline;}
 	public void setHeadline(String headline) {this.headline = headline;}
 	
+	@JsonProperty("markup")
+	private String markup;
+	public String getMarkup() {return markup;}
+	public void setMarkup(String markup) {this.markup = markup;}
+	
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

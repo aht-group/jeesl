@@ -41,8 +41,7 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 									USER extends JeeslSimpleUser,
 									M extends JeeslMarkup<MT>,
 									MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
-									FRC extends JeeslFileContainer<?,?>
->
+									FRC extends JeeslFileContainer<?,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable,SbSingleBean,JeeslFileRepositoryCallback
 {
@@ -59,8 +58,8 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 	
 	private List<ITEM> items; public List<ITEM> getItems() {return items;}
 	
-	protected R realm;
-	protected RREF rref;
+	private R realm;
+	private FEED feed;
 	private USER author;
 	private ITEM item; public ITEM getItem() {return item;} public void setItem(ITEM item) {this.item = item;}
 
@@ -88,17 +87,24 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 		sbhLocale.setList(lp.getLocales());
 		sbhLocale.setDefault();
 		frh.setLocale(sbhLocale.getSelection());
-		
-//		categories = fNews.allOrderedPositionVisible(fbNews.getClassCategory());
-//		active = new HashMap<NEWS,Boolean>();
+
 	}
 	
 	public void updateRealmReference(RREF rref)
 	{
-		this.rref=rref;
-		
 		sbhCategory.clear();
 		sbhCategory.setList(fNews.all(fbNews.getClassCategory(),realm,rref));
+		sbhCategory.setDefault();
+		
+		try {feed = fNews.fByRref(fbNews.getClassFeed(),realm,rref);}
+		catch (JeeslNotFoundException e)
+		{
+			try
+			{
+				feed = fNews.save(fbNews.ejbFeed().build(realm,rref));
+			}
+			catch (JeeslConstraintViolationException | JeeslLockingException e1) {e1.printStackTrace();}
+		}
 		
 		reloadNews();
 	}
@@ -122,7 +128,7 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 	
 	private void reloadNews()
 	{
-		items = fNews.all(fbNews.getClassItem());
+		items = fNews.allForParent(fbNews.getClassItem(),feed);
 //		active.clear();
 //		for(NEWS n : list){active.put(n,false);}
 //		for(NEWS n : fNews.fActiveNews()){active.put(n,true);}	
@@ -132,9 +138,10 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbNews.getClassItem()));}
 		MT markupType = fNews.fByEnum(fbNews.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
-		item = fbNews.ejbItem().build(realm,rref,sbhLocale.getList(),markupType,author);
-//		news.setName(efLang.createEmpty(localeCodes));
-//		news.setDescription(efDescription.createEmpty(localeCodes));
+		item = fbNews.ejbItem().build(feed,sbhLocale.getList(),markupType,author);
+		
+		if(sbhCategory.isSelected()) {item.setCategory(sbhCategory.getSelection());}
+		
 		frh.reset();
 	}
 	
@@ -153,7 +160,7 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 //		if(news.getCategory()!=null){news.setCategory(fNews.find(fbNews.getClassCategory(), news.getCategory()));}
 		item = fNews.save(item);
 		reloadNews();
-		bMessage.growlSuccessSaved();
+		if(Objects.nonNull(bMessage)) {bMessage.growlSuccessSaved();}
 		frh.init(item);
 	}
 	

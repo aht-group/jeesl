@@ -9,6 +9,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisible;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.io.cms.JeeslWithMarkupMulti;
@@ -21,11 +22,14 @@ public interface JeeslNewsItem<L extends JeeslLang,
 								M extends JeeslMarkup<?>,
 								FRC extends JeeslFileContainer<?,?>>
 							extends EjbWithId,EjbSaveable,EjbRemoveable,EjbWithVisible,
+									EjbWithParentAttributeResolver,
 									EjbWithLang<L>,JeeslWithMarkupMulti<M>,
 									JeeslWithFileRepositoryContainer<FRC>
 {
-	public static enum Attributes{visible,validFrom}
+	public static enum Attributes{feed,visible,validFrom}
 	
+	FEED getFeed();
+	void setFeed(FEED feed);
 	
 	CATEGORY getCategory();
 	void setCategory(CATEGORY category);

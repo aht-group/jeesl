@@ -68,8 +68,8 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		Path<CALENDAR> pathCalendar = root.get(JeeslWithCalendar.Attributes.calendar.toString());
 		Path<Long> pId = root.get(EjbWithId.attribute);
 		
-		cQ.where(cB.equal(pId,owner.getId()));
 		cQ.select(pathCalendar);
+		cQ.where(cB.equal(pId,owner.getId()));
 		
 		try	{return em.createQuery(cQ).getSingleResult();}
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbCalendar.getClassCalendar()+" found for owner "+owner);}

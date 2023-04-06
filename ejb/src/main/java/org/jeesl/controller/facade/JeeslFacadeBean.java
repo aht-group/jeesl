@@ -593,7 +593,23 @@ public class JeeslFacadeBean implements JeeslFacade
 		return em.createQuery(select).getResultList();
 	}
 
-	// MCS
+	// System - Tenant
+	@Override public <T extends JeeslWithTenantSupport<REALM>, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId> T fByRref(Class<T> c, REALM realm, RREF rref) throws JeeslNotFoundException
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<T> cQ = cB.createQuery(c);
+		Root<T> root = cQ.from(c);
+		
+		Path<REALM> pRealm = root.get(JeeslWithTenantSupport.Attributes.realm.toString());
+		Expression<Long> eRref = root.get(JeeslWithTenantSupport.Attributes.rref.toString());
+		
+		cQ.select(root);
+		cQ.where(cB.equal(pRealm,realm),cB.equal(eRref,rref.getId()));
+		
+		try	{return em.createQuery(cQ).getSingleResult();}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+c.getSimpleName()+" found realm:"+realm.toString()+" and rref="+rref.getId());}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple "+c.getSimpleName()+" found realm:"+realm.toString()+" and rref="+rref.getId());}
+	}
 	@Override public <T extends JeeslWithTenantSupport<REALM>, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId> List<T> all(Class<T> c, REALM realm, RREF rref)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -610,7 +626,7 @@ public class JeeslFacadeBean implements JeeslFacade
 
 		return em.createQuery(select).getResultList();
 	}
-	@Override public <T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,?,?>, RREF extends EjbWithId, E extends Enum<E>> T fByEnum(Class<T> type, REALM realm, RREF rref, E code)
+	@Override public <T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId, E extends Enum<E>> T fByEnum(Class<T> type, REALM realm, RREF rref, E code)
 	{
 		try {return this.fByCode(type,realm,rref,code.toString());} catch (JeeslNotFoundException e)
 		{
@@ -618,7 +634,7 @@ public class JeeslFacadeBean implements JeeslFacade
 			return null;
 		}
 	}
-	@Override public <T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,?,?>, RREF extends EjbWithId> T fByCode(Class<T> type, REALM realm, RREF rref, String code) throws JeeslNotFoundException
+	@Override public <T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId> T fByCode(Class<T> type, REALM realm, RREF rref, String code) throws JeeslNotFoundException
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
         CriteriaQuery<T> cQ = cB.createQuery(type);

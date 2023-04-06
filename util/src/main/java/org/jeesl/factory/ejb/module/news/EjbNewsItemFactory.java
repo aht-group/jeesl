@@ -43,15 +43,16 @@ public class EjbNewsItemFactory<L extends JeeslLang, D extends JeeslDescription,
         efMarkup = EjbMarkupFactory.instance(cMarkup);
     }
 	
-	public <RREF extends EjbWithId> ITEM build(R realm, RREF rref, List<LOC> locales, MT markupType, USER author)
+	public <RREF extends EjbWithId> ITEM build(FEED feed, List<LOC> locales, MT markupType, USER author)
 	{
 		try
 		{
 			ITEM ejb = cItem.newInstance();
+			ejb.setFeed(feed);
 			ejb.setName(efLang.buildEmpty(locales));
 			ejb.setMarkup(efMarkup.build(locales,markupType));
 			ejb.setAuthor(author);
-			ejb.setValidFrom(LocalDateTime.now());
+			ejb.setRecord(LocalDateTime.now());
 	
 		    return ejb;
 		}

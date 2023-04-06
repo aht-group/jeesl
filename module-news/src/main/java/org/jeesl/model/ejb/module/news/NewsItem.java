@@ -39,10 +39,11 @@ public class NewsItem implements JeeslNewsItem<IoLang,NewsFeed,NewsCategory,Secu
 	@Override public long getId() {return id;}
 	@Override public void setId(long id){this.id = id;}
 
+	@Override public String resolveParentAttribute() {return JeeslNewsItem.Attributes.feed.toString();}	
 	@NotNull @ManyToOne
 	private NewsFeed feed;
-	public NewsFeed getFeed() {return feed;}
-	public void setFeed(NewsFeed feed) {this.feed = feed;}
+	@Override public NewsFeed getFeed() {return feed;}
+	@Override public void setFeed(NewsFeed feed) {this.feed = feed;}
 
 	@NotNull @ManyToOne
 	private NewsCategory category;
@@ -58,12 +59,10 @@ public class NewsItem implements JeeslNewsItem<IoLang,NewsFeed,NewsCategory,Secu
 	@Override public LocalDateTime getRecord() {return record;}
 	@Override public void setRecord(LocalDateTime record) {this.record = record;}
 
-	@NotNull
 	private LocalDateTime validFrom;
 	@Override public LocalDateTime getValidFrom() {return validFrom;}
 	@Override public void setValidFrom(LocalDateTime validFrom) {this.validFrom = validFrom;}
-	
-	@NotNull
+
 	private LocalDateTime validUntil;
 	@Override public LocalDateTime getValidUntil() {return validUntil;}
 	@Override public void setValidUntil(LocalDateTime validUntil) {this.validUntil = validUntil;}
@@ -102,5 +101,5 @@ public class NewsItem implements JeeslNewsItem<IoLang,NewsFeed,NewsCategory,Secu
 		sb.append("[").append(id).append("]");
 		sb.append(" ").append(name).append(":");
 		return sb.toString();
-	}	
+	}
 }

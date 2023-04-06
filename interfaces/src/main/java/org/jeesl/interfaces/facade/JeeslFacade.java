@@ -95,10 +95,11 @@ public interface JeeslFacade extends JeeslIdFacade
 	<T extends EjbWithRecord, AND extends EjbWithId, OR extends EjbWithId> List<T> allOrderedForParents(Class<T> queryClass, List<ParentPredicate<AND>> lpAnd, List<ParentPredicate<OR>> lpOr,boolean ascending);
 	<T extends EjbWithValidFrom> List<T> allOrderedValidFrom(Class<T> cl, boolean ascending);
 	
-	// MCS
+	// System - Tenant
+	<T extends JeeslWithTenantSupport<REALM>, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId> T fByRref(Class<T> c, REALM realm, RREF rref) throws JeeslNotFoundException;
 	<T extends JeeslWithTenantSupport<REALM>, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId> List<T> all(Class<T> c, REALM realm, RREF rref);
-	<T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,?,?>, RREF extends EjbWithId, E extends Enum<E>> T fByEnum(Class<T> type, REALM realm, RREF rref, E code);
-	<T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,?,?>, RREF extends EjbWithId> T fByCode(Class<T> type, REALM realm, RREF rref, String code) throws JeeslNotFoundException;
+	<T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId, E extends Enum<E>> T fByEnum(Class<T> type, REALM realm, RREF rref, E code);
+	<T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId> T fByCode(Class<T> type, REALM realm, RREF rref, String code) throws JeeslNotFoundException;
 	
 	//Visibility
 	<T extends EjbWithVisible, P extends EjbWithId> List<T> allVisible(Class<T> cl);

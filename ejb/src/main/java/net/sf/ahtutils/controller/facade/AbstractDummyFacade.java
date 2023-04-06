@@ -522,21 +522,10 @@ public class AbstractDummyFacade implements JeeslFacade
 		return null;
 	}
 
+	@Override public <T extends JeeslWithTenantSupport<REALM>, REALM extends JeeslTenantRealm<?, ?, REALM, ?>, RREF extends EjbWithId> T fByRref(Class<T> c, REALM realm, RREF rref) {return null;}
 	@Override public <T extends JeeslWithTenantSupport<REALM>, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId> List<T> all(Class<T> c, REALM realm, RREF rref) {return null;}
-
-	@Override
-	public <T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?, ?, ?, ?>, RREF extends EjbWithId, E extends Enum<E>> T fByEnum(
-			Class<T> type, REALM realm, RREF rref, E code) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?, ?, ?, ?>, RREF extends EjbWithId> T fByCode(
-			Class<T> type, REALM realm, RREF rref, String code) throws JeeslNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	@Override public <T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId, E extends Enum<E>> T fByEnum(Class<T> type, REALM realm, RREF rref, E code) {return null;}
+	@Override public <T extends EjbWithNonUniqueCode, REALM extends JeeslTenantRealm<?,?,REALM,?>, RREF extends EjbWithId> T fByCode(Class<T> type, REALM realm, RREF rref, String code) throws JeeslNotFoundException {return null;}
 
 	@Override
 	public <T extends EjbWithId, A1 extends Enum<A1>, P1 extends EjbWithId> List<T> allForParent(Class<T> type, A1 a1,
@@ -566,6 +555,10 @@ public class AbstractDummyFacade implements JeeslFacade
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
+
 
 
 
