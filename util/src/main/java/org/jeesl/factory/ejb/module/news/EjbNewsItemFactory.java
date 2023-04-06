@@ -14,6 +14,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class EjbNewsItemFactory<L extends JeeslLang, D extends JeeslDescription,
 									FEED extends JeeslNewsFeed<L,D,R>,
 									CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
 									ITEM extends JeeslNewsItem<L,FEED,CATEGORY,USER,M,?>,
-									USER extends EjbWithId,
+									USER extends JeeslSimpleUser,
 									M extends JeeslMarkup<MT>,
 									MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
 {

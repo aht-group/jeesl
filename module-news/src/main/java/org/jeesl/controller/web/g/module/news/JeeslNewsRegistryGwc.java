@@ -1,4 +1,4 @@
-package org.jeesl.controller.web.module.news;
+package org.jeesl.controller.web.g.module.news;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,6 +24,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
@@ -32,22 +33,21 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslNewsRegistryController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 									FEED extends JeeslNewsFeed<L,D,R>,
 									CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
 									ITEM extends JeeslNewsItem<L,FEED,CATEGORY,USER,M,FRC>,
-									USER extends EjbWithId,
+									USER extends JeeslSimpleUser,
 									M extends JeeslMarkup<MT>,
 									MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
 									FRC extends JeeslFileContainer<?,?>
-//,FRM extends JeeslFileMeta<D,FRC,?,?>
 >
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable,SbSingleBean,JeeslFileRepositoryCallback
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslNewsRegistryController.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslNewsRegistryGwc.class);
 	
 	protected JeeslNewsFacade<L,D,R,FEED,CATEGORY,ITEM,USER,M,MT,FRC> fNews;
 	private final NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews;
@@ -64,7 +64,7 @@ public class JeeslNewsRegistryController <L extends JeeslLang, D extends JeeslDe
 	private USER author;
 	private ITEM item; public ITEM getItem() {return item;} public void setItem(ITEM item) {this.item = item;}
 
-	public JeeslNewsRegistryController(NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews)
+	public JeeslNewsRegistryGwc(NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews)
 	{
 		super(fbNews.getClassL(),fbNews.getClassD());
 		this.fbNews=fbNews;

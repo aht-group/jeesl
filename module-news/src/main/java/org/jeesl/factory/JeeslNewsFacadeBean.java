@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade.module;
+package org.jeesl.factory;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class JeeslNewsFacadeBean<L extends JeeslLang, D extends JeeslDescription
 								FEED extends JeeslNewsFeed<L,D,R>,
 								CAT extends JeeslNewsCategory<L,D,R,CAT,?>,
 								ITEM extends JeeslNewsItem<L,FEED,CAT,USER,M,FRC>,
-								USER extends EjbWithId,
+								USER extends JeeslSimpleUser,
 								M extends JeeslMarkup<MT>,
 								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
 								FRC extends JeeslFileContainer<?,?>>

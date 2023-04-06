@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisible;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.io.cms.JeeslWithMarkupMulti;
@@ -16,7 +17,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 public interface JeeslNewsItem<L extends JeeslLang,
 								FEED extends JeeslNewsFeed<L,?,?>,
 								CATEGORY extends JeeslNewsCategory<L,?,?,CATEGORY,?>,
-								USER extends EjbWithId,
+								USER extends JeeslSimpleUser,
 								M extends JeeslMarkup<?>,
 								FRC extends JeeslFileContainer<?,?>>
 							extends EjbWithId,EjbSaveable,EjbRemoveable,EjbWithVisible,

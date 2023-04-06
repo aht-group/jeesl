@@ -74,15 +74,15 @@ public class NewsItem implements JeeslNewsItem<IoLang,NewsFeed,NewsCategory,Secu
 	@Override public void setAuthor(SecurityUser author) {this.author = author;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="NewsItemJtLang",joinColumns={@JoinColumn(name="item_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="NewsItemJtMarkup",joinColumns={@JoinColumn(name="item_id")},inverseJoinColumns={@JoinColumn(name="markup_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoMarkup> markup;
 	@Override public Map<String,IoMarkup> getMarkup() {return markup;}
 	@Override public void setMarkup(Map<String,IoMarkup> markup) {this.markup = markup;}

@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
@@ -26,6 +28,15 @@ public class NewsFeed implements JeeslNewsFeed<IoLang,IoDescription,TenantRealm>
 	protected long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id){this.id = id;}
+	
+	@NotNull @ManyToOne
+	private TenantRealm realm;
+	@Override public TenantRealm getRealm() {return realm;}
+	@Override public void setRealm(TenantRealm realm) {this.realm = realm;}
+	
+	private long rref;
+	@Override public long getRref() {return rref;}
+	@Override public void setRref(long rref) {this.rref = rref;}
 	
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
