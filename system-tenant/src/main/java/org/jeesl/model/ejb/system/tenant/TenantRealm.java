@@ -16,7 +16,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("tenantRealm")
-@EjbErNode(name="Realm",category="revision",subset="revision",level=4)
+@EjbErNode(name="Realm",category="systemTenant",subset="systemTenant",level=4)
 public class TenantRealm extends IoStatus implements JeeslTenantRealm<IoLang,IoDescription,TenantRealm,IoGraphic>
 {
 	public static final long serialVersionUID=1;
@@ -24,10 +24,10 @@ public class TenantRealm extends IoStatus implements JeeslTenantRealm<IoLang,IoD
 
 	@Override public List<String> getFixedCodes()
 	{
-		List<String> fixed = new ArrayList<String>();
-		
+		List<String> fixed = new ArrayList<>();
 		return fixed;
 	}
+
 
 	@Override public boolean equals(Object object) {return (object instanceof TenantRealm) ? id == ((TenantRealm) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}

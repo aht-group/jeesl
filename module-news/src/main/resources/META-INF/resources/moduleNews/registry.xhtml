@@ -48,6 +48,7 @@
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveItem()}" update=":#{cc.id}:grid"/>
 					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						
 						<jtp:label entity="NewsItem" code="category"/>

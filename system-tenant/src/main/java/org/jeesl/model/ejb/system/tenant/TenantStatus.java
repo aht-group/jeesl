@@ -85,15 +85,15 @@ public class TenantStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemov
 	@Override public void setPosition(int position) {this.position = position;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="TenantStatusJtLang",joinColumns={@JoinColumn(name="status_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@MapKey(name="lkey")
 	protected Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {if(name==null){name=new HashMap<String,IoLang>();}return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="TenantStatusJtDescription",joinColumns={@JoinColumn(name="status_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@MapKey(name="lkey")
 	protected Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}

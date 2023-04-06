@@ -12,7 +12,8 @@ import org.slf4j.LoggerFactory;
 public class NewsRestHandler implements JeeslNewsRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(NewsRestHandler.class);
-		
+
+
 	public NewsRestHandler()
 	{
 		

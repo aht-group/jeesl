@@ -43,6 +43,11 @@
     		<artifactId>jeesl-api</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-jsf</artifactId>
+    		<scope>provided</scope>
+		</dependency>
 		
 		<!-- JEESL Modles -->
 		<dependency>
@@ -52,12 +57,17 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-io-fr</artifactId>
+    		<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
     		<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-io-fr</artifactId>
+    		<artifactId>jeesl-system-security</artifactId>
     		<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -65,12 +75,6 @@
     		<artifactId>jeesl-system-tenant</artifactId>
     		<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-system-security</artifactId>
-    		<scope>compile</scope>
-		</dependency>
-		
 	
 		<!-- JakartaEE -->
 		<dependency>
@@ -86,6 +90,11 @@
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.faces</groupId>
+			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		
