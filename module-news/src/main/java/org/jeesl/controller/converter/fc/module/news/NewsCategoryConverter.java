@@ -1,4 +1,4 @@
-package org.jeesl.controller.controller.converter.fc.module.news;
+package org.jeesl.controller.converter.fc.module.news;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;
