@@ -63,8 +63,8 @@ public class JeeslSystemNewsFacadeBean<L extends JeeslLang,D extends JeeslDescri
 		predicates.add(cB.lessThanOrEqualTo(dStart,DateUtil.toDate(now)));
 		predicates.add(cB.greaterThanOrEqualTo(dEnd,DateUtil.toDate(now)));
 		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(news);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.orderBy(cB.desc(dStart));
 
 		TypedQuery<NEWS> tQ = em.createQuery(cQ);

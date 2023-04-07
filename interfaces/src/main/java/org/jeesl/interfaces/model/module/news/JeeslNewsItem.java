@@ -30,7 +30,7 @@ public interface JeeslNewsItem<L extends JeeslLang,
 									EjbWithLang<L>,JeeslWithMarkupMulti<M>,
 									JeeslWithFileRepositoryContainer<FRC>
 {
-	public static enum Attributes{feed,visible,validFrom}
+	public static enum Attributes{feed,visible,record,validFrom,validUntil}
 	
 	FEED getFeed();
 	void setFeed(FEED feed);

@@ -28,5 +28,5 @@ public interface JeeslNewsFacade <L extends JeeslLang, D extends JeeslDescriptio
 			extends JeeslFacade
 {	
 	<OWNER extends JeeslWithNewsFeed<FEED>> FEED fNewsFeed(Class<OWNER> cOwner, OWNER owner) throws JeeslNotFoundException;
-	List<ITEM> fNewsActive();
+	List<ITEM> fNewsActiveItems(FEED feed);
 }

@@ -1,5 +1,7 @@
-package org.jeesl.factory;
+package org.jeesl.controller.facade.module;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,7 +9,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.JeeslNewsFacade;
@@ -72,8 +76,27 @@ public class JeeslNewsFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple "+fbNews.getClassFeed()+" found for owner "+owner);}
 	}
 
-	@Override public List<ITEM> fNewsActive()
+	@Override public List<ITEM> fNewsActiveItems(FEED feed)
 	{
-		return this.all(fbNews.getClassItem());
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<ITEM> cQ = cB.createQuery(fbNews.getClassItem());
+		Root<ITEM> root = cQ.from(fbNews.getClassItem());
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		Path<Boolean> pVisible = root.get(JeeslNewsItem.Attributes.visible.toString());
+		Expression<LocalDateTime> eRecord = root.get(JeeslNewsItem.Attributes.record.toString());
+		Expression<LocalDateTime> eFrom   = root.get(JeeslNewsItem.Attributes.validFrom.toString());
+		Expression<LocalDateTime> eUntil  = root.get(JeeslNewsItem.Attributes.validUntil.toString());
+		
+		java.time.LocalDateTime now = java.time.LocalDateTime.now();
+		predicates.add(cB.isTrue(pVisible));	
+		predicates.add(cB.or(cB.isNull(eFrom),cB.lessThanOrEqualTo(eFrom,now)));
+		predicates.add(cB.or(cB.isNull(eUntil),cB.greaterThanOrEqualTo(eUntil,now)));
+		
+		cQ.select(root);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.orderBy(cB.desc(eRecord));
+
+		return em.createQuery(cQ).getResultList();
 	}
 }

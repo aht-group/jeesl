@@ -29,6 +29,7 @@ public class NewsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(NewsFactoryBuilder.class);
 	
 	private final Class<LOC> cLocale; public Class<LOC> getClassLocale() {return cLocale;}
+	private final Class<R> cRealm; public Class<R> getClassRealm() {return cRealm;}
 	private final Class<FEED> cFeed; public Class<FEED> getClassFeed() {return cFeed;}
 	private final Class<CATEGORY> cCategory; public Class<CATEGORY> getClassCategory() {return cCategory;}
 	private final Class<ITEM> cItem; public Class<ITEM> getClassItem() {return cItem;}
@@ -37,6 +38,7 @@ public class NewsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	private final Class<MT> cMarkupType; public Class<MT> getClassMarkupType() {return cMarkupType;}
 
 	public NewsFactoryBuilder(final Class<L> cL,final Class<D> cD, Class<LOC> cLocale,
+								final Class<R> cRealm,
 								final Class<FEED> cFeed,
 								final Class<CATEGORY> cCategory,
 								final Class<ITEM> cItem,
@@ -45,6 +47,7 @@ public class NewsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 	{       
 		super(cL,cD);
 		this.cLocale=cLocale;
+		this.cRealm=cRealm;
 		this.cFeed=cFeed;
 		this.cCategory=cCategory;
 		this.cItem=cItem;

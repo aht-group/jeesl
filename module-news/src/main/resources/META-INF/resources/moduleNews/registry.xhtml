@@ -26,6 +26,9 @@
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectItem()}" update=":#{cc.id}:sFaq"/>
 					<p:column>
+						<j:duoCheckmark value="#{item.visible}"/>
+					</p:column>
+					<p:column>
 						<f:facet name="header"><jtp:label entity="NewsItem" code="record"/></f:facet>
 						<jp:outputDate value="#{item.record}"/>
 					</p:column>
@@ -55,6 +58,9 @@
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<j:inputGrid>
+						
+						<jtp:label entity="NewsItem" code="visible"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.ctrl.item.visible}"/>
 						
 						<jtp:label entity="NewsItem" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.item.category}" effect="fade" autoWidth="false" dynamic="true">

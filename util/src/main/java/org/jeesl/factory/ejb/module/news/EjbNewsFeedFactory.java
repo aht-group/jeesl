@@ -1,5 +1,7 @@
 package org.jeesl.factory.ejb.module.news;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -27,7 +29,7 @@ public class EjbNewsFeedFactory<L extends JeeslLang, D extends JeeslDescription,
 		{
 			FEED ejb = cFeed.newInstance();
 			ejb.setRealm(realm);
-			ejb.setRref(rref.getId());
+			if(Objects.nonNull(rref)) { ejb.setRref(rref.getId());}
 			ejb.setVisible(true);
 		    return ejb;
 		}
