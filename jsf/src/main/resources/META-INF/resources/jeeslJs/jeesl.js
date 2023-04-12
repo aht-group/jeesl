@@ -4,7 +4,7 @@ function updateCellSelection(cell, rowCode, columnCode) {
 	//find cell ancestor with class 'jeesl-datatable' and remove class 'selected'
     tableId.find('.selected').removeClass('selected');
 
-	$(cell).addClass('selected');
+	$(cell).addClass('selected').parent().addClass('selected');
 
 	selectCell([
 		{ name: 'rowCode', value: rowCode },
@@ -34,7 +34,7 @@ var jeeslCellSelection = {
                 this.remove(cell, rowCode, columnCode);
                 return;
             }
-            $(cell).addClass('selected');
+            $(cell).addClass('selected').parent().addClass('selected');
             cellData = [{ name: 'rowCode', value: rowCode },
                         { name: 'columnCode', value: columnCode }];
             this.selectedCells.push(cellData);
@@ -49,7 +49,7 @@ var jeeslCellSelection = {
                    if (this.selectedCells[i][0].value == rowCode && this.selectedCells[i][1].value == columnCode)
                    {
                        this.selectedCells.splice(i, 1);
-                       $(cell).removeClass('selected');
+                       $(cell).removeClass('selected').parent().removeClass('selected');
                        selectMultiCell(this.toRowAndColumnCodes(this.selectedCells));
                        break;
                    }
