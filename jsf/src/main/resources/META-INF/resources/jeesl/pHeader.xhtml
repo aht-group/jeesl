@@ -11,7 +11,9 @@
 		<composite:attribute name="entity" required="false"/>
 		<composite:attribute name="code" required="false"/>
 		<composite:attribute name="link" required="false" default=""/>
+		<composite:attribute name="prefix" required="false"/>
 		<composite:attribute name="suffix" required="false"/>
+
 		
 		<composite:facet name="header" required="false"/>
 	</composite:interface>
@@ -23,6 +25,9 @@
 	 	<c:set var="titleText" value="#{not empty cc.attrs.title ? cc.attrs.title : not empty cc.attrs.entity ? not empty evaluatedEntityCodeValue ? evaluatedEntityCodeValue : defaultEntityCodeValue :'myTitle'}"/>
     	
     	<c:if test="#{empty cc.facets.header}">
+    		<c:if test="#{not empty cc.attrs.prefix}">
+        		<h:outputText value=" #{cc.attrs.prefix}"/>
+        	</c:if>
     		<c:if test="#{empty cc.attrs.link}">
         		<h:outputText value="#{titleText}"/>
         	</c:if>

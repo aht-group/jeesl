@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+	</composite:interface>
+	
+<composite:implementation>
+<jp:grid id="grid">
+	<j:row id="row1">
+		<j:slot id="sArtifacts" width="9">
+			<h:form id="fPorts">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="p" value="#{cc.attrs.ctrl.ports}"
+						selection="#{cc.attrs.ctrl.port}" selectionMode="single" rowKey="#{p.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoSsiPort" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addPort()}" update=":#{cc.id}:grid"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectPort()}" update=":#{cc.id}:sPort"/>  
+		            <p:column>
+						<h:outputText value="#{p.position}" />  
+		            </p:column>
+					<p:column>
+		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="host"/></f:facet>
+						<h:outputText value="#{p.host.name[localeCode].lang}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="port"/></f:facet>
+						<h:outputText value="#{p.port}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="destinationIp"/></f:facet>
+						<h:outputText value="#{p.destinationHost.ipAddr}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="destinationPort"/></f:facet>
+						<h:outputText value="#{p.destinationPort}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="destinationHost"/></f:facet>
+						<h:outputText value="#{p.destinationHost.name[localeCode].lang}" />  
+		            </p:column>
+					<p:column>
+		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="name"/></f:facet>
+						<h:outputText value="#{p.name[localeCode].lang}" />  
+		            </p:column>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sPort" width="3">
+			<h:form id="fArtifact" rendered="#{not empty cc.attrs.ctrl.port}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoSsiPort"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.savePort()}" update=":#{cc.id}:grid"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="IoSsiPort" code="host"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.port.host}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.hosts}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoSsiPort" code="port"/>
+						<p:inputText value="#{cc.attrs.ctrl.port.port}"/>
+						
+						<jtp:label entity="IoSsiPort" code="destinationHost"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.port.destinationHost}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.hosts}" var="h" itemLabel="#{h.name[localeCode].lang}" itemValue="#{h}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoSsiPort" code="destinationPort"/>
+						<p:inputText value="#{cc.attrs.ctrl.port.destinationPort}"/>
+						
+					</j:inputGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.ctrl.port}" withDescription="true"/>
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+</composite:implementation>
+</html>

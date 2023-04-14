@@ -11,9 +11,8 @@
 	
 	<c:set var="handler" value="#{handler}"/>
 
-	<h:panelGroup styleClass="jeesl-input-container">
-		<p:inputTextarea rendered="#{rendered}"
-						rows="#{rows}" styleClass="w100" value="#{value}" autoResize="true" autocomplete="off">
+	<h:panelGroup styleClass="jeesl-input-container" rendered="#{rendered}">
+		<p:inputTextarea rows="#{rows}" styleClass="w100" value="#{value}" autoResize="true" autocomplete="off">
 			<c:set var="id" value="#{id}" />
 		</p:inputTextarea>
 		

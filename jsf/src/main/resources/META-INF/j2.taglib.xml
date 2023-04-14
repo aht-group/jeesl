@@ -23,6 +23,12 @@
             <resource-id>ioMaven/module.xhtml</resource-id>
         </component>
 	</tag>
+	<tag>
+        <tag-name>gridIoSsiPort</tag-name>
+        <component>
+            <resource-id>ioSsi/port.xhtml</resource-id>
+        </component>
+	</tag>
 	
 	<tag>
         <tag-name>gridModuleNewsRegistry</tag-name>
