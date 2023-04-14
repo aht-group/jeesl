@@ -3174,9 +3174,16 @@ body, .ui-widget {
 			}
 		}
 		
-		.cell-select {
+		.jeesl-cell-select {
+			transition: border-color .2s linear;
+			
+			&.selected {
+				border-color: $dark-colour;
+			}
+			
 			label {
 				align-items: center;
+				cursor: pointer;
 				display: flex;
 				height: 100%;
 			}
@@ -3197,7 +3204,7 @@ body, .ui-widget {
 			}
 		}
 		
-		tr, .cell-select > label {
+		tr, .jeesl-cell-select > label {
 			transition: background .2s linear;
 		}
 		
@@ -3210,7 +3217,7 @@ body, .ui-widget {
 				width: 0;
 			}
 			
-			&.cell-select {
+			&.jeesl-cell-select {
 				padding: 0;
 				
 				label {
@@ -3227,13 +3234,13 @@ body, .ui-widget {
 			}
 		}
 		
-		tr.ui-state-hover, .cell-select > label:not(.selected):hover {
+		tr.ui-state-hover, .jeesl-cell-select > label:not(.selected):hover {
 			background: $light-grey;
 			box-shadow: none;
 			border-color: $soft-grey $light-grey;
 		}
 		
-		tr.ui-state-highlight, .cell-select > label.selected {
+		tr.ui-state-highlight, .jeesl-cell-select > label.selected {
 			background: $highlight-colour;
 			border-color: $dark-colour;
 			color: $white-100;

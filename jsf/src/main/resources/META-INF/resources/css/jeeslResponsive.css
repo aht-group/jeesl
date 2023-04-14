@@ -317,6 +317,7 @@ template {
   box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
   color: #333333;
   cursor: pointer;
+  font-weight: 700;
   line-height: normal;
   padding: 0 5px;
   text-align: center;
@@ -387,6 +388,7 @@ template {
   box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
   color: #333333;
   cursor: pointer;
+  font-weight: 700;
   line-height: normal;
   padding: 0 5px;
   text-align: center;
@@ -466,6 +468,7 @@ template {
   box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
   color: #333333;
   cursor: pointer;
+  font-weight: 700;
   line-height: normal;
   padding: 0 5px;
   text-align: center;
@@ -644,6 +647,7 @@ template {
     box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
     color: #333333;
     cursor: pointer;
+    font-weight: 700;
     line-height: normal;
     padding: 0 5px;
     text-align: center;
@@ -880,6 +884,7 @@ template {
     box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
     color: #333333;
     cursor: pointer;
+    font-weight: 700;
     line-height: normal;
     padding: 0 5px;
     text-align: center;
@@ -1465,6 +1470,7 @@ template {
     box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
     color: #333333;
     cursor: pointer;
+    font-weight: 700;
     line-height: normal;
     padding: 0 5px;
     text-align: center;
@@ -1576,6 +1582,7 @@ template {
     box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
     color: #333333;
     cursor: pointer;
+    font-weight: 700;
     line-height: normal;
     padding: 0 5px;
     text-align: center;
@@ -1739,6 +1746,7 @@ template {
     box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
     color: #333333;
     cursor: pointer;
+    font-weight: 700;
     line-height: normal;
     padding: 0 5px;
     text-align: center;
@@ -1891,6 +1899,7 @@ template {
   box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
   color: #333333;
   cursor: pointer;
+  font-weight: 700;
   line-height: normal;
   padding: 0 5px;
   text-align: center;
@@ -2169,6 +2178,7 @@ template {
       box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
       color: #333333;
       cursor: pointer;
+      font-weight: 700;
       line-height: normal;
       padding: 0 5px;
       text-align: center;
@@ -4807,6 +4817,7 @@ body, .ui-widget {
                     box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
                     color: #333333;
                     cursor: pointer;
+                    font-weight: 700;
                     line-height: normal;
                     padding: 0 5px;
                     text-align: center;
@@ -5076,6 +5087,7 @@ body, .ui-widget {
     box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
     color: #333333;
     cursor: pointer;
+    font-weight: 700;
     line-height: normal;
     padding: 0 5px;
     text-align: center;
@@ -5327,10 +5339,15 @@ body, .ui-widget {
           .jeesl-datatable table thead th .ui-inputfield {
             min-width: 42px;
             width: 100% !important; } }
-    .jeesl-datatable table .cell-select label {
-      align-items: center;
-      display: flex;
-      height: 100%; }
+    .jeesl-datatable table .jeesl-cell-select {
+      transition: border-color .2s linear; }
+      .jeesl-datatable table .jeesl-cell-select.selected {
+        border-color: #00663a; }
+      .jeesl-datatable table .jeesl-cell-select label {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        height: 100%; }
   .jeesl-datatable tbody, .jeesl-datatable .ui-datatable-data {
     background: #ededed;
     border: none; }
@@ -5340,7 +5357,7 @@ body, .ui-widget {
       border-color: #c4c4c4 #dedede; }
       .jeesl-datatable tbody tr:nth-child(2n), .jeesl-datatable .ui-datatable-data tr:nth-child(2n) {
         background: rgba(255, 255, 255, 0.5); }
-    .jeesl-datatable tbody tr, .jeesl-datatable tbody .cell-select > label, .jeesl-datatable .ui-datatable-data tr, .jeesl-datatable .ui-datatable-data .cell-select > label {
+    .jeesl-datatable tbody tr, .jeesl-datatable tbody .jeesl-cell-select > label, .jeesl-datatable .ui-datatable-data tr, .jeesl-datatable .ui-datatable-data .jeesl-cell-select > label {
       transition: background .2s linear; }
     .jeesl-datatable tbody td, .jeesl-datatable .ui-datatable-data td {
       border-color: inherit;
@@ -5348,20 +5365,20 @@ body, .ui-widget {
       padding: 5px 10px; }
       .jeesl-datatable tbody td.jeesl-column-min-width, .jeesl-datatable .ui-datatable-data td.jeesl-column-min-width {
         width: 0; }
-      .jeesl-datatable tbody td.cell-select, .jeesl-datatable .ui-datatable-data td.cell-select {
+      .jeesl-datatable tbody td.jeesl-cell-select, .jeesl-datatable .ui-datatable-data td.jeesl-cell-select {
         padding: 0; }
-        .jeesl-datatable tbody td.cell-select label, .jeesl-datatable .ui-datatable-data td.cell-select label {
+        .jeesl-datatable tbody td.jeesl-cell-select label, .jeesl-datatable .ui-datatable-data td.jeesl-cell-select label {
           padding: 5px 10px; }
       .jeesl-datatable tbody td .jeesl-icon, .jeesl-datatable .ui-datatable-data td .jeesl-icon {
         height: 12px; }
         @media (max-width: 768px) {
           .jeesl-datatable tbody td .jeesl-icon, .jeesl-datatable .ui-datatable-data td .jeesl-icon {
             height: 32px; } }
-    .jeesl-datatable tbody tr.ui-state-hover, .jeesl-datatable tbody .cell-select > label:not(.selected):hover, .jeesl-datatable .ui-datatable-data tr.ui-state-hover, .jeesl-datatable .ui-datatable-data .cell-select > label:not(.selected):hover {
+    .jeesl-datatable tbody tr.ui-state-hover, .jeesl-datatable tbody .jeesl-cell-select > label:not(.selected):hover, .jeesl-datatable .ui-datatable-data tr.ui-state-hover, .jeesl-datatable .ui-datatable-data .jeesl-cell-select > label:not(.selected):hover {
       background: #dedede;
       box-shadow: none;
       border-color: #c4c4c4 #dedede; }
-    .jeesl-datatable tbody tr.ui-state-highlight, .jeesl-datatable tbody .cell-select > label.selected, .jeesl-datatable .ui-datatable-data tr.ui-state-highlight, .jeesl-datatable .ui-datatable-data .cell-select > label.selected {
+    .jeesl-datatable tbody tr.ui-state-highlight, .jeesl-datatable tbody .jeesl-cell-select > label.selected, .jeesl-datatable .ui-datatable-data tr.ui-state-highlight, .jeesl-datatable .ui-datatable-data .jeesl-cell-select > label.selected {
       background: #008a4e;
       border-color: #00663a;
       color: white;
@@ -6239,6 +6256,7 @@ body, .ui-widget {
                         box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
                         color: #333333;
                         cursor: pointer;
+                        font-weight: 700;
                         line-height: normal;
                         padding: 0 5px;
                         text-align: center;
@@ -6827,6 +6845,7 @@ body, .ui-widget {
         box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
         color: #333333;
         cursor: pointer;
+        font-weight: 700;
         line-height: normal;
         padding: 0 5px;
         text-align: center;
