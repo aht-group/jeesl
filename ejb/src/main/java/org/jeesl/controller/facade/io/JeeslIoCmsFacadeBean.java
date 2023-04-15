@@ -3,12 +3,19 @@ package org.jeesl.controller.facade.io;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsCategory;
@@ -19,6 +26,7 @@ import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsVisiblity;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.w.JeeslWithMarkupSingle;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -48,10 +56,10 @@ public class JeeslIoCmsFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoCmsFacadeBean.class);
 	
-	private final IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fbCms;
+	private final IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,M,MT,FC,FM> fbCms;
 	
 	public JeeslIoCmsFacadeBean(EntityManager em,
-			IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fbCms)
+			IoCmsFactoryBuilder<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,M,MT,FC,FM> fbCms)
 	{
 		super(em);
 		this.fbCms=fbCms;
@@ -100,5 +108,22 @@ public class JeeslIoCmsFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		element = this.save(element);
 		
 		this.rmProtected(element);
+	}
+
+	@Override public <W extends JeeslWithMarkupSingle<M>> M fIoMarkup(Class<W> c, W with) throws JeeslNotFoundException
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<M> cQ = cB.createQuery(fbCms.getClassMarkup());
+		Root<W> root = cQ.from(c);
+		
+		Path<M> pGraphic = root.get(JeeslWithMarkupSingle.Attributes.markup.toString());
+		Path<Long> pId = root.get(JeeslWithMarkupSingle.Attributes.id.toString());
+		
+		cQ.select(pGraphic);
+		cQ.where(cB.equal(pId,with.getId()));
+		
+		try	{return em.createQuery(cQ).getSingleResult();}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbCms.getClassMarkup().getSimpleName()+" found for "+c.getSimpleName()+"."+with.getId()+" ("+JeeslIoCmsFacadeBean.class.getSimpleName()+".fIoMarkup)");}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Multiple "+fbCms.getClassMarkup().getSimpleName()+" found for "+c.getSimpleName()+"."+with.getId()+" ("+JeeslIoCmsFacadeBean.class.getSimpleName()+".fIoMarkup)");}
 	}
 }

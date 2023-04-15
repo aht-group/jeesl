@@ -75,7 +75,7 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractHdFgaBean.class);
 	
-	private final IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?> fbCms;
+	private final IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fbCms;
 	
 	private JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fCms;
 	
@@ -89,7 +89,7 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 	private FGA fga; public FGA getFga() {return fga;} public void setFga(FGA fga) {this.fga = fga;}
 	
 	public AbstractHdFgaBean(HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd,
-								IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?> fbCms)
+								IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fbCms)
 	{
 		super(fbHd);
 		this.fbCms=fbCms;

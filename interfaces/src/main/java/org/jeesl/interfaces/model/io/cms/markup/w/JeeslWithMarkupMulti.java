@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.with.system.io.cms;
+package org.jeesl.interfaces.model.io.cms.markup.w;
 
 import java.util.Map;
 

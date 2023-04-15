@@ -12,6 +12,7 @@ import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElementType;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsVisiblity;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
@@ -31,6 +32,7 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 								EC extends JeeslStatus<L,D,EC>,
 								ET extends JeeslIoCmsElementType<L,D,ET,?>,
 								C extends JeeslIoCmsContent<V,E,MT>,
+								M extends JeeslIoMarkup<MT>,
 								MT extends JeeslIoMarkupType<L,D,MT,?>,
 								FC extends JeeslFileContainer<?,FM>,
 								FM extends JeeslFileMeta<D,FC,?,?>
@@ -47,6 +49,7 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 	private final Class<EC> cElementCategory; public Class<EC> getClassElementCategory() {return cElementCategory;}
 	private final Class<ET> cElementType; public Class<ET> getClassElementType() {return cElementType;}
 	private final Class<C> cContent; public Class<C> getClassContent() {return cContent;}
+	private final Class<M> cMarkup; public Class<M> getClassMarkup() {return cMarkup;}
 	private final Class<MT> cMarkupType; public Class<MT> getClassMarkupType() {return cMarkupType;}
 	private final Class<FM> cFileMeta; public Class<FM> getClassFileMeta() {return cFileMeta;}
     
@@ -55,6 +58,7 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 				final Class<S> cSection,
 				final Class<E> cElement,final Class<EC> cElementCategory,final Class<ET> cElementType,
 				final Class<C> cContent,
+				final Class<M> cMarkup,
 				final Class<MT> cMarkupType,
 				final Class<FM> cFileMeta)
 	{
@@ -68,6 +72,7 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 		this.cElementType=cElementType;
 		this.cContent=cContent;
 		
+		this.cMarkup=cMarkup;
 		this.cMarkupType=cMarkupType;
 		this.cFileMeta=cFileMeta;
 	}

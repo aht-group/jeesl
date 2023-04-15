@@ -72,7 +72,7 @@ public abstract class AbstractHdTicketBean <L extends JeeslLang, D extends Jeesl
 	final static Logger logger = LoggerFactory.getLogger(AbstractHdTicketBean.class);
 
 	private JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fCms;
-	private final IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?> fbCms;
+	private final IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fbCms;
 	
 	private final UiEditSavedHandler<TICKET> editHandler; public UiEditSavedHandler<TICKET> getEditHandler() {return editHandler;}
 
@@ -87,7 +87,7 @@ public abstract class AbstractHdTicketBean <L extends JeeslLang, D extends Jeesl
 	private CAT category; public CAT getCategory() {return category;} public void setCategory(CAT category) {this.category = category;}
 
 	public AbstractHdTicketBean(HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd,
-			IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?> fbCms)
+			IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fbCms)
 	{
 		super(fbHd);
 		this.fbCms=fbCms;
