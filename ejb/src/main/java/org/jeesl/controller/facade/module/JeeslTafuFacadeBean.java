@@ -15,7 +15,8 @@ import javax.persistence.criteria.Root;
 import org.jeesl.api.facade.module.JeeslTafuFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.factory.builder.module.TafuFactoryBuilder;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarDayOfWeek;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuScope;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuStatus;
@@ -23,7 +24,6 @@ import org.jeesl.interfaces.model.module.tafu.JeeslTafuTask;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuViewport;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -37,8 +37,8 @@ public class JeeslTafuFacadeBean<L extends JeeslLang, D extends JeeslDescription
 								SC extends JeeslTafuScope<L,D,R,SC,?>,
 								VP extends JeeslTafuViewport<L,D,VP,?>,
 								DOW extends JeeslCalendarDayOfWeek<L,D,DOW,?>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>>
 					extends JeeslFacadeBean
 					implements JeeslTafuFacade<L,D,R,T,TS,SC,VP,DOW,M>
 {	

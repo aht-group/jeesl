@@ -8,7 +8,8 @@ import org.jeesl.factory.ejb.module.asset.EjbAssetEventFactory;
 import org.jeesl.factory.ejb.module.asset.EjbAssetFactory;
 import org.jeesl.factory.ejb.module.asset.EjbAssetLevelFactory;
 import org.jeesl.factory.ejb.module.asset.EjbAssetTypeFactory;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
@@ -22,7 +23,6 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.util.comparator.ejb.module.aom.EjbAssetComparator;
@@ -41,8 +41,8 @@ public class AomFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
 								ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
 								ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>,
 								USER extends JeeslSimpleUser,
 								FRC extends JeeslFileContainer<?,?>,
 								UP extends JeeslAomEventUpload<L,D,UP,?>>

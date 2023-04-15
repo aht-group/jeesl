@@ -1,11 +1,11 @@
 package org.jeesl.doc.ofx.cms.generic;
 
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.openfuxml.content.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslMarkupSectionFactory<M extends JeeslMarkup<?>>
+public class JeeslMarkupSectionFactory<M extends JeeslIoMarkup<?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslMarkupSectionFactory.class);
 	

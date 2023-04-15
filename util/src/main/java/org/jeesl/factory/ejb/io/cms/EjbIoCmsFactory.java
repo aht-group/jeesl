@@ -7,10 +7,10 @@ import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsContent;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElementType;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsVisiblity;
 import org.jeesl.interfaces.model.io.cms.JeeslWithCms;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -24,7 +24,7 @@ public class EjbIoCmsFactory <L extends JeeslLang,D extends JeeslDescription,
 								V extends JeeslIoCmsVisiblity,
 								S extends JeeslIoCmsSection<L,S>,
 								C extends JeeslIoCmsContent<V,?,MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>,
 								LOC extends JeeslLocale<L,D,LOC,?>>
 {
 	//TODO @tk reduce

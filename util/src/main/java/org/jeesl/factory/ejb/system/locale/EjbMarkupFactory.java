@@ -5,23 +5,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbMarkupFactory<LOC extends JeeslLocale<?,?,LOC,?>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<?,?,MT,?>>
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<?,?,MT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbMarkupFactory.class);
 
     final Class<M> cM;
 
     public static <LOC extends JeeslLocale<?,?,LOC,?>,
-					M extends JeeslMarkup<MT>,
-					MT extends JeeslIoCmsMarkupType<?,?,MT,?>>
+					M extends JeeslIoMarkup<MT>,
+					MT extends JeeslIoMarkupType<?,?,MT,?>>
     		EjbMarkupFactory<LOC,M,MT> instance(final Class<M> cM)
     {
         return new EjbMarkupFactory<>(cM);

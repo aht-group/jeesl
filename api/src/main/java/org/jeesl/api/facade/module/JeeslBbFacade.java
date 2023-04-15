@@ -3,11 +3,11 @@ package org.jeesl.api.facade.module;
 import java.util.List;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.bb.JeeslBbBoard;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbPost;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbThread;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -19,8 +19,8 @@ public interface JeeslBbFacade <L extends JeeslLang,D extends JeeslDescription,
 								PUB extends JeeslStatus<L,D,PUB>,
 								THREAD extends JeeslBbThread<BB>,
 								POST extends JeeslBbPost<THREAD,M,USER>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>,
 								USER extends EjbWithEmail>
 			extends JeeslFacade
 {	

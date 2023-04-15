@@ -2,6 +2,7 @@ package org.jeesl.interfaces.model.io.cms;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -10,7 +11,7 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslIoCmsContent<V extends JeeslIoCmsVisiblity,
 								E extends JeeslIoCmsElement<V,?,?,?,?,?>,
-								MT extends JeeslIoCmsMarkupType<?,?,MT,?>>
+								MT extends JeeslIoMarkupType<?,?,MT,?>>
 		extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 					EjbWithId,EjbWithParentAttributeResolver
 {	

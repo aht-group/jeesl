@@ -1,7 +1,7 @@
 package org.jeesl.doc.ofx.cms.generic;
 
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jsoup.Jsoup;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class JeeslMarkupFactory <M extends JeeslMarkup<T>,
-								T extends JeeslIoCmsMarkupType<?,?,T,?>>
+public class JeeslMarkupFactory <M extends JeeslIoMarkup<T>,
+								T extends JeeslIoMarkupType<?,?,T,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslMarkupFactory.class);
 	
@@ -42,14 +42,14 @@ public class JeeslMarkupFactory <M extends JeeslMarkup<T>,
 		
 		Section section = XmlSectionFactory.build();
 
-		if(type.equals(JeeslIoCmsMarkupType.Code.text.toString()))
+		if(type.equals(JeeslIoMarkupType.Code.text.toString()))
 		{
 			Paragraph p = XmlParagraphFactory.build();
 			content = Jsoup.parse(content).text();
 			p.getContent().add(content);
 			section.getContent().add(p);
 		}
-		else if(type.equals(JeeslIoCmsMarkupType.Code.xhtml.toString()))
+		else if(type.equals(JeeslIoMarkupType.Code.xhtml.toString()))
 		{
 			Section xml = xhtmlTransformer.process(content);
 			if(debug)

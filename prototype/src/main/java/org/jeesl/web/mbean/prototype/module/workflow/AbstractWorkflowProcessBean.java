@@ -10,9 +10,9 @@ import java.util.Map;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.handler.module.workflow.WorkflowProcesslResetHandler;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -112,7 +112,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractWorkflowProcessBean.class);
 
-	private JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
+	private JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
 	private JeeslWorkflowFacade<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fWorkflow;
 	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision;
 
@@ -226,14 +226,14 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	}
 
 	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-											JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+											JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 											JeeslWorkflowFacade<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fApproval,
 											JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision)
 	{
 		postConstructProcess(bTranslation,bMessage,fGraphic,fApproval,fRevision,null);
 	}
 	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-										JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+										JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 										JeeslWorkflowFacade<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fApproval,
 										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision,
 										WP preSelection)

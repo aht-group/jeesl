@@ -7,7 +7,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
@@ -44,7 +44,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableBean.class);
 	private static final long serialVersionUID = 1L;
 	
-	protected JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic;
+	protected JeeslIoGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic;
 	
 	protected final LocaleFactoryBuilder<L,D,LOC> fbStatus;
 	protected final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;

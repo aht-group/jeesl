@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
@@ -16,7 +16,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 public interface JeeslTafuTask <R extends JeeslTenantRealm<?,?,R,?>,
 								TS extends JeeslTafuStatus<?,?,TS,?>,
 								SC extends JeeslTafuScope<?,?,R,SC,?>,
-								M extends JeeslMarkup<?>>
+								M extends JeeslIoMarkup<?>>
 			extends Serializable,EjbSaveable,EjbRemoveable,
 					JeeslWithTenantSupport<R>, JeeslWithStatus<TS>, JeeslWithScope<SC>, 
 					EjbWithName

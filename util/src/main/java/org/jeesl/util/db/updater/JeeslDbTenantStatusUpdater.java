@@ -3,7 +3,7 @@ package org.jeesl.util.db.updater;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
@@ -31,7 +31,7 @@ public class JeeslDbTenantStatusUpdater <L extends JeeslLang, D extends JeeslDes
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbTenantStatusUpdater.class);
 	
-	private final JeeslGraphicFacade<?,?,?,G,GT,?,?> fGraphic;
+	private final JeeslIoGraphicFacade<?,?,?,G,GT,?,?> fGraphic;
 	private final LocaleFactoryBuilder<L,D,?> fbLocale;
 	private final JeeslLocaleManager<LOC> lp;
 	private JeeslDbGraphicUpdater<G,GT> uGraphic;
@@ -40,7 +40,7 @@ public class JeeslDbTenantStatusUpdater <L extends JeeslLang, D extends JeeslDes
 	private RREF rref;
 	
 	public JeeslDbTenantStatusUpdater(LocaleFactoryBuilder<L,D,LOC> fbLocale, SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg,
-										JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic, JeeslLocaleManager<LOC> lp)
+										JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic, JeeslLocaleManager<LOC> lp)
 	{
 		this.fbLocale=fbLocale;
 		this.fGraphic=fGraphic;

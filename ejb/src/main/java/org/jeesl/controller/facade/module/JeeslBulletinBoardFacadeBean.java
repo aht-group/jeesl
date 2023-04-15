@@ -15,11 +15,11 @@ import javax.persistence.criteria.Root;
 import org.jeesl.api.facade.module.JeeslBbFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.factory.builder.module.BbFactoryBuilder;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.bb.JeeslBbBoard;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbPost;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbThread;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -33,8 +33,8 @@ public class JeeslBulletinBoardFacadeBean<L extends JeeslLang,D extends JeeslDes
 										PUB extends JeeslStatus<L,D,PUB>,
 										THREAD extends JeeslBbThread<BB>,
 										POST extends JeeslBbPost<THREAD,M,USER>,
-										M extends JeeslMarkup<MT>,
-										MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+										M extends JeeslIoMarkup<MT>,
+										MT extends JeeslIoMarkupType<L,D,MT,?>,
 										USER extends EjbWithEmail>
 					extends JeeslFacadeBean
 					implements JeeslBbFacade<L,D,SCOPE,BB,PUB,THREAD,POST,M,MT,USER>

@@ -3,14 +3,14 @@ package org.jeesl.factory.builder.module;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.news.EjbNewsFeedFactory;
 import org.jeesl.factory.ejb.module.news.EjbNewsItemFactory;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.news.JeeslNewsCategory;
 import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
 import org.jeesl.interfaces.model.module.news.JeeslNewsItem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.slf4j.Logger;
@@ -22,8 +22,8 @@ public class NewsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 								CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
 								ITEM extends JeeslNewsItem<L,FEED,CATEGORY,USER,M,?>,
 								USER extends JeeslSimpleUser,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(NewsFactoryBuilder.class);

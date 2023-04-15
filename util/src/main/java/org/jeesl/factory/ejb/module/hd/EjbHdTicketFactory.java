@@ -3,9 +3,9 @@ package org.jeesl.factory.ejb.module.hd;
 import java.util.UUID;
 
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsMarkupFactory;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicket;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 
 public class EjbHdTicketFactory<R extends JeeslTenantRealm<?,?,R,?>,
 								TICKET extends JeeslHdTicket<R,?,M,?>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<?,?,MT,?>>
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<?,?,MT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbHdTicketFactory.class);
 	

@@ -1,19 +1,19 @@
 package org.jeesl.factory.ejb.io.cms;
 
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbIoCmsMarkupFactory<M extends JeeslMarkup<MT>,
-									MT extends JeeslIoCmsMarkupType<?,?,MT,?>>
+public class EjbIoCmsMarkupFactory<M extends JeeslIoMarkup<MT>,
+									MT extends JeeslIoMarkupType<?,?,MT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoCmsMarkupFactory.class);
 	
 	private final Class<M> cMarkup;
 	
-	public static <M extends JeeslMarkup<MT>, MT extends JeeslIoCmsMarkupType<?,?,MT,?>>
+	public static <M extends JeeslIoMarkup<MT>, MT extends JeeslIoMarkupType<?,?,MT,?>>
 			 EjbIoCmsMarkupFactory<M,MT> instance(final Class<M> cMarkup)
 	 {
 		return new EjbIoCmsMarkupFactory<>(cMarkup);

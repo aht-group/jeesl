@@ -19,7 +19,8 @@ import org.jeesl.factory.builder.module.TafuFactoryBuilder;
 import org.jeesl.factory.ejb.module.tafu.EjbTaskFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarDayOfWeek;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuScope;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuStatus;
@@ -28,7 +29,6 @@ import org.jeesl.interfaces.model.module.tafu.JeeslTafuViewport;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
@@ -48,8 +48,8 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
     										SC extends JeeslTafuScope<L,D,R,SC,?>,
     										VP extends JeeslTafuViewport<L,D,VP,?>,
     										DOW extends JeeslCalendarDayOfWeek<L,D,DOW,?>,
-    										M extends JeeslMarkup<MT>,
-    										MT extends JeeslIoCmsMarkupType<L,D,MT,?>
+    										M extends JeeslIoMarkup<MT>,
+    										MT extends JeeslIoMarkupType<L,D,MT,?>
     										>
 					extends AbstractAdminBean<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
@@ -230,17 +230,17 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 		
 		if(task.getMarkup()==null)
 		{
-			MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+			MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
 			task.setMarkup(fbTafu.ejbMarkup().build(type));
 			try {task = fTafu.save(task);}
 			catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 		}
 		
-		if(task.getMarkup().getType().getCode().equals(JeeslIoCmsMarkupType.Code.text.toString()))
+		if(task.getMarkup().getType().getCode().equals(JeeslIoMarkupType.Code.text.toString()))
 		{
 			try
 			{
-				MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+				MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
 				task.getMarkup().setType(type);
 				task = fTafu.save(task);
 			}
@@ -252,7 +252,7 @@ public abstract class AbstractTafuDashboardBean <L extends JeeslLang, D extends 
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbTafu.getClassTask()));}
 		
-		MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+		MT type = fTafu.fByEnum(fbTafu.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
 		task = efTask.build(realm,rref,type);
 		task.setStatus(fTafu.fByEnum(fbTafu.getClassStatus(),JeeslTafuStatus.Code.open));
 	}

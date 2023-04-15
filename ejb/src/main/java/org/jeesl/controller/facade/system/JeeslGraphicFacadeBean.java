@@ -10,7 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
@@ -27,7 +27,7 @@ public class JeeslGraphicFacadeBean<L extends JeeslLang, D extends JeeslDescript
 									G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
 									GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 					extends JeeslFacadeBean
-					implements JeeslGraphicFacade<L,D,S,G,GT,GC,GS>
+					implements JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS>
 {	
 	private static final long serialVersionUID = 1L;
 	

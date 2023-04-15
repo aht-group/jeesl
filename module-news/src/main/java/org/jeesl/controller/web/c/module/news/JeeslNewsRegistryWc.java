@@ -2,9 +2,9 @@ package org.jeesl.controller.web.c.module.news;
 
 import org.jeesl.controller.web.g.module.news.JeeslNewsRegistryGwc;
 import org.jeesl.factory.builder.module.NewsFactoryBuilder;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.news.JeeslNewsItem;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.fr.IoFileContainer;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -17,8 +17,8 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 
 public class JeeslNewsRegistryWc <RREF extends EjbWithId,
 									ITEM extends JeeslNewsItem<IoLang,NewsFeed,NewsCategory,SecurityUser,M,IoFileContainer>,
-									M extends JeeslMarkup<MT>,
-									MT extends JeeslIoCmsMarkupType<IoLang,IoDescription,MT,?>
+									M extends JeeslIoMarkup<MT>,
+									MT extends JeeslIoMarkupType<IoLang,IoDescription,MT,?>
 >
 					extends JeeslNewsRegistryGwc<IoLang,IoDescription,IoLocale,TenantRealm,RREF,NewsFeed,NewsCategory,ITEM,SecurityUser,M,MT,IoFileContainer>
 {

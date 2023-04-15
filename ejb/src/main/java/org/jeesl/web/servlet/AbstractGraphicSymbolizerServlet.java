@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.transcoder.TranscoderException;
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
@@ -61,7 +61,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void symbolizer(JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic, HttpServletRequest request, HttpServletResponse response) throws IOException
+	protected void symbolizer(JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic, HttpServletRequest request, HttpServletResponse response) throws IOException
     {
 		Image m = super.getGraphicInfo(request,response);
 		
@@ -132,7 +132,7 @@ public class AbstractGraphicSymbolizerServlet<L extends JeeslLang, D extends Jee
 	    }
 	}
 	
-	protected void process(HttpServletRequest request, HttpServletResponse response, JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic, G graphic, Image image) throws IOException, TranscoderException, UtilsProcessingException
+	protected void process(HttpServletRequest request, HttpServletResponse response, JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic, G graphic, Image image) throws IOException, TranscoderException, UtilsProcessingException
     {
 		byte[] bytes = null;
     	

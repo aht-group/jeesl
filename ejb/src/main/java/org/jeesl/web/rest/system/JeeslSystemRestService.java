@@ -3,8 +3,8 @@ package org.jeesl.web.rest.system;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
@@ -61,14 +61,14 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 
 	protected final IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision;
 
-	private final JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic;
+	private final JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic;
 	private final JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision;
 
 	private final XmlGraphicFactory<L,D,G,GT,GC,GS> xfGraphic;
 	private final XmlEntityFactory<L,D,RC,REM,RE,RA,RER,RAT,ERD> xfEntity;
 
 	private JeeslSystemRestService(IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision,
-							JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
+							JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
 							JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision)
 	{
 		super(fGraphic,fbRevision.getClassL(),fbRevision.getClassD());
@@ -93,7 +93,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 						ERD extends JeeslRevisionDiagram<L,D,RC>>
 	JeeslSystemRestService<L,D,R,S,G,GT,GC,GS,RC,REM,RE,RA,RER,RAT,ERD>
 		factory(IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision,
-				JeeslGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
+				JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
 				JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision)
 	{
 		return new JeeslSystemRestService<L,D,R,S,G,GT,GC,GS,RC,REM,RE,RA,RER,RAT,ERD>(fbRevision,fGraphic,fRevision);

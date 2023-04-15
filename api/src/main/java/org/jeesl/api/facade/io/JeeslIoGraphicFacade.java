@@ -1,4 +1,4 @@
-package org.jeesl.api.facade.system.graphic;
+package org.jeesl.api.facade.io;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 
-public interface JeeslGraphicFacade <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslIoGraphicFacade <L extends JeeslLang, D extends JeeslDescription,
 									S extends EjbWithId,
 									G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
 									GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>

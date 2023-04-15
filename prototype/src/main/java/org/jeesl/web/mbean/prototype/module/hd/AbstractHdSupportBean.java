@@ -14,8 +14,9 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.HdFactoryBuilder;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEvent;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEventType;
@@ -31,7 +32,6 @@ import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicketStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -55,8 +55,8 @@ public abstract class AbstractHdSupportBean <L extends JeeslLang, D extends Jees
 								LEVEL extends JeeslHdLevel<L,D,R,LEVEL,?>,
 								PRIORITY extends JeeslHdPriority<L,D,R,PRIORITY,?>,
 								MSG extends JeeslHdMessage<TICKET,M,SCOPE,USER>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>,
 								FAQ extends JeeslHdFaq<L,D,R,CAT,SCOPE>,
 								SCOPE extends JeeslHdScope<L,D,SCOPE,?>,
 								FGA extends JeeslHdFga<FAQ,DOC,SEC>,
@@ -196,7 +196,7 @@ public abstract class AbstractHdSupportBean <L extends JeeslLang, D extends Jees
 	public void addMessage()
 	{
 		logger.info(AbstractLogMessage.createEntity(fbHd.getClassMessage()));
-		MT type = fHd.fByEnum(fbHd.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+		MT type = fHd.fByEnum(fbHd.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
 		SCOPE scope = fHd.fByEnum(fbHd.getClassScope(),JeeslHdScope.Code.suppport);
 		message = fbHd.ejbMessage().build(ticket,type,scope,supporter);
 		editHandler.update(message);

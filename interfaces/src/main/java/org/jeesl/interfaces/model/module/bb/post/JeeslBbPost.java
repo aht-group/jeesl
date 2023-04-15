@@ -2,14 +2,14 @@ package org.jeesl.interfaces.model.module.bb.post;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 
 public interface JeeslBbPost<THREAD extends JeeslBbThread<?>,
-								M extends JeeslMarkup<?>,
+								M extends JeeslIoMarkup<?>,
 //								MT extends JeeslIoCmsMarkupType<?,?,MT,?>,
 								USER extends EjbWithEmail>
 						extends Serializable,

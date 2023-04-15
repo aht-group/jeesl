@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -45,7 +45,7 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 	final static Logger logger = LoggerFactory.getLogger(AbstractTreeClassificationController.class);
 	
 	private JeeslFacade facade;
-	private JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
+	private JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
 	
 	protected final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg;
 	protected final Class<C> cClassification;
@@ -76,7 +76,7 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 	}
 	
 	public void postConstructTreeClassification(JeeslFacade facade,
-									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+									JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{

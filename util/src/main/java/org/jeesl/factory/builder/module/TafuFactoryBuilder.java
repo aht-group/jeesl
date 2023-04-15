@@ -3,7 +3,8 @@ package org.jeesl.factory.builder.module;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsMarkupFactory;
 import org.jeesl.factory.ejb.module.tafu.EjbTaskFactory;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarDayOfWeek;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuScope;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuStatus;
@@ -11,7 +12,6 @@ import org.jeesl.interfaces.model.module.tafu.JeeslTafuTask;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuViewport;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +23,8 @@ public class TafuFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								SC extends JeeslTafuScope<?,?,R,SC,?>,
 								VP extends JeeslTafuViewport<L,D,VP,?>,
 								DOW extends JeeslCalendarDayOfWeek<L,D,DOW,?>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>>
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
 	final static Logger logger = LoggerFactory.getLogger(TafuFactoryBuilder.class);

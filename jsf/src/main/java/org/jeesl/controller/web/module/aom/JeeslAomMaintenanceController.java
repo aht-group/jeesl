@@ -18,9 +18,9 @@ import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
-import org.jeesl.interfaces.cache.module.aom.JeeslAssetCacheBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
@@ -35,7 +35,6 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -62,8 +61,8 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 										EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
 										ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
 										ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
-										M extends JeeslMarkup<MT>,
-										MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+										M extends JeeslIoMarkup<MT>,
+										MT extends JeeslIoMarkupType<L,D,MT,?>,
 										USER extends JeeslSimpleUser,
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
@@ -131,7 +130,7 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 		
 		uiHelper.setCacheBean(cache);
 		
-		markupType = fAsset.fByEnum(fbAsset.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+		markupType = fAsset.fByEnum(fbAsset.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
 		realm = fAsset.fByEnum(fbAsset.getClassRealm(),eRealm);
 		
 		identifier = TenantIdentifier.instance(realm);

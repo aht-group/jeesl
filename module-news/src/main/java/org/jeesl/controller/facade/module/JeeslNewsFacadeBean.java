@@ -18,7 +18,8 @@ import org.jeesl.api.facade.module.JeeslNewsFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.NewsFactoryBuilder;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.news.JeeslNewsCategory;
 import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
@@ -27,7 +28,6 @@ import org.jeesl.interfaces.model.module.news.JeeslWithNewsFeed;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -40,8 +40,8 @@ public class JeeslNewsFacadeBean<L extends JeeslLang, D extends JeeslDescription
 								CAT extends JeeslNewsCategory<L,D,R,CAT,?>,
 								ITEM extends JeeslNewsItem<L,FEED,CAT,USER,M,FRC>,
 								USER extends JeeslSimpleUser,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>,
 								FRC extends JeeslFileContainer<?,?>>
 					extends JeeslFacadeBean
 					implements JeeslNewsFacade<L,D,R,FEED,CAT,ITEM,USER,M,MT,FRC>

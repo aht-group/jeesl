@@ -8,9 +8,9 @@ import org.jeesl.interfaces.model.io.cms.JeeslIoCmsCategory;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsContent;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElementType;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsVisiblity;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -34,7 +34,7 @@ public abstract class AbstractOfxCmsFactory <L extends JeeslLang, D extends Jees
 								EC extends JeeslStatus<L,D,EC>,
 								ET extends JeeslIoCmsElementType<L,D,ET,?>,
 								C extends JeeslIoCmsContent<V,E,MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>,
 								FC extends JeeslFileContainer<?,?>,
 								FM extends JeeslFileMeta<D,FC,?,?>,
 								LOC extends JeeslLocale<L,D,LOC,?>>
@@ -42,9 +42,9 @@ public abstract class AbstractOfxCmsFactory <L extends JeeslLang, D extends Jees
 	final static Logger logger = LoggerFactory.getLogger(AbstractOfxCmsFactory.class);
 	
 	protected final String localeCode;
-	protected final JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fCms;
+	protected final JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,?,MT,FC,FM> fCms;
 	
-	public AbstractOfxCmsFactory(String localeCode, JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,MT,FC,FM> fCms)
+	public AbstractOfxCmsFactory(String localeCode, JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,?,MT,FC,FM> fCms)
 	{
 		this.localeCode=localeCode;
 		this.fCms = fCms;

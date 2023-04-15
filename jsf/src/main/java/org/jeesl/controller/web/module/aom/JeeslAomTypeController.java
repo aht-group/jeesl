@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.module.JeeslAomFacade;
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -53,7 +53,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomTypeController.class);
 
 	private JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset;
-	private JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
+	private JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
 
 	private JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache;
 
@@ -81,7 +81,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 	public void postConstructAssetType(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache,
 									JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset,
-									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+									JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);

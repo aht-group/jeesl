@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.controller.web.io.label.JeeslLabelEntityController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -106,7 +106,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 	protected abstract void test();
 
 	protected void postConstructOptionTable(JeeslTranslationBean<L,D,LOC> bTranslation,
-											JeeslGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic,
+											JeeslIoGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic,
 											JeeslFacesMessageBean bMessage)
 	{
 		super.initJeeslAdmin(bTranslation, bMessage);

@@ -15,7 +15,8 @@ import org.jeesl.factory.builder.module.NewsFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.news.JeeslNewsCategory;
 import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
@@ -23,7 +24,6 @@ import org.jeesl.interfaces.model.module.news.JeeslNewsItem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -39,8 +39,8 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 									CATEGORY extends JeeslNewsCategory<L,D,R,CATEGORY,?>,
 									ITEM extends JeeslNewsItem<L,FEED,CATEGORY,USER,M,FRC>,
 									USER extends JeeslSimpleUser,
-									M extends JeeslMarkup<MT>,
-									MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+									M extends JeeslIoMarkup<MT>,
+									MT extends JeeslIoMarkupType<L,D,MT,?>,
 									FRC extends JeeslFileContainer<?,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable,SbSingleBean,JeeslFileRepositoryCallback
@@ -137,7 +137,7 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 	public void addItem() throws JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbNews.getClassItem()));}
-		MT markupType = fNews.fByEnum(fbNews.getClassMarkupType(),JeeslIoCmsMarkupType.Code.xhtml);
+		MT markupType = fNews.fByEnum(fbNews.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
 		item = fbNews.ejbItem().build(feed,sbhLocale.getList(),markupType,author);
 		
 		if(sbhCategory.isSelected()) {item.setCategory(sbhCategory.getSelection());}

@@ -1,8 +1,8 @@
 package org.jeesl.controller.web.module.mmg;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.module.JeeslMmgFacade;
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
 import org.jeesl.controller.web.util.AbstractTreeClassificationController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -57,7 +57,7 @@ public class JeeslMmgClassificationController <L extends JeeslLang, D extends Je
 	}
 	
 	public void postConstructTreeElement(JeeslMmgFacade<L,D,R,MG,MI,MC,MQ,USER> fMmg,
-									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+									JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{

@@ -2,19 +2,19 @@ package org.jeesl.factory.ejb.module.bb;
 
 import java.util.Date;
 
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbPost;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbThread;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbBbPostFactory<THREAD extends JeeslBbThread<?>,
 								POST extends JeeslBbPost<THREAD,M,USER>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<?,?,MT,?>,
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<?,?,MT,?>,
 								USER extends EjbWithEmail>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbBbPostFactory.class);

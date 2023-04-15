@@ -14,8 +14,9 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
 import org.jeesl.factory.builder.module.HdFactoryBuilder;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEvent;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEventType;
@@ -31,7 +32,6 @@ import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicketStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -59,8 +59,8 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 								LEVEL extends JeeslHdLevel<L,D,R,LEVEL,?>,
 								PRIORITY extends JeeslHdPriority<L,D,R,PRIORITY,?>,
 								MSG extends JeeslHdMessage<TICKET,M,SCOPE,USER>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<L,D,MT,?>,
 								FAQ extends JeeslHdFaq<L,D,R,CAT,SCOPE>,
 								SCOPE extends JeeslHdScope<L,D,SCOPE,?>,
 								FGA extends JeeslHdFga<FAQ,DOC,SEC>,
@@ -77,7 +77,7 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 	
 	private final IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?> fbCms;
 	
-	private JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?> fCms;
+	private JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fCms;
 	
 	protected final SbSingleHandler<DOC> sbhDocuments; public SbSingleHandler<DOC> getSbhDocuments() {return sbhDocuments;}
 	
@@ -104,7 +104,7 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 
 	protected void postConstructHdFaq(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 									JeeslHdFacade<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd,
-									JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?> fCms,
+									JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fCms,
 									R realm)
 	{
 		super.postConstructHd(bTranslation,bMessage,fHd,realm);

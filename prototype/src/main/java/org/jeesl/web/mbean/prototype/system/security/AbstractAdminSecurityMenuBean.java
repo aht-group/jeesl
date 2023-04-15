@@ -76,7 +76,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 //	private final IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?> fbCms;
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity;
 
-	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?> fCms;
+	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
 
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
@@ -111,7 +111,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 	                              JeeslTranslationBean<L,D,LOC> bTranslation,
 	                              JeeslFacesMessageBean bMessage,
 	                              JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
-	                              JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?> fCms)
+	                              JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
 	{
 		super.postConstructSecurity(fSecurity,bTranslation,bMessage,bSecurity);
 		opViews = fSecurity.all(fbSecurity.getClassView());

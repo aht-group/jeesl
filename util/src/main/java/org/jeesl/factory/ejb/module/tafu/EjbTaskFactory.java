@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 import org.jeesl.factory.builder.module.TafuFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuScope;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuStatus;
 import org.jeesl.interfaces.model.module.tafu.JeeslTafuTask;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
@@ -20,8 +20,8 @@ public class EjbTaskFactory<R extends JeeslTenantRealm<?,?,R,?>,
 							T extends JeeslTafuTask<R,TS,SC,M>,
 							TS extends JeeslTafuStatus<?,?,TS,?>,
 							SC extends JeeslTafuScope<?,?,R,SC,?>,
-							M extends JeeslMarkup<MT>,
-							MT extends JeeslIoCmsMarkupType<?,?,MT,?>
+							M extends JeeslIoMarkup<MT>,
+							MT extends JeeslIoMarkupType<?,?,MT,?>
 							>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbTaskFactory.class);

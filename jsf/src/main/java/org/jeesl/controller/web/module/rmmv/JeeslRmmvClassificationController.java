@@ -1,8 +1,8 @@
 package org.jeesl.controller.web.module.rmmv;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.module.JeeslRmmvFacade;
-import org.jeesl.api.facade.system.graphic.JeeslGraphicFacade;
 import org.jeesl.controller.web.util.AbstractTreeClassificationController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -48,7 +48,7 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 	}
 	
 	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,?,?,?,?,?> fRmmv,
-									JeeslGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+									JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{

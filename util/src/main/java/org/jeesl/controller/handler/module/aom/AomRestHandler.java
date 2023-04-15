@@ -9,7 +9,8 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsMarkupFactory;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
@@ -24,7 +25,6 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -43,8 +43,8 @@ public class AomRestHandler <L extends JeeslLang, D extends JeeslDescription, LO
 							EVENT extends JeeslAomEvent<COMPANY,ASSET,ETYPE,ESTATUS,M,USER,FRC>,
 							ETYPE extends JeeslAomEventType<L,D,ETYPE,?>,
 							ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
-							M extends JeeslMarkup<MT>,
-							MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+							M extends JeeslIoMarkup<MT>,
+							MT extends JeeslIoMarkupType<L,D,MT,?>,
 							USER extends JeeslSimpleUser,
 							FRC extends JeeslFileContainer<?,?>,
 							UP extends JeeslAomEventUpload<L,D,UP,?>>
@@ -96,7 +96,7 @@ public class AomRestHandler <L extends JeeslLang, D extends JeeslDescription, LO
 		DataUpdateTracker dut = DataUpdateTracker.instance().start();
 		List<EVENT> events = fAsset.all(fbAsset.getClassEvent());
 		
-		MT markupType = fAsset.fByEnum(fbAsset.getClassMarkupType(), JeeslIoCmsMarkupType.Code.xhtml);
+		MT markupType = fAsset.fByEnum(fbAsset.getClassMarkupType(), JeeslIoMarkupType.Code.xhtml);
 		EjbIoCmsMarkupFactory<M,MT> fMarkup = EjbIoCmsMarkupFactory.instance(fbAsset.getClassMarkup());
 		
 		for(EVENT e : events)

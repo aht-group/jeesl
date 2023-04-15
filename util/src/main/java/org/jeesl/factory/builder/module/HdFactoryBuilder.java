@@ -8,8 +8,9 @@ import org.jeesl.factory.ejb.module.hd.EjbHdMessageFactory;
 import org.jeesl.factory.ejb.module.hd.EjbHdTicketFactory;
 import org.jeesl.factory.ftl.module.hd.FtlHdTicketFactory;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEvent;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEventType;
@@ -25,7 +26,6 @@ import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicketStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.slf4j.Logger;
@@ -41,8 +41,8 @@ public class HdFactoryBuilder<L extends JeeslLang,D extends JeeslDescription, LO
 							LEVEL extends JeeslHdLevel<L,D,R,LEVEL,?>,
 							PRIORITY extends JeeslHdPriority<L,D,R,PRIORITY,?>,
 							MSG extends JeeslHdMessage<TICKET,M,SCOPE,USER>,
-							M extends JeeslMarkup<MT>,
-							MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+							M extends JeeslIoMarkup<MT>,
+							MT extends JeeslIoMarkupType<L,D,MT,?>,
 							FAQ extends JeeslHdFaq<L,D,R,CAT,SCOPE>,
 							SCOPE extends JeeslHdScope<L,D,SCOPE,?>,
 							FGA extends JeeslHdFga<FAQ,DOC,SEC>,

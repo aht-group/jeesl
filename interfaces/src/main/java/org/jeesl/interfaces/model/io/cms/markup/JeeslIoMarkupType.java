@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.cms;
+package org.jeesl.interfaces.model.io.cms.markup;
 
 import java.io.Serializable;
 
@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 
 @DownloadJeeslData
-public interface JeeslIoCmsMarkupType <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslIoMarkupType <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,

@@ -12,19 +12,19 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.BbFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.bb.JeeslBbBoard;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbPost;
 import org.jeesl.interfaces.model.module.bb.post.JeeslBbThread;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
+import org.jeesl.interfaces.model.system.locale.JeeslDescription;
+import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.primefaces.event.NodeCollapseEvent;
 import org.primefaces.event.NodeExpandEvent;
 import org.primefaces.event.NodeSelectEvent;
@@ -41,8 +41,8 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
 									PUB extends JeeslStatus<L,D,PUB>,
 									THREAD extends JeeslBbThread<BB>,
 									POST extends JeeslBbPost<THREAD,M,USER>,
-									M extends JeeslMarkup<MT>,
-									MT extends JeeslIoCmsMarkupType<L,D,MT,?>,
+									M extends JeeslIoMarkup<MT>,
+									MT extends JeeslIoMarkupType<L,D,MT,?>,
 									USER extends EjbWithEmail>
 					extends AbstractAdminBean<L,D,LOC>
 					implements Serializable,SbSingleBean
@@ -89,7 +89,7 @@ public class AbstractBbPostBean <L extends JeeslLang,D extends JeeslDescription,
 		pageConfig();
 		reloadBoards();
 		
-		try {markupType = fBb.fByCode(fbBb.getClassMarkupType(),JeeslIoCmsMarkupType.Code.text);}
+		try {markupType = fBb.fByCode(fbBb.getClassMarkupType(),JeeslIoMarkupType.Code.text);}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 	}
 	

@@ -15,11 +15,11 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsContent;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.ofx.Section;
@@ -34,8 +34,8 @@ import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class JeeslCmsImageFactory<E extends JeeslIoCmsElement<?,?,?,?,C,FC>,
 								C extends JeeslIoCmsContent<?,E,?>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<?,?,MT,?>,
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<?,?,MT,?>,
 								FS extends JeeslFileStorage<?,?,?,?,?>,
 								FC extends JeeslFileContainer<FS,FM>,
 								FM extends JeeslFileMeta<?,FC,?,?>>

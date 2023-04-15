@@ -2,11 +2,11 @@ package org.jeesl.interfaces.model.module.hd.ticket;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslWithFileRepositoryContainer;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEvent;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
@@ -19,7 +19,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslHdTicket<R extends JeeslTenantRealm<?,?,R,?>,
 								EVENT extends JeeslHdEvent<?,?,?,?,?,?,?>,
-								M extends JeeslMarkup<?>,
+								M extends JeeslIoMarkup<?>,
 								FRC extends JeeslFileContainer<?,?>>
 						extends Serializable,EjbSaveable,
 								EjbWithId,EjbWithName,EjbWithNonUniqueCode,

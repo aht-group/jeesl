@@ -5,19 +5,19 @@ import java.util.Date;
 import org.jeesl.factory.builder.module.HdFactoryBuilder;
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsMarkupFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdMessage;
 import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdScope;
 import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicket;
-import org.jeesl.interfaces.model.system.locale.JeeslMarkup;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbHdMessageFactory<TICKET extends JeeslHdTicket<?,?,M,?>,
 								MSG extends JeeslHdMessage<TICKET,M,SCOPE,USER>,
-								M extends JeeslMarkup<MT>,
-								MT extends JeeslIoCmsMarkupType<?,?,MT,?>,
+								M extends JeeslIoMarkup<MT>,
+								MT extends JeeslIoMarkupType<?,?,MT,?>,
 								SCOPE extends JeeslHdScope<?,?,SCOPE,?>,
 								USER extends JeeslSimpleUser>
 {
