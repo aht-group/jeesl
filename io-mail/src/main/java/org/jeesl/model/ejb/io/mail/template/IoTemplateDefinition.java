@@ -1,6 +1,5 @@
 package org.jeesl.model.ejb.io.mail.template;
 
-import java.io.Serializable;
 import java.util.Map;
 
 import javax.persistence.CascadeType;
@@ -20,16 +19,13 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateDefinition;
-import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
-import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 
 @Entity
 @Table(name="IoTemplateDefinition",uniqueConstraints=@UniqueConstraint(columnNames={"template_id","type_id"}))
 @EjbErNode(name="Definition",category="system",subset="template")
-public class IoTemplateDefinition implements Serializable,EjbRemoveable,EjbPersistable,
-							JeeslIoTemplateDefinition<IoDescription,IoTemplateChannel,IoTemplate>
+public class IoTemplateDefinition implements JeeslIoTemplateDefinition<IoDescription,IoTemplateChannel,IoTemplate>
 {
 	public static final long serialVersionUID=1;	
 
@@ -38,7 +34,7 @@ public class IoTemplateDefinition implements Serializable,EjbRemoveable,EjbPersi
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	@Override public String resolveParentAttribute() {return "template";}
 	@ManyToOne
 	private IoTemplate template;
@@ -51,7 +47,7 @@ public class IoTemplateDefinition implements Serializable,EjbRemoveable,EjbPersi
 	@Override public void setType(IoTemplateChannel type) {this.type = type;}
 
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinTable(name="IoTemplateDefinitionJtDescription",joinColumns={@JoinColumn(name="template_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@JoinTable(name="IoTemplateDefinitionJtDescription",joinColumns={@JoinColumn(name="definition_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}

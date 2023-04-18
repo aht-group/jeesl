@@ -38,38 +38,38 @@ public class IoTemplate implements JeeslIoTemplate<IoLang,IoDescription,IoTempla
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	@Override public String resolveParentAttribute() {return "category";}
 	@ManyToOne
 	private IoTemplateCategory category;
 	@Override public IoTemplateCategory getCategory() {return category;}
 	@Override public void setCategory(IoTemplateCategory category) {this.category = category;}
-	
+
 	@ManyToOne
 	private IoTemplateScope scope;
 	@Override public IoTemplateScope getScope() {return scope;}
 	@Override public void setScope(IoTemplateScope scope) {this.scope = scope;}
-	
+
 	@NotNull
 	private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
-	
+
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
-	
+
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name = "lkey")
 	@JoinTable(name="IoTemplateJtLang",joinColumns={@JoinColumn(name="template_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String, IoLang> name) {this.name = name;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name = "lkey")
 	@JoinTable(name="IoTemplateJtDescription",joinColumns={@JoinColumn(name="template_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
@@ -80,18 +80,18 @@ public class IoTemplate implements JeeslIoTemplate<IoLang,IoDescription,IoTempla
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="template")
 	@OrderBy("position")
 	private List<IoTemplateToken> tokens;
-	@Override public List<IoTemplateToken> getTokens() {if(tokens==null){tokens=new ArrayList<IoTemplateToken>();} return tokens;}
+	@Override public List<IoTemplateToken> getTokens() {if(tokens==null) {tokens = new ArrayList<>();} return tokens;}
 	@Override public void setTokens(List<IoTemplateToken> tokens) {this.tokens = tokens;}
 
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="template")
 	private List<IoTemplateDefinition> definitions;
-	@Override public List<IoTemplateDefinition> getDefinitions() {if(definitions==null){definitions=new ArrayList<IoTemplateDefinition>();} return definitions;}
+	@Override public List<IoTemplateDefinition> getDefinitions() {if(definitions==null) {definitions = new ArrayList<>();} return definitions;}
 	@Override public void setDefinitions(List<IoTemplateDefinition> definitions) {this.definitions = definitions;}
 
 
 	@Override public boolean equals(Object object){return (object instanceof IoTemplate) ? id == ((IoTemplate) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

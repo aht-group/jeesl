@@ -66,7 +66,7 @@ public class IoTemplateToken implements JeeslIoTemplateToken<IoLang,IoDescriptio
 	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
-	@Override public void setName(Map<String, IoLang> name) {this.name = name;}
+	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="IoTemplateTokenJtDescription",joinColumns={@JoinColumn(name="token_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
