@@ -77,7 +77,7 @@ public class IoMail implements JeeslIoMail<IoLang,IoDescription,IoMailCategory,I
 	@Override public String getRecipient() {return recipient;}
 	@Override public void setRecipient(String recipient) {this.recipient = recipient;}
 
-	@Basic @Column(columnDefinition = "text")
+	@Basic @Column(columnDefinition="text")
 	private String xml;
 	@Override public String getXml() {return xml;}
 	@Override public void setXml(String xml) {this.xml = xml;}
