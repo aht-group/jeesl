@@ -103,8 +103,6 @@ html, body {
       .jeesl-panel .ui-panelgrid .ui-widget-content .ui-panelgrid-cell {
         border-style: none;
         padding-right: 13px; }
-  .jeesl-panel .ui-widget-content {
-    background: transparent; }
   .jeesl-panel .ui-widget-content .ui-inputfield, .jeesl-panel .ui-widget-header .ui-inputfield {
     border: 0;
     font-weight: normal;

@@ -4467,6 +4467,8 @@ body, .ui-widget {
     padding: 0 !important; }
   .jeesl-panel.jeesl-map .e-chart {
     height: calc(100vh - 180px); }
+  .jeesl-panel .ui-widget-content:not(.ui-dialog) {
+    background: transparent; }
   .jeesl-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
     margin-left: -10px;
     margin-right: -10px; }
@@ -5906,6 +5908,8 @@ body, .ui-widget {
         padding: 0 !important; }
       .jeesl-content .jeesl-content-container .ui-panel.jeesl-map .e-chart {
         height: calc(100vh - 180px); }
+      .jeesl-content .jeesl-content-container .ui-panel .ui-widget-content:not(.ui-dialog) {
+        background: transparent; }
       .jeesl-content .jeesl-content-container .ui-panel .jeesl-tabs.jeesl-editor .ui-tabs-panel .ui-texteditor {
         margin-left: -10px;
         margin-right: -10px; }
@@ -6553,6 +6557,7 @@ body, .ui-widget {
             text-decoration: none; }
 
 .ui-dialog {
+  background: #ededed;
   max-width: 982px; }
   .ui-dialog .ui-dialog-titlebar {
     align-items: center;
@@ -6793,28 +6798,38 @@ body, .ui-widget {
         border-top: 0; } }
     .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr:last-child, .ui-dialog.jeesl-table-dialog .ui-widget-content table tbody tr:last-child td {
       border-bottom: 0; }
-  .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-title {
-    padding-left: 10px; }
-  .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-titlebar-icon {
-    align-items: center;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    color: #333333;
-    display: flex;
-    float: none;
-    padding: 0;
-    text-decoration: none;
-    transition: background 0.2s linear;
-    width: 22px; }
-    .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-titlebar-icon .ui-icon {
+  .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar {
+    align-items: stretch; }
+    .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-title {
+      padding-left: 10px; }
+    .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-titlebar-icon {
+      align-items: stretch;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      color: #333333;
       display: flex;
-      flex-grow: 1;
-      justify-content: center; }
-      .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-titlebar-icon .ui-icon:hover {
-        background: #c4c4c4; }
-      .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-titlebar-icon .ui-icon:before {
-        font-size: 1.3em; }
+      float: none;
+      padding: 0;
+      text-decoration: none;
+      transition: background 0.2s linear;
+      width: 22px; }
+      .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-titlebar-icon .ui-icon {
+        align-items: center;
+        display: flex;
+        flex-grow: 1;
+        justify-content: center; }
+        .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-titlebar-icon .ui-icon:hover {
+          background: #c4c4c4; }
+        .ui-dialog:not(.jeesl-dialog) .ui-dialog-titlebar .ui-dialog-titlebar-icon .ui-icon:before {
+          font-size: 1.3em; }
+  .ui-dialog:not(.jeesl-dialog) .ui-dialog-buttonpane {
+    display: flex;
+    gap: 5px;
+    margin: 0;
+    padding: 10px; }
+    .ui-dialog:not(.jeesl-dialog) .ui-dialog-buttonpane .ui-button {
+      margin: 0; }
   .ui-dialog.multi-panel-dialog {
     background: none;
     border: none;

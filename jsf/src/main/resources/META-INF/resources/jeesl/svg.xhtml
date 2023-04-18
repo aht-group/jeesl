@@ -56,14 +56,18 @@
 			</p:commandLink>
 			<p:confirmDialog severity="alert" widgetVar="#{cc.attrs.id}-cd" header="#{cc.attrs.confirmHeader}" message="#{cc.attrs.confirmMessage}">
 				<p:commandButton id="linkConfirm" 
-								value="#{cc.attrs.confirmYes}"
-								oncomplete="PF('#{cc.attrs.id}-cd').hide(); #{cc.attrs.oncomplete}"
-								update="#{cc.attrs.update}"
-								actionListener="#{cc.listener}"
-								process="#{cc.attrs.process}" 
-								onstart="#{cc.attrs.onstart}"
-								immediate="#{cc.attrs.immediate}"/>
-				<p:commandButton value="#{cc.attrs.confirmNo}" onclick="PF('#{cc.attrs.id}-cd').hide();" type="button" />
+								 value="#{cc.attrs.confirmYes}"
+								 oncomplete="PF('#{cc.attrs.id}-cd').hide(); #{cc.attrs.oncomplete}"
+								 update="#{cc.attrs.update}"
+								 actionListener="#{cc.listener}"
+								 process="#{cc.attrs.process}" 
+								 onstart="#{cc.attrs.onstart}"
+								 immediate="#{cc.attrs.immediate}"
+								 styleClass="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"/>
+				<p:commandButton value="#{cc.attrs.confirmNo}"
+								 onclick="PF('#{cc.attrs.id}-cd').hide();"
+								 type="button"
+								 styleClass="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-all"/>
 			</p:confirmDialog>
 		
 		</c:if>
