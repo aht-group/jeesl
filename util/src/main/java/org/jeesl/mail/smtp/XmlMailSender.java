@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JDomUtil;
 
+@Deprecated
 public class XmlMailSender extends AbstractMailSender
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlMailSender.class);
@@ -61,25 +62,8 @@ public class XmlMailSender extends AbstractMailSender
 		
 		Transport.send(msg);
 	}
-	
-	@Deprecated
-	public void send(FreemarkerEngine fme, String lang, Document doc) throws UnsupportedEncodingException, MessagingException, UtilsProcessingException, UtilsMailException
-	{
-		this.fme=fme;
-		send(lang, doc);
-	}
-	
-	@Deprecated
-	public void send(String lang, Document doc) throws UnsupportedEncodingException, MessagingException, UtilsProcessingException, UtilsMailException
-	{
-		send(doc,lang);
-	}
+
 	public void send(Document doc) throws UnsupportedEncodingException, MessagingException, UtilsProcessingException, UtilsMailException
-	{
-		send(doc,null);
-	}
-	
-	private void send(Document doc, String lang) throws UnsupportedEncodingException, MessagingException, UtilsProcessingException, UtilsMailException
 	{
 		buildSession();
 		MimeMessage message = new MimeMessage(session);
@@ -104,8 +88,7 @@ public class XmlMailSender extends AbstractMailSender
 		
 		if(!mail.isSetLang())
 		{
-			if(lang!=null){mail.setLang(lang);}
-			else{mail.setLang("de");}
+			mail.setLang("de");
 			logger.warn("No @lang is set in this mail! Setting to "+mail.getLang());
 		}
 		

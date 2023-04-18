@@ -27,7 +27,7 @@ public class IoMailRetention extends IoStatus implements JeeslMailRetention<IoLa
 		for(JeeslMailRetention.Code c : JeeslMailRetention.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoMailRetention) ? id == ((IoMailRetention) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(17,37).append(id).toHashCode();}
 }

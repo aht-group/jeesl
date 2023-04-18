@@ -27,7 +27,7 @@ public class IoMailStatus extends IoStatus implements JeeslMailStatus<IoLang,IoD
 		for(JeeslMailStatus.Code c : JeeslMailStatus.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoMailStatus) ? id == ((IoMailStatus) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(17,37).append(id).toHashCode();}
 }

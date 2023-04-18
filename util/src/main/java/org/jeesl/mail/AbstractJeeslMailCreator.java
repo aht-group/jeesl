@@ -29,6 +29,8 @@ public abstract class AbstractJeeslMailCreator
 		doneWork=false;
 	}
 	
+//	public abstract void x();
+	
 	protected void setInjections(){doneInjection=true;}
 	protected void setWork(){doneWork=true;}
 	
