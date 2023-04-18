@@ -9,7 +9,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailStatus;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TsMailQueueProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
-									STATUS extends JeeslMailStatus<?,?,STATUS,?>,
+									STATUS extends JeeslIoMailStatus<?,?,STATUS,?>,
 									SCOPE extends JeeslTsScope<?,?,?,ST,?,EC,INT>,
 									ST extends JeeslTsScopeType<?,?,ST,?>,
 									MP extends JeeslTsMultiPoint<?,?,SCOPE,?>,

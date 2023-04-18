@@ -14,8 +14,8 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailRetention;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailStatus;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -29,8 +29,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 public class MailSplitter<L extends JeeslLang,D extends JeeslDescription,
 						CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 						MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
-						STATUS extends JeeslMailStatus<L,D,STATUS,?>,
-						RETENTION extends JeeslMailRetention<L,D,RETENTION,?>,
+						STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
+						RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
 						FRC extends JeeslFileContainer<?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(MailSplitter.class);
@@ -55,7 +55,7 @@ public class MailSplitter<L extends JeeslLang,D extends JeeslDescription,
 		
 		try
 		{
-			retentions.add(fMail.fByCode(fbMail.getClassRetention(), JeeslMailRetention.Code.fully));
+			retentions.add(fMail.fByCode(fbMail.getClassRetention(), JeeslIoMailRetention.Code.fully));
 		}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 		
@@ -80,7 +80,7 @@ public class MailSplitter<L extends JeeslLang,D extends JeeslDescription,
 					}
 //					logger.info(eMail.getRecipient()+" "+eMail.getXml().length()+" "+xMail.getAttachment().size());
 					
-					eMail.setRetention(fMail.fByCode(fbMail.getClassRetention(), JeeslMailRetention.Code.split));
+					eMail.setRetention(fMail.fByCode(fbMail.getClassRetention(), JeeslIoMailRetention.Code.split));
 					fMail.save(eMail);
 				}
 				catch (IOException | JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}

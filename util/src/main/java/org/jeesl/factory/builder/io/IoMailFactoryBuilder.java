@@ -6,8 +6,8 @@ import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.mail.core.EjbIoMailFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailRetention;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailStatus;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 public class IoMailFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 								MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
-								STATUS extends JeeslMailStatus<L,D,STATUS,?>,
-								RETENTION extends JeeslMailRetention<L,D,RETENTION,?>,
+								STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
+								RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
 								FRC extends JeeslFileContainer<?,?>>
 		extends AbstractFactoryBuilder<L,D>
 {

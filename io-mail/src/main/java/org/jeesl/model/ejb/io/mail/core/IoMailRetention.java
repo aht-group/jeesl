@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailRetention;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -17,14 +17,14 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("ioMailRetention")
 @EjbErNode(name="Retention",category="system",subset="mail",level=3)
-public class IoMailRetention extends IoStatus implements JeeslMailRetention<IoLang,IoDescription,IoMailRetention,IoGraphic>
+public class IoMailRetention extends IoStatus implements JeeslIoMailRetention<IoLang,IoDescription,IoMailRetention,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<>();
-		for(JeeslMailRetention.Code c : JeeslMailRetention.Code.values()){fixed.add(c.toString());}
+		for(JeeslIoMailRetention.Code c : JeeslIoMailRetention.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
 

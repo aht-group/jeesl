@@ -42,24 +42,24 @@ public class IoTemplateDefinition implements Serializable,EjbRemoveable,EjbPersi
 	@Override public String resolveParentAttribute() {return "template";}
 	@ManyToOne
 	private IoTemplate template;
-	public IoTemplate getTemplate() {return template;}
-	public void setTemplate(IoTemplate template) {this.template = template;}
+	@Override public IoTemplate getTemplate() {return template;}
+	@Override public void setTemplate(IoTemplate template) {this.template = template;}
 
 	@NotNull @ManyToOne
 	private IoTemplateChannel type;
-	public IoTemplateChannel getType() {return type;}
-	public void setType(IoTemplateChannel type) {this.type = type;}
+	@Override public IoTemplateChannel getType() {return type;}
+	@Override public void setType(IoTemplateChannel type) {this.type = type;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="IoTemplateDefinitionJtDescription",joinColumns={@JoinColumn(name="template_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="IoTemplateDefinitionJtHeader",joinColumns={@JoinColumn(name="definition_id")},inverseJoinColumns={@JoinColumn(name="descripton_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoDescription> header;
 	@Override public Map<String,IoDescription> getHeader() {return header;}
 	@Override public void setHeader(Map<String,IoDescription> header) {this.header = header;}
@@ -67,7 +67,7 @@ public class IoTemplateDefinition implements Serializable,EjbRemoveable,EjbPersi
 
 	@Override public boolean equals(Object object){return (object instanceof IoTemplateDefinition) ? id == ((IoTemplateDefinition) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

@@ -26,8 +26,8 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailRetention;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailStatus;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -41,8 +41,8 @@ import net.sf.exlp.util.DateUtil;
 public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescription,
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 									MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
-									STATUS extends JeeslMailStatus<L,D,STATUS,?>,
-									RETENTION extends JeeslMailRetention<L,D,RETENTION,?>,
+									STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
+									RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
 									FRC extends JeeslFileContainer<?,?>>
 					extends JeeslFacadeBean
 					implements JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC>
@@ -73,8 +73,8 @@ public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescriptio
 
 		try
 		{
-			STATUS statusSpooling = fByCode(fbMail.getClassStatus(), JeeslMailStatus.Code.spooling);
-			STATUS statusQueue = fByCode(fbMail.getClassStatus(), JeeslMailStatus.Code.queue);
+			STATUS statusSpooling = fByCode(fbMail.getClassStatus(), JeeslIoMailStatus.Code.spooling);
+			STATUS statusQueue = fByCode(fbMail.getClassStatus(), JeeslIoMailStatus.Code.queue);
 			cQ.where(cB.or(cB.equal(pStatus,statusSpooling),cB.equal(pStatus,statusQueue)));
 			cQ.select(cB.count(mail));
 			TypedQuery<Long> tQ = em.createQuery(cQ);
@@ -122,8 +122,8 @@ public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescriptio
 	
 	@Override public void queueMail(CATEGORY category, RETENTION retention, Mail mail) throws JeeslConstraintViolationException
 	{
-		STATUS status = this.fByEnum(fbMail.getClassStatus(), JeeslMailStatus.Code.queue);
-		if(retention==null) {retention = this.fByEnum(fbMail.getClassRetention(), JeeslMailRetention.Code.fully);}
+		STATUS status = this.fByEnum(fbMail.getClassStatus(), JeeslIoMailStatus.Code.queue);
+		if(retention==null) {retention = this.fByEnum(fbMail.getClassRetention(), JeeslIoMailRetention.Code.fully);}
 		MAIL ejb = efMail.build(category,status,mail,retention);
 		ejb = this.persist(ejb);
 		logger.info(fbMail.getClassMail().getSimpleName()+" spooled with id="+ejb.getId());
@@ -134,8 +134,8 @@ public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescriptio
 		List<MAIL> mails = new ArrayList<MAIL>();
 		try
 		{
-			STATUS statusSpooling = fByCode(fbMail.getClassStatus(), JeeslMailStatus.Code.spooling);
-			STATUS statusQueue = fByCode(fbMail.getClassStatus(), JeeslMailStatus.Code.queue);
+			STATUS statusSpooling = fByCode(fbMail.getClassStatus(), JeeslIoMailStatus.Code.spooling);
+			STATUS statusQueue = fByCode(fbMail.getClassStatus(), JeeslIoMailStatus.Code.queue);
 			
 			mails.addAll(fMails(statusSpooling,maxResult));
 			

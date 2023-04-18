@@ -19,8 +19,8 @@ import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailRetention;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailStatus;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -36,8 +36,8 @@ import net.sf.exlp.util.DateUtil;
 public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 											MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
-											STATUS extends JeeslMailStatus<L,D,STATUS,?>,
-											RETENTION extends JeeslMailRetention<L,D,RETENTION,?>,
+											STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
+											RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
 											FRC extends JeeslFileContainer<?,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable,SbToggleBean,SbDateSelectionBean
@@ -96,8 +96,8 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 		sbhRetention.selectAll();
 		
 		sbhStatus.setList(fMail.allOrderedPositionVisible(fbMail.getClassStatus()));
-		sbhStatus.select(fMail.fByEnum(fbMail.getClassStatus(),JeeslMailStatus.Code.queue));
-		sbhStatus.select(fMail.fByEnum(fbMail.getClassStatus(),JeeslMailStatus.Code.spooling));
+		sbhStatus.select(fMail.fByEnum(fbMail.getClassStatus(),JeeslIoMailStatus.Code.queue));
+		sbhStatus.select(fMail.fByEnum(fbMail.getClassStatus(),JeeslIoMailStatus.Code.spooling));
 		
 		initPageConfiguration();
 		reloadMails();

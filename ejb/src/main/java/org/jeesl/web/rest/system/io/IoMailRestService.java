@@ -18,8 +18,8 @@ import org.jeesl.factory.xml.io.mail.XmlMailFactory;
 import org.jeesl.factory.xml.io.mail.XmlMailsFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailRetention;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailStatus;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -37,8 +37,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 								MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
-								STATUS extends JeeslMailStatus<L,D,STATUS,?>,
-								RETENTION extends JeeslMailRetention<L,D,RETENTION,?>,
+								STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
+								RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
 								FRC extends JeeslFileContainer<?,?>>
 					extends AbstractJeeslRestHandler<L,D>
 					implements JeeslIoMailRestInterface,JeeslIoMailRestExport,JeeslIoMailRestImport
@@ -65,8 +65,8 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 	public static <L extends JeeslLang,D extends JeeslDescription,
 					CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 					MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
-					STATUS extends JeeslMailStatus<L,D,STATUS,?>,
-					RETENTION extends JeeslMailRetention<L,D,RETENTION,?>,
+					STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
+					RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
 					FRC extends JeeslFileContainer<?,?>>
 		IoMailRestService<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC>
 		factory(JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail,final Class<L> cL, final Class<D> cD, Class<CATEGORY> cCategory, final Class<MAIL> cMail, final Class<STATUS> cStatus, final Class<RETENTION> cRetention)
@@ -97,12 +97,12 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 				eMail.setCounter(eMail.getCounter()+1);
 				if(eMail.getCounter()>5)
 				{
-					eMail.setStatus(fMail.fByCode(cStatus, JeeslMailStatus.Code.failed));
+					eMail.setStatus(fMail.fByCode(cStatus, JeeslIoMailStatus.Code.failed));
 					eMail = fMail.save(eMail);
 				}
 				else
 				{
-					eMail.setStatus(fMail.fByCode(cStatus, JeeslMailStatus.Code.spooling));
+					eMail.setStatus(fMail.fByCode(cStatus, JeeslIoMailStatus.Code.spooling));
 					eMail = fMail.save(eMail);
 					Mail xMail = JaxbUtil.loadJAXB(IOUtils.toInputStream(eMail.getXml(), "UTF-8"), Mail.class);
 					xMail.setId(eMail.getId());
@@ -123,7 +123,7 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 		try
 		{
 			MAIL eMail = fMail.find(cMail,id);
-			eMail.setStatus(fMail.fByCode(cStatus, JeeslMailStatus.Code.sent));
+			eMail.setStatus(fMail.fByCode(cStatus, JeeslIoMailStatus.Code.sent));
 			eMail.setRecordSent(new Date());
 			eMail = fMail.update(eMail);
 			xMail.setId(eMail.getId());
@@ -144,7 +144,7 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 		List<RETENTION> retentions = fMail.all(cRetention);
 		
 		List<STATUS> status = new ArrayList<>();
-		try {status.add(fMail.fByCode(cStatus,JeeslMailStatus.Code.queue));}
+		try {status.add(fMail.fByCode(cStatus,JeeslIoMailStatus.Code.queue));}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 		
 		List<MAIL> mails = fMail.fMails(categories, status, retentions, null, DateUtil.toDate(ld.atStartOfDay()), null);
@@ -153,7 +153,7 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 		{
 			try
 			{
-				STATUS discard = fMail.fByCode(cStatus,JeeslMailStatus.Code.discarded);
+				STATUS discard = fMail.fByCode(cStatus,JeeslIoMailStatus.Code.discarded);
 				for(MAIL mail : mails)
 				{
 					mail.setStatus(discard);

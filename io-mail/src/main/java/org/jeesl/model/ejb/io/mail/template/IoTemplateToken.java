@@ -37,12 +37,12 @@ public class IoTemplateToken implements JeeslIoTemplateToken<IoLang,IoDescriptio
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 	@Override public String resolveParentAttribute() {return "template";}
 	@ManyToOne
 	private IoTemplate template;
-	public IoTemplate getTemplate() {return template;}
-	public void setTemplate(IoTemplate template) {this.template = template;}
+	@Override public IoTemplate getTemplate() {return template;}
+	@Override public void setTemplate(IoTemplate template) {this.template = template;}
 
 	@NotNull private String code;
 	@Override public String getCode() {return code;}
@@ -55,27 +55,27 @@ public class IoTemplateToken implements JeeslIoTemplateToken<IoLang,IoDescriptio
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
-	
+
 	@NotNull @ManyToOne
 	private IoTemplateTokenType type;
 	@Override public IoTemplateTokenType getType() {return type;}
 	@Override public void setType(IoTemplateTokenType type) {this.type = type;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name = "lkey")
 	@JoinTable(name="IoTemplateTokenJtLang",joinColumns={@JoinColumn(name="token_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
-	public Map<String,IoLang> getName() {return name;}
-	public void setName(Map<String, IoLang> name) {this.name = name;}
+	@Override public Map<String,IoLang> getName() {return name;}
+	@Override public void setName(Map<String, IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name = "lkey")
 	@JoinTable(name="IoTemplateTokenJtDescription",joinColumns={@JoinColumn(name="token_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
-	public Map<String,IoDescription> getDescription() {return description;}
-	public void setDescription(Map<String,IoDescription> description) {this.description = description;}
-	
-	@Basic @Column(columnDefinition = "text")
+	@Override public Map<String,IoDescription> getDescription() {return description;}
+	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
+
+	@Basic @Column(columnDefinition="text")
 	private String example;
 	@Override public String getExample() {return example;}
 	@Override public void setExample(String example) {this.example = example;}
@@ -83,7 +83,7 @@ public class IoTemplateToken implements JeeslIoTemplateToken<IoLang,IoDescriptio
 
 	@Override public boolean equals(Object object){return (object instanceof IoTemplateToken) ? id == ((IoTemplateToken) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

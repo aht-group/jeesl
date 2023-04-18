@@ -17,7 +17,6 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("ioTemplateTokenType")
 @EjbErNode(name="Type",category="system",subset="template",level=3)
-
 public class IoTemplateTokenType extends IoStatus implements JeeslTemplateTokenType<IoLang,IoDescription,IoTemplateTokenType,IoGraphic>
 {
 	public static final long serialVersionUID=1;

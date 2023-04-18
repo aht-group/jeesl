@@ -13,11 +13,13 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 @DownloadJeeslData
-public interface JeeslMailRetention <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>, G extends JeeslGraphic<?,?,?>>
+public interface JeeslIoMailStatus <L extends JeeslLang, D extends JeeslDescription,
+								S extends JeeslStatus<L,D,S>,
+								G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
 								
 								JeeslStatusFixedCode,
 								EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	
-	public enum Code{fully,split,text,header,delete};
+	public enum Code{queue,spooling,sent,failed,discarded};
 }

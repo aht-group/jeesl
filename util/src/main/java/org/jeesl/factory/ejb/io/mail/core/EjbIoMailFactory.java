@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailStatus;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -17,7 +17,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 public class EjbIoMailFactory <L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 								MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
-								STATUS extends JeeslMailStatus<L,D,STATUS,?>,
+								STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
 								RETENTION extends JeeslStatus<L,D,RETENTION>,
 								FRC extends JeeslFileContainer<?,?>>
 {

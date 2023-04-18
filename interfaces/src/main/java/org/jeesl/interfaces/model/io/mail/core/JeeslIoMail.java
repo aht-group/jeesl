@@ -18,7 +18,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslIoMail<L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-								STATUS extends JeeslMailStatus<L,D,STATUS,?>,
+								STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
 								RETENTION extends JeeslStatus<L,D,RETENTION>,
 								FRC extends JeeslFileContainer<?,?>
 								>

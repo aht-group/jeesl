@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.logging.JeeslIoLogStatus;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailStatus;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -26,7 +26,7 @@ public class IoLogStatus extends IoStatus implements JeeslIoLogStatus<IoLang,IoD
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<>();
-		for(JeeslMailStatus.Code c : JeeslMailStatus.Code.values()){fixed.add(c.toString());}
+		for(JeeslIoMailStatus.Code c : JeeslIoMailStatus.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
 

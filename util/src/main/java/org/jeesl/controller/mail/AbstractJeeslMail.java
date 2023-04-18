@@ -21,8 +21,8 @@ import org.jeesl.interfaces.controller.JeeslMail;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslTemplateHandler;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailRetention;
-import org.jeesl.interfaces.model.io.mail.core.JeeslMailStatus;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
+import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateDefinition;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateToken;
@@ -52,8 +52,8 @@ public class AbstractJeeslMail<L extends JeeslLang,D extends JeeslDescription,LO
 								TOKENTYPE extends JeeslTemplateTokenType<L,D,TOKENTYPE,?>,
 								MAILCAT extends JeeslStatus<L,D,MAILCAT>,
 								MAIL extends JeeslIoMail<L,D,MAILCAT,STATUS,RETENTION,FRC>,
-								STATUS extends JeeslMailStatus<L,D,STATUS,?>,
-								RETENTION extends JeeslMailRetention<L,D,RETENTION,?>,
+								STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
+								RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
 								FRC extends JeeslFileContainer<?,?>>
 							implements JeeslMail<TEMPLATE>
 {
