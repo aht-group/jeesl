@@ -20,6 +20,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslCalendarFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -35,6 +36,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.module.EjbCalendarQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -135,6 +137,30 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		
 		return map;
 	}
+	
+	@Override public List<ITEM> fCalendarItems(EjbCalendarQuery<CALENDAR, IT> query)
+	{
+		if(ObjectUtils.isEmpty(query.getCalendars())){return new ArrayList<>();}
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<ITEM> cQ = cB.createQuery(fbCalendar.getClassItem());
+		Root<ITEM> root = cQ.from(fbCalendar.getClassItem());
+		
+		Expression<LocalDateTime> utcStart = root.get(JeeslCalendarItem.Attributes.utcStart.toString());
+		
+		if(ObjectUtils.isNotEmpty(query.getCalendars()))
+		{
+			Join<ITEM,CALENDAR> jCalendar = root.join(JeeslCalendarItem.Attributes.calendar.toString());
+			predicates.add(jCalendar.in(query.getCalendars()));
+		}
+		
+		cQ.select(root);	    
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.orderBy(cB.asc(utcStart));
+		
+		return em.createQuery(cQ).getResultList();
+	}
 
 	@Override public List<ITEM> fCalendarItems(ZONE zone, CALENDAR calendar, LocalDate from, LocalDate to)
 	{
@@ -145,7 +171,7 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 	
 	@Override public List<ITEM> fCalendarItems(ZONE zone, List<CALENDAR> calendars, LocalDate ldStart, LocalDate ldEnd)
 	{	
-		if(calendars==null || calendars.isEmpty()){return new ArrayList<ITEM>();}
+		if(ObjectUtils.isEmpty(calendars)){return new ArrayList<>();}
 		
 		LocalDateTime ldtStart = ldStart.atStartOfDay(ZoneId.of(zone.getCode())).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
 		LocalDateTime ldtEnd = ldEnd.atStartOfDay(ZoneId.of(zone.getCode())).plusDays(1).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
@@ -177,9 +203,10 @@ public class JeeslCalendarFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		
 		Join<ITEM,CALENDAR> jCalendar = root.join(JeeslCalendarItem.Attributes.calendar.toString());
 		predicates.add(jCalendar.in(calendars));
-				    
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+				 
 		cQ.select(root);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
 		cQ.orderBy(cB.asc(dStart));
 		
 		return em.createQuery(cQ).getResultList();

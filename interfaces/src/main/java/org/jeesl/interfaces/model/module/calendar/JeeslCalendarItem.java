@@ -16,7 +16,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslCalendarItem <CAL extends JeeslCalendar<ZONE,?>,
 									ZONE extends JeeslCalendarTimeZone<?,?>,
-									IT extends JeeslCalendarItemType<?,?,?,IT,?>,
+									TYPE extends JeeslCalendarItemType<?,?,?,TYPE,?>,
 									USER extends JeeslSimpleUser>
 		extends  Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 					EjbWithParentAttributeResolver,
@@ -33,8 +33,8 @@ public interface JeeslCalendarItem <CAL extends JeeslCalendar<ZONE,?>,
 	String getPlace();
 	void setPlace(String place);
 	
-	IT getType();
-	void setType(IT type);
+	TYPE getType();
+	void setType(TYPE type);
 
 	ZONE getStartZone();
 	void setStartZone(ZONE startZone);
