@@ -39,7 +39,7 @@ public class IoTemplate implements JeeslIoTemplate<IoLang,IoDescription,IoTempla
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 
-	@Override public String resolveParentAttribute() {return "category";}
+	@Override public String resolveParentAttribute() {return JeeslIoTemplate.Attributes.category.toString();}
 	@ManyToOne
 	private IoTemplateCategory category;
 	@Override public IoTemplateCategory getCategory() {return category;}
@@ -63,16 +63,16 @@ public class IoTemplate implements JeeslIoTemplate<IoLang,IoDescription,IoTempla
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name = "lkey")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="IoTemplateJtLang",joinColumns={@JoinColumn(name="template_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String, IoLang> name) {this.name = name;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name = "lkey")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="IoTemplateJtDescription",joinColumns={@JoinColumn(name="template_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
