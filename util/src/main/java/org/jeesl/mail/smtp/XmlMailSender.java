@@ -31,10 +31,7 @@ public class XmlMailSender extends AbstractMailSender
 	
 	private FreemarkerEngine fme;
 	
-	public XmlMailSender(String smtpHost)
-	{
-		this(null,smtpHost);
-	}
+	public XmlMailSender(String smtpHost) {this(null,smtpHost);}
 	public XmlMailSender(FreemarkerEngine fme, String smtpHost){this(fme,smtpHost,25);}
 	public XmlMailSender(FreemarkerEngine fme, String smtpHost, int smtpPort)
 	{
