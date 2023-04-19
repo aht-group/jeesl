@@ -56,7 +56,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
          
-		<maven.version.jeesl.bom>0.3.0</maven.version.jeesl.bom>
+		<maven.version.jeesl.bom>${project.version}</maven.version.jeesl.bom>
 		<maven.ignore.versions>file://${project.parent.basedir}/maven/src/main/resources/jeesl/maven/ignore-versions.xml</maven.ignore.versions>
 
 		<guava.version>10.0.1</guava.version>
