@@ -1451,6 +1451,10 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
+	.ui-widget-content:not(.ui-dialog) {
+		background: transparent;
+	}
+	
 	.jeesl-tabs.jeesl-editor {
 		.ui-tabs-panel {
 			.ui-texteditor {
@@ -3551,6 +3555,7 @@ body, .ui-widget {
 .ui-dialog {
 	@include jeesl-dialog-titlebar;
 
+	background: $panel-background;
 	max-width: $min-fixed-container-width;
 	
 	@for $i from 1 to 13 {
@@ -3617,12 +3622,14 @@ body, .ui-widget {
 
 	&:not(.jeesl-dialog) {
 		.ui-dialog-titlebar {
+			align-items: stretch;
+			
 			.ui-dialog-title {
 				padding-left: $regular-spacing;
 			}
 			
 			.ui-dialog-titlebar-icon {
-				align-items: center;
+				align-items: stretch;
 				background: transparent;
 				border: none;
 				box-shadow: none;
@@ -3635,6 +3642,7 @@ body, .ui-widget {
 				width: $header-element-height;
 				
 				.ui-icon {
+					align-items: center;
 					display: flex;
 					flex-grow: 1;
 					justify-content: center;
@@ -3647,6 +3655,17 @@ body, .ui-widget {
 						font-size: 1.3em;
 					}
 				}
+			}
+		}
+		
+		.ui-dialog-buttonpane {
+			display: flex;
+			gap: $half-spacing;
+			margin: 0;
+			padding: $regular-spacing;
+			
+			.ui-button {
+				margin: 0;
 			}
 		}
 	}
