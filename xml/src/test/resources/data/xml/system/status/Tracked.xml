@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<s:tracked xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" record="2011-11-11T11:11:11">
-    <sec:user firstName="myFirst" lastName="myLast" email="myEmail"/>
-    <s:status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
-    <s:statement code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
-    <s:declaration code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
-</s:tracked>
+<js:tracked xmlns:js="http://ahtutils.aht-group.com/status" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:ns4="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" record="2011-11-11T11:11:11">
+    <ns4:user firstName="myFirst" lastName="myLast" email="myEmail"/>
+    <js:status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
+    <js:statement code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
+    <js:declaration code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
+</js:tracked>

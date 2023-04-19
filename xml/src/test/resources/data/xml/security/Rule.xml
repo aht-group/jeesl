@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sec:rule xmlns:sec="http://ahtutils.aht-group.com/security" type="myType" code="myCode" valid="true" min="1" max="8" actual="4"/>
+<rule xmlns="https://www.jeesl.org/jeesl/xsd/system/security" type="myType" code="myCode" valid="true" min="1" max="8" actual="4"/>

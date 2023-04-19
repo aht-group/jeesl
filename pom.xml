@@ -28,7 +28,6 @@
 		<module>maven</module>
 		<module>prototype</module>
 		
-		
 		<module>io-cms</module>
 		<module>io-crypto</module>
 		<module>io-label</module>
@@ -84,14 +83,14 @@
 		<url>https://github.com/aht-group/jeesl.git</url>
 		<connection>scm:git:ssh://git@github.com/aht-group/jeesl.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/aht-group/jeesl.git</developerConnection>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
 	
 	<developers>
 		<developer>
 			<id>1</id>
 			<name>Thorsten Kisner</name>
-			<email>thorsten-k@sourceforge.net</email>
+			<email>t.kisner@web.de</email>
 		</developer>
 	</developers>
 

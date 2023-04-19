@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<qa:checklist xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:qa="http://ahtutils.aht-group.com/qa" xmlns:text="http://ahtutils.aht-group.com/text" xmlns:survey="http://ahtutils.aht-group.com/survey">
-    <sec:staff id="123"/>
+<qa:checklist xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:qa="http://ahtutils.aht-group.com/qa" xmlns:text="http://www.jeesl.org/text" xmlns:survey="http://www.jeesl.org/survey" xmlns:t="http://ahtutils.aht-group.com/text" xmlns:jf="http://www.jeesl.org/finance">
+    <ns2:staff id="123"/>
     <qa:category id="123" name="myName" code="myCode"/>
     <qa:category id="123" name="myName" code="myCode"/>
 </qa:checklist>
