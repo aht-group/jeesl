@@ -16,6 +16,7 @@ import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
 import org.jeesl.factory.ejb.io.attribute.EjbAttributeCriteriaFactory;
 import org.jeesl.factory.ejb.io.attribute.EjbAttributeOptionFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
@@ -101,7 +102,7 @@ public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslD
 		reloadCriterias();
 	}
 	
-	public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 		if(fbAttribute.getClassCategory().isAssignableFrom(c))

@@ -8,6 +8,7 @@ import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.system.job.JeeslJob;
 import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
@@ -73,10 +74,10 @@ public class AbstractAdminJobTriggerBean <L extends JeeslLang,D extends JeeslDes
 		templates = new ArrayList<TEMPLATE>();
 	}
 	
-	@Override public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
-		super.toggled(c);
+		super.toggled(handler,c);
 	}
 	
 	public void selectTemplate()

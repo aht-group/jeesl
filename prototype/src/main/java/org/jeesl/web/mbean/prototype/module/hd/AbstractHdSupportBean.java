@@ -13,6 +13,7 @@ import org.jeesl.api.facade.module.JeeslHdFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.HdFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
@@ -120,7 +121,7 @@ public abstract class AbstractHdSupportBean <L extends JeeslLang, D extends Jees
 	protected abstract void preSelectSbh();
 	protected abstract void reloadSupporters();
 	
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadTickets();
 	}

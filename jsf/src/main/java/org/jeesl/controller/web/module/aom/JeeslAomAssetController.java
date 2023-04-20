@@ -20,6 +20,7 @@ import org.jeesl.factory.ejb.module.asset.EjbAssetEventFactory;
 import org.jeesl.factory.ejb.module.asset.EjbAssetFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.bean.th.ThMultiFilter;
 import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
@@ -189,7 +190,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 		logger.info("TH Filter");
 	}
 	
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(asset!=null) {lazyEvents.reloadScope(fAom,asset);}
 	}

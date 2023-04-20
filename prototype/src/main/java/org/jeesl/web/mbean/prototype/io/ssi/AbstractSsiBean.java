@@ -13,6 +13,7 @@ import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.processor.SsiMappingProcessor;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
@@ -84,7 +85,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		sbhLink.preSelect(JeeslIoSsiLink.Code.possible,JeeslIoSsiLink.Code.unlinked);
 	}
 	
-	@Override public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 		if(fbSsi.getClassLink().isAssignableFrom(c)){reloadData();}

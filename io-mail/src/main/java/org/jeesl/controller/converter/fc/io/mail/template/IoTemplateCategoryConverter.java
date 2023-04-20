@@ -1,4 +1,4 @@
-package org.jeesl.controller.converter.io.mail.template;
+package org.jeesl.controller.converter.fc.io.mail.template;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;

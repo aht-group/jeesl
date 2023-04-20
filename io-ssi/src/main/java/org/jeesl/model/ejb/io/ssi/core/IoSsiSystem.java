@@ -44,14 +44,14 @@ public class IoSsiSystem implements JeeslIoSsiSystem<IoLang,IoDescription>
 	@Override public String getFqdn() {return fqdn;}
 	@Override public void setFqdn(String fqdn) {this.fqdn = fqdn;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="IoSsiSystemJtLang",joinColumns={@JoinColumn(name="system_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="IoSsiSystemJtDescription",joinColumns={@JoinColumn(name="system_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;

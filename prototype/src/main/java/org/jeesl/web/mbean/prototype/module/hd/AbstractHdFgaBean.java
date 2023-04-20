@@ -13,6 +13,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
 import org.jeesl.factory.builder.module.HdFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
@@ -121,7 +122,7 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 	}
 	protected abstract void reloadDocuments() throws JeeslNotFoundException;
 	
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 
 	}

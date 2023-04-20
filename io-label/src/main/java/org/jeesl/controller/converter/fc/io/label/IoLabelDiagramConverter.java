@@ -1,4 +1,4 @@
-package org.jeesl.controller.converter.forclass.io.label;
+package org.jeesl.controller.converter.fc.io.label;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;

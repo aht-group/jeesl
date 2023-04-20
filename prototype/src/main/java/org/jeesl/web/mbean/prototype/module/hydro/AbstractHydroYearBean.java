@@ -13,6 +13,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.HydroFactoryBuilder;
 import org.jeesl.factory.ejb.module.hydro.EjbHydroYearFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.hydro.JeeslHydroDecade;
 import org.jeesl.interfaces.model.module.hydro.JeeslHydroYear;
@@ -82,7 +83,7 @@ public class AbstractHydroYearBean <L extends JeeslLang, D extends JeeslDescript
 	}
 
 	@Override
-	public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(debugOnInfo){logger.info(SbMultiHandler.class.getSimpleName()+" toggled, but NYI");}
 	}

@@ -16,6 +16,7 @@ import org.jeesl.factory.ejb.io.label.EjbLabelMappingViewFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelScopeFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelViewFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -114,7 +115,7 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 		categories = fRevision.allOrderedPositionVisible(fbRevision.getClassCategory());
 	}
 
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 
 	}

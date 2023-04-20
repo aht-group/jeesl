@@ -7,6 +7,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.system.job.JeeslJob;
 import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
@@ -86,7 +87,7 @@ public abstract class AbstractAdminJobBean <L extends JeeslLang, D extends Jeesl
 		sbhPriority.setList(fJob.allOrderedPositionVisible(fbJob.getClassPriority()));
 	}
 	
-	@Override public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		
 	}

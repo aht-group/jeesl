@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sec:category xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:ns4="http://ahtutils.aht-group.com/navigation" code="myCode" label="myLabel" position="1" visible="true" documentation="true">
-    <s:langs/>
-    <s:descriptions/>
-    <sec:roles type="myType"/>
-    <sec:actions/>
-    <sec:templates/>
-    <sec:usecases/>
-    <acl:views/>
-    <sec:staffs/>
-    <sec:staffs/>
-</sec:category>
+<ns2:category xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" code="myCode" label="myLabel" position="1" visible="true" documentation="true">
+    <js:langs/>
+    <js:descriptions/>
+    <ns2:roles type="myType"/>
+    <ns2:actions/>
+    <ns2:templates/>
+    <ns2:usecases/>
+    <ns2:views/>
+    <ns2:staffs/>
+    <ns2:staffs/>
+</ns2:category>

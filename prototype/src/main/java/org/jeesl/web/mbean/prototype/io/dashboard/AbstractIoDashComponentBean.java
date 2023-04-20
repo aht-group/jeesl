@@ -12,6 +12,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoDashboardFactoryBuilder;
 import org.jeesl.factory.ejb.io.dashboard.EjbDashComponentFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.dash.JeeslIoDashComponent;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -75,7 +76,7 @@ public class AbstractIoDashComponentBean <L extends JeeslLang, D extends JeeslDe
 	}
 
 	@Override
-	public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(debugOnInfo){logger.info(SbMultiHandler.class.getSimpleName()+" toggled, but NYI");}
 	}

@@ -11,6 +11,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.ConstraintFactoryBuilder;
 import org.jeesl.factory.ejb.system.constraint.algorithm.EjbConstraintAlgorithmFactory;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
@@ -67,7 +68,7 @@ public abstract class AbstractSystemConstraintAlgorithmBean <L extends JeeslLang
 	
 	protected abstract void initImplementationSettings();
 	
-	public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 //		if(fbAttribute.getClassCategory().isAssignableFrom(c))

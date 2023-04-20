@@ -12,6 +12,7 @@ import org.jeesl.factory.builder.module.AmFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.module.am.JeesAmProject;
 import org.jeesl.interfaces.model.module.am.JeeslAmActivity;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -76,7 +77,7 @@ public abstract class AbstractAmActivityTimelineBean <L extends JeeslLang,D exte
 	}
 
 
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 	}

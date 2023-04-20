@@ -16,6 +16,7 @@ import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
@@ -110,7 +111,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 		sbhCategory.selectAll();
 	}
 	
-	@Override public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 		if(fbMail.getClassCategory().isAssignableFrom(c)){logger.info(fbMail.getClassCategory().getName());reloadStatistic();}

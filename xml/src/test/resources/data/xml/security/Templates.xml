@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sec:templates xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security">
-    <sec:template id="123" code="myCode" position="1" visible="true" documentation="true" label="myLabel"/>
-    <sec:template id="123" code="myCode" position="1" visible="true" documentation="true" label="myLabel"/>
-</sec:templates>
+<ns2:templates xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security">
+    <ns2:template id="123" code="myCode" position="1" visible="true" documentation="true" label="myLabel"/>
+    <ns2:template id="123" code="myCode" position="1" visible="true" documentation="true" label="myLabel"/>
+</ns2:templates>

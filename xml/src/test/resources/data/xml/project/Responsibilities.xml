@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<p:responsibilities xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:s="http://ahtutils.aht-group.com/status" xmlns:p="http://ahtutils.aht-group.com/project">
-    <sec:roles type="myType"/>
-    <sec:user firstName="myFirst" lastName="myLast" email="myEmail"/>
-    <sec:user firstName="myFirst" lastName="myLast" email="myEmail"/>
+<p:responsibilities xmlns="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:js="http://ahtutils.aht-group.com/status" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:p="http://ahtutils.aht-group.com/project">
+    <roles type="myType"/>
+    <user firstName="myFirst" lastName="myLast" email="myEmail"/>
+    <user firstName="myFirst" lastName="myLast" email="myEmail"/>
 </p:responsibilities>

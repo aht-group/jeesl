@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sec:usecases xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security">
-    <sec:usecase id="123" code="myCode" position="1" visible="true" label="myLabel"/>
-    <sec:usecase id="123" code="myCode" position="1" visible="true" label="myLabel"/>
-</sec:usecases>
+<ns2:usecases xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol">
+    <ns2:usecase id="123" code="myCode" position="1" visible="true" label="myLabel"/>
+    <ns2:usecase id="123" code="myCode" position="1" visible="true" label="myLabel"/>
+</ns2:usecases>

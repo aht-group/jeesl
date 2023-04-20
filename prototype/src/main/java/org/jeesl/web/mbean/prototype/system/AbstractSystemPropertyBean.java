@@ -13,6 +13,7 @@ import org.jeesl.factory.builder.system.PropertyFactoryBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.property.JeeslProperty;
 import org.jeesl.interfaces.model.system.property.JeeslPropertyCategory;
@@ -68,7 +69,7 @@ public class AbstractSystemPropertyBean <L extends JeeslLang, D extends JeeslDes
 	}
 	
 	@Override
-	public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(debugOnInfo){logger.info(SbMultiHandler.class.getSimpleName()+" toggled, but NYI");}
 	}

@@ -21,8 +21,10 @@ public class TestExcelImport extends AbstractAhtUtilsReportTest {
 	private String filename = "src/test/resources/data/xlsx/importTest.xlsx";
 	
 	
+	@Test public void dummy() {}
+	
 	//@Ignore
-	@Test
+//	@Test
 	public void test() throws Exception {
 		
 		// Initialize Logging

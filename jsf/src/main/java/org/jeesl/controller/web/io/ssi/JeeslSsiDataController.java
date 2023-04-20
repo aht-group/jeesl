@@ -13,6 +13,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.io.ssi.JeeslIoSsiDataCallback;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
@@ -86,7 +87,8 @@ public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescrip
 	}
 
 	@Override
-	public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException {
+	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	{
 		// TODO Auto-generated method stub
 		
 	}

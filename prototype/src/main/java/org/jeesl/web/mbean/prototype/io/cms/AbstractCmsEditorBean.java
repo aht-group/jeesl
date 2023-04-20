@@ -24,6 +24,7 @@ import org.jeesl.factory.json.system.translation.JsonTranslationFactory;
 import org.jeesl.interfaces.bean.op.OpEntityBean;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.OutputXpathPattern;
 import org.jeesl.interfaces.controller.handler.op.OpEntityHandler;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
@@ -169,7 +170,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 		logger.info(AbstractLogMessage.reloaded(fbCms.getClassCms(), sbhCms.getList()));
 	}
 	
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 	}

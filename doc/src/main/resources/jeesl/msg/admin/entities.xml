@@ -50,27 +50,7 @@
 			<s:lang key="fr" translation="DMS View Type"/>
 		</s:langs>
 	</s:translation>	
-	<s:translation key="IoMailCategory">
-		<s:langs>
-			<s:lang key="de" translation="Mail Kategorie"/>
-			<s:lang key="en" translation="Mail Category"/>
-			<s:lang key="fr" translation="Mail Category"/>
-		</s:langs>
-	</s:translation>
-	<s:translation key="IoMailStatus">
-		<s:langs>
-			<s:lang key="de" translation="Mail Status"/>
-			<s:lang key="en" translation="Mail Status"/>
-			<s:lang key="fr" translation="Mail Status"/>
-		</s:langs>
-	</s:translation>
-	<s:translation key="IoMailRetention">
-		<s:langs>
-			<s:lang key="de" translation="Mail Aufbewahrung"/>
-			<s:lang key="en" translation="Mail Retention"/>
-			<s:lang key="fr" translation="Mail Retention"/>
-		</s:langs>
-	</s:translation>
+	
 	
 	<s:translation key="IoAttributeCategory">
 		<s:langs>

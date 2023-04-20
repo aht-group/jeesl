@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sec:access xmlns:sec="http://ahtutils.aht-group.com/security" publicUser="true" authenticatedUser="true"/>
+<access xmlns="https://www.jeesl.org/jeesl/xsd/system/security" publicUser="true" authenticatedUser="true"/>

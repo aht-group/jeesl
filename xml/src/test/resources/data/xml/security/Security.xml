@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sec:security xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:acl="http://ahtutils.aht-group.com/access" xmlns:ns4="http://ahtutils.aht-group.com/navigation">
-    <sec:category code="myCode" label="myLabel" position="1" visible="true" documentation="true"/>
-    <sec:category code="myCode" label="myLabel" position="1" visible="true" documentation="true"/>
-</sec:security>
+<ns3:security xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns3="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:text="http://www.jeesl.org/text">
+    <ns3:category code="myCode" label="myLabel" position="1" visible="true" documentation="true"/>
+    <ns3:category code="myCode" label="myLabel" position="1" visible="true" documentation="true"/>
+</ns3:security>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<jeesl:querySecurity xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:jeesl="http://www.jeesl.org">
-    <sec:user firstName="myFirst" lastName="myLast" email="myEmail"/>
-    <sec:staff id="123"/>
-    <sec:role id="123" code="myCode" position="1" visible="true" label="myLabel"/>
+<jeesl:querySecurity xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:jeesl="http://www.jeesl.org">
+    <ns2:user firstName="myFirst" lastName="myLast" email="myEmail"/>
+    <ns2:staff id="123"/>
+    <ns2:role id="123" code="myCode" position="1" visible="true" label="myLabel"/>
 </jeesl:querySecurity>

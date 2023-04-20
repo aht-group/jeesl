@@ -31,6 +31,7 @@ import org.jeesl.factory.ejb.io.report.EjbIoReportWorkbookFactory;
 import org.jeesl.factory.xml.system.io.report.XmlReportFactory;
 import org.jeesl.factory.xml.system.io.report.XmlReportsFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
@@ -196,7 +197,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		sbhCategory.setList(fReport.allOrderedPositionVisible(fbReport.getClassCategory()));
 	}
 	
-	public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 		reloadReports();

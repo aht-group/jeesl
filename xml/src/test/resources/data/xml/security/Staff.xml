@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<sec:staff xmlns:s="http://ahtutils.aht-group.com/status" xmlns:sec="http://ahtutils.aht-group.com/security" id="123">
-    <sec:role id="123" code="myCode" position="1" visible="true" label="myLabel"/>
-    <sec:user firstName="myFirst" lastName="myLast" email="myEmail"/>
-    <s:domain code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
-    <s:status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
-    <s:type id="123" key="myKey" code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
-    <s:responsible code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
-    <s:level code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
-</sec:staff>
+<ns2:staff xmlns:js="http://ahtutils.aht-group.com/status" xmlns:ns2="https://www.jeesl.org/jeesl/xsd/system/security" xmlns:nav="http://ahtutils.aht-group.com/navigation" xmlns:io="http://exlp.sf.net/io" xmlns:symbol="http://www.jeesl.org/symbol" id="123">
+    <ns2:role id="123" code="myCode" position="1" visible="true" label="myLabel"/>
+    <ns2:user firstName="myFirst" lastName="myLast" email="myEmail"/>
+    <js:domain code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
+    <js:status id="123" code="myCode" group="myGroup" label="myLabel" symbol="mySymbol" visible="true" image="test/green.png" style="myStyle" position="1"/>
+    <js:type id="123" key="myKey" code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
+    <js:responsible code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
+    <js:level code="myCode" group="myGroup" label="myLabel" visible="true" image="test/green.png" position="1"/>
+</ns2:staff>
