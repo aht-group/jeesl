@@ -17,6 +17,7 @@ import org.jeesl.factory.builder.system.ConstraintFactoryBuilder;
 import org.jeesl.factory.ejb.system.constraint.EjbConstraintFactory;
 import org.jeesl.factory.ejb.system.constraint.EjbConstraintScopeFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
@@ -88,7 +89,7 @@ public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D exte
 
 	}
 	
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadScopes();
 	}

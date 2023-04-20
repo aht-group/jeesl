@@ -14,6 +14,7 @@ import org.jeesl.factory.builder.io.IoDmsFactoryBuilder;
 import org.jeesl.factory.ejb.io.dms.EjbIoDmsFactory;
 import org.jeesl.factory.ejb.io.dms.EjbIoDmsViewFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDms;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsDocument;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsLayer;
@@ -87,7 +88,7 @@ public abstract class AbstractAdminDmsConfigBean <L extends JeeslLang, D extends
 	}
 	protected abstract void initPageConfiguration();
 	
-	public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 		

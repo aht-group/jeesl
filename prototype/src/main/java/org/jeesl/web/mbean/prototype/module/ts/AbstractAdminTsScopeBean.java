@@ -11,6 +11,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
@@ -103,9 +104,9 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 		opClasses = fTs.all(fbTs.getClassEntity());
 	}
 	
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		super.toggled(c);
+		super.toggled(handler,c);
 		if(fbTs.getClassCategory().isAssignableFrom(c)){reloadScopes();reset(true,true);}
 	}
 	

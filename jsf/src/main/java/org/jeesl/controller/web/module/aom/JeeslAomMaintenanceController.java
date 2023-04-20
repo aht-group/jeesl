@@ -17,6 +17,7 @@ import org.jeesl.factory.ejb.module.asset.EjbAssetEventFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
@@ -145,7 +146,7 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 		reloadEvents();
 	}
 	
-	@Override public void toggled(Class<?> c){reloadEvents();}
+	@Override public void toggled(SbToggleSelection handler, Class<?> c){reloadEvents();}
 	@Override public void callbackDateChanged(SbDateSelection handler) {reloadEvents();}
 	
 	private void reloadEvents()

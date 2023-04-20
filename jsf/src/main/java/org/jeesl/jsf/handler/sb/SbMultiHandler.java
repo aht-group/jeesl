@@ -1,6 +1,5 @@
 package org.jeesl.jsf.handler.sb;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringUtil;
 
-public class SbMultiHandler <T extends EjbWithId> implements Serializable
+public class SbMultiHandler <T extends EjbWithId> implements SbToggleSelection
 {
 	final static Logger logger = LoggerFactory.getLogger(SbMultiHandler.class);
 	private static final long serialVersionUID = 1L;
@@ -149,7 +149,7 @@ public class SbMultiHandler <T extends EjbWithId> implements Serializable
 	
 	public void callbackToggledToBean()
 	{
-		try {if(bean!=null){bean.toggled(cT);}}
+		try {if(bean!=null){bean.toggled(this,cT);}}
 		catch (JeeslLockingException e) {e.printStackTrace();}
 		catch (JeeslConstraintViolationException e) {e.printStackTrace();}
 	}

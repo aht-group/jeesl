@@ -12,6 +12,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoFileRepositoryFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
@@ -104,7 +105,7 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 	}
 	
 	@Override
-	public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		reloadStorages();
 	}

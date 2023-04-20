@@ -20,6 +20,7 @@ import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateDefinitionFactory;
 import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateFactory;
 import org.jeesl.factory.ejb.io.mail.template.EjbIoTemplateTokenFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateDefinition;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateToken;
@@ -125,7 +126,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 		initPageConfiguration();
 		try
 		{
-			toggled(fbTemplate.getClassCategory());
+			toggled(sbhCategory,fbTemplate.getClassCategory());
 		}
 		catch (JeeslLockingException e) {e.printStackTrace();}
 		catch (JeeslConstraintViolationException e) {e.printStackTrace();}
@@ -140,7 +141,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 		sbhCategory.selectAll();
 	}
 	
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 		scopes = fTemplate.all(fbTemplate.getClassScope());

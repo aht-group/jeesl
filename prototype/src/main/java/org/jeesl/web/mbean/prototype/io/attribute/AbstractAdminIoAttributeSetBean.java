@@ -14,6 +14,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeContainer;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
@@ -96,7 +97,7 @@ public abstract class AbstractAdminIoAttributeSetBean <L extends JeeslLang, D ex
 		reloadSets();
 	}
 	
-	@Override public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
 		if(fbAttribute.getClassCategory().isAssignableFrom(c))

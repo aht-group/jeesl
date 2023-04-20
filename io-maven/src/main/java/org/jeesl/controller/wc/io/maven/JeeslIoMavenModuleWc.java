@@ -16,6 +16,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.ejb.io.maven.EjbMavenModuleFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.jsf.handler.PositionListReorderer;
@@ -94,7 +95,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	}
 	
 	@Override
-	public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(debugOnInfo){logger.info(SbMultiHandler.class.getSimpleName()+" toggled, but NYI");}
 	}

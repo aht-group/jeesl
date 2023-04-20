@@ -14,6 +14,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.io.label.EjbLabelDiagramFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
@@ -81,7 +82,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 	}
 
 	@Override
-	public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		if(debugOnInfo){logger.info(SbMultiHandler.class.getSimpleName()+" toggled, but NYI");}
 		reloadDiagrams();

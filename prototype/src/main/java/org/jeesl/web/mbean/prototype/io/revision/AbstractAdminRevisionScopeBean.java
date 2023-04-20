@@ -10,6 +10,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -64,9 +65,9 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 		reloadScopes();
 	}
 
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		super.toggled(c);
+		super.toggled(handler,c);
 		logger.info(AbstractLogMessage.toggled(c));
 		reloadScopes();
 		cancel();

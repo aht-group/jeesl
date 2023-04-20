@@ -15,6 +15,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
 import org.jeesl.factory.builder.module.HdFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
@@ -115,7 +116,7 @@ public abstract class AbstractHdTicketBean <L extends JeeslLang, D extends Jeesl
 		reloadTickets();
 	}
 
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
 		// TODO Auto-generated method stub
 	}

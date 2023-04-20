@@ -10,6 +10,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
 import org.jeesl.factory.ejb.system.job.EjbJobTemplateFactory;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.system.job.JeeslJob;
 import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
@@ -82,10 +83,10 @@ public class AbstractAdminJobTemplateBean <L extends JeeslLang, D extends JeeslD
 		reloadTemplates();
 	}
 	
-	@Override public void toggled(Class<?> c)
+	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
-		super.toggled(c);
+		super.toggled(handler,c);
 		reloadTemplates();
 		reset(true);
 	}

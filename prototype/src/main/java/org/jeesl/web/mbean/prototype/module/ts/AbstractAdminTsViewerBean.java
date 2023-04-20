@@ -14,6 +14,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
 import org.jeesl.factory.mc.ts.McTsViewerFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
@@ -96,9 +97,9 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		sbhCategory.toggleAll();
 	}
 	
-	@Override public void toggled(Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
+	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		super.toggled(c);
+		super.toggled(handler,c);
 		if(fbTs.getClassCategory().isAssignableFrom(c))
 		{
 			EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT>();
