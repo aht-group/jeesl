@@ -336,6 +336,8 @@
 		    <id>AsposeJavaAPI</id>
 		    <name>Aspose Java API</name>
 		    <url>https://repository.aspose.com/repo/</url>
+			<releases><enabled>true</enabled></releases>
+		    <snapshots><enabled>false</enabled></snapshots>
 		</repository>
 		<repository>
 		    <id>aht.3rd</id>
