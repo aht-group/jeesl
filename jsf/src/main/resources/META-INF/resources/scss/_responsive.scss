@@ -891,134 +891,12 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 					}
 					
-					> .jeesl-ck-editor {
-						@media (max-width: 768px) {
-							padding: 0;
-						}
+					> .jeesl-ck-editor .cke_button {
+						border-width: $border-width 0;
 						
-						.cke {
-							border: none;
-							border-radius: $border-radius;
-							box-sizing: border-box;
-							width: 100%;
-							
-							.cke_inner {
-								border-radius: $border-radius;
-							
-								.cke_top {
-									background: transparent;
-									border: none;
-									border-radius: $border-radius-top;
-									padding: 0;
-									
-									.cke_toolbar {
-										display: flex;
-										float: none;
-											justify-content: right;
-											
-										.cke_toolgroup {
-											align-items: center;
-											display: flex;
-											padding: 0;
-											margin: 0;
-												
-											.cke_button {
-												@include button(cke_button_on);
-												
-												border: $border;
-												border-width: $border-width 0;
-												box-sizing: border-box;
-												cursor: pointer;
-												min-width: $element-height;
-												
-												@media (max-width: 768px) {
-													min-width: $element-height-mobile;
-												}
-												
-												&:first-child {
-													border-left: $border;
-												}
-												
-												&:last-child {
-													border-right: $border;
-													border-top-right-radius: $border-radius;
-												}
-												
-												&:after {
-													position: relative;
-													margin: 0;
-												}
-												
-												.cke_button_label {
-													display: none;
-												}
-												
-												.cke_button_icon {
-													@include icon;
-													
-													background: none !important;
-													float: none;
-													font-size: 0;
-													font-weight: bold;
-													text-align: center;
-													
-													&:before {
-														font-size: 1rem;
-														
-														@media (max-width: 768px) {
-															font-size: 1.5rem;
-														}
-													}
-													
-													&.cke_button__bold_icon:before {
-														content: '\f032';
-													}
-													
-													&.cke_button__italic_icon:before {
-														content: '\f033';
-													}
-													
-													&.cke_button__bulletedlist_icon:before {
-														content: '\f0ca';
-													}
-													
-													&.cke_button__numberedlist_icon:before {
-														content: '\f0cb';
-													}
-													
-													&.cke_button__subscript_icon:before {
-														content: '\f12c';
-													}
-													
-													&.cke_button__superscript_icon:before {
-														content: '\f12b';
-													}
-												}
-											}
-											
-											.cke_toolbar_separator {
-												background: none;
-												border-left: $border;
-												height: $element-height;
-												margin: 0;
-												width: 0;
-												
-												@media (max-width: 768px) {
-													height: $element-height-mobile;
-												}
-											}
-										}
-									}
-								}
-								
-								.cke_contents {
-									padding: $half-spacing $regular-spacing;
-									
-									@media (max-width: 768px) {
-										padding: $regular-spacing;
-									}
-								}
-							}
+						&:last-child {
+							border-right: $border;
+							border-top-right-radius: $border-radius;
 						}
 					}
 					
@@ -1204,23 +1082,32 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 }
 
+@mixin justified-panel-border {
+	
+}
+
 @mixin jeesl-editor-layout {
-	.ui-texteditor, .jeesl-timeline {
+	.ui-texteditor, .jeesl-timeline, .jeesl-ck-editor {
 		@include justified-panel-content;
 		
 		border-left-width: 0;
 		border-right-width: 0;
 		
-		&:first-child {
+		&:first-child, &:first-child .cke {
 			border-top-width: 0;
 		}
 		
-		&:last-child {
+		&:last-child, &:last-child .cke {
 			border-bottom-width: 0;
 			
 			.ql-container {
 				border-radius: $border-radius-bottom;
 			}
+		}
+		
+		.cke {
+			border-left-width: 0;
+			border-right-width: 0;
 		}
 	}
 	
@@ -1273,6 +1160,138 @@ $enable-pointer-cursor-for-buttons: true;
 	&.jeesl-editor {
 		.ui-panel-content {
 			overflow: visible;
+			
+			.jeesl-ck-editor {
+				@media (max-width: 768px) {
+					padding: 0;
+				}
+				
+				.cke {
+					border: none;
+					border-radius: $border-radius;
+					box-sizing: border-box;
+					width: 100%;
+					
+					.cke_inner {
+						border-radius: $border-radius;
+					
+						.cke_top {
+							background: transparent;
+							border: none;
+							border-radius: $border-radius-top;
+							padding: 0;
+							
+							.cke_toolbar {
+								display: flex;
+								float: none;
+									justify-content: right;
+									
+								.cke_toolgroup {
+									align-items: center;
+									display: flex;
+									padding: 0;
+									margin: 0;
+										
+									.cke_button {
+										@include button(cke_button_on);
+										
+										border: $border;
+//										border-width: $border-width 0;
+										border-width: 0 0 $border-width;
+										box-sizing: border-box;
+										cursor: pointer;
+										min-width: $element-height;
+										
+										@media (max-width: 768px) {
+											min-width: $element-height-mobile;
+										}
+										
+										&:first-child {
+											border-left: $border;
+										}
+										
+//										&:last-child {
+//											border-right: $border;
+//											border-top-right-radius: $border-radius;
+//										}
+										
+										&:after {
+											position: relative;
+											margin: 0;
+										}
+										
+										.cke_button_label {
+											display: none;
+										}
+										
+										.cke_button_icon {
+											@include icon;
+											
+											background: none !important;
+											float: none;
+											font-size: 0;
+											font-weight: bold;
+											text-align: center;
+											
+											&:before {
+												font-size: 1rem;
+												
+												@media (max-width: 768px) {
+													font-size: 1.5rem;
+												}
+											}
+											
+											&.cke_button__bold_icon:before {
+												content: '\f032';
+											}
+											
+											&.cke_button__italic_icon:before {
+												content: '\f033';
+											}
+											
+											&.cke_button__bulletedlist_icon:before {
+												content: '\f0ca';
+											}
+											
+											&.cke_button__numberedlist_icon:before {
+												content: '\f0cb';
+											}
+											
+											&.cke_button__subscript_icon:before {
+												content: '\f12c';
+											}
+											
+											&.cke_button__superscript_icon:before {
+												content: '\f12b';
+											}
+										}
+									}
+									
+									.cke_toolbar_separator {
+										background: none;
+										border-left: $border;
+										height: $element-height;
+										margin: 0;
+										width: 0;
+										
+										@media (max-width: 768px) {
+											height: $element-height-mobile;
+										}
+									}
+								}
+							}
+						}
+						
+						.cke_contents {
+							padding: $half-spacing $regular-spacing;
+							
+							@media (max-width: 768px) {
+								padding: $regular-spacing;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	
@@ -1804,7 +1823,7 @@ body, .ui-widget {
 	> a {
 		display: inline-block;
 		margin: 5px 0 0 10px;
-		width: $header-logo-width;
+		max-width: $header-logo-width;
 		
 		.jeesl-logo {
 			height: $header-logo-height;
@@ -3734,7 +3753,7 @@ body, .ui-widget {
 			}
 		}
 		
-		.ui-texteditor {
+		.ui-texteditor, .jeesl-ck-editor {
 			margin-left: -$regular-spacing;
 			margin-right: -$regular-spacing;
 			border-width: $border-width 0;
@@ -3772,7 +3791,7 @@ body, .ui-widget {
 		@include jeesl-editor-layout;
 		
 		.ui-tabs-panel {
-			.ui-texteditor {
+			.ui-texteditor, .jeesl-ck-editor {
 				margin-left: -$slim-spacing;
 				margin-right: -$slim-spacing;
 				
