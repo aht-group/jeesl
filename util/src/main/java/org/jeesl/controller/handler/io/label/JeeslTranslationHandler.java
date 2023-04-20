@@ -50,7 +50,7 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
         entities = new HashMap<String,Map<String,L>>()
         {
 			private static final long serialVersionUID = 1L;
-			
+
 			/**
 			 * Override default get function
 			 * so that we can load revision entity (Load translation for entity) on demand
@@ -99,7 +99,7 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
 				Map<String, Map<String, L>> m = super.get(key);
 				String jscn = (String)key;
 				entityJscn=jscn;
-				
+
 				try
 				{
 					if(Objects.isNull(m) && !isLoadedRevisionEntity(jscn))
@@ -118,7 +118,35 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
 			}
         };
 
-        descriptions = new HashMap<String,Map<String,Map<String,D>>>();
+        descriptions = new HashMap<String,Map<String,Map<String,D>>>()
+        {
+        	private static final long serialVersionUID = 1L;
+
+			@Override public  Map<String,Map<String,D>> get(Object key)
+			{
+				//search label map with  entity key is java simple class name of revision entity
+				Map<String, Map<String, D>> m = super.get(key);
+				String jscn = (String)key;
+				entityJscn=jscn;
+
+				try
+				{
+					if(Objects.isNull(m) && !isLoadedRevisionEntity(jscn))
+					{
+						RE re =  fRevision.fRevisionEntity(jscn);
+						load(re);
+					}
+					m = super.get(key);
+					if (Objects.nonNull(m))
+					{
+				        return m;
+				    }
+				}
+				catch(JeeslNotFoundException e) {missingLabelHandler.updateMissingRevisionEntity(jscn);}
+				return getTempDescHashtable();
+			}
+        };
+
 	}
 
 	public void reloadFromDb()
@@ -250,6 +278,24 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
 		};
 	}
 
+	private Hashtable<String, Map<String, D>> getTempDescHashtable()
+	{
+		return new Hashtable<String,Map<String,D>>()
+		{
+			final static long serialVersionUID = 1L;
+			@Override public Map<String, D> get(Object key)
+			{
+				String missingCode = (String)key;
+				Map<String, D> m = super.get(key);
+				if (Objects.nonNull(m))
+				{
+					return m;
+				}
+				return getDescMap(entityJscn,missingCode);
+			}
+		};
+	}
+
 	private Map<String,L> getLangMap(String missingEntity, String missingCode)
 	{
 		return new HashMap<String, L>()
@@ -271,6 +317,36 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
 						L l = fbRevision.getClassL().newInstance();
 						l.setLkey((String)key);
 						return l;
+					}
+					catch (InstantiationException | IllegalAccessException e)
+					{
+						return null;
+					}
+				}
+			}
+    	};
+    }
+
+	private Map<String,D> getDescMap(String missingEntity, String missingCode)
+	{
+		return new HashMap<String, D>()
+		{
+			final static long serialVersionUID = 1L;
+			@Override
+			public D get(Object key)
+			{
+				D langLabel = super.get(key);
+				if (langLabel != null)
+				{
+			        return langLabel;
+			    }
+				else
+				{
+					try
+					{
+						D d = fbRevision.getClassD().newInstance();
+						d.setLkey((String)key);
+						return d;
 					}
 					catch (InstantiationException | IllegalAccessException e)
 					{
