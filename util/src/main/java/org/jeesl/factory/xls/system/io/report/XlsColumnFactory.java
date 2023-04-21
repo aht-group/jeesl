@@ -84,8 +84,8 @@ public class XlsColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 				{
 					case none: break;
 					case auto: sheet.autoSizeColumn(i);break;
-					case min: sheet.setColumnWidth(i, ioColumn.getColumSize());break;
-					default: break;
+					case min: sheet.setColumnWidth(i, ioColumn.getColumSize()*256);break;
+				//	default: break;
 				}
 			}
         }
