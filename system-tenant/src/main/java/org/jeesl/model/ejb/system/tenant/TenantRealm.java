@@ -1,8 +1,5 @@
 package org.jeesl.model.ejb.system.tenant;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -20,13 +17,6 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 public class TenantRealm extends IoStatus implements JeeslTenantRealm<IoLang,IoDescription,TenantRealm,IoGraphic>
 {
 	public static final long serialVersionUID=1;
-
-
-	@Override public List<String> getFixedCodes()
-	{
-		List<String> fixed = new ArrayList<>();
-		return fixed;
-	}
 
 
 	@Override public boolean equals(Object object) {return (object instanceof TenantRealm) ? id == ((TenantRealm) object).getId() : (object == this);}
