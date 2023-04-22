@@ -8,9 +8,9 @@
     	<version>0.3.2-SNAPSHOT</version>
 	</parent>
 	
-    <artifactId>jeesl-io-label</artifactId>
+    <artifactId>jeesl-module-aom</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - IO Label</name>
+    <name>JEESL - Module - Asset/O+M</name>
 	
 	<dependencyManagement>
 		<dependencies>
@@ -35,12 +35,12 @@
 		<!-- JEESL -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-api</artifactId>
+    		<artifactId>jeesl-interfaces</artifactId>
     		<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
-    		<artifactId>jeesl-interfaces</artifactId>
+    		<artifactId>jeesl-api</artifactId>
     		<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -53,12 +53,37 @@
     		<artifactId>jeesl-util</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-xml</artifactId>
+    		<scope>provided</scope>
+		</dependency>
 		
-		<!-- JEESL Modules -->
+		<!-- JEESL Modles -->
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-io-cms</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-io-fr</artifactId>
+    		<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
     		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-system-security</artifactId>
+    		<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-system-tenant</artifactId>
+    		<scope>compile</scope>
 		</dependency>
 	
 		<!-- JakartaEE -->
@@ -83,23 +108,12 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- Resteasy -->
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>resteasy-client</artifactId>
-			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
-			<artifactId>jaxrs-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
+  			<groupId>org.jboss.spec.javax.ws.rs</groupId>
+  			<artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+  			<scope>provided</scope>
+  		</dependency>
+		
 
 		<!-- Commons -->
 		<dependency>
@@ -110,10 +124,10 @@
 		
 		<!-- Logging -->
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
+	  		<groupId>org.slf4j</groupId>
+	  		<artifactId>slf4j-api</artifactId>
+	  		<scope>provided</scope>
+	  	</dependency>
 		
 	</dependencies>
 </project>
