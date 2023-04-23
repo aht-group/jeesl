@@ -1,4 +1,4 @@
-package org.jeesl.mode.ejb.module.aom.event;
+package org.jeesl.model.ejb.module.aom.event;
 
 import java.util.ArrayList;
 import java.util.List;
