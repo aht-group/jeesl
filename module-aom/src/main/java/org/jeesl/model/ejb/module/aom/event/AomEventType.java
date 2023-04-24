@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("omOpE")
+@DiscriminatorValue("aomEventType")
 @EjbErNode(name="Event",category="asset",subset="moduleAsset")
 public class AomEventType extends IoStatus implements JeeslAomEventType<IoLang,IoDescription,AomEventType,IoGraphic>
 {

@@ -28,5 +28,4 @@ public class JeeslAomEventLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM
 	}
 	
 	@Override public List<ETYPE> getEventType() {return fAom.allOrderedPositionVisible(fbAom.getClassEventType());}
-
 }
