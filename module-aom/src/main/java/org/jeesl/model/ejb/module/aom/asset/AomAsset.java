@@ -24,7 +24,7 @@ import org.jeesl.model.ejb.module.aom.company.AomCompany;
 import org.jeesl.model.ejb.system.tenant.TenantRealm;
 
 @Entity
-@Table(name="AomAsset",uniqueConstraints=@UniqueConstraint(name="UC_AomAsset_realm_code",columnNames={"realm_id","realmIdentifier","code"}))
+@Table(name="AomAsset",uniqueConstraints=@UniqueConstraint(name="UC_AomAsset_realm_code",columnNames={"realm_id","rref","code"}))
 public class AomAsset implements JeeslAomAsset<TenantRealm,AomAsset,AomCompany,AomAssetStatus,AomAssetType>
 {
 	public static final long serialVersionUID=1;
@@ -39,6 +39,7 @@ public class AomAsset implements JeeslAomAsset<TenantRealm,AomAsset,AomCompany,A
 	@Override public TenantRealm getRealm() {return realm;}
 	@Override public void setRealm(TenantRealm realm) {this.realm = realm;}
 	
+	@Column(name="rref")
     private long realmIdentifier;
     @Override public long getRealmIdentifier() {return realmIdentifier;}
     @Override public void setRealmIdentifier(long realmIdentifier) {this.realmIdentifier = realmIdentifier;}

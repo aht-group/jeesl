@@ -6,6 +6,7 @@ import java.util.List;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
+import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentId;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
@@ -22,6 +23,7 @@ public interface JeeslAomAsset <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 			extends Serializable,EjbSaveable,
 					EjbWithPosition,EjbWithParentAttributeResolver,EjbWithParentId<ASSET>,
 					EjbWithNonUniqueCode,EjbWithName,EjbWithRemark,
+//					JeeslWithTenantSupport<REALM>,
 					JeeslWithStatus<STATUS>
 					
 {

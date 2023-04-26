@@ -3,6 +3,7 @@ package org.jeesl.model.ejb.module.aom.company;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -37,6 +38,7 @@ public class AomCompany implements JeeslAomCompany<TenantRealm,AomCompanyScope>
 	@Override public TenantRealm getRealm() {return realm;}
 	@Override public void setRealm(TenantRealm realm) {this.realm = realm;}
 	
+	@Column(name="rref")
     private long realmIdentifier;
     @Override public long getRealmIdentifier() {return realmIdentifier;}
     @Override public void setRealmIdentifier(long realmIdentifier) {this.realmIdentifier = realmIdentifier;}
