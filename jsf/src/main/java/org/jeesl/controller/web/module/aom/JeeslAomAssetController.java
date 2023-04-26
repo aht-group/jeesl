@@ -26,8 +26,8 @@ import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
@@ -324,11 +324,17 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     @SuppressWarnings("unchecked")
 	public void onNodeSelect(NodeSelectEvent event)
     {
-    	reset(true,true,true);
-		logger.info("Selected "+event.getTreeNode().toString());
 		asset = (ASSET)event.getTreeNode().getData();
-		reloadEvents();
+		this.selectAsset();
     }
+    
+    public void selectAsset()
+    {
+    	reset(false,true,true);
+    	logger.info(AbstractLogMessage.selectEntity(asset));
+    	reloadEvents();
+    }
+    
     
 	private void reloadEvents()
 	{
@@ -339,7 +345,10 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     {
     	logger.info(AbstractLogMessage.createEntity(fbAsset.getClassEvent()));
     	
-    	event = efEvent.build(asset,cache.getEventType().get(0),markupType);
+    	event = efEvent.build(asset,null,markupType);
+    	event.setStatus(fAom.fByEnum(fbAsset.getClassEventStatus(), JeeslAomEventStatus.Code.planned));
+    	event.setType(fAom.fByEnum(fbAsset.getClassEventType(), JeeslAomEventType.Code.check));
+    	
     	efEvent.ejb2nnb(event,nnb);
     	uiHelper.update(key,event);
     	if(frh!=null) {frh.init(event);}

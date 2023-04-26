@@ -65,14 +65,14 @@
 						<jtp:label entity="AomAsset" code="name"/>
 						<jtp:inputText value="#{cc.attrs.bean.asset.name}"/>
 						
-						<p:outputLabel value="#{msg.jeeslAssetStatus}"/>
+						<jtp:label entity="AomAsset" code="status"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.asset.status}" var="t" effect="fade" autoWidth="false" dynamic="true">
                         	<f:selectItems value="#{cc.attrs.cache.assetStatus}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
                         	<p:column><jtp:symbolizer value="#{t}"/></p:column>
 				            <p:column><h:outputText value="#{t.name[localeCode].lang}"/></p:column>
                         </p:selectOneMenu>
                         
-                        <p:outputLabel value="#{msg.jeeslAomAssetType1}"/>
+                        <jtp:label entity="AomAsset" code="type1"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.asset.type1}" var="t" effect="fade" autoWidth="false">
                         	<f:selectItems value="#{cc.attrs.cache.cachedType[cc.attrs.bean.key.typeNatural]}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
                         	<p:column><jtp:symbolizer value="#{t}"/></p:column>
@@ -85,18 +85,19 @@
                         	<f:selectItems value="#{cc.attrs.cache.cachedScopeCompanies[cc.attrs.bean.key.scopeManufacturer]}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
                         </p:selectOneMenu>
                         
-                        <p:outputLabel value="#{msg.jeeslAssetRemark}"/>
+                        <jtp:label entity="AomAsset" code="remark"/>
                         <jtp:inputRemark value="#{cc.attrs.bean.asset.remark}"/>
 					</j:inputGrid>
 				</p:panel>
 			</h:form>
 			<h:form id="fEvents" rendered="#{not empty cc.attrs.bean.asset}">
-				<p:dataTable var="e" value="#{cc.attrs.bean.lazyEvents}" lazy="true" draggableRows="false"
+				<p:dataTable styleClass="jeesl-datatable"
+								var="e" value="#{cc.attrs.bean.lazyEvents}" lazy="true" draggableRows="false"
 								selection="#{cc.attrs.bean.event}" selectionMode="single" rowKey="#{e.id}"
 								paginator="true" rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslAssetEvents}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addEvent()}" update=":#{cc.id}:fEvents :#{cc.id}:fEvent :#{cc.id}:pgFr"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addEvent()}" update=":#{cc.id}:fEvents :#{cc.id}:fEvent :#{cc.id}:pgFr"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectEvent()}" update=":#{cc.id}:sAsset"/>
@@ -121,8 +122,8 @@
 			   	</p:dataTable>
 			</h:form>
 			<h:form id="fEvent">
-				<p:panel id="pEvent" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.event}">
-					<f:facet name="header"><j:pHeader entity="JeeAttribute" code="label"/></f:facet>
+				<p:panel id="pEvent" styleClass="jeesl-panel jeesl-editor" rendered="#{not empty cc.attrs.bean.event}">
+					<f:facet name="header"><j:pHeader entity="AomEvent"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelEvent()}" update=":#{cc.id}:sAsset"/>
 						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveEvent()}"   update=":#{cc.id}:sAsset"/>
@@ -172,11 +173,12 @@
                         <p:selectOneMenu value="#{cc.attrs.bean.event.company}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.uiHelper.showCompany}">
 							<f:selectItem itemLabel="--"/>	
                         	<f:selectItems value="#{cc.attrs.bean.uiHelper.companies}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
-                        </p:selectOneMenu>                        
+                        </p:selectOneMenu>
+						                     
 					</j:inputGrid>
-					<j:inputGrid>
+					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
 						<jtp:inputMarkup value="#{cc.attrs.bean.event.markup}"/>
-					</j:inputGrid>
+					</p:panelGrid>
 				</p:panel>
 				<p:droppable for=":#{cc.id}:fEvent:pEvent" tolerance="touch">
 					<p:ajax listener="#{cc.attrs.bean.onDrop}" update="@form" />  

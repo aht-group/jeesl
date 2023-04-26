@@ -55,5 +55,4 @@ public class JeeslAomLoadingCache <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 	
 	//Event
 	@Override public List<ETYPE> getEventType() {return event.getEventType();}
-
 }

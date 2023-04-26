@@ -44,6 +44,7 @@ public class EjbAssetEventFactory<COMPANY extends JeeslAomCompany<?,?>,
 			M markup = fbAsset.getClassMarkup().newInstance();
 			markup.setLkey(JeeslLocale.none);
 			markup.setType(markupType);
+			markup.setContent("");
 			
 			EVENT ejb = fbAsset.getClassEvent().newInstance();
 			ejb.getAssets().add(asset);

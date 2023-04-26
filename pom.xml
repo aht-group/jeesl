@@ -38,6 +38,7 @@
 		<module>io-fr</module>
 		<module>io-ssi</module>
 		
+		<module>module-aom</module>
 		<module>module-news</module>
 		<module>module-ts</module>
 		
@@ -206,11 +207,12 @@
         		<version>${project.version}</version>
         	</dependency>
 
+			<!-- 2023-04-02 tk trying to remove -->
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jaxb-provider</artifactId>
 				<version>2.2.1.GA</version>
-			</dependency>
+			</dependency> 
 		</dependencies>
 	</dependencyManagement>
 	
