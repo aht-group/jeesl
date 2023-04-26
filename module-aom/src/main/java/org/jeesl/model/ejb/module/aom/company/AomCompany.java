@@ -2,6 +2,7 @@ package org.jeesl.model.ejb.module.aom.company;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,10 +62,10 @@ public class AomCompany implements JeeslAomCompany<TenantRealm,AomCompanyScope>
 	@JoinTable(name="AomCompanyJtScope",joinColumns={@JoinColumn(name="company_id")},inverseJoinColumns={@JoinColumn(name="scope_id")},uniqueConstraints=@UniqueConstraint(columnNames={"company_id","scope_id"}))
 	@OrderBy("position ASC")
 	private List<AomCompanyScope> scopes;
-	public List<AomCompanyScope> getScopes(){if(scopes==null){scopes = new ArrayList<AomCompanyScope>();}return scopes;}
+	public List<AomCompanyScope> getScopes() {if(Objects.isNull(scopes)) {scopes = new ArrayList<>();} return scopes;}
 	public void setScopes(List<AomCompanyScope> scopes){this.scopes = scopes;}
 
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof AomCompany) ? id == ((AomCompany) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
 

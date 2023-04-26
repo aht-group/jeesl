@@ -61,14 +61,14 @@ public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,Io
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="AomViewJtLang",joinColumns={@JoinColumn(name="view_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {if(Objects.isNull(name)) {name=new HashMap<>();} return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="AomViewJtDescription",joinColumns={@JoinColumn(name="view_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
@@ -80,7 +80,7 @@ public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,Io
 	@Override public IoGraphic getGraphic() {return graphic;}
 	@Override public void setGraphic(IoGraphic graphic) {this.graphic = graphic;}
 
-	@NotNull	//JeeslAomView.Tree enum
+	@NotNull
 	private String tree;
 	@Override public String getTree() {return tree;}
 	@Override public void setTree(String tree) {this.tree = tree;}

@@ -34,7 +34,8 @@ import org.jeesl.model.ejb.system.security.user.SecurityUser;
 public class AomEvent implements JeeslAomEvent<AomCompany,AomAsset,AomEventType,AomEventStatus,IoMarkup,SecurityUser,IoFileContainer>
 {
 	public static final long serialVersionUID=1;
-		
+
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
     @Override public long getId() {return id;}

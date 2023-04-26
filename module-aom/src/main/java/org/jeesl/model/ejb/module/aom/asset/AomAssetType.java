@@ -37,6 +37,7 @@ public class AomAssetType implements JeeslAomAssetType<IoLang,IoDescription,Tena
 {
 	public static final long serialVersionUID=1;
 
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}
@@ -88,7 +89,7 @@ public class AomAssetType implements JeeslAomAssetType<IoLang,IoDescription,Tena
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="parent")
 	@OrderBy("position ASC")
 	private List<AomAssetType> types;
-	@Override public List<AomAssetType> getTypes() {if(Objects.isNull(types)) {types = new ArrayList<AomAssetType>();} return types;}
+	@Override public List<AomAssetType> getTypes() {if(Objects.isNull(types)) {types = new ArrayList<>();} return types;}
 	@Override public void setTypes(List<AomAssetType> types) {this.types = types;}
 
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
