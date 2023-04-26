@@ -35,7 +35,7 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 public class AomAssetType implements JeeslAomAssetType<IoLang,IoDescription,TenantRealm,AomAssetType,AomView,IoGraphic>
 {
 	public static final long serialVersionUID=1;
-		
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
     @Override public long getId() {return id;}
@@ -45,51 +45,51 @@ public class AomAssetType implements JeeslAomAssetType<IoLang,IoDescription,Tena
     private TenantRealm realm;
 	@Override public TenantRealm getRealm() {return realm;}
 	@Override public void setRealm(TenantRealm realm) {this.realm = realm;}
-	
+
 	@Column(name="rref")
     private long realmIdentifier;
     @Override public long getRealmIdentifier() {return realmIdentifier;}
     @Override public void setRealmIdentifier(long realmIdentifier) {this.realmIdentifier = realmIdentifier;}
-    
+   
     @NotNull @ManyToOne
     private AomView view;
     @Override public AomView getView() {return view;}
     @Override public void setView(AomView view) {this.view = view;}
-	
+
     @Override public String resolveParentAttribute() {return JeeslAomAssetType.Attributes.parent.toString();}
     @ManyToOne
     private AomAssetType parent;
     @Override public AomAssetType getParent() {return parent;}
     @Override public void setParent(AomAssetType parent) {this.parent = parent;}
-	
+
 	private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
-	
+
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="AomAssetTypeJtLang",joinColumns={@JoinColumn(name="type_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
-	protected Map<String,IoLang> name;
+	@MapKey(name="lkey")
+	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {if(name==null){name=new HashMap<String,IoLang>();}return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@MapKey(name="lkey")
 	@JoinTable(name="AssetTypeJtDescription",joinColumns={@JoinColumn(name="type_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
-	protected Map<String,IoDescription> description;
+	@MapKey(name="lkey")
+	private Map<String,IoDescription> description;
 	@Override public Map<String, IoDescription> getDescription() {if(description==null){description=new HashMap<String,IoDescription>();}return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="parent")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="parent")
 	@OrderBy("position ASC")
 	private List<AomAssetType> types;
 	@Override public List<AomAssetType> getTypes() {if(types==null){types = new ArrayList<AomAssetType>();}return types;}
 	@Override public void setTypes(List<AomAssetType> types) {this.types = types;}
-	
+
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private IoGraphic graphic;
 	@Override public IoGraphic getGraphic() {return graphic;}
@@ -98,7 +98,7 @@ public class AomAssetType implements JeeslAomAssetType<IoLang,IoDescription,Tena
 
 	@Override public boolean equals(Object object) {return (object instanceof AomAssetType) ? id == ((AomAssetType) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

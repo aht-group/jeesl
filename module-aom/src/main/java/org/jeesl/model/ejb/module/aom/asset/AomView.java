@@ -32,7 +32,8 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,IoGraphic>
 {
 	public static final long serialVersionUID=1;
-		
+
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
     @Override public long getId() {return id;}
@@ -42,19 +43,19 @@ public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,Io
     private TenantRealm realm;
 	@Override public TenantRealm getRealm() {return realm;}
 	@Override public void setRealm(TenantRealm realm) {this.realm = realm;}
-	
+
     private long rref;
     @Override public long getRref() {return rref;}
     @Override public void setRref(long rref) {this.rref = rref;}
-		
+
 	private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
-	
+
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
-	
+
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
@@ -63,14 +64,14 @@ public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,Io
 	@JoinTable(name="AomViewJtLang",joinColumns={@JoinColumn(name="view_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
-	@Override public Map<String,IoLang> getName() {if(name==null){name=new HashMap<String,IoLang>();}return name;}
+	@Override public Map<String,IoLang> getName() {if(name==null){name=new HashMap<>();} return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="AomViewJtDescription",joinColumns={@JoinColumn(name="view_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
-	@Override public Map<String,IoDescription> getDescription() {if(description==null){description=new HashMap<String,IoDescription>();}return description;}
+	@Override public Map<String,IoDescription> getDescription() {if(description==null){description=new HashMap<>();} return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
@@ -86,7 +87,7 @@ public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,Io
 
 	@Override public boolean equals(Object object) {return (object instanceof AomView) ? id == ((AomView) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

@@ -27,7 +27,7 @@ public class AomAssetStatus extends IoStatus implements JeeslAomAssetStatus<IoLa
 		for(JeeslAomAssetStatus.Code c : JeeslAomAssetStatus.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof AomAssetStatus) ? id == ((AomAssetStatus) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(19,21).append(id).toHashCode();}
 }
