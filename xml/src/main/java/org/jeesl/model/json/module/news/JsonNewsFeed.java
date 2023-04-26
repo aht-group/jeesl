@@ -3,6 +3,8 @@ package org.jeesl.model.json.module.news;
 import java.io.Serializable;
 import java.util.List;
 
+import org.jeesl.model.json.io.label.JsonTranslation;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -12,6 +14,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class JsonNewsFeed implements Serializable
 {
 	public static final long serialVersionUID=1;
+
+	@JsonProperty("translations")
+	private List<JsonTranslation> translations;
+	public List<JsonTranslation> getTranslations() {return translations;}
+	public void setTranslations(List<JsonTranslation> translations) {this.translations = translations;}
 
 	@JsonProperty("id")
 	private Long id;

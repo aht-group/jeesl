@@ -38,6 +38,9 @@ public class JeeslNewsGenericRestHandler <R extends JeeslTenantRealm<?,?,R,?>,
 	
 	@Override public JsonNewsFeed feed(Long realmId, Long feedId, String localeCode)
 	{
+		if (localeCode == null || localeCode.length() < 2) { localeCode = "en"; }
+		localeCode = localeCode.substring(0, 2);
+		
 		JsonNewsFeed json = new JsonNewsFeed();
 		try
 		{
