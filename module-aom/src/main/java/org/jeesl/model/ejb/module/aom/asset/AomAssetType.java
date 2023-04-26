@@ -39,29 +39,29 @@ public class AomAssetType implements JeeslAomAssetType<IoLang,IoDescription,Tena
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-    @Override public long getId() {return id;}
-    @Override public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 
 	@NotNull @ManyToOne
-    private TenantRealm realm;
+	private TenantRealm realm;
 	@Override public TenantRealm getRealm() {return realm;}
 	@Override public void setRealm(TenantRealm realm) {this.realm = realm;}
 
 	@Column(name="rref")
-    private long realmIdentifier;
-    @Override public long getRealmIdentifier() {return realmIdentifier;}
-    @Override public void setRealmIdentifier(long realmIdentifier) {this.realmIdentifier = realmIdentifier;}
-   
-    @NotNull @ManyToOne
-    private AomView view;
-    @Override public AomView getView() {return view;}
-    @Override public void setView(AomView view) {this.view = view;}
+	private long realmIdentifier;
+	@Override public long getRealmIdentifier() {return realmIdentifier;}
+	@Override public void setRealmIdentifier(long realmIdentifier) {this.realmIdentifier = realmIdentifier;}
 
-    @Override public String resolveParentAttribute() {return JeeslAomAssetType.Attributes.parent.toString();}
-    @ManyToOne
-    private AomAssetType parent;
-    @Override public AomAssetType getParent() {return parent;}
-    @Override public void setParent(AomAssetType parent) {this.parent = parent;}
+	@NotNull @ManyToOne
+	private AomView view;
+	@Override public AomView getView() {return view;}
+	@Override public void setView(AomView view) {this.view = view;}
+
+	@Override public String resolveParentAttribute() {return JeeslAomAssetType.Attributes.parent.toString();}
+	@ManyToOne
+	private AomAssetType parent;
+	@Override public AomAssetType getParent() {return parent;}
+	@Override public void setParent(AomAssetType parent) {this.parent = parent;}
 
 	private String code;
 	@Override public String getCode() {return code;}
@@ -79,7 +79,7 @@ public class AomAssetType implements JeeslAomAssetType<IoLang,IoDescription,Tena
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(name="AssetTypeJtDescription",joinColumns={@JoinColumn(name="type_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
+	@JoinTable(name="AomAssetTypeJtDescription",joinColumns={@JoinColumn(name="type_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
 	@Override public Map<String,IoDescription> getDescription() {if(Objects.isNull(description)) {description = new HashMap<>();} return description;}
