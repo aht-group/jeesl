@@ -60,7 +60,8 @@ public class AomEvent implements JeeslAomEvent<AomCompany,AomAsset,AomEventType,
 	@Override public Date getRecord() {return record;}
 	@Override public void setRecord(Date record) {this.record = record;}
 	
-	@NotNull private String name;
+	@NotNull
+	private String name;
 	@Override public String getName() {return name;}
 	@Override public void setName(String name) {this.name = name;}
 

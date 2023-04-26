@@ -29,44 +29,44 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 public class AomAsset implements JeeslAomAsset<TenantRealm,AomAsset,AomCompany,AomAssetStatus,AomAssetType>
 {
 	public static final long serialVersionUID=1;
-		
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-    @Override public long getId() {return id;}
-    @Override public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 
 	@NotNull @ManyToOne
-    private TenantRealm realm;
+	private TenantRealm realm;
 	@Override public TenantRealm getRealm() {return realm;}
 	@Override public void setRealm(TenantRealm realm) {this.realm = realm;}
 
 	@Column(name="rref")
-    private long realmIdentifier;
-    @Override public long getRealmIdentifier() {return realmIdentifier;}
-    @Override public void setRealmIdentifier(long realmIdentifier) {this.realmIdentifier = realmIdentifier;}
+	private long realmIdentifier;
+	@Override public long getRealmIdentifier() {return realmIdentifier;}
+	@Override public void setRealmIdentifier(long realmIdentifier) {this.realmIdentifier = realmIdentifier;}
 
-    @Override public String resolveParentAttribute() {return JeeslAomAsset.Attributes.parent.toString();}
-    @ManyToOne
-    private AomAsset parent;
-    @Override public AomAsset getParent() {return parent;}
-    @Override public void setParent(AomAsset parent) {this.parent = parent;}
+	@Override public String resolveParentAttribute() {return JeeslAomAsset.Attributes.parent.toString();}
+	@ManyToOne
+	private AomAsset parent;
+	@Override public AomAsset getParent() {return parent;}
+	@Override public void setParent(AomAsset parent) {this.parent = parent;}
 
 	private String code;
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
-   
+
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
 
 	private String name;
-    @Override public String getName() {return name;}
-    @Override public void setName(String name) {this.name = name;}
-   
-    @NotNull @ManyToOne
-    private AomAssetStatus status;
-    @Override public AomAssetStatus getStatus() {return status;}
-    @Override public void setStatus(AomAssetStatus status) {this.status = status;}
+	@Override public String getName() {return name;}
+	@Override public void setName(String name) {this.name = name;}
+
+	@NotNull @ManyToOne
+	private AomAssetStatus status;
+	@Override public AomAssetStatus getStatus() {return status;}
+	@Override public void setStatus(AomAssetStatus status) {this.status = status;}
 
 	@NotNull @ManyToOne
 	private AomAssetType type1;
@@ -80,8 +80,8 @@ public class AomAsset implements JeeslAomAsset<TenantRealm,AomAsset,AomCompany,A
 
 	@ManyToOne
 	private AomCompany manufacturer;
-	public AomCompany getManufacturer() {return manufacturer;}
-	public void setManufacturer(AomCompany manufacturer) {this.manufacturer = manufacturer;}
+	@Override public AomCompany getManufacturer() {return manufacturer;}
+	@Override public void setManufacturer(AomCompany manufacturer) {this.manufacturer = manufacturer;}
 
 	@NotNull @Basic @Column(columnDefinition="text")
 	private String remark;
@@ -97,7 +97,7 @@ public class AomAsset implements JeeslAomAsset<TenantRealm,AomAsset,AomCompany,A
 
 	@Override public boolean equals(Object object) {return (object instanceof AomAsset) ? id == ((AomAsset) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

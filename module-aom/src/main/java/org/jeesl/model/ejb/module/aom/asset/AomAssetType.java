@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -74,20 +75,20 @@ public class AomAssetType implements JeeslAomAssetType<IoLang,IoDescription,Tena
 	@JoinTable(name="AomAssetTypeJtLang",joinColumns={@JoinColumn(name="type_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
-	@Override public Map<String,IoLang> getName() {if(name==null){name=new HashMap<String,IoLang>();}return name;}
+	@Override public Map<String,IoLang> getName() {if(Objects.isNull(name)) {name=new HashMap<>();} return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="AssetTypeJtDescription",joinColumns={@JoinColumn(name="type_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
-	@Override public Map<String, IoDescription> getDescription() {if(description==null){description=new HashMap<String,IoDescription>();}return description;}
+	@Override public Map<String,IoDescription> getDescription() {if(Objects.isNull(description)) {description = new HashMap<>();} return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="parent")
 	@OrderBy("position ASC")
 	private List<AomAssetType> types;
-	@Override public List<AomAssetType> getTypes() {if(types==null){types = new ArrayList<AomAssetType>();}return types;}
+	@Override public List<AomAssetType> getTypes() {if(Objects.isNull(types)) {types = new ArrayList<AomAssetType>();} return types;}
 	@Override public void setTypes(List<AomAssetType> types) {this.types = types;}
 
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
