@@ -56,11 +56,11 @@ public class AomEvent implements JeeslAomEvent<AomCompany,AomAsset,AomEventType,
 	private AomEventStatus status;
 	@Override public AomEventStatus getStatus() {return status;}
 	@Override public void setStatus(AomEventStatus status) {this.status = status;}
-	
+
 	private Date record;
 	@Override public Date getRecord() {return record;}
 	@Override public void setRecord(Date record) {this.record = record;}
-	
+
 	@NotNull
 	private String name;
 	@Override public String getName() {return name;}
@@ -70,7 +70,7 @@ public class AomEvent implements JeeslAomEvent<AomCompany,AomAsset,AomEventType,
 	private String remark;
 	@Override public String getRemark() {return remark;}
 	@Override public void setRemark(String remark) {this.remark = remark;}
-	
+
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private IoMarkup markup;
 	@Override public IoMarkup getMarkup() {return markup;}
@@ -80,20 +80,20 @@ public class AomEvent implements JeeslAomEvent<AomCompany,AomAsset,AomEventType,
 	private AomCompany company;
 	@Override public AomCompany getCompany() {return company;}
 	@Override public void setCompany(AomCompany company) {this.company = company;}
-	
+
 	private Double amount;
 	@Override public Double getAmount() {return amount;}
 	@Override public void setAmount(Double amount) {this.amount = amount;}
-	
+
 	@OneToOne
 	private IoFileContainer frContainer;
 	@Override public IoFileContainer getFrContainer() {return frContainer;}
 	@Override public void setFrContainer(IoFileContainer frContainer) {this.frContainer = frContainer;}
 
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof AomEvent) ? id == ((AomEvent) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
