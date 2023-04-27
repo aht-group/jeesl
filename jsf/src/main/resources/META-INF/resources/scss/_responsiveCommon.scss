@@ -1213,6 +1213,10 @@ $border: $border-width solid $border-colour;
 	&.ui-icon-circle-triangle-e:before {
 		content: $icon-next;
 	}
+	
+	&.ui-icon-arrow-4:before {
+		content: $icon-all-arrows;
+	}
 }
 
 .ui-spinner {
