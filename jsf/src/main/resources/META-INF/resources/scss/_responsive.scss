@@ -3401,6 +3401,10 @@ body, .ui-widget {
 	line-height: 1.25em;
 	
 	@for $i from 1 to 13 {
+		.jeesl-row-#{$i} {
+			width: calc((100% / 12) * #{$i});
+		}
+		
 		.jeesl-grid-#{$i} {
 			width: calc((100% / 12) * #{$i} - (2 * #{$half-spacing}));
 			display: inline-block;

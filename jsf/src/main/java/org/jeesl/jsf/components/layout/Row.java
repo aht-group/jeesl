@@ -14,7 +14,7 @@ import org.jeesl.jsf.util.ComponentAttribute;
 @FacesComponent("org.jeesl.jsf.components.layout.Row")
 public class Row extends UIPanel
 {	
-	private static enum Properties {renderChildren,renderChildrenIfEjb,renderChildrenIfEjbPersisted}
+	private static enum Properties {width,renderChildren,renderChildrenIfEjb,renderChildrenIfEjbPersisted}
 	
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException
@@ -22,7 +22,12 @@ public class Row extends UIPanel
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.startElement("div", this);
 		responseWriter.writeAttribute("id",getClientId(context),"id");
-		responseWriter.writeAttribute("class", "jeesl-row", null);
+
+		StringBuffer sbStyleClass = new StringBuffer();
+		sbStyleClass.append("jeesl-row jeesl-row-");
+		sbStyleClass.append(ComponentAttribute.get(Properties.width, "12", context, this));
+
+		responseWriter.writeAttribute("class", sbStyleClass, null);
 	}
 
 	@Override

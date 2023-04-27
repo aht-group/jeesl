@@ -5510,6 +5510,8 @@ body, .ui-widget {
 
 .jeesl-content-container, .jeesl-overlay-container {
   line-height: 1.25em; }
+  .jeesl-content-container .jeesl-row-1, .jeesl-overlay-container .jeesl-row-1 {
+    width: calc((100% / 12) * 1); }
   .jeesl-content-container .jeesl-grid-1, .jeesl-overlay-container .jeesl-grid-1 {
     width: calc((100% / 12) * 1 - (2 * 5px));
     display: inline-block;
@@ -5521,6 +5523,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-1, .jeesl-overlay-container .height-balance-container .jeesl-grid-1 {
     width: calc((100% / 12) * 1 - 5px); }
+  .jeesl-content-container .jeesl-row-2, .jeesl-overlay-container .jeesl-row-2 {
+    width: calc((100% / 12) * 2); }
   .jeesl-content-container .jeesl-grid-2, .jeesl-overlay-container .jeesl-grid-2 {
     width: calc((100% / 12) * 2 - (2 * 5px));
     display: inline-block;
@@ -5532,6 +5536,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-2, .jeesl-overlay-container .height-balance-container .jeesl-grid-2 {
     width: calc((100% / 12) * 2 - 5px); }
+  .jeesl-content-container .jeesl-row-3, .jeesl-overlay-container .jeesl-row-3 {
+    width: calc((100% / 12) * 3); }
   .jeesl-content-container .jeesl-grid-3, .jeesl-overlay-container .jeesl-grid-3 {
     width: calc((100% / 12) * 3 - (2 * 5px));
     display: inline-block;
@@ -5543,6 +5549,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-3, .jeesl-overlay-container .height-balance-container .jeesl-grid-3 {
     width: calc((100% / 12) * 3 - 5px); }
+  .jeesl-content-container .jeesl-row-4, .jeesl-overlay-container .jeesl-row-4 {
+    width: calc((100% / 12) * 4); }
   .jeesl-content-container .jeesl-grid-4, .jeesl-overlay-container .jeesl-grid-4 {
     width: calc((100% / 12) * 4 - (2 * 5px));
     display: inline-block;
@@ -5554,6 +5562,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-4, .jeesl-overlay-container .height-balance-container .jeesl-grid-4 {
     width: calc((100% / 12) * 4 - 5px); }
+  .jeesl-content-container .jeesl-row-5, .jeesl-overlay-container .jeesl-row-5 {
+    width: calc((100% / 12) * 5); }
   .jeesl-content-container .jeesl-grid-5, .jeesl-overlay-container .jeesl-grid-5 {
     width: calc((100% / 12) * 5 - (2 * 5px));
     display: inline-block;
@@ -5565,6 +5575,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-5, .jeesl-overlay-container .height-balance-container .jeesl-grid-5 {
     width: calc((100% / 12) * 5 - 5px); }
+  .jeesl-content-container .jeesl-row-6, .jeesl-overlay-container .jeesl-row-6 {
+    width: calc((100% / 12) * 6); }
   .jeesl-content-container .jeesl-grid-6, .jeesl-overlay-container .jeesl-grid-6 {
     width: calc((100% / 12) * 6 - (2 * 5px));
     display: inline-block;
@@ -5576,6 +5588,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-6, .jeesl-overlay-container .height-balance-container .jeesl-grid-6 {
     width: calc((100% / 12) * 6 - 5px); }
+  .jeesl-content-container .jeesl-row-7, .jeesl-overlay-container .jeesl-row-7 {
+    width: calc((100% / 12) * 7); }
   .jeesl-content-container .jeesl-grid-7, .jeesl-overlay-container .jeesl-grid-7 {
     width: calc((100% / 12) * 7 - (2 * 5px));
     display: inline-block;
@@ -5587,6 +5601,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-7, .jeesl-overlay-container .height-balance-container .jeesl-grid-7 {
     width: calc((100% / 12) * 7 - 5px); }
+  .jeesl-content-container .jeesl-row-8, .jeesl-overlay-container .jeesl-row-8 {
+    width: calc((100% / 12) * 8); }
   .jeesl-content-container .jeesl-grid-8, .jeesl-overlay-container .jeesl-grid-8 {
     width: calc((100% / 12) * 8 - (2 * 5px));
     display: inline-block;
@@ -5598,6 +5614,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-8, .jeesl-overlay-container .height-balance-container .jeesl-grid-8 {
     width: calc((100% / 12) * 8 - 5px); }
+  .jeesl-content-container .jeesl-row-9, .jeesl-overlay-container .jeesl-row-9 {
+    width: calc((100% / 12) * 9); }
   .jeesl-content-container .jeesl-grid-9, .jeesl-overlay-container .jeesl-grid-9 {
     width: calc((100% / 12) * 9 - (2 * 5px));
     display: inline-block;
@@ -5609,6 +5627,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-9, .jeesl-overlay-container .height-balance-container .jeesl-grid-9 {
     width: calc((100% / 12) * 9 - 5px); }
+  .jeesl-content-container .jeesl-row-10, .jeesl-overlay-container .jeesl-row-10 {
+    width: calc((100% / 12) * 10); }
   .jeesl-content-container .jeesl-grid-10, .jeesl-overlay-container .jeesl-grid-10 {
     width: calc((100% / 12) * 10 - (2 * 5px));
     display: inline-block;
@@ -5620,6 +5640,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-10, .jeesl-overlay-container .height-balance-container .jeesl-grid-10 {
     width: calc((100% / 12) * 10 - 5px); }
+  .jeesl-content-container .jeesl-row-11, .jeesl-overlay-container .jeesl-row-11 {
+    width: calc((100% / 12) * 11); }
   .jeesl-content-container .jeesl-grid-11, .jeesl-overlay-container .jeesl-grid-11 {
     width: calc((100% / 12) * 11 - (2 * 5px));
     display: inline-block;
@@ -5631,6 +5653,8 @@ body, .ui-widget {
         width: calc(100% - 10px); } }
   .jeesl-content-container .height-balance-container .jeesl-grid-11, .jeesl-overlay-container .height-balance-container .jeesl-grid-11 {
     width: calc((100% / 12) * 11 - 5px); }
+  .jeesl-content-container .jeesl-row-12, .jeesl-overlay-container .jeesl-row-12 {
+    width: calc((100% / 12) * 12); }
   .jeesl-content-container .jeesl-grid-12, .jeesl-overlay-container .jeesl-grid-12 {
     width: calc((100% / 12) * 12 - (2 * 5px));
     display: inline-block;
