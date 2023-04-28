@@ -299,6 +299,7 @@ $border: $border-width solid $border-colour;
     font-size: inherit;
 	font-weight: 700;
 	height: auto;
+	line-height: normal;
 	margin: 0;
 	position: relative;
     text-indent: 0;
@@ -1163,13 +1164,31 @@ $border: $border-width solid $border-colour;
 
 .ui-icon {
 	@include icon;
+		
+	&.ui-icon-calendar:before {
+		content: $icon-calendar;
+	}
 	
-	&.ui-icon-search:before {
-		content: $icon-search;
+	&.ui-icon-check:before {
+		content: $icon-check;
+	}
+		
+	&.ui-icon-close, &.ui-icon-circle-close, &.ui-icon-closethick {
+		&:before {
+			content: $icon-close;
+		}
+	}
+	
+	&.ui-icon-pencil:before {
+		content: $icon-pencil;
 	}
 	
 	&.ui-icon-plusthick:before {
 		content: $icon-plus;
+	}
+	
+	&.ui-icon-search:before {
+		content: $icon-search;
 	}
 		
 	&.ui-icon-seek-first:before {
@@ -1186,16 +1205,6 @@ $border: $border-width solid $border-colour;
 	
 	&.ui-icon-seek-end:before {
 		content: $icon-end;
-	}
-		
-	&.ui-icon-close, &.ui-icon-circle-close, &.ui-icon-closethick {
-		&:before {
-			content: $icon-close;
-		}
-	}
-		
-	&.ui-icon-calendar:before {
-		content: $icon-calendar;
 	}
 	
 	&.ui-icon-triangle-1-n:before {

@@ -509,6 +509,7 @@ $enable-pointer-cursor-for-buttons: true;
 	border: none;
 	border-bottom: $header-underline;
 	box-shadow: $header-shadow;
+	box-sizing: content-box;
 	color: $foreground;
 	display: flex;
 	flex-wrap: wrap;
@@ -3399,9 +3400,9 @@ body, .ui-widget {
 			max-height: calc(#{$element-height-mobile} - 2 * #{$half-spacing});
 		}
 		
-		.ui-datatable-header {
-			border-width: $border-width $border-width 0;
-		}
+//		.ui-datatable-header {
+//			border-width: $border-width $border-width 0;
+//		}
 	}
 }
 
