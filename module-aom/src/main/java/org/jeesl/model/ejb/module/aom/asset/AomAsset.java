@@ -28,7 +28,7 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 @Table(name="AomAsset",uniqueConstraints=@UniqueConstraint(name="UC_AomAsset_realm_code",columnNames={"realm_id","rref","code"}))
 public class AomAsset implements JeeslAomAsset<TenantRealm,AomAsset,AomCompany,AomAssetStatus,AomAssetType>
 {
-	public static final long serialVersionUID=1;
+	public static final long serialVersionUID = 1;
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;

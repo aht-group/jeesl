@@ -28,7 +28,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.system.tenant.TenantRealm;
 
 @Entity
-@Table(name="AomView",uniqueConstraints= {@UniqueConstraint(name="UC_AomView_realm_code",columnNames={"realm_id","rref","code"}),
+@Table(name="AomView",uniqueConstraints={@UniqueConstraint(name="UC_AomView_realm_code",columnNames={"realm_id","rref","code"}),
 										  @UniqueConstraint(name="UC_AomView_realm_tree",columnNames={"realm_id","rref","tree"})})
 public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,IoGraphic>
 {
@@ -65,14 +65,14 @@ public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,Io
 	@JoinTable(name="AomViewJtLang",joinColumns={@JoinColumn(name="view_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
-	@Override public Map<String,IoLang> getName() {if(Objects.isNull(name)) {name=new HashMap<>();} return name;}
+	@Override public Map<String,IoLang> getName() {if(Objects.isNull(name)) {name = new HashMap<>();} return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(name="AomViewJtDescription",joinColumns={@JoinColumn(name="view_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoDescription> description;
-	@Override public Map<String,IoDescription> getDescription() {if(Objects.isNull(description)) {description=new HashMap<>();} return description;}
+	@Override public Map<String,IoDescription> getDescription() {if(Objects.isNull(description)) {description = new HashMap<>();} return description;}
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
@@ -86,7 +86,7 @@ public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,Io
 	@Override public void setTree(String tree) {this.tree = tree;}
 
 
-	@Override public boolean equals(Object object) {return (object instanceof AomView) ? id == ((AomView) object).getId() : (object == this);}
+	@Override public boolean equals(Object o) {return (o instanceof AomView) ? id == ((AomView)o).getId() : (o == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
 
 	@Override public String toString()
