@@ -32,7 +32,7 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 										  @UniqueConstraint(name="UC_AomView_realm_tree",columnNames={"realm_id","rref","tree"})})
 public class AomView implements JeeslAomView<IoLang,IoDescription,TenantRealm,IoGraphic>
 {
-	public static final long serialVersionUID=1;
+	public static final long serialVersionUID = 1;
 
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)

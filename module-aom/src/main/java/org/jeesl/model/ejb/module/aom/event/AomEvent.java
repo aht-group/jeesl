@@ -38,14 +38,14 @@ public class AomEvent implements JeeslAomEvent<AomCompany,AomAsset,AomEventType,
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-    @Override public long getId() {return id;}
-    @Override public void setId(long id) {this.id = id;}
+	@Override public long getId() {return id;}
+	@Override public void setId(long id) {this.id = id;}
 
-    @ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="AomEventJtAsset",joinColumns={@JoinColumn(name="event_id")},inverseJoinColumns={@JoinColumn(name="asset_id")},uniqueConstraints=@UniqueConstraint(columnNames={"event_id","asset_id"}))
 	private List<AomAsset> assets;
-    @Override public List<AomAsset> getAssets() {if(assets==null) {assets = new ArrayList<>();} return assets;}
-    @Override public void setAssets(List<AomAsset> assets) {this.assets = assets;}
+	@Override public List<AomAsset> getAssets() {if(assets==null) {assets = new ArrayList<>();} return assets;}
+	@Override public void setAssets(List<AomAsset> assets) {this.assets = assets;}
 
 	@NotNull @ManyToOne
 	private AomEventType type;
