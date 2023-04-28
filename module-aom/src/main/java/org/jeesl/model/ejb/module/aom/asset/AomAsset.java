@@ -30,6 +30,7 @@ public class AomAsset implements JeeslAomAsset<TenantRealm,AomAsset,AomCompany,A
 {
 	public static final long serialVersionUID = 1;
 
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}
@@ -88,14 +89,14 @@ public class AomAsset implements JeeslAomAsset<TenantRealm,AomAsset,AomCompany,A
 	@Override public String getRemark() {return remark;}
 	@Override public void setRemark(String remark) {this.remark = remark;}
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="parent")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="parent")
 	@OrderBy("position ASC")
 	private List<AomAsset> assets;
-	@Override public List<AomAsset> getAssets() {if (Objects.isNull(assets)) {this.assets = new ArrayList<>(); } return this.assets;}
+	@Override public List<AomAsset> getAssets() {if(Objects.isNull(assets)) {this.assets = new ArrayList<>(); } return this.assets;}
 	@Override public void setAssets(List<AomAsset> assets) {this.assets = assets;}
 
 
-	@Override public boolean equals(Object object) {return (object instanceof AomAsset) ? id == ((AomAsset) object).getId() : (object == this);}
+	@Override public boolean equals(Object o) {return (o instanceof AomAsset) ? id == ((AomAsset)o).getId() : (o == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
 
 	@Override public String toString()

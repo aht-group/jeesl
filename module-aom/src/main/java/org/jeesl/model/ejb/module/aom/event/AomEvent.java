@@ -33,7 +33,7 @@ import org.jeesl.model.ejb.system.security.user.SecurityUser;
 @Table(name="AomEvent")
 public class AomEvent implements JeeslAomEvent<AomCompany,AomAsset,AomEventType,AomEventStatus,IoMarkup,SecurityUser,IoFileContainer>
 {
-	public static final long serialVersionUID=1;
+	public static final long serialVersionUID = 1;
 
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -91,7 +91,7 @@ public class AomEvent implements JeeslAomEvent<AomCompany,AomAsset,AomEventType,
 	@Override public void setFrContainer(IoFileContainer frContainer) {this.frContainer = frContainer;}
 
 
-	@Override public boolean equals(Object object) {return (object instanceof AomEvent) ? id == ((AomEvent) object).getId() : (object == this);}
+	@Override public boolean equals(Object o) {return (o instanceof AomEvent) ? id == ((AomEvent)o).getId() : (o == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,51).append(id).toHashCode();}
 
 	@Override public String toString()
