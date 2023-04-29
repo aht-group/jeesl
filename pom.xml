@@ -40,6 +40,7 @@
 		
 		<module>module-aom</module>
 		<module>module-news</module>
+		<module>module-tafu</module>
 		<module>module-ts</module>
 		
 		<module>system-bookmark</module>
