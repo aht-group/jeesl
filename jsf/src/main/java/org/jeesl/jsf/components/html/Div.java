@@ -34,8 +34,7 @@ public class Div extends UIPanel
 	@Override
 	public void encodeChildren(FacesContext context) throws IOException
 	{
-		ResponseWriter responseWriter = context.getResponseWriter();
-		responseWriter.write("test");
+//		ResponseWriter responseWriter = context.getResponseWriter();
 		if(ComponentAttribute.getBoolean(Properties.renderChildren, true, context, this))
 		{
 			for(UIComponent uic : this.getChildren())
