@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarWeekOfYear;
+import org.jeesl.interfaces.model.module.calendar.unit.JeeslCalendarWeekOfMonth;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -17,7 +17,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("calendarWeekOfMonth")
 @EjbErNode(name="Woche",category="mj",level=3,subset="mj")
-public class CalWeekOfMonth extends IoStatus implements JeeslCalendarWeekOfYear<IoLang,IoDescription,CalWeekOfMonth,IoGraphic>
+public class CalWeekOfMonth extends IoStatus implements JeeslCalendarWeekOfMonth<IoLang,IoDescription,CalWeekOfMonth,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 	

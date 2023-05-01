@@ -10,11 +10,15 @@ import javax.faces.context.ResponseWriter;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.util.ComponentAttribute;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @FacesComponent("org.jeesl.jsf.components.layout.Row")
 public class Row extends UIPanel
 {	
-	private static enum Properties {width,renderChildren,renderChildrenIfEjb,renderChildrenIfEjbPersisted}
+	final static Logger logger = LoggerFactory.getLogger(Row.class);
+	
+	private static enum Properties {width,renderChildren,renderChildrenIfEjb,renderChildrenIfEjbPersisted,dir}
 	
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException
@@ -23,10 +27,15 @@ public class Row extends UIPanel
 		responseWriter.startElement("div", this);
 		responseWriter.writeAttribute("id",getClientId(context),"id");
 
-		StringBuffer sbStyleClass = new StringBuffer();
+		StringBuilder sbStyleClass = new StringBuilder();
 		sbStyleClass.append("jeesl-row jeesl-row-");
 		sbStyleClass.append(ComponentAttribute.get(Properties.width, "12", context, this));
 
+		if(ComponentAttribute.available(Properties.dir,context,this))
+		{
+			logger.info(Properties.dir+": "+ComponentAttribute.get(Properties.dir,"ltr",context,this));
+		}
+		
 		responseWriter.writeAttribute("class", sbStyleClass, null);
 	}
 
