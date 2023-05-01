@@ -18,7 +18,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("mjYear")
+@DiscriminatorValue("calendarYear")
 @EjbErNode(name="Jahr",category="lcf",level=3,subset="hm")
 public class CalYear extends IoStatus
 								implements Serializable,EjbPersistable,EjbWithCode,EjbWithPositionVisible,
