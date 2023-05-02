@@ -572,7 +572,7 @@ $enable-pointer-cursor-for-buttons: true;
 		align-items: center;
 		display: flex;
 		margin: 0;
-		padding: 4px 0;
+		padding: $half-spacing 0;
 		transition: background .2s linear;
 
 		@media (max-width: 768px) {
@@ -603,6 +603,8 @@ $enable-pointer-cursor-for-buttons: true;
 		
 		.ui-panel-actions {
 			.ui-outputpanel {
+				display: flex;
+				flex-direction: row-reverse;
 				height: 100%;
 			}
 			
