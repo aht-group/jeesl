@@ -46,7 +46,7 @@
 	<tag>
         <tag-name>div</tag-name>
         <component>
-            <component-type>org.jeesl.jsf.components.html.Li</component-type>
+            <component-type>org.jeesl.jsf.components.html.Div</component-type>
         </component>
     </tag>
 	<tag>

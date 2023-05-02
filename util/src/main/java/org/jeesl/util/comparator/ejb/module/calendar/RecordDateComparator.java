@@ -1,17 +1,17 @@
-package org.jeesl.util.comparator.ejb;
+package org.jeesl.util.comparator.ejb.module.calendar;
 
 import java.util.Comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
+import org.jeesl.interfaces.model.with.date.jt.JeeslWithRecordDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RecordComparator<T extends EjbWithRecord> implements Comparator<T>
+public class RecordDateComparator<T extends JeeslWithRecordDate> implements Comparator<T>
 {
-	final static Logger logger = LoggerFactory.getLogger(RecordComparator.class);
+	final static Logger logger = LoggerFactory.getLogger(RecordDateComparator.class);
 
-	public RecordComparator() {}
+	public RecordDateComparator() {}
 	
 	@Override public int compare(T a, T b)
     {
