@@ -263,7 +263,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 	
 	public boolean isExpanded()
 	{
-		return this.tree != null && this.tree.getChildren().stream().filter(node -> node.isExpanded()).count() > 1;
+		return this.tree != null && this.tree.getChildren().stream().filter(node -> node.isExpanded()).count() > 0;
 	}
 	
 	public void addAsset()
