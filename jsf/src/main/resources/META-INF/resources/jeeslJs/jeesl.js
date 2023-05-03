@@ -15,6 +15,27 @@ function updateCellSelection(cell, rowCode, columnCode) {
 }
 
 var jeeslCellSelection = {
+    lastSelectedCell: undefined, 
+	single: function(cell, rowCode, columnCode) {
+	    if (this.lastSelectedCell != undefined)
+	    {
+	        $(this.lastSelectedCell).removeClass('selected').parent().removeClass('selected');
+	    }
+	    this.lastSelectedCell = cell;
+		//find cell ancestor with class 'jeesl-datatable'
+		var tableId = $(cell).closest('.jeesl-datatable');
+		var tableIdValue = $(cell).closest('.jeesl-datatable').attr('id');
+		//find cell ancestor with class 'jeesl-datatable' and remove class 'selected'
+	    tableId.find('.selected').removeClass('selected');
+	
+		$(cell).addClass('selected').parent().addClass('selected');
+	
+		selectCell([
+			{ name: 'rowCode', value: rowCode },
+			{ name: 'columnCode', value: columnCode },
+			{ name: 'tableId', value: tableIdValue },
+		]);
+	},
     // empty araaay
     selectedCells: [],
     toRowAndColumnCodes: function (selectedCells) {
