@@ -4,6 +4,7 @@ import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsContentFactory;
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsElementFactory;
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsFactory;
+import org.jeesl.factory.ejb.io.cms.EjbIoCmsMarkupFactory;
 import org.jeesl.factory.ejb.io.cms.EjbIoCmsSectionFactory;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsCategory;
@@ -81,4 +82,5 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 	public EjbIoCmsSectionFactory<L,S,FM> ejbSection() {return new EjbIoCmsSectionFactory<>(cSection);}
 	public EjbIoCmsElementFactory<L,S,E> ejbElement() {return new EjbIoCmsElementFactory<>(cElement);}
 	public EjbIoCmsContentFactory<LOC,E,C,MT> ejbContent() {return new EjbIoCmsContentFactory<>(cContent);}
+	public EjbIoCmsMarkupFactory<M,MT> ejbMarkup() {return new EjbIoCmsMarkupFactory<>(cMarkup);}
 }

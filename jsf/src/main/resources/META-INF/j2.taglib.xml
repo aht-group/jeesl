@@ -36,6 +36,12 @@
             <resource-id>moduleNews/registry.xhtml</resource-id>
         </component>
 	</tag>
+	<tag>
+        <tag-name>gridModuleTafu</tag-name>
+        <component>
+            <resource-id>moduleTafu/dashboard.xhtml</resource-id>
+        </component>
+	</tag>
   
 	<tag>
         <tag-name>gridSystemProperty</tag-name>
