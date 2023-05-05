@@ -5742,7 +5742,7 @@ body, .ui-widget {
         .jeesl-content .jeesl-content-container .jeesl-row {
           display: block; } }
       .jeesl-content .jeesl-content-container .jeesl-row.jeesl-row-rtl {
-        flex-direction: row-reverse; }
+        flex-flow: row-reverse wrap-reverse; }
       @media (max-width: 768px) {
         .jeesl-content .jeesl-content-container .jeesl-row .jeesl-grid {
           margin-top: 10px; } }

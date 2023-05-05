@@ -3468,7 +3468,7 @@ body, .ui-widget {
 			}
 			
 			&.jeesl-row-rtl {
-				flex-direction: row-reverse;
+				flex-flow: row-reverse wrap-reverse;
 			}
 			
 			.jeesl-grid {
