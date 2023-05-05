@@ -4,7 +4,7 @@
 >
 
 	<c:set var="value" value="#{value}"/>
-	<c:set var="height"  value="#{not empty height ? height : '12'}" />
+	<c:set var="height"  value="#{height}" />
 	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
 	<c:set var="marginRight" value="#{marginRight}"/>
 	<c:set var="marginLeft" value="#{marginLeft}"/>
@@ -23,10 +23,9 @@
 </ui:remove> 	
 
 	<ui:fragment rendered="#{rendered and (not empty value)}">
-			<img src="#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.class.name}/#{height}/#{value.id}"
-				 height="#{height}"
-				 class="#{styleClass}"
-				 style="#{not empty marginRight ? 'margin-right: '.concat(marginRight).concat('px;') : ''}#{not empty marginLeft ? 'margin-left: '.concat(marginLeft).concat('px;') : ''}"/>
+			<img src="#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.class.name}/#{not empty height ? height : '12'}/#{value.id}"
+				 class="jeesl-icon #{styleClass}"
+				 style="#{not empty marginRight ? 'margin-right: '.concat(marginRight).concat('px;') : ''}#{not empty marginLeft ? 'margin-left: '.concat(marginLeft).concat('px;') : ''}#{not empty height ? 'min-height: auto;'.concat('height: ').concat(height).concat('px;') : ''}"/>
 	</ui:fragment>
 
 </ui:composition>
