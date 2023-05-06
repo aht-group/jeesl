@@ -19,8 +19,8 @@
 		<j:slot id="sUsecases" width="3" renderChildren="#{(not empty cc.attrs.bean.category) and (cc.attrs.bean.category.id gt 0)}">
 			<h:form id="fUsecases">
 				<p:dataTable rendered="#{not empty cc.attrs.bean.category}"
-								var="u" value="#{cc.attrs.bean.usecases}" draggableRows="true"
-								selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
+							var="u" value="#{cc.attrs.bean.usecases}" draggableRows="true" styleClass="jeesl-datatable"
+							selection="#{cc.attrs.bean.usecase}" selectionMode="single" rowKey="#{u.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.aupSecurityUsecases}">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addUsecase()}" update=":#{cc.id}:fUsecase :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
@@ -41,7 +41,7 @@
 		       	</p:dataTable>
 			</h:form>
 			<h:form id="fUsecase">
-				<p:panel header="#{msg.aupSecurityUsecase}" styleClass="jeeslPanel"
+				<p:panel header="#{msg.aupSecurityUsecase}" styleClass="jeesl-panel"
 						 rendered="#{not empty cc.attrs.bean.usecase}">
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveUsecase()}" update=":#{cc.id}:sUsecases :#{cc.id}:sUsecase" tooltip="#{cc.attrs.tooltip}"/>
@@ -70,7 +70,8 @@
 			<h:form id="fViews"><jpSec:addViews rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fViews :#{cc.id}:fAction" views="#{cc.attrs.bean.views}"/></h:form>
 			<h:form id="fAction"><jpSec:addActions rendered="#{cc.attrs.bean.usecase.id gt 0}" bean="#{cc.attrs.bean}" update=":#{cc.id}:fAction" actions="#{cc.attrs.bean.actions}"/></h:form>
 			
-			<p:dataTable var="r" value="#{cc.attrs.bean.roles}" rendered="#{not empty cc.attrs.bean.usecase}">
+			<p:dataTable rendered="#{not empty cc.attrs.bean.usecase}" styleClass="jeesl-datatable"
+						var="r" value="#{cc.attrs.bean.roles}" >
 				<f:facet name="header"><j:dtHeader title="#{msg.aupSecurityViewAppliedToRole}"/></f:facet>
 				<p:column><h:outputText value="#{r.category.position}.#{r.position}" /></p:column>  
 	         	<p:column>

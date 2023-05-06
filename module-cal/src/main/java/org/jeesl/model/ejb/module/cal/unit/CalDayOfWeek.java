@@ -30,5 +30,4 @@ public class CalDayOfWeek extends IoStatus implements JeeslCalendarDayOfWeek<IoL
 	
 	@Override public boolean equals(Object object){return (object instanceof CalDayOfWeek) ? id == ((CalDayOfWeek) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(23,43).append(id).toHashCode();}
-	
 }

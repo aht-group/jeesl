@@ -133,6 +133,11 @@ public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescript
 		Collections.rotate(postpone,-1*(LocalDate.now().getDayOfWeek().getValue()-1)-1);
 //		Collections.reverse(postpone);
 		
+		for(DOW d : postpone)
+		{
+			logger.info(d.toString());
+		}
+		
 		status.addAll(fTafu.allOrderedPositionVisible(fbTafu.getClassStatus()));
 		
 		sbhViewport.setList(fTafu.allOrderedPositionVisible(fbTafu.getClassViewport()));
@@ -271,13 +276,15 @@ public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescript
 	
 	public void moveTask(int delta) throws JeeslConstraintViolationException, JeeslLockingException
 	{
+		logger.info("Move Task: "+delta);
 		task.setRecordShow(LocalDate.now().plusDays(delta));
 		this.saveTask();
 	}
 	
 	public void postpone(DOW dow) throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		task.setRecordShow(LocalDate.now().plusDays(postpone.size()-postpone.indexOf(dow)));
+		logger.info("Postpone to "+dow+" "+postpone.indexOf(dow));
+		task.setRecordShow(LocalDate.now().plusDays(1+postpone.indexOf(dow)));
 		this.saveTask();
 	}
 }

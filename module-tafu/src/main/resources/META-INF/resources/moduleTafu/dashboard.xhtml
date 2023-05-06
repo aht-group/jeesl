@@ -76,7 +76,7 @@
 				<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelTask()}" update=":#{cc.id}:fTask" />
 				<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveTask()}" update=":#{cc.id}:grid"/>
 			</f:facet>
-			<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{not empty cc.attrs.ctrl.task}">
+			<j:inputGrid rendered="#{not empty cc.attrs.ctrl.task}">
 				<jtp:label entity="TafuTask" code="id"/>
 				<h:outputText value="#{cc.attrs.ctrl.task.id}"/>
 				
@@ -98,16 +98,16 @@
 				<ui:fragment>
 					<jp:inputCalendar  value="#{cc.attrs.ctrl.task.recordShow}"/>
 					
+					<j:svg type="jeeslTafu0" listener="#{cc.attrs.ctrl.moveTask(0)}" update=":#{cc.id}:grid"/>
 					<ui:repeat var="p" value="#{cc.attrs.ctrl.postpone}">
 						<jp:icon value="#{p}" listener="#{cc.attrs.ctrl.postpone(p)}" update=":#{cc.id}:grid"/>
 					</ui:repeat>
-					<j:svg type="jeeslTafu0" listener="#{cc.attrs.ctrl.moveTask(0)}" update=":#{cc.id}:grid"/>
 					
 				</ui:fragment>
 				
 				<jtp:label entity="TafuTask" code="recordDue"/>
 				<jp:inputCalendar  value="#{cc.attrs.ctrl.task.recordDue}"/>
-			</p:panelGrid>
+			</j:inputGrid>
 			
 			<jtp:inputMarkup value="#{cc.attrs.ctrl.task.markup}"/>
 		</j:dialog>

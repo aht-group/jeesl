@@ -12,7 +12,11 @@ import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithScope;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslTafuTask <R extends JeeslTenantRealm<?,?,R,?>,
 								TS extends JeeslTafuStatus<?,?,TS,?>,
 								SC extends JeeslTafuScope<?,?,R,SC,?>,

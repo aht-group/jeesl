@@ -118,9 +118,9 @@ public class IoStatus implements JeeslAbstractStatus,EjbPersistable,EjbRemoveabl
 
 	@Override public String toString()
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[").append(id).append("]");
-		sb.append(" code="+code);
+		sb.append(" (").append(code).append(")");
 		return sb.toString();
 	}
 }

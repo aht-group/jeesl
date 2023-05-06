@@ -18,8 +18,9 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<p:dataTable id="dtActions" var="a" value="#{cc.attrs.actions}"
-						 selection="#{cc.attrs.bean.tblAction}" selectionMode="single" rowKey="#{a.id}">
+		<p:dataTable id="dtActions" styleClass="jeesl-datatable"
+					var="a" value="#{cc.attrs.actions}"
+					selection="#{cc.attrs.bean.tblAction}" selectionMode="single" rowKey="#{a.id}">
 			<f:facet name="header">
 				<j:dtHeader id="dth" title="#{msg.jeeslSecurityActions}">
 					<j:svg type="jeeslAdd" onstart="PF('wvOpActionSelection').show();" library="jeeslGfx"/>
@@ -42,9 +43,10 @@
 			</p:column>
 		</p:dataTable>
 		<p:overlayPanel widgetVar="wvOpActionSelection" appendToBody="false">
-			<p:dataTable id="dtOpSector" var="a" value="#{cc.attrs.bean.opActions}" rowKey="#{a.id}"
-                         selection="#{cc.attrs.bean.opAction}" selectionMode="single"
-                         rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+			<p:dataTable id="dtOpSector" styleClass="jeesl-datatable"
+						var="a" value="#{cc.attrs.bean.opActions}" rowKey="#{a.id}"
+                        selection="#{cc.attrs.bean.opAction}" selectionMode="single"
+                        rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddAction}" oncomplete="PF('wvOpActionSelection').hide();"/>
 				<p:column>
 					<h:outputText value="#{a.view.category.position}.#{a.view.position}.#{a.position}"/>
