@@ -1,5 +1,6 @@
 package org.jeesl.factory.builder;
 
+import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
@@ -17,4 +18,6 @@ public class AbstractFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 		this.cL=cL;
 		this.cD=cD;
 	}
+	
+	public EjbLangFactory<L> ejbLang() {return EjbLangFactory.instance(cL);}
 }
