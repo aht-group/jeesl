@@ -14,10 +14,10 @@
 	<composite:implementation>
 <jp:grid id="grid">
 	<j:row>
-		<j:slot id="sLists" width="5">
+		<j:slot id="sLists" width="4">
 			<h:form id="fLists">
 				<p:dataTable styleClass="jeesl-datatable"
-							var="l" value="#{cc.attrs.ctrl.lists}" draggableRows="false"
+							var="l" value="#{cc.attrs.ctrl.lists}" draggableRows="true"
 							selection="#{cc.attrs.ctrl.list}" selectionMode="single" rowKey="#{l.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="ClChecklist" code="listOf">
@@ -25,35 +25,77 @@
 						</j:dtHeader>	
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectList()}" update=":#{cc.id}:sList"/>
-					
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderLists()}" update="@form"/>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClChecklist" code="id"/></f:facet>
-						<h:outputText value="#{l.id}"/>
+						<f:facet name="header"><jtp:label entity="ClChecklist" code="positionShort"/></f:facet>
+						<h:outputText value="#{l.position}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClChecklist" code="id"/></f:facet>
+						<f:facet name="header"><jtp:label entity="ClChecklist" code="name"/></f:facet>
 						<h:outputText value="#{l.name[localeCode].lang}"/>
 					</p:column>
 			   	</p:dataTable>
 			</h:form>
 		</j:slot>
-		<j:slot id="sList" width="7">
-			<h:form id="fKey" rendered="#{not empty cc.attrs.ctrl.list}">
-				<p:panel styleClass="jeesl-panel">
-					<f:facet name="header"><j:pHeader entity="ClChecklist"/></f:facet>
-					<f:facet name="actions">
-						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelList()}" update=":#{cc.id}:grid" />
-						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveList()}" update=":#{cc.id}:grid" />
-					</f:facet>
-					<j:inputGrid>
-						<jtp:label entity="ClChecklist" code="id"/>
-						<h:outputText value="#{cc.attrs.ctrl.list.id}"/>
-						
-					</j:inputGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.ctrl.list}" withDescription="false" />
-				</p:panel>
-			</h:form>
-		</j:slot>
+		<j:row id="sList" width="8">
+			<j:slot width="4">
+				<h:form id="fKey" rendered="#{not empty cc.attrs.ctrl.list}">
+					<p:panel styleClass="jeesl-panel">
+						<f:facet name="header"><j:pHeader entity="ClChecklist"/></f:facet>
+						<f:facet name="actions">
+							<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelList()}" update=":#{cc.id}:grid" />
+							<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveList()}" update=":#{cc.id}:grid" />
+							<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteList()}" update=":#{cc.id}:grid" />
+						</f:facet>
+						<j:inputGrid>
+							<jtp:label entity="ClChecklist" code="id"/>
+							<h:outputText value="#{cc.attrs.ctrl.list.id}"/>
+						</j:inputGrid>
+						<j:tabTranslationEditor value="#{cc.attrs.ctrl.list}" withDescription="false" />
+					</p:panel>
+				</h:form>
+			</j:slot>
+			<j:slot width="4">
+				<h:form id="fItem" rendered="#{not empty cc.attrs.ctrl.item}">
+					<p:panel styleClass="jeesl-panel">
+						<f:facet name="header"><j:pHeader entity="ClChecklistItem"/></f:facet>
+						<f:facet name="actions">
+							<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelItem()}" update=":#{cc.id}:sList" />
+							<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveItem()}" update=":#{cc.id}:sList" />
+							<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteItem()}" update=":#{cc.id}:sList" />
+						</f:facet>
+						<j:inputGrid>
+							<jtp:label entity="ClChecklistItem" code="id"/>
+							<h:outputText value="#{cc.attrs.ctrl.item.id}"/>
+						</j:inputGrid>
+						<j:tabTranslationEditor value="#{cc.attrs.ctrl.item}" withDescription="false" />
+					</p:panel>
+				</h:form>
+			</j:slot>
+			<j:slot width="12">
+				<h:form id="fItems">
+					<p:dataTable styleClass="jeesl-datatable" rendered="#{cc.attrs.ctrl.list.id gt 0}"
+								var="i" value="#{cc.attrs.ctrl.items}" draggableRows="true"
+								selection="#{cc.attrs.ctrl.item}" selectionMode="single" rowKey="#{i.id}">
+						<f:facet name="header">
+							<j:dtHeader entity="ClChecklistItem" code="listOf">
+								<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addItem()}" update=":#{cc.id}:sList"/>
+							</j:dtHeader>	
+						</f:facet>
+						<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectItem()}" update=":#{cc.id}:sList"/>
+						<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderItems()}" update="@form"/>
+						<p:column>
+							<f:facet name="header"><jtp:label entity="ClChecklistItem" code="positionShort"/></f:facet>
+							<h:outputText value="#{i.position}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header"><jtp:label entity="ClChecklistItem" code="name"/></f:facet>
+							<h:outputText value="#{i.name[localeCode].lang}"/>
+						</p:column>
+				   	</p:dataTable>
+				</h:form>
+			</j:slot>
+		</j:row>
 	</j:row>
 </jp:grid>
 	</composite:implementation>

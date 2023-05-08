@@ -13,6 +13,9 @@
 		<composite:attribute name="widgetVar" required="true"/>
 		<composite:attribute name="localeCode" required="false" default="#{localeCode}"/>
 		
+		<composite:attribute name="oncomplete" required="false"/>
+
+		
 		<composite:attribute name="opRows" required="false" default="10"/>
 		<composite:attribute name="paginatorTemplate" required="false" default="#{appSettingsBean.paginatorTemplate}"/>
 		<composite:attribute name="rowsPerPageTemplate" required="false" default="#{appSettingsBean.rowsPerPageTemplate}"/>
@@ -27,7 +30,8 @@
 			<p:dataTable id="dtOpEntity" var="var" value="#{cc.attrs.handler.lazy}" lazy="true"
 				 	selection="#{cc.attrs.handler.op}" selectionMode="single" rowKey="#{var.id}"
 				 	rows="#{cc.attrs.opRows}" rowsPerPageTemplate="#{cc.attrs.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">>
-				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.addEntity()}" oncomplete="PF('#{cc.attrs.widgetVar}').hide();"/>
+				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.handler.addEntity()}"
+						oncomplete="PF('#{cc.attrs.widgetVar}').hide(); #{cc.attrs.oncomplete}"/>
 				
 				<p:column rendered="#{fn:length(cc.attrs.handler.columns) gt 0}">
 					<c:if test="#{not empty cc.attrs.handler.columns[0].filterBy}"><f:attribute name="filterBy" value="#{var.column0}"/></c:if>

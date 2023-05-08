@@ -19,15 +19,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.module.cl.JeeslChecklist;
+import org.jeesl.interfaces.model.module.cl.JeeslChecklistItem;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.system.tenant.TenantRealm;
 
-@Table(name="ClChecklist")
+@Table(name="ClChecklistItem")
 @EjbErNode(name="Checklist",category="tafu",subset="moduleTafu")
 @Entity
-public class ClChecklist implements JeeslChecklist<IoLang,TenantRealm,ClTopic>
+public class ClChecklistItem implements JeeslChecklistItem<IoLang,ClChecklist>
 {
 	public static final long serialVersionUID=1;
 
@@ -37,28 +37,29 @@ public class ClChecklist implements JeeslChecklist<IoLang,TenantRealm,ClTopic>
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 	
+	@Override public String resolveParentAttribute() {return JeeslChecklistItem.Attributes.checklist.toString();}
 	@NotNull @ManyToOne
-	private TenantRealm realm;
-	@Override public TenantRealm getRealm() {return realm;}
-	@Override public void setRealm(TenantRealm realm) {this.realm = realm;}
-	
-	private long rref;
-	@Override public long getRref() {return rref;}
-	@Override public void setRref(long rref) {this.rref = rref;}
-	
+	private ClChecklist checklist;
+	@Override public ClChecklist getChecklist() {return checklist;}
+	@Override public void setChecklist(ClChecklist checklist) {this.checklist = checklist;}
+
 	private int position;
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
-	
+
+	private boolean visible;
+	@Override public boolean isVisible() {return visible;}
+	@Override public void setVisible(boolean visible) {this.visible = visible;}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(name="ClChecklistJtLang",joinColumns={@JoinColumn(name="checklist_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
+	@JoinTable(name="ClChecklistItemJtLang",joinColumns={@JoinColumn(name="item_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	@MapKey(name="lkey")
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {if(Objects.isNull(name)) {name=new HashMap<>();} return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	
-	@Override public boolean equals(Object object) {return (object instanceof ClChecklist) ? id == ((ClChecklist) object).getId() : (object == this);}
+	@Override public boolean equals(Object object) {return (object instanceof ClChecklistItem) ? id == ((ClChecklistItem) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(23,7).append(id).toHashCode();}
 	
 	@Override public String toString()
