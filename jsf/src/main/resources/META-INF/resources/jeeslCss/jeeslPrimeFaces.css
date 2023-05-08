@@ -234,7 +234,7 @@ input[class="ui-spinner-input ui-inputfield ui-state-default ui-corner-all ui-st
 .jeeslPanel .ui-panelgrid .ui-outputpanel > img {margin: 0 -5px 0 10px; height: 12px;}
 .jeeslPanel .ui-panelgrid .ui-outputpanel > img:first-child {margin: 0 5px 0 0;}
 
-.jeeslPanel .ui-inputtextarea {vertical-align: middle; margin: 2.8px 0;}
+/* .jeeslPanel .ui-inputtextarea {vertical-align: middle; margin: 2.8px 0;} */
 
 .jeeslPanel .ui-calendar {display: flex; flex-direction: row; align-items: center;}
 .jeeslPanel .ui-calendar .ui-datepicker-trigger {margin: 0 0 0 6px; flex: 1;}

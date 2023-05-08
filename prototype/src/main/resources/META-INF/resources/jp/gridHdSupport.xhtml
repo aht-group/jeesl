@@ -16,7 +16,7 @@
 	<j:row>
 		<j:slot id="sTickets" width="#{cc.attrs.bean.uiSlot.a}" rendered="#{cc.attrs.bean.uiSlot.showA}">
 			<h:form id="fTickets">
-				<p:dataTable var="t" value="#{cc.attrs.bean.tickets}" draggableRows="false"
+				<p:dataTable var="t" value="#{cc.attrs.bean.tickets}" draggableRows="false" styleClass="jeesl-datatable"
 								selection="#{cc.attrs.bean.ticket}" selectionMode="single" rowKey="#{t.id}"
 								rows="20" paginator="true" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
