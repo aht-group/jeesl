@@ -34,6 +34,8 @@ public class Row extends UIPanel
 		if(ComponentAttribute.available(Properties.dir,context,this))
 		{
 			logger.info(Properties.dir+": "+ComponentAttribute.get(Properties.dir,"ltr",context,this));
+			sbStyleClass.append(" jeesl-row-");
+			sbStyleClass.append(ComponentAttribute.get(Properties.dir, "ltr", context, this));
 		}
 		
 		responseWriter.writeAttribute("class", sbStyleClass, null);

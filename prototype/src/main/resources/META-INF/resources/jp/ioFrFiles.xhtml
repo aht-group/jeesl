@@ -65,7 +65,7 @@
 				</p:column>
 				<p:column styleClass="jeesl-nowrap">
 					<f:facet name="header"><h:outputText value="#{msg.jeeslIoFileSize}"/></f:facet>
-					<jtp:symbolizer value="#{meta.type}" marginRight="5" styleClass="jeesl-icon"/>
+					<jtp:symbolizer value="#{meta.type}" marginRight="5"/>
 					<h:outputText value="#{j:humanFileSize(meta.size)}"/>
 					<p:graphicImage style="margin-left: 5px;" name="ui/control/upload.svg" library="jeeslGfx" height="12" rendered="#{not empty cc.attrs.handler.mapDeferred[meta]}"/>
 				</p:column>

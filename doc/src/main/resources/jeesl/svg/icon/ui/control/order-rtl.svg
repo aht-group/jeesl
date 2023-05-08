@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg2" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" sodipodi:docname="barretr-House.svg" inkscape:version="0.48.4 r9939" inkscape:export-filename="/home/barret/Desktop/house.png" inkscape:export-xdpi="90" inkscape:export-ydpi="90" inkscape:output_extension="org.inkscape.output.svg.inkscape" sodipodi:modified="TRUE" sodipodi:version="0.32"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="677.831px" height="617px"
+	 viewBox="0 0 677.831 617" enable-background="new 0 0 677.831 617" xml:space="preserve">
+<path fill="#FFFFFF" stroke="#C8C8C8" stroke-width="4.6705" d="M633.818,44.169v528.817H489.424V44.169H633.818z M323.876,44.167
+	c8.146,0,15.916,3.066,21.877,8.635c6.416,5.996,9.951,14.202,9.951,23.106v128.573l-32.572,31.694h103.622
+	c17.5,0,31.738,14.238,31.738,31.739v81.567c0,17.501-14.238,31.739-31.738,31.739H323.441l32.264,31.394v128.574
+	c0,8.904-3.533,17.11-9.951,23.105c-5.961,5.567-13.729,8.634-21.875,8.634c-8.324,0-16.213-3.278-22.213-9.23L44.55,308.548
+	L301.661,53.401C307.663,47.446,315.552,44.167,323.876,44.167L323.876,44.167z"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="340.6321" y1="782.2168" x2="839.1819" y2="782.2168" gradientTransform="matrix(4.366649e-008 1 1 -4.366649e-008 -220.5173 -281.2546)">
+	<stop  offset="0" style="stop-color:#858585"/>
+	<stop  offset="0.871" style="stop-color:#CBCBCB"/>
+</linearGradient>
+<rect x="504.635" y="59.378" fill="url(#SVGID_1_)" width="114.128" height="498.55"/>
+<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="234.3401" y1="308.5479" x2="611.9875" y2="308.5479" gradientTransform="matrix(-1 0 0 1 677.8325 0)">
+	<stop  offset="0" style="stop-color:#0F66CE"/>
+	<stop  offset="1" style="stop-color:#0E76DD"/>
+</linearGradient>
+<path fill="url(#SVGID_2_)" d="M312.228,64.048c10.545-10.462,28.477-2.994,28.477,11.86v122.24l-54.498,53.028h140.548
+	c9.244,0,16.738,7.494,16.738,16.739v81.567c0,9.245-7.494,16.739-16.738,16.739H286.517l54.188,52.728v122.24
+	c0,14.854-17.932,22.318-28.477,11.859L65.845,308.548L312.228,64.048z"/>
+<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="253.7698" y1="42.2778" x2="452.4869" y2="360.2917">
+	<stop  offset="0" style="stop-color:#FFFFFF"/>
+	<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+</linearGradient>
+<path fill="url(#SVGID_3_)" d="M504.635,59.378h114.128v213.211c-37.514-3.631-75.719-4.703-114.128-3.057V59.378z M426.754,251.176
+	H286.206l54.498-53.028V75.908c0-14.854-17.932-22.322-28.477-11.86l-246.383,244.5l71.823,71.274
+	c94.83-58.872,200.125-92.761,305.825-105.355v-6.552C443.492,258.67,435.998,251.176,426.754,251.176z"/>
+</svg>

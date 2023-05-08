@@ -3098,7 +3098,7 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-datatable {
+.jeesl-datatable, .ui-datatable.ui-sortable-helper {
 	@include jeesl-table-titlebar;
 	
 	border: $border;
@@ -3467,6 +3467,10 @@ body, .ui-widget {
 				display: block;
 			}
 			
+			&.jeesl-row-rtl {
+				flex-flow: row-reverse wrap-reverse;
+			}
+			
 			.jeesl-grid {
 				@media (max-width: 768px) {
 					margin-top: $regular-spacing;
@@ -3794,7 +3798,7 @@ body, .ui-widget {
 	@include jeesl-tabs-titlebar;
 		
 	background: $panel-background;
-	padding: $slim-spacing;
+	padding: 0;
 	
 	@media (max-width: 768px) {
 		padding: 0;
@@ -4099,46 +4103,46 @@ body, .ui-widget {
 		> form {
 			border-radius: $border-radius;
 			box-shadow: $overlay-box-shadow;
+		}
+	}
+}
+
+.ui-fileupload {
+	.ui-fileupload-content {
+		background: $panel-background;
+		padding: $slim-spacing;
+		
+		.ui-fileupload-files {
+			margin: 0;
+			width: 100%;
 			
-			.ui-fileupload {
-				.ui-fileupload-content {
-					background: $panel-background;
-					padding: $slim-spacing;
+			.ui-fileupload-row {
+				> div {
+					vertical-align: middle;
+					white-space: nowrap;
+				}
+				
+				.ui-fileupload-preview {
+					display: none;
+				}
+				
+				.ui-fileupload-filename {
+					display: table-cell;
+					white-space: break-spaces;
+				}
+				
+				.ui-fileupload-progress .ui-progressbar {
+					top: 0;
 					
-					.ui-fileupload-files {
-						margin: 0;
-						width: 100%;
-						
-						.ui-fileupload-row {
-							> div {
-								vertical-align: middle;
-								white-space: nowrap;
-							}
-							
-							.ui-fileupload-preview {
-								display: none;
-							}
-							
-							.ui-fileupload-filename {
-								display: table-cell;
-								white-space: break-spaces;
-							}
-							
-							.ui-fileupload-progress .ui-progressbar {
-								top: 0;
-								
-								.ui-progressbar-value {
-									background: $bright-colour;
-									border: none;
-									border-radius: 1px;
-								}
-							}
-							
-							.ui-fileupload-cancel .ui-icon:before {
-								content: $icon-cancel;
-							}
-						}
+					.ui-progressbar-value {
+						background: $bright-colour;
+						border: none;
+						border-radius: 1px;
 					}
+				}
+				
+				.ui-fileupload-cancel .ui-icon:before {
+					content: $icon-cancel;
 				}
 			}
 		}
