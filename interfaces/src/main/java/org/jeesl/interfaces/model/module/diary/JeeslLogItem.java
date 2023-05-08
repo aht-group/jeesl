@@ -26,7 +26,7 @@ public interface JeeslLogItem <L extends JeeslLang, D extends JeeslDescription,
 				EjbSaveable,EjbPersistable,EjbRemoveable,
 				EjbWithLang<L>,EjbWithRecord
 {
-	public enum Attributes{log,record}
+	public enum Attributes{log,record,confidentialities}
 	
 	LOG getLog();
 	void setLog(LOG log);
@@ -41,5 +41,5 @@ public interface JeeslLogItem <L extends JeeslLang, D extends JeeslDescription,
 	public void setMarkup(Map<String,M> markup);
 	
 	List<CONF> getConfidentialities();
-	void setConfidentialities(List<CONF> scopes);
+	void setConfidentialities(List<CONF> confidentialities);
 }

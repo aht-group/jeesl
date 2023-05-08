@@ -1,4 +1,4 @@
-package org.jeesl.controllerl.web.g.module.cl;
+package org.jeesl.controller.web.g.module.cl;
 
 import java.io.Serializable;
 import java.util.ArrayList;

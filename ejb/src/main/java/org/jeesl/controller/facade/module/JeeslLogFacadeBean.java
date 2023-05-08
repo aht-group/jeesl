@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -12,10 +13,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslLogFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -115,21 +118,24 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 			predicates.add(jScope.in(scopes));
 		}
 		
+		if(ObjectUtils.isNotEmpty(confidentialities))
+		{
+			ListJoin<ITEM,CONF> jConf = item.joinList(JeeslLogItem.Attributes.confidentialities.toString());
+			predicates.add(jConf.in(confidentialities));
+		}
+		
 		Expression<Date> eRecord = item.get(JeeslLogItem.Attributes.record.toString());
-		if(startDate!=null)
+		if(Objects.nonNull(startDate))
 		{
 			predicates.add(cB.greaterThan(eRecord,DateUtil.toDate(startDate.atStartOfDay())));
 		}
-		if(endDate!=null)
+		if(Objects.nonNull(endDate))
 		{
 			predicates.add(cB.lessThan(eRecord,DateUtil.toDate(endDate.atStartOfDay().plusDays(1))));
 		}
 		
-//		ListJoin<ITEM,CONF> jConfidentiality = item.joinList(JeeslLogItem.Attributes.issues.toString());
-//		predicates.add(jConfidentiality.in(confidentialities));
-		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.select(item);
+		cQ.select(item).distinct(true);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));		
 
 		TypedQuery<ITEM> tQ = em.createQuery(cQ);
 		return tQ.getResultList();

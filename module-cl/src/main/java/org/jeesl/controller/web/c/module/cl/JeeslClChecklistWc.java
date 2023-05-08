@@ -1,6 +1,6 @@
-package org.jeesl.controllerl.web.c.module.cl;
+package org.jeesl.controller.web.c.module.cl;
 
-import org.jeesl.controllerl.web.g.module.cl.JeeslClChecklistGwc;
+import org.jeesl.controller.web.g.module.cl.JeeslClChecklistGwc;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.locale.IoDescription;
