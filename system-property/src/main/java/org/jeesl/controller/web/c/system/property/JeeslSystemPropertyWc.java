@@ -1,4 +1,4 @@
-package org.jeesl.controller.web.system.property;
+package org.jeesl.controller.web.c.system.property;
 
 import org.jeesl.controller.web.system.JeeslSystemPropertyGwc;
 import org.jeesl.factory.builder.system.PropertyFactoryBuilder;

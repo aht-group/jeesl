@@ -200,7 +200,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		if(rTransitions) {transitions.clear();}
 		if(rTransition) {transition = null;}
 		if(rSignature) {screenSignature = null;}
-		if(rWorkflow) {workflow=null;link=null;activities.clear();}
+		if(rWorkflow) {workflow=null; link=null; activities.clear();}
 		if(rDelegate) {delegate=null;}
 //		if(rFrh) {frh.reset();}
 	}
@@ -257,7 +257,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		this.security=security;
 		this.user=user;
 		this.entity = ejb;
-		reset(true,true,true,true,true,true);
+		this.reset(true,true,true,true,true,true);
 
 		link = fWorkflow.fWorkflowLink(process,ejb);
 		if(Objects.nonNull(jogger)) {jogger.milestone("fWorkflow.fWorkflowLink");}
@@ -265,7 +265,6 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		workflow = link.getWorkflow();
 		if(debugOnInfo) {logger.info("Select: Workflow and Link");}
 		reloadWorkflow(false);
-		
 	}
 
 	public <W extends JeeslWithWorkflow<WF>> void loadWorkflows(List<W> ejbs)

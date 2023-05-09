@@ -53,6 +53,8 @@
     		<artifactId>jeesl-util</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		
+		<!-- JEESL Modules -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
