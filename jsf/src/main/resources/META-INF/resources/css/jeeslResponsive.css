@@ -7334,16 +7334,16 @@ body, .ui-widget {
     .jeesl-footer {
       max-width: 100%; } }
 
-.ui-panelgrid .ui-panelgrid-cell > * {
+.ui-panelgrid .ui-panelgrid-cell > *, .ui-panelgrid .p-col > *, .jeesl-input-grid .ui-panelgrid-cell > *, .jeesl-input-grid .p-col > * {
   min-height: 22px; }
   @media (max-width: 768px) {
-    .ui-panelgrid .ui-panelgrid-cell > * {
+    .ui-panelgrid .ui-panelgrid-cell > *, .ui-panelgrid .p-col > *, .jeesl-input-grid .ui-panelgrid-cell > *, .jeesl-input-grid .p-col > * {
       min-height: 42px; } }
-.ui-panelgrid .ui-panelgrid-cell .jeesl-icon {
+.ui-panelgrid .ui-panelgrid-cell .jeesl-icon, .ui-panelgrid .p-col .jeesl-icon, .jeesl-input-grid .ui-panelgrid-cell .jeesl-icon, .jeesl-input-grid .p-col .jeesl-icon {
   height: 12px;
   width: auto; }
   @media (max-width: 768px) {
-    .ui-panelgrid .ui-panelgrid-cell .jeesl-icon {
+    .ui-panelgrid .ui-panelgrid-cell .jeesl-icon, .ui-panelgrid .p-col .jeesl-icon, .jeesl-input-grid .ui-panelgrid-cell .jeesl-icon, .jeesl-input-grid .p-col .jeesl-icon {
       height: 32px; } }
 
 .jeesl-input-grid .p-field .p-col:not(.ui-outputlabel) > * {

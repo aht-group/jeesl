@@ -4025,8 +4025,8 @@ body, .ui-widget {
 	}
 }
 
-.ui-panelgrid {
-	.ui-panelgrid-cell {
+.ui-panelgrid, .jeesl-input-grid {
+	.ui-panelgrid-cell, .p-col {
 		> * {
 			min-height: $element-height;
 			
