@@ -140,7 +140,11 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 			&:hover {
-				background: $hover;
+//				background: $hover;
+
+				> .jeesl-dropdown-item-label {
+					background: $hover;
+				}
 				
 				.jeesl-dropdown-sub {
 					opacity: 1;
@@ -160,7 +164,8 @@ $enable-pointer-cursor-for-buttons: true;
 			}
 			
 			.jeesl-dropdown-item-label {
-				background: transparent;
+//				background: transparent;
+				background: $background;
 				color: $foreground;
     			display: block;
 				height: 30px;
@@ -168,6 +173,7 @@ $enable-pointer-cursor-for-buttons: true;
 				margin: 0;
 				padding: 8px 15px;
 			    position: relative;
+				transition: background $transition-duration linear;
 			    white-space: nowrap;
 
 				@media (max-width: 768px) {
@@ -3464,7 +3470,7 @@ body, .ui-widget {
 			flex-wrap: wrap;
 			
 			@media (max-width: 768px) {
-				display: block;
+//				display: block;
 			}
 			
 			&.jeesl-row-rtl {
@@ -4026,6 +4032,15 @@ body, .ui-widget {
 			
 			@media (max-width: 768px) {
 				min-height: $element-height-mobile;
+			}
+		}
+		
+		.jeesl-icon {
+			height: $table-icon-height;
+			width: auto;
+			
+			@media (max-width: 768px) {
+				height: $table-icon-height-mobile;
 			}
 		}
 	}

@@ -2506,12 +2506,12 @@ body, .ui-widget {
           padding: 0 15px;
           transition: opacity 0s 0.4s, background 0.2s linear;
           width: 100%; } }
-      .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item:hover {
+      .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item:hover > .jeesl-dropdown-item-label {
         background: white; }
-        .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item:hover .jeesl-dropdown-sub {
-          opacity: 1;
-          transition: opacity 0.2s 1s linear, visibility 0s 1s linear;
-          visibility: visible; }
+      .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item:hover .jeesl-dropdown-sub {
+        opacity: 1;
+        transition: opacity 0.2s 1s linear, visibility 0s 1s linear;
+        visibility: visible; }
       .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item:after {
         border-bottom: 0 solid #ededed;
         content: '';
@@ -2520,7 +2520,7 @@ body, .ui-widget {
           .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item:after {
             border-bottom-width: 2px; } }
       .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
-        background: transparent;
+        background: white;
         color: #333333;
         display: block;
         height: 30px;
@@ -2528,6 +2528,7 @@ body, .ui-widget {
         margin: 0;
         padding: 8px 15px;
         position: relative;
+        transition: background 0.2s linear;
         white-space: nowrap; }
         @media (max-width: 768px) {
           .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
@@ -2980,12 +2981,12 @@ body, .ui-widget {
             padding: 0 15px;
             transition: opacity 0s 0.4s, background 0.2s linear;
             width: 100%; } }
-        .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover {
+        .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover > .jeesl-dropdown-item-label {
           background: #00663a; }
-          .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover .jeesl-dropdown-sub {
-            opacity: 1;
-            transition: opacity 0.2s 1s linear, visibility 0s 1s linear;
-            visibility: visible; }
+        .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover .jeesl-dropdown-sub {
+          opacity: 1;
+          transition: opacity 0.2s 1s linear, visibility 0s 1s linear;
+          visibility: visible; }
         .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:after {
           border-bottom: 0 solid #00663a;
           content: '';
@@ -2994,7 +2995,7 @@ body, .ui-widget {
             .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:after {
               border-bottom-width: 2px; } }
         .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
-          background: transparent;
+          background: linear-gradient(to right, #00663a, #008a4e);
           color: white;
           display: block;
           height: 30px;
@@ -3002,6 +3003,7 @@ body, .ui-widget {
           margin: 0;
           padding: 8px 15px;
           position: relative;
+          transition: background 0.2s linear;
           white-space: nowrap; }
           @media (max-width: 768px) {
             .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
@@ -3318,12 +3320,12 @@ body, .ui-widget {
             padding: 0 15px;
             transition: opacity 0s 0.4s, background 0.2s linear;
             width: 100%; } }
-        .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover {
+        .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover > .jeesl-dropdown-item-label {
           background: #00663a; }
-          .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover .jeesl-dropdown-sub {
-            opacity: 1;
-            transition: opacity 0.2s 1s linear, visibility 0s 1s linear;
-            visibility: visible; }
+        .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover .jeesl-dropdown-sub {
+          opacity: 1;
+          transition: opacity 0.2s 1s linear, visibility 0s 1s linear;
+          visibility: visible; }
         .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:after {
           border-bottom: 0 solid #00663a;
           content: '';
@@ -3332,7 +3334,7 @@ body, .ui-widget {
             .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:after {
               border-bottom-width: 2px; } }
         .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
-          background: transparent;
+          background: #007a45;
           color: white;
           display: block;
           height: 30px;
@@ -3340,6 +3342,7 @@ body, .ui-widget {
           margin: 0;
           padding: 8px 15px;
           position: relative;
+          transition: background 0.2s linear;
           white-space: nowrap; }
           @media (max-width: 768px) {
             .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
@@ -3834,12 +3837,12 @@ body, .ui-widget {
               padding: 0 15px;
               transition: opacity 0s 0.4s, background 0.2s linear;
               width: 100%; } }
-          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover {
+          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover > .jeesl-dropdown-item-label {
             background: #00663a; }
-            .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover .jeesl-dropdown-sub {
-              opacity: 1;
-              transition: opacity 0.2s 1s linear, visibility 0s 1s linear;
-              visibility: visible; }
+          .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:hover .jeesl-dropdown-sub {
+            opacity: 1;
+            transition: opacity 0.2s 1s linear, visibility 0s 1s linear;
+            visibility: visible; }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:after {
             border-bottom: 0 solid #00663a;
             content: '';
@@ -3848,7 +3851,7 @@ body, .ui-widget {
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item:after {
                 border-bottom-width: 2px; } }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
-            background: transparent;
+            background: #007a45;
             color: white;
             display: block;
             height: 30px;
@@ -3856,6 +3859,7 @@ body, .ui-widget {
             margin: 0;
             padding: 8px 15px;
             position: relative;
+            transition: background 0.2s linear;
             white-space: nowrap; }
             @media (max-width: 768px) {
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label {
@@ -5738,9 +5742,6 @@ body, .ui-widget {
       align-items: stretch;
       display: flex;
       flex-wrap: wrap; }
-      @media (max-width: 768px) {
-        .jeesl-content .jeesl-content-container .jeesl-row {
-          display: block; } }
       .jeesl-content .jeesl-content-container .jeesl-row.jeesl-row-rtl {
         flex-flow: row-reverse wrap-reverse; }
       @media (max-width: 768px) {
@@ -7338,6 +7339,12 @@ body, .ui-widget {
   @media (max-width: 768px) {
     .ui-panelgrid .ui-panelgrid-cell > * {
       min-height: 42px; } }
+.ui-panelgrid .ui-panelgrid-cell .jeesl-icon {
+  height: 12px;
+  width: auto; }
+  @media (max-width: 768px) {
+    .ui-panelgrid .ui-panelgrid-cell .jeesl-icon {
+      height: 32px; } }
 
 .jeesl-input-grid .p-field .p-col:not(.ui-outputlabel) > * {
   min-height: 22px;
