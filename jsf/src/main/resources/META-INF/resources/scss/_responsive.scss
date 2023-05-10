@@ -4025,27 +4025,6 @@ body, .ui-widget {
 	}
 }
 
-.ui-panelgrid, .jeesl-input-grid {
-	.ui-panelgrid-cell, .p-col {
-		> * {
-			min-height: $element-height;
-			
-			@media (max-width: 768px) {
-				min-height: $element-height-mobile;
-			}
-		}
-		
-		.jeesl-icon {
-			height: $table-icon-height;
-			width: auto;
-			
-			@media (max-width: 768px) {
-				height: $table-icon-height-mobile;
-			}
-		}
-	}
-}
-
 .jeesl-input-grid {
 	.p-field {
 		.p-col {
@@ -4075,6 +4054,23 @@ body, .ui-widget {
 							width: auto;
 						}
 					}
+				}
+			}
+			
+			> * {
+				min-height: $element-height;
+				
+				@media (max-width: 768px) {
+					min-height: $element-height-mobile;
+				}
+			}
+			
+			.jeesl-icon {
+				height: $table-icon-height;
+				width: auto;
+				
+				@media (max-width: 768px) {
+					height: $table-icon-height-mobile;
 				}
 			}
 		}
