@@ -13,571 +13,582 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<jp:grid id="grid" rendered="#{cc.attrs.bean.sbhContext.hasSome}">
-			<j:row id="rProcess" rendered="#{cc.attrs.bean.sbhProcess.twiceSelected or cc.attrs.bean.sbhProcess.hasNone}">
-				<j:slot id="sProcesses" width="8">
-					<h:form id="fProcesses">
-						<p:dataTable var="p" value="#{cc.attrs.bean.sbhProcess.list}" draggableRows="true"
-								selection="#{cc.attrs.bean.process}" selectionMode="single" rowKey="#{p.id}">
-							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslApprovalProcesses}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addProcess()}" update=":#{cc.id}:rProcess"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderProcesses()}" update="@form :fStatusBar"/>
-							<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectProcess()}" update=":#{cc.id}:sProcess :#{cc.id}:fDocuments"/>
-							
-							<p:column rendered="true" headerText="#{msg.jeeslCode}">  
-								<h:outputText value="#{p.code}"/>  
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslName}">  
-								<h:outputText value="#{p.name[localeCode].lang}"/>  
-							</p:column>
-											
-						</p:dataTable>
-					</h:form>
-					<h:form id="fDocuments">
-						<p:dataTable var="d" value="#{cc.attrs.bean.documents}" draggableRows="true"
-								selection="#{cc.attrs.bean.document}" selectionMode="single" rowKey="#{d.id}">
-							<f:facet name="header">
-								<j:dtHeader entity="WorkflowDocument" code="listOf">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addDocument()}" update=":#{cc.id}:rProcess"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderDocuments()}" update="@form "/>
-							<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectDocument()}" update=":#{cc.id}:sProcess"/>
-							
-							<p:column rendered="true" headerText="#{msg.jeeslCode}">  
-								<h:outputText value="#{d.code}"/>  
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslName}">  
-								<h:outputText value="#{d.name[localeCode].lang}"/>  
-							</p:column>
-											
-						</p:dataTable>
-					</h:form>
-				</j:slot>
-				<j:slot id="sProcess" width="4">
-					<h:form id="fProcess" rendered="#{not empty cc.attrs.bean.process}">
-						<p:panel id="pLang" header="#{msg.jeeslApprovalProcess}" styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveProcess()}" update=":fStatusBar :#{cc.id}:rProcess"/>
-								<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.process.id gt 0}" listener="#{cc.attrs.bean.deleteProcess()}" update=":fStatusBar :#{cc.id}:rProcess"/>
-							</f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslApprovalContext}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.process.context}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.sbhContext.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslCode}"/>
-								<p:inputText autocomplete="off" value="#{cc.attrs.bean.process.code}"/>
-								
-								<jtp:label entity="WorkflowProcess" code="pageContext"/>
-								<p:inputText autocomplete="off" value="#{cc.attrs.bean.process.pageContext}"/>
-							</p:panelGrid>
-							<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">
-								<p:selectBooleanCheckbox value="#{cc.attrs.bean.process.escalationHandling}"/>
-								<jtp:label entity="WorkflowProcess" code="escalationHandling"/>
-								
-								<p:selectBooleanCheckbox value="#{cc.attrs.bean.process.includeInDashboard}"/>
-								<jtp:label entity="WorkflowProcess" code="includeInDashboard"/>
-							</p:panelGrid>
-							<j:tabTranslationEditor value="#{cc.attrs.bean.process}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
-						</p:panel>
-					</h:form>
-					<h:form id="fDocument" rendered="#{not empty cc.attrs.bean.process}">
-						<p:panel id="pLang" header="#{appLabelBean.entities['WorkflowDocument'][localeCode].lang}" rendered="#{not empty cc.attrs.bean.document}" styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveDocument()}" update=":#{cc.id}:rProcess"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteDocument()}" rendered="#{cc.attrs.bean.document.id gt 0}" update=":#{cc.id}:rProcess"/>
-							</f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslCode}"/>
-								<p:inputText autocomplete="off" value="#{cc.attrs.bean.document.code}"/>
-							</p:panelGrid>
-							<j:tabTranslationEditor value="#{cc.attrs.bean.document}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
-						</p:panel>
-					</h:form>
-				</j:slot>
-			</j:row>
-			<j:row id="rStage">
-				<j:slot id="sStages" width="5" rendered="#{not empty cc.attrs.bean.process}">
-					<h:form id="fStages">
-						<p:dataTable var="s" value="#{cc.attrs.bean.stages}" draggableRows="true"
-								selection="#{cc.attrs.bean.stage}" selectionMode="single" rowKey="#{s.id}">
-							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslApprovalStages}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addStage()}" update=":#{cc.id}:rStage"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderStages()}" update="@form"/>
-							<p:ajax event="rowSelect" update=":#{cc.id}:sStage" listener="#{cc.attrs.bean.selectStage()}"/>
-							<p:column rendered="true">
-								<jtp:symbolizer value="#{s.type}" marginRight="5"/>
-								<h:outputText value="#{s.position}"/>
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslName}">
-								<jtp:symbolizer value="#{s}" rendered="#{not empty s.graphic}" marginRight="5"/>
-								<h:outputText value="#{s.name[localeCode].lang}"/>
-							</p:column>
-							<p:column rendered="true" styleClass="jeeslCenter">
-								<f:facet name="header"><jtp:label entity="WorkflowStage" code="progress"/></f:facet>
-								<h:outputText value="#{s.progress}"><f:convertNumber type="percent" /></h:outputText>
-							</p:column>
-						</p:dataTable>
-					</h:form>
-					<mcg:graph dotScript="#{cc.attrs.bean.processDiagram}" maxwidth="100%"/>
-				</j:slot>
-				<j:slot id="sStage" width="7">
-					<h:form id="fStage" rendered="#{not empty cc.attrs.bean.stage}">
-						<p:panel header="#{msg.jeeslApprovalStage}"  styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{not cc.attrs.bean.editStage}"/>
-								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{cc.attrs.bean.editStage}"/>
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveStage()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editStage}"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteStage()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.stage.id gt 0) and cc.attrs.bean.editStage}"/>
-							</f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslApprovalProcess}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.stage.process}" effect="fade" autoWidth="false" rendered="#{false and cc.attrs.bean.editStage}">
-									<f:selectItems value="#{cc.attrs.bean.sbhProcess.list}" var="p" itemLabel="#{p.name[localeCode].lang}" itemValue="#{p}"/>
-								</p:selectOneMenu>
-								<h:outputText value="#{cc.attrs.bean.stage.process.context.name[localeCode].lang}: #{cc.attrs.bean.stage.process.name[localeCode].lang}" rendered="#{true or (not cc.attrs.bean.editStage)}"/>
-								
-								<jtp:label entity="WorkflowStage" code="type"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.stage.type}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.editStage}">
-									<f:selectItems value="#{cc.attrs.bean.stageTypes}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-								</p:selectOneMenu>
-								<ui:fragment rendered="#{not cc.attrs.bean.editStage}">
-									<jtp:symbolizer value="#{cc.attrs.bean.stage.type}" marginRight="5"/>
-									<h:outputText value="#{cc.attrs.bean.stage.type.name[localeCode].lang}"/>
-								</ui:fragment>
-								
-								<p:outputLabel value="#{msg.jeeslCode}" rendered="#{cc.attrs.bean.editStage}"/>
-								<p:inputText value="#{cc.attrs.bean.stage.code}" autocomplete="off" rendered="#{cc.attrs.bean.editStage}"/>
-								
-								<p:outputLabel value="#{msg.jeeslName}" rendered="#{not cc.attrs.bean.editStage}"/>
-								<ui:fragment rendered="#{not cc.attrs.bean.editStage}">
-									<jtp:symbolizer value="#{cc.attrs.bean.stage}" rendered="#{not empty cc.attrs.bean.stage.graphic}" marginRight="5"/>
-									<h:outputText value="#{cc.attrs.bean.stage.name[localeCode].lang}" />
-								</ui:fragment>
-								
-								<jtp:label entity="WorkflowStage" code="progress"/>
-								<p:inputText value="#{cc.attrs.bean.stage.progress}" autocomplete="off" rendered="#{cc.attrs.bean.editStage}"/>
-								<h:outputText value="#{cc.attrs.bean.stage.progress}" rendered="#{not cc.attrs.bean.editStage}"/>
-								
-								<p:outputLabel value="#{msg.jeeslDescription}" rendered="#{not cc.attrs.bean.editStage}"/>
-								<h:outputText value="#{cc.attrs.bean.stage.description[localeCode].lang}" rendered="#{not cc.attrs.bean.editStage}"/>
-								
-							</p:panelGrid>
-							<j:tabTranslationEditor value="#{cc.attrs.bean.stage}" keys="#{cc.attrs.localeKeys}" withDescription="true" rendered="#{cc.attrs.bean.editStage}"/>
-						</p:panel>
-					</h:form>
-					<h:form id="fUpload" enctype="multipart/form-data">
-						<p:fileUpload styleClass="jeeslFileUpload" previewWidth="80" 
-							rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0) and cc.attrs.bean.editStage}"
-							listener="#{cc.attrs.bean.handleFileUpload}" update=":#{cc.id}:grid"
-							mode="advanced" dragDropSupport="false" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/" />
-					</h:form>
+<jp:grid id="grid" rendered="#{cc.attrs.bean.sbhContext.hasSome}">
+	<j:row id="rProcess" rendered="#{cc.attrs.bean.sbhProcess.twiceSelected or cc.attrs.bean.sbhProcess.hasNone}">
+		<j:slot id="sProcesses" width="8">
+			<h:form id="fProcesses">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="p" value="#{cc.attrs.bean.sbhProcess.list}" draggableRows="true"
+						selection="#{cc.attrs.bean.process}" selectionMode="single" rowKey="#{p.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslApprovalProcesses}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addProcess()}" update=":#{cc.id}:rProcess"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderProcesses()}" update="@form :fStatusBar"/>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectProcess()}" update=":#{cc.id}:sProcess :#{cc.id}:fDocuments"/>
 					
+					<p:column rendered="true" headerText="#{msg.jeeslCode}">  
+						<h:outputText value="#{p.code}"/>  
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslName}">  
+						<h:outputText value="#{p.name[localeCode].lang}"/>  
+					</p:column>
+									
+				</p:dataTable>
+			</h:form>
+			<h:form id="fDocuments">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="d" value="#{cc.attrs.bean.documents}" draggableRows="true"
+						selection="#{cc.attrs.bean.document}" selectionMode="single" rowKey="#{d.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="WorkflowDocument" code="listOf">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addDocument()}" update=":#{cc.id}:rProcess"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderDocuments()}" update="@form "/>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectDocument()}" update=":#{cc.id}:sProcess"/>
 					
-					<h:form id="fPermissions" rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0)}">
-						<p:dataTable var="p" value="#{cc.attrs.bean.permissions}" draggableRows="true"
-								selection="#{cc.attrs.bean.permission}" selectionMode="single" rowKey="#{p.id}">
-							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslApprovalPermissions}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addPermission()}" update=":#{cc.id}:sStage"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderPermissions()}" update="@form"/>
-							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectPermission()}" update=":#{cc.id}:sStage"/>
-							
-							<p:column headerText="#{msg.jeeslWorkflowPermissionType}">
-								<jtp:symbolizer value="#{p.type}" marginRight="5"/> 
-								<h:outputText value="#{p.type.name[localeCode].lang}"/>   
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslSecurityRole}">  
-								<h:outputText value="#{p.role.category.name[localeCode].lang} - #{p.role.name[localeCode].lang}"/>  
-							</p:column>
-							<p:column styleClass="jeeslCenter">
-								<jtp:symbolizer value="#{p.modificationLevel}"/>  
-							</p:column>
-						</p:dataTable>
-					</h:form>
-					<h:form id="fPermission" rendered="#{not empty cc.attrs.bean.permission}">
-						<p:panel header="#{msg.jeeslApprovalPermission}" styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelPermission()}" update=":#{cc.id}:rStage"/>
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.savePermission()}" update=":#{cc.id}:rStage"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deletePermission()}" update=":#{cc.id}:rStage"/>
-							</f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslApprovalStage}"/>
-								<h:outputText value="#{cc.attrs.bean.permission.stage.name[localeCode].lang}" />
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowPermissionType}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.permission.type}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.permissionTypes}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.permission.role}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.category.position}.#{r.position} #{r.category.name[localeCode].lang} - #{r.name[localeCode].lang}" itemValue="#{r}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowModificationLevel}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.permission.modificationLevel}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.modificationLevels}" var="l" itemLabel="#{l.name[localeCode].lang}" itemValue="#{l}"/>
-								</p:selectOneMenu>
-								
-							</p:panelGrid>
-							
-						</p:panel>
-					</h:form>
+					<p:column rendered="true" headerText="#{msg.jeeslCode}">  
+						<h:outputText value="#{d.code}"/>  
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslName}">  
+						<h:outputText value="#{d.name[localeCode].lang}"/>  
+					</p:column>
+									
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sProcess" width="4">
+			<h:form id="fProcess" rendered="#{not empty cc.attrs.bean.process}">
+				<p:panel id="pLang" header="#{msg.jeeslApprovalProcess}" styleClass="jeesl-panel">
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveProcess()}" update=":fStatusBar :#{cc.id}:rProcess"/>
+						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.process.id gt 0}" listener="#{cc.attrs.bean.deleteProcess()}" update=":fStatusBar :#{cc.id}:rProcess"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.jeeslApprovalContext}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.process.context}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.sbhContext.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslCode}"/>
+						<p:inputText autocomplete="off" value="#{cc.attrs.bean.process.code}"/>
+						
+						<jtp:label entity="WorkflowProcess" code="pageContext"/>
+						<p:inputText autocomplete="off" value="#{cc.attrs.bean.process.pageContext}"/>
+					</p:panelGrid>
+					<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.process.escalationHandling}"/>
+						<jtp:label entity="WorkflowProcess" code="escalationHandling"/>
+						
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.process.includeInDashboard}"/>
+						<jtp:label entity="WorkflowProcess" code="includeInDashboard"/>
+					</p:panelGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.process}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
+				</p:panel>
+			</h:form>
+			<h:form id="fDocument" rendered="#{not empty cc.attrs.bean.process}">
+				<p:panel id="pLang" rendered="#{not empty cc.attrs.bean.document}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="WorkflowDocument"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveDocument()}" update=":#{cc.id}:rProcess"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteDocument()}" rendered="#{cc.attrs.bean.document.id gt 0}" update=":#{cc.id}:rProcess"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.jeeslCode}"/>
+						<p:inputText autocomplete="off" value="#{cc.attrs.bean.document.code}"/>
+					</p:panelGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.document}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+	<j:row id="rStage">
+		<j:slot id="sStages" width="5" rendered="#{not empty cc.attrs.bean.process}">
+			<h:form id="fStages">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="s" value="#{cc.attrs.bean.stages}" draggableRows="true"
+						selection="#{cc.attrs.bean.stage}" selectionMode="single" rowKey="#{s.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslApprovalStages}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addStage()}" update=":#{cc.id}:rStage"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderStages()}" update="@form"/>
+					<p:ajax event="rowSelect" update=":#{cc.id}:sStage" listener="#{cc.attrs.bean.selectStage()}"/>
+					<p:column rendered="true">
+						<jtp:symbolizer value="#{s.type}" marginRight="5"/>
+						<h:outputText value="#{s.position}"/>
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslName}">
+						<jtp:symbolizer value="#{s}" rendered="#{not empty s.graphic}" marginRight="5"/>
+						<h:outputText value="#{s.name[localeCode].lang}"/>
+					</p:column>
+					<p:column rendered="true" styleClass="jeeslCenter">
+						<f:facet name="header"><jtp:label entity="WorkflowStage" code="progress"/></f:facet>
+						<h:outputText value="#{s.progress}"><f:convertNumber type="percent" /></h:outputText>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<mcg:graph dotScript="#{cc.attrs.bean.processDiagram}" maxwidth="100%"/>
+		</j:slot>
+		<j:slot id="sStage" width="7">
+			<h:form id="fStage" rendered="#{not empty cc.attrs.bean.stage}">
+				<p:panel header="#{msg.jeeslApprovalStage}" styleClass="jeesl-panel">
+					<f:facet name="actions">
+						<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{not cc.attrs.bean.editStage}"/>
+						<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditStage()}" update="@form :#{cc.id}:fUpload" rendered="#{cc.attrs.bean.editStage}"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveStage()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editStage}"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteStage()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.stage.id gt 0) and cc.attrs.bean.editStage}"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.jeeslApprovalProcess}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.stage.process}" effect="fade" autoWidth="false" rendered="#{false and cc.attrs.bean.editStage}">
+							<f:selectItems value="#{cc.attrs.bean.sbhProcess.list}" var="p" itemLabel="#{p.name[localeCode].lang}" itemValue="#{p}"/>
+						</p:selectOneMenu>
+						<h:outputText value="#{cc.attrs.bean.stage.process.context.name[localeCode].lang}: #{cc.attrs.bean.stage.process.name[localeCode].lang}" rendered="#{true or (not cc.attrs.bean.editStage)}"/>
+						
+						<jtp:label entity="WorkflowStage" code="type"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.stage.type}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.editStage}">
+							<f:selectItems value="#{cc.attrs.bean.stageTypes}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						<ui:fragment rendered="#{not cc.attrs.bean.editStage}">
+							<jtp:symbolizer value="#{cc.attrs.bean.stage.type}" marginRight="5"/>
+							<h:outputText value="#{cc.attrs.bean.stage.type.name[localeCode].lang}"/>
+						</ui:fragment>
+						
+						<p:outputLabel value="#{msg.jeeslCode}" rendered="#{cc.attrs.bean.editStage}"/>
+						<p:inputText value="#{cc.attrs.bean.stage.code}" autocomplete="off" rendered="#{cc.attrs.bean.editStage}"/>
+						
+						<p:outputLabel value="#{msg.jeeslName}" rendered="#{not cc.attrs.bean.editStage}"/>
+						<ui:fragment rendered="#{not cc.attrs.bean.editStage}">
+							<jtp:symbolizer value="#{cc.attrs.bean.stage}" rendered="#{not empty cc.attrs.bean.stage.graphic}" marginRight="5"/>
+							<h:outputText value="#{cc.attrs.bean.stage.name[localeCode].lang}" />
+						</ui:fragment>
+						
+						<jtp:label entity="WorkflowStage" code="progress"/>
+						<p:inputText value="#{cc.attrs.bean.stage.progress}" autocomplete="off" rendered="#{cc.attrs.bean.editStage}"/>
+						<h:outputText value="#{cc.attrs.bean.stage.progress}" rendered="#{not cc.attrs.bean.editStage}"/>
+						
+						<p:outputLabel value="#{msg.jeeslDescription}" rendered="#{not cc.attrs.bean.editStage}"/>
+						<h:outputText value="#{cc.attrs.bean.stage.description[localeCode].lang}" rendered="#{not cc.attrs.bean.editStage}"/>
+						
+					</p:panelGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.stage}" keys="#{cc.attrs.localeKeys}" withDescription="true" rendered="#{cc.attrs.bean.editStage}"/>
+				</p:panel>
+			</h:form>
+			<h:form id="fUpload" enctype="multipart/form-data">
+				<p:fileUpload styleClass="jeeslFileUpload" previewWidth="80" 
+					rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0) and cc.attrs.bean.editStage}"
+					listener="#{cc.attrs.bean.handleFileUpload}" update=":#{cc.id}:grid"
+					mode="advanced" dragDropSupport="false" sizeLimit="10000000" fileLimit="1" allowTypes="/(\.|\/)(svg)$/" />
+			</h:form>
+			
+			
+			<h:form id="fPermissions" rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0)}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="p" value="#{cc.attrs.bean.permissions}" draggableRows="true"
+						selection="#{cc.attrs.bean.permission}" selectionMode="single" rowKey="#{p.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslApprovalPermissions}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addPermission()}" update=":#{cc.id}:sStage"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderPermissions()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectPermission()}" update=":#{cc.id}:sStage"/>
 					
-					<h:form id="fNotifications" rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0)}">
-						<p:dataTable var="n" value="#{cc.attrs.bean.notifications}" draggableRows="true"
-								selection="#{cc.attrs.bean.notification}" selectionMode="single" rowKey="#{n.id}">
-							<f:facet name="header">
-								<j:dtHeader entity="WorkflowStageNotification" code="listOf">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addNotification()}" update=":#{cc.id}:sStage"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderNotification()}" update="@form"/>
-							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectNotification()}" update=":#{cc.id}:sStage"/>
-							
-							<p:column rendered="true" styleClass="jeeslCenter">
-								<h:graphicImage rendered="#{not n.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
-								<h:outputText rendered="#{n.visible}" value="#{n.position}"/>
-							</p:column>
-							
-							<p:column rendered="true" styleClass="jeeslCenter">
-								<jtp:symbolizer value="#{n.channel}" />
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslCategory}">  
-								<h:outputText value="#{n.role.category.name[localeCode].lang}"/>  
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslSecurityRole}">  
-								<h:outputText value="#{n.role.name[localeCode].lang}"/>  
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationScope}">  
-								<h:outputText value="#{n.scope.name[localeCode].lang}"/>+
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationTemplate}">  
-								<h:outputText value="#{n.template.name[localeCode].lang}"/>
-							</p:column>
-							
-							<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationTemplate}"> 
-								<f:facet name="header"><jtp:label entity="WorkflowStageNotification" code="overdueHours"/></f:facet> 
-								<h:outputText value="#{n.overdueHours}"/>
-							</p:column>
-							
-						</p:dataTable>
-					</h:form>
-					<h:form id="fNotification" rendered="#{not empty cc.attrs.bean.notification}">
-						<p:panel header="#{appLabelBean.entities['WorkflowStageNotification'][localeCode].lang}" styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelNotification()}" update=":#{cc.id}:rStage"/>
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveNotification()}" update=":#{cc.id}:rStage"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteNotification()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.notification.id gt 0)}"/>
-							</f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.aupSecurityVisible}"/>
-								<p:selectBooleanCheckbox value="#{cc.attrs.bean.notification.visible}"/>
-								
-								<p:outputLabel value="#{msg.jeeslApprovalTransition}"/>
-								<h:outputText value="#{cc.attrs.bean.notification.stage.name[localeCode].lang}" />
-								
-								<p:outputLabel value="#{msg.jeeslTemplateChannel}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.notification.channel}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.channels}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.notification.role}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.category.name[localeCode].lang} - #{r.name[localeCode].lang}" itemValue="#{r}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowCommunicationScope}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.notification.scope}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.scopes}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowCommunicationTemplate}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.notification.template}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.templates}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-								</p:selectOneMenu>
-								
-								<jtp:label entity="WorkflowStageNotification" code="overdueHours"/>
-								<p:inputText value="#{cc.attrs.bean.notification.overdueHours}"/>
-							</p:panelGrid>
-						</p:panel>
-					</h:form>
+					<p:column headerText="#{msg.jeeslWorkflowPermissionType}">
+						<jtp:symbolizer value="#{p.type}" marginRight="5"/> 
+						<h:outputText value="#{p.type.name[localeCode].lang}"/>   
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslSecurityRole}">  
+						<h:outputText value="#{p.role.category.name[localeCode].lang} - #{p.role.name[localeCode].lang}"/>  
+					</p:column>
+					<p:column styleClass="jeeslCenter">
+						<jtp:symbolizer value="#{p.modificationLevel}"/>  
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fPermission" rendered="#{not empty cc.attrs.bean.permission}">
+				<p:panel header="#{msg.jeeslApprovalPermission}" styleClass="jeesl-panel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelPermission()}" update=":#{cc.id}:rStage"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.savePermission()}" update=":#{cc.id}:rStage"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deletePermission()}" update=":#{cc.id}:rStage"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.jeeslApprovalStage}"/>
+						<h:outputText value="#{cc.attrs.bean.permission.stage.name[localeCode].lang}" />
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowPermissionType}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.permission.type}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.permissionTypes}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.permission.role}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.category.position}.#{r.position} #{r.category.name[localeCode].lang} - #{r.name[localeCode].lang}" itemValue="#{r}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowModificationLevel}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.permission.modificationLevel}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.modificationLevels}" var="l" itemLabel="#{l.name[localeCode].lang}" itemValue="#{l}"/>
+						</p:selectOneMenu>
+						
+					</p:panelGrid>
 					
-					<h:form id="fTransitions" rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0)}">
-						<p:dataTable var="t" value="#{cc.attrs.bean.transitions}" draggableRows="true"
-								selection="#{cc.attrs.bean.transition}" selectionMode="single" rowKey="#{t.id}">
-							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslApprovalTransitions}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTransition()}" update=":#{cc.id}:sStage"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTransitions()}" update="@form"/>
-							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTransition()}" update=":#{cc.id}:sStage"/>
-							
-							<p:column styleClass="jeeslCenter">
-								<h:graphicImage rendered="#{not t.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
-								<jtp:symbolizer rendered="#{t.visible}" value="#{t.type}"/>  
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslName}">
-								<h:outputText value="#{t.name[localeCode].lang}"/>
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslApprovalTrasitionDestination}">  
-								<h:outputText value="#{t.destination.name[localeCode].lang}"/>  
-							</p:column>
-							<p:column styleClass="jeeslCenter">
-								<h:graphicImage rendered="#{not empty t.role}" library="jeeslPrototypeGfx" name="12/sb/roles.png"/>
-							</p:column>
-											
-						</p:dataTable>
-					</h:form>
-					<h:form id="fTransition" rendered="#{not empty cc.attrs.bean.transition}">
-						<p:panel header="#{msg.jeeslApprovalTransition} (#{cc.attrs.bean.transition.id})" styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{not cc.attrs.bean.editTransition}"/>
-								<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{cc.attrs.bean.editTransition}"/>
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveTransition()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editTransition}"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteTransition()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.transition.id gt 0) and cc.attrs.bean.editTransition}"/>
-							</f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-								<p:outputLabel value="#{msg.jeeslApprovalTrasitionSource}"/>
-								<h:outputText value="#{cc.attrs.bean.transition.source.name[localeCode].lang}" />
-								
-								<p:outputLabel value="#{msg.jeeslApprovalTrasitionDestination}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.transition.destination}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.editTransition}">
-									<f:selectItems value="#{cc.attrs.bean.stages}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
-								</p:selectOneMenu>
-								<h:outputText value="#{cc.attrs.bean.transition.destination.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowTrasitionType}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.transition.type}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.editTransition}">
-									<f:selectItems value="#{cc.attrs.bean.transitionTypes}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-								</p:selectOneMenu>
-								<h:outputText value="#{cc.attrs.bean.transition.type.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
+				</p:panel>
+			</h:form>
+			
+			<h:form id="fNotifications" rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0)}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="n" value="#{cc.attrs.bean.notifications}" draggableRows="true"
+						selection="#{cc.attrs.bean.notification}" selectionMode="single" rowKey="#{n.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="WorkflowStageNotification" code="listOf">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addNotification()}" update=":#{cc.id}:sStage"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderNotification()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectNotification()}" update=":#{cc.id}:sStage"/>
+					
+					<p:column rendered="true" styleClass="jeeslCenter">
+						<h:graphicImage rendered="#{not n.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
+						<h:outputText rendered="#{n.visible}" value="#{n.position}"/>
+					</p:column>
+					
+					<p:column rendered="true" styleClass="jeeslCenter">
+						<jtp:symbolizer value="#{n.channel}" />
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslCategory}">  
+						<h:outputText value="#{n.role.category.name[localeCode].lang}"/>  
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslSecurityRole}">  
+						<h:outputText value="#{n.role.name[localeCode].lang}"/>  
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationScope}">  
+						<h:outputText value="#{n.scope.name[localeCode].lang}"/>+
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationTemplate}">  
+						<h:outputText value="#{n.template.name[localeCode].lang}"/>
+					</p:column>
+					
+					<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationTemplate}"> 
+						<f:facet name="header"><jtp:label entity="WorkflowStageNotification" code="overdueHours"/></f:facet> 
+						<h:outputText value="#{n.overdueHours}"/>
+					</p:column>
+					
+				</p:dataTable>
+			</h:form>
+			<h:form id="fNotification" rendered="#{not empty cc.attrs.bean.notification}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="WorkflowStageNotification" code="label"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelNotification()}" update=":#{cc.id}:rStage"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveNotification()}" update=":#{cc.id}:rStage"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteNotification()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.notification.id gt 0)}"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.aupSecurityVisible}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.notification.visible}"/>
+						
+						<p:outputLabel value="#{msg.jeeslApprovalTransition}"/>
+						<h:outputText value="#{cc.attrs.bean.notification.stage.name[localeCode].lang}" />
+						
+						<p:outputLabel value="#{msg.jeeslTemplateChannel}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.notification.channel}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.channels}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.notification.role}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.category.name[localeCode].lang} - #{r.name[localeCode].lang}" itemValue="#{r}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowCommunicationScope}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.notification.scope}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.scopes}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowCommunicationTemplate}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.notification.template}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.templates}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="WorkflowStageNotification" code="overdueHours"/>
+						<p:inputText value="#{cc.attrs.bean.notification.overdueHours}"/>
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+			
+			<h:form id="fTransitions" rendered="#{(not empty cc.attrs.bean.stage) and (cc.attrs.bean.stage.id gt 0)}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="t" value="#{cc.attrs.bean.transitions}" draggableRows="true"
+						selection="#{cc.attrs.bean.transition}" selectionMode="single" rowKey="#{t.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslApprovalTransitions}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTransition()}" update=":#{cc.id}:sStage"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTransitions()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectTransition()}" update=":#{cc.id}:sStage"/>
+					
+					<p:column styleClass="jeeslCenter">
+						<h:graphicImage rendered="#{not t.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
+						<jtp:symbolizer rendered="#{t.visible}" value="#{t.type}"/>  
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslName}">
+						<h:outputText value="#{t.name[localeCode].lang}"/>
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslApprovalTrasitionDestination}">  
+						<h:outputText value="#{t.destination.name[localeCode].lang}"/>  
+					</p:column>
+					<p:column styleClass="jeeslCenter">
+						<h:graphicImage rendered="#{not empty t.role}" library="jeeslPrototypeGfx" name="12/sb/roles.png"/>
+					</p:column>
+									
+				</p:dataTable>
+			</h:form>
+			<h:form id="fTransition" rendered="#{not empty cc.attrs.bean.transition}">
+				<p:panel header="#{msg.jeeslApprovalTransition} (#{cc.attrs.bean.transition.id})" styleClass="jeesl-panel">
+					<f:facet name="actions">
+						<j:icon type="jeeslEditGrey" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{not cc.attrs.bean.editTransition}"/>
+						<j:icon type="jeeslEdit" listener="#{cc.attrs.bean.toggleEditTransition()}" update="@form" rendered="#{cc.attrs.bean.editTransition}"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveTransition()}" update=":#{cc.id}:rStage" rendered="#{cc.attrs.bean.editTransition}"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteTransition()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.transition.id gt 0) and cc.attrs.bean.editTransition}"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+						<p:outputLabel value="#{msg.jeeslApprovalTrasitionSource}"/>
+						<h:outputText value="#{cc.attrs.bean.transition.source.name[localeCode].lang}" />
+						
+						<p:outputLabel value="#{msg.jeeslApprovalTrasitionDestination}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.transition.destination}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.editTransition}">
+							<f:selectItems value="#{cc.attrs.bean.stages}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+						</p:selectOneMenu>
+						<h:outputText value="#{cc.attrs.bean.transition.destination.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowTrasitionType}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.transition.type}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.editTransition}">
+							<f:selectItems value="#{cc.attrs.bean.transitionTypes}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						<h:outputText value="#{cc.attrs.bean.transition.type.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
 
-								<p:outputLabel value="#{msg.jeeslWorkflowTransitionLabel}" rendered="#{not cc.attrs.bean.editTransition}"/>
-								<h:outputText value="#{cc.attrs.bean.transition.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowTransitionLabel}" rendered="#{not cc.attrs.bean.editTransition}"/>
-								<h:outputText value="#{cc.attrs.bean.transition.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowTransitionConfirmation}" rendered="#{not cc.attrs.bean.editTransition}"/>
-								<h:outputText value="#{cc.attrs.bean.transition.confirmation[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
-								
-								<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.transition.role}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.editTransition}">
-									<f:selectItem itemLabel="--"/>
-									<f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.category.position}.#{r.position} #{r.category.name[localeCode].lang} - #{r.name[localeCode].lang}" itemValue="#{r}"/>
-								</p:selectOneMenu>
-								<h:outputText value="#{cc.attrs.bean.transition.role.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
-								
-								<jtp:label entity="WorkflowTransition" code="autoTransitionTimer"/>
-                        		<jtp:inputText value="#{cc.attrs.bean.nnb.a}" rendered="#{cc.attrs.bean.editTransition}"/>
-                        		<h:outputText value="#{cc.attrs.bean.transition.autoTransitionTimer}" rendered="#{not cc.attrs.bean.editTransition}"/>
-							</p:panelGrid>
-							<p:panelGrid columns="4" columnClasses="jeeslGrid30,jeeslGrid20,jeeslGrid30,jeeslGrid20">
-								<p:outputLabel value="#{msg.jeeslVisible}"/>
-								<p:selectBooleanCheckbox value="#{cc.attrs.bean.transition.visible}" disabled="#{not cc.attrs.bean.editTransition}"/>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowTrasitionSignatureScreen}"/>
-								<p:selectBooleanCheckbox value="#{cc.attrs.bean.transition.screenSignature}" disabled="#{not cc.attrs.bean.editTransition}"/>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowTrasitionRemarkMandatory}"/>
-								<p:selectBooleanCheckbox value="#{cc.attrs.bean.transition.remarkMandatory}" disabled="#{not cc.attrs.bean.editTransition}"/>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowTrasitionFileUpload}"/>
-								<p:selectBooleanCheckbox value="#{cc.attrs.bean.transition.fileUpload}" disabled="#{not cc.attrs.bean.editTransition}"/>
-							</p:panelGrid>
-							
-							
-							<p:tabView id="tabViewKey" var="t" value="#{cc.attrs.localeKeys}" rendered="#{cc.attrs.bean.editTransition}">  
-						  		<p:tab title="#{t}">
-						  			<p:outputLabel value="#{msg.jeeslWorkflowTransitionLabel}"/>
-							  		<p:inputTextarea value="#{cc.attrs.bean.transition.name[t].lang}" maxlength="254" style="width:100%" autocomplete="off"/>
-						  			<p:outputLabel value="#{msg.jeeslWorkflowTransitionDescription}"/>
-						  			<p:inputTextarea value="#{cc.attrs.bean.transition.description[t].lang}" style="width:100%" autocomplete="off"/>
-						  			<p:outputLabel value="#{msg.jeeslWorkflowTransitionConfirmation}"/>
-						  			<p:inputTextarea value="#{cc.attrs.bean.transition.confirmation[t].lang}" style="width:100%" autocomplete="off"/>
-						  		</p:tab>  
-						  	</p:tabView> 
-						</p:panel>
-					</h:form>
-					<h:form id="fActions" rendered="#{(not empty cc.attrs.bean.transition) and (cc.attrs.bean.transition.id gt 0)}">
-						<p:dataTable var="a" value="#{cc.attrs.bean.actions}" draggableRows="true"
-								selection="#{cc.attrs.bean.action}" selectionMode="single" rowKey="#{a.id}">
-							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslApprovalActions}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAction()}" update=":#{cc.id}:sStage"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderActions()}" update="@form"/>
-							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectAction()}" update=":#{cc.id}:sStage"/>
-							
-							<p:column rendered="true" headerText="#{msg.jeeslWorkflowBot}">  
-								<h:outputText value="#{a.bot.name[localeCode].lang}"/>
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslRevisionEntity} - #{msg.jeeslRevisionAttribute}">
-								<ui:fragment rendered="#{a.bot.code eq 'statusUpdate'}">
-									<h:outputText value="#{a.entity.name[localeCode].lang}"/>
-									<jtp:symbolizer value="#{a.attribute.relation}" marginLeftRight="5"/>
-									<h:outputText value="#{a.attribute.name[localeCode].lang}"/>
-								</ui:fragment>
-								
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslApprovalOption}">
-								<ui:fragment rendered="#{a.bot.code eq 'statusUpdate'}">
-									<jtp:symbolizer value="#{a.option}" marginRight="5" rendered="#{a.bot.code eq 'statusUpdate'}"/>
-									<h:outputText value="#{a.option.name[localeCode].lang}"/>
-								</ui:fragment>
-								<ui:fragment rendered="#{a.bot.code eq 'callbackCommand'}">
-									<h:outputText value="#{a.callbackCommand}"/>
-								</ui:fragment>
-							</p:column>
-						</p:dataTable>
-					</h:form>
-					<h:form id="fAction" rendered="#{not empty cc.attrs.bean.action}">
-						<p:panel header="#{msg.jeeslApprovalAction}" styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelAction()}" update=":#{cc.id}:rStage"/>
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:rStage"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAction()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.action.id gt 0)}"/>
-							</f:facet>
-							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslApprovalTransition}"/>
-								<h:outputText value="#{cc.attrs.bean.action.transition.name[localeCode].lang}" />
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowBot}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.action.bot}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.bots}" var="b" itemLabel="#{b.name[localeCode].lang}" itemValue="#{b}"/>
-									<p:ajax event="change" listener="#{cc.attrs.bean.changeBot()}" update="@form"/>
-								</p:selectOneMenu>
-							</p:panelGrid>
-							<p:panelGrid id="pgEntity" columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslRevisionEntity}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.action.entity}" effect="fade" autoWidth="false">
-									<f:selectItem itemLabel="--"/>
-									<f:selectItems value="#{cc.attrs.bean.entities}" var="e" itemLabel="#{e.category.name[localeCode].lang} - #{e.name[localeCode].lang}" itemValue="#{e}"/>
-									<p:ajax event="change" listener="#{cc.attrs.bean.changeEntity()}" update="pgEntity"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslRevisionAttribute}" rendered="#{not empty cc.attrs.bean.action.entity}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.action.attribute}" effect="fade" autoWidth="false" rendered="#{not empty cc.attrs.bean.action.entity}">
-									<f:selectItems value="#{cc.attrs.bean.attributes}" var="a" itemLabel="#{a.name[localeCode].lang}" itemValue="#{a}"/>
-									<p:ajax event="change" listener="#{cc.attrs.bean.changeAttribute()}" update="pgEntity"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslApprovalOption}" rendered="#{not empty cc.attrs.bean.action.entity}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.option}" effect="fade" autoWidth="false" rendered="#{not empty cc.attrs.bean.action.entity}">
-									<f:selectItems value="#{cc.attrs.bean.options}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s.id}"/>
-								</p:selectOneMenu>
-							</p:panelGrid>
-							<p:panelGrid id="pgCommand" columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslWorkflowActionCommand}"/>
-								<p:inputText value="#{cc.attrs.bean.action.callbackCommand}" autocomplete="off"/>
-							</p:panelGrid>
-							
-							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
-						</p:panel>
-					</h:form>
-					<h:form id="fRequired" rendered="#{(not empty cc.attrs.bean.transition) and (cc.attrs.bean.transition.id gt 0)}">
-						<p:dataTable var="d" value="#{cc.attrs.bean.opDocument.tbList}"
-									selection="#{cc.attrs.bean.opDocument.tb}" selectionMode="single" rowKey="#{d.id}">
-							<f:facet name="header">
-								<j:dtHeader entity="WorkflowTransition" code="documents">
-									<j:icon type="jeeslRemove" listener="#{cc.attrs.bean.opDocument.removeEntity()}" update=":#{cc.id}:fRequired" rendered="#{not empty cc.attrs.bean.opDocument.tb}"/>
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.prepareAddRequired()}" update=":#{cc.id}:opRequired" oncomplete="PF('wvRequired').show();"/>
-								</j:dtHeader>
-							</f:facet>
-		                    <p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectRequired()}" update=":#{cc.id}:fRequired"/>
-							<p:column>
-								<f:facet name="header"><jtp:label entity="WorkflowDocument" code="code"/></f:facet>
-								<h:outputText value="#{d.code}"/>
-							</p:column>
-							<p:column>
-								<f:facet name="header"><jtp:label entity="WorkflowDocument" code="name"/></f:facet>
-								<h:outputText value="#{d.name[localeCode].lang}"/>
-							</p:column>
-						</p:dataTable>
-					</h:form>
-					<h:form id="opRequired">
-						<jp:xpathOverlayTable  widgetVar="wvRequired" handler="#{cc.attrs.bean.opDocument}" update=":#{cc.id}:fRequired"/>
-					</h:form>
+						<p:outputLabel value="#{msg.jeeslWorkflowTransitionLabel}" rendered="#{not cc.attrs.bean.editTransition}"/>
+						<h:outputText value="#{cc.attrs.bean.transition.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowTransitionLabel}" rendered="#{not cc.attrs.bean.editTransition}"/>
+						<h:outputText value="#{cc.attrs.bean.transition.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowTransitionConfirmation}" rendered="#{not cc.attrs.bean.editTransition}"/>
+						<h:outputText value="#{cc.attrs.bean.transition.confirmation[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
+						
+						<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.transition.role}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.editTransition}">
+							<f:selectItem itemLabel="--"/>
+							<f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.category.position}.#{r.position} #{r.category.name[localeCode].lang} - #{r.name[localeCode].lang}" itemValue="#{r}"/>
+						</p:selectOneMenu>
+						<h:outputText value="#{cc.attrs.bean.transition.role.name[localeCode].lang}" rendered="#{not cc.attrs.bean.editTransition}"/>
+						
+						<jtp:label entity="WorkflowTransition" code="autoTransitionTimer"/>
+                      		<jtp:inputText value="#{cc.attrs.bean.nnb.a}" rendered="#{cc.attrs.bean.editTransition}"/>
+                      		<h:outputText value="#{cc.attrs.bean.transition.autoTransitionTimer}" rendered="#{not cc.attrs.bean.editTransition}"/>
+					</p:panelGrid>
+					<p:panelGrid columns="4" columnClasses="jeeslGrid30,jeeslGrid20,jeeslGrid30,jeeslGrid20">
+						<p:outputLabel value="#{msg.jeeslVisible}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.transition.visible}" disabled="#{not cc.attrs.bean.editTransition}"/>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowTrasitionSignatureScreen}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.transition.screenSignature}" disabled="#{not cc.attrs.bean.editTransition}"/>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowTrasitionRemarkMandatory}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.transition.remarkMandatory}" disabled="#{not cc.attrs.bean.editTransition}"/>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowTrasitionFileUpload}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.transition.fileUpload}" disabled="#{not cc.attrs.bean.editTransition}"/>
+					</p:panelGrid>
 					
-					<h:form id="fCommunications" rendered="#{(not empty cc.attrs.bean.transition) and (cc.attrs.bean.transition.id gt 0)}">
-						<p:dataTable var="c" value="#{cc.attrs.bean.communications}" draggableRows="true"
-								selection="#{cc.attrs.bean.communication}" selectionMode="single" rowKey="#{c.id}">
-							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslApprovalCommunications}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addCommunication()}" update=":#{cc.id}:sStage"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderCommunication()}" update="@form"/>
-							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCommunication()}" update=":#{cc.id}:sStage"/>
-							<p:column rendered="true" styleClass="jeeslCenter">
-								<jtp:symbolizer value="#{c.channel}" />
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslCategory}">  
-								<h:outputText value="#{c.role.category.name[localeCode].lang}"/>
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslSecurityRole}">  
-								<h:outputText value="#{c.role.name[localeCode].lang}"/>  
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationScope}">  
-								<h:outputText value="#{c.scope.name[localeCode].lang}"/>
-							</p:column>
-							<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationTemplate}">  
-								<h:outputText value="#{c.template.name[localeCode].lang}"/>
-							</p:column>
-						</p:dataTable>
-					</h:form>
-					<h:form id="fCommunication" rendered="#{not empty cc.attrs.bean.communication}">
-						<p:panel header="#{msg.jeeslApprovalCommunication}" styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelCommunication()}" update=":#{cc.id}:rStage"/>
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveCommunication()}" update=":#{cc.id}:rStage"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteCommunication()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.communication.id gt 0)}"/>
-							</f:facet>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslApprovalTransition}"/>
-								<h:outputText value="#{cc.attrs.bean.communication.transition.name[localeCode].lang}" />
-								
-								<p:outputLabel value="#{msg.jeeslTemplateChannel}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.communication.channel}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.channels}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.communication.role}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.category.name[localeCode].lang} - #{r.name[localeCode].lang}" itemValue="#{r}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowCommunicationScope}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.communication.scope}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.scopes}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslWorkflowCommunicationTemplate}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.communication.template}" effect="fade" autoWidth="false">
-									<f:selectItems value="#{cc.attrs.bean.templates}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-								</p:selectOneMenu>
-							</p:panelGrid>
-						</p:panel>
-					</h:form>
 					
-				</j:slot>
-			</j:row>
-	    </jp:grid>
+					<p:tabView id="tabViewKey" var="t" value="#{cc.attrs.localeKeys}" rendered="#{cc.attrs.bean.editTransition}">  
+				  		<p:tab title="#{t}">
+				  			<p:outputLabel value="#{msg.jeeslWorkflowTransitionLabel}"/>
+					  		<p:inputTextarea value="#{cc.attrs.bean.transition.name[t].lang}" maxlength="254" style="width:100%" autocomplete="off"/>
+				  			<p:outputLabel value="#{msg.jeeslWorkflowTransitionDescription}"/>
+				  			<p:inputTextarea value="#{cc.attrs.bean.transition.description[t].lang}" style="width:100%" autocomplete="off"/>
+				  			<p:outputLabel value="#{msg.jeeslWorkflowTransitionConfirmation}"/>
+				  			<p:inputTextarea value="#{cc.attrs.bean.transition.confirmation[t].lang}" style="width:100%" autocomplete="off"/>
+				  		</p:tab>  
+				  	</p:tabView> 
+				</p:panel>
+			</h:form>
+			<h:form id="fActions" rendered="#{(not empty cc.attrs.bean.transition) and (cc.attrs.bean.transition.id gt 0)}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="a" value="#{cc.attrs.bean.actions}" draggableRows="true"
+						selection="#{cc.attrs.bean.action}" selectionMode="single" rowKey="#{a.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslApprovalActions}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAction()}" update=":#{cc.id}:sStage"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderActions()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectAction()}" update=":#{cc.id}:sStage"/>
+					
+					<p:column rendered="true" headerText="#{msg.jeeslWorkflowBot}">  
+						<h:outputText value="#{a.bot.name[localeCode].lang}"/>
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslRevisionEntity} - #{msg.jeeslRevisionAttribute}">
+						<ui:fragment rendered="#{a.bot.code eq 'statusUpdate'}">
+							<h:outputText value="#{a.entity.name[localeCode].lang}"/>
+							<jtp:symbolizer value="#{a.attribute.relation}" marginLeftRight="5"/>
+							<h:outputText value="#{a.attribute.name[localeCode].lang}"/>
+						</ui:fragment>
+						
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslApprovalOption}">
+						<ui:fragment rendered="#{a.bot.code eq 'statusUpdate'}">
+							<jtp:symbolizer value="#{a.option}" marginRight="5" rendered="#{a.bot.code eq 'statusUpdate'}"/>
+							<h:outputText value="#{a.option.name[localeCode].lang}"/>
+						</ui:fragment>
+						<ui:fragment rendered="#{a.bot.code eq 'callbackCommand'}">
+							<h:outputText value="#{a.callbackCommand}"/>
+						</ui:fragment>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fAction" rendered="#{not empty cc.attrs.bean.action}">
+				<p:panel header="#{msg.jeeslApprovalAction}" styleClass="jeeslPanel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelAction()}" update=":#{cc.id}:rStage"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:rStage"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAction()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.action.id gt 0)}"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.jeeslApprovalTransition}"/>
+						<h:outputText value="#{cc.attrs.bean.action.transition.name[localeCode].lang}" />
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowBot}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.action.bot}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.bots}" var="b" itemLabel="#{b.name[localeCode].lang}" itemValue="#{b}"/>
+							<p:ajax event="change" listener="#{cc.attrs.bean.changeBot()}" update="@form"/>
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid id="pgEntity" columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.jeeslRevisionEntity}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.action.entity}" effect="fade" autoWidth="false">
+							<f:selectItem itemLabel="--"/>
+							<f:selectItems value="#{cc.attrs.bean.entities}" var="e" itemLabel="#{e.category.name[localeCode].lang} - #{e.name[localeCode].lang}" itemValue="#{e}"/>
+							<p:ajax event="change" listener="#{cc.attrs.bean.changeEntity()}" update="pgEntity"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslRevisionAttribute}" rendered="#{not empty cc.attrs.bean.action.entity}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.action.attribute}" effect="fade" autoWidth="false" rendered="#{not empty cc.attrs.bean.action.entity}">
+							<f:selectItems value="#{cc.attrs.bean.attributes}" var="a" itemLabel="#{a.name[localeCode].lang}" itemValue="#{a}"/>
+							<p:ajax event="change" listener="#{cc.attrs.bean.changeAttribute()}" update="pgEntity"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslApprovalOption}" rendered="#{not empty cc.attrs.bean.action.entity}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.option}" effect="fade" autoWidth="false" rendered="#{not empty cc.attrs.bean.action.entity}">
+							<f:selectItems value="#{cc.attrs.bean.options}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s.id}"/>
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<p:panelGrid id="pgCommand" columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.jeeslWorkflowActionCommand}"/>
+						<p:inputText value="#{cc.attrs.bean.action.callbackCommand}" autocomplete="off"/>
+					</p:panelGrid>
+					
+					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
+				</p:panel>
+			</h:form>
+			<h:form id="fRequired" rendered="#{(not empty cc.attrs.bean.transition) and (cc.attrs.bean.transition.id gt 0)}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="d" value="#{cc.attrs.bean.opDocument.tbList}"
+						selection="#{cc.attrs.bean.opDocument.tb}" selectionMode="single" rowKey="#{d.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="WorkflowTransition" code="documents">
+							<j:icon type="jeeslRemove" listener="#{cc.attrs.bean.opDocument.removeEntity()}" update=":#{cc.id}:fRequired" rendered="#{not empty cc.attrs.bean.opDocument.tb}"/>
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.prepareAddRequired()}" update=":#{cc.id}:opRequired" oncomplete="PF('wvRequired').show();"/>
+						</j:dtHeader>
+					</f:facet>
+                    <p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectRequired()}" update=":#{cc.id}:fRequired"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="WorkflowDocument" code="code"/></f:facet>
+						<h:outputText value="#{d.code}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="WorkflowDocument" code="name"/></f:facet>
+						<h:outputText value="#{d.name[localeCode].lang}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="opRequired">
+				<jp:xpathOverlayTable  widgetVar="wvRequired" handler="#{cc.attrs.bean.opDocument}" update=":#{cc.id}:fRequired"/>
+			</h:form>
+			
+			<h:form id="fCommunications" rendered="#{(not empty cc.attrs.bean.transition) and (cc.attrs.bean.transition.id gt 0)}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="c" value="#{cc.attrs.bean.communications}" draggableRows="true"
+						selection="#{cc.attrs.bean.communication}" selectionMode="single" rowKey="#{c.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslApprovalCommunications}">
+							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addCommunication()}" update=":#{cc.id}:sStage"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderCommunication()}" update="@form"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectCommunication()}" update=":#{cc.id}:sStage"/>
+					<p:column rendered="true" styleClass="jeeslCenter">
+						<jtp:symbolizer value="#{c.channel}" />
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslCategory}">  
+						<h:outputText value="#{c.role.category.name[localeCode].lang}"/>
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslSecurityRole}">  
+						<h:outputText value="#{c.role.name[localeCode].lang}"/>  
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationScope}">  
+						<h:outputText value="#{c.scope.name[localeCode].lang}"/>
+					</p:column>
+					<p:column rendered="true" headerText="#{msg.jeeslWorkflowCommunicationTemplate}">  
+						<h:outputText value="#{c.template.name[localeCode].lang}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fCommunication" rendered="#{not empty cc.attrs.bean.communication}">
+				<p:panel header="#{msg.jeeslApprovalCommunication}" styleClass="jeeslPanel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelCommunication()}" update=":#{cc.id}:rStage"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveCommunication()}" update=":#{cc.id}:rStage"/>
+						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteCommunication()}" update=":#{cc.id}:rStage" rendered="#{(cc.attrs.bean.communication.id gt 0)}"/>
+					</f:facet>
+					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+						<p:outputLabel value="#{msg.jeeslApprovalTransition}"/>
+						<h:outputText value="#{cc.attrs.bean.communication.transition.name[localeCode].lang}" />
+						
+						<p:outputLabel value="#{msg.jeeslTemplateChannel}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.communication.channel}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.channels}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.communication.role}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.category.name[localeCode].lang} - #{r.name[localeCode].lang}" itemValue="#{r}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowCommunicationScope}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.communication.scope}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.scopes}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslWorkflowCommunicationTemplate}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.communication.template}" effect="fade" autoWidth="false">
+							<f:selectItems value="#{cc.attrs.bean.templates}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+			
+		</j:slot>
+	</j:row>
+</jp:grid>
 	</composite:implementation>
 </html>
