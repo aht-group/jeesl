@@ -6,9 +6,12 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-public interface JeeslFeature
-		extends Serializable,EjbWithId,EjbSaveable,EjbWithCode,EjbWithPositionVisible
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
+public interface JeeslSystemFeature extends Serializable,EjbWithId,EjbSaveable,EjbWithCode,EjbWithPositionVisible
 {
 	String getName();
 	void setName(String name);

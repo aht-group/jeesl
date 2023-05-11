@@ -9,11 +9,11 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.ejb.system.EjbSystemFeatureFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.system.JeeslFeature;
+import org.jeesl.interfaces.model.system.JeeslSystemFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractAdminFeatureBean <F extends JeeslFeature>
+public class AbstractAdminFeatureBean <F extends JeeslSystemFeature>
 		implements Serializable
 {
 	private static final long serialVersionUID = 1L;

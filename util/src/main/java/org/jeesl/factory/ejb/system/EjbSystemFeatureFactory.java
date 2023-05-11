@@ -1,10 +1,10 @@
 package org.jeesl.factory.ejb.system;
 
-import org.jeesl.interfaces.model.system.JeeslFeature;
+import org.jeesl.interfaces.model.system.JeeslSystemFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbSystemFeatureFactory<F extends JeeslFeature>
+public class EjbSystemFeatureFactory<F extends JeeslSystemFeature>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbSystemFeatureFactory.class);
 	
@@ -15,7 +15,7 @@ public class EjbSystemFeatureFactory<F extends JeeslFeature>
         this.cFeature = cFeature;
 	}
 	
-	public static <F extends JeeslFeature>
+	public static <F extends JeeslSystemFeature>
 		EjbSystemFeatureFactory<F> factory(final Class<F> cFeature)
 	{
 		return new EjbSystemFeatureFactory<F>(cFeature);

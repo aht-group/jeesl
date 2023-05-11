@@ -26,7 +26,8 @@
 	<j:row>
 		<j:slot id="sCategories" width="5">
 			<h:form id="fCategories">
-				<p:dataTable var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
+				<p:dataTable styleClass="jeesl-datatable"
+						var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
 						selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}"
 						paginator="true" rows="5" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">>
 					<f:facet name="header">
@@ -93,8 +94,9 @@
 				</p:panel>
 			</h:form>
 			<h:form id="fTokens" rendered="#{(not empty cc.attrs.bean.template) and (cc.attrs.bean.template.id gt 0)}">
-				<p:dataTable var="token" value="#{cc.attrs.bean.tokens}" draggableRows="true"
-					selection="#{cc.attrs.bean.token}" selectionMode="single" rowKey="#{token.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="token" value="#{cc.attrs.bean.tokens}" draggableRows="true"
+						selection="#{cc.attrs.bean.token}" selectionMode="single" rowKey="#{token.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoTokens}">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addToken()}" update=":#{cc.id}:fTokens :#{cc.id}:fToken"/>
@@ -119,7 +121,7 @@
 			      </p:dataTable>
 			</h:form>
 			<h:form id="fToken">
-				<p:panel header="#{msg.jeeslIoToken}" rendered="#{not empty cc.attrs.bean.token}" styleClass="jeeslPanel">
+				<p:panel header="#{msg.jeeslIoToken}" rendered="#{not empty cc.attrs.bean.token}" styleClass="jeesl-panel">
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelToken()}" update=":#{cc.id}:sTokens"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveToken()}" update=":#{cc.id}:sTokens"/>
@@ -150,8 +152,9 @@
 	<j:row id="row2">
 		<j:slot id="sDefinitions" width="2" rendered="#{(not empty cc.attrs.bean.template) and (cc.attrs.bean.template.id gt 0)}">
 			<h:form id="fDefinitions">
-				<p:dataTable var="d" value="#{cc.attrs.bean.definitions}" draggableRows="false"
-					selection="#{cc.attrs.bean.definition}" selectionMode="single" rowKey="#{d.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="d" value="#{cc.attrs.bean.definitions}" draggableRows="false"
+						selection="#{cc.attrs.bean.definition}" selectionMode="single" rowKey="#{d.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoTemplateDefinitions}">
 							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addDefinition()}" update=":#{cc.id}:row2"/>

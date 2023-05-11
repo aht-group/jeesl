@@ -16,7 +16,7 @@
 			<f:facet name="actions">
 				<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.jeeslTtCancel}"/>
 				<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.ttSave}"/>
-				<j:icon type="jeeslDelete" rendered="#{cc.attrs.bean.attribute.id gt 0}" listener="#{cc.attrs.bean.rmAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
+				<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.attribute.id gt 0}" listener="#{cc.attrs.bean.rmAttribute()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
 			</f:facet>
 			<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 			<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">

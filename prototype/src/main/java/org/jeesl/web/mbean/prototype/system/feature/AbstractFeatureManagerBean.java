@@ -7,11 +7,11 @@ import java.util.Map;
 
 import org.jeesl.api.bean.JeeslFeatureManagerBean;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.system.JeeslFeature;
+import org.jeesl.interfaces.model.system.JeeslSystemFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractFeatureManagerBean <F extends JeeslFeature>
+public class AbstractFeatureManagerBean <F extends JeeslSystemFeature>
 		implements Serializable,JeeslFeatureManagerBean<F>
 {
 	private static final long serialVersionUID = 1L;
