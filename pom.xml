@@ -47,6 +47,7 @@
 		
 		<module>system-bookmark</module>
 		<module>system-constraint</module>
+		<module>system-feature</module>
 		<module>system-feedback</module>
 		<module>system-job</module>
 		<module>system-property</module>
