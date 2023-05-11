@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.system.feature;
+package org.jeesl.model.ejb.system.property;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

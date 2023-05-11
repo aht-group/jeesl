@@ -36,6 +36,7 @@
 		<module>io-mail</module>
 		<module>io-maven</module>
 		<module>io-fr</module>
+		<module>io-report</module>
 		<module>io-ssi</module>
 		
 		<module>module-aom</module>
@@ -47,7 +48,7 @@
 		
 		<module>system-bookmark</module>
 		<module>system-constraint</module>
-		<module>system-feature</module>
+
 		<module>system-feedback</module>
 		<module>system-job</module>
 		<module>system-property</module>

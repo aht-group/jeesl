@@ -8,9 +8,9 @@
     	<version>0.3.2-SNAPSHOT</version>
 	</parent>
 	
-    <artifactId>jeesl-system-feature</artifactId>
+    <artifactId>jeesl-io-report</artifactId>
     <packaging>jar</packaging>
-    <name>JEESL - System Feature</name>
+    <name>JEESL - IO - Report</name>
 	
 	<dependencyManagement>
 		<dependencies>
