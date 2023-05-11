@@ -53,7 +53,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 							CAT extends JeeslTsCategory<L,D,CAT,?>,
@@ -522,9 +522,9 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		return em.createQuery(cQ).getResultList();
 	}
 
-	@Override public Json1Tuples<TS> tpCountRecordsByTs(List<TS> series)
+	@Override public JsonTuples1<TS> tpCountRecordsByTs(List<TS> series)
 	{
-		if(ObjectUtils.isEmpty(series)) {return new Json1Tuples<>();}
+		if(ObjectUtils.isEmpty(series)) {return new JsonTuples1<>();}
 		Json1TuplesFactory<TS> jtf = Json1TuplesFactory.instance(fbTs.getClassTs()).facade(this);
 		
 		List<Tuple> tuples = new ArrayList<>();

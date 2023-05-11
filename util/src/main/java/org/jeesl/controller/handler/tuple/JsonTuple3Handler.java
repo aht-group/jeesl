@@ -12,9 +12,9 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
-import org.jeesl.model.json.db.tuple.t3.Json3Tuples;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples3;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,10 +30,10 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 	private final Class<C> cC;
 	
 	protected final Map<Long,C> mapC;
-	private final Map<A,Map<B,Map<C,Json3Tuple<A,B,C>>>> map3; public Map<A,Map<B,Map<C,Json3Tuple<A,B,C>>>> getMap3() {return map3;}
+	private final Map<A,Map<B,Map<C,JsonTuple3<A,B,C>>>> map3; public Map<A,Map<B,Map<C,JsonTuple3<A,B,C>>>> getMap3() {return map3;}
 	
 	private final List<C> listC; public List<C> getListC() {return listC;}
-	private final List<Json3Tuple<A,B,C>> tuples3; public List<Json3Tuple<A,B,C>> getTuples3() {return tuples3;}
+	private final List<JsonTuple3<A,B,C>> tuples3; public List<JsonTuple3<A,B,C>> getTuples3() {return tuples3;}
 
 	private int sizeC; public int getSizeC() {return sizeC;}
 	
@@ -45,8 +45,8 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 		
 		mapC = new HashMap<Long,C>();
 		listC = new ArrayList<C>();
-		map3 = new HashMap<A,Map<B,Map<C,Json3Tuple<A,B,C>>>>();
-		tuples3 = new ArrayList<Json3Tuple<A,B,C>>();
+		map3 = new HashMap<A,Map<B,Map<C,JsonTuple3<A,B,C>>>>();
+		tuples3 = new ArrayList<JsonTuple3<A,B,C>>();
 		
 		dimension = 3;
 	}
@@ -60,26 +60,19 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 		tuples3.clear();
 	}
 	
-	public JsonTuple3Handler<A,B,C> init(Json3Tuples<A,B,C> tuples) {init(null,tuples,false); return this;}
-	public void init(JeeslFacade fJeesl, Json3Tuples<A,B,C> tuples, boolean load){init(fJeesl,tuples,true,true,true);}
-	public void init(JeeslFacade fJeesl, Json3Tuples<A,B,C> tuples, boolean loadA, boolean loadB, boolean loadC)
+	public JsonTuple3Handler<A,B,C> init(JsonTuples3<A,B,C> tuples) {init(null,tuples,false); return this;}
+	public void init(JeeslFacade fJeesl, JsonTuples3<A,B,C> tuples, boolean load){init(fJeesl,tuples,true,true,true);}
+	public void init(JeeslFacade fJeesl, JsonTuples3<A,B,C> tuples, boolean loadA, boolean loadB, boolean loadC)
 	{
-		clear();
+		this.clear();
 	
-		for(Json3Tuple<A,B,C> t : tuples.getTuples())
+		for(JsonTuple3<A,B,C> t : tuples.getTuples())
 		{
 			size++;
 			if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
 			
-			if(t.getEjb1()==null)
-			{
-				if(mapA.containsKey(t.getId1())) {t.setEjb1(mapA.get(t.getId1()));}
-				else
-				{
-					try{t.setEjb1(cA.newInstance()); t.getEjb1().setId(t.getId1());}
-					catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
-				}
-			}
+			
+			
 			if(t.getEjb2()==null)
 			{
 				if(mapB.containsKey(t.getId2())) {t.setEjb2(mapB.get(t.getId2()));}
@@ -99,12 +92,12 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 				}
 			}
 			
-			if(!mapA.containsKey(t.getId1())) {mapA.put(t.getId1(),t.getEjb1());}
+			
 			if(!mapB.containsKey(t.getId2())) {mapB.put(t.getId2(),t.getEjb2());}
 			if(!mapC.containsKey(t.getId3())) {mapC.put(t.getId3(),t.getEjb3());}
 				
-			if(!map3.containsKey(t.getEjb1())) {map3.put(t.getEjb1(), new HashMap<B,Map<C,Json3Tuple<A,B,C>>>());}
-			if(!map3.get(t.getEjb1()).containsKey(t.getEjb2())) {map3.get(t.getEjb1()).put(t.getEjb2(), new HashMap<C,Json3Tuple<A,B,C>>());}
+			if(!map3.containsKey(t.getEjb1())) {map3.put(t.getEjb1(), new HashMap<B,Map<C,JsonTuple3<A,B,C>>>());}
+			if(!map3.get(t.getEjb1()).containsKey(t.getEjb2())) {map3.get(t.getEjb1()).put(t.getEjb2(), new HashMap<C,JsonTuple3<A,B,C>>());}
 			map3.get(t.getEjb1()).get(t.getEjb2()).put(t.getEjb3(), t);
 		}
 	
@@ -127,10 +120,10 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 		if(jppC!=null && jppC.provides(cC)){Collections.sort(listC, jppC.provide(cC));}
 	}
 	
-	public List<Json3Tuple<A,B,C>> toList(List<Json3Tuple<A,B,C>> list, A a, B b, C c)
+	public List<JsonTuple3<A,B,C>> toList(List<JsonTuple3<A,B,C>> list, A a, B b, C c)
 	{
-		List<Json3Tuple<A,B,C>> result = new ArrayList<>();
-		for(Json3Tuple<A,B,C> t : list)
+		List<JsonTuple3<A,B,C>> result = new ArrayList<>();
+		for(JsonTuple3<A,B,C> t : list)
 		{
 			if(t.getId1()==a.getId() && t.getId2()==b.getId() && t.getId3()== c.getId())
 			{
@@ -141,10 +134,5 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 	}
 	
 	public boolean contains(A a, B b, C c) {return map3.containsKey(a) && map3.get(a).containsKey(b) &&  map3.get(a).get(b).containsKey(c);}
-	
-	public JsonTuple value(A a, B b, C c)
-	{
-		Json3Tuple<A,B,C> json = map3.get(a).get(b).get(c);
-		return JsonTupleFactory.build(json);
-	}
+	public JsonTuple value(A a, B b, C c) {return JsonTupleFactory.build(map3.get(a).get(b).get(c));}
 }

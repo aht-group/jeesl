@@ -39,8 +39,8 @@ import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob1;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
-import org.jeesl.model.json.db.tuple.two.Json2Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -209,9 +209,9 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" and id="+ejb.getId()+" not unique");}
 	}
 	
-	@Override public Json1Tuples<LINK> tpIoSsiLinkForMapping(MAPPING mapping){return tpIoSsiLinkForMapping(mapping,null,null);}
-	@Override public <A extends EjbWithId> Json1Tuples<LINK> tpIoSsiLinkForMapping(MAPPING mapping, A a){return tpIoSsiLinkForMapping(mapping,a,null);}
-	@Override public <A extends EjbWithId, B extends EjbWithId> Json1Tuples<LINK> tpIoSsiLinkForMapping(MAPPING mapping, A a, B b)
+	@Override public JsonTuples1<LINK> tpIoSsiLinkForMapping(MAPPING mapping){return tpIoSsiLinkForMapping(mapping,null,null);}
+	@Override public <A extends EjbWithId> JsonTuples1<LINK> tpIoSsiLinkForMapping(MAPPING mapping, A a){return tpIoSsiLinkForMapping(mapping,a,null);}
+	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<LINK> tpIoSsiLinkForMapping(MAPPING mapping, A a, B b)
 	{
 		Json1TuplesFactory<LINK> jtf = new Json1TuplesFactory<LINK>(this,fbSsi.getClassLink());
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -242,7 +242,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	}
 	
 	@Override
-	public <A extends EjbWithId, B extends EjbWithId> Json2Tuples<LINK, JOB> tpcIoSsiLinkJobForMapping(MAPPING mapping, A a, B b)
+	public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<LINK, JOB> tpcIoSsiLinkJobForMapping(MAPPING mapping, A a, B b)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -273,7 +273,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
-	@Override public Json1Tuples<MAPPING> tpMapping()
+	@Override public JsonTuples1<MAPPING> tpMapping()
 	{
 		Json1TuplesFactory<MAPPING> jtf = new Json1TuplesFactory<>(this,fbSsi.getClassMapping());
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -290,7 +290,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
-	@Override public Json2Tuples<MAPPING,LINK> tpMappingLink(List<MAPPING> list)
+	@Override public JsonTuples2<MAPPING,LINK> tpMappingLink(List<MAPPING> list)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
@@ -312,7 +312,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
-	@Override public <A extends EjbWithId, B extends EjbWithId> Json2Tuples<LINK,B> tpMappingB(Class<B> classB, MAPPING mapping, A a)
+	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<LINK,B> tpMappingB(Class<B> classB, MAPPING mapping, A a)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -356,7 +356,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		tQ.setMaxResults(maxResult);
 		return tQ.getResultList();
 	}
-	@Override public <T extends EjbWithSsiDataCleaning<CLEANING>> Json1Tuples<CLEANING> tpcSsiDataCleaning(Class<T> c)
+	@Override public <T extends EjbWithSsiDataCleaning<CLEANING>> JsonTuples1<CLEANING> tpcSsiDataCleaning(Class<T> c)
 	{
 		Json1TuplesFactory<CLEANING> jtf = new Json1TuplesFactory<CLEANING>(fbSsi.getClassCleaning());
 		jtf.setfUtils(this);

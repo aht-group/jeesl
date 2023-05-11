@@ -20,8 +20,8 @@ import org.jeesl.interfaces.model.io.fr.JeeslWithFileRepositoryContainer;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
-import org.jeesl.model.json.db.tuple.two.Json2Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
 public interface JeeslIoFrFacade <L extends JeeslLang, D extends JeeslDescription,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
@@ -37,8 +37,8 @@ public interface JeeslIoFrFacade <L extends JeeslLang, D extends JeeslDescriptio
 		extends JeeslFacade,JeeslFileRepositoryStore<META>
 {
 	CONTAINER moveContainer(CONTAINER container, STORAGE destination) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException;
-	Json1Tuples<STORAGE> tpsIoFileByStorage();
-	Json2Tuples<STORAGE,FTYPE> tpcIoFileByStorageType();
+	JsonTuples1<STORAGE> tpsIoFileByStorage();
+	JsonTuples2<STORAGE,FTYPE> tpcIoFileByStorageType();
 //	Json2Tuples<STORAGE,TYPE> tpcIoFrReplicationInfoByReplicationStatus();
 	
 	<OWNER extends JeeslWithFileRepositoryContainer<CONTAINER>> List<META> fIoFrMetas(Class<OWNER> c, List<OWNER> owners);

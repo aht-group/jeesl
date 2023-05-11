@@ -1,7 +1,7 @@
 package org.jeesl.util.filter;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.JsonIdTuple;
+import org.jeesl.model.json.io.db.tuple.special.JsonIdTuple;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

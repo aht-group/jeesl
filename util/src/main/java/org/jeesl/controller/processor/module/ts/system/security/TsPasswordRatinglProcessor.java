@@ -22,8 +22,8 @@ import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityPasswordRating;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public class TsPasswordRatinglProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	
 	
-	public void update(SYSTEM system, Json1Tuples<RATING> tuples)
+	public void update(SYSTEM system, JsonTuples1<RATING> tuples)
 	{
 		try
 		{
@@ -70,10 +70,10 @@ public class TsPasswordRatinglProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 					
 			for(MP mp : fTs.allForParent(fbTs.getClassMp(), scope))
 			{
-				for(Json1Tuple<RATING> t : tuples.getTuples())
+				for(JsonTuple1<RATING> t : tuples.getTuples())
 				{
 					
-					if(t.getEjb().getCode().equals(mp.getCode()))
+					if(t.getEjb1().getCode().equals(mp.getCode()))
 					{
 						if(t.getCount()!=null)
 						{

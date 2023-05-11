@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jeesl.JeeslMavenBootstrap;
 import org.jeesl.processor.JeeslXhtmlParser;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import net.sf.ahtutils.test.AbstractUtilsMavenTst;
-import net.sf.ahtutils.test.UtilsMavenTstBootstrap;
 
 public class TestXhtmlValidator extends AbstractUtilsMavenTst
 {
@@ -37,7 +37,7 @@ public class TestXhtmlValidator extends AbstractUtilsMavenTst
 
 	public static void main(String[] args) throws Exception
     {
-		UtilsMavenTstBootstrap.init();
+		JeeslMavenBootstrap.init();
 
 		TestXhtmlValidator test = new TestXhtmlValidator();
 		test.init();

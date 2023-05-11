@@ -51,7 +51,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithContext;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -535,7 +535,7 @@ public class AbstractDummyFacade implements JeeslFacade
 	}
 
 	@Override
-	public <W extends JeeslWithType<T>, T extends JeeslStatus<?, ?, T>> Json1Tuples<T> tpcWithType(Class<W> cWith,
+	public <W extends JeeslWithType<T>, T extends JeeslStatus<?, ?, T>> JsonTuples1<T> tpcWithType(Class<W> cWith,
 			Class<T> cType) {
 		// TODO Auto-generated method stub
 		return null;

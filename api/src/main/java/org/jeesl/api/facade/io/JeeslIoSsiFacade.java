@@ -18,8 +18,8 @@ import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
-import org.jeesl.model.json.db.tuple.two.Json2Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
 public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescription,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,
@@ -45,17 +45,17 @@ public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescriptio
 	<A extends EjbWithId> List<DATA> fIoSsiData(MAPPING mapping, List<LINK> links, A a);
 	<A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(MAPPING mapping, List<LINK> links, A a, B b, Integer maxSize);
 	
-	Json1Tuples<LINK> tpIoSsiLinkForMapping(MAPPING mapping);
-	<A extends EjbWithId> Json1Tuples<LINK> tpIoSsiLinkForMapping(MAPPING mapping, A a);
-	<A extends EjbWithId, B extends EjbWithId> Json1Tuples<LINK> tpIoSsiLinkForMapping(MAPPING mapping, A a, B b);
-	<A extends EjbWithId, B extends EjbWithId> Json2Tuples<LINK,JOB> tpcIoSsiLinkJobForMapping(MAPPING mapping, A a, B b);
+	JsonTuples1<LINK> tpIoSsiLinkForMapping(MAPPING mapping);
+	<A extends EjbWithId> JsonTuples1<LINK> tpIoSsiLinkForMapping(MAPPING mapping, A a);
+	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<LINK> tpIoSsiLinkForMapping(MAPPING mapping, A a, B b);
+	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<LINK,JOB> tpcIoSsiLinkJobForMapping(MAPPING mapping, A a, B b);
 	
-	Json1Tuples<MAPPING> tpMapping();
-	Json2Tuples<MAPPING,LINK> tpMappingLink(List<MAPPING> list);
-	<A extends EjbWithId, B extends EjbWithId> Json2Tuples<LINK,B> tpMappingB(Class<B> classB, MAPPING mapping, A a);
+	JsonTuples1<MAPPING> tpMapping();
+	JsonTuples2<MAPPING,LINK> tpMappingLink(List<MAPPING> list);
+	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<LINK,B> tpMappingB(Class<B> classB, MAPPING mapping, A a);
 		
 	List<DATA> fSsiDataWithJob1(MAPPING mapping, LINK link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
 	
 	<T extends EjbWithSsiDataCleaning<CLEANING>> List<T> fEntitiesWithoutSsiDataCleaning(Class<T> c, int maxResult);
-	<T extends EjbWithSsiDataCleaning<CLEANING>> Json1Tuples<CLEANING> tpcSsiDataCleaning(Class<T> c);
+	<T extends EjbWithSsiDataCleaning<CLEANING>> JsonTuples1<CLEANING> tpcSsiDataCleaning(Class<T> c);
 }

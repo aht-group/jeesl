@@ -1,8 +1,8 @@
 package org.jeesl.factory.json.io.db.tuple;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.two.Json2Tuple;
 import org.jeesl.model.json.io.db.tuple.MongoTuple;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,9 +10,9 @@ public class MongoTupleFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(MongoTupleFactory.class);
 	
-	public static <A extends EjbWithId, B extends EjbWithId> Json2Tuple<A,B> build(MongoTuple tuple)
+	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple2<A,B> build(MongoTuple tuple)
 	{
-		Json2Tuple<A,B> json = new Json2Tuple<A,B>();
+		JsonTuple2<A,B> json = new JsonTuple2<A,B>();
 		json.setId1(tuple.getTuple().getId1());
 		json.setId2(tuple.getTuple().getId2());
 		

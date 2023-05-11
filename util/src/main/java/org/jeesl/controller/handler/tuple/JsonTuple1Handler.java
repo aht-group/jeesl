@@ -11,9 +11,10 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
 import org.jeesl.util.comparator.json.Tuple1Comparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 	
 	private int sizeA; public int getSizeA() {return sizeA;}
 	private final List<A> listA; public List<A> getListA() {return listA;}
-	private final Map<A,Json1Tuple<A>> map1; public Map<A,Json1Tuple<A>> getMapA() {return map1;} public Map<A,Json1Tuple<A>> getMap1() {return map1;}
+	private final Map<A,JsonTuple1<A>> map1; public Map<A,JsonTuple1<A>> getMapA() {return map1;} public Map<A,JsonTuple1<A>> getMap1() {return map1;}
 
 	public static <A extends EjbWithId> JsonTuple1Handler<A> instance(Class<A> cA) {return new JsonTuple1Handler<>(cA);}
 	public JsonTuple1Handler(Class<A> cA)
@@ -41,7 +42,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		
 		mapA = new HashMap<Long,A>();
 		listA = new ArrayList<A>();
-		map1 = new HashMap<A,Json1Tuple<A>>();
+		map1 = new HashMap<A,JsonTuple1<A>>();
 		
 		cpTuple = new Tuple1Comparator<A>();
 		
@@ -55,31 +56,31 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		map1.clear();
 	}
 
-	public JsonTuple1Handler<A> init(Json1Tuples<A> tuples)
+	public JsonTuple1Handler<A> init(JsonTuples1<A> tuples)
 	{
 		clear();
-		for(Json1Tuple<A> t : tuples.getTuples())
+		for(JsonTuple1<A> t : tuples.getTuples())
 		{
 			size++;
 			if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
 			
-			if(t.getEjb()==null)
+			if(t.getEjb1()==null)
 			{
-				if(mapA.containsKey(t.getId())) {t.setEjb(mapA.get(t.getId()));}
+				if(mapA.containsKey(t.getId1())) {t.setEjb1(mapA.get(t.getId1()));}
 				else
 				{
 					try
 					{
-						t.setEjb(cA.newInstance());
-						if(t.getId()!=null){t.getEjb().setId(t.getId());}
-						else {t.getEjb().setId(0);}
+						t.setEjb1(cA.newInstance());
+						if(t.getId1()!=null){t.getEjb1().setId(t.getId1());}
+						else {t.getEjb1().setId(0);}
 					}
 					catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
 				}
 			}
 			
-			if(!mapA.containsKey(t.getId())) {mapA.put(t.getId(),t.getEjb());}
-			if(!map1.containsKey(t.getEjb())) {map1.put(t.getEjb(), t);}
+			if(!mapA.containsKey(t.getId1())) {mapA.put(t.getId1(),t.getEjb1());}
+			if(!map1.containsKey(t.getEjb1())) {map1.put(t.getEjb1(), t);}
 		}
 		initListA(null);
 		return this;
@@ -97,7 +98,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 	public boolean contains(A a){return map1.containsKey(a);}
 	public JsonTuple value(A a)
 	{
-		Json1Tuple<A> json = map1.get(a);
+		JsonTuple1<A> json = map1.get(a);
 		return JsonTupleFactory.build(json);
 	}
 	
@@ -115,6 +116,8 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 			return map1.get(a).getSum1();
 		}
 	}
+	
+	
 	
 	public void orderDescending()
 	{

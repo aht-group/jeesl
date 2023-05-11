@@ -43,8 +43,8 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
-import org.jeesl.model.json.db.tuple.two.Json2Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.jeesl.util.comparator.pojo.BooleanComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,7 +140,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
 		return container;
 	}
 
-	@Override public Json1Tuples<STORAGE> tpsIoFileByStorage()
+	@Override public JsonTuples1<STORAGE> tpsIoFileByStorage()
 	{
 
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -159,7 +159,7 @@ public class JeeslIoFrFacadeBean<L extends JeeslLang, D extends JeeslDescription
         return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
-	@Override public Json2Tuples<STORAGE,TYPE> tpcIoFileByStorageType()
+	@Override public JsonTuples2<STORAGE,TYPE> tpcIoFileByStorageType()
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();

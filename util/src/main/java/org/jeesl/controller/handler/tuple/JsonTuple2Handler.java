@@ -16,9 +16,9 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.two.Json2Tuple;
-import org.jeesl.model.json.db.tuple.two.Json2Tuples;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,11 +35,11 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	protected final Class<B> cB;
 	
 	protected final Map<Long,B> mapB;
-	private final Map<A,Map<B,Json2Tuple<A,B>>> map; public Map<A,Map<B,Json2Tuple<A,B>>> getMap() {return map;}
-	public Map<A,Map<B,Json2Tuple<A,B>>> getMap2() {return map;}
+	private final Map<A,Map<B,JsonTuple2<A,B>>> map; public Map<A,Map<B,JsonTuple2<A,B>>> getMap() {return map;}
+	public Map<A,Map<B,JsonTuple2<A,B>>> getMap2() {return map;}
 	
 	private final List<B> listB; public List<B> getListB() {return listB;}
-	private final List<Json2Tuple<A,B>> tuples2; public List<Json2Tuple<A,B>> getTuples2() {return tuples2;}
+	private final List<JsonTuple2<A,B>> tuples2; public List<JsonTuple2<A,B>> getTuples2() {return tuples2;}
 	
 	private int sizeB; public int getSizeB() {return sizeB;}
 	
@@ -51,8 +51,8 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		
 		mapB = new HashMap<Long,B>();
 		listB = new ArrayList<B>();
-		map = new HashMap<A,Map<B,Json2Tuple<A,B>>>();
-		tuples2 = new ArrayList<Json2Tuple<A,B>>();
+		map = new HashMap<A,Map<B,JsonTuple2<A,B>>>();
+		tuples2 = new ArrayList<JsonTuple2<A,B>>();
 		
 		dimension = 2;
 	}
@@ -65,13 +65,13 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		listB.clear();
 	}
 
-	public void init(Json2Tuples<A,B> tuples, JeeslFacade fUtils, boolean loadA, boolean loadB)
+	public void init(JsonTuples2<A,B> tuples, JeeslFacade fUtils, boolean loadA, boolean loadB)
 	{
 		clear();
 		Set<Long> setIdA = new HashSet<>();
 		Set<Long> setIdB = new HashSet<>();
 		
-		for(Json2Tuple<A,B> t : tuples.getTuples())
+		for(JsonTuple2<A,B> t : tuples.getTuples())
 		{
 			setIdA.add(t.getId1());
 			setIdB.add(t.getId2());
@@ -83,7 +83,7 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		if(loadA) {mapA = EjbIdFactory.toIdMap(fUtils.find(cA, setIdA));}
 		if(loadB) {mapB = EjbIdFactory.toIdMap(fUtils.find(cB, setIdB));}
 		
-		for(Json2Tuple<A,B> t : tuples.getTuples())
+		for(JsonTuple2<A,B> t : tuples.getTuples())
 		{
 			try
 			{
@@ -109,12 +109,12 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		init(tuples);
 		
 	}
-	public JsonTuple2Handler<A,B> init(Json2Tuples<A,B> tuples) {init(null,tuples); return this;}
-	public void init(JeeslFacade fJeesl, Json2Tuples<A,B> tuples)
+	public JsonTuple2Handler<A,B> init(JsonTuples2<A,B> tuples) {init(null,tuples); return this;}
+	public void init(JeeslFacade fJeesl, JsonTuples2<A,B> tuples)
 	{
 		clear();
 	
-		for(Json2Tuple<A,B> t : tuples.getTuples())
+		for(JsonTuple2<A,B> t : tuples.getTuples())
 		{
 			size++;
 			if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
@@ -148,7 +148,7 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 			if(!mapA.containsKey(t.getId1())) {mapA.put(t.getId1(),t.getEjb1());}
 			if(!mapB.containsKey(t.getId2())) {mapB.put(t.getId2(),t.getEjb2());}
 			
-			if(!map.containsKey(t.getEjb1())) {map.put(t.getEjb1(), new HashMap<B,Json2Tuple<A,B>>());}
+			if(!map.containsKey(t.getEjb1())) {map.put(t.getEjb1(), new HashMap<B,JsonTuple2<A,B>>());}
 			map.get(t.getEjb1()).put(t.getEjb2(), t);
 		}
 	
@@ -169,7 +169,7 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	
 	public JsonTuple value(A a, B b)
 	{
-		Json2Tuple<A,B> json = map.get(a).get(b);
+		JsonTuple2<A,B> json = map.get(a).get(b);
 		return JsonTupleFactory.build(json);
 	}
 	

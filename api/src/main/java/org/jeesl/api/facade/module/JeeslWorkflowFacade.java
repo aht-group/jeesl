@@ -35,8 +35,8 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
-import org.jeesl.model.json.db.tuple.two.Json2Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
 public interface JeeslWorkflowFacade <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
 										WX extends JeeslWorkflowContext<L,D,WX,?>,
@@ -85,8 +85,8 @@ public interface JeeslWorkflowFacade <L extends JeeslLang, D extends JeeslDescri
 	List<WF> fWorkflows(WP process, List<WS> stages);
 	List<WF> fWorkflows(List<WP> processes, List<WST> types);
 	
-	Json1Tuples<WP> tpcActivitiesByProcess();
-	Json2Tuples<WP,WST> tpcActivitiesByProcessType();
+	JsonTuples1<WP> tpcActivitiesByProcess();
+	JsonTuples2<WP,WST> tpcActivitiesByProcessType();
 	
 	List<WY> fWorkflowActivities(Date from, Date to, List<USER> users, List<WP> processes);
 }

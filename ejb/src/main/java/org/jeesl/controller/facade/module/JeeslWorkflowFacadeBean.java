@@ -55,8 +55,8 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
-import org.jeesl.model.json.db.tuple.two.Json2Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -429,7 +429,7 @@ public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		return em.createQuery(cQ).getResultList();
 	}
 
-	@Override public Json1Tuples<WP> tpcActivitiesByProcess()
+	@Override public JsonTuples1<WP> tpcActivitiesByProcess()
 	{
 		Json1TuplesFactory<WP> jtf = new Json1TuplesFactory<>(fbWorkflow.getClassProcess());
 		jtf.setfUtils(this);
@@ -447,7 +447,7 @@ public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
-	@Override public Json2Tuples<WP,WST> tpcActivitiesByProcessType()
+	@Override public JsonTuples2<WP,WST> tpcActivitiesByProcessType()
 	{
 		Json2TuplesFactory<WP,WST> jtf = new Json2TuplesFactory<>(fbWorkflow.getClassProcess(),fbWorkflow.getClassStageType());
 		jtf.setfUtils(this);

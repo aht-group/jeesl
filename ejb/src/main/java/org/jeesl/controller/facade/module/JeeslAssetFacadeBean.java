@@ -42,7 +42,7 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -384,7 +384,7 @@ public class JeeslAssetFacadeBean<L extends JeeslLang, D extends JeeslDescriptio
 		return event;
 	}
 
-	@Override public Json1Tuples<VIEW> tpcTypeByView(TenantIdentifier<REALM> identifier)
+	@Override public JsonTuples1<VIEW> tpcTypeByView(TenantIdentifier<REALM> identifier)
 	{
 		Json1TuplesFactory<VIEW> jtf = new Json1TuplesFactory<>(this,fbAsset.getClassAssetLevel());
 		CriteriaBuilder cB = em.getCriteriaBuilder();

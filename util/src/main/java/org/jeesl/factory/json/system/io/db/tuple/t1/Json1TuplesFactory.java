@@ -13,9 +13,9 @@ import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 
 public class Json1TuplesFactory <A extends EjbWithId>
 {
@@ -29,7 +29,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	
 	protected final Map<Long,A> mapA; public Map<Long,A> getMapA() {return mapA;}
 	
-	private Json1Tuples<A> tuples; public Json1Tuples<A> get1Tuples() {return tuples;} public void set1Tuples(Json1Tuples<A> tuples) {this.tuples = tuples;}
+	private JsonTuples1<A> tuples; public JsonTuples1<A> get1Tuples() {return tuples;} public void set1Tuples(JsonTuples1<A> tuples) {this.tuples = tuples;}
 
 	public static <A extends EjbWithId> Json1TuplesFactory<A> instance(Class<A> cA) {return new Json1TuplesFactory<>(cA);}
 	public Json1TuplesFactory(Class<A> cA) {this(null,cA);}
@@ -51,14 +51,14 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		return this;
 	}
 	
-	public void init(JeeslFacade fUtils, Json1Tuples<A> json)
+	public void init(JeeslFacade fUtils, JsonTuples1<A> json)
 	{
 		clear();
 		this.tuples = json;
 		
-		for(Json1Tuple<A> t : json.getTuples())
+		for(JsonTuple1<A> t : json.getTuples())
 		{
-			setA.add(t.getId());
+			setA.add(t.getId1());
 		}
 		
 		mapA.putAll(EjbIdFactory.toIdMap(fUtils.find(cA, setA)));
@@ -76,11 +76,11 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	}
 	
 	// Deprecated?
-	public List<Json1Tuple<A>> add(List<Json1Tuple<A>> list)
+	public List<JsonTuple1<A>> add(List<JsonTuple1<A>> list)
 	{
-		for(Json1Tuple<A> t : list)
+		for(JsonTuple1<A> t : list)
 		{
-			if(!setA.contains(t.getId())) {setA.add(t.getId());}
+			if(!setA.contains(t.getId1())) {setA.add(t.getId1());}
 		}
 		return list;
 	}
@@ -90,38 +90,38 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		return fUtils.find(cA,setA);
 	}
 	
-	public List<A> toListA(Json1Tuples<A> tuples)
+	public List<A> toListA(JsonTuples1<A> tuples)
 	{
 		Set<A> set = new HashSet<A>();
-		for(Json1Tuple<A> t : tuples.getTuples())
+		for(JsonTuple1<A> t : tuples.getTuples())
 		{
-			if(!set.contains(t.getEjb())) {set.add(t.getEjb());}
+			if(!set.contains(t.getEjb1())) {set.add(t.getEjb1());}
 		}
 		return new ArrayList<A>(set);
 	}
 	
-	public Json1Tuples<A> build(List<Tuple> tuples)
+	public JsonTuples1<A> build(List<Tuple> tuples)
 	{
-		Json1Tuples<A> json = new Json1Tuples<A>();
+		JsonTuples1<A> json = new JsonTuples1<A>();
 		
 		for(Tuple t : tuples)
         {
-			Json1Tuple<A> j = JsonTupleFactory.build1(t);
-			setA.add(j.getId());
+			JsonTuple1<A> j = JsonTupleFactory.build1(t);
+			setA.add(j.getId1());
         	json.getTuples().add(j);
         }
 		ejb1Load(json);	
 		return json;
 	}
 	
-	public Json1Tuples<A> buildSum(List<Tuple> tuples)
+	public JsonTuples1<A> buildSum(List<Tuple> tuples)
 	{
-		Json1Tuples<A> json = new Json1Tuples<A>();
+		JsonTuples1<A> json = new JsonTuples1<A>();
 		
 		for(Tuple t : tuples)
         {
-			Json1Tuple<A> j = jtf.buildSum(t);
-			setA.add(j.getId());
+			JsonTuple1<A> j = jtf.buildSum(t);
+			setA.add(j.getId1());
         	json.getTuples().add(j);
         }
 		ejb1Load(json);
@@ -129,82 +129,82 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	}
 	
 	@Deprecated
-	public Json1Tuples<A> buildCount1(List<Tuple> tuples)
+	public JsonTuples1<A> buildCount1(List<Tuple> tuples)
 	{
-		Json1Tuples<A> json = new Json1Tuples<A>();
+		JsonTuples1<A> json = new JsonTuples1<A>();
 		
 		for(Tuple t : tuples)
         {
-			Json1Tuple<A> j = jtf.buildCount(t);
-			setA.add(j.getId());
+			JsonTuple1<A> j = jtf.buildCount(t);
+			setA.add(j.getId1());
         	json.getTuples().add(j);
         }
 		ejb1Load(json);
 		return json;
 	}
 	
-	public Json1Tuples<A> buildCountNative(List<Object> list)
+	public JsonTuples1<A> buildCountNative(List<Object> list)
 	{
-		Json1Tuples<A> json = new Json1Tuples<A>();
+		JsonTuples1<A> json = new JsonTuples1<A>();
 		for(Object o : list)
 		{
-			Json1Tuple<A> j = jtf.buildCountNative(o);
-			setA.add(j.getId());
+			JsonTuple1<A> j = jtf.buildCountNative(o);
+			setA.add(j.getId1());
         	json.getTuples().add(j);
 		}
 		ejb1Load(json);
 		return json;
 	}
 	
-	public Json1Tuples<A> buildSumNative(List<Object> list)
+	public JsonTuples1<A> buildSumNative(List<Object> list)
 	{
-		Json1Tuples<A> json = new Json1Tuples<A>();
+		JsonTuples1<A> json = new JsonTuples1<A>();
 		for(Object o : list)
 		{
-			Json1Tuple<A> j = jtf.buildCountNative(o);
-			setA.add(j.getId());
+			JsonTuple1<A> j = jtf.buildCountNative(o);
+			setA.add(j.getId1());
         	json.getTuples().add(j);
 		}
 		ejb1Load(json);
 		return json;
 	}
 	
-	public Json1Tuples<A> buildV1(List<Tuple> tuples, JsonTuple.Field... fields)
+	public JsonTuples1<A> buildV1(List<Tuple> tuples, JsonTuple.Field... fields)
 	{
-		Json1Tuples<A> json = new Json1Tuples<A>();
+		JsonTuples1<A> json = new JsonTuples1<A>();
 		
 		for(Tuple t : tuples)
         {
-			Json1Tuple<A> j = jtf.build(t,fields);
-			setA.add(j.getId());
+			JsonTuple1<A> j = jtf.build(t,fields);
+			setA.add(j.getId1());
         	json.getTuples().add(j);
         }
 		ejb1Load(json);
 		return json;
 	}
 	
-	public Json1Tuples<A> buildV2(List<Tuple> tuples, JsonTupleFactory.Type...types)
+	public JsonTuples1<A> buildV2(List<Tuple> tuples, JsonTupleFactory.Type...types)
 	{
-		Json1Tuples<A> json = new Json1Tuples<A>();
+		JsonTuples1<A> json = new JsonTuples1<A>();
 		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build1(t,types));}
 		ejb1Load(json);
 		return json;
 	}
 	
-	private void ejb1Load(Json1Tuples<A> json)
+	private void ejb1Load(JsonTuples1<A> json)
 	{
-		for(Json1Tuple<A> t : json.getTuples())
+		for(JsonTuple1<A> t : json.getTuples())
 		{
-			setA.add(t.getId());
+			setA.add(t.getId1());
 		}
 		
 		if(fUtils==null)
 		{	// A object is created and the corresponding id is set
-			for(Json1Tuple<A> t : json.getTuples())
+			for(JsonTuple1<A> t : json.getTuples())
 			{
 				try
 				{
-					t.setEjb(cA.newInstance()); t.getEjb().setId(t.getId());
+					t.setEjb1(cA.newInstance()); t.getEjb1().setId(t.getId1());
 				}
 				catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
 			}
@@ -212,21 +212,21 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		else
 		{	// Here we really load the objects from the DB
 			Map<Long,A> map = EjbIdFactory.toIdMap(fUtils.find(cA,setA));
-			for(Json1Tuple<A> t : json.getTuples())
+			for(JsonTuple1<A> t : json.getTuples())
 			{
-				t.setEjb(map.get(t.getId()));
+				t.setEjb1(map.get(t.getId1()));
 			}
 		}
 	}
 	
 	@Deprecated
-	public Map<A,Json1Tuple<A>> toMap(Json1Tuples<A> tuples)
+	public Map<A,JsonTuple1<A>> toMap(JsonTuples1<A> tuples)
 	{
-		Map<A,Json1Tuple<A>> map = new HashMap<A,Json1Tuple<A>>();
+		Map<A,JsonTuple1<A>> map = new HashMap<A,JsonTuple1<A>>();
 		
-		for(Json1Tuple<A> t : tuples.getTuples())
+		for(JsonTuple1<A> t : tuples.getTuples())
 		{
-			if(!map.containsKey(t.getEjb())) {map.put(t.getEjb(), t);}
+			if(!map.containsKey(t.getEjb1())) {map.put(t.getEjb1(), t);}
 		}
 		
 		return map;

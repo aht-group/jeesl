@@ -54,7 +54,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithContext;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -204,7 +204,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 		return fJeesl.fByNameAndLang(type, langType, lang, name);
 	}
 	
-	@Override public <W extends JeeslWithType<T>, T extends JeeslStatus<?, ?, T>> Json1Tuples<T> tpcWithType(Class<W> cWith,Class<T> cType) {return fJeesl.tpcWithType(cWith,cType);}
+	@Override public <W extends JeeslWithType<T>, T extends JeeslStatus<?, ?, T>> JsonTuples1<T> tpcWithType(Class<W> cWith,Class<T> cType) {return fJeesl.tpcWithType(cWith,cType);}
 
 	@Override
 	public <T extends EjbWithId> T loadEntityWithGraph(Class<T> clazz, String graphName, long parentId)

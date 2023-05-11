@@ -23,8 +23,8 @@ import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +54,7 @@ public class TsMailQueueProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 		super(fbTs,fTs);
 	}
 	
-	public void update(SYSTEM system, Date record, Json1Tuples<STATUS> tuples)
+	public void update(SYSTEM system, Date record, JsonTuples1<STATUS> tuples)
 	{
 		try
 		{
@@ -65,11 +65,11 @@ public class TsMailQueueProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 			if(!developmentMode) {data = fTs.save(data);}
 			logger.info("Series: "+ts.toString()+" data:"+data.toString());
 			
-			for(Json1Tuple<STATUS> t : tuples.getTuples())
+			for(JsonTuple1<STATUS> t : tuples.getTuples())
 			{
 				for(MP mp : mps)
 				{
-					if(t.getEjb().getCode().equals(mp.getCode()))
+					if(t.getEjb1().getCode().equals(mp.getCode()))
 					{
 						POINT point = efPoint.build(data,mp,Long.valueOf(t.getCount1()).doubleValue());
 						if(!developmentMode) {point = fTs.save(point);}

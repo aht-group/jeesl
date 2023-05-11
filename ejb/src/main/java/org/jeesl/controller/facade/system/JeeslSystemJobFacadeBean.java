@@ -49,7 +49,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 import net.sf.exlp.util.DateUtil;
 
@@ -315,7 +315,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		return tQ.getResultList();
 	}
 	
-	@Override public <T extends EjbWithMigrationJob1<STATUS>> Json1Tuples<STATUS> tpcJob1Status(Class<T> c)
+	@Override public <T extends EjbWithMigrationJob1<STATUS>> JsonTuples1<STATUS> tpcJob1Status(Class<T> c)
 	{
 		Json1TuplesFactory<STATUS> jtf = new Json1TuplesFactory<>(fbJob.getClassStatus());
 		jtf.setfUtils(this);
@@ -332,7 +332,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
-	@Override public <T extends EjbWithMigrationJob2<STATUS>> Json1Tuples<STATUS> tpcJob2Status(Class<T> c)
+	@Override public <T extends EjbWithMigrationJob2<STATUS>> JsonTuples1<STATUS> tpcJob2Status(Class<T> c)
 	{
 		Json1TuplesFactory<STATUS> jtf = new Json1TuplesFactory<>(fbJob.getClassStatus());
 		jtf.setfUtils(this);
@@ -349,7 +349,7 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
-	@Override public <T extends EjbWithMigrationJob3<STATUS>> Json1Tuples<STATUS> tpcJob3Status(Class<T> c)
+	@Override public <T extends EjbWithMigrationJob3<STATUS>> JsonTuples1<STATUS> tpcJob3Status(Class<T> c)
 	{
 		Json1TuplesFactory<STATUS> jtf = new Json1TuplesFactory<>(fbJob.getClassStatus());
 		jtf.setfUtils(this);

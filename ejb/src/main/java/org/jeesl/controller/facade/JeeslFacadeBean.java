@@ -74,7 +74,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithContext;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithStatus;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -1493,7 +1493,7 @@ public class JeeslFacadeBean implements JeeslFacade
 		return tQ.getResultList();
 	}
 	
-	@Override public <W extends JeeslWithType<T>, T extends JeeslStatus<?, ?, T>> Json1Tuples<T> tpcWithType(Class<W> cWith, Class<T> cType) 
+	@Override public <W extends JeeslWithType<T>, T extends JeeslStatus<?, ?, T>> JsonTuples1<T> tpcWithType(Class<W> cWith, Class<T> cType) 
 	{
 		Json1TuplesFactory<T> jtf = new Json1TuplesFactory<>(cType);
 		jtf.setfUtils(this);

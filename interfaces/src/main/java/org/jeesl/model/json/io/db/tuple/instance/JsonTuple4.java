@@ -1,12 +1,11 @@
-package org.jeesl.model.json.db.tuple.t4;
+package org.jeesl.model.json.io.db.tuple.instance;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Json4Tuple <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId, D extends EjbWithId> extends Json3Tuple<A,B,C>
+public class JsonTuple4 <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId, D extends EjbWithId> extends JsonTuple3<A,B,C>
 {
 	public static final long serialVersionUID=1;
 

@@ -3,13 +3,13 @@ package org.jeesl.factory.json.io.db.tuple;
 import javax.persistence.Tuple;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.JsonIdTuple;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuple;
-import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
-import org.jeesl.model.json.db.tuple.t4.Json4Tuple;
-import org.jeesl.model.json.db.tuple.two.Json2Tuple;
 import org.jeesl.model.json.io.db.tuple.AbstractJsonTuple;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple4;
+import org.jeesl.model.json.io.db.tuple.special.JsonIdTuple;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public class JsonTupleFactory
 	
 	public static JsonTuple build() {return new JsonTuple();}
 	
-	public static <X extends EjbWithId> JsonTuple build(Json1Tuple<X> tuple)
+	public static <X extends EjbWithId> JsonTuple build(JsonTuple1<X> tuple)
 	{
 		JsonTuple json = build();
 		
@@ -36,11 +36,11 @@ public class JsonTupleFactory
 		json.setSum4(tuple.getSum4());
 		json.setSum5(tuple.getSum5());
 		
-		json.setId1(tuple.getId());
+		json.setId1(tuple.getId1());
 		return json;
 	}
 	
-	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple build(Json2Tuple<A,B> tuple)
+	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple build(JsonTuple2<A,B> tuple)
 	{
 		JsonTuple json = build();
 		if(tuple.getCount1()!=null) {json.setCount(tuple.getCount1());}
@@ -58,7 +58,7 @@ public class JsonTupleFactory
 		return json;
 	}
 	
-	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId> JsonTuple build(Json3Tuple<A,B,C> tuple)
+	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId> JsonTuple build(JsonTuple3<A,B,C> tuple)
 	{
 		JsonTuple json = build();
 		json.setL1(tuple.getCount());
@@ -83,19 +83,19 @@ public class JsonTupleFactory
 //    	return json;
 //	}
 	
-	public static <A extends EjbWithId> Json1Tuple<A> build1(Tuple tuple, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId> JsonTuple1<A> build1(Tuple tuple, JsonTupleFactory.Type...types)
 	{
-		Json1Tuple<A> json = new Json1Tuple<A>();
-		json.setId((Long)tuple.get(0));
+		JsonTuple1<A> json = new JsonTuple1<A>();
+		json.setId1((Long)tuple.get(0));
 
 		JsonTupleFactory.build(tuple,0,json,types);
 		
     	return json;
 	}
 	
-	public static <A extends EjbWithId, B extends EjbWithId> Json2Tuple<A,B> build2(Tuple tuple, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple2<A,B> build2(Tuple tuple, JsonTupleFactory.Type...types)
 	{
-		Json2Tuple<A,B> json = new Json2Tuple<A,B>();
+		JsonTuple2<A,B> json = new JsonTuple2<A,B>();
 		json.setId1((Long)tuple.get(0));
 		json.setId2((Long)tuple.get(1));
 
@@ -104,9 +104,9 @@ public class JsonTupleFactory
     	return json;
 	}
 	
-	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId> Json3Tuple<A,B,C> build3(Tuple tuple, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId> JsonTuple3<A,B,C> build3(Tuple tuple, JsonTupleFactory.Type...types)
 	{
-		Json3Tuple<A,B,C> json = new Json3Tuple<A,B,C>();
+		JsonTuple3<A,B,C> json = new JsonTuple3<A,B,C>();
 		json.setId1((Long)tuple.get(0));
 		json.setId2((Long)tuple.get(1));
 		json.setId3((Long)tuple.get(2));
@@ -114,9 +114,9 @@ public class JsonTupleFactory
     	return json;
 	}
 	
-	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId, D extends EjbWithId> Json4Tuple<A,B,C,D> build4(Tuple tuple, JsonTupleFactory.Type...types)
+	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId, D extends EjbWithId> JsonTuple4<A,B,C,D> build4(Tuple tuple, JsonTupleFactory.Type...types)
 	{
-		Json4Tuple<A,B,C,D> json = new Json4Tuple<A,B,C,D>();
+		JsonTuple4<A,B,C,D> json = new JsonTuple4<A,B,C,D>();
 		json.setId1((Long)tuple.get(0));
 		json.setId2((Long)tuple.get(1));
 		json.setId3((Long)tuple.get(2));

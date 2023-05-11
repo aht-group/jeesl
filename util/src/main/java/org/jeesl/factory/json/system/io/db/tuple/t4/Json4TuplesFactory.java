@@ -13,10 +13,10 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t3.Json3TuplesFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
-import org.jeesl.model.json.db.tuple.t3.Json3Tuples;
-import org.jeesl.model.json.db.tuple.t4.Json4Tuple;
-import org.jeesl.model.json.db.tuple.t4.Json4Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples3;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples4;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple4;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +34,7 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 	private final Set<Long> setId4;
 	private final Map<Long,D> mapD; public Map<Long,D> getMapD() {return mapD;}
 
-	private Json4Tuples<A,B,C,D> tuples; public Json4Tuples<A,B,C,D> getTuples4() {return tuples;} public void setTuples4(Json4Tuples<A,B,C,D> tuples) {this.tuples = tuples;}
+	private JsonTuples4<A,B,C,D> tuples; public JsonTuples4<A,B,C,D> getTuples4() {return tuples;} public void setTuples4(JsonTuples4<A,B,C,D> tuples) {this.tuples = tuples;}
 
 	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId, D extends EjbWithId> Json4TuplesFactory<A,B,C,D> instance(Class<A> cA, Class<B> cB, Class<C> cC, Class<D> cD) {return new Json4TuplesFactory<>(cA,cB,cC,cD);}
 	public Json4TuplesFactory(Class<A> cA, Class<B> cB, Class<C> cC, Class<D> cD)
@@ -61,12 +61,12 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		mapD.clear();
 	}
 	
-	public void init(JeeslFacade fUtils, Json4Tuples<A,B,C,D> json)
+	public void init(JeeslFacade fUtils, JsonTuples4<A,B,C,D> json)
 	{
 		clear();
 		this.tuples = json;
 		
-		for(Json4Tuple<A,B,C,D> t : json.getTuples())
+		for(JsonTuple4<A,B,C,D> t : json.getTuples())
 		{
 			setA.add(t.getId1());
 			setB.add(t.getId2());
@@ -82,18 +82,18 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		mapD.putAll(EjbIdFactory.toIdMap(fUtils.find(cD, setId4)));
 	}
 	
-	public Json4Tuples<A,B,C,D> build4(List<Tuple> tuples, JsonTupleFactory.Type...types)
+	public JsonTuples4<A,B,C,D> build4(List<Tuple> tuples, JsonTupleFactory.Type...types)
 	{
-		Json4Tuples<A,B,C,D> json = new Json4Tuples<A,B,C,D>();
+		JsonTuples4<A,B,C,D> json = new JsonTuples4<A,B,C,D>();
 		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build4(t,types));}
 		this.ejb4Load(json);
 		return json;
 	}
 	
-	private void ejb4Load(Json4Tuples<A,B,C,D> json)
+	private void ejb4Load(JsonTuples4<A,B,C,D> json)
 	{ 
 		clear();
-		for(Json4Tuple<A,B,C,D> t : json.getTuples())
+		for(JsonTuple4<A,B,C,D> t : json.getTuples())
 		{
 			setA.add(t.getId1());
 			setB.add(t.getId2());
@@ -103,7 +103,7 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		
 		if(facade==null)
 		{	// A object is created and the corresponding id is set
-			for(Json4Tuple<A,B,C,D> t : json.getTuples())
+			for(JsonTuple4<A,B,C,D> t : json.getTuples())
 			{
 				try
 				{
@@ -123,7 +123,7 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 			mapC.putAll(EjbIdFactory.toIdMap(facade.find(cC,setC)));
 			mapD.putAll(EjbIdFactory.toIdMap(facade.find(cD,setId4)));
 			
-			for(Json4Tuple<A,B,C,D> t : json.getTuples())
+			for(JsonTuple4<A,B,C,D> t : json.getTuples())
 			{
 				t.setEjb1(mapA.get(t.getId1()));
 				t.setEjb2(mapB.get(t.getId2()));
@@ -134,12 +134,9 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		this.tuples=json;
 	}
 	
-	
-	
-	
-	public Json4Tuples<A,B,C,D> build4Sum(List<Tuple> tuples)
+	public JsonTuples4<A,B,C,D> build4Sum(List<Tuple> tuples)
 	{
-		Json4Tuples<A,B,C,D> json = new Json4Tuples<A,B,C,D>();
+		JsonTuples4<A,B,C,D> json = new JsonTuples4<A,B,C,D>();
 		for(Tuple t : tuples)
         {
         	json.getTuples().add(jtf.buildSum(t));
@@ -147,13 +144,13 @@ public class Json4TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		return json;
 	}
 	
-	public Json4Tuples<A,B,C,D> build4Count(List<Tuple> tuples)
-	{
-		Json4Tuples<A,B,C,D> json = new Json4Tuples<A,B,C,D>();
-		for(Tuple t : tuples)
-        {
-        	json.getTuples().add(jtf.buildCount(t));
-        }
-		return json;
-	}
+//	private Json4Tuples<A,B,C,D> build4Count(List<Tuple> tuples)
+//	{
+//		Json4Tuples<A,B,C,D> json = new Json4Tuples<A,B,C,D>();
+//		for(Tuple t : tuples)
+//        {
+//        	json.getTuples().add(jtf.buildCount(t));
+//        }
+//		return json;
+//	}
 }

@@ -1,21 +1,22 @@
-package org.jeesl.model.json.db.tuple.t1;
+package org.jeesl.model.json.io.db.tuple.container;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Json1Tuples <T extends EjbWithId> implements Serializable
+public class JsonTuples1 <T extends EjbWithId> implements Serializable
 {
 	public static final long serialVersionUID=1;
 
 	@JsonProperty("tuples")
-	private List<Json1Tuple<T>> tuples;
-	public List<Json1Tuple<T>> getTuples() {if(tuples==null){tuples = new ArrayList<Json1Tuple<T>>();} return tuples;}
-	public void setTuples(List<Json1Tuple<T>> tuples) {this.tuples = tuples;}
+	private List<JsonTuple1<T>> tuples;
+	public List<JsonTuple1<T>> getTuples() {if(tuples==null){tuples = new ArrayList<JsonTuple1<T>>();} return tuples;}
+	public void setTuples(List<JsonTuple1<T>> tuples) {this.tuples = tuples;}
 
 	private boolean ejbLoaded;
 	public boolean isEjbLoaded() {return ejbLoaded;}

@@ -17,7 +17,8 @@
 	<j:row id="rowScope">
 		<j:slot id="sScopes" width="3">
 			<h:form id="fCategories">
-				<p:dataTable var="s" value="#{cc.attrs.bean.scopes}" draggableRows="true"
+				<p:dataTable stlyeClass="jeesl-datatable"
+						var="s" value="#{cc.attrs.bean.scopes}" draggableRows="true"
 					selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SystemConstraintScope" code="listOf">
@@ -42,7 +43,7 @@
 		</j:slot>
 		<j:slot id="sScope" width="4">
 			<h:form id="fScope" rendered="#{(not empty cc.attrs.bean.scope) and (cc.attrs.bean.ui2.showA)}">
-				<p:panel id="pView" styleClass="jeeslPanel">
+				<p:panel id="pView" styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="SystemConstraintScope"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:grid"/>
@@ -63,8 +64,9 @@
 				</p:panel>
 			</h:form>
 			<h:form id="fConstraints" rendered="#{(not empty cc.attrs.bean.scope) and (cc.attrs.bean.scope.id gt 0)}">
-				<p:dataTable var="c" value="#{cc.attrs.bean.constraints}" draggableRows="true"
-					selection="#{cc.attrs.bean.constraint}" selectionMode="single" rowKey="#{c.id}">
+				<p:dataTable stlyeClass="jeesl-datatable"
+						var="c" value="#{cc.attrs.bean.constraints}" draggableRows="true"
+						selection="#{cc.attrs.bean.constraint}" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SystemConstraint" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addConstraint()}" update=":#{cc.id}:sConstraint"/>
@@ -86,7 +88,7 @@
 		</j:slot>
 		<j:slot id="sConstraint" width="5">
 			<h:form id="fConstraint" rendered="#{not empty cc.attrs.bean.constraint}">
-				<p:panel styleClass="jeeslPanel">
+				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="SystemConstraint"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:sScope :#{cc.id}:sConstraint"/>

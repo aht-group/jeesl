@@ -16,9 +16,10 @@
 	<j:row>
 		<j:slot id="sTickets" width="#{cc.attrs.bean.uiSlot.a}" rendered="#{cc.attrs.bean.uiSlot.showA}">
 			<h:form id="fTickets">
-				<p:dataTable var="t" value="#{cc.attrs.bean.tickets}" draggableRows="false" styleClass="jeesl-datatable"
-								selection="#{cc.attrs.bean.ticket}" selectionMode="single" rowKey="#{t.id}"
-								rows="20" paginator="true" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="t" value="#{cc.attrs.bean.tickets}" draggableRows="false"
+						selection="#{cc.attrs.bean.ticket}" selectionMode="single" rowKey="#{t.id}"
+						rows="20" paginator="true" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader entity="HdTicket" code="listOf">
 							<j:svg rendered="false" type="jeeslAdd" listener="#{cc.attrs.bean.addTicket()}" update=":#{cc.id}:sTicket :#{cc.id}:sMessage" library="jeeslGfx"/>
@@ -57,7 +58,7 @@
 		</j:slot>
 		<j:slot id="sTicket" width="#{cc.attrs.bean.uiSlot.b}" rendered="#{cc.attrs.bean.uiSlot.showB}">
 			<h:form id="fTicket" rendered="#{not empty cc.attrs.bean.ticket}">
-				<p:panel styleClass="jeeslPanel">
+				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><jtp:label entity="HdTicket"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslArrowRight" listener="#{cc.attrs.bean.addMessage()}" update=":#{cc.id}:sMessage" library="jeeslGfx" rendered="#{cc.attrs.bean.uiSlot.showC}"/>
@@ -108,8 +109,9 @@
 			</h:form>
 			<jp:ioFrFiles handler="#{cc.attrs.bean.frh}" overlay="false" componentPrefix="#{cc.id}" allowDelete="false" allowUpload="false"
 						  rendered="#{(not empty cc.attrs.bean.ticket) and (not empty cc.attrs.bean.frh)}"/>
-			<p:dataTable var="e" value="#{cc.attrs.bean.events}" draggableRows="false" rendered="#{not empty cc.attrs.bean.ticket}"
-						rows="5" paginator="true" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+			<p:dataTable styleClass="jeesl-datatable"
+					var="e" value="#{cc.attrs.bean.events}" draggableRows="false" rendered="#{not empty cc.attrs.bean.ticket}"
+					rows="5" paginator="true" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="#{appSettingsBean.paginatorPosition}" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 				<f:facet name="header">
 					<j:dtHeader entity="HdEvent" code="listOf">
 						
@@ -165,7 +167,7 @@
 		</j:slot>
 		<j:slot id="sMessage" width="#{cc.attrs.bean.uiSlot.c}" rendered="#{cc.attrs.bean.uiSlot.showC}">
 			<h:form id="fMessage" >
-				<p:panel styleClass="jeeslPanel" rendered="#{not empty cc.attrs.bean.message}">
+				<p:panel styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.message}">
 					<f:facet name="header"><jtp:label entity="HdMessage"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveMessage()}" update=":#{cc.id}:sMessage" library="jeeslGfx"/>

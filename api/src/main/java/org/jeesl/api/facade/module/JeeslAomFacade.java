@@ -18,7 +18,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public interface JeeslAomFacade <L extends JeeslLang, D extends JeeslDescription,
 									REALM extends JeeslTenantRealm<L,D,REALM,?>,
@@ -51,5 +51,5 @@ public interface JeeslAomFacade <L extends JeeslLang, D extends JeeslDescription
 	List<EVENT> fAssetEvents(ASSET asset);
 	<RREF extends EjbWithId> List<EVENT> fAssetEvents(REALM realm, RREF rref, List<ESTATUS> status);
 	
-	Json1Tuples<VIEW> tpcTypeByView(TenantIdentifier<REALM> identifier);
+	JsonTuples1<VIEW> tpcTypeByView(TenantIdentifier<REALM> identifier);
 }

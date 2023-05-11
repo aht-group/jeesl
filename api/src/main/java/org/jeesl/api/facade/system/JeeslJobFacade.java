@@ -27,7 +27,7 @@ import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob3;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public interface JeeslJobFacade <L extends JeeslLang,D extends JeeslDescription,
 								TEMPLATE extends JeeslJobTemplate<L,D,CATEGORY,TYPE,PRIORITY,EXPIRE>,
@@ -63,9 +63,9 @@ public interface JeeslJobFacade <L extends JeeslLang,D extends JeeslDescription,
 	
 	<T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithJob2In(Class<T> c, List<STATUS> list, Integer maxResults);
 	
-	<T extends EjbWithMigrationJob1<STATUS>> Json1Tuples<STATUS> tpcJob1Status(Class<T> c);
-	<T extends EjbWithMigrationJob2<STATUS>> Json1Tuples<STATUS> tpcJob2Status(Class<T> c);
-	<T extends EjbWithMigrationJob3<STATUS>> Json1Tuples<STATUS> tpcJob3Status(Class<T> c);
+	<T extends EjbWithMigrationJob1<STATUS>> JsonTuples1<STATUS> tpcJob1Status(Class<T> c);
+	<T extends EjbWithMigrationJob2<STATUS>> JsonTuples1<STATUS> tpcJob2Status(Class<T> c);
+	<T extends EjbWithMigrationJob3<STATUS>> JsonTuples1<STATUS> tpcJob3Status(Class<T> c);
 	
 	
 }

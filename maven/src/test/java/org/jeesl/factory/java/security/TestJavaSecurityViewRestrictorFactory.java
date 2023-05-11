@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import net.sf.ahtutils.controller.factory.java.security.AbstractJavaSecurityFactoryTst;
-import net.sf.ahtutils.test.UtilsMavenTstBootstrap;
 
+import org.jeesl.JeeslMavenBootstrap;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.junit.After;
 import org.junit.Assert;
@@ -56,7 +56,7 @@ public class TestJavaSecurityViewRestrictorFactory extends AbstractJavaSecurityF
 	
 	public static void main(String[] args) throws Exception
     {
-		UtilsMavenTstBootstrap.init();
+		JeeslMavenBootstrap.init();
 		
 		TestJavaSecurityViewRestrictorFactory test = new TestJavaSecurityViewRestrictorFactory();
 		test.setSaveReference(true);

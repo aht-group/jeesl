@@ -31,7 +31,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
-import org.jeesl.model.json.db.tuple.JsonIdTuple;
+import org.jeesl.model.json.io.db.tuple.special.JsonIdTuple;
 import org.jeesl.model.json.util.time.JsonYear;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.json.JsonYearComparator;

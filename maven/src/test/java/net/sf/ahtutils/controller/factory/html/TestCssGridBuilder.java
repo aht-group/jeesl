@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.IOException;
 
 import net.sf.ahtutils.test.AbstractUtilsMavenTst;
-import net.sf.ahtutils.test.UtilsMavenTstBootstrap;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.dir.DirChecker;
 
 import org.apache.commons.io.FileUtils;
+import org.jeesl.JeeslMavenBootstrap;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -71,7 +71,7 @@ public class TestCssGridBuilder extends AbstractUtilsMavenTst
 	
 	public static void main(String[] args) throws Exception
     {
-		UtilsMavenTstBootstrap.init();
+		JeeslMavenBootstrap.init();
 		
 		TestCssGridBuilder.initTmpDir();
 		TestCssGridBuilder test = new TestCssGridBuilder();

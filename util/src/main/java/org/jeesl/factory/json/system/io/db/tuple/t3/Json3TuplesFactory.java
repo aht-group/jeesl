@@ -12,8 +12,8 @@ import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
-import org.jeesl.model.json.db.tuple.t3.Json3Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples3;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,7 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 	protected final Map<Long,B> mapB; public Map<Long,B> getMapB() {return mapB;}
 	protected final Map<Long,C> mapC; public Map<Long,C> getMapC() {return mapC;}
 
-	private Json3Tuples<A,B,C> tuples; public Json3Tuples<A,B,C> get3Tuples() {return tuples;} public void set3Tuples(Json3Tuples<A, B, C> tuples) {this.tuples = tuples;}
+	private JsonTuples3<A,B,C> tuples; public JsonTuples3<A,B,C> get3Tuples() {return tuples;} public void set3Tuples(JsonTuples3<A, B, C> tuples) {this.tuples = tuples;}
 
 	public static <A extends EjbWithId, B extends EjbWithId, C extends EjbWithId> Json3TuplesFactory<A,B,C> instance(Class<A> cA, Class<B> cB, Class<C> cC) {return new Json3TuplesFactory<>(cA,cB,cC);}
 	public Json3TuplesFactory(Class<A> cA, Class<B> cB, Class<C> cC)
@@ -74,18 +74,18 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		mapC.clear();
 	}
 	
-	public Json3Tuples<A,B,C> build(List<Tuple> tuples, JsonTupleFactory.Type...types)
+	public JsonTuples3<A,B,C> build(List<Tuple> tuples, JsonTupleFactory.Type...types)
 	{
-		Json3Tuples<A,B,C> json = new Json3Tuples<>();
+		JsonTuples3<A,B,C> json = new JsonTuples3<>();
 		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build3(t,types));}
 		ejb3Load(json);
 		return json;
 	}
 	
-	private void ejb3Load(Json3Tuples<A,B,C> json)
+	private void ejb3Load(JsonTuples3<A,B,C> json)
 	{ 
 		clear();
-		for(Json3Tuple<A,B,C> t : json.getTuples())
+		for(JsonTuple3<A,B,C> t : json.getTuples())
 		{
 			setA.add(t.getId1());
 			setB.add(t.getId2());
@@ -94,7 +94,7 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		
 		if(fUtils==null)
 		{	// A object is created and the corresponding id is set
-			for(Json3Tuple<A,B,C> t : json.getTuples())
+			for(JsonTuple3<A,B,C> t : json.getTuples())
 			{
 				try
 				{
@@ -112,7 +112,7 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 			mapB.putAll(EjbIdFactory.toIdMap(fUtils.find(cB,setB)));
 			mapC.putAll(EjbIdFactory.toIdMap(fUtils.find(cC,setC)));
 			
-			for(Json3Tuple<A,B,C> t : json.getTuples())
+			for(JsonTuple3<A,B,C> t : json.getTuples())
 			{
 				t.setEjb1(mapA.get(t.getId1()));
 				t.setEjb2(mapB.get(t.getId2()));
@@ -122,9 +122,9 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		this.tuples=json;
 	}
 	
-	public Json3Tuples<A,B,C> build3Sum(List<Tuple> tuples)
+	public JsonTuples3<A,B,C> build3Sum(List<Tuple> tuples)
 	{
-		Json3Tuples<A,B,C> json = new Json3Tuples<A,B,C>();
+		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();
 		for(Tuple t : tuples)
         {
         	json.getTuples().add(jtf.buildSum(t));
@@ -133,9 +133,9 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		return json;
 	}
 	
-	public Json3Tuples<A,B,C> build3Count(List<Tuple> tuples)
+	public JsonTuples3<A,B,C> build3Count(List<Tuple> tuples)
 	{
-		Json3Tuples<A,B,C> json = new Json3Tuples<A,B,C>();
+		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();
 		for(Tuple t : tuples)
         {
         	json.getTuples().add(jtf.buildCount(t));
@@ -144,9 +144,9 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		return json;
 	}
 	
-	public Json3Tuples<A,B,C> build3CountInterger4(List<Tuple> tuples)
+	public JsonTuples3<A,B,C> build3CountInterger4(List<Tuple> tuples)
 	{
-		Json3Tuples<A,B,C> json = new Json3Tuples<A,B,C>();
+		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();
 		for(Tuple t : tuples)
         {
         	json.getTuples().add(jtf.buildCountInteger4(t));

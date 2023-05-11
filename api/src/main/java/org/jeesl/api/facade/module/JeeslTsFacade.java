@@ -26,7 +26,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 								CAT extends JeeslTsCategory<L,D,CAT,?>,
@@ -85,5 +85,5 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	
 	void deleteTransaction(TRANSACTION transaction) throws JeeslConstraintViolationException;
 	
-	Json1Tuples<TS> tpCountRecordsByTs(List<TS> series);
+	JsonTuples1<TS> tpCountRecordsByTs(List<TS> series);
 }

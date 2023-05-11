@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import net.sf.ahtutils.test.AbstractUtilsMavenTst;
-import net.sf.ahtutils.test.UtilsMavenTstBootstrap;
 
+import org.jeesl.JeeslMavenBootstrap;
 import org.junit.Before;
 import org.junit.Test;
 import org.mozilla.javascript.EvaluatorException;
@@ -31,7 +31,7 @@ public class TestJsBuilder extends AbstractUtilsMavenTst
 		
 	public static void main(String[] args) throws Exception
     {
-		UtilsMavenTstBootstrap.init();
+		JeeslMavenBootstrap.init();
 		
 		TestJsBuilder test = new TestJsBuilder();
 		test.init();

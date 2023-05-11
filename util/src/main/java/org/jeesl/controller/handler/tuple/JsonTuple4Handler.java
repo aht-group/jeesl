@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.json.db.tuple.t3.Json3Tuple;
-import org.jeesl.model.json.db.tuple.t4.Json4Tuple;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple4;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,14 +19,14 @@ public class JsonTuple4Handler <A extends EjbWithId, B extends EjbWithId, C exte
 	final static Logger logger = LoggerFactory.getLogger(JsonTuple4Handler.class);
 
 //	private JeeslComparatorProvider<D> jppD; public void setComparatorProviderD(JeeslComparatorProvider<D> jppD) {this.jppD = jppD;}
-//	
-//	private final Class<D> cD;
+	
+	private final Class<D> cD;
 	
 	protected final Map<Long,D> mapD;
-	private final Map<A,Map<B,Map<C,Json3Tuple<A,B,C>>>> map4; public Map<A,Map<B,Map<C,Json3Tuple<A,B,C>>>> getMap4() {return map4;}
+	private final Map<A,Map<B,Map<C,JsonTuple3<A,B,C>>>> map4; public Map<A,Map<B,Map<C,JsonTuple3<A,B,C>>>> getMap4() {return map4;}
 	
 	private final List<D> listD; public List<D> getListD() {return listD;}
-	private final List<Json4Tuple<A,B,C,D>> tuples4; public List<Json4Tuple<A,B,C,D>> getTuples4() {return tuples4;}
+	private final List<JsonTuple4<A,B,C,D>> tuples4; public List<JsonTuple4<A,B,C,D>> getTuples4() {return tuples4;}
 
 	private int sizeC; public int getSizeC() {return sizeC;}
 	
@@ -34,14 +34,14 @@ public class JsonTuple4Handler <A extends EjbWithId, B extends EjbWithId, C exte
 	public JsonTuple4Handler(Class<A> cA, Class<B> cB, Class<C> cC, Class<D> cD)
 	{
 		super(cA,cB,cC);
-//		this.cD=cD;
+		this.cD=cD;
 		
 		mapD = new HashMap<>();
 		listD = new ArrayList<>();
-		map4 = new HashMap<A,Map<B,Map<C,Json3Tuple<A,B,C>>>>();
+		map4 = new HashMap<A,Map<B,Map<C,JsonTuple3<A,B,C>>>>();
 		tuples4 = new ArrayList<>();
 		
-		dimension = 3;
+		dimension = 4;
 	}
 	
 	public void clear()

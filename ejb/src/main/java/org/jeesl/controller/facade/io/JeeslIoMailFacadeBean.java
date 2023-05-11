@@ -31,7 +31,7 @@ import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.json.db.tuple.t1.Json1Tuples;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.xml.system.io.mail.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -174,7 +174,7 @@ public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescriptio
 		return tQ.getResultList();
 	}
 	
-	@Override public Json1Tuples<STATUS> tpcIoMailByStatus(LocalDate from, LocalDate to, List<CATEGORY> categories)
+	@Override public JsonTuples1<STATUS> tpcIoMailByStatus(LocalDate from, LocalDate to, List<CATEGORY> categories)
 	{		
 		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbMail.getClassStatus()).tupleLoad(this,true);
 		CriteriaBuilder cB = em.getCriteriaBuilder();
