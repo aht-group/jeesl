@@ -5124,7 +5124,13 @@ body, .ui-widget {
   background: #ededed; }
   .jeesl-tree .ui-widget-content {
     background: transparent; }
-    .jeesl-tree .ui-widget-content .ui-treenode.jeesl-disabled > .ui-treenode-content > .ui-treenode-label {
+    .jeesl-tree .ui-widget-content .ui-treenode .jeesl-icon {
+      height: 12px;
+      width: auto; }
+      @media (max-width: 768px) {
+        .jeesl-tree .ui-widget-content .ui-treenode .jeesl-icon {
+          height: 32px; } }
+    .jeesl-tree .ui-widget-content .ui-treenode .jeesl-disabled > .ui-treenode-content > .ui-treenode-label {
       font-style: italic;
       opacity: .5; }
 
@@ -5417,17 +5423,18 @@ body, .ui-widget {
       border-color: inherit;
       border-width: 0 0 1px 1px;
       padding: 5px 10px; }
+      .jeesl-datatable tbody td .jeesl-icon, .jeesl-datatable .ui-datatable-data td .jeesl-icon, .ui-datatable.ui-sortable-helper tbody td .jeesl-icon, .ui-datatable.ui-sortable-helper .ui-datatable-data td .jeesl-icon {
+        height: 12px;
+        width: auto; }
+        @media (max-width: 768px) {
+          .jeesl-datatable tbody td .jeesl-icon, .jeesl-datatable .ui-datatable-data td .jeesl-icon, .ui-datatable.ui-sortable-helper tbody td .jeesl-icon, .ui-datatable.ui-sortable-helper .ui-datatable-data td .jeesl-icon {
+            height: 32px; } }
       .jeesl-datatable tbody td.jeesl-column-min-width, .jeesl-datatable .ui-datatable-data td.jeesl-column-min-width, .ui-datatable.ui-sortable-helper tbody td.jeesl-column-min-width, .ui-datatable.ui-sortable-helper .ui-datatable-data td.jeesl-column-min-width {
         width: 0; }
       .jeesl-datatable tbody td.jeesl-cell-select, .jeesl-datatable .ui-datatable-data td.jeesl-cell-select, .ui-datatable.ui-sortable-helper tbody td.jeesl-cell-select, .ui-datatable.ui-sortable-helper .ui-datatable-data td.jeesl-cell-select {
         padding: 0; }
         .jeesl-datatable tbody td.jeesl-cell-select label, .jeesl-datatable .ui-datatable-data td.jeesl-cell-select label, .ui-datatable.ui-sortable-helper tbody td.jeesl-cell-select label, .ui-datatable.ui-sortable-helper .ui-datatable-data td.jeesl-cell-select label {
           padding: 5px 10px; }
-      .jeesl-datatable tbody td .jeesl-icon, .jeesl-datatable .ui-datatable-data td .jeesl-icon, .ui-datatable.ui-sortable-helper tbody td .jeesl-icon, .ui-datatable.ui-sortable-helper .ui-datatable-data td .jeesl-icon {
-        height: 12px; }
-        @media (max-width: 768px) {
-          .jeesl-datatable tbody td .jeesl-icon, .jeesl-datatable .ui-datatable-data td .jeesl-icon, .ui-datatable.ui-sortable-helper tbody td .jeesl-icon, .ui-datatable.ui-sortable-helper .ui-datatable-data td .jeesl-icon {
-            height: 32px; } }
     .jeesl-datatable tbody tr.ui-state-hover, .jeesl-datatable tbody .jeesl-cell-select > label:not(.selected):hover, .jeesl-datatable .ui-datatable-data tr.ui-state-hover, .jeesl-datatable .ui-datatable-data .jeesl-cell-select > label:not(.selected):hover, .ui-datatable.ui-sortable-helper tbody tr.ui-state-hover, .ui-datatable.ui-sortable-helper tbody .jeesl-cell-select > label:not(.selected):hover, .ui-datatable.ui-sortable-helper .ui-datatable-data tr.ui-state-hover, .ui-datatable.ui-sortable-helper .ui-datatable-data .jeesl-cell-select > label:not(.selected):hover {
       background: #dedede;
       box-shadow: none;
@@ -7364,6 +7371,12 @@ body, .ui-widget {
     .jeesl-footer {
       max-width: 100%; } }
 
+.jeesl-input-grid .p-field .p-col .jeesl-icon {
+  height: 12px;
+  width: auto; }
+  @media (max-width: 768px) {
+    .jeesl-input-grid .p-field .p-col .jeesl-icon {
+      height: 32px; } }
 .jeesl-input-grid .p-field .p-col:not(.ui-outputlabel) > * {
   min-height: 22px;
   min-width: 22px !important; }
@@ -7387,12 +7400,6 @@ body, .ui-widget {
   @media (max-width: 768px) {
     .jeesl-input-grid .p-field .p-col > * {
       min-height: 42px; } }
-.jeesl-input-grid .p-field .p-col .jeesl-icon {
-  height: 12px;
-  width: auto; }
-  @media (max-width: 768px) {
-    .jeesl-input-grid .p-field .p-col .jeesl-icon {
-      height: 32px; } }
 
 .pf-action-icon {
   float: none; }
