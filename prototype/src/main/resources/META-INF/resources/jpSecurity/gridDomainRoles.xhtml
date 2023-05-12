@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
-	xmlns:aupAdm="http://ahtutils.sourceforge.net/prototype/admin"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
@@ -24,77 +17,78 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<aup:grid id="grid">
-	        <aht:row id="row1">
-	            <aht:slot width="4">
-					<h:form>
-						<p:dataTable var="var" value="#{cc.attrs.domains}"
-	                			selection="#{cc.attrs.bean.domain}" selectionMode="single" rowKey="#{var.id}">
-							<j:dtHeader title="#{cc.attrs.staffTableHeader}">
-                                
-                            </j:dtHeader>
-							<p:ajax event="rowSelect" update=":#{cc.id}:sStaff :#{cc.id}:sUser" listener="#{cc.attrs.bean.selectDomain()}"/>
-							<composite:renderFacet name="domainColumns"/>
-							<composite:insertChildren/>
-						</p:dataTable>
-					</h:form>
-		        </aht:slot>
-		        <aht:slot id="sStaff" width="4" renderChildrenIfEjb="#{cc.attrs.bean.domain}">
-		            <h:form>
-		                <p:dataTable var="staff" value="#{cc.attrs.bean.staffs}"
-		                             selection="#{cc.attrs.bean.staff}" selectionMode="single" rowKey="#{staff.id}">
-		   					<f:facet name="header">
-	                            <j:dtHeader title="#{cc.attrs.staffTableHeader}">
-	                                <j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addStaff()}" update=":#{cc.id}:sUser"/>
-	                            </j:dtHeader>
-	                        </f:facet>
-		                    <p:ajax event="rowSelect" update=":#{cc.id}:sUser" listener="#{cc.attrs.bean.selectStaff()}"/>
-		                    <p:column headerText="#{msg.jeeslSecurityRole}" sortBy="#{staff.role.name[userBean.localeCode].lang}" filterBy="#{staff.role.name[userBean.localeCode].lang}" filterMatchMode="contains" filterStyle="width: 50px;">
-		                        <h:outputText value="#{staff.role.name[userBean.localeCode].lang}" />
-		                    </p:column>
-		                    <p:column headerText="#{msg.Name}" sortBy="#{staff.user.lastName}" filterBy="#{staff.user.lastName}" filterMatchMode="contains" filterStyle="width: 50px;">
-		                        <h:outputText value="#{staff.user.firstName} #{staff.user.lastName}" />
-		                    </p:column>
-		                </p:dataTable>
-		            </h:form>
-		        </aht:slot>
-				<aht:slot id="sUser" width="4" renderChildrenIfEjb="#{cc.attrs.bean.staff}">
-	                <h:form id="fUser" rendered="#{not empty cc.attrs.bean.staff}">
-	                    <p:panel header="#{msg.jeeslDetails}" styleClass="jeeslPanel">
-							<f:facet name="actions">
-		                        	<j:svg type="jeeslCancel" library="jeeslGfx" process="@this" listener="#{cc.attrs.bean.cancel()}" update=":#{cc.id}:sUser" tooltip="#{msg.jeeslTtCancel}"/>
-		                        	<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-		                        	<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmStaff()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
-		                        	<j:svg type="jeeslAddressBook" id="giContactSelection"/>
-	                        </f:facet>
-	                        <composite:renderFacet name="domainDetail"/>
-	                        <p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+<jp:grid id="grid">
+	<j:row id="row1">
+		<j:slot width="4">
+			<h:form>
+				<p:dataTable styleClass="jeesl-datatable"
+						var="var" value="#{cc.attrs.domains}"
+               			selection="#{cc.attrs.bean.domain}" selectionMode="single" rowKey="#{var.id}">
+					<j:dtHeader title="#{cc.attrs.staffTableHeader}"/>
+					<p:ajax event="rowSelect" update=":#{cc.id}:sStaff :#{cc.id}:sUser" listener="#{cc.attrs.bean.selectDomain()}"/>
+					<composite:renderFacet name="domainColumns"/>
+					<composite:insertChildren/>
+				</p:dataTable>
+			</h:form>
+        </j:slot>
+        <j:slot id="sStaff" width="4" >
+            <h:form rendered="#{cc.attrs.bean.domain}">
+                <p:dataTable styleClass="jeesl-datatable"
+                		var="staff" value="#{cc.attrs.bean.staffs}"
+                        selection="#{cc.attrs.bean.staff}" selectionMode="single" rowKey="#{staff.id}">
+   					<f:facet name="header">
+                           <j:dtHeader title="#{cc.attrs.staffTableHeader}">
+                               <j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addStaff()}" update=":#{cc.id}:sUser"/>
+                           </j:dtHeader>
+                       </f:facet>
+                    <p:ajax event="rowSelect" update=":#{cc.id}:sUser" listener="#{cc.attrs.bean.selectStaff()}"/>
+                    <p:column headerText="#{msg.jeeslSecurityRole}" sortBy="#{staff.role.name[userBean.localeCode].lang}" filterBy="#{staff.role.name[userBean.localeCode].lang}" filterMatchMode="contains" filterStyle="width: 50px;">
+                        <h:outputText value="#{staff.role.name[userBean.localeCode].lang}" />
+                    </p:column>
+                    <p:column headerText="#{msg.Name}" sortBy="#{staff.user.lastName}" filterBy="#{staff.user.lastName}" filterMatchMode="contains" filterStyle="width: 50px;">
+                        <h:outputText value="#{staff.user.firstName} #{staff.user.lastName}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </j:slot>
+		<j:slot id="sUser" width="4">
+			<h:form id="fUser" rendered="#{not empty cc.attrs.bean.staff}">
+				<p:panel header="#{msg.jeeslDetails}" styleClass="jeesl-panel">
+					<f:facet name="actions">
+                        	<j:svg type="jeeslCancel" process="@this" listener="#{cc.attrs.bean.cancel()}" update=":#{cc.id}:sUser" tooltip="#{msg.jeeslTtCancel}"/>
+                        	<j:svg type="jeeslSave" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+                        	<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmStaff()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}"/>
+                        	<j:svg type="jeeslAddressBook" id="giContactSelection"/>
+                       </f:facet>
+                       <p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
+                       <composite:renderFacet name="domainDetail"/>
+                       <j:inputGrid>
 
-								<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.staff.role}" effect="fade" autoWidth="false">
-	                                <f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.name[userBean.localeCode].lang}" itemValue="#{r}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslPerson}" for="acContact" />
-								<p:autoComplete id="acContact" value="#{cc.attrs.bean.staff.user}" required="true"
-	                                           completeMethod="#{cc.attrs.bean.autoComplete}" forceSelection="true"
-	                                           var="user" itemLabel="#{user.lastName}" itemValue="#{user}">
-	                               <p:ajax event="itemSelect" update=":#{cc.id}:fUser" listener="#{cc.attrs.bean.autoCompleteSelect}" process="@form"/>
-	                               <p:column><h:outputText value="#{user.firstName}"/></p:column>
-	                               <p:column><h:outputText value="#{user.lastName}"/></p:column>
-	                               <p:column><h:outputText value="#{user.email}"/></p:column>
-	                            </p:autoComplete>
-	
-								<p:outputLabel value="#{msg.jeeslEmail}"/>
-								<aup:outputEmail id="otEmail" user="#{cc.attrs.bean.staff.user}"/>
-                           
-	                        </p:panelGrid>
-	                        <p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-	                    </p:panel>
-	                    <aup:opUserSelection for=":#{cc.id}:fUser:giContactSelection:link" update=":#{cc.id}:sUser" contactHandler="#{cc.attrs.bean.opUserHandler}" linkAddContact="#{cc.attrs.linkAddContact}"/>
-		            </h:form>
-		        </aht:slot>
-	        </aht:row>
-	    </aup:grid>
+						<p:outputLabel value="#{msg.jeeslSecurityRole}"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.staff.role}" effect="fade" autoWidth="false">
+                               <f:selectItems value="#{cc.attrs.bean.roles}" var="r" itemLabel="#{r.name[userBean.localeCode].lang}" itemValue="#{r}"/>
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{msg.jeeslPerson}" for="acContact" />
+						<p:autoComplete id="acContact" value="#{cc.attrs.bean.staff.user}" required="true"
+                                          completeMethod="#{cc.attrs.bean.autoComplete}" forceSelection="true"
+                                          var="user" itemLabel="#{user.lastName}" itemValue="#{user}">
+                              <p:ajax event="itemSelect" update=":#{cc.id}:fUser" listener="#{cc.attrs.bean.autoCompleteSelect}" process="@form"/>
+                              <p:column><h:outputText value="#{user.firstName}"/></p:column>
+                              <p:column><h:outputText value="#{user.lastName}"/></p:column>
+                              <p:column><h:outputText value="#{user.email}"/></p:column>
+                           </p:autoComplete>
+
+						<p:outputLabel value="#{msg.jeeslEmail}"/>
+						<jp:outputEmail id="otEmail" user="#{cc.attrs.bean.staff.user}"/>
+                         
+                       </j:inputGrid>
+                       
+                   </p:panel>
+                   <aup:opUserSelection for=":#{cc.id}:fUser:giContactSelection:link" update=":#{cc.id}:sUser" contactHandler="#{cc.attrs.bean.opUserHandler}" linkAddContact="#{cc.attrs.linkAddContact}"/>
+            </h:form>
+        </j:slot>
+	</j:row>
+</jp:grid>
 	</composite:implementation>
 </html>

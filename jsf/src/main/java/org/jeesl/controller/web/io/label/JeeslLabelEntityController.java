@@ -18,6 +18,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.api.rest.rs.system.JeeslSystemRest;
+import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -49,7 +50,6 @@ import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
-import org.jeesl.util.comparator.ejb.io.revision.RevisionEntityComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
 import org.slf4j.Logger;
@@ -118,7 +118,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		super(fbRevision.getClassL(),fbRevision.getClassD());
 		this.fbRevision=fbRevision;
 		
-		cpEntity = fbRevision.cpEjbEntity(RevisionEntityComparator.Type.position);
+		cpEntity = fbRevision.cpEjbEntity(LabelEntityComparator.Type.position);
 		
 		sbhCategory = new SbSingleHandler<>(fbRevision.getClassCategory(),this);
 		sbhDiagram = new SbSingleHandler<>(fbRevision.getClassDiagram(),this);

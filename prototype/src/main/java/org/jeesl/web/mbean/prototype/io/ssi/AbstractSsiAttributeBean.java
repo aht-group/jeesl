@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
+import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
@@ -28,7 +29,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
-import org.jeesl.util.comparator.ejb.io.revision.RevisionEntityComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,7 +84,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 		sbhMapping = new SbSingleHandler<MAPPING>(fbSsiData.getClassMapping(),this);
 		sbhEntity = new SbSingleHandler<ENTITY>(fbRevision.getClassEntity(),this);
 
-		cpEntity = fbRevision.cpEjbEntity(RevisionEntityComparator.Type.position);
+		cpEntity = fbRevision.cpEjbEntity(LabelEntityComparator.Type.position);
 
 		efAttribute = fbSsiData.ejbAttribute();
 	}

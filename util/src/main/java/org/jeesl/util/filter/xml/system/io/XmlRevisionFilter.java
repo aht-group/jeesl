@@ -3,9 +3,9 @@ package org.jeesl.util.filter.xml.system.io;
 import java.util.Iterator;
 import java.util.List;
 
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.model.xml.system.revision.Entities;
 import org.jeesl.model.xml.system.revision.Entity;
-import org.jeesl.util.comparator.pojo.BooleanComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

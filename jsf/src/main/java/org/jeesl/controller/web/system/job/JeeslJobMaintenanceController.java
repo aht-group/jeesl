@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslJobFacade;
+import org.jeesl.controller.util.comparator.ejb.system.job.JobMaintenanceInfoComparator;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -20,7 +21,6 @@ import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.util.comparator.ejb.system.job.JobMaintenanceInfoComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

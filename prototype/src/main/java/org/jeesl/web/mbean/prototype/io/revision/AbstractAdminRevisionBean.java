@@ -6,6 +6,9 @@ import java.util.List;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.controller.util.comparator.ejb.io.label.LabelDiagramComparator;
+import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
+import org.jeesl.controller.util.comparator.ejb.io.label.LabelScopeComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -30,9 +33,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.util.comparator.ejb.io.revision.RevisionDiagramComparator;
-import org.jeesl.util.comparator.ejb.io.revision.RevisionEntityComparator;
-import org.jeesl.util.comparator.ejb.io.revision.RevisionScopeComparator;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,9 +91,9 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 		
 //		sbhDiagram = new SbMultiHandler<>(fbRevision.getClassDiagram(),this);
 
-		cpEntity = fbRevision.cpEjbEntity(RevisionEntityComparator.Type.position);
-		comparatorScope = (new RevisionScopeComparator<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>()).factory(RevisionScopeComparator.Type.position);
-		cpDiagram = (new RevisionDiagramComparator<RC,ERD>()).factory(RevisionDiagramComparator.Type.category);
+		cpEntity = fbRevision.cpEjbEntity(LabelEntityComparator.Type.position);
+		comparatorScope = (new LabelScopeComparator<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT>()).factory(LabelScopeComparator.Type.position);
+		cpDiagram = (new LabelDiagramComparator<RC,ERD>()).factory(LabelDiagramComparator.Type.category);
 
 		efView = fbRevision.ejbView();
 		efMappingView = fbRevision.ejbMappingView();

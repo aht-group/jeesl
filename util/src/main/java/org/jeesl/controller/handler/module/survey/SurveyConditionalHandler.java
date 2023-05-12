@@ -13,6 +13,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.bean.module.survey.JeeslSurveyCache;
 import org.jeesl.controller.handler.module.survey.antlr.ConditionEvaluator;
+import org.jeesl.controller.util.comparator.ejb.module.survey.SurveyQuestionComparator;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyAnswerFactory;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
@@ -21,7 +22,6 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyCondition;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
-import org.jeesl.util.comparator.ejb.module.survey.SurveyQuestionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

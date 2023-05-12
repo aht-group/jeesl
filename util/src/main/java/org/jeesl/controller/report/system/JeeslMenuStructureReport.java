@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.controller.util.comparator.ejb.system.security.SecurityViewComparator;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.xml.system.navigation.XmlMenuFactory;
 import org.jeesl.factory.xml.system.navigation.XmlMenuItemFactory;
@@ -25,7 +26,6 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.model.xml.system.navigation.Menu;
 import org.jeesl.model.xml.system.navigation.MenuItem;
 import org.jeesl.model.xml.system.security.Security;
-import org.jeesl.util.comparator.ejb.system.security.SecurityViewComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

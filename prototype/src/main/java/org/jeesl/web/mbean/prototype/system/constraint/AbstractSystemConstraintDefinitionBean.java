@@ -10,6 +10,7 @@ import org.jeesl.api.bean.msg.JeeslConstraintsBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
 import org.jeesl.controller.handler.ui.helper.UiTwiceClickHelper;
+import org.jeesl.controller.util.comparator.ejb.system.constraint.ContraintScopeComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -28,7 +29,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
-import org.jeesl.util.comparator.ejb.system.constraint.ContraintScopeComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

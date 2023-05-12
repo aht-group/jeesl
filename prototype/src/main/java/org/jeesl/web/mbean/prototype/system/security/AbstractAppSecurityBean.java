@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
@@ -29,7 +30,6 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.ejb.PositionComparator;
-import org.jeesl.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

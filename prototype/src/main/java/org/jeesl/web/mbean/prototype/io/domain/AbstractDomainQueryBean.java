@@ -8,6 +8,7 @@ import java.util.List;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoDomainFacade;
+import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoDomainFactoryBuilder;
@@ -29,7 +30,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
-import org.jeesl.util.comparator.ejb.io.revision.RevisionEntityComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,7 +78,7 @@ public abstract class AbstractDomainQueryBean <L extends JeeslLang, D extends Je
 		efDomainQuery = fbDomain.ejbDomainQuery();
 		efDomainPath = fbDomain.ejbDomainPath();
 		
-		cpDomainEntity = new RevisionEntityComparator().factory(RevisionEntityComparator.Type.position);
+		cpDomainEntity = new LabelEntityComparator().factory(LabelEntityComparator.Type.position);
 	}
 	
 	protected void postConstructDomainQuery(String userLocale, JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,

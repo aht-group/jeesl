@@ -2,6 +2,7 @@ package org.jeesl.factory.builder.module;
 
 import java.util.Comparator;
 
+import org.jeesl.controller.util.comparator.ejb.module.workflow.EjbWorkflowProcessComparator;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.workflow.EjbWorkflowActionFactory;
 import org.jeesl.factory.ejb.module.workflow.EjbWorkflowActivityFactory;
@@ -47,7 +48,6 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.jeesl.QueryWf;
-import org.jeesl.util.comparator.ejb.module.workflow.EjbWorkflowProcessComparator;
 import org.jeesl.util.query.xml.module.XmlWorkflowQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

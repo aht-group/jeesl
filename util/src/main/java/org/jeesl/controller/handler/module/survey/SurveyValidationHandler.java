@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.bean.module.survey.JeeslSurveyCache;
+import org.jeesl.controller.util.comparator.ejb.module.survey.SurveyQuestionComparator;
 import org.jeesl.interfaces.controller.processor.SurveyValidator;
 import org.jeesl.interfaces.model.json.module.survey.SurveyValidatorConfiguration;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyTemplate;
@@ -22,7 +23,6 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyValidation;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.util.comparator.ejb.module.survey.SurveyQuestionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

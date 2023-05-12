@@ -2,29 +2,33 @@ package org.jeesl.web.mbean.prototype.system.security;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.facade.core.JeeslUserFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
+import org.jeesl.controller.util.comparator.ejb.system.security.SecurityStaffComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbStaffFactory;
 import org.jeesl.interfaces.bean.op.OpUserBean;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +56,8 @@ public class AbstractAdminSecurityDomainBean <L extends JeeslLang, D extends Jee
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity;
 	protected JeeslUserFacade<USER> fUser;
 
+	protected final Comparator<STAFF> cpStaff;
+	
 	protected final Class<STAFF> cStaff;
 	
 	protected List<R> roles; public List<R> getRoles(){return roles;}
@@ -71,6 +77,7 @@ public class AbstractAdminSecurityDomainBean <L extends JeeslLang, D extends Jee
 		this.fbSecurity=fbSecurity;
 		this.cStaff=cStaff;
 		efStaff = fbSecurity.ejbStaff(cStaff);
+		cpStaff = (new SecurityStaffComparator<C,R,USER,STAFF>()).factory(SecurityStaffComparator.Type.position);
 	}
 	
 	protected void initSuper(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity, JeeslUserFacade<USER> fUser)
@@ -108,6 +115,7 @@ public class AbstractAdminSecurityDomainBean <L extends JeeslLang, D extends Jee
 	protected void reloadStaffs()
 	{
 		staffs = fSecurity.fStaffD(cStaff, domain);
+		Collections.sort(staffs,cpStaff);
 	}
 	
 	public void cancel()

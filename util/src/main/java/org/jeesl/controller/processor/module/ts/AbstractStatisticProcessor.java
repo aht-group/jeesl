@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.jeesl.controller.util.comparator.ejb.module.ts.TsDataComparator;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
 import org.jeesl.factory.ejb.module.ts.EjbTsDataFactory;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
@@ -22,7 +23,6 @@ import org.jeesl.interfaces.model.module.ts.data.JeeslTsSample;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.util.comparator.ejb.module.ts.TsDataComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

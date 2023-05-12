@@ -10,6 +10,7 @@ import org.jeesl.api.bean.JeeslAttributeBean;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoAttributeFacade;
+import org.jeesl.controller.util.comparator.ejb.io.attribute.AttributeSetComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
@@ -29,7 +30,6 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
-import org.jeesl.util.comparator.ejb.system.io.attribute.AttributeSetComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

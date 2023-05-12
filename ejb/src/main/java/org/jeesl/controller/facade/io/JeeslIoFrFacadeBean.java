@@ -21,6 +21,7 @@ import org.jeesl.api.facade.io.JeeslIoFrFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryAmazonS3;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryFileStorage;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -45,7 +46,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
-import org.jeesl.util.comparator.pojo.BooleanComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -272,17 +272,19 @@
 			
 			<p:panel rendered="#{(not empty cc.attrs.bean.status) and (cc.attrs.bean.supportsGraphic)}" styleClass="jeesl-panel">
 				<f:facet name="header"><j:pHeader entity="IoGraphic" code="preview"/></f:facet>
-				<p:panelGrid columns="5" columnClasses="jeeslGrid20,jeeslGrid20,jeeslGrid20,jeeslGrid20">
+				<p:panelGrid columns="6" columnClasses="jeeslGrid15,jeeslGrid15,jeeslGrid15,jeeslGrid15,jeeslGrid15,jeeslGrid15">
 					<p:outputLabel value="8px"/>
 					<p:outputLabel value="12px"/>
 					<p:outputLabel value="14px"/>
 					<p:outputLabel value="18px"/>
 					<p:outputLabel value="24px"/>
+					<p:outputLabel value="32px"/>
 					<jtp:symbolizer value="#{cc.attrs.bean.status}" height="8"/>
 					<jtp:symbolizer value="#{cc.attrs.bean.status}" height="12"/>
 					<jtp:symbolizer value="#{cc.attrs.bean.status}" height="14"/>
 					<jtp:symbolizer value="#{cc.attrs.bean.status}" height="18"/>
 					<jtp:symbolizer value="#{cc.attrs.bean.status}" height="24"/>
+					<jtp:symbolizer value="#{cc.attrs.bean.status}" height="32"/>
 				</p:panelGrid>
 			</p:panel>
 			

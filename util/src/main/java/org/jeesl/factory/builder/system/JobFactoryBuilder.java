@@ -2,6 +2,7 @@ package org.jeesl.factory.builder.system;
 
 import java.util.Comparator;
 
+import org.jeesl.controller.util.comparator.ejb.system.job.JobMaintenanceInfoComparator;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.system.job.EjbJobCacheFactory;
 import org.jeesl.factory.ejb.system.job.EjbJobFactory;
@@ -24,7 +25,6 @@ import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.util.comparator.ejb.system.job.JobMaintenanceInfoComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

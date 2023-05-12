@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.facade.module.JeeslCalendarFacade;
+import org.jeesl.controller.util.comparator.ejb.module.calendar.TimeZoneComparator;
 import org.jeesl.factory.builder.module.CalendarFactoryBuilder;
 import org.jeesl.interfaces.bean.module.JeeslAppCalendarBean;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -18,7 +19,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.util.comparator.ejb.module.TimeZoneComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

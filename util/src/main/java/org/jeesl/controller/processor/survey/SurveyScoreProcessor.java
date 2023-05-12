@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.controller.processor.finance.AmountRounder;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.module.survey.EjbSurveyQuestionFactory;
 import org.jeesl.interfaces.model.module.survey.data.JeeslSurveyAnswer;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
-import org.jeesl.util.comparator.pojo.BooleanComparator;
 import org.jeesl.util.filter.ejb.module.survey.EjbSurveyAnswerFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

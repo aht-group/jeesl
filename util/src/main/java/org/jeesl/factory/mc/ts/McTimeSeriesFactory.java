@@ -11,6 +11,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
 import org.jeesl.api.facade.module.JeeslTsFacade;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
 import org.jeesl.factory.ejb.module.ts.EjbTsDataPointFactory;
@@ -27,7 +28,6 @@ import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.module.ts.TimeSeries;
-import org.jeesl.util.comparator.pojo.BooleanComparator;
 import org.metachart.factory.xml.chart.XmlChartFactory;
 import org.metachart.factory.xml.chart.XmlDataFactory;
 import org.metachart.factory.xml.chart.XmlSubtitleFactory;

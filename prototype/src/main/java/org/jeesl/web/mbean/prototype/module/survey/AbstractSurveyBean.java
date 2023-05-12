@@ -11,6 +11,7 @@ import org.jeesl.api.facade.module.survey.JeeslSurveyAnalysisFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.controller.handler.module.survey.SurveyAnalysisCacheHandler;
+import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.survey.SurveyAnalysisFactoryBuilder;
 import org.jeesl.factory.builder.module.survey.SurveyCoreFactoryBuilder;
@@ -64,7 +65,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
-import org.jeesl.util.comparator.ejb.io.revision.RevisionEntityComparator;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -176,7 +176,7 @@ public abstract class AbstractSurveyBean <L extends JeeslLang, D extends JeeslDe
 		
 		questions = new ArrayList<QUESTION>();
 		
-		cpDomainEntity = new RevisionEntityComparator().factory(RevisionEntityComparator.Type.position);
+		cpDomainEntity = new LabelEntityComparator().factory(LabelEntityComparator.Type.position);
 	}
 	
 	protected abstract void initPageSettings();

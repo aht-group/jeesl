@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
+import org.jeesl.controller.util.comparator.ejb.module.calendar.RecordComparator;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -60,8 +62,6 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.interfaces.web.JeeslJsfWorkflowHandler;
-import org.jeesl.util.comparator.ejb.RecordComparator;
-import org.jeesl.util.comparator.pojo.BooleanComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

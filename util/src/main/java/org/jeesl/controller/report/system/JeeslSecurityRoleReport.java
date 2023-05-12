@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
@@ -27,7 +28,6 @@ import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.model.xml.system.security.Roles;
 import org.jeesl.model.xml.system.security.Security;
-import org.jeesl.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

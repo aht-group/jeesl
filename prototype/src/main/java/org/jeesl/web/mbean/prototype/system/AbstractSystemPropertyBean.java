@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.jeesl.api.facade.system.JeeslSystemPropertyFacade;
+import org.jeesl.controller.util.comparator.ejb.system.property.PropertyComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -18,7 +19,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.property.JeeslProperty;
 import org.jeesl.interfaces.model.system.property.JeeslPropertyCategory;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
-import org.jeesl.util.comparator.ejb.system.PropertyComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

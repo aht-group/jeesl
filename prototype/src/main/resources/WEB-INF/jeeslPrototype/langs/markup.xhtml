@@ -5,7 +5,10 @@
 				xmlns:c="http://java.sun.com/jsp/jstl/core"
 				xmlns:p="http://primefaces.org/ui"
 				xmlns:pe="http://primefaces.org/ui/extensions">
-	<h:panelGroup class="jeesl-ck-editor" layout="block">
+				
+	<c:set var="rendered"  value="#{not empty rendered ? rendered : true}" />
+	
+	<h:panelGroup class="jeesl-ck-editor" layout="block" rendered="#{rendered}">
 		<p:inputTextarea value="#{value.content}" style="w100" autocomplete="off" rendered="#{value.type.code eq 'text'}"/>
 	        
 		<!-- for testing -->

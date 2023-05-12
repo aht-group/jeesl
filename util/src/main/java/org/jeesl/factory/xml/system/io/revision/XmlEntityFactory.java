@@ -1,5 +1,6 @@
 package org.jeesl.factory.xml.system.io.revision;
 
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
@@ -14,7 +15,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.jeesl.QueryRevision;
 import org.jeesl.model.xml.system.revision.Entity;
-import org.jeesl.util.comparator.pojo.BooleanComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

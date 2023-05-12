@@ -2,6 +2,8 @@ package org.jeesl.factory.builder.module;
 
 import java.util.Comparator;
 
+import org.jeesl.controller.util.comparator.ejb.module.aom.EjbAssetComparator;
+import org.jeesl.controller.util.comparator.ejb.module.aom.EjbEventComparator;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.asset.EjbAssetCompanyFactory;
 import org.jeesl.factory.ejb.module.asset.EjbAssetEventFactory;
@@ -25,8 +27,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
-import org.jeesl.util.comparator.ejb.module.aom.EjbAssetComparator;
-import org.jeesl.util.comparator.ejb.module.aom.EjbEventComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

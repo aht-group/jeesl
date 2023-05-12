@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.jeesl.controller.util.comparator.ejb.module.calendar.RecordComparator;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityPasswordRating;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityPasswordRule;
 import org.jeesl.interfaces.model.system.security.user.JeeslPasswordHistory;
-import org.jeesl.util.comparator.ejb.RecordComparator;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Months;

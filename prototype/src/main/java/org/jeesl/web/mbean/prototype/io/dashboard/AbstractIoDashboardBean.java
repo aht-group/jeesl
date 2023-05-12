@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
+import org.jeesl.controller.util.comparator.ejb.io.dashboard.DashboardComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -26,7 +27,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.jsf.handler.op.OpEntitySelectionHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
-import org.jeesl.util.comparator.ejb.system.io.dashboard.DashboardComparator;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.primefaces.event.SelectEvent;
 import org.slf4j.Logger;

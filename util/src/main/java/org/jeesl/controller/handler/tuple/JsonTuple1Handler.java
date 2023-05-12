@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.controller.processor.finance.AmountRounder;
+import org.jeesl.controller.util.comparator.json.Tuple1Comparator;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -15,7 +16,6 @@ import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
-import org.jeesl.util.comparator.json.Tuple1Comparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

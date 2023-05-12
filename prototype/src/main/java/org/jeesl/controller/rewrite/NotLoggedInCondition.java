@@ -3,6 +3,7 @@ package org.jeesl.controller.rewrite;
 import java.io.Serializable;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
@@ -15,7 +16,6 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslIdentity;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.util.comparator.pojo.BooleanComparator;
 import org.ocpsoft.rewrite.config.Condition;
 import org.ocpsoft.rewrite.context.EvaluationContext;
 import org.ocpsoft.rewrite.servlet.config.HttpCondition;

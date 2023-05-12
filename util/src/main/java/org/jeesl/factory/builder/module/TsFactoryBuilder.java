@@ -3,6 +3,9 @@ package org.jeesl.factory.builder.module;
 import java.util.Comparator;
 
 import org.jeesl.api.facade.module.JeeslTsFacade;
+import org.jeesl.controller.util.comparator.ejb.module.ts.TsClassComparator;
+import org.jeesl.controller.util.comparator.ejb.module.ts.TsDataComparator;
+import org.jeesl.controller.util.comparator.ejb.module.ts.TsScopeComparator;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.ts.EjbTsBridgeFactory;
 import org.jeesl.factory.ejb.module.ts.EjbTsClassFactory;
@@ -35,9 +38,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
-import org.jeesl.util.comparator.ejb.module.ts.TsClassComparator;
-import org.jeesl.util.comparator.ejb.module.ts.TsDataComparator;
-import org.jeesl.util.comparator.ejb.module.ts.TsScopeComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

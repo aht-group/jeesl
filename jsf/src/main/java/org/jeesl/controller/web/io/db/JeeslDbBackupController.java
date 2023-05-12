@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
+import org.jeesl.controller.util.comparator.ejb.module.calendar.RecordComparator;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
@@ -21,7 +22,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
-import org.jeesl.util.comparator.ejb.RecordComparator;
 import org.metachart.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

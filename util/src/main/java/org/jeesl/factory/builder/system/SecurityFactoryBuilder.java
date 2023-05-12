@@ -2,6 +2,7 @@ package org.jeesl.factory.builder.system;
 
 import java.util.Comparator;
 
+import org.jeesl.controller.util.comparator.ejb.system.security.SecurityActionComparator;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityActionFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityActionTemplateFactory;
@@ -38,7 +39,6 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.util.comparator.ejb.system.security.SecurityActionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
