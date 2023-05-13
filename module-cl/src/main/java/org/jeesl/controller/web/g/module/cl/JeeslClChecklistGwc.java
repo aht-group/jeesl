@@ -57,17 +57,11 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
     private final List<CI> items; public List<CI> getItems() {return items;}
 
 	private CL list; public CL getList() {return list;} public void setList(CL list) {this.list = list;}
-	private CI item;
+	private CI item; public CI getItem() {return item;} public void setItem(CI item) {this.item = item;}
 	
-	public CI getItem() {
-		return item;
-	}
-	public void setItem(CI item) {
-		this.item = item;
-	}
 	public JeeslClChecklistGwc(ChecklistFactoryBuilder<L,D,R,CL,TO,CI> fbCl)
 	{
-		super(fbCl.getClassL(),fbCl.getClassD());	
+		super(fbCl.getClassL(),fbCl.getClassD());
 		this.fbCl=fbCl;
 		
 		ejbChecklist = fbCl.ejbChecklist();

@@ -6,6 +6,13 @@
 	<namespace>https://www.jeesl.org/j2</namespace>
   
 	<tag>
+        <tag-name>gridIoCryptoKey</tag-name>
+        <component>
+            <resource-id>ioCrypto/key.xhtml</resource-id>
+        </component>
+	</tag>
+  
+	<tag>
         <tag-name>gridIoMavenArtifact</tag-name>
         <component>
             <resource-id>ioMaven/artifact.xhtml</resource-id>

@@ -6,7 +6,7 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 		
 	<composite:interface>
-		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="ctrl" required="true"/>
 		<composite:attribute name="app" required="true" default="#{appCryptoBean}"/>
 	</composite:interface>
 	
@@ -15,15 +15,16 @@
 	<j:row>
 		<j:slot id="sKeys" width="8">
 			<h:form id="fKeys">
-				<p:dataTable var="k" value="#{cc.attrs.bean.keys}" draggableRows="true"
-								selection="#{cc.attrs.bean.key}" selectionMode="single" rowKey="#{k.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="k" value="#{cc.attrs.ctrl.keys}" draggableRows="true"
+						selection="#{cc.attrs.ctrl.key}" selectionMode="single" rowKey="#{k.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoCryptoKey" code="listOf">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addKey()}" update=":#{cc.id}:grid"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addKey()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderKeys()}" update=":#{cc.id}:grid"/>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectKey()}" update=":#{cc.id}:sKey"/>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderKeys()}" update=":#{cc.id}:grid"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectKey()}" update=":#{cc.id}:sKey"/>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoCryptoKey" code="status"/></f:facet>
 						<jtp:symbolizer value="#{k.status}"/>
@@ -38,12 +39,12 @@
 					</p:column>
 					<p:column styleClass="jeeslCenter" rendered="false">
 						<f:facet name="header">
-							<h:outputText value="#{cc.attrs.bean.sessionKeystore.type.name[localeCode].lang}"/>
-							<br/><jtp:symbolizer value="#{cc.attrs.bean.sessionKeystore.type}"/>
+							<h:outputText value="#{cc.attrs.ctrl.sessionKeystore.type.name[localeCode].lang}"/>
+							<br/><jtp:symbolizer value="#{cc.attrs.ctrl.sessionKeystore.type}"/>
 						</f:facet>
-						<jtp:symbolizer value="#{cc.attrs.bean.sessionKeystore.mapState[k]}"/>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.sessionKeystore.mapState[k]}"/>
 					</p:column>
-					<p:columns var="s" value="#{cc.attrs.bean.stores}" columnIndexVar="colIndex" styleClass="jeeslCenter">
+					<p:columns var="s" value="#{cc.attrs.ctrl.stores}" columnIndexVar="colIndex" styleClass="jeeslCenter">
 						<f:facet name="header">
 							<h:outputText value="#{s.type.name[localeCode].lang}"/>
 							<br/><jtp:symbolizer value="#{s.type}"/>
@@ -54,22 +55,22 @@
 			</h:form>
 		</j:slot>
 		<j:slot id="sKey" width="4">
-			<h:form id="fKey" rendered="#{not empty cc.attrs.bean.key}">
+			<h:form id="fKey" rendered="#{not empty cc.attrs.ctrl.key}">
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoCryptoKey"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelKey()}" update=":#{cc.id}:grid" />
-						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveKey()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelKey()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveKey()}" update=":#{cc.id}:grid" />
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<jtp:label entity="IoCryptoKey" code="record"/>
-						<jp:outputDate value="#{cc.attrs.bean.key.record}" withSecond="true"/>
+						<jp:outputDate value="#{cc.attrs.ctrl.key.record}" withSecond="true"/>
 						
 						<jtp:label entity="IoCryptoKey" code="name"/>
-						<p:inputText value="#{cc.attrs.bean.key.name}"/>
+						<p:inputText value="#{cc.attrs.ctrl.key.name}"/>
 						
 						<jtp:label entity="IoCryptoKey" code="status"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.key.status}" effect="fade" autoWidth="false" dynamic="true">
+						<p:selectOneMenu value="#{cc.attrs.ctrl.key.status}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.app.keyStatus}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 					</p:panelGrid>
@@ -79,24 +80,24 @@
 					<p:panelGrid columns="2" columnClasses="jeeslGrid40,jeeslGrid60">
 						
 						<jtp:label entity="IoCryptoKey" code="memoIv"/>
-						<h:outputText value="#{of:abbreviate(cc.attrs.bean.key.memoIv,20)}"/>
+						<h:outputText value="#{of:abbreviate(cc.attrs.ctrl.key.memoIv,20)}"/>
 						
 						<jtp:label entity="IoCryptoKey" code="memoText"/>
-						<h:outputText value="#{of:abbreviate(cc.attrs.bean.key.memoText,20)}"/>
+						<h:outputText value="#{of:abbreviate(cc.attrs.ctrl.key.memoText,20)}"/>
 						
 						<jtp:label entity="IoCryptoKey" code="memoCypher"/>
-						<h:outputText value="#{of:abbreviate(cc.attrs.bean.key.memoCypher,20)}"/>
+						<h:outputText value="#{of:abbreviate(cc.attrs.ctrl.key.memoCypher,20)}"/>
 					</p:panelGrid>
 					
 					<p:separator/>
 					
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
-						<jtp:inputText value="#{cc.attrs.bean.pwd}" entity="IoCryptoKey" code="pwd"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.pwd}" entity="IoCryptoKey" code="pwd"/>
 					</p:panelGrid>
 					
 					<p:separator/>
 					
-					<ui:repeat var="store" value="#{cc.attrs.bean.stores}">
+					<ui:repeat var="store" value="#{cc.attrs.ctrl.stores}">
 						<p:panelGrid columns="2" columnClasses="jeeslGrid40">
 							<ui:fragment>
 								<jtp:symbolizer value="#{store.type}" marginRight="5"/>
@@ -104,7 +105,7 @@
 							</ui:fragment>
 							<ui:fragment>
 								<ui:repeat var="state" value="#{cc.attrs.app.keyState}">
-									<jp:icon value="#{state}" listener="#{cc.attrs.bean.activateState(store,state)}">
+									<jp:icon value="#{state}" listener="#{cc.attrs.ctrl.activateState(store,state)}">
 									
 									</jp:icon>
 								</ui:repeat>
