@@ -85,8 +85,10 @@
 						<jtp:label entity="IoCryptoKey" code="memoText"/>
 						<h:outputText value="#{of:abbreviate(cc.attrs.ctrl.key.memoText,20)}"/>
 						
-						<jtp:label entity="IoCryptoKey" code="memoCypher"/>
-						<h:outputText value="#{of:abbreviate(cc.attrs.ctrl.key.memoCypher,20)}"/>
+						
+						<jtp:label entity="IoCryptoKey" code="clearVerification"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.clearVerification}" rendered="#{cc.attrs.ctrl.key.id eq 0}"/>
+						<h:outputText value="#{cc.attrs.ctrl.clearVerification}" rendered="#{cc.attrs.ctrl.key.id gt 0}"/>
 					</p:panelGrid>
 					
 					<p:separator/>

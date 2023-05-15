@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
@@ -48,21 +49,20 @@ public class IoCryptoKey implements JeeslIoCryptoKey<SecurityUser,IoCryptoKeyLif
 	@Override public IoCryptoKeyLifetime getStatus() {return status;}
 	@Override public void setStatus(IoCryptoKeyLifetime status) {this.status = status;}
 	
-	private String pwdSalt;
-	@Override public String getPwdSalt() {return pwdSalt;}
-	@Override public void setPwdSalt(String pwdSalt) {this.pwdSalt = pwdSalt;}
+	@NotNull
+	private String salt;
+	@Override public String getSalt() {return salt;}
+	@Override public void setSalt(String salt) {this.salt = salt;}
 
-	private String memoIv;
-	@Override public String getMemoIv() {return memoIv;}
-	@Override public void setMemoIv(String memoIv) {this.memoIv = memoIv;}
+	@NotNull
+	private String iv;
+	@Override public String getIv() {return iv;}
+	@Override public void setIv(String iv) {this.iv = iv;}
 	
-	private String memoText;
-	@Override public String getMemoText() {return memoText;}
-	@Override public void setMemoText(String memoText) {this.memoText = memoText;}
-	
-	private String memoCypher;
-	@Override public String getMemoCypher() {return memoCypher;}
-	@Override public void setMemoCypher(String memoCypher) {this.memoCypher = memoCypher;}
+	@NotNull
+	private String cipherVerification;
+	@Override public String getCipherVerification() {return cipherVerification;}
+	@Override public void setCipherVerification(String cipherVerification) {this.cipherVerification = cipherVerification;}
 
 
 	@Override public boolean equals(Object object) {return (object instanceof IoCryptoKey) ? id == ((IoCryptoKey) object).getId() : (object == this);}

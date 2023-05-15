@@ -62,8 +62,10 @@ public class JeeslIoCryptoKeyGwc <L extends JeeslLang, D extends JeeslDescriptio
 	private USER user;
 	private KEY key; public KEY getKey() {return key;} public void setKey(KEY key) {this.key = key;}
 	private JeeslIoCryptoStore<KEY,KT,ST> sessionKeystore; public JeeslIoCryptoStore<KEY, KT, ST> getSessionKeystore() {return sessionKeystore;}
+	
 	private String pwd; public String getPwd() {return pwd;} public void setPwd(String pwd) {this.pwd = pwd;}
-
+	private String clearVerification; public String getClearVerification() {return clearVerification;} public void setClearVerification(String clearVerification) {this.clearVerification = clearVerification;}
+	
 	public JeeslIoCryptoKeyGwc(final IoCryptoFactoryBuilder<L,D,KEY,KS,KT,ST,USER> fbCrypto)
 	{
 		super(fbCrypto.getClassL(),fbCrypto.getClassD());
@@ -131,11 +133,11 @@ public class JeeslIoCryptoKeyGwc <L extends JeeslLang, D extends JeeslDescriptio
 		{
 			if(pwd!=null && pwd.length()>0)
 			{
-				 SecretKey secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getPwdSalt());
-				 IvParameterSpec iv = TxtCryptoFactory.buildIv(key.getMemoIv());
-				 String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm,key.getMemoText(),secret,iv);
-				 key.setMemoCypher(cipherText);
+				 SecretKey secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getSalt());
+				 IvParameterSpec iv = TxtCryptoFactory.buildIv(key.getIv());
+				 key.setCipherVerification(TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm,clearVerification,secret,iv));
 				 key = fCrypto.save(key);
+				 
 				 sessionKeystore.update(key,fCrypto.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.unlocked), secret);
 			}
 			else
@@ -145,15 +147,11 @@ public class JeeslIoCryptoKeyGwc <L extends JeeslLang, D extends JeeslDescriptio
 		}
 		else
 		{
-			SecretKey secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getPwdSalt());
-			IvParameterSpec iv = TxtCryptoFactory.buildIv(key.getMemoIv());
-			String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm,key.getMemoText(),secret,iv);
+			SecretKey secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getSalt());
+			IvParameterSpec iv = TxtCryptoFactory.buildIv(key.getIv());
+//			String cipherText = TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm,key.getMemoText(),secret,iv);
 			
-			if(cipherText.equals(key.getMemoCypher()))
-			{
-				sessionKeystore.update(key,fCrypto.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.unlocked), secret);
-				key = fCrypto.save(key);
-			}
+			sessionKeystore.update(key,fCrypto.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.unlocked), secret);
 		}
 		this.reset(false,true);
 		reloadKeys();

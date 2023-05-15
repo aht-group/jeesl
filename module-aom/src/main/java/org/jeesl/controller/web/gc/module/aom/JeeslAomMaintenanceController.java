@@ -1,4 +1,4 @@
-package org.jeesl.controller.web.module.aom;
+package org.jeesl.controller.web.gc.module.aom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbAssetComparator;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbEventComparator;
 import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.module.aom.JeeslAomCacheKey;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
@@ -90,7 +91,7 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 
 	private final List<EVENT> events; public List<EVENT> getEvents() {return events;}
 
-	 private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
+	private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
 	private JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
 	private REALM realm; public REALM getRealm() {return realm;}
 	private RREF rref; public RREF getRref() {return rref;}
@@ -123,20 +124,20 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 	public <E extends Enum<E>> void postConstructAssetMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset,
 									JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,ALEVEL,ETYPE> cache,
-									E eRealm, RREF rref
+									REALM realm, RREF rref
 									)
 	{
 		super.postConstructWebController(lp,bMessage);
-		this.fAsset=fAsset;
+		this.fAsset = fAsset;
+		this.realm = realm;
+		this.rref = rref;
 		
 		uiHelper.setCacheBean(cache);
 		
 		markupType = fAsset.fByEnum(fbAsset.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
-		realm = fAsset.fByEnum(fbAsset.getClassRealm(),eRealm);
 		
 		identifier = TenantIdentifier.instance(realm);
 		key.update(identifier,cache.getScopes());
-		this.rref=rref;
 		
 		sbhEventStatus.setList(fAsset.all(fbAsset.getClassEventStatus()));
 		sbhEventStatus.preSelect(JeeslAomEventStatus.Code.planned);
@@ -145,6 +146,8 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 		
 		reloadEvents();
 	}
+	
+	
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c){reloadEvents();}
 	@Override public void callbackDateChanged(SbDateSelection handler) {reloadEvents();}

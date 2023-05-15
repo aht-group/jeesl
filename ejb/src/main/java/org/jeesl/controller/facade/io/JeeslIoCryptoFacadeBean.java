@@ -45,7 +45,7 @@ public class JeeslIoCryptoFacadeBean <L extends JeeslLang,D extends JeeslDescrip
 		KT state = null;
 		try
 		{
-			secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getPwdSalt());
+			secret = AbstractSessionKeystore.getKeyFromPassword(pwd,key.getSalt());
 			state = this.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.unlocked);
 		}
 		catch (NoSuchAlgorithmException | InvalidKeySpecException e)

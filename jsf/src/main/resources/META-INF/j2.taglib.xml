@@ -38,6 +38,13 @@
 	</tag>
 	
 	<tag>
+        <tag-name>gridAomMaintenance</tag-name>
+        <component>
+            <resource-id>moduleAom/maintenance.xhtml</resource-id>
+        </component>
+	</tag>
+	
+	<tag>
         <tag-name>gridModuleNewsRegistry</tag-name>
         <component>
             <resource-id>moduleNews/registry.xhtml</resource-id>

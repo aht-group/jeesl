@@ -29,15 +29,12 @@ public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser,
 	LocalDateTime getRecord();
 	void setRecord(LocalDateTime record);
 	
-	String getPwdSalt();
-	void setPwdSalt(String pwdSalt);
+	String getSalt();
+	void setSalt(String salt);
 	
-	String getMemoIv();
-	void setMemoIv(String memoIv);
-	
-	String getMemoText();
-	void setMemoText(String memoText);
-	
-	String getMemoCypher();
-	void setMemoCypher(String memoCypher);
+	String getIv();
+	void setIv(String iv);
+		
+	String getCipherVerification();
+	void setCipherVerification(String cipherVerification);
 }
