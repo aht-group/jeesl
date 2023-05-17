@@ -9,10 +9,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslUser <R extends JeeslSecurityRole<?,?,?,?,?,?,?>
-							//,REGISTRATION>,
-//							REGISTRATION extends JeeslRegistrationStatus<L,D,USER,?>
->
+public interface JeeslUser <R extends JeeslSecurityRole<?,?,?,?,?,?,?>>
 		extends Serializable,EjbWithId,EjbPersistable,EjbSaveable,EjbRemoveable
 {
 	public enum Attributes{firstName,lastName}

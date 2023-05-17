@@ -43,7 +43,7 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 		paginatorPosition = "bottom";
 		rowsPerPageTemplate = "5,10,20,50,100,200,500,1000,2000,5000";
 		
-		filterStyle = "width: 75px;";
+		filterStyle = "width: 75%;";
 		filterStyleCode = "width: 50px;";
 		filterStyle35 = "width: 35px;";
 		filterStyle75 = "width: 75px;";

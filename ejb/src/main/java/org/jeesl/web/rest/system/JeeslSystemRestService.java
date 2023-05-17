@@ -108,8 +108,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 			Class<X> x = (Class<X>)Class.forName(code).asSubclass(JeeslStatus.class);
 			logger.info(x.getName());
 			logger.info("FG: "+(fGraphic!=null));
-			org.jeesl.model.xml.jeesl.Container xml = xfContainer.
-					build(fGraphic.allOrderedPosition(x));
+			org.jeesl.model.xml.jeesl.Container xml = xfContainer.build(fGraphic.allOrderedPosition(x));
 
 			if(EjbWithGraphic.class.isAssignableFrom(x))
 			{
@@ -230,10 +229,8 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 						catch (ClassNotFoundException e) {}
 					}
 					throw new UtilsConfigurationException("Even for multiple candidats no class with "+code+" found using "+ClassGraph.class.getSimpleName());
-					
 				}
 			}
-//			catch (ClassNotFoundException e) {throw new UtilsConfigurationException("Class found for interface "+code+" using "+ClassGraph.class.getSimpleName()+", but CNFE with "+fqcn);}
 		}
 		
 	}

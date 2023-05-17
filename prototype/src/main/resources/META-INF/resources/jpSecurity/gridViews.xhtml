@@ -30,7 +30,7 @@
 						var="v" value="#{cc.attrs.bean.views}" draggableRows="true"
 						selection="#{cc.attrs.bean.view}" selectionMode="single" rowKey="#{v.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.aupSecurityViews}">
+						<j:dtHeader entity="SecurityView" code="listOf">
 							<j:svg type="jeeslAdd" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttAdd}"/>
 						</j:dtHeader>
 					</f:facet>
@@ -38,10 +38,11 @@
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderViews()}" update="@form"/>
 					<p:column>  
 						<h:outputText value="#{v.position}" />  
-		         </p:column>  
-		         <p:column headerText="#{msg.aupSecurityView}">  
+					</p:column>  
+					<p:column>
+						<f:facet name="header"><jtp:label entity="SecurityView"/></f:facet>
 						<h:outputText value="#{v.name[localeCode].lang}" />  
-		            </p:column>
+					</p:column>
 					<p:column rendered="#{cc.attrs.bean.uiShowInvisible}" styleClass="jeeslCenter">  
 						<h:graphicImage rendered="#{v.visible}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
 		                <h:graphicImage rendered="#{not v.visible}" name="#{appIconBean.icon12['jeeslSecurityInvisible']}" library="gfx"/>
@@ -124,9 +125,9 @@
 						<jtp:label entity="SecurityView" code="urlBase"/>
 						<p:inputText value="#{cc.attrs.bean.view.urlBase}"/>
 					</p:panelGrid>
-					<aht:tabTranslationEditor value="#{cc.attrs.bean.view}"
-						labelTranslation="#{msg.jeeslName}" labelDescription="#{msg.jeeslDescription}"
-		       			keys="#{cc.attrs.localeCodes}" withDescription="true"/>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.view}" withDescription="true"
+						labelTranslation="#{appLabelBean.labels['SecurityView']['name'][localeCode].lang}"
+						labelDescription="#{appLabelBean.labels['SecurityView']['description'][localeCode].lang}"/>
 				</p:panel>
 			</h:form>
 			
@@ -135,7 +136,7 @@
 						var="a" value="#{cc.attrs.bean.actions}" draggableRows="true"
 						selection="#{cc.attrs.bean.action}" selectionMode="single" rowKey="#{a.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslSecurityActions}">
+						<j:dtHeader entity="SecurityAction" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttNew}"/>
 						</j:dtHeader>
 					</f:facet>
@@ -144,14 +145,15 @@
 					<p:column>  
 						<h:outputText value="#{a.position}" />  
 		            </p:column>
-		            <p:column headerText="#{msg.jeeslSecurityAction}">  
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="SecurityAction"/></f:facet>
 						<h:outputText value="#{a.toName()[localeCode].lang}"/>
 						<h:graphicImage rendered="#{not empty a.template}" name="12/ui/template.png" library="aupGfx"/>
 		            </p:column>
 		       	</p:dataTable>
 			</h:form>
 			<h:form id="fAction">					
-				<p:panel rendered="#{not empty cc.attrs.bean.action}" styleClass="jeeslPanel">
+				<p:panel rendered="#{not empty cc.attrs.bean.action}" styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="SecurityAction"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttSave}"/>
@@ -172,8 +174,9 @@
 				</p:panel>
 			</h:form>
 			<h:form id="fAreas" rendered="#{(not empty cc.attrs.bean.view) and (cc.attrs.bean.view.id gt 0)}">
-				<p:dataTable var="a" value="#{cc.attrs.bean.areas}" draggableRows="true"
-							selection="#{cc.attrs.bean.area}" selectionMode="single" rowKey="#{a.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="a" value="#{cc.attrs.bean.areas}" draggableRows="true"
+						selection="#{cc.attrs.bean.area}" selectionMode="single" rowKey="#{a.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityArea" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>

@@ -9,7 +9,11 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslSecurityOnlineHelp<V extends JeeslSecurityView<?,?,?,?,?,?>,
 										DOC extends JeeslIoCms<?,?,?,?,SEC>,
 										SEC extends JeeslIoCmsSection<?,SEC>>

@@ -87,17 +87,17 @@
 						<p:inputText autocomplete="off" value="#{cc.attrs.bean.entity.code}"/>
 					</j:inputGrid>
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
-						<p:outputLabel value="#{msg.jeeslRevisionClass}" rendered="false"/>
 						<h:outputText value="#{cc.attrs.bean.className}"/>
 						<p:commandButton value="Pull Attributes from Class" disabled="#{cc.attrs.bean.isEmptyEntityReloaded()}" update=":#{cc.id}:sAttributes">
 							<f:actionListener binding="#{cc.attrs.bean.pullAttributesFromClass()}"/>
 						</p:commandButton>
 
-						<p:outputLabel value="#{msg.jeeslRemark}" rendered="false"/>
 						<p:inputTextarea value="#{cc.attrs.bean.entity.developerInfo}" style="width:100%" autocomplete="off"/>
 						
 					</p:panelGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.entity}" withDescription="true"/>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.entity}" withDescription="true"
+						labelTranslation="#{appLabelBean.labels['IoLabelEntity']['name'][localeCode].lang}"
+						labelDescription="#{appLabelBean.labels['IoLabelEntity']['description'][localeCode].lang}"/>
 				</p:panel>
 			</h:form>
 		</j:slot>

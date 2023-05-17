@@ -31,6 +31,7 @@ import org.jeesl.interfaces.model.module.tafu.JeeslTafuViewport;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.locale.JeeslLocaleDirection;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
@@ -87,6 +88,7 @@ public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescript
 	private T task; public T getTask() {return task;} public void setTask(T task) {this.task = task;}
 	private SC emptyScope;
 	private LocalDate ldBegin,ldEnd;
+	private String componentDir; public String getComponentDir() {return componentDir;} public void setComponentDir(String componentDir) {this.componentDir = componentDir;}
 	
 	public JeeslTafuDashboardGwc(TafuFactoryBuilder<L,D,R,T,TS,SC,VP,DOW,M,MT> fbTafu)
 	{
@@ -116,6 +118,8 @@ public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescript
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}
+		
+		componentDir = JeeslLocaleDirection.Code.ltr.toString();
 	}
 
 	public void postConstructDashboard(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
