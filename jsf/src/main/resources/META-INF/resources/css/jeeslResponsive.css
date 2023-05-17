@@ -2546,8 +2546,7 @@ body, .ui-widget {
           text-overflow: ellipsis; }
         .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
           height: 100%;
-          margin-left: 5px;
-          padding: 2px 0; }
+          margin-left: 5px; }
           @media (max-width: 768px) {
             .jeesl-header .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
               margin: 0;
@@ -3026,8 +3025,7 @@ body, .ui-widget {
             text-overflow: ellipsis; }
           .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
             height: 100%;
-            margin-left: 5px;
-            padding: 2px 0; }
+            margin-left: 5px; }
             @media (max-width: 768px) {
               .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
                 margin: 0;
@@ -3370,8 +3368,7 @@ body, .ui-widget {
             text-overflow: ellipsis; }
           .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
             height: 100%;
-            margin-left: 5px;
-            padding: 2px 0; }
+            margin-left: 5px; }
             @media (max-width: 768px) {
               .jeesl-footer .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
                 margin: 0;
@@ -3892,8 +3889,7 @@ body, .ui-widget {
               text-overflow: ellipsis; }
             .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
               height: 100%;
-              margin-left: 5px;
-              padding: 2px 0; }
+              margin-left: 5px; }
               @media (max-width: 768px) {
                 .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
                   margin: 0;
@@ -3952,8 +3948,7 @@ body, .ui-widget {
             height: 26px;
             padding: 6px 7px; } }
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
-          margin: 0;
-          padding: 2px 0; }
+          margin: 0; }
           @media (max-width: 768px) {
             .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label .jeesl-dropdown-item-label-icon {
               padding: 12px 0; } }
