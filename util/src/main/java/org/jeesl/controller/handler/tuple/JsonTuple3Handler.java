@@ -14,6 +14,7 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples3;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,31 +72,10 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 			size++;
 			if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
 			
-			
-			
-			if(t.getEjb2()==null)
-			{
-				if(mapB.containsKey(t.getId2())) {t.setEjb2(mapB.get(t.getId2()));}
-				else
-				{
-					try{t.setEjb2(cB.newInstance()); t.getEjb2().setId(t.getId2());}
-					catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
-				}
-			}
-			if(t.getEjb3()==null)
-			{
-				if(mapC.containsKey(t.getId3())) {t.setEjb3(mapC.get(t.getId3()));}
-				else
-				{
-					try{t.setEjb3(cC.newInstance()); t.getEjb3().setId(t.getId3());}
-					catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
-				}
-			}
-			
-			
-			if(!mapB.containsKey(t.getId2())) {mapB.put(t.getId2(),t.getEjb2());}
-			if(!mapC.containsKey(t.getId3())) {mapC.put(t.getId3(),t.getEjb3());}
-				
+			super.initTupleA(t);
+			super.initTupleB(t);
+			this.initTupleC(t);
+					
 			if(!map3.containsKey(t.getEjb1())) {map3.put(t.getEjb1(), new HashMap<B,Map<C,JsonTuple3<A,B,C>>>());}
 			if(!map3.get(t.getEjb1()).containsKey(t.getEjb2())) {map3.get(t.getEjb1()).put(t.getEjb2(), new HashMap<C,JsonTuple3<A,B,C>>());}
 			map3.get(t.getEjb1()).get(t.getEjb2()).put(t.getEjb3(), t);
@@ -105,6 +85,20 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 		super.initListB(fJeesl);
 		this.initListC(fJeesl);
 		tuples3.addAll(tuples.getTuples());
+	}
+	
+	protected void initTupleC(JsonTuple3<A,B,C> t)
+	{
+		if(t.getEjb3()==null)
+		{
+			if(mapC.containsKey(t.getId3())) {t.setEjb3(mapC.get(t.getId3()));}
+			else
+			{
+				try{t.setEjb3(cC.newInstance()); t.getEjb3().setId(t.getId3());}
+				catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
+			}
+		}
+		if(!mapC.containsKey(t.getId3())) {mapC.put(t.getId3(),t.getEjb3());}
 	}
 	
 	public void reloadABC(JeeslFacade facade) {super.initListA(facade); super.initListB(facade); this.initListC(facade);}
@@ -135,4 +129,10 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 	
 	public boolean contains(A a, B b, C c) {return map3.containsKey(a) && map3.get(a).containsKey(b) &&  map3.get(a).get(b).containsKey(c);}
 	public JsonTuple value(A a, B b, C c) {return JsonTupleFactory.build(map3.get(a).get(b).get(c));}
+	
+	public void debug(boolean debug)
+	{
+		super.debug(debug);
+		logger.info(cC.getSimpleName()+" "+listC.size());
+	}
 }

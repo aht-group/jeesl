@@ -86,14 +86,30 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		return this;
 	}
 	
+	protected void initTupleA(JsonTuple1<A> t)
+	{
+		if(t.getEjb1()==null)
+		{
+			if(mapA.containsKey(t.getId1())) {t.setEjb1(mapA.get(t.getId1()));}
+			else
+			{
+				try {t.setEjb1(cA.newInstance()); t.getEjb1().setId(t.getId1());}
+				catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
+			}
+		}
+		if(!mapA.containsKey(t.getId1())) {mapA.put(t.getId1(),t.getEjb1());}
+	}
+	
 	public void initListA(JeeslFacade facade)
 	{
 		listA.clear();
-		if(facade==null){listA.addAll(mapA.values());}
-		else{listA.addAll(facade.find(cA,new ArrayList<Long>(mapA.keySet())));}
+		if(facade==null) {listA.addAll(mapA.values());}
+		else {listA.addAll(facade.find(cA,new ArrayList<Long>(mapA.keySet())));}
 		sizeA = listA.size();
 		if(jcpA!=null && jcpA.provides(cA)){Collections.sort(listA, jcpA.provide(cA));}
 	}
+	
+	
 	
 	public boolean contains(A a){return map1.containsKey(a);}
 	public JsonTuple value(A a)
@@ -124,5 +140,11 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		cpTuple.setMap(map1);
 		Collections.sort(listA,cpTuple);
 		Collections.reverse(listA);
+	}
+	
+	public void debug(boolean debug)
+	{
+		
+		logger.info(cA.getSimpleName()+" "+listA.size());
 	}
 }

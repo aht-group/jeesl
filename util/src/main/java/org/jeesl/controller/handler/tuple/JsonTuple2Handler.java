@@ -18,6 +18,7 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -157,6 +158,20 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		tuples2.addAll(tuples.getTuples());
 	}
 	
+	protected void initTupleB(JsonTuple2<A,B> t)
+	{
+		if(t.getEjb2()==null)
+		{
+			if(mapB.containsKey(t.getId2())) {t.setEjb2(mapB.get(t.getId2()));}
+			else
+			{
+				try{t.setEjb2(cB.newInstance()); t.getEjb2().setId(t.getId2());}
+				catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
+			}
+		}
+		if(!mapB.containsKey(t.getId2())) {mapB.put(t.getId2(),t.getEjb2());}
+	}
+	
 	public void initListB(JeeslFacade fJeesl)
 	{
 		if(fJeesl==null){listB.addAll(mapB.values());}
@@ -175,4 +190,10 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	
 	public double sum(A a, B b) {return map.get(a).get(b).getSum();}
 	public double sum1(A a, B b) {return map.get(a).get(b).getSum1();}
+	
+	public void debug(boolean debug)
+	{
+		super.debug(debug);
+		logger.info(cB.getSimpleName()+" "+listB.size());
+	}
 }

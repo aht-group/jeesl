@@ -196,7 +196,6 @@ $enable-pointer-cursor-for-buttons: true;
 				.jeesl-dropdown-item-label-icon {
 					height: 100%;
 					margin-left: 5px;
-				    padding: 2px 0;
 
 					@media (max-width: 768px) {
 						margin: 0;
@@ -2611,7 +2610,7 @@ body, .ui-widget {
 						
 						.jeesl-dropdown-item-label-icon {
 							margin: 0;
-							padding: 2px 0;
+//							padding: 2px 0;
 							
 							@media (max-width: 768px) {
 								padding: 12px 0;

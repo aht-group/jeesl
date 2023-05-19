@@ -15,12 +15,13 @@
 	
 	<composite:implementation>
 		
-		<p:panel header="#{msg.jeeslSecurityLogin}" styleClass="jeeslPanel jeesl-panel">
+		<p:panel styleClass="jeesl-panel">
+			<f:facet name="header"><j:pHeader entity="SecurityUser" code="login"/></f:facet>
 			<j:inputGrid>
-				<p:outputLabel for="name" value="#{msg.jeeslSecurityEmail}"/>
+				<jtp:label for="name" entity="SecurityUser" code="email"/>
 				<p:inputText id="name" value="#{cc.attrs.bean.identity.loginName}"/>
 				
-				<p:outputLabel for="password" value="#{msg.jeeslSecurityPassword}"/>
+				<jtp:label for="password" entity="SecurityUser" code="password"/>
 				<p:password id="password" value="#{cc.attrs.bean.identity.loginPassword}"/>
 				
 				<p:outputLabel for="cbLogin" value=""/>

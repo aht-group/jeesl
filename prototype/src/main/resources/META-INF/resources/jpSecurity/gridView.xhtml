@@ -20,8 +20,9 @@
 	<j:row>
 		<j:slot id="sCategories" width="4">
 			<h:form id="fCategories">
-				<p:dataTable var="c" value="#{cc.attrs.ctrl.categories}" styleClass="jeesl-datatable"
-					 selection="#{cc.attrs.ctrl.category}" draggableRows="true" selectionMode="single" rowKey="#{c.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="c" value="#{cc.attrs.ctrl.categories}" 
+					 	selection="#{cc.attrs.ctrl.category}" draggableRows="true" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityCategory" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addCategory()}" update=":#{cc.id}:grid"/>
@@ -65,7 +66,9 @@
 						<jtp:label entity="SecurityCategory" code="documentation" rendered="#{cc.attrs.ctrl.uiShowDocumentation}"/>
 						<p:selectBooleanCheckbox rendered="#{cc.attrs.ctrl.uiShowDocumentation}" value="#{cc.attrs.ctrl.category.documentation}"/>
 					</j:inputGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.ctrl.category}" withDescription="true" labelTranslation="#{msg.jeeslName}" labelDescription="#{msg.jeeslDescription}"/>
+					<j:tabTranslationEditor value="#{cc.attrs.ctrl.category}" withDescription="true"
+						labelTranslation="#{appLabelBean.labels['SecurityCategory']['name'][localeCode].lang}"
+						labelDescription="#{appLabelBean.labels['SecurityCategory']['description'][localeCode].lang}"/>
 				</p:panel>
 			</h:form>
 		</j:slot>
@@ -127,7 +130,7 @@
 				<p:panel rendered="#{not empty cc.attrs.ctrl.view}" styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="SecurityView"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.ctrl.saveView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttSave}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttSave}"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" rendered="#{cc.attrs.ctrl.hasDeveloperAction}" tooltip="#{msg.ttDelete}"/>
 						<j:svg type="jeeslClone" listener="#{cc.attrs.ctrl.cloneView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.jeeslTooltipClone}"/>
 					</f:facet>
@@ -174,13 +177,15 @@
 						<p:inputText value="#{cc.attrs.ctrl.view.urlBase}"/>
 					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.ctrl.view}" withDescription="true"
-							labelTranslation="#{msg.jeeslName}" labelDescription="#{msg.jeeslDescription}"/>
+							labelTranslation="#{appLabelBean.labels['SecurityView']['name'][localeCode].lang}"
+							labelDescription="#{appLabelBean.labels['SecurityView']['description'][localeCode].lang}"/>
 				</p:panel>
 			</h:form>
 			
 			<h:form id="fActions">
-				<p:dataTable var="a" value="#{cc.attrs.ctrl.actions}" draggableRows="true"
-							selection="#{cc.attrs.ctrl.action}" selectionMode="single" rowKey="#{a.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="a" value="#{cc.attrs.ctrl.actions}" draggableRows="true"
+						selection="#{cc.attrs.ctrl.action}" selectionMode="single" rowKey="#{a.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityAction" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttNew}"/>
@@ -199,7 +204,8 @@
 		       	</p:dataTable>
 			</h:form>
 			<h:form id="fAction">					
-				<p:panel rendered="#{not empty cc.attrs.ctrl.action}" header="#{msg.jeeslSecurityAction}" styleClass="jeeslPanel">
+				<p:panel rendered="#{not empty cc.attrs.ctrl.action}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="SecurityAction"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttSave}"/>
 						<j:svg type="jeeslDelete" rendered="#{cc.attrs.ctrl.hasDeveloperAction}" listener="#{cc.attrs.ctrl.rmAction()}" update=":#{cc.id}:sView"/>
@@ -211,7 +217,7 @@
 							<f:selectItems value="#{cc.attrs.ctrl.templates}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 							<p:ajax event="change" listener="#{cc.attrs.ctrl.changeTemplate()}" update="@form"/>
 						</p:selectOneMenu>
-						<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
+						<jtp:label entity="SecurityAction" code="code"/>
 						<h:outputText rendered="#{(not empty cc.attrs.ctrl.action.template) or (not cc.attrs.ctrl.uiAllowCode)}" value="#{cc.attrs.ctrl.view.code}.#{fn:substringAfter(cc.attrs.ctrl.action.template.code,'.')}"/>
 						<p:inputText rendered="#{(empty cc.attrs.ctrl.action.template) and (cc.attrs.ctrl.uiAllowCode)}" value="#{cc.attrs.ctrl.action.code}"/>
 					</p:panelGrid>
@@ -219,11 +225,12 @@
 				</p:panel>
 			</h:form>
 			<h:form id="fAreas" rendered="#{(not empty cc.attrs.ctrl.view) and (cc.attrs.ctrl.view.id gt 0)}">
-				<p:dataTable var="a" value="#{cc.attrs.ctrl.areas}" draggableRows="true"
-							selection="#{cc.attrs.ctrl.area}" selectionMode="single" rowKey="#{a.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="a" value="#{cc.attrs.ctrl.areas}" draggableRows="true"
+						selection="#{cc.attrs.ctrl.area}" selectionMode="single" rowKey="#{a.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslSecurityAreas}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.ctrl.addArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
+						<j:dtHeader entity="SecurityArea" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderAreas()}" update="@form"/>
@@ -231,7 +238,8 @@
 					<p:column>  
 						<h:outputText value="#{a.position}" />  
 		            </p:column>
-		            <p:column headerText="#{msg.jeeslSecurityArea}">  
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="SecurityArea"/></f:facet>
 						<h:outputText value="#{a.name[localeCode].lang}"/>
 		            </p:column>
 		            <p:column rendered="#{cc.attrs.ctrl.uiShowInvisible}" styleClass="jeeslCenter">  
@@ -240,13 +248,15 @@
 		       	</p:dataTable>
 			</h:form>
 			<h:form id="fArea">						
-				<p:panel rendered="#{not empty cc.attrs.ctrl.area}" header="#{msg.jeeslSecurityArea}" styleClass="jeeslPanel">
+				<p:panel rendered="#{not empty cc.attrs.ctrl.area}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="SecurityArea"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.ctrl.saveArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
-						<j:icon type="jeeslDelete" rendered="#{cc.attrs.ctrl.hasDeveloperAction}" listener="#{cc.attrs.ctrl.deleteArea()}" update=":#{cc.id}:sView" tooltip="#{msg.ttDelete}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
+						<j:svg type="jeeslDelete" rendered="#{cc.attrs.ctrl.hasDeveloperAction}" listener="#{cc.attrs.ctrl.deleteArea()}" update=":#{cc.id}:sView" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
+						<jtp:label entity="SecurityArea" code="code"/>
 						<h:outputText rendered="#{not cc.attrs.ctrl.uiAllowCode}" value="#{cc.attrs.ctrl.area.code}"/>
 						<p:inputText rendered="#{cc.attrs.ctrl.uiAllowCode}" value="#{cc.attrs.ctrl.area.code}"/>
 						

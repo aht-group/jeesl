@@ -15,9 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 
 @Entity
 @Table(name="SecurityUser",uniqueConstraints=@UniqueConstraint(columnNames={"email"}))
@@ -25,7 +24,7 @@ import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 @DiscriminatorColumn(name="system", discriminatorType=DiscriminatorType.STRING, length=32)
 @DiscriminatorValue("generic")
 @SequenceGenerator(name="SequenceUser", sequenceName="SecurityUser_id_seq", allocationSize=1)
-public abstract class SecurityUser  implements EjbWithId,EjbWithEmail,JeeslSimpleUser
+public abstract class SecurityUser implements JeeslSimpleUser,JeeslSecurityUser
 {
 	public static final long serialVersionUID=1;
 
