@@ -1,8 +1,13 @@
 package org.jeesl.factory.xls.system.io.report;
 
 import java.util.List;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Row;
 
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellReference;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
@@ -75,6 +80,7 @@ public class XlsColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 	
 	public void adjustWidth(Sheet sheet, List<COLUMN> columns)
     {
+		boolean activateVerticalCenter = false;
 		for(int i=0; i<columns.size(); i++)
         {
 			COLUMN ioColumn = columns.get(i);
@@ -83,12 +89,58 @@ public class XlsColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 				switch(JeeslReportLayout.ColumnWidth.valueOf(ioColumn.getColumWidth().getCode()))
 				{
 					case none: break;
-					case auto: sheet.autoSizeColumn(i);break;
-					case min: sheet.setColumnWidth(i, ioColumn.getColumSize()*256);break;
+					case auto: 
+						sheet.autoSizeColumn(i);
+						break;
+					case min: 
+						sheet.setColumnWidth(i, ioColumn.getColumSize()*256);
+						activateVerticalCenter = true;
+						
+						for (Row row : sheet){
+							Cell cell = row.getCell(i);
+							CellStyle style = sheet.getWorkbook().createCellStyle();
+							if (cell!=null)
+							{
+								if (cell.getCellStyle()!=null)
+								{
+									style = cell.getCellStyle();
+								}
+								style.setWrapText(true);
+								cell.setCellStyle(style);
+							//	logger.info("Setting " +row.getRowNum() +"," +i +" to wrap");
+							}
+						}
+						break;
 				//	default: break;
 				}
 			}
         }
+		if (activateVerticalCenter)
+		{
+			logger.info("Aligning all cells to vertical center");
+			for(int i=0; i<columns.size(); i++)
+			{
+				for (Row row : sheet)
+				{
+					Cell cell = row.getCell(i);
+					CellStyle style = sheet.getWorkbook().createCellStyle();
+					if (cell!=null)
+					{
+						if (cell.getCellStyle()!=null)
+						{
+							style = cell.getCellStyle();
+						}
+						style.setVerticalAlignment(VerticalAlignment.CENTER);
+						cell.setCellStyle(style);
+					//	logger.info("Column " +i +" in Row " +row.getRowNum() +" is now centered verticallly");
+					}
+					else
+					{
+						
+					}
+				}
+			}
+		}
     }
 	
 	public static int code2index(String code)

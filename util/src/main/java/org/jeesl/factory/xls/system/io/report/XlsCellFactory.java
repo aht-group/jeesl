@@ -104,6 +104,10 @@ public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
 	{
 		JeeslReportLayout.Data dt = xfStyle.getDataType(ioColumn);
 		CellStyle style = xfStyle.get(JeeslReportLayout.Style.cell,ioColumn);
+		if (ioColumn.getStyleCell()!=null)
+		{
+			style = xfStyle.get(JeeslReportLayout.Style.cell, ioColumn);
+		}
 		try {add(xlsRow, columnNr, context, ioColumn.getQueryCell(), style, dt);}
 		catch (JXPathInvalidSyntaxException e)
 		{

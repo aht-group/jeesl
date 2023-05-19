@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" 
 	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
-	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
-	xmlns:aupAdmin="http://ahtutils.sourceforge.net/prototype/admin"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
@@ -18,9 +13,9 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<aup:grid id="grid">
-			<aht:row>
-				<aht:slot id="sStyles" width="5">
+		<jp:grid id="grid">
+			<j:row>
+				<j:slot id="sStyles" width="5">
 					<h:form id="fStyles">
 						<p:dataTable var="s" value="#{cc.attrs.bean.styles}" draggableRows="true"
 							selection="#{cc.attrs.bean.style}" selectionMode="single" rowKey="#{s.id}">
@@ -36,8 +31,8 @@
 							<p:column><j:duoCheckmark value="#{s.visible}"/></p:column>
 						</p:dataTable>
 					</h:form>
-				</aht:slot>
-				<aht:slot id="sStyle" width="7">
+				</j:slot>
+				<j:slot id="sStyle" width="7">
 					<h:form id="fStyle">
 						<p:panel header="#{msg.jeeslIoReportStyle}" rendered="#{not empty cc.attrs.bean.style}" styleClass="jeeslPanel">
 							<f:facet name="actions">
@@ -45,40 +40,35 @@
 								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveStyle()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmStyle()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.style.id gt 0}" />
 							</f:facet>
-							<div class="ui-fluid">
-								<div class="p-field p-grid">
+							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 									<p:outputLabel for="visibility" styleClass="p-col p-md-3" value="#{msg.aupSecurityVisible}"/>
-									<div class="p-col p-md-9">
-										<p:selectBooleanCheckbox id="visibility" value="#{cc.attrs.bean.style.visible}"/>
-									</div>
-								</div>
-							</div>
-							<aht:tabTranslationEditor value="#{cc.attrs.bean.style}" withDescription="true" keys="#{cc.attrs.localeKeys}" />
-							
-							<div class="ui-fluid">
-								<div class="p-field p-grid">
+									<p:selectBooleanCheckbox id="visibility" value="#{cc.attrs.bean.style.visible}"/>
+									
+									<p:outputLabel value="Font"/>
+									<p:selectOneMenu value="#{cc.attrs.bean.style.font}" effect="fade" >
+										<f:selectItem itemValue="Arial" itemLabel="Arial"/>
+										<f:selectItem rendered="false" itemValue="times" itemLabel="Times"/>
+										<f:selectItem itemValue="Courier New" itemLabel="Courier New"/>
+										<f:selectItem itemValue="Serif" itemLabel="Serif"/>
+									</p:selectOneMenu>
+									
+									<p:outputLabel value="Font Size"/>
+									<p:inputNumber value="#{cc.attrs.bean.style.sizeFont}"/>
+									
 									<p:outputLabel for="backgroundColour" styleClass="p-col p-md-3" value="#{msg.jeeslIoReportStyleColorBackground}"/>
-									<div class="p-col p-md-9">
-										<p:colorPicker id="backgroundColour" value="#{cc.attrs.bean.style.colorBackground}"/>
-									</div>
-								</div>
-								<div class="p-field p-grid">
+									<p:colorPicker id="backgroundColour" value="#{cc.attrs.bean.style.colorBackground}"/>
+									
 									<p:outputLabel for="fontBold" styleClass="p-col p-md-3" value="#{msg.jeeslIoReportStyleFontBold}"/>
-									<div class="p-col p-md-9">
-										<p:selectBooleanCheckbox id="fontBold" value="#{cc.attrs.bean.style.fontBold}"/>
-									</div>
-								</div>
-								<div class="p-field p-grid">
+									<p:selectBooleanCheckbox id="fontBold" value="#{cc.attrs.bean.style.fontBold}"/>
+									
 									<p:outputLabel for="fontItalic" styleClass="p-col p-md-3" value="#{msg.jeeslIoReportStyleFontItalic}"/>
-									<div class="p-col p-md-9">
-										<p:selectBooleanCheckbox id="fontItalic" value="#{cc.attrs.bean.style.fontItalic}"/>
-									</div>
-								</div>
-							</div>
+									<p:selectBooleanCheckbox id="fontItalic" value="#{cc.attrs.bean.style.fontItalic}"/>
+							</p:panelGrid>
+							<aht:tabTranslationEditor value="#{cc.attrs.bean.style}" withDescription="true" keys="#{cc.attrs.localeKeys}" />
 						</p:panel>
 					</h:form>
-				</aht:slot>
-			</aht:row>
-	    </aup:grid>
+				</j:slot>
+			</j:row>
+	    </jp:grid>
 	</composite:implementation>
 </html>
