@@ -212,7 +212,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		logger.info("Documents: "+documents.size());
 	}
 
-	public void addWorkflow(JeeslJsfSecurityHandler<SR,?,?,?,?,USER> security, USER user, JeeslWithWorkflow<WF> ejb)
+	public void addWorkflow(JeeslJsfSecurityHandler<SR,?,?,?,?,USER> security, USER user, JeeslWithWorkflow<WF> ejb) throws JeeslNotFoundException
 	{
 		this.security = security;
 		this.user=user;
@@ -229,9 +229,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		workflow.getActivities().add(activity);
 		workflow.setLastActivity(activity);
 
-		RE entity = null;
-		try {entity = fWorkflow.fByCode(fbRevision.getClassEntity(),ejb.getClass().getName());}
-		catch (JeeslNotFoundException e) {e.printStackTrace();}
+		RE entity = fWorkflow.fByCode(fbRevision.getClassEntity(),ejb.getClass().getName());
 
 		link = fbWorkflow.ejbLink().build(entity,workflow,ejb);
 		if(debugOnInfo) {logger.info("Build: Workflow and Link");}
