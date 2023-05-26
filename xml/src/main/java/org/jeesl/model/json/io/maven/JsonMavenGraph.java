@@ -42,6 +42,10 @@ public class JsonMavenGraph implements Serializable
 	public List<JsonMavenDependency> getDependencies() {return dependencies;}	
 	public void setDependencies(List<JsonMavenDependency> dependencies) {this.dependencies = dependencies;}
 
+	@JsonProperty("fonts")
+	private List<JsonFont> fonts;
+	public List<JsonFont> getFonts() {return fonts;}	
+	public void setFonts(List<JsonFont> fonts) {this.fonts = fonts;}
 
 	@Override
 	public String toString()

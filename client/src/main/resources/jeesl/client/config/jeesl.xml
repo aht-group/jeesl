@@ -2,7 +2,12 @@
 <config>
 	<net>
         <rest>
-            <url>http://localhost:8080/jeesl</url>
+        	<local>
+        		<url>http://localhost:8080/jeesl</url>
+        	</local>
+        	<production>
+        		<url>https://www.jeesl.org/jeesl</url>
+        	</production>
         </rest>
 	</net>
 </config>

@@ -1,6 +1,5 @@
 package org.jeesl.client.app;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -16,7 +15,7 @@ import org.apache.commons.configuration.Configuration;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.jeesl.api.rest.rs.io.db.JeeslIoDbRest;
+import org.jeesl.api.rest.rs.io.maven.JeeslIoMavenRest;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.controller.processor.system.io.db.DatabaseBackupProcessor;
@@ -25,34 +24,38 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.exception.processing.UtilsProcessingException;
+import org.jeesl.factory.json.io.maven.JeeslFontFactory;
+import org.jeesl.model.json.io.maven.JsonMavenGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.interfaces.util.ConfigKey;
+import net.sf.exlp.util.io.JsonUtil;
 
-public class JeeslDbBackupNotifier
+public class JeeslFontTrackerApp
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslDbBackupNotifier.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslFontTrackerApp.class);
 	
-	private JeeslCliOptionHandler jco;
-	private Option oUrl,oDirectory,oHost,oSystem;
+	private final Configuration config;
+	private JeeslCliOptionHandler handler;
+	
+	
+	private Option oHost,oSystem;
 
 	private String cfgUrl,cfgHost,cfgSystem;
-	private File cfgDirectory;
 	
-	public JeeslDbBackupNotifier()
+	public JeeslFontTrackerApp(Configuration config)
 	{
-		
+		this.config = config;
 	}
 	
-	private JeeslIoDbRest buildRest(String url)
+	private JeeslIoMavenRest buildRest(String url)
 	{
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		ResteasyWebTarget restTarget = client.target(url);
-//		return restTarget.proxy(JeeslIoDbRest.class);
-		return null;
+		return restTarget.proxy(JeeslIoMavenRest.class);
 	}
 	
 	public void local()
@@ -60,68 +63,69 @@ public class JeeslDbBackupNotifier
 		Configuration config = JeeslBootstrap.init();
 		
 		cfgUrl = config.getString(ConfigKey.netRestUrlLocal);
-		cfgDirectory = new File(config.getString("dir.db.backup"));
 		cfgHost = "x";
 		cfgSystem = "jeesl";
 		
-		debugConfig();
-		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(buildRest(cfgUrl),cfgDirectory,cfgHost,cfgSystem);
-		processor.upload();
+		this.debugConfig();
+		
+		JsonMavenGraph graph = JeeslFontFactory.build();
+		graph.setCode(cfgHost);
+		
+		this.buildRest(cfgUrl).uploadFonts(graph);
 	}
 	
 	private void createOptions()
 	{
-		jco.buildHelp();
-		jco.buildDebug();
+		handler.buildHelp();
+		handler.buildDebug();
         
-        oUrl = Option.builder("url").required(true).hasArg(true).argName("URL").desc("URL Endpoint").build(); jco.getOptions().addOption(oUrl);
-        oDirectory = Option.builder("dir").required(true).hasArg(true).argName("DIR").desc("Directory with .sql files").build(); jco.getOptions().addOption(oDirectory);
-        oHost = Option.builder("host").required(true).hasArg(true).argName("HOST").desc("Host identifier of storage server").build(); jco.getOptions().addOption(oHost);
-        oSystem = Option.builder("system").required(true).hasArg(true).argName("SYSTEM").desc("System identifier").build(); jco.getOptions().addOption(oSystem);
+		oSystem = Option.builder("system").required(true).hasArg(true).argName("SYSTEM").desc("System identifier").build(); handler.getOptions().addOption(oSystem);
+        oHost = Option.builder("host").required(true).hasArg(true).argName("HOST").desc("Host identifier").build(); handler.getOptions().addOption(oHost);
+       
 	}
 	
 	private void debugConfig()
 	{
 		logger.info("URL: "+cfgUrl);
-		logger.info("Directory: "+cfgDirectory.getAbsolutePath());
 		logger.info("Host: "+cfgHost);
 		logger.info("System: "+cfgSystem);
 	}
 	
-	public void parseArguments(JeeslCliOptionHandler jco, String args[]) throws Exception
+	public void parseArguments(JeeslCliOptionHandler jcoh, String args[]) throws Exception
 	{
-		this.jco = jco;
+		this.handler = jcoh;
 		
-		createOptions();
+		this.createOptions();
 		
 		CommandLineParser parser = new DefaultParser();
-		CommandLine line = parser.parse(jco.getOptions() , args); 
+		CommandLine line = parser.parse(handler.getOptions() , args); 
 	     
-		jco.handleHelp(line);
-		jco.handleLogger(line);
-		
-//		Configuration config = uOption.initConfig(line, MeisBootstrap.xmlConfig);
-	    
-		cfgUrl = line.getOptionValue(oUrl.getOpt());
-		cfgDirectory = new File(line.getOptionValue(oDirectory.getOpt()));
-		cfgHost = line.getOptionValue(oHost.getOpt());
+		handler.handleHelp(line);
+		handler.handleLogger(line);
+
+		cfgUrl = config.getString(ConfigKey.netRestUrlProduction);
 		cfgSystem = line.getOptionValue(oSystem.getOpt());
-		
+		cfgHost = line.getOptionValue(oHost.getOpt());
+
 		debugConfig();
-		DatabaseBackupProcessor processor = new DatabaseBackupProcessor(buildRest(cfgUrl),cfgDirectory,cfgHost,cfgSystem);
-		processor.upload();
+		
+		JsonMavenGraph graph = JeeslFontFactory.build();
+		graph.setCode(cfgHost);
+		
+		this.buildRest(cfgUrl).uploadFonts(graph);
 	}
 	
 	public static void main(String args[]) throws FileNotFoundException, UtilsConfigurationException, NamingException, ExlpConfigurationException
 	{
-		JeeslDbBackupNotifier notifier = new JeeslDbBackupNotifier();
+		Configuration config = JeeslBootstrap.init();
+		JeeslFontTrackerApp app = new JeeslFontTrackerApp(config);
 		
-		notifier.local(); System.exit(0);
+//		app.local(); System.exit(0);
 		
 		JeeslCliOptionHandler jco = new JeeslCliOptionHandler(org.jeesl.Version.class.getPackage().getImplementationVersion());
 		jco.setLog4jPaths("jeesl/client/config");
 		
-		try {notifier.parseArguments(jco,args);}
+		try {app.parseArguments(jco,args);}
 		catch (ParseException e) {logger.error(e.getMessage());jco.help();}
 		catch (UtilsProcessingException e) {e.printStackTrace();}
 		catch (IOException e) {e.printStackTrace();}

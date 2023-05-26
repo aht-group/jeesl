@@ -1,4 +1,4 @@
-package org.jeesl.controller.wc.io.maven;
+package org.jeesl.controller.web.c.io.maven;
 
 import java.io.Serializable;
 import java.util.ArrayList;

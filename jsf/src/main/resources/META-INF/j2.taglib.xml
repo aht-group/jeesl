@@ -31,6 +31,13 @@
         </component>
 	</tag>
 	<tag>
+        <tag-name>gridIoMavenFont</tag-name>
+        <component>
+            <resource-id>ioMaven/font.xhtml</resource-id>
+        </component>
+	</tag>
+	
+	<tag>
         <tag-name>gridIoSsiPort</tag-name>
         <component>
             <resource-id>ioSsi/port.xhtml</resource-id>

@@ -77,6 +77,11 @@
     		<artifactId>jeesl-io-locale</artifactId>
     		<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-io-ssi</artifactId>
+    		<scope>compile</scope>
+		</dependency>
 	
 		<!-- JakartaEE -->
 		<dependency>

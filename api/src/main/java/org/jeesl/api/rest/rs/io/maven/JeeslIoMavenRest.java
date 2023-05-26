@@ -16,4 +16,9 @@ public interface JeeslIoMavenRest extends JeeslIoMavenRestInterface
 	@POST @Path("/upload/dependency/graph")
 	@Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON)
 	JsonSsiUpdate uploadDependencyGraph(JsonMavenGraph graph);
+	
+	@POST @Path("/upload/fonts")
+	@Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON)
+	JsonSsiUpdate uploadFonts(JsonMavenGraph fonts);
+	
 }

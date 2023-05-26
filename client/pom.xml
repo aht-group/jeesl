@@ -18,7 +18,14 @@
     </properties>
 
 	<dependencyManagement>
-		<dependencies>      	         
+		<dependencies>
+			<dependency>
+				<groupId>org.jeesl.bom</groupId>
+				<artifactId>bom-eap73</artifactId>
+				<version>${project.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>   	         
 			<dependency>
 				<groupId>org.jeesl.bom</groupId>
 				<artifactId>bom-core</artifactId>
@@ -73,31 +80,62 @@
     		<version>3.2.2</version>
 		</dependency>
 		
+		<!-- JSON Jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.jaxrs</groupId>
+		    <artifactId>jackson-jaxrs-json-provider</artifactId>
+		</dependency>
+		<dependency>
+		   <groupId>com.fasterxml.jackson.datatype</groupId>
+		   <artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+		
+		<!-- JAXB -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+		</dependency>
+
+		<!-- REST -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-			<version>3.0.14.Final</version>
 			<exclusions>
-            	<exclusion>
-            		<artifactId>commons-logging</artifactId>
-            		<groupId>commons-logging</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>slf4j-simple</artifactId>
-            		<groupId>org.slf4j</groupId>
-            	</exclusion>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>slf4j-simple</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-        	<groupId>org.jboss.resteasy</groupId>
-        	<artifactId>resteasy-client</artifactId>
-        	<version>3.0.14.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxb-provider</artifactId>
-			<version>3.0.14.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+		</dependency>
+		
 		
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -110,11 +148,7 @@
             	</exclusion>
 			</exclusions>
 		</dependency>
-		
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-		</dependency>
+
          
          <!--2022-09-04 tk Preparing removal -->
 		<dependency>
@@ -157,7 +191,7 @@
 		</dependency>
 		
 		<!-- Utils -->
-			<dependency>
+		<dependency>
 			<groupId>org.apache.xmlgraphics</groupId>
 			<artifactId>batik-transcoder</artifactId>
 			<scope>test</scope>
@@ -173,13 +207,7 @@
 			<artifactId>mail</artifactId>
 		</dependency>
 		
-		<!-- JSON -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.6.0</version>
-		</dependency>
-		
+
 		<!-- Test for eap80 
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -202,7 +230,6 @@
 		    <version>1.18.0</version>
 		</dependency> -->
 
-	  	
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -281,6 +308,16 @@
 						<configuration>
 							<appClass>org.jeesl.client.app.JeeslMailSpooler</appClass>
 							<fileName>JeeslMailSpooler</fileName>
+							<fileDesc>-${project.version}</fileDesc>
+							<type>fat</type>
+						</configuration>
+					</execution>
+					<execution>
+						<id>capsule-fonttracker</id>
+						<goals><goal>build</goal></goals>
+						<configuration>
+							<appClass>org.jeesl.client.app.JeeslFontTrackerApp</appClass>
+							<fileName>JeeslFontTracker</fileName>
 							<fileDesc>-${project.version}</fileDesc>
 							<type>fat</type>
 						</configuration>
