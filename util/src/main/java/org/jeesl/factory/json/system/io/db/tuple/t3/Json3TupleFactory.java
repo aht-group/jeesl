@@ -19,32 +19,34 @@ public class Json3TupleFactory<A extends EjbWithId, B extends EjbWithId, C exten
 	
 	public JsonTuple3<A,B,C> buildSum(Tuple tuple)
 	{
-		JsonTuple3<A,B,C> json = build(tuple);
+		JsonTuple3<A,B,C> json = new JsonTuple3<A,B,C>();
+		json.setId1((Long)tuple.get(0));
+		json.setId2((Long)tuple.get(1));
+		json.setId3((Long)tuple.get(2));
 		json.setSum((Double)tuple.get(3));
     	return json;
 	}
 	
 	public JsonTuple3<A,B,C> buildCount(Tuple tuple)
 	{
-		JsonTuple3<A,B,C> json = build(tuple);
+		JsonTuple3<A,B,C> json = new JsonTuple3<A,B,C>();
+		json.setId1((Long)tuple.get(0));
+		json.setId2((Long)tuple.get(1));
+		json.setId3((Long)tuple.get(2));
 		json.setCount((Long)tuple.get(3));
     	return json;
 	}
 	
 	public JsonTuple3<A,B,C> buildCountInteger4(Tuple tuple)
 	{
-		JsonTuple3<A,B,C> json = build(tuple);
+		JsonTuple3<A,B,C> json = new JsonTuple3<A,B,C>();
+		json.setId1((Long)tuple.get(0));
+		json.setId2((Long)tuple.get(1));
+		json.setId3((Long)tuple.get(2));
 		json.setGi1((Integer)tuple.get(3));
 		json.setCount((Long)tuple.get(4));
     	return json;
 	}
 	
-	private JsonTuple3<A,B,C> build(Tuple tuple)
-	{
-		JsonTuple3<A,B,C> json = new JsonTuple3<A,B,C>();
-		json.setId1((Long)tuple.get(0));
-		json.setId2((Long)tuple.get(1));
-		json.setId3((Long)tuple.get(2));
-		return json;
-	}
+	
 }

@@ -74,14 +74,6 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		mapC.clear();
 	}
 	
-	public JsonTuples3<A,B,C> build(List<Tuple> tuples, JsonTupleFactory.Type...types)
-	{
-		JsonTuples3<A,B,C> json = new JsonTuples3<>();
-		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build3(t,types));}
-		ejb3Load(json);
-		return json;
-	}
-	
 	private void ejb3Load(JsonTuples3<A,B,C> json)
 	{ 
 		clear();
@@ -122,27 +114,35 @@ public class Json3TuplesFactory <A extends EjbWithId, B extends EjbWithId, C ext
 		this.tuples=json;
 	}
 	
-	public JsonTuples3<A,B,C> build3Sum(List<Tuple> tuples)
+	public JsonTuples3<A,B,C> build(List<Tuple> tuples, JsonTupleFactory.Type...types)
 	{
-		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();
-		for(Tuple t : tuples)
-        {
-        	json.getTuples().add(jtf.buildSum(t));
-        }
+		JsonTuples3<A,B,C> json = new JsonTuples3<>();
+		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build3(t,types));}
 		ejb3Load(json);
 		return json;
 	}
 	
-	public JsonTuples3<A,B,C> build3Count(List<Tuple> tuples)
-	{
-		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();
-		for(Tuple t : tuples)
-        {
-        	json.getTuples().add(jtf.buildCount(t));
-        }
-		ejb3Load(json);
-		return json;
-	}
+//	private JsonTuples3<A,B,C> build3Count(List<Tuple> tuples)
+//	{
+//		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();
+//		for(Tuple t : tuples)
+//        {
+//        	json.getTuples().add(jtf.buildCount(t));
+//        }
+//		ejb3Load(json);
+//		return json;
+//	}
+	
+//	public JsonTuples3<A,B,C> build3Sum(List<Tuple> tuples)
+//	{
+//		JsonTuples3<A,B,C> json = new JsonTuples3<A,B,C>();
+//		for(Tuple t : tuples)
+//        {
+//        	json.getTuples().add(jtf.buildSum(t));
+//        }
+//		ejb3Load(json);
+//		return json;
+//	}
 	
 	public JsonTuples3<A,B,C> build3CountInterger4(List<Tuple> tuples)
 	{
