@@ -12,12 +12,13 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<p:dataTable id="dtViews" var="u" value="#{cc.attrs.usecases}"
-						 selection="#{cc.attrs.bean.tblUsecase}" selectionMode="single" rowKey="#{u.id}">
+		<p:dataTable id="dtViews" styleClass="jeesl-datatable"
+					var="u" value="#{cc.attrs.usecases}"
+					selection="#{cc.attrs.bean.tblUsecase}" selectionMode="single" rowKey="#{u.id}">
 				<f:facet name="header">
-					<j:dtHeader id="dth" title="#{msg.aupSecurityUsecases}">
-						<j:svg type="jeeslAdd" onstart="PF('wvOpUsecaseSelection').show();" library="jeeslGfx"/>
-						<j:svg type="jeeslRemove" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblUsecase)}" listener="#{cc.attrs.bean.opRmUsecase()}" update="#{cc.attrs.update}" library="jeeslGfx"/>
+					<j:dtHeader id="dth" entity="SecurityUsecase" code="listOf">
+						<j:svg type="jeeslAdd" onstart="PF('wvOpUsecaseSelection').show();"/>
+						<j:svg type="jeeslRemove" rendered="#{cc.attrs.withRemove and (not empty cc.attrs.bean.tblUsecase)}" listener="#{cc.attrs.bean.opRmUsecase()}" update="#{cc.attrs.update}"/>
 					</j:dtHeader>
 				</f:facet>
 				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.selectTblUsecase}"/>
@@ -35,9 +36,10 @@
 				</p:column>
 		</p:dataTable>				  
 		<p:overlayPanel widgetVar="wvOpUsecaseSelection" appendToBody="false">
-			<p:dataTable id="dtOpSector" var="u" value="#{cc.attrs.bean.opUsecases}" rowKey="#{u.id}"
-                         selection="#{cc.attrs.bean.opUsecase}" selectionMode="single"
-                         rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+			<p:dataTable id="dtOpSector" styleClass="jeesl-datatable"
+					var="u" value="#{cc.attrs.bean.opUsecases}" rowKey="#{u.id}"
+                    selection="#{cc.attrs.bean.opUsecase}" selectionMode="single"
+					rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 				<p:ajax event="rowSelect" update="#{cc.attrs.update}" listener="#{cc.attrs.bean.opAddUsecase}" oncomplete="PF('wvOpUsecaseSelection').hide();"/>
 				<p:column>
 					<h:outputText value="#{u.category.position}.#{u.position}"/>

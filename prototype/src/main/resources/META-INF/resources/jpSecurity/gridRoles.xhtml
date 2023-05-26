@@ -18,12 +18,12 @@
 		</j:slot>
 		<j:slot id="sViews" width="3">
 			<h:form id="fRoles">
-				<p:dataTable var="r" value="#{cc.attrs.bean.roles}" draggableRows="true"
-						selection="#{cc.attrs.bean.role}" selectionMode="single" rowKey="#{r.id}"
-						rendered="#{not empty cc.attrs.bean.category}">
+				<p:dataTable styleClass="jeesl-datatable" rendered="#{not empty cc.attrs.bean.category}"
+						var="r" value="#{cc.attrs.bean.roles}" draggableRows="true"
+						selection="#{cc.attrs.bean.role}" selectionMode="single" rowKey="#{r.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslSecurityRoles}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{cc.attrs.tooltip}"/>
+						<j:dtHeader entity="SecurityRole" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{cc.attrs.tooltip}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole"/>
@@ -35,7 +35,8 @@
 					<p:column rendered="false">  
 						<h:outputText value="#{r.position}" />  
 		            </p:column>
-		            <p:column headerText="#{msg.jeeslSecurityRole}">  
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="SecurityRole"/></f:facet>
 						<h:outputText value="#{r.name[userBean.localeCode].lang}" />  
 		            </p:column>
 		            <p:column rendered="#{false and cc.attrs.bean.uiShowInvisible}">  
