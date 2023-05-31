@@ -55,9 +55,16 @@ public class JeeslMemoryKeyStore<KEY extends JeeslIoCryptoKey<?,?>,
 		return this;
 	}
 	
-	@Override public void update(KEY key, KT state, SecretKey secret)
+	@Override public void enable(KEY key, KT state, SecretKey secret)
 	{
-		if(secret!=null) {map.put(key.getId(),secret);}
+		map.put(key.getId(),secret);
+		mapState.put(key,state);
+	}
+	@Override public void disable(KEY key, KT state)
+	{
+		if(map.containsKey(key.getId())) {map.remove(key.getId());}
+		mapState.put(key,state);
+		
 	}
 
 	@Override public SecretKey getSecretKey(KEY key)
@@ -65,4 +72,7 @@ public class JeeslMemoryKeyStore<KEY extends JeeslIoCryptoKey<?,?>,
 		if(map.containsKey(key.getId())) {return map.get(key.getId());}
 		return null;
 	}
+
+	@Override public boolean isUnlocked(KEY key) {return map.containsKey(key.getId());}
+
 }

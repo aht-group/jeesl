@@ -200,11 +200,7 @@
         		<artifactId>jeesl-io-locale</artifactId>
         		<version>${project.version}</version>
 			</dependency>
-			<dependency>
-        		<groupId>org.jeesl</groupId>
-        		<artifactId>jeesl-io-crypto</artifactId>
-        		<version>${project.version}</version>
-        	</dependency>
+
 
         	<dependency>
         		<groupId>org.jeesl</groupId>

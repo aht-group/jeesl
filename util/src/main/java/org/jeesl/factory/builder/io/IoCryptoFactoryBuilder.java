@@ -4,7 +4,7 @@ import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.crypto.EjbCryptoKeyFactory;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyStatus;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyLifetime;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class IoCryptoFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 								KEY extends JeeslIoCryptoKey<USER,KS>,
-								KS extends JeeslIoCryptoKeyStatus<L,D,KS,?>,
+								KS extends JeeslIoCryptoKeyLifetime<L,D,KS,?>,
 								KT extends JeeslIoCryptoKeyState<L,D,KT,?>,
 								ST extends JeeslIoCryptoStoreType<L,D,ST,?>,
 								USER extends JeeslSimpleUser>

@@ -14,7 +14,9 @@ public interface JeeslIoCryptoStore <KEY extends JeeslIoCryptoKey<?,?>,
 	ST getType();
 	Map<KEY,KT> getMapState();
 	
-	void update(KEY key, KT sate, SecretKey secret);
+	void enable(KEY key, KT state, SecretKey secret);
+	void disable(KEY key, KT state);
 	
+	boolean isUnlocked(KEY key);
 	SecretKey getSecretKey(KEY key);	
 }

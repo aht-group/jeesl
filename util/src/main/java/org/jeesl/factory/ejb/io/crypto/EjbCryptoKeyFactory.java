@@ -6,13 +6,13 @@ import org.jeesl.factory.txt.io.crypto.TxtCryptoFactory;
 import org.jeesl.factory.txt.system.security.TxtUserFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyStatus;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyLifetime;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbCryptoKeyFactory <KEY extends JeeslIoCryptoKey<USER,KS>,
-								KS extends JeeslIoCryptoKeyStatus<?,?,KS,?>,
+								KS extends JeeslIoCryptoKeyLifetime<?,?,KS,?>,
 								USER extends JeeslSimpleUser>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbCryptoKeyFactory.class);

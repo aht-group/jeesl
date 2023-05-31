@@ -16,7 +16,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser,
-									STATUS extends JeeslIoCryptoKeyStatus<?,?,STATUS,?>>
+									STATUS extends JeeslIoCryptoKeyLifetime<?,?,STATUS,?>>
 						extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 								EjbWithPosition,JeeslWithStatus<STATUS>,EjbWithParentAttributeResolver
 								
@@ -35,6 +35,6 @@ public interface JeeslIoCryptoKey<USER extends JeeslSimpleUser,
 	String getIv();
 	void setIv(String iv);
 		
-	String getCipherVerification();
-	void setCipherVerification(String cipherVerification);
+	String getVerification();
+	void setVerification(String verification);
 }

@@ -36,7 +36,10 @@ public class TxtCryptoFactory
 //	    logger.info("IV Length:"+iv.length);
 	    return new IvParameterSpec(iv);
 	}
-
+	public static String encrypt(SecretKey key, IvParameterSpec iv, String clearText) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException
+	{
+		return TxtCryptoFactory.encrypt(TxtCryptoFactory.encrpytionAlgorithm, clearText, key, iv);
+	}
 	public static String encrypt(String algorithm, String input, SecretKey key, IvParameterSpec iv) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException
 	{
 		Cipher cipher = Cipher.getInstance(algorithm);
@@ -45,6 +48,10 @@ public class TxtCryptoFactory
 		return Base64.getEncoder().encodeToString(cipherText);
 	}
 	
+	public static String decrypt(SecretKey key, IvParameterSpec iv, String cipherText) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException
+	{
+		return TxtCryptoFactory.decrypt(TxtCryptoFactory.encrpytionAlgorithm, cipherText, key, iv);
+	}
 	public static String decrypt(String algorithm, String cipherText, SecretKey key, IvParameterSpec iv) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException
 	{
 		Cipher cipher = Cipher.getInstance(algorithm);

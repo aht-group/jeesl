@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyStatus;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyLifetime;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
@@ -18,7 +18,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("ioCryptoKeyLifetime")
 @EjbErNode(name="Status",category="system",subset="mail",level=3)
-public class IoCryptoKeyLifetime extends IoStatus implements JeeslIoCryptoKeyStatus<IoLang,IoDescription,IoCryptoKeyLifetime,IoGraphic>
+public class IoCryptoKeyLifetime extends IoStatus implements JeeslIoCryptoKeyLifetime<IoLang,IoDescription,IoCryptoKeyLifetime,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 	

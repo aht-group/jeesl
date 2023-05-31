@@ -13,7 +13,7 @@ import org.jeesl.controller.handler.system.io.crypto.JeeslMemoryKeyStore;
 import org.jeesl.factory.builder.io.IoCryptoFactoryBuilder;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyStatus;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyLifetime;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStore;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -23,7 +23,7 @@ import org.jeesl.model.ejb.system.security.AbstractSessionKeystore;
 
 public class JeeslIoCryptoFacadeBean <L extends JeeslLang,D extends JeeslDescription,
 										KEY extends JeeslIoCryptoKey<USER,KS>,
-										KS extends JeeslIoCryptoKeyStatus<L,D,KS,?>,
+										KS extends JeeslIoCryptoKeyLifetime<L,D,KS,?>,
 										KT extends JeeslIoCryptoKeyState<L,D,KT,?>,
 										ST extends JeeslIoCryptoStoreType<L,D,ST,?>,
 										USER extends JeeslSimpleUser>
@@ -54,6 +54,6 @@ public class JeeslIoCryptoFacadeBean <L extends JeeslLang,D extends JeeslDescrip
 			state = this.fByEnum(fbCrypto.getClassKeyState(),JeeslIoCryptoKeyState.Code.locked);
 		}
 		JeeslIoCryptoStore<KEY,KT,ST> memory = JeeslMemoryKeyStore.instance();
-		memory.update(key,state,secret);
+		memory.enable(key,state,secret);
 	}
 }

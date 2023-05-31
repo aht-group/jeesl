@@ -15,8 +15,8 @@ import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.system.security.user.SecurityUser;
 
-@Table(name="CryptoKey")
-@EjbErNode(name="CryptoKey",category="ts",subset="ioCrypto")
+@Table(name="IoCryptoKey")
+@EjbErNode(name="CryptoKey",category="ioCrypto",subset="ioCrypto")
 @Entity
 public class IoCryptoKey implements JeeslIoCryptoKey<SecurityUser,IoCryptoKeyLifetime>
 {
@@ -60,9 +60,9 @@ public class IoCryptoKey implements JeeslIoCryptoKey<SecurityUser,IoCryptoKeyLif
 	@Override public void setIv(String iv) {this.iv = iv;}
 	
 	@NotNull
-	private String cipherVerification;
-	@Override public String getCipherVerification() {return cipherVerification;}
-	@Override public void setCipherVerification(String cipherVerification) {this.cipherVerification = cipherVerification;}
+	private String verification;
+	@Override public String getVerification() {return verification;}
+	@Override public void setVerification(String verification) {this.verification = verification;}
 
 
 	@Override public boolean equals(Object object) {return (object instanceof IoCryptoKey) ? id == ((IoCryptoKey) object).getId() : (object == this);}

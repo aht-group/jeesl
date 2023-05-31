@@ -42,7 +42,7 @@ public abstract class AbstractSessionKeystore <KEY extends JeeslIoCryptoKey<?,?>
 		keys = new ArrayList<>();
 	}
 	
-	@Override public void update(KEY key, KT state, SecretKey secret)
+	@Override public void enable(KEY key, KT state, SecretKey secret)
 	{
 		if(!keys.contains(key)) {keys.add(key);}
 //		AbstractSessionKeyStore.getKeyFromPassword(mapPassword.get(key),key.getPwdSalt());
@@ -50,16 +50,22 @@ public abstract class AbstractSessionKeystore <KEY extends JeeslIoCryptoKey<?,?>
 		mapState.put(key,state);
 	}
 	
+	public void disable(KEY key, KT state)
+	{
+		mapState.put(key,state);
+		if(!keys.contains(key)) {keys.add(key);}
+		if(mapKey.containsKey(key)) {mapKey.remove(key);}
+	}
+	
+	@Override public boolean isUnlocked(KEY key)
+	{
+		return mapKey.containsKey(key);
+	}
 	
 	@Override public SecretKey getSecretKey(KEY key)
 	{
 		if(mapKey.containsKey(key)) {return mapKey.get(key);}
 		return null;
-	}
-	
-	public boolean isUnlocked(KEY key)
-	{
-		return mapKey.containsKey(key);
 	}
 	
 	public static SecretKey getKeyFromPassword(String password, String salt) throws NoSuchAlgorithmException, InvalidKeySpecException

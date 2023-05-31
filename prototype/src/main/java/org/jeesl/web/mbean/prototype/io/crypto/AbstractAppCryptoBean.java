@@ -9,7 +9,7 @@ import org.jeesl.interfaces.bean.system.io.crypto.JeeslIoCryptoBean;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;
-import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyStatus;
+import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyLifetime;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoStoreType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 public abstract class AbstractAppCryptoBean <L extends JeeslLang, D extends JeeslDescription,
 											KEY extends JeeslIoCryptoKey<USER,KS>,
-											KS extends JeeslIoCryptoKeyStatus<L,D,KS,?>,
+											KS extends JeeslIoCryptoKeyLifetime<L,D,KS,?>,
 											KT extends JeeslIoCryptoKeyState<L,D,KT,?>,
 											ST extends JeeslIoCryptoStoreType<L,D,ST,?>,
 											USER extends JeeslSimpleUser>

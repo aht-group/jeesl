@@ -61,8 +61,9 @@
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelKey()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveKey()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteKey()}" update=":#{cc.id}:grid" />
 					</f:facet>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<j:inputGrid>
 						<jtp:label entity="IoCryptoKey" code="record"/>
 						<jp:outputDate value="#{cc.attrs.ctrl.key.record}" withSecond="true"/>
 						
@@ -73,47 +74,40 @@
 						<p:selectOneMenu value="#{cc.attrs.ctrl.key.status}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.app.keyStatus}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
-					</p:panelGrid>
+						
+					</j:inputGrid>
 					
 					<p:separator/>
 					
-					<p:panelGrid columns="2" columnClasses="jeeslGrid40,jeeslGrid60">
+					<j:inputGrid>
 						
-						<jtp:label entity="IoCryptoKey" code="memoIv"/>
-						<h:outputText value="#{of:abbreviate(cc.attrs.ctrl.key.memoIv,20)}"/>
+						<jtp:label entity="IoCryptoKey" code="pwd"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.pwd}" />
 						
-						<jtp:label entity="IoCryptoKey" code="memoText"/>
-						<h:outputText value="#{of:abbreviate(cc.attrs.ctrl.key.memoText,20)}"/>
+						<jtp:label entity="IoCryptoKey" code="verification"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.memo}" rendered="#{cc.attrs.ctrl.key.id eq 0}"/>
+						<h:outputText value="#{cc.attrs.ctrl.memo}" rendered="#{cc.attrs.ctrl.key.id gt 0}"/>
 						
-						
-						<jtp:label entity="IoCryptoKey" code="clearVerification"/>
-						<jtp:inputText value="#{cc.attrs.ctrl.clearVerification}" rendered="#{cc.attrs.ctrl.key.id eq 0}"/>
-						<h:outputText value="#{cc.attrs.ctrl.clearVerification}" rendered="#{cc.attrs.ctrl.key.id gt 0}"/>
-					</p:panelGrid>
+					</j:inputGrid>
 					
 					<p:separator/>
 					
-					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
-						<jtp:inputText value="#{cc.attrs.ctrl.pwd}" entity="IoCryptoKey" code="pwd"/>
-					</p:panelGrid>
+					<ui:fragment rendered="#{not empty cc.attrs.ctrl.memo}">
+						<ui:repeat var="store" value="#{cc.attrs.ctrl.stores}">
+							<p:panelGrid columns="2" columnClasses="jeeslGrid40,jeeslGrid60">
+								<ui:fragment>
+									<jtp:symbolizer value="#{store.type}" marginRight="5"/>
+									<h:outputText value="#{store.type.name[localeCode].lang}"/>
+								</ui:fragment>
+								<p:inputSwitch value="#{cc.attrs.ctrl.mapUnlock[store]}"
+											offLabel="#{cc.attrs.app.stateLocked.name[localeCode].lang}"
+											onLabel="#{cc.attrs.app.stateUnlocked.name[localeCode].lang}">
+							            <p:ajax listener="#{cc.attrs.ctrl.toggleKey(store)}" update=":#{cc.id}:grid" />
+							    </p:inputSwitch>	
+							</p:panelGrid>
+						</ui:repeat>
+					</ui:fragment>
 					
-					<p:separator/>
-					
-					<ui:repeat var="store" value="#{cc.attrs.ctrl.stores}">
-						<p:panelGrid columns="2" columnClasses="jeeslGrid40">
-							<ui:fragment>
-								<jtp:symbolizer value="#{store.type}" marginRight="5"/>
-								<h:outputText value="#{store.type.name[localeCode].lang}"/>
-							</ui:fragment>
-							<ui:fragment>
-								<ui:repeat var="state" value="#{cc.attrs.app.keyState}">
-									<jp:icon value="#{state}" listener="#{cc.attrs.ctrl.activateState(store,state)}">
-									
-									</jp:icon>
-								</ui:repeat>
-							</ui:fragment>
-						</p:panelGrid>
-					</ui:repeat>
 				</p:panel>
 			</h:form>
 		</j:slot>

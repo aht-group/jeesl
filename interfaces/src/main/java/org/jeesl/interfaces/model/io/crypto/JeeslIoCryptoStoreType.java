@@ -8,10 +8,13 @@ import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
-
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 @DownloadJeeslData
 public interface JeeslIoCryptoStoreType <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
