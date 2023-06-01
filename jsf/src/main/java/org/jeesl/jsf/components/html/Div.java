@@ -1,6 +1,7 @@
 package org.jeesl.jsf.components.html;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
@@ -13,15 +14,25 @@ import org.jeesl.jsf.util.ComponentAttribute;
 @FacesComponent("org.jeesl.jsf.components.html.Div")
 public class Div extends UIPanel
 {	
-	private static enum Properties {renderChildren}
+	private enum Properties {renderChildren,style,styleClass}
 	
 	@Override public boolean getRendersChildren(){return true;}
 	
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException
 	{
+		Map<String,Object> map = super.getAttributes();
+		
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.startElement("div", this);
+		if(map.containsKey(Properties.style.toString()))
+		{
+			responseWriter.writeAttribute("style",map.get(Properties.style.toString()),null);
+		}
+		if(map.containsKey(Properties.styleClass.toString()))
+		{
+			responseWriter.writeAttribute("class",map.get(Properties.styleClass.toString()),null);
+		}
 	}
 
 	@Override

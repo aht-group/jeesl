@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class Slot extends UIPanel
 {
 	final static Logger logger = LoggerFactory.getLogger(Slot.class);
-	private static enum Properties {id,width,styleClass,renderChildren,renderChildrenIfEjb,renderChildrenIfEjbPersisted}
+	private enum Properties {id,width,styleClass,renderChildren,renderChildrenIfEjb,renderChildrenIfEjbPersisted}
 	
 	@Override public boolean getRendersChildren(){return true;}
 	
@@ -29,7 +29,7 @@ public class Slot extends UIPanel
 	@Override
 	public void encodeBegin(FacesContext context) throws IOException
 	{
-		Map<String,Object> map = getAttributes();
+		Map<String,Object> map = super.getAttributes();
 		
 		ResponseWriter responseWriter = context.getResponseWriter();
 		responseWriter.startElement("div", this);

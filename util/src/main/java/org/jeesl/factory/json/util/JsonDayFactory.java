@@ -164,7 +164,11 @@ public class JsonDayFactory
 	
 	public static Date toDate(JsonDay day)
 	{
-		return DateUtil.toDate(LocalDate.of(day.getYear(),day.getMonth(),day.getNr()));
+		return DateUtil.toDate(JsonDayFactory.toLocalDate(day));
+	}
+	public static LocalDate toLocalDate(JsonDay day)
+	{
+		return LocalDate.of(day.getYear(),day.getMonth(),day.getNr());
 	}
 	
 	public static List<Integer> toIntegerDayNr(List<JsonDay> days)
