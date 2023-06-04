@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-cms</artifactId>
-    		<scope>compile</scope>
+    		<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>

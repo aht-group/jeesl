@@ -26,7 +26,7 @@
 							
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectEvent()}" update=":#{cc.id}:grid"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectEvent()}" update=":#{cc.id}:grid" onclick="window.scrollTo(0,0);"/>
 					<p:column headerText="#{msg.jeeslAssetEventDate}">
 						<h:panelGroup styleClass="jeesl-nbsc">
 							<jtp:symbolizer value="#{e.status}" marginRight="5"/>

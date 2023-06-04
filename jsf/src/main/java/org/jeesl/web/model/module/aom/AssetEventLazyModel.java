@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
 import org.jeesl.jsf.util.JeeslLazyListHandler;
@@ -27,7 +27,7 @@ public class AssetEventLazyModel <ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 									EVENT extends JeeslAomEvent<?,ASSET,ETYPE,ESTATUS,?,USER,?>,
 									ETYPE extends JeeslAomEventType<?,?,ETYPE,?>,
 									ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>,
-									USER extends JeeslSimpleUser>
+									USER extends JeeslSecurityUser>
 					extends LazyDataModel<EVENT>
 {
 	final static Logger logger = LoggerFactory.getLogger(AssetEventLazyModel.class);

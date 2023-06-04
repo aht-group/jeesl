@@ -44,7 +44,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
@@ -79,7 +79,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
 										ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
 										M extends JeeslIoMarkup<MT>,
 										MT extends JeeslIoMarkupType<L,D,MT,?>,
-										USER extends JeeslSimpleUser,
+										USER extends JeeslSecurityUser,
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
@@ -116,7 +116,7 @@ public class JeeslAomAssetController <L extends JeeslLang, D extends JeeslDescri
     private TreeNode node; public TreeNode getNode() {return node;} public void setNode(TreeNode node) {this.node = node;}
 
     private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
-	private JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
+	private final JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
 
 //	private ASSET root;
     private ASSET asset; public ASSET getAsset() {return asset;} public void setAsset(ASSET asset) {this.asset = asset;}

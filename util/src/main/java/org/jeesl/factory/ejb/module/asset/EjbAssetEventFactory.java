@@ -5,8 +5,8 @@ import java.util.Date;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.company.JeeslAomCompany;
@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEvent;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ public class EjbAssetEventFactory<COMPANY extends JeeslAomCompany<?,?>,
 								ESTATUS extends JeeslAomEventStatus<?,?,ESTATUS,?>,
 								M extends JeeslIoMarkup<MT>,
 								MT extends JeeslIoMarkupType<?,?,MT,?>,
-								USER extends JeeslSimpleUser,
+								USER extends JeeslSecurityUser,
 								FRC extends JeeslFileContainer<?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAssetEventFactory.class);

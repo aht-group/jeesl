@@ -1,4 +1,4 @@
-package org.jeesl.controller.web.gc.module.aom;
+package org.jeesl.controller.web.g.module.aom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.cache.module.aom.JeeslAomCache;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAsset;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetStatus;
@@ -39,7 +39,7 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslAomMaintenanceController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
 										COMPANY extends JeeslAomCompany<REALM,SCOPE>,
 										SCOPE extends JeeslAomScope<L,D,SCOPE,?>,
@@ -65,14 +65,14 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 										ESTATUS extends JeeslAomEventStatus<L,D,ESTATUS,?>,
 										M extends JeeslIoMarkup<MT>,
 										MT extends JeeslIoMarkupType<L,D,MT,?>,
-										USER extends JeeslSimpleUser,
+										USER extends JeeslSecurityUser,
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable,SbToggleBean,SbDateSelectionBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslAomMaintenanceController.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslAomMaintenanceGwc.class);
 	
 	protected JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,UP> fAsset;
 	
@@ -92,19 +92,20 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 	private final List<EVENT> events; public List<EVENT> getEvents() {return events;}
 
 	private TenantIdentifier<REALM> identifier; public TenantIdentifier<REALM> getIdentifier() {return identifier;}
-	private JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
+	private final JeeslAomCacheKey<REALM,SCOPE> key; public JeeslAomCacheKey<REALM,SCOPE> getKey() {return key;}
 	private REALM realm; public REALM getRealm() {return realm;}
 	private RREF rref; public RREF getRref() {return rref;}
 	private MT markupType;
 	
 	private EVENT event; public EVENT getEvent() {return event;} public void setEvent(EVENT event) {this.event = event;}
 
-	public JeeslAomMaintenanceController(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset)
+	public JeeslAomMaintenanceGwc(AomFactoryBuilder<L,D,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,ALEVEL,EVENT,ETYPE,ESTATUS,M,MT,USER,FRC,UP> fbAsset)
 	{
 		super(fbAsset.getClassL(),fbAsset.getClassD());
 		this.fbAsset=fbAsset;
 		
 		uiHelper = new UiHelperAsset<>();
+		nnb = new NullNumberBinder();
 		
 		efEvent = fbAsset.ejbEvent();
 		
@@ -119,6 +120,7 @@ public class JeeslAomMaintenanceController <L extends JeeslLang, D extends Jeesl
 		sbDateHandler.initWeeks(0,4);
 		
 		events = new ArrayList<>();
+		key = new JeeslAomCacheKey<>();
 	}
 	
 	public <E extends Enum<E>> void postConstructAssetMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
