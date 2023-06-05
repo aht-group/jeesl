@@ -8,7 +8,7 @@
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
-		<composite:attribute name="bean" required="true"/>
+		<composite:attribute name="ctrl" required="true"/>
 		<composite:attribute name="withCode" required="false" default="true"/>
 		
 		<composite:attribute name="cache" required="false" default="#{appAomCacheBean}"/>
@@ -22,20 +22,20 @@
 				<p:panel id="pTree" header="#{msg.jeeslCmsDocumentStructure}" styleClass="jeesl-tree" >
 					<f:facet id="fActions" name="actions">
 						<p:outputPanel id="cActions">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAsset()}" update=":#{cc.id}:sAsset" tooltip="#{msg.jeeslTtAdd}" marginLeft="5" rendered="#{cc.attrs.bean.sbhView.selection.tree eq 'hierarchy'}"/>
-							<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}"/>
-							<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseTree()}" update="@form" rendered="#{cc.attrs.bean.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}"/>
-							<j:svg type="jeeslTreeExpandThree" listener="#{cc.attrs.bean.expandTree(3)}" update="@form" tooltip="#{msg.jeeslTtExpandThree}"/>
-							<j:svg type="jeeslTreeExpandTwo" listener="#{cc.attrs.bean.expandTree(2)}" update="@form" tooltip="#{msg.jeeslTtExpandTwo}"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addAsset()}" update=":#{cc.id}:sAsset" tooltip="#{msg.jeeslTtAdd}" marginLeft="5" rendered="#{cc.attrs.ctrl.sbhView.selection.tree eq 'hierarchy'}"/>
+							<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.ctrl.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}"/>
+							<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.ctrl.collapseTree()}" update="@form" rendered="#{cc.attrs.ctrl.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}"/>
+							<j:svg type="jeeslTreeExpandThree" listener="#{cc.attrs.ctrl.expandTree(3)}" update="@form" tooltip="#{msg.jeeslTtExpandThree}"/>
+							<j:svg type="jeeslTreeExpandTwo" listener="#{cc.attrs.ctrl.expandTree(2)}" update="@form" tooltip="#{msg.jeeslTtExpandTwo}"/>
 						</p:outputPanel>
 					</f:facet>
-					<p:tree id="tTree" value="#{cc.attrs.bean.tree}" var="node" 
-							selection="#{cc.attrs.bean.node}" selectionMode="single"
+					<p:tree id="tTree" value="#{cc.attrs.ctrl.tree}" var="node" 
+							selection="#{cc.attrs.ctrl.node}" selectionMode="single"
 			                draggable="true" droppable="true" dragdropScope="demo">
-			            <p:ajax event="dragdrop" listener="#{cc.attrs.bean.onDragDrop}" update=":#{cc.id}:sAsset"/>
-			            <p:ajax event="select" listener="#{cc.attrs.bean.onNodeSelect}" update=":#{cc.id}:sAsset"/>
-			            <p:ajax event="expand" listener="#{cc.attrs.bean.onNodeExpand}" update="@form:cActions" />
-						<p:ajax event="collapse" listener="#{cc.attrs.bean.onNodeCollapse}" update="@form:cActions"  />
+			            <p:ajax event="dragdrop" listener="#{cc.attrs.ctrl.onDragDrop}" update=":#{cc.id}:sAsset"/>
+			            <p:ajax event="select" listener="#{cc.attrs.ctrl.onNodeSelect}" update=":#{cc.id}:sAsset"/>
+			            <p:ajax event="expand" listener="#{cc.attrs.ctrl.onNodeExpand}" update="@form:cActions" />
+						<p:ajax event="collapse" listener="#{cc.attrs.ctrl.onNodeCollapse}" update="@form:cActions"  />
 			            <p:treeNode id="tn">
 			            	<jtp:symbolizer value="#{node.type1}" marginRight="5"/>
 			                <h:outputText id="otText" value="#{node.name}" />
@@ -47,66 +47,66 @@
 			</h:form>
 		</j:slot>
 		<j:slot id="sAsset" width="8">
-			<h:form id="fType" rendered="#{not empty cc.attrs.bean.asset}">
+			<h:form id="fType" rendered="#{not empty cc.attrs.ctrl.asset}">
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="AomAsset"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelAsset()}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveAsset()}"   update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteAsset()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.asset.id gt 0}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelAsset()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave"   listener="#{cc.attrs.ctrl.saveAsset()}"   update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteAsset()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.asset.id gt 0}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<j:inputGrid rendered="#{cc.attrs.withCode}">
 						<jtp:label entity="AomAsset" code="code"/>
-						<jtp:inputText value="#{cc.attrs.bean.asset.code}"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.asset.code}"/>
 					</j:inputGrid>
 					<j:inputGrid>
 						
 						<jtp:label entity="AomAsset" code="name"/>
-						<jtp:inputText value="#{cc.attrs.bean.asset.name}"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.asset.name}"/>
 						
 						<jtp:label entity="AomAsset" code="status"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.asset.status}" var="t" effect="fade" autoWidth="false" dynamic="true">
+						<p:selectOneMenu value="#{cc.attrs.ctrl.asset.status}" var="t" effect="fade" autoWidth="false" dynamic="true">
                         	<f:selectItems value="#{cc.attrs.cache.assetStatus}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
                         	<p:column><jtp:symbolizer value="#{t}"/></p:column>
 				            <p:column><h:outputText value="#{t.name[localeCode].lang}"/></p:column>
                         </p:selectOneMenu>
                         
                         <jtp:label entity="AomAsset" code="type1"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.asset.type1}" var="t" effect="fade" autoWidth="false">
-                        	<f:selectItems value="#{cc.attrs.cache.cachedType[cc.attrs.bean.key.typeNatural]}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.asset.type1}" var="t" effect="fade" autoWidth="false">
+                        	<f:selectItems value="#{cc.attrs.cache.cachedType[cc.attrs.ctrl.key.typeNatural]}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
                         	<p:column><jtp:symbolizer value="#{t}"/></p:column>
 				            <p:column><h:outputText value="#{t.name[localeCode].lang}"/></p:column>
                         </p:selectOneMenu>
  
                         <jtp:label entity="AomCompany" code="typeManufacturer"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.asset.manufacturer}" effect="fade" autoWidth="false">
+						<p:selectOneMenu value="#{cc.attrs.ctrl.asset.manufacturer}" effect="fade" autoWidth="false">
 							<f:selectItem itemLabel="--"/>
-                        	<f:selectItems value="#{cc.attrs.cache.cachedScopeCompanies[cc.attrs.bean.key.scopeManufacturer]}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
+                        	<f:selectItems value="#{cc.attrs.cache.cachedScopeCompanies[cc.attrs.ctrl.key.scopeManufacturer]}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
                         </p:selectOneMenu>
                         
                         <jtp:label entity="AomAsset" code="remark"/>
-                        <jtp:inputRemark value="#{cc.attrs.bean.asset.remark}"/>
+                        <jtp:inputRemark value="#{cc.attrs.ctrl.asset.remark}"/>
 					</j:inputGrid>
 				</p:panel>
 			</h:form>
-			<h:form id="fEvents" rendered="#{not empty cc.attrs.bean.asset}">
+			<h:form id="fEvents" rendered="#{not empty cc.attrs.ctrl.asset}">
 				<p:dataTable styleClass="jeesl-datatable"
-								var="e" value="#{cc.attrs.bean.lazyEvents}" lazy="true" draggableRows="false"
-								selection="#{cc.attrs.bean.event}" selectionMode="single" rowKey="#{e.id}"
-								paginator="true" rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+						var="e" value="#{cc.attrs.ctrl.lazyEvents}" lazy="true" draggableRows="false"
+						selection="#{cc.attrs.ctrl.event}" selectionMode="single" rowKey="#{e.id}"
+						paginator="true" rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslAssetEvents}">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addEvent()}" update=":#{cc.id}:fEvents :#{cc.id}:fEvent :#{cc.id}:pgFr"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addEvent()}" update=":#{cc.id}:fEvents :#{cc.id}:fEvent :#{cc.id}:pgFr"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectEvent()}" update=":#{cc.id}:sAsset"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectEvent()}" update=":#{cc.id}:sAsset"/>
 					<p:column headerText="#{msg.jeeslAssetEventStatus}">
 						<jtp:symbolizer value="#{e.status}" marginRight="5"/>
 						<jp:outputDate type="both" value="#{e.record}"/>
 					</p:column>
 					<p:column headerText="#{msg.jeeslAssetEventType}">
-						<f:facet name="header"><jp:thFilter handler="#{cc.attrs.bean.thfEventType}"/></f:facet>
+						<f:facet name="header"><jp:thFilter handler="#{cc.attrs.ctrl.thfEventType}"/></f:facet>
 						<jtp:symbolizer value="#{e.type}" marginRight="5"/>
 						<h:outputText value="#{e.type.name[localeCode].lang}"/>
 					</p:column>
@@ -122,72 +122,72 @@
 			   	</p:dataTable>
 			</h:form>
 			<h:form id="fEvent">
-				<p:panel id="pEvent" styleClass="jeesl-panel jeesl-editor" rendered="#{not empty cc.attrs.bean.event}">
+				<p:panel id="pEvent" styleClass="jeesl-panel jeesl-editor" rendered="#{not empty cc.attrs.ctrl.event}">
 					<f:facet name="header"><j:pHeader entity="AomEvent"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelEvent()}" update=":#{cc.id}:sAsset"/>
-						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveEvent()}"   update=":#{cc.id}:sAsset"/>
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteEvent()}" update=":#{cc.id}:sAsset" rendered="#{false and cc.attrs.bean.event.id gt 0}"/>
-						<j:svg type="jeeslRemove" listener="#{cc.attrs.bean.removeEvent()}" update=":#{cc.id}:sAsset" rendered="#{(cc.attrs.bean.event.id gt 0) and (cc.attrs.bean.event.assets.size() gt 1)}"/>
-						<j:svg type="jeeslClone"  listener="#{cc.attrs.bean.cloneEvent()}"  update=":#{cc.id}:fEvents :#{cc.id}:fEvent :#{cc.id}:pgFr" rendered="#{cc.attrs.bean.event.id gt 0}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelEvent()}" update=":#{cc.id}:sAsset"/>
+						<j:svg type="jeeslSave"   listener="#{cc.attrs.ctrl.saveEvent()}"   update=":#{cc.id}:sAsset"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteEvent()}" update=":#{cc.id}:sAsset" rendered="#{false and cc.attrs.ctrl.event.id gt 0}"/>
+						<j:svg type="jeeslRemove" listener="#{cc.attrs.ctrl.removeEvent()}" update=":#{cc.id}:sAsset" rendered="#{(cc.attrs.ctrl.event.id gt 0) and (cc.attrs.ctrl.event.assets.size() gt 1)}"/>
+						<j:svg type="jeeslClone"  listener="#{cc.attrs.ctrl.cloneEvent()}"  update=":#{cc.id}:fEvents :#{cc.id}:fEvent :#{cc.id}:pgFr" rendered="#{cc.attrs.ctrl.event.id gt 0}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<j:inputGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						<p:outputLabel value="#{msg.jeeslAsset}"/>
 						<ui:fragment>
-							<ui:repeat var="a" value="#{cc.attrs.bean.event.assets}">
+							<ui:repeat var="a" value="#{cc.attrs.ctrl.event.assets}">
 								<ui:fragment rendered="#{not empty a.parent.parent}">
 									<jtp:symbolizer value="#{a.parent.parent.type1}" marginRight="5"/>
-									<h:outputText value="#{a.parent.parent.name}" style="margin-right: 10px;" styleClass="#{(a.id eq cc.attrs.bean.asset.id) ? 'jeeslBold' : ' '}"/>
+									<h:outputText value="#{a.parent.parent.name}" style="margin-right: 10px;" styleClass="#{(a.id eq cc.attrs.ctrl.asset.id) ? 'jeeslBold' : ' '}"/>
 								</ui:fragment>
 								<ui:fragment rendered="#{not empty a.parent}">
 									<jtp:symbolizer value="#{a.parent.type1}" marginRight="5"/>
-									<h:outputText value="#{a.parent.name}" style="margin-right: 10px;" styleClass="#{(a.id eq cc.attrs.bean.asset.id) ? 'jeeslBold' : ' '}"/>
+									<h:outputText value="#{a.parent.name}" style="margin-right: 10px;" styleClass="#{(a.id eq cc.attrs.ctrl.asset.id) ? 'jeeslBold' : ' '}"/>
 								</ui:fragment>
 								<jtp:symbolizer value="#{a.type1}" marginRight="5"/>
-								<h:outputText value="#{a.name}" styleClass="#{(a.id eq cc.attrs.bean.asset.id) ? 'jeeslBold' : ' '}"/>
+								<h:outputText value="#{a.name}" styleClass="#{(a.id eq cc.attrs.ctrl.asset.id) ? 'jeeslBold' : ' '}"/>
 								<br/>
 							</ui:repeat>
 						</ui:fragment>
 						
 						<jtp:label entity="AomEvent" code="type"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.event.type}" effect="fade" autoWidth="false">
+						<p:selectOneMenu value="#{cc.attrs.ctrl.event.type}" effect="fade" autoWidth="false">
                         	<f:selectItems value="#{cc.attrs.cache.eventType}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
                         </p:selectOneMenu>   
                         
                         <jtp:label entity="AomEvent" code="status"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.event.status}" effect="fade" autoWidth="false">
+						<p:selectOneMenu value="#{cc.attrs.ctrl.event.status}" effect="fade" autoWidth="false">
                         	<f:selectItems value="#{cc.attrs.cache.eventStatus}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
                         </p:selectOneMenu>
                         
                         <jtp:label entity="AomEvent" code="record"/>
-						<jp:inputCalendar value="#{cc.attrs.bean.event.record}" pattern="#{appSettingsBean.patternDateMinute}"/>
+						<jp:inputCalendar value="#{cc.attrs.ctrl.event.record}" pattern="#{appSettingsBean.patternDateMinute}"/>
 						
 						<jtp:label entity="AomEvent" code="name"/>
-						<jtp:inputText value="#{cc.attrs.bean.event.name}"/>
+						<jtp:inputText value="#{cc.attrs.ctrl.event.name}"/>
 						
-						<p:outputLabel value="#{msg.jeeslAssetEventAmount}" rendered="#{cc.attrs.bean.uiHelper.showAmount}"/>
-                        <jtp:inputText value="#{cc.attrs.bean.nnb.a}" rendered="#{cc.attrs.bean.uiHelper.showAmount}"/>
+						<p:outputLabel value="#{msg.jeeslAssetEventAmount}" rendered="#{cc.attrs.ctrl.uiHelper.showAmount}"/>
+                        <jtp:inputText value="#{cc.attrs.ctrl.nnb.a}" rendered="#{cc.attrs.ctrl.uiHelper.showAmount}"/>
                         
-                        <p:outputLabel value="#{msg.jeeslAssetCompany}" rendered="#{cc.attrs.bean.uiHelper.showCompany}"/>
-                        <p:selectOneMenu value="#{cc.attrs.bean.event.company}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.uiHelper.showCompany}">
+                        <p:outputLabel value="#{msg.jeeslAssetCompany}" rendered="#{cc.attrs.ctrl.uiHelper.showCompany}"/>
+                        <p:selectOneMenu value="#{cc.attrs.ctrl.event.company}" effect="fade" autoWidth="false" rendered="#{cc.attrs.ctrl.uiHelper.showCompany}">
 							<f:selectItem itemLabel="--"/>	
-                        	<f:selectItems value="#{cc.attrs.bean.uiHelper.companies}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
+                        	<f:selectItems value="#{cc.attrs.ctrl.uiHelper.companies}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
                         </p:selectOneMenu>
 						                     
 					</j:inputGrid>
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
-						<jtp:inputMarkup value="#{cc.attrs.bean.event.markup}"/>
+						<jtp:inputMarkup value="#{cc.attrs.ctrl.event.markup}"/>
 					</p:panelGrid>
 				</p:panel>
 				<p:droppable for=":#{cc.id}:fEvent:pEvent" tolerance="touch">
-					<p:ajax listener="#{cc.attrs.bean.onDrop}" update="@form" />  
+					<p:ajax listener="#{cc.attrs.ctrl.onDrop}" update="@form" />  
 				</p:droppable>
 			</h:form>
 			<h:panelGroup id="pgFr" layout="block">
-				<jp:ioFrFiles handler="#{cc.attrs.bean.frh}" allowDelete="true" overlay="false" componentPrefix="#{cc.id}"
+				<jp:ioFrFiles handler="#{cc.attrs.ctrl.frh}" allowDelete="true" overlay="false" componentPrefix="#{cc.id}"
 								withCategory="true" mapCategory="#{cc.attrs.cache.mapUploadCategory}"
-								rendered="#{(not empty cc.attrs.bean.event) and (cc.attrs.bean.event.id gt 0) and (not empty cc.attrs.bean.frh)}"/>
+								rendered="#{(not empty cc.attrs.ctrl.event) and (cc.attrs.ctrl.event.id gt 0) and (not empty cc.attrs.ctrl.frh)}"/>
 			</h:panelGroup>
 		</j:slot>
 	</j:row>

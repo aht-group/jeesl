@@ -26,7 +26,7 @@
 							
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectEvent()}" update=":#{cc.id}:grid" onclick="window.scrollTo(0,0);"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectEvent()}" update=":#{cc.id}:grid" oncomplete="window.scrollTo(0,0);"/>
 					<p:column headerText="#{msg.jeeslAssetEventDate}">
 						<h:panelGroup styleClass="jeesl-nbsc">
 							<jtp:symbolizer value="#{e.status}" marginRight="5"/>
@@ -124,6 +124,32 @@
 						<jtp:inputMarkup value="#{cc.attrs.bean.event.markup}"/>
 					</p:panelGrid>
 				</p:panel>
+			</h:form>
+			<h:form id="fHistory" rendered="#{not empty cc.attrs.ctrl.event}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="e" value="#{cc.attrs.ctrl.history}" draggableRows="false"
+						paginator="true" rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslAssetEvents}">
+							
+						</j:dtHeader>
+					</f:facet>
+					<p:column headerText="#{msg.jeeslAssetEventStatus}">
+						<jtp:symbolizer value="#{e.status}" marginRight="5"/>
+						<jp:outputDate type="both" value="#{e.record}"/>
+					</p:column>
+					<p:column headerText="#{msg.jeeslAssetEventType}">
+						<f:facet name="header"><jp:thFilter handler="#{cc.attrs.ctrl.thfEventType}"/></f:facet>
+						<jtp:symbolizer value="#{e.type}" marginRight="5"/>
+						<h:outputText value="#{e.type.name[localeCode].lang}"/>
+					</p:column>
+					<p:column headerText="#{msg.jeeslAssetEventName}">
+						<jp:outputAmount value="#{e.name}"/>
+					</p:column>
+					<p:column headerText="#{msg.jeeslAssetCompany}">
+						<h:outputText value="#{e.company.code}"/>
+					</p:column>
+			   	</p:dataTable>
 			</h:form>
 		</j:slot>
 	</j:row>

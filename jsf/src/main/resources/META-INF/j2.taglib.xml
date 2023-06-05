@@ -50,6 +50,13 @@
             <resource-id>moduleAom/maintenance.xhtml</resource-id>
         </component>
 	</tag>
+	<tag>
+        <tag-name>gridAomAsset</tag-name>
+        <component>
+            <resource-id>moduleAom/asset.xhtml</resource-id>
+        </component>
+	</tag>
+	
 	
 	<tag>
         <tag-name>gridModuleNewsRegistry</tag-name>
