@@ -90,9 +90,9 @@ public abstract class AbstractAdminIoAttributePoolBean <L extends JeeslLang, D e
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
-		if(fbAttribute.getClassCategory().isAssignableFrom(c))
+		if(handler.equals(sbhCat))
 		{
-			reloadCriterias();
+			this.reloadCriterias();
 		}
 	}
 	

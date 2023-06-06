@@ -64,7 +64,7 @@ public class EjbAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDes
 	
 	public void converter(JeeslFacade facade, CRITERIA ejb)
 	{
-		if(ejb.getCategory()!=null) {ejb.setCategory(facade.find(fbAttribute.getClassCategory(),ejb.getCategory()));}
+//		if(ejb.getCategory()!=null) {ejb.setCategory(facade.find(fbAttribute.getClassCategory(),ejb.getCategory()));}
 		if(ejb.getCategory2()!=null) {ejb.setCategory2(facade.find(fbAttribute.getClassCat(),ejb.getCategory2()));}
 		if(ejb.getType()!=null) {ejb.setType(facade.find(fbAttribute.getClassType(),ejb.getType()));}
 	}

@@ -69,7 +69,7 @@ public class EjbAttributeSetFactory<L extends JeeslLang, D extends JeeslDescript
 	
 	public void converter(JeeslFacade facade, SET ejb)
 	{
-		if(ejb.getCategory()!=null) {ejb.setCategory(facade.find(fbAttribute.getClassCategory(),ejb.getCategory()));}
+//		if(ejb.getCategory()!=null) {ejb.setCategory(facade.find(fbAttribute.getClassCategory(),ejb.getCategory()));}
 		if(ejb.getCategory2()!=null) {ejb.setCategory2(facade.find(fbAttribute.getClassCat(),ejb.getCategory2()));}
 	}
 }

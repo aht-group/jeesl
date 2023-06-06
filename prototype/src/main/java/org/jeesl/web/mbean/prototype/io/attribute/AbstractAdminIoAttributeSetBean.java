@@ -91,7 +91,7 @@ public abstract class AbstractAdminIoAttributeSetBean <L extends JeeslLang, D ex
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
-		if(fbAttribute.getClassCategory().isAssignableFrom(c))
+		if(handler.equals(sbhCat))
 		{
 			reloadSets();
 		}
