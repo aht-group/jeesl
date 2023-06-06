@@ -28,6 +28,7 @@
 		<module>maven</module>
 		<module>prototype</module>
 		
+		<module>io-attribute</module>
 		<module>io-cms</module>
 		<module>io-crypto</module>
 		<module>io-label</module>

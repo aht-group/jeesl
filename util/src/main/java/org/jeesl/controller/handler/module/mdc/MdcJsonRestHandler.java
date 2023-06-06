@@ -104,7 +104,6 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 		jCollection.setValidUntil(eCollection.getValidUntil());
 //		jCollection.setTest3(new Date());
 		
-		
 		json.setCollection(jCollection);
 		
 		return json;

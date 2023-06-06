@@ -71,7 +71,6 @@ public class JsonAttributeSetFactory<L extends JeeslLang, D extends JeeslDescrip
 			}
 		}
 		
-		
 		return json;
 	}
 }
