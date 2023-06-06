@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractDmsBean <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										DMS extends JeeslIoDms<L,D,STORAGE,AS,DS,SECTION>,
 										STORAGE extends JeeslFileStorage<L,D,?,?,?>,
-										AS extends JeeslAttributeSet<L,D,?,?,?,?>,
+										AS extends JeeslAttributeSet<L,D,?,?,?>,
 										DS extends JeeslDomainSet<L,D,?>,
 										SECTION extends JeeslIoDmsSection<L,D,SECTION>,
 										F extends JeeslIoDmsDocument<L,SECTION,FC,AC>,

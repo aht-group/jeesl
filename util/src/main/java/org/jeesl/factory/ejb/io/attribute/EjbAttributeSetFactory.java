@@ -17,7 +17,7 @@ public class EjbAttributeSetFactory<L extends JeeslLang, D extends JeeslDescript
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-									SET extends JeeslAttributeSet<L,D,R,CAT,CATEGORY,ITEM>,
+									SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
 									ITEM extends JeeslAttributeItem<?,SET>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAttributeSetFactory.class);
@@ -27,21 +27,6 @@ public class EjbAttributeSetFactory<L extends JeeslLang, D extends JeeslDescript
 	public EjbAttributeSetFactory(IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,?,?,?,SET,ITEM,?,?> fbAttribute)
 	{       
         this.fbAttribute = fbAttribute;
-	}
-    
-	public SET build(CATEGORY category, Long refId)
-	{
-		SET ejb = null;
-		try
-		{
-			ejb = fbAttribute.getClassSet().newInstance();
-			ejb.setRefId(refId);
-			ejb.setCategory(category);
-		}
-		catch (InstantiationException e) {e.printStackTrace();}
-		catch (IllegalAccessException e) {e.printStackTrace();}
-		
-		return ejb;
 	}
 	
 	public <RREF extends EjbWithId> SET build(R realm, RREF rref, CAT category)
@@ -60,12 +45,26 @@ public class EjbAttributeSetFactory<L extends JeeslLang, D extends JeeslDescript
 		return ejb;
 	}
 	
-	public SET clone(SET source, String codeSuffix)
-	{
-		SET clone = this.build(source.getCategory(),source.getRefId());
-		clone.setCode(source.getCode()+codeSuffix);
-		return clone;
-	}
+//	public SET build1(CATEGORY category, Long refId)
+//	{
+//		SET ejb = null;
+//		try
+//		{
+//			ejb = fbAttribute.getClassSet().newInstance();
+//			ejb.setRefId(refId);
+//			ejb.setCategory(category);
+//		}
+//		catch (InstantiationException e) {e.printStackTrace();}
+//		catch (IllegalAccessException e) {e.printStackTrace();}
+//		
+//		return ejb;
+//	}
+//	public SET clone1(SET source, String codeSuffix)
+//	{
+//		SET clone = this.build1(source.getCategory(),source.getRefId());
+//		clone.setCode(source.getCode()+codeSuffix);
+//		return clone;
+//	}
 	
 	public void converter(JeeslFacade facade, SET ejb)
 	{

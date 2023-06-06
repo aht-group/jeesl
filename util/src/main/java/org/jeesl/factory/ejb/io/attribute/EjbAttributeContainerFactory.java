@@ -10,7 +10,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslWithAttributeContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbAttributeContainerFactory<SET extends JeeslAttributeSet<?,?,?,?,?,?>,
+public class EjbAttributeContainerFactory<SET extends JeeslAttributeSet<?,?,?,?,?>,
 											CONTAINER extends JeeslAttributeContainer<SET,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAttributeContainerFactory.class);

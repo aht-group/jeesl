@@ -14,7 +14,7 @@ public interface JeeslMdcCollection <R extends JeeslTenantRealm<?,?,R,?>,
 									
 									SCOPE extends JeeslMdcScope<?,?,R,SCOPE,?>,
 									STATUS extends JeeslMdcStatus<?,?,STATUS,?>,
-									AS extends JeeslAttributeSet<?,?,?,?,?,?>
+									AS extends JeeslAttributeSet<?,?,?,?,?>
 									>
 		extends Serializable,EjbSaveable,EjbRemoveable,
 				EjbWithName,

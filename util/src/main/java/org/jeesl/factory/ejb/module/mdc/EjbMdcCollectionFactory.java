@@ -15,7 +15,7 @@ public class EjbMdcCollectionFactory<R extends JeeslTenantRealm<?,?,R,?>,
 									COLLECTION extends JeeslMdcCollection<R,SCOPE,STATUS,AS>,
 									SCOPE extends JeeslMdcScope<?,?,R,SCOPE,?>,
 									STATUS extends JeeslMdcStatus<?,?,STATUS,?>,
-									AS extends JeeslAttributeSet<?,?,R,?,?,?>>
+									AS extends JeeslAttributeSet<?,?,R,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbMdcCollectionFactory.class);
 

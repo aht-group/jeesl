@@ -76,7 +76,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
 											ACRITERIA extends JeeslAttributeCriteria<L,D,R,ACAT,ACATEGORY,ATYPE,AOPTION>,
 											ATYPE extends JeeslStatus<L,D,ATYPE>,
 											AOPTION extends JeeslAttributeOption<L,D,ACRITERIA>,
-											ASET extends JeeslAttributeSet<L,D,R,ACAT,ACATEGORY,AITEM>,
+											ASET extends JeeslAttributeSet<L,D,R,ACAT,AITEM>,
 											AITEM extends JeeslAttributeItem<ACRITERIA,ASET>,
 											ACONTAINER extends JeeslAttributeContainer<ASET,ADATA>,
 											ADATA extends JeeslAttributeData<ACRITERIA,AOPTION,ACONTAINER>

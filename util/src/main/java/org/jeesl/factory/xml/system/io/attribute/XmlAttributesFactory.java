@@ -19,7 +19,7 @@ public class XmlAttributesFactory <L extends JeeslLang, D extends JeeslDescripti
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 									CRITERIA extends JeeslAttributeCriteria<L,D,?,CAT,CATEGORY,?,OPTION>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
-									SET extends JeeslAttributeSet<L,D,?,CAT,CATEGORY,ITEM>,
+									SET extends JeeslAttributeSet<L,D,?,CAT,ITEM>,
 									ITEM extends JeeslAttributeItem<CRITERIA,SET>,
 									DATA extends JeeslAttributeData<CRITERIA,OPTION,?>>
 {

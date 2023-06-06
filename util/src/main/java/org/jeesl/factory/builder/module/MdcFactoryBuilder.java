@@ -24,7 +24,7 @@ public class MdcFactoryBuilder<L extends JeeslLang,D extends JeeslDescription, L
 							
 							CDATA extends JeeslMdcData<COLLECTION,ACON>,
 							
-							ASET extends JeeslAttributeSet<?,?,R,?,?,?>,
+							ASET extends JeeslAttributeSet<?,?,R,?,?>,
 							ACON extends JeeslAttributeContainer<ASET,?>
 							>
 		extends AbstractFactoryBuilder<L,D>

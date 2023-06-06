@@ -52,7 +52,7 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 								CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,CATEGORY,TYPE,OPTION>,
 								TYPE extends JeeslStatus<L,D,TYPE>,
 								OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
-								ASET extends JeeslAttributeSet<L,D,R,CAT,CATEGORY,AITEM>,
+								ASET extends JeeslAttributeSet<L,D,R,CAT,AITEM>,
 								AITEM extends JeeslAttributeItem<CRITERIA,ASET>,
 								ACON extends JeeslAttributeContainer<ASET,ADATA>,
 								ADATA extends JeeslAttributeData<CRITERIA,OPTION,ACON>>

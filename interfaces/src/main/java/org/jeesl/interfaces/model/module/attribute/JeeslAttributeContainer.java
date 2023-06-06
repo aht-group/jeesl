@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslAttributeContainer <SET extends JeeslAttributeSet<?,?,?,?,?,?>,
+public interface JeeslAttributeContainer <SET extends JeeslAttributeSet<?,?,?,?,?>,
 											DATA extends JeeslAttributeData<?,?,?>>
 		extends Serializable,EjbRemoveable,EjbWithId,EjbSaveable
 {

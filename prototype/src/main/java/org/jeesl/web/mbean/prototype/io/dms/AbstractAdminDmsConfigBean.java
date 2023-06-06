@@ -39,7 +39,7 @@ public abstract class AbstractAdminDmsConfigBean <L extends JeeslLang, D extends
 													R extends JeeslTenantRealm<L,D,R,?>,
 													DMS extends JeeslIoDms<L,D,STORAGE,AS,DS,S>,
 													STORAGE extends JeeslFileStorage<L,D,?,?,?>,
-													AS extends JeeslAttributeSet<L,D,R,?,?,?>,
+													AS extends JeeslAttributeSet<L,D,R,?,?>,
 													DS extends JeeslDomainSet<L,D,?>,
 													S extends JeeslIoDmsSection<L,D,S>,
 													F extends JeeslIoDmsDocument<L,S,FC,AC>,

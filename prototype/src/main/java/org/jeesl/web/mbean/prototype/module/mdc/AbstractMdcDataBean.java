@@ -37,7 +37,7 @@ public abstract class AbstractMdcDataBean <L extends JeeslLang, D extends JeeslD
 								CDATA extends JeeslMdcData<COLLECTION,ACON>,
 								
 								ACRIT extends JeeslAttributeCriteria<L,D,R,?,?,?,?>,
-								ASET extends JeeslAttributeSet<L,D,R,?,?,AITEM>,
+								ASET extends JeeslAttributeSet<L,D,R,?,AITEM>,
 								AITEM extends JeeslAttributeItem<ACRIT,ASET>,
 								ACON extends JeeslAttributeContainer<ASET,ADATA>,
 								ADATA extends JeeslAttributeData<ACRIT,?,ACON>

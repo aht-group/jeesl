@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 public class AttributeSetComparator<CAT extends JeeslAttributeCategory<?,?,?,CAT,?>,
 									CATEGORY extends JeeslStatus<?,?,CATEGORY>,
-									SET extends JeeslAttributeSet<?,?,?,CAT,CATEGORY,?>>
+									SET extends JeeslAttributeSet<?,?,?,CAT,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(AttributeSetComparator.class);
 
@@ -39,7 +39,7 @@ public class AttributeSetComparator<CAT extends JeeslAttributeCategory<?,?,?,CAT
         public int compare(SET a, SET b)
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
-			  ctb.append(a.getCategory().getPosition(), b.getCategory().getPosition());
+			  ctb.append(a.getCategory2().getPosition(), b.getCategory2().getPosition());
 			  ctb.append(a.getPosition(), b.getPosition());
 			  return ctb.toComparison();
         }
