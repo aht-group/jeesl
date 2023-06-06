@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 
-public interface JeeslAttributeData <CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,?,OPTION>,
+public interface JeeslAttributeData <CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,OPTION>,
 							OPTION extends JeeslAttributeOption<?,?,CRITERIA>,
 							CONTAINER extends JeeslAttributeContainer<?,?>>
 		extends Serializable,EjbSaveable,EjbRemoveable,Cloneable,EjbWithParentAttributeResolver

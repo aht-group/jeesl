@@ -39,7 +39,7 @@ public abstract class AbstractAdminIoAttributeSetBean <L extends JeeslLang, D ex
 												R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 												CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 												CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-												CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,CATEGORY,TYPE,OPTION>,
+												CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
 												TYPE extends JeeslStatus<L,D,TYPE>,
 												OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
 												SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,

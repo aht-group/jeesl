@@ -16,7 +16,7 @@ public class EjbAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDes
 										R extends JeeslTenantRealm<L,D,R,?>,
 										CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-										CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,CATEGORY,TYPE,?>,
+										CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,?>,
 										TYPE extends JeeslStatus<L,D,TYPE>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAttributeCriteriaFactory.class);
@@ -29,14 +29,14 @@ public class EjbAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDes
 	}
     
 	@Deprecated
-	public CRITERIA build(CATEGORY category, TYPE type, long refId)
+	public CRITERIA build1(CATEGORY category, TYPE type, long refId)
 	{
 		CRITERIA ejb = null;
 		try
 		{
 			ejb = fbAttribute.getClassCriteria().newInstance();
 			ejb.setRefId(refId);
-			ejb.setCategory(category);
+//			ejb.setCategory(category);
 			ejb.setType(type);
 		}
 		catch (InstantiationException e) {e.printStackTrace();}

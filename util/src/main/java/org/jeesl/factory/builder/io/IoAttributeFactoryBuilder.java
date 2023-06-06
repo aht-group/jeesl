@@ -38,7 +38,7 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,CATEGORY,TYPE,OPTION>,
+									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
 									TYPE extends JeeslStatus<L,D,TYPE>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
 									SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,

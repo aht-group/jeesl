@@ -7,7 +7,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbAttributeOptionFactory<CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,?,OPTION>,
+public class EjbAttributeOptionFactory<CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,OPTION>,
 										OPTION extends JeeslAttributeOption<?,?,CRITERIA>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAttributeOptionFactory.class);

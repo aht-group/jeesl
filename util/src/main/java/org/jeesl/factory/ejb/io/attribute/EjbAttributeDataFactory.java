@@ -16,7 +16,7 @@ import org.jeesl.util.db.cache.EjbIdCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbAttributeDataFactory<CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,?,OPTION>,
+public class EjbAttributeDataFactory<CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,OPTION>,
 									OPTION extends JeeslAttributeOption<?,?,CRITERIA>,
 									CONTAINER extends JeeslAttributeContainer<?,DATA>,
 									DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>

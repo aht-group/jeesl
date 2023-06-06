@@ -36,18 +36,18 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslAttributePoolGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 						R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 						CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 						CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-						CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,CATEGORY,TYPE,OPTION>,
+						CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
 						TYPE extends JeeslStatus<L,D,TYPE>,
 						OPTION extends JeeslAttributeOption<L,D,CRITERIA>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslAttributePoolController.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslAttributePoolGwc.class);
 	
 	protected JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute;
 	protected JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute;
@@ -70,7 +70,7 @@ public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslD
 	protected RREF rref;
 	protected long refId;
 	
-	public JeeslAttributePoolController(IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute)
+	public JeeslAttributePoolGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute)
 	{
 		super(fbAttribute.getClassL(),fbAttribute.getClassD());
 		this.fbAttribute=fbAttribute;

@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
 public interface JeeslAttributeOption<L extends JeeslLang, D extends JeeslDescription,
-										CRITERIA extends JeeslAttributeCriteria<L,D,?,?,?,?,?>>
+										CRITERIA extends JeeslAttributeCriteria<L,D,?,?,?,?>>
 			extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 					EjbWithNonUniqueCode,EjbWithPosition,EjbWithPositionParent,
 					EjbWithLang<L>,EjbWithDescription<D>

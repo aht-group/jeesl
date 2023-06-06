@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbAttributeItemFactory<CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,?,?>,
+public class EjbAttributeItemFactory<CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,?>,
 									SET extends JeeslAttributeSet<?,?,?,?,ITEM>,
 									ITEM extends JeeslAttributeItem<CRITERIA,SET>>
 {
