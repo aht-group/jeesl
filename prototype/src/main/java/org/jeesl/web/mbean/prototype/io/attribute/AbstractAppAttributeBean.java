@@ -66,7 +66,13 @@ public abstract class AbstractAppAttributeBean <L extends JeeslLang, D extends J
 	
 	private final List<CATEGORY> categories;
 	@Override public List<CATEGORY> getCategories(){return categories;}
-	@Override public void reloadCategories() {categories.clear();categories.addAll(fAttribute.allOrderedPositionVisible(fbAttribute.getClassCategory()));}
+	@Override public void reloadCategories()
+	{
+		logger.warn("DEACTIVATED");
+		try {Thread.sleep(5000);} catch (InterruptedException e) {e.printStackTrace();}
+		categories.clear();
+//		categories.addAll(fAttribute.allOrderedPositionVisible(fbAttribute.getClassCategory()));
+	}
 	
 	private final List<TYPE> types;
 	@Override public List<TYPE> getTypes(){return types;}

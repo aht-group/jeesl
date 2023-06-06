@@ -100,7 +100,7 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 	@Override
 	public <RREF extends EjbWithId> List<CRITERIA> fAttributeCriteria(R realm, RREF rref, List<CAT> categories)
 	{
-		if(categories==null || categories.isEmpty()){return new ArrayList<CRITERIA>();}
+		if(categories==null || categories.isEmpty()) {return new ArrayList<CRITERIA>();}
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<CRITERIA> cQ = cB.createQuery(fbAttribute.getClassCriteria());

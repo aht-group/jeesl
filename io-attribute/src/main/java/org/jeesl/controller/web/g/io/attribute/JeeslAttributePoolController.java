@@ -1,4 +1,4 @@
-package org.jeesl.controller.web.io.attribute;
+package org.jeesl.controller.web.g.io.attribute;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.JeeslAttributeBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoAttributeFacade;
@@ -84,9 +85,10 @@ public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslD
 		criterias = new ArrayList<CRITERIA>();
 	}
 	
-	public void postConstruct(JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute,
+	public void postConstruct(JeeslLocaleProvider<LOC> lp,
+								JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute,
 								JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute,
-								JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, R realm)
+								JeeslFacesMessageBean bMessage, R realm)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.realm=realm;
@@ -98,8 +100,8 @@ public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslD
 	{
 		this.reset(true,true,true);
 		this.rref=rref;
-		reloadCategories();
-		reloadCriterias();
+		this.reloadCategories();
+		this.reloadCriterias();
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)
@@ -107,20 +109,20 @@ public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslD
 		logger.info(AbstractLogMessage.toggled(c));
 		if(fbAttribute.getClassCategory().isAssignableFrom(c))
 		{
-			reloadCriterias();
+			this.reloadCriterias();
 		}
 	}
 	
 	protected void reloadCategories()
 	{
-		logger.warn("Relaoding v");
 		sbhCat.clear();
-		if(realm!=null && rref!=null)
+		if(ObjectUtils.allNotNull(realm,rref))
 		{
 			List<CAT> list = fAttribute.all(fbAttribute.getClassCat(),realm,rref);
 			sbhCat.setList(list);
 		}
-		sbhCat.debug(true);
+		sbhCat.selectAll();
+		sbhCat.debug(false);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassCat(),sbhCat.getList()));}
 	}
 	
@@ -136,7 +138,11 @@ public class JeeslAttributePoolController <L extends JeeslLang, D extends JeeslD
 	protected void reloadCriterias()
 	{
 		criterias.clear();
-		if(realm!=null && rref!=null) {criterias.addAll(fAttribute.fAttributeCriteria(realm,rref,sbhCat.getSelected()));}
+		if(ObjectUtils.allNotNull(realm,rref))
+		{
+			logger.warn("Realm: "+realm.toString()+" RREF:"+rref);
+			criterias.addAll(fAttribute.fAttributeCriteria(realm,rref,sbhCat.getSelected()));
+		}
 //		else if(refId<0) {}
 //		else {criterias.addAll(fAttribute.fAttributeCriteria(sbhCategory.getSelected(),refId));}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassCriteria(),criterias));}

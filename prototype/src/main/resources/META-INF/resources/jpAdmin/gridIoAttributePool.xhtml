@@ -27,7 +27,7 @@
 					selection="#{cc.attrs.bean.criteria}" selectionMode="single" rowKey="#{c.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoAttributes}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.sbhCat.hasSome}"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.sbhCat.hasSome}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderCriterias()}" update="@form"/>
@@ -56,7 +56,7 @@
 				<p:panel id="pView" header="#{msg.jeeslIoAttribute}" rendered="#{not empty cc.attrs.bean.criteria}" styleClass="jeeslPanel">
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.resetCriteria()}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveCriteria()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.criteria.id gt 0}"/>
 					</f:facet>
 					<p:messages showDetail="true" autoUpdate="true" closable="true" />
@@ -113,7 +113,7 @@
 					<f:facet name="header"><j:pHeader entity="IoAttributeOption"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.resetOption()}" update=":#{cc.id}:sCriteria"/>
-						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveOption()}" update=":#{cc.id}:sCriteria" rendered="#{cc.attrs.bean.uiAllowSave}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveOption()}" update=":#{cc.id}:sCriteria"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteOption()}" update=":#{cc.id}:sCriteria" rendered="#{cc.attrs.bean.option.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">

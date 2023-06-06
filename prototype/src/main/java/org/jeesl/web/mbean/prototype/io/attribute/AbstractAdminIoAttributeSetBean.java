@@ -77,20 +77,11 @@ public abstract class AbstractAdminIoAttributeSetBean <L extends JeeslLang, D ex
 		super.postConstructAttribute(realm,bTranslation,bMessage,bAttribute,fAttribute);
 	}
 	
-//	@Deprecated
-//	protected void initAttributeSet1(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-//									JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
-//									JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
-//	{
-//		super.initAttribute(bTranslation,bMessage,bAttribute,fAttribute);
-//		reloadSets();
-//	}
-	
 	protected void updateRealm(RREF rref)
 	{
 		this.reset(true,true,true);
 		this.rref=rref;
-		reloadCategories();
+		this.reloadCategories();
 		
 		criterias.addAll(fAttribute.fAttributeCriteria(realm,rref,sbhCat.getSelected()));
 		logger.info("Criterias: "+realm.toString()+" "+rref.toString()+" "+criterias.size());

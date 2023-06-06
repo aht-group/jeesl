@@ -1,6 +1,7 @@
 package org.jeesl.controller.handler.module.mdc;
 
 import org.jeesl.api.facade.io.JeeslIoAttributeFacade;
+import org.jeesl.api.rest.rs.module.mdc.JeeslMdcRestInterface;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
@@ -55,6 +56,7 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 								AITEM extends JeeslAttributeItem<CRITERIA,ASET>,
 								ACON extends JeeslAttributeContainer<ASET,ADATA>,
 								ADATA extends JeeslAttributeData<CRITERIA,OPTION,ACON>>
+		implements JeeslMdcRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(MdcJsonRestHandler.class);
 	
@@ -159,5 +161,11 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 		
 		JsonMdcData result = new JsonMdcData();
 		return result;
+	}
+
+	@Override public JsonMdcData upload(JsonMdcData data)
+	{
+		logger.warn("NYI");
+		return null;
 	}
 }
