@@ -56,7 +56,16 @@ public class EjbStaffFactory <R extends JeeslSecurityRole<?,?,?,?,?,?,USER>,
 		return map;
 	}
     
-    public Map<USER,List<STAFF>> toMapUserStaff(List<STAFF> staffs)
+    public Map<USER,STAFF> toMapUserStaff(List<STAFF> staffs)
+	{
+		Map<USER,STAFF> map = new HashMap<>();
+		for(STAFF staff : staffs)
+		{
+			map.put(staff.getUser(),staff);
+		}
+		return map;
+	}
+    public Map<USER,List<STAFF>> toMapUserStaffs(List<STAFF> staffs)
 	{
 		Map<USER,List<STAFF>> map = new HashMap<>();
 		for(STAFF staff : staffs)
