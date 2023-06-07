@@ -2,11 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
-	
-		xmlns:aht="http://ahtutils.sourceforge.net/jsf"
-	xmlns:aup="http://ahtutils.sourceforge.net/prototype"
-	
-	xmlns:aupAdmin="http://ahtutils.sourceforge.net/prototype/admin"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 	
 	<composite:interface>
@@ -19,11 +14,12 @@
 	<j:row>
 		<j:slot id="sSets" width="5">
 			<h:form id="fSets">
-				<p:dataTable var="s" value="#{cc.attrs.bean.sets}" draggableRows="true"
-					selection="#{cc.attrs.bean.set}" selectionMode="single" rowKey="#{s.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="s" value="#{cc.attrs.bean.sets}" draggableRows="true"
+						selection="#{cc.attrs.bean.set}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoAttributeSets}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.sbhCat.hasSelected}"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addSet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttNew}" rendered="#{cc.attrs.bean.sbhCat.hasSelected}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderSets()}" update="@form"/>
@@ -40,10 +36,10 @@
 			   	</p:dataTable>
 			</h:form>
 			<h:form id="fSet">
-				<p:panel header="#{msg.jeeslIoAttributeSet}" rendered="#{not empty cc.attrs.bean.set}" styleClass="jeeslPanel">
+				<p:panel header="#{msg.jeeslIoAttributeSet}" rendered="#{not empty cc.attrs.bean.set}" styleClass="jeesl-panel">
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetSet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveSet()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.resetSet()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveSet()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteSet()}" update=":#{cc.id}:grid" rendered="#{(cc.attrs.bean.set.id gt 0) and (cc.attrs.bean.items.isEmpty())}" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
@@ -59,13 +55,14 @@
 				</p:panel>
 			</h:form>
 		</j:slot>
-		<aht:slot id="sItems" width="7">
+		<j:slot id="sItems" width="7">
 			<h:form id="fItems" rendered="#{(not empty cc.attrs.bean.set) and (cc.attrs.bean.set.id gt 0)}">
-				<p:dataTable var="i" value="#{cc.attrs.bean.items}" draggableRows="true"
+				<p:dataTable styleClass="jeesl-datatable"
+						var="i" value="#{cc.attrs.bean.items}" draggableRows="true"
 					selection="#{cc.attrs.bean.item}" selectionMode="single" rowKey="#{i.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoAttributeItems}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.ttNew}"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.ttNew}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderItems()}" update="@form"/>
@@ -102,10 +99,10 @@
 			   	</p:dataTable>
 			</h:form>
 			<h:form id="fItem">
-				<p:panel header="#{msg.jeeslIoAttributeItem}" rendered="#{not empty cc.attrs.bean.item}" styleClass="jeeslPanel">
+				<p:panel header="#{msg.jeeslIoAttributeItem}" rendered="#{not empty cc.attrs.bean.item}" styleClass="jeesl-panel">
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.jeeslTtCancel}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
+						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.ttSave}"/>
 						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.item.id gt 0}" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
@@ -134,7 +131,7 @@
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
-		</aht:slot>
+		</j:slot>
 	</j:row>
 </jp:grid>
 	</composite:implementation>

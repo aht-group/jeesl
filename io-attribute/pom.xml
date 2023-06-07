@@ -68,12 +68,12 @@
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-system-security</artifactId>
-    		<scope>compile</scope>
+    		<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-system-tenant</artifactId>
-    		<scope>compile</scope>
+    		<scope>provided</scope>
 		</dependency>
 	
 		<!-- JakartaEE -->

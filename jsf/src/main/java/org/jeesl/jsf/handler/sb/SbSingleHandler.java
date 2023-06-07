@@ -3,6 +3,7 @@ package org.jeesl.jsf.handler.sb;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -33,7 +34,8 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	private T selection; public T getSelection() {return selection;} public void setSelection(T selected) {this.selection = selected;}
 	private T previous;
 
-	public SbSingleHandler(Class<T> c, SbSingleBean bean){this(c,new ArrayList<T>(),bean);}
+	public SbSingleHandler(SbSingleBean bean) {this(null,new ArrayList<T>(),bean);}
+	public SbSingleHandler(Class<T> c, SbSingleBean bean) {this(c,new ArrayList<T>(),bean);}
 	public SbSingleHandler(Class<T> c, List<T> list, SbSingleBean bean)
 	{
 		this.c=c;
@@ -42,14 +44,19 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 		this.list = new ArrayList<T>();
 
 		if(list==null) {list=new ArrayList<T>();}
-		update(list);
-		try
+		this.update(list);
+		
+		if(Objects.nonNull(c))
 		{
-			previous = c.newInstance();
-			previous.setId(-1);
+			try
+			{
+				previous = c.newInstance();
+				previous.setId(-1);
+			}
+			catch (InstantiationException e) {e.printStackTrace();}
+			catch (IllegalAccessException e) {e.printStackTrace();}
 		}
-		catch (InstantiationException e) {e.printStackTrace();}
-		catch (IllegalAccessException e) {e.printStackTrace();}
+		
 	}
 	
 	public void cache(JeeslTree1Cache<T> cache1)
@@ -85,7 +92,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 			selection = null;
 			if(bean!=null){bean.selectSbSingle(null);}
 		}
-		else if(c.isAssignableFrom(item.getClass()))
+		else if(Objects.nonNull(c) && c.isAssignableFrom(item.getClass()))
 		{
 			if(selection!=null) {previous.setId(selection.getId());}
 			selection=(T)item;
@@ -186,6 +193,12 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	public <E extends Enum<E>> boolean isSelected(E code)
 	{
 		if(!isSelected()) {return false;}
+		if(Objects.nonNull(c))
+		{
+			logger.error("C not defined");
+			return false;
+		}
+		
 		if(c.isAssignableFrom(EjbWithCode.class))
 		{
 			EjbWithCode w = (EjbWithCode)selection;
@@ -219,7 +232,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	public <E extends Enum<E>> void setDefault(E code) {this.setDefault(code.toString());}
 	public <E extends Enum<E>> void setDefault(String code)
 	{
-		if(EjbWithCode.class.isAssignableFrom(c) || EjbWithNonUniqueCode.class.isAssignableFrom(c))
+		if(Objects.nonNull(c) && EjbWithCode.class.isAssignableFrom(c) || EjbWithNonUniqueCode.class.isAssignableFrom(c))
 		{
 			for(T t : list)
 			{

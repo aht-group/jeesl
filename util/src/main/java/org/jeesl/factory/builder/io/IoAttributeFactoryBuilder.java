@@ -49,7 +49,7 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 {
 	final static Logger logger = LoggerFactory.getLogger(IoAttributeFactoryBuilder.class);
 
-//	private final Class<CATEGORY> cCat; public Class<CATEGORY> getClassCategory() {return cCat;}
+	private final Class<R> cR; public Class<R> getClassRealm() {return cR;}
 	private final Class<CAT> cCategory; public Class<CAT> getClassCat() {return cCategory;}
 	private final Class<CRITERIA> cCriteria; public Class<CRITERIA> getClassCriteria() {return cCriteria;}
 	private final Class<TYPE> cType; public Class<TYPE> getClassType() {return cType;}
@@ -59,9 +59,10 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 	private final Class<CONTAINER> cContainer; public Class<CONTAINER> getClassContainer() {return cContainer;}
 	private final Class<DATA> cData; public Class<DATA> getClassData() {return cData;}
     
-	public IoAttributeFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<CAT> cCategory, final Class<CRITERIA> cCriteria, final Class<TYPE> cType, final Class<OPTION> cOption, final Class<SET> cSet, final Class<ITEM> cItem, final Class<CONTAINER> cContainer, final Class<DATA> cData)
+	public IoAttributeFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<R> cR, final Class<CAT> cCategory, final Class<CRITERIA> cCriteria, final Class<TYPE> cType, final Class<OPTION> cOption, final Class<SET> cSet, final Class<ITEM> cItem, final Class<CONTAINER> cContainer, final Class<DATA> cData)
 	{
 		super(cL,cD);
+		this.cR = cR;
 		this.cCategory=cCategory;
 //		this.cCat=cCat;
 		this.cCriteria=cCriteria;

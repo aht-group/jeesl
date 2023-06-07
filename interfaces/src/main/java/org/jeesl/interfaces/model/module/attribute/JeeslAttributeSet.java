@@ -29,12 +29,12 @@ public interface JeeslAttributeSet <L extends JeeslLang, D extends JeeslDescript
 //	CATEGORY getCategory();
 //	void setCategory(CATEGORY category);
 	
-	CAT getCategory2();
-	void setCategory2(CAT category2);
-	
 //	Long getRefId();
 //	void setRefId(Long refId);
 
+	CAT getCategory2();
+	void setCategory2(CAT category2);
+	
 	List<ITEM> getItems();
 	void setItems(List<ITEM> items);
 }

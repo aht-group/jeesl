@@ -27,23 +27,6 @@ public class EjbAttributeCriteriaFactory<L extends JeeslLang, D extends JeeslDes
 	{       
         this.fbAttribute = fbAttribute;
 	}
-    
-	@Deprecated
-	public CRITERIA build1(CATEGORY category, TYPE type, long refId)
-	{
-		CRITERIA ejb = null;
-		try
-		{
-			ejb = fbAttribute.getClassCriteria().newInstance();
-			ejb.setRefId(refId);
-//			ejb.setCategory(category);
-			ejb.setType(type);
-		}
-		catch (InstantiationException e) {e.printStackTrace();}
-		catch (IllegalAccessException e) {e.printStackTrace();}
-		
-		return ejb;
-	}
 	
 	public <RREF extends EjbWithId> CRITERIA build(R realm, RREF rref, CAT category, TYPE type)
 	{

@@ -24,23 +24,18 @@ public interface JeeslAttributeCriteria<L extends JeeslLang, D extends JeeslDesc
 										OPTION extends JeeslAttributeOption<L,D,?>>
 			extends Serializable,EjbWithId,
 					EjbSaveable,EjbRemoveable,
-					EjbWithNonUniqueCode,EjbWithPositionVisible,EjbWithPositionParent,
+					EjbWithNonUniqueCode,EjbWithPositionVisible,
+					EjbWithPositionParent,
 					EjbWithLang<L>,EjbWithDescription<D>,
 					JeeslWithTenantSupport<R>
 {
 	public enum Attributes{category,category2,refId,position,type}
-
-	
-//	CATEGORY getCategory();
-//	void setCategory(CATEGORY category);
 	
 	CAT getCategory2();
 	void setCategory2(CAT category2);
-	
-	
-	
-	Long getRefId();
-	void setRefId(Long refId);
+		
+//	Long getRefId();
+//	void setRefId(Long refId);
 	
 	TYPE getType();
 	void setType(TYPE type);
