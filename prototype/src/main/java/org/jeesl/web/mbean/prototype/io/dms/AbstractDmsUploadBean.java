@@ -87,15 +87,15 @@ R extends JeeslTenantRealm<L,D,R,?>,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractDmsUploadBean.class);	
 
-	private JeeslIoAttributeFacade<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute; 
+	private JeeslIoAttributeFacade<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute; 
 	private JeeslIoFrFacade<L,D,?,FSTORAGE,?,FENGINE,FCONTAINER,FMETA,FTYPE,?,?,?> fFr;
 	
-	private final IoAttributeFactoryBuilder<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fbAttribute;
+	private final IoAttributeFactoryBuilder<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fbAttribute;
 //	private final IoFileRepositoryFactoryBuilder<L,D,FSTORAGE,FENGINE,FCONTAINER,FMETA,FTYPE> fbFr;
 	
 	protected final SbSingleHandler<DMS> sbhDms; public SbSingleHandler<DMS> getSbhDms() {return sbhDms;}
 
-	private AttributeHandler<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> attributeHandler; public AttributeHandler<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> getAttributeHandler() {return attributeHandler;}
+	private AttributeHandler<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> attributeHandler; public AttributeHandler<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> getAttributeHandler() {return attributeHandler;}
 	private JeeslFileRepositoryHandler<LOC,FSTORAGE,FCONTAINER,FMETA> fileHandler; public JeeslFileRepositoryHandler<LOC,FSTORAGE,FCONTAINER,FMETA> getFileHandler() {return fileHandler;}
 
 	private List<FILE> files; public List<FILE> getFiles() {return files;} public void setFiles(List<FILE> files) {this.files = files;}
@@ -106,7 +106,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
 	private FILE file; public FILE getFile() {return file;} public void setFile(FILE file) {this.file = file;}
 
 	public AbstractDmsUploadBean(final IoDmsFactoryBuilder<L,D,LOC,DMS,FSTORAGE,S,FILE,VIEW,LAYER> fbDms,
-								final IoAttributeFactoryBuilder<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fbAttribute,
+								final IoAttributeFactoryBuilder<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fbAttribute,
 								final IoFileRepositoryFactoryBuilder<L,D,LOC,?,FSTORAGE,?,FENGINE,FCONTAINER,FMETA,FTYPE,?,?,?> fbFr)
 	{
 		super(fbDms);
@@ -118,8 +118,8 @@ R extends JeeslTenantRealm<L,D,R,?>,
 	protected void postConstructDmsUpload(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 								JeeslIoDmsFacade<L,D,LOC,DMS,FSTORAGE,ASET,DS,S,FILE,VIEW,FCONTAINER,ACONTAINER> fDms,
 								JeeslIoFrFacade<L,D,?,FSTORAGE,?,FENGINE,FCONTAINER,FMETA,FTYPE,?,?,?> fFr,
-								JeeslIoAttributeFacade<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute,
-								JeeslAttributeBean<L,D,R,ACAT,ACATEGORY,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> bAttribute,
+								JeeslIoAttributeFacade<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute,
+								JeeslAttributeBean<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> bAttribute,
 								JeeslFileRepositoryHandler<LOC,FSTORAGE,FCONTAINER,FMETA> fileHandler
 								)
 	{

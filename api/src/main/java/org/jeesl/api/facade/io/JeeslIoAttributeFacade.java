@@ -22,7 +22,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 public interface JeeslIoAttributeFacade <L extends JeeslLang, D extends JeeslDescription,
 										R extends JeeslTenantRealm<L,D,R,?>,
 										CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 										CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
 										TYPE extends JeeslStatus<L,D,TYPE>,
 										OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
@@ -34,13 +33,13 @@ public interface JeeslIoAttributeFacade <L extends JeeslLang, D extends JeeslDes
 {	
 	SET load(SET set);
 	
-	List<CRITERIA> fAttributeCriteria(List<CATEGORY> categories, long refId);
+//	List<CRITERIA> fAttributeCriteria(List<CATEGORY> categories, long refId);
 	<RREF extends EjbWithId> List<CRITERIA> fAttributeCriteria(R realm, RREF rref, List<CAT> categories);
 	
 	List<CRITERIA> fAttributeCriteria(SET set);
 	List<OPTION> fAttributeOption(SET set);
 	
-	List<SET> fAttributeSets(List<CATEGORY> categories, long refId);
+//	List<SET> fAttributeSets(List<CATEGORY> categories, long refId);
 	<RREF extends EjbWithId> List<SET> fAttributeSets(R realm, RREF rref, List<CAT> categories);
 	
 	List<DATA> fAttributeData(CONTAINER container);

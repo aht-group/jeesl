@@ -54,7 +54,7 @@ public abstract class AbstractAdminDmsConfigBean <L extends JeeslLang, D extends
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminDmsConfigBean.class);
 	
-	private final IoAttributeFactoryBuilder<L,D,?,?,?,?,?,?,AS,?,?,?> fbAttribute;
+	private final IoAttributeFactoryBuilder<L,D,?,?,?,?,?,AS,?,?,?> fbAttribute;
 	
 	private final EjbIoDmsFactory<DMS> efDms;
 	private final EjbIoDmsViewFactory<DMS,VIEW> efView;
@@ -68,7 +68,7 @@ public abstract class AbstractAdminDmsConfigBean <L extends JeeslLang, D extends
 	private VIEW dmsView; public VIEW getDmsView() {return dmsView;} public void setDmsView(VIEW dmsView) {this.dmsView = dmsView;}
 
 	public AbstractAdminDmsConfigBean(IoDmsFactoryBuilder<L,D,LOC,DMS,STORAGE,S,F,VIEW,LAYER> fbDms,
-										final IoAttributeFactoryBuilder<L,D,R,?,?,?,?,?,AS,?,?,?> fbAttribute)
+										final IoAttributeFactoryBuilder<L,D,R,?,?,?,?,AS,?,?,?> fbAttribute)
 	{
 		super(fbDms);
 		this.fbAttribute=fbAttribute;

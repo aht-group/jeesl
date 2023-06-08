@@ -19,7 +19,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 public interface JeeslAttributeBean<L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+//									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
 									TYPE extends JeeslStatus<L,D,TYPE>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
@@ -29,7 +29,6 @@ public interface JeeslAttributeBean<L extends JeeslLang, D extends JeeslDescript
 									DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
 	extends Serializable//,JeeslAttributeCriteriaCacheBean<CRITERIA,OPTION,SET>
 {	
-	List<CATEGORY> getCategories();
 	void reloadCategories();
 	
 	List<TYPE> getTypes();

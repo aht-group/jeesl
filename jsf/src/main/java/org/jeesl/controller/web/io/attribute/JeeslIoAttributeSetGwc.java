@@ -44,25 +44,22 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 												R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 												CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-												CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-												CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
-												TYPE extends JeeslStatus<L,D,TYPE>,
-												OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
+												
+												CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,?,?>,
+												
 												SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
-												ITEM extends JeeslAttributeItem<CRITERIA,SET>,
-												CONTAINER extends JeeslAttributeContainer<SET,DATA>,
-												DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
+												ITEM extends JeeslAttributeItem<CRITERIA,SET>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements SbSingleBean,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoAttributeSetGwc.class);
 	
-	private JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fAttribute;
-	private JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> bAttribute;
+	private JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fAttribute;
+	private JeeslAttributeBean<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> bAttribute;
 	
-	private final IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute;
-	private final EjbAttributeSetFactory<L,D,R,CAT,CATEGORY,SET,ITEM> efSet;
+	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fbAttribute;
+	private final EjbAttributeSetFactory<L,D,R,CAT,SET,ITEM> efSet;
 	private final EjbAttributeItemFactory<CRITERIA,SET,ITEM> efItem;
 	
 	private final SbSingleHandler<R> sbhRealm; public final SbSingleHandler<R> getSbhRealm() {return sbhRealm;}
@@ -78,7 +75,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	private final Comparator<SET> comparatorSet;
 	
-	public JeeslIoAttributeSetGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
+	public JeeslIoAttributeSetGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fbAttribute)
 	{
 		super(fbAttribute.getClassL(),fbAttribute.getClassD());
 		this.fbAttribute=fbAttribute;
@@ -90,14 +87,14 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 		sbhRref = new SbSingleHandler<>(this);
 		sbhCat = new SbMultiHandler<>(fbAttribute.getClassCat(),this);
 		
-		comparatorSet = new AttributeSetComparator<CAT,CATEGORY,SET>().factory(AttributeSetComparator.Type.position);
+		comparatorSet = new AttributeSetComparator<CAT,SET>().factory(AttributeSetComparator.Type.position);
 		criterias = new ArrayList<>();
 		sets = new ArrayList<>();
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp,
-										JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute,
-										JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
+										JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fAttribute,
+										JeeslAttributeBean<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> bAttribute,
 			
 										JeeslFacesMessageBean bMessage, R realm
 												)

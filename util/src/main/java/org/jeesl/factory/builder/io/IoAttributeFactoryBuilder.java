@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+									
 									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
 									TYPE extends JeeslStatus<L,D,TYPE>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
@@ -74,21 +74,21 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 		this.cData=cData;
 	}
 	
-	public EjbAttributeCriteriaFactory<L,D,R,CAT,CATEGORY,CRITERIA,TYPE> ejbCriteria(){return new EjbAttributeCriteriaFactory<>(this);}
+	public EjbAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE> ejbCriteria(){return new EjbAttributeCriteriaFactory<>(this);}
 	public EjbAttributeOptionFactory<CRITERIA,OPTION> ejbOption() {return new EjbAttributeOptionFactory<>(cOption);}
-	public EjbAttributeSetFactory<L,D,R,CAT,CATEGORY,SET,ITEM> ejbSet() {return new EjbAttributeSetFactory<>(this);}
+	public EjbAttributeSetFactory<L,D,R,CAT,SET,ITEM> ejbSet() {return new EjbAttributeSetFactory<>(this);}
 	public EjbAttributeItemFactory<CRITERIA,SET,ITEM> ejbItem() {return new EjbAttributeItemFactory<>(cItem);}
 	public EjbAttributeContainerFactory<SET,CONTAINER> ejbContainer() {return new EjbAttributeContainerFactory<SET,CONTAINER>(cContainer);}
 	public EjbAttributeDataFactory<CRITERIA,OPTION,CONTAINER,DATA> ejbData() {return new EjbAttributeDataFactory<CRITERIA,OPTION,CONTAINER,DATA>(cData);}
 	
-	public XmlAttributesFactory<L,D,CAT,CATEGORY,CRITERIA,OPTION,SET,ITEM,DATA> xmlAttributes(QueryAttribute query) {return new XmlAttributesFactory<>(query);}
+	public XmlAttributesFactory<L,D,CAT,CRITERIA,OPTION,SET,ITEM,DATA> xmlAttributes(QueryAttribute query) {return new XmlAttributesFactory<>(query);}
 	public XmlAttributeFactory<L,D,CRITERIA,OPTION,ITEM,DATA> xmlAttribute(QueryAttribute query) {return new XmlAttributeFactory<L,D,CRITERIA,OPTION,ITEM,DATA>(query);}
 	
-	public JsonAttributeDataFactory<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> jsonData(String localeCode, JsonAttributeData q){return new JsonAttributeDataFactory<>(localeCode,q);} 
+	public JsonAttributeDataFactory<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> jsonData(String localeCode, JsonAttributeData q){return new JsonAttributeDataFactory<>(localeCode,q);} 
 	
-	public Comparator<CRITERIA> cpCriteria(AttributeCriteriaComparator.Type type) {return (new AttributeCriteriaComparator<CAT,CATEGORY,CRITERIA>()).factory(type);}
+	public Comparator<CRITERIA> cpCriteria(AttributeCriteriaComparator.Type type) {return (new AttributeCriteriaComparator<CAT,CRITERIA>()).factory(type);}
 	
-	public AttributeHandler<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> handler(JeeslFacesMessageBean bMessage, JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute, JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute, AttributeBean<CONTAINER> bean)
+	public AttributeHandler<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> handler(JeeslFacesMessageBean bMessage, JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute, JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute, AttributeBean<CONTAINER> bean)
 	{
 		return new AttributeHandler<>(bMessage,fAttribute,bAttribute,this,bean);
 	}

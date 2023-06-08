@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AttributeCriteriaComparator<CAT extends JeeslAttributeCategory<?,?,?,CAT,?>,
-										CATEGORY extends JeeslStatus<?,?,CATEGORY>,
+										
 										CRITERIA extends JeeslAttributeCriteria<?,?,?,CAT,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(AttributeCriteriaComparator.class);
@@ -25,7 +25,7 @@ public class AttributeCriteriaComparator<CAT extends JeeslAttributeCategory<?,?,
     public Comparator<CRITERIA> factory(Type type)
     {
         Comparator<CRITERIA> c = null;
-        AttributeCriteriaComparator<CAT,CATEGORY,CRITERIA> factory = new AttributeCriteriaComparator<CAT,CATEGORY,CRITERIA>();
+        AttributeCriteriaComparator<CAT,CRITERIA> factory = new AttributeCriteriaComparator<CAT,CRITERIA>();
         switch (type)
         {
             case position: c = factory.new PositionComparator();break;

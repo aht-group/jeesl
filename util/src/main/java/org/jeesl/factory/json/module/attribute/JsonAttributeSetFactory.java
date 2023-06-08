@@ -34,7 +34,7 @@ public class JsonAttributeSetFactory<L extends JeeslLang, D extends JeeslDescrip
 	private final JsonAttributeSet q;
 	
 	private JeeslFacade facade;
-	private IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute;
+	private IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute;
 	
 	private JsonAttributeItemFactory<L,D,LOC,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM> jfItem;
 	
@@ -44,7 +44,7 @@ public class JsonAttributeSetFactory<L extends JeeslLang, D extends JeeslDescrip
 		if(q.getItems()!=null && !q.getItems().isEmpty()) {jfItem = new JsonAttributeItemFactory<>(localeCode,q.getItems().get(0));}
 	}
 	
-	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute)
+	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute)
 	{
 		this.facade=facade;
 		this.fbAttribute=fbAttribute;

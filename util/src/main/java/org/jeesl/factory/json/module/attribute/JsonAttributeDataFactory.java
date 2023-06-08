@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class JsonAttributeDataFactory<L extends JeeslLang, D extends JeeslDescription,
 										R extends JeeslTenantRealm<L,D,R,?>,
 										CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+										
 										CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
 										TYPE extends JeeslStatus<L,D,TYPE>,
 										OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
@@ -34,7 +34,7 @@ public class JsonAttributeDataFactory<L extends JeeslLang, D extends JeeslDescri
 	
 	private final JsonAttributeData q;
 	
-	private JsonAttributeCriteriaFactory<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM> jfCriteria;
+	private JsonAttributeCriteriaFactory<L,D,R,CAT,?,CRITERIA,TYPE,OPTION,SET,ITEM> jfCriteria;
 	private JsonAttributeOptionFactory<L,D,OPTION> jfOption;
 	private JsonAttributeOptionFactory<L,D,OPTION> jfOptions;
 	

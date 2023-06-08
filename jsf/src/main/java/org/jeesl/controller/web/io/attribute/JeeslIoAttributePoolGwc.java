@@ -40,7 +40,6 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 						R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 						CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-						CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 						CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
 						TYPE extends JeeslStatus<L,D,TYPE>,
 						OPTION extends JeeslAttributeOption<L,D,CRITERIA>>
@@ -50,12 +49,12 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoAttributePoolGwc.class);
 	
-	protected JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute;
-	protected JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute;
+	protected JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute;
+	protected JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute;
 	
-	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute;
+	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute;
 	
-	protected final EjbAttributeCriteriaFactory<L,D,R,CAT,CATEGORY,CRITERIA,TYPE> efCriteria;
+	protected final EjbAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE> efCriteria;
 	protected final EjbAttributeOptionFactory<CRITERIA,OPTION> efOption;
 	
 	private final SbSingleHandler<R> sbhRealm; public final SbSingleHandler<R> getSbhRealm() {return sbhRealm;}
@@ -71,7 +70,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	protected final Comparator<CRITERIA> cpCriteria;
 	protected long refId;
 	
-	public JeeslIoAttributePoolGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute)
+	public JeeslIoAttributePoolGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute)
 	{
 		super(fbAttribute.getClassL(),fbAttribute.getClassD());
 		this.fbAttribute=fbAttribute;
@@ -89,8 +88,8 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp,
-								JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute,
-								JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute,
+								JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute,
+								JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute,
 								JeeslFacesMessageBean bMessage, R realm)
 	{
 		super.postConstructWebController(lp,bMessage);

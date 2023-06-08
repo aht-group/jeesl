@@ -35,25 +35,24 @@ public abstract class AbstractAppAttributeBean <L extends JeeslLang, D extends J
 											ITEM extends JeeslAttributeItem<CRITERIA,SET>,
 											CONTAINER extends JeeslAttributeContainer<SET,DATA>,
 											DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
-					implements JeeslAttributeBean<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA>
+					implements JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppAttributeBean.class);
 
-	private JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
-	private final IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
+	private JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
+	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
 
-	public AbstractAppAttributeBean(IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
+	public AbstractAppAttributeBean(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
 	{
 		this.fbAttribute=fbAttribute;
-		categories = new ArrayList<CATEGORY>();
 		types = new ArrayList<TYPE>();
 		mapCriteria = new HashMap<SET,List<CRITERIA>>();
 		mapTableHeader = new HashMap<SET,List<CRITERIA>>();
 		mapOption = new HashMap<CRITERIA,List<OPTION>>();
 	}
 	
-	public void initSuper(JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
+	public void initSuper(JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
 	{
 		this.fAttribute=fAttribute;
 		
@@ -63,14 +62,12 @@ public abstract class AbstractAppAttributeBean <L extends JeeslLang, D extends J
 		reloadCriteria();
 		reloadOptions();
 	}
-	
-	private final List<CATEGORY> categories;
-	@Override public List<CATEGORY> getCategories(){return categories;}
+
 	@Override public void reloadCategories()
 	{
 		logger.warn("DEACTIVATED");
 		try {Thread.sleep(5000);} catch (InterruptedException e) {e.printStackTrace();}
-		categories.clear();
+
 //		categories.addAll(fAttribute.allOrderedPositionVisible(fbAttribute.getClassCategory()));
 	}
 	

@@ -16,15 +16,15 @@ import org.slf4j.LoggerFactory;
 public class EjbAttributeSetFactory<L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+									
 									SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
 									ITEM extends JeeslAttributeItem<?,SET>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbAttributeSetFactory.class);
 	
-	private final IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,?,?,?,SET,ITEM,?,?> fbAttribute;
+	private final IoAttributeFactoryBuilder<L,D,R,CAT,?,?,?,SET,ITEM,?,?> fbAttribute;
     
-	public EjbAttributeSetFactory(IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,?,?,?,SET,ITEM,?,?> fbAttribute)
+	public EjbAttributeSetFactory(IoAttributeFactoryBuilder<L,D,R,CAT,?,?,?,SET,ITEM,?,?> fbAttribute)
 	{       
         this.fbAttribute = fbAttribute;
 	}

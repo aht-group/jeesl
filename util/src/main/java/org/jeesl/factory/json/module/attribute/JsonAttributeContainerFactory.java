@@ -36,11 +36,11 @@ public class JsonAttributeContainerFactory<L extends JeeslLang, D extends JeeslD
 	final static Logger logger = LoggerFactory.getLogger(JsonAttributeContainerFactory.class);
 	
 	private JeeslFacade facade;
-	private IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
+	private IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
 
 	private final JsonAttributeContainer q;
 	
-	private JsonAttributeDataFactory<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> jfData;
+	private JsonAttributeDataFactory<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> jfData;
 	
 	public JsonAttributeContainerFactory(String localeCode, JsonAttributeContainer q)
 	{
@@ -52,7 +52,7 @@ public class JsonAttributeContainerFactory<L extends JeeslLang, D extends JeeslD
 //		if(q.getOptions()!=null && !q.getOptions().isEmpty()) {jfOption = new JsonAttributeOptionFactory<>(localeCode,q.getOptions().get(0));}
 	}
 	
-	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
+	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
 	{
 		this.facade=facade;
 		this.fbAttribute=fbAttribute;

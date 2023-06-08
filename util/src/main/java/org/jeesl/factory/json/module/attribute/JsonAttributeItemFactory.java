@@ -37,7 +37,7 @@ public class JsonAttributeItemFactory<L extends JeeslLang, D extends JeeslDescri
 		if(q.getCriteria()!=null) {jfCriteria = new JsonAttributeCriteriaFactory<>(localeCode,q.getCriteria());}
 	}
 	
-	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute)
+	public void lazy(JeeslFacade facade, IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,?,?> fbAttribute)
 	{
 		if(jfCriteria!=null) {jfCriteria.lazy(facade,fbAttribute);}
 	}

@@ -49,14 +49,14 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 										CONTAINER extends JeeslAttributeContainer<SET,DATA>,
 										DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
 					extends JeeslFacadeBean
-					implements JeeslIoAttributeFacade<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA>
+					implements JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoAttributeFacadeBean.class);
 	
-	private final IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
+	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
 	
-	public JeeslIoAttributeFacadeBean(EntityManager em, IoAttributeFactoryBuilder<L,D,R,CAT,CATEGORY,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
+	public JeeslIoAttributeFacadeBean(EntityManager em, IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
 	{
 		super(em);
 		this.fbAttribute=fbAttribute;
@@ -67,34 +67,6 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		set = em.find(fbAttribute.getClassSet(), set.getId());
 		set.getItems().size();
 		return set;
-	}
-	
-	@Override
-	public List<CRITERIA> fAttributeCriteria(List<CATEGORY> categories, long refId)
-	{
-		if(categories==null || categories.isEmpty()){return new ArrayList<CRITERIA>();}
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<CRITERIA> cQ = cB.createQuery(fbAttribute.getClassCriteria());
-		Root<CRITERIA> root = cQ.from(fbAttribute.getClassCriteria());
-		
-		Join<CRITERIA,CATEGORY> jCategory = root.join(JeeslAttributeCriteria.Attributes.category.toString());
-		predicates.add(jCategory.in(categories));
-		
-		if(refId>0)
-		{
-			Expression<Long> eRefId = root.get(JeeslAttributeCriteria.Attributes.refId.toString());
-			predicates.add(cB.equal(eRefId,refId));
-		}
-		
-		Path<Integer> pPosition = root.get(JeeslAttributeCriteria.Attributes.position.toString());
-		Path<Integer> pCategoryPosition = jCategory.get(JeeslAttributeCriteria.Attributes.position.toString());
-		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.orderBy(cB.asc(pCategoryPosition),cB.asc(pPosition));
-		cQ.select(root);
-
-		return em.createQuery(cQ).getResultList();
 	}
 	
 	@Override
@@ -150,33 +122,6 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
  			result.addAll(item.getCriteria().getOptions());
  		}
 		return result;
-	}
-	
-	@Override public List<SET> fAttributeSets(List<CATEGORY> categories, long refId)
-	{
-		if(categories==null || categories.isEmpty()){return new ArrayList<SET>();}
-		List<Predicate> predicates = new ArrayList<Predicate>();
-		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<SET> cQ = cB.createQuery(fbAttribute.getClassSet());
-		Root<SET> root = cQ.from(fbAttribute.getClassSet());
-		
-		Join<SET,CATEGORY> jCategory = root.join(JeeslAttributeSet.Attributes.category.toString());
-		predicates.add(jCategory.in(categories));
-		
-		if(refId>0)
-		{
-			Expression<Long> eRefId = root.get(JeeslAttributeSet.Attributes.refId.toString());
-			predicates.add(cB.equal(eRefId,refId));
-		}
-		
-		Path<Integer> pPosition = root.get(JeeslAttributeSet.Attributes.position.toString());
-		Path<Integer> pCategoryPosition = jCategory.get(JeeslAttributeSet.Attributes.position.toString());
-		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
-		cQ.orderBy(cB.asc(pCategoryPosition),cB.asc(pPosition));
-		cQ.select(root);
-
-		return em.createQuery(cQ).getResultList();
 	}
 	
 	@Override public <RREF extends EjbWithId> List<SET> fAttributeSets(R realm, RREF rref, List<CAT> categories)
