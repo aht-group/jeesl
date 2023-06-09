@@ -21,7 +21,7 @@
 	
 	<composite:implementation>
 		<ui:fragment rendered="#{cc.attrs.withPanel}">
-			<p:panel id="pQuestions" header="#{cc.attrs.handler.attributeSet.name[localeCode].lang}" styleClass="jeeslPanel">
+			<p:panel id="pQuestions" header="#{cc.attrs.handler.attributeSet.name[localeCode].lang}" styleClass="jeesl-panel">
 				<f:facet name="actions">
 					<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.handler.save()}" update="@form #{cc.attrs.update}" tooltip="#{msg.jeeslSurveyTtSaveSection}" rendered="#{cc.attrs.withSave}"/>
 					<j:icon type="jeeslIoAttributeCriteriaWithDescription" listener="#{cc.attrs.handler.toggleDescription()}" update="@form" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.withDescriptionToggle and cc.attrs.handler.showDescription}"/>

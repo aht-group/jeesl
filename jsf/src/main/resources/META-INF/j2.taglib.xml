@@ -70,13 +70,20 @@
             <resource-id>moduleTafu/dashboard.xhtml</resource-id>
         </component>
 	</tag>
+	
 	<tag>
-        <tag-name>gridModuleChecklistCheck</tag-name>
+        <tag-name>gridModuleClCheck</tag-name>
         <component>
             <resource-id>moduleCl/checklist.xhtml</resource-id>
         </component>
 	</tag>
-  
+	<tag>
+        <tag-name>gridModuleClTrack</tag-name>
+        <component>
+            <resource-id>moduleCl/tracklist.xhtml</resource-id>
+        </component>
+	</tag>
+	
 	<tag>
         <tag-name>gridSystemProperty</tag-name>
         <component>

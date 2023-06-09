@@ -17,11 +17,12 @@
 	<j:row>
 		<j:slot id="sActivities" width="12">
 			<h:form id="fTickets">
-				<p:dataTable var="d" value="#{cc.attrs.bean.datas}" draggableRows="false"
-								selection="#{cc.attrs.bean.data}" selectionMode="single" rowKey="#{d.id}">
+				<p:dataTable tyleClass="jeesl-datatable"
+						var="d" value="#{cc.attrs.bean.datas}" draggableRows="false"
+						selection="#{cc.attrs.bean.data}" selectionMode="single" rowKey="#{d.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="MdcData" code="listOf">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addActivity()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
+							<j:svg type="jeeslRemove" rendered="false" listener="#{cc.attrs.bean.addActivity()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:column>

@@ -41,6 +41,7 @@
 			         	<f:facet name="header"><jtp:label entity="IoAttributeCriteria"/></f:facet>
 			         	<jtp:symbolizer value="#{c.type}" marginRight="5"/>
 						<h:outputText value="#{c.name[localeCode].lang}"/>
+						<h:outputText value=" (#{c.nested.name[localeCode].lang})" rendered="#{cc.attrs.bean.criteria.type.code eq 'nested'}"/>
 			         </p:column>
 					<p:column styleClass="jeeslColumnCentered">  
 						<h:graphicImage library="gfx" rendered="#{c.allowEmpty}" name="#{appIconBean.icon12['jeeslIoAttributeEmpty']}"/>
@@ -58,7 +59,7 @@
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteCriteria()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.criteria.id gt 0}"/>
 					</f:facet>
 					<p:messages showDetail="true" autoUpdate="true" closable="true" />
-					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					<j:inputGrid>
 						
 						<jtp:label entity="IoAttributeCriteria" code="id"/>
 						<h:outputText value="#{cc.attrs.bean.criteria.id}"/>
@@ -68,19 +69,27 @@
 							<f:selectItems value="#{cc.attrs.bean.sbhCat.list}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
 						
-						<p:outputLabel value="#{msg.jeeslCode}"/>
+						<jtp:label entity="IoAttributeCriteria" code="code"/>
 						<p:inputText  value="#{cc.attrs.bean.criteria.code}" autocomplete="off"/>
-						<p:outputLabel value="#{msg.aupSecurityVisible}"/>
+						
+						<jtp:label entity="IoAttributeCriteria" code="visible"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.criteria.visible}"/>
 						
-						<p:outputLabel value="#{msg.jeeslIoAttributeAllowEmpty}"/>
+						<jtp:label entity="IoAttributeCriteria" code="allowEmpty"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.criteria.allowEmpty}" />
-						<p:outputLabel value="#{msg.jeeslType}"/>
+						
+						<jtp:label entity="IoAttributeCriteria" code="type"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.criteria.type}" effect="fade" >
 							<f:selectItems value="#{appAttributeBean.types}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
-							<p:ajax event="change" listener="#{cc.attrs.bean.changeCriteriaType()}" update=":#{cc.id}:fOptions :#{cc.id}:fOption"/>
+							<p:ajax event="change" listener="#{cc.attrs.bean.changeCriteriaType()}" update="@form :#{cc.id}:fOptions :#{cc.id}:fOption"/>
 						</p:selectOneMenu>
-					</p:panelGrid>
+					</j:inputGrid>
+					<j:inputGrid rendered="#{cc.attrs.bean.criteria.type.code eq 'nested'}">
+						<jtp:label entity="IoAttributeCriteria" code="nested"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.criteria.nested}" effect="fade" >
+							<f:selectItems value="#{cc.attrs.bean.sets}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+						</p:selectOneMenu>
+					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.bean.criteria}" withDescription="true"/>
 				</p:panel>
 			</h:form>

@@ -17,9 +17,9 @@ public class EjbChecklistFactory<R extends JeeslTenantRealm<?,?,R,?>,
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbChecklistFactory.class);
 	
-	private final ChecklistFactoryBuilder<?,?,R,CL,?,?> fbCl;
+	private final ChecklistFactoryBuilder<?,?,R,CL,?,?,?> fbCl;
 	
-    public EjbChecklistFactory(ChecklistFactoryBuilder<?,?,R,CL,?,?> fbCl)
+    public EjbChecklistFactory(ChecklistFactoryBuilder<?,?,R,CL,?,?,?> fbCl)
     {
         this.fbCl = fbCl;
     } 
@@ -29,9 +29,10 @@ public class EjbChecklistFactory<R extends JeeslTenantRealm<?,?,R,?>,
 		try
 		{
 			CL ejb = fbCl.getClassChecklist().newInstance();
+			EjbPositionFactory.next(ejb,list);
+			
 			ejb.setRealm(realm);
 			ejb.setRref(rref.getId());
-			EjbPositionFactory.next(ejb,list);
 			
 		    return ejb;
 		}

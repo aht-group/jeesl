@@ -17,8 +17,9 @@
 	<j:row>
 		<j:slot id="sActivities" width="7">
 			<h:form id="fTickets">
-				<p:dataTable var="a" value="#{cc.attrs.bean.activities}" draggableRows="false"
-								selection="#{cc.attrs.bean.activity}" selectionMode="single" rowKey="#{a.id}">
+				<p:dataTable styleClass="jeesl-datatable" 
+						var="a" value="#{cc.attrs.bean.activities}" draggableRows="false"
+						selection="#{cc.attrs.bean.activity}" selectionMode="single" rowKey="#{a.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="MdcCollection" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addActivity()}" update=":#{cc.id}:grid"/>
@@ -43,13 +44,13 @@
 		</j:slot>
 		<j:slot id="sActivity" width="5">
 			<h:form id="fTicket" rendered="#{not empty cc.attrs.bean.activity}">
-				<p:panel styleClass="jeeslPanel">
+				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="MdcCollection"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveActivity()}" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					<j:inputGrid>
 						
 						<jtp:label entity="MdcCollection" code="id"/>
 						<h:outputText value="#{cc.attrs.bean.activity.id}"/>
@@ -78,10 +79,8 @@
 						<jtp:label entity="MdcCollection" code="validUntil"/>
 						<jp:inputCalendar value="#{cc.attrs.bean.activity.validUntil}" />
 						
-					</p:panelGrid>
-					
+					</j:inputGrid>
 				</p:panel>
-				
 			</h:form>			
 		</j:slot>
 	</j:row>

@@ -87,7 +87,8 @@
 				    <p:column>  
 						<h:graphicImage rendered="#{i.tableHeader}" name="12/ui/system/io/attribute/table.png"  library="jeeslPrototypeGfx"/>
 				    </p:column>
-					<p:column>  
+					<p:column>
+						<jtp:symbolizer value="#{i.criteria.type}" marginRight="5"/>
 						<h:outputText value="#{i.criteria.name[localeCode].lang}"/>
 					</p:column>
 					<p:column>

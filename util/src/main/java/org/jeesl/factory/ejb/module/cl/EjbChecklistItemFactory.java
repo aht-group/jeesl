@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.module.cl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
@@ -16,9 +17,9 @@ public class EjbChecklistItemFactory<CL extends JeeslChecklist<?,?,?>,
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbChecklistItemFactory.class);
 	
-	private final ChecklistFactoryBuilder<?,?,?,CL,?,CI> fbCl;
+	private final ChecklistFactoryBuilder<?,?,?,CL,?,CI,?> fbCl;
 	
-    public EjbChecklistItemFactory(ChecklistFactoryBuilder<?,?,?,CL,?,CI> fbCl)
+    public EjbChecklistItemFactory(ChecklistFactoryBuilder<?,?,?,CL,?,CI,?> fbCl)
     {
         this.fbCl = fbCl;
     } 
@@ -30,6 +31,8 @@ public class EjbChecklistItemFactory<CL extends JeeslChecklist<?,?,?>,
 			CI ejb = fbCl.getClassChecklistItem().newInstance();
 			ejb.setChecklist(list);
 			EjbPositionFactory.next(ejb,items);
+			
+			ejb.setValidFrom(LocalDate.now());
 			
 		    return ejb;
 		}

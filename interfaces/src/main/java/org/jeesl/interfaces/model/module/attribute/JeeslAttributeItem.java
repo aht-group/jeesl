@@ -7,7 +7,11 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisibleParent;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslAttributeItem <CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,?>,
 									SET extends JeeslAttributeSet<?,?,?,?,?>>
 		extends Serializable,EjbWithId,EjbSaveable,EjbWithPositionVisibleParent,EjbRemoveable,EjbWithNonUniqueCode

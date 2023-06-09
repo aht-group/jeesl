@@ -12,7 +12,11 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslAttributeOption<L extends JeeslLang, D extends JeeslDescription,
 										CRITERIA extends JeeslAttributeCriteria<L,D,?,?,?,?>>
 			extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,

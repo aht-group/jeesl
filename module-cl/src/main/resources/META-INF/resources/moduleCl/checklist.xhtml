@@ -89,6 +89,10 @@
 							<h:outputText value="#{i.position}"/>
 						</p:column>
 						<p:column>
+							<f:facet name="header"><jtp:label entity="ClChecklistItem" code="validFrom"/></f:facet>
+							<jp:outputDate value="#{i.validFrom}"/>
+						</p:column>
+						<p:column>
 							<f:facet name="header"><jtp:label entity="ClChecklistItem" code="name"/></f:facet>
 							<h:outputText value="#{i.name[localeCode].lang}"/>
 						</p:column>

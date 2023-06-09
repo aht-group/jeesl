@@ -19,6 +19,7 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.model.module.cl.JeeslChecklist;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklistItem;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklistTopic;
+import org.jeesl.interfaces.model.module.cl.JeeslClTracklist;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -30,17 +31,17 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
     								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
     								CL extends JeeslChecklist<L,R,TO>,
     								TO extends JeeslChecklistTopic<L,?,R,TO,?>,
-    								CI extends JeeslChecklistItem<L,CL>
-    										>
+    								CI extends JeeslChecklistItem<L,CL>,
+    								TL extends JeeslClTracklist<L,R>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslClChecklistGwc.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslClTracklistGwc.class);
 	
 	private JeeslChecklistFacade<L,D,R,CL,TO> fCl;
 //
@@ -51,15 +52,11 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
     protected R realm;
     protected RREF rref; public RREF getRref() {return rref;}
 
+    private final List<TL> lists; public List<TL> getLists() {return lists;}
 
-
-    private final List<CL> lists; public List<CL> getLists() {return lists;}
-    private final List<CI> items; public List<CI> getItems() {return items;}
-
-	private CL list; public CL getList() {return list;} public void setList(CL list) {this.list = list;}
-	private CI item; public CI getItem() {return item;} public void setItem(CI item) {this.item = item;}
+	private TL list; public TL getList() {return list;} public void setList(TL list) {this.list = list;}
 	
-	public JeeslClChecklistGwc(ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?> fbCl)
+	public JeeslClTracklistGwc(ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?> fbCl)
 	{
 		super(fbCl.getClassL(),fbCl.getClassD());
 		this.fbCl=fbCl;
@@ -68,8 +65,6 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 		ejbChecklistItem = fbCl.ejbChecklistItem();
 		
 		lists = new ArrayList<>();
-		items = new ArrayList<>();
-		
 	}
 
 	public void postConstructChecklist(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage ,R realm,
@@ -89,7 +84,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	
 	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		reloadLists();
+		this.reloadLists();
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
@@ -97,45 +92,43 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 		// TODO Auto-generated method stub
 	}
 	
-	public void cancelList() {reset(false, true, true, true);}
-	public void cancelItem() {reset(false, false, false, true);}
-	private void reset(boolean rLists, boolean rList, boolean rItems, boolean rItem)
+	public void cancelList() {reset(false, true);}
+	public void cancelItem() {reset(false, false);}
+	private void reset(boolean rLists, boolean rList)
 	{
 		if(rLists) {lists.clear();}
 		if(rList) {list = null;}
-		if(rItems) {items.clear();}
-		if(rItem) {item = null;}
 	}
 	
-	public void reorderLists() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fCl,lists); this.reloadLists();}
-	public void reorderItems() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fCl,items); this.reloadItems();}
+//	public void reorderLists() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fCl,lists); this.reloadLists();}
+//	public void reorderItems() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fCl,items); this.reloadItems();}
 	
 	private void reloadLists()
 	{
-		this.reset(true,false,false,false);
-		lists.addAll(fCl.all(fbCl.getClassChecklist(),realm,rref));
+		this.reset(true,false);
+//		lists.addAll(fCl.all(fbCl.getClassChecklist(),realm,rref));
     }
 	
 	public void selectList()
 	{
-		this.reset(false, false, true, true);
+		this.reset(false, false);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(list));}
 		list = efLang.persistMissingLangs(fCl, lp.getLocales(),list);
-		this.reloadItems();
+//		this.reloadItems();
 	}
 	
 	public void addList()
 	{
-		this.reset(false, true, true, true);
+		this.reset(false, true);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbCl.getClassChecklist()));}
-		list = ejbChecklist.build(realm, rref, lists);
-		list.setName(efLang.buildEmpty(lp.getLocales()));
+//		list = ejbChecklist.build(realm, rref, lists);
+//		list.setName(efLang.buildEmpty(lp.getLocales()));
 	}
 	
 	public void saveList() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(list));}
-		ejbChecklist.converter(fCl,list);
+//		ejbChecklist.converter(fCl,list);
 		list = fCl.save(list);
 		this.reloadLists();
 	}
@@ -144,44 +137,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(list));}
 		fCl.rm(list);
-		this.reset(false, true, true, true);
+		this.reset(false, true);
 		this.reloadLists();
-	}
-	
-	
-	private void reloadItems()
-	{
-		this.reset(false,false,true,false);
-		items.addAll(fCl.allForParent(fbCl.getClassChecklistItem(),list));
-    }
-	
-	public void selectItem()
-	{
-		this.reset(false, false, false, false);
-		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(item));}
-		item = efLang.persistMissingLangs(fCl, lp.getLocales(),item);
-	}
-	
-	public void addItem()
-	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbCl.getClassChecklistItem()));}
-		item = ejbChecklistItem.build(list,items);
-		item.setName(efLang.buildEmpty(lp.getLocales()));
-	}
-	
-	public void saveItem() throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(item));}
-		ejbChecklistItem.converter(fCl,item);
-		item = fCl.save(item);
-		this.reloadItems();
-	}
-	
-	public void deleteItem() throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(item));}
-		fCl.rm(item);
-		this.reset(false, false, false, true);
-		this.reloadItems();
 	}
 }

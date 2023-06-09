@@ -23,6 +23,7 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -42,17 +43,18 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 						CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 						CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
 						TYPE extends JeeslStatus<L,D,TYPE>,
-						OPTION extends JeeslAttributeOption<L,D,CRITERIA>>
+						OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
+						SET extends JeeslAttributeSet<L,D,R,CAT,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements SbSingleBean,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoAttributePoolGwc.class);
 	
-	protected JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute;
-	protected JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute;
+	protected JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fAttribute;
+	protected JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute;
 	
-	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute;
+	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fbAttribute;
 	
 	protected final EjbAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE> efCriteria;
 	protected final EjbAttributeOptionFactory<CRITERIA,OPTION> efOption;
@@ -62,6 +64,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	private final SbMultiHandler<CAT> sbhCat; public SbMultiHandler<CAT> getSbhCat() {return sbhCat;}
 	
 	private final List<CRITERIA> criterias; public List<CRITERIA> getCriterias() {return criterias;}
+	private final List<SET> sets; public List<SET> getSets() {return sets;}
 	private List<OPTION> options; public List<OPTION> getOptions() {return options;}
 
 	private CRITERIA criteria; public CRITERIA getCriteria() {return criteria;} public void setCriteria(CRITERIA criteria) {this.criteria = criteria;}
@@ -70,7 +73,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	protected final Comparator<CRITERIA> cpCriteria;
 	protected long refId;
 	
-	public JeeslIoAttributePoolGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fbAttribute)
+	public JeeslIoAttributePoolGwc(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fbAttribute)
 	{
 		super(fbAttribute.getClassL(),fbAttribute.getClassD());
 		this.fbAttribute=fbAttribute;
@@ -84,12 +87,13 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 		sbhRref = new SbSingleHandler<>(this);
 		sbhCat = new SbMultiHandler<>(fbAttribute.getClassCat(),this);
 		
-		criterias = new ArrayList<CRITERIA>();
+		criterias = new ArrayList<>();
+		sets = new ArrayList<>();
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp,
-								JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> fAttribute,
-								JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,?,?,?,?> bAttribute,
+								JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fAttribute,
+								JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute,
 								JeeslFacesMessageBean bMessage, R realm)
 	{
 		super.postConstructWebController(lp,bMessage);
@@ -109,6 +113,9 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 		
 		this.reloadCategories();
 		this.reloadCriterias();
+		
+		sets.clear();
+		sets.addAll(fAttribute.fAttributeSets(sbhRealm.getSelection(),sbhRref.getSelection(),sbhCat.getSelected()));
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)

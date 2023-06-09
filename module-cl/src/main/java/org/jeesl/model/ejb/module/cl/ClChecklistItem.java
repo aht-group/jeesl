@@ -1,5 +1,6 @@
 package org.jeesl.model.ejb.module.cl;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -22,7 +23,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklistItem;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoLang;
-import org.jeesl.model.ejb.system.tenant.TenantRealm;
 
 @Table(name="ClChecklistItem")
 @EjbErNode(name="Checklist",category="tafu",subset="moduleTafu")
@@ -50,7 +50,11 @@ public class ClChecklistItem implements JeeslChecklistItem<IoLang,ClChecklist>
 	private boolean visible;
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
-
+	
+	private LocalDate validFrom;
+	@Override public LocalDate getValidFrom() {return validFrom;}
+	@Override public void setValidFrom(LocalDate validFrom) {this.validFrom = validFrom;}
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="ClChecklistItemJtLang",joinColumns={@JoinColumn(name="item_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	@MapKey(name="lkey")
