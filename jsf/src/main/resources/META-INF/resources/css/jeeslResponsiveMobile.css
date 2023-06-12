@@ -257,6 +257,8 @@ html, body, .ui-widget {
       display: list-item;
       height: 15px;
       width: 100%; }
+    .jeesl-header .jeesl-dropdown-list:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item:hover:after {
+      border-bottom-width: 3px; }
     .jeesl-header .jeesl-dropdown-list:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item > .jeesl-dropdown-item-label {
       height: 84px;
       line-height: 84px; }
@@ -395,6 +397,8 @@ html, body, .ui-widget {
       display: list-item;
       height: 15px;
       width: 100%; }
+    .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item:hover:after {
+      border-bottom-width: 3px; }
     .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item > .jeesl-dropdown-item-label {
       height: 84px;
       line-height: 84px; }
@@ -511,6 +515,8 @@ html, body, .ui-widget {
         display: list-item;
         height: 15px;
         width: 100%; }
+      .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item:hover:after {
+        border-bottom-width: 3px; }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item > .jeesl-dropdown-item-label {
         height: 84px;
         line-height: 84px; }
@@ -929,12 +935,10 @@ html, body, .ui-widget {
 .jeesl-content-container .jeesl-grid-12, .jeesl-overlay-container .jeesl-grid-12 {
   width: calc(100% - 10px); }
 
-.jeesl-content .jeesl-content-container .jeesl-row {
-  display: block; }
-  .jeesl-content .jeesl-content-container .jeesl-row .jeesl-grid {
-    margin-top: 10px; }
-    .jeesl-content .jeesl-content-container .jeesl-row .jeesl-grid.jeesl-grid-image {
-      max-width: 30%; }
+.jeesl-content .jeesl-content-container .jeesl-row .jeesl-grid {
+  margin-top: 10px; }
+  .jeesl-content .jeesl-content-container .jeesl-row .jeesl-grid.jeesl-grid-image {
+    max-width: 30%; }
 .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor {
   margin-left: -15px;
   margin-right: -15px; }
