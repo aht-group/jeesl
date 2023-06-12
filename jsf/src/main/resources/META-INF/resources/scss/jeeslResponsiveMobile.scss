@@ -1261,15 +1261,11 @@ html, body, .ui-widget {
 }
 
 .jeesl-content .jeesl-content-container {
-	.jeesl-row {
-//		display: block;
+	.jeesl-row .jeesl-grid {
+		margin-top: $regular-spacing;
 		
-		.jeesl-grid {
-			margin-top: $regular-spacing;
-			
-			&.jeesl-grid-image {
-				max-width: 30%;
-			}
+		&.jeesl-grid-image {
+			max-width: 30%;
 		}
 	}
 	

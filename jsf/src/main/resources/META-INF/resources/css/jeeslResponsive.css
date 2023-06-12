@@ -6713,8 +6713,8 @@ body, .ui-widget {
       .ui-dialog .ui-dialog-titlebar {
         pointer-events: none; } }
     .ui-dialog .ui-dialog-titlebar > .ui-dialog-title {
+      align-items: center;
       display: flex;
-      height: 100%;
       flex-grow: 1; }
       .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-title {
         font-weight: 700;

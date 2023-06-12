@@ -761,8 +761,8 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 		
 		> .ui-dialog-title {
+			align-items: center;
 			display: flex;
-			height: 100%;
 			flex-grow: 1;
 			
 			.ui-dialog-title {
@@ -3500,10 +3500,6 @@ body, .ui-widget {
 			align-items: stretch;
 			display: flex;
 			flex-wrap: wrap;
-			
-			@media (max-width: 768px) {
-//				display: block;
-			}
 			
 			&.jeesl-row-rtl {
 				flex-flow: row-reverse wrap-reverse;
