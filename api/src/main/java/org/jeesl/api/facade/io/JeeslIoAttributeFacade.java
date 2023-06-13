@@ -13,6 +13,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -22,8 +23,8 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 public interface JeeslIoAttributeFacade <L extends JeeslLang, D extends JeeslDescription,
 										R extends JeeslTenantRealm<L,D,R,?>,
 										CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-										CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
-										TYPE extends JeeslStatus<L,D,TYPE>,
+										CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
+										TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 										OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
 										SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
 										ITEM extends JeeslAttributeItem<CRITERIA,SET>,

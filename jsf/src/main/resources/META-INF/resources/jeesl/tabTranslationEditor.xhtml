@@ -18,7 +18,8 @@
 	</composite:interface>
         
   <composite:implementation>
-  	<p:tabView id="tabViewKey" var="t" value="#{cc.attrs.keys}" rendered="#{empty cc.attrs.locales}" styleClass="jeesl-tabs">  
+  	<p:tabView id="tabViewKey" styleClass="jeesl-tabs"
+  			var="t" value="#{cc.attrs.keys}" rendered="#{empty cc.attrs.locales}" >  
   		<p:tab title="#{t}">
   			<j:inputGrid>
 	  			<c:if test="#{cc.attrs.withName}">
@@ -33,7 +34,8 @@
   			<composite:insertChildren/>
   		</p:tab>  
   	</p:tabView> 
-  	<p:tabView id="tabViewLocale" var="l" value="#{cc.attrs.locales}" rendered="#{not empty cc.attrs.locales}">  
+  	<p:tabView id="tabViewLocale" styleClass="jeesl-tabs" rendered="#{not empty cc.attrs.locales}"
+  			var="l" value="#{cc.attrs.locales}">  
   		<p:tab title="#{l.code}">
   			<c:if test="#{cc.attrs.withName}">
 	  			<p:outputLabel value="#{cc.attrs.labelTranslation}"/>

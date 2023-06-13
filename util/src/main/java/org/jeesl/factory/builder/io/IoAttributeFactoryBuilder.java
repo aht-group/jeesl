@@ -25,9 +25,9 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.model.json.module.attribute.JsonAttributeData;
 import org.jeesl.model.xml.jeesl.QueryAttribute;
@@ -37,9 +37,8 @@ import org.slf4j.LoggerFactory;
 public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-									
-									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
-									TYPE extends JeeslStatus<L,D,TYPE>,
+									CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
+									TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 									OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
 									SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
 									ITEM extends JeeslAttributeItem<CRITERIA,SET>,
@@ -64,7 +63,6 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 		super(cL,cD);
 		this.cR = cR;
 		this.cCategory=cCategory;
-//		this.cCat=cCat;
 		this.cCriteria=cCriteria;
 		this.cType=cType;
 		this.cOption=cOption;
@@ -74,7 +72,7 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 		this.cData=cData;
 	}
 	
-	public EjbAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE> ejbCriteria(){return new EjbAttributeCriteriaFactory<>(this);}
+	public EjbAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE,SET> ejbCriteria(){return new EjbAttributeCriteriaFactory<>(this);}
 	public EjbAttributeOptionFactory<CRITERIA,OPTION> ejbOption() {return new EjbAttributeOptionFactory<>(cOption);}
 	public EjbAttributeSetFactory<L,D,R,CAT,SET,ITEM> ejbSet() {return new EjbAttributeSetFactory<>(this);}
 	public EjbAttributeItemFactory<CRITERIA,SET,ITEM> ejbItem() {return new EjbAttributeItemFactory<>(cItem);}
@@ -88,7 +86,7 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 	
 	public Comparator<CRITERIA> cpCriteria(AttributeCriteriaComparator.Type type) {return (new AttributeCriteriaComparator<CAT,CRITERIA>()).factory(type);}
 	
-	public AttributeHandler<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> handler(JeeslFacesMessageBean bMessage, JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute, JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute, AttributeBean<CONTAINER> bean)
+	public AttributeHandler<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> handler(JeeslFacesMessageBean bMessage, JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute, JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute, AttributeBean<CONTAINER> bean)
 	{
 		return new AttributeHandler<>(bMessage,fAttribute,bAttribute,this,bean);
 	}

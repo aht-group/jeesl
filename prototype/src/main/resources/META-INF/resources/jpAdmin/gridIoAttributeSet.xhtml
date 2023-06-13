@@ -102,9 +102,9 @@
 			<h:form id="fItem">
 				<p:panel header="#{msg.jeeslIoAttributeItem}" rendered="#{not empty cc.attrs.bean.item}" styleClass="jeesl-panel">
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.resetItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.jeeslTtCancel}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:sItems" tooltip="#{msg.ttSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.item.id gt 0}" tooltip="#{msg.ttDelete}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.resetItem()}" update=":#{cc.id}:sItems"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveItem()}" update=":#{cc.id}:sItems"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteItem()}" update=":#{cc.id}:sItems" rendered="#{cc.attrs.bean.item.id gt 0}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">

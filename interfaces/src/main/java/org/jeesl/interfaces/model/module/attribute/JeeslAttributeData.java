@@ -12,7 +12,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslAttributeData <CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,OPTION>,
+public interface JeeslAttributeData <CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?,OPTION,?>,
 							OPTION extends JeeslAttributeOption<?,?,CRITERIA>,
 							CONTAINER extends JeeslAttributeContainer<?,?>>
 		extends Serializable,EjbSaveable,EjbRemoveable,Cloneable,EjbWithParentAttributeResolver

@@ -37,6 +37,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -73,8 +74,8 @@ R extends JeeslTenantRealm<L,D,R,?>,
 											
 											ACAT extends JeeslAttributeCategory<L,D,R,ACAT,?>,
 											ACATEGORY extends JeeslStatus<L,D,ACATEGORY>,
-											ACRITERIA extends JeeslAttributeCriteria<L,D,R,ACAT,ATYPE,AOPTION>,
-											ATYPE extends JeeslStatus<L,D,ATYPE>,
+											ACRITERIA extends JeeslAttributeCriteria<L,D,R,ACAT,ATYPE,AOPTION,ASET>,
+											ATYPE extends JeeslAttributeType<L,D,ATYPE,?>,
 											AOPTION extends JeeslAttributeOption<L,D,ACRITERIA>,
 											ASET extends JeeslAttributeSet<L,D,R,ACAT,AITEM>,
 											AITEM extends JeeslAttributeItem<ACRITERIA,ASET>,
@@ -119,7 +120,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
 								JeeslIoDmsFacade<L,D,LOC,DMS,FSTORAGE,ASET,DS,S,FILE,VIEW,FCONTAINER,ACONTAINER> fDms,
 								JeeslIoFrFacade<L,D,?,FSTORAGE,?,FENGINE,FCONTAINER,FMETA,FTYPE,?,?,?> fFr,
 								JeeslIoAttributeFacade<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute,
-								JeeslAttributeBean<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> bAttribute,
+								JeeslAttributeBean<R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> bAttribute,
 								JeeslFileRepositoryHandler<LOC,FSTORAGE,FCONTAINER,FMETA> fileHandler
 								)
 	{

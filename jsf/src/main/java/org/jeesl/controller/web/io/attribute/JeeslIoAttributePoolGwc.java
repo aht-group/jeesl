@@ -24,10 +24,10 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
@@ -41,8 +41,8 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 						R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 						CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-						CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
-						TYPE extends JeeslStatus<L,D,TYPE>,
+						CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
+						TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 						OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
 						SET extends JeeslAttributeSet<L,D,R,CAT,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
@@ -52,11 +52,11 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoAttributePoolGwc.class);
 	
 	protected JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fAttribute;
-	protected JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute;
+	protected JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute;
 	
 	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fbAttribute;
 	
-	protected final EjbAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE> efCriteria;
+	protected final EjbAttributeCriteriaFactory<L,D,R,CAT,CRITERIA,TYPE,SET> efCriteria;
 	protected final EjbAttributeOptionFactory<CRITERIA,OPTION> efOption;
 	
 	private final SbSingleHandler<R> sbhRealm; public final SbSingleHandler<R> getSbhRealm() {return sbhRealm;}
@@ -93,7 +93,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp,
 								JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fAttribute,
-								JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute,
+								JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute,
 								JeeslFacesMessageBean bMessage, R realm)
 	{
 		super.postConstructWebController(lp,bMessage);
@@ -145,8 +145,6 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassCat(),sbhCat.getList()));}
 	}
 	
-//	private void resetOption() {reset(false,false,true);}
-//	private void resetCriteria() {reset(false,true,true);}
 	private void reset(boolean rCategories, boolean rCriteria, boolean rOption)
 	{
 		if(rCategories) {sbhCat.clear();}
@@ -159,11 +157,8 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 		criterias.clear();
 		if(ObjectUtils.allNotNull(sbhRealm.getSelection(),sbhRref.getSelection()))
 		{
-			logger.warn("Realm: "+sbhRealm.getSelection().toString()+" RREF:"+sbhRref.getSelection());
 			criterias.addAll(fAttribute.fAttributeCriteria(sbhRealm.getSelection(),sbhRref.getSelection(),sbhCat.getSelected()));
 		}
-//		else if(refId<0) {}
-//		else {criterias.addAll(fAttribute.fAttributeCriteria(sbhCategory.getSelected(),refId));}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbAttribute.getClassCriteria(),criterias));}
 	}
 	
@@ -178,14 +173,21 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 		reset(false,false,true);
 	}
 	
+	public void changeCriteriaType()
+	{
+		efCriteria.converter(fAttribute,criteria);
+	}
 	public void saveCriteria() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(criteria));}
+		logger.info("1: "+criteria.toString());
 		efCriteria.converter(fAttribute,criteria);
+		logger.info("2: "+criteria.toString());
 		criteria = fAttribute.save(criteria);
-		bAttribute.updateCriteria(criteria);
-		reloadCriterias();
-		reloadOptions();
+		logger.info("3: "+criteria.toString());
+//		bAttribute.updateCriteria(criteria);
+		this.reloadCriterias();
+		this.reloadOptions();
 	}
 	
 	public void selectCriteria()
@@ -209,12 +211,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	{
 		options = fAttribute.allForParent(fbAttribute.getClassOption(),criteria);
 	}
-	
-	public void changeCriteriaType()
-	{
-		criteria.setType(fAttribute.find(fbAttribute.getClassType(),criteria.getType()));
-	}
-	
+		
 	public void addOption()
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbAttribute.getClassOption()));}

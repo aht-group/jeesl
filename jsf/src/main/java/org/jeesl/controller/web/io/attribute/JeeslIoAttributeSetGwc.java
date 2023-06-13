@@ -45,7 +45,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 												R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 												CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 												
-												CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,?,?>,
+												CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,?,?,SET>,
 												
 												SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
 												ITEM extends JeeslAttributeItem<CRITERIA,SET>>
@@ -56,7 +56,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoAttributeSetGwc.class);
 	
 	private JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fAttribute;
-	private JeeslAttributeBean<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> bAttribute;
+	private JeeslAttributeBean<R,CAT,CRITERIA,?,?,SET,ITEM,?,?> bAttribute;
 	
 	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fbAttribute;
 	private final EjbAttributeSetFactory<L,D,R,CAT,SET,ITEM> efSet;
@@ -94,7 +94,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp,
 										JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> fAttribute,
-										JeeslAttributeBean<L,D,R,CAT,CRITERIA,?,?,SET,ITEM,?,?> bAttribute,
+										JeeslAttributeBean<R,CAT,CRITERIA,?,?,SET,ITEM,?,?> bAttribute,
 			
 										JeeslFacesMessageBean bMessage, R realm
 												)

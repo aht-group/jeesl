@@ -17,33 +17,30 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractAppAttributeBean <L extends JeeslLang, D extends JeeslDescription,
-											R extends JeeslTenantRealm<L,D,R,?>,
-											CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-											CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-											CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
-											TYPE extends JeeslStatus<L,D,TYPE>,
-											OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
-											SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
+public abstract class AbstractAppAttributeBean <
+											R extends JeeslTenantRealm<?,?,R,?>,
+											CAT extends JeeslAttributeCategory<?,?,R,CAT,?>,
+											
+											CRITERIA extends JeeslAttributeCriteria<?,?,R,CAT,TYPE,OPTION,SET>,
+											TYPE extends JeeslAttributeType<?,?,TYPE,?>,
+											OPTION extends JeeslAttributeOption<?,?,CRITERIA>,
+											SET extends JeeslAttributeSet<?,?,R,CAT,ITEM>,
 											ITEM extends JeeslAttributeItem<CRITERIA,SET>,
 											CONTAINER extends JeeslAttributeContainer<SET,DATA>,
 											DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
-					implements JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA>
+					implements JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppAttributeBean.class);
 
-	private JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
-	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
+	private JeeslIoAttributeFacade<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
+	private final IoAttributeFactoryBuilder<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
 
-	public AbstractAppAttributeBean(IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
+	public AbstractAppAttributeBean(IoAttributeFactoryBuilder<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
 	{
 		this.fbAttribute=fbAttribute;
 		types = new ArrayList<TYPE>();
@@ -52,21 +49,20 @@ public abstract class AbstractAppAttributeBean <L extends JeeslLang, D extends J
 		mapOption = new HashMap<CRITERIA,List<OPTION>>();
 	}
 	
-	public void initSuper(JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
+	public void initSuper(JeeslIoAttributeFacade<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
 	{
 		this.fAttribute=fAttribute;
 		
-		reloadCategories();
-		reloadTypes();
-		reloadCategories();
-		reloadCriteria();
-		reloadOptions();
+		this.reloadCategories();
+		this.reloadTypes();
+		this.reloadCriteria();
+		this.reloadOptions();
 	}
 
 	@Override public void reloadCategories()
 	{
-		logger.warn("DEACTIVATED");
-		try {Thread.sleep(5000);} catch (InterruptedException e) {e.printStackTrace();}
+		logger.warn("DEACTIVATED, forced sleep");
+		try {Thread.sleep(1000);} catch (InterruptedException e) {e.printStackTrace();}
 
 //		categories.addAll(fAttribute.allOrderedPositionVisible(fbAttribute.getClassCategory()));
 	}
@@ -102,6 +98,7 @@ public abstract class AbstractAppAttributeBean <L extends JeeslLang, D extends J
 	
 	public void updateSet(SET s)
 	{
+		logger.info("Update: "+s.toString());
 		List<CRITERIA> listCriteria = new ArrayList<CRITERIA>();
 		List<CRITERIA> listTable = new ArrayList<CRITERIA>();
 		
@@ -122,16 +119,15 @@ public abstract class AbstractAppAttributeBean <L extends JeeslLang, D extends J
 		for(List<CRITERIA> list : mapCriteria.values())
 		{
 			int index = -1;
-			for(int i=0;i<list.size();i++){if(list.get(i).equals(criteria)){index=i;break;}}
-			if(index>=0){list.set(index,criteria);}
+			for(int i=0;i<list.size();i++) {if(list.get(i).equals(criteria)) {index=i; break;}}
+			if(index>=0) {list.set(index,criteria);}
 		}
 		for(List<CRITERIA> list : mapTableHeader.values())
 		{
 			int index = -1;
-			for(int i=0;i<list.size();i++){if(list.get(i).equals(criteria)){index=i;break;}}
-			if(index>=0){list.set(index,criteria);}
+			for(int i=0;i<list.size();i++) {if(list.get(i).equals(criteria)){index=i; break;}}
+			if(index>=0) {list.set(index,criteria);}
 		}
-		
 	}
 	
 	private final Map<CRITERIA,List<OPTION>> mapOption; @Override public Map<CRITERIA,List<OPTION>> getMapOption() {return mapOption;}

@@ -20,6 +20,9 @@ public interface JeeslAttributeContainer <SET extends JeeslAttributeSet<?,?,?,?,
 	SET getSet();
 	void setSet(SET set);
 	
+	DATA getParent();
+	void setParent(DATA parent);
+	
 	List<DATA> getDatas();
 	void setDatas(List<DATA> datas);
 }

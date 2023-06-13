@@ -36,7 +36,7 @@
 							<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeeslItalic"/>
 						</ui:fragment>
 						<jtp:inputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{cc.attrs.withSave}"/>
-						<jtp:outputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
+						<jp:ioAttributeDataOutput handler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
 					</p:panelGrid>
 				</ui:repeat>
 			</p:panel>
@@ -51,7 +51,7 @@
 							<h:outputText rendered="#{cc.attrs.handler.showDescription}" value="#{c.description[localeCode].lang}" styleClass="jeeslItalic"/>
 					</ui:fragment>
 					<jtp:inputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{cc.attrs.withSave}"/>
-					<jtp:outputAttribute attributeHandler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
+					<jp:ioAttributeDataOutput handler="#{cc.attrs.handler}" criteria="#{c}" rendered="#{not cc.attrs.withSave}"/>
 				</p:panelGrid>
 			</ui:repeat>
 		</ui:fragment>

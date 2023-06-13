@@ -19,7 +19,8 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 public interface JeeslAttributeType <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
-		extends Serializable,EjbPersistable,JeeslStatusFixedCode,EjbWithCodeGraphic<G>
+		extends Serializable,EjbPersistable,JeeslStatusFixedCode,EjbWithCodeGraphic<G>,
+				JeeslStatus<L,D,S>
 {
 	public enum Code{text,email,bool,intNumber,doubleNumber,date,selectOne,selectMany,remark,nested}
 	public enum Html5{select}

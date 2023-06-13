@@ -10,11 +10,8 @@ public class UiEditBooleanHandler implements UiEditHandler
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(UiEditBooleanHandler.class);
 	
-	private boolean allow;
+	private boolean allow; public void setAllow(boolean allow) {this.allow = allow;}
 	
-	public void setAllow(boolean allow) {
-		this.allow = allow;
-	}
 	public boolean isAllow() {return allow;}
 	public boolean isDeny() {return !allow;}
 

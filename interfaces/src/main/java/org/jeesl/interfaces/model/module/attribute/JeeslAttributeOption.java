@@ -18,7 +18,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslAttributeOption<L extends JeeslLang, D extends JeeslDescription,
-										CRITERIA extends JeeslAttributeCriteria<L,D,?,?,?,?>>
+										CRITERIA extends JeeslAttributeCriteria<L,D,?,?,?,?,?>>
 			extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 					EjbWithNonUniqueCode,EjbWithPosition,EjbWithPositionParent,
 					EjbWithLang<L>,EjbWithDescription<D>

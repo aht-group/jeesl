@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 public class AttributeCriteriaComparator<CAT extends JeeslAttributeCategory<?,?,?,CAT,?>,
 										
-										CRITERIA extends JeeslAttributeCriteria<?,?,?,CAT,?,?>>
+										CRITERIA extends JeeslAttributeCriteria<?,?,?,CAT,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(AttributeCriteriaComparator.class);
 

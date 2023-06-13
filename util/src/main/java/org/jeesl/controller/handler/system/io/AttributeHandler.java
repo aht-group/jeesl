@@ -40,8 +40,8 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>,
 								CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 								
-								CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
-								TYPE extends JeeslStatus<L,D,TYPE>,
+								CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
+								TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 								OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
 								SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
 								ITEM extends JeeslAttributeItem<CRITERIA,SET>,
@@ -56,7 +56,7 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 	private boolean showDescription; public boolean isShowDescription() {return showDescription;}
 	
 	private final JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
-	private final JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute;
+	private final JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute;
 	private final AttributeBean<CONTAINER> bean;
 	
 	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
@@ -66,13 +66,14 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 	private final Map<CRITERIA,DATA> data; public Map<CRITERIA,DATA> getData() {return data;}
 	private final Map<CRITERIA,String[]> options; public Map<CRITERIA,String[]> getOptions() {return options;}
 	private final Map<CONTAINER,Map<CRITERIA,DATA>> containers; public Map<CONTAINER, Map<CRITERIA, DATA>> getContainers() {return containers;}
+	private final Map<CRITERIA,List<CONTAINER>> nestedContainers; public Map<CRITERIA, List<CONTAINER>> getNestedContainers() {return nestedContainers;}
 	
 	private SET attributeSet; public SET getAttributeSet() {return attributeSet;}
 	private CONTAINER container;
 	
 	public AttributeHandler(JeeslFacesMessageBean bMessage,
 			final JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute,
-			final JeeslAttributeBean<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
+			final JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
 			final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute,
 			final AttributeBean<CONTAINER> bean)
 	{
@@ -87,9 +88,10 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 		efContainer = fbAttribute.ejbContainer();
 		efData = fbAttribute.ejbData();
 		
-		data = new HashMap<CRITERIA,DATA>();
+		data = new HashMap<>();
 		options = new HashMap<CRITERIA,String[]>();
 		containers = new HashMap<CONTAINER,Map<CRITERIA,DATA>>();
+		nestedContainers = new HashMap<>();
 	}
 	
 	public void toggleDescription()
@@ -103,9 +105,9 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 		try {init(fAttribute.fByCode(fbAttribute.getClassSet(), code));}
 		catch (JeeslNotFoundException e) {e.printStackTrace();}
 	}
-	public  void init(SET attributeSet)
+	public  void init(SET set)
 	{
-		this.attributeSet = attributeSet;
+		this.attributeSet = set;
 		if(debugOnInfo) {logger.info("Initialized with Attribute Set: "+this.attributeSet.toString());}
 	}
 	

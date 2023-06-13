@@ -7,7 +7,6 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
@@ -24,8 +23,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 public interface JeeslAttributeCriteria<L extends JeeslLang, D extends JeeslDescription,
 										R extends JeeslTenantRealm<L,D,R,?>,
 										CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-										TYPE extends JeeslStatus<L,D,TYPE>,
-										OPTION extends JeeslAttributeOption<L,D,?>>
+										TYPE extends JeeslAttributeType<L,D,TYPE,?>,
+										OPTION extends JeeslAttributeOption<L,D,?>,
+										SET extends JeeslAttributeSet<L,D,R,CAT,?>>
 			extends Serializable,EjbWithId,
 					EjbSaveable,EjbRemoveable,
 					EjbWithNonUniqueCode,EjbWithPositionVisible,
@@ -46,4 +46,7 @@ public interface JeeslAttributeCriteria<L extends JeeslLang, D extends JeeslDesc
 	
 	List<OPTION> getOptions();
 	void setOptions(List<OPTION> options);
+	
+	SET getNested();
+	void setNested(SET nested);
 }

@@ -18,6 +18,7 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
+import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.module.mdc.collection.JeeslMdcCollection;
 import org.jeesl.interfaces.model.module.mdc.collection.JeeslMdcScope;
 import org.jeesl.interfaces.model.module.mdc.collection.JeeslMdcStatus;
@@ -49,8 +50,8 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 								
 								CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-								CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION>,
-								TYPE extends JeeslStatus<L,D,TYPE>,
+								CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,ASET>,
+								TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 								OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
 								ASET extends JeeslAttributeSet<L,D,R,CAT,AITEM>,
 								AITEM extends JeeslAttributeItem<CRITERIA,ASET>,
