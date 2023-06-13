@@ -355,9 +355,15 @@ html, body, .ui-widget {
 			width: 100%;
 		}
 		
-		&:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item > .jeesl-dropdown-item-label {
-			height: $element-height-mobile;
-			line-height: $element-height-mobile;
+		&:not(.jeesl-dropdown-sub) > .jeesl-dropdown-item {
+			&:hover:after {
+				border-bottom-width: $separator-thickness-mobile;
+			}
+			
+			> .jeesl-dropdown-item-label {
+				height: $element-height-mobile;
+				line-height: $element-height-mobile;
+			}
 		}
 		
 		.jeesl-dropdown-item {
@@ -1255,15 +1261,11 @@ html, body, .ui-widget {
 }
 
 .jeesl-content .jeesl-content-container {
-	.jeesl-row {
-		display: block;
+	.jeesl-row .jeesl-grid {
+		margin-top: $regular-spacing;
 		
-		.jeesl-grid {
-			margin-top: $regular-spacing;
-			
-			&.jeesl-grid-image {
-				max-width: 30%;
-			}
+		&.jeesl-grid-image {
+			max-width: 30%;
 		}
 	}
 	
