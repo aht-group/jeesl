@@ -2084,6 +2084,8 @@ body, .ui-widget {
 							&:before, &:after {
 								@include triangle(transparent transparent transparent $bright-colour, 15px 1px 15px 15px);
 								
+								transition: border-color $transition-duration linear;
+								
 								@media (max-width: 768px) {
 									display: none;
 								}
@@ -4108,9 +4110,23 @@ body, .ui-widget {
 	}
 }
 
-.jeesl-heatmap-entry {
-	fill: $dark-colour;
+.jeesl-heatmap {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	
+	.jeesl-heatmap-row {
+		display: flex;
+		gap: 2px;
+	
+		.jeesl-heatmap-entry {
+			background: $dark-colour;
+			height: 12px;
+			width: 12px;
+		}
+	}
 }
+
 
 .jeesl-ellipsis {
 	display: -webkit-box;

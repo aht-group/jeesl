@@ -2125,6 +2125,15 @@ template {
   position: relative;
   top: 0; }
 
+.jeesl-input-container > .ui-inputtextarea, .jeesl-input-container > .ui-inputtext {
+  flex-grow: 1; }
+  .jeesl-input-container > .ui-inputtextarea:not(:last-child), .jeesl-input-container > .ui-inputtext:not(:last-child) {
+    border-radius: 3px 0 0 3px; }
+  .jeesl-input-container > .ui-inputtextarea + .jeesl-input-unit, .jeesl-input-container > .ui-inputtext + .jeesl-input-unit {
+    background: white;
+    border-radius: 0 3px 3px 0;
+    padding: 0 5px; }
+
 .ui-colorpicker-container {
   background: white;
   border: 1px solid #ababab;
@@ -2835,7 +2844,8 @@ body, .ui-widget {
         position: absolute;
         top: 0;
         margin-top: 0;
-        display: block; }
+        display: block;
+        transition: border-color 0.2s linear; }
         @media (max-width: 768px) {
           .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item:not(:last-child) .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label:before, .jeesl-breadcrumb-header .jeesl-menu-bar-list .jeesl-menu-bar-item:not(:last-child) .jeesl-dropdown-list .jeesl-dropdown-item .jeesl-dropdown-item-label:after {
             display: none; } }
@@ -7401,8 +7411,17 @@ body, .ui-widget {
     .pf-action-icon img {
       height: 42px; } }
 
-.jeesl-heatmap-entry {
-  fill: #00663a; }
+.jeesl-heatmap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; }
+  .jeesl-heatmap .jeesl-heatmap-row {
+    display: flex;
+    gap: 2px; }
+    .jeesl-heatmap .jeesl-heatmap-row .jeesl-heatmap-entry {
+      background: #00663a;
+      height: 12px;
+      width: 12px; }
 
 .jeesl-ellipsis {
   display: -webkit-box;
