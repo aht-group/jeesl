@@ -10,12 +10,16 @@ import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
+import org.jeesl.factory.ejb.io.cms.EjbIoCmsMarkupFactory;
+import org.jeesl.factory.ejb.io.cms.EjbMarkupFactory;
 import org.jeesl.factory.ejb.module.cl.EjbChecklistFactory;
 import org.jeesl.factory.ejb.module.cl.EjbChecklistItemFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklist;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklistItem;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklistTopic;
@@ -34,7 +38,9 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
     								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
     								CL extends JeeslChecklist<L,R,TO>,
     								TO extends JeeslChecklistTopic<L,?,R,TO,?>,
-    								CI extends JeeslChecklistItem<L,CL>
+    								CI extends JeeslChecklistItem<L,CL,M>,
+    								M extends JeeslIoMarkup<MT>,
+									MT extends JeeslIoMarkupType<L,D,MT,?>
     										>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
@@ -44,39 +50,43 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	
 	private JeeslChecklistFacade<L,D,R,CL,TO> fCl;
 //
-	private final ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?> fbCl;
-	private EjbChecklistFactory<R,CL> ejbChecklist;
-	private EjbChecklistItemFactory<CL,CI> ejbChecklistItem;
+	private final ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?,M,MT> fbCl;
+	private final EjbChecklistFactory<R,CL,TO> ejbChecklist;
+	private final EjbChecklistItemFactory<CL,CI,M,MT> ejbChecklistItem;
+	private final EjbMarkupFactory<LOC,M,MT> efMarkup;
 	
     protected R realm;
     protected RREF rref; public RREF getRref() {return rref;}
 
-
-
     private final List<CL> lists; public List<CL> getLists() {return lists;}
+    private final List<TO> topics; public List<TO> getTopics() {return topics;}
     private final List<CI> items; public List<CI> getItems() {return items;}
 
+    private MT markupType;
 	private CL list; public CL getList() {return list;} public void setList(CL list) {this.list = list;}
 	private CI item; public CI getItem() {return item;} public void setItem(CI item) {this.item = item;}
 	
-	public JeeslClChecklistGwc(ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?> fbCl)
+	public JeeslClChecklistGwc(ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?,M,MT> fbCl)
 	{
 		super(fbCl.getClassL(),fbCl.getClassD());
 		this.fbCl=fbCl;
 		
 		ejbChecklist = fbCl.ejbChecklist();
 		ejbChecklistItem = fbCl.ejbChecklistItem();
+		efMarkup = EjbMarkupFactory.instance(fbCl.getClassMarkup());
 		
 		lists = new ArrayList<>();
+		topics = new ArrayList<>();
 		items = new ArrayList<>();
 		
 	}
 
-	public void postConstructChecklist(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage ,R realm,
+	public void postConstructChecklist(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, R realm,
 										JeeslChecklistFacade<L,D,R,CL,TO> fCl
 										)
 	{
 		super.postConstructWebController(lp,bMessage);
+		markupType = fCl.fByEnum(fbCl.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
 		this.fCl=fCl;
 		this.realm=realm;
 	}
@@ -85,6 +95,9 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	{
 		this.rref=rref;
 		this.reloadLists();
+		
+		topics.clear();
+		topics.addAll(fCl.all(fbCl.getClassTopic(),realm,rref));
 	}
 	
 	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
@@ -159,7 +172,8 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	{
 		this.reset(false, false, false, false);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(item));}
-		item = efLang.persistMissingLangs(fCl, lp.getLocales(),item);
+		item = efLang.persistMissingLangs(fCl,lp.getLocales(),item);
+		item = efMarkup.persistMissingLangs(fCl,lp.getLocales(),item,markupType);
 	}
 	
 	public void addItem()
@@ -167,6 +181,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbCl.getClassChecklistItem()));}
 		item = ejbChecklistItem.build(list,items);
 		item.setName(efLang.buildEmpty(lp.getLocales()));
+		item.setMarkup(efMarkup.build(lp.getLocales(), markupType));
 	}
 	
 	public void saveItem() throws JeeslConstraintViolationException, JeeslLockingException

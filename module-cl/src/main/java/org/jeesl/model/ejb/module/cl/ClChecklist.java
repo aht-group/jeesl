@@ -57,7 +57,11 @@ public class ClChecklist implements JeeslChecklist<IoLang,TenantRealm,ClTopic>
 	@Override public Map<String,IoLang> getName() {if(Objects.isNull(name)) {name=new HashMap<>();} return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
-
+	@ManyToOne
+	private ClTopic topic;
+	public ClTopic getTopic() {return topic;}
+	public void setTopic(ClTopic topic) {this.topic = topic;}
+	
 	@Override public boolean equals(Object object) {return (object instanceof ClChecklist) ? id == ((ClChecklist) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(23,7).append(id).toHashCode();}
 	

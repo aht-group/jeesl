@@ -62,6 +62,11 @@
 		<!-- JEESL Modles -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-io-cms</artifactId>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
     		<scope>provided</scope>
 		</dependency>

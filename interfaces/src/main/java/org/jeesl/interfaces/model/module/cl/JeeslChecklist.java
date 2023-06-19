@@ -9,6 +9,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.model.with.system.tenant.JeeslWithTenantTopic;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
@@ -20,7 +21,7 @@ public interface JeeslChecklist <L extends JeeslLang,
 			extends Serializable,EjbSaveable,EjbRemoveable,
 					JeeslWithTenantSupport<R>,
 					EjbWithPosition,
-//					JeeslWithTenantTopic<T>,
+					JeeslWithTenantTopic<TO>,
 					EjbWithLang<L>
 					
 {

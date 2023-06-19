@@ -3,7 +3,7 @@ package org.jeesl.factory.ejb.module.news;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.jeesl.factory.ejb.system.locale.EjbMarkupFactory;
+import org.jeesl.factory.ejb.io.cms.EjbMarkupFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;

@@ -3,6 +3,8 @@ package org.jeesl.controller.web.c.module.cl;
 import org.jeesl.controller.web.g.module.cl.JeeslClTracklistGwc;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
+import org.jeesl.model.ejb.io.cms.markup.IoMarkupType;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
@@ -17,7 +19,7 @@ public class JeeslClTracklistWc <RREF extends EjbWithId>
 {
 	private static final long serialVersionUID = 1L;
 	
-	public JeeslClTracklistWc(ChecklistFactoryBuilder<IoLang,IoDescription,TenantRealm,ClChecklist,ClTopic,ClChecklistItem,ClTracklist> fbCl)
+	public JeeslClTracklistWc(ChecklistFactoryBuilder<IoLang,IoDescription,TenantRealm,ClChecklist,ClTopic,ClChecklistItem,ClTracklist,IoMarkup,IoMarkupType> fbCl)
 	{
 		super(fbCl);	
 	}

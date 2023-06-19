@@ -15,22 +15,32 @@ public class EjbCodeCache <T extends EjbWithCode>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbCodeCache.class);
 
-	private JeeslFacade fUtils;
+	private JeeslFacade facade;
 	private final Class<T> c;
 	
 	private final Map<String,T> map;
 	
-	public EjbCodeCache(Class<T> c, JeeslFacade fUtils)
+	public EjbCodeCache(Class<T> c)
 	{
 		this.c=c;
-		this.fUtils=fUtils;
 		map = new HashMap<>();
+	}
+	public EjbCodeCache(Class<T> c, JeeslFacade fUtils)
+	{
+		this(c);
+		this.facade=fUtils;
+		
 	}
 	
 	public EjbCodeCache(Class<T> c, List<T> list)
 	{
-		this.c=c;
-		map = new HashMap<>();
+		this(c);
+		this.reload(list);
+	}
+	
+	public void reload(List<T> list)
+	{
+		map.clear();
 		for(T t : list) {map.put(t.getCode(),t);}
 	}
 	
@@ -46,13 +56,10 @@ public class EjbCodeCache <T extends EjbWithCode>
 	{
 		if(!map.containsKey(code))
 		{
-			try
+			if(Objects.nonNull(facade))
 			{
-				map.put(code, fUtils.fByCode(c,code));
-			}
-			catch (JeeslNotFoundException e)
-			{
-				if(withStackTrace) {e.printStackTrace();}
+				try {map.put(code, facade.fByCode(c,code));}
+				catch (JeeslNotFoundException e) {if(withStackTrace) {e.printStackTrace();}}
 			}
 		}
 		return map.get(code);
@@ -62,7 +69,7 @@ public class EjbCodeCache <T extends EjbWithCode>
 	{
 		if(!map.containsKey(code))
 		{
-			map.put(code, fUtils.fByCode(c,code));
+			map.put(code, facade.fByCode(c,code));
 		}
 	}
 	
@@ -86,5 +93,4 @@ public class EjbCodeCache <T extends EjbWithCode>
 	{
 		return this.equals(ejb,a) || this.equals(ejb,b);
 	}
-	
 }

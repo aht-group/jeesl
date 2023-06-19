@@ -79,7 +79,7 @@
 				            <p:column><h:outputText value="#{t.name[localeCode].lang}"/></p:column>
                         </p:selectOneMenu>
  
-                        <jtp:label entity="AomCompany" code="typeManufacturer"/>
+                        <jtp:label entity="AomAsset" code="manufacturer"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.asset.manufacturer}" effect="fade" autoWidth="false">
 							<f:selectItem itemLabel="--"/>
                         	<f:selectItems value="#{cc.attrs.cache.cachedScopeCompanies[cc.attrs.ctrl.key.scopeManufacturer]}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>

@@ -7,6 +7,8 @@ public interface JeeslWithMarkupSingle <M extends JeeslIoMarkup<?>> extends EjbW
 {
 	public enum Attributes{id,markup}
 	
+//	void x();
+
 	M getMarkup();
 	void setMarkup(M markup);
 }

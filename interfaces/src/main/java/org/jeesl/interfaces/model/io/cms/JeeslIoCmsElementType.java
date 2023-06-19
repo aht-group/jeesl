@@ -14,7 +14,7 @@ public interface JeeslIoCmsElementType <L extends JeeslLang, D extends JeeslDesc
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,JeeslStatusFixedCode,
-							JeeslStatus<L,D,S> 
+							JeeslStatus<L,D,S>
 {	
 	public enum Code {paragraph,image}
 }

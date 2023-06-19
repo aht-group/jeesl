@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.w.JeeslWithMarkupSingle;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslWithFileRepositoryContainer;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -30,7 +31,8 @@ public interface JeeslAomEvent <COMPANY extends JeeslAomCompany<?,?>,
 			extends Serializable,EjbSaveable,
 					EjbWithRecord,EjbWithRemark,EjbWithName,
 					JeeslWithType<ETYPE>,JeeslWithStatus<ESTATUS>,
-					JeeslWithFileRepositoryContainer<FRC>
+					JeeslWithFileRepositoryContainer<FRC>,
+					JeeslWithMarkupSingle<M>
 {
 	public enum Attributes{assets,status}
 	
@@ -43,6 +45,6 @@ public interface JeeslAomEvent <COMPANY extends JeeslAomCompany<?,?>,
 	Double getAmount();
 	void setAmount(Double amount);
 	
-	M getMarkup();
-	public void setMarkup(M markup);
+//	M getMarkup();
+//	public void setMarkup(M markup);
 }

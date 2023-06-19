@@ -16,6 +16,8 @@ import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklist;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklistItem;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklistTopic;
@@ -35,7 +37,7 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
     								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
     								CL extends JeeslChecklist<L,R,TO>,
     								TO extends JeeslChecklistTopic<L,?,R,TO,?>,
-    								CI extends JeeslChecklistItem<L,CL>,
+    								CI extends JeeslChecklistItem<L,CL,?>,
     								TL extends JeeslClTracklist<L,R>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
@@ -45,9 +47,9 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	
 	private JeeslChecklistFacade<L,D,R,CL,TO> fCl;
 //
-	private final ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?> fbCl;
-	private EjbChecklistFactory<R,CL> ejbChecklist;
-	private EjbChecklistItemFactory<CL,CI> ejbChecklistItem;
+	private final ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?,?,?> fbCl;
+	private EjbChecklistFactory<R,CL,TO> ejbChecklist;
+
 	
     protected R realm;
     protected RREF rref; public RREF getRref() {return rref;}
@@ -56,13 +58,13 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 
 	private TL list; public TL getList() {return list;} public void setList(TL list) {this.list = list;}
 	
-	public JeeslClTracklistGwc(ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?> fbCl)
+	public JeeslClTracklistGwc(ChecklistFactoryBuilder<L,D,R,CL,TO,CI,?,?,?> fbCl)
 	{
 		super(fbCl.getClassL(),fbCl.getClassD());
 		this.fbCl=fbCl;
 		
 		ejbChecklist = fbCl.ejbChecklist();
-		ejbChecklistItem = fbCl.ejbChecklistItem();
+
 		
 		lists = new ArrayList<>();
 	}

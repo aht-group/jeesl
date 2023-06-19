@@ -22,12 +22,13 @@ import javax.validation.constraints.NotNull;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklistItem;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
+import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
 import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Table(name="ClChecklistItem")
 @EjbErNode(name="Checklist",category="tafu",subset="moduleTafu")
 @Entity
-public class ClChecklistItem implements JeeslChecklistItem<IoLang,ClChecklist>
+public class ClChecklistItem implements JeeslChecklistItem<IoLang,ClChecklist,IoMarkup>
 {
 	public static final long serialVersionUID=1;
 
@@ -62,7 +63,14 @@ public class ClChecklistItem implements JeeslChecklistItem<IoLang,ClChecklist>
 	@Override public Map<String,IoLang> getName() {if(Objects.isNull(name)) {name=new HashMap<>();} return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
-	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@MapKey(name="lkey")
+	@JoinTable(name="ClChecklistItemJtMarkup",joinColumns={@JoinColumn(name="item_id")},inverseJoinColumns={@JoinColumn(name="markup_id")})
+	protected Map<String,IoMarkup> markup;
+	@Override public Map<String,IoMarkup> getMarkup() {return markup;}
+	@Override public void setMarkup(Map<String,IoMarkup> markup) {this.markup = markup;}
+
+
 	@Override public boolean equals(Object object) {return (object instanceof ClChecklistItem) ? id == ((ClChecklistItem) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(23,7).append(id).toHashCode();}
 	

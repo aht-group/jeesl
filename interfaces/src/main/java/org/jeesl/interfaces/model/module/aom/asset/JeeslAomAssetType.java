@@ -15,7 +15,11 @@ import org.jeesl.interfaces.model.with.parent.EjbWithParentId;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslAomAssetType <L extends JeeslLang, D extends JeeslDescription,
 							REALM extends JeeslTenantRealm<L,D,REALM,?>,
 							ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,G>,

@@ -2,6 +2,8 @@ package org.jeesl.interfaces.model.module.cl;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.w.JeeslWithMarkupMulti;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -15,11 +17,13 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslChecklistItem <L extends JeeslLang,
-								CL extends JeeslChecklist<L,?,?>>
+								CL extends JeeslChecklist<L,?,?>,
+								M extends JeeslIoMarkup<?>>
 			extends Serializable,EjbSaveable,EjbRemoveable,
 					EjbWithParentAttributeResolver,EjbWithPositionVisible,
 					EjbWithLang<L>,
 					JeeslWithValidFromDate
+					,JeeslWithMarkupMulti<M>
 					
 {
 	public enum Attributes{id,checklist,position,visible}

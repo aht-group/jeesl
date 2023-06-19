@@ -209,8 +209,6 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 		if(Objects.nonNull(jogger)) {jogger.start("reloadTree");}
 		if(debugOnInfo) {logger.info("Loading root: realm:"+identifier.getRealm().toString()+" rref:"+identifier.getId());}
 		
-
-		
 		List<ASSET> assets = fAom.fAomAssets(identifier);
 		if(Objects.nonNull(jogger)) {jogger.milestone(fbAsset.getClassAsset(),"fAomAssets(identifier)",assets.size());}
 		

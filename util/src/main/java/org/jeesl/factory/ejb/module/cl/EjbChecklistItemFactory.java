@@ -6,20 +6,24 @@ import java.util.List;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbPositionFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklist;
 import org.jeesl.interfaces.model.module.cl.JeeslChecklistItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbChecklistItemFactory<CL extends JeeslChecklist<?,?,?>,
-									CI extends JeeslChecklistItem<?,CL>
+									CI extends JeeslChecklistItem<?,CL,M>,
+									M extends JeeslIoMarkup<MT>,
+									MT extends JeeslIoMarkupType<?,?,MT,?>
 							>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbChecklistItemFactory.class);
 	
-	private final ChecklistFactoryBuilder<?,?,?,CL,?,CI,?> fbCl;
+	private final ChecklistFactoryBuilder<?,?,?,CL,?,CI,?,M,MT> fbCl;
 	
-    public EjbChecklistItemFactory(ChecklistFactoryBuilder<?,?,?,CL,?,CI,?> fbCl)
+    public EjbChecklistItemFactory(ChecklistFactoryBuilder<?,?,?,CL,?,CI,?,M,MT> fbCl)
     {
         this.fbCl = fbCl;
     } 
