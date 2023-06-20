@@ -265,11 +265,26 @@ template {
   .header ul li a:hover {
     border: none; }
 
+.jeesl-bold {
+  font-weight: 700; }
+
+.jeesl-italic {
+  font-style: italic; }
+
 .jeesl-left {
-  float: left; }
+  text-align: left; }
+
+.jeesl-center {
+  text-align: center; }
 
 .jeesl-right {
-  float: right; }
+  text-align: right; }
+
+.jeesl-red {
+  color: #d60039; }
+
+.jeesl-grey {
+  color: #ababab; }
 
 .jeesl-greyscale {
   filter: grayscale(1); }

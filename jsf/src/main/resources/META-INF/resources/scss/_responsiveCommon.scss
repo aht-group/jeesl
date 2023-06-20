@@ -129,12 +129,32 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+.jeesl-bold {
+	font-weight: 700;
+}
+
+.jeesl-italic {
+	font-style: italic;
+}
+
 .jeesl-left {
-	float: left;
+	text-align: left;
+}
+
+.jeesl-center {
+	text-align: center;
 }
 
 .jeesl-right {
-	float: right;
+	text-align: right;
+}
+
+.jeesl-red {
+	color: $foreground-alert;
+}
+
+.jeesl-grey {
+	color: $foreground-grey;
 }
 
 .jeesl-greyscale {
