@@ -9,8 +9,8 @@ import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
-import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.factory.ejb.io.graphic.EjbGraphicFactory;
 import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
@@ -46,7 +46,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	
 	protected JeeslIoGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic;
 	
-	protected final LocaleFactoryBuilder<L,D,LOC> fbStatus;
+	protected final IoLocaleFactoryBuilder<L,D,LOC> fbStatus;
 	protected final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;
 	protected final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision;
 
@@ -83,7 +83,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	protected long index;
 	protected Map<Long,Boolean> allowAdditionalElements; public Map<Long, Boolean> getAllowAdditionalElements(){return allowAdditionalElements;}
 
-	public AbstractTableBean(LocaleFactoryBuilder<L,D,LOC> fbStatus,
+	public AbstractTableBean(IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
 									SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{

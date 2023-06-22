@@ -10,8 +10,8 @@ import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
-import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionMissingLabel;
@@ -41,9 +41,9 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 	private SbMultiHandler<LOC> sbhStatus;
 	public SbMultiHandler<LOC> getSbhStatus() {return sbhStatus;}
 
-	private LocaleFactoryBuilder<L,D,LOC> fbLocale;
+	private IoLocaleFactoryBuilder<L,D,LOC> fbLocale;
 
-	public AbstractAdminRevisionMissingLabelBean(final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,?,?,RML> fbRevision, LocaleFactoryBuilder<L,D,LOC> fbLocale)
+	public AbstractAdminRevisionMissingLabelBean(final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,?,?,RML> fbRevision, IoLocaleFactoryBuilder<L,D,LOC> fbLocale)
 	{
 		super(fbRevision.getClassL(), fbRevision.getClassD());
 		this.fbRevision = fbRevision;

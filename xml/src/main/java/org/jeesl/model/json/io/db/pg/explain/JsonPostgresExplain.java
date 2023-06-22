@@ -1,4 +1,4 @@
-package org.jeesl.model.json.io.db.pg.analysis;
+package org.jeesl.model.json.io.db.pg.explain;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="analysis")
-public class JsonPostgresAnalysis implements Serializable
+public class JsonPostgresExplain implements Serializable
 {
 	public static final long serialVersionUID=1;
 	

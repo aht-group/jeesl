@@ -11,6 +11,13 @@
             <resource-id>ioCrypto/key.xhtml</resource-id>
         </component>
 	</tag>
+	
+	<tag>
+        <tag-name>gridIoDbExplain</tag-name>
+        <component>
+            <resource-id>ioDb/explain.xhtml</resource-id>
+        </component>
+	</tag>
   
 	<tag>
         <tag-name>gridIoMavenArtifact</tag-name>

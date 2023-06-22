@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.bean.JeeslTranslationBean;
-import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
+import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.txt.system.locale.TranslationFactory;
 import org.jeesl.factory.txt.system.locale.TranslationMap;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -29,7 +29,7 @@ public class AbstractTranslationBean<L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 
 	private JeeslFacade fUtils;
-	private LocaleFactoryBuilder<L,D,LOC> fbStatus;
+	private IoLocaleFactoryBuilder<L,D,LOC> fbStatus;
 
 	private TranslationMap tm;
 	protected final List<String> langKeys; @Override public List<String> getLangKeys(){return langKeys;}
@@ -37,7 +37,7 @@ public class AbstractTranslationBean<L extends JeeslLang, D extends JeeslDescrip
 	protected final List<LOC> locales; @Override public List<LOC> getLocales() {return locales;}
 	private final Map<String,LOC> mapLocales; public Map<String, LOC> getMapLocales() {return mapLocales;}
 
-	public AbstractTranslationBean(LocaleFactoryBuilder<L,D,LOC> fbStatus)
+	public AbstractTranslationBean(IoLocaleFactoryBuilder<L,D,LOC> fbStatus)
 	{
 		langKeys = new ArrayList<String>();
 		locales = new ArrayList<LOC>();

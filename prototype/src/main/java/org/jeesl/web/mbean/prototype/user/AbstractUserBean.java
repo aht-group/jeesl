@@ -13,7 +13,7 @@ import javax.servlet.RequestDispatcher;
 import org.jeesl.api.bean.JeeslMenuBean;
 import org.jeesl.api.facade.core.JeeslUserFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
-import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
+import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.pojo.system.JeeslIdentityFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -59,7 +59,7 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 	protected String uuid;
 	protected String localeCode;
 
-	protected AbstractUserBean(LocaleFactoryBuilder<L,D,?> fbStatus)
+	protected AbstractUserBean(IoLocaleFactoryBuilder<L,D,?> fbStatus)
 	{
 		super(fbStatus.getClassL(),fbStatus.getClassD());
 	}

@@ -1,4 +1,4 @@
-package org.jeesl.factory.builder.io;
+package org.jeesl.factory.provider.io;
 
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
@@ -8,7 +8,7 @@ import org.jeesl.model.ejb.io.graphic.core.IoGraphicType;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 
-public class IoLocaleFactoryBuilder
+public class IoLocaleFactoryProvider
 {
 //	final static Logger logger = LoggerFactory.getLogger(IoLocaleFactoryBuilder.class);
 	

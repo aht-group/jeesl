@@ -1,4 +1,4 @@
-package org.jeesl.model.json.io.db.pg.analysis;
+package org.jeesl.model.json.io.db.pg.explain;
 
 import java.io.Serializable;
 
@@ -26,4 +26,10 @@ public class JsonPostgresTrigger implements Serializable
 	private Double time;
 	public Double getTime() {return time;}
 	public void setTime(Double time) {this.time = time;}
+	
+	@JsonProperty("Calls")
+	private Integer  calls;
+	public Integer getCalls() {return calls;}
+	public void setCalls(Integer calls) {this.calls = calls;}
+	
 }

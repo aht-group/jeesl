@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
+import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.interfaces.bean.system.JeeslSessionRegistryBean;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -32,7 +32,7 @@ public abstract class AbstractSessionOverviewBean <L extends JeeslLang, D extend
 	private USER user; public USER getUser() {return user;} public void setUser(USER user) {this.user = user;}
 	protected Chart chart; public Chart getChart() {return chart;}
 	
-	public AbstractSessionOverviewBean(LocaleFactoryBuilder<L,D,LOC> fbStatus)
+	public AbstractSessionOverviewBean(IoLocaleFactoryBuilder<L,D,LOC> fbStatus)
 	{
 		super(fbStatus.getClassL(),fbStatus.getClassD());
 	}

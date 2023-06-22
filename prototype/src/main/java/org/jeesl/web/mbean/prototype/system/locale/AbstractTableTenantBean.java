@@ -11,8 +11,8 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
-import org.jeesl.factory.builder.system.LocaleFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -70,7 +70,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 	private R realm; public R getRealm() {return realm;}
 	private RREF rref; public RREF getRref() {return rref;}
 	
-	public AbstractTableTenantBean(LocaleFactoryBuilder<L,D,LOC> fbStatus,
+	public AbstractTableTenantBean(IoLocaleFactoryBuilder<L,D,LOC> fbStatus,
 									SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg,
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{

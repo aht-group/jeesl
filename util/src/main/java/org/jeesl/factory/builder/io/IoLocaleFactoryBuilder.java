@@ -1,4 +1,4 @@
-package org.jeesl.factory.builder.system;
+package org.jeesl.factory.builder.io;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
@@ -11,18 +11,18 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class LocaleFactoryBuilder<L extends JeeslLang,
+public class IoLocaleFactoryBuilder<L extends JeeslLang,
 									D extends JeeslDescription,
 									LOC extends JeeslLocale<L,D,LOC,?>>
 	extends AbstractFactoryBuilder<L,D>
 {
-	final static Logger logger = LoggerFactory.getLogger(LocaleFactoryBuilder.class);
+	final static Logger logger = LoggerFactory.getLogger(IoLocaleFactoryBuilder.class);
 	
 	private final Class<LOC> cLoc; public Class<LOC> getClassLocale(){return cLoc;}
 	private final Class<?> cStatusGlobal; public Class<?> getClassStatusGlobal(){return cStatusGlobal;}
 	private final Class<?> cStatusTenant; public Class<?> getClassStatusTenant(){return cStatusTenant;}
 	
-	public LocaleFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<LOC> cLoc,
+	public IoLocaleFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<LOC> cLoc,
 								final Class<?> cStatusGlobal, final Class<?> cStatusTenant)
 	{       
 		super(cL,cD);

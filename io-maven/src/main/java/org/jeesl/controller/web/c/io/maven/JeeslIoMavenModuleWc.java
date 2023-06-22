@@ -13,8 +13,8 @@ import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.ejb.io.maven.EjbMavenModuleFactory;
+import org.jeesl.factory.provider.io.IoLocaleFactoryProvider;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -129,7 +129,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 		if(module.getGraphic()==null)
 		{
 			IoGraphicType type = fMaven.fByCode(IoGraphicType.class,JeeslGraphicType.Code.svg);
-			module.setGraphic(IoLocaleFactoryBuilder.svg().efGraphic().build(type));
+			module.setGraphic(IoLocaleFactoryProvider.svg().efGraphic().build(type));
 		}
 		module.getGraphic().setData(file.getContent());
 	}
