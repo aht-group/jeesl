@@ -29,7 +29,6 @@ public class EjbCodeCache <T extends EjbWithCode>
 	{
 		this(c);
 		this.facade=fUtils;
-		
 	}
 	
 	public EjbCodeCache(Class<T> c, List<T> list)

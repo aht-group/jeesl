@@ -13,6 +13,11 @@ public class XmlUserFactory<USER extends JeeslUser<?>>
 		
 	private final User q;
 	
+	public static <USER extends JeeslUser<?>> XmlUserFactory<USER> instance(User q)
+	{
+		return new XmlUserFactory<>(q);
+	}
+	
 	public XmlUserFactory(QuerySecurity query){this(query.getUser());}
 	public XmlUserFactory(User q)
 	{

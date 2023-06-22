@@ -6,9 +6,11 @@ import java.util.Map;
 import org.jeesl.factory.xml.module.workflow.XmlPermissionFactory;
 import org.jeesl.factory.xml.module.workflow.XmlPermissionsFactory;
 import org.jeesl.factory.xml.system.security.XmlRoleFactory;
+import org.jeesl.factory.xml.system.security.XmlUserFactory;
 import org.jeesl.factory.xml.system.status.XmlContextFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.model.xml.jeesl.QueryWf;
+import org.jeesl.model.xml.module.workflow.Activity;
 import org.jeesl.model.xml.module.workflow.Permission;
 import org.jeesl.model.xml.module.workflow.Permissions;
 import org.jeesl.model.xml.module.workflow.Stage;
@@ -146,6 +148,16 @@ public class XmlWorkflowQuery
 		xml.setPosition(0);
 		xml.setLabel("");
 		xml.setStage(rStage2Process());
+		return xml;
+	}
+	
+	public static Activity rLastActivity()
+	{		
+		Activity xml = new Activity();
+		xml.setId(0);
+		xml.setUser(XmlUserFactory.build("","",""));
+		
+		
 		return xml;
 	}
 }

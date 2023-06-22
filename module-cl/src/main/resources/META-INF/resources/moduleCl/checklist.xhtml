@@ -57,7 +57,7 @@
 							<f:selectItems value="#{cc.attrs.ctrl.topics}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
 					</j:inputGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.ctrl.list}" withDescription="false" />
+					<jtp:inputMulti value="#{cc.attrs.ctrl.list}" withDescription="false" locales="#{cc.attrs.ctrl.locales}"/>
 				</p:panel>
 			</h:form>
 		</j:slot>
@@ -103,7 +103,7 @@
 						<jtp:label entity="ClChecklistItem" code="id"/>
 						<h:outputText value="#{cc.attrs.ctrl.item.id}"/>
 					</j:inputGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.ctrl.item}" withDescription="false" />
+					<jtp:inputMulti value="#{cc.attrs.ctrl.item}" withDescription="false" locales="#{cc.attrs.ctrl.locales}"/>
 					<jtp:inputTabMarkup value="#{cc.attrs.ctrl.item.markup}" locales="#{cc.attrs.ctrl.locales}"/>
 				</p:panel>
 			</h:form>

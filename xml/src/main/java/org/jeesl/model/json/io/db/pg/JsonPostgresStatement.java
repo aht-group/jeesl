@@ -6,6 +6,11 @@ public class JsonPostgresStatement implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
+	public JsonPostgresStatement()
+	{
+		
+	}
+	
 	private long id;
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
@@ -19,21 +24,12 @@ public class JsonPostgresStatement implements Serializable
 	public void setCalls(Long calls) {this.calls = calls;}
 	
 	private Double average;
-	
-	public Double getAverage() {
-		return average;
-	}
-	public void setAverage(Double average) {
-		this.average = average;
-	}
-	public Double getTotal() {
-		return total;
-	}
-	public void setTotal(Double total) {
-		this.total = total;
-	}
+	public Double getAverage() {return average;}
+	public void setAverage(Double average) {this.average = average;}
 
 	private Double total;
+	public Double getTotal() {return total;}
+	public void setTotal(Double total) {this.total = total;}
 
 	private String sql;
 	public String getSql() {return sql;}

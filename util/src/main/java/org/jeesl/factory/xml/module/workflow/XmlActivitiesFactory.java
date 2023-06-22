@@ -8,6 +8,7 @@ import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransi
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.xml.module.workflow.Activities;
+import org.jeesl.model.xml.module.workflow.Activity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,5 +31,6 @@ public class XmlActivitiesFactory<L extends JeeslLang, D extends JeeslDescriptio
 		this.q=q;
 	}
 	
-	public static Activities build(){return new Activities();}
+	public static Activities build() {return new Activities();}
+	public static Activities build(Activity activity) {Activities xml = build(); xml.getActivity().add(activity); return xml;}
 }

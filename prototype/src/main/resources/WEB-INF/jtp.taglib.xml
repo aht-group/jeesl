@@ -42,7 +42,11 @@
         <tag-name>inputText</tag-name>
         <source>jeeslPrototype/input/text.xhtml</source>
     </tag>
-        <tag>
+    <tag>
+        <tag-name>inputMulti</tag-name>
+        <source>jeeslPrototype/input/multi.xhtml</source>
+    </tag>
+	<tag>
         <tag-name>inputDate</tag-name>
         <source>jeeslPrototype/input/date.xhtml</source>
     </tag>
@@ -66,6 +70,7 @@
         <tag-name>inputTabText</tag-name>
         <source>jeeslPrototype/langs/tabText.xhtml</source>
     </tag>
+    
     <tag>
         <tag-name>inputTabRemark</tag-name>
         <source>jeeslPrototype/langs/tabRemark.xhtml</source>

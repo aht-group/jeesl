@@ -1,4 +1,4 @@
-package org.jeesl.model.json.ssi.postgres;
+package org.jeesl.model.json.io.db.pg.analysis;
 
 import java.io.Serializable;
 

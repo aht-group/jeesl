@@ -31,6 +31,7 @@
 		<module>io-attribute</module>
 		<module>io-cms</module>
 		<module>io-crypto</module>
+		<module>io-db</module>
 		<module>io-label</module>
 		<module>io-locale</module>
 		<module>io-log</module>

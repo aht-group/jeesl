@@ -26,6 +26,6 @@ public class UiEditBooleanHandler implements UiEditHandler
 	}
 	
 	public void denyEdit() {allow=false;}
-	public void allowEdit() {allow=false;}
+	public void allowEdit() {allow=true;}
 }
 //jeesl.highlight:showcase
