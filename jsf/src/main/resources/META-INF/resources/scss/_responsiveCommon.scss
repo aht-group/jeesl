@@ -129,12 +129,32 @@ $border: $border-width solid $border-colour;
 	}
 }
 
+.jeesl-bold {
+	font-weight: 700;
+}
+
+.jeesl-italic {
+	font-style: italic;
+}
+
 .jeesl-left {
-	float: left;
+	text-align: left;
+}
+
+.jeesl-center {
+	text-align: center;
 }
 
 .jeesl-right {
-	float: right;
+	text-align: right;
+}
+
+.jeesl-red {
+	color: $foreground-alert;
+}
+
+.jeesl-grey {
+	color: $foreground-grey;
 }
 
 .jeesl-greyscale {
@@ -1285,6 +1305,22 @@ $border: $border-width solid $border-colour;
 	padding: 0;
 	position: relative;
 	top: 0;
+}
+
+.jeesl-input-container {
+	> .ui-inputtextarea, > .ui-inputtext {
+		flex-grow: 1;
+		
+		&:not(:last-child) {
+			border-radius: $border-radius-left;
+		}
+		
+		+ .jeesl-input-unit {
+			background: $white-100;
+			border-radius: $border-radius-right;
+			padding: 0 $half-spacing;
+		}
+	}
 }
 
 .ui-colorpicker-container {
