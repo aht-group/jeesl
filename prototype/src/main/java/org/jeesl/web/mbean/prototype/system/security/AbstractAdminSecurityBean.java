@@ -92,12 +92,12 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 	
 	protected C category;public void setCategory(C category) {this.category = category;}public C getCategory() {return category;}
 	
-	protected V opView;public V getOpView(){return opView;}public void setOpView(V opView){this.opView = opView;}
-	protected V tblView;public V getTblView(){return tblView;}public void setTblView(V tblView){this.tblView = tblView;}
-	protected A opAction;public A getOpAction(){return opAction;}public void setOpAction(A opAction){this.opAction = opAction;}
-	protected A tblAction;public A getTblAction(){return tblAction;}public void setTblAction(A tblAction){this.tblAction = tblAction;}
-	protected U opUsecase;public U getOpUsecase(){return opUsecase;}public void setOpUsecase(U opUsecase){this.opUsecase = opUsecase;}
-	protected U tblUsecase;public U getTblUsecase(){return tblUsecase;}public void setTblUsecase(U tblUsecase){this.tblUsecase = tblUsecase;}
+	protected V opView; public V getOpView(){return opView;}public void setOpView(V opView){this.opView = opView;}
+	protected V tblView; public V getTblView(){return tblView;}public void setTblView(V tblView){this.tblView = tblView;}
+	protected A opAction; public A getOpAction(){return opAction;}public void setOpAction(A opAction){this.opAction = opAction;}
+	protected A tblAction; public A getTblAction(){return tblAction;}public void setTblAction(A tblAction){this.tblAction = tblAction;}
+	protected U opUsecase; public U getOpUsecase(){return opUsecase;}public void setOpUsecase(U opUsecase){this.opUsecase = opUsecase;}
+	protected U tblUsecase; public U getTblUsecase(){return tblUsecase;}public void setTblUsecase(U tblUsecase){this.tblUsecase = tblUsecase;}
 	
 	public AbstractAdminSecurityBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{

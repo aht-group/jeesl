@@ -21,7 +21,7 @@
 		<p:panel header="#{msg.jeeslSecurityCategory}" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.category}">
 			<f:facet name="actions">
 				<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
-				<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.hasDeveloperAction}" listener="#{cc.attrs.bean.rmCategory()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
+				<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.rmCategory()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
 			</f:facet>
 			<p:messages for="category" redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 			<j:inputGrid>
@@ -29,11 +29,11 @@
 				<h:outputText rendered="#{not cc.attrs.withAdd}" value="#{cc.attrs.bean.category.code}"/>
 				<p:inputText rendered="#{cc.attrs.withAdd}" value="#{cc.attrs.bean.category.code}"/>
 				
-				<jtp:label entity="SecurityCategory" code="visible" rendered="#{cc.attrs.bean.uiShowInvisible}"/>
-				<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{cc.attrs.bean.category.visible}"/>
+				<jtp:label entity="SecurityCategory" code="visible" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
+				<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.category.visible}"/>
 				
-				<jtp:label entity="SecurityCategory" code="documentation" rendered="#{cc.attrs.bean.uiShowDocumentation}"/>
-				<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{cc.attrs.bean.category.documentation}"/>
+				<jtp:label entity="SecurityCategory" code="documentation" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
+				<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.category.documentation}"/>
 			</j:inputGrid>
 			<jtp:inputMulti value="#{cc.attrs.bean.category}" withDescription="true"/>
 		</p:panel>

@@ -31,7 +31,7 @@
 						selection="#{cc.attrs.bean.view}" selectionMode="single" rowKey="#{v.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SecurityView" code="listOf">
-							<j:svg type="jeeslAdd" rendered="#{cc.attrs.bean.uiAllowAdd}" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttAdd}"/>
+							<j:svg type="jeeslAdd" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttAdd}"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectView}" update=":#{cc.id}:sViews :#{cc.id}:sView"/>
@@ -43,11 +43,11 @@
 						<f:facet name="header"><jtp:label entity="SecurityView"/></f:facet>
 						<h:outputText value="#{v.name[localeCode].lang}" />  
 					</p:column>
-					<p:column rendered="#{cc.attrs.bean.uiShowInvisible}" styleClass="jeeslCenter">  
+					<p:column rendered="#{cc.attrs.bean.userIsDeveloper}" styleClass="jeeslCenter">  
 						<h:graphicImage rendered="#{v.visible}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
 		                <h:graphicImage rendered="#{not v.visible}" name="#{appIconBean.icon12['jeeslSecurityInvisible']}" library="gfx"/>
 		         	</p:column>
-					<p:column rendered="#{cc.attrs.bean.uiShowDocumentation}" styleClass="jeeslCenter">  
+					<p:column rendered="#{cc.attrs.bean.userIsDeveloper}" styleClass="jeeslCenter">  
 						<h:graphicImage rendered="#{v.documentation}" name="#{appIconBean.icon12['jeeslSecurityDocumentation']}" library="gfx"/>
 		            </p:column>
 		       	</p:dataTable>
@@ -83,39 +83,39 @@
 					<f:facet name="header"><j:pHeader entity="SecurityView"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttSave}"/>
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" rendered="#{cc.attrs.bean.hasDeveloperAction}" tooltip="#{msg.ttDelete}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" rendered="#{cc.attrs.bean.userIsDeveloper}" tooltip="#{msg.ttDelete}"/>
 						<j:svg type="jeeslClone" listener="#{cc.attrs.bean.cloneView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.jeeslTooltipClone}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<jtp:label entity="SecurityView" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.view.category}" effect="fade" autoWidth="false">
-							<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
+							<f:selectItems value="#{cc.attrs.bean.categories}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
 					</p:panelGrid>
 					<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">
-						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.visible}" rendered="#{cc.attrs.bean.uiShowInvisible}" />
-						<jtp:label entity="SecurityView" code="visible" rendered="#{cc.attrs.bean.uiShowInvisible}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.visible}" rendered="#{cc.attrs.bean.userIsDeveloper}" />
+						<jtp:label entity="SecurityView" code="visible" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
 												
 						<p:triStateCheckbox value="#{cc.attrs.bean.tsb.a}"/>
 						<jtp:label entity="SecurityView" code="redirect"/>
 					</p:panelGrid>	
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<jtp:label entity="SecurityView" code="code"/>
-						<h:outputText rendered="#{not cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.view.code}"/>
-						<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.view.code}"/>
+						<h:outputText rendered="#{not cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.view.code}"/>
+						<p:inputText rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.view.code}"/>
 					</p:panelGrid>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid50,jeeslGrid50" rendered="#{cc.attrs.bean.uiShowDocumentation}">	
+					<p:panelGrid columns="2" columnClasses="jeeslGrid50,jeeslGrid50" rendered="#{cc.attrs.bean.userIsDeveloper}">	
 						<jtp:label entity="SecurityView" code="documentation"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.documentation}"/>
 					</p:panelGrid>
-					<p:panelGrid rendered="#{cc.attrs.bean.hasDeveloperAction}" columns="2" columnClasses="jeeslGrid50,jeeslGrid50">
+					<p:panelGrid rendered="#{cc.attrs.bean.userIsDeveloper}" columns="2" columnClasses="jeeslGrid50,jeeslGrid50">
 						<jtp:label entity="SecurityView" code="accessPublic"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.accessPublic}"/>
 						<jtp:label entity="SecurityView" code="accessLogin"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.accessLogin}"/>
 					</p:panelGrid>	
-					<p:panelGrid rendered="#{cc.attrs.bean.hasDeveloperAction}" columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
+					<p:panelGrid rendered="#{cc.attrs.bean.userIsDeveloper}" columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<jtp:label entity="SecurityView" code="packageName"/>
 						<p:inputText value="#{cc.attrs.bean.view.packageName}"/>
 						<jtp:label entity="SecurityView" code="viewPattern"/>
@@ -157,7 +157,7 @@
 					<f:facet name="header"><j:pHeader entity="SecurityAction"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveAction()}" update=":#{cc.id}:fActions :#{cc.id}:fAction" tooltip="#{msg.ttSave}"/>
-						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.hasDeveloperAction}" listener="#{cc.attrs.bean.rmAction()}" update=":#{cc.id}:sView"/>
+						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.rmAction()}" update=":#{cc.id}:sView"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<p:outputLabel value="#{msg.jeeslSecurityActionTemplate}"/>
@@ -167,8 +167,8 @@
 							<p:ajax event="change" listener="#{cc.attrs.bean.changeTemplate()}" update="@form"/>
 						</p:selectOneMenu>
 						<p:outputLabel value="#{msg.jeeslSecurityCode}"/>
-						<h:outputText rendered="#{(not empty cc.attrs.bean.action.template) or (not cc.attrs.bean.uiAllowCode)}" value="#{cc.attrs.bean.view.code}.#{fn:substringAfter(cc.attrs.bean.action.template.code,'.')}"/>
-						<p:inputText rendered="#{(empty cc.attrs.bean.action.template) and (cc.attrs.bean.uiAllowCode)}" value="#{cc.attrs.bean.action.code}"/>
+						<h:outputText rendered="#{(not empty cc.attrs.bean.action.template) or (not cc.attrs.bean.userIsDeveloper)}" value="#{cc.attrs.bean.view.code}.#{fn:substringAfter(cc.attrs.bean.action.template.code,'.')}"/>
+						<p:inputText rendered="#{(empty cc.attrs.bean.action.template) and (cc.attrs.bean.userIsDeveloper)}" value="#{cc.attrs.bean.action.code}"/>
 					</p:panelGrid>
 					<aht:tabTranslationEditor rendered="#{empty cc.attrs.bean.action.template}" value="#{cc.attrs.bean.action}" keys="#{appTranslationBean.langKeys}" withDescription="true"/>
 				</p:panel>
@@ -190,7 +190,7 @@
 		            <p:column headerText="#{msg.jeeslSecurityArea}">  
 						<h:outputText value="#{a.name[localeCode].lang}"/>
 		            </p:column>
-		            <p:column rendered="#{cc.attrs.bean.uiShowInvisible}" styleClass="jeeslCenter">  
+		            <p:column rendered="#{cc.attrs.bean.userIsDeveloper}" styleClass="jeeslCenter">  
 						<h:graphicImage rendered="#{a.restricted}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
 		         	</p:column>
 		       	</p:dataTable>
@@ -200,12 +200,12 @@
 					<f:facet name="header"><j:pHeader entity="SecurityArea"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveArea()}" update=":#{cc.id}:fAreas :#{cc.id}:fArea"/>
-						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.hasDeveloperAction}" listener="#{cc.attrs.bean.deleteArea()}" update=":#{cc.id}:sView" tooltip="#{msg.ttDelete}"/>
+						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.deleteArea()}" update=":#{cc.id}:sView" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<jtp:label entity="SecurityArea" code="code"/>
-						<h:outputText rendered="#{not cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.area.code}"/>
-						<p:inputText rendered="#{cc.attrs.bean.uiAllowCode}" value="#{cc.attrs.bean.area.code}"/>
+						<h:outputText rendered="#{not cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.area.code}"/>
+						<p:inputText rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.area.code}"/>
 						
 						<p:outputLabel value="#{msg.jeeslSecurityAreaRestricted}"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.area.restricted}"/>

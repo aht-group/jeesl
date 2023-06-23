@@ -64,6 +64,7 @@ public class AbstractAdminSecurityRoleBean <L extends JeeslLang, D extends Jeesl
 	private R role; public R getRole(){return role;} public void setRole(R role) {this.role = role;}
 	
 	private boolean denyRemove; public boolean isDenyRemove(){return denyRemove;}
+	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
 	
 	public AbstractAdminSecurityRoleBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
@@ -85,6 +86,8 @@ public class AbstractAdminSecurityRoleBean <L extends JeeslLang, D extends Jeesl
 		Collections.sort(opUsecases,comparatorUsecase);
 		
 		roles = new ArrayList<R>();
+		
+		userIsDeveloper = false;
 	}
 	
 	public void addCategory() 

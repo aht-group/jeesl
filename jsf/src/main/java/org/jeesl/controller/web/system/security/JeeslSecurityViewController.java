@@ -1,19 +1,27 @@
-package org.jeesl.web.mbean.prototype.system.security;
+package org.jeesl.controller.web.system.security;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
+import org.jeesl.controller.util.comparator.ejb.system.security.SecurityActionComparator;
+import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
+import org.jeesl.controller.util.comparator.ejb.system.security.SecurityUsecaseComparator;
+import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
+import org.jeesl.factory.ejb.system.security.EjbSecurityActionFactory;
+import org.jeesl.factory.ejb.system.security.EjbSecurityCategoryFactory;
+import org.jeesl.factory.ejb.system.security.EjbSecurityViewFactory;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -29,6 +37,7 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplat
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.util.TriStateBinder;
 import org.slf4j.Logger;
@@ -36,8 +45,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-@Deprecated //Use JeeslSecurityViewController instead
-public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
 											R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
 											V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -50,18 +58,35 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 											OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 											OH extends JeeslSecurityOnlineHelp<V,?,?>,
 											USER extends JeeslUser<R>>
-		extends AbstractAdminSecurityBean<L,D,LOC,C,R,V,U,A,AT,CTX,M,AR,OT,OH,USER>
+		extends AbstractJeeslWebController<L,D,LOC>
 		implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityViewBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityViewController.class);
 
+	private enum SecuritySuffix {developer}
+	private enum SecuritySuffixDeprecated {Developer}
+	
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
+	private JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
+	
+	private final EjbSecurityCategoryFactory<C> efCategory;
+	protected final EjbSecurityViewFactory<C,V> efView;
+	protected final EjbSecurityActionFactory<V,A> efAction;
+	
+	protected final Comparator<R> comparatorRole;
+	protected final Comparator<U> comparatorUsecase;
+	protected final Comparator<A> comparatorAction;
+	
+	private List<C> categories; public List<C> getCategories() {return categories;}
 	private List<V> views; public List<V> getViews(){return views;}
 	private final List<A> actions; public List<A> getActions(){return actions;}
 	private List<AR> areas; public List<AR> getAreas(){return areas;}
 	private List<R> roles; public List<R> getRoles(){return roles;}
 	private List<U> usecases; public List<U> getUsecases(){return usecases;}
+	private List<AT> templates; public List<AT> getTemplates(){return templates;}
 	
+	private C category;public void setCategory(C category) {this.category = category;} public C getCategory() {return category;}
 	private V view; public V getView(){return view;} public void setView(V view) {this.view = view;}
 	private A action; public A getAction(){return action;} public void setAction(A action) {this.action = action;}
 	private AR area; public AR getArea(){return area;} public void setArea(AR area) {this.area = area;}
@@ -69,36 +94,67 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
 	private final TriStateBinder tsb; public TriStateBinder getTsb() {return tsb;}
 	
-	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
+	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
 	
-	public AbstractAdminSecurityViewBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
+	public JeeslSecurityViewController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
-		super(fbSecurity);
-		categoryType = JeeslSecurityCategory.Type.view;
+		super(fbSecurity.getClassL(),fbSecurity.getClassD());
+		this.fbSecurity=fbSecurity;
+		
+		efCategory = fbSecurity.ejbCategory();
+		efView = fbSecurity.ejbView();
+		efAction = fbSecurity.ejbAction();
+		
+		comparatorRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
+		comparatorUsecase = (new SecurityUsecaseComparator<L,D,C,R,V,U,A,AT,USER>()).factory(SecurityUsecaseComparator.Type.position);
+		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
+		
 		tsb = new TriStateBinder();
 		actions = new ArrayList<>();
-		
-		userIsDeveloper = false;
 	}
 	
-	public void initSuper(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
-							JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-							JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
+			JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
+			JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
+			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{
-		super.postConstructSecurity(fSecurity,bTranslation,bMessage,bSecurity);
+		super.postConstructWebController(lp,bMessage);
+		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
 		templates = fSecurity.allOrderedPositionVisible(fbSecurity.getClassTemplate());
+		
+		userIsDeveloper = security.allowSuffixCode(SecuritySuffix.developer) || security.allowSuffixCode(SecuritySuffixDeprecated.Developer);
+		
+		this.reloadCategories();
 	}
 	
-	@Override public void categorySelected() throws JeeslNotFoundException
+	private void reloadCategories()
 	{
-		reloadViews();
+		categories = fSecurity.allOrderedPosition(fbSecurity.getClassCategory(),JeeslSecurityCategory.Type.view);
+		logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassCategory(),categories));
+	}
+	public void addCategory() throws JeeslConstraintViolationException
+	{
+		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassCategory()));
+		category = efCategory.create(null,JeeslSecurityCategory.Type.view.toString());
+		category.setName(efLang.buildEmpty(lp.getLocales()));
+		category.setDescription(efDescription.buildEmpty(lp.getLocales()));
+	}
+	public void selectCategory() throws JeeslNotFoundException
+	{
+		logger.info(AbstractLogMessage.selectEntity(category));
+		category = efLang.persistMissingLangs(fSecurity,lp.getLocales(),category);
+		category = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),category);
+		this.reloadViews();
 		view=null;
 		action=null;
 	}
-	@Override protected void categorySaved() throws JeeslNotFoundException
+	public void saveCategory() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
-		reloadViews();
+		logger.info(AbstractLogMessage.saveEntity(category));
+		category = fSecurity.save(category);
+		this.reloadCategories();
+		this.reloadViews();
 	}
 	
 	protected boolean categoryRemoveable() throws JeeslNotFoundException
@@ -142,21 +198,15 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	}
 	
 	//Add
-	public void addCategory() throws JeeslConstraintViolationException
-	{
-		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassCategory()));
-		category = efCategory.create(null,JeeslSecurityCategory.Type.view.toString());
-		category.setName(efLang.createEmpty(localeCodes));
-		category.setDescription(efDescription.createEmpty(localeCodes));
-	}
+	
 	
 	//VIEW
 	public void addView() throws JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassView()));
 		view = efView.build(category,"",views);
-		view.setName(efLang.createEmpty(localeCodes));
-		view.setDescription(efDescription.createEmpty(localeCodes));
+		view.setName(efLang.buildEmpty(lp.getLocales()));
+		view.setDescription(efDescription.buildEmpty(lp.getLocales()));
 		tsb.booleanToA(view.getRedirect());
 	}
 	
@@ -165,17 +215,10 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		reset(false,true,true);
 		logger.info(AbstractLogMessage.selectEntity(view));
 		view = fSecurity.load(fbSecurity.getClassView(), view);
-		view = efLang.persistMissingLangs(fSecurity,localeCodes,view);
-		view = efDescription.persistMissingLangs(fSecurity,localeCodes,view);
+		view = efLang.persistMissingLangs(fSecurity,lp.getLocales(),view);
+		view = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),view);
 		reloadView();
 		reloadActions();
-	}
-	
-	public void selectAction()
-	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(action));}
-		action = efLang.persistMissingLangs(fSecurity,localeCodes,action);
-		action = efDescription.persistMissingLangs(fSecurity,localeCodes,action);
 	}
 	
 	public void saveView() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
@@ -201,7 +244,10 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		view = clone;
 	}
 	
-	protected abstract void propagateChanges();
+	protected void propagateChanges()
+	{
+		logger.warn("NYI: propagateChanges");
+	}
 	
 	public void deleteView() throws JeeslConstraintViolationException, JeeslNotFoundException
 	{
@@ -230,12 +276,18 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	}
 	
 	//ACTION
+	public void selectAction()
+	{
+		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(action));}
+		action = efLang.persistMissingLangs(fSecurity,lp.getLocales(),action);
+		action = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),action);
+	}
 	public void addAction() throws JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassAction()));
 		action = efAction.build(view,"",actions);
-		action.setName(efLang.createEmpty(localeCodes));
-		action.setDescription(efDescription.createEmpty(localeCodes));
+		action.setName(efLang.buildEmpty(lp.getLocales()));
+		action.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
 	public void saveAction() throws JeeslConstraintViolationException, JeeslLockingException
@@ -284,8 +336,8 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		}
 		else
 		{
-			action = efLang.persistMissingLangs(fSecurity,localeCodes,action);
-			action = efDescription.persistMissingLangs(fSecurity,localeCodes,action);
+			action = efLang.persistMissingLangs(fSecurity,lp.getLocales(),action);
+			action = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),action);
 		}
 	}
 	
@@ -299,8 +351,8 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassArea()));
 		area = fbSecurity.ejbArea().build(view,areas);
-		area.setName(efLang.createEmpty(localeCodes));
-		area.setDescription(efDescription.createEmpty(localeCodes));
+		area.setName(efLang.buildEmpty(lp.getLocales()));
+		area.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
 	public void saveArea() throws JeeslConstraintViolationException, JeeslLockingException
@@ -315,8 +367,8 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	public void selectArea() throws JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassArea()));
-		area = efLang.persistMissingLangs(fSecurity,localeCodes,area);
-		area = efDescription.persistMissingLangs(fSecurity,localeCodes,area);
+		area = efLang.persistMissingLangs(fSecurity,lp.getLocales(),area);
+		area = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),area);
 	}
 	
 	public void deleteArea() throws JeeslConstraintViolationException

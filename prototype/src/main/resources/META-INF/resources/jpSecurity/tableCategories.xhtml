@@ -42,11 +42,11 @@
             	<f:facet name="header"><jtp:label entity="SecurityCategory"/></f:facet>
 				<h:outputText value="#{c.name[localeCode].lang}"/>
             </p:column>
-            <p:column rendered="#{false and cc.attrs.bean.uiShowInvisible}" styleClass="jeeslPfTcCenter">  
+            <p:column rendered="#{false and cc.attrs.bean.userIsDeveloper}" styleClass="jeeslPfTcCenter">  
 				<h:graphicImage rendered="#{c.visible}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
                 <h:graphicImage rendered="#{not c.visible}" name="#{appIconBean.icon12['jeeslSecurityInvisible']}" library="gfx"/>
             </p:column>
-            <p:column rendered="#{cc.attrs.bean.uiShowDocumentation}" styleClass="jeeslPfTcCenter">  
+            <p:column rendered="#{cc.attrs.bean.userIsDeveloper}" styleClass="jeeslPfTcCenter">  
 				<j:svg type="jeeslSecurityDocumentation" rendered="#{u.documentation}"/>
             </p:column>
        	</p:dataTable>

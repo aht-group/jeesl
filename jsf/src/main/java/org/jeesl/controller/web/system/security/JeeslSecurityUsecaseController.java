@@ -100,6 +100,8 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	protected boolean uiShowInvisible; public boolean isUiShowInvisible() {return uiShowInvisible;}
 	protected boolean hasDeveloperAction; public boolean isHasDeveloperAction() {return hasDeveloperAction;}
 	
+	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
+	
 	public JeeslSecurityUsecaseController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
@@ -130,8 +132,11 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		
 		// Page Security Settings
 		hasDeveloperAction = security.allow(security.getPageCode()+".Developer");
+		userIsDeveloper = security.allow(security.getPageCode()+".developer");
 		uiShowDocumentation = hasDeveloperAction;
 		uiShowInvisible = hasDeveloperAction;
+		
+		
 		if(debugOnInfo) {logger.info("Page security for "+security.getPageCode()+" hasDeveloperAction:"+hasDeveloperAction+" uiShowDocumentation:"+uiShowInvisible);}
 		
 		reloadCategories();

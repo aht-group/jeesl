@@ -65,7 +65,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	private JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
 	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
 	
-	protected final EjbSecurityCategoryFactory<C> efCategory;
+	private final EjbSecurityCategoryFactory<C> efCategory;
 	
 	protected final Comparator<V> comparatorView;
 	protected final Comparator<U> comparatorUsecase;
@@ -81,7 +81,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	private List<A> actions; public List<A> getActions(){return actions;}
 	private List<U> usecases; public List<U> getUsecases(){return usecases;}
 	
-	protected C category;public void setCategory(C category) {this.category = category;} public C getCategory() {return category;}
+	private C category;public void setCategory(C category) {this.category = category;} public C getCategory() {return category;}
 	private R role; public R getRole(){return role;} public void setRole(R role) {this.role = role;}
 	
 	protected V tblView; public V getTblView() {return tblView;} public void setTblView(V tblView) {this.tblView = tblView;}
@@ -97,6 +97,8 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	private boolean denyRemove; public boolean isDenyRemove(){return denyRemove;}
 	private boolean uiShowInvisible; public boolean isUiShowInvisible() {return uiShowInvisible;}
 	private boolean uiAllowCode; public boolean isUiAllowCode() {return uiAllowCode;}
+	
+	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
 	
 	public JeeslSecurityRoleController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
@@ -115,6 +117,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		hasDeveloperAction = false;
 		uiShowInvisible = true;
 		uiAllowCode = true;
+		userIsDeveloper = false;
 	}
 	
 	public void postConstructRole(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
@@ -136,13 +139,11 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		this.reloadCategories();
 	}
 
-	protected void reloadCategories()
+	private void reloadCategories()
 	{
 		categories = fSecurity.allOrderedPosition(fbSecurity.getClassCategory(),JeeslSecurityCategory.Type.role);
-		
 		logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassCategory(),categories));
 	}
-	
 	public void addCategory() 
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassCategory()));
@@ -150,7 +151,6 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		category.setName(efLang.buildEmpty(lp.getLocales()));
 		category.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
-
 	public void selectCategory() throws JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.selectEntity(category));
@@ -159,7 +159,6 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		reloadRoles();
 		role=null;
 	}
-	
 	public void saveCategory() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		logger.info(AbstractLogMessage.saveEntity(category));

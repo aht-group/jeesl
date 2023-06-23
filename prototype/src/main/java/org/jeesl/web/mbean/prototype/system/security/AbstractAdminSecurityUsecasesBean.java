@@ -60,6 +60,7 @@ public class AbstractAdminSecurityUsecasesBean <L extends JeeslLang, D extends J
 	private List<A> actions; public List<A> getActions(){return actions;}
 	
 	private U usecase; public U getUsecase(){return usecase;} public void setUsecase(U usecase){this.usecase = usecase;}
+	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;}
 	
 	public AbstractAdminSecurityUsecasesBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
@@ -76,6 +77,7 @@ public class AbstractAdminSecurityUsecasesBean <L extends JeeslLang, D extends J
 		Collections.sort(opViews,comparatorView);
 		
 		opActions = new ArrayList<A>();
+		userIsDeveloper = false;
 	}
 	
 	public void categorySelected() throws JeeslNotFoundException
