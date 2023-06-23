@@ -19,12 +19,14 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<p:dataTable var="c" value="#{cc.attrs.bean.categories}" styleClass="jeesl-datatable"
-					 selection="#{cc.attrs.bean.category}" draggableRows="true" selectionMode="single" rowKey="#{c.id}">
+		<p:dataTable styleClass="jeesl-datatable"
+				var="c" value="#{cc.attrs.bean.categories}" 
+				selection="#{cc.attrs.bean.category}" draggableRows="true" selectionMode="single" rowKey="#{c.id}"
+				paginator="true" rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 			<f:facet name="header">
-				<j:dtHeader title="#{msg.jeeslSecurityCategories}">
-					<j:svg type="jeeslAdd" library="jeeslGfx" rendered="#{cc.attrs.withAdd}" listener="#{cc.attrs.bean.addCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
-					<aht:downloadIcon rendered="#{cc.attrs.withXls}" type="reportXls" value="#{cc.attrs.bean.xlsStream()}" tooltip="#{msg.reportXls}"/>
+				<j:dtHeader entity="SecurityCategory" code="listOf">
+					<j:svg type="jeeslAdd" rendered="#{cc.attrs.withAdd}" listener="#{cc.attrs.bean.addCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
+					<j:downloadIcon rendered="#{cc.attrs.withXls}" type="reportXls" value="#{cc.attrs.bean.xlsStream()}" tooltip="#{msg.reportXls}"/>
 				</j:dtHeader>
 			</f:facet>
 			<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderCategories()}" update="@form"/>
@@ -36,8 +38,9 @@
          	<p:column rendered="false">  
 				<h:outputText value="#{c.position}"/>
          	</p:column>
-            <p:column headerText="#{msg.jeeslSecurityCategory}">  
-				<h:outputText value="#{c.name[userBean.localeCode].lang}"/>
+            <p:column filterBy="#{c.name[localeCode].lang}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle35}">
+            	<f:facet name="header"><jtp:label entity="SecurityCategory"/></f:facet>
+				<h:outputText value="#{c.name[localeCode].lang}"/>
             </p:column>
             <p:column rendered="#{false and cc.attrs.bean.uiShowInvisible}" styleClass="jeeslPfTcCenter">  
 				<h:graphicImage rendered="#{c.visible}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
