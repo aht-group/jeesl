@@ -124,7 +124,7 @@
 							<f:selectItems value="#{cc.attrs.bean.criterias}" var="c" itemLabel="[#{c.id}] #{c.code} - #{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
 						
-						<jtp:label entity="IoAttributeItem" code="code"/>
+						<jtp:label entity="IoAttributeItem" code="code" ttd="true"/>
 						<p:inputText  value="#{cc.attrs.bean.item.code}" autocomplete="off"/>
 						
 						<jtp:label entity="IoAttributeItem" code="remark"/>

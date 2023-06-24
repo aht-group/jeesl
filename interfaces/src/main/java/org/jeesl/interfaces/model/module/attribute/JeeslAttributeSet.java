@@ -10,6 +10,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
+import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
@@ -24,7 +25,7 @@ public interface JeeslAttributeSet <L extends JeeslLang, D extends JeeslDescript
 									CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
 									ITEM extends JeeslAttributeItem<?,?>>
 		extends Serializable,EjbSaveable,EjbRemoveable,
-				EjbWithPosition,EjbWithPositionParent,EjbWithCode,
+				EjbWithPosition,EjbWithPositionParent,EjbWithCode,EjbWithNonUniqueCode,
 				EjbWithLang<L>,EjbWithDescription<D>,
 				JeeslWithTenantSupport<R>
 {

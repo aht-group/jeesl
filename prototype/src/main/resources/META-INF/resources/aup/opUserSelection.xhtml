@@ -24,7 +24,6 @@
 	<p:overlayPanel for="#{cc.attrs.for}" widgetVar="wvOpContactSelection" appendToBody="false">
 		<p:dataTable id="dtOpContact" var="user" value="#{cc.attrs.contacts}"
 				selection="#{cc.attrs.contactHandler.user}" selectionMode="single" rowKey="#{user.id}"
-				filteredValue="#{cc.attrs.contactHandler.fvUser}"
 				rows="10" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{cc.attrs.paginatorTemplate}">
 			<f:facet name="header">
 				#{msg.aupContacts} <h:outputLink rendered="#{not empty cc.attrs.linkAddContact}" value="#{cc.attrs.linkAddContact}" onclick="PF('wvOpContactSelection').hide();">#{msg.aupAddressBookAddContactPage}</h:outputLink>
