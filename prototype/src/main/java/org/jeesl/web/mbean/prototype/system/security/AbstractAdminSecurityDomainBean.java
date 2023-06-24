@@ -15,16 +15,8 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbStaffFactory;
 import org.jeesl.interfaces.bean.op.OpUserBean;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -34,15 +26,8 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.prototype.controller.handler.op.user.OverlayUserSelectionHandler;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class AbstractAdminSecurityDomainBean <
-												C extends JeeslSecurityCategory<?,?>,
-												R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
-												V extends JeeslSecurityView<?,?,C,R,U,A>,
-												U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
-												A extends JeeslSecurityAction<?,?,R,V,U,AT>,
-												AT extends JeeslSecurityTemplate<?,?,C>,
-												CTX extends JeeslSecurityContext<?,?>,
-												M extends JeeslSecurityMenu<?,V,CTX,M>,
+public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,?>,
+												R extends JeeslSecurityRole<?,?,C,?,?,?,USER>,
 												USER extends JeeslUser<R>,
 												STAFF extends JeeslStaff<R,USER,D1,D2>,
 												D1 extends EjbWithId, D2 extends EjbWithId>
@@ -51,8 +36,8 @@ public class AbstractAdminSecurityDomainBean <
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityDomainBean.class);
 
-	protected JeeslSecurityFacade<?,?,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
-	private final SecurityFactoryBuilder<?,?,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity;
+	protected JeeslSecurityFacade<?,?,C,R,?,?,?,?,?,?,USER> fSecurity;
+	private final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	protected JeeslUserFacade<USER> fUser;
 
 	protected final Comparator<STAFF> cpStaff;
@@ -70,7 +55,7 @@ public class AbstractAdminSecurityDomainBean <
 	
 	private OverlayUserSelectionHandler<USER> opContactHandler; @Override public OverlayUserSelectionHandler<USER> getOpUserHandler() {return opContactHandler;}
 	
-	public AbstractAdminSecurityDomainBean(final SecurityFactoryBuilder<?,?,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity, Class<STAFF> cStaff)
+	public AbstractAdminSecurityDomainBean(final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity, Class<STAFF> cStaff)
 	{
 		this.fbSecurity=fbSecurity;
 		this.cStaff=cStaff;
@@ -78,7 +63,7 @@ public class AbstractAdminSecurityDomainBean <
 		cpStaff = (new SecurityStaffComparator<C,R,USER,STAFF>()).factory(SecurityStaffComparator.Type.position);
 	}
 	
-	protected void initSuper(JeeslSecurityFacade<?,?,C,R,V,U,A,AT,CTX,M,USER> fSecurity, JeeslUserFacade<USER> fUser)
+	protected void initSuper(JeeslSecurityFacade<?,?,C,R,?,?,?,?,?,?,USER> fSecurity, JeeslUserFacade<USER> fUser)
 	{
 		this.fSecurity=fSecurity;
 		this.fUser=fUser;
