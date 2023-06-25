@@ -9,7 +9,7 @@ import java.util.Objects;
 
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.commons.configuration.Configuration;
-import org.jeesl.api.rest.rs.io.label.JeeslRevisionRestExport;
+import org.jeesl.api.rest.rs.io.JeeslIoLabelRest;
 import org.jeesl.api.rest.rs.io.label.JeeslRevisionRestImport;
 import org.jeesl.model.xml.system.revision.Diagram;
 import org.jeesl.model.xml.system.revision.Diagrams;
@@ -49,7 +49,7 @@ public class AbstractErDiagram
 	private boolean showErDiagramLabel;
 
 	private JeeslRevisionRestImport restUpload; public void setRest(JeeslRevisionRestImport restUpload) {this.restUpload = restUpload;}
-	private JeeslRevisionRestExport restDownload; public void setRest(JeeslRevisionRestExport restDownload) {this.restDownload = restDownload;}
+	private JeeslIoLabelRest restDownload; public void setRest(JeeslIoLabelRest restDownload) {this.restDownload = restDownload;}
 
 	public AbstractErDiagram(Configuration config, OfxMultiLangLatexWriter ofxWriter)
 	{

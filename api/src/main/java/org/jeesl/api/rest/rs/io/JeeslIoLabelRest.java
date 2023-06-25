@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.rs.io.label;
+package org.jeesl.api.rest.rs.io;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -6,12 +6,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.api.rest.i.io.label.JeeslIoLabelRestInterface;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Diagrams;
 import org.jeesl.model.xml.system.revision.Entities;
 import org.metachart.xml.graph.Graph;
 
-public interface JeeslRevisionRestExport
+@Path("/rest/jeesl/io/label")
+public interface JeeslIoLabelRest extends JeeslIoLabelRestInterface
 {
 	@GET @Path("/export/system/io/revision/category") @Produces(MediaType.APPLICATION_XML)
 	Container exportSystemRevisionCategories();

@@ -8,8 +8,8 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 public interface JeeslLastUpdate <USER extends JeeslUser<?>> extends EjbWithId
 {
 	public Date getLastUpdateAt();
-	public void setLastUpdateAt(Date record);
+	public void setLastUpdateAt(Date lastUpdateAt);
 	
 	public USER getLastUpdateBy();
-	public void setLastUpdateBy(USER user);
+	public void setLastUpdateBy(USER lastUpdateBy);
 }

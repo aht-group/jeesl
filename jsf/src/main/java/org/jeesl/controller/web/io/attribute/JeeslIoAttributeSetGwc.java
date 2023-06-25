@@ -119,7 +119,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 		
 		criterias.addAll(fAttribute.fAttributeCriteria(sbhRealm.getSelection(),sbhRref.getSelection(),sbhCat.getSelected()));
 		logger.info("Criterias: "+sbhRealm.getSelection().toString()+" "+rref.toString()+" "+criterias.size());
-		reloadSets();
+		this.reloadSets();
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)

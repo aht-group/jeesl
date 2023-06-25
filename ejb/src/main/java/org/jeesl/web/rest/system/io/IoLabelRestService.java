@@ -1,4 +1,4 @@
-package org.jeesl.web.rest.system;
+package org.jeesl.web.rest.system.io;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.api.rest.rs.io.label.JeeslRevisionRestExport;
+import org.jeesl.api.rest.rs.io.JeeslIoLabelRest;
 import org.jeesl.api.rest.rs.io.label.JeeslRevisionRestImport;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -57,7 +57,7 @@ import net.sf.ahtutils.xml.aht.Aht;
 import net.sf.ahtutils.xml.status.Status;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
-public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription,
+public class IoLabelRestService <L extends JeeslLang,D extends JeeslDescription,
 								RC extends JeeslRevisionCategory<L,D,RC,?>,
 								RV extends JeeslRevisionView<L,D,RVM>,
 								RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -70,9 +70,9 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
 								RAT extends JeeslStatus<L,D,RAT>,
 								ERD extends JeeslRevisionDiagram<L,D,RC>
 >
-					implements JeeslRevisionRestExport,JeeslRevisionRestImport
+//					implements JeeslIoLabelRest,JeeslRevisionRestImport
 {
-	final static Logger logger = LoggerFactory.getLogger(RevisionRestService.class);
+	final static Logger logger = LoggerFactory.getLogger(IoLabelRestService.class);
 
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
 	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision;
@@ -86,7 +86,7 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
 	private EjbLabelEntityFactory<L,D,RC,RV,RVM,RE,REM,RA,RER,RAT,ERD> efEntity;
 	private EjbLabelAttributeFactory<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT> efAttribute;
 
-	public RevisionRestService(IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision,
+	public IoLabelRestService(IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision,
 								JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision)
 	{
 		this.fbRevision=fbRevision;
@@ -102,12 +102,12 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
 		xfDiagram = fbRevision.xmlDiagram(XmlRevisionQuery.get(XmlRevisionQuery.Key.xDiagram));
 	}
 
-	@Override public Container exportSystemIoRevisionAttributeTypes() {return xfContainer.build(fRevision.allOrderedPosition(fbRevision.getClassAttributeType()));}
-	@Override public Container exportSystemIoRevisionScopeTypes() {return xfContainer.build(fRevision.allOrderedPosition(fbRevision.getClassScopeType()));}
-	@Override public Container exportSystemRevisionCategories(){return xfContainer.build(fRevision.allOrderedPosition(fbRevision.getClassCategory()));}
-	@Override public Container exportSystemRevisionRelationType() {return xfContainer.build(fRevision.allOrderedPosition(fbRevision.getClassRelation()));}
+	public Container exportSystemIoRevisionAttributeTypes() {return xfContainer.build(fRevision.allOrderedPosition(fbRevision.getClassAttributeType()));}
+	public Container exportSystemIoRevisionScopeTypes() {return xfContainer.build(fRevision.allOrderedPosition(fbRevision.getClassScopeType()));}
+	public Container exportSystemRevisionCategories(){return xfContainer.build(fRevision.allOrderedPosition(fbRevision.getClassCategory()));}
+	public Container exportSystemRevisionRelationType() {return xfContainer.build(fRevision.allOrderedPosition(fbRevision.getClassRelation()));}
 
-	@Override public Entities exportSystemRevisionEntities()
+	public Entities exportSystemRevisionEntities()
 	{
 		Entities xml = new Entities();
 
@@ -123,7 +123,7 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
 		return xml;
 	}
 
-	@Override public Diagrams exportSystemRevisionDiagrams()
+	public Diagrams exportSystemRevisionDiagrams()
 	{
 		Diagrams xml = XmlDiagramsFactory.build();
 		List<ERD> list = fRevision.all(fbRevision.getClassDiagram());
@@ -135,7 +135,7 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
 		return xml;
 	}
 
-	@Override public Graph exportSystemRevisionGraph(String code)
+	public Graph exportSystemRevisionGraph(String code)
 	{
 		Graph g = XmlGraphFactory.build(code);
 		try
@@ -148,11 +148,11 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
 		return g;
 	}
 
-	@Override public DataUpdate importSystemIoRevisionAttributeTypes(Container categories){return importStatus(fbRevision.getClassAttributeType(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
-	@Override public DataUpdate importSystemIoRevisionScopeTypes(Container categories){return importStatus(fbRevision.getClassScopeType(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
-	@Override public DataUpdate importSystemRevisionCategories(org.jeesl.model.xml.jeesl.Container categories){return importStatus(fbRevision.getClassCategory(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
+	public DataUpdate importSystemIoRevisionAttributeTypes(Container categories){return importStatus(fbRevision.getClassAttributeType(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
+	 public DataUpdate importSystemIoRevisionScopeTypes(Container categories){return importStatus(fbRevision.getClassScopeType(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
+	 public DataUpdate importSystemRevisionCategories(org.jeesl.model.xml.jeesl.Container categories){return importStatus(fbRevision.getClassCategory(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
 
-	@Override public DataUpdate importSystemRevisionEntities(Entities entities)
+	 public DataUpdate importSystemRevisionEntities(Entities entities)
 	{
 		DataUpdateTracker dut = new DataUpdateTracker(true);
 		dut.setType(XmlTypeFactory.build(fbRevision.getClassEntity().getName(),"DB Import"));
@@ -293,7 +293,7 @@ public class RevisionRestService <L extends JeeslLang,D extends JeeslDescription
         return dataUpdate;
     }
 
-	@Override
+	
 	public DataUpdate importSystemRevisionDiagram(Graph graph)
 	{
 		try

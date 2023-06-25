@@ -15,11 +15,12 @@ public class EjbCodeCache <T extends EjbWithCode>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbCodeCache.class);
 
-	private JeeslFacade facade;
+	private JeeslFacade facade; public EjbCodeCache<T> facade(JeeslFacade facade) {this.facade=facade; return this;}
 	private final Class<T> c;
 	
 	private final Map<String,T> map;
 	
+	public static <T extends EjbWithCode> EjbCodeCache<T> instance(Class<T> c) {return new EjbCodeCache<>(c);}
 	public EjbCodeCache(Class<T> c)
 	{
 		this.c=c;

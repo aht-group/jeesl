@@ -20,4 +20,5 @@ public interface JeeslSurveyDataEntryStatus <S extends JeeslStatus<L,D,S>, L ext
 								JeeslStatus<L,D,S>
 {	
 	public static enum Code{empty,started,partial,fully,confirmed};
+	
 }
