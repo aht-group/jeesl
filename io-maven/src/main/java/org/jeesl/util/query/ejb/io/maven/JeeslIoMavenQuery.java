@@ -37,6 +37,7 @@ public class JeeslIoMavenQuery
 	
 	//Fetches
 	public <E extends Enum<E>> JeeslIoMavenQuery addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
+	public JeeslIoMavenQuery distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//LocalDate
 	public JeeslIoMavenQuery ld1(LocalDate ld1) {this.ld1 = ld1; return this;}

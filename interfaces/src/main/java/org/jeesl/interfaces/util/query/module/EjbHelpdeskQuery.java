@@ -64,6 +64,7 @@ public class EjbHelpdeskQuery<L extends JeeslLang,D extends JeeslDescription,
 	
 	//Fetches
 	public <E extends Enum<E>> EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
+	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//LocalDate
 	public EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}

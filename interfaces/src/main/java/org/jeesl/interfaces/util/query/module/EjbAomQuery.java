@@ -36,6 +36,7 @@ public class EjbAomQuery<ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 	
 	//Fetches
 	public <E extends Enum<E>> EjbAomQuery<ASSET,EVENT> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
+	public EjbAomQuery<ASSET,EVENT> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//LocalDate
 	public EjbAomQuery<ASSET,EVENT> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}

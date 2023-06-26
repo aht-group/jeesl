@@ -84,7 +84,7 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 		this.fAttribute=fAttribute;
 		
 		jfAttributeSet = new JsonAttributeSetFactory<>(localeCode,JsonAttributeQueryProvider.set());					jfAttributeSet.lazy(fAttribute,fbAttribute);
-		jfAttributeContainer = new JsonAttributeContainerFactory<>(localeCode,JsonAttributeQueryProvider.container());	jfAttributeContainer.lazy(fAttribute,fbAttribute);
+		jfAttributeContainer = new JsonAttributeContainerFactory<>(localeCode,JsonAttributeQueryProvider.containerWithData());	jfAttributeContainer.lazy(fAttribute,fbAttribute);
 		
 		efCollectionData = fbMdc.ejbData();
 		efAttributeContainer = fbAttribute.ejbContainer();

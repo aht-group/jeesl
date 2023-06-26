@@ -65,11 +65,15 @@ public class JsonAttributeQueryProvider
 		json.setDescription("");
 		return json;
 	}
-	
 	public static JsonAttributeContainer container()
 	{				
 		JsonAttributeContainer json = new JsonAttributeContainer();
 		json.setId(0l);
+		return json;
+	}
+	public static JsonAttributeContainer containerWithData()
+	{				
+		JsonAttributeContainer json = JsonAttributeQueryProvider.container();
 		json.setDatas(new ArrayList<>());
 		json.getDatas().add(data());
 		return json;

@@ -30,6 +30,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 
 	private boolean distinct;
 	@Override public boolean isDistinct() {return distinct;}
+	public abstract AbstractEjbQuery distinct(boolean distinct);
 	@Override public void setDistinct(boolean distinct) {this.distinct = distinct;}
 
 	private Integer firstResult;

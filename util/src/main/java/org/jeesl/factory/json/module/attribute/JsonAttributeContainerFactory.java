@@ -59,11 +59,17 @@ public class JsonAttributeContainerFactory<L extends JeeslLang, D extends JeeslD
 		this.fbAttribute=fbAttribute;
 	}
 	
-	public static JsonAttributeContainer build(){return new JsonAttributeContainer();}
+	public static JsonAttributeContainer build() {return new JsonAttributeContainer();}
+	public static JsonAttributeContainer build(Long id)
+	{
+		JsonAttributeContainer json = JsonAttributeContainerFactory.build();
+		json.setId(0l);
+		return json;
+	}
 	
 	public JsonAttributeContainer build(CONTAINER container)
 	{
-		JsonAttributeContainer json = build();
+		JsonAttributeContainer json = JsonAttributeContainerFactory.build();
 		if(q.getId()!=null) {json.setId(container.getId());}
 //		if(q.getCode()!=null) {json.setCode(criteria.getCode());}
 //		if(q.getVisible()!=null) {json.setVisible(criteria.isVisible());}

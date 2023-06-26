@@ -2,6 +2,7 @@ package org.jeesl.factory.json.module.attribute;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -57,7 +58,7 @@ public class JsonAttributeSetFactory<L extends JeeslLang, D extends JeeslDescrip
 	public JsonAttributeSet build(SET set)
 	{
 		JsonAttributeSet json = build();
-		if(q.getId()!=null) {json.setId(set.getId());}
+		if(Objects.nonNull(q.getId())) {json.setId(set.getId());}
 		
 		if(q.getItems()!=null && !q.getItems().isEmpty())
 		{

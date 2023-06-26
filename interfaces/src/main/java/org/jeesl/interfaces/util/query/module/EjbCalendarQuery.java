@@ -34,6 +34,7 @@ public class EjbCalendarQuery<CAL extends JeeslCalendar<?,?>,
 	
 	//Fetches
 	public <E extends Enum<E>> EjbCalendarQuery<CAL,TYPE> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
+	public EjbCalendarQuery<CAL,TYPE> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//LocalDate
 	public EjbCalendarQuery<CAL,TYPE> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}

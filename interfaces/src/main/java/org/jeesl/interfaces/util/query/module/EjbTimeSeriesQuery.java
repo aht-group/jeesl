@@ -38,6 +38,7 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	
 	//Fetches
 	public <E extends Enum<E>> EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
+	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//LocalDate
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
