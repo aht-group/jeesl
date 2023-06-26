@@ -22,6 +22,7 @@ import org.jeesl.factory.ejb.system.security.EjbSecurityActionFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityCategoryFactory;
 import org.jeesl.factory.ejb.system.security.EjbSecurityViewFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.system.security.JeeslSecurityViewCallback;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -70,6 +71,8 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 	private JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
 	
+	private final JeeslSecurityViewCallback callback;
+	
 	private final EjbSecurityCategoryFactory<C> efCategory;
 	protected final EjbSecurityViewFactory<C,V> efView;
 	protected final EjbSecurityActionFactory<V,A> efAction;
@@ -96,10 +99,11 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
 	
-	public JeeslSecurityViewController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
+	public JeeslSecurityViewController(JeeslSecurityViewCallback callback, SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
-		this.fbSecurity=fbSecurity;
+		this.callback = callback;
+		this.fbSecurity = fbSecurity;
 		
 		efCategory = fbSecurity.ejbCategory();
 		efView = fbSecurity.ejbView();
@@ -230,8 +234,8 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		reloadView();
 		reloadViews();
 		bMessage.growlSuccessSaved();
-		propagateChanges();
 		bSecurity.update(view);
+		callback.propagateChanges();
 	}
 	
 	public void cloneView() throws JeeslConstraintViolationException

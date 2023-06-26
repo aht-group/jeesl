@@ -94,11 +94,11 @@
 						</p:selectOneMenu>
 					</p:panelGrid>
 					<p:panelGrid columns="4" columnClasses="jeeslGrid10,jeeslGrid40,jeeslGrid10,jeeslGrid40">
-						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.visible}" rendered="#{cc.attrs.bean.userIsDeveloper}" />
-						<jtp:label entity="SecurityView" code="visible" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.view.visible}"  />
+						<jtp:label entity="SecurityView" code="visible" />
 												
-						<p:triStateCheckbox value="#{cc.attrs.bean.tsb.a}"/>
-						<jtp:label entity="SecurityView" code="redirect"/>
+						<p:triStateCheckbox value="#{cc.attrs.bean.tsb.a}" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
+						<jtp:label entity="SecurityView" code="redirect" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
 					</p:panelGrid>	
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<jtp:label entity="SecurityView" code="code"/>
