@@ -20,7 +20,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.module.cl.JeeslChecklistItem;
+import org.jeesl.interfaces.model.module.cl.JeeslClCheckItem;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
 import org.jeesl.model.ejb.io.locale.IoLang;
@@ -28,7 +28,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 @Table(name="ClChecklistItem")
 @EjbErNode(name="Checklist",category="tafu",subset="moduleTafu")
 @Entity
-public class ClChecklistItem implements JeeslChecklistItem<IoLang,ClChecklist,IoMarkup>
+public class ClCheckltem implements JeeslClCheckItem<IoLang,ClChecklist,IoMarkup>
 {
 	public static final long serialVersionUID=1;
 
@@ -38,7 +38,7 @@ public class ClChecklistItem implements JeeslChecklistItem<IoLang,ClChecklist,Io
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 	
-	@Override public String resolveParentAttribute() {return JeeslChecklistItem.Attributes.checklist.toString();}
+	@Override public String resolveParentAttribute() {return JeeslClCheckItem.Attributes.checklist.toString();}
 	@NotNull @ManyToOne
 	private ClChecklist checklist;
 	@Override public ClChecklist getChecklist() {return checklist;}
@@ -71,7 +71,7 @@ public class ClChecklistItem implements JeeslChecklistItem<IoLang,ClChecklist,Io
 	@Override public void setMarkup(Map<String,IoMarkup> markup) {this.markup = markup;}
 
 
-	@Override public boolean equals(Object object) {return (object instanceof ClChecklistItem) ? id == ((ClChecklistItem) object).getId() : (object == this);}
+	@Override public boolean equals(Object object) {return (object instanceof ClCheckltem) ? id == ((ClCheckltem) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(23,7).append(id).toHashCode();}
 	
 	@Override public String toString()

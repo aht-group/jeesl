@@ -7,7 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.module.cl.JeeslChecklistTrackStatus;
+import org.jeesl.interfaces.model.module.cl.JeeslClTrackStatus;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -17,14 +17,14 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("checklistTrackStatus")
 @EjbErNode(name="Kalendertag",category="mj",level=3,subset="mj")
-public class ClTrackStatus extends IoStatus implements JeeslChecklistTrackStatus<IoLang,IoDescription,ClTrackStatus,IoGraphic>
+public class ClTrackStatus extends IoStatus implements JeeslClTrackStatus<IoLang,IoDescription,ClTrackStatus,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 	
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<String>();
-		for(JeeslChecklistTrackStatus.Code c : JeeslChecklistTrackStatus.Code.values()){fixed.add(c.toString());}
+		for(JeeslClTrackStatus.Code c : JeeslClTrackStatus.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
 	

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:ofx="http://www.openfuxml.org/jsf"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+		
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sLists" width="5">
+			<h:form id="fLists">
+				<p:dataTable styleClass="jeesl-datatable"
+							var="l" value="#{cc.attrs.ctrl.lists}" draggableRows="true"
+							selection="#{cc.attrs.ctrl.list}" selectionMode="single" rowKey="#{l.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="ClTracklist" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addList()}" update=":#{cc.id}:grid"/>
+						</j:dtHeader>	
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectList()}" update=":#{cc.id}:sList"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="ClTracklist" code="endDate"/></f:facet>
+						<jp:outputDate value="#{l.endDate}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="ClTracklist" code="name"/></f:facet>
+						<jtp:symbolizer value="#{l.category}" marginRight="5"/>
+						<h:outputText value="#{l.name[localeCode].lang}"/>
+					</p:column>
+			   	</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sList" width="7">
+			<h:form id="fKey" rendered="#{not empty cc.attrs.ctrl.list}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="ClTracklist"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelList()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveList()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteList()}" update=":#{cc.id}:grid" />
+						
+						<j:svg type="jeeslEdit" listener="#{cc.attrs.ctrl.ehMagnet.toggle()}" update="@form" rendered="#{cc.attrs.ctrl.list.id gt 0}"/>
+					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
+					<j:inputGrid>
+						<jtp:label entity="ClTracklist" code="id"/>
+						<h:outputText value="#{cc.attrs.ctrl.list.id}"/>
+						
+						<jtp:label entity="ClTracklist" code="category"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.list.category}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.categories}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="ClTracklist" code="startDate"/>
+						<jp:inputCalendar value="#{cc.attrs.ctrl.list.startDate}"/>
+						
+						<jtp:label entity="ClTracklist" code="endDate"/>
+						<jp:inputCalendar value="#{cc.attrs.ctrl.list.endDate}"/>
+						
+					</j:inputGrid>
+					<jtp:inputMulti value="#{cc.attrs.ctrl.list}" withDescription="false" locales="#{cc.attrs.ctrl.locales}"/>
+				</p:panel>
+			</h:form>
+			<h:form id="fMagnet" rendered="#{not empty cc.attrs.ctrl.checkLists}">
+				<p:dataTable styleClass="jeesl-datatable"
+							var="l" value="#{cc.attrs.ctrl.lists}" draggableRows="true"
+							selection="#{cc.attrs.ctrl.checkList}" selectionMode="single" rowKey="#{l.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="ClChecklist" code="listOf">
+							
+						</j:dtHeader>	
+					</f:facet>
+					
+					<p:column>
+						<jtp:symbolizer value="#{l.topic}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="ClChecklist" code="name"/></f:facet>
+						<h:outputText value="#{l.name[localeCode].lang}"/>
+					</p:column>
+			   	</p:dataTable>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>

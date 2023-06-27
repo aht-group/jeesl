@@ -18,8 +18,9 @@
 	<j:row>
 		<j:slot id="sReport" width="6">
 			<h:form id="fReports">
-				<p:dataTable var="r" value="#{cc.attrs.bean.reports}" draggableRows="true"
-					selection="#{cc.attrs.bean.report}" selectionMode="single" rowKey="#{r.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="r" value="#{cc.attrs.bean.reports}" draggableRows="true"
+						selection="#{cc.attrs.bean.report}" selectionMode="single" rowKey="#{r.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoReports}">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addReport()}" update=":#{cc.id}:fReport :#{cc.id}:sSheet :#{cc.id}:sGroup :#{cc.id}:row2 :#{cc.id}:row3" tooltip="#{msg.ttNew}"/>
@@ -36,7 +37,8 @@
 				</p:dataTable>
 			</h:form>
 			<h:form id="fReport">
-				<p:panel header="#{msg.jeeslIoReport}" rendered="#{(not empty cc.attrs.bean.report) and cc.attrs.bean.uiHelper.showPanelReport}" styleClass="jeeslPanel">
+				<p:panel rendered="#{(not empty cc.attrs.bean.report) and cc.attrs.bean.uiHelper.showPanelReport}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoReport"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelReport()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveReport()}" update=":#{cc.id}:grid"/>
@@ -69,10 +71,11 @@
 		</j:slot>
 		<j:slot id="sSheet" width="3">
 			<h:form id="fSheets" rendered="#{(not empty cc.attrs.bean.report) and (cc.attrs.bean.report.id gt 0)}">
-				<p:dataTable var="sheet" value="#{cc.attrs.bean.sheets}" draggableRows="true"
-							selection="#{cc.attrs.bean.sheet}" selectionMode="single" rowKey="#{sheet.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="sheet" value="#{cc.attrs.bean.sheets}" draggableRows="true"
+						selection="#{cc.attrs.bean.sheet}" selectionMode="single" rowKey="#{sheet.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslIoSheets}">
+						<j:dtHeader entity="IoReportSheet" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addSheet()}" update=":#{cc.id}:fSheet :#{cc.id}:sGroup :#{cc.id}:row2  :#{cc.id}:row3"/>
 						</j:dtHeader>
 					</f:facet>
@@ -91,7 +94,8 @@
 				</p:dataTable>
 			</h:form>
 			<h:form id="fSheet">
-				<p:panel header="#{msg.jeeslIoSheet}" rendered="#{(not empty cc.attrs.bean.sheet) and cc.attrs.bean.uiHelper.showPanelSheet}" styleClass="jeeslPanel">
+				<p:panel rendered="#{(not empty cc.attrs.bean.sheet) and cc.attrs.bean.uiHelper.showPanelSheet}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoReportSheet"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelSheet()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveSheet()}" update=":#{cc.id}:grid"/>
@@ -116,10 +120,11 @@
 		</j:slot>
 		<j:slot id="sGroup" width="3">
 			<h:form id="fGroups" rendered="#{(not empty cc.attrs.bean.sheet) and (cc.attrs.bean.sheet.id gt 0)}">
-				<p:dataTable var="group" value="#{cc.attrs.bean.groups}" draggableRows="true"
-					selection="#{cc.attrs.bean.group}" selectionMode="single" rowKey="#{group.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="group" value="#{cc.attrs.bean.groups}" draggableRows="true"
+						selection="#{cc.attrs.bean.group}" selectionMode="single" rowKey="#{group.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslIoReportGroups}">
+						<j:dtHeader entity="IoReportColumnGroup" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addGroup()}" update=":#{cc.id}:fGroup :#{cc.id}:row2"/>
 						</j:dtHeader>
 					</f:facet>
@@ -136,7 +141,8 @@
 		      </p:dataTable>
 			</h:form>
 			<h:form id="fGroup">
-				<p:panel header="#{msg.jeeslIoReportGroup}" rendered="#{(not empty cc.attrs.bean.group) and cc.attrs.bean.uiHelper.showPanelGroup}" styleClass="jeeslPanel">
+				<p:panel rendered="#{(not empty cc.attrs.bean.group) and cc.attrs.bean.uiHelper.showPanelGroup}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoReportColumnGroup"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelGroup()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveGroup()}" update=":#{cc.id}:grid"/>
@@ -171,10 +177,11 @@
 	<j:row id="row2">
 		<j:slot id="sColumns" width="4">
 			<h:form id="fColumns" rendered="#{(not empty cc.attrs.bean.group) and (cc.attrs.bean.group.id gt 0)}">
-				<p:dataTable var="column" value="#{cc.attrs.bean.columns}" draggableRows="true"
-					selection="#{cc.attrs.bean.column}" selectionMode="single" rowKey="#{column.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="column" value="#{cc.attrs.bean.columns}" draggableRows="true"
+						selection="#{cc.attrs.bean.column}" selectionMode="single" rowKey="#{column.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslIoReportColumns}">
+						<j:dtHeader entity="IoReportColumn" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addColumn()}" update=":#{cc.id}:sColumns :#{cc.id}:sColumn"/>
 						</j:dtHeader>
 					</f:facet>
@@ -193,7 +200,8 @@
 		</j:slot>
 		<j:slot id="sColumn" width="8">
 			<h:form id="fColumn">
-				<p:panel header="#{msg.jeeslIoReportColumn}" rendered="#{not empty cc.attrs.bean.column}" styleClass="jeeslPanel">
+				<p:panel rendered="#{not empty cc.attrs.bean.column}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoReportColumn"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelColumn()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveColumn()}" update=":#{cc.id}:grid"/>
@@ -302,10 +310,11 @@
 	<j:row id="row3">
 		<j:slot id="sRows" width="4">
 			<h:form id="fRows" rendered="#{(not empty cc.attrs.bean.sheet) and (cc.attrs.bean.sheet.id gt 0)}">
-				<p:dataTable var="row" value="#{cc.attrs.bean.rows}" draggableRows="true"
-							selection="#{cc.attrs.bean.row}" selectionMode="single" rowKey="#{row.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="row" value="#{cc.attrs.bean.rows}" draggableRows="true"
+						selection="#{cc.attrs.bean.row}" selectionMode="single" rowKey="#{row.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslIoReportRows}">
+						<j:dtHeader entity="IoReportRow" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addRow()}" update=":#{cc.id}:sRows :#{cc.id}:sRow"/>
 						</j:dtHeader>
 					</f:facet>
@@ -328,7 +337,8 @@
 		</j:slot>
 		<j:slot id="sRow" width="8">
 			<h:form id="fRow">
-				<p:panel header="#{msg.jeeslIoReportRow}" rendered="#{not empty cc.attrs.bean.row}" styleClass="jeeslPanel">
+				<p:panel rendered="#{not empty cc.attrs.bean.row}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoReportColumn"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelRow()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
 						<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveRow()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>

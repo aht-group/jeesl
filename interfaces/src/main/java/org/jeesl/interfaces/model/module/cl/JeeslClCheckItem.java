@@ -16,8 +16,8 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslChecklistItem <L extends JeeslLang,
-								CL extends JeeslChecklist<L,?,?>,
+public interface JeeslClCheckItem <L extends JeeslLang,
+								CL extends JeeslClChecklist<L,?,?>,
 								M extends JeeslIoMarkup<?>>
 			extends Serializable,EjbSaveable,EjbRemoveable,
 					EjbWithParentAttributeResolver,EjbWithPositionVisible,

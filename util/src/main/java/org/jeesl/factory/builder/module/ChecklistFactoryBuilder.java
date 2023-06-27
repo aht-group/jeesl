@@ -3,11 +3,12 @@ package org.jeesl.factory.builder.module;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.cl.EjbChecklistFactory;
 import org.jeesl.factory.ejb.module.cl.EjbChecklistItemFactory;
+import org.jeesl.factory.ejb.module.cl.EjbTracklistFactory;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
-import org.jeesl.interfaces.model.module.cl.JeeslChecklist;
-import org.jeesl.interfaces.model.module.cl.JeeslChecklistItem;
-import org.jeesl.interfaces.model.module.cl.JeeslChecklistTopic;
+import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
+import org.jeesl.interfaces.model.module.cl.JeeslClCategory;
+import org.jeesl.interfaces.model.module.cl.JeeslClCheckItem;
 import org.jeesl.interfaces.model.module.cl.JeeslClTracklist;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -17,9 +18,10 @@ import org.slf4j.LoggerFactory;
 
 public class ChecklistFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>,
-								CL extends JeeslChecklist<L,R,TO>,
-								TO extends JeeslChecklistTopic<L,?,R,TO,?>,
-								CI extends JeeslChecklistItem<L,CL,M>,
+								CAT extends JeeslClCategory<L,?,R,CAT,?>,
+								CL extends JeeslClChecklist<L,R,CAT>,
+								
+								CI extends JeeslClCheckItem<L,CL,M>,
 								TL extends JeeslClTracklist<L,R>,
 								M extends JeeslIoMarkup<MT>,
 								MT extends JeeslIoMarkupType<L,D,MT,?>>
@@ -30,7 +32,7 @@ public class ChecklistFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 	private final Class<R> cRealm; public Class<R> getClassRealm() {return cRealm;}
 	
 	private final Class<CL> cChecklist; public Class<CL> getClassChecklist() {return cChecklist;}
-	private final Class<TO> cTopic; public Class<TO> getClassTopic() {return cTopic;}
+	private final Class<CAT> cTopic; public Class<CAT> getClassTopic() {return cTopic;}
 	private final Class<CI> cChecklistItem; public Class<CI> getClassChecklistItem() {return cChecklistItem;}
 	private final Class<TL> cTracklist; public Class<TL> getClassTracklist() {return cTracklist;}
 	private final Class<M> cMarkup; public Class<M> getClassMarkup() {return cMarkup;}
@@ -39,7 +41,7 @@ public class ChecklistFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 	public ChecklistFactoryBuilder(final Class<L> cL,final Class<D> cD,
 								final Class<R> cRealm,
 								final Class<CL> cChecklist,
-								final Class<TO> cTopic,
+								final Class<CAT> cTopic,
 								final Class<CI> cChecklistItem,
 								final Class<TL> cTracklist,
 								final Class<M> cMarkup,
@@ -56,7 +58,8 @@ public class ChecklistFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 		this.cMarkupType = cMarkupType;
 	}
 	
-	public EjbChecklistFactory<R,CL,TO> ejbChecklist() {return new EjbChecklistFactory<>(this);}
+	public EjbChecklistFactory<R,CAT,CL> ejbChecklist() {return new EjbChecklistFactory<>(this);}
 	public EjbChecklistItemFactory<CL,CI,M,MT> ejbChecklistItem() {return new EjbChecklistItemFactory<>(this);}
-//	public EjbItsFactory<R,I,IS> ejbIssue() {return new EjbItsFactory<>(this);}
+
+	public EjbTracklistFactory<R,CAT,TL> ejbTracklist() {return new EjbTracklistFactory<>(this);}
 }

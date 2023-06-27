@@ -14,4 +14,11 @@ public class TxtIdFactory
 		for(T id : ids) {list.add(Long.valueOf(id.getId()).toString());}
 		return StringUtils.join(list, ", ");
 	}
+	
+	public static <T extends EjbWithId> String idList(List<T> ids)
+	{
+		List<String> list = new ArrayList<String>();
+		for(T id : ids) {list.add(Long.valueOf(id.getId()).toString());}
+		return "["+StringUtils.join(list, ",")+"]";
+	}
 }

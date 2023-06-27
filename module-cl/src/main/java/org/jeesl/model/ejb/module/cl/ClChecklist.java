@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.module.cl.JeeslChecklist;
+import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.system.tenant.TenantRealm;
@@ -27,7 +27,7 @@ import org.jeesl.model.ejb.system.tenant.TenantRealm;
 @Table(name="ClChecklist")
 @EjbErNode(name="Checklist",category="tafu",subset="moduleTafu")
 @Entity
-public class ClChecklist implements JeeslChecklist<IoLang,TenantRealm,ClTopic>
+public class ClChecklist implements JeeslClChecklist<IoLang,TenantRealm,ClTopic>
 {
 	public static final long serialVersionUID=1;
 

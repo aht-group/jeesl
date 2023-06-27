@@ -1,39 +1,33 @@
 package org.jeesl.factory.ejb.module.cl;
 
-import java.util.List;
-import java.util.Objects;
-
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
-import org.jeesl.factory.ejb.util.EjbPositionFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
 import org.jeesl.interfaces.model.module.cl.JeeslClCategory;
+import org.jeesl.interfaces.model.module.cl.JeeslClTracklist;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbChecklistFactory<R extends JeeslTenantRealm<?,?,R,?>,
+public class EjbTracklistFactory<R extends JeeslTenantRealm<?,?,R,?>,
 								CAT extends JeeslClCategory<?,?,R,CAT,?>,
-								CL extends JeeslClChecklist<?,R,CAT>
+								TL extends JeeslClTracklist<?,R>
 							>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbChecklistFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbTracklistFactory.class);
 	
-	private final ChecklistFactoryBuilder<?,?,R,CAT,CL,?,?,?,?> fbCl;
+	private final ChecklistFactoryBuilder<?,?,R,CAT,?,?,TL,?,?> fbCl;
 	
-    public EjbChecklistFactory(ChecklistFactoryBuilder<?,?,R,CAT,CL,?,?,?,?> fbCl)
+    public EjbTracklistFactory(ChecklistFactoryBuilder<?,?,R,CAT,?,?,TL,?,?> fbCl)
     {
         this.fbCl = fbCl;
     } 
 	
-    public <RREF extends EjbWithId> CL build(R realm, RREF rref, List<CL> list)
+    public <RREF extends EjbWithId> TL build(R realm, RREF rref)
     {
 		try
 		{
-			CL ejb = fbCl.getClassChecklist().newInstance();
-			EjbPositionFactory.next(ejb,list);
-			
+			TL ejb = fbCl.getClassTracklist().newInstance();
 			ejb.setRealm(realm);
 			ejb.setRref(rref.getId());
 			
@@ -44,9 +38,9 @@ public class EjbChecklistFactory<R extends JeeslTenantRealm<?,?,R,?>,
 		throw new RuntimeException("x");
     }
     
-    public void converter(JeeslFacade facade, CL ejb)
+    public void converter(JeeslFacade facade, TL ejb)
     {
-    	if(Objects.nonNull(ejb.getTopic())) {ejb.setTopic(facade.find(fbCl.getClassTopic(),ejb.getTopic()));}
+//    	if(Objects.nonNull(ejb.getTopic())) {ejb.setTopic(facade.find(fbCl.getClassTopic(),ejb.getTopic()));}
 //    	if(task.getScope()!=null) {task.setScope(facade.find(fbTafu.getClassScope(),task.getScope()));}
     }
 }

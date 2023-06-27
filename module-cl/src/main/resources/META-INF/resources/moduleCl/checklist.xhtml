@@ -54,7 +54,7 @@
 						
 						<jtp:label entity="ClChecklist" code="topic"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.list.topic}" effect="fade" autoWidth="false" dynamic="true">
-							<f:selectItems value="#{cc.attrs.ctrl.topics}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+							<f:selectItems value="#{cc.attrs.ctrl.categories}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
 					</j:inputGrid>
 					<jtp:inputMulti value="#{cc.attrs.ctrl.list}" withDescription="false" locales="#{cc.attrs.ctrl.locales}"/>
@@ -69,22 +69,22 @@
 							var="i" value="#{cc.attrs.ctrl.items}" draggableRows="true"
 							selection="#{cc.attrs.ctrl.item}" selectionMode="single" rowKey="#{i.id}">
 					<f:facet name="header">
-						<j:dtHeader entity="ClChecklistItem" code="listOf">
+						<j:dtHeader entity="ClCheckltem" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addItem()}" update=":#{cc.id}:rItem"/>
 						</j:dtHeader>	
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectItem()}" update=":#{cc.id}:sItem"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderItems()}" update="@form"/>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClChecklistItem" code="positionShort"/></f:facet>
+						<f:facet name="header"><jtp:label entity="ClCheckltem" code="positionShort"/></f:facet>
 						<h:outputText value="#{i.position}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClChecklistItem" code="validFrom"/></f:facet>
+						<f:facet name="header"><jtp:label entity="ClCheckltem" code="validFrom"/></f:facet>
 						<jp:outputDate value="#{i.validFrom}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClChecklistItem" code="name"/></f:facet>
+						<f:facet name="header"><jtp:label entity="ClCheckltem" code="name"/></f:facet>
 						<h:outputText value="#{i.name[localeCode].lang}"/>
 					</p:column>
 			   	</p:dataTable>
@@ -93,14 +93,14 @@
 		<j:slot id="sItem" width="7">
 			<h:form id="fItem" rendered="#{not empty cc.attrs.ctrl.item}">
 				<p:panel styleClass="jeesl-panel">
-					<f:facet name="header"><j:pHeader entity="ClChecklistItem"/></f:facet>
+					<f:facet name="header"><j:pHeader entity="ClCheckltem"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelItem()}" update=":#{cc.id}:rItem" />
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveItem()}" update=":#{cc.id}:rItem" />
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteItem()}" update=":#{cc.id}:rItem" />
 					</f:facet>
 					<j:inputGrid>
-						<jtp:label entity="ClChecklistItem" code="id"/>
+						<jtp:label entity="ClCheckltem" code="id"/>
 						<h:outputText value="#{cc.attrs.ctrl.item.id}"/>
 					</j:inputGrid>
 					<jtp:inputMulti value="#{cc.attrs.ctrl.item}" withDescription="false" locales="#{cc.attrs.ctrl.locales}"/>
