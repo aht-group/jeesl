@@ -13,16 +13,16 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbChecklistFactory<R extends JeeslTenantRealm<?,?,R,?>,
+public class EjbChecklistFactory2<R extends JeeslTenantRealm<?,?,R,?>,
 								CAT extends JeeslClCategory<?,?,R,CAT,?>,
 								CL extends JeeslClChecklist<?,R,CAT>
 							>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbChecklistFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbChecklistFactory2.class);
 	
-	private final ChecklistFactoryBuilder<?,?,R,CAT,CL,?,?,?,?> fbCl;
+	private final ChecklistFactoryBuilder<?,?,R,CAT,CL,?,?,?,?,?,?> fbCl;
 	
-    public EjbChecklistFactory(ChecklistFactoryBuilder<?,?,R,CAT,CL,?,?,?,?> fbCl)
+    public EjbChecklistFactory2(ChecklistFactoryBuilder<?,?,R,CAT,CL,?,?,?,?,?,?> fbCl)
     {
         this.fbCl = fbCl;
     } 
@@ -31,7 +31,7 @@ public class EjbChecklistFactory<R extends JeeslTenantRealm<?,?,R,?>,
     {
 		try
 		{
-			CL ejb = fbCl.getClassChecklist().newInstance();
+			CL ejb = fbCl.getClassCheckList().newInstance();
 			EjbPositionFactory.next(ejb,list);
 			
 			ejb.setRealm(realm);

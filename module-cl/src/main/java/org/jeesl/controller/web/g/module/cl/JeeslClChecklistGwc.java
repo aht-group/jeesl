@@ -11,8 +11,8 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
 import org.jeesl.factory.ejb.io.cms.EjbMarkupFactory;
-import org.jeesl.factory.ejb.module.cl.EjbChecklistFactory;
-import org.jeesl.factory.ejb.module.cl.EjbChecklistItemFactory;
+import org.jeesl.factory.ejb.module.cl.EjbChecklistFactory2;
+import org.jeesl.factory.ejb.module.cl.EjbCheckItemFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
@@ -48,11 +48,11 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslClChecklistGwc.class);
 	
-	private JeeslChecklistFacade<L,D,R,CAT,CL> fCl;
+	private JeeslChecklistFacade<CL,CI,?> fCl;
 
-	private final ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,?,M,MT> fbCl;
-	private final EjbChecklistFactory<R,CAT,CL> ejbChecklist;
-	private final EjbChecklistItemFactory<CL,CI,M,MT> ejbChecklistItem;
+	private final ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,?,?,?,M,MT> fbCl;
+	private final EjbChecklistFactory2<R,CAT,CL> ejbChecklist;
+	private final EjbCheckItemFactory<CL,CI,M,MT> ejbChecklistItem;
 	private final EjbMarkupFactory<LOC,M,MT> efMarkup;
 	
     protected R realm;
@@ -66,7 +66,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	private CL list; public CL getList() {return list;} public void setList(CL list) {this.list = list;}
 	private CI item; public CI getItem() {return item;} public void setItem(CI item) {this.item = item;}
 	
-	public JeeslClChecklistGwc(ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,?,M,MT> fbCl)
+	public JeeslClChecklistGwc(ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,?,?,?,M,MT> fbCl)
 	{
 		super(fbCl.getClassL(),fbCl.getClassD());
 		this.fbCl=fbCl;
@@ -82,7 +82,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	}
 
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, R realm,
-										JeeslChecklistFacade<L,D,R,CAT,CL> fCl
+										JeeslChecklistFacade<CL,CI,?> fCl
 										)
 	{
 		super.postConstructWebController(lp,bMessage);
@@ -126,7 +126,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	private void reloadLists()
 	{
 		this.reset(true,false,false,false);
-		lists.addAll(fCl.all(fbCl.getClassChecklist(),realm,rref));
+		lists.addAll(fCl.all(fbCl.getClassCheckList(),realm,rref));
     }
 	
 	public void selectList()
@@ -140,7 +140,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	public void addList()
 	{
 		this.reset(false, true, true, true);
-		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbCl.getClassChecklist()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbCl.getClassCheckList()));}
 		list = ejbChecklist.build(realm, rref, lists);
 		list.setName(efLang.buildEmpty(lp.getLocales()));
 	}
@@ -165,7 +165,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	private void reloadItems()
 	{
 		this.reset(false,false,true,false);
-		items.addAll(fCl.allForParent(fbCl.getClassChecklistItem(),list));
+		items.addAll(fCl.allForParent(fbCl.getClassCheckItem(),list));
     }
 	
 	public void selectItem()
@@ -178,7 +178,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	
 	public void addItem()
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbCl.getClassChecklistItem()));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbCl.getClassCheckItem()));}
 		item = ejbChecklistItem.build(list,items);
 		item.setName(efLang.buildEmpty(lp.getLocales()));
 		item.setMarkup(efMarkup.build(lp.getLocales(), markupType));

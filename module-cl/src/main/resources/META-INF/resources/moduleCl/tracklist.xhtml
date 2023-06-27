@@ -46,7 +46,7 @@
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveList()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteList()}" update=":#{cc.id}:grid" />
 						
-						<j:svg type="jeeslEdit" listener="#{cc.attrs.ctrl.ehMagnet.toggle()}" update="@form" rendered="#{cc.attrs.ctrl.list.id gt 0}"/>
+						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.ehMagnet.toggle()}" update="@form :#{cc.id}:fMagnet" rendered="#{cc.attrs.ctrl.list.id gt 0}"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
 					<j:inputGrid>
@@ -64,26 +64,51 @@
 						<jtp:label entity="ClTracklist" code="endDate"/>
 						<jp:inputCalendar value="#{cc.attrs.ctrl.list.endDate}"/>
 						
+						<jtp:label entity="ClTracklist" code="checklists"/>
+						<ui:fragment>
+							<ui:repeat var="cl" value="#{cc.attrs.ctrl.list.checklists}" varStatus="index">
+			           			<h:outputText value="#{cl.name[localeCode].lang}"/>
+			           			<h:outputText value="#{index.last ? '' : ', '}"/>
+                            </ui:repeat>
+						</ui:fragment>
+						
 					</j:inputGrid>
 					<jtp:inputMulti value="#{cc.attrs.ctrl.list}" withDescription="false" locales="#{cc.attrs.ctrl.locales}"/>
 				</p:panel>
 			</h:form>
-			<h:form id="fMagnet" rendered="#{not empty cc.attrs.ctrl.checkLists}">
-				<p:dataTable styleClass="jeesl-datatable"
-							var="l" value="#{cc.attrs.ctrl.lists}" draggableRows="true"
-							selection="#{cc.attrs.ctrl.checkList}" selectionMode="single" rowKey="#{l.id}">
+			<h:form id="fMagnet">
+				<p:dataTable widgetVar="wvChecklists" styleClass="jeesl-datatable" rendered="#{cc.attrs.ctrl.ehMagnet.allow}"
+							var="cl" value="#{cc.attrs.ctrl.checkLists}">
 					<f:facet name="header">
-						<j:dtHeader entity="ClChecklist" code="listOf">
-							
-						</j:dtHeader>	
+						<j:dtHeader entity="ClChecklist" code="listOf"/>
 					</f:facet>
-					
 					<p:column>
-						<jtp:symbolizer value="#{l.topic}"/>
+						<jtp:symbolizer value="#{cl.topic}"/>
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="ClChecklist" code="name"/></f:facet>
-						<h:outputText value="#{l.name[localeCode].lang}"/>
+						<h:outputText value="#{cl.name[localeCode].lang}"/>
+					</p:column>
+					<p:column>
+						<j:svg type="jeeslRemove" listener="#{cc.attrs.ctrl.applyChecklist(cl,true)}" rendered="#{not cc.attrs.ctrl.mapLinked[cl]}" oncomplete="PF('wvChecklists').filter()"/>
+						<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.applyChecklist(cl,false)}" rendered="#{cc.attrs.ctrl.mapLinked[cl]}" oncomplete="PF('wvChecklists').filter()"/>
+					</p:column>
+			   	</p:dataTable>
+			</h:form>
+			<h:form id="fItems">
+				<p:dataTable styleClass="jeesl-datatable" rendered="#{cc.attrs.ctrl.list.id gt 0}"
+							var="i" value="#{cc.attrs.ctrl.items}">
+					<f:facet name="header">
+						<j:dtHeader entity="ClTrackItem" code="listOf">
+							<j:svg type="jeeslReload" listener="#{cc.attrs.ctrl.applyItems()}" update="@form"/>
+						</j:dtHeader>	
+					</f:facet>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="ClTrackItem" code="status"/></f:facet>
+						<jtp:symbolizer value="#{i.status}"/>
+					</p:column>
+					<p:column>
+						<h:outputText value="#{i.name[localeCode].lang}"/>
 					</p:column>
 			   	</p:dataTable>
 			</h:form>

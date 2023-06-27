@@ -9,16 +9,16 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbTracklistFactory<R extends JeeslTenantRealm<?,?,R,?>,
+public class EjbTracklistFactory2<R extends JeeslTenantRealm<?,?,R,?>,
 								CAT extends JeeslClCategory<?,?,R,CAT,?>,
-								TL extends JeeslClTracklist<?,R>
+								TL extends JeeslClTracklist<?,R,?>
 							>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbTracklistFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbTracklistFactory2.class);
 	
-	private final ChecklistFactoryBuilder<?,?,R,CAT,?,?,TL,?,?> fbCl;
+	private final ChecklistFactoryBuilder<?,?,R,CAT,?,?,TL,?,?,?,?> fbCl;
 	
-    public EjbTracklistFactory(ChecklistFactoryBuilder<?,?,R,CAT,?,?,TL,?,?> fbCl)
+    public EjbTracklistFactory2(ChecklistFactoryBuilder<?,?,R,CAT,?,?,TL,?,?,?,?> fbCl)
     {
         this.fbCl = fbCl;
     } 
@@ -27,7 +27,7 @@ public class EjbTracklistFactory<R extends JeeslTenantRealm<?,?,R,?>,
     {
 		try
 		{
-			TL ejb = fbCl.getClassTracklist().newInstance();
+			TL ejb = fbCl.getClassTrackList().newInstance();
 			ejb.setRealm(realm);
 			ejb.setRref(rref.getId());
 			

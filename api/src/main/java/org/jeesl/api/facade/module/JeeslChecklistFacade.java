@@ -1,18 +1,20 @@
 package org.jeesl.api.facade.module;
 
-import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
-import org.jeesl.interfaces.model.module.cl.JeeslClCategory;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
+import java.util.List;
 
-public interface JeeslChecklistFacade <L extends JeeslLang, D extends JeeslDescription,
-									R extends JeeslTenantRealm<L,D,R,?>,
-									TO extends JeeslClCategory<L,?,R,TO,?>,
-									CL extends JeeslClChecklist<L,R,TO>
+import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.interfaces.model.module.cl.JeeslClCheckItem;
+import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
+import org.jeesl.interfaces.model.module.cl.JeeslClTracklist;
+import org.jeesl.interfaces.util.query.module.EjbChecklistQuery;
+
+public interface JeeslChecklistFacade <CL extends JeeslClChecklist<?,?,?>,
+									CI extends JeeslClCheckItem<?,CL,?>,
+									TL extends JeeslClTracklist<?,?,CL>
     								>
 			extends JeeslFacade
 {	
+	TL load(TL tracklist);
 	
+	List<CI> fCheckItems(EjbChecklistQuery<CL,CI,TL> query);
 }

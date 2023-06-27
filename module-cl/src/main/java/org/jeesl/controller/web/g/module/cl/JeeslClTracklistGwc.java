@@ -2,7 +2,10 @@ package org.jeesl.controller.web.g.module.cl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslChecklistFacade;
@@ -10,7 +13,8 @@ import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
-import org.jeesl.factory.ejb.module.cl.EjbTracklistFactory;
+import org.jeesl.factory.ejb.module.cl.EjbTrackItemFactory;
+import org.jeesl.factory.ejb.module.cl.EjbTracklistFactory2;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
@@ -18,12 +22,15 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.model.module.cl.JeeslClCategory;
 import org.jeesl.interfaces.model.module.cl.JeeslClCheckItem;
 import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
+import org.jeesl.interfaces.model.module.cl.JeeslClTrackItem;
+import org.jeesl.interfaces.model.module.cl.JeeslClTrackStatus;
 import org.jeesl.interfaces.model.module.cl.JeeslClTracklist;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.module.EjbChecklistQuery;
 import org.jeesl.jsf.handler.ui.edit.UiEditBooleanHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,45 +42,55 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
     								CAT extends JeeslClCategory<L,?,R,CAT,?>,
     								CL extends JeeslClChecklist<L,R,CAT>,
     								CI extends JeeslClCheckItem<L,CL,?>,
-    								TL extends JeeslClTracklist<L,R>>
+    								TL extends JeeslClTracklist<L,R,CL>,
+    								TI extends JeeslClTrackItem<CI,TL,?>,
+    								TS extends JeeslClTrackStatus<L,D,TS,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslClTracklistGwc.class);
 	
-	private JeeslChecklistFacade<L,D,R,CAT,CL> fCl;
+	private JeeslChecklistFacade<CL,CI,TL> fCl;
 
-	private final ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,TL,?,?> fbCl;
-	private EjbTracklistFactory<R,CAT,TL> ejbTracklist;
+	private final ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,TL,TI,TS,?,?> fbCl;
+	private final EjbTracklistFactory2<R,CAT,TL> efTrackList;
+	private final EjbTrackItemFactory<CI,TL,TI> efTrackItem;
 
 	private final UiEditBooleanHandler ehMagnet; public UiEditBooleanHandler getEhMagnet() {return ehMagnet;}
+//	private final EjbCodeCache<TS> cStatus;
 	
-    protected R realm;
-    protected RREF rref; public RREF getRref() {return rref;}
+	private final Map<CL,Boolean> mapLinked; public Map<CL, Boolean> getMapLinked() {return mapLinked;}
 
-    private final List<CAT> categories; public List<CAT> getCategories() {return categories;}
+	private final List<CAT> categories; public List<CAT> getCategories() {return categories;}
     private final List<TL> lists; public List<TL> getLists() {return lists;}
     private final List<CL> checkLists; public List<CL> getCheckLists() {return checkLists;}
+    private final List<TI> items; public List<TI> getItems() {return items;}
 
+    protected R realm;
+    protected RREF rref; public RREF getRref() {return rref;}
 	private TL list; public TL getList() {return list;} public void setList(TL list) {this.list = list;}
 	
-	public JeeslClTracklistGwc(ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,TL,?,?> fbCl)
+	public JeeslClTracklistGwc(ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,TL,TI,TS,?,?> fbCl)
 	{
 		super(fbCl.getClassL(),fbCl.getClassD());
 		this.fbCl=fbCl;
 		
-		ejbTracklist = fbCl.ejbTracklist();
+		efTrackList = fbCl.ejbTrackList();
+		efTrackItem = fbCl.ejbTrackItem();
 		
 		ehMagnet = new UiEditBooleanHandler();
 
+		mapLinked = new HashMap<>();
+		
 		categories = new ArrayList<>();
 		lists = new ArrayList<>();
 		checkLists = new ArrayList<>();
+		items = new ArrayList<>();
 	}
 
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage ,R realm,
-										JeeslChecklistFacade<L,D,R,CAT,CL> fCl)
+										JeeslChecklistFacade<CL,CI,TL> fCl)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fCl=fCl;
@@ -88,7 +105,9 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 		categories.addAll(fCl.all(fbCl.getClassTopic(),realm,rref));
 		
 		checkLists.clear();
-		checkLists.addAll(fCl.all(fbCl.getClassChecklist(),realm,rref));
+		checkLists.addAll(fCl.all(fbCl.getClassCheckList(),realm,rref));
+		
+		if(debugOnInfo) {logger.info(fbCl.getClassCheckList().getSimpleName()+": "+checkLists.size());}
 		
 		this.reloadLists();
 	}
@@ -103,51 +122,113 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 		// TODO Auto-generated method stub
 	}
 	
-	public void cancelList() {reset(false, true);}
-	public void cancelItem() {reset(false, false);}
-	private void reset(boolean rLists, boolean rList)
+	public void cancelList() {reset(false,true,true,true);}
+	private void reset(boolean rTrackLists, boolean rList, boolean rLinkedLists, boolean rItems)
 	{
-		if(rLists) {lists.clear();}
-		if(rList) {list = null;}
+		if(rTrackLists) {lists.clear();}
+		if(rList) {list=null; ehMagnet.denyEdit();}
+		if(rLinkedLists) {mapLinked.clear();}
+		if(rItems) {items.clear();}
 	}
 	
 //	public void reorderItems() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fCl,items); this.reloadItems();}
 	
 	private void reloadLists()
 	{
-		this.reset(true,false);
-		lists.addAll(fCl.all(fbCl.getClassTracklist(),realm,rref));
+		this.reset(true,false,false,false);
+		lists.addAll(fCl.all(fbCl.getClassTrackList(),realm,rref));
     }
+	
+	private void reloadList()
+	{
+		this.reset(false,false,true,false);
+		list = fCl.load(list);
+		for(CL l : list.getChecklists())
+		{
+			mapLinked.put(l,true);
+		}
+	}
 	
 	public void selectList()
 	{
-		this.reset(false, false);
+		this.reset(false,false,true,true);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(list));}
-		list = efLang.persistMissingLangs(fCl, lp.getLocales(),list);
-//		this.reloadItems();
+		list = efLang.persistMissingLangs(fCl,lp.getLocales(),list);
+		this.reloadList();
+		this.reloadItems();
 	}
 	
 	public void addList()
 	{
-		this.reset(false, true);
-		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbCl.getClassChecklist()));}
-		list = ejbTracklist.build(realm, rref);
+		this.reset(false,true,true,true);
+		if(debugOnInfo) {logger.info(AbstractLogMessage.createEntity(fbCl.getClassCheckList()));}
+		list = efTrackList.build(realm, rref);
 		list.setName(efLang.buildEmpty(lp.getLocales()));
 	}
 	
 	public void saveList() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(list));}
-		ejbTracklist.converter(fCl,list);
+		efTrackList.converter(fCl,list);
 		list = fCl.save(list);
 		this.reloadLists();
+		this.reloadList();
 	}
 	
 	public void deleteList() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.saveEntity(list));}
 		fCl.rm(list);
-		this.reset(false, true);
+		this.reset(false,true,true,true);
 		this.reloadLists();
+	}
+	
+	public void applyChecklist(CL cl, boolean link) throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		if(debugOnInfo){logger.info("Link ("+link+") "+cl.toString());}
+
+		if(link && !list.getChecklists().contains(cl))
+		{
+			logger.info("add");
+			list.getChecklists().add(cl);
+			mapLinked.put(cl,true);
+		}
+		else if(!link && list.getChecklists().contains(cl))
+		{
+			logger.info("remove");
+			list.getChecklists().remove(cl);
+			mapLinked.put(cl,false);
+		}
+		
+		list = fCl.save(list);
+		list = fCl.load(list);
+	}
+	
+	public void applyItems()
+	{
+		EjbChecklistQuery<CL,CI,TL> query = new EjbChecklistQuery<CL,CI,TL>(); 
+		query.addCalendars(list.getChecklists());
+		
+		Set<CI> existing = efTrackItem.toLSetCheckItem(items);
+		List<CI> available = fCl.fCheckItems(query);
+		
+		if(debugOnInfo) {logger.info(fbCl.getClassTrackItem().getSimpleName()+": "+existing.size());}
+		if(debugOnInfo) {logger.info(fbCl.getClassCheckList().getSimpleName()+": "+list.getChecklists().size());}
+		if(debugOnInfo) {logger.info(fbCl.getClassCheckItem().getSimpleName()+": "+available.size());}
+		
+		for(CI ci : available)
+		{
+			if(!existing.contains(ci))
+			{
+				TI ti = efTrackItem.build(list,ci);
+			}
+		}
+		
+	}
+	
+	private void reloadItems()
+	{
+		this.reset(false, false, false, true);
+		items.addAll(fCl.allForParent(fbCl.getClassTrackItem(), list));
 	}
 }
