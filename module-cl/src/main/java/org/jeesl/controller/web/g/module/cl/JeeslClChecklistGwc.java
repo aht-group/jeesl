@@ -11,7 +11,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
 import org.jeesl.factory.ejb.io.cms.EjbMarkupFactory;
-import org.jeesl.factory.ejb.module.cl.EjbChecklistFactory2;
+import org.jeesl.factory.ejb.module.cl.EjbCheckListFactory;
 import org.jeesl.factory.ejb.module.cl.EjbCheckItemFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
@@ -51,7 +51,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	private JeeslChecklistFacade<CL,CI,?> fCl;
 
 	private final ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,?,?,?,M,MT> fbCl;
-	private final EjbChecklistFactory2<R,CAT,CL> ejbChecklist;
+	private final EjbCheckListFactory<R,CAT,CL> ejbChecklist;
 	private final EjbCheckItemFactory<CL,CI,M,MT> ejbChecklistItem;
 	private final EjbMarkupFactory<LOC,M,MT> efMarkup;
 	

@@ -14,7 +14,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
 import org.jeesl.factory.ejb.module.cl.EjbTrackItemFactory;
-import org.jeesl.factory.ejb.module.cl.EjbTracklistFactory2;
+import org.jeesl.factory.ejb.module.cl.EjbTrackListFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
@@ -32,6 +32,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.module.EjbChecklistQuery;
 import org.jeesl.jsf.handler.ui.edit.UiEditBooleanHandler;
+import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +44,7 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
     								CL extends JeeslClChecklist<L,R,CAT>,
     								CI extends JeeslClCheckItem<L,CL,?>,
     								TL extends JeeslClTracklist<L,R,CL>,
-    								TI extends JeeslClTrackItem<CI,TL,?>,
+    								TI extends JeeslClTrackItem<CI,TL,TS>,
     								TS extends JeeslClTrackStatus<L,D,TS,?>>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
@@ -54,11 +55,11 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	private JeeslChecklistFacade<CL,CI,TL> fCl;
 
 	private final ChecklistFactoryBuilder<L,D,R,CAT,CL,CI,TL,TI,TS,?,?> fbCl;
-	private final EjbTracklistFactory2<R,CAT,TL> efTrackList;
+	private final EjbTrackListFactory<R,CAT,TL> efTrackList;
 	private final EjbTrackItemFactory<CI,TL,TI> efTrackItem;
 
 	private final UiEditBooleanHandler ehMagnet; public UiEditBooleanHandler getEhMagnet() {return ehMagnet;}
-//	private final EjbCodeCache<TS> cStatus;
+	private final EjbCodeCache<TS> cStatus;
 	
 	private final Map<CL,Boolean> mapLinked; public Map<CL, Boolean> getMapLinked() {return mapLinked;}
 
@@ -80,7 +81,8 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 		efTrackItem = fbCl.ejbTrackItem();
 		
 		ehMagnet = new UiEditBooleanHandler();
-
+		cStatus = EjbCodeCache.instance(fbCl.getClassTrackStatus());
+		
 		mapLinked = new HashMap<>();
 		
 		categories = new ArrayList<>();
@@ -95,6 +97,8 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 		super.postConstructWebController(lp,bMessage);
 		this.fCl=fCl;
 		this.realm=realm;
+		
+		cStatus.facade(fCl);
 	}
 	
 	public void updateRealmReference(RREF rref)
@@ -204,7 +208,7 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 		list = fCl.load(list);
 	}
 	
-	public void applyItems()
+	public void applyItems() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		EjbChecklistQuery<CL,CI,TL> query = new EjbChecklistQuery<CL,CI,TL>(); 
 		query.addCalendars(list.getChecklists());
@@ -221,9 +225,11 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 			if(!existing.contains(ci))
 			{
 				TI ti = efTrackItem.build(list,ci);
+				ti.setStatus(cStatus.ejb(JeeslClTrackStatus.Code.missing));
+				ti = fCl.save(ti);
+				items.add(ti);
 			}
 		}
-		
 	}
 	
 	private void reloadItems()

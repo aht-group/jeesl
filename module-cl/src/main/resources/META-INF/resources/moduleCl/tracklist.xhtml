@@ -20,17 +20,17 @@
 							var="l" value="#{cc.attrs.ctrl.lists}" draggableRows="true"
 							selection="#{cc.attrs.ctrl.list}" selectionMode="single" rowKey="#{l.id}">
 					<f:facet name="header">
-						<j:dtHeader entity="ClTracklist" code="listOf">
+						<j:dtHeader entity="ClTrackList" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addList()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>	
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectList()}" update=":#{cc.id}:sList"/>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClTracklist" code="endDate"/></f:facet>
+						<f:facet name="header"><jtp:label entity="ClTrackList" code="endDate"/></f:facet>
 						<jp:outputDate value="#{l.endDate}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClTracklist" code="name"/></f:facet>
+						<f:facet name="header"><jtp:label entity="ClTrackList" code="name"/></f:facet>
 						<jtp:symbolizer value="#{l.category}" marginRight="5"/>
 						<h:outputText value="#{l.name[localeCode].lang}"/>
 					</p:column>
@@ -40,7 +40,7 @@
 		<j:slot id="sList" width="7">
 			<h:form id="fKey" rendered="#{not empty cc.attrs.ctrl.list}">
 				<p:panel styleClass="jeesl-panel">
-					<f:facet name="header"><j:pHeader entity="ClTracklist"/></f:facet>
+					<f:facet name="header"><j:pHeader entity="ClTrackList"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelList()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveList()}" update=":#{cc.id}:grid" />
@@ -50,21 +50,21 @@
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
 					<j:inputGrid>
-						<jtp:label entity="ClTracklist" code="id"/>
+						<jtp:label entity="ClTrackList" code="id"/>
 						<h:outputText value="#{cc.attrs.ctrl.list.id}"/>
 						
-						<jtp:label entity="ClTracklist" code="category"/>
+						<jtp:label entity="ClTrackList" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.list.category}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.categories}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
 						
-						<jtp:label entity="ClTracklist" code="startDate"/>
+						<jtp:label entity="ClTrackList" code="startDate"/>
 						<jp:inputCalendar value="#{cc.attrs.ctrl.list.startDate}"/>
 						
-						<jtp:label entity="ClTracklist" code="endDate"/>
+						<jtp:label entity="ClTrackList" code="endDate"/>
 						<jp:inputCalendar value="#{cc.attrs.ctrl.list.endDate}"/>
 						
-						<jtp:label entity="ClTracklist" code="checklists"/>
+						<jtp:label entity="ClTrackList" code="checklists"/>
 						<ui:fragment>
 							<ui:repeat var="cl" value="#{cc.attrs.ctrl.list.checklists}" varStatus="index">
 			           			<h:outputText value="#{cl.name[localeCode].lang}"/>
@@ -80,13 +80,13 @@
 				<p:dataTable widgetVar="wvChecklists" styleClass="jeesl-datatable" rendered="#{cc.attrs.ctrl.ehMagnet.allow}"
 							var="cl" value="#{cc.attrs.ctrl.checkLists}">
 					<f:facet name="header">
-						<j:dtHeader entity="ClChecklist" code="listOf"/>
+						<j:dtHeader entity="ClCheckList" code="listOf"/>
 					</f:facet>
 					<p:column>
 						<jtp:symbolizer value="#{cl.topic}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClChecklist" code="name"/></f:facet>
+						<f:facet name="header"><jtp:label entity="ClCheckList" code="name"/></f:facet>
 						<h:outputText value="#{cl.name[localeCode].lang}"/>
 					</p:column>
 					<p:column>
@@ -97,18 +97,23 @@
 			</h:form>
 			<h:form id="fItems">
 				<p:dataTable styleClass="jeesl-datatable" rendered="#{cc.attrs.ctrl.list.id gt 0}"
-							var="i" value="#{cc.attrs.ctrl.items}">
+							var="ti" value="#{cc.attrs.ctrl.items}">
 					<f:facet name="header">
 						<j:dtHeader entity="ClTrackItem" code="listOf">
 							<j:svg type="jeeslReload" listener="#{cc.attrs.ctrl.applyItems()}" update="@form"/>
 						</j:dtHeader>	
 					</f:facet>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClTrackItem" code="status"/></f:facet>
-						<jtp:symbolizer value="#{i.status}"/>
+						<f:facet name="header"><jtp:label entity="ClCheckItem" code="checklist"/></f:facet>
+						<h:outputText value="#{ti.item.checklist.name[localeCode].lang}"/>
 					</p:column>
 					<p:column>
-						<h:outputText value="#{i.name[localeCode].lang}"/>
+						<f:facet name="header"><jtp:label entity="ClTrackItem" code="item"/></f:facet>
+						<h:outputText value="#{ti.item.name[localeCode].lang}"/>
+					</p:column>
+					<p:column styleClass="jeesl-center">
+						<f:facet name="header"><jtp:label entity="ClTrackItem" code="status"/></f:facet>
+						<jtp:symbolizer value="#{ti.status}"/>
 					</p:column>
 			   	</p:dataTable>
 			</h:form>

@@ -20,18 +20,18 @@
 							var="l" value="#{cc.attrs.ctrl.lists}" draggableRows="true"
 							selection="#{cc.attrs.ctrl.list}" selectionMode="single" rowKey="#{l.id}">
 					<f:facet name="header">
-						<j:dtHeader entity="ClChecklist" code="listOf">
+						<j:dtHeader entity="ClCheckList" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addList()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>	
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectList()}" update=":#{cc.id}:sList :#{cc.id}:rItem"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderLists()}" update="@form"/>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClChecklist" code="positionShort"/></f:facet>
+						<f:facet name="header"><jtp:label entity="ClCheckList" code="positionShort"/></f:facet>
 						<h:outputText value="#{l.position}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="ClChecklist" code="name"/></f:facet>
+						<f:facet name="header"><jtp:label entity="ClCheckList" code="name"/></f:facet>
 						<jtp:symbolizer value="#{l.topic}" marginRight="5"/>
 						<h:outputText value="#{l.name[localeCode].lang}"/>
 					</p:column>
@@ -41,7 +41,7 @@
 		<j:slot id="sList" width="5">
 			<h:form id="fKey" rendered="#{not empty cc.attrs.ctrl.list}">
 				<p:panel styleClass="jeesl-panel">
-					<f:facet name="header"><j:pHeader entity="ClChecklist"/></f:facet>
+					<f:facet name="header"><j:pHeader entity="ClCheckList"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelList()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveList()}" update=":#{cc.id}:grid" />
@@ -49,10 +49,10 @@
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
 					<j:inputGrid>
-						<jtp:label entity="ClChecklist" code="id"/>
+						<jtp:label entity="ClCheckList" code="id"/>
 						<h:outputText value="#{cc.attrs.ctrl.list.id}"/>
 						
-						<jtp:label entity="ClChecklist" code="topic"/>
+						<jtp:label entity="ClCheckList" code="topic"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.list.topic}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.categories}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>

@@ -26,9 +26,9 @@ import org.jeesl.model.ejb.io.cms.markup.IoMarkup;
 import org.jeesl.model.ejb.io.locale.IoLang;
 
 @Table(name="ClChecklistItem")
-@EjbErNode(name="Checklist",category="tafu",subset="moduleTafu")
+@EjbErNode(name="Checklist",category="tafu",subset="moduleCl")
 @Entity
-public class ClCheckItem implements JeeslClCheckItem<IoLang,ClCheckList2,IoMarkup>
+public class ClCheckItem implements JeeslClCheckItem<IoLang,ClCheckList,IoMarkup>
 {
 	public static final long serialVersionUID=1;
 
@@ -40,9 +40,9 @@ public class ClCheckItem implements JeeslClCheckItem<IoLang,ClCheckList2,IoMarku
 	
 	@Override public String resolveParentAttribute() {return JeeslClCheckItem.Attributes.checklist.toString();}
 	@NotNull @ManyToOne
-	private ClCheckList2 checklist;
-	@Override public ClCheckList2 getChecklist() {return checklist;}
-	@Override public void setChecklist(ClCheckList2 checklist) {this.checklist = checklist;}
+	private ClCheckList checklist;
+	@Override public ClCheckList getChecklist() {return checklist;}
+	@Override public void setChecklist(ClCheckList checklist) {this.checklist = checklist;}
 
 	private int position;
 	@Override public int getPosition() {return position;}

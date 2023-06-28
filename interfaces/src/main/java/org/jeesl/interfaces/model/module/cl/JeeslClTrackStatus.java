@@ -23,5 +23,5 @@ public interface JeeslClTrackStatus <L extends JeeslLang, D extends JeeslDescrip
 										EjbWithCodeGraphic<G>,
 										JeeslStatus<L,D,S>
 {
-	public static enum Code{mon,tue,wed,thu,fri,sat,sun};
+	public static enum Code{missing};
 }

@@ -15,7 +15,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 @Table(name="ClTrackItem")
 @EjbErNode(name="Track Item",category="tafu",subset="moduleCl")
 @Entity
-public class ClTrackItem implements JeeslClTrackItem<ClCheckItem,ClTrackList2,ClTrackStatus>
+public class ClTrackItem implements JeeslClTrackItem<ClCheckItem,ClTrackList,ClTrackStatus>
 {
 	public static final long serialVersionUID=1;
 
@@ -27,20 +27,21 @@ public class ClTrackItem implements JeeslClTrackItem<ClCheckItem,ClTrackList2,Cl
 	
 	@Override public String resolveParentAttribute() {return JeeslClTrackItem.Attributes.tracklist.toString();}
 	@NotNull @ManyToOne
-	private ClTrackList2 tracklist;
-	public ClTrackList2 getTracklist() {return tracklist;}
-	public void setTracklist(ClTrackList2 tracklist) {this.tracklist = tracklist;}
+	private ClTrackList tracklist;
+	@Override public ClTrackList getTracklist() {return tracklist;}
+	@Override public void setTracklist(ClTrackList tracklist) {this.tracklist = tracklist;}
 	
 	@NotNull @ManyToOne
 	private ClCheckItem item;
-	public ClCheckItem getItem() {return item;}
-	public void setItem(ClCheckItem item) {this.item = item;}
+	@Override public ClCheckItem getItem() {return item;}
+	@Override public void setItem(ClCheckItem item) {this.item = item;}
 
 	@NotNull @ManyToOne
 	private ClTrackStatus status;
-	public ClTrackStatus getStatus() {return status;}
-	public void setStatus(ClTrackStatus status) {this.status = status;}
-	
+	@Override public ClTrackStatus getStatus() {return status;}
+	@Override public void setStatus(ClTrackStatus status) {this.status = status;}
+
+
 	@Override public boolean equals(Object object) {return (object instanceof ClTrackItem) ? id == ((ClTrackItem) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(23,7).append(id).toHashCode();}
 	

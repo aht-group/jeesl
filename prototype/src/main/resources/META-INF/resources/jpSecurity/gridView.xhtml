@@ -211,7 +211,7 @@
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
 						<p:outputLabel value="#{msg.jeeslSecurityActionTemplate}"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.action.template}" effect="fade" >
+						<p:selectOneMenu value="#{cc.attrs.ctrl.action.template}" disabled="#{not cc.attrs.ctrl.userIsDeveloper}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItem itemLabel="---"/>
 							<f:selectItems value="#{cc.attrs.ctrl.templates}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 							<p:ajax event="change" listener="#{cc.attrs.ctrl.changeTemplate()}" update="@form"/>

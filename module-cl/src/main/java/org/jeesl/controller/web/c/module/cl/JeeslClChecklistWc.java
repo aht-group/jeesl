@@ -9,19 +9,19 @@ import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
 import org.jeesl.model.ejb.module.cl.ClCheckItem;
-import org.jeesl.model.ejb.module.cl.ClCheckList2;
+import org.jeesl.model.ejb.module.cl.ClCheckList;
 import org.jeesl.model.ejb.module.cl.ClTopic;
 import org.jeesl.model.ejb.module.cl.ClTrackItem;
 import org.jeesl.model.ejb.module.cl.ClTrackStatus;
-import org.jeesl.model.ejb.module.cl.ClTrackList2;
+import org.jeesl.model.ejb.module.cl.ClTrackList;
 import org.jeesl.model.ejb.system.tenant.TenantRealm;
 
 public class JeeslClChecklistWc <RREF extends EjbWithId>
-					extends JeeslClChecklistGwc<IoLang,IoDescription,IoLocale,TenantRealm,RREF,ClTopic,ClCheckList2,ClCheckItem,IoMarkup,IoMarkupType>
+					extends JeeslClChecklistGwc<IoLang,IoDescription,IoLocale,TenantRealm,RREF,ClTopic,ClCheckList,ClCheckItem,IoMarkup,IoMarkupType>
 {
 	private static final long serialVersionUID = 1L;
 	
-	public JeeslClChecklistWc(ChecklistFactoryBuilder<IoLang,IoDescription,TenantRealm,ClTopic,ClCheckList2,ClCheckItem,ClTrackList2,ClTrackItem,ClTrackStatus,IoMarkup,IoMarkupType> fbCl)
+	public JeeslClChecklistWc(ChecklistFactoryBuilder<IoLang,IoDescription,TenantRealm,ClTopic,ClCheckList,ClCheckItem,ClTrackList,ClTrackItem,ClTrackStatus,IoMarkup,IoMarkupType> fbCl)
 	{
 		super(fbCl);	
 	}
