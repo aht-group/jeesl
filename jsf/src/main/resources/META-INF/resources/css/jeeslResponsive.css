@@ -4306,7 +4306,7 @@ body, .ui-widget {
         .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item .jeesl-menu-bar-radio-item-list .jeesl-menu-bar-item:last-child:after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item .jeesl-menu-bar-radio-item-list:hover .jeesl-menu-bar-item:last-child:after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover .jeesl-menu-bar-radio-item-list .jeesl-menu-bar-item:last-child:after, .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-radio-item:hover .jeesl-menu-bar-radio-item-list:hover .jeesl-menu-bar-item:last-child:after {
           display: none; }
 
-.jeesl-panel, .jeesl-tree, .jeesl-datatable, .html-container-panel {
+.jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel {
   margin-bottom: 10px; }
 
 .jeesl-panel {
