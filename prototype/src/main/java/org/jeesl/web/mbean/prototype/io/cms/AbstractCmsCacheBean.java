@@ -109,7 +109,7 @@ public abstract class AbstractCmsCacheBean <L extends JeeslLang,D extends JeeslD
 			return buildBySection(localeCode,section);
 		}
 	}
-	
+
 	public Section buildBySection(String localeCode, S section)
 	{
 		if(section==null) {logger.warn("Section is NULL"); return new Section();}

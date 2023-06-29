@@ -385,6 +385,17 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		bMessage.growlSuccessRemoved();
 	}
 	
+	public void reorderCategories() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity,categories);}
+//	{
+//		logger.info("updateOrder "+categories.size());
+//		int i=1;
+//		for(C c : categories)
+//		{
+//			c.setPosition(i);
+//			fSecurity.update(c);
+//			i++;
+//		}
+//	}
 	public void reorderViews() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity,views);}
 	public void reorderActions() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity,actions);}
 	public void reorderAreas() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity, areas);}

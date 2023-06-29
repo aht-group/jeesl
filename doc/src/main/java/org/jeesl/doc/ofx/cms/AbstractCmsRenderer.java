@@ -23,6 +23,7 @@ import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
+import org.jeesl.interfaces.model.io.fr.JeeslFileType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -50,7 +51,8 @@ public abstract class AbstractCmsRenderer <L extends JeeslLang, D extends JeeslD
 								MT extends JeeslIoMarkupType<L,D,MT,?>,
 								FS extends JeeslFileStorage<L,D,?,?,?>,
 								FC extends JeeslFileContainer<FS,FM>,
-								FM extends JeeslFileMeta<D,FC,?,?>
+								FM extends JeeslFileMeta<D,FC,FT,?>,
+								FT extends JeeslFileType<?,D,FT,?>
 								>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractCmsRenderer.class);
@@ -62,10 +64,15 @@ public abstract class AbstractCmsRenderer <L extends JeeslLang, D extends JeeslD
 	private final JeeslCmsParagraphFactory<E,C> ofParagraph;
 	private final JeeslCmsStatusTableFactory<E,C> ofTableStatus;
 	private final JeeslCmsStatusListFactory<E,C> ofxListStatus;
-	private final JeeslCmsImageFactory<E,C,M,MT,FS,FC,FM> ofImage;
+	private final JeeslCmsImageFactory<E,C,M,MT,FS,FC,FM,FT> ofImage;
 	private final OfxSectionWorkflow<L,LOC,E> ofxWorkflow;
 	
-	public AbstractCmsRenderer(OfxTranslationProvider tp, JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,M,MT,FC,FM> fCms, JeeslFileRepositoryHandler<LOC,FS,FC,FM> frh)
+	public AbstractCmsRenderer(OfxTranslationProvider tp, JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,M,MT,FC,FM> fCms)
+	{
+		this(tp,fCms,null);
+	}
+	public AbstractCmsRenderer(OfxTranslationProvider tp, JeeslIoCmsFacade<L,D,LOC,CAT,CMS,V,S,E,EC,ET,C,M,MT,FC,FM> fCms,
+						JeeslFileRepositoryHandler<LOC,FS,FC,FM> frh)
 	{
 		this.tp=tp;
 		this.fCms = fCms;
