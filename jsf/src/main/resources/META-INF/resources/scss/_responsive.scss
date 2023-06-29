@@ -466,7 +466,8 @@ $enable-pointer-cursor-for-buttons: true;
 					@media (max-width: 768px) {
 						&:before, &:after {
 							content: '';
-						    display: none;
+//						    display: none;
+							display: list-item;
 						    height: 15px;
 						    width: 100%;
 						}
@@ -2720,44 +2721,54 @@ body, .ui-widget {
 					}
 				}
 				
-				.search-btn-light {
-					background: transparent;
-					border: none;
-					box-shadow: none;
-					color: $brighter-colour;
-					opacity: 0;
+				.jeesl-menu-bar-search-buttons {
+					display: flex;
 					pointer-events: none;
 					position: absolute;
 					right: 0;
-					text-shadow: none;
 					top: 0;
-					transition: background .2s linear, opacity .2s linear;
-					
-					&:nth-last-child(2) {
-						right: calc(#{$regular-spacing} + 2 * #{$half-spacing});
-					}
-					
-					&:hover {
-						background: $dark-colour;
+				
+					.search-btn-light {
+						background: transparent;
+						border: none;
+						box-shadow: none;
 						color: $brighter-colour;
-					}
-					
-					&:before, &:after {
-						display: none;
-					}
-					
-					&.ui-state-visible {
-						opacity: 1;
-						pointer-events: all;
-					}
-					
-					.ui-icon {
-						color: $brighter-colour !important;
-						height: $regular-spacing;
-						width: $regular-spacing;
+						height: 100%;
+						opacity: 0;
+						pointer-events: none;
+						text-shadow: none;
+						transition: background .2s linear, opacity .2s linear;
 						
-						&.ui-icon-apply {
-							transform: rotate(90deg);
+						&:hover {
+							background: $dark-colour;
+							color: $brighter-colour;
+						}
+						
+						&:before, &:after {
+							display: none;
+						}
+						
+						&.ui-state-visible {
+							opacity: 1;
+							pointer-events: all;
+						}
+						
+						.ui-icon {
+							align-items: center;
+							color: $brighter-colour !important;
+							display: flex;
+							height: $regular-spacing;
+							width: $regular-spacing;
+							
+							@media (max-width: 768px) {
+								height: 100%;
+								width: auto;
+								
+								&.ui-icon-apply {
+									height: auto;
+									width: 100%;
+								}
+							}
 						}
 					}
 				}

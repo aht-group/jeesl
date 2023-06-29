@@ -12,15 +12,35 @@
 				@include jeesl-titlebar-title;
 				
 				margin: -#{$regular-spacing} -#{$regular-spacing} #{$regular-spacing};
+				min-height: #{$element-height - (2 * $slim-spacing) - $header-underline};
 				
 				@media (max-width: 768px) {
 					margin: -$regular-spacing;
 					margin-bottom: $regular-spacing + $header-element-underline;
+					min-height: #{$element-height-mobile - (2 * $half-spacing) - $header-element-underline-mobile};
 				}
 				
 				&:after {
 					left: 0;
 				}
+			}
+		}
+		
+		p + figure {
+			margin-top: -#{$half-spacing};
+		}
+		
+		figure {
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+			
+			img {
+				max-width: 100%;
+			}
+			
+			figcaption {
+				font-style: italic;
 			}
 		}
 	}

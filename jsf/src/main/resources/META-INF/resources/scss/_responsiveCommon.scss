@@ -1257,6 +1257,14 @@ $border: $border-width solid $border-colour;
 	&.ui-icon-arrow-4:before {
 		content: $icon-all-arrows;
 	}
+	
+	&.ui-icon-apply {
+		transform: rotate(90deg);
+		
+		&:before {
+			content: $icon-return;
+		}
+	}
 }
 
 .ui-spinner {
