@@ -3,6 +3,7 @@ package org.jeesl.model.json.system.security;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,6 +17,6 @@ public class JsonSecurityPages implements Serializable
 
 	@JsonProperty("list")
 	private List<JsonSecurityPage> list;
-	public List<JsonSecurityPage> getList() {if(list==null) {list = new ArrayList<JsonSecurityPage>();}return list;}
+	public List<JsonSecurityPage> getList() {if(Objects.isNull(list)) {list = new ArrayList<>();}return list;}
 	public void setList(List<JsonSecurityPage> pages) {this.list = pages;}
 }

@@ -12,6 +12,11 @@ public class JsonSecurityPage implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	@JsonProperty("code")
+	private String code;
+	public String getCode() {return code;}
+	public void setCode(String code) {this.code = code;}
+
 	@JsonProperty("s1")
 	private String s1;
 	public String getS1() {return s1;}
@@ -28,7 +33,16 @@ public class JsonSecurityPage implements Serializable
 	public void setS3(String s3) {this.s3 = s3;}
 	
 	@JsonProperty("public")
-	private boolean accessPublic;
-	public boolean isAccessPublic() {return accessPublic;}
-	public void setAccessPublic(boolean accessPublic) {this.accessPublic = accessPublic;}
+	private Boolean accessPublic;
+	public Boolean isAccessPublic() {return accessPublic;}
+	public void setAccessPublic(Boolean accessPublic) {this.accessPublic = accessPublic;}
+	
+	@JsonProperty("accessViaRole")
+	private Boolean accessViaRole;
+	public Boolean getAccessViaRole() {
+		return accessViaRole;
+	}
+	public void setAccessViaRole(Boolean accessViaRole) {
+		this.accessViaRole = accessViaRole;
+	}
 }

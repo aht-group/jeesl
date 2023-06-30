@@ -68,23 +68,23 @@ public class JeeslCmsImageFactory<E extends JeeslIoCmsElement<?,?,?,?,C,FC>,
 			xml.getMedia().setDst(meta.getType().getCode());
 		}
 		
-		if(element.getContent().containsKey(localeCode))
-		{
-			try
-			{
-				C content = element.getContent().get(localeCode);
-				Section section = ofxMarkup.build(content.getMarkup().getCode(),content.getLang());
-				Paragraph p = XmlSectionQuery.getFirstParagraph(section);
-				String s = p.getContent().get(0).toString();
-				logger.trace(s);
-				xml.setTitle(XmlTitleFactory.build(s));
-			}
-			catch (ExlpXpathNotFoundException e)
-			{
-				logger.error(e.getMessage());
-				logger.error(element.getSection().toString()+ " "+element.getPosition());
-			}
-		}
+//		if(element.getContent().containsKey(localeCode))
+//		{
+//			try
+//			{
+//				C content = element.getContent().get(localeCode);
+//				Section section = ofxMarkup.build(content.getMarkup().getCode(),content.getLang());
+//				Paragraph p = XmlSectionQuery.getFirstParagraph(section);
+//				String s = p.getContent().get(0).toString();
+//				logger.trace(s);
+//				xml.setTitle(XmlTitleFactory.build(s));
+//			}
+//			catch (ExlpXpathNotFoundException e)
+//			{
+//				logger.error(e.getMessage());
+//				logger.error(element.getSection().toString()+ " "+element.getPosition());
+//			}
+//		}
 		if(Objects.nonNull(frh))
 		{
 			try
