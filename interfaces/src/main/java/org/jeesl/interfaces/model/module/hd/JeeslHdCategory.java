@@ -18,5 +18,4 @@ public interface JeeslHdCategory <L extends JeeslLang, D extends JeeslDescriptio
 					
 {
 	public enum Attributes{realm,rref}
-//	void x();
 }
