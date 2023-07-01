@@ -101,7 +101,7 @@ public abstract class AbstractHdTicketBean <L extends JeeslLang, D extends Jeesl
 	}
 
 	protected void postConstructHdTicket(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-									JeeslHdFacade<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd,
+									JeeslHdFacade<L,D,R,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd,
 									JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fCms,
 									R realm,
 									USER reporter)
@@ -130,7 +130,7 @@ public abstract class AbstractHdTicketBean <L extends JeeslLang, D extends Jeesl
 
 	private void reloadTickets()
 	{
-		EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> query = EjbHelpdeskQuery.build();
+		EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> query = EjbHelpdeskQuery.build();
 		query.addReporter(reporter);
 
 		tickets.clear();

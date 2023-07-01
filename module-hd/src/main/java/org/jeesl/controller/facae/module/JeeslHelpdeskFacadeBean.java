@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade.module;
+package org.jeesl.controller.facae.module;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,8 +46,9 @@ import org.slf4j.LoggerFactory;
 
 public class JeeslHelpdeskFacadeBean<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										R extends JeeslTenantRealm<L,D,R,?>,
-										TICKET extends JeeslHdTicket<R,EVENT,M,?>,
 										CAT extends JeeslHdCategory<L,D,R,CAT,?>,
+										TICKET extends JeeslHdTicket<R,EVENT,M,?>,
+										
 										STATUS extends JeeslHdTicketStatus<L,D,R,STATUS,?>,
 										EVENT extends JeeslHdEvent<TICKET,CAT,STATUS,TYPE,LEVEL,PRIORITY,USER>,
 										TYPE extends JeeslHdEventType<L,D,TYPE,?>,
@@ -63,7 +64,7 @@ public class JeeslHelpdeskFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 										SEC extends JeeslIoCmsSection<L,SEC>,
 										USER extends JeeslSimpleUser>
 					extends JeeslFacadeBean
-					implements JeeslHdFacade<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER>
+					implements JeeslHdFacade<L,D,R,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER>
 {	
 	private static final long serialVersionUID = 1L;
 
@@ -124,7 +125,7 @@ public class JeeslHelpdeskFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		return ticket;
 	}
 
-	@Override public <RREF extends EjbWithId> List<TICKET> fHdTickets(EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> query)
+	@Override public <RREF extends EjbWithId> List<TICKET> fHdTickets(EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();

@@ -72,8 +72,8 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 	private final List<MI> items; public List<MI> getItems() {return items;}
 	private final List<MC> classifications; public List<MC> getClassifications() {return classifications;}
 
-	protected R realm;
-	protected RREF rref;
+	private R realm;
+	private RREF rref;
 	private MG gallery;
 	private USER currentUser;
 	private MI item; public MI getItem() {return item;} public void setItem(MI item) {this.item = item;}

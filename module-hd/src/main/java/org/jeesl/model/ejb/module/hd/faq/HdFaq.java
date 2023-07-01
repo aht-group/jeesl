@@ -24,7 +24,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.module.hd.HdCategory;
-import org.jeesl.model.ejb.module.hd.resolution.HdScope;
+import org.jeesl.model.ejb.module.hd.HdScope;
 import org.jeesl.model.ejb.system.tenant.TenantRealm;
 
 @Table(name="HdFaq")

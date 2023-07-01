@@ -1,13 +1,11 @@
 package org.jeesl.controller.facade.module;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -16,7 +14,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslChecklistFacade;
 import org.jeesl.controller.facade.JeeslFacadeBean;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
-import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
 import org.jeesl.interfaces.model.module.cl.JeeslClCheckItem;
 import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
 import org.jeesl.interfaces.model.module.cl.JeeslClTracklist;
@@ -49,7 +46,7 @@ public class JeeslChecklistFacadeBean<CL extends JeeslClChecklist<?,?,?>,
 		return tracklist;
 	}
 
-	@Override public List<CI> fCheckItems(EjbChecklistQuery<CL, CI, TL> query)
+	@Override public List<CI> fCheckItems(EjbChecklistQuery<CL,CI,TL> query)
 	{
 		if(ObjectUtils.allNull(query.getCheckLists())) {return new ArrayList<>();}
 		

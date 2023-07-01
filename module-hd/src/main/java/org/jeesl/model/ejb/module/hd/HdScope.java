@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.module.hd.resolution;
+package org.jeesl.model.ejb.module.hd;
 
 import java.util.ArrayList;
 import java.util.List;

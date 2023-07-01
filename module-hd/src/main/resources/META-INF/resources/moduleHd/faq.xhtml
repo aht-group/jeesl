@@ -16,14 +16,12 @@
 	<composite:implementation>
 		<jp:grid id="grid">
 			<j:row>
-				<j:slot id="sFaqs" width="6">
+				<j:slot id="sFaqs" width="4">
 					<h:form id="fFaqs">
 						<p:dataTable var="faq" value="#{cc.attrs.bean.faqs}" draggableRows="false"
 										selection="#{cc.attrs.bean.faq}" selectionMode="single" rowKey="#{faq.id}">
 							<f:facet name="header">
-								<j:dtHeader entity="HdFaq" code="listOf">
-									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addFaq()}" update=":#{cc.id}:grid"/>
-								</j:dtHeader>
+								<j:dtHeader entity="HdFaq" code="listOf"/>
 							</f:facet>
 							<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectFaq()}" update=":#{cc.id}:sFaq"/>
 							<p:column>
@@ -34,13 +32,13 @@
 								</h:panelGroup>
 							</p:column>
 							<p:column>
-								<f:facet name="header"><jtp:label entity="HdFaq" code="labelQuestion"/></f:facet>
+								<f:facet name="header"><jtp:label entity="HdFaq" code="name"/></f:facet>
 								<h:outputText value="#{faq.name[localeCode].lang}"/>
 							</p:column>
 					   	</p:dataTable>
 					</h:form>
 				</j:slot>
-				<j:slot id="sFaq" width="6">
+				<j:slot id="sFaq" width="8">
 					<h:form id="fTicket" rendered="#{not empty cc.attrs.bean.faq}">
 						<p:panel styleClass="jeeslPanel jeesl-panel">
 							<f:facet name="header"><j:pHeader entity="HdFaq"/></f:facet>

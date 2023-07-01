@@ -102,7 +102,7 @@ public abstract class AbstractHdSupportBean <L extends JeeslLang, D extends Jees
 	}
 
 	protected void postConstructHdSupport(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-									JeeslHdFacade<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd,
+									JeeslHdFacade<L,D,R,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd,
 									R realm,
 									USER supporter)
 	{
@@ -134,7 +134,7 @@ public abstract class AbstractHdSupportBean <L extends JeeslLang, D extends Jees
 	
 	private void reloadTickets()
 	{
-		EjbHelpdeskQuery<L,D,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> query = EjbHelpdeskQuery.build();
+		EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> query = EjbHelpdeskQuery.build();
 		if(sbhStatus.hasSelected()) {query.addStatus(sbhStatus.getSelected());} else {query.nullStatus();}
 		
 		tickets.clear();

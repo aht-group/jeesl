@@ -1,23 +1,25 @@
-package org.jeesl.web.mbean.prototype.module.hd;
+package org.jeesl.controller.web.g.module.hd;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.api.facade.module.JeeslHdFacade;
+import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
-import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
 import org.jeesl.factory.builder.module.HdFactoryBuilder;
+import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.module.hd.JeeslHdFgaCallback;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.hd.JeeslHdCategory;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEvent;
@@ -37,6 +39,7 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
+import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.primefaces.event.DragDropEvent;
@@ -50,7 +53,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 								TICKET extends JeeslHdTicket<R,EVENT,M,FRC>,
 								CAT extends JeeslHdCategory<L,D,R,CAT,?>,
@@ -70,57 +73,85 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 								FRC extends JeeslFileContainer<?,?>,
 								USER extends JeeslSimpleUser
 								>
-					extends AbstractHelpdeskBean<L,D,LOC,R,RREF,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER>
-					implements Serializable//,SbSingleBean
+					extends AbstractJeeslWebController<L,D,LOC>
+					implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractHdFgaBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslHdFgaGwc.class);
 	
+	protected final HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd;
 	private final IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fbCms;
 	
+	private JeeslHdFacade<L,D,R,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd;
 	private JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fCms;
 	
+	private final JeeslHdFgaCallback<DOC> callback;
+	
+	protected final SbMultiHandler<CAT> sbhCategory; public SbMultiHandler<CAT> getSbhCategory() {return sbhCategory;}
+	protected final SbMultiHandler<SCOPE> sbhScope; public SbMultiHandler<SCOPE> getSbhScope() {return sbhScope;}
 	protected final SbSingleHandler<DOC> sbhDocuments; public SbSingleHandler<DOC> getSbhDocuments() {return sbhDocuments;}
 	
+	private final List<LEVEL> levels; public List<LEVEL> getLevels() {return levels;}
+	private final List<PRIORITY> priorities; public List<PRIORITY> getPriorities() {return priorities;}
 	private final List<FAQ> faqs; public List<FAQ> getFaqs() {return faqs;}
 	private final List<FGA> answers; public List<FGA> getAnswers() {return answers;}
 	private final List<SEC> sections; public List<SEC> getSections() {return sections;}
 	
+	private R realm;
+	private RREF rref;
 	private FAQ faq; public FAQ getFaq() {return faq;} public void setFaq(FAQ faq) {this.faq = faq;}
 	private FGA fga; public FGA getFga() {return fga;} public void setFga(FGA fga) {this.fga = fga;}
 	
-	public AbstractHdFgaBean(HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd,
-								IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fbCms)
+	public JeeslHdFgaGwc(JeeslHdFgaCallback<DOC> callback,
+							HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd,
+							IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fbCms)
 	{
-		super(fbHd);
+		super(fbHd.getClassL(),fbHd.getClassD());
+		this.callback=callback;
+		this.fbHd=fbHd;
 		this.fbCms=fbCms;
 		
+		sbhCategory = new SbMultiHandler<>(fbHd.getClassCategory(),this);
+		sbhScope = new SbMultiHandler<>(fbHd.getClassScope(),this);
 		sbhDocuments = new SbSingleHandler<DOC>(fbHd.getClassDoc(),null);
 		
+		levels = new ArrayList<>();
+		priorities = new ArrayList<>();
 		faqs = new ArrayList<>();
 		answers = new ArrayList<>();
 		sections = new ArrayList<>();
 		documents = new ArrayList<>();
 	}
 
-	protected void postConstructHdFaq(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-									JeeslHdFacade<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd,
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
+									JeeslHdFacade<L,D,R,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd,
 									JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fCms,
 									R realm)
 	{
-		super.postConstructHd(bTranslation,bMessage,fHd,realm);
+		super.postConstructWebController(lp,bMessage);
+		this.fHd=fHd;
 		this.fCms=fCms;
+		this.realm=realm;
 	}
-	
-	public void selectedTicket() {} // Dummy Implementation
-	
-	@Override protected void updatedRealmReference()
+		
+	public void updateRealmReference(RREF rref)
 	{
-		reloadFaqs();
-		try {reloadDocuments();}
-		catch (JeeslNotFoundException e) {e.printStackTrace();}
+		this.rref=rref;
+		
+		sbhCategory.setList(fHd.all(fbHd.getClassCategory(),realm,rref));
+		sbhCategory.selectAll();
+		
+		sbhScope.setList(fHd.all(fbHd.getClassScope()));
+		sbhScope.selectAll();
+		
+		levels.addAll(fHd.all(fbHd.getClassLevel(),realm,rref));
+		priorities.addAll(fHd.all(fbHd.getClassPriority(),realm,rref));
+		
+		this.reloadFaqs();
+		
+		sbhDocuments.clear();
+		sbhDocuments.getList().addAll(callback.getDocuments());
 	}
-	protected abstract void reloadDocuments() throws JeeslNotFoundException;
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
@@ -144,8 +175,8 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 	{
 		reset(false,true,true);
 		logger.info(AbstractLogMessage.selectEntity(faq));
-		faq = efLang.persistMissingLangs(fHd,bTranslation.getLocales(),faq);
-		faq = efDescription.persistMissingLangs(fHd,bTranslation.getLocales(),faq);
+		faq = efLang.persistMissingLangs(fHd,lp.getLocales(),faq);
+		faq = efDescription.persistMissingLangs(fHd,lp.getLocales(),faq);
 		reloadAnswers();
 	}
 	
@@ -153,8 +184,8 @@ public abstract class AbstractHdFgaBean <L extends JeeslLang, D extends JeeslDes
 	{
 		logger.info(AbstractLogMessage.createEntity(fbHd.getClassFaq()));
 		faq = fbHd.ejbFaq().build(realm,rref,sbhCategory.getList().get(0),sbhScope.getList().get(0));
-		faq.setName(efLang.buildEmpty(bTranslation.getLocales()));
-		faq.setDescription(efDescription.buildEmpty(bTranslation.getLocales()));
+		faq.setName(efLang.buildEmpty(lp.getLocales()));
+		faq.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
 	public void saveFaq() throws JeeslConstraintViolationException, JeeslLockingException

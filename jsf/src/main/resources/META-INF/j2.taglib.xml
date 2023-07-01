@@ -64,6 +64,19 @@
         </component>
 	</tag>
 	
+	<tag>
+        <tag-name>gridHdFaq</tag-name>
+        <component>
+            <resource-id>moduleHd/faq.xhtml</resource-id>
+        </component>
+	</tag>
+	<tag>
+        <tag-name>gridHdFga</tag-name>
+        <component>
+            <resource-id>moduleHd/fga.xhtml</resource-id>
+        </component>
+	</tag>
+	
 	
 	<tag>
         <tag-name>gridModuleNewsRegistry</tag-name>
