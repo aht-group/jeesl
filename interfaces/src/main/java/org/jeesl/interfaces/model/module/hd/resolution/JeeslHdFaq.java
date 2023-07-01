@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicketCategory;
+import org.jeesl.interfaces.model.module.hd.JeeslHdCategory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
@@ -17,7 +17,7 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithScope;
 
 public interface JeeslHdFaq<L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>,
-								CAT extends JeeslHdTicketCategory<L,D,R,CAT,?>,
+								CAT extends JeeslHdCategory<L,D,R,CAT,?>,
 								SCOPE extends JeeslHdScope<?,?,SCOPE,?>>
 						extends Serializable,EjbSaveable,EjbRemoveable,
 								EjbWithId,JeeslWithTenantSupport<R>,

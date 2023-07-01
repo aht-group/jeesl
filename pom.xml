@@ -44,6 +44,7 @@
 		<module>module-aom</module>
 		<module>module-cal</module>
 		<module>module-cl</module>
+		<module>module-hd</module>
 		<module>module-news</module>
 		<module>module-tafu</module>
 		<module>module-ts</module>

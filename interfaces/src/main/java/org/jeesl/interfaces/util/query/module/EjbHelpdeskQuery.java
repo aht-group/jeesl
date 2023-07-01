@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jeesl.interfaces.model.module.hd.JeeslHdCategory;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEvent;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEventType;
 import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdLevel;
 import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdPriority;
 import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicket;
-import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicketCategory;
 import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicketStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class EjbHelpdeskQuery<L extends JeeslLang,D extends JeeslDescription,
 							R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 							TICKET extends JeeslHdTicket<R,EVENT,?,?>,
-							CAT extends JeeslHdTicketCategory<L,D,R,CAT,?>,
+							CAT extends JeeslHdCategory<L,D,R,CAT,?>,
 							STATUS extends JeeslHdTicketStatus<L,D,R,STATUS,?>,
 							EVENT extends JeeslHdEvent<TICKET,CAT,STATUS,TYPE,LEVEL,PRIORITY,USER>,
 							TYPE extends JeeslHdEventType<L,D,TYPE,?>,
@@ -45,7 +45,7 @@ public class EjbHelpdeskQuery<L extends JeeslLang,D extends JeeslDescription,
 	public static <L extends JeeslLang,D extends JeeslDescription,
 					R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 					TICKET extends JeeslHdTicket<R,EVENT,?,?>,
-					CAT extends JeeslHdTicketCategory<L,D,R,CAT,?>,
+					CAT extends JeeslHdCategory<L,D,R,CAT,?>,
 					STATUS extends JeeslHdTicketStatus<L,D,R,STATUS,?>,
 					EVENT extends JeeslHdEvent<TICKET,CAT,STATUS,TYPE,LEVEL,PRIORITY,USER>,
 					TYPE extends JeeslHdEventType<L,D,TYPE,?>,
