@@ -19,8 +19,6 @@ import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
 import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-import net.sf.ahtutils.interfaces.model.util.UtilsStaffPool;
-
 public interface JeeslSecurityFacade <L extends JeeslLang, D extends JeeslDescription,
 										C extends JeeslSecurityCategory<L,D>,
 										R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
@@ -55,9 +53,7 @@ public interface JeeslSecurityFacade <L extends JeeslLang, D extends JeeslDescri
 	boolean hasRole(Class<USER> clUser, Class<R> clRole, USER user, R role);
 		
 	<WC extends JeeslSecurityWithCategory<C>> List<WC> allForCategory(Class<WC> clWc, Class<C> clC, String catCode) throws JeeslNotFoundException;
-	
-	<S extends UtilsStaffPool<L,D,C,R,V,U,A,AT,P,E,USER>, P extends EjbWithId, E extends EjbWithId> List<S> fStaffPool(Class<S> clStaff, P pool);
-	
+		
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> S fStaff(Class<S> cStaff, USER user, R role, D1 domain) throws JeeslNotFoundException;
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffU(Class<S> cStaff, USER user);
 	<S extends JeeslStaff<R,USER,D1,D2>, D1 extends EjbWithId, D2 extends EjbWithId> List<S> fStaffR(Class<S> cStaff, R role);

@@ -28,8 +28,8 @@ import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutoria
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory.Type;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
@@ -41,8 +41,6 @@ import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithCategory
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.interfaces.model.util.UtilsStaffPool;
 
 public class JeeslSecurityFacadeBean<L extends JeeslLang,
 									D extends JeeslDescription,
@@ -271,10 +269,6 @@ public class JeeslSecurityFacadeBean<L extends JeeslLang,
 		return this.allOrderedPositionParent(clWc,category);
 	}	
 	
-	@Override
-	public <S extends UtilsStaffPool<L,D,C,R,V,U,A,AT,P,E,USER>, P extends EjbWithId, E extends EjbWithId>
-		List<S>	fStaffPool(Class<S> clStaff, P pool)
-	{return allForParent(clStaff,UtilsStaffPool.Attributes.pool, pool);}
 	
 	
 	// STAFF
