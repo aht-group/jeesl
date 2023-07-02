@@ -49,8 +49,8 @@
 						<p:panel rendered="#{not empty cc.attrs.bean.diagram}" styleClass="jeesl-panel">
 							<f:facet name="header"><j:pHeader entity="IoLabelDiagram"/></f:facet>
 							<f:facet name="actions">
-								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelDiagram()}" update=":#{cc.id}:sDiagram :#{cc.id}:sSvg" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveDiagram()}" update=":#{cc.id}:sDiagrams :#{cc.id}:sDiagram :#{cc.id}:sSvg"/>
+								<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelDiagram()}" update=":#{cc.id}:sDiagram :#{cc.id}:sSvg" tooltip="#{msg.jeeslTtCancel}"/>
+								<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveDiagram()}" update=":#{cc.id}:sDiagrams :#{cc.id}:sDiagram :#{cc.id}:sSvg"/>
 								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmDiagram()}" update=":#{cc.id}:sDiagrams :#{cc.id}:sDiagram :#{cc.id}:sSvg" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.diagram.id gt 0}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
@@ -71,7 +71,9 @@
 								<p:selectBooleanCheckbox value="#{cc.attrs.bean.diagram.documentation}"/>
 								
 							</j:inputGrid >
-							<j:tabTranslationEditor value="#{cc.attrs.bean.diagram}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
+							<jtp:inputMulti value="#{cc.attrs.bean.diagram}"
+								withName="true" labelName="#{appLabelBean.labels['IoLabelDiagram']['name'][localeCode].lang}"
+								withDescription="true" labelDescription="#{appLabelBean.labels['IoLabelDiagram']['description'][localeCode].lang}"/>
 							<p:panelGrid columns="1" columnClasses="jeeslGrid100" rendered="#{cc.attrs.bean.diagram.dotManual}">
 								<jtp:inputRemark value="#{cc.attrs.bean.diagram.dotGraph}"/>
 							</p:panelGrid>

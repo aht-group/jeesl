@@ -7,17 +7,8 @@ import java.util.List;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.ocpsoft.rewrite.config.Condition;
 import org.ocpsoft.rewrite.config.ConfigurationBuilder;
 import org.ocpsoft.rewrite.config.Direction;
@@ -26,16 +17,8 @@ import org.ocpsoft.rewrite.servlet.config.rule.Join;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractRewriteProvider <L extends JeeslLang, D extends JeeslDescription,
-											C extends JeeslSecurityCategory<L,D>,
-											R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-											V extends JeeslSecurityView<L,D,C,R,U,A>,
-											U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-											A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-											AT extends JeeslSecurityTemplate<L,D,C>,
-											CTX extends JeeslSecurityContext<L,D>,
-											M extends JeeslSecurityMenu<L,V,CTX,M>,
-											USER extends JeeslUser<R>>
+public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?,?,U,?>,
+											U extends JeeslSecurityUsecase<?,?,?,?,V,?>>
 		extends HttpConfigurationProvider
 		implements Serializable
 {
@@ -44,7 +27,7 @@ public abstract class AbstractRewriteProvider <L extends JeeslLang, D extends Je
 
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
+	private JeeslSecurityBean<?,?,?,?,V,U,?,?,?,?,?,?> bSecurity;
 
 	private U usecase; public U getUsecase(){return usecase;} public void setUsecase(U usecase){this.usecase = usecase;}
 
@@ -52,15 +35,15 @@ public abstract class AbstractRewriteProvider <L extends JeeslLang, D extends Je
 	protected String forwardLogin;
 	protected String forwardDenied;
 
-	public AbstractRewriteProvider(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity)
+	public AbstractRewriteProvider(SecurityFactoryBuilder<?,?,?,?,V,U,?,?,?,?,?,?,?,?,?,?> fbSecurity)
 	{
 		debugOnInfo = false;
-		forwardDeactivated = "/jsf/settings/system/security/access/pageDeactivated.xhtml";
-		forwardLogin = "/jsf/settings/system/security/access/loginRequired.xhtml";
-		forwardDenied = "/jsf/settings/system/security/access/denied.xhtml";
+		forwardDeactivated = "/jsf/settings/system/security/page/deactivated.xhtml";
+		forwardLogin = "/jsf/settings/system/security/page/unauthorized.xhtml";
+		forwardDenied = "/jsf/settings/system/security/page/denied.xhtml";
 	}
 
-	public void postConstruct(JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity)
+	public void postConstruct(JeeslSecurityBean<?,?,?,?,V,U,?,?,?,?,?,?> bSecurity)
 	{
 		this.bSecurity=bSecurity;
 	}

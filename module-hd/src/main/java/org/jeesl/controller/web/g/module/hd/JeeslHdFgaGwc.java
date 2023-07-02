@@ -18,24 +18,13 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.controller.web.module.hd.JeeslHdFgaCallback;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.hd.JeeslHdCategory;
-import org.jeesl.interfaces.model.module.hd.event.JeeslHdEvent;
-import org.jeesl.interfaces.model.module.hd.event.JeeslHdEventType;
 import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdFaq;
 import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdFga;
-import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdLevel;
-import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdMessage;
-import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdPriority;
 import org.jeesl.interfaces.model.module.hd.resolution.JeeslHdScope;
-import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicket;
-import org.jeesl.interfaces.model.module.hd.ticket.JeeslHdTicketStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.PositionListReorderer;
@@ -55,23 +44,12 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
-								TICKET extends JeeslHdTicket<R,EVENT,M,FRC>,
 								CAT extends JeeslHdCategory<L,D,R,CAT,?>,
-								STATUS extends JeeslHdTicketStatus<L,D,R,STATUS,?>,
-								EVENT extends JeeslHdEvent<TICKET,CAT,STATUS,TYPE,LEVEL,PRIORITY,USER>,
-								TYPE extends JeeslHdEventType<L,D,TYPE,?>,
-								LEVEL extends JeeslHdLevel<L,D,R,LEVEL,?>,
-								PRIORITY extends JeeslHdPriority<L,D,R,PRIORITY,?>,
-								MSG extends JeeslHdMessage<TICKET,M,SCOPE,USER>,
-								M extends JeeslIoMarkup<MT>,
-								MT extends JeeslIoMarkupType<L,D,MT,?>,
-								FAQ extends JeeslHdFaq<L,D,R,CAT,SCOPE>,
 								SCOPE extends JeeslHdScope<L,D,SCOPE,?>,
+								FAQ extends JeeslHdFaq<L,D,R,CAT,SCOPE>,
 								FGA extends JeeslHdFga<FAQ,DOC,SEC>,
 								DOC extends JeeslIoCms<L,D,LOC,?,SEC>,
-								SEC extends JeeslIoCmsSection<L,SEC>,
-								FRC extends JeeslFileContainer<?,?>,
-								USER extends JeeslSimpleUser
+								SEC extends JeeslIoCmsSection<L,SEC>
 								>
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements Serializable,SbToggleBean
@@ -79,11 +57,11 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslHdFgaGwc.class);
 	
-	protected final HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd;
-	private final IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fbCms;
+	protected final HdFactoryBuilder<L,D,LOC,R,?,CAT,?,?,?,?,?,?,?,?,FAQ,SCOPE,FGA,DOC,SEC,?,?> fbHd;
+	private final IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?,?> fbCms;
 	
-	private JeeslHdFacade<L,D,R,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd;
-	private JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fCms;
+	private JeeslHdFacade<L,D,R,CAT,?,?,?,?,?,?,?,?,?,FAQ,SCOPE,FGA,DOC,SEC,?> fHd;
+	private JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?,?> fCms;
 	
 	private final JeeslHdFgaCallback<DOC> callback;
 	
@@ -91,8 +69,6 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 	protected final SbMultiHandler<SCOPE> sbhScope; public SbMultiHandler<SCOPE> getSbhScope() {return sbhScope;}
 	protected final SbSingleHandler<DOC> sbhDocuments; public SbSingleHandler<DOC> getSbhDocuments() {return sbhDocuments;}
 	
-	private final List<LEVEL> levels; public List<LEVEL> getLevels() {return levels;}
-	private final List<PRIORITY> priorities; public List<PRIORITY> getPriorities() {return priorities;}
 	private final List<FAQ> faqs; public List<FAQ> getFaqs() {return faqs;}
 	private final List<FGA> answers; public List<FGA> getAnswers() {return answers;}
 	private final List<SEC> sections; public List<SEC> getSections() {return sections;}
@@ -103,8 +79,8 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 	private FGA fga; public FGA getFga() {return fga;} public void setFga(FGA fga) {this.fga = fga;}
 	
 	public JeeslHdFgaGwc(JeeslHdFgaCallback<DOC> callback,
-							HdFactoryBuilder<L,D,LOC,R,TICKET,CAT,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,FRC,USER> fbHd,
-							IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fbCms)
+							HdFactoryBuilder<L,D,LOC,R,?,CAT,?,?,?,?,?,?,?,?,FAQ,SCOPE,FGA,DOC,SEC,?,?> fbHd,
+							IoCmsFactoryBuilder<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbHd.getClassL(),fbHd.getClassD());
 		this.callback=callback;
@@ -115,8 +91,6 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 		sbhScope = new SbMultiHandler<>(fbHd.getClassScope(),this);
 		sbhDocuments = new SbSingleHandler<DOC>(fbHd.getClassDoc(),null);
 		
-		levels = new ArrayList<>();
-		priorities = new ArrayList<>();
 		faqs = new ArrayList<>();
 		answers = new ArrayList<>();
 		sections = new ArrayList<>();
@@ -124,8 +98,8 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 	}
 
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslHdFacade<L,D,R,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,MSG,M,MT,FAQ,SCOPE,FGA,DOC,SEC,USER> fHd,
-									JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,M,MT,?,?> fCms,
+									JeeslHdFacade<L,D,R,CAT,?,?,?,?,?,?,?,?,?,FAQ,SCOPE,FGA,DOC,SEC,?> fHd,
+									JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?,?> fCms,
 									R realm)
 	{
 		super.postConstructWebController(lp,bMessage);
@@ -143,9 +117,6 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 		
 		sbhScope.setList(fHd.all(fbHd.getClassScope()));
 		sbhScope.selectAll();
-		
-		levels.addAll(fHd.all(fbHd.getClassLevel(),realm,rref));
-		priorities.addAll(fHd.all(fbHd.getClassPriority(),realm,rref));
 		
 		this.reloadFaqs();
 		
@@ -296,9 +267,8 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
     public void onHelpCollapse(NodeCollapseEvent event) {if(debugOnInfo) {logger.info("Collapsed "+event.getTreeNode().toString());}}
     
     // Handler Tree-Select
-    
-    @SuppressWarnings("unchecked")
-	public void onHelpDrop(DragDropEvent ddEvent) throws JeeslConstraintViolationException, JeeslLockingException
+	@SuppressWarnings("unchecked")
+	public void onHelpDrop(DragDropEvent<SEC> ddEvent) throws JeeslConstraintViolationException, JeeslLockingException
     {
     	if(debugOnInfo) {logger.info("DRAG "+ddEvent.getDragId());}
     	if(debugOnInfo) {logger.info("DROP "+ddEvent.getDropId());}

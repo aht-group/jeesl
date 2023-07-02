@@ -32,8 +32,8 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class JeeslHdFaqGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 								CAT extends JeeslHdCategory<L,D,R,CAT,?>,
-								FAQ extends JeeslHdFaq<L,D,R,CAT,SCOPE>,
 								SCOPE extends JeeslHdScope<L,D,SCOPE,?>,
+								FAQ extends JeeslHdFaq<L,D,R,CAT,SCOPE>,
 								FGA extends JeeslHdFga<FAQ,?,?>
 								>
 					extends AbstractJeeslWebController<L,D,LOC>
@@ -91,8 +91,17 @@ public class JeeslHdFaqGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 		sbhScope.setList(fHd.all(fbHd.getClassScope()));
 		sbhScope.selectAll();
 		
+		List<SCOPE> scopes = callback.getAllowedScopes();
+		logger.info(fbHd.getClassScope().getSimpleName()+": "+scopes.size());
+		
 		faqs.clear();
-		faqs.addAll(fHd.all(fbHd.getClassFaq(),realm,rref));
+		for(FAQ f : fHd.all(fbHd.getClassFaq(),realm,rref))
+		{
+			if(scopes.contains(f.getScope()))
+			{
+				faqs.add(f);
+			}
+		}
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException

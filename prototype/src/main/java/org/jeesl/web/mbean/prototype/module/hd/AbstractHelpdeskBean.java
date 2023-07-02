@@ -83,7 +83,6 @@ public abstract class AbstractHelpdeskBean <L extends JeeslLang, D extends Jeesl
 	
 	protected final List<LEVEL> levels; public List<LEVEL> getLevels() {return levels;}
 	protected final List<PRIORITY> priorities; public List<PRIORITY> getPriorities() {return priorities;}
-	
 	protected final List<TICKET> tickets;  public List<TICKET> getTickets() {return tickets;}
 	
 	protected R realm;
@@ -107,7 +106,6 @@ public abstract class AbstractHelpdeskBean <L extends JeeslLang, D extends Jeesl
 		
 		levels = new ArrayList<>();
 		priorities = new ArrayList<>();
-		
 		tickets = new ArrayList<>();
 	}
 

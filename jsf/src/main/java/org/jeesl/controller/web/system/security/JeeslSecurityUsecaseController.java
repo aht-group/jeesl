@@ -116,7 +116,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
 	}
 	
-	public void postConstructUsecase(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
 									JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
 									JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)

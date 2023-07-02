@@ -12,8 +12,11 @@
 	<c:set var="labelDescription" value="#{not empty labelDescription ? labelDescription : appLabelBean.labels['IoDescription']['description'][localeCode].lang}"/>
 	
 	<j:inputGrid rendered="#{locales.size() eq 1}">
-		<jtp:label entity="IoLang" code="name"/>
+		<p:outputLabel value="#{labelName}"/>
 		<jtp:inputText value="#{value.name[locales[0].code].lang}"/>
+		
+		<p:outputLabel value="#{labelDescription}" rendered="#{withDescription}"/>
+		<jtp:inputRemark value="#{value.description[locales[0].code].lang}" rendered="#{withDescription}"/>
 	</j:inputGrid>
 	<p:tabView id="tabViewLocale" styleClass="jeesl-tabs" rendered="#{locales.size() gt 1}"
   			var="l" value="#{locales}">  

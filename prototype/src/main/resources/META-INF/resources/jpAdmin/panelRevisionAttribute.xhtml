@@ -50,7 +50,9 @@
 				<jtp:label entity="IoLabelAttribute" code="developerInfo"/>
 				<p:inputTextarea value="#{cc.attrs.bean.attribute.developerInfo}" style="width:100%" autocomplete="off"/>
 			</j:inputGrid>
-			<j:tabTranslationEditor value="#{cc.attrs.bean.attribute}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
+			<jtp:inputMulti value="#{cc.attrs.bean.attribute}"
+						withName="true" labelName="#{appLabelBean.labels['IoLabelAttribute']['name'][localeCode].lang}"
+						withDescription="true" labelDescription="#{appLabelBean.labels['IoLabelAttribute']['description'][localeCode].lang}"/>
 			<j:inputGrid id="pgRelation">
 				
 				<jtp:label entity="IoLabelAttribute" code="relation"/>

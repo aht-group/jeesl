@@ -34,7 +34,7 @@
 							<j:svg type="jeeslAdd" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.addView()}" update=":#{cc.id}:sViews :#{cc.id}:sView" tooltip="#{msg.ttAdd}"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectView}" update=":#{cc.id}:sViews :#{cc.id}:sView"/>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectView()}" update=":#{cc.id}:sViews :#{cc.id}:sView"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderViews()}" update="@form"/>
 					<p:column>  
 						<h:outputText value="#{v.position}" />  
@@ -54,7 +54,7 @@
 			</h:form>
 			<p:dataTable styleClass="jeesl-datatable" rendered="#{not empty cc.attrs.bean.view}"
 					var="u" value="#{cc.attrs.bean.usecases}" >
-				<f:facet name="header"><j:dtHeader title="#{msg.jeeslSecurityViewAppliedToUsecase}"/></f:facet>
+				<f:facet name="header"><j:dtHeader entity="SecurityView" code="usecases"/></f:facet>
 				<p:column>
 					<h:outputText value="#{u.category.position}.#{u.position}"/>
 				</p:column>  
@@ -66,7 +66,7 @@
 			</p:dataTable>
 			<p:dataTable styleClass="jeesl-datatable" rendered="#{not empty cc.attrs.bean.view}"
 					var="r" value="#{cc.attrs.bean.roles}">
-				<f:facet name="header"><j:dtHeader title="#{msg.aupSecurityViewAppliedToRole}"/></f:facet>
+				<f:facet name="header"><j:dtHeader entity="SecurityView" code="roles"/></f:facet>
 				<p:column>
 					<h:outputText value="#{r.category.position}.#{r.position}" />
 				</p:column>  
@@ -125,9 +125,9 @@
 						<jtp:label entity="SecurityView" code="urlBase"/>
 						<p:inputText value="#{cc.attrs.bean.view.urlBase}"/>
 					</p:panelGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.view}" withDescription="true"
-						labelTranslation="#{appLabelBean.labels['SecurityView']['name'][localeCode].lang}"
-						labelDescription="#{appLabelBean.labels['SecurityView']['description'][localeCode].lang}"/>
+					<jtp:inputMulti value="#{cc.attrs.bean.view}"
+						withName="true" labelName="#{appLabelBean.labels['SecurityView']['name'][localeCode].lang}"
+						withDescription="true" labelDescription="#{appLabelBean.labels['SecurityView']['description'][localeCode].lang}"/>
 				</p:panel>
 			</h:form>
 			
@@ -187,10 +187,11 @@
 					<p:column>  
 						<h:outputText value="#{a.position}" />  
 		            </p:column>
-		            <p:column headerText="#{msg.jeeslSecurityArea}">  
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="SecurityArea"/></f:facet>
 						<h:outputText value="#{a.name[localeCode].lang}"/>
 		            </p:column>
-		            <p:column rendered="#{cc.attrs.bean.userIsDeveloper}" styleClass="jeeslCenter">  
+		            <p:column rendered="#{cc.attrs.bean.userIsDeveloper}" styleClass="jeesl-center">  
 						<h:graphicImage rendered="#{a.restricted}" name="#{appIconBean.icon12['jeeslSecurityVisible']}" library="gfx"/>
 		         	</p:column>
 		       	</p:dataTable>
@@ -207,11 +208,13 @@
 						<h:outputText rendered="#{not cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.area.code}"/>
 						<p:inputText rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.area.code}"/>
 						
-						<p:outputLabel value="#{msg.jeeslSecurityAreaRestricted}"/>
+						<jtp:label entity="SecurityArea" code="restricted"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.area.restricted}"/>
 						
 					</p:panelGrid>
-					<aht:tabTranslationEditor value="#{cc.attrs.bean.area}" keys="#{appTranslationBean.langKeys}" withDescription="true"/>
+					<jtp:inputMulti value="#{cc.attrs.bean.area}"
+						withName="true" labelName="#{appLabelBean.labels['SecurityArea']['name'][localeCode].lang}"
+						withDescription="true" labelDescription="#{appLabelBean.labels['SecurityArea']['description'][localeCode].lang}"/>
 				</p:panel>
 			</h:form>
 		</j:slot>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
@@ -127,7 +128,10 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		this.bSecurity=bSecurity;
 		templates = fSecurity.allOrderedPositionVisible(fbSecurity.getClassTemplate());
 		
-		userIsDeveloper = security.allowSuffixCode(SecuritySuffix.developer) || security.allowSuffixCode(SecuritySuffixDeprecated.Developer);
+		if(Objects.nonNull(security))
+		{
+			userIsDeveloper = security.allowSuffixCode(SecuritySuffix.developer) || security.allowSuffixCode(SecuritySuffixDeprecated.Developer);
+		}
 		
 		this.reloadCategories();
 	}
@@ -173,20 +177,6 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassView(), views));
 	}
 	
-	private void reloadView()
-	{
-		view = fSecurity.load(fbSecurity.getClassView(),view);
-		tsb.booleanToA(view.getRedirect());
-		roles = view.getRoles();
-		Collections.sort(roles,comparatorRole);
-		
-		usecases = view.getUsecases();
-		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassUsecase(),usecases,view));}
-		Collections.sort(usecases,comparatorUsecase);
-		
-		reloadAreas();
-	}
-	
 	private void reloadActions()
 	{
 		actions.clear();
@@ -216,13 +206,29 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	public void selectView()
 	{
-		reset(false,true,true);
+		this.reset(false,true,true);
 		logger.info(AbstractLogMessage.selectEntity(view));
 		view = fSecurity.load(fbSecurity.getClassView(), view);
 		view = efLang.persistMissingLangs(fSecurity,lp.getLocales(),view);
 		view = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),view);
-		reloadView();
-		reloadActions();
+		
+		this.reloadView();
+		this.reloadActions();
+	}
+	
+	private void reloadView()
+	{
+		if(debugOnInfo) {logger.trace("reloadView()");}
+		view = fSecurity.load(fbSecurity.getClassView(),view);
+		tsb.booleanToA(view.getRedirect());
+		roles = view.getRoles();
+		Collections.sort(roles,comparatorRole);
+		
+		usecases = view.getUsecases();
+		Collections.sort(usecases,comparatorUsecase);
+		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassUsecase(),usecases,view));}
+		
+		this.reloadAreas();
 	}
 	
 	public void saveView() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
@@ -231,7 +237,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		view.setCategory(fSecurity.find(fbSecurity.getClassCategory(), view.getCategory()));
 		view.setRedirect(tsb.aToBoolean());
 		view = fSecurity.save(view);
-		reloadView();
+		this.reloadView();
 		reloadViews();
 		bMessage.growlSuccessSaved();
 		bSecurity.update(view);
@@ -348,7 +354,9 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	//AREA
 	public void reloadAreas()
 	{
-		areas = fSecurity.allForParent(fbSecurity.getClassArea(), view);
+		if(debugOnInfo) {logger.info("reloadAreas() for "+fbSecurity.getClassArea().getSimpleName()+" and view:"+view.toString());}
+		areas = fSecurity.allForParent(fbSecurity.getClassArea(),view);
+		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassArea(),areas));}
 	}
 	
 	public void addArea() throws JeeslConstraintViolationException

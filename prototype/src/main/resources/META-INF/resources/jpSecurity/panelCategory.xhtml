@@ -18,7 +18,8 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<p:panel header="#{msg.jeeslSecurityCategory}" styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.category}">
+		<p:panel styleClass="jeesl-panel" rendered="#{not empty cc.attrs.bean.category}">
+			<f:facet name="header"><j:pHeader entity="SecurityCategory"/></f:facet>
 			<f:facet name="actions">
 				<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveCategory()}" update="#{cc.attrs.update}" tooltip="#{cc.attrs.tooltip}"/>
 				<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.userIsDeveloper}" listener="#{cc.attrs.bean.rmCategory()}" update="#{cc.attrs.update}" tooltip="#{msg.ttDelete}"/>
@@ -35,7 +36,9 @@
 				<jtp:label entity="SecurityCategory" code="documentation" rendered="#{cc.attrs.bean.userIsDeveloper}"/>
 				<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.userIsDeveloper}" value="#{cc.attrs.bean.category.documentation}"/>
 			</j:inputGrid>
-			<jtp:inputMulti value="#{cc.attrs.bean.category}" withDescription="true"/>
+			<jtp:inputMulti value="#{cc.attrs.bean.category}"
+						withName="true" labelName="#{appLabelBean.labels['SecurityCategory']['name'][localeCode].lang}"
+						withDescription="true" labelDescription="#{appLabelBean.labels['SecurityCategory']['description'][localeCode].lang}"/>
 		</p:panel>
 	</composite:implementation>
 </html>

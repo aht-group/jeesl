@@ -1,6 +1,7 @@
 package org.jeesl.controller.rewrite;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -22,15 +23,14 @@ import org.ocpsoft.rewrite.servlet.http.event.HttpServletRewrite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PageActiveCondition <L extends JeeslLang, D extends JeeslDescription,
-											C extends JeeslSecurityCategory<L,D>,
-											R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-											V extends JeeslSecurityView<L,D,C,R,U,A>,
-											U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-											A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-											AT extends JeeslSecurityTemplate<L,D,C>,
-											CTX extends JeeslSecurityContext<L,D>,
-											M extends JeeslSecurityMenu<L,V,CTX,M>,
+public class PageActiveCondition <C extends JeeslSecurityCategory<?,?>,
+											R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
+											V extends JeeslSecurityView<?,?,C,R,U,A>,
+											U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
+											A extends JeeslSecurityAction<?,?,R,V,U,AT>,
+											AT extends JeeslSecurityTemplate<?,?,C>,
+											CTX extends JeeslSecurityContext<?,?>,
+											M extends JeeslSecurityMenu<?,V,CTX,M>,
 											USER extends JeeslUser<R>>
 		extends HttpCondition
 		implements Condition,Serializable
@@ -38,11 +38,11 @@ public class PageActiveCondition <L extends JeeslLang, D extends JeeslDescriptio
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(PageActiveCondition.class);
 	
-	private boolean debugOnInfo;
+	private boolean debugOnInfo; 
 	
-	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
+	private JeeslSecurityBean<?,?,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
 	
-	public PageActiveCondition(boolean debugOnInfo, JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, JeeslIdentity<R,V,U,A,CTX,USER> identity)
+	public PageActiveCondition(boolean debugOnInfo, JeeslSecurityBean<?,?,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, JeeslIdentity<R,V,U,A,CTX,USER> identity)
 	{
 		this.debugOnInfo=debugOnInfo;
 		this.bSecurity=bSecurity;
@@ -52,21 +52,20 @@ public class PageActiveCondition <L extends JeeslLang, D extends JeeslDescriptio
     {           	 
 		String url = AbstractRewriteProvider.getUrlMapping(event.getContextPath(), event.getAddress().toString());
 		V view = bSecurity.findViewByUrlMapping(url);
-
+		if(Objects.isNull(view)) {view = bSecurity.findViewByHttpPattern(url);}
+		
 		if(debugOnInfo)
 	 	{
-	    	 	logger.info(event.getContextPath());
-	    	 	logger.info(event.getAddress().toString());
-	    	 	logger.info(event.getInboundAddress().toString());
-	    	 	logger.info("pageActive: "+url);
-	    		if(view!=null) {logger.info("View: "+view.getCode()+" "+view.isVisible());}
-	    		else {logger.warn("View not found");}
+    	 	logger.info(event.getContextPath());
+    	 	logger.info(event.getAddress().toString());
+    	 	logger.info(event.getInboundAddress().toString());
+    	 	logger.info("pageActive: "+url);
+    		if(Objects.nonNull(view)) {logger.info("View: "+view.getCode()+" "+view.isVisible());}
+    		else {logger.warn("View not found");}
 	 	}
 		
-		if(view!=null)
+		if(Objects.nonNull(view))
 		{
-			if(view.isVisible()) {return true;}
-			
 			return view.isVisible();
 		}
 		else
