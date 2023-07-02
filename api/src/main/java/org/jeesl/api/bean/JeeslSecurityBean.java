@@ -17,16 +17,15 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 
-public interface JeeslSecurityBean<L extends JeeslLang,D extends JeeslDescription,
-									C extends JeeslSecurityCategory<L,D>,
-									R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-									V extends JeeslSecurityView<L,D,C,R,U,A>,
-									U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-									A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-									AT extends JeeslSecurityTemplate<L,D,C>,
-									AR extends JeeslSecurityArea<L,D,V>,
-									CTX extends JeeslSecurityContext<L,D>,
-									M extends JeeslSecurityMenu<L,V,CTX,M>,
+public interface JeeslSecurityBean<C extends JeeslSecurityCategory<?,?>,
+									R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
+									V extends JeeslSecurityView<?,?,C,R,U,A>,
+									U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
+									A extends JeeslSecurityAction<?,?,R,V,U,AT>,
+									AT extends JeeslSecurityTemplate<?,?,C>,
+									AR extends JeeslSecurityArea<?,?,V>,
+									CTX extends JeeslSecurityContext<?,?>,
+									M extends JeeslSecurityMenu<?,V,CTX,M>,
 									USER extends JeeslUser<R>>
 					extends Serializable
 {	

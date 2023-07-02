@@ -43,9 +43,9 @@ public class NotLoggedInCondition <L extends JeeslLang, D extends JeeslDescripti
 	
 	private JeeslIdentity<R,V,U,A,CTX,USER> identity;
 	
-	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
+	private JeeslSecurityBean<C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
 	
-	public NotLoggedInCondition(boolean debugOnInfo, JeeslSecurityBean<L,D,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, JeeslIdentity<R,V,U,A,CTX,USER> identity)
+	public NotLoggedInCondition(boolean debugOnInfo, JeeslSecurityBean<C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, JeeslIdentity<R,V,U,A,CTX,USER> identity)
 	{
 		this.debugOnInfo=debugOnInfo;
 		this.bSecurity=bSecurity;

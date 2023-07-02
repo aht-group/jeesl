@@ -95,7 +95,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	private A action; public A getAction(){return action;} public void setAction(A action) {this.action = action;}
 	private AR area; public AR getArea(){return area;} public void setArea(AR area) {this.area = area;}
 	
-	private JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
+	private JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
 	private final TriStateBinder tsb; public TriStateBinder getTsb() {return tsb;}
 	
 	private boolean userIsDeveloper; public boolean isUserIsDeveloper() {return userIsDeveloper;} public void setUserIsDeveloper(boolean userIsDeveloper) {this.userIsDeveloper = userIsDeveloper;}
@@ -120,7 +120,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
-			JeeslSecurityBean<L,D,C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
+			JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
 			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{
 		super.postConstructWebController(lp,bMessage);

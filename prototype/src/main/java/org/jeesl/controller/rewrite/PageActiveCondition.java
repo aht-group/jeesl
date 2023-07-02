@@ -40,9 +40,9 @@ public class PageActiveCondition <C extends JeeslSecurityCategory<?,?>,
 	
 	private boolean debugOnInfo; 
 	
-	private JeeslSecurityBean<?,?,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
+	private JeeslSecurityBean<C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
 	
-	public PageActiveCondition(boolean debugOnInfo, JeeslSecurityBean<?,?,C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, JeeslIdentity<R,V,U,A,CTX,USER> identity)
+	public PageActiveCondition(boolean debugOnInfo, JeeslSecurityBean<C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, JeeslIdentity<R,V,U,A,CTX,USER> identity)
 	{
 		this.debugOnInfo=debugOnInfo;
 		this.bSecurity=bSecurity;
