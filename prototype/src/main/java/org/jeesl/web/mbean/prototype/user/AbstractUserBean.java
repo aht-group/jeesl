@@ -16,8 +16,6 @@ import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.pojo.system.JeeslIdentityFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
@@ -26,19 +24,18 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslIdentity;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-											R extends JeeslSecurityRole<L,D,?,V,U,A,USER>,
-											V extends JeeslSecurityView<L,D,?,R,U,A>,
-											U extends JeeslSecurityUsecase<L,D,?,R,V,A>,
-											A extends JeeslSecurityAction<L,D,R,V,U,?>,
+public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
+											R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
+											V extends JeeslSecurityView<?,?,?,R,U,A>,
+											U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
+											A extends JeeslSecurityAction<?,?,R,V,U,?>,
 											CTX extends JeeslSecurityContext<?,?>,
 											USER extends JeeslUser<R>,
 											I extends JeeslIdentity<R,V,U,A,CTX,USER>>
-				extends AbstractAdminBean<L,D,LOC>
+//				extends AbstractAdminBean<L,D,LOC>
 				implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -58,10 +55,11 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 //	protected String sessionId;
 	protected String uuid;
 	protected String localeCode;
+	protected boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;}
 
-	protected AbstractUserBean(IoLocaleFactoryBuilder<L,D,?> fbStatus)
+	protected AbstractUserBean(IoLocaleFactoryBuilder<?,?,?> fbStatus)
 	{
-		super(fbStatus.getClassL(),fbStatus.getClassD());
+//		super(fbStatus.getClassL(),fbStatus.getClassD());
 	}
 
 	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity)
