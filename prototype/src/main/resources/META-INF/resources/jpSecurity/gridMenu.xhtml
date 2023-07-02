@@ -20,8 +20,8 @@
 						<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseTree()}" update="@form" rendered="#{cc.attrs.bean.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}" library="jeeslGfx"/>
 					</f:facet>
 					<p:tree id="tree1" var="node" value="#{cc.attrs.bean.tree}" 
-						selection="#{cc.attrs.bean.node}" selectionMode="single"
-		                draggable="true" droppable="true" dragdropScope="demo">
+							selection="#{cc.attrs.bean.node}" selectionMode="single"
+		                	draggable="true" droppable="true" dragdropScope="demo">
 		                <p:ajax event="select" listener="#{cc.attrs.bean.onNodeSelect}" update=":#{cc.id}:sView"/>
 						<p:ajax event="dragdrop" listener="#{cc.attrs.bean.onDragDrop}" oncomplete="try{calculateTreeHeight();}catch(e){}"/>
 			            <p:ajax event="expand" listener="#{cc.attrs.bean.onNodeExpand}" />
@@ -49,20 +49,23 @@
 						<jtp:label entity="SecurityMenu" code="visible"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.menu.visible}"/>
 						
-						<p:outputLabel value="#{msg.jeeslCategory}"/>
+						<jtp:label entity="SecurityView" code="category"/>
 						<h:outputText value="#{cc.attrs.bean.menu.view.category.name[localeCode].lang}"/>
-						<p:outputLabel value="#{msg.jeeslCode}"/>
+						
+						<jtp:label entity="SecurityView" code="code"/>
 						<h:outputText value="#{cc.attrs.bean.menu.view.code}"/>
-						<p:outputLabel value="#{msg.aupSecurityView}"/>
+						
+						<jtp:label entity="SecurityView" code="name"/>
 						<h:outputText value="#{cc.attrs.bean.menu.view.name[localeCode].lang}"/>
-						<p:outputLabel value="#{msg.aupSecurityViewPattern}"/>
+						
+						<jtp:label entity="SecurityView" code="viewPattern"/>
 						<h:outputText value="#{cc.attrs.bean.menu.view.viewPattern}"/>
-						<p:outputLabel value="#{msg.jeeslSecurityViewMapping}"/>
+						
+						<jtp:label entity="SecurityView" code="urlMapping"/>
 						<h:outputText value="#{cc.attrs.bean.menu.view.urlMapping}"/>
 						
 						<jtp:label entity="SecurityView" code="description"/>
 						<h:outputText value="#{cc.attrs.bean.menu.view.description[localeCode].lang}"/>
-						
 						
 					</p:panelGrid>
 				</p:panel>
