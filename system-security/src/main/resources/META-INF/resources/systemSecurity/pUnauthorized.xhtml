@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:ofx="http://www.openfuxml.org/jsf"
+	xmlns:aht="http://ahtutils.sourceforge.net/jsf"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	
+	<composite:interface>
+		<composite:attribute name="bean" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+		<p:panel styleClass="jeesl-panel">
+			<f:facet name="header"><j:pHeader entity="SecurityUser" code="panelUnauthorized"/></f:facet>
+			<p:panelGrid columns="2" columnClasses="jeeslGrid40,jeeslGrid60">
+				<h:outputText value="Icon"/>
+				<h:outputText value="#{appLabelBean.descriptions['SecurityUser']['panelUnauthorized'][localeCode].lang}"/>
+			</p:panelGrid>
+		</p:panel>
+	</composite:implementation>
+</html>

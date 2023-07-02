@@ -43,7 +43,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	final static Logger logger = LoggerFactory.getLogger(PrototypeDb3MenuBean.class);
 	private static final long serialVersionUID = 1L;
 
-	private JeeslSecurityBean<C,R,V,U,A,AT,?,CTX,M,USER> bSecurity;
+	private JeeslSecurityBean<C,R,V,U,A,?,CTX,M,USER> bSecurity;
 	
 	private final LoadingCache<String,List<M>> cacheSub;
 	private final LoadingCache<String,List<M>> cacheBreadcrumb;
@@ -76,7 +76,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		setupRequired = true;
 	}
 	
-	public void postConstructMenu(JeeslSecurityBean<C,R,V,U,A,AT,?,CTX,M,USER> bSecurity, I identity)
+	public void postConstructMenu(JeeslSecurityBean<C,R,V,U,A,?,CTX,M,USER> bSecurity, I identity)
 	{
 		this.bSecurity=bSecurity;
 		this.context=identity.getContext();

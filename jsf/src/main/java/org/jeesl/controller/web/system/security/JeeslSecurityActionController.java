@@ -56,7 +56,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityActionController.class);
 
 	JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
-	JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
+	JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 	
@@ -84,7 +84,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
-			JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
+			JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity,
 			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{
 		super.postConstructWebController(lp,bMessage);

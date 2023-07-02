@@ -110,5 +110,12 @@
             <resource-id>systemProperty/grid.xhtml</resource-id>
         </component>
 	</tag>
+	
+		<tag>
+        <tag-name>pSecurityUnauthorized</tag-name>
+        <component>
+            <resource-id>systemSecurity/pUnauthorized.xhtml</resource-id>
+        </component>
+	</tag>
     
 </facelet-taglib>

@@ -37,20 +37,19 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 import net.sf.exlp.util.io.ObjectIO;
 import net.sf.exlp.util.io.StringUtil;
 
-public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescription,
-										C extends JeeslSecurityCategory<L,D>,
-										R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-										V extends JeeslSecurityView<L,D,C,R,U,A>,
-										U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-										A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-										AT extends JeeslSecurityTemplate<L,D,C>,
-										CTX extends JeeslSecurityContext<L,D>,
-										M extends JeeslSecurityMenu<L,V,CTX,M>,
-										AR extends JeeslSecurityArea<L,D,V>,
-										OT extends JeeslSecurityOnlineTutorial<L,D,V>,
+public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
+										R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
+										V extends JeeslSecurityView<?,?,C,R,U,A>,
+										U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
+										A extends JeeslSecurityAction<?,?,R,V,U,AT>,
+										AT extends JeeslSecurityTemplate<?,?,C>,
+										CTX extends JeeslSecurityContext<?,?>,
+										M extends JeeslSecurityMenu<?,V,CTX,M>,
+										AR extends JeeslSecurityArea<?,?,V>,
+										OT extends JeeslSecurityOnlineTutorial<?,?,V>,
 										OH extends JeeslSecurityOnlineHelp<V,?,?>,
 										USER extends JeeslUser<R>>
-					implements JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER>
+					implements JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppSecurityBean.class);
@@ -59,7 +58,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	
 	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	
-	protected final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
+	protected final SecurityFactoryBuilder<?,?,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
 	protected JeeslLogger jogger;
@@ -96,7 +95,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 	private final CTX nullCtx;
 
-	public AbstractAppSecurityBean(final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
+	public AbstractAppSecurityBean(final SecurityFactoryBuilder<?,?,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
 		this.fbSecurity=fbSecurity;
 		

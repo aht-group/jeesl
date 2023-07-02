@@ -73,7 +73,7 @@ public class AbstractAdminSecurityRoleBean <L extends JeeslLang, D extends Jeesl
 	
 	public void initSuper(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 						JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-						JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity)
+						JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{
 		categoryType = JeeslSecurityCategory.Type.role;
 		super.postConstructSecurity(fSecurity,bTranslation,bMessage,bSecurity);

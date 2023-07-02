@@ -41,7 +41,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 
 	private SecurityFactoryBuilder<?,?,?,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity;
 	private JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity;
-	protected JeeslSecurityBean<?,R,V,U,A,AT,AR,?,?,USER> bSecurity;
+	protected JeeslSecurityBean<?,R,V,U,A,AR,?,?,USER> bSecurity;
 	
 	protected I identity;
 	
@@ -64,7 +64,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 	
 	public AbstractJsfSecurityHandler(SecurityFactoryBuilder<?,?,?,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity,
-			JeeslSecurityBean<?,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
+			JeeslSecurityBean<?,R,V,U,A,AR,CTX,M,USER> bSecurity,
 			I identity,
 			V view)
 	{

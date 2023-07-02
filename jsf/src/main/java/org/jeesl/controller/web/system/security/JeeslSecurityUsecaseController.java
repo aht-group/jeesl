@@ -66,7 +66,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	
 	private JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	
-	private JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
+	private JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 	
@@ -118,7 +118,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
-									JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
+									JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity,
 									JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{
 		super.postConstructWebController(lp,bMessage);

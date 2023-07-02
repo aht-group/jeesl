@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
 
 import org.jeesl.api.bean.JeeslMenuBean;
-import org.jeesl.api.facade.core.JeeslUserFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.pojo.system.JeeslIdentityFactory;
@@ -35,14 +34,12 @@ public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
 											CTX extends JeeslSecurityContext<?,?>,
 											USER extends JeeslUser<R>,
 											I extends JeeslIdentity<R,V,U,A,CTX,USER>>
-//				extends AbstractAdminBean<L,D,LOC>
 				implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractUserBean.class);
 
-//	private JeeslUserFacade<USER> fUser;
-	protected JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity;
+//	protected JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity9;
 	protected JeeslIdentityFactory<I,R,V,U,A,CTX,USER> fId;
 	private JeeslMenuBean<V,?,?> bMenu;
 
@@ -55,25 +52,12 @@ public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
 //	protected String sessionId;
 	protected String uuid;
 	protected String localeCode;
+	
 	protected boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;}
 
 	protected AbstractUserBean(IoLocaleFactoryBuilder<?,?,?> fbStatus)
 	{
 //		super(fbStatus.getClassL(),fbStatus.getClassD());
-	}
-
-	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity)
-	{
-//		this.fUser=fUser;
-		this.fSecurity=fSecurity;
-	}
-
-	@Deprecated
-	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity, JeeslMenuBean<V,?,?> bMenu)
-	{
-//		this.fUser=fUser;
-		this.fSecurity=fSecurity;
-		this.bMenu=bMenu;
 	}
 
 	public void setLocale(String localeCode)

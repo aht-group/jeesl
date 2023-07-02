@@ -70,7 +70,7 @@ public class AbstractAdminSecurityUsecasesBean <L extends JeeslLang, D extends J
 	
 	public void postConstructUsecase(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 									JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-									JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity)
+									JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{
 		super.postConstructSecurity(fSecurity,bTranslation,bMessage,bSecurity);		
 		opViews = fSecurity.all(fbSecurity.getClassView());

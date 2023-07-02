@@ -27,7 +27,7 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	private JeeslSecurityBean<?,?,V,U,?,?,?,?,?,?> bSecurity;
+	private JeeslSecurityBean<?,?,V,U,?,?,?,?,?> bSecurity;
 
 	private U usecase; public U getUsecase(){return usecase;} public void setUsecase(U usecase){this.usecase = usecase;}
 
@@ -43,7 +43,7 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 		forwardDenied = "/jsf/settings/system/security/page/denied.xhtml";
 	}
 
-	public void postConstruct(JeeslSecurityBean<?,?,V,U,?,?,?,?,?,?> bSecurity)
+	public void postConstruct(JeeslSecurityBean<?,?,V,U,?,?,?,?,?> bSecurity)
 	{
 		this.bSecurity=bSecurity;
 	}
