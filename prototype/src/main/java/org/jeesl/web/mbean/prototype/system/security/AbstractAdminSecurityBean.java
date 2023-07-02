@@ -61,7 +61,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityBean.class);
 	
-	protected JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity;
+	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
 	protected JeeslSecurityCategory.Type categoryType;
 	
 	protected JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
@@ -116,7 +116,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
 	}
 	
-	public void postConstructSecurity(JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity,
+	public void postConstructSecurity(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 									JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 									JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity)
 	{

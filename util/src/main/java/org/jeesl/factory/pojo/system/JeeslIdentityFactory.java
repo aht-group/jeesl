@@ -72,7 +72,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 		return identity;
 	}
 
-	public I build(JeeslSecurityFacade<?,R,V,U,A,?,?,?,USER> fSecurity, JeeslSecurityBean<?,R,V,U,A,?,?,?,?,USER> bSecurity, USER user, CTX context)
+	public I build(JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity, JeeslSecurityBean<?,R,V,U,A,?,?,?,?,USER> bSecurity, USER user, CTX context)
 	{		
 		I identity = null;
 		try
@@ -98,7 +98,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 		return identity;
 	}
 	
-	private void processViews(JeeslSecurityFacade<?,R,V,U,A,?,?,?,USER> fSecurity, USER user, I identity)
+	private void processViews(JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity, USER user, I identity)
 	{
 		List<V> views = fSecurity.allViewsForUser(user);
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),JeeslSecurityFacade.class.getSimpleName(),views.size());}
@@ -127,7 +127,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 		for(V v : views){identity.allowView(v);}
 	}
 	
-	private void processActions(JeeslSecurityFacade<?,R,V,U,A,?,?,?,USER> fSecurity, USER user, I identity)
+	private void processActions(JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity, USER user, I identity)
 	{
 		for(A a : fSecurity.allActionsForUser(user)){identity.allowAction(a);}
 	}

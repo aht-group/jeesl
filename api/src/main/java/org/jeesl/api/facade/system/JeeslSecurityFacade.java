@@ -9,7 +9,6 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategor
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
@@ -21,8 +20,7 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 										R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
 										V extends JeeslSecurityView<?,?,C,R,U,A>,
 										U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
-										A extends JeeslSecurityAction<?,?,R,V,U,AT>,
-										AT extends JeeslSecurityTemplate<?,?,C>,
+										A extends JeeslSecurityAction<?,?,R,V,U,?>,
 										CTX extends JeeslSecurityContext<?,?>,
 										M extends JeeslSecurityMenu<?,V,CTX,M>,
 										USER extends JeeslUser<R>>

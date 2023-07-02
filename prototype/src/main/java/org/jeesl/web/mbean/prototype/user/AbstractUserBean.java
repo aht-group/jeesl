@@ -45,7 +45,7 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 	final static Logger logger = LoggerFactory.getLogger(AbstractUserBean.class);
 
 //	private JeeslUserFacade<USER> fUser;
-	protected JeeslSecurityFacade<?,R,V,U,A,?,?,?,USER> fSecurity;
+	protected JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity;
 	protected JeeslIdentityFactory<I,R,V,U,A,CTX,USER> fId;
 	private JeeslMenuBean<V,?,?> bMenu;
 
@@ -64,14 +64,14 @@ public abstract class AbstractUserBean <L extends JeeslLang, D extends JeeslDesc
 		super(fbStatus.getClassL(),fbStatus.getClassD());
 	}
 
-	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<?,R,V,U,A,?,?,?,USER> fSecurity)
+	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity)
 	{
 //		this.fUser=fUser;
 		this.fSecurity=fSecurity;
 	}
 
 	@Deprecated
-	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<?,R,V,U,A,?,?,?,USER> fSecurity, JeeslMenuBean<V,?,?> bMenu)
+	protected void postConstruct(JeeslUserFacade<USER> fUser, JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity, JeeslMenuBean<V,?,?> bMenu)
 	{
 //		this.fUser=fUser;
 		this.fSecurity=fSecurity;

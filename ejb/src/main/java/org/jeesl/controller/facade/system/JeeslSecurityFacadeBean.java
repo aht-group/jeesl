@@ -42,29 +42,26 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslSecurityFacadeBean<L extends JeeslLang,
-									D extends JeeslDescription,
-									C extends JeeslSecurityCategory<L,D>,
-									R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-									V extends JeeslSecurityView<L,D,C,R,U,A>,
-									U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-									A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-									AT extends JeeslSecurityTemplate<L,D,C>,
-									CTX extends JeeslSecurityContext<L,D>,
-									M extends JeeslSecurityMenu<L,V,CTX,M>,
-									AR extends JeeslSecurityArea<L,D,V>,
-									OT extends JeeslSecurityOnlineTutorial<L,D,V>,
+public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
+									R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
+									V extends JeeslSecurityView<?,?,C,R,U,A>,
+									U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
+									A extends JeeslSecurityAction<?,?,R,V,U,?>,
+									CTX extends JeeslSecurityContext<?,?>,
+									M extends JeeslSecurityMenu<?,V,CTX,M>,
+									AR extends JeeslSecurityArea<?,?,V>,
+									OT extends JeeslSecurityOnlineTutorial<?,?,V>,
 									OH extends JeeslSecurityOnlineHelp<V,?,?>,
 									USER extends JeeslUser<R>>
 							extends JeeslFacadeBean
-							implements JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER>
+							implements JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityFacadeBean.class);
 	
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
+	private final SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 	
-	public JeeslSecurityFacadeBean(EntityManager em, SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
+	public JeeslSecurityFacadeBean(EntityManager em, SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,OT,OH,?,?,USER> fbSecurity)
 	{
 		super(em);
 		this.fbSecurity=fbSecurity;
