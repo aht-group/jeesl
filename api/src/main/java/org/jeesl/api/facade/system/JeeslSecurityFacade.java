@@ -4,8 +4,6 @@ import java.util.List;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
@@ -19,15 +17,14 @@ import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
 import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslSecurityFacade <L extends JeeslLang, D extends JeeslDescription,
-										C extends JeeslSecurityCategory<L,D>,
-										R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-										V extends JeeslSecurityView<L,D,C,R,U,A>,
-										U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-										A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-										AT extends JeeslSecurityTemplate<L,D,C>,
-										CTX extends JeeslSecurityContext<L,D>,
-										M extends JeeslSecurityMenu<L,V,CTX,M>,
+public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
+										R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
+										V extends JeeslSecurityView<?,?,C,R,U,A>,
+										U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
+										A extends JeeslSecurityAction<?,?,R,V,U,AT>,
+										AT extends JeeslSecurityTemplate<?,?,C>,
+										CTX extends JeeslSecurityContext<?,?>,
+										M extends JeeslSecurityMenu<?,V,CTX,M>,
 										USER extends JeeslUser<R>>
 	extends JeeslFacade
 {	

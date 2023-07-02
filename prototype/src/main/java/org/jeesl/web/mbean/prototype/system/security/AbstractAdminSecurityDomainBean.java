@@ -36,7 +36,7 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityDomainBean.class);
 
-	protected JeeslSecurityFacade<?,?,C,R,?,?,?,?,?,?,USER> fSecurity;
+	protected JeeslSecurityFacade<C,R,?,?,?,?,?,?,USER> fSecurity;
 	private final SecurityFactoryBuilder<?,?,C,R,?,?,?,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	protected JeeslUserFacade<USER> fUser;
 
@@ -63,7 +63,7 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 		cpStaff = (new SecurityStaffComparator<C,R,USER,STAFF>()).factory(SecurityStaffComparator.Type.position);
 	}
 	
-	protected void initSuper(JeeslSecurityFacade<?,?,C,R,?,?,?,?,?,?,USER> fSecurity, JeeslUserFacade<USER> fUser)
+	protected void initSuper(JeeslSecurityFacade<C,R,?,?,?,?,?,?,USER> fSecurity, JeeslUserFacade<USER> fUser)
 	{
 		this.fSecurity=fSecurity;
 		this.fUser=fUser;

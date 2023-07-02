@@ -55,7 +55,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityActionController.class);
 
-	JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
+	JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity;
 	JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity;
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
@@ -83,7 +83,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity,
+			JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity,
 			JeeslSecurityBean<C,R,V,U,A,AT,AR,CTX,M,USER> bSecurity,
 			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{

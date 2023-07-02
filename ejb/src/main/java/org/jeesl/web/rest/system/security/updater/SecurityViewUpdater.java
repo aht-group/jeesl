@@ -53,7 +53,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 	private final JeeslDbCodeEjbUpdater<A> dbCleanerAction;
 	
 	public SecurityViewUpdater(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity,
-								JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
+								JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity)
 	{       
         super(fbSecurity,fSecurity);
 		dbCleanerView = JeeslDbCodeEjbUpdater.createFactory(fbSecurity.getClassView());

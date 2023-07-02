@@ -52,7 +52,7 @@ public class SecurityUsecaseUpdater <L extends JeeslLang,
 	private JeeslDbCodeEjbUpdater<U> updateUsecases;
 	
 	public SecurityUsecaseUpdater(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity,
-									JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
+									JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity)
 	{       
         super(fbSecurity,fSecurity);
 	}

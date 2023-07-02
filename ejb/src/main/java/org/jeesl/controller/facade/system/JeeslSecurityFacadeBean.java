@@ -57,7 +57,7 @@ public class JeeslSecurityFacadeBean<L extends JeeslLang,
 									OH extends JeeslSecurityOnlineHelp<V,?,?>,
 									USER extends JeeslUser<R>>
 							extends JeeslFacadeBean
-							implements JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER>
+							implements JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityFacadeBean.class);

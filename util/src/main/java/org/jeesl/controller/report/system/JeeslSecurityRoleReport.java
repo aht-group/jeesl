@@ -46,7 +46,7 @@ public class JeeslSecurityRoleReport <L extends JeeslLang, D extends JeeslDescri
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityRoleReport.class);
 
-	private final JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
+	private final JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity;
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,M,?,?,?,?,?,USER> fbSecurity;
 	
 	private final String localeCode;
@@ -55,7 +55,7 @@ public class JeeslSecurityRoleReport <L extends JeeslLang, D extends JeeslDescri
 	//	private org.jeesl.factory.xml.system.security.XmlViewFactory<L,D,C,R,V,U,A,AT,USER> xfView;
 	private Comparator<R> comparatorView;
 	
-	public JeeslSecurityRoleReport(String localeCode, SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,M,?,?,?,?,?,USER> fbSecurity, JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
+	public JeeslSecurityRoleReport(String localeCode, SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,?,M,?,?,?,?,?,USER> fbSecurity, JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity)
 	{
 		this.localeCode=localeCode;
 		this.fSecurity=fSecurity;

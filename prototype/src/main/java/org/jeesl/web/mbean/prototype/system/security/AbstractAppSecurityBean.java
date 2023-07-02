@@ -57,7 +57,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	
 	protected enum JoggerLoop {loadView}
 	
-	protected JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity;
+	protected JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity;
 	
 	protected final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
@@ -131,7 +131,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		nullCtx = fbSecurity.ejbContext().build();
 	}
 	
-	public void postConstructDb(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
+	public void postConstructDb(JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity)
 	{
 		this.fSecurity=fSecurity;
 		views.addAll(fSecurity.all(fbSecurity.getClassView()));
@@ -168,7 +168,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void postConstructFile(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fSecurity)
+	public void postConstructFile(JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fSecurity)
 	{
 		this.fSecurity=fSecurity;
 		
@@ -215,7 +215,7 @@ public class AbstractAppSecurityBean <L extends JeeslLang,D extends JeeslDescrip
 		}
 	}
 	
-	public void reloadMenu(JeeslSecurityFacade<L,D,C,R,V,U,A,AT,CTX,M,USER> fProvidedSecurity)
+	public void reloadMenu(JeeslSecurityFacade<C,R,V,U,A,AT,CTX,M,USER> fProvidedSecurity)
 	{
 		mapMenuAll.clear();
 		mapMenuRoot.clear();

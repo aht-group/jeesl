@@ -40,7 +40,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 	public static final long serialVersionUID=1;
 
 	private SecurityFactoryBuilder<?,?,?,R,V,U,A,AT,?,?,AR,?,?,?,?,USER> fbSecurity;
-	private JeeslSecurityFacade<?,?,?,R,V,U,A,AT,?,?,USER> fSecurity;
+	private JeeslSecurityFacade<?,R,V,U,A,AT,?,?,USER> fSecurity;
 	protected JeeslSecurityBean<?,R,V,U,A,AT,AR,?,?,USER> bSecurity;
 	
 	protected I identity;
