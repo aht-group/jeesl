@@ -22,9 +22,7 @@ public class AbstractSsiXlsMapper
 	protected final Map<Integer,String> mapColumnIndex;
 	protected final List<Integer> listColumns;
 	
-	public List<Integer> getListColumns() {
-		return listColumns;
-	}
+	public List<Integer> getListColumns() {return listColumns;}
 
 	public AbstractSsiXlsMapper()
 	{

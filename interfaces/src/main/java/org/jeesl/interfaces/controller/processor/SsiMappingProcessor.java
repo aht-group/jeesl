@@ -2,7 +2,6 @@ package org.jeesl.interfaces.controller.processor;
 
 import java.util.List;
 
-import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
 
@@ -14,7 +13,7 @@ public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiMapping<?,?>,
 	
 	MAPPING getMapping();
 	
-	void initMappings() throws JeeslNotFoundException;
+	void initMappings();
 	
 	Class<?> getClassA();
 	Class<?> getClassB();

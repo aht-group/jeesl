@@ -73,7 +73,7 @@ public class EjbCodeCache <T extends EjbWithCode>
 		}
 	}
 	
-	
+	public <E extends Enum<E>> boolean notEquals(T ejb, E code) {return !this.equals(ejb,code);}
 	public <E extends Enum<E>> boolean equals(T ejb, E code)
 	{
 		if(Objects.isNull(ejb) || Objects.isNull(code)) {return false;}

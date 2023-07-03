@@ -63,8 +63,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		this.fSsi=fSsi;
 		this.fbSsi=fbSsi;
 		
-		try {this.initMappings();}
-		catch (JeeslNotFoundException e) {e.printStackTrace();}
+		this.initMappings();
 		
 		jec = BucketSizeCounter.instance();
 		cacheLink = new EjbCodeCache<>(fbSsi.getClassLink(),fSsi);
@@ -73,9 +72,13 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		efData = fbSsi.ejbData();
 	}
 	
-	@Override public void initMappings() throws JeeslNotFoundException
+	@Override public void initMappings()
 	{
-		mapping = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
+		try
+		{
+			mapping = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
+		}
+		catch (JeeslNotFoundException e) {throw new RuntimeException(e);}
 	}
 	
 	public String sqlDeleteAll()
