@@ -43,8 +43,6 @@ public class PageActiveCondition <V extends JeeslSecurityView<?,?,?,?,?,?>>
 	    	 	sb.append("SecurityView (").append(view.getCode());
 	    	 	sb.append(") ").append(event.getAddress().toString());
 	    	 	sb.append(" active:").append(view.isVisible());
-//	    	 	sb.append(" ").append(event.toString());
-//	    	 	sb.append(" ").append(context.toString());
 	    	 	logger.info(sb.toString());
 		 	}
 			return view.isVisible();

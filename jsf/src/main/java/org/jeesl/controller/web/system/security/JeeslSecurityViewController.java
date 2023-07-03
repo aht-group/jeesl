@@ -190,10 +190,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		if(rAction) {action=null;}
 		if(rArea) {area=null;}
 	}
-	
-	//Add
-	
-	
+
 	//VIEW
 	public void addView() throws JeeslConstraintViolationException
 	{
