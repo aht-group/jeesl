@@ -19,32 +19,33 @@
 	<jp:grid id="grid">
 		<j:slot width="8">
 			<h:form>
-				<p:dataTable var="a" value="#{cc.attrs.bean.attributes}"
-							 selection="#{cc.attrs.bean.attribute}" selectionMode="single" rowKey="#{a.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="a" value="#{cc.attrs.bean.attributes}"
+						selection="#{cc.attrs.bean.attribute}" selectionMode="single" rowKey="#{a.id}">
 					<f:facet name="header">
 						<j:dtHeader title="#{msg.jeeslIoSsiAttributeMappings}">
-							<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addAttribute()}" update=":#{cc.id}:sAttribute"/>
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addAttribute()}" update=":#{cc.id}:sAttribute"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectAttribute()}" update=":#{cc.id}:grid"/>
 					<p:column>
-						<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiSystem}"/></f:facet>
+						<f:facet name="header"><jtp:label entity="IoSsiContext" code="system"/></f:facet>
 						<h:outputText value="#{a.mapping.system.code}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiMapping}"/></f:facet>
+						<f:facet name="header"><jtp:label entity="IoSsiMapping" code="mapping"/></f:facet>
 						<h:outputText value="#{a.mapping.entity.name[localeCode].lang}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><h:outputText value="#{msg.jeeslRevisionEntity}"/></f:facet>
+						<f:facet name="header"><jtp:label entity="IoSsiMapping" code="entity"/></f:facet>
 						<h:outputText value="#{a.entity.name[localeCode].lang}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiAttributeRemoteCode}"/></f:facet>
+						<f:facet name="header"><jtp:label entity="IoSsiMapping" code="remoteCode"/></f:facet>
 						<h:outputText value="#{a.remoteCode}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiAttributeLocalCode}"/></f:facet>
+						<f:facet name="header"><jtp:label entity="IoSsiMapping" code="localCode"/></f:facet>
 						<h:outputText value="#{a.localCode}"/>
 					</p:column>
 				</p:dataTable>
@@ -52,32 +53,49 @@
 		</j:slot>
 		<j:slot id="sAttribute" width="4">
 			<h:form id="fMapping" rendered="#{not empty cc.attrs.bean.attribute}">
-				<p:panel id="pView" header="#{msg.jeeslIoSsiAttributeMappings} #{cc.attrs.bean.attribute.id}" styleClass="jeeslPanel">
+				<p:panel id="pView" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoSsiMapping"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelMapping()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-						<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveAttribute()}"   update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteAttribute()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.attribute.id gt 0}"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelMapping()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveAttribute()}"   update=":#{cc.id}:grid" tooltip="#{msg.ttSave}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteAttribute()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.attribute.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						
-						<p:outputLabel value="#{msg.jeeslIoSsiMapping}"/>
+						<jtp:label entity="IoSsiMapping" code="id"/>
+						<h:outputText value="#{cc.attrs.bean.attribute}.id}"/>
+						
+						<jtp:label entity="IoSsiMapping" code="mapping"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.attribute.mapping}" effect="fade" autoWidth="false" >
 							<f:selectItems value="#{cc.attrs.bean.sbhMapping.list}" var="m" itemLabel="#{m.system.code} #{m.entity.name[localeCode].lang}" itemValue="#{m}"/>
 						</p:selectOneMenu>
 						
-						<p:outputLabel value="#{msg.jeeslRevisionEntity}"/>
-						<p:selectOneMenu value="#{cc.attrs.bean.attribute.entity}" effect="fade" autoWidth="false">
+						<jtp:label entity="IoSsiMapping" code="entity"/>
+						<p:selectOneMenu var="var" value="#{cc.attrs.bean.attribute.entity}"
+									effect="fade" autoWidth="false" filter="true" filterMatchMode="contains">
+							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.bean.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
+							<p:column>
+								<h:outputText value="#{var.category.position}.#{var.position}" />
+							</p:column>
+							<p:column headerText="#{msg.aupCategory}">
+								<h:outputText value="#{var.category.name[localeCode].lang}" />
+							</p:column>
+							<p:column headerText="#{msg.jeeslRevisionDiagramShort}">
+								<h:outputText value="#{var.diagram.name[localeCode].lang}" />
+							</p:column>
+							<p:column headerText="#{msg.jeeslRevisionEntity}">
+								<h:outputText value="#{var.name[localeCode].lang}" />
+							</p:column>
 						</p:selectOneMenu>
 						
-						<p:outputLabel value="#{msg.jeeslIoSsiAttributeRemoteCode}"/>
+						<jtp:label entity="IoSsiMapping" code="remoteCode"/>
 						<p:inputText value="#{cc.attrs.bean.attribute.remoteCode}"/>
 						
-						<p:outputLabel value="#{msg.jeeslIoSsiAttributeLocalCode}"/>
+						<jtp:label entity="IoSsiMapping" code="localCode"/>
 						<p:inputText value="#{cc.attrs.bean.attribute.localCode}"/>
 						
 					</p:panelGrid>
-					
 				</p:panel>
 			</h:form>
 		</j:slot>
