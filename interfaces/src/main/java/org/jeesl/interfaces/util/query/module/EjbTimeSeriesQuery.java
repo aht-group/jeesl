@@ -40,8 +40,9 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	public <E extends Enum<E>> EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
-	//ID-List
+	//Lists
 	@Override public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
+	@Override public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
 	//LocalDate
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}

@@ -40,6 +40,7 @@ public interface JeeslQuery extends Serializable
 	void debug(boolean debug, int ident);
 	
 	List<Long> getIdList();
+	List<String> getCodeList();
 	
 	Boolean getBool1();
 	void setBool1(Boolean bool1);

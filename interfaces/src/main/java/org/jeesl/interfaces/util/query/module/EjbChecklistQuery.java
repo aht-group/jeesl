@@ -37,8 +37,9 @@ public class EjbChecklistQuery<CL extends JeeslClChecklist<?,?,?>,
 	public <E extends Enum<E>> EjbChecklistQuery<CL,CI,TL> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbChecklistQuery<CL,CI,TL> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
-	//ID-List
+	//List
 	@Override public EjbChecklistQuery<CL,CI,TL> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
+	@Override public EjbChecklistQuery<CL,CI,TL> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
 	//LocalDate
 	public EjbChecklistQuery<CL,CI,TL> ld1(LocalDate ld1) {this.ld1=ld1; return this;}
