@@ -41,6 +41,11 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public Integer getMaxResults() {return maxResults;}
 	@Override public void setMaxResults(Integer maxResults) {this.maxResults = maxResults;}
 	
+	//IDs
+	protected List<Long> idList;
+	public List<Long> getIdList() {return idList;}
+	public abstract AbstractEjbQuery idList(List<Long> list);
+
 	//Dates
 	private Date fromDate1;
 	public Date getFromDate1() {return fromDate1;}

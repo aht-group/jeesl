@@ -3,6 +3,7 @@ package org.jeesl.interfaces.util.query.module;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.module.hd.JeeslHdCategory;
 import org.jeesl.interfaces.model.module.hd.event.JeeslHdEvent;
@@ -68,6 +69,9 @@ public class EjbHelpdeskQuery<L extends JeeslLang,D extends JeeslDescription,
 	public <E extends Enum<E>> EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
+	//ID-List
+	@Override public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
+
 	//LocalDate
 	public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
 	public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}

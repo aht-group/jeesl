@@ -30,7 +30,6 @@ public interface JeeslQuery extends Serializable
 	List<String> getRootFetches();
 	
 	String getSortBy();
-
 	boolean isSortAscending();
 	
 	void sort(String sortBy, boolean sortAscending);
@@ -39,6 +38,8 @@ public interface JeeslQuery extends Serializable
 	
 	void debug(boolean debug);
 	void debug(boolean debug, int ident);
+	
+	List<Long> getIdList();
 	
 	Boolean getBool1();
 	void setBool1(Boolean bool1);

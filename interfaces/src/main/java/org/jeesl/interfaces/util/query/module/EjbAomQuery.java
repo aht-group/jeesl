@@ -38,6 +38,9 @@ public class EjbAomQuery<ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 	public <E extends Enum<E>> EjbAomQuery<ASSET,EVENT> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbAomQuery<ASSET,EVENT> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
+	//ID-List
+	@Override public EjbAomQuery<ASSET,EVENT> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
+
 	//LocalDate
 	public EjbAomQuery<ASSET,EVENT> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
 	public EjbAomQuery<ASSET,EVENT> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}

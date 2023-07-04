@@ -20,8 +20,8 @@ public class SsiCodeCache <MAPPING extends JeeslIoSsiMapping<?,ENTITY>,
 {
 	final static Logger logger = LoggerFactory.getLogger(SsiCodeCache.class);
 	
-	private final Map<String,T> map;
-	
+	private final Map<String,T> map; public Map<String,T> getMap() {return map;}
+
 	public SsiCodeCache(IoSsiDataFactoryBuilder<?,?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?> fbSsi,
 						JeeslIoSsiFacade<?,?,?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?,?> fSsi,
 						Class<T> cT)

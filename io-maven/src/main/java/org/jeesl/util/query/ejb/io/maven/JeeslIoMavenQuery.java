@@ -39,6 +39,9 @@ public class JeeslIoMavenQuery
 	public <E extends Enum<E>> JeeslIoMavenQuery addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public JeeslIoMavenQuery distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
+	//ID-List
+	@Override public JeeslIoMavenQuery idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
+
 	//LocalDate
 	public JeeslIoMavenQuery ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
 	public JeeslIoMavenQuery ld2(LocalDate ld2) {this.ld2 = ld2; return this;}

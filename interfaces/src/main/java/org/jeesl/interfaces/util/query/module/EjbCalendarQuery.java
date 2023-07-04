@@ -36,6 +36,9 @@ public class EjbCalendarQuery<CAL extends JeeslCalendar<?,?>,
 	public <E extends Enum<E>> EjbCalendarQuery<CAL,TYPE> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbCalendarQuery<CAL,TYPE> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
+	//ID-List
+	@Override public EjbCalendarQuery<CAL,TYPE> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
+
 	//LocalDate
 	public EjbCalendarQuery<CAL,TYPE> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
 	public EjbCalendarQuery<CAL,TYPE> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
