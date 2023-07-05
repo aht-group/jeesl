@@ -18,7 +18,7 @@ public class EjbCodeCache <T extends EjbWithCode>
 	private JeeslFacade facade; public EjbCodeCache<T> facade(JeeslFacade facade) {this.facade=facade; return this;}
 	private final Class<T> c;
 	
-	private final Map<String,T> map;
+	private final Map<String,T> map; public Map<String, T> getMap() {return map;}
 	
 	public static <T extends EjbWithCode> EjbCodeCache<T> instance(Class<T> c) {return new EjbCodeCache<>(c);}
 	public EjbCodeCache(Class<T> c)
@@ -26,17 +26,20 @@ public class EjbCodeCache <T extends EjbWithCode>
 		this.c=c;
 		map = new HashMap<>();
 	}
-	public EjbCodeCache(Class<T> c, JeeslFacade fUtils)
-	{
-		this(c);
-		this.facade=fUtils;
-	}
+	
+//	private EjbCodeCache(Class<T> c, JeeslFacade fUtils)
+//	{
+//		this(c);
+//		this.facade=fUtils;
+//	}
 	
 	public EjbCodeCache(Class<T> c, List<T> list)
 	{
 		this(c);
 		this.reload(list);
 	}
+	
+	public EjbCodeCache<T> load() {map.clear(); if(Objects.nonNull(facade)) {this.reload(facade.all(c));} return this;}
 	
 	public void reload(List<T> list)
 	{

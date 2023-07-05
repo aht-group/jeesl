@@ -54,9 +54,9 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 	{
 		this.fMaven=fMaven;
 		
-		cacheStructure = new EjbCodeCache<>(IoMavenStructure.class,fMaven);
-		cacheOutdate = new EjbCodeCache<>(IoMavenOutdate.class,fMaven);
-		cacheSuitability = new EjbCodeCache<>(IoMavenSuitability.class,fMaven);
+		cacheStructure = EjbCodeCache.instance(IoMavenStructure.class).facade(fMaven);
+		cacheOutdate = EjbCodeCache.instance(IoMavenOutdate.class).facade(fMaven);
+		cacheSuitability = EjbCodeCache.instance(IoMavenSuitability.class).facade(fMaven);
 	}
 	
 	@Override public JsonSsiUpdate uploadDependencyGraph(JsonMavenGraph graph)

@@ -66,8 +66,8 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		this.initMappings();
 		
 		jec = BucketSizeCounter.instance();
-		cacheLink = new EjbCodeCache<>(fbSsi.getClassLink(),fSsi);
-		cacheJob = new EjbCodeCache<>(fbSsi.getClassJob(),fSsi);
+		cacheLink = EjbCodeCache.instance(fbSsi.getClassLink()).facade(fSsi);
+		cacheJob = EjbCodeCache.instance(fbSsi.getClassJob()).facade(fSsi);
 		
 		efData = fbSsi.ejbData();
 	}

@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.io.ssi.data;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
@@ -42,7 +43,7 @@ public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiMapping<?,?>,
 	public void updateJson(DATA data, Object json)
 	{
 		data.setJson(null);
-		if(json!=null)
+		if(Objects.nonNull(json))
 		{
 			try{data.setJson(JsonUtil.toString(json));}
 			catch (JsonProcessingException e) {e.printStackTrace();}

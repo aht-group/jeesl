@@ -97,7 +97,7 @@ public class JeeslIoCryptoKeyGwc <L extends JeeslLang, D extends JeeslDescriptio
 		this.sessionKeystore=sessionKeystore;
 		stores.add(sessionKeystore);
 		
-		cacheState = new EjbCodeCache<>(fbCrypto.getClassKeyState(),fCrypto);
+		cacheState = EjbCodeCache.instance(fbCrypto.getClassKeyState()).facade(fCrypto);
 		
 		reloadKeys();
 	}

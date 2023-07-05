@@ -26,11 +26,11 @@ public class SsiCodeCache <MAPPING extends JeeslIoSsiMapping<?,ENTITY>,
 						JeeslIoSsiFacade<?,?,?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?,?> fSsi,
 						Class<T> cT)
 	{
-//		this.cT=cT;
 		map = new HashMap<>();
 		
 		for(ATTRIBUTE a : fSsi.all(fbSsi.getClassAttribute()))
 		{
+//			logger.info(a.toString());
 			if(a.getEntity().getCode().equals(cT.getName()))
 			{
 				try
