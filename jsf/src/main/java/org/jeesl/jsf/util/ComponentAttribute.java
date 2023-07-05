@@ -28,6 +28,12 @@ public class ComponentAttribute
 		return new Boolean(value);
 	}
 	
+	public static int getInteger(String attribute, int defaultValue, FacesContext context, UIComponent component)
+	{
+		String value = get(attribute,null,context,component);
+		if(value==null){value=""+defaultValue;}
+		return new Integer(value);
+	}
 	public static int getInteger(String attribute, FacesContext context, UIComponent component) throws JeeslNotFoundException
 	{
 		String value = get(attribute,null,context,component);
@@ -68,13 +74,6 @@ public class ComponentAttribute
 		String value = get(attribute,null,context,component);
 		if(value==null){throw new JeeslNotFoundException("No attribute in component: "+attribute);}
 		return value;
-	}
-	
-	public static int getInteger(String attribute, int defaultValue, FacesContext context, UIComponent component)
-	{
-		String value = get(attribute,null,context,component);
-		if(value==null){value=""+defaultValue;}
-		return new Integer(value);
 	}
 	
 	public static <E extends Enum<E>> String get(E attribute, String defaultValue, FacesContext context, UIComponent component) {return get(attribute.toString(), defaultValue, context, component);}

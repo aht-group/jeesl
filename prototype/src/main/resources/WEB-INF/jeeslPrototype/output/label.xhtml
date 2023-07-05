@@ -6,6 +6,7 @@
 	<c:set var="id" value="#{id}"/>
 	<c:set var="rendered" value="#{not empty rendered ? rendered : true}"/>
     <c:set var="for" value="#{for}"/>
+    <c:set var="url" value="#{url}"/>
 	 
     <c:set var="entity" value="#{entity}"/>
     <c:set var="code" value="#{code}"/>
@@ -22,34 +23,60 @@
 	<c:set var="field" value="#{field}"/>
 	<c:set var="validated" value="#{validated}"/>
 
-	<p:outputLabel rendered="#{rendered}" styleClass="#{mandatory ? 'mandatory' : ''}">
-        <!-- <c:if test="#{id}"><f:attribute name="id" value="olwithOverlay"/></c:if >-->
-		<!-- <c:if test="#{not empty id}"><f:attribute name="id" value="#{id}_ol"/></c:if> -->
-        
-		<c:if test="#{not empty code}"><f:attribute name="value" value="#{not empty appLabelBean.labels[entity][code][loc].lang ? appLabelBean.labels[entity][code][loc].lang : defaultValue}"/></c:if>
-		<c:if test="#{empty code}"><f:attribute name="value" value="#{not empty appLabelBean.entities[entity][loc].lang ? appLabelBean.entities[entity][loc].lang : defaultValue}"/></c:if>
-        
-        <c:if test="#{not empty for}"><f:attribute name="for" value="#{for}"/></c:if>
-		<c:if test="#{(not empty style) and (empty validated)}"><f:attribute name="style" value="#{style}"/></c:if>
-        <c:if test="#{not empty validated}"><f:attribute name="style" value="#{validated and empty field ? 'color:red' : 'color:default'};"/></c:if>
-		
-		<ui:remove>
-			<c:if test="#{not empty iOptions}"><f:attribute name="style" value="cursor:pointer;"/></c:if>
-		</ui:remove>
-		
-        
-        <p:tooltip rendered="#{ttd}" for="@parent" position="top" showDelay="1000">
-        	<c:if test="#{not empty code}"><f:attribute name="value" value="#{not empty appLabelBean.descriptions[entity][code][loc].lang ? appLabelBean.descriptions[entity][code][loc].lang : defaultValue}"/></c:if>
-        </p:tooltip>
-        
-		<c:if test="#{not empty iOptions}">
-        	<p:overlayPanel for="@parent" widgetVar="wvImageOptions" showEffect="blind" hideEffect="explode" showEvent="click"
-                        hideEvent="mousedown" dismissable="false" showCloseIcon="true">
-                <h:outputText value="#{iOptions}" />
-            	
-			</p:overlayPanel>
-		</c:if>
-	</p:outputLabel>
-
-	
+	<c:if test="#{empty url}">
+		<p:outputLabel rendered="#{rendered}" styleClass="#{mandatory ? 'mandatory' : ''}">        
+			<c:if test="#{not empty code}"><f:attribute name="value" value="#{not empty appLabelBean.labels[entity][code][loc].lang ? appLabelBean.labels[entity][code][loc].lang : defaultValue}"/></c:if>
+			<c:if test="#{empty code}"><f:attribute name="value" value="#{not empty appLabelBean.entities[entity][loc].lang ? appLabelBean.entities[entity][loc].lang : defaultValue}"/></c:if>
+	        
+	        <c:if test="#{not empty for}"><f:attribute name="for" value="#{for}"/></c:if>
+			<c:if test="#{(not empty style) and (empty validated)}"><f:attribute name="style" value="#{style}"/></c:if>
+	        <c:if test="#{not empty validated}"><f:attribute name="style" value="#{validated and empty field ? 'color:red' : 'color:default'};"/></c:if>
+			
+			<ui:remove>
+				<c:if test="#{not empty iOptions}"><f:attribute name="style" value="cursor:pointer;"/></c:if>
+			</ui:remove>
+			
+	        
+	        <p:tooltip rendered="#{ttd}" for="@parent" position="top" showDelay="1000">
+	        	<c:if test="#{not empty code}"><f:attribute name="value" value="#{not empty appLabelBean.descriptions[entity][code][loc].lang ? appLabelBean.descriptions[entity][code][loc].lang : defaultValue}"/></c:if>
+	        </p:tooltip>
+	        
+			<c:if test="#{not empty iOptions}">
+	        	<p:overlayPanel for="@parent" widgetVar="wvImageOptions" showEffect="blind" hideEffect="explode" showEvent="click"
+	                        hideEvent="mousedown" dismissable="false" showCloseIcon="true">
+	                <h:outputText value="#{iOptions}" />
+	            	
+				</p:overlayPanel>
+			</c:if>
+		</p:outputLabel>
+	</c:if>
+	<c:if test="#{not empty url}">
+		<h:outputLink value="#{facesContext.externalContext.requestContextPath}/test">
+			<p:outputLabel rendered="#{rendered}" styleClass="#{mandatory ? 'mandatory' : ''}">        
+				<c:if test="#{not empty code}"><f:attribute name="value" value="#{not empty appLabelBean.labels[entity][code][loc].lang ? appLabelBean.labels[entity][code][loc].lang : defaultValue}"/></c:if>
+				<c:if test="#{empty code}"><f:attribute name="value" value="#{not empty appLabelBean.entities[entity][loc].lang ? appLabelBean.entities[entity][loc].lang : defaultValue}"/></c:if>
+		        
+		        <c:if test="#{not empty for}"><f:attribute name="for" value="#{for}"/></c:if>
+				<c:if test="#{(not empty style) and (empty validated)}"><f:attribute name="style" value="#{style}"/></c:if>
+		        <c:if test="#{not empty validated}"><f:attribute name="style" value="#{validated and empty field ? 'color:red' : 'color:default'};"/></c:if>
+				
+				<ui:remove>
+					<c:if test="#{not empty iOptions}"><f:attribute name="style" value="cursor:pointer;"/></c:if>
+				</ui:remove>
+				
+		        
+		        <p:tooltip rendered="#{ttd}" for="@parent" position="top" showDelay="1000">
+		        	<c:if test="#{not empty code}"><f:attribute name="value" value="#{not empty appLabelBean.descriptions[entity][code][loc].lang ? appLabelBean.descriptions[entity][code][loc].lang : defaultValue}"/></c:if>
+		        </p:tooltip>
+		        
+				<c:if test="#{not empty iOptions}">
+		        	<p:overlayPanel for="@parent" widgetVar="wvImageOptions" showEffect="blind" hideEffect="explode" showEvent="click"
+		                        hideEvent="mousedown" dismissable="false" showCloseIcon="true">
+		                <h:outputText value="#{iOptions}" />
+		            	
+					</p:overlayPanel>
+				</c:if>
+			</p:outputLabel>
+		</h:outputLink>
+	</c:if>
 </ui:composition>
