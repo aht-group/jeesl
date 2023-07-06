@@ -2,6 +2,7 @@ package org.jeesl.util.query.json;
 
 import org.jeesl.model.json.system.status.JsonCategory;
 import org.jeesl.model.json.system.status.JsonInterval;
+import org.jeesl.model.json.system.status.JsonMode;
 import org.jeesl.model.json.system.status.JsonSector;
 import org.jeesl.model.json.system.status.JsonStatus;
 import org.jeesl.model.json.system.status.JsonType;
@@ -93,6 +94,14 @@ public class JsonStatusQueryProvider
 	{				
 		JsonInterval xml = new JsonInterval();
 		xml.setCode("");
+		return xml;
+	}
+	
+	public static JsonMode modeCodeLabel()
+	{				
+		JsonMode xml = new JsonMode();
+		xml.setCode("");
+		xml.setLabel("");
 		return xml;
 	}
 	

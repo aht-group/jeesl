@@ -29,7 +29,7 @@ public class JsonStatusFactory<L extends JeeslLang, D extends JeeslDescription,S
 	public static JsonStatus build(Long id, String code, String label)
 	{
 		JsonStatus json = new JsonStatus();
-		json.setId(0l);
+		json.setId(id);
 		json.setCode(code);
 		json.setLabel(label);
 		return json;

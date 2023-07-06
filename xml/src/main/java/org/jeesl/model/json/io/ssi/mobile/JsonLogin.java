@@ -1,7 +1,9 @@
 package org.jeesl.model.json.io.ssi.mobile;
 
 import java.io.Serializable;
+import java.util.List;
 
+import org.jeesl.model.json.system.security.JsonSecurityPage;
 import org.jeesl.model.json.system.security.JsonSecurityUser;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,4 +38,9 @@ public class JsonLogin implements Serializable
 	private String token;
 	public String getToken() {return token;}
 	public void setToken(String token) {this.token = token;}
+	
+	@JsonProperty("accessRights")
+	private List<JsonSecurityPage> accessRights;
+	public List<JsonSecurityPage> getAccessRights() {return accessRights;}
+	public void setAccessRights(List<JsonSecurityPage> accessRights) {this.accessRights = accessRights;} 
 }

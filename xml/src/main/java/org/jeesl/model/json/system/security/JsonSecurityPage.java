@@ -16,6 +16,11 @@ public class JsonSecurityPage implements Serializable
 	private String code;
 	public String getCode() {return code;}
 	public void setCode(String code) {this.code = code;}
+	
+	@JsonProperty("label")
+	private String label;
+	public String getLabel() {return label;}
+	public void setLabel(String label) {this.label = label;}
 
 	@JsonProperty("s1")
 	private String s1;
@@ -32,17 +37,23 @@ public class JsonSecurityPage implements Serializable
 	public String getS3() {return s3;}
 	public void setS3(String s3) {this.s3 = s3;}
 	
-	@JsonProperty("public")
-	private Boolean accessPublic;
-	public Boolean isAccessPublic() {return accessPublic;}
-	public void setAccessPublic(Boolean accessPublic) {this.accessPublic = accessPublic;}
-	
+	@JsonProperty("accessViaPublic")
+	private Boolean accessViaPublic;
+	public Boolean getAccessViaPublic() {return accessViaPublic;}
+	public void setAccessViaPublic(Boolean accessViaPublic) {this.accessViaPublic = accessViaPublic;}
+
 	@JsonProperty("accessViaRole")
 	private Boolean accessViaRole;
-	public Boolean getAccessViaRole() {
-		return accessViaRole;
-	}
-	public void setAccessViaRole(Boolean accessViaRole) {
-		this.accessViaRole = accessViaRole;
-	}
+	public Boolean getAccessViaRole() {return accessViaRole;}
+	public void setAccessViaRole(Boolean accessViaRole) {this.accessViaRole = accessViaRole;}
+	
+	@JsonProperty("accessViaLogin")
+	private Boolean accessViaLogin;
+	public Boolean getAccessViaLogin() {return accessViaLogin;}
+	public void setAccessViaLogin(Boolean accessViaLogin) {this.accessViaLogin = accessViaLogin;}
+	
+	@JsonProperty("accessForUser")
+	private Boolean accessForUser;
+	public Boolean getAccessForUser() {return accessForUser;}
+	public void setAccessForUser(Boolean accessForUser) {this.accessForUser = accessForUser;}
 }

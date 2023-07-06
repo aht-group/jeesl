@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName(value="version")
-public class Version implements Serializable
+public class JsonVersion implements Serializable
 {
 	public static final long serialVersionUID=1;
 

@@ -128,12 +128,16 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		this.bSecurity=bSecurity;
 		templates = fSecurity.allOrderedPositionVisible(fbSecurity.getClassTemplate());
 		
+		this.reloadCategories();
 		if(Objects.nonNull(security))
 		{
-			userIsDeveloper = security.allowSuffixCode(SecuritySuffix.developer) || security.allowSuffixCode(SecuritySuffixDeprecated.Developer);
-		}
-		
-		this.reloadCategories();
+			this.postConstruct(security);
+		}	
+	}
+	
+	private void postConstruct(JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
+	{
+		userIsDeveloper = security.allowSuffixCode(AbstractJeeslWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslWebController.SecurityActionSuffixDeprecated.Developer);
 	}
 	
 	private void reloadCategories()

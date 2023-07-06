@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -75,7 +76,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	private List<A> opActions; public List<A> getOpActions(){return opActions;}
 	protected List<U> opUsecases; public List<U> getOpUsecases(){return opUsecases;}
 	
-	private List<C> categories; public List<C> getCategories() {return categories;}
+	private final List<C> categories; public List<C> getCategories() {return categories;}
 	private final List<R> roles; public List<R> getRoles(){return roles;}
 	private List<V> views; public List<V> getViews(){return views;}
 	private List<A> actions; public List<A> getActions(){return actions;}
@@ -111,6 +112,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		comparatorAction = fbSecurity.comparatorAction(SecurityActionComparator.Type.position);
 		comparatorUsecase = (new SecurityUsecaseComparator<L,D,C,R,V,U,A,AT,USER>()).factory(SecurityUsecaseComparator.Type.position);
 		
+		categories = new ArrayList<>();
 		roles = new ArrayList<>();
 		
 		uiShowDocumentation = false;
@@ -122,8 +124,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	
 	public void postConstructRole(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
-			JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity,
-			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
+			JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fSecurity=fSecurity;
@@ -135,13 +136,24 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		opActions = new ArrayList<A>();
 		opUsecases = fSecurity.all(fbSecurity.getClassUsecase());
 		Collections.sort(opUsecases,comparatorUsecase);
-		
+	}
+	
+	public void postConstruct(JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
+	{
+		if(Objects.nonNull(security))
+		{
+			userIsDeveloper = security.allowSuffixCode(AbstractJeeslWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslWebController.SecurityActionSuffixDeprecated.Developer);
+		}
 		this.reloadCategories();
 	}
 
 	private void reloadCategories()
 	{
-		categories = fSecurity.allOrderedPosition(fbSecurity.getClassCategory(),JeeslSecurityCategory.Type.role);
+		categories.clear();
+		for(C c : fSecurity.allOrderedPosition(fbSecurity.getClassCategory(),JeeslSecurityCategory.Type.role))
+		{
+			categories.add(c);
+		}
 		logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassCategory(),categories));
 	}
 	public void addCategory() 

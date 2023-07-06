@@ -25,7 +25,6 @@ public class EjbSecurityRoleFactory <C extends JeeslSecurityCategory<?,?>,
     public R build(C category, String code)
     {
     	R ejb = null;
-    	
     	try
     	{
 			ejb = cRole.newInstance();
@@ -36,7 +35,6 @@ public class EjbSecurityRoleFactory <C extends JeeslSecurityCategory<?,?>,
 		}
     	catch (InstantiationException e) {e.printStackTrace();}
     	catch (IllegalAccessException e) {e.printStackTrace();}
-    	
     	return ejb;
     }
     
