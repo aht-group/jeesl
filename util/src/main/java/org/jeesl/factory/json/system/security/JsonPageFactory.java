@@ -23,7 +23,7 @@ public class JsonPageFactory<L extends JeeslLang, D extends JeeslDescription,
 	public JsonSecurityPage build(V view)
 	{
 		JsonSecurityPage json = build();
-		json.setAccessPublic(view.getAccessPublic());
+		json.setAccessViaPublic(view.getAccessPublic());
 		return json;
 	}
 }

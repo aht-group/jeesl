@@ -173,8 +173,9 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 	{
 		List<COLUMN> list = new ArrayList<COLUMN>();
 		for(GROUP g : sheet.getGroups())
-		{			
-			if(EjbIoReportColumnGroupFactory.visible(g,mapGroupVisibilityToggle))
+		{		
+			boolean visible = EjbIoReportColumnGroupFactory.visible(g,mapGroupVisibilityToggle);
+			if(visible)
 			{
 				for(COLUMN c : g.getColumns())
 				{

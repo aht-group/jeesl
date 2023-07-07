@@ -12,7 +12,11 @@ import org.jeesl.interfaces.model.with.primitive.bool.EjbWithVisible;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslReportCell<L extends JeeslLang,D extends JeeslDescription,
 									TEMPLATE extends JeeslReportTemplate<L,D,?>>
 

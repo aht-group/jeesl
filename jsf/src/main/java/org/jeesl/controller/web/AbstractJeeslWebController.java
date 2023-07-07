@@ -33,6 +33,9 @@ public class AbstractJeeslWebController <L extends JeeslLang, D extends JeeslDes
 	protected boolean debugOnInfo;
 	protected Class<L> cL;
 	protected Class<D> cD;
+	
+	public enum SecurityActionSuffix {developer}
+	public enum SecurityActionSuffixDeprecated {Developer}
 
 	public AbstractJeeslWebController(final Class<L> cL, final Class<D> cD)
 	{

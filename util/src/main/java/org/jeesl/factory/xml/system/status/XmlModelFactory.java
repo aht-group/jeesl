@@ -13,7 +13,7 @@ import net.sf.ahtutils.xml.aht.Query;
 import net.sf.ahtutils.xml.status.Model;
 import net.sf.ahtutils.xml.status.Parent;
 
-public class XmlModelFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
+public class XmlModelFactory <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlModelFactory.class);
 	

@@ -67,16 +67,16 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 			if(ObjectUtils.allNotNull(view.getViewPattern(),view.getUrlMapping()) && view.getViewPattern().contains("/") && view.getUrlMapping().contains("/"))
 			{
 				//Deactivate 6
-				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardDeactivated).withInboundCorrection()).when(Direction.isInbound().andNot(pageActive));
-				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardDeactivated).withInboundCorrection()).when(Direction.isInbound().andNot(pageActive));
-				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardLogin).withInboundCorrection()).when(Direction.isInbound().and(notLoggedIn));
-				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardLogin).withInboundCorrection()).when(Direction.isInbound().and(notLoggedIn));
-				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardDenied).withInboundCorrection()).when(Direction.isInbound().and(pageDenied));
-				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardDenied).withInboundCorrection()).when(Direction.isInbound().and(pageDenied));
+				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardDeactivated)).when(Direction.isInbound().andNot(pageActive));
+				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardDeactivated)).when(Direction.isInbound().andNot(pageActive));
+				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardLogin)).when(Direction.isInbound().and(notLoggedIn));
+				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardLogin)).when(Direction.isInbound().and(notLoggedIn));
+				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardDenied)).when(Direction.isInbound().and(pageDenied));
+				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardDenied)).when(Direction.isInbound().and(pageDenied));
 	
 				//Flip
-				cb = cb.addRule(Join.path(view.getUrlMapping()).to(view.getViewPattern()).withInboundCorrection()).when(Direction.isInbound().and(pageActive));
-//				cb = cb.addRule(Join.path(view.getUrlMapping()).to(view.getViewPattern()).withInboundCorrection()).when(Direction.isInbound());
+				cb = cb.addRule(Join.path(view.getUrlMapping()).to(view.getViewPattern())).when(Direction.isInbound().and(pageActive));
+//				cb = cb.addRule(Join.path(view.getUrlMapping()).to(view.getViewPattern())).when(Direction.isInbound());
 			}
 			else
 			{

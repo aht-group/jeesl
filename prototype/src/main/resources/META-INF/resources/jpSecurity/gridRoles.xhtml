@@ -57,7 +57,14 @@
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{msg.ttSave}"/>
 						<j:svg type="jeeslDelete" rendered="#{not cc.attrs.bean.denyRemove}" listener="#{cc.attrs.bean.rmRole()}" update=":#{cc.id}:fRoles :#{cc.id}:sRole" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
-					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
+					<j:inputGrid rendered="#{cc.attrs.bean.userIsDeveloper}">
+						<jtp:label entity="SecurityRole" code="id"/>
+						<h:outputText value="#{cc.attrs.bean.role.id}"/>
+						
+						<jtp:label entity="SecurityRole" code="visible"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.role.visible}"/>
+					</j:inputGrid>
 					<j:inputGrid>
 						<jtp:label entity="SecurityRole" code="category"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.role.category}" effect="fade" >
@@ -67,10 +74,7 @@
 						<jtp:label entity="SecurityRole" code="code"/>
 						<p:inputText rendered="#{cc.attrs.bean.uiAllowCode or (cc.attrs.bean.role.id eq 0)}" value="#{cc.attrs.bean.role.code}"/>
 						<h:outputText rendered="#{!(cc.attrs.bean.uiAllowCode or (cc.attrs.bean.role.id eq 0))}" value="#{cc.attrs.bean.role.code}"/>
-						
-						<p:outputLabel rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{msg.aupSecurityVisible}"/>
-						<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowInvisible}" value="#{cc.attrs.bean.role.visible}"/>
-						
+
 						<p:outputLabel rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{msg.aupSecurityIncludeInManual}"/>
 						<p:selectBooleanCheckbox rendered="#{cc.attrs.bean.uiShowDocumentation}" value="#{cc.attrs.bean.role.documentation}"/>
 					</j:inputGrid>
