@@ -1695,9 +1695,9 @@ $enable-pointer-cursor-for-buttons: true;
 					display: flex;
 					flex: 1;
 					gap: $half-spacing;
-					height: calc(#{$element-height - $element-droppable-underline});
+					min-height: calc(#{$element-height - $element-droppable-underline});
 					outline: 0;
-					padding-left: $slim-spacing;
+					padding: $slim-spacing;
 					transition: background $transition-duration linear;
 					
 					@media(max-width: 768px) {

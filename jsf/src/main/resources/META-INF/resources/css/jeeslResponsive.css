@@ -4890,9 +4890,9 @@ body, .ui-widget {
         display: flex;
         flex: 1;
         gap: 5px;
-        height: calc(18px);
+        min-height: calc(18px);
         outline: 0;
-        padding-left: 2px;
+        padding: 2px;
         transition: background 0.2s linear; }
         @media (max-width: 768px) {
           .jeesl-panel .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
@@ -6419,9 +6419,9 @@ body, .ui-widget {
             display: flex;
             flex: 1;
             gap: 5px;
-            height: calc(18px);
+            min-height: calc(18px);
             outline: 0;
-            padding-left: 2px;
+            padding: 2px;
             transition: background 0.2s linear; }
             @media (max-width: 768px) {
               .jeesl-content .jeesl-content-container .ui-panel .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label {
