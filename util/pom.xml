@@ -82,14 +82,6 @@
 			<version>2.0.0.Final-redhat-00001</version>
 			<scope>provided</scope>
 		</dependency>
-		
-		<!-- @Sachin -->
-		<dependency>
-			<groupId>org.jboss.spec.javax.faces</groupId>
-			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
-			<version>3.0.0.SP04-redhat-00001</version>
-			<scope>provided</scope>
-		</dependency>
 		 
         <dependency>
             <groupId>org.jboss.spec</groupId>

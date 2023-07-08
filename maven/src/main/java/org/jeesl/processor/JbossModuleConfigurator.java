@@ -15,7 +15,7 @@ public class JbossModuleConfigurator
 {
 	final static Logger logger = LoggerFactory.getLogger(JbossModuleConfigurator.class);
 	
-	private static final String srcBaseDir = "jeesl/listing/installation/jboss/modules";
+	private static final String srcBaseDir = "jeesl/system/io/config/jboss";
 	
 	public static enum Product {eap}
 		

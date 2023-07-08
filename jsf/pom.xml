@@ -45,9 +45,9 @@
 	    </dependency>
    	   	
    	   	<!-- Jakarta EE -->
-   	   	<dependency>
-			<groupId>org.jboss.spec.javax.faces</groupId>
-			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
+		<dependency>
+			<groupId>jakarta.faces</groupId>
+			<artifactId>jakarta.faces-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		
