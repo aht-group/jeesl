@@ -37,7 +37,7 @@ public abstract class AbstractAppAttributeBean <
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppAttributeBean.class);
 
-	private JeeslIoAttributeFacade<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
+	private JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
 	private final IoAttributeFactoryBuilder<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute;
 
 	public AbstractAppAttributeBean(IoAttributeFactoryBuilder<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute)
@@ -49,7 +49,7 @@ public abstract class AbstractAppAttributeBean <
 		mapOption = new HashMap<CRITERIA,List<OPTION>>();
 	}
 	
-	public void initSuper(JeeslIoAttributeFacade<?,?,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
+	public void initSuper(JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute)
 	{
 		this.fAttribute=fAttribute;
 		

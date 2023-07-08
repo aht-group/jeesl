@@ -55,7 +55,7 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 	private boolean showDescription; public boolean isShowDescription() {return showDescription;}
 	
-	private final JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
+	private final JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute;
 	private final JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute;
 	private final AttributeBean<CONTAINER> bean;
 	
@@ -72,7 +72,7 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 	private CONTAINER container;
 	
 	public AttributeHandler(JeeslFacesMessageBean bMessage,
-			final JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute,
+			final JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fAttribute,
 			final JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> bAttribute,
 			final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA> fbAttribute,
 			final AttributeBean<CONTAINER> bean)

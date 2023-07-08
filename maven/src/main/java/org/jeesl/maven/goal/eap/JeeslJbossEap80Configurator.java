@@ -11,15 +11,15 @@ import org.apache.log4j.Level;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.jboss.as.controller.client.ModelControllerClient;
-import org.jeesl.controller.config.jboss.JbossStandaloneConfigurator;
-import org.jeesl.controller.config.jboss.JbossModuleConfigurator;
+import org.jeesl.processor.JbossModuleConfigurator;
+import org.jeesl.processor.JbossStandaloneConfigurator;
 
 @Mojo(name="eap80Config")
 public class JeeslJbossEap80Configurator extends AbstractJbossEapConfigurator
 {	
 	public JeeslJbossEap80Configurator()
 	{
-		
+		eapVersion = "8.0";
 	}
 	
     public void execute() throws MojoExecutionException
@@ -34,23 +34,21 @@ public class JeeslJbossEap80Configurator extends AbstractJbossEapConfigurator
     {
     	String jbossDir = config.getString("eap.dir","/Volumes/ramdisk/jboss");
 		File f = new File(jbossDir);
-		getLog().info("JBoss EAP 8.0 directoy: "+f.getAbsolutePath());
+		super.getLog().info("JBoss Configuration (EAP "+eapVersion+") base: "+f.getAbsolutePath());
     	
-    	ModelControllerClient client;
-    	JbossModuleConfigurator jbossModule = new JbossModuleConfigurator(JbossModuleConfigurator.Product.eap,"8.0",jbossDir);
     	try
     	{
-    		client = ModelControllerClient.Factory.create(InetAddress.getByName("localhost"), 9990);
-    		
-    		JbossStandaloneConfigurator jbossConfig = new JbossStandaloneConfigurator(client);
+    		ModelControllerClient client = ModelControllerClient.Factory.create(InetAddress.getByName("localhost"), 9990);
+    		JbossModuleConfigurator jbossModule = new JbossModuleConfigurator(JbossModuleConfigurator.Product.eap,eapVersion,jbossDir);
+    		JbossStandaloneConfigurator jbossConfig = new JbossStandaloneConfigurator(eapVersion,client);
         	
         	String key = config.getString("eap.configurations");
-    	    getLog().warn("Keys: "+key);
+    	    super.getLog().info("Keys: "+key);
     	    String[] keys = key.split("-");
     	    
-    	    dbFiles(keys,config,jbossModule);
-	    	dbDrivers(keys,config,jbossConfig);
-	    	dbDs(keys,config,jbossConfig);
+    	    super.dbFiles(keys,config,jbossModule);
+	    	super.dbDrivers(keys,config,jbossConfig);
+	    	super.dbDs(keys,config,jbossConfig);
     	}
     	catch (UnknownHostException e) {throw new MojoExecutionException(e.getMessage());}
     	catch (IOException e) {throw new MojoExecutionException(e.getMessage());}

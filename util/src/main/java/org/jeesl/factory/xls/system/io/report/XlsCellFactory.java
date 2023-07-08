@@ -292,4 +292,9 @@ public class XlsCellFactory <REPORT extends JeeslIoReport<?,?,?,WORKBOOK>,
 		sb.append(" col:"+XlsColumnFactory.index2code(col));
 		return sb.toString();
 	}
+	
+	public static void copy(Cell cellIn, Cell cellOut)
+	{
+		 cellOut.setCellValue(cellIn.getStringCellValue());
+	}
 }

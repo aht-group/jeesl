@@ -15,7 +15,6 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.JsonTuple;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
-import org.jeesl.model.json.io.db.tuple.instance.JsonTuple3;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -88,7 +88,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractDmsUploadBean.class);	
 
-	private JeeslIoAttributeFacade<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute; 
+	private JeeslIoAttributeFacade<R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute; 
 	private JeeslIoFrFacade<L,D,?,FSTORAGE,?,FENGINE,FCONTAINER,FMETA,FTYPE,?,?,?> fFr;
 	
 	private final IoAttributeFactoryBuilder<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fbAttribute;
@@ -119,7 +119,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
 	protected void postConstructDmsUpload(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 								JeeslIoDmsFacade<L,D,LOC,DMS,FSTORAGE,ASET,DS,S,FILE,VIEW,FCONTAINER,ACONTAINER> fDms,
 								JeeslIoFrFacade<L,D,?,FSTORAGE,?,FENGINE,FCONTAINER,FMETA,FTYPE,?,?,?> fFr,
-								JeeslIoAttributeFacade<L,D,R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute,
+								JeeslIoAttributeFacade<R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> fAttribute,
 								JeeslAttributeBean<R,ACAT,ACRITERIA,ATYPE,AOPTION,ASET,AITEM,ACONTAINER,ADATA> bAttribute,
 								JeeslFileRepositoryHandler<LOC,FSTORAGE,FCONTAINER,FMETA> fileHandler
 								)

@@ -12,8 +12,8 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.jeesl.controller.config.jboss.JbossStandaloneConfigurator;
-import org.jeesl.controller.config.jboss.JbossModuleConfigurator;
+import org.jeesl.processor.JbossModuleConfigurator;
+import org.jeesl.processor.JbossStandaloneConfigurator;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.config.ConfigLoader;
@@ -26,6 +26,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
 	
 	protected enum DbType {mysql,mariadb,postgres}
 	protected final Set<DbType> setFiles;
+	protected String eapVersion;
 	
 	public AbstractJbossEapConfigurator()
 	{
@@ -77,6 +78,24 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	return "";
     }
     
+    protected void dbFiles(String[] keys, Configuration config, JbossModuleConfigurator jbConfigurator) throws IOException
+    {
+    	List<String> log = new ArrayList<String>();
+    	for(String key : keys)
+    	{
+        	DbType dbType = DbType.valueOf(config.getString("db."+key+".type"));
+        	switch(dbType)
+        	{
+	        	case mariadb: if(!setFiles.contains(dbType)) {jbConfigurator.mariaDB();} break;
+        		case mysql: if(!setFiles.contains(dbType)) {jbConfigurator.mysql();} break;
+        		case postgres: if(!setFiles.contains(dbType)) {jbConfigurator.postgres(); jbConfigurator.hibernate();} break;
+        	}
+        	log.add(dbType.toString());
+			setFiles.add(dbType);
+    	}
+    	super.getLog().info("DB Files: "+StringUtils.join(log, ", "));
+    }
+    
     protected void dbDs(String[] keys, Configuration config, JbossStandaloneConfigurator jbossConfig) throws IOException
     {
     	for(String key : keys)
@@ -103,63 +122,12 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
         	DbType dbType = DbType.valueOf(type);
         	switch(dbType)
         	{
-        		case mariadb: if(!jbossStandalone.driverExists("mariadb"))
-								{
-									jbossStandalone.createMariadbDriver();
-									log.add("mariadb");
-								}
-								break;
-        		case mysql: if(!jbossStandalone.driverExists("mysql"))
-        					{
-        						jbossStandalone.createMysqlDriver();
-        						log.add("mysql");
-        					}
-        					break;
-        		case postgres:	getLog().info("DB Drivers: "+dbType+" exists:"+jbossStandalone.driverExists("postgres"));
-        						if(!jbossStandalone.driverExists("postgres"))
-							{
-								jbossStandalone.createPostgresDriver();
-								log.add("postgres");
-							}
-							break;
+        		case mariadb: if(!jbossStandalone.driverExists("mariadb")) {jbossStandalone.createMariadbDriver();} break;
+        		case mysql: if(!jbossStandalone.driverExists("mysql")) {jbossStandalone.createMysqlDriver();} break;
+        		case postgres:	if(!jbossStandalone.driverExists("postgres")){jbossStandalone.createPostgresDriver();} break;
         	}
+        	log.add(dbType.toString());
     	}
     	getLog().info("DB Drivers: "+StringUtils.join(log, ", "));
-    }
-    
-    protected void dbFiles(String[] keys, Configuration config, JbossModuleConfigurator jbConfigurator) throws IOException
-    {
-    	List<String> log = new ArrayList<String>();
-    	for(String key : keys)
-    	{
-    		String type = config.getString("db."+key+".type");
-        	DbType dbType = DbType.valueOf(type);
-        	switch(dbType)
-        	{
-	        	case mariadb: if(!setFiles.contains(dbType))
-							{
-								jbConfigurator.mariaDB();
-								log.add(dbType.toString());
-								setFiles.add(dbType);
-							}
-							break;
-        		case mysql: if(!setFiles.contains(dbType))
-        					{
-        						jbConfigurator.mysql();
-        						log.add(dbType.toString());
-        						setFiles.add(dbType);
-        					}
-        					break;
-        		case postgres: if(!setFiles.contains(dbType))
-							{
-								jbConfigurator.postgres();
-								jbConfigurator.hibernate();
-								log.add(dbType.toString());
-								setFiles.add(dbType);
-							}
-				break;
-        	}
-    	}
-    	getLog().info("DB Files: "+StringUtils.join(log, ", "));
     }
 }

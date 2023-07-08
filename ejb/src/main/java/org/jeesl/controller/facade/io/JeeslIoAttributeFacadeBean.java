@@ -35,6 +35,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.system.tenant.JeeslWithTenantSupport;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.io.EjbAttributeQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +51,7 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 										CONTAINER extends JeeslAttributeContainer<SET,DATA>,
 										DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
 					extends JeeslFacadeBean
-					implements JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA>
+					implements JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,ITEM,CONTAINER,DATA>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoAttributeFacadeBean.class);
@@ -70,8 +71,7 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		return set;
 	}
 	
-	@Override
-	public <RREF extends EjbWithId> List<CRITERIA> fAttributeCriteria(R realm, RREF rref, List<CAT> categories)
+	@Override public <RREF extends EjbWithId> List<CRITERIA> fAttributeCriteria(R realm, RREF rref, List<CAT> categories)
 	{
 		if(categories==null || categories.isEmpty()) {return new ArrayList<CRITERIA>();}
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -203,6 +203,37 @@ public class JeeslIoAttributeFacadeBean<L extends JeeslLang, D extends JeeslDesc
 		tQ.setHint("javax.persistence.query.timeout",200);
 		return tQ.getResultList();
 	}
+	
+	@Override public List<DATA> fAttributeData(EjbAttributeQuery<CRITERIA, CONTAINER, DATA> query)
+	{
+		if(ObjectUtils.isEmpty(query.getCriterias()) && ObjectUtils.isEmpty(query.getContainers())) {return new ArrayList<>();}
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<DATA> cQ = cB.createQuery(fbAttribute.getClassData());
+		Root<DATA> data = cQ.from(fbAttribute.getClassData());
+		
+		data.fetch(JeeslAttributeData.Attributes.valueOption.toString(), JoinType.LEFT);
+		data.fetch(JeeslAttributeData.Attributes.valueOptions.toString(), JoinType.LEFT);
+		data.fetch(JeeslAttributeData.Attributes.container.toString(), JoinType.LEFT);
+		
+		if(ObjectUtils.isNotEmpty(query.getCriterias()))
+		{
+			Path<CRITERIA> pCriteria = data.join(JeeslAttributeData.Attributes.criteria.toString());
+			predicates.add(pCriteria.in(query.getCriterias()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getContainers()))
+		{
+			Path<CONTAINER> pContainer = data.join(JeeslAttributeData.Attributes.container.toString());
+			predicates.add(pContainer.in(query.getContainers()));
+		}
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(data);
+
+		TypedQuery<DATA> tQ = em.createQuery(cQ);
+//		tQ.setHint("javax.persistence.query.timeout",200);
+		return tQ.getResultList();	}
 
 	@Override
 	public CONTAINER copy(CONTAINER container) throws JeeslConstraintViolationException, JeeslLockingException

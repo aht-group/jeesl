@@ -1,4 +1,4 @@
-package org.jeesl.controller.config.jboss;
+package org.jeesl.processor;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -16,14 +16,16 @@ public class JbossStandaloneConfigurator
 	final static Logger logger = LoggerFactory.getLogger(JbossStandaloneConfigurator.class);
 	
 	private final ModelControllerClient client;
+	private final String eapVersion;
 	
-	public JbossStandaloneConfigurator(InetAddress host, int port)
+	public JbossStandaloneConfigurator(String eapVersion, InetAddress host, int port)
 	{
-		this(ModelControllerClient.Factory.create(host,9990));
+		this(eapVersion, ModelControllerClient.Factory.create(host,9990));
 	}
 	
-	public JbossStandaloneConfigurator(ModelControllerClient client)
+	public JbossStandaloneConfigurator(String eapVersion,ModelControllerClient client)
 	{
+		this.eapVersion=eapVersion;
 		this.client=client;
 	}
 	
@@ -105,8 +107,19 @@ public class JbossStandaloneConfigurator
 		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
 		request.get(ClientConstants.OP_ADDR).add("jdbc-driver","postgres");
 		request.get("driver-name").set("postgres");
-		request.get("driver-module-name").set("org.postgresql");
-		request.get("driver-xa-datasource-class-name").set("org.postgresql.xa.PGXADataSource");
+		
+		if(eapVersion.equals("8.0"))
+		{
+			request.get("driver-module-name").set("org.postgresql.jdbc");
+			request.get("driver-class-name").set("org.postgresql.Driver");
+		}
+		else
+		{
+			request.get("driver-module-name").set("org.postgresql");
+			request.get("driver-xa-datasource-class-name").set("org.postgresql.xa.PGXADataSource");
+		}
+		
+		
 		client.execute(new OperationBuilder(request).build());
 	}
 	

@@ -11,15 +11,15 @@ import org.apache.log4j.Level;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.jboss.as.controller.client.ModelControllerClient;
-import org.jeesl.controller.config.jboss.JbossStandaloneConfigurator;
-import org.jeesl.controller.config.jboss.JbossModuleConfigurator;
+import org.jeesl.processor.JbossModuleConfigurator;
+import org.jeesl.processor.JbossStandaloneConfigurator;
 
 @Mojo(name="eap73Config")
 public class JeeslJbossEap73Configurator extends AbstractJbossEapConfigurator
 {	
 	public JeeslJbossEap73Configurator()
 	{
-		
+		eapVersion = "7.3";
 	}
 	
     public void execute() throws MojoExecutionException
@@ -37,11 +37,11 @@ public class JeeslJbossEap73Configurator extends AbstractJbossEapConfigurator
 		getLog().info("JBoss EAP 7.3 directoy: "+f.getAbsolutePath());
     	
     	ModelControllerClient client;
-    	JbossModuleConfigurator jbossModule = new JbossModuleConfigurator(JbossModuleConfigurator.Product.eap,"7.3",jbossDir);
+    	JbossModuleConfigurator jbossModule = new JbossModuleConfigurator(JbossModuleConfigurator.Product.eap,eapVersion,jbossDir);
     	try {client = ModelControllerClient.Factory.create(InetAddress.getByName("localhost"), 9990);}
     	catch (UnknownHostException e) {throw new MojoExecutionException(e.getMessage());}
     	
-    	JbossStandaloneConfigurator jbossConfig = new JbossStandaloneConfigurator(client);
+    	JbossStandaloneConfigurator jbossConfig = new JbossStandaloneConfigurator(eapVersion,client);
     	
     	String key = config.getString("eap.configurations");
 	    getLog().warn("Keys: "+key);

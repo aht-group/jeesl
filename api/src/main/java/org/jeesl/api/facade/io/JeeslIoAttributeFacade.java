@@ -14,19 +14,16 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeItem;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.io.EjbAttributeQuery;
 
-public interface JeeslIoAttributeFacade <L extends JeeslLang, D extends JeeslDescription,
-										R extends JeeslTenantRealm<L,D,R,?>,
-										CAT extends JeeslAttributeCategory<L,D,R,CAT,?>,
-										CRITERIA extends JeeslAttributeCriteria<L,D,R,CAT,TYPE,OPTION,SET>,
-										TYPE extends JeeslAttributeType<L,D,TYPE,?>,
-										OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
-										SET extends JeeslAttributeSet<L,D,R,CAT,ITEM>,
+public interface JeeslIoAttributeFacade <R extends JeeslTenantRealm<?,?,R,?>,
+										CAT extends JeeslAttributeCategory<?,?,R,CAT,?>,
+										CRITERIA extends JeeslAttributeCriteria<?,?,R,CAT,TYPE,OPTION,SET>,
+										TYPE extends JeeslAttributeType<?,?,TYPE,?>,
+										OPTION extends JeeslAttributeOption<?,?,CRITERIA>,
+										SET extends JeeslAttributeSet<?,?,R,CAT,ITEM>,
 										ITEM extends JeeslAttributeItem<CRITERIA,SET>,
 										CONTAINER extends JeeslAttributeContainer<SET,DATA>,
 										DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
@@ -34,17 +31,16 @@ public interface JeeslIoAttributeFacade <L extends JeeslLang, D extends JeeslDes
 {	
 	SET load(SET set);
 	
-//	List<CRITERIA> fAttributeCriteria(List<CATEGORY> categories, long refId);
 	<RREF extends EjbWithId> List<CRITERIA> fAttributeCriteria(R realm, RREF rref, List<CAT> categories);
 	
 	List<CRITERIA> fAttributeCriteria(SET set);
 	List<OPTION> fAttributeOption(SET set);
 	
-//	List<SET> fAttributeSets(List<CATEGORY> categories, long refId);
 	<RREF extends EjbWithId> List<SET> fAttributeSets(R realm, RREF rref, List<CAT> categories);
 	
 	List<DATA> fAttributeData(CONTAINER container);
 	List<DATA> fAttributeData(CRITERIA criteria, List<CONTAINER> containers);
+	List<DATA> fAttributeData(EjbAttributeQuery<CRITERIA,CONTAINER,DATA> query);
 	
 	DATA fAttributeData(CRITERIA criteria, CONTAINER container) throws JeeslNotFoundException;
 	

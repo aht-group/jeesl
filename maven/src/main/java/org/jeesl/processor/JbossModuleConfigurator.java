@@ -1,4 +1,4 @@
-package org.jeesl.controller.config.jboss;
+package org.jeesl.processor;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +18,7 @@ public class JbossModuleConfigurator
 	private static final String srcBaseDir = "jeesl/listing/installation/jboss/modules";
 	
 	public static enum Product {eap}
-	
-	private final String versionPostgres = "42.3.4";
-	
+		
 	private MultiResourceLoader mrl;
 	
 	private Product product;
@@ -37,7 +35,13 @@ public class JbossModuleConfigurator
 	
 	public void postgres() throws IOException
 	{
-		File postgresBase = buildMobuleBase("org/postgresql");
+		StringBuilder sbBase = new StringBuilder();
+		sbBase.append(buildMobuleBase("org/postgresql"));
+		if(version.equals("8.0")) {sbBase.append("/jdbc");}
+		
+		File postgresBase = new File(jbossBaseDir,sbBase.toString());
+		logger.debug("Postgres: "+postgresBase.getAbsolutePath());
+		
 		File moduleMain = new File(postgresBase,"main");
 		File moduleXml = new File(moduleMain,"module.xml");
 		
@@ -46,7 +50,7 @@ public class JbossModuleConfigurator
 		if(!moduleXml.exists())
 		{
 			String src = srcBaseDir+"/"+product+"/"+version+"/postgres.xml";
-			logger.info("Available?"+mrl.isAvailable(src)+" "+src);
+			logger.info("Available:"+mrl.isAvailable(src)+" "+src);
 			InputStream input = mrl.searchIs(src);
 			FileUtils.copyInputStreamToFile(input, moduleXml);
 		}
@@ -54,34 +58,34 @@ public class JbossModuleConfigurator
 		if(version.equals("6.3"))
 		{
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgis:postgis-jdbc:1.5.3"),moduleMain);
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.3.4"),moduleMain);
 		}
 		else if(version.equals("7.0"))
 		{
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgis:postgis-jdbc:1.5.3"),moduleMain);
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.3.4"),moduleMain);
 		}
 		else if(version.equals("7.1"))
 		{
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgis:postgis-jdbc:1.5.3"),moduleMain);
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.3.4"),moduleMain);
 		}
 		else if(version.equals("7.2"))
 		{
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.3.4"),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("net.postgis:postgis-jdbc:2.5.0"),moduleMain);
 
 		}
 		else if(version.equals("7.3"))
 		{
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:"+versionPostgres),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.3.4"),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("net.postgis:postgis-jdbc:2.5.0"),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("net.postgis:postgis-geometry:2.5.0"),moduleMain);
 		}
 		else if(version.equals("8.0"))
 		{
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.5.1"),moduleMain);
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("net.postgis:postgis-jdbc:2.5.1"),moduleMain);
+			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.postgresql:postgresql:42.6.0"),moduleMain);
+//			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("net.postgis:postgis-jdbc:2.5.1"),moduleMain);
 //			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("net.postgis:postgis-geometry:2.5.0"),moduleMain);
 
 		}
@@ -93,16 +97,13 @@ public class JbossModuleConfigurator
 	
 	public void mysql() throws IOException
 	{
-		File dirCom = buildMobuleBase("com");
-		File dirMysql = new File(dirCom,"mysql");
+		File dirMysql = new File(jbossBaseDir,buildMobuleBase("com/mysql"));
 		File dirMain = new File(dirMysql,"main");
 		File moduleXml = new File(dirMain,"module.xml");
 		
 		logger.debug(moduleXml.getAbsolutePath());
 		
-		if(!dirCom.exists()){dirCom.mkdir();}
-		if(!dirMysql.exists()){dirMysql.mkdir();}
-		if(!dirMain.exists()){dirMain.mkdir();}
+		if(!dirMain.exists()){dirMain.mkdirs();}
 		if(!moduleXml.exists())
 		{
 			String src = srcBaseDir+"/"+product+"/"+version+"/mysql.xml";
@@ -132,15 +133,13 @@ public class JbossModuleConfigurator
 	
 	public void mariaDB() throws IOException
 	{
-		File dirOrg = buildMobuleBase("org");
-		File dirMaria = new File(dirOrg,"mariadb");
+		File dirMaria = new File(jbossBaseDir,buildMobuleBase("org/mariadb"));
 		File dirMain = new File(dirMaria,"main");
 		File moduleXml = new File(dirMain,"module.xml");
 		
 		logger.debug(moduleXml.getAbsolutePath());
 		
-		if(!dirOrg.exists()){dirOrg.mkdir();}
-		if(!dirMaria.exists()){dirMaria.mkdir();}
+		if(!dirMaria.exists()){dirMaria.mkdirs();}
 		if(!dirMain.exists()){dirMain.mkdir();}
 		if(!moduleXml.exists())
 		{
@@ -162,7 +161,7 @@ public class JbossModuleConfigurator
 	
 	public void envers() throws IOException
 	{
-		File hibernateBase = buildMobuleBase("org"+File.separator+"hibernate"+File.separator+"envers");
+		File hibernateBase = new File(jbossBaseDir,buildMobuleBase("org"+File.separator+"hibernate"+File.separator+"envers"));
 		File moduleMain = new File(hibernateBase,"main");
 		File moduleXml = new File(moduleMain,"module.xml");
 		
@@ -181,7 +180,7 @@ public class JbossModuleConfigurator
 	
 	public void hibernate() throws IOException
 	{
-		File hibernateBase = buildMobuleBase("org/hibernate");
+		File hibernateBase = new File(jbossBaseDir,buildMobuleBase("org"+File.separator+"hibernate"));
 		File moduleMain = new File(hibernateBase,"main");
 		File moduleXml = new File(moduleMain,"module.xml");
 		
@@ -190,28 +189,31 @@ public class JbossModuleConfigurator
 		
 		String src = srcBaseDir+"/"+product+"/"+version+"/hibernate.xml";
 		InputStream input = mrl.searchIs(src);
-		FileUtils.copyInputStreamToFile(input, moduleXml);
-		System.out.println("Copy "+src+" to "+moduleXml.getAbsolutePath());
 		
 		if(version.equals("6.3"))
 		{
+			FileUtils.copyInputStreamToFile(input, moduleXml);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("com.vividsolutions:jts:1.12"),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.hibernate:hibernate-spatial:4.0-M1"),moduleMain);
 		}
 		else if(version.equals("7.0"))
 		{
+			FileUtils.copyInputStreamToFile(input, moduleXml);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("com.vividsolutions:jts:1.13"),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.geolatte:geolatte-geom:1.0.1"),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.hibernate:hibernate-spatial:5.0.9.Final"),moduleMain);
 		}
 		else if(version.equals("7.1"))
 		{
+			FileUtils.copyInputStreamToFile(input, moduleXml);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.hibernate:hibernate-spatial:5.1.12.Final"),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.geolatte:geolatte-geom:1.0.6"),moduleMain);
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("com.vividsolutions:jts:1.13"),moduleMain);
 		}
 		else if(version.equals("7.2"))
 		{
+			FileUtils.copyInputStreamToFile(input, moduleXml);
+			
 			//Should match the hibernate version of EAP7.2.x
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.hibernate:hibernate-spatial:5.3.15.Final"),moduleMain);
 			
@@ -223,6 +225,8 @@ public class JbossModuleConfigurator
 		}
 		else if(version.equals("7.3"))
 		{
+			FileUtils.copyInputStreamToFile(input, moduleXml);
+			
 			//Should match the hibernate version of EAP7.2.x
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.hibernate:hibernate-spatial:5.3.18.Final"),moduleMain);
 			
@@ -236,14 +240,17 @@ public class JbossModuleConfigurator
 		}
 		else if(version.equals("8.0"))
 		{
+			logger.warn("EAP 8 hibernate still deactivated");
+//			FileUtils.copyInputStreamToFile(input, moduleXml);
+			
 			//Should match the hibernate version of EAP 8.0
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.hibernate.orm:hibernate-spatial:6.1.4.Final"),moduleMain);
+//			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.hibernate.orm:hibernate-spatial:6.1.4.Final"),moduleMain);
 			
 			//Find the version in hibernate-spatial
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.geolatte:geolatte-geom:1.8.2"),moduleMain);
+//			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.geolatte:geolatte-geom:1.8.2"),moduleMain);
 			
 			//Find the version in geolatte-geom
-			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.locationtech.jts:jts-core:1.18.0"),moduleMain);
+//			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.locationtech.jts:jts-core:1.18.0"),moduleMain);
 //			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.hibernate.common:hibernate-commons-annotations:5.1.0.Final"),moduleMain);
 		}
 		else
@@ -252,14 +259,14 @@ public class JbossModuleConfigurator
 		}
 	}
 	
-	private File buildMobuleBase(String packageId)
+	private String buildMobuleBase(String packageId)
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("modules");
 		sb.append(File.separator).append("system");
 		sb.append(File.separator).append("layers");
 		sb.append(File.separator).append("base");
 		sb.append(File.separator).append(packageId);
-		return new File(jbossBaseDir,sb.toString());
+		return sb.toString();
 	}
 }

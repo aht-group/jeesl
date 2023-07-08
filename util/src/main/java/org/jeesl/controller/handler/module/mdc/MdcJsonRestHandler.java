@@ -61,7 +61,7 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(MdcJsonRestHandler.class);
 	
-	private final JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM,ACON,ADATA> fAttribute;
+	private final JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM,ACON,ADATA> fAttribute;
 	
 	private final MdcFactoryBuilder<L,D,LOC,?,COLLECTION,SCOPE,STATUS,CDATA,ASET,ACON> fbMdc;
 	private final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM,ACON,ADATA> fbAttribute;
@@ -76,7 +76,7 @@ public class MdcJsonRestHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	public MdcJsonRestHandler(MdcFactoryBuilder<L,D,LOC,?,COLLECTION,SCOPE,STATUS,CDATA,ASET,ACON> fbMdc,
 								IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM,ACON,ADATA> fbAttribute,
-								JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM,ACON,ADATA> fAttribute,
+								JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,ASET,AITEM,ACON,ADATA> fAttribute,
 								String localeCode)
 	{
 		this.fbMdc=fbMdc;

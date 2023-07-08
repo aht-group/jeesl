@@ -1,4 +1,4 @@
-package org.jeesl.controller.config.jboss;
+package org.jeesl.controller.processor;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -9,6 +9,7 @@ import org.jboss.as.controller.client.OperationBuilder;
 import org.jboss.as.controller.client.helpers.ClientConstants;
 import org.jboss.dmr.ModelNode;
 import org.jeesl.JeeslBootstrap;
+import org.jeesl.processor.JbossStandaloneConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,7 +23,7 @@ public class CliJbossStandaloneConfigurator
 	public CliJbossStandaloneConfigurator() throws UnknownHostException
 	{
 		client = ModelControllerClient.Factory.create(InetAddress.getByName("localhost"), 9990);
-		jbossStandalone = new JbossStandaloneConfigurator(client);
+		jbossStandalone = new JbossStandaloneConfigurator("7.3",client);
 	}
 	
 	public void dsExists() throws IOException

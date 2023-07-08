@@ -51,7 +51,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoAttributePoolGwc.class);
 	
-	protected JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fAttribute;
+	protected JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fAttribute;
 	protected JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute;
 	
 	protected final IoAttributeFactoryBuilder<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fbAttribute;
@@ -92,7 +92,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp,
-								JeeslIoAttributeFacade<L,D,R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fAttribute,
+								JeeslIoAttributeFacade<R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> fAttribute,
 								JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute,
 								JeeslFacesMessageBean bMessage, R realm)
 	{
