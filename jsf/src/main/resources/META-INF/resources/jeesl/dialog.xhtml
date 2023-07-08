@@ -39,7 +39,9 @@
 	            </c:if>
 			</f:facet>
 			<composite:insertChildren/>
-			<f:facet name="footer"><composite:renderFacet name="footer"/></f:facet>
+			<c:if test="#{not empty cc.facets.footer}">
+				<f:facet name="footer"><composite:renderFacet name="footer"/></f:facet>
+			</c:if>
 		</p:dialog>
 
    </composite:implementation>
