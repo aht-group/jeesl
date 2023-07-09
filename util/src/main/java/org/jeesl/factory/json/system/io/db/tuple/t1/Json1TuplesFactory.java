@@ -35,7 +35,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	public Json1TuplesFactory(Class<A> cA) {this(null,cA);}
 	
 	@Deprecated //This should not be used, the Facade should be activated manually (via the query.isTupleLoad() or later in the TupleHandler
-	public Json1TuplesFactory(JeeslFacade fUtils, Class<A> cA)
+	private Json1TuplesFactory(JeeslFacade fUtils, Class<A> cA)
 	{
 		this.cA=cA;
 		this.fUtils=fUtils;

@@ -112,7 +112,7 @@ public interface JeeslFacade extends JeeslIdFacade
 	<T extends EjbMergeable> T mergeTransaction(T o) throws JeeslConstraintViolationException, JeeslLockingException;
 	
 	<T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException,JeeslLockingException;
-	<T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException,JeeslLockingException;
+//	<T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException,JeeslLockingException;
 	<T extends EjbSaveable> void save(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException;
 	<T extends EjbSaveable> T saveTransaction(T o) throws JeeslConstraintViolationException,JeeslLockingException;
 	<T extends EjbSaveable> void saveTransaction(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException;

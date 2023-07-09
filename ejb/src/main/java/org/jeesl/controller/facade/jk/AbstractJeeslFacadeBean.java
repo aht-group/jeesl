@@ -85,7 +85,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	@Override public <T extends EjbMergeable> T merge(T o) throws JeeslConstraintViolationException, JeeslLockingException{return fJeesl.merge(o);}
 	
 	@Override public <T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException,JeeslLockingException {return fJeesl.save(o);}
-	@Override public <T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException,JeeslLockingException {return fJeesl.save3(o);}
+//	@Override public <T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException,JeeslLockingException {return fJeesl.save3(o);}
 	public <T extends EjbWithId> T saveProtected(T o) throws JeeslConstraintViolationException,JeeslLockingException {return fJeesl.saveProtected(o);}
 	
 	public <T extends Object> T persist(T o) throws JeeslConstraintViolationException {return fJeesl.persist(o);}

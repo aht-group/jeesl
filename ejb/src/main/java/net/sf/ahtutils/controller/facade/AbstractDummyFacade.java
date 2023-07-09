@@ -119,12 +119,8 @@ public class AbstractDummyFacade implements JeeslFacade
 		return null;
 	}
 
-	@Override
-	public <T extends EjbSaveable> T save(T o)
-			throws JeeslConstraintViolationException, JeeslLockingException {
-
-		return null;
-	}
+	@Override public <T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException, JeeslLockingException {return null;}
+//	@Override public <T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException, JeeslLockingException {return null;}
 
 	@Override
 	public <T> T persist(T o) throws JeeslConstraintViolationException {
@@ -550,11 +546,7 @@ public class AbstractDummyFacade implements JeeslFacade
 	    return null;
 	}
 
-	@Override
-	public <T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException, JeeslLockingException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 
 
