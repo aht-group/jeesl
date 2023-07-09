@@ -8,7 +8,7 @@ import javax.crypto.SecretKey;
 import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.io.JeeslIoCryptoFacade;
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.handler.system.io.crypto.JeeslMemoryKeyStore;
 import org.jeesl.factory.builder.io.IoCryptoFactoryBuilder;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;

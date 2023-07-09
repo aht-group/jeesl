@@ -3,7 +3,7 @@ package org.jeesl.controller.facade.io;
 import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.io.JeeslIoNewsletterFacade;
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.factory.builder.io.IoNewsletterFactoryBuilder;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterCategory;
 import org.jeesl.interfaces.model.io.mail.newsletter.JeeslNewsletterRecipient;

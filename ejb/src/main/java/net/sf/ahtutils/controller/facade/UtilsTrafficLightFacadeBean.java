@@ -5,7 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.system.graphic.JeeslTrafficLightFacade;
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;

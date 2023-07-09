@@ -551,7 +551,7 @@ public class AbstractDummyFacade implements JeeslFacade
 	}
 
 	@Override
-	public <T extends EjbSaveable> T save2(T o) throws JeeslConstraintViolationException, JeeslLockingException {
+	public <T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException, JeeslLockingException {
 		// TODO Auto-generated method stub
 		return null;
 	}

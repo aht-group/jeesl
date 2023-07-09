@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade;
+package org.jeesl.controller.facade.jx;
 
 import java.util.Date;
 import java.util.List;
@@ -84,7 +84,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	@Override public <T extends EjbMergeable> T merge(T o) throws JeeslConstraintViolationException, JeeslLockingException{return fJeesl.merge(o);}
 	
 	@Override public <T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException,JeeslLockingException {return fJeesl.save(o);}
-	@Override public <T extends EjbSaveable> T save2(T o) throws JeeslConstraintViolationException,JeeslLockingException {return fJeesl.save2(o);}
+	@Override public <T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException,JeeslLockingException {return fJeesl.save3(o);}
 	public <T extends EjbWithId> T saveProtected(T o) throws JeeslConstraintViolationException,JeeslLockingException {return fJeesl.saveProtected(o);}
 	
 	public <T extends Object> T persist(T o) throws JeeslConstraintViolationException {return fJeesl.persist(o);}
@@ -198,11 +198,7 @@ public class AbstractJeeslFacadeBean implements JeeslFacade
 	//Visibility
 	@Override public <T extends EjbWithVisible, P extends EjbWithId> List<T> allVisible(Class<T> cl) {return fJeesl.allVisible(cl);}
 
-	@Override
-	public <L extends JeeslLang, T extends EjbWithId> List<T> fByNameAndLang(Class<T> type, Class<L> langType,
-			String lang, String name) throws JeeslNotFoundException {
-		return fJeesl.fByNameAndLang(type, langType, lang, name);
-	}
+	@Override public <L extends JeeslLang, T extends EjbWithId> List<T> fByNameAndLang(Class<T> cT, Class<L> cL, String lang, String name) throws JeeslNotFoundException {return fJeesl.fByNameAndLang(cT,cL,lang,name);}
 	
 	@Override public <W extends JeeslWithType<T>, T extends JeeslStatus<?, ?, T>> JsonTuples1<T> tpcWithType(Class<W> cWith,Class<T> cType) {return fJeesl.tpcWithType(cWith,cType);}
 

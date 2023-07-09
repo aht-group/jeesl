@@ -3,7 +3,7 @@ package org.jeesl.controller.facade.io;
 import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.io.JeeslIoDmsFacade;
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.factory.builder.io.IoDmsFactoryBuilder;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDms;
 import org.jeesl.interfaces.model.io.dms.JeeslIoDmsDocument;

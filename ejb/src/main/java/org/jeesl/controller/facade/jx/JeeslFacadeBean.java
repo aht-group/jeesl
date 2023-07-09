@@ -1,4 +1,4 @@
-package org.jeesl.controller.facade;
+package org.jeesl.controller.facade.jx;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -98,7 +98,7 @@ public class JeeslFacadeBean implements JeeslFacade
 
 	//Persist
 	@Override public <T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException,JeeslLockingException {return saveProtected(o);}
-	@Override public <T extends EjbSaveable> T save2(T o) throws JeeslConstraintViolationException,JeeslLockingException {return saveProtected2(o);}
+	@Override public <T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException,JeeslLockingException {return saveProtected2(o);}
 	@Override public <T extends EjbSaveable> T saveTransaction(T o) throws JeeslConstraintViolationException, JeeslLockingException{return saveProtected(o);}
 
 	@Override public <T extends EjbSaveable> void save(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException {for(T t : list){saveProtected(t);}}
@@ -235,7 +235,7 @@ public class JeeslFacadeBean implements JeeslFacade
 		return o;
 	}
 	
-	public <T extends Object> T update2(T o) throws JeeslConstraintViolationException, JeeslLockingException
+	private <T extends Object> T update2(T o) throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		try
 		{

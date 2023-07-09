@@ -13,7 +13,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.JeeslRmmvFacade;
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.factory.builder.module.RmmvFactoryBuilder;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvClassification;
 import org.jeesl.interfaces.model.module.rmmv.JeeslRmmvElement;

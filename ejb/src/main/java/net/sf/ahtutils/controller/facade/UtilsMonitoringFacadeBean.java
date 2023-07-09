@@ -3,7 +3,7 @@ package net.sf.ahtutils.controller.facade;
 import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.module.JeeslMonitoringFacade;
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

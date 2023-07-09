@@ -7,7 +7,7 @@ import net.sf.ahtutils.bootstrap.UtilsMonitorBootstrap;
 import net.sf.ahtutils.monitor.task.AnalysisTask;
 import net.sf.ahtutils.monitor.worker.MonitoringTaskBuilder;
 
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.monitoring.result.net.IcmpResult;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.joda.time.Duration;

@@ -3,7 +3,7 @@ package org.jeesl.controller.facade.module;
 import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.module.JeeslFeedbackFacade;
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.interfaces.model.module.feedback.JeeslFeedback;
 import org.jeesl.interfaces.model.module.feedback.JeeslFeedbackThread;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

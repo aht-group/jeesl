@@ -18,7 +18,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.io.JeeslIoFrFacade;
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryAmazonS3;
 import org.jeesl.controller.handler.system.io.fr.storage.FileRepositoryFileStorage;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;

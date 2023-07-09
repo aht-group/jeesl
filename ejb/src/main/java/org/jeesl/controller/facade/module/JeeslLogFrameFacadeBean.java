@@ -3,7 +3,7 @@ package org.jeesl.controller.facade.module;
 import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.module.JeeslLogframeFacade;
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.factory.builder.module.LfFactoryBuilder;
 import org.jeesl.interfaces.model.module.lf.JeeslLfConfiguration;
 import org.jeesl.interfaces.model.module.lf.JeeslLfLogframe;

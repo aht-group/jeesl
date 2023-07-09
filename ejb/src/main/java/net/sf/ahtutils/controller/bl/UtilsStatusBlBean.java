@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 import javax.persistence.EntityManager;
 
-import org.jeesl.controller.facade.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
