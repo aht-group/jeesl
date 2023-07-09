@@ -60,7 +60,7 @@
          	<scope>provided</scope>
 		</dependency>  
          
-         <!-- JakartaEE -->
+         <!-- JakartaEE 10 -->
          <dependency>
 			<groupId>jakarta.inject</groupId>
 			<artifactId>jakarta.inject-api</artifactId>
@@ -71,11 +71,13 @@
 			<groupId>jakarta.ejb</groupId>
 			<artifactId>jakarta.ejb-api</artifactId>
 			<version>4.0.1</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>jakarta.persistence</groupId>
 			<artifactId>jakarta.persistence-api</artifactId>
 			<version>3.1.0</version>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- JakartaEE 8 -->

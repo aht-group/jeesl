@@ -21,7 +21,6 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.Session;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -29,7 +28,6 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.facade.ParentPredicate;
-import org.jeesl.interfaces.model.io.crypto.JeeslWithCrypto;
 import org.jeesl.interfaces.model.marker.EjbEquals;
 import org.jeesl.interfaces.model.marker.jpa.EjbMergeable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -98,8 +96,7 @@ public class JeeslFacadeBean implements JeeslFacade
 
 	//Persist
 	@Override public <T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException,JeeslLockingException {return saveProtected(o);}
-//	@Override public <T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException,JeeslLockingException {return saveProtected3(o);}
-	@Override public <T extends EjbSaveable> T saveTransaction(T o) throws JeeslConstraintViolationException, JeeslLockingException{return saveProtected(o);}
+	@Override public <T extends EjbSaveable> T saveTransaction(T o) throws JeeslConstraintViolationException, JeeslLockingException {return saveProtected(o);}
 
 	@Override public <T extends EjbSaveable> void save(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException {for(T t : list){saveProtected(t);}}
 	@Override public <T extends EjbSaveable> void saveTransaction(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException {for(T t : list){saveProtected(t);}}
@@ -119,11 +116,6 @@ public class JeeslFacadeBean implements JeeslFacade
 //		if(o instanceof JeeslWithCrypto) {throw new JeeslConstraintViolationException("A "+JeeslWithCrypto.class.getSimpleName()+" has to be saved with saveCrypto()");}
 		if(o.getId()==0){return this.persist(o);}
 		else{return this.update(o);}
-	}
-	private <T extends EjbWithId> T saveProtected3(T o) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		if(o.getId()==0){return this.persist(o);}
-		else{return this.update3(o);}
 	}
 
 	@Override public <T extends Object> T persist(T o) throws JeeslConstraintViolationException
@@ -203,31 +195,6 @@ public class JeeslFacadeBean implements JeeslFacade
 			{
 				if(e.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {throw new JeeslConstraintViolationException(e.getCause().getMessage());}
 				else {System.err.println("This Error is not handled: "+e.getClass().getName()); e.printStackTrace();}
-			}
-			System.err.println("(end) This Error is not handled: "+e.getClass().getName()); e.printStackTrace();
-		}
-		return o;
-	}
-	
-	private <T extends Object> T update3(T o) throws JeeslConstraintViolationException, JeeslLockingException
-	{
-		try
-		{
-			if(handleTransaction){em.getTransaction().begin();}
-			em.unwrap(Session.class).update(o);
-			em.flush();
-			if(handleTransaction){em.getTransaction().commit();}
-		}
-		catch (Exception e)
-		{
-			if(handleTransaction){em.getTransaction().rollback();}
-
-			if(e instanceof javax.validation.ConstraintViolationException) {throw new JeeslConstraintViolationException(e.getMessage());}
-			if(e instanceof javax.persistence.OptimisticLockException) {throw new JeeslLockingException(e.getMessage());}
-			if(e instanceof javax.persistence.PersistenceException)
-			{
-				if(e.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {throw new JeeslConstraintViolationException(e.getCause().getMessage());}
-				else {System.err.println("This Error is not handled: "+e.getClass().getName());e.printStackTrace();}
 			}
 			System.err.println("(end) This Error is not handled: "+e.getClass().getName()); e.printStackTrace();
 		}

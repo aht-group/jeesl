@@ -4,11 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public class ParentPredicate <P extends EjbWithId> implements Serializable
@@ -38,9 +33,14 @@ public class ParentPredicate <P extends EjbWithId> implements Serializable
 		return pp;
 	}
 	
-	public <T extends EjbWithId> Predicate to(CriteriaBuilder cB, Root<T> from)
+//	public <T extends EjbWithId> jakarta.persistence.criteria.Predicate to(jakarta.persistence.criteria.CriteriaBuilder cB, jakarta.persistence.criteria.Root<T> from)
+//	{
+//		jakarta.persistence.criteria.Path<Object> pPath = from.get(name);
+//		return cB.equal(pPath, parent.getId());
+//	}
+	public <T extends EjbWithId> javax.persistence.criteria.Predicate to(javax.persistence.criteria.CriteriaBuilder cB, javax.persistence.criteria.Root<T> from)
 	{
-		Path<Object> pPath = from.get(name);
+		javax.persistence.criteria.Path<Object> pPath = from.get(name);
 		return cB.equal(pPath, parent.getId());
 	}
 	
@@ -61,11 +61,22 @@ public class ParentPredicate <P extends EjbWithId> implements Serializable
 		return new ArrayList<ParentPredicate<T>>();
 	}
 	
-	public static <T extends EjbWithId, P extends EjbWithId> Predicate[] array(CriteriaBuilder cB, Root<T> from, List<ParentPredicate<P>> list)
+//	public static <T extends EjbWithId, P extends EjbWithId> jakarta.persistence.criteria.Predicate[] array(jakarta.persistence.criteria.CriteriaBuilder cB, jakarta.persistence.criteria.Root<T> from, List<ParentPredicate<P>> list)
+//	{
+//		int size=0;
+//		if(list!=null){size = list.size();}
+//		jakarta.persistence.criteria.Predicate[] result = new jakarta.persistence.criteria.Predicate[size];
+//		for(int i=0;i<size;i++)
+//		{
+//			result[i] = list.get(i).to(cB, from);
+//		}
+//		return result;
+//	}
+	public static <T extends EjbWithId, P extends EjbWithId> javax.persistence.criteria.Predicate[] array(javax.persistence.criteria.CriteriaBuilder cB, javax.persistence.criteria.Root<T> from, List<ParentPredicate<P>> list)
 	{
 		int size=0;
 		if(list!=null){size = list.size();}
-		Predicate[] result = new Predicate[size];
+		javax.persistence.criteria.Predicate[] result = new javax.persistence.criteria.Predicate[size];
 		for(int i=0;i<size;i++)
 		{
 			result[i] = list.get(i).to(cB, from);

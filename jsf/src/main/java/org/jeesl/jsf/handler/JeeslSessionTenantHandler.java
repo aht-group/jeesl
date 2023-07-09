@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.jeesl.exception.jsf.JeeslSessionInitialisationException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.slf4j.Logger;
@@ -44,10 +45,10 @@ public class JeeslSessionTenantHandler <CTX extends JeeslSecurityContext<?,?>>
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.append(JeeslSessionTenantHandler.class.getSimpleName()).append(" is throwing a ");
-			sb.append(RuntimeException.class.getSimpleName()).append(", then the SeesionTenantBean is newly created");
+			sb.append(JeeslSessionInitialisationException.class.getSimpleName()).append(", then the SeesionTenantBean is newly created");
 			logger.warn(FacesContext.class.getSimpleName()+" is null");
 			logger.warn(sb.toString());
-			throw new RuntimeException(sb.toString());
+			throw new JeeslSessionInitialisationException(sb.toString());
 		}
 		
 		ExternalContext externalContext = null;
