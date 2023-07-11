@@ -12,8 +12,9 @@
 <jp:grid id="grid">
 	<j:slot width="6">
 		<h:form>
-			<p:dataTable var="s" value="#{cc.attrs.bean.systems}"
-						 selection="#{cc.attrs.bean.system}" selectionMode="single" rowKey="#{s.id}">
+			<p:dataTable styleClass="jeesl-datatable"
+					var="s" value="#{cc.attrs.bean.systems}"
+					selection="#{cc.attrs.bean.system}" selectionMode="single" rowKey="#{s.id}">
 				<f:facet name="header">
 					<j:dtHeader entity="IoSsiSystem" code="listOf">
 						<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addSystem()}" update=":#{cc.id}:grid"/>
@@ -60,8 +61,9 @@
 			</p:panel>
 		</h:form>
 		<h:form id="fCredentials" rendered="#{not empty cc.attrs.bean.system}">
-			<p:dataTable var="c" value="#{cc.attrs.bean.credentials}"
-						 selection="#{cc.attrs.bean.credential}" selectionMode="single" rowKey="#{c.id}">
+			<p:dataTable styleClass="jeesl-datatable"
+					var="c" value="#{cc.attrs.bean.credentials}"
+					selection="#{cc.attrs.bean.credential}" selectionMode="single" rowKey="#{c.id}">
 				<f:facet name="header">
 					<j:dtHeader entity="IoSsiCredential" code="listOf">
 						<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential"/>
@@ -90,6 +92,9 @@
 					<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteCredential()}" update=":#{cc.id}:fCredentials :#{cc.id}:fCredential" rendered="#{cc.attrs.bean.credential.id gt 0}"/>
 				</f:facet>
 				<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					
+					<jtp:label entity="IoSsiCredential" code="id"/>
+					<h:outputText value="#{cc.attrs.bean.credential.id}"/>
 					
 					<jtp:label entity="IoSsiCredential" code="code"/>
 					<p:inputText value="#{cc.attrs.bean.credential.code}" autocomplete="off"/>

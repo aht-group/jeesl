@@ -25,5 +25,5 @@ public interface JeeslSecurityIcon <L extends JeeslLang, D extends JeeslDescript
 					EjbWithCodeGraphic<G>,
 					JeeslStatus<L,D,S>
 {
-	public enum Code{loginRequired,sessionExpired,sccessDenied}
+	public enum Code{loginRequired,sessionExpired,sccessDenied,pageDeativated}
 }
