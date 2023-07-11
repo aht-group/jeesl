@@ -808,8 +808,6 @@ html, body, .ui-widget {
 
 @mixin jeesl-titlebar {
 	border-radius: $border-radius-top;
-	border-width: 0;
-	margin: 0 0 $header-element-underline-mobile 0;
 	min-height: $element-height-mobile;
 }
 
@@ -922,6 +920,10 @@ html, body, .ui-widget {
 			}
 		}
 	}
+}
+
+@mixin jeesl-ck-editor {
+	
 }
 
 @mixin input-grid {
@@ -1071,12 +1073,38 @@ html, body, .ui-widget {
 	}
 }
 
+@mixin jeesl-ck-editor {
+	.jeesl-ck-editor {
+		padding: 0;
+		
+		.cke .cke_inner {
+			.cke_top .cke_toolbar .cke_toolgroup .cke_button {
+				@include button;
+				
+				min-width: $element-height-mobile;
+				
+				.cke_button_icon {
+					font-size: 1.5em;
+				}
+			}
+			
+			.cke_content {
+				padding: $regular-spacing;
+			}
+		}
+	}
+}
+
 @mixin jeesl-panel {
 	@include jeesl-editor-layout;
 	@include jeesl-panel-titlebar;
 	
 	&:not(.html-container-panel) .ui-panel-content {
 		padding: $regular-spacing $wide-spacing;
+	}
+	
+	&.jeesl-editor .ui-panel-content {
+		@include jeesl-ck-editor;
 	}
 	
 	&.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper {
@@ -1294,6 +1322,8 @@ html, body, .ui-widget {
 	}
 
 	.ui-dialog-content {
+		@include jeesl-ck-editor;
+		
 		padding: $wide-spacing;
 		margin: 0;
 		
@@ -1304,6 +1334,19 @@ html, body, .ui-widget {
 		.html-container {
 			> div > section {
 				padding: 0;
+			}
+		}
+		
+		.ui-texteditor, .jeesl-ck-editor {
+			margin-left: -$wide-spacing;
+			margin-right: -$wide-spacing;
+			
+			&:first-child {
+				margin-top: -$wide-spacing;
+			}
+			
+			&:last-child {
+				margin-bottom: -$wide-spacing;
 			}
 		}
 	}

@@ -289,19 +289,19 @@ template {
 .jeesl-greyscale {
   filter: grayscale(1); }
 
-.ui-corner-all, .timeline-event-box.ui-state-default.ui-corner-all:before, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before, .ui-chips-container .ui-chips-token.ui-corner-all:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-all:before, .fc .fc-button.ui-corner-all:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-all:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-all:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-all:before, .ui-fieldset .ui-fieldset-legend.ui-corner-all:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-all:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-all:before {
+.ui-corner-all, .timeline-event-box.ui-state-default.ui-corner-all:before, .ui-button.ui-state-default.ui-corner-all:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-all:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-all:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before, .ui-chips-container .ui-chips-token.ui-corner-all:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-all:before, .fc .fc-button.ui-corner-all:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-all:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-all:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-all:before, .ui-fieldset .ui-fieldset-legend.ui-corner-all:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-all:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-all:before, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-all:before {
   border-radius: 3px; }
 
-.ui-corner-top, .timeline-event-box.ui-state-default.ui-corner-top:before, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before, .ui-chips-container .ui-chips-token.ui-corner-top:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-top:before, .fc .fc-button.ui-corner-top:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-top:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-top:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-top:before, .ui-fieldset .ui-fieldset-legend.ui-corner-top:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-top:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-top:before {
+.ui-corner-top, .timeline-event-box.ui-state-default.ui-corner-top:before, .ui-button.ui-state-default.ui-corner-top:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-top:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-top:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-top:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-top:before, .ui-chips-container .ui-chips-token.ui-corner-top:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-top:before, .fc .fc-button.ui-corner-top:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-top:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-top:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-top:before, .ui-fieldset .ui-fieldset-legend.ui-corner-top:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-top:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-top:before, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-top:before {
   border-radius: 3px 3px 0 0; }
 
-.ui-corner-bottom, .timeline-event-box.ui-state-default.ui-corner-bottom:before, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before, .ui-chips-container .ui-chips-token.ui-corner-bottom:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-bottom:before, .fc .fc-button.ui-corner-bottom:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-bottom:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-bottom:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-bottom:before, .ui-fieldset .ui-fieldset-legend.ui-corner-bottom:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-bottom:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-bottom:before {
+.ui-corner-bottom, .timeline-event-box.ui-state-default.ui-corner-bottom:before, .ui-button.ui-state-default.ui-corner-bottom:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-bottom:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-bottom:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-bottom:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-bottom:before, .ui-chips-container .ui-chips-token.ui-corner-bottom:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-bottom:before, .fc .fc-button.ui-corner-bottom:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-bottom:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-bottom:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-bottom:before, .ui-fieldset .ui-fieldset-legend.ui-corner-bottom:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-bottom:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-bottom:before, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-bottom:before {
   border-radius: 0 0 3px 3px; }
 
-.ui-corner-left, .timeline-event-box.ui-state-default.ui-corner-left:before, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before, .ui-chips-container .ui-chips-token.ui-corner-left:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-left:before, .fc .fc-button.ui-corner-left:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-left:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-left:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-left:before, .ui-fieldset .ui-fieldset-legend.ui-corner-left:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-left:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-left:before {
+.ui-corner-left, .timeline-event-box.ui-state-default.ui-corner-left:before, .ui-button.ui-state-default.ui-corner-left:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-left:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-left:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-left:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-left:before, .ui-chips-container .ui-chips-token.ui-corner-left:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-left:before, .fc .fc-button.ui-corner-left:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-left:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-left:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-left:before, .ui-fieldset .ui-fieldset-legend.ui-corner-left:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-left:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-left:before, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-left:before {
   border-radius: 3px 0 0 3px; }
 
-.ui-corner-right, .timeline-event-box.ui-state-default.ui-corner-right:before, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before, .ui-chips-container .ui-chips-token.ui-corner-right:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-right:before, .fc .fc-button.ui-corner-right:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-right:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-right:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-right:before, .ui-fieldset .ui-fieldset-legend.ui-corner-right:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-right:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-right:before {
+.ui-corner-right, .timeline-event-box.ui-state-default.ui-corner-right:before, .ui-button.ui-state-default.ui-corner-right:before, .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-right:before, .ui-selectonemenu.ui-state-default .ui-selectonemenu-trigger.ui-corner-right:before, .ui-selectcheckboxmenu.ui-state-default .ui-selectcheckboxmenu-trigger.ui-corner-right:before, .ui-slider .ui-slider-handle.ui-state-default.ui-corner-right:before, .ui-chips-container .ui-chips-token.ui-corner-right:before, .ui-selectcheckboxmenu-multiple-container .ui-selectcheckboxmenu-token.ui-corner-right:before, .fc .fc-button.ui-corner-right:before, .ui-colorpicker-container .ui-colorpicker_hex > span.ui-corner-right:before, .ui-colorpicker-container .ui-colorpicker_field > span.ui-corner-right:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-right:before, .ui-fieldset .ui-fieldset-legend.ui-corner-right:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-right:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon.ui-corner-right:before, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-corner-right:before {
   border-radius: 0 3px 3px 0; }
 
 .ui-input-overlay {
@@ -4583,12 +4583,9 @@ body, .ui-widget {
               .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_toolbar_separator {
                 background: none;
                 border-left: 1px solid #ababab;
-                height: 22px;
+                height: 100%;
                 margin: 0;
                 width: 0; }
-                @media (max-width: 768px) {
-                  .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_toolbar_separator {
-                    height: 42px; } }
         .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_contents {
           padding: 5px 10px; }
           @media (max-width: 768px) {
@@ -6112,12 +6109,9 @@ body, .ui-widget {
                   .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_toolbar_separator {
                     background: none;
                     border-left: 1px solid #ababab;
-                    height: 22px;
+                    height: 100%;
                     margin: 0;
                     width: 0; }
-                    @media (max-width: 768px) {
-                      .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_toolbar_separator {
-                        height: 42px; } }
             .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_contents {
               padding: 5px 10px; }
               @media (max-width: 768px) {
@@ -7111,6 +7105,171 @@ body, .ui-widget {
     padding: 5px 10px;
     margin-bottom: 0;
     width: 100% !important; }
+    @media (max-width: 768px) {
+      .ui-dialog .ui-dialog-content .jeesl-ck-editor {
+        padding: 0; } }
+    .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke {
+      border: none;
+      border-radius: 3px;
+      box-sizing: border-box;
+      width: 100%; }
+      .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner {
+        border-radius: 3px; }
+        .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top {
+          background: transparent;
+          border: none;
+          border-radius: 3px 3px 0 0;
+          padding: 0; }
+          .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar {
+            display: flex;
+            float: none;
+            justify-content: right; }
+            .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup {
+              align-items: center;
+              display: flex;
+              padding: 0;
+              margin: 0; }
+              .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
+                height: 22px;
+                min-width: 15px;
+                background: linear-gradient(to bottom, #ededed, #c4c4c4);
+                border: 1px solid #ababab;
+                box-shadow: 0 -1px inset rgba(255, 255, 255, 0.8);
+                color: #333333;
+                cursor: pointer;
+                font-weight: 700;
+                line-height: normal;
+                padding: 0 5px;
+                text-align: center;
+                text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+                transition: border-color 0.2s linear, color 0.2s linear, text-shadow 0.2s linear;
+                z-index: 0;
+                border: 1px solid #ababab;
+                border-width: 0 0 1px;
+                box-sizing: border-box;
+                cursor: pointer;
+                min-width: 22px; }
+                @media (max-width: 768px) {
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
+                    height: 42px; } }
+                @media (max-width: 768px) {
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
+                    min-width: 30px; } }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:after {
+                  content: '';
+                  display: inline-block;
+                  height: 100%;
+                  vertical-align: middle; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button > * {
+                  display: inline-block;
+                  vertical-align: middle; }
+                @media (max-width: 768px) {
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
+                    padding: 0 10px;
+                    width: auto; } }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:before {
+                  background: #c4c4c4;
+                  content: '';
+                  height: 100%;
+                  left: 0;
+                  opacity: 0;
+                  position: absolute;
+                  top: 0;
+                  transition: background 0.2s linear, opacity 0.2s linear;
+                  width: 100%;
+                  z-index: -1; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-button-icon-only .ui-button-text {
+                  display: none; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.cke_button_on:before, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-state-hover:before, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:hover:before {
+                  opacity: 1;
+                  transition: background 0.2s linear, opacity 0.2s linear; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-state-hover:not(.cke_button_on):not(.ui-state-disabled):not(:disabled), .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:hover:not(.cke_button_on):not(.ui-state-disabled):not(:disabled) {
+                  background: linear-gradient(to bottom, #ededed, #c4c4c4);
+                  border-color: #ababab;
+                  box-shadow: none;
+                  color: #333333; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.ui-state-disabled, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:disabled {
+                  background: linear-gradient(to bottom, #ededed, #dedede);
+                  color: #c4c4c4;
+                  cursor: default;
+                  opacity: 1; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.cke_button_on {
+                  border-color: #00663a;
+                  color: white;
+                  text-shadow: none; }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.cke_button_on:focus {
+                    box-shadow: none; }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button.cke_button_on:before {
+                    background: #008a4e; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .ui-button-text {
+                  line-height: normal;
+                  padding: 2px 10px; }
+                @media (max-width: 768px) {
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button {
+                    min-width: 42px; } }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:first-child {
+                  border-left: 1px solid #ababab; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button:after {
+                  position: relative;
+                  margin: 0; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_label {
+                  display: none; }
+                .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon {
+                  background-image: none !important;
+                  color: inherit;
+                  display: inline-block;
+                  font-family: "Font Awesome 5 Free";
+                  font-size: inherit;
+                  font-weight: 700;
+                  height: auto;
+                  line-height: normal;
+                  margin: 0;
+                  position: relative;
+                  text-indent: 0;
+                  text-rendering: auto;
+                  transition: background 0.2s linear;
+                  top: 0;
+                  width: auto;
+                  -webkit-font-smoothing: antialiased;
+                  background: none !important;
+                  float: none;
+                  font-size: 0;
+                  font-weight: bold;
+                  text-align: center; }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon:before {
+                    font-size: inherit;
+                    vertical-align: top; }
+                    @media (max-width: 768px) {
+                      .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon:before {
+                        font-size: 2em; } }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon:before {
+                    font-size: 1rem; }
+                    @media (max-width: 768px) {
+                      .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon:before {
+                        font-size: 1.5rem; } }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon.cke_button__bold_icon:before {
+                    content: '\f032'; }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon.cke_button__italic_icon:before {
+                    content: '\f033'; }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon.cke_button__bulletedlist_icon:before {
+                    content: '\f0ca'; }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon.cke_button__numberedlist_icon:before {
+                    content: '\f0cb'; }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon.cke_button__subscript_icon:before {
+                    content: '\f12c'; }
+                  .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_button .cke_button_icon.cke_button__superscript_icon:before {
+                    content: '\f12b'; }
+              .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .cke_toolbar_separator {
+                background: none;
+                border-left: 1px solid #ababab;
+                height: 100%;
+                margin: 0;
+                width: 0; }
+        .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_contents {
+          padding: 5px 10px; }
+          @media (max-width: 768px) {
+            .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_contents {
+              padding: 10px; } }
     @media (max-width: 768px) {
       .ui-dialog .ui-dialog-content {
         margin: 0; } }
