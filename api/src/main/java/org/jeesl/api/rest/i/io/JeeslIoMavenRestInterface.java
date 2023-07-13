@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.i.io.maven;
+package org.jeesl.api.rest.i.io;
 
 import org.jeesl.model.json.io.maven.JsonMavenGraph;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;

@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.i.io.label;
+package org.jeesl.api.rest.i.io;
 
 import org.jeesl.model.xml.system.revision.Entities;
 

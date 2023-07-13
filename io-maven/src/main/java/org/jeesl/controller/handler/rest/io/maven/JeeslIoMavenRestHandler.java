@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
-import org.jeesl.api.rest.i.io.maven.JeeslIoMavenRestInterface;
+import org.jeesl.api.rest.i.io.JeeslIoMavenRestInterface;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;

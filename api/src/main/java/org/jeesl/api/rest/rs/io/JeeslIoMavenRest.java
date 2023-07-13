@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.rs.io.maven;
+package org.jeesl.api.rest.rs.io;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -6,7 +6,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jeesl.api.rest.i.io.maven.JeeslIoMavenRestInterface;
+import org.jeesl.api.rest.i.io.JeeslIoMavenRestInterface;
 import org.jeesl.model.json.io.maven.JsonMavenGraph;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 
