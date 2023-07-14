@@ -25,9 +25,6 @@ xmlns:aup="http://ahtutils.sourceforge.net/prototype"
 						<f:attribute name="styleClass" value="jeesl-greyscale jeesl-menu-bar-button-icon"/>
 					</c:if>
 				</h:graphicImage>
-				<c:if test="#{cc.attrs.handler.noRoles}">
-					<p:tooltip rendered="#{cc.attrs.handler.noRoles}" for="sbGiSecurity" value="#{msg.NoRoleSecurities}" />
-				</c:if>
 			</f:facet>
 			<span class="jeesl-dropdown-item-label">
 				<aup:sbCheckmark value="#{cc.attrs.handler.mapHasRole[var]}"/>

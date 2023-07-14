@@ -21,7 +21,7 @@
 			<j:row id="rowDocuments" rendered="#{(cc.attrs.bean.sbhCms.twiceSelected) or (empty cc.attrs.bean.cms) or  (cc.attrs.bean.cms.id eq 0)}">
 				<j:slot id="sDocuments" width="6">
 					<h:form id="fDocuments">
-						<p:dataTable var="d" value="#{cc.attrs.bean.sbhCms.list}" draggableRows="true"
+						<p:dataTable var="d" value="#{cc.attrs.bean.sbhCms.list}" draggableRows="true" styleClass="jeesl-datatable"
 							selection="#{cc.attrs.bean.cms}" selectionMode="single" rowKey="#{d.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslCmsDocuments}">
@@ -90,22 +90,22 @@
 									<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmSection()}" update=":#{cc.id}:sSection" rendered="#{cc.attrs.bean.cms.id gt 0}" tooltip="#{msg.ttDelete}" library="jeeslGfx"/>
 									<j:svg type="jeeslReset" listener="#{cc.attrs.bean.clearSectionCache()}" update=":#{cc.id}:fSection" rendered="#{cc.attrs.bean.cms.id gt 0}"/>
 								</f:facet>
-								<p:panelGrid columns="6" columnClasses="jeeslGrid10,jeeslGrid10,jeeslGrid10,jeeslGrid10,jeeslGrid10,jeeslGrid60" >
+								<j:inputGrid>
 									<p:outputLabel value="#{msg.jeeslCmsVisible}"/>
 									<p:selectBooleanCheckbox value="#{cc.attrs.bean.section.visible}"/>
 									<p:outputLabel value="#{msg.jeeslId}"/>
 									<h:outputText value="#{cc.attrs.bean.section.id}"/>						
 									<p:outputLabel value="#{msg.jeeslCode}"/>
 									<jtp:inputText value="#{cc.attrs.bean.section.code}"/>
-								</p:panelGrid>
-								<p:panelGrid columns="2" columnClasses="jeeslGrid10,jeeslGrid90" >
+								</j:inputGrid>
+								<j:inputGrid>
 									<p:outputLabel value="#{msg.jeeslCmsSectionHeader}"/>
 									<jtp:inputText value="#{cc.attrs.bean.section.name[cc.attrs.bean.sbhLocale.selection.code].lang}"/>
-								</p:panelGrid>
+								</j:inputGrid>
 							</p:panel>
 						</h:form>
 						<h:form id="fElements" rendered="#{(not empty cc.attrs.bean.section) and (cc.attrs.bean.section.id gt 0)}">
-							<p:dataTable var="e" value="#{cc.attrs.bean.elements}" draggableRows="true"
+							<p:dataTable var="e" value="#{cc.attrs.bean.elements}" draggableRows="true" styleClass="jeesl-datatable"
 								selection="#{cc.attrs.bean.element}" selectionMode="single" rowKey="#{e.id}">
 								<f:facet name="header">
 									<j:dtHeader title="#{msg.jeeslCmsElements}">
@@ -130,7 +130,7 @@
 									<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveElement()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttSave}"/>
 									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteElement()}" update=":#{cc.id}:sSection" tooltip="#{msg.ttSave}"/>
 								</f:facet>
-								<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+								<j:inputGrid>
 									<p:outputLabel value="#{msg.jeeslCmsElementCategory}"/>
 									<p:selectOneMenu value="#{cc.attrs.bean.elementCategory}" effect="fade" >
 										<f:selectItems value="#{cc.attrs.bean.elementCategories}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
@@ -141,8 +141,8 @@
 										<f:selectItems value="#{cc.attrs.bean.types}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 										<p:ajax event="change" update=":#{cc.id}:fElement"/>
 									</p:selectOneMenu>
-								</p:panelGrid>
-								<p:separator/>
+								</j:inputGrid>
+								<p:separator rendered="#{(cc.attrs.bean.element.type.code eq 'systemStatusTable')}"/>
 								<j:jsonPropertyEditor for="org.jeesl.model.json.system.io.cms.JsonCmsStatusTable" value="#{cc.attrs.bean.jsonString}" rendered="#{(cc.attrs.bean.element.type.code eq 'systemStatusTable')}"/>
 							</p:panel>
 						</h:form>
@@ -155,10 +155,10 @@
 										<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveElement()}" update=":@form" tooltip="#{msg.ttSave}"/>
 									</f:facet>
 									<p:messages for="document" redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-									<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+									<j:inputGrid>
 										<p:outputLabel value="#{msg.jeeslCmsElementJson}"/>
 										<p:inputText value="#{cc.attrs.bean.element.json}"/>
-									</p:panelGrid>
+									</j:inputGrid>
 								</p:panel>
 							</h:form>
 						

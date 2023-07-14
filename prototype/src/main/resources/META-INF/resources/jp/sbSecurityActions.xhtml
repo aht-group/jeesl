@@ -28,9 +28,6 @@
 						<f:attribute name="styleClass" value="jeesl-menu-bar-button-icon jeesl-greyscale"/>
 					</c:if>
 				</h:graphicImage>
-				<c:if test="#{cc.attrs.handler.noActions}">
-					<p:tooltip rendered="#{cc.attrs.handler.noActions}" for="sbGiSecurity" value="#{msg.ttJeeslSecurityNoPageSpecifcActionsDefined}" />
-				</c:if>
 			</f:facet>
 			<span class="jeesl-dropdown-item-label">
 				<aup:sbCheckmark value="#{cc.attrs.handler.mapIdAllow[var.id]}"/>

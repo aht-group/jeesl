@@ -1193,6 +1193,130 @@ $enable-pointer-cursor-for-buttons: true;
 //	}
 }
 
+@mixin jeesl-ck-editor {
+	.jeesl-ck-editor {
+		@media (max-width: 768px) {
+			padding: 0;
+		}
+		
+		.cke {
+			border: none;
+			border-radius: $border-radius;
+			box-sizing: border-box;
+			width: 100%;
+			
+			.cke_inner {
+				border-radius: $border-radius;
+			
+				.cke_top {
+					background: transparent;
+					border: none;
+					border-radius: $border-radius-top;
+					padding: 0;
+					
+					.cke_toolbar {
+						display: flex;
+						float: none;
+							justify-content: right;
+							
+						.cke_toolgroup {
+							align-items: center;
+							display: flex;
+							padding: 0;
+							margin: 0;
+								
+							.cke_button {
+								@include button(cke_button_on);
+								
+								border: $border;
+								border-width: 0 0 $border-width;
+								box-sizing: border-box;
+								cursor: pointer;
+								min-width: $element-height;
+								
+								@media (max-width: 768px) {
+									min-width: $element-height-mobile;
+								}
+								
+								&:first-child {
+									border-left: $border;
+								}
+								
+								&:after {
+									position: relative;
+									margin: 0;
+								}
+								
+								.cke_button_label {
+									display: none;
+								}
+								
+								.cke_button_icon {
+									@include icon;
+									
+									background: none !important;
+									float: none;
+									font-size: 0;
+									font-weight: bold;
+									text-align: center;
+									
+									&:before {
+										font-size: 1rem;
+										
+										@media (max-width: 768px) {
+											font-size: 1.5rem;
+										}
+									}
+									
+									&.cke_button__bold_icon:before {
+										content: '\f032';
+									}
+									
+									&.cke_button__italic_icon:before {
+										content: '\f033';
+									}
+									
+									&.cke_button__bulletedlist_icon:before {
+										content: '\f0ca';
+									}
+									
+									&.cke_button__numberedlist_icon:before {
+										content: '\f0cb';
+									}
+									
+									&.cke_button__subscript_icon:before {
+										content: '\f12c';
+									}
+									
+									&.cke_button__superscript_icon:before {
+										content: '\f12b';
+									}
+								}
+							}
+							
+							.cke_toolbar_separator {
+								background: none;
+								border-left: $border;
+								height: 100%;
+								margin: 0;
+								width: 0;
+							}
+						}
+					}
+				}
+				
+				.cke_contents {
+					padding: $half-spacing $regular-spacing;
+					
+					@media (max-width: 768px) {
+						padding: $regular-spacing;
+					}
+				}
+			}
+		}
+	}
+}
+
 @mixin jeesl-panel {
 	@include jeesl-editor-layout;
 	@include jeesl-panel-titlebar;
@@ -1216,138 +1340,8 @@ $enable-pointer-cursor-for-buttons: true;
 	&.jeesl-editor {
 		.ui-panel-content {
 			overflow: visible;
-			
-			.jeesl-ck-editor {
-				@media (max-width: 768px) {
-					padding: 0;
-				}
-				
-				.cke {
-					border: none;
-					border-radius: $border-radius;
-					box-sizing: border-box;
-					width: 100%;
-					
-					.cke_inner {
-						border-radius: $border-radius;
-					
-						.cke_top {
-							background: transparent;
-							border: none;
-							border-radius: $border-radius-top;
-							padding: 0;
-							
-							.cke_toolbar {
-								display: flex;
-								float: none;
-									justify-content: right;
-									
-								.cke_toolgroup {
-									align-items: center;
-									display: flex;
-									padding: 0;
-									margin: 0;
-										
-									.cke_button {
-										@include button(cke_button_on);
-										
-										border: $border;
-//										border-width: $border-width 0;
-										border-width: 0 0 $border-width;
-										box-sizing: border-box;
-										cursor: pointer;
-										min-width: $element-height;
-										
-										@media (max-width: 768px) {
-											min-width: $element-height-mobile;
-										}
-										
-										&:first-child {
-											border-left: $border;
-										}
-										
-//										&:last-child {
-//											border-right: $border;
-//											border-top-right-radius: $border-radius;
-//										}
-										
-										&:after {
-											position: relative;
-											margin: 0;
-										}
-										
-										.cke_button_label {
-											display: none;
-										}
-										
-										.cke_button_icon {
-											@include icon;
-											
-											background: none !important;
-											float: none;
-											font-size: 0;
-											font-weight: bold;
-											text-align: center;
-											
-											&:before {
-												font-size: 1rem;
-												
-												@media (max-width: 768px) {
-													font-size: 1.5rem;
-												}
-											}
-											
-											&.cke_button__bold_icon:before {
-												content: '\f032';
-											}
-											
-											&.cke_button__italic_icon:before {
-												content: '\f033';
-											}
-											
-											&.cke_button__bulletedlist_icon:before {
-												content: '\f0ca';
-											}
-											
-											&.cke_button__numberedlist_icon:before {
-												content: '\f0cb';
-											}
-											
-											&.cke_button__subscript_icon:before {
-												content: '\f12c';
-											}
-											
-											&.cke_button__superscript_icon:before {
-												content: '\f12b';
-											}
-										}
-									}
-									
-									.cke_toolbar_separator {
-										background: none;
-										border-left: $border;
-										height: $element-height;
-										margin: 0;
-										width: 0;
-										
-										@media (max-width: 768px) {
-											height: $element-height-mobile;
-										}
-									}
-								}
-							}
-						}
-						
-						.cke_contents {
-							padding: $half-spacing $regular-spacing;
-							
-							@media (max-width: 768px) {
-								padding: $regular-spacing;
-							}
-						}
-					}
-				}
-			}
+	
+			@include jeesl-ck-editor;
 		}
 	}
 	
@@ -3817,6 +3811,8 @@ body, .ui-widget {
 	}
 
 	.ui-dialog-content {
+		@include jeesl-ck-editor;
+		
 		padding: $half-spacing $regular-spacing;
 		margin-bottom: 0;
 		width: 100% !important; // Fix for primefaces incorrectly calculating width after resize.
