@@ -8,7 +8,7 @@ import java.util.Map;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
-import org.jeesl.interfaces.model.io.db.JeeslDbConnectionColumn;
+import org.jeesl.interfaces.model.io.db.pg.JeeslDbConnectionColumn;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
