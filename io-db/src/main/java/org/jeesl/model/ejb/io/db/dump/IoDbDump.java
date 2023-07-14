@@ -3,6 +3,7 @@ package org.jeesl.model.ejb.io.db.dump;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -52,7 +53,7 @@ public class IoDbDump implements JeeslDbDump<IoSsiSystem,IoDbDumpFile>
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="dump")
 	private List<IoDbDumpFile> files;
-	@Override public List<IoDbDumpFile> getFiles() {if(files==null){files = new ArrayList<>();}return files;}
+	@Override public List<IoDbDumpFile> getFiles() {if(Objects.isNull(files)){files = new ArrayList<>();} return files;}
 	@Override public void setFiles(List<IoDbDumpFile> files) {this.files = files;}
 	
 

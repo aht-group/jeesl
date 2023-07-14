@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
-@DiscriminatorValue("ioDbDS")
+@DiscriminatorValue("ioDbDumpStatus")
 @EjbErNode(name="Status",category="system",subset="db",level=3)
 public class IoDbDumpStatus extends IoStatus implements JeeslDbDumpStatus<IoLang,IoDescription,IoDbDumpStatus,IoGraphic>
 {
@@ -24,7 +24,7 @@ public class IoDbDumpStatus extends IoStatus implements JeeslDbDumpStatus<IoLang
 	@Override public List<String> getFixedCodes()
 	{
 		List<String> fixed = new ArrayList<>();
-		for(JeeslDbDumpStatus.Code c : JeeslDbDumpStatus.Code.values()){fixed.add(c.toString());}
+		for(JeeslDbDumpStatus.Code c : JeeslDbDumpStatus.Code.values()) {fixed.add(c.toString());}
 		return fixed;
 	}
 	
