@@ -62,6 +62,10 @@
 		<!-- JEESL Modles -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
+    		<artifactId>jeesl-io-ssi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
     		<artifactId>jeesl-io-locale</artifactId>
     		<scope>provided</scope>
 		</dependency>

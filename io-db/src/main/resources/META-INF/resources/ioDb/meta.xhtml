@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:ofx="http://www.openfuxml.org/jsf"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+		
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row id="rSnapshots">
+		<j:slot id="sSnapshots" width="6">
+			<h:form id="fSnapshots">
+				<p:dataTable styleClass="jeesl-datatable"
+							var="s" value="#{cc.attrs.ctrl.snapshots}" draggableRows="false"
+							selection="#{cc.attrs.ctrl.snapshot}" selectionMode="single" rowKey="#{s.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoDbMetaSnapshot" code="listOf">
+							
+						</j:dtHeader>	
+					</f:facet>
+					<p:ajax event="rowSelect"  listener="#{cc.attrs.ctrl.selectSnapshot()}" update=":#{cc.id}:rSnapshots"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="id"/></f:facet>
+						<h:outputText value="#{s.id}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="record"/></f:facet>
+						<jp:outputDate value="#{s.record}" withSecond="true"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sSnapshotSource" width="3">
+			<h:form id="fSnapshotSource" rendered="#{not empty cc.attrs.ctrl.snapshotSource}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoDbMetaSnapshot" code="source"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.process()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.magnetSource()}" update=":#{cc.id}:grid" rendered="#{not empty cc.attrs.ctrl.snapshot}"/>
+					</f:facet>
+					
+					<j:inputGrid>
+						<jtp:label entity="IoDbMetaSnapshot" code="record"/>
+						<jp:outputDate value="#{cc.attrs.ctrl.snapshotSource.record}" withSecond="true"/>
+					</j:inputGrid>
+				</p:panel>
+			</h:form>	
+		</j:slot>
+		<j:slot id="sSnapshotTarget" width="3">
+			<h:form id="fSnapshotTarget" rendered="#{not empty cc.attrs.ctrl.snapshotTarget}">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoDbMetaSnapshot" code="target"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.process()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.magnetTarget()}" update=":#{cc.id}:grid" rendered="#{not empty cc.attrs.ctrl.snapshot}"/>
+					</f:facet>
+					
+					<j:inputGrid>
+						<jtp:label entity="IoDbMetaSnapshot" code="record"/>
+						<jp:outputDate value="#{cc.attrs.ctrl.snapshotTarget.record}" withSecond="true"/>
+					</j:inputGrid>
+				</p:panel>
+			</h:form>	
+		</j:slot>
+	</j:row>
+	<j:row id="rTable">
+		<j:slot width="12">
+			<p:dataTable styleClass="jeesl-datatable"
+							var="t" value="#{cc.attrs.ctrl.tables}" draggableRows="false">
+					<f:facet name="header">
+						<j:dtHeader entity="IoDbMetaTable" code="listOf">
+							
+						</j:dtHeader>	
+					</f:facet>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="id"/></f:facet>
+						<h:outputText value="#{t.id}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="code"/></f:facet>
+						<h:outputText value="#{t.code}"/>
+					</p:column>
+				</p:dataTable>
+		</j:slot>
+	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>

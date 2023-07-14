@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.api.rest.i.io.label.JeeslIoLabelRestInterface;
+import org.jeesl.api.rest.i.io.JeeslIoLabelRestInterface;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.xml.system.io.revision.XmlDiagramFactory;
 import org.jeesl.factory.xml.system.io.revision.XmlEntityFactory;

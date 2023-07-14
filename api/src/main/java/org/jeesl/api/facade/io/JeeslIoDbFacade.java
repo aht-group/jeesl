@@ -5,21 +5,21 @@ import java.util.Map;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.db.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpFile;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpStatus;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 
-public interface JeeslIoDbFacade <L extends JeeslLang,D extends JeeslDescription,
-								SYSTEM extends JeeslIoSsiSystem<L,D>,
+public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DUMP extends JeeslDbDump<SYSTEM,DF>,
-								DF extends JeeslDbDumpFile<DUMP,DH,DS>,
-								DH extends JeeslIoSsiHost<L,D,?>,
-								DS extends JeeslDbDumpStatus<L,D,DS,?>>
+								DF extends JeeslDbDumpFile<DUMP,DH,?>,
+								DH extends JeeslIoSsiHost<?,?,?>,
+								
+								MT extends JeeslDbMetaTable<SYSTEM>
+							>
 		extends JeeslFacade
 {
 	List<DF> fDumpFiles(DH host);
@@ -33,4 +33,6 @@ public interface JeeslIoDbFacade <L extends JeeslLang,D extends JeeslDescription
 	JsonPostgres postgresReplications();
 	JsonPostgres postgresConnections(String dbName);
 	JsonPostgres postgresStatements(String dbName);
+	
+	List<MT> fIoDbMetaTables(EjbIoDbQuery<SYSTEM> query);
 }

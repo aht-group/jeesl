@@ -18,6 +18,12 @@
             <resource-id>ioDb/explain.xhtml</resource-id>
         </component>
 	</tag>
+	<tag>
+        <tag-name>gridIoDbMeta</tag-name>
+        <component>
+            <resource-id>ioDb/meta.xhtml</resource-id>
+        </component>
+	</tag>
   
 	<tag>
         <tag-name>gridIoMavenArtifact</tag-name>

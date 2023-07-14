@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
-import org.jeesl.controller.util.comparator.ejb.module.calendar.RecordComparator;
+import org.jeesl.controller.util.comparator.ejb.module.calendar.EjbWithRecordDateComparator;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -169,7 +169,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		debugOnInfo = false;
 		allowTransitions = true;
 
-		cpActivity = new RecordComparator<WY>();
+		cpActivity = new EjbWithRecordDateComparator<WY>();
 
 		mapDocument = new HashMap<>();
 		mapWorkflow = new HashMap<>();

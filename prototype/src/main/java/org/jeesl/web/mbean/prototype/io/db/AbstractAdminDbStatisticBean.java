@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.interfaces.model.io.db.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpFile;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpStatus;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -27,7 +27,7 @@ implements Serializable
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminDbStatisticBean.class);
 	
-	protected JeeslIoDbFacade<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fDb;
+	protected JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?> fDb;
 	
 	protected List<Class<?>> list = new ArrayList<Class<?>>();
 	public List<Class<?>> getList(){return list;}
