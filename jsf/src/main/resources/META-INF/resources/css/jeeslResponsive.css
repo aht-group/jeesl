@@ -1150,7 +1150,7 @@ template {
     margin: 0;
     padding: 0;
     text-shadow: none; }
-    @media (max-height: 768px) {
+    @media (max-width: 768px) {
       .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header {
         background-size: 100% 50px; } }
     .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-title {
@@ -1286,7 +1286,7 @@ template {
     margin: 0;
     padding: 0;
     text-shadow: none; }
-    @media (max-height: 768px) {
+    @media (max-width: 768px) {
       .ui-datepicker .ui-datepicker-header {
         background-size: 100% 50px; } }
     .ui-datepicker .ui-datepicker-header .ui-datepicker-title {
@@ -2047,7 +2047,7 @@ template {
 .jeesl-input-grid .p-field > label {
   margin-bottom: 0; }
 .jeesl-input-grid .p-field .p-col {
-  padding: 5px 10px; }
+  padding: 5px; }
   .jeesl-input-grid .p-field .p-col:first-child {
     padding-left: 0; }
 
@@ -3771,6 +3771,8 @@ body, .ui-widget {
               line-height: 30px; } }
           .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .jeesl-menu-bar-button-label:first-child {
             padding-left: 6px; }
+        .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-menu-bar-button .ui-inputfield {
+          min-height: calc(26px - 2 * 6px); }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list {
         background: #007a45;
         list-style: none;
@@ -4219,7 +4221,6 @@ body, .ui-widget {
                   padding-bottom: 5px; } }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item {
       display: flex;
-      height: 100%;
       padding: 0;
       top: 0; }
       @media (max-width: 768px) {
@@ -4236,6 +4237,7 @@ body, .ui-widget {
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item:hover {
         background: transparent; }
       .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list {
+        display: flex;
         height: 100%;
         opacity: 1;
         padding: 0;
@@ -4307,7 +4309,8 @@ body, .ui-widget {
           display: none; }
 
 .jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  overflow: hidden; }
 
 .jeesl-panel {
   background: #ededed;
@@ -4932,24 +4935,26 @@ body, .ui-widget {
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid {
           display: block;
           padding: 0; } }
-      @media (max-width: 768px) {
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
-          left: 50%;
-          line-height: normal;
-          padding: 0;
-          position: absolute;
-          top: 0;
-          transform: translate(-50%, 0);
-          width: auto;
-          word-break: break-word;
-          z-index: 1; }
-          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
-            left: 15px;
-            transform: none; }
-          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
-            left: auto;
-            right: 15px;
-            transform: none; } }
+      .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
+        word-break: break-all; }
+        @media (max-width: 768px) {
+          .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
+            left: 50%;
+            line-height: normal;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            transform: translate(-50%, 0);
+            width: auto;
+            word-break: break-word;
+            z-index: 1; }
+            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
+              left: 15px;
+              transform: none; }
+            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
+              left: auto;
+              right: 15px;
+              transform: none; } }
       .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
         overflow-wrap: anywhere; }
         @media (max-width: 768px) {
@@ -5148,6 +5153,8 @@ body, .ui-widget {
       background: #dedede;
       height: 2px;
       margin: 6px 0; } }
+  .jeesl-panel .ui-panel-content .jeesl-panelgrid-scrollview {
+    overflow-x: auto; }
   @media (max-width: 768px) {
     .jeesl-panel .ui-panel-footer {
       margin: 5px 0 0;
@@ -5283,7 +5290,8 @@ body, .ui-widget {
 
 .jeesl-datatable, .ui-datatable.ui-sortable-helper {
   border: 1px solid #ababab;
-  border-radius: 3px; }
+  border-radius: 3px;
+  overflow: hidden; }
   .jeesl-datatable .ui-datatable-header, .ui-datatable.ui-sortable-helper .ui-datatable-header {
     align-items: center;
     background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
@@ -5593,6 +5601,10 @@ body, .ui-widget {
     .jeesl-datatable img, .ui-datatable.ui-sortable-helper img {
       height: auto;
       max-height: calc(42px - 2 * 5px); } }
+  .jeesl-datatable .ui-datatable-footer, .ui-datatable.ui-sortable-helper .ui-datatable-footer {
+    border: none;
+    border-radius: 0;
+    border-top: 1px solid #ababab; }
 
 .jeesl-content-container, .jeesl-overlay-container {
   line-height: 1.25em; }
@@ -6458,24 +6470,26 @@ body, .ui-widget {
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid {
               display: block;
               padding: 0; } }
-          @media (max-width: 768px) {
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
-              left: 50%;
-              line-height: normal;
-              padding: 0;
-              position: absolute;
-              top: 0;
-              transform: translate(-50%, 0);
-              width: auto;
-              word-break: break-word;
-              z-index: 1; }
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
-                left: 15px;
-                transform: none; }
-              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
-                left: auto;
-                right: 15px;
-                transform: none; } }
+          .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
+            word-break: break-all; }
+            @media (max-width: 768px) {
+              .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel {
+                left: 50%;
+                line-height: normal;
+                padding: 0;
+                position: absolute;
+                top: 0;
+                transform: translate(-50%, 0);
+                width: auto;
+                word-break: break-word;
+                z-index: 1; }
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:first-child {
+                  left: 15px;
+                  transform: none; }
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col.ui-outputlabel:last-child {
+                  left: auto;
+                  right: 15px;
+                  transform: none; } }
           .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) {
             overflow-wrap: anywhere; }
             @media (max-width: 768px) {
@@ -6674,6 +6688,8 @@ body, .ui-widget {
           background: #dedede;
           height: 2px;
           margin: 6px 0; } }
+      .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .jeesl-panelgrid-scrollview {
+        overflow-x: auto; }
       @media (max-width: 768px) {
         .jeesl-content .jeesl-content-container .ui-panel .ui-panel-footer {
           margin: 5px 0 0;
