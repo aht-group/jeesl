@@ -1,4 +1,4 @@
-package org.jeesl.util.comparator.ejb.io.report;
+package org.jeesl.controller.util.comparator.ejb.io.report;
 
 import java.util.Comparator;
 
@@ -8,14 +8,14 @@ import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ReportComparator<CATEGORY extends JeeslIoReportCategory<?,?,CATEGORY,?>,
+public class EjbIoReportComparator<CATEGORY extends JeeslIoReportCategory<?,?,CATEGORY,?>,
 								REPORT extends JeeslIoReport<?,?,CATEGORY,?>>
 {
-	final static Logger logger = LoggerFactory.getLogger(ReportComparator.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbIoReportComparator.class);
 
     public enum Type {position};
 
-    public ReportComparator()
+    public EjbIoReportComparator()
     {
     	
     }
@@ -23,7 +23,7 @@ public class ReportComparator<CATEGORY extends JeeslIoReportCategory<?,?,CATEGOR
     public Comparator<REPORT> instance(Type type)
     {
         Comparator<REPORT> c = null;
-        ReportComparator<CATEGORY,REPORT> factory = new ReportComparator<>();
+        EjbIoReportComparator<CATEGORY,REPORT> factory = new EjbIoReportComparator<>();
         switch (type)
         {
             case position: c = factory.new PositionCodeComparator();break;

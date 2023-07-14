@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.controller.report.JeeslReportUpdater;
+import org.jeesl.controller.util.comparator.ejb.io.report.EjbIoReportComparator;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.report.EjbIoReportCellFactory;
 import org.jeesl.factory.ejb.io.report.EjbIoReportColumnFactory;
@@ -40,7 +41,6 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.util.comparator.ejb.io.report.ReportComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -201,5 +201,5 @@ public class ReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 	public TxtIoColumnFactory<COLUMN> tfColumn(String localeCode){return new TxtIoColumnFactory<COLUMN>(localeCode);}
 	public TxtIoGroupFactory<SHEET,GROUP> tfGroup(String localeCode) {return new TxtIoGroupFactory<SHEET,GROUP>(localeCode);}
 	
-	public Comparator<REPORT> cpReport(ReportComparator.Type type) {return (new ReportComparator<CATEGORY,REPORT>()).instance(type);}
+	public Comparator<REPORT> cpReport(EjbIoReportComparator.Type type) {return (new EjbIoReportComparator<CATEGORY,REPORT>()).instance(type);}
 }

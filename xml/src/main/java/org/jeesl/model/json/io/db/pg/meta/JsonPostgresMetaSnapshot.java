@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.jeesl.model.json.io.ssi.core.JsonSsiSystem;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,6 +29,11 @@ public class JsonPostgresMetaSnapshot implements Serializable
 	public LocalDateTime getRecord() {return record;}
 	public void setRecord(LocalDateTime record) {this.record = record;}
 	
+	@JsonProperty("system")
+	private JsonSsiSystem system;
+	public JsonSsiSystem getSystem() {return system;}
+	public void setSystem(JsonSsiSystem system) {this.system = system;}
+
 	@JsonProperty("tables")
 	private List<JsonPostgresMetaTable> tables;
 	public List<JsonPostgresMetaTable> getTables() {return tables;}

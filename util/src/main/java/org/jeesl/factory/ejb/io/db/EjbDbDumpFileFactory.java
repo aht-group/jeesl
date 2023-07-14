@@ -1,8 +1,8 @@
 package org.jeesl.factory.ejb.io.db;
 
-import org.jeesl.interfaces.model.io.db.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpFile;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpStatus;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

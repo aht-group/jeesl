@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.controller.util.comparator.ejb.module.calendar.RecordComparator;
+import org.jeesl.controller.util.comparator.ejb.module.calendar.EjbWithRecordDateComparator;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
-import org.jeesl.interfaces.model.io.db.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpFile;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpStatus;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -40,8 +40,8 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbBackupController.class);
 	
-	private JeeslIoDbFacade<L,D,SYSTEM,DUMP,DF,DH,DS> fDb;
-	private final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb;
+	private JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?> fDb;
+	private final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?,?,?> fbDb;
 	
 	private SbDateHandler sbhDate; public SbDateHandler getSbhDate() {return sbhDate;}
 
@@ -53,7 +53,7 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 	private SYSTEM system;
 	protected Chart chart; public void setChart(Chart chart) {this.chart = chart;} public Chart getChart() {return chart;}
 	
-	public JeeslDbBackupController(final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb)
+	public JeeslDbBackupController(final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?,?,?> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb=fbDb;
@@ -63,7 +63,7 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 		sbhDate.initWeeks(2,0);
 	}
 	
-	public void postConstructDbBackup(JeeslIoDbFacade<L,D,SYSTEM,DUMP,DF,DH,DS> fDb, SYSTEM system)
+	public void postConstructDbBackup(JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?> fDb, SYSTEM system)
 	{
 		this.fDb=fDb;
 		this.system=system;
@@ -92,7 +92,7 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 	protected void refreshList()
 	{		
 		dumps = fDb.inInterval(fbDb.getClassDump(),DateUtil.toDate(sbhDate.getDateFrom()),DateUtil.toDate(sbhDate.getDateTo()));
-		Collections.sort(dumps,new RecordComparator<DUMP>());
+		Collections.sort(dumps,new EjbWithRecordDateComparator<DUMP>());
 		Collections.reverse(dumps);
 		if(jogger!=null) {jogger.milestone(fbDb.getClassDump().getSimpleName(),"reloaded",dumps.size());}
 		

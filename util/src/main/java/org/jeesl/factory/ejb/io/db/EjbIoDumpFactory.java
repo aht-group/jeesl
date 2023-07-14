@@ -2,7 +2,7 @@ package org.jeesl.factory.ejb.io.db;
 
 import java.util.Date;
 
-import org.jeesl.interfaces.model.io.db.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

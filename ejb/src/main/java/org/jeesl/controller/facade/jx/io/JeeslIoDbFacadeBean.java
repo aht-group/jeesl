@@ -9,7 +9,14 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
@@ -19,34 +26,32 @@ import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
-import org.jeesl.interfaces.model.io.db.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpFile;
-import org.jeesl.interfaces.model.io.db.JeeslDbDumpStatus;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslIoDbFacadeBean <L extends JeeslLang,D extends JeeslDescription,
-								SYSTEM extends JeeslIoSsiSystem<L,D>,
+public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DUMP extends JeeslDbDump<SYSTEM,DF>,
-								DF extends JeeslDbDumpFile<DUMP,DH,DS>,
-								DH extends JeeslIoSsiHost<L,D,?>,
-								DS extends JeeslDbDumpStatus<L,D,DS,?>>
-		extends JeeslFacadeBean implements JeeslIoDbFacade<L,D,SYSTEM,DUMP,DF,DH,DS>
+								DF extends JeeslDbDumpFile<DUMP,DH,?>,
+								DH extends JeeslIoSsiHost<?,?,?>,
+								MT extends JeeslDbMetaTable<SYSTEM>>
+		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,MT>
 {
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoDbFacadeBean.class);
 	
-	private final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb;
+	private final IoDbFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?,?,MT,?,?,?,?,?> fbDb;
 	
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb){this(em,fbDb,false);}
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?> fbDb, boolean handleTransaction)
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?,?,MT,?,?,?,?,?> fbDb){this(em,fbDb,false);}
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?,?,MT,?,?,?,?,?> fbDb, boolean handleTransaction)
 	{
 		super(em,handleTransaction);
 		this.fbDb=fbDb;
@@ -194,5 +199,32 @@ public class JeeslIoDbFacadeBean <L extends JeeslLang,D extends JeeslDescription
 			}
 			i++;
 		}
+	}
+	
+	@Override
+	public List<MT> fIoDbMetaTables(EjbIoDbQuery<SYSTEM> query)
+	{
+//		if(ObjectUtils.isEmpty(query.getCalendars())){return new ArrayList<>();}
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<MT> cQ = cB.createQuery(fbDb.getClassMetaTable());
+		Root<MT> root = cQ.from(fbDb.getClassMetaTable());
+		
+		if(ObjectUtils.isNotEmpty(query.getSystems()))
+		{
+			Join<MT,SYSTEM> jSystem = root.join(JeeslDbMetaTable.Attributes.system.toString());
+			predicates.add(jSystem.in(query.getSystems()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getCodeList()))
+		{
+			Expression<String> eCode = root.get(JeeslDbMetaTable.Attributes.code.toString());
+			predicates.add(eCode.in(query.getCodeList()));
+		}
+		
+		cQ.select(root);	    
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		return em.createQuery(cQ).getResultList();
 	}
 }

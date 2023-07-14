@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.jeesl.controller.util.comparator.ejb.module.calendar.RecordComparator;
+import org.jeesl.controller.util.comparator.ejb.module.calendar.EjbWithRecordDateComparator;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityPasswordRating;
@@ -39,7 +39,7 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 
 	private JeeslFacade fJeesl;
 	
-	private final RecordComparator<HISTORY> cpHistory;
+	private final EjbWithRecordDateComparator<HISTORY> cpHistory;
 	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
 	public JeeslPasswordRuleChecker(JeeslFacade fJeesl, Class<RATING> cRating)
@@ -49,7 +49,7 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 		zxcvbn = new Zxcvbn();
 		mapResult = new HashMap<>();
 		
-		cpHistory = new RecordComparator<>();
+		cpHistory = new EjbWithRecordDateComparator<>();
 		debugOnInfo = false;
 	}
 	

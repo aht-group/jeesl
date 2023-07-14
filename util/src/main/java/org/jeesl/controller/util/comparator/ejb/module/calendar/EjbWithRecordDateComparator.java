@@ -7,16 +7,16 @@ import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RecordComparator<T extends EjbWithRecord> implements Comparator<T>
+public class EjbWithRecordDateComparator<T extends EjbWithRecord> implements Comparator<T>
 {
-	final static Logger logger = LoggerFactory.getLogger(RecordComparator.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbWithRecordDateComparator.class);
 
-	public RecordComparator() {}
+	public EjbWithRecordDateComparator() {}
 	
-	@Override public int compare(T a, T b)
+	public int compare(T a, T b)
     {
 		  CompareToBuilder ctb = new CompareToBuilder();
-		  ctb.append(a.getRecord(), b.getRecord());
+		  ctb.append(a.getRecord(),b.getRecord());
 		  ctb.append(a.getId(), b.getId());
 		  return ctb.toComparison();
     }
