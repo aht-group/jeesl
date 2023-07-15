@@ -14,8 +14,8 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
-@Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"system_id","code"}))
-public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoSsiSystem,IoDbMetaTable>
+@Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"system_id","table_id","code"}))
+public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable>
 {
 	public static final long serialVersionUID=1;
 	

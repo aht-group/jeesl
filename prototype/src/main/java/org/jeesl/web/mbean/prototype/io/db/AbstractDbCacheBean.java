@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.interfaces.model.io.db.JeeslDbStatementColumn;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -27,9 +27,9 @@ public class AbstractDbCacheBean <L extends JeeslLang, D extends JeeslDescriptio
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbCacheBean.class);
 	
 	@SuppressWarnings("unused")
-	private JeeslIoDbFacade<?,?,?,?,?> fDb;
+	private JeeslIoDbFacade<?,?,?,?,?,?> fDb;
 	@SuppressWarnings("unused")
-	private final IoDbFactoryBuilder<L,D,?,?,?,?,?,?,?,?,SC,?,?,?> fbDb;
+	private final IoDbDumpFactoryBuilder<L,D,?,?,?,?,?> fbDb;
 	
 	private final Map<String,JsonDbCacheStatistic> systemStatistic; public Map<String,JsonDbCacheStatistic> getSystemStatistic() {return systemStatistic;}
 	
@@ -39,7 +39,7 @@ public class AbstractDbCacheBean <L extends JeeslLang, D extends JeeslDescriptio
 	
 	private List<JsonPostgresStatement> statements; public List<JsonPostgresStatement> getStatements() {return statements;}
 	
-	public AbstractDbCacheBean(final IoDbFactoryBuilder<L,D,?,?,?,?,?,?,?,?,SC,?,?,?> fbDb)
+	public AbstractDbCacheBean(final IoDbDumpFactoryBuilder<L,D,?,?,?,?,?> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb=fbDb;
@@ -49,7 +49,7 @@ public class AbstractDbCacheBean <L extends JeeslLang, D extends JeeslDescriptio
 		mapColumn = new HashMap<>();
 	}
 	
-	public void postConstructDbCache(JeeslIoDbFacade<?,?,?,?,?> fDb)
+	public void postConstructDbCache(JeeslIoDbFacade<?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 	}

@@ -24,6 +24,11 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		distinct = false;
 	}
 	
+	public void reset()
+	{
+		codeList=null;
+	}
+	
 	private boolean tupleLoad;
 	@Override public boolean isTupleLoad() {return tupleLoad;}
 	@Override public void setTupleLoad(boolean tupleLoad) {this.tupleLoad = tupleLoad;}

@@ -13,13 +13,18 @@ public class JsonPostgresMetaTable implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
-	@JsonProperty("name")
-	private String name;
-	public String getName() {return name;}
-	public void setName(String name) {this.name = name;}
+	@JsonProperty("code")
+	private String code;
+	public String getCode() {return code;}
+	public void setCode(String code) {this.code = code;}
 	
-	@JsonProperty("constraints")
-	private List<JsonPostgresMetaConstraint> constraints;
-	public List<JsonPostgresMetaConstraint> getConstraints() {return constraints;}
-	public void setConstraints(List<JsonPostgresMetaConstraint> constraints) {this.constraints = constraints;}
+	@JsonProperty("columns")
+	private List<JsonPostgresMetaColumn> columns;
+	public List<JsonPostgresMetaColumn> getColumns() {return columns;}
+	public void setColumns(List<JsonPostgresMetaColumn> columns) {this.columns = columns;}
+
+	@JsonProperty("foreignKeys")
+	private List<JsonPostgresMetaConstraint> foreignKeys;
+	public List<JsonPostgresMetaConstraint> getForeignKeys() {return foreignKeys;}
+	public void setForeignKeys(List<JsonPostgresMetaConstraint> foreignKeys) {this.foreignKeys = foreignKeys;}
 }

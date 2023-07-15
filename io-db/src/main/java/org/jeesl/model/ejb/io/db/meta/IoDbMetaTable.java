@@ -15,7 +15,7 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
 @Table(name="IoDbMetaTable",uniqueConstraints=@UniqueConstraint(columnNames={"system_id","code"}))
-public class IoDbMetaTable implements JeeslDbMetaTable<IoSsiSystem>
+public class IoDbMetaTable implements JeeslDbMetaTable<IoSsiSystem,IoDbMetaSnapshot>
 {
 	public static final long serialVersionUID=1;
 	

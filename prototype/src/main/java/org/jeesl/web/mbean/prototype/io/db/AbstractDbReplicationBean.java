@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.interfaces.model.io.db.JeeslDbReplicationColumn;
 import org.jeesl.interfaces.model.io.db.JeeslDbReplicationState;
@@ -32,8 +33,8 @@ public class AbstractDbReplicationBean <L extends JeeslLang, D extends JeeslDesc
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbReplicationBean.class);
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,?> fDb;
-	private final IoDbFactoryBuilder<L,D,SYSTEM,?,?,?,?,?,?,?,?,RC,RS,RY> fbDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?> fDb;
+	private final IoDbPgFactoryBuilder<L,D,?,?,RC,RS,RY> fbDb;
 	
 	private final Map<String,RC> mapColumn; public Map<String,RC> getMapColumn() {return mapColumn;}
 	private final Map<String,RS> mapState; public Map<String,RS> getMapState() {return mapState;}
@@ -43,7 +44,7 @@ public class AbstractDbReplicationBean <L extends JeeslLang, D extends JeeslDesc
 	
 	protected Chart chart; public Chart getChart() {return chart;}
 	
-	public AbstractDbReplicationBean(final IoDbFactoryBuilder<L,D,SYSTEM,?,?,?,?,?,?,?,?,RC,RS,RY> fbDb)
+	public AbstractDbReplicationBean(final IoDbPgFactoryBuilder<L,D,?,?,RC,RS,RY> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb=fbDb;
@@ -53,7 +54,7 @@ public class AbstractDbReplicationBean <L extends JeeslLang, D extends JeeslDesc
 		mapSync = new HashMap<>();
 	}
 	
-	public void postConstructDbReplication(JeeslIoDbFacade<SYSTEM,?,?,?,?> fDb)
+	public void postConstructDbReplication(JeeslIoDbFacade<SYSTEM,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		

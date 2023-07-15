@@ -10,7 +10,8 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
-public interface JeeslDbMetaTable<SYSTEM extends JeeslIoSsiSystem<?,?>>
+public interface JeeslDbMetaTable<SYSTEM extends JeeslIoSsiSystem<?,?>,
+									MS extends JeeslDbMetaSnapshot<SYSTEM,?,?>>
 					extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 							EjbWithNonUniqueCode
 {

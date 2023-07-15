@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
@@ -29,19 +29,19 @@ public class AbstractAdminDbDumpBean <L extends JeeslLang,D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminDbDumpBean.class);
 	
-	private JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?> fDb;
-	private final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS,?,?,?,?,?,?,?> fbDb;
+	private JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?,?> fDb;
+	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb;
 	
 	private List<DUMP> dumps; public List<DUMP> getDumps(){return dumps;}
 	private List<HOST> hosts; public List<HOST> getHosts() {return hosts;}
 	private Map<DUMP,Map<HOST,FILE>> mapFiles; public Map<DUMP, Map<HOST, FILE>> getMapFiles() {return mapFiles;}
 	
-	public AbstractAdminDbDumpBean(final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS,?,?,?,?,?,?,?> fbDb)
+	public AbstractAdminDbDumpBean(final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb)
 	{
 		this.fbDb=fbDb;
 	}
 	
-	public void initSuper(JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?> fDb)
+	public void initSuper(JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?,?> fDb)
 	{
 		this.fDb=fDb;
 		refreshList();

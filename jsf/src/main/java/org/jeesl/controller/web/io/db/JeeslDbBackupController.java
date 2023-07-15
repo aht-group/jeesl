@@ -10,7 +10,7 @@ import java.util.Map;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.util.comparator.ejb.module.calendar.EjbWithRecordDateComparator;
 import org.jeesl.controller.web.AbstractJeeslWebController;
-import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
@@ -40,8 +40,8 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbBackupController.class);
 	
-	private JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?> fDb;
-	private final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?,?,?> fbDb;
+	private JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?,?> fDb;
+	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS> fbDb;
 	
 	private SbDateHandler sbhDate; public SbDateHandler getSbhDate() {return sbhDate;}
 
@@ -53,7 +53,7 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 	private SYSTEM system;
 	protected Chart chart; public void setChart(Chart chart) {this.chart = chart;} public Chart getChart() {return chart;}
 	
-	public JeeslDbBackupController(final IoDbFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS,?,?,?,?,?,?,?> fbDb)
+	public JeeslDbBackupController(final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb=fbDb;
@@ -63,7 +63,7 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 		sbhDate.initWeeks(2,0);
 	}
 	
-	public void postConstructDbBackup(JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?> fDb, SYSTEM system)
+	public void postConstructDbBackup(JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?,?> fDb, SYSTEM system)
 	{
 		this.fDb=fDb;
 		this.system=system;

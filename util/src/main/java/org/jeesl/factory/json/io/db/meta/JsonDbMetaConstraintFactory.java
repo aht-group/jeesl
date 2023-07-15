@@ -13,14 +13,13 @@ public class JsonDbMetaConstraintFactory
 		return JsonDbMetaConstraintFactory.build(rs.getString("fk_name"),rs.getString("fkcolumn_name"),rs.getString("pktable_name"),rs.getString("pkcolumn_name"));
 	}
 	
-	public static JsonPostgresMetaConstraint build(String code, String localColumn, String referencedTable, String referencedColumn) throws IOException
+	public static JsonPostgresMetaConstraint build(String code, String localColumn, String remoteTable, String remoteColumn) throws IOException
 	{
 		JsonPostgresMetaConstraint json = new JsonPostgresMetaConstraint();
 		json.setCode(code);
 		json.setLocalColumn(localColumn);
-		json.setReferencedTable(referencedTable);
-		json.setReferencedColumn(referencedColumn);
-		
+		json.setRemoteTable(remoteTable);
+		json.setRemoteColumn(remoteColumn);
 		return json;
 	}
 }

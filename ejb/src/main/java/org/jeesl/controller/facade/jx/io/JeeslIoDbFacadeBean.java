@@ -21,13 +21,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.factory.builder.io.IoDbFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
 import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
@@ -41,20 +43,23 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DUMP extends JeeslDbDump<SYSTEM,DF>,
 								DF extends JeeslDbDumpFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
-								MT extends JeeslDbMetaTable<SYSTEM>>
-		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,MT>
+								MT extends JeeslDbMetaTable<SYSTEM,?>,
+								MC extends JeeslDbMetaConstraint<SYSTEM,?,MT>>
+		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,MT,MC>
 {
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoDbFacadeBean.class);
 	
-	private final IoDbFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?,?,MT,?,?,?,?,?> fbDb;
+	private final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb;
+	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,?,MT,MC> fbDbMeta;
 	
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?,?,MT,?,?,?,?,?> fbDb){this(em,fbDb,false);}
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?,?,MT,?,?,?,?,?> fbDb, boolean handleTransaction)
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,?,MT,MC> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,?,MT,MC> fbDbMeta, boolean handleTransaction)
 	{
 		super(em,handleTransaction);
 		this.fbDb=fbDb;
+		this.fbDbMeta=fbDbMeta;
 	}
 	
 	@Override public List<DF> fDumpFiles(DH host) 
@@ -201,15 +206,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		}
 	}
 	
-	@Override
-	public List<MT> fIoDbMetaTables(EjbIoDbQuery<SYSTEM> query)
+	@Override public List<MT> fIoDbMetaTables(EjbIoDbQuery<SYSTEM> query)
 	{
-//		if(ObjectUtils.isEmpty(query.getCalendars())){return new ArrayList<>();}
-		
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<MT> cQ = cB.createQuery(fbDb.getClassMetaTable());
-		Root<MT> root = cQ.from(fbDb.getClassMetaTable());
+		CriteriaQuery<MT> cQ = cB.createQuery(fbDbMeta.getClassMetaTable());
+		Root<MT> root = cQ.from(fbDbMeta.getClassMetaTable());
 		
 		if(ObjectUtils.isNotEmpty(query.getSystems()))
 		{
@@ -219,6 +221,30 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		if(ObjectUtils.isNotEmpty(query.getCodeList()))
 		{
 			Expression<String> eCode = root.get(JeeslDbMetaTable.Attributes.code.toString());
+			predicates.add(eCode.in(query.getCodeList()));
+		}
+		
+		cQ.select(root);	    
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		return em.createQuery(cQ).getResultList();
+	}
+	
+	@Override public List<MC> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<MC> cQ = cB.createQuery(fbDbMeta.getClassMetaConstraint());
+		Root<MC> root = cQ.from(fbDbMeta.getClassMetaConstraint());
+		
+		if(ObjectUtils.isNotEmpty(query.getSystems()))
+		{
+			Join<MT,SYSTEM> jSystem = root.join(JeeslDbMetaConstraint.Attributes.system.toString());
+			predicates.add(jSystem.in(query.getSystems()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getCodeList()))
+		{
+			Expression<String> eCode = root.get(JeeslDbMetaConstraint.Attributes.code.toString());
 			predicates.add(eCode.in(query.getCodeList()));
 		}
 		

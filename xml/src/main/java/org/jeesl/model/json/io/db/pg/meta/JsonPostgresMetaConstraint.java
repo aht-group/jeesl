@@ -22,13 +22,13 @@ public class JsonPostgresMetaConstraint implements Serializable
 	public String getLocalColumn() {return localColumn;}
 	public void setLocalColumn(String localColumn) {this.localColumn = localColumn;}
 	
-	@JsonProperty("referencedTable")
-	private String referencedTable;
-	public String getReferencedTable() {return referencedTable;}
-	public void setReferencedTable(String referencedTable) {this.referencedTable = referencedTable;}
+	@JsonProperty("remoteTable")
+	private String remoteTable;
+	public String getRemoteTable() {return remoteTable;}
+	public void setRemoteTable(String remoteTable) {this.remoteTable = remoteTable;}
 
-	@JsonProperty("referencedColumn")
-	private String referencedColumn;
-	public String getReferencedColumn() {return referencedColumn;}
-	public void setReferencedColumn(String referencedColumn) {this.referencedColumn = referencedColumn;}
+	@JsonProperty("remoteColumn")
+	private String remoteColumn;
+	public String getRemoteColumn() {return remoteColumn;}
+	public void setRemoteColumn(String remoteColumn) {this.remoteColumn = remoteColumn;}
 }

@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoDbMetaSnapshotFactory<SYSTEM extends JeeslIoSsiSystem<?,?>,
-								MS extends JeeslDbMetaSnapshot<SYSTEM>>
+								MS extends JeeslDbMetaSnapshot<SYSTEM,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoDbMetaSnapshotFactory.class);
 	

@@ -26,6 +26,7 @@ public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>
 	
 	@Override public void reset()
 	{
+		super.reset();
 		systems=null;
 	}
 	
