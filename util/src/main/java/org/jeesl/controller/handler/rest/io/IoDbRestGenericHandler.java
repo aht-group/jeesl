@@ -27,6 +27,7 @@ import org.jeesl.factory.json.io.db.meta.JsonDbMetaTableFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
@@ -53,31 +54,32 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 							HOST extends JeeslIoSsiHost<L,D,SYSTEM>,
 							STATUS extends JeeslDbDumpStatus<L,D,STATUS,?>,
 							
-							MS extends JeeslDbMetaSnapshot<SYSTEM,MT,MC>,
-							MT extends JeeslDbMetaTable<SYSTEM,MS>,
-							MC extends JeeslDbMetaConstraint<SYSTEM,MS,MT>>
+							MS extends JeeslDbMetaSnapshot<SYSTEM,TAB,MC>,
+							TAB extends JeeslDbMetaTable<SYSTEM,MS>,
+							COL extends JeeslDbMetaColumn<SYSTEM,MS,TAB>,
+							MC extends JeeslDbMetaConstraint<SYSTEM,MS,TAB>>
 					implements JeeslIoDbRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestGenericHandler.class);
 	
 	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb;
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,MT,MC> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,MC> fbDbMeta;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
-	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,MT,MC> fDb;
+	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,TAB,MC> fDb;
 	
 	private EjbIoDumpFactory<SYSTEM,DUMP> efDump;
 	private EjbDbDumpFileFactory<DUMP,FILE,HOST,STATUS> efDumpFile;
 	private final EjbIoDbMetaSnapshotFactory<SYSTEM,MS> efSnapshot;
-	private final EjbIoDbMetaTableFactory<SYSTEM,MT> efTable;
-	private final EjbIoDbMetaConstraintFactory<SYSTEM,MT,MC> efConstraint;
+	private final EjbIoDbMetaTableFactory<SYSTEM,TAB> efTable;
+	private final EjbIoDbMetaConstraintFactory<SYSTEM,TAB,MC> efConstraint;
 
 	private final SYSTEM system;
 	
 	public IoDbRestGenericHandler(IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb,
-							IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,MT,MC> fbDbMeta,
+							IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,MC> fbDbMeta,
 							IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi,
-							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,MT,MC> fDb,
+							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,TAB,MC> fDb,
 							SYSTEM system)
 	{
 
@@ -183,13 +185,13 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			query.add(eSystem);
 			query.codeList(JsonDbMetaTableFactory.toCodes(snapshot));
 			
-			List<MT> tables = fDb.fIoDbMetaTables(query);
-			Map<String,MT> mapTable = EjbCodeFactory.toMapNonUniqueCode(tables);
+			List<TAB> tables = fDb.fIoDbMetaTables(query);
+			Map<String,TAB> mapTable = EjbCodeFactory.toMapNonUniqueCode(tables);
 			for(JsonPostgresMetaTable jTable : snapshot.getTables())
 			{
 				if(!mapTable.containsKey(jTable.getCode()))
 				{
-					MT t = efTable.build(eSystem,jTable.getCode());
+					TAB t = efTable.build(eSystem,jTable.getCode());
 					mapTable.put(jTable.getCode(),fDb.save(t));
 				}
 			}

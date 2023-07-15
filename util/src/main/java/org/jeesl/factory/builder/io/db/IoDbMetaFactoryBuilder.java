@@ -4,6 +4,7 @@ import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSnapshotFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaTableFactory;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
@@ -16,9 +17,10 @@ import org.slf4j.LoggerFactory;
 public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
 								
-								MS extends JeeslDbMetaSnapshot<SYSTEM,MT,MC>,
-								MT extends JeeslDbMetaTable<SYSTEM,MS>,
-								MC extends JeeslDbMetaConstraint<SYSTEM,MS,MT>
+								MS extends JeeslDbMetaSnapshot<SYSTEM,TAB,MC>,
+								TAB extends JeeslDbMetaTable<SYSTEM,MS>,
+								COL extends JeeslDbMetaColumn<SYSTEM,MS,TAB>,
+								MC extends JeeslDbMetaConstraint<SYSTEM,MS,TAB>
 								
 >
 			extends AbstractFactoryBuilder<L,D>
@@ -27,7 +29,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		
 	private final Class<SYSTEM> cSystem; public Class<SYSTEM> getClassSsiSystem() {return cSystem;}
 	private final Class<MS> cSnapshot; public Class<MS> getClassSnapshot(){return cSnapshot;}
-	private final Class<MT> cMetaTable; public Class<MT> getClassMetaTable(){return cMetaTable;}
+	private final Class<TAB> cMetaTable; public Class<TAB> getClassMetaTable(){return cMetaTable;}
 	private final Class<MC> cMetaConstraint; public Class<MC> getClassMetaConstraint(){return cMetaConstraint;}
 	
 
@@ -35,7 +37,7 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	public IoDbMetaFactoryBuilder(final Class<L> cL, final Class<D> cD,
 							final Class<SYSTEM> cSystem,
 							final Class<MS> cSnapshot,
-							final Class<MT> cMetaTable,
+							final Class<TAB> cMetaTable,
 							final Class<MC> cMetaConstraint)
 	{
 		super(cL,cD);
@@ -47,6 +49,6 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		
 	}	
 	public EjbIoDbMetaSnapshotFactory<SYSTEM,MS> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
-	public EjbIoDbMetaTableFactory<SYSTEM,MT> ejbTable() {return new EjbIoDbMetaTableFactory<>(cMetaTable);}
-	public EjbIoDbMetaConstraintFactory<SYSTEM,MT,MC> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cMetaConstraint);}
+	public EjbIoDbMetaTableFactory<SYSTEM,TAB> ejbTable() {return new EjbIoDbMetaTableFactory<>(cMetaTable);}
+	public EjbIoDbMetaConstraintFactory<SYSTEM,TAB,MC> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cMetaConstraint);}
 }
