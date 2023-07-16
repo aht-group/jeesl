@@ -33,7 +33,7 @@ public class AbstractDbReplicationBean <L extends JeeslLang, D extends JeeslDesc
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbReplicationBean.class);
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?> fDb;
 	private final IoDbPgFactoryBuilder<L,D,?,?,RC,RS,RY> fbDb;
 	
 	private final Map<String,RC> mapColumn; public Map<String,RC> getMapColumn() {return mapColumn;}
@@ -54,7 +54,7 @@ public class AbstractDbReplicationBean <L extends JeeslLang, D extends JeeslDesc
 		mapSync = new HashMap<>();
 	}
 	
-	public void postConstructDbReplication(JeeslIoDbFacade<SYSTEM,?,?,?,?,?> fDb)
+	public void postConstructDbReplication(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		

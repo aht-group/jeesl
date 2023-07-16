@@ -17,10 +17,12 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
+import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaColumnFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
@@ -38,10 +40,11 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
-								MS extends JeeslDbMetaSnapshot<SYSTEM,TAB,MC>,
+								MS extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,MC>,
 								TAB extends JeeslDbMetaTable<SYSTEM,MS>,
-								COL extends JeeslDbMetaColumn<SYSTEM,MS,TAB>,
-								MC extends JeeslDbMetaConstraint<SYSTEM,MS,TAB>
+								COL extends JeeslDbMetaColumn<MS,TAB,COLT>,
+								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
+								MC extends JeeslDbMetaConstraint<MS,TAB>
 >
 					extends AbstractJeeslWebController<L,D,LOC>
 					implements SbSingleBean
@@ -49,17 +52,19 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbMetaGwc.class);
 	
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,MC> fbDb;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,COLT,MC> fbDb;
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,TAB,MC> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,TAB,COL,MC> fDb;
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
 
-	private final EjbIoDbMetaConstraintFactory<SYSTEM,TAB,MC> efConstraint;
+	private final EjbIoDbMetaConstraintFactory<TAB,MC> efConstraint;
+	private final EjbIoDbMetaColumnFactory<TAB,COL> efColumn;
 	
 	private final Comparator<MS> cpSnapshot;
 	private final Comparator<TAB> cpTable;
 	
+	private final Map<TAB,List<COL>> mapColumn; public Map<TAB,List<COL>> getMapColumn() {return mapColumn;}
 	private final Map<TAB,List<MC>> mapConstraint; public Map<TAB,List<MC>> getMapConstraint() {return mapConstraint;}
 
 	private final List<MS> snapshots; public List<MS> getSnapshots() {return snapshots;}
@@ -69,25 +74,27 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private MS snapshotSource; public MS getSnapshotSource() {return snapshotSource;} public void setSnapshotSource(MS snapshotSource) {this.snapshotSource = snapshotSource;}
 	private MS snapshotTarget; public MS getSnapshotTarget() {return snapshotTarget;} public void setSnapshotTarget(MS snapshotTarget) {this.snapshotTarget = snapshotTarget;}
 
-	public JeeslDbMetaGwc(IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,MC> fbDb)
+	public JeeslDbMetaGwc(IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,COLT,MC> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb = fbDb;
 		
 		sbhSystem = new SbSingleHandler<>(fbDb.getClassSsiSystem(),this);
 		
+		efColumn = fbDb.ejbColumn();
 		efConstraint = fbDb.ejbConstraint();
 		
 		cpSnapshot = new EjbWithRecordJtComparator<MS>().factory(EjbWithRecordJtComparator.Type.dsc); 
 		cpTable = new EjbIoDbTableComparator<TAB>().instance(EjbIoDbTableComparator.Type.code);
 		
+		mapColumn = new HashMap<>();
 		mapConstraint = new HashMap<>();
 		
 		snapshots = new ArrayList<>();
 		tables = new ArrayList<>();
 	}
 
-	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,TAB,MC> fDb)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,TAB,COL,MC> fDb)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fDb = fDb;
@@ -118,6 +125,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			tables.addAll(fDb.fIoDbMetaTables(query));
 			Collections.sort(tables,cpTable);
 			
+			mapColumn.putAll(efColumn.toMapColumn(fDb.fIoDbMetaColumns(query)));
 			mapConstraint.putAll(efConstraint.toMapConstraints(fDb.fIoDbMetaConstraints(query)));
 		}
 		

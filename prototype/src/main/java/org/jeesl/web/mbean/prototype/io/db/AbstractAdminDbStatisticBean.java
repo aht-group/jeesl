@@ -27,7 +27,7 @@ implements Serializable
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminDbStatisticBean.class);
 	
-	protected JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?,?> fDb;
+	protected JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?,?,?> fDb;
 	
 	protected List<Class<?>> list = new ArrayList<Class<?>>();
 	public List<Class<?>> getList(){return list;}

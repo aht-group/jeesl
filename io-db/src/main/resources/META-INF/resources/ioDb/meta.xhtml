@@ -87,6 +87,12 @@
 						<h:outputText value="#{t.code}"/>
 					</p:column>
 					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="columns"/></f:facet>
+						<ui:repeat var="c" value="#{cc.attrs.ctrl.mapColumn[t]}">
+							<h:outputText value="#{c.code}"/><br/>
+						</ui:repeat>
+					</p:column>
+					<p:column>
 						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="constraints"/></f:facet>
 						<ui:repeat var="c" value="#{cc.attrs.ctrl.mapConstraint[t]}">
 							<h:outputText value="#{c.code}"/><br/>

@@ -29,6 +29,7 @@ import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
@@ -44,18 +45,19 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DF extends JeeslDbDumpFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
 								MT extends JeeslDbMetaTable<SYSTEM,?>,
-								MC extends JeeslDbMetaConstraint<SYSTEM,?,MT>>
-		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,MT,MC>
+								COL extends JeeslDbMetaColumn<?,MT,?>,
+								MC extends JeeslDbMetaConstraint<?,MT>>
+		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,MT,COL,MC>
 {
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoDbFacadeBean.class);
 	
 	private final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb;
-	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,?,MT,?,MC> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,?,MT,COL,?,MC> fbDbMeta;
 	
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,?,MT,?,MC> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,?,MT,?,MC> fbDbMeta, boolean handleTransaction)
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,?,MT,COL,?,MC> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,?,MT,COL,?,MC> fbDbMeta, boolean handleTransaction)
 	{
 		super(em,handleTransaction);
 		this.fbDb=fbDb;
@@ -210,8 +212,8 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<MT> cQ = cB.createQuery(fbDbMeta.getClassMetaTable());
-		Root<MT> root = cQ.from(fbDbMeta.getClassMetaTable());
+		CriteriaQuery<MT> cQ = cB.createQuery(fbDbMeta.getClassTable());
+		Root<MT> root = cQ.from(fbDbMeta.getClassTable());
 		
 		if(ObjectUtils.isNotEmpty(query.getSystems()))
 		{
@@ -230,6 +232,31 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
+	@Override public List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<COL> cQ = cB.createQuery(fbDbMeta.getClassMetaColumn());
+		Root<COL> root = cQ.from(fbDbMeta.getClassMetaColumn());
+		
+		if(ObjectUtils.isNotEmpty(query.getSystems()))
+		{
+			Join<COL,MT> jTable = root.join(JeeslDbMetaColumn.Attributes.table.toString());
+			Join<MT,SYSTEM> jSystem = jTable.join(JeeslDbMetaTable.Attributes.system.toString());
+			predicates.add(jSystem.in(query.getSystems()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getCodeList()))
+		{
+			Expression<String> eCode = root.get(JeeslDbMetaConstraint.Attributes.code.toString());
+			predicates.add(eCode.in(query.getCodeList()));
+		}
+		
+		cQ.select(root);	    
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		return em.createQuery(cQ).getResultList();
+	}
+	
 	@Override public List<MC> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -239,7 +266,8 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		
 		if(ObjectUtils.isNotEmpty(query.getSystems()))
 		{
-			Join<MT,SYSTEM> jSystem = root.join(JeeslDbMetaConstraint.Attributes.system.toString());
+			Join<MC,MT> jTable = root.join(JeeslDbMetaConstraint.Attributes.table.toString());
+			Join<MT,SYSTEM> jSystem = jTable.join(JeeslDbMetaTable.Attributes.system.toString());
 			predicates.add(jSystem.in(query.getSystems()));
 		}
 		if(ObjectUtils.isNotEmpty(query.getCodeList()))

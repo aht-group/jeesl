@@ -7,6 +7,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
@@ -19,8 +20,9 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DF extends JeeslDbDumpFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
 								
-								MT extends JeeslDbMetaTable<SYSTEM,?>,
-								MC extends JeeslDbMetaConstraint<SYSTEM,?,MT>
+								TAB extends JeeslDbMetaTable<SYSTEM,?>,
+								COL extends JeeslDbMetaColumn<?,TAB,?>,
+								MC extends JeeslDbMetaConstraint<?,TAB>
 							>
 		extends JeeslFacade
 {
@@ -36,6 +38,7 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	JsonPostgres postgresConnections(String dbName);
 	JsonPostgres postgresStatements(String dbName);
 	
-	List<MT> fIoDbMetaTables(EjbIoDbQuery<SYSTEM> query);
+	List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM> query);
+	List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM> query);
 	List<MC> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM> query);
 }

@@ -1,10 +1,12 @@
 package org.jeesl.factory.builder.io.db;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
+import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaColumnFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSnapshotFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaTableFactory;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
@@ -16,11 +18,11 @@ import org.slf4j.LoggerFactory;
 
 public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
-								
-								MS extends JeeslDbMetaSnapshot<SYSTEM,TAB,MC>,
+								MS extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,MC>,
 								TAB extends JeeslDbMetaTable<SYSTEM,MS>,
-								COL extends JeeslDbMetaColumn<SYSTEM,MS,TAB>,
-								MC extends JeeslDbMetaConstraint<SYSTEM,MS,TAB>
+								COL extends JeeslDbMetaColumn<MS,TAB,COLT>,
+								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
+								MC extends JeeslDbMetaConstraint<MS,TAB>
 								
 >
 			extends AbstractFactoryBuilder<L,D>
@@ -28,8 +30,10 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	final static Logger logger = LoggerFactory.getLogger(IoDbMetaFactoryBuilder.class);
 		
 	private final Class<SYSTEM> cSystem; public Class<SYSTEM> getClassSsiSystem() {return cSystem;}
+	
 	private final Class<MS> cSnapshot; public Class<MS> getClassSnapshot(){return cSnapshot;}
-	private final Class<TAB> cMetaTable; public Class<TAB> getClassMetaTable(){return cMetaTable;}
+	private final Class<TAB> cTable; public Class<TAB> getClassTable(){return cTable;}
+	private final Class<COL> cMetaColumn; public Class<COL> getClassMetaColumn(){return cMetaColumn;}
 	private final Class<MC> cMetaConstraint; public Class<MC> getClassMetaConstraint(){return cMetaConstraint;}
 	
 
@@ -37,18 +41,21 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	public IoDbMetaFactoryBuilder(final Class<L> cL, final Class<D> cD,
 							final Class<SYSTEM> cSystem,
 							final Class<MS> cSnapshot,
-							final Class<TAB> cMetaTable,
+							final Class<TAB> cTable,
+							final Class<COL> cMetaColumn,
 							final Class<MC> cMetaConstraint)
 	{
 		super(cL,cD);
 		this.cSystem=cSystem;
 		
 		this.cSnapshot=cSnapshot;
-		this.cMetaTable=cMetaTable;
+		this.cTable=cTable;
+		this.cMetaColumn=cMetaColumn;
 		this.cMetaConstraint=cMetaConstraint;
 		
 	}	
 	public EjbIoDbMetaSnapshotFactory<SYSTEM,MS> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
-	public EjbIoDbMetaTableFactory<SYSTEM,TAB> ejbTable() {return new EjbIoDbMetaTableFactory<>(cMetaTable);}
-	public EjbIoDbMetaConstraintFactory<SYSTEM,TAB,MC> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cMetaConstraint);}
+	public EjbIoDbMetaTableFactory<SYSTEM,TAB> ejbTable() {return new EjbIoDbMetaTableFactory<>(cTable);}
+	public EjbIoDbMetaColumnFactory<TAB,COL> ejbColumn() {return new EjbIoDbMetaColumnFactory<>(cMetaColumn);}
+	public EjbIoDbMetaConstraintFactory<TAB,MC> ejbConstraint() {return new EjbIoDbMetaConstraintFactory<>(cMetaConstraint);}
 }

@@ -24,7 +24,7 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
 @Table(name="IoDbMetaSnapshot",uniqueConstraints=@UniqueConstraint(columnNames={"system_id","record"}))
-public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMetaTable,IoDbMetaConstraint>
+public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint>
 {
 	public static final long serialVersionUID=1;
 
@@ -54,6 +54,12 @@ public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMet
 	private List<IoDbMetaTable> tables;
 	public List<IoDbMetaTable> getTables() {if(Objects.isNull(tables)) {tables = new ArrayList<>();} return tables;}
 	public void setTables(List<IoDbMetaTable> tables) {this.tables = tables;}
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="IoDbMetaSnapshotJtColumn",joinColumns={@JoinColumn(name="snapshot_id")},inverseJoinColumns={@JoinColumn(name="column_id")})
+	private List<IoDbMetaColumn> columns;
+	public List<IoDbMetaColumn> getColumns() {if(Objects.isNull(columns)) {columns = new ArrayList<>();} return columns;}
+	public void setColumns(List<IoDbMetaColumn> columns) {this.columns = columns;}
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="IoDbMetaSnapshotJtConstraint",joinColumns={@JoinColumn(name="snapshot_id")},inverseJoinColumns={@JoinColumn(name="constraint_id")})

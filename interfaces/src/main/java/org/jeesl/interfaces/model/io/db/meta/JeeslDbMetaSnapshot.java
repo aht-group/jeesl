@@ -14,8 +14,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 public interface JeeslDbMetaSnapshot<SYSTEM extends JeeslIoSsiSystem<?,?>,
-									MT extends JeeslDbMetaTable<SYSTEM,?>,
-									MC extends JeeslDbMetaConstraint<SYSTEM,?,MT>>
+									TAB extends JeeslDbMetaTable<SYSTEM,?>,
+									COL extends JeeslDbMetaColumn<?,TAB,?>,
+									MC extends JeeslDbMetaConstraint<?,TAB>>
 					extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 						JeeslWithRecordDateTime,EjbWithName,EjbWithParentAttributeResolver
 {
@@ -24,8 +25,11 @@ public interface JeeslDbMetaSnapshot<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	SYSTEM getSystem();
 	void setSystem(SYSTEM system);
 	
-	List<MT> getTables();
-	void setTables(List<MT> tables);
+	List<TAB> getTables();
+	void setTables(List<TAB> tables);
+	
+	List<COL> getColumns();
+	void setColumns(List<COL> columns);
 	
 	List<MC> getConstraints();
 	void setConstraints(List<MC> constraints);

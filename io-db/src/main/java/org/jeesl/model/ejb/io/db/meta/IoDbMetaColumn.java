@@ -11,25 +11,19 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
-import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
-@Table(name="IoDbMetaColumn",uniqueConstraints=@UniqueConstraint(columnNames={"system_id","table_id","code"}))
-public class IoDbMetaColumn implements JeeslDbMetaColumn<IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable>
+@Table(name="IoDbMetaColumn",uniqueConstraints=@UniqueConstraint(columnNames={"table_id","code"}))
+public class IoDbMetaColumn implements JeeslDbMetaColumn<IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumnType>
 {
 	public static final long serialVersionUID=1;
-	
-	
+
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
-	@NotNull @ManyToOne
-	private IoSsiSystem system;
-	@Override public IoSsiSystem getSystem() {return system;}
-	@Override public void setSystem(IoSsiSystem system) {this.system = system;}
-	
+		
 	@NotNull @ManyToOne
 	private IoDbMetaTable table;
 	@Override public IoDbMetaTable getTable() {return table;}
@@ -40,6 +34,12 @@ public class IoDbMetaColumn implements JeeslDbMetaColumn<IoSsiSystem,IoDbMetaSna
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
 	
+	@NotNull @ManyToOne
+	private IoDbMetaColumnType type;
+	@Override public IoDbMetaColumnType getType() {return type;}
+	@Override public void setType(IoDbMetaColumnType type) {this.type = type;}
+
+
 	@Override public boolean equals(Object object){return (object instanceof IoDbMetaColumn) ? id == ((IoDbMetaColumn) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 }

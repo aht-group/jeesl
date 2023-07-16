@@ -19,6 +19,7 @@ import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.ejb.io.db.EjbDbDumpFileFactory;
 import org.jeesl.factory.ejb.io.db.EjbIoDumpFactory;
+import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaColumnFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSnapshotFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaTableFactory;
@@ -28,6 +29,7 @@ import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
@@ -36,6 +38,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
+import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaColumn;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
@@ -54,32 +57,34 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 							HOST extends JeeslIoSsiHost<L,D,SYSTEM>,
 							STATUS extends JeeslDbDumpStatus<L,D,STATUS,?>,
 							
-							MS extends JeeslDbMetaSnapshot<SYSTEM,TAB,MC>,
-							TAB extends JeeslDbMetaTable<SYSTEM,MS>,
-							COL extends JeeslDbMetaColumn<SYSTEM,MS,TAB>,
-							MC extends JeeslDbMetaConstraint<SYSTEM,MS,TAB>>
+							SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,MC>,
+							TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+							COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
+							COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
+							MC extends JeeslDbMetaConstraint<SNAP,TAB>>
 					implements JeeslIoDbRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestGenericHandler.class);
 	
 	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb;
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,MC> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,MC> fbDbMeta;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
-	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,TAB,MC> fDb;
+	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,TAB,COL,MC> fDb;
 	
 	private EjbIoDumpFactory<SYSTEM,DUMP> efDump;
 	private EjbDbDumpFileFactory<DUMP,FILE,HOST,STATUS> efDumpFile;
-	private final EjbIoDbMetaSnapshotFactory<SYSTEM,MS> efSnapshot;
+	private final EjbIoDbMetaSnapshotFactory<SYSTEM,SNAP> efSnapshot;
 	private final EjbIoDbMetaTableFactory<SYSTEM,TAB> efTable;
-	private final EjbIoDbMetaConstraintFactory<SYSTEM,TAB,MC> efConstraint;
+	private final EjbIoDbMetaColumnFactory<TAB,COL> efColumn;
+	private final EjbIoDbMetaConstraintFactory<TAB,MC> efConstraint;
 
 	private final SYSTEM system;
 	
 	public IoDbRestGenericHandler(IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb,
-							IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,MC> fbDbMeta,
+							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,MC> fbDbMeta,
 							IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi,
-							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,TAB,MC> fDb,
+							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,TAB,COL,MC> fDb,
 							SYSTEM system)
 	{
 
@@ -95,6 +100,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 		efDumpFile = fbDb.dumpFile();
 		efSnapshot = fbDbMeta.ejbSnapshot();
 		efTable = fbDbMeta.ejbTable();
+		efColumn = fbDbMeta.ejbColumn();
 		efConstraint = fbDbMeta.ejbConstraint();
 	}
 		
@@ -177,7 +183,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 		try
 		{
 			SYSTEM eSystem = fDb.fByCode(fbSsi.getClassSystem(),snapshot.getSystem().getCode());
-			MS eSnapshot = efSnapshot.build(eSystem);
+			SNAP eSnapshot = efSnapshot.build(eSystem);
 			eSnapshot.setRecord(snapshot.getRecord());
 			eSnapshot = fDb.save(eSnapshot);
 			
@@ -200,24 +206,54 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			
 			query.reset();
 			query.add(eSystem);
+			List<COL> columns = fDb.fIoDbMetaColumns(query);
+			Map<String,Map<String,COL>> mapSystemColums = efColumn.toMapTableColumn(columns);
+			Map<String,Map<String,COL>> mapSnapshotColums = new HashMap<>();
+			for(JsonPostgresMetaTable jTable : snapshot.getTables())
+			{
+				if(Objects.nonNull(jTable.getColumns()))
+				{
+					if(!mapSystemColums.containsKey(jTable.getCode())) {mapSystemColums.put(jTable.getCode(), new HashMap<>());}
+					if(!mapSnapshotColums.containsKey(jTable.getCode())) {mapSnapshotColums.put(jTable.getCode(), new HashMap<>());}
+					
+					for(JsonPostgresMetaColumn jColumn : jTable.getColumns())
+					{
+						if(!mapSystemColums.get(jTable.getCode()).containsKey(jColumn.getCode()))
+						{
+							COL col = efColumn.build(mapTable.get(jTable.getCode()),jColumn.getCode());
+							mapSnapshotColums.get(jTable.getCode()).put(jColumn.getCode(), fDb.save(col));
+						}
+						else {mapSnapshotColums.get(jTable.getCode()).put(jColumn.getCode(), mapSystemColums.get(jTable.getCode()).get(jColumn.getCode()));}
+					}
+				}
+			}
+			for(Map<String,COL> map : mapSnapshotColums.values()) {eSnapshot.getColumns().addAll(map.values());}
+			eSnapshot = fDb.save(eSnapshot);
+			
+			query.reset();
+			query.add(eSystem);
 			List<MC> constraints = fDb.fIoDbMetaConstraints(query);
-			Map<String,Map<String,MC>> mapConstraint = efConstraint.toMapTableConstraint(constraints);
+			Map<String,Map<String,MC>> mapSystemConstraint = efConstraint.toMapTableConstraint(constraints);
+			Map<String,Map<String,MC>> mapSnapshotConstraints = new HashMap<>();
 			for(JsonPostgresMetaTable jTable : snapshot.getTables())
 			{
 				if(Objects.nonNull(jTable.getForeignKeys()))
 				{
-					if(!mapConstraint.containsKey(jTable.getCode())) {mapConstraint.put(jTable.getCode(), new HashMap<>());}
+					if(!mapSystemConstraint.containsKey(jTable.getCode())) {mapSystemConstraint.put(jTable.getCode(), new HashMap<>());}
+					if(!mapSnapshotConstraints.containsKey(jTable.getCode())) {mapSnapshotConstraints.put(jTable.getCode(), new HashMap<>());}
+					
 					for(JsonPostgresMetaConstraint jConstraint : jTable.getForeignKeys())
 					{
-						if(!mapConstraint.get(jTable.getCode()).containsKey(jConstraint.getCode()))
+						if(!mapSystemConstraint.get(jTable.getCode()).containsKey(jConstraint.getCode()))
 						{
-							MC mc = efConstraint.build(eSystem,mapTable.get(jTable.getCode()),jConstraint.getCode());
-							mapConstraint.get(jTable.getCode()).put(jConstraint.getCode(), fDb.save(mc));
+							MC mc = efConstraint.build(mapTable.get(jTable.getCode()),jConstraint.getCode());
+							mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), fDb.save(mc));
 						}
+						else {mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), mapSystemConstraint.get(jTable.getCode()).get(jConstraint.getCode()));}
 					}
 				}
 			}
-			for(Map<String,MC> map : mapConstraint.values()) {eSnapshot.getConstraints().addAll(map.values());}
+			for(Map<String,MC> map : mapSystemConstraint.values()) {eSnapshot.getConstraints().addAll(map.values());}
 			eSnapshot = fDb.save(eSnapshot);
 		}
 		catch (JeeslNotFoundException e) {dut.error(e);}

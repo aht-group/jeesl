@@ -5,29 +5,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
-								MC extends JeeslDbMetaConstraint<?,MT>>
+public class EjbIoDbMetaColumnFactory<TAB extends JeeslDbMetaTable<?,?>,
+								COL extends JeeslDbMetaColumn<?,TAB,?>>
 {
-	final static Logger logger = LoggerFactory.getLogger(EjbIoDbMetaConstraintFactory.class);
+	final static Logger logger = LoggerFactory.getLogger(EjbIoDbMetaColumnFactory.class);
 	
-	private final Class<MC> cConstraint;
+	private final Class<COL> cColumn;
     
-	public EjbIoDbMetaConstraintFactory(final Class<MC> cConstraint)
+	public EjbIoDbMetaColumnFactory(final Class<COL> cColumn)
 	{       
-        this.cConstraint = cConstraint;
+        this.cColumn = cColumn;
 	}
 	
-	public MC build(MT table, String code)
+	public COL build(TAB table, String code)
 	{
-		MC ejb = null;
+		COL ejb = null;
 		try
 		{
-			 ejb = cConstraint.newInstance();
+			 ejb = cColumn.newInstance();
 			 ejb.setTable(table);
 			 ejb.setCode(code);
 		}
@@ -37,10 +37,10 @@ public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
 		return ejb;
 	}
 	
-	public Map<MT,List<MC>> toMapConstraints(List<MC> list)
+	public Map<TAB,List<COL>> toMapColumn(List<COL> list)
 	{
-		Map<MT,List<MC>> map = new HashMap<>();
-		for(MC c : list)
+		Map<TAB,List<COL>> map = new HashMap<>();
+		for(COL c : list)
 		{
 			if(!map.containsKey(c.getTable())) {map.put(c.getTable(), new ArrayList<>());}
 			map.get(c.getTable()).add(c);
@@ -48,10 +48,10 @@ public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
 		return map;
 	}
 	
-	public Map<String,Map<String,MC>> toMapTableConstraint(List<MC> list)
+	public Map<String,Map<String,COL>> toMapTableColumn(List<COL> list)
 	{
-		Map<String,Map<String,MC>> map = new HashMap<>();
-		for(MC c : list)
+		Map<String,Map<String,COL>> map = new HashMap<>();
+		for(COL c : list)
 		{
 			if(!map.containsKey(c.getTable().getCode())) {map.put(c.getTable().getCode(), new HashMap<>());}
 			map.get(c.getTable().getCode()).put(c.getCode(), c);

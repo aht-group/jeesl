@@ -11,11 +11,10 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
-import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
-@Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"system_id","table_id","code"}))
-public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable>
+@Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"table_id","code"}))
+public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapshot,IoDbMetaTable>
 {
 	public static final long serialVersionUID=1;
 	
@@ -24,11 +23,6 @@ public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoSsiSystem,IoD
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
-	@NotNull @ManyToOne
-	private IoSsiSystem system;
-	@Override public IoSsiSystem getSystem() {return system;}
-	@Override public void setSystem(IoSsiSystem system) {this.system = system;}
 	
 	@NotNull @ManyToOne
 	private IoDbMetaTable table;
