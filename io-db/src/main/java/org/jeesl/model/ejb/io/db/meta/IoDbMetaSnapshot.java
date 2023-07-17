@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -49,19 +50,19 @@ public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMet
 	@Override public String getName() {return name;}
 	@Override public void setName(String name) {this.name = name;}
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinTable(name="IoDbMetaSnapshotJtTable",joinColumns={@JoinColumn(name="snapshot_id")},inverseJoinColumns={@JoinColumn(name="table_id")})
 	private List<IoDbMetaTable> tables;
 	public List<IoDbMetaTable> getTables() {if(Objects.isNull(tables)) {tables = new ArrayList<>();} return tables;}
 	public void setTables(List<IoDbMetaTable> tables) {this.tables = tables;}
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinTable(name="IoDbMetaSnapshotJtColumn",joinColumns={@JoinColumn(name="snapshot_id")},inverseJoinColumns={@JoinColumn(name="column_id")})
 	private List<IoDbMetaColumn> columns;
 	public List<IoDbMetaColumn> getColumns() {if(Objects.isNull(columns)) {columns = new ArrayList<>();} return columns;}
 	public void setColumns(List<IoDbMetaColumn> columns) {this.columns = columns;}
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinTable(name="IoDbMetaSnapshotJtConstraint",joinColumns={@JoinColumn(name="snapshot_id")},inverseJoinColumns={@JoinColumn(name="constraint_id")})
 	private List<IoDbMetaConstraint> constraints;
 	public List<IoDbMetaConstraint> getConstraints() {if(Objects.isNull(constraints)) {constraints = new ArrayList<>();} return constraints;}
@@ -70,4 +71,11 @@ public class IoDbMetaSnapshot implements JeeslDbMetaSnapshot<IoSsiSystem,IoDbMet
 
 	@Override public boolean equals(Object object){return (object instanceof IoDbMetaSnapshot) ? id == ((IoDbMetaSnapshot) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
+	
+	@Override public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("[").append(id).append("|");
+		return sb.toString();
+	}
 }

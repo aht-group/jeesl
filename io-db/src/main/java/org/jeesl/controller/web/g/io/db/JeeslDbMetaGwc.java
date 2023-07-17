@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -20,10 +23,13 @@ import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaColumnFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.bean.th.ThMultiFilter;
+import org.jeesl.interfaces.bean.th.ThMultiFilterBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaDifference;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
@@ -33,6 +39,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
+import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
+import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,93 +48,134 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
-								MS extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,MC>,
-								TAB extends JeeslDbMetaTable<SYSTEM,MS>,
-								COL extends JeeslDbMetaColumn<MS,TAB,COLT>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
-								MC extends JeeslDbMetaConstraint<MS,TAB>
+								CON extends JeeslDbMetaConstraint<SNAP,TAB>,
+								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>
 >
 					extends AbstractJeeslWebController<L,D,LOC>
-					implements SbSingleBean
+					implements SbSingleBean,ThMultiFilterBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbMetaGwc.class);
 	
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,COLT,MC> fbDb;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,DIFF> fbDb;
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,TAB,COL,MC> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON> fDb;
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
-
-	private final EjbIoDbMetaConstraintFactory<TAB,MC> efConstraint;
+	private final ThMultiFilterHandler<DIFF> thFilter; public ThMultiFilterHandler<DIFF> getThFilter() {return thFilter;}
+	
+	private final EjbCodeCache<DIFF> cacheDiff;
+	
+	private final EjbIoDbMetaConstraintFactory<TAB,CON> efConstraint;
 	private final EjbIoDbMetaColumnFactory<TAB,COL> efColumn;
 	
-	private final Comparator<MS> cpSnapshot;
+	private final Comparator<SNAP> cpSnapshot;
 	private final Comparator<TAB> cpTable;
 	
 	private final Map<TAB,List<COL>> mapColumn; public Map<TAB,List<COL>> getMapColumn() {return mapColumn;}
-	private final Map<TAB,List<MC>> mapConstraint; public Map<TAB,List<MC>> getMapConstraint() {return mapConstraint;}
-
-	private final List<MS> snapshots; public List<MS> getSnapshots() {return snapshots;}
-	private final List<TAB> tables; public List<TAB> getTables() {return tables;}
+	private final Map<TAB,List<CON>> mapConstraint; public Map<TAB,List<CON>> getMapConstraint() {return mapConstraint;}
+	private final Map<TAB,DIFF> mapDiffTable; public Map<TAB, DIFF> getMapDiffTable() {return mapDiffTable;}
+	private final Map<COL,DIFF> mapDiffColumn; public Map<COL,DIFF> getMapDiffColumn() {return mapDiffColumn;}
+	private final Map<CON,DIFF> mapDiffConstraint; public Map<CON,DIFF> getMapDiffConstraint() {return mapDiffConstraint;}
 	
-	private MS snapshot; public MS getSnapshot() {return snapshot;} public void setSnapshot(MS snapshot) {this.snapshot = snapshot;}
-	private MS snapshotSource; public MS getSnapshotSource() {return snapshotSource;} public void setSnapshotSource(MS snapshotSource) {this.snapshotSource = snapshotSource;}
-	private MS snapshotTarget; public MS getSnapshotTarget() {return snapshotTarget;} public void setSnapshotTarget(MS snapshotTarget) {this.snapshotTarget = snapshotTarget;}
+	private final Set<TAB> setSourceTable, setTargetTable;
+	private final Set<COL> setSourceColumn, setTargetColumn;
+	private final Set<CON> setSourceConstraint, setTargetConstraint;
+	
+	private final List<SNAP> snapshots; public List<SNAP> getSnapshots() {return snapshots;}
+	private final List<TAB> systemTables; private final List<TAB> snapshotTables; public List<TAB> getSnapshotTables() {return snapshotTables;}
+	private final List<COL> systemColumn;
+	private final List<CON> systemConstraints;
+	
+	private SNAP snapshot; public SNAP getSnapshot() {return snapshot;} public void setSnapshot(SNAP snapshot) {this.snapshot = snapshot;}
+	private SNAP snapshotSource; public SNAP getSnapshotSource() {return snapshotSource;} public void setSnapshotSource(SNAP snapshotSource) {this.snapshotSource = snapshotSource;}
+	private SNAP snapshotTarget; public SNAP getSnapshotTarget() {return snapshotTarget;} public void setSnapshotTarget(SNAP snapshotTarget) {this.snapshotTarget = snapshotTarget;}
 
-	public JeeslDbMetaGwc(IoDbMetaFactoryBuilder<L,D,SYSTEM,MS,TAB,COL,COLT,MC> fbDb)
+	public JeeslDbMetaGwc(IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,DIFF> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb = fbDb;
 		
 		sbhSystem = new SbSingleHandler<>(fbDb.getClassSsiSystem(),this);
+		thFilter = new ThMultiFilterHandler<>(this);
+		
+		cacheDiff = EjbCodeCache.instance(fbDb.getClassDifference());
 		
 		efColumn = fbDb.ejbColumn();
 		efConstraint = fbDb.ejbConstraint();
 		
-		cpSnapshot = new EjbWithRecordJtComparator<MS>().factory(EjbWithRecordJtComparator.Type.dsc); 
+		cpSnapshot = new EjbWithRecordJtComparator<SNAP>().factory(EjbWithRecordJtComparator.Type.dsc); 
 		cpTable = new EjbIoDbTableComparator<TAB>().instance(EjbIoDbTableComparator.Type.code);
 		
 		mapColumn = new HashMap<>();
 		mapConstraint = new HashMap<>();
+		mapDiffTable = new HashMap<>();
+		mapDiffColumn = new HashMap<>();
+		mapDiffConstraint = new HashMap<>();
+		
+		setSourceTable = new HashSet<>(); setTargetTable = new HashSet<>();
+		setSourceColumn = new HashSet<>(); setTargetColumn = new HashSet<>();
+		setSourceConstraint = new HashSet<>(); setTargetConstraint = new HashSet<>();
 		
 		snapshots = new ArrayList<>();
-		tables = new ArrayList<>();
+		
+		systemTables = new ArrayList<>(); snapshotTables = new ArrayList<>();
+		systemColumn = new ArrayList<>();
+		systemConstraints = new ArrayList<>();
 	}
 
-	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,TAB,COL,MC> fDb)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON> fDb)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fDb = fDb;
 		sbhSystem.setList(fDb.all(fbDb.getClassSsiSystem()));
 		
-		this.reloadSnapshots();
+		thFilter.setList(fDb.all(fbDb.getClassDifference()));
+		thFilter.preSelect(fbDb.getClassDifference(),JeeslDbMetaDifference.Code.deleted,JeeslDbMetaDifference.Code.added);
+		
+		cacheDiff.facade(fDb);
+		
+		this.reloadSystem();
+		this.reloadSnapshot();
 	}
 
-	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException {
+	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
+	{
 		// TODO Auto-generated method stub
-		
 	}
 	
-	public void reloadSnapshots()
+	@Override public void filtered(ThMultiFilter filter) throws JeeslLockingException, JeeslConstraintViolationException
+	{
+		logger.info("Received "+filter.getClass().getSimpleName());
+		this.reloadFilter();
+	}
+	
+	public void reloadSystem()
 	{
 		mapConstraint.clear();
 		snapshots.clear();
-		tables.clear();
+		systemTables.clear(); systemColumn.clear(); systemConstraints.clear();
 		
 		if(sbhSystem.isSelected())
 		{
 			snapshots.addAll(fDb.allForParent(fbDb.getClassSnapshot(),sbhSystem.getSelection()));
 			Collections.sort(snapshots,cpSnapshot);
 			
-			EjbIoDbQuery<SYSTEM> query = new EjbIoDbQuery<>();
+			EjbIoDbQuery<SYSTEM,SNAP> query = new EjbIoDbQuery<>();
 			query.add(sbhSystem.getSelection());
 			
-			tables.addAll(fDb.fIoDbMetaTables(query));
-			Collections.sort(tables,cpTable);
+			systemTables.addAll(fDb.fIoDbMetaTables(query));
+			Collections.sort(systemTables,cpTable);
 			
-			mapColumn.putAll(efColumn.toMapColumn(fDb.fIoDbMetaColumns(query)));
-			mapConstraint.putAll(efConstraint.toMapConstraints(fDb.fIoDbMetaConstraints(query)));
+			systemColumn.addAll(fDb.fIoDbMetaColumns(query));
+			mapColumn.putAll(efColumn.toMapColumn(systemColumn));
+			
+			systemConstraints.addAll(fDb.fIoDbMetaConstraints(query));
+			mapConstraint.putAll(efConstraint.toMapConstraints(systemConstraints));
 		}
 		
 		if(ObjectUtils.isNotEmpty(snapshots))
@@ -145,10 +194,118 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	{
 		snapshotSource = fDb.find(fbDb.getClassSnapshot(), snapshot.getId());
 		snapshot=null;
+		this.reloadSnapshot();
+		this.reloadFilter();
 	}
+	public void deleteSource() throws JeeslNotFoundException, JeeslConstraintViolationException
+	{
+		snapshots.remove(snapshotSource);
+		fDb.deleteIoDbSnapshot(snapshotSource);
+		
+		snapshotSource = null;
+		snapshot=null;
+		snapshotTables.clear();
+	}
+	
 	public void magnetTarget() throws JeeslNotFoundException
 	{
 		snapshotTarget = fDb.find(fbDb.getClassSnapshot(), snapshot.getId());
 		snapshot=null;
+		this.reloadSnapshot();
+		this.reloadFilter();
+	}
+	public void deleteTarget() throws JeeslNotFoundException, JeeslConstraintViolationException
+	{
+		snapshots.remove(snapshotTarget);
+		fDb.deleteIoDbSnapshot(snapshotTarget);
+		snapshotTarget = null;
+		
+		snapshot=null;
+		snapshotTables.clear();
+	}
+	
+	public void reloadSnapshot()
+	{
+		setSourceTable.clear(); setTargetTable.clear();
+		setSourceColumn.clear(); setTargetColumn.clear();
+		setSourceConstraint.clear(); setTargetConstraint.clear();
+		
+		if(sbhSystem.isSelected())
+		{
+			if(Objects.nonNull(snapshotSource))
+			{
+				EjbIoDbQuery<SYSTEM,SNAP> query = new EjbIoDbQuery<>();
+				query.add(sbhSystem.getSelection());
+				query.add(snapshotSource);
+				
+				setSourceTable.addAll(fDb.fIoDbMetaTables(query));
+				setSourceColumn.addAll(fDb.fIoDbMetaColumns(query));
+				setSourceConstraint.addAll(fDb.fIoDbMetaConstraints(query));
+			}
+			
+			if(Objects.nonNull(snapshotTarget))
+			{
+				EjbIoDbQuery<SYSTEM,SNAP> query = new EjbIoDbQuery<>();
+				query.add(sbhSystem.getSelection());
+				query.add(snapshotTarget);
+				
+				setTargetTable.addAll(fDb.fIoDbMetaTables(query));
+				setTargetColumn.addAll(fDb.fIoDbMetaColumns(query));
+				setTargetConstraint.addAll(fDb.fIoDbMetaConstraints(query));
+			}
+			
+			logger.info(fbDb.getClassTable().getSimpleName()+": "+snapshotSource.toString()+":"+setSourceTable.size()+" -> "+snapshotTarget.toString()+":"+setTargetTable.size());
+			logger.info(fbDb.getClassMetaColumn().getSimpleName()+": "+snapshotSource.toString()+":"+setSourceColumn.size()+" -> "+snapshotTarget.toString()+":"+setTargetColumn.size());
+			logger.info(fbDb.getClassMetaConstraint().getSimpleName()+": "+snapshotSource.toString()+":"+setSourceConstraint.size()+" -> "+snapshotTarget.toString()+":"+setTargetConstraint.size());
+		}
+	}
+	
+	public void reloadFilter()
+	{
+		snapshotTables.clear();
+		mapDiffTable.clear();
+		mapDiffColumn.clear();
+		mapDiffConstraint.clear();
+		
+		Set<DIFF> filter = new HashSet<>(thFilter.getSelected());
+		for(TAB t : systemTables)
+		{
+			DIFF d = null;
+			if(setSourceTable.contains(t) && setTargetTable.contains(t)) {d = cacheDiff.ejb(JeeslDbMetaDifference.Code.both);}
+			else if(setSourceTable.contains(t) && !setTargetTable.contains(t)) {d = cacheDiff.ejb(JeeslDbMetaDifference.Code.deleted);}
+			else if(!setSourceTable.contains(t) && setTargetTable.contains(t)) {d = cacheDiff.ejb(JeeslDbMetaDifference.Code.added);}
+			
+			if(Objects.nonNull(d) )
+			{
+				mapDiffTable.put(t,d);
+				if(filter.contains(d)) {snapshotTables.add(t);}
+			}
+		}
+		for(COL c : systemColumn)
+		{
+			DIFF d = null;
+			if(setSourceColumn.contains(c) && setTargetColumn.contains(c)) {d = cacheDiff.ejb(JeeslDbMetaDifference.Code.both);}
+			else if(setSourceColumn.contains(c) && !setTargetColumn.contains(c)) {d = cacheDiff.ejb(JeeslDbMetaDifference.Code.deleted);}
+			else if(!setSourceColumn.contains(c) && setTargetColumn.contains(c)) {d = cacheDiff.ejb(JeeslDbMetaDifference.Code.added);}
+			
+			if(Objects.nonNull(d) )
+			{
+				mapDiffColumn.put(c,d);
+				if(filter.contains(d) && !snapshotTables.contains(c.getTable())) {snapshotTables.add(c.getTable());}
+			}
+		}
+		for(CON c : systemConstraints)
+		{
+			DIFF d = null;
+			if(setSourceConstraint.contains(c) && setTargetConstraint.contains(c)) {d = cacheDiff.ejb(JeeslDbMetaDifference.Code.both);}
+			else if(setSourceConstraint.contains(c) && !setTargetConstraint.contains(c)) {d = cacheDiff.ejb(JeeslDbMetaDifference.Code.deleted);}
+			else if(!setSourceConstraint.contains(c) && setTargetConstraint.contains(c)) {d = cacheDiff.ejb(JeeslDbMetaDifference.Code.added);}
+			
+			if(Objects.nonNull(d))
+			{
+				mapDiffConstraint.put(c,d);
+				if(filter.contains(d) && !snapshotTables.contains(c.getTable())) {snapshotTables.add(c.getTable());}
+			}
+		}
 	}
 }

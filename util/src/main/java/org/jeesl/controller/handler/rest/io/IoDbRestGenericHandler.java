@@ -43,6 +43,7 @@ import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
+import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,10 +68,10 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestGenericHandler.class);
 	
 	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb;
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,MC> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,MC,?> fbDbMeta;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
-	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,TAB,COL,MC> fDb;
+	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,MC> fDb;
 	
 	private EjbIoDumpFactory<SYSTEM,DUMP> efDump;
 	private EjbDbDumpFileFactory<DUMP,FILE,HOST,STATUS> efDumpFile;
@@ -82,9 +83,9 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	private final SYSTEM system;
 	
 	public IoDbRestGenericHandler(IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb,
-							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,MC> fbDbMeta,
+							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,MC,?> fbDbMeta,
 							IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi,
-							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,TAB,COL,MC> fDb,
+							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,MC> fDb,
 							SYSTEM system)
 	{
 
@@ -180,6 +181,9 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	public JsonSsiUpdate uploadMetaSnapshot(JsonPostgresMetaSnapshot snapshot)
 	{
 		DataUpdateTracker dut = DataUpdateTracker.instance().start();
+		
+		EjbCodeCache<COLT> cacheColumnType = EjbCodeCache.instance(fbDbMeta.getClassColumnType()).facade(fDb);
+		
 		try
 		{
 			SYSTEM eSystem = fDb.fByCode(fbSsi.getClassSystem(),snapshot.getSystem().getCode());
@@ -187,7 +191,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			eSnapshot.setRecord(snapshot.getRecord());
 			eSnapshot = fDb.save(eSnapshot);
 			
-			EjbIoDbQuery<SYSTEM> query = new EjbIoDbQuery<>();
+			EjbIoDbQuery<SYSTEM,SNAP> query = new EjbIoDbQuery<>();
 			query.add(eSystem);
 			query.codeList(JsonDbMetaTableFactory.toCodes(snapshot));
 			
@@ -220,7 +224,10 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 					{
 						if(!mapSystemColums.get(jTable.getCode()).containsKey(jColumn.getCode()))
 						{
+							cacheColumnType.verify(jColumn.getType().getCode());
+						
 							COL col = efColumn.build(mapTable.get(jTable.getCode()),jColumn.getCode());
+							col.setType(cacheColumnType.ejb(jColumn.getType().getCode()));
 							mapSnapshotColums.get(jTable.getCode()).put(jColumn.getCode(), fDb.save(col));
 						}
 						else {mapSnapshotColums.get(jTable.getCode()).put(jColumn.getCode(), mapSystemColums.get(jTable.getCode()).get(jColumn.getCode()));}
@@ -253,7 +260,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 					}
 				}
 			}
-			for(Map<String,MC> map : mapSystemConstraint.values()) {eSnapshot.getConstraints().addAll(map.values());}
+			for(Map<String,MC> map : mapSnapshotConstraints.values()) {eSnapshot.getConstraints().addAll(map.values());}
 			eSnapshot = fDb.save(eSnapshot);
 		}
 		catch (JeeslNotFoundException e) {dut.error(e);}

@@ -41,7 +41,8 @@
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoDbMetaSnapshot" code="source"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.process()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveSource()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteSource()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.magnetSource()}" update=":#{cc.id}:grid" rendered="#{not empty cc.attrs.ctrl.snapshot}"/>
 					</f:facet>
 					
@@ -57,7 +58,7 @@
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoDbMetaSnapshot" code="target"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.process()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveTarget()}" update=":#{cc.id}:grid" />
 						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.magnetTarget()}" update=":#{cc.id}:grid" rendered="#{not empty cc.attrs.ctrl.snapshot}"/>
 					</f:facet>
 					
@@ -71,11 +72,12 @@
 	</j:row>
 	<j:row id="rTable">
 		<j:slot width="12">
-			<p:dataTable styleClass="jeesl-datatable"
-							var="t" value="#{cc.attrs.ctrl.tables}" draggableRows="false">
+			<h:form id="fTable">
+				<p:dataTable styleClass="jeesl-datatable"
+							var="t" value="#{cc.attrs.ctrl.snapshotTables}" draggableRows="false">
 					<f:facet name="header">
 						<j:dtHeader entity="IoDbMetaTable" code="listOf">
-							
+							<jp:thFilter handler="#{cc.attrs.ctrl.thFilter}"/>
 						</j:dtHeader>	
 					</f:facet>
 					<p:column>
@@ -84,21 +86,25 @@
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="code"/></f:facet>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffTable[t]}" marginRight="5"/>
 						<h:outputText value="#{t.code}"/>
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="columns"/></f:facet>
 						<ui:repeat var="c" value="#{cc.attrs.ctrl.mapColumn[t]}">
+							<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffColumn[c]}" marginRight="5"/>
 							<h:outputText value="#{c.code}"/><br/>
 						</ui:repeat>
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="constraints"/></f:facet>
 						<ui:repeat var="c" value="#{cc.attrs.ctrl.mapConstraint[t]}">
+							<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffConstraint[c]}" marginRight="5"/>
 							<h:outputText value="#{c.code}"/><br/>
 						</ui:repeat>
 					</p:column>
 				</p:dataTable>
+			</h:form>
 		</j:slot>
 	</j:row>
 </jp:grid>

@@ -3,12 +3,14 @@ package org.jeesl.api.facade.io;
 import java.util.List;
 import java.util.Map;
 
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
@@ -20,6 +22,7 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DF extends JeeslDbDumpFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
 								
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,MC>,
 								TAB extends JeeslDbMetaTable<SYSTEM,?>,
 								COL extends JeeslDbMetaColumn<?,TAB,?>,
 								MC extends JeeslDbMetaConstraint<?,TAB>
@@ -38,7 +41,8 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	JsonPostgres postgresConnections(String dbName);
 	JsonPostgres postgresStatements(String dbName);
 	
-	List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM> query);
-	List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM> query);
-	List<MC> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM> query);
+	void deleteIoDbSnapshot(SNAP snapshot) throws JeeslConstraintViolationException;
+	List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM,SNAP> query);
+	List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM,SNAP> query);
+	List<MC> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM,SNAP> query);
 }

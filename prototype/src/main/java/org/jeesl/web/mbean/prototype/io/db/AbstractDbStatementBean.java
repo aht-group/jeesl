@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.factory.txt.system.io.db.TxtSqlQueryFactory;
@@ -30,7 +29,7 @@ public class AbstractDbStatementBean <L extends JeeslLang, D extends JeeslDescri
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbStatementBean.class);
 	
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?> fDb;
 	private final IoDbPgFactoryBuilder<L,D,?,SC,?,?,?> fbDb;
 	
 	private final Map<String,SC> mapColumn; public Map<String,SC> getMapColumn() {return mapColumn;}
@@ -48,7 +47,7 @@ public class AbstractDbStatementBean <L extends JeeslLang, D extends JeeslDescri
 		mapColumn = new HashMap<>();
 	}
 	
-	public void postConstructDbStatement(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?> fDb)
+	public void postConstructDbStatement(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		mapColumn.putAll(EjbCodeFactory.toMapCode(fDb.allOrderedPositionVisible(fbDb.getClassStatementColumn())));

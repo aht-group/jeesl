@@ -8,6 +8,7 @@ import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaTableFactory;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaDifference;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
@@ -22,7 +23,8 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 								TAB extends JeeslDbMetaTable<SYSTEM,MS>,
 								COL extends JeeslDbMetaColumn<MS,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
-								MC extends JeeslDbMetaConstraint<MS,TAB>
+								MC extends JeeslDbMetaConstraint<MS,TAB>,
+								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>
 								
 >
 			extends AbstractFactoryBuilder<L,D>
@@ -34,7 +36,9 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 	private final Class<MS> cSnapshot; public Class<MS> getClassSnapshot(){return cSnapshot;}
 	private final Class<TAB> cTable; public Class<TAB> getClassTable(){return cTable;}
 	private final Class<COL> cMetaColumn; public Class<COL> getClassMetaColumn(){return cMetaColumn;}
+	private final Class<COLT> cColumnType; public Class<COLT> getClassColumnType(){return cColumnType;}
 	private final Class<MC> cMetaConstraint; public Class<MC> getClassMetaConstraint(){return cMetaConstraint;}
+	private final Class<DIFF> cDifference; public Class<DIFF> getClassDifference(){return cDifference;}
 	
 
 	
@@ -43,7 +47,9 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 							final Class<MS> cSnapshot,
 							final Class<TAB> cTable,
 							final Class<COL> cMetaColumn,
-							final Class<MC> cMetaConstraint)
+							final Class<COLT> cColumnType,
+							final Class<MC> cMetaConstraint,
+							final Class<DIFF> cDifference)
 	{
 		super(cL,cD);
 		this.cSystem=cSystem;
@@ -51,7 +57,9 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		this.cSnapshot=cSnapshot;
 		this.cTable=cTable;
 		this.cMetaColumn=cMetaColumn;
+		this.cColumnType=cColumnType;
 		this.cMetaConstraint=cMetaConstraint;
+		this.cDifference=cDifference;
 		
 	}	
 	public EjbIoDbMetaSnapshotFactory<SYSTEM,MS> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
