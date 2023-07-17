@@ -4749,9 +4749,6 @@ body, .ui-widget {
         .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
           border-bottom-width: 4px;
           min-height: 42px; } }
-      @media (max-width: 768px) {
-        .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
-          border-bottom-width: 4px; } }
       .jeesl-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
         font-weight: 700;
         align-items: center;
@@ -5314,9 +5311,6 @@ body, .ui-widget {
       .jeesl-datatable .ui-datatable-header, .ui-datatable.ui-sortable-helper .ui-datatable-header {
         border-bottom-width: 4px;
         min-height: 42px; } }
-    @media (max-width: 768px) {
-      .jeesl-datatable .ui-datatable-header, .ui-datatable.ui-sortable-helper .ui-datatable-header {
-        border-bottom-width: 4px; } }
     .jeesl-datatable .ui-datatable-header .pf-datatable-header-title, .ui-datatable.ui-sortable-helper .ui-datatable-header .pf-datatable-header-title {
       font-weight: 700;
       align-items: center;
@@ -6284,9 +6278,6 @@ body, .ui-widget {
             .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
               border-bottom-width: 4px;
               min-height: 42px; } }
-          @media (max-width: 768px) {
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header {
-              border-bottom-width: 4px; } }
           .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
             font-weight: 700;
             align-items: center;

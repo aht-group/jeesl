@@ -642,13 +642,6 @@ $enable-pointer-cursor-for-buttons: true;
 	.ui-datatable-header {
 		@include jeesl-titlebar;
 		
-//		border-bottom: $header-element-underline solid $dark-colour; // Overriding primefaces selector.
-//		margin-bottom: 0;
-		
-		@media (max-width: 768px) {
-			border-bottom-width: $header-element-underline-mobile;
-		}
-		
 		.pf-datatable-header-title {
 			@include jeesl-titlebar-title;
 		}
