@@ -671,7 +671,7 @@ $border: $border-width solid $border-colour;
 		padding: 0;
 		text-shadow: none;
 		
-		@media (max-height: 768px) {
+		@media (max-width: 768px) {
 			background-size: 100% $ls-element-height-mobile;
 		}
 		
@@ -1180,7 +1180,7 @@ $border: $border-width solid $border-colour;
 		}
 		
 		.p-col {
-			padding: $half-spacing $regular-spacing;
+			padding: $half-spacing;
 			
 			&:first-child {
 				padding-left: 0;

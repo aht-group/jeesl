@@ -816,6 +816,8 @@ $enable-pointer-cursor-for-buttons: true;
 			
 			.p-col {
 				&.ui-outputlabel {
+					word-break: break-all;
+					
 					@media (max-width: 768px) {
 						left: 50%;
 						line-height: normal;
@@ -1798,6 +1800,10 @@ $enable-pointer-cursor-for-buttons: true;
 				margin: 6px 0;
 			}
 		}
+		
+		.jeesl-panelgrid-scrollview {
+			overflow-x: auto;
+		}
 	}
 	
 	.ui-panel-footer {
@@ -2528,6 +2534,10 @@ body, .ui-widget {
 						padding-left: 6px;
 					}
 				}
+				
+				.ui-inputfield {
+					min-height: calc(#{$sb-element-height} - 2 * #{$sb-vertical-padding});
+				}
 			}
 			
 			@include jeesl-sb-dropdown($white-100, $medium-colour, $dark-colour, $dark-colour);
@@ -2982,7 +2992,6 @@ body, .ui-widget {
 		
 		.jeesl-menu-bar-calendar-item {
 			display: flex;
-			height: 100%;
 			padding: 0;
 			top: 0;
 			
@@ -2999,6 +3008,7 @@ body, .ui-widget {
 			}
 			
 			.jeesl-menu-bar-calendar-item-list {
+				display: flex;
 				height: 100%;
 			    opacity: 1;
 				padding: 0;
@@ -3095,6 +3105,7 @@ body, .ui-widget {
 
 .jeesl-panel, .jeesl-tree, .jeesl-datatable, .jeesl-tabs, .html-container-panel {
 	margin-bottom: $regular-spacing;
+	overflow: hidden;
 }
 
 .jeesl-panel {
@@ -3162,6 +3173,7 @@ body, .ui-widget {
 	
 	border: $border;
 	border-radius: $border-radius;
+	overflow: hidden;
 	
 	&.jeesl-datatable-collapsible {
 		&.jeesl-active .ui-datatable-header {
@@ -3458,6 +3470,12 @@ body, .ui-widget {
 //		.ui-datatable-header {
 //			border-width: $border-width $border-width 0;
 //		}
+	}
+	
+	.ui-datatable-footer {
+		border: none;
+		border-radius: 0;
+		border-top: $border;
 	}
 }
 
