@@ -33,6 +33,10 @@
 						<f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="record"/></f:facet>
 						<jp:outputDate value="#{s.record}" withSecond="true"/>
 					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaSnapshot" code="name"/></f:facet>
+						<h:outputText value="#{s.name}"/>
+					</p:column>
 				</p:dataTable>
 			</h:form>
 		</j:slot>
@@ -49,6 +53,9 @@
 					<j:inputGrid>
 						<jtp:label entity="IoDbMetaSnapshot" code="record"/>
 						<jp:outputDate value="#{cc.attrs.ctrl.snapshotSource.record}" withSecond="true"/>
+						
+						<jtp:label entity="IoDbMetaSnapshot" code="name"/>
+						<p:inputText value="#{cc.attrs.ctrl.snapshotSource.name}"/>
 					</j:inputGrid>
 				</p:panel>
 			</h:form>	
@@ -65,6 +72,9 @@
 					<j:inputGrid>
 						<jtp:label entity="IoDbMetaSnapshot" code="record"/>
 						<jp:outputDate value="#{cc.attrs.ctrl.snapshotTarget.record}" withSecond="true"/>
+						
+						<jtp:label entity="IoDbMetaSnapshot" code="name"/>
+						<p:inputText value="#{cc.attrs.ctrl.snapshotTarget.name}"/>
 					</j:inputGrid>
 				</p:panel>
 			</h:form>	
@@ -98,10 +108,33 @@
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="constraints"/></f:facet>
-						<ui:repeat var="c" value="#{cc.attrs.ctrl.mapConstraint[t]}">
-							<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffConstraint[c]}" marginRight="5"/>
-							<h:outputText value="#{c.code}"/><br/>
-						</ui:repeat>
+						<h:dataTable rendered="false" var="c" value="#{cc.attrs.ctrl.mapConstraint[t]}">
+						   <h:column>
+								<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffConstraint[c]}" marginRight="5"/>		
+						      <h:outputText value="#{c.code}"/>
+						   </h:column>
+						   
+						   <h:column>
+						     <h:outputText value="#{c.columnLocal.code}"/>
+						   </h:column>
+						   
+						   <h:column>
+						     <h:outputText value="#{c.columnRemote.table.code}"/>
+						   </h:column>
+						   
+						    <h:column>
+						     <h:outputText value="#{c.columnRemote.code}"/>
+						   </h:column>
+						</h:dataTable>
+						<ui:fragment rendered="true">
+							<ui:repeat var="c" value="#{cc.attrs.ctrl.mapConstraint[t]}">
+								<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffConstraint[c]}" marginRight="5"/>
+								 <h:outputText value="#{c.code}"/>
+								 <h:outputText value=" [#{c.columnLocal.code}  #{c.columnRemote.table.code}.#{c.columnRemote.code}]"/>
+								<br/>
+							</ui:repeat>
+						</ui:fragment>
+						
 					</p:column>
 				</p:dataTable>
 			</h:form>

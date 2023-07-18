@@ -22,7 +22,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 
 @Entity
 @Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"table_id","code"}))
-public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapshot,IoDbMetaTable>
+public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraintType>
 {
 	public static final long serialVersionUID=1;
 	
@@ -42,13 +42,27 @@ public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapsho
 	@Override public String getCode() {return code;}
 	@Override public void setCode(String code) {this.code = code;}
 	
+	@NotNull @ManyToOne
+	private IoDbMetaConstraintType type;
+	@Override public IoDbMetaConstraintType getType() {return type;}
+	@Override public void setType(IoDbMetaConstraintType type) {this.type = type;}
+	
+	@ManyToOne
+	private IoDbMetaColumn columnLocal;
+	@Override public IoDbMetaColumn getColumnLocal() {return columnLocal;}
+	@Override public void setColumnLocal(IoDbMetaColumn columnLocal) {this.columnLocal = columnLocal;}
+	
+	@ManyToOne
+	private IoDbMetaColumn columnRemote;
+	@Override public IoDbMetaColumn getColumnRemote() {return columnRemote;}
+	@Override public void setColumnRemote(IoDbMetaColumn columnRemote) {this.columnRemote = columnRemote;}
+	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="IoDbMetaSnapshotJtConstraint",joinColumns={@JoinColumn(name="constraint_id")},inverseJoinColumns={@JoinColumn(name="snapshot_id")})
 	private List<IoDbMetaSnapshot> snapshots;
 	@Override public List<IoDbMetaSnapshot> getSnapshots() {if(Objects.isNull(snapshots)) {snapshots = new ArrayList<>();} return snapshots;}
 	@Override public void setSnapshots(List<IoDbMetaSnapshot> snapshots) {this.snapshots = snapshots;}
-
-
+	
 	@Override public boolean equals(Object object){return (object instanceof IoDbMetaConstraint) ? id == ((IoDbMetaConstraint) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 

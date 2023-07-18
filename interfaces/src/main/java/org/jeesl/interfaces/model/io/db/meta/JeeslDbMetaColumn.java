@@ -11,16 +11,16 @@ import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
-public interface JeeslDbMetaColumn<SNAP extends JeeslDbMetaSnapshot<?,MT,?,?>,
-										MT extends JeeslDbMetaTable<?,SNAP>,
+public interface JeeslDbMetaColumn<SNAP extends JeeslDbMetaSnapshot<?,TAB,?,?>,
+										TAB extends JeeslDbMetaTable<?,SNAP>,
 										COLT extends JeeslDbMetaColumnType<?,?,COLT,?>>
 					extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,
 							EjbWithNonUniqueCode,JeeslWithType<COLT>
 {
 	public static enum Attributes{table,code};
 	
-	MT getTable();
-	void setTable(MT table);
+	TAB getTable();
+	void setTable(TAB table);
 	
 	List<SNAP> getSnapshots();
 	void setSnapshots(List<SNAP> snapshots);

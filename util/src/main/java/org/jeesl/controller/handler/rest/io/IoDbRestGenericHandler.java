@@ -31,6 +31,7 @@ import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
@@ -58,34 +59,37 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 							HOST extends JeeslIoSsiHost<L,D,SYSTEM>,
 							STATUS extends JeeslDbDumpStatus<L,D,STATUS,?>,
 							
-							SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,MC>,
+							SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
 							TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
 							COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 							COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
-							MC extends JeeslDbMetaConstraint<SNAP,TAB>>
+							CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT>,
+							CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>>
 					implements JeeslIoDbRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestGenericHandler.class);
 	
 	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb;
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,MC,?> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,?> fbDbMeta;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
-	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,MC> fDb;
+	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON> fDb;
+	
+	private final EjbCodeCache<CONT> cacheConstraintType;
 	
 	private EjbIoDumpFactory<SYSTEM,DUMP> efDump;
 	private EjbDbDumpFileFactory<DUMP,FILE,HOST,STATUS> efDumpFile;
 	private final EjbIoDbMetaSnapshotFactory<SYSTEM,SNAP> efSnapshot;
 	private final EjbIoDbMetaTableFactory<SYSTEM,TAB> efTable;
 	private final EjbIoDbMetaColumnFactory<TAB,COL> efColumn;
-	private final EjbIoDbMetaConstraintFactory<TAB,MC> efConstraint;
+	private final EjbIoDbMetaConstraintFactory<TAB,CON> efConstraint;
 
 	private final SYSTEM system;
 	
 	public IoDbRestGenericHandler(IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb,
-							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,MC,?> fbDbMeta,
+							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,?> fbDbMeta,
 							IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi,
-							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,MC> fDb,
+							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON> fDb,
 							SYSTEM system)
 	{
 
@@ -96,6 +100,8 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 		this.fDb = fDb;
 		
 		this.system=system;
+		
+		cacheConstraintType = EjbCodeCache.instance(fbDbMeta.getClassConstraintType()).facade(fDb);
 		
 		efDump = fbDb.dump();
 		efDumpFile = fbDb.dumpFile();
@@ -228,7 +234,9 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 						
 							COL col = efColumn.build(mapTable.get(jTable.getCode()),jColumn.getCode());
 							col.setType(cacheColumnType.ejb(jColumn.getType().getCode()));
-							mapSnapshotColums.get(jTable.getCode()).put(jColumn.getCode(), fDb.save(col));
+							col = fDb.save(col);
+							mapSnapshotColums.get(jTable.getCode()).put(jColumn.getCode(), col);
+							mapSystemColums.get(jTable.getCode()).put(jColumn.getCode(), col);
 						}
 						else {mapSnapshotColums.get(jTable.getCode()).put(jColumn.getCode(), mapSystemColums.get(jTable.getCode()).get(jColumn.getCode()));}
 					}
@@ -239,9 +247,9 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			
 			query.reset();
 			query.add(eSystem);
-			List<MC> constraints = fDb.fIoDbMetaConstraints(query);
-			Map<String,Map<String,MC>> mapSystemConstraint = efConstraint.toMapTableConstraint(constraints);
-			Map<String,Map<String,MC>> mapSnapshotConstraints = new HashMap<>();
+			List<CON> constraints = fDb.fIoDbMetaConstraints(query);
+			Map<String,Map<String,CON>> mapSystemConstraint = efConstraint.toMapTableConstraint(constraints);
+			Map<String,Map<String,CON>> mapSnapshotConstraints = new HashMap<>();
 			for(JsonPostgresMetaTable jTable : snapshot.getTables())
 			{
 				if(Objects.nonNull(jTable.getForeignKeys()))
@@ -253,14 +261,23 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 					{
 						if(!mapSystemConstraint.get(jTable.getCode()).containsKey(jConstraint.getCode()))
 						{
-							MC mc = efConstraint.build(mapTable.get(jTable.getCode()),jConstraint.getCode());
-							mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), fDb.save(mc));
+							CON con = efConstraint.build(mapTable.get(jTable.getCode()),jConstraint.getCode());
+							con.setType(cacheConstraintType.ejb(JeeslDbMetaConstraintType.Code.fk));
+							con.setColumnLocal(mapSystemColums.get(jTable.getCode()).get(jConstraint.getLocalColumn()));
+							con.setColumnRemote(mapSystemColums.get(jConstraint.getRemoteTable()).get(jConstraint.getRemoteColumn()));
+							con = fDb.save(con);
+							
+							mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), con);
+							mapSystemConstraint.get(jTable.getCode()).put(jConstraint.getCode(), con);
 						}
-						else {mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), mapSystemConstraint.get(jTable.getCode()).get(jConstraint.getCode()));}
+						else
+						{
+							mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), mapSystemConstraint.get(jTable.getCode()).get(jConstraint.getCode()));
+						}
 					}
 				}
 			}
-			for(Map<String,MC> map : mapSnapshotConstraints.values()) {eSnapshot.getConstraints().addAll(map.values());}
+			for(Map<String,CON> map : mapSnapshotConstraints.values()) {eSnapshot.getConstraints().addAll(map.values());}
 			eSnapshot = fDb.save(eSnapshot);
 		}
 		catch (JeeslNotFoundException e) {dut.error(e);}

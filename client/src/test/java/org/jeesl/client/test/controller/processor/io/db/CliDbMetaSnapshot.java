@@ -40,7 +40,7 @@ public class CliDbMetaSnapshot
 		Connection connection = null;
 		try
 		{
-			connection = JeeslBootstrap.createMeisDatasource(config,systemCode).getConnection();
+			connection = JeeslBootstrap.buildDatasource(config,systemCode).getConnection();
 			snapshot = DatabaseSanpshotProcessor.snapshot(connection);
 			snapshot.setSystem(JsonSsiSystemFactory.build(systemCode));
 		}
@@ -48,7 +48,7 @@ public class CliDbMetaSnapshot
 	    catch (SQLException | IOException e) {e.printStackTrace();}
 		finally{DbUtils.closeQuietly(connection);}
 		
-		JsonUtil.info(snapshot);
+		JsonUtil.trace(snapshot);
 		Path path = Paths.get(config.getString("dir.onedrive"),"dev/jeesl/io/db/meta/"+systemCode+".json");
 		JsonUtil.write(snapshot, path.toFile());
 	}
@@ -59,6 +59,7 @@ public class CliDbMetaSnapshot
 //		MeisBootstrap.createMeisDatasource(config);
 		
 		CliDbMetaSnapshot cli = new CliDbMetaSnapshot(config);
-		cli.metaSnapshot("ofx");
+//		cli.metaSnapshot("ofx");
+		cli.metaSnapshot("meis");
 	}
 }

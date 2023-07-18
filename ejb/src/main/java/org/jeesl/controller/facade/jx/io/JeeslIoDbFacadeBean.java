@@ -47,21 +47,21 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DUMP extends JeeslDbDump<SYSTEM,DF>,
 								DF extends JeeslDbDumpFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,MT,COL,CON>,
-								MT extends JeeslDbMetaTable<SYSTEM,SNAP>,
-								COL extends JeeslDbMetaColumn<SNAP,MT,?>,
-								CON extends JeeslDbMetaConstraint<SNAP,MT>>
-		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,MT,COL,CON>
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
+								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
+								COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
+								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,?>>
+		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,TAB,COL,CON>
 {
 	private static final long serialVersionUID = 1L;
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoDbFacadeBean.class);
 	
 	private final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb;
-	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,MT,COL,?,CON,?> fbDbMeta;
+	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,?> fbDbMeta;
 	
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,MT,COL,?,CON,?> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,MT,COL,?,CON,?> fbDbMeta, boolean handleTransaction)
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,?> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
+	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,?> fbDbMeta, boolean handleTransaction)
 	{
 		super(em,handleTransaction);
 		this.fbDb=fbDb;
@@ -223,12 +223,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		
 	}
 	
-	@Override public List<MT> fIoDbMetaTables(EjbIoDbQuery<SYSTEM,SNAP> query)
+	@Override public List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<MT> cQ = cB.createQuery(fbDbMeta.getClassTable());
-		Root<MT> root = cQ.from(fbDbMeta.getClassTable());
+		CriteriaQuery<TAB> cQ = cB.createQuery(fbDbMeta.getClassTable());
+		Root<TAB> root = cQ.from(fbDbMeta.getClassTable());
 		
 		if(ObjectUtils.isNotEmpty(query.getCodeList()))
 		{
@@ -237,12 +237,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		}
 		if(ObjectUtils.isNotEmpty(query.getSystems()))
 		{
-			Join<MT,SYSTEM> jSystem = root.join(JeeslDbMetaTable.Attributes.system.toString());
+			Join<TAB,SYSTEM> jSystem = root.join(JeeslDbMetaTable.Attributes.system.toString());
 			predicates.add(jSystem.in(query.getSystems()));
 		}
 		if(ObjectUtils.isNotEmpty(query.getSnapshots()))
 		{
-			ListJoin<MT,SNAP> jSnapshot = root.joinList(JeeslDbMetaTable.Attributes.snapshots.toString());
+			ListJoin<TAB,SNAP> jSnapshot = root.joinList(JeeslDbMetaTable.Attributes.snapshots.toString());
 			predicates.add(jSnapshot.in(query.getSnapshots()));
 		}
 		
@@ -266,13 +266,13 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		}
 		if(ObjectUtils.isNotEmpty(query.getSystems()))
 		{
-			Join<COL,MT> jTable = root.join(JeeslDbMetaColumn.Attributes.table.toString());
-			Join<MT,SYSTEM> jSystem = jTable.join(JeeslDbMetaTable.Attributes.system.toString());
+			Join<COL,TAB> jTable = root.join(JeeslDbMetaColumn.Attributes.table.toString());
+			Join<TAB,SYSTEM> jSystem = jTable.join(JeeslDbMetaTable.Attributes.system.toString());
 			predicates.add(jSystem.in(query.getSystems()));
 		}
 		if(ObjectUtils.isNotEmpty(query.getSnapshots()))
 		{
-			ListJoin<MT,SNAP> jSnapshot = root.joinList(JeeslDbMetaTable.Attributes.snapshots.toString());
+			ListJoin<TAB,SNAP> jSnapshot = root.joinList(JeeslDbMetaTable.Attributes.snapshots.toString());
 			predicates.add(jSnapshot.in(query.getSnapshots()));
 		}
 		
@@ -286,8 +286,8 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
-		CriteriaQuery<CON> cQ = cB.createQuery(fbDbMeta.getClassMetaConstraint());
-		Root<CON> root = cQ.from(fbDbMeta.getClassMetaConstraint());
+		CriteriaQuery<CON> cQ = cB.createQuery(fbDbMeta.getClassConstraint());
+		Root<CON> root = cQ.from(fbDbMeta.getClassConstraint());
 		
 		if(ObjectUtils.isNotEmpty(query.getCodeList()))
 		{
@@ -296,8 +296,8 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		}
 		if(ObjectUtils.isNotEmpty(query.getSystems()))
 		{
-			Join<CON,MT> jTable = root.join(JeeslDbMetaConstraint.Attributes.table.toString());
-			Join<MT,SYSTEM> jSystem = jTable.join(JeeslDbMetaTable.Attributes.system.toString());
+			Join<CON,TAB> jTable = root.join(JeeslDbMetaConstraint.Attributes.table.toString());
+			Join<TAB,SYSTEM> jSystem = jTable.join(JeeslDbMetaTable.Attributes.system.toString());
 			predicates.add(jSystem.in(query.getSystems()));
 		}
 		if(ObjectUtils.isNotEmpty(query.getSnapshots()))

@@ -11,20 +11,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
-								MC extends JeeslDbMetaConstraint<?,MT>>
+								CON extends JeeslDbMetaConstraint<?,MT,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoDbMetaConstraintFactory.class);
 	
-	private final Class<MC> cConstraint;
+	private final Class<CON> cConstraint;
     
-	public EjbIoDbMetaConstraintFactory(final Class<MC> cConstraint)
+	public EjbIoDbMetaConstraintFactory(final Class<CON> cConstraint)
 	{       
         this.cConstraint = cConstraint;
 	}
 	
-	public MC build(MT table, String code)
+	public CON build(MT table, String code)
 	{
-		MC ejb = null;
+		CON ejb = null;
 		try
 		{
 			 ejb = cConstraint.newInstance();
@@ -37,10 +37,10 @@ public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
 		return ejb;
 	}
 	
-	public Map<MT,List<MC>> toMapConstraints(List<MC> list)
+	public Map<MT,List<CON>> toMapConstraints(List<CON> list)
 	{
-		Map<MT,List<MC>> map = new HashMap<>();
-		for(MC c : list)
+		Map<MT,List<CON>> map = new HashMap<>();
+		for(CON c : list)
 		{
 			if(!map.containsKey(c.getTable())) {map.put(c.getTable(), new ArrayList<>());}
 			map.get(c.getTable()).add(c);
@@ -48,10 +48,10 @@ public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
 		return map;
 	}
 	
-	public Map<String,Map<String,MC>> toMapTableConstraint(List<MC> list)
+	public Map<String,Map<String,CON>> toMapTableConstraint(List<CON> list)
 	{
-		Map<String,Map<String,MC>> map = new HashMap<>();
-		for(MC c : list)
+		Map<String,Map<String,CON>> map = new HashMap<>();
+		for(CON c : list)
 		{
 			if(!map.containsKey(c.getTable().getCode())) {map.put(c.getTable().getCode(), new HashMap<>());}
 			map.get(c.getTable().getCode()).put(c.getCode(), c);

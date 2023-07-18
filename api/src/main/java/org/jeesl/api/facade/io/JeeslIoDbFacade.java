@@ -22,10 +22,10 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								DF extends JeeslDbDumpFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
 								
-								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,MC>,
+								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
 								TAB extends JeeslDbMetaTable<SYSTEM,?>,
 								COL extends JeeslDbMetaColumn<?,TAB,?>,
-								MC extends JeeslDbMetaConstraint<?,TAB>
+								CON extends JeeslDbMetaConstraint<?,TAB,COL,?>
 							>
 		extends JeeslFacade
 {
@@ -44,5 +44,5 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	void deleteIoDbSnapshot(SNAP snapshot) throws JeeslConstraintViolationException;
 	List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM,SNAP> query);
 	List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM,SNAP> query);
-	List<MC> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM,SNAP> query);
+	List<CON> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM,SNAP> query);
 }

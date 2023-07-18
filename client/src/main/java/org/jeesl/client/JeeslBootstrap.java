@@ -47,7 +47,7 @@ public class JeeslBootstrap
 		return ConfigLoader.init();
 	}
 	
-	public static BasicDataSource createMeisDatasource(Configuration config, String code)
+	public static BasicDataSource buildDatasource(Configuration config, String code)
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("jdbc:postgresql://");
