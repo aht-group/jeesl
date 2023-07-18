@@ -699,7 +699,7 @@ html, body, .ui-widget {
     .jeesl-panel .ui-texteditor .ql-container .ql-editor {
       min-height: 84px; }
 .jeesl-panel .ui-panel-titlebar {
-  border-radius: 3px 3px 0 0;
+  border-bottom-width: 4px;
   min-height: 84px; }
   .jeesl-panel .ui-panel-titlebar .ui-panel-title {
     font-size: 1.4em;
@@ -737,7 +737,7 @@ html, body, .ui-widget {
   margin: 0 -10px;
   width: calc(100% + (2 * 10px)); }
 .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
-  border-radius: 3px 3px 0 0;
+  border-bottom-width: 4px;
   min-height: 84px; }
   .jeesl-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
     font-size: 1.4em;
@@ -867,7 +867,7 @@ html, body, .ui-widget {
     margin-left: -11px; }
 
 .jeesl-datatable .ui-datatable-header {
-  border-radius: 3px 3px 0 0;
+  border-bottom-width: 4px;
   min-height: 84px; }
   .jeesl-datatable .ui-datatable-header .pf-datatable-header-title {
     font-size: 1.4em;
@@ -963,7 +963,7 @@ html, body, .ui-widget {
     .jeesl-content .jeesl-content-container .ui-panel .ui-texteditor .ql-container .ql-editor {
       min-height: 84px; }
 .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar {
-  border-radius: 3px 3px 0 0;
+  border-bottom-width: 4px;
   min-height: 84px; }
   .jeesl-content .jeesl-content-container .ui-panel .ui-panel-titlebar .ui-panel-title {
     font-size: 1.4em;
@@ -1001,7 +1001,7 @@ html, body, .ui-widget {
   margin: 0 -10px;
   width: calc(100% + (2 * 10px)); }
 .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header {
-  border-radius: 3px 3px 0 0;
+  border-bottom-width: 4px;
   min-height: 84px; }
   .jeesl-content .jeesl-content-container .ui-panel .ui-panelgrid .ui-datatable .ui-datatable-header .pf-datatable-header-title {
     font-size: 1.4em;
@@ -1124,7 +1124,7 @@ html, body, .ui-widget {
   display: none; }
 
 .ui-dialog .ui-dialog-titlebar {
-  border-radius: 3px 3px 0 0;
+  border-bottom-width: 4px;
   min-height: 84px;
   pointer-events: none; }
   .ui-dialog .ui-dialog-titlebar > .ui-dialog-title .ui-dialog-title {
@@ -1222,7 +1222,7 @@ html, body, .ui-widget {
 .jeesl-tabs {
   padding: 0; }
   .jeesl-tabs .ui-tabs-nav {
-    border-radius: 3px 3px 0 0;
+    border-bottom-width: 4px;
     min-height: 84px;
     padding-top: 3px !important; }
     .jeesl-tabs .ui-tabs-nav:after {
@@ -1276,7 +1276,7 @@ html, body, .ui-widget {
   height: 84px;
   min-width: 84px; }
 .fc .fc-head {
-  border-radius: 3px 3px 0 0;
+  border-bottom-width: 4px;
   min-height: 84px;
   border-width: 1px 1px 0; }
   .fc .fc-head .fc-head-container .fc-row .fc-day-header {
@@ -1313,7 +1313,7 @@ html, body, .ui-widget {
   .html-container-panel .html-container > div > section {
     padding: 15px; }
     .html-container-panel .html-container > div > section h1:first-child {
-      border-radius: 3px 3px 0 0;
+      border-bottom-width: 4px;
       min-height: 84px;
       font-size: 1.4em;
       letter-spacing: -.5px;

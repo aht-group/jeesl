@@ -807,7 +807,7 @@ html, body, .ui-widget {
 }
 
 @mixin jeesl-titlebar {
-	border-radius: $border-radius-top;
+	border-bottom-width: $header-element-underline-mobile;
 	min-height: $element-height-mobile;
 }
 
