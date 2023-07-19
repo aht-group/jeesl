@@ -2,10 +2,10 @@ package org.jeesl.factory.txt.io.ssi.data;
 
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 
 public class TxtIoSsiMappingFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
-										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
+										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 {
 	private final String localeCode;

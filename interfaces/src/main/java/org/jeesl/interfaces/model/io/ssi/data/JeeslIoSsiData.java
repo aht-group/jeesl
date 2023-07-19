@@ -15,7 +15,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslIoSsiData <MAPPING extends JeeslIoSsiMapping<?,?>,
+public interface JeeslIoSsiData <MAPPING extends JeeslIoSsiContext<?,?>,
 									LINK extends JeeslStatus<?,?,LINK>,
 									JOB extends JeeslJobStatus<?,?,JOB,?>>
 		extends EjbWithId,EjbSaveable,EjbRemoveable,EjbWithCode,EjbWithParentAttributeResolver,

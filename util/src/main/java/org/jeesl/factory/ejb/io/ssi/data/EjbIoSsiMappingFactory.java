@@ -4,10 +4,10 @@ import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 
 public class EjbIoSsiMappingFactory <SYSTEM extends JeeslIoSsiSystem<?,?>,
-										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
+										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 {
 	private final IoSsiDataFactoryBuilder<?,?,SYSTEM,MAPPING,?,?,?,ENTITY,?,?> fbSsi;

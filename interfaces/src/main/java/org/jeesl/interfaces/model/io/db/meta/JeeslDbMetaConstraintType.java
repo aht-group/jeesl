@@ -24,5 +24,5 @@ public interface JeeslDbMetaConstraintType <L extends JeeslLang, D extends Jeesl
 									EjbWithCodeGraphic<G>,JeeslStatusFixedCode,
 									JeeslStatus<L,D,S>
 {	
-	public static enum Code{fk};
+	public static enum Code{pk,fk,uk};
 }

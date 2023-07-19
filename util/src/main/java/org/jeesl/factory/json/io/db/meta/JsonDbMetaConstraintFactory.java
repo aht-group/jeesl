@@ -8,7 +8,15 @@ import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 
 public class JsonDbMetaConstraintFactory
 {
-	public static JsonPostgresMetaConstraint build(ResultSet rs) throws IOException, SQLException
+	public static JsonPostgresMetaConstraint buildPk(ResultSet rs) throws IOException, SQLException
+	{
+		return JsonDbMetaConstraintFactory.build(rs.getString("pk_name"),rs.getString("column_name"),null,null);
+	}
+	public static JsonPostgresMetaConstraint buildUk(ResultSet rs) throws IOException, SQLException
+	{
+		return JsonDbMetaConstraintFactory.build(rs.getString("index_name"),rs.getString("column_name"),null,null);
+	}
+	public static JsonPostgresMetaConstraint buildFk(ResultSet rs) throws IOException, SQLException
 	{
 		return JsonDbMetaConstraintFactory.build(rs.getString("fk_name"),rs.getString("fkcolumn_name"),rs.getString("pktable_name"),rs.getString("pkcolumn_name"));
 	}

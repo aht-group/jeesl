@@ -20,7 +20,7 @@ import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -32,7 +32,7 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class JeeslSsiMappingController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
 										
-										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
+										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>>
 						extends AbstractJeeslWebController<L,D,LOC>

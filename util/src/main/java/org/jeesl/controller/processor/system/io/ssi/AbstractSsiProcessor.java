@@ -20,7 +20,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -33,7 +33,7 @@ import net.sf.exlp.util.io.JsonUtil;
 public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDescription,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
 										CRED extends JeeslIoSsiCredential<SYSTEM>,
-										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
+										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
 										DATA extends JeeslIoSsiData<MAPPING,LINK,JOB>,
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,

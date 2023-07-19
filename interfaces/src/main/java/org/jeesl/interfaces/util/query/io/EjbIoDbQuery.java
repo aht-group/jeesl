@@ -30,6 +30,7 @@ public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	{
 		super.reset();
 		systems=null;
+		snapshots=null;
 	}
 	
 	//Fetches

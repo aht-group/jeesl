@@ -37,6 +37,7 @@ public class EjbIoDbConstraintComparator<COL extends JeeslDbMetaColumn<?,?,?>,
         @Override public int compare(CON a, CON b)
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
+			  ctb.append(a.getType().getPosition(), b.getType().getPosition());
 			  ctb.append(a.getColumnLocal().getId(), b.getColumnLocal().getId());
 			  ctb.append(a.getId(),b.getId());
 			  return ctb.toComparison();

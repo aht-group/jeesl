@@ -252,28 +252,41 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 			Map<String,Map<String,CON>> mapSnapshotConstraints = new HashMap<>();
 			for(JsonPostgresMetaTable jTable : snapshot.getTables())
 			{
-				if(Objects.nonNull(jTable.getForeignKeys()))
+				if(!mapSystemConstraint.containsKey(jTable.getCode())) {mapSystemConstraint.put(jTable.getCode(), new HashMap<>());}
+				if(!mapSnapshotConstraints.containsKey(jTable.getCode())) {mapSnapshotConstraints.put(jTable.getCode(), new HashMap<>());}
+				
+				for(JsonPostgresMetaConstraint jConstraint : jTable.getPrimaryKeys())
 				{
-					if(!mapSystemConstraint.containsKey(jTable.getCode())) {mapSystemConstraint.put(jTable.getCode(), new HashMap<>());}
-					if(!mapSnapshotConstraints.containsKey(jTable.getCode())) {mapSnapshotConstraints.put(jTable.getCode(), new HashMap<>());}
-					
-					for(JsonPostgresMetaConstraint jConstraint : jTable.getForeignKeys())
+					if(!mapSystemConstraint.get(jTable.getCode()).containsKey(jConstraint.getCode()))
 					{
-						if(!mapSystemConstraint.get(jTable.getCode()).containsKey(jConstraint.getCode()))
-						{
-							CON con = efConstraint.build(mapTable.get(jTable.getCode()),jConstraint.getCode());
-							con.setType(cacheConstraintType.ejb(JeeslDbMetaConstraintType.Code.fk));
-							con.setColumnLocal(mapSystemColums.get(jTable.getCode()).get(jConstraint.getLocalColumn()));
-							con.setColumnRemote(mapSystemColums.get(jConstraint.getRemoteTable()).get(jConstraint.getRemoteColumn()));
-							con = fDb.save(con);
-							
-							mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), con);
-							mapSystemConstraint.get(jTable.getCode()).put(jConstraint.getCode(), con);
-						}
-						else
-						{
-							mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), mapSystemConstraint.get(jTable.getCode()).get(jConstraint.getCode()));
-						}
+						CON con = efConstraint.build(mapTable.get(jTable.getCode()),jConstraint.getCode());
+						con.setType(cacheConstraintType.ejb(JeeslDbMetaConstraintType.Code.pk));
+						con.setColumnLocal(mapSystemColums.get(jTable.getCode()).get(jConstraint.getLocalColumn()));
+						con = fDb.save(con);
+						mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), con);
+						mapSystemConstraint.get(jTable.getCode()).put(jConstraint.getCode(), con);
+					}
+					else
+					{
+						mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), mapSystemConstraint.get(jTable.getCode()).get(jConstraint.getCode()));
+					}
+				}
+				for(JsonPostgresMetaConstraint jConstraint : jTable.getForeignKeys())
+				{
+					if(!mapSystemConstraint.get(jTable.getCode()).containsKey(jConstraint.getCode()))
+					{
+						CON con = efConstraint.build(mapTable.get(jTable.getCode()),jConstraint.getCode());
+						con.setType(cacheConstraintType.ejb(JeeslDbMetaConstraintType.Code.fk));
+						con.setColumnLocal(mapSystemColums.get(jTable.getCode()).get(jConstraint.getLocalColumn()));
+						con.setColumnRemote(mapSystemColums.get(jConstraint.getRemoteTable()).get(jConstraint.getRemoteColumn()));
+						con = fDb.save(con);
+						
+						mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), con);
+						mapSystemConstraint.get(jTable.getCode()).put(jConstraint.getCode(), con);
+					}
+					else
+					{
+						mapSnapshotConstraints.get(jTable.getCode()).put(jConstraint.getCode(), mapSystemConstraint.get(jTable.getCode()).get(jConstraint.getCode()));
 					}
 				}
 			}

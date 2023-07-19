@@ -3,9 +3,9 @@ package org.jeesl.interfaces.controller.processor;
 import java.util.List;
 
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 
-public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiMapping<?,?>,
+public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiContext<?,?>,
 										DATA extends JeeslIoSsiData<MAPPING,?,?>,
 										JSON extends Object
 										>

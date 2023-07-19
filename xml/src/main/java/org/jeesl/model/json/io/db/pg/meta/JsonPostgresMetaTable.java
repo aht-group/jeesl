@@ -23,6 +23,11 @@ public class JsonPostgresMetaTable implements Serializable
 	public List<JsonPostgresMetaColumn> getColumns() {return columns;}
 	public void setColumns(List<JsonPostgresMetaColumn> columns) {this.columns = columns;}
 
+	@JsonProperty("primaryKeys")
+	private List<JsonPostgresMetaConstraint> primaryKeys;
+	public List<JsonPostgresMetaConstraint> getPrimaryKeys() {return primaryKeys;}
+	public void setPrimaryKeys(List<JsonPostgresMetaConstraint> primaryKeys) {this.primaryKeys = primaryKeys;}
+
 	@JsonProperty("foreignKeys")
 	private List<JsonPostgresMetaConstraint> foreignKeys;
 	public List<JsonPostgresMetaConstraint> getForeignKeys() {return foreignKeys;}

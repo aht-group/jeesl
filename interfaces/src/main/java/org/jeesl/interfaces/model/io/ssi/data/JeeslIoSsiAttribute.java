@@ -10,7 +10,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslIoSsiAttribute <MAPPING extends JeeslIoSsiMapping<?,ENTITY>,
+public interface JeeslIoSsiAttribute <MAPPING extends JeeslIoSsiContext<?,ENTITY>,
 									 ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 		extends EjbWithId,EjbSaveable,EjbRemoveable,
 				EjbWithParentAttributeResolver

@@ -12,13 +12,13 @@ import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractSsiImport <SYSTEM extends JeeslIoSsiSystem<?,?>,
-										MAPPING extends JeeslIoSsiMapping<SYSTEM,ENTITY>,
+										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										LINK extends JeeslIoSsiLink<?,?,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 {

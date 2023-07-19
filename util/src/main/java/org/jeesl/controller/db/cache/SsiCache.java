@@ -8,12 +8,12 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SsiCache <MAPPING extends JeeslIoSsiMapping<?,?>,
+public class SsiCache <MAPPING extends JeeslIoSsiContext<?,?>,
 						DATA extends JeeslIoSsiData<MAPPING,LINK,?>,
 						LINK extends JeeslIoSsiLink<?,?,LINK,?>,
 						T extends EjbWithId>

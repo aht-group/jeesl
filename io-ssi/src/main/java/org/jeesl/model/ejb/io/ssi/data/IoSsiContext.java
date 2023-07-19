@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.label.entity.IoLabelEntity;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
@@ -17,7 +17,7 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 @Entity
 @Table(name="IoSsiContext")
 @EjbErNode(name="Mapping",category="ssi",subset="systemSsi")
-public class IoSsiContext implements JeeslIoSsiMapping<IoSsiSystem,IoLabelEntity>
+public class IoSsiContext implements JeeslIoSsiContext<IoSsiSystem,IoLabelEntity>
 {
 	public static final long serialVersionUID=1;
 
@@ -27,7 +27,7 @@ public class IoSsiContext implements JeeslIoSsiMapping<IoSsiSystem,IoLabelEntity
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 
-	@Override public String resolveParentAttribute() {return JeeslIoSsiMapping.Attributes.system.toString();}
+	@Override public String resolveParentAttribute() {return JeeslIoSsiContext.Attributes.system.toString();}
 	@NotNull @ManyToOne
 	private IoSsiSystem system;
 	@Override public IoSsiSystem getSystem(){return system;}

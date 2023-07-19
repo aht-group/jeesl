@@ -7,9 +7,9 @@ import java.util.Set;
 
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiMapping;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 
-public class EjbIoSsiAttributeFactory <MAPPING extends JeeslIoSsiMapping<?,ENTITY>,
+public class EjbIoSsiAttributeFactory <MAPPING extends JeeslIoSsiContext<?,ENTITY>,
 										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
 {

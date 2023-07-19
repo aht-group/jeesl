@@ -96,14 +96,16 @@
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="code"/></f:facet>
-						<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffTable[t]}" marginRight="5"/>
+						<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffTable[t]}" marginRight="10"/>
 						<h:outputText value="#{t.code}"/>
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="columns"/></f:facet>
 						<ui:repeat var="c" value="#{cc.attrs.ctrl.mapColumn[t]}">
-							<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffColumn[c]}" marginRight="5"/>
-							<h:outputText value="#{c.code}"/><br/>
+							<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffColumn[c]}" marginRight="10"/>
+							<h:outputText value="#{c.code}"/>
+							<jtp:symbolizer value="#{c.type}" marginLeft="5"/>
+							<br/>
 						</ui:repeat>
 					</p:column>
 					<p:column>
@@ -128,9 +130,11 @@
 						</h:dataTable>
 						<ui:fragment rendered="true">
 							<ui:repeat var="c" value="#{cc.attrs.ctrl.mapConstraint[t]}">
-								<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffConstraint[c]}" marginRight="5"/>
-								 <h:outputText value="#{c.code}"/>
-								 <h:outputText value=" [#{c.columnLocal.code}  #{c.columnRemote.table.code}.#{c.columnRemote.code}]"/>
+								<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffConstraint[c]}" marginRight="10"/>
+								<h:outputText value="#{c.code}"/>
+								<jtp:symbolizer value="#{c.type}" marginLeft="5" marginRight="5"/>
+								<h:outputText value=" [#{c.columnLocal.code}]" rendered="#{c.type.code eq 'pk'}"/>
+								<h:outputText value=" [#{c.columnLocal.code}  #{c.columnRemote.table.code}.#{c.columnRemote.code}]" rendered="#{c.type.code eq 'fk'}"/>
 								<br/>
 							</ui:repeat>
 						</ui:fragment>

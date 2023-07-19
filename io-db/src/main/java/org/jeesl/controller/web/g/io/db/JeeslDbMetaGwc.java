@@ -75,9 +75,6 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private final ThMultiFilterHandler<DIFF> thFilter; public ThMultiFilterHandler<DIFF> getThFilter() {return thFilter;}
 	
 	private final EjbCodeCache<DIFF> cacheDiff;
-
-	private final EjbIoDbMetaConstraintFactory<TAB,CON> efConstraint;
-	private final EjbIoDbMetaColumnFactory<TAB,COL> efColumn;
 	
 	private final Comparator<SNAP> cpSnapshot;
 	private final Comparator<TAB> cpTable;
@@ -112,9 +109,6 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		thFilter = new ThMultiFilterHandler<>(this);
 		
 		cacheDiff = EjbCodeCache.instance(fbDb.getClassDifference());
-		
-		efColumn = fbDb.ejbColumn();
-		efConstraint = fbDb.ejbConstraint();
 		
 		cpSnapshot = new EjbWithRecordJtComparator<SNAP>().factory(EjbWithRecordJtComparator.Type.dsc); 
 		cpTable = new EjbIoDbTableComparator<TAB>().instance(EjbIoDbTableComparator.Type.code);
@@ -345,6 +339,5 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		for(List<CON> l : mapConstraint.values()) {Collections.sort(l,cpConstraint);}
 		logger.info("reloadedFilter()");
 		logger.info("\t"+fbDb.getClassConstraint().getSimpleName()+": System:"+systemConstraints.size()+" filter:"+mapConstraint.size());
-		
 	}
 }
