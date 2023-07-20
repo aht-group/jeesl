@@ -725,7 +725,7 @@ html, body, .ui-widget {
 				top: 100%;
 				
 				.jeesl-overlay-wrapper .ui-selectonemenu-list {
-					@include select-list(ui-selectonemenu);
+//					@include select-list(ui-selectonemenu);
 					
 					overflow: hidden;
 				
@@ -750,21 +750,33 @@ html, body, .ui-widget {
 						}
 					
 						.jeesl-field-tip {
+							border-bottom-width: $separator-thickness-mobile;
 							font-size: $font-size-mobile;
-							height: 0;
-							margin-top: 0;
+							height: $element-height-mobile;
+							margin-top: -$element-height-mobile;
 							overflow: hidden;
+							pointer-events: none;
 							position: relative;
 							transition: height .2s linear;
 							width: 100%;
+							
+							.jeesl-field-tip-icon {
+								font-size: 1.8rem;
+								height: $element-height-mobile;
+								line-height: $element-height-mobile;
+								margin-left: calc(100% - #{$element-height-mobile});
+								width: $element-height-mobile;
+							}
 							
 							.jeesl-field-tip-content {
 								@include overlay;
 								
 								box-shadow: none;
-								padding: 0 $wide-spacing;
-								position: relative;
+								padding: 0;
 								opacity: 1;
+								overflow: hidden;
+								pointer-events: all;
+								position: relative;
 								top: 0;
 								
 								.jeesl-grid {
@@ -778,28 +790,32 @@ html, body, .ui-widget {
 			}
 		}
 		
-		.jeesl-menu-bar-calendar-item .jeesl-menu-bar-calendar-item-list {
-			.jeesl-calendar-icon {
-				height: $element-height-mobile;
-				
-				> img {
-					margin: 0 -#{$half-spacing};
-				}
-			}
+		.jeesl-menu-bar-calendar-item {
+			height: $element-height-mobile;
 			
-			.jeesl-menu-bar-item {
-				&:first-child .jeesl-menu-bar-button-label {
-					padding-right: 0;
+			.jeesl-menu-bar-calendar-item-list {
+				.jeesl-calendar-icon {
+					height: $element-height-mobile;
+					
+					> img {
+						margin: 0 -#{$half-spacing};
+					}
 				}
 				
-				&:last-child .jeesl-menu-bar-button-label {
-					padding-left: 0;
-				}
-			
-				.jeesl-menu-bar-button .ui-inputfield {
-					height: 100%;
-					letter-spacing: -.5px;
-					width: 140px;
+				.jeesl-menu-bar-item {
+					&:first-child .jeesl-menu-bar-button-label {
+						padding-right: 0;
+					}
+					
+					&:last-child .jeesl-menu-bar-button-label {
+						padding-left: 0;
+					}
+				
+					.jeesl-menu-bar-button .ui-inputfield {
+						height: 100%;
+						letter-spacing: -.5px;
+						width: 140px;
+					}
 				}
 			}
 		}
@@ -961,55 +977,54 @@ html, body, .ui-widget {
 				// Overriding inline css
 				width: 100% !important;
 
-				> * {
-					padding: $regular-spacing;
+				> .ui-inputfield, .ui-selectonemenu, .ui-spinner, .ui-selectcheckboxmenu, .ui-selectmanybutton, .ui-chips {
+					margin: 0;
+					padding: $half-spacing $regular-spacing;
 					width: 100%;
-					
-					> .ui-inputfield {
-						padding-left: $regular-spacing;
-					}
 				}
 				
-				> span {
+				> span:not(.jeesl-input-container) {
 					align-items: center;
 					background: $light-grey;
 					display: flex;
 					padding: $regular-spacing;
-				}
-				
-				> .ui-selectonemenu, > .ui-selectcheckboxmenu {
-					padding: 0;
-				}
-				
-				> .jeesl-ck-editor {
-					padding: 0;
-					
-					.cke .cke_inner {
-						.cke_top .cke_toolbar .cke_toolgroup {
-							.cke_button {
-								@include button();
-								
-								min-width: $element-height-mobile;
-								
-								.cke_button_icon {
-									@include icon;
-								}
-							}
 							
-							.cke_toolbar_separator {
-								height: $element-height-mobile;
-							}
-						}
-						
-						.cke_contents {
-							padding: $regular-spacing;
-						}
+					&.jeesl-center {
+						justify-content: center;
+					}
+					
+					&.jeesl-right {
+						justify-content: end;
 					}
 				}
 				
+//				> .jeesl-ck-editor {
+//					padding: 0;
+//					
+//					.cke .cke_inner {
+//						.cke_top .cke_toolbar .cke_toolgroup {
+//							.cke_button {
+//								@include button();
+//								
+//								min-width: $element-height-mobile;
+//								
+//								.cke_button_icon {
+//									@include icon;
+//								}
+//							}
+//							
+//							.cke_toolbar_separator {
+//								height: $element-height-mobile;
+//							}
+//						}
+//						
+//						.cke_contents {
+//							padding: $regular-spacing;
+//						}
+//					}
+//				}
+				
 				> .jeesl-tabs {
-					padding: 0;
-					
 					.ui-tabs-nav {
 						border-width: $border-width $border-width 0;
 						padding: #{$wide-spacing - $border-width} $regular-spacing 0 !important;

@@ -852,7 +852,7 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 					}
 
-					> .ui-inputfield, .ui-selectonemenu, .ui-spinner, .ui-selectonemenu, .ui-selectcheckboxmenu, .ui-selectmanybutton, .ui-chips {
+					> .ui-inputfield, .ui-selectonemenu, .ui-spinner, .ui-selectcheckboxmenu, .ui-selectmanybutton, .ui-chips {
 						border-radius: $border-radius;
 //						height: 100%;
 						
@@ -864,7 +864,7 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 					}
 					
-					> span {
+					> span:not(.jeesl-input-container) {
 						display: inline-block;
 						padding: 0;
 						
@@ -897,10 +897,10 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 						
 						.ui-commandlink {
+							flex-grow: 1;
 							height: auto;
 							margin: 0 0 0 6px;
 							padding: 0;
-							flex-grow: 1;
 							
 							> img {
 								height: auto;
@@ -911,7 +911,9 @@ $enable-pointer-cursor-for-buttons: true;
 						.ui-button {
 							align-items: center;
 							display: flex;
+							flex-grow: 1;
 							justify-content: center;
+							margin: 0 0 0 6px;
 							overflow: hidden;
 							padding: 0;
 							
@@ -2923,10 +2925,14 @@ body, .ui-widget {
 										box-shadow: none;
 										color: $white-100;
 										font-size: $font-size-mobile;
-										padding: $half-spacing $wide-spacing;
-										position: relative;
+										left: 0;
 										opacity: 1;
+										overflow: hidden;
+										padding: 0;
+										pointer-events: all;
+										position: relative;
 										top: 0;
+										width: 100%;
 									}
 									
 									&:before {
@@ -2936,8 +2942,7 @@ body, .ui-widget {
 										top: calc(#{$header-element-height} + #{$header-element-underline} + #{$border-width} + (#{$ls-element-height} / 2) - 8px);
 										
 										@media (max-width: 768px) {
-											height: calc(100% + 10px);
-											top: 0;
+											display: none;
 										}
 									}
 									
@@ -2946,6 +2951,10 @@ body, .ui-widget {
 										
 										left: -7px;
 										top: calc(#{$header-element-height} + #{$header-element-underline} + #{$border-width} + (#{$ls-element-height} / 2) - 8px);
+										
+										@media (max-width: 768px) {
+											display: none;
+										}
 									}
 									
 									.jeesl-grid {

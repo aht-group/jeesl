@@ -11,6 +11,14 @@ cancelButton.click((event) => {
 })
 inputChange();
 
+$(document).click(function(event) {
+	var $target = $(event.target);
+	var overlay = $target.closest('.jeesl-menu-bar-search').find('.jeesl-overlay-container.jeesl-visible');
+	if(!overlay.length) {
+		hideResults($('.jeesl-menu-bar-search .jeesl-overlay-container.jeesl-visible'));
+	}
+})
+
 function inputChange() {
 	searchField.toggleClass('ui-state-filled', !!searchField.val());
 	cancelButton.toggleClass('ui-state-visible', !!searchField.val());

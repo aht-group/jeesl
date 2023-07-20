@@ -4185,10 +4185,14 @@ body, .ui-widget {
                   box-shadow: none;
                   color: white;
                   font-size: 13px;
-                  padding: 5px 15px;
-                  position: relative;
+                  left: 0;
                   opacity: 1;
-                  top: 0; } }
+                  overflow: hidden;
+                  padding: 0;
+                  pointer-events: all;
+                  position: relative;
+                  top: 0;
+                  width: 100%; } }
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content:before {
                 border-color: transparent #ababab transparent transparent;
                 border-style: solid;
@@ -4202,8 +4206,7 @@ body, .ui-widget {
                 top: calc(22px + 2px + 1px + (26px / 2) - 8px); }
                 @media (max-width: 768px) {
                   .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content:before {
-                    height: calc(100% + 10px);
-                    top: 0; } }
+                    display: none; } }
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content:after {
                 border-color: transparent #ededed transparent transparent;
                 border-style: solid;
@@ -4215,6 +4218,9 @@ body, .ui-widget {
                 display: block;
                 left: -7px;
                 top: calc(22px + 2px + 1px + (26px / 2) - 8px); }
+                @media (max-width: 768px) {
+                  .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content:after {
+                    display: none; } }
               @media (max-width: 768px) {
                 .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content .jeesl-grid {
                   margin: 0;
@@ -4983,25 +4989,25 @@ body, .ui-widget {
           width: 6.81818%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-12 {
           width: 6.25%; }
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
           border-radius: 3px; }
           @media (max-width: 768px) {
-            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
+            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
               margin: 0;
               padding: 5px 10px;
               width: 100%; } }
-        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+        .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span:not(.jeesl-input-container) {
           display: inline-block;
           padding: 0; }
           @media (max-width: 768px) {
-            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+            .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span:not(.jeesl-input-container) {
               align-items: center;
               background: #dedede;
               display: flex;
               padding: 10px; }
-              .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span.jeesl-center {
+              .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span:not(.jeesl-input-container).jeesl-center {
                 justify-content: center; }
-              .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span.jeesl-right {
+              .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span:not(.jeesl-input-container).jeesl-right {
                 justify-content: end; } }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container {
           display: flex; }
@@ -5011,17 +5017,19 @@ body, .ui-widget {
             .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-inputtext:last-child, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-inputtextarea:last-child {
               width: 100%; }
           .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-commandlink {
+            flex-grow: 1;
             height: auto;
             margin: 0 0 0 6px;
-            padding: 0;
-            flex-grow: 1; }
+            padding: 0; }
             .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-commandlink > img {
               height: auto;
               width: 100%; }
           .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-button {
             align-items: center;
             display: flex;
+            flex-grow: 1;
             justify-content: center;
+            margin: 0 0 0 6px;
             overflow: hidden;
             padding: 0; }
             .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-button .ui-button-text {
@@ -6512,25 +6520,25 @@ body, .ui-widget {
               width: 6.81818%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-12 {
               width: 6.25%; }
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
               border-radius: 3px; }
               @media (max-width: 768px) {
-                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
                   margin: 0;
                   padding: 5px 10px;
                   width: 100%; } }
-            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+            .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span:not(.jeesl-input-container) {
               display: inline-block;
               padding: 0; }
               @media (max-width: 768px) {
-                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span {
+                .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span:not(.jeesl-input-container) {
                   align-items: center;
                   background: #dedede;
                   display: flex;
                   padding: 10px; }
-                  .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span.jeesl-center {
+                  .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span:not(.jeesl-input-container).jeesl-center {
                     justify-content: center; }
-                  .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span.jeesl-right {
+                  .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > span:not(.jeesl-input-container).jeesl-right {
                     justify-content: end; } }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container {
               display: flex; }
@@ -6540,17 +6548,19 @@ body, .ui-widget {
                 .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-inputtext:last-child, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-inputtextarea:last-child {
                   width: 100%; }
               .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-commandlink {
+                flex-grow: 1;
                 height: auto;
                 margin: 0 0 0 6px;
-                padding: 0;
-                flex-grow: 1; }
+                padding: 0; }
                 .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-commandlink > img {
                   height: auto;
                   width: 100%; }
               .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-button {
                 align-items: center;
                 display: flex;
+                flex-grow: 1;
                 justify-content: center;
+                margin: 0 0 0 6px;
                 overflow: hidden;
                 padding: 0; }
                 .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .jeesl-input-container .ui-button .ui-button-text {
