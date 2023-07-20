@@ -60,6 +60,8 @@ public class TxtSqlQueryFactory
 	
 	public static String toXhtml(String query)
 	{
+		query = query.replaceAll("select ", "<span class=\"jeesl-sql-reserved\">SELECT</span> ");
+		query = query.replaceAll(" from ", " <span class=\"jeesl-sql-reserved\">FROM</span> ");
 		return query;
 	}
 }
