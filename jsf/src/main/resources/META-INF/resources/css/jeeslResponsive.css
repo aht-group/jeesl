@@ -4175,9 +4175,8 @@ body, .ui-widget {
               display: block;
               left: calc(100% + 5px);
               opacity: 0;
-              overflow: hidden;
               padding: 0;
-              pointer-events: all;
+              pointer-events: none;
               top: calc(-22px - 2px - 1px);
               transition: opacity .2s linear; }
               @media (max-width: 768px) {
@@ -4187,9 +4186,11 @@ body, .ui-widget {
                   color: white;
                   font-size: 13px;
                   left: 0;
-                  padding: 0;
-                  position: relative;
                   opacity: 1;
+                  overflow: hidden;
+                  padding: 0;
+                  pointer-events: all;
+                  position: relative;
                   top: 0;
                   width: 100%; } }
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content:before {

@@ -2915,9 +2915,8 @@ body, .ui-widget {
 									display: block;
 									left: calc(100% + #{$half-spacing});
 									opacity: 0;
-									overflow: hidden;
 									padding: 0;
-									pointer-events: all;
+									pointer-events: none;
 									top: calc(-#{$header-element-height} - #{$header-element-underline} - #{$border-width});
 									transition: opacity .2s linear;
 									
@@ -2927,9 +2926,11 @@ body, .ui-widget {
 										color: $white-100;
 										font-size: $font-size-mobile;
 										left: 0;
-										padding: 0;
-										position: relative;
 										opacity: 1;
+										overflow: hidden;
+										padding: 0;
+										pointer-events: all;
+										position: relative;
 										top: 0;
 										width: 100%;
 									}

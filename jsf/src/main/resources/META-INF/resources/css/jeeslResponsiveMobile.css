@@ -644,8 +644,10 @@ html, body, .ui-widget {
               width: 100% !important;
               box-shadow: none;
               padding: 0;
-              position: relative;
               opacity: 1;
+              overflow: hidden;
+              pointer-events: all;
+              position: relative;
               top: 0; }
               .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-overlay-container .jeesl-overlay-wrapper .ui-selectonemenu-list .ui-selectonemenu-item .jeesl-field-tip .jeesl-field-tip-content .jeesl-grid {
                 margin: 0;
