@@ -166,7 +166,10 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 		return allow;
 	}
 	
-	@Override public boolean hasRole(R role) {return mapHasRole.containsKey(role) && mapHasRole.get(role);}
+	@Override public boolean hasRole(R role)
+	{
+		return role!=null && mapHasRole.containsKey(role) && mapHasRole.get(role);
+	}
 	
 	protected boolean hasDomainRole(A action, Collection<R> staffRoles)
 	{

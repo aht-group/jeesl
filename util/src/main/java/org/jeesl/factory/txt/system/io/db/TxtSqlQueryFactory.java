@@ -6,17 +6,20 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TxtSqlQueryFactory {
+public class TxtSqlQueryFactory
+{
 	final static Logger logger = LoggerFactory.getLogger(TxtSqlQueryFactory.class);
 
-	public static String shortenIn(String query) {
+	public static String shortenIn(String query)
+	{
 		// Query pattern eg : in ($1 , $2 , $3 , $4 , $5 , $6 , $7 , $8 , $9))
 		String regex = " [iI][nN] \\(\\$[0-9]+([^)]*)\\$[0-9]+\\)";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(query);
 
 		boolean hasInQueryQuestionMarks = false;
-		if (!matcher.find()) {
+		if (!matcher.find())
+		{
 			// Query pattern eg: IN (?,?,?)
 			regex = " [iI][nN] \\(([\\?,]+)\\)";
 			pattern = Pattern.compile(regex);
@@ -37,7 +40,8 @@ public class TxtSqlQueryFactory {
 		}
 
 		StringBuilder sb = new StringBuilder(query);
-		while (!startPositions.isEmpty()) {
+		while (!startPositions.isEmpty())
+		{
 			int start = startPositions.pop();
 			int end = endPositions.pop();
 
@@ -52,5 +56,10 @@ public class TxtSqlQueryFactory {
 			}
 		}
 		return sb.toString();
+	}
+	
+	public static String toXhtml(String query)
+	{
+		return query;
 	}
 }

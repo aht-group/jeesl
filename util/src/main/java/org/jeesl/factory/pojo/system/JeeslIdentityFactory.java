@@ -82,7 +82,8 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 			identity.setUser(user);
 			
 			List<R> roles = fSecurity.allRolesForUser(user);
-			for(R r : roles){identity.allowRole(r);}
+			
+			for(R r : roles) {identity.allowRole(r);}
 			if(jogger!=null) {jogger.milestone(fbSecurity.getClassRole().getSimpleName(), null, roles.size());}
 			
 			if(bSecurity==null) {processViews(fSecurity,user,identity);}

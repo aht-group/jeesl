@@ -1,6 +1,8 @@
 package org.jeesl.factory.xml.domain.finance;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -21,7 +23,11 @@ public class XmlTimeFactory
 	
 	public static <E extends Enum<E>> void add(Figures figures, E code, Date value)
 	{
-		if(value!=null){figures.getTime().add(XmlTimeFactory.build(code, value));}
+		if(Objects.nonNull(value)){figures.getTime().add(XmlTimeFactory.build(code, value));}
+	}
+	public static <E extends Enum<E>> void add(Figures figures, E code, LocalDate value)
+	{
+		if(Objects.nonNull(value)){figures.getTime().add(XmlTimeFactory.build(code, value));}
 	}
 	
 	public static <E extends Enum<E>> Time build(E code, Date record){return create(code.toString(),record);}
@@ -29,6 +35,14 @@ public class XmlTimeFactory
 	{
 		Time xml = new Time();
 		xml.setCode(code);
+		xml.setRecord(DateUtil.toXmlGc(record));
+		return xml;
+	}
+	
+	public static <E extends Enum<E>> Time build(E code, LocalDate record)
+	{
+		Time xml = new Time();
+		xml.setCode(code.toString());
 		xml.setRecord(DateUtil.toXmlGc(record));
 		return xml;
 	}

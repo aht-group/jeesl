@@ -36,6 +36,8 @@ public interface JeeslSecurityRole<L extends JeeslLang, D extends JeeslDescripti
 					JeeslSecurityWithActions<A>
 					
 {
+	public enum Developer{devLogger}
+	
 	public static final String extractId = "securityRoles";
 	public enum Attributes{category}
 	

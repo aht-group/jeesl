@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslAttributeBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -19,6 +20,7 @@ import org.jeesl.factory.ejb.io.attribute.EjbAttributeDataFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.AttributeBean;
 import org.jeesl.interfaces.controller.handler.JeeslAttributeHandler;
+import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeContainer;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
@@ -30,9 +32,9 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeType;
 import org.jeesl.interfaces.model.module.attribute.JeeslWithAttributeContainer;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.io.EjbAttributeQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +54,7 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(AttributeHandler.class);
 	private static final long serialVersionUID = 1L;
 
+	private JeeslLogger jogger; public JeeslLogger getJogger() {return jogger;} public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
 	private boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 	private boolean showDescription; public boolean isShowDescription() {return showDescription;}
 	
@@ -256,16 +259,24 @@ public class AttributeHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	public <W extends JeeslWithAttributeContainer<CONTAINER>> void loadContainers(List<W> list)
 	{
+		if(debugOnInfo) {logger.info("Loading "+list.size()+" "+fbAttribute.getClassContainer().getSimpleName());}	
+		
+//		containers.clear();
+//		for(W w : list)
+//		{
+//			Map<CRITERIA,DATA> map = new HashMap<CRITERIA,DATA>();
+//			for(DATA d : fAttribute.fAttributeData(w.getAttributeContainer()))
+//			{
+//				map.put(d.getCriteria(),d);
+//			}
+//			containers.put(w.getAttributeContainer(), map);
+//		}
+//		if(Objects.nonNull(jogger)) {logger.info(jogger.milestone(this.getClass().getSimpleName()+"-loadContainers","for-loop",containers.size()));}
+		
 		containers.clear();
-		if(debugOnInfo) {logger.info("Loading "+list.size()+" "+fbAttribute.getClassContainer().getSimpleName());}
-		for(W w : list)
-		{
-			Map<CRITERIA,DATA> map = new HashMap<CRITERIA,DATA>();
-			for(DATA d : fAttribute.fAttributeData(w.getAttributeContainer()))
-			{
-				map.put(d.getCriteria(),d);
-			}
-			containers.put(w.getAttributeContainer(), map);
-		}
+		EjbAttributeQuery<CRITERIA,CONTAINER,DATA> query = new EjbAttributeQuery<>();
+		for(W w : list) {query.add(w.getAttributeContainer());}
+		containers.putAll(efData.toMapContainerCriteriaDta(fAttribute.fAttributeData(query)));
+		if(Objects.nonNull(jogger)) {logger.info(jogger.milestone(this.getClass().getSimpleName()+"-loadContainers","query",containers.size()));}
 	}
 }
