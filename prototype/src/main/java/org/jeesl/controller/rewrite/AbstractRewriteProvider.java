@@ -26,7 +26,7 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
-	private JeeslSecurityBean<?,?,V,?,?,?,?,?,?> bSecurity;
+	private JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity;
 
 	protected String forwardDeactivated;
 	protected String forwardLogin;
@@ -40,7 +40,7 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 		forwardDenied = "/jsf/settings/system/security/page/denied.xhtml";
 	}
 
-	public void postConstruct(JeeslSecurityBean<?,?,V,?,?,?,?,?,?> bSecurity)
+	public void postConstruct(JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity)
 	{
 		this.bSecurity=bSecurity;
 	}

@@ -1,4 +1,4 @@
-package org.jeesl.web.mbean.prototype.io.db;
+package org.jeesl.controller.web.io.db;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
+import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.factory.txt.system.io.db.TxtSqlQueryFactory;
@@ -15,18 +16,17 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.model.json.io.db.pg.JsonPostgresStatement;
-import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractDbStatementBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslDbStatementGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,
 									SC extends JeeslDbStatementColumn<L,D,SC,?>>
-						extends AbstractAdminBean<L,D,LOC>
+						extends AbstractJeeslWebController<L,D,LOC>
 						implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(AbstractDbStatementBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslDbStatementGwc.class);
 	
 	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?> fDb;
@@ -38,7 +38,7 @@ public class AbstractDbStatementBean <L extends JeeslLang, D extends JeeslDescri
 	
 	private final String dbName;
 	
-	public AbstractDbStatementBean(String dbName, final IoDbPgFactoryBuilder<L,D,?,SC,?,?,?> fbDb)
+	public JeeslDbStatementGwc(String dbName, final IoDbPgFactoryBuilder<L,D,?,SC,?,?,?> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.dbName=dbName;

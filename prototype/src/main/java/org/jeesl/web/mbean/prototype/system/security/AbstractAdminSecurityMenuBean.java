@@ -111,7 +111,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
 	public void postConstructMenu(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
 	                              JeeslTranslationBean<L,D,LOC> bTranslation,
 	                              JeeslFacesMessageBean bMessage,
-	                              JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity,
+	                              JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 	                              JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
 	{
 		super.postConstructSecurity(fSecurity,bTranslation,bMessage,bSecurity);

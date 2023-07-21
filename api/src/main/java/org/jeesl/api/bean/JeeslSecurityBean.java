@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityArea;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
@@ -14,12 +13,10 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 
-public interface JeeslSecurityBean<C extends JeeslSecurityCategory<?,?>,
-									R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
-									V extends JeeslSecurityView<?,?,C,R,U,A>,
-									U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
+public interface JeeslSecurityBean<R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
+									V extends JeeslSecurityView<?,?,?,R,U,A>,
+									U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 									A extends JeeslSecurityAction<?,?,R,V,U,?>,
-									
 									AR extends JeeslSecurityArea<?,?,V>,
 									CTX extends JeeslSecurityContext<?,?>,
 									M extends JeeslSecurityMenu<?,V,CTX,M>,

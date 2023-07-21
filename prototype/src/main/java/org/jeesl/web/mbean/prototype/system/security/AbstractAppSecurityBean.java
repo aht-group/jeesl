@@ -45,7 +45,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 										M extends JeeslSecurityMenu<?,V,CTX,M>,
 										AR extends JeeslSecurityArea<?,?,V>,
 										USER extends JeeslUser<R>>
-					implements JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER>
+					implements JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAppSecurityBean.class);

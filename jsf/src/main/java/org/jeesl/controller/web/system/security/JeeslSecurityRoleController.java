@@ -64,7 +64,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
 	private JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
-	private JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity;
+	private JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
 	private final EjbSecurityCategoryFactory<C> efCategory;
 	
@@ -124,7 +124,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	
 	public void postConstructRole(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
-			JeeslSecurityBean<C,R,V,U,A,AR,CTX,M,USER> bSecurity)
+			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fSecurity=fSecurity;

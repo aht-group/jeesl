@@ -22,10 +22,10 @@ public class PageDeniedCondition <V extends JeeslSecurityView<?,?,?,?,?,?>>
 	
 	private boolean debugOnInfo;
 	
-	private final JeeslSecurityBean<?,?,V,?,?,?,?,?,?> bSecurity;
+	private final JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity;
 	private final JeeslIdentity<?,V,?,?,?,?> identity;
 	
-	public PageDeniedCondition(boolean debugOnInfo, JeeslSecurityBean<?,?,V,?,?,?,?,?,?> bSecurity, JeeslIdentity<?,V,?,?,?,?> identity)
+	public PageDeniedCondition(boolean debugOnInfo, JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity, JeeslIdentity<?,V,?,?,?,?> identity)
 	{
 		this.debugOnInfo=debugOnInfo;
 		this.bSecurity=bSecurity;

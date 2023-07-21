@@ -21,9 +21,9 @@ public class PageActiveCondition <V extends JeeslSecurityView<?,?,?,?,?,?>>
 	
 	private boolean debugOnInfo; 
 	
-	private JeeslSecurityBean<?,?,V,?,?,?,?,?,?> bSecurity;
+	private JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity;
 	
-	public PageActiveCondition(boolean debugOnInfo, JeeslSecurityBean<?,?,V,?,?,?,?,?,?> bSecurity, JeeslIdentity<?,V,?,?,?,?> identity)
+	public PageActiveCondition(boolean debugOnInfo, JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity, JeeslIdentity<?,V,?,?,?,?> identity)
 	{
 		this.debugOnInfo=debugOnInfo;
 		this.bSecurity=bSecurity;

@@ -55,7 +55,7 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity;
 	private JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity;
-	private JeeslSecurityBean<C,R,V,U,A,?,CTX,M,USER> bSecurity;
+	private JeeslSecurityBean<R,V,U,A,?,CTX,M,USER> bSecurity;
 
 	private final XmlMenuItemFactory<L,D,C,R,V,U,A,AT,CTX,M,USER> xfMenuItem;
 	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
@@ -92,7 +92,7 @@ public class PrototypeDb2MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	}
 
 	public void postConstructMenu(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, I identity, String localeCode, CTX context) {this.postConstructMenu(fSecurity,null,identity,localeCode,context);}
-	public void postConstructMenu(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, JeeslSecurityBean<C,R,V,U,A,?,CTX,M,USER> bSecurity, I identity, String localeCode, CTX context)
+	public void postConstructMenu(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity, JeeslSecurityBean<R,V,U,A,?,CTX,M,USER> bSecurity, I identity, String localeCode, CTX context)
 	{
 		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
