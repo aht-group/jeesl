@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
@@ -30,12 +31,17 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIdentityFactory.class);
 	
-	protected boolean debugOnInfo; public boolean isDebugOnInfo() {return debugOnInfo;} public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
+	private JeeslSecurityFacade<?,R,V,U,A,USER> fSecurity;
+	private JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity;
 	
 	private final SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	private JeeslLogger jogger; public JeeslLogger getJogger() {return jogger;} public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
 
+	public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> securityFacade(JeeslSecurityFacade<?,R,V,U,A,USER> fSecurity) {this.fSecurity = fSecurity; return this;}
+	public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> securityBean(JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity) {this.bSecurity = bSecurity; return this;}
+	
 	final Class<I>  cIdentity;
+	protected boolean debugOnInfo; public boolean isDebugOnInfo() {return debugOnInfo;} public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
 	public static <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 				   R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
@@ -72,7 +78,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 		return identity;
 	}
 
-	public I build(JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity, JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity, USER user, CTX context)
+	public I build(USER user, CTX context)
 	{		
 		I identity = null;
 		try
@@ -86,11 +92,12 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 			for(R r : roles) {identity.allowRole(r);}
 			if(jogger!=null) {jogger.milestone(fbSecurity.getClassRole().getSimpleName(), null, roles.size());}
 			
-			if(bSecurity==null) {processViews(fSecurity,user,identity);}
-			else {processViews(bSecurity,roles,identity);}
+			if(Objects.nonNull(bSecurity)) {processViewsByBean(bSecurity,roles,identity);}
+			else if (Objects.nonNull(fSecurity)) {processViewsByFacade(user,identity);}
 			
-			if(bSecurity==null) {processActions(fSecurity,user,identity);}
-			else {processActions(bSecurity,roles,identity);}
+			if(Objects.nonNull(bSecurity)) {processActionsByBean(bSecurity,roles,identity);}
+			else if (Objects.nonNull(fSecurity)) {processActionByFacade(user,identity);}
+			
 			if(jogger!=null) {jogger.milestone(fbSecurity.getClassAction().getSimpleName(), null, identity.sizeAllowedActions());}
 			
 		}
@@ -99,13 +106,13 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 		return identity;
 	}
 	
-	private void processViews(JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity, USER user, I identity)
+	private void processViewsByFacade(USER user, I identity)
 	{
 		List<V> views = fSecurity.allViewsForUser(user);
 		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),JeeslSecurityFacade.class.getSimpleName(),views.size());}
 		for(V v : views) {identity.allowView(v);}
 	}
-	private void processViews(JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity, List<R> roles, I identity)
+	private void processViewsByBean(JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity, List<R> roles, I identity)
 	{	
 		Map<Long,V> map = new HashMap<Long,V>();
 		for(R role : roles)
@@ -128,11 +135,11 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 		for(V v : views) {identity.allowView(v);}
 	}
 	
-	private void processActions(JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity, USER user, I identity)
+	private void processActionByFacade(USER user, I identity)
 	{
 		for(A a : fSecurity.allActionsForUser(user)){identity.allowAction(a);}
 	}
-	private void processActions(JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity, List<R> roles, I identity)
+	private void processActionsByBean(JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity, List<R> roles, I identity)
 	{
 		Map<Long,A> actions = new HashMap<Long,A>();
 		for(R r : roles)

@@ -54,7 +54,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityUserBean.class);
 
 	protected JeeslUserFacade<USER> fUtilsUser;
-	protected JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fUtilsSecurity;
+	protected JeeslSecurityFacade<C,R,V,U,A,USER> fUtilsSecurity;
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity;
 	
 	protected final List<CTX> contexts; public List<CTX> getContexts() {return contexts;}
@@ -89,7 +89,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	}
 	
 	public void postConstructSecurityUser(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-							JeeslUserFacade<USER> fUtilsUser, JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fUtilsSecurity)
+							JeeslUserFacade<USER> fUtilsUser, JeeslSecurityFacade<C,R,V,U,A,USER> fUtilsSecurity)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fUtilsUser=fUtilsUser;

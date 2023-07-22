@@ -21,8 +21,8 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 										V extends JeeslSecurityView<?,?,C,R,U,A>,
 										U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
 										A extends JeeslSecurityAction<?,?,R,V,U,?>,
-										CTX extends JeeslSecurityContext<?,?>,
-										M extends JeeslSecurityMenu<?,V,CTX,M>,
+//										CTX extends JeeslSecurityContext<?,?>,
+//										M extends JeeslSecurityMenu<?,V,?,M>,
 										USER extends JeeslUser<R>>
 	extends JeeslFacade
 {	

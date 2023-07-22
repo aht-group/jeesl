@@ -39,7 +39,7 @@ public class JeeslSecurityMatrixController  <L extends JeeslLang, D extends Jees
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityMatrixController.class);
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,?,?,?,?,?,?,?,?,?,?> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,U,?,?,?,?> fSecurity;
+	private JeeslSecurityFacade<C,R,V,U,?,?> fSecurity;
 	
 	private final SbMultiHandler<C> sbhRole; public SbMultiHandler<C> getSbhRole() {return sbhRole;}
 	private final SbMultiHandler<C> sbhUsecase; public SbMultiHandler<C> getSbhUsecase() {return sbhUsecase;}
@@ -66,7 +66,7 @@ public class JeeslSecurityMatrixController  <L extends JeeslLang, D extends Jees
 	}
 	
 	public void postConstructMatrix(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslSecurityFacade<C,R,V,U,?,?,?,?> fSecurity)
+			JeeslSecurityFacade<C,R,V,U,?,?> fSecurity)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fSecurity=fSecurity;

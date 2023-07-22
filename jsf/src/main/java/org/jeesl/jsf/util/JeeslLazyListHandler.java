@@ -37,8 +37,18 @@ public class JeeslLazyListHandler <T extends EjbWithId>
 		}
 		return null;
 	}
-	
-
+	public T getRowData(String rowKey)
+	{
+		long id = new Long(rowKey).longValue();
+		for(T t : tmp)
+		{
+			if(t.getId()==id)
+			{
+				return t;
+			}
+		}
+		return null;
+	}
 	
 	public void paginator(List<T> tmp, int first, int pageSize, List<T> result)
 	{
@@ -70,5 +80,4 @@ public class JeeslLazyListHandler <T extends EjbWithId>
 		else {result.addAll(tmp);}
 		return result;
 	}
-	
 }

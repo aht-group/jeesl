@@ -71,7 +71,7 @@ public class AbstractAdminSecurityRoleBean <L extends JeeslLang, D extends Jeesl
 		super(fbSecurity);
 	}
 	
-	public void initSuper(JeeslSecurityFacade<C,R,V,U,A,CTX,M,USER> fSecurity,
+	public void initSuper(JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity,
 						JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 						JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{
