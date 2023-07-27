@@ -33,8 +33,7 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	private final String regexSymbols = "(.*?[_.*+:#!?%%{}\\|@\\[\\];=\"&$\\\\/,()-]){%d,}.*?";
 	
 	private final Class<RATING> cRating;
-	private final Zxcvbn zxcvbn;
-	
+
 	private final Map<RULE,Boolean> mapResult; public Map<RULE,Boolean> getMapResult() {return mapResult;}
 
 	private JeeslFacade fJeesl;
@@ -46,7 +45,7 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	{		
 		this.fJeesl=fJeesl;
 		this.cRating=cRating;
-		zxcvbn = new Zxcvbn();
+		
 		mapResult = new HashMap<>();
 		
 		cpHistory = new EjbWithRecordDateComparator<>();
@@ -79,6 +78,7 @@ public class JeeslPasswordRuleChecker <RATING extends JeeslSecurityPasswordRatin
 	public void analyseComplexity1(List<RULE> rules, String pwd) throws JeeslNotFoundException
 	{
 		RATING rating = null;
+		Zxcvbn zxcvbn = new Zxcvbn();
 		Strength strength = zxcvbn.measure(pwd);
 		
 		if(debugOnInfo) {logger.info("fJeesl:"+(fJeesl==null));}

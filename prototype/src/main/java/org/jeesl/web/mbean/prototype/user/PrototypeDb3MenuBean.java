@@ -1,5 +1,6 @@
 package org.jeesl.web.mbean.prototype.user;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +39,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 									M extends JeeslSecurityMenu<L,V,CTX,M>,
 									USER extends JeeslUser<R>,
 									I extends JeeslIdentity<R,V,U,A,CTX,USER>>
-						implements JeeslMenuBean<V,CTX,M>
+						implements JeeslMenuBean<V,CTX,M>,Serializable
 {
 	final static Logger logger = LoggerFactory.getLogger(PrototypeDb3MenuBean.class);
 	private static final long serialVersionUID = 1L;
@@ -53,7 +54,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	private I identity;
 	private CTX context;
 	
-	private boolean setupRequired=false;
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 
 	public PrototypeDb3MenuBean(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,?,?,?,?,?,USER> fbSecurity)
@@ -73,7 +73,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		mainMenu = new ArrayList<>();
 
 		debugOnInfo = false;
-		setupRequired = true;
 	}
 	
 	public void postConstructMenu(JeeslSecurityBean<R,V,U,A,?,CTX,M,USER> bSecurity, I identity)
@@ -86,13 +85,13 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 			logger.error("Implementation for a empty bSecurity is deprecated");
 		}
 		
-		prepare(identity);
+		this.prepare(identity);
 	}
 	
 	public List<M> subMenu(String key) {return cacheSub.get(key);}
 	private List<M> buildSub(String viewCode)
 	{
-		if(debugOnInfo) {logger.info("Generating buildSub for ("+viewCode+") withContext:"+context+" setup:"+setupRequired);}
+		if(debugOnInfo) {logger.info("Generating buildSub for ("+viewCode+") withContext:"+context);}
 		List<M> tmp = new ArrayList<>();
 		tmp.addAll(bSecurity.getAllMenus(context)
 				.stream()
@@ -113,7 +112,7 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 	public List<M> breadcrumb(String key) {return cacheBreadcrumb.get(key);}
 	private List<M> buildBreadcrumb(String key)
 	{
-		if(debugOnInfo) {logger.info("Generating buildBreadcrumb for ("+key+") setup:"+setupRequired);}
+		if(debugOnInfo) {logger.info("Generating buildBreadcrumb for ("+key+")");}
 		List<M> list = new ArrayList<>();
 		if(bSecurity==null) {logger.error("Implementation for a empty bSecurity is not forseen"); return list;}
 		
@@ -124,7 +123,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 				traverseParent(list,m);
 			}
 		}
-		
 		Collections.reverse(list);
 		return list;
 	}
@@ -135,12 +133,10 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		if(m.getParent()!=null) {traverseParent(list,m.getParent());}
 	}
 	
-	public void updateLocale(String localeCode) {}
-
 	public void prepare(I identity)
 	{
 		this.identity=identity;
-		reset();
+		this.reset();
 	}
 
 	public void reset()
@@ -155,8 +151,6 @@ public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescripti
 		
 		cacheBreadcrumb.invalidateAll();
 		cacheBreadcrumb.cleanUp();
-		
-		setupRequired = true;
 	}
 
 	private boolean userHasAccessTo(M m)

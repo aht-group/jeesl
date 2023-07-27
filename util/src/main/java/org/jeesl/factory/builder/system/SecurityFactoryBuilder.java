@@ -60,6 +60,8 @@ public class SecurityFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 >
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(SecurityFactoryBuilder.class);
         
 	private final Class<C> cCategory; public Class<C> getClassCategory(){return cCategory;}

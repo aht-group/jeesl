@@ -139,8 +139,8 @@ public class SbTree5Handler <L1 extends EjbWithId, L2 extends EjbWithId, L3 exte
 		{
 			super.debug(debug);
 			StringBuilder sb = new StringBuilder();
-			sb.append("\tLevel 5 ").append(list5.size()).append("elements ");
-			if(l4!=null) {sb.append(l5.getClass().getSimpleName()).append(": ").append(l5.toString());}else {sb.append(": null");}
+			sb.append("\tLevel 5 ").append(list5.size()).append(" elements ");
+			if(l4!=null) {sb.append(l5.getClass().getSimpleName()).append(": ").append(l5.toString());} else {sb.append(": null");}
 			logger.info(sb.toString());
 		}
 	}

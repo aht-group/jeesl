@@ -14,15 +14,12 @@ import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComp
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
-import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
-import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineTutorial;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
@@ -54,8 +51,8 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	
 	protected JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity;
 	
-	protected final SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,USER> fbSecurity;
-	private final EjbSecurityMenuFactory<V,CTX,M> efMenu;
+	protected SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,USER> fbSecurity;
+	private EjbSecurityMenuFactory<V,CTX,M> efMenu;
 
 	protected JeeslLogger jogger;
 	
@@ -89,13 +86,10 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	protected File dirCaching; protected void activateCaching(File dirCaching) {this.dirCaching=dirCaching;}
 	private boolean cachingFilesSaved;
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
-	private final CTX nullCtx;
+	private CTX nullCtx;
 
-	public AbstractAppSecurityBean(final SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,USER> fbSecurity)
+	public AbstractAppSecurityBean()
 	{
-		this.fbSecurity=fbSecurity;
-		
-		efMenu = fbSecurity.ejbMenu();
 		cpRole = (new SecurityRoleComparator<C,R>()).factory(SecurityRoleComparator.Type.position);
 		cpMenu = new PositionComparator<M>();
 		
@@ -123,6 +117,13 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		
 		debugOnInfo = false;
 		cachingFilesSaved = false;
+		
+	}
+	
+	public void noArgConstructor(final SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,USER> fbSecurity)
+	{
+		this.fbSecurity=fbSecurity;
+		efMenu = fbSecurity.ejbMenu();
 		nullCtx = fbSecurity.ejbContext().build();
 	}
 	

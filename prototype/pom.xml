@@ -130,7 +130,6 @@
 		
 
 
-
 		<dependency>
 			<groupId>org.metachart</groupId>
 			<artifactId>metachart-jsf</artifactId>
@@ -204,6 +203,11 @@
 			<artifactId>joda-time</artifactId>
 		</dependency> -->
 		
+		<dependency>
+		  <groupId>org.infinispan</groupId>
+		  <artifactId>infinispan-cdi-embedded</artifactId>
+		  <scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>

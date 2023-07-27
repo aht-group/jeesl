@@ -39,7 +39,6 @@ public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractUserBean.class);
 
-//	protected JeeslSecurityFacade<?,R,V,U,A,?,?,USER> fSecurity9;
 	protected JeeslIdentityFactory<I,R,V,U,A,CTX,USER> fId;
 	private JeeslMenuBean<V,?,?> bMenu;
 
@@ -53,7 +52,7 @@ public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
 	protected String uuid;
 	protected String localeCode;
 	
-	protected boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;}
+	protected boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo=debugOnInfo;}
 
 	protected AbstractUserBean(IoLocaleFactoryBuilder<?,?,?> fbStatus)
 	{
@@ -80,7 +79,6 @@ public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
 			UIViewRoot root = ctx.getViewRoot();
 			if(root!=null) {root.setLocale(locale);}
 		}
-		if(bMenu!=null) {bMenu.updateLocale(localeCode);}
 		localeChanged();
 	}
 	protected void localeChanged() {}

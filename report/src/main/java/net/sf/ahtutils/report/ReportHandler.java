@@ -248,11 +248,8 @@ public class ReportHandler
 			}
 			
 		}
-		 catch (ExlpXpathNotFoundException e1) {
-			throw new ReportException("XPath has not been found when trying to find report with id " +id +"! " +e1.getMessage());
-		} catch (ExlpXpathNotUniqueException e2) {
-			throw new ReportException("XPath search found non-unique results when trying to find report with id " +id +"! " +e2.getMessage());
-		}
+		catch (ExlpXpathNotFoundException e1) {throw new ReportException("XPath has not been found when trying to find report with id " +id +"! " +e1.getMessage());}
+		catch (ExlpXpathNotUniqueException e2) {throw new ReportException("XPath search found non-unique results when trying to find report with id " +id +"! " +e2.getMessage());}
 		
 		String reportDir = (String)JXPathContext.newContext(reports).getValue("report[@id='"+ id +"']/@dir");
 		String location = "jrxml";
@@ -268,11 +265,9 @@ public class ReportHandler
 		try
 		{
 			design = (JasperDesign)JRXmlLoader.load(mrl.searchIs(location));
-		} catch (FileNotFoundException e) {
-			throw new ReportException("Requested report design jrxml file for report " +id +" could not be found at " +location +"!");
-		} catch (JRException e) {
-			throw new ReportException("Internal JasperReports error when trying to load requested report design jrxml file for report " +id +": " +e.getMessage());
 		}
+		catch (FileNotFoundException e) {throw new ReportException("Requested report design jrxml file for report " +id +" could not be found at " +location +"!");}
+		catch (JRException e) {throw new ReportException("Internal JasperReports error when trying to load requested report design jrxml file for report " +id +": " +e.getMessage());}
 		logger.info("lodaded report");
 		return design;
 	}
@@ -403,21 +398,21 @@ public class ReportHandler
 			}
 			if (res.getType().equals("template"))           
 			{                
-				try {
+				try
+				{
 					String templateLocation = "/resources/templates" +"/" +res.getValue().getValue();
 					logger.info("Including style template resource: " +templateLocation);
 					JRTemplate style = JRXmlTemplateLoader.load(mrl.searchIs(templateLocation));
-											mapReportParameter.put(res.getName() +"-style", style);
-									}
+					mapReportParameter.put(res.getName() +"-style", style);
+				}
 				catch (FileNotFoundException e) {logger.error(e.getMessage());}
-				catch (IOException e) {logger.error(e.getMessage());}
 			}
 		}
 		for (Object key : mapReportParameter.keySet())
 		{
 			String keyString = (String) key;
 			String valueString = mapReportParameter.get(keyString).toString();
-			logger.info("Report Parameter: " +keyString +" = " +valueString);
+			if(logger.isDebugEnabled()) {logger.debug("Report Parameter: " +keyString +" = " +valueString);}
 		}
 		return mapReportParameter;
 	}

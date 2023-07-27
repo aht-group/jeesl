@@ -1,5 +1,6 @@
 package org.jeesl.factory.pojo.system;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,16 +28,18 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 								   A extends JeeslSecurityAction<?,?,R,V,U,?>,
 								   CTX extends JeeslSecurityContext<?,?>,
 								   USER extends JeeslUser<R>>
+								implements Serializable 
 {
 
+	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIdentityFactory.class);
+	protected JeeslLogger jogger; public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> jogger(JeeslLogger jogger) {this.jogger = jogger; return this;}
 	
-	private JeeslSecurityFacade<?,R,V,U,A,USER> fSecurity;
-	private JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity;
+	protected JeeslSecurityFacade<?,R,V,U,A,USER> fSecurity;
+	protected JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity;
 	
 	private final SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity;
-	private JeeslLogger jogger; public JeeslLogger getJogger() {return jogger;} public void setJogger(JeeslLogger jogger) {this.jogger = jogger;}
-
+	
 	public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> securityFacade(JeeslSecurityFacade<?,R,V,U,A,USER> fSecurity) {this.fSecurity = fSecurity; return this;}
 	public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> securityBean(JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity) {this.bSecurity = bSecurity; return this;}
 	
@@ -90,7 +93,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 			List<R> roles = fSecurity.allRolesForUser(user);
 			
 			for(R r : roles) {identity.allowRole(r);}
-			if(jogger!=null) {jogger.milestone(fbSecurity.getClassRole().getSimpleName(), null, roles.size());}
+			if(Objects.nonNull(jogger)) {jogger.milestone(fbSecurity.getClassRole().getSimpleName(), null, roles.size());}
 			
 			if(Objects.nonNull(bSecurity)) {processViewsByBean(bSecurity,roles,identity);}
 			else if (Objects.nonNull(fSecurity)) {processViewsByFacade(user,identity);}
@@ -98,7 +101,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 			if(Objects.nonNull(bSecurity)) {processActionsByBean(bSecurity,roles,identity);}
 			else if (Objects.nonNull(fSecurity)) {processActionByFacade(user,identity);}
 			
-			if(jogger!=null) {jogger.milestone(fbSecurity.getClassAction().getSimpleName(), null, identity.sizeAllowedActions());}
+			if(Objects.nonNull(jogger)) {jogger.milestone(fbSecurity.getClassAction().getSimpleName(), null, identity.sizeAllowedActions());}
 			
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
@@ -130,7 +133,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 			}
 		}
 		List<V> views = new ArrayList<V>(map.values());
-		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),JeeslSecurityBean.class.getSimpleName(),views.size());}
+		if(Objects.nonNull(jogger)) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),JeeslSecurityBean.class.getSimpleName(),views.size());}
 		
 		for(V v : views) {identity.allowView(v);}
 	}
