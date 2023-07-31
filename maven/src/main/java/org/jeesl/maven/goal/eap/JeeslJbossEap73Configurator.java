@@ -34,7 +34,7 @@ public class JeeslJbossEap73Configurator extends AbstractJbossEapConfigurator
     {
     	String jbossDir = config.getString("eap.dir","/Volumes/ramdisk/jboss");
 		File f = new File(jbossDir);
-		getLog().info("JBoss EAP 7.3 directoy: "+f.getAbsolutePath());
+		super.getLog().info("JBoss EAP 7.3 directoy: "+f.getAbsolutePath()+" x1");
     	
     	ModelControllerClient client;
     	JbossModuleConfigurator jbossModule = new JbossModuleConfigurator(JbossModuleConfigurator.Product.eap,eapVersion,jbossDir);
@@ -52,6 +52,7 @@ public class JeeslJbossEap73Configurator extends AbstractJbossEapConfigurator
 	    	dbFiles(keys,config,jbossModule);
 	    	dbDrivers(keys,config,jbossConfig);
 	    	dbDs(keys,config,jbossConfig);
+//	    	super.caches(keys,config,jbossConfig);
 	    }
 	    catch (IOException e) {throw new MojoExecutionException(e.getMessage());}
     }

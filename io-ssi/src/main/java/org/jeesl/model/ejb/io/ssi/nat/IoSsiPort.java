@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.io.ssi.core;
+package org.jeesl.model.ejb.io.ssi.nat;
 
 import java.util.Map;
 
@@ -21,9 +21,11 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiPort;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
+import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
+import org.jeesl.model.ejb.io.ssi.data.IoSsiStatus;
 
 @Entity
-@Table(name="IoSsiPort")
+@Table(name="IoSsiNat")
 @EjbErNode(name="port")
 public class IoSsiPort implements JeeslIoSsiPort<IoLang,IoDescription,IoSsiHost>
 {
@@ -58,6 +60,11 @@ public class IoSsiPort implements JeeslIoSsiPort<IoLang,IoDescription,IoSsiHost>
 	@Override public int getDestinationPort() {return destinationPort;}
 	@Override public void setDestinationPort(int destinationPort) {this.destinationPort = destinationPort;}
 	
+	@NotNull @ManyToOne
+	private IoSsiNatService service;
+	public IoSsiNatService getService() {return service;}
+	public void setService(IoSsiNatService service) {this.service = service;}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
 	@JoinTable(name="IoSsiPortJtLang",joinColumns={@JoinColumn(name="port_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})

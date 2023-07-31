@@ -22,7 +22,9 @@ public class CliJbossStandaloneConfigurator
 	
 	public CliJbossStandaloneConfigurator() throws UnknownHostException
 	{
-		client = ModelControllerClient.Factory.create(InetAddress.getByName("localhost"), 9990);
+		logger.info("c");
+		client = ModelControllerClient.Factory.create(InetAddress.getByName("127.0.0.1"), 9990);
+		
 		jbossStandalone = new JbossStandaloneConfigurator("7.3",client);
 	}
 	
@@ -47,11 +49,18 @@ public class CliJbossStandaloneConfigurator
 //		client.close();
 	}
 	
+	public void infinispan() throws IOException
+	{
+
+		jbossStandalone.cache("cxy4");
+	}
+	
 	public static void main(String[] args) throws Exception
 	{
 		JeeslBootstrap.init();
 		CliJbossStandaloneConfigurator cli = new CliJbossStandaloneConfigurator();
 		
-		cli.dsExists();
+//		cli.dsExists();
+		cli.infinispan();
 	}
 }

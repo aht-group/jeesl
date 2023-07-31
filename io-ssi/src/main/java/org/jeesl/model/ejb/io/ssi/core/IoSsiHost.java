@@ -70,7 +70,11 @@ public class IoSsiHost implements JeeslIoSsiHost<IoLang,IoDescription,IoSsiSyste
 	private String memory;
 	@Override public String getMemory() {return memory;}
 	@Override public void setMemory(String memory) {this.memory = memory;}
-
+	
+	private String os;
+	@Override public String getOs() {return os;}
+	@Override public void setOs(String os) {this.os = os;}
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
 	@JoinTable(name="IoSsiHostJtLang",joinColumns={@JoinColumn(name="host_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})

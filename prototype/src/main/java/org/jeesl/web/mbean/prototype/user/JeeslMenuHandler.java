@@ -1,12 +1,12 @@
 package org.jeesl.web.mbean.prototype.user;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.infinispan.Cache;
-import org.jeesl.api.bean.JeeslMenuBean;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.factory.txt.system.security.user.TxtIdentityFactory;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
@@ -22,16 +22,16 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 									M extends JeeslSecurityMenu<?,V,CTX,M>,
 									USER extends JeeslUser<?>,
 									I extends JeeslIdentity<?,V,?,?,CTX,USER>>
-						implements JeeslMenuBean<V,CTX,M>
+						implements Serializable//JeeslMenuBean<V,CTX,M>
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslMenuHandler.class);
 	private static final long serialVersionUID = 1L;
 
 	private JeeslSecurityBean<?,?,?,?,?,CTX,M,?> bSecurity;
-	private Cache<String,List<M>> cacheSub;
-	private Cache<String,List<M>> cacheBreadcrumb;
+//	private Cache<String,List<M>> cacheSub;
+//	private Cache<String,List<M>> cacheBreadcrumb;
 	
-	private final List<M> mainMenu; @Override public List<M> getMainMenu() {return mainMenu;}
+	private final List<M> mainMenu; public List<M> getMainMenu() {return mainMenu;}
 	
 	private I identity;
 	private CTX context;
@@ -54,8 +54,8 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	
 	public void caches(Cache<String,List<M>> cacheSub, Cache<String,List<M>> cacheBreadcrumb)
 	{
-		this.cacheSub=cacheSub;
-		this.cacheBreadcrumb=cacheBreadcrumb;
+//		this.cacheSub=cacheSub;
+//		this.cacheBreadcrumb=cacheBreadcrumb;
 	}
 	
 	public void prepare(I identity)
@@ -82,7 +82,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 		for(M m : bSecurity.getRootMenus(context)) {if(this.userHasAccessTo(m)) {mainMenu.add(m);}}
 	}
 	
-	@Override public List<M> subMenu(String viewCode)
+	public List<M> subMenu(Cache<String,List<M>> cacheSub, String viewCode)
 	{
 		String cacheKey = TxtIdentityFactory.key(identity, viewCode);
 		if(cacheSub.containsKey(cacheKey)){return cacheSub.get(cacheKey);}
@@ -108,7 +108,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 		}
 	}
 	
-	@Override public List<M> breadcrumb(String viewCode)
+	public List<M> breadcrumb(Cache<String,List<M>> cacheBreadcrumb, String viewCode)
 	{
 		String cacheKey = TxtIdentityFactory.key(identity, viewCode);
 		if(cacheBreadcrumb.containsKey(cacheKey)){return cacheBreadcrumb.get(cacheKey);}

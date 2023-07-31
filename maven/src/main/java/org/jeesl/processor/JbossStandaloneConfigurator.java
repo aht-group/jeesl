@@ -23,7 +23,7 @@ public class JbossStandaloneConfigurator
 		this(eapVersion, ModelControllerClient.Factory.create(host,9990));
 	}
 	
-	public JbossStandaloneConfigurator(String eapVersion,ModelControllerClient client)
+	public JbossStandaloneConfigurator(String eapVersion, ModelControllerClient client)
 	{
 		this.eapVersion=eapVersion;
 		this.client=client;
@@ -273,13 +273,13 @@ public class JbossStandaloneConfigurator
 		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
 		request.get(ClientConstants.OP_ADDR).add("data-source",name);
 		
-		datasource(request,name);
+		this.datasource(request,name);
 		connection(request,"postgresql",host,port,db,jdbcParamter);
 		request.get("driver-name").set("postgres");
 		request.get("transaction-isolation").set("TRANSACTION_READ_COMMITTED");
 		 
-		pool(request);
-		security(request,username,password);
+		this.pool(request);
+		this.security(request,username,password);
 		  
 		request.get("prepared-statements-cache-size").set(32);
 		request.get("share-prepared-statements").set(true);
@@ -315,16 +315,35 @@ public class JbossStandaloneConfigurator
 	
 	private void pool(ModelNode request)
 	{
-		  request.get("min-pool-size").set(2);
-		  request.get("max-pool-size").set(5);
-		  request.get("pool-prefill").set(true);
-		  request.get("pool-use-strict-min").set(false);
-		  request.get("flush-strategy").set("FailingConnectionOnly");
+		request.get("min-pool-size").set(2);
+		request.get("max-pool-size").set(5);
+		request.get("pool-prefill").set(true);
+		request.get("pool-use-strict-min").set(false);
+		request.get("flush-strategy").set("FailingConnectionOnly");
 	}
 	
 	private void security(ModelNode request, String username, String password)
 	{
 		request.get("user-name").set(username);
 		request.get("password").set(password);
+	}
+	
+	public void cache(String name) throws IOException
+	{	
+		name="cxy1";
+		
+		ModelNode cache = new ModelNode("cache-container");
+		cache.set("name",name);
+		
+		ModelNode op = new ModelNode();
+		op.get(ClientConstants.OP).set(ClientConstants.ADD_CONTENT);
+		
+		ModelNode address = op.get(ClientConstants.OP_ADDR);
+		address.add("subsystem","infinispan");
+		
+		op.add(cache);
+		
+		  
+		client.execute(new OperationBuilder(op).build());
 	}
 }

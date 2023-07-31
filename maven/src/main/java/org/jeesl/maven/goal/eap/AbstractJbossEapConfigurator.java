@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.configuration.Configuration;
@@ -129,5 +130,18 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
         	log.add(dbType.toString());
     	}
     	getLog().info("DB Drivers: "+StringUtils.join(log, ", "));
+    }
+    
+    protected void caches(String[] keys, Configuration config, JbossStandaloneConfigurator jbossConfig) throws IOException
+    {
+    	for(String key : keys)
+    	{
+    		String caches = config.getString("cache."+key+".list");
+        	if(Objects.isNull(caches)) {super.getLog().info("No caches for "+key);}
+        	else
+        	{
+        		super.getLog().info("Caches "+key+" "+caches);
+        	}
+    	}
     }
 }

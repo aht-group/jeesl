@@ -41,4 +41,7 @@ public interface JeeslIoSsiHost <L extends JeeslLang, D extends JeeslDescription
 	
 	String getMemory();
 	void setMemory(String memory);
+	
+	String getOs();
+	void setOs(String os);
 }

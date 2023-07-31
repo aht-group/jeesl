@@ -330,6 +330,13 @@
             <artifactId>commons-dbutils</artifactId>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- Classgraph -->
+        <dependency>
+			<groupId>io.github.classgraph</groupId>
+			<artifactId>classgraph</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
         <!-- JBoss Wildfly -->
         <dependency>
