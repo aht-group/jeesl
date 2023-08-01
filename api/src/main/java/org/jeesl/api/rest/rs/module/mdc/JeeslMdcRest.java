@@ -8,6 +8,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.api.rest.i.module.mdc.JeeslMdcRestInterface;
 import org.jeesl.model.json.module.mdc.JsonMdcContainer;
 import org.jeesl.model.json.module.mdc.JsonMdcData;
 

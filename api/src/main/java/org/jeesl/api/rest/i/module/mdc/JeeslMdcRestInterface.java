@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.rs.module.mdc;
+package org.jeesl.api.rest.i.module.mdc;
 
 import org.jeesl.model.json.module.mdc.JsonMdcContainer;
 import org.jeesl.model.json.module.mdc.JsonMdcData;

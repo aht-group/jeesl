@@ -1,10 +1,13 @@
 package org.jeesl.controller.handler;
 
+import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NullNumberBinder
+public class NullNumberBinder implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(NullNumberBinder.class);
 	
 	public NullNumberBinder()

@@ -1,7 +1,7 @@
 package org.jeesl.controller.handler.module.mdc;
 
 import org.jeesl.api.facade.io.JeeslIoAttributeFacade;
-import org.jeesl.api.rest.rs.module.mdc.JeeslMdcRestInterface;
+import org.jeesl.api.rest.i.module.mdc.JeeslMdcRestInterface;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;

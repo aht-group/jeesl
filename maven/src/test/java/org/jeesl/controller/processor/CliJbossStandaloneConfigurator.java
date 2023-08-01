@@ -51,8 +51,18 @@ public class CliJbossStandaloneConfigurator
 	
 	public void infinispan() throws IOException
 	{
-
 		jbossStandalone.cache("cxy4");
+		
+//		<cache-container name="jeesl">
+//			<transport lock-timeout="60000"/>
+//			<replicated-cache name="menucrumb">
+//        		<transaction mode="BATCH"/>
+//        		</replicated-cache>
+//        	<replicated-cache name="menusub">
+//        		<transaction mode="BATCH"/>
+//        	</replicated-cache>
+//        </cache-container>
+
 	}
 	
 	public static void main(String[] args) throws Exception

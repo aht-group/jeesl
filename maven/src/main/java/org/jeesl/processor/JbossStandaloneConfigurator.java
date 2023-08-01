@@ -273,13 +273,13 @@ public class JbossStandaloneConfigurator
 		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
 		request.get(ClientConstants.OP_ADDR).add("data-source",name);
 		
-		this.datasource(request,name);
+		datasource(request,name);
 		connection(request,"postgresql",host,port,db,jdbcParamter);
 		request.get("driver-name").set("postgres");
 		request.get("transaction-isolation").set("TRANSACTION_READ_COMMITTED");
 		 
 		this.pool(request);
-		this.security(request,username,password);
+		security(request,username,password);
 		  
 		request.get("prepared-statements-cache-size").set(32);
 		request.get("share-prepared-statements").set(true);
@@ -328,22 +328,16 @@ public class JbossStandaloneConfigurator
 		request.get("password").set(password);
 	}
 	
+	
 	public void cache(String name) throws IOException
 	{	
-		name="cxy1";
-		
-		ModelNode cache = new ModelNode("cache-container");
-		cache.set("name",name);
-		
-		ModelNode op = new ModelNode();
-		op.get(ClientConstants.OP).set(ClientConstants.ADD_CONTENT);
-		
-		ModelNode address = op.get(ClientConstants.OP_ADDR);
-		address.add("subsystem","infinispan");
-		
-		op.add(cache);
-		
-		  
-		client.execute(new OperationBuilder(op).build());
+		name = "cxy1";
+
+		ModelNode request = new ModelNode();		
+		request.get(ClientConstants.OP).set(ClientConstants.ADD);
+		request.get(ClientConstants.OP_ADDR).add("subsystem","infinispan");
+		request.get(ClientConstants.OP_ADDR).add("cache-container",name);
+
+		client.execute(new OperationBuilder(request).build());
 	}
 }
