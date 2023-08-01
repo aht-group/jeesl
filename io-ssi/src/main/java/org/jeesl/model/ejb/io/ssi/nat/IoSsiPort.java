@@ -22,7 +22,6 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
-import org.jeesl.model.ejb.io.ssi.data.IoSsiStatus;
 
 @Entity
 @Table(name="IoSsiNat")

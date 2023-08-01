@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.security;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,12 +18,16 @@ import org.slf4j.LoggerFactory;
 public class EjbSecurityMenuFactory <V extends JeeslSecurityView<?,?,?,?,?,?>,
 									CTX extends JeeslSecurityContext<?,?>,
 									M extends JeeslSecurityMenu<?,V,CTX,M>>
+						implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(EjbSecurityMenuFactory.class);
 	
 	private final Class<M> cM;
 	private final Comparator<M> comparator;
     
+	public static <V extends JeeslSecurityView<?,?,?,?,?,?>, CTX extends JeeslSecurityContext<?,?>, M extends JeeslSecurityMenu<?,V,CTX,M>>
+					EjbSecurityMenuFactory<V,CTX,M> instance(final Class<M> cM) {return new EjbSecurityMenuFactory<>(cM);}
     public EjbSecurityMenuFactory(final Class<M> cM)
     {
 		this.cM = cM;

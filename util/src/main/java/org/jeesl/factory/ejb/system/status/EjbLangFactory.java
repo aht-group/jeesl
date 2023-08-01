@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.status;
 
+import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -22,11 +23,12 @@ import net.sf.ahtutils.xml.status.Lang;
 import net.sf.ahtutils.xml.status.Langs;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class EjbLangFactory<L extends JeeslLang>
+public class EjbLangFactory<L extends JeeslLang> implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(EjbLangFactory.class);
 
-    final Class<L> cL;
+    private final Class<L> cL;
 
     public static <L extends JeeslLang> EjbLangFactory<L> instance(final Class<L> cL) {return new EjbLangFactory<>(cL);}
     private EjbLangFactory(final Class<L> cL)
@@ -97,16 +99,6 @@ public class EjbLangFactory<L extends JeeslLang>
 	{
 		Map<String,L> map = new Hashtable<String,L>();
 		map.put(key, createLang(key, translation));
-		return map;
-	}
-
-	public Map<String,L> createLangMap(L... langs)
-	{
-		Map<String,L> map = new Hashtable<String,L>();
-		for(L l : langs)
-		{
-			map.put(l.getLkey(), l);
-		}
 		return map;
 	}
 

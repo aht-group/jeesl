@@ -45,7 +45,7 @@ public class AbstractJeeslWebController <L extends JeeslLang, D extends JeeslDes
 		locales = new ArrayList<LOC>();
 		
 		efLang = EjbLangFactory.instance(cL);
-		efDescription = new EjbDescriptionFactory<D>(cD);
+		efDescription = EjbDescriptionFactory.instance(cD);
 		
 		debugOnInfo = false;
 	}

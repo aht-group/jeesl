@@ -1,5 +1,6 @@
 package org.jeesl.factory.ejb.system.status;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -23,14 +24,15 @@ import net.sf.ahtutils.xml.status.Description;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.exlp.util.xml.JaxbUtil;
 
-public class EjbDescriptionFactory<D extends JeeslDescription>
+public class EjbDescriptionFactory<D extends JeeslDescription> implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(EjbDescriptionFactory.class);
 	
     private final Class<D> cD;
 	
     public static <D extends JeeslDescription> EjbDescriptionFactory<D> instance(final Class<D> cD) {return new EjbDescriptionFactory<>(cD);}
-    public EjbDescriptionFactory(final Class<D> cD)
+    private EjbDescriptionFactory(final Class<D> cD)
     {
         this.cD = cD;
     } 

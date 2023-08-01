@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.jeesl.api.bean.JeeslSecurityBean;
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;

@@ -124,7 +124,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		mode = Mode.directSave;
 		
 		fth = new JeeslFileTypeHandler<META,TYPE>(fbFile,fFr);
-		efDescription = new EjbDescriptionFactory<D>(fbFile.getClassD());
+		efDescription = EjbDescriptionFactory.instance(fbFile.getClassD());
 		efContainer = fbFile.ejbContainer();
 		efMeta = fbFile.ejbMeta();
 		metas = new ArrayList<>();
