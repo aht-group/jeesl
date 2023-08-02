@@ -63,6 +63,13 @@ public class XmlStyleFactory<L extends JeeslLang, D extends JeeslDescription,S e
 		xml.setCode(code);
 		return xml;
 	}
+	public static Style buildLabel(String code, String label)
+	{
+		Style xml = new Style();
+		xml.setCode(code);
+		xml.setLabel(label);
+		return xml;
+	}
 	
 	public static Style build(Status status)
 	{
