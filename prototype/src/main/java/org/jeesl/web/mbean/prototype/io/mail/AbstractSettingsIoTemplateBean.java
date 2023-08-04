@@ -216,7 +216,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 	
 	public void rmTemplate() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(template));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(template));}
 		fTemplate.rm(template);
 		reset(true,true);
 		bMessage.growlSuccessRemoved();
@@ -262,7 +262,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 	
 	public void rmToken() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(token));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(token));}
 		fTemplate.rm(token);
 		token=null;
 		bMessage.growlSuccessRemoved();

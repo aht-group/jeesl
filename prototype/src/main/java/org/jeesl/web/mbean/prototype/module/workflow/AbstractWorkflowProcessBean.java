@@ -398,7 +398,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	public void deleteProcess() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(process));
+		logger.info(AbstractLogMessage.deleteEntity(process));
 		fWorkflow.rm(process);
 		reset(WorkflowProcesslResetHandler.build().all());
 		reloadProcesses();
@@ -493,7 +493,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	public void deleteStage() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(stage));
+		logger.info(AbstractLogMessage.deleteEntity(stage));
 		fWorkflow.rm(stage);
 		reset(WorkflowProcesslResetHandler.build().all());
 		reloadStages();
@@ -531,7 +531,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	public void deletePermission() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(permission));
+		logger.info(AbstractLogMessage.deleteEntity(permission));
 		fWorkflow.rm(permission);
 		reset(WorkflowProcesslResetHandler.build().none().permission(true));
 		reloadPermissions();
@@ -570,7 +570,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	public void deleteNotification() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(notification));
+		logger.info(AbstractLogMessage.deleteEntity(notification));
 		fWorkflow.rm(notification);
 		reset(WorkflowProcesslResetHandler.build().none().notification(true));
 		reloadNotifications();
@@ -638,7 +638,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	public void deleteTransition() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(transition));
+		logger.info(AbstractLogMessage.deleteEntity(transition));
 		fWorkflow.rm(transition);
 		reset(WorkflowProcesslResetHandler.build().none().transistion(true));
 		reloadTransitions();
@@ -677,7 +677,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	public void deleteCommunication() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(communication));
+		logger.info(AbstractLogMessage.deleteEntity(communication));
 		fWorkflow.rm(communication);
 		reset(WorkflowProcesslResetHandler.build().none().communication(true));
 		reloadCommunications();
@@ -728,7 +728,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	public void deleteAction() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(action));
+		logger.info(AbstractLogMessage.deleteEntity(action));
 		fWorkflow.rm(action);
 		reset(WorkflowProcesslResetHandler.build().none().action(true));
 		reloadActions();

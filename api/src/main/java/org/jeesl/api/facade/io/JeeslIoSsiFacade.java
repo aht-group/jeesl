@@ -42,8 +42,8 @@ public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescriptio
 	<A extends EjbWithId> DATA fIoSsiData(CTX mapping, String code, A a) throws JeeslNotFoundException;
 		
 	<T extends EjbWithId> DATA fIoSsiData(CTX mapping, T ejb) throws JeeslNotFoundException;
-	List<DATA> fIoSsiData(CTX mapping, List<LINK> links);
-	<A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<LINK> links, A a);
+	
+	
 	<A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<LINK> links, A a, B b, Integer maxSize);
 	
 	JsonTuples1<LINK> tpIoSsiLinkForMapping(CTX mapping);
@@ -57,6 +57,8 @@ public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescriptio
 	
 	Long cSsiData(EjbIoSsiQuery<CTX,LINK> query);
 	List<DATA> fSsiData(EjbIoSsiQuery<CTX,LINK> query);
+	List<DATA> fIoSsiData(CTX mapping, List<LINK> links);
+	<A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<LINK> links, A a);
 	List<DATA> fSsiDataWithJob1(CTX mapping, LINK link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
 	
 	<T extends EjbWithSsiDataCleaning<CLEANING>> List<T> fEntitiesWithoutSsiDataCleaning(Class<T> c, int maxResult);

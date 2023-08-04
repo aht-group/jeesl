@@ -237,7 +237,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	}
 	public void rmRole() throws JeeslConstraintViolationException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(role));
+		logger.info(AbstractLogMessage.deleteEntity(role));
 		fSecurity.rm(role);
 		role=null;
 		reloadRoles();

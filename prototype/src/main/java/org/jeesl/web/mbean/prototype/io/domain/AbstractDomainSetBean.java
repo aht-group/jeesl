@@ -119,7 +119,7 @@ public abstract class AbstractDomainSetBean <L extends JeeslLang, D extends Jees
 	
 	public void deleteItem() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		logger.info(AbstractLogMessage.rmEntity(item));
+		logger.info(AbstractLogMessage.deleteEntity(item));
 //		domain.setEntity(fAnalysis.find(fbAnalysis.getClassDomainEntity(),domain.getEntity()));
 		fDomain.rm(item);
 		reloadItems();

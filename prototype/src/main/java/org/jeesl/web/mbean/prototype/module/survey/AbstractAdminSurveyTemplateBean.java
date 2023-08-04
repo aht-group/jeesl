@@ -313,7 +313,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	
 	public void deleteVersion() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(version));
+		logger.info(AbstractLogMessage.deleteEntity(version));
 		fCore.rmVersion(version);
 		clear(true,true,true,true,true,true,true,true,true,true);
 		reloadVersions();
@@ -360,7 +360,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	
 	public void rmSection() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		logger.info(AbstractLogMessage.rmEntity(section));
+		logger.info(AbstractLogMessage.deleteEntity(section));
 		fCore.rm(section);
 		section=null;
 		question=null;
@@ -461,7 +461,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	
 	public void rmQuestion() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(question));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(question));}
 		fCore.rm(question);
 		clear(false,false,false,true,true,true,true,true,true,true);
 		loadSection();
@@ -510,14 +510,14 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	
 	public void delQuestionOption() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(option));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(option));}
 		fCore.rmOption(question,option);
 		reloadQuestion();
 		bMessage.growlSuccessRemoved();
 	}
 	public void rmSetOption() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(option));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(option));}
 		fCore.rmOption(optionSet,option);
 		clear(false,false,true,true,true,true,true,false,true,true);
 		reloadOptionSet(true);

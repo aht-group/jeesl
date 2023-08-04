@@ -254,7 +254,7 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 	
 	public void deleteAnalysis() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(analysis));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(analysis));}
 		fCore.rm(analysis);
 		reset(true,false,false,true,true,true);
 	}
@@ -321,7 +321,7 @@ public abstract class AbstractAdminSurveyAnalysisBean <L extends JeeslLang, D ex
 	
 	public void deleteTool() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(tool));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(tool));}
 		cacheHandler.remove(tool);
 		
 		fAnalysis.rm(tool);

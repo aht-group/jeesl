@@ -110,7 +110,7 @@ public abstract class AbstractLfConfigurationBean <L extends JeeslLang, D extend
 
 	public void deleteConfiguration() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(configuration));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(configuration));}
 		fLf.rm(configuration);
 		reloadConfigurations();
 		reset();

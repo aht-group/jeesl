@@ -104,7 +104,7 @@ public class AbstractIoDashComponentBean <L extends JeeslLang, D extends JeeslDe
 
 	public void deleteDashComponent() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(dashComponent));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(dashComponent));}
 		fUtils.rm(dashComponent);
 		dashComponent=null;
 		//bMessage.growlSuccessRemoved();

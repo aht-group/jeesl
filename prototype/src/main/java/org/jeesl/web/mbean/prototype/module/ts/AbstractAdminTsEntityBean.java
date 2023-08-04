@@ -122,7 +122,7 @@ public class AbstractAdminTsEntityBean <L extends JeeslLang, D extends JeeslDesc
 	
 	public void rm() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(entity));
+		logger.info(AbstractLogMessage.deleteEntity(entity));
 		fTs.rm(entity);
 		entity=null;
 		reloadClasses();

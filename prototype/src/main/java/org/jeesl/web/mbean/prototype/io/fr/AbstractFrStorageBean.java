@@ -135,7 +135,7 @@ public class AbstractFrStorageBean <L extends JeeslLang, D extends JeeslDescript
 	
 	public void deleteStorage() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(storage));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(storage));}
 		fFr.rm(storage);
 		reloadStorages();
 		reset(true);

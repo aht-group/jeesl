@@ -280,7 +280,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	
 	public void rmReport() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(report));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(report));}
 		fReport.rm(report);
 		reset(true,true,true,true,true);
 		bMessage.growlSuccessRemoved();
@@ -355,7 +355,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		
 	public void rmSheet() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(sheet));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(sheet));}
 		fReport.rmSheet(sheet);
 		reset(false,true,true,true,true);
 		bMessage.growlSuccessRemoved();
@@ -494,7 +494,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		
 	public void rmColumn() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(column));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(column));}
 		fReport.rmColumn(column);
 		column=null;
 		bMessage.growlSuccessRemoved();

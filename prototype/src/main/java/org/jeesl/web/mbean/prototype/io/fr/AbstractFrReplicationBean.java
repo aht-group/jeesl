@@ -149,7 +149,7 @@ public class AbstractFrReplicationBean <L extends JeeslLang, D extends JeeslDesc
 	
 	public void deleteReplication() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(replication));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(replication));}
 		fFr.rm(replication);
 		reloadReplications();
 		reset(true);

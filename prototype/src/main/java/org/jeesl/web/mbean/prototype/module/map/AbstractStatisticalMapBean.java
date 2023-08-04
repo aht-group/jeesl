@@ -122,7 +122,7 @@ public abstract class AbstractStatisticalMapBean <L extends JeeslLang, D extends
 	
 	public void deleteMap() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(map));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(map));}
 		fMap.rm(map);
 		reset(true);
 		bMessage.growlSuccessRemoved();

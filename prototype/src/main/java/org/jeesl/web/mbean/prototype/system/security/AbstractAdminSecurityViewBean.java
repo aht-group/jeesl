@@ -205,7 +205,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	
 	public void deleteView() throws JeeslConstraintViolationException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(view));
+		logger.info(AbstractLogMessage.deleteEntity(view));
 
 		List<M> menus = fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.view.toString(),view,-1);
 		for(M m : menus)
@@ -265,7 +265,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	
 	public void rmAction() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.rmEntity(action));
+		logger.info(AbstractLogMessage.deleteEntity(action));
 		fSecurity.rm(action);
 		action=null;
 		reloadView();
@@ -321,7 +321,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	
 	public void deleteArea() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.rmEntity(area));
+		logger.info(AbstractLogMessage.deleteEntity(area));
 		fSecurity.rm(area);
 		reset(false,false,true);
 		reloadAreas();

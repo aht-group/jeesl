@@ -136,7 +136,7 @@ public class AbstractAdminTsTransactionBean <L extends JeeslLang, D extends Jees
 	{
 		if(cch.isCodeConfirmed())
 		{
-			logger.info(AbstractLogMessage.rmEntity(transaction));
+			logger.info(AbstractLogMessage.deleteEntity(transaction));
 			fTs.deleteTransaction(transaction);
 			transaction = null;
 			reloadTransactions();
@@ -153,7 +153,7 @@ public class AbstractAdminTsTransactionBean <L extends JeeslLang, D extends Jees
 			logger.info("In DEV MODE - PURGING ALL TRANSACTIONs");
 			for (TRANSACTION transactionToDelete : fTs.fTransactions(null,JeeslTsData.QueryInterval.closedOpen,null,null))
 			{
-				logger.info(AbstractLogMessage.rmEntity(transactionToDelete));
+				logger.info(AbstractLogMessage.deleteEntity(transactionToDelete));
 				fTs.deleteTransaction(transactionToDelete);
 			}
 		}

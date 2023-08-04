@@ -137,7 +137,7 @@ public class AbstractIoDashboardBean <L extends JeeslLang, D extends JeeslDescri
 
 	public void deleteDashboard() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(dashboard));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(dashboard));}
 		fUtils.rm(dashboard);
 		dashboard=null;
 		//bMessage.growlSuccessRemoved();
@@ -186,7 +186,7 @@ public class AbstractIoDashboardBean <L extends JeeslLang, D extends JeeslDescri
 
 	public void deleteDashboardComponent() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(dashboard));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(dashboard));}
 		fUtils.rm(dashComponentPosition);
 		dashComponentPosition = null;
 		dashboard = fUtils.find(fbDashboard.getClassDashboard(), dashboard);

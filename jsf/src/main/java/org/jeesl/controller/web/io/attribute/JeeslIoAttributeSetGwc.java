@@ -184,7 +184,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	public void deleteSet() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(set));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(set));}
 		fAttribute.rm(set);
 		reloadSets();
 		reset(false,true,true);
@@ -223,7 +223,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	
 	public void deleteItem() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(item));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(item));}
 		fAttribute.rm(item);
 		reset(false,false,true);
 		reloadItems();

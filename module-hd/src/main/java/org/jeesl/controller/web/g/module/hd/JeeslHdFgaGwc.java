@@ -222,7 +222,7 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 	
 	public void deleteAnswer() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		logger.info(AbstractLogMessage.rmEntity(fga));
+		logger.info(AbstractLogMessage.deleteEntity(fga));
 		fHd.rm(fga);
 		reset(false,true,true);
 		reloadAnswers();

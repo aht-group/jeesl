@@ -411,7 +411,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 
 	public void rmEntity() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(entity));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(entity));}
 		fRevision.rm(entity);
 		entity=null;
 		mapping=null;
@@ -463,7 +463,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 
 	public void rmAttribute() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(attribute));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(attribute));}
 		fRevision.rm(fbRevision.getClassEntity(),entity,attribute);
 		attribute=null;
 		bMessage.growlSuccessRemoved();
@@ -525,7 +525,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 
 	public void rmMapping() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(mapping));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(mapping));}
 		fRevision.rm(mapping);
 		mapping=null;
 		bMessage.growlSuccessRemoved();

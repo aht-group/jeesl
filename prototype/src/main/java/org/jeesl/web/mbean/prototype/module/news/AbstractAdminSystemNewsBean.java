@@ -98,7 +98,7 @@ public class AbstractAdminSystemNewsBean <L extends JeeslLang, D extends JeeslDe
 	
 	public void rmNews() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(news));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(news));}
 		fNews.rm(news);
 		news=null;
 		bMessage.growlSuccessRemoved();

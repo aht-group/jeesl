@@ -109,7 +109,7 @@ public class AbstractAdminTrafficLightBean <L extends JeeslLang, D extends Jeesl
 	
 	public void rm() throws JeeslConstraintViolationException
 	{
-		logger.debug(AbstractLogMessage.rmEntity(trafficLight));
+		logger.debug(AbstractLogMessage.deleteEntity(trafficLight));
 		fTl.rm(trafficLight);
 		trafficLight=null;
 		reloadTrafficLights();

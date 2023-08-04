@@ -145,7 +145,7 @@ public abstract class AbstractLfTimeBean <L extends JeeslLang, D extends JeeslDe
 
 	public void deleteTimeGroup() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(timeGroup));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(timeGroup));}
 		elements = fLf.allForParent(fbLf.getClassTE(),timeGroup);
 		for (TE tte : elements){fLf.rm(tte);}
 		elements.clear();
@@ -183,7 +183,7 @@ public abstract class AbstractLfTimeBean <L extends JeeslLang, D extends JeeslDe
 
 	public void deleteElement() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(timeGroup));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(timeGroup));}
 		fLf.rm(element);
 
 		reloadElements();

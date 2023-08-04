@@ -173,7 +173,7 @@ public class AbstractAdminTsScopeBean <L extends JeeslLang, D extends JeeslDescr
 	
 	public void rm() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(scope));
+		logger.info(AbstractLogMessage.deleteEntity(scope));
 		fTs.rm(scope);
 		reset(true,true);
 		reloadScopes();

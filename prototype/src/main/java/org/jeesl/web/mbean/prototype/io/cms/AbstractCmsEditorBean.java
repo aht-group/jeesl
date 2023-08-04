@@ -427,7 +427,7 @@ public abstract class AbstractCmsEditorBean <L extends JeeslLang,D extends Jeesl
 	
 	public void deleteElement() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(element));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(element));}
 		fCms.deleteCmsElement(element);
 		reset(true);
 		reloadSection();

@@ -105,7 +105,7 @@ public class AbstractAmProjectBean <L extends JeeslLang,D extends JeeslDescripti
 
 	public void deleteProject() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(project));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(project));}
 		fAm.deleteActivityTree(project.getRoot());
 		fAm.rm(project);
 

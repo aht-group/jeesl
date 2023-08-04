@@ -160,7 +160,7 @@ public abstract class AbstractAdminDmsTreeBean <L extends JeeslLang,D extends Je
 
 	public void deleteSection()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(section));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(section));}
 		reloadTree();
 	}
 

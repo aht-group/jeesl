@@ -157,7 +157,7 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 	
 	public void deleteSurvey() throws JeeslLockingException, JeeslConstraintViolationException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(survey));
+		logger.info(AbstractLogMessage.deleteEntity(survey));
 		fCore.deleteSurvey(survey);
 		survey=null;
 		reloadSurveys();

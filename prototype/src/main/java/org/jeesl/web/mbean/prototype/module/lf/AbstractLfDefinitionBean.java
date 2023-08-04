@@ -191,7 +191,7 @@ public abstract class AbstractLfDefinitionBean <L extends JeeslLang, D extends J
 
 	public void deleteIndicator() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(indicator));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(indicator));}
 		fLf.rm(indicator);
 		reloadIndicators();
 		reset(true,true);
@@ -245,7 +245,7 @@ public abstract class AbstractLfDefinitionBean <L extends JeeslLang, D extends J
 
 	public void deleteIndicatorValue() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(indicatorValue));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(indicatorValue));}
 		fLf.rm(indicatorValue);
 		//Indicator = fLf.save(Indicator);
 		reloadIndicatorValues();

@@ -127,7 +127,7 @@ public abstract class AbstractAdminDmsConfigBean <L extends JeeslLang, D extends
 	
 	public void deleteDm() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(dm));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(dm));}
 //		fAttribute.rm(set);
 //		reloadSets();
 //		reset(true,true);

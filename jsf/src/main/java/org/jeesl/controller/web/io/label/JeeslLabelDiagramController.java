@@ -123,7 +123,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 
 	public void rmDiagram() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(diagram));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(diagram));}
 		fRevision.rm(diagram);
 		diagram=null;
 		dot = null;

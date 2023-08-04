@@ -120,7 +120,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 
 	public void rm() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(rv));
+		logger.info(AbstractLogMessage.deleteEntity(rv));
 		fRevision.rm(rv);
 		bMessage.growlSuccessRemoved();
 		rv=null;
@@ -192,7 +192,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 
 	public void rmMapping() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(mapping));
+		logger.info(AbstractLogMessage.deleteEntity(mapping));
 		fRevision.rm(fbRevision.getClassViewMapping(),mapping);
 		mapping=null;
 		bMessage.growlSuccessRemoved();

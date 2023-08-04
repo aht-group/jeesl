@@ -77,7 +77,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	
 	public void deleteContext() throws JeeslConstraintViolationException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(context));
+		logger.info(AbstractLogMessage.deleteEntity(context));
 		fSecurity.rm(context);
 		context=null;
 		reloadContexts();

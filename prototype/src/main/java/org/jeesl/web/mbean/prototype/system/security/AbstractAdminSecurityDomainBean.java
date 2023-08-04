@@ -132,7 +132,7 @@ public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,
 	
 	public void rmStaff() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		logger.info(AbstractLogMessage.rmEntity(staff));
+		logger.info(AbstractLogMessage.deleteEntity(staff));
 		fSecurity.rm(staff);
 		staff=null;
 		reloadStaffs();

@@ -262,7 +262,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	public void deleteView() throws JeeslConstraintViolationException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(view));
+		logger.info(AbstractLogMessage.deleteEntity(view));
 
 		List<M> menus = fSecurity.allForParent(fbSecurity.getClassMenu(), JeeslSecurityMenu.Attributes.view.toString(),view,-1);
 		for(M m : menus)
@@ -328,7 +328,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	public void rmAction() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.rmEntity(action));
+		logger.info(AbstractLogMessage.deleteEntity(action));
 		fSecurity.rm(action);
 		action=null;
 		reloadView();
@@ -386,7 +386,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	public void deleteArea() throws JeeslConstraintViolationException
 	{
-		logger.info(AbstractLogMessage.rmEntity(area));
+		logger.info(AbstractLogMessage.deleteEntity(area));
 		fSecurity.rm(area);
 		reset(false,false,true);
 		reloadAreas();

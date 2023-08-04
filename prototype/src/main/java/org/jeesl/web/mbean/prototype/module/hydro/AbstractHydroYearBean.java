@@ -115,7 +115,7 @@ public class AbstractHydroYearBean <L extends JeeslLang, D extends JeeslDescript
 
 	public void deleteHydroYear() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(hydroYear));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(hydroYear));}
 		fUtils.rm(hydroYear);
 		hydroYear=null;
 		//bMessage.growlSuccessRemoved();

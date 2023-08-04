@@ -199,7 +199,7 @@ public abstract class AbstractDomainQueryBean <L extends JeeslLang, D extends Je
 	
 	public void deleteQuery() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		logger.info(AbstractLogMessage.rmEntity(query));
+		logger.info(AbstractLogMessage.deleteEntity(query));
 //		domain.setEntity(fAnalysis.find(fbAnalysis.getClassDomainEntity(),domain.getEntity()));
 		fDomain.rm(query);
 		reloadQueries();
@@ -270,7 +270,7 @@ public abstract class AbstractDomainQueryBean <L extends JeeslLang, D extends Je
 	
 	public void deletePath() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		logger.info(AbstractLogMessage.rmEntity(path));
+		logger.info(AbstractLogMessage.deleteEntity(path));
 //		domain.setEntity(fAnalysis.find(fbAnalysis.getClassDomainEntity(),domain.getEntity()));
 		fDomain.rm(path);
 		reloadPaths();

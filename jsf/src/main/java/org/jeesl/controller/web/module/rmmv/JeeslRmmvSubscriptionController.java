@@ -176,7 +176,7 @@ public class JeeslRmmvSubscriptionController <L extends JeeslLang, D extends Jee
 	
 	public void deleteItem() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		logger.info(AbstractLogMessage.rmEntity(item));
+		logger.info(AbstractLogMessage.deleteEntity(item));
 		fRmmv.rm(item);
 		this.reset(false, false, false, true);
 		this.reloadItems();

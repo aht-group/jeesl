@@ -151,7 +151,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 	
 	public void rmCategory() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(category));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(category));}
 		if(categoryRemoveable())
 		{
 			fSecurity.rm(category);

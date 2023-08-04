@@ -121,7 +121,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 
 	public void rm() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		logger.info(AbstractLogMessage.rmEntity(scope));
+		logger.info(AbstractLogMessage.deleteEntity(scope));
 		fRevision.rm(scope);
 		bMessage.growlSuccessRemoved();
 		scope=null;
@@ -147,7 +147,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 
 	public void rmAttribute() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(attribute));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(attribute));}
 		fRevision.rm(fbRevision.getClassScope(),scope,attribute);
 		attribute=null;
 		bMessage.growlSuccessRemoved();

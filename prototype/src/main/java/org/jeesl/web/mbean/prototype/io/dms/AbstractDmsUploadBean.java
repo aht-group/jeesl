@@ -220,7 +220,7 @@ R extends JeeslTenantRealm<L,D,R,?>,
     
     public void deleteFile() throws JeeslConstraintViolationException, JeeslLockingException
     {
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(file));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(file));}
 		
 		if(fileHandler.getMetas()!=null && fileHandler.getMetas().size()>0)
 		{

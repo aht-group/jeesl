@@ -2,23 +2,24 @@ package org.jeesl.jsf.util.stream;
 
 import java.io.InputStream;
 
+import org.jeesl.interfaces.controller.report.format.JeeslCsvReport;
 import org.jeesl.interfaces.controller.report.format.JeeslXlsReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
-public class XlsStreamedContent <REPORT extends JeeslIoReport<?,?,?,?>>
+public class CsvStreamedContent <REPORT extends JeeslIoReport<?,?,?,?>>
 								extends DefaultStreamedContent implements StreamedContent 
 {
 	private static final long serialVersionUID = 1L;
 
-	public XlsStreamedContent(JeeslXlsReport<REPORT> report) throws Exception
+	public CsvStreamedContent(JeeslCsvReport<REPORT> report) throws Exception
 	{
-		super(report.xlsStream(),JeeslXlsReport.mimeType,report.xlsFileName());
+		super(report.csvStream(),JeeslCsvReport.mimeType,report.csvFileName());
 	}
 
-	public XlsStreamedContent(InputStream is, String fileName)
-	{
-		super(is,JeeslXlsReport.mimeType,fileName);
-	}
+//	public CsvStreamedContent(InputStream is, String fileName)
+//	{
+//		super(is,JeeslXlsReport.mimeType,fileName);
+//	}
 }

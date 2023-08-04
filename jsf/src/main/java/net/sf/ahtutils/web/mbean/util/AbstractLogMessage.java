@@ -20,7 +20,13 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractLogMessage <L extends JeeslLang,D extends JeeslDescription,C extends JeeslSecurityCategory<L,D>,R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,V extends JeeslSecurityView<L,D,C,R,U,A>,U extends JeeslSecurityUsecase<L,D,C,R,V,A>,A extends JeeslSecurityAction<L,D,R,V,U,AT>,AT extends JeeslSecurityTemplate<L,D,C>,USER extends JeeslUser<R>>
+public class AbstractLogMessage <L extends JeeslLang, D extends JeeslDescription,
+								C extends JeeslSecurityCategory<L,D>,
+								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
+								V extends JeeslSecurityView<L,D,C,R,U,A>,
+								U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
+								A extends JeeslSecurityAction<L,D,R,V,U,?>,
+								USER extends JeeslUser<R>>
 		implements Serializable
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractLogMessage.class);
@@ -123,11 +129,8 @@ public class AbstractLogMessage <L extends JeeslLang,D extends JeeslDescription,
 		 sb.append(" ").append(c.getClass().getSimpleName());
 		 return sb.toString();
 	}
-	public static <T extends EjbWithId> String rmEntity(T t)
-	{
-		 return rmEntity(null,t);
-	}
-	public static <USER extends JeeslUser<?>, T extends EjbWithId> String rmEntity(USER user, T t)
+	public static <T extends EjbWithId> String deleteEntity(T t) {return deleteEntity(null,t);}
+	public static <USER extends JeeslUser<?>, T extends EjbWithId> String deleteEntity(USER user, T t)
 	{
 		 StringBuilder sb = new StringBuilder();
 		 sb.append("Removing ").append(t.getClass().getSimpleName());

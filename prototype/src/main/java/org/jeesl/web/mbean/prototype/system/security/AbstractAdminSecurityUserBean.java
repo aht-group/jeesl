@@ -172,7 +172,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 	public void rm(USER myUser){this.user=myUser;deleteUser();}
 	public void deleteUser()
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(user));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(user));}
 		try
 		{
 			fUtilsUser.rm(user);

@@ -131,7 +131,7 @@ public class AbstractAdminJobTemplateBean <L extends JeeslLang, D extends JeeslD
 	
 	public void deleteTemplate() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(template));}
+		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(template));}
 		fJob.rm(template);
 		reloadTemplates();
 		reset(true);

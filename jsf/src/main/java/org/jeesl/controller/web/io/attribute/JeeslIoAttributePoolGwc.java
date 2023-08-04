@@ -201,7 +201,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	
 	public void deleteCriteria() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(criteria));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(criteria));}
 		fAttribute.rm(criteria);
 		reloadCriterias();
 		reset(false,true,true);
@@ -237,7 +237,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	
 	public void deleteOption() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(criteria));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(criteria));}
 		fAttribute.rm(option);
 		reloadOptions();
 		bAttribute.updateCriteria(option.getCriteria());

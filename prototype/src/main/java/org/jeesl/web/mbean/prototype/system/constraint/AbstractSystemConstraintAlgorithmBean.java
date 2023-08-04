@@ -118,7 +118,7 @@ public abstract class AbstractSystemConstraintAlgorithmBean <L extends JeeslLang
 	
 	public void deleteAlgorithm() throws JeeslConstraintViolationException
 	{
-		if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(algorithm));}
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(algorithm));}
 		fConstraint.rm(algorithm);
 		reloadAlgorithms();
 		reset(true);

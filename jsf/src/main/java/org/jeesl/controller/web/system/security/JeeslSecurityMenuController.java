@@ -365,7 +365,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
     public void selectHelp(){if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(help));}}
     public void removeHelp() throws JeeslConstraintViolationException
     {
-    	if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(help));}
+    	if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(help));}
     	fSecurity.rm(help);
     	reloadHelps();
     }

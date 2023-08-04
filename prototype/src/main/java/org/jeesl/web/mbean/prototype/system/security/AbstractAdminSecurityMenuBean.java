@@ -357,7 +357,7 @@ public abstract class AbstractAdminSecurityMenuBean <L extends JeeslLang, D exte
     public void selectHelp(){if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(help));}}
     public void removeHelp() throws JeeslConstraintViolationException
     {
-    	if(debugOnInfo) {logger.info(AbstractLogMessage.rmEntity(help));}
+    	if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(help));}
     	fSecurity.rm(help);
     	reloadHelps();
     }
