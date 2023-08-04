@@ -7,26 +7,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityTemplate;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractLogMessage <L extends JeeslLang, D extends JeeslDescription,
-								C extends JeeslSecurityCategory<L,D>,
-								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
-								V extends JeeslSecurityView<L,D,C,R,U,A>,
-								U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-								A extends JeeslSecurityAction<L,D,R,V,U,?>,
-								USER extends JeeslUser<R>>
+public class AbstractLogMessage <USER extends JeeslUser<?>>
 		implements Serializable
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractLogMessage.class);
