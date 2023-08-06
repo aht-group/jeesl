@@ -18,7 +18,6 @@ public interface JeeslIoLog<STATUS extends JeeslIoLogStatus<?,?,STATUS,?>,
 {	
 	public static enum Attributes{status,retention,user};
 
-
 	STATUS getStatus();
 	void setStatus(STATUS status);
 

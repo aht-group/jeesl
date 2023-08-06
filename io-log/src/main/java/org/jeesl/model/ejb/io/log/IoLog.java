@@ -19,7 +19,7 @@ import org.jeesl.model.ejb.system.security.user.SecurityUser;
 
 @Entity
 @Table(name="IoLog")
-@EjbErNode(name="Log",category="systemIo",subset="ioLog")
+@EjbErNode(name="Log",category="systemIoLog",subset="ioLog")
 public class IoLog implements JeeslIoLog<IoLogStatus,IoLogRetention,SecurityUser>
 {
 	public static final long serialVersionUID=1;	
@@ -53,7 +53,7 @@ public class IoLog implements JeeslIoLog<IoLogStatus,IoLogRetention,SecurityUser
 	@Override public LocalDateTime getEndDate() {return endDate;}
 	@Override public void setEndDate(LocalDateTime endDate) {this.endDate = endDate;}
 
-	@Basic @Column(columnDefinition = "text")
+	@Basic @Column(columnDefinition="text")
 	private String remark;
 	public String getRemark() {return remark;}
 	public void setRemark(String remark) {this.remark = remark;}

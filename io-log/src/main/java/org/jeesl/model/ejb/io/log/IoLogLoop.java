@@ -14,7 +14,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="IoLogLoop")
-@EjbErNode(name="Loop",category="systemIo",subset="ioLog")
+@EjbErNode(name="Loop",category="systemIoLog",subset="ioLog")
 public class IoLogLoop implements JeeslIoLogLoop<IoLog>
 {
 	public static final long serialVersionUID=1;	
