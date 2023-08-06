@@ -2,9 +2,9 @@ package org.jeesl.controller.handler.system.io;
 
 import java.io.OutputStream;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,7 +114,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		{
 			Instant timeNow = Instant.now();
 			MILESTONE ejb = efMilestone.build(log);
-			ejb.setRecord(Date.from(timeNow));
+			ejb.setRecord(LocalDateTime.from(timeNow));
 			if(Objects.isNull(timeStart)) {this.start("Implicit start");}
 			ejb.setMilliTotal(ChronoUnit.MILLIS.between(timeStart,timeNow));
 			ejb.setMilliStep(ChronoUnit.MILLIS.between(timeMilestone,timeNow));

@@ -1,6 +1,6 @@
 package org.jeesl.model.ejb.io.log;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity
 @Table(name="IoLogMilestone")
-@EjbErNode(name="Log",category="systemIo",subset="ioLog")
+@EjbErNode(name="Log",category="systemIoLog",subset="ioLog")
 public class IoLogMilestone implements JeeslIoLogMilestone<IoLog>
 {
 	public static final long serialVersionUID=1;	
@@ -32,9 +32,9 @@ public class IoLogMilestone implements JeeslIoLogMilestone<IoLog>
 	@Override public IoLog getLog() {return log;}
 	@Override public void setLog(IoLog log) {this.log = log;}
 
-	private Date record;
-	@Override public Date getRecord() {return record;}
-	@Override public void setRecord(Date record) {this.record = record;}
+	private LocalDateTime record;
+	@Override public LocalDateTime getRecord() {return record;}
+	@Override public void setRecord(LocalDateTime record) {this.record = record;}
 
 	private long milliTotal;
 	@Override public long getMilliTotal() {return milliTotal;}
@@ -66,7 +66,7 @@ public class IoLogMilestone implements JeeslIoLogMilestone<IoLog>
 
 	@Override public String toString()
 	{
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("[").append(id).append("]");
 		return sb.toString();
 	}

@@ -16,7 +16,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("ioLogRetention")
-@EjbErNode(name="Retention",category="systemIo",subset="ioLog",level=3)
+@EjbErNode(name="Retention",category="systemIoLog",subset="ioLog",level=3)
 public class IoLogRetention extends IoStatus implements JeeslIoLogRetention<IoLang,IoDescription,IoLogRetention,IoGraphic>
 {
 	public static final long serialVersionUID=1;

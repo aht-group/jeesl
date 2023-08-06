@@ -17,8 +17,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 
 @Entity
 @DiscriminatorValue("ioLogStatus")
-@EjbErNode(name="Status",category="systemIo",subset="ioLog",level=3)
-
+@EjbErNode(name="Status",category="systemIoLog",subset="ioLog",level=3)
 public class IoLogStatus extends IoStatus implements JeeslIoLogStatus<IoLang,IoDescription,IoLogStatus,IoGraphic>
 {
 	public static final long serialVersionUID=1;
