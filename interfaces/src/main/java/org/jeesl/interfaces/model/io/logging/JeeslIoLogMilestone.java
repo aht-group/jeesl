@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 
-public interface JeeslIoLogMilestone<LOG extends JeeslIoLog<?,?,?,?,?>
+public interface JeeslIoLogMilestone<LOG extends JeeslIoLog<?,?,?>
 								>
 		extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
 				EjbWithRecord,EjbWithName

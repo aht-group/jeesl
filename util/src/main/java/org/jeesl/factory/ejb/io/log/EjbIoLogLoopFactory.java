@@ -5,7 +5,7 @@ import org.jeesl.interfaces.model.io.logging.JeeslIoLogLoop;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbIoLogLoopFactory<LOG extends JeeslIoLog<?,?,?,?,?>,
+public class EjbIoLogLoopFactory<LOG extends JeeslIoLog<?,?,?>,
 									LOOP extends JeeslIoLogLoop<LOG>
 >
 {

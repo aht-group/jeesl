@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
-							LOG extends JeeslIoLog<L,D,STATUS,RETENTION,USER>,
+							LOG extends JeeslIoLog<STATUS,RETENTION,USER>,
 							STATUS extends JeeslIoLogStatus<L,D,STATUS,?>,
 							RETENTION extends JeeslIoLogRetention<L,D,RETENTION,?>,
 							MILESTONE extends JeeslIoLogMilestone<LOG>,

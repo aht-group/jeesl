@@ -5,7 +5,7 @@ import org.jeesl.interfaces.model.io.logging.JeeslIoLogMilestone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbIoLogMilestoneFactory<LOG extends JeeslIoLog<?,?,?,?,?>,
+public class EjbIoLogMilestoneFactory<LOG extends JeeslIoLog<?,?,?>,
 										MILESTONE extends JeeslIoLogMilestone<LOG>
 >
 {

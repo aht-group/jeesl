@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 
-public interface JeeslIoLogLoop<LOG extends JeeslIoLog<?,?,?,?,?>
+public interface JeeslIoLogLoop<LOG extends JeeslIoLog<?,?,?>
 								>
 		extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
 				EjbWithNonUniqueCode,EjbWithName

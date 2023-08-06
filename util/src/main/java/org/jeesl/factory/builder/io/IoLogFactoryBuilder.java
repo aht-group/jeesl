@@ -12,11 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class IoLogFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
-								LOG extends JeeslIoLog<L,D,?,?,?>,
+								LOG extends JeeslIoLog<?,?,?>,
 								MILESTONE extends JeeslIoLogMilestone<LOG>,
 								LOOP extends JeeslIoLogLoop<LOG>>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoLogFactoryBuilder.class);
 	
 	private final Class<MILESTONE> cMileStone;  public Class<MILESTONE> getClassRetention(){return cMileStone;}

@@ -5,19 +5,16 @@ import java.io.Serializable;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.interfaces.model.with.date.ju.EjbWithDateRange;
+import org.jeesl.interfaces.model.with.date.jt.JeeslWithDateTimeRange;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslIoLog<L extends JeeslLang, D extends JeeslDescription,
-								STATUS extends JeeslIoLogStatus<L,D,STATUS,?>,
-								RETENTION extends JeeslIoLogRetention<L,D,RETENTION,?>,
+public interface JeeslIoLog<STATUS extends JeeslIoLogStatus<?,?,STATUS,?>,
+								RETENTION extends JeeslIoLogRetention<?,?,RETENTION,?>,
 								USER extends JeeslSimpleUser
 								>
 		extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
-				EjbWithDateRange
+		JeeslWithDateTimeRange
 {	
 	public static enum Attributes{status,retention,user};
 
@@ -30,4 +27,5 @@ public interface JeeslIoLog<L extends JeeslLang, D extends JeeslDescription,
 
 	USER getUser();
 	void setUser(USER user);
+	
 }

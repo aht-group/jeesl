@@ -52,7 +52,7 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 		
 		String s = explainString.replaceAll("(\\u00A0)","");
 		
-		FileUtils.writeStringToFile(Paths.get("/Volumes/ramdisk/test.json").toFile(), s, StandardCharsets.UTF_8);
+//		FileUtils.writeStringToFile(Paths.get("/Volumes/ramdisk/test.json").toFile(), s, StandardCharsets.UTF_8);
 		
 		List<JsonPostgresExplain> list = JsonUtil.jom().readValue(s, new TypeReference<List<JsonPostgresExplain>>(){});
 		logger.info(JsonPostgresExplain.class.getSimpleName()+" "+list.size());
