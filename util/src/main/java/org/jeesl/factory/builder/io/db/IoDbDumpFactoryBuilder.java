@@ -22,6 +22,8 @@ public class IoDbDumpFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 >
 			extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoDbDumpFactoryBuilder.class);
 	
 	private final Class<DUMP> cDump; public Class<DUMP> getClassDump(){return cDump;}

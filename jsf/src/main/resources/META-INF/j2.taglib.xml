@@ -19,6 +19,12 @@
         </component>
 	</tag>
 	<tag>
+        <tag-name>gridIoDbFlyway</tag-name>
+        <component>
+            <resource-id>ioDb/flyway.xhtml</resource-id>
+        </component>
+	</tag>
+	<tag>
         <tag-name>gridIoDbMeta</tag-name>
         <component>
             <resource-id>ioDb/meta.xhtml</resource-id>

@@ -23,6 +23,10 @@ public class IoDbPgFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 >
 			extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
+
+
 	final static Logger logger = LoggerFactory.getLogger(IoDbPgFactoryBuilder.class);
 	
 	

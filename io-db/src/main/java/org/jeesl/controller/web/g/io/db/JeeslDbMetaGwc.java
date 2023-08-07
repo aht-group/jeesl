@@ -21,8 +21,6 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
-import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaColumnFactory;
-import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.bean.th.ThMultiFilter;

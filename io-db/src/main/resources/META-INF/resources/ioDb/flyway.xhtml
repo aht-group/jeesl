@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:ofx="http://www.openfuxml.org/jsf"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+		
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row id="rTable">
+		<j:slot width="12">
+			<h:form id="fTable">
+				<p:dataTable styleClass="jeesl-datatable"
+							var="f" value="#{cc.attrs.ctrl.flyways}" draggableRows="false">
+					<f:facet name="header">
+						<j:dtHeader entity="IoDbFlyway" code="listOf"/>
+					</f:facet>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbFlyway" code="id"/></f:facet>
+						<h:outputText value="#{f.id}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbFlyway" code="version"/></f:facet>
+						<h:outputText value="#{f.version}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbFlyway" code="record"/></f:facet>
+						<jp:outputDate value="#{f.record}" withSecond="true"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbFlyway" code="description"/></f:facet>
+						<h:outputText value="#{f.description}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>
