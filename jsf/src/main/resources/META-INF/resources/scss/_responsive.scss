@@ -1396,7 +1396,7 @@ $enable-pointer-cursor-for-buttons: true;
 			position: relative;
 			width: 100%;
 			
-			.jeesl-galleria-image-wrapper img {
+			.jeesl-galleria-image-wrapper img, > img {
 				width: 100%;
 			}
 			

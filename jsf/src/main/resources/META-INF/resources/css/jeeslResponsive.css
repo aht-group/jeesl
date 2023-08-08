@@ -1,3 +1,29 @@
+@charset "UTF-8";
+@use 'sass:map';
+.jeesl-brewer-1 {
+  background: #66c2a5; }
+
+.jeesl-brewer-2 {
+  background: #fc8f64; }
+
+.jeesl-brewer-3 {
+  background: #8c9eca; }
+
+.jeesl-brewer-4 {
+  background: #e788c3; }
+
+.jeesl-brewer-5 {
+  background: #a6d855; }
+
+.jeesl-brewer-6 {
+  background: #ffd92e; }
+
+.jeesl-brewer-7 {
+  background: #e5c594; }
+
+.jeesl-brewer-8 {
+  background: #b3b3b3; }
+
 *,
 *::before,
 *::after {
@@ -471,9 +497,9 @@ template {
     position: relative;
     top: 0; }
   .ui-button.ui-state-default .ui-icon-circle-triangle-e:before {
-    content: "\25ba"; }
+    content: "►"; }
   .ui-button.ui-state-default .ui-icon-circle-triangle-w:before {
-    content: "\25c4"; }
+    content: "◄"; }
 
 .ui-chkbox .ui-chkbox-box.ui-state-default {
   height: 22px;
@@ -552,7 +578,7 @@ template {
     .ui-chkbox .ui-chkbox-box.ui-state-default {
       padding: 0;
       width: 42px; } }
-  .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before {
+  .ui-chkbox .ui-chkbox-box.ui-state-default.ui-corner-all:before, .ui-chkbox .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-chkbox-box.ui-state-default.cke_button.ui-corner-all:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-chkbox .ui-chkbox-box.ui-state-default.cke_button.ui-corner-all:before, .ui-chkbox .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-chkbox-box.ui-state-default.cke_button.ui-corner-all:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-chkbox .ui-chkbox-box.ui-state-default.cke_button.ui-corner-all:before, .ui-chkbox .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-chkbox-box.ui-state-default.ui-dialog-titlebar-icon.ui-corner-all:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-chkbox .ui-chkbox-box.ui-state-default.ui-dialog-titlebar-icon.ui-corner-all:before, .ui-chkbox .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-chkbox-box.ui-state-default.cke_button.ui-corner-all:before, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-chkbox .ui-chkbox-box.ui-state-default.cke_button.ui-corner-all:before {
     border-radius: 0; }
   .ui-chkbox .ui-chkbox-box.ui-state-default .ui-icon {
     background-image: none !important;
@@ -769,7 +795,7 @@ template {
         .ui-selectonemenu.ui-state-default .ui-icon:before {
           font-size: 2em; } }
   .ui-selectonemenu.ui-state-default .ui-icon-triangle-1-s:before {
-    content: "\f0d7" !important;
+    content: "" !important;
     font-size: 1.5em; }
     @media (max-width: 768px) {
       .ui-selectonemenu.ui-state-default .ui-icon-triangle-1-s:before {
@@ -1007,7 +1033,7 @@ template {
         .ui-selectcheckboxmenu.ui-state-default .ui-icon:before {
           font-size: 2em; } }
   .ui-selectcheckboxmenu.ui-state-default .ui-icon-triangle-1-s:before {
-    content: "\f0d7" !important;
+    content: "" !important;
     font-size: 1.5em; }
     @media (max-width: 768px) {
       .ui-selectcheckboxmenu.ui-state-default .ui-icon-triangle-1-s:before {
@@ -1561,7 +1587,7 @@ template {
       padding: 2px 10px; }
     .ui-slider .ui-slider-handle.ui-state-default.ui-state-hover {
       cursor: pointer; }
-    .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before {
+    .ui-slider .ui-slider-handle.ui-state-default.ui-corner-all:before, .ui-slider .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-slider-handle.ui-state-default.cke_button.ui-corner-all:before, .jeesl-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-slider .ui-slider-handle.ui-state-default.cke_button.ui-corner-all:before, .ui-slider .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-slider-handle.ui-state-default.cke_button.ui-corner-all:before, .jeesl-content .jeesl-content-container .ui-panel.jeesl-editor .ui-panel-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-slider .ui-slider-handle.ui-state-default.cke_button.ui-corner-all:before, .ui-slider .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-slider-handle.ui-state-default.ui-dialog-titlebar-icon.ui-corner-all:before, .ui-dialog.multi-panel-dialog .ui-dialog-titlebar .ui-slider .ui-slider-handle.ui-state-default.ui-dialog-titlebar-icon.ui-corner-all:before, .ui-slider .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-slider-handle.ui-state-default.cke_button.ui-corner-all:before, .ui-dialog .ui-dialog-content .jeesl-ck-editor .cke .cke_inner .cke_top .cke_toolbar .cke_toolgroup .ui-slider .ui-slider-handle.ui-state-default.cke_button.ui-corner-all:before {
       border-radius: 50%; }
     @media (max-width: 768px) {
       .ui-slider .ui-slider-handle.ui-state-default {
@@ -1989,11 +2015,11 @@ template {
 
 .p-md-1 {
   flex: 0 0 auto;
-  width: 8%; }
+  width: 8.33%; }
 
 .p-md-2 {
   flex: 0 0 auto;
-  width: 17%; }
+  width: 16.67%; }
 
 .p-md-3 {
   flex: 0 0 auto;
@@ -2001,11 +2027,11 @@ template {
 
 .p-md-4 {
   flex: 0 0 auto;
-  width: 33%; }
+  width: 33.33%; }
 
 .p-md-5 {
   flex: 0 0 auto;
-  width: 42%; }
+  width: 41.67%; }
 
 .p-md-6 {
   flex: 0 0 auto;
@@ -2013,11 +2039,11 @@ template {
 
 .p-md-7 {
   flex: 0 0 auto;
-  width: 58%; }
+  width: 58.33%; }
 
 .p-md-8 {
   flex: 0 0 auto;
-  width: 67%; }
+  width: 66.67%; }
 
 .p-md-9 {
   flex: 0 0 auto;
@@ -2025,11 +2051,11 @@ template {
 
 .p-md-10 {
   flex: 0 0 auto;
-  width: 83%; }
+  width: 83.33%; }
 
 .p-md-11 {
   flex: 0 0 auto;
-  width: 92%; }
+  width: 91.67%; }
 
 .p-md-12 {
   flex: 0 0 auto;
@@ -2078,39 +2104,39 @@ template {
       .ui-icon:before {
         font-size: 2em; } }
   .ui-icon.ui-icon-calendar:before {
-    content: "\f073"; }
+    content: ""; }
   .ui-icon.ui-icon-check:before {
-    content: "\f00c"; }
+    content: ""; }
   .ui-icon.ui-icon-close:before, .ui-icon.ui-icon-circle-close:before, .ui-icon.ui-icon-closethick:before {
-    content: "\f00d"; }
+    content: ""; }
   .ui-icon.ui-icon-pencil:before {
-    content: "\f304"; }
+    content: ""; }
   .ui-icon.ui-icon-plusthick:before {
-    content: "\f067"; }
+    content: ""; }
   .ui-icon.ui-icon-search:before {
-    content: "\f002"; }
+    content: ""; }
   .ui-icon.ui-icon-seek-first:before {
-    content: "\f049"; }
+    content: ""; }
   .ui-icon.ui-icon-seek-prev:before {
-    content: "\f04a"; }
+    content: ""; }
   .ui-icon.ui-icon-seek-next:before {
-    content: "\f04e"; }
+    content: ""; }
   .ui-icon.ui-icon-seek-end:before {
-    content: "\f050"; }
+    content: ""; }
   .ui-icon.ui-icon-triangle-1-n:before {
-    content: "\f0d8"; }
+    content: ""; }
   .ui-icon.ui-icon-triangle-1-s:before {
-    content: "\f0d7"; }
+    content: ""; }
   .ui-icon.ui-icon-circle-triangle-w:before {
-    content: "\25c4"; }
+    content: "◄"; }
   .ui-icon.ui-icon-circle-triangle-e:before {
-    content: "\25ba"; }
+    content: "►"; }
   .ui-icon.ui-icon-arrow-4:before {
-    content: "\f0b2"; }
+    content: ""; }
   .ui-icon.ui-icon-apply {
     transform: rotate(90deg); }
     .ui-icon.ui-icon-apply:before {
-      content: "\f3be"; }
+      content: ""; }
 
 .ui-spinner {
   display: grid;
@@ -2177,7 +2203,7 @@ template {
   .ui-colorpicker-container .ui-colorpicker_color, .ui-colorpicker-container .ui-colorpicker_hue, .ui-colorpicker-container .ui-colorpicker_new_color {
     border: 1px solid #ababab; }
   .ui-colorpicker-container .ui-colorpicker_hue {
-    background: linear-gradient(to bottom, red 0%, magenta calc(100%/6), blue calc(200%/6), cyan calc(300%/6), lime calc(400%/6), yellow calc(500%/6), red 100%);
+    background: linear-gradient(to bottom, #ff0000 0%, #ff00ff calc(100%/6), #0000ff calc(200%/6), #00ffff calc(300%/6), #00ff00 calc(400%/6), #ffff00 calc(500%/6), #ff0000 100%);
     margin: 0 8px;
     width: 19px; }
     .ui-colorpicker-container .ui-colorpicker_hue > div {
@@ -2360,7 +2386,7 @@ body, .ui-widget {
   background: white;
   box-shadow: 0 0 10px #ababab;
   margin: 0 auto;
-  max-width: 982px;
+  max-width: 968px;
   padding: 0 0 15px 0;
   width: auto; }
   @media (min-width: 100%) {
@@ -4634,7 +4660,7 @@ body, .ui-widget {
       padding: 0;
       position: relative;
       width: 100%; }
-      .jeesl-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-image-wrapper img {
+      .jeesl-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-image-wrapper img, .jeesl-panel.jeesl-galleria .ui-panel-content > img {
         width: 100%; }
       .jeesl-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper {
         align-items: stretch;
@@ -4697,11 +4723,11 @@ body, .ui-widget {
         .jeesl-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper .slick-prev {
           border-right-width: 1px; }
           .jeesl-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper .slick-prev:before {
-            content: "\25c4"; }
+            content: "◄"; }
         .jeesl-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper .slick-next {
           border-left-width: 1px; }
           .jeesl-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper .slick-next:before {
-            content: "\25ba"; }
+            content: "►"; }
   .jeesl-panel.jeesl-image-wall .ui-panel-content {
     padding: 5px; }
   .jeesl-panel.jeesl-map .ui-panel-titlebar + .ui-panel-content {
@@ -4978,15 +5004,15 @@ body, .ui-widget {
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-6 {
           width: 12.5%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-7 {
-          width: 10.71429%; }
+          width: 10.7142857143%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-8 {
           width: 9.375%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-9 {
-          width: 8.33333%; }
+          width: 8.3333333333%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-10 {
           width: 7.5%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-11 {
-          width: 6.81818%; }
+          width: 6.8181818182%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-12 {
           width: 6.25%; }
         .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
@@ -6165,7 +6191,7 @@ body, .ui-widget {
           padding: 0;
           position: relative;
           width: 100%; }
-          .jeesl-content .jeesl-content-container .ui-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-image-wrapper img {
+          .jeesl-content .jeesl-content-container .ui-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-image-wrapper img, .jeesl-content .jeesl-content-container .ui-panel.jeesl-galleria .ui-panel-content > img {
             width: 100%; }
           .jeesl-content .jeesl-content-container .ui-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper {
             align-items: stretch;
@@ -6228,11 +6254,11 @@ body, .ui-widget {
             .jeesl-content .jeesl-content-container .ui-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper .slick-prev {
               border-right-width: 1px; }
               .jeesl-content .jeesl-content-container .ui-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper .slick-prev:before {
-                content: "\25c4"; }
+                content: "◄"; }
             .jeesl-content .jeesl-content-container .ui-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper .slick-next {
               border-left-width: 1px; }
               .jeesl-content .jeesl-content-container .ui-panel.jeesl-galleria .ui-panel-content .jeesl-galleria-filmstrip-wrapper .slick-next:before {
-                content: "\25ba"; }
+                content: "►"; }
       .jeesl-content .jeesl-content-container .ui-panel.jeesl-image-wall .ui-panel-content {
         padding: 5px; }
       .jeesl-content .jeesl-content-container .ui-panel.jeesl-map .ui-panel-titlebar + .ui-panel-content {
@@ -6509,15 +6535,15 @@ body, .ui-widget {
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-6 {
               width: 12.5%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-7 {
-              width: 10.71429%; }
+              width: 10.7142857143%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-8 {
               width: 9.375%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-9 {
-              width: 8.33333%; }
+              width: 8.3333333333%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-10 {
               width: 7.5%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-11 {
-              width: 6.81818%; }
+              width: 6.8181818182%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel).p-col-count-12 {
               width: 6.25%; }
             .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) > .ui-inputfield, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectonemenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-spinner, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectcheckboxmenu, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-selectmanybutton, .jeesl-content .jeesl-content-container .ui-panel .ui-panel-content .ui-fluid .p-grid .p-col:not(.ui-outputlabel) .ui-chips {
@@ -6743,7 +6769,7 @@ body, .ui-widget {
 
 .ui-dialog {
   background: #ededed;
-  max-width: 982px; }
+  max-width: 968px; }
   .ui-dialog .ui-dialog-titlebar {
     align-items: center;
     background: #c4c4c4 linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
@@ -6843,8 +6869,8 @@ body, .ui-widget {
       float: none;
       margin: 0; }
   .ui-dialog.jeesl-dialog-1 {
-    width: calc(982px * (1 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (1 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-1 {
         width: calc(100% * (1 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6853,8 +6879,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-2 {
-    width: calc(982px * (2 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (2 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-2 {
         width: calc(100% * (2 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6863,8 +6889,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-3 {
-    width: calc(982px * (3 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (3 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-3 {
         width: calc(100% * (3 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6873,8 +6899,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-4 {
-    width: calc(982px * (4 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (4 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-4 {
         width: calc(100% * (4 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6883,8 +6909,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-5 {
-    width: calc(982px * (5 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (5 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-5 {
         width: calc(100% * (5 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6893,8 +6919,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-6 {
-    width: calc(982px * (6 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (6 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-6 {
         width: calc(100% * (6 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6903,8 +6929,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-7 {
-    width: calc(982px * (7 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (7 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-7 {
         width: calc(100% * (7 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6913,8 +6939,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-8 {
-    width: calc(982px * (8 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (8 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-8 {
         width: calc(100% * (8 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6923,8 +6949,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-9 {
-    width: calc(982px * (9 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (9 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-9 {
         width: calc(100% * (9 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6933,8 +6959,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-10 {
-    width: calc(982px * (10 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (10 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-10 {
         width: calc(100% * (10 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6943,8 +6969,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-11 {
-    width: calc(982px * (11 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (11 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-11 {
         width: calc(100% * (11 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -6953,8 +6979,8 @@ body, .ui-widget {
         transform: translate(0, -50%);
         width: calc(100% - 30px) !important; } }
   .ui-dialog.jeesl-dialog-12 {
-    width: calc(982px * (12 / 12)) !important; }
-    @media (max-width: 982px) {
+    width: calc(968px * (12 / 12)) !important; }
+    @media (max-width: 968px) {
       .ui-dialog.jeesl-dialog-12 {
         width: calc(100% * (12 / 12)) !important; } }
     @media (max-width: 768px) {
@@ -7581,7 +7607,7 @@ body, .ui-widget {
   display: flex;
   justify-content: space-between;
   margin: 10px auto;
-  max-width: 982px;
+  max-width: 968px;
   padding: 0 10px; }
   @media (min-width: 100%) {
     .jeesl-footer {
@@ -7673,7 +7699,7 @@ body, .ui-widget {
         border: none;
         border-radius: 1px; }
     .ui-fileupload .ui-fileupload-content .ui-fileupload-files .ui-fileupload-row .ui-fileupload-cancel .ui-icon:before {
-      content: "\f05e"; }
+      content: ""; }
 
 .jeesl-vertical-nospace {
   border-bottom-left-radius: 0;
@@ -7762,3 +7788,5 @@ body, .ui-widget {
 
   .jeesl-header, .jeesl-breadcrumb-header, .jeesl-status-bar, .jeesl-footer {
     display: none; } }
+
+/*# sourceMappingURL=jeeslResponsive.css.map */

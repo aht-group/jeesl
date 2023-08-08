@@ -1,3 +1,28 @@
+@use 'sass:map';
+.jeesl-brewer-1 {
+  background: #66c2a5; }
+
+.jeesl-brewer-2 {
+  background: #fc8f64; }
+
+.jeesl-brewer-3 {
+  background: #8c9eca; }
+
+.jeesl-brewer-4 {
+  background: #e788c3; }
+
+.jeesl-brewer-5 {
+  background: #a6d855; }
+
+.jeesl-brewer-6 {
+  background: #ffd92e; }
+
+.jeesl-brewer-7 {
+  background: #e5c594; }
+
+.jeesl-brewer-8 {
+  background: #b3b3b3; }
+
 .ui-datatable table {
   table-layout: auto; }
 .ui-datatable .ui-datatable-header {
@@ -232,3 +257,5 @@ form > .jeeslPanel {
       padding: 5px; }
       .ui-dialog .ui-dialog-titlebar .jeeslDialogActions .pf-action-icon > img {
         height: 12px; }
+
+/*# sourceMappingURL=jeeslPrimeFaces.css.map */
