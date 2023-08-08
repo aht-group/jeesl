@@ -59,7 +59,7 @@ public class JeeslDbStatementGwc <L extends JeeslLang, D extends JeeslDescriptio
 		statements = fDb.postgresStatements(dbName).getStatements();
 		for(JsonPostgresStatement s : statements)
 		{
-			s.setSql(TxtSqlQueryFactory.shortenIn(s.getSql()));
+			s.setSql(TxtSqlQueryFactory.toXhtml(TxtSqlQueryFactory.shortenIn(s.getSql())));
 		}
 	}
 }

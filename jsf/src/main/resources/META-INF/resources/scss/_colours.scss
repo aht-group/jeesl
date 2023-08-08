@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $white-0: hsla(0,0%,100%,0);
 $white-35: hsla(0,0%,100%,.35);
 $white-50: hsla(0,0%,100%,.5);
@@ -20,6 +22,15 @@ $bright-colour: hsla(154,100%,27%,1);
 $medium-colour: hsla(154,100%,24%,1);
 $dark-colour: hsla(154,100%,20%,1);
 $darker-colour: hsla(154,100%,18%,1);
+
+$brewer-set28-colours: (1: hsla(161,43%,58%,1),
+						2: hsla(17,96%,69%,1),
+						3: hsla(222,37%,67%,1),
+						4: hsla(323,66%,72%,1),
+						5: hsla(83,63%,59%,1),
+						6: hsla(49,100%,59%,1),
+						7: hsla(36,61%,74%,1),
+						8: hsla(0,0%,70%,1));
 
 $body-foreground: $anthracite;
 $body-background: $light-grey;
@@ -84,4 +95,10 @@ $header-underline: 2px solid $dark-colour;
 
 @mixin setHighlightColour($highlight) {
 	$highlight-colour: $highlight;
+}
+
+@for $i from 1 through 8 {
+	.jeesl-brewer-#{$i} {
+		background: map-get($brewer-set28-colours, $i);
+	}
 }

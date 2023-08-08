@@ -39,7 +39,7 @@
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['sql'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.sql}"/>
+							<h:outputText value="#{s.sql}" escape="false"/>
 						</p:column>
 			       	</p:dataTable>
 				</j:slot>
