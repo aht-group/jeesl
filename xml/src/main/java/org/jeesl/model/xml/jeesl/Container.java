@@ -49,6 +49,7 @@ public class Container
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected List<Type> type;
 
+    
     /**
      * Gets the value of the status property.
      * 

@@ -28,21 +28,22 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 
 	private JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity;
 
+	protected String forwardUnauthorized;
 	protected String forwardDeactivated;
-	protected String forwardLogin;
 	protected String forwardDenied;
 
 	public AbstractRewriteProvider(SecurityFactoryBuilder<?,?,?,?,V,?,?,?,?,?,?,?,?,?,?,?> fbSecurity)
 	{
 		debugOnInfo = false;
+		forwardUnauthorized = "/jsf/settings/system/security/redirect/unauthorized.xhtml";
 		forwardDeactivated = "/jsf/settings/system/security/page/deactivated.xhtml";
-		forwardLogin = "/jsf/settings/system/security/page/unauthorized.xhtml";
 		forwardDenied = "/jsf/settings/system/security/page/denied.xhtml";
 	}
 
 	public void postConstruct(JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity)
 	{
 		this.bSecurity=bSecurity;
+		
 	}
 
 	protected ConfigurationBuilder build(Condition pageActive, Condition notLoggedIn, Condition pageDenied)
@@ -69,8 +70,8 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 				//Deactivate 6
 				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardDeactivated)).when(Direction.isInbound().andNot(pageActive));
 				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardDeactivated)).when(Direction.isInbound().andNot(pageActive));
-				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardLogin)).when(Direction.isInbound().and(notLoggedIn));
-				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardLogin)).when(Direction.isInbound().and(notLoggedIn));
+				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardUnauthorized)).when(Direction.isInbound().and(notLoggedIn));
+				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardUnauthorized)).when(Direction.isInbound().and(notLoggedIn));
 				cb = cb.addRule(Join.path(view.getViewPattern()).to(forwardDenied)).when(Direction.isInbound().and(pageDenied));
 				cb = cb.addRule(Join.path(view.getUrlMapping()).to(forwardDenied)).when(Direction.isInbound().and(pageDenied));
 	

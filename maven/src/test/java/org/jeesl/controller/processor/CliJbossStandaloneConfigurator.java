@@ -53,7 +53,7 @@ public class CliJbossStandaloneConfigurator
 	{
 		jbossStandalone.cache("cxy4");
 		
-//		<cache-container name="jeesl">
+//		<cache-container name="ofx">
 //			<transport lock-timeout="60000"/>
 //			<replicated-cache name="menucrumb">
 //        		<transaction mode="BATCH"/>

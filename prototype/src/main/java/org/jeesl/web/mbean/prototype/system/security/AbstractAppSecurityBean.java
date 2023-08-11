@@ -7,7 +7,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
@@ -37,7 +39,6 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 										V extends JeeslSecurityView<?,?,C,R,U,A>,
 										U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
 										A extends JeeslSecurityAction<?,?,R,V,U,?>,
-										
 										CTX extends JeeslSecurityContext<?,?>,
 										M extends JeeslSecurityMenu<?,V,CTX,M>,
 										AR extends JeeslSecurityArea<?,?,V>,
@@ -87,6 +88,9 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	private boolean cachingFilesSaved;
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 	private CTX nullCtx;
+	
+	protected V viewExpired; public V getViewExpired() {return viewExpired;}
+	protected V viewUnauthorized; public V getViewUnauthorized() {return viewUnauthorized;}
 
 	public AbstractAppSecurityBean()
 	{
@@ -159,8 +163,18 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 			update(v,mapAction.get(v),mapArea.get(v));
 		}
 		
-		if(jogger!=null) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),"Updated", views.size());}
+		if(Objects.nonNull(jogger)) {jogger.milestone(fbSecurity.getClassView().getSimpleName(),"Updated", views.size());}
 		if(debugOnInfo) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassView(), views));}
+		
+		viewExpired = this.findViewByCode(JeeslSecurityView.Code.sSecPageErrorExpired.toString());
+		viewUnauthorized = this.findViewByCode(JeeslSecurityView.Code.sSecPageLoginRequired.toString());
+		
+		if(ObjectUtils.anyNull(viewExpired,viewUnauthorized))
+		{
+			logger.error("The following views need to be defined!");
+			logger.error(fbSecurity.getClassView().getSimpleName()+" "+JeeslSecurityView.Code.sSecPageErrorExpired+" "+viewExpired);
+			logger.error(fbSecurity.getClassView().getSimpleName()+" "+JeeslSecurityView.Code.sSecPageLoginRequired+" "+viewUnauthorized);
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

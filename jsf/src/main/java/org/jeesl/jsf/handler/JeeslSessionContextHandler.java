@@ -1,5 +1,6 @@
 package org.jeesl.jsf.handler;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,32 +10,33 @@ import javax.faces.context.FacesContext;
 import org.jeesl.exception.jsf.JeeslSessionInitialisationException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
+import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringUtil;
 
-public class JeeslSessionTenantHandler <CTX extends JeeslSecurityContext<?,?>>
+public class JeeslSessionContextHandler <CTX extends JeeslSecurityContext<?,?>>
 {
-	final static Logger logger = LoggerFactory.getLogger(JeeslSessionTenantHandler.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslSessionContextHandler.class);
 	
 	private final JeeslFacade facade;
 	private final Class<CTX> cCtx;
 	
 	private boolean debugOnInfo;
 	
-	public static <CTX extends JeeslSecurityContext<?,?>> JeeslSessionTenantHandler<CTX> instance(Class<CTX> cCtx, JeeslFacade facade)
+	public static <CTX extends JeeslSecurityContext<?,?>> JeeslSessionContextHandler<CTX> instance(Class<CTX> cCtx, JeeslFacade facade)
 	{
-		return new JeeslSessionTenantHandler<>(cCtx,facade);
+		return new JeeslSessionContextHandler<>(cCtx,facade);
 	}
-	private JeeslSessionTenantHandler(Class<CTX> cCtx, JeeslFacade facade)
+	private JeeslSessionContextHandler(Class<CTX> cCtx, JeeslFacade facade)
 	{
 		this.cCtx=cCtx;
 		this.facade=facade;
 		this.debugOnInfo = false;
 	}
 	
-	public JeeslSessionTenantHandler<CTX> withDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo=debugOnInfo; return this;}
+	public JeeslSessionContextHandler<CTX> withDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo=debugOnInfo; return this;}
 	
 	public CTX determineContext()
 	{
@@ -44,7 +46,7 @@ public class JeeslSessionTenantHandler <CTX extends JeeslSecurityContext<?,?>>
 		else
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.append(JeeslSessionTenantHandler.class.getSimpleName()).append(" is throwing a ");
+			sb.append(JeeslSessionContextHandler.class.getSimpleName()).append(" is throwing a ");
 			sb.append(JeeslSessionInitialisationException.class.getSimpleName()).append(", then the SeesionTenantBean is newly created");
 			logger.warn(FacesContext.class.getSimpleName()+" is null");
 			logger.warn(sb.toString());
@@ -62,13 +64,16 @@ public class JeeslSessionTenantHandler <CTX extends JeeslSecurityContext<?,?>>
 		CTX securityContext = null;
 		if(Objects.nonNull(externalContext))
 		{
-			logger.info("RequestContextPath: "+externalContext.getRequestContextPath());
-			logger.info("ApplicationContextPath: "+externalContext.getApplicationContextPath());
-			logger.info("RequestScheme: "+externalContext.getRequestScheme());
-			logger.info("RequestServerPort: "+externalContext.getRequestServerPort());
-			logger.info("RequestPathInfo: "+externalContext.getRequestPathInfo());
-			logger.info("RequestServerName: "+externalContext.getRequestServerName());
-			logger.info("RequestServletPath: "+externalContext.getRequestServletPath());
+			if(debugOnInfo)
+			{
+				logger.info("RequestContextPath: "+externalContext.getRequestContextPath());
+				logger.info("ApplicationContextPath: "+externalContext.getApplicationContextPath());
+				logger.info("RequestScheme: "+externalContext.getRequestScheme());
+				logger.info("RequestServerPort: "+externalContext.getRequestServerPort());
+				logger.info("RequestPathInfo: "+externalContext.getRequestPathInfo());
+				logger.info("RequestServerName: "+externalContext.getRequestServerName());
+				logger.info("RequestServletPath: "+externalContext.getRequestServletPath());
+			}	
 			
 			String serverName = FacesContext.getCurrentInstance().getExternalContext().getRequestServerName();
 			
@@ -90,5 +95,19 @@ public class JeeslSessionTenantHandler <CTX extends JeeslSecurityContext<?,?>>
 		}
 		
 		return securityContext;
+	}
+	
+	public static <V extends JeeslSecurityView<?,?,?,?,?,?>> void invalidateAndRedirect(V view)
+	{
+		logger.trace("Invalidating Session and redirecting to "+view.getCode()+" "+view.getUrlMapping());
+		try
+		{
+			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+view.getUrlMapping());
+		}
+		catch (IOException e)
+		{
+
+		}
 	}
 }

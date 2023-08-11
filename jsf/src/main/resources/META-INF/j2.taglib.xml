@@ -123,10 +123,16 @@
         </component>
 	</tag>
 	
-		<tag>
+	<tag>
         <tag-name>pSecurityUnauthorized</tag-name>
         <component>
             <resource-id>systemSecurity/pUnauthorized.xhtml</resource-id>
+        </component>
+	</tag>
+	<tag>
+        <tag-name>pSecurityExpired</tag-name>
+        <component>
+            <resource-id>systemSecurity/pExpired.xhtml</resource-id>
         </component>
 	</tag>
     

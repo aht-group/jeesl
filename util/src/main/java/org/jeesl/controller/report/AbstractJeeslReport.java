@@ -20,6 +20,7 @@ import org.jeesl.factory.ejb.io.report.EjbIoReportColumnGroupFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.factory.xls.system.io.report.XlsFactory;
 import org.jeesl.interfaces.controller.handler.JeeslProgressHandler;
+import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.controller.report.JeeslComparatorProvider;
 import org.jeesl.interfaces.controller.report.JeeslReport;
 import org.jeesl.interfaces.factory.txt.JeeslReportAggregationLevelFactory;
@@ -81,6 +82,7 @@ public abstract class AbstractJeeslReport<L extends JeeslLang,D extends JeeslDes
 					implements JeeslReport<REPORT>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslReport.class);
+	protected JeeslLogger jogger; public void setJogger(JeeslLogger jogger) {this.jogger=jogger;}
 	
 	protected final boolean alwaysFalse = false;
 	protected boolean debugOnInfo;

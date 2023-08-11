@@ -24,6 +24,8 @@ public class XmlContainerFactory
 		xfStatus = new XmlStatusFactory(query);
 	}
 	
+	public static Container build() {return new Container(); }
+	
 	@SuppressWarnings("unchecked")
 	public <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription> Container build(List<S> list)
 	{
@@ -39,12 +41,6 @@ public class XmlContainerFactory
     {
     	Container xml = build();
     	xml.getStatus().addAll(list);
-    	return xml;
-    }
-	
-    public static Container build()
-    {
-    	Container xml = new Container();
     	return xml;
     }
 }
