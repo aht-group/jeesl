@@ -331,13 +331,46 @@ public class JbossStandaloneConfigurator
 	
 	public void cache(String name) throws IOException
 	{	
-		name = "cxy1";
+		// More info on how this works can be found here
+		// https://stackoverflow.com/questions/76865879/how-to-add-a-cache-programmatically-in-wildfly-jboss-using-the-detyped-java-api
+		
+		ModelNode cacheContainer = new ModelNode();		
+		cacheContainer.get(ClientConstants.OP_ADDR).add("subsystem","infinispan");
+		cacheContainer.get(ClientConstants.OP_ADDR).add("cache-container",name);
+		cacheContainer.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode transport = cacheContainer.clone();
+		transport.get(ClientConstants.OP_ADDR).add("transport","jgroups");		
+		transport.get("lock-timeout").set(60000);
+		transport.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		createReplicatedCaches(cacheContainer, "menucrumb", "menusub");
+		
+		ModelNode result = client.execute(new OperationBuilder(cacheContainer).build());
+		System.out.println(result.toString());
+		
+		result = client.execute(new OperationBuilder(transport).build());
+		System.out.println(result.toString());
+	}
+	
+	public void createReplicatedCaches(ModelNode cacheContainer, String... replicatedCacheNames) throws IOException
+	{
+		for (String name : replicatedCacheNames)
+		{
+			ModelNode replicatedCache = cacheContainer.clone();
+			replicatedCache.get(ClientConstants.OP_ADDR).add("replicated-cache",name);		
+			replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
+			
+			ModelNode replicatedCacheTransaction = replicatedCache.clone();	
+			replicatedCacheTransaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
+			replicatedCacheTransaction.get("mode").set("BATCH");
+			replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
+			
+			ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
+			System.out.println(result.toString());
 
-		ModelNode request = new ModelNode();		
-		request.get(ClientConstants.OP).set(ClientConstants.ADD);
-		request.get(ClientConstants.OP_ADDR).add("subsystem","infinispan");
-		request.get(ClientConstants.OP_ADDR).add("cache-container",name);
-
-		client.execute(new OperationBuilder(request).build());
+			result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
+			System.out.println(result.toString());
+		}
 	}
 }
