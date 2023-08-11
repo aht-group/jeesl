@@ -51,15 +51,12 @@ public class CliJbossStandaloneConfigurator
 	
 	public void infinispan() throws IOException
 	{
-<<<<<<< HEAD
+
 		jbossStandalone.cache("cxy4");
-		
-//		<cache-container name="ofx">
-=======
+	
 		jbossStandalone.cache("jeesl");
 	
 //		<cache-container name="jeesl">
->>>>>>> branch 'master' of git@github.com:aht-group/jeesl.git
 //			<transport lock-timeout="60000"/>
 //			<replicated-cache name="menucrumb">
 //        		<transaction mode="BATCH"/>
