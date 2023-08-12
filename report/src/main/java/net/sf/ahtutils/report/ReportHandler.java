@@ -530,9 +530,8 @@ public class ReportHandler
 		for (Object key : mapReportParameter.keySet())
 		{
 			String keyString = (String) key;
-			logger.info("Key " +keyString);
 			String valueString = mapReportParameter.get(keyString).getClass().getCanonicalName();
-			logger.info("Report Parameter: " +keyString +" = " +valueString);
+			if (logger.isTraceEnabled()) {logger.trace("Report Parameter: " +keyString +" = " +valueString);}
 		}
 		return mapReportParameter;
 	}
