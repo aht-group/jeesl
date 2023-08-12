@@ -51,9 +51,6 @@ public class CliJbossStandaloneConfigurator
 	
 	public void infinispan() throws IOException
 	{
-
-		jbossStandalone.cache("cxy4");
-	
 		jbossStandalone.cache("jeesl");
 	
 //		<cache-container name="jeesl">

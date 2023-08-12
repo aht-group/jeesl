@@ -344,7 +344,7 @@ public class JbossStandaloneConfigurator
 		transport.get("lock-timeout").set(60000);
 		transport.get(ClientConstants.OP).set(ClientConstants.ADD);
 		
-		createReplicatedCaches(cacheContainer, "menucrumb", "menusub");
+		this.createReplicatedCaches(cacheContainer, "menucrumb", "menusub");
 		
 		ModelNode result = client.execute(new OperationBuilder(cacheContainer).build());
 		System.out.println(result.toString());

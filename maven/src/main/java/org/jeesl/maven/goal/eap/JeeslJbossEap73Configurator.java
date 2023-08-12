@@ -49,9 +49,9 @@ public class JeeslJbossEap73Configurator extends AbstractJbossEapConfigurator
 	    
 	    try
 	    {
-	    	dbFiles(keys,config,jbossModule);
-	    	dbDrivers(keys,config,jbossConfig);
-	    	dbDs(keys,config,jbossConfig);
+	    	super.dbFiles(keys,config,jbossModule);
+	    	super.dbDrivers(keys,config,jbossConfig);
+	    	super.dbDs(keys,config,jbossConfig);
 //	    	super.caches(keys,config,jbossConfig);
 	    }
 	    catch (IOException e) {throw new MojoExecutionException(e.getMessage());}

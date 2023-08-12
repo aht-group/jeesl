@@ -136,7 +136,9 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     {
     	for(String key : keys)
     	{
-    		String caches = config.getString("cache."+key+".list");
+    		String configKey = "cache."+key+".list";
+//    		super.getLog().info("Trying");
+    		String caches = config.getString(configKey,null);
         	if(Objects.isNull(caches)) {super.getLog().info("No caches for "+key);}
         	else
         	{
