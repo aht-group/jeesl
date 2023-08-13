@@ -114,7 +114,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 	private JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
 	private JeeslWorkflowFacade<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fWorkflow;
-	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision;
+	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision;
 
 	private final WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fbWorkflow;
 	private final IoTemplateFactoryBuilder<L,D,?,MC,MT,?,?,?,?> fbTemplate;
@@ -228,14 +228,14 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 											JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 											JeeslWorkflowFacade<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fApproval,
-											JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision)
+											JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision)
 	{
 		postConstructProcess(bTranslation,bMessage,fGraphic,fApproval,fRevision,null);
 	}
 	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 										JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
 										JeeslWorkflowFacade<L,D,LOC,WX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,WAN,WA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER> fApproval,
-										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision,
+										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision,
 										WP preSelection)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);

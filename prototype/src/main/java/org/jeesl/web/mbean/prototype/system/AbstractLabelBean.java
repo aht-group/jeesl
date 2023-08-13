@@ -59,7 +59,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		mapLocales = new HashMap<String,LOC>();
 	}
 
-	protected void postConstruct(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision)
+	protected void postConstruct(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,RML> fRevision)
 	{
 		th = new JeeslTranslationHandler<>(fbRevision,fRevision);
 		ftp = new FacadeTranslationProvider<>(fbRevision,fRevision);

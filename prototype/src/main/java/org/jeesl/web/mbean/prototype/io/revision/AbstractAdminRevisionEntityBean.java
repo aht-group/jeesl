@@ -103,7 +103,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		entities = new ArrayList<>();
 	}
 
-	protected void postConstructRevisionEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
+	protected void postConstructRevisionEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
 	{
 		if(jogger!=null) {jogger.start("postConstructRevisionEntity");}
 		super.postConstructRevision(bTranslation,bMessage,fRevision);

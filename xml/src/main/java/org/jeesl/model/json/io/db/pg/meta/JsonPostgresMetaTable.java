@@ -13,6 +13,11 @@ public class JsonPostgresMetaTable implements Serializable
 {
 	public static final long serialVersionUID=1;
 	
+	@JsonProperty("scheme")
+	private String scheme;
+	public String getScheme() {return scheme;}
+	public void setScheme(String scheme) {this.scheme = scheme;}
+
 	@JsonProperty("code")
 	private String code;
 	public String getCode() {return code;}

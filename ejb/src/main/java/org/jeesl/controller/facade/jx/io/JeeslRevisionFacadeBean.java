@@ -63,7 +63,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 									ERD extends JeeslRevisionDiagram<L,D,RC>,
 									RML extends JeeslRevisionMissingLabel>
 					extends JeeslFacadeBean
-					implements JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,RML>
+					implements JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,RML>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslRevisionFacadeBean.class);

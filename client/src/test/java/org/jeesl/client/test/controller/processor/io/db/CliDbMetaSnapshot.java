@@ -59,7 +59,6 @@ public class CliDbMetaSnapshot
 //		MeisBootstrap.createMeisDatasource(config);
 		
 		CliDbMetaSnapshot cli = new CliDbMetaSnapshot(config);
-//		cli.metaSnapshot("ofx");
-		cli.metaSnapshot("meis");
+		cli.metaSnapshot("jeesl");
 	}
 }

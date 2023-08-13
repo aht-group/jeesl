@@ -92,7 +92,7 @@ public abstract class AbstractWorkflowDashboardBean <L extends JeeslLang, D exte
 	final static Logger logger = LoggerFactory.getLogger(AbstractWorkflowDashboardBean.class);
 
 	private JeeslWorkflowFacade<L,D,LOC,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,FRC,USER> fWorkflow;
-	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision;
+	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision;
 
 	private final WorkflowFactoryBuilder<L,D,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,FRC,USER> fbApproval;
 	private final IoTemplateFactoryBuilder<L,D,?,?,MT,?,?,?,?> fbTemplate;
@@ -127,7 +127,7 @@ public abstract class AbstractWorkflowDashboardBean <L extends JeeslLang, D exte
 
 	protected void postConstructProcess(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 										JeeslWorkflowFacade<L,D,LOC,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,MT,MC,SR,RE,RA,AL,WF,WY,WD,FRC,USER> fWorkflow,
-										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,?> fRevision,
+										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?> fRevision,
 										JeeslWorkflowEngine<L,D,LOC,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,MT,MC,MD,SR,RE,RA,AL,WF,WY,WD,FRC,WCS,USER> wfEngine)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);

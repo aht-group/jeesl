@@ -27,7 +27,7 @@ public class JeeslMissingLabelsHandler<L extends JeeslLang,D extends JeeslDescri
 	final static Logger logger = LoggerFactory.getLogger(JeeslMissingLabelsHandler.class);
 	private static final long serialVersionUID = 1L;
 
-	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision;
+	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,RML> fRevision;
 	private Class<RML> cRml;
 
 	public final Map<String,RE> mapEntities; public Map<String,RE> getMapEntities() {return mapEntities;}
@@ -38,7 +38,7 @@ public class JeeslMissingLabelsHandler<L extends JeeslLang,D extends JeeslDescri
 	public List<String> loadedJscnRevisionEntity;
 
 
-	public JeeslMissingLabelsHandler(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision,
+	public JeeslMissingLabelsHandler(JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,RML> fRevision,
 			final Class<RE> cRE, final Class<L> cL, final Class<RML> cRml)
 	{
 		this.fRevision=fRevision;

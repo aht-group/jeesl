@@ -62,14 +62,14 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 	protected final IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision;
 
 	private final JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic;
-	private final JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision;
+	private final JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,ERD,?> fRevision;
 
 	private final XmlGraphicFactory<L,D,G,GT,GC,GS> xfGraphic;
 	private final XmlEntityFactory<L,D,RC,REM,RE,RA,RER,RAT,ERD> xfEntity;
 
 	private JeeslSystemRestService(IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision,
 							JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
-							JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision)
+							JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,ERD,?> fRevision)
 	{
 		super(fGraphic,fbRevision.getClassL(),fbRevision.getClassD());
 		this.fbRevision=fbRevision;
@@ -94,7 +94,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 	JeeslSystemRestService<L,D,R,S,G,GT,GC,GS,RC,REM,RE,RA,RER,RAT,ERD>
 		factory(IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,RE,?,RA,RER,RAT,ERD,?> fbRevision,
 				JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS> fGraphic,
-				JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,?,RAT,ERD,?> fRevision)
+				JeeslIoRevisionFacade<L,D,RC,?,?,?,?,RE,?,RA,ERD,?> fRevision)
 	{
 		return new JeeslSystemRestService<L,D,R,S,G,GT,GC,GS,RC,REM,RE,RA,RER,RAT,ERD>(fbRevision,fGraphic,fRevision);
 	}

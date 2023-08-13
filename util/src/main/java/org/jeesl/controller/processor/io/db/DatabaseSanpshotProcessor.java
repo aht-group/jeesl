@@ -42,7 +42,7 @@ public class DatabaseSanpshotProcessor
 			ResultSet rsColumn = meta.getColumns(null,null, table.getCode(), null);
 			while(rsColumn.next())
 			{
-				for(int i=1;i<=rsColumn.getMetaData().getColumnCount();i++) {logger.trace(i+" "+rsColumn.getMetaData().getColumnName(i)+": "+rsColumn.getString(i));}
+				for(int i=1;i<=rsColumn.getMetaData().getColumnCount();i++) {logger.info(i+" "+rsColumn.getMetaData().getColumnName(i)+": "+rsColumn.getString(i));}
 				table.getColumns().add(JsonDbMetaColumnFactory.build(rsColumn));
 			}
 			

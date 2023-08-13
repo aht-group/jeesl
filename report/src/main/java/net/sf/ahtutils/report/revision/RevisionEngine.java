@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.audit.Change;
 
-public class RevisionEngine<L extends JeeslLang,D extends JeeslDescription,
+public class RevisionEngine<L extends JeeslLang, D extends JeeslDescription,
 							RC extends JeeslRevisionCategory<L,D,RC,?>,
 							RV extends JeeslRevisionView<L,D,RVM>,
 							RVM extends JeeslRevisionViewMapping<RV,RE,REM>,
@@ -54,7 +54,7 @@ public class RevisionEngine<L extends JeeslLang,D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(RevisionEngine.class);
 
-	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,?,?> fRevision;
+	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision;
 
 	private RevisionEngineScopeResolver<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,REV,C,R,V,U,A,AT,USER> resr;
 	private RevisionEngineAttributeResolver<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,REV,C,R,V,U,A,AT,USER> rear;
@@ -69,7 +69,7 @@ public class RevisionEngine<L extends JeeslLang,D extends JeeslDescription,
 	private Map<RAT,DecimalFormat> mapDecimalFormatter;
 	private Map<RAT,SimpleDateFormat> mapDateFormatter;
 
-	public RevisionEngine(JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,?,?> fRevision, final Class<RV> cView, final Class<RS> cScope, final Class<RE> cEntity, final Class<RAT> cRat)
+	public RevisionEngine(JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,?,?> fRevision, final Class<RV> cView, final Class<RS> cScope, final Class<RE> cEntity, final Class<RAT> cRat)
 	{
 		this.fRevision=fRevision;
 		this.cView=cView;

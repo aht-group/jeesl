@@ -64,7 +64,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 	}
 
 	protected void postConstructRevisionView(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-							JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision)
+							JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
 	{
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
 		entities.addAll(fRevision.all(fbRevision.getClassEntity()));

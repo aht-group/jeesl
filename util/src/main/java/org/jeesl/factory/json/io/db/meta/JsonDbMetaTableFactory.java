@@ -14,12 +14,13 @@ public class JsonDbMetaTableFactory
 {
 	public static JsonPostgresMetaTable build(ResultSet rs) throws IOException, SQLException
 	{
-		return JsonDbMetaTableFactory.build(rs.getString("TABLE_NAME"));
+		return JsonDbMetaTableFactory.build(rs.getString("TABLE_SCHEM"),rs.getString("TABLE_NAME"));
 	}
 	
-	public static JsonPostgresMetaTable build(String code) throws IOException
+	public static JsonPostgresMetaTable build(String scheme, String code) throws IOException
 	{
 		JsonPostgresMetaTable json = new JsonPostgresMetaTable();
+		json.setScheme(scheme);
 		json.setCode(code);
 		return json;
 	}

@@ -34,7 +34,7 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminRevisionMissingLabelBean.class);
 
 	private RML missingLabel;public RML getMissingLabel() {return missingLabel;} public void setMissingLabel(RML missingLabel) {this.missingLabel = missingLabel;}
-	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,?,?,?,?,?,?,RML> fRevision;
+	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,?,?,?,?,RML> fRevision;
 	private List<RML> missingLabels; public List<RML> getMissingLabels() {return missingLabels;}
 	private IoRevisionFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,?,?,RML> fbRevision;
 
@@ -51,7 +51,8 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 		this.sbhStatus = new SbMultiHandler<LOC>(fbLocale.getClassLocale(), this);
 	}
 
-	protected void postConstructMissingEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,?,?,?,?,?,?,?,?,?,?,?,RML> fRevision, String defaultLangCode) {
+	protected void postConstructMissingEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+			JeeslIoRevisionFacade<L,D,?,?,?,?,?,?,?,?,?,RML> fRevision, String defaultLangCode) {
 		super.initJeeslAdmin(bTranslation, bMessage);
 		this.fRevision = fRevision;
 		List<LOC> langList =fRevision.allOrderedPositionVisible(fbLocale.getClassLocale());

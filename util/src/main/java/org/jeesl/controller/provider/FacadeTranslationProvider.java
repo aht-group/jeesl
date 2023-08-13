@@ -22,11 +22,11 @@ public class FacadeTranslationProvider <L extends JeeslLang, D extends JeeslDesc
 {
 	final static Logger logger = LoggerFactory.getLogger(FacadeTranslationProvider.class);
 
-	private final JeeslIoRevisionFacade<?,?,?,?,?,?,?,RE,?,?,?,?,?,?> fRevision;
+	private final JeeslIoRevisionFacade<?,?,?,?,?,?,?,RE,?,?,?,?> fRevision;
 	private final IoRevisionFactoryBuilder<?,?,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision;
 
 	public FacadeTranslationProvider(IoRevisionFactoryBuilder<?,?,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision,
-								JeeslIoRevisionFacade<?,?,?,?,?,?,?,RE,?,?,?,?,?,?> fRevision)
+								JeeslIoRevisionFacade<?,?,?,?,?,?,?,RE,?,?,?,?> fRevision)
 	{
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;

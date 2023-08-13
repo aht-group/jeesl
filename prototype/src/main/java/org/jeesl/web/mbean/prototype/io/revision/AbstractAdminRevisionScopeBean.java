@@ -55,7 +55,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 	public AbstractAdminRevisionScopeBean(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision){super(fbRevision);}
 
 	protected void postConstructRevisionScope(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-											JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision)
+											JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
 	{
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
 		

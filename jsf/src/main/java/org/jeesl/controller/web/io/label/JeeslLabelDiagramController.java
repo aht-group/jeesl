@@ -38,7 +38,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslLabelDiagramController.class);
 
-	private JeeslIoRevisionFacade<L,D,RC,?,?,?,?,?,?,?,?,?,ERD,?> fRevision;
+	private JeeslIoRevisionFacade<L,D,RC,?,?,?,?,?,?,?,ERD,?> fRevision;
 	private final IoRevisionFactoryBuilder<L,D,RC,?,?,?,?,?,?,?,?,?,ERD,?> fbRevision;
 	
 	protected SbMultiHandler<RC> sbhCategory; public SbMultiHandler<RC> getSbhCategory() {return sbhCategory;}
@@ -64,7 +64,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 
 	public void postConstructRevisionDiagram(JeeslLocaleProvider<LOC> lp,
 											JeeslFacesMessageBean bMessage,
-											JeeslIoRevisionFacade<L,D,RC,?,?,?,?,?,?,?,?,?,ERD,?> fRevision)
+											JeeslIoRevisionFacade<L,D,RC,?,?,?,?,?,?,?,ERD,?> fRevision)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fRevision=fRevision;

@@ -77,7 +77,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
 	
-	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision;
+	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
 	
 	protected final Comparator<RE> cpEntity;
 	
@@ -134,7 +134,8 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		uiAllowSave = true;
 	}
 
-	public void postConstructRevisionEntity(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
+	public void postConstructRevisionEntity(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
+			JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
 	{
 		if(jogger!=null) {jogger.start("postConstructRevisionEntity");}
 		super.postConstructWebController(lp,bMessage);

@@ -30,7 +30,7 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
 	private static final long serialVersionUID = 1L;
 
 	protected IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fbRevision;
-	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision;
+	private JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,RML> fRevision;
 
 
 	private final Map<String,Map<String,L>> entities; public Map<String,Map<String,L>> getEntities() {return entities;}
@@ -41,7 +41,7 @@ public class JeeslTranslationHandler<L extends JeeslLang,D extends JeeslDescript
 	private String entityJscn;	//2022-08-10 Unclear why we need this
 
 	public JeeslTranslationHandler(IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fbRevision,
-										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fRevision)
+										JeeslIoRevisionFacade<L,D,?,?,?,?,?,RE,?,RA,?,RML> fRevision)
 	{
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;

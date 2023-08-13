@@ -75,7 +75,7 @@ public class AbstractAdminErDiagramBean <L extends JeeslLang, D extends JeeslDes
 		efErDiagram = fbRevision.ejbDiagram();
 	}
 
-	protected void postConstructRevisionDiagram(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fRevision)
+	protected void postConstructRevisionDiagram(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision)
 	{
 		super.postConstructRevision(bTranslation,bMessage,fRevision);
 		

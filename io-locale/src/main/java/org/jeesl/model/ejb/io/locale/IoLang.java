@@ -1,5 +1,6 @@
 package org.jeesl.model.ejb.io.locale;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 
 @Entity
+@Cacheable(true)
 @Table(name="IoLang")
 public class IoLang implements JeeslLang
 {

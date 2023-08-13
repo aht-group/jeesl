@@ -20,7 +20,6 @@ import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionView;
 import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMapping;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.system.io.revision.JsonRevision;
 
@@ -32,9 +31,7 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 									RST extends JeeslRevisionScopeType<L,D,RST,?>,
 									RE extends JeeslRevisionEntity<L,D,RC,REM,RA,ERD>,
 									REM extends JeeslRevisionEntityMapping<RS,RST,RE>,
-									RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>,
-									RER extends JeeslStatus<L,D,RER>,
-									RAT extends JeeslStatus<L,D,RAT>,
+									RA extends JeeslRevisionAttribute<L,D,RE,?,?>,				
 									ERD extends JeeslRevisionDiagram<L,D,RC>,
 									RML extends JeeslRevisionMissingLabel>
 			extends JeeslFacade
