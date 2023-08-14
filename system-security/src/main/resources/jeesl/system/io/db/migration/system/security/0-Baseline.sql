@@ -1,0 +1,13 @@
+create sequence SecurityUser_id_seq start 1 increment 1;
+create table SecurityCategory (id  bigserial not null, code varchar(255), documentation boolean, position int4 not null, type varchar(255), visible boolean not null, primary key (id));
+create table SecurityCategoryJtDescription (category_id int8 not null, description_id int8 not null, primary key (category_id, description_id));
+create table SecurityCategoryJtLang (category_id int8 not null, lang_id int8 not null, primary key (category_id, lang_id));
+create table SecurityUser (system varchar(32) not null, id int8 not null, email varchar(255), firstName varchar(255), lastName varchar(255), permitLogin boolean, pwd varchar(255), salt varchar(255), primary key (id));
+alter table SecurityCategory add constraint UK8d8cfhkrhvyygimcbj8d6txhp unique (type, code);
+alter table SecurityCategoryJtDescription add constraint UK_fs7ol2vjrkjt289xnskvmalry unique (description_id);
+alter table SecurityCategoryJtLang add constraint UK_9k8yhybl8et3f6nkcymed0g0x unique (lang_id);
+alter table SecurityUser add constraint UK_kkldrg9jqi256n89pv39tu7lq unique (email);
+alter table SecurityCategoryJtDescription add constraint FKemq5afaqcyno3t7gqh07982u7 foreign key (description_id) references IoDescription;
+alter table SecurityCategoryJtDescription add constraint FK5xaje8qxe4q9fmswybef7um1o foreign key (category_id) references SecurityCategory;
+alter table SecurityCategoryJtLang add constraint FK3amq69lpwonjd14p61l99airv foreign key (lang_id) references IoLang;
+alter table SecurityCategoryJtLang add constraint FK1w2yjalffi0xg8cpgi953e28f foreign key (category_id) references SecurityCategory;
