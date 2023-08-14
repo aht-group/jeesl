@@ -87,7 +87,7 @@
 							var="t" value="#{cc.attrs.ctrl.snapshotTables}" draggableRows="false">
 					<f:facet name="header">
 						<j:dtHeader entity="IoDbMetaTable" code="listOf">
-							<jp:thFilter handler="#{cc.attrs.ctrl.thFilter}"/>
+							
 						</j:dtHeader>	
 					</f:facet>
 					<p:column>
@@ -95,12 +95,18 @@
 						<h:outputText value="#{t.id}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="code"/></f:facet>
+						<f:facet name="header">
+							<jtp:label entity="IoDbMetaTable" code="code"/>
+							<jp:thFilter handler="#{cc.attrs.ctrl.thFilterTable}"/>
+						</f:facet>
 						<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffTable[t]}" marginRight="10"/>
 						<h:outputText value="#{t.code}"/>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="columns"/></f:facet>
+						<f:facet name="header">
+							<jtp:label entity="IoDbMetaTable" code="columns"/>
+							<jp:thFilter handler="#{cc.attrs.ctrl.thFilterColumn}"/>
+						</f:facet>
 						<ui:repeat var="c" value="#{cc.attrs.ctrl.mapColumn[t]}">
 							<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffColumn[c]}" marginRight="10"/>
 							<h:outputText value="#{c.code}"/>
@@ -109,7 +115,10 @@
 						</ui:repeat>
 					</p:column>
 					<p:column>
-						<f:facet name="header"><jtp:label entity="IoDbMetaTable" code="constraints"/></f:facet>
+						<f:facet name="header">
+							<jtp:label entity="IoDbMetaTable" code="constraints"/>
+							<jp:thFilter handler="#{cc.attrs.ctrl.thFilterConstraint}"/>
+						</f:facet>
 						<h:dataTable rendered="false" var="c" value="#{cc.attrs.ctrl.mapConstraint[t]}">
 						   <h:column>
 								<jtp:symbolizer value="#{cc.attrs.ctrl.mapDiffConstraint[c]}" marginRight="5"/>		

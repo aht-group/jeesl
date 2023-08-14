@@ -7,12 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaColumnFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaConstraintFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaTableFactory;
-import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
 import org.slf4j.Logger;
@@ -42,7 +40,7 @@ public class DatabaseSanpshotProcessor
 			ResultSet rsColumn = meta.getColumns(null,null, table.getCode(), null);
 			while(rsColumn.next())
 			{
-				for(int i=1;i<=rsColumn.getMetaData().getColumnCount();i++) {logger.info(i+" "+rsColumn.getMetaData().getColumnName(i)+": "+rsColumn.getString(i));}
+				for(int i=1;i<=rsColumn.getMetaData().getColumnCount();i++) {logger.trace(i+" "+rsColumn.getMetaData().getColumnName(i)+": "+rsColumn.getString(i));}
 				table.getColumns().add(JsonDbMetaColumnFactory.build(rsColumn));
 			}
 			
