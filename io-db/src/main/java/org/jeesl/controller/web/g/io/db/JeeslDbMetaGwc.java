@@ -70,7 +70,10 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private final JeeslIoDbMetaCallback callback;
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
-	private final ThMultiFilterHandler<DIFF> thFilter; public ThMultiFilterHandler<DIFF> getThFilter() {return thFilter;}
+	
+	private final ThMultiFilterHandler<DIFF> thFilterTable; public ThMultiFilterHandler<DIFF> getThFilterTable() {return thFilterTable;}
+	private final ThMultiFilterHandler<DIFF> thFilterColumn; public ThMultiFilterHandler<DIFF> getThFilterColumn() {return thFilterColumn;}
+	private final ThMultiFilterHandler<DIFF> thFilterConstraint; public ThMultiFilterHandler<DIFF> getThFilterConstraint() {return thFilterConstraint;}
 	
 	private final EjbCodeCache<DIFF> cacheDiff;
 	
@@ -104,7 +107,10 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		this.fbDb = fbDb;
 		
 		sbhSystem = new SbSingleHandler<>(fbDb.getClassSsiSystem(),this);
-		thFilter = new ThMultiFilterHandler<>(this);
+		
+		thFilterTable = new ThMultiFilterHandler<>(this);
+		thFilterColumn = new ThMultiFilterHandler<>(this);
+		thFilterConstraint = new ThMultiFilterHandler<>(this);
 		
 		cacheDiff = EjbCodeCache.instance(fbDb.getClassDifference());
 		
@@ -135,8 +141,13 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		this.fDb = fDb;
 		sbhSystem.setList(fDb.all(fbDb.getClassSsiSystem()));
 		
-		thFilter.setList(fDb.all(fbDb.getClassDifference()));
-		thFilter.preSelect(fbDb.getClassDifference(),JeeslDbMetaDifference.Code.deleted,JeeslDbMetaDifference.Code.added);
+		thFilterTable.setList(fDb.all(fbDb.getClassDifference()));
+		thFilterColumn.setList(fDb.all(fbDb.getClassDifference()));
+		thFilterConstraint.setList(fDb.all(fbDb.getClassDifference()));
+		
+		thFilterTable.preSelect(fbDb.getClassDifference(),JeeslDbMetaDifference.Code.deleted,JeeslDbMetaDifference.Code.added);
+		thFilterColumn.preSelect(fbDb.getClassDifference(),JeeslDbMetaDifference.Code.deleted,JeeslDbMetaDifference.Code.added);
+		thFilterConstraint.preSelect(fbDb.getClassDifference(),JeeslDbMetaDifference.Code.deleted,JeeslDbMetaDifference.Code.added);
 		
 		cacheDiff.facade(fDb);
 		
@@ -279,7 +290,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		mapColumn.clear(); mapConstraint.clear();
 		mapDiffTable.clear(); mapDiffColumn.clear(); mapDiffConstraint.clear();
 		
-		Set<DIFF> filter = new HashSet<>(thFilter.getSelected());
+		Set<DIFF> filter1 = new HashSet<>(thFilterTable.getSelected());
 		for(TAB t : systemTables)
 		{
 			DIFF d = null;
@@ -290,10 +301,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			if(Objects.nonNull(d) )
 			{
 				mapDiffTable.put(t,d);
-				if(filter.contains(d))
-				{
-					snapshotTables.add(t);
-				}
+				if(thFilterTable.isSelected(d)) {snapshotTables.add(t);}
 			}
 		}
 		
@@ -307,7 +315,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			if(Objects.nonNull(d) )
 			{
 				mapDiffColumn.put(c,d);
-				if(filter.contains(d))
+				if(getThFilterColumn().isSelected(d))
 				{
 					if(!snapshotTables.contains(c.getTable())) {snapshotTables.add(c.getTable());}
 					if(!mapColumn.containsKey(c.getTable())) {mapColumn.put(c.getTable(), new ArrayList<>());}
@@ -325,9 +333,9 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			if(Objects.nonNull(d))
 			{
 				mapDiffConstraint.put(c,d);
-				if(filter.contains(d))
+				if(thFilterTable.isSelected(d)) {if(!snapshotTables.contains(c.getTable())) {snapshotTables.add(c.getTable());}}
+				if(thFilterConstraint.isSelected(d))
 				{
-					if(!snapshotTables.contains(c.getTable())) {snapshotTables.add(c.getTable());}
 					if(!mapConstraint.containsKey(c.getTable())) {mapConstraint.put(c.getTable(), new ArrayList<>());}
 					mapConstraint.get(c.getTable()).add(c);
 				}	

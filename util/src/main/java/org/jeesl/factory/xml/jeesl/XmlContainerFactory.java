@@ -19,9 +19,17 @@ public class XmlContainerFactory
 	
 	private XmlStatusFactory xfStatus;
 	
+	public static XmlContainerFactory instance(String localeCode, Status query)
+	{
+		return new XmlContainerFactory(localeCode,query);
+	}
 	public XmlContainerFactory(Status query)
 	{
 		xfStatus = new XmlStatusFactory(query);
+	}
+	public XmlContainerFactory(String localeCode, Status query)
+	{
+		xfStatus = new XmlStatusFactory(localeCode,query);
 	}
 	
 	public static Container build() {return new Container(); }

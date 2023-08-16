@@ -28,8 +28,6 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	private static final long serialVersionUID = 1L;
 
 	private JeeslSecurityBean<?,?,?,?,?,CTX,M,?> bSecurity;
-//	private Cache<String,List<M>> cacheSub;
-//	private Cache<String,List<M>> cacheBreadcrumb;
 	
 	private final List<M> mainMenu; public List<M> getMainMenu() {return mainMenu;}
 	
@@ -84,7 +82,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	
 	public List<M> subMenu(Cache<String,List<M>> cacheSub, String viewCode)
 	{
-		String cacheKey = TxtIdentityFactory.key(identity, viewCode);
+		String cacheKey = TxtIdentityFactory.key("sub",identity,viewCode);
 		if(cacheSub.containsKey(cacheKey)){return cacheSub.get(cacheKey);}
 		else
 		{
@@ -110,7 +108,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	
 	public List<M> breadcrumb(Cache<String,List<M>> cacheBreadcrumb, String viewCode)
 	{
-		String cacheKey = TxtIdentityFactory.key(identity, viewCode);
+		String cacheKey = TxtIdentityFactory.key("crumb",identity, viewCode);
 		if(cacheBreadcrumb.containsKey(cacheKey)){return cacheBreadcrumb.get(cacheKey);}
 		else
 		{
