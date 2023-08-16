@@ -368,13 +368,13 @@ public class ReportHandler
 		//Add all resources configured in resources.xml
 		for (Resource res : resources.getResource())
 		{
-			logger.info("Adding resource of type " +res.getType() +" with id='" +res.getName() +"' loaded from " +res.getValue().getValue());
+		//	logger.info("Adding resource of type " +res.getType() +" with id='" +res.getName() +"' loaded from " +res.getValue().getValue());
 			if (res.getType().equals("image"))
 			{
 				BufferedImage image = null;
 				try {
 					String imgLocation = "/resources/" +res.getType() +"/" +res.getValue().getValue();
-					logger.info("Including image resource: " +imgLocation);
+			//		logger.info("Including image resource: " +imgLocation);
 					image = ImageIO.read(mrl.searchIs(imgLocation));} 
 				catch (FileNotFoundException e) {logger.error(e.getMessage());}
 				catch (IOException e) {logger.error(e.getMessage());}
@@ -401,7 +401,7 @@ public class ReportHandler
 				try
 				{
 					String templateLocation = "/resources/templates" +"/" +res.getValue().getValue();
-					logger.info("Including style template resource: " +templateLocation);
+				//	logger.info("Including style template resource: " +templateLocation);
 					JRTemplate style = JRXmlTemplateLoader.load(mrl.searchIs(templateLocation));
 					mapReportParameter.put(res.getName() +"-style", style);
 				}
