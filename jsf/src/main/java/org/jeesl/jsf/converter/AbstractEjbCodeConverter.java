@@ -21,7 +21,7 @@ public abstract class AbstractEjbCodeConverter <I extends EjbWithCode> implement
 		this.clEjb=clEjb;
 	}
 	
-	public AbstractEjbCodeConverter(){}
+	private AbstractEjbCodeConverter() {}
 	public void setClEjb(Class<I> clEjb) {this.clEjb = clEjb;}	
 	
     public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue)
