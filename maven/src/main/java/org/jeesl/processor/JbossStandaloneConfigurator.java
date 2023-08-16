@@ -344,13 +344,13 @@ public class JbossStandaloneConfigurator
 		transport.get("lock-timeout").set(60000);
 		transport.get(ClientConstants.OP).set(ClientConstants.ADD);
 		
-		this.createReplicatedCaches(cacheContainer, "menucrumb", "menusub");
-		
 		ModelNode result = client.execute(new OperationBuilder(cacheContainer).build());
 		System.out.println(result.toString());
 		
 		result = client.execute(new OperationBuilder(transport).build());
 		System.out.println(result.toString());
+		
+		this.createReplicatedCaches(cacheContainer, "menucrumb", "menusub");
 	}
 	
 	public void createReplicatedCaches(ModelNode cacheContainer, String... replicatedCacheNames) throws IOException
