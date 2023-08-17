@@ -350,27 +350,24 @@ public class JbossStandaloneConfigurator
 		result = client.execute(new OperationBuilder(transport).build());
 		System.out.println(result.toString());
 		
-		this.createReplicatedCaches(cacheContainer, "menucrumb", "menusub");
+		this.createReplicatedCaches(cacheContainer, "menu");
 	}
 	
-	public void createReplicatedCaches(ModelNode cacheContainer, String... replicatedCacheNames) throws IOException
+	public void createReplicatedCaches(ModelNode cacheContainer, String replicatedCacheNames) throws IOException
 	{
-		for (String name : replicatedCacheNames)
-		{
-			ModelNode replicatedCache = cacheContainer.clone();
-			replicatedCache.get(ClientConstants.OP_ADDR).add("replicated-cache",name);		
-			replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
-			
-			ModelNode replicatedCacheTransaction = replicatedCache.clone();	
-			replicatedCacheTransaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
-			replicatedCacheTransaction.get("mode").set("BATCH");
-			replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
-			
-			ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
-			System.out.println(result.toString());
+		ModelNode replicatedCache = cacheContainer.clone();
+		replicatedCache.get(ClientConstants.OP_ADDR).add("replicated-cache",replicatedCacheNames);		
+		replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode replicatedCacheTransaction = replicatedCache.clone();	
+		replicatedCacheTransaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
+		replicatedCacheTransaction.get("mode").set("BATCH");
+		replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
+		System.out.println(result.toString());
 
-			result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
-			System.out.println(result.toString());
-		}
+		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
+		System.out.println(result.toString());
 	}
 }

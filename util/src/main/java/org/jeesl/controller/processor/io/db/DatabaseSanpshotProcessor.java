@@ -36,21 +36,12 @@ public class DatabaseSanpshotProcessor
 			JsonPostgresMetaTable table = JsonDbMetaTableFactory.build(rsTable);
 			
 			table.setColumns(new ArrayList<>());
-			logger.trace("Columns of "+table.getCode());
+			logger.info("Columns of "+table.getCode());
 			ResultSet rsColumn = meta.getColumns(null,null, table.getCode(), null);
 			while(rsColumn.next())
 			{
 				for(int i=1;i<=rsColumn.getMetaData().getColumnCount();i++) {logger.trace(i+" "+rsColumn.getMetaData().getColumnName(i)+": "+rsColumn.getString(i));}
 				table.getColumns().add(JsonDbMetaColumnFactory.build(rsColumn));
-			}
-			
-			table.setForeignKeys(new ArrayList<>());
-			ResultSet rsFk = meta.getImportedKeys(null, null, table.getCode());
-			logger.trace("Foreign Keys of "+table.getCode());
-			while(rsFk.next())
-			{
-				for(int i=1;i<=rsFk.getMetaData().getColumnCount();i++){logger.trace(i+" "+rsFk.getMetaData().getColumnName(i)+": "+rsFk.getString(i));}
-				table.getForeignKeys().add(JsonDbMetaConstraintFactory.buildFk(rsFk));
 			}
 			
 			table.setPrimaryKeys(new ArrayList<>());
@@ -61,6 +52,26 @@ public class DatabaseSanpshotProcessor
 				for(int i=1;i<=rsPk.getMetaData().getColumnCount();i++) {logger.trace(i+" "+rsPk.getMetaData().getColumnName(i)+": "+rsPk.getString(i));}
 				table.getPrimaryKeys().add(JsonDbMetaConstraintFactory.buildPk(rsPk));
 			}
+			
+			table.setForeignKeys(new ArrayList<>());
+			ResultSet rsFk = meta.getImportedKeys(null,null, table.getCode());
+			logger.trace("Foreign Keys of "+table.getCode());
+			while(rsFk.next())
+			{
+				for(int i=1;i<=rsFk.getMetaData().getColumnCount();i++){logger.trace(i+" "+rsFk.getMetaData().getColumnName(i)+": "+rsFk.getString(i));}
+				table.getForeignKeys().add(JsonDbMetaConstraintFactory.buildFk(rsFk));
+			}
+			
+			table.setUniqueKeys(new ArrayList<>());
+			ResultSet rsUk = meta.getIndexInfo(null,null, table.getCode(), true, false);
+			logger.trace("Foreign Keys of "+table.getCode());
+			while(rsUk.next())
+			{
+				for(int i=1;i<=rsUk.getMetaData().getColumnCount();i++){logger.info(i+" "+rsUk.getMetaData().getColumnName(i)+": "+rsUk.getString(i));}
+//				table.getForeignKeys().add(JsonDbMetaConstraintFactory.buildFk(rsXX));
+			}
+			
+			System.exit(-1);
 			
 			if(table.getCode().equals("SpProject".toLowerCase()))
 			{

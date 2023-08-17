@@ -37,4 +37,9 @@ public class JsonPostgresMetaTable implements Serializable
 	private List<JsonPostgresMetaConstraint> foreignKeys;
 	public List<JsonPostgresMetaConstraint> getForeignKeys() {return foreignKeys;}
 	public void setForeignKeys(List<JsonPostgresMetaConstraint> foreignKeys) {this.foreignKeys = foreignKeys;}
+	
+	@JsonProperty("uniqueKeys")
+	private List<JsonPostgresMetaConstraint> uniqueKeys;
+	public List<JsonPostgresMetaConstraint> getUniqueKeys() {return uniqueKeys;}
+	public void setUniqueKeys(List<JsonPostgresMetaConstraint> uniqueKeys) {this.uniqueKeys = uniqueKeys;}
 }
