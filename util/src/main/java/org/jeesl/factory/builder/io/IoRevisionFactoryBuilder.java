@@ -45,6 +45,8 @@ public class IoRevisionFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 >
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoRevisionFactoryBuilder.class);
 
 	private final Class<RC> cCategory; public Class<RC> getClassCategory(){return cCategory;}

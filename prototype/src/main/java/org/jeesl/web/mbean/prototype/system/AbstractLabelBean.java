@@ -50,7 +50,8 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 
 	private final List<LOC> locales; @Override public List<LOC> getLocales() {return locales;}
 	private final Map<String,LOC> mapLocales; public Map<String, LOC> getMapLocales() {return mapLocales;}
-
+	protected LOC fallbackLocale; public LOC getFallbackLocale() {return fallbackLocale;}
+	
 	public AbstractLabelBean(IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,RA,?,?,?,RML> fbRevision)
 	{
 		this.fbRevision=fbRevision;

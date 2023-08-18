@@ -14,7 +14,11 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithCategory;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithScope;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslHdFaq<L extends JeeslLang, D extends JeeslDescription,
 								R extends JeeslTenantRealm<L,D,R,?>,
 								CAT extends JeeslHdCategory<L,D,R,CAT,?>,

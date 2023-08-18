@@ -51,7 +51,7 @@ public class CliJbossStandaloneConfigurator
 	
 	public void infinispan() throws IOException
 	{
-		jbossStandalone.cache("ofx");
+		jbossStandalone.cache("jeesl");
 	
 //		<cache-container name="jeesl">
 //			<transport lock-timeout="60000"/>
