@@ -24,7 +24,7 @@
 
 	<ui:fragment rendered="#{rendered and (not empty value)}">
 			<img src="#{facesContext.externalContext.requestContextPath}/image/symbolizer/graphic/#{value.class.name}/#{not empty height ? height : '12'}/#{value.id}"
-				 class="jeesl-icon #{styleClass}"  title="#{((not empty value.name) and (not empty value.name[localeCode])) ? value.name[localeCode].lang : value.code}"
+				 class="jeesl-icon #{styleClass}"
 				 style="#{not empty marginRight ? 'margin-right: '.concat(marginRight).concat('px;') : ''}#{not empty marginLeft ? 'margin-left: '.concat(marginLeft).concat('px;') : ''}#{not empty height ? 'min-height: auto;'.concat('height: ').concat(height).concat('px;') : ''}"/>
 	</ui:fragment>
 
