@@ -61,20 +61,20 @@ public class SecurityCategory implements JeeslSecurityCategory<IoLang,IoDescript
 	@MapKey(name="lkey")
 	@JoinTable(name="SecurityCategoryJtLang",joinColumns={@JoinColumn(name="category_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	private Map<String,IoLang> name;
-	public Map<String,IoLang> getName() {return name;}
-	public void setName(Map<String, IoLang> name) {this.name = name;}
+	@Override public Map<String,IoLang> getName() {return name;}
+	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
 	@JoinTable(name="SecurityCategoryJtDescription",joinColumns={@JoinColumn(name="category_id")},inverseJoinColumns={@JoinColumn(name="description_id")})
 	private Map<String,IoDescription> description;
-	public Map<String,IoDescription> getDescription() {return description;}
-	public void setDescription(Map<String,IoDescription> description) {this.description = description;}
+	@Override public Map<String,IoDescription> getDescription() {return description;}
+	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
 
-	@Override public boolean equals(Object object){return (object instanceof SecurityCategory) ? id == ((SecurityCategory) object).getId() : (object == this);}
-	@Override public int hashCode(){return new HashCodeBuilder(23,43).append(id).toHashCode();}
-	
+	@Override public boolean equals(Object object) {return (object instanceof SecurityCategory) ? id == ((SecurityCategory) object).getId() : (object == this);}
+	@Override public int hashCode() {return new HashCodeBuilder(23,43).append(id).toHashCode();}
+
 	@Override public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
