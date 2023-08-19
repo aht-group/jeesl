@@ -10,4 +10,10 @@ public interface JeeslSimpleUser extends EjbWithId,EjbWithEmail
 	
 	String getLastName();
 	void setLastName(String lastName);
+	
+	String getSalt();
+	void setSalt(String salt);
+	
+	Boolean getPermitLogin();
+	void setPermitLogin(Boolean permitLogin);
 }
