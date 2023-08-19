@@ -10,16 +10,10 @@ import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslUser <R extends JeeslSecurityRole<?,?,?,?,?,?,?>>
-		extends Serializable,EjbWithId,EjbPersistable,EjbSaveable,EjbRemoveable
+					extends Serializable,EjbWithId,EjbPersistable,EjbSaveable,EjbRemoveable,JeeslSimpleUser
 {
 	public enum Attributes{firstName,lastName}
-	
-	String getFirstName();
-	void setFirstName(String firstName);
-	
-	String getLastName();
-	void setLastName(String lastName);
-	
+		
 	String getSalt();
 	void setSalt(String salt);
 	

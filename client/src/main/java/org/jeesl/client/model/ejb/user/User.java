@@ -17,6 +17,7 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.jeesl.client.model.ejb.system.security.SecurityRole;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
@@ -27,7 +28,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 ({	
 	@NamedQuery(name="fUserByEmail",query="SELECT u FROM MeisUser u WHERE u.email = :email")
 })
-public class User implements JeeslUser<SecurityRole>
+public class User implements JeeslSimpleUser,JeeslUser<SecurityRole>
 {
 	public static final long serialVersionUID=1;
 	

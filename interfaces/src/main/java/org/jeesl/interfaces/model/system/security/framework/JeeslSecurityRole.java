@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithActions;
 import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithCategory;
 import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithViews;
@@ -27,7 +27,7 @@ public interface JeeslSecurityRole<L extends JeeslLang, D extends JeeslDescripti
 						 		   V extends JeeslSecurityView<L,D,C,?,U,A>,
 						 		   U extends JeeslSecurityUsecase<L,D,C,?,V,A>,
 						 		   A extends JeeslSecurityAction<L,D,?,V,U,?>,
-						 		   USER extends JeeslUser<?>>
+						 		   USER extends JeeslSimpleUser>
 			extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 					EjbWithPositionVisible,EjbWithParentAttributeResolver,
 					EjbWithCode,EjbWithLang<L>,EjbWithDescription<D>,
