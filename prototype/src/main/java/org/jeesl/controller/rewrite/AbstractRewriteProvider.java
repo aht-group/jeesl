@@ -9,7 +9,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.ocpsoft.rewrite.config.Condition;
 import org.ocpsoft.rewrite.config.ConfigurationBuilder;
 import org.ocpsoft.rewrite.config.Direction;

@@ -4,16 +4,16 @@ import java.util.List;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
+import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
+import org.jeesl.interfaces.model.system.security.access.JeeslStaff;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslStaff;
-import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithCategory;
+import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,

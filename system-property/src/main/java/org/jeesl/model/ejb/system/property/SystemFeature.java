@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.jeesl.interfaces.model.system.JeeslSystemFeature;
+import org.jeesl.interfaces.model.system.property.JeeslSystemFeature;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
 @Entity

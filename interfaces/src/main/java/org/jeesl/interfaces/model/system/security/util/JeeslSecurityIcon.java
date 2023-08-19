@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.security.framework;
+package org.jeesl.interfaces.model.system.security.util;
 
 import java.io.Serializable;
 
@@ -10,12 +10,14 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
+@DownloadJeeslAttributes
 @DownloadJeeslData
-public interface JeeslSecurityPasswordRating <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslSecurityIcon <L extends JeeslLang, D extends JeeslDescription,
 											S extends JeeslStatus<L,D,S>,
 											G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,
@@ -23,6 +25,5 @@ public interface JeeslSecurityPasswordRating <L extends JeeslLang, D extends Jee
 					EjbWithCodeGraphic<G>,
 					JeeslStatus<L,D,S>
 {
-	public enum Code{r0,r1,r2,r3,r4}
-	public static final String codePrefix = "r";
+	public enum Code{loginRequired,sessionExpired,sccessDenied,pageDeativated}
 }

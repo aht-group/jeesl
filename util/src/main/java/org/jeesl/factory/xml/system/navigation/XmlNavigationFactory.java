@@ -1,6 +1,6 @@
 package org.jeesl.factory.xml.system.navigation;
 
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.model.xml.system.navigation.Navigation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

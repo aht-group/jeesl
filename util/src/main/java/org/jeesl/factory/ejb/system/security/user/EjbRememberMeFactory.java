@@ -2,8 +2,8 @@ package org.jeesl.factory.ejb.system.security.user;
 
 import java.util.UUID;
 
+import org.jeesl.interfaces.model.system.security.login.JeeslRememberMe;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslRememberMe;
 import org.joda.time.DateTime;
 
 public class EjbRememberMeFactory <USER extends JeeslUser<?>, REM extends JeeslRememberMe<USER>>

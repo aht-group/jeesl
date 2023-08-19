@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

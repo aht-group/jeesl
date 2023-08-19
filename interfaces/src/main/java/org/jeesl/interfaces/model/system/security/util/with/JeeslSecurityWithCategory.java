@@ -1,6 +1,6 @@
-package org.jeesl.interfaces.model.system.security.with;
+package org.jeesl.interfaces.model.system.security.util.with;
 
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
+import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionParent;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisibleParent;

@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityArea;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
+import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 
 public interface JeeslSecurityBean<R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,

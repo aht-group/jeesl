@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.factory.ejb.util.EjbPositionFactory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityArea;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

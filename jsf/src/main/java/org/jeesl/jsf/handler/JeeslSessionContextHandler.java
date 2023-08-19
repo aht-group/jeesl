@@ -9,8 +9,8 @@ import javax.faces.context.FacesContext;
 
 import org.jeesl.exception.jsf.JeeslSessionInitialisationException;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

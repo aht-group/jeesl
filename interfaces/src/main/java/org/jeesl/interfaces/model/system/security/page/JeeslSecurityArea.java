@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.security.framework;
+package org.jeesl.interfaces.model.system.security.page;
 
 import java.io.Serializable;
 

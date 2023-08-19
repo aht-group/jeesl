@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.security.framework;
+package org.jeesl.interfaces.model.system.security.access;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,10 +8,13 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithActions;
-import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithCategory;
-import org.jeesl.interfaces.model.system.security.with.JeeslSecurityWithViews;
+import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithActions;
+import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCategory;
+import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithViews;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisible;

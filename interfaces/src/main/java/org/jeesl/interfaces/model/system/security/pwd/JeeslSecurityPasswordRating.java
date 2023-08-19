@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.security.framework;
+package org.jeesl.interfaces.model.system.security.pwd;
 
 import java.io.Serializable;
 
@@ -9,20 +9,20 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslSecurityPasswordRule <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslSecurityPasswordRating <L extends JeeslLang, D extends JeeslDescription,
 											S extends JeeslStatus<L,D,S>,
 											G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,
-					EjbWithCode,JeeslStatusFixedCode,JeeslStatusWithSymbol,
+					EjbWithCode,JeeslStatusFixedCode,
 					EjbWithCodeGraphic<G>,
 					JeeslStatus<L,D,S>
 {
-	public enum Code{length,digit,lower,upper,symbol,rating,history,age}
+	public enum Code{r0,r1,r2,r3,r4}
+	public static final String codePrefix = "r";
 }

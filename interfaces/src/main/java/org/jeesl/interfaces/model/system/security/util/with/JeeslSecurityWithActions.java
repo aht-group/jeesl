@@ -1,8 +1,8 @@
-package org.jeesl.interfaces.model.system.security.with;
+package org.jeesl.interfaces.model.system.security.util.with;
 
 import java.util.List;
 
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 
 public interface JeeslSecurityWithActions <A extends JeeslSecurityAction<?,?,?,?,?,?>>
 {

@@ -1,7 +1,7 @@
 package org.jeesl.factory.ejb.system.security;
 
 import org.jeesl.controller.handler.NullNumberBinder;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.security.util;
+package org.jeesl.interfaces.model.system.security.login;
 
 import java.io.Serializable;
 

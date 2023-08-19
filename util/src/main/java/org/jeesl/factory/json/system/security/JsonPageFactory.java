@@ -2,10 +2,10 @@ package org.jeesl.factory.json.system.security;
 
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityCategory;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityMenu;
-import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
+import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.model.json.system.security.JsonSecurityPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
