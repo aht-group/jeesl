@@ -40,7 +40,7 @@ public class XmlRevisionFactory <REV extends JeeslRevision,
 
 	public static Revision build(){return new Revision();}
 	
-	public static Revision build(org.jeesl.interfaces.model.system.security.user.JeeslRevision revision)
+	public static Revision build(org.jeesl.interfaces.model.system.security.user.audit.JeeslRevision revision)
 	{
 		Revision xml =  build();
 		xml.setRecord(DateUtil.toXmlGc(revision.getInfo().getAuditRecord()));

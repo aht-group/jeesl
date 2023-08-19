@@ -1,11 +1,11 @@
-package org.jeesl.interfaces.model.system.security.user;
+package org.jeesl.interfaces.model.system.security.user.identity;
 
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.user.identity.JeeslIdentityLogin;
+import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 
 public interface JeeslIdentity <R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
 								V extends JeeslSecurityView<?,?,?,R,U,A>,

@@ -2,8 +2,8 @@ package org.jeesl.factory.ejb.system.security;
 
 import java.util.Date;
 
-import org.jeesl.interfaces.model.system.security.user.JeeslPasswordHistory;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.model.system.security.user.pwd.JeeslPasswordHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

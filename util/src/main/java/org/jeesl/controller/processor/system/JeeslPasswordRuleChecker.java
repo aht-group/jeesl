@@ -11,7 +11,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityPasswordRating;
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityPasswordRule;
-import org.jeesl.interfaces.model.system.security.user.JeeslPasswordHistory;
+import org.jeesl.interfaces.model.system.security.user.pwd.JeeslPasswordHistory;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Months;

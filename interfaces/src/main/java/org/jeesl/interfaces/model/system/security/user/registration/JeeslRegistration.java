@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.security.user;
+package org.jeesl.interfaces.model.system.security.user.registration;
 
 import java.io.Serializable;
 
@@ -7,6 +7,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslRegistration <L extends JeeslLang, D extends JeeslDescription,

@@ -3,8 +3,8 @@ package org.jeesl.factory.txt.system.security.user;
 import java.util.Objects;
 
 import org.jeesl.interfaces.model.system.security.framework.JeeslSecurityContext;
-import org.jeesl.interfaces.model.system.security.user.JeeslIdentity;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.model.system.security.user.identity.JeeslIdentity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
