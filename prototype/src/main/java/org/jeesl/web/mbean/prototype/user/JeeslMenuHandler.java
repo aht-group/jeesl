@@ -34,7 +34,11 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	private I identity;
 	private CTX context;
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
+	public JeeslMenuHandler<V,CTX,M,USER,I> jogger() {this.debugOnInfo=true; return this;}
 
+	public static <V extends JeeslSecurityView<?,?,?,?,?,?>,CTX extends JeeslSecurityContext<?,?>,M extends JeeslSecurityMenu<?,V,CTX,M>,USER extends JeeslUser<?>,I extends JeeslIdentity<?,V,?,?,CTX,USER>>
+		JeeslMenuHandler<V,CTX,M,USER,I> instance() {return new JeeslMenuHandler<>();}
+	
 	public JeeslMenuHandler()
 	{				
 		mainMenu = new ArrayList<>();
@@ -108,7 +112,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	
 	public List<M> breadcrumb(Cache<String,List<M>> cacheBreadcrumb, String viewCode)
 	{
-		String cacheKey = TxtIdentityFactory.key("crumb",identity, viewCode);
+		String cacheKey = TxtIdentityFactory.key("crumb",identity,viewCode);
 		if(cacheBreadcrumb.containsKey(cacheKey)){return cacheBreadcrumb.get(cacheKey);}
 		else
 		{

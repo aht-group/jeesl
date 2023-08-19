@@ -11,17 +11,7 @@ import org.slf4j.LoggerFactory;
 public class TxtIdentityFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtIdentityFactory.class);
-    
-    public static <CTX extends JeeslSecurityContext<?,?>, USER extends JeeslUser<?>, I extends JeeslIdentity<?,?,?,?,CTX,USER>> String key1(I identity, String key)
-    {
-    	StringBuilder sb = new StringBuilder();
-    	sb.append(identity.getContext().getId()).append("-");
-    	if(Objects.isNull(identity.getUser())) {sb.append("0");}
-    	else {sb.append(identity.getUser().getId());}
-    	sb.append("-").append(key);
-    	return sb.toString();
-    }
-    
+   
     public static <CTX extends JeeslSecurityContext<?,?>, USER extends JeeslUser<?>, I extends JeeslIdentity<?,?,?,?,CTX,USER>> String key(String prefix, I identity, String key)
     {
     	StringBuilder sb = new StringBuilder();

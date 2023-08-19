@@ -1,6 +1,6 @@
 package org.jeesl.controller.web.c.system.property;
 
-import org.jeesl.controller.web.system.JeeslSystemPropertyGwc;
+import org.jeesl.controller.web.system.property.JeeslSystemPropertyGwc;
 import org.jeesl.factory.builder.system.PropertyFactoryBuilder;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;

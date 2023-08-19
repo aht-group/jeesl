@@ -1,4 +1,4 @@
-package org.jeesl.controller.web.system;
+package org.jeesl.controller.web.system.property;
 
 import java.io.Serializable;
 import java.util.Collections;
