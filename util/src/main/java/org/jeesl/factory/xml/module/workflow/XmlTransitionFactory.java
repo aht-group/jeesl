@@ -25,7 +25,7 @@ public class XmlTransitionFactory<L extends JeeslLang, D extends JeeslDescriptio
 									WML extends JeeslWorkflowModificationLevel<L,D,WML,?>,
 									WT extends JeeslWorkflowTransition<L,D,?,WS,WTT,?,?>,
 									WTT extends JeeslWorkflowTransitionType<L,D,WTT,?>,
-									SR extends JeeslSecurityRole<L,D,?,?,?,?,?>>
+									SR extends JeeslSecurityRole<L,D,?,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlTransitionFactory.class);
 	

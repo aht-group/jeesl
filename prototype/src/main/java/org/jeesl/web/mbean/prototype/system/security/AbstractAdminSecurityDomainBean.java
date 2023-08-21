@@ -27,7 +27,7 @@ import net.sf.ahtutils.prototype.controller.handler.op.user.OverlayUserSelection
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractAdminSecurityDomainBean <C extends JeeslSecurityCategory<?,?>,
-												R extends JeeslSecurityRole<?,?,C,?,?,?,USER>,
+												R extends JeeslSecurityRole<?,?,C,?,?,?>,
 												USER extends JeeslUser<R>,
 												STAFF extends JeeslStaff<R,USER,D1,D2>,
 												D1 extends EjbWithId, D2 extends EjbWithId>

@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 
 public class TxtSecurityRoleFactory <L extends JeeslLang,
 										 D extends JeeslDescription,
-										 R extends JeeslSecurityRole<L,D,?,?,?,?,?>
+										 R extends JeeslSecurityRole<L,D,?,?,?,?>
 										 >
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtSecurityRoleFactory.class);
     
-	public static <L extends JeeslLang, R extends JeeslSecurityRole<L,?,?,?,?,?,?>> String labels(String localeCode, List<R> roles)
+	public static <L extends JeeslLang, R extends JeeslSecurityRole<L,?,?,?,?,?>> String labels(String localeCode, List<R> roles)
 	{
 		List<String> list = new ArrayList<>();
 		for(R r : roles) {list.add(r.getName().get(localeCode).getLang());}

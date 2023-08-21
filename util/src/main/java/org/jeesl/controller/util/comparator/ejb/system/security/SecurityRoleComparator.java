@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SecurityRoleComparator<C extends JeeslSecurityCategory<?,?>,
-									R extends JeeslSecurityRole<?,?,C,?,?,?,?>>
+									R extends JeeslSecurityRole<?,?,C,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SecurityRoleComparator.class);
 

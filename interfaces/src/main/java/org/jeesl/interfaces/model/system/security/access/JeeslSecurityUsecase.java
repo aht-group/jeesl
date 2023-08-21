@@ -26,7 +26,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslSecurityUsecase<L extends JeeslLang, D extends JeeslDescription, 
  									  C extends JeeslSecurityCategory<L,D>,
- 									  R extends JeeslSecurityRole<L,D,C,V,?,A,?>,
+ 									  R extends JeeslSecurityRole<L,D,C,V,?,A>,
  									  V extends JeeslSecurityView<L,D,C,R,?,A>,
  									  A extends JeeslSecurityAction<L,D,R,V,?,?>
  									 >

@@ -24,7 +24,7 @@ import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
+public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,?,?,V,U,A>,
 													V extends JeeslSecurityView<?,?,?,R,U,A>,
 													U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 													A extends JeeslSecurityAction<?,?,R,V,U,AT>,

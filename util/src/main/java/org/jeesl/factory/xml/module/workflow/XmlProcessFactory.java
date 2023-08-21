@@ -39,7 +39,7 @@ public class XmlProcessFactory<L extends JeeslLang, D extends JeeslDescription,
 								WML extends JeeslWorkflowModificationLevel<L,D,WML,?>,
 								WT extends JeeslWorkflowTransition<L,D,WPD,WS,WTT,?,?>,
 								WTT extends JeeslWorkflowTransitionType<L,D,WTT,?>,
-								SR extends JeeslSecurityRole<L,D,?,?,?,?,?>>
+								SR extends JeeslSecurityRole<L,D,?,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlProcessFactory.class);
 	
@@ -65,7 +65,7 @@ public class XmlProcessFactory<L extends JeeslLang, D extends JeeslDescription,
 					WML extends JeeslWorkflowModificationLevel<L,D,WML,?>,
 					WT extends JeeslWorkflowTransition<L,D,WPD,WS,WTT,?,?>,
 					WTT extends JeeslWorkflowTransitionType<L,D,WTT,?>,
-					SR extends JeeslSecurityRole<L,D,?,?,?,?,?>>
+					SR extends JeeslSecurityRole<L,D,?,?,?,?>>
 			XmlProcessFactory<L,D,WX,WP,WPD,WS,WST,WSP,WPT,WML,WT,WTT,SR> instance(String localeCode, XmlWorkflowQuery.Key key)
 	{
 		return new XmlProcessFactory<>(XmlWorkflowQuery.get(key, localeCode));

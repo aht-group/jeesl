@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 
-public interface JeeslSecurityBean<R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
+public interface JeeslSecurityBean<R extends JeeslSecurityRole<?,?,?,V,U,A>,
 									V extends JeeslSecurityView<?,?,?,R,U,A>,
 									U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 									A extends JeeslSecurityAction<?,?,R,V,U,?>,

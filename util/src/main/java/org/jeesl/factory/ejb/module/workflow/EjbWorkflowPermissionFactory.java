@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class EjbWorkflowPermissionFactory<AS extends JeeslWorkflowStage<?,?,?,?,WSP,?,?>,
 											WSP extends JeeslWorkflowStagePermission<AS,?,WML,SR>,
 											WML extends JeeslWorkflowModificationLevel<?,?,WML,?>,
-											SR extends JeeslSecurityRole<?,?,?,?,?,?,?>
+											SR extends JeeslSecurityRole<?,?,?,?,?,?>
 >
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbWorkflowPermissionFactory.class);

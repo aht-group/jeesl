@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class XmlViewsFactory <L extends JeeslLang,
 								D extends JeeslDescription, 
 								C extends JeeslSecurityCategory<L,D>,
-								R extends JeeslSecurityRole<L,D,C,V,U,?,?>,
+								R extends JeeslSecurityRole<L,D,C,V,U,?>,
 								V extends JeeslSecurityView<L,D,C,R,U,?>,
 								U extends JeeslSecurityUsecase<L,D,C,R,V,?>>
 {

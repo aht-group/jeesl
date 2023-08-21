@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
-											R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
+											R extends JeeslSecurityRole<?,?,?,V,U,A>,
 											V extends JeeslSecurityView<?,?,?,R,U,A>,
 											U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 											A extends JeeslSecurityAction<?,?,R,V,U,?>,

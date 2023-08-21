@@ -15,7 +15,7 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 
 public interface JeeslWorkflowNotification <MT extends JeeslIoTemplate<?,?,?,?,?,?>,
 											MC extends JeeslTemplateChannel<?,?,MC,?>,
-											SR extends JeeslSecurityRole<?,?,?,?,?,?,?>,
+											SR extends JeeslSecurityRole<?,?,?,?,?,?>,
 											RE extends JeeslRevisionEntity<?,?,?,?,?,?>
 									>
 		extends Serializable,EjbPersistable,EjbRemoveable,EjbSaveable,

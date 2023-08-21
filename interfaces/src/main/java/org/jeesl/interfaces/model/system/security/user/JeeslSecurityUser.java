@@ -6,7 +6,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslSecurityUser //<R extends JeeslSecurityRole<?,?,?,?,?,?,?>>
+public interface JeeslSecurityUser //<R extends JeeslSecurityRole<?,?,?,?,?,?>>
 {
 //	void x();
 }

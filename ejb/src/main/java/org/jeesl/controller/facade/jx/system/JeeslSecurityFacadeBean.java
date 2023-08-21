@@ -41,7 +41,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
-									R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
+									R extends JeeslSecurityRole<?,?,C,V,U,A>,
 									V extends JeeslSecurityView<?,?,C,R,U,A>,
 									U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
 									A extends JeeslSecurityAction<?,?,R,V,U,?>,

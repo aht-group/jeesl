@@ -29,7 +29,7 @@ import org.jeesl.interfaces.qualifier.er.EjbErNode;
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"code"}))
 @EjbErNode(name="Role",category="security",subset="security,ts")
-public class SecurityRole implements JeeslSecurityRole<Lang,Description,SecurityCategory,SecurityView,SecurityUsecase,SecurityAction,User>
+public class SecurityRole implements JeeslSecurityRole<Lang,Description,SecurityCategory,SecurityView,SecurityUsecase,SecurityAction>
 {	
 	public static final long serialVersionUID=1;
 	

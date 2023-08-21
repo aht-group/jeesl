@@ -22,7 +22,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslSecurityAction<L extends JeeslLang, D extends JeeslDescription,
-								   R extends JeeslSecurityRole<L,D,?,V,U,?,?>,
+								   R extends JeeslSecurityRole<L,D,?,V,U,?>,
 								   V extends JeeslSecurityView<L,D,?,R,U,?>,
 								   U extends JeeslSecurityUsecase<L,D,?,R,V,?>,
 								   AT extends JeeslSecurityTemplate<L,D,?>>

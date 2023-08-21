@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TxtStaffFactory <L extends JeeslLang, D extends JeeslDescription,
-								R extends JeeslSecurityRole<L,D,?,?,?,?,USER>,
+								R extends JeeslSecurityRole<L,D,?,?,?,?>,
 								USER extends JeeslUser<R>,
 								STAFF extends JeeslStaff<R,USER,D1,D2>,
 								D1 extends EjbWithId, D2 extends EjbWithId>

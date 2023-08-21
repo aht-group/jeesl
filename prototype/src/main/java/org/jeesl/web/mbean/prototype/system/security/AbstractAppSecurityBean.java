@@ -35,7 +35,7 @@ import net.sf.exlp.util.io.ObjectIO;
 import net.sf.exlp.util.io.StringUtil;
 
 public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
-										R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
+										R extends JeeslSecurityRole<?,?,C,V,U,A>,
 										V extends JeeslSecurityView<?,?,C,R,U,A>,
 										U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
 										A extends JeeslSecurityAction<?,?,R,V,U,?>,

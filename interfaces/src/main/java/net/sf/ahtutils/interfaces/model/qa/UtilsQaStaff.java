@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface UtilsQaStaff<
-					R extends JeeslSecurityRole<?,?,?,?,?,?,USER>,
+					R extends JeeslSecurityRole<?,?,?,?,?,?>,
 					USER extends JeeslUser<R>,
 					GROUP extends UtilsQaGroup<?,QA,?>,
 					QA extends UtilsQualityAssurarance<?,?,QASH>,

@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 
 public class JeeslSecurityMatrixController  <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										C extends JeeslSecurityCategory<L,D>,
-										R extends JeeslSecurityRole<L,D,C,V,U,?,?>,
+										R extends JeeslSecurityRole<L,D,C,V,U,?>,
 										V extends JeeslSecurityView<L,D,C,R,U,?>,
 										U extends JeeslSecurityUsecase<L,D,C,R,V,?>
 										>

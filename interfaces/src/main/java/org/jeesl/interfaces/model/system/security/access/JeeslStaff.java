@@ -8,7 +8,7 @@ import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslStaff<R extends JeeslSecurityRole<?,?,?,?,?,?,USER>,
+public interface JeeslStaff<R extends JeeslSecurityRole<?,?,?,?,?,?>,
 							USER extends JeeslUser<R>,
 							D1 extends EjbWithId, D2 extends EjbWithId>
 			extends Serializable,EjbWithId,EjbPersistable,EjbSaveable,EjbRemoveable

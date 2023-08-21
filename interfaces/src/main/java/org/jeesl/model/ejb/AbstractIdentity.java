@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.system.security.user.identity.JeeslIdentity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
+public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A>,
 								   V extends JeeslSecurityView<?,?,?,R,U,A>,
 								   U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 								   A extends JeeslSecurityAction<?,?,R,V,U,?>,

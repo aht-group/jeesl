@@ -22,7 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
-								   R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
+								   R extends JeeslSecurityRole<?,?,?,V,U,A>,
 								   V extends JeeslSecurityView<?,?,?,R,U,A>,
 								   U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 								   A extends JeeslSecurityAction<?,?,R,V,U,?>,
@@ -47,7 +47,7 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 	protected boolean debugOnInfo; public boolean isDebugOnInfo() {return debugOnInfo;} public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
 
 	public static <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
-				   R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
+				   R extends JeeslSecurityRole<?,?,?,V,U,A>,
 				   V extends JeeslSecurityView<?,?,?,R,U,A>,
 				   U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 				   A extends JeeslSecurityAction<?,?,R,V,U,?>,

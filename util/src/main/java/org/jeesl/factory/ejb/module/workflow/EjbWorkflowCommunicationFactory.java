@@ -16,7 +16,7 @@ public class EjbWorkflowCommunicationFactory<WT extends JeeslWorkflowTransition<
 											WC extends JeeslWorkflowActionNotification<WT,MT,MC,SR,RE>,
 											MT extends JeeslIoTemplate<?,?,?,?,?,?>,
 											MC extends JeeslTemplateChannel<?,?,MC,?>,
-											SR extends JeeslSecurityRole<?,?,?,?,?,?,?>,
+											SR extends JeeslSecurityRole<?,?,?,?,?,?>,
 											RE extends JeeslRevisionEntity<?,?,?,?,?,?>
 >
 {

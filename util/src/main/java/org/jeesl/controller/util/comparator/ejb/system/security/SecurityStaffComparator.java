@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SecurityStaffComparator<C extends JeeslSecurityCategory<?,?>,
-									R extends JeeslSecurityRole<?,?,C,?,?,?,USER>,
+									R extends JeeslSecurityRole<?,?,C,?,?,?>,
 									USER extends JeeslUser<R>,
 									STAFF extends JeeslStaff<R,USER,?,?>>
 {

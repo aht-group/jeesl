@@ -15,7 +15,7 @@ import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCat
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
-										R extends JeeslSecurityRole<?,?,C,V,U,A,USER>,
+										R extends JeeslSecurityRole<?,?,C,V,U,A>,
 										V extends JeeslSecurityView<?,?,C,R,U,A>,
 										U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
 										A extends JeeslSecurityAction<?,?,R,V,U,?>,

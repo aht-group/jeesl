@@ -29,8 +29,7 @@ public interface JeeslSecurityRole<L extends JeeslLang, D extends JeeslDescripti
 						 		   C extends JeeslSecurityCategory<L,D>,
 						 		   V extends JeeslSecurityView<L,D,C,?,U,A>,
 						 		   U extends JeeslSecurityUsecase<L,D,C,?,V,A>,
-						 		   A extends JeeslSecurityAction<L,D,?,V,U,?>,
-						 		   USER extends JeeslSimpleUser>
+						 		   A extends JeeslSecurityAction<L,D,?,V,U,?>>
 			extends Serializable,EjbPersistable,EjbSaveable,EjbRemoveable,
 					EjbWithPositionVisible,EjbWithParentAttributeResolver,
 					EjbWithCode,EjbWithLang<L>,EjbWithDescription<D>,

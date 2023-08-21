@@ -22,7 +22,7 @@ public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescriptio
 								WSP extends JeeslWorkflowStagePermission<WS,WPT,WML,SR>,
 								WPT extends JeeslWorkflowPermissionType<L,D,WPT,?>,
 								WML extends JeeslWorkflowModificationLevel<L,D,WML,?>,
-								SR extends JeeslSecurityRole<L,D,?,?,?,?,?>>
+								SR extends JeeslSecurityRole<L,D,?,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlPermissionFactory.class);
 	

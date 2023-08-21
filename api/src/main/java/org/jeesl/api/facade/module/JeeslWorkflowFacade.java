@@ -56,7 +56,7 @@ public interface JeeslWorkflowFacade <L extends JeeslLang, D extends JeeslDescri
 										AO extends EjbWithId,
 										MT extends JeeslIoTemplate<L,D,?,?,?,?>,
 										MC extends JeeslTemplateChannel<L,D,MC,?>,
-										SR extends JeeslSecurityRole<L,D,?,?,?,?,?>,
+										SR extends JeeslSecurityRole<L,D,?,?,?,?>,
 										RE extends JeeslRevisionEntity<L,D,?,?,RA,?>,
 										RA extends JeeslRevisionAttribute<L,D,RE,?,?>,
 										WL extends JeeslWorkflowLink<WF,RE>,

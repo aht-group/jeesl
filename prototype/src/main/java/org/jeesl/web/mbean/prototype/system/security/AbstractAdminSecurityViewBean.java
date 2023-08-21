@@ -39,7 +39,7 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 @Deprecated //Use JeeslSecurityViewController instead
 public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
-											R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
+											R extends JeeslSecurityRole<L,D,C,V,U,A>,
 											V extends JeeslSecurityView<L,D,C,R,U,A>,
 											U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
 											A extends JeeslSecurityAction<L,D,R,V,U,AT>,

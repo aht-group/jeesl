@@ -16,7 +16,7 @@ public class EjbWorkflowNotificationFactory<WS extends JeeslWorkflowStage<?,?,?,
 											WSN extends JeeslWorkflowStageNotification<WS,MT,MC,SR,RE>,
 											MT extends JeeslIoTemplate<?,?,?,?,?,?>,
 											MC extends JeeslTemplateChannel<?,?,MC,?>,
-											SR extends JeeslSecurityRole<?,?,?,?,?,?,?>,
+											SR extends JeeslSecurityRole<?,?,?,?,?,?>,
 											RE extends JeeslRevisionEntity<?,?,?,?,?,?>
 >
 {

@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 public interface JeeslWorkflowStagePermission <AS extends JeeslWorkflowStage<?,?,?,?,?,?,?>,
 									APT extends JeeslWorkflowPermissionType<?,?,APT,?>,
 									WML extends JeeslWorkflowModificationLevel<?,?,WML,?>,
-									SR extends JeeslSecurityRole<?,?,?,?,?,?,?>
+									SR extends JeeslSecurityRole<?,?,?,?,?,?>
 									>
 		extends Serializable,EjbPersistable,EjbRemoveable,EjbSaveable,
 				EjbWithId,EjbWithPosition,EjbWithParentAttributeResolver

@@ -35,7 +35,7 @@ import net.sf.ahtutils.xml.status.Descriptions;
 
 public class JeeslSecurityRoleReport <L extends JeeslLang, D extends JeeslDescription,
 								C extends JeeslSecurityCategory<L,D>,
-								R extends JeeslSecurityRole<L,D,C,V,U,A,USER>,
+								R extends JeeslSecurityRole<L,D,C,V,U,A>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
 								U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
 								A extends JeeslSecurityAction<L,D,R,V,U,AT>,

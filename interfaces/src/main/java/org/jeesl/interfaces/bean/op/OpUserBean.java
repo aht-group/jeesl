@@ -13,7 +13,7 @@ import net.sf.ahtutils.interfaces.controller.handler.op.user.OpUserSelectionHand
 
 public interface OpUserBean <
 //L extends JeeslLang, D extends JeeslDescription,C extends JeeslSecurityCategory<L,D>,
-//							R extends JeeslSecurityRole<?,?,?,V,U,A,USER>,
+//							R extends JeeslSecurityRole<?,?,?,V,U,A>,
 //							V extends JeeslSecurityView<?,?,?,R,U,A>,
 //							U extends JeeslSecurityUsecase<?,?,?,R,V,A>,
 //							A extends JeeslSecurityAction<?,?,R,V,U,AT>,
