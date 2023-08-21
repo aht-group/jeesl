@@ -21,15 +21,15 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 @Entity
 @Table(name="SecurityUser",uniqueConstraints=@UniqueConstraint(columnNames={"email"}))
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="system", discriminatorType=DiscriminatorType.STRING, length=32)
+@DiscriminatorColumn(name="system",discriminatorType=DiscriminatorType.STRING,length=32)
 @DiscriminatorValue("generic")
-@SequenceGenerator(name="SequenceUser", sequenceName="SecurityUser_id_seq", allocationSize=1)
+@SequenceGenerator(name="SequenceUser",sequenceName="SecurityUser_id_seq",allocationSize=1)
 public abstract class SecurityUser implements JeeslSimpleUser,JeeslSecurityUser
 {
 	public static final long serialVersionUID=1;
 
 
-	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SequenceUser")
+	@Id @GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SequenceUser")
 	protected long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}

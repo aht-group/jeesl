@@ -43,8 +43,7 @@ public class SecurityView implements JeeslSecurityView<Lang,Description,Security
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
 	
-	@Override public String resolveParentAttribute() {return "category";}
-	
+	@Override public String resolveParentAttribute() {return JeeslSecurityView.Attributes.category.toString();}
 	@NotNull @ManyToOne
 	private SecurityCategory category;
 	public SecurityCategory getCategory() {return category;}

@@ -38,6 +38,7 @@ public interface JeeslSecurityUsecase<L extends JeeslLang, D extends JeeslDescri
 					JeeslSecurityWithActions<A>
 {
 	public static final String extractId = "securityUsecases";
+	public enum Attributes {category}
 	
 	public List<R> getRoles();
 	public void setRoles(List<R> roles);
