@@ -467,9 +467,9 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 	private void rmRole(USER user, R role)
 	{
 		if(user.getRoles().contains(role)){user.getRoles().remove(role);}
-		if(role.getUsers().contains(user)){role.getUsers().remove(user);}
+//		if(role.getUsers().contains(user)){role.getUsers().remove(user);}
 		user = em.merge(user);
-		role = em.merge(role);
+//		role = em.merge(role);
 	}
 
 	@Override public boolean hasRole(Class<USER> clUser, Class<R> clRole, USER user, R role)

@@ -47,8 +47,8 @@ public interface JeeslSecurityRole<L extends JeeslLang, D extends JeeslDescripti
 	public List<U> getUsecases();
 	public void setUsecases(List<U> usecases);
 	
-	List<USER> getUsers();
-	void setUsers(List<USER> users);
+//	List<USER> getUsers();
+//	void setUsers(List<USER> users);
 	
 	public Boolean getDocumentation();
 	public void setDocumentation(Boolean documentation);
