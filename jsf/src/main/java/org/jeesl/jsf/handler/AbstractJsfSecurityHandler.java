@@ -179,7 +179,7 @@ public abstract class AbstractJsfSecurityHandler <R extends JeeslSecurityRole<?,
 			List<A> lA1 = new ArrayList<>();
 			if(bSecurity==null)
 			{
-				r = fSecurity.load(r,false);
+				r = fSecurity.load(r);
 				lA1.addAll(r.getActions());
 			}
 			else {lA1.addAll(bSecurity.fActions(r));}

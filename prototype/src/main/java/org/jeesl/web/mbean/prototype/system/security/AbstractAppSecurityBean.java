@@ -305,7 +305,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	public void update(R role)
 	{
 		if(debugOnInfo) {logger.info("Updating "+JeeslSecurityRole.class.getSimpleName()+" "+role.getCode());}
-		role = fSecurity.load(role,false);
+		role = fSecurity.load(role);
 		mapViewsByRole.put(role,role.getViews());
 		mapUsecasesByRole.put(role,role.getUsecases());
 		mapActionsByRole.put(role,role.getActions());

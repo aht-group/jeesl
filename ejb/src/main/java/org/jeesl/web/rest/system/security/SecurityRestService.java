@@ -213,7 +213,7 @@ public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription
 					xCat.setRoles(XmlRolesFactory.build());
 					for(R role : fSecurity.allForCategory(fbSecurity.getClassRole(), fbSecurity.getClassCategory(), category.getCode()))
 					{
-						role = fSecurity.load(role,false);
+						role = fSecurity.load(role);
 						Collections.sort(role.getUsecases(),comparatorUsecase);
 						Role xRole = xfRole.build(role);
 						xCat.getRoles().getRole().add(xRole);

@@ -192,7 +192,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 		role = fSecurity.find(fbSecurity.getClassRole(),role);
 		role = efLang.persistMissingLangs(fSecurity,lp.getLocales(),role);
 		role = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),role);		
-		role = fSecurity.load(role,false);
+		role = fSecurity.load(role);
 		reloadActions();
 		
 		views = role.getViews();

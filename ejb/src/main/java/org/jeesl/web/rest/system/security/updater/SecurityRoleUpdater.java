@@ -128,7 +128,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 			ejb.setCategory(category);
 			ejb = fSecurity.save(ejb);
 
-			ejb = fSecurity.load(ejb,false);
+			ejb = fSecurity.load(ejb);
 			ejb = iuListViewsSecurity(ejb, role.getViews());
 			ejb = iuListActions(ejb, role.getActions());
 			ejb = iuUsecasesForRole(ejb, role.getUsecases());

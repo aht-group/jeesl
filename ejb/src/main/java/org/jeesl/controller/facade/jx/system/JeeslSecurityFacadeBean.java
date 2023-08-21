@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -64,16 +65,25 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		this.fbSecurity=fbSecurity;
 	}
 
-	@Override public R load(R role, boolean withUsers)
+	@Override public R load(R role)
 	{
 		role = em.find(fbSecurity.getClassRole(), role.getId());
 		role.getCategory().getId();
-		if(withUsers && role.getUsers()!=null){role.getUsers().size();}
 		if(role.getActions()!=null){role.getActions().size();}
 		if(role.getViews()!=null){role.getViews().size();}
 		if(role.getUsecases()!=null){role.getUsecases().size();}
 		return role;
 	}
+//	@Override public R load(R role, boolean withUsers)
+//	{
+//		role = em.find(fbSecurity.getClassRole(), role.getId());
+//		role.getCategory().getId();
+//		if(withUsers && role.getUsers()!=null){role.getUsers().size();}
+//		if(role.getActions()!=null){role.getActions().size();}
+//		if(role.getViews()!=null){role.getViews().size();}
+//		if(role.getUsecases()!=null){role.getUsecases().size();}
+//		return role;
+//	}
 	
 	@Override public V load(Class<V> cView, V view)
 	{
@@ -137,6 +147,39 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 			}
 		}
 		return new ArrayList<V>(views.values());
+	}
+	
+	@Override public List<USER> fUsers(R role)
+	{
+//		CriteriaBuilder cB = em.getCriteriaBuilder();
+//		CriteriaQuery<G> cQ = cB.createQuery(cG);
+//		Root<W> root = cQ.from(c);
+//		
+//		Path<G> pGraphic = root.get("graphic");
+//		Path<Long> pId = root.get("id");
+//		
+//		cQ.select(pGraphic);
+//		cQ.where(cB.equal(pId,id));
+		
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<USER> cQ = cB.createQuery(fbSecurity.getClassUser());
+		Root<USER> root = cQ.from(fbSecurity.getClassUser());
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		ListJoin<USER,R> jRole = root.joinList(JeeslUser.Attributes.roles.toString());
+		predicates.add(cB.equal(jRole,role));
+		
+		cQ.select(root);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		return em.createQuery(cQ).getResultList();
+		
+//		TypedQuery<VIEW> tQ = em.createQuery(cQ);
+//		try	{return tQ.getSingleResult();}
+//		catch (NoResultException ex){throw new JeeslNotFoundException(ex.getMessage());}
+//		
+//		
+//		role = em.find(fbSecurity.getClassRole(), role.getId());
+//		return new ArrayList<>(role.getUsers());
 	}
 	
 	@Override public List<R> rolesForView(V view)

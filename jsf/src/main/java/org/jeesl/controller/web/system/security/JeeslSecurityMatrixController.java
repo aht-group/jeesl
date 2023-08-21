@@ -93,7 +93,7 @@ public class JeeslSecurityMatrixController  <L extends JeeslLang, D extends Jees
 		
 		for(R r : roles)
 		{
-			r = fSecurity.load(r,false);
+			r = fSecurity.load(r);
 			Map<U,Boolean> m = new HashMap<>();
 			for(U u : r.getUsecases())
 			{

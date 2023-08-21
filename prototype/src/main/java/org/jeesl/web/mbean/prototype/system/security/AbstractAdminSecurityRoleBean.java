@@ -168,7 +168,7 @@ public class AbstractAdminSecurityRoleBean <L extends JeeslLang, D extends Jeesl
 		role = fSecurity.find(fbSecurity.getClassRole(),role);
 		role = efLang.persistMissingLangs(fSecurity,localeCodes,role);
 		role = efDescription.persistMissingLangs(fSecurity,localeCodes,role);		
-		role = fSecurity.load(role,false);
+		role = fSecurity.load(role);
 		reloadActions();
 		
 		views = role.getViews();

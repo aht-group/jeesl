@@ -11,7 +11,7 @@ public interface JeeslUser <R extends JeeslSecurityRole<?,?,?,?,?,?,?>>
 					extends EjbPersistable,EjbSaveable,EjbRemoveable,
 							JeeslSimpleUser
 {
-	public enum Attributes{firstName,lastName}
+	public enum Attributes{firstName,lastName,roles}
 		
 	String getSalt();
 	void setSalt(String salt);
