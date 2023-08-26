@@ -19,6 +19,7 @@ import org.jeesl.processor.JbossStandaloneConfigurator;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractJbossEapConfigurator extends AbstractMojo
 {
@@ -37,16 +38,17 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     protected Configuration config()
     {
     	String subnetConfigPrefix = test();
+    	
+    	ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("jeesl").jaxb(JaxbUtil.instance());
     	try
 		{
-    		ConfigLoader.add(ExlpCentralConfigPointer.getFile("jeesl","eapConfig"+subnetConfigPrefix).getAbsolutePath());
-    		
+			ConfigLoader.add(ccp.toFile("eapConfig"+subnetConfigPrefix));
 		}
 		catch (ExlpConfigurationException e) {getLog().info("No specific "+ExlpCentralConfigPointer.class.getSimpleName()+" for "+subnetConfigPrefix);}
     	
     	try
 		{
-    		ConfigLoader.add(ExlpCentralConfigPointer.getFile("jeesl","eapConfig").getAbsolutePath());
+    		ConfigLoader.add(ccp.toFile("eapConfig"));
 		}
 		catch (ExlpConfigurationException e) {getLog().error("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" "+e.getMessage());}
 		

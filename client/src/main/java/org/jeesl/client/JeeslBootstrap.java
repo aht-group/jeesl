@@ -9,10 +9,13 @@ import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslBootstrap
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslBootstrap.class);
+
+	public enum App {jeesl}
 	
 	public final static String xmlConfig = "jeesl/client/config/jeesl.xml";
 	
@@ -27,21 +30,14 @@ public class JeeslBootstrap
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
 		loggerInit.addAltPath("jeesl/client/config");
 		loggerInit.init();
-						
+		
 		try
 		{
-			String cfn = ExlpCentralConfigPointer.getFile("jeesl","client").getAbsolutePath();
-			ConfigLoader.add(cfn);
-			logger.info("Using additional config in: "+cfn );
+			ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(App.jeesl).jaxb(JaxbUtil.instance());
+			ConfigLoader.add(ccp.toFile("client"));
+			ConfigLoader.add(ccp.toFile("eapConfig"));
 		}
 		catch (ExlpConfigurationException e) {logger.debug("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" because "+e.getMessage());}
-		try
-		{
-			String cfn = ExlpCentralConfigPointer.getFile("jeesl","eapConfig").getAbsolutePath();
-			ConfigLoader.add(cfn);
-			logger.info("Using additional config in: "+cfn );
-		}
-		catch (ExlpConfigurationException e) {}
 		ConfigLoader.add(configFile);
 		
 		return ConfigLoader.init();

@@ -13,6 +13,7 @@ import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslCliOptionHandler
 {
@@ -32,7 +33,7 @@ public class JeeslCliOptionHandler
 
 	public JeeslCliOptionHandler(String version)
 	{
-		this.version=version;
+		this.version = version;
 		appStarted = false;
 		options = new Options();
 		
@@ -102,7 +103,8 @@ public class JeeslCliOptionHandler
 				logger.info("Using "+ExlpCentralConfigPointer.class.getSimpleName());
 				try
 				{
-					configFile = ExlpCentralConfigPointer.getFile(exlpApp,exlpCode).getAbsolutePath();
+					ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(exlpApp).jaxb(JaxbUtil.instance());
+					configFile = ccp.toFile(exlpCode).getAbsolutePath();
 				}
 				catch (ExlpConfigurationException e)
 				{
