@@ -271,7 +271,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	{
 		this.addFile();
 		xmlFile.setName(name);
-		xmlFile.setSize(bytes.length);
+		xmlFile.setSize(Integer.valueOf(bytes.length).longValue());
 		xmlFile.setData(XmlDataFactory.build(bytes));
 		meta = efMeta.build(container,name,bytes.length,new Date());
 		meta.setCategory(category);

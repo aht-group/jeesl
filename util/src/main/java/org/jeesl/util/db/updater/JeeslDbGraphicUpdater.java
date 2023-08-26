@@ -1,6 +1,7 @@
 package org.jeesl.util.db.updater;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -51,7 +52,7 @@ public class JeeslDbGraphicUpdater <G extends JeeslGraphic<GT,?,?>, GT extends J
 				if(xml.isSetGraphic())
 				{
 					if(xml.getGraphic().isSetType() && xml.getGraphic().getType().isSetCode() && xml.getGraphic().getType().getCode().equals(JeeslGraphicType.Code.svg.toString())
-						&& xml.getGraphic().isSetFile() && xml.getGraphic().getFile().isSetData())
+						&& xml.getGraphic().isSetFile() && Objects.nonNull(xml.getGraphic().getFile().getData()))
 					{
 						updateSvg(cStatus,ejb,xml);
 					}

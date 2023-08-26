@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.api.facade.module.JeeslTsFacade;
@@ -62,7 +63,7 @@ public class TsDbBackupSizeProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 		
 	public void update(SYSTEM system, Dir xDirectory)
 	{
-		if(xDirectory.isSetClassifier() && xDirectory.getClassifier().contentEquals(system.getCode()))
+		if(Objects.nonNull(xDirectory.getClassifier()) && xDirectory.getClassifier().contentEquals(system.getCode()))
 		{
 			try
 			{

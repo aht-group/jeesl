@@ -11,7 +11,7 @@ public class IoQuery
 	{
 		net.sf.exlp.xml.io.File qFile = new net.sf.exlp.xml.io.File();
 		qFile.setName("");
-		qFile.setSize(0);
+		qFile.setSize(0l);
 		qFile.setLastModifed(DateUtil.toXmlGc(new Date()));
 		
 		Dir qDir  = new Dir();

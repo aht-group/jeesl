@@ -144,7 +144,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 				try
 				{
 					eDump = efDump.build(system,xFile);
-					if(directory.isSetClassifier()) {eDump.setSystem(fDb.fByCode(fbSsi.getClassSystem(), directory.getClassifier()));}
+					if(Objects.nonNull(directory.getClassifier())) {eDump.setSystem(fDb.fByCode(fbSsi.getClassSystem(), directory.getClassifier()));}
 					eDump = fDb.persist(eDump);
 					
 				}
