@@ -35,7 +35,7 @@ public class XmlAttachmentFactory
 	
     public static Attachment create(String fileName, String mime, byte[] data)
     {
-		net.sf.exlp.xml.io.File file = new net.sf.exlp.xml.io.File();
+		org.exlp.model.xml.io.File file = new org.exlp.model.xml.io.File();
     	file.setName(fileName);
     	file.setMime(mime);
     	

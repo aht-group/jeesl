@@ -2,9 +2,10 @@ package org.jeesl.interfaces.controller.db;
 
 import java.io.File;
 
+import org.exlp.model.xml.config.Parameters;
+
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.interfaces.util.TextWriter;
-import net.sf.exlp.xml.config.Parameters;
 
 public interface UtilsDbShell
 {

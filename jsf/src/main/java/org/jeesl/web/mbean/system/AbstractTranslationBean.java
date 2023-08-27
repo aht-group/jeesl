@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.exlp.model.xml.io.Dir;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.txt.system.locale.TranslationFactory;
@@ -20,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.io.Dir;
 
 public class AbstractTranslationBean<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>>
 									implements Serializable,JeeslTranslationBean<L,D,LOC>
@@ -65,7 +65,7 @@ public class AbstractTranslationBean<L extends JeeslLang, D extends JeeslDescrip
 		{
 			Dir dir = JaxbUtil.loadJAXB(cl,fXml,Dir.class);
 			TranslationFactory tFactory = new TranslationFactory();
-			for(net.sf.exlp.xml.io.File f : dir.getFile())
+			for(org.exlp.model.xml.io.File f : dir.getFile())
 			{
 				tFactory.add(cl,dir.getName()+"/"+f.getName());
 			}

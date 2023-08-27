@@ -19,7 +19,7 @@ public class TestXmlImage extends AbstractXmlMailTest<Image>
     	if(withChilds)
     	{
     		xml.setData("myBinaryData".getBytes());
-    		xml.setFile(new net.sf.exlp.xml.io.File());
+    		xml.setFile(new org.exlp.model.xml.io.File());
     	}
     	    	
     	return xml;

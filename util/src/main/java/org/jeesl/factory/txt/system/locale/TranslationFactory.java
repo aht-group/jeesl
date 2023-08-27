@@ -16,10 +16,10 @@ import net.sf.ahtutils.xml.status.Translation;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.io.Dir;
 
 import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.FilenameUtils;
+import org.exlp.model.xml.io.Dir;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,7 +82,7 @@ public class TranslationFactory
 		{
 			for(File f : tff.find(startDirectory))
 			{
-				net.sf.exlp.xml.io.File xmlF = new net.sf.exlp.xml.io.File();
+				org.exlp.model.xml.io.File xmlF = new org.exlp.model.xml.io.File();
 				xmlF.setName(rpf.relativate(f));
 				translationRepo.getFile().add(xmlF);
 				

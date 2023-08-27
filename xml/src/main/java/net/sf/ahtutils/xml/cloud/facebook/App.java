@@ -10,7 +10,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import net.sf.exlp.xml.net.Url;
+
+import org.exlp.model.xml.net.Url;
 
 
 /**

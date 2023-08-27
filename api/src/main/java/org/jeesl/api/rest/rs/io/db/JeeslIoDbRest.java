@@ -6,12 +6,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.exlp.model.xml.io.Dir;
 import org.jeesl.api.rest.i.io.JeeslIoDbRestInterface;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 
 import net.sf.ahtutils.xml.sync.DataUpdate;
-import net.sf.exlp.xml.io.Dir;
 
 @Path("/rest/jeesl/io/db")
 public interface JeeslIoDbRest extends JeeslIoDbRestInterface

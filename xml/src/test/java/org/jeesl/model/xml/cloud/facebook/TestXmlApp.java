@@ -1,11 +1,11 @@
 package org.jeesl.model.xml.cloud.facebook;
 
+import org.exlp.model.xml.net.Url;
 import org.jeesl.JeeslXmlTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.cloud.facebook.App;
-import net.sf.exlp.xml.net.Url;
 
 public class TestXmlApp extends AbstractXmlFacebookTest<App>
 {

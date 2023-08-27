@@ -2,14 +2,15 @@ package org.jeesl.util.query.xml;
 
 import java.util.Date;
 
+import org.exlp.model.xml.io.Dir;
+
 import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.xml.io.Dir;
 
 public class IoQuery
 {	
 	public static Dir dumpDir()
 	{
-		net.sf.exlp.xml.io.File qFile = new net.sf.exlp.xml.io.File();
+		org.exlp.model.xml.io.File qFile = new org.exlp.model.xml.io.File();
 		qFile.setName("");
 		qFile.setSize(0l);
 		qFile.setLastModifed(DateUtil.toXmlGc(new Date()));

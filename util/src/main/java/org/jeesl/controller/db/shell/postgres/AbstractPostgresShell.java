@@ -3,6 +3,7 @@ package org.jeesl.controller.db.shell.postgres;
 import java.util.NoSuchElementException;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.model.xml.config.Parameter;
 import org.jdom2.Document;
 import org.jeesl.controller.db.shell.AbstractDatabaseShell;
 import org.jeesl.interfaces.controller.db.UtilsDbShell;
@@ -13,7 +14,6 @@ import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.factory.xml.config.XmlParameterFactory;
 import net.sf.exlp.shell.cmd.ShellCmdExport;
 import net.sf.exlp.shell.cmd.ShellCmdUnset;
-import net.sf.exlp.xml.config.Parameter;
 
 public class AbstractPostgresShell extends AbstractDatabaseShell
 {

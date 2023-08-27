@@ -3,6 +3,8 @@ package org.jeesl.util.query.xml;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.exlp.model.xml.io.Data;
+import org.exlp.model.xml.io.File;
 import org.jeesl.factory.xml.system.status.XmlStyleFactory;
 import org.jeesl.factory.xml.system.status.XmlStylesFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
@@ -14,8 +16,6 @@ import org.jeesl.factory.xml.system.symbol.XmlSizesFactory;
 import net.sf.ahtutils.xml.aht.Query;
 import net.sf.ahtutils.xml.symbol.Graphic;
 import net.sf.ahtutils.xml.symbol.Symbol;
-import net.sf.exlp.xml.io.Data;
-import net.sf.exlp.xml.io.File;
 
 public class SymbolQuery
 {

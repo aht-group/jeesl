@@ -19,9 +19,9 @@ public class XmlFileFactory<META extends JeeslFileMeta<?,?,?,?>>
 		this.frRepository=frRepository;
 	}
 	
-	public net.sf.exlp.xml.io.File build(META meta) throws JeeslNotFoundException
+	public org.exlp.model.xml.io.File build(META meta) throws JeeslNotFoundException
 	{
-		net.sf.exlp.xml.io.File xml = net.sf.exlp.factory.xml.io.XmlFileFactory.build();
+		org.exlp.model.xml.io.File xml = net.sf.exlp.factory.xml.io.XmlFileFactory.build();
 		xml.setName(meta.getFileName());
 		
 		if(frRepository!=null)

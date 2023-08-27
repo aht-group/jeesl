@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import org.exlp.model.xml.io.Dir;
+import org.exlp.model.xml.io.File;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.processor.module.ts.AbstractTimeSeriesProcessor;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -33,8 +35,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.DateUtil;
-import net.sf.exlp.xml.io.Dir;
-import net.sf.exlp.xml.io.File;
 
 public class TsDbBackupSizeProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
 									DUMP extends JeeslDbDump<SYSTEM,?>,

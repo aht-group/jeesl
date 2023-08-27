@@ -97,7 +97,7 @@ public class ErGraphProcessor
 		{
 			createNode(f,setSub);
 		}
-		int i=0;
+		long i=0;
 		for(String key : mapNodes.keySet())
 		{
 			Node n = mapNodes.get(key);

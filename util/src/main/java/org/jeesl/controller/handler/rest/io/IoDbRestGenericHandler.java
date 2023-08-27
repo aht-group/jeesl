@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.exlp.model.xml.io.Dir;
+import org.exlp.model.xml.io.File;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.api.rest.i.io.JeeslIoDbRestInterface;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
@@ -49,8 +51,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.sync.DataUpdate;
-import net.sf.exlp.xml.io.Dir;
-import net.sf.exlp.xml.io.File;
 
 public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescription,
 							SYSTEM extends JeeslIoSsiSystem<L,D>,

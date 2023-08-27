@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.exlp.model.xml.io.File;
 import org.jeesl.api.facade.io.JeeslIoJcrFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsProcessingException;
@@ -16,8 +17,6 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.xml.io.File;
 
 public class JcrFileHandler<L extends JeeslLang,D extends JeeslDescription, T extends JeeslStatus<L,D,T>> implements Serializable
 {

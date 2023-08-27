@@ -19,6 +19,7 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.exlp.model.xml.io.File;
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
 import org.jeesl.api.facade.io.JeeslIoFrFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -54,7 +55,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.factory.xml.io.XmlDataFactory;
 import net.sf.exlp.factory.xml.io.XmlFileFactory;
-import net.sf.exlp.xml.io.File;
 
 public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,

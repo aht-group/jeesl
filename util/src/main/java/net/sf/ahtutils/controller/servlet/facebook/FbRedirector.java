@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.ahtutils.xml.cloud.facebook.App;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.exlp.xml.net.Url;
 import net.sf.exlp.xml.xpath.NetXpath;
 
+import org.exlp.model.xml.net.Url;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

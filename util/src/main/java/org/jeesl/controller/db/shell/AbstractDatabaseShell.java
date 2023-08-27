@@ -6,6 +6,8 @@ import java.util.NoSuchElementException;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.WordUtils;
+import org.exlp.model.xml.config.Parameter;
+import org.exlp.model.xml.config.Parameters;
 import org.jdom2.Document;
 import org.jeesl.interfaces.controller.db.UtilsDbShell;
 import org.slf4j.Logger;
@@ -21,8 +23,6 @@ import net.sf.exlp.shell.os.OsBashFile;
 import net.sf.exlp.shell.spawn.Spawn;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.io.txt.ExlpTxtWriter;
-import net.sf.exlp.xml.config.Parameter;
-import net.sf.exlp.xml.config.Parameters;
 
 public class AbstractDatabaseShell
 {

@@ -19,7 +19,7 @@ public class EjbIoDumpFactory<SYSTEM extends JeeslIoSsiSystem<?,?>,
         this.cDumpFile = cDumpFile;
 	}
 	
-	public DUMP build(SYSTEM system, net.sf.exlp.xml.io.File file)
+	public DUMP build(SYSTEM system, org.exlp.model.xml.io.File file)
 	{
 		return build(system,file.getName(),file.getSize(),file.getLastModifed().toGregorianCalendar().getTime());
     }

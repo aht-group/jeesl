@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.io.Dir;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
@@ -14,6 +13,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.exlp.model.xml.io.Dir;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.txt.system.locale.TranslationFactory;
 import org.jeesl.maven.goal.JeeslMsgGoal;

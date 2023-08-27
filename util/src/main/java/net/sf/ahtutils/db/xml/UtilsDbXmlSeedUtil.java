@@ -179,7 +179,7 @@ public class UtilsDbXmlSeedUtil
 				{
 					String file = buildSvgPath(ds,key)+File.separator+s.getCode()+".svg";
 					logger.info(file);
-					net.sf.exlp.xml.io.File xFile = s.getGraphic().getFile();
+					org.exlp.model.xml.io.File xFile = s.getGraphic().getFile();
 					s.getGraphic().setFile(null);
 					
 					try
