@@ -92,7 +92,7 @@ public class JeeslCliOptionHandler
 	}
 	
 	// *** CONFIG ***
-	public Configuration initConfig(CommandLine line, String defaultConfig)
+	public org.apache.commons.configuration.Configuration initConfig(CommandLine line, String defaultConfig)
 	{
 		if(line.hasOption(oConfig.getOpt()))
 		{
@@ -126,6 +126,43 @@ public class JeeslCliOptionHandler
 		ConfigLoader.add(defaultConfig);
 		
 		return ConfigLoader.init();
+	}
+	
+	public org.apache.commons.configuration2.Configuration toConfig(CommandLine line, String defaultConfig)
+	{
+		ConfigLoader cl = ConfigLoader.instance();
+		if(line.hasOption(oConfig.getOpt()))
+		{
+			String configFile = line.getOptionValue(oConfig.getOpt());
+			
+			if(configFile.equals("exlp"))
+			{
+				logger.info("Using "+ExlpCentralConfigPointer.class.getSimpleName());
+				try
+				{
+					ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(exlpApp).jaxb(JaxbUtil.instance());
+					configFile = ccp.toFile(exlpCode).getAbsolutePath();
+				}
+				catch (ExlpConfigurationException e)
+				{
+					logger.error(e.getMessage());
+					System.exit(-1);
+				}
+			}
+			
+			MultiResourceLoader mrl = new MultiResourceLoader();
+			if(!mrl.isAvailable(configFile))
+			{
+				logger.error("Specified configuration does not exist: "+configFile);
+				System.exit(-1);
+			}
+			logger.info("Using "+Configuration.class.getSimpleName()+" "+configFile);
+			cl.addS(configFile);
+	    }
+		
+		cl.addS(defaultConfig);
+		
+		return cl.combine();
 	}
 	
 	public boolean allowAppStart()

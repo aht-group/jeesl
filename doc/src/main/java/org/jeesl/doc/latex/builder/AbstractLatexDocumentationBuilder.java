@@ -44,6 +44,20 @@ public class AbstractLatexDocumentationBuilder extends AbstractDocumentationLate
 		
 		logger.info("Using baseLatexDir: "+baseLatexDir);		
 	}
+	public AbstractLatexDocumentationBuilder(org.apache.commons.configuration2.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
+	{
+		super(config,translations,langs,cp);
+		logger.warn("Config2 NYI");
+//		this.config=config;
+		this.langs=langs;
+		
+		dstFiles = new Hashtable<String,String>();
+		
+		applyConfigCodes();
+		applyBaseLatexDir();
+		
+		logger.info("Using baseLatexDir: "+baseLatexDir);		
+	}
 	
 	protected void applyBaseLatexDir()
 	{

@@ -43,9 +43,8 @@ public class TxtStatusFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang,
 		return StringUtils.join(result, ", ");
 	}
 	
-	public static <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription, E extends Enum<E>> String label(E locale, S ejb) {return TxtStatusFactory.label(locale.toString(), ejb);}
-	public static <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription>
-			String label(String lang, S ejb)
+	public static <S extends JeeslStatus<L,?,S>, L extends JeeslLang, E extends Enum<E>> String label(E locale, S ejb) {return TxtStatusFactory.label(locale.toString(), ejb);}
+	public static <S extends JeeslStatus<L,?,S>, L extends JeeslLang> String label(String lang, S ejb)
 	{
 		return ejb.getName().get(lang).getLang();
 	}

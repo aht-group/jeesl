@@ -25,6 +25,11 @@ public class SqlConnectionFactory
 	{
 		this.config=config;
 	}
+	public SqlConnectionFactory(org.apache.commons.configuration2.Configuration config)
+	{
+//		this.config=config;
+		logger.error("NYI COnfig 2");
+	}
 	
 	public Connection getConnection(String code)
 	{

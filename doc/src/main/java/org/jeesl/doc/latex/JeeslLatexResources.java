@@ -36,6 +36,10 @@ public class JeeslLatexResources extends OfxLatexResources
 	{
 		super(config.getString(UtilsDocumentation.keyBaseLatexDir));
 	}
+	public JeeslLatexResources(org.apache.commons.configuration2.Configuration config)
+	{
+		super(config.getString(UtilsDocumentation.keyBaseLatexDir));
+	}
 	
 	public JeeslLatexResources(File fLatexBase)
 	{

@@ -58,8 +58,24 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 		
 		buildFactories();
 	}
+	@Deprecated
+	public LatexSecurityWriter(org.apache.commons.configuration2.Configuration config, Translations translations, String[] langs, ConfigurationProvider cp)
+	{
+		super(config,translations,langs,cp);
+		
+		File baseDir = new File(config.getString(UtilsDocumentation.keyBaseLatexDir));
+		ofxMlw = new OfxMultiLangLatexWriter(baseDir,langs,cp);
+		
+		buildFactories();
+	}
 	
 	public LatexSecurityWriter(Configuration config, Translations translations, String[] langs, OfxMultiLangLatexWriter ofxMlw, ConfigurationProvider cp)
+	{
+		super(config,translations,langs,cp);
+		this.ofxMlw=ofxMlw;
+		buildFactories();
+	}
+	public LatexSecurityWriter(org.apache.commons.configuration2.Configuration config, Translations translations, String[] langs, OfxMultiLangLatexWriter ofxMlw, ConfigurationProvider cp)
 	{
 		super(config,translations,langs,cp);
 		this.ofxMlw=ofxMlw;

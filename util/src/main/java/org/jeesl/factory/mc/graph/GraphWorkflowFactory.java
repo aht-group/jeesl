@@ -37,6 +37,7 @@ public class GraphWorkflowFactory
 			Node node = new Node();
 			node.setId(s.getId());
 			node.setCode(s.getId()+"");
+			node.setSize(0);
 			try {node.setLabel(StatusXpath.getLang(s.getLangs(),localeCode).getTranslation());}
 			catch (ExlpXpathNotFoundException | ExlpXpathNotUniqueException e) {e.printStackTrace();}
 			

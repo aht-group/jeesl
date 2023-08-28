@@ -3,7 +3,7 @@
 	xmlns:it="http://ahtutils.aht-group.com/issue"
 	xmlns:id="http://exlp.sf.net/identity"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://exlp.sf.net/identity" schemaLocation="../../../../../../exlp/xml/src/main/xsd/util/identity.xsd"/>
+    <xsd:import namespace="http://exlp.sf.net/identity" schemaLocation="../../../../../../exlp/xml/src/main/xsd/identity.xsd"/>
     <xsd:element name="tasks">
         <xsd:complexType>
         	<xsd:sequence>

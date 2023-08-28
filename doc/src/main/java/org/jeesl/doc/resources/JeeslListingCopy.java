@@ -78,8 +78,16 @@ public class JeeslListingCopy
 	{
 		this("listing.aht-utils",new File(config.getString(UtilsDocumentation.keyBaseLatexDir)));
 	}
+	public JeeslListingCopy(org.apache.commons.configuration2.Configuration config)
+	{
+		this("listing.aht-utils",new File(config.getString(UtilsDocumentation.keyBaseLatexDir)));
+	}
 	
 	public JeeslListingCopy(Configuration config, String prefix)
+	{
+		this(prefix,new File(config.getString(UtilsDocumentation.keyBaseLatexDir)));
+	}
+	public JeeslListingCopy(org.apache.commons.configuration2.Configuration config, String prefix)
 	{
 		this(prefix,new File(config.getString(UtilsDocumentation.keyBaseLatexDir)));
 	}

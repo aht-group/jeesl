@@ -17,6 +17,7 @@ public class TxtSecurityRoleFactory <L extends JeeslLang,
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtSecurityRoleFactory.class);
     
+	public static <L extends JeeslLang, R extends JeeslSecurityRole<L,?,?,?,?,?>, E extends Enum<E>> String labels(E locale, List<R> roles) {return TxtSecurityRoleFactory.labels(locale.toString(),roles);}
 	public static <L extends JeeslLang, R extends JeeslSecurityRole<L,?,?,?,?,?>> String labels(String localeCode, List<R> roles)
 	{
 		List<String> list = new ArrayList<>();

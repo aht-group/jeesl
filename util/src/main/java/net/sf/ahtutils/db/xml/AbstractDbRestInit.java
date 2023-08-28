@@ -19,11 +19,19 @@ public abstract class AbstractDbRestInit extends UtilsDbXmlSeedUtil
 	protected Configuration config;
 	protected UtilsIdMapper idMapper;
 	
-	public AbstractDbRestInit(Db dbSeed, DataSource datasource, Configuration config, UtilsIdMapper idMapper)
+	public AbstractDbRestInit(Db dbSeed, DataSource datasource, org.apache.commons.configuration.Configuration config, UtilsIdMapper idMapper)
 	{
 		super(dbSeed, datasource);
 		this.config=config;
 		this.idMapper=idMapper;
+	}
+	public AbstractDbRestInit(Db dbSeed, DataSource datasource, org.apache.commons.configuration2.Configuration config, UtilsIdMapper idMapper)
+	{
+		super(dbSeed, datasource);
+		
+		logger.error("NYI Configuration 2");
+//		this.config=config;
+//		this.idMapper=idMapper;
 	}
 	
 	public void initFromXml(Priority priority) throws FileNotFoundException,JeeslConstraintViolationException, UtilsConfigurationException

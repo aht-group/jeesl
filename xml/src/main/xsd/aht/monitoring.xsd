@@ -3,7 +3,7 @@
 	xmlns:mo="http://ahtutils.aht-group.com/monitoring"
 	xmlns:id="http://exlp.sf.net/identity"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://exlp.sf.net/identity" schemaLocation="../../../../../../exlp/xml/src/main/xsd/util/identity.xsd"/>
+    <xsd:import namespace="http://exlp.sf.net/identity" schemaLocation="../../../../../../exlp/xml/src/main/xsd/identity.xsd"/>
 	<xsd:element name="monitoring">
         <xsd:complexType>
             <xsd:attribute name="id" type="xsd:long"/>

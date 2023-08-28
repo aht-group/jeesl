@@ -42,6 +42,18 @@ public class AbstractDocumentationLatexWriter
 		baseLatexDir=config.getString(UtilsDocumentation.keyBaseLatexDir);
 	}
 	
+	public AbstractDocumentationLatexWriter(org.apache.commons.configuration2.Configuration config, Translations translations,String[] langs, ConfigurationProvider cp)
+	{
+		logger.warn("Config2 NXI");
+//		this.config=config;
+		this.translations=translations;
+		this.langs=langs;
+		this.cp=cp;
+		
+		baseLatexDir=config.getString(UtilsDocumentation.keyBaseLatexDir);
+	}
+	
+	
 	protected void writeTable(Table table, File f) throws OfxAuthoringException, IOException
 	{
 		LatexTableRenderer tableRenderer = new LatexTableRenderer(cp);

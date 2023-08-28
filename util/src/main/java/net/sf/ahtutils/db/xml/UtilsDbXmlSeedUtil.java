@@ -47,10 +47,24 @@ public class UtilsDbXmlSeedUtil
 	{
 		this(config,JaxbUtil.loadJAXB(config.getString(configKeySeed), Db.class));
 	}
+	public UtilsDbXmlSeedUtil(org.apache.commons.configuration2.Configuration config) throws FileNotFoundException
+	{
+		this(config,JaxbUtil.loadJAXB(config.getString(configKeySeed), Db.class));
+	}
 	
 	public UtilsDbXmlSeedUtil(Configuration config, Db dbSeed) throws FileNotFoundException
 	{
 		this.config=config;
+		this.dbSeed=dbSeed;
+		try{this.dbSeed.setPathExport(config.getString(configKeyPathExport));} catch (NoSuchElementException e){}
+		
+		try{fTmp = new File(config.getString(ConfigKey.dirTmp));}
+		catch (NoSuchElementException e){fTmp = new File(System.getProperty("java.io.tmpdir"));}
+	}
+	public UtilsDbXmlSeedUtil(org.apache.commons.configuration2.Configuration config, Db dbSeed) throws FileNotFoundException
+	{
+		logger.warn("Config2 NYI");
+//		this.config=config;
 		this.dbSeed=dbSeed;
 		try{this.dbSeed.setPathExport(config.getString(configKeyPathExport));} catch (NoSuchElementException e){}
 		
