@@ -13,7 +13,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 public interface JeeslIoCmsElementCategory <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
-					extends Serializable,EjbPersistable,JeeslStatusFixedCode,
+					extends Serializable,EjbPersistable,
 							JeeslStatus<L,D,S>,EjbWithCodeGraphic<G>
 {	
 
