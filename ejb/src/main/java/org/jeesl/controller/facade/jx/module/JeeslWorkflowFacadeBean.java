@@ -19,6 +19,7 @@ import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
@@ -51,7 +52,6 @@ import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransi
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransitionType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -62,7 +62,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.DateUtil;
 
-public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
+public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 									AX extends JeeslWorkflowContext<L,D,AX,?>,
 									WP extends JeeslWorkflowProcess<L,D,AX,WS>,
 									WPD extends JeeslWorkflowDocument<L,D,WP>,
@@ -90,7 +90,7 @@ public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 									FRC extends JeeslFileContainer<?,?>,
 									USER extends JeeslUser<SR>>
 					extends JeeslFacadeBean
-					implements JeeslWorkflowFacade<L,D,LOC,AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,FRC,USER>
+					implements JeeslWorkflowFacade<AX,WP,WPD,WS,WST,WSP,WPT,WML,WSN,WT,WTT,AC,AA,AB,AO,MT,MC,SR,RE,RA,WL,WF,WY,WD,USER>
 {	
 	private static final long serialVersionUID = 1L;
 
@@ -194,6 +194,22 @@ public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		workflow = em.find(fbWorkflow.getClassWorkflow(), workflow.getId());
 		workflow.getResponsibles().size();
 		return workflow;
+	}
+	
+	@Override public void deleteWorkflow(WL link) throws JeeslConstraintViolationException
+	{
+		WF workflow = link.getWorkflow();
+		
+		logger.info("Removing Link: "+link.toString());
+		this.rm(link);
+	
+		List<WL> links = this.allForParent(fbWorkflow.getClassLink(),workflow);
+		logger.info("Remaining Links: "+links.size());
+		if(links.isEmpty())
+		{
+			this.rm(workflow);
+		}
+		
 	}
 	
 	@Override public WT loadTransition(WT transition)
@@ -467,4 +483,6 @@ public class JeeslWorkflowFacadeBean<L extends JeeslLang, D extends JeeslDescrip
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
+
+	
 }

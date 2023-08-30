@@ -17,7 +17,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 public class IoCmsElementCategory extends IoStatus implements JeeslIoCmsElementCategory<IoLang,IoDescription,IoCmsElementCategory,IoGraphic>
 {
 	public static final long serialVersionUID=1;
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoCmsElementCategory) ? id == ((IoCmsElementCategory) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(17,37).append(id).toHashCode();}
 }

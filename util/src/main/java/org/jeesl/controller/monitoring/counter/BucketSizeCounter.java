@@ -21,7 +21,7 @@ public class BucketSizeCounter
 {
 	final static Logger logger = LoggerFactory.getLogger(BucketSizeCounter.class);
 	
-	private String category;
+	private String category; public BucketSizeCounter category(String category) {this.category = category; return this;}
 	private final Map<String,Long> map;
 	
 	private long loop;

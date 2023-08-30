@@ -3,9 +3,9 @@ package org.jeesl.api.facade.module;
 import java.util.Date;
 import java.util.List;
 
+import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
@@ -29,41 +29,37 @@ import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStagePermis
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStageType;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransition;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransitionType;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
-public interface JeeslWorkflowFacade <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
-										WX extends JeeslWorkflowContext<L,D,WX,?>,
-										WP extends JeeslWorkflowProcess<L,D,WX,WS>,
-										WPD extends JeeslWorkflowDocument<L,D,WP>,
-										WS extends JeeslWorkflowStage<L,D,WP,WST,WSP,WT,?>,
-										WST extends JeeslWorkflowStageType<L,D,WST,?>,
+public interface JeeslWorkflowFacade <WX extends JeeslWorkflowContext<?,?,WX,?>,
+										WP extends JeeslWorkflowProcess<?,?,WX,WS>,
+										WPD extends JeeslWorkflowDocument<?,?,WP>,
+										WS extends JeeslWorkflowStage<?,?,WP,WST,WSP,WT,?>,
+										WST extends JeeslWorkflowStageType<?,?,WST,?>,
 										WSP extends JeeslWorkflowStagePermission<WS,WPT,WML,SR>,
-										WPT extends JeeslWorkflowPermissionType<L,D,WPT,?>,
-										WML extends JeeslWorkflowModificationLevel<L,D,WML,?>,
+										WPT extends JeeslWorkflowPermissionType<?,?,WPT,?>,
+										WML extends JeeslWorkflowModificationLevel<?,?,WML,?>,
 										WSN extends JeeslWorkflowStageNotification<WS,MT,MC,SR,RE>,
-										WT extends JeeslWorkflowTransition<L,D,WPD,WS,WTT,SR,?>,
-										WTT extends JeeslWorkflowTransitionType<L,D,WTT,?>,
+										WT extends JeeslWorkflowTransition<?,?,WPD,WS,WTT,SR,?>,
+										WTT extends JeeslWorkflowTransitionType<?,?,WTT,?>,
 										AC extends JeeslWorkflowActionNotification<WT,MT,MC,SR,RE>,
 										WA extends JeeslWorkflowAction<WT,AB,AO,RE,RA>,
-										AB extends JeeslWorkflowBot<AB,L,D,?>,
+										AB extends JeeslWorkflowBot<AB,?,?,?>,
 										AO extends EjbWithId,
-										MT extends JeeslIoTemplate<L,D,?,?,?,?>,
-										MC extends JeeslTemplateChannel<L,D,MC,?>,
-										SR extends JeeslSecurityRole<L,D,?,?,?,?>,
-										RE extends JeeslRevisionEntity<L,D,?,?,RA,?>,
-										RA extends JeeslRevisionAttribute<L,D,RE,?,?>,
+										MT extends JeeslIoTemplate<?,?,?,?,?,?>,
+										MC extends JeeslTemplateChannel<?,?,MC,?>,
+										SR extends JeeslSecurityRole<?,?,?,?,?,?>,
+										RE extends JeeslRevisionEntity<?,?,?,?,RA,?>,
+										RA extends JeeslRevisionAttribute<?,?,RE,?,?>,
 										WL extends JeeslWorkflowLink<WF,RE>,
 										WF extends JeeslWorkflow<WP,WS,WY,USER>,
-										WY extends JeeslWorkflowActivity<WT,WF,WD,FRC,USER>,
+										WY extends JeeslWorkflowActivity<WT,WF,WD,?,USER>,
 										WD extends JeeslWorkflowDelegate<WY,USER>,
-										FRC extends JeeslFileContainer<?,?>,
+										
 										USER extends JeeslUser<SR>>
 			extends JeeslFacade
 {	
@@ -82,6 +78,8 @@ public interface JeeslWorkflowFacade <L extends JeeslLang, D extends JeeslDescri
 	WT loadTransition(WT transition);
 	
 	WF loadWorkflow(WF workflow);
+	void deleteWorkflow(WL link) throws JeeslConstraintViolationException;
+	
 	List<WF> fWorkflows(WP process, List<WS> stages);
 	List<WF> fWorkflows(List<WP> processes, List<WST> types);
 	

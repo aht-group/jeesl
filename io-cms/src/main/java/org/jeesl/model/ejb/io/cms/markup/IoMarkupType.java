@@ -27,7 +27,7 @@ public class IoMarkupType extends IoStatus implements JeeslIoMarkupType<IoLang,I
 		for(JeeslIoMarkupType.Code c : JeeslIoMarkupType.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object) {return (object instanceof IoMarkupType) ? id == ((IoMarkupType) object).getId() : (object == this);}
 	@Override public int hashCode(){return new HashCodeBuilder(17,37).append(id).toHashCode();}
 }
