@@ -12,7 +12,11 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.primitive.position.EjbWithPositionVisibleParent;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslAttributes
+@DownloadJeeslDescription
 public interface JeeslIoDmsSection<L extends JeeslLang, D extends JeeslDescription,
 					S extends JeeslIoDmsSection<L,D,S>>
 					extends Serializable,EjbWithId,

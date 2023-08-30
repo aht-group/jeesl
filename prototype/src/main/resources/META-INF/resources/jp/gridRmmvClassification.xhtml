@@ -45,6 +45,9 @@
 				</f:facet>
 				<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 				<j:inputGrid>
+					<jtp:label entity="RmmvClassification" code="id" />
+					<h:outputText value="#{cc.attrs.ctrl.classification.id}"/>
+					
 					<jtp:label entity="RmmvClassification" code="code" rendered="#{cc.attrs.withCode}"/>
 					<jtp:inputText value="#{cc.attrs.ctrl.classification.code}" rendered="#{cc.attrs.withCode}"/>
 				
