@@ -55,14 +55,14 @@ public class IoCmsSection implements JeeslIoCmsSection<IoLang,IoCmsSection>
 	@Override public boolean isVisible() {return visible;}
 	@Override public void setVisible(boolean visible) {this.visible = visible;}
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@MapKey(name="lkey")
 	@JoinTable(name="IoCmsSectionJtLang",joinColumns={@JoinColumn(name="section_id")},inverseJoinColumns={@JoinColumn(name="lang_id")})
 	private Map<String,IoLang> name;
 	@Override public Map<String,IoLang> getName() {return name;}
 	@Override public void setName(Map<String,IoLang> name) {this.name = name;}
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="section")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="section")
 	@OrderBy("position ASC")
 	private List<IoCmsSection> sections;
 	@Override public List<IoCmsSection> getSections() {if(Objects.isNull(sections)) {sections = new ArrayList<>();} return sections;}
