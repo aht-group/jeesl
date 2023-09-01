@@ -117,7 +117,6 @@ public abstract class AbstractIdentity < R extends JeeslSecurityRole<?,?,?,V,U,A
 	
 	public Map<String,Boolean> getMapViews() {return mapViews;}
 	
-	
 	@Override public String getRoleCodeWithAccessToAllPages() {return null;}
 	
 	@Override public String toString()

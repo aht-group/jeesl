@@ -1,12 +1,5 @@
-create table IoCms (id  bigserial not null, position int4 not null, toc boolean not null, category_id int8, root_id int8, primary key (id));
-create table IoCmsJtLang (cms_id int8 not null, lang_id int8 not null, primary key (cms_id, lang_id));
-create table IoCmsJtLanguage (cms_id int8 not null, locale_id int8 not null);
-create table IoCmsSection (id  bigserial not null, code varchar(255), position int4 not null, visible boolean not null, section_id int8, primary key (id));
-create table IoCmsSectionJtLang (section_id int8 not null, lang_id int8 not null, primary key (section_id, lang_id));
-create table IoCmsVisibility (id  bigserial not null, visible boolean not null, primary key (id));
-create table IoMarkup (id  bigserial not null, content text, lkey varchar(255), type_id int8, primary key (id));
-alter table IoCmsJtLang add constraint UK_s3ctsjjly4337qujwkofspaq2 unique (lang_id);
 alter table IoCmsSectionJtLang add constraint UK_agat69w89msuh3ys2asn78p53 unique (lang_id);
+alter table envers.IoMarkup_ add constraint FKi4yypo9a2smr07lclbw451146 foreign key (REV) references envers._Audits;
 alter table IoCms add constraint FKlo0h4kh1jwlp3ag75l21sfrb6 foreign key (category_id) references IoStatus;
 alter table IoCms add constraint FKr6090kbm1u6u7679qtm5dw6li foreign key (root_id) references IoCmsSection;
 alter table IoCmsJtLang add constraint FKe9hpqlnvp8am31mte52age8ek foreign key (lang_id) references IoLang;
