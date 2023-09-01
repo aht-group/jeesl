@@ -11,9 +11,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 
+@Audited
 @Entity
 @Table(name="IoMarkup")
 @EjbErNode(name="Markup",category="ioCms",subset="ioCms")
@@ -37,6 +40,7 @@ public class IoMarkup implements JeeslIoMarkup<IoMarkupType>
 	@Override public String getContent() {return content;}
 	@Override public void setContent(String content) {this.content = content;}
 
+	@Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
 	@NotNull @ManyToOne
 	private IoMarkupType type;
 	@Override public IoMarkupType getType() {return type;}
