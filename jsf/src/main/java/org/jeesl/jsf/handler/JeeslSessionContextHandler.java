@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-
 import org.jeesl.exception.jsf.JeeslSessionInitialisationException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
@@ -41,24 +38,24 @@ public class JeeslSessionContextHandler <CTX extends JeeslSecurityContext<?,?>>
 	public CTX determineContext()
 	{
 		if(debugOnInfo) {logger.info(StringUtil.stars());}
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		if(Objects.nonNull(facesContext)) {logger.info(FacesContext.class.getSimpleName()+": "+facesContext.toString());}
+		javax.faces.context.FacesContext facesContext = javax.faces.context.FacesContext.getCurrentInstance();
+		if(Objects.nonNull(facesContext)) {logger.info(javax.faces.context.FacesContext.class.getSimpleName()+": "+facesContext.toString());}
 		else
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.append(JeeslSessionContextHandler.class.getSimpleName()).append(" is throwing a ");
 			sb.append(JeeslSessionInitialisationException.class.getSimpleName()).append(", then the SeesionTenantBean is newly created");
-			logger.warn(FacesContext.class.getSimpleName()+" is null");
+			logger.warn(javax.faces.context.FacesContext.class.getSimpleName()+" is null");
 			logger.warn(sb.toString());
 			throw new JeeslSessionInitialisationException(sb.toString());
 		}
 		
-		ExternalContext externalContext = null;
+		javax.faces.context.ExternalContext externalContext = null;
 		if(Objects.nonNull(facesContext))
 		{
 			externalContext = facesContext.getExternalContext();
-			if(Objects.isNull(externalContext)) {logger.warn(ExternalContext.class.getSimpleName()+" is null");}
-			else if(debugOnInfo) {logger.info(ExternalContext.class.getSimpleName()+": "+externalContext.toString());}
+			if(Objects.isNull(externalContext)) {logger.warn(javax.faces.context.ExternalContext.class.getSimpleName()+" is null");}
+			else if(debugOnInfo) {logger.info(javax.faces.context.ExternalContext.class.getSimpleName()+": "+externalContext.toString());}
 		}
 		
 		CTX securityContext = null;
@@ -75,7 +72,7 @@ public class JeeslSessionContextHandler <CTX extends JeeslSecurityContext<?,?>>
 				logger.info("RequestServletPath: "+externalContext.getRequestServletPath());
 			}	
 			
-			String serverName = FacesContext.getCurrentInstance().getExternalContext().getRequestServerName();
+			String serverName = javax.faces.context.FacesContext.getCurrentInstance().getExternalContext().getRequestServerName();
 			
 			List<CTX> list = facade.allOrderedPosition(cCtx);
 			for(CTX c : list)
@@ -97,13 +94,15 @@ public class JeeslSessionContextHandler <CTX extends JeeslSecurityContext<?,?>>
 		return securityContext;
 	}
 	
+	
+	
 	public static <V extends JeeslSecurityView<?,?,?,?,?,?>> void invalidateAndRedirect(V view)
 	{
 		logger.trace("Invalidating Session and redirecting to "+view.getCode()+" "+view.getUrlMapping());
 		try
 		{
-			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-			FacesContext.getCurrentInstance().getExternalContext().redirect(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+view.getUrlMapping());
+			javax.faces.context.FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			javax.faces.context.FacesContext.getCurrentInstance().getExternalContext().redirect(javax.faces.context.FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath()+view.getUrlMapping());
 		}
 		catch (IOException e)
 		{
