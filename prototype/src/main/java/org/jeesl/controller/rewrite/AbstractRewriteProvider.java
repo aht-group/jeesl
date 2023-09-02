@@ -19,14 +19,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?,?,?,?>>
-		extends HttpConfigurationProvider implements Serializable
+												extends HttpConfigurationProvider implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractRewriteProvider.class);
 
 	protected boolean debugOnInfo; public void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo = debugOnInfo;}
-
-	private JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity;
 
 	protected String forwardUnauthorized;
 	protected String forwardDeactivated;
@@ -40,17 +38,19 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 		forwardDenied = "/jsf/settings/system/security/page/denied.xhtml";
 	}
 
-	public void postConstruct(JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity)
+	protected ConfigurationBuilder build(JeeslSecurityBean<?,V,?,?,?,?,?,?> bSecurity, Condition pageActive, Condition notLoggedIn, Condition pageDenied)
 	{
-		this.bSecurity=bSecurity;
+		logger.info("1.build ConfigurationBuilder");
 		
-	}
-
-	protected ConfigurationBuilder build(Condition pageActive, Condition notLoggedIn, Condition pageDenied)
-	{
-		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
+		
+//		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
+		logger.info("2.ptt");
+		
 		ConfigurationBuilder cb = ConfigurationBuilder.begin();
+		logger.info("3.cb");
+		
 		cb = cb.addRule(Join.path("/").to("/index.jsf"));
+		logger.info("4.join /");
 		
 		// Activate all of these
 //		cb = (ConfigurationBuilder)cb.addRule().when(Direction.isInbound().and(Path.matches("/javax.faces.resource/showcase.css.jsf")));
@@ -61,7 +61,9 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 //		cb = (ConfigurationBuilder)cb.addRule().when(Direction.isInbound().and(notLoggedIn)).perform(Forward.to(forwardLogin));
 //		cb = (ConfigurationBuilder)cb.addRule().when(Direction.isInbound().and(pageDenied)).perform(Forward.to(forwardDenied));
 
+		logger.info("5.Security.getViews()");
 		List<V> views = bSecurity.getViews();
+		logger.info("6. list"+views.size());
 		for(V view : views)
 		{
 			logger.debug("Building Rule for "+view.toString());
@@ -84,7 +86,8 @@ public abstract class AbstractRewriteProvider <V extends JeeslSecurityView<?,?,?
 				logger.warn("No Rule will be created for "+view.toString());
 			}
 		}
-		logger.info("Rules created for "+views.size()+" Views in "+ptt.toTotalTime());
+//		logger.info("Rules created for "+views.size()+" Views in "+ptt.toTotalTime());
+		logger.info("Rules created for "+views.size()+" Views");
 		return cb;
 	}
 

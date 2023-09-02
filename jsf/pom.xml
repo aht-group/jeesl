@@ -50,11 +50,11 @@
 			<artifactId>jboss-jsf-api_2.3_spec</artifactId>
 			<scope>provided</scope>
 		</dependency>
-<!--		<dependency>
+		<dependency>
 			<groupId>jakarta.faces</groupId>
 			<artifactId>jakarta.faces-api</artifactId>
 			<scope>provided</scope>
-		</dependency> -->
+		</dependency>
 		
 		<!-- Infinispan -->
 		<dependency>

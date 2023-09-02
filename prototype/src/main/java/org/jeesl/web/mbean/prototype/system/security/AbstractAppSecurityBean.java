@@ -172,8 +172,8 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		if(ObjectUtils.anyNull(viewExpired,viewUnauthorized))
 		{
 			logger.error("The following views need to be defined!");
-			logger.error(fbSecurity.getClassView().getSimpleName()+" "+JeeslSecurityView.Code.sSecPageErrorExpired+" "+viewExpired);
-			logger.error(fbSecurity.getClassView().getSimpleName()+" "+JeeslSecurityView.Code.sSecPageLoginRequired+" "+viewUnauthorized);
+			logger.error("\t"+fbSecurity.getClassView().getSimpleName()+" "+JeeslSecurityView.Code.sSecPageErrorExpired+" "+viewExpired);
+			logger.error("\t"+fbSecurity.getClassView().getSimpleName()+" "+JeeslSecurityView.Code.sSecPageLoginRequired+" "+viewUnauthorized);
 		}
 	}
 	
