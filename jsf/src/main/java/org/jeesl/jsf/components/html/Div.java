@@ -9,7 +9,7 @@ import javax.faces.component.UIPanel;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
-import org.jeesl.jsf.util.ComponentAttribute;
+import org.jeesl.jsf.jx.util.ComponentAttribute;
 
 @FacesComponent("org.jeesl.jsf.components.html.Div")
 public class Div extends UIPanel

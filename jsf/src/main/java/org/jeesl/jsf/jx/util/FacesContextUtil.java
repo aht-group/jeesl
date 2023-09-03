@@ -1,4 +1,4 @@
-package net.sf.ahtutils.jsf.util;
+package org.jeesl.jsf.jx.util;
 
 import javax.el.ELContext;
 import javax.el.ExpressionFactory;

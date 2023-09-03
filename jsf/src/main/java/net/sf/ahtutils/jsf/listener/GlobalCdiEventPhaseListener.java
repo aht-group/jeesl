@@ -10,9 +10,9 @@ import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.servlet.http.HttpSession;
 
-import net.sf.ahtutils.jsf.util.FacesContextUtil;
 import net.sf.ahtutils.model.event.GlobalCdiEvent;
 
+import org.jeesl.jsf.jx.util.FacesContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

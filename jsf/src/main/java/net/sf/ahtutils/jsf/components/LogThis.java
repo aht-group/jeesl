@@ -11,7 +11,7 @@ import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.jsf.util.ComponentAttribute;
+import org.jeesl.jsf.jx.util.ComponentAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

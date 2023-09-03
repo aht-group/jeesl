@@ -1,8 +1,8 @@
-package org.jeesl.jsf.util;
+package org.jeesl.jsf.jk.util;
 
-import javax.el.ValueExpression;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
+import jakarta.el.ValueExpression;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.FacesContext;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -20,11 +20,14 @@ public class ComponentAttribute
 		return new Boolean(value);
 	}
 	
-	public static <E extends Enum<E>> boolean getBoolean(E attribute, boolean defaultValue, FacesContext context, UIComponent component) {return getBoolean(attribute.toString(), defaultValue, context, component);}
+	public static <E extends Enum<E>> boolean getBoolean(E attribute, boolean defaultValue, FacesContext context, UIComponent component)
+	{
+		return getBoolean(attribute.toString(), defaultValue, context, component);
+	}
 	private static boolean getBoolean(String attribute, boolean defaultValue, FacesContext context, UIComponent component)
 	{
 		String value = get(attribute,null,context,component);
-		if(value==null){value=""+defaultValue;}
+		if(value==null) {value=""+defaultValue;}
 		return new Boolean(value);
 	}
 	

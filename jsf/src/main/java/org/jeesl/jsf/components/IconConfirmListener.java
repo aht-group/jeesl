@@ -11,12 +11,11 @@ import javax.faces.event.ListenersFor;
 import javax.faces.event.PostAddToViewEvent;
 import javax.faces.event.PostRestoreStateEvent;
 
+import org.jeesl.jsf.jx.util.FacesContextUtil;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.confirmdialog.ConfirmDialog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.jsf.util.FacesContextUtil;
 
 @FacesComponent(value="org.jeesl.jsf.components.IconConfirmListener")
 @ListenersFor({ @ListenerFor(systemEventClass = PostAddToViewEvent.class, sourceClass = IconConfirmListener.class),

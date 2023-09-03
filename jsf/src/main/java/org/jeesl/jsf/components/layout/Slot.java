@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.jsf.util.ComponentAttribute;
+import org.jeesl.jsf.jx.util.ComponentAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

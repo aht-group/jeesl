@@ -56,6 +56,32 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- EL -->
+		<dependency>
+  			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>jakarta.el</groupId>
+		    <artifactId>jakarta.el-api</artifactId>
+		    <version>4.0.0</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>jakarta.servlet</groupId>
+		    <artifactId>jakarta.servlet-api</artifactId>
+		    <version>4.0.4</version>
+		    <scope>provided</scope>
+		</dependency>
+
+		
 		<!-- Infinispan -->
 		<dependency>
 		  <groupId>org.infinispan</groupId>
@@ -193,17 +219,6 @@
 			</exclusions>
 		</dependency> -->
 		
-		
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-  			<groupId>javax.el</groupId>
-			<artifactId>javax.el-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>

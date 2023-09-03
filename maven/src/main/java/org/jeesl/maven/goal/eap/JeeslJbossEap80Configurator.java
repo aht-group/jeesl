@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.BasicConfigurator;
@@ -49,8 +50,30 @@ public class JeeslJbossEap80Configurator extends AbstractJbossEapConfigurator
     	    super.dbFiles(keys,config,jbossModule);
 	    	super.dbDrivers(keys,config,jbossConfig);
 	    	super.dbDs(keys,config,jbossConfig);
+	    	this.caches(keys,config,jbossConfig);
     	}
     	catch (UnknownHostException e) {throw new MojoExecutionException(e.getMessage());}
     	catch (IOException e) {throw new MojoExecutionException(e.getMessage());}
+    }
+    
+    protected void caches(String[] keys, Configuration config, JbossStandaloneConfigurator jbossConfig) throws IOException
+    {
+    	super.getLog().info("Caches");
+    	for(String key : keys)
+    	{
+    		String configKey = "cache."+key+".list";
+    		super.getLog().info("Trying");
+    		String caches = config.getString(configKey,null);
+        	if(Objects.nonNull(caches))
+        	{
+        		super.getLog().info("Found: "+key+": "+caches);
+        		String[] cacheList = caches.split(",");
+        		for(String cache : cacheList)
+        		{
+        			super.getLog().info("Cache "+key+" "+cache);
+        			jbossConfig.cache(key);
+        		}
+        	}
+    	}
     }
 }
