@@ -66,7 +66,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 										TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>,
 										RC extends JeeslRevisionCategory<L,D,RC,?>,
 										RE extends JeeslRevisionEntity<L,D,RC,?,RA,?>,
-										RA extends JeeslRevisionAttribute<L,D,RE,?,CDT>
+										RA extends JeeslRevisionAttribute<L,D,RE,?,?>
 										>
 	extends AbstractIoReportBean<L,D,LOC,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION,RC,RE,RA>
 	implements Serializable

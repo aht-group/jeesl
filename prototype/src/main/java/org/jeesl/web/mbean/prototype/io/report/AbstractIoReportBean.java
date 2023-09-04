@@ -54,7 +54,7 @@ public class AbstractIoReportBean <L extends JeeslLang, D extends JeeslDescripti
 							TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>,
 							RCAT extends JeeslRevisionCategory<L,D,RCAT,?>,
 							RE extends JeeslRevisionEntity<L,D,RCAT,?,RA,?>,
-							RA extends JeeslRevisionAttribute<L,D,RE,?,CDT>
+							RA extends JeeslRevisionAttribute<L,D,RE,?,?>
 							>
 					extends AbstractAdminBean<L,D,LOC>
 					implements Serializable

@@ -97,7 +97,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 						TRANSFORMATION extends JeeslStatus<L,D,TRANSFORMATION>,
 						RCAT extends JeeslRevisionCategory<L,D,RCAT,?>,	
 						RE extends JeeslRevisionEntity<L,D,RCAT,?,RA,?>,
-						RA extends JeeslRevisionAttribute<L,D,RE,?,CDT>
+						RA extends JeeslRevisionAttribute<L,D,RE,?,?>
 						>
 	extends AbstractIoReportBean<L,D,LOC,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION,RCAT,RE,RA>
 	implements Serializable,SbToggleBean
