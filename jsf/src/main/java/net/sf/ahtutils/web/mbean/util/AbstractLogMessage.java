@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
@@ -130,9 +131,13 @@ public class AbstractLogMessage <USER extends JeeslUser<?>>
 	 {
         StringBuffer sb = new StringBuffer();
         sb.append("Selecting ");
-        if(t!=null) {sb.append(t.getClass().getSimpleName());} else {sb.append("NULL");}
-        sb.append(": ");
-        if(t!=null) {sb.append(t.toString());} else {sb.append("NULL");}
+        if(Objects.isNull(t)) {sb.append("NULL:NULL");}
+        else
+        {
+        	sb.append(t.getClass().getSimpleName());
+        	sb.append(": ");
+        	sb.append(t.toString());
+        }
         return sb.toString();
 	 }
 	 public static <A extends EjbWithId,B extends EjbWithId> String selectEntity(A a, B b)

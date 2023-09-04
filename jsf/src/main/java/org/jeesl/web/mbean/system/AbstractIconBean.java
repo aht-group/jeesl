@@ -6,17 +6,17 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.exlp.model.xml.io.Dir;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslIcon;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithImage;
-import org.jeesl.model.xml.jeesl.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.jsf.filter.UtilsStatusFilter;
-import net.sf.ahtutils.xml.status.Status;
+import net.sf.exlp.interfaces.util.xml.JaxbInterface;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractIconBean implements Serializable
@@ -266,18 +266,19 @@ public class AbstractIconBean implements Serializable
 		mapStatic.put("reportDoc", "ui/jeesl/system/io/file/doc.png");	svg.put("reportDoc","ui/io/fr/type/doc.svg");
 	}
 	
-	protected void jeeslIconLibrary()
+	protected void jeeslIconLibrary() {this.jeeslIconLibrary(JaxbUtil.instance());}
+	protected void jeeslIconLibrary(JaxbInterface jaxb)
 	{
 		try
 		{
-			Container xml = JaxbUtil.loadJAXB(JeeslIcon.jeeslLibIcons,Container.class);
-			for(Status s : xml.getStatus())
+			Dir xml = jaxb.load(Dir.class,JeeslIcon.jeeslLibIcons);
+			for(org.exlp.model.xml.io.File s : xml.getFile())
 			{
 				logger.trace("Jeesl Icon Library: "+s.getCode()+" "+s.getSymbol());
 				if(svg.containsKey(s.getCode())) {logger.warn("Icon already defined !!!");}
 				else
 				{
-					svg.put(s.getCode(),s.getSymbol());
+					svg.put(s.getCode(),s.getName());
 					library.put(s.getCode(),"jeeslGfx");
 				}
 			}

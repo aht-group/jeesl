@@ -67,7 +67,7 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		fbRevision.ejbEntity().applyJscn(fRevision,th.allEntities());
 	}
 
-	protected void addLocales(List<LOC> locs) {for(LOC loc : locs) {addLocale(loc);}}
+	protected void addLocales(List<LOC> locs) {for(LOC loc : locs) {this.addLocale(loc);}}
 
 	protected void addLocale(LOC loc)
 	{

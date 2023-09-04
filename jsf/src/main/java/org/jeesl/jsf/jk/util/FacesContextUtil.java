@@ -1,6 +1,6 @@
 package org.jeesl.jsf.jk.util;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.slf4j.Logger;

@@ -3,6 +3,7 @@ package org.jeesl.controller.web.system.security;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
@@ -64,6 +65,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	{
 		contexts.clear();
 		contexts.addAll(fSecurity.allOrderedPosition(fbSecurity.getClassContext()));
+		if(Objects.nonNull(jogger)) {logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassContext(),contexts));}
 	}
 
 	public void addContext()
