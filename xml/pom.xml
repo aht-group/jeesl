@@ -68,6 +68,35 @@
    	   			</exclusion>
    	   		</exclusions>
 		</dependency>
+		
+		<!-- JAXB -->
+      	<dependency>
+    	   	<groupId>javax.xml.bind</groupId>
+    	   	<artifactId>jaxb-api</artifactId>
+    	   	<scope>provided</scope>
+   	   	</dependency>
+   	   	<dependency>
+   	   		<groupId>com.sun.xml.bind</groupId>
+   	   		<artifactId>jaxb-impl</artifactId>
+   	   		<scope>provided</scope>
+   	   	</dependency>
+   	   	<dependency>
+   	   		<groupId>com.sun.xml.bind</groupId>
+   	   		<artifactId>jaxb-xjc</artifactId>
+   	   		<scope>provided</scope>
+   	   	</dependency>
+   	   	<dependency>
+   	   		<groupId>commons-jxpath</groupId>
+   	   		<artifactId>commons-jxpath</artifactId>
+   	   		<scope>provided</scope>
+   	   	</dependency>
+		<!-- Required for Java 11 -->
+    	<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>4.0.0</version>
+			<scope>provided</scope>
+		</dependency> 
    	   	
    	   	<dependency>
    	   		<groupId>commons-lang</groupId>
@@ -103,28 +132,6 @@
    	   		<groupId>org.slf4j</groupId>
    	   		<artifactId>slf4j-log4j12</artifactId>
    	   		<scope>test</scope>
-   	   	</dependency>
-		
-		<!-- JAXB -->
-      	<dependency>
-    	   	<groupId>javax.xml.bind</groupId>
-    	   	<artifactId>jaxb-api</artifactId>
-    	   	<scope>provided</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-xjc</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>commons-jxpath</groupId>
-   	   		<artifactId>commons-jxpath</artifactId>
-   	   		<scope>provided</scope>
    	   	</dependency>
     	   	
 		<!-- Test -->
@@ -223,7 +230,7 @@
 	<profiles>
 		<profile>
 			<id>compile8</id>
-			<activation><jdk>11</jdk></activation>
+			<activation><jdk>1.8</jdk></activation>
 			<build>
 				<plugins>
 					<plugin>

@@ -72,12 +72,4 @@ public class Remarks
         return this.remark;
     }
 
-    public boolean isSetRemark() {
-        return ((this.remark!= null)&&(!this.remark.isEmpty()));
-    }
-
-    public void unsetRemark() {
-        this.remark = null;
-    }
-
 }

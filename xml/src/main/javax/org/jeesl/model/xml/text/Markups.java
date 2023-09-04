@@ -72,12 +72,4 @@ public class Markups
         return this.markup;
     }
 
-    public boolean isSetMarkup() {
-        return ((this.markup!= null)&&(!this.markup.isEmpty()));
-    }
-
-    public void unsetMarkup() {
-        this.markup = null;
-    }
-
 }

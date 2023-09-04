@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.jeesl.Container;
@@ -128,7 +129,7 @@ public class OfxQaNfrSectionFactory extends AbstractUtilsOfxDocumentationFactory
 		for(Question q : section.getQuestion())
 		{
 			
-			if(q.isSetRemark() && q.getRemark().isSetValue() && q.getRemark().getValue().trim().length()>0)
+			if(q.isSetRemark() && Objects.nonNull(q.getRemark()) && q.getRemark().getValue().trim().length()>0)
 			{
 				JaxbUtil.trace(q);
 				StringBuffer sb = new StringBuffer();

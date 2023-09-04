@@ -54,11 +54,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Reference }
+     * Create an instance of {@link Remarks }
      * 
      */
-    public Reference createReference() {
-        return new Reference();
+    public Remarks createRemarks() {
+        return new Remarks();
     }
 
     /**
@@ -67,14 +67,6 @@ public class ObjectFactory {
      */
     public Remark createRemark() {
         return new Remark();
-    }
-
-    /**
-     * Create an instance of {@link Remarks }
-     * 
-     */
-    public Remarks createRemarks() {
-        return new Remarks();
     }
 
     /**
@@ -147,6 +139,14 @@ public class ObjectFactory {
      */
     public Team createTeam() {
         return new Team();
+    }
+
+    /**
+     * Create an instance of {@link Reference }
+     * 
+     */
+    public Reference createReference() {
+        return new Reference();
     }
 
 }
