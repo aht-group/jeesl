@@ -45,7 +45,7 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 	final static Logger logger = LoggerFactory.getLogger(AbstractTreeClassificationController.class);
 	
 	private JeeslFacade facade;
-	private JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
+	private JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic;
 	
 	protected final SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg;
 	protected final Class<C> cClassification;
@@ -76,7 +76,7 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 	}
 	
 	public void postConstructTreeClassification(JeeslFacade facade,
-									JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+									JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{

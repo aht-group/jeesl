@@ -23,7 +23,7 @@ public class JeeslDbGraphicUpdater <G extends JeeslGraphic<GT,?,?>, GT extends J
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbGraphicUpdater.class);
 
-	private JeeslIoGraphicFacade<?,?,?,G,GT,?,?> fGraphic;
+	private JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic;
 	private static boolean debugOnInfo = true;
 	
 	private SvgFactoryBuilder<?,?,G,GT,?,?> fbGraphic;
@@ -35,7 +35,7 @@ public class JeeslDbGraphicUpdater <G extends JeeslGraphic<GT,?,?>, GT extends J
 		efGraphic = fbGraphic.efGraphic();
 	}
 	
-	public void setFacade(JeeslIoGraphicFacade<?,?,?,G,GT,?,?> fGraphic){this.fGraphic=fGraphic;}
+	public void setFacade(JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic){this.fGraphic=fGraphic;}
 	
 	
 	public <W extends EjbWithCodeGraphic<G>> void update(Class<W> cStatus, List<Status> list)

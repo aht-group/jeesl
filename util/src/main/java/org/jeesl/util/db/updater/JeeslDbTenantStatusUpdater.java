@@ -31,7 +31,7 @@ public class JeeslDbTenantStatusUpdater <L extends JeeslLang, D extends JeeslDes
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbTenantStatusUpdater.class);
 	
-	private final JeeslIoGraphicFacade<?,?,?,G,GT,?,?> fGraphic;
+	private final JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic;
 	private final IoLocaleFactoryBuilder<L,D,?> fbLocale;
 	private final JeeslLocaleManager<LOC> lp;
 	private JeeslDbGraphicUpdater<G,GT> uGraphic;
@@ -40,7 +40,7 @@ public class JeeslDbTenantStatusUpdater <L extends JeeslLang, D extends JeeslDes
 	private RREF rref;
 	
 	public JeeslDbTenantStatusUpdater(IoLocaleFactoryBuilder<L,D,LOC> fbLocale, SvgFactoryBuilder<L,D,G,GT,?,?> fbSvg,
-										JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic, JeeslLocaleManager<LOC> lp)
+										JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic, JeeslLocaleManager<LOC> lp)
 	{
 		this.fbLocale=fbLocale;
 		this.fGraphic=fGraphic;

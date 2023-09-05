@@ -106,7 +106,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 	protected abstract void test();
 
 	protected void postConstructOptionTable(JeeslTranslationBean<L,D,LOC> bTranslation,
-											JeeslIoGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic,
+											JeeslIoGraphicFacade<?,G,GT,GC,GS> fGraphic,
 											JeeslFacesMessageBean bMessage)
 	{
 		super.initJeeslAdmin(bTranslation, bMessage);

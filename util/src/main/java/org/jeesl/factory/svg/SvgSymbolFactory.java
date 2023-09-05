@@ -12,8 +12,6 @@ import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
@@ -23,9 +21,8 @@ import net.sf.ahtutils.xml.status.Style;
 import net.sf.ahtutils.xml.symbol.Size;
 import net.sf.ahtutils.xml.symbol.Symbol;
 
-public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+public class SvgSymbolFactory<G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
+								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgSymbolFactory.class);
 		
@@ -36,12 +33,11 @@ public class SvgSymbolFactory<L extends JeeslLang, D extends JeeslDescription,
 		impl = SVGDOMImplementation.getDOMImplementation();
 	}
 	
-    public static <L extends JeeslLang, D extends JeeslDescription,
-				    G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-					GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
-    	SvgSymbolFactory<L,D,G,GT,GC,GS> factory()
+    public static <G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
+					GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
+    	SvgSymbolFactory<G,GT,GC,GS> factory()
 	{
-	    return new SvgSymbolFactory<L,D,G,GT,GC,GS>();
+	    return new SvgSymbolFactory<G,GT,GC,GS>();
 	}
     
 	public static SVGGraphics2D build()

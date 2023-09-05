@@ -48,7 +48,7 @@ public class JeeslRmmvClassificationController <L extends JeeslLang, D extends J
 	}
 	
 	public void postConstructTreeElement(JeeslRmmvFacade<L,D,R,E,EC,?,?,?,?,?> fRmmv,
-									JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+									JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{

@@ -20,6 +20,8 @@ public class SvgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 	extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(SvgFactoryBuilder.class);
 	
 	private final Class<G> cG; public Class<G> getClassGraphic(){return cG;}
@@ -49,6 +51,6 @@ public class SvgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
     public EjbGraphicFigureFactory<L,D,G,GC,GS> efFigure() {return new EjbGraphicFigureFactory<>(cF);}
 	public EjbStatusFactory<L,D,GS> style() {return EjbStatusFactory.instance(cFs,cL,cD);}
 	
-	public SvgSymbolFactory<L,D,G,GT,GC,GS> symbol() {return SvgSymbolFactory.factory();}
-	public SvgFigureFactory<L,D,G,GT,GC,GS> figure() {return SvgFigureFactory.factory();}
+	public SvgSymbolFactory<G,GT,GC,GS> symbol() {return SvgSymbolFactory.factory();}
+	public SvgFigureFactory<G,GT,GC,GS> figure() {return SvgFigureFactory.factory();}
 }

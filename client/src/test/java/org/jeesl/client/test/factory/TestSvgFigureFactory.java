@@ -35,7 +35,7 @@ public class TestSvgFigureFactory extends AbstractJeeslClientTest
 
 	private EjbStatusFactory<Lang,Description,GraphicShape> efStyle;
 	private EjbGraphicFigureFactory<Lang,Description,Graphic,GraphicComponent,GraphicShape> efFigure;
-	private static SvgFigureFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicShape> svgF;
+	private static SvgFigureFactory<Graphic,GraphicType,GraphicComponent,GraphicShape> svgF;
 	
 	private String colorRed = "FF0000";
 	private String colorBlue = "0000FF";

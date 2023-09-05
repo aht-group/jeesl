@@ -57,7 +57,7 @@ public class JeeslMmgClassificationController <L extends JeeslLang, D extends Je
 	}
 	
 	public void postConstructTreeElement(JeeslMmgFacade<L,D,R,MG,MI,MC,MQ,USER> fMmg,
-									JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+									JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{

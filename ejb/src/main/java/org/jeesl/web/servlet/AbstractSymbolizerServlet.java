@@ -19,8 +19,6 @@ import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.xml.media.XmlImageFactory;
 import org.slf4j.Logger;
@@ -28,9 +26,8 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.StringUtil;
 
-public abstract class AbstractSymbolizerServlet<L extends JeeslLang, D extends JeeslDescription,
-												G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-												GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+public abstract class AbstractSymbolizerServlet<G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
+												GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
 	extends HttpServlet
 	implements Serializable
 {

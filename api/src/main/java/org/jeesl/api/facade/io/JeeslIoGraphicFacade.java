@@ -8,15 +8,12 @@ import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 
-public interface JeeslIoGraphicFacade <L extends JeeslLang, D extends JeeslDescription,
-									S extends EjbWithId,
-									G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-									GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+public interface JeeslIoGraphicFacade <S extends EjbWithId,
+									G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
+									GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
 			extends JeeslFacade
 {	
 	G fGraphicForStatus(long statusId) throws JeeslNotFoundException;

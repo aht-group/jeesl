@@ -44,7 +44,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 	final static Logger logger = LoggerFactory.getLogger(JeeslAomViewController.class);
 
 	private JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAom;
-	private JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic;
+	private JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic;
 
 	@SuppressWarnings("unused")
 	private JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache;
@@ -74,7 +74,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 	public void postConstructView(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									JeeslAomTypeCache<REALM,ATYPE,VIEW> bCache,
 									JeeslAomFacade<L,D,REALM,?,?,?,ATYPE,VIEW,?,?,?,?> fAsset,
-									JeeslIoGraphicFacade<L,D,?,G,GT,?,?> fGraphic,
+									JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
 									REALM realm)
 	{
 		super.postConstructWebController(lp,bMessage);

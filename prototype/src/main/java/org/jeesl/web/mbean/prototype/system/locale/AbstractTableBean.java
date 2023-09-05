@@ -44,7 +44,7 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableBean.class);
 	private static final long serialVersionUID = 1L;
 	
-	protected JeeslIoGraphicFacade<L,D,?,G,GT,GC,GS> fGraphic;
+	protected JeeslIoGraphicFacade<?,G,GT,GC,GS> fGraphic;
 	
 	protected final IoLocaleFactoryBuilder<L,D,LOC> fbStatus;
 	protected final SvgFactoryBuilder<L,D,G,GT,GC,GS> fbSvg;

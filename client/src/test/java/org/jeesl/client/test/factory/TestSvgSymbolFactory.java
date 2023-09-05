@@ -13,8 +13,6 @@ import org.jeesl.client.model.ejb.system.graphic.Graphic;
 import org.jeesl.client.model.ejb.system.graphic.GraphicComponent;
 import org.jeesl.client.model.ejb.system.graphic.GraphicShape;
 import org.jeesl.client.model.ejb.system.graphic.GraphicType;
-import org.jeesl.client.model.ejb.system.locale.Description;
-import org.jeesl.client.model.ejb.system.locale.Lang;
 import org.jeesl.client.test.AbstractJeeslClientTest;
 import org.jeesl.factory.svg.SvgSymbolFactory;
 import org.junit.Test;
@@ -28,7 +26,7 @@ public class TestSvgSymbolFactory extends AbstractJeeslClientTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestSvgSymbolFactory.class);
 
-	private SvgSymbolFactory<Lang,Description,Graphic,GraphicType,GraphicComponent,GraphicShape> svgF;
+	private SvgSymbolFactory<Graphic,GraphicType,GraphicComponent,GraphicShape> svgF;
 	
 	public TestSvgSymbolFactory()
 	{

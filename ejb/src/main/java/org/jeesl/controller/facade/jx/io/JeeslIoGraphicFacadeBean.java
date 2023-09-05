@@ -27,7 +27,7 @@ public class JeeslIoGraphicFacadeBean<L extends JeeslLang, D extends JeeslDescri
 									G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
 									GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
 					extends JeeslFacadeBean
-					implements JeeslIoGraphicFacade<L,D,S,G,GT,GC,GS>
+					implements JeeslIoGraphicFacade<S,G,GT,GC,GS>
 {	
 	private static final long serialVersionUID = 1L;
 	

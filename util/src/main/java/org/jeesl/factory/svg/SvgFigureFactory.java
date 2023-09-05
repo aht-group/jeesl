@@ -24,9 +24,8 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.svg.SVGDocument;
 
-public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
-								G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
+public class SvgFigureFactory<G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
+								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SvgFigureFactory.class);
 	
@@ -37,12 +36,11 @@ public class SvgFigureFactory<L extends JeeslLang, D extends JeeslDescription,
 		impl = SVGDOMImplementation.getDOMImplementation();
 	}
 	
-    public static <L extends JeeslLang, D extends JeeslDescription,
-    			G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
-    			GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<L,D,GS,G>>
-		SvgFigureFactory<L,D,G,GT,GC,GS> factory()
+    public static <G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
+    			GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
+		SvgFigureFactory<G,GT,GC,GS> factory()
 	{
-    	return new SvgFigureFactory<L,D,G,GT,GC,GS>();
+    	return new SvgFigureFactory<G,GT,GC,GS>();
 	}
 	
 	public SVGGraphics2D build(List<GC> list, int canvasSize)
