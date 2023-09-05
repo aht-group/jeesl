@@ -1,7 +1,7 @@
 package org.jeesl.controller.web.c.io.db;
 
 import org.jeesl.controller.web.io.db.JeeslDbStatementGwc;
-import org.jeesl.model.ejb.io.db.pg.IoDbStatementColumn;
+import org.jeesl.model.ejb.io.db.pg.connection.IoDbStatementColumn;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;

@@ -31,9 +31,6 @@ public interface JeeslAttributeSet <L extends JeeslLang, D extends JeeslDescript
 {
 	public enum Attributes{category,category2,refId,position}
 	
-//	CATEGORY getCategory();
-//	void setCategory(CATEGORY category);
-	
 //	Long getRefId();
 //	void setRefId(Long refId);
 
