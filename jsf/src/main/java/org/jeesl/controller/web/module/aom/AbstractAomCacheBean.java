@@ -1,9 +1,11 @@
 package org.jeesl.controller.web.module.aom;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -31,6 +33,8 @@ import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.benmanes.caffeine.cache.Caffeine;
+
 public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,REALM,?>,
 										COMPANY extends JeeslAomCompany<REALM,SCOPE>,
 										SCOPE extends JeeslAomScope<?,?,SCOPE,?>,
@@ -49,10 +53,13 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 	
 	private final AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?,?,?,?,UC> fbAom;
 	protected JeeslAomFacade<?,?,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?> fAom;
+
+//	@Inject @AomCompanyCache private Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheCdiAllCompanies;
+//	@Inject @AomCompanyCache private Cache<AomScopeCacheKey,List<COMPANY>> cacheCdiCompanyScope;
+//	@Inject @AomCompanyCache private Cache<AomTypeCacheKey,List<ATYPE>> cacheCdiType;
 	
-	@Inject @AomCompanyCache protected Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheAllCompanies;
-	@Inject @AomCompanyCache protected Cache<AomScopeCacheKey,List<COMPANY>> cacheCompanyScope;
-	@Inject @AomCompanyCache protected Cache<AomTypeCacheKey,List<ATYPE>> cacheType;
+	private final com.github.benmanes.caffeine.cache.Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheLocalAllCompanies;
+	private final com.github.benmanes.caffeine.cache.Cache<TenantIdentifier<REALM>,List<COMPANY>> cacheLocalCompanyScope;
 
 	protected final Map<TenantIdentifier<REALM>,List<COMPANY>> cachedCompanies; @Override public Map<TenantIdentifier<REALM>, List<COMPANY>> getCachedAllCompanies() {return cachedCompanies;}
 	protected final Map<AomScopeCacheKey,List<COMPANY>> cachedCompanyScope; @Override public Map<AomScopeCacheKey,List<COMPANY>> getCachedScopeCompanies() {return cachedCompanyScope;}
@@ -68,6 +75,9 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 	public AbstractAomCacheBean(AomFactoryBuilder<?,?,REALM,COMPANY,SCOPE,ASSET,ASTATUS,ATYPE,VIEW,?,ETYPE,ESTATUS,?,?,?,?,UC> fbAom)
 	{
 		this.fbAom=fbAom;
+		
+		cacheLocalAllCompanies = Caffeine.newBuilder().maximumSize(500).expireAfterWrite(Duration.ofMinutes(2)).build();
+		cacheLocalCompanyScope = Caffeine.newBuilder().maximumSize(500).expireAfterWrite(Duration.ofMinutes(2)).build();
 		
 		cachedCompanies = new CacheMapCompany();
 		cachedCompanyScope = new CacheMapCompanyScope();
@@ -100,8 +110,17 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 		@Override public List<COMPANY> get(Object key)
 		{
 			TenantIdentifier<REALM> identifier = (TenantIdentifier<REALM>)key;
-			return cacheAllCompanies.computeIfAbsent(identifier, i -> fAom.fAomCompanies(identifier));
+			
+			List<COMPANY> list = cacheLocalAllCompanies.getIfPresent(identifier);
+			if(Objects.isNull(list)) {list = fAom.fAomCompanies(identifier); cacheLocalAllCompanies.put(identifier,list);}
+			return list;
+//			return cacheCdiAllCompanies.computeIfAbsent(identifier, i -> fAom.fAomCompanies(identifier));
 		}
+	}
+	@Override public void invalidateCompanyCache(TenantIdentifier<REALM> identifier)
+	{
+//		cacheCdiAllCompanies.remove(identifier);
+		cacheLocalAllCompanies.invalidate(identifier);
 	}
 	
 	private class CacheMapCompanyScope extends HashMap<AomScopeCacheKey,List<COMPANY>>
@@ -120,10 +139,7 @@ public abstract class AbstractAomCacheBean <REALM extends JeeslTenantRealm<?,?,R
 		return cachedCompanies.get(id).stream().filter(c -> c.getScopes().contains(identifier.getScope())).collect(Collectors.toList());
 	}
 
-	@Override public void invalidateCompanyCache(TenantIdentifier<REALM> identifier)
-	{
-		cacheAllCompanies.remove(identifier);
-	}
+
 	
 	private class CacheMapType extends HashMap<AomTypeCacheKey,List<ATYPE>>
 	{

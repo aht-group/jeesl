@@ -53,29 +53,8 @@ public class JeeslJbossEap73Configurator extends AbstractJbossEapConfigurator
 	    	super.dbFiles(keys,config,jbossModule);
 	    	super.dbDrivers(keys,config,jbossConfig);
 	    	super.dbDs(keys,config,jbossConfig);
-	    	this.caches(keys,config,jbossConfig);
+	    	super.caches(keys,config,jbossConfig);
 	    }
 	    catch (IOException e) {throw new MojoExecutionException(e.getMessage());}
-    }
-    
-    protected void caches(String[] keys, Configuration config, JbossStandaloneConfigurator jbossConfig) throws IOException
-    {
-    	super.getLog().info("Caches");
-    	for(String key : keys)
-    	{
-    		String configKey = "cache."+key+".list";
-    		super.getLog().info("Trying");
-    		String caches = config.getString(configKey,null);
-        	if(Objects.nonNull(caches))
-        	{
-        		super.getLog().info("Found: "+key+": "+caches);
-        		String[] cacheList = caches.split(",");
-        		for(String cache : cacheList)
-        		{
-        			super.getLog().info("Cache "+key+" "+cache);
-        			jbossConfig.cache(key);
-        		}
-        	}
-    	}
     }
 }

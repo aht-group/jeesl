@@ -15,12 +15,12 @@ import org.jboss.as.controller.client.ModelControllerClient;
 import org.jeesl.processor.JbossModuleConfigurator;
 import org.jeesl.processor.JbossStandaloneConfigurator;
 
-@Mojo(name="eap80Config")
-public class JeeslJbossEap80Configurator extends AbstractJbossEapConfigurator
+@Mojo(name="eap74Config")
+public class JeeslJbossEap74Configurator extends AbstractJbossEapConfigurator
 {	
-	public JeeslJbossEap80Configurator()
+	public JeeslJbossEap74Configurator()
 	{
-		eapVersion = "8.0";
+		eapVersion = "7.4";
 	}
 	
     public void execute() throws MojoExecutionException
@@ -35,24 +35,26 @@ public class JeeslJbossEap80Configurator extends AbstractJbossEapConfigurator
     {
     	String jbossDir = config.getString("eap.dir","/Volumes/ramdisk/jboss");
 		File f = new File(jbossDir);
-		super.getLog().info("JBoss Configuration (EAP "+eapVersion+") base: "+f.getAbsolutePath());
+		super.getLog().info("JBoss EAP "+eapVersion+" directoy: "+f.getAbsolutePath()+" x2");
     	
-    	try
-    	{
-    		ModelControllerClient client = ModelControllerClient.Factory.create(InetAddress.getByName("localhost"), 9990);
-    		JbossModuleConfigurator jbossModule = new JbossModuleConfigurator(JbossModuleConfigurator.Product.eap,eapVersion,jbossDir);
-    		JbossStandaloneConfigurator jbossConfig = new JbossStandaloneConfigurator(eapVersion,client);
-        	
-        	String key = config.getString("eap.configurations");
-    	    super.getLog().info("Keys: "+key);
-    	    String[] keys = key.split("-");
-    	    
-    	    super.dbFiles(keys,config,jbossModule);
+    	ModelControllerClient client;
+    	JbossModuleConfigurator jbossModule = new JbossModuleConfigurator(JbossModuleConfigurator.Product.eap,eapVersion,jbossDir);
+    	try {client = ModelControllerClient.Factory.create(InetAddress.getByName("localhost"), 9990);}
+    	catch (UnknownHostException e) {throw new MojoExecutionException(e.getMessage());}
+    	
+    	JbossStandaloneConfigurator jbossConfig = new JbossStandaloneConfigurator(eapVersion,client);
+    	
+    	String key = config.getString("eap.configurations");
+	    getLog().warn("Keys: "+key);
+	    String[] keys = key.split("-");
+	    
+	    try
+	    {
+	    	super.dbFiles(keys,config,jbossModule);
 	    	super.dbDrivers(keys,config,jbossConfig);
 	    	super.dbDs(keys,config,jbossConfig);
 	    	super.caches(keys,config,jbossConfig);
-    	}
-    	catch (UnknownHostException e) {throw new MojoExecutionException(e.getMessage());}
-    	catch (IOException e) {throw new MojoExecutionException(e.getMessage());}
+	    }
+	    catch (IOException e) {throw new MojoExecutionException(e.getMessage());}
     }
 }

@@ -329,7 +329,7 @@ public class JbossStandaloneConfigurator
 	}
 	
 	
-	public void cache(String name) throws IOException
+	public void cachContainer(String name, String[] caches) throws IOException
 	{	
 		// More info on how this works can be found here
 		// https://stackoverflow.com/questions/76865879/how-to-add-a-cache-programmatically-in-wildfly-jboss-using-the-detyped-java-api
@@ -350,13 +350,34 @@ public class JbossStandaloneConfigurator
 		result = client.execute(new OperationBuilder(transport).build());
 		System.out.println(result.toString());
 		
-		this.createReplicatedCaches(cacheContainer, "menu");
+		for(String type : caches)
+		{
+			if(type.equals("menu")) {this.createCacheReplicated(cacheContainer, "menu");}
+			else if(type.equals("icon")) {this.createCacheLocal(cacheContainer, "icon");}
+		}
 	}
-	
-	public void createReplicatedCaches(ModelNode cacheContainer, String replicatedCacheNames) throws IOException
+
+	public void createCacheReplicated(ModelNode container, String cacheName) throws IOException
 	{
-		ModelNode replicatedCache = cacheContainer.clone();
-		replicatedCache.get(ClientConstants.OP_ADDR).add("replicated-cache",replicatedCacheNames);		
+		ModelNode replicatedCache = container.clone();
+		replicatedCache.get(ClientConstants.OP_ADDR).add("replicated-cache",cacheName);		
+		replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode replicatedCacheTransaction = replicatedCache.clone();	
+		replicatedCacheTransaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
+		replicatedCacheTransaction.get("mode").set("BATCH");
+		replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
+		System.out.println(result.toString());
+
+		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
+		System.out.println(result.toString());
+	}
+	public void createCacheLocal(ModelNode container, String cacheName) throws IOException
+	{
+		ModelNode replicatedCache = container.clone();
+		replicatedCache.get(ClientConstants.OP_ADDR).add("local-cache",cacheName);		
 		replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
 		
 		ModelNode replicatedCacheTransaction = replicatedCache.clone();	
