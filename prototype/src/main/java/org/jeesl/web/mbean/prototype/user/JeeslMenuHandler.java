@@ -49,33 +49,15 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	{
 		this.bSecurity=bSecurity;
 		this.context=identity.getContext();
-//		this.check("postConstructMenu");
 		
 		this.prepare(identity);
-	}
-	
-	public void caches(Cache<String,List<M>> cacheSub, Cache<String,List<M>> cacheBreadcrumb)
-	{
-//		this.cacheSub=cacheSub;
-//		this.cacheBreadcrumb=cacheBreadcrumb;
 	}
 	
 	public void prepare(I identity)
 	{
 		this.identity=identity;
-//		this.check("prepare");
-		
 		this.reset();
 	}
-	
-//	private void check(String where)
-//	{
-//		logger.info(StringUtil.stars());
-//		logger.info(where);
-//		logger.info("\t"+JeeslSecurityBean.class.getSimpleName()+" nonNull:"+Objects.nonNull(bSecurity));
-//		logger.info("\t"+JeeslSecurityContext.class.getSimpleName()+" nonNull:"+Objects.nonNull(context));
-//		logger.info("\t"+JeeslIdentity.class.getSimpleName()+" nonNull:"+Objects.nonNull(identity));
-//	}
 	
 	public void reset()
 	{
