@@ -352,8 +352,11 @@ public class JbossStandaloneConfigurator
 		
 		for(String type : caches)
 		{
-			if(type.equals("menu")) {this.createCacheReplicated(cacheContainer, "menu");}
-			else if(type.equals("icon")) {this.createCacheLocal(cacheContainer, "icon");}
+			if(type.equals("menu")) {this.createCacheReplicated(cacheContainer,type);}
+			else if(type.equals("icon")) {this.createCacheLocal(cacheContainer,type);}
+			else if(type.equals("ofx")) {this.createCacheLocal(cacheContainer,type);}
+			else if(type.equals("report")) {this.createCacheLocal(cacheContainer,type);}
+			else if(type.equals("aom")) {this.createCacheLocal(cacheContainer,type);}
 		}
 	}
 
