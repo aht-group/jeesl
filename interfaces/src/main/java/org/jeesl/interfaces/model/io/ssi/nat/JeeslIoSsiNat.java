@@ -1,7 +1,8 @@
-package org.jeesl.interfaces.model.io.ssi.core;
+package org.jeesl.interfaces.model.io.ssi.nat;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -14,7 +15,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslIoSsiPort <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslIoSsiNat <L extends JeeslLang, D extends JeeslDescription,
 									HOST extends JeeslIoSsiHost<L,D,?>>
 							extends Serializable,EjbSaveable,
 									EjbWithId,EjbWithParentAttributeResolver,

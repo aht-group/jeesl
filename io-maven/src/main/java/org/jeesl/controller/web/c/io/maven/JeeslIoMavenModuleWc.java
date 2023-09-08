@@ -48,7 +48,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenModuleWc.class);
 	
-	private JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final List<IoMavenStructure> structures; public List<IoMavenStructure> getStructures() {return structures;}
 	private final List<IoMavenType> types; public List<IoMavenType> getTypes() {return types;}
@@ -70,7 +70,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven)
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fMaven=fMaven;

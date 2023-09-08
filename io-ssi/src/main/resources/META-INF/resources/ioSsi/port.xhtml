@@ -18,7 +18,7 @@
 						var="p" value="#{cc.attrs.ctrl.ports}"
 						selection="#{cc.attrs.ctrl.port}" selectionMode="single" rowKey="#{p.id}">
 					<f:facet name="header">
-						<j:dtHeader entity="IoSsiPort" code="listOf">
+						<j:dtHeader entity="IoSsiNat" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addPort()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
@@ -27,28 +27,32 @@
 						<h:outputText value="#{p.position}" />  
 		            </p:column>
 					<p:column>
-		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="host"/></f:facet>
+		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="host"/></f:facet>
 						<h:outputText value="#{p.host.name[localeCode].lang}" />  
 		            </p:column>
 		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="port"/></f:facet>
+		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="port"/></f:facet>
 						<h:outputText value="#{p.port}" />  
 		            </p:column>
 		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="destinationIp"/></f:facet>
+		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="destinationIp"/></f:facet>
 						<h:outputText value="#{p.destinationHost.ipAddr}" />  
 		            </p:column>
 		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="destinationPort"/></f:facet>
+		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="destinationPort"/></f:facet>
 						<h:outputText value="#{p.destinationPort}" />  
 		            </p:column>
 		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="destinationHost"/></f:facet>
+		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="destinationHost"/></f:facet>
+						<h:outputText value="#{p.destinationHost.name[localeCode].lang}" />  
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="destinationHost"/></f:facet>
 						<h:outputText value="#{p.destinationHost.name[localeCode].lang}" />  
 		            </p:column>
 					<p:column>
-		            	<f:facet name="header"><jtp:label entity="IoSsiPort" code="name"/></f:facet>
-						<h:outputText value="#{p.name[localeCode].lang}" />  
+		            	<f:facet name="header"><jtp:label entity="IoSsiNat" code="service"/></f:facet>
+						<jtp:symbolizer value="#{p.service}" />  
 		            </p:column>
 				</p:dataTable>
 			</h:form>
@@ -56,27 +60,32 @@
 		<j:slot id="sPort" width="3">
 			<h:form id="fArtifact" rendered="#{not empty cc.attrs.ctrl.port}">
 				<p:panel styleClass="jeesl-panel">
-					<f:facet name="header"><j:pHeader entity="IoSsiPort"/></f:facet>
+					<f:facet name="header"><j:pHeader entity="IoSsiNat"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.savePort()}" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 					<j:inputGrid>
-						<jtp:label entity="IoSsiPort" code="host"/>
+						<jtp:label entity="IoSsiNat" code="host"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.port.host}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.hosts}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
 						</p:selectOneMenu>
 						
-						<jtp:label entity="IoSsiPort" code="port"/>
+						<jtp:label entity="IoSsiNat" code="port"/>
 						<p:inputText value="#{cc.attrs.ctrl.port.port}"/>
 						
-						<jtp:label entity="IoSsiPort" code="destinationHost"/>
+						<jtp:label entity="IoSsiNat" code="destinationHost"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.port.destinationHost}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.hosts}" var="h" itemLabel="#{h.name[localeCode].lang}" itemValue="#{h}"/>
 						</p:selectOneMenu>
 						
-						<jtp:label entity="IoSsiPort" code="destinationPort"/>
+						<jtp:label entity="IoSsiNat" code="destinationPort"/>
 						<p:inputText value="#{cc.attrs.ctrl.port.destinationPort}"/>
+						
+						<jtp:label entity="IoSsiNat" code="service"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.port.service}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.services}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
+						</p:selectOneMenu>
 						
 					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.ctrl.port}" withDescription="true"/>

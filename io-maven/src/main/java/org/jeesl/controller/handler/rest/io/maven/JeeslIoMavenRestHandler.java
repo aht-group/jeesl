@@ -44,13 +44,13 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 	public static final long serialVersionUID=1;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenRestHandler.class);
 	
-	private final JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
+	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
 	
 	private final EjbCodeCache<IoMavenStructure> cacheStructure;
 	private final EjbCodeCache<IoMavenOutdate> cacheOutdate;
 	private final EjbCodeCache<IoMavenSuitability> cacheSuitability;
 	
-	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoLang,IoDescription,IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven)
+	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		this.fMaven=fMaven;
 		

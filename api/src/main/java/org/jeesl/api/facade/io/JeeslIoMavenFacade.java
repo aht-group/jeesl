@@ -11,12 +11,9 @@ import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
 
-public interface JeeslIoMavenFacade <L extends JeeslLang,D extends JeeslDescription,
-									GROUP extends JeeslIoMavenGroup,
+public interface JeeslIoMavenFacade <GROUP extends JeeslIoMavenGroup,
 									ARTIFACT extends JeeslIoMavenArtifact<GROUP,?>,
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,OUTDATE,MAINTAINER>,
 									OUTDATE extends JeeslMavenOutdate<?,?,OUTDATE,?>,

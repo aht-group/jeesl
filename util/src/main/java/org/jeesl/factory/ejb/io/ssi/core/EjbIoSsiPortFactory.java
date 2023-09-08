@@ -5,10 +5,10 @@ import java.util.List;
 import org.jeesl.factory.ejb.util.EjbPositionFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
-import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiPort;
+import org.jeesl.interfaces.model.io.ssi.nat.JeeslIoSsiNat;
 
 public class EjbIoSsiPortFactory <HOST extends JeeslIoSsiHost<?,?,?>,
-									PORT extends JeeslIoSsiPort<?,?,HOST>>
+									PORT extends JeeslIoSsiNat<?,?,HOST>>
 {
 	private final Class<PORT> cPort;
 

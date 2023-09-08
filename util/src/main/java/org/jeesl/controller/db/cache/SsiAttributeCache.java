@@ -20,7 +20,7 @@ public class SsiAttributeCache <MAPPING extends JeeslIoSsiContext<?,ENTITY>,
 {
 	final static Logger logger = LoggerFactory.getLogger(SsiAttributeCache.class);
 	
-	private final JeeslIoSsiFacade<?,?,?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?,?> fSsi;
+	private final JeeslIoSsiFacade<?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?,?> fSsi;
 	private final IoSsiDataFactoryBuilder<?,?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?> fbSsi;
 	
 	private final Class<T> cT;
@@ -33,7 +33,7 @@ public class SsiAttributeCache <MAPPING extends JeeslIoSsiContext<?,ENTITY>,
 	private final MAPPING mapping;
 	
 	public SsiAttributeCache(IoSsiDataFactoryBuilder<?,?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?> fbSsi,
-						JeeslIoSsiFacade<?,?,?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?,?> fSsi,
+						JeeslIoSsiFacade<?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?,?> fSsi,
 						MAPPING mapping,
 						Class<T> cT)
 	{

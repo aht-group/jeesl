@@ -46,7 +46,7 @@ public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSsiDataController.class);
 	
-	private JeeslIoSsiFacade<L,D,?,?,CTX,?,DATA,STATUS,?,?,?,?> fSsi;
+	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,?,?> fSsi;
 	private final JeeslIoSsiDataCallback callback;
 	protected final SbMultiHandler<STATUS> sbhStatus; public SbMultiHandler<STATUS> getSbhStatus() {return sbhStatus;}
 	
@@ -72,7 +72,7 @@ public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescrip
 	}
 
 	public void postConstructSsiData(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-										JeeslIoSsiFacade<L,D,?,?,CTX,?,DATA,STATUS,?,?,?,?> fSsi)
+										JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,?,?> fSsi)
 	{
 		this.fSsi=fSsi;
 //		super.postConstructWebController(lp,bMessage);

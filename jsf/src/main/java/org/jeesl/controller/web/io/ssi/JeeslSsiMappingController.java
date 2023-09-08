@@ -44,7 +44,7 @@ public class JeeslSsiMappingController <L extends JeeslLang, D extends JeeslDesc
 	protected JeeslLogger jogger;
 	
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,?,?,LINK,ENTITY,?,?> fbSsi;
-	private JeeslIoSsiFacade<L,D,SYSTEM,?,MAPPING,?,?,LINK,ENTITY,?,?,?> fSsi;
+	private JeeslIoSsiFacade<SYSTEM,?,MAPPING,?,?,LINK,ENTITY,?,?,?> fSsi;
 	
 	private final JsonTuple1Handler<MAPPING> thMapping; public JsonTuple1Handler<MAPPING> getThMapping() {return thMapping;}
 	private final JsonTuple2Handler<MAPPING,LINK> thLink; public JsonTuple2Handler<MAPPING,LINK> getThLink() {return thLink;}
@@ -75,7 +75,7 @@ public class JeeslSsiMappingController <L extends JeeslLang, D extends JeeslDesc
 		jogger = DebugLoggerHandler.instance(this.getClass());
 	}
 
-	public void postConstructSsiMapping(JeeslIoSsiFacade<L,D,SYSTEM,?,MAPPING,?,?,LINK,ENTITY,?,?,?> fSsi)
+	public void postConstructSsiMapping(JeeslIoSsiFacade<SYSTEM,?,MAPPING,?,?,LINK,ENTITY,?,?,?> fSsi)
 	{	
 		this.fSsi=fSsi;
 		

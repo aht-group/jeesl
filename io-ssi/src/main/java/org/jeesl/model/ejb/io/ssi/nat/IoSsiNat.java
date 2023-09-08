@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiPort;
+import org.jeesl.interfaces.model.io.ssi.nat.JeeslIoSsiNat;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
@@ -26,7 +26,7 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
 @Entity
 @Table(name="IoSsiNat")
 @EjbErNode(name="port")
-public class IoSsiPort implements JeeslIoSsiPort<IoLang,IoDescription,IoSsiHost>
+public class IoSsiNat implements JeeslIoSsiNat<IoLang,IoDescription,IoSsiHost>
 {
 	public static final long serialVersionUID=1;
 
@@ -40,7 +40,7 @@ public class IoSsiPort implements JeeslIoSsiPort<IoLang,IoDescription,IoSsiHost>
 	@Override public int getPosition() {return position;}
 	@Override public void setPosition(int position) {this.position = position;}
 	
-	@Override public String resolveParentAttribute() {return JeeslIoSsiPort.Attributes.host.toString();}
+	@Override public String resolveParentAttribute() {return JeeslIoSsiNat.Attributes.host.toString();}
 	@NotNull @ManyToOne
 	private IoSsiHost host;
 	@Override public IoSsiHost getHost() {return host;}
@@ -79,7 +79,7 @@ public class IoSsiPort implements JeeslIoSsiPort<IoLang,IoDescription,IoSsiHost>
 	@Override public void setDescription(Map<String,IoDescription> description) {this.description = description;}
 
 
-	@Override public boolean equals(Object object){return (object instanceof IoSsiPort) ? id == ((IoSsiPort) object).getId() : (object == this);}
+	@Override public boolean equals(Object object){return (object instanceof IoSsiNat) ? id == ((IoSsiNat) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,57).append(id).toHashCode();}
 
 	@Override public String toString()

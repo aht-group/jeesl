@@ -58,7 +58,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 									JOB extends JeeslJobStatus<L,D,JOB,?>,
 									HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
 					extends JeeslFacadeBean
-					implements JeeslIoSsiFacade<L,D,SYSTEM,CRED,CTX,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST>
+					implements JeeslIoSsiFacade<SYSTEM,CRED,CTX,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoSsiFacadeBean.class);

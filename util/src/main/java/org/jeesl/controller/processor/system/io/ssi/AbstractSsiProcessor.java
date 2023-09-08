@@ -47,7 +47,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiProcessor.class);
 	
 	protected final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi;
-	protected final JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi;
+	protected final JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi;
 	
 	protected final EjbIoSsiDataFactory<MAPPING,DATA,LINK> efData;
 	
@@ -58,7 +58,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
 
 	public AbstractSsiProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi,
-									JeeslIoSsiFacade<L,D,SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi)
+									JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi)
 	{
 		this.fSsi=fSsi;
 		this.fbSsi=fbSsi;

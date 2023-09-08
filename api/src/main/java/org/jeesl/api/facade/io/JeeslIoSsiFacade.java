@@ -15,24 +15,21 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.io.ssi.maintenance.EjbWithSsiDataCleaning;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.EjbIoSsiQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 
-public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescription,
-									SYSTEM extends JeeslIoSsiSystem<L,D>,
+public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 									CRED extends JeeslIoSsiCredential<SYSTEM>,
 									CTX extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 									ATTRIBUTE extends JeeslIoSsiAttribute<CTX,ENTITY>,
-									DATA extends JeeslIoSsiData<CTX,LINK,JOB>,
-									LINK extends JeeslIoSsiLink<L,D,LINK,?>,
+									DATA extends JeeslIoSsiData<CTX,STATUS,JOB>,
+									STATUS extends JeeslIoSsiLink<?,?,STATUS,?>,
 									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
-									CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
-									JOB extends JeeslJobStatus<L,D,JOB,?>,
-									HOST extends JeeslIoSsiHost<L,D,SYSTEM>
+									CLEANING extends JeeslIoSsiCleaning<?,?,CLEANING,?>,
+									JOB extends JeeslJobStatus<?,?,JOB,?>,
+									HOST extends JeeslIoSsiHost<?,?,SYSTEM>
 									>
 			extends JeeslFacade
 {	
@@ -44,22 +41,22 @@ public interface JeeslIoSsiFacade <L extends JeeslLang,D extends JeeslDescriptio
 	<T extends EjbWithId> DATA fIoSsiData(CTX mapping, T ejb) throws JeeslNotFoundException;
 	
 	
-	<A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<LINK> links, A a, B b, Integer maxSize);
+	<A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a, B b, Integer maxSize);
 	
-	JsonTuples1<LINK> tpIoSsiLinkForMapping(CTX mapping);
-	<A extends EjbWithId> JsonTuples1<LINK> tpIoSsiLinkForMapping(CTX mapping, A a);
-	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<LINK> tpIoSsiLinkForMapping(CTX mapping, A a, B b);
-	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<LINK,JOB> tpcIoSsiLinkJobForMapping(CTX mapping, A a, B b);
+	JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping);
+	<A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a);
+	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a, B b);
+	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiLinkJobForMapping(CTX mapping, A a, B b);
 	
 	JsonTuples1<CTX> tpMapping();
-	JsonTuples2<CTX,LINK> tpMappingLink(List<CTX> list);
-	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<LINK,B> tpMappingB(Class<B> classB, CTX mapping, A a);
+	JsonTuples2<CTX,STATUS> tpMappingLink(List<CTX> list);
+	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,B> tpMappingB(Class<B> classB, CTX mapping, A a);
 	
-	Long cSsiData(EjbIoSsiQuery<CTX,LINK> query);
-	List<DATA> fSsiData(EjbIoSsiQuery<CTX,LINK> query);
-	List<DATA> fIoSsiData(CTX mapping, List<LINK> links);
-	<A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<LINK> links, A a);
-	List<DATA> fSsiDataWithJob1(CTX mapping, LINK link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
+	Long cSsiData(EjbIoSsiQuery<CTX,STATUS> query);
+	List<DATA> fSsiData(EjbIoSsiQuery<CTX,STATUS> query);
+	List<DATA> fIoSsiData(CTX mapping, List<STATUS> links);
+	<A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a);
+	List<DATA> fSsiDataWithJob1(CTX mapping, STATUS link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
 	
 	<T extends EjbWithSsiDataCleaning<CLEANING>> List<T> fEntitiesWithoutSsiDataCleaning(Class<T> c, int maxResult);
 	<T extends EjbWithSsiDataCleaning<CLEANING>> JsonTuples1<CLEANING> tpcSsiDataCleaning(Class<T> c);

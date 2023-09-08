@@ -43,7 +43,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 									STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>,
 									TYPE extends JeeslMavenType<L,D,TYPE,?>,
 									USAGE extends JeeslIoMavenUsage<VERSION,MODULE>>
-	extends JeeslFacadeBean implements JeeslIoMavenFacade<L,D,GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE,USAGE>
+	extends JeeslFacadeBean implements JeeslIoMavenFacade<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE,USAGE>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFacadeBean.class);

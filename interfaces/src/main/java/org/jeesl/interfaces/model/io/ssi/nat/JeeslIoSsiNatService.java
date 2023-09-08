@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.ssi.port;
+package org.jeesl.interfaces.model.io.ssi.nat;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 @DownloadJeeslData
-public interface JeeslIoSsiService <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslIoSsiNatService <L extends JeeslLang, D extends JeeslDescription,
 						S extends JeeslStatus<L,D,S>,
 						G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,

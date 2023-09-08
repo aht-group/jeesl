@@ -45,7 +45,6 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 	RE load(Class<RE> cEntity, RE entity);
 
 	List<RE> findLabelEntities(RC categories, ERD diagram);
-//	List<RE> findRevisionEntities(List<RC> categories, boolean withAttributes);
 	List<RS> findRevisionScopes(List<RC> categories, boolean showInvisibleScopes);
 
 	void rm(Class<RVM> cMappingView, RVM mapping) throws JeeslConstraintViolationException;
@@ -63,6 +62,4 @@ public interface JeeslIoRevisionFacade <L extends JeeslLang,D extends JeeslDescr
 	void addMissingLabel(RML rML);
 	void cleanMissingLabels(Class<RML> cRml);
 	RE fRevisionEntity(String jscn) throws JeeslNotFoundException;
-
-
 }

@@ -10,7 +10,6 @@ import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.ejb.io.ssi.core.EjbIoSsiPortFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.model.ejb.io.label.entity.IoLabelEntity;
@@ -25,7 +24,8 @@ import org.jeesl.model.ejb.io.ssi.data.IoSsiContext;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiData;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiMapping;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiStatus;
-import org.jeesl.model.ejb.io.ssi.nat.IoSsiPort;
+import org.jeesl.model.ejb.io.ssi.nat.IoSsiNatService;
+import org.jeesl.model.ejb.io.ssi.nat.IoSsiNat;
 import org.jeesl.model.ejb.system.job.core.SystemJobStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,31 +38,34 @@ public class JeeslIoSsiPortWc extends AbstractJeeslWebController<IoLang,IoDescri
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoSsiPortWc.class);
 	
-	private JeeslIoSsiFacade<IoLang,IoDescription,IoSsiSystem,IoSsiCredential,IoSsiContext,IoSsiMapping,IoSsiData,IoSsiStatus,IoLabelEntity,IoSsiCleaning,SystemJobStatus,IoSsiHost> fSsi;
+	private JeeslIoSsiFacade<IoSsiSystem,IoSsiCredential,IoSsiContext,IoSsiMapping,IoSsiData,IoSsiStatus,IoLabelEntity,IoSsiCleaning,SystemJobStatus,IoSsiHost> fSsi;
 //	private final IoSsiCoreFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoSsiCredential,IoSsiHost> fbSsi;
 	
-	private final EjbIoSsiPortFactory<IoSsiHost,IoSsiPort> efPort;
+	private final EjbIoSsiPortFactory<IoSsiHost,IoSsiNat> efPort;
 	
-	private final List<IoSsiPort> ports; public List<IoSsiPort> getPorts() {return ports;}
+	private final List<IoSsiNatService> services; public List<IoSsiNatService> getServices() {return services;}
+	private final List<IoSsiNat> ports; public List<IoSsiNat> getPorts() {return ports;}
 	private final List<IoSsiHost> hosts; public List<IoSsiHost> getHosts() {return hosts;}
 	
-	private IoSsiPort port; public IoSsiPort getPort() {return port;} public void setPort(IoSsiPort port) {this.port = port;}
+	private IoSsiNat port; public IoSsiNat getPort() {return port;} public void setPort(IoSsiNat port) {this.port = port;}
 
 	public JeeslIoSsiPortWc()
 	{
 		super(IoLang.class,IoDescription.class);
 		
 //		fbSsi = new IoSsiCoreFactoryBuilder<>(IoLang.class,IoDescription.class,IoSsiSystem.class,IoSsiCredential.class,IoSsiHost.class);
-		efPort = new EjbIoSsiPortFactory<>(IoSsiPort.class);
+		efPort = new EjbIoSsiPortFactory<>(IoSsiNat.class);
 		
 //		cpArtifact = EjbMavenArtifactComparator.instance(EjbMavenArtifactComparator.Type.code);
 //		cpVersion = new PositionComparator<>();
 
 //		mapVersion = new HashMap<>();
 //		mapModule = new HashMap<>();
-//		
+
+		services = new ArrayList<>();
 		ports = new ArrayList<>();
 		hosts = new ArrayList<>();
+	
 //		versions = new ArrayList<>();
 //		suitabilities = new ArrayList<>();
 //		outdates = new ArrayList<>();
@@ -70,11 +73,12 @@ public class JeeslIoSsiPortWc extends AbstractJeeslWebController<IoLang,IoDescri
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-			JeeslIoSsiFacade<IoLang,IoDescription,IoSsiSystem,IoSsiCredential,IoSsiContext,IoSsiMapping,IoSsiData,IoSsiStatus,IoLabelEntity,IoSsiCleaning,SystemJobStatus,IoSsiHost> fSsi)
+			JeeslIoSsiFacade<IoSsiSystem,IoSsiCredential,IoSsiContext,IoSsiMapping,IoSsiData,IoSsiStatus,IoLabelEntity,IoSsiCleaning,SystemJobStatus,IoSsiHost> fSsi)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fSsi=fSsi;
 
+		services.addAll(fSsi.all(IoSsiNatService.class));
 		hosts.addAll(fSsi.all(IoSsiHost.class));
 		
 //		suitabilities.addAll(fMaven.allOrderedPositionVisible(IoMavenSuitability.class));
@@ -91,12 +95,10 @@ public class JeeslIoSsiPortWc extends AbstractJeeslWebController<IoLang,IoDescri
 //		if(rVersion) {version=null;}
 	}
 	
-	
-	
 	private void reloadPorts()
 	{
 		ports.clear();
-		ports.addAll(fSsi.all(IoSsiPort.class));
+		ports.addAll(fSsi.all(IoSsiNat.class));
 	}
 	
 	public void selectPort()
