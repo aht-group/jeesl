@@ -34,6 +34,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaDifference;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -54,8 +55,9 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,COLT>,
 								COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
-								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT>,
+								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,CUN>,
 								CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>,
+								CUN extends JeeslDbMetaUnique<COL,CON>,
 								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>
 >
 					extends AbstractJeeslWebController<L,D,LOC>
@@ -64,9 +66,9 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbMetaGwc.class);
 	
-	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,DIFF> fbDb;
+	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF> fbDb;
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN> fDb;
 	private final JeeslIoDbMetaCallback callback;
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
@@ -100,7 +102,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 	private SNAP snapshotSource; public SNAP getSnapshotSource() {return snapshotSource;} public void setSnapshotSource(SNAP snapshotSource) {this.snapshotSource = snapshotSource;}
 	private SNAP snapshotTarget; public SNAP getSnapshotTarget() {return snapshotTarget;} public void setSnapshotTarget(SNAP snapshotTarget) {this.snapshotTarget = snapshotTarget;}
 
-	public JeeslDbMetaGwc(JeeslIoDbMetaCallback callback, IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,DIFF> fbDb)
+	public JeeslDbMetaGwc(JeeslIoDbMetaCallback callback, IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.callback = callback;
@@ -135,7 +137,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		systemConstraints = new ArrayList<>();
 	}
 
-	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON> fDb)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN> fDb)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fDb = fDb;
@@ -186,6 +188,9 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 			Collections.sort(systemTables,cpTable);
 			
 			systemColumn.addAll(fDb.fIoDbMetaColumns(query));
+			
+			query.addRootFetch(JeeslDbMetaConstraint.Attributes.uniques);
+			query.distinct(true);
 			systemConstraints.addAll(fDb.fIoDbMetaConstraints(query));
 		}
 		

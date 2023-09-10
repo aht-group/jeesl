@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoDbMetaConstraintFactory<MT extends JeeslDbMetaTable<?,?>,
-								CON extends JeeslDbMetaConstraint<?,MT,?,?>>
+										CON extends JeeslDbMetaConstraint<?,MT,?,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoDbMetaConstraintFactory.class);
 	

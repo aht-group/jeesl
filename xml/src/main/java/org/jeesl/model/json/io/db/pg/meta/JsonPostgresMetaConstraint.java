@@ -1,6 +1,9 @@
 package org.jeesl.model.json.io.db.pg.meta;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.jeesl.model.json.system.status.JsonType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +20,11 @@ public class JsonPostgresMetaConstraint implements Serializable
 	public String getCode() {return code;}
 	public void setCode(String code) {this.code = code;}
 	
+	@JsonProperty("type")
+	private JsonType type;
+	public JsonType getType() {return type;}
+	public void setType(JsonType type) {this.type = type;}
+
 	@JsonProperty("localColumn")
 	private String localColumn;
 	public String getLocalColumn() {return localColumn;}
@@ -31,4 +39,9 @@ public class JsonPostgresMetaConstraint implements Serializable
 	private String remoteColumn;
 	public String getRemoteColumn() {return remoteColumn;}
 	public void setRemoteColumn(String remoteColumn) {this.remoteColumn = remoteColumn;}
+	
+	@JsonProperty("columns")
+	private List<JsonPostgresMetaColumn> columns;
+	public List<JsonPostgresMetaColumn> getColumns() {return columns;}
+	public void setColumns(List<JsonPostgresMetaColumn> columns) {this.columns = columns;}
 }

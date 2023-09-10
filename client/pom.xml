@@ -75,6 +75,17 @@
         	</exclusions>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-configuration2</artifactId>
+			<scope>compile</scope>
+			<exclusions>
+        		<exclusion>
+        			<artifactId>commons-logging</artifactId>
+        			<groupId>commons-logging</groupId>
+        		</exclusion>
+        	</exclusions>
+		</dependency>
+		<dependency>
     		<groupId>commons-collections</groupId>
     		<artifactId>commons-collections</artifactId>
     		<version>3.2.2</version>

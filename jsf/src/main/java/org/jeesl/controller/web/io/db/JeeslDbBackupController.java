@@ -40,7 +40,7 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbBackupController.class);
 	
-	private JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?,?,?,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?,?,?,?,?> fDb;
 	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,DF,DH,DS> fbDb;
 	
 	private SbDateHandler sbhDate; public SbDateHandler getSbhDate() {return sbhDate;}
@@ -63,7 +63,7 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 		sbhDate.initWeeks(2,0);
 	}
 	
-	public void postConstructDbBackup(JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?,?,?,?> fDb, SYSTEM system)
+	public void postConstructDbBackup(JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,?,?,?,?,?> fDb, SYSTEM system)
 	{
 		this.fDb=fDb;
 		this.system=system;

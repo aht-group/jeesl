@@ -2,6 +2,7 @@ package org.jeesl.controller.util.comparator.ejb.io.db;
 
 import java.util.Comparator;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
@@ -9,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoDbConstraintComparator<COL extends JeeslDbMetaColumn<?,?,?>,
-											CON extends JeeslDbMetaConstraint<?,?,COL,?>>
+											CON extends JeeslDbMetaConstraint<?,?,COL,?,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoDbConstraintComparator.class);
 
@@ -38,7 +39,8 @@ public class EjbIoDbConstraintComparator<COL extends JeeslDbMetaColumn<?,?,?>,
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
 			  ctb.append(a.getType().getPosition(), b.getType().getPosition());
-			  ctb.append(a.getColumnLocal().getId(), b.getColumnLocal().getId());
+			  if(ObjectUtils.allNotNull(a.getColumnLocal(),b.getColumnLocal())) {ctb.append(a.getColumnLocal().getId(), b.getColumnLocal().getId());}
+			  ctb.append(a.getCode(), b.getType().getCode());
 			  ctb.append(a.getId(),b.getId());
 			  return ctb.toComparison();
         }

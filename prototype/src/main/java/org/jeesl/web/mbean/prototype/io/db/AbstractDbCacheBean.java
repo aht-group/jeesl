@@ -27,7 +27,7 @@ public class AbstractDbCacheBean <L extends JeeslLang, D extends JeeslDescriptio
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbCacheBean.class);
 	
 	@SuppressWarnings("unused")
-	private JeeslIoDbFacade<?,?,?,?,?,?,?,?> fDb;
+	private JeeslIoDbFacade<?,?,?,?,?,?,?,?,?> fDb;
 	@SuppressWarnings("unused")
 	private final IoDbDumpFactoryBuilder<L,D,?,?,?,?,?> fbDb;
 	
@@ -49,7 +49,7 @@ public class AbstractDbCacheBean <L extends JeeslLang, D extends JeeslDescriptio
 		mapColumn = new HashMap<>();
 	}
 	
-	public void postConstructDbCache(JeeslIoDbFacade<?,?,?,?,?,?,?,?> fDb)
+	public void postConstructDbCache(JeeslIoDbFacade<?,?,?,?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 	}

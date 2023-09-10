@@ -19,6 +19,11 @@ public class JsonPostgresMetaColumn implements Serializable
 	public String getCode() {return code;}
 	public void setCode(String code) {this.code = code;}
 	
+	@JsonProperty("position")
+	private Integer position;
+	public Integer getPosition() {return position;}
+	public void setPosition(Integer position) {this.position = position;}
+
 	@JsonProperty("type")
 	private JsonType type;
 	public JsonType getType() {return type;}

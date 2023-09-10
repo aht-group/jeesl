@@ -47,8 +47,8 @@
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="SecurityContext"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveContext()}" update=":#{cc.id}:grid" />
-						<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteContext()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveContext()}" update=":#{cc.id}:grid" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteContext()}" update=":#{cc.id}:grid"/>
 					</f:facet>
 					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
 					<j:inputGrid>

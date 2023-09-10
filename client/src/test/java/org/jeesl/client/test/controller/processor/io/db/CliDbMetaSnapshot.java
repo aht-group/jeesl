@@ -46,7 +46,7 @@ public class CliDbMetaSnapshot
 		}
 		
 	    catch (SQLException | IOException e) {e.printStackTrace();}
-		finally{DbUtils.closeQuietly(connection);}
+		finally {DbUtils.closeQuietly(connection);}
 		
 		JsonUtil.trace(snapshot);
 		Path path = Paths.get(config.getString("dir.onedrive"),"dev/jeesl/io/db/meta/"+systemCode+".json");

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -22,7 +24,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 
 @Entity
 @Table(name="IoDbMetaConstraint",uniqueConstraints=@UniqueConstraint(columnNames={"table_id","code"}))
-public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraintType>
+public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraintType,IoDbMetaUnique>
 {
 	public static final long serialVersionUID=1;
 	
@@ -63,6 +65,13 @@ public class IoDbMetaConstraint implements JeeslDbMetaConstraint<IoDbMetaSnapsho
 	@Override public List<IoDbMetaSnapshot> getSnapshots() {if(Objects.isNull(snapshots)) {snapshots = new ArrayList<>();} return snapshots;}
 	@Override public void setSnapshots(List<IoDbMetaSnapshot> snapshots) {this.snapshots = snapshots;}
 	
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="constraint")
+	@OrderBy("position ASC")
+	private List<IoDbMetaUnique> uniques;
+	@Override public List<IoDbMetaUnique> getUniques() {if(Objects.isNull(uniques)) {uniques = new ArrayList<>();} return uniques;}
+	@Override public void setUniques(List<IoDbMetaUnique> uniques) {this.uniques = uniques;}
+
+
 	@Override public boolean equals(Object object){return (object instanceof IoDbMetaConstraint) ? id == ((IoDbMetaConstraint) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 

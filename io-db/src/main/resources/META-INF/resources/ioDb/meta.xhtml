@@ -144,6 +144,14 @@
 								<jtp:symbolizer value="#{c.type}" marginLeft="5" marginRight="5"/>
 								<h:outputText value=" [#{c.columnLocal.code}]" rendered="#{c.type.code eq 'pk'}"/>
 								<h:outputText value=" [#{c.columnLocal.code}  #{c.columnRemote.table.code}.#{c.columnRemote.code}]" rendered="#{c.type.code eq 'fk'}"/>
+								<ui:fragment rendered="#{c.type.code eq 'uk'}">
+									<h:outputText value=" ["/>
+										<ui:repeat var="u" value="#{c.uniques}" varStatus="index">
+											<h:outputText value="#{u.column.code}"/>
+											<h:outputText value="#{index.last ? '' : ' '}"/>
+										</ui:repeat>
+									<h:outputText value="]"/>
+								</ui:fragment>
 								<br/>
 							</ui:repeat>
 						</ui:fragment>

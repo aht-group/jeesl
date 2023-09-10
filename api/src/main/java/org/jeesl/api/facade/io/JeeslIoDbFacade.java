@@ -12,6 +12,7 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
@@ -25,7 +26,8 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
 								TAB extends JeeslDbMetaTable<SYSTEM,?>,
 								COL extends JeeslDbMetaColumn<?,TAB,?>,
-								CON extends JeeslDbMetaConstraint<?,TAB,COL,?>
+								CON extends JeeslDbMetaConstraint<?,TAB,COL,?,CUN>,
+								CUN extends JeeslDbMetaUnique<COL,CON>
 							>
 		extends JeeslFacade
 {
@@ -45,4 +47,5 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	List<TAB> fIoDbMetaTables(EjbIoDbQuery<SYSTEM,SNAP> query);
 	List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM,SNAP> query);
 	List<CON> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM,SNAP> query);
+	List<CUN> fIoDbMetaUniques(EjbIoDbQuery<SYSTEM,SNAP> query);
 }

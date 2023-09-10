@@ -29,7 +29,7 @@ public class AbstractAdminDbDumpBean <L extends JeeslLang,D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminDbDumpBean.class);
 	
-	private JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?,?,?,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?,?,?,?,?> fDb;
 	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb;
 	
 	private List<DUMP> dumps; public List<DUMP> getDumps(){return dumps;}
@@ -41,7 +41,7 @@ public class AbstractAdminDbDumpBean <L extends JeeslLang,D extends JeeslDescrip
 		this.fbDb=fbDb;
 	}
 	
-	public void initSuper(JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?,?,?,?> fDb)
+	public void initSuper(JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		refreshList();

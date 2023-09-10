@@ -16,6 +16,7 @@ import org.jeesl.model.ejb.io.db.meta.IoDbMetaConstraintType;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaDifference;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaSnapshot;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaTable;
+import org.jeesl.model.ejb.io.db.meta.IoDbMetaUnique;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
@@ -23,24 +24,24 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IoDbRestHandler extends IoDbRestGenericHandler<IoLang,IoDescription,IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbDumpStatus,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType>
+public class IoDbRestHandler extends IoDbRestGenericHandler<IoLang,IoDescription,IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbDumpStatus,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique>
 					implements JeeslIoDbRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestHandler.class);
 	
 	public static IoDbRestHandler instance(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbDumpStatus> fbDb,
-											IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaDifference> fbDbMeta,
+											IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference> fbDbMeta,
 											IoSsiCoreFactoryBuilder<IoLang,IoDescription,IoSsiSystem,?,IoSsiHost> fbSsi,
-											JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint> fDb,
+											JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique> fDb,
 											IoSsiSystem system)
 	{
 		return new IoDbRestHandler(fbDb,fbDbMeta,fbSsi,fDb,system);
 	}
 	
 	private IoDbRestHandler(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbDumpStatus> fbDb,
-							IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaDifference> fbDbMeta,
+							IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference> fbDbMeta,
 							IoSsiCoreFactoryBuilder<IoLang,IoDescription,IoSsiSystem,?,IoSsiHost> fbSsi,
-							JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint> fDb,
+							JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique> fDb,
 							IoSsiSystem system)
 	{
 		super(fbDb,fbDbMeta,fbSsi,fDb,system);

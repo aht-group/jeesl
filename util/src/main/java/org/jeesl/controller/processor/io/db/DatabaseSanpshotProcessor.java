@@ -7,10 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaColumnFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaConstraintFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaTableFactory;
+import org.jeesl.factory.json.system.status.JsonTypeFactory;
+import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
+import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
 import org.slf4j.Logger;
@@ -45,12 +51,15 @@ public class DatabaseSanpshotProcessor
 			}
 			
 			table.setPrimaryKeys(new ArrayList<>());
+			Map<String,JsonPostgresMetaConstraint> mapPk = new HashMap<>();
 			ResultSet rsPk = meta.getPrimaryKeys(null, null, table.getCode());
 			logger.trace("Primary Keys of "+table.getCode());
 			while(rsPk.next())
 			{
 				for(int i=1;i<=rsPk.getMetaData().getColumnCount();i++) {logger.trace(i+" "+rsPk.getMetaData().getColumnName(i)+": "+rsPk.getString(i));}
-				table.getPrimaryKeys().add(JsonDbMetaConstraintFactory.buildPk(rsPk));
+				JsonPostgresMetaConstraint c = JsonDbMetaConstraintFactory.buildPk(rsPk);
+				mapPk.put(c.getCode(),c);
+				table.getPrimaryKeys().add(c);
 			}
 			
 			table.setForeignKeys(new ArrayList<>());
@@ -63,20 +72,28 @@ public class DatabaseSanpshotProcessor
 			}
 			
 			table.setUniqueKeys(new ArrayList<>());
+			Map<String,JsonPostgresMetaConstraint> mapUk = new HashMap<>();
 			ResultSet rsUk = meta.getIndexInfo(null,null, table.getCode(), true, false);
-			logger.trace("Foreign Keys of "+table.getCode());
+			logger.trace("Uniques of "+table.getCode());
 			while(rsUk.next())
 			{
-				for(int i=1;i<=rsUk.getMetaData().getColumnCount();i++){logger.info(i+" "+rsUk.getMetaData().getColumnName(i)+": "+rsUk.getString(i));}
-//				table.getForeignKeys().add(JsonDbMetaConstraintFactory.buildFk(rsXX));
+				for(int i=1;i<=rsUk.getMetaData().getColumnCount();i++){logger.trace(i+" "+rsUk.getMetaData().getColumnName(i)+": "+rsUk.getString(i));}
+				JsonDbMetaConstraintFactory.addUk(rsUk,mapUk);
+			}
+			if(ObjectUtils.isNotEmpty(mapUk.values()))
+			{
+				for(JsonPostgresMetaConstraint c : mapUk.values())
+				{
+					if(!mapPk.containsKey(c.getCode())) {table.getUniqueKeys().add(c);}
+				}
 			}
 			
-			System.exit(-1);
-			
-			if(table.getCode().equals("SpProject".toLowerCase()))
+			if(table.getCode().equals("xxIoReportSheet".toLowerCase()))
 			{
 				JsonUtil.info(table);
+				System.exit(-1);
 			}
+			
 			
 			jSnapshot.getTables().add(table);
 		}

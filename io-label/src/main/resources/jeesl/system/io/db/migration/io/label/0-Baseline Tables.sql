@@ -1,0 +1,16 @@
+create table IoLabelAttribute (id  bigserial not null, bean boolean, code varchar(255), construction boolean, developerInfo text, docOptionsInline boolean, manualAdmin boolean, manualUser boolean, position int4 not null, relationOwner boolean, showEnclosure boolean not null, showName boolean not null, showPrint boolean not null, showWeb boolean not null, statusTableDoc boolean, ui boolean, xpath varchar(255), entity_id int8, relation_id int8, type_id int8, primary key (id));
+create table IoLabelAttributeJtDescription (attribute_id int8 not null, description_id int8 not null, primary key (attribute_id, description_id));
+create table IoLabelAttributeJtLang (attribute_id int8 not null, lang_id int8 not null, primary key (attribute_id, lang_id));
+create table IoLabelDiagram (id  bigserial not null, code varchar(255), documentation boolean not null, dotGraph text, dotManual boolean not null, position int4 not null, category_id int8, primary key (id));
+create table IoLabelDiagramJtDescription (diagram_id int8 not null, description_id int8 not null, primary key (diagram_id, description_id));
+create table IoLabelDiagramJtLang (diagram_id int8 not null, lang_id int8 not null, primary key (diagram_id, lang_id));
+create table IoLabelEntity (id  bigserial not null, code varchar(255), developerInfo text, documentation boolean, jscn varchar(255), position int4 not null, timeseries boolean, visible boolean not null, category_id int8, diagram_id int8, primary key (id));
+create table IoLabelEntityJtAttribute (entity_id int8 not null, attribute_id int8 not null);
+create table IoLabelEntityJtDescription (entity_id int8 not null, description_id int8 not null, primary key (entity_id, description_id));
+create table IoLabelEntityJtLang (entity_id int8 not null, lang_id int8 not null, primary key (entity_id, lang_id));
+create table IoLabelMissing (id  bigserial not null, missingCode varchar(255), missingEntity varchar(255), missingLocal varchar(255), primary key (id));
+create table IoRevisionMappingEntity (id  bigserial not null, jpqlTree varchar(255), position int4 not null, visible boolean not null, xpath varchar(255), entity_id int8, scope_id int8, type_id int8, primary key (id));
+create table IoRevisionScope (id  bigserial not null, code varchar(255), position int4 not null, visible boolean not null, category_id int8, primary key (id));
+create table IoRevisionScopeJtAttribute (scope_id int8 not null, attribute_id int8 not null);
+create table IoRevisionScopeJtDescription (scope_id int8 not null, description_id int8 not null, primary key (scope_id, description_id));
+create table IoRevisionScopeJtLang (scope_id int8 not null, lang_id int8 not null, primary key (scope_id, lang_id));

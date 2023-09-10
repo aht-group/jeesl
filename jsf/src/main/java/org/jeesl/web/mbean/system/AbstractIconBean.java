@@ -274,7 +274,7 @@ public class AbstractIconBean implements Serializable
 			Dir xml = jaxb.load(Dir.class,JeeslIcon.jeeslLibIcons);
 			for(org.exlp.model.xml.io.File s : xml.getFile())
 			{
-				logger.trace("Jeesl Icon Library: "+s.getCode()+" "+s.getSymbol());
+//				logger.info("Jeesl Icon Library: "+s.getCode()+" "+s.getName());
 				if(svg.containsKey(s.getCode())) {logger.warn("Icon already defined !!!");}
 				else
 				{
