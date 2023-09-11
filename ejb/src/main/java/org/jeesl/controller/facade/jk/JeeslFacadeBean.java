@@ -912,7 +912,7 @@ public class JeeslFacadeBean implements JeeslFacade
 	    Path<Object> p1Path = root.get(p1Name);
 
 	    CriteriaQuery<T> select = criteriaQuery.select(root);
-	    select.where(cB.equal(p1Path, p1.getId()));
+	    select.where(cB.equal(p1Path, p1));
 
 	    if(EjbWithPosition.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithPosition.Attribute.position.toString())));}
 	    else if(EjbWithValidFrom.class.isAssignableFrom(c)){select.orderBy(cB.asc(root.get(EjbWithValidFrom.Attributes.validFrom.toString())));}

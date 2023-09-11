@@ -20,6 +20,7 @@ import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
 import org.jeesl.factory.ejb.system.security.EjbSecurityMenuFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.system.security.JeeslSecurityMenuCallback;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -98,7 +99,8 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 
 	private boolean disabledMenuImportFromDefaultContext; public boolean isDisabledMenuImportFromDefaultContext() {return disabledMenuImportFromDefaultContext;}
 
-	public JeeslSecurityMenuController(SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity,
+	public JeeslSecurityMenuController(JeeslSecurityMenuCallback callback,
+										SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity,
 										IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
@@ -112,9 +114,9 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	}
 
 	public void postConstructMenu(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-								JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity,
-	                              JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
-	                              JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
+									JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity,
+									JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
+									JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fSecurity=fSecurity;

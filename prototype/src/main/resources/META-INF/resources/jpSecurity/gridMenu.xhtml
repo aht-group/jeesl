@@ -16,8 +16,8 @@
 				<p:panel styleClass="jeesl-tree">
 					<f:facet name="header"><j:pHeader entity="SecurityMenu"/></f:facet>
 					<f:facet id="fActions" name="actions">
-						<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}" library="jeeslGfx"/>
-						<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseTree()}" update="@form" rendered="#{cc.attrs.bean.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}" library="jeeslGfx"/>
+						<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandTree()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}"/>
+						<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseTree()}" update="@form" rendered="#{cc.attrs.bean.isExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}"/>
 					</f:facet>
 					<p:tree id="tree1" var="node" value="#{cc.attrs.bean.tree}" 
 							selection="#{cc.attrs.bean.node}" selectionMode="single"
@@ -78,7 +78,7 @@
 							<ui:repeat var="d" value="#{cc.attrs.bean.documents}">
 						     	<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addHelp(d)}" update=":#{cc.id}:sView" tooltip="#{d.id}"/>						
 					    	</ui:repeat>
-							<j:icon rendered="#{not empty cc.attrs.bean.help}" type="jeeslRemove" listener="#{cc.attrs.bean.removeHelp()}" update=":#{cc.id}:sView"/>
+							<j:svg rendered="#{not empty cc.attrs.bean.help}" type="jeeslRemove" listener="#{cc.attrs.bean.removeHelp()}" update=":#{cc.id}:sView"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect"  listener="#{cc.attrs.bean.selectHelp()}" update=":#{cc.id}:fHelps"/>
@@ -104,8 +104,8 @@
 				<p:panel styleClass="jeesl-tree">
 					<f:facet name="header"><j:pHeader entity="SecurityHelp"/></f:facet>
 					<f:facet id="fHelpActions" name="actions">
-						<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandHelp()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}" library="jeeslGfx"/>
-						<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseHelp()}" update="@form" rendered="#{cc.attrs.bean.isHelpExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}" library="jeeslGfx"/>
+						<j:svg type="jeeslTreeExpandAll" listener="#{cc.attrs.bean.expandHelp()}" update="@form" tooltip="#{msg.jeeslTtExpandAllChildren}"/>
+						<j:svg type="jeeslTreeCollapseAll" listener="#{cc.attrs.bean.collapseHelp()}" update="@form" rendered="#{cc.attrs.bean.isHelpExpanded()}" tooltip="#{msg.jeeslTtCollapseAllChildren}"/>
 					</f:facet>
 					<p:tree id="tHelp" value="#{cc.attrs.bean.helpTree}" var="helpNode"
 						selection="#{cc.attrs.bean.helpNode}" selectionMode="single"
