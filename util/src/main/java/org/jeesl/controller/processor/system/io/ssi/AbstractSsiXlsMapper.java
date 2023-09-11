@@ -45,7 +45,7 @@ public class AbstractSsiXlsMapper
 		{
 			String key = row.getCell(colIndex).getStringCellValue().trim();
 			logger.trace("i:"+colIndex+" "+key);
-			logger.trace(colIndex+"\t"+CellReference.convertNumToColString(colIndex)+" "+key);
+			logger.trace(String.format("%02d", colIndex)+"\t"+CellReference.convertNumToColString(colIndex)+" "+key);
 			mapColumnIndex.put(colIndex,key);
 			if(mapColumnCode.containsKey(key)) {logger.warn("Already exists: "+key);}
 			mapColumnCode.put(key,colIndex);
