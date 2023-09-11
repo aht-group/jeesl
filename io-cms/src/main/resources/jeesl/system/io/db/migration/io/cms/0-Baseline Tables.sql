@@ -1,5 +1,7 @@
 create table envers.IoMarkup_ (id int8 not null, REV int8 not null, REVTYPE int2, content text, lkey varchar(255), type_id int8, primary key (id, REV));
 create table IoCms (id  bigserial not null, position int4 not null, toc boolean not null, category_id int8, root_id int8, primary key (id));
+create table IoCmsContent (id  bigserial not null, fallback boolean not null, lang text, lkey varchar(255), element_id int8, markup_id int8, primary key (id));
+create table IoCmsElement (id  bigserial not null, json text, position int4 not null, visible boolean, frContainer_id int8, section_id int8, type_id int8, primary key (id));
 create table IoCmsJtLang (cms_id int8 not null, lang_id int8 not null, primary key (cms_id, lang_id));
 create table IoCmsJtLanguage (cms_id int8 not null, locale_id int8 not null);
 create table IoCmsSection (id  bigserial not null, code varchar(255), position int4 not null, visible boolean not null, section_id int8, primary key (id));
