@@ -1,4 +1,4 @@
-package org.jeesl.jsf.components.layout;
+package org.jeesl.jsf.jx.component.layout;
 
 import java.io.IOException;
 import java.util.ArrayList;

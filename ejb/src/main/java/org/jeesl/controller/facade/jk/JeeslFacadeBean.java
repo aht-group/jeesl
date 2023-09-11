@@ -496,14 +496,14 @@ public class JeeslFacadeBean implements JeeslFacade
 
 		CriteriaQuery<T> select = cQ.select(from);
 
-		Expression<Date> eOrder = from.get("position");
+		Expression<Integer> eOrder = from.get("position");
 		select.orderBy(cB.asc(eOrder));
 
 		try
 		{
 			T prototype = cl.newInstance();
 			Path<Object> p1Path = from.get(prototype.resolveParentAttribute());
-			select.where(cB.equal(p1Path, parent.getId()));
+			select.where(cB.equal(p1Path, parent));
 		}
 		catch (InstantiationException e) {e.printStackTrace();}
 		catch (IllegalAccessException e) {e.printStackTrace();}

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.infinispan.Cache;
@@ -29,7 +30,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 
 	private JeeslSecurityBean<?,?,?,?,?,CTX,M,?> bSecurity;
 	
-	private final List<M> mainMenu; public List<M> getMainMenu() {return mainMenu;}
+	private final List<M> mainMenu;
 	
 	private I identity;
 	private CTX context;
@@ -47,15 +48,17 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	
 	public void postConstructMenu(JeeslSecurityBean<?,?,?,?,?,CTX,M,?> bSecurity, I identity)
 	{
-		this.bSecurity=bSecurity;
-		this.context=identity.getContext();
+		this.bSecurity = bSecurity;
+		this.context = identity.getContext();
 		
 		this.prepare(identity);
 	}
 	
 	public void prepare(I identity)
 	{
-		this.identity=identity;
+		if(Objects.isNull(identity)) {logger.error("Preparing(identity), but the provided value is null");}
+		else if(debugOnInfo) {logger.info("Preparing(identity) "+identity.toString());}
+		this.identity = identity;
 		this.reset();
 	}
 	
@@ -66,8 +69,16 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 		for(M m : bSecurity.getRootMenus(context)) {if(this.userHasAccessTo(m)) {mainMenu.add(m);}}
 	}
 	
+	public List<M> getMainMenu()
+	{
+		if(debugOnInfo) {logger.info("Requesting main-menu with size "+mainMenu.size());}
+		return mainMenu;
+	}
+	
 	public List<M> subMenu(Cache<String,List<M>> cacheSub, String viewCode)
 	{
+		if(Objects.isNull(identity)) {logger.error("subMenu, but identity is null!");}
+		
 		String cacheKey = TxtIdentityFactory.key("sub",identity,viewCode);
 		if(cacheSub.containsKey(cacheKey)){return cacheSub.get(cacheKey);}
 		else
@@ -94,6 +105,8 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	
 	public List<M> breadcrumb(Cache<String,List<M>> cacheBreadcrumb, String viewCode)
 	{
+		if(Objects.isNull(identity)) {logger.error("breadcrumb, but identity is null!");}
+		
 		String cacheKey = TxtIdentityFactory.key("crumb",identity,viewCode);
 		if(cacheBreadcrumb.containsKey(cacheKey)){return cacheBreadcrumb.get(cacheKey);}
 		else

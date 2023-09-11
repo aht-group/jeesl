@@ -22,6 +22,7 @@ import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
+import org.jeesl.factory.ejb.system.security.EjbSecurityCategoryFactory;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.access.JeeslStaff;
@@ -295,11 +296,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 			logger.info(JeeslSecurityUsecase.class.getSimpleName()+" "+clWc.isAssignableFrom(JeeslSecurityUsecase.class));
 		}
 	
-		String type = null;
-		if(clWc.getSimpleName().contains("Usecase")){type=JeeslSecurityCategory.Type.usecase.toString();}
-		else if(clWc.getSimpleName().contains("Role")){type=JeeslSecurityCategory.Type.role.toString();}
-		else if(clWc.getSimpleName().contains("View")){type=JeeslSecurityCategory.Type.view.toString();}
-		else if(clWc.getSimpleName().contains("Action")){type=JeeslSecurityCategory.Type.action.toString();}
+		String type = EjbSecurityCategoryFactory.toType(clWc);
 		
 		C category = this.fByTypeCode(clC, type, code);
 		

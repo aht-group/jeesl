@@ -16,9 +16,18 @@ public class TxtIdentityFactory
     {
     	StringBuilder sb = new StringBuilder();
     	sb.append(prefix).append("-");
-    	sb.append(identity.getContext().getId()).append("-");
-    	if(Objects.isNull(identity.getUser())) {sb.append("0");}
-    	else {sb.append(identity.getUser().getId());}
+    	
+    	if(Objects.isNull(identity))
+    	{
+    		sb.append("0-0");
+    	}
+    	else
+    	{
+//    		logger.warn("Identity is null!");
+    		if(Objects.isNull(identity.getContext())) {sb.append("0");} else {sb.append(identity.getContext().getId());}
+    		sb.append("-");
+    		if(Objects.isNull(identity.getUser())) {sb.append("0");} else {sb.append(identity.getUser().getId());}
+    	}
     	sb.append("-").append(key);
     	return sb.toString();
     }

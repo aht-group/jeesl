@@ -1,14 +1,14 @@
-package org.jeesl.jsf.components.html;
+package org.jeesl.jsf.jk.component.html;
 
 import java.io.IOException;
 
-import javax.faces.component.FacesComponent;
-import javax.faces.component.UIComponent;
-import javax.faces.component.UIPanel;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
+import jakarta.faces.component.FacesComponent;
+import jakarta.faces.component.UIComponent;
+import jakarta.faces.component.UIPanel;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.context.ResponseWriter;
 
-import org.jeesl.jsf.jx.util.ComponentAttribute;
+import org.jeesl.jsf.jk.util.ComponentAttribute;
 
 @FacesComponent("org.jeesl.jsf.components.html.Li")
 public class Li extends UIPanel

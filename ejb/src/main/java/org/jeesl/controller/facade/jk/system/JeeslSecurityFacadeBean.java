@@ -8,20 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Expression;
-import jakarta.persistence.criteria.ListJoin;
-import jakarta.persistence.criteria.Path;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
-
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.facade.jk.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
+import org.jeesl.factory.ejb.system.security.EjbSecurityCategoryFactory;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.access.JeeslStaff;
@@ -39,6 +30,16 @@ import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCat
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.ListJoin;
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 
 public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 									R extends JeeslSecurityRole<?,?,C,V,U,A>,
@@ -284,28 +285,24 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		return user.getRoles();
 	}
 	
-	@Override public <WC extends JeeslSecurityWithCategory<C>> List<WC> allForCategory(Class<WC> clWc, Class<C> clC, String code) throws JeeslNotFoundException
+	@Override public <WC extends JeeslSecurityWithCategory<C>> List<WC> allForCategory(Class<WC> cWithCategory, Class<C> cCategory, String code) throws JeeslNotFoundException
 	{
 		if(logger.isTraceEnabled())
 		{
-			logger.info(clWc.getName());
+			logger.info(cWithCategory.getName());
 			logger.info(JeeslSecurityRole.class.getSimpleName()+" ");
-			logger.info(JeeslSecurityRole.class.getSimpleName()+" "+clWc.isAssignableFrom(JeeslSecurityRole.class));
-			logger.info(JeeslSecurityView.class.getSimpleName()+" "+clWc.isAssignableFrom(JeeslSecurityView.class));
-			logger.info(JeeslSecurityUsecase.class.getSimpleName()+" "+clWc.isAssignableFrom(JeeslSecurityUsecase.class));
+			logger.info(JeeslSecurityRole.class.getSimpleName()+" "+cWithCategory.isAssignableFrom(JeeslSecurityRole.class));
+			logger.info(JeeslSecurityView.class.getSimpleName()+" "+cWithCategory.isAssignableFrom(JeeslSecurityView.class));
+			logger.info(JeeslSecurityUsecase.class.getSimpleName()+" "+cWithCategory.isAssignableFrom(JeeslSecurityUsecase.class));
 		}
 	
-		String type = null;
-		if(clWc.getSimpleName().contains("Usecase")){type=JeeslSecurityCategory.Type.usecase.toString();}
-		else if(clWc.getSimpleName().contains("Role")){type=JeeslSecurityCategory.Type.role.toString();}
-		else if(clWc.getSimpleName().contains("View")){type=JeeslSecurityCategory.Type.view.toString();}
-		else if(clWc.getSimpleName().contains("Action")){type=JeeslSecurityCategory.Type.action.toString();}
+		String type = EjbSecurityCategoryFactory.toType(cWithCategory);
+		logger.info("Type: "+type);
 		
-		C category = this.fByTypeCode(clC, type, code);
+		C category = this.fByTypeCode(cCategory, type, code);
 		
-		return this.allOrderedPositionParent(clWc,category);
+		return this.allOrderedPositionParent(cWithCategory,category);
 	}	
-	
 	
 	
 	// STAFF

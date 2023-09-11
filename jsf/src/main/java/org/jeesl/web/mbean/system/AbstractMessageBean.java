@@ -67,6 +67,4 @@ public class AbstractMessageBean <L extends JeeslLang, D extends JeeslDescriptio
 	{
 		FacesContextMessage.error(id, jeeslTranslationBean.get(jeeslLocaleCode, "fmError"), text);
 	}
-	
-	
 }

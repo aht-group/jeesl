@@ -171,13 +171,13 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	protected boolean categoryRemoveable() throws JeeslNotFoundException
 	{
-		views = fSecurity.allForCategory(fbSecurity.getClassView(),fbSecurity.getClassCategory(),category.getCode());
+		views = fSecurity.allForParent(fbSecurity.getClassView(),category);
 		return views.isEmpty();
 	}
 	
 	private void reloadViews() throws JeeslNotFoundException
 	{
-		views = fSecurity.allForCategory(fbSecurity.getClassView(),fbSecurity.getClassCategory(),category.getCode());
+		views = fSecurity.allForParent(fbSecurity.getClassView(),category);
 		logger.info(AbstractLogMessage.reloaded(fbSecurity.getClassView(), views));
 	}
 	
