@@ -1,0 +1,8 @@
+create table IoDbMetaColumn (id  bigserial not null, code varchar(255), table_id int8, type_id int8, primary key (id));
+create table IoDbMetaConstraint (id  bigserial not null, code varchar(255), columnLocal_id int8, columnRemote_id int8, table_id int8, type_id int8, primary key (id));
+create table IoDbMetaSnapshot (id  bigserial not null, name varchar(255), record timestamp, system_id int8, primary key (id));
+create table IoDbMetaSnapshotJtColumn (snapshot_id int8 not null, column_id int8 not null);
+create table IoDbMetaSnapshotJtConstraint (snapshot_id int8 not null, constraint_id int8 not null);
+create table IoDbMetaSnapshotJtTable (table_id int8 not null, snapshot_id int8 not null);
+create table IoDbMetaTable (id  bigserial not null, code varchar(255), system_id int8, primary key (id));
+create table IoDbMetaUnique (id  bigserial not null, position int4 not null, column_id int8, constraint_id int8, primary key (id));
