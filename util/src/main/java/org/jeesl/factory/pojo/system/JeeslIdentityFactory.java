@@ -35,12 +35,12 @@ public class JeeslIdentityFactory <I extends JeeslIdentity<R,V,U,A,CTX,USER>,
 	final static Logger logger = LoggerFactory.getLogger(JeeslIdentityFactory.class);
 	protected JeeslLogger jogger; public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> jogger(JeeslLogger jogger) {this.jogger = jogger; return this;}
 	
-	protected JeeslSecurityFacade<?,R,V,U,A,USER> fSecurity;
+	protected JeeslSecurityFacade<?,R,V,U,A,?,USER> fSecurity;
 	protected JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity;
 	
 	private final SecurityFactoryBuilder<?,?,?,R,V,U,A,?,?,?,?,?,?,?,?,USER> fbSecurity;
 	
-	public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> securityFacade(JeeslSecurityFacade<?,R,V,U,A,USER> fSecurity) {this.fSecurity = fSecurity; return this;}
+	public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> securityFacade(JeeslSecurityFacade<?,R,V,U,A,?,USER> fSecurity) {this.fSecurity = fSecurity; return this;}
 	public JeeslIdentityFactory<I,R,V,U,A,CTX,USER> securityBean(JeeslSecurityBean<R,V,U,A,?,?,?,USER> bSecurity) {this.bSecurity = bSecurity; return this;}
 	
 	final Class<I>  cIdentity;

@@ -165,7 +165,7 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-		</dependency> 
+		</dependency>
 		
 		<!-- 2022-10-26 tk Preparing removal 
        <dependency>

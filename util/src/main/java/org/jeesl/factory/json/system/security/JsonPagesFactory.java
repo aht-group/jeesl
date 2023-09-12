@@ -52,7 +52,7 @@ public class JsonPagesFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 	public static JsonSecurityPages build() {return new JsonSecurityPages();}
 	
-	public JsonSecurityPages hierarchy(JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity)
+	public JsonSecurityPages hierarchy(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity)
 	{
 		JsonSecurityPages pages = build();
 		

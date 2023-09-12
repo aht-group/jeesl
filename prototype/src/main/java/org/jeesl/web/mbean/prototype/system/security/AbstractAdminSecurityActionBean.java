@@ -64,7 +64,7 @@ public class AbstractAdminSecurityActionBean <L extends JeeslLang, D extends Jee
 		userIsDeveloper = true;
 	}
 	
-	public void initSuper(JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity, JeeslTranslationBean<L,D,LOC> bTranslation,
+	public void initSuper(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity, JeeslTranslationBean<L,D,LOC> bTranslation,
 											JeeslFacesMessageBean bMessage,
 											JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{

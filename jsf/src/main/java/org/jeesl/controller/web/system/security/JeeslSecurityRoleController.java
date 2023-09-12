@@ -63,7 +63,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityRoleController.class);
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity;
+	private JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
 	private JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
 	private final EjbSecurityCategoryFactory<C> efCategory;
@@ -123,7 +123,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	}
 	
 	public void postConstructRole(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity,
+			JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
 			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{
 		super.postConstructWebController(lp,bMessage);

@@ -64,7 +64,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	
 	public enum Action{Developer}
 	
-	private JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity;
+	private JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
 	
 	private JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
@@ -117,7 +117,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity,
+									JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
 									JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 									JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{

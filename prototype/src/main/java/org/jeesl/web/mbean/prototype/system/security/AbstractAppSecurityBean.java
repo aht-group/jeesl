@@ -25,6 +25,7 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityArea;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.interfaces.util.query.system.EjbSecurityQuery;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.slf4j.Logger;
@@ -50,7 +51,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	
 	protected enum JoggerLoop {loadView}
 	
-	protected JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity;
+	protected JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
 	
 	protected SecurityFactoryBuilder<?,?,C,R,V,U,A,?,CTX,M,AR,?,?,?,?,USER> fbSecurity;
 	private EjbSecurityMenuFactory<V,CTX,M> efMenu;
@@ -131,7 +132,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		nullCtx = fbSecurity.ejbContext().build();
 	}
 	
-	public void postConstructDb(JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity)
+	public void postConstructDb(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity)
 	{
 		this.fSecurity=fSecurity;
 		views.addAll(fSecurity.all(fbSecurity.getClassView()));
@@ -178,7 +179,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void postConstructFile(JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity)
+	public void postConstructFile(JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity)
 	{
 		this.fSecurity=fSecurity;
 		
@@ -225,14 +226,17 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 		}
 	}
 	
-	public void reloadMenu(JeeslSecurityFacade<C,R,V,U,A,USER> fProvidedSecurity)
+	public void reloadMenu(JeeslSecurityFacade<C,R,V,U,A,M,USER> fProvidedSecurity)
 	{
 		mapMenuAll.clear();
 		mapMenuRoot.clear();
 		n2mMenu.clear();
 		mapRoot.clear();
-			
-		for(M m : fProvidedSecurity.all(fbSecurity.getClassMenu()))
+		
+		EjbSecurityQuery query = new EjbSecurityQuery();
+		query.addRootFetch(JeeslSecurityMenu.Attributes.context);
+		
+		for(M m : fProvidedSecurity.fSecurityMenus(query))
 		{
 			CTX ctx = null;
 			if(m.getContext()==null){ctx = nullCtx;}

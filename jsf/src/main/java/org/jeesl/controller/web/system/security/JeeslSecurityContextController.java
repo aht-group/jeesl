@@ -34,7 +34,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityContextController.class);
 	
 	private final SecurityFactoryBuilder<L,D,?,?,?,?,?,?,CTX,?,?,?,?,?,?,?> fbSecurity;
-	private JeeslSecurityFacade<?,?,?,?,?,?> fSecurity;
+	private JeeslSecurityFacade<?,?,?,?,?,?,?> fSecurity;
 	
 	private final EjbSecurityContextFactory<CTX> efContext;
 	
@@ -54,7 +54,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	}
 	
 	public void postConstructContext(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-											JeeslSecurityFacade<?,?,?,?,?,?> fSecurity)
+											JeeslSecurityFacade<?,?,?,?,?,?,?> fSecurity)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fSecurity = fSecurity;

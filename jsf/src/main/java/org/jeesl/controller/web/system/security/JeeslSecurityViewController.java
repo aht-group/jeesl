@@ -70,7 +70,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	private enum SecuritySuffixDeprecated {Developer}
 	
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,?,?,USER> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity;
+	private JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
 	
 	private final JeeslSecurityViewCallback callback;
 	
@@ -119,7 +119,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-			JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity,
+			JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
 			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{

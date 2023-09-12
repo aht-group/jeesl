@@ -13,6 +13,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
@@ -38,6 +39,7 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory.Type;
 import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.system.EjbSecurityQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,7 +55,7 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 									OH extends JeeslSecurityOnlineHelp<V,?,?>,
 									USER extends JeeslUser<R>>
 							extends JeeslFacadeBean
-							implements JeeslSecurityFacade<C,R,V,U,A,USER>
+							implements JeeslSecurityFacade<C,R,V,U,A,M,USER>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityFacadeBean.class);
@@ -276,6 +278,21 @@ public class JeeslSecurityFacadeBean<C extends JeeslSecurityCategory<?,?>,
 		List<A> result = new ArrayList<A>();
 		logger.warn("NYI");
 		return result;
+	}
+	
+	@Override public List<M> fSecurityMenus(EjbSecurityQuery query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<M> cQ = cB.createQuery(fbSecurity.getClassMenu());
+		Root<M> root = cQ.from(fbSecurity.getClassMenu());
+		if(query.getRootFetches()!=null) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+		
+		cQ.select(root);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		TypedQuery<M> tQ = em.createQuery(cQ);
+		return tQ.getResultList();
 	}
 	
 	@Override public List<R> allRolesForUser(USER user)

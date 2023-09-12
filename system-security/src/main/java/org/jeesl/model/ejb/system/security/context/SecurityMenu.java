@@ -37,7 +37,8 @@ public class SecurityMenu implements JeeslSecurityMenu<IoLang,SecurityView,Secur
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 
-	@NotNull @ManyToOne
+	@NotNull
+	@ManyToOne(fetch=FetchType.LAZY)
 	private SecurityContext context;
 	@Override public SecurityContext getContext() {return context;}
 	@Override public void setContext(SecurityContext context) {this.context = context;}

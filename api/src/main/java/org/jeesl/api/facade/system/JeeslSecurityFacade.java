@@ -7,18 +7,21 @@ import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.access.JeeslStaff;
+import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCategory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.system.EjbSecurityQuery;
 
 public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 										R extends JeeslSecurityRole<?,?,C,V,U,A>,
 										V extends JeeslSecurityView<?,?,C,R,U,A>,
 										U extends JeeslSecurityUsecase<?,?,C,R,V,A>,
 										A extends JeeslSecurityAction<?,?,R,V,U,?>,
+										M extends JeeslSecurityMenu<?,V,?,M>,
 										USER extends JeeslUser<R>>
 	extends JeeslFacade
 {	
@@ -43,6 +46,8 @@ public interface JeeslSecurityFacade <C extends JeeslSecurityCategory<?,?>,
 	
 	List<A> allActionsForUser(USER user);
 	List<A> allActions(Class<R> cRole, List<R> roles);
+	
+	List<M> fSecurityMenus(EjbSecurityQuery query);
 	
 	void grantRole(Class<USER> clUser, Class<R> clRole, USER user, R role, boolean grant);
 	boolean hasRole(Class<USER> clUser, Class<R> clRole, USER user, R role);

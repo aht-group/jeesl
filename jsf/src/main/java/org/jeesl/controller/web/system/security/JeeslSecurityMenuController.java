@@ -76,7 +76,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityMenuController.class);
 
 	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity;
+	private JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
 	private JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
 	
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
@@ -114,7 +114,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	}
 
 	public void postConstructMenu(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslSecurityFacade<C,R,V,U,A,USER> fSecurity,
+									JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
 									JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 									JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
 	{
