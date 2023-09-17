@@ -1,5 +1,6 @@
 package org.jeesl.factory.sql;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -350,7 +351,12 @@ public class SqlFactory
 		semicolon(sb,newLine);
 	}
 
-	
+	public static Long toLong(Object o)
+	{
+		if(o instanceof BigInteger) {return ((BigInteger)o).longValue();}
+		else if(o instanceof Long) {return (Long)o;}
+		else {return null;}
+	}
 	
 	
 }

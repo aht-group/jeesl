@@ -11,7 +11,7 @@ import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.interfaces.model.io.db.JeeslDbPoolStatistic;
+import org.jeesl.interfaces.model.io.db.pg.connection.JeeslDbPoolStatistic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;

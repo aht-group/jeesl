@@ -7,8 +7,8 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.db.JeeslDbReplicationState;
-import org.jeesl.interfaces.model.io.db.JeeslDbReplicationSync;
+import org.jeesl.interfaces.model.io.db.pg.replication.JeeslDbReplicationState;
+import org.jeesl.interfaces.model.io.db.pg.replication.JeeslDbReplicationSync;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoStatus;

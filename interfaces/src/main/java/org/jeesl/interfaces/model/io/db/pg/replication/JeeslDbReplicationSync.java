@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.db;
+package org.jeesl.interfaces.model.io.db.pg.replication;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslDbReplicationColumn <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslDbReplicationSync <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
 							extends Serializable,EjbPersistable,

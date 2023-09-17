@@ -1,13 +1,14 @@
 package org.jeesl.factory.json.system.io.db;
 
-import java.math.BigInteger;
+import java.util.Objects;
 
 import org.jeesl.controller.processor.finance.AmountRounder;
+import org.jeesl.factory.sql.SqlFactory;
 import org.jeesl.model.json.io.db.pg.JsonPostgresStatement;
 
 public class JsonPostgresStatementFactory
 {
-	public static JsonPostgresStatement build(int number, Object[] array)
+	public static JsonPostgresStatement build(long number, Object[] array)
 	{
 		String datName = null;
 		String query = null; 
@@ -21,8 +22,8 @@ public class JsonPostgresStatementFactory
 		if(array[0]!=null){datName = (String)array[0];}
 		if(array[1]!=null){query = (String)array[1];}
 		
-		if(array[2]!=null){rowCount = ((BigInteger)array[2]).longValue();}
-		if(array[3]!=null){calls = ((BigInteger)array[3]).longValue();}
+		if(Objects.nonNull(array[2])){rowCount = SqlFactory.toLong(array[2]);}
+		if(Objects.nonNull(array[3])){calls = SqlFactory.toLong(array[3]);}
 		
 		if(array[4]!=null){totalTime = (Double)array[4];}
 		if(array[5]!=null){avgTime = (Double)array[5];}
@@ -30,7 +31,7 @@ public class JsonPostgresStatementFactory
 		return build(number,datName,query,rowCount,calls,totalTime,avgTime);
 	}
 	
-	public static JsonPostgresStatement build(int number, String datName, String query, Long rowCount, Long calls, Double totalTime, Double avgTime)
+	public static JsonPostgresStatement build(long number, String datName, String query, Long rowCount, Long calls, Double totalTime, Double avgTime)
 	{
 		JsonPostgresStatement json = new JsonPostgresStatement();
 		json.setId(number);

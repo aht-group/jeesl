@@ -10,7 +10,7 @@ import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.factory.txt.system.io.db.TxtSqlQueryFactory;
-import org.jeesl.interfaces.model.io.db.JeeslDbStatementColumn;
+import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementColumn;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -19,14 +19,14 @@ import org.jeesl.model.json.io.db.pg.JsonPostgresStatement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslDbStatementGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslDbStatementStatisticGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,
 									SC extends JeeslDbStatementColumn<L,D,SC,?>>
 						extends AbstractJeeslWebController<L,D,LOC>
 						implements Serializable
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslDbStatementGwc.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslDbStatementStatisticGwc.class);
 	
 	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?> fDb;
@@ -38,7 +38,7 @@ public class JeeslDbStatementGwc <L extends JeeslLang, D extends JeeslDescriptio
 	
 	private final String dbName;
 	
-	public JeeslDbStatementGwc(String dbName, final IoDbPgFactoryBuilder<L,D,?,SC,?,?,?> fbDb)
+	public JeeslDbStatementStatisticGwc(String dbName, final IoDbPgFactoryBuilder<L,D,?,SC,?,?,?> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.dbName=dbName;

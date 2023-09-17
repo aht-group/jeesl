@@ -17,13 +17,13 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
 public class IoDbDumpFile implements JeeslDbDumpFile<IoDbDump,IoSsiHost,IoDbDumpStatus>
 {
 	public static final long serialVersionUID=1;
-	
-	
+
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
-	
+
 //	private IoSsiSystem system;
 //	public IoSsiSystem getSystem() {return system;}
 //	public void setSystem(IoSsiSystem system) {this.system = system;}
@@ -33,7 +33,7 @@ public class IoDbDumpFile implements JeeslDbDumpFile<IoDbDump,IoSsiHost,IoDbDump
 	private IoDbDump dump;
 	@Override public IoDbDump getDump() {return dump;}
 	@Override public void setDump(IoDbDump dump) {this.dump = dump;}
-	
+
 	@NotNull @ManyToOne
 	private IoSsiHost host;
 	@Override public IoSsiHost getHost() {return host;}
@@ -43,7 +43,8 @@ public class IoDbDumpFile implements JeeslDbDumpFile<IoDbDump,IoSsiHost,IoDbDump
 	private IoDbDumpStatus status;
 	@Override public IoDbDumpStatus getStatus() {return status;}
 	@Override public void setStatus(IoDbDumpStatus status) {this.status = status;}
-	
+
+
 	@Override public boolean equals(Object object){return (object instanceof IoDbDumpFile) ? id == ((IoDbDumpFile) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 }

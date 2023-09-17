@@ -1,11 +1,11 @@
 package org.jeesl.factory.builder.io.db;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
-import org.jeesl.interfaces.model.io.db.JeeslDbReplicationColumn;
-import org.jeesl.interfaces.model.io.db.JeeslDbReplicationState;
-import org.jeesl.interfaces.model.io.db.JeeslDbReplicationSync;
-import org.jeesl.interfaces.model.io.db.JeeslDbStatementColumn;
 import org.jeesl.interfaces.model.io.db.pg.JeeslDbConnectionColumn;
+import org.jeesl.interfaces.model.io.db.pg.replication.JeeslDbReplicationColumn;
+import org.jeesl.interfaces.model.io.db.pg.replication.JeeslDbReplicationState;
+import org.jeesl.interfaces.model.io.db.pg.replication.JeeslDbReplicationSync;
+import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementColumn;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;

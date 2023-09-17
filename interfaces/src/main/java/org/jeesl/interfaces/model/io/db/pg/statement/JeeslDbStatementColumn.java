@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.db;
+package org.jeesl.interfaces.model.io.db.pg.statement;
 
 import java.io.Serializable;
 
@@ -12,11 +12,9 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-
 @DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslDbConnectionState <L extends JeeslLang,
-										D extends JeeslDescription,
+public interface JeeslDbStatementColumn <L extends JeeslLang, D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
 							extends Serializable,EjbPersistable,
@@ -24,5 +22,5 @@ public interface JeeslDbConnectionState <L extends JeeslLang,
 									EjbWithCodeGraphic<G>,JeeslStatusFixedCode,
 									JeeslStatus<L,D,S>
 {	
-	public enum Code{ok}
+	public static enum Code{xx};
 }

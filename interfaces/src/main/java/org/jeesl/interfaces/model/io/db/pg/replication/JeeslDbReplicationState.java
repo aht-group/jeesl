@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.db;
+package org.jeesl.interfaces.model.io.db.pg.replication;
 
 import java.io.Serializable;
 

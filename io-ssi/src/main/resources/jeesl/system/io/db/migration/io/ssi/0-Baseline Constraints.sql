@@ -1,6 +1,14 @@
+alter table IoSsiHost add constraint UC_IoSsiHost_system_code unique (system_id, code);
+alter table IoSsiHostJtDescription add constraint UK_dbg6kl0rup1gp3mtu3e46myne unique (description_id);
+alter table IoSsiHostJtLang add constraint UK_4djh6hbwex7hwqlh2nqq25l89 unique (lang_id);
 alter table IoSsiSystem add constraint UK5rebgs7a8scrwfhe0vj4bt7c6 unique (code);
 alter table IoSsiSystemJtDescription add constraint UK_jai61m8ljsafigc60b09788m1 unique (description_id);
 alter table IoSsiSystemJtLang add constraint UK_9pcqro6mu4032olc4rwnvj5it unique (lang_id);
+alter table IoSsiHost add constraint FKe39eme1s74iq0x5j2nrj17bxh foreign key (system_id) references IoSsiSystem;
+alter table IoSsiHostJtDescription add constraint FKrvfs28p8f92cbmrfsiw0kfnrn foreign key (description_id) references IoDescription;
+alter table IoSsiHostJtDescription add constraint FKaxxkcug5cunoyo7u9w9jjp15u foreign key (host_id) references IoSsiHost;
+alter table IoSsiHostJtLang add constraint FK1krxxi058947x2jc77wpiscye foreign key (lang_id) references IoLang;
+alter table IoSsiHostJtLang add constraint FKe85j58geervpuf97cy106q8qw foreign key (host_id) references IoSsiHost;
 alter table IoSsiSystemJtDescription add constraint FKmqw7gikdwf2dm3qt7spvnhhq8 foreign key (description_id) references IoDescription;
 alter table IoSsiSystemJtDescription add constraint FK2jlhuld217nj3e1kt2dth9lrb foreign key (system_id) references IoSsiSystem;
 alter table IoSsiSystemJtLang add constraint FKqtajwy56ee3kienr1vt3jetps foreign key (lang_id) references IoLang;

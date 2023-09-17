@@ -1,3 +1,6 @@
+create table IoDbDump (id  bigserial not null, name varchar(255), record timestamp, size int8 not null, system_id int8, primary key (id));
+create table IoDbDumpFile (id  bigserial not null, dump_id int8, host_id int8, status_id int8, primary key (id));
+create table IoDbFlyWay (installed_rank  serial not null, description varchar(255), installed_on timestamp, type varchar(255), version varchar(255), primary key (installed_rank));
 create table IoDbMetaColumn (id  bigserial not null, code varchar(255), table_id int8, type_id int8, primary key (id));
 create table IoDbMetaConstraint (id  bigserial not null, code varchar(255), columnLocal_id int8, columnRemote_id int8, table_id int8, type_id int8, primary key (id));
 create table IoDbMetaSnapshot (id  bigserial not null, name varchar(255), record timestamp, system_id int8, primary key (id));

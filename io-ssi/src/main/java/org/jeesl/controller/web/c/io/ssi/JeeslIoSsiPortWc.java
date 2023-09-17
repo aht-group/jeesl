@@ -1,4 +1,4 @@
-package org.jeesl.controller.wc.io.ssi;
+package org.jeesl.controller.web.c.io.ssi;
 
 import java.io.Serializable;
 import java.util.ArrayList;

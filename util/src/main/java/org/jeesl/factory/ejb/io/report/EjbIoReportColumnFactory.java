@@ -3,6 +3,7 @@ package org.jeesl.factory.ejb.io.report;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
@@ -199,7 +200,20 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 	public CDT toCellDataType(COLUMN column)
 	{
 		if(column.getDataType()!=null){return column.getDataType();}
-		logger.warn("No CellDataType for "+column.toString());
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("No CellDataType for [").append(column.getId()).append("]");
+		
+		if(Objects.nonNull(column.getGroup().getName()) && column.getGroup().getName().containsKey(JeeslLang.en))
+		{
+			sb.append(" ").append(column.getGroup().getName().get(JeeslLang.en).getLang());
+		}
+		if(Objects.nonNull(column.getName()) && column.getName().containsKey(JeeslLang.en))
+		{
+			sb.append(": ").append(column.getName().get(JeeslLang.en).getLang());
+		}
+		
+		logger.warn(sb.toString());
 		return null;
 	}
 	

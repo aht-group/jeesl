@@ -26,8 +26,8 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 public class IoDbDump implements JeeslDbDump<IoSsiSystem,IoDbDumpFile>
 {
 	public static final long serialVersionUID=1;
-	
-	
+
+
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	@Override public long getId() {return id;}
@@ -50,12 +50,12 @@ public class IoDbDump implements JeeslDbDump<IoSsiSystem,IoDbDumpFile>
 	private long size;
 	@Override public long getSize(){return size;}
 	@Override public void setSize(long size){this.size = size;}
-	
+
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="dump")
 	private List<IoDbDumpFile> files;
 	@Override public List<IoDbDumpFile> getFiles() {if(Objects.isNull(files)){files = new ArrayList<>();} return files;}
 	@Override public void setFiles(List<IoDbDumpFile> files) {this.files = files;}
-	
+
 
 	@Override public boolean equals(Object object){return (object instanceof IoDbDump) ? id == ((IoDbDump) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}

@@ -1,8 +1,13 @@
+alter table IoDbDump add constraint UKl9h0e40vcdfovb8xuj14wqxmy unique (name);
 alter table IoDbMetaColumn add constraint UK5ljrc30hah9itol20mqkgnaq unique (table_id, code);
 alter table IoDbMetaConstraint add constraint UKed8io78fc4ko3udiw73d8oyva unique (table_id, code);
 alter table IoDbMetaSnapshot add constraint UK7sq9792i54lyg1j4pq4c508bq unique (system_id, record);
 alter table IoDbMetaTable add constraint UKt41mwi71v74ks14ofa56knief unique (system_id, code);
 alter table IoDbMetaUnique add constraint UKh4vw4hsri6cmj3q3nbvxb25lq unique (constraint_id, column_id);
+alter table IoDbDump add constraint FKhb2ajrravpmg2njdmec9leb96 foreign key (system_id) references IoSsiSystem;
+alter table IoDbDumpFile add constraint FKjio5n8wxkrlnn2wnvn1tj4r5w foreign key (dump_id) references IoDbDump;
+alter table IoDbDumpFile add constraint FKq8mdmdj47kbwk0v7u7k1kif4l foreign key (host_id) references IoSsiHost;
+alter table IoDbDumpFile add constraint FKpgcypdqvy87231tste2n9winu foreign key (status_id) references IoStatus;
 alter table IoDbMetaColumn add constraint FKk7y96fswbprocbsbhvvv1n5nf foreign key (table_id) references IoDbMetaTable;
 alter table IoDbMetaColumn add constraint FKnu4lcvwlrr5t27qn8a2bm4hos foreign key (type_id) references IoStatus;
 alter table IoDbMetaConstraint add constraint FKkna9oqjwqwbror8brcfqqjvnw foreign key (columnLocal_id) references IoDbMetaColumn;

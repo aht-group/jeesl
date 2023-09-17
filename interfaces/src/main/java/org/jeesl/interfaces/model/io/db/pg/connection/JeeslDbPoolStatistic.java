@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.db;
+package org.jeesl.interfaces.model.io.db.pg.connection;
 
 import java.io.Serializable;
 
@@ -12,15 +12,19 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+
 @DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslDbReplicationSync <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslDbPoolStatistic <L extends JeeslLang,
+										D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
 							extends Serializable,EjbPersistable,
-									
+								
 									EjbWithCodeGraphic<G>,JeeslStatusFixedCode,
 									JeeslStatus<L,D,S>
 {	
-	public static enum Code{xx};
+	public enum Code{InUseCount,AvailableCount}
+	
+	//	/subsystem=datasources/data-source=JeeslDs/statistics=pool:read-resource(include-runtime=true)
 }

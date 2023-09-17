@@ -12,7 +12,7 @@
 		<jp:grid id="grid">
 			<j:row>
 				<j:slot id="sCriterias" width="12">
-					<p:dataTable styleClass="jeesl-datatable" 
+					<p:dataTable styleClass="jeesl-datatable" lazy="false"
 							var="s" value="#{cc.attrs.bean.statements}">
 						<f:facet name="header">
 							<j:dtHeader title="PG Stat Statements: SELECT pg_stat_statements_reset();"/>

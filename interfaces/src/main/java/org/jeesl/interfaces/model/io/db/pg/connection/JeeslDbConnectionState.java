@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.db;
+package org.jeesl.interfaces.model.io.db.pg.connection;
 
 import java.io.Serializable;
 
@@ -15,16 +15,14 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslDbPoolStatistic <L extends JeeslLang,
+public interface JeeslDbConnectionState <L extends JeeslLang,
 										D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
 							extends Serializable,EjbPersistable,
-								
+									
 									EjbWithCodeGraphic<G>,JeeslStatusFixedCode,
 									JeeslStatus<L,D,S>
 {	
-	public enum Code{InUseCount,AvailableCount}
-	
-	//	/subsystem=datasources/data-source=JeeslDs/statistics=pool:read-resource(include-runtime=true)
+	public enum Code{ok}
 }
