@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import org.exlp.model.xml.io.Dir;
 import org.jeesl.api.rest.i.io.JeeslIoDbRestInterface;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
+import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatementGroup;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 
 import net.sf.ahtutils.xml.sync.DataUpdate;
@@ -21,5 +22,9 @@ public interface JeeslIoDbRest extends JeeslIoDbRestInterface
 	
 	@POST @Path("/upload/meta/snapshot")
 	@Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON)
-	JsonSsiUpdate uploadMetaSnapshot(JsonPostgresMetaSnapshot snapshot);	
+	JsonSsiUpdate uploadMetaSnapshot(JsonPostgresMetaSnapshot snapshot);
+	
+	@POST @Path("/upload/statement/group")
+	@Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON)
+	JsonSsiUpdate  uploadStatementGroup(JsonPostgresStatementGroup group);
 }

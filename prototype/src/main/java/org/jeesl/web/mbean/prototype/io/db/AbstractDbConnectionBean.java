@@ -29,7 +29,7 @@ public class AbstractDbConnectionBean <L extends JeeslLang, D extends JeeslDescr
 	
 	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?> fDb;
-	private final IoDbPgFactoryBuilder<L,D,CC,?,?,?,?> fbDbPg;
+	private final IoDbPgFactoryBuilder<L,D,SYSTEM,?,CC,?,?,?,?,?,?> fbDbPg;
 	
 	private final Map<String,CC> mapColumn; public Map<String,CC> getMapColumn() {return mapColumn;}
 	
@@ -37,7 +37,7 @@ public class AbstractDbConnectionBean <L extends JeeslLang, D extends JeeslDescr
 	
 	private final String dbName;
 	
-	public AbstractDbConnectionBean(String dbName, IoDbPgFactoryBuilder<L,D,CC,?,?,?,?> fbDbPg)
+	public AbstractDbConnectionBean(String dbName, IoDbPgFactoryBuilder<L,D,SYSTEM,?,CC,?,?,?,?,?,?> fbDbPg)
 	{
 		super(fbDbPg.getClassL(),fbDbPg.getClassD());
 		this.dbName=dbName;

@@ -1,8 +1,8 @@
 package org.jeesl.factory.builder.io.db;
 
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
-import org.jeesl.factory.ejb.io.db.EjbDbDumpFileFactory;
-import org.jeesl.factory.ejb.io.db.EjbIoDumpFactory;
+import org.jeesl.factory.ejb.io.db.backup.EjbDbDumpFileFactory;
+import org.jeesl.factory.ejb.io.db.backup.EjbIoDumpFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;

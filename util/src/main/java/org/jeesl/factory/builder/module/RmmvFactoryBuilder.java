@@ -31,6 +31,8 @@ public class RmmvFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 								USER extends EjbWithId>
 	extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(RmmvFactoryBuilder.class);
 	
 	private final Class<LOC> cLocale; public Class<LOC> getClassLocale() {return cLocale;}

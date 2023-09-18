@@ -26,6 +26,12 @@
         </component>
 	</tag>
 	<tag>
+        <tag-name>gridIoDbStatementHistory</tag-name>
+        <component>
+            <resource-id>ioDb/history.xhtml</resource-id>
+        </component>
+	</tag>
+	<tag>
         <tag-name>gridIoDbFlyway</tag-name>
         <component>
             <resource-id>ioDb/flyway.xhtml</resource-id>

@@ -19,8 +19,8 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
-import org.jeesl.factory.ejb.io.db.EjbDbDumpFileFactory;
-import org.jeesl.factory.ejb.io.db.EjbIoDumpFactory;
+import org.jeesl.factory.ejb.io.db.backup.EjbDbDumpFileFactory;
+import org.jeesl.factory.ejb.io.db.backup.EjbIoDumpFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaColumnFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSnapshotFactory;
@@ -47,6 +47,7 @@ import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaColumn;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
+import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatementGroup;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
@@ -326,5 +327,11 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 		catch (JeeslConstraintViolationException e) {dut.error(e);}
 		catch (JeeslLockingException e) {dut.error(e);}
 		return dut.toJson();
+	}
+
+	@Override
+	public JsonSsiUpdate uploadStatementGroup(JsonPostgresStatementGroup group)
+	{
+		return null;
 	}
 }

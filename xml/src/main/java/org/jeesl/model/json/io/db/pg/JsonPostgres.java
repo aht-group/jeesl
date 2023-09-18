@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatement;
+
 public class JsonPostgres implements Serializable
 {
 	public static final long serialVersionUID=1;

@@ -12,12 +12,14 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IoSsiCoreFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
+public class IoSsiCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
 								CRED extends JeeslIoSsiCredential<SYSTEM>,
 								HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoSsiCoreFactoryBuilder.class);
 	
 	private final Class<SYSTEM> cSystem; public Class<SYSTEM> getClassSystem(){return cSystem;}

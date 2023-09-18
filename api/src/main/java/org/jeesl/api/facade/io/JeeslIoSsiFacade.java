@@ -33,31 +33,31 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 									>
 			extends JeeslFacade
 {	
+	HOST fSsiHost(SYSTEM system, String code) throws JeeslNotFoundException;
 	<E extends Enum<E>> CRED fSsiCredential(SYSTEM system, E code) throws JeeslNotFoundException;
 	CTX fMapping(Class<?> json, Class<?> ejb) throws JeeslNotFoundException;
 	DATA fIoSsiData(CTX mapping, String code) throws JeeslNotFoundException;
 	<A extends EjbWithId> DATA fIoSsiData(CTX mapping, String code, A a) throws JeeslNotFoundException;
 		
 	<T extends EjbWithId> DATA fIoSsiData(CTX mapping, T ejb) throws JeeslNotFoundException;
-	
-	
+
 	<A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a, B b, Integer maxSize);
-	
+
 	JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping);
 	<A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a, B b);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiLinkJobForMapping(CTX mapping, A a, B b);
-	
+
 	JsonTuples1<CTX> tpMapping();
 	JsonTuples2<CTX,STATUS> tpMappingLink(List<CTX> list);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,B> tpMappingB(Class<B> classB, CTX mapping, A a);
-	
+
 	Long cSsiData(EjbIoSsiQuery<CTX,STATUS> query);
 	List<DATA> fSsiData(EjbIoSsiQuery<CTX,STATUS> query);
 	List<DATA> fIoSsiData(CTX mapping, List<STATUS> links);
 	<A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a);
 	List<DATA> fSsiDataWithJob1(CTX mapping, STATUS link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC);
-	
+
 	<T extends EjbWithSsiDataCleaning<CLEANING>> List<T> fEntitiesWithoutSsiDataCleaning(Class<T> c, int maxResult);
 	<T extends EjbWithSsiDataCleaning<CLEANING>> JsonTuples1<CLEANING> tpcSsiDataCleaning(Class<T> c);
 }

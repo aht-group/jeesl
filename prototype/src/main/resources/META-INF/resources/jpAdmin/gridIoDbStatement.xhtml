@@ -9,41 +9,45 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<jp:grid id="grid">
-			<j:row>
-				<j:slot id="sCriterias" width="12">
-					<p:dataTable styleClass="jeesl-datatable" lazy="false"
-							var="s" value="#{cc.attrs.bean.statements}">
-						<f:facet name="header">
-							<j:dtHeader title="PG Stat Statements: SELECT pg_stat_statements_reset();"/>
-						</f:facet>
-						<p:column>
-							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['id'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.id}"/>
-						</p:column>
-						<p:column sortBy="#{s.rows}">
-							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['rows'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.rows}" withSecond="true"/>
-						</p:column>
-						<p:column sortBy="#{s.calls}">
-							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['calls'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.calls}" withSecond="true"/>
-						</p:column>
-						<p:column sortBy="#{s.average}">
-							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['average'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.average}" withSecond="true"/>
-						</p:column>
-						<p:column sortBy="#{s.total}">
-							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['total'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.total}"/>
-						</p:column>
-						<p:column>
-							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['sql'].name[localeCode].lang}"/></f:facet>
-							<h:outputText value="#{s.sql}" escape="false"/>
-						</p:column>
-			       	</p:dataTable>
-				</j:slot>
-			</j:row>
-	    </jp:grid>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sStatements" width="12">
+			<h:form id="fStatements">
+				<p:dataTable styleClass="jeesl-datatable" lazy="false"
+						var="s" value="#{cc.attrs.bean.statements}"
+						selection="#{cc.attrs.bean.statement}" selectionMode="single" rowKey="#{s.id}">
+					<f:facet name="header">
+						<j:dtHeader title="PG Stat Statements: SELECT pg_stat_statements_reset();"/>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectStatement()}" update=":#{cc.id}:grid"/>
+					<p:column>
+						<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['id'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.id}" styleClass="#{empty cc.attrs.bean.mapDb[s.id]  ? '' : 'jeesl-red'}"/>
+					</p:column>
+					<p:column sortBy="#{s.rows}">
+						<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['rows'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.rows}" withSecond="true"/>
+					</p:column>
+					<p:column sortBy="#{s.calls}">
+						<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['calls'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.calls}" withSecond="true"/>
+					</p:column>
+					<p:column sortBy="#{s.average}">
+						<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['average'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.average}" withSecond="true"/>
+					</p:column>
+					<p:column sortBy="#{s.total}">
+						<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['total'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.total}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['sql'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.xhtml}" escape="false"/>
+					</p:column>
+		       	</p:dataTable>
+			</h:form>
+		</j:slot>
+	</j:row>
+   </jp:grid>
 	</composite:implementation>
 </html>

@@ -1,4 +1,4 @@
-package org.jeesl.factory.ejb.io.db;
+package org.jeesl.factory.ejb.io.db.backup;
 
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;

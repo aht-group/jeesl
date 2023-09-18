@@ -86,7 +86,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	@Override
 	public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		if(item==null)
+		if(Objects.isNull(item))
 		{
 			previous.setId(-1);
 			selection = null;
@@ -189,7 +189,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	
 	public boolean getTwiceSelected() {return previous.equals(selection);}
 	
-	public boolean isSelected(){return selection!=null;}
+	public boolean isSelected() {return selection!=null;}
 	public <E extends Enum<E>> boolean isSelected(E code)
 	{
 		if(!isSelected()) {return false;}
@@ -209,7 +209,6 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 			logger.error("The class "+c.getSimpleName()+" does not implement "+EjbWithCode.class.getSimpleName());
 			return false;
 		}
-		
 	}
 
 	public void setDefault()

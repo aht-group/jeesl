@@ -12,11 +12,12 @@
 	<jp:grid id="grid">
 		<j:slot width="8">
 			<h:form>
-				<p:dataTable var="h" value="#{cc.attrs.bean.hosts}" draggableRows="true"
-							 selection="#{cc.attrs.bean.host}" selectionMode="single" rowKey="#{h.id}">
+				<p:dataTable styleClass="jeesl-datatable" 
+						var="h" value="#{cc.attrs.bean.hosts}" draggableRows="true"
+						selection="#{cc.attrs.bean.host}" selectionMode="single" rowKey="#{h.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslIoSsiHosts}">
-							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addHost()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
+						<j:dtHeader entity="IoSsiHost" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addHost()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectHost()}" update=":#{cc.id}:sSystem"/>
@@ -56,20 +57,21 @@
 		</j:slot>
 		<j:slot id="sSystem" width="4">
 			<h:form id="fSystem" rendered="#{not empty cc.attrs.bean.host}">
-				<p:panel id="pView" header="#{msg.jeeslIoSsiHost}" styleClass="jeeslPanel">
+				<p:panel id="pView" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoSsiHost"/></f:facet>
 					<f:facet name="actions">
-						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelHost()}" update=":#{cc.id}:grid" library="jeeslGfx"/>
-						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveHost()}"   update=":#{cc.id}:grid" library="jeeslGfx"/>
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteHost()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.host.id gt 0}" library="jeeslGfx"/>
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelHost()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave"   listener="#{cc.attrs.bean.saveHost()}"   update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteHost()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.host.id gt 0}"/>
 					</f:facet>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+					<j:inputGrid>
 						
-						<p:outputLabel value="#{msg.jeeslIoSsiSystem}"/>
+						<jtp:label entity="IoSsiHost" code="system"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.host.system}" effect="fade" autoWidth="false" >
 							<f:selectItems value="#{cc.attrs.bean.systems}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						
-						<p:outputLabel value="#{msg.jeeslIoSsiHostCode}"/>
+						<jtp:label entity="IoSsiHost" code="code"/>
 						<p:inputText value="#{cc.attrs.bean.host.code}" autocomplete="off"/>
 						
 						<jtp:label entity="IoSsiHost" code="fqdn"/>
@@ -87,7 +89,7 @@
 						<jtp:label entity="IoSsiHost" code="memory"/>
 						<p:inputText value="#{cc.attrs.bean.host.memory}" autocomplete="off"/>
 						
-					</p:panelGrid>
+					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.bean.host}" withDescription="true"/>
 				</p:panel>
 			</h:form>

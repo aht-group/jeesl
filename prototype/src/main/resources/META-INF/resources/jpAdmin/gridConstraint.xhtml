@@ -19,7 +19,7 @@
 			<h:form id="fCategories">
 				<p:dataTable stlyeClass="jeesl-datatable"
 						var="s" value="#{cc.attrs.bean.scopes}" draggableRows="true"
-					selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
+						selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SystemConstraintScope" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addScope()}" update=":#{cc.id}:grid"/>

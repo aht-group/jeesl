@@ -19,7 +19,8 @@
 	<j:row id="row1">
 		<j:slot id="sProperties" width="7">
 			<h:form id="fProperties">
-				<p:dataTable var="p" value="#{cc.attrs.bean.properties}"
+				<p:dataTable styleClass="jeesl-datatable"
+						var="p" value="#{cc.attrs.bean.properties}"
 						selection="#{cc.attrs.bean.prop}" selectionMode="single" rowKey="#{p.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="SystemProperty" code="listOf"/>
@@ -42,7 +43,7 @@
 		</j:slot>
 		<j:slot id="sProperty" width="5">
 			<h:form id="fProperty">
-				<p:panel header="#{msg.jeeslProperty}" rendered="#{not empty cc.attrs.bean.prop}" styleClass="jeeslPanel">
+				<p:panel rendered="#{not empty cc.attrs.bean.prop}" styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="SystemProperty"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveProperty()}" update=":#{cc.id}:sProperties" tooltip="#{msg.ttSave}" library="jeeslGfx"/>

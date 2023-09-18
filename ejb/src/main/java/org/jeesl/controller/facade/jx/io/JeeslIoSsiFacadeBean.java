@@ -76,6 +76,28 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	}
 	
 	@Override
+	public HOST fSsiHost(SYSTEM system, String code) throws JeeslNotFoundException
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<HOST> cQ = cB.createQuery(fbSsiCore.getClassHost());
+		Root<HOST> data = cQ.from(fbSsiCore.getClassHost());
+		
+		Path<SYSTEM> pSystem = data.get(JeeslIoSsiCredential.Attributes.system.toString());
+		Path<String> eCode = data.get(JeeslIoSsiCredential.Attributes.code.toString());
+		predicates.add(cB.equal(pSystem,system));
+		predicates.add(cB.equal(eCode,code.toString()));
+		
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.select(data);
+
+		TypedQuery<HOST> tQ = em.createQuery(cQ);
+		try	{return tQ.getSingleResult();}
+		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbSsiCore.getClassHost().getSimpleName()+" found for system"+system.toString()+" and code="+code);}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsiCore.getClassHost().getSimpleName()+" not unique for system"+system.toString()+" and code="+code);}
+	}
+	
+	@Override
 	public <E extends Enum<E>> CRED fSsiCredential(SYSTEM system, E code) throws JeeslNotFoundException
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -94,7 +116,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		TypedQuery<CRED> tQ = em.createQuery(cQ);
 		try	{return tQ.getSingleResult();}
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbSsiCore.getClassCredential().getSimpleName()+" found for system"+system.toString()+" and code="+code);}
-		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" not unique for system"+system.toString()+" and code="+code);}
+		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsiCore.getClassHost().getSimpleName()+" not unique for system"+system.toString()+" and code="+code);}
 	}
 	
 	@Override public CTX fMapping(Class<?> json, Class<?> ejb) throws JeeslNotFoundException

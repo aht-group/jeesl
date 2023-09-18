@@ -1,4 +1,4 @@
-package org.jeesl.factory.ejb.io.db;
+package org.jeesl.factory.ejb.io.db.backup;
 
 import java.util.Date;
 

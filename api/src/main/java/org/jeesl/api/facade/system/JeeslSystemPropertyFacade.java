@@ -13,7 +13,9 @@ public interface JeeslSystemPropertyFacade <L extends JeeslLang,D extends JeeslD
 											C extends JeeslStatus<L,D,C>,
 											P extends JeeslProperty<L,D,C,P>>
 			extends JeeslFacade
-{	
+{
+	public enum IoDb {dbIdentifier}
+	
 	String valueStringForKey(String key, String defaultValue) throws JeeslNotFoundException;
 	Integer valueIntForKey(String key, Integer defaultValue) throws JeeslNotFoundException;
 	Long valueLongForKey(String key, Long defaultValue) throws JeeslNotFoundException;

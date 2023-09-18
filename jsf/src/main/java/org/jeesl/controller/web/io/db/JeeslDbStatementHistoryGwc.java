@@ -1,18 +1,17 @@
 package org.jeesl.controller.web.io.db;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
-import org.jeesl.factory.ejb.io.db.pg.EjbDbStatementFactory;
+import org.jeesl.factory.ejb.io.db.pg.EjbDbStatementGroupFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.factory.txt.system.io.db.TxtSqlQueryFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
@@ -30,7 +29,9 @@ import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslDbStatementStatisticGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
+
+public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,
 									HOST extends JeeslIoSsiHost<L,D,SYSTEM>,
 									ST extends JeeslDbStatement<HOST,SG>,
@@ -40,87 +41,104 @@ public class JeeslDbStatementStatisticGwc <L extends JeeslLang, D extends JeeslD
 						implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(JeeslDbStatementStatisticGwc.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslDbStatementHistoryGwc.class);
 	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?> fDb;
 	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb;
+	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
-	private final EjbDbStatementFactory<HOST,ST,SG> efStatement;
+//	private final EjbDbStatementFactory<HOST,ST,SG> efStatement;
+	private final EjbDbStatementGroupFactory<SYSTEM,SG> efGroup;
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public final SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
-	private final SbSingleHandler<HOST> sbhHost; public final SbSingleHandler<HOST> getSbhHost() {return sbhHost;}
-	private final SbSingleHandler<SG> sbhGroup; public final SbSingleHandler<SG> getSbhGroup() {return sbhGroup;}
 	
-	private final Map<Long,ST> mapDb; public Map<Long, ST> getMapDb() {return mapDb;}
 	private final Map<String,SC> mapColumn; public Map<String,SC> getMapColumn() {return mapColumn;}
+	private final Map<ST,String> mapSql; public Map<ST,String> getMapSql() {return mapSql;}
+
+	private final List<SG> groups; public List<SG> getGroups() {return groups;}
+	private final List<ST> statements; public List<ST> getStatements() {return statements;}
 	
-	private List<JsonPostgresStatement> statements; public List<JsonPostgresStatement> getStatements() {return statements;}
-	
-	private final String dbName;
-	private LocalDateTime record;
+	private SG group; public SG getGroup() {return group;} public void setGroup(SG group) {this.group = group;}
+
 	private JsonPostgresStatement statement; public JsonPostgresStatement getStatement() {return statement;} public void setStatement(JsonPostgresStatement statement) {this.statement = statement;}
 
-	public JeeslDbStatementStatisticGwc(String dbName, final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb, final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi)
+	public JeeslDbStatementHistoryGwc(final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb,
+										final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
-		this.dbName=dbName;
 		this.fbDb=fbDb;
+		this.fbSsi=fbSsi;
 		
-		efStatement = fbDb.efStatement();
+//		efStatement = fbDb.efStatement();
+		efGroup  = fbDb.efGroup(); 
 		
 		sbhSystem = new SbSingleHandler<>(fbSsi.getClassSystem(),this);
-		sbhHost = new SbSingleHandler<>(fbSsi.getClassHost(),this);
-		sbhGroup = new SbSingleHandler<>(fbDb.getClassStatementGroup(),this);
 		
-		mapDb = new HashMap<>();
 		mapColumn = new HashMap<>();
+		mapSql = new HashMap<>();
+		
+		groups = new ArrayList<>();
+		statements = new ArrayList<>();
 	}
 	
 	public void postConstructDbStatement(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		mapColumn.putAll(EjbCodeFactory.toMapCode(fDb.allOrderedPositionVisible(fbDb.getClassStatementColumn())));
-		refreshList(); 
+		sbhSystem.setList(fDb.all(fbSsi.getClassSystem()));
+		sbhSystem.setDefault();
+		this.reloadGroups(); 
 	}
-	public void configure(SYSTEM system, HOST host)
+	
+	private void reset(boolean rGroups, boolean rGroup, boolean rStatements)
 	{
-		sbhSystem.setSelection(system);
-		sbhHost.setSelection(host);
+		if(rGroups) {groups.clear();}
 		
-		sbhGroup.setList(fDb.allForParent(fbDb.getClassStatementGroup(),system));
-		sbhGroup.setDefault();
+		if(rStatements) {statements.clear(); mapSql.clear();}
 	}
 	
 	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
+		if(fbSsi.getClassSystem().isAssignableFrom(item.getClass())) {this.reset(true,false,false); this.reloadGroups();}
+		if(fbDb.getClassStatementGroup().isAssignableFrom(item.getClass())) {this.reloadStatements();}
+	}
+	
+	private void reloadGroups()
+	{
+		this.reset(true,false,false);
+		if(sbhSystem.isSelected())
+		{
+			groups.addAll(fDb.allForParent(fbDb.getClassStatementGroup(),sbhSystem.getSelection()));
+		}
+	}
+	
+	public void addGroup()
+	{
+		group = efGroup.build(sbhSystem.getSelection(), groups);
+	}
+	
+	public void selectGroup() throws JeeslConstraintViolationException, JeeslLockingException
+	{
+		this.reset(false,false,true);
+		logger.info(AbstractLogMessage.selectEntity(group));
 		
+		this.reloadStatements();
 	}
 	
-	protected void refreshList()
+	public void saveGroup() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		mapDb.clear();
-		record = LocalDateTime.now();
-		statements = fDb.postgresStatements(dbName).getStatements();
-		for(JsonPostgresStatement s : statements)
-		{
-			s.setXhtml(TxtSqlQueryFactory.toXhtml(TxtSqlQueryFactory.shortenIn(s.getSql())));
-		}
+		group = fDb.save(group);
+		this.reloadGroups();
 	}
 	
-	public void selectStatement() throws JeeslConstraintViolationException, JeeslLockingException
+	private void reloadStatements()
 	{
-		logger.info("Select "+record.toString()+" "+statement.getId());
-		if(mapDb.containsKey(statement.getId()))
+		this.reset(false,false,true);
+		statements.addAll(fDb.allForParent(fbDb.getClassStatement(),group));
+		for(ST s : statements)
 		{
-			fDb.rm(mapDb.get(statement.getId()));
-			mapDb.remove(statement.getId());
+			mapSql.put(s,TxtSqlQueryFactory.toXhtml(TxtSqlQueryFactory.shortenIn(s.getSql())));
 		}
-		else if(ObjectUtils.allNotNull(sbhHost.getSelection(),sbhGroup.getSelection()))
-		{
-			ST ejb = efStatement.build(sbhHost.getSelection(),sbhGroup.getSelection(),record,statement);
-			ejb = fDb.save(ejb);
-			mapDb.put(statement.getId(), ejb);
-		}
-		statement=null;
+		logger.info(AbstractLogMessage.reloaded(fbDb.getClassStatement(),statements));
 	}
 }

@@ -46,8 +46,7 @@ public class JeeslFlywayVerifier
 		List<URI> listFlyway = JeeslFlywayVerifier.sqlScripts(pathFlyway);
 		List<URI> listLib = JeeslFlywayVerifier.sqlScriptsSince(pathLibrary,i);
 		logger.info("Checking "+listLib.size()+" library migrations with "+listFlyway.size()+" flyway migrations");
-		
-		
+
 		try
 		{
 			Map<String,URI> mapFly = this.toMapHashUri(listFlyway);
@@ -62,14 +61,9 @@ public class JeeslFlywayVerifier
 				}
 			}
 		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		catch (IOException e) {e.printStackTrace();}
 	}
-	
-	
-	
+
 	private static List<URI> sqlScriptsSince(String path, int i)
 	{
 		Map<Integer,URI> map = new HashMap<>();
@@ -77,7 +71,6 @@ public class JeeslFlywayVerifier
 		{
 		    ResourceList resources = null;
 		    resources = result.getResourcesWithExtension("sql");
-//		    resources = result.getResourcesWithPath("jeesl");
 		    List<URI> uris = resources.getURIs();
 		    for(URI url : uris)
 		    {
@@ -89,7 +82,6 @@ public class JeeslFlywayVerifier
 		    	if(logger.isTraceEnabled())
 		    	{
 		    		logger.info(url.toString());
-		    		logger.info(url.getScheme());
 		    		logger.info(url.getSchemeSpecificPart());
 		    		logger.info("Last ("+File.separator+"): "+lastIndex);
 			    	logger.info("Version ("+versionSeparator+"): "+versionIndex);
@@ -97,7 +89,11 @@ public class JeeslFlywayVerifier
 		    	}
 		    	
 		    	Integer iVersion = Integer.valueOf(sVersion);
-		    	if(iVersion>=i) {map.put(iVersion,url);}
+		    	if(iVersion>=i)
+		    	{
+		    		logger.info(name);
+		    		map.put(iVersion,url);
+		    	}
 		    }
 		}
 		catch (UnsupportedEncodingException e) {throw new RuntimeException(e);}
