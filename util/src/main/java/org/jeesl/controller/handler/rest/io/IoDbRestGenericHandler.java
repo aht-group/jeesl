@@ -18,6 +18,7 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.ejb.io.db.backup.EjbDbDumpFileFactory;
 import org.jeesl.factory.ejb.io.db.backup.EjbIoDumpFactory;
@@ -38,6 +39,8 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaTable;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
+import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatement;
+import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementGroup;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -47,6 +50,7 @@ import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaColumn;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;
+import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatement;
 import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatementGroup;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.util.db.cache.EjbCodeCache;
@@ -54,6 +58,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.sync.DataUpdate;
+import net.sf.exlp.util.io.JsonUtil;
 
 public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescription,
 							SYSTEM extends JeeslIoSsiSystem<L,D>,
@@ -68,13 +73,17 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 							COLT extends JeeslDbMetaColumnType<L,D,COLT,?>,
 							CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,CONT,CUN>,
 							CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>,
-							CUN extends JeeslDbMetaUnique<COL,CON>>
+							CUN extends JeeslDbMetaUnique<COL,CON>,
+							
+							ST extends JeeslDbStatement<HOST,SG>,
+							SG extends JeeslDbStatementGroup<SYSTEM>>
 					implements JeeslIoDbRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestGenericHandler.class);
 	
 	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb;
 	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,?> fbDbMeta;
+	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,?,?,?,?> fbPg;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
 	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,CUN> fDb;
@@ -93,13 +102,14 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	
 	public IoDbRestGenericHandler(IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb,
 							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,?> fbDbMeta,
+							IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,?,?,?,?> fbdbPg,
 							IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi,
 							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,CUN> fDb,
 							SYSTEM system)
 	{
-
 		this.fbDb=fbDb;
 		this.fbDbMeta=fbDbMeta;
+		this.fbPg=fbdbPg;
 		
 		this.fbSsi=fbSsi;
 		this.fDb = fDb;
@@ -330,8 +340,52 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	}
 
 	@Override
-	public JsonSsiUpdate uploadStatementGroup(JsonPostgresStatementGroup group)
+	public JsonSsiUpdate uploadStatementGroup(JsonPostgresStatementGroup json)
 	{
-		return null;
+		JsonUtil.info(json);
+		
+		DataUpdateTracker dut = DataUpdateTracker.instance().start();
+		
+		SG eGroup = null;
+		try
+		{
+			eGroup = fDb.fByCode(fbPg.getClassStatementGroup(),json.getCode());
+		}
+		catch (JeeslNotFoundException e)
+		{
+			try
+			{
+				SYSTEM eSystem = fDb.fByCode(fbSsi.getClassSystem(),json.getSystem().getCode());
+				eGroup = fbPg.efGroup().build(eSystem, null);
+				eGroup.setCode(json.getCode());
+				eGroup.setName(json.getName());
+				eGroup = fDb.save(eGroup);
+			}
+			catch (JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e1) {dut.error(e1);}
+		}
+		
+		if(Objects.nonNull(eGroup))
+		{
+			for(JsonPostgresStatement jStatement : json.getStatements())
+			{
+				ST eStatement = null;
+				try
+				{
+					eStatement = fDb.fByCode(fbPg.getClassStatement(),jStatement.getCode());
+				}
+				catch (JeeslNotFoundException e)
+				{
+					try
+					{
+						HOST eHost = fDb.fByCode(fbSsi.getClassHost(),jStatement.getHost().getCode());
+						eStatement = fbPg.efStatement().build(eHost,eGroup,jStatement.getRecord(),jStatement);
+						eStatement.setCode(jStatement.getCode());
+						eStatement = fDb.save(eStatement);
+					}
+					catch (JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException  e1) {dut.error(e1);}
+				}
+			}
+		}
+		return dut.toJson();
 	}
 }

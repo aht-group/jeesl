@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
+import org.jeesl.api.facade.system.JeeslExportRestFacade;
+import org.jeesl.api.rest.rs.io.db.JeeslIoDbRest;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -13,6 +18,8 @@ import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.factory.ejb.io.db.pg.EjbDbStatementGroupFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
+import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementFactory;
+import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementGroupFactory;
 import org.jeesl.factory.txt.system.io.db.TxtSqlQueryFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatement;
@@ -26,6 +33,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatement;
+import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatementGroup;
+import org.jeesl.util.query.json.JsonIoDbQueryProvider;
+import org.jeesl.util.web.RestLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -140,5 +150,26 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 			mapSql.put(s,TxtSqlQueryFactory.toXhtml(TxtSqlQueryFactory.shortenIn(s.getSql())));
 		}
 		logger.info(AbstractLogMessage.reloaded(fbDb.getClassStatement(),statements));
+	}
+	
+	public void upload()
+	{
+		JsonPostgresStatementGroupFactory<SYSTEM,SG> jfGroup = fbDb.jfGroup(JsonIoDbQueryProvider.statementGroup());
+		JsonPostgresStatementFactory<HOST,ST,SG> jfStatement = fbDb.jfStatement(JsonIoDbQueryProvider.statement());
+		
+		group = fDb.find(fbDb.getClassStatementGroup(),group);
+		
+		JsonPostgresStatementGroup json = jfGroup.build(group);
+		json.setStatements(new ArrayList<>());
+		for(ST st : statements)
+		{
+			json.getStatements().add(jfStatement.build(st));
+		}
+		
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		client.register(new RestLogger());
+		ResteasyWebTarget target = client.target(JeeslExportRestFacade.urlJeesl);
+		JeeslIoDbRest rest = target.proxy(JeeslIoDbRest.class);
+		rest.uploadStatementGroup(json);
 	}
 }

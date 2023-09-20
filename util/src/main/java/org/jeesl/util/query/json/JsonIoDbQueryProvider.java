@@ -2,6 +2,7 @@ package org.jeesl.util.query.json;
 
 import java.time.LocalDateTime;
 
+import org.jeesl.factory.json.io.ssi.core.JsonSsiHostFactory;
 import org.jeesl.factory.json.io.ssi.core.JsonSsiSystemFactory;
 import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatement;
 import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatementGroup;
@@ -34,6 +35,8 @@ public class JsonIoDbQueryProvider
 
 		json.setSql("");
 		json.setRemark("");
+		
+		json.setHost(JsonSsiHostFactory.build(""));
 		
 		return json;
 	}

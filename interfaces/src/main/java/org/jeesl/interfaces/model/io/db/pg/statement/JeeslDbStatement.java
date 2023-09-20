@@ -7,14 +7,15 @@ import org.jeesl.interfaces.model.with.date.jt.JeeslWithRecordDateTime;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithRefId;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslDbStatement <HOST extends JeeslIoSsiHost<?,?,?>,
 									SG extends JeeslDbStatementGroup<?>>
 							extends EjbWithId,EjbSaveable,EjbRemoveable,
-									EjbWithCode,JeeslWithRecordDateTime,EjbWithRefId,EjbWithParentAttributeResolver
+									EjbWithCode,JeeslWithRecordDateTime,EjbWithParentAttributeResolver
 {
 	public static enum Attributes{group};
 	

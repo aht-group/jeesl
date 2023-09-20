@@ -34,7 +34,6 @@ public class EjbDbStatementFactory <HOST extends JeeslIoSsiHost<?,?,?>,
 			 ejb.setHost(host);
 			 ejb.setGroup(group);
 			 ejb.setRecord(record);
-			 ejb.setRefId(json.getId());
 			 
 			 ejb.setRows(Long.valueOf(json.getRows()).intValue());
 			 ejb.setCalls(Long.valueOf(json.getCalls()).intValue());

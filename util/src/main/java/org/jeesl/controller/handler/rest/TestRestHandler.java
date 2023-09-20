@@ -46,4 +46,10 @@ public class TestRestHandler implements JeeslTestRestInterface
 		json.setStart(LocalDateTime.now());
 		return json;
 	}
+
+	@Override public String jsonMirror(String content)
+	{
+		logger.info(content);
+		return content;
+	}
 }

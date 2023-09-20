@@ -15,12 +15,10 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatement;
-import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementGroup;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
-import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
-@Table(name="IoDbStatement",uniqueConstraints=@UniqueConstraint(columnNames={"host_id","record","refId"}))
+@Table(name="IoDbStatement",uniqueConstraints={@UniqueConstraint(columnNames={"host_id","group_id","record"}),@UniqueConstraint(columnNames={"code"})})
 public class IoDbStatement implements JeeslDbStatement<IoSsiHost,IoDbStatementGroup>
 {
 	public static final long serialVersionUID=1;
@@ -49,10 +47,6 @@ public class IoDbStatement implements JeeslDbStatement<IoSsiHost,IoDbStatementGr
 	private LocalDateTime record;
 	@Override public LocalDateTime getRecord() {return record;}
 	@Override public void setRecord(LocalDateTime record) {this.record = record;}
-
-	private long refId;
-	@Override public long getRefId() {return refId;}
-	@Override public void setRefId(long refId) {this.refId = refId;}
 
 	private int rows;
 	@Override public int getRows() {return rows;}

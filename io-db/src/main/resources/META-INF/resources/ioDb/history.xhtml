@@ -58,7 +58,9 @@
 			<p:dataTable styleClass="jeesl-datatable" lazy="false"
 						var="s" value="#{cc.attrs.ctrl.statements}">
 				<f:facet name="header">
-					<j:dtHeader title="PG Stat Statements: SELECT pg_stat_statements_reset();"/>
+					<j:dtHeader title="PG Stat Statements: SELECT pg_stat_statements_reset();">
+						<j:svg type="jeeslUpload" listener="#{cc.attrs.ctrl.upload()}" update=":#{cc.id}:grid"/>
+					</j:dtHeader>
 				</f:facet>
 				<p:column>
 					<f:facet name="header"><jtp:label entity="IoDbStatement" code="record"/></f:facet>

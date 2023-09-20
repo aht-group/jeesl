@@ -10,4 +10,6 @@ public interface JeeslTestRestInterface
 	
 	JsonSsiUpdate jsonUpdate();
 	JsonSystemJob jsonJob();
+	
+	String jsonMirror(String content);
 }
