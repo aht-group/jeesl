@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.rs.io.db;
+package org.jeesl.api.rest.rs.jx.io.db;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

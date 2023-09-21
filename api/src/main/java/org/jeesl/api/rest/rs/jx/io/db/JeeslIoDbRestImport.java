@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.rs.io.db;
+package org.jeesl.api.rest.rs.jx.io.db;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

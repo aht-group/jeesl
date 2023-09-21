@@ -10,7 +10,7 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
-import org.jeesl.api.rest.rs.io.db.JeeslIoDbRest;
+import org.jeesl.api.rest.rs.jx.io.db.JeeslIoDbRest;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -22,6 +22,7 @@ import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementFactory;
 import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementGroupFactory;
 import org.jeesl.factory.txt.system.io.db.TxtSqlQueryFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
+import org.jeesl.interfaces.controller.web.io.db.JeeslIoDbStatementHistoryCallback;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatement;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementColumn;
 import org.jeesl.interfaces.model.io.db.pg.statement.JeeslDbStatementGroup;
@@ -53,6 +54,8 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbStatementHistoryGwc.class);
 	
+	private final JeeslIoDbStatementHistoryCallback callback;
+	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?> fDb;
 	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
@@ -72,10 +75,12 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 
 	private JsonPostgresStatement statement; public JsonPostgresStatement getStatement() {return statement;} public void setStatement(JsonPostgresStatement statement) {this.statement = statement;}
 
-	public JeeslDbStatementHistoryGwc(final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb,
+	public JeeslDbStatementHistoryGwc(JeeslIoDbStatementHistoryCallback callback,
+										final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb,
 										final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
+		this.callback=callback;
 		this.fbDb=fbDb;
 		this.fbSsi=fbSsi;
 		
@@ -166,10 +171,6 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 			json.getStatements().add(jfStatement.build(st));
 		}
 		
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		client.register(new RestLogger());
-		ResteasyWebTarget target = client.target(JeeslExportRestFacade.urlJeesl);
-		JeeslIoDbRest rest = target.proxy(JeeslIoDbRest.class);
-		rest.uploadStatementGroup(json);
+		callback.upload(json);
 	}
 }

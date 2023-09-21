@@ -3,7 +3,7 @@ package org.jeesl.controller.processor.io.db;
 import java.io.File;
 
 import org.exlp.model.xml.io.Dir;
-import org.jeesl.api.rest.rs.io.db.JeeslIoDbRest;
+import org.jeesl.api.rest.rs.jx.io.db.JeeslIoDbRest;
 import org.jeesl.util.query.xml.FileQuery;
 import org.jeesl.util.query.xml.IoQuery;
 

@@ -9,3 +9,5 @@ create table IoDbMetaSnapshotJtConstraint (snapshot_id int8 not null, constraint
 create table IoDbMetaSnapshotJtTable (table_id int8 not null, snapshot_id int8 not null);
 create table IoDbMetaTable (id  bigserial not null, code varchar(255), system_id int8, primary key (id));
 create table IoDbMetaUnique (id  bigserial not null, position int4 not null, column_id int8, constraint_id int8, primary key (id));
+create table IoDbStatement (id  bigserial not null, average float8 not null, calls int4 not null, code varchar(255), record timestamp, remark text, rows int4 not null, sql text, total float8 not null, group_id int8, host_id int8, primary key (id));
+create table IoDbStatementGroup (id  bigserial not null, code varchar(255), name varchar(255), position int4 not null, remark text, system_id int8, primary key (id));

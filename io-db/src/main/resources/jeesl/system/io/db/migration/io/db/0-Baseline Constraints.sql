@@ -4,6 +4,8 @@ alter table IoDbMetaConstraint add constraint UKed8io78fc4ko3udiw73d8oyva unique
 alter table IoDbMetaSnapshot add constraint UK7sq9792i54lyg1j4pq4c508bq unique (system_id, record);
 alter table IoDbMetaTable add constraint UKt41mwi71v74ks14ofa56knief unique (system_id, code);
 alter table IoDbMetaUnique add constraint UKh4vw4hsri6cmj3q3nbvxb25lq unique (constraint_id, column_id);
+alter table IoDbStatement add constraint UKc76oo5tmpvey2xujhr4qh49df unique (host_id, group_id, record);
+alter table IoDbStatement add constraint UKk7yhawmf90bmkwboqqdsj3uvy unique (code);
 alter table IoDbDump add constraint FKhb2ajrravpmg2njdmec9leb96 foreign key (system_id) references IoSsiSystem;
 alter table IoDbDumpFile add constraint FKjio5n8wxkrlnn2wnvn1tj4r5w foreign key (dump_id) references IoDbDump;
 alter table IoDbDumpFile add constraint FKq8mdmdj47kbwk0v7u7k1kif4l foreign key (host_id) references IoSsiHost;
@@ -24,3 +26,6 @@ alter table IoDbMetaSnapshotJtTable add constraint FKfiwqmib4do8hpa4bl09699oo3 f
 alter table IoDbMetaTable add constraint FK56e7tidumlmekxq5n38eyqrvd foreign key (system_id) references IoSsiSystem;
 alter table IoDbMetaUnique add constraint FKab8wgjgmbxhyj1kfr0dmerdpd foreign key (column_id) references IoDbMetaColumn;
 alter table IoDbMetaUnique add constraint FKn3d9mo0wgfkgwxpg79dw46a6u foreign key (constraint_id) references IoDbMetaConstraint;
+alter table IoDbStatement add constraint FK9jw839s86vbyj6l3flrx92niu foreign key (group_id) references IoDbStatementGroup;
+alter table IoDbStatement add constraint FKfvll21c27n186v7vwqkbwi5qs foreign key (host_id) references IoSsiHost;
+alter table IoDbStatementGroup add constraint FKqlqmb0i25ru5f740e3ibu06g0 foreign key (system_id) references IoSsiSystem;

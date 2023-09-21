@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.rs.io.label;
+package org.jeesl.api.rest.rs.jx.io.label;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

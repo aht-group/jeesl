@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.rs.io;
+package org.jeesl.api.rest.rs.jx.io.label;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

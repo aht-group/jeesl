@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.rs.system;
+package org.jeesl.api.rest.rs.jx.system;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,6 +11,7 @@ import org.jeesl.api.rest.i.system.JeeslTestRestInterface;
 import org.jeesl.interfaces.util.qualifier.JeeslRestSecured;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.json.system.job.JsonSystemJob;
+import org.jeesl.model.json.util.JsonTime;
 
 @Path("/rest/test")
 public interface JeeslTestRest extends JeeslTestRestInterface
@@ -29,6 +30,9 @@ public interface JeeslTestRest extends JeeslTestRestInterface
 	@GET @Path("/json/job") @Produces(MediaType.APPLICATION_JSON) 
 	JsonSystemJob jsonJob();
 	
-	@POST @Path("/json/mirror") @Consumes(MediaType.TEXT_PLAIN) @Produces(MediaType.TEXT_PLAIN) 
-	String jsonMirror(String content);
+	@GET @Path("/json/time/download") @Produces(MediaType.APPLICATION_JSON) 
+	JsonTime jsonTimeDownload();
+	
+	@POST @Path("/json/time/upload") @Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON) 
+	JsonTime jsonTimeUpload(JsonTime content);
 }

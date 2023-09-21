@@ -1,4 +1,4 @@
-package org.jeesl.controller.converter.fc.io.ssi.nat;
+package org.jeesl.controller.converter.jx.fc.io.ssi.nat;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.convert.FacesConverter;
