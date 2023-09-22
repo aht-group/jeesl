@@ -17,7 +17,7 @@
 	<j:row>
 		<j:slot id="sScopes" width="2">
 			<h:form id="fGroups">
-				<p:dataTable stlyeClass="jeesl-datatable"
+				<p:dataTable styleClass="jeesl-datatable"
 						var="g" value="#{cc.attrs.ctrl.groups}" draggableRows="true"
 						selection="#{cc.attrs.ctrl.group}" selectionMode="single" rowKey="#{g.id}">
 					<f:facet name="header">
@@ -55,45 +55,50 @@
 			</h:form>
 		</j:slot>
 		<j:slot id="sStatements" width="10">
-			<p:dataTable styleClass="jeesl-datatable" lazy="false"
-						var="s" value="#{cc.attrs.ctrl.statements}">
-				<f:facet name="header">
-					<j:dtHeader title="PG Stat Statements: SELECT pg_stat_statements_reset();">
-						<j:svg type="jeeslUpload" listener="#{cc.attrs.ctrl.upload()}" update=":#{cc.id}:grid"/>
-					</j:dtHeader>
-				</f:facet>
-				<p:column>
-					<f:facet name="header"><jtp:label entity="IoDbStatement" code="record"/></f:facet>
-					<jp:outputDate value="#{s.record}" withMinute="true"/>
-				</p:column>
-				<p:column rendered="false" sortBy="#{s.rows}">
-					<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['rows'].name[localeCode].lang}"/></f:facet>
-					<h:outputText value="#{s.rows}"/>
-				</p:column>
-				<p:column rendered="false" sortBy="#{s.calls}">
-					<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['calls'].name[localeCode].lang}"/></f:facet>
-					<h:outputText value="#{s.calls}"/>
-				</p:column>
-				<p:column rendered="false" sortBy="#{s.average}">
-					<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['average'].name[localeCode].lang}"/></f:facet>
-					<h:outputText value="#{s.average}"/>
-				</p:column>
-				<p:column rendered="false" sortBy="#{s.total}">
-					<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['total'].name[localeCode].lang}"/></f:facet>
-					<h:outputText value="#{s.total}"/>
-				</p:column>
-				<p:column rendered="true">
-					<f:facet name="header"><jtp:label entity="IoDbStatement" code="statistics"/></f:facet>
-					<h:outputText value="#{s.rows}" />
-					<br/><h:outputText value="#{s.calls}"/>
-					<br/><h:outputText value="#{s.average}"/>
-					<br/><h:outputText value="#{s.total}"/>
-				</p:column>
-				<p:column>
-					<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['sql'].name[localeCode].lang}"/></f:facet>
-					<h:outputText value="#{cc.attrs.ctrl.mapSql[s]}" escape="false"/>
-				</p:column>
-	       	</p:dataTable>
+			<h:form id="fStatements">
+				<p:dataTable styleClass="jeesl-datatable" lazy="false"
+						var="s" value="#{cc.attrs.ctrl.statements}"
+						selection="#{cc.attrs.ctrl.statement}" selectionMode="single" rowKey="#{s.id}">
+					<f:facet name="header">
+						<j:dtHeader title="PG Stat Statements: SELECT pg_stat_statements_reset();">
+							<j:svg type="jeeslRemove" listener="#{cc.attrs.ctrl.removeStatement()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.statement.id gt 0}"/>
+							<j:svg type="jeeslUpload" listener="#{cc.attrs.ctrl.upload()}" update=":#{cc.id}:grid"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectStatement()}" update="@form"/>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbStatement" code="record"/></f:facet>
+						<jp:outputDate value="#{s.record}" withMinute="true"/>
+					</p:column>
+					<p:column rendered="false" sortBy="#{s.rows}">
+						<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['rows'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.rows}"/>
+					</p:column>
+					<p:column rendered="false" sortBy="#{s.calls}">
+						<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['calls'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.calls}"/>
+					</p:column>
+					<p:column rendered="false" sortBy="#{s.average}">
+						<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['average'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.average}"/>
+					</p:column>
+					<p:column rendered="false" sortBy="#{s.total}">
+						<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['total'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{s.total}"/>
+					</p:column>
+					<p:column rendered="true">
+						<f:facet name="header"><jtp:label entity="IoDbStatement" code="statistics"/></f:facet>
+						<h:outputText value="#{s.average}"/>
+						<ui:remove>
+							<h:outputText value="#{s.rows}" /><br/><h:outputText value="#{s.calls}"/><br/><h:outputText value="#{s.total}"/>
+						</ui:remove>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><h:outputText value="#{cc.attrs.ctrl.mapColumn['sql'].name[localeCode].lang}"/></f:facet>
+						<h:outputText value="#{cc.attrs.ctrl.mapSql[s]}" escape="false"/>
+					</p:column>
+		       	</p:dataTable>
+			</h:form>
 		</j:slot>
 	</j:row>
 </jp:grid>

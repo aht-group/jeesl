@@ -1,6 +1,7 @@
 package org.jeesl.controller.web.io.db;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +74,7 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 	
 	private SG group; public SG getGroup() {return group;} public void setGroup(SG group) {this.group = group;}
 
-	private JsonPostgresStatement statement; public JsonPostgresStatement getStatement() {return statement;} public void setStatement(JsonPostgresStatement statement) {this.statement = statement;}
+	private ST statement; public ST getStatement() {return statement;} public void setStatement(ST statement) {this.statement = statement;}
 
 	public JeeslDbStatementHistoryGwc(JeeslIoDbStatementHistoryCallback callback,
 										final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb,
@@ -105,22 +106,23 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 		this.reloadGroups(); 
 	}
 	
-	private void reset(boolean rGroups, boolean rGroup, boolean rStatements)
+	private void reset(boolean rGroups, boolean rGroup, boolean rStatements, boolean rStatement)
 	{
 		if(rGroups) {groups.clear();}
-		
+		if(rGroup) {group=null;}
 		if(rStatements) {statements.clear(); mapSql.clear();}
+		if(rStatement) {statement=null;}
 	}
 	
 	@Override public void selectSbSingle(EjbWithId item) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		if(fbSsi.getClassSystem().isAssignableFrom(item.getClass())) {this.reset(true,false,false); this.reloadGroups();}
-		if(fbDb.getClassStatementGroup().isAssignableFrom(item.getClass())) {this.reloadStatements();}
+		if(fbSsi.getClassSystem().isAssignableFrom(item.getClass())) {this.reset(true,false,true,true); this.reloadGroups();}
+		if(fbDb.getClassStatementGroup().isAssignableFrom(item.getClass())) {this.reset(false,false,false,true); this.reloadStatements();}
 	}
 	
 	private void reloadGroups()
 	{
-		this.reset(true,false,false);
+		this.reset(true,false,false,false);
 		if(sbhSystem.isSelected())
 		{
 			groups.addAll(fDb.allForParent(fbDb.getClassStatementGroup(),sbhSystem.getSelection()));
@@ -134,7 +136,7 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 	
 	public void selectGroup() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		this.reset(false,false,true);
+		this.reset(false,false,true,true);
 		logger.info(AbstractLogMessage.selectEntity(group));
 		
 		this.reloadStatements();
@@ -148,13 +150,26 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 	
 	private void reloadStatements()
 	{
-		this.reset(false,false,true);
+		this.reset(false,false,true,false);
 		statements.addAll(fDb.allForParent(fbDb.getClassStatement(),group));
 		for(ST s : statements)
 		{
 			mapSql.put(s,TxtSqlQueryFactory.toXhtml(TxtSqlQueryFactory.shortenIn(s.getSql())));
 		}
+		Collections.reverse(statements);
 		logger.info(AbstractLogMessage.reloaded(fbDb.getClassStatement(),statements));
+	}
+	
+	public void selectStatement()
+	{
+		logger.info(AbstractLogMessage.selectEntity(statement));
+	}
+	
+	public void removeStatement() throws JeeslConstraintViolationException
+	{
+		fDb.rm(statement);
+		this.reset(false,false,false,true);
+		this.reloadStatements();
 	}
 	
 	public void upload()

@@ -40,6 +40,8 @@ public class JsonPostgresStatement implements Serializable
 	public void setHost(JsonSsiHost host) {this.host = host;}
 
 	@JsonProperty("record")
+	@javax.json.bind.annotation.JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+	@jakarta.json.bind.annotation.JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
