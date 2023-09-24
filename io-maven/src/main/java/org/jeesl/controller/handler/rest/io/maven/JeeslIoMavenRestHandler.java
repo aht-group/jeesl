@@ -16,8 +16,6 @@ import org.jeesl.factory.ejb.io.maven.EjbMavenUsageFactory;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenSuitability;
-import org.jeesl.model.ejb.io.locale.IoDescription;
-import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
@@ -44,13 +42,13 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 	public static final long serialVersionUID=1;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenRestHandler.class);
 	
-	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
+	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 	
 	private final EjbCodeCache<IoMavenStructure> cacheStructure;
 	private final EjbCodeCache<IoMavenOutdate> cacheOutdate;
 	private final EjbCodeCache<IoMavenSuitability> cacheSuitability;
 	
-	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven)
+	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		this.fMaven=fMaven;
 		

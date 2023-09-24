@@ -1,8 +1,10 @@
 package org.jeesl.interfaces.model.io.maven.usage;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
+import org.jeesl.interfaces.model.io.maven.module.JeeslMavenEe;
 import org.jeesl.interfaces.model.io.maven.module.JeeslMavenType;
 import org.jeesl.interfaces.model.marker.jpa.EjbPersistable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -19,9 +21,10 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslIoMavenModule <MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,TYPE,G>,
+public interface JeeslIoMavenModule <MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,TYPE,EE,G>,
 										STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,G>,
 										TYPE extends JeeslMavenType<?,?,TYPE,G>,
+										EE extends JeeslMavenEe<?,?,EE,G>,
 										G extends JeeslGraphic<?,?,?>>
 								extends Serializable,EjbWithId,EjbRemoveable,EjbPersistable,EjbSaveable,
 										EjbWithCode,EjbWithPosition,EjbWithParentAttributeResolver,
@@ -29,7 +32,7 @@ public interface JeeslIoMavenModule <MODULE extends JeeslIoMavenModule<MODULE,ST
 									
 {	
 	
-	public static enum Attributes{parent,code};
+	public static enum Attributes{id,parent,code,enterpriseEditions};
 	
 	MODULE getParent();
 	void setParent(MODULE parent);
@@ -39,4 +42,7 @@ public interface JeeslIoMavenModule <MODULE extends JeeslIoMavenModule<MODULE,ST
 	
 	STRUCTURE getStructure();
 	void setStructure(STRUCTURE structure);
+	
+	List<EE> getEnterpriseEditions();
+	void setEnterpriseEditions(List<EE> enterpriseEditions);
 }

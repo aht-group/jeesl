@@ -9,6 +9,8 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -39,11 +41,11 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,OUTDATE,MAINTAINER>,
 									OUTDATE extends JeeslMavenOutdate<?,?,OUTDATE,?>,
 									MAINTAINER extends JeeslMavenMaintainer<?,?,MAINTAINER,?>,
-									MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,TYPE,?>,
+									MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,TYPE,?,?>,
 									STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>,
 									TYPE extends JeeslMavenType<L,D,TYPE,?>,
 									USAGE extends JeeslIoMavenUsage<VERSION,MODULE>>
-	extends JeeslFacadeBean implements JeeslIoMavenFacade<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE,USAGE>
+	extends JeeslFacadeBean implements JeeslIoMavenFacade<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,MODULE,STRUCTURE,USAGE>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFacadeBean.class);
@@ -96,6 +98,28 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		try	{return tQ.getSingleResult();}
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbMaven.getClassVersion().getSimpleName()+" found for artifact="+artifact.getCode()+" and code="+code);}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbMaven.getClassVersion().getSimpleName()+" not unique for artifact:"+artifact.getCode()+" and code="+code);}
+	}
+	
+	@Override public List<MODULE> fIoMavenModules(EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<MODULE> cQ = cB.createQuery(fbMaven.getClassModule());
+		Root<MODULE> root = cQ.from(fbMaven.getClassModule());
+		if(ObjectUtils.isNotEmpty(query.getRootFetches())) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+			
+		if(ObjectUtils.isNotEmpty(query.getIdList()))
+		{
+			Expression<Long> eId = root.get(JeeslIoMavenModule.Attributes.id.toString());
+			predicates.add(eId.in(query.getIdList()));
+		}
+		
+		cQ.select(root);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		cQ.distinct(query.isDistinct());
+		
+		TypedQuery<MODULE> tQ = em.createQuery(cQ);
+		return tQ.getResultList();
 	}
 
 	@Override public List<USAGE> fIoMavenUsages(EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> query)

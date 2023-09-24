@@ -16,6 +16,8 @@
       	<ignoreVersion>3.1.0.Beta2</ignoreVersion>
       	
       	<ignoreVersion>3.15.3.Final-redhat-00001</ignoreVersion>
+      	<ignoreVersion>3.15.7.Final-redhat-00001</ignoreVersion>
+      	<ignoreVersion>3.15.7.Final-redhat-00002</ignoreVersion>
       	
       	<ignoreVersion>4.0.0.Beta1</ignoreVersion>
       	<ignoreVersion>4.0.0.Beta2</ignoreVersion>

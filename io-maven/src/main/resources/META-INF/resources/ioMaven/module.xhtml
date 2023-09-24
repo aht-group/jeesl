@@ -15,7 +15,7 @@
 <composite:implementation>
 <jp:grid id="grid">
 	<j:row>
-		<j:slot id="sDevelopments" width="7">
+		<j:slot id="sDevelopments" width="8">
 			<h:form id="fDevelopments">
 				<p:dataTable styleClass="jeesl-datatable"
 						var="m" value="#{cc.attrs.ctrl.modules}" draggableRows="true"
@@ -25,7 +25,7 @@
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addDevelopment()}" update=":#{cc.id}:grid"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectDevelopment()}" update=":#{cc.id}:sDevelopment"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectModule()}" update=":#{cc.id}:sDevelopment"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderModules()}" update="@form"/>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoMavenModule" code="structure"/></f:facet>
@@ -41,10 +41,20 @@
 		            	<jtp:symbolizer value="#{m.type}" marginRight="5"/>
 						<h:outputText value="#{m.code}" />
 		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="jdk"/></f:facet>
+		            	<jtp:symbolizer value="#{m.jdk}"/>
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="enterpriseEditions"/></f:facet>
+		            	<ui:repeat var="ee" value="#{m.enterpriseEditions}">
+							<jtp:symbolizer value="#{ee}" marginRight="5"/>
+						</ui:repeat>
+		            </p:column>
 				</p:dataTable>
 			</h:form>
 		</j:slot>
-		<j:slot id="sDevelopment" width="5">
+		<j:slot id="sDevelopment" width="4">
 			<h:form id="fModule" rendered="#{not empty cc.attrs.ctrl.module}">
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoMavenModule"/></f:facet>
@@ -68,6 +78,18 @@
 						<p:selectOneMenu value="#{cc.attrs.ctrl.module.type}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.types}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
+						
+						<jtp:label entity="IoMavenModule" code="jdk"/>
+						<p:selectOneMenu value="#{cc.attrs.ctrl.module.jdk}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.ctrl.compilers}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="IoMavenModule" code="enterpriseEditions"/>
+						<p:selectCheckboxMenu value="#{cc.attrs.ctrl.module.enterpriseEditions}" multiple="true" filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+							<f:converter converterId="ioMavenEeConverter" />
+							<f:attribute name="collectionType" value="java.util.LinkedList" />
+							<f:selectItems value="#{cc.attrs.ctrl.enterpriseEditions}" var="e" itemLabel="#{e.name[localeCode].lang}" itemValue="#{e}" />
+						</p:selectCheckboxMenu>
 					</j:inputGrid>
 				</p:panel>
 			</h:form>

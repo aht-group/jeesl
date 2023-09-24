@@ -78,9 +78,13 @@
 			<ignoreVersion>2.3-pfd</ignoreVersion>
 		</ignoreVersions>
     </rule>
-	<rule groupId="javax.inject" comparisonMethod="maven">
+	<rule groupId="javax.json.bind" comparisonMethod="maven">
 		<ignoreVersions>
-		
+			<ignoreVersion>1.0.0.redhat-1</ignoreVersion>
+		</ignoreVersions>
+    </rule>
+    <rule groupId="javax.inject" comparisonMethod="maven">
+		<ignoreVersions>
 			<ignoreVersion>1.0-PFD-1</ignoreVersion>
 			<ignoreVersion>1-redhat-1</ignoreVersion>
 			<ignoreVersion>1-redhat-2</ignoreVersion>
@@ -92,6 +96,7 @@
 			<ignoreVersion>1.0.0.redhat-00008</ignoreVersion>
 		</ignoreVersions>
     </rule>
+    
 	<rule groupId="javax.jws" comparisonMethod="maven">
 		<ignoreVersions>
 			<ignoreVersion>1.0-MR1-redhat-1</ignoreVersion>

@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeContainer;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeData;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,7 @@ public class EjbAttributeQuery<CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?
 	public EjbAttributeQuery<CRITERIA,CONTAINER,DATA> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//Lists
+	@Override public  EjbAttributeQuery<CRITERIA,CONTAINER,DATA> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
 	@Override public EjbAttributeQuery<CRITERIA,CONTAINER,DATA> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbAttributeQuery<CRITERIA,CONTAINER,DATA> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

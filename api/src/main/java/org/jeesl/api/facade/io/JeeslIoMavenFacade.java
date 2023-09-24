@@ -10,6 +10,7 @@ import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
 
@@ -18,6 +19,7 @@ public interface JeeslIoMavenFacade <GROUP extends JeeslIoMavenGroup,
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,OUTDATE,MAINTAINER>,
 									OUTDATE extends JeeslMavenOutdate<?,?,OUTDATE,?>,
 									MAINTAINER extends JeeslMavenMaintainer<?,?,MAINTAINER,?>,
+									MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,?,?,?>,
 									STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>,
 									USAGE extends JeeslIoMavenUsage<VERSION,?>>
 			extends JeeslFacade
@@ -25,5 +27,6 @@ public interface JeeslIoMavenFacade <GROUP extends JeeslIoMavenGroup,
 	ARTIFACT fIoMavenArtifact(GROUP group, String code) throws JeeslNotFoundException;
 	VERSION fIoMavenVersion(ARTIFACT artifact, String code) throws JeeslNotFoundException;
 	
+	List<MODULE> fIoMavenModules(EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> query);
 	List<USAGE> fIoMavenUsages(EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> query);
 }

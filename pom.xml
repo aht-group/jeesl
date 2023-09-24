@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jeesl.bom</groupId>
+		<artifactId>bom-parent8</artifactId>
+		<version>0.3.2-SNAPSHOT</version>
+	</parent>
 	     
 	<groupId>org.jeesl</groupId>
 	<artifactId>jeesl</artifactId>
 	<packaging>pom</packaging>
-	<version>0.3.2-SNAPSHOT</version>
     
 	<name>JEESL (JavaEE Support Library)</name>
 	<url>https://github.com/aht-group/jeesl</url>
@@ -28,6 +33,7 @@
 		<module>maven</module>
 		<module>prototype</module>
 		
+		<module>io-ai</module>
 		<module>io-attribute</module>
 		<module>io-cms</module>
 		<module>io-crypto</module>
@@ -67,7 +73,7 @@
         <jeesl.jaxb.package.base>org.jeesl.model.xml</jeesl.jaxb.package.base>
          
 		<maven.version.jeesl.bom>0.3.2-SNAPSHOT</maven.version.jeesl.bom>
-		<maven.ignore.versions>file://${project.parent.basedir}/maven/src/main/resources/jeesl/maven/ignore-versions.xml</maven.ignore.versions>
+		<jeesl.maven.ignore>file://${project.parent.basedir}/maven/src/main/resources/jeesl/io/maven/ignore.xml</jeesl.maven.ignore>
 
 		<guava.version>10.0.1</guava.version>
 		<jaxb.version>2.2.2</jaxb.version>
@@ -255,11 +261,7 @@
 					<artifactId>exlp-maven</artifactId>
 					<version>0.1.18-SNAPSHOT</version>
 				</plugin>
-				<plugin>
-			        <groupId>org.codehaus.mojo</groupId>
-			        <artifactId>versions-maven-plugin</artifactId>
-			        <version>2.2</version>
-				</plugin>
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 			        <artifactId>maven-pmd-plugin</artifactId>
@@ -319,11 +321,7 @@
           			</execution>
         		</executions>
 			</plugin>
-			<plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <configuration><rulesUri>${maven.ignore.versions}</rulesUri></configuration>
-            </plugin>
+			
 		</plugins>
 	</build>
 	
@@ -338,48 +336,16 @@
 	</pluginRepositories>
 	
 	<repositories>
-		<repository>
-		    <!--Aspose for WordRendering -->
-		    <id>AsposeJavaAPI</id>
-		    <name>Aspose Java API</name>
-		    <url>https://repository.aspose.com/repo/</url>
-			<releases><enabled>true</enabled></releases>
-		    <snapshots><enabled>false</enabled></snapshots>
-		</repository>
-		<repository>
-		    <id>aht.3rd</id>
-		    <name>AHT Nexus Third Party</name>
-		    <url>https://www.aht-group.com/nexus/content/repositories/thirdparty</url>
-		    <releases><enabled>true</enabled></releases>
-		    <snapshots><enabled>false</enabled></snapshots>
-		</repository>
-		<repository>
-		    <id>sonatype.snapshot</id>
-		    <name>Sonatype Snapshot Repository</name>
-		    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		    <releases><enabled>false</enabled></releases>
-		    <snapshots><enabled>true</enabled></snapshots>
-		</repository>
+
+		
+
 		<!-- May not be needed to be explicitely given -->
 		<repository>
 		    <id>mvn.central</id>
 		    <name>MVN Central</name>
 		    <url>https://repo1.maven.org/maven2</url>
 		</repository>
-		 <repository>
-		    <id>jboss.public</id>
-		    <name>JBoss Repository</name>
-		    <url>https://repository.jboss.org/nexus/content/groups/public</url>
-		    <releases><enabled>true</enabled></releases>
-		    <snapshots><enabled>false</enabled></snapshots>
-		</repository>
-		<repository>
-		    <id>redhat.ga</id>
-		    <name>JBoss Repository</name>
-		    <url>https://maven.repository.redhat.com/ga</url>
-		    <releases><enabled>true</enabled></releases>
-		    <snapshots><enabled>false</enabled></snapshots>
-		</repository>
+		 
 		<repository>
 		    <id>osgeo</id>
 		    <name>OSGeo Release Repository</name>

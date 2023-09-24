@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.model.ejb.io.maven.module.IoMavenJdk;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenType;
@@ -24,6 +25,7 @@ public class EjbMavenModuleFactory
 	{
 		if(Objects.nonNull(ejb.getStructure())) {ejb.setStructure(facade.find(IoMavenStructure.class,ejb.getStructure()));}
 		if(Objects.nonNull(ejb.getType())) {ejb.setType(facade.find(IoMavenType.class,ejb.getType()));}
+		if(Objects.nonNull(ejb.getJdk())) {ejb.setJdk(facade.find(IoMavenJdk.class,ejb.getJdk()));}
 	}
 	
 	public static Map<IoMavenType,List<IoMavenModule>> toMapModule(List<IoMavenModule> list)

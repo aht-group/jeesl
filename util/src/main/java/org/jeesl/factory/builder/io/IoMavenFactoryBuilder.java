@@ -15,10 +15,12 @@ public class IoMavenFactoryBuilder<L extends JeeslLang, D extends JeeslDescripti
 									GROUP extends JeeslIoMavenGroup,
 									ARTIFACT extends JeeslIoMavenArtifact<GROUP,?>,
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,?,?>,
-									MODULE extends JeeslIoMavenModule<MODULE,?,?,?>,
+									MODULE extends JeeslIoMavenModule<MODULE,?,?,?,?>,
 									USAGE extends JeeslIoMavenUsage<VERSION,MODULE>>
 			extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoMavenFactoryBuilder.class);
 	
 	private final Class<GROUP> cGroup; public Class<GROUP> getClassGroup() {return cGroup;}
