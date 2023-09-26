@@ -71,6 +71,8 @@ public class ReportFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 >
 	extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(ReportFactoryBuilder.class);
 	
 	private final Class<CATEGORY> cCategory; public Class<CATEGORY> getClassCategory(){return cCategory;}

@@ -19,6 +19,8 @@ public class MapFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								LEVEL extends JeeslLocationLevel<L,D,LEVEL,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(MapFactoryBuilder.class);
 	
 	private final Class<MAP> cMap; public Class<MAP> getClassMap() {return cMap;}

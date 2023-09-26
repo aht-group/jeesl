@@ -28,6 +28,8 @@ public class IoDomainFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 				ITEM extends JeeslDomainItem<QUERY,SET>>
 			extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoDomainFactoryBuilder.class);
 	
 	private final Class<DOMAIN> cDomain; public Class<DOMAIN> getClassDomain() {return cDomain;}

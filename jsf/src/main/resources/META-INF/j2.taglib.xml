@@ -12,6 +12,13 @@
         </component>
     </tag>
   
+  	<tag>
+        <tag-name>gridIoAiDeepl</tag-name>
+        <component>
+            <resource-id>ioAi/deepl.xhtml</resource-id>
+        </component>
+	</tag>
+  
 	<tag>
         <tag-name>gridIoCryptoKey</tag-name>
         <component>

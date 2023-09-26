@@ -27,6 +27,8 @@ public class CalendarFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									USER extends JeeslSimpleUser>
 	extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(CalendarFactoryBuilder.class);
 	
 	private final Class<CAL> cCalendar; public Class<CAL> getClassCalendar()	{return cCalendar;}

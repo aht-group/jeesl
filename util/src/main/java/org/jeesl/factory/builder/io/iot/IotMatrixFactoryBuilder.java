@@ -15,6 +15,8 @@ public class IotMatrixFactoryBuilder<L extends JeeslLang, D extends JeeslDescrip
 										>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IotMatrixFactoryBuilder.class);
 
 	private final Class<DEVICE> cDevice; public Class<DEVICE> getClassDevice() {return cDevice;}

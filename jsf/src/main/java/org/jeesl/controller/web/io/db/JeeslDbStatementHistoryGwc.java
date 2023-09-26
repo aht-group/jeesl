@@ -6,12 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.api.facade.system.JeeslExportRestFacade;
-import org.jeesl.api.rest.rs.jx.io.db.JeeslIoDbRest;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -34,10 +29,8 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
-import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatement;
 import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatementGroup;
 import org.jeesl.util.query.json.JsonIoDbQueryProvider;
-import org.jeesl.util.web.RestLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

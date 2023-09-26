@@ -25,6 +25,8 @@ public class MmgFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, 
 								USER extends JeeslSimpleUser>
 	extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(MmgFactoryBuilder.class);
 	
 	private final Class<LOC> cLocale; public Class<LOC> getClassLocale() {return cLocale;}

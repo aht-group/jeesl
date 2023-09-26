@@ -24,6 +24,8 @@ public class LogFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
 								>
 	extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(LogFactoryBuilder.class);
 	
 	private final Class<LOG> cLog;

@@ -20,6 +20,8 @@ public class IoCryptoFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 								USER extends JeeslSimpleUser>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoCryptoFactoryBuilder.class);
 
 	private final Class<KEY> cKey; public Class<KEY> getClassKey() {return cKey;}

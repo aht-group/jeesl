@@ -52,6 +52,8 @@ public class HdFactoryBuilder<L extends JeeslLang,D extends JeeslDescription, LO
 							USER extends JeeslSimpleUser>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(HdFactoryBuilder.class);
 	
 	private final Class<TICKET> cTicket; public Class<TICKET> getClassTicket() {return cTicket;}

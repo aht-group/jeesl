@@ -17,6 +17,8 @@ public class IoSsiDockerFactoryBuilder<L extends JeeslLang,D extends JeeslDescri
 										HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoSsiDockerFactoryBuilder.class);
 	
 	private final Class<SYSTEM> cSystem; public Class<SYSTEM> getClassSystem(){return cSystem;}

@@ -336,30 +336,6 @@
 		        <artifactId>versions-maven-plugin</artifactId>
 		        <configuration><rulesUri>${maven.ignore.versions}</rulesUri></configuration>
 			</plugin>
-			<plugin>
-				<groupId>net.sf.exlp</groupId>
-				<artifactId>exlp-maven</artifactId>
-				<executions>
- 					<execution>
-						<id>create-merged-maven-ignore</id>
-						<phase>process-resources</phase> 
-						<goals><goal>mvnVersionIgnore</goal></goals>
-						<configuration>
-							<log>WARN</log>
-							<files>
-							  <param>exlp/maven/exlp-versions.xml</param>
-							  <param>${basedir}/src/main/resources/jeesl/io/maven/ignore/ee.xml</param>
-							  <param>${basedir}/src/main/resources/jeesl/io/maven/ignore/jakarta.xml</param>
-							  <param>${basedir}/src/main/resources/jeesl/io/maven/ignore/javax.xml</param>
-							  <param>${basedir}/src/main/resources/jeesl/io/maven/ignore/jboss.xml</param>
-							  <param>${basedir}/src/main/resources/jeesl/io/maven/ignore/jeesl.xml</param>
-							  <param>${basedir}/src/main/resources/jeesl/io/maven/ignore/jsf.xml</param>
-							</files>
-							<saveTo>${basedir}/src/main/resources/jeesl/io/maven/ignore.xml</saveTo>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin> 
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-plugin-plugin</artifactId>

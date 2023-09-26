@@ -79,6 +79,8 @@ public class SurveyCoreFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 				ATT extends JeeslStatus<L,D,ATT>>
 	extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(SurveyCoreFactoryBuilder.class);
 	
 	private final Class<SURVEY> cSurvey; public Class<SURVEY> getClassSurvey() {return cSurvey;}

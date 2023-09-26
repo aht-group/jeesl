@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+		
+	<composite:interface>
+		<composite:attribute name="ctrl" required="true"/>
+	</composite:interface>
+	
+	<composite:implementation>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sLeft" width="6">
+			<h:form id="fInput">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header">
+						<j:pHeader entity="IoCryptoKey">
+							
+						</j:pHeader>
+					</f:facet>
+					<f:facet name="actions">
+						<jp:thFilter handler="#{cc.attrs.ctrl.thSource}"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.translate()}" update=":#{cc.id}:grid" />
+					</f:facet>
+					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
+						<jtp:inputRemark value="#{cc.attrs.ctrl.input}"/>
+					</p:panelGrid>
+				</p:panel>
+			</h:form>
+		</j:slot>
+		<j:slot id="sRight" width="6">
+			<h:form id="fOutput">
+				<p:panel styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoCryptoKey"/></f:facet>
+					<f:facet name="actions">
+						<jp:thFilter handler="#{cc.attrs.ctrl.thTarget}"/>
+					</f:facet>
+					<ui:repeat var="l" value="#{cc.attrs.ctrl.thTarget.selected}">
+						<p:panelGrid columns="2" columnClasses="jeeslGrid15,jeeslGrid90">
+							<h:outputText value="#{l.code}"/>
+							<h:outputText value="#{cc.attrs.ctrl.mapTranslation[l]}"/>
+						</p:panelGrid>
+					</ui:repeat>				
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
+	</composite:implementation>
+</html>

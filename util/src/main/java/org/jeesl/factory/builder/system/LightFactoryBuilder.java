@@ -13,6 +13,8 @@ public class LightFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 								SCOPE extends JeeslTrafficLightScope<L,D,SCOPE,?>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(LightFactoryBuilder.class);
 	
 	private final Class<LIGHT> cLight; public Class<LIGHT> getClassLight() {return cLight;}

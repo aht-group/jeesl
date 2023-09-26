@@ -16,6 +16,8 @@ public class NewsFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								USER extends EjbWithId>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(NewsFactoryBuilder.class);
 	
 	private final Class<CATEGORY> cCategory; public Class<CATEGORY> getClassCategory() {return cCategory;}

@@ -20,6 +20,8 @@ public class IoDashboardFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 									DB extends JeeslIoDashboard<L,D,DBR,DBCP,DB>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoDashboardFactoryBuilder.class);
 
 	private final Class<DBR> cResolution; public Class<DBR> getClassResolution() {return cResolution;}

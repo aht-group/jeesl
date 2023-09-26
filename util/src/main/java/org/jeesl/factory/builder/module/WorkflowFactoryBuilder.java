@@ -81,6 +81,8 @@ public class WorkflowFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									USER extends JeeslUser<SR>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(WorkflowFactoryBuilder.class);
 	
 	private final Class<WX> cContext; public Class<WX> getClassContext() {return cContext;}

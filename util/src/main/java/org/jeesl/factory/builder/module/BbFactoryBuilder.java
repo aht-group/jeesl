@@ -27,6 +27,8 @@ public class BbFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								USER extends EjbWithEmail>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(BbFactoryBuilder.class);
 	
 	private final Class<SCOPE> cScope; public Class<SCOPE> getClassScope() {return cScope;}

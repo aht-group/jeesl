@@ -14,6 +14,8 @@ public class HydroFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 									HY extends JeeslHydroYear<L,D,HD,HY>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(HydroFactoryBuilder.class);
 
 	private final Class<HD> cDecade; public Class<HD> getClassDecade() {return cDecade;}
