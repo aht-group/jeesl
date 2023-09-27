@@ -237,8 +237,7 @@
 	
 	<profiles>
 		<profile>
-			<id>compile8</id>
-			<activation><jdk>1.8</jdk></activation>
+			<id>j8</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -256,8 +255,7 @@
 		                    			<xsdOption>
 											<bindingFile>${basedir}/src/main/xsd/javax.xjb</bindingFile>
 											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
-		                        			<xsd>${basedir}/src/main/xsd/jeesl/text.xsd</xsd>
-		                        			<packagename>${jeesl.jaxb.package.base}.text</packagename>
+		                        			<xsd>${basedir}/src/main/xsd/dummy.xsd</xsd>
 		                    			</xsdOption>
 		                			</xsdOptions>
 		            			</configuration>
