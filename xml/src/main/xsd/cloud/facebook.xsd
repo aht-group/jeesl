@@ -8,7 +8,7 @@
     elementFormDefault="qualified"
     attributeFormDefault="unqualified"
     jaxb:extensionBindingPrefixes="xjc">
-    <xsd:import namespace="http://exlp.sf.net/net" schemaLocation="../../../../../../exlp/xml/src/main/xsd/util/net.xsd"/>
+    <xsd:import namespace="http://exlp.sf.net/net" schemaLocation="../../../../../../exlp/xml/src/main/xsd/net.xsd"/>
     <xsd:element name="signedRequest">
         <xsd:complexType>
             <xsd:sequence>

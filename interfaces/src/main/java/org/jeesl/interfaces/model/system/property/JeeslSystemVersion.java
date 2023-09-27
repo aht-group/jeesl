@@ -20,5 +20,5 @@ public interface JeeslSystemVersion <L extends JeeslLang, D extends JeeslDescrip
 								EjbWithCodeGraphic<G>,
 								JeeslStatus<L,D,S>
 {
-
+	public enum Code {v1}
 }
