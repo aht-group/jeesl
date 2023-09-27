@@ -38,6 +38,8 @@ public class IoFileRepositoryFactoryBuilder<L extends JeeslLang, D extends Jeesl
 											RSTATUS extends JeeslFileStatus<L,D,RSTATUS,?>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoFileRepositoryFactoryBuilder.class);
 
 	private final Class<STORAGE> cStorage; public Class<STORAGE> getClassStorage() {return cStorage;}

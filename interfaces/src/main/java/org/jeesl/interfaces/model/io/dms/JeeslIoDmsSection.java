@@ -18,7 +18,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 @DownloadJeeslDescription
 public interface JeeslIoDmsSection<L extends JeeslLang, D extends JeeslDescription,
-					S extends JeeslIoDmsSection<L,D,S>>
+								S extends JeeslIoDmsSection<L,D,S>>
 					extends Serializable,EjbWithId,
 					EjbRemoveable,EjbPersistable,EjbSaveable,
 					EjbWithPositionVisibleParent,

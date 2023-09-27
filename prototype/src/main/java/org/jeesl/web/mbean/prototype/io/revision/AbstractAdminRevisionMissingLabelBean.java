@@ -3,6 +3,7 @@ package org.jeesl.web.mbean.prototype.io.revision;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -38,8 +39,7 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 	private List<RML> missingLabels; public List<RML> getMissingLabels() {return missingLabels;}
 	private IoRevisionFactoryBuilder<L,D,?,?,?,?,?,?,?,?,?,?,?,RML> fbRevision;
 
-	private SbMultiHandler<LOC> sbhStatus;
-	public SbMultiHandler<LOC> getSbhStatus() {return sbhStatus;}
+	private SbMultiHandler<LOC> sbhStatus; public SbMultiHandler<LOC> getSbhStatus() {return sbhStatus;}
 
 	private IoLocaleFactoryBuilder<L,D,LOC> fbLocale;
 
@@ -52,10 +52,13 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 	}
 
 	protected void postConstructMissingEntity(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
-			JeeslIoRevisionFacade<L,D,?,?,?,?,?,?,?,?,?,RML> fRevision, String defaultLangCode) {
+			JeeslIoRevisionFacade<L,D,?,?,?,?,?,?,?,?,?,RML> fRevision, String defaultLangCode)
+	{
 		super.initJeeslAdmin(bTranslation, bMessage);
 		this.fRevision = fRevision;
-		List<LOC> langList =fRevision.allOrderedPositionVisible(fbLocale.getClassLocale());
+		if (Objects.isNull(fRevision)) {logger.warn(JeeslIoRevisionFacade.class.getSimpleName() + " is NULL");}
+		
+		List<LOC> langList = fRevision.allOrderedPositionVisible(fbLocale.getClassLocale());
 		sbhStatus.setList(langList);
 		LOC selecedLang = null;
 		for (LOC lang : langList)
@@ -67,8 +70,7 @@ public class AbstractAdminRevisionMissingLabelBean <L extends JeeslLang, D exten
 		}
 		sbhStatus.preSelect(selecedLang);
 
-		if (fRevision == null) {logger.warn(JeeslIoRevisionFacade.class.getSimpleName() + " is NULL");}
-		reloadMissingLabels();
+		this.reloadMissingLabels();
 	}
 
 	public void reloadMissingLabels()

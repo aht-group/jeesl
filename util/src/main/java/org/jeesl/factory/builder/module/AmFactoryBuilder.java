@@ -18,6 +18,7 @@ public class AmFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,LOC
 								PROJ extends JeesAmProject<L,D,REALM,ACTIVITY,PROJ>> extends AbstractFactoryBuilder<L,D>
 {
 
+	private static final long serialVersionUID = 1L;
 	public AmFactoryBuilder(Class<L> cL, Class<D> cD, Class<LOC> cLoc, Class<REALM> cRealm,  Class<ACTIVITY> cActivity,Class<PROJ> cProject)
 	{
 		super(cL, cD);

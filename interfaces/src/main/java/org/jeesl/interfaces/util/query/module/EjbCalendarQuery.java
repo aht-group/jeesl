@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItemType;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,7 @@ public class EjbCalendarQuery<CAL extends JeeslCalendar<?,?>,
 	public EjbCalendarQuery<CAL,TYPE> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//Lists
+	@Override public EjbCalendarQuery<CAL,TYPE> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
 	@Override public EjbCalendarQuery<CAL,TYPE> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbCalendarQuery<CAL,TYPE> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

@@ -1,14 +1,23 @@
 package org.jeesl.model.ejb.io.maven.module;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
@@ -18,7 +27,7 @@ import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 @Entity
 @Table(name="IoMavenModule")
 @EjbErNode(name="Module",category="ioMaven",subset="ioMaven")
-public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenStructure,IoMavenType,IoGraphic>
+public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenStructure,IoMavenType,IoMavenEe,IoGraphic>
 {
 	public static final long serialVersionUID=1;	
 
@@ -60,8 +69,20 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenSt
 	private IoGraphic graphic;
 	@Override public IoGraphic getGraphic() {return graphic;}
 	@Override public void setGraphic(IoGraphic graphic) {this.graphic = graphic;}
-
-
+	
+	@NotNull @ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_iomavenmodule_jdk"))
+	private IoMavenJdk jdk;
+	public IoMavenJdk getJdk() {return jdk;}
+	public void setJdk(IoMavenJdk jdk) {this.jdk = jdk;}
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="IoMavenModuleEe",joinColumns={@JoinColumn(name="module_id")},inverseJoinColumns={@JoinColumn(name="ee_id")})
+	private List<IoMavenEe> enterpriseEditions;
+	@Override public List<IoMavenEe> getEnterpriseEditions() {if(Objects.isNull(enterpriseEditions)) {enterpriseEditions = new ArrayList<>();} return enterpriseEditions;}
+	@Override public void setEnterpriseEditions(List<IoMavenEe> enterpriseEditions) {this.enterpriseEditions = enterpriseEditions;}
+	
+	
 	@Override public boolean equals(Object object){return (object instanceof IoMavenModule) ? id == ((IoMavenModule) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 	

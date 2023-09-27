@@ -14,7 +14,7 @@
 	<composite:implementation>
 <jp:grid id="grid">
 	<j:row id="rStage">
-		<j:slot id="sStages" width="5">
+		<j:slot id="sStages" width="12">
 			<h:form id="fStage">
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="JsonPostgresExplain"/></f:facet>
@@ -30,7 +30,7 @@
 				</p:panel>
 			</h:form>
 		</j:slot>
-		<j:slot id="sStage" width="7">
+		<j:slot id="sStage" width="12">
 			<p:dataTable styleClass="jeesl-datatable"
 							var="t" value="#{cc.attrs.ctrl.explain.triggers}" draggableRows="true">
 					<f:facet name="header">
@@ -54,6 +54,14 @@
 					<p:column sortBy="#{t.calls}">
 						<f:facet name="header"><jtp:label entity="JsonPostgresTrigger" code="calls"/></f:facet>
 						<h:outputText value="#{t.calls}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaConstraint" code="table"/></f:facet>
+						<h:outputText value="#{cc.attrs.ctrl.mapConstraint[t.constraintName].table.code}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbMetaConstraint" code="columnLocal"/></f:facet>
+						<h:outputText value="#{cc.attrs.ctrl.mapConstraint[t.constraintName].columnLocal.code}"/>
 					</p:column>
 			   	</p:dataTable>
 		</j:slot>

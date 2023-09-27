@@ -29,6 +29,8 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 								JOB extends JeeslJobStatus<L,D,JOB,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoSsiDataFactoryBuilder.class);
 	
 	private final Class<SYSTEM> cSystem; public Class<SYSTEM> getClassSystem(){return cSystem;}

@@ -31,6 +31,8 @@ public class ChecklistFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 								MT extends JeeslIoMarkupType<L,D,MT,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(ChecklistFactoryBuilder.class);
 	
 	private final Class<R> cRealm; public Class<R> getClassRealm() {return cRealm;}

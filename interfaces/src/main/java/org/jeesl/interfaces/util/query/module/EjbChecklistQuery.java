@@ -9,6 +9,7 @@ import java.util.Objects;
 import org.jeesl.interfaces.model.module.cl.JeeslClCheckItem;
 import org.jeesl.interfaces.model.module.cl.JeeslClChecklist;
 import org.jeesl.interfaces.model.module.cl.JeeslClTracklist;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,7 @@ public class EjbChecklistQuery<CL extends JeeslClChecklist<?,?,?>,
 	public EjbChecklistQuery<CL,CI,TL> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//List
+	@Override public EjbChecklistQuery<CL,CI,TL> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
 	@Override public EjbChecklistQuery<CL,CI,TL> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbChecklistQuery<CL,CI,TL> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

@@ -48,6 +48,8 @@ public class AomFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								UP extends JeeslAomEventUpload<L,D,UP,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(AomFactoryBuilder.class);
 	
 	private final Class<REALM> cRealm; public Class<REALM> getClassRealm() {return cRealm;}

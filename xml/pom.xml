@@ -111,7 +111,13 @@
 			<version>1.0</version>
 			<scope>provided</scope>
 		</dependency>
-<!-- Thanks for using https://jar-download.com -->
+		<dependency>
+		    <groupId>jakarta.json.bind</groupId>
+		    <artifactId>jakarta.json.bind-api</artifactId>
+		    <version>2.0.0</version>
+		    <scope>provided</scope>
+		</dependency>
+
 
    	   	<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -191,11 +197,6 @@
     					</goals>
   					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-		        <groupId>org.codehaus.mojo</groupId>
-		        <artifactId>versions-maven-plugin</artifactId>
-		        <configuration><rulesUri>${maven.ignore.versions}</rulesUri></configuration>
 			</plugin>
 			<plugin>
 		        <groupId>org.apache.maven.plugins</groupId>

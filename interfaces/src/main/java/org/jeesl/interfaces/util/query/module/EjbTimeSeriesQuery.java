@@ -10,6 +10,7 @@ import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsBridge;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,7 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//Lists
+	@Override public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
 	@Override public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

@@ -46,6 +46,8 @@ public class IoAttributeFactoryBuilder<L extends JeeslLang, D extends JeeslDescr
 									DATA extends JeeslAttributeData<CRITERIA,OPTION,CONTAINER>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoAttributeFactoryBuilder.class);
 
 	private final Class<R> cR; public Class<R> getClassRealm() {return cR;}

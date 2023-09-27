@@ -17,8 +17,9 @@ public interface EjbIoMavenQuery <GROUP extends JeeslIoMavenGroup,
 							STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>>
 //			extends AbstractEjbQuery
 {
-
+	boolean isDistinct();
 	
+	List<String> getRootFetches();
 	//Fetches
 //	public <E extends Enum<E>> EjbIoMavenQuery<L,D,GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	
@@ -27,11 +28,13 @@ public interface EjbIoMavenQuery <GROUP extends JeeslIoMavenGroup,
 //	public EjbIoMavenQuery<L,D,GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
 //	public EjbIoMavenQuery<L,D,GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 
-	public List<VERSION> getVersions();
-	public EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> add(VERSION version);
-	public EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> addVersions(List<VERSION> list);
+	List<Long> getIdList();
 	
-	public List<STRUCTURE> getStructures();
-	public EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> add(STRUCTURE structure);
-	public EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> addStructures(List<STRUCTURE> list);
+	List<VERSION> getVersions();
+	EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> add(VERSION version);
+	EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> addVersions(List<VERSION> list);
+	
+	List<STRUCTURE> getStructures();
+	EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> add(STRUCTURE structure);
+	EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> addStructures(List<STRUCTURE> list);
 }

@@ -53,6 +53,8 @@ public class SurveyAnalysisFactoryBuilder<L extends JeeslLang, D extends JeeslDe
 				TOOLCACHETEMPLATE extends JeeslJobTemplate<L,D,?,?,?,?>>
 			extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(SurveyAnalysisFactoryBuilder.class);
 	
 	private final Class<ANSWER> cAnswer; public Class<ANSWER> getClassAnswer() {return cAnswer;}

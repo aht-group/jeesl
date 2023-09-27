@@ -40,6 +40,8 @@ public class LfFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,R e
 							LFC extends JeeslLfConfiguration<LF,?>>
 extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(LfFactoryBuilder.class);
 
 	private final Class<R> cRealm; public Class<R> getClassRealm() {return cRealm;}

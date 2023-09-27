@@ -23,6 +23,8 @@ public class ConstraintFactoryBuilder<L extends JeeslLang, D extends JeeslDescri
 									RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(ConstraintFactoryBuilder.class);
 	
 	private final Class<SCOPE> cScope; public Class<SCOPE> getClassScope() {return cScope;}

@@ -58,6 +58,4 @@ public interface JeeslIoReportFacade <L extends JeeslLang,D extends JeeslDescrip
 	void rmColumn(COLUMN column) throws JeeslConstraintViolationException;
 	void rmRow(ROW row) throws JeeslConstraintViolationException;
 	void rmCell(CELL cell) throws JeeslConstraintViolationException;
-	
-	List<REPORT> fReports(List<CATEGORY> categories, boolean showInvisibleEntities);
 }

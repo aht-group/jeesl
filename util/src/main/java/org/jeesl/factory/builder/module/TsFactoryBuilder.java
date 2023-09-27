@@ -64,6 +64,8 @@ public class TsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription, L
 								CRON extends JeeslTsCron<SCOPE,INT,STAT>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(TsFactoryBuilder.class);
 	
 	private final Class<LOC> cLocale; public Class<LOC> getClassLocale() {return cLocale;}

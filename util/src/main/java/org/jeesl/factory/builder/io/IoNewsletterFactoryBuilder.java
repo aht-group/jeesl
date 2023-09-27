@@ -21,6 +21,8 @@ public class IoNewsletterFactoryBuilder<L extends JeeslLang,D extends JeeslDescr
 								REG extends JeeslNewsletterRegistration<L,D,REG,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoNewsletterFactoryBuilder.class);
 	
 	private final Class<RCP> cRecipient;  public Class<RCP> getClassRecipient(){return cRecipient;}
@@ -48,5 +50,4 @@ public class IoNewsletterFactoryBuilder<L extends JeeslLang,D extends JeeslDescr
 	}
 	
 	public EjbIoNewsletterTopicFactory<R,TOPIC> ejbTopic(){return new EjbIoNewsletterTopicFactory<>(cTopic);}
-
 }

@@ -13,6 +13,8 @@ public class PropertyFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									P extends JeeslProperty<L,D,C,P>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(PropertyFactoryBuilder.class);
 	
 	private final Class<C> cCategory; public Class<C> getClassCategory() {return cCategory;}

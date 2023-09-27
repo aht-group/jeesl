@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 
 public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
@@ -32,6 +33,7 @@ public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 	public EjbIoSsiQuery<CTX,STATUS> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//Lists
+	@Override public EjbIoSsiQuery<CTX,STATUS> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
 	@Override public EjbIoSsiQuery<CTX,STATUS> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbIoSsiQuery<CTX,STATUS> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

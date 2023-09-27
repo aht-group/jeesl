@@ -342,7 +342,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	@Override
 	public JsonSsiUpdate uploadStatementGroup(JsonPostgresStatementGroup json)
 	{
-		JsonUtil.info(json);
+//		JsonUtil.info(json);
 		
 		DataUpdateTracker dut = DataUpdateTracker.instance().start();
 		

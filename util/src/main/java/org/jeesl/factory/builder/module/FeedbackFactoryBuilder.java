@@ -20,6 +20,8 @@ public class FeedbackFactoryBuilder<L extends JeeslLang, D extends JeeslDescript
 									USER extends EjbWithEmail>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(FeedbackFactoryBuilder.class);
 	
 	private final Class<THREAD> cThread;

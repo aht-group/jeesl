@@ -187,10 +187,4 @@ public class JeeslIoReportFacadeBean<L extends JeeslLang,D extends JeeslDescript
 		cell.getTemplate().getCells().remove(cell);
 		this.rmProtected(cell);
 	}
-	
-	@Override public List<REPORT> fReports(List<CATEGORY> categories, boolean showInvisibleEntities)
-	{
-		List<ParentPredicate<CATEGORY>> ppCategory = ParentPredicate.createFromList(cCategory,"category",categories);
-		return allForOrParents(cReport,ppCategory);
-	}
 }

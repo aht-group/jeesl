@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,6 +50,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	//Lists
 	protected List<Long> idList;
 	@Override public List<Long> getIdList() {return idList;}
+	public abstract AbstractEjbQuery id(EjbWithId id);
 	public abstract AbstractEjbQuery idList(List<Long> list);
 	
 	protected List<String> codeList;

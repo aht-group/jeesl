@@ -27,6 +27,8 @@ public class TafuFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								MT extends JeeslIoMarkupType<L,D,MT,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(TafuFactoryBuilder.class);
 	
 	private final Class<R> cRealm; public Class<R> getClassRealm() {return cRealm;}

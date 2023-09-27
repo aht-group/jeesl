@@ -46,6 +46,8 @@ public class JobFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(JobFactoryBuilder.class);
 	
 	private final Class<TEMPLATE> cTemplate; public Class<TEMPLATE> getClassTemplate(){return cTemplate;}

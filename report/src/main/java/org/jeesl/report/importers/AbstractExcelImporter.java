@@ -1,28 +1,27 @@
 package org.jeesl.report.importers;
 
-import org.jeesl.report.importers.AbstractTableImporter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Map;
-import net.sf.ahtutils.interfaces.controller.report.UtilsXlsDefinitionResolver;
-import net.sf.ahtutils.report.util.DataUtil;
-import net.sf.ahtutils.xml.report.XlsSheet;
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import org.apache.commons.lang3.StringUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jeesl.api.controller.ImportStrategy;
-import static org.jeesl.report.importers.AbstractShpImporter.logger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.interfaces.controller.report.UtilsXlsDefinitionResolver;
+import net.sf.ahtutils.report.util.DataUtil;
+import net.sf.ahtutils.xml.report.XlsSheet;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 public abstract class AbstractExcelImporter <C extends Serializable, I extends ImportStrategy> extends AbstractTableImporter<C, I>{
 	

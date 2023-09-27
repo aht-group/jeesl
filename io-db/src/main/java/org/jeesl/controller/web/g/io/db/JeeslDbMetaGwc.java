@@ -142,6 +142,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 		super.postConstructWebController(lp,bMessage);
 		this.fDb = fDb;
 		sbhSystem.setList(fDb.all(fbDb.getClassSsiSystem()));
+		sbhSystem.setDefault();
 		
 		thFilterTable.setList(fDb.all(fbDb.getClassDifference()));
 		thFilterColumn.setList(fDb.all(fbDb.getClassDifference()));

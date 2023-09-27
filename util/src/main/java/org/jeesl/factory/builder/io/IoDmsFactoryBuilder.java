@@ -26,6 +26,8 @@ public class IoDmsFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								LAYER extends JeeslIoDmsLayer<VIEW,?>>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoDmsFactoryBuilder.class);
 
 	private final Class<LOC> cLoc; public Class<LOC> getClassLocale() {return cLoc;}

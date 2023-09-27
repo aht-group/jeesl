@@ -29,6 +29,8 @@ public class MdcFactoryBuilder<L extends JeeslLang,D extends JeeslDescription, L
 							>
 		extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(MdcFactoryBuilder.class);
 	
 	private final Class<COLLECTION> cActivity; public Class<COLLECTION> getClassActivity() {return cActivity;}

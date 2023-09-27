@@ -40,6 +40,8 @@ public class IoCmsFactoryBuilder<L extends JeeslLang, D extends JeeslDescription
 								>
 				extends AbstractFactoryBuilder<L,D>
 {
+	private static final long serialVersionUID = 1L;
+
 	final static Logger logger = LoggerFactory.getLogger(IoCmsFactoryBuilder.class);
 
 	private final Class<LOC> cLoc; public Class<LOC> getClassLocale() {return cLoc;}

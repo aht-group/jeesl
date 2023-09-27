@@ -18,6 +18,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.font.IoMavenFont;
 import org.jeesl.model.ejb.io.maven.font.IoMavenFontUsage;
+import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
@@ -31,7 +32,7 @@ public class JeeslIoMavenFontWc extends AbstractJeeslWebController<IoLang,IoDesc
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFontWc.class);
 	
-	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final Nested2Map<IoMavenFont,IoSsiHost,IoMavenFontUsage> n2m; public Nested2Map<IoMavenFont, IoSsiHost, IoMavenFontUsage> getN2m() {return n2m;}
 	
@@ -49,7 +50,7 @@ public class JeeslIoMavenFontWc extends AbstractJeeslWebController<IoLang,IoDesc
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure,IoMavenUsage> fMaven)
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fMaven=fMaven;
