@@ -76,21 +76,21 @@ $header-underline: 2px solid $dark-colour;
 
 
 @mixin setColours($brighter, $bright, $medium, $dark, $darker) {
-	$brighter-colour: $brighter;
-	$bright-colour: $bright;
-	$medium-colour: $medium;
-	$dark-colour: $dark;
-	$darker-colour: $darker;
+	$brighter-colour: $brighter !global;
+	$bright-colour: $bright !global;
+	$medium-colour: $medium !global;
+	$dark-colour: $dark !global;
+	$darker-colour: $darker !global;
 
-	$link-colour: $dark-colour;
-	$link-hover-colour: $bright-colour;
+	$link-colour: $dark-colour !global;
+	$link-hover-colour: $bright-colour !global;
 
-	$main-background-gradient: linear-gradient(to right, $dark-colour, $bright-colour);
-	$breadcrumb-background-gradient: linear-gradient(to right, $white-0, $bright-colour);
-	$status-bar-background-gradient: linear-gradient(to bottom, $dark-colour, $medium-colour);
+	$main-background-gradient: linear-gradient(to right, $dark-colour, $bright-colour) !global;
+	$breadcrumb-background-gradient: linear-gradient(to right, $white-0, $bright-colour) !global;
+	$status-bar-background-gradient: linear-gradient(to bottom, $dark-colour, $medium-colour) !global;
 	
-	$highlight-colour: $bright-colour;
-	$header-underline: 2px solid $dark-colour;
+	$highlight-colour: $bright-colour !global;
+	$header-underline: 2px solid $dark-colour !global;
 }
 
 @mixin setHighlightColour($highlight) {

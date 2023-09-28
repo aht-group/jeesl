@@ -11,13 +11,13 @@
 				@include jeesl-titlebar;
 				@include jeesl-titlebar-title;
 				
-				margin: -#{$regular-spacing} -#{$regular-spacing} #{$regular-spacing};
-				min-height: #{$element-height - (2 * $slim-spacing) - $header-underline};
+				margin: -#{$regular-spacing} -#{$regular-spacing} $regular-spacing;
+				min-height: ($element-height - (2 * $slim-spacing) - $header-element-underline);
 				
 				@media (max-width: 768px) {
 					margin: -$regular-spacing;
 					margin-bottom: $regular-spacing + $header-element-underline;
-					min-height: #{$element-height-mobile - (2 * $half-spacing) - $header-element-underline-mobile};
+					min-height: ($element-height-mobile - (2 * $half-spacing) - $header-element-underline-mobile);
 				}
 				
 				&:after {

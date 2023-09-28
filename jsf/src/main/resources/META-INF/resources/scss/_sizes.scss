@@ -42,6 +42,9 @@ $separator-thickness-mobile: 2px;
 $headings-margin-bottom: $half-spacing;
 $paragraph-margin-bottom: 7px;
 
+$icon-height: 12px;
+$icon-height-mobile: 15px;
+
 $table-cell-padding: $regular-spacing;
 $table-icon-height: 12px;
 $table-icon-height-mobile: 32px;
@@ -115,6 +118,6 @@ $overlay-filter-input-width: 200px;
 }
 
 @mixin setContainerWidth($minimum, $maximum: 100%) {
-	$min-fixed-container-width: $minimum;
-	$max-fixed-container-width: $maximum;
+	$min-fixed-container-width: $minimum !global;
+	$max-fixed-container-width: $maximum !global;
 }

@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @import '_fonts';
 
 $enable-pointer-cursor-for-buttons: true;
@@ -583,15 +585,15 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	> img {
-		border-left: $border;
-		margin: 4px 0;
+		margin: $half-spacing 0;
 		
 		@media (max-width: 768px) {
+			border-left: $border;
 			margin: $ls-element-padding-vertical 0;
 		}
 	}
 		
-	.pf-action-icon, .jeesl-action-icon {
+	.pf-action-icon, .jeesl-icon {
 		@include vertical-center(before);
 		
 		align-items: center;
@@ -848,7 +850,7 @@ $enable-pointer-cursor-for-buttons: true;
 					
 					@for $i from 1 to 13 {
 						&.p-col-count-#{$i} {
-							width: 75 / $i * 1%;
+							width: math.div(75, $i) * 1%;
 						}
 					}
 
@@ -1415,7 +1417,7 @@ $enable-pointer-cursor-for-buttons: true;
 						.slick-slide {
 							cursor: pointer;
 							height: auto;
-							margin: 0 #{$half-spacing / 2};
+							margin: 0 math.div($half-spacing, 2);
 						}
 					}
 				}
@@ -1530,6 +1532,32 @@ $enable-pointer-cursor-for-buttons: true;
 	}
 	
 	.ui-panelgrid {
+		.ui-panelgrid-cell {
+			height: $element-height;
+			
+			@media (max-width: 768px) {
+				height: $element-height-mobile;
+			}
+		
+			@for $i from 1 to 10 {
+				&.jeesl-grid-#{$i}0 {
+					width: 0%;
+				}
+			}
+			
+			.jeesl-icon {
+				height: $table-icon-height;
+				
+				@media (max-width: 768px) {
+					height: $table-icon-height-mobile;
+				}
+				
+				img {
+					height: '100%';
+				}
+			}
+		}
+		
 		@media (max-width: 768px) {
 			.ui-panelgrid-cell {
 				.jeesl-datatable {
@@ -1811,7 +1839,7 @@ $enable-pointer-cursor-for-buttons: true;
 
 @mixin float-titlebar-icons {
 	.ui-dialog-titlebar, .ui-panel-titlebar, .ui-datatable-header {
-		.pf-action-icon, .jeesl-action-icon {
+		.pf-action-icon, .jeesl-icon {
 			float: right;
 		}
 	}
@@ -2660,8 +2688,8 @@ body, .ui-widget {
 							
 							@media (max-width: 768px) {
 								font-size: $font-size-ls-mobile;
-								line-height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
-								height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+								line-height: math.div($ls-element-height-mobile, 2) - $ls-element-padding-vertical;
+								height: math.div($ls-element-height-mobile, 2) - $ls-element-padding-vertical;
 							}
 						}
 						
@@ -2671,7 +2699,7 @@ body, .ui-widget {
 							
 							@media (max-width: 768px) {
 								font-size: $font-size-ls-mobile;
-								line-height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+								line-height: math.div($ls-element-height-mobile, 2) - $ls-element-padding-vertical;
 							}
 						}
 					}
@@ -3465,7 +3493,7 @@ body, .ui-widget {
 	
 	@media (max-width: 768px) {
 		img {
-			height: auto;
+			height: 100%;
 			max-height: calc(#{$element-height-mobile} - 2 * #{$half-spacing});
 		}
 		
