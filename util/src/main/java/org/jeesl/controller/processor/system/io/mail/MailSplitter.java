@@ -12,7 +12,6 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
@@ -28,20 +27,19 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 public class MailSplitter<L extends JeeslLang,D extends JeeslDescription,
 						CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-						MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
+						MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,?>,
 						STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
-						RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
-						FRC extends JeeslFileContainer<?,?>>
+						RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(MailSplitter.class);
 	
-	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fbMail;
-	private final JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail;
+	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
+	private final JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,?> fMail;
 	
 	private final BucketSizeCounter bsc;
 	
-	public MailSplitter(IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fbMail,
-						JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
+	public MailSplitter(IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail,
+						JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,?> fMail)
 	{		
 		this.fbMail=fbMail;
 		this.fMail=fMail;

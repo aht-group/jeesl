@@ -4,7 +4,6 @@ import org.jeesl.api.facade.io.JeeslIoMailFacade;
 import org.jeesl.controller.processor.system.io.mail.MailSplitter;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.io.mail.core.EjbIoMailFactory;
-import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailRetention;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
@@ -16,10 +15,9 @@ import org.slf4j.LoggerFactory;
 
 public class IoMailFactoryBuilder<L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-								MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,FRC>,
+								MAIL extends JeeslIoMail<L,D,CATEGORY,STATUS,RETENTION,?>,
 								STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
-								RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
-								FRC extends JeeslFileContainer<?,?>>
+								RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>>
 		extends AbstractFactoryBuilder<L,D>
 {
 	private static final long serialVersionUID = 1L;
@@ -31,7 +29,11 @@ public class IoMailFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 	private final Class<STATUS> cStatus; public Class<STATUS> getClassStatus(){return cStatus;}
 	private final Class<RETENTION> cRetention;  public Class<RETENTION> getClassRetention(){return cRetention;}
 	
-	public IoMailFactoryBuilder(final Class<L> cL, final Class<D> cD, final Class<CATEGORY> cCategory, final Class<MAIL> cMail, final Class<STATUS> cStatus, final Class<RETENTION> cRetention)
+	public IoMailFactoryBuilder(final Class<L> cL, final Class<D> cD,
+								final Class<CATEGORY> cCategory,
+								final Class<MAIL> cMail,
+								final Class<STATUS> cStatus,
+								final Class<RETENTION> cRetention)
 	{
 		super(cL,cD);
 		this.cCategory=cCategory;
@@ -40,13 +42,6 @@ public class IoMailFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 		this.cRetention=cRetention;
 	}
 	
-	public EjbIoMailFactory<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> mail()
-	{
-		return new EjbIoMailFactory<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC>(cMail);
-	}
-	
-	public MailSplitter<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> splitter(JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
-	{
-		return new MailSplitter<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC>(this,fMail);
-	}
+	public EjbIoMailFactory<CATEGORY,MAIL,STATUS,RETENTION> mail() {return new EjbIoMailFactory<>(cMail);}
+	public MailSplitter<L,D,CATEGORY,MAIL,STATUS,RETENTION> splitter(JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,?> fMail) {return new MailSplitter<L,D,CATEGORY,MAIL,STATUS,RETENTION>(this,fMail);}
 }

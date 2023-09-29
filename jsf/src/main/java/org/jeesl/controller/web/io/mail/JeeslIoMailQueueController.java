@@ -11,7 +11,6 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.web.AbstractJeeslWebController;
-import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
@@ -49,7 +48,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	private enum Statistic{today,day30}
 	
 	protected JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail;
-	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fbMail;
+	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
 
 	private List<CATEGORY> categories; public List<CATEGORY> getCategories() {return categories;}
 	private List<MAIL> mails; public List<MAIL> getMails() {return mails;}
@@ -64,7 +63,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	private final Map<String,JsonTuple1Handler<STATUS>> mapTh; public Map<String, JsonTuple1Handler<STATUS>> getMapTh() {return mapTh;}
 	private final JsonTuple1Handler<STATUS> thToday,thDay30;
 	
-	public JeeslIoMailQueueController(IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fbMail)
+	public JeeslIoMailQueueController(IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail)
 	{
 		super(fbMail.getClassL(),fbMail.getClassD());
 		this.fbMail=fbMail;

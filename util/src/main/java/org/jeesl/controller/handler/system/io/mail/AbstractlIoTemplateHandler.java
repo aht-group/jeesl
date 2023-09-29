@@ -38,7 +38,7 @@ public class AbstractlIoTemplateHandler<L extends JeeslLang,D extends JeeslDescr
 									DEFINITION extends JeeslIoTemplateDefinition<D,CHANNEL,TEMPLATE>,
 									TOKEN extends JeeslIoTemplateToken<L,D,TEMPLATE,TOKENTYPE>,
 									TOKENTYPE extends JeeslTemplateTokenType<L,D,TOKENTYPE,?>>
-								implements JeeslTemplateHandler<L,D,LOC,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE>
+								implements JeeslTemplateHandler<LOC,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractlIoTemplateHandler.class);
@@ -46,7 +46,7 @@ public class AbstractlIoTemplateHandler<L extends JeeslLang,D extends JeeslDescr
 	private final IoTemplateFactoryBuilder<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fbTemplate;
 	private final IoTemplateBean bean;
 	
-	private final JeeslMail<TEMPLATE> mail; public JeeslMail<TEMPLATE> getMail() {return mail;}
+//	private final JeeslMail<TEMPLATE> mail; public JeeslMail<TEMPLATE> getMail() {return mail;}
 	private final List<LOC> locales; @Override public List<LOC> getLocales() {return locales;}
 	private final List<CHANNEL> channels;
 	private final List<DEFINITION> definitons; @Override public List<DEFINITION> getDefinitons() {return definitons;}
@@ -70,7 +70,7 @@ public class AbstractlIoTemplateHandler<L extends JeeslLang,D extends JeeslDescr
 	{
 		this.fbTemplate=fbTemplate;
 		this.bean=bean;
-		this.mail=mail;
+//		this.mail=mail;
 		tokens = fTemplate.allForParent(fbTemplate.getClassToken(),mail.getTemplate());
 		locales = new ArrayList<>();
 		channels = new ArrayList<>();

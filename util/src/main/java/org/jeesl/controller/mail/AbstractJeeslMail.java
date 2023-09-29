@@ -60,12 +60,12 @@ public class AbstractJeeslMail<L extends JeeslLang,D extends JeeslDescription,LO
 	final static Logger logger = LoggerFactory.getLogger(AbstractJeeslMail.class);
 	
 	private final IoTemplateFactoryBuilder<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fbTemplate;
-	private final IoMailFactoryBuilder<L,D,MAILCAT,MAIL,STATUS,RETENTION,FRC> fbMail;
+	private final IoMailFactoryBuilder<L,D,MAILCAT,MAIL,STATUS,RETENTION> fbMail;
 	
 	protected final JeeslIoTemplateFacade<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fTemplate;
 	protected final JeeslIoMailFacade<L,D,MAILCAT,MAIL,STATUS,RETENTION,FRC> fMail;
 	
-	protected JeeslTemplateHandler<L,D,LOC,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> mth;
+	protected JeeslTemplateHandler<LOC,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> mth;
 	protected final FreemarkerIoTemplateEngine<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fmEngine;
 
 	protected final Map<String,Template> mapTemplateHeader;
@@ -83,7 +83,7 @@ public class AbstractJeeslMail<L extends JeeslLang,D extends JeeslDescription,LO
 	protected boolean developmentMode; public void activateDevelopmentMode() {developmentMode=true;}
 	
 	public AbstractJeeslMail(IoTemplateFactoryBuilder<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fbTemplate,
-							IoMailFactoryBuilder<L,D,MAILCAT,MAIL,STATUS,RETENTION,FRC> fbMail,
+							IoMailFactoryBuilder<L,D,MAILCAT,MAIL,STATUS,RETENTION> fbMail,
 							JeeslIoTemplateFacade<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fTemplate,
 							JeeslIoMailFacade<L,D,MAILCAT,MAIL,STATUS,RETENTION,FRC> fMail)
 	{
@@ -136,7 +136,7 @@ public class AbstractJeeslMail<L extends JeeslLang,D extends JeeslDescription,LO
 	{
 		this.compile(mth);
 	}
-	protected void compile(JeeslTemplateHandler<L,D,LOC,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> handler) throws IOException
+	protected void compile(JeeslTemplateHandler<LOC,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> handler) throws IOException
 	{
 		for(DEFINITION def : handler.getDefinitons())
 		{

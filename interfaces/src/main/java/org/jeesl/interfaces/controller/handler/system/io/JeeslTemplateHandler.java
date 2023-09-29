@@ -3,28 +3,25 @@ package org.jeesl.interfaces.controller.handler.system.io;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jeesl.interfaces.controller.JeeslMail;
-import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateDefinition;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateToken;
 import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
-public interface JeeslTemplateHandler <L extends JeeslLang,D extends JeeslDescription,LOC extends JeeslLocale<L,D,LOC,?>,
-										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
-										CHANNEL extends JeeslTemplateChannel<L,D,CHANNEL,?>,
-										TEMPLATE extends JeeslIoTemplate<L,D,CATEGORY,SCOPE,DEFINITION,TOKEN>,
-										SCOPE extends JeeslStatus<L,D,SCOPE>,
-										DEFINITION extends JeeslIoTemplateDefinition<D,CHANNEL,TEMPLATE>,
-										TOKEN extends JeeslIoTemplateToken<L,D,TEMPLATE,TOKENTYPE>,
-										TOKENTYPE extends JeeslStatus<L,D,TOKENTYPE>> 
+public interface JeeslTemplateHandler <LOC extends JeeslLocale<?,?,LOC,?>,
+										CATEGORY extends JeeslStatus<?,?,CATEGORY>,
+										CHANNEL extends JeeslTemplateChannel<?,?,CHANNEL,?>,
+										TEMPLATE extends JeeslIoTemplate<?,?,CATEGORY,SCOPE,DEFINITION,TOKEN>,
+										SCOPE extends JeeslStatus<?,?,SCOPE>,
+										DEFINITION extends JeeslIoTemplateDefinition<?,CHANNEL,TEMPLATE>,
+										TOKEN extends JeeslIoTemplateToken<?,?,TEMPLATE,TOKENTYPE>,
+										TOKENTYPE extends JeeslStatus<?,?,TOKENTYPE>> 
 							extends Serializable
 {
 	
-	JeeslMail<TEMPLATE> getMail();
+//	JeeslMail<TEMPLATE> getMail();
 	
 	String getRecipients();
 	void setRecipients(String recipients);

@@ -51,11 +51,11 @@ public class JeeslIoMailFacadeBean<L extends JeeslLang,D extends JeeslDescriptio
 
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMailFacadeBean.class);
 		
-	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fbMail;
+	private final IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail;
 	
-	private EjbIoMailFactory<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> efMail;
+	private EjbIoMailFactory<CATEGORY,MAIL,STATUS,RETENTION> efMail;
 	
-	public JeeslIoMailFacadeBean(EntityManager em, IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fbMail)
+	public JeeslIoMailFacadeBean(EntityManager em, IoMailFactoryBuilder<L,D,CATEGORY,MAIL,STATUS,RETENTION> fbMail)
 	{
 		super(em);
 		this.fbMail = fbMail;
