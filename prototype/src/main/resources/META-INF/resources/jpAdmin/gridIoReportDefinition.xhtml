@@ -207,6 +207,7 @@
 						<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveColumn()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.column.id gt 0}" listener="#{cc.attrs.bean.rmColumn()}" update=":#{cc.id}:grid"/>
 					</f:facet>
+					<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 						<p:outputLabel value="#{msg.jeeslIoReportGroup}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.column.group}" effect="fade" autoWidth="false">

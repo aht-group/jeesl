@@ -32,6 +32,7 @@ import org.jeesl.interfaces.model.module.diary.JeeslWithDiary;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.module.EjbDiaryQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -139,5 +140,12 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 
 		TypedQuery<ITEM> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
+	}
+
+	@Override
+	public List<ITEM> fDiaryItems(EjbDiaryQuery<LOG,SCOPE,ITEM,IMPACT,CONF,USER> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

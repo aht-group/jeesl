@@ -459,6 +459,7 @@
 											</pluginExecutionFilter>
 											<action><ignore /></action>
 										</pluginExecution>
+										
 									</pluginExecutions>
 								</lifecycleMappingMetadata>
 							</configuration>

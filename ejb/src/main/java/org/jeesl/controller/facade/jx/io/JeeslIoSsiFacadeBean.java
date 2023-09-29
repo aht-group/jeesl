@@ -98,7 +98,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	}
 	
 	@Override
-	public <E extends Enum<E>> CRED fSsiCredential(SYSTEM system, E code) throws JeeslNotFoundException
+	public <E extends Enum<E>> CRED fSsiCredential(SYSTEM system, E code)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -115,8 +115,9 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 
 		TypedQuery<CRED> tQ = em.createQuery(cQ);
 		try	{return tQ.getSingleResult();}
-		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbSsiCore.getClassCredential().getSimpleName()+" found for system"+system.toString()+" and code="+code);}
-		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsiCore.getClassHost().getSimpleName()+" not unique for system"+system.toString()+" and code="+code);}
+		catch (NoResultException ex){logger.error("No "+fbSsiCore.getClassCredential().getSimpleName()+" found for system"+system.toString()+" and code="+code);}
+		catch (NonUniqueResultException ex){logger.error("Results for "+fbSsiCore.getClassHost().getSimpleName()+" not unique for system"+system.toString()+" and code="+code);}
+		return null;
 	}
 	
 	@Override public CTX fMapping(Class<?> json, Class<?> ejb) throws JeeslNotFoundException

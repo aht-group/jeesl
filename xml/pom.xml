@@ -239,6 +239,7 @@
 	<profiles>
 		<profile>
 			<id>j8</id>
+			<activation><jdk>1.8</jdk></activation>
 			<build>
 				<plugins>
 					<plugin>

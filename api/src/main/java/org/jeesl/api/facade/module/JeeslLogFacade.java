@@ -14,6 +14,7 @@ import org.jeesl.interfaces.model.module.diary.JeeslWithDiary;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.util.query.module.EjbDiaryQuery;
 
 public interface JeeslLogFacade <L extends JeeslLang, D extends JeeslDescription,
 									BOOK extends JeeslLogBook<SCOPE,ITEM>,
@@ -26,6 +27,7 @@ public interface JeeslLogFacade <L extends JeeslLang, D extends JeeslDescription
 			extends JeeslFacade
 {	
 	<OWNER extends JeeslWithDiary<BOOK>> OWNER fDiaryOwner(Class<OWNER> cOwner, BOOK diary) throws JeeslNotFoundException;
+	List<ITEM> fDiaryItems(EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> query);
 	List<ITEM> fLogItems(List<BOOK> books);
 	List<ITEM> fLogItems(List<BOOK> books, List<SCOPE> scopes, List<CONF> confidentialities, LocalDate ldStart, LocalDate ldEnd);
 }
