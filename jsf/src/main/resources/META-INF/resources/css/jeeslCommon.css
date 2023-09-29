@@ -143,23 +143,4 @@ html, body {
   .jeesl-tree .ui-widget-content {
     background-color: transparent; }
 
-.ui-panelgrid .ui-panelgrid-cell > * {
-  min-height: 22px; }
-  @media (max-width: 768px) {
-    .ui-panelgrid .ui-panelgrid-cell > * {
-      min-height: 42px; } }
-.ui-panelgrid .ui-panelgrid-cell .jeesl-icon {
-  height: 12px;
-  width: auto; }
-  @media (max-width: 768px) {
-    .ui-panelgrid .ui-panelgrid-cell .jeesl-icon {
-      height: 32px; } }
-
-.ui-datatable .jeesl-icon {
-  height: 12px;
-  width: auto; }
-  @media (max-width: 768px) {
-    .ui-datatable .jeesl-icon {
-      height: 32px; } }
-
 /*# sourceMappingURL=jeeslCommon.css.map */

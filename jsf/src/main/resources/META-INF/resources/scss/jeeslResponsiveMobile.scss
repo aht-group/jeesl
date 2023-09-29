@@ -1,5 +1,6 @@
+@use 'sass:math';
+
 @import '_colours';
-@import '_decimal';
 @import '_fonts';
 @import '_sizes';
 
@@ -284,18 +285,18 @@ html, body, .ui-widget {
 			dt {
 				height: $ls-element-height-mobile;
 				line-height: $ls-element-height-mobile;
-				padding-left: $ls-element-height-mobile / 2;
+				padding-left: math.div($ls-element-height-mobile, 2);
 			}
 			
 			dd {
-				padding-right: $ls-element-height-mobile / 2;
+				padding-right: math.div($ls-element-height-mobile, 2);
 			}
 		}
 		
 		.ui_tpicker_time_label {
 			height: $ls-element-height-mobile;
 			line-height: $ls-element-height-mobile;
-			padding-left: #{$regular-spacing + $half-spacing + ($ls-element-height-mobile / 2)};
+			padding-left: $regular-spacing + $half-spacing + math.div($ls-element-height-mobile, 2);
 		}
 		
 		.ui_tpicker_time {
@@ -309,8 +310,8 @@ html, body, .ui-widget {
 .ui-slider .ui-slider-handle.ui-state-default {
 	@include button;
 	
-	margin-left: -$element-height-mobile / 2;
-	top: -($element-height-mobile / 2) + 4px;
+	margin-left: math.div(-$element-height-mobile, 2);
+	top: math.div(-$element-height-mobile, 2) + 4px;
 	width: $element-height-mobile;
 }
 
@@ -529,7 +530,7 @@ html, body, .ui-widget {
 					padding-right: 36px;
 				
 					&:before, &:after {
-						border-width: calc(#{$element-height-mobile} / 2) 1px calc(#{$element-height-mobile} / 2) calc(#{$element-height-mobile} / 2);
+						border-width: math.div($element-height-mobile, 2) 1px math.div($element-height-mobile, 2) math.div($element-height-mobile, 2);
 					}
 				}
 				
@@ -691,14 +692,14 @@ html, body, .ui-widget {
 					&.jeesl-dropdown-multiline-item {
 						.jeesl-dropdown-item-title {
 							font-size: $font-size-ls-mobile;
-							line-height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
-							height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+							line-height: math.div($ls-element-height-mobile, 2) - $ls-element-padding-vertical;
+							height: math.div($ls-element-height-mobile, 2) - $ls-element-padding-vertical;
 						}
 						
 						.jeesl-dropdown-item-content {
 							font-size: $font-size-ls-mobile;
-							line-height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
-							height: ($ls-element-height-mobile / 2) - $ls-element-padding-vertical;
+							line-height: math.div($ls-element-height-mobile, 2) - $ls-element-padding-vertical;
+							height: math.div($ls-element-height-mobile, 2) - $ls-element-padding-vertical;
 						}
 					}
 				}

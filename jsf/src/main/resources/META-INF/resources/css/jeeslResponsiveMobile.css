@@ -1,3 +1,4 @@
+@use 'sass:math' as math;
 @use 'sass:map';
 .jeesl-brewer-1 {
   background: #66c2a5; }
@@ -227,13 +228,13 @@ html, body, .ui-widget {
   .ui-datepicker .ui-timepicker-div dl dt {
     height: 50px;
     line-height: 50px;
-    padding-left: 25px; }
+    padding-left: calc($ls-element-height-mobile / 2); }
   .ui-datepicker .ui-timepicker-div dl dd {
-    padding-right: 25px; }
+    padding-right: calc($ls-element-height-mobile / 2); }
   .ui-datepicker .ui-timepicker-div .ui_tpicker_time_label {
     height: 50px;
     line-height: 50px;
-    padding-left: 40px; }
+    padding-left: 15pxcalc($ls-element-height-mobile / 2); }
   .ui-datepicker .ui-timepicker-div .ui_tpicker_time {
     font-size: 1.2em;
     height: 50px;
@@ -244,8 +245,8 @@ html, body, .ui-widget {
   min-width: 30px;
   padding: 0 10px;
   width: auto;
-  margin-left: -42px;
-  top: -38px;
+  margin-left: -calc($element-height-mobile / 2);
+  top: -calc($element-height-mobile / 2)4px;
   width: 84px; }
 
 .ui-texteditor .ql-container .ql-editor {
@@ -612,12 +613,12 @@ html, body, .ui-widget {
           margin-right: 12px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-dropdown-multiline-item .jeesl-dropdown-item-title {
       font-size: 1.2em;
-      line-height: 15px;
-      height: 15px; }
+      line-height: calc($ls-element-height-mobile / 2)-10px;
+      height: calc($ls-element-height-mobile / 2)-10px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .jeesl-dropdown-list .jeesl-dropdown-item.jeesl-dropdown-multiline-item .jeesl-dropdown-item-content {
       font-size: 1.2em;
-      line-height: 15px;
-      height: 15px; }
+      line-height: calc($ls-element-height-mobile / 2)-10px;
+      height: calc($ls-element-height-mobile / 2)-10px; }
     .jeesl-status-bar .jeesl-menu-bar-list .jeesl-menu-bar-item .ui-inputgroup {
       padding: 5px;
       pointer-events: all; }

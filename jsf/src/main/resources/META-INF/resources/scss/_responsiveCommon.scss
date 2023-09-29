@@ -1,4 +1,4 @@
-@import '_decimal';
+@use 'sass:math';
 
 $border: $border-width solid $border-colour;
 
@@ -225,26 +225,6 @@ $border: $border-width solid $border-colour;
 		.ui-button-text {
 			display: none;
 		}
-	}
-
-	&.ui-corner-all:before {
-		@extend .ui-corner-all;
-	}
-	
-	&.ui-corner-top:before {
-		@extend .ui-corner-top;
-	}
-	
-	&.ui-corner-bottom:before {
-		@extend .ui-corner-bottom;
-	}
-	
-	&.ui-corner-left:before {
-		@extend .ui-corner-left;
-	}
-	
-	&.ui-corner-right:before {
-		@extend .ui-corner-right;
 	}
 	
 	&.#{$active-class}, &.ui-state-hover, &:hover {
@@ -563,52 +543,6 @@ $border: $border-width solid $border-colour;
 @include jeesl-select(ui-selectonemenu);
 @include jeesl-select(ui-selectcheckboxmenu);
 
-//.ui-selectcheckboxmenu.ui-state-default {
-//	.ui-selectcheckboxmenu-multiple-container {
-//		height: auto;
-//		min-height: $element-height;
-//		padding: 0;
-//		
-//		.ui-selectcheckboxmenu-token {
-//			@include button;
-//			
-//    		align-items: center;
-//			display: flex;
-//			height: $element-height - (2 * $slim-spacing);
-//			padding: 0;
-//			
-//			.ui-selectcheckboxmenu-token-label {
-//    			margin: 0 $half-spacing;
-//				order: 1;
-//				padding: 0;
-//			}
-//			
-//			.ui-selectcheckboxmenu-token-icon {
-//				@include vertical-center(after);
-//				
-//				height: 100%;
-//				order: 2;
-//				padding: 0 $half-spacing;
-//				transition: background .2s linear;
-//				
-//				@media (max-width: 768px) {
-//					margin-right: -$regular-spacing;
-//					padding: 0 $regular-spacing;
-//				}
-//				
-//				&:hover {
-//					background: $bright-colour;
-//				}
-//				
-//				&:before {
-//					display: inline-block;
-//					vertical-align: middle;
-//				}
-//			}
-//		}
-//	}
-//}
-
 .ui-autocomplete-panel {
 	opacity: 1;
 }
@@ -919,7 +853,7 @@ $border: $border-width solid $border-colour;
 				@media (max-width: 768px) {
 					height: $ls-element-height-mobile;
 					line-height: $ls-element-height-mobile;
-					padding-left: $ls-element-height-mobile / 2;
+					padding-left: math.div($ls-element-height-mobile, 2);
 				}
 			}
 			
@@ -927,7 +861,7 @@ $border: $border-width solid $border-colour;
 				width: 60%;
 				
 				@media (max-width: 768px) {
-					padding-right: $ls-element-height-mobile / 2;
+					padding-right: math.div($ls-element-height-mobile, 2);
 				}
 			}
 		}
@@ -947,7 +881,7 @@ $border: $border-width solid $border-colour;
 			@media (max-width: 768px) {
 				height: $ls-element-height-mobile;
 				line-height: $ls-element-height-mobile;
-				padding-left: #{$regular-spacing + $half-spacing + ($ls-element-height-mobile / 2)};
+				padding-left: #{$regular-spacing + $half-spacing + math.div($ls-element-height-mobile, 2)};
 			}
 		}
 		
@@ -1000,8 +934,8 @@ $border: $border-width solid $border-colour;
 		}
 		
 		@media (max-width: 768px) {
-			margin-left: -$element-height-mobile / 2;
-			top: -($element-height-mobile / 2) + 4px;
+			margin-left: math.div(-$element-height-mobile, 2);
+			top: math.div(-$element-height-mobile, 2) + 4px;
 			width: $element-height-mobile;
 		}
 	}
@@ -1139,20 +1073,10 @@ $border: $border-width solid $border-colour;
 	@include token-container(ui-selectcheckboxmenu);
 }
 
-.fc {
-	.fc-button {
-		@include button(fc-button-active);
-	}
-	
-	.fc-center {
-		margin: 0 $regular-spacing;
-	}
-}
-
 @for $i from 1 to 13 {
 	.p-md-#{$i} {
 		flex: 0 0 auto;
-		width: decimal-round(100 / 12 * $i) * 1%;
+		width: math.round(math.div(100, 12) * $i) * 1%;
 	}
 }
 
@@ -1191,6 +1115,20 @@ $border: $border-width solid $border-colour;
 
 .jeesl-nowrap {
 	white-space: nowrap;
+}
+
+.jeesl-icon {
+	display: inline-block;
+	min-height: auto;
+	vertical-align: top;
+	
+	img {
+		height: $icon-height;
+	
+		@media (max-width: 768px) {
+			height: $icon-height-mobile;
+		}
+	}
 }
 
 .ui-icon {
@@ -1276,7 +1214,7 @@ $border: $border-width solid $border-colour;
 	}
 	
 	.ui-spinner-button {
-		height: #{$element-height / 2};
+		height: math.div($element-height, 2);
 		position: relative;
 		
 		&.ui-spinner-up {
@@ -1328,6 +1266,16 @@ $border: $border-width solid $border-colour;
 			border-radius: $border-radius-right;
 			padding: 0 $half-spacing;
 		}
+	}
+}
+
+.fc {
+	.fc-button {
+		@include button(fc-button-active);
+	}
+	
+	.fc-center {
+		margin: 0 $regular-spacing;
 	}
 }
 
@@ -1423,6 +1371,27 @@ $border: $border-width solid $border-colour;
 	.ui-colorpicker_hsb_b:before {
 		content: 'B';
 	}
+}
+
+
+.ui-corner-all:before {
+	@extend .ui-corner-all;
+}
+
+.ui-corner-top:before {
+	@extend .ui-corner-top;
+}
+
+.ui-corner-bottom:before {
+	@extend .ui-corner-bottom;
+}
+
+.ui-corner-left:before {
+	@extend .ui-corner-left;
+}
+
+.ui-corner-right:before {
+	@extend .ui-corner-right;
 }
 
 /* Primefaces 12 fixes */
