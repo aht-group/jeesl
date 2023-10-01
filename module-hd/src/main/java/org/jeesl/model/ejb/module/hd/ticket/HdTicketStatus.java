@@ -13,7 +13,7 @@ import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 
 @Entity
-@DiscriminatorValue("hdIssueS")
+@DiscriminatorValue("helpdeskTicketStatus")
 @EjbErNode(name="Status",category="hd",subset="moduleHd")
 public class HdTicketStatus extends TenantStatus implements JeeslHdTicketStatus<IoLang,IoDescription,TenantRealm,HdTicketStatus,IoGraphic>
 {

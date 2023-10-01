@@ -10,6 +10,11 @@ public class JsonSsiCredential implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	@JsonProperty("code")
+	private String code;
+	public String getCode() {return code;}
+	public void setCode(String code) {this.code = code;}
+
 	@JsonProperty("host")
 	private String host;
 	public String getHost() {return host;}

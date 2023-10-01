@@ -6,6 +6,19 @@ import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
 
 public class JsonSsiCredentialFactory
 {
+	private JsonSsiCredential json;
+	
+	public static JsonSsiCredentialFactory instance() {return new JsonSsiCredentialFactory();}
+	private JsonSsiCredentialFactory()
+	{
+		
+	}
+	
+	public JsonSsiCredentialFactory fluent() {json = new JsonSsiCredential(); return this;}
+	public JsonSsiCredentialFactory code(String code) {json.setCode(code); return this;}
+	public JsonSsiCredentialFactory url(String url) {json.setUrl(url); return this;}
+	public JsonSsiCredential json() {return json;}
+	
 	public static JsonSsiCredential build(){return new JsonSsiCredential();}
 	public static JsonSsiCredential build(String user, String pwd){return build(null,null,user,pwd);}
 	public static JsonSsiCredential build(String host, String url, String user, String pwd)
