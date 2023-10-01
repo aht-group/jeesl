@@ -5,11 +5,13 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     jaxb:version="2.0">
+    
+    <xsd:import namespace="http://www.jeesl.org/text" schemaLocation="jeesl/text.xsd"/>
    
 	<xsd:element name="jeesl">
 		<xsd:complexType>
 			<xsd:sequence>
-			     
+			       
 			</xsd:sequence>
 			<xsd:attribute name="id" type="xsd:long"/>
 		</xsd:complexType>

@@ -16,4 +16,10 @@ version="2.1">
         </jxb:schemaBindings>
     </jxb:bindings>
     
+    <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.text"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
 </jxb:bindings>
