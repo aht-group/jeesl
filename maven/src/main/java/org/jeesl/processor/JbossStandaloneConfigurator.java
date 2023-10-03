@@ -337,7 +337,7 @@ public class JbossStandaloneConfigurator
 		ModelNode cacheContainer = new ModelNode();		
 		cacheContainer.get(ClientConstants.OP_ADDR).add("subsystem","infinispan");
 		cacheContainer.get(ClientConstants.OP_ADDR).add("cache-container",name);
-		cacheContainer.get(ClientConstants.OP).set(ClientConstants.ADD);
+		cacheContainer.get(ClientConstants.OP).set(ClientConstants.ADD);		
 		
 		ModelNode transport = cacheContainer.clone();
 		transport.get(ClientConstants.OP_ADDR).add("transport","jgroups");		
@@ -345,6 +345,18 @@ public class JbossStandaloneConfigurator
 		transport.get(ClientConstants.OP).set(ClientConstants.ADD);
 		
 		ModelNode result = client.execute(new OperationBuilder(cacheContainer).build());
+		System.out.println(result.toString());
+		
+		// To be tested on recent WildFly, attribute not available in version 24 or higher
+		ModelNode op = new ModelNode();
+		op.get("operation").set("write-attribute");
+		ModelNode addr = op.get("address");
+		addr.add("subsystem", "infinispan");
+		addr.add("cache-container", name);
+		op.get("name").set("marshaller");
+		op.get("value").set("JBOSS");
+		op.get("operation-headers", "rollback-on-runtime-failure").set(false);
+		result = client.execute(new OperationBuilder(op).build());
 		System.out.println(result.toString());
 		
 		result = client.execute(new OperationBuilder(transport).build());
