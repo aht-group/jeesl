@@ -1,0 +1,409 @@
+package org.jeesl.processor;
+
+import java.io.IOException;
+import java.net.InetAddress;
+
+import org.apache.commons.configuration.Configuration;
+import org.jboss.as.controller.client.ModelControllerClient;
+import org.jboss.as.controller.client.OperationBuilder;
+import org.jboss.as.controller.client.helpers.ClientConstants;
+import org.jboss.dmr.ModelNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class JbossStandaloneConfigurator
+{
+	final static Logger logger = LoggerFactory.getLogger(JbossStandaloneConfigurator.class);
+	
+	private final ModelControllerClient client;
+	private final String eapVersion;
+	
+	public JbossStandaloneConfigurator(String eapVersion, InetAddress host, int port)
+	{
+		this(eapVersion, ModelControllerClient.Factory.create(host,9990));
+	}
+	
+	public JbossStandaloneConfigurator(String eapVersion, ModelControllerClient client)
+	{
+		this.eapVersion=eapVersion;
+		this.client=client;
+	}
+	
+	public boolean dsExists(String name) throws IOException
+	{
+		boolean result = false;
+		ModelNode request = new ModelNode();
+		request.get(ClientConstants.OP).set(ClientConstants.READ_RESOURCE_OPERATION);
+	  	request.get(ClientConstants.RECURSIVE).set(true);
+	  	request.get(ClientConstants.OP_ADDR).add("subsystem", "datasources");
+	  	ModelNode responce = client.execute(new OperationBuilder(request).build());
+	  	ModelNode drivers = responce.get(ClientConstants.RESULT).get("data-source");
+	  	if (drivers.isDefined())
+	  	{
+	  		for (ModelNode driver : drivers.asList())
+  			{
+  				String driverName = driver.asProperty().getName();
+  				if (driverName.equals(name))
+  				{
+  					result=true;
+  					break;
+  				}				
+  			}
+	  	}
+	  	return result;
+	}
+	
+	public boolean driverExists(String name) throws IOException
+	{
+		boolean result = false;
+		ModelNode request = new ModelNode();
+		request.get(ClientConstants.OP).set(ClientConstants.READ_RESOURCE_OPERATION);
+	  	request.get(ClientConstants.RECURSIVE).set(true);
+	  	request.get(ClientConstants.OP_ADDR).add("subsystem", "datasources");
+	  	ModelNode responce = client.execute(new OperationBuilder(request).build());
+	  	ModelNode drivers = responce.get(ClientConstants.RESULT).get("jdbc-driver");
+	  	if(drivers.isDefined())
+	  	{
+	  		for (ModelNode driver : drivers.asList())
+  			{
+  				String driverName = driver.asProperty().getName();
+  				if (driverName.equals(name))
+  				{
+  					result=true;
+  					break;
+  				}				
+  			}
+	  	}
+	  	return result;
+	}
+	
+	public void createMysqlDriver() throws IOException
+	{			
+		ModelNode request = new ModelNode();
+		request.get(ClientConstants.OP).set(ClientConstants.ADD);
+		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
+		request.get(ClientConstants.OP_ADDR).add("jdbc-driver","mysql");
+		request.get("driver-name").set("mysql");
+		request.get("driver-module-name").set("com.mysql");
+		request.get("driver-xa-datasource-class-name").set("com.mysql.jdbc.jdbc2.optional.MysqlXADataSource");
+		client.execute(new OperationBuilder(request).build());
+	}
+	public void createMariadbDriver() throws IOException
+	{			
+		ModelNode request = new ModelNode();
+		request.get(ClientConstants.OP).set(ClientConstants.ADD);
+		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
+		request.get(ClientConstants.OP_ADDR).add("jdbc-driver","mariadb");
+		request.get("driver-name").set("mariadb");
+		request.get("driver-module-name").set("org.mariadb");
+		request.get("driver-xa-datasource-class-name").set("org.mariadb.jdbc.MariaDbDataSource");
+		client.execute(new OperationBuilder(request).build());
+	}
+	
+	public void createPostgresDriver() throws IOException
+	{		
+		ModelNode request = new ModelNode();
+		request.get(ClientConstants.OP).set(ClientConstants.ADD);
+		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
+		request.get(ClientConstants.OP_ADDR).add("jdbc-driver","postgres");
+		request.get("driver-name").set("postgres");
+		
+		if(eapVersion.equals("8.0"))
+		{
+			request.get("driver-module-name").set("org.postgresql.jdbc");
+			request.get("driver-class-name").set("org.postgresql.Driver");
+		}
+		else
+		{
+			request.get("driver-module-name").set("org.postgresql");
+			request.get("driver-xa-datasource-class-name").set("org.postgresql.xa.PGXADataSource");
+		}
+		
+		
+		client.execute(new OperationBuilder(request).build());
+	}
+	
+	public String createMariaDbDatasource(Configuration config, String context) throws IOException
+	{
+		String cfgDbDs = "db."+context+".ds";
+		String cfgDbHost = "db."+context+".host";
+		String cfgDbPort = "db."+context+".port";
+		String cfgDbName = "db."+context+".db";
+		String cfgDbUser = "db."+context+".user";
+		String cfgDbPwd = "db."+context+".pwd";
+		
+		String pDbDs = config.getString(cfgDbDs);
+		String pDbHost = config.getString(cfgDbHost);
+		String pDbPort = config.getString(cfgDbPort,"3306");
+		String pDbName = config.getString(cfgDbName);
+		String pDbUser = config.getString(cfgDbUser);
+		String pDbPwd = config.getString(cfgDbPwd);
+		
+		logger.debug(cfgDbPwd+"\t"+pDbDs);
+		logger.debug(cfgDbHost+"\t"+pDbHost);
+		logger.debug(cfgDbHost+"\t"+pDbHost);
+		logger.debug(cfgDbName+"\t"+pDbName);
+		logger.debug(cfgDbUser+"\t"+pDbUser);
+		logger.debug(cfgDbPwd+"\t"+pDbPwd);
+		
+		boolean dsExists = dsExists(cfgDbDs);
+		if(!dsExists)
+		{
+			createMariadbDatasource(pDbDs,pDbHost,pDbPort,pDbName,"?useSSL=false",pDbUser,pDbPwd);
+			StringBuilder sb = new StringBuilder();
+			sb.append(pDbDs);
+			return sb.toString();
+		}
+		return null;
+	}
+	
+	public String createMysqlDatasource(Configuration config, String context) throws IOException
+	{
+		String cfgDbDs = "db."+context+".ds";
+		String cfgDbHost = "db."+context+".host";
+		String cfgDbPort = "db."+context+".port";
+		String cfgDbName = "db."+context+".db";
+		String cfgDbUser = "db."+context+".user";
+		String cfgDbPwd = "db."+context+".pwd";
+		
+		String pDbDs = config.getString(cfgDbDs);
+		String pDbHost = config.getString(cfgDbHost);
+		String pDbPort = config.getString(cfgDbPort,"3306");
+		String pDbName = config.getString(cfgDbName);
+		String pDbUser = config.getString(cfgDbUser);
+		String pDbPwd = config.getString(cfgDbPwd);
+		
+		logger.debug(cfgDbPwd+"\t"+pDbDs);
+		logger.debug(cfgDbHost+"\t"+pDbHost);
+		logger.debug(cfgDbHost+"\t"+pDbHost);
+		logger.debug(cfgDbName+"\t"+pDbName);
+		logger.debug(cfgDbUser+"\t"+pDbUser);
+		logger.debug(cfgDbPwd+"\t"+pDbPwd);
+		
+		boolean dsExists = dsExists(cfgDbDs);
+		if(!dsExists)
+		{
+			createMysqlDatasource(pDbDs,pDbHost,pDbPort,pDbName,"?useSSL=false",pDbUser,pDbPwd);
+			StringBuilder sb = new StringBuilder();
+			sb.append(pDbDs);
+			return sb.toString();
+		}
+		return null;
+	}
+	
+	public String createPostgresDatasource(Configuration config, String context) throws IOException
+	{
+		String cfgDbDs = "db."+context+".ds";
+		String cfgDbHost = "db."+context+".host";
+		String cfgDbPort = "db."+context+".port";
+		String cfgDbName = "db."+context+".db";
+		String cfgDbUser = "db."+context+".user";
+		String cfgDbPwd = "db."+context+".pwd";
+		
+		String pDbDs = config.getString(cfgDbDs);
+		String pDbHost = config.getString(cfgDbHost);
+		String pDbPort = config.getString(cfgDbPort,"5432");
+		String pDbName = config.getString(cfgDbName);
+		String pDbUser = config.getString(cfgDbUser);
+		String pDbPwd = config.getString(cfgDbPwd);
+		
+		logger.debug(cfgDbPwd+"\t"+pDbDs);
+		logger.debug(cfgDbHost+"\t"+pDbHost);
+		logger.debug(cfgDbName+"\t"+pDbName);
+		logger.debug(cfgDbUser+"\t"+pDbUser);
+		logger.debug(cfgDbPwd+"\t"+pDbPwd);
+		
+		if(!this.dsExists(cfgDbDs))
+		{
+			createPostgresDatasource(pDbDs,pDbHost,pDbPort,pDbName,null,pDbUser,pDbPwd);
+			StringBuilder sb = new StringBuilder();
+			sb.append(pDbDs);
+			sb.append(" ").append(pDbHost).append(":").append(pDbPort);
+			return sb.toString();
+		}
+		return null;
+	}
+	
+	public void createMariadbDatasource(String name, String host, String port, String db, String jdbcParamter, String username, String password) throws IOException
+	{		
+		ModelNode request = new ModelNode();
+		request.get(ClientConstants.OP).set(ClientConstants.ADD);
+		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
+		request.get(ClientConstants.OP_ADDR).add("data-source",name);
+		
+		datasource(request,name);
+		connection(request,"mariadb",host,port,db,jdbcParamter);
+		request.get("driver-name").set("mariadb");
+		request.get("transaction-isolation").set("TRANSACTION_READ_COMMITTED");
+		 
+		pool(request);
+		security(request,username,password);
+		  
+		request.get("prepared-statements-cache-size").set(32);
+		request.get("share-prepared-statements").set(true);
+		  
+		client.execute(new OperationBuilder(request).build());
+	}
+	
+	public void createMysqlDatasource(String name, String host, String port, String db, String jdbcParamter, String username, String password) throws IOException
+	{		
+		ModelNode request = new ModelNode();
+		request.get(ClientConstants.OP).set(ClientConstants.ADD);
+		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
+		request.get(ClientConstants.OP_ADDR).add("data-source",name);
+		
+		datasource(request,name);
+		connection(request,"mysql",host,port,db,jdbcParamter);
+		request.get("driver-name").set("mysql");
+		request.get("transaction-isolation").set("TRANSACTION_READ_COMMITTED");
+		 
+		pool(request);
+		security(request,username,password);
+		  
+		request.get("prepared-statements-cache-size").set(32);
+		request.get("share-prepared-statements").set(true);
+		  
+		client.execute(new OperationBuilder(request).build());
+	}
+	
+	public void createPostgresDatasource(String name, String host, String port, String db, String jdbcParamter, String username, String password) throws IOException
+	{		
+		ModelNode request = new ModelNode();
+		request.get(ClientConstants.OP).set(ClientConstants.ADD);
+		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
+		request.get(ClientConstants.OP_ADDR).add("data-source",name);
+		
+		datasource(request,name);
+		connection(request,"postgresql",host,port,db,jdbcParamter);
+		request.get("driver-name").set("postgres");
+		request.get("transaction-isolation").set("TRANSACTION_READ_COMMITTED");
+		 
+		this.pool(request);
+		security(request,username,password);
+		  
+		request.get("prepared-statements-cache-size").set(32);
+		request.get("share-prepared-statements").set(true);
+		
+		//Validation
+		request.get("check-valid-connection-sql").set("select 1");
+		request.get("background-validation").set(true);
+		request.get("background-validation-millis").set(5000);
+		  
+		client.execute(new OperationBuilder(request).build());
+	}
+	
+	private void datasource(ModelNode request, String name)
+	{
+		request.get("jta").set(true);
+		request.get("jndi-name").set("java:jboss/datasources/"+name);
+		request.get("pool-name").set(name);
+		request.get("use-java-context").set(true);
+		request.get("use-ccm").set(true);
+		request.get("statistics-enabled").set(true);
+	}
+	
+	private void connection(ModelNode request, String type, String host, String port, String db, String jdbcParamter)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append("jdbc:").append(type).append("://");
+		sb.append(host);
+		sb.append(":").append(port);
+		sb.append("/").append(db);
+		if(jdbcParamter!=null) {sb.append(jdbcParamter);}
+		request.get("connection-url").set(sb.toString());
+	}
+	
+	private void pool(ModelNode request)
+	{
+		request.get("min-pool-size").set(2);
+		request.get("max-pool-size").set(5);
+		request.get("pool-prefill").set(true);
+		request.get("pool-use-strict-min").set(false);
+		request.get("flush-strategy").set("FailingConnectionOnly");
+	}
+	
+	private void security(ModelNode request, String username, String password)
+	{
+		request.get("user-name").set(username);
+		request.get("password").set(password);
+	}
+	
+	
+	public void cachContainer(String name, String[] caches) throws IOException
+	{	
+		// More info on how this works can be found here
+		// https://stackoverflow.com/questions/76865879/how-to-add-a-cache-programmatically-in-wildfly-jboss-using-the-detyped-java-api
+		
+		ModelNode cacheContainer = new ModelNode();		
+		cacheContainer.get(ClientConstants.OP_ADDR).add("subsystem","infinispan");
+		cacheContainer.get(ClientConstants.OP_ADDR).add("cache-container",name);
+		cacheContainer.get(ClientConstants.OP).set(ClientConstants.ADD);		
+		
+		ModelNode transport = cacheContainer.clone();
+		transport.get(ClientConstants.OP_ADDR).add("transport","jgroups");		
+		transport.get("lock-timeout").set(60000);
+		transport.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode result = client.execute(new OperationBuilder(cacheContainer).build());
+		System.out.println(result.toString());
+		
+		// To be tested on recent WildFly, attribute not available in version 24 or higher
+		ModelNode op = new ModelNode();
+		op.get("operation").set("write-attribute");
+		ModelNode addr = op.get("address");
+		addr.add("subsystem", "infinispan");
+		addr.add("cache-container", name);
+		op.get("name").set("marshaller");
+		op.get("value").set("JBOSS");
+		op.get("operation-headers", "rollback-on-runtime-failure").set(false);
+		result = client.execute(new OperationBuilder(op).build());
+		System.out.println(result.toString());
+		
+		result = client.execute(new OperationBuilder(transport).build());
+		System.out.println(result.toString());
+		
+		for(String type : caches)
+		{
+			if(type.equals("menu")) {this.createCacheReplicated(cacheContainer,type);}
+			else if(type.equals("icon")) {this.createCacheLocal(cacheContainer,type);}
+			else if(type.equals("ofx")) {this.createCacheLocal(cacheContainer,type);}
+			else if(type.equals("report")) {this.createCacheLocal(cacheContainer,type);}
+			else if(type.equals("aom")) {this.createCacheLocal(cacheContainer,type);}
+		}
+	}
+
+	public void createCacheReplicated(ModelNode container, String cacheName) throws IOException
+	{
+		ModelNode replicatedCache = container.clone();
+		replicatedCache.get(ClientConstants.OP_ADDR).add("replicated-cache",cacheName);		
+		replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode replicatedCacheTransaction = replicatedCache.clone();	
+		replicatedCacheTransaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
+		replicatedCacheTransaction.get("mode").set("BATCH");
+		replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
+		System.out.println(result.toString());
+
+		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
+		System.out.println(result.toString());
+	}
+	public void createCacheLocal(ModelNode container, String cacheName) throws IOException
+	{
+		ModelNode replicatedCache = container.clone();
+		replicatedCache.get(ClientConstants.OP_ADDR).add("local-cache",cacheName);		
+		replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode replicatedCacheTransaction = replicatedCache.clone();	
+		replicatedCacheTransaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
+		replicatedCacheTransaction.get("mode").set("BATCH");
+		replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
+		
+		ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
+		System.out.println(result.toString());
+
+		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
+		System.out.println(result.toString());
+	}
+}
