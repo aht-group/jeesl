@@ -20,6 +20,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.jboss.as.controller.client.ModelControllerClient;
+import org.jeesl.controller.io.ssi.wildfly.JbossModuleConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.JbossStandaloneConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.cache.AbstractEapCacheConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
@@ -27,7 +28,6 @@ import org.jeesl.controller.io.ssi.wildfly.ds.pg.DsPostgresEap73Configurator;
 import org.jeesl.interfaces.controller.io.ssi.eap.EapCacheConfigurator;
 import org.jeesl.interfaces.controller.io.ssi.eap.EapDsConfigurator;
 import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
-import org.jeesl.processor.JbossModuleConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

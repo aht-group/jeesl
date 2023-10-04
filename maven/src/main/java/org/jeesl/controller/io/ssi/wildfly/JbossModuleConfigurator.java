@@ -1,4 +1,4 @@
-package org.jeesl.processor;
+package org.jeesl.controller.io.ssi.wildfly;
 
 import java.io.File;
 import java.io.IOException;
