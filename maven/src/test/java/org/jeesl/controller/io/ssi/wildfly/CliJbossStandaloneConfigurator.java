@@ -1,4 +1,4 @@
-package org.jeesl.controller.processor;
+package org.jeesl.controller.io.ssi.wildfly;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -9,7 +9,13 @@ import org.jboss.as.controller.client.OperationBuilder;
 import org.jboss.as.controller.client.helpers.ClientConstants;
 import org.jboss.dmr.ModelNode;
 import org.jeesl.JeeslBootstrap;
-import org.jeesl.processor.JbossStandaloneConfigurator;
+import org.jeesl.controller.io.ssi.wildfly.cache.CacheEap73Configurator;
+import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
+import org.jeesl.controller.io.ssi.wildfly.ds.pg.DsPostgresEap73Configurator;
+import org.jeesl.factory.json.io.ssi.core.JsonSsiCredentialFactory;
+import org.jeesl.factory.json.io.ssi.core.JsonSsiSystemFactory;
+import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
+import org.jeesl.model.json.io.ssi.core.JsonSsiSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +32,16 @@ public class CliJbossStandaloneConfigurator
 		client = ModelControllerClient.Factory.create(InetAddress.getByName("127.0.0.1"), 9990);
 		
 		jbossStandalone = new JbossStandaloneConfigurator("7.3",client);
+	}
+	
+	public void driverExists() throws IOException
+	{
+		DsPostgresEap73Configurator dsc = DsPostgresEap73Configurator.instance(client);
+		
+		for(AbstractEapDsConfigurator.DbType type : AbstractEapDsConfigurator.DbType.values())
+		{
+			logger.info(type+" not available "+dsc.driverNotAvailable(type.toString()));
+		}
 	}
 	
 	public void dsExists() throws IOException
@@ -50,9 +66,12 @@ public class CliJbossStandaloneConfigurator
 	}
 	
 	public void infinispan() throws IOException
-	{
-		String[] caches = {"menu", "icon" };
-		jbossStandalone.cachContainer("ofx",caches);
+	{		
+		JsonSsiSystem system = JsonSsiSystemFactory.instance().fluent().code("ofx").credentials().json();
+		system.getCredentials().add(JsonSsiCredentialFactory.build("menu"));
+		system.getCredentials().add(JsonSsiCredentialFactory.build("icon"));
+
+		CacheEap73Configurator.instance(client).addCaches(system);
 	
 //		<cache-container name="jeesl">
 //			<transport lock-timeout="60000"/>
@@ -71,7 +90,8 @@ public class CliJbossStandaloneConfigurator
 		JeeslBootstrap.init();
 		CliJbossStandaloneConfigurator cli = new CliJbossStandaloneConfigurator();
 		
+		cli.driverExists();
 //		cli.dsExists();
-		cli.infinispan();
+//		cli.infinispan();
 	}
 }

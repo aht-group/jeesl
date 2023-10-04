@@ -10,6 +10,11 @@ public class JsonSsiCredential implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	@JsonProperty("system")
+	private JsonSsiSystem system;
+	public JsonSsiSystem getSystem() {return system;}
+	public void setSystem(JsonSsiSystem system) {this.system = system;}
+
 	@JsonProperty("code")
 	private String code;
 	public String getCode() {return code;}
@@ -24,6 +29,11 @@ public class JsonSsiCredential implements Serializable
 	private Integer port;
 	public Integer getPort() {return port;}
 	public void setPort(Integer port) {this.port = port;}
+	
+	@JsonProperty("token")
+	private String token;
+	public String getToken() {return token;}
+	public void setToken(String token) {this.token = token;}
 	
 	@JsonProperty("url")
 	private String url;

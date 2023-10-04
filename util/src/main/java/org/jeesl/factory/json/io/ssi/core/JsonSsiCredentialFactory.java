@@ -19,7 +19,8 @@ public class JsonSsiCredentialFactory
 	public JsonSsiCredentialFactory url(String url) {json.setUrl(url); return this;}
 	public JsonSsiCredential json() {return json;}
 	
-	public static JsonSsiCredential build(){return new JsonSsiCredential();}
+	public static JsonSsiCredential build() {return new JsonSsiCredential();}
+	public static JsonSsiCredential build(String code) {JsonSsiCredential json = JsonSsiCredentialFactory.build(); json.setCode(code); return json;}
 	public static JsonSsiCredential build(String user, String pwd){return build(null,null,user,pwd);}
 	public static JsonSsiCredential build(String host, String url, String user, String pwd)
 	{

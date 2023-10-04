@@ -1,20 +1,13 @@
 package org.jeesl.maven.goal.eap;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import org.apache.commons.configuration.Configuration;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.jboss.as.controller.client.ModelControllerClient;
 import org.jeesl.controller.db.shell.mysql.MySqlShellCommands;
 import org.jeesl.controller.db.shell.postgres.PostgreSqlShellCommands;
-import org.jeesl.processor.JbossModuleConfigurator;
-import org.jeesl.processor.JbossStandaloneConfigurator;
+import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
 
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 
@@ -37,32 +30,6 @@ public class JeeslJbossEap71Configurator extends AbstractJbossEapConfigurator
 		configureEap(config);
     }
     
-    private void configureEap(Configuration config) throws MojoExecutionException
-    {
-    	String jbossDir = config.getString("eap.dir","/Volumes/ramdisk/jboss");
-		File f = new File(jbossDir);
-		getLog().info("JBoss EAP 7.1 directoy: "+f.getAbsolutePath());
-    	
-    	ModelControllerClient client;
-    	JbossModuleConfigurator jbossModule = new JbossModuleConfigurator(JbossModuleConfigurator.Product.eap,eapVersion,jbossDir);
-    	try {client = ModelControllerClient.Factory.create(InetAddress.getByName("localhost"), 9990);}
-    	catch (UnknownHostException e) {throw new MojoExecutionException(e.getMessage());}
-    	
-    	JbossStandaloneConfigurator jbossConfig = new JbossStandaloneConfigurator(eapVersion,client);
-    	
-    	String key = config.getString("eap.configurations");
-	    getLog().warn("Keys: "+key);
-	    String[] keys = key.split("-");
-	    
-	    try
-	    {
-	    	dbFiles(keys,config,jbossModule);
-	    	dbDrivers(keys,config,jbossConfig);
-	    	dbDs(keys,config,jbossConfig);
-	    }
-	    catch (IOException e) {throw new MojoExecutionException(e.getMessage());}
-    }
-    
     @SuppressWarnings("unused")
 	private void dbRestore(Configuration config) throws ExlpUnsupportedOsException
     {
@@ -75,7 +42,7 @@ public class JeeslJbossEap71Configurator extends AbstractJbossEapConfigurator
 	    	String pDbPwd = config.getString("db."+key+".pwd");
 	    	String pDbDump = config.getString("db."+key+".dump");
 	    	String pDbRootPwd = config.getString("db."+key+".rootpwd",null);
-        	DbType dbType = DbType.valueOf(config.getString("db."+key+".type"));
+	    	AbstractEapDsConfigurator.DbType dbType = AbstractEapDsConfigurator.DbType.valueOf(config.getString("db."+key+".type"));
         	switch(dbType)
         	{
         		case mysql: System.out.println(MySqlShellCommands.dropDatabase("root",pDbRootPwd,pDbName));
@@ -83,7 +50,7 @@ public class JeeslJbossEap71Configurator extends AbstractJbossEapConfigurator
         					System.out.println(MySqlShellCommands.grantDatabase("root",pDbRootPwd,pDbName,pDbUser,pDbPwd));
         					System.out.println(MySqlShellCommands.restoreDatabase("root",pDbRootPwd,pDbName,pDbDump));
         					break;
-        		case postgres:	System.out.println(PostgreSqlShellCommands.createUser("postgres",pDbUser,pDbPwd));
+        		case postgresql:	System.out.println(PostgreSqlShellCommands.createUser("postgres",pDbUser,pDbPwd));
         						System.out.println(PostgreSqlShellCommands.terminate("postgres",pDbName));
         						System.out.println(PostgreSqlShellCommands.terminate("postgres","template1"));
         						System.out.println(PostgreSqlShellCommands.dropDatabase("postgres",pDbName));

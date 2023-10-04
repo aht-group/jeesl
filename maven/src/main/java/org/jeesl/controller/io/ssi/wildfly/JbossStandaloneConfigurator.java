@@ -1,4 +1,4 @@
-package org.jeesl.processor;
+package org.jeesl.controller.io.ssi.wildfly;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -100,29 +100,6 @@ public class JbossStandaloneConfigurator
 		client.execute(new OperationBuilder(request).build());
 	}
 	
-	public void createPostgresDriver() throws IOException
-	{		
-		ModelNode request = new ModelNode();
-		request.get(ClientConstants.OP).set(ClientConstants.ADD);
-		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
-		request.get(ClientConstants.OP_ADDR).add("jdbc-driver","postgres");
-		request.get("driver-name").set("postgres");
-		
-		if(eapVersion.equals("8.0"))
-		{
-			request.get("driver-module-name").set("org.postgresql.jdbc");
-			request.get("driver-class-name").set("org.postgresql.Driver");
-		}
-		else
-		{
-			request.get("driver-module-name").set("org.postgresql");
-			request.get("driver-xa-datasource-class-name").set("org.postgresql.xa.PGXADataSource");
-		}
-		
-		
-		client.execute(new OperationBuilder(request).build());
-	}
-	
 	public String createMariaDbDatasource(Configuration config, String context) throws IOException
 	{
 		String cfgDbDs = "db."+context+".ds";
@@ -191,39 +168,6 @@ public class JbossStandaloneConfigurator
 		return null;
 	}
 	
-	public String createPostgresDatasource(Configuration config, String context) throws IOException
-	{
-		String cfgDbDs = "db."+context+".ds";
-		String cfgDbHost = "db."+context+".host";
-		String cfgDbPort = "db."+context+".port";
-		String cfgDbName = "db."+context+".db";
-		String cfgDbUser = "db."+context+".user";
-		String cfgDbPwd = "db."+context+".pwd";
-		
-		String pDbDs = config.getString(cfgDbDs);
-		String pDbHost = config.getString(cfgDbHost);
-		String pDbPort = config.getString(cfgDbPort,"5432");
-		String pDbName = config.getString(cfgDbName);
-		String pDbUser = config.getString(cfgDbUser);
-		String pDbPwd = config.getString(cfgDbPwd);
-		
-		logger.debug(cfgDbPwd+"\t"+pDbDs);
-		logger.debug(cfgDbHost+"\t"+pDbHost);
-		logger.debug(cfgDbName+"\t"+pDbName);
-		logger.debug(cfgDbUser+"\t"+pDbUser);
-		logger.debug(cfgDbPwd+"\t"+pDbPwd);
-		
-		if(!this.dsExists(cfgDbDs))
-		{
-			createPostgresDatasource(pDbDs,pDbHost,pDbPort,pDbName,null,pDbUser,pDbPwd);
-			StringBuilder sb = new StringBuilder();
-			sb.append(pDbDs);
-			sb.append(" ").append(pDbHost).append(":").append(pDbPort);
-			return sb.toString();
-		}
-		return null;
-	}
-	
 	public void createMariadbDatasource(String name, String host, String port, String db, String jdbcParamter, String username, String password) throws IOException
 	{		
 		ModelNode request = new ModelNode();
@@ -266,32 +210,6 @@ public class JbossStandaloneConfigurator
 		client.execute(new OperationBuilder(request).build());
 	}
 	
-	public void createPostgresDatasource(String name, String host, String port, String db, String jdbcParamter, String username, String password) throws IOException
-	{		
-		ModelNode request = new ModelNode();
-		request.get(ClientConstants.OP).set(ClientConstants.ADD);
-		request.get(ClientConstants.OP_ADDR).add("subsystem","datasources");
-		request.get(ClientConstants.OP_ADDR).add("data-source",name);
-		
-		datasource(request,name);
-		connection(request,"postgresql",host,port,db,jdbcParamter);
-		request.get("driver-name").set("postgres");
-		request.get("transaction-isolation").set("TRANSACTION_READ_COMMITTED");
-		 
-		this.pool(request);
-		security(request,username,password);
-		  
-		request.get("prepared-statements-cache-size").set(32);
-		request.get("share-prepared-statements").set(true);
-		
-		//Validation
-		request.get("check-valid-connection-sql").set("select 1");
-		request.get("background-validation").set(true);
-		request.get("background-validation-millis").set(5000);
-		  
-		client.execute(new OperationBuilder(request).build());
-	}
-	
 	private void datasource(ModelNode request, String name)
 	{
 		request.get("jta").set(true);
@@ -329,69 +247,4 @@ public class JbossStandaloneConfigurator
 	}
 	
 	
-	public void cachContainer(String name, String[] caches) throws IOException
-	{	
-		// More info on how this works can be found here
-		// https://stackoverflow.com/questions/76865879/how-to-add-a-cache-programmatically-in-wildfly-jboss-using-the-detyped-java-api
-		
-		ModelNode cacheContainer = new ModelNode();		
-		cacheContainer.get(ClientConstants.OP_ADDR).add("subsystem","infinispan");
-		cacheContainer.get(ClientConstants.OP_ADDR).add("cache-container",name);
-		cacheContainer.get(ClientConstants.OP).set(ClientConstants.ADD);
-		
-		ModelNode transport = cacheContainer.clone();
-		transport.get(ClientConstants.OP_ADDR).add("transport","jgroups");		
-		transport.get("lock-timeout").set(60000);
-		transport.get(ClientConstants.OP).set(ClientConstants.ADD);
-		
-		ModelNode result = client.execute(new OperationBuilder(cacheContainer).build());
-		System.out.println(result.toString());
-		
-		result = client.execute(new OperationBuilder(transport).build());
-		System.out.println(result.toString());
-		
-		for(String type : caches)
-		{
-			if(type.equals("menu")) {this.createCacheReplicated(cacheContainer,type);}
-			else if(type.equals("icon")) {this.createCacheLocal(cacheContainer,type);}
-			else if(type.equals("ofx")) {this.createCacheLocal(cacheContainer,type);}
-			else if(type.equals("report")) {this.createCacheLocal(cacheContainer,type);}
-			else if(type.equals("aom")) {this.createCacheLocal(cacheContainer,type);}
-		}
-	}
-
-	public void createCacheReplicated(ModelNode container, String cacheName) throws IOException
-	{
-		ModelNode replicatedCache = container.clone();
-		replicatedCache.get(ClientConstants.OP_ADDR).add("replicated-cache",cacheName);		
-		replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
-		
-		ModelNode replicatedCacheTransaction = replicatedCache.clone();	
-		replicatedCacheTransaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
-		replicatedCacheTransaction.get("mode").set("BATCH");
-		replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
-		
-		ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
-		System.out.println(result.toString());
-
-		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
-		System.out.println(result.toString());
-	}
-	public void createCacheLocal(ModelNode container, String cacheName) throws IOException
-	{
-		ModelNode replicatedCache = container.clone();
-		replicatedCache.get(ClientConstants.OP_ADDR).add("local-cache",cacheName);		
-		replicatedCache.get(ClientConstants.OP).set(ClientConstants.ADD);
-		
-		ModelNode replicatedCacheTransaction = replicatedCache.clone();	
-		replicatedCacheTransaction.get(ClientConstants.OP_ADDR).add("component","transaction");		
-		replicatedCacheTransaction.get("mode").set("BATCH");
-		replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
-		
-		ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
-		System.out.println(result.toString());
-
-		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
-		System.out.println(result.toString());
-	}
 }

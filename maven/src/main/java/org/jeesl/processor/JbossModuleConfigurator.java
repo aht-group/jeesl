@@ -4,18 +4,18 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.ahtutils.controller.util.MavenArtifactResolver;
-import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
-
 import org.apache.commons.io.FileUtils;
+import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.ahtutils.controller.util.MavenArtifactResolver;
+import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
+
+@Deprecated
 public class JbossModuleConfigurator
 {
 	final static Logger logger = LoggerFactory.getLogger(JbossModuleConfigurator.class);
-	
-	private static final String srcBaseDir = "jeesl/system/io/config/jboss";
 	
 	public static enum Product {eap}
 		
@@ -49,7 +49,7 @@ public class JbossModuleConfigurator
 		if(!moduleMain.exists()){moduleMain.mkdir();}
 		if(!moduleXml.exists())
 		{
-			String src = srcBaseDir+"/"+product+"/"+version+"/postgres.xml";
+			String src = AbstractEapDsConfigurator.srcBaseDir+"/"+product+"/"+version+"/postgres.xml";
 			logger.info("Available:"+mrl.isAvailable(src)+" "+src);
 			InputStream input = mrl.searchIs(src);
 			FileUtils.copyInputStreamToFile(input, moduleXml);
@@ -112,7 +112,7 @@ public class JbossModuleConfigurator
 		if(!dirMain.exists()){dirMain.mkdirs();}
 		if(!moduleXml.exists())
 		{
-			String src = srcBaseDir+"/"+product+"/"+version+"/mysql.xml";
+			String src = AbstractEapDsConfigurator.srcBaseDir+"/"+product+"/"+version+"/mysql.xml";
 			logger.info("Available?"+mrl.isAvailable(src)+" "+src+" to "+moduleXml.getAbsolutePath());
 			InputStream input = mrl.searchIs(src);
 			FileUtils.copyInputStreamToFile(input, moduleXml);
@@ -149,7 +149,7 @@ public class JbossModuleConfigurator
 		if(!dirMain.exists()){dirMain.mkdir();}
 		if(!moduleXml.exists())
 		{
-			String src = srcBaseDir+"/"+product+"/"+version+"/mariadb.xml";
+			String src = AbstractEapDsConfigurator.srcBaseDir+"/"+product+"/"+version+"/mariadb.xml";
 			logger.info("Available?"+mrl.isAvailable(src)+" "+src+" to "+moduleXml.getAbsolutePath());
 			InputStream input = mrl.searchIs(src);
 			FileUtils.copyInputStreamToFile(input, moduleXml);
@@ -165,7 +165,7 @@ public class JbossModuleConfigurator
 		}
 	}
 	
-	public void envers() throws IOException
+	public void envers2() throws IOException
 	{
 		File hibernateBase = new File(jbossBaseDir,buildMobuleBase("org"+File.separator+"hibernate"+File.separator+"envers"));
 		File moduleMain = new File(hibernateBase,"main");
@@ -174,7 +174,7 @@ public class JbossModuleConfigurator
 		if(!hibernateBase.exists()){hibernateBase.mkdir();}
 		if(!moduleMain.exists()){moduleMain.mkdir();}
 		
-		String src = srcBaseDir+"/"+product+"/"+version+"/envers.xml";
+		String src = AbstractEapDsConfigurator.srcBaseDir+"/"+product+"/"+version+"/envers.xml";
 		InputStream input = mrl.searchIs(src);
 		FileUtils.copyInputStreamToFile(input, moduleXml);
 		
@@ -193,7 +193,7 @@ public class JbossModuleConfigurator
 		if(!hibernateBase.exists()){hibernateBase.mkdir();}
 		if(!moduleMain.exists()){moduleMain.mkdir();}
 		
-		String src = srcBaseDir+"/"+product+"/"+version+"/hibernate.xml";
+		String src = AbstractEapDsConfigurator.srcBaseDir+"/"+product+"/"+version+"/hibernate.xml";
 		InputStream input = mrl.searchIs(src);
 		
 		if(version.equals("6.3"))
@@ -222,11 +222,7 @@ public class JbossModuleConfigurator
 			
 			//Should match the hibernate version of EAP7.2.x
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.hibernate:hibernate-spatial:5.3.15.Final"),moduleMain);
-			
-			//Find the version in hibernate-spatial
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("org.geolatte:geolatte-geom:1.3.0"),moduleMain);
-			
-			//Find the version in geolatte-geom
 			FileUtils.copyFileToDirectory(MavenArtifactResolver.resolve("com.vividsolutions:jts-core:1.14.0"),moduleMain);
 		}
 		else if(version.equals("7.3"))

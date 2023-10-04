@@ -1,5 +1,6 @@
 package org.jeesl.factory.json.io.ssi.core;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
@@ -8,6 +9,14 @@ import org.jeesl.model.json.io.ssi.core.JsonSsiSystem;
 public class JsonSsiSystemFactory<SYSTEM extends JeeslIoSsiSystem<?,?>>
 {
 	private JsonSsiSystem q;
+	private JsonSsiSystem json;
+	
+	public static <SYSTEM extends JeeslIoSsiSystem<?,?>> JsonSsiSystemFactory<SYSTEM> instance() {return new JsonSsiSystemFactory<SYSTEM>(null);}
+	
+	public JsonSsiSystemFactory<SYSTEM> fluent() {json = new JsonSsiSystem(); return this;}
+	public JsonSsiSystemFactory<SYSTEM> credentials() {json.setCredentials(new ArrayList<>()); return this;}
+	public JsonSsiSystemFactory<SYSTEM> code(String code) {json.setCode(code); return this;}
+	public JsonSsiSystem json() {return json;}
 	
 	public JsonSsiSystemFactory(JsonSsiSystem q)
 	{
