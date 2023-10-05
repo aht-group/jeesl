@@ -17,7 +17,7 @@ import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
 import org.jeesl.factory.xml.system.status.XmlDataTypeFactory;
 import org.jeesl.factory.xml.system.status.XmlImplementationFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
-import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.util.query.xml.XmlStatusQuery;
 
 import net.sf.ahtutils.xml.aht.Query;
@@ -196,7 +196,7 @@ public class XmlReportQuery
 		Layout xml = XmlLayoutFactory.build();
 		xml.setOffset(XmlOffsetFactory.build());
 		xml.setStyles(XmlStylesFactory.build(XmlStyleFactory.build("")));
-		xml.getSize().add(XmlSizeFactory.build(JeeslReportLayout.ColumnWidth.none, XmlTypeFactory.create(""), 1));
+		xml.getSize().add(XmlSizeFactory.build(JeeslReportColumnWidth.Code.none, XmlTypeFactory.create(""), 1));
 		return xml;
 	}
 	

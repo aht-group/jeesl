@@ -1,11 +1,10 @@
 package org.jeesl.factory.xls.system.io.report;
 
 import java.util.List;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
-
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellReference;
@@ -15,6 +14,7 @@ import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRowType;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportTemplate;
+import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportLayout;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.interfaces.model.io.report.xlsx.JeeslReportCell;
@@ -66,7 +66,7 @@ public class XlsColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 				COLUMN ioColumn = columns.get(i);
 				if(ioColumn.getColumWidth()!=null)
 				{
-					switch(JeeslReportLayout.ColumnWidth.valueOf(ioColumn.getColumWidth().getCode()))
+					switch(JeeslReportColumnWidth.Code.valueOf(ioColumn.getColumWidth().getCode()))
 					{
 						case none: break;
 						case auto: ((SXSSFSheet)sheet).trackColumnForAutoSizing(i);break;
@@ -86,7 +86,7 @@ public class XlsColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 			COLUMN ioColumn = columns.get(i);
 			if(ioColumn.getColumWidth()!=null)
 			{
-				switch(JeeslReportLayout.ColumnWidth.valueOf(ioColumn.getColumWidth().getCode()))
+				switch(JeeslReportColumnWidth.Code.valueOf(ioColumn.getColumWidth().getCode()))
 				{
 					case none: break;
 					case auto: 

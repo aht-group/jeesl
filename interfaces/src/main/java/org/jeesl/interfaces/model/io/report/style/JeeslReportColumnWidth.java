@@ -23,4 +23,5 @@ public interface JeeslReportColumnWidth <L extends JeeslLang, D extends JeeslDes
 											
 											EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {
+	public enum Code {none,auto,exact}
 }
