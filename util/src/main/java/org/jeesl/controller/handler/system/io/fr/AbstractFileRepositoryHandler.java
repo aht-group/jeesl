@@ -307,14 +307,14 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		if(Objects.nonNull(callback)) {callback.callbackFrMetaSelected();}
 	}
 	
-	@Override public void saveFile() throws JeeslConstraintViolationException, JeeslLockingException
+	@Override public META saveFile() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info("Saving: "+xmlFile.getName()+" Mode:"+mode);}
 		if(mode.equals(Mode.directSave))
 		{
 			if(debugOnInfo) {logger.info("Saving to FR "+storage.toString());}
 			meta = fFr.saveToFileRepository(meta,xmlFile.getData().getValue());
-			reload();
+			this.reload();
 		}
 		else
 		{
@@ -324,16 +324,21 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		
 		if(debugOnInfo) {logger.info("Saved");}
 		
+		META m = meta;
 		reset(false,true);
+		return m;
     }
 	public void saveMeta() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo) {logger.info("save meta "+meta.toString());}
-		if(FilenameUtils.getExtension(fileName).equals(FilenameUtils.getExtension(meta.getFileName())))
+		if(Objects.nonNull(fileName))
 		{
-			meta.setFileName(fileName);
+			if(FilenameUtils.getExtension(fileName).equals(FilenameUtils.getExtension(meta.getFileName())))
+			{
+				meta.setFileName(fileName);
+			}
+			else {meta.setFileName(fileName+"."+FilenameUtils.getExtension(meta.getFileName()));}
 		}
-		else {meta.setFileName(fileName+"."+FilenameUtils.getExtension(meta.getFileName()));}
 		
 		if(mode.equals(Mode.directSave))
 		{

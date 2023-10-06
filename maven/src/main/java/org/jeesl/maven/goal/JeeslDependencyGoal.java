@@ -77,8 +77,7 @@ public class JeeslDependencyGoal extends AbstractMojo
 	
 	private Supplier<Collection<MavenProject>> subProjectsInReactorOrder()
 	{
-//	    return () -> this.mavenSession.getProjectDependencyGraph().getSortedProjects();
-		 return () -> new ArrayList<MavenProject>(Arrays.asList(project));
+		return () -> new ArrayList<MavenProject>(Arrays.asList(project));
 	}
 	
 	public void execute() throws MojoExecutionException
@@ -118,10 +117,10 @@ public class JeeslDependencyGoal extends AbstractMojo
 		    
 		    MavenGraphAdapter adapter = new MavenGraphAdapter(dependenciesResolver, transitiveIncludeExcludeFilter, targetFilter, EnumSet.of(INCLUDED));
 		    
-		    GraphFactory graphFactory = new AggregatingGraphFactory(adapter, subProjectsInReactorOrder(), globalFilter, graphBuilder,false,true);
+		    GraphFactory graphFactory = new AggregatingGraphFactory(adapter, subProjectsInReactorOrder(), globalFilter, graphBuilder,true,true);
 		    String dependencyGraph = graphFactory.createGraph(project);
 		    
-		    logger.trace(dependencyGraph);
+		    logger.info(dependencyGraph);
 		      
 		    try
 		    {

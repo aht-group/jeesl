@@ -39,7 +39,7 @@ public interface JeeslFileRepositoryHandler <LOC extends JeeslLocale<?,?,LOC,?>,
 	
 	InputStream download(META meta) throws JeeslNotFoundException;
 	
-	void saveFile()  throws JeeslConstraintViolationException, JeeslLockingException;
+	META saveFile()  throws JeeslConstraintViolationException, JeeslLockingException;
 	void saveThreadsafe(CONTAINER container, String name, byte[] bytes, String category) throws JeeslConstraintViolationException, JeeslLockingException;
 	<W extends JeeslWithFileRepositoryContainer<CONTAINER>> void saveDeferred(W with) throws JeeslConstraintViolationException, JeeslLockingException;
 	

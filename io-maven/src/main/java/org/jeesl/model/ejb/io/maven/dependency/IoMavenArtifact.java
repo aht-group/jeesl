@@ -1,5 +1,7 @@
 package org.jeesl.model.ejb.io.maven.dependency;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,6 +40,11 @@ public class IoMavenArtifact implements JeeslIoMavenArtifact<IoMavenGroup,IoMave
 	private IoMavenSuitability suitability;
 	@Override public IoMavenSuitability getSuitability() {return suitability;}
 	@Override public void setSuitability(IoMavenSuitability suitability) {this.suitability = suitability;}
+
+	@Basic @Column(columnDefinition="text")
+	private String remark;
+	@Override public String getRemark() {return remark;}
+	@Override public void setRemark(String remark) {this.remark = remark;}
 
 
 	@Override public boolean equals(Object object){return (object instanceof IoMavenArtifact) ? id == ((IoMavenArtifact) object).getId() : (object == this);}

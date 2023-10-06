@@ -11,7 +11,7 @@ import org.jeesl.interfaces.controller.web.io.ai.JeeslIoAiDeeplCallback;
 import org.jeesl.interfaces.model.io.ai.JeeslIoAiLanguage;
 import org.jeesl.jsf.handler.th.ThMultiFilterHandler;
 
-public class JeeslAiDeeplWc  <LANG extends JeeslIoAiLanguage<?,?,LANG,?>> implements ThMultiFilterBean
+public class JeeslAiDeeplWc <LANG extends JeeslIoAiLanguage<?,?,LANG,?>> implements ThMultiFilterBean
 {
 	private static final long serialVersionUID = 1L;
 	
