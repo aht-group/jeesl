@@ -453,6 +453,31 @@
 	
 	<profiles>
 		<profile>
+			<id>sass</id>
+			<build>
+				<plugins>
+				    <plugin>
+			            <groupId>org.codehaus.mojo</groupId>
+			            <artifactId>exec-maven-plugin</artifactId>
+			            <version>3.1.0</version>
+			            <executions>
+				            <execution>
+								<phase>compile</phase>
+				                <goals><goal>exec</goal></goals>
+				                <configuration>
+									<executable>sass</executable>
+									<arguments>
+										<argument>./src/main/resources/META-INF/resources/scss:src/main/webapp/resources/css</argument>
+										<argument>--no-source-map</argument>
+									</arguments>
+					            </configuration>
+				            </execution>
+				        </executions>
+			        </plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>jakarta</id>
 			
 			<build>
