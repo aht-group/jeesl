@@ -309,7 +309,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 	
 	@Override public META saveFile() throws JeeslConstraintViolationException, JeeslLockingException
 	{
-		if(debugOnInfo) {logger.info("Saving: "+xmlFile.getName()+" Mode:"+mode);}
+		if(debugOnInfo) {logger.info("Saving: "+xmlFile.getName()+" to "+storage.getCode()+" with "+mode+" mode.");}
 		if(mode.equals(Mode.directSave))
 		{
 			if(debugOnInfo) {logger.info("Saving to FR "+storage.toString());}
@@ -453,7 +453,7 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		return DefaultStreamedContent.builder().contentType(JeeslZipReport.mimeType).stream(()->is).name(this.getZipName()).build();
 	}
 
-	public void copyTo(JeeslFileRepositoryHandler<LOC,STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
+	@Override public void copyTo(JeeslFileRepositoryHandler<LOC,STORAGE,CONTAINER,META> target) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		logger.info("Copy To");
 		for(META oldMeta : metas)
@@ -466,12 +466,11 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 		}
 	}
 	
-	public void moveTo(STORAGE storage) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
+	public void moveTo1(STORAGE storage) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		for(META m : metas)
 		{
 			byte[] bytes = fFr.loadFromFileRepository(m);
-			
 			fFr.saveToFileRepository(m,bytes);
 		}
 	}

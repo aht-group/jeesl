@@ -31,7 +31,8 @@
 </composite:interface>
 
 <composite:implementation>
-	<p:dataTable id="dtProject" var="p" value="#{cc.attrs.handler.tbList}"
+	<p:dataTable id="dtProject" styleClass="jeesl-datatable"
+			var="p" value="#{cc.attrs.handler.tbList}"
 			selection="#{cc.attrs.handler.tb}" selectionMode="single" rowKey="#{p.id}">
 		<f:facet name="header">
 			<j:dtHeader id="dth" title="#{cc.attrs.tableHeader}">
