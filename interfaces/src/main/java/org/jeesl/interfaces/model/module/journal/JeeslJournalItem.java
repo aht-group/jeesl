@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.module.diary;
+package org.jeesl.interfaces.model.module.journal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,11 +15,11 @@ import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 
-public interface JeeslLogItem <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslJournalItem <L extends JeeslLang, D extends JeeslDescription,
 								M extends JeeslIoMarkup<MT>, MT extends JeeslIoMarkupType<L,D,MT,?>,
-								LOG extends JeeslLogBook<?,?>,
-								IMPACT extends JeeslLogImpact<L,D,IMPACT,?>,
-								CONF extends JeeslLogConfidentiality<L,D,CONF,?>,
+								LOG extends JeeslJournalBook<?,?>,
+								IMPACT extends JeeslJournalImpact<L,D,IMPACT,?>,
+								CONF extends JeeslJournalConfidentiality<L,D,CONF,?>,
 								USER extends EjbWithId
 								>
 		extends Serializable,EjbWithId,

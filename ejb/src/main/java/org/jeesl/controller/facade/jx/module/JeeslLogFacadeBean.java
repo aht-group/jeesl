@@ -23,12 +23,12 @@ import org.jeesl.api.facade.module.JeeslLogFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.LogFactoryBuilder;
-import org.jeesl.interfaces.model.module.diary.JeeslLogBook;
-import org.jeesl.interfaces.model.module.diary.JeeslLogConfidentiality;
-import org.jeesl.interfaces.model.module.diary.JeeslLogImpact;
-import org.jeesl.interfaces.model.module.diary.JeeslLogItem;
-import org.jeesl.interfaces.model.module.diary.JeeslLogScope;
-import org.jeesl.interfaces.model.module.diary.JeeslWithDiary;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalItem;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
+import org.jeesl.interfaces.model.module.journal.JeeslWithJournal;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -39,11 +39,11 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.DateUtil;
 
 public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
-									LOG extends JeeslLogBook<SCOPE,ITEM>,
-									SCOPE extends JeeslLogScope<L,D,SCOPE,?>,
-									ITEM extends JeeslLogItem<L,D,?,?,LOG,IMPACT,CONF,USER>,
-									IMPACT extends JeeslLogImpact<L,D,IMPACT,?>,
-									CONF extends JeeslLogConfidentiality<L,D,CONF,?>,
+									LOG extends JeeslJournalBook<SCOPE,ITEM>,
+									SCOPE extends JeeslJournalScope<L,D,SCOPE,?>,
+									ITEM extends JeeslJournalItem<L,D,?,?,LOG,IMPACT,CONF,USER>,
+									IMPACT extends JeeslJournalImpact<L,D,IMPACT,?>,
+									CONF extends JeeslJournalConfidentiality<L,D,CONF,?>,
 									USER extends EjbWithId
 									>
 					extends JeeslFacadeBean
@@ -61,13 +61,13 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		this.fbLog=fbLog;
 	}
 	
-	public <OWNER extends JeeslWithDiary<LOG>> OWNER fDiaryOwner(Class<OWNER> cOwner, LOG diary) throws JeeslNotFoundException
+	public <OWNER extends JeeslWithJournal<LOG>> OWNER fDiaryOwner(Class<OWNER> cOwner, LOG diary) throws JeeslNotFoundException
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<OWNER> cQ = cB.createQuery(cOwner);
 		Root<OWNER> owner = cQ.from(cOwner);
         
-        Path<LOG> pDiary = owner.get(JeeslWithDiary.Attributes.log.toString());   
+        Path<LOG> pDiary = owner.get(JeeslWithJournal.Attributes.log.toString());   
         CriteriaQuery<OWNER> select = cQ.select(owner);
 	    select.where(cB.equal(pDiary,diary));
 
@@ -84,8 +84,8 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		Root<ITEM> item = cQ.from(fbLog.getClassItem());
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		Join<ITEM,LOG> jLog = item.join(JeeslLogItem.Attributes.log.toString());
-		Path<Date> pRecord = item.get(JeeslLogItem.Attributes.record.toString());
+		Join<ITEM,LOG> jLog = item.join(JeeslJournalItem.Attributes.log.toString());
+		Path<Date> pRecord = item.get(JeeslJournalItem.Attributes.record.toString());
 		
 		predicates.add(jLog.in(logs));
 		
@@ -107,7 +107,7 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		Root<ITEM> item = cQ.from(fbLog.getClassItem());
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		
-		Join<ITEM,LOG> jBook = item.join(JeeslLogItem.Attributes.log.toString());
+		Join<ITEM,LOG> jBook = item.join(JeeslJournalItem.Attributes.log.toString());
 		if(books!=null)
 		{
 			predicates.add(jBook.in(books));
@@ -115,17 +115,17 @@ public class JeeslLogFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		
 		if(scopes!=null)
 		{
-			Join<LOG,SCOPE> jScope = jBook.join(JeeslLogBook.Attributes.scope.toString());
+			Join<LOG,SCOPE> jScope = jBook.join(JeeslJournalBook.Attributes.scope.toString());
 			predicates.add(jScope.in(scopes));
 		}
 		
 		if(ObjectUtils.isNotEmpty(confidentialities))
 		{
-			ListJoin<ITEM,CONF> jConf = item.joinList(JeeslLogItem.Attributes.confidentialities.toString());
+			ListJoin<ITEM,CONF> jConf = item.joinList(JeeslJournalItem.Attributes.confidentialities.toString());
 			predicates.add(jConf.in(confidentialities));
 		}
 		
-		Expression<Date> eRecord = item.get(JeeslLogItem.Attributes.record.toString());
+		Expression<Date> eRecord = item.get(JeeslJournalItem.Attributes.record.toString());
 		if(Objects.nonNull(startDate))
 		{
 			predicates.add(cB.greaterThan(eRecord,DateUtil.toDate(startDate.atStartOfDay())));

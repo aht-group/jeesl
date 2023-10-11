@@ -3,11 +3,11 @@ package org.jeesl.factory.builder.module;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.module.log.EjbLogBookFactory;
 import org.jeesl.factory.ejb.module.log.EjbLogItemFactory;
-import org.jeesl.interfaces.model.module.diary.JeeslLogBook;
-import org.jeesl.interfaces.model.module.diary.JeeslLogConfidentiality;
-import org.jeesl.interfaces.model.module.diary.JeeslLogImpact;
-import org.jeesl.interfaces.model.module.diary.JeeslLogItem;
-import org.jeesl.interfaces.model.module.diary.JeeslLogScope;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalItem;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -15,11 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LogFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
-								LOG extends JeeslLogBook<SCOPE,ITEM>,
-								SCOPE extends JeeslLogScope<L,D,SCOPE,?>,
-								ITEM extends JeeslLogItem<L,D,?,?,LOG,IMPACT,CONF,USER>,
-								IMPACT extends JeeslLogImpact<L,D,IMPACT,?>,
-								CONF extends JeeslLogConfidentiality<L,D,CONF,?>,
+								LOG extends JeeslJournalBook<SCOPE,ITEM>,
+								SCOPE extends JeeslJournalScope<L,D,SCOPE,?>,
+								ITEM extends JeeslJournalItem<L,D,?,?,LOG,IMPACT,CONF,USER>,
+								IMPACT extends JeeslJournalImpact<L,D,IMPACT,?>,
+								CONF extends JeeslJournalConfidentiality<L,D,CONF,?>,
 								USER extends EjbWithId
 								>
 	extends AbstractFactoryBuilder<L,D>
