@@ -7,6 +7,7 @@
 		
 	<composite:interface>
 		<composite:attribute name="ctrl" required="true"/>
+		<composite:attribute name="height" required="false" default="12"/>
 	</composite:interface>
 	
 	<composite:implementation>
@@ -14,7 +15,7 @@
 	<j:row>
 		<j:slot id="sLeft" width="6">
 			<h:form id="fInput">
-				<p:panel styleClass="jeesl-panel">
+				<p:panel styleClass="jeesl-panel jeesl-panel-deepl">
 					<f:facet name="header">
 						<j:pHeader entity="IoCryptoKey">
 							
@@ -22,10 +23,31 @@
 					</f:facet>
 					<f:facet name="actions">
 						<jp:thFilter handler="#{cc.attrs.ctrl.thSource}"/>
+						
+						<p:selectOneMenu value="#{cc.attrs.ctrl.thSource.selectedSingle}" var="locale">
+							<f:selectItems value="#{cc.attrs.ctrl.thSource.list}"
+										   var="lang"
+										   itemLabel="&lt;img height=&quot;#{cc.attrs.height}&quot; src=&quot;/jeesl/image/symbolizer/graphic/#{lang.class.name}/#{cc.attrs.height}/#{lang.id}&quot; /&gt;"
+										   itemLabelEscaped="false"
+										   itemValue="lang"></f:selectItems>
+							
+							<ui:remove><p:column>
+								<h:graphicImage height="#{cc.attrs.height}" value="/image/symbolizer/graphic/#{locale.class.name}/#{cc.attrs.height}/#{locale.id}"></h:graphicImage>
+							</p:column></ui:remove>
+						</p:selectOneMenu>
+						
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.translate()}" update=":#{cc.id}:grid" />
 					</f:facet>
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
-						<jtp:inputRemark value="#{cc.attrs.ctrl.input}"/>
+					
+					
+					
+						<p:inputTextarea styleClass="jeesl-deepl-textarea" value="#{cc.attrs.ctrl.input}">
+							<p:remoteCommand name="deeplTranslate" actionListener="#{cc.attrs.ctrl.translate}" immediate="true" update=":#{cc.id}:grid"/>
+						</p:inputTextarea>
+					
+					
+					
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
@@ -48,5 +70,7 @@
 		</j:slot>
 	</j:row>
 </jp:grid>
+						
+		<h:outputScript library="jeeslJs" name="deepl.js"/>
 	</composite:implementation>
 </html>

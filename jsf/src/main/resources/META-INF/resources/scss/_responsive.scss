@@ -1344,6 +1344,17 @@ $enable-pointer-cursor-for-buttons: true;
 		}
 	}
 	
+	&.jeesl-panel-deepl {
+		.ui-panel-content {
+			padding: 0;
+			
+			.ui-inputtextarea {
+				font-size: 2em;
+				padding: $wide-spacing !important;
+			}
+		}
+	}
+	
 	&.jeesl-galleria {
 		padding: 0;
 		
