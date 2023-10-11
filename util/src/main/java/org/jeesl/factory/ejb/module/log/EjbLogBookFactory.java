@@ -1,12 +1,12 @@
 package org.jeesl.factory.ejb.module.log;
 
-import org.jeesl.interfaces.model.module.diary.JeeslLogBook;
-import org.jeesl.interfaces.model.module.diary.JeeslLogScope;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbLogBookFactory<LOG extends JeeslLogBook<SCOPE,?>,
-							SCOPE extends JeeslLogScope<?,?,SCOPE,?>
+public class EjbLogBookFactory<LOG extends JeeslJournalBook<SCOPE,?>,
+							SCOPE extends JeeslJournalScope<?,?,SCOPE,?>
 >
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbLogBookFactory.class);

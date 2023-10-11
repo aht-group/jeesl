@@ -23,6 +23,7 @@ public class EjbMavenVersionFactory
 	
 	public static void converter(JeeslFacade facade, IoMavenVersion ejb)
 	{
+		if(Objects.nonNull(ejb.getLabel())) {ejb.setLabel(ejb.getLabel().trim());}
 		if(Objects.nonNull(ejb.getOutdate())) {ejb.setOutdate(facade.find(IoMavenOutdate.class,ejb.getOutdate()));}
 		if(Objects.nonNull(ejb.getMaintainer())) {ejb.setMaintainer(facade.find(IoMavenMaintainer.class,ejb.getMaintainer()));}
 		if(Objects.nonNull(ejb.getLabel())) {ejb.setLabel(ejb.getLabel().trim());}

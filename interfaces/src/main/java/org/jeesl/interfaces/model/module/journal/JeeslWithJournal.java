@@ -1,8 +1,8 @@
-package org.jeesl.interfaces.model.module.diary;
+package org.jeesl.interfaces.model.module.journal;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslWithDiary <DIARY extends JeeslLogBook<?,?>>
+public interface JeeslWithJournal <DIARY extends JeeslJournalBook<?,?>>
 		extends EjbWithId
 {
 	public enum Attributes{log}

@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.module.diary;
+package org.jeesl.interfaces.model.module.journal;
 
 import java.io.Serializable;
 
@@ -11,7 +11,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
-public interface JeeslLogImpact <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>,G extends JeeslGraphic<?,?,?>>
+public interface JeeslJournalScope <L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>,G extends JeeslGraphic<?,?,?>>
 									extends Serializable,EjbPersistable,
 									EjbWithCode,JeeslStatusFixedCode,
 //									JeeslOptionRestDownload,

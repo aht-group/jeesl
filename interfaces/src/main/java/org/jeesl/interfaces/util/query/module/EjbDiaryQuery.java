@@ -6,21 +6,21 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import org.jeesl.interfaces.model.module.diary.JeeslLogBook;
-import org.jeesl.interfaces.model.module.diary.JeeslLogConfidentiality;
-import org.jeesl.interfaces.model.module.diary.JeeslLogImpact;
-import org.jeesl.interfaces.model.module.diary.JeeslLogItem;
-import org.jeesl.interfaces.model.module.diary.JeeslLogScope;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalItem;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalScope;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalBook;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalImpact;
+import org.jeesl.interfaces.model.module.journal.JeeslJournalConfidentiality;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbDiaryQuery <BOOK extends JeeslLogBook<SCOPE,ITEM>,
-								SCOPE extends JeeslLogScope<?,?,SCOPE,?>,
-								ITEM extends JeeslLogItem<?,?,?,?,BOOK,IMPACT,CONF,USER>,
-								IMPACT extends JeeslLogImpact<?,?,IMPACT,?>,
-								CONF extends JeeslLogConfidentiality<?,?,CONF,?>,
+public class EjbDiaryQuery <BOOK extends JeeslJournalBook<SCOPE,ITEM>,
+								SCOPE extends JeeslJournalScope<?,?,SCOPE,?>,
+								ITEM extends JeeslJournalItem<?,?,?,?,BOOK,IMPACT,CONF,USER>,
+								IMPACT extends JeeslJournalImpact<?,?,IMPACT,?>,
+								CONF extends JeeslJournalConfidentiality<?,?,CONF,?>,
 								USER extends EjbWithId>
 			extends AbstractEjbQuery
 {

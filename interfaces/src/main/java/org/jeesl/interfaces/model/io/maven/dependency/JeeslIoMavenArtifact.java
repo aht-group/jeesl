@@ -26,4 +26,7 @@ public interface JeeslIoMavenArtifact <GROUP extends JeeslIoMavenGroup,
 	
 	SUITABILITY getSuitability();
 	void setSuitability(SUITABILITY suitability);
+	
+	String getRemark();
+	void setRemark(String remark);
 }

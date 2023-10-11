@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.module.diary;
+package org.jeesl.interfaces.model.module.journal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
-public interface JeeslLogBook <SCOPE extends JeeslLogScope<?,?,SCOPE,?>,
-								ITEM extends JeeslLogItem<?,?,?,?,?,?,?,?>>
+public interface JeeslJournalBook <SCOPE extends JeeslJournalScope<?,?,SCOPE,?>,
+								ITEM extends JeeslJournalItem<?,?,?,?,?,?,?,?>>
 		extends Serializable,EjbSaveable,EjbWithId
 {
 	public enum Attributes{scope}

@@ -24,7 +24,7 @@
 						<j:dtHeader entity="IoMavenArtifact" code="listOf"/>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectArtifact()}" update=":#{cc.id}:sArtifact"/>  
-		            <p:column>
+		            <p:column filterBy="#{a.group.code}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">>
 		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet>
 						<h:outputText value="#{a.group.code}" />  
 		            </p:column>
@@ -66,6 +66,9 @@
 						<p:selectOneMenu value="#{cc.attrs.ctrl.artifact.suitability}" effect="fade" autoWidth="false" dynamic="true">
 							<f:selectItems value="#{cc.attrs.ctrl.suitabilities}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
+					
+						<jtp:label entity="IoMavenArtifact" code="remark"/>
+						<jtp:inputRemark value="#{cc.attrs.ctrl.artifact.remark}"/>
 					
 					</j:inputGrid>
 				</p:panel>
