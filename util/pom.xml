@@ -136,6 +136,8 @@
 	 	<dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
+		<!--	<version>2.14.0</version>-->
+		<!-- Activate if problems occur with Apache POI upgrade (Issue 1018) -->
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>

@@ -129,6 +129,8 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
         Font font = wb.createFont();
         font.setItalic(true);
         font.setBold(true);
+		font.setFontName("Arial");
+		font.setFontHeight((short)(9*20));
 
         // Create styles
         dateHeaderStyle = wb.createCellStyle();

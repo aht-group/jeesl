@@ -48,6 +48,13 @@
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itextpdf</artifactId>
 		</dependency>
+		
+		<dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+		<!--	<version>2.14.0</version>-->
+		<!-- Activate if problems occur with Apache POI upgrade (Issue 1018) -->
+        </dependency>
 
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
@@ -178,10 +185,12 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
+			<version>5.2.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
+			<version>5.2.3</version>
 		</dependency>
 
 		<!-- Chart -->

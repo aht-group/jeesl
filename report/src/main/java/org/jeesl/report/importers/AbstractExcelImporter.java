@@ -110,7 +110,7 @@ public abstract class AbstractExcelImporter <C extends Serializable, I extends I
         for(int cellNum = excelRow.getFirstCellNum(); cellNum < excelRow.getLastCellNum(); cellNum++)
         {
            Cell cell = excelRow.getCell(cellNum);
-           if(cell != null && cell.getCellTypeEnum() != CellType.BLANK && StringUtils.isNotBlank(cell.toString()))
+           if(cell != null && cell.getCellType() != CellType.BLANK && StringUtils.isNotBlank(cell.toString()))
            {
                 rowExists = true;
            }    

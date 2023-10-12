@@ -29,8 +29,7 @@ public class Highlight extends UINamingContainer
 		
 		if(is!=null)
 		{
-			try
-			{
+			
 				list = IOUtils.readLines(is, "UTF-8");
 				for(int i=0;i<list.size();i++)
 				{
@@ -45,8 +44,7 @@ public class Highlight extends UINamingContainer
 						}
 					}
 				}
-			}
-			catch (IOException e) {return e.getMessage();}
+			
 			
 		}
 		else {return resourceNotFound(input);}
@@ -79,12 +77,10 @@ public class Highlight extends UINamingContainer
 			
 			if(from!=0 || to !=-1)
 			{
-				try
-				{
+				
 					List<String> list = IOUtils.readLines(is, "UTF-8");
 					writer.write(build(list, from, to));
-				}
-				catch (IOException e){logger.error(e.getMessage());e.printStackTrace();}
+				
 			}
 			else
 			{			
