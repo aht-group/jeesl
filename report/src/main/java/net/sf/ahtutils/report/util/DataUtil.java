@@ -71,7 +71,7 @@ public class DataUtil {
 			}
 			// Depending on the cell type, the value is read using Apache POI methods
 			
-			switch (cell.getCellTypeEnum()) {
+			switch (cell.getCellType()) {
 			
 				// String are easy to handle
 				case STRING : 
