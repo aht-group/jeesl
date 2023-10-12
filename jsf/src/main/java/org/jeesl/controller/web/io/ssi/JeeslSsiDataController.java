@@ -60,6 +60,8 @@ public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescrip
 
 	private String json; public String getJson() {return json;} public void setJson(String json) {this.json = json;}
 
+	private Long ref2; public Long getRef2() {return ref2;} public void setRef2(Long ref2) {this.ref2 = ref2;}
+
 	public JeeslSsiDataController(final JeeslIoSsiDataCallback callback, IoSsiDataFactoryBuilder<L,D,?,?,?,DATA,STATUS,?,?,?> fbSsiData)
 	{
 //		super(fbSsiData.getClassL(),fbSsiData.getClassD());
@@ -98,9 +100,9 @@ public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescrip
 		EjbIoSsiQuery<CTX,STATUS> query = new EjbIoSsiQuery<>();
 		query.setFirstResult(first);
 		query.setMaxResults(pageSize);
+		query.id2(ref2);
 		if(Objects.nonNull(context)) {query.add(context);}
 		
-
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 		super.setRowCount(fSsi.cSsiData(query).intValue());
 		datas.addAll(fSsi.fSsiData(query));

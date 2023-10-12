@@ -32,7 +32,9 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 
 	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear(); this.list.addAll(list);}
 	private final List<T> selected; public List<T> getSelected() {return selected;}
+	
 	private T selectedSingle; public T getSelectedSingle() { return selectedSingle; } public void getSelectedSingle(T value) { selectedSingle = value; }
+	
 	private final List<T> memory;
 	private final Map<T,Boolean> map; public Map<T,Boolean> getMap() {return map;}
 	public boolean toggleMode; public boolean isToggleMode() {return toggleMode;} public void setToggleMode(boolean toggleMode) {this.toggleMode = toggleMode;}
@@ -146,7 +148,7 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 		map.clear();
 		for(T t : list){map.put(t,false);}
 		for(T t : memory) {map.put(t,true);}
-		refresh();
+		this.refresh();
 	}
 
 	public void toggle(T type)

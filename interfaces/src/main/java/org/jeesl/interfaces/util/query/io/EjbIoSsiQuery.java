@@ -28,6 +28,11 @@ public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 		contexts=null;
 	}
 	
+	//IDs
+	public EjbIoSsiQuery<CTX,STATUS> id1(Long id1) {this.id1 = id1; return this;}
+	public EjbIoSsiQuery<CTX,STATUS> id2(Long id2) {this.id2 = id2; return this;}
+	public EjbIoSsiQuery<CTX,STATUS> id3(Long id3) {this.id3 = id3; return this;}
+	
 	//Fetches
 	public <E extends Enum<E>> EjbIoSsiQuery<CTX,STATUS> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public EjbIoSsiQuery<CTX,STATUS> distinct(boolean distinct) {super.setDistinct(distinct); return this;}

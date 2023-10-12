@@ -2,6 +2,7 @@ package org.jeesl.controller.facade.jx.io;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -462,6 +463,12 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	private Predicate[] pSsiData(CriteriaBuilder cB, Root<DATA> ejb, EjbIoSsiQuery<CTX,LINK> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(Objects.nonNull(query.getId2()))
+		{
+			Expression<Long> eRef2 = ejb.get(JeeslIoSsiData.Attributes.refB.toString());
+			predicates.add(cB.equal(eRef2,query.getId2()));
+		}
 		
 		if(ObjectUtils.isNotEmpty(query.getContexts()))
 		{

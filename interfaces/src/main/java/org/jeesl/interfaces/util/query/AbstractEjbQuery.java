@@ -47,6 +47,18 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public Integer getMaxResults() {return maxResults;}
 	@Override public void setMaxResults(Integer maxResults) {this.maxResults = maxResults;}
 	
+	//Ids
+	protected Long id1;
+	public Long getId1() {return id1;}
+	
+	protected Long id2;
+	public Long getId2() {return id2;}
+	public void setId2(Long id2) {this.id2 = id2;}
+
+	protected Long id3;
+	public Long getId3() {return id3;}
+	public void setId3(Long id3) {this.id3 = id3;}
+
 	//Lists
 	protected List<Long> idList;
 	@Override public List<Long> getIdList() {return idList;}
