@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
+	xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" xmlns:of="http://omnifaces.org/functions"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:composite="http://java.sun.com/jsf/composite">
 		
@@ -16,55 +16,31 @@
 		<j:slot id="sLeft" width="6">
 			<h:form id="fInput">
 				<p:panel styleClass="jeesl-panel jeesl-panel-deepl">
-					<f:facet name="header">
-						<j:pHeader entity="IoCryptoKey">
-							
-						</j:pHeader>
-					</f:facet>
+					<f:facet name="header"><j:pHeader entity="DeeplLanguage" code="labelTranslateFrom"/></f:facet>
 					<f:facet name="actions">
-						<jp:thFilter handler="#{cc.attrs.ctrl.thSource}"/>
-						
-						<p:selectOneMenu value="#{cc.attrs.ctrl.thSource.selectedSingle}" var="locale">
-							<f:selectItems value="#{cc.attrs.ctrl.thSource.list}"
-										   var="lang"
-										   itemLabel="&lt;img height=&quot;#{cc.attrs.height}&quot; src=&quot;/jeesl/image/symbolizer/graphic/#{lang.class.name}/#{cc.attrs.height}/#{lang.id}&quot; /&gt;"
-										   itemLabelEscaped="false"
-										   itemValue="lang"></f:selectItems>
-							
-							<ui:remove><p:column>
-								<h:graphicImage height="#{cc.attrs.height}" value="/image/symbolizer/graphic/#{locale.class.name}/#{cc.attrs.height}/#{locale.id}"></h:graphicImage>
-							</p:column></ui:remove>
-						</p:selectOneMenu>
-						
-						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.translate()}" update=":#{cc.id}:grid" />
+						<jp:thFilter handler="#{cc.attrs.ctrl.thSource}"/>						
 					</f:facet>
 					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
-					
-					
-					
 						<p:inputTextarea styleClass="jeesl-deepl-textarea" value="#{cc.attrs.ctrl.input}">
-							<p:remoteCommand name="deeplTranslate" actionListener="#{cc.attrs.ctrl.translate}" immediate="true" update=":#{cc.id}:grid"/>
+							<p:ajax event="keyup" delay="1000" listener="#{cc.attrs.ctrl.translate()}" update=":#{cc.id}:fOutput" process="@this" />
 						</p:inputTextarea>
-					
-					
-					
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
 		</j:slot>
 		<j:slot id="sRight" width="6">
 			<h:form id="fOutput">
-				<p:panel styleClass="jeesl-panel">
-					<f:facet name="header"><j:pHeader entity="IoCryptoKey"/></f:facet>
+				<p:panel styleClass="jeesl-panel jeesl-panel-deepl">
+					<f:facet name="header"><j:pHeader entity="DeeplLanguage" code="labelTranslateTo"/></f:facet>
 					<f:facet name="actions">
+						<j:icon id="iClip" type="jeeslClone" listener="#{cc.attrs.ctrl.voidCallback()}"/>
+						<pe:clipboard trigger="iClip:link" text="#{cc.attrs.ctrl.output}"/>
 						<jp:thFilter handler="#{cc.attrs.ctrl.thTarget}"/>
 					</f:facet>
-					<ui:repeat var="l" value="#{cc.attrs.ctrl.thTarget.selected}">
-						<p:panelGrid columns="2" columnClasses="jeeslGrid15,jeeslGrid90">
-							<h:outputText value="#{l.code}"/>
-							<h:outputText value="#{cc.attrs.ctrl.mapTranslation[l]}"/>
-						</p:panelGrid>
-					</ui:repeat>				
+					<p:panelGrid columns="1" columnClasses="jeeslGrid100">
+						<p:inputTextarea styleClass="jeesl-deepl-textarea" value="#{cc.attrs.ctrl.output}">
+						</p:inputTextarea>
+					</p:panelGrid>
 				</p:panel>
 			</h:form>
 		</j:slot>

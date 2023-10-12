@@ -1,7 +1,10 @@
 package org.jeesl.controller.web.c.io.ai;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -31,30 +34,34 @@ public class JeeslAiDeeplWc <LANG extends JeeslIoAiLanguage<?,?,LANG,?>> impleme
 		
 		thSource = new ThMultiFilterHandler<>(this);
 		thTarget = new ThMultiFilterHandler<>(this);
+		thTarget.setToggleMode(true);
 		
 		mapTranslation = new HashMap<>();
+	}
+	
+	@Override public void filtered(ThMultiFilter filter) throws JeeslLockingException, JeeslConstraintViolationException
+	{
+		this.translate();
 	}
 	
 	public void translate()
 	{
 		mapTranslation.clear();
+		output="";
 		if(thSource.hasSelected())
 		{
 			String sourceLang = thSource.getSelected().get(0).getCode().toUpperCase();
 			
-			for(LANG l : thTarget.getSelected())
+			if(thTarget.hasSelected())
 			{
+				LANG l = thTarget.getSelected().get(0);
 				String targetLang = l.getCode().toUpperCase();
-				String translation = callback.translate(input,sourceLang,targetLang);
-				mapTranslation.put(l,translation);
+				output = callback.translate(input,sourceLang,targetLang);
 			}
 		}
 	}
 	
-	@Override
-	public void filtered(ThMultiFilter filter) throws JeeslLockingException, JeeslConstraintViolationException
-	{
-		// TODO Auto-generated method stub
-		
-	}
+
+	
+	public void voidCallback() {}
 }
