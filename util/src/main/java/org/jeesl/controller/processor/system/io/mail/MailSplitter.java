@@ -81,7 +81,7 @@ public class MailSplitter<L extends JeeslLang,D extends JeeslDescription,
 					eMail.setRetention(fMail.fByCode(fbMail.getClassRetention(), JeeslIoMailRetention.Code.split));
 					fMail.save(eMail);
 				}
-				catch (IOException | JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
+				catch (JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 			}
 		}
 		

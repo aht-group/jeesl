@@ -111,7 +111,6 @@ public class IoMailRestService <L extends JeeslLang,D extends JeeslDescription,
 			}
 			catch (JeeslConstraintViolationException e) {e.printStackTrace();}
 			catch (JeeslLockingException e) {logger.warn(e.getMessage());}
-			catch (IOException e) {logger.error(e.getMessage());}
 			catch (JeeslNotFoundException e) {logger.error(e.getMessage());}
 		}		
 		return xml;

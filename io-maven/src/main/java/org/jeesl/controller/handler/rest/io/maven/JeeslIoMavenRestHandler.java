@@ -130,7 +130,6 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 			fMaven.rm(existingVersions);
 		}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {dut.fail(e,true); return dut.toJson();}
-		
 		return dut.toJson();
 	}
 

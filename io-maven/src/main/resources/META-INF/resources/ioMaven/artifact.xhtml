@@ -24,7 +24,7 @@
 						<j:dtHeader entity="IoMavenArtifact" code="listOf"/>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectArtifact()}" update=":#{cc.id}:sArtifact"/>  
-		            <p:column filterBy="#{a.group.code}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">>
+		            <p:column filterBy="#{a.group.code}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">
 		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet>
 						<h:outputText value="#{a.group.code}" />  
 		            </p:column>

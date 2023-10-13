@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumSet;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import org.apache.log4j.BasicConfigurator;
@@ -120,7 +121,7 @@ public class JeeslDependencyGoal extends AbstractMojo
 		    GraphFactory graphFactory = new AggregatingGraphFactory(adapter, subProjectsInReactorOrder(), globalFilter, graphBuilder,true,true);
 		    String dependencyGraph = graphFactory.createGraph(project);
 		    
-		    logger.info(dependencyGraph);
+		    logger.trace(dependencyGraph);
 		      
 		    try
 		    {
@@ -136,8 +137,13 @@ public class JeeslDependencyGoal extends AbstractMojo
 				ResteasyWebTarget target = client.target("https://www.jeesl.org/jeesl");
 //				ResteasyWebTarget target = client.target("http://localhost:8080/jeesl");
 				JeeslIoMavenRest rest = target.proxy(JeeslIoMavenRest.class);
-				JsonSsiUpdate medsage = rest.uploadDependencyGraph(graph);
-				JsonUtil.info(medsage);
+				JsonSsiUpdate message = rest.uploadDependencyGraph(graph);
+				
+				if(Objects.nonNull(message.getStatistic()) && Objects.nonNull(message.getStatistic().getError()) && message.getStatistic().getError()>0)
+				{
+					JsonUtil.info(message);
+					throw new MojoExecutionException("Module not configured in JEESL: "+graph.getCode());
+				}
 			}
 		    catch (JsonParseException e) {e.printStackTrace();}
 		    catch (JsonMappingException e) {e.printStackTrace();}
