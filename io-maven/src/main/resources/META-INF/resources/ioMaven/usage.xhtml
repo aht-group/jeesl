@@ -32,14 +32,18 @@
 							</p:columns>
                    		</p:row>
                    		<p:row>
-                   			<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet></p:column>
-							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoMavenArtifact"/></f:facet></p:column>
+                   			<p:column colspan="1" filterBy="#{a.group.code}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">
+                   				<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet>
+                   			</p:column>
+							<p:column colspan="1" filterBy="#{a.code}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">>
+								<f:facet name="header"><jtp:label entity="IoMavenArtifact"/></f:facet>
+							</p:column>
 							<p:columns var="m" value="#{cc.attrs.ctrl.modules}">
 		            			<f:facet name="header">#{m.label}</f:facet>
 							</p:columns>
                    		</p:row>
 					</p:columnGroup>
-		            <p:column>
+		            <p:column >
 						<h:outputText value="#{a.group.code}" />  
 		            </p:column>
 		            <p:column>

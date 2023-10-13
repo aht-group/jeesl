@@ -2,7 +2,11 @@ package org.jeesl.maven.goal;
 
 import static com.github.ferstl.depgraph.dependency.NodeResolution.INCLUDED;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -131,13 +135,19 @@ public class JeeslDependencyGoal extends AbstractMojo
 				graph.setCode(groupId+":"+artifactId);
 				logger.info("Uploading "+graph.getCode());
 				
+				Path path = Paths.get("/Volumes/ramdisk");
+				if(Files.exists(path) && Files.isDirectory(path))
+				{
+					JsonUtil.write(graph,new File(path.toFile(),"graph.json"));
+				}
+				
 				ResteasyClient client = new ResteasyClientBuilder().build();
 //				client.register(new BasicAuthentication(restUser,restPwd));
 //				client.register(new RestLogger());
 				ResteasyWebTarget target = client.target("https://www.jeesl.org/jeesl");
 //				ResteasyWebTarget target = client.target("http://localhost:8080/jeesl");
 				JeeslIoMavenRest rest = target.proxy(JeeslIoMavenRest.class);
-				JsonSsiUpdate message = rest.uploadDependencyGraph(graph);
+				JsonSsiUpdate message = rest.uploadDependencyGraph(graph);				
 				
 				if(Objects.nonNull(message.getStatistic()) && Objects.nonNull(message.getStatistic().getError()) && message.getStatistic().getError()>0)
 				{

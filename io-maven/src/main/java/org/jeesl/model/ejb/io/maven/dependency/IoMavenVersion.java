@@ -1,5 +1,7 @@
 package org.jeesl.model.ejb.io.maven.dependency;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -61,6 +63,7 @@ public class IoMavenVersion implements JeeslIoMavenVersion<IoMavenArtifact,IoMav
 	{
 		StringBuffer sb = new StringBuffer();
 		sb.append("[").append(id).append("]");
+		sb.append(" ").append(code);
 		return sb.toString();
 	}
 }

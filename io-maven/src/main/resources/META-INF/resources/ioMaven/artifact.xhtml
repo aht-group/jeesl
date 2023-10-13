@@ -28,7 +28,7 @@
 		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet>
 						<h:outputText value="#{a.group.code}" />  
 		            </p:column>
-		            <p:column>
+		            <p:column filterBy="#{a.code}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">
 		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact"/></f:facet>
 		            	<jtp:symbolizer value="#{a.suitability}" marginRight="5"/>
 						<h:outputText value="#{a.code}" />  

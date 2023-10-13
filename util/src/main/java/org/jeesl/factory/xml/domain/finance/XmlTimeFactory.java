@@ -66,7 +66,7 @@ public class XmlTimeFactory
 		{
 			throw new UtilsProcessingException("The cell is null. No Date in "+XlsCellFactory.debugPosition(row, col));
 		}
-		else if(cell.getCellTypeEnum()!=CellType.NUMERIC)
+		else if(cell.getCellType()!=CellType.NUMERIC)
 		{
 			StringBuffer sb = new StringBuffer();
 			sb.append(XmlTimeFactory.class.getSimpleName());
@@ -75,7 +75,7 @@ public class XmlTimeFactory
 			sb.append(XlsCellFactory.debugPosition(row, col));
 			sb.append(" has wrong CellType.");
 			sb.append(" Expected: ").append(CellType.NUMERIC);//.append(PoiSsCellType.translate(0));
-			sb.append(" Actual:").append(cell.getCellTypeEnum());
+			sb.append(" Actual:").append(cell.getCellType());
 			throw new UtilsProcessingException(sb.toString());
 		}
 		else

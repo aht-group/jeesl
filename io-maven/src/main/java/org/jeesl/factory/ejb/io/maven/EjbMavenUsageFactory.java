@@ -31,6 +31,13 @@ public class EjbMavenUsageFactory
 		
 		return set;
 	}
+	public static Map<IoMavenVersion,IoMavenUsage> toMapVersion(List<IoMavenUsage> list)
+	{
+		Map<IoMavenVersion,IoMavenUsage> map = new HashMap<>();
+		for(IoMavenUsage usage : list) {map.put(usage.getVersion(),usage);}
+		
+		return map;
+	}
 	
 	public static void add(Nested2Map<IoMavenArtifact,IoMavenModule,IoMavenUsage> n2m, List<IoMavenUsage> list)
 	{

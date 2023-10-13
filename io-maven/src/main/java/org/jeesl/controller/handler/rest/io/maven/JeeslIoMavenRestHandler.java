@@ -3,6 +3,7 @@ package org.jeesl.controller.handler.rest.io.maven;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import org.jeesl.factory.ejb.io.maven.EjbMavenUsageFactory;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenSuitability;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
@@ -116,18 +118,37 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 			}
 		}
 
-		Set<IoMavenVersion> existingVersions = EjbMavenUsageFactory.toSetVersion(fMaven.allForParent(IoMavenUsage.class,module));
+		List<IoMavenUsage> usages = fMaven.allForParent(IoMavenUsage.class,module);
+		Set<IoMavenVersion> existingVersions = EjbMavenUsageFactory.toSetVersion(usages);
+		Map<IoMavenVersion,IoMavenUsage> existingUsages = EjbMavenUsageFactory.toMapVersion(usages);
+		
 		List<IoMavenUsage> newUsages = new ArrayList<>();
 		for(IoMavenVersion v : currentVersions)
 		{
-			if(existingVersions.contains(v)) {existingVersions.remove(v);}
+			if(existingVersions.contains(v))
+			{
+				existingVersions.remove(v);
+				existingUsages.remove(v);
+			}
 			else {newUsages.add(EjbMavenUsageFactory.build(module,v));}
 		}
 		
 		try 
 		{
 			fMaven.save(newUsages);
-			fMaven.rm(existingVersions);
+			
+			logger.info("Removing unneccessary usages: "+existingUsages.size());
+			fMaven.rm(new ArrayList<>(existingUsages.values()));
+			
+			logger.info("Removing unneccessary versions");
+			for(IoMavenVersion v : existingVersions)
+			{
+				List<IoMavenUsage> remaining = fMaven.allForParent(IoMavenUsage.class, JeeslIoMavenUsage.Attributes.version, v);
+				if(remaining.isEmpty())
+				{
+					fMaven.rm(v);
+				}
+			}			
 		}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {dut.fail(e,true); return dut.toJson();}
 		return dut.toJson();

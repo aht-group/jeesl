@@ -31,7 +31,7 @@ public class JsonXlsCellFactory
 //		}
 
 		//enum does not work with streaming-api: java.lang.AbstractMethodError: com.monitorjbl.xlsx.impl.StreamingCell.getCellTypeEnum()Lorg/apache/poi/ss/usermodel/CellType;
-		CellType type = cell.getCellTypeEnum();
+		CellType type = cell.getCellType();
 		switch(type)
 		{
 			case NUMERIC: json.setValueString(cell.getStringCellValue()); break;
