@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.io.maven.classification;
+package org.jeesl.interfaces.model.io.maven.dependency;
 
 import java.io.Serializable;
 
@@ -16,12 +16,12 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 @DownloadJeeslAttributes
 @DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslMavenStructure <L extends JeeslLang, D extends JeeslDescription,
+public interface JeeslMavenScope <L extends JeeslLang, D extends JeeslDescription,
 								S extends JeeslStatus<L,D,S>,
 								G extends JeeslGraphic<?,?,?>>
 					extends Serializable,EjbPersistable,
 								JeeslStatusFixedCode,
 								EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {	
-	public enum Code{mm,sm,sub};
+	public enum Code{compile};
 }

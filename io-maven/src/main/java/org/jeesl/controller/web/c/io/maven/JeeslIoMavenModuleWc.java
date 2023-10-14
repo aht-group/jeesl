@@ -181,6 +181,16 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 		this.reloadChilds();
 	}
 	
+	public void deleteChild() throws JeeslConstraintViolationException
+	{
+		List<IoMavenUsage> usages = fMaven.allForParent(IoMavenUsage.class,child);
+		if(debugOnInfo) {logger.info(AbstractLogMessage.deleteEntity(child)+" with "+usages.size()+" "+IoMavenUsage.class.getSimpleName());}
+		fMaven.rm(usages);
+		fMaven.rm(child);
+		this.reset(false, true);
+		this.reloadChilds();
+	}
+	
 	public void reorderModules() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fMaven,modules); this.reloadModules();}
 	public void reorderChilds() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fMaven,childs); this.reloadChilds();}
 }

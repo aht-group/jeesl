@@ -4,6 +4,7 @@ import static com.github.ferstl.depgraph.dependency.NodeResolution.INCLUDED;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -138,6 +139,7 @@ public class JeeslDependencyGoal extends AbstractMojo
 				Path path = Paths.get("/Volumes/ramdisk");
 				if(Files.exists(path) && Files.isDirectory(path))
 				{
+					Files.write(Paths.get(path.toString(),"graph.txt"), Arrays.asList(dependencyGraph), StandardCharsets.UTF_8);
 					JsonUtil.write(graph,new File(path.toFile(),"graph.json"));
 				}
 				

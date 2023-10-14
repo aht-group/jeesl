@@ -1,6 +1,9 @@
 package org.jeesl.model.json.io.maven;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.jeesl.model.json.system.status.JsonScope;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -29,7 +32,12 @@ public class JsonMavenArtifact implements Serializable
 	private String version;
 	public String getVersion() {return version;}
 	public void setVersion(String version) {this.version = version;}
-
+	
+	@JsonProperty("scopes")
+	private List<JsonScope> scopes;
+	public List<JsonScope> getScopes() {return scopes;}
+	public void setScopes(List<JsonScope> scopes) {this.scopes = scopes;}
+	
 	@Override
 	public String toString()
 	{
