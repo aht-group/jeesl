@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 
 import org.jeesl.api.facade.io.JeeslIoCryptoFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
-import org.jeesl.controller.handler.system.io.crypto.JeeslMemoryKeyStore;
+import org.jeesl.controller.handler.io.crypto.JeeslMemoryKeyStore;
 import org.jeesl.factory.builder.io.IoCryptoFactoryBuilder;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKey;
 import org.jeesl.interfaces.model.io.crypto.JeeslIoCryptoKeyState;

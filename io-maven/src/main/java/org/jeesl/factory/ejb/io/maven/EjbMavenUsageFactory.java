@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.io.maven;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
+import org.jeesl.util.comparator.ejb.PositionComparator;
 
 public class EjbMavenUsageFactory
 {
@@ -80,6 +82,13 @@ public class EjbMavenUsageFactory
 				l.add(u.getModule());
 			}
 		}
+		
+		PositionComparator<IoMavenModule> comparator = new PositionComparator<>();
+		for(List<IoMavenModule> l : map.values())
+		{
+			Collections.sort(l,comparator);
+		}
+		
 		return map;
 	}
 	

@@ -1,0 +1,96 @@
+package org.jeesl.controller.handler.system.property;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.configuration2.CombinedConfiguration;
+import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
+import org.apache.commons.configuration2.builder.fluent.Parameters;
+import org.apache.commons.configuration2.tree.NodeCombiner;
+import org.apache.commons.configuration2.tree.UnionCombiner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
+import net.sf.exlp.util.io.ExlpCentralConfigPointer;
+
+public class ConfigBootstrap
+{
+	final static Marker fatal = MarkerFactory.getMarker("FATAL");
+	final static Logger logger = LoggerFactory.getLogger(ExlpCentralConfigPointer.class);
+	
+	private enum Typ{UNKNOWN,XML,PROPERTIES}
+	
+	private final List<String> configurations;
+	
+	public static ConfigBootstrap instance()
+	{
+		return new ConfigBootstrap();
+	}
+	private ConfigBootstrap()
+	{
+		configurations = new ArrayList<>();
+	}
+	
+	
+	public void add(Path path)
+	{
+		logger.info("Adding "+path.toString());
+		configurations.add(path.toFile().getAbsolutePath());
+	}
+	public void addS(String s)
+	{
+		logger.info("Adding "+s);
+		configurations.add(s);
+	}
+	
+	public org.apache.commons.configuration2.Configuration combine()
+	{
+		NodeCombiner combiner = new UnionCombiner();
+		combiner.addListNode("table");  // mark table as list node
+		
+		Parameters params = new Parameters();
+		
+		CombinedConfiguration cc = new CombinedConfiguration(combiner);
+		
+		for(String configName : configurations)
+		{
+			try
+			{
+				Typ type = getTyp(configName);
+				if(type.equals(Typ.XML))
+				{
+					FileBasedConfigurationBuilder<org.apache.commons.configuration2.XMLConfiguration> builder1 =
+						    new FileBasedConfigurationBuilder<org.apache.commons.configuration2.XMLConfiguration>(org.apache.commons.configuration2.XMLConfiguration.class)
+						    	.configure(params.xml().setFileName(configName));
+					cc.addConfiguration(builder1.getConfiguration());
+				}
+				else if(type.equals(Typ.PROPERTIES))
+				{
+					FileBasedConfigurationBuilder<org.apache.commons.configuration2.FileBasedConfiguration> builder2 =
+						    new FileBasedConfigurationBuilder<org.apache.commons.configuration2.FileBasedConfiguration>(org.apache.commons.configuration2.PropertiesConfiguration.class)
+						    	.configure(params.properties().setFileName(configName));
+					cc.addConfiguration(builder2.getConfiguration());
+				}
+				else
+				{
+					logger.warn("NYI: "+type);
+				}
+			}
+			catch (org.apache.commons.configuration2.ex.ConfigurationException e) {e.printStackTrace();}
+		}
+		
+		return cc;
+	}
+	
+	private static Typ getTyp(String configName)
+	{
+		Typ typ = Typ.UNKNOWN;
+		if(configName.endsWith(".xml")){typ=Typ.XML;}
+		else if(configName.endsWith(".properties")){typ=Typ.PROPERTIES;}
+		else if(configName.endsWith(".txt")){typ=Typ.PROPERTIES;}
+		return typ;
+	}
+}

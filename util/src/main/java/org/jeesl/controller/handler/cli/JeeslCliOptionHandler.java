@@ -5,6 +5,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.controller.handler.system.property.ConfigBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -136,7 +137,7 @@ public class JeeslCliOptionHandler
 	
 	public org.apache.commons.configuration2.Configuration toConfig(CommandLine line, String defaultConfig)
 	{
-		ConfigLoader cl = ConfigLoader.instance();
+		ConfigBootstrap cl = ConfigBootstrap.instance();
 		if(line.hasOption(oConfig.getOpt()))
 		{
 			String configFile = line.getOptionValue(oConfig.getOpt());

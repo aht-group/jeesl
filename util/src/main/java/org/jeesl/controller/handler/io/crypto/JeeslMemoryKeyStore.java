@@ -1,4 +1,4 @@
-package org.jeesl.controller.handler.system.io.crypto;
+package org.jeesl.controller.handler.io.crypto;
 
 import java.io.Serializable;
 import java.util.HashMap;

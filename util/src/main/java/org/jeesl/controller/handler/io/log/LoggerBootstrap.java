@@ -40,7 +40,7 @@ public class LoggerBootstrap
 		{
 			sb.setLength(0);
 			sb.append(path+File.separatorChar+log4j2Name);
-			Configurator.initialize(null, "rmmv/system/io/log/log4j2.xml");
+			Configurator.initialize(null, sb.toString());
 		}
 	}
 
