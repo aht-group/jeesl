@@ -40,6 +40,9 @@ public interface JeeslIoMavenModule <MODULE extends JeeslIoMavenModule<MODULE,ST
 	String getLabel();
 	void setLabel(String label);
 	
+	String getAbbreviation();
+	void setAbbreviation(String abbreviation);
+	
 	STRUCTURE getStructure();
 	void setStructure(STRUCTURE structure);
 	

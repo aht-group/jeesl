@@ -2,26 +2,23 @@ package org.jeesl.interfaces.util.query.io;
 
 import java.util.List;
 
-import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenMaintainer;
-import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
-import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslMavenScope;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 
-public interface EjbIoMavenQuery <GROUP extends JeeslIoMavenGroup,
-							ARTIFACT extends JeeslIoMavenArtifact<GROUP,?>,
-							VERSION extends JeeslIoMavenVersion<ARTIFACT,OUTDATE,MAINTAINER>,
-							OUTDATE extends JeeslMavenOutdate<?,?,OUTDATE,?>,
-							MAINTAINER extends JeeslMavenMaintainer<?,?,MAINTAINER,?>,
+public interface EjbIoMavenQuery <
+							VERSION extends JeeslIoMavenVersion<?,?,?>,
+							SCOPE extends JeeslMavenScope<?,?,SCOPE,?>,
+							MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,?,?,?>,
 							STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>>
 //			extends AbstractEjbQuery
 {
 	boolean isDistinct();
 	
-	List<String> getRootFetches();
 	//Fetches
-//	public <E extends Enum<E>> EjbIoMavenQuery<L,D,GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER> addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
+	List<String> getRootFetches();
+	public <E extends Enum<E>> EjbIoMavenQuery<VERSION,SCOPE,MODULE,STRUCTURE> addRootFetch(E e);
 	
 	//LocalDate
 //	public EjbIoMavenQuery<L,D,GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
@@ -31,10 +28,14 @@ public interface EjbIoMavenQuery <GROUP extends JeeslIoMavenGroup,
 	List<Long> getIdList();
 	
 	List<VERSION> getVersions();
-	EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> add(VERSION version);
-	EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> addVersions(List<VERSION> list);
+	EjbIoMavenQuery<VERSION,SCOPE,MODULE,STRUCTURE> add(VERSION version);
+	EjbIoMavenQuery<VERSION,SCOPE,MODULE,STRUCTURE> addVersions(List<VERSION> list);
 	
 	List<STRUCTURE> getStructures();
-	EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> add(STRUCTURE structure);
-	EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> addStructures(List<STRUCTURE> list);
+	EjbIoMavenQuery<VERSION,SCOPE,MODULE,STRUCTURE> add(STRUCTURE structure);
+	EjbIoMavenQuery<VERSION,SCOPE,MODULE,STRUCTURE> addStructures(List<STRUCTURE> list);
+	
+	List<MODULE> getModules();
+	EjbIoMavenQuery<VERSION,SCOPE,MODULE,STRUCTURE> add(MODULE module);
+	EjbIoMavenQuery<VERSION,SCOPE,MODULE,STRUCTURE> addModules(List<MODULE> list);
 }

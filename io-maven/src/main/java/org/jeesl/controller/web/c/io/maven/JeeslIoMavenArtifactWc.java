@@ -19,6 +19,7 @@ import org.jeesl.factory.ejb.io.maven.EjbMavenVersionFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -28,6 +29,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenSuitability;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
@@ -47,13 +49,14 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,Io
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenArtifactWc.class);
 	
-	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final Comparator<IoMavenArtifact> cpArtifact;
 	private final Comparator<IoMavenVersion> cpVersion;
 	
 	private final Map<IoMavenArtifact,List<IoMavenVersion>> mapVersion; public Map<IoMavenArtifact, List<IoMavenVersion>> getMapVersion() {return mapVersion;}
-	private final Map<IoMavenVersion,List<IoMavenModule>> mapModule; public Map<IoMavenVersion, List<IoMavenModule>> getMapModule() {return mapModule;}
+	private final Map<IoMavenVersion,List<IoMavenModule>> mapRoot; public Map<IoMavenVersion,List<IoMavenModule>> getMapRoot() {return mapRoot;}
+	private final Map<IoMavenVersion,Map<IoMavenModule,List<IoMavenUsage>>> mapUsage; public Map<IoMavenVersion,Map<IoMavenModule,List<IoMavenUsage>>> getMapUsage() {return mapUsage;}
 	
 	private final List<IoMavenArtifact> artifacts; public List<IoMavenArtifact> getArtifacts() {return artifacts;}
 	private final List<IoMavenVersion> versions; public List<IoMavenVersion> getVersions() {return versions;}
@@ -72,7 +75,8 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,Io
 		cpVersion = new PositionComparator<>();
 		
 		mapVersion = new HashMap<>();
-		mapModule = new HashMap<>();
+		mapRoot = new HashMap<>();
+		mapUsage = new HashMap<>();
 		
 		artifacts = new ArrayList<>();
 		versions = new ArrayList<>();
@@ -82,7 +86,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,Io
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fMaven=fMaven;
@@ -161,9 +165,12 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,Io
 	
 	private void reloadUsages()
 	{
-		mapModule.clear();
-		List<IoMavenUsage> usages = fMaven.fIoMavenUsages(JeeslIoMavenQuery.instance().addVersions(versions));
-		mapModule.putAll(EjbMavenUsageFactory.toMapVersionModules(usages));
+		mapRoot.clear();
+		mapUsage.clear();
+		
+		List<IoMavenUsage> usages = fMaven.fIoMavenUsages(JeeslIoMavenQuery.instance().addVersions(versions).addRootFetch(JeeslIoMavenUsage.Attributes.scopes));
+		mapRoot.putAll(EjbMavenUsageFactory.toMapVersionRootModules(usages));
+		mapUsage.putAll(EjbMavenUsageFactory.toMapVersionModuleUsage(usages));
 	}
 	
 	public void reorderVersions() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fMaven,versions); this.reloadVersions();}

@@ -54,7 +54,11 @@ public class IoMavenModule implements JeeslIoMavenModule<IoMavenModule,IoMavenSt
 	private String label;
 	@Override public String getLabel() {return label;}
 	@Override public void setLabel(String label) {this.label = label;}
-
+	
+	private String abbreviation;
+	@Override public String getAbbreviation() {return abbreviation;}
+	@Override public void setAbbreviation(String abbreviation) {this.abbreviation = abbreviation;}
+	
 	@ManyToOne
 	private IoMavenStructure structure;
 	@Override public IoMavenStructure getStructure() {return structure;}

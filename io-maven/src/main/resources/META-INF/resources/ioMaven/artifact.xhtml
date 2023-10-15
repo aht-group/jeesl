@@ -15,7 +15,7 @@
 <composite:implementation>
 <jp:grid id="grid">
 	<j:row id="row1">
-		<j:slot id="sArtifacts" width="7">
+		<j:slot id="sArtifacts" width="6">
 			<h:form id="fArtifacts">
 				<p:dataTable styleClass="jeesl-datatable"
 						var="a" value="#{cc.attrs.ctrl.artifacts}"
@@ -47,7 +47,7 @@
 				</p:dataTable>
 			</h:form>
 		</j:slot>
-		<j:slot id="sArtifact" width="5">
+		<j:slot id="sArtifact" width="6">
 			<h:form id="fArtifact" rendered="#{not empty cc.attrs.ctrl.artifact}">
 				<p:panel styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoMavenArtifact"/></f:facet>
@@ -97,10 +97,21 @@
 		            </p:column>
 		            <p:column>
 		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="usedIn"/></f:facet>
-						<ui:repeat var="m" value="#{cc.attrs.ctrl.mapModule[v]}" varStatus="index">
-							<h:outputText value="#{m.label}"/>
-							<h:outputText value="#{index.last ? '' : ', '}"/>
-						</ui:repeat>
+		            	<ui:repeat var="r" value="#{cc.attrs.ctrl.mapRoot[v]}" varStatus="index">
+		            		<jtp:symbolizer value="#{r}" marginRight="5"/>
+		            		<h:outputText value="#{r.label}" styleClass="jeesl-bold"/>
+		            		<h:outputText value=": " />
+		            		<ui:repeat var="u" value="#{cc.attrs.ctrl.mapUsage[v][r]}" varStatus="index">
+								<ui:repeat var="s" value="#{u.scopes}">
+									<jtp:symbolizer value="#{s}" marginRight="3"/>
+								</ui:repeat>
+								<h:outputText value="#{u.module.label}" rendered="#{empty u.module.abbreviation}"/>
+								<h:outputText value="#{u.module.abbreviation}" rendered="#{not empty u.module.abbreviation}"/>
+								<h:outputText value="#{index.last ? '' : ', '}"/>
+							</ui:repeat>
+		            		<br/>
+		            	</ui:repeat>
+						
 		            </p:column>
 				</p:dataTable>
 			</h:form>

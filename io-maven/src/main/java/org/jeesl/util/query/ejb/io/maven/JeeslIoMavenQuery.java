@@ -8,17 +8,14 @@ import java.util.Objects;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
-import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
-import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
-import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
-import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
+import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslIoMavenQuery 
-			extends AbstractEjbQuery implements EjbIoMavenQuery<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure>
+public class JeeslIoMavenQuery extends AbstractEjbQuery implements EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure>
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -37,7 +34,7 @@ public class JeeslIoMavenQuery
 	}
 	
 	//Fetches
-	public <E extends Enum<E>> JeeslIoMavenQuery addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
+	public <E extends Enum<E>> JeeslIoMavenQuery addRootFetch(E e) {if(Objects.isNull(rootFetches)) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	public JeeslIoMavenQuery distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//Lists
@@ -57,8 +54,11 @@ public class JeeslIoMavenQuery
 
 	private List<IoMavenStructure> structures;
 	@Override public List<IoMavenStructure> getStructures() {return structures;}
-	@Override public EjbIoMavenQuery<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure> add(IoMavenStructure structure) {if(Objects.isNull(structures)) {structures = new ArrayList<>();} structures.add(structure); return this;}
-	@Override public EjbIoMavenQuery<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenStructure> addStructures(List<IoMavenStructure> list) {if(Objects.isNull(structures)) {structures = new ArrayList<>();} structures.addAll(list); return this;}
-
+	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> add(IoMavenStructure structure) {if(Objects.isNull(structures)) {structures = new ArrayList<>();} structures.add(structure); return this;}
+	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> addStructures(List<IoMavenStructure> list) {if(Objects.isNull(structures)) {structures = new ArrayList<>();} structures.addAll(list); return this;}
 	
+	private List<IoMavenModule> modules;
+	@Override public List<IoMavenModule> getModules() {return modules;}
+	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> add(IoMavenModule module) {if(Objects.isNull(modules)) {modules = new ArrayList<>();} modules.add(module); return this;}
+	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> addModules(List<IoMavenModule> list) {if(Objects.isNull(modules)) {modules = new ArrayList<>();} modules.addAll(list); return this;}
 }

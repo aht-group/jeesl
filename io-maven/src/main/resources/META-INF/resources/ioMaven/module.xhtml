@@ -120,6 +120,10 @@
 		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="label"/></f:facet>
 						<h:outputText value="#{c.label}" />  
 		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenModule" code="abbreviation"/></f:facet>
+						<h:outputText value="#{c.abbreviation}" />  
+		            </p:column>
 				</p:dataTable>
 			</h:form>
 			<h:form id="fChild">
@@ -136,6 +140,9 @@
 						
 						<jtp:label entity="IoMavenModule" code="label"/>
 						<p:inputText value="#{cc.attrs.ctrl.child.label}"/>
+						
+						<jtp:label entity="IoMavenModule" code="abbreviation"/>
+						<p:inputText value="#{cc.attrs.ctrl.child.abbreviation}"/>
 						
 						<jtp:label entity="IoMavenModule" code="structure"/>
 						<p:selectOneMenu value="#{cc.attrs.ctrl.child.structure}" effect="fade" autoWidth="false" dynamic="true">

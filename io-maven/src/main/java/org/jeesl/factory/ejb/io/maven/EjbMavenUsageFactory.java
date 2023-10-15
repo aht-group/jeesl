@@ -63,15 +63,47 @@ public class EjbMavenUsageFactory
 		return map;
 	}
 	
-	public static Map<IoMavenVersion,List<IoMavenModule>> toMapVersionModules( List<IoMavenUsage> list)
+	public static Map<IoMavenVersion,List<IoMavenModule>> toMapVersionRootModules( List<IoMavenUsage> list)
 	{
 		Map<IoMavenVersion,List<IoMavenModule>> map = new HashMap<>();
 		for(IoMavenUsage u : list)
 		{
 			if(!map.containsKey(u.getVersion())) {map.put(u.getVersion(),new ArrayList<>());}
 			List<IoMavenModule> l = map.get(u.getVersion());
-			if(!l.contains(u.getModule())) {l.add(u.getModule());}
+			
+			if(Objects.nonNull(u.getModule().getParent()) && !l.contains(u.getModule().getParent()))
+			{
+				l.add(u.getModule().getParent());
+			}
+			else if(Objects.isNull(u.getModule().getParent()) && !l.contains(u.getModule()))
+			{
+				l.add(u.getModule());
+			}
 		}
 		return map;
 	}
+	
+	public static Map<IoMavenVersion,Map<IoMavenModule,List<IoMavenUsage>>> toMapVersionModuleUsage( List<IoMavenUsage> list)
+	{
+		Map<IoMavenVersion,Map<IoMavenModule,List<IoMavenUsage>>> map = new HashMap<>();
+		for(IoMavenUsage u : list)
+		{
+			if(!map.containsKey(u.getVersion())) {map.put(u.getVersion(),new HashMap<>());}
+			Map<IoMavenModule,List<IoMavenUsage>> m = map.get(u.getVersion());
+			
+			List<IoMavenUsage> l = null;
+			if(Objects.nonNull(u.getModule().getParent()))
+			{
+				if(!m.containsKey(u.getModule().getParent())) {m.put(u.getModule().getParent(),new ArrayList<>());}
+				l = m.get(u.getModule().getParent());
+			}
+			else
+			{
+				if(!m.containsKey(u.getModule())) {m.put(u.getModule(),new ArrayList<>());}
+				l = m.get(u.getModule());
+			}
+			l.add(u);
+		}
+		return map;
+	}	
 }

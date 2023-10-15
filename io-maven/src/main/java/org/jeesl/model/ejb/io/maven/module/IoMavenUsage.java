@@ -25,7 +25,7 @@ import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 @Entity
 @Table(name="IoMavenUsage")
 @EjbErNode(name="Usage",category="ioMaven",subset="ioMaven")
-public class IoMavenUsage implements JeeslIoMavenUsage<IoMavenVersion,IoMavenModule>
+public class IoMavenUsage implements JeeslIoMavenUsage<IoMavenVersion,IoMavenScope,IoMavenModule>
 {
 	public static final long serialVersionUID=1;	
 

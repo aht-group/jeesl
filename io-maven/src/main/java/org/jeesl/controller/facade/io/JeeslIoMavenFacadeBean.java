@@ -26,6 +26,7 @@ import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslMavenScope;
 import org.jeesl.interfaces.model.io.maven.module.JeeslMavenType;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
@@ -39,20 +40,21 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 									GROUP extends JeeslIoMavenGroup,
 									ARTIFACT extends JeeslIoMavenArtifact<GROUP,?>,
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,OUTDATE,MAINTAINER>,
+									SCOPE extends JeeslMavenScope<?,?,SCOPE,?>,
 									OUTDATE extends JeeslMavenOutdate<?,?,OUTDATE,?>,
 									MAINTAINER extends JeeslMavenMaintainer<?,?,MAINTAINER,?>,
 									MODULE extends JeeslIoMavenModule<MODULE,STRUCTURE,TYPE,?,?>,
 									STRUCTURE extends JeeslMavenStructure<?,?,STRUCTURE,?>,
 									TYPE extends JeeslMavenType<L,D,TYPE,?>,
-									USAGE extends JeeslIoMavenUsage<VERSION,MODULE>>
-	extends JeeslFacadeBean implements JeeslIoMavenFacade<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,MODULE,STRUCTURE,USAGE>
+									USAGE extends JeeslIoMavenUsage<VERSION,SCOPE,MODULE>>
+	extends JeeslFacadeBean implements JeeslIoMavenFacade<GROUP,ARTIFACT,VERSION,SCOPE,OUTDATE,MAINTAINER,MODULE,STRUCTURE,USAGE>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenFacadeBean.class);
 		
-	private final IoMavenFactoryBuilder<L,D,GROUP,ARTIFACT,VERSION,MODULE,USAGE> fbMaven;
+	private final IoMavenFactoryBuilder<L,D,GROUP,ARTIFACT,VERSION,SCOPE,MODULE,USAGE> fbMaven;
 	
-	public JeeslIoMavenFacadeBean(EntityManager em, final IoMavenFactoryBuilder<L,D,GROUP,ARTIFACT,VERSION,MODULE,USAGE> fbMaven)
+	public JeeslIoMavenFacadeBean(EntityManager em, final IoMavenFactoryBuilder<L,D,GROUP,ARTIFACT,VERSION,SCOPE,MODULE,USAGE> fbMaven)
 	{
 		super(em);
 		this.fbMaven=fbMaven;
@@ -100,7 +102,7 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbMaven.getClassVersion().getSimpleName()+" not unique for artifact:"+artifact.getCode()+" and code="+code);}
 	}
 	
-	@Override public List<MODULE> fIoMavenModules(EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> query)
+	@Override public List<MODULE> fIoMavenModules(EjbIoMavenQuery<VERSION,SCOPE,MODULE,STRUCTURE> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -122,17 +124,23 @@ public class JeeslIoMavenFacadeBean <L extends JeeslLang,D extends JeeslDescript
 		return tQ.getResultList();
 	}
 
-	@Override public List<USAGE> fIoMavenUsages(EjbIoMavenQuery<GROUP,ARTIFACT,VERSION,OUTDATE,MAINTAINER,STRUCTURE> query)
+	@Override public List<USAGE> fIoMavenUsages(EjbIoMavenQuery<VERSION,SCOPE,MODULE,STRUCTURE> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<USAGE> cQ = cB.createQuery(fbMaven.getClassUsage());
 		Root<USAGE> root = cQ.from(fbMaven.getClassUsage());
+		if(ObjectUtils.isNotEmpty(query.getRootFetches())) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
 		
 		if(ObjectUtils.isNotEmpty(query.getVersions()))
 		{
 			Path<VERSION> pVersion = root.get(JeeslIoMavenUsage.Attributes.version.toString());
 			predicates.add(pVersion.in(query.getVersions()));
+		}
+		if(ObjectUtils.isNotEmpty(query.getModules()))
+		{
+			Path<MODULE> pModule = root.get(JeeslIoMavenUsage.Attributes.module.toString());
+			predicates.add(pModule.in(query.getModules()));
 		}
 		
 		cQ.select(root);

@@ -4,6 +4,7 @@ import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenArtifact;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenGroup;
 import org.jeesl.interfaces.model.io.maven.dependency.JeeslIoMavenVersion;
+import org.jeesl.interfaces.model.io.maven.dependency.JeeslMavenScope;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -15,8 +16,9 @@ public class IoMavenFactoryBuilder<L extends JeeslLang, D extends JeeslDescripti
 									GROUP extends JeeslIoMavenGroup,
 									ARTIFACT extends JeeslIoMavenArtifact<GROUP,?>,
 									VERSION extends JeeslIoMavenVersion<ARTIFACT,?,?>,
+									SCOPE extends JeeslMavenScope<?,?,SCOPE,?>,
 									MODULE extends JeeslIoMavenModule<MODULE,?,?,?,?>,
-									USAGE extends JeeslIoMavenUsage<VERSION,MODULE>>
+									USAGE extends JeeslIoMavenUsage<VERSION,SCOPE,MODULE>>
 			extends AbstractFactoryBuilder<L,D>
 {
 	private static final long serialVersionUID = 1L;

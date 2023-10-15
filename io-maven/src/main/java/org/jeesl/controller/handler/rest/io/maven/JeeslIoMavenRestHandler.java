@@ -1,12 +1,15 @@
 package org.jeesl.controller.handler.rest.io.maven;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.api.rest.i.io.JeeslIoMavenRestInterface;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
@@ -18,10 +21,12 @@ import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenSuitability;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
+import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenSuitability;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.font.IoMavenFont;
@@ -34,29 +39,32 @@ import org.jeesl.model.json.io.maven.JsonFont;
 import org.jeesl.model.json.io.maven.JsonMavenArtifact;
 import org.jeesl.model.json.io.maven.JsonMavenGraph;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
+import org.jeesl.model.json.system.status.JsonScope;
 import org.jeesl.util.db.cache.EjbCodeCache;
+import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 {
 	public static final long serialVersionUID=1;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenRestHandler.class);
 	
-	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
+	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 	
 	private final EjbCodeCache<IoMavenStructure> cacheStructure;
 	private final EjbCodeCache<IoMavenOutdate> cacheOutdate;
 	private final EjbCodeCache<IoMavenSuitability> cacheSuitability;
+	private final EjbCodeCache<IoMavenScope> cacheScope;
 	
-	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
+	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		this.fMaven=fMaven;
 		
 		cacheStructure = EjbCodeCache.instance(IoMavenStructure.class).facade(fMaven);
 		cacheOutdate = EjbCodeCache.instance(IoMavenOutdate.class).facade(fMaven);
 		cacheSuitability = EjbCodeCache.instance(IoMavenSuitability.class).facade(fMaven);
+		cacheScope = EjbCodeCache.instance(IoMavenScope.class).facade(fMaven);
 	}
 	
 	@Override public JsonSsiUpdate uploadDependencyGraph(JsonMavenGraph graph)
@@ -72,6 +80,7 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 		}
 		catch (JeeslNotFoundException e) {dut.error(e); return dut.toJson();}
 		
+		Map<IoMavenArtifact,List<IoMavenScope>> mapScope = new HashMap<>();
 		List<IoMavenVersion> currentVersions = new ArrayList<>();
 		for(JsonMavenArtifact json : graph.getArtifacts())
 		{
@@ -99,6 +108,10 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 					artifact = fMaven.save(artifact);
 				}
 				
+				List<IoMavenScope> scopes = new ArrayList<>();
+				for(JsonScope scope : json.getScopes()) {scopes.add(cacheScope.ejb(scope.getCode()));}
+				mapScope.put(artifact,scopes);
+				
 				IoMavenVersion version = null;
 				try {version = fMaven.fIoMavenVersion(artifact, json.getVersion());}
 				catch (JeeslNotFoundException e)
@@ -118,24 +131,46 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 			}
 		}
 
-		List<IoMavenUsage> usages = fMaven.allForParent(IoMavenUsage.class,module);
+		EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> query = JeeslIoMavenQuery.instance();
+		query.addRootFetch(JeeslIoMavenUsage.Attributes.scopes);
+		query.add(module);
+	
+		List<IoMavenUsage> usages = fMaven.fIoMavenUsages(query);
 		Set<IoMavenVersion> existingVersions = EjbMavenUsageFactory.toSetVersion(usages);
 		Map<IoMavenVersion,IoMavenUsage> existingUsages = EjbMavenUsageFactory.toMapVersion(usages);
 		
 		List<IoMavenUsage> newUsages = new ArrayList<>();
+		List<IoMavenUsage> updatedUsages = new ArrayList<>();
 		for(IoMavenVersion v : currentVersions)
 		{
 			if(existingVersions.contains(v))
 			{
+				IoMavenUsage u = existingUsages.get(v);
+				if(Objects.isNull(u)) {logger.warn("NULL"); System.exit(-1);}
+				
+				Collection<IoMavenScope> listA = CollectionUtils.subtract(mapScope.get(v.getArtifact()),u.getScopes());
+				Collection<IoMavenScope> listB = CollectionUtils.subtract(u.getScopes(),mapScope.get(v.getArtifact()));
+				if(!listA.isEmpty() || listB.isEmpty())
+				{
+					u.setScopes(mapScope.get(v.getArtifact()));
+					updatedUsages.add(u);
+				}
+				
 				existingVersions.remove(v);
 				existingUsages.remove(v);
 			}
-			else {newUsages.add(EjbMavenUsageFactory.build(module,v));}
+			else
+			{
+				IoMavenUsage usage = EjbMavenUsageFactory.build(module,v);
+				usage.setScopes(mapScope.get(usage.getVersion().getArtifact()));
+				newUsages.add(usage);
+			}
 		}
 		
 		try 
 		{
 			fMaven.save(newUsages);
+			fMaven.save(updatedUsages);
 			
 			logger.info("Removing unneccessary usages: "+existingUsages.size());
 			fMaven.rm(new ArrayList<>(existingUsages.values()));
