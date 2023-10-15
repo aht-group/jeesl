@@ -3,11 +3,11 @@ package org.jeesl.controller.handler.web.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class RestUrlDelay
+public class DelayedUrlConfig
 {
-	final static Logger logger = LoggerFactory.getLogger(RestUrlDelay.class);
+	final static Logger logger = LoggerFactory.getLogger(DelayedUrlConfig.class);
 	
-	public static String getUrl(org.apache.commons.configuration2.Configuration config, String key)
+	public static String resolve(org.apache.commons.configuration2.Configuration config, String key)
 	{
 		String url = config.getString(key);
 		
