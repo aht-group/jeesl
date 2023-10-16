@@ -3,17 +3,16 @@ package net.sf.ahtutils.test;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.ahtutils.controller.factory.java.security.AbstractJavaSecurityFactoryTst;
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.util.io.StringIO;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.apache.commons.io.FileUtils;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.util.io.StringIO;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractUtilsMavenTst
 {
@@ -23,8 +22,6 @@ public class AbstractUtilsMavenTst
 	protected boolean saveReference=false;
 
 	protected static File fTarget;
-	
-	protected static void setfTarget(File fTarget) {AbstractJavaSecurityFactoryTst.fTarget = fTarget;}
 
 	@BeforeClass
 	public static void initFile()
@@ -32,7 +29,7 @@ public class AbstractUtilsMavenTst
 		if(!LoggerInit.isLog4jInited()){initLogger();}
 		String dirTarget = System.getProperty("targetDir");
 		if(dirTarget==null){dirTarget="target";}
-		setfTarget(new File(dirTarget));
+		
 		logger.debug("Using targeDir "+fTarget.getAbsolutePath());
 	}
 	

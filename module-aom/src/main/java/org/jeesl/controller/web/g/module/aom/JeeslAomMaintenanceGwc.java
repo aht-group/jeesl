@@ -46,7 +46,6 @@ import org.jeesl.interfaces.util.query.module.EjbAomQuery;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
 import org.jeesl.jsf.handler.ui.UiSlotWidthHandler;
-import org.jeesl.model.ejb.module.aom.asset.AomAsset;
 import org.jeesl.model.ejb.module.aom.event.AomEvent;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;
 import org.jeesl.web.ui.module.aom.UiHelperAsset;
