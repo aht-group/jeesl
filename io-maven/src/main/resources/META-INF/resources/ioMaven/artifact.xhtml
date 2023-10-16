@@ -17,18 +17,20 @@
 	<j:row id="row1">
 		<j:slot id="sArtifacts" width="6">
 			<h:form id="fArtifacts">
-				<p:dataTable styleClass="jeesl-datatable"
+				<p:dataTable widgetVar="dtArtifacts" styleClass="jeesl-datatable"
 						var="a" value="#{cc.attrs.ctrl.artifacts}"
 						selection="#{cc.attrs.ctrl.artifact}" selectionMode="single" rowKey="#{a.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenArtifact" code="listOf"/>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectArtifact()}" update=":#{cc.id}:sArtifact"/>  
-		            <p:column filterBy="#{a.group.code}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">
+		            <p:column filterBy="#{a.group.code}" filterValue="#{cc.attrs.ctrl.fvGroup}"
+		            		filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">
 		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="group"/></f:facet>
 						<h:outputText value="#{a.group.code}" />  
 		            </p:column>
-		            <p:column filterBy="#{a.code}" filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">
+		            <p:column filterBy="#{a.code}" filterValue="#{cc.attrs.ctrl.fvArtifact}"
+		            		filterMatchMode="contains" filterStyle="#{appSettingsBean.filterStyle}">
 		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact"/></f:facet>
 		            	<jtp:symbolizer value="#{a.suitability}" marginRight="5"/>
 						<h:outputText value="#{a.code}" />  
@@ -152,6 +154,7 @@
 			</h:form>
 		</j:slot>
 	</j:row>
+	<script type="text/javascript" target="body">$j = jQuery; $j(document).ready( function() {dtArtifacts.filter(); });</script>    
 </jp:grid>
 </composite:implementation>
 </html>

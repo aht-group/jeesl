@@ -48,7 +48,10 @@
 		            </p:column>
 		            <p:column>
 		            	<jtp:symbolizer value="#{a.suitability}" marginRight="5"/>
-						<h:outputText value="#{a.code}" />
+		            	<h:outputLink value="#{facesContext.externalContext.requestContextPath}#{appSecurityBean.viewIoMavenArtifact.urlMapping}">
+							<h:outputText value="#{a.code}"/>
+							<f:param name="artifact" value="#{a.id}" />
+						</h:outputLink>
 		            </p:column>
 		            <p:columns var="m" value="#{cc.attrs.ctrl.modules}">
 		            	<ui:repeat var="v" value="#{cc.attrs.ctrl.mapVersion[a][m]}">

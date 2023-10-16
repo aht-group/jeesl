@@ -41,7 +41,9 @@ public class LoggerBootstrap
 			sb.setLength(0);
 			sb.append(path+File.separatorChar+log4j2Name);
 			Configurator.initialize(null, sb.toString());
+			logger.info("Activated with "+sb.toString());
 		}
+		
 	}
 
 	public static boolean isLog4jInited() {return log4jInited;}

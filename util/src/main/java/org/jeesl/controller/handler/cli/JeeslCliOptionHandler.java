@@ -135,6 +135,43 @@ public class JeeslCliOptionHandler
 		return ConfigLoader.init();
 	}
 	
+	public org.apache.commons.configuration2.Configuration config(CommandLine line, String defaultConfig)
+	{
+		ConfigBootstrap bootstrap = ConfigBootstrap.instance();
+		if(line.hasOption(oConfig.getOpt()))
+		{
+			String configFile = line.getOptionValue(oConfig.getOpt());
+			
+			if(configFile.equals("exlp"))
+			{
+				logger.info("Using "+ExlpCentralConfigPointer.class.getSimpleName());
+				try
+				{
+					ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance(exlpApp).jaxb(JaxbUtil.instance());
+					bootstrap.add(ccp.toFile(exlpCode).toPath());
+				}
+				catch (ExlpConfigurationException e)
+				{
+					logger.error(e.getMessage());
+					System.exit(-1);
+				}
+			}
+			
+			MultiResourceLoader mrl = new MultiResourceLoader();
+			if(!mrl.isAvailable(configFile))
+			{
+				logger.error("Specified configuration does not exist: "+configFile);
+				System.exit(-1);
+			}
+			logger.info("Using "+Configuration.class.getSimpleName()+" "+configFile);
+			bootstrap.addS(configFile);
+	    }
+		
+		bootstrap.addS(defaultConfig);
+		
+		return bootstrap.combine();
+	}
+	
 	public org.apache.commons.configuration2.Configuration toConfig(CommandLine line, String defaultConfig)
 	{
 		ConfigBootstrap cl = ConfigBootstrap.instance();
