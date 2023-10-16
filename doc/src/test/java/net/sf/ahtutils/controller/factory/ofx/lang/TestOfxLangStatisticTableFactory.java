@@ -5,21 +5,21 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openfuxml.content.table.Table;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.latex.content.table.LatexGridTableRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.ahtutils.doc.latex.writer.TestLatexTranslationStatFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxLangStatisticTableFactory;
 import net.sf.ahtutils.model.pojo.status.TranslationStatistic;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.openfuxml.content.table.Table;
-import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.content.table.LatexGridTableRenderer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TestOfxLangStatisticTableFactory extends AbstractOfxStatusFactoryTest
 {
@@ -31,7 +31,7 @@ public class TestOfxLangStatisticTableFactory extends AbstractOfxStatusFactoryTe
 	private String[] headerKeys = {"key1","key1"};
 	private List<TranslationStatistic> lStats;
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initFiles() throws FileNotFoundException
 	{
 		fXml = new File(rootDir,"tableView.xml");
@@ -40,7 +40,7 @@ public class TestOfxLangStatisticTableFactory extends AbstractOfxStatusFactoryTe
 		translations = JaxbUtil.loadJAXB("src/test/resources/data/xml/dummyTranslations.xml", Translations.class);
 	}
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{	
 		super.initOfx();

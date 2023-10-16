@@ -2,13 +2,13 @@ package net.sf.ahtutils.test;
 
 import java.io.File;
 
-import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
-
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
+import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 public class AbstractAhtUtilsJsfTst extends AbstractJeeslTest
 {
@@ -17,7 +17,7 @@ public class AbstractAhtUtilsJsfTst extends AbstractJeeslTest
 	protected static NsPrefixMapperInterface nsPrefixMapper;
 	protected static File fTarget;
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initFile()
 	{
 		if(!LoggerInit.isLog4jInited()){initLogger();}
@@ -28,7 +28,7 @@ public class AbstractAhtUtilsJsfTst extends AbstractJeeslTest
 	}
 	protected static void setfTarget(File fTarget) {AbstractAhtUtilsJsfTst.fTarget = fTarget;}
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		if(!LoggerInit.isLog4jInited())

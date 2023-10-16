@@ -1,13 +1,13 @@
 package net.sf.ahtutils.monitor.task.net;
 
-import net.sf.ahtutils.test.UtilsMonitorTestBootstrap;
-
 import org.jeesl.controller.monitoring.result.net.IcmpResult;
 import org.jeesl.controller.monitoring.result.net.IcmpResults;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.test.UtilsMonitorTestBootstrap;
 
 public class TestIcmpTask
 {
@@ -20,7 +20,7 @@ public class TestIcmpTask
 		IcmpResults results = task.call();
 		for(IcmpResult result : results.getList())
 		{
-			Assert.assertEquals(IcmpResult.Code.REACHABLE, result.getCode());
+			Assertions.assertEquals(IcmpResult.Code.REACHABLE, result.getCode());
 		}
 		
 	}

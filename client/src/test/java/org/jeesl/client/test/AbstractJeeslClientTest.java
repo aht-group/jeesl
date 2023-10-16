@@ -2,9 +2,9 @@ package org.jeesl.client.test;
 
 import java.io.File;
 
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,14 +19,14 @@ public class AbstractJeeslClientTest extends AbstractJeeslTest
 	protected File f;
 	protected boolean saveReference=false;
 
-	@BeforeClass
+	@BeforeAll
 	public static void initFile()
 	{
 		if(!LoggerInit.isLog4jInited()){initLogger();}
 		AbstractJeeslTest.initTargetDirectory();
 	}
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		if(!LoggerInit.isLog4jInited())
@@ -37,7 +37,7 @@ public class AbstractJeeslClientTest extends AbstractJeeslTest
 		}
     }
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initPrefixMapper()
 	{
 //		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
@@ -47,7 +47,7 @@ public class AbstractJeeslClientTest extends AbstractJeeslTest
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
-		Assert.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
+		Assertions.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
 	}
 	
 	protected void saveXml(Object xml, File f, boolean formatted)

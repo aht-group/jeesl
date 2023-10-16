@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
-import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class AbstractUtilsMavenTst
 
 	protected static File fTarget;
 
-	@BeforeClass
+	@BeforeAll
 	public static void initFile()
 	{
 		if(!LoggerInit.isLog4jInited()){initLogger();}
@@ -33,7 +33,7 @@ public class AbstractUtilsMavenTst
 		logger.debug("Using targeDir "+fTarget.getAbsolutePath());
 	}
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		if(!LoggerInit.isLog4jInited())
@@ -44,7 +44,7 @@ public class AbstractUtilsMavenTst
 		}
     }
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initPrefixMapper()
 	{
 		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
@@ -52,7 +52,7 @@ public class AbstractUtilsMavenTst
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
-		Assert.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
+		Assertions.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
 	}
 	
 	protected void saveXml(Object xml, File f, boolean formatted)
@@ -76,7 +76,7 @@ public class AbstractUtilsMavenTst
 		
 		String expected = StringIO.loadTxt(fExpected);
 		String actual = StringIO.loadTxt(fActual);
-		Assert.assertEquals("Texts are different",expected, actual);
+		Assertions.assertEquals("Texts are different",expected, actual);
 	}
 	
 	public void setSaveReference(boolean saveReference) {this.saveReference = saveReference;}

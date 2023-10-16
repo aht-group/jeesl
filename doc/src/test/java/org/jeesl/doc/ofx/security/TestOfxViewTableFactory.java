@@ -14,10 +14,10 @@ import org.jeesl.model.xml.system.security.View;
 import org.jeesl.model.xml.system.security.Views;
 import org.jeesl.model.xml.system.status.TestXmlDescription;
 import org.jeesl.model.xml.system.status.TestXmlLang;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class TestOfxViewTableFactory extends AbstractOfxSecurityFactoryTest
 	
 	private static List<String> headerKeys;
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initFiles() throws FileNotFoundException, ConfigurationException
 	{
 		headerKeys = new ArrayList<String>();
@@ -54,7 +54,7 @@ public class TestOfxViewTableFactory extends AbstractOfxSecurityFactoryTest
 		translations = JaxbUtil.loadJAXB("src/test/resources/data/xml/dummyTranslations.xml", Translations.class);
 	}
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{	
 		super.initOfx();
@@ -73,7 +73,7 @@ public class TestOfxViewTableFactory extends AbstractOfxSecurityFactoryTest
 		return views;
 	}
 	
-	@Test @Ignore
+	@Test @Disabled
 	public void testOfx() throws FileNotFoundException
 	{
 /*		Views views = createViews();
@@ -84,7 +84,7 @@ public class TestOfxViewTableFactory extends AbstractOfxSecurityFactoryTest
 		assertJaxbEquals(expected, actual);
 */	}
 	
-	@Test @Ignore
+	@Test @Disabled
 	public void testLatex() throws OfxAuthoringException, IOException
 	{
 /*		Table actual = fOfx.toOfx(createViews().getView(),headerKeys);

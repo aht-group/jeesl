@@ -1,13 +1,13 @@
 package net.sf.ahtutils.jsf.menu;
 
-import net.sf.ahtutils.test.AbstractAhtUtilsJsfTst;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jeesl.model.xml.system.navigation.Menu;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.test.AbstractAhtUtilsJsfTst;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestDummyMenuFactory extends AbstractAhtUtilsJsfTst
 {
@@ -15,7 +15,7 @@ public class TestDummyMenuFactory extends AbstractAhtUtilsJsfTst
 	
 	private Menu menu;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		menu = DummyMenuFactory.create();

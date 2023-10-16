@@ -14,9 +14,9 @@ import org.jeesl.factory.xml.system.lang.XmlLangFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.security.XmlCategoryFactory;
 import org.jeesl.model.xml.system.security.Category;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.content.list.List;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.renderer.latex.OfxLatexRenderer;
@@ -46,7 +46,7 @@ public class TestOfxCategoryListFactory extends AbstractOfxSecurityFactoryTest
 	
 	private OfxLatexRenderer parentSection;
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initFiles() throws ConfigurationException, FileNotFoundException
 	{
 		fXml = new File(rootDir,"listRoleCategory.xml");
@@ -57,7 +57,7 @@ public class TestOfxCategoryListFactory extends AbstractOfxSecurityFactoryTest
 		translations = JaxbUtil.loadJAXB("src/test/resources/data/xml/dummyTranslations.xml", Translations.class);
 	}
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{	
 		super.initOfx();

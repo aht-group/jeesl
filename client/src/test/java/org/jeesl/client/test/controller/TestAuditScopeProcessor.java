@@ -15,10 +15,10 @@ import org.jeesl.client.model.ejb.system.security.SecurityUsecase;
 import org.jeesl.client.model.ejb.system.security.SecurityView;
 import org.jeesl.client.model.ejb.user.User;
 import org.jeesl.controller.processor.io.label.revision.AuditScopeProcessor;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +43,7 @@ public class TestAuditScopeProcessor extends AbstractJeeslTest
 	private AuditScopeProcessor asp;
 	private XmlRevisionFactory<Lang,Description,SecurityCategory,SecurityRole,SecurityView,SecurityUsecase,SecurityAction,SecurityActionTemplate,User> xfRevision;
 	
-	@Before
+	@BeforeEach
     public void init()
     {
 		asp = new AuditScopeProcessor();
@@ -100,7 +100,7 @@ public class TestAuditScopeProcessor extends AbstractJeeslTest
     public void nrOfScopes()
     {
         List<Scope> actual = asp.group(list);
-        Assert.assertEquals(3, actual.size());
+        Assertions.assertEquals(3, actual.size());
     }
 
     @Test
@@ -109,15 +109,15 @@ public class TestAuditScopeProcessor extends AbstractJeeslTest
         List<Scope> actual = asp.group(list);
         for(Scope s : actual)
         {
-            Assert.assertTrue(s.isSetChange());
+        	Assertions.assertTrue(s.isSetChange());
         }
         Revision r = new Revision();
         r.getScope().addAll(actual);
         JaxbUtil.info(r);
-        Assert.assertEquals(3, actual.size());
+        Assertions.assertEquals(3, actual.size());
     }
     
-    @Test @Ignore
+    @Test @Disabled
     public void ordering()
     {
     	int i=0;
@@ -126,7 +126,7 @@ public class TestAuditScopeProcessor extends AbstractJeeslTest
     	{
     		for(Change c : s.getChange())
     		{
-    			Assert.assertEquals("Element i="+i,list.get(i), c);
+    			Assertions.assertEquals(list.get(i), c,"Element i="+i);
     			i++;
     		}
     	}
@@ -135,7 +135,7 @@ public class TestAuditScopeProcessor extends AbstractJeeslTest
     @Test public void flatSize()
     {
     	Scope scope = XmlScopeFactory.build(asp.flat(revisions.getRevision()));
-    	Assert.assertEquals(7, scope.getChange().size());
+    	Assertions.assertEquals(7, scope.getChange().size());
     }
     
     public void flat()

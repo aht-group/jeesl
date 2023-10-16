@@ -5,13 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.doc.word.WordResponsibilityMatrixFactory;
-import net.sf.ahtutils.test.AbstractUtilsDocTest;
-import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
-import net.sf.ahtutils.xml.project.Responsibilities;
-import net.sf.ahtutils.xml.status.Status;
-import net.sf.exlp.util.xml.JaxbUtil;
-
 import org.jeesl.factory.xml.system.security.XmlRoleFactory;
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
@@ -20,11 +13,18 @@ import org.jeesl.model.xml.system.security.Roles;
 import org.jeesl.model.xml.system.security.Staff;
 import org.jeesl.model.xml.system.security.Staffs;
 import org.jeesl.model.xml.system.security.User;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.doc.word.WordResponsibilityMatrixFactory;
+import net.sf.ahtutils.test.AbstractUtilsDocTest;
+import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
+import net.sf.ahtutils.xml.project.Responsibilities;
+import net.sf.ahtutils.xml.status.Status;
+import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestResponsibilityMatrixFactory extends AbstractUtilsDocTest
 {
@@ -37,14 +37,14 @@ public class TestResponsibilityMatrixFactory extends AbstractUtilsDocTest
 	
 	private Responsibilities responsibilites;
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initFiles() throws FileNotFoundException
 	{
 		fDst = new File("target","matrix.docx");
 		logger.info("Using target File: "+fDst.getAbsolutePath());
 	}
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{	
 		initLists();

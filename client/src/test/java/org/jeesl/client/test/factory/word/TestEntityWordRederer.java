@@ -5,11 +5,12 @@ import java.io.IOException;
 import org.jeesl.doc.word.EntityWordRenderer;
 import org.jeesl.model.xml.system.revision.Entities;
 import org.jeesl.model.xml.system.revision.Entity;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aspose.words.Document;
+
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -27,7 +28,8 @@ public class TestEntityWordRederer extends AbstractWordCli
 //			this.templateDoc = new Document("../util/src/test/resources/data/docx/templates/entity.dotx");
 	}
 	
-	@Test public void dummy() {}
+	@Test
+	public void dummy() {}
 	
 	public void renderEntities() throws IOException, Exception
 	{

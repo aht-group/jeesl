@@ -5,16 +5,16 @@ import java.util.Map;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.client.maintenance.DuplicateHashCodeFinder;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class TestHashCodeFinder
 {
 	DuplicateHashCodeFinder hcc;
 
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		File f = new File("..\\ejb\\src\\test\\java\\net\\sf\\ahtutils\\test\\model");
@@ -22,13 +22,13 @@ public class TestHashCodeFinder
 		hcc.searchForHashCodeBuilder();
 	}
 
-	@Test @Ignore
+	@Test @Disabled
 	public void test()
 	{
 		int expectedSize = 2;
 		Map<String, String> testList = hcc.compareCode();
 		int actual = testList.size();
-		Assert.assertEquals(expectedSize, actual);
+		Assertions.assertEquals(expectedSize, actual);
 		for(Map.Entry<String, String> entry : testList.entrySet()){System.out.println(entry);}
 		System.out.println(actual);
 	}

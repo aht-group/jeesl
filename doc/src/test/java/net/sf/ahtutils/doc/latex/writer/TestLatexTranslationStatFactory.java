@@ -6,10 +6,10 @@ import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +35,7 @@ public class TestLatexTranslationStatFactory extends AbstractUtilsDocTest
 		return factory;
 	}
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{	
 		factory = new LatexTranslationStatisticWriter(null,null,null);
@@ -62,42 +62,42 @@ public class TestLatexTranslationStatFactory extends AbstractUtilsDocTest
 		return new Element("langs",nsLang);
 	}
 	
-	@Test @Ignore
+	@Test @Disabled
 	public void noLangs()
 	{
-		Assert.assertFalse(factory.hasLangs(doc));
+		Assertions.assertFalse(factory.hasLangs(doc));
 	}
 	
-	@Test @Ignore
+	@Test @Disabled
 	public void hasOneLangs()
 	{
 		doc.getRootElement().addContent(langs);
-		Assert.assertTrue(factory.hasLangs(doc));
+		Assertions.assertTrue(factory.hasLangs(doc));
 	}
 	
-	@Test @Ignore
+	@Test @Disabled
 	public void hasTwoLangs()
 	{
 		doc.getRootElement().addContent(createLangs());
 		doc.getRootElement().addContent(createLangs());
-		Assert.assertTrue(factory.hasLangs(doc));
-		Assert.assertEquals(2, factory.getLangsElements(doc).size());
+		Assertions.assertTrue(factory.hasLangs(doc));
+		Assertions.assertEquals(2, factory.getLangsElements(doc).size());
 	}
 	
-	@Test @Ignore
+	@Test @Disabled
 	public void jdomLangs()
 	{
 		doc.getRootElement().addContent(langs);
 		List<Element> actual = factory.getLangsElements(doc);
-		Assert.assertEquals(1, actual.size());
-		Assert.assertEquals(langs, actual.get(0));
+		Assertions.assertEquals(1, actual.size());
+		Assertions.assertEquals(langs, actual.get(0));
 	}
 	
-	@Test @Ignore
+	@Test @Disabled
 	public void xmlLangs()
 	{
 		doc.getRootElement().addContent(langs);
 		List<Langs> actual = factory.getLangs(doc);
-		Assert.assertEquals(1, actual.size());
+		Assertions.assertEquals(1, actual.size());
 	}
 }

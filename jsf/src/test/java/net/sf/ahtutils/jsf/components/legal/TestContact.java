@@ -5,9 +5,9 @@ import java.util.Scanner;
 import net.sf.ahtutils.test.AbstractAhtUtilsJsfTst;
 import net.sf.ahtutils.test.UtilsJsfTstBootstrap;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +17,7 @@ public class TestContact extends AbstractAhtUtilsJsfTst
 	
 	private Contact contact;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 //		contact = new Contact();
@@ -32,8 +32,8 @@ public class TestContact extends AbstractAhtUtilsJsfTst
 		String base64 = contact.encode(input);
 		String back = contact.decode(base64);
 		
-		Assert.assertEquals("TWVpbiBUZXN0", base64);
-		Assert.assertEquals(input, back);
+		Assertions.assertEquals("TWVpbiBUZXN0", base64);
+		Assertions.assertEquals(input, back);
 		
 		logger.debug("Input: "+input);
 		logger.debug("Base64: "+base64);

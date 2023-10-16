@@ -6,8 +6,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jeesl.JeeslMavenBootstrap;
 import org.jeesl.processor.JeeslXhtmlParser;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mozilla.javascript.EvaluatorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class TestXhtmlValidator extends AbstractUtilsMavenTst
 
 	private JeeslXhtmlParser xhtmlParser;
 
-	@Before
+	@BeforeEach
 	public void init() throws EvaluatorException, IOException, ParserConfigurationException, SAXException
 	{
 		xhtmlParser = new JeeslXhtmlParser("src/test/resources/data/factory/xhtml");

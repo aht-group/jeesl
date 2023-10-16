@@ -15,7 +15,7 @@ import org.jeesl.client.model.ejb.system.graphic.GraphicShape;
 import org.jeesl.client.model.ejb.system.graphic.GraphicType;
 import org.jeesl.client.test.AbstractJeeslClientTest;
 import org.jeesl.factory.svg.SvgSymbolFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.media.transcode.Svg2SvgTranscoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

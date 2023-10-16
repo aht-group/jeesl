@@ -1,8 +1,8 @@
 package org.jeesl.jsf.functions;
 
 import org.jeesl.jsf.function.Position2Character;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +17,8 @@ public class TestPosition2Character extends AbstractAhtUtilsJsfTst
 	@Test
 	public void test()
 	{
-		Assert.assertEquals("A", Position2Character.toChar(1));
-		Assert.assertEquals("B", Position2Character.toChar(2));	
+		Assertions.assertEquals("A", Position2Character.toChar(1));
+		Assertions.assertEquals("B", Position2Character.toChar(2));	
 	}
 	
 	public static void main(String[] args)

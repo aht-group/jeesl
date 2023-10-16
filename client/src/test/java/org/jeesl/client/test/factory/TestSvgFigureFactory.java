@@ -22,7 +22,7 @@ import org.jeesl.factory.ejb.io.graphic.EjbGraphicFigureFactory;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
 import org.jeesl.factory.svg.SvgFigureFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.media.transcode.Svg2SvgTranscoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

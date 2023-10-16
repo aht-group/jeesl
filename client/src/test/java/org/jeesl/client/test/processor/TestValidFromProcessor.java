@@ -8,9 +8,9 @@ import net.sf.ahtutils.test.AbstractJeeslTest;
 
 import org.jeesl.client.model.ejb.ValidFrom;
 import org.joda.time.DateTime;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ public class TestValidFromProcessor extends AbstractJeeslTest
 	
 	private List<ValidFrom> list;
 	
-	@Before
+	@BeforeEach
 	public void init()
 	{
 		list = new ArrayList<ValidFrom>();
@@ -42,7 +42,7 @@ public class TestValidFromProcessor extends AbstractJeeslTest
     	DateTime dt = new DateTime(2012, 3, 1, 0, 0, 0);
     	
     	List<ValidFrom> result = vfp.getValid(dt.toDate());
-    	Assert.assertEquals(1, result.size());
-    	Assert.assertEquals(1, result.get(0).getId());
+    	Assertions.assertEquals(1, result.size());
+    	Assertions.assertEquals(1, result.get(0).getId());
     }
 }

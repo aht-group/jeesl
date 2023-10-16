@@ -297,13 +297,19 @@
    	   		<scope>test</scope>
    	   	</dependency>
 		
-		<!-- Test -->
-		
+		<!-- Test  -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>provided</scope>
+		</dependency> 
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
 		</dependency>
+		
+		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>

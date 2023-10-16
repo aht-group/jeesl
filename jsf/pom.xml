@@ -319,13 +319,19 @@
    	   		<scope>test</scope>
    	   	</dependency>
 		
-		<!-- Test -->
+		<!-- Test 
 		<dependency>
    	   		<groupId>junit</groupId>
    	   		<artifactId>junit</artifactId>
    	   		<type>jar</type>
    	   		<scope>test</scope>
-   	   	</dependency>
+   	   	</dependency> -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+   	   	
    	   	<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-test</artifactId>

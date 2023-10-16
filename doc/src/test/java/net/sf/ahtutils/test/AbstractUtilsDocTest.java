@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.openfuxml.factory.ConfigurationProviderFacotry;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
@@ -37,7 +37,7 @@ public class AbstractUtilsDocTest
 	protected static File fTarget;
 	protected static void setfTarget(File myTarget) {fTarget=myTarget;}	
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initFile()
 	{
 		if(!LoggerInit.isLog4jInited()){initLogger();}
@@ -47,7 +47,7 @@ public class AbstractUtilsDocTest
 		logger.debug("Using targeDir "+fTarget.getAbsolutePath());
 	}
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		if(!LoggerInit.isLog4jInited())
@@ -58,7 +58,7 @@ public class AbstractUtilsDocTest
 		}
     }
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initPrefixMapper()
 	{
 //		JaxbUtil.setNsPrefixMapper(new AhtUtilsNsPrefixMapper());
@@ -74,7 +74,7 @@ public class AbstractUtilsDocTest
 	
 	protected void assertJaxbEquals(Object expected, Object actual)
 	{
-		Assert.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
+		Assertions.assertEquals("actual XML differes from expected XML",JaxbUtil.toString(expected),JaxbUtil.toString(actual));
 	}
 	
 	protected void saveXml(Object xml, File f, boolean formatted)
@@ -123,7 +123,7 @@ public class AbstractUtilsDocTest
 	private void assertText(File fExpected, String actual)
 	{
 		String expected = StringIO.loadTxt(fExpected);		
-		Assert.assertEquals("Texts are different",expected, actual);
+		Assertions.assertEquals("Texts are different",expected, actual);
 	}
 	
 	protected void assertText(File fExpected, File fActual) throws IOException
@@ -136,7 +136,7 @@ public class AbstractUtilsDocTest
 		
 		String expected = StringIO.loadTxt(fExpected);
 		String actual = StringIO.loadTxt(fActual);
-		Assert.assertEquals("Texts are different",expected, actual);
+		Assertions.assertEquals("Texts are different",expected, actual);
 	}
 	
 	public void setSaveReference(boolean saveReference) {this.saveReference = saveReference;}

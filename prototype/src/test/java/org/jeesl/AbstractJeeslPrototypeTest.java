@@ -2,8 +2,8 @@ package org.jeesl;
 
 import java.io.File;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +17,7 @@ public class AbstractJeeslPrototypeTest
 	protected static NsPrefixMapperInterface nsPrefixMapper;
 	protected static File fTarget;
 		
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		if(!LoggerInit.isLog4jInited())

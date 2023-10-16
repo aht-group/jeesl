@@ -4,6 +4,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.DefaultConfigurationBuilder;
+import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
+import org.jeesl.factory.xml.system.lang.XmlLangFactory;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openfuxml.content.table.Table;
+import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.renderer.latex.content.table.LatexGridTableRenderer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.ahtutils.controller.factory.ofx.lang.AbstractOfxStatusFactoryTest;
 import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
@@ -13,21 +28,6 @@ import net.sf.ahtutils.xml.status.Langs;
 import net.sf.ahtutils.xml.status.Status;
 import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
-
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.DefaultConfigurationBuilder;
-import org.jeesl.exception.processing.UtilsConfigurationException;
-import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
-import org.jeesl.factory.xml.system.lang.XmlLangFactory;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.openfuxml.content.table.Table;
-import org.openfuxml.exception.OfxAuthoringException;
-import org.openfuxml.renderer.latex.content.table.LatexGridTableRenderer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 {
@@ -40,7 +40,7 @@ public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 	private Aht xmlStatus;
 	private static Translations translations;
 	
-	@BeforeClass
+	@BeforeAll
 	public static void initFiles() throws FileNotFoundException, ConfigurationException
 	{
 		fXml = new File(rootDir,"tableStatus.xml");
@@ -54,7 +54,7 @@ public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest
 		translations = JaxbUtil.loadJAXB("data/xml/dummyTranslations.xml", Translations.class);
 	}
 	
-	@Before
+	@BeforeEach
 	public void init() throws UtilsConfigurationException
 	{			
 		super.initOfx();

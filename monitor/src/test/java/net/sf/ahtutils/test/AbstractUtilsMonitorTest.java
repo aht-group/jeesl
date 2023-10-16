@@ -1,17 +1,17 @@
 package net.sf.ahtutils.test;
 
-import net.sf.exlp.util.io.LoggerInit;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.LoggerInit;
 
 public class AbstractUtilsMonitorTest
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractUtilsMonitorTest.class);
 	
-	@BeforeClass
+	@BeforeAll
     public static void initLogger()
 	{
 		if(!LoggerInit.isLog4jInited())

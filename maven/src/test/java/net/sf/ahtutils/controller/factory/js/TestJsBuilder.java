@@ -6,8 +6,9 @@ import java.io.IOException;
 import net.sf.ahtutils.test.AbstractUtilsMavenTst;
 
 import org.jeesl.JeeslMavenBootstrap;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mozilla.javascript.EvaluatorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,7 @@ public class TestJsBuilder extends AbstractUtilsMavenTst
 	
 	private JsFactory jsFactory;
 			
-	@Before
+	@BeforeEach
 	public void init() throws EvaluatorException, IOException
 	{	
 		File src = new File("src/test/resources/data/factory/js");
