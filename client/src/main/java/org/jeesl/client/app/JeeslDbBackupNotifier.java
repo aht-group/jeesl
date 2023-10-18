@@ -98,7 +98,7 @@ public class JeeslDbBackupNotifier
 		CommandLine line = parser.parse(jco.getOptions() , args); 
 	     
 		jco.handleHelp(line);
-		jco.handleLogger(line);
+		jco.handleLog4j(line);
 		
 //		Configuration config = uOption.initConfig(line, MeisBootstrap.xmlConfig);
 	    

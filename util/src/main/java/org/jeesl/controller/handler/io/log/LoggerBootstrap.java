@@ -24,6 +24,7 @@ public class LoggerBootstrap
 
 	
 	public static LoggerBootstrap instance() {return new LoggerBootstrap("log4j2.xml");}
+	public static LoggerBootstrap instance(String log4j2Name) {return new LoggerBootstrap(log4j2Name);}
 	private LoggerBootstrap(String log4j2Name)
 	{
 		this.log4j2Name=log4j2Name;

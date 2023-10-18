@@ -5,6 +5,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.controller.handler.io.log.LoggerBootstrap;
 import org.jeesl.controller.handler.system.property.ConfigBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,31 +72,38 @@ public class JeeslCliOptionHandler
 		formatter.printHelp( "java -jar xxx"+version, options );
 		System.exit(0);
 	}
+
 	
-	// *** DEBUG ***
-	public void setLog4jPaths(String... paths)
+	public JeeslCliOptionHandler setLog4jPaths(String... paths)
 	{
 		log4jPaths = paths;
+		return this;
 	}
 	
-	public void handleLogger(String alternativePath, CommandLine line)
-	{
-		this.setLog4jPaths(alternativePath);
-		if(line.hasOption(oDebug.getOpt())) {this.initLogger("log4j.debug.xml");}
-        else {this.initLogger("log4j.cli.xml");}
-	}
-	public void handleLogger(CommandLine line)
+	
+	public void handleLog4j(CommandLine line)
 	{
 		if(line.hasOption(oDebug.getOpt())) {this.initLogger("log4j.debug.xml");}
         else {this.initLogger("log4j.cli.xml");}
 	}
-	
 	private void initLogger(String loggingProfile)
 	{
 		LoggerInit loggerInit = new LoggerInit(loggingProfile);
 		for(String path : log4jPaths){loggerInit.addAltPath(path);}
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();
+	}
+	
+	public void handleLog4j2(CommandLine line)
+	{
+//		System.out.println("Testing logging");
+		if(line.hasOption(oDebug.getOpt())) {this.initLogger2("log4j.debug.xml");}
+        else {this.initLogger2("log4j2-cli.xml");}
+	}
+	private void initLogger2(String loggingProfile)
+	{
+//		System.out.println(log4jPaths[0]+"/"+loggingProfile);
+		LoggerBootstrap.instance(loggingProfile).path(log4jPaths[0]).init();
 	}
 	
 	// *** CONFIG ***

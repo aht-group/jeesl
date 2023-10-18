@@ -115,6 +115,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	protected List<SCORE> scores; public List<SCORE> getScores() {return scores;}
 	private final List<VALGORITHM> algorithms; public List<VALGORITHM> getAlgorithms() {return algorithms;}
 	
+	private TC category; public TC getCategory() {return category;} public void setCategory(TC category) {this.category = category;}
 	protected VERSION version; public VERSION getVersion() {return version;}public void setVersion(VERSION version) {this.version = version;}
 	protected VERSION nestedVersion; public VERSION getNestedVersion() {return nestedVersion;} public void setNestedVersion(VERSION nestedVersion) {this.nestedVersion = nestedVersion;}
 	
