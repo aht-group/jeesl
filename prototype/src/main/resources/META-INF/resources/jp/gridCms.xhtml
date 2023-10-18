@@ -57,7 +57,7 @@
 					</h:form>
 				</j:slot>
 			</j:row>
-			<c:if test="${cc.attrs.layout == false}">
+			<c:if test="${not cc.attrs.layout}">
 				<j:row rendered="#{(not empty cc.attrs.bean.cms) and (cc.attrs.bean.cms.id gt 0) and (not empty cc.attrs.bean.sbhLocale.selection)}">
 					<j:slot width="3">
 						<h:form id="fTree" >
@@ -167,18 +167,7 @@
 									<f:facet name="actions">
 										<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveParagraph()}" update="@form" tooltip="#{msg.ttSave}"/>
 									</f:facet>
-									<p:textEditor widgetVar="editorWidget1" value="#{cc.attrs.bean.element.content[cc.attrs.bean.sbhLocale.selection.code].lang}" height="300" placeholder="Enter your content">
-								        <f:facet name="toolbar">
-								             <span class="ql-formats">
-								                <button class="ql-bold"></button>
-								                <button class="ql-italic"></button>
-								            </span>
-											<span class="ql-formats">
-												<button class="ql-list" value="ordered"></button>
-												<button class="ql-list" value="bullet"></button>
-											</span>
-								        </f:facet>
-								    </p:textEditor>
+									<jtp:inputXhtml value="#{cc.attrs.bean.element.content[cc.attrs.bean.sbhLocale.selection.code].lang}"/>
 								</p:panel>
 							</h:form>
 							<jp:ioFrFiles handler="#{cc.attrs.bean.hFileRepository}" allowDelete="true" rendered="#{(cc.attrs.bean.element.type.code eq 'image')}" componentPrefix="#{cc.id}"/>
@@ -188,7 +177,7 @@
 					</j:slot>
 				</j:row>
 			</c:if>
-			<c:if test="${cc.attrs.layout == true}">
+			<c:if test="${cc.attrs.layout}">
 				<j:row id="sRow" rendered="#{(not empty cc.attrs.bean.cms) and (cc.attrs.bean.cms.id gt 0) and (not empty cc.attrs.bean.sbhLocale.selection)}">
 					<j:slot width="3">
 						<h:form id="fTree" >
@@ -292,18 +281,8 @@
 									<f:facet name="actions">
 										<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveParagraph()}" update="@form" tooltip="#{msg.ttSave}"/>
 									</f:facet>
-									<p:textEditor widgetVar="editorWidget1" value="#{cc.attrs.bean.element.content[cc.attrs.bean.sbhLocale.selection.code].lang}" height="300" placeholder="Enter your content">
-								        <f:facet name="toolbar">
-								             <span class="ql-formats">
-								                <button class="ql-bold"></button>
-								                <button class="ql-italic"></button>
-								            </span>
-											<span class="ql-formats">
-												<button class="ql-list" value="ordered"></button>
-												<button class="ql-list" value="bullet"></button>
-											</span>
-								        </f:facet>
-								    </p:textEditor>
+									<jtp:inputXhtml value="#{cc.attrs.bean.element.content[cc.attrs.bean.sbhLocale.selection.code].lang}"/>
+									
 								</p:panel>	
 							</h:form>
 							<jp:ioFrFiles handler="#{cc.attrs.bean.hFileRepository}" allowDelete="true" rendered="#{(cc.attrs.bean.element.type.code eq 'image')}" componentPrefix="#{cc.id}" update=":#{cc.id}:sRow"/>

@@ -27,9 +27,9 @@ public class TestFigureXPathFinance extends AbstractJeeslUtilTest
 	{
 		figures = TestXmlFigures.create(false);
 
-		f1 = TestXmlFinance.create(false);f1.setCode("ok");figures.getFinance().add(f1);
-		f2 = TestXmlFinance.create(false);f2.setCode("multi");figures.getFinance().add(f2);
-		f3 = TestXmlFinance.create(false);f3.setCode("multi");figures.getFinance().add(f3);
+		f1 = TestXmlFinance.create(false);f1.setCode("ok"); figures.getFinance().add(f1);
+		f2 = TestXmlFinance.create(false);f2.setCode("multi"); figures.getFinance().add(f2);
+		f3 = TestXmlFinance.create(false);f3.setCode("multi"); figures.getFinance().add(f3);
 	}
 	
 	@Test

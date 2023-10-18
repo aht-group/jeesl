@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
+import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.controller.web.AbstractJeeslWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -22,10 +23,14 @@ import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenModule;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
+import org.jeesl.model.ejb.io.graphic.core.IoGraphicComponent;
+import org.jeesl.model.ejb.io.graphic.core.IoGraphicShape;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphicType;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
+import org.jeesl.model.ejb.io.locale.IoStatus;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
@@ -53,6 +58,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenModuleWc.class);
 	
+	private JeeslIoGraphicFacade<IoStatus,IoGraphic,IoGraphicType,IoGraphicComponent,IoGraphicShape> fGraphic;
 	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final List<IoMavenStructure> structures; public List<IoMavenStructure> getStructures() {return structures;}
@@ -78,10 +84,12 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven,
+							JeeslIoGraphicFacade<IoStatus,IoGraphic,IoGraphicType,IoGraphicComponent,IoGraphicShape> fGraphic)
 	{
 		super.postConstructWebController(lp,bMessage);
 		this.fMaven=fMaven;
+		this.fGraphic=fGraphic;
 		
 		compilers.addAll(fMaven.allOrderedPositionVisible(IoMavenJdk.class));
 		enterpriseEditions.addAll(fMaven.allOrderedPositionVisible(IoMavenEe.class));
@@ -147,7 +155,11 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 	{
 		UploadedFile file = event.getFile();
 		logger.info("Received file with a size of " +file.getSize());
-		if(module.getGraphic()==null)
+		try
+		{
+			module.setGraphic(fGraphic.fGraphic(IoMavenModule.class,module));
+		}
+		catch (JeeslNotFoundException e)
 		{
 			IoGraphicType type = fMaven.fByCode(IoGraphicType.class,JeeslGraphicType.Code.svg);
 			module.setGraphic(IoLocaleFactoryProvider.svg().efGraphic().build(type));

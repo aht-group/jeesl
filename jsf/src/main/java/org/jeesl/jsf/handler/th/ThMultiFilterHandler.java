@@ -2,6 +2,7 @@ package org.jeesl.jsf.handler.th;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,24 +33,29 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 
 	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear(); this.list.addAll(list);}
 	private final List<T> selected; public List<T> getSelected() {return selected;}
+	private final List<T> selection; public List<T> getSelection() {return selection;}
 	
 	private T selectedSingle; public T getSelectedSingle() { return selectedSingle; } public void getSelectedSingle(T value) { selectedSingle = value; }
 	
 	private final List<T> memory;
 	private final Map<T,Boolean> map; public Map<T,Boolean> getMap() {return map;}
 	public boolean toggleMode; public boolean isToggleMode() {return toggleMode;} public void setToggleMode(boolean toggleMode) {this.toggleMode = toggleMode;}
-	
+	private int selectedSize; public int getSelectedSize() {return selectedSize;}
+
 	public static <T extends EjbWithId> ThMultiFilterHandler<T> instance(ThMultiFilterBean callback) {return new ThMultiFilterHandler<>(callback);}
 	public ThMultiFilterHandler(ThMultiFilterBean bean)
 	{
 		this.bean=bean;
 		list = new ArrayList<>();
 		map = new ConcurrentHashMap<T,Boolean>();
-		selected = new ArrayList<T>();
-		memory = new ArrayList<T>();
+		selected = new ArrayList<>();
+		selection = new ArrayList<>();
+		memory = new ArrayList<>();
 		toggleMode = false;
 		refresh();
 	}
+	
+	public ThMultiFilterHandler<T> toggleMode(boolean toggleMode) {this.setToggleMode(toggleMode); return this;}
 
 	public void clear()
 	{
@@ -108,6 +114,11 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 		else {logger.error(cT.getSimpleName()+" is not a "+EjbWithCode.class.getSimpleName());}
 		refresh();
 	}
+	public void preSelect(T selection)
+	{
+		map.put(selection,true);
+		refresh();
+	}
 	public void preSelect(List<T> selection)
 	{
 		for(T t : selection)
@@ -121,7 +132,6 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 		if(ObjectUtils.isNotEmpty(selection)) {this.preSelect(selection);}
 		else {selectAll();}
 	}
-	
 	
 	public void select(T t)
 	{
@@ -174,12 +184,17 @@ public class ThMultiFilterHandler <T extends EjbWithId> implements Serializable,
 
 	private void refresh()
 	{
+		selection.clear();
 		selected.clear();
 		for(T t : list)
 		{
 			if(!map.containsKey(t)) {map.put(t,false);}
 			if(map.get(t)){selected.add(t);}
 		}
+		selection.addAll(selected);
+		Collections.reverse(selection);
+		
+		selectedSize = selected.size();
 	}
 
 	public boolean isSelected(T t)
