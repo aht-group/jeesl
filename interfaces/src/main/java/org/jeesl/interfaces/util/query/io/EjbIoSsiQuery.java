@@ -10,11 +10,14 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 							STATUS extends JeeslIoSsiLink<?,?,STATUS,?>>
 		extends AbstractEjbQuery
 {
+	final static Logger logger = LoggerFactory.getLogger(EjbIoSsiQuery.class);
 	private static final long serialVersionUID = 1L;
 	
 	public EjbIoSsiQuery()
@@ -39,6 +42,7 @@ public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 	
 	//Lists
 	@Override public EjbIoSsiQuery<CTX,STATUS> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> EjbIoSsiQuery<CTX,STATUS> ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbIoSsiQuery<CTX,STATUS> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbIoSsiQuery<CTX,STATUS> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

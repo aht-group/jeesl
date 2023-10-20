@@ -33,6 +33,7 @@ public class EjbSecurityQuery
 	
 	//Lists
 	@Override public EjbSecurityQuery id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> EjbSecurityQuery ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbSecurityQuery idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbSecurityQuery codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

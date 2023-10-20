@@ -44,6 +44,7 @@ public class EjbDiaryQuery <BOOK extends JeeslJournalBook<SCOPE,ITEM>,
 	
 	//Lists
 	@Override public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

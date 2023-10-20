@@ -38,7 +38,8 @@ public class EjbAttributeQuery<CRITERIA extends JeeslAttributeCriteria<?,?,?,?,?
 	public EjbAttributeQuery<CRITERIA,CONTAINER,DATA> distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//Lists
-	@Override public  EjbAttributeQuery<CRITERIA,CONTAINER,DATA> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public EjbAttributeQuery<CRITERIA,CONTAINER,DATA> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> EjbAttributeQuery<CRITERIA,CONTAINER,DATA> ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbAttributeQuery<CRITERIA,CONTAINER,DATA> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbAttributeQuery<CRITERIA,CONTAINER,DATA> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

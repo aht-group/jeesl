@@ -63,6 +63,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected List<Long> idList;
 	@Override public List<Long> getIdList() {return idList;}
 	public abstract AbstractEjbQuery id(EjbWithId id);
+	public abstract <T extends EjbWithId> AbstractEjbQuery ids(List<T> ids);
 	public abstract AbstractEjbQuery idList(List<Long> list);
 	
 	protected List<String> codeList;

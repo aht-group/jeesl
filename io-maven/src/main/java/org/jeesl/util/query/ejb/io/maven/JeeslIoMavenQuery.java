@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
@@ -38,7 +39,8 @@ public class JeeslIoMavenQuery extends AbstractEjbQuery implements EjbIoMavenQue
 	public JeeslIoMavenQuery distinct(boolean distinct) {super.setDistinct(distinct); return this;}
 	
 	//Lists
-	@Override public AbstractEjbQuery id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public JeeslIoMavenQuery id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> JeeslIoMavenQuery ids(List<T> ids) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(EjbIdFactory.toIds(ids)); return this;}
 	@Override public JeeslIoMavenQuery idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public JeeslIoMavenQuery codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

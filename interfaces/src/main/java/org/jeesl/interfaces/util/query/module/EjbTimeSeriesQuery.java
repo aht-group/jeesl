@@ -43,6 +43,7 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	
 	//Lists
 	@Override public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

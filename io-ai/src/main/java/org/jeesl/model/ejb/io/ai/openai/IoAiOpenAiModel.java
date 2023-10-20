@@ -1,5 +1,8 @@
 package org.jeesl.model.ejb.io.ai.openai;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -18,7 +21,12 @@ public class IoAiOpenAiModel extends IoStatus implements JeeslIoAiOpenAiModel<Io
 {
 	public static final long serialVersionUID=1;
 	
-	public static enum Code{chartBarHorizontal};
+	@Override public List<String> getFixedCodes()
+	{
+		List<String> fixed = new ArrayList<>();
+		for(JeeslIoAiOpenAiModel.Code c : JeeslIoAiOpenAiModel.Code.values()){fixed.add(c.toString());}
+		return fixed;
+	}
 	
 	@Override public boolean equals(Object object) {return (object instanceof IoAiOpenAiModel) ? id == ((IoAiOpenAiModel) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(19,21).append(id).toHashCode();}

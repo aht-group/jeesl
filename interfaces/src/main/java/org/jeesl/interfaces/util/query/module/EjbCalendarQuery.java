@@ -39,6 +39,7 @@ public class EjbCalendarQuery<CAL extends JeeslCalendar<?,?>,
 	
 	//Lists
 	@Override public EjbCalendarQuery<CAL,TYPE> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> EjbCalendarQuery<CAL,TYPE> ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbCalendarQuery<CAL,TYPE> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbCalendarQuery<CAL,TYPE> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

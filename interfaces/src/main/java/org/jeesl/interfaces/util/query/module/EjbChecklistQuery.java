@@ -40,6 +40,7 @@ public class EjbChecklistQuery<CL extends JeeslClChecklist<?,?,?>,
 	
 	//List
 	@Override public EjbChecklistQuery<CL,CI,TL> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> EjbChecklistQuery<CL,CI,TL> ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbChecklistQuery<CL,CI,TL> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbChecklistQuery<CL,CI,TL> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 

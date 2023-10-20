@@ -41,6 +41,7 @@ public class EjbAomQuery<ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 	
 	//Lists
 	@Override public EjbAomQuery<ASSET,EVENT> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> EjbAomQuery<ASSET,EVENT> ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbAomQuery<ASSET,EVENT> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbAomQuery<ASSET,EVENT> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 	

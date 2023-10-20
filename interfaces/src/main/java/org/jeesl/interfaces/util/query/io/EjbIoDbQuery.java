@@ -40,6 +40,7 @@ public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	//Lists
 	@Override public EjbIoDbQuery<SYSTEM,SNAP> id(EjbWithId id) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.add(id.getId()); return this;}
+	@Override public <T extends EjbWithId> EjbIoDbQuery<SYSTEM,SNAP> ids(List<T> ids) {logger.error("NYI"); return this;}
 	@Override public EjbIoDbQuery<SYSTEM,SNAP> idList(List<Long> list) {if(Objects.isNull(idList)) {idList = new ArrayList<>();} idList.addAll(list); return this;}
 	@Override public EjbIoDbQuery<SYSTEM,SNAP> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
