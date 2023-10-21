@@ -5,13 +5,13 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.jeesl.controller.handler.io.log.LoggerBootstrap;
 import org.jeesl.controller.handler.system.property.ConfigBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
@@ -106,7 +106,7 @@ public class JeeslCliOptionHandler
 		LoggerBootstrap.instance(loggingProfile).path(log4jPaths[0]).init();
 	}
 	
-	public org.apache.commons.configuration.Configuration initConfig(CommandLine line, String defaultConfig)
+	public org.apache.commons.configuration.Configuration config1(CommandLine line, String defaultConfig)
 	{
 		if(line.hasOption(oConfig.getOpt()))
 		{
@@ -134,15 +134,19 @@ public class JeeslCliOptionHandler
 				System.exit(-1);
 			}
 			logger.info("Using "+Configuration.class.getSimpleName()+" "+configFile);
-			ConfigLoader.add(configFile);
+			ConfigLoader.addString(configFile);
 	    }
 		
-		ConfigLoader.add(defaultConfig);
+		ConfigLoader.addString(defaultConfig);
 		
 		return ConfigLoader.init();
 	}
 	
-	public org.apache.commons.configuration2.Configuration config(CommandLine line, String defaultConfig)
+	public org.exlp.interfaces.system.property.Configuration config2Wrapper(CommandLine line, String defaultConfig)
+	{
+		return ConfigBootstrap.wrap(config2(line,defaultConfig));
+	}
+	public org.apache.commons.configuration2.Configuration config2(CommandLine line, String defaultConfig)
 	{
 		ConfigBootstrap bootstrap = ConfigBootstrap.instance();
 		if(line.hasOption(oConfig.getOpt()))

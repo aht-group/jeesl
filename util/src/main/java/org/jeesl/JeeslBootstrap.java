@@ -1,10 +1,10 @@
 package org.jeesl;
 
 import org.apache.commons.configuration.Configuration;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.LoggerInit;
 
 public class JeeslBootstrap
@@ -23,7 +23,7 @@ public class JeeslBootstrap
 		loggerInit.path("jeesl/util/config");
 		loggerInit.init();
 						
-		ConfigLoader.add(configFile);
+		ConfigLoader.addString(configFile);
 		Configuration config = ConfigLoader.init();					
 		logger.debug("Config and Logger initialized");
 		return config;

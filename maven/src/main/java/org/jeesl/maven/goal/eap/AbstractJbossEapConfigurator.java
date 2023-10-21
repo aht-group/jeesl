@@ -19,6 +19,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.exlp.controller.handler.system.property.ConfigLoader;
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jeesl.controller.io.ssi.wildfly.JbossModuleConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.JbossStandaloneConfigurator;
@@ -32,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.config.ConfigLoader;
 import net.sf.exlp.util.io.ExlpCentralConfigPointer;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -62,13 +62,13 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	ExlpCentralConfigPointer ccp = ExlpCentralConfigPointer.instance("jeesl").jaxb(JaxbUtil.instance());
     	try
 		{
-			ConfigLoader.add(ccp.toFile("eapConfig"+subnetConfigPrefix));
+			ConfigLoader.addFile(ccp.toFile("eapConfig"+subnetConfigPrefix));
 		}
 		catch (ExlpConfigurationException e) {getLog().info("No specific "+ExlpCentralConfigPointer.class.getSimpleName()+" for "+subnetConfigPrefix);}
     	
     	try
 		{
-    		ConfigLoader.add(ccp.toFile("eapConfig"));
+    		ConfigLoader.addFile(ccp.toFile("eapConfig"));
 		}
 		catch (ExlpConfigurationException e) {getLog().error("No additional "+ExlpCentralConfigPointer.class.getSimpleName()+" "+e.getMessage());}
 		

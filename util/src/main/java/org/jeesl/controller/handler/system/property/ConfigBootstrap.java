@@ -3,6 +3,7 @@ package org.jeesl.controller.handler.system.property;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.configuration2.CombinedConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
@@ -37,14 +38,21 @@ public class ConfigBootstrap
 	
 	public void add(Path path)
 	{
-		logger.info("Adding "+path.toString());
-		configurations.add(path.toFile().getAbsolutePath());
+		if(Objects.isNull(path)) {logger.warn("Requested an additional config, but null provided");}
+		else
+		{
+			logger.info("Adding "+path.toString());
+			configurations.add(path.toFile().getAbsolutePath());
+		}
 	}
 	public void addS(String s)
 	{
 		logger.info("Adding "+s);
 		configurations.add(s);
 	}
+	
+	public org.exlp.interfaces.system.property.Configuration wrap() {return new ConfigWrapper(combine());}
+	public static org.exlp.interfaces.system.property.Configuration wrap(org.apache.commons.configuration2.Configuration config) {return ConfigBootstrap.instance().new ConfigWrapper(config);}
 	
 	public org.apache.commons.configuration2.Configuration combine()
 	{
@@ -92,5 +100,17 @@ public class ConfigBootstrap
 		else if(configName.endsWith(".properties")){typ=Typ.PROPERTIES;}
 		else if(configName.endsWith(".txt")){typ=Typ.PROPERTIES;}
 		return typ;
+	}
+	
+	private class ConfigWrapper implements org.exlp.interfaces.system.property.Configuration
+	{
+		private org.apache.commons.configuration2.Configuration config;
+		
+		public ConfigWrapper(org.apache.commons.configuration2.Configuration config)
+		{
+			this.config=config;
+		}
+
+		@Override public String getString(String key) {return config.getString(key);}
 	}
 }
