@@ -17,7 +17,7 @@ public class AbstractUtilsMonitorTest
 		if(!LoggerInit.isLog4jInited())
 		{
 			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.addAltPath("config.ahtutils-monitor.test");
+			loggerInit.path("config.ahtutils-monitor.test");
 			loggerInit.init();
 		}
     }

@@ -49,7 +49,7 @@ public class TestEntityWordRederer extends AbstractWordCli
 	public static void main(String[] args) throws Exception
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.addAltPath("jeesl/client/config");
+		loggerInit.path("jeesl/client/config");
 		loggerInit.init();
 		TestEntityWordRederer cli = new TestEntityWordRederer();
 		cli.renderEntities();	  

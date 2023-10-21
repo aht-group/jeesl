@@ -97,7 +97,7 @@ public class AbstractJeeslReportTest
 		if(!LoggerInit.isLog4jInited())
 		{
 			LoggerInit loggerInit = new LoggerInit(loggerConfigFile);
-			loggerInit.addAltPath(loggerConfigPath);
+			loggerInit.path(loggerConfigPath);
 			loggerInit.init();
 		}
     }

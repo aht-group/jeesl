@@ -53,7 +53,7 @@ public class AbstractUtilsDocTest
 		if(!LoggerInit.isLog4jInited())
 		{
 			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.addAltPath("config.ahtutils-doc.test");
+			loggerInit.path("config.ahtutils-doc.test");
 			loggerInit.init();
 		}
     }

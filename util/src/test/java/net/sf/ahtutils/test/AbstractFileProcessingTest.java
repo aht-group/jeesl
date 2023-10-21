@@ -21,7 +21,7 @@ public abstract class AbstractFileProcessingTest extends AbstractAhtUtilsXmlTest
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("src/test/resources/config.ahtutils-util.test");
+		loggerInit.path("src/test/resources/config.ahtutils-util.test");
 		loggerInit.init();
     }
 	

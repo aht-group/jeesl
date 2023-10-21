@@ -23,7 +23,7 @@ public class AbstractJeeslPrototypeTest
 		if(!LoggerInit.isLog4jInited())
 		{
 			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.addAltPath("jeesl/prototype/test");
+			loggerInit.path("jeesl/prototype/test");
 			loggerInit.init();
 		}
     }

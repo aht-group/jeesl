@@ -34,7 +34,7 @@ public class AbstractAhtUtilsJsfTst extends AbstractJeeslTest
 		if(!LoggerInit.isLog4jInited())
 		{
 			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.addAltPath("config.ahtutils-jsf.test");
+			loggerInit.path("config.ahtutils-jsf.test");
 			loggerInit.init();
 		}
     }

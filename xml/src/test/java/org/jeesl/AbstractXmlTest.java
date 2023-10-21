@@ -23,7 +23,7 @@ public abstract class AbstractXmlTest <T extends Object> extends AbstractAhtUtil
     public static void initLogger()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-		loggerInit.addAltPath("config.ahtutils-xml.test");
+		loggerInit.path("config.ahtutils-xml.test");
 		loggerInit.init();
     }
 	

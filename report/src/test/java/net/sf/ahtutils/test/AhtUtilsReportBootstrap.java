@@ -19,7 +19,7 @@ final static Logger logger = LoggerFactory.getLogger(AhtUtilsReportBootstrap.cla
 	public static void init(String configFile)
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.addAltPath("ahtutils-report");
+		loggerInit.path("ahtutils-report");
 		loggerInit.init();
 						
 		//ConfigLoader.add(configFile);

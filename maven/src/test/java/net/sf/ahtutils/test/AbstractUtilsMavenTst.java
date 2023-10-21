@@ -39,7 +39,7 @@ public class AbstractUtilsMavenTst
 		if(!LoggerInit.isLog4jInited())
 		{
 			LoggerInit loggerInit = new LoggerInit("log4junit.xml");	
-			loggerInit.addAltPath("config.ahtutils-maven.test");
+			loggerInit.path("config.ahtutils-maven.test");
 			loggerInit.init();
 		}
     }

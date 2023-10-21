@@ -14,7 +14,7 @@ public class JeeslMavenBootstrap
 //		AbstractUtilsMavenTst.setfTarget(new File("target"));
 		
 		LoggerInit loggerInit = new LoggerInit("log4j.maven.xml");
-		loggerInit.addAltPath("jeesl/system/io/config");
+		loggerInit.path("jeesl/system/io/config");
 		loggerInit.init();
 	}
 }

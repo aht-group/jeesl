@@ -14,7 +14,7 @@ public class Bootstrap {
     public static void init()
     {
          LoggerInit loggerInit = new LoggerInit("log4j.xml");
-			loggerInit.addAltPath("config");
+			loggerInit.path("config");
 			loggerInit.init();
     }
     

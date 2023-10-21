@@ -19,6 +19,8 @@ public class JsonTime implements Serializable
 	public static final long serialVersionUID=1;
 	public enum Type{idList,idSingle,date}
 	
+//	private JsonTime() {}
+	
 	@JsonProperty("ldt1")
 	@JsonbDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS")

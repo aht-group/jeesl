@@ -20,7 +20,7 @@ public class JeeslBootstrap
 	public static Configuration init(String configFile)
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.addAltPath("jeesl/util/config");
+		loggerInit.path("jeesl/util/config");
 		loggerInit.init();
 						
 		ConfigLoader.add(configFile);

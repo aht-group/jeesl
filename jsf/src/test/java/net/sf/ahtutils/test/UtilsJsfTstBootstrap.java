@@ -12,7 +12,7 @@ public class UtilsJsfTstBootstrap
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("config.ahtutils-jsf.test");
+		loggerInit.path("config.ahtutils-jsf.test");
 		loggerInit.init();		
 	}
 }

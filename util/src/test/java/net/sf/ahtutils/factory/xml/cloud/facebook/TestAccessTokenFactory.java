@@ -81,7 +81,7 @@ public class TestAccessTokenFactory extends AbstractFileProcessingTest
 	public static void main(String[] args) throws FileNotFoundException
     {
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
+			loggerInit.path("src/test/resources/config");
 			loggerInit.init();	
 		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
 			

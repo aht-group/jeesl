@@ -15,6 +15,8 @@ public class UiEditBooleanHandler implements UiEditHandler
 	public boolean isAllow() {return allow;}
 	public boolean isDeny() {return !allow;}
 
+	public static UiEditBooleanHandler instance() {return new UiEditBooleanHandler();}
+	
 	public UiEditBooleanHandler()
 	{
 		allow = false;
@@ -25,7 +27,7 @@ public class UiEditBooleanHandler implements UiEditHandler
 		allow = !allow;
 	}
 	
-	public void denyEdit() {allow=false;}
-	public void allowEdit() {allow=true;}
+	public UiEditBooleanHandler denyEdit() {allow=false; return this;}
+	public UiEditBooleanHandler allowEdit() {allow=true; return this;}
 }
 //jeesl.highlight:showcase

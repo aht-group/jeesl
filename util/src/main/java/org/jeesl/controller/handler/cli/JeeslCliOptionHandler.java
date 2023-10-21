@@ -89,7 +89,7 @@ public class JeeslCliOptionHandler
 	private void initLogger(String loggingProfile)
 	{
 		LoggerInit loggerInit = new LoggerInit(loggingProfile);
-		for(String path : log4jPaths){loggerInit.addAltPath(path);}
+		for(String path : log4jPaths){loggerInit.path(path);}
 		loggerInit.setAllLoadTypes(LoggerInit.LoadType.File,LoggerInit.LoadType.Resource);
 		loggerInit.init();
 	}
@@ -106,7 +106,6 @@ public class JeeslCliOptionHandler
 		LoggerBootstrap.instance(loggingProfile).path(log4jPaths[0]).init();
 	}
 	
-	// *** CONFIG ***
 	public org.apache.commons.configuration.Configuration initConfig(CommandLine line, String defaultConfig)
 	{
 		if(line.hasOption(oConfig.getOpt()))

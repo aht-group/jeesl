@@ -14,7 +14,7 @@ public class JeeslXmlTestBootstrap
 	public static void init()
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-		loggerInit.addAltPath("config.ahtutils-xml.test");
+		loggerInit.path("config.ahtutils-xml.test");
 		loggerInit.init();
 		
 		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());

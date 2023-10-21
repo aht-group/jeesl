@@ -128,7 +128,7 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.addAltPath("src/test/resources/config");
+			loggerInit.path("src/test/resources/config");
 			loggerInit.init();		
 			
 		TestUtilsStatusEjbFactory test = new TestUtilsStatusEjbFactory();

@@ -21,7 +21,7 @@ public class AhtUtilsDocBootstrap
 	public static Configuration init(String configFile)
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-			loggerInit.addAltPath("config.ahtutils-doc.test");
+			loggerInit.path("config.ahtutils-doc.test");
 			loggerInit.init();
 						
 //		ConfigLoader.add(configFile);

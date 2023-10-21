@@ -28,7 +28,7 @@ public class JeeslBootstrap
 	public static Configuration init(String configFile)
 	{
 		LoggerInit loggerInit = new LoggerInit("log4j.xml");
-		loggerInit.addAltPath("jeesl/client/config");
+		loggerInit.path("jeesl/client/config");
 		loggerInit.init();
 		
 		try
