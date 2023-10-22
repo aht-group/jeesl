@@ -19,7 +19,7 @@ import javax.crypto.spec.IvParameterSpec;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCryptoFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -51,7 +51,7 @@ public class JeeslIoCryptoKeyGwc <L extends JeeslLang, D extends JeeslDescriptio
 											KT extends JeeslIoCryptoKeyState<L,D,KT,?>,
 											ST extends JeeslIoCryptoStoreType<L,D,ST,?>,
 											USER extends JeeslSimpleUser>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -91,7 +91,7 @@ public class JeeslIoCryptoKeyGwc <L extends JeeslLang, D extends JeeslDescriptio
 										USER user,
 										JeeslIoCryptoStore<KEY,KT,ST> sessionKeystore)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fCrypto=fCrypto;
 		this.user=user;
 		this.sessionKeystore=sessionKeystore;

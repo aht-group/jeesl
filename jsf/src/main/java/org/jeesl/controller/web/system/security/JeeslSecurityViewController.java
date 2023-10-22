@@ -14,7 +14,7 @@ import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityActionComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityUsecaseComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -60,7 +60,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 											OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 											OH extends JeeslSecurityOnlineHelp<V,?,?>,
 											USER extends JeeslUser<R>>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -123,7 +123,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
 		templates = fSecurity.allOrderedPositionVisible(fbSecurity.getClassTemplate());
@@ -137,7 +137,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	private void postConstruct(JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{
-		userIsDeveloper = security.allowSuffixCode(AbstractJeeslWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslWebController.SecurityActionSuffixDeprecated.Developer);
+		userIsDeveloper = security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffixDeprecated.Developer);
 	}
 	
 	private void reloadCategories()

@@ -11,7 +11,7 @@ import org.jeesl.controller.handler.system.io.log.DebugLoggerHandler;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
@@ -35,7 +35,7 @@ public class JeeslSsiMappingController <L extends JeeslLang, D extends JeeslDesc
 										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>>
-						extends AbstractJeeslWebController<L,D,LOC>
+						extends AbstractJeeslLocaleWebController<L,D,LOC>
 						implements Serializable
 {
 	private static final long serialVersionUID = 1L;

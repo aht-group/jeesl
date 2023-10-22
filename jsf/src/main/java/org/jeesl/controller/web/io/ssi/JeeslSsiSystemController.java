@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
@@ -24,7 +24,7 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class JeeslSsiSystemController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
 										CRED extends JeeslIoSsiCredential<SYSTEM>>
-									extends AbstractJeeslWebController<L,D,LOC>
+									extends AbstractJeeslLocaleWebController<L,D,LOC>
 									implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -51,7 +51,7 @@ public class JeeslSsiSystemController <L extends JeeslLang, D extends JeeslDescr
 	public void postConstructSsiSystem(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 										JeeslIoSsiFacade<SYSTEM,CRED,?,?,?,?,?,?,?,?> fSsi)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSsi=fSsi;
 		reloadSystems();
 	}

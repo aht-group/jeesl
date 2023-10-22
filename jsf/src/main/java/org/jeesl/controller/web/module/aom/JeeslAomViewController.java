@@ -8,7 +8,7 @@ import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -37,7 +37,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 										REALM extends JeeslTenantRealm<L,D,REALM,?>,
 										ATYPE extends JeeslAomAssetType<L,D,REALM,ATYPE,VIEW,G>,
 										VIEW extends JeeslAomView<L,D,REALM,G>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -77,7 +77,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 									JeeslIoGraphicFacade<?,G,GT,?,?> fGraphic,
 									REALM realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.bCache=bCache;
 		this.fAom=fAsset;
 		this.fGraphic=fGraphic;

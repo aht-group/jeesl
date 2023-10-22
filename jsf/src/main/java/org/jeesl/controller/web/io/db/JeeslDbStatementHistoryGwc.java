@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
@@ -42,7 +42,7 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 									ST extends JeeslDbStatement<HOST,SG>,
 									SG extends JeeslDbStatementGroup<SYSTEM>,
 									SC extends JeeslDbStatementColumn<L,D,SC,?>>
-						extends AbstractJeeslWebController<L,D,LOC>
+						extends AbstractJeeslLocaleWebController<L,D,LOC>
 						implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;

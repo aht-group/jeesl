@@ -8,7 +8,7 @@ import java.util.List;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelDiagramComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -32,7 +32,7 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										RC extends JeeslRevisionCategory<L,D,RC,?>,
 										ERD extends JeeslRevisionDiagram<L,D,RC>>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -66,7 +66,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 											JeeslFacesMessageBean bMessage,
 											JeeslIoRevisionFacade<L,D,RC,?,?,?,?,?,?,?,ERD,?> fRevision)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fRevision=fRevision;
 		
 		sbhCategory.setList(fRevision.allOrderedPositionVisible(fbRevision.getClassCategory()));

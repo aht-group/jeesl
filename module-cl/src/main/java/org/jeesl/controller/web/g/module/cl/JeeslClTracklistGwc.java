@@ -9,7 +9,7 @@ import java.util.Set;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslChecklistFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
@@ -46,7 +46,7 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
     								TL extends JeeslClTracklist<L,R,CL>,
     								TI extends JeeslClTrackItem<CI,TL,TS>,
     								TS extends JeeslClTrackStatus<L,D,TS,?>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -94,7 +94,7 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage ,R realm,
 										JeeslChecklistFacade<CL,CI,TL> fCl)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fCl=fCl;
 		this.realm=realm;
 		

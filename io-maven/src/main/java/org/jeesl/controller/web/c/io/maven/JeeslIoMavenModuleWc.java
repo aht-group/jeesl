@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDescription,IoLocale>
+public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLang,IoDescription,IoLocale>
 									implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -87,7 +87,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslWebController<IoLang,IoDe
 							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven,
 							JeeslIoGraphicFacade<IoStatus,IoGraphic,IoGraphicType,IoGraphicComponent,IoGraphicShape> fGraphic)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMaven=fMaven;
 		this.fGraphic=fGraphic;
 		

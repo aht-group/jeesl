@@ -13,7 +13,7 @@ import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityActionComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityUsecaseComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityViewComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -56,7 +56,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 										OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 										OH extends JeeslSecurityOnlineHelp<V,?,?>,
 										USER extends JeeslUser<R>>
-									extends AbstractJeeslWebController<L,D,LOC>
+									extends AbstractJeeslLocaleWebController<L,D,LOC>
 									implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -126,7 +126,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 			JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
 			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
 		
@@ -142,7 +142,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	{
 		if(Objects.nonNull(security))
 		{
-			userIsDeveloper = security.allowSuffixCode(AbstractJeeslWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslWebController.SecurityActionSuffixDeprecated.Developer);
+			userIsDeveloper = security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffixDeprecated.Developer);
 		}
 		this.reloadCategories();
 	}

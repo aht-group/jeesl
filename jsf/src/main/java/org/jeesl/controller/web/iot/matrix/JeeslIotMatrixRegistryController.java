@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.iot.IotMatrixFactoryBuilder;
@@ -27,7 +27,7 @@ public class JeeslIotMatrixRegistryController <L extends JeeslLang, D extends Je
 											DEVICE extends JeeslIotMatrixDevice<L,D,LAYOUT>,
 											LAYOUT extends JeeslIotMatrixLayout<L,D,LAYOUT,?>
 										>
-			extends AbstractJeeslWebController<L,D,LOC>
+			extends AbstractJeeslLocaleWebController<L,D,LOC>
 			implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -57,7 +57,7 @@ public class JeeslIotMatrixRegistryController <L extends JeeslLang, D extends Je
 	
 	public void postConstructMatrixDevice(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslFacade facade)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.facade=facade;
 		reloadDevices();
 	}

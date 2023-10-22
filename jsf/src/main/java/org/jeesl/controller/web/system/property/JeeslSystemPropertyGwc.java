@@ -8,7 +8,7 @@ import java.util.List;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSystemPropertyFacade;
 import org.jeesl.controller.util.comparator.ejb.system.property.PropertyComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -30,7 +30,7 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 public class JeeslSystemPropertyGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslPropertyCategory<L,D,C,?>,
 											P extends JeeslProperty<L,D,C,P>>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -57,7 +57,7 @@ public class JeeslSystemPropertyGwc <L extends JeeslLang, D extends JeeslDescrip
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 							JeeslSystemPropertyFacade<L,D,C,P> fProperty)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fProperty=fProperty;
 
 		sbhCategory.setList(fProperty.allOrderedPositionVisible(fbProperty.getClassCategory()));

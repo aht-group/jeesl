@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslJobFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
@@ -27,7 +27,7 @@ public class JeeslJobRobotController <L extends JeeslLang, D extends JeeslDescri
 									STATUS extends JeeslJobStatus<L,D,STATUS,?>,
 									ROBOT extends JeeslJobRobot<L,D>
 									>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -53,7 +53,7 @@ public class JeeslJobRobotController <L extends JeeslLang, D extends JeeslDescri
 	public void postConstructJobMaintenance(JeeslJobFacade<L,D,?,?,?,?,JOB,?,?,?,STATUS,ROBOT,?,?,?,?,?> fJob,
 											JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fJob=fJob;
 		
 		reloadRobots();

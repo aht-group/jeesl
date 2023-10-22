@@ -6,7 +6,7 @@ import java.util.List;
 import org.jeesl.api.bean.JeeslSecurityBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -49,7 +49,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 											OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 											OH extends JeeslSecurityOnlineHelp<V,?,?>,
 											USER extends JeeslUser<R>>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -87,7 +87,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 			JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 			JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
 		this.reloadCategories();

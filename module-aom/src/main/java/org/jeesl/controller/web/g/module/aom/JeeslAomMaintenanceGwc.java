@@ -11,7 +11,7 @@ import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbAssetComparator;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbEventComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.controller.web.module.aom.JeeslAomCacheKey;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -70,7 +70,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 										USER extends JeeslSecurityUser,
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable,SbToggleBean,SbDateSelectionBean
 {
 	private static final long serialVersionUID = 1L;
@@ -132,7 +132,7 @@ public class JeeslAomMaintenanceGwc <L extends JeeslLang, D extends JeeslDescrip
 									JeeslAomCache<REALM,COMPANY,SCOPE,ATYPE,ALEVEL,ETYPE> cache,
 									REALM realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fAsset = fAsset;
 		this.realm = realm;
 		

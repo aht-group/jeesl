@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
@@ -27,7 +27,7 @@ import org.jeesl.model.pojo.map.generic.Nested2Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslIoMavenFontWc extends AbstractJeeslWebController<IoLang,IoDescription,IoLocale>
+public class JeeslIoMavenFontWc extends AbstractJeeslLocaleWebController<IoLang,IoDescription,IoLocale>
 		implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -53,7 +53,7 @@ public class JeeslIoMavenFontWc extends AbstractJeeslWebController<IoLang,IoDesc
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
 							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMaven=fMaven;
 		
 		List<IoMavenFontUsage> usages = fMaven.all(IoMavenFontUsage.class);

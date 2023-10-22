@@ -19,7 +19,7 @@ import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
 import org.jeesl.api.rest.rs.system.JeeslSystemRest;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -69,7 +69,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 											RER extends JeeslStatus<L,D,RER>,
 											RAT extends JeeslStatus<L,D,RAT>,
 											ERD extends JeeslRevisionDiagram<L,D,RC>>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -138,7 +138,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision, JeeslLabelBean<RE> bLabel)
 	{
 		if(jogger!=null) {jogger.start("postConstructRevisionEntity");}
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fRevision=fRevision;
 		this.bLabel=bLabel;
 		

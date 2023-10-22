@@ -7,7 +7,7 @@ import java.util.List;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.api.facade.module.JeeslHdFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoCmsFactoryBuilder;
@@ -51,7 +51,7 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 								DOC extends JeeslIoCms<L,D,LOC,?,SEC>,
 								SEC extends JeeslIoCmsSection<L,SEC>
 								>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -102,7 +102,7 @@ public class JeeslHdFgaGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 									JeeslIoCmsFacade<L,D,LOC,?,DOC,?,SEC,?,?,?,?,?,?,?,?> fCms,
 									R realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fHd=fHd;
 		this.fCms=fCms;
 		this.realm=realm;

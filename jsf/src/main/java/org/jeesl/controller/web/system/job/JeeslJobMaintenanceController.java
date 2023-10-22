@@ -9,7 +9,7 @@ import java.util.List;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.controller.util.comparator.ejb.system.job.JobMaintenanceInfoComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.JobFactoryBuilder;
@@ -30,7 +30,7 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 													STATUS extends JeeslJobStatus<L,D,STATUS,?>,
 													MNT extends JeeslJobMaintenance<L,D,MNT,?>,
 													MNI extends JeeslJobMaintenanceInfo<D,STATUS,MNT>>
-						extends AbstractJeeslWebController<L,D,LOC>
+						extends AbstractJeeslLocaleWebController<L,D,LOC>
 						implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -65,7 +65,7 @@ public class JeeslJobMaintenanceController <L extends JeeslLang, D extends Jeesl
 	
 	public void postConstructJobMaintenance(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslJobFacade<L,D,?,?,?,?,?,?,?,?,STATUS,?,?,MNT,MNI,?,?> fJob)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fJob=fJob;
 	
 		stati.addAll(fJob.all(fbJob.getClassStatus()));

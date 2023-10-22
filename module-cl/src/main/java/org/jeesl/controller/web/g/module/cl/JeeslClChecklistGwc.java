@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslChecklistFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.ChecklistFactoryBuilder;
@@ -42,7 +42,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
     								M extends JeeslIoMarkup<MT>,
 									MT extends JeeslIoMarkupType<L,D,MT,?>
     										>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -85,7 +85,7 @@ public class JeeslClChecklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 										JeeslChecklistFacade<CL,CI,?> fCl
 										)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		markupType = fCl.fByEnum(fbCl.getClassMarkupType(),JeeslIoMarkupType.Code.xhtml);
 		this.fCl=fCl;
 		this.realm=realm;

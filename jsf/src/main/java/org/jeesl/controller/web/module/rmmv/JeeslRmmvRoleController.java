@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslRmmvFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.RmmvFactoryBuilder;
@@ -37,7 +37,7 @@ public class JeeslRmmvRoleController <L extends JeeslLang, D extends JeeslDescri
 											EC extends JeeslRmmvClassification<L,R,EC,?>,
 											MOD extends JeeslRmmvModule<?,?,MOD,?>,
 											MC extends JeeslRmmvModuleConfig<E,MOD>>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -87,7 +87,7 @@ public class JeeslRmmvRoleController <L extends JeeslLang, D extends JeeslDescri
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fRmmv=fRmmv;
 		this.realm=realm;
 		

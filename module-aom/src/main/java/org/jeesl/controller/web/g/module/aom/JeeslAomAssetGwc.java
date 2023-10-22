@@ -13,7 +13,7 @@ import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbAssetComparator;
 import org.jeesl.controller.util.comparator.ejb.module.aom.EjbEventComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.controller.web.module.aom.JeeslAomCacheKey;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -83,7 +83,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 										USER extends JeeslSecurityUser,
 										FRC extends JeeslFileContainer<?,?>,
 										UP extends JeeslAomEventUpload<L,D,UP,?>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements ThMultiFilterBean,SbToggleBean,SbSingleBean,JeeslFileRepositoryCallback
 {
 	private static final long serialVersionUID = 1L;
@@ -151,7 +151,7 @@ public class JeeslAomAssetGwc <L extends JeeslLang, D extends JeeslDescription, 
 						JeeslAomFacade<L,D,REALM,COMPANY,ASSET,ASTATUS,ATYPE,VIEW,EVENT,ETYPE,ESTATUS,UP> fAsset,
 						REALM realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fAom=fAsset;
 		this.cache=cache;
 		uiHelper.setCacheBean(cache);

@@ -16,7 +16,7 @@ import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.util.comparator.ejb.io.db.EjbIoDbConstraintComparator;
 import org.jeesl.controller.util.comparator.ejb.io.db.EjbIoDbTableComparator;
 import org.jeesl.controller.util.comparator.ejb.module.calendar.EjbWithRecordJtComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -60,7 +60,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 								CUN extends JeeslDbMetaUnique<COL,CON>,
 								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>
 >
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements SbSingleBean,ThMultiFilterBean
 {
 	private static final long serialVersionUID = 1L;
@@ -139,7 +139,7 @@ public class JeeslDbMetaGwc <L extends JeeslLang, D extends JeeslDescription, LO
 
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN> fDb)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fDb = fDb;
 		sbhSystem.setList(fDb.all(fbDb.getClassSsiSystem()));
 		sbhSystem.setDefault();

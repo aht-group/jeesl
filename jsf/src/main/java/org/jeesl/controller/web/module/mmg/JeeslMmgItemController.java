@@ -10,7 +10,7 @@ import java.util.List;
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslMmgFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -52,7 +52,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 											FRC extends JeeslFileContainer<FRS,FRM>,
 											FRM extends JeeslFileMeta<D,FRC,?,?>,
 											USER extends JeeslSimpleUser>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements SbSingleBean,JeeslFileRepositoryCallback
 {
 	private static final long serialVersionUID = 1L;
@@ -97,7 +97,7 @@ public class JeeslMmgItemController <L extends JeeslLang, D extends JeeslDescrip
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMmg=fRmmv;
 		this.realm=realm;
 		

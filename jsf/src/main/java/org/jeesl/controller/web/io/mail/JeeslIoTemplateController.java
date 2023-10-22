@@ -14,7 +14,7 @@ import org.jeesl.api.facade.io.JeeslIoTemplateFacade;
 import org.jeesl.controller.util.comparator.ejb.io.template.IoTemplateComparator;
 import org.jeesl.controller.util.comparator.ejb.io.template.IoTemplateDefinitionComparator;
 import org.jeesl.controller.util.comparator.ejb.io.template.IoTemplateTokenComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -54,7 +54,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 											DEFINITION extends JeeslIoTemplateDefinition<D,CHANNEL,TEMPLATE>,
 											TOKEN extends JeeslIoTemplateToken<L,D,TEMPLATE,TOKENTYPE>,
 											TOKENTYPE extends JeeslTemplateTokenType<L,D,TOKENTYPE,?>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -108,7 +108,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 	public void postConstructTemplate(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 										JeeslIoTemplateFacade<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fTemplate)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fTemplate=fTemplate;
 		
 		efTemplate = fbTemplate.ejbTemplate();

@@ -10,7 +10,7 @@ import java.util.Map;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMailFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.factory.builder.io.IoMailFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
@@ -39,7 +39,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 											STATUS extends JeeslIoMailStatus<L,D,STATUS,?>,
 											RETENTION extends JeeslIoMailRetention<L,D,RETENTION,?>,
 											FRC extends JeeslFileContainer<?,?>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable,SbToggleBean,SbDateSelectionBean
 {
 	private static final long serialVersionUID = 1L;
@@ -86,7 +86,7 @@ public class JeeslIoMailQueueController <L extends JeeslLang,D extends JeeslDesc
 	public void postConstructMailQueue(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 											JeeslIoMailFacade<L,D,CATEGORY,MAIL,STATUS,RETENTION,FRC> fMail)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMail=fMail;
 		
 		categories = fMail.allOrderedPositionVisible(fbMail.getClassCategory());

@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,IoDescription,IoLocale>
+public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoLang,IoDescription,IoLocale>
 									implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -91,7 +91,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslWebController<IoLang,Io
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
 							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMaven=fMaven;
 
 		suitabilities.addAll(fMaven.allOrderedPositionVisible(IoMavenSuitability.class));

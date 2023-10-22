@@ -12,7 +12,7 @@ import java.util.Map;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslTafuFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.TafuFactoryBuilder;
@@ -53,7 +53,7 @@ public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescript
     										M extends JeeslIoMarkup<MT>,
     										MT extends JeeslIoMarkupType<L,D,MT,?>
     										>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable, SbSingleBean, SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -126,7 +126,7 @@ public class JeeslTafuDashboardGwc <L extends JeeslLang, D extends JeeslDescript
 			JeeslTafuFacade<L,D,R,T,TS,SC,VP,DOW,M> fTafu,
 									R realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fTafu=fTafu;
 		this.realm=realm;
 		

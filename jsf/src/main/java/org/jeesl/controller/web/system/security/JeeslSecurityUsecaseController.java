@@ -13,7 +13,7 @@ import org.jeesl.controller.util.comparator.ejb.system.security.SecurityActionCo
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityRoleComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityUsecaseComparator;
 import org.jeesl.controller.util.comparator.ejb.system.security.SecurityViewComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -56,7 +56,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 											OT extends JeeslSecurityOnlineTutorial<L,D,V>,
 											OH extends JeeslSecurityOnlineHelp<V,?,?>,
 											USER extends JeeslUser<R>>
-									extends AbstractJeeslWebController<L,D,LOC>
+									extends AbstractJeeslLocaleWebController<L,D,LOC>
 									implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -121,7 +121,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 									JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
 									JeeslJsfSecurityHandler<R,V,U,A,AR,USER> security)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSecurity=fSecurity;
 		this.bSecurity=bSecurity;
 		

@@ -7,7 +7,7 @@ import java.util.Objects;
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslNewsFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -42,7 +42,7 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 									M extends JeeslIoMarkup<MT>,
 									MT extends JeeslIoMarkupType<L,D,MT,?>,
 									FRC extends JeeslFileContainer<?,?>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable,SbSingleBean,JeeslFileRepositoryCallback
 {
 	private static final long serialVersionUID = 1L;
@@ -77,7 +77,7 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 										R realm, USER author,
 										JeeslFileRepositoryHandler<LOC,?,FRC,?> frh)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fNews=fNews;
 		this.realm=realm;
 		this.author=author;

@@ -8,7 +8,7 @@ import java.util.Objects;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.handler.NullNumberBinder;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -27,7 +27,7 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslSecurityContextController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CTX extends JeeslSecurityContext<L,D>>
-			extends AbstractJeeslWebController<L,D,LOC>
+			extends AbstractJeeslLocaleWebController<L,D,LOC>
 			implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -56,7 +56,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	public void postConstructContext(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 											JeeslSecurityFacade<?,?,?,?,?,?,?> fSecurity)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSecurity = fSecurity;
 		this.reloadContexts();
 	}

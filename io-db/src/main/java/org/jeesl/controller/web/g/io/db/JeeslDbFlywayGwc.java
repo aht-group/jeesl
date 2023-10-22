@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.factory.builder.io.db.IoDbFlywayFactoryBuilder;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.io.db.JeeslIoDbFlywayCallback;
@@ -24,7 +24,7 @@ public class JeeslDbFlywayGwc <L extends JeeslLang, D extends JeeslDescription, 
 								FLY extends JeeslIoDbFlyway,
 								FT extends JeeslIoDbFlywayType<L,D,FT,?>
 >
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -54,7 +54,7 @@ public class JeeslDbFlywayGwc <L extends JeeslLang, D extends JeeslDescription, 
 
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<?,?,?,?,?,?,?,?,?> fDb)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fDb = fDb;
 		
 		cacheType.facade(fDb);

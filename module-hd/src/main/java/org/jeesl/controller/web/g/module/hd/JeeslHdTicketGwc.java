@@ -7,7 +7,7 @@ import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoCmsFacade;
 import org.jeesl.api.facade.module.JeeslHdFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.doc.ofx.cms.generic.JeeslMarkupSectionFactory;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -72,7 +72,7 @@ public class JeeslHdTicketGwc <L extends JeeslLang, D extends JeeslDescription, 
 								FRC extends JeeslFileContainer<?,?>,
 								USER extends JeeslSimpleUser
 								>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements SbToggleBean,JeeslFileRepositoryCallback
 {
 	private static final long serialVersionUID = 1L;
@@ -145,7 +145,7 @@ public class JeeslHdTicketGwc <L extends JeeslLang, D extends JeeslDescription, 
 									R realm,
 									USER reporter)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fHd=fHd;
 		this.fCms=fCms;
 		this.realm=realm;

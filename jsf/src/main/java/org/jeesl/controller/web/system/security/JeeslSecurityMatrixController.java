@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.system.SecurityFactoryBuilder;
@@ -32,7 +32,7 @@ public class JeeslSecurityMatrixController  <L extends JeeslLang, D extends Jees
 										V extends JeeslSecurityView<L,D,C,R,U,?>,
 										U extends JeeslSecurityUsecase<L,D,C,R,V,?>
 										>
-									extends AbstractJeeslWebController<L,D,LOC>
+									extends AbstractJeeslLocaleWebController<L,D,LOC>
 									implements SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -68,7 +68,7 @@ public class JeeslSecurityMatrixController  <L extends JeeslLang, D extends Jees
 	public void postConstructMatrix(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			JeeslSecurityFacade<C,R,V,U,?,?,?> fSecurity)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSecurity=fSecurity;
 	}
 

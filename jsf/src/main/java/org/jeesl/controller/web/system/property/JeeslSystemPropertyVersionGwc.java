@@ -8,7 +8,7 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 import org.jeesl.api.facade.system.JeeslSystemPropertyFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.PropertyFactoryBuilder;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public class JeeslSystemPropertyVersionGwc <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslPropertyCategory<L,D,C,?>,
 											P extends JeeslProperty<L,D,C,P>>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements Serializable
 {
 	private static final long serialVersionUID = 1L;

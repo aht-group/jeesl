@@ -9,7 +9,7 @@ import java.util.Map;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
@@ -51,7 +51,7 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 								CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>,
 								CUN extends JeeslDbMetaUnique<COL,CON>,
 								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -86,7 +86,7 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 
 	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN> fDb)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fDb=fDb;
 	}
 	

@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -38,7 +38,7 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 											G extends JeeslGraphic<GT,?,?>, GT extends JeeslGraphicType<L,D,GT,G>,
 											R extends JeeslTenantRealm<L,D,R,?>, RREF extends EjbWithId,
 											C extends JeeslTreeClassification<L,R,C,G>>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -80,7 +80,7 @@ public abstract class AbstractTreeClassificationController <L extends JeeslLang,
 									JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 									R realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.facade=facade;
 		this.fGraphic=fGraphic;
 		

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslHdFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.HdFactoryBuilder;
@@ -36,7 +36,7 @@ public class JeeslHdFaqGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 								FAQ extends JeeslHdFaq<L,D,R,CAT,SCOPE>,
 								FGA extends JeeslHdFga<FAQ,?,?>
 								>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -78,7 +78,7 @@ public class JeeslHdFaqGwc <L extends JeeslLang, D extends JeeslDescription, LOC
 									JeeslHdFacade<L,D,R,CAT,?,?,?,?,?,?,?,?,?,FAQ,SCOPE,FGA,?,?,?> fHd,
 									R realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fHd=fHd;
 		this.realm=realm;
 	}

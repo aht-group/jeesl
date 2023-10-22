@@ -10,7 +10,7 @@ import org.jeesl.api.bean.JeeslAttributeBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoAttributeFacade;
 import org.jeesl.controller.util.comparator.ejb.io.attribute.AttributeCriteriaComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
@@ -45,7 +45,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 						TYPE extends JeeslAttributeType<L,D,TYPE,?>,
 						OPTION extends JeeslAttributeOption<L,D,CRITERIA>,
 						SET extends JeeslAttributeSet<L,D,R,CAT,?>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements SbSingleBean,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -96,7 +96,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 								JeeslAttributeBean<R,CAT,CRITERIA,TYPE,OPTION,SET,?,?,?> bAttribute,
 								JeeslFacesMessageBean bMessage, R realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		
 		this.fAttribute=fAttribute;
 		this.bAttribute=bAttribute;

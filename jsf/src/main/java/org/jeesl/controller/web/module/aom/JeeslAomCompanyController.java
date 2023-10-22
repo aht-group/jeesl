@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslAomFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -30,7 +30,7 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 											REALM extends JeeslTenantRealm<L,D,REALM,?>, RREF extends EjbWithId,
 											COMPANY extends JeeslAomCompany<REALM,SCOPE>,
 											SCOPE extends JeeslAomScope<L,D,SCOPE,?>>
-					extends AbstractJeeslWebController<L,D,LOC>
+					extends AbstractJeeslLocaleWebController<L,D,LOC>
 					implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -61,7 +61,7 @@ public class JeeslAomCompanyController <L extends JeeslLang, D extends JeeslDesc
 			JeeslAomFacade<L,D,REALM,COMPANY,?,?,?,?,?,?,?,?> fAsset,
 			REALM realm)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fAsset=fAsset;
 		this.cache=cache;
 		lazyCompany.setCache(cache);

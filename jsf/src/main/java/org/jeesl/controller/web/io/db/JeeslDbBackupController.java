@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
 import org.jeesl.controller.util.comparator.ejb.module.calendar.EjbWithRecordDateComparator;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
@@ -34,7 +34,7 @@ public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescrip
 									DF extends JeeslDbDumpFile<DUMP,DH,DS>,
 									DH extends JeeslIoSsiHost<L,D,?>,
 									DS extends JeeslDbDumpStatus<L,D,DS,?>>
-						extends AbstractJeeslWebController<L,D,LOC>
+						extends AbstractJeeslLocaleWebController<L,D,LOC>
 						implements Serializable,SbDateSelectionBean
 {
 	private static final long serialVersionUID = 1L;

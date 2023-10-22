@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
-public class JeeslIoSsiPortWc extends AbstractJeeslWebController<IoLang,IoDescription,IoLocale>
+public class JeeslIoSsiPortWc extends AbstractJeeslLocaleWebController<IoLang,IoDescription,IoLocale>
 									implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -75,7 +75,7 @@ public class JeeslIoSsiPortWc extends AbstractJeeslWebController<IoLang,IoDescri
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
 			JeeslIoSsiFacade<IoSsiSystem,IoSsiCredential,IoSsiContext,IoSsiMapping,IoSsiData,IoSsiStatus,IoLabelEntity,IoSsiCleaning,SystemJobStatus,IoSsiHost> fSsi)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSsi=fSsi;
 
 		services.addAll(fSsi.all(IoSsiNatService.class));

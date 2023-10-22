@@ -6,7 +6,7 @@ import java.util.List;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
-import org.jeesl.controller.web.AbstractJeeslWebController;
+import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
@@ -44,7 +44,7 @@ public class JeeslTsStatisticController <L extends JeeslLang, D extends JeeslDes
 											INT extends JeeslTsInterval<L,D,INT,?>,
 											STAT extends JeeslTsStatistic<L,D,STAT,?>
 											>
-		extends AbstractJeeslWebController<L,D,LOC>
+		extends AbstractJeeslLocaleWebController<L,D,LOC>
 		implements SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -73,7 +73,7 @@ public class JeeslTsStatisticController <L extends JeeslLang, D extends JeeslDes
 	public void postConstructStatistic(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
 			JeeslTsFacade<L,D,CAT,SCOPE,?,?,?,TS,?,?,BRIDGE,EC,ENTITY,INT,STAT,?,?,?,?,?,?,?> fTs)
 	{
-		super.postConstructWebController(lp,bMessage);
+		super.postConstructLocaleWebController(lp,bMessage);
 		this.fTs=fTs;
 		
 		sbhLocale.setList(lp.getLocales());
