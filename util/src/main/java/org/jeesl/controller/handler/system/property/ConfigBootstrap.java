@@ -36,7 +36,7 @@ public class ConfigBootstrap
 	}
 	
 	
-	public void add(Path path)
+	public ConfigBootstrap add(Path path)
 	{
 		if(Objects.isNull(path)) {logger.warn("Requested an additional config, but null provided");}
 		else
@@ -44,11 +44,13 @@ public class ConfigBootstrap
 			logger.info("Adding "+path.toString());
 			configurations.add(path.toFile().getAbsolutePath());
 		}
+		return this;
 	}
-	public void addS(String s)
+	public ConfigBootstrap add(String s)
 	{
 		logger.info("Adding "+s);
 		configurations.add(s);
+		return this;
 	}
 	
 	public org.exlp.interfaces.system.property.Configuration wrap() {return new ConfigWrapper(combine());}

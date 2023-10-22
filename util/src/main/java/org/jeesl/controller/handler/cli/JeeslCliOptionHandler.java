@@ -81,10 +81,10 @@ public class JeeslCliOptionHandler
 	}
 	
 	
-	public void handleLog4j(CommandLine line)
+	public void handleLog4j1(CommandLine line)
 	{
-		if(line.hasOption(oDebug.getOpt())) {this.initLogger("log4j.debug.xml");}
-        else {this.initLogger("log4j.cli.xml");}
+		if(line.hasOption(oDebug.getOpt())) {this.initLogger("debug-log4j.xml");}
+        else {this.initLogger("cli-log4j.xml");}
 	}
 	private void initLogger(String loggingProfile)
 	{
@@ -96,9 +96,8 @@ public class JeeslCliOptionHandler
 	
 	public void handleLog4j2(CommandLine line)
 	{
-//		System.out.println("Testing logging");
-		if(line.hasOption(oDebug.getOpt())) {this.initLogger2("log4j.debug.xml");}
-        else {this.initLogger2("log4j2-cli.xml");}
+		if(line.hasOption(oDebug.getOpt())) {this.initLogger2("debug-log4j2.xml");}
+        else {this.initLogger2("cli-log4j2.xml");}
 	}
 	private void initLogger2(String loggingProfile)
 	{
@@ -106,6 +105,7 @@ public class JeeslCliOptionHandler
 		LoggerBootstrap.instance(loggingProfile).path(log4jPaths[0]).init();
 	}
 	
+	public org.exlp.interfaces.system.property.Configuration config1Wrapper(CommandLine line, String defaultConfig) {return ConfigLoader.wrap(config1(line,defaultConfig));}
 	public org.apache.commons.configuration.Configuration config1(CommandLine line, String defaultConfig)
 	{
 		if(line.hasOption(oConfig.getOpt()))
@@ -142,10 +142,7 @@ public class JeeslCliOptionHandler
 		return ConfigLoader.init();
 	}
 	
-	public org.exlp.interfaces.system.property.Configuration config2Wrapper(CommandLine line, String defaultConfig)
-	{
-		return ConfigBootstrap.wrap(config2(line,defaultConfig));
-	}
+	public org.exlp.interfaces.system.property.Configuration config2Wrapper(CommandLine line, String defaultConfig) {return ConfigBootstrap.wrap(config2(line,defaultConfig));}
 	public org.apache.commons.configuration2.Configuration config2(CommandLine line, String defaultConfig)
 	{
 		ConfigBootstrap bootstrap = ConfigBootstrap.instance();
@@ -175,10 +172,10 @@ public class JeeslCliOptionHandler
 				System.exit(-1);
 			}
 			logger.info("Using "+Configuration.class.getSimpleName()+" "+configFile);
-			bootstrap.addS(configFile);
+			bootstrap.add(configFile);
 	    }
 		
-		bootstrap.addS(defaultConfig);
+		bootstrap.add(defaultConfig);
 		
 		return bootstrap.combine();
 	}
@@ -212,10 +209,10 @@ public class JeeslCliOptionHandler
 				System.exit(-1);
 			}
 			logger.info("Using "+Configuration.class.getSimpleName()+" "+configFile);
-			cl.addS(configFile);
+			cl.add(configFile);
 	    }
 		
-		cl.addS(defaultConfig);
+		cl.add(defaultConfig);
 		
 		return cl.combine();
 	}

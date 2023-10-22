@@ -22,8 +22,9 @@
 			<aht:row>
 				<aht:slot id="sCategories" width="8">
 					<h:form id="fCategories">
-						<p:dataTable var="s" value="#{cc.attrs.bean.scopes}" draggableRows="true"
-							selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
+						<p:dataTable styleClass="jeesl-datatable"
+								var="s" value="#{cc.attrs.bean.scopes}" draggableRows="true"
+								selection="#{cc.attrs.bean.scope}" selectionMode="single" rowKey="#{s.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslTsScopes}">
 									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.add()}" update=":#{cc.id}:sCategory"/>
@@ -35,19 +36,23 @@
 								<h:graphicImage rendered="#{not s.visible}" name="12/ui/status/ghost.png"  library="jeeslPrototypeGfx"/>
 								<h:outputText rendered="#{s.visible}" value="#{s.category.position}.#{s.position}"/>
 				          </p:column>
-				          <p:column rendered="false" headerText="#{msg.jeeslCode}">  
+							<p:column rendered="false">
+								<f:facet name="header"><jtp:label entity="TsScope" code="code"/></f:facet>
 								<h:outputText value="#{s.code}"/>  
-				          </p:column>
-				          <p:column headerText="#{msg.aupCategory}">  
+							</p:column>
+							<p:column>
+								<f:facet name="header"><jtp:label entity="TsScope" code="category"/></f:facet>
 								<h:outputText value="#{s.category.name[localeCode].lang}"/>
 							</p:column>
 							<p:column headerText="#{msg.jeeslTsScope}">  
 								<h:outputText value="#{s.name[localeCode].lang}"/>
 							</p:column>
-							<p:column headerText="#{msg.jeeslTsUnit}">  
+							<p:column>
+								<f:facet name="header"><jtp:label entity="TsScope" code="unit"/></f:facet>
 								<h:outputText value="#{s.unit.symbol}" rendered="#{s.type.code eq 'ts'}"/>
 							</p:column>
-							<p:column headerText="#{msg.jeeslType}" styleClass="jeeslPfTcCenter">
+							<p:column styleClass="jeesl-center">
+								<f:facet name="header"><jtp:label entity="TsScope" code="type"/></f:facet>
 								<jtp:symbolizer value="#{s.type}" height="12"/>
 							</p:column>
 						</p:dataTable>
@@ -55,45 +60,47 @@
 				</aht:slot>
 				<aht:slot id="sCategory" width="4">
 					<h:form id="fCategory">
-						<p:panel id="pLang" header="#{msg.jeeslTsScope}"
-								 rendered="#{not empty cc.attrs.bean.scope}" styleClass="jeeslPanel">
+						<p:panel id="pLang" rendered="#{not empty cc.attrs.bean.scope}" styleClass="jeesl-panel">
+							<f:facet name="header"><j:pHeader entity="TsScope"/></f:facet>
 							<f:facet name="actions">
 								<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelScope()}" update=":#{cc.id}:sCategory"/>
 								<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.save()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory"/>
 								<j:svg type="jeeslDelete" rendered="#{cc.attrs.bean.scope.id gt 0}" listener="#{cc.attrs.bean.rm()}" update=":#{cc.id}:sCategories :#{cc.id}:sCategory"/>
 							</f:facet>
-							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
-								<p:outputLabel value="#{msg.jeeslCode}"/>
+							<p:messages redisplay="false" severity="warn,error" showSummary="true" showDetail="false" closable="true"/>
+							<j:inputGrid rendered="#{cc.attrs.bean.uiShowInvisible}" >
+								<jtp:label entity="TsScope" code="visible"/>
+								<p:selectBooleanCheckbox value="#{cc.attrs.bean.scope.visible}"/>
+							</j:inputGrid>
+							<j:inputGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+								<jtp:label entity="TsScope" code="code"/>
 								<p:inputText autocomplete="off" value="#{cc.attrs.bean.scope.code}"/>
 								
-								<p:outputLabel value="#{msg.jeeslCategory}"/>
+								<jtp:label entity="TsScope" code="category"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.scope.category}" effect="fade" autoWidth="false">
 									<f:selectItems value="#{cc.attrs.bean.categories}" var="u" itemLabel="#{u.name[localeCode].lang}" itemValue="#{u}"/>
 								</p:selectOneMenu>
 								
-								<p:outputLabel value="#{msg.jeeslType}"/>
+								<jtp:label entity="TsScope" code="type"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.scope.type}" effect="fade" autoWidth="false">
 									<f:selectItems value="#{cc.attrs.bean.scopeTypes}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 									<p:ajax event="change" listener="#{cc.attrs.bean.changeScopeType()}" update="@form"/>
 								</p:selectOneMenu>
 								
-								<p:outputLabel value="#{msg.jeeslTsUnit}"/>
+								<jtp:label entity="TsScope" code="unit"/>
 								<p:selectOneMenu value="#{cc.attrs.bean.scope.unit}" effect="fade" autoWidth="false" >
 									<f:selectItems value="#{cc.attrs.bean.units}" var="u" itemLabel="#{u.name[localeCode].lang}" itemValue="#{u}"/>
 								</p:selectOneMenu>
-
-							</p:panelGrid>
-							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80" rendered="#{cc.attrs.bean.uiShowInvisible}" >
-								<p:outputLabel value="#{msg.aupSecurityVisible}"/>
-								<p:selectBooleanCheckbox value="#{cc.attrs.bean.scope.visible}"/>
-							</p:panelGrid>
-							<aht:tabTranslationEditor value="#{cc.attrs.bean.scope}" keys="#{cc.attrs.localeKeys}" withDescription="true"/>
+							</j:inputGrid>
+							<jtp:inputMulti value="#{cc.attrs.bean.scope}"
+									withName="true" labelName="#{appLabelBean.labels['TsScope']['name'][localeCode].lang}"
+									withDescription="true" labelDescription="#{appLabelBean.labels['TsScope']['description'][localeCode].lang}"/>
 						</p:panel>
 					</h:form>
 					<h:form id="fIntervals" rendered="#{(not empty cc.attrs.bean.scope) and (cc.attrs.bean.scope.id gt 0)}">
-						<p:dataTable id="dtViews" var="v" value="#{cc.attrs.bean.scope.intervals}"
-						 selection="#{cc.attrs.bean.tbInterval}" selectionMode="single" rowKey="#{v.id}">
+						<p:dataTable id="dtViews" styleClass="jeesl-datatable"
+								var="v" value="#{cc.attrs.bean.scope.intervals}"
+						 		selection="#{cc.attrs.bean.tbInterval}" selectionMode="single" rowKey="#{v.id}">
 							<f:facet name="header">
 								<j:dtHeader id="dth" title="#{msg.aupTsIntervals}">
 									<j:svg type="jeeslAdd" onstart="PF('wvOpViewSelection').show();"/>
@@ -118,8 +125,9 @@
 						</p:overlayPanel>
 					</h:form>
 					<h:form id="fClasses" rendered="#{(not empty cc.attrs.bean.scope) and (cc.attrs.bean.scope.id gt 0)}">
-						<p:dataTable id="dtClasses" var="c" value="#{cc.attrs.bean.scope.classes}"
-						 selection="#{cc.attrs.bean.tbClass}" selectionMode="single" rowKey="#{c.id}">
+						<p:dataTable id="dtClasses" styleClass="jeesl-datatable"
+								var="c" value="#{cc.attrs.bean.scope.classes}"
+						 		selection="#{cc.attrs.bean.tbClass}" selectionMode="single" rowKey="#{c.id}">
 							<f:facet name="header">
 								<j:dtHeader id="dth" title="#{msg.jeeslTsClasses}">
 									<j:svg type="jeeslAdd" onstart="PF('wvOpClassSelection').show();"/>
@@ -144,9 +152,9 @@
 						</p:overlayPanel>
 					</h:form>
 					<h:form id="fMultiPoints" rendered="#{(not empty cc.attrs.bean.scope) and (cc.attrs.bean.scope.id gt 0)}">
-						<p:dataTable var="mp" value="#{cc.attrs.bean.multiPoints}"
-							rendered="#{cc.attrs.bean.scope.type.code eq 'mp'}" draggableRows="true"
-						 	selection="#{cc.attrs.bean.multiPoint}" selectionMode="single" rowKey="#{mp.id}">
+						<p:dataTable styleClass="jeesl-datatable" rendered="#{cc.attrs.bean.scope.type.code eq 'mp'}"
+								var="mp" value="#{cc.attrs.bean.multiPoints}" draggableRows="true"
+						 		selection="#{cc.attrs.bean.multiPoint}" selectionMode="single" rowKey="#{mp.id}">
 							<f:facet name="header">
 								<j:dtHeader id="dth" title="#{msg.jeeslTsMultiPoints}">
 									<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint" tooltip="#{msg.ttNew}"/>
@@ -170,8 +178,8 @@
 						</p:dataTable>		  
 					</h:form>
 					<h:form id="fMultiPoint" rendered="#{(not empty cc.attrs.bean.scope) and (cc.attrs.bean.scope.id gt 0)}">
-						<p:panel id="pLang" header="#{msg.jeeslTsMultiPoint}"
-								 rendered="#{not empty cc.attrs.bean.multiPoint}" styleClass="jeeslPanel">
+						<p:panel id="pLang" rendered="#{not empty cc.attrs.bean.multiPoint}" styleClass="jeesl-panel">
+							<f:facet name="header"><j:pHeader entity="TsMultiPoint"/></f:facet>
 							<f:facet name="actions">
 								<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint"/>
 								<j:svg type="jeeslSave" rendered="#{cc.attrs.bean.uiAllowSave}" listener="#{cc.attrs.bean.saveMultiPoint()}" update=":#{cc.id}:fMultiPoints :#{cc.id}:fMultiPoint"/>

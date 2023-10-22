@@ -2,14 +2,21 @@ package org.jeesl.model.json.io.ssi.core;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonInclude(Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown=true)
 @JsonRootName(value="crendential")
 public class JsonSsiCredential implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+	public static String test() {return "test";}
+	
 	@JsonProperty("system")
 	private JsonSsiSystem system;
 	public JsonSsiSystem getSystem() {return system;}
