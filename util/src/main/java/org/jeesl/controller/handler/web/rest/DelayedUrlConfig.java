@@ -18,8 +18,8 @@ public class DelayedUrlConfig
 		sb.append(" (").append(key).append(")");
 		
 		boolean isLocal = url.contains("localhost");
-		sb.append(" skipDelay:").append(skipDelay);
-		sb.append(" localhost:").append(isLocal);
+//		sb.append(" skipDelay:").append(skipDelay);
+//		sb.append(" localhost:").append(isLocal);
 		
 		if(!skipDelay && !isLocal)
 		{

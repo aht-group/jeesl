@@ -6,6 +6,8 @@ import java.io.Serializable;
 public interface JeeslLogger extends Serializable
 {
 	void reset();
+	boolean isActive();
+	boolean isNotActive();
 	
 	String start(String log);
 	String start(String log, String message);

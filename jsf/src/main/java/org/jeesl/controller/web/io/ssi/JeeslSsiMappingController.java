@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
-import org.jeesl.controller.handler.system.io.log.DebugLoggerHandler;
+import org.jeesl.controller.handler.system.io.log.DebugJeeslLogger;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
@@ -72,7 +72,7 @@ public class JeeslSsiMappingController <L extends JeeslLang, D extends JeeslDesc
 		thMapping = new JsonTuple1Handler<>(fbSsi.getClassMapping());
 		thLink = new JsonTuple2Handler<>(fbSsi.getClassMapping(),fbSsi.getClassLink());
 		
-		jogger = DebugLoggerHandler.instance(this.getClass());
+		jogger = DebugJeeslLogger.instance(this.getClass());
 	}
 
 	public void postConstructSsiMapping(JeeslIoSsiFacade<SYSTEM,?,MAPPING,?,?,LINK,ENTITY,?,?,?> fSsi)

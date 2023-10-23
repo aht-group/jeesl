@@ -59,8 +59,7 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	private LOG log;
 	private static final String msgNotActive = "Jogger is not active";
 	
-	public LoggerHandler(IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog,
-					   Class<?> c)
+	public LoggerHandler(IoLogFactoryBuilder<L,D,LOG,MILESTONE,LOOP> fbLog, Class<?> c)
 	{
 		this.fbLog=fbLog;
 		this.c=c;
@@ -82,7 +81,8 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		mapCount.clear();
 	}
 	
-	private boolean isActive() {return Objects.nonNull(timeStart);}
+	@Override public boolean isActive() {return Objects.nonNull(timeStart);}
+	@Override public boolean isNotActive() {return Objects.isNull(timeStart);}
 	
 	@Override public String start(String log) {return start(log,null,null);}
 	public String start(String log, USER user) {return start(log,null,user);}
@@ -105,7 +105,6 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 	
 	@Override public String milestone(Class<?> c, String message){return milestone(c.getSimpleName(),message,null);}
 	@Override public String milestone(String milestone, String message){return milestone(milestone,message,null);}
-	
 	
 	public String milestone(String milestone, Integer elements) {return milestone(milestone,null,elements);}
 	public String milestone(Class<?> c, String message, Integer elements) {return milestone(c.getSimpleName(),message,elements);}

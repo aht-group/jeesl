@@ -6,19 +6,21 @@ import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DebugLoggerHandler implements JeeslLogger
+public class DebugJeeslLogger implements JeeslLogger
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(DebugLoggerHandler.class);
+	final static Logger logger = LoggerFactory.getLogger(DebugJeeslLogger.class);
 	
 
-	public static JeeslLogger instance(Class<?> c) {return new DebugLoggerHandler(c);}
-	private DebugLoggerHandler(Class<?> c)
+	public static JeeslLogger instance(Class<?> c) {return new DebugJeeslLogger(c);}
+	private DebugJeeslLogger(Class<?> c)
 	{
 		
 	}
 	
 	@Override public void reset() {}
+	@Override public boolean isActive() {return true;}
+	@Override public boolean isNotActive() {return false;}
 	
 	@Override public String start(String log) {return log;}
 	@Override public String start(String log, String message) {return log+" - "+message;}
@@ -38,6 +40,4 @@ public class DebugLoggerHandler implements JeeslLogger
 	@Override public void ofxMilestones(OutputStream os) {}
 
 	@Override public void ofxLoops(OutputStream os) {}
-	
-
 }

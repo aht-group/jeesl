@@ -80,7 +80,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 		if(Objects.isNull(identity)) {logger.error("subMenu, but identity is null!");}
 		
 		String cacheKey = TxtIdentityFactory.key("sub",identity,viewCode);
-		if(cacheSub.containsKey(cacheKey)){return cacheSub.get(cacheKey);}
+		if(cacheSub.containsKey(cacheKey)) {return cacheSub.get(cacheKey);}
 		else
 		{
 			if(debugOnInfo) {logger.info("Generating buildSub for ("+viewCode+") withContext:"+context);}
