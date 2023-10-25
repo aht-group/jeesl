@@ -1,6 +1,5 @@
 package org.jeesl.util.web;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -21,8 +20,8 @@ public class RestLogger implements ClientRequestFilter
         logger.info(ctx.getMethod()+" "+ctx.getUri().toString());
         logger.info("Header:");
         for(String key : ctx.getStringHeaders().keySet())
-        {
-        	logger.info("\t"+key+": "+ctx.getStringHeaders().get(key));
+        {        	
+        	logger.info("\t"+key+": "+String.join(", ",ctx.getStringHeaders().get(key)));
         }
 
         if(ObjectUtils.isNotEmpty(ctx.getPropertyNames()))

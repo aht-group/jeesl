@@ -114,5 +114,8 @@ public class ConfigBootstrap
 		}
 
 		@Override public String getString(String key) {return config.getString(key);}
+		@Override public String getString(String key, String fallback) {return config.getString(key,fallback);}
+		@Override public int getInt(String key) {return config.getInt(key);}
+		@Override public int getInt(String key, int fallback) {return config.getInt(key,fallback);}
 	}
 }
