@@ -18,7 +18,6 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jeesl.api.rest.rs.jx.io.JeeslIoMavenRest;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
-import org.jeesl.controller.processor.io.db.DatabaseBackupProcessor;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -32,7 +31,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.interfaces.util.ConfigKey;
-import net.sf.exlp.util.io.JsonUtil;
 
 public class JeeslFontTrackerApp
 {

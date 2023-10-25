@@ -1,9 +1,6 @@
 package org.jeesl.jsf.util.stream;
 
-import java.io.InputStream;
-
 import org.jeesl.interfaces.controller.report.format.JeeslCsvReport;
-import org.jeesl.interfaces.controller.report.format.JeeslXlsReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;

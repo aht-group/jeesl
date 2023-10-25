@@ -8,18 +8,16 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.jsf.jk.util.ComponentAttribute;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jakarta.faces.component.FacesComponent;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.component.UIPanel;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.context.ResponseWriter;
-
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.jsf.jk.util.ComponentAttribute;
-import org.primefaces.component.blockui.BlockUIBase;
-import org.primefaces.component.outputlabel.OutputLabel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @FacesComponent("org.jeesl.jsf.components.layout.InputGrid")
 public class InputGrid extends UIPanel

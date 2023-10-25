@@ -7,7 +7,6 @@ import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.exlp.interfaces.system.property.Configuration;
-import org.exlp.interfaces.system.property.Configuration;
 import org.jdom2.Comment;
 import org.jdom2.Document;
 import org.jdom2.output.Format;

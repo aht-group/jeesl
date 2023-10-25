@@ -6,18 +6,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import net.sf.ahtutils.xml.report.XlsSheet;
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 import org.geotools.data.DataStore;
 import org.geotools.data.DataStoreFinder;
-import org.geotools.data.Query;
-import org.geotools.data.simple.SimpleFeatureCollection;
 import org.geotools.data.simple.SimpleFeatureSource;
 import org.geotools.feature.FeatureCollection;
 import org.geotools.feature.FeatureIterator;
-
 import org.jeesl.api.controller.ImportStrategy;
 import org.jeesl.report.importers.model.shp.ShapeFeature;
 import org.jeesl.report.importers.model.shp.ShapeFile;
@@ -25,6 +19,10 @@ import org.opengis.feature.Feature;
 import org.opengis.feature.Property;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.report.XlsSheet;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 public abstract class AbstractShpImporter <C extends Serializable, I extends ImportStrategy> extends AbstractTableImporter<C, I>{
 	

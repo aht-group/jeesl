@@ -14,8 +14,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaColumnFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaConstraintFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaTableFactory;
-import org.jeesl.factory.json.system.status.JsonTypeFactory;
-import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraintType;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaConstraint;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaTable;

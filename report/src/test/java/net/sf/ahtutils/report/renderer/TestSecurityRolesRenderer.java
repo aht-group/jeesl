@@ -3,15 +3,14 @@ package net.sf.ahtutils.report.renderer;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.ahtutils.report.exception.ReportException;
 import net.sf.ahtutils.test.AbstractAhtUtilsReportTest;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TestSecurityRolesRenderer extends AbstractAhtUtilsReportTest
 {

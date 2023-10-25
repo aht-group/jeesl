@@ -1,7 +1,5 @@
 package org.jeesl.api.facade.io;
 
-import java.util.List;
-
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;

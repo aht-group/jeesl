@@ -2,13 +2,12 @@ package org.jeesl.controller.processor;
 
 import java.util.List;
 
-import net.sf.ahtutils.controller.processor.set.SetProcessingLexer;
-import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.commons.collections.ListUtils;
 
 import net.sf.ahtutils.controller.processor.set.SetProcessingBaseVisitor;
+import net.sf.ahtutils.controller.processor.set.SetProcessingLexer;
 import net.sf.ahtutils.controller.processor.set.SetProcessingParser;
 
 public class IntersectionProcessor extends SetProcessingBaseVisitor

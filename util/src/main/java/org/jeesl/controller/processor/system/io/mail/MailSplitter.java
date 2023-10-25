@@ -1,6 +1,5 @@
 package org.jeesl.controller.processor.system.io.mail;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

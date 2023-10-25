@@ -3,15 +3,14 @@ package net.sf.ahtutils.controller.factory.js;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.ahtutils.test.AbstractUtilsMavenTst;
-
 import org.jeesl.JeeslMavenBootstrap;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mozilla.javascript.EvaluatorException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.test.AbstractUtilsMavenTst;
 
 public class TestJsBuilder extends AbstractUtilsMavenTst
 {

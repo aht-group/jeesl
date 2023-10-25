@@ -13,7 +13,10 @@ import java.util.Base64;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
-import static net.sf.ahtutils.report.ReportHandler.logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
 import net.sf.ahtutils.report.exception.ReportException;
 import net.sf.ahtutils.xml.report.Reports;
@@ -27,10 +30,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.query.JRXPathQueryExecuterFactory;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
 
 public class ReportController extends AbstractReportControl
 {

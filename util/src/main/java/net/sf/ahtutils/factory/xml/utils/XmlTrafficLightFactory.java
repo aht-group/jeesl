@@ -1,19 +1,18 @@
 package net.sf.ahtutils.factory.xml.utils;
 
-import net.sf.ahtutils.xml.aht.Query;
-import net.sf.ahtutils.xml.utils.TrafficLight;
-
 import org.jeesl.api.exception.xml.JeeslXmlStructureException;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlScopeFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.aht.Query;
+import net.sf.ahtutils.xml.utils.TrafficLight;
 
 public class XmlTrafficLightFactory<L extends JeeslLang, D extends JeeslDescription,
 									SCOPE extends JeeslTrafficLightScope<L,D,SCOPE,?>,

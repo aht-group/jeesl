@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.api.rest.rs.jx.io.label.JeeslIoLabelRest;
-import org.jeesl.api.rest.rs.jx.io.label.JeeslRevisionRestImport;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;

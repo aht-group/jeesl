@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.factory.txt.system.locale.TranslationMap;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -9,7 +9,6 @@ import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
-import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionMissingLabel;

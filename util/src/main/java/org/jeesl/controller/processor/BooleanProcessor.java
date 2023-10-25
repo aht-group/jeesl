@@ -67,7 +67,5 @@ public class BooleanProcessor extends BoolProcessingBaseVisitor
 	@Override
 	public Object visitParse(BoolProcessingParser.ParseContext ctx) {return super.visitParse(ctx);}
 
-	private Boolean asBoolean(String s) {
-		return s.equals("true");
-	}
+	private Boolean asBoolean(String s) {return s.equals("true");}
 }

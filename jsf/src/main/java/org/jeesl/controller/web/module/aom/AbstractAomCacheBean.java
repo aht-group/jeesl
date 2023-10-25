@@ -8,9 +8,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-
-import org.infinispan.Cache;
 import org.jeesl.api.facade.module.JeeslAomFacade;
 import org.jeesl.factory.builder.module.AomFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
@@ -26,7 +23,6 @@ import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventStatus;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventType;
 import org.jeesl.interfaces.model.module.aom.event.JeeslAomEventUpload;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
-import org.jeesl.interfaces.qualifier.cache.local.AomCompanyCache;
 import org.jeesl.model.ejb.module.aom.AomScopeCacheKey;
 import org.jeesl.model.ejb.module.aom.AomTypeCacheKey;
 import org.jeesl.model.ejb.system.tenant.TenantIdentifier;

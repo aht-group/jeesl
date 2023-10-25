@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.status.Langs;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 public class TestReportXpathSerializeable extends AbstractJeeslUtilTest
 {
