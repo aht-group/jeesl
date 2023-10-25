@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.batik.transcoder.TranscoderException;
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.exlp.interfaces.system.property.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.openfuxml.media.transcode.Svg2PngTranscoder;
 import org.slf4j.Logger;
