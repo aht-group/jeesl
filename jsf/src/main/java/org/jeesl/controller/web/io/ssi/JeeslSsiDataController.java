@@ -20,7 +20,7 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvide
 import org.jeesl.interfaces.controller.web.io.ssi.JeeslIoSsiDataCallback;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -37,7 +37,7 @@ import net.sf.exlp.util.io.JsonUtil;
 public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										CTX extends JeeslIoSsiContext<?,?>,
 										DATA extends JeeslIoSsiData<CTX,STATUS,?>,
-										STATUS extends JeeslIoSsiLink<L,D,STATUS,?>,
+										STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
 										JSON extends Object>
 //									extends AbstractJeeslWebController<L,D,LOC>
 									extends LazyDataModel<DATA>

@@ -19,7 +19,7 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -36,7 +36,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
 										DATA extends JeeslIoSsiData<MAPPING,LINK,JOB>,
-										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
+										LINK extends JeeslIoSsiStatus<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 										JOB extends JeeslJobStatus<L,D,JOB,?>,
@@ -94,7 +94,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	{
 		for(DATA d : datas)
 		{
-			if(!d.getLink().getCode().equals(JeeslIoSsiLink.Code.linked.toString()))
+			if(!d.getLink().getCode().equals(JeeslIoSsiStatus.Code.linked.toString()))
 			{
 				ignoreData(d);
 			}
@@ -106,7 +106,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		try
 		{
 			data.setLocalId(null);
-			data.setLink(cacheLink.ejb(JeeslIoSsiLink.Code.ignore));
+			data.setLink(cacheLink.ejb(JeeslIoSsiStatus.Code.ignore));
 			fSsi.save(data);
 		}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
@@ -116,7 +116,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	{
 		for(DATA d : datas)
 		{
-			if(d.getLink().getCode().equals(JeeslIoSsiLink.Code.ignore.toString()))
+			if(d.getLink().getCode().equals(JeeslIoSsiStatus.Code.ignore.toString()))
 			{
 				unignoreData(d);
 			}
@@ -128,7 +128,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		try
 		{
 			data.setLocalId(null);
-			data.setLink(cacheLink.ejb(JeeslIoSsiLink.Code.unlinked));
+			data.setLink(cacheLink.ejb(JeeslIoSsiStatus.Code.unlinked));
 			fSsi.save(data);
 		}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
@@ -140,7 +140,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		{
 			try
 			{
-				if(data.getLink().equals(cacheLink.ejb(JeeslIoSsiLink.Code.update)))
+				if(data.getLink().equals(cacheLink.ejb(JeeslIoSsiStatus.Code.update)))
 				{
 					if(data.getLocalId()==null)
 					{
@@ -173,7 +173,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 			{
 				try
 				{
-					if(!data.getLink().equals(cacheLink.ejb(JeeslIoSsiLink.Code.linked)))
+					if(!data.getLink().equals(cacheLink.ejb(JeeslIoSsiStatus.Code.linked)))
 					{
 						evaluate(data,JsonUtil.read(this.getClassJson(),data.getJson()));
 					}
@@ -194,7 +194,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		for(DATA data : datas)
 		{
 			
-			if(data.getLink().equals(cacheLink.ejb(JeeslIoSsiLink.Code.possible)))
+			if(data.getLink().equals(cacheLink.ejb(JeeslIoSsiStatus.Code.possible)))
 			{
 				try {importData(data,JsonUtil.read(this.getClassJson(),data.getJson()));}
 				catch (IOException | JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e){e.printStackTrace();}

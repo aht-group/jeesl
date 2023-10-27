@@ -7,14 +7,14 @@ import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AbstractSsiCacheBean <L extends JeeslLang,D extends JeeslDescription,
-										LINK extends JeeslIoSsiLink<L,D,LINK,?>,
+										LINK extends JeeslIoSsiStatus<L,D,LINK,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>>
 						implements Serializable
 {

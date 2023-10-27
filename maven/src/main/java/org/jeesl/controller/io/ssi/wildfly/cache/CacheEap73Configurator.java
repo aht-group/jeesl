@@ -56,6 +56,7 @@ public class CacheEap73Configurator extends AbstractEapCacheConfigurator impleme
 			else if(cache.getCode().equals("report")) {this.createCacheLocal(cacheContainer,cache.getCode());}
 			else if(cache.getCode().equals("aom")) {this.createCacheLocal(cacheContainer,cache.getCode());}
 			else if(cache.getCode().equals("ts")) {this.createCacheLocal(cacheContainer,cache.getCode());}
+			else if(cache.getCode().equals("db")) {this.createCacheLocal(cacheContainer,cache.getCode());}
 		}
 //		logger.warn("@HH: Implement result code handling");
 	}

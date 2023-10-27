@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.io.ssi.maintenance.EjbWithSsiDataCleaning;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -25,7 +25,7 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 									CTX extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 									ATTRIBUTE extends JeeslIoSsiAttribute<CTX,ENTITY>,
 									DATA extends JeeslIoSsiData<CTX,STATUS,JOB>,
-									STATUS extends JeeslIoSsiLink<?,?,STATUS,?>,
+									STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
 									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 									CLEANING extends JeeslIoSsiCleaning<?,?,CLEANING,?>,
 									JOB extends JeeslJobStatus<?,?,JOB,?>,

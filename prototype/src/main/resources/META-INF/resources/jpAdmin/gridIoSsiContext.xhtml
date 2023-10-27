@@ -16,28 +16,28 @@
 			<h:form>
 				<p:dataTable styleClass="jeesl-datatable"
 						var="m" value="#{cc.attrs.ctrl.mappings}"
-						selection="#{cc.attrs.ctrl.mapping}" selectionMode="single" rowKey="#{m.id}">
+						selection="#{cc.attrs.ctrl.context}" selectionMode="single" rowKey="#{m.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoSsiContext" code="listOf">
 							<j:security actionSuffix="create" handler="#{cc.attrs.security}">
-								<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addMapping()}" update=":#{cc.id}:sMapping"/>
+								<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addContext()}" update=":#{cc.id}:sMapping"/>
 							</j:security>
 							<j:svg type="jeeslReload" listener="#{cc.attrs.ctrl.reloadNumbers()}" update="@form"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectMapping()}" update=":#{cc.id}:rowDetail"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectContext()}" update="@form :#{cc.id}:rowDetail"/>
 					<p:columnGroup type="header">
 						<p:row>
-							<p:column colspan="5"><f:facet name="header"></f:facet></p:column>
+							<p:column colspan="5"><f:facet name="header"><jtp:label entity="IoSsiContext"/></f:facet></p:column>
 							<p:column colspan="3"><f:facet name="header"><h:outputText value="Grouping"/></f:facet></p:column>
 							<p:column colspan="#{cc.attrs.ctrl.links.size()}"><f:facet name="header"><h:outputText value="#{msg.jeeslCount}"/></f:facet></p:column>
                    		</p:row>
                    		<p:row>
                    			<p:column colspan="1"><f:facet name="header"></f:facet></p:column>
 							<p:column colspan="1"><f:facet name="header"></f:facet></p:column>
-							<p:column colspan="1"><f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiSystem}"/></f:facet></p:column>
-							<p:column colspan="1"><f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiJsonClass}"/></f:facet></p:column>
-							<p:column colspan="1"><f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiMappingClass}"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoSsiContext" code="system"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoSsiContext" code="json"/></f:facet></p:column>
+							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoSsiContext" code="entity"/></f:facet></p:column>
 							
 							<p:column colspan="1"><f:facet name="header"><h:outputText value="A"/></f:facet></p:column>
 							<p:column colspan="1"><f:facet name="header"><h:outputText value="B"/></f:facet></p:column>
@@ -64,7 +64,7 @@
       			     
 					<p:column styleClass="jeeslRight">
 						<h:outputText value="#{m.id}"/>
-						<h:outputText value="#{cc.attrs.ctrl.thMapping.mapA[m].count}"><f:convertNumber type="number"/></h:outputText>
+						<h:outputText value="#{cc.attrs.ctrl.thContext.mapA[m].count}"><f:convertNumber type="number"/></h:outputText>
 					</p:column>
 					<p:column><h:outputText value="#{m.system.code}"/></p:column>
 					<p:column><h:outputText value="#{m.json.name[localeCode].lang}"/></p:column>
@@ -75,7 +75,7 @@
 					<p:column><h:outputText value="#{m.classC.name[localeCode].lang}"/></p:column>
 					
 				    <p:columns var="l" value="#{cc.attrs.ctrl.links}" columnIndexVar="colIndex" styleClass="jeeslCenter">
-						<h:outputText value="#{cc.attrs.ctrl.thLink.map[m][l].count1}"/>
+						<h:outputText value="#{cc.attrs.ctrl.thStatus.map[m][l].count1}"/>
 					</p:columns>
 				</p:dataTable>
 			</h:form>
@@ -83,27 +83,27 @@
 	</j:row>
 	<j:row id="rowDetail">
 		<j:slot id="sMapping" width="8">
-			<h:form id="fMapping" rendered="#{not empty cc.attrs.ctrl.mapping}">
+			<h:form id="fMapping" rendered="#{not empty cc.attrs.ctrl.context}">
 				<p:panel id="pView" styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoSsiContext"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelMapping()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveMapping()}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteMapping()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.mapping.id gt 0}"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteMapping()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.context.id gt 0}"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGRid80">
 						
 						<jtp:label entity="IoSsiContext" code="id"/>
-						<h:outputText value="#{cc.attrs.ctrl.mapping.id}"/>
+						<h:outputText value="#{cc.attrs.ctrl.context.id}"/>
 						
 						<jtp:label entity="IoSsiContext" code="system"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.system}" disabled="#{cc.attrs.ctrl.mapping.id gt 0}"
+						<p:selectOneMenu value="#{cc.attrs.ctrl.context.system}" disabled="#{cc.attrs.ctrl.context.id gt 0}"
 											effect="fade" autoWidth="false" filter="true" filterMatchMode="contains">
 							<f:selectItems value="#{cc.attrs.ctrl.systems}" var="s" itemLabel="#{s.name[localeCode].lang}" itemValue="#{s}"/>
 						</p:selectOneMenu>
 						
 						<jtp:label entity="IoSsiContext" code="json"/>
-						<p:selectOneMenu var="var" value="#{cc.attrs.ctrl.mapping.json}" rendered="#{cc.attrs.ctrl.mapping.id eq 0}"
+						<p:selectOneMenu var="var" value="#{cc.attrs.ctrl.context.json}" rendered="#{cc.attrs.ctrl.context.id eq 0}"
 											effect="fade" autoWidth="false" filter="true" filterMatchMode="contains">
 							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
@@ -120,13 +120,13 @@
 								<h:outputText value="#{var.name[localeCode].lang}" />
 							</p:column>
 						</p:selectOneMenu>
-						<ui:fragment rendered="#{cc.attrs.ctrl.mapping.id gt 0}">
-							<h:outputText value="#{cc.attrs.ctrl.mapping.json.id} "/>
-							<h:outputText value="#{cc.attrs.ctrl.mapping.json.code}"/>
+						<ui:fragment rendered="#{cc.attrs.ctrl.context.id gt 0}">
+							<h:outputText value="#{cc.attrs.ctrl.context.json.id} "/>
+							<h:outputText value="#{cc.attrs.ctrl.context.json.code}"/>
 						</ui:fragment>
 						
 						<jtp:label entity="IoSsiContext" code="entity"/>
-						<p:selectOneMenu var="var" value="#{cc.attrs.ctrl.mapping.entity}" rendered="#{cc.attrs.ctrl.mapping.id eq 0}"
+						<p:selectOneMenu var="var" value="#{cc.attrs.ctrl.context.entity}" rendered="#{cc.attrs.ctrl.context.id eq 0}"
 									effect="fade" autoWidth="false" filter="true" filterMatchMode="contains">
 							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
@@ -143,13 +143,13 @@
 								<h:outputText value="#{var.name[localeCode].lang}" />
 							</p:column>
 						</p:selectOneMenu>
-						<ui:fragment rendered="#{cc.attrs.ctrl.mapping.id gt 0}">
-							<h:outputText value="#{cc.attrs.ctrl.mapping.entity.id} "/>
-							<h:outputText value="#{cc.attrs.ctrl.mapping.entity.code}"/>
+						<ui:fragment rendered="#{cc.attrs.ctrl.context.id gt 0}">
+							<h:outputText value="#{cc.attrs.ctrl.context.entity.id} "/>
+							<h:outputText value="#{cc.attrs.ctrl.context.entity.code}"/>
 						</ui:fragment>
 						
 						<jtp:label entity="IoSsiContext" code="classA"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.classA}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
+						<p:selectOneMenu value="#{cc.attrs.ctrl.context.classA}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
 							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
 							<p:column>
@@ -167,7 +167,7 @@
 						</p:selectOneMenu>
 						
 						<jtp:label entity="IoSsiContext" code="classB"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.classB}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
+						<p:selectOneMenu value="#{cc.attrs.ctrl.context.classB}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
 							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
 							<p:column>
@@ -185,7 +185,7 @@
 						</p:selectOneMenu>
 						
 						<jtp:label entity="IoSsiContext" code="classC"/>
-						<p:selectOneMenu value="#{cc.attrs.ctrl.mapping.classC}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
+						<p:selectOneMenu value="#{cc.attrs.ctrl.context.classC}" effect="fade" autoWidth="false" filter="true" filterMatchMode="contains" var="var">
 							<f:selectItem itemLabel="--"/>
 							<f:selectItems value="#{cc.attrs.ctrl.entities}" var="e" itemLabel="#{e.category.position}.#{e.position} #{e.name[localeCode].lang}" itemValue="#{e}"/>
 							<p:column>

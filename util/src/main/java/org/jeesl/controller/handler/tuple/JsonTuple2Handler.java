@@ -35,7 +35,8 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 	protected final Class<B> cB;
 	
 	protected final Map<Long,B> mapB;
-	private final Map<A,Map<B,JsonTuple2<A,B>>> map; public Map<A,Map<B,JsonTuple2<A,B>>> getMap() {return map;}
+	private final Map<A,Map<B,JsonTuple2<A,B>>> map;
+	public Map<A,Map<B,JsonTuple2<A,B>>> getMap() {return map;}
 	public Map<A,Map<B,JsonTuple2<A,B>>> getMap2() {return map;}
 	
 	private final List<B> listB; public List<B> getListB() {return listB;}
@@ -63,6 +64,12 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		map.clear();
 		mapB.clear();
 		listB.clear();
+	}
+	public void clearFrom(A a)
+	{
+//		super.
+		if(mapA.containsKey(a.getId())) {mapA.remove(a.getId());}
+		if(map.containsKey(a)) {map.remove(a);}
 	}
 
 	public void init(JsonTuples2<A,B> tuples, JeeslFacade fUtils, boolean loadA, boolean loadB)
@@ -109,52 +116,57 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		init(tuples);
 		
 	}
-	public JsonTuple2Handler<A,B> init(JsonTuples2<A,B> tuples) {init(null,tuples); return this;}
-	public void init(JeeslFacade fJeesl, JsonTuples2<A,B> tuples)
+	public JsonTuple2Handler<A,B> init(JsonTuples2<A,B> tuples)
 	{
-		clear();
-	
-		for(JsonTuple2<A,B> t : tuples.getTuples())
+		this.clear();
+		this.append(tuples);
+		initListA(null);
+		initListB(null);
+		tuples2.addAll(tuples.getTuples());
+		return this;
+	}
+	public void append(JsonTuples2<A,B> tuples)
+	{
+		if(Objects.nonNull(tuples))
 		{
-			size++;
-			if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
-			if(t.getSum1()!=null) {t.setSum1(AmountRounder.two(t.getSum1()/sumDivider));}
-			if(t.getSum2()!=null) {t.setSum2(AmountRounder.two(t.getSum2()/sumDivider));}
-			if(t.getSum3()!=null) {t.setSum3(AmountRounder.two(t.getSum3()/sumDivider));}
-			if(Objects.nonNull(t.getSum4())) {t.setSum4(AmountRounder.two(t.getSum4()/sumDivider));}
-			
-			if(t.getEjb1()==null)
+			for(JsonTuple2<A,B> t : tuples.getTuples())
 			{
-				if(mapA.containsKey(t.getId1())) {t.setEjb1(mapA.get(t.getId1()));}
-				else
+				size++;
+				if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
+				if(t.getSum1()!=null) {t.setSum1(AmountRounder.two(t.getSum1()/sumDivider));}
+				if(t.getSum2()!=null) {t.setSum2(AmountRounder.two(t.getSum2()/sumDivider));}
+				if(t.getSum3()!=null) {t.setSum3(AmountRounder.two(t.getSum3()/sumDivider));}
+				if(Objects.nonNull(t.getSum4())) {t.setSum4(AmountRounder.two(t.getSum4()/sumDivider));}
+				
+				if(t.getEjb1()==null)
 				{
-					try{t.setEjb1(cA.newInstance()); t.getEjb1().setId(t.getId1());}
-					catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
-				}
-			}
-			if(t.getEjb2()==null)
-			{
-				if(mapB.containsKey(t.getId2())) {t.setEjb2(mapB.get(t.getId2()));}
-				else
-				{
-					if(t.getId2()!=null)
+					if(mapA.containsKey(t.getId1())) {t.setEjb1(mapA.get(t.getId1()));}
+					else
 					{
-						try{t.setEjb2(cB.newInstance()); t.getEjb2().setId(t.getId2());}
+						try{t.setEjb1(cA.newInstance()); t.getEjb1().setId(t.getId1());}
 						catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
 					}
 				}
+				if(t.getEjb2()==null)
+				{
+					if(mapB.containsKey(t.getId2())) {t.setEjb2(mapB.get(t.getId2()));}
+					else
+					{
+						if(t.getId2()!=null)
+						{
+							try{t.setEjb2(cB.newInstance()); t.getEjb2().setId(t.getId2());}
+							catch (InstantiationException | IllegalAccessException e) {e.printStackTrace();}
+						}
+					}
+				}
+				
+				if(!mapA.containsKey(t.getId1())) {mapA.put(t.getId1(),t.getEjb1());}
+				if(!mapB.containsKey(t.getId2())) {mapB.put(t.getId2(),t.getEjb2());}
+				
+				if(!map.containsKey(t.getEjb1())) {map.put(t.getEjb1(), new HashMap<B,JsonTuple2<A,B>>());}
+				map.get(t.getEjb1()).put(t.getEjb2(), t);
 			}
-			
-			if(!mapA.containsKey(t.getId1())) {mapA.put(t.getId1(),t.getEjb1());}
-			if(!mapB.containsKey(t.getId2())) {mapB.put(t.getId2(),t.getEjb2());}
-			
-			if(!map.containsKey(t.getEjb1())) {map.put(t.getEjb1(), new HashMap<B,JsonTuple2<A,B>>());}
-			map.get(t.getEjb1()).put(t.getEjb2(), t);
 		}
-	
-		initListA(fJeesl);
-		initListB(fJeesl);
-		tuples2.addAll(tuples.getTuples());
 	}
 	
 	protected void initTupleB(JsonTuple2<A,B> t)

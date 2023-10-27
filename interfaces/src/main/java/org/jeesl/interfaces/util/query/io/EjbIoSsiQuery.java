@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Objects;
 
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
-							STATUS extends JeeslIoSsiLink<?,?,STATUS,?>>
+							STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>>
 		extends AbstractEjbQuery
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoSsiQuery.class);

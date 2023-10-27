@@ -7,7 +7,7 @@ import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiLink;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class SsiCache <MAPPING extends JeeslIoSsiContext<?,?>,
 						DATA extends JeeslIoSsiData<MAPPING,LINK,?>,
-						LINK extends JeeslIoSsiLink<?,?,LINK,?>,
+						LINK extends JeeslIoSsiStatus<?,?,LINK,?>,
 						T extends EjbWithId>
 {
 	final static Logger logger = LoggerFactory.getLogger(SsiCache.class);
@@ -44,7 +44,7 @@ public class SsiCache <MAPPING extends JeeslIoSsiContext<?,?>,
 		if(!map.containsKey(code))
 		{
 			DATA data = fSsi.fIoSsiData(mapping,code);
-			if(!data.getLink().getCode().equals(JeeslIoSsiLink.Code.linked.toString())) {throw new JeeslNotFoundException("Not Linked");}
+			if(!data.getLink().getCode().equals(JeeslIoSsiStatus.Code.linked.toString())) {throw new JeeslNotFoundException("Not Linked");}
 			if(data.getLocalId()==null) {throw new JeeslNotFoundException("No LocalId");}
 			T t = fSsi.find(cT,data.getLocalId());
 			map.put(code,t);
