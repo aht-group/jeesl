@@ -1,7 +1,5 @@
 package org.jeesl.controller.facade.jx.io;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -15,7 +13,6 @@ import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.interfaces.facade.ParentPredicate;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;

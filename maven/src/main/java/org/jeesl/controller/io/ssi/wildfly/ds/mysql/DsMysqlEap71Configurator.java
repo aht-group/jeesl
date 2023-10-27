@@ -1,25 +1,13 @@
 package org.jeesl.controller.io.ssi.wildfly.ds.mysql;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.util.Arrays;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.jboss.as.controller.client.ModelControllerClient;
-import org.jboss.as.controller.client.OperationBuilder;
-import org.jboss.as.controller.client.helpers.ClientConstants;
-import org.jboss.dmr.ModelNode;
 import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
-import org.jeesl.factory.txt.io.ssi.core.TxtIoSsiCredentialFactory;
 import org.jeesl.interfaces.controller.io.ssi.eap.EapDsConfigurator;
 import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.controller.util.MavenArtifactResolver;
 
 public class DsMysqlEap71Configurator extends AbstractEapDsConfigurator implements EapDsConfigurator
 {

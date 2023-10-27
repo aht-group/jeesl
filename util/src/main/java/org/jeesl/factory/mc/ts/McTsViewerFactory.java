@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsData;
-import org.metachart.factory.xml.chart.XmlDataFactory;
-import org.metachart.factory.xml.chart.XmlDataSetFactory;
+import org.metachart.factory.xml.chart.high.core.XmlDataFactory;
+import org.metachart.factory.xml.chart.high.core.XmlDataSetFactory;
 import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

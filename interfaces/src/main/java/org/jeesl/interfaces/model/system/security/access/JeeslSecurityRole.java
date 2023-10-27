@@ -10,7 +10,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithActions;
 import org.jeesl.interfaces.model.system.security.util.with.JeeslSecurityWithCategory;

@@ -8,7 +8,7 @@ import org.jeesl.interfaces.factory.txt.JeeslReportAggregationLevelFactory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.JsonFlatFigure;
 import org.jeesl.model.json.JsonFlatFigures;
-import org.metachart.factory.xml.chart.XmlDataFactory;
+import org.metachart.factory.xml.chart.high.core.XmlDataFactory;
 import org.metachart.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

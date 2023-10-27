@@ -58,7 +58,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.sync.DataUpdate;
-import net.sf.exlp.util.io.JsonUtil;
 
 public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescription,
 							SYSTEM extends JeeslIoSsiSystem<L,D>,

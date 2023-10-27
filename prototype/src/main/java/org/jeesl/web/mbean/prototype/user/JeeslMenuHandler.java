@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.infinispan.Cache;
 import org.jeesl.api.bean.JeeslSecurityBean;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.txt.system.security.user.TxtIdentityFactory;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
@@ -66,7 +67,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	{
 //		this.check("reset");
 		mainMenu.clear();
-		for(M m : bSecurity.getRootMenus(context)) {if(this.userHasAccessTo(m)) {mainMenu.add(m);}}
+		for(M m : bSecurity.getRootMenus(context)) {if(BooleanComparator.active(m.getVisible()) && this.userHasAccessTo(m)) {mainMenu.add(m);}}
 	}
 	
 	public List<M> getMainMenu()

@@ -6,7 +6,6 @@ import java.util.List;
 import org.jeesl.model.json.io.ssi.core.JsonSsiSystem;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName(value="group")

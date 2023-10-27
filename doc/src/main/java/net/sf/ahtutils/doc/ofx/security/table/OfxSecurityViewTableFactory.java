@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
-import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.model.xml.system.security.View;
 import org.jeesl.model.xml.system.security.Views;
 import org.openfuxml.content.table.Body;

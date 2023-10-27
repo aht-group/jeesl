@@ -16,23 +16,17 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsContent;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
 import org.jeesl.interfaces.model.io.fr.JeeslFileType;
 import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.factory.xml.media.XmlImageFactory;
 import org.openfuxml.factory.xml.media.XmlMediaFactory;
-import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
-import org.openfuxml.util.query.XmlSectionQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class JeeslCmsImageFactory<E extends JeeslIoCmsElement<?,?,?,?,C,FC>,
 								C extends JeeslIoCmsContent<?,E,?>,

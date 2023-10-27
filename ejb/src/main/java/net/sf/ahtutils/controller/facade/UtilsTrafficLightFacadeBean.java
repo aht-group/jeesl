@@ -8,7 +8,6 @@ import org.jeesl.api.facade.system.graphic.JeeslTrafficLightFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 

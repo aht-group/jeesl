@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitArray;
 import com.google.zxing.common.BitMatrix;

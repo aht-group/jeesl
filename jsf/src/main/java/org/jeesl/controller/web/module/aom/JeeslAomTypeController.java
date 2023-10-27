@@ -18,8 +18,6 @@ import org.jeesl.interfaces.cache.module.aom.JeeslAomTypeCache;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomAssetType;
 import org.jeesl.interfaces.model.module.aom.asset.JeeslAomView;
-import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
-import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;

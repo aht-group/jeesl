@@ -3,13 +3,12 @@ package net.sf.ahtutils.jsf.filerepo;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.exlp.util.io.HashUtil;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.HashUtil;
 
 public class UtilsFileRepository
 {

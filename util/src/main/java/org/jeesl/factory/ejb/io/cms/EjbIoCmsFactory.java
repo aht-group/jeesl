@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.jeesl.interfaces.model.io.cms.JeeslIoCms;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsContent;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
-import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElementType;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsVisiblity;
 import org.jeesl.interfaces.model.io.cms.JeeslWithCms;

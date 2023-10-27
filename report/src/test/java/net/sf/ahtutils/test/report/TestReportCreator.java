@@ -4,19 +4,17 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.sf.ahtutils.report.ReportUtilCreator;
-import net.sf.ahtutils.test.AbstractAhtUtilsReportTest;
-import net.sf.exlp.exception.ExlpXpathNotFoundException;
-import net.sf.exlp.exception.ExlpXpathNotUniqueException;
-import net.sf.jasperreports.engine.JRException;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import freemarker.template.TemplateException;
+import net.sf.ahtutils.report.ReportUtilCreator;
+import net.sf.ahtutils.test.AbstractAhtUtilsReportTest;
+import net.sf.exlp.exception.ExlpXpathNotFoundException;
+import net.sf.exlp.exception.ExlpXpathNotUniqueException;
+import net.sf.jasperreports.engine.JRException;
 
 public class TestReportCreator extends AbstractAhtUtilsReportTest
 {

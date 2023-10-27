@@ -5,7 +5,6 @@ import java.util.Comparator;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

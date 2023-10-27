@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.factory.builder.io.IoAttributeFactoryBuilder;
-import org.jeesl.factory.json.system.status.JsonTypeFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCategory;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeCriteria;

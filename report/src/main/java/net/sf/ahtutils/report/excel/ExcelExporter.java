@@ -39,7 +39,6 @@ import net.sf.ahtutils.xml.report.XlsWorkbook;
 import net.sf.ahtutils.xml.status.Lang;
 import net.sf.ahtutils.xml.status.Langs;
 import net.sf.exlp.util.io.StringUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 @Deprecated // Use JeeslExcelDomainExporter
 public class ExcelExporter
