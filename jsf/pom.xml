@@ -373,6 +373,26 @@
 			</plugin>
 			-->
 			<plugin>
+				<groupId>io.github.cleydyr</groupId>
+				<artifactId>dart-sass-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<executions>
+					<execution>
+						<id>generate-css-using-sass</id>
+						<phase>compile</phase>
+						<goals>
+							<goal>compile-sass</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<inputFolder>${basedir}/src/main/resources/META-INF/resources/scss</inputFolder>
+					<outputFolder>${basedir}/src/main/resources/META-INF/resources/css</outputFolder>
+					<update>true</update>
+					<noSourceMap>true</noSourceMap>
+				</configuration>
+			</plugin>
+			<plugin>
 		        <groupId>org.codehaus.mojo</groupId>
 			    <artifactId>versions-maven-plugin</artifactId>
 				<configuration><rulesUri>${maven.ignore.versions}</rulesUri></configuration>
@@ -427,34 +447,6 @@
 						</lifecycleMappingMetadata>
 					</configuration>
 				</plugin>
-				<plugin>
-					<groupId>nl.geodienstencentrum.maven</groupId>
-					<artifactId>sass-maven-plugin</artifactId>
-					<version>3.7.3-SNAPSHOT</version>
-		            <executions>
-		                <execution>
-		                    <id>compile</id>
-		                    <phase>prepare-package</phase>
-		                    <goals>
-		                        <goal>update-stylesheets</goal>
-		                    </goals>
-		                </execution>
-		            </executions>
-		            <configuration>
-		                <resources>
-		                    <resource>
-		                        <source>
-		                            <directory>${basedir}/src/main/resources/META-INF/resources/scss</directory>
-		                        </source>
-		                        <destination>${basedir}/src/main/resources/META-INF/resources/css</destination>
-		                    </resource>
-		                </resources>
-		                <sassOptions>
-		                    <cache>false</cache>
-		                    <always_update>true</always_update>
-		                </sassOptions>
-		            </configuration>
-	            </plugin>
 			</plugins>
 		</pluginManagement>
 	</build>

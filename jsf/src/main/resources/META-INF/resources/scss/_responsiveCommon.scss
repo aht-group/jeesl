@@ -1122,12 +1122,14 @@ $border: $border-width solid $border-colour;
 	min-height: auto;
 	vertical-align: top;
 	
-	img {
-		height: $icon-height;
-	
-		@media (max-width: 768px) {
-			height: $icon-height-mobile;
-		}
+	--icon-height-multiplier: 1;
+}
+
+img.jeesl-icon, .jeesl-icon img {
+	height: calc($icon-height * var(--icon-height-multiplier));
+
+	@media (max-width: 768px) {
+		height: $icon-height-mobile;
 	}
 }
 

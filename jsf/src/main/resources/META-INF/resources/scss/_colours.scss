@@ -54,7 +54,7 @@ $main-background-gradient: linear-gradient(to right, $dark-colour, $bright-colou
 $breadcrumb-background-gradient: linear-gradient(to right, $white-0, $bright-colour);
 $status-bar-background-gradient: linear-gradient(to bottom, $dark-colour, $medium-colour);
 
-$panel-header-gradient: linear-gradient(to bottom, $bright-grey, $soft-grey);
+$panel-header-gradient: $soft-grey linear-gradient(to bottom, $white-80, $white-0);
 
 $overlay-shadow: 0 3px 3px $black-40;
 $highlight-shadow: 0 -1px inset $white-80;
