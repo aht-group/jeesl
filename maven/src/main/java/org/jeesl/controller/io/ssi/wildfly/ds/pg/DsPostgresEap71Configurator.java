@@ -118,7 +118,10 @@ public class DsPostgresEap71Configurator extends AbstractEapDsConfigurator imple
 		request.get("share-prepared-statements").set(true);
 		
 		//Validation
-		request.get("check-valid-connection-sql").set("select 1");
+		// old:
+		// request.get("check-valid-connection-sql").set("select 1");
+		// newer/different method:
+		request.get("valid-connection-checker class-name").set("org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker");
 		request.get("background-validation").set(true);
 		request.get("background-validation-millis").set(5000);
 		  
