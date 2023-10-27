@@ -14,4 +14,9 @@ public class JsonSsiHost implements Serializable
 	private String code;
 	public String getCode() {return code;}
 	public void setCode(String code) {this.code = code;}
+	
+	@JsonProperty("ip")
+	private String ip;
+	public String getIp() {return ip;}
+	public void setIp(String ip) {this.ip = ip;}
 }

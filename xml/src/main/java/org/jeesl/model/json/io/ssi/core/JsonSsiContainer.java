@@ -13,6 +13,7 @@ public class JsonSsiContainer implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+
 	@JsonProperty("versions")
 	private List<JsonSsiVersion> versions;
 	public List<JsonSsiVersion> getVersions() {return versions;}
@@ -23,6 +24,12 @@ public class JsonSsiContainer implements Serializable
 	public List<JsonSsiCredential> getCredentials() {return credentials;}
 	public void setCredentials(List<JsonSsiCredential> credentials) {this.credentials = credentials;}
 	
+	@JsonProperty("nats")
+	private List<JsonSsiNat> nats;
+	public List<JsonSsiNat> getNats() {return nats;}
+	public void setNats(List<JsonSsiNat> nats) {this.nats = nats;}
+
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();	

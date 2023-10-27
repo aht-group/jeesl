@@ -27,6 +27,7 @@ public class JsonSsiHostFactory<HOST extends JeeslIoSsiHost<?,?,?>>
 		JsonSsiHost json = JsonSsiHostFactory.build();
 		
 		if(Objects.nonNull(q.getCode())) {json.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getIp())) {json.setIp(ejb.getIpAddr());}
 		
 		return json;
 	}

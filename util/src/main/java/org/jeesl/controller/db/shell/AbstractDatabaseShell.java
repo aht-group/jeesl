@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang.WordUtils;
+import org.exlp.cmd.file.ShellCmdChmod;
 import org.exlp.model.xml.config.Parameter;
 import org.exlp.model.xml.config.Parameters;
 import org.jdom2.Document;
@@ -17,7 +18,6 @@ import net.sf.exlp.exception.ExlpUnsupportedOsException;
 import net.sf.exlp.factory.xml.config.XmlParameterFactory;
 import net.sf.exlp.factory.xml.config.XmlParametersFactory;
 import net.sf.exlp.interfaces.util.TextWriter;
-import net.sf.exlp.shell.cmd.ShellCmdChmod;
 import net.sf.exlp.shell.os.OsArchitectureUtil;
 import net.sf.exlp.shell.os.OsBashFile;
 import net.sf.exlp.shell.spawn.Spawn;
