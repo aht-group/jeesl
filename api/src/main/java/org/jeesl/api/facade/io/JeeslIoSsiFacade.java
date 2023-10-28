@@ -49,7 +49,7 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiLinkJobForMapping(CTX mapping, A a, B b);
 
 	JsonTuples1<CTX> tpMapping();
-	JsonTuples2<CTX,STATUS> tpMappingLink(List<CTX> list);
+	JsonTuples2<CTX,STATUS> tpcContextStatus(List<CTX> list);
 	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,B> tpMappingB(Class<B> classB, CTX mapping, A a);
 
 	Long cSsiData(EjbIoSsiQuery<CTX,STATUS> query);

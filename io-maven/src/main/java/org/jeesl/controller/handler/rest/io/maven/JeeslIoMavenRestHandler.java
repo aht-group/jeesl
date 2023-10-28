@@ -12,6 +12,7 @@ import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.api.rest.i.io.JeeslIoMavenRestInterface;
+import org.jeesl.controller.handler.io.log.LoggedExit;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -146,7 +147,7 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 			if(existingVersions.contains(v))
 			{
 				IoMavenUsage u = existingUsages.get(v);
-				if(Objects.isNull(u)) {logger.warn("NULL"); System.exit(-1);}
+				if(Objects.isNull(u)) {logger.warn("NULL"); LoggedExit.exit(true);}
 				
 				Collection<IoMavenScope> listA = CollectionUtils.subtract(mapScope.get(v.getArtifact()),u.getScopes());
 				Collection<IoMavenScope> listB = CollectionUtils.subtract(u.getScopes(),mapScope.get(v.getArtifact()));

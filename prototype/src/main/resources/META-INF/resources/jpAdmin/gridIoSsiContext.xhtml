@@ -22,18 +22,16 @@
 							<j:security actionSuffix="create" handler="#{cc.attrs.security}">
 								<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addContext()}" update=":#{cc.id}:sMapping"/>
 							</j:security>
-							<j:svg type="jeeslReload" listener="#{cc.attrs.ctrl.reloadNumbers()}" update="@form"/>
 						</j:dtHeader>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectContext()}" update="@form :#{cc.id}:rowDetail"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectContext()}" update=":#{cc.id}:rowDetail"/>
 					<p:columnGroup type="header">
 						<p:row>
-							<p:column colspan="5"><f:facet name="header"><jtp:label entity="IoSsiContext"/></f:facet></p:column>
+							<p:column colspan="4"><f:facet name="header"><jtp:label entity="IoSsiContext"/></f:facet></p:column>
 							<p:column colspan="3"><f:facet name="header"><h:outputText value="Grouping"/></f:facet></p:column>
 							<p:column colspan="#{cc.attrs.ctrl.links.size()}"><f:facet name="header"><h:outputText value="#{msg.jeeslCount}"/></f:facet></p:column>
                    		</p:row>
                    		<p:row>
-                   			<p:column colspan="1"><f:facet name="header"></f:facet></p:column>
 							<p:column colspan="1"><f:facet name="header"></f:facet></p:column>
 							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoSsiContext" code="system"/></f:facet></p:column>
 							<p:column colspan="1"><f:facet name="header"><jtp:label entity="IoSsiContext" code="json"/></f:facet></p:column>
@@ -51,17 +49,7 @@
 								</f:facet>
 							</p:columns>
                    		</p:row>
-      			     </p:columnGroup>
-      			     
-      			    <p:column>
-						<h:graphicImage rendered="#{cc.attrs.ctrl.mapTuples[m]}" name="#{appIconBean.svg['jeeslRoleAssinged']}" library="jeeslGfx" height="12">
-							<p:ajax update="@form" event="click" listener="#{cc.attrs.ctrl.considerTuple(m)}"/>
-						</h:graphicImage>
-						<h:graphicImage rendered="#{not cc.attrs.ctrl.mapTuples[m]}" name="#{appIconBean.svg['jeeslRoleUnassinged']}" library="jeeslGfx" height="12">
-							<p:ajax update="@form" event="click" listener="#{cc.attrs.ctrl.considerTuple(m)}"/>
-						</h:graphicImage>
-					</p:column>
-      			     
+      			     </p:columnGroup>      			     
 					<p:column styleClass="jeeslRight">
 						<h:outputText value="#{m.id}"/>
 						<h:outputText value="#{cc.attrs.ctrl.thContext.mapA[m].count}"><f:convertNumber type="number"/></h:outputText>
@@ -90,6 +78,7 @@
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelMapping()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveMapping()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteMapping()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.context.id gt 0}"/>
+						<j:svg type="jeeslReload" listener="#{cc.attrs.ctrl.countNumbers()}" update=":#{cc.id}:grid" ttEntity="IoSsiContext" ttCode="ttReload"/>
 					</f:facet>
 					<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGRid80">
 						

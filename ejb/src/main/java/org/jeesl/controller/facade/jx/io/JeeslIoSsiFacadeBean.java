@@ -52,24 +52,24 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 									CRED extends JeeslIoSsiCredential<SYSTEM>,
 									CTX extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 									ATTRIBUTE extends JeeslIoSsiAttribute<CTX,ENTITY>,
-									DATA extends JeeslIoSsiData<CTX,LINK,JOB>,
-									LINK extends JeeslIoSsiStatus<L,D,LINK,?>,
+									DATA extends JeeslIoSsiData<CTX,STATUS,JOB>,
+									STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
 									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 									CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 									JOB extends JeeslJobStatus<L,D,JOB,?>,
 									HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
 					extends JeeslFacadeBean
-					implements JeeslIoSsiFacade<SYSTEM,CRED,CTX,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST>
+					implements JeeslIoSsiFacade<SYSTEM,CRED,CTX,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB,HOST>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoSsiFacadeBean.class);
 
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsiCore;
-	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi;
+	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB> fbSsi;
 	
 	public JeeslIoSsiFacadeBean(EntityManager em,
 								IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsiCore,
-								IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi)
+								IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB> fbSsi)
 	{
 		super(em);
 		this.fbSsiCore = fbSsiCore;
@@ -128,9 +128,9 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return this.oneForParents(fbSsi.getClassMapping(), JeeslIoSsiContext.Attributes.entity,eEjb, JeeslIoSsiContext.Attributes.json,eJson);
 	}
 
-	@Override public List<DATA> fIoSsiData(CTX mapping, List<LINK> links){return fIoSsiData(mapping,links,null,null,null);}
-	@Override public <A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<LINK> links, A a){return fIoSsiData(mapping,links,a,null,null);}
-	@Override public <A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<LINK> links, A a, B b, Integer maxResults)
+	@Override public List<DATA> fIoSsiData(CTX mapping, List<STATUS> links){return fIoSsiData(mapping,links,null,null,null);}
+	@Override public <A extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a){return fIoSsiData(mapping,links,a,null,null);}
+	@Override public <A extends EjbWithId, B extends EjbWithId> List<DATA> fIoSsiData(CTX mapping, List<STATUS> links, A a, B b, Integer maxResults)
 	{
 		if(links!=null && links.isEmpty()) {return new ArrayList<DATA>();}
 		List<Predicate> predicates = new ArrayList<Predicate>();
@@ -143,7 +143,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		if(links!=null)
 		{
-			Join<DATA,LINK> jLink = data.join(JeeslIoSsiData.Attributes.link.toString());
+			Join<DATA,STATUS> jLink = data.join(JeeslIoSsiData.Attributes.link.toString());
 			predicates.add(jLink.in(links));
 		}
 		
@@ -234,9 +234,9 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" and id="+ejb.getId()+" not unique");}
 	}
 	
-	@Override public JsonTuples1<LINK> tpIoSsiLinkForMapping(CTX mapping){return tpIoSsiLinkForMapping(mapping,null,null);}
-	@Override public <A extends EjbWithId> JsonTuples1<LINK> tpIoSsiLinkForMapping(CTX mapping, A a){return tpIoSsiLinkForMapping(mapping,a,null);}
-	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<LINK> tpIoSsiLinkForMapping(CTX mapping, A a, B b)
+	@Override public JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping){return tpIoSsiLinkForMapping(mapping,null,null);}
+	@Override public <A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a){return tpIoSsiLinkForMapping(mapping,a,null);}
+	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a, B b)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -245,7 +245,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		Expression<Long> cCount = cB.count(data);
 		
-		Path<LINK> pLink = data.get(JeeslIoSsiData.Attributes.link.toString());
+		Path<STATUS> pLink = data.get(JeeslIoSsiData.Attributes.link.toString());
 		Join<DATA,CTX> jMapping = data.join(JeeslIoSsiData.Attributes.mapping.toString());
 		predicates.add(jMapping.in(mapping));
 		
@@ -262,12 +262,12 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json1TuplesFactory<LINK> jtf = Json1TuplesFactory.instance(fbSsi.getClassLink()).tupleLoad(this,true);
+		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassLink()).tupleLoad(this,true);
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
 	@Override
-	public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<LINK, JOB> tpcIoSsiLinkJobForMapping(CTX mapping, A a, B b)
+	public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS, JOB> tpcIoSsiLinkJobForMapping(CTX mapping, A a, B b)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -276,8 +276,8 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		Expression<Long> cCount = cB.count(data);
 		
-		Path<LINK> pLink = data.get(JeeslIoSsiData.Attributes.link.toString());
-		Path<LINK> pJob = data.get(JeeslIoSsiData.Attributes.job1.toString());
+		Path<STATUS> pLink = data.get(JeeslIoSsiData.Attributes.link.toString());
+		Path<STATUS> pJob = data.get(JeeslIoSsiData.Attributes.job1.toString());
 		Join<DATA,CTX> jMapping = data.join(JeeslIoSsiData.Attributes.mapping.toString());
 		predicates.add(jMapping.in(mapping));
 		
@@ -294,7 +294,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json2TuplesFactory<LINK,JOB> jtf = Json2TuplesFactory.instance(fbSsi.getClassLink(),fbSsi.getClassJob()).tupleLoad(this,true);
+		Json2TuplesFactory<STATUS,JOB> jtf = Json2TuplesFactory.instance(fbSsi.getClassLink(),fbSsi.getClassJob()).tupleLoad(this,true);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
@@ -316,29 +316,31 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
-	@Override public JsonTuples2<CTX,LINK> tpMappingLink(List<CTX> list)
+	@Override public JsonTuples2<CTX,STATUS> tpcContextStatus(List<CTX> list)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
 		Root<DATA> item = cQ.from(fbSsi.getClassData());
 		
 		Expression<Long> eCount = cB.count(item.<Long>get("id"));
-		Join<DATA,CTX> jMapping = item.join(JeeslIoSsiData.Attributes.mapping.toString());
-		Join<DATA,LINK> jLink = item.join(JeeslIoSsiData.Attributes.link.toString());
+		Path<CTX> pContext = item.get(JeeslIoSsiData.Attributes.mapping.toString());
+		Path<STATUS> pStatus = item.get(JeeslIoSsiData.Attributes.link.toString());
 		
 		List<Predicate> predicates = new ArrayList<Predicate>();
-		predicates.add(jMapping.in(list));
+		if(Objects.isNull(list) || list.size()==0) {}
+		else if(list.size()==1) {predicates.add(cB.equal(pContext,list.get(0)));}
+		else {predicates.add(pContext.in(list));}
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		
-		cQ.groupBy(jMapping.get("id"),jLink.get("id"));
-		cQ.multiselect(jMapping.get("id"),jLink.get("id"),eCount);
+		cQ.groupBy(pContext.get("id"),pStatus.get("id"));
+		cQ.multiselect(pContext.get("id"),pStatus.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json2TuplesFactory<CTX,LINK> jtf = Json2TuplesFactory.instance(fbSsi.getClassMapping(),fbSsi.getClassLink()).tupleLoad(this,true);
+		Json2TuplesFactory<CTX,STATUS> jtf = Json2TuplesFactory.instance(fbSsi.getClassMapping(),fbSsi.getClassLink()).tupleLoad(this,true);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
-	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<LINK,B> tpMappingB(Class<B> classB, CTX mapping, A a)
+	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,B> tpMappingB(Class<B> classB, CTX mapping, A a)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -354,14 +356,14 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		Join<DATA,CTX> jMapping = item.join(JeeslIoSsiData.Attributes.mapping.toString());
 		predicates.add(jMapping.in(mapping));
 		
-		Join<DATA,LINK> jLink = item.join(JeeslIoSsiData.Attributes.link.toString());
+		Join<DATA,STATUS> jLink = item.join(JeeslIoSsiData.Attributes.link.toString());
 	
 		cQ.groupBy(jLink.get("id"),pB);
 		cQ.multiselect(jLink.get("id"),pB,eCount);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json2TuplesFactory<LINK,B> jtf = Json2TuplesFactory.instance(fbSsi.getClassLink(),classB).tupleLoad(this,true);
+		Json2TuplesFactory<STATUS,B> jtf = Json2TuplesFactory.instance(fbSsi.getClassLink(),classB).tupleLoad(this,true);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 
@@ -400,7 +402,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 
-	@Override public List<DATA> fSsiDataWithJob1(CTX mapping, LINK link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC)
+	@Override public List<DATA> fSsiDataWithJob1(CTX mapping, STATUS link, JOB job, int maxResult, boolean includeNull, Long refA, Long refB, Long refC)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -416,7 +418,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		if(link!=null)
 		{
-			Expression<LINK> eLink = ejb.get(JeeslIoSsiData.Attributes.link.toString());
+			Expression<STATUS> eLink = ejb.get(JeeslIoSsiData.Attributes.link.toString());
 			predicates.add(cB.equal(eLink, link));
 		}
 		
@@ -433,7 +435,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return tQ.getResultList();
 	}
 
-	@Override public Long cSsiData(EjbIoSsiQuery<CTX,LINK> query)
+	@Override public Long cSsiData(EjbIoSsiQuery<CTX,STATUS> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<Long> cQ = cB.createQuery(Long.class);
@@ -444,7 +446,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 
 		return em.createQuery(cQ).getSingleResult();
 	}
-	@Override public List<DATA> fSsiData(EjbIoSsiQuery<CTX,LINK> query)
+	@Override public List<DATA> fSsiData(EjbIoSsiQuery<CTX,STATUS> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<DATA> cQ = cB.createQuery(fbSsi.getClassData());
@@ -460,7 +462,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		return tQ.getResultList();
 	}
 	
-	private Predicate[] pSsiData(CriteriaBuilder cB, Root<DATA> ejb, EjbIoSsiQuery<CTX,LINK> query)
+	private Predicate[] pSsiData(CriteriaBuilder cB, Root<DATA> ejb, EjbIoSsiQuery<CTX,STATUS> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		

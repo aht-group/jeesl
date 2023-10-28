@@ -3,16 +3,13 @@ package org.jeesl.controller.web.io.ssi;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.system.io.log.DebugJeeslLogger;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
-import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -53,9 +50,7 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	
 	private final JsonTuple1Handler<CONTEXT> thContext; public JsonTuple1Handler<CONTEXT> getThContext() {return thContext;}
 	private final JsonTuple2Handler<CONTEXT,STATUS> thStatus; public JsonTuple2Handler<CONTEXT,STATUS> getThStatus() {return thStatus;}
-	
-	private final Map<CONTEXT,Boolean> mapTuples; public Map<CONTEXT, Boolean> getMapTuples() {return mapTuples;}
-	
+
 	private final List<SYSTEM> systems; public List<SYSTEM> getSystems() {return systems;}
 	private final List<ENTITY> entities; public List<ENTITY> getEntities() {return entities;}
 	private final List<CONTEXT> mappings; public List<CONTEXT> getMappings() {return mappings;}
@@ -67,7 +62,6 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	{
 		super(fbSsi.getClassL(),fbSsi.getClassD());
 		this.fbSsi=fbSsi;
-		mapTuples = new HashMap<>();
 		
 		systems = new ArrayList<>();
 		mappings = new ArrayList<>();
@@ -118,7 +112,11 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	{
 		logger.info(AbstractLogMessage.selectEntity(context));
 		
-		JsonTuples2<CONTEXT,STATUS> tuples = fSsi.tpMappingLink(Arrays.asList(context));
+	}
+	
+	public void countNumbers()
+	{
+		JsonTuples2<CONTEXT,STATUS> tuples = fSsi.tpcContextStatus(Arrays.asList(context));
 		if(Objects.nonNull(cache))
 		{
 			thStatus.append(tuples);
@@ -131,24 +129,6 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		{
 			thStatus.init(tuples);
 		}
-	}
-	
-	public void considerTuple(CONTEXT m)
-	{
-		if(!mapTuples.containsKey(m)) {mapTuples.put(m,false);}
-		mapTuples.put(m,!mapTuples.get(m));
-	}
-	
-	public void reloadNumbers()
-	{
-		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
-		List<CONTEXT> tupleMappings = new ArrayList<>();
-		for(CONTEXT m : mappings)
-		{
-			if(mapTuples.containsKey(m) && mapTuples.get(m)) {tupleMappings.add(m);}
-		}
-		thStatus.init(fSsi.tpMappingLink(tupleMappings));
-		logger.info(AbstractLogMessage.reloaded(fbSsi.getClassMapping(),ptt,tupleMappings));
 	}
 	
 	public void addContext()
