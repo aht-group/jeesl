@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:c="http://java.sun.com/jsp/jstl/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+    xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
+		<composite:attribute name="userLocaleCode" required="false" default="#{localeCode}"/>
+		<composite:attribute name="fallbackLocale" required="false" default="#{appLabelBean.fallbackLocale}" />
+	
 		<composite:attribute name="entity" required="false"/>
 		<composite:attribute name="code" required="false"/>
 		<composite:attribute name="title" required="false"/>
@@ -15,13 +17,45 @@
 		<composite:facet name="header" required="false"/>
 	</composite:interface>
         
-	<composite:implementation>
-		<c:set var="defaultEntityValue" value="#{not empty cc.attrs.entity ? cc.attrs.entity : ''}"/>
-	 	<c:set var="defaultEntityCodeValue" value="#{not empty cc.attrs.code ? defaultEntityValue.concat(' : ').concat(cc.attrs.code) : defaultEntityValue}"/>
-	 	<c:set var="evaluatedEntityCodeValue" value="#{not empty cc.attrs.code and not empty cc.attrs.entity ? appLabelBean.labels[cc.attrs.entity][cc.attrs.code][localeCode].lang : not empty cc.attrs.entity ? appLabelBean.entities[cc.attrs.entity][localeCode].lang : ''}"/>
-	 	<c:set var="titleText" value="#{not empty cc.attrs.title ? cc.attrs.title : not empty cc.attrs.entity ? not empty evaluatedEntityCodeValue ? evaluatedEntityCodeValue : defaultEntityCodeValue :'myTitle'}"/>
-    	
+	<composite:implementation>    	
     	<c:if test="#{empty cc.facets.header}">
+			<c:set var="showDirect" value="#{not empty cc.attrs.title}"/>
+    		<c:set var="showEntity" value="#{(not showDirect) and (empty cc.attrs.code)}"/>
+    		<c:set var="showCode" value="#{(not showEntity) and (not empty cc.attrs.code)}"/>
+    		
+			<c:choose>
+				<c:when test="#{showEntity and empty appLabelBean.entities[cc.attrs.entity][cc.attrs.userLocaleCode].lang}">
+         			<c:set var="showFallback" value="true"/>
+         		</c:when>
+         		<c:when test="#{showCode and empty appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.userLocaleCode].lang}">
+         			<c:set var="showFallback" value="true"/>
+         		</c:when>
+         		<c:otherwise>
+           			<c:set var="showFallback" value="false"/>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:choose>
+         		<c:when test="#{showDirect}">
+         			<c:set var="titleText" value="#{cc.attrs.title}"/>
+         		</c:when>
+         		<c:when test="#{showEntity}">
+         			<c:set var="titleText" value="#{showFallback
+         											? appLabelBean.entities[cc.attrs.entity][cc.attrs.fallbackLocale.code].lang
+         											: appLabelBean.entities[cc.attrs.entity][cc.attrs.userLocaleCode].lang}"/>
+         		</c:when>
+         		<c:when test="#{showCode}">
+         			<c:set var="titleText" value="#{showFallback
+         											? appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.fallbackLocale.code].lang
+         											: appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.userLocaleCode].lang}"/>
+         		</c:when>
+         		<c:otherwise>
+           			<c:set var="titleText" value="#{cc.attrs.entity}:#{cc.attrs.code}"/>
+				</c:otherwise>
+			</c:choose>
+			
+			<jtp:symbolizer rendered="#{false and showFallback}" value="#{cc.attrs.fallbackLocale}" marginRight="5" />
+			<h:outputText rendered="false" value="ULC:#{cc.attrs.userLocaleCode}  D:#{showDirect}  E:#{showEntity}  C:#{showCode}  F:#{showFallback}" class="pf-datatable-header-title"/>
         	<h:outputText value="#{titleText}#{cc.attrs.suffix}" class="pf-datatable-header-title"/>
         </c:if>
         <c:if test="#{not empty cc.facets.header}">

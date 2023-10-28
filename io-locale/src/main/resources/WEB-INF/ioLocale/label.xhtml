@@ -55,7 +55,12 @@
 			</ui:remove>
 	        
 	        <p:tooltip rendered="#{ttd}" for="@parent" position="top" showDelay="1000">
-	        	<c:if test="#{not empty code}"><f:attribute name="value" value="#{not empty appLabelBean.descriptions[entity][code][userLocaleCode].lang ? appLabelBean.descriptions[entity][code][userLocaleCode].lang : debugValue}"/></c:if>
+	        	<c:if test="#{not empty code}">
+	        		<f:attribute name="value"
+	        			value="#{empty appLabelBean.descriptions[entity][code][userLocaleCode].lang
+	        					? debugValue
+	        					: appLabelBean.descriptions[entity][code][userLocaleCode].lang}"/>
+	        	</c:if>
 	        </p:tooltip>
 	        
 			<c:if test="#{not empty iOptions}">
