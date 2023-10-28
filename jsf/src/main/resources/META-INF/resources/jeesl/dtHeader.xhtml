@@ -19,6 +19,7 @@
         
 	<composite:implementation>    	
     	<c:if test="#{empty cc.facets.header}">
+    		<c:set var="debugValue" value="#{cc.attrs.entity}:#{cc.attrs.code}"/>
 			<c:set var="showDirect" value="#{not empty cc.attrs.title}"/>
     		<c:set var="showEntity" value="#{(not showDirect) and (empty cc.attrs.code)}"/>
     		<c:set var="showCode" value="#{(not showEntity) and (not empty cc.attrs.code)}"/>
@@ -41,16 +42,20 @@
          		</c:when>
          		<c:when test="#{showEntity}">
          			<c:set var="titleText" value="#{showFallback
-         											? appLabelBean.entities[cc.attrs.entity][cc.attrs.fallbackLocale.code].lang
+         											? empty appLabelBean.entities[cc.attrs.entity][cc.attrs.fallbackLocale.code].lang
+         												? debugValue
+         												: appLabelBean.entities[cc.attrs.entity][cc.attrs.fallbackLocale.code].lang
          											: appLabelBean.entities[cc.attrs.entity][cc.attrs.userLocaleCode].lang}"/>
          		</c:when>
          		<c:when test="#{showCode}">
          			<c:set var="titleText" value="#{showFallback
-         											? appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.fallbackLocale.code].lang
+         											? empty appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.fallbackLocale.code].lang
+         												? debugValue
+         												: appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.fallbackLocale.code].lang
          											: appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.userLocaleCode].lang}"/>
          		</c:when>
          		<c:otherwise>
-           			<c:set var="titleText" value="#{cc.attrs.entity}:#{cc.attrs.code}"/>
+           			<c:set var="titleText" value="Title needs to be defined"/>
 				</c:otherwise>
 			</c:choose>
 			
