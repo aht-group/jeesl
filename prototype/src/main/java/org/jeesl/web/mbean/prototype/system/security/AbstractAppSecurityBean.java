@@ -90,7 +90,7 @@ public class AbstractAppSecurityBean <C extends JeeslSecurityCategory<?,?>,
 	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 	private CTX nullCtx;
 	
-	protected V viewExpired; public V getViewExpired() {return viewExpired;}
+	private V viewExpired; public V getViewExpired() {return viewExpired;}
 	protected V viewUnauthorized; public V getViewUnauthorized() {return viewUnauthorized;}
 
 	public AbstractAppSecurityBean()

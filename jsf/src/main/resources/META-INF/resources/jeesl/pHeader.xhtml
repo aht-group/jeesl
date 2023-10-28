@@ -1,44 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:c="http://java.sun.com/jsp/jstl/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"
+    xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
     xmlns:composite="http://java.sun.com/jsf/composite">
     
 	<composite:interface>
-		<composite:attribute name="title" required="false"/>
+		<composite:attribute name="userLocaleCode" required="false" default="#{localeCode}"/>
+		<composite:attribute name="fallbackLocale" required="false" default="#{appLabelBean.fallbackLocale}" />
+		
 		<composite:attribute name="entity" required="false"/>
 		<composite:attribute name="code" required="false"/>
+		
 		<composite:attribute name="link" required="false" default=""/>
+		
 		<composite:attribute name="prefix" required="false"/>
+		<composite:attribute name="title" required="false"/>
 		<composite:attribute name="suffix" required="false"/>
 
-		
 		<composite:facet name="header" required="false"/>
 	</composite:interface>
         
 	<composite:implementation>
-		<c:set var="defaultEntityValue" value="#{not empty cc.attrs.entity ? cc.attrs.entity : ''}"/>
-	 	<c:set var="defaultEntityCodeValue" value="#{not empty cc.attrs.code ? defaultEntityValue.concat(' : ').concat(cc.attrs.code) : defaultEntityValue}"/>
-	 	<c:set var="evaluatedEntityCodeValue" value="#{not empty cc.attrs.code and not empty cc.attrs.entity ? appLabelBean.labels[cc.attrs.entity][cc.attrs.code][localeCode].lang : not empty cc.attrs.entity ? appLabelBean.entities[cc.attrs.entity][localeCode].lang : ''}"/>
-	 	<c:set var="titleText" value="#{not empty cc.attrs.title ? cc.attrs.title : not empty cc.attrs.entity ? not empty evaluatedEntityCodeValue ? evaluatedEntityCodeValue : defaultEntityCodeValue :'myTitle'}"/>
-    	
     	<c:if test="#{empty cc.facets.header}">
-    		<c:if test="#{not empty cc.attrs.prefix}">
-        		<h:outputText value=" #{cc.attrs.prefix}"/>
-        	</c:if>
+
+    		<c:set var="debugValue" value="#{cc.attrs.entity}:#{cc.attrs.code}"/>
+    		<c:set var="titleText" value="#{(not empty cc.attrs.title)
+						? cc.attrs.title
+						: ((not empty cc.attrs.entity) and (empty cc.attrs.code))
+							? (empty appLabelBean.entities[cc.attrs.entity][cc.attrs.userLocaleCode].lang)
+								? (empty appLabelBean.entities[cc.attrs.entity][cc.attrs.fallbackLocale.code].lang)
+									? debugValue
+									: appLabelBean.entities[cc.attrs.entity][cc.attrs.fallbackLocale.code].lang
+								: appLabelBean.entities[cc.attrs.entity][cc.attrs.userLocaleCode].lang
+							: (not empty cc.attrs.entity) and (not empty cc.attrs.code)
+								? empty appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.userLocaleCode].lang
+									? empty appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.fallbackLocale.code].lang
+										? debugValue
+										: appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.fallbackLocale.code].lang
+									: appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.userLocaleCode].lang
+								: debugValue}"/>
+			<c:set var="fallback" value="#{(empty cc.attrs.title) and (not empty cc.attrs.entity) and (
+						((empty cc.attrs.code) and (empty appLabelBean.entities[cc.attrs.entity][cc.attrs.userLocaleCode].lang) and (not empty appLabelBean.entities[cc.attrs.entity][cc.attrs.fallbackLocale.code].lang))
+											or
+						((not empty cc.attrs.code) and (empty appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.userLocaleCode].lang) and (not empty appLabelBean.labels[cc.attrs.entity][cc.attrs.code][cc.attrs.fallbackLocale.code].lang)))}"/>
+    		    	
+    		<jtp:symbolizer value="#{cc.attrs.fallbackLocale}" marginRight="5" rendered="#{true and fallback}"/>
+    		<h:outputText value="#{cc.attrs.prefix} " rendered="#{not empty cc.attrs.prefix}"/>
     		<c:if test="#{empty cc.attrs.link}">
-        		<h:outputText value="#{titleText}"/>
+				<h:outputText value="#{titleText}"/>
         	</c:if>
         	<c:if test="#{not empty cc.attrs.link}">
         		<h:outputLink value="#{cc.attrs.link}">
 					<h:outputText value="#{titleText}"/>
 				</h:outputLink>
         	</c:if>
-        	<c:if test="#{not empty cc.attrs.suffix}">
-        		<h:outputText value=" #{cc.attrs.suffix}"/>
-        	</c:if>
+        	<h:outputText value="#{cc.attrs.suffix}" rendered="#{not empty cc.attrs.suffix}"/>
         </c:if>
         <c:if test="#{not empty cc.facets.header}">
 			<composite:renderFacet name="header"/>
