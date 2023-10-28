@@ -397,6 +397,20 @@
 							</resources>              
 						</configuration>
           			</execution>
+          			<execution>
+	            		<id>copy-resources-taglib</id>
+	            		<phase>prepare-package</phase>
+	            		<goals><goal>copy-resources</goal></goals>
+	            		<configuration>
+		              		<outputDirectory>${project.build.directory}/classes/META-INF</outputDirectory>
+		              		<resources>          
+								<resource>
+									<directory>${project.basedir}/../io-locale/src/main/resources/WEB-INF</directory>
+									<includes><include>ioLocale/**/*.*</include></includes>
+								</resource>
+							</resources>              
+						</configuration>
+          			</execution>
         		</executions>
 			</plugin>
 		</plugins>

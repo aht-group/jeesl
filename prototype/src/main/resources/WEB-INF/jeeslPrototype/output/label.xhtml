@@ -22,9 +22,9 @@
 	<c:set var="field" value="#{field}"/>
 	<c:set var="validated" value="#{validated}"/>
 
+
+
 	<p:outputLabel rendered="#{rendered}" styleClass="#{mandatory ? 'mandatory' : ''}">
-        <!-- <c:if test="#{id}"><f:attribute name="id" value="olwithOverlay"/></c:if >-->
-		<!-- <c:if test="#{not empty id}"><f:attribute name="id" value="#{id}_ol"/></c:if> -->
         
 		<c:if test="#{not empty code}"><f:attribute name="value" value="#{not empty appLabelBean.labels[entity][code][loc].lang ? appLabelBean.labels[entity][code][loc].lang : defaultValue}"/></c:if>
 		<c:if test="#{empty code}"><f:attribute name="value" value="#{not empty appLabelBean.entities[entity][loc].lang ? appLabelBean.entities[entity][loc].lang : defaultValue}"/></c:if>
@@ -46,7 +46,6 @@
         	<p:overlayPanel for="@parent" widgetVar="wvImageOptions" showEffect="blind" hideEffect="explode" showEvent="click"
                         hideEvent="mousedown" dismissable="false" showCloseIcon="true">
                 <h:outputText value="#{iOptions}" />
-            	
 			</p:overlayPanel>
 		</c:if>
 	</p:outputLabel>

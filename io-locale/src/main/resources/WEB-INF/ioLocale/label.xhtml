@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag">
+
+	<c:set var="id" value="#{id}"/>
+	<c:set var="rendered" value="#{not empty rendered ? rendered : true}"/>
+    <c:set var="for" value="#{for}"/>
+	 
+    <c:set var="entity" value="#{entity}"/>
+    <c:set var="code" value="#{code}"/>
+    
+    <c:set var="debugValue" value="#{entity}:#{code}"/>
+    
+    <c:set var="userLocaleCode" value="#{not empty userLocaleCode ? userLocaleCode : localeCode}"/>
+	<c:set var="fallbackLocale"  value="#{not empty fallbackLocale ? fallbackLocale : appLabelBean.fallbackLocale}" />
+    
+    <c:set var="ttd" value="#{not empty ttd ? ttd : false}"/>
+	<c:set var="iOptions" value="#{iOptions}"/>
+    
+    <c:set var="bean" value="#{bean}"/>
+    <c:set var="mandatory" value="#{not empty mandatory ? mandatory : false}"/>
+	<c:set var="style" value="#{style}"/>
+	<c:set var="field" value="#{field}"/>
+	<c:set var="validated" value="#{validated}"/>
+
+	<ui:fragment>
+		<jtp:symbolizer rendered="#{(not empty code) and (empty appLabelBean.labels[entity][code][userLocaleCode].lang) and (not empty appLabelBean.labels[entity][code][fallbackLocale.code].lang)}"
+						value="#{fallbackLocale}" marginRight="5" />
+		<jtp:symbolizer rendered="#{(empty code) and (empty appLabelBean.entities[entity][userLocaleCode].lang) and (not empty appLabelBean.entities[entity][fallbackLocale.code].lang)}"
+						value="#{fallbackLocale}" marginRight="5" />
+		<p:outputLabel rendered="#{rendered}" styleClass="#{mandatory ? 'mandatory' : ''}">
+	        
+	        <c:if test="#{empty code}">
+	        	<f:attribute name="value" value="#{empty appLabelBean.entities[entity][userLocaleCode].lang
+	        										? (empty appLabelBean.entities[entity][fallbackLocale.code].lang
+	        											? debugValue
+	        											: appLabelBean.entities[entity][fallbackLocale.code].lang)
+	        										: appLabelBean.entities[entity][userLocaleCode].lang}"/>
+	        </c:if>
+			<c:if test="#{not empty code}">
+				<f:attribute name="value" value="#{empty appLabelBean.labels[entity][code][userLocaleCode].lang
+													? (empty appLabelBean.labels[entity][code][fallbackLocale.code].lang
+														? debugValue
+														: appLabelBean.labels[entity][code][fallbackLocale.code].lang)
+													: appLabelBean.labels[entity][code][userLocaleCode].lang}"/>
+			</c:if>
+	        
+	        <c:if test="#{not empty for}"><f:attribute name="for" value="#{for}"/></c:if>
+			<c:if test="#{(not empty style) and (empty validated)}"><f:attribute name="style" value="#{style}"/></c:if>
+	        <c:if test="#{not empty validated}"><f:attribute name="style" value="#{validated and empty field ? 'color:red' : 'color:default'};"/></c:if>
+			
+			<ui:remove>
+				<c:if test="#{not empty iOptions}"><f:attribute name="style" value="cursor:pointer;"/></c:if>
+			</ui:remove>
+	        
+	        <p:tooltip rendered="#{ttd}" for="@parent" position="top" showDelay="1000">
+	        	<c:if test="#{not empty code}"><f:attribute name="value" value="#{not empty appLabelBean.descriptions[entity][code][userLocaleCode].lang ? appLabelBean.descriptions[entity][code][userLocaleCode].lang : debugValue}"/></c:if>
+	        </p:tooltip>
+	        
+			<c:if test="#{not empty iOptions}">
+	        	<p:overlayPanel for="@parent" widgetVar="wvImageOptions" showEffect="blind" hideEffect="explode" showEvent="click"
+	                        hideEvent="mousedown" dismissable="false" showCloseIcon="true">
+	                <h:outputText value="#{iOptions}" />
+				</p:overlayPanel>
+			</c:if>
+		</p:outputLabel>
+	</ui:fragment>
+	
+	
+</ui:composition>

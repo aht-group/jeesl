@@ -11,6 +11,15 @@
             <component-type>org.jeesl.web.component.grid.Grid</component-type>
         </component>
     </tag>
+    
+    <tag>
+        <tag-name>label</tag-name>
+        <source>ioLocale/label.xhtml</source>
+	</tag>
+	<tag>
+        <tag-name>outputMultiText</tag-name>
+        <source>ioLocale/multiText.xhtml</source>
+	</tag>
   
   	<tag>
         <tag-name>gridIoAiDeepl</tag-name>

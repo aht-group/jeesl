@@ -10,10 +10,6 @@
         <tag-name>label</tag-name>
         <source>jeeslPrototype/output/label.xhtml</source>
     </tag>
-     <tag>
-        <tag-name>outputMultiText</tag-name>
-        <source>jeeslPrototype/output/multiText.xhtml</source>
-    </tag>
 	<tag>
         <tag-name>description</tag-name>
         <source>jeeslPrototype/output/description.xhtml</source>

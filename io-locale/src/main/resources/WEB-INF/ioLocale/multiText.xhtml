@@ -1,0 +1,15 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:p="http://primefaces.org/ui">
+    
+    <c:set var="value" value="#{value}"/>
+    <c:set var="userLocaleCode"  value="#{not empty userLocaleCode ? userLocaleCode : localeCode}" />
+    <c:set var="fallbackLocale"  value="#{not empty fallbackLocale ? fallbackLocale : appLabelBean.fallbackLocale}" />
+
+	<h:outputText value="#{value[userLocaleCode].lang}" rendered="#{(not empty value) and (not empty value[userLocaleCode].lang)}"/>
+	<ui:fragment rendered="#{(empty value) or (empty value[userLocaleCode].lang)}">
+		<jtp:symbolizer value="#{appLabelBean.fallbackLocale}" marginRight="5"/>
+		<h:outputText value="#{value[fallbackLocale.code].lang}"/>
+	</ui:fragment>
+</ui:composition>
