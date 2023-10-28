@@ -216,14 +216,14 @@
 									<p:outputLabel value="#{msg.jeeslCode}"/>
 									<jtp:inputText value="#{cc.attrs.bean.section.code}"/>
 								</p:panelGrid>
-								<p:panelGrid columns="2" columnClasses="jeeslGrid10,jeeslGrid90" >
+								<j:inputGrid>
 									<p:outputLabel value="#{msg.jeeslCmsSectionHeader}"/>
 									<jtp:inputText value="#{cc.attrs.bean.section.name[cc.attrs.bean.sbhLocale.selection.code].lang}"/>
-								</p:panelGrid>
+								</j:inputGrid>
 							</p:panel>
 						</h:form>
 						<h:form id="fElements" rendered="#{(not empty cc.attrs.bean.section) and (cc.attrs.bean.section.id gt 0)}">
-							<p:dataTable var="e" value="#{cc.attrs.bean.elements}" draggableRows="true"
+							<p:dataTable var="e" value="#{cc.attrs.bean.elements}" draggableRows="true" styleClass="jeesl-datatable"
 								selection="#{cc.attrs.bean.element}" selectionMode="single" rowKey="#{e.id}">
 								<f:facet name="header">
 									<j:dtHeader title="#{msg.jeeslCmsElements}">
@@ -246,7 +246,7 @@
 									<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveElement()}" update=":#{cc.id}:sRow" tooltip="#{msg.ttSave}"/>
 									<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteElement()}" update=":#{cc.id}:sRow" tooltip="#{msg.ttSave}"/>
 								</f:facet>
-								<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+								<j:inputGrid>
 									<p:outputLabel value="#{msg.jeeslCmsElementCategory}"/>
 									<p:selectOneMenu value="#{cc.attrs.bean.elementCategory}" effect="fade" >
 										<f:selectItems value="#{cc.attrs.bean.elementCategories}" var="c" itemLabel="#{c.name[localeCode].lang}" itemValue="#{c}"/>
@@ -256,12 +256,12 @@
 									<p:selectOneMenu value="#{cc.attrs.bean.element.type}" effect="fade" >
 										<f:selectItems value="#{cc.attrs.bean.types}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 									</p:selectOneMenu>
-								</p:panelGrid>
-								<p:separator/>
+								</j:inputGrid>
+								<p:separator rendered="#{(cc.attrs.bean.element.type.code eq 'systemStatusTable')}"/>
 								<j:jsonPropertyEditor for="org.jeesl.model.json.system.io.cms.JsonCmsStatusTable" value="#{cc.attrs.bean.jsonString}" rendered="#{(cc.attrs.bean.element.type.code eq 'systemStatusTable')}"/>
 							</p:panel>
 						</h:form>
-						<h:panelGroup id="pgElements" rendered="#{(not empty cc.attrs.bean.element) and (cc.attrs.bean.element.id gt 0)}" styleClass="jeeslSticky">
+						<h:panelGroup id="pgElements" rendered="#{(not empty cc.attrs.bean.element) and (cc.attrs.bean.element.id gt 0)}" styleClass="jeeslSticky" layout="block">
 						
 							<h:form id="fStatusList" rendered="#{(cc.attrs.bean.element.type.code eq 'sysStatusList')
 																			 or (cc.attrs.bean.element.type.code eq 'wfProcess')}">
@@ -270,10 +270,10 @@
 										<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveElement()}" update=":@form" tooltip="#{msg.ttSave}"/>
 									</f:facet>
 									<p:messages for="document" redisplay="false" severity="warn,error" showSummary="true" showDetail="true" closable="true"/>
-									<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
+									<j:inputGrid>
 										<p:outputLabel value="#{msg.jeeslCmsElementJson}"/>
 										<p:inputText value="#{cc.attrs.bean.element.json}"/>
-									</p:panelGrid>
+									</j:inputGrid>
 								</p:panel>
 							</h:form>
 							<h:form id="fImage" rendered="#{(cc.attrs.bean.element.type.code eq 'paragraph') or (cc.attrs.bean.element.type.code eq 'image')}">

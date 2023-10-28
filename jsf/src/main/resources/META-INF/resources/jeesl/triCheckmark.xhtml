@@ -11,13 +11,13 @@
 	</composite:interface>
 
 	<composite:implementation>
-		<h:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslQuestionMark']}" rendered="#{empty cc.attrs.value}">
+		<h:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslQuestionMark']}" rendered="#{empty cc.attrs.value}" styleClass="jeesl-icon">
 			<f:attribute name="height" value="#{cc.attrs.height}"/>
 		</h:graphicImage>
-		<h:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslCheckMark']}" rendered="#{(not empty cc.attrs.value) and cc.attrs.value}">
+		<h:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslCheckMark']}" rendered="#{(not empty cc.attrs.value) and cc.attrs.value}" styleClass="jeesl-icon">
 			<f:attribute name="height" value="#{cc.attrs.height}"/>
 		</h:graphicImage>
-		<h:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslCrossMark']}" rendered="#{(not empty cc.attrs.value) and (not cc.attrs.value)}">
+		<h:graphicImage library="jeeslGfx" name="#{appIconBean.svg['jeeslCrossMark']}" rendered="#{(not empty cc.attrs.value) and (not cc.attrs.value)}" styleClass="jeesl-icon">
 			<f:attribute name="height" value="#{cc.attrs.height}"/>
 		</h:graphicImage>
 	</composite:implementation>
