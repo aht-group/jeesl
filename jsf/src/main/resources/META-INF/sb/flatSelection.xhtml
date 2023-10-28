@@ -21,12 +21,12 @@
 		<ul class="jeesl-menu-bar-radio-item-list">
 			<ui:repeat var="var" value="#{handler.list}">
 				<j:li styleClass="aupStatusBarRight jeeslSbFlat jeesl-menu-bar-item jeesl-left">
-					<j:label styleClass="jeesl-menu-bar-button #{(handler.selection.id eq var.id) ? 'jeeslSbFlatSelected' : 'jeeslSbFlatUnSelected'} #{(handler.selection.id eq var.id) ? 'jeesl-active' : ''}">
+					<j:sbLabel styleClass="jeesl-menu-bar-button #{(handler.selection.id eq var.id) ? 'jeeslSbFlatSelected' : 'jeeslSbFlatUnSelected'} #{(handler.selection.id eq var.id) ? 'jeesl-active' : ''}">
 						<p:commandLink>
 							<h:outputText value="#{var.name[localeCode].lang}" styleClass="jeesl-menu-bar-button-label"/>
 							<p:ajax event="click" listener="#{handler.selectSbSingle(var)}" update="#{update}"/>
 						</p:commandLink>
-					</j:label>
+					</j:sbLabel>
 				</j:li>
 			</ui:repeat>
 		</ul>

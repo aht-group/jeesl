@@ -1,18 +1,11 @@
-<facelet-taglib version="2.0"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
+<facelet-taglib version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facelettaglibrary_2_2.xsd">
+
 	<namespace>http://www.jeesl.org/jsf</namespace>
 	<composite-library-name>jeesl</composite-library-name>
 	
-	<!-- 
-	<tag>
-        <tag-name>grid</tag-name>
-        <component>
-            <component-type>net.sf.ahtutils.jsf.components.layout.Grid</component-type>
-        </component>
-    </tag>
-     -->
 	<tag>
         <tag-name>row</tag-name>
         <component>
@@ -42,7 +35,8 @@
         <component>
             <component-type>net.sf.ahtutils.jsf.components.layout.Block</component-type>
         </component>
-    </tag> 
+    </tag>
+    
     <tag>
         <tag-name>li</tag-name>
         <component>
@@ -53,12 +47,6 @@
         <tag-name>div</tag-name>
         <component>
             <component-type>org.jeesl.jsf.components.html.Div</component-type>
-        </component>
-    </tag>
-	<tag>
-        <tag-name>label</tag-name>
-        <component>
-            <component-type>org.jeesl.jsf.components.html.Label</component-type>
         </component>
     </tag>
 	<tag>
@@ -98,6 +86,18 @@
         <tag-name>qrCode</tag-name>
         <component>
             <component-type>org.jeesl.jsf.components.QrCode</component-type>
+        </component>
+    </tag>
+    
+    <!-- Status Bar -->
+    <tag>
+        <tag-name>sbFlat</tag-name>
+        <source>sb/flatSelection.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>sbLabel</tag-name>
+        <component>
+            <component-type>org.jeesl.jsf.components.html.Label</component-type>
         </component>
     </tag>
     
