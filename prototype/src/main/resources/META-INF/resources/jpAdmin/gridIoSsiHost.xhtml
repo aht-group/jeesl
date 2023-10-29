@@ -23,7 +23,7 @@
 					<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectHost()}" update=":#{cc.id}:sSystem"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderHosts()}" update="@form"/>
 					<p:column>
-						<f:facet name="header"><h:outputText value="#{msg.jeeslIoSsiSystem}"/></f:facet>
+						<f:facet name="header"><jtp:label entity="IoSsiHost" code="system"/></f:facet>
 						<h:outputText value="#{h.system.name[localeCode].lang}"/>
 					</p:column>
 					

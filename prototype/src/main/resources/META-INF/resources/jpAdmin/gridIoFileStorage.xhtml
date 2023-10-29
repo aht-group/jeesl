@@ -18,21 +18,24 @@
 				<p:dataTable var="s" value="#{cc.attrs.bean.storages}" draggableRows="true" styleClass="jeesl-datatable"
 							selection="#{cc.attrs.bean.storage}" selectionMode="single" rowKey="#{s.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslIoFileStorages}">
+						<j:dtHeader entity="IoFileStorage" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addStorage()}" update=":#{cc.id}:grid"/>
 							<jp:icon value="#{cc.attrs.bean.typeUnknown}" listener="#{cc.attrs.bean.fixType()}" update=":#{cc.id}:sStorages"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderStorages()}" update="@form"/>
 					<p:ajax event="rowSelect" update=":#{cc.id}:sStorage" listener="#{cc.attrs.bean.selectStorage()}"/>
-			      	<p:column headerText="#{msg.jeeslIoFileStorageEngine}" styleClass="jeeslCenter">
+			      	<p:column styleClass="jeesl-center">
+			      		<f:facet name="header"><jtp:label entity="IoFileStorage" code="engine"/></f:facet>
 			      		<jtp:symbolizer value="#{s.engine}"/>
 			     	</p:column>
-			     	<p:column headerText="#{msg.jeeslName}">  
+			     	<p:column>
+			     		<f:facet name="header"><jtp:label entity="IoFileStorage" code="type"/></f:facet>
 			     		<jtp:symbolizer value="#{s.type}" marginRight="5" rendered="#{cc.attrs.bean.sbhStorageType.hasMore}"/>
 						<h:outputText value="#{s.name[localeCode].lang}"/>
 			     	</p:column>
 			     	<p:column headerText="#{msg.jeeslIoFileStorageSize}" styleClass="jeeslRight">  
+			     		<f:facet name="header"><jtp:label entity="IoFileStorage" code="totalSize"/></f:facet>
 			     		<h:outputText value="#{jeesl:humanFileSize(cc.attrs.bean.thSize.mapA[s].count1)}"/>
 			     	</p:column>
 			     	<p:columns var="type" value="#{cc.attrs.bean.thCount.listB}" columnIndexVar="colIndex" styleClass="jeeslCenter">
@@ -53,31 +56,31 @@
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.storage.id gt 0}" tooltip="#{msg.ttDelete}"/>
 					</f:facet>
-					<p:panelGrid columns="2" columnClasses="jeeslGrid30,jeeslGrid70">
-					
-						<p:outputLabel value="#{msg.jeeslCode}" />
+					<j:inputGrid>
+						
+						<jtp:label entity="IoFileStorage" code="code"/>
 						<p:inputText value="#{cc.attrs.bean.storage.code}"/>
 						
-						<p:outputLabel value="#{msg.jeeslIoFileStorageEngine}" />
+						<jtp:label entity="IoFileStorage" code="engine"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.storage.engine}" effect="fade" autoWidth="false">
 							<f:selectItems value="#{cc.attrs.bean.engines}" var="e" itemLabel="#{e.name[localeCode].lang}" itemValue="#{e}"/>
 						</p:selectOneMenu>
 						
-						<p:outputLabel value="#{msg.jeeslIoFileStorageType}" rendered="#{cc.attrs.bean.sbhStorageType.hasMore}"/>
+						<jtp:label entity="IoFileStorage" code="type" rendered="#{cc.attrs.bean.sbhStorageType.hasMore}"/>
 						<p:selectOneMenu value="#{cc.attrs.bean.storage.type}" effect="fade" autoWidth="false" rendered="#{cc.attrs.bean.sbhStorageType.hasMore}">
 							<f:selectItems value="#{cc.attrs.bean.sbhStorageType.list}" var="t" itemLabel="#{t.name[localeCode].lang}" itemValue="#{t}"/>
 						</p:selectOneMenu>
 						
-						<p:outputLabel value="#{msg.jeeslIoFileStorageLimit}" />
+						<jtp:label entity="IoFileStorage" code="fileSizeLimit"/>
 						<p:inputText value="#{cc.attrs.bean.storage.fileSizeLimit}"/>
 						
-						<p:outputLabel value="#{msg.jeeslIoFileStorageKeep}" />
+						<jtp:label entity="IoFileStorage" code="keepRemoved"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.storage.keepRemoved}" />
 						
-						<p:outputLabel value="#{msg.jeeslJson}" />
+						<jtp:label entity="IoFileStorage" code="json"/>
 						<p:inputText value="#{cc.attrs.bean.storage.json}"/>
 						
-					</p:panelGrid>
+					</j:inputGrid>
 					<j:tabTranslationEditor value="#{cc.attrs.bean.storage}" withDescription="true" keys="#{cc.attrs.localeKeys}" />
 				</p:panel>
 			</h:form>

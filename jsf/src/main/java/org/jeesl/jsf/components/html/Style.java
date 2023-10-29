@@ -17,21 +17,21 @@ public class Style extends UIPanel
 	@Override public boolean getRendersChildren(){return true;}
 	
 	@Override
-	public void encodeBegin(FacesContext context) throws IOException
+	public void encodeBegin(FacesContext ctx) throws IOException
 	{
-		ResponseWriter responseWriter = context.getResponseWriter();
+		ResponseWriter responseWriter = ctx.getResponseWriter();
 		responseWriter.startElement("style", this);
 		
-		responseWriter.write(ComponentAttribute.get(Properties.rules, "", context, this));
+		responseWriter.write(ComponentAttribute.get(Properties.rules, "", ctx, this));
 	}
 
 	@Override
-	public void encodeEnd(FacesContext context) throws IOException
+	public void encodeEnd(FacesContext ctx) throws IOException
 	{
-		ResponseWriter responseWriter = context.getResponseWriter();
+		ResponseWriter responseWriter = ctx.getResponseWriter();
 		responseWriter.endElement("style");
 	}
 	
 	@Override
-	public void encodeChildren(FacesContext context) throws IOException { }
+	public void encodeChildren(FacesContext ctx) throws IOException { }
 }

@@ -80,7 +80,7 @@ public class ComponentAttribute
 	}
 	
 	public static <E extends Enum<E>> String get(E attribute, String defaultValue, FacesContext context, UIComponent component) {return get(attribute.toString(), defaultValue, context, component);}
-	public static String get(String attribute, String defaultValue, FacesContext context, UIComponent component)
+	private static String get(String attribute, String defaultValue, FacesContext context, UIComponent component)
 	{
 		String value = null;
 		if(component.getAttributes().containsKey(attribute))
@@ -105,7 +105,7 @@ public class ComponentAttribute
 	}
 	
 	public static <E extends Enum<E>> Object getObject(E attribute, String defaultValue, FacesContext context, UIComponent component) {return getObject(attribute.toString(), defaultValue, context, component);}
-	public static Object getObject(String attribute, Object defaultValue, FacesContext context, UIComponent component)
+	private static Object getObject(String attribute, Object defaultValue, FacesContext context, UIComponent component)
 	{
 		Object value = null;
 		if(component.getAttributes().containsKey(attribute))

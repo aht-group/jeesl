@@ -13,9 +13,11 @@ import org.jeesl.interfaces.model.with.primitive.position.EjbWithPosition;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.jeesl.interfaces.model.with.system.status.JeeslWithType;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslFileStorage<L extends JeeslLang, D extends JeeslDescription,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,
 									STYPE extends JeeslFileStorageType<L,D,STYPE,?>,
