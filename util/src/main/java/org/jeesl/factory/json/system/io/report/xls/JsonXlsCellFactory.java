@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.jeesl.controller.handler.io.log.LoggedExit;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ public class JsonXlsCellFactory
 //		{
 //			logger.error("You need to handle type="+type+" in row:"+cell.getRowIndex()+" cell:"+cell.getColumnIndex());
 //			logger.error(cell.getStringCellValue());
-//			System.exit(-1);
+//			LoggedExit.exit(true);
 //		}
 
 		//enum does not work with streaming-api: java.lang.AbstractMethodError: com.monitorjbl.xlsx.impl.StreamingCell.getCellTypeEnum()Lorg/apache/poi/ss/usermodel/CellType;
@@ -42,7 +43,7 @@ public class JsonXlsCellFactory
 				logger.error("You need to handle "+type);
 				logger.error("Check Row: " + cell.getRowIndex() + " Column: " + cell.getColumnIndex());
 				logger.error("value: " + cell.getStringCellValue());
-				System.exit(-1);
+				LoggedExit.exit(true);
 		}
 
 		return json;

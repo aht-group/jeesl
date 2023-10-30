@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.jeesl.controller.handler.io.log.LoggedExit;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaColumnFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaConstraintFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaTableFactory;
@@ -89,7 +90,7 @@ public class DatabaseSanpshotProcessor
 			if(table.getCode().equals("xxIoReportSheet".toLowerCase()))
 			{
 				JsonUtil.info(table);
-				System.exit(-1);
+				LoggedExit.exit(true);
 			}
 			
 			
