@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.JeeslIdEjb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -163,6 +165,17 @@ public class EjbIdFactory
 		List<EjbWithId> result = new ArrayList<EjbWithId>();
 		for(T l : list){result.add(l);}
 		return result;
+	}
+	
+	public static JeeslIdEjb toIdEjb(Long id)
+	{
+		if(Objects.isNull(id)) {return null;}
+		else
+		{
+			JeeslIdEjb ejb = new JeeslIdEjb();
+			ejb.setId(id);
+			return ejb;
+		}
 	}
 	
 	public static <T extends EjbWithId> void updateList(List<T> list, T ejb)

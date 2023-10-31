@@ -234,9 +234,9 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbSsi.getClassData().getSimpleName()+" and id="+ejb.getId()+" not unique");}
 	}
 	
-	@Override public JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping){return tpIoSsiLinkForMapping(mapping,null,null);}
-	@Override public <A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a){return tpIoSsiLinkForMapping(mapping,a,null);}
-	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a, B b)
+	@Override public JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping){return tpcIoSsiStatusForContext(mapping,null,null);}
+	@Override public <A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a){return tpcIoSsiStatusForContext(mapping,a,null);}
+	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpcIoSsiStatusForContext(CTX mapping, A a, B b)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -262,12 +262,12 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassLink()).tupleLoad(this,true);
+		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassStatus()).tupleLoad(this,true);
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
 	@Override
-	public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS, JOB> tpcIoSsiLinkJobForMapping(CTX mapping, A a, B b)
+	public <A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiStatusJobForContext(CTX mapping, A a, B b)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -294,7 +294,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json2TuplesFactory<STATUS,JOB> jtf = Json2TuplesFactory.instance(fbSsi.getClassLink(),fbSsi.getClassJob()).tupleLoad(this,true);
+		Json2TuplesFactory<STATUS,JOB> jtf = Json2TuplesFactory.instance(fbSsi.getClassStatus(),fbSsi.getClassJob()).tupleLoad(this,true);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
@@ -336,7 +336,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.multiselect(pContext.get("id"),pStatus.get("id"),eCount);
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json2TuplesFactory<CTX,STATUS> jtf = Json2TuplesFactory.instance(fbSsi.getClassMapping(),fbSsi.getClassLink()).tupleLoad(this,true);
+		Json2TuplesFactory<CTX,STATUS> jtf = Json2TuplesFactory.instance(fbSsi.getClassMapping(),fbSsi.getClassStatus()).tupleLoad(this,true);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
@@ -363,7 +363,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
-		Json2TuplesFactory<STATUS,B> jtf = Json2TuplesFactory.instance(fbSsi.getClassLink(),classB).tupleLoad(this,true);
+		Json2TuplesFactory<STATUS,B> jtf = Json2TuplesFactory.instance(fbSsi.getClassStatus(),classB).tupleLoad(this,true);
         return jtf.build(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 

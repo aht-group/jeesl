@@ -37,7 +37,7 @@ public class AbstractSsiCacheBean <L extends JeeslLang,D extends JeeslDescriptio
 
 	private List<LINK> links;
 	public List<LINK> getLinks() {return links;}
-	public void reloadLinks(JeeslFacade facade) {links = facade.allOrderedPositionVisible(fbSsi.getClassLink());}
+	public void reloadLinks(JeeslFacade facade) {links = facade.allOrderedPositionVisible(fbSsi.getClassStatus());}
 	
 	private List<CLEANING> cleanings;
 	public List<CLEANING> getCleanings() {return cleanings;}

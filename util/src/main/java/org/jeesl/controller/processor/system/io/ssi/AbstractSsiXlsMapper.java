@@ -9,6 +9,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellReference;
+import org.jeesl.controller.handler.io.log.LoggedExit;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsCell;
 import org.jeesl.model.json.io.report.xlsx.JsonXlsRow;
 import org.slf4j.Logger;
@@ -85,7 +86,7 @@ public class AbstractSsiXlsMapper
 		if(!mapColumnIndex.containsKey(index))
 		{
 			logger.warn("Column not available: "+index);
-			System.exit(-1);
+			LoggedExit.exit(true);
 			return "";
 		}
 		else

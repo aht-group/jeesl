@@ -22,8 +22,8 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
 								MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 								ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-								DATA extends JeeslIoSsiData<MAPPING,LINK,?>,
-								LINK extends JeeslIoSsiStatus<L,D,LINK,?>,
+								DATA extends JeeslIoSsiData<MAPPING,STATUS,?>,
+								STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
 								ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 								CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 								JOB extends JeeslJobStatus<L,D,JOB,?>>
@@ -37,15 +37,18 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 	private final Class<MAPPING> cMapping; public Class<MAPPING> getClassMapping(){return cMapping;}
 	private final Class<ATTRIBUTE> cAttribute; public Class<ATTRIBUTE> getClassAttribute(){return cAttribute;}
 	private final Class<DATA> cData; public Class<DATA> getClassData(){return cData;}
-	private final Class<LINK> cLink; public Class<LINK> getClassLink(){return cLink;}
+	private final Class<STATUS> cStatus; public Class<STATUS> getClassStatus(){return cStatus;}
 	private final Class<ENTITY> cEntity; public Class<ENTITY> getClassEntity(){return cEntity;}
 	private final Class<CLEANING> cCleaning; public Class<CLEANING> getClassCleaning(){return cCleaning;}
 	private final Class<JOB> cJob; public Class<JOB> getClassJob(){return cJob;}
 	
 	public IoSsiDataFactoryBuilder(final Class<L> cL, final Class<D> cD,
 								final Class<SYSTEM> cSystem,
-								final Class<MAPPING> cMapping, final Class<ATTRIBUTE> cAttribute,
-								final Class<DATA> cData, final Class<LINK> cLink, final Class<ENTITY> cEntity,
+								final Class<MAPPING> cMapping,
+								final Class<ATTRIBUTE> cAttribute,
+								final Class<DATA> cData,
+								final Class<STATUS> cLink,
+								final Class<ENTITY> cEntity,
 								final Class<CLEANING> cCleaning, final Class<JOB> cJob
 								)
 	{
@@ -54,7 +57,7 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 		this.cMapping=cMapping;
 		this.cAttribute=cAttribute;
 		this.cData=cData;
-		this.cLink=cLink;
+		this.cStatus=cLink;
 		this.cEntity=cEntity;
 		this.cCleaning=cCleaning;
 		this.cJob=cJob;
@@ -62,7 +65,7 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 
 	public EjbIoSsiMappingFactory<SYSTEM,MAPPING,ENTITY> ejbMapping() {return new EjbIoSsiMappingFactory<>(this);}
 	public EjbIoSsiAttributeFactory<MAPPING,ATTRIBUTE,ENTITY> ejbAttribute() {return new EjbIoSsiAttributeFactory<>(cAttribute);}
-	public EjbIoSsiDataFactory<MAPPING,DATA,LINK> ejbData() {return new EjbIoSsiDataFactory<>(cData);}
+	public EjbIoSsiDataFactory<MAPPING,DATA,STATUS> ejbData() {return new EjbIoSsiDataFactory<>(cData);}
 	
 	public TxtIoSsiMappingFactory<SYSTEM,MAPPING,ENTITY> txtMapping(String localeCode) {return new TxtIoSsiMappingFactory<>(localeCode);}
 }

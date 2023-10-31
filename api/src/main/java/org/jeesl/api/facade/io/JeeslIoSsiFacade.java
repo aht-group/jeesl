@@ -45,8 +45,8 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 
 	JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping);
 	<A extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a);
-	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpIoSsiLinkForMapping(CTX mapping, A a, B b);
-	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiLinkJobForMapping(CTX mapping, A a, B b);
+	<A extends EjbWithId, B extends EjbWithId> JsonTuples1<STATUS> tpcIoSsiStatusForContext(CTX mapping, A a, B b);
+	<A extends EjbWithId, B extends EjbWithId> JsonTuples2<STATUS,JOB> tpcIoSsiStatusJobForContext(CTX mapping, A a, B b);
 
 	JsonTuples1<CTX> tpMapping();
 	JsonTuples2<CTX,STATUS> tpcContextStatus(List<CTX> list);

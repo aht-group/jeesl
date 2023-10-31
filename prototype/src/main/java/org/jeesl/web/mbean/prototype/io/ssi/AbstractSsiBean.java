@@ -72,8 +72,8 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	{
 		this.fbSsi=fbSsi;
 		this.cJson=cJson;
-		sbhLink = new SbMultiHandler<LINK>(fbSsi.getClassLink(),this);
-		thLink = new JsonTuple1Handler<LINK>(fbSsi.getClassLink());
+		sbhLink = new SbMultiHandler<LINK>(fbSsi.getClassStatus(),this);
+		thLink = new JsonTuple1Handler<LINK>(fbSsi.getClassStatus());
 		mapData = new HashMap<>();
 		datas = new ArrayList<>();
 	}
@@ -81,14 +81,14 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	public void postConstructSsi(JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi)
 	{
 		this.fSsi=fSsi;
-		sbhLink.setList(fSsi.allOrderedPositionVisible(fbSsi.getClassLink()));
+		sbhLink.setList(fSsi.allOrderedPositionVisible(fbSsi.getClassStatus()));
 		sbhLink.preSelect(JeeslIoSsiStatus.Code.possible,JeeslIoSsiStatus.Code.unlinked);
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)
 	{
 		logger.info(AbstractLogMessage.toggled(c));
-		if(fbSsi.getClassLink().isAssignableFrom(c)){reloadData();}
+		if(fbSsi.getClassStatus().isAssignableFrom(c)){reloadData();}
 	}
 	
 	protected abstract boolean constraintEmptySelectionFailed();

@@ -69,7 +69,7 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		entities = new ArrayList<>();
 		
 		thContext = new JsonTuple1Handler<>(fbSsi.getClassMapping());
-		thStatus = new JsonTuple2Handler<>(fbSsi.getClassMapping(),fbSsi.getClassLink());
+		thStatus = new JsonTuple2Handler<>(fbSsi.getClassMapping(),fbSsi.getClassStatus());
 		
 		jogger = DebugJeeslLogger.instance(this.getClass());
 	}
@@ -81,8 +81,8 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		this.cache=cache;
 		
 		systems.addAll(fSsi.all(fbSsi.getClassSystem()));
-		links.addAll(fSsi.allOrderedPosition(fbSsi.getClassLink()));
-		if(Objects.nonNull(jogger)) {jogger.milestone(fbSsi.getClassLink().getSimpleName(),null,links.size());}
+		links.addAll(fSsi.allOrderedPosition(fbSsi.getClassStatus()));
+		if(Objects.nonNull(jogger)) {jogger.milestone(fbSsi.getClassStatus().getSimpleName(),null,links.size());}
 		
 		entities.addAll(fSsi.all(fbSsi.getClassEntity()));
 		jogger.milestone(fbSsi.getClassEntity().getSimpleName(),null,entities.size());
