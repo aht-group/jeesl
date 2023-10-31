@@ -39,6 +39,39 @@ public class LoggingConfigurator extends AbstractEapLoggingConfigurator implemen
 		logger.info("result " +result.toString());
 	}
 	
+	public void addHandlerToRootLogger(String name) throws IOException
+	{
+		// More info on how this works can be found here
+		// https://stackoverflow.com/questions/76865879/how-to-add-a-cache-programmatically-in-wildfly-jboss-using-the-detyped-java-api
+		
+		ModelNode handlerContainer = new ModelNode();		
+		handlerContainer.get(ClientConstants.OP_ADDR).add("subsystem","logging");
+		handlerContainer.get(ClientConstants.OP_ADDR).add("root-logger","ROOT");
+		handlerContainer.get("name").set(name);
+		handlerContainer.get(ClientConstants.OP).set("add-handler");
+		
+		ModelNode result = client.execute(new OperationBuilder(handlerContainer).build());
+	}
+	
+	public boolean existsRootLoggerHandler(String name) throws IOException
+	{
+		ModelNode handlerContainer = new ModelNode();		
+		handlerContainer.get(ClientConstants.OP_ADDR).add("subsystem","logging");
+		handlerContainer.get(ClientConstants.OP_ADDR).add("root-logger","ROOT");
+		handlerContainer.get("handlers");
+		handlerContainer.get(ClientConstants.OP).set(ClientConstants.READ_RESOURCE_OPERATION);
+		
+		ModelNode result = client.execute(new OperationBuilder(handlerContainer).build());
+		//logger.info(result.get("result").get("handlers").asList());
+		boolean found = false;
+		for (ModelNode a : result.get("result").get("handlers").asList())
+		{
+			logger.info("Found logger with name " +a.asString());
+			if (a.asString().equals(name)) { found = true; }
+		}
+		return found;
+	}
+	
 	public void evaluateResult(String key, ModelNode result, Map<String, List<String>> failures) throws MojoExecutionException
 	{
 		if (result.get("outcome").toString().equals("\"failed\""))

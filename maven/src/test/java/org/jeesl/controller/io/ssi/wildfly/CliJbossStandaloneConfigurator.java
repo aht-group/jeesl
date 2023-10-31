@@ -92,7 +92,10 @@ public class CliJbossStandaloneConfigurator
 		system.getCredentials().add(JsonSsiCredentialFactory.build("menu"));
 		system.getCredentials().add(JsonSsiCredentialFactory.build("icon"));
 
-		LoggingConfigurator.instance(client).addLogger("CONSOL17E", "INFO", "COLOR-PATTERN");
+		LoggingConfigurator.instance(client).addLogger("JEESL", "INFO", "COLOR-PATTERN");
+		boolean exists = LoggingConfigurator.instance(client).existsRootLoggerHandler("JEESL");
+		logger.info("Does handler exist in root logger? " +exists);
+		if (!exists) {LoggingConfigurator.instance(client).addHandlerToRootLogger("JEESL");}
 		
 	}
 	
