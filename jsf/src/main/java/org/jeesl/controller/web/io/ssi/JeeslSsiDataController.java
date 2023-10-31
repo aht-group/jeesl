@@ -8,24 +8,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
+import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
+import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
+import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
-import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.controller.web.io.ssi.JeeslIoSsiDataCallback;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
-import org.jeesl.interfaces.model.system.locale.JeeslDescription;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.EjbIoSsiQuery;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.primefaces.model.FilterMeta;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -34,10 +36,11 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.JsonUtil;
 
-public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public class JeeslSsiDataController <
 										CTX extends JeeslIoSsiContext<?,?>,
-										DATA extends JeeslIoSsiData<CTX,STATUS,?>,
-										STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
+										DATA extends JeeslIoSsiData<CTX,STATUS,JOB>,
+										STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
+										JOB extends JeeslJobStatus<?,?,JOB,?>,
 										JSON extends Object>
 //									extends AbstractJeeslWebController<L,D,LOC>
 									extends LazyDataModel<DATA>
@@ -46,9 +49,13 @@ public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescrip
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSsiDataController.class);
 	
-	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,?,?> fSsi;
+	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,JOB,?> fSsi;
 	private final JeeslIoSsiDataCallback callback;
+	
 	protected final SbMultiHandler<STATUS> sbhStatus; public SbMultiHandler<STATUS> getSbhStatus() {return sbhStatus;}
+	
+	protected JsonTuple1Handler<STATUS> thStatus; public JsonTuple1Handler<STATUS> getThStatus() {return thStatus;}
+	protected JsonTuple2Handler<STATUS,JOB> thJob; public JsonTuple2Handler<STATUS,JOB> getThJob() {return thJob;}
 	
 	final Map<DATA,JSON> mapJson; public Map<DATA,JSON> getMapJson() {return mapJson;}
 
@@ -60,24 +67,41 @@ public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescrip
 
 	private String json; public String getJson() {return json;} public void setJson(String json) {this.json = json;}
 
-	private Long ref2; public Long getRef2() {return ref2;} public void setRef2(Long ref2) {this.ref2 = ref2;}
+	private Long refA; public <A extends EjbWithId> void setRefA(A a) {this.refA = a.getId();}
+	private Long refB; public <B extends EjbWithId> void setRefB(B b) {this.refB = b.getId();}
 
-	public JeeslSsiDataController(final JeeslIoSsiDataCallback callback, IoSsiDataFactoryBuilder<L,D,?,?,?,DATA,STATUS,?,?,?> fbSsiData)
+	public JeeslSsiDataController(final JeeslIoSsiDataCallback callback,
+						IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,JOB> fbSsiData)
 	{
-//		super(fbSsiData.getClassL(),fbSsiData.getClassD());
 		this.callback=callback;
 		
-		sbhStatus = new SbMultiHandler<>(fbSsiData.getClassLink(),this);
+		sbhStatus = new SbMultiHandler<>(fbSsiData.getClassStatus(),this);
+		
+		thStatus = JsonTuple1Handler.instance(fbSsiData.getClassStatus());
+		thJob = JsonTuple2Handler.instance(fbSsiData.getClassStatus(),fbSsiData.getClassJob());
 		
 		mapJson = new HashMap<>();
 		datas = new ArrayList<>();
 	}
 
-	public void postConstructSsiData(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-										JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,?,?> fSsi)
+	public void postConstructSsiData(JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,JOB,?> fSsi)
 	{
 		this.fSsi=fSsi;
-//		super.postConstructWebController(lp,bMessage);
+		logger.trace(callback.getClass().getName());
+	}
+	
+	public void reloadStatistics()
+	{
+		thStatus.clear();
+		JsonTuples1<STATUS> tStatus = fSsi.tpcIoSsiStatusForContext(context,EjbIdFactory.toIdEjb(refA),null);
+		JsonUtil.info(tStatus);
+		thStatus.init(tStatus);
+		thStatus.initListA(fSsi);
+		
+		JsonTuples2<STATUS,JOB> tJob = fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),null);
+		JsonUtil.info(tJob);
+		thJob.init(tJob);
+		thJob.initListB(fSsi);
 	}
 	
 	public void addDatas(List<DATA> list)
@@ -89,9 +113,10 @@ public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescrip
 	@Override
 	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		// TODO Auto-generated method stub
 		
 	}
+	
+	
 	
 	@Override
 	public List<DATA> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
@@ -100,7 +125,7 @@ public class JeeslSsiDataController <L extends JeeslLang, D extends JeeslDescrip
 		EjbIoSsiQuery<CTX,STATUS> query = new EjbIoSsiQuery<>();
 		query.setFirstResult(first);
 		query.setMaxResults(pageSize);
-		query.id2(ref2);
+		query.id2(refB);
 		if(Objects.nonNull(context)) {query.add(context);}
 		
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.controller.processor.finance.AmountRounder;
 import org.jeesl.controller.util.comparator.json.Tuple1Comparator;
@@ -57,13 +58,13 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 
 	public JsonTuple1Handler<A> init(JsonTuples1<A> tuples)
 	{
-		clear();
+		this.clear();
 		for(JsonTuple1<A> t : tuples.getTuples())
 		{
 			size++;
 			if(t.getSum()!=null) {t.setSum(AmountRounder.two(t.getSum()/sumDivider));}
 			
-			if(t.getEjb1()==null)
+			if(Objects.isNull(t.getEjb1()))
 			{
 				if(mapA.containsKey(t.getId1())) {t.setEjb1(mapA.get(t.getId1()));}
 				else

@@ -26,6 +26,13 @@ public class SqlFactory
 		else {sb.append("NULL");}
 		newLine(newLine,sb);
 	}
+	public static <E extends Enum<E>, T extends EjbWithId> void updateSet(StringBuilder sb, String alias, E attribute, T t, boolean newLine)
+	{
+		sb.append(", ").append(id(alias,attribute)).append("=");
+		if(t!=null) {sb.append(t.getId());}
+		else {sb.append("NULL");}
+		newLine(newLine,sb);
+	}
 	
 	public static <E extends Enum<E>> void updateL(StringBuilder sb, Class<?> c, String alias, E attribute, Long value, boolean newLine)
 	{

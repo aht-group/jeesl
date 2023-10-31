@@ -7,12 +7,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.txt.io.ssi.data.TxtIoSsiMappingFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
+import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,13 +22,17 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractSsiImport <SYSTEM extends JeeslIoSsiSystem<?,?>,
 										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										LINK extends JeeslIoSsiStatus<?,?,LINK,?>,
-										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>>
+										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
+										JOB extends JeeslJobStatus<?,?,JOB,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiImport.class);
 	
 	protected EjbCodeCache<LINK> cacheLink;
 	
 	protected final TxtIoSsiMappingFactory<SYSTEM,MAPPING,ENTITY> tfMapping;
+	
+	protected EjbCodeCache<LINK> cDataStatus;
+	protected EjbCodeCache<JOB> cJobStatus;
 	
 	protected File xlsDir,xlsFile;
 	
@@ -38,11 +44,14 @@ public abstract class AbstractSsiImport <SYSTEM extends JeeslIoSsiSystem<?,?>,
 
 	protected int indexSheet;
 	
-	public AbstractSsiImport(String localeCode)
+	public AbstractSsiImport(IoSsiDataFactoryBuilder<?,?,?,?,?,?,LINK,?,?,JOB> fBSsi, String localeCode)
 	{
 		tfMapping = new TxtIoSsiMappingFactory<>(localeCode);
 		
 		indexSheet = 0;
+		
+		cDataStatus = EjbCodeCache.instance(fBSsi.getClassStatus());
+		cJobStatus = EjbCodeCache.instance(fBSsi.getClassJob());
 		
 		jec = new BucketSizeCounter("Import");
 	}
