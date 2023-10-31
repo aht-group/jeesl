@@ -1,6 +1,9 @@
 package org.jeesl.controller.io.ssi.wildfly.cache;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.maven.plugin.MojoExecutionException;
 
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jboss.as.controller.client.OperationBuilder;
@@ -18,19 +21,17 @@ public class CacheEap73Configurator extends AbstractEapCacheConfigurator impleme
 	
 	public enum DbType {mysql,mariadb,postgresql}
 	
-
-	
 	public static CacheEap73Configurator instance(ModelControllerClient client) {return new CacheEap73Configurator(client);}
 	private CacheEap73Configurator(ModelControllerClient client)
 	{
 		super(client);
 	}
 	
-	@Override public void addCaches(JsonSsiSystem system) throws IOException
+	@Override public void addCaches(JsonSsiSystem system) throws IOException, MojoExecutionException
 	{
 		// More info on how this works can be found here
 		// https://stackoverflow.com/questions/76865879/how-to-add-a-cache-programmatically-in-wildfly-jboss-using-the-detyped-java-api
-
+		
 		ModelNode cacheContainer = new ModelNode();		
 		cacheContainer.get(ClientConstants.OP_ADDR).add("subsystem","infinispan");
 		cacheContainer.get(ClientConstants.OP_ADDR).add("cache-container",system.getCode());
@@ -42,26 +43,44 @@ public class CacheEap73Configurator extends AbstractEapCacheConfigurator impleme
 		transport.get(ClientConstants.OP).set(ClientConstants.ADD);
 		
 		ModelNode result = client.execute(new OperationBuilder(cacheContainer).build());
-//		System.out.println(result.toString());
+		evaluateResult(system.getCode(), result);
 		
 		result = client.execute(new OperationBuilder(transport).build());
-//		System.out.println(result.toString());
-//		
+		evaluateResult(system.getCode(), result);
 		
+		List<String> cacheNames = new ArrayList<>();
 		for(JsonSsiCredential cache : system.getCredentials())
 		{
-			if(cache.getCode().equals("menu")) {this.createCacheReplicated(cacheContainer,cache.getCode());}
-			else if(cache.getCode().equals("icon")) {this.createCacheLocal(cacheContainer,cache.getCode());}
-			else if(cache.getCode().equals("ofx")) {this.createCacheLocal(cacheContainer,cache.getCode());}
-			else if(cache.getCode().equals("report")) {this.createCacheLocal(cacheContainer,cache.getCode());}
-			else if(cache.getCode().equals("aom")) {this.createCacheLocal(cacheContainer,cache.getCode());}
-			else if(cache.getCode().equals("ts")) {this.createCacheLocal(cacheContainer,cache.getCode());}
-			else if(cache.getCode().equals("db")) {this.createCacheLocal(cacheContainer,cache.getCode());}
+			if(cache.getCode().equals("menu")) {this.createCacheReplicated(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("icon")) {this.createCacheLocal(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("ofx")) {this.createCacheLocal(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("report")) {this.createCacheLocal(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
+			else if(cache.getCode().equals("aom")) {this.createCacheLocal(cacheContainer,cache.getCode()); cacheNames.add(cache.getCode());}
 		}
+		
 //		logger.warn("@HH: Implement result code handling");
+		logger.info("Added caches for " +system.getCode() +": " +cacheNames.toString());
+	}
+	
+	public void evaluateResult(String key, ModelNode result) throws MojoExecutionException
+	{
+		if (result.get("outcome").toString().equals("\"failed\""))
+		{
+			// Check if it is only "duplicate resource" (WFLYCTL0212)
+			// https://docs.wildfly.org/19/wildscribe/log-message-reference.html
+			if (result.get("failure-description").toString().contains("WFLYCTL0212"))
+			{
+				// Thats ok, continue
+				// More codes can be added here as elseif clauses
+			} 
+			else
+			{
+				throw new MojoExecutionException(result.get("failure-description").toString());
+			}
+		}
 	}
 
-	public void createCacheReplicated(ModelNode container, String cacheName) throws IOException
+	public void createCacheReplicated(ModelNode container, String cacheName) throws IOException, MojoExecutionException
 	{
 		ModelNode replicatedCache = container.clone();
 		replicatedCache.get(ClientConstants.OP_ADDR).add("replicated-cache",cacheName);		
@@ -73,11 +92,12 @@ public class CacheEap73Configurator extends AbstractEapCacheConfigurator impleme
 		replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
 		
 		ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
-//		System.out.println(result.toString());
+		evaluateResult(cacheName, result);
 
 		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
-//		System.out.println(result.toString());
+		evaluateResult(cacheName, result);
 	}
+	
 	public void createCacheLocal(ModelNode container, String cacheName) throws IOException
 	{
 		ModelNode replicatedCache = container.clone();
@@ -90,9 +110,8 @@ public class CacheEap73Configurator extends AbstractEapCacheConfigurator impleme
 		replicatedCacheTransaction.get(ClientConstants.OP).set(ClientConstants.ADD);
 		
 		ModelNode result = client.execute(new OperationBuilder(replicatedCache).build());
-//		System.out.println(result.toString());
 
 		result = client.execute(new OperationBuilder(replicatedCacheTransaction).build());
-//		System.out.println(result.toString());
+		System.out.println(result.get("outcome").toString());
 	}
 }

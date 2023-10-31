@@ -3,6 +3,7 @@ package org.jeesl.controller.io.ssi.wildfly;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import org.apache.maven.plugin.MojoExecutionException;
 
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jboss.as.controller.client.OperationBuilder;
@@ -12,6 +13,7 @@ import org.jeesl.JeeslBootstrap;
 import org.jeesl.controller.io.ssi.wildfly.cache.CacheEap73Configurator;
 import org.jeesl.controller.io.ssi.wildfly.ds.AbstractEapDsConfigurator;
 import org.jeesl.controller.io.ssi.wildfly.ds.pg.DsPostgresEap73Configurator;
+import org.jeesl.controller.io.ssi.wildfly.logging.LoggingConfigurator;
 import org.jeesl.factory.json.io.ssi.core.JsonSsiCredentialFactory;
 import org.jeesl.factory.json.io.ssi.core.JsonSsiSystemFactory;
 import org.jeesl.model.json.io.ssi.core.JsonSsiSystem;
@@ -64,7 +66,7 @@ public class CliJbossStandaloneConfigurator
 //		client.close();
 	}
 	
-	public void infinispan() throws IOException
+	public void infinispan() throws IOException, MojoExecutionException
 	{		
 		JsonSsiSystem system = JsonSsiSystemFactory.instance().fluent().code("ofx").credentials().json();
 		system.getCredentials().add(JsonSsiCredentialFactory.build("menu"));
@@ -84,13 +86,24 @@ public class CliJbossStandaloneConfigurator
 
 	}
 	
+	public void logging() throws IOException, MojoExecutionException
+	{		
+		JsonSsiSystem system = JsonSsiSystemFactory.instance().fluent().code("ofx333").credentials().json();
+		system.getCredentials().add(JsonSsiCredentialFactory.build("menu"));
+		system.getCredentials().add(JsonSsiCredentialFactory.build("icon"));
+
+		LoggingConfigurator.instance(client).addLogger("CONSOL17E", "INFO", "COLOR-PATTERN");
+		
+	}
+	
 	public static void main(String[] args) throws Exception
 	{
 		JeeslBootstrap.init();
 		CliJbossStandaloneConfigurator cli = new CliJbossStandaloneConfigurator();
 		
-		cli.driverExists();
+//		cli.driverExists();
 //		cli.dsExists();
 //		cli.infinispan();
+		cli.logging();
 	}
 }

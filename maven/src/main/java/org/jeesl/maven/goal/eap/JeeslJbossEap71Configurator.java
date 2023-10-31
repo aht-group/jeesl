@@ -25,9 +25,14 @@ public class JeeslJbossEap71Configurator extends AbstractJbossEapConfigurator
     	org.apache.log4j.Logger.getRootLogger().setLevel(Level.toLevel(log));
 
     	Configuration config = config();
-//		try{dbRestore(config);}
+			//		try{dbRestore(config);}
 //		catch (ExlpUnsupportedOsException e) {throw new MojoExecutionException(e.getMessage());}
-		configureEap(config);
+		
+		try {
+			configureEap(super.config());
+		} catch (Exception ex) {
+			throw new MojoExecutionException(ex.getClass().toGenericString() +": " +ex.getMessage());
+		}
     }
     
     @SuppressWarnings("unused")

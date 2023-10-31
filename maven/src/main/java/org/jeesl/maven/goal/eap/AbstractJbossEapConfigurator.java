@@ -103,7 +103,7 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	return "";
     }
     
-    protected void configureEap(Configuration config) throws MojoExecutionException
+    protected void configureEap(Configuration config) throws MojoExecutionException, Exception
     {
     	String jbossDir = config.getString("eap.dir","/Volumes/ramdisk/jboss");
 		File f = new File(jbossDir);
@@ -179,14 +179,14 @@ public abstract class AbstractJbossEapConfigurator extends AbstractMojo
     	}
     }
     
-    protected void caches(String[] keys, Configuration config, JbossStandaloneConfigurator jbossConfig) throws IOException
+    protected void caches(String[] keys, Configuration config, JbossStandaloneConfigurator jbossConfig) throws IOException, Exception
     {
     	logger.info("Cache Configuration");
     	if(Objects.nonNull(cacheConfigurator))
 		{
 	    	for(String system : keys)
 	    	{
-	    		cacheConfigurator.addCaches(AbstractEapCacheConfigurator.toSystem(config,system));
+				cacheConfigurator.addCaches(AbstractEapCacheConfigurator.toSystem(config,system));
 	    	}
 		}
     	else
