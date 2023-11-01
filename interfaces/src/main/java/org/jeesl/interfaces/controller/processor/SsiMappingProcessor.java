@@ -6,7 +6,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 
 public interface SsiMappingProcessor <MAPPING extends JeeslIoSsiContext<?,?>,
-										DATA extends JeeslIoSsiData<MAPPING,?,?>,
+										DATA extends JeeslIoSsiData<MAPPING,?,?,?>,
 										JSON extends Object
 										>
 {

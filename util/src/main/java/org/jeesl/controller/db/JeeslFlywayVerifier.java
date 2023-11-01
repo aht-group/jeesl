@@ -43,16 +43,18 @@ public class JeeslFlywayVerifier
 	
 	public void test(int i, String pathLibrary)
 	{
+		String library = this.toLibName(pathLibrary);
+		
 		List<URI> listFlyway = JeeslFlywayVerifier.sqlScripts(pathFlyway);
-		List<URI> listLib = JeeslFlywayVerifier.sqlScriptsSince(pathLibrary,i);
-		logger.info("Checking "+listLib.size()+" library migrations with "+listFlyway.size()+" flyway migrations");
+		List<URI> listUpdates = JeeslFlywayVerifier.sqlScriptsSince(pathLibrary,i);
+		logger.info("Checking "+listUpdates.size()+" "+library+" library updates against "+listFlyway.size()+" flyway migrations for "+pathLibrary);
 
 		try
 		{
 			Map<String,URI> mapFly = this.toMapHashUri(listFlyway);
-			Map<URI,String> mapLib = this.toMapUriHash(listLib);
+			Map<URI,String> mapLib = this.toMapUriHash(listUpdates);
 			
-			for(URI uri : listLib)
+			for(URI uri : listUpdates)
 			{
 				String hash = mapLib.get(uri);
 				if(!mapFly.containsKey(hash))
@@ -152,11 +154,12 @@ public class JeeslFlywayVerifier
 		}
 	}
 	
-	private String toLibName(URI uri)
+	private String toLibName(URI uri) {return toLibName(uri.getSchemeSpecificPart());}
+	private String toLibName(String path)
 	{
-		String ssp = uri.getSchemeSpecificPart();
-		int index = ssp.indexOf(jeeslPath);
-		String name = ssp.substring(index+jeeslPath.length()+1,ssp.length());
+		logger.info(path);
+		int index = path.indexOf(jeeslPath);
+		String name = path.substring(index+jeeslPath.length()+1,path.length());
 		return name;
 	}
 }

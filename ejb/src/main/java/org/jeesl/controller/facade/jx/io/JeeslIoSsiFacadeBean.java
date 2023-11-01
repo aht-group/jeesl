@@ -52,7 +52,7 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 									CRED extends JeeslIoSsiCredential<SYSTEM>,
 									CTX extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 									ATTRIBUTE extends JeeslIoSsiAttribute<CTX,ENTITY>,
-									DATA extends JeeslIoSsiData<CTX,STATUS,JOB>,
+									DATA extends JeeslIoSsiData<CTX,STATUS,?,JOB>,
 									STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
 									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 									CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
@@ -474,8 +474,14 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		if(ObjectUtils.isNotEmpty(query.getContexts()))
 		{
-			Join<DATA,CTX> jCtx = ejb.join(JeeslIoSsiData.Attributes.mapping.toString());
-			predicates.add(jCtx.in(query.getContexts()));
+			Path<CTX> pCtx = ejb.join(JeeslIoSsiData.Attributes.mapping.toString());
+			predicates.add(pCtx.in(query.getContexts()));
+		}
+		
+		if(ObjectUtils.isNotEmpty(query.getStatus()))
+		{
+			Path<STATUS> pStatus = ejb.get(JeeslIoSsiData.Attributes.link.toString());
+			predicates.add(pStatus.in(query.getStatus()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);

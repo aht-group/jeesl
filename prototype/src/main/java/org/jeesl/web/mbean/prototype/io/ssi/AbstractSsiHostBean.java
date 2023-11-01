@@ -35,7 +35,7 @@ public class AbstractSsiHostBean <L extends JeeslLang, D extends JeeslDescriptio
 										CRED extends JeeslIoSsiCredential<SYSTEM>,
 										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-										DATA extends JeeslIoSsiData<MAPPING,LINK,JOB>,
+										DATA extends JeeslIoSsiData<MAPPING,LINK,?,JOB>,
 										LINK extends JeeslIoSsiStatus<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,

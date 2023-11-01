@@ -1,0 +1,16 @@
+alter table IoMavenArtifact add constraint FKmssrhe4rajvgirh909qb3dw03 foreign key (group_id) references IoMavenGroup;
+alter table IoMavenArtifact add constraint FK4n4vjf466pksuls8amiw97uxj foreign key (suitability_id) references IoStatus;
+alter table IoMavenModule add constraint FKc2fr7ii7117d094pbme9tgpjq foreign key (graphic_id) references IoGraphic;
+alter table IoMavenModule add constraint fk_iomavenmodule_jdk foreign key (jdk_id) references IoStatus;
+alter table IoMavenModule add constraint FKfu5qb3lkjpegx6fm9fqul12xq foreign key (parent_id) references IoMavenModule;
+alter table IoMavenModule add constraint FK64s87lwd9cub63k5g2h1mvmpo foreign key (structure_id) references IoStatus;
+alter table IoMavenModule add constraint FKe2kfqxbhw8dfcklxsbiy1dbt9 foreign key (type_id) references IoStatus;
+alter table IoMavenModuleEe add constraint FKbbw7jj98vpgyid1sag1owotpl foreign key (ee_id) references IoStatus;
+alter table IoMavenModuleEe add constraint FK9315pqk1eyopngcx146i0hwqt foreign key (module_id) references IoMavenModule;
+alter table IoMavenUsage add constraint FKqwmtgv8tyr7k63sdf8u2b7xvr foreign key (module_id) references IoMavenModule;
+alter table IoMavenUsage add constraint FKeuae28rup20d54r37gvuawh9e foreign key (version_id) references IoMavenVersion;
+alter table IoMavenUsageJtScope add constraint FKogk8lt4tcbs0305vglhgmpwx4 foreign key (scope_id) references IoStatus;
+alter table IoMavenUsageJtScope add constraint FKentl3c263stglsnhpr7hapqh foreign key (usage_id) references IoMavenUsage;
+alter table IoMavenVersion add constraint FK3kvbv2g8ixxd1nab8ogonj920 foreign key (artifact_id) references IoMavenArtifact;
+alter table IoMavenVersion add constraint FKgaqt1x0x0ns4jfvah17p6ttn7 foreign key (maintainer_id) references IoStatus;
+alter table IoMavenVersion add constraint FK4rrubcdnpqrk14eqn8gi92elj foreign key (outdate_id) references IoStatus;

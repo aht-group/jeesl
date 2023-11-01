@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SsiCache <MAPPING extends JeeslIoSsiContext<?,?>,
-						DATA extends JeeslIoSsiData<MAPPING,LINK,?>,
+						DATA extends JeeslIoSsiData<MAPPING,LINK,?,?>,
 						LINK extends JeeslIoSsiStatus<?,?,LINK,?>,
 						T extends EjbWithId>
 {

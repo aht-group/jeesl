@@ -39,7 +39,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 										CRED extends JeeslIoSsiCredential<SYSTEM>,
 										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-										DATA extends JeeslIoSsiData<MAPPING,LINK,JOB>,
+										DATA extends JeeslIoSsiData<MAPPING,LINK,?,JOB>,
 										LINK extends JeeslIoSsiStatus<L,D,LINK,?>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,

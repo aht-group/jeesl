@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ import org.jeesl.model.ejb.system.job.core.SystemJobStatus;
 @Table(name="IoSsiData",uniqueConstraints={@UniqueConstraint(columnNames={"context_id","code"}),@UniqueConstraint(columnNames={"context_id","localId"})})
 @EjbErNode(name="Data",category="ssi",subset="systemSsi")
 //@TypeDef(name = "json",typeClass = JsonType.class)
-public class IoSsiData implements JeeslIoSsiData<IoSsiContext,IoSsiStatus,SystemJobStatus>
+public class IoSsiData implements JeeslIoSsiData<IoSsiContext,IoSsiStatus,IoSsiError,SystemJobStatus>
 {
 	public static final long serialVersionUID=1;
 
@@ -81,6 +82,12 @@ public class IoSsiData implements JeeslIoSsiData<IoSsiContext,IoSsiStatus,System
 	private String remark;
 	public String getRemark() {return remark;}
 	public void setRemark(String remark) {this.remark = remark;}
+	
+	@ManyToOne
+	@JoinColumn(foreignKey=@ForeignKey(name="fk_IoSsiData_error"))
+	private IoSsiError error;
+	public IoSsiError getError() {return error;}
+	public void setError(IoSsiError error) {this.error = error;}
 
 	private Date jsonCreatedAt;
 	@Override public Date getJsonCreatedAt() {return jsonCreatedAt;}

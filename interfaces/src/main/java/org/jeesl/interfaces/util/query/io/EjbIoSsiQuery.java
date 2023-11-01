@@ -51,8 +51,15 @@ public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 	public EjbIoSsiQuery<CTX,STATUS> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
 	public EjbIoSsiQuery<CTX,STATUS> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 
+	// IO SSI Objects
 	private List<CTX> contexts; public List<CTX> getContexts() {return contexts;}
 	public EjbIoSsiQuery<CTX,STATUS> add(CTX context) {if(Objects.isNull(contexts)) {contexts = new ArrayList<>();} contexts.add(context); return this;}
 	public EjbIoSsiQuery<CTX,STATUS> addContexts(List<CTX> list) {if(Objects.isNull(contexts)) {contexts = new ArrayList<>();} contexts.addAll(list); return this;}
 	public EjbIoSsiQuery<CTX,STATUS> addContexts(Collection<CTX> collection) {if(Objects.isNull(contexts)) {contexts = new ArrayList<>();} contexts.addAll(collection); return this;}
+	
+	
+	private List<STATUS> status; public List<STATUS> getStatus() {return status;}
+	public EjbIoSsiQuery<CTX,STATUS> add(STATUS s) {if(Objects.isNull(status)) {status = new ArrayList<>();} status.add(s); return this;}
+	public EjbIoSsiQuery<CTX,STATUS> addStatus(List<STATUS> list) {if(Objects.isNull(status)) {status = new ArrayList<>();} status.addAll(list); return this;}
+	public EjbIoSsiQuery<CTX,STATUS> addStatus(Collection<STATUS> collection) {if(Objects.isNull(status)) {status = new ArrayList<>();} status.addAll(collection); return this;}
 }

@@ -1,8 +1,8 @@
 package org.jeesl.model.ejb;
 
-public interface IoSsiFlywayProvider extends JeeslFlywayMigrationVerifier //extends IoLocaleFlywayProvider
+public interface IoSsiFlywayProvider extends JeeslFlywayMigrationVerifier
 {	
-	public static final String flywayMigrationPath = "jeesl/system/io/db/migration/io/db";
+	public static final String flywayMigrationPath = "jeesl/system/io/db/migration/io/ssi";
 	public static String baselineTables = "jeesl/system/io/db/migration/io/ssi/0-Baseline Tables.sql";
 	public static String baselineConstraints = "jeesl/system/io/db/migration/io/ssi/0-Baseline Constraints.sql";
 	

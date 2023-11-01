@@ -13,3 +13,9 @@ alter table IoSsiSystemJtDescription add constraint FKmqw7gikdwf2dm3qt7spvnhhq8 
 alter table IoSsiSystemJtDescription add constraint FK2jlhuld217nj3e1kt2dth9lrb foreign key (system_id) references IoSsiSystem;
 alter table IoSsiSystemJtLang add constraint FKqtajwy56ee3kienr1vt3jetps foreign key (lang_id) references IoLang;
 alter table IoSsiSystemJtLang add constraint FKjatyuga72v2xt8g1jo8a1mleh foreign key (system_id) references IoSsiSystem;
+alter table IoSsiContext add constraint FK68v9nclqlxm75ix2scdd9q0dp foreign key (classA_id) references IoLabelEntity;
+alter table IoSsiContext add constraint FKqam4wace42m4v7jjph28udal4 foreign key (classB_id) references IoLabelEntity;
+alter table IoSsiContext add constraint FKo3hww31sflmjb5of0r352da7o foreign key (classC_id) references IoLabelEntity;
+alter table IoSsiContext add constraint FK7sm3p3ni6coc32s1agnujvogr foreign key (entity_id) references IoLabelEntity;
+alter table IoSsiContext add constraint FKscx8uwvbwvyqty6ua0g88ni3q foreign key (json_id) references IoLabelEntity;
+alter table IoSsiContext add constraint FK1a966jxndggr3lm4cajq4gssv foreign key (system_id) references IoSsiSystem;

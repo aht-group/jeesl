@@ -15,16 +15,19 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslIoSsiData <MAPPING extends JeeslIoSsiContext<?,?>,
+public interface JeeslIoSsiData <CTX extends JeeslIoSsiContext<?,?>,
 									LINK extends JeeslStatus<?,?,LINK>,
+									ERROR extends JeeslIoSsiError<?,?,CTX>,
 									JOB extends JeeslJobStatus<?,?,JOB,?>>
 		extends EjbWithId,EjbSaveable,EjbRemoveable,EjbWithCode,EjbWithParentAttributeResolver,
 						EjbWithMigrationJob1<JOB>
 {	
 	public enum Attributes{mapping,code,link,targetId,localId,refA,refB,refC,job1}
 	
-	public MAPPING getMapping();
-	public void setMapping(MAPPING mapping);
+//	void x();
+	
+	public CTX getMapping();
+	public void setMapping(CTX mapping);
 	
 	public LINK getLink();
 	void setLink(LINK link);
@@ -58,4 +61,5 @@ public interface JeeslIoSsiData <MAPPING extends JeeslIoSsiContext<?,?>,
 	
 	Date getEjbUpdatedAt();
 	void setEjbUpdatedAt(Date ejbUpdatedAt);
+	
 }

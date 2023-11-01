@@ -36,9 +36,8 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.JsonUtil;
 
-public class JeeslSsiDataController <
-										CTX extends JeeslIoSsiContext<?,?>,
-										DATA extends JeeslIoSsiData<CTX,STATUS,JOB>,
+public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
+										DATA extends JeeslIoSsiData<CTX,STATUS,?,JOB>,
 										STATUS extends JeeslIoSsiStatus<?,?,STATUS,?>,
 										JOB extends JeeslJobStatus<?,?,JOB,?>,
 										JSON extends Object>
@@ -113,10 +112,8 @@ public class JeeslSsiDataController <
 	@Override
 	public void toggled(SbToggleSelection handler, Class<?> c) throws JeeslLockingException, JeeslConstraintViolationException
 	{
-		
+		callback.ssiDataFilterChanged();
 	}
-	
-	
 	
 	@Override
 	public List<DATA> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,FilterMeta> filters)
@@ -127,6 +124,7 @@ public class JeeslSsiDataController <
 		query.setMaxResults(pageSize);
 		query.id2(refB);
 		if(Objects.nonNull(context)) {query.add(context);}
+		if(sbhStatus.hasSelected()) {query.addStatus(sbhStatus.getSelected());}
 		
 		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 		super.setRowCount(fSsi.cSsiData(query).intValue());
@@ -142,6 +140,7 @@ public class JeeslSsiDataController <
 			}
 		}
 		
+		callback.ssiDataLoaded();
 		return datas;
 	}
 

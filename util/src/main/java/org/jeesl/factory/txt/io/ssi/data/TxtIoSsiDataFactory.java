@@ -4,12 +4,12 @@ import java.util.Objects;
 
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 
-public class TxtIoSsiDataFactory <DATA extends JeeslIoSsiData<?,?,?>>
+public class TxtIoSsiDataFactory <DATA extends JeeslIoSsiData<?,?,?,?>>
 {
 	@SuppressWarnings("unused")
 	private final String localeCode;
 	
-	public static <DATA extends JeeslIoSsiData<?,?,?>> TxtIoSsiDataFactory<DATA> instance() {return new TxtIoSsiDataFactory<>(null);}
+	public static <DATA extends JeeslIoSsiData<?,?,?,?>> TxtIoSsiDataFactory<DATA> instance() {return new TxtIoSsiDataFactory<>(null);}
 	public TxtIoSsiDataFactory(String localeCode)
 	{
         this.localeCode=localeCode;

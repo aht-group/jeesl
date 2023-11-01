@@ -22,7 +22,7 @@ public class IoSsiDataFactoryBuilder<L extends JeeslLang,D extends JeeslDescript
 								SYSTEM extends JeeslIoSsiSystem<L,D>,
 								MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 								ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-								DATA extends JeeslIoSsiData<MAPPING,STATUS,?>,
+								DATA extends JeeslIoSsiData<MAPPING,STATUS,?,?>,
 								STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
 								ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 								CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
