@@ -140,6 +140,14 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		userIsDeveloper = security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffix.developer) || security.allowSuffixCode(AbstractJeeslLocaleWebController.SecurityActionSuffixDeprecated.Developer);
 	}
 	
+	private void reset(boolean rCategory, boolean rView, boolean rAction, boolean rArea)
+	{
+		if(rCategory) {category=null;}
+		if(rView) {view=null;}
+		if(rAction) {action=null;}
+		if(rArea) {area=null;}
+	}
+	
 	private void reloadCategories()
 	{
 		categories = fSecurity.allOrderedPosition(fbSecurity.getClassCategory(),JeeslSecurityCategory.Type.view);
@@ -168,11 +176,14 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		this.reloadCategories();
 		this.reloadViews();
 	}
-	
-	protected boolean categoryRemoveable() throws JeeslNotFoundException
+	public void deleteCategory() throws JeeslConstraintViolationException
 	{
-		views = fSecurity.allForParent(fbSecurity.getClassView(),category);
-		return views.isEmpty();
+		if(views.isEmpty())
+		{
+			fSecurity.rm(category);
+			this.reset(true, true, true, true);
+			this.reloadCategories();
+		}
 	}
 	
 	private void reloadViews() throws JeeslNotFoundException
@@ -187,13 +198,6 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		actions.addAll(fSecurity.allForParent(fbSecurity.getClassAction(), view));
 		Collections.sort(actions, comparatorAction);
 	}
-	
-	private void reset(boolean rView, boolean rAction, boolean rArea)
-	{
-		if(rView) {view=null;}
-		if(rAction) {action=null;}
-		if(rArea) {area=null;}
-	}
 
 	//VIEW
 	public void addView() throws JeeslConstraintViolationException
@@ -207,7 +211,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	
 	public void selectView()
 	{
-		this.reset(false,true,true);
+		this.reset(false,false,true,true);
 		logger.info(AbstractLogMessage.selectEntity(view));
 		view = fSecurity.load(fbSecurity.getClassView(), view);
 		view = efLang.persistMissingLangs(fSecurity,lp.getLocales(),view);
@@ -251,7 +255,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		V clone = efView.clone(view);
 		clone.setName(efLang.clone(view.getName()));
 		clone.setDescription(efDescription.clone(view.getDescription()));
-		reset(true,true,true);
+		reset(false,true,true,true);
 		view = clone;
 	}
 	
@@ -280,7 +284,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		}
 		
 		fSecurity.rm(view);
-		reset(true,true,true);
+		reset(false,true,true,true);
 		reloadViews();
 		propagateChanges();
 		bMessage.growlSuccessRemoved();
@@ -388,7 +392,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	{
 		logger.info(AbstractLogMessage.deleteEntity(area));
 		fSecurity.rm(area);
-		reset(false,false,true);
+		reset(false,false,false,true);
 		reloadAreas();
 		propagateChanges();
 		bMessage.growlSuccessRemoved();

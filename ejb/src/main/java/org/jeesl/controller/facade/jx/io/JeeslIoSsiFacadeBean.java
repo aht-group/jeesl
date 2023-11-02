@@ -65,11 +65,11 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoSsiFacadeBean.class);
 
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsiCore;
-	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB> fbSsi;
+	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,?,ENTITY,CLEANING,JOB> fbSsi;
 	
 	public JeeslIoSsiFacadeBean(EntityManager em,
 								IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsiCore,
-								IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB> fbSsi)
+								IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,?,ENTITY,CLEANING,JOB> fbSsi)
 	{
 		super(em);
 		this.fbSsiCore = fbSsiCore;

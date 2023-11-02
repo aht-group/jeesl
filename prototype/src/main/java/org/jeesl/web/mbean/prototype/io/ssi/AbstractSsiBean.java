@@ -52,7 +52,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiBean.class);
 	
-	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi;
+	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsi;
 	
 	protected JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi;
 	
@@ -68,7 +68,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	private final Class<JSON> cJson;
 	protected Long refA;
 	
-	public AbstractSsiBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi, final Class<JSON> cJson)
+	public AbstractSsiBean(final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsi, final Class<JSON> cJson)
 	{
 		this.fbSsi=fbSsi;
 		this.cJson=cJson;

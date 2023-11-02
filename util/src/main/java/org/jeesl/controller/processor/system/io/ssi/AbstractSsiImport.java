@@ -44,7 +44,7 @@ public abstract class AbstractSsiImport <SYSTEM extends JeeslIoSsiSystem<?,?>,
 
 	protected int indexSheet;
 	
-	public AbstractSsiImport(IoSsiDataFactoryBuilder<?,?,?,?,?,?,LINK,?,?,JOB> fBSsi, String localeCode)
+	public AbstractSsiImport(IoSsiDataFactoryBuilder<?,?,?,?,?,?,LINK,?,?,?,JOB> fBSsi, String localeCode)
 	{
 		tfMapping = new TxtIoSsiMappingFactory<>(localeCode);
 		

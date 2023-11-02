@@ -26,7 +26,7 @@ public class SsiCache <MAPPING extends JeeslIoSsiContext<?,?>,
 	
 	private final Map<String,T> map;
 	
-	public SsiCache(IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,?,?,?> fbSsi,
+	public SsiCache(IoSsiDataFactoryBuilder<?,?,?,MAPPING,?,?,?,?,?,?,?> fbSsi,
 						JeeslIoSsiFacade<?,?,MAPPING,?,DATA,LINK,?,?,?,?> fSsi,
 						Class<T> cT,
 						MAPPING mapping

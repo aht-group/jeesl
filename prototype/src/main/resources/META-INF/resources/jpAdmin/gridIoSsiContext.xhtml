@@ -15,8 +15,9 @@
 		<j:slot width="12">
 			<h:form>
 				<p:dataTable styleClass="jeesl-datatable"
-						var="m" value="#{cc.attrs.ctrl.mappings}"
-						selection="#{cc.attrs.ctrl.context}" selectionMode="single" rowKey="#{m.id}">
+						var="ctx" value="#{cc.attrs.ctrl.contexts}"
+						selection="#{cc.attrs.ctrl.context}" selectionMode="single" rowKey="#{ctx.id}"
+						rows="5" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoSsiContext" code="listOf">
 							<j:security actionSuffix="create" handler="#{cc.attrs.security}">
@@ -50,20 +51,20 @@
 							</p:columns>
                    		</p:row>
       			     </p:columnGroup>      			     
-					<p:column styleClass="jeeslRight">
-						<h:outputText value="#{m.id}"/>
-						<h:outputText value="#{cc.attrs.ctrl.thContext.mapA[m].count}"><f:convertNumber type="number"/></h:outputText>
+					<p:column styleClass="jeesl-right">
+						<h:outputText value="#{ctx.id}"/>
+						<h:outputText value="#{cc.attrs.ctrl.thContext.mapA[ctx].count}"><f:convertNumber type="number"/></h:outputText>
 					</p:column>
-					<p:column><h:outputText value="#{m.system.code}"/></p:column>
-					<p:column><h:outputText value="#{m.json.name[localeCode].lang}"/></p:column>
-					<p:column><h:outputText value="#{m.entity.name[localeCode].lang}"/></p:column>
+					<p:column><h:outputText value="#{ctx.system.code}"/></p:column>
+					<p:column><h:outputText value="#{ctx.json.name[localeCode].lang}"/></p:column>
+					<p:column><h:outputText value="#{ctx.entity.name[localeCode].lang}"/></p:column>
 					
-					<p:column><h:outputText value="#{m.classA.name[localeCode].lang}"/></p:column>
-					<p:column><h:outputText value="#{m.classB.name[localeCode].lang}"/></p:column>
-					<p:column><h:outputText value="#{m.classC.name[localeCode].lang}"/></p:column>
+					<p:column><h:outputText value="#{ctx.classA.name[localeCode].lang}"/></p:column>
+					<p:column><h:outputText value="#{ctx.classB.name[localeCode].lang}"/></p:column>
+					<p:column><h:outputText value="#{ctx.classC.name[localeCode].lang}"/></p:column>
 					
-				    <p:columns var="l" value="#{cc.attrs.ctrl.links}" columnIndexVar="colIndex" styleClass="jeeslCenter">
-						<h:outputText value="#{cc.attrs.ctrl.thStatus.map[m][l].count1}"/>
+				    <p:columns var="l" value="#{cc.attrs.ctrl.links}" columnIndexVar="colIndex" styleClass="jeesl-right">
+						<h:outputText value="#{cc.attrs.ctrl.thStatus.map[ctx][l].count1}"/>
 					</p:columns>
 				</p:dataTable>
 			</h:form>
@@ -76,7 +77,7 @@
 					<f:facet name="header"><j:pHeader entity="IoSsiContext"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelMapping()}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveMapping()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveContext()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteMapping()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.ctrl.context.id gt 0}"/>
 						<j:svg type="jeeslReload" listener="#{cc.attrs.ctrl.countNumbers()}" update=":#{cc.id}:grid" ttEntity="IoSsiContext" ttCode="ttReload"/>
 					</f:facet>
@@ -191,6 +192,48 @@
 							</p:column>
 						</p:selectOneMenu>
 					</p:panelGrid>
+				</p:panel>
+			</h:form>
+		</j:slot>
+		<j:slot id="sErrors" width="4" rendered="#{not empty cc.attrs.ctrl.context}">
+			<h:form id="fErrors" >
+				<p:dataTable styleClass="jeesl-datatable"
+						var="e" value="#{cc.attrs.ctrl.errors}"
+						selection="#{cc.attrs.ctrl.error}" selectionMode="single" rowKey="#{e.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoSsiError" code="listOf">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addError()}" update=":#{cc.id}:sErrors"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectError()}" update=":#{cc.id}:sErrors"/>
+					   			     
+					<p:column styleClass="jeesl-right">
+						<f:facet name="header"><jtp:label entity="IoSsiError" code="id"/></f:facet>
+						<h:outputText value="#{e.id}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoSsiError" code="code"/></f:facet>
+						<h:outputText value="#{e.code}"/>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form id="fError" rendered="#{not empty cc.attrs.ctrl.error}">
+				<p:panel id="pView" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoSsiError"/></f:facet>
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.ctrl.cancelError()}" update=":#{cc.id}:sErrors"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.ctrl.saveError()}" update=":#{cc.id}:sErrors"/>
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.ctrl.deleteError()}" update=":#{cc.id}:sErrors" rendered="#{cc.attrs.ctrl.error.id gt 0}"/>
+					</f:facet>
+					<j:inputGrid>
+						
+						<jtp:label entity="IoSsiError" code="id"/>
+						<h:outputText value="#{cc.attrs.ctrl.error.id}"/>
+						
+						<jtp:label entity="IoSsiError" code="code"/>
+						<p:inputText value="#{cc.attrs.ctrl.error.code}"/>
+						
+					</j:inputGrid>
 				</p:panel>
 			</h:form>
 		</j:slot>

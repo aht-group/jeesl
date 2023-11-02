@@ -22,7 +22,7 @@ public class SsiCodeCache <MAPPING extends JeeslIoSsiContext<?,ENTITY>,
 	
 	private final Map<String,T> map; public Map<String,T> getMap() {return map;}
 
-	public SsiCodeCache(IoSsiDataFactoryBuilder<?,?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?> fbSsi,
+	public SsiCodeCache(IoSsiDataFactoryBuilder<?,?,?,MAPPING,ATTRIBUTE,?,?,?,ENTITY,?,?> fbSsi,
 						JeeslIoSsiFacade<?,?,MAPPING,ATTRIBUTE,?,?,ENTITY,?,?,?> fSsi,
 						Class<T> cT)
 	{

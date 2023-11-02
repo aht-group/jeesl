@@ -14,29 +14,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AbstractSsiCacheBean <L extends JeeslLang,D extends JeeslDescription,
-										LINK extends JeeslIoSsiStatus<L,D,LINK,?>,
+										STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>>
 						implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiCacheBean.class);
 	
-	private final IoSsiDataFactoryBuilder<L,D,?,?,?,?,LINK,?,CLEANING,?> fbSsi;
+	private final IoSsiDataFactoryBuilder<L,D,?,?,?,?,STATUS,?,?,CLEANING,?> fbSsi;
 	
-	public AbstractSsiCacheBean(final IoSsiDataFactoryBuilder<L,D,?,?,?,?,LINK,?,CLEANING,?> fbSsi)
+	public AbstractSsiCacheBean(final IoSsiDataFactoryBuilder<L,D,?,?,?,?,STATUS,?,?,CLEANING,?> fbSsi)
 	{
 		this.fbSsi=fbSsi;
 
 	}
 
-	public void postConstructSsiCache(JeeslIoSsiFacade<?,?,?,?,?,LINK,?,CLEANING,?,?> fSsi)
+	public void postConstructSsiCache(JeeslIoSsiFacade<?,?,?,?,?,STATUS,?,CLEANING,?,?> fSsi)
 	{
 		reloadLinks(fSsi);
 		reloadCleanings(fSsi);
 	}
 
-	private List<LINK> links;
-	public List<LINK> getLinks() {return links;}
+	private List<STATUS> links;
+	public List<STATUS> getLinks() {return links;}
 	public void reloadLinks(JeeslFacade facade) {links = facade.allOrderedPositionVisible(fbSsi.getClassStatus());}
 	
 	private List<CLEANING> cleanings;

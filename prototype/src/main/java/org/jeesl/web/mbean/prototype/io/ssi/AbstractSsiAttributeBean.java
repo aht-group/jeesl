@@ -51,7 +51,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiAttributeBean.class);
 
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,?> fbSsiCore;
-	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsiData;
+	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsiData;
 	private final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,ENTITY,?,?,?,?,?,?> fbRevision;
 
 	private JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi;
@@ -71,7 +71,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 
 
 	public AbstractSsiAttributeBean(final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,?> fbSsiCore,
-									final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsiData,
+									final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsiData,
 									final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,ENTITY,?,?,?,?,?,?> fbRevision)
 	{
 		this.fbSsiCore=fbSsiCore;

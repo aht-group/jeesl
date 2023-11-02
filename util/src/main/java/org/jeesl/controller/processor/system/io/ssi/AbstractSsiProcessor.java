@@ -18,9 +18,9 @@ import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiCredential;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
-import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -46,7 +46,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiProcessor.class);
 	
-	protected final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi;
+	protected final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsi;
 	protected final JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi;
 	
 	protected final EjbIoSsiDataFactory<MAPPING,DATA,LINK> efData;
@@ -57,7 +57,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	protected MAPPING mapping; @Override public MAPPING getMapping() {return mapping;}
 	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
 
-	public AbstractSsiProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB> fbSsi,
+	public AbstractSsiProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsi,
 									JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi)
 	{
 		this.fSsi=fSsi;
@@ -187,7 +187,15 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 			catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 		}
 	}
-	protected abstract DATA evaluate(DATA data, JSON json);
+	
+	protected DATA evaluate(DATA data, JSON json)
+	{
+		logger.warn("This method needs to be implemented in child class"); return data;
+	}
+	protected void importData(DATA data, JSON json) throws IOException, JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
+	{
+		logger.warn("This method needs to be implemented in child class");
+	}
 	
 	@Override public void linkData(List<DATA> datas)
 	{
@@ -201,5 +209,4 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 			}
 		}
 	}
-	protected abstract void importData(DATA data, JSON json) throws IOException,JeeslNotFoundException,JeeslConstraintViolationException,JeeslLockingException;
 }

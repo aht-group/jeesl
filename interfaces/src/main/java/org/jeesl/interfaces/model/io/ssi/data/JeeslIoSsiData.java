@@ -16,7 +16,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoSsiData <CTX extends JeeslIoSsiContext<?,?>,
-									LINK extends JeeslStatus<?,?,LINK>,
+									STATUS extends JeeslStatus<?,?,STATUS>,
 									ERROR extends JeeslIoSsiError<?,?,CTX>,
 									JOB extends JeeslJobStatus<?,?,JOB,?>>
 		extends EjbWithId,EjbSaveable,EjbRemoveable,EjbWithCode,EjbWithParentAttributeResolver,
@@ -29,8 +29,8 @@ public interface JeeslIoSsiData <CTX extends JeeslIoSsiContext<?,?>,
 	public CTX getMapping();
 	public void setMapping(CTX mapping);
 	
-	public LINK getLink();
-	void setLink(LINK link);
+	public STATUS getLink();
+	void setLink(STATUS link);
 	
 	String getJson();
 	void setJson(String json);

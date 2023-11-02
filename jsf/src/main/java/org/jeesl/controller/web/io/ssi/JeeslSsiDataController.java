@@ -70,7 +70,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	private Long refB; public <B extends EjbWithId> void setRefB(B b) {this.refB = b.getId();}
 
 	public JeeslSsiDataController(final JeeslIoSsiDataCallback callback,
-						IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,JOB> fbSsiData)
+						IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,?,JOB> fbSsiData)
 	{
 		this.callback=callback;
 		
@@ -92,12 +92,12 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	public void reloadStatistics()
 	{
 		thStatus.clear();
-		JsonTuples1<STATUS> tStatus = fSsi.tpcIoSsiStatusForContext(context,EjbIdFactory.toIdEjb(refA),null);
+		JsonTuples1<STATUS> tStatus = fSsi.tpcIoSsiStatusForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB));
 		JsonUtil.info(tStatus);
 		thStatus.init(tStatus);
 		thStatus.initListA(fSsi);
 		
-		JsonTuples2<STATUS,JOB> tJob = fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),null);
+		JsonTuples2<STATUS,JOB> tJob = fSsi.tpcIoSsiStatusJobForContext(context,EjbIdFactory.toIdEjb(refA),EjbIdFactory.toIdEjb(refB));
 		JsonUtil.info(tJob);
 		thJob.init(tJob);
 		thJob.initListB(fSsi);
@@ -147,12 +147,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	@Override public DATA getRowData(String rowKey)
 	{
 		Long id = new Long(rowKey);
-//		for (MeisProgram h : data)
-//		{
-//			if(h.getId()==id){return h;}
-//		}
-//		try {return fProgram.find(MeisProgram.class,id);}
-//		catch (JeeslNotFoundException e) {logger.error(e.getMessage());}
+
 		return null;
 	}
 }
