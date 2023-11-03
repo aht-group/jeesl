@@ -18,8 +18,6 @@ public class XmlOptionsFactory <L extends JeeslLang, D extends JeeslDescription,
 	
 	private XmlOptionFactory<L,D,OPTION> xfOption;
 	
-	
-	
 	public XmlOptionsFactory(String localeCode, Options q)
 	{
 		this.q=q;

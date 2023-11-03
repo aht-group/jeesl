@@ -53,13 +53,13 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 	final static Logger logger = LoggerFactory.getLogger(XmlSurveyFactory.class);
 	
 	private JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey;
-	private Class<SURVEY> cSurvey;
 	
 	private final String localeCode;
 	private final Survey q;
 	
 	private XmlStatusFactory<L,D,SS> xfStatus;
 	private XmlDataFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> xfData;
+	private XmlTemplateFactory<L,D,SURVEY,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> xfTemplate;
 	
 	public XmlSurveyFactory(String localeCode, Survey q)
 	{
@@ -67,14 +67,16 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 		this.q=q;
 		if(q.isSetData()){xfData = new XmlDataFactory<>(localeCode,q.getData().get(0));}
 		if(q.isSetStatus()){xfStatus = new XmlStatusFactory<>(q.getStatus());}
+		if(q.isSetTemplate()) {xfTemplate = new XmlTemplateFactory<>(localeCode,q.getTemplate());}
 	}
 	
 	public void lazyLoad(JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
-				JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,Class<SURVEY> cSurvey,Class<SECTION> cSection
+				JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
+				Class<SURVEY> cSurvey,
+				Class<SECTION> cSection
 				)
 	{
 		this.fSurvey=fSurvey;
-		this.cSurvey=cSurvey;
 		
 		if(q.isSetData()){xfData.lazyLoad(fSurvey,fTemplate);}
 	}
@@ -91,12 +93,7 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 		
 		if(q.isSetStatus()) {xml.setStatus(xfStatus.build(ejb.getStatus()));}
 		
-		if(q.isSetTemplate())
-		{
-			XmlTemplateFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> f = new XmlTemplateFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,q.getTemplate());
-//			if(fSurvey!=null){f.lazyLoad(fSurvey,cSection);}
-			xml.setTemplate(f.build(ejb.getTemplate()));
-		}
+		if(q.isSetTemplate()) {xml.setTemplate(xfTemplate.build(ejb.getTemplate()));}
 		
 		if(q.isSetData())
 		{

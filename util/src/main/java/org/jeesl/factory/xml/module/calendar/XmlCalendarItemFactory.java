@@ -30,14 +30,14 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 	final static Logger logger = LoggerFactory.getLogger(XmlCalendarItemFactory.class);
 	
 	private final Item q;
-	private final TimeZoneProcessor tzp;
+//	private final TimeZoneProcessor tzp;
 	private XmlTypeFactory<L,D,IT> xfType;
 	
 	public XmlCalendarItemFactory(String localeCode, Item q, TimeZoneProcessor tzp)
 	{
 		this.q=q;
-		this.tzp=tzp;
-		if(q.isSetType()){xfType = new XmlTypeFactory<>(localeCode,q.getType());}
+//		this.tzp=tzp;
+		if(q.isSetType()) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,

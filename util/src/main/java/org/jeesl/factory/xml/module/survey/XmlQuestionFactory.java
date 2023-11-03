@@ -9,7 +9,6 @@ import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOptionSet;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionElement;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestionUnit;
-import org.jeesl.interfaces.model.module.survey.question.JeeslSurveySection;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.xml.jeesl.QuerySurvey;
@@ -19,10 +18,9 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.factory.xml.status.XmlUnitFactory;
 
-public class XmlQuestionFactory<L extends JeeslLang,D extends JeeslDescription,
+public class XmlQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
 								SCHEME extends JeeslSurveyScheme<L,D,?,SCORE>,
-								SECTION extends JeeslSurveySection<L,D,?,SECTION,QUESTION>,
-								QUESTION extends JeeslSurveyQuestion<L,D,SECTION,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
+								QUESTION extends JeeslSurveyQuestion<L,D,?,?,?,QE,SCORE,UNIT,OPTIONS,OPTION,?>,
 								QE extends JeeslSurveyQuestionElement<L,D,QE,?>,
 								SCORE extends JeeslSurveyScore<L,D,SCHEME,QUESTION>,
 								UNIT extends JeeslSurveyQuestionUnit<L,D,UNIT,?>,
@@ -31,7 +29,7 @@ public class XmlQuestionFactory<L extends JeeslLang,D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlQuestionFactory.class);
 		
-	private JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,SECTION,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey;
+	private JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,?,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey;
 	
 	private String localeCode;
 	private Question q;
@@ -48,7 +46,7 @@ public class XmlQuestionFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetOptions()) {xfOptions = new XmlOptionsFactory<L,D,QUESTION,OPTION>(localeCode,q.getOptions());}
 	}
 	
-	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,SECTION,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey)
+	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,?,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey)
 	{
 		this.fSurvey=fSurvey;
 	}
