@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
+import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.system.io.log.DebugJeeslLogger;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
@@ -20,6 +21,7 @@ import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.cache.io.ssi.JeeslIoSsiContextCache;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
@@ -28,6 +30,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,9 +88,11 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		jogger = DebugJeeslLogger.instance(this.getClass());
 	}
 
-	public void postConstructSsiMapping(JeeslIoSsiFacade<SYSTEM,?,CONTEXT,?,?,STATUS,ENTITY,?,?,?> fSsi,
+	public void postConstructSsiMapping(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
+										JeeslIoSsiFacade<SYSTEM,?,CONTEXT,?,?,STATUS,ENTITY,?,?,?> fSsi,
 										JeeslIoSsiContextCache<CONTEXT,STATUS> cache)
-	{	
+	{
+		super.postConstructLocaleWebController(lp, bMessage);
 		this.fSsi=fSsi;
 		this.cache=cache;
 		
@@ -129,7 +134,7 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	public void selectContext()
 	{
 		logger.info(AbstractLogMessage.selectEntity(context));
-		
+		this.reloadErrors();
 	}
 	
 	public void countNumbers()
@@ -167,15 +172,33 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		this.reset(true,false);
 		errors.addAll(fSsi.allForParent(fbSsi.getClassError(),context));
 	}
+	public void reorderSpots() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSsi,errors); this.reloadErrors();}
 	public void addError()
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSsi.getClassError()));
 		error = fbSsi.efError().build(context, errors);
+		error.setName(efLang.buildEmpty(lp.getLocales()));
+		error.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
-	public void saveError() throws JeeslConstraintViolationException, JeeslLockingException
+	public void selectError()
+	{
+		logger.info(AbstractLogMessage.selectEntity(error));
+	}
+	public void saveError() throws JeeslLockingException
 	{
 		logger.info(AbstractLogMessage.saveEntity(error));
-		error = fSsi.save(error);
+		try
+		{
+			error = fSsi.save(error);
+		}
+		catch (JeeslConstraintViolationException | JeeslLockingException e) {bMessage.errorConstraintViolationDuplicateObject();}
 		this.reloadErrors();
+	}
+	public void deleteError() throws JeeslConstraintViolationException
+	{
+		logger.info(AbstractLogMessage.deleteEntity(error));
+		fSsi.rm(error);
+		this.reset(false, true);
+		this.reloadErrors();	
 	}
 }

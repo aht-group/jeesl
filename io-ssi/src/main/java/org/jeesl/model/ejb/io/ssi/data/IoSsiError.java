@@ -21,7 +21,6 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
-import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
@@ -39,7 +38,7 @@ public class IoSsiError implements JeeslIoSsiError<IoLang,IoDescription,IoSsiCon
 	@Override public long getId() {return id;}
 	@Override public void setId(long id) {this.id = id;}
 	
-	@Override public String resolveParentAttribute() {return JeeslJobMaintenanceInfo.Attributes.maintenance.toString();}
+	@Override public String resolveParentAttribute() {return JeeslIoSsiError.Attributes.context.toString();}
 	@NotNull @ManyToOne
 	private IoSsiContext context;
 	@Override public IoSsiContext getContext() {return context;}
