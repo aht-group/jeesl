@@ -443,8 +443,6 @@ public class ReportHandler
 		org.jdom2.Element infoElement   = reportElement.getChild("info", Namespace.getNamespace("http://ahtutils.aht-group.com/report"));
 		if (infoElement!=null)
 		{
-			
-			
 			logger.warn("Chart module deactivated");
 //			Info info = JDomUtil.toJaxb(infoElement, Info.class);
 //			OfxChartRenderer ofxRenderer = new OfxChartRenderer();
@@ -457,74 +455,76 @@ public class ReportHandler
 //				mapReportParameter.put(media.getCode(), chartImage);
 //			}		}
 		}
+
 		//Add the data document
 		doc = JDomUtil.unsetNameSpace(doc);
 		Document docReport = JDomUtil.toW3CDocument(doc);
 		mapReportParameter.put(JRXPathQueryExecuterFactory.PARAMETER_XML_DATA_DOCUMENT, docReport);
 		ArrayList<JRTemplate> templateList = new ArrayList<JRTemplate>();
+		
 		//Add all resources configured in resources.xml
 		for (Resource res : resources.getResource())
 		{
 			logger.info("Adding resource of type " +res.getType() +" with id='" +res.getName() +"' loaded from " +res.getValue().getValue());
 			if (res.getType().equals("image"))
-				
-				{
-					BufferedImage image = null;
-					try {
-						String imgLocation = "/resources/" +res.getType() +"/" +res.getValue().getValue();
-						logger.info("Including image resource: " +imgLocation);
-						image = ImageIO.read(mrl.searchIs(imgLocation));} 
-					catch (FileNotFoundException e) {logger.error(e.getMessage());}
-					catch (IOException e) {logger.error(e.getMessage());}
-					mapReportParameter.put(res.getName(), image);
-				}
-				else if (res.getType().equals("vector"))
+			{
+				BufferedImage image = null;
+				try
 				{
 					String imgLocation = "/resources/" +res.getType() +"/" +res.getValue().getValue();
-					
-					InputStream vector = null;
-				try {
-					vector = mrl.searchIs(imgLocation);
-				} catch (FileNotFoundException ex) {
+					logger.info("Including image resource: " +imgLocation);
+					image = ImageIO.read(mrl.searchIs(imgLocation));
+				} 
+				catch (FileNotFoundException e) {logger.error(e.getMessage());}
+				catch (IOException e) {logger.error(e.getMessage());}
+				mapReportParameter.put(res.getName(), image);
+			}
+			else if (res.getType().equals("vector"))
+			{
+				String imgLocation = "/resources/" +res.getType() +"/" +res.getValue().getValue();
+				
+				InputStream vector = null;
+				try {vector = mrl.searchIs(imgLocation);}
+				catch (FileNotFoundException ex)
+				{
 					logger.error("Could not load SVG from classpath " +ex.getMessage());
 				}
-					
-					
-					logger.info("Including vector resource as File object: " +imgLocation);
-					//vector = new File(getClass().getClassLoader().getResource(imgLocation).getFile());
-					mapReportParameter.put(res.getName(), vector);
-				}
+				
+				logger.info("Including vector resource as File object: " +imgLocation);
+				//vector = new File(getClass().getClassLoader().getResource(imgLocation).getFile());
+				mapReportParameter.put(res.getName(), vector);
+			}
 				// The next case is handling SVG images. They need to be encoded as Base64 String.
-				else if (res.getType().equals("svg"))
+			else if (res.getType().equals("svg"))
+			{
+				byte[] byteArrayOfVectorImage = null;
+				try 
 				{
-					byte[] byteArrayOfVectorImage = null;
-					try 
-					{
-						String imgLocation = "resources/" +res.getType() +"/" +res.getValue().getValue();
-						Path pathToImage   = Paths.get(imgLocation);
-						System.out.println("Including vector Image resource: " +imgLocation + " as base64 encoded String. Available as ${"+ res.getName() +"}");
-						
-						// byteArrayOfVectorImage = Files.readAllBytes(pathToImage);
-						byteArrayOfVectorImage = IOUtils.toByteArray(mrl.searchIs(imgLocation));
-					} 
-					catch (FileNotFoundException e ) {logger.error(e.getMessage());}
-					catch (IOException e) {logger.error(e.getMessage());}
-					mapReportParameter.put(res.getName(), Base64.getEncoder().encodeToString(byteArrayOfVectorImage));
-				}
-				else if (res.getType().equals("template"))           
-				{
-                                    
-					try {
-						String templateLocation = "/resources/templates" +"/" +res.getValue().getValue();
-						logger.info("Including style template resource: " +templateLocation);
-						JRTemplate style = (JRTemplate) JRXmlTemplateLoader.load(mrl.searchIs(templateLocation));
-                                                mapReportParameter.put(res.getName() +"-style", style);
-                                                templateList.add(style);
-                                        }
-					catch (FileNotFoundException e) {logger.error(e.getMessage());}
-					catch (IOException e) {logger.error(e.getMessage());}
+					String imgLocation = "resources/" +res.getType() +"/" +res.getValue().getValue();
+					Path pathToImage   = Paths.get(imgLocation);
+					System.out.println("Including vector Image resource: " +imgLocation + " as base64 encoded String. Available as ${"+ res.getName() +"}");
 					
-				}
+					// byteArrayOfVectorImage = Files.readAllBytes(pathToImage);
+					byteArrayOfVectorImage = IOUtils.toByteArray(mrl.searchIs(imgLocation));
+				} 
+				catch (FileNotFoundException e ) {logger.error(e.getMessage());}
+				catch (IOException e) {logger.error(e.getMessage());}
+				mapReportParameter.put(res.getName(), Base64.getEncoder().encodeToString(byteArrayOfVectorImage));
+			}
+			else if (res.getType().equals("template"))           
+			{
+                                
+				try {
+					String templateLocation = "/resources/templates" +"/" +res.getValue().getValue();
+					logger.info("Including style template resource: " +templateLocation);
+					JRTemplate style = (JRTemplate) JRXmlTemplateLoader.load(mrl.searchIs(templateLocation));
+                                            mapReportParameter.put(res.getName() +"-style", style);
+                                            templateList.add(style);
+                                    }
+				catch (FileNotFoundException e) {logger.error(e.getMessage());}
+				catch (IOException e) {logger.error(e.getMessage());}
+				
+			}
 		}
                 mapReportParameter.put("REPORT_TEMPLATES", templateList);
 		for (Object key : mapReportParameter.keySet())
@@ -535,7 +535,6 @@ public class ReportHandler
 		}
 		return mapReportParameter;
 	}
-	
 
 	/*
 	 * Get a Map of all standard parameters plus the given locale and the included data XML file

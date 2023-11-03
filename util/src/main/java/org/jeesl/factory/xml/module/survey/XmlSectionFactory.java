@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.module.survey;
 
+import java.util.Objects;
+
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
@@ -52,6 +54,7 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 	private final String localeCode;
 	private final Section q;
 	
+	private XmlSectionFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION> xfSection;
 	private XmlQuestionFactory<L,D,SCHEME,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> xfQuestion;
 	
 	public XmlSectionFactory(String localeCode, Section q)
@@ -59,12 +62,14 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 		this.localeCode=localeCode;
 		this.q=q;
 		
-		if(q.isSetQuestion()){xfQuestion = new XmlQuestionFactory<L,D,SCHEME,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION>(localeCode,q.getQuestion().get(0));}
+		if(q.isSetSection()) {xfSection = new XmlSectionFactory<>(localeCode,q.getSection().get(0));}
+		if(q.isSetQuestion()){xfQuestion = new XmlQuestionFactory<>(localeCode,q.getQuestion().get(0));}
 	}
 	
 	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,?> fSurvey)
 	{
 		this.fSurvey=fSurvey;
+		if(Objects.nonNull(xfSection)) {xfSection.lazyLoad(fSurvey);}
 		if(xfQuestion!=null) {xfQuestion.lazyLoad(fSurvey);}
 	}
 	
@@ -90,17 +95,12 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 		
 		if(q.isSetSection())
 		{
-			XmlSectionFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION> f = new XmlSectionFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION>(localeCode,q.getSection().get(0));
-			if(fSurvey!=null){f.lazyLoad(fSurvey);}
-			
 			for(SECTION section : ejb.getSections())
 			{
-				xml.getSection().add(f.build(section));
+				xml.getSection().add(xfSection.build(section));
 			}
 		}
 		
 		return xml;
 	}
-	
-	
 }
