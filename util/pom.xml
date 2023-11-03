@@ -26,7 +26,6 @@
     </dependencyManagement>
 
     <dependencies>
-    
 		<!-- JEESL -->
 		<dependency>
             <groupId>org.jeesl</groupId>
