@@ -34,6 +34,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.io.ssi.maintenance.EjbWithSsiDataCleaning;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
@@ -52,24 +53,25 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 									CRED extends JeeslIoSsiCredential<SYSTEM>,
 									CTX extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 									ATTRIBUTE extends JeeslIoSsiAttribute<CTX,ENTITY>,
-									DATA extends JeeslIoSsiData<CTX,STATUS,?,JOB>,
+									DATA extends JeeslIoSsiData<CTX,STATUS,ERROR,JOB>,
 									STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
+									ERROR extends JeeslIoSsiError<L,D,CTX>,
 									ENTITY extends JeeslRevisionEntity<?,?,?,?,?,?>,
 									CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 									JOB extends JeeslJobStatus<L,D,JOB,?>,
 									HOST extends JeeslIoSsiHost<L,D,SYSTEM>>
 					extends JeeslFacadeBean
-					implements JeeslIoSsiFacade<SYSTEM,CRED,CTX,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB,HOST>
+					implements JeeslIoSsiFacade<SYSTEM,CRED,CTX,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB,HOST>
 {	
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoSsiFacadeBean.class);
 
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsiCore;
-	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,?,ENTITY,CLEANING,JOB> fbSsi;
+	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi;
 	
 	public JeeslIoSsiFacadeBean(EntityManager em,
 								IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsiCore,
-								IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,?,ENTITY,CLEANING,JOB> fbSsi)
+								IoSsiDataFactoryBuilder<L,D,SYSTEM,CTX,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi)
 	{
 		super(em);
 		this.fbSsiCore = fbSsiCore;
@@ -263,6 +265,40 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 	       
 		TypedQuery<Tuple> tQ = em.createQuery(cQ);
 		Json1TuplesFactory<STATUS> jtf = Json1TuplesFactory.instance(fbSsi.getClassStatus()).tupleLoad(this,true);
+		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+	}
+	
+	@Override public <A extends EjbWithId, B extends EjbWithId> JsonTuples1<ERROR> tpcIoSsiErrorContext(CTX context, A a, B b)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<DATA> data = cQ.from(fbSsi.getClassData());
+		
+		Expression<Long> cCount = cB.count(data);
+		
+		Path<ERROR> pError = data.get(JeeslIoSsiData.Attributes.error.toString());
+		Path<CTX> pContext = data.get(JeeslIoSsiData.Attributes.mapping.toString());
+		predicates.add(pContext.in(context));
+		
+		if(Objects.nonNull(a))
+		{
+			Path<Long> pA = data.get(JeeslIoSsiData.Attributes.refA.toString());
+			predicates.add(cB.equal(pA,a.getId()));
+		}
+		
+		if(Objects.nonNull(b))
+		{
+			Path<Long> pB = data.get(JeeslIoSsiData.Attributes.refB.toString());
+			predicates.add(cB.equal(pB,b.getId()));
+		}
+		
+		cQ.groupBy(pError.get("id"));
+		cQ.multiselect(pError.get("id"),cCount);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		Json1TuplesFactory<ERROR> jtf = Json1TuplesFactory.instance(fbSsi.getClassError()).tupleLoad(this,true);
 		return jtf.buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 	
@@ -486,5 +522,4 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}
-	
 }

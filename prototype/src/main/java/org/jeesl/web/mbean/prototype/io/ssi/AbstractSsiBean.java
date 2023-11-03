@@ -54,7 +54,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 	
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsi;
 	
-	protected JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi;
+	protected JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB,HOST> fSsi;
 	
 	protected final SbMultiHandler<LINK> sbhLink; public SbMultiHandler<LINK> getSbhLink() {return sbhLink;}
 	protected final JsonTuple1Handler<LINK> thLink; public JsonTuple1Handler<LINK> getThLink() {return thLink;}
@@ -78,7 +78,7 @@ public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescr
 		datas = new ArrayList<>();
 	}
 
-	public void postConstructSsi(JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi)
+	public void postConstructSsi(JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB,HOST> fSsi)
 	{
 		this.fSsi=fSsi;
 		sbhLink.setList(fSsi.allOrderedPositionVisible(fbSsi.getClassStatus()));

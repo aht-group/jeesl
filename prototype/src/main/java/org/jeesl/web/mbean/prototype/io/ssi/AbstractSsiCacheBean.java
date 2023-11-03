@@ -29,7 +29,7 @@ public class AbstractSsiCacheBean <L extends JeeslLang,D extends JeeslDescriptio
 
 	}
 
-	public void postConstructSsiCache(JeeslIoSsiFacade<?,?,?,?,?,STATUS,?,CLEANING,?,?> fSsi)
+	public void postConstructSsiCache(JeeslIoSsiFacade<?,?,?,?,?,STATUS,?,?,CLEANING,?,?> fSsi)
 	{
 		reloadLinks(fSsi);
 		reloadCleanings(fSsi);

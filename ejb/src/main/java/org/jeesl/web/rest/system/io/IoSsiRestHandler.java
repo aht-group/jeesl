@@ -36,11 +36,11 @@ public class IoSsiRestHandler <L extends JeeslLang, D extends JeeslDescription,
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsi;
 	private final IoSsiNetworkFactoryBuilder<L,D,SYSTEM,HOST,NAT> fbSsiNetwork;
 	
-	private final JeeslIoSsiFacade<SYSTEM,CRED,?,?,?,?,?,?,?,HOST> fSsi;
+	private final JeeslIoSsiFacade<SYSTEM,CRED,?,?,?,?,?,?,?,?,HOST> fSsi;
 	
 	public IoSsiRestHandler(IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,HOST> fbSsi,
 							IoSsiNetworkFactoryBuilder<L,D,SYSTEM,HOST,NAT> fbSsiNetwork,
-							JeeslIoSsiFacade<SYSTEM,CRED,?,?,?,?,?,?,?,HOST> fSsi)
+							JeeslIoSsiFacade<SYSTEM,CRED,?,?,?,?,?,?,?,?,HOST> fSsi)
 	{
 		this.fbSsi=fbSsi;
 		this.fbSsiNetwork=fbSsiNetwork;

@@ -71,7 +71,7 @@
 		</j:slot>
 	</j:row>
 	<j:row id="rowDetail">
-		<j:slot id="sMapping" width="6">
+		<j:slot id="sMapping" width="7">
 			<h:form id="fMapping" rendered="#{not empty cc.attrs.ctrl.context}">
 				<p:panel id="pView" styleClass="jeesl-panel">
 					<f:facet name="header"><j:pHeader entity="IoSsiContext"/></f:facet>
@@ -195,7 +195,7 @@
 				</p:panel>
 			</h:form>
 		</j:slot>
-		<j:slot id="sErrors" width="6" rendered="#{not empty cc.attrs.ctrl.context}">
+		<j:slot id="sErrors" width="5" rendered="#{not empty cc.attrs.ctrl.context}">
 			<h:form id="fErrors" >
 				<p:dataTable styleClass="jeesl-datatable"
 						var="e" value="#{cc.attrs.ctrl.errors}" draggableRows="true"
@@ -203,10 +203,11 @@
 					<f:facet name="header">
 						<j:dtHeader entity="IoSsiError" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addError()}" update=":#{cc.id}:sErrors"/>
+							<j:svg type="jeeslReload" listener="#{cc.attrs.ctrl.countErrors()}" update="@form" ttEntity="IoSsiContext" ttCode="ttCountErrors"/>
 						</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectError()}" update=":#{cc.id}:sErrors"/>
-					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderSpots()}" update="@form"/>	     
+					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderErrors()}" update="@form"/>	     
 					<p:column rendered="false" styleClass="jeesl-right">
 						<f:facet name="header"><jtp:label entity="IoSsiError" code="id"/></f:facet>
 						<h:outputText value="#{e.id}"/>
@@ -223,6 +224,11 @@
 						<f:facet name="header"><jtp:label entity="IoSsiError" code="description"/></f:facet>
 						<h:outputText value="#{e.description[localeCode].lang}"/>
 					</p:column>
+					<p:column rendered="true">
+						<f:facet name="header"><jtp:label entity="IoSsiError" code="count"/></f:facet>
+						<h:outputText value="#{cc.attrs.ctrl.thError.mapA[e].count1}"/>
+					</p:column>
+					
 				</p:dataTable>
 			</h:form>
 			<h:form id="fError" rendered="#{not empty cc.attrs.ctrl.error}">

@@ -30,7 +30,7 @@ public class JeeslSsiSystemController <L extends JeeslLang, D extends JeeslDescr
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSsiSystemController.class);
 	
-	private JeeslIoSsiFacade<SYSTEM,CRED,?,?,?,?,?,?,?,?> fSsi;
+	private JeeslIoSsiFacade<SYSTEM,CRED,?,?,?,?,?,?,?,?,?> fSsi;
 	
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,CRED,?> fbSsiCore;
 	
@@ -49,7 +49,7 @@ public class JeeslSsiSystemController <L extends JeeslLang, D extends JeeslDescr
 	}
 
 	public void postConstructSsiSystem(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-										JeeslIoSsiFacade<SYSTEM,CRED,?,?,?,?,?,?,?,?> fSsi)
+										JeeslIoSsiFacade<SYSTEM,CRED,?,?,?,?,?,?,?,?,?> fSsi)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSsi=fSsi;

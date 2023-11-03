@@ -54,7 +54,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsiData;
 	private final IoRevisionFactoryBuilder<L,D,?,?,?,?,?,ENTITY,?,?,?,?,?,?> fbRevision;
 
-	private JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi;
+	private JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB,HOST> fSsi;
 
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
 	private final SbSingleHandler<MAPPING> sbhMapping; public SbSingleHandler<MAPPING> getSbhMapping() {return sbhMapping;}
@@ -89,7 +89,7 @@ public abstract class AbstractSsiAttributeBean <L extends JeeslLang,D extends Je
 		efAttribute = fbSsiData.ejbAttribute();
 	}
 
-	public void postConstructSsiAttribute(JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,HOST> fSsi)
+	public void postConstructSsiAttribute(JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB,HOST> fSsi)
 	{
 		this.fSsi=fSsi;
 		entities.addAll(fSsi.all(fbRevision.getClassEntity()));

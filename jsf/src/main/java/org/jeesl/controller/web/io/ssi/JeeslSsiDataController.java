@@ -48,7 +48,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSsiDataController.class);
 	
-	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,JOB,?> fSsi;
+	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,?,JOB,?> fSsi;
 	private final JeeslIoSsiDataCallback callback;
 	
 	protected final SbMultiHandler<STATUS> sbhStatus; public SbMultiHandler<STATUS> getSbhStatus() {return sbhStatus;}
@@ -83,7 +83,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 		datas = new ArrayList<>();
 	}
 
-	public void postConstructSsiData(JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,JOB,?> fSsi)
+	public void postConstructSsiData(JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,?,JOB,?> fSsi)
 	{
 		this.fSsi=fSsi;
 		logger.trace(callback.getClass().getName());

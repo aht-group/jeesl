@@ -186,7 +186,7 @@ public class Json1TuplesFactory <A extends EjbWithId>
 	public JsonTuples1<A> buildV2(List<Tuple> tuples, JsonTupleFactory.Type...types)
 	{
 		JsonTuples1<A> json = new JsonTuples1<A>();
-		for(Tuple t : tuples){json.getTuples().add(JsonTupleFactory.build1(t,types));}
+		for(Tuple t : tuples) {json.getTuples().add(JsonTupleFactory.build1(t,types));}
 		ejb1Load(json);
 		return json;
 	}

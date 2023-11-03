@@ -52,12 +52,13 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 	protected JeeslLogger jogger;
 	
 	private final IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,?,?,STATUS,ERROR,ENTITY,?,?> fbSsi;
-	private JeeslIoSsiFacade<SYSTEM,?,CONTEXT,?,?,STATUS,ENTITY,?,?,?> fSsi;
+	private JeeslIoSsiFacade<SYSTEM,?,CONTEXT,?,?,STATUS,ERROR,ENTITY,?,?,?> fSsi;
 	
 	private JeeslIoSsiContextCache<CONTEXT,STATUS> cache; 
 	private final Comparator<CONTEXT> cpContext;
 	
 	private final JsonTuple1Handler<CONTEXT> thContext; public JsonTuple1Handler<CONTEXT> getThContext() {return thContext;}
+	private final JsonTuple1Handler<ERROR> thError; public JsonTuple1Handler<ERROR> getThError() {return thError;}
 	private final JsonTuple2Handler<CONTEXT,STATUS> thStatus; public JsonTuple2Handler<CONTEXT,STATUS> getThStatus() {return thStatus;}
 
 	private final List<SYSTEM> systems; public List<SYSTEM> getSystems() {return systems;}
@@ -83,13 +84,14 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		cpContext = new EjbIdComparator<CONTEXT>().factory(EjbIdComparator.Type.dsc);
 		
 		thContext = new JsonTuple1Handler<>(fbSsi.getClassMapping());
+		thError = new JsonTuple1Handler<>(fbSsi.getClassError());
 		thStatus = new JsonTuple2Handler<>(fbSsi.getClassMapping(),fbSsi.getClassStatus());
 		
 		jogger = DebugJeeslLogger.instance(this.getClass());
 	}
 
 	public void postConstructSsiMapping(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-										JeeslIoSsiFacade<SYSTEM,?,CONTEXT,?,?,STATUS,ENTITY,?,?,?> fSsi,
+										JeeslIoSsiFacade<SYSTEM,?,CONTEXT,?,?,STATUS,ERROR,ENTITY,?,?,?> fSsi,
 										JeeslIoSsiContextCache<CONTEXT,STATUS> cache)
 	{
 		super.postConstructLocaleWebController(lp, bMessage);
@@ -172,17 +174,19 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		this.reset(true,false);
 		errors.addAll(fSsi.allForParent(fbSsi.getClassError(),context));
 	}
-	public void reorderSpots() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSsi,errors); this.reloadErrors();}
+	public void reorderErrors() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSsi,errors); this.reloadErrors();}
 	public void addError()
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSsi.getClassError()));
 		error = fbSsi.efError().build(context, errors);
 		error.setName(efLang.buildEmpty(lp.getLocales()));
 		error.setDescription(efDescription.buildEmpty(lp.getLocales()));
+		thError.clear();
 	}
 	public void selectError()
 	{
 		logger.info(AbstractLogMessage.selectEntity(error));
+		thError.clear();
 	}
 	public void saveError() throws JeeslLockingException
 	{
@@ -200,5 +204,10 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		fSsi.rm(error);
 		this.reset(false, true);
 		this.reloadErrors();	
+	}
+	public void countErrors()
+	{
+		thError.clear();
+		thError.init(fSsi.tpcIoSsiErrorContext(context, null, null));
 	}
 }

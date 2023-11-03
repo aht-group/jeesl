@@ -22,7 +22,7 @@ public interface JeeslIoSsiData <CTX extends JeeslIoSsiContext<?,?>,
 		extends EjbWithId,EjbSaveable,EjbRemoveable,EjbWithCode,EjbWithParentAttributeResolver,
 						EjbWithMigrationJob1<JOB>
 {	
-	public enum Attributes{mapping,code,link,targetId,localId,refA,refB,refC,job1}
+	public enum Attributes{mapping,code,link,targetId,localId,refA,refB,refC,job1,error}
 	
 //	void x();
 	
@@ -61,5 +61,12 @@ public interface JeeslIoSsiData <CTX extends JeeslIoSsiContext<?,?>,
 	
 	Date getEjbUpdatedAt();
 	void setEjbUpdatedAt(Date ejbUpdatedAt);
+	
+
+	String getRemark();
+	void setRemark(String remark);
+	
+	ERROR getError();
+	void setError(ERROR error);
 	
 }

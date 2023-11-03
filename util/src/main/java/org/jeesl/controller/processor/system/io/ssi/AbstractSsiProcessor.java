@@ -2,6 +2,7 @@ package org.jeesl.controller.processor.system.io.ssi;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
@@ -26,6 +27,7 @@ import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.util.db.cache.EjbCodeCache;
+import org.jeesl.util.db.cache.EjbNonUniquieCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +38,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 										CRED extends JeeslIoSsiCredential<SYSTEM>,
 										CONTEXT extends JeeslIoSsiContext<SYSTEM,ENTITY>,
 										ATTRIBUTE extends JeeslIoSsiAttribute<CONTEXT,ENTITY>,
-										DATA extends JeeslIoSsiData<CONTEXT,STATUS,?,JOB>,
+										DATA extends JeeslIoSsiData<CONTEXT,STATUS,ERROR,JOB>,
 										STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
 										ERROR extends JeeslIoSsiError<L,D,CONTEXT>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
@@ -49,23 +51,29 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiProcessor.class);
 	
 	protected final IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi;
-	protected final JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB,?> fSsi;
+	protected final JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB,?> fSsi;
 	
 	protected final EjbIoSsiDataFactory<CONTEXT,DATA,STATUS> efData;
 	
 	protected final EjbCodeCache<STATUS> cacheLink; public EjbCodeCache<STATUS> getCacheLink() {return cacheLink;}
 	protected final EjbCodeCache<JOB> cacheJob; //public EjbCodeCache<JOB> getCacheJob() {return cacheJob;}
-		
+	protected final EjbNonUniquieCodeCache<ERROR> cacheError;
+	
 	protected CONTEXT mapping; @Override public CONTEXT getMapping() {return mapping;}
+	private final String localeCode;
 	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
 
-	public AbstractSsiProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi,
-									JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB,?> fSsi)
+	public AbstractSsiProcessor(String localeCode, IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi,
+									JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB,?> fSsi)
 	{
+		this.localeCode=localeCode;
 		this.fSsi=fSsi;
 		this.fbSsi=fbSsi;
 		
 		this.initMappings();
+		
+		cacheError = EjbNonUniquieCodeCache.instance();
+		cacheError.addAll(fSsi.allForParent(fbSsi.getClassError(),mapping));
 		
 		jec = BucketSizeCounter.instance();
 		cacheLink = EjbCodeCache.instance(fbSsi.getClassStatus()).facade(fSsi);
@@ -79,6 +87,8 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 		try
 		{
 			mapping = fSsi.fMapping(this.getClassJson(),this.getClassLocal());
+			
+			
 		}
 		catch (JeeslNotFoundException e) {throw new RuntimeException(e);}
 	}
@@ -210,5 +220,12 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 				catch (IOException | JeeslNotFoundException | JeeslConstraintViolationException | JeeslLockingException e){e.printStackTrace();}
 			}
 		}
+	}
+	
+	protected <E extends Enum<E>> void applyError(StringBuilder sb, E code, DATA data, Object... substitutions)
+	{
+		ERROR error = cacheError.ejb(code);
+		if(Objects.isNull(data.getError())) {data.setError(error);}
+		sb.append(" ").append(String.format(error.getDescription().get(localeCode).getLang(),substitutions));
 	}
 }

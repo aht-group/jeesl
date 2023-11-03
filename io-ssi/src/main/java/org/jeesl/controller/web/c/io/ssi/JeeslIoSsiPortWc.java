@@ -22,10 +22,11 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiCleaning;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiContext;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiData;
+import org.jeesl.model.ejb.io.ssi.data.IoSsiError;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiMapping;
 import org.jeesl.model.ejb.io.ssi.data.IoSsiStatus;
-import org.jeesl.model.ejb.io.ssi.nat.IoSsiNatService;
 import org.jeesl.model.ejb.io.ssi.nat.IoSsiNat;
+import org.jeesl.model.ejb.io.ssi.nat.IoSsiNatService;
 import org.jeesl.model.ejb.system.job.core.SystemJobStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class JeeslIoSsiPortWc extends AbstractJeeslLocaleWebController<IoLang,Io
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoSsiPortWc.class);
 	
-	private JeeslIoSsiFacade<IoSsiSystem,IoSsiCredential,IoSsiContext,IoSsiMapping,IoSsiData,IoSsiStatus,IoLabelEntity,IoSsiCleaning,SystemJobStatus,IoSsiHost> fSsi;
+	private JeeslIoSsiFacade<IoSsiSystem,IoSsiCredential,IoSsiContext,IoSsiMapping,IoSsiData,IoSsiStatus,IoSsiError,IoLabelEntity,IoSsiCleaning,SystemJobStatus,IoSsiHost> fSsi;
 //	private final IoSsiCoreFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoSsiCredential,IoSsiHost> fbSsi;
 	
 	private final EjbIoSsiPortFactory<IoSsiHost,IoSsiNat> efPort;
@@ -73,7 +74,7 @@ public class JeeslIoSsiPortWc extends AbstractJeeslLocaleWebController<IoLang,Io
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-			JeeslIoSsiFacade<IoSsiSystem,IoSsiCredential,IoSsiContext,IoSsiMapping,IoSsiData,IoSsiStatus,IoLabelEntity,IoSsiCleaning,SystemJobStatus,IoSsiHost> fSsi)
+			JeeslIoSsiFacade<IoSsiSystem,IoSsiCredential,IoSsiContext,IoSsiMapping,IoSsiData,IoSsiStatus,IoSsiError,IoLabelEntity,IoSsiCleaning,SystemJobStatus,IoSsiHost> fSsi)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fSsi=fSsi;
