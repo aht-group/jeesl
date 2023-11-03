@@ -20,6 +20,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiAttribute;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiCleaning;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
+import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -33,32 +34,33 @@ import net.sf.exlp.util.io.JsonUtil;
 public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDescription,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
 										CRED extends JeeslIoSsiCredential<SYSTEM>,
-										MAPPING extends JeeslIoSsiContext<SYSTEM,ENTITY>,
-										ATTRIBUTE extends JeeslIoSsiAttribute<MAPPING,ENTITY>,
-										DATA extends JeeslIoSsiData<MAPPING,LINK,?,JOB>,
-										LINK extends JeeslIoSsiStatus<L,D,LINK,?>,
+										CONTEXT extends JeeslIoSsiContext<SYSTEM,ENTITY>,
+										ATTRIBUTE extends JeeslIoSsiAttribute<CONTEXT,ENTITY>,
+										DATA extends JeeslIoSsiData<CONTEXT,STATUS,?,JOB>,
+										STATUS extends JeeslIoSsiStatus<L,D,STATUS,?>,
+										ERROR extends JeeslIoSsiError<L,D,CONTEXT>,
 										ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 										CLEANING extends JeeslIoSsiCleaning<L,D,CLEANING,?>,
 										JOB extends JeeslJobStatus<L,D,JOB,?>,
 										JSON extends Object
 >
-						implements SsiMappingProcessor<MAPPING,DATA,JSON>
+						implements SsiMappingProcessor<CONTEXT,DATA,JSON>
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractSsiProcessor.class);
 	
-	protected final IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsi;
-	protected final JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi;
+	protected final IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi;
+	protected final JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB,?> fSsi;
 	
-	protected final EjbIoSsiDataFactory<MAPPING,DATA,LINK> efData;
+	protected final EjbIoSsiDataFactory<CONTEXT,DATA,STATUS> efData;
 	
-	protected final EjbCodeCache<LINK> cacheLink; public EjbCodeCache<LINK> getCacheLink() {return cacheLink;}
-	protected final EjbCodeCache<JOB> cacheJob; public EjbCodeCache<LINK> getCacheJob() {return cacheLink;}
+	protected final EjbCodeCache<STATUS> cacheLink; public EjbCodeCache<STATUS> getCacheLink() {return cacheLink;}
+	protected final EjbCodeCache<JOB> cacheJob; //public EjbCodeCache<JOB> getCacheJob() {return cacheJob;}
 		
-	protected MAPPING mapping; @Override public MAPPING getMapping() {return mapping;}
+	protected CONTEXT mapping; @Override public CONTEXT getMapping() {return mapping;}
 	protected BucketSizeCounter jec; public void setEventCounter(BucketSizeCounter jec) {this.jec = jec;}
 
-	public AbstractSsiProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,MAPPING,ATTRIBUTE,DATA,LINK,?,ENTITY,CLEANING,JOB> fbSsi,
-									JeeslIoSsiFacade<SYSTEM,CRED,MAPPING,ATTRIBUTE,DATA,LINK,ENTITY,CLEANING,JOB,?> fSsi)
+	public AbstractSsiProcessor(IoSsiDataFactoryBuilder<L,D,SYSTEM,CONTEXT,ATTRIBUTE,DATA,STATUS,ERROR,ENTITY,CLEANING,JOB> fbSsi,
+									JeeslIoSsiFacade<SYSTEM,CRED,CONTEXT,ATTRIBUTE,DATA,STATUS,ENTITY,CLEANING,JOB,?> fSsi)
 	{
 		this.fSsi=fSsi;
 		this.fbSsi=fbSsi;
