@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
@@ -32,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-import net.sf.exlp.util.io.JsonUtil;
 
 public abstract class AbstractSsiBean <L extends JeeslLang, D extends JeeslDescription,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,

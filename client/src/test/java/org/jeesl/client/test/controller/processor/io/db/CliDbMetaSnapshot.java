@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.dbutils.DbUtils;
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.controller.processor.io.db.DatabaseSanpshotProcessor;
 import org.jeesl.factory.json.io.ssi.core.JsonSsiSystemFactory;
@@ -19,8 +20,6 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public class CliDbMetaSnapshot
 {

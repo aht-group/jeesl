@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.bean.module.survey.JeeslSurveyCache;
 import org.jeesl.controller.util.comparator.ejb.module.survey.SurveyQuestionComparator;
 import org.jeesl.interfaces.controller.processor.SurveyValidator;
@@ -26,7 +27,6 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.io.JsonUtil;
 import net.sf.exlp.util.io.StringUtil;
 
 public class SurveyValidationHandler<L extends JeeslLang, D extends JeeslDescription,

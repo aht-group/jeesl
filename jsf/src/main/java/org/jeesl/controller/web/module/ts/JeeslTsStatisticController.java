@@ -3,6 +3,7 @@ package org.jeesl.controller.web.module.ts;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
@@ -31,8 +32,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public class JeeslTsStatisticController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CAT extends JeeslTsCategory<L,D,CAT,?>,

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
+import org.exlp.util.io.JsonUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -29,7 +30,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.sf.exlp.exception.ExlpConfigurationException;
-import net.sf.exlp.util.io.JsonUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslDocker

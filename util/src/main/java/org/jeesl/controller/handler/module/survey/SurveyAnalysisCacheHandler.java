@@ -3,6 +3,7 @@ package org.jeesl.controller.handler.module.survey;
 import java.io.IOException;
 import java.io.Serializable;
 
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.facade.module.survey.JeeslSurveyAnalysisFacade;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -50,8 +51,6 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public class SurveyAnalysisCacheHandler<L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslStatus<L,D,LOC>,
 										SURVEY extends JeeslSurvey<L,D,SS,TEMPLATE,DATA>,

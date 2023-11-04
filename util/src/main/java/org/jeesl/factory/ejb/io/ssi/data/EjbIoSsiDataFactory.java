@@ -4,12 +4,11 @@ import java.util.Date;
 import java.util.Objects;
 
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public class EjbIoSsiDataFactory <MAPPING extends JeeslIoSsiContext<?,?>,
 									DATA extends JeeslIoSsiData<MAPPING,LINK,?,?>,

@@ -1,5 +1,6 @@
 package org.jeesl.factory.json.util.query;
 
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.model.json.util.query.JsonFilter;
 import org.jeesl.model.json.util.query.JsonFilterItem;
 import org.slf4j.Logger;
@@ -8,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import net.sf.exlp.util.io.HashUtil;
-import net.sf.exlp.util.io.JsonUtil;
 
 public class JsonFilterFactory
 {

@@ -2,6 +2,7 @@ package org.jeesl.controller.io.ssi.wildfly.cache;
 
 import java.io.IOException;
 
+import org.exlp.util.io.JsonUtil;
 import org.jboss.as.controller.client.ModelControllerClient;
 import org.jboss.as.controller.client.OperationBuilder;
 import org.jboss.as.controller.client.helpers.ClientConstants;
@@ -11,8 +12,6 @@ import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
 import org.jeesl.model.json.io.ssi.core.JsonSsiSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public class CacheEap80Configurator extends AbstractEapCacheConfigurator implements EapCacheConfigurator
 {

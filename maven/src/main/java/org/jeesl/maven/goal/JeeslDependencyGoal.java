@@ -27,6 +27,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.ProjectDependenciesResolver;
+import org.exlp.util.io.JsonUtil;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -48,8 +49,6 @@ import com.github.ferstl.depgraph.dependency.GraphStyleConfigurer;
 import com.github.ferstl.depgraph.dependency.MavenGraphAdapter;
 import com.github.ferstl.depgraph.dependency.json.JsonGraphStyleConfigurer;
 import com.github.ferstl.depgraph.graph.GraphBuilder;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 @Mojo(name="dependency")
 public class JeeslDependencyGoal extends AbstractMojo

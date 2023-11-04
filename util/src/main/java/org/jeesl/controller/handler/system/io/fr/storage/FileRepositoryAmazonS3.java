@@ -7,6 +7,7 @@ import java.io.InputStream;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -27,8 +28,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public class FileRepositoryAmazonS3<STORAGE extends JeeslFileStorage<?,?,?,?,?>,
 									META extends JeeslFileMeta<?,?,?,?>>

@@ -18,11 +18,10 @@ import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.model.json.io.ssi.core.JsonSsiCredential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public class JeeslRestClient
 {

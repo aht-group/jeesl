@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.handler.tuple.JsonTuple1Handler;
 import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
@@ -33,8 +34,6 @@ import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 										DATA extends JeeslIoSsiData<CTX,STATUS,?,JOB>,

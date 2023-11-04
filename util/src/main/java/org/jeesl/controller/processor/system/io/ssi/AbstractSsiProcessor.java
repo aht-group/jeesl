@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.exlp.util.io.JsonUtil;
 import org.jeesl.api.facade.io.JeeslIoSsiFacade;
 import org.jeesl.controller.monitoring.counter.BucketSizeCounter;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -30,8 +31,6 @@ import org.jeesl.util.db.cache.EjbCodeCache;
 import org.jeesl.util.db.cache.EjbNonUniquieCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.util.io.JsonUtil;
 
 public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDescription,
 										SYSTEM extends JeeslIoSsiSystem<L,D>,
