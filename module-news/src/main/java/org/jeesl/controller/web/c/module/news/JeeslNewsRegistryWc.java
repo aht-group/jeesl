@@ -1,9 +1,10 @@
 package org.jeesl.controller.web.c.module.news;
 
+import org.jeesl.api.bean.callback.module.news.JeeslNewsRegistryCallback;
 import org.jeesl.controller.web.g.module.news.JeeslNewsRegistryGwc;
 import org.jeesl.factory.builder.module.NewsFactoryBuilder;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.module.news.JeeslNewsItem;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.fr.IoFileContainer;
@@ -24,8 +25,8 @@ public class JeeslNewsRegistryWc <RREF extends EjbWithId,
 {
 	private static final long serialVersionUID = 1L;
 
-	public JeeslNewsRegistryWc(NewsFactoryBuilder<IoLang,IoDescription,IoLocale,TenantRealm,NewsFeed,NewsCategory,ITEM,SecurityUser,M,MT> fbNews)
+	public JeeslNewsRegistryWc(JeeslNewsRegistryCallback callback, NewsFactoryBuilder<IoLang,IoDescription,IoLocale,TenantRealm,NewsFeed,NewsCategory,ITEM,SecurityUser,M,MT> fbNews)
 	{
-		super(fbNews);
+		super(callback,fbNews);
 	}
 }

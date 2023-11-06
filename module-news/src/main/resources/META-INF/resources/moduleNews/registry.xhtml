@@ -17,8 +17,9 @@
 	<j:row>
 		<j:slot id="sFaqs" width="7">
 			<h:form id="fFaqs">
-				<p:dataTable var="item" value="#{cc.attrs.ctrl.items}" draggableRows="false"
-								selection="#{cc.attrs.ctrl.item}" selectionMode="single" rowKey="#{item.id}">
+				<p:dataTable styleClass="jeesl-datatable"
+						var="item" value="#{cc.attrs.ctrl.items}" draggableRows="false"
+						selection="#{cc.attrs.ctrl.item}" selectionMode="single" rowKey="#{item.id}">
 					<f:facet name="header">
 						<j:dtHeader entity="NewsItem" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.ctrl.addItem()}" update=":#{cc.id}:grid"/>

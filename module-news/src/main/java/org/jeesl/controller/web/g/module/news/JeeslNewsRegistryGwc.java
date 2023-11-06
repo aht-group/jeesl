@@ -1,10 +1,10 @@
 package org.jeesl.controller.web.g.module.news;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 import org.jeesl.api.bean.callback.JeeslFileRepositoryCallback;
+import org.jeesl.api.bean.callback.module.news.JeeslNewsRegistryCallback;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.module.JeeslNewsFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
@@ -15,8 +15,8 @@ import org.jeesl.factory.builder.module.NewsFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslFileRepositoryHandler;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
-import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkup;
+import org.jeesl.interfaces.model.io.cms.markup.JeeslIoMarkupType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.module.news.JeeslNewsCategory;
 import org.jeesl.interfaces.model.module.news.JeeslNewsFeed;
@@ -43,10 +43,12 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 									MT extends JeeslIoMarkupType<L,D,MT,?>,
 									FRC extends JeeslFileContainer<?,?>>
 					extends AbstractJeeslLocaleWebController<L,D,LOC>
-					implements Serializable,SbSingleBean,JeeslFileRepositoryCallback
+					implements SbSingleBean,JeeslFileRepositoryCallback
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslNewsRegistryGwc.class);
+	
+	private final JeeslNewsRegistryCallback callback;
 	
 	protected JeeslNewsFacade<L,D,R,FEED,CATEGORY,ITEM,USER,M,MT,FRC> fNews;
 	private final NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews;
@@ -63,9 +65,10 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 	private USER author;
 	private ITEM item; public ITEM getItem() {return item;} public void setItem(ITEM item) {this.item = item;}
 
-	public JeeslNewsRegistryGwc(NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews)
+	public JeeslNewsRegistryGwc(JeeslNewsRegistryCallback callback, NewsFactoryBuilder<L,D,LOC,R,FEED,CATEGORY,ITEM,USER,M,MT> fbNews)
 	{
 		super(fbNews.getClassL(),fbNews.getClassD());
+		this.callback=callback;
 		this.fbNews=fbNews;
 		
 		sbhCategory = new SbSingleHandler<>(fbNews.getClassCategory(),this);
@@ -143,6 +146,8 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 		if(sbhCategory.isSelected()) {item.setCategory(sbhCategory.getSelection());}
 		
 		frh.reset();
+		callback.callbackPostAddItem();
+		
 	}
 	
 	public void selectItem() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
