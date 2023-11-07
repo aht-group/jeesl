@@ -11,7 +11,11 @@ import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
+@DownloadJeeslDescription
+@DownloadJeeslAttributes
 public interface JeeslJob<TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 							PRIORITY extends JeeslStatus<?,?,PRIORITY>,
 							STATUS extends JeeslJobStatus<?,?,STATUS,?>,
@@ -20,7 +24,7 @@ public interface JeeslJob<TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 {	
 	public static enum Attributes{template,status,priority,recordCreation,recordStart,code};
 	
-	public static enum Type{reportXml,reportXlsx,reportZip,db}
+	public static enum Type{reportXml,reportXlsx,reportZip,db,json}
 	
 	TEMPLATE getTemplate();
 	void setTemplate(TEMPLATE template);

@@ -13,68 +13,81 @@
 	</composite:interface>
 	
 	<composite:implementation>
-		<jp:grid id="grid">
-			<j:row>
-				<j:slot id="sTemplates" width="8">
-					<h:form id="fTemplates">
-						<p:dataTable var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
-							selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}">
-							<f:facet name="header">
-								<j:dtHeader title="#{msg.jeeslJobTemplates}">
-									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTemplate"/>
-								</j:dtHeader>
-							</f:facet>
-							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>
-							<p:ajax event="rowSelect" update=":#{cc.id}:sTemplate" listener="#{cc.attrs.bean.selectTemplate()}"/>
-							<p:column headerText="#{msg.jeeslJobType}" styleClass="jeeslPfTcCenter"><jtp:symbolizer value="#{t.type}" height="12"/></p:column>
-							<p:column headerText="#{msg.jeeslJobCategory}"><h:outputText value="#{t.category.name[userBean.localeCode].lang}"/></p:column>
-							<p:column headerText="#{msg.jeeslName}"><h:outputText value="#{t.name[userBean.localeCode].lang}"/></p:column>
-							<p:column headerText="#{msg.jeeslJobPriority}" styleClass="jeeslCenter"><jtp:symbolizer value="#{t.priority}" height="12"/></p:column>
-							<p:column headerText="#{msg.jeeslJobExpiration}" styleClass="jeeslCenter"><jtp:symbolizer value="#{t.expiration}" height="12"/></p:column>
-						</p:dataTable>
-					</h:form>
-				</j:slot>
-				<j:slot id="sTemplate" width="4">
-					<h:form id="fTemplate">
-						<p:panel header="#{msg.jeeslJobTemplate}" rendered="#{not empty cc.attrs.bean.template}" styleClass="jeeslPanel">
-							<f:facet name="actions">
-								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
-								<j:svg type="jeeslSave" library="jeeslGfx"   listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid" tooltip="#{msg.ttSave}" rendered="#{cc.attrs.bean.uiAllowSave}" />
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.deleteTemplate()}" update=":#{cc.id}:grid" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.template.id gt 0}" />
-							</f:facet>
-							<p:panelGrid columns="2" columnClasses="auPwg20,auPwg80">
-							
-								<p:outputLabel value="#{msg.jeeslJobCategory}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.template.category}" effect="fade" >
-									<f:selectItems value="#{cc.attrs.bean.sbhCategory.list}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslJobType}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.template.type}" effect="fade" >
-									<f:selectItems value="#{cc.attrs.bean.sbhType.list}" var="t" itemLabel="#{t.name[userBean.localeCode].lang}" itemValue="#{t}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslJobPriority}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.template.priority}" effect="fade" >
-									<f:selectItems value="#{cc.attrs.bean.sbhPriority.list}" var="p" itemLabel="#{p.name[userBean.localeCode].lang}" itemValue="#{p}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslJobExpiration}"/>
-								<p:selectOneMenu value="#{cc.attrs.bean.template.expiration}" effect="fade" >
-									<f:selectItems value="#{cc.attrs.bean.expirations}" var="e" itemLabel="#{e.name[userBean.localeCode].lang}" itemValue="#{e}"/>
-								</p:selectOneMenu>
-								
-								<p:outputLabel value="#{msg.jeeslJobTimeout}"/>
-								<p:inputText value="#{cc.attrs.bean.template.timeout}"/>
-							
-								<p:outputLabel value="#{msg.jeeslCode}"/>
-								<p:inputText value="#{cc.attrs.bean.template.code}"/>
-							</p:panelGrid>
-							<aht:tabTranslationEditor value="#{cc.attrs.bean.template}" withDescription="true" keys="#{cc.attrs.localeKeys}"/>
-						</p:panel>
-					</h:form>
-				</j:slot>
-			</j:row>
-	    </jp:grid>
+<jp:grid id="grid">
+	<j:row>
+		<j:slot id="sTemplates" width="8">
+			<h:form id="fTemplates">
+				<p:dataTable styleClass="jeesl-datatable" 
+						var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
+						selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}">
+					<f:facet name="header">
+						<j:dtHeader title="#{msg.jeeslJobTemplates}">
+							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTemplate"/>
+						</j:dtHeader>
+					</f:facet>
+					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>
+					<p:ajax event="rowSelect" update=":#{cc.id}:sTemplate" listener="#{cc.attrs.bean.selectTemplate()}"/>
+					<p:column styleClass="jeesl-center">
+						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="type"/></f:facet>
+						<jtp:symbolizer value="#{t.type}" height="12"/></p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="category"/></f:facet>
+						<h:outputText value="#{t.category.name[localeCode].lang}"/>
+					</p:column>
+					<p:column >
+						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="name"/></f:facet>
+						<h:outputText value="#{t.name[localeCode].lang}"/>
+					</p:column>
+					<p:column styleClass="jeesl-center">
+						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="priority"/></f:facet>
+						<jtp:symbolizer value="#{t.priority}" height="12"/>
+					</p:column>
+					<p:column styleClass="jeesl-center">
+						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="expiration"/></f:facet>
+						<jtp:symbolizer value="#{t.expiration}"/></p:column>
+				</p:dataTable>
+			</h:form>
+		</j:slot>
+		<j:slot id="sTemplate" width="4">
+			<h:form id="fTemplate">
+				<p:panel header="#{msg.jeeslJobTemplate}" rendered="#{not empty cc.attrs.bean.template}" styleClass="jeeslPanel">
+					<f:facet name="actions">
+						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid"/>
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" />
+						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteTemplate()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.template.id gt 0}" />
+					</f:facet>
+					<j:inputGrid>
+						<jtp:label entity="SystemJobTemplate" code="category"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.template.category}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.bean.sbhCategory.list}" var="c" itemLabel="#{c.name[userBean.localeCode].lang}" itemValue="#{c}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="SystemJobTemplate" code="type"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.template.type}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.bean.sbhType.list}" var="t" itemLabel="#{t.name[userBean.localeCode].lang}" itemValue="#{t}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="SystemJobTemplate" code="priority"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.template.priority}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.bean.sbhPriority.list}" var="p" itemLabel="#{p.name[userBean.localeCode].lang}" itemValue="#{p}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="SystemJobTemplate" code="expiration"/>
+						<p:selectOneMenu value="#{cc.attrs.bean.template.expiration}" effect="fade" autoWidth="false" dynamic="true">
+							<f:selectItems value="#{cc.attrs.bean.expirations}" var="e" itemLabel="#{e.name[userBean.localeCode].lang}" itemValue="#{e}"/>
+						</p:selectOneMenu>
+						
+						<jtp:label entity="SystemJobTemplate" code="timeout"/>
+						<p:inputText value="#{cc.attrs.bean.template.timeout}"/>
+					
+						<jtp:label entity="SystemJobTemplate" code="code"/>
+						<p:inputText value="#{cc.attrs.bean.template.code}"/>
+					</j:inputGrid>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.template}" withDescription="true"/>
+				</p:panel>
+			</h:form>
+		</j:slot>
+	</j:row>
+</jp:grid>
 	</composite:implementation>
 </html>

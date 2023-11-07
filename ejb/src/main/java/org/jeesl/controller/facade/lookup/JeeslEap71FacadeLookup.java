@@ -14,6 +14,8 @@ public class JeeslEap71FacadeLookup implements JeeslFacadeLookup
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslEap71FacadeLookup.class);
 	
+	private boolean debugOnInfo; @Override public boolean setDebugOnInfo(boolean value) {return this.debugOnInfo=value;}
+	
 	private Context context;
 
 	private final String appName;
@@ -54,7 +56,7 @@ public class JeeslEap71FacadeLookup implements JeeslFacadeLookup
 		if(moduleName!=null) {sb.append("/").append(moduleName);}
 		sb.append("/").append(facade.getSimpleName()).append("Bean");
 		sb.append("!").append(facade.getName());	
-		logger.info("Looking up: "+sb.toString());
+		if(debugOnInfo) {logger.info("Looking up: "+sb.toString());}
 		
 		return (F) context.lookup(sb.toString());
 	}

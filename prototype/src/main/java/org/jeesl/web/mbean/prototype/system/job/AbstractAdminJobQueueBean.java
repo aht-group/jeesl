@@ -74,14 +74,11 @@ public class AbstractAdminJobQueueBean <L extends JeeslLang, D extends JeeslDesc
 		sbhDate = new SbDateIntervalHandler(this);
 		sbhDate.initWeeksToNow(2);
 		
-		try
-		{
-			sbhStatus.select(fJob.fByCode(fbJob.getClassStatus(),JeeslJobStatus.Code.queue));
-			sbhStatus.select(fJob.fByCode(fbJob.getClassStatus(),JeeslJobStatus.Code.timeout));
-			sbhStatus.select(fJob.fByCode(fbJob.getClassStatus(),JeeslJobStatus.Code.failed));
-			sbhStatus.select(fJob.fByCode(fbJob.getClassStatus(),JeeslJobStatus.Code.working));
-		}
-		catch (JeeslNotFoundException e) {logger.error(e.getMessage());}
+		sbhStatus.select(fJob.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue));
+		sbhStatus.select(fJob.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.deferred));
+		sbhStatus.select(fJob.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.timeout));
+		sbhStatus.select(fJob.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.failed));
+		sbhStatus.select(fJob.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.working));
 		
 		if(debugOnInfo)
 		{
@@ -89,7 +86,7 @@ public class AbstractAdminJobQueueBean <L extends JeeslLang, D extends JeeslDesc
 			logger.info(AbstractLogMessage.multiStatus(fbJob.getClassType(),sbhType.getSelected(),sbhType.getList()));
 			logger.info(AbstractLogMessage.multiStatus(fbJob.getClassStatus(),sbhStatus.getSelected(),sbhStatus.getList()));
 		}
-		reloadJobs();
+		this.reloadJobs();
 	}
 	
 	@Override public void toggled(SbToggleSelection handler, Class<?> c)

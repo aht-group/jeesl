@@ -22,8 +22,9 @@
 			<aht:row>
 				<aht:slot id="sTemplates" width="7">
 					<h:form id="fTemplates">
-						<p:dataTable var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
-							selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}">
+						<p:dataTable styleClass="jeesl-datatable"
+								var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
+								selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}">
 							<f:facet name="header">
 								<j:dtHeader title="#{msg.jeeslJobTemplates}">
 									<j:svg type="jeeslAdd" library="jeeslGfx" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTemplate" tooltip="#{msg.ttNew}"/>
@@ -31,8 +32,13 @@
 							</f:facet>
 							<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorderTemplates()}" update="@form"/>
 							<p:ajax event="rowSelect" update=":#{cc.id}:sTemplate" listener="#{cc.attrs.bean.selectTemplate()}"/>
-							<p:column headerText="#{msg.jeeslJobType}" styleClass="jeeslPfTcCenter"><jtp:symbolizer value="#{t.type}" height="12"/></p:column>
-							<p:column headerText="#{msg.jeeslJobCategory}"><h:outputText value="#{t.category.name[userBean.localeCode].lang}"/></p:column>
+							<p:column styleClass="jeesl-center">
+								<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="type"/></f:facet>
+								<jtp:symbolizer value="#{t.type}" height="12"/>
+							</p:column>
+							<p:column>
+								<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="name"/></f:facet>
+								<h:outputText value="#{t.category.name[localeCode].lang}"/></p:column>
 							<p:column headerText="#{msg.Name}"><h:outputText value="#{t.name[userBean.localeCode].lang}"/></p:column>
 						</p:dataTable>
 					</h:form>
@@ -42,16 +48,16 @@
 						<p:panel header="#{cc.attrs.bean.template.name[localeCode].lang}" styleClass="jeeslPanel">
 							<p:panelGrid columns="2" columnClasses="jeeslGrid20,jeeslGrid80">
 							
-								<p:outputLabel value="#{msg.jeeslJobCategory}"/>
+								<jtp:label entity="SystemJobTemplate" code="category"/>
 								<h:outputText value="#{cc.attrs.bean.template.category.name[localeCode].lang}"/>
 								
-								<p:outputLabel value="#{msg.jeeslJobType}"/>
+								<jtp:label entity="SystemJobTemplate" code="type"/>
 								<h:outputText value="#{cc.attrs.bean.template.type.name[localeCode].lang}"/>
 								
-								<p:outputLabel value="#{msg.jeeslJobTemplate}"/>
+								<jtp:label entity="SystemJobTemplate" />
 								<h:outputText value="#{cc.attrs.bean.template.name[localeCode].lang}"/>
 								
-								<p:outputLabel value="#{msg.jeeslDescription}"/>
+								<jtp:label entity="SystemJobTemplate" code="description"/>
 								<h:outputText value="#{cc.attrs.bean.template.description[localeCode].lang}"/>
 								
 								<p:outputLabel value=""/>

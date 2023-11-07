@@ -21,6 +21,8 @@ public class JeeslEap63FacadeLookup implements JeeslFacadeLookup
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslEap63FacadeLookup.class);
 	
+	private boolean debugOnInfo; @Override public boolean setDebugOnInfo(boolean value) {return this.debugOnInfo=value;}
+	
 	private String appName;
 	private String moduleName;
 
@@ -42,6 +44,7 @@ public class JeeslEap63FacadeLookup implements JeeslFacadeLookup
 	}
 	public JeeslEap63FacadeLookup(String appName, String moduleName, String host, int port, String username, String password)
 	{
+		this.debugOnInfo = true;
 		this.appName=appName;
 		this.moduleName=moduleName;
 		this.host=host;
@@ -76,7 +79,7 @@ public class JeeslEap63FacadeLookup implements JeeslFacadeLookup
 //        sb.append(distinctName).append("/");
         sb.append(beanName);
         sb.append("!").append(interfaceName);
-        logger.info("Trying: "+sb.toString());
+        if(debugOnInfo) {logger.info("Trying: "+sb.toString());}
         return (F) context.lookup(sb.toString());
     }
    

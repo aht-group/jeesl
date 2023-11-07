@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.system.job;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.system.job.JeeslJob;
 import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
@@ -41,6 +42,10 @@ public class EjbJobFactory <L extends JeeslLang,D extends JeeslDescription,
         this.cJob = cJob;
 	}
  
+	public JOB build(USER user, TEMPLATE template, STATUS status, String code, String name)
+	{
+		return this.build(user, template, status, code, name, null);
+	}
 	public JOB build(USER user, TEMPLATE template, STATUS status, String code, String name, String jsonFilter)
 	{
 		JOB ejb = null;
@@ -50,7 +55,7 @@ public class EjbJobFactory <L extends JeeslLang,D extends JeeslDescription,
 			ejb.setUser(user);
 			ejb.setTemplate(template);
 			ejb.setStatus(status);
-			if(template!=null) {ejb.setPriority(template.getPriority());}
+			if(Objects.nonNull(template)) {ejb.setPriority(template.getPriority());}
 			ejb.setRecordCreation(new Date());
 			ejb.setCode(code);
 			ejb.setName(name);

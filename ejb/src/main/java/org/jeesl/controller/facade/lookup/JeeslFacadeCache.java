@@ -13,6 +13,8 @@ public class JeeslFacadeCache implements JeeslFacadeLookup
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslFacadeCache.class);
 	
+	private boolean debugOnInfo; @Override public boolean setDebugOnInfo(boolean value) {return this.debugOnInfo=value;}
+	
 	private JeeslFacadeLookup lookup;
 	private Map<Class<?>,Object> map;
 	
@@ -43,7 +45,7 @@ public class JeeslFacadeCache implements JeeslFacadeLookup
 			}
 			else
 			{
-				logger.info("In Cache:");
+				if(debugOnInfo) {logger.info("In Cache:");}
 				for(Class<?> c : map.keySet())
 				{
 					logger.info(c.getName());

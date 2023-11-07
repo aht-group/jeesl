@@ -53,9 +53,9 @@ public interface JeeslJobFacade <L extends JeeslLang,D extends JeeslDescription,
 	List<JOB> fJobs(TEMPLATE template, String code);
 	
 	JOB fActiveJob(TEMPLATE template, String code) throws JeeslNotFoundException;
+	JOB cJob(USER user, List<FEEDBACK> feedbacks, TEMPLATE template, String code, String name, String jsonFilter) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException;
 	CACHE fJobCache(TEMPLATE template, String code) throws JeeslNotFoundException;
 	CACHE uJobCache(TEMPLATE template, String code, byte[] data) throws JeeslConstraintViolationException, JeeslLockingException;
-	JOB cJob(USER user, List<FEEDBACK> feedbacks, TEMPLATE template, String code, String name, String jsonFilter) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException;
 	
 	<T extends EjbWithMigrationJob1<STATUS>> List<T> fEntitiesWithPendingJob1(Class<T> c, int maxResult, boolean includeNull);
 	<T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithPendingJob2(Class<T> c, int maxResult, boolean includeNull);

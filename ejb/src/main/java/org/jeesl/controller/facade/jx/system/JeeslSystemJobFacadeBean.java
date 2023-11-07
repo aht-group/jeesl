@@ -182,19 +182,16 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 	@Override public JOB fActiveJob(TEMPLATE template, String code) throws JeeslNotFoundException
 	{
 		List<STATUS> statuses = new ArrayList<STATUS>();
-		try
-		{
-			statuses.add(this.fByCode(fbJob.getClassStatus(),JeeslJobStatus.Code.queue));
-			statuses.add(this.fByCode(fbJob.getClassStatus(),JeeslJobStatus.Code.working));
-		}
-		catch (JeeslNotFoundException e) {e.printStackTrace();}
+		statuses.add(this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.queue));
+		statuses.add(this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.working));
+		statuses.add(this.fByEnum(fbJob.getClassStatus(),JeeslJobStatus.Code.deferred));
 		
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
 		CriteriaQuery<JOB> cQ = cB.createQuery(fbJob.getClassJob());
 		Root<JOB> job = cQ.from(fbJob.getClassJob());
 		
-		Join<CACHE,TEMPLATE> jTemplate = job.join(JeeslJob.Attributes.template.toString());
+		Join<JOB,TEMPLATE> jTemplate = job.join(JeeslJob.Attributes.template.toString());
 		Path<STATUS> pStatus = job.get(JeeslJob.Attributes.status.toString());
 		Expression<String> pCode = job.get(JeeslJob.Attributes.code.toString());
 		
@@ -202,8 +199,8 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		predicates.add(pStatus.in(statuses));
 		predicates.add(cB.equal(pCode,code));
 		
-		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.select(job);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 
 		TypedQuery<JOB> tQ = em.createQuery(cQ);
 		List<JOB> results = tQ.getResultList();

@@ -18,21 +18,47 @@
 		<j:row>
 			<j:slot id="sQueue" width="12">
 				<h:form id="fQueue">
-					<p:dataTable var="j" value="#{cc.attrs.bean.jobs}" draggableRows="true"
-						selection="#{cc.attrs.bean.job}" selectionMode="single" rowKey="#{j.id}">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="j" value="#{cc.attrs.bean.jobs}" draggableRows="true"
+							selection="#{cc.attrs.bean.job}" selectionMode="single" rowKey="#{j.id}">
 						<f:facet name="header"><j:dtHeader title="#{msg.jeeslJobQueue}"/></f:facet>
 						<p:ajax event="rowSelect" listener="#{cc.attrs.bean.selectJob()}" update=":#{cc.id}:fJob" oncomplete="PF('wvJob').show();"/>
-						<p:column rendered="#{cc.attrs.withCategory}" headerText="#{msg.jeeslJobCategory}"><h:outputText value="#{j.template.category.name[localeCode].lang}"/></p:column>
-						<p:column headerText="#{msg.jeeslJobType}" styleClass="jeeslPfTcCenter"><jtp:symbolizer value="#{j.template.type}" height="12"/></p:column>
-						<p:column headerText="#{msg.jeeslJobPriority}" styleClass="jeeslPfTcCenter"><jtp:symbolizer value="#{j.priority}" height="12"/></p:column>
-						<p:column headerText="#{msg.jeeslJobCreated}"><h:outputText value="#{j.recordCreation}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" /></h:outputText></p:column>
-						<p:column headerText="#{msg.jeeslJobStarted}"><h:outputText value="#{j.recordStart}"><f:convertDateTime pattern="HH:mm:ss" /></h:outputText></p:column>
-						<p:column headerText="#{msg.jeeslJobCompleted}"><h:outputText value="#{j.recordComplete}"><f:convertDateTime pattern="HH:mm:ss" /></h:outputText></p:column>
-						<p:column headerText="#{msg.jeeslJobStatus}">
+						<p:column rendered="#{cc.attrs.withCategory}" styleClass="jeesl-center jeeslDtThVertical">
+							<f:facet name="header"><jtp:label entity="SystemJob" code="category"/></f:facet>
+							<jtp:symbolizer value="#{j.template.category}"/>
+							<h:outputText value="#{j.template.category.name[localeCode].lang}" rendered="false"/>
+						</p:column>
+						<p:column styleClass="jeesl-center jeeslDtThVertical">
+							<f:facet name="header"><jtp:label entity="SystemJob" code="type"/></f:facet>
+							<jtp:symbolizer value="#{j.template.type}"/>
+						</p:column>
+						<p:column styleClass="jeesl-center">
+							<f:facet name="header"><jtp:label entity="SystemJob" code="priority"/></f:facet>
+							<jtp:symbolizer value="#{j.priority}"/>
+						</p:column>
+						<p:column>
+							<f:facet name="header"><jtp:label entity="SystemJob" code="recordCreation"/></f:facet>
+							<h:outputText value="#{j.recordCreation}"><f:convertDateTime pattern="dd.MM.yyyy HH:mm:ss" /></h:outputText>
+						</p:column>
+						<p:column>
+							<f:facet name="header"><jtp:label entity="SystemJob" code="recordStart"/></f:facet>
+							<h:outputText value="#{j.recordStart}"><f:convertDateTime pattern="HH:mm:ss" /></h:outputText>
+						</p:column>
+						<p:column>
+							<f:facet name="header"><jtp:label entity="SystemJob" code="thlRecordComplete"/></f:facet>
+							<h:outputText value="#{j.recordComplete}"><f:convertDateTime pattern="HH:mm:ss" /></h:outputText>
+						</p:column>
+						<p:column>
+							<f:facet name="header"><jtp:label entity="SystemJob" code="status"/></f:facet>
 							<jtp:symbolizer value="#{j.status}" marginRight="5"/>
 							<h:outputText value="#{j.status.name[localeCode].lang}"/>
 						</p:column>
-						<p:column headerText="#{msg.jeeslJobDescription}"><h:outputText value="#{j.template.name[localeCode].lang} #{j.name}"/></p:column>
+						<p:column headerText="#{msg.jeeslJobDescription}">
+							<f:facet name="header"><jtp:label entity="SystemJob" code="name"/></f:facet>
+							<h:outputText value="#{j.template.name[localeCode].lang} " styleClass="jeesl-bold"/>
+							<br/><h:outputText value="#{j.name}" styleClass="jeesl-italic"/>
+							<br/><h:outputText value="#{j.code}"/>
+						</p:column>
 					</p:dataTable>
 				</h:form>
 				<h:form id="fJob">

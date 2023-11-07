@@ -21,6 +21,8 @@ public class JeeslWildflyFacadeLookup implements JeeslFacadeLookup
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslWildflyFacadeLookup.class);
 
+	private boolean debugOnInfo; @Override public boolean setDebugOnInfo(boolean value) {return this.debugOnInfo=value;}
+	
 	private String appName;
 	private String moduleName;
 	private final Properties properties = new Properties();
@@ -79,7 +81,7 @@ public class JeeslWildflyFacadeLookup implements JeeslFacadeLookup
         sb.append(distinctName).append("/");
         sb.append(beanName);
         sb.append("!").append(viewClassName);
-        logger.info("Trying: "+sb.toString());
+        if(debugOnInfo) { logger.info("Trying: "+sb.toString());}
         return (F) context.lookup(sb.toString());
     }
    
