@@ -19,7 +19,8 @@
 			<h:form id="fArtifacts">
 				<p:dataTable widgetVar="dtArtifacts" styleClass="jeesl-datatable"
 						var="a" value="#{cc.attrs.ctrl.artifacts}"
-						selection="#{cc.attrs.ctrl.artifact}" selectionMode="single" rowKey="#{a.id}">
+						selection="#{cc.attrs.ctrl.artifact}" selectionMode="single" rowKey="#{a.id}"
+						rows="10" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenArtifact" code="listOf"/>
 					</f:facet>
@@ -82,7 +83,7 @@
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenVersion" code="listOf"/>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectVersion()}" update=":#{cc.id}:fVersion"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectVersion()}" update=":#{cc.id}:fVersion :#{cc.id}:fDependencies"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderVersions()}" update="@form"/>
 					<p:column>
 		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="outdate"/></f:facet>
@@ -151,6 +152,21 @@
 					
 					</j:inputGrid>
 				</p:panel>
+			</h:form>
+			<h:form id="fDependencies">
+				<p:dataTable rendered="#{not empty cc.attrs.ctrl.version}" styleClass="jeesl-datatable"
+						var="d" value="#{cc.attrs.ctrl.dependencies}" draggableRows="true"
+						selection="#{cc.attrs.ctrl.dependency}" selectionMode="single" rowKey="#{d.id}">
+					<f:facet name="header">
+						<j:dtHeader entity="IoMavenDependency" code="listOf"/>
+					</f:facet>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenVersion"/></f:facet>
+						<h:outputText value="#{d.dependsOn.artifact.group.code}" />
+						- <h:outputText value="#{d.dependsOn.artifact.code}" />  
+						- <h:outputText value="#{d.dependsOn.code}" />  
+		            </p:column>
+				</p:dataTable>
 			</h:form>
 		</j:slot>
 	</j:row>

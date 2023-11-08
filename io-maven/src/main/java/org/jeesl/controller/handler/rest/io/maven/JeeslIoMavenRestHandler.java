@@ -2,6 +2,7 @@ package org.jeesl.controller.handler.rest.io.maven;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.keyvalue.MultiKey;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
 import org.jeesl.api.rest.i.io.JeeslIoMavenRestInterface;
 import org.jeesl.controller.handler.io.log.LoggedExit;
@@ -17,13 +20,18 @@ import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.ejb.io.maven.EjbMavenDependencyFactory;
 import org.jeesl.factory.ejb.io.maven.EjbMavenUsageFactory;
+import org.jeesl.factory.ejb.util.EjbIdFactory;
+import org.jeesl.factory.txt.io.maven.TxtMavenDependencyFactory;
+import org.jeesl.factory.txt.io.maven.TxtMavenVersionFactory;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenOutdate;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenStructure;
 import org.jeesl.interfaces.model.io.maven.classification.JeeslMavenSuitability;
 import org.jeesl.interfaces.model.io.maven.usage.JeeslIoMavenUsage;
 import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenDependency;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
@@ -38,27 +46,32 @@ import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiHost;
 import org.jeesl.model.json.io.maven.JsonFont;
 import org.jeesl.model.json.io.maven.JsonMavenArtifact;
+import org.jeesl.model.json.io.maven.JsonMavenDependency;
 import org.jeesl.model.json.io.maven.JsonMavenGraph;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.json.system.status.JsonScope;
+import org.jeesl.util.comparator.ejb.io.maven.EjbMavenDependencyComparator;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.exlp.util.io.StringUtil;
+
 
 public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 {
 	public static final long serialVersionUID=1;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenRestHandler.class);
 	
-	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
+	private final JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 	
 	private final EjbCodeCache<IoMavenStructure> cacheStructure;
 	private final EjbCodeCache<IoMavenOutdate> cacheOutdate;
 	private final EjbCodeCache<IoMavenSuitability> cacheSuitability;
 	private final EjbCodeCache<IoMavenScope> cacheScope;
 	
-	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
+	public JeeslIoMavenRestHandler(JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		this.fMaven=fMaven;
 		
@@ -76,13 +89,14 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 		try
 		{
 			module = fMaven.fByCode(IoMavenModule.class, graph.getCode());
-			
 			if(cacheStructure.equals(module.getStructure(),JeeslMavenStructure.Code.mm)) {return dut.toJson();}
 		}
 		catch (JeeslNotFoundException e) {dut.error(e); return dut.toJson();}
 		
+		
 		Map<IoMavenArtifact,List<IoMavenScope>> mapScope = new HashMap<>();
 		List<IoMavenVersion> currentVersions = new ArrayList<>();
+		Map<Long,IoMavenVersion> mapJsonId = new HashMap<>();
 		for(JsonMavenArtifact json : graph.getArtifacts())
 		{
 			logger.info(json.getGroupId()+":"+json.getArtifactId());
@@ -124,15 +138,67 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 					version = fMaven.save(version);
 				}
 				currentVersions.add(version);
-				
+				mapJsonId.put(json.getId(), version);
 			}
 			catch (JeeslConstraintViolationException | JeeslLockingException e1)
 			{
 				dut.error(e1);
 			}
 		}
+		
+		List<IoMavenDependency> nowDependencies = new ArrayList<>();
+		for(JsonMavenDependency json : graph.getDependencies())
+		{
+			IoMavenVersion vArtifact = mapJsonId.get(json.getFrom());
+			IoMavenVersion vDependsOn = mapJsonId.get(json.getTo());
+			IoMavenDependency tmpDependency = EjbMavenDependencyFactory.build(vArtifact, vDependsOn);
+			EjbIdFactory.setNextNegativeId(tmpDependency,nowDependencies);
+			nowDependencies.add(tmpDependency);
+		}
+		logger.info(StringUtil.stars());
+		Collections.sort(nowDependencies,EjbMavenDependencyComparator.instance(EjbMavenDependencyComparator.Type.code));
+		for(IoMavenDependency d : nowDependencies) {logger.info(TxtMavenDependencyFactory.build(d));}
+		
+		logger.info(StringUtil.stars());
+		
+		Map<IoMavenVersion,List<IoMavenVersion>> nowDependsOn = EjbMavenDependencyFactory.toMapDependsOn(nowDependencies);
+		List<IoMavenDependency> dbDependencies = fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().addVersions(nowDependsOn.keySet()));
+		Map<IoMavenVersion,List<IoMavenVersion>> dbDependsOn = EjbMavenDependencyFactory.toMapDependsOn(dbDependencies);
+		Map<MultiKey<IoMavenVersion>,IoMavenDependency> mapDependencies = EjbMavenDependencyFactory.toMultiKeyMap(dbDependencies);
+		
+		logger.info(IoMavenDependency.class.getSimpleName()+".now: "+nowDependencies.size());
+		logger.info(IoMavenDependency.class.getSimpleName()+".db: "+dbDependencies.size());
 
-		EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> query = JeeslIoMavenQuery.instance();
+		for(IoMavenVersion v : nowDependsOn.keySet())
+		{
+			List<IoMavenVersion> lNow = new ArrayList<>(); if(nowDependsOn.containsKey(v)) {lNow.addAll(nowDependsOn.get(v));}
+			List<IoMavenVersion> lDb = new ArrayList<>(); if(dbDependsOn.containsKey(v)) {lDb.addAll(dbDependsOn.get(v));}
+			
+			Collection<IoMavenVersion> cAdd = CollectionUtils.subtract(lNow,lDb);
+			Collection<IoMavenVersion> cDel = CollectionUtils.subtract(lDb,lNow);
+			
+			if(ObjectUtils.isNotEmpty(cAdd) || ObjectUtils.isNotEmpty(cDel))
+			{
+				logger.info(TxtMavenVersionFactory.full(v));
+				logger.info("\tcAdd "+cAdd.size());
+				logger.info("\tcDel "+cDel.size());
+				
+				List<IoMavenDependency> addList = new ArrayList<>();
+				for(IoMavenVersion dependsOn : cAdd) {addList.add(EjbMavenDependencyFactory.build(v,dependsOn));}
+				
+				List<IoMavenDependency> delList = new ArrayList<>();
+				for(IoMavenVersion dependsOn : cDel) {delList.add(mapDependencies.get(new MultiKey<IoMavenVersion>(v,dependsOn)));}
+				
+				try
+				{
+					fMaven.save(addList);
+					fMaven.rm(delList);
+				}
+				catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
+			}
+		}
+
+		EjbIoMavenQuery<IoMavenVersion,IoMavenModule,IoMavenStructure> query = JeeslIoMavenQuery.instance();
 		query.addRootFetch(JeeslIoMavenUsage.Attributes.scopes);
 		query.add(module);
 	
@@ -176,15 +242,15 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 			logger.info("Removing unneccessary usages: "+existingUsages.size());
 			fMaven.rm(new ArrayList<>(existingUsages.values()));
 			
-			logger.info("Removing unneccessary versions");
-			for(IoMavenVersion v : existingVersions)
-			{
-				List<IoMavenUsage> remaining = fMaven.allForParent(IoMavenUsage.class, JeeslIoMavenUsage.Attributes.version, v);
-				if(remaining.isEmpty())
-				{
-					fMaven.rm(v);
-				}
-			}			
+//			logger.info("Removing unneccessary versions");
+//			for(IoMavenVersion v : existingVersions)
+//			{
+//				List<IoMavenUsage> remaining = fMaven.allForParent(IoMavenUsage.class, JeeslIoMavenUsage.Attributes.version, v);
+//				if(remaining.isEmpty())
+//				{
+//					fMaven.rm(v);
+//				}
+//			}
 		}
 		catch (JeeslConstraintViolationException | JeeslLockingException e) {dut.fail(e,true); return dut.toJson();}
 		return dut.toJson();

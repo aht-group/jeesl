@@ -26,6 +26,7 @@ import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenDependency;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
@@ -49,7 +50,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenArtifactWc.class);
 	
-	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final Comparator<IoMavenArtifact> cpArtifact;
 	private final Comparator<IoMavenVersion> cpVersion;
@@ -62,11 +63,13 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	private final List<IoMavenVersion> versions; public List<IoMavenVersion> getVersions() {return versions;}
 	private final List<IoMavenSuitability> suitabilities; public List<IoMavenSuitability> getSuitabilities() {return suitabilities;}
 	private final List<IoMavenOutdate> outdates; public List<IoMavenOutdate> getOutdates() {return outdates;}
-	private final List<IoMavenMaintainer> maintainers; public List<IoMavenMaintainer> getMaintainers() {return maintainers;} 
+	private final List<IoMavenMaintainer> maintainers; public List<IoMavenMaintainer> getMaintainers() {return maintainers;}
+	private final List<IoMavenDependency> dependencies; public List<IoMavenDependency> getDependencies() {return dependencies;}
 	
 	private IoMavenArtifact artifact; public IoMavenArtifact getArtifact() {return artifact;} public void setArtifact(IoMavenArtifact artifact) {this.artifact = artifact;}
 	private IoMavenVersion version; public IoMavenVersion getVersion() {return version;} public void setVersion(IoMavenVersion version) {this.version = version;}
-	
+	private IoMavenDependency dependency; public IoMavenDependency getDependency() {return dependency;} public void setDependency(IoMavenDependency dependency) {this.dependency = dependency;}
+
 	private String fvGroup; public String getFvGroup() {return fvGroup;} public void setFvGroup(String fvGroup) {this.fvGroup = fvGroup;}
 	private String fvArtifact; public String getFvArtifact() {return fvArtifact;} public void setFvArtifact(String fvArtifact) {this.fvArtifact = fvArtifact;}
 	
@@ -86,10 +89,11 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		suitabilities = new ArrayList<>();
 		outdates = new ArrayList<>();
 		maintainers = new ArrayList<>();
+		dependencies = new ArrayList<>();
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fMaven=fMaven;
@@ -101,8 +105,8 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		this.reloadArtifacts();
 	}
 	
-	public void cancelVersion() {this.reset(false, true);}
-	private void reset(boolean rVersions, boolean rVersion)
+	public void cancelVersion() {this.reset(false,true,true);}
+	private void reset(boolean rVersions, boolean rVersion, boolean rDependencies)
 	{
 		if(rVersions) {versions.clear();}
 		if(rVersion) {version=null;}
@@ -129,7 +133,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	public void selectArtifact()
 	{
-		this.reset(true, true);
+		this.reset(true, true, true);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(artifact));}
 		this.reloadVersions();
 		this.reloadUsages();
@@ -146,13 +150,15 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	private void reloadVersions()
 	{
-		this.reset(true,false);
+		this.reset(true,false,false);
 		versions.addAll(fMaven.allForParent(IoMavenVersion.class,artifact));
 	}
 	
 	public void selectVersion() throws JeeslNotFoundException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(version));}
+		this.reset(false, false, true);
+		this.reloadDependencies();
 	}
 	
 	public void saveVersion() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
@@ -166,6 +172,8 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		mapVersion.putAll(EjbMavenVersionFactory.toMapArtifactVersion(versions));
 	}
 	
+	public void reorderVersions() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fMaven,versions); this.reloadVersions();}
+	
 	private void reloadUsages()
 	{
 		mapRoot.clear();
@@ -176,5 +184,9 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		mapUsage.putAll(EjbMavenUsageFactory.toMapVersionModuleUsage(usages));
 	}
 	
-	public void reorderVersions() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fMaven,versions); this.reloadVersions();}
+	private void reloadDependencies()
+	{
+		this.reset(false, false, true);
+		dependencies.addAll(fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().add(version)));
+	}
 }

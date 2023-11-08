@@ -19,3 +19,11 @@ alter table IoSsiContext add constraint FKo3hww31sflmjb5of0r352da7o foreign key 
 alter table IoSsiContext add constraint FK7sm3p3ni6coc32s1agnujvogr foreign key (entity_id) references IoLabelEntity;
 alter table IoSsiContext add constraint FKscx8uwvbwvyqty6ua0g88ni3q foreign key (json_id) references IoLabelEntity;
 alter table IoSsiContext add constraint FK1a966jxndggr3lm4cajq4gssv foreign key (system_id) references IoSsiSystem;
+alter table IoSsiError add constraint UKi5bfhi4n3taxmrmyc25k1fi8i unique (context_id, code);
+alter table IoSsiErrorJtDescription add constraint UK_b7i90or7yecljr2b7oio9kewv unique (description_id);
+alter table IoSsiErrorJtLang add constraint UK_5oxlbw7nq1pm7iscke5e0la09 unique (lang_id);
+alter table IoSsiError add constraint FK1ykx6nbnqelm4gxfa192j3kcg foreign key (context_id) references IoSsiContext;
+alter table IoSsiErrorJtDescription add constraint FKe6qdn7c8rru3tqjbyg5gusr63 foreign key (description_id) references IoDescription;
+alter table IoSsiErrorJtDescription add constraint FK2rkwn6fd1tbenay6oiaq0wf1w foreign key (error_id) references IoSsiError;
+alter table IoSsiErrorJtLang add constraint FKrywqf5t4fkjurf05sn0hvyhj2 foreign key (lang_id) references IoLang;
+alter table IoSsiErrorJtLang add constraint FK1gb39u2vrmebto0v260755xgf foreign key (error_id) references IoSsiError;

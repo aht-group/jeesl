@@ -14,3 +14,6 @@ alter table IoMavenUsageJtScope add constraint FKentl3c263stglsnhpr7hapqh foreig
 alter table IoMavenVersion add constraint FK3kvbv2g8ixxd1nab8ogonj920 foreign key (artifact_id) references IoMavenArtifact;
 alter table IoMavenVersion add constraint FKgaqt1x0x0ns4jfvah17p6ttn7 foreign key (maintainer_id) references IoStatus;
 alter table IoMavenVersion add constraint FK4rrubcdnpqrk14eqn8gi92elj foreign key (outdate_id) references IoStatus;
+alter table IoMavenDependency add constraint uk_IoMavenDependency_artifact_depends unique (artifact_id, dependsOn_id);
+alter table IoMavenDependency add constraint fk_IoMavenDependency_artifact foreign key (artifact_id) references IoMavenVersion;
+alter table IoMavenDependency add constraint fk_IoMavenDependency_dependsOn foreign key (dependsOn_id) references IoMavenVersion;

@@ -32,6 +32,7 @@ import org.jeesl.model.ejb.io.locale.IoLang;
 import org.jeesl.model.ejb.io.locale.IoLocale;
 import org.jeesl.model.ejb.io.locale.IoStatus;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenArtifact;
+import org.jeesl.model.ejb.io.maven.dependency.IoMavenDependency;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenGroup;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenMaintainer;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenOutdate;
@@ -59,7 +60,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	final static Logger logger = LoggerFactory.getLogger(JeeslIoMavenModuleWc.class);
 	
 	private JeeslIoGraphicFacade<IoStatus,IoGraphic,IoGraphicType,IoGraphicComponent,IoGraphicShape> fGraphic;
-	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
+	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 
 	private final List<IoMavenStructure> structures; public List<IoMavenStructure> getStructures() {return structures;}
 	private final List<IoMavenEe> enterpriseEditions;  public List<IoMavenEe> getEnterpriseEditions() {return enterpriseEditions;}
@@ -84,7 +85,7 @@ public class JeeslIoMavenModuleWc extends AbstractJeeslLocaleWebController<IoLan
 	}
 	
 	public void postConstruct(JeeslLocaleProvider<IoLocale> lp, JeeslFacesMessageBean bMessage,
-							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven,
+							JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven,
 							JeeslIoGraphicFacade<IoStatus,IoGraphic,IoGraphicType,IoGraphicComponent,IoGraphicShape> fGraphic)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);

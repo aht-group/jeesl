@@ -11,6 +11,7 @@ public class JsonMavenFerstlDependency implements Serializable
 {
 	public static final long serialVersionUID=1;
 
+
 	@JsonProperty("from")
 	private String from;
 	public String getFrom() {return from;}
@@ -27,12 +28,11 @@ public class JsonMavenFerstlDependency implements Serializable
 	public void setNumericFrom(Long numericFrom) {this.numericFrom = numericFrom;}
 
 	@JsonProperty("numericTo")
-	private String numericTo;
-	public String getNumericTo() {return numericTo;}
-	public void setNumericTo(String numericTo) {this.numericTo = numericTo;}
+	private Long numericTo;
+	public Long getNumericTo() {return numericTo;}
+	public void setNumericTo(Long numericTo) {this.numericTo = numericTo;}
 
-	
-	
+
 	@JsonProperty("resolution")
 	private String resolution;
 	public String getResolution() {return resolution;}

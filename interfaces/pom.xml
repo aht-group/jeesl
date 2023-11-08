@@ -107,12 +107,18 @@
 		   <scope>provided</scope>
 		</dependency>
 		
-		<!-- REST -->
+		<!-- REST 
 		<dependency>
 			<groupId>org.jboss.spec.javax.ws.rs</groupId>
 	  		<artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
 	  		<version>1.0.0.Final</version>
 			<scope>provided</scope>
+		</dependency> -->
+		<dependency>
+		    <groupId>javax.ws.rs</groupId>
+		    <artifactId>javax.ws.rs-api</artifactId>
+		    <version>2.1</version>
+		    <scope>provided</scope>
 		</dependency>
 			
 		<dependency>

@@ -2,6 +2,7 @@ package org.jeesl.util.query.ejb.io.maven;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,14 +10,13 @@ import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.jeesl.interfaces.util.query.io.EjbIoMavenQuery;
-import org.jeesl.model.ejb.io.maven.dependency.IoMavenScope;
 import org.jeesl.model.ejb.io.maven.dependency.IoMavenVersion;
 import org.jeesl.model.ejb.io.maven.module.IoMavenModule;
 import org.jeesl.model.ejb.io.maven.module.IoMavenStructure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JeeslIoMavenQuery extends AbstractEjbQuery implements EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure>
+public class JeeslIoMavenQuery extends AbstractEjbQuery implements EjbIoMavenQuery<IoMavenVersion,IoMavenModule,IoMavenStructure>
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -52,15 +52,15 @@ public class JeeslIoMavenQuery extends AbstractEjbQuery implements EjbIoMavenQue
 	private List<IoMavenVersion> versions;
 	public List<IoMavenVersion> getVersions() {return versions;}
 	public JeeslIoMavenQuery add(IoMavenVersion version) {if(Objects.isNull(versions)) {versions = new ArrayList<>();} versions.add(version); return this;}
-	public JeeslIoMavenQuery addVersions(List<IoMavenVersion> list) {if(Objects.isNull(versions)) {versions = new ArrayList<>();} versions.addAll(list); return this;}
+	public JeeslIoMavenQuery addVersions(Collection<IoMavenVersion> list) {if(Objects.isNull(versions)) {versions = new ArrayList<>();} versions.addAll(list); return this;}
 
 	private List<IoMavenStructure> structures;
 	@Override public List<IoMavenStructure> getStructures() {return structures;}
-	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> add(IoMavenStructure structure) {if(Objects.isNull(structures)) {structures = new ArrayList<>();} structures.add(structure); return this;}
-	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> addStructures(List<IoMavenStructure> list) {if(Objects.isNull(structures)) {structures = new ArrayList<>();} structures.addAll(list); return this;}
+	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenModule,IoMavenStructure> add(IoMavenStructure structure) {if(Objects.isNull(structures)) {structures = new ArrayList<>();} structures.add(structure); return this;}
+	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenModule,IoMavenStructure> addStructures(List<IoMavenStructure> list) {if(Objects.isNull(structures)) {structures = new ArrayList<>();} structures.addAll(list); return this;}
 	
 	private List<IoMavenModule> modules;
 	@Override public List<IoMavenModule> getModules() {return modules;}
-	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> add(IoMavenModule module) {if(Objects.isNull(modules)) {modules = new ArrayList<>();} modules.add(module); return this;}
-	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenScope,IoMavenModule,IoMavenStructure> addModules(List<IoMavenModule> list) {if(Objects.isNull(modules)) {modules = new ArrayList<>();} modules.addAll(list); return this;}
+	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenModule,IoMavenStructure> add(IoMavenModule module) {if(Objects.isNull(modules)) {modules = new ArrayList<>();} modules.add(module); return this;}
+	@Override public EjbIoMavenQuery<IoMavenVersion,IoMavenModule,IoMavenStructure> addModules(List<IoMavenModule> list) {if(Objects.isNull(modules)) {modules = new ArrayList<>();} modules.addAll(list); return this;}
 }

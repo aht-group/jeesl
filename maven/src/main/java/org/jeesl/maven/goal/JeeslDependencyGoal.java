@@ -117,15 +117,17 @@ public class JeeslDependencyGoal extends AbstractMojo
 		            .showScope(true)
 		            .showVersionsOnNodes(true)
 		            .showVersionsOnEdges(false)
-		            .repeatTransitiveDependencies(false)
+		            .repeatTransitiveDependencies(true)
 		            .configure(GraphBuilder.create(nodeIdRenderer));
+		    
 		    
 		    MavenGraphAdapter adapter = new MavenGraphAdapter(dependenciesResolver, transitiveIncludeExcludeFilter, targetFilter, EnumSet.of(INCLUDED));
 		    
-		    GraphFactory graphFactory = new AggregatingGraphFactory(adapter, subProjectsInReactorOrder(), globalFilter, graphBuilder,true,true);
+		    GraphFactory graphFactory = new AggregatingGraphFactory(adapter,this.subProjectsInReactorOrder(),
+		    								globalFilter, graphBuilder,true,true);
 		    String dependencyGraph = graphFactory.createGraph(project);
 		    
-		    logger.trace(dependencyGraph);
+//		    logger.info("Text debug"); logger.info(dependencyGraph);
 		      
 		    try
 		    {

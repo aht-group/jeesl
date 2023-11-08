@@ -16,9 +16,9 @@ public class JsonMavenDependency implements Serializable
 	public void setFrom(Long from) {this.from = from;}
 
 	@JsonProperty("to")
-	private String to;
-	public String getTo() {return to;}
-	public void setTo(String to) {this.to = to;}
+	private Long to;
+	public Long getTo() {return to;}
+	public void setTo(Long to) {this.to = to;}
 	
 	@Override
 	public String toString()

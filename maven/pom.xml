@@ -197,12 +197,14 @@
 			<artifactId>yuicompressor</artifactId>
 			<version>2.4.7</version>
 	    </dependency>
-            
+
+		<!-- Apache Commons -->
 		<dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant-compress</artifactId>
             <version>1.2</version>
         </dependency>
+        
             
 		<dependency>
 		    <groupId>org.wildfly.core</groupId>
