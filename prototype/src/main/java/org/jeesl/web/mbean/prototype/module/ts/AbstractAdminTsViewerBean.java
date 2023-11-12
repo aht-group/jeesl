@@ -53,21 +53,21 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 											UNIT extends JeeslStatus<L,D,UNIT>,
 											MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT>,
 											TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-											TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
+											TX extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
 											SOURCE extends EjbWithLangDescription<L,D>, 
 											BRIDGE extends JeeslTsBridge<EC>,
 											EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
 											ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 											INT extends JeeslTsInterval<L,D,INT,?>,
 											STAT extends JeeslTsStatistic<L,D,STAT,?>,
-											DATA extends JeeslTsData<TS,TRANSACTION,SAMPLE,POINT,WS>,
+											DATA extends JeeslTsData<TS,TX,SAMPLE,POINT,WS>,
 											POINT extends JeeslTsDataPoint<DATA,MP>,
 											SAMPLE extends JeeslTsSample, 
 											USER extends EjbWithId, 
 											WS extends JeeslStatus<L,D,WS>,
 											QAF extends JeeslStatus<L,D,QAF>,
 											CRON extends JeeslTsCron<SCOPE,INT,STAT>>
-					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
+					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -80,7 +80,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 	protected final SbSingleHandler<EC> sbhClass; public SbSingleHandler<EC> getSbhClass() {return sbhClass;}
 	protected final SbSingleHandler<INT> sbhInterval; public SbSingleHandler<INT> getSbhInterval() {return sbhInterval;}
 	
-	public AbstractAdminTsViewerBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractAdminTsViewerBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
 		sbhScope = new SbSingleHandler<SCOPE>(fbTs.getClassScope(),this);
@@ -91,7 +91,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		mapTsEntity = new HashMap<TS,EjbWithId>();
 	}
 	
-	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
+	protected void initSuper(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		sbhCategory.toggleAll();
@@ -102,7 +102,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		super.toggled(handler,c);
 		if(fbTs.getClassCategory().isAssignableFrom(c))
 		{
-			EjbTimeSeriesQuery<CAT,SCOPE,TS,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
+			EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
 			query.addCategories(sbhCategory.getSelected());
 			
 			sbhScope.setList(fTs.fTsScopes(query));

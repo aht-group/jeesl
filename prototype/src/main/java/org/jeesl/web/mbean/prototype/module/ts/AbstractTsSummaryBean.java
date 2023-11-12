@@ -51,21 +51,21 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 											UNIT extends JeeslStatus<L,D,UNIT>,
 											MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT>,
 											TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-											TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
+											TX extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
 											SOURCE extends EjbWithLangDescription<L,D>,
 											BRIDGE extends JeeslTsBridge<EC>,
 											EC extends JeeslTsEntityClass<L,D,CAT,ENTITY>,
 											ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
 											INT extends JeeslTsInterval<L,D,INT,?>,
 											STAT extends JeeslTsStatistic<L,D,STAT,?>,
-											DATA extends JeeslTsData<TS,TRANSACTION,SAMPLE,POINT,WS>,
+											DATA extends JeeslTsData<TS,TX,SAMPLE,POINT,WS>,
 											POINT extends JeeslTsDataPoint<DATA,MP>,
 											SAMPLE extends JeeslTsSample,
 											USER extends EjbWithId,
 											WS extends JeeslStatus<L,D,WS>,
 											QAF extends JeeslStatus<L,D,QAF>,
 											CRON extends JeeslTsCron<SCOPE,INT,STAT>>
-					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
+					extends AbstractAdminTsBean<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
 					implements Serializable,SbSingleBean
 {
 	private static final long serialVersionUID = 1L;
@@ -84,7 +84,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 	private TS ts; public TS getTs() {return ts;} public void setTs(TS ts) {this.ts = ts;}
 
 
-	public AbstractTsSummaryBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
+	public AbstractTsSummaryBean(final TsFactoryBuilder<L,D,LOC,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs)
 	{
 		super(fbTs);
 		mapBridge = new HashMap<Long,EjbWithId>();
@@ -93,7 +93,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		th = new JsonTuple1Handler<TS>(fbTs.getClassTs());
 	}
 
-	protected void postConstructSummary(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TRANSACTION,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
+	protected void postConstructSummary(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fTs)
 	{
 		super.postConstructTs(bTranslation,bMessage,fTs);
 		sbhClass.update(fTs.all(fbTs.getClassEntity()));
@@ -131,12 +131,12 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		catch (ClassNotFoundException e) {e.printStackTrace();}
 		if(bridges.size() > 0)
 		{
-			EjbTimeSeriesQuery<CAT,SCOPE,TS,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
+			EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
 			query.addBridges(bridges);
 			
 			series = fTs.fTimeSeries(query);
 			mapTs.putAll(efTs.toMapBridgTsList(series));
-			th.init(fTs.tpCountRecordsByTs(series));
+			th.init(fTs.tpcTsDataByTs(series));
 		}
 		else {series = new ArrayList<TS>();}
 		if(debugOnInfo){logger.info("reloadBridges Bridges:"+bridges.size()+" TS:"+series.size());}

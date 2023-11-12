@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jeesl.JeeslMavenBootstrap;
-import org.jeesl.processor.JeeslXhtmlParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mozilla.javascript.EvaluatorException;

@@ -91,7 +91,7 @@ public class JeeslTsStatisticController <L extends JeeslLang, D extends JeeslDes
 	private void reloadBridges()
 	{
 		List<TS> series = fTs.all(fbTs.getClassTs());
-		th.init(fTs.tpCountRecordsByTs(series));
+		th.init(fTs.tpcTsDataByTs(series));
 		
 		List<JsonTsStatistic> list = new ArrayList<JsonTsStatistic>();
 		for(TS ts : series)
