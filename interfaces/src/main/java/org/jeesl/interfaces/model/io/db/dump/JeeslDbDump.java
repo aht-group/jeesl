@@ -19,7 +19,7 @@ public interface JeeslDbDump<SYSTEM extends JeeslIoSsiSystem<?,?>,
 {
 	public static enum Attributes{record};
 	
-	public enum Tag {dbDumpTag,dbRestoreTag};
+	public enum Tag {dbBackupTag,dbDumpTag,dbRestoreTag};
 	
 	SYSTEM getSystem();
 	void setSystem(SYSTEM system);

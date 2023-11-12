@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsEntityClass;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
@@ -21,7 +22,7 @@ public class EjbTsFactory<SCOPE extends JeeslTsScope<?,?,?,?,UNIT,EC,INT>,
 							SOURCE extends EjbWithLangDescription<?,?>, 
 							BRIDGE extends JeeslTsBridge<EC>,
 							EC extends JeeslTsEntityClass<?,?,?,?>,
-							INT extends JeeslStatus<?,?,INT>,
+							INT extends JeeslTsInterval<?,?,INT,?>,
 							STAT extends JeeslTsStatistic<?,?,STAT,?>
 							>
 {

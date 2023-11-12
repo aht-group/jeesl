@@ -82,6 +82,13 @@
     		<artifactId>jeesl-io-ssi</artifactId>
     		<scope>compile</scope>
 		</dependency>
+		
+		<!-- MetaChart -->
+		<dependency>
+			<groupId>org.metachart</groupId>
+    		<artifactId>metachart-util</artifactId>
+    		<scope>provided</scope>
+		</dependency>
 	
 		<!-- JakartaEE -->
 		<dependency>
@@ -131,6 +138,11 @@
    			<groupId>org.apache.commons</groupId>
    			<artifactId>commons-lang3</artifactId>
    			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jgrapht</groupId>
+			<artifactId>jgrapht-core</artifactId>
+			<version>1.4.0</version>
 		</dependency>
 		
 		<!-- Logging -->

@@ -10,10 +10,12 @@ import java.util.Map;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoMavenFacade;
+import org.jeesl.controller.processor.io.maven.MavenMetachartGraphProcessor;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.factory.ejb.io.maven.EjbMavenDependencyFactory;
 import org.jeesl.factory.ejb.io.maven.EjbMavenUsageFactory;
 import org.jeesl.factory.ejb.io.maven.EjbMavenVersionFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
@@ -39,6 +41,9 @@ import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenArtifactComparator;
 import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
+import org.metachart.factory.json.chart.echart.type.JsonEchartGraphFactory;
+import org.metachart.interfaces.graph.EchartDataProvider;
+import org.metachart.model.json.graph.mc.JsonGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,12 +57,15 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	
 	private JeeslIoMavenFacade<IoMavenGroup,IoMavenArtifact,IoMavenVersion,IoMavenDependency,IoMavenScope,IoMavenOutdate,IoMavenMaintainer,IoMavenModule,IoMavenStructure,IoMavenUsage> fMaven;
 
+	private EchartDataProvider graph; public EchartDataProvider getGraph() {return graph;}
+	
 	private final Comparator<IoMavenArtifact> cpArtifact;
 	private final Comparator<IoMavenVersion> cpVersion;
 	
 	private final Map<IoMavenArtifact,List<IoMavenVersion>> mapVersion; public Map<IoMavenArtifact, List<IoMavenVersion>> getMapVersion() {return mapVersion;}
 	private final Map<IoMavenVersion,List<IoMavenModule>> mapRoot; public Map<IoMavenVersion,List<IoMavenModule>> getMapRoot() {return mapRoot;}
 	private final Map<IoMavenVersion,Map<IoMavenModule,List<IoMavenUsage>>> mapUsage; public Map<IoMavenVersion,Map<IoMavenModule,List<IoMavenUsage>>> getMapUsage() {return mapUsage;}
+	private final Map<IoMavenVersion,List<IoMavenVersion>> mapParent; public Map<IoMavenVersion, List<IoMavenVersion>> getMapParent() {return mapParent;}
 	
 	private final List<IoMavenArtifact> artifacts; public List<IoMavenArtifact> getArtifacts() {return artifacts;}
 	private final List<IoMavenVersion> versions; public List<IoMavenVersion> getVersions() {return versions;}
@@ -73,6 +81,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	private String fvGroup; public String getFvGroup() {return fvGroup;} public void setFvGroup(String fvGroup) {this.fvGroup = fvGroup;}
 	private String fvArtifact; public String getFvArtifact() {return fvArtifact;} public void setFvArtifact(String fvArtifact) {this.fvArtifact = fvArtifact;}
 	
+
 	public JeeslIoMavenArtifactWc()
 	{
 		super(IoLang.class,IoDescription.class);
@@ -83,6 +92,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 		mapVersion = new HashMap<>();
 		mapRoot = new HashMap<>();
 		mapUsage = new HashMap<>();
+		mapParent = new HashMap<>();
 		
 		artifacts = new ArrayList<>();
 		versions = new ArrayList<>();
@@ -110,6 +120,7 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	{
 		if(rVersions) {versions.clear();}
 		if(rVersion) {version=null;}
+		if(rDependencies) {dependencies.clear(); mapParent.clear();}
 	}
 	
 	@Override
@@ -188,5 +199,44 @@ public class JeeslIoMavenArtifactWc extends AbstractJeeslLocaleWebController<IoL
 	{
 		this.reset(false, false, true);
 		dependencies.addAll(fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().add(version)));
+
+		List<IoMavenVersion> dependenciesDependOn = EjbMavenDependencyFactory.toListDependsOn(dependencies);
+		List<IoMavenDependency> parents = fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().addVersions(dependenciesDependOn));
+		
+		mapParent.putAll(EjbMavenDependencyFactory.toMapDependsOn(parents));
+		
+		logger.info(IoMavenDependency.class.getSimpleName()+": "+dependencies.size());
+		for(IoMavenVersion v : dependenciesDependOn) {logger.info("\t"+v.getArtifact().getCode());}
+		
+		logger.info(IoMavenVersion.class.getSimpleName()+": "+dependenciesDependOn.size());
+		logger.info("Parents "+parents.size());
+		
+		MavenMetachartGraphProcessor mmgp = MavenMetachartGraphProcessor.instance(fMaven);
+		mmgp.dependenciesOf(version);
+		JsonGraph g = mmgp.toMetachartGraph();
+		graph = JsonEchartGraphFactory.instance().transform(g);
+	}
+	
+	public void addModulePath()
+	{
+		this.reset(false, false, true);
+		dependencies.addAll(fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().add(version)));
+
+		List<IoMavenVersion> dependenciesDependOn = EjbMavenDependencyFactory.toListDependsOn(dependencies);
+		List<IoMavenDependency> parents = fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().addVersions(dependenciesDependOn));
+		
+		mapParent.putAll(EjbMavenDependencyFactory.toMapDependsOn(parents));
+		
+		logger.info(IoMavenDependency.class.getSimpleName()+": "+dependencies.size());
+		for(IoMavenVersion v : dependenciesDependOn) {logger.info("\t"+v.getArtifact().getCode());}
+		
+		logger.info(IoMavenVersion.class.getSimpleName()+": "+dependenciesDependOn.size());
+		logger.info("Parents "+parents.size());
+		
+		MavenMetachartGraphProcessor mmgp = MavenMetachartGraphProcessor.instance(fMaven);
+		mmgp.dependenciesOf(version);
+		mmgp.addUsagePath(version);
+		JsonGraph g = mmgp.toMetachartGraph();
+		graph = JsonEchartGraphFactory.instance().transform(g);
 	}
 }

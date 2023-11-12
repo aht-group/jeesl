@@ -38,7 +38,7 @@ public class JeeslSystemPropertyVersionGwc <L extends JeeslLang, D extends Jeesl
 	{
 		try
 		{
-			String backupTag = fProperty.valueStringForKey(JeeslDbDump.Tag.dbRestoreTag.toString(),null);
+			String backupTag = fProperty.valueStringForKey(JeeslDbDump.Tag.dbBackupTag.toString(),null);
 			return LocalDateTime.parse(backupTag,DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 		}
 		catch (JeeslNotFoundException e) {return null;}

@@ -1,10 +1,13 @@
 package org.jeesl.factory.ejb.io.maven;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -28,6 +31,15 @@ public class EjbMavenDependencyFactory
 		if(Objects.nonNull(ejb.getDependsOn())) {ejb.setDependsOn(facade.find(IoMavenVersion.class,ejb.getDependsOn()));}
 	}
 	
+	public static List<IoMavenVersion> toListDependsOn(List<IoMavenDependency> list)
+	{
+		Set<IoMavenVersion> set = new HashSet<>();
+		for(IoMavenDependency d : list)
+		{
+			set.add(d.getDependsOn());
+		}
+		return new ArrayList<>(set);
+	}
 	public static Map<IoMavenVersion,List<IoMavenVersion>> toMapDependsOn(List<IoMavenDependency> list)
 	{
 		Map<IoMavenVersion,List<IoMavenVersion>> map = new HashMap<>();
@@ -40,7 +52,7 @@ public class EjbMavenDependencyFactory
 		return map;
 	}
 	
-	public static Map<MultiKey<IoMavenVersion>,IoMavenDependency> toMultiKeyMap(List<IoMavenDependency> list)
+	public static Map<MultiKey<IoMavenVersion>,IoMavenDependency> toMultiKeyMap(Collection<IoMavenDependency> list)
 	{
 		Map<MultiKey<IoMavenVersion>,IoMavenDependency> map = new HashMap<>();
 		for(IoMavenDependency d : list)
@@ -50,4 +62,6 @@ public class EjbMavenDependencyFactory
 		}
 		return map;
 	}
+	
+	
 }

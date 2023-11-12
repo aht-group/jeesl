@@ -35,7 +35,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	
 	private I identity;
 	private CTX context;
-	private boolean debugOnInfo; protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
+	private boolean debugOnInfo; //protected void setDebugOnInfo(boolean log) {debugOnInfo = log;}
 	public JeeslMenuHandler<V,CTX,M,USER,I> jogger() {this.debugOnInfo=true; return this;}
 
 	public static <V extends JeeslSecurityView<?,?,?,?,?,?>,CTX extends JeeslSecurityContext<?,?>,M extends JeeslSecurityMenu<?,V,CTX,M>,USER extends JeeslUser<?>,I extends JeeslIdentity<?,V,?,?,CTX,USER>>
@@ -44,7 +44,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	public JeeslMenuHandler()
 	{				
 		mainMenu = new ArrayList<>();
-		debugOnInfo = true;
+		debugOnInfo = false;
 	}
 	
 	public void postConstructMenu(JeeslSecurityBean<?,?,?,?,?,CTX,M,?> bSecurity, I identity)

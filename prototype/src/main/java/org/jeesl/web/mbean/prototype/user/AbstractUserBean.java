@@ -52,7 +52,8 @@ public abstract class AbstractUserBean <LOC extends JeeslLocale<?,?,LOC,?>,
 	protected String localeCode;
 	
 	protected boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo) {this.debugOnInfo=debugOnInfo;}
-
+	protected boolean roleDeveloper; public boolean isRoleDeveloper() {return roleDeveloper;}
+	
 	protected AbstractUserBean(IoLocaleFactoryBuilder<?,?,?> fbStatus)
 	{
 //		super(fbStatus.getClassL(),fbStatus.getClassD());

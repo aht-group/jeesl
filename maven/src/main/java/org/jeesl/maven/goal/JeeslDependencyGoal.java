@@ -1,7 +1,5 @@
 package org.jeesl.maven.goal;
 
-import static com.github.ferstl.depgraph.dependency.NodeResolution.INCLUDED;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -47,6 +45,7 @@ import com.github.ferstl.depgraph.dependency.DependencyNodeIdRenderer;
 import com.github.ferstl.depgraph.dependency.GraphFactory;
 import com.github.ferstl.depgraph.dependency.GraphStyleConfigurer;
 import com.github.ferstl.depgraph.dependency.MavenGraphAdapter;
+import com.github.ferstl.depgraph.dependency.NodeResolution;
 import com.github.ferstl.depgraph.dependency.json.JsonGraphStyleConfigurer;
 import com.github.ferstl.depgraph.graph.GraphBuilder;
 
@@ -99,11 +98,11 @@ public class JeeslDependencyGoal extends AbstractMojo
 	    	
 		    GraphStyleConfigurer graphStyleConfigurer = new JsonGraphStyleConfigurer();
 
-		    ArtifactFilter globalFilter = new AndArtifactFilter();
-		    ArtifactFilter transitiveIncludeExcludeFilter = new AndArtifactFilter();
-		    ArtifactFilter targetFilter = new AndArtifactFilter();
+		    ArtifactFilter fiGlobal = new AndArtifactFilter();
+		    ArtifactFilter fiTransitive = new AndArtifactFilter();
+		    ArtifactFilter fiTarget = new AndArtifactFilter();
 		    
-		    DependencyNodeIdRenderer nodeIdRenderer = DependencyNodeIdRenderer.versionlessId()
+		    DependencyNodeIdRenderer nodeRenderer = DependencyNodeIdRenderer.versionlessId()
 		            .withClassifier(true)
 		            .withType(true)
 		            .withScope(true);
@@ -118,13 +117,13 @@ public class JeeslDependencyGoal extends AbstractMojo
 		            .showVersionsOnNodes(true)
 		            .showVersionsOnEdges(false)
 		            .repeatTransitiveDependencies(true)
-		            .configure(GraphBuilder.create(nodeIdRenderer));
+		            .configure(GraphBuilder.create(nodeRenderer));
 		    
 		    
-		    MavenGraphAdapter adapter = new MavenGraphAdapter(dependenciesResolver, transitiveIncludeExcludeFilter, targetFilter, EnumSet.of(INCLUDED));
+		    MavenGraphAdapter adapter = new MavenGraphAdapter(dependenciesResolver, fiTransitive, fiTarget, EnumSet.of(NodeResolution.INCLUDED));
 		    
 		    GraphFactory graphFactory = new AggregatingGraphFactory(adapter,this.subProjectsInReactorOrder(),
-		    								globalFilter, graphBuilder,true,true);
+		    								fiGlobal, graphBuilder,true,true);
 		    String dependencyGraph = graphFactory.createGraph(project);
 		    
 //		    logger.info("Text debug"); logger.info(dependencyGraph);

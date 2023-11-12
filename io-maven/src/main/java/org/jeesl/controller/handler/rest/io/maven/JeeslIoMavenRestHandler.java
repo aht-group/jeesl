@@ -83,6 +83,8 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 	
 	@Override public JsonSsiUpdate uploadDependencyGraph(JsonMavenGraph graph)
 	{
+		if(Objects.isNull(graph.getDependencies())) {graph.setDependencies(new ArrayList<>());}
+		
 		DataUpdateTracker dut = DataUpdateTracker.instance();
 
 		IoMavenModule module = null;
@@ -146,31 +148,42 @@ public class JeeslIoMavenRestHandler implements JeeslIoMavenRestInterface
 			}
 		}
 		
-		List<IoMavenDependency> nowDependencies = new ArrayList<>();
+		logger.info(StringUtil.stars());
+		logger.info(StringUtil.stars());
+		
+		List<IoMavenDependency> resolvedDependencies = new ArrayList<>();
 		for(JsonMavenDependency json : graph.getDependencies())
 		{
 			IoMavenVersion vArtifact = mapJsonId.get(json.getFrom());
 			IoMavenVersion vDependsOn = mapJsonId.get(json.getTo());
+			
+			if(vArtifact.getCode().contains("css")) {logger.warn(TxtMavenVersionFactory.full(vArtifact));}
+			logger.warn(TxtMavenVersionFactory.full(vArtifact));
+			
 			IoMavenDependency tmpDependency = EjbMavenDependencyFactory.build(vArtifact, vDependsOn);
-			EjbIdFactory.setNextNegativeId(tmpDependency,nowDependencies);
-			nowDependencies.add(tmpDependency);
+			EjbIdFactory.setNextNegativeId(tmpDependency,resolvedDependencies);
+			resolvedDependencies.add(tmpDependency);
 		}
 		logger.info(StringUtil.stars());
-		Collections.sort(nowDependencies,EjbMavenDependencyComparator.instance(EjbMavenDependencyComparator.Type.code));
-		for(IoMavenDependency d : nowDependencies) {logger.info(TxtMavenDependencyFactory.build(d));}
+		Collections.sort(resolvedDependencies,EjbMavenDependencyComparator.instance(EjbMavenDependencyComparator.Type.code));
+		for(IoMavenDependency d : resolvedDependencies) {logger.info(TxtMavenDependencyFactory.build(d));}
 		
-		logger.info(StringUtil.stars());
 		
-		Map<IoMavenVersion,List<IoMavenVersion>> nowDependsOn = EjbMavenDependencyFactory.toMapDependsOn(nowDependencies);
+		
+		Map<IoMavenVersion,List<IoMavenVersion>> nowDependsOn = EjbMavenDependencyFactory.toMapDependsOn(resolvedDependencies);
+		
 		List<IoMavenDependency> dbDependencies = fMaven.fIoMavenDependencies(JeeslIoMavenQuery.instance().addVersions(nowDependsOn.keySet()));
 		Map<IoMavenVersion,List<IoMavenVersion>> dbDependsOn = EjbMavenDependencyFactory.toMapDependsOn(dbDependencies);
 		Map<MultiKey<IoMavenVersion>,IoMavenDependency> mapDependencies = EjbMavenDependencyFactory.toMultiKeyMap(dbDependencies);
 		
-		logger.info(IoMavenDependency.class.getSimpleName()+".now: "+nowDependencies.size());
+		logger.info(StringUtil.stars());
+		logger.info(IoMavenDependency.class.getSimpleName()+".resolved: "+resolvedDependencies.size());
 		logger.info(IoMavenDependency.class.getSimpleName()+".db: "+dbDependencies.size());
-
+		logger.info(StringUtil.stars());
+		
 		for(IoMavenVersion v : nowDependsOn.keySet())
 		{
+			logger.info(TxtMavenVersionFactory.full(v));
 			List<IoMavenVersion> lNow = new ArrayList<>(); if(nowDependsOn.containsKey(v)) {lNow.addAll(nowDependsOn.get(v));}
 			List<IoMavenVersion> lDb = new ArrayList<>(); if(dbDependsOn.containsKey(v)) {lDb.addAll(dbDependsOn.get(v));}
 			

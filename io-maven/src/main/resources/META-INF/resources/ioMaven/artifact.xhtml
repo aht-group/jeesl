@@ -3,6 +3,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui" xmlns:of="http://omnifaces.org/functions"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
+	xmlns:mc="http://www.metachart.org/ui" 
 	xmlns:composite="http://xmlns.jcp.org/jsf/composite">
 	
 	<composite:interface>
@@ -40,9 +41,9 @@
 		            	<f:facet name="header"><jtp:label entity="IoMavenArtifact" code="versions"/></f:facet>
 		            	<ui:repeat var="v" value="#{cc.attrs.ctrl.mapVersion[a]}">
 		            		<jtp:symbolizer value="#{v.outdate}" marginRight="5"/>
-						<h:outputText value="#{v.code}" rendered="#{empty v.label}"/>
-						<h:outputText value="#{v.label}" rendered="#{not empty v.label}"/>
-						<jtp:symbolizer value="#{v.maintainer}" marginLeft="5"/>
+							<h:outputText value="#{v.code}" rendered="#{empty v.label}"/>
+							<h:outputText value="#{v.label}" rendered="#{not empty v.label}"/>
+							<jtp:symbolizer value="#{v.maintainer}" marginLeft="5"/>
 		            		<br/>
 		            	</ui:repeat>
 						
@@ -83,7 +84,7 @@
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenVersion" code="listOf"/>
 					</f:facet>
-					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectVersion()}" update=":#{cc.id}:fVersion :#{cc.id}:fDependencies"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.ctrl.selectVersion()}" update=":#{cc.id}:fVersion :#{cc.id}:fDependencies :#{cc.id}:fGraph"/>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.ctrl.reorderVersions()}" update="@form"/>
 					<p:column>
 		            	<f:facet name="header"><jtp:label entity="IoMavenVersion" code="outdate"/></f:facet>
@@ -153,18 +154,45 @@
 					</j:inputGrid>
 				</p:panel>
 			</h:form>
+			<h:form id="fGraph">
+				<p:panel styleClass="jeesl-panel jeesl-map" rendered="#{not empty cc.attrs.ctrl.version}">
+					<f:facet name="actions">
+						<j:svg type="jeeslMagnet" listener="#{cc.attrs.ctrl.addModulePath()}" update="@form"/>
+					</f:facet>
+					<f:facet name="header"><j:pHeader title="Graph"/></f:facet>
+					<mc:echart type="graph">
+						<mc:data type="category" value="#{cc.attrs.ctrl.graph.graphCategories}"/>
+						<mc:data type="data" value="#{cc.attrs.ctrl.graph.graphNodes}"/>
+						<mc:data type="edge" value="#{cc.attrs.ctrl.graph.graphEdges}"/>
+					</mc:echart>
+				</p:panel>
+			</h:form>
 			<h:form id="fDependencies">
 				<p:dataTable rendered="#{not empty cc.attrs.ctrl.version}" styleClass="jeesl-datatable"
 						var="d" value="#{cc.attrs.ctrl.dependencies}" draggableRows="true"
-						selection="#{cc.attrs.ctrl.dependency}" selectionMode="single" rowKey="#{d.id}">
+						selection="#{cc.attrs.ctrl.dependency}" selectionMode="single" rowKey="#{d.id}"
+						rows="5" rowsPerPageTemplate="#{appSettingsBean.rowsPerPageTemplate}" paginator="true" paginatorPosition="bottom" paginatorTemplate="#{appSettingsBean.paginatorTemplate}">
 					<f:facet name="header">
 						<j:dtHeader entity="IoMavenDependency" code="listOf"/>
 					</f:facet>
 		            <p:column>
-		            	<f:facet name="header"><jtp:label entity="IoMavenVersion"/></f:facet>
-						<h:outputText value="#{d.dependsOn.artifact.group.code}" />
-						- <h:outputText value="#{d.dependsOn.artifact.code}" />  
-						- <h:outputText value="#{d.dependsOn.code}" />  
+		            	<f:facet name="header"><jtp:label entity="IoMavenDependency"/></f:facet>
+						<h:outputText value="#{of:abbreviate(d.dependsOn.artifact.group.code, 10)}"/>
+						<jtp:symbolizer value="#{d.dependsOn.artifact.suitability}" marginLeft="3" marginRight="1"/>
+						<h:outputText value="#{of:abbreviate(d.dependsOn.artifact.code,15)}" />  
+						<jtp:symbolizer value="#{d.dependsOn.outdate}" marginLeft="3" marginRight="1"/>
+						<h:outputText value="#{d.dependsOn.code}" rendered="#{empty d.dependsOn.label}"/> <h:outputText value="#{d.dependsOn.label}" rendered="#{not empty d.dependsOn.label}"/>
+		            </p:column>
+		            <p:column>
+		            	<f:facet name="header"><jtp:label entity="IoMavenDependency" code="dependsOn"/></f:facet>
+		            	<ui:repeat var="p" value="#{cc.attrs.ctrl.mapParent[d.dependsOn]}">
+		            		<h:outputText value="#{of:abbreviate(p.artifact.group.code, 10)}"/>
+							<jtp:symbolizer value="#{p.artifact.suitability}" marginLeft="5" marginRight="2"/>
+							<h:outputText value="#{of:abbreviate(p.artifact.code,15)}" />  
+							<jtp:symbolizer value="#{p.outdate}" marginLeft="5" marginRight="2"/>
+							<h:outputText value="#{p.code}" rendered="#{empty p.label}"/> <h:outputText value="#{p.label}" rendered="#{not empty p.label}"/>
+							<br/>
+		            	</ui:repeat>
 		            </p:column>
 				</p:dataTable>
 			</h:form>
