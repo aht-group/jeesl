@@ -131,7 +131,7 @@ public class AbstractTsSummaryBean <L extends JeeslLang, D extends JeeslDescript
 		catch (ClassNotFoundException e) {e.printStackTrace();}
 		if(bridges.size() > 0)
 		{
-			EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
+			EjbTimeSeriesQuery<CAT,SCOPE,TS,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
 			query.addBridges(bridges);
 			
 			series = fTs.fTimeSeries(query);

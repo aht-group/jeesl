@@ -95,7 +95,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		sqlFactory = new SqlTimeSeriesFactory<>(fbTs.getClassData());
 	}
 	
-	@Override public List<SCOPE> fTsScopes(EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query)
+	@Override public List<SCOPE> fTsScopes(EjbTimeSeriesQuery<CAT,SCOPE,TS,BRIDGE,INT,STAT> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -226,7 +226,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<TS> fTimeSeries(EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query)
+	@Override public List<TS> fTimeSeries(EjbTimeSeriesQuery<CAT,SCOPE,TS,BRIDGE,INT,STAT> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();

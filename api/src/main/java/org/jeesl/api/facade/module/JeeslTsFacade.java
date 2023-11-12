@@ -31,47 +31,46 @@ import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 								CATEGORY extends JeeslTsCategory<L,D,CATEGORY,?>,
-								SCOPE extends JeeslTsScope<L,D,CATEGORY,ST,UNIT,EC,INT>,
+								SCOPE extends JeeslTsScope<L,D,CATEGORY,ST,UNIT,EC,INTERVAL>,
 								ST extends JeeslTsScopeType<L,D,ST,?>,
 								UNIT extends JeeslStatus<L,D,UNIT>,
 								MP extends JeeslTsMultiPoint<L,D,SCOPE,UNIT>,
-								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INT,STAT>,
-								TRANSACTION extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
+								TS extends JeeslTimeSeries<SCOPE,TS,BRIDGE,INTERVAL,STATISTIC>,
+								TX extends JeeslTsTransaction<SOURCE,DATA,USER,?>,
 								SOURCE extends EjbWithLangDescription<L,D>, 
 								BRIDGE extends JeeslTsBridge<EC>,
 								EC extends JeeslTsEntityClass<L,D,CATEGORY,ENTITY>,
 								ENTITY extends JeeslRevisionEntity<L,D,?,?,?,?>,
-								INT extends JeeslTsInterval<L,D,INT,?>,
-								STAT extends JeeslTsStatistic<L,D,STAT,?>,
-								DATA extends JeeslTsData<TS,TRANSACTION,SAMPLE,POINT,WS>,
+								INTERVAL extends JeeslTsInterval<L,D,INTERVAL,?>,
+								STATISTIC extends JeeslTsStatistic<L,D,STATISTIC,?>,
+								DATA extends JeeslTsData<TS,TX,SAMPLE,POINT,WS>,
 								POINT extends JeeslTsDataPoint<DATA,MP>,
 								SAMPLE extends JeeslTsSample, 
 								USER extends EjbWithId, 
 								WS extends JeeslStatus<L,D,WS>,
 								QAF extends JeeslStatus<L,D,QAF>,
-								CRON extends JeeslTsCron<SCOPE,INT,STAT>>
+								CRON extends JeeslTsCron<SCOPE,INTERVAL,STATISTIC>>
 			extends JeeslFacade
 {	
-	List<SCOPE> fTsScopes(EjbTimeSeriesQuery<CATEGORY,SCOPE,BRIDGE,INT,STAT> query);
+	List<SCOPE> fTsScopes(EjbTimeSeriesQuery<CATEGORY,SCOPE,TS,BRIDGE,INTERVAL,STATISTIC> query);
 	List<EC> findClasses(Class<EC> cClass, Class<CATEGORY> cCategory, List<CATEGORY> categories, boolean showInvisibleClasses);
 	
 	<T extends EjbWithId> BRIDGE fBridge(EC entityClass, T ejb) throws JeeslNotFoundException;
 	<T extends EjbWithId> BRIDGE fcBridge(Class<BRIDGE> cBridge, EC entityClass, T ejb) throws JeeslConstraintViolationException;
 	<T extends EjbWithId> List<BRIDGE> fBridges(EC ec, List<T> ejbs);
 	
-	boolean isTimeSeriesAllowed(SCOPE scope, INT interval, EC c);
+	boolean isTimeSeriesAllowed(SCOPE scope, INTERVAL interval, EC c);
 	
-	TS fTimeSeries(SCOPE scope, INT interval, STAT statistic, BRIDGE bridge) throws JeeslNotFoundException;
-	TS fcTimeSeries(SCOPE scope, INT interval, STAT statistic, BRIDGE bridge) throws JeeslConstraintViolationException;
+	TS fTimeSeries(SCOPE scope, INTERVAL interval, STATISTIC statistic, BRIDGE bridge) throws JeeslNotFoundException;
+	TS fcTimeSeries(SCOPE scope, INTERVAL interval, STATISTIC statistic, BRIDGE bridge) throws JeeslConstraintViolationException;
 
+	List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes);
+	List<TS> fTimeSeries(SCOPE scope, INTERVAL interval, EC entityClass);
+	List<TS> fTimeSeries(EjbTimeSeriesQuery<CATEGORY,SCOPE,TS,BRIDGE,INTERVAL,STATISTIC> query);
+	
 	DATA fDataLast(TS series) throws JeeslNotFoundException;
 	
-//	List<TS> fTimeSeries1(List<BRIDGE> bridges);
-	List<TS> fTimeSeries(List<BRIDGE> bridges, List<SCOPE> scopes);
-	List<TS> fTimeSeries(SCOPE scope, INT interval, EC entityClass);
-	List<TS> fTimeSeries(EjbTimeSeriesQuery<CATEGORY,SCOPE,BRIDGE,INT,STAT> query);
-	
-	List<DATA> fData(TRANSACTION transaction);
+	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);
 	List<DATA> fData(WS workspace, TS timeSeries, int year);
 	List<DATA> fData(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
@@ -81,9 +80,9 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	List<POINT> fPoints(WS workspace, TS timeSeries, JeeslTsData.QueryInterval interval, Date from, Date to);
 	List<POINT> fPoints(WS workspace, List<TS> timeSeries, List<MP> mps, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
-	List<TRANSACTION> fTransactions(List<USER> users, JeeslTsData.QueryInterval interval, Date from, Date to);
+	List<TX> fTransactions(List<USER> users, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
-	void deleteTransaction(TRANSACTION transaction) throws JeeslConstraintViolationException;
+	void deleteTransaction(TX transaction) throws JeeslConstraintViolationException;
 	
 	JsonTuples1<TS> tpCountRecordsByTs(List<TS> series);
 }

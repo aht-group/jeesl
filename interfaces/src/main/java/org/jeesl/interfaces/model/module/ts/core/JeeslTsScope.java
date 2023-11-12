@@ -6,6 +6,7 @@ import java.util.List;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -27,7 +28,7 @@ public interface JeeslTsScope <L extends JeeslLang, D extends JeeslDescription,
 									ST extends JeeslTsScopeType<L,D,ST,?>,
 									UNIT extends JeeslStatus<L,D,UNIT>,
 									EC extends JeeslTsEntityClass<L,D,CAT,?>,
-									INT extends JeeslStatus<L,D,INT>
+									INT extends JeeslTsInterval<L,D,INT,?>
 //									,AS extends JeeslAttributeSet<L,D,?,?>
 									>
 		extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithCode,

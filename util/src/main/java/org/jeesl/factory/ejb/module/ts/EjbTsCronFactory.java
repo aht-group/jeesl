@@ -1,15 +1,15 @@
 package org.jeesl.factory.ejb.module.ts;
 
+import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
 import org.jeesl.interfaces.model.module.ts.core.JeeslTsScope;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsCron;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 public class EjbTsCronFactory <	SCOPE extends JeeslTsScope<?,?,?,?,?,?,INT>,
-								INT extends JeeslStatus<?,?,INT>,
+								INT extends JeeslTsInterval<?,?,INT,?>,
 								STAT extends JeeslTsStatistic<?,?,STAT,?>,
 								CRON extends JeeslTsCron<SCOPE,INT,STAT>>
 {

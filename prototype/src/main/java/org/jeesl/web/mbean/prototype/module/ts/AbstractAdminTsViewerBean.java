@@ -102,7 +102,7 @@ public class AbstractAdminTsViewerBean <L extends JeeslLang, D extends JeeslDesc
 		super.toggled(handler,c);
 		if(fbTs.getClassCategory().isAssignableFrom(c))
 		{
-			EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<CAT,SCOPE,BRIDGE,INT,STAT>();
+			EjbTimeSeriesQuery<CAT,SCOPE,TS,BRIDGE,INT,STAT> query = new EjbTimeSeriesQuery<>();
 			query.addCategories(sbhCategory.getSelected());
 			
 			sbhScope.setList(fTs.fTsScopes(query));
