@@ -315,6 +315,12 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+ fbTs.getClassData()+" found for series="+series.toString());}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("Results for "+fbTs.getClassData()+" and series="+series.toString()+" not unique");}
 	}
+	
+	@Override public List<DATA> fData(EjbTimeSeriesQuery<CAT, SCOPE, TS, BRIDGE, INT, STAT> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public List<DATA> fData(TRANSACTION transaction)
@@ -553,6 +559,4 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		
         return jtf.buildV2(tuples,JsonTupleFactory.Type.count);
 	}
-
-	
 }

@@ -70,6 +70,7 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	
 	DATA fDataLast(TS series) throws JeeslNotFoundException;
 	
+	List<DATA> fData(EjbTimeSeriesQuery<CATEGORY,SCOPE,TS,BRIDGE,INTERVAL,STATISTIC> query);
 	List<DATA> fData(TX transaction);
 	List<DATA> fData(WS workspace, TS timeSeries);
 	List<DATA> fData(WS workspace, TS timeSeries, int year);
