@@ -2,8 +2,10 @@ package org.jeesl.controller.facade.jx.module;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -54,6 +56,9 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
+import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 							CAT extends JeeslTsCategory<L,D,CAT,?>,
@@ -80,6 +85,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 					implements JeeslTsFacade<L,D,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON>
 {
 	private static final long serialVersionUID = 1L;
+	final static Logger logger = LoggerFactory.getLogger(JeeslTsFacadeBean.class);
 
 	private final TsFactoryBuilder<L,D,?,CAT,SCOPE,ST,UNIT,MP,TS,TX,SOURCE,BRIDGE,EC,ENTITY,INT,STAT,DATA,POINT,SAMPLE,USER,WS,QAF,CRON> fbTs;
 
@@ -505,11 +511,38 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 	}
 	
 	@Override
-	public void deleteTsSeries(TS series)
+	public void deleteTsSeries(TS series) throws JeeslConstraintViolationException
 	{
-		// TODO Auto-generated method stub
+		EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> qData = new EjbTimeSeriesQuery<>();
+		qData.add(series);
 		
+		List<DATA> datas = this.fData(qData);
+		logger.info(fbTs.getClassData()+": "+datas.size());
+		
+		Set<Long> setTxCount = new HashSet<>();
+		List<TX> listTxDelete = new ArrayList<>();
+		
+		EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INT,STAT> qTx = new EjbTimeSeriesQuery<>();
+		for(DATA d : datas) {qTx.add(d.getTransaction());}
+		
+		logger.info(fbTs.getClassData()+": Deleting "+datas.size());
+		this.rm(datas);
+		
+		
+		for(JsonTuple1<TX> t : this.tpcTsDataByTx(qTx).getTuples()) {setTxCount.add(t.getId1());}
+		logger.info(fbTs.getClassTransaction()+": remaining "+setTxCount.size());
+		for(TX tx : qTx.getTransactions())
+		{
+			if(!setTxCount.contains(tx.getId())) {listTxDelete.add(tx);}
+		}
+		
+		logger.info(fbTs.getClassTransaction()+": Deleting "+listTxDelete.size());
+		this.rm(listTxDelete);
+		
+		logger.info(fbTs.getClassTs()+": Deleting "+series.toString());
+		this.rm(series);
 	}
+	
 	@Override
 	public void deleteTransaction(TX transaction) throws JeeslConstraintViolationException
 	{
@@ -606,7 +639,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.groupBy(pTx.get("id"));
 		
-		Json1TuplesFactory<TX> jtf = Json1TuplesFactory.instance(fbTs.getClassTransaction()).facade(this);
+		Json1TuplesFactory<TX> jtf = Json1TuplesFactory.instance(fbTs.getClassTransaction()).tupleLoad(this,query.isTupleLoad());
 		return jtf.buildV2(em.createQuery(cQ).getResultList(),JsonTupleFactory.Type.count);
 	}
 }

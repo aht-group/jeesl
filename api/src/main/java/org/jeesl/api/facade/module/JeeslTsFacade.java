@@ -83,8 +83,8 @@ public interface JeeslTsFacade <L extends JeeslLang, D extends JeeslDescription,
 	
 	List<TX> fTransactions(List<USER> users, JeeslTsData.QueryInterval interval, Date from, Date to);
 	
+	void deleteTsSeries(TS series) throws JeeslConstraintViolationException;
 	void deleteTransaction(TX transaction) throws JeeslConstraintViolationException;
-	void deleteTsSeries(TS series);
 	
 	JsonTuples1<TS> tpcTsDataByTs(List<TS> series);
 	JsonTuples1<TX> tpcTsDataByTx(EjbTimeSeriesQuery<CATEGORY,SCOPE,TS,TX,BRIDGE,INTERVAL,STATISTIC> query);
