@@ -25,6 +25,7 @@
     <io:file code="jeeslSave" name="ui/control/crud/save.svg"/>
     <io:file code="jeeslReset" name="ui/control/crud/reset.svg"/>
     <io:file code="jeeslClean" name="ui/control/crud/clean.svg"/>
+    <io:file code="jeeslCut" name="ui/control/crud/cut.svg"/>
     <io:file code="jeeslClone" name="ui/control/crud/clone.svg"/>
     <io:file code="jeeslSearch" name="ui/control/crud/search.svg"/>
     <io:file code="jeeslReload" name="ui/control/crud/reload.svg"/>
