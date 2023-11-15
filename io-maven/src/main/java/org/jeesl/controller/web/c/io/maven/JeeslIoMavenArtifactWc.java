@@ -41,7 +41,7 @@ import org.jeesl.model.ejb.io.maven.module.IoMavenUsage;
 import org.jeesl.util.comparator.ejb.PositionComparator;
 import org.jeesl.util.comparator.ejb.io.maven.EjbMavenArtifactComparator;
 import org.jeesl.util.query.ejb.io.maven.JeeslIoMavenQuery;
-import org.metachart.factory.json.chart.echart.script.type.JsonEchartGraphFactory;
+import org.metachart.factory.json.chart.echart.js.type.JsonEchartGraphFactory;
 import org.metachart.interfaces.data.EchartGraphDataProvider;
 import org.metachart.model.json.graph.mc.JsonGraph;
 import org.slf4j.Logger;
