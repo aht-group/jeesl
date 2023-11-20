@@ -24,6 +24,8 @@ import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob1;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob2;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob3;
+import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob4;
+import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob5;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
@@ -60,12 +62,15 @@ public interface JeeslJobFacade <L extends JeeslLang,D extends JeeslDescription,
 	<T extends EjbWithMigrationJob1<STATUS>> List<T> fEntitiesWithPendingJob1(Class<T> c, int maxResult, boolean includeNull);
 	<T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithPendingJob2(Class<T> c, int maxResult, boolean includeNull);
 	<T extends EjbWithMigrationJob3<STATUS>> List<T> fEntitiesWithPendingJob3(Class<T> c, int maxResult, boolean includeNull);
+	<T extends EjbWithMigrationJob4<STATUS>> List<T> fEntitiesWithPendingJob4(Class<T> c, int maxResult, boolean includeNull);
+	<T extends EjbWithMigrationJob5<STATUS>> List<T> fEntitiesWithPendingJob5(Class<T> c, int maxResult, boolean includeNull);
 	
 	<T extends EjbWithMigrationJob2<STATUS>> List<T> fEntitiesWithJob2In(Class<T> c, List<STATUS> list, Integer maxResults);
 	
 	<T extends EjbWithMigrationJob1<STATUS>> JsonTuples1<STATUS> tpcJob1Status(Class<T> c);
 	<T extends EjbWithMigrationJob2<STATUS>> JsonTuples1<STATUS> tpcJob2Status(Class<T> c);
 	<T extends EjbWithMigrationJob3<STATUS>> JsonTuples1<STATUS> tpcJob3Status(Class<T> c);
-	
+	<T extends EjbWithMigrationJob4<STATUS>> JsonTuples1<STATUS> tpcJob4Status(Class<T> c);
+	<T extends EjbWithMigrationJob5<STATUS>> JsonTuples1<STATUS> tpcJob5Status(Class<T> c); 
 	
 }
