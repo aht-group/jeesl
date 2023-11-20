@@ -1,5 +1,7 @@
 package org.jeesl.factory.json.io.db.tuple;
 
+import java.util.Objects;
+
 import javax.persistence.Tuple;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
@@ -43,8 +45,10 @@ public class JsonTupleFactory
 	public static <A extends EjbWithId, B extends EjbWithId> JsonTuple build(JsonTuple2<A,B> tuple)
 	{
 		JsonTuple json = build();
-		if(tuple.getCount1()!=null) {json.setCount(tuple.getCount1());}
+		if(Objects.nonNull(tuple.getCount1())) {json.setCount(tuple.getCount1());}
 		else {json.setCount(tuple.getCount());}
+		
+		if(Objects.isNull(json.getCount1()) && Objects.nonNull(tuple.getCount())) {json.setCount1(tuple.getCount());}
 		
 		json.setSum(tuple.getSum());
 		json.setSum1(tuple.getSum1());

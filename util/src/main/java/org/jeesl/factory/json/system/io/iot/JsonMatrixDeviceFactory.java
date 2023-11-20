@@ -3,8 +3,10 @@ package org.jeesl.factory.json.system.io.iot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.collections4.ListUtils;
+import org.jeesl.interfaces.factory.json.JeeslJsonMatrixDeviceFactory;
 import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixDevice;
 import org.jeesl.interfaces.model.iot.matrix.JeeslIotMatrixLayout;
 import org.jeesl.model.json.io.iot.matrix.JsonMatrixDevice;
@@ -13,12 +15,14 @@ import org.slf4j.LoggerFactory;
 
 public class JsonMatrixDeviceFactory <DEVICE extends JeeslIotMatrixDevice<?,?,LAYOUT>,
 										LAYOUT extends JeeslIotMatrixLayout<?,?,LAYOUT,?>>
+										implements JeeslJsonMatrixDeviceFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(JsonMatrixDeviceFactory.class);
 
-	
 	private final JsonMatrixDevice q;
-
+	private JsonMatrixDevice json;
+	private String[][] cells; @Override public String[][] getCells() {return cells;}
+	
 	public static <DEVICE extends JeeslIotMatrixDevice<?,?,LAYOUT>,LAYOUT extends JeeslIotMatrixLayout<?,?,LAYOUT,?>>
 					JsonMatrixDeviceFactory<DEVICE,LAYOUT> instance(String localeCode, JsonMatrixDevice q) {return new JsonMatrixDeviceFactory<>(localeCode,q);}
 	public JsonMatrixDeviceFactory(String localeCode, JsonMatrixDevice q)
@@ -26,18 +30,37 @@ public class JsonMatrixDeviceFactory <DEVICE extends JeeslIotMatrixDevice<?,?,LA
 		this.q=q;
 	}
     
-    public static JsonMatrixDevice build() {return new JsonMatrixDevice();}
+    public static JsonMatrixDevice create() {return new JsonMatrixDevice();}
+    
+    public JsonMatrixDevice build()
+    {
+    	json.setData(new ArrayList<>());
+    	for(int r=0;r<cells.length;r++)
+    	{
+    		for(int c=0;c<cells[r].length;c++)
+        	{
+    			if(Objects.isNull(cells[r][c])) {json.getData().add("");}
+        		else {json.getData().add(cells[r][c]);}
+        	}
+    		
+    	}
+    	
+    	return json;
+    }
     
     public JsonMatrixDevice build(DEVICE ejb)
 	{
-		JsonMatrixDevice xml = build();
-		if(q.getId()!=null){xml.setId(ejb.getId());}
-		if(q.getCode()!=null){xml.setCode(ejb.getCode());}
-		if(q.getName()!=null){xml.setName(ejb.getName());}
-		if(q.getRows()!=null){xml.setRows(ejb.getTotalRows());}
-		if(q.getColumns()!=null){xml.setColumns(ejb.getTotalCols());}
-		if(q.getBrightness()!=null){xml.setBrightness(ejb.getBrightness());}
-		return xml;
+    	json = create();
+		if(q.getId()!=null){json.setId(ejb.getId());}
+		if(q.getCode()!=null){json.setCode(ejb.getCode());}
+		if(q.getName()!=null){json.setName(ejb.getName());}
+		if(q.getRows()!=null){json.setRows(ejb.getTotalRows());}
+		if(q.getColumns()!=null){json.setColumns(ejb.getTotalCols());}
+		if(q.getBrightness()!=null){json.setBrightness(ejb.getBrightness());}
+		
+		cells = new String[ejb.getTotalRows()][ejb.getTotalCols()];
+		
+		return json;
 	}
 
 	public List<String> transform(DEVICE device, JsonMatrixDevice json)
