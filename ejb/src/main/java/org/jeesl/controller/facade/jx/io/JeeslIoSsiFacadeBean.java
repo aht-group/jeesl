@@ -492,8 +492,8 @@ public class JeeslIoSsiFacadeBean<L extends JeeslLang,D extends JeeslDescription
 		cQ.where(cB.and(pSsiData(cB, ejb,query)));
 		
 		TypedQuery<DATA> tQ = em.createQuery(cQ);
-		tQ.setFirstResult(query.getFirstResult());
-		tQ.setMaxResults(query.getMaxResults());
+		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
+		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
 		
 		return tQ.getResultList();
 	}

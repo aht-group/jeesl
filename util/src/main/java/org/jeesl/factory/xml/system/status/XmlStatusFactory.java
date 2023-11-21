@@ -28,7 +28,7 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	
-	public XmlStatusFactory(Query query){this(query.getLang(),query.getStatus());}
+	public XmlStatusFactory(Query query) {this(query.getLang(),query.getStatus());}
 	public XmlStatusFactory(Status q){this(null,q);}
 	public XmlStatusFactory(String localeCode, Status q)
 	{
