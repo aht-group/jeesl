@@ -107,9 +107,7 @@ public class JsonTuple1Handler <A extends EjbWithId> extends JsonTupleHandler
 		else {listA.addAll(facade.find(cA,new ArrayList<Long>(mapA.keySet())));}
 		sizeA = listA.size();
 		if(jcpA!=null && jcpA.provides(cA)){Collections.sort(listA, jcpA.provide(cA));}
-	}
-	
-	
+	}	
 	
 	public boolean contains(A a){return map1.containsKey(a);}
 	public JsonTuple value(A a)

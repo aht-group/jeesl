@@ -431,6 +431,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		documents.clear();documents.addAll(transition.getDocuments());
 
 		constraints.clear();
+		actionHandler.checkPreconditions(constraints,entity,transition);
 		actionHandler.checkPreconditions(constraints,entity,actions);
 		if(!documents.isEmpty()) {actionHandler.checkDocuments(constraints,entity,documents);}
 
@@ -452,6 +453,7 @@ public class JeeslWorkflowEngine <L extends JeeslLang, D extends JeeslDescriptio
 		if(debugOnInfo) {logger.info("Perform "+fbWorkflow.getClassTransition().getSimpleName()+" to "+transition.getDestination().getCode());}
 
 		constraints.clear();
+		actionHandler.checkPreconditions(constraints,entity,transition);
 		actionHandler.checkPreconditions(constraints,entity,actions);
 		actionHandler.checkRemark(constraints,transition,remark);
 

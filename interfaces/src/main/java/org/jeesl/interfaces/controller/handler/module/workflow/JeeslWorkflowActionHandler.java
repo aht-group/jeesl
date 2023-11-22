@@ -31,6 +31,7 @@ public interface JeeslWorkflowActionHandler<WPD extends JeeslWorkflowDocument<?,
 											USER extends JeeslUser<?>>
 {
 	boolean checkVeto(JeeslWithWorkflow<?> entity, WT transition);
+	void workflowPreconditions(List<WCS> constraints, JeeslWithWorkflow<?> entity, WT transition) throws JeeslNotFoundException;
 	void workflowPreconditions(List<WCS> constraints, JeeslWithWorkflow<?> entity, WA action) throws JeeslNotFoundException;
 	JeeslWithWorkflow<WF> statusUpdated(JeeslWithWorkflow<WF> entity) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException, UtilsProcessingException, JeeslWorkflowException;
 	JeeslWithWorkflow<WF> perform(USER user, JeeslWithWorkflow<WF> entity, WA action) throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException, UtilsProcessingException, JeeslWorkflowException;

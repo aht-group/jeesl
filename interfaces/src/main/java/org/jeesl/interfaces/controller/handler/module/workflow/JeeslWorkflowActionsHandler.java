@@ -34,6 +34,7 @@ public interface JeeslWorkflowActionsHandler<WPD extends JeeslWorkflowDocument<?
 	
 	void checkRemark(List<WCS> constraints, WT transition, String remark);
 	boolean checkVeto(JeeslWithWorkflow<?> entity, WT transition);
+	void checkPreconditions(List<WCS> constraints, JeeslWithWorkflow<?> entity, WT transition);
 	void checkPreconditions(List<WCS> constraints, JeeslWithWorkflow<?> entity, List<WA> actions);
 	void checkDocuments(List<WCS> constraints, JeeslWithWorkflow<?> entity, List<WPD> documents);
 	<W extends JeeslWithWorkflow<WF>> void abort(JeeslWithWorkflow<WF> entity);

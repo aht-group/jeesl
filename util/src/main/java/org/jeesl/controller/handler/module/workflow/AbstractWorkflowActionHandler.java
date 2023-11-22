@@ -171,6 +171,23 @@ public abstract class AbstractWorkflowActionHandler <WPD extends JeeslWorkflowDo
 		return veto;
 	}
 	
+	@Override public void checkPreconditions(List<WC> constraints, JeeslWithWorkflow<?> entity, WT transition)
+	{
+		for(JeeslWorkflowActionHandler<WPD,WT,WA,AB,AO,RE,RA,WF,WC,USER> ah : actionHandlers)
+		{
+			try
+			{
+				ah.workflowPreconditions(constraints, entity, transition);
+			}
+			catch (JeeslNotFoundException e)
+			{
+				WC c = getConstraintNotFound();
+				c.setContextMessage(e.getMessage());
+				constraints.add(c);
+			}
+		}
+	}
+	
 	@Override public void checkPreconditions(List<WC> constraints, JeeslWithWorkflow<?> entity, List<WA> actions)
 	{
 		for(JeeslWorkflowActionHandler<WPD,WT,WA,AB,AO,RE,RA,WF,WC,USER> ah : actionHandlers)

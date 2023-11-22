@@ -60,6 +60,21 @@ public class JsonTuple3Handler <A extends EjbWithId, B extends EjbWithId, C exte
 		tuples3.clear();
 	}
 	
+	public int size()
+	{
+		int size=0;
+		for(A a : map3.keySet())
+		{
+			Map<B,Map<C,JsonTuple3<A,B,C>>> mB = map3.get(a);
+			for(B b : mB.keySet())
+			{
+				Map<C,JsonTuple3<A,B,C>> mC = mB.get(b);
+				size = size+mC.size();
+			}
+		}
+		return size;
+	}
+	
 	public JsonTuple3Handler<A,B,C> init(JsonTuples3<A,B,C> tuples) {init(null,tuples,false); return this;}
 	public void init(JeeslFacade fJeesl, JsonTuples3<A,B,C> tuples, boolean load){init(fJeesl,tuples,true,true,true);}
 	public void init(JeeslFacade fJeesl, JsonTuples3<A,B,C> tuples, boolean loadA, boolean loadB, boolean loadC)

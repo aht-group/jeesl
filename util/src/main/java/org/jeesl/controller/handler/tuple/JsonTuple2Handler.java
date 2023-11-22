@@ -207,4 +207,14 @@ public class JsonTuple2Handler <A extends EjbWithId, B extends EjbWithId>
 		super.debug(debug);
 		logger.info(cB.getSimpleName()+" "+listB.size());
 	}
+	
+	public int size()
+	{
+		int size=0;
+		for(A a : map.keySet())
+		{
+			size = size + map.get(a).size();
+		}
+		return size;
+	}
 }
