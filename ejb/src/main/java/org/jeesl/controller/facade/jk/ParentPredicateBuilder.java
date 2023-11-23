@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.facade.jk;
+package org.jeesl.controller.facade.jk;
 
 import java.util.ArrayList;
 import java.util.List;

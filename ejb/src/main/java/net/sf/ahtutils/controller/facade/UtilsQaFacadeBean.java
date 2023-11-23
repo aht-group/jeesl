@@ -12,9 +12,9 @@ import javax.persistence.criteria.Root;
 
 import org.jeesl.api.facade.module.JeeslQaFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
-import org.jeesl.interfaces.facade.jx.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;

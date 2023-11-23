@@ -7,13 +7,13 @@ import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.facade.jk.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.json.system.io.label.JsonRevisionFactory;
 import org.jeesl.interfaces.facade.ParentPredicate;
-import org.jeesl.interfaces.facade.jx.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.io.label.entity.EjbWithRevisionAttributes;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;

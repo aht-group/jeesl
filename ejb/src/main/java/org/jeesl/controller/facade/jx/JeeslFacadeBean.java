@@ -28,7 +28,6 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.facade.ParentPredicate;
-import org.jeesl.interfaces.facade.jx.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.marker.EjbEquals;
 import org.jeesl.interfaces.model.marker.jpa.EjbMergeable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
