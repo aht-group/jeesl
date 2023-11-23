@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -259,18 +260,23 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 
 		Collections.sort(roles,cpRole);
 
-		if(preSelection==null) {reloadProcesses();}
+		if(Objects.isNull(preSelection))
+		{
+			logger.info("No Pre-Section, reloading Processes");
+			this.reloadProcesses();
+		}
 		else
 		{
 			sbhContext.setDefault(preSelection.getContext());
 			reloadProcesses();
 			sbhProcess.setDefault(preSelection);
 		}
+		
 		if(sbhProcess.isSelected())
 		{
 			process = fApproval.find(fbWorkflow.getClassProcess(),sbhProcess.getSelection());
-			reloadProcess();
-			updateProcesDiagram();
+			this.reloadProcess();
+			this.updateProcesDiagram();
 		}
 	}
 
@@ -335,6 +341,13 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 		sbhProcess.update(fWorkflow.allForContext(fbWorkflow.getClassProcess(),sbhContext.getSelection()));
 		if(debugOnInfo){logger.info(AbstractLogMessage.reloaded(fbWorkflow.getClassProcess(), sbhProcess.getList(),sbhContext.getSelection()));}
 	}
+	
+	private void reloadProcess()
+	{
+		logger.info("reloadProcess "+process.toString());
+		this.reloadStages();
+		this.reloadDocuments();
+	}
 
 	public void reloadStages()
 	{
@@ -342,14 +355,8 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 		stages.addAll(fWorkflow.allForParent(fbWorkflow.getClassStage(),process));
 
 		mapTransition.clear();
-		buildTransitionMap(fWorkflow.allForGrandParent(fbWorkflow.getClassTransition(),fbWorkflow.getClassStage(),JeeslWorkflowTransition.Attributes.source.toString(),process,JeeslWorkflowStage.Attributes.process.toString()));
+		this.buildTransitionMap(fWorkflow.allForGrandParent(fbWorkflow.getClassTransition(),fbWorkflow.getClassStage(),JeeslWorkflowTransition.Attributes.source.toString(),process,JeeslWorkflowStage.Attributes.process.toString()));
 		updateProcesDiagram();
-	}
-
-	private void reloadProcess()
-	{
-		reloadStages();
-		reloadDocuments();
 	}
 
 	public void addProcess() throws JeeslNotFoundException

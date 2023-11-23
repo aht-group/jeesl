@@ -13,6 +13,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.json.system.io.label.JsonRevisionFactory;
 import org.jeesl.interfaces.facade.ParentPredicate;
+import org.jeesl.interfaces.facade.jx.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.io.label.entity.EjbWithRevisionAttributes;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
@@ -107,7 +108,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 
 	@Override public List<RS> findRevisionScopes(List<RC> categories, boolean showInvisibleScopes)
 	{
-		List<ParentPredicate<RC>> ppCategory = ParentPredicate.createFromList(fbRevision.getClassCategory(),"category",categories);
+		List<ParentPredicate<RC>> ppCategory = ParentPredicateBuilder.createFromList(fbRevision.getClassCategory(),"category",categories);
 		return allForOrParents(fbRevision.getClassScope(),ppCategory);
 	}
 

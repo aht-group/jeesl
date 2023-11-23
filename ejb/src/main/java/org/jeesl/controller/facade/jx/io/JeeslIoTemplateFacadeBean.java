@@ -15,6 +15,7 @@ import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.IoTemplateFactoryBuilder;
 import org.jeesl.interfaces.facade.ParentPredicate;
+import org.jeesl.interfaces.facade.jx.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateDefinition;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateToken;
@@ -77,7 +78,7 @@ public class JeeslIoTemplateFacadeBean<L extends JeeslLang,D extends JeeslDescri
 	
 	@Override public List<TEMPLATE> fTemplates(List<CATEGORY> categories, boolean showInvisibleEntities)
 	{
-		List<ParentPredicate<CATEGORY>> ppCategory = ParentPredicate.createFromList(fbTemplate.getClassCategory(),"category",categories);
+		List<ParentPredicate<CATEGORY>> ppCategory = ParentPredicateBuilder.createFromList(fbTemplate.getClassCategory(),"category",categories);
 		return allForOrParents(fbTemplate.getClassTemplate(),ppCategory);
 	}
 	

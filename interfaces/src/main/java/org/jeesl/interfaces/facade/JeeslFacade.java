@@ -7,6 +7,7 @@ import java.util.Set;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.interfaces.facade.ParentPredicate;
 import org.jeesl.interfaces.model.marker.EjbEquals;
 import org.jeesl.interfaces.model.marker.jpa.EjbMergeable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;

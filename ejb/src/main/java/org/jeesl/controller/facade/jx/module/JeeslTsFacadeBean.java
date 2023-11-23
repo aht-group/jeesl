@@ -34,6 +34,7 @@ import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.factory.sql.module.SqlTimeSeriesFactory;
 import org.jeesl.interfaces.facade.ParentPredicate;
+import org.jeesl.interfaces.facade.jx.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsCategory;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
@@ -128,7 +129,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 
 	@Override public List<EC> findClasses(Class<EC> cClass, Class<CAT> cCategory, List<CAT> categories, boolean showInvisibleScopes)
 	{
-		List<ParentPredicate<CAT>> ppCategory = ParentPredicate.createFromList(cCategory,"category",categories);
+		List<ParentPredicate<CAT>> ppCategory = ParentPredicateBuilder.createFromList(cCategory,"category",categories);
 		return allForOrParents(cClass,ppCategory);
 	}
 
