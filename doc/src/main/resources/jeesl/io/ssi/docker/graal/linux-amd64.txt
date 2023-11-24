@@ -20,6 +20,6 @@ RUN cd /root \
 	&& mkdir maven \
 	&& mkdir config
 
-COPY settings.xml /root/.m2
+COPY resources/maven/settings.xml /root/.m2
 	
 WORKDIR /root/git

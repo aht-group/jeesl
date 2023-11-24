@@ -1,0 +1,9 @@
+FROM debian:bullseye
+
+RUN apt-get update && apt-get install -y ncurses-dev file wget cpio unzip rsync bc git make build-essential
+
+RUN cd root && git clone https://gitlab.com/buildroot.org/buildroot.git
+
+RUN mkdir /root/host
+	
+WORKDIR /root/buildroot

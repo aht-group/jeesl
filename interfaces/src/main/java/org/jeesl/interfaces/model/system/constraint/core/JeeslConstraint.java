@@ -38,6 +38,8 @@ public interface JeeslConstraint<L extends JeeslLang, D extends JeeslDescription
 					JeeslWithLevel<LEVEL>
 {
 	public static enum Attributes{scope,code};
+	public enum Constraint {constraintNotFound}
+	
 	
 	SCOPE getScope();
 	void setScope(SCOPE scope);
