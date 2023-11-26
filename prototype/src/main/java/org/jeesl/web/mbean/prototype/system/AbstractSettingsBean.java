@@ -24,6 +24,7 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 	
 	protected String filterStyle; public String getFilterStyle() {return filterStyle;}
 	protected String filterStyle35; public String getFilterStyle35() {return filterStyle35;}
+	protected String fs50; public String getFs50() {return fs50;}
 	protected String filterStyle75; public String getFilterStyle75() {return filterStyle75;}
 	protected String filterStyleCode; public String getFilterStyleCode() {return filterStyleCode;}
 	
@@ -46,6 +47,7 @@ public class AbstractSettingsBean implements Serializable,JeeslSettingsBean
 		filterStyle = "width: 75%;";
 		filterStyleCode = "width: 50px;";
 		filterStyle35 = "width: 35px;";
+		fs50 = "width: 50px;";
 		filterStyle75 = "width: 75px;";
 		
 		allowUploadSvg = "/(\\.|\\/)(svg)$/";

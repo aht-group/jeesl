@@ -26,20 +26,9 @@ public class EjbCodeCache <T extends EjbWithCode>
 		this.c=c;
 		map = new HashMap<>();
 	}
-		
-	public EjbCodeCache(Class<T> c, List<T> list)
-	{
-		this(c);
-		this.reload(list);
-	}
 	
-	public EjbCodeCache<T> load() {map.clear(); if(Objects.nonNull(facade)) {this.reload(facade.all(c));} return this;}
-	
-	public void reload(List<T> list)
-	{
-		map.clear();
-		for(T t : list) {map.put(t.getCode(),t);}
-	}
+	public EjbCodeCache<T> load() {map.clear(); if(Objects.nonNull(facade)) {this.init(facade.all(c));} return this;}
+	public EjbCodeCache<T> init(List<T> list) {map.clear(); if(Objects.nonNull(list)) { for(T t : list) {map.put(t.getCode(),t);}} return this;}
 	
 	public int size() {return map.size();}
 	public boolean contains(String code) {return map.containsKey(code);}

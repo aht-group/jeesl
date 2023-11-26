@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+import org.jeesl.model.ejb.io.db.CqElOrdering;
+import org.jeesl.model.ejb.io.db.CqLiteral;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
@@ -29,12 +31,12 @@ public interface JeeslQuery extends Serializable
 	
 	List<String> getRootFetches();
 	
+	List<CqElOrdering> getOrderings();
 	String getSortBy();
 	boolean isSortAscending();
 	
 	void sort(String sortBy, boolean sortAscending);
-	void noSort();
-	boolean withSort();
+//	void noSort();
 	
 	void debug(boolean debug);
 	void debug(boolean debug, int ident);
@@ -44,6 +46,12 @@ public interface JeeslQuery extends Serializable
 	
 	Boolean getBool1();
 	void setBool1(Boolean bool1);
+	
+	CqLiteral getLiteral1();
+	CqLiteral getLiteral2();
+	CqLiteral getLiteral3();
+	CqLiteral getLiteral4();
+	CqLiteral getLiteral5();
 	
 	String getString1();
 	void setString1(String string1);

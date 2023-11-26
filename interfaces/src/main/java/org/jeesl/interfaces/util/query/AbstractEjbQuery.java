@@ -8,6 +8,8 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.ejb.io.db.CqElOrdering;
+import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -102,6 +104,14 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	public LocalDate getLd3() {return ld3;}
 	public abstract AbstractEjbQuery ld3(LocalDate ld3);
 	
+	//Literals
+	protected CqLiteral literal1; @Override public CqLiteral getLiteral1() {return literal1;}
+	protected CqLiteral literal2; @Override public CqLiteral getLiteral2() {return literal2;}
+	protected CqLiteral literal3; @Override public CqLiteral getLiteral3() {return literal3;}
+	protected CqLiteral literal4; @Override public CqLiteral getLiteral4() {return literal4;}
+	protected CqLiteral literal5; @Override public CqLiteral getLiteral5() {return literal5;}
+	
+	
 	//Strings
 	private String string1;
 	@Override public String getString1() {return string1;}
@@ -121,6 +131,15 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public void setBool1(Boolean bool1) {this.bool1 = bool1;}
 	
 	//Sorting
+	
+	private List<CqElOrdering> orderings;
+	@Override public List<CqElOrdering> getOrderings() {return orderings;}
+	protected void addOrdering(CqElOrdering ordering)
+	{
+		if(Objects.isNull(orderings)) {orderings = new ArrayList<>();}
+		orderings.add(ordering);
+	}
+	
 	private String sortBy;
 	@Override public String getSortBy() {return sortBy;}
 
@@ -132,13 +151,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		this.sortBy=sortBy;
 		this.sortAscending=sortAscending;
 	}
-	@Override public void noSort()
-	{
-		sortBy=null;
-	}
-	@Override public boolean withSort(){return (sortBy!=null && sortBy.trim().length()>0);}
 
-	
 	//Fetches
 	protected List<String> rootFetches; public List<String> getRootFetches() {return rootFetches;}
 	public abstract <E extends Enum<E>> AbstractEjbQuery addRootFetch(E e);
