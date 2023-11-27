@@ -1,6 +1,5 @@
-@mixin jeesl-widget-header {
+@mixin jeesl-header {
 	background: $panel-header-gradient;
-	border: $border;
 	color: $body-foreground;
 	min-height: $element-height;
 	padding: 0;
@@ -8,6 +7,18 @@
 	
 	@media (max-width: 768px) {
 		min-height: $element-height-mobile;
+	}
+	
+}
+
+@mixin jeesl-widget-header {
+	@include jeesl-header;
+	
+	border: none;
+	border-bottom: $header-underline;
+	
+	@media (max-width: 768px) {
+		border-bottom-width: $header-element-underline-mobile;
 	}
 }
 
@@ -17,6 +28,10 @@ body {
 		
 		.ui-panel-titlebar {
 			border-radius: $border-radius
+		}
+		
+		.ui-panelgrid .ui-panelgrid-cell {
+			background: transparent;
 		}
 	}
 	
@@ -87,6 +102,11 @@ body {
 		}
 	}
 	
+	.ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
+		color: $body-foreground;
+		font-weight: 700;
+	}
+	
 	.ui-selectonemenu-panel .ui-selectonemenu-items .ui-selectonemenu-item.ui-state-highlight {
 		color: $white-100;
 	}
@@ -100,8 +120,9 @@ body {
 		}
 			
 		thead th {
-			@include jeesl-widget-header;
+			@include jeesl-header;
 			
+			border-color: $border-colour;
 			height: $element-height;
 			
 			@media (max-width: 768px) {
@@ -130,7 +151,7 @@ body {
 				}
 				
 				&.ui-state-highlight {
-					background: $dark-colour;
+					background: $highlight-colour;
 					color: $white-100;
 				}
 				
@@ -145,11 +166,11 @@ body {
 		.ui-datatable-header {
 			@include jeesl-widget-header;
 			
-			border-width: 0 0 $border-width;
+//			border-width: 0 0 $border-width;
 			
-			@media (max-width: 768px) {
-				border-width: 0;
-			}
+//			@media (max-width: 768px) {
+//				border-width: 0;
+//			}
 		}
 		
 		.ui-paginator {
@@ -168,6 +189,22 @@ body {
 				&:before {
 					display: none;
 				}
+			}
+		}
+	}
+	
+	.ui-chkbox .ui-chkbox-box {
+		&.ui-state-focus {
+			box-shadow: none;
+		}
+		
+		.ui-chkbox-icon.ui-icon-check {
+			font-family: "Font Awesome 5 Free";
+			font-weight: 700;
+			left: 0;
+			
+			&:before {
+				content: "\1F5F8";
 			}
 		}
 	}

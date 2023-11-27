@@ -369,7 +369,7 @@ $border: $border-width solid $border-colour;
 		}
 		
 		&.ui-corner-all:before {
-			border-radius: 0;
+			border-radius: inherit;
 		}
 		
 		.ui-icon {

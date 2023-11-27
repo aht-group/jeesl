@@ -60,7 +60,7 @@ $overlay-shadow: 0 3px 3px $black-40;
 $highlight-shadow: 0 -1px inset $white-80;
 $text-shadow: 0 1px 0 $white-70;
 
-$highlight-colour: $bright-colour;
+$highlight-colour: $medium-colour;
 
 $overlay-box-shadow: 0 5px 10px $black-80;
 
@@ -89,12 +89,12 @@ $header-underline: 2px solid $dark-colour;
 	$breadcrumb-background-gradient: linear-gradient(to right, $white-0, $bright-colour) !global;
 	$status-bar-background-gradient: linear-gradient(to bottom, $dark-colour, $medium-colour) !global;
 	
-	$highlight-colour: $bright-colour !global;
+	$highlight-colour: $medium-colour !global;
 	$header-underline: 2px solid $dark-colour !global;
 }
 
 @mixin setHighlightColour($highlight) {
-	$highlight-colour: $highlight;
+	$highlight-colour: $highlight !global;
 }
 
 @for $i from 1 through 8 {

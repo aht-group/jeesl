@@ -3374,6 +3374,13 @@ body, .ui-widget {
 			}
 		}
 		
+		thead th, tbody td {
+			&.jeesl-min-width-column {
+				white-space: nowrap;
+				width: 0px;
+			}
+		}
+		
 		.jeesl-cell-select {
 			transition: border-color .2s linear;
 			
