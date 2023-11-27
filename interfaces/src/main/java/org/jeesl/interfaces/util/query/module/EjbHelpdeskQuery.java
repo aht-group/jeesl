@@ -76,8 +76,8 @@ public class EjbHelpdeskQuery<L extends JeeslLang,D extends JeeslDescription,
 	@Override public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
 	//LocalDate
-	public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
-	public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
+	public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld1(LocalDate ld1) {this.localDate1 = ld1; return this;}
+	public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbHelpdeskQuery<L,D,R,RREF,CAT,TICKET,STATUS,EVENT,TYPE,LEVEL,PRIORITY,USER> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
 	private List<R> realms; public List<R> getRealm() {return realms;}

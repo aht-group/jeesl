@@ -8,7 +8,8 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.ejb.io.db.CqElOrdering;
+import org.jeesl.model.ejb.io.db.CqDate;
+import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.CqLiteral;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,17 +93,14 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	public void setToDate3(Date toDate3) {this.toDate3 = toDate3;}
 	
 	//LocalDate
-	protected LocalDate ld1;
-	public LocalDate getLd1() {return ld1;}
-	public abstract AbstractEjbQuery ld1(LocalDate ld1);
+	protected List<CqDate> localDates; @Override public List<CqDate> getLocalDates() {return localDates;}
 	
-	protected LocalDate ld2;
-	public LocalDate getLd2() {return ld2;}
-	public abstract AbstractEjbQuery ld2(LocalDate ld2);
+	protected LocalDate localDate1; @Override public LocalDate getLocalDate1() {return localDate1;}
+	protected LocalDate localDate2; @Override public LocalDate getLocalDate2() {return localDate2;}
 	
 	protected LocalDate ld3;
 	public LocalDate getLd3() {return ld3;}
-	public abstract AbstractEjbQuery ld3(LocalDate ld3);
+//	public abstract AbstractEjbQuery ld3(LocalDate ld3);
 	
 	//Literals
 	protected CqLiteral literal1; @Override public CqLiteral getLiteral1() {return literal1;}
@@ -132,9 +130,9 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	
 	//Sorting
 	
-	private List<CqElOrdering> orderings;
-	@Override public List<CqElOrdering> getOrderings() {return orderings;}
-	protected void addOrdering(CqElOrdering ordering)
+	private List<CqOrdering> orderings;
+	@Override public List<CqOrdering> getOrderings() {return orderings;}
+	protected void addOrdering(CqOrdering ordering)
 	{
 		if(Objects.isNull(orderings)) {orderings = new ArrayList<>();}
 		orderings.add(ordering);
@@ -176,8 +174,8 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		if(firstResult!=null){list.add("firstResult: "+firstResult);}
 		if(maxResults!=null){list.add("maxResults: "+maxResults);}
 		if(Objects.nonNull(tupleLoad)) {list.add("Tuple-Load: "+tupleLoad);}
-		if(Objects.nonNull(ld1)) {list.add(LocalDate.class.getSimpleName()+".1: "+ld1.toString());}
-		if(Objects.nonNull(ld2)) {list.add(LocalDate.class.getSimpleName()+".2: "+ld2.toString());}
+		if(Objects.nonNull(localDate1)) {list.add(LocalDate.class.getSimpleName()+".1: "+localDate1.toString());}
+		if(Objects.nonNull(localDate2)) {list.add(LocalDate.class.getSimpleName()+".2: "+localDate2.toString());}
 		return list;
 	}
 }

@@ -46,8 +46,8 @@ public class EjbAomQuery<ASSET extends JeeslAomAsset<?,ASSET,?,?,?>,
 	@Override public EjbAomQuery<ASSET,EVENT> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 	
 	//LocalDate
-	public EjbAomQuery<ASSET,EVENT> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
-	public EjbAomQuery<ASSET,EVENT> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
+	public EjbAomQuery<ASSET,EVENT> ld1(LocalDate ld1) {this.localDate1 = ld1; return this;}
+	public EjbAomQuery<ASSET,EVENT> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbAomQuery<ASSET,EVENT> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
 	private List<ASSET> assets; public List<ASSET> getAssets() {return assets;}

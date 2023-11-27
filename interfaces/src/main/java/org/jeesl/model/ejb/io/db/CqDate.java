@@ -7,18 +7,20 @@ public class CqDate implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	public enum Type {Before,BeforeOrEqual,Equal,AfterOrEqual,After}
+	public enum Type {DbIsBefore,DbIsBeforeOrEqual,DbIsEqual,DbIsEqualOrAfter,DbIsAfter}
 	
 	private final Type type; public final Type getType() {return type;}
 	private final LocalDate date; public LocalDate getDate() {return date;}
+	private final String path; public String getPath() {return path;}
 
-	public static CqDate beforeOrEqual(LocalDate date) {return new CqDate(Type.BeforeOrEqual,date);}
-	public static CqDate afterOrEqual(LocalDate date) {return new CqDate(Type.AfterOrEqual,date);}
+	public static CqDate dbIsBeforeOrEqual(LocalDate date, String path) {return new CqDate(Type.DbIsBeforeOrEqual,date,path);}
+	public static CqDate dbIsEqualOrAfter(LocalDate date, String path) {return new CqDate(Type.DbIsEqualOrAfter,date,path);}
 
-	private CqDate(Type type, LocalDate date)
+	private CqDate(Type type, LocalDate date, String path)
 	{
 		this.type=type;
 		this.date=date;
+		this.path=path;
 	}
 	
 	public String toString()
@@ -29,4 +31,6 @@ public class CqDate implements Serializable
 		sb.append(date.toString());
 		return sb.toString();
 	}
+	
+	public static String path(Serializable...attributes) {return CqOrdering.path(attributes); }
 }

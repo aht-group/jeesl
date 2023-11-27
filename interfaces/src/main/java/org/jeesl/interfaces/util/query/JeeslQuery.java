@@ -7,7 +7,7 @@ import java.util.List;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.model.ejb.io.db.CqDate;
-import org.jeesl.model.ejb.io.db.CqElOrdering;
+import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.CqLiteral;
 
 @DownloadJeeslDescription
@@ -32,7 +32,7 @@ public interface JeeslQuery extends Serializable
 	
 	List<String> getRootFetches();
 	
-	List<CqElOrdering> getOrderings();
+	List<CqOrdering> getOrderings();
 	String getSortBy();
 	boolean isSortAscending();
 	
@@ -66,7 +66,9 @@ public interface JeeslQuery extends Serializable
 //	CqDate getDate1();
 //	CqDate getDate2();
 	
-	LocalDate getLd1();
-	LocalDate getLd2();
+	List<CqDate> getLocalDates();
+	
+	LocalDate getLocalDate1();
+	LocalDate getLocalDate2();
 	LocalDate getLd3();
 }
