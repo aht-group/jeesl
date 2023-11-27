@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
+import org.jeesl.model.ejb.io.db.CqDate;
 import org.jeesl.model.ejb.io.db.CqElOrdering;
 import org.jeesl.model.ejb.io.db.CqLiteral;
 
@@ -61,6 +62,9 @@ public interface JeeslQuery extends Serializable
 	
 	String getString3();
 	void setString3(String string3);
+	
+//	CqDate getDate1();
+//	CqDate getDate2();
 	
 	LocalDate getLd1();
 	LocalDate getLd2();
