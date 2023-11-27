@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.CqDate;
@@ -98,17 +99,10 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected LocalDate localDate1; @Override public LocalDate getLocalDate1() {return localDate1;}
 	protected LocalDate localDate2; @Override public LocalDate getLocalDate2() {return localDate2;}
 	
-	protected LocalDate ld3;
-	public LocalDate getLd3() {return ld3;}
-//	public abstract AbstractEjbQuery ld3(LocalDate ld3);
+	protected LocalDate ld3; public LocalDate getLd3() {return ld3;}
 	
 	//Literals
-	protected CqLiteral literal1; @Override public CqLiteral getLiteral1() {return literal1;}
-	protected CqLiteral literal2; @Override public CqLiteral getLiteral2() {return literal2;}
-	protected CqLiteral literal3; @Override public CqLiteral getLiteral3() {return literal3;}
-	protected CqLiteral literal4; @Override public CqLiteral getLiteral4() {return literal4;}
-	protected CqLiteral literal5; @Override public CqLiteral getLiteral5() {return literal5;}
-	
+	protected List<CqLiteral> literals; @Override public List<CqLiteral> getLiterals() {return literals;}
 	
 	//Strings
 	private String string1;
@@ -176,6 +170,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 		if(Objects.nonNull(tupleLoad)) {list.add("Tuple-Load: "+tupleLoad);}
 		if(Objects.nonNull(localDate1)) {list.add(LocalDate.class.getSimpleName()+".1: "+localDate1.toString());}
 		if(Objects.nonNull(localDate2)) {list.add(LocalDate.class.getSimpleName()+".2: "+localDate2.toString());}
+		if(ObjectUtils.isNotEmpty(literals)) {for(CqLiteral l : literals) {logger.info(l.toString());}}
 		return list;
 	}
 }

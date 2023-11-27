@@ -33,6 +33,8 @@ public interface JeeslQuery extends Serializable
 	List<String> getRootFetches();
 	
 	List<CqOrdering> getOrderings();
+	List<CqLiteral> getLiterals();
+	
 	String getSortBy();
 	boolean isSortAscending();
 	
@@ -48,12 +50,6 @@ public interface JeeslQuery extends Serializable
 	Boolean getBool1();
 	void setBool1(Boolean bool1);
 	
-	CqLiteral getLiteral1();
-	CqLiteral getLiteral2();
-	CqLiteral getLiteral3();
-	CqLiteral getLiteral4();
-	CqLiteral getLiteral5();
-	
 	String getString1();
 	void setString1(String string1);
 	
@@ -62,9 +58,6 @@ public interface JeeslQuery extends Serializable
 	
 	String getString3();
 	void setString3(String string3);
-	
-//	CqDate getDate1();
-//	CqDate getDate2();
 	
 	List<CqDate> getLocalDates();
 	

@@ -32,5 +32,5 @@ public class CqDate implements Serializable
 		return sb.toString();
 	}
 	
-	public static String path(Serializable...attributes) {return CqOrdering.path(attributes); }
+	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
 }
