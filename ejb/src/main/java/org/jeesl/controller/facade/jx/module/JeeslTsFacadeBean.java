@@ -25,6 +25,7 @@ import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslTsFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
@@ -128,7 +129,7 @@ public class JeeslTsFacadeBean<L extends JeeslLang, D extends JeeslDescription,
 
 	@Override public List<EC> findClasses(Class<EC> cClass, Class<CAT> cCategory, List<CAT> categories, boolean showInvisibleScopes)
 	{
-		List<ParentPredicate<CAT>> ppCategory = ParentPredicate.createFromList(cCategory,"category",categories);
+		List<ParentPredicate<CAT>> ppCategory = ParentPredicateBuilder.createFromList(cCategory,"category",categories);
 		return allForOrParents(cClass,ppCategory);
 	}
 

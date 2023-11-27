@@ -780,7 +780,7 @@ public class JeeslFacadeBean implements JeeslFacade
 
 	@Override public <T extends EjbWithId, P extends EjbWithId> T oneForParents(Class<T> cl, List<ParentPredicate<P>> parents) throws JeeslNotFoundException
 	{
-		List<T> list = this.fForAndOrParents(cl, parents, ParentPredicate.empty());
+		List<T> list = this.fForAndOrParents(cl, parents, ParentPredicateBuilder.empty());
 		if(list.size()>1){throw new JeeslNotFoundException("More than one result found for Query");}
 		if(list.size()==0){throw new JeeslNotFoundException("No "+cl.getSimpleName()+" found for Query");}
 		return list.get(0);
@@ -985,8 +985,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		Root<T> from = criteriaQuery.from(queryClass);
 		Expression<Date> eRecord = from.get("record");
 
-		Predicate pOr = cB.or(ParentPredicate.array(cB, from, lpOr));
-		Predicate pAnd = cB.and(ParentPredicate.array(cB, from, lpAnd));
+		Predicate pOr = cB.or(ParentPredicateBuilder.array(cB, from, lpOr));
+		Predicate pAnd = cB.and(ParentPredicateBuilder.array(cB, from, lpAnd));
 
 		CriteriaQuery<T> select = criteriaQuery.select(from);
 		if(ascending){select.orderBy(cB.asc(eRecord));}
@@ -1055,7 +1055,7 @@ public class JeeslFacadeBean implements JeeslFacade
 
 	@Override public <T extends EjbWithId, P extends EjbWithId> List<T> allForOrParents(Class<T> queryClass, List<ParentPredicate<P>> parents)
 	{
-		List<ParentPredicate<P>> lAnd = ParentPredicate.empty();
+		List<ParentPredicate<P>> lAnd = ParentPredicateBuilder.empty();
 		return fForAndOrParents(queryClass,  lAnd,parents);
 	}
 
@@ -1076,8 +1076,8 @@ public class JeeslFacadeBean implements JeeslFacade
 
 		Root<T> from = criteriaQuery.from(queryClass);
 
-		Predicate pOr = cB.or(ParentPredicate.array(cB, from, lpOr));
-		Predicate pAnd = cB.and(ParentPredicate.array(cB, from, lpAnd));
+		Predicate pOr = cB.or(ParentPredicateBuilder.array(cB, from, lpOr));
+		Predicate pAnd = cB.and(ParentPredicateBuilder.array(cB, from, lpAnd));
 
 		CriteriaQuery<T> select = criteriaQuery.select(from);
 		if(lpOr==null || lpOr.size()==0)
@@ -1117,8 +1117,8 @@ public class JeeslFacadeBean implements JeeslFacade
 
 		Root<T> from = criteriaQuery.from(cl);
 
-		Predicate pOr1 = cB.or(ParentPredicate.array(cB, from, or1));
-		Predicate pOr2 = cB.or(ParentPredicate.array(cB, from, or2));
+		Predicate pOr1 = cB.or(ParentPredicateBuilder.array(cB, from, or1));
+		Predicate pOr2 = cB.or(ParentPredicateBuilder.array(cB, from, or2));
 
 		CriteriaQuery<T> select = criteriaQuery.select(from);
 		select.where(cB.and(pOr1,pOr2));
@@ -1127,10 +1127,11 @@ public class JeeslFacadeBean implements JeeslFacade
 		return q.getResultList();
 	}
 
-	@Override public <T extends EjbWithId, P extends EjbWithId, GP extends EjbWithId> List<T> allForGrandParent(Class<T> queryClass, Class<P> pClass, String pName, GP gpObject, String gpName)
+	@Override public <T extends EjbWithId, P extends EjbWithId, GP extends EjbWithId> List<T> allForGrandParent(Class<T> cQuery, Class<P> cParent, String pName, GP gpObject, String gpName)
 	{
-		ParentPredicate<GP> ppGrandparent = ParentPredicate.create(gpObject, gpName);
-		return fForAndOrGrandParents(queryClass,pClass,pName,ParentPredicate.list(ppGrandparent),ParentPredicate.empty());
+		logger.info("allForGrandParent");
+		ParentPredicateBuilder<GP> ppGrandparent = ParentPredicateBuilder.create(gpObject, gpName);
+		return this.fForAndOrGrandParents(cQuery,cParent,pName,ParentPredicateBuilder.list(ppGrandparent),ParentPredicateBuilder.empty());
 	}
 
 	@Override
@@ -1154,8 +1155,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		Path<Object> pathToParent = from.get(parentName);
 	    Path<Object> pathParentId = fromParent.get("id");
 
-		Predicate pOr = cB.or(ParentPredicate.array(cB, fromParent, lpOr));
-		Predicate pAnd = cB.and(ParentPredicate.array(cB, fromParent, lpAnd));
+		Predicate pOr = cB.or(ParentPredicateBuilder.array(cB, fromParent, lpOr));
+		Predicate pAnd = cB.and(ParentPredicateBuilder.array(cB, fromParent, lpAnd));
 
 		CriteriaQuery<T> select = criteriaQuery.select(from);
 		if(lpOr==null || lpOr.size()==0)
@@ -1192,8 +1193,8 @@ public class JeeslFacadeBean implements JeeslFacade
 		Path<Object> pathToParent = from.get(parentName);
 	    Path<Object> pathParentId = fromParent.get("id");
 
-		Predicate pOr1 = cB.or(ParentPredicate.array(cB, fromParent, lpOr1));
-		Predicate pOr2 = cB.or(ParentPredicate.array(cB, fromParent, lpOr2));
+		Predicate pOr1 = cB.or(ParentPredicateBuilder.array(cB, fromParent, lpOr1));
+		Predicate pOr2 = cB.or(ParentPredicateBuilder.array(cB, fromParent, lpOr2));
 
 		CriteriaQuery<T> select = criteriaQuery.select(from);
 		if(lpOr1==null || lpOr2==null || lpOr1.size()==0 || lpOr2.size()==0)
@@ -1256,7 +1257,7 @@ public class JeeslFacadeBean implements JeeslFacade
 	@Override
 	public <T extends EjbWithTimeline> List<T> between(Class<T> clTimeline, Date from, Date to)
 	{
-		return between(clTimeline, from, to, ParentPredicate.empty(), ParentPredicate.empty());
+		return between(clTimeline, from, to, ParentPredicateBuilder.empty(), ParentPredicateBuilder.empty());
 	}
 
 	@Override
@@ -1310,8 +1311,8 @@ public class JeeslFacadeBean implements JeeslFacade
 
 		Predicate pTime = cB.or(pOnlyStartAndStartInRange,pStartAndEndInRange,pStartOutsideEndInRange,pStartInRangeEndOutside,pStartBeforeRangeEndAfterRange);
 
-		Predicate pAnd = cB.and(ParentPredicate.array(cB, root, lpAnd));
-		Predicate pOr = cB.or(ParentPredicate.array(cB, root, lpOr));
+		Predicate pAnd = cB.and(ParentPredicateBuilder.array(cB, root, lpAnd));
+		Predicate pOr = cB.or(ParentPredicateBuilder.array(cB, root, lpOr));
 
 		CriteriaQuery<T> select = cQ.select(root);
 

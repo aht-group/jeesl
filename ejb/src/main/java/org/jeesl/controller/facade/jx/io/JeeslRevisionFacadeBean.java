@@ -22,6 +22,7 @@ import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
+import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -110,7 +111,7 @@ public class JeeslRevisionFacadeBean<L extends JeeslLang,D extends JeeslDescript
 
 	@Override public List<RS> findRevisionScopes(List<RC> categories, boolean showInvisibleScopes)
 	{
-		List<ParentPredicate<RC>> ppCategory = ParentPredicate.createFromList(fbRevision.getClassCategory(),"category",categories);
+		List<ParentPredicate<RC>> ppCategory = ParentPredicateBuilder.createFromList(fbRevision.getClassCategory(),"category",categories);
 		return allForOrParents(fbRevision.getClassScope(),ppCategory);
 	}
 

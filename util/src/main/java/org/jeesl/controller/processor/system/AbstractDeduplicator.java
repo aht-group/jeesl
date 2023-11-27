@@ -92,7 +92,7 @@ public abstract class AbstractDeduplicator <RE extends JeeslRevisionEntity<?,?,?
 		try
 		{
 			Class<?> c = Class.forName(entity.getCode());
-			action(c,icon);
+			this.action(c,icon);
 		}
 		catch (ClassNotFoundException e){throw new JeeslNotFoundException(e.getMessage());}
 		analyse();
