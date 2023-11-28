@@ -49,8 +49,8 @@ public class EjbDiaryQuery <BOOK extends JeeslJournalBook<SCOPE,ITEM>,
 	@Override public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
 	//LocalDate
-	public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
-	public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
+	public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> ld1(LocalDate ld1) {this.localDate1 = ld1; return this;}
+	public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbDiaryQuery<BOOK,SCOPE,ITEM,IMPACT,CONF,USER> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
 	private List<BOOK> books;

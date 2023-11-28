@@ -45,8 +45,8 @@ public class EjbIoDbQuery<SYSTEM extends JeeslIoSsiSystem<?,?>,
 	@Override public EjbIoDbQuery<SYSTEM,SNAP> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
 	//LocalDate
-	public EjbIoDbQuery<SYSTEM,SNAP> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
-	public EjbIoDbQuery<SYSTEM,SNAP> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
+	public EjbIoDbQuery<SYSTEM,SNAP> ld1(LocalDate ld1) {this.localDate1 = ld1; return this;}
+	public EjbIoDbQuery<SYSTEM,SNAP> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbIoDbQuery<SYSTEM,SNAP> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
 	private List<SYSTEM> systems; public List<SYSTEM> getSystems() {return systems;}

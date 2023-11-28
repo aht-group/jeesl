@@ -47,8 +47,8 @@ public class EjbIoSsiQuery <CTX extends JeeslIoSsiContext<?,?>,
 	@Override public EjbIoSsiQuery<CTX,STATUS> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
 	//LocalDate
-	public EjbIoSsiQuery<CTX,STATUS> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
-	public EjbIoSsiQuery<CTX,STATUS> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
+	public EjbIoSsiQuery<CTX,STATUS> ld1(LocalDate ld1) {this.localDate1 = ld1; return this;}
+	public EjbIoSsiQuery<CTX,STATUS> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbIoSsiQuery<CTX,STATUS> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 
 	// IO SSI Objects

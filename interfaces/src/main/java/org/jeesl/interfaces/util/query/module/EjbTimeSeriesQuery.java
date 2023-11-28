@@ -53,8 +53,8 @@ public class EjbTimeSeriesQuery<CAT extends JeeslTsCategory<?,?,CAT,?>,
 	@Override public EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INTV,STAT> codeList(List<String> list) {if(Objects.isNull(codeList)) {codeList = new ArrayList<>();} codeList.addAll(list); return this;}
 
 	//LocalDate
-	public EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INTV,STAT> ld1(LocalDate ld1) {this.ld1 = ld1; return this;}
-	public EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INTV,STAT> ld2(LocalDate ld2) {this.ld2 = ld2; return this;}
+	public EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INTV,STAT> ld1(LocalDate ld1) {this.localDate1 = ld1; return this;}
+	public EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INTV,STAT> ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbTimeSeriesQuery<CAT,SCOPE,TS,TX,BRIDGE,INTV,STAT> ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
 	
 	private List<CAT> categories; public List<CAT> getCategories() {return categories;}

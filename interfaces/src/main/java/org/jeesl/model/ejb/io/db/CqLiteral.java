@@ -6,17 +6,20 @@ public class CqLiteral implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	public enum Type {STARTS,LIKE}
+	public enum Type {STARTS,CONTAINS}
 	
 	private final Type type; public final Type getType() {return type;}
-	private String literal; public String getLiteral() {return literal;}
+	private final String literal; public String getLiteral() {return literal;}
+	private final String path; public String getPath() {return path;}
 
-	public static CqLiteral starts(String literal) {return new CqLiteral(Type.STARTS,literal);}
+	public static CqLiteral starts(String literal, String path) {return new CqLiteral(Type.STARTS,literal,path);}
+	public static CqLiteral contains(String literal, String path) {return new CqLiteral(Type.CONTAINS,literal,path);}
 
-	private CqLiteral(Type type, String literal)
+	private CqLiteral(Type type, String literal, String path)
 	{
 		this.type=type;
 		this.literal=literal;
+		this.path=path;
 	}
 	
 	public String toString()
@@ -24,7 +27,10 @@ public class CqLiteral implements Serializable
 		StringBuffer sb = new StringBuffer();
 		sb.append(type.toString());
 		sb.append(" ");
-		sb.append(literal);
+		sb.append("'").append(literal).append("'");
+		sb.append(" in [").append(path).append("]");
 		return sb.toString();
 	}
+	
+	public static String path(Serializable...attributes) {return CqOrdering.path(attributes);}
 }
