@@ -3581,6 +3581,13 @@ body, .ui-widget {
 	}
 }
 
+.jeesl-datatable {
+	.jeesl-heatbar-wrapper {
+		display: flex;
+		gap: $half-spacing;
+	}
+}
+
 .ui-selectonemenu-panel .ui-selectonemenu-table {
 	border: 0;
 	width: auto;
