@@ -7,5 +7,8 @@ public class TxtRevisionTypeFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(TxtRevisionTypeFactory.class);
     
-// e
+//	public static String debug(RevisionType type)
+//	{
+//		
+//	}
 }

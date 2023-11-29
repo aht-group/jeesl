@@ -1,9 +1,11 @@
 package org.jeesl.factory.ejb.module.workflow;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
-import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
 import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflow;
+import org.jeesl.interfaces.model.module.workflow.instance.JeeslWorkflowActivity;
 import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransition;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
@@ -50,5 +52,19 @@ public class EjbWorkflowActivityFactory<WT extends JeeslWorkflowTransition<?,?,?
 		catch (IllegalAccessException e) {e.printStackTrace();}
 		
 		return ejb;
+	}
+	
+	public WY toLast(WT transition, List<WY> list)
+	{
+		WY last = null;
+		for(WY a : list)
+		{
+			if(a.getTransition().equals(transition))
+			{
+				if(Objects.isNull(last)) {last = a;}
+				else if(a.getRecord().after(last.getRecord())) {last=a;}
+			}
+		}
+		return last;
 	}
 }

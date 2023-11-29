@@ -96,7 +96,8 @@ public class LoggerHandler<L extends JeeslLang, D extends JeeslDescription,
 		StringBuilder sb = new StringBuilder();
 		sb.append("Starting logging in ").append(c.getSimpleName());
 		sb.append(": ").append(log);
-		if(user!=null) {sb.append(" by ").append(user.getEmail());}
+		if(Objects.nonNull(message)) {sb.append(" (").append(message).append(")");}
+		if(Objects.nonNull(user)) {sb.append(" by ").append(user.getEmail());}
 		return sb.toString();
 	}
 	
