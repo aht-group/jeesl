@@ -40,6 +40,7 @@ public interface JeeslIoSsiFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	CTX fMapping(Class<?> json, Class<?> ejb) throws JeeslNotFoundException;
 	DATA fIoSsiData(CTX mapping, String code) throws JeeslNotFoundException;
 	<A extends EjbWithId> DATA fIoSsiData(CTX mapping, String code, A a) throws JeeslNotFoundException;
+	<A extends EjbWithId, B extends EjbWithId> DATA fIoSsiData(CTX mapping, String code, A a, B b) throws JeeslNotFoundException;
 		
 	<T extends EjbWithId> DATA fIoSsiData(CTX mapping, T ejb) throws JeeslNotFoundException;
 
