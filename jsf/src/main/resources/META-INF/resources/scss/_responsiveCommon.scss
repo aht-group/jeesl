@@ -192,6 +192,7 @@ $border: $border-width solid $border-colour;
 	
 	background: $panel-header-gradient;
 	border: $border;
+	border-radius: $border-radius;
 	box-shadow: $highlight-shadow;
 	color: $foreground;
 	cursor: pointer;
@@ -369,7 +370,7 @@ $border: $border-width solid $border-colour;
 		}
 		
 		&.ui-corner-all:before {
-			border-radius: inherit;
+			border-radius: $border-radius - 1px;
 		}
 		
 		.ui-icon {
