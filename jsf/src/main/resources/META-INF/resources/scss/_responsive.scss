@@ -3412,7 +3412,7 @@ body, .ui-widget {
 		}
 		
 		tr, .jeesl-cell-select > label {
-			transition: background .2s linear;
+			transition: background $transition-duration linear, border-color $transition-duration linear;
 		}
 		
 		td {
