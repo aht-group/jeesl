@@ -29,7 +29,6 @@ import org.jeesl.model.ejb.io.locale.IoDescription;
 public class IoFileMeta implements JeeslFileMeta<IoDescription,IoFileContainer,IoFileType,IoFileStatus>
 {
 	public static final long serialVersionUID=1;
-	
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;

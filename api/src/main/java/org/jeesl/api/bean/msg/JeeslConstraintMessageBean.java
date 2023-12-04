@@ -2,6 +2,7 @@ package org.jeesl.api.bean.msg;
 
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -14,7 +15,7 @@ public interface JeeslConstraintMessageBean<L extends JeeslLang, D extends Jeesl
 											SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 											CONCAT extends JeeslStatus<L,D,CONCAT>,
 											CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
-											LEVEL extends JeeslStatus<L,D,LEVEL>,
+											LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 											TYPE extends JeeslStatus<L,D,TYPE>,
 											RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 				extends JeeslFacesMessageBean

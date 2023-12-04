@@ -29,7 +29,7 @@ public class SbSingleHandler <T extends EjbWithId> implements SbSingleBean
 	private final SbSingleBean bean;
 	protected final Class<T> c;
 
-	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear();this.list.addAll(list);}
+	private final List<T> list; public List<T> getList() {return list;} public void setList(List<T> list) {this.list.clear(); this.list.addAll(list);}
 
 	private T selection; public T getSelection() {return selection;} public void setSelection(T selected) {this.selection = selected;}
 	private T previous;

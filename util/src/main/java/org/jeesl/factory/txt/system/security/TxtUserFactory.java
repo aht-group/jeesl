@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
@@ -36,7 +37,7 @@ public class TxtUserFactory <USER extends JeeslUser<?>>
     	return sb.toString();
     }
     
-    public String names(List<USER> users)
+    public String names(Collection<USER> users)
     {
     	List<String> list = new ArrayList<>();
 		for(USER u : users)

@@ -2,6 +2,7 @@ package org.jeesl.factory.json.io.ssi.com;
 
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -23,7 +24,7 @@ public class JsonSsiMessageFactory
 				L extends JeeslLang, D extends JeeslDescription,
 				SCOPE extends JeeslConstraintScope<L,D,?>,
 				CONSTRAINT extends JeeslConstraint<L,D,SCOPE,?,CONSTRAINT,LEVEL,TYPE,?>,
-				LEVEL extends JeeslStatus<L,D,LEVEL>,
+				LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 				TYPE extends JeeslStatus<L,D,TYPE>>
 		JsonSsiMessage build(LOC loc, JeeslSystemConstraintFacade<L,D,?,?,SCOPE,?,CONSTRAINT,LEVEL,TYPE,?> facade, Class<?> c, E code)
 	{

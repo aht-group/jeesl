@@ -2,6 +2,7 @@ package org.jeesl.controller.handler.system.io.mail;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,15 +15,15 @@ import org.jeesl.factory.txt.system.security.TxtUserFactory;
 import org.jeesl.interfaces.bean.system.IoTemplateBean;
 import org.jeesl.interfaces.controller.JeeslMail;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslTemplateHandler;
-import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplate;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateDefinition;
 import org.jeesl.interfaces.model.io.mail.template.JeeslIoTemplateToken;
 import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
 import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateTokenType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
+import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +47,7 @@ public class AbstractlIoTemplateHandler<L extends JeeslLang,D extends JeeslDescr
 	private final IoTemplateFactoryBuilder<L,D,CATEGORY,CHANNEL,TEMPLATE,SCOPE,DEFINITION,TOKEN,TOKENTYPE> fbTemplate;
 	private final IoTemplateBean bean;
 	
-//	private final JeeslMail<TEMPLATE> mail; public JeeslMail<TEMPLATE> getMail() {return mail;}
+	private final JeeslMail<TEMPLATE> mail; public JeeslMail<TEMPLATE> getMail() {return mail;}
 	private final List<LOC> locales; @Override public List<LOC> getLocales() {return locales;}
 	private final List<CHANNEL> channels;
 	private final List<DEFINITION> definitons; @Override public List<DEFINITION> getDefinitons() {return definitons;}
@@ -70,7 +71,7 @@ public class AbstractlIoTemplateHandler<L extends JeeslLang,D extends JeeslDescr
 	{
 		this.fbTemplate=fbTemplate;
 		this.bean=bean;
-//		this.mail=mail;
+		this.mail=mail;
 		tokens = fTemplate.allForParent(fbTemplate.getClassToken(),mail.getTemplate());
 		locales = new ArrayList<>();
 		channels = new ArrayList<>();
@@ -135,7 +136,7 @@ public class AbstractlIoTemplateHandler<L extends JeeslLang,D extends JeeslDescr
 	
 	public boolean hasOneLocale() {return locales.size()==1;}
 	
-	public <USER extends JeeslUser<?>> void updateRecipients(List<USER> users)
+	public <USER extends JeeslUser<?>> void updateRecipients(Collection<USER> users)
 	{
 		TxtUserFactory<USER> tfUser = new TxtUserFactory<USER>();
 		recipients = tfUser.names(users);

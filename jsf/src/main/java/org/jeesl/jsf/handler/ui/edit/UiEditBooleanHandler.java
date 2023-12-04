@@ -16,7 +16,6 @@ public class UiEditBooleanHandler implements UiEditHandler
 	public boolean isDeny() {return !allow;}
 
 	public static UiEditBooleanHandler instance() {return new UiEditBooleanHandler();}
-	
 	public UiEditBooleanHandler()
 	{
 		allow = false;
