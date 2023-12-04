@@ -38,6 +38,9 @@ public interface JeeslFileStorage<L extends JeeslLang, D extends JeeslDescriptio
 	Boolean getKeepRemoved();
 	void setKeepRemoved(Boolean keepRemoved);
 	
+	boolean isFrozen();
+	void setFrozen(boolean frozen);
+	
 	Long getFileSizeLimit();
 	void setFileSizeLimit(Long fileSizeLimit);
 }

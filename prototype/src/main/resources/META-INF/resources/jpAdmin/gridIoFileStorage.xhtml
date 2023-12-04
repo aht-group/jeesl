@@ -33,6 +33,7 @@
 			     		<f:facet name="header"><jtp:label entity="IoFileStorage" code="type"/></f:facet>
 			     		<jtp:symbolizer value="#{s.type}" marginRight="5" rendered="#{cc.attrs.bean.sbhStorageType.hasMore}"/>
 						<h:outputText value="#{s.name[localeCode].lang}"/>
+						<j:svg type="jeeslFrozen" marginLeft="5" rendered="#{s.frozen}"/>
 			     	</p:column>
 			     	<p:column headerText="#{msg.jeeslIoFileStorageSize}" styleClass="jeeslRight">  
 			     		<f:facet name="header"><jtp:label entity="IoFileStorage" code="totalSize"/></f:facet>
@@ -50,7 +51,8 @@
 		</j:slot>
 		<j:slot id="sStorage" width="3">
 			<h:form id="fStorage">
-				<p:panel header="#{msg.jeeslIoFileStorage}" rendered="#{not empty cc.attrs.bean.storage}" styleClass="jeesl-panel">
+				<p:panel rendered="#{not empty cc.attrs.bean.storage}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="IoFileStorage"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.resetStorage()}" update=":#{cc.id}:grid" tooltip="#{msg.jeeslTtCancel}"/>
 						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveStorage()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" tooltip="#{msg.ttSave}"/>
@@ -76,6 +78,9 @@
 						
 						<jtp:label entity="IoFileStorage" code="keepRemoved"/>
 						<p:selectBooleanCheckbox value="#{cc.attrs.bean.storage.keepRemoved}" />
+						
+						<jtp:label entity="IoFileStorage" code="frozen"/>
+						<p:selectBooleanCheckbox value="#{cc.attrs.bean.storage.frozen}" />
 						
 						<jtp:label entity="IoFileStorage" code="json"/>
 						<p:inputText value="#{cc.attrs.bean.storage.json}"/>

@@ -44,6 +44,7 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileStorageType;
 import org.jeesl.interfaces.model.io.fr.JeeslFileType;
 import org.jeesl.interfaces.model.io.fr.JeeslWithFileRepositoryContainer;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -66,7 +67,9 @@ public abstract class AbstractFileRepositoryHandler<L extends JeeslLang, D exten
 									TYPE extends JeeslFileType<L,D,TYPE,?>,
 									REPLICATION extends JeeslFileReplication<L,D,SYSTEM,STORAGE,RTYPE>,
 									RTYPE extends JeeslFileReplicationType<L,D,RTYPE,?>,
-									RSTATUS extends JeeslFileStatus<L,D,RSTATUS,?>>
+									RSTATUS extends JeeslFileStatus<L,D,RSTATUS,?>
+//,CONSTRAINT extends JeeslConstraint<L,D,?,?,?,?,?,?>
+>
 					implements JeeslFileRepositoryHandler<LOC,STORAGE,CONTAINER,META>
 {
 	private static final long serialVersionUID = 1L;

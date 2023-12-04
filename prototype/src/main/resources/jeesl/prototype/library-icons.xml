@@ -39,6 +39,7 @@
     <io:file code="jeeslComment" name="/ui/info/comment.svg"/>
     <io:file code="jeeslMegaphone" name="/ui/info/megaphone.svg"/>
     <io:file code="jeeslWarn" name="/ui/info/warn.svg"/>
+    <io:file code="jeeslFrozen" name="/ui/info/frozen.svg"/>
     <io:file code="jeeslRevision" name="ui/io/revision/envers/revision.svg"/>
     <io:file code="jeeslOnlineHelp" name="ui/info/help.svg"/>
     <io:file code="jeeslRevisionMod" name="ui/io/revision/envers/mod.svg"/>
