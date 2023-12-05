@@ -7,7 +7,6 @@ import java.util.Set;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
-import org.jeesl.interfaces.facade.ParentPredicate;
 import org.jeesl.interfaces.model.marker.EjbEquals;
 import org.jeesl.interfaces.model.marker.jpa.EjbMergeable;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -113,7 +112,6 @@ public interface JeeslFacade extends JeeslIdFacade
 	<T extends EjbMergeable> T mergeTransaction(T o) throws JeeslConstraintViolationException, JeeslLockingException;
 	
 	<T extends EjbSaveable> T save(T o) throws JeeslConstraintViolationException,JeeslLockingException;
-//	<T extends EjbSaveable> T save3(T o) throws JeeslConstraintViolationException,JeeslLockingException;
 	<T extends EjbSaveable> void save(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException;
 	<T extends EjbSaveable> T saveTransaction(T o) throws JeeslConstraintViolationException,JeeslLockingException;
 	<T extends EjbSaveable> void saveTransaction(List<T> list) throws JeeslConstraintViolationException,JeeslLockingException;
