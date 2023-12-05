@@ -6,15 +6,18 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -25,6 +28,7 @@ import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
+import org.jeesl.factory.builder.io.db.IoDbFlywayFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
 import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
@@ -32,6 +36,7 @@ import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
@@ -40,6 +45,8 @@ import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaUnique;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
+import org.jeesl.model.ejb.io.db.CqOrdering;
+import org.jeesl.model.ejb.io.db.CqOrdering.SortOrder;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresReplication;
 import org.slf4j.Logger;
@@ -53,8 +60,9 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
 								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,?,CUN>,
-								CUN extends JeeslDbMetaUnique<COL,CON>>
-		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,TAB,COL,CON,CUN>
+								CUN extends JeeslDbMetaUnique<COL,CON>,
+								FW extends JeeslIoDbFlyway>
+		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,TAB,COL,CON,CUN,FW>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -62,13 +70,23 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	private final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb;
 	private final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta;
+	private final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway;
 	
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta){this(em,fbDb,fbDbMeta,false);}
-	public JeeslIoDbFacadeBean(EntityManager em, final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb, IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta, boolean handleTransaction)
+	public JeeslIoDbFacadeBean(EntityManager em,
+								final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb,
+								final IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta,
+								final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway)
+			{this(em,fbDb,fbDbMeta,fbDbFlyway,false);}
+	public JeeslIoDbFacadeBean(EntityManager em,
+								final IoDbDumpFactoryBuilder<?,?,SYSTEM,DUMP,DF,DH,?> fbDb,
+								IoDbMetaFactoryBuilder<?,?,SYSTEM,SNAP,TAB,COL,?,CON,?,CUN,?> fbDbMeta,
+								final IoDbFlywayFactoryBuilder<?,?,FW,?> fbDbFlyway,
+								boolean handleTransaction)
 	{
 		super(em,handleTransaction);
 		this.fbDb=fbDb;
 		this.fbDbMeta=fbDbMeta;
+		this.fbDbFlyway=fbDbFlyway;
 	}
 	
 	@Override public List<DF> fDumpFiles(DH host) 
@@ -317,7 +335,7 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		return em.createQuery(cQ).getResultList();
 	}
 	
-	@Override public List<CUN> fIoDbMetaUniques(EjbIoDbQuery<SYSTEM, SNAP> query)
+	@Override public List<CUN> fIoDbMetaUniques(EjbIoDbQuery<SYSTEM,SNAP> query)
 	{
 		List<Predicate> predicates = new ArrayList<Predicate>();
 		CriteriaBuilder cB = em.getCriteriaBuilder();
@@ -348,5 +366,41 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		
 		return em.createQuery(cQ).getResultList();
+	}
+	
+	@Override public List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM, SNAP> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<FW> cQ = cB.createQuery(fbDbFlyway.getClassFlyway());
+		Root<FW> root = cQ.from(fbDbFlyway.getClassFlyway());
+		if(ObjectUtils.isNotEmpty(query.getRootFetches())) {for(String fetch : query.getRootFetches()) {root.fetch(fetch, JoinType.LEFT);}}
+		
+		cQ.select(root);	    
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+		
+		if(ObjectUtils.isNotEmpty(query.getOrderings()))
+		{
+			List<Order> orders = new ArrayList<>();
+			
+			for(CqOrdering el : query.getOrderings())
+			{
+				if(el.getPath().equals(CqOrdering.path(JeeslIoDbFlyway.Attributes.id)))
+				{
+					Expression<Long> eId = root.get(JeeslIoDbFlyway.Attributes.id.toString());
+					if(el.getOrder()==SortOrder.ASCENDING) {orders.add(cB.asc(eId));}
+					else if(el.getOrder()==SortOrder.DESCENDING) {orders.add(cB.desc(eId));}
+				}
+				else {logger.warn("No Handling for "+el.toString());}
+			}
+
+			cQ.orderBy(orders);
+		}
+		
+		TypedQuery<FW> tQ = em.createQuery(cQ);
+		if(Objects.nonNull(query.getFirstResult())) {tQ.setFirstResult(query.getFirstResult());}
+		if(Objects.nonNull(query.getMaxResults())) {tQ.setMaxResults(query.getMaxResults());}
+		
+		return tQ.getResultList();
 	}
 }

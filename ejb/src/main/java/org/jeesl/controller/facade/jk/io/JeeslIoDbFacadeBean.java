@@ -32,6 +32,7 @@ import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
@@ -53,8 +54,9 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
 								COL extends JeeslDbMetaColumn<SNAP,TAB,?>,
 								CON extends JeeslDbMetaConstraint<SNAP,TAB,COL,?,CUN>,
-								CUN extends JeeslDbMetaUnique<COL,CON>>
-		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,TAB,COL,CON,CUN>
+								CUN extends JeeslDbMetaUnique<COL,CON>,
+								FW extends JeeslIoDbFlyway>
+		extends JeeslFacadeBean implements JeeslIoDbFacade<SYSTEM,DUMP,DF,DH,SNAP,TAB,COL,CON,CUN,FW>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -348,5 +350,11 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		
 		return em.createQuery(cQ).getResultList();
+	}
+	
+	@Override public List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM, SNAP> query)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

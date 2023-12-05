@@ -28,7 +28,7 @@ public class AbstractDbConnectionBean <L extends JeeslLang, D extends JeeslDescr
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbConnectionBean.class);
 	
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb;
 	private final IoDbPgFactoryBuilder<L,D,SYSTEM,?,CC,?,?,?,?,?,?> fbDbPg;
 	
 	private final Map<String,CC> mapColumn; public Map<String,CC> getMapColumn() {return mapColumn;}
@@ -46,7 +46,7 @@ public class AbstractDbConnectionBean <L extends JeeslLang, D extends JeeslDescr
 		mapColumn = new HashMap<>();
 	}
 	
-	public void postConstructDbReplication(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?> fDb)
+	public void postConstructDbReplication(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		mapColumn.putAll(EjbCodeFactory.toMapCode(fDb.allOrderedPositionVisible(fbDbPg.getClassConnectionColumn())));

@@ -6,6 +6,7 @@ import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaConstraintFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaSnapshotFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaTableFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaUniqueFactory;
+import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
@@ -30,7 +31,6 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 								CONT extends JeeslDbMetaConstraintType<L,D,CONT,?>,
 								CUN extends JeeslDbMetaUnique<COL,CON>,
 								DIFF extends JeeslDbMetaDifference<L,D,DIFF,?>
-								
 >
 			extends AbstractFactoryBuilder<L,D>
 {
@@ -71,8 +71,8 @@ public class IoDbMetaFactoryBuilder<L extends JeeslLang,D extends JeeslDescripti
 		this.cConstraintType=cConstraintType;
 		this.cUnique=cUnique;
 		this.cDifference=cDifference;
-		
-	}	
+	}
+
 	public EjbIoDbMetaSnapshotFactory<SYSTEM,MS> ejbSnapshot() {return new EjbIoDbMetaSnapshotFactory<>(cSnapshot);}
 	public EjbIoDbMetaTableFactory<SYSTEM,TAB> ejbTable() {return new EjbIoDbMetaTableFactory<>(cTable);}
 	public EjbIoDbMetaColumnFactory<TAB,COL> ejbColumn() {return new EjbIoDbMetaColumnFactory<>(cMetaColumn);}

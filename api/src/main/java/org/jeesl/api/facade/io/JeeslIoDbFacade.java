@@ -8,6 +8,7 @@ import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
 import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaSnapshot;
@@ -27,7 +28,9 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 								TAB extends JeeslDbMetaTable<SYSTEM,?>,
 								COL extends JeeslDbMetaColumn<?,TAB,?>,
 								CON extends JeeslDbMetaConstraint<?,TAB,COL,?,CUN>,
-								CUN extends JeeslDbMetaUnique<COL,CON>
+								CUN extends JeeslDbMetaUnique<COL,CON>,
+
+								FW extends JeeslIoDbFlyway
 							>
 		extends JeeslFacade
 {
@@ -48,4 +51,6 @@ public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	List<COL> fIoDbMetaColumns(EjbIoDbQuery<SYSTEM,SNAP> query);
 	List<CON> fIoDbMetaConstraints(EjbIoDbQuery<SYSTEM,SNAP> query);
 	List<CUN> fIoDbMetaUniques(EjbIoDbQuery<SYSTEM,SNAP> query);
+	
+	List<FW> fIoDbFlyWay(EjbIoDbQuery<SYSTEM,SNAP> query);
 }

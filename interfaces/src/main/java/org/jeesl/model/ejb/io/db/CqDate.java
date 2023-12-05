@@ -26,9 +26,10 @@ public class CqDate implements Serializable
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append(type.toString());
-		sb.append(" ");
-		sb.append(date.toString());
+		sb.append(path);
+		sb.append(" ").append(type.toString());
+		sb.append(" ").append(date.toString());
+		
 		return sb.toString();
 	}
 	

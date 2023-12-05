@@ -32,7 +32,7 @@ public class JeeslDbFlywayGwc <L extends JeeslLang, D extends JeeslDescription, 
 	
 	private final IoDbFlywayFactoryBuilder<L,D,FLY,FT> fbDb;
 	
-	private JeeslIoDbFacade<?,?,?,?,?,?,?,?,?> fDb;
+	private JeeslIoDbFacade<?,?,?,?,?,?,?,?,?,FLY> fDb;
 	
 	private final EjbCodeCache<FT> cacheType;
 	
@@ -52,7 +52,7 @@ public class JeeslDbFlywayGwc <L extends JeeslLang, D extends JeeslDescription, 
 		flyways = new ArrayList<>();
 	}
 
-	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<?,?,?,?,?,?,?,?,?> fDb)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<?,?,?,?,?,?,?,?,?,FLY> fDb)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fDb = fDb;

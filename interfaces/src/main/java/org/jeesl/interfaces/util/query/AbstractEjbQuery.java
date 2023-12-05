@@ -10,8 +10,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.ejb.io.db.CqDate;
-import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.jeesl.model.ejb.io.db.CqLiteral;
+import org.jeesl.model.ejb.io.db.CqOrdering;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -95,6 +95,7 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	
 	//LocalDate
 	protected List<CqDate> localDates; @Override public List<CqDate> getLocalDates() {return localDates;}
+	public void addProtected(CqDate date) {if(Objects.isNull(localDates)) {localDates = new ArrayList<>();} localDates.add(date);}
 	
 	protected LocalDate localDate1; @Override public LocalDate getLocalDate1() {return localDate1;}
 	protected LocalDate localDate2; @Override public LocalDate getLocalDate2() {return localDate2;}

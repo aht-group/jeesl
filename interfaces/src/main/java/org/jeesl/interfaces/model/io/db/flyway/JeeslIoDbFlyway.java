@@ -9,7 +9,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 public interface JeeslIoDbFlyway extends EjbWithIntegerId
-{	
+{
+	public enum Attributes{id}
+	
 	String getVersion();
 	void setVersion(String version);
 	

@@ -85,7 +85,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,?,?,?,?> fbPg;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
-	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,CUN> fDb;
+	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,CUN,?> fDb;
 	
 	private final EjbCodeCache<CONT> cacheConstraintType;
 	
@@ -103,7 +103,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,?> fbDbMeta,
 							IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,?,?,?,?> fbdbPg,
 							IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi,
-							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,CUN> fDb,
+							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,CUN,?> fDb,
 							SYSTEM system)
 	{
 		this.fbDb=fbDb;

@@ -10,6 +10,7 @@ import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
 import org.jeesl.model.ejb.io.db.dump.IoDbDump;
 import org.jeesl.model.ejb.io.db.dump.IoDbDumpFile;
 import org.jeesl.model.ejb.io.db.dump.IoDbDumpStatus;
+import org.jeesl.model.ejb.io.db.flyway.IoDbFlyway;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaColumn;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaColumnType;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaConstraint;
@@ -40,7 +41,7 @@ public class IoDbRestHandler extends IoDbRestGenericHandler<IoLang,IoDescription
 	
 	public static IoDbRestHandler instance(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbDumpStatus> fbDb,
 											IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference> fbDbMeta,
-											JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique> fDb,
+											JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique,IoDbFlyway> fDb,
 											IoSsiSystem system)
 	{
 		return new IoDbRestHandler(fbDb,fbDbMeta,fDb,system);
@@ -48,7 +49,7 @@ public class IoDbRestHandler extends IoDbRestGenericHandler<IoLang,IoDescription
 	
 	private IoDbRestHandler(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbDumpStatus> fbDb,
 							IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference> fbDbMeta,
-							JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique> fDb,
+							JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique,IoDbFlyway> fDb,
 							IoSsiSystem system)
 	{
 		super(fbDb,fbDbMeta,

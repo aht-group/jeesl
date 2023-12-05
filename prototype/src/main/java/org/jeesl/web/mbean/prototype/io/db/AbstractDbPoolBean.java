@@ -24,7 +24,7 @@ implements Serializable
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbPoolBean.class);
 	
-	protected JeeslIoDbFacade<?,?,?,?,?,?,?,?,?> fDb;
+	protected JeeslIoDbFacade<?,?,?,?,?,?,?,?,?,?> fDb;
 	
 	protected final Map<STATISTIC,Long> map; public Map<STATISTIC,Long> getMap() {return map;}
 
@@ -41,7 +41,7 @@ implements Serializable
 		statistics = new ArrayList<>();
 	}
 	
-	public void postConstruct(JeeslIoDbFacade<?,?,?,?,?,?,?,?,?> fDb)
+	public void postConstruct(JeeslIoDbFacade<?,?,?,?,?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		statistics.addAll(fDb.allOrderedPositionVisible(cStatistic));

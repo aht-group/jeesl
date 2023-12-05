@@ -58,7 +58,7 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 	
 	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,DIFF> fbDb;
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN,?> fDb;
 	
 	
 	private final SbSingleHandler<SYSTEM> sbhSystem; public SbSingleHandler<SYSTEM> getSbhSystem() {return sbhSystem;}
@@ -83,7 +83,7 @@ public class JeeslDbExplainGwc <L extends JeeslLang, D extends JeeslDescription,
 		mapConstraint = new HashMap<>();
 	}
 
-	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN> fDb)
+	public void postConstruct(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage, JeeslIoDbFacade<SYSTEM,?,?,?,SNAP,TAB,COL,CON,CUN,?> fDb)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);
 		this.fDb=fDb;

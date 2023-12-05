@@ -50,7 +50,7 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 	
 	private final JeeslIoDbStatementHistoryCallback callback;
 	
-	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?> fDb;
+	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb;
 	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
@@ -90,7 +90,7 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 		statements = new ArrayList<>();
 	}
 	
-	public void postConstructDbStatement(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?> fDb)
+	public void postConstructDbStatement(JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb)
 	{
 		this.fDb=fDb;
 		mapColumn.putAll(EjbCodeFactory.toMapCode(fDb.allOrderedPositionVisible(fbDb.getClassStatementColumn())));
