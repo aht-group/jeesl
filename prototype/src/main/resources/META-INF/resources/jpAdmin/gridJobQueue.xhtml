@@ -64,7 +64,7 @@
 				<h:form id="fJob">
 					
 						<!-- This only works on EAP7 -->
-							<j:dialog id="dJob" widgetVar="wvJob" header="#{msg.Details}" size="7">
+							<j:dialog id="dJob" widgetVar="wvJob" header="#{msg.Details}" width="7">
 							<f:facet name="actions">
 								<j:svg type="jeeslCancel" library="jeeslGfx" listener="#{cc.attrs.bean.cancelJob()}" update=":#{cc.id}:grid" oncomplete="PF('wvJob').hide();"/>
 								<j:svg type="jeeslSave" library="jeeslGfx" listener="#{cc.attrs.bean.saveJob()}" update=":#{cc.id}:grid"/>
