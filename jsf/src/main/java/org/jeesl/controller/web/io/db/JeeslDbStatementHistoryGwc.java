@@ -51,7 +51,7 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 	private final JeeslIoDbStatementHistoryCallback callback;
 	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb;
-	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb;
+	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,?,?,ST,SG,SC,?,?,?> fbDb;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
 //	private final EjbDbStatementFactory<HOST,ST,SG> efStatement;
@@ -70,7 +70,7 @@ public class JeeslDbStatementHistoryGwc <L extends JeeslLang, D extends JeeslDes
 	private ST statement; public ST getStatement() {return statement;} public void setStatement(ST statement) {this.statement = statement;}
 
 	public JeeslDbStatementHistoryGwc(JeeslIoDbStatementHistoryCallback callback,
-										final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb,
+										final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,?,?,ST,SG,SC,?,?,?> fbDb,
 										final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());

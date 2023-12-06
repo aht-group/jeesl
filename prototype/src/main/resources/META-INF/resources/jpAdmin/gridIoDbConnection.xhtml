@@ -13,13 +13,16 @@
 		<jp:grid id="grid">
 			<j:row>
 				<j:slot id="sCriterias" width="12">
-					<p:dataTable var="c" value="#{cc.attrs.bean.connections}">
+					<p:dataTable styleClass="jeesl-datatable"
+							var="c" value="#{cc.attrs.bean.connections}">
+						<f:facet name="header"><j:dtHeader entity="IoDbConnectionColumn" code="lConnection"/></f:facet>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['id'].name[localeCode].lang}"/></f:facet>
 							<h:outputText value="#{c.id}"/>
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['transaction'].name[localeCode].lang}"/></f:facet>
+							<jtp:symbolizer value="#{cc.attrs.bean.cacheState.map[c.state]}" marginRight="5"/>
 							<jp:outputDate type="both" value="#{c.transaction}" withSecond="true"/>
 						</p:column>
 						<p:column>
@@ -28,15 +31,21 @@
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['change'].name[localeCode].lang}"/></f:facet>
+							<jtp:symbolizer value="#{cc.attrs.bean.cacheWait.map[c.waitEvent]}" marginRight="5"/>
 							<jp:outputDate type="both" value="#{c.change}" withSecond="true"/>
 						</p:column>
-						<p:column>
+						<p:column rendered="false">
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['state'].name[localeCode].lang}"/></f:facet>
 							<h:outputText value="#{c.state}"/>
 						</p:column>
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['sql'].name[localeCode].lang}"/></f:facet>
 							<h:outputText value="#{c.sql}"/>
+						</p:column>
+						<p:column rendered="false">
+							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['waitEvent'].name[localeCode].lang}"/></f:facet>
+							<jtp:symbolizer value="#{cc.attrs.bean.cacheWait.map[c.waitEvent]}" marginRight="5"/>
+							<h:outputText value="#{c.waitEvent}"/>
 						</p:column>
 			       	</p:dataTable>
 				</j:slot>

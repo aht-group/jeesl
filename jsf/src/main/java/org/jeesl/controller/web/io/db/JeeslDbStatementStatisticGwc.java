@@ -43,7 +43,7 @@ public class JeeslDbStatementStatisticGwc <L extends JeeslLang, D extends JeeslD
 	final static Logger logger = LoggerFactory.getLogger(JeeslDbStatementStatisticGwc.class);
 	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb;
-	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb;
+	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,?,?,ST,SG,SC,?,?,?> fbDb;
 	
 	private final EjbDbStatementFactory<HOST,ST,SG> efStatement;
 	
@@ -60,7 +60,7 @@ public class JeeslDbStatementStatisticGwc <L extends JeeslLang, D extends JeeslD
 	private LocalDateTime record;
 	private JsonPostgresStatement statement; public JsonPostgresStatement getStatement() {return statement;} public void setStatement(JsonPostgresStatement statement) {this.statement = statement;}
 
-	public JeeslDbStatementStatisticGwc(String dbName, final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,SC,?,?,?> fbDb, final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi)
+	public JeeslDbStatementStatisticGwc(String dbName, final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,?,?,ST,SG,SC,?,?,?> fbDb, final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.dbName=dbName;

@@ -20,6 +20,8 @@ import org.jeesl.model.ejb.io.db.meta.IoDbMetaSnapshot;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaTable;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaUnique;
 import org.jeesl.model.ejb.io.db.pg.connection.IoDbConnectionColumn;
+import org.jeesl.model.ejb.io.db.pg.connection.IoDbConnectionState;
+import org.jeesl.model.ejb.io.db.pg.connection.IoDbConnectionWait;
 import org.jeesl.model.ejb.io.db.pg.replication.IoDbReplicationColumn;
 import org.jeesl.model.ejb.io.db.pg.replication.IoDbReplicationState;
 import org.jeesl.model.ejb.io.db.pg.replication.IoDbReplicationSync;
@@ -53,7 +55,7 @@ public class IoDbRestHandler extends IoDbRestGenericHandler<IoLang,IoDescription
 							IoSsiSystem system)
 	{
 		super(fbDb,fbDbMeta,
-				new IoDbPgFactoryBuilder<>(IoLang.class,IoDescription.class,IoDbConnectionColumn.class,IoDbStatement.class,IoDbStatementGroup.class,IoDbStatementColumn.class,IoDbReplicationColumn.class,IoDbReplicationState.class,IoDbReplicationSync.class),
+				new IoDbPgFactoryBuilder<>(IoLang.class,IoDescription.class,IoDbConnectionColumn.class,IoDbConnectionState.class,IoDbConnectionWait.class,IoDbStatement.class,IoDbStatementGroup.class,IoDbStatementColumn.class,IoDbReplicationColumn.class,IoDbReplicationState.class,IoDbReplicationSync.class),
 				new IoSsiCoreFactoryBuilder<>(IoLang.class,IoDescription.class,IoSsiSystem.class,IoSsiCredential.class,IoSsiHost.class)
 				,fDb,system);
 		

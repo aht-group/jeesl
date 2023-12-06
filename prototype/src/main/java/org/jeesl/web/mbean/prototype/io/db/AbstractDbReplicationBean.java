@@ -33,7 +33,7 @@ public class AbstractDbReplicationBean <L extends JeeslLang, D extends JeeslDesc
 	final static Logger logger = LoggerFactory.getLogger(AbstractDbReplicationBean.class);
 	
 	private JeeslIoDbFacade<SYSTEM,?,?,?,?,?,?,?,?,?> fDb;
-	private final IoDbPgFactoryBuilder<L,D,SYSTEM,?,?,?,?,?,RC,RS,RY> fbDb;
+	private final IoDbPgFactoryBuilder<L,D,SYSTEM,?,?,?,?,?,?,?,RC,RS,RY> fbDb;
 	
 	private final Map<String,RC> mapColumn; public Map<String,RC> getMapColumn() {return mapColumn;}
 	private final Map<String,RS> mapState; public Map<String,RS> getMapState() {return mapState;}
@@ -43,7 +43,7 @@ public class AbstractDbReplicationBean <L extends JeeslLang, D extends JeeslDesc
 	
 	protected Chart chart; public Chart getChart() {return chart;}
 	
-	public AbstractDbReplicationBean(final IoDbPgFactoryBuilder<L,D,SYSTEM,?,?,?,?,?,RC,RS,RY> fbDb)
+	public AbstractDbReplicationBean(final IoDbPgFactoryBuilder<L,D,SYSTEM,?,?,?,?,?,?,?,RC,RS,RY> fbDb)
 	{
 		super(fbDb.getClassL(),fbDb.getClassD());
 		this.fbDb=fbDb;

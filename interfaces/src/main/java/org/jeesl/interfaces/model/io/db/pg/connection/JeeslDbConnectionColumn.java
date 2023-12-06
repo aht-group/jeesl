@@ -16,7 +16,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 @DownloadJeeslDescription
 @DownloadJeeslData
-public interface JeeslDbConnectionState <L extends JeeslLang,
+public interface JeeslDbConnectionColumn <L extends JeeslLang,
 										D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
