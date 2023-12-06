@@ -1249,6 +1249,7 @@ $enable-pointer-cursor-for-buttons: true;
 								@include button(cke_button_on);
 								
 								border: $border;
+								border-radius: 0;
 								border-width: 0 0 $border-width;
 								box-sizing: border-box;
 								cursor: pointer;
@@ -3803,7 +3804,8 @@ body, .ui-widget {
 	
 	@for $i from 1 to 13 {
 		&.jeesl-dialog-#{$i} {
-			width: calc(#{$min-fixed-container-width} * (#{$i} / 12)) !important;
+//			width: calc(#{$min-fixed-container-width} * (#{$i} / 12)) !important;
+			width: calc(100% * (#{$i} / 12)) !important;
 			
 			@media (max-width: $min-fixed-container-width) {
 				width: calc(100% * (#{$i} / 12)) !important;
