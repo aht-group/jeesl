@@ -17,8 +17,14 @@
 	<c:set var="handler" value="#{handler}"/>
 	
 	<h:panelGroup styleClass="jeesl-input-container" rendered="#{rendered}">
-		<p:inputText rendered="#{empty entity or empty code}"
-					 rows="#{rows}"
+		<p:outputLabel for="@next"
+		 			   styleClass="jeesl-input-label"
+		 			   rendered="#{(not empty entity) or (not empty code)}"
+					   value="#{empty code
+									? (not empty appLabelBean.entities[entity][loc].lang ? appLabelBean.labels[entity][loc].lang : defaultValue)
+									: (not empty appLabelBean.labels[entity][code][loc].lang ? appLabelBean.labels[entity][code][loc].lang : defaultValue)}"/>
+		
+		<p:inputText rows="#{rows}"
 					 value="#{value}"
 					 autocomplete="off"
 					 required="#{required}">
@@ -35,15 +41,7 @@
 		    </c:if></ui:remove>
 		</p:inputText>
 		
-		<h:panelGroup rendered="#{(not empty entity) or (not empty code)}" styleClass="ui-float-label">
-			<p:inputText value="#{value}" />
-			<p:outputLabel for="@previous"
-						   value="#{empty code
-										? (not empty appLabelBean.entities[entity][loc].lang ? appLabelBean.labels[entity][loc].lang : defaultValue)
-										: (not empty appLabelBean.labels[entity][code][loc].lang ? appLabelBean.labels[entity][code][loc].lang : defaultValue)}"/>
-		</h:panelGroup>
-		
-		<p:outputLabel rendered="#{not empty unit}" value="#{unit}" styleClass="jeesl-input-unit"/>
+		<p:outputLabel rendered="#{not empty unit}" value="#{unit}" styleClass="jeesl-input-label"/>
 		
 		<p:commandLink action="#{handler.selectNext}" update="#{update}" rendered="#{not empty handler}" styleClass="ui-button ui-state-default ui-corner-all">
 			<jtp:symbolizer value="#{handler.selection}"

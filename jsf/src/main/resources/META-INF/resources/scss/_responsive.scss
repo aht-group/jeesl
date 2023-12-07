@@ -887,7 +887,8 @@ $enable-pointer-cursor-for-buttons: true;
 						}
 					}
 					
-					> span:not(.jeesl-input-container) {
+					> span:not(.jeesl-input-container, .ui-autocomplete) {
+						border-radius: $border-radius;
 						display: inline-block;
 						padding: 0;
 						
@@ -911,12 +912,13 @@ $enable-pointer-cursor-for-buttons: true;
 						display: flex;
 						
 						.ui-inputtext, .ui-inputtextarea {
-							flex-shrink: 0;
-							width: 85%;
+							flex-shrink: 1;
+//							width: 85%;
+							width: auto;
 							
-							&:last-child {
-								width: 100%;
-							}
+//							&:last-child {
+//								width: 100%;
+//							}
 						}
 						
 						.ui-commandlink {
@@ -1247,6 +1249,7 @@ $enable-pointer-cursor-for-buttons: true;
 								@include button(cke_button_on);
 								
 								border: $border;
+								border-radius: 0;
 								border-width: 0 0 $border-width;
 								box-sizing: border-box;
 								cursor: pointer;
@@ -3342,6 +3345,7 @@ body, .ui-widget {
 		thead th {
 			border-top: 0;
 			box-shadow: 0 -1px 0 inset $white-35;
+			position: relative;
 			
 			&.jeesl-column-min-width {
 				white-space: nowrap;
@@ -3365,7 +3369,12 @@ body, .ui-widget {
 			}
 			
 			.ui-inputfield {
+				bottom: 0;
+				left: 50%;
+				margin-bottom: $half-spacing;
 				min-width: $element-height;
+				position: absolute;
+				transform: translateX(-50%);
 				
 				@media (max-width: 768px) {
 					min-width: $element-height-mobile;
@@ -3795,7 +3804,8 @@ body, .ui-widget {
 	
 	@for $i from 1 to 13 {
 		&.jeesl-dialog-#{$i} {
-			width: calc(#{$min-fixed-container-width} * (#{$i} / 12)) !important;
+//			width: calc(#{$min-fixed-container-width} * (#{$i} / 12)) !important;
+			width: calc(100% * (#{$i} / 12)) !important;
 			
 			@media (max-width: $min-fixed-container-width) {
 				width: calc(100% * (#{$i} / 12)) !important;

@@ -458,6 +458,7 @@ $border: $border-width solid $border-colour;
 			@include button;
 			@include vertical-center(after);
 			
+			border-radius: $border-radius-right;
 			flex-grow: 1;
 			height: auto;
 			padding: 0;
@@ -1257,17 +1258,32 @@ img.jeesl-icon, .jeesl-icon img {
 }
 
 .jeesl-input-container {
+	> .jeesl-input-label {
+		background: $white-100;
+		padding: 0 $half-spacing;
+	}
+	
 	> .ui-inputtextarea, > .ui-inputtext {
 		flex-grow: 1;
 		
+		&:not(:first-child) {
+			border-radius: $border-radius-right;
+			padding-left: 0 !important;
+		}
+		
 		&:not(:last-child) {
+			border-radius: $border-radius-left;
+			padding-right: 0 !important;
+		}
+	}
+	
+	> .ui-inputtextarea, > .ui-inputtext, > .jeesl-input-label {
+		&:first-child {
 			border-radius: $border-radius-left;
 		}
 		
-		+ .jeesl-input-unit {
-			background: $white-100;
+		&:last-child {
 			border-radius: $border-radius-right;
-			padding: 0 $half-spacing;
 		}
 	}
 }
