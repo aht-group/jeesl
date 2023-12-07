@@ -14,9 +14,11 @@ import org.jeesl.model.ejb.io.db.CqLiteral;
 @DownloadJeeslAttributes
 public interface JeeslQuery extends Serializable
 {
-	public String getLocaleCode();
-	
 	void reset();
+	void debug(boolean debug);
+	void debug(boolean debug, int ident);
+	
+	public String getLocaleCode();
 	
 	boolean isTupleLoad();
 	void setTupleLoad(boolean tupleLoad);
@@ -34,15 +36,10 @@ public interface JeeslQuery extends Serializable
 	
 	List<CqOrdering> getOrderings();
 	List<CqLiteral> getLiterals();
+	List<CqDate> getLocalDates();
 	
-	String getSortBy();
-	boolean isSortAscending();
-	
-	void sort(String sortBy, boolean sortAscending);
-//	void noSort();
-	
-	void debug(boolean debug);
-	void debug(boolean debug, int ident);
+//	boolean isSortAscending();
+//	void sort(String sortBy, boolean sortAscending);
 	
 	List<Long> getIdList();
 	List<String> getCodeList();
@@ -58,8 +55,6 @@ public interface JeeslQuery extends Serializable
 	
 	String getString3();
 	void setString3(String string3);
-	
-	List<CqDate> getLocalDates();
 	
 	LocalDate getLocalDate1();
 	LocalDate getLocalDate2();

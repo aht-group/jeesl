@@ -10,8 +10,7 @@ import org.jeesl.interfaces.util.query.AbstractEjbQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EjbSecurityQuery
-			extends AbstractEjbQuery
+public class EjbSecurityQuery extends AbstractEjbQuery
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -41,7 +40,4 @@ public class EjbSecurityQuery
 	public EjbSecurityQuery ld1(LocalDate ld1) {this.localDate1 = ld1; return this;}
 	public EjbSecurityQuery ld2(LocalDate ld2) {this.localDate2 = ld2; return this;}
 	public EjbSecurityQuery ld3(LocalDate ld3) {this.ld3 = ld3; return this;}
-	
-	
-	
 }

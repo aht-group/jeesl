@@ -29,6 +29,8 @@ public class SqlDbPgStatFactory
 		sb.append("   AND query NOT ILIKE '%pg_catalog.pg_roles%'");
 		sb.append("   AND query NOT ILIKE '%pg_catalog.pg_type%'");
 		sb.append("   AND query NOT ILIKE '%pg_catalog.pg_opclass%'");
+		sb.append("   AND query NOT ILIKE '%pg_catalog.pg_trigger%'");
+		
 		sb.append("   AND query != '<IDLE>'");
 		
 		return sb.toString();

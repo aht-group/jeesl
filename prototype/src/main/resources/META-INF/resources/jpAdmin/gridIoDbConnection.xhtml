@@ -32,6 +32,7 @@
 						<p:column>
 							<f:facet name="header"><h:outputText value="#{cc.attrs.bean.mapColumn['change'].name[localeCode].lang}"/></f:facet>
 							<jtp:symbolizer value="#{cc.attrs.bean.cacheWait.map[c.waitEvent]}" marginRight="5"/>
+							<h:outputText value="#{c.waitEvent}" rendered="#{empty cc.attrs.bean.cacheWait.map[c.waitEvent]}"/>
 							<jp:outputDate type="both" value="#{c.change}" withSecond="true"/>
 						</p:column>
 						<p:column rendered="false">

@@ -173,9 +173,9 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		predicates.add(pType.in(types));
 		predicates.add(pStatus.in(status));
 		
+		cQ.select(job);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.orderBy(cB.desc(pPosition),cB.asc(pRecordCreation));
-		cQ.select(job);
 
 		TypedQuery<JOB> tQ = em.createQuery(cQ);
 		return tQ.getResultList();

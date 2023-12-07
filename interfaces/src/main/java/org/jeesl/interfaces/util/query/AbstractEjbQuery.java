@@ -124,33 +124,19 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	@Override public void setBool1(Boolean bool1) {this.bool1 = bool1;}
 	
 	//Sorting
-	
 	private List<CqOrdering> orderings;
 	@Override public List<CqOrdering> getOrderings() {return orderings;}
-	protected void addOrdering(CqOrdering ordering)
-	{
-		if(Objects.isNull(orderings)) {orderings = new ArrayList<>();}
-		orderings.add(ordering);
-	}
+	protected void addOrdering(CqOrdering ordering) {if(Objects.isNull(orderings)) {orderings = new ArrayList<>();} orderings.add(ordering);}
 	
-	private String sortBy;
-	@Override public String getSortBy() {return sortBy;}
-
-	private boolean sortAscending;
-	@Override public boolean isSortAscending() {return sortAscending;}
-	
-	@Override public void sort(String sortBy, boolean sortAscending)
-	{
-		this.sortBy=sortBy;
-		this.sortAscending=sortAscending;
-	}
+	private String sortBy; //@Override public String getSortBy() {return sortBy;}
+	private boolean sortAscending; //@Override public boolean isSortAscending() {return sortAscending;}
+//	@Override public void sort(String sortBy, boolean sortAscending) {this.sortBy=sortBy; this.sortAscending=sortAscending;}
 
 	//Fetches
 	protected List<String> rootFetches; public List<String> getRootFetches() {return rootFetches;}
 	public abstract <E extends Enum<E>> AbstractEjbQuery addRootFetch(E e);
 //	public <E extends Enum<E>> AbstractEjbQuery addRootFetch(E e){if(rootFetches==null) {rootFetches = new ArrayList<>();} rootFetches.add(e.toString()); return this;}
 	
-
 	@Override public void debug(boolean debug){debug(debug,0);}
 	@Override public void debug(boolean debug, int ident)
 	{
@@ -166,12 +152,12 @@ public abstract class AbstractEjbQuery implements JeeslQuery
 	protected List<String> debugStrings()
 	{
 		List<String> list = new ArrayList<>();
-		if(firstResult!=null){list.add("firstResult: "+firstResult);}
-		if(maxResults!=null){list.add("maxResults: "+maxResults);}
+		if(Objects.nonNull(firstResult)){list.add("firstResult: "+firstResult);}
+		if(Objects.nonNull(maxResults)){list.add("maxResults: "+maxResults);}
 		if(Objects.nonNull(tupleLoad)) {list.add("Tuple-Load: "+tupleLoad);}
 		if(Objects.nonNull(localDate1)) {list.add(LocalDate.class.getSimpleName()+".1: "+localDate1.toString());}
 		if(Objects.nonNull(localDate2)) {list.add(LocalDate.class.getSimpleName()+".2: "+localDate2.toString());}
-		if(ObjectUtils.isNotEmpty(literals)) {for(CqLiteral l : literals) {logger.info(l.toString());}}
+		if(ObjectUtils.isNotEmpty(literals)) {for(CqLiteral l : literals) {list.add(l.toString());}}
 		return list;
 	}
 }

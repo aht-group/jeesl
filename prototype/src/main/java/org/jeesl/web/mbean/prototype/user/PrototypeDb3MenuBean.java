@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 
+@Deprecated //Use JeeslMenuHandler instead
 public class PrototypeDb3MenuBean <L extends JeeslLang, D extends JeeslDescription,
 									C extends JeeslSecurityCategory<L,D>,
 									R extends JeeslSecurityRole<L,D,C,V,U,A>,
