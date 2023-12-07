@@ -75,6 +75,7 @@ public interface JeeslJobFacade <L extends JeeslLang,D extends JeeslDescription,
 	<T extends EjbWithMigrationJob4<STATUS>> JsonTuples1<STATUS> tpcJob4Status(Class<T> c);
 	<T extends EjbWithMigrationJob5<STATUS>> JsonTuples1<STATUS> tpcJob5Status(Class<T> c);
 	
+	JsonTuples1<TEMPLATE> tpJobJobByTemplate(JeeslJobQuery<TEMPLATE> query);
 	JsonTuples1<TEMPLATE> tpJobCacheByTemplate(JeeslJobQuery<TEMPLATE> query);
 	
 }

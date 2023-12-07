@@ -95,7 +95,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	public String sqlDeleteAll()
 	{
 		StringBuilder sb = new StringBuilder(); String alias=null; boolean newLine=false;
-		SqlFactory.delete(sb,fbSsi.getClassData(),alias,newLine);
+		SqlFactory.deleteFrom(sb,fbSsi.getClassData(),alias,newLine);
 		SqlFactory.where(sb,alias,false,JeeslIoSsiData.Attributes.mapping,mapping, newLine);
 		SqlFactory.semicolon(sb,newLine);
 		return sb.toString();

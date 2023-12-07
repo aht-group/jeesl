@@ -18,6 +18,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -140,8 +141,26 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 	
 	@Override public List<JOB> fJobs(JeeslJobQuery<TEMPLATE> query)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<JOB> cQ = cB.createQuery(fbJob.getClassJob());
+		Root<JOB> job = cQ.from(fbJob.getClassJob());
+		
+		if(ObjectUtils.isNotEmpty(query.getSystemJobTemplates()))
+		{
+			Path<TEMPLATE> pTemplate = job.get(JeeslJob.Attributes.template.toString());
+			predicates.add(pTemplate.in(query.getSystemJobTemplates()));
+		}
+			
+//		predicates.add(pType.in(types));
+//		predicates.add(pStatus.in(status));
+		
+		cQ.select(job);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.orderBy(cB.desc(pPosition),cB.asc(pRecordCreation));
+
+		TypedQuery<JOB> tQ = em.createQuery(cQ);
+		return tQ.getResultList();
 	}
 	
 	@Override public List<JOB> fJobs(List<CATEGORY> categories, List<TYPE> types, List<STATUS> status, Date from, Date to)
@@ -453,7 +472,21 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		if(maxResults!=null) {tQ.setMaxResults(maxResults);}
 		return tQ.getResultList();
 	}
-
+	
+	@Override public JsonTuples1<TEMPLATE> tpJobJobByTemplate(JeeslJobQuery<TEMPLATE> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<JOB> item = cQ.from(fbJob.getClassJob());
+		
+		Path<TEMPLATE> pTemplate = item.get(JeeslJob.Attributes.template.toString());
+		
+		cQ.multiselect(pTemplate.get("id"),cB.count(item.<Long>get("id")));
+		cQ.groupBy(pTemplate.get("id"));
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		return Json1TuplesFactory.instance(fbJob.getClassTemplate()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+	}
 	@Override public JsonTuples1<TEMPLATE> tpJobCacheByTemplate(JeeslJobQuery<TEMPLATE> query)
 	{
 		CriteriaBuilder cB = em.getCriteriaBuilder();
