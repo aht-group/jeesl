@@ -1,6 +1,6 @@
 package org.jeesl.interfaces.model.system.job.with;
 
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 
 public interface EjbWithMigrationJob2 <STATUS extends JeeslJobStatus<?,?,?,?>>
 {

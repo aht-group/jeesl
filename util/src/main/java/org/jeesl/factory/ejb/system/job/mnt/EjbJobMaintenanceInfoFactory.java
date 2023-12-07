@@ -1,9 +1,9 @@
 package org.jeesl.factory.ejb.system.job.mnt;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
-import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenance;
-import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenance;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenanceInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.system.job.JeeslJob;
+import org.jeesl.interfaces.model.system.job.core.JeeslJob;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.system.job.template.SystemJobTemplate;
 import org.jeesl.model.ejb.system.security.user.SecurityUser;

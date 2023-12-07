@@ -23,7 +23,7 @@ import org.jeesl.interfaces.controller.web.io.ssi.JeeslIoSsiDataCallback;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.EjbIoSsiQuery;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;

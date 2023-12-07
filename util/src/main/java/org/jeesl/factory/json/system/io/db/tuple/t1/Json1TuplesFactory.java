@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.persistence.Tuple;
 
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
@@ -45,9 +46,9 @@ public class Json1TuplesFactory <A extends EjbWithId>
 		jtf = new Json1TupleFactory<A>();
 	}
 	
-	public Json1TuplesFactory<A> tupleLoad(JeeslFacade facade, boolean load)
+	public Json1TuplesFactory<A> tupleLoad(JeeslFacade facade, Boolean load)
 	{
-		if(load) {this.fUtils=facade;}
+		if(BooleanComparator.active(load)) {this.fUtils=facade;}
 		return this;
 	}
 	

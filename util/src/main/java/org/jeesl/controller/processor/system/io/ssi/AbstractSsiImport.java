@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

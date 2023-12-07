@@ -3,8 +3,8 @@ package org.jeesl.controller.util.comparator.ejb.system.job;
 import java.util.Comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
-import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenanceInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

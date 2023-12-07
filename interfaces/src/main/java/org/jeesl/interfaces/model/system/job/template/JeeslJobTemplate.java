@@ -4,10 +4,8 @@ import java.io.Serializable;
 
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
-import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
-import org.jeesl.interfaces.model.system.job.JeeslJobPriority;
-import org.jeesl.interfaces.model.system.job.JeeslJobType;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobPriority;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;

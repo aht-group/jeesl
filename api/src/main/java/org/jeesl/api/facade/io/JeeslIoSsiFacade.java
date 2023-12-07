@@ -15,7 +15,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
 import org.jeesl.interfaces.model.io.ssi.maintenance.EjbWithSsiDataCleaning;
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.util.query.io.EjbIoSsiQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
