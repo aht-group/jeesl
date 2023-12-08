@@ -1242,8 +1242,18 @@ html, body, .ui-widget {
 		thead th {
 			height: $element-height-mobile;
 			
+			&.ui-sortable-column .ui-column-title {
+				margin-right: 16px;
+			}
+			
+			&.ui-filter-column .ui-column-title {
+				margin-bottom: $element-height-mobile;
+			}
+			
 			.ui-inputfield {
+				height: $element-height-mobile;
 				min-width: $element-height-mobile;
+				width: calc(100% - 2 * $half-spacing) !important;
 			}
 		}
 		
