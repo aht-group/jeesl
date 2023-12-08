@@ -1151,8 +1151,16 @@ html, body, .ui-widget {
 .jeesl-datatable table thead th {
   height: 84px;
 }
+.jeesl-datatable table thead th.ui-sortable-column .ui-column-title {
+  margin-right: 16px;
+}
+.jeesl-datatable table thead th.ui-filter-column .ui-column-title {
+  margin-bottom: 84px;
+}
 .jeesl-datatable table thead th .ui-inputfield {
+  height: 84px;
   min-width: 84px;
+  width: calc(100% - 10px) !important;
 }
 .jeesl-datatable table tbody td {
   height: 84px;

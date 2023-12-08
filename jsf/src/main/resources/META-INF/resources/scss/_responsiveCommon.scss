@@ -288,6 +288,7 @@ $border: $border-width solid $border-colour;
 	}
 	
 	@media (max-width: 768px) {
+		min-height: $element-height-mobile;
 		padding: $regular-spacing !important;
 	}
 }
@@ -1140,6 +1141,10 @@ img.jeesl-icon, .jeesl-icon img {
 		
 	&.ui-icon-calendar:before {
 		content: $icon-calendar;
+	}
+	
+	&.ui-icon-carat-2-n-s:before { // That's a primefaces typo.
+		content: $icon-sort;
 	}
 	
 	&.ui-icon-check:before {
