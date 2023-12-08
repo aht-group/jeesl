@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.system.job.work;
+package org.jeesl.model.ejb.system.job.maintenance;
 
 import java.util.Date;
 import java.util.Map;
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.system.job.JeeslJobRobot;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobRobot;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.locale.IoDescription;
 import org.jeesl.model.ejb.io.locale.IoLang;

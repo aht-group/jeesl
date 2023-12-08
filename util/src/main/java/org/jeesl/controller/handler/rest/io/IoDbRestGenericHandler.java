@@ -82,7 +82,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	
 	private final IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb;
 	private final IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,?> fbDbMeta;
-	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,?,?,?,?> fbPg;
+	private final IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,?,?,ST,SG,?,?,?,?> fbPg;
 	private final IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi;
 	
 	private final JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,CUN,?> fDb;
@@ -101,7 +101,7 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 	
 	public IoDbRestGenericHandler(IoDbDumpFactoryBuilder<L,D,SYSTEM,DUMP,FILE,HOST,STATUS> fbDb,
 							IoDbMetaFactoryBuilder<L,D,SYSTEM,SNAP,TAB,COL,COLT,CON,CONT,CUN,?> fbDbMeta,
-							IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,ST,SG,?,?,?,?> fbdbPg,
+							IoDbPgFactoryBuilder<L,D,SYSTEM,HOST,?,?,?,ST,SG,?,?,?,?> fbdbPg,
 							IoSsiCoreFactoryBuilder<L,D,SYSTEM,?,HOST> fbSsi,
 							JeeslIoDbFacade<SYSTEM,DUMP,FILE,HOST,SNAP,TAB,COL,CON,CUN,?> fDb,
 							SYSTEM system)

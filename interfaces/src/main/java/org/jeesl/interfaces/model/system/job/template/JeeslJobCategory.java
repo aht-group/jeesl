@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.job;
+package org.jeesl.interfaces.model.system.job.template;
 
 import java.io.Serializable;
 
@@ -9,17 +9,14 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
-import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
-@DownloadJeeslData
-public interface JeeslJobPriority <L extends JeeslLang, D extends JeeslDescription,
-									S extends JeeslStatus<L,D,S>,
-									G extends JeeslGraphic<?,?,?>>
+public interface JeeslJobCategory <L extends JeeslLang,D extends JeeslDescription,
+										S extends JeeslStatus<L,D,S>,
+										G extends JeeslGraphic<?,?,?>>
 		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
 {
-	public static enum Attributes{position};
-	public static enum Code{low,medium,high}
+
 }

@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.job;
+package org.jeesl.interfaces.model.system.job.template;
 
 import java.io.Serializable;
 

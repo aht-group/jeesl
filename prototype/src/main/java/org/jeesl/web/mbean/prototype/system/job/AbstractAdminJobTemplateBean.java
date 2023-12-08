@@ -12,19 +12,19 @@ import org.jeesl.factory.builder.system.JobFactoryBuilder;
 import org.jeesl.factory.ejb.system.job.EjbJobTemplateFactory;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
-import org.jeesl.interfaces.model.system.job.JeeslJob;
-import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
-import org.jeesl.interfaces.model.system.job.JeeslJobPriority;
-import org.jeesl.interfaces.model.system.job.JeeslJobRobot;
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
-import org.jeesl.interfaces.model.system.job.JeeslJobType;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobCache;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
+import org.jeesl.interfaces.model.system.job.core.JeeslJob;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobPriority;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
 import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedbackType;
-import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenance;
-import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenance;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenanceInfo;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobRobot;
+import org.jeesl.interfaces.model.system.job.template.JeeslJobCategory;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
+import org.jeesl.interfaces.model.system.job.template.JeeslJobType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
+@Deprecated
 public class AbstractAdminJobTemplateBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									TEMPLATE extends JeeslJobTemplate<L,D,CATEGORY,TYPE,PRIORITY,EXPIRE>,
 									CATEGORY extends JeeslJobCategory<L,D,CATEGORY,?>,

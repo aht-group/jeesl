@@ -1,7 +1,6 @@
 package org.jeesl.factory.sql;
 
 import java.math.BigInteger;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +15,34 @@ import org.slf4j.LoggerFactory;
 public class SqlFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(SqlFactory.class);
+	
+	private StringBuilder sb;
+	private String alias;
+	private boolean newLine;
+	
+	public static SqlFactory instance() {return new SqlFactory();}
+	private SqlFactory()
+	{
+		sb = new StringBuilder();
+		alias = null;
+		newLine = false;
+	}
+	
+	public <T extends EjbWithId> SqlFactory delete(Class<T> c)
+	{
+		SqlFactory.deleteFrom(sb,c,alias,newLine);
+		return this;
+	}
+	public <E extends Enum<E>, T extends EjbWithId> SqlFactory where(E attribute, T where)
+	{
+		sb.append(" WHERE ");
+		whereAndOrAttribute(sb,alias,false,attribute,where,newLine);
+		return this;
+	}
+	
+	public String toString() {sb.append(";"); return sb.toString();}
+	
+	
 	
 	public static <E extends Enum<E>, T extends EjbWithId> void update(StringBuilder sb, Class<?> c, String alias, E attribute, T t, boolean newLine)
 	{
@@ -109,7 +136,7 @@ public class SqlFactory
 		newLine(newLine,sb);
 	}
 	
-	public static <T extends EjbWithId> String delete(Class<T> c)
+	public static <T extends EjbWithId> String deleteFrom(Class<T> c)
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
 		StringBuilder sb = new StringBuilder();
@@ -118,7 +145,9 @@ public class SqlFactory
 		return sb.toString();
 	}
 	
-	public static <T extends EjbWithId> void delete(StringBuilder sb, Class<T> c, String alias, boolean newLine)
+
+	
+	public static <T extends EjbWithId> void deleteFrom(StringBuilder sb, Class<T> c, String alias, boolean newLine)
 	{
 		if(c.getAnnotation(Table.class)==null) {throw new RuntimeException("Not a @Table)");}
 		sb.append("DELETE FROM ");

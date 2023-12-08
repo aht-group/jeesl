@@ -18,6 +18,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.system.JeeslJobFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -29,19 +30,19 @@ import org.jeesl.factory.ejb.system.job.EjbJobFactory;
 import org.jeesl.factory.json.io.db.tuple.JsonTupleFactory;
 import org.jeesl.factory.json.system.io.db.tuple.t1.Json1TuplesFactory;
 import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
-import org.jeesl.interfaces.model.system.job.JeeslJob;
-import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
-import org.jeesl.interfaces.model.system.job.JeeslJobPriority;
-import org.jeesl.interfaces.model.system.job.JeeslJobRobot;
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
-import org.jeesl.interfaces.model.system.job.JeeslJobType;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobCache;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
+import org.jeesl.interfaces.model.system.job.core.JeeslJob;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobPriority;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedback;
 import org.jeesl.interfaces.model.system.job.feedback.JeeslJobFeedbackType;
-import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenance;
-import org.jeesl.interfaces.model.system.job.mnt.JeeslJobMaintenanceInfo;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenance;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobMaintenanceInfo;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobRobot;
+import org.jeesl.interfaces.model.system.job.template.JeeslJobCategory;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
+import org.jeesl.interfaces.model.system.job.template.JeeslJobType;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob1;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob2;
 import org.jeesl.interfaces.model.system.job.with.EjbWithMigrationJob3;
@@ -51,6 +52,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
+import org.jeesl.interfaces.util.query.system.JeeslJobQuery;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 
 import net.sf.exlp.util.DateUtil;
@@ -137,6 +139,30 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		return tQ.getResultList();
 	}
 	
+	@Override public List<JOB> fJobs(JeeslJobQuery<TEMPLATE> query)
+	{
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<JOB> cQ = cB.createQuery(fbJob.getClassJob());
+		Root<JOB> job = cQ.from(fbJob.getClassJob());
+		
+		if(ObjectUtils.isNotEmpty(query.getSystemJobTemplates()))
+		{
+			Path<TEMPLATE> pTemplate = job.get(JeeslJob.Attributes.template.toString());
+			predicates.add(pTemplate.in(query.getSystemJobTemplates()));
+		}
+			
+//		predicates.add(pType.in(types));
+//		predicates.add(pStatus.in(status));
+		
+		cQ.select(job);
+		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
+//		cQ.orderBy(cB.desc(pPosition),cB.asc(pRecordCreation));
+
+		TypedQuery<JOB> tQ = em.createQuery(cQ);
+		return tQ.getResultList();
+	}
+	
 	@Override public List<JOB> fJobs(List<CATEGORY> categories, List<TYPE> types, List<STATUS> status, Date from, Date to)
 	{
 		if(categories==null || categories.isEmpty()){return new ArrayList<JOB>();}
@@ -173,9 +199,9 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		predicates.add(pType.in(types));
 		predicates.add(pStatus.in(status));
 		
+		cQ.select(job);
 		cQ.where(cB.and(predicates.toArray(new Predicate[predicates.size()])));
 		cQ.orderBy(cB.desc(pPosition),cB.asc(pRecordCreation));
-		cQ.select(job);
 
 		TypedQuery<JOB> tQ = em.createQuery(cQ);
 		return tQ.getResultList();
@@ -445,5 +471,34 @@ public class JeeslSystemJobFacadeBean<L extends JeeslLang,D extends JeeslDescrip
 		TypedQuery<T> tQ = em.createQuery(cQ);
 		if(maxResults!=null) {tQ.setMaxResults(maxResults);}
 		return tQ.getResultList();
+	}
+	
+	@Override public JsonTuples1<TEMPLATE> tpJobJobByTemplate(JeeslJobQuery<TEMPLATE> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<JOB> item = cQ.from(fbJob.getClassJob());
+		
+		Path<TEMPLATE> pTemplate = item.get(JeeslJob.Attributes.template.toString());
+		
+		cQ.multiselect(pTemplate.get("id"),cB.count(item.<Long>get("id")));
+		cQ.groupBy(pTemplate.get("id"));
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		return Json1TuplesFactory.instance(fbJob.getClassTemplate()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
+	}
+	@Override public JsonTuples1<TEMPLATE> tpJobCacheByTemplate(JeeslJobQuery<TEMPLATE> query)
+	{
+		CriteriaBuilder cB = em.getCriteriaBuilder();
+		CriteriaQuery<Tuple> cQ = cB.createTupleQuery();
+		Root<CACHE> item = cQ.from(fbJob.getClassCache());
+		
+		Path<TEMPLATE> pTemplate = item.get(JeeslJobCache.Attributes.template.toString());
+		
+		cQ.multiselect(pTemplate.get("id"),cB.count(item.<Long>get("id")));
+		cQ.groupBy(pTemplate.get("id"));
+	       
+		TypedQuery<Tuple> tQ = em.createQuery(cQ);
+		return Json1TuplesFactory.instance(fbJob.getClassTemplate()).tupleLoad(this,query.getTupleLoad()).buildV2(tQ.getResultList(),JsonTupleFactory.Type.count);
 	}
 }

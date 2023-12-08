@@ -30,4 +30,12 @@ public class JsonPostgresConnection implements Serializable
 	private String sql;
 	public String getSql() {return sql;}
 	public void setSql(String sql) {this.sql = sql;}
+	
+	private String backend;
+	public String getBackend() {return backend;}
+	public void setBackend(String backend) {this.backend = backend;}
+	
+	private String waitEvent;
+	public String getWaitEvent() {return waitEvent;}
+	public void setWaitEvent(String waitEvent) {this.waitEvent = waitEvent;}
 }

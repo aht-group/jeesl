@@ -9,10 +9,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-
+@DownloadJeeslAttributes
 @DownloadJeeslDescription
 @DownloadJeeslData
 public interface JeeslDbConnectionState <L extends JeeslLang,

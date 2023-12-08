@@ -1,6 +1,6 @@
 package org.jeesl.factory.ejb.system.job;
 
-import org.jeesl.interfaces.model.system.job.JeeslJobRobot;
+import org.jeesl.interfaces.model.system.job.maintenance.JeeslJobRobot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

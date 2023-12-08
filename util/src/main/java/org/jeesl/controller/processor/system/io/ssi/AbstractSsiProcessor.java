@@ -24,7 +24,7 @@ import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiContext;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiData;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiError;
 import org.jeesl.interfaces.model.io.ssi.data.JeeslIoSsiStatus;
-import org.jeesl.interfaces.model.system.job.JeeslJobStatus;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobStatus;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.util.db.cache.EjbCodeCache;
@@ -95,7 +95,7 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	public String sqlDeleteAll()
 	{
 		StringBuilder sb = new StringBuilder(); String alias=null; boolean newLine=false;
-		SqlFactory.delete(sb,fbSsi.getClassData(),alias,newLine);
+		SqlFactory.deleteFrom(sb,fbSsi.getClassData(),alias,newLine);
 		SqlFactory.where(sb,alias,false,JeeslIoSsiData.Attributes.mapping,mapping, newLine);
 		SqlFactory.semicolon(sb,newLine);
 		return sb.toString();

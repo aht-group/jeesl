@@ -1,8 +1,5 @@
 package org.jeesl.doc.ofx.system.io;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresConnection;
 import org.openfuxml.content.table.Table;
@@ -21,21 +18,17 @@ public class OfxDbTableFactory
 	
 	public static Table connections(JsonPostgres json)
 	{
-		List<String> fileds = new ArrayList<String>();
-		fileds.add("#");
-		fileds.add("xact_start");
-		fileds.add("query");
+		XmlTableFactory xt = XmlTableFactory.instance("Connections");
+		xt.header("#").header("xact_start").header("query");
 		
-		List<Object[]> data = new ArrayList<Object[]>();
 		for(JsonPostgresConnection c : json.getConnections())
 		{
-			Object[] o = new Object[3];
-			o[0] = c.getId();
-			o[1] = c.getTransaction();
-			o[2] = c.getSql();
-			data.add(o);
+			xt.cell(c.getId());
+			xt.cell(c.getTransaction());
+			xt.cell(c.getSql());
+			xt.row();
 		}
 		
-		return XmlTableFactory.build(fileds,data);
+		return xt.getTable();
 	}
 }

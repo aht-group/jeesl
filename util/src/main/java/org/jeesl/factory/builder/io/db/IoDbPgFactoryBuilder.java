@@ -5,7 +5,9 @@ import org.jeesl.factory.ejb.io.db.pg.EjbDbStatementFactory;
 import org.jeesl.factory.ejb.io.db.pg.EjbDbStatementGroupFactory;
 import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementFactory;
 import org.jeesl.factory.json.io.db.pg.JsonPostgresStatementGroupFactory;
-import org.jeesl.interfaces.model.io.db.pg.JeeslDbConnectionColumn;
+import org.jeesl.interfaces.model.io.db.pg.connection.JeeslDbConnectionColumn;
+import org.jeesl.interfaces.model.io.db.pg.connection.JeeslDbConnectionState;
+import org.jeesl.interfaces.model.io.db.pg.connection.JeeslDbConnectionWait;
 import org.jeesl.interfaces.model.io.db.pg.replication.JeeslDbReplicationColumn;
 import org.jeesl.interfaces.model.io.db.pg.replication.JeeslDbReplicationState;
 import org.jeesl.interfaces.model.io.db.pg.replication.JeeslDbReplicationSync;
@@ -26,6 +28,8 @@ public class IoDbPgFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 								HOST extends JeeslIoSsiHost<L,D,SYSTEM>,
 
 								CC extends JeeslDbConnectionColumn<L,D,CC,?>,
+								CS extends JeeslDbConnectionState<L,D,CS,?>,
+								CW extends JeeslDbConnectionWait<L,D,CW,?>,
 								
 								ST extends JeeslDbStatement<HOST,SG>,
 								SG extends JeeslDbStatementGroup<SYSTEM>,
@@ -42,6 +46,8 @@ public class IoDbPgFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 	final static Logger logger = LoggerFactory.getLogger(IoDbPgFactoryBuilder.class);
 	
 	private final Class<CC> cConnectionColumn; public Class<CC> getClassConnectionColumn() {return cConnectionColumn;}
+	private final Class<CS> cConnectionState; public Class<CS> getClassConnectionState() {return cConnectionState;}
+	private final Class<CW> cConnectionWait; public Class<CW> getClassConnectionWait() {return cConnectionWait;}
 	
 	private final Class<ST> cStatement; public Class<ST> getClassStatement() {return cStatement;}
 	private final Class<SG> cStatementGroup; public Class<SG> getClassStatementGroup() {return cStatementGroup;}
@@ -53,13 +59,15 @@ public class IoDbPgFactoryBuilder<L extends JeeslLang,D extends JeeslDescription
 	
 	public IoDbPgFactoryBuilder(final Class<L> cL, final Class<D> cD,
 							
-							final Class<CC> cConnectionColumn,
+							final Class<CC> cConnectionColumn, final Class<CS> cConnectionState, final Class<CW> cConnectionWait,
 							final Class<ST> cStatement, final Class<SG> cStatementGroup, final Class<SC> cStatementColumn,
 							final Class<RC> cReplicationColumn, final Class<RS> cReplicationState, final Class<RY> cReplicationSync)
 	{
 		super(cL,cD);
 		
 		this.cConnectionColumn=cConnectionColumn;
+		this.cConnectionState=cConnectionState;
+		this.cConnectionWait=cConnectionWait;
 		
 		this.cStatement=cStatement;
 		this.cStatementGroup=cStatementGroup;

@@ -1,4 +1,4 @@
-package org.jeesl.web.mbean.prototype.user;
+package org.jeesl.web.handler.system.security.menu;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.infinispan.Cache;
 import org.jeesl.api.bean.JeeslSecurityBean;
+import org.jeesl.api.bean.cache.JeeslMenuCache;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.txt.system.security.user.TxtIdentityFactory;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
@@ -65,7 +66,6 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 	
 	public void reset()
 	{
-//		this.check("reset");
 		mainMenu.clear();
 		for(M m : bSecurity.getRootMenus(context)) {if(BooleanComparator.active(m.getVisible()) && this.userHasAccessTo(m)) {mainMenu.add(m);}}
 	}
@@ -76,12 +76,12 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 		return mainMenu;
 	}
 	
-	public List<M> subMenu(Cache<String,List<M>> cacheSub, String viewCode)
+	public List<M> subMenu(JeeslMenuCache<M> cache, String viewCode)
 	{
 		if(Objects.isNull(identity)) {logger.error("subMenu, but identity is null!");}
 		
 		String cacheKey = TxtIdentityFactory.key("sub",identity,viewCode);
-		if(cacheSub.containsKey(cacheKey)) {return cacheSub.get(cacheKey);}
+		if(cache.cacheContains(cacheKey)) {return cache.cacheGet(cacheKey);}
 		else
 		{
 			if(debugOnInfo) {logger.info("Generating buildSub for ("+viewCode+") withContext:"+context);}
@@ -99,17 +99,17 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 					list.add(m);
 				}
 			}
-			cacheSub.put(cacheKey, list);
+			cache.cachePut(cacheKey, list);
 			return list;
 		}
 	}
 	
-	public List<M> breadcrumb(Cache<String,List<M>> cacheBreadcrumb, String viewCode)
+	public List<M> breadcrumb(JeeslMenuCache<M> cache, String viewCode)
 	{
 		if(Objects.isNull(identity)) {logger.error("breadcrumb, but identity is null!");}
 		
 		String cacheKey = TxtIdentityFactory.key("crumb",identity,viewCode);
-		if(cacheBreadcrumb.containsKey(cacheKey)){return cacheBreadcrumb.get(cacheKey);}
+		if(cache.cacheContains(cacheKey)){return cache.cacheGet(cacheKey);}
 		else
 		{
 			List<M> list = new ArrayList<>();
@@ -121,7 +121,7 @@ public class JeeslMenuHandler <V extends JeeslSecurityView<?,?,?,?,?,?>,
 				}
 			}
 			Collections.reverse(list);
-			cacheBreadcrumb.put(cacheKey, list);
+			cache.cachePut(cacheKey, list);
 			return list;
 		}
 	}

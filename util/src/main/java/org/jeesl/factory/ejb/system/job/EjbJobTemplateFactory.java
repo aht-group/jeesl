@@ -1,11 +1,11 @@
 package org.jeesl.factory.ejb.system.job;
 
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.system.job.JeeslJobCategory;
-import org.jeesl.interfaces.model.system.job.JeeslJobPriority;
-import org.jeesl.interfaces.model.system.job.JeeslJobType;
 import org.jeesl.interfaces.model.system.job.cache.JeeslJobExpiration;
+import org.jeesl.interfaces.model.system.job.core.JeeslJobPriority;
+import org.jeesl.interfaces.model.system.job.template.JeeslJobCategory;
 import org.jeesl.interfaces.model.system.job.template.JeeslJobTemplate;
+import org.jeesl.interfaces.model.system.job.template.JeeslJobType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.slf4j.Logger;

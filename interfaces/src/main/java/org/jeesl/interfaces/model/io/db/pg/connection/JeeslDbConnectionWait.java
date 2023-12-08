@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.model.system.job;
+package org.jeesl.interfaces.model.io.db.pg.connection;
 
 import java.io.Serializable;
 
@@ -8,15 +8,22 @@ import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.locale.status.JeeslStatusFixedCode;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
+import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
-@DownloadJeeslDescription
 @DownloadJeeslAttributes
-public interface JeeslJobCategory <L extends JeeslLang,D extends JeeslDescription,
+@DownloadJeeslDescription
+@DownloadJeeslData
+public interface JeeslDbConnectionWait <L extends JeeslLang,
+										D extends JeeslDescription,
 										S extends JeeslStatus<L,D,S>,
 										G extends JeeslGraphic<?,?,?>>
-		extends Serializable,EjbPersistable,EjbWithCodeGraphic<G>,JeeslStatus<L,D,S>
-{
-
+							extends Serializable,EjbPersistable,
+									
+									EjbWithCodeGraphic<G>,JeeslStatusFixedCode,
+									JeeslStatus<L,D,S>
+{	
+	public enum Code{ok}
 }

@@ -18,7 +18,7 @@ public class EjbCodeCache <T extends EjbWithCode>
 	private JeeslFacade facade; public EjbCodeCache<T> facade(JeeslFacade facade) {this.facade=facade; return this;}
 	private final Class<T> c;
 	
-	private final Map<String,T> map; public Map<String, T> getMap() {return map;}
+	private final Map<String,T> map; public Map<String,T> getMap() {return map;}
 	
 	public static <T extends EjbWithCode> EjbCodeCache<T> instance(Class<T> c) {return new EjbCodeCache<>(c);}
 	public EjbCodeCache(Class<T> c)

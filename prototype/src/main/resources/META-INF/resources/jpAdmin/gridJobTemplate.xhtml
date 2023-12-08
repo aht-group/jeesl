@@ -21,7 +21,7 @@
 						var="t" value="#{cc.attrs.bean.templates}" draggableRows="true"
 						selection="#{cc.attrs.bean.template}" selectionMode="single" rowKey="#{t.id}">
 					<f:facet name="header">
-						<j:dtHeader title="#{msg.jeeslJobTemplates}">
+						<j:dtHeader entity="SystemJobTemplate" code="listOf">
 							<j:svg type="jeeslAdd" listener="#{cc.attrs.bean.addTemplate()}" update=":#{cc.id}:sTemplate"/>
 						</j:dtHeader>
 					</f:facet>
@@ -29,7 +29,7 @@
 					<p:ajax event="rowSelect" update=":#{cc.id}:sTemplate" listener="#{cc.attrs.bean.selectTemplate()}"/>
 					<p:column styleClass="jeesl-center">
 						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="type"/></f:facet>
-						<jtp:symbolizer value="#{t.type}" height="12"/></p:column>
+						<jtp:symbolizer value="#{t.type}"/></p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="category"/></f:facet>
 						<h:outputText value="#{t.category.name[localeCode].lang}"/>
@@ -40,20 +40,34 @@
 					</p:column>
 					<p:column styleClass="jeesl-center">
 						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="priority"/></f:facet>
-						<jtp:symbolizer value="#{t.priority}" height="12"/>
+						<jtp:symbolizer value="#{t.priority}"/>
 					</p:column>
 					<p:column styleClass="jeesl-center">
 						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="expiration"/></f:facet>
-						<jtp:symbolizer value="#{t.expiration}"/></p:column>
+						<jtp:symbolizer value="#{t.expiration}"/>
+					</p:column>
+					<p:column styleClass="jeesl-right">
+						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="jobNumber"/></f:facet>
+						<h:outputText value="#{cc.attrs.bean.thJob.map1[t].count1}"/>
+					</p:column>
+					<p:column styleClass="jeesl-right">
+						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="cacheNumber"/></f:facet>
+						<h:outputText value="#{cc.attrs.bean.thCache.map1[t].count1}"/>
+					</p:column>
+					<p:column styleClass="jeesl-right" rendered="false">
+						<f:facet name="header"><jtp:label entity="SystemJobTemplate" code="cacheSize"/></f:facet>
+						<h:outputText value="#{cc.attrs.bean.thCache.map1[t].count1}"/>
+					</p:column>
 				</p:dataTable>
 			</h:form>
 		</j:slot>
 		<j:slot id="sTemplate" width="4">
 			<h:form id="fTemplate">
-				<p:panel header="#{msg.jeeslJobTemplate}" rendered="#{not empty cc.attrs.bean.template}" styleClass="jeeslPanel">
+				<p:panel rendered="#{not empty cc.attrs.bean.template}" styleClass="jeesl-panel">
+					<f:facet name="header"><j:pHeader entity="SystemJobTemplate"/></f:facet>
 					<f:facet name="actions">
 						<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelTemplate()}" update=":#{cc.id}:grid"/>
-						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.uiAllowSave}" />
+						<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveTemplate()}" update=":#{cc.id}:grid"/>
 						<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.deleteTemplate()}" update=":#{cc.id}:grid" rendered="#{cc.attrs.bean.template.id gt 0}" />
 					</f:facet>
 					<j:inputGrid>
