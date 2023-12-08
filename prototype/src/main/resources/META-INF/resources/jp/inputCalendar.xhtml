@@ -14,6 +14,8 @@
 		<composite:attribute name="disabled" required="false" default="false"/>
 		
 		<composite:attribute name="update" required="false" />
+		<composite:attribute name="process" required="false" default="@none"/>
+		
 		<composite:attribute name="pattern" required="false" default="#{appSettingsBean.patternDate}"/>
 		<composite:attribute name="stepMinute" required="false" default="5"/>
 		<composite:attribute name="showWeek" required="false"  default="false"/>
@@ -39,7 +41,7 @@
 						pagedate="#{cc.attrs.pagedate}"
 						required="#{cc.attrs.required}"
 						disabled="#{cc.attrs.disabled}">
-			<p:ajax event="dateSelect" update="#{cc.attrs.update}"/>
+			<p:ajax event="dateSelect" update="#{cc.attrs.update}" process="#{cc.attrs.process}"/>
 		</p:calendar>
 		<script>
 			$(function() {

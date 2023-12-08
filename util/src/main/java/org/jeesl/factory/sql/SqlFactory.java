@@ -33,9 +33,20 @@ public class SqlFactory
 		SqlFactory.deleteFrom(sb,c,alias,newLine);
 		return this;
 	}
+	public <C extends EjbWithId, E extends Enum<E>, T extends EjbWithId> SqlFactory update(Class<C> c, E attribute, T t)
+	{
+		SqlFactory.update(sb,c,alias,attribute,t,newLine);
+		return this;
+	}
 	public <E extends Enum<E>, T extends EjbWithId> SqlFactory where(E attribute, T where)
 	{
 		sb.append(" WHERE ");
+		whereAndOrAttribute(sb,alias,false,attribute,where,newLine);
+		return this;
+	}
+	public <E extends Enum<E>, T extends EjbWithId> SqlFactory and(E attribute, T where)
+	{
+		sb.append(" AND ");
 		whereAndOrAttribute(sb,alias,false,attribute,where,newLine);
 		return this;
 	}
