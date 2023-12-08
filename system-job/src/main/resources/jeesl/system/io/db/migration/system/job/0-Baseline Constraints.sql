@@ -1,1 +1,24 @@
-
+alter table SystemJobCache add constraint UK69uroa4hxur1i4nvmdnfr5j0t unique (template_id, code);
+alter table SystemJobRobot add constraint UK743xa15wdi7ib5mvrxe759r3g unique (code);
+alter table SystemJobRobotJtDescription add constraint UK_pp6drqayejp959k209j2uc2ij unique (description_id);
+alter table SystemJobRobotJtLang add constraint UK_d8005tuob1m9tu5u4x2pplwh2 unique (lang_id);
+alter table SystemJobTemplate add constraint UKr7dnek2bshrtx75g28tva6rff unique (type_id, code);
+alter table SystemJobTemplateJtDescription add constraint UK_idcyuq78bu663rmmv7iiw6gmo unique (description_id);
+alter table SystemJobTemplateJtLang add constraint UK_hr9urcqqul3qg4k8ed5w61axa unique (lang_id);
+alter table SystemJob add constraint FKex6153a93tyytlgpxwa6yvglf foreign key (priority_id) references IoStatus;
+alter table SystemJob add constraint FKhaiaac07yosu47q8a9flr4hrn foreign key (status_id) references IoStatus;
+alter table SystemJob add constraint FKd1ph8ciicis78brwg1d0s2qir foreign key (template_id) references SystemJobTemplate;
+alter table SystemJob add constraint FKfjrvd2sg65hqwwbyby7iqsvre foreign key (user_id) references SecurityUser;
+alter table SystemJobCache add constraint FKmxnu00aeep7m2u2yqebhfnguh foreign key (template_id) references SystemJobTemplate;
+alter table SystemJobRobotJtDescription add constraint FK5g2gmp7w78x2j1f0vx5ix3xj4 foreign key (description_id) references IoDescription;
+alter table SystemJobRobotJtDescription add constraint FK68lkjdecm98v9lsclshp6cjv4 foreign key (robot_id) references SystemJobRobot;
+alter table SystemJobRobotJtLang add constraint FK2gg6ptgbjxteuodtfthpi9uoo foreign key (lang_id) references IoLang;
+alter table SystemJobRobotJtLang add constraint FK53ger5n5951s06xvx91nqmax7 foreign key (robot_id) references SystemJobRobot;
+alter table SystemJobTemplate add constraint FK4lvblkb69lvtue49adllyt91j foreign key (category_id) references IoStatus;
+alter table SystemJobTemplate add constraint FKrjobstuc83vp2dxciu9toqrqa foreign key (expiration_id) references IoStatus;
+alter table SystemJobTemplate add constraint FKaw95yox7psw2icas0cs5513hs foreign key (priority_id) references IoStatus;
+alter table SystemJobTemplate add constraint FK9pydxgwlyxv31d4ai0tgyee85 foreign key (type_id) references IoStatus;
+alter table SystemJobTemplateJtDescription add constraint FKdjtplawd1fnaagtmqjdamqf3q foreign key (description_id) references IoDescription;
+alter table SystemJobTemplateJtDescription add constraint FKokdiufqurx6egi6ejl26c5nq0 foreign key (template_id) references SystemJobTemplate;
+alter table SystemJobTemplateJtLang add constraint FKjp2uyu9w0ukmpelg89mph21iq foreign key (lang_id) references IoLang;
+alter table SystemJobTemplateJtLang add constraint FKdgc2oaje0hkvh93ys9oed4rqr foreign key (template_id) references SystemJobTemplate;

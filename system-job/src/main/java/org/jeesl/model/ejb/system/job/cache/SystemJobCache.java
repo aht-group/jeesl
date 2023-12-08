@@ -53,7 +53,12 @@ public class SystemJobCache implements JeeslJobCache<SystemJobTemplate,IoFileCon
 	private byte[] data;
     @Override public byte[] getData() {return data;}
     @Override public void setData(byte[] data) {this.data = data;}
+    
+    private long size;
+    @Override public long getSize() {return size;}
+    @Override public void setSize(long size) {this.size = size;}
 	
+
 	@Override public boolean equals(Object object){return (object instanceof SystemJobCache) ? id == ((SystemJobCache) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(21,43).append(id).toHashCode();}
 }

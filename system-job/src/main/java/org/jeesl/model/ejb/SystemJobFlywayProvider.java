@@ -4,4 +4,7 @@ public interface SystemJobFlywayProvider extends JeeslFlywayMigrationVerifier,
 												IoFrFlywayProvider
 {	
 	
+	void sinceSystemJob(int i);
+	
+	void markerSystemJob();
 }

@@ -26,4 +26,7 @@ public interface JeeslJobCache<TEMPLATE extends JeeslJobTemplate<?,?,?,?,?,?>,
 	
 	byte[] getData();
 	void setData(byte[] data);
+	
+	long getSize();
+	void setSize(long size);
 }
