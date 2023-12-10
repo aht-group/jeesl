@@ -3,15 +3,11 @@ package org.jeesl.web.mbean.prototype.system.constraint;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslConstraintMessageBean;
 import org.jeesl.api.bean.msg.JeeslConstraintsBean;
-import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
-import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
-import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.web.mbean.system.AbstractMessageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,14 +15,9 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.jsf.util.FacesContextMessage;
 
 public class AbstractConstraintMessageBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-											ALGCAT extends JeeslStatus<L,D,ALGCAT>,
-											ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
-											SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
-											CONCAT extends JeeslStatus<L,D,CONCAT>,
-											CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
-											LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
-											TYPE extends JeeslStatus<L,D,TYPE>,
-											RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
+											CONSTRAINT extends JeeslConstraint<L,D,?,?,CONSTRAINT,LEVEL,?,?>,
+											LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>
+											>
 		extends AbstractMessageBean<L,D,LOC> implements JeeslConstraintMessageBean<CONSTRAINT>
 {
 	private static final long serialVersionUID = 1;
