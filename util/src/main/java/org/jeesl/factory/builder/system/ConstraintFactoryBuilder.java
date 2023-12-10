@@ -3,6 +3,7 @@ package org.jeesl.factory.builder.system;
 import org.jeesl.factory.builder.AbstractFactoryBuilder;
 import org.jeesl.factory.ejb.system.constraint.algorithm.EjbConstraintAlgorithmFactory;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
@@ -14,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ConstraintFactoryBuilder<L extends JeeslLang, D extends JeeslDescription,
-									ALGCAT extends JeeslStatus<L,D,ALGCAT>,
+									ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
 									ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
 									SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 									CONCAT extends JeeslStatus<L,D,CONCAT>,

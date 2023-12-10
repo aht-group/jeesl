@@ -11,6 +11,7 @@ import org.jeesl.factory.builder.system.ConstraintFactoryBuilder;
 import org.jeesl.factory.ejb.system.constraint.EjbConstraintFactory;
 import org.jeesl.factory.ejb.system.constraint.EjbConstraintScopeFactory;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
@@ -29,7 +30,7 @@ import net.sf.ahtutils.xml.system.ConstraintScope;
 import net.sf.ahtutils.xml.system.Constraints;
 
 public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescription,
-									ALGCAT extends JeeslStatus<L,D,ALGCAT>,
+									ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
 									ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
 									SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 									CONCAT extends JeeslStatus<L,D,CONCAT>,
@@ -61,7 +62,7 @@ public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescript
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
-						ALGCAT extends JeeslStatus<L,D,ALGCAT>,
+						ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
 						ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
 						SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 						CONCAT extends JeeslStatus<L,D,CONCAT>,

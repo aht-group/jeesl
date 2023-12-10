@@ -20,6 +20,7 @@ import org.jeesl.factory.ejb.system.constraint.EjbConstraintScopeFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
@@ -36,7 +37,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class AbstractSystemConstraintDefinitionBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-										ALGCAT extends JeeslStatus<L,D,ALGCAT>,
+										ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
 										ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
 										SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 										CONCAT extends JeeslStatus<L,D,CONCAT>,

@@ -12,6 +12,7 @@ import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.ConstraintFactoryBuilder;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
@@ -34,7 +35,7 @@ import net.sf.ahtutils.xml.system.Constraints;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescription,
-									ALGCAT extends JeeslStatus<L,D,ALGCAT>,
+									ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
 									ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
 									SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 									CONCAT extends JeeslStatus<L,D,CONCAT>,
@@ -130,18 +131,18 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 	private Map<String,Constraint> constraints;
 	private Map<String,ConstraintScope> scopes;
 
-    public void init(String artifact) throws FileNotFoundException
+    public void initWithXml(String artifact) throws FileNotFoundException
     {
-		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();;
+		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 
 		constraints = new Hashtable<String,Constraint>();
 		scopes = new Hashtable<String,ConstraintScope>();
 		
-		String resourceName = "constraints."+artifact+"/index.xml";
-		Constraints index = JaxbUtil.loadJAXB(resourceName, Constraints.class);
+		String path = artifact+"/system/constraint";
+		Constraints index = JaxbUtil.loadJAXB(path+"/index.xml", Constraints.class);
 		for(ConstraintScope scopeCategory : index.getConstraintScope())
 		{
-			Constraints c = JaxbUtil.loadJAXB("constraints."+artifact+"/"+scopeCategory.getCategory()+".xml", Constraints.class);
+			Constraints c = JaxbUtil.loadJAXB(path+"/"+scopeCategory.getCategory()+".xml", Constraints.class);
 			for(ConstraintScope scope : c.getConstraintScope())
 			{
 				String scopeCode = scopeCategory.getCategory()+"-"+scope.getCode();
@@ -156,12 +157,14 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 				}
 			}
 		}
-		logger.info(AbstractLogMessage.postConstruct(ptt)+" via XML init ("+resourceName+") for "+ constraints.size()+" "+Constraints.class.getSimpleName());
+		logger.info(AbstractLogMessage.postConstruct(ptt)+" via XML init ("+path.toString()+") for "+ constraints.size()+" "+Constraints.class.getSimpleName());
+		try {Thread.sleep(5000);} catch (InterruptedException e) {e.printStackTrace();}
     }
     
+    @Deprecated
     public void init2(String artifact) throws FileNotFoundException
     {
-		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();;
+		ProcessingTimeTracker ptt = ProcessingTimeTracker.instance().start();
 
 		constraints = new Hashtable<String,Constraint>();
 		scopes = new Hashtable<String,ConstraintScope>();
@@ -179,7 +182,6 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 					if(constraint.isSetCode())
 					{
 						String key = scopeCode+"-"+constraint.getCode();
-						logger.info("Adding "+key);
 						constraints.put(key, constraint);
 					}
 				}
@@ -232,29 +234,29 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
     
     public ConstraintScope getScope(String category, String scope, String lang)
     {    	
-	    	String key = category+"-"+scope;
-	    	ConstraintScope xml = XmlConstraintScopeFactory.build(key);
-	    	if(scopes.containsKey(key))
-	    	{
-	    		ConstraintScope x = scopes.get(key);
-	    		for(Lang l : x.getLangs().getLang()){if(l.getKey().equals(lang)){xml.setLang(l);}}
-	    		for(Description d : x.getDescriptions().getDescription()) {if(d.getKey().equals(lang)){xml.setDescription(d);}}
-	    		
-	    		for(Constraint c : x.getConstraint())
-	    		{
-	    			Constraint xmlC = XmlConstraintFactory.build();
-	    			if(c.isSetLangs())
-	    			{
-	    				for(Lang l : c.getLangs().getLang()){if(l.getKey().equals(lang)){xmlC.setLang(l);}}
-	    			}
-	    			if(c.isSetDescriptions())
-	    			{
-	    				for(Description d : c.getDescriptions().getDescription()) {if(d.getKey().equals(lang)){xmlC.setDescription(d);}}
-	    			}
-	        		xml.getConstraint().add(xmlC);
-	    		}
-	    	}
-	    	
-	    	return xml;
+    	String key = category+"-"+scope;
+    	ConstraintScope xml = XmlConstraintScopeFactory.build(key);
+    	if(scopes.containsKey(key))
+    	{
+    		ConstraintScope x = scopes.get(key);
+    		for(Lang l : x.getLangs().getLang()){if(l.getKey().equals(lang)){xml.setLang(l);}}
+    		for(Description d : x.getDescriptions().getDescription()) {if(d.getKey().equals(lang)){xml.setDescription(d);}}
+    		
+    		for(Constraint c : x.getConstraint())
+    		{
+    			Constraint xmlC = XmlConstraintFactory.build();
+    			if(c.isSetLangs())
+    			{
+    				for(Lang l : c.getLangs().getLang()){if(l.getKey().equals(lang)){xmlC.setLang(l);}}
+    			}
+    			if(c.isSetDescriptions())
+    			{
+    				for(Description d : c.getDescriptions().getDescription()) {if(d.getKey().equals(lang)){xmlC.setDescription(d);}}
+    			}
+        		xml.getConstraint().add(xmlC);
+    		}
+    	}
+    	
+    	return xml;
     }
 }
