@@ -18,8 +18,7 @@ public class SystemJobExpiration extends IoStatus implements JeeslJobExpiration<
 {
 	public static final long serialVersionUID=1;
 
-	
-	
+
 	@Override public boolean equals(Object object){return (object instanceof SystemJobExpiration) ? id == ((SystemJobExpiration) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(21,43).append(id).toHashCode();}
 }

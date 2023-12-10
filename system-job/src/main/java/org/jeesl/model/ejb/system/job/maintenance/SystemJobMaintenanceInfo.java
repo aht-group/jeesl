@@ -57,7 +57,7 @@ public class SystemJobMaintenanceInfo implements JeeslJobMaintenanceInfo<IoDescr
 
 	@Override public boolean equals(Object object){return (object instanceof SystemJobMaintenanceInfo) ? id == ((SystemJobMaintenanceInfo) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(21,43).append(id).toHashCode();}
-	
+
 	@Override public String toString()
 	{
 		StringBuffer sb = new StringBuffer();

@@ -13,7 +13,8 @@ public interface JeeslSystemRestInterface <L extends JeeslLang, D extends JeeslD
 									R extends JeeslTenantRealm<L,D,R,?>,
 									G extends JeeslGraphic<?,?,?>>
 {	
-	<X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.jeesl.Container exportStatus(String code) throws UtilsConfigurationException;
+	<X extends JeeslStatus<L,D,X>>
+	org.jeesl.model.xml.jeesl.Container exportStatus(String code) throws UtilsConfigurationException;
 	<X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.jeesl.Container updateTranslation(String code, Container xml) throws UtilsConfigurationException;
 	Entity exportRevisionEntity(String code) throws UtilsConfigurationException;
 	

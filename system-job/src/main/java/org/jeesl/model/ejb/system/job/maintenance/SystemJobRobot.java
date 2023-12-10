@@ -36,16 +36,16 @@ public class SystemJobRobot implements JeeslJobRobot<IoLang,IoDescription>
 	@Override public void setId(long id) {this.id = id;}
 	
 	private String code;
-	public String getCode() {return code;}
-	public void setCode(String code) {this.code = code;}
+	@Override public String getCode() {return code;}
+	@Override public void setCode(String code) {this.code = code;}
 	 
 	private boolean visible;
-	public boolean isVisible() {return visible;}
-	public void setVisible(boolean visible) {this.visible = visible;}
+	@Override public boolean isVisible() {return visible;}
+	@Override public void setVisible(boolean visible) {this.visible = visible;}
 	
 	protected int position;
-	public int getPosition() {return position;}
-	public void setPosition(int position) {this.position = position;}
+	@Override public int getPosition() {return position;}
+	@Override public void setPosition(int position) {this.position = position;}
 			 
 	private Date record;	 
 	public Date getRecord() {return record;}

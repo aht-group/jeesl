@@ -200,7 +200,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 		}
 		else
 		{
-			logger.info("classForInterface: "+code);
+			logger.info("Searching class for provided interface: "+code);
 			try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(basePackage).scan())
 			{
 				ClassInfoList list = scanResult.getClassesImplementing(code);
@@ -222,7 +222,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 					{
 						try
 						{
-							logger.info("Trying: "+fqcn);
+							if(list.getNames().size()>1) {logger.info("Trying "+list.getNames().indexOf(fqcn)+": "+fqcn);}
 							c = Class.forName(fqcn);
 							return c;
 						}

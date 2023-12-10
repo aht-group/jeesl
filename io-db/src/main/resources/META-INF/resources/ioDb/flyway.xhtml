@@ -31,7 +31,11 @@
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoDbFlyway" code="record"/></f:facet>
-						<jp:outputDate value="#{f.record}" withSecond="true"/>
+						<jp:outputDate value="#{f.record}"/>
+					</p:column>
+					<p:column>
+						<f:facet name="header"><jtp:label entity="IoDbFlyway" code="time"/></f:facet>
+						<jp:outputDate value="#{f.record}" withDate="false" withSecond="true"/>
 					</p:column>
 					<p:column>
 						<f:facet name="header"><jtp:label entity="IoDbFlyway" code="description"/></f:facet>

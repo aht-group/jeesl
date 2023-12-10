@@ -27,7 +27,7 @@ public class SystemJobStatus extends IoStatus implements JeeslJobStatus<IoLang,I
 		for(JeeslJobStatus.Code c : JeeslJobStatus.Code.values()){fixed.add(c.toString());}
 		return fixed;
 	}
-	
+
 	@Override public boolean equals(Object object){return (object instanceof SystemJobStatus) ? id == ((SystemJobStatus) object).getId() : (object==this);}
 	@Override public int hashCode() {return new HashCodeBuilder(21,43).append(id).toHashCode();}
 }

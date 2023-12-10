@@ -494,7 +494,6 @@
 		</profile>
 		<profile>
 			<id>jakarta</id>
-			
 			<build>
 				<plugins>
 					<plugin>
