@@ -7,10 +7,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.jsf.jx.util.FacesContextMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.jsf.util.FacesContextMessage;
 
 public class AbstractMessageBean <L extends JeeslLang, D extends JeeslDescription,
 									LOC extends JeeslLocale<L,D,LOC,?>>

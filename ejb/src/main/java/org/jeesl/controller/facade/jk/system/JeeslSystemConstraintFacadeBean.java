@@ -82,6 +82,4 @@ public class JeeslSystemConstraintFacadeBean<L extends JeeslLang, D extends Jees
 		catch (NoResultException ex){throw new JeeslNotFoundException("No "+fbConstraint.getClassConstraint().getSimpleName()+" found for scope="+scope.toString()+" and code="+code);}
 		catch (NonUniqueResultException ex){throw new JeeslNotFoundException("No unique results in "+fbConstraint.getClassConstraint().getSimpleName()+" for type="+scope.toString()+" and code="+code);}
 	}
-
-	
 }

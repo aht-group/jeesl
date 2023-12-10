@@ -8,17 +8,15 @@ import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.jsf.jx.util.FacesContextMessage;
 import org.jeesl.web.mbean.system.AbstractMessageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.jsf.util.FacesContextMessage;
-
 public class AbstractConstraintMessageBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CONSTRAINT extends JeeslConstraint<L,D,?,?,CONSTRAINT,LEVEL,?,?>,
-											LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>
-											>
-		extends AbstractMessageBean<L,D,LOC> implements JeeslConstraintMessageBean<CONSTRAINT>
+											LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>>
+							extends AbstractMessageBean<L,D,LOC> implements JeeslConstraintMessageBean<CONSTRAINT>
 {
 	private static final long serialVersionUID = 1;
 	final static Logger logger = LoggerFactory.getLogger(AbstractConstraintMessageBean.class);
