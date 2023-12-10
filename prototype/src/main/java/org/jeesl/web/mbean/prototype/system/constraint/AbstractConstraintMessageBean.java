@@ -27,7 +27,7 @@ public class AbstractConstraintMessageBean <L extends JeeslLang, D extends Jeesl
 											LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 											TYPE extends JeeslStatus<L,D,TYPE>,
 											RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
-		extends AbstractMessageBean<L,D,LOC> implements JeeslConstraintMessageBean<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
+		extends AbstractMessageBean<L,D,LOC> implements JeeslConstraintMessageBean<CONSTRAINT>
 {
 	private static final long serialVersionUID = 1;
 	final static Logger logger = LoggerFactory.getLogger(AbstractConstraintMessageBean.class);

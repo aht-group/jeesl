@@ -37,12 +37,12 @@ public class AbstractMessageBean <L extends JeeslLang, D extends JeeslDescriptio
 	
 	public void growlError(String key)
 	{
-		FacesContextMessage.info("growl", jeeslTranslationBean.get(jeeslLocaleCode, "jeeslFmError"), jeeslTranslationBean.get(jeeslLocaleCode, key));
+		FacesContextMessage.info("growl", jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmError"), jeeslTranslationBean.get(jeeslLocaleCode, key));
 	}
 	
 	public void growlSuccess(String key)
 	{
-		FacesContextMessage.info("growl", jeeslTranslationBean.get(jeeslLocaleCode, "jeeslFmSuccess"), jeeslTranslationBean.get(jeeslLocaleCode, key));
+		FacesContextMessage.info("growl", jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmSuccess"), jeeslTranslationBean.get(jeeslLocaleCode, key));
 	}
 	
 	public void growlInfoText(String text)

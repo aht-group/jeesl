@@ -1,6 +1,7 @@
 package org.jeesl.controller.web;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
@@ -34,5 +35,7 @@ public class AbstractJeeslWebController implements Serializable
 	protected void postConstructWebController(JeeslFacesMessageBean bMessage)
 	{
 		this.bMessage=bMessage;
+		
+		if(Objects.isNull(bMessage)) {logger.warn(JeeslFacesMessageBean.class.getSimpleName()+" is NULL");}
 	}
 }

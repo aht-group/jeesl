@@ -239,12 +239,20 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	public void saveView() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.saveEntity(view));
+		
+		if(Objects.isNull(fSecurity)) {logger.warn("fSecurity is null");}
+		if(Objects.isNull(view)) {logger.warn("View is null");}
+		else if(Objects.isNull(view.getCategory())) {logger.warn("view.category is null");}
+		
+		if(Objects.isNull(fbSecurity)) {logger.warn("fbSecurity is null");}
+		else if(Objects.isNull(fbSecurity.getClassCategory())) {logger.warn("fbSecurity.getClassCategory is null");}
+		
 		view.setCategory(fSecurity.find(fbSecurity.getClassCategory(), view.getCategory()));
 		view.setRedirect(tsb.aToBoolean());
 		view = fSecurity.save(view);
 		this.reloadView();
-		reloadViews();
-		bMessage.growlSuccessSaved();
+		this.reloadViews();
+		if(Objects.nonNull(bMessage)) {bMessage.growlSuccessSaved();}
 		bSecurity.update(view);
 		callback.propagateChanges();
 	}
