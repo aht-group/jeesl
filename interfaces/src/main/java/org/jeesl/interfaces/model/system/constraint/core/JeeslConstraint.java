@@ -7,7 +7,6 @@ import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.parent.EjbWithParentAttributeResolver;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNonUniqueCode;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithNrString;
@@ -23,7 +22,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslConstraint<L extends JeeslLang, D extends JeeslDescription,
 									SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
-									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+									CATEGORY extends JeeslConstraintCategory<L,D,CATEGORY,?>,
 									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 									LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 									TYPE extends JeeslConstraintType<L,D,TYPE,?>,

@@ -11,7 +11,7 @@ import org.jeesl.factory.builder.system.ConstraintFactoryBuilder;
 import org.jeesl.factory.ejb.system.constraint.EjbConstraintFactory;
 import org.jeesl.factory.ejb.system.constraint.EjbConstraintScopeFactory;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
-import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmCategory;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmGroup;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
@@ -32,8 +32,8 @@ import net.sf.ahtutils.xml.system.ConstraintScope;
 import net.sf.ahtutils.xml.system.Constraints;
 
 public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescription,
-									ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
-									ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
+									GROUP extends JeeslConstraintAlgorithmGroup<L,D,GROUP,?>,
+									ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,
 									SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 									CONCAT extends JeeslConstraintCategory<L,D,CONCAT,?>,
 									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
@@ -45,14 +45,14 @@ public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescript
 {
 	final static Logger logger = LoggerFactory.getLogger(ConstraintRestService.class);
 	
-	private final ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint;
-	private JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint;
+	private final ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint;
+	private JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CONCAT,LEVEL,TYPE,RESOLUTION> fConstraint;
 	
 	private final EjbConstraintScopeFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> efScope;
 	private final EjbConstraintFactory<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> efConstraint;
 	
-	private ConstraintRestService(final String[] localeCodes, JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint,
-			final ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
+	private ConstraintRestService(final String[] localeCodes, JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CONCAT,LEVEL,TYPE,RESOLUTION> fConstraint,
+			final ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
 	{
 		super(fConstraint,fbConstraint.getClassL(),fbConstraint.getClassD());
 		this.fbConstraint=fbConstraint;
@@ -64,20 +64,20 @@ public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescript
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
-						ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
-						ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
-						SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
-						CONCAT extends JeeslConstraintCategory<L,D,CONCAT,?>,
-						CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
+						GROUP extends JeeslConstraintAlgorithmGroup<L,D,GROUP,?>,
+						ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,
+						SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
+						CATEGORY extends JeeslConstraintCategory<L,D,CATEGORY,?>,
+						CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 						LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 						TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 						RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
-			ConstraintRestService<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
+			ConstraintRestService<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
 					factory(String[] localeCodes,
-							JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint,
-							final ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
+							JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CATEGORY,LEVEL,TYPE,RESOLUTION> fConstraint,
+							final ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
 	{
-		return new ConstraintRestService<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(localeCodes,fConstraint,fbConstraint);
+		return new ConstraintRestService<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>(localeCodes,fConstraint,fbConstraint);
 	}
 	
 	@Override public Container exportSystemConstraintCategories() {return xfContainer.build(fConstraint.allOrderedPosition(fbConstraint.getClassConstraintCategory()));}

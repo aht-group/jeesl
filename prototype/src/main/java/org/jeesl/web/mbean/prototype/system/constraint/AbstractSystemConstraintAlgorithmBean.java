@@ -13,7 +13,7 @@ import org.jeesl.factory.builder.system.ConstraintFactoryBuilder;
 import org.jeesl.factory.ejb.system.constraint.algorithm.EjbConstraintAlgorithmFactory;
 import org.jeesl.interfaces.bean.sb.handler.SbToggleSelection;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
-import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmCategory;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmGroup;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
@@ -31,38 +31,39 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public abstract class AbstractSystemConstraintAlgorithmBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-														ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
-														ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
+														GROUP extends JeeslConstraintAlgorithmGroup<L,D,GROUP,?>,
+														ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,
 														SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
 														CONCAT extends JeeslConstraintCategory<L,D,CONCAT,?>,
 														CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 														LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 														TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 														RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
-					extends AbstractSystemConstraintBean<L,D,LOC,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
+					extends AbstractSystemConstraintBean<L,D,LOC,GROUP,ALGORITHM,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
 					implements Serializable//,SbToggleBean
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSystemConstraintAlgorithmBean.class);
 	
-	protected final SbMultiHandler<ALGCAT> sbhAlgorithmCategory; public SbMultiHandler<ALGCAT> getSbhAlgorithmCategory() {return sbhAlgorithmCategory;}
+	protected final SbMultiHandler<GROUP> sbhAlgorithmCategory; public SbMultiHandler<GROUP> getSbhAlgorithmCategory() {return sbhAlgorithmCategory;}
 	
-	protected final EjbConstraintAlgorithmFactory<L,D,ALGCAT,ALGO> efAlgorithm;
+	protected final EjbConstraintAlgorithmFactory<L,D,GROUP,ALGORITHM> efAlgorithm;
 	
-	private List<ALGO> algorithms; public List<ALGO> getAlgorithms() {return algorithms;}
+	private List<ALGORITHM> algorithms; public List<ALGORITHM> getAlgorithms() {return algorithms;}
 
-	private ALGO algorithm; public ALGO getAlgorithm() {return algorithm;} public void setAlgorithm(ALGO algorithm) {this.algorithm = algorithm;}
+	private ALGORITHM algorithm; public ALGORITHM getAlgorithm() {return algorithm;} public void setAlgorithm(ALGORITHM algorithm) {this.algorithm = algorithm;}
 
 	
-	public AbstractSystemConstraintAlgorithmBean(ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
+	public AbstractSystemConstraintAlgorithmBean(ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
 	{
 		super(fbConstraint);
 		efAlgorithm = fbConstraint.algorithm();
 	
-		sbhAlgorithmCategory = new SbMultiHandler<ALGCAT>(fbConstraint.getClassAlgorithmCategory(),this);
+		sbhAlgorithmCategory = new SbMultiHandler<GROUP>(fbConstraint.getClassAlgorithmCategory(),this);
 	}
 	
-	protected void initConstraintAlgorithms(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint)
+	protected void initConstraintAlgorithms(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+											JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CONCAT,LEVEL,TYPE,RESOLUTION> fConstraint)
 	{
 		super.initConstraint(bTranslation,bMessage,fConstraint);
 		initImplementationSettings();

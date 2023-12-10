@@ -26,7 +26,7 @@ public class JsonSsiMessageFactory
 				CONSTRAINT extends JeeslConstraint<L,D,SCOPE,?,CONSTRAINT,LEVEL,TYPE,?>,
 				LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 				TYPE extends JeeslConstraintType<L,D,TYPE,?>>
-		JsonSsiMessage build(LOC loc, JeeslSystemConstraintFacade<L,D,?,?,SCOPE,?,CONSTRAINT,LEVEL,TYPE,?> facade, Class<?> c, E code)
+		JsonSsiMessage build(LOC loc, JeeslSystemConstraintFacade<L,D,?,?,SCOPE,CONSTRAINT,?,LEVEL,TYPE,?> facade, Class<?> c, E code)
 	{
 		JsonSsiMessage json = new JsonSsiMessage();
 	

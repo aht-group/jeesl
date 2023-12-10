@@ -4,12 +4,12 @@ import java.util.Comparator;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SystemConstraintAlgorithmComparator<ALGCAT extends JeeslStatus<?,?,ALGCAT>,
-										ALGO extends JeeslConstraintAlgorithm<?,?,ALGCAT>>
+public class SystemConstraintAlgorithmComparator<ALGORITHM extends JeeslConstraintAlgorithm<?,?,GROUP>,
+										GROUP extends JeeslConstraintAlgorithmGroup<?,?,GROUP,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(SystemConstraintAlgorithmComparator.class);
 
@@ -20,10 +20,10 @@ public class SystemConstraintAlgorithmComparator<ALGCAT extends JeeslStatus<?,?,
     	
     }
     
-    public Comparator<ALGO> factory(Type type)
+    public Comparator<ALGORITHM> factory(Type type)
     {
-        Comparator<ALGO> c = null;
-        SystemConstraintAlgorithmComparator<ALGCAT,ALGO> factory = new SystemConstraintAlgorithmComparator<ALGCAT,ALGO>();
+        Comparator<ALGORITHM> c = null;
+        SystemConstraintAlgorithmComparator<ALGORITHM,GROUP> factory = new SystemConstraintAlgorithmComparator<>();
         switch (type)
         {
             case position: c = factory.new PositionComparator();break;
@@ -32,9 +32,9 @@ public class SystemConstraintAlgorithmComparator<ALGCAT extends JeeslStatus<?,?,
         return c;
     }
 
-    private class PositionComparator implements Comparator<ALGO>
+    private class PositionComparator implements Comparator<ALGORITHM>
     {
-        public int compare(ALGO a, ALGO b)
+        public int compare(ALGORITHM a, ALGORITHM b)
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
 			  ctb.append(a.getCategory().getPosition(), b.getCategory().getPosition());

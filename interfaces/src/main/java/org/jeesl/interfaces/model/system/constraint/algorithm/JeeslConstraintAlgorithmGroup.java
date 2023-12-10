@@ -15,7 +15,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslDescription
 @DownloadJeeslAttributes
 @DownloadJeeslData
-public interface JeeslConstraintAlgorithmCategory <L extends JeeslLang,
+public interface JeeslConstraintAlgorithmGroup <L extends JeeslLang,
 											D extends JeeslDescription,
 											S extends JeeslStatus<L,D,S>,
 											G extends JeeslGraphic<?,?,?>>

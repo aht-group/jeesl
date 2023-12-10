@@ -62,7 +62,7 @@ public class EjbConstraintFactory <L extends JeeslLang, D extends JeeslDescripti
 		return ejb;
 	}
 	
-	public CONSTRAINT importOrUpdate(JeeslSystemConstraintFacade<L,D,?,?,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint, SCOPE eScope, Constraint xConstraint) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
+	public CONSTRAINT importOrUpdate(JeeslSystemConstraintFacade<L,D,?,?,SCOPE,CONSTRAINT,CATEGORY,LEVEL,TYPE,RESOLUTION> fConstraint, SCOPE eScope, Constraint xConstraint) throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException
 	{
 		CONSTRAINT eConstraint;	
 		try {eConstraint = fConstraint.fSystemConstraint(eScope,xConstraint.getCode());}

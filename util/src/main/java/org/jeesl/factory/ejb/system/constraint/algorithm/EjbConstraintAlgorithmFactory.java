@@ -3,14 +3,14 @@ package org.jeesl.factory.ejb.system.constraint.algorithm;
 import java.util.List;
 
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmGroup;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbConstraintAlgorithmFactory <L extends JeeslLang, D extends JeeslDescription,
-											ALGCAT extends JeeslStatus<L,D,ALGCAT>,
+											ALGCAT extends JeeslConstraintAlgorithmGroup<L,D,ALGCAT,?>,
 											ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbConstraintAlgorithmFactory.class);

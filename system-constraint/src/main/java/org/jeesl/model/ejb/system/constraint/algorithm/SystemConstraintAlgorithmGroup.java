@@ -4,7 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmCategory;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmGroup;
 import org.jeesl.interfaces.qualifier.er.EjbErNode;
 import org.jeesl.model.ejb.io.graphic.core.IoGraphic;
 import org.jeesl.model.ejb.io.locale.IoDescription;
@@ -14,7 +14,7 @@ import org.jeesl.model.ejb.io.locale.IoStatus;
 @Entity
 @DiscriminatorValue("systemConstraintAlgorithmGroup")
 @EjbErNode(name="Category",category="lcf",level=3,subset="lcf")
-public class SystemConstraintAlgorithmGroup extends IoStatus implements JeeslConstraintAlgorithmCategory<IoLang,IoDescription,SystemConstraintAlgorithmGroup,IoGraphic>
+public class SystemConstraintAlgorithmGroup extends IoStatus implements JeeslConstraintAlgorithmGroup<IoLang,IoDescription,SystemConstraintAlgorithmGroup,IoGraphic>
 {
 	public static final long serialVersionUID=1;
 	

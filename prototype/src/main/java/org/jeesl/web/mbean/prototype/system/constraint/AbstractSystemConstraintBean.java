@@ -10,7 +10,7 @@ import org.jeesl.controller.util.comparator.ejb.system.constraint.SystemConstrai
 import org.jeesl.factory.builder.system.ConstraintFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
-import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmCategory;
+import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmGroup;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
@@ -25,11 +25,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractSystemConstraintBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
-													ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
-													ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
-													SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
-													CONCAT extends JeeslConstraintCategory<L,D,CONCAT,?>,
-													CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
+													GROUP extends JeeslConstraintAlgorithmGroup<L,D,GROUP,?>,
+													ALGORITHM extends JeeslConstraintAlgorithm<L,D,GROUP>,
+													SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
+													CATEGORY extends JeeslConstraintCategory<L,D,CATEGORY,?>,
+													CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 													LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
 													TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 													RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
@@ -39,20 +39,21 @@ public abstract class AbstractSystemConstraintBean <L extends JeeslLang, D exten
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractSystemConstraintBean.class);
 
-	protected JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint;
-	protected final ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint;
+	protected JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CATEGORY,LEVEL,TYPE,RESOLUTION> fConstraint;
+	protected final ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint;
 
-	protected final Comparator<ALGO> cpAlgorithm;
+	protected final Comparator<ALGORITHM> cpAlgorithm;
 	
-	public AbstractSystemConstraintBean(ConstraintFactoryBuilder<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
+	public AbstractSystemConstraintBean(ConstraintFactoryBuilder<L,D,GROUP,ALGORITHM,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fbConstraint)
 	{
 		super(fbConstraint.getClassL(),fbConstraint.getClassD());
 		this.fbConstraint=fbConstraint;
 		
-		cpAlgorithm = (new SystemConstraintAlgorithmComparator<ALGCAT,ALGO>()).factory(SystemConstraintAlgorithmComparator.Type.position);
+		cpAlgorithm = (new SystemConstraintAlgorithmComparator<ALGORITHM,GROUP>()).factory(SystemConstraintAlgorithmComparator.Type.position);
 	}
 	
-	protected void initConstraint(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage, JeeslSystemConstraintFacade<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION> fConstraint)
+	protected void initConstraint(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
+									JeeslSystemConstraintFacade<L,D,ALGORITHM,GROUP,SCOPE,CONSTRAINT,CATEGORY,LEVEL,TYPE,RESOLUTION> fConstraint)
 	{
 		super.initJeeslAdmin(bTranslation,bMessage);
 		this.fConstraint=fConstraint;
