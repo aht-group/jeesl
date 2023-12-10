@@ -26,7 +26,7 @@ public interface JeeslConstraint<L extends JeeslLang, D extends JeeslDescription
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 									LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
-									TYPE extends JeeslStatus<L,D,TYPE>,
+									TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 									RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 			extends Serializable,EjbWithId,
 					EjbRemoveable,EjbPersistable,EjbSaveable,

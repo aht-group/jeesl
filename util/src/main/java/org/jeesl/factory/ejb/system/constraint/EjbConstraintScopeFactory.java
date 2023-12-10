@@ -10,6 +10,7 @@ import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -23,7 +24,7 @@ public class EjbConstraintScopeFactory <L extends JeeslLang, D extends JeeslDesc
 										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
 										CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 										LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
-										TYPE extends JeeslStatus<L,D,TYPE>,
+										TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 										RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbConstraintScopeFactory.class);

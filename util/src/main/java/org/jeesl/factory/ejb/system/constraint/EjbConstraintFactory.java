@@ -8,12 +8,13 @@ import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,10 +22,10 @@ import net.sf.ahtutils.xml.system.Constraint;
 
 public class EjbConstraintFactory <L extends JeeslLang, D extends JeeslDescription,
 										SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,
-										CATEGORY extends JeeslStatus<L,D,CATEGORY>,
+										CATEGORY extends JeeslConstraintCategory<L,D,CATEGORY,?>,
 										CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CATEGORY,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 										LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
-										TYPE extends JeeslStatus<L,D,TYPE>,
+										TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 										RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbConstraintFactory.class);

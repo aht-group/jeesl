@@ -13,9 +13,11 @@ import org.jeesl.factory.ejb.system.constraint.EjbConstraintScopeFactory;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithm;
 import org.jeesl.interfaces.model.system.constraint.algorithm.JeeslConstraintAlgorithmCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintCategory;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintResolution;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
+import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -33,10 +35,10 @@ public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescript
 									ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
 									ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
 									SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
-									CONCAT extends JeeslStatus<L,D,CONCAT>,
+									CONCAT extends JeeslConstraintCategory<L,D,CONCAT,?>,
 									CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 									LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
-									TYPE extends JeeslStatus<L,D,TYPE>,
+									TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 									RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 		extends AbstractJeeslRestHandler<L,D>
 		implements JeeslConstraintRestExport,JeeslConstraintRestImport
@@ -65,10 +67,10 @@ public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescript
 						ALGCAT extends JeeslConstraintAlgorithmCategory<L,D,ALGCAT,?>,
 						ALGO extends JeeslConstraintAlgorithm<L,D,ALGCAT>,
 						SCOPE extends JeeslConstraintScope<L,D,CONCAT>,
-						CONCAT extends JeeslStatus<L,D,CONCAT>,
+						CONCAT extends JeeslConstraintCategory<L,D,CONCAT,?>,
 						CONSTRAINT extends JeeslConstraint<L,D,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>,
 						LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>,
-						TYPE extends JeeslStatus<L,D,TYPE>,
+						TYPE extends JeeslConstraintType<L,D,TYPE,?>,
 						RESOLUTION extends JeeslConstraintResolution<L,D,CONSTRAINT>>
 			ConstraintRestService<L,D,ALGCAT,ALGO,SCOPE,CONCAT,CONSTRAINT,LEVEL,TYPE,RESOLUTION>
 					factory(String[] localeCodes,
