@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -245,7 +246,7 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
 	
 	public <W extends EjbWithDescription<D>> void update(W ejb, Descriptions descriptions)
 	{
-		if(descriptions!=null)
+		if(Objects.nonNull(descriptions))
 		{
 			for(Description xml : descriptions.getDescription())
 			{

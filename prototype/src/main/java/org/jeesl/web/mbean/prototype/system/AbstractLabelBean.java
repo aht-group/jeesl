@@ -123,11 +123,13 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	
 	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code)
 	{
-		return this.getLabels().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
+		logger.info("toLabel("+localeCode+","+c.getSimpleName()+","+code.toString()+")");
+		return th.getLabels().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
 	}
 	@Override public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code)
 	{
-		return this.getDescriptions().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
+		logger.info("toDescription("+localeCode+","+c.getSimpleName()+","+code.toString()+")");
+		return th.getDescriptions().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
 	}
 
 	//This are some dummy-methods for the OfxTranslationProvider .. not required here

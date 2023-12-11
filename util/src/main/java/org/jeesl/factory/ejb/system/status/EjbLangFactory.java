@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -219,7 +220,7 @@ public class EjbLangFactory<L extends JeeslLang> implements Serializable
 	
 	public <W extends EjbWithLang<L>> void update(W ejb, Langs langs)
 	{
-		if(langs!=null)
+		if(Objects.nonNull(langs))
 		{
 			for(Lang xml : langs.getLang())
 			{

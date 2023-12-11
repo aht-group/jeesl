@@ -13,7 +13,6 @@ public interface JeeslFacesMessageBean extends Serializable
 	<E extends Enum<E>> void errorText(E id, String text);
 	void errorText(String text);
 	
-//	void growlSuccessSaved();
 	<T extends EjbWithId> void growlSuccessSaved(T t);
 	void growlSuccessRemoved();
 	
@@ -21,5 +20,4 @@ public interface JeeslFacesMessageBean extends Serializable
 	<E extends Enum<E>> void errorConstraintViolationDuplicateObject(E id);
 	void errorConstraintViolationInUse();
 	void errorConstraintViolationInUse(String id);
-	
 }

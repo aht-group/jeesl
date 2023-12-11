@@ -50,8 +50,8 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(Objects.nonNull(tp))
 		{
-			summary = tp.toLabel(detail, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summarySuccess);
-			detail = tp.toDescription(detail, FacesContextMessage.class, JeeslFacesContextMessage.Detail.detailSaved);
+			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summarySuccess);
+			detail = tp.toDescription(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Detail.detailSaved);
 		}
 		else if(Objects.nonNull(bTranslation))
 		{

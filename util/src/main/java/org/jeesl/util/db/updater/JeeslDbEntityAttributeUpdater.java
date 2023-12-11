@@ -8,9 +8,11 @@ import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.db.updater.JeeslDbLangUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
+import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
+import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttributeType;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.label.er.JeeslRevisionDiagram;
@@ -25,10 +27,10 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.system.revision.Attribute;
 import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Lang;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
@@ -49,8 +51,13 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
 	private final JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
 	
+	private final EjbCodeCache<RAT> cacheType;
+	
 	private final EjbLangFactory<L> efLang;
+	private final EjbDescriptionFactory<D> efDescription;
 	private final JeeslDbLangUpdater<RA,L> dbuLang;
+	
+	
 
 	
 	public JeeslDbEntityAttributeUpdater(IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision,
@@ -59,7 +66,10 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 		this.fbRevision=fbRevision;
 		this.fRevision=fRevision;
 		
+		cacheType = EjbCodeCache.instance(fbRevision.getClassAttributeType()).facade(fRevision);
+		
 		efLang = EjbLangFactory.instance(fbRevision.getClassL());
+		efDescription  = EjbDescriptionFactory.instance(fbRevision.getClassD());
 		dbuLang = JeeslDbLangUpdater.factory(fbRevision.getClassAttribute(),fbRevision.getClassL());
 	}
 	
@@ -67,18 +77,17 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 	{
 		updateAttributes(entity,EjbCodeFactory.toListCode(locales),xml);
 	}
-	public void updateAttributes(RE entity, List<String> localeCodes, Entity xml) throws JeeslConstraintViolationException
+	public void updateAttributes(RE entity, List<String> eLocales, Entity xml) throws JeeslConstraintViolationException
 	{
-		logger.info("Creating/Updating Attributes of "+entity.toString()+ entity.getCode() +" for "+localeCodes.toString());
+		logger.info("Creating/Updating Attributes of "+entity.toString()+ entity.getCode() +" for "+eLocales.toString());
 		JaxbUtil.trace(xml);
 
 		// Init the lazy loading of EJB properties
 		entity = fRevision.load(fbRevision.getClassEntity(), entity);
 		
 		// Preparing Maps for storing the XML and EJB Attributes Objects referenced by their code
-		Map<String,Attribute> xmlAttributes				= new HashMap<>();
-		Map<String,RA> ejbAttributes	= new HashMap<>();
-
+		Map<String,Attribute> xmlAttributes = new HashMap<>();
+		Map<String,RA> ejbAttributes = new HashMap<>();
 
 		// Load data into the maps
 		for (Attribute attribute : xml.getAttribute())
@@ -90,54 +99,46 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 			ejbAttributes.put(ra.getCode(), ra);
 		}
 
+		
 		// Process all data coming from the XML Attributes for updating or creating properties of EJB object
 		for (String xmlCode : xmlAttributes.keySet())
 		{
 			Attribute xmlAttribute = xmlAttributes.get(xmlCode);
 
-			RAT type = fRevision.all(fbRevision.getClassAttributeType(),1).get(0);
-			//Needs to be handled, check if type is part of the XML repsonse
+			RAT type = cacheType.ejb(JeeslRevisionAttributeType.Code.text); 
 			
 			// See if an Attribute is available in the EJB entity already and load it
 			// Otherwise, use a new created instance
-			RA ejbAttribute = fbRevision.ejbAttribute().build(type,xmlAttribute);
+			RA ejbAttribute = null;
 			if (ejbAttributes.containsKey(xmlCode))
 			{
 				ejbAttribute = ejbAttributes.get(xmlCode);
 			}
-
-			// Iterate through all language codes and update/add the translations
-			for (String locale : localeCodes)
+			else
 			{
-				for (Lang lang : xmlAttribute.getLangs().getLang())
-				{
-					if (lang.getKey().equals(locale))
-					{	
-						if (ejbAttribute.getName()==null) 
-						{
-							logger.info("No Name Matrix present for " +ejbAttribute.getCode() +". Creating a new one");
-							ejbAttribute.setName(new HashMap<>());
-						}
-						if (ejbAttribute.getName().containsKey(locale))
-						{
-							ejbAttribute.getName().get(locale).setLang(lang.getTranslation());
-						} else
-						{
-							ejbAttribute.getName().put(locale,efLang.createLang(lang));
-						}
-					}
-				}
+				ejbAttribute = fbRevision.ejbAttribute().build(type,xmlAttribute);
 			}
+			
+			ejbAttribute.setEntity(entity);
+			ejbAttribute.setType(cacheType.ejb(xmlAttribute.getType().getCode()));
+			
+			efLang.persistMissingLangsForCode(fRevision, eLocales, ejbAttribute);
+			efLang.update(ejbAttribute,xmlAttribute.getLangs());
+			
+			efDescription.persistMissingLangsForCode(fRevision, eLocales, ejbAttribute);
+			efDescription.update(ejbAttribute,xmlAttribute.getDescriptions());
+			
 			try
 			{
-				ejbAttribute.setEntity(entity);
-				efLang.persistMissingLangsForCode(fRevision, localeCodes, ejbAttribute);
-				dbuLang.handle(fRevision, ejbAttribute, localeCodes);
+				
+				efLang.persistMissingLangsForCode(fRevision, eLocales, ejbAttribute);
+				dbuLang.handle(fRevision, ejbAttribute, eLocales);
 				fRevision.save(fbRevision.getClassEntity(), entity, ejbAttribute); 
 				fRevision.save(entity);
 				
 				logger.info("EJB Attribute: " +ejbAttribute.toString() +" has been updated in database");
-			} catch(Exception e)
+			}
+			catch(Exception e)
 			{
 				logger.error("EJB Attribute: " +ejbAttribute.toString() +" has not been updated in database. Reason: " +e.getMessage());
 			}
