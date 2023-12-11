@@ -186,7 +186,8 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 		catch (JeeslNotFoundException e) {throw new UtilsConfigurationException(e.getMessage());}
 	}
 	
-	public static Class<?> classForInterface(String code, String... basePackage) throws UtilsConfigurationException
+	
+	public static Class<?> classForInterface(String code, List<String> packages) throws UtilsConfigurationException
 	{
 		if(code.equals(JeeslAbstractStatus.class.getName()))
 		{
@@ -200,8 +201,13 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 		}
 		else
 		{
+			List<String> searchInPackages = new ArrayList<>();
+			searchInPackages.addAll(packages);
+			searchInPackages.add("org.jeesl.jsf.jx.util");
+			
+			
 			logger.info("Searching class for provided interface: "+code);
-			try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(basePackage).scan())
+			try (ScanResult scanResult = new ClassGraph().enableAllInfo().acceptPackages(searchInPackages.toArray(new String[0])).scan())
 			{
 				ClassInfoList list = scanResult.getClassesImplementing(code);
 				

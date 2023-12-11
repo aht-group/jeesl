@@ -13,7 +13,7 @@ import org.jeesl.web.mbean.system.AbstractMessageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractConstraintMessageBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
+public abstract class AbstractConstraintMessageBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											CONSTRAINT extends JeeslConstraint<L,D,?,?,CONSTRAINT,LEVEL,?,?>,
 											LEVEL extends JeeslConstraintLevel<L,D,LEVEL,?>>
 							extends AbstractMessageBean<L,D,LOC> implements JeeslConstraintMessageBean<CONSTRAINT>
@@ -24,6 +24,11 @@ public class AbstractConstraintMessageBean <L extends JeeslLang, D extends Jeesl
 	private final static boolean debugOnInfo=true;
 	
 	private JeeslConstraintsBean<CONSTRAINT> bConstraint;
+	
+	public AbstractConstraintMessageBean()
+	{
+		super(FacesContextMessage.instance());
+	}
 	
 	protected void postConstruct(String localeCode, JeeslTranslationBean<L,D,LOC> bTranslation, JeeslConstraintsBean<CONSTRAINT> bConstraint)
 	{
@@ -46,7 +51,7 @@ public class AbstractConstraintMessageBean <L extends JeeslLang, D extends Jeesl
 		String facesId = null;
 		if(fId!=null) {facesId=fId.toString();}
 		
-		FacesContextMessage.error(facesId, constraint.getLevel().getName().get(jeeslLocaleCode).getLang(), constraint.getDescription().get(jeeslLocaleCode).getLang());
+		fcm.error(facesId, constraint.getLevel().getName().get(jeeslLocaleCode).getLang(), constraint.getDescription().get(jeeslLocaleCode).getLang());
 	}
 	
 	@Override public <FID extends Enum<FID>, SID extends Enum<SID>, CID extends Enum<CID>> void show(FID fId, SID sId, CID cId)
@@ -60,11 +65,11 @@ public class AbstractConstraintMessageBean <L extends JeeslLang, D extends Jeesl
 		}
 		
 		CONSTRAINT c = bConstraint.getSilent(sId,cId);
-		if(c!=null){show(fId,c);}
+		if(c!=null) {show(fId,c);}
 		else
 		{
 			logger.error("Constraint not found");
-			FacesContextMessage.error(fId.toString(), "ERROR", "Constraint not found");
+			fcm.error(fId.toString(), "ERROR", "Constraint not found");
 		}
 	}
 }

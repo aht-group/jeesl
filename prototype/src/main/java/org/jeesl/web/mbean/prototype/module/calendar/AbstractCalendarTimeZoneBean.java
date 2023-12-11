@@ -82,7 +82,7 @@ public abstract class AbstractCalendarTimeZoneBean <L extends JeeslLang, D exten
 		{
 			zone = fCalendar.save(zone);
 			bCalendar.reloadZones(fCalendar);
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(zone);
 		}
 		else
 		{

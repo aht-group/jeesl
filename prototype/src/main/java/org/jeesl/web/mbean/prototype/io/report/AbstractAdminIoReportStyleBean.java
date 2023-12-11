@@ -137,7 +137,7 @@ public class AbstractAdminIoReportStyleBean <L extends JeeslLang, D extends Jees
 		style = fReport.save(style);
 		reloadStyles();
 		reloadStyle();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(style);
 		updatePerformed();
 	}
 /*	

@@ -210,7 +210,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 		template = fTemplate.save(template);
 		reloadTemplates();
 		reloadTemplate();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(template);
 		updatePerformed();
 	}
 	
@@ -254,7 +254,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 			if(token.getType()!=null) {token.setType(fTemplate.find(fbTemplate.getClassTokenType(), token.getType()));}
 			token = fTemplate.save(token);
 			reloadTemplate();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(token);
 			updatePerformed();
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
@@ -302,7 +302,7 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 			definition.setType(fTemplate.find(fbTemplate.getClassType(), definition.getType()));
 			definition = fTemplate.save(definition);
 			renderPreview();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(definition);
 			updatePerformed();
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}

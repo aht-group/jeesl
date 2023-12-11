@@ -310,7 +310,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 
 			updateAppScopeBean2(status);
 			selectCategory(false);
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved((EjbSaveable)status);
 		}
 		catch (JeeslConstraintViolationException e)
 		{

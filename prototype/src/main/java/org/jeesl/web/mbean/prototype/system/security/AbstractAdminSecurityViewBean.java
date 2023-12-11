@@ -186,7 +186,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		view = fSecurity.save(view);
 		reloadView();
 		reloadViews();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(view);
 		propagateChanges();
 		bSecurity.update(view);
 	}
@@ -260,7 +260,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		reloadView();
 		reloadActions();
 		propagateChanges();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(action);
 	}
 	
 	public void rmAction() throws JeeslConstraintViolationException
@@ -309,7 +309,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		area = fSecurity.save(area);
 		reloadAreas();
 		propagateChanges();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(area);
 	}
 	
 	public void selectArea() throws JeeslConstraintViolationException

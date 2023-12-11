@@ -353,7 +353,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			entity = fRevision.save(entity);
 			reloadEntities();
 			reloadEntity();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(entity);
 			bLabel.reload(entity);
 			updatePerformed();
 		}
@@ -406,7 +406,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		changeRelation();
 		attribute = fRevision.save(fbRevision.getClassEntity(),entity,attribute);
 		reloadEntity();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(attribute);
 		bLabel.reload(entity);
 		updatePerformed();
 	}
@@ -465,7 +465,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			mapping = fRevision.save(mapping);
 			updateUi();
 			reloadEntity();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(mapping);
 			updatePerformed();
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
@@ -548,7 +548,6 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 				}
 			}
 			reloadEntity();
-			bMessage.growlSuccessSaved();
 			bLabel.reload(entity);
 		} catch (SecurityException | ClassNotFoundException e) {
 			e.printStackTrace();

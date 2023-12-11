@@ -93,7 +93,7 @@ public class AbstractAdminSystemNewsBean <L extends JeeslLang, D extends JeeslDe
 		if(news.getCategory()!=null){news.setCategory(fNews.find(fbNews.getClassCategory(), news.getCategory()));}
 		news = fNews.save(news);
 		reloadNews();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(news);
 	}
 	
 	public void rmNews() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException

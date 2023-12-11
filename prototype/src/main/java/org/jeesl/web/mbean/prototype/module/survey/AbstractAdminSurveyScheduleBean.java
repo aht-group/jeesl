@@ -152,7 +152,7 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 		survey.setStatus(fCore.find(fbCore.getClassSurveyStatus(),survey.getStatus()));
 		survey = fCore.save(survey);
 		reloadSurveys();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(survey);
 	}
 	
 	public void deleteSurvey() throws JeeslLockingException, JeeslConstraintViolationException, JeeslNotFoundException

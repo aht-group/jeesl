@@ -160,7 +160,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 			user = fUtilsUser.saveTransaction(user);
 			postSave(changedPassword);
 			reloadUser();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(user);
 			if(revision!=null){revision.pageFlowPrimarySave(user);}
 			userChangePerformed();
 		}

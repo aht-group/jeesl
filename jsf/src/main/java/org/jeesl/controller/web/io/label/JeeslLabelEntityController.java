@@ -382,7 +382,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			entity = fRevision.save(entity);
 			reloadEntities();
 			reloadEntity();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(entity);
 			bLabel.reload(entity);
 			updatePerformed();
 		}
@@ -457,7 +457,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		changeRelation();
 		attribute = fRevision.save(fbRevision.getClassEntity(),entity,attribute);
 		reloadEntity();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(attribute);
 		bLabel.reload(entity);
 		updatePerformed();
 	}
@@ -518,7 +518,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			mapping = fRevision.save(mapping);
 			updateUi();
 			reloadEntity();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(mapping);
 			updatePerformed();
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
@@ -602,7 +602,6 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 				}
 			}
 			reloadEntity();
-			bMessage.growlSuccessSaved();
 			bLabel.reload(entity);
 		} catch (SecurityException | ClassNotFoundException e) {
 			e.printStackTrace();

@@ -297,7 +297,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 
 			updateAppScopeBean(fGraphic,status);
 			selectCategory(false);
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved((EjbSaveable)status);
 		}
 		catch (JeeslConstraintViolationException e)
 		{

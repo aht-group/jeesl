@@ -117,7 +117,7 @@ public abstract class AbstractStatisticalMapBean <L extends JeeslLang, D extends
 		map = fMap.save(map);
 		reloadMaps();
 		reloadImplementations();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(map);
 	}
 	
 	public void deleteMap() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
@@ -153,6 +153,6 @@ public abstract class AbstractStatisticalMapBean <L extends JeeslLang, D extends
 		implementation.setStatus(fMap.find(fbMap.getClassStatus(), implementation.getStatus()));
 		implementation = fMap.save(implementation);
 		reloadImplementations();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(implementation);
 	}
 }

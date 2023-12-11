@@ -113,7 +113,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 	{
 		logger.info(AbstractLogMessage.saveEntity(scope));
 		scope = fRevision.save(scope);
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(scope);
 		reloadScopes();
 		reloadScope();
 		updatePerformed();
@@ -141,7 +141,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 		if(attribute.getType()!=null){attribute.setType(fRevision.find(fbRevision.getClassAttributeType(), attribute.getType()));}
 		attribute = fRevision.save(fbRevision.getClassScope(),scope,attribute);
 		reloadScope();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(attribute);
 		updatePerformed();
 	}
 

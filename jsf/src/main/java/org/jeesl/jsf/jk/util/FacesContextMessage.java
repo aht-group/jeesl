@@ -6,43 +6,37 @@ import jakarta.faces.context.FacesContext;
 
 public class FacesContextMessage
 {
+	public static FacesContextMessage intance() {return new FacesContextMessage();}
+	private FacesContextMessage()
+	{
+		
+	}
 	
-	public static void info(String summary, String detail) {info(null,summary, detail);}
-	public static void info(String id, String summary, String detail)
+	public void info(String summary, String detail) {info(null,summary, detail);}
+	public void info(String id, String summary, String detail)
 	{
 		addMessage(id, FacesMessage.SEVERITY_INFO,summary,detail);
 	}
 	
-	public static void warn(String summary, String detail) {warn(null,summary, detail);}
-	public static void warn(String id,String summary, String detail)
+	public void warn(String summary, String detail) {warn(null,summary, detail);}
+	public void warn(String id,String summary, String detail)
 	{
 		addMessage(id, FacesMessage.SEVERITY_WARN,summary,detail);
 	}
 	
-	public static void error(String summary, String detail) {error(null,summary, detail);}
-	public static void error(String id,String summary, String detail)
+	public void error(String summary, String detail) {error(null,summary, detail);}
+	public void error(String id,String summary, String detail)
 	{
 		addMessage(id, FacesMessage.SEVERITY_ERROR,summary,detail);
 	}
 	
-	public static void fatal(String summary, String detail) {fatal(null,summary, detail);}
-	public static void fatal(String id,String summary, String detail)
+	public void fatal(String summary, String detail) {fatal(null,summary, detail);}
+	public void fatal(String id,String summary, String detail)
 	{
 		addMessage(id, FacesMessage.SEVERITY_FATAL,summary,detail);
 	}
 	
-	public static void addMessage(String id, Severity severity, String summary, String detail)
-	{  
-		FacesMessage fm = new FacesMessage(severity,summary,detail);
-		addMessage(id,fm);
-	}
-	
-	public static void addMessage(FacesMessage message)
-	{  
-		addMessage(null, message);  
-	}
-	public static void addMessage(String id, FacesMessage message)
-	{  
-		FacesContext.getCurrentInstance().addMessage(id, message);  
-	}
+	public void addMessage(String id, Severity severity, String summary, String detail) {addMessage(id,new FacesMessage(severity,summary,detail));}
+	public void addMessage(FacesMessage message) {addMessage(null, message);}
+	public void addMessage(String id, FacesMessage message) {FacesContext.getCurrentInstance().addMessage(id, message);}
 }

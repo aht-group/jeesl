@@ -116,7 +116,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 		if(diagram.getCategory()!=null){diagram.setCategory(fRevision.find(fbRevision.getClassCategory(),diagram.getCategory()));}
 		diagram = fRevision.save(diagram);
 		reloadDiagrams();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(diagram);
 		reloadDiagram();
 	}
 

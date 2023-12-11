@@ -274,7 +274,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		report = fReport.save(report);
 		reloadReports();
 		reloadReport();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(report);
 		updatePerformed();
 	}
 	
@@ -346,7 +346,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			sheet = fReport.save(sheet);
 			reloadReport();
 			reloadSheet();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(sheet);
 			updatePerformed();
 			uiHelper.check(sheet);
 		}
@@ -418,7 +418,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			reloadReport();
 			reloadSheet();
 			reloadGroup();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(group);
 			updatePerformed();
 			uiHelper.check(group);
 		}
@@ -486,7 +486,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			reloadSheet();
 			reloadGroup();
 			reloadColumn();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(column);
 			updatePerformed();
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
@@ -559,7 +559,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			reloadReport();
 			reloadSheet();
 			reloadRow();
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(row);
 			updatePerformed();
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}

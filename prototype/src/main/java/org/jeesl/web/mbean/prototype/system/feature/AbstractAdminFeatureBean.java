@@ -54,6 +54,6 @@ public class AbstractAdminFeatureBean <F extends JeeslSystemFeature>
 	{
 		feature = fFeature.saveTransaction(feature);
 		bFeature.realodFeatures();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(feature);
 	}
 }

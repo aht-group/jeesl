@@ -2,6 +2,8 @@ package org.jeesl.api.bean.msg;
 
 import java.io.Serializable;
 
+import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+
 public interface JeeslFacesMessageBean extends Serializable
 {
 	void growlSuccess(String key);
@@ -11,7 +13,8 @@ public interface JeeslFacesMessageBean extends Serializable
 	<E extends Enum<E>> void errorText(E id, String text);
 	void errorText(String text);
 	
-	void growlSuccessSaved();
+//	void growlSuccessSaved();
+	<T extends EjbWithId> void growlSuccessSaved(T t);
 	void growlSuccessRemoved();
 	
 	void errorConstraintViolationDuplicateObject();

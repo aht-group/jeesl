@@ -252,7 +252,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		view = fSecurity.save(view);
 		this.reloadView();
 		this.reloadViews();
-		if(Objects.nonNull(bMessage)) {bMessage.growlSuccessSaved();}
+		if(Objects.nonNull(bMessage)) {bMessage.growlSuccessSaved(view);}
 		bSecurity.update(view);
 		callback.propagateChanges();
 	}
@@ -335,7 +335,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		reloadView();
 		reloadActions();
 		propagateChanges();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(action);
 	}
 	
 	public void rmAction() throws JeeslConstraintViolationException
@@ -386,7 +386,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		area = fSecurity.save(area);
 		reloadAreas();
 		propagateChanges();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(area);
 	}
 	
 	public void selectArea() throws JeeslConstraintViolationException

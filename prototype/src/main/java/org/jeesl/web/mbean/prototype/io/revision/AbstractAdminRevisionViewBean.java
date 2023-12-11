@@ -112,7 +112,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 	{
 		logger.info(AbstractLogMessage.saveEntity(rv));
 		rv = fRevision.save(rv);
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(rv);
 		reloadViews();
 		reloadView();
 		updatePerformed();
@@ -186,7 +186,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 		mapping.setEntity(fRevision.find(fbRevision.getClassEntity(),mapping.getEntity()));
 		mapping = fRevision.save(mapping);
 		reloadView();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(mapping);
 		updatePerformed();
 	}
 

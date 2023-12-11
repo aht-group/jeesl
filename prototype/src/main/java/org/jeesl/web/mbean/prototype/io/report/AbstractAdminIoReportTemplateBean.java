@@ -152,7 +152,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 		template = fReport.save(template);
 		reloadTemplates();
 		reloadTemplate();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(template);
 		updatePerformed();
 	}
 /*	
@@ -195,7 +195,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 			cell = fReport.save(cell);
 			reloadTemplate();
 			
-			bMessage.growlSuccessSaved();
+			bMessage.growlSuccessSaved(cell);
 			updatePerformed();
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}

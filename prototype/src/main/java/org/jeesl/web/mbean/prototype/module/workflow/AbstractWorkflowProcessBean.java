@@ -625,7 +625,7 @@ public abstract class AbstractWorkflowProcessBean <L extends JeeslLang, D extend
 		reloadActions();
 		reloadCommunications();
 		reloadRequired();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(transition);
 	}
 
 	public void selectTransition() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException

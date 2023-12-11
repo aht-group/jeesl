@@ -1,19 +1,17 @@
 package org.jeesl.web.mbean.system;
 
-import java.io.Serializable;
-
 import org.jeesl.api.bean.JeeslTranslationBean;
+import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
+import org.jeesl.interfaces.bean.system.JeeslFacesContextMessage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.jsf.jx.util.FacesContextMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AbstractMessageBean <L extends JeeslLang, D extends JeeslDescription,
-									LOC extends JeeslLocale<L,D,LOC,?>>
-								implements Serializable
+public abstract class AbstractMessageBean <L extends JeeslLang, D extends JeeslDescription,LOC extends JeeslLocale<L,D,LOC,?>>
+					implements JeeslFacesMessageBean
 {
 	private static final long serialVersionUID = 1;
 	final static Logger logger = LoggerFactory.getLogger(AbstractMessageBean.class);
@@ -21,49 +19,39 @@ public class AbstractMessageBean <L extends JeeslLang, D extends JeeslDescriptio
 	private JeeslTranslationBean<L,D,LOC> jeeslTranslationBean;
 	protected String jeeslLocaleCode;
 	
+	protected final JeeslFacesContextMessage fcm;
+	
+	public AbstractMessageBean(JeeslFacesContextMessage fcm)
+	{
+		this.fcm=fcm;
+	}
+	
 	public void initJeesl(String localeCode, JeeslTranslationBean<L,D,LOC> bTranslation)
 	{
 		this.jeeslLocaleCode=localeCode;
 		this.jeeslTranslationBean=bTranslation;
 	}
 	
-	public void growlSuccessSaved(){growlSuccess("jeeslFmObjectSaved");}
-	public void growlSuccessRemoved(){growlSuccess("fmObjectRemoved");}
+
+	@Override public void growlSuccessRemoved() {growlSuccess("fmObjectRemoved");}
 	
-	public <T extends EjbWithId> void growlSuccessSaved(T t){growlSuccess("jeeslFmObjectSaved");}
+	@Override public void growlError(String key) {fcm.info("growl", jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmError"), jeeslTranslationBean.get(jeeslLocaleCode, key));}
+	@Override public void growlSuccess(String key) {fcm.info("growl", jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmSuccess"), jeeslTranslationBean.get(jeeslLocaleCode, key));}
+	@Override public void growlInfoText(String text) {fcm.error("growl", jeeslTranslationBean.get(jeeslLocaleCode, "fmInfo"), text);}
 	
-	public void growlNyi(){growlError("jeeslFmNyi");}
+	@Override public void errorConstraintViolationDuplicateObject() {fcm.error(jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}
+	@Override public <E extends Enum<E>> void errorConstraintViolationDuplicateObject(E id) {fcm.error(id.toString(),jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}
 	
-	public void growlError(String key)
-	{
-		FacesContextMessage.info("growl", jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmError"), jeeslTranslationBean.get(jeeslLocaleCode, key));
-	}
+	@Override public void errorConstraintViolationInUse() {errorConstraintViolationInUse(null);}
+	@Override public void errorConstraintViolationInUse(String id) {errorText(id,jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationInUse"));}
 	
-	public void growlSuccess(String key)
-	{
-		FacesContextMessage.info("growl", jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmSuccess"), jeeslTranslationBean.get(jeeslLocaleCode, key));
-	}
+	@Override public void errorText(String text) {errorTextWithId(null,text);}
+	@Override public <E extends Enum<E>> void errorText(E id, String text) {errorTextWithId(id.toString(),text);}
 	
-	public void growlInfoText(String text)
-	{
-		FacesContextMessage.error("growl", jeeslTranslationBean.get(jeeslLocaleCode, "fmInfo"), text);
-	}
+	public void errorText(String id, String text) {errorTextWithId(id,text);}
 	
-//	@Override
-	public void errorConstraintViolationDuplicateObject() {FacesContextMessage.error(jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}
-	
-	
-//	@Override
-	public <E extends Enum<E>> void errorConstraintViolationDuplicateObject(E id) {FacesContextMessage.error(id.toString(),jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}
-	
-	public void errorConstraintViolationInUse() {errorConstraintViolationInUse(null);}
-	public void errorConstraintViolationInUse(String id) {errorText(id,jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationInUse"));}
-	public void errorText(String text){errorTextWithId(null,text);}
-	public <E extends Enum<E>> void errorText(E id, String text) {errorTextWithId(id.toString(),text);}
-	
-	public void errorText(String id, String text){errorTextWithId(id,text);}
 	private void errorTextWithId(String id, String text)
 	{
-		FacesContextMessage.error(id, jeeslTranslationBean.get(jeeslLocaleCode, "fmError"), text);
+		fcm.error(id, jeeslTranslationBean.get(jeeslLocaleCode, "fmError"), text);
 	}
 }

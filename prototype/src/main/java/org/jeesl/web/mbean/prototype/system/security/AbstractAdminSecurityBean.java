@@ -145,7 +145,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		category = fSecurity.save(category);
 		reloadCategories();
 		categorySaved();
-		bMessage.growlSuccessSaved();
+		bMessage.growlSuccessSaved(category);
 	}
 	protected void categorySaved()  throws JeeslNotFoundException {}
 	

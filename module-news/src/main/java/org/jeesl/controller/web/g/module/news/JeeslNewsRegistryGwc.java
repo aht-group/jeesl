@@ -165,7 +165,7 @@ public class JeeslNewsRegistryGwc <L extends JeeslLang, D extends JeeslDescripti
 //		if(news.getCategory()!=null){news.setCategory(fNews.find(fbNews.getClassCategory(), news.getCategory()));}
 		item = fNews.save(item);
 		reloadNews();
-		if(Objects.nonNull(bMessage)) {bMessage.growlSuccessSaved();}
+		if(Objects.nonNull(bMessage)) {bMessage.growlSuccessSaved(item);}
 		frh.init(item);
 	}
 	
