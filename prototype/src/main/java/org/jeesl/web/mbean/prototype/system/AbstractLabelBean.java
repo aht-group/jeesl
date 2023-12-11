@@ -68,7 +68,6 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 	}
 
 	protected void addLocales(List<LOC> locs) {for(LOC loc : locs) {this.addLocale(loc);}}
-
 	protected void addLocale(LOC loc)
 	{
 		locales.add(loc);
@@ -119,19 +118,29 @@ public class AbstractLabelBean <L extends JeeslLang, D extends JeeslDescription,
 		}
 	}
 	
-	//Method coming from  TranslationProvider ... but required!
+	//Method coming from  OfxTranslationProvider ... but required!
 	@Override public List<String> getLocaleCodes() {return EjbCodeFactory.toListCode(locales);}
+	
+	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code)
+	{
+		return this.getLabels().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
+	}
+	@Override public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code)
+	{
+		return this.getDescriptions().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
+	}
 
-	//This are some dummy-methods for the TranslationProvider .. not required here
+	//This are some dummy-methods for the OfxTranslationProvider .. not required here
 	@Override public boolean hasLocale(String localeCode) {logger.warn("NYI"); return false;}
 	
 	@Override public String tlEntity(String localeCode, String key) {logger.warn("NYI"); return null;}
 	@Override public String tlAttribute(String localeCode, String key1, String key2) {logger.warn("NYI"); return null;}
-	@Override public <E extends Enum<E>> String tlAttribute(String localeCode, Class<?> c, E code) {logger.warn("NYI"); return null;}
+	
 	@Override public String toDate(String localeCode, LocalDate record) {logger.warn("NYI"); return null;}
 	@Override public String toDate(String localeCode, Date record) {logger.warn("NYI"); return null;}
 	@Override public String toTime(String localeCode, Date record) {logger.warn("NYI"); return null;}
 	@Override public String toCurrency(String localeCode, Double value) {logger.warn("NYI"); return null;}
 	@Override public String toCurrency(String localeCode, boolean grouping, int decimals, Double value) {logger.warn("NYI"); return null;}
 	@Override public void setLanguages(List<LOC> locales) {logger.warn("NYI");}
+	
 }

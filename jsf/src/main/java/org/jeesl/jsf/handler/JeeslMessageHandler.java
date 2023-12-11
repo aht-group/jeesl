@@ -2,12 +2,15 @@ package org.jeesl.jsf.handler;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.interfaces.bean.system.JeeslFacesContextMessage;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.jsf.jk.util.FacesContextMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +21,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 	final static Logger logger = LoggerFactory.getLogger(JeeslMessageHandler.class);
 
 	private JeeslTranslationBean<L,D,LOC> bTranslation;
+	private JeeslTranslationProvider<LOC> tp;
 	protected String localeCode;
 	
 	protected final JeeslFacesContextMessage fcm;
@@ -32,22 +36,31 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		this.localeCode=localeCode;
 		this.bTranslation=bTranslation;
 	}
+	public void postConstruct(String localeCode, JeeslTranslationProvider<LOC> tp)
+	{
+		this.localeCode=localeCode;
+		this.tp=tp;
+	}
 	
 //	@Override
 	public <T extends EjbWithId> void growlSuccessSaved(T t)
 	{
-		String summary;
-		String detail;
-		if(Objects.nonNull(bTranslation))
+		String summary = null;
+		String detail= null;
+		
+		if(Objects.nonNull(tp))
+		{
+			summary = tp.toLabel(detail, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summarySuccess);
+			detail = tp.toDescription(detail, FacesContextMessage.class, JeeslFacesContextMessage.Detail.detailSaved);
+		}
+		else if(Objects.nonNull(bTranslation))
 		{
 			summary = bTranslation.get(localeCode,"jeeslFmSuccess");
 			detail = bTranslation.get(localeCode,"jeeslFmObjectSaved");
 		}
-		else
-		{
-			summary = "** SUCCESS **";
-			detail = "** Object Saved **";
-		}
+		
+		if(ObjectUtils.isEmpty(summary)) {summary = "** SUCCESS **";}
+		if(ObjectUtils.isEmpty(detail)) {detail = "** Object Saved **";}
 		
 		logger.info("growlSuccessSaved "+t.toString());
 		fcm.info("growl",summary,detail);

@@ -67,9 +67,13 @@ public class HandlerTranslationProvider <L extends JeeslLang, D extends JeeslDes
 		return th.getEntities().get(key).get(localeCode).getLang();
 	}
 
-	@Override public <E extends Enum<E>> String tlAttribute(String localeCode, Class<?> c, E code)
+	@Override public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code)
 	{
-		return tlAttribute(localeCode,c.getSimpleName(),code.toString());
+		return th.getLabels().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
+	}
+	@Override public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code)
+	{
+		return th.getDescriptions().get(c.getSimpleName()).get(code.toString()).get(localeCode).getLang();
 	}
 
 	@Override public String tlAttribute(String localeCode, String key1, String key2)

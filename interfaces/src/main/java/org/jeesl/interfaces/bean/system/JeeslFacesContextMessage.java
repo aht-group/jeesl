@@ -7,6 +7,9 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslFacesContextMessage
 {
+	public enum Summary {summarySuccess}
+	public enum Detail {detailSaved};
+	
 	void info(String summary, String detail);
 	void info(String id, String summary, String detail);
 	

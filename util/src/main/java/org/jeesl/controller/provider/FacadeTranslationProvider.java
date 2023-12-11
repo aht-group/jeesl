@@ -89,7 +89,12 @@ public class FacadeTranslationProvider <L extends JeeslLang, D extends JeeslDesc
 	}
 
 	@Override
-	public <E extends Enum<E>> String tlAttribute(String localeCode, Class<?> c, E code) {
+	public <E extends Enum<E>> String toLabel(String localeCode, Class<?> c, E code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public <E extends Enum<E>> String toDescription(String localeCode, Class<?> c, E code) {
 		// TODO Auto-generated method stub
 		return null;
 	}
