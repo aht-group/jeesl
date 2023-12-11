@@ -6,7 +6,6 @@ import org.jeesl.interfaces.bean.system.JeeslFacesContextMessage;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,10 +32,10 @@ public abstract class AbstractMessageBean <L extends JeeslLang, D extends JeeslD
 	}
 	
 
-	@Override public void growlSuccessRemoved() {growlSuccess("fmObjectRemoved");}
+	@Override public void growlSuccessRemoved(Object o) {fcm.info(JeeslFacesContextMessage.Faces.growl, jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmSuccess"), jeeslTranslationBean.get(jeeslLocaleCode,"fmObjectRemoved"));}
 	
-	@Override public void growlError(String key) {fcm.info("growl", jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmError"), jeeslTranslationBean.get(jeeslLocaleCode, key));}
-	@Override public void growlSuccess(String key) {fcm.info("growl", jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmSuccess"), jeeslTranslationBean.get(jeeslLocaleCode, key));}
+	@Override public void growlError(String key) {fcm.info(JeeslFacesContextMessage.Faces.growl, jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmError"), jeeslTranslationBean.get(jeeslLocaleCode, key));}
+	@Override public void growlSuccess(String key) {fcm.info(JeeslFacesContextMessage.Faces.growl, jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmSuccess"), jeeslTranslationBean.get(jeeslLocaleCode, key));}
 	@Override public void growlInfoText(String text) {fcm.error("growl", jeeslTranslationBean.get(jeeslLocaleCode, "fmInfo"), text);}
 	
 	@Override public void errorConstraintViolationDuplicateObject() {fcm.error(jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}

@@ -317,9 +317,10 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		{
 			fGraphic.rm((EjbRemoveable)status);
 			updateAppScopeBean(fGraphic,status);
+			bMessage.growlSuccessRemoved((EjbRemoveable)status);
 			status=null;
 			selectCategory();
-			bMessage.growlSuccessRemoved();
+			
 		}
 		catch (JeeslConstraintViolationException e)
 		{

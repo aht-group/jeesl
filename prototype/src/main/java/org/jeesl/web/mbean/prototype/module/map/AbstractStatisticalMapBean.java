@@ -124,8 +124,9 @@ public abstract class AbstractStatisticalMapBean <L extends JeeslLang, D extends
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(map));}
 		fMap.rm(map);
+		bMessage.growlSuccessRemoved(map);
 		reset(true);
-		bMessage.growlSuccessRemoved();
+		
 		reloadMaps();
 	}
 	

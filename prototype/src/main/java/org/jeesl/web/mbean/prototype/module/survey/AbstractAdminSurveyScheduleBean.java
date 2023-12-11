@@ -159,9 +159,10 @@ public abstract class AbstractAdminSurveyScheduleBean <L extends JeeslLang, D ex
 	{
 		logger.info(AbstractLogMessage.deleteEntity(survey));
 		fCore.deleteSurvey(survey);
+		bMessage.growlSuccessRemoved(survey);
 		survey=null;
 		reloadSurveys();
-		bMessage.growlSuccessRemoved();
+		
 	}
 	
 	public void selectSurvey() throws JeeslNotFoundException

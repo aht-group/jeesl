@@ -513,16 +513,18 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(option));}
 		fCore.rmOption(question,option);
+		bMessage.growlSuccessRemoved(option);
 		reloadQuestion();
-		bMessage.growlSuccessRemoved();
+		
 	}
 	public void rmSetOption() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(option));}
 		fCore.rmOption(optionSet,option);
+		bMessage.growlSuccessRemoved(option);
 		clear(false,false,true,true,true,true,true,false,true,true);
 		reloadOptionSet(true);
-		bMessage.growlSuccessRemoved();
+		
 	}
 	
 	//Scheme

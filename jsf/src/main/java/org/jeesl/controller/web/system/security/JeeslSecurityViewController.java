@@ -292,10 +292,11 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		}
 		
 		fSecurity.rm(view);
+		bMessage.growlSuccessRemoved(view);
 		reset(false,true,true,true);
 		reloadViews();
 		propagateChanges();
-		bMessage.growlSuccessRemoved();
+		
 	}
 	
 	//ACTION
@@ -342,11 +343,12 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	{
 		logger.info(AbstractLogMessage.deleteEntity(action));
 		fSecurity.rm(action);
+		bMessage.growlSuccessRemoved(action);
 		action=null;
 		reloadView();
 		reloadActions();
 		propagateChanges();
-		bMessage.growlSuccessRemoved();
+		
 	}
 	
 	public void changeTemplate()
@@ -400,10 +402,11 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	{
 		logger.info(AbstractLogMessage.deleteEntity(area));
 		fSecurity.rm(area);
+		bMessage.growlSuccessRemoved(area);
 		reset(false,false,false,true);
 		reloadAreas();
 		propagateChanges();
-		bMessage.growlSuccessRemoved();
+		
 	}
 	
 	public void reorderCategories() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity,categories);}

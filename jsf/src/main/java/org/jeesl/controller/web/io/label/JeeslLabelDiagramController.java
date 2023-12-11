@@ -125,10 +125,11 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(diagram));}
 		fRevision.rm(diagram);
+		bMessage.growlSuccessRemoved(diagram);
 		diagram=null;
 		dot = null;
 		reloadDiagrams();
-		bMessage.growlSuccessRemoved();
+		
 	}
 
 	public void cancelDiagram()

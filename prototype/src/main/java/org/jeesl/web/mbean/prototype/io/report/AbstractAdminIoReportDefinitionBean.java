@@ -282,8 +282,8 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(report));}
 		fReport.rm(report);
+		bMessage.growlSuccessRemoved(report);
 		reset(true,true,true,true,true);
-		bMessage.growlSuccessRemoved();
 		reloadReports();
 		updatePerformed();
 	}
@@ -357,8 +357,9 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(sheet));}
 		fReport.rmSheet(sheet);
+		bMessage.growlSuccessRemoved(sheet);
 		reset(false,true,true,true,true);
-		bMessage.growlSuccessRemoved();
+		
 		reloadReport();
 		updatePerformed();
 	}
@@ -496,8 +497,9 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(column));}
 		fReport.rmColumn(column);
+		bMessage.growlSuccessRemoved(column);
 		column=null;
-		bMessage.growlSuccessRemoved();
+		
 		reloadGroup();
 		updatePerformed();
 	}

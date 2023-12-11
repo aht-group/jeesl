@@ -7,11 +7,13 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 @DownloadJeeslAttributes
 public interface JeeslFacesContextMessage
 {
+	public enum Faces {growl}
+	
 	public enum Summary {summarySuccess}
 	public enum Detail {detailSaved};
 	
 	void info(String summary, String detail);
-	void info(String id, String summary, String detail);
+	<FID extends Enum<FID>> void info(FID facesId, String summary, String detail);
 	
 	void warn(String summary, String detail);
 	void warn(String id, String summary, String detail);

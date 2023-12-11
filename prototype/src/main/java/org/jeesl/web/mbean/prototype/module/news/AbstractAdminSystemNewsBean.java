@@ -100,8 +100,8 @@ public class AbstractAdminSystemNewsBean <L extends JeeslLang, D extends JeeslDe
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(news));}
 		fNews.rm(news);
+		bMessage.growlSuccessRemoved(news);
 		news=null;
-		bMessage.growlSuccessRemoved();
 		reloadNews();
 	}
 	

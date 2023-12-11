@@ -223,10 +223,11 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		}
 		
 		fSecurity.rm(view);
+		bMessage.growlSuccessRemoved(view);
 		reset(true,true,true);
 		reloadViews();
 		propagateChanges();
-		bMessage.growlSuccessRemoved();
+		
 	}
 	
 	//ACTION
@@ -267,11 +268,12 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	{
 		logger.info(AbstractLogMessage.deleteEntity(action));
 		fSecurity.rm(action);
+		bMessage.growlSuccessRemoved(action);
 		action=null;
 		reloadView();
 		reloadActions();
 		propagateChanges();
-		bMessage.growlSuccessRemoved();
+		
 	}
 	
 	public void changeTemplate()
@@ -323,10 +325,11 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	{
 		logger.info(AbstractLogMessage.deleteEntity(area));
 		fSecurity.rm(area);
+		bMessage.growlSuccessRemoved(area);
 		reset(false,false,true);
 		reloadAreas();
 		propagateChanges();
-		bMessage.growlSuccessRemoved();
+		
 	}
 	
 	public void reorderViews() throws JeeslConstraintViolationException, JeeslLockingException {PositionListReorderer.reorder(fSecurity,views);}

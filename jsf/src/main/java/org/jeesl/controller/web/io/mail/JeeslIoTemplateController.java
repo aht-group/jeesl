@@ -218,8 +218,9 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(template));}
 		fTemplate.rm(template);
+		bMessage.growlSuccessRemoved(template);
 		reset(true,true);
-		bMessage.growlSuccessRemoved();
+		
 		reloadTemplates();
 		updatePerformed();
 	}
@@ -264,8 +265,9 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(token));}
 		fTemplate.rm(token);
+		bMessage.growlSuccessRemoved(token);
 		token=null;
-		bMessage.growlSuccessRemoved();
+		
 		reloadTemplate();
 		updatePerformed();
 	}

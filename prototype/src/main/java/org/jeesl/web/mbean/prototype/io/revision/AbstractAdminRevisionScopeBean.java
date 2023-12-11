@@ -123,7 +123,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 	{
 		logger.info(AbstractLogMessage.deleteEntity(scope));
 		fRevision.rm(scope);
-		bMessage.growlSuccessRemoved();
+		bMessage.growlSuccessRemoved(scope);
 		scope=null;
 		reloadScopes();
 		updatePerformed();
@@ -149,8 +149,9 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(attribute));}
 		fRevision.rm(fbRevision.getClassScope(),scope,attribute);
+		bMessage.growlSuccessRemoved(attribute);
 		attribute=null;
-		bMessage.growlSuccessRemoved();
+		
 		reloadScope();
 		updatePerformed();
 	}

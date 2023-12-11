@@ -329,10 +329,11 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		try
 		{
 			fGraphic.rm((EjbRemoveable)status);
+			bMessage.growlSuccessRemoved((EjbRemoveable)status);
 			updateAppScopeBean2(status);
 			status=null;
 			selectCategory();
-			bMessage.growlSuccessRemoved();
+			
 		}
 		catch (JeeslConstraintViolationException e)
 		{

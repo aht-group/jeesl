@@ -14,7 +14,7 @@ public interface JeeslFacesMessageBean extends Serializable
 	void errorText(String text);
 	
 	<T extends EjbWithId> void growlSuccessSaved(T t);
-	void growlSuccessRemoved();
+	<T extends EjbWithId> void growlSuccessRemoved(Object o);
 	
 	void errorConstraintViolationDuplicateObject();
 	<E extends Enum<E>> void errorConstraintViolationDuplicateObject(E id);

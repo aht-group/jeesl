@@ -176,8 +176,9 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 		try
 		{
 			fUtilsUser.rm(user);
+			bMessage.growlSuccessRemoved(user);
 			user = null;
-			bMessage.growlSuccessRemoved();
+			
 			if(revision!=null){revision.pageFlowPrimaryCancel();}
 			userChangePerformed();
 		}

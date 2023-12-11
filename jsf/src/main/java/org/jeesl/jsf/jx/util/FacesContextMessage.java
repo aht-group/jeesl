@@ -1,5 +1,7 @@
 package org.jeesl.jsf.jx.util;
 
+import java.util.Objects;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
@@ -19,7 +21,12 @@ public class FacesContextMessage implements JeeslFacesContextMessage
 	}
 	
 	public void info(String summary, String detail) {info(null,summary, detail);}
-	public void info(String id, String summary, String detail) {addMessage(id, FacesMessage.SEVERITY_INFO,summary,detail);}
+	public <FID extends Enum<FID>> void info(FID id, String summary, String detail)
+	{
+		if(Objects.isNull(detail)) {addMessage(null, FacesMessage.SEVERITY_INFO,summary,detail);}
+		else {addMessage(id.toString(), FacesMessage.SEVERITY_INFO,summary,detail);}
+		
+	}
 	
 	@Override public void warn(String summary, String detail) {warn(null,summary, detail);}
 	@Override public void warn(String id, String summary, String detail) {addMessage(id, FacesMessage.SEVERITY_WARN,summary,detail);}

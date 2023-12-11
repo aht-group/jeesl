@@ -62,7 +62,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		if(ObjectUtils.isEmpty(summary)) {summary = "** SUCCESS **";}
 		if(ObjectUtils.isEmpty(detail)) {detail = "** Object Saved **";}
 		
-		logger.info("growlSuccessSaved "+t.toString());
-		fcm.info("growl",summary,detail);
+//		logger.info("growlSuccessSaved "+t.toString());
+		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,detail);
 	}
 }

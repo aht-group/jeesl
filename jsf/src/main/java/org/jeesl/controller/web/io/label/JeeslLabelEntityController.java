@@ -414,10 +414,11 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(entity));}
 		fRevision.rm(entity);
+		bMessage.growlSuccessRemoved(entity);
 		entity=null;
 		mapping=null;
 		attribute=null;
-		bMessage.growlSuccessRemoved();
+		
 		reloadEntities();
 		updatePerformed();
 	}
@@ -466,8 +467,9 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(attribute));}
 		fRevision.rm(fbRevision.getClassEntity(),entity,attribute);
+		bMessage.growlSuccessRemoved(attribute);
 		attribute=null;
-		bMessage.growlSuccessRemoved();
+		
 		reloadEntity();
 		updatePerformed();
 	}
@@ -528,8 +530,9 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(mapping));}
 		fRevision.rm(mapping);
+		bMessage.growlSuccessRemoved(mapping);
 		mapping=null;
-		bMessage.growlSuccessRemoved();
+		
 		reloadEntity();
 		updatePerformed();
 	}

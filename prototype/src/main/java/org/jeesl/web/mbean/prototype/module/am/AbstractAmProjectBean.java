@@ -108,9 +108,9 @@ public class AbstractAmProjectBean <L extends JeeslLang,D extends JeeslDescripti
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(project));}
 		fAm.deleteActivityTree(project.getRoot());
 		fAm.rm(project);
-
+		bMessage.growlSuccessRemoved(project);
 		project=null;
-		bMessage.growlSuccessRemoved();
+		
 		refreshList();
 	}
 

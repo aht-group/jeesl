@@ -155,9 +155,10 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		if(categoryRemoveable())
 		{
 			fSecurity.rm(category);
+			bMessage.growlSuccessRemoved(category);
 			category = null;
 			reloadCategories();
-			bMessage.growlSuccessRemoved();
+			
 		}
 		else
 		{
