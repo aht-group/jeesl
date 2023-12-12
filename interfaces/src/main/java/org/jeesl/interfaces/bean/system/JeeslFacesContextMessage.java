@@ -10,7 +10,7 @@ public interface JeeslFacesContextMessage
 	public enum Faces {growl}
 	
 	public enum Summary {summarySuccess,summaryInfo,summaryError}
-	public enum Detail {detailSaved};
+	public enum Detail {detailSaved,detailDuplicate,detailInUse};
 	
 	<FID extends Enum<FID>> void info(FID facesId, String summary, String detail);
 

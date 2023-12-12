@@ -30,7 +30,4 @@ public abstract class AbstractMessageBean <L extends JeeslLang, D extends JeeslD
 		this.jeeslLocaleCode=localeCode;
 		this.jeeslTranslationBean=bTranslation;
 	}
-	
-	@Override public <FID extends Enum<FID>> void constraintDuplicate(FID id) {fcm.error(id,jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}
-	@Override public <FID extends Enum<FID>> void constraintInUse(FID id) {fcm.error(id, jeeslTranslationBean.get(jeeslLocaleCode, "fmError"), jeeslTranslationBean.get(jeeslLocaleCode, "fmConstraintViolationInUse"));}
 }

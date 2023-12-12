@@ -139,4 +139,48 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		fcm.info(fid,summary,text);
 	}
+	
+	
+	public <FID extends Enum<FID>> void constraintDuplicate(FID id)
+	{
+		String summary = null;
+		String detail= null;
+		
+		if(Objects.nonNull(tp))
+		{
+			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
+			detail = tp.toDescription(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Detail.detailDuplicate);
+		}
+		else if(Objects.nonNull(bTranslation))
+		{
+			summary = bTranslation.get(localeCode,"fmError");
+			detail = bTranslation.get(localeCode,"fmConstraintViolationDuplicateObject");
+		}
+		
+		if(ObjectUtils.isEmpty(summary)) {summary = "** ERROR **";}
+		if(ObjectUtils.isEmpty(detail)) {detail = "** Duplicate **";}
+		
+		fcm.info(id,summary,detail);
+	}
+	public <FID extends Enum<FID>> void constraintInUse(FID id)
+	{
+		String summary = null;
+		String detail= null;
+		
+		if(Objects.nonNull(tp))
+		{
+			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
+			detail = tp.toDescription(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Detail.detailInUse);
+		}
+		else if(Objects.nonNull(bTranslation))
+		{
+			summary = bTranslation.get(localeCode,"fmError");
+			detail = bTranslation.get(localeCode,"fmConstraintViolationInUse");
+		}
+		
+		if(ObjectUtils.isEmpty(summary)) {summary = "** ERROR **";}
+		if(ObjectUtils.isEmpty(detail)) {detail = "** In Use **";}
+		
+		fcm.info(id,summary,detail);		
+	}
 }
