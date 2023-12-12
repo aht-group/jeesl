@@ -1,9 +1,10 @@
-package org.jeesl.jsf.handler;
+package org.jeesl.jsf.handler.system.constraint;
 
 import java.util.Objects;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.bean.JeeslTranslationBean;
+import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.interfaces.bean.system.JeeslFacesContextMessage;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslTranslationProvider;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -15,16 +16,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescription,LOC extends JeeslLocale<L,D,LOC,?>>
-//					implements JeeslFacesMessageBean
+								implements JeeslFacesMessageBean
 {
 	private static final long serialVersionUID = 1;
 	final static Logger logger = LoggerFactory.getLogger(JeeslMessageHandler.class);
 
 	private JeeslTranslationBean<L,D,LOC> bTranslation;
 	private JeeslTranslationProvider<LOC> tp;
-	protected String localeCode;
 	
-	protected final JeeslFacesContextMessage fcm;
+	private final JeeslFacesContextMessage fcm;
+	
+	private String localeCode;
 	
 	public JeeslMessageHandler(JeeslFacesContextMessage fcm)
 	{
@@ -42,8 +44,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		this.tp=tp;
 	}
 	
-//	@Override
-	public <T extends EjbWithId> void growlSaved(T t)
+	@Override public <T extends EjbWithId> void growlSaved(T t)
 	{
 		String summary = null;
 		String detail= null;
@@ -65,7 +66,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,detail);
 	}
 	
-	public <T extends EjbWithId> void growlDeleted(T t)
+	@Override public <T extends EjbWithId> void growlDeleted(T t)
 	{
 		String summary = null;
 		String detail= null;
@@ -87,7 +88,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,detail);
 	}
 	
-	public void growlInfo(String text)
+	@Override public void growlInfo(String text)
 	{
 		String summary = null;
 		
@@ -104,7 +105,8 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,text);
 	}
-	public void growlError(String text)
+	
+	@Override public void growlError(String text)
 	{
 		String summary = null;
 		
@@ -122,7 +124,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,text);
 	}
 	
-	public <FID extends Enum<FID>> void error(FID fid, String text)
+	@Override public <FID extends Enum<FID>> void error(FID fid, String text)
 	{
 		String summary = null;
 		
@@ -141,7 +143,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 	}
 	
 	
-	public <FID extends Enum<FID>> void constraintDuplicate(FID id)
+	@Override public <FID extends Enum<FID>> void constraintDuplicate(FID id)
 	{
 		String summary = null;
 		String detail= null;
@@ -162,7 +164,8 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		fcm.info(id,summary,detail);
 	}
-	public <FID extends Enum<FID>> void constraintInUse(FID id)
+	
+	@Override public <FID extends Enum<FID>> void constraintInUse(FID id)
 	{
 		String summary = null;
 		String detail= null;

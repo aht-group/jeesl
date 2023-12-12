@@ -1,6 +1,5 @@
 package org.jeesl.web.mbean.prototype.system.constraint;
 
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslConstraintMessageBean;
 import org.jeesl.api.bean.msg.JeeslConstraintsBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -23,10 +22,7 @@ public abstract class AbstractConstraintMessageBean <L extends JeeslLang, D exte
 	
 	private final static boolean debugOnInfo=true;
 	
-	
-	
 	private JeeslConstraintsBean<CONSTRAINT> bConstraint;
-//	private JeeslTranslationBean<L,D,LOC> bTranslation;
 	protected final JeeslFacesContextMessage fcm;
 	
 	private String localeCode;
@@ -36,45 +32,30 @@ public abstract class AbstractConstraintMessageBean <L extends JeeslLang, D exte
 		this.fcm=fcm;
 	}
 	
-	protected void postConstruct(String localeCode, JeeslTranslationBean<L,D,LOC> bTranslation, JeeslConstraintsBean<CONSTRAINT> bConstraint)
+	protected void postConstruct(String localeCode, JeeslConstraintsBean<CONSTRAINT> bConstraint)
 	{
 		this.localeCode=localeCode;
-//		this.bTranslation=bTranslation;
 		this.bConstraint=bConstraint;
 	}
 	
-	@Override public <FID extends Enum<FID>> void show(FID fId, CONSTRAINT constraint)
-	{
-		if(debugOnInfo)
-		{
-			StringBuffer sb = new StringBuffer();
-			sb.append("Show ").append(constraint.toString());
-			sb.append(" in locale "+localeCode);
-			sb.append(" for FacesId:");if(fId!=null) {sb.append(fId.toString());}else {sb.append("null");}
-			sb.append(" ").append(constraint.getLevel().getName().get(localeCode).getLang());
-			sb.append(" ").append(constraint.getDescription().get(localeCode).getLang());
-			logger.info(sb.toString());
-		}
-		
-		fcm.error(fId, constraint.getLevel().getName().get(localeCode).getLang(), constraint.getDescription().get(localeCode).getLang());
-	}
 	
-	@Override public <FID extends Enum<FID>, SID extends Enum<SID>, CID extends Enum<CID>> void show(FID fId, SID sId, CID cId)
+	
+	@Override public <FID extends Enum<FID>, SID extends Enum<SID>, CID extends Enum<CID>> void show(FID facesId, SID scopeId, CID constraintId)
 	{
 		if(debugOnInfo)
 		{
 			StringBuffer sb = new StringBuffer();
-			sb.append("SID").append(sId.toString());
-			sb.append("CID").append(cId.toString());
+			sb.append("SID").append(scopeId.toString());
+			sb.append("CID").append(constraintId.toString());
 			logger.info(sb.toString());
 		}
 		
-		CONSTRAINT c = bConstraint.getSilent(sId,cId);
-		if(c!=null) {show(fId,c);}
+		CONSTRAINT c = bConstraint.getSilent(scopeId,constraintId);
+		if(c!=null) {show(facesId,c);}
 		else
 		{
 			logger.error("Constraint not found");
-			fcm.error(fId, "ERROR", "Constraint not found");
+			fcm.error(facesId, "ERROR", "Constraint not found");
 		}
 	}
 }
