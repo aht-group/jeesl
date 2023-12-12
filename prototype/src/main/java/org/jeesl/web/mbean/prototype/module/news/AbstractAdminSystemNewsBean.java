@@ -93,14 +93,14 @@ public class AbstractAdminSystemNewsBean <L extends JeeslLang, D extends JeeslDe
 		if(news.getCategory()!=null){news.setCategory(fNews.find(fbNews.getClassCategory(), news.getCategory()));}
 		news = fNews.save(news);
 		reloadNews();
-		bMessage.growlSuccessSaved(news);
+		bMessage.growlSaved(news);
 	}
 	
 	public void rmNews() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(news));}
 		fNews.rm(news);
-		bMessage.growlSuccessRemoved(news);
+		bMessage.growlDeleted(news);
 		news=null;
 		reloadNews();
 	}

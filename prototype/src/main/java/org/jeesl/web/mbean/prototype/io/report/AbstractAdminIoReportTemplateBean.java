@@ -152,20 +152,9 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 		template = fReport.save(template);
 		reloadTemplates();
 		reloadTemplate();
-		bMessage.growlSuccessSaved(template);
+		bMessage.growlSaved(template);
 		updatePerformed();
 	}
-/*	
-	public void rmTemplate() throws UtilsConstraintViolationException, UtilsLockingException, UtilsNotFoundException
-	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(template));}
-		fTemplate.rm(template);
-		template=null;
-		bMessage.growlSuccessRemoved();
-		reloadTemplates();
-		updatePerformed();
-	}
-*/		
 	
 	public void cancelTemplate() {reset(true,true);}
 	
@@ -195,10 +184,10 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 			cell = fReport.save(cell);
 			reloadTemplate();
 			
-			bMessage.growlSuccessSaved(cell);
+			bMessage.growlSaved(cell);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 	}
 
 	public void cancelCell() {reset(false,true);}

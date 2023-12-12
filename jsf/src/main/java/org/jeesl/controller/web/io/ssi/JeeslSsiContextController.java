@@ -195,7 +195,7 @@ public class JeeslSsiContextController <L extends JeeslLang, D extends JeeslDesc
 		{
 			error = fSsi.save(error);
 		}
-		catch (JeeslConstraintViolationException | JeeslLockingException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException | JeeslLockingException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 		this.reloadErrors();
 	}
 	public void deleteError() throws JeeslConstraintViolationException

@@ -117,14 +117,14 @@ public abstract class AbstractStatisticalMapBean <L extends JeeslLang, D extends
 		map = fMap.save(map);
 		reloadMaps();
 		reloadImplementations();
-		bMessage.growlSuccessSaved(map);
+		bMessage.growlSaved(map);
 	}
 	
 	public void deleteMap() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(map));}
 		fMap.rm(map);
-		bMessage.growlSuccessRemoved(map);
+		bMessage.growlDeleted(map);
 		reset(true);
 		
 		reloadMaps();
@@ -154,6 +154,6 @@ public abstract class AbstractStatisticalMapBean <L extends JeeslLang, D extends
 		implementation.setStatus(fMap.find(fbMap.getClassStatus(), implementation.getStatus()));
 		implementation = fMap.save(implementation);
 		reloadImplementations();
-		bMessage.growlSuccessSaved(implementation);
+		bMessage.growlSaved(implementation);
 	}
 }

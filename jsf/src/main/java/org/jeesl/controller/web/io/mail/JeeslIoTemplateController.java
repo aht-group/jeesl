@@ -210,7 +210,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 		template = fTemplate.save(template);
 		reloadTemplates();
 		reloadTemplate();
-		bMessage.growlSuccessSaved(template);
+		bMessage.growlSaved(template);
 		updatePerformed();
 	}
 	
@@ -218,7 +218,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(template));}
 		fTemplate.rm(template);
-		bMessage.growlSuccessRemoved(template);
+		bMessage.growlDeleted(template);
 		reset(true,true);
 		
 		reloadTemplates();
@@ -255,17 +255,17 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 			if(token.getType()!=null) {token.setType(fTemplate.find(fbTemplate.getClassTokenType(), token.getType()));}
 			token = fTemplate.save(token);
 			reloadTemplate();
-			bMessage.growlSuccessSaved(token);
+			bMessage.growlSaved(token);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 	}
 	
 	public void rmToken() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(token));}
 		fTemplate.rm(token);
-		bMessage.growlSuccessRemoved(token);
+		bMessage.growlDeleted(token);
 		token=null;
 		
 		reloadTemplate();
@@ -304,10 +304,10 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 			definition.setType(fTemplate.find(fbTemplate.getClassType(), definition.getType()));
 			definition = fTemplate.save(definition);
 			renderPreview();
-			bMessage.growlSuccessSaved(definition);
+			bMessage.growlSaved(definition);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 	}
 	
     public void definitonTabChange(TabChangeEvent event)

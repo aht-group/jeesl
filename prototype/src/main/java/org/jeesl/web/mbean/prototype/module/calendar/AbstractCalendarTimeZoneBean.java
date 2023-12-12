@@ -82,11 +82,11 @@ public abstract class AbstractCalendarTimeZoneBean <L extends JeeslLang, D exten
 		{
 			zone = fCalendar.save(zone);
 			bCalendar.reloadZones(fCalendar);
-			bMessage.growlSuccessSaved(zone);
+			bMessage.growlSaved(zone);
 		}
 		else
 		{
-			bMessage.errorText("TS not supported");
+			bMessage.errorText(null,"TS not supported");
 		}
 	}
 }

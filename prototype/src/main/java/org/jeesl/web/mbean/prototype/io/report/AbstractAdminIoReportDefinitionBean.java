@@ -274,7 +274,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 		report = fReport.save(report);
 		reloadReports();
 		reloadReport();
-		bMessage.growlSuccessSaved(report);
+		bMessage.growlSaved(report);
 		updatePerformed();
 	}
 	
@@ -282,7 +282,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(report));}
 		fReport.rm(report);
-		bMessage.growlSuccessRemoved(report);
+		bMessage.growlDeleted(report);
 		reset(true,true,true,true,true);
 		reloadReports();
 		updatePerformed();
@@ -346,18 +346,18 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			sheet = fReport.save(sheet);
 			reloadReport();
 			reloadSheet();
-			bMessage.growlSuccessSaved(sheet);
+			bMessage.growlSaved(sheet);
 			updatePerformed();
 			uiHelper.check(sheet);
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 	}
 		
 	public void rmSheet() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(sheet));}
 		fReport.rmSheet(sheet);
-		bMessage.growlSuccessRemoved(sheet);
+		bMessage.growlDeleted(sheet);
 		reset(false,true,true,true,true);
 		
 		reloadReport();
@@ -419,11 +419,11 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			reloadReport();
 			reloadSheet();
 			reloadGroup();
-			bMessage.growlSuccessSaved(group);
+			bMessage.growlSaved(group);
 			updatePerformed();
 			uiHelper.check(group);
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 	}
 	
 	public void rmGroup() throws JeeslConstraintViolationException
@@ -487,17 +487,17 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			reloadSheet();
 			reloadGroup();
 			reloadColumn();
-			bMessage.growlSuccessSaved(column);
+			bMessage.growlSaved(column);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 	}
 		
 	public void rmColumn() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(column));}
 		fReport.rmColumn(column);
-		bMessage.growlSuccessRemoved(column);
+		bMessage.growlDeleted(column);
 		column=null;
 		
 		reloadGroup();
@@ -561,10 +561,10 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			reloadReport();
 			reloadSheet();
 			reloadRow();
-			bMessage.growlSuccessSaved(row);
+			bMessage.growlSaved(row);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 	}
 	
 	public void rmRow() throws JeeslConstraintViolationException

@@ -61,6 +61,8 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(AbstractAdminSecurityBean.class);
 	
+	private enum Fm {category}
+	
 	protected JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
 	protected JeeslSecurityCategory.Type categoryType;
 	
@@ -145,7 +147,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		category = fSecurity.save(category);
 		reloadCategories();
 		categorySaved();
-		bMessage.growlSuccessSaved(category);
+		bMessage.growlSaved(category);
 	}
 	protected void categorySaved()  throws JeeslNotFoundException {}
 	
@@ -155,7 +157,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		if(categoryRemoveable())
 		{
 			fSecurity.rm(category);
-			bMessage.growlSuccessRemoved(category);
+			bMessage.growlDeleted(category);
 			category = null;
 			reloadCategories();
 			
@@ -164,7 +166,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		{
 			
 			logger.warn(fbSecurity.getClassCategory().getSimpleName()+" not removeable. It may be in use or feature not activted (@Override)");
-			bMessage.errorConstraintViolationInUse("category");
+			bMessage.errorConstraintViolationInUse(Fm.category);
 		}
 	}
 	protected boolean categoryRemoveable() throws JeeslNotFoundException {return false;}

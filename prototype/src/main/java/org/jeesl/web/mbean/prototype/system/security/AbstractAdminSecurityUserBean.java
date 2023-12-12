@@ -27,6 +27,7 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslSecurityUser;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.user.pwd.JeeslWithPwd;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
@@ -160,7 +161,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 			user = fUtilsUser.saveTransaction(user);
 			postSave(changedPassword);
 			reloadUser();
-			bMessage.growlSuccessSaved(user);
+			bMessage.growlSaved(user);
 			if(revision!=null){revision.pageFlowPrimarySave(user);}
 			userChangePerformed();
 		}
@@ -176,7 +177,7 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 		try
 		{
 			fUtilsUser.rm(user);
-			bMessage.growlSuccessRemoved(user);
+			bMessage.growlDeleted(user);
 			user = null;
 			
 			if(revision!=null){revision.pageFlowPrimaryCancel();}
@@ -202,8 +203,6 @@ public abstract class AbstractAdminSecurityUserBean <L extends JeeslLang, D exte
 			{
 				if(pwd1.equals(pwd2))
 				{
-					bMessage.growlSuccess("fmPwdChanged");
-					
 					JeeslWithPwd ejb = (JeeslWithPwd)user;
 					if(useSaltedHash) {ejb.setPwd(TxtUserFactory.toHash(pwd1,user.getSalt()));}
 					else {ejb.setPwd(pwd1);}

@@ -137,20 +137,9 @@ public class AbstractAdminIoReportStyleBean <L extends JeeslLang, D extends Jees
 		style = fReport.save(style);
 		reloadStyles();
 		reloadStyle();
-		bMessage.growlSuccessSaved(style);
+		bMessage.growlSaved(style);
 		updatePerformed();
 	}
-/*	
-	public void rmTemplate() throws UtilsConstraintViolationException, UtilsLockingException, UtilsNotFoundException
-	{
-		if(debugOnInfo){logger.info(AbstractLogMessage.rmEntity(template));}
-		fTemplate.rm(template);
-		template=null;
-		bMessage.growlSuccessRemoved();
-		reloadTemplates();
-		updatePerformed();
-	}
-*/		
 	
 	public void cancelStyles() {reset(true);}
 	 

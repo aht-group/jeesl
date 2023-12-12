@@ -9,15 +9,14 @@ public interface JeeslFacesContextMessage
 {
 	public enum Faces {growl}
 	
-	public enum Summary {summarySuccess}
+	public enum Summary {summarySuccess,summaryInfo,summaryError}
 	public enum Detail {detailSaved};
 	
-	void info(String summary, String detail);
 	<FID extends Enum<FID>> void info(FID facesId, String summary, String detail);
-	
+
 	void warn(String summary, String detail);
 	void warn(String id, String summary, String detail);
 	
 	void error(String summary, String detail);
-	void error(String id,String summary, String detail);
+	<FID extends Enum<FID>> void error(FID id, String summary, String detail);
 }

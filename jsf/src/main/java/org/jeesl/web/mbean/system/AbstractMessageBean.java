@@ -1,5 +1,7 @@
 package org.jeesl.web.mbean.system;
 
+import java.util.Objects;
+
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.interfaces.bean.system.JeeslFacesContextMessage;
@@ -19,7 +21,7 @@ public abstract class AbstractMessageBean <L extends JeeslLang, D extends JeeslD
 	protected String jeeslLocaleCode;
 	
 	protected final JeeslFacesContextMessage fcm;
-	
+
 	public AbstractMessageBean(JeeslFacesContextMessage fcm)
 	{
 		this.fcm=fcm;
@@ -31,25 +33,18 @@ public abstract class AbstractMessageBean <L extends JeeslLang, D extends JeeslD
 		this.jeeslTranslationBean=bTranslation;
 	}
 	
-
-	@Override public void growlSuccessRemoved(Object o) {fcm.info(JeeslFacesContextMessage.Faces.growl, jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmSuccess"), jeeslTranslationBean.get(jeeslLocaleCode,"fmObjectRemoved"));}
+//	@Override public void errorConstraintViolationDuplicateObject() {fcm.error(jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}
+	@Override public <FID extends Enum<FID>> void errorConstraintViolationDuplicateObject(FID id) {fcm.error(id,jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}
 	
-	@Override public void growlError(String key) {fcm.info(JeeslFacesContextMessage.Faces.growl, jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmError"), jeeslTranslationBean.get(jeeslLocaleCode, key));}
-	@Override public void growlSuccess(String key) {fcm.info(JeeslFacesContextMessage.Faces.growl, jeeslTranslationBean.get(jeeslLocaleCode,"jeeslFmSuccess"), jeeslTranslationBean.get(jeeslLocaleCode, key));}
-	@Override public void growlInfoText(String text) {fcm.error("growl", jeeslTranslationBean.get(jeeslLocaleCode, "fmInfo"), text);}
+	@Override public <FID extends Enum<FID>> void errorConstraintViolationInUse(FID id) {errorTextWithId(id,jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationInUse"));}
 	
-	@Override public void errorConstraintViolationDuplicateObject() {fcm.error(jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}
-	@Override public <E extends Enum<E>> void errorConstraintViolationDuplicateObject(E id) {fcm.error(id.toString(),jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationDuplicateObject"),"");}
+	@Override public <FID extends Enum<FID>> void errorText(FID id, String text)
+	{
+		if(Objects.nonNull(id)) {errorTextWithId(id,text);}
+		else {errorTextWithId(null,text);}
+	}
 	
-	@Override public void errorConstraintViolationInUse() {errorConstraintViolationInUse(null);}
-	@Override public void errorConstraintViolationInUse(String id) {errorText(id,jeeslTranslationBean.get(jeeslLocaleCode,"fmConstraintViolationInUse"));}
-	
-	@Override public void errorText(String text) {errorTextWithId(null,text);}
-	@Override public <E extends Enum<E>> void errorText(E id, String text) {errorTextWithId(id.toString(),text);}
-	
-	public void errorText(String id, String text) {errorTextWithId(id,text);}
-	
-	private void errorTextWithId(String id, String text)
+	private <FID extends Enum<FID>> void errorTextWithId(FID id, String text)
 	{
 		fcm.error(id, jeeslTranslationBean.get(jeeslLocaleCode, "fmError"), text);
 	}

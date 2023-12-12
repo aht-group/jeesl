@@ -362,7 +362,7 @@ public class SurveyHandler<L extends JeeslLang, D extends JeeslDescription,
 			matrix.put(m.getAnswer().getQuestion().getId(),m.getRow().getId(),m.getColumn().getId(),m);
 		}
 		
-		if(bMessage!=null){bMessage.growlSuccessSaved(section);}
+		if(bMessage!=null){bMessage.growlSaved(section);}
 	}
 	
 	public void updateAnswer(ANSWER answer)

@@ -5,19 +5,17 @@ import java.io.Serializable;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 
 public interface JeeslFacesMessageBean extends Serializable
-{
-	void growlSuccess(String key);
-	void growlError(String key);
-	void growlInfoText(String text);
+{	
+	<T extends EjbWithId> void growlSaved(T t);
+	<T extends EjbWithId> void growlDeleted(T o);
 	
-	<E extends Enum<E>> void errorText(E id, String text);
-	void errorText(String text);
+	void growlInfo(String text);
+	void growlError(String text);
 	
-	<T extends EjbWithId> void growlSuccessSaved(T t);
-	<T extends EjbWithId> void growlSuccessRemoved(Object o);
+	<FID extends Enum<FID>> void errorText(FID facesId, String text);
 	
-	void errorConstraintViolationDuplicateObject();
+//	void errorConstraintViolationDuplicateObject();
 	<E extends Enum<E>> void errorConstraintViolationDuplicateObject(E id);
-	void errorConstraintViolationInUse();
-	void errorConstraintViolationInUse(String id);
+	
+	<FID extends Enum<FID>> void errorConstraintViolationInUse(FID id);
 }

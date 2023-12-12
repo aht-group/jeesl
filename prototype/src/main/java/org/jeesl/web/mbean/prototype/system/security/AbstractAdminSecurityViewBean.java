@@ -186,7 +186,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		view = fSecurity.save(view);
 		reloadView();
 		reloadViews();
-		bMessage.growlSuccessSaved(view);
+		bMessage.growlSaved(view);
 		propagateChanges();
 		bSecurity.update(view);
 	}
@@ -213,7 +213,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 			List<M> childs = fSecurity.allForParent(fbSecurity.getClassMenu(), m);
 			if(!childs.isEmpty())
 			{
-				bMessage.errorConstraintViolationInUse();
+				bMessage.errorConstraintViolationInUse(null);
 				return;
 			}
 			else
@@ -223,7 +223,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		}
 		
 		fSecurity.rm(view);
-		bMessage.growlSuccessRemoved(view);
+		bMessage.growlDeleted(view);
 		reset(true,true,true);
 		reloadViews();
 		propagateChanges();
@@ -261,14 +261,14 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		reloadView();
 		reloadActions();
 		propagateChanges();
-		bMessage.growlSuccessSaved(action);
+		bMessage.growlSaved(action);
 	}
 	
 	public void rmAction() throws JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.deleteEntity(action));
 		fSecurity.rm(action);
-		bMessage.growlSuccessRemoved(action);
+		bMessage.growlDeleted(action);
 		action=null;
 		reloadView();
 		reloadActions();
@@ -311,7 +311,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 		area = fSecurity.save(area);
 		reloadAreas();
 		propagateChanges();
-		bMessage.growlSuccessSaved(area);
+		bMessage.growlSaved(area);
 	}
 	
 	public void selectArea() throws JeeslConstraintViolationException
@@ -325,7 +325,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 	{
 		logger.info(AbstractLogMessage.deleteEntity(area));
 		fSecurity.rm(area);
-		bMessage.growlSuccessRemoved(area);
+		bMessage.growlDeleted(area);
 		reset(false,false,true);
 		reloadAreas();
 		propagateChanges();

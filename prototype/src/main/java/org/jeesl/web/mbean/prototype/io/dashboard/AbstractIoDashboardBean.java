@@ -139,8 +139,8 @@ public class AbstractIoDashboardBean <L extends JeeslLang, D extends JeeslDescri
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(dashboard));}
 		fUtils.rm(dashboard);
+		bMessage.growlDeleted(dashboard);
 		dashboard=null;
-		//bMessage.growlSuccessRemoved();
 		refreshList();
 	}
 
@@ -188,8 +188,8 @@ public class AbstractIoDashboardBean <L extends JeeslLang, D extends JeeslDescri
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(dashboard));}
 		fUtils.rm(dashComponentPosition);
+		bMessage.growlDeleted(dashComponentPosition);
 		dashComponentPosition = null;
 		dashboard = fUtils.find(fbDashboard.getClassDashboard(), dashboard);
-		//bMessage.growlSuccessRemoved();
 	}
 }

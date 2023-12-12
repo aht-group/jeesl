@@ -117,8 +117,8 @@ public class AbstractHydroYearBean <L extends JeeslLang, D extends JeeslDescript
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(hydroYear));}
 		fUtils.rm(hydroYear);
+		bMessage.growlDeleted(hydroYear);
 		hydroYear=null;
-		//bMessage.growlSuccessRemoved();
 		refreshList();
 	}
 

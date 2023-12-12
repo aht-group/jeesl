@@ -297,17 +297,17 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 
 			updateAppScopeBean(fGraphic,status);
 			selectCategory(false);
-			bMessage.growlSuccessSaved((EjbSaveable)status);
+			bMessage.growlSaved((EjbSaveable)status);
 		}
 		catch (JeeslConstraintViolationException e)
 		{
 			logger.error(JeeslConstraintViolationException.class.getSimpleName()+" "+e.getMessage());
-			bMessage.errorConstraintViolationInUse();
+			bMessage.errorConstraintViolationInUse(null);
 		}
 		catch (JeeslLockingException e)
 		{
 			logger.error(JeeslLockingException.class.getSimpleName()+" "+e.getMessage());
-			bMessage.errorConstraintViolationInUse();
+			bMessage.errorConstraintViolationInUse(null);
 		}
 	}
 
@@ -317,14 +317,14 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		{
 			fGraphic.rm((EjbRemoveable)status);
 			updateAppScopeBean(fGraphic,status);
-			bMessage.growlSuccessRemoved((EjbRemoveable)status);
+			bMessage.growlDeleted((EjbRemoveable)status);
 			status=null;
 			selectCategory();
 			
 		}
 		catch (JeeslConstraintViolationException e)
 		{
-			bMessage.errorConstraintViolationInUse();
+			bMessage.errorConstraintViolationInUse(null);
 		}
 	}
 

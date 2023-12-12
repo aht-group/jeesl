@@ -106,8 +106,8 @@ public class AbstractIoDashComponentBean <L extends JeeslLang, D extends JeeslDe
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(dashComponent));}
 		fUtils.rm(dashComponent);
+		bMessage.growlDeleted(dashComponent);
 		dashComponent=null;
-		//bMessage.growlSuccessRemoved();
 		refreshList();
 	}
 

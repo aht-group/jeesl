@@ -116,7 +116,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 		if(diagram.getCategory()!=null){diagram.setCategory(fRevision.find(fbRevision.getClassCategory(),diagram.getCategory()));}
 		diagram = fRevision.save(diagram);
 		reloadDiagrams();
-		bMessage.growlSuccessSaved(diagram);
+		bMessage.growlSaved(diagram);
 		reloadDiagram();
 	}
 
@@ -125,7 +125,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(diagram));}
 		fRevision.rm(diagram);
-		bMessage.growlSuccessRemoved(diagram);
+		bMessage.growlDeleted(diagram);
 		diagram=null;
 		dot = null;
 		reloadDiagrams();

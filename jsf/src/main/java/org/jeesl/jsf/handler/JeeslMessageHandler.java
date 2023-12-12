@@ -43,7 +43,7 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 	}
 	
 //	@Override
-	public <T extends EjbWithId> void growlSuccessSaved(T t)
+	public <T extends EjbWithId> void growlSaved(T t)
 	{
 		String summary = null;
 		String detail= null;
@@ -62,7 +62,63 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		if(ObjectUtils.isEmpty(summary)) {summary = "** SUCCESS **";}
 		if(ObjectUtils.isEmpty(detail)) {detail = "** Object Saved **";}
 		
-//		logger.info("growlSuccessSaved "+t.toString());
 		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,detail);
+	}
+	
+	public <T extends EjbWithId> void growlDeleted(T t)
+	{
+		String summary = null;
+		String detail= null;
+		
+//		if(Objects.nonNull(tp))
+//		{
+//			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summarySuccess);
+//			detail = tp.toDescription(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Detail.detailSaved);
+//		}
+		if(Objects.nonNull(bTranslation))
+		{
+			summary = bTranslation.get(localeCode,"jeeslFmSuccess");
+			detail = bTranslation.get(localeCode,"fmObjectRemoved");
+		}
+		
+		if(ObjectUtils.isEmpty(summary)) {summary = "** SUCCESS **";}
+		if(ObjectUtils.isEmpty(detail)) {detail = "** Object Deleted **";}
+		
+		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,detail);
+	}
+	
+	public void growlInfo(String text)
+	{
+		String summary = null;
+		
+		if(Objects.nonNull(tp))
+		{
+			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryInfo);
+		}
+		if(Objects.nonNull(bTranslation))
+		{
+			summary = bTranslation.get(localeCode,"aupFmInfo");
+		}
+		
+		if(ObjectUtils.isEmpty(summary)) {summary = "INFO";}
+		
+		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,text);
+	}
+	public void growlError(String text)
+	{
+		String summary = null;
+		
+		if(Objects.nonNull(tp))
+		{
+			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
+		}
+		if(Objects.nonNull(bTranslation))
+		{
+			summary = bTranslation.get(localeCode,"jeeslFmError");
+		}
+		
+		if(ObjectUtils.isEmpty(summary)) {summary = "ERROR";}
+		
+		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,text);
 	}
 }

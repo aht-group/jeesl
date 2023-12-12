@@ -169,7 +169,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
 			reloadTree();
 			reset(true);
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationInUse();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationInUse(null);}
 	}
 
 	public void onNodeExpand(NodeExpandEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}

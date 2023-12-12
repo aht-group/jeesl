@@ -382,11 +382,11 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			entity = fRevision.save(entity);
 			reloadEntities();
 			reloadEntity();
-			bMessage.growlSuccessSaved(entity);
+			bMessage.growlSaved(entity);
 			bLabel.reload(entity);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 	}
 	
 	public void downloadJeeslTranslations() throws UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
@@ -414,7 +414,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(entity));}
 		fRevision.rm(entity);
-		bMessage.growlSuccessRemoved(entity);
+		bMessage.growlDeleted(entity);
 		entity=null;
 		mapping=null;
 		attribute=null;
@@ -458,7 +458,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		changeRelation();
 		attribute = fRevision.save(fbRevision.getClassEntity(),entity,attribute);
 		reloadEntity();
-		bMessage.growlSuccessSaved(attribute);
+		bMessage.growlSaved(attribute);
 		bLabel.reload(entity);
 		updatePerformed();
 	}
@@ -467,7 +467,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(attribute));}
 		fRevision.rm(fbRevision.getClassEntity(),entity,attribute);
-		bMessage.growlSuccessRemoved(attribute);
+		bMessage.growlDeleted(attribute);
 		attribute=null;
 		
 		reloadEntity();
@@ -520,17 +520,17 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			mapping = fRevision.save(mapping);
 			updateUi();
 			reloadEntity();
-			bMessage.growlSuccessSaved(mapping);
+			bMessage.growlSaved(mapping);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject();}
+		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
 	}
 
 	public void rmMapping() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(mapping));}
 		fRevision.rm(mapping);
-		bMessage.growlSuccessRemoved(mapping);
+		bMessage.growlDeleted(mapping);
 		mapping=null;
 		
 		reloadEntity();

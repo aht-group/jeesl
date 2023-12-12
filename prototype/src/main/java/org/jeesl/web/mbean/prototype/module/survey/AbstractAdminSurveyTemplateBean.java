@@ -499,21 +499,21 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 		if(debugOnInfo){logger.info(AbstractLogMessage.saveEntity(option));}
 		option = fCore.saveOption(question,option);
 		reloadQuestion();
-		bMessage.growlSuccessSaved(option);
+		bMessage.growlSaved(option);
 	}
 	public void saveSetOption() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.saveEntity(option));}
 		option = fCore.saveOption(optionSet,option);
 		reloadOptionSet(true);
-		bMessage.growlSuccessSaved(option);
+		bMessage.growlSaved(option);
 	}
 	
 	public void delQuestionOption() throws JeeslConstraintViolationException, JeeslLockingException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(option));}
 		fCore.rmOption(question,option);
-		bMessage.growlSuccessRemoved(option);
+		bMessage.growlDeleted(option);
 		reloadQuestion();
 		
 	}
@@ -521,7 +521,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(option));}
 		fCore.rmOption(optionSet,option);
-		bMessage.growlSuccessRemoved(option);
+		bMessage.growlDeleted(option);
 		clear(false,false,true,true,true,true,true,false,true,true);
 		reloadOptionSet(true);
 		
@@ -559,7 +559,7 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 		if(debugOnInfo){logger.info(AbstractLogMessage.saveEntity(score));}
 		score = fCore.save(score);
 		reloadQuestion();
-		bMessage.growlSuccessSaved(score);
+		bMessage.growlSaved(score);
 	}
 	
 	private void reloadConditions()

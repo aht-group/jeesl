@@ -93,7 +93,7 @@ public abstract class AbstractWorkflowActionHandler <WPD extends JeeslWorkflowDo
 		if(Objects.nonNull(callback)) {callback.workflowCallback(entity);}
 		if(bMessage!=null && transition!=null && transition.getConfirmation()!=null && transition.getConfirmation().containsKey(localeCode) && !transition.getConfirmation().get(localeCode).getLang().trim().isEmpty())
 		{
-			bMessage.growlInfoText(transition.getConfirmation().get(localeCode).getLang());
+			bMessage.growlInfo(transition.getConfirmation().get(localeCode).getLang());
 		}
 		return entity;
 	}

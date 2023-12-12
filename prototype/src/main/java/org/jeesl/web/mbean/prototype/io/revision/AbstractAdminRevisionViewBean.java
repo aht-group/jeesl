@@ -112,7 +112,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 	{
 		logger.info(AbstractLogMessage.saveEntity(rv));
 		rv = fRevision.save(rv);
-		bMessage.growlSuccessSaved(rv);
+		bMessage.growlSaved(rv);
 		reloadViews();
 		reloadView();
 		updatePerformed();
@@ -122,7 +122,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 	{
 		logger.info(AbstractLogMessage.deleteEntity(rv));
 		fRevision.rm(rv);
-		bMessage.growlSuccessRemoved(rv);
+		bMessage.growlDeleted(rv);
 		rv=null;
 		reloadViews();
 		updatePerformed();
@@ -186,7 +186,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 		mapping.setEntity(fRevision.find(fbRevision.getClassEntity(),mapping.getEntity()));
 		mapping = fRevision.save(mapping);
 		reloadView();
-		bMessage.growlSuccessSaved(mapping);
+		bMessage.growlSaved(mapping);
 		updatePerformed();
 	}
 
@@ -194,7 +194,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 	{
 		logger.info(AbstractLogMessage.deleteEntity(mapping));
 		fRevision.rm(fbRevision.getClassViewMapping(),mapping);
-		bMessage.growlSuccessRemoved(mapping);
+		bMessage.growlDeleted(mapping);
 		mapping=null;
 		
 		reloadView();

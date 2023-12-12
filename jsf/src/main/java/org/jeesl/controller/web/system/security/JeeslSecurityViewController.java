@@ -252,7 +252,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		view = fSecurity.save(view);
 		this.reloadView();
 		this.reloadViews();
-		if(Objects.nonNull(bMessage)) {bMessage.growlSuccessSaved(view);}
+		if(Objects.nonNull(bMessage)) {bMessage.growlSaved(view);}
 		bSecurity.update(view);
 		callback.propagateChanges();
 	}
@@ -282,7 +282,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 			List<M> childs = fSecurity.allForParent(fbSecurity.getClassMenu(), m);
 			if(!childs.isEmpty())
 			{
-				bMessage.errorConstraintViolationInUse();
+				bMessage.errorConstraintViolationInUse(null);
 				return;
 			}
 			else
@@ -292,11 +292,10 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		}
 		
 		fSecurity.rm(view);
-		bMessage.growlSuccessRemoved(view);
+		bMessage.growlDeleted(view);
 		reset(false,true,true,true);
 		reloadViews();
-		propagateChanges();
-		
+		propagateChanges();	
 	}
 	
 	//ACTION
@@ -336,14 +335,14 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		reloadView();
 		reloadActions();
 		propagateChanges();
-		bMessage.growlSuccessSaved(action);
+		bMessage.growlSaved(action);
 	}
 	
 	public void rmAction() throws JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.deleteEntity(action));
 		fSecurity.rm(action);
-		bMessage.growlSuccessRemoved(action);
+		bMessage.growlDeleted(action);
 		action=null;
 		reloadView();
 		reloadActions();
@@ -388,7 +387,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		area = fSecurity.save(area);
 		reloadAreas();
 		propagateChanges();
-		bMessage.growlSuccessSaved(area);
+		bMessage.growlSaved(area);
 	}
 	
 	public void selectArea() throws JeeslConstraintViolationException
@@ -402,7 +401,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	{
 		logger.info(AbstractLogMessage.deleteEntity(area));
 		fSecurity.rm(area);
-		bMessage.growlSuccessRemoved(area);
+		bMessage.growlDeleted(area);
 		reset(false,false,false,true);
 		reloadAreas();
 		propagateChanges();

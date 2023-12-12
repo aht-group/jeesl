@@ -113,7 +113,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 	{
 		logger.info(AbstractLogMessage.saveEntity(scope));
 		scope = fRevision.save(scope);
-		bMessage.growlSuccessSaved(scope);
+		bMessage.growlSaved(scope);
 		reloadScopes();
 		reloadScope();
 		updatePerformed();
@@ -123,7 +123,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 	{
 		logger.info(AbstractLogMessage.deleteEntity(scope));
 		fRevision.rm(scope);
-		bMessage.growlSuccessRemoved(scope);
+		bMessage.growlDeleted(scope);
 		scope=null;
 		reloadScopes();
 		updatePerformed();
@@ -141,7 +141,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 		if(attribute.getType()!=null){attribute.setType(fRevision.find(fbRevision.getClassAttributeType(), attribute.getType()));}
 		attribute = fRevision.save(fbRevision.getClassScope(),scope,attribute);
 		reloadScope();
-		bMessage.growlSuccessSaved(attribute);
+		bMessage.growlSaved(attribute);
 		updatePerformed();
 	}
 
@@ -149,7 +149,7 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.deleteEntity(attribute));}
 		fRevision.rm(fbRevision.getClassScope(),scope,attribute);
-		bMessage.growlSuccessRemoved(attribute);
+		bMessage.growlDeleted(attribute);
 		attribute=null;
 		
 		reloadScope();
