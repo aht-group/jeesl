@@ -10,8 +10,6 @@ import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintLevel;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
-import org.jeesl.jsf.jx.util.FacesContextMessage;
-import org.jeesl.web.mbean.system.AbstractMessageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
