@@ -20,7 +20,7 @@ public abstract class AbstractMessageBean <L extends JeeslLang, D extends JeeslD
 	
 	protected final JeeslFacesContextMessage fcm;
 
-	public AbstractMessageBean(JeeslFacesContextMessage fcm)
+	private AbstractMessageBean(JeeslFacesContextMessage fcm)
 	{
 		this.fcm=fcm;
 	}
