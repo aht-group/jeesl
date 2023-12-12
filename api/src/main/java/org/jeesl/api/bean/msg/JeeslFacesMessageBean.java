@@ -12,7 +12,7 @@ public interface JeeslFacesMessageBean extends Serializable
 	void growlInfo(String text);
 	void growlError(String text);
 	
-	<FID extends Enum<FID>> void errorText(FID facesId, String text);
+	<FID extends Enum<FID>> void error(FID facesId, String text);
 	
 	<FID extends Enum<FID>> void constraintDuplicate(FID id);
 	<FID extends Enum<FID>> void constraintInUse(FID id);

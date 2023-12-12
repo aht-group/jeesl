@@ -86,7 +86,7 @@ public abstract class AbstractCalendarTimeZoneBean <L extends JeeslLang, D exten
 		}
 		else
 		{
-			bMessage.errorText(null,"TS not supported");
+			bMessage.error(null,"TS not supported");
 		}
 	}
 }
