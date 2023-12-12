@@ -166,7 +166,7 @@ public class AbstractAdminSecurityBean <L extends JeeslLang, D extends JeeslDesc
 		{
 			
 			logger.warn(fbSecurity.getClassCategory().getSimpleName()+" not removeable. It may be in use or feature not activted (@Override)");
-			bMessage.errorConstraintViolationInUse(Fm.category);
+			bMessage.constraintInUse(Fm.category);
 		}
 	}
 	protected boolean categoryRemoveable() throws JeeslNotFoundException {return false;}

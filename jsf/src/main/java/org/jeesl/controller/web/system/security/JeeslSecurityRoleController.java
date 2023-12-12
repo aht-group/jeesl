@@ -255,7 +255,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 			this.reloadRoles();
 //			roleUpdatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 
 //	protected void roleUpdatePerformed(){}

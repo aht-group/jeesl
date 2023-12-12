@@ -144,7 +144,7 @@ public abstract class AbstractItsIssueBean <L extends JeeslLang, D extends Jeesl
 			reloadTree();
 			reset(true);
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationInUse(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintInUse(null);}
 	}
 	
 	public void onNodeExpand(NodeExpandEvent event) {if(debugOnInfo) {logger.info("Expanded "+event.getTreeNode().toString());}}

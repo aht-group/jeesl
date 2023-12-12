@@ -258,7 +258,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 			bMessage.growlSaved(token);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 	
 	public void rmToken() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
@@ -307,7 +307,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 			bMessage.growlSaved(definition);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 	
     public void definitonTabChange(TabChangeEvent event)

@@ -213,7 +213,7 @@ public abstract class AbstractAdminSecurityViewBean <L extends JeeslLang, D exte
 			List<M> childs = fSecurity.allForParent(fbSecurity.getClassMenu(), m);
 			if(!childs.isEmpty())
 			{
-				bMessage.errorConstraintViolationInUse(null);
+				bMessage.constraintInUse(null);
 				return;
 			}
 			else

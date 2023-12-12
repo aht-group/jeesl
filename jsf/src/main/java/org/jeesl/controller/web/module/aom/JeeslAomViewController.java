@@ -131,7 +131,7 @@ public class JeeslAomViewController <L extends JeeslLang, D extends JeeslDescrip
 			reload();
 			reset(true);
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationInUse(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintInUse(null);}
 	}
 
 	public void handleFileUpload(FileUploadEvent event) throws JeeslConstraintViolationException, JeeslLockingException

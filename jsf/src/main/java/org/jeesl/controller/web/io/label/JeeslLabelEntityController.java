@@ -386,7 +386,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			bLabel.reload(entity);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 	
 	public void downloadJeeslTranslations() throws UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
@@ -523,7 +523,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			bMessage.growlSaved(mapping);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 
 	public void rmMapping() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException

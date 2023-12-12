@@ -121,4 +121,22 @@ public class JeeslMessageHandler <L extends JeeslLang, D extends JeeslDescriptio
 		
 		fcm.info(JeeslFacesContextMessage.Faces.growl,summary,text);
 	}
+	
+	public <FID extends Enum<FID>> void error(FID fid, String text)
+	{
+		String summary = null;
+		
+		if(Objects.nonNull(tp))
+		{
+			summary = tp.toLabel(localeCode, FacesContextMessage.class, JeeslFacesContextMessage.Summary.summaryError);
+		}
+		if(Objects.nonNull(bTranslation))
+		{
+			summary = bTranslation.get(localeCode,"fmError");
+		}
+		
+		if(ObjectUtils.isEmpty(summary)) {summary = "ERROR";}
+		
+		fcm.info(fid,summary,text);
+	}
 }

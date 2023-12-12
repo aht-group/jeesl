@@ -187,7 +187,7 @@ public class AbstractAdminIoReportTemplateBean <L extends JeeslLang, D extends J
 			bMessage.growlSaved(cell);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 
 	public void cancelCell() {reset(false,true);}

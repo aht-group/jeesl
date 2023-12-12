@@ -357,7 +357,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			bLabel.reload(entity);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 	
 	public void downloadJeeslTranslations() throws UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
@@ -469,7 +469,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			bMessage.growlSaved(mapping);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 
 	public void rmMapping() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException

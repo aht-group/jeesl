@@ -302,12 +302,12 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		catch (JeeslConstraintViolationException e)
 		{
 			logger.error(JeeslConstraintViolationException.class.getSimpleName()+" "+e.getMessage());
-			bMessage.errorConstraintViolationInUse(null);
+			bMessage.constraintInUse(null);
 		}
 		catch (JeeslLockingException e)
 		{
 			logger.error(JeeslLockingException.class.getSimpleName()+" "+e.getMessage());
-			bMessage.errorConstraintViolationInUse(null);
+			bMessage.constraintInUse(null);
 		}
 	}
 
@@ -324,7 +324,7 @@ public class AbstractTableTenantBean <L extends JeeslLang, D extends JeeslDescri
 		}
 		catch (JeeslConstraintViolationException e)
 		{
-			bMessage.errorConstraintViolationInUse(null);
+			bMessage.constraintInUse(null);
 		}
 	}
 

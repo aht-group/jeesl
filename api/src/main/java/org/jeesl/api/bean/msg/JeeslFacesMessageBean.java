@@ -14,8 +14,6 @@ public interface JeeslFacesMessageBean extends Serializable
 	
 	<FID extends Enum<FID>> void errorText(FID facesId, String text);
 	
-//	void errorConstraintViolationDuplicateObject();
-	<E extends Enum<E>> void errorConstraintViolationDuplicateObject(E id);
-	
-	<FID extends Enum<FID>> void errorConstraintViolationInUse(FID id);
+	<FID extends Enum<FID>> void constraintDuplicate(FID id);
+	<FID extends Enum<FID>> void constraintInUse(FID id);
 }

@@ -282,7 +282,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 			List<M> childs = fSecurity.allForParent(fbSecurity.getClassMenu(), m);
 			if(!childs.isEmpty())
 			{
-				bMessage.errorConstraintViolationInUse(null);
+				bMessage.constraintInUse(null);
 				return;
 			}
 			else

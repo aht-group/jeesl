@@ -350,7 +350,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			updatePerformed();
 			uiHelper.check(sheet);
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 		
 	public void rmSheet() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
@@ -423,7 +423,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			updatePerformed();
 			uiHelper.check(group);
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 	
 	public void rmGroup() throws JeeslConstraintViolationException
@@ -490,7 +490,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			bMessage.growlSaved(column);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 		
 	public void rmColumn() throws JeeslConstraintViolationException, JeeslLockingException
@@ -564,7 +564,7 @@ public class AbstractAdminIoReportDefinitionBean <L extends JeeslLang,D extends 
 			bMessage.growlSaved(row);
 			updatePerformed();
 		}
-		catch (JeeslConstraintViolationException e) {bMessage.errorConstraintViolationDuplicateObject(null);}
+		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
 	
 	public void rmRow() throws JeeslConstraintViolationException
