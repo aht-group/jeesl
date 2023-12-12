@@ -1,5 +1,6 @@
 package org.jeesl.jsf.handler.system.constraint;
 
+import org.jeesl.api.bean.msg.JeeslConstraintMessageBean;
 import org.jeesl.api.bean.msg.JeeslConstraintsBean;
 import org.jeesl.interfaces.bean.system.JeeslFacesContextMessage;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraint;
@@ -10,7 +11,7 @@ import org.slf4j.LoggerFactory;
 public class JeeslConstraintHandler <CONSTRAINT extends JeeslConstraint<?,?,?,?,CONSTRAINT,LEVEL,?,?>,
 									LEVEL extends JeeslConstraintLevel<?,?,LEVEL,?>
 									>
-//								implements JeeslConstraintMessageBean<CONSTRAINT>
+								implements JeeslConstraintMessageBean<CONSTRAINT>
 {
 	final static Logger logger = LoggerFactory.getLogger(JeeslConstraintHandler.class);
 	
@@ -47,5 +48,25 @@ public class JeeslConstraintHandler <CONSTRAINT extends JeeslConstraint<?,?,?,?,
 		}
 		
 		fcm.error(fId, constraint.getLevel().getName().get(localeCode).getLang(), constraint.getDescription().get(localeCode).getLang());
+	}
+	
+//	@Override
+	public <FID extends Enum<FID>, SID extends Enum<SID>, CID extends Enum<CID>> void show(FID facesId, SID scopeId, CID constraintId)
+	{
+		if(debugOnInfo)
+		{
+			StringBuffer sb = new StringBuffer();
+			sb.append("SID").append(scopeId.toString());
+			sb.append("CID").append(constraintId.toString());
+			logger.info(sb.toString());
+		}
+		
+		CONSTRAINT c = bConstraint.getSilent(scopeId,constraintId);
+		if(c!=null) {show(facesId,c);}
+		else
+		{
+			logger.error("Constraint not found");
+			fcm.error(facesId, "ERROR", "Constraint not found");
+		}
 	}
 }
