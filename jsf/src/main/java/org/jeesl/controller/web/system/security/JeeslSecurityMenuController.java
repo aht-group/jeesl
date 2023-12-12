@@ -56,11 +56,9 @@ import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
 
 public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											C extends JeeslSecurityCategory<L,D>,
-											R extends JeeslSecurityRole<L,D,C,V,U,A>,
-											V extends JeeslSecurityView<L,D,C,R,U,A>,
-											U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-											A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-											AT extends JeeslSecurityTemplate<L,D,C>,
+											R extends JeeslSecurityRole<L,D,C,V,U,?>,
+											V extends JeeslSecurityView<L,D,C,R,U,?>,
+											U extends JeeslSecurityUsecase<L,D,C,R,V,?>,
 											CTX extends JeeslSecurityContext<L,D>,
 											M extends JeeslSecurityMenu<L,V,CTX,M>,
 											AR extends JeeslSecurityArea<L,D,V>,
@@ -75,9 +73,9 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslSecurityMenuController.class);
 
-	private final SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity;
-	private JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity;
-	private JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity;
+	private final SecurityFactoryBuilder<L,D,C,R,V,U,?,?,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity;
+	private JeeslSecurityFacade<C,R,V,U,?,M,USER> fSecurity;
+	private JeeslSecurityBean<R,V,U,?,AR,CTX,M,USER> bSecurity;
 	
 	protected JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms;
 
@@ -100,7 +98,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	private boolean disabledMenuImportFromDefaultContext; public boolean isDisabledMenuImportFromDefaultContext() {return disabledMenuImportFromDefaultContext;}
 
 	public JeeslSecurityMenuController(JeeslSecurityMenuCallback callback,
-										SecurityFactoryBuilder<L,D,C,R,V,U,A,AT,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity,
+										SecurityFactoryBuilder<L,D,C,R,V,U,?,?,CTX,M,AR,OT,OH,DC,DS,USER> fbSecurity,
 										IoCmsFactoryBuilder<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fbCms)
 	{
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
@@ -114,8 +112,8 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 	}
 
 	public void postConstructMenu(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage,
-									JeeslSecurityFacade<C,R,V,U,A,M,USER> fSecurity,
-									JeeslSecurityBean<R,V,U,A,AR,CTX,M,USER> bSecurity,
+									JeeslSecurityFacade<C,R,V,U,?,M,USER> fSecurity,
+									JeeslSecurityBean<R,V,U,?,AR,CTX,M,USER> bSecurity,
 									JeeslIoCmsFacade<L,D,LOC,?,DC,?,DS,?,?,?,?,?,?,?,?> fCms)
 	{
 		super.postConstructLocaleWebController(lp,bMessage);

@@ -1,11 +1,19 @@
 package org.jeesl.jsf.jk.util;
 
+import java.util.Objects;
+
+import org.jeesl.interfaces.bean.system.JeeslFacesContextMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.application.FacesMessage.Severity;
 import jakarta.faces.context.FacesContext;
 
-public class FacesContextMessage
+public class FacesContextMessage implements JeeslFacesContextMessage
 {
+	final static Logger logger = LoggerFactory.getLogger(FacesContextMessage.class);
+	
 	public static FacesContextMessage intance() {return new FacesContextMessage();}
 	private FacesContextMessage()
 	{
@@ -13,30 +21,30 @@ public class FacesContextMessage
 	}
 	
 	public void info(String summary, String detail) {info(null,summary, detail);}
-	public void info(String id, String summary, String detail)
+	public <FID extends Enum<FID>> void info(FID id, String summary, String detail)
 	{
-		addMessage(id, FacesMessage.SEVERITY_INFO,summary,detail);
+		if(Objects.isNull(detail)) {addMessage(null, FacesMessage.SEVERITY_INFO,summary,detail);}
+		else {addMessage(id.toString(), FacesMessage.SEVERITY_INFO,summary,detail);}
+		
 	}
 	
-	public void warn(String summary, String detail) {warn(null,summary, detail);}
-	public void warn(String id,String summary, String detail)
+	@Override public void warn(String summary, String detail) {warn(null,summary, detail);}
+	@Override public void warn(String id, String summary, String detail) {addMessage(id, FacesMessage.SEVERITY_WARN,summary,detail);}
+	
+	public void error(String summary, String detail) {addMessage(null, FacesMessage.SEVERITY_ERROR,summary,detail);}
+	public <FID extends Enum<FID>> void error(FID id,String summary, String detail)
 	{
-		addMessage(id, FacesMessage.SEVERITY_WARN,summary,detail);
+		if(Objects.isNull(id)) {addMessage(null, FacesMessage.SEVERITY_ERROR,summary,detail);}
+		else {addMessage(id.toString(), FacesMessage.SEVERITY_ERROR,summary,detail);}
 	}
 	
-	public void error(String summary, String detail) {error(null,summary, detail);}
-	public void error(String id,String summary, String detail)
-	{
-		addMessage(id, FacesMessage.SEVERITY_ERROR,summary,detail);
-	}
+//	private void fatal(String summary, String detail) {fatal(null,summary, detail);}
+//	private void fatal(String id,String summary, String detail) {addMessage(id,FacesMessage.SEVERITY_FATAL,summary,detail);}
 	
-	public void fatal(String summary, String detail) {fatal(null,summary, detail);}
-	public void fatal(String id,String summary, String detail)
+	private void addMessage(String id, Severity severity, String summary, String detail) {addMessage(id,new FacesMessage(severity,summary,detail));}
+	private void addMessage(String id, FacesMessage message)
 	{
-		addMessage(id, FacesMessage.SEVERITY_FATAL,summary,detail);
+		logger.info(FacesMessage.class.getSimpleName()+": "+message.getSeverity()+" ("+id+") "+message.getSummary()+": "+message.getSummary());
+		FacesContext.getCurrentInstance().addMessage(id, message);
 	}
-	
-	public void addMessage(String id, Severity severity, String summary, String detail) {addMessage(id,new FacesMessage(severity,summary,detail));}
-	public void addMessage(FacesMessage message) {addMessage(null, message);}
-	public void addMessage(String id, FacesMessage message) {FacesContext.getCurrentInstance().addMessage(id, message);}
 }

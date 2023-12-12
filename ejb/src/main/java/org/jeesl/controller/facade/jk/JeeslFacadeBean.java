@@ -129,8 +129,10 @@ public class JeeslFacadeBean implements JeeslFacade
 		{
 			if(handleTransaction){em.getTransaction().rollback();}
 
-			if(e instanceof javax.validation.ConstraintViolationException) {throw new JeeslConstraintViolationException(e.getMessage());}
-			else if(e instanceof IllegalStateException)
+//			if(e instanceof javax.validation.ConstraintViolationException) {throw new JeeslConstraintViolationException(e.getMessage());}
+//			
+//			else
+				if(e instanceof IllegalStateException)
 			{
 				System.err.println("Most probably a transient value error as "+e.getClass().getName());
 				e.printStackTrace();
