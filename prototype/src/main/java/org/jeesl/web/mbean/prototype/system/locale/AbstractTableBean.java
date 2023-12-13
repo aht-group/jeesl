@@ -130,7 +130,6 @@ public class AbstractTableBean <L extends JeeslLang, D extends JeeslDescription,
 	}
 	
 	public void cancelStatus() {reset(true,true);}
-//	public void cancelFigure() {reset(false,true);reloadFigures();}
 	protected void reset(boolean rStatus, boolean rFigure)
 	{
 		if(rStatus){status=null;}

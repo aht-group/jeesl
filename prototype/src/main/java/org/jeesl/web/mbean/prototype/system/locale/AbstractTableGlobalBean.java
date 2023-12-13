@@ -1,6 +1,8 @@
 package org.jeesl.web.mbean.prototype.system.locale;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
@@ -14,6 +16,7 @@ import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
 import org.jeesl.interfaces.model.marker.jpa.EjbSaveable;
@@ -64,6 +67,8 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableGlobalBean.class);
 	private static final long serialVersionUID = 1L;
+	
+	private JeeslLocaleProvider<LOC> lp;
 
 	private final JeeslDbGraphicUpdater<G,GT> dbuGraphic;
 
@@ -81,9 +86,6 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 									IoRevisionFactoryBuilder<L,D,?,?,?,?,?,RE,?,?,?,?,?,?> fbRevision)
 	{
 		super(fbStatus,fbSvg,fbRevision);
-//		this.fbStatus=fbStatus;
-//		this.fbSvg=fbSvg;
-//		this.fbRevision=fbRevision;
 		dbuGraphic = new JeeslDbGraphicUpdater<>(fbSvg);
 
 //		efGraphic = fbSvg.efGraphic();
@@ -110,6 +112,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 											JeeslFacesMessageBean bMessage)
 	{
 		super.initJeeslAdmin(bTranslation, bMessage);
+		this.lp=lp;
 		this.fGraphic=fGraphic;
 		dbuGraphic.setFacade(fGraphic);
 
@@ -421,9 +424,10 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		Class<S> cS = (Class<S>)Class.forName(fqcn).asSubclass(JeeslStatus.class);
 		Class<W> cW = (Class<W>)Class.forName(fqcn).asSubclass(EjbWithCodeGraphic.class);
 
-		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());;
+		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());
 
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
+		
         asdi.setStatusEjbFactory(EjbStatusFactory.instance(cS,cL,cD,bTranslation.getLangKeys()));
         asdi.setFacade(fGraphic);
         DataUpdate dataUpdate = asdi.iuStatus(xml.getStatus(),cS,cL,clParent);

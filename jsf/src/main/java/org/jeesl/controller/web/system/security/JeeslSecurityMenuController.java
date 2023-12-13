@@ -104,7 +104,7 @@ public class JeeslSecurityMenuController <L extends JeeslLang, D extends JeeslDe
 		super(fbSecurity.getClassL(),fbSecurity.getClassD());
 		this.fbSecurity=fbSecurity;
 
-		sbhContext = new SbSingleHandler<CTX>(fbSecurity.getClassContext(),this);
+		sbhContext = new SbSingleHandler<>(fbSecurity.getClassContext(),this);
 
 		efMenu = fbSecurity.ejbMenu();
 		helps = new ArrayList<>();

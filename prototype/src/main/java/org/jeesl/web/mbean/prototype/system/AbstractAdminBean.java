@@ -28,7 +28,7 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription,
 	protected Class<D> cD;
 	
 	protected JeeslFacesMessageBean bMessage;
-	protected JeeslTranslationBean<L,D,?> bTranslation;
+	protected JeeslTranslationBean<L,D,LOC> bTranslation;
 	protected JeeslLogger jogger;
 	
 	protected boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;}
