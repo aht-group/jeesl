@@ -1,4 +1,4 @@
-package org.jeesl.api.rest.rs.system;
+package org.jeesl.api.rest.rs.jx.system;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -8,13 +8,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jeesl.api.rest.i.system.JeeslSystemRestInterface;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
-import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Entity;
 

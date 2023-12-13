@@ -105,8 +105,8 @@ public abstract class AbstractStatisticalMapBean <L extends JeeslLang, D extends
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(map));}
 		map = fMap.find(fbMap.getClassMap(),map);
-		map = efLang.persistMissingLangs(fMap,langs,map);
-		map = efDescription.persistMissingLangs(fMap,langs,map);
+		map = efLang.persistMissingLangs(fMap,lp.getLocales(),map);
+		map = efDescription.persistMissingLangs(fMap,lp.getLocales(),map);
 		reloadImplementations();
 	}
 	

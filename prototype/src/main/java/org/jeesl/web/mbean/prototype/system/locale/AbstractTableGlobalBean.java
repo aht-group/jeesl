@@ -16,6 +16,7 @@ import org.jeesl.factory.builder.io.IoLocaleFactoryBuilder;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.builder.system.SvgFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
+import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.marker.jpa.EjbRemoveable;
@@ -67,8 +68,6 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 {
 	final static Logger logger = LoggerFactory.getLogger(AbstractTableGlobalBean.class);
 	private static final long serialVersionUID = 1L;
-	
-	private JeeslLocaleProvider<LOC> lp;
 
 	private final JeeslDbGraphicUpdater<G,GT> dbuGraphic;
 
@@ -107,12 +106,11 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 	
 	protected abstract void test();
 
-	protected void postConstructOptionTable(JeeslTranslationBean<L,D,LOC> bTranslation,
+	protected void postConstructOptionTable(JeeslLocaleProvider<LOC> lp,
 											JeeslIoGraphicFacade<?,G,GT,GC,GS> fGraphic,
 											JeeslFacesMessageBean bMessage)
 	{
-		super.initJeeslAdmin(bTranslation, bMessage);
-		this.lp=lp;
+		super.initJeeslAdmin(lp, bMessage);
 		this.fGraphic=fGraphic;
 		dbuGraphic.setFacade(fGraphic);
 
@@ -424,11 +422,11 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 		Class<S> cS = (Class<S>)Class.forName(fqcn).asSubclass(JeeslStatus.class);
 		Class<W> cW = (Class<W>)Class.forName(fqcn).asSubclass(EjbWithCodeGraphic.class);
 
-		Container xml = JeeslLabelEntityController.rest(i.getName()).exportStatus(i.getName());
+		Container xml = this.downloadData(i.getName());
 
 		JeeslDbStatusUpdater asdi = new JeeslDbStatusUpdater();
 		
-        asdi.setStatusEjbFactory(EjbStatusFactory.instance(cS,cL,cD,bTranslation.getLangKeys()));
+        asdi.setStatusEjbFactory(EjbStatusFactory.instance(cS,cL,cD,EjbCodeFactory.toListCode(lp.getLocales())));
         asdi.setFacade(fGraphic);
         DataUpdate dataUpdate = asdi.iuStatus(xml.getStatus(),cS,cL,clParent);
         asdi.deleteUnusedStatus(cS, cL, cD);
@@ -437,6 +435,11 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
         dbuGraphic.update(cW,xml.getStatus());
 
         selectCategory();
+	}
+	
+	protected Container downloadData(String iFqcn) throws UtilsConfigurationException
+	{
+		return JeeslLabelEntityController.rest(iFqcn).exportStatus(iFqcn);
 	}
 	
 	@SuppressWarnings({"rawtypes" })

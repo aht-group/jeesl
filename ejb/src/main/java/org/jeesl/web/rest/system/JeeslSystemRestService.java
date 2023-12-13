@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
+import org.jeesl.api.rest.i.system.JeeslSystemRestInterface;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
@@ -28,7 +29,6 @@ import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
-import org.jeesl.interfaces.rest.system.JeeslSystemRestInterface;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.util.query.xml.SymbolQuery;

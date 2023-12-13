@@ -152,14 +152,14 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 		uiHelper = new UiHelperSurvey<VERSION,SECTION>();
 	}
 	
-	protected void postConstructTemplate(String userLocale, List<String> localeCodes,
+	protected void postConstructTemplate(String userLocale,
 			JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage,
 			JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
 			JeeslSurveyCoreFacade<L,D,LOC,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fCore,
 			JeeslSurveyAnalysisFacade<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,DOMAIN,QUERY,PATH,DENTITY,DATTRIBUTE,ANALYSIS,AQ,AT,ATT> fAnalysis,
 			final JeeslSurveyBean<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,CONDITION,VALIDATION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION,ATT> bSurvey)
 	{
-		super.initSuperSurvey(localeCodes,bMessage,fTemplate,fCore,fAnalysis,bSurvey);
+		super.initSuperSurvey(bTranslation,bMessage,fTemplate,fCore,fAnalysis,bSurvey);
 		initPageSettings();
 		super.initLocales(userLocale);
 
@@ -532,8 +532,8 @@ public abstract class AbstractAdminSurveyTemplateBean <L extends JeeslLang, D ex
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassScheme()));}
 		scheme = efScheme.build(template, "", schemes);
-		scheme.setName(efLang.createEmpty(langs));
-		scheme.setDescription(efDescription.createEmpty(langs));
+		scheme.setName(efLang.buildEmpty(lp.getLocales()));
+		scheme.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
 	public void selectScheme()

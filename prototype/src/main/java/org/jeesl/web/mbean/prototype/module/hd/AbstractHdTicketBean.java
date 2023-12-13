@@ -270,8 +270,8 @@ public abstract class AbstractHdTicketBean <L extends JeeslLang, D extends Jeesl
 		fga=null;
 		sections.clear();
 		logger.info(AbstractLogMessage.selectEntity(faq));
-		faq = efLang.persistMissingLangs(fHd,bTranslation.getLocales(),faq);
-		faq = efDescription.persistMissingLangs(fHd,bTranslation.getLocales(),faq);
+		faq = efLang.persistMissingLangs(fHd,lp.getLocales(),faq);
+		faq = efDescription.persistMissingLangs(fHd,lp.getLocales(),faq);
 		reloadAnswers();
 	}
 

@@ -17,7 +17,7 @@ import org.jeesl.api.bean.JeeslLabelBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.api.facade.system.JeeslExportRestFacade;
-import org.jeesl.api.rest.rs.system.JeeslSystemRest;
+import org.jeesl.api.rest.rs.jx.system.JeeslSystemRest;
 import org.jeesl.controller.util.comparator.ejb.io.label.LabelEntityComparator;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -683,15 +683,20 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 //	}
 	
 	@SuppressWarnings("unchecked")
-	public static <L extends JeeslLang, D extends JeeslDescription> JeeslSystemRest<L,D,?,?> rest(String code)
+	public static <L extends JeeslLang, D extends JeeslDescription> JeeslSystemRest<L,D,?,?> rest(String iFqcn)
 	{
-		StringBuilder url = new StringBuilder();
-		if(code.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
-		else if(code.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
-
 		ResteasyClient client = new ResteasyClientBuilder().build();
-		ResteasyWebTarget restTarget = client.target(url.toString());
+		ResteasyWebTarget restTarget = client.target(JeeslLabelEntityController.urlForInterface(iFqcn));
 		JeeslSystemRest<L,D,?,?> rest = restTarget.proxy(JeeslSystemRest.class);
 		return rest;
+	}
+	
+	public static String urlForInterface(String iFqcn)
+	{
+		StringBuilder url = new StringBuilder();
+		if(iFqcn.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
+		else if(iFqcn.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
+		
+		return url.toString();
 	}
 }

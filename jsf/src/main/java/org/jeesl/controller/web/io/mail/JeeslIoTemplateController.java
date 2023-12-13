@@ -292,7 +292,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(definition));}
 		definition = fTemplate.find(fbTemplate.getClassDefinition(), definition);
 		definition = efDescription.persistMissingLangs(fTemplate,lp.getLocales(),definition);
-		efDescription.persistMissigLangs(fTemplate,lp,definition.getHeader());
+		efDescription.persistMissingLangs(fTemplate,lp,definition.getHeader());
 		renderPreview();
 	}
 	

@@ -61,8 +61,7 @@
 			          		<j:security actionSuffix="upload" handler="#{cc.attrs.bean.security}" allow="#{cc.attrs.bean.supportsUpload}">
 								<j:svg type="jeeslUpload" listener="#{cc.attrs.bean.uploadData()}" update=":#{cc.id}:sCategory :#{cc.id}:sLang"/>
 							</j:security>
-			          		<j:icon type="jeeslIoAttributeCriteriaWithDescription" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{cc.attrs.bean.showDescription}"/>
-							<j:icon type="jeeslIoAttributeCriteriaWithoutDescription" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" tooltip="#{msg.jeeslIoAttributeToggleDescription}" rendered="#{not cc.attrs.bean.showDescription}"/>
+			          		<j:svg type="jeeslInfo" listener="#{cc.attrs.bean.toggleDescription()}" update=":#{cc.id}:sCategory" styleClass="#{cc.attrs.bean.showDescription ? '' : 'jeesl-greyscale'}"/>
 			          	</j:dtHeader>
 					</f:facet>
 					<p:ajax event="rowReorder" listener="#{cc.attrs.bean.reorder()}" update="@form"/>

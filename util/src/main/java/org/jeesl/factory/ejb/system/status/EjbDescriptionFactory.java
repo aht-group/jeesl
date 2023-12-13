@@ -210,7 +210,7 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
 		return ejb;
 	}
 	
-	public <LOC extends JeeslLocale<?,D,LOC,?>> Map<String,D> persistMissigLangs(JeeslFacade fUtils, JeeslLocaleProvider<LOC> lp, Map<String,D> map)
+	public <LOC extends JeeslLocale<?,D,LOC,?>> Map<String,D> persistMissingLangs(JeeslFacade fUtils, JeeslLocaleProvider<LOC> lp, Map<String,D> map)
 	{
 		for(LOC loc : lp.getLocales())
 		{

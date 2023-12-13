@@ -83,8 +83,8 @@ public class AbstractAdminSystemNewsBean <L extends JeeslLang, D extends JeeslDe
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(news));}
 		news = fNews.find(fbNews.getClassNews(),news);
-		news = efLang.persistMissingLangs(fNews,bTranslation.getLocales(),news);
-		news = efDescription.persistMissingLangs(fNews,bTranslation.getLocales(),news);
+		news = efLang.persistMissingLangs(fNews,lp.getLocales(),news);
+		news = efDescription.persistMissingLangs(fNews,lp.getLocales(),news);
 	}
 	
 	public void saveNews() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException

@@ -40,7 +40,7 @@
     <tag>
         <tag-name>li</tag-name>
         <component>
-            <component-type>org.jeesl.jsf.components.html.Li</component-type>
+            <component-type>org.jeesl.jsf.component.html.Li</component-type>
         </component>
     </tag>
 	<tag>
@@ -79,7 +79,7 @@
 	<tag>
         <tag-name>security</tag-name>
         <component>
-            <component-type>org.jeesl.jsf.components.Security</component-type>
+            <component-type>org.jeesl.jsf.component.Security</component-type>
         </component>
     </tag>
 	<tag>

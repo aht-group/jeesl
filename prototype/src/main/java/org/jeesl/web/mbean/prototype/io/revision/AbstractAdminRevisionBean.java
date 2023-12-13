@@ -128,16 +128,16 @@ public abstract class AbstractAdminRevisionBean <L extends JeeslLang, D extends 
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbRevision.getClassAttribute()));}
 		attribute = efAttribute.build(null);
-		attribute.setName(efLang.createEmpty(langs));
-		attribute.setDescription(efDescription.createEmpty(langs));
+		attribute.setName(efLang.buildEmpty(lp.getLocales()));
+		attribute.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 
 	public void selectAttribute() throws JeeslNotFoundException
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(attribute));}
 		attribute = fRevision.find(fbRevision.getClassAttribute(), attribute);
-		attribute = efLang.persistMissingLangs(fRevision,langs,attribute);
-		attribute = efDescription.persistMissingLangs(fRevision,langs,attribute);
+		attribute = efLang.persistMissingLangs(fRevision,lp.getLocales(),attribute);
+		attribute = efDescription.persistMissingLangs(fRevision,lp.getLocales(),attribute);
 	}
 
 	public void cancelAttribute()

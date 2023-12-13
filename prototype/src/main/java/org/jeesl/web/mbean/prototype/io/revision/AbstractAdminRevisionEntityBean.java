@@ -302,8 +302,8 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbRevision.getClassEntity()));}
 		entity = efEntity.build(sbhCategory.getSelection(),entities);
 		entity.setDiagram(sbhDiagram.getSelection());
-		entity.setName(efLang.createEmpty(langs));
-		entity.setDescription(efDescription.createEmpty(langs));
+		entity.setName(efLang.buildEmpty(lp.getLocales()));
+		entity.setDescription(efDescription.buildEmpty(lp.getLocales()));
 		attribute=null;
 		mapping=null;
 	}
@@ -334,8 +334,8 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(entity));}
 		entity = fRevision.find(fbRevision.getClassEntity(), entity);
-		entity = efLang.persistMissingLangs(fRevision,langs,entity);
-		entity = efDescription.persistMissingLangs(fRevision,langs,entity);
+		entity = efLang.persistMissingLangs(fRevision,lp.getLocales(),entity);
+		entity = efDescription.persistMissingLangs(fRevision,lp.getLocales(),entity);
 		reloadEntity();
 		attribute=null;
 		mapping=null;
@@ -434,7 +434,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 			Entity xml = JeeslLabelEntityController.rest(i.getName()).exportRevisionEntity(i.getName());
 
 			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
-			updater.updateAttributes(entity,bTranslation.getLangKeys(),xml);
+			updater.updateAttributes2(entity,lp.getLocales(),xml);
 			reloadEntity();
 		}
 		catch (ClassNotFoundException e){e.printStackTrace();}
@@ -571,7 +571,7 @@ public abstract class AbstractAdminRevisionEntityBean <L extends JeeslLang, D ex
 		attribute = efAttribute.build(null);
 		attribute.setCode(f.getName());
 		attribute.setName(efLang.createLangMap("en",StringUtils.capitalize(f.getName())));
-		attribute.setDescription(efDescription.createEmpty(langs));
+		attribute.setDescription(efDescription.buildEmpty(lp.getLocales()));
 		attribute.setEntity(entity);
 		attribute.setBean(true);
 		attribute.setType(getAttributeTypeFromeCode(f.getType().getSimpleName().toString()));

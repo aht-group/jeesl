@@ -1,4 +1,4 @@
-package org.jeesl.interfaces.rest.system;
+package org.jeesl.api.rest.i.system;
 
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
@@ -13,8 +13,7 @@ public interface JeeslSystemRestInterface <L extends JeeslLang, D extends JeeslD
 									R extends JeeslTenantRealm<L,D,R,?>,
 									G extends JeeslGraphic<?,?,?>>
 {	
-	<X extends JeeslStatus<L,D,X>>
-	org.jeesl.model.xml.jeesl.Container exportStatus(String code) throws UtilsConfigurationException;
+	<X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.jeesl.Container exportStatus(String code) throws UtilsConfigurationException;
 	<X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.jeesl.Container updateTranslation(String code, Container xml) throws UtilsConfigurationException;
 	Entity exportRevisionEntity(String code) throws UtilsConfigurationException;
 	

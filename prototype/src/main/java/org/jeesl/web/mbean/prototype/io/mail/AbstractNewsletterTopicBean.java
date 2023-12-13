@@ -86,15 +86,15 @@ public abstract class AbstractNewsletterTopicBean <L extends JeeslLang, D extend
 	{
 		logger.info(AbstractLogMessage.selectEntity(topic));
 		topic = fNewsletter.find(fbNewsletter.getClassTopic(), topic);
-		topic = efLang.persistMissingLangs(fNewsletter, langs, topic);
-		topic = efDescription.persistMissingLangs(fNewsletter, langs, topic);
+		topic = efLang.persistMissingLangs(fNewsletter, lp.getLocales(), topic);
+		topic = efDescription.persistMissingLangs(fNewsletter, lp.getLocales(), topic);
 	}
 	
 	public void addTopic()
 	{
 		topic = fbNewsletter.ejbTopic().build(realm, rref);
-		topic.setName(efLang.createEmpty(langs));
-		topic.setDescription(efDescription.createEmpty(langs));
+		topic.setName(efLang.buildEmpty(lp.getLocales()));
+		topic.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
 	public void saveTopic() throws JeeslConstraintViolationException, JeeslLockingException

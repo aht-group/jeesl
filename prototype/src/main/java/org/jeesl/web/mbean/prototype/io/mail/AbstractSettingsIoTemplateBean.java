@@ -173,8 +173,8 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassTemplate()));}
 		reset(true,true);
 		template = efTemplate.build(null);
-		template.setName(efLang.createEmpty(langs));
-		template.setDescription(efDescription.createEmpty(langs));
+		template.setName(efLang.buildEmpty(lp.getLocales()));
+		template.setDescription(efDescription.buildEmpty(lp.getLocales()));
 		definition=null;
 		reset(true);
 	}
@@ -183,8 +183,8 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(template));}
 		template = fTemplate.find(fbTemplate.getClassTemplate(),template);
-		template = efLang.persistMissingLangs(fTemplate,langs,template);
-		template = efDescription.persistMissingLangs(fTemplate,langs,template);
+		template = efLang.persistMissingLangs(fTemplate,lp.getLocales(),template);
+		template = efDescription.persistMissingLangs(fTemplate,lp.getLocales(),template);
 		reloadTemplate();
 		reset(false,true);
 		definition=null;
@@ -237,8 +237,8 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassToken()));}
 		token = efToken.build(template,tokens);
-		token.setName(efLang.createEmpty(langs));
-		token.setDescription(efDescription.createEmpty(langs));
+		token.setName(efLang.buildEmpty(lp.getLocales()));
+		token.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 	
 	public void selectToken() throws JeeslNotFoundException
@@ -282,8 +282,8 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.createEntity(fbTemplate.getClassDefinition()));}
 		definition = efDefinition.build(template,null);
-		definition.setDescription(efDescription.createEmpty(langs));
-		definition.setHeader(efDescription.createEmpty(langs));
+		definition.setDescription(efDescription.buildEmpty(lp.getLocales()));
+		definition.setHeader(efDescription.buildEmpty(lp.getLocales()));
 		reset(true);
 	}
 	
@@ -291,8 +291,8 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(definition));}
 		definition = fTemplate.find(fbTemplate.getClassDefinition(), definition);
-		definition = efDescription.persistMissingLangs(fTemplate,langs,definition);
-		efDescription.persistMissingLangs(fTemplate,langs,definition.getHeader());
+		definition = efDescription.persistMissingLangs(fTemplate,lp.getLocales(),definition);
+		efDescription.persistMissingLangs(fTemplate,lp,definition.getHeader());
 		renderPreview();
 	}
 	
@@ -318,14 +318,14 @@ public abstract class AbstractSettingsIoTemplateBean <L extends JeeslLang,D exte
     
     private void renderPreview()
     {
-    	logger.info("Preview of "+langs[tabIndex]);
+    	logger.info("Preview of "+localeCodes[tabIndex]);
     	try
     	{
     		reset(true);
     		Map<String,Object> model = fbTemplate.txtToken().buildModel(template);
     		
-    		templateHeader = new Template("name",definition.getHeader().get(langs[tabIndex]).getLang(),templateConfig);
-    		templateBody = new Template("name",definition.getDescription().get(langs[tabIndex]).getLang(),templateConfig);
+    		templateHeader = new Template("name",definition.getHeader().get(localeCodes[tabIndex]).getLang(),templateConfig);
+    		templateBody = new Template("name",definition.getDescription().get(localeCodes[tabIndex]).getLang(),templateConfig);
     		
     		StringWriter swHeader = new StringWriter();
     		templateHeader.process(model,swHeader);

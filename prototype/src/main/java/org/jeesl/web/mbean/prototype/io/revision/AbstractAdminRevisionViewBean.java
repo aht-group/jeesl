@@ -88,16 +88,16 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 	{
 		logger.info(AbstractLogMessage.createEntity(fbRevision.getClassView()));
 		rv = efView.build();
-		rv.setName(efLang.createEmpty(langs));
-		rv.setDescription(efDescription.createEmpty(langs));
+		rv.setName(efLang.buildEmpty(lp.getLocales()));
+		rv.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 
 	public void select() throws JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.selectEntity(rv));
 		rv = fRevision.find(fbRevision.getClassView(), rv);
-		rv = efLang.persistMissingLangs(fRevision,langs,rv);
-		rv = efDescription.persistMissingLangs(fRevision,langs,rv);
+		rv = efLang.persistMissingLangs(fRevision,lp.getLocales(),rv);
+		rv = efDescription.persistMissingLangs(fRevision,lp.getLocales(),rv);
 		mapping=null;
 		reloadView();
 	}

@@ -1,15 +1,14 @@
 package org.jeesl.web.mbean.prototype.system;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.controller.handler.NullNumberBinder;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
+import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.interfaces.controller.handler.system.io.JeeslLogger;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -28,13 +27,11 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription,
 	protected Class<D> cD;
 	
 	protected JeeslFacesMessageBean bMessage;
-	protected JeeslTranslationBean<L,D,LOC> bTranslation;
+	protected JeeslLocaleProvider<LOC> lp;
 	protected JeeslLogger jogger;
 	
 	protected boolean debugOnInfo; protected void setDebugOnInfo(boolean debugOnInfo){this.debugOnInfo=debugOnInfo;}
-	protected String[] langs; public String[] getLangs() {return langs;}
 	protected String[] localeCodes; public String[] getLocaleCodes() {return localeCodes;}
-	private final List<LOC> locales; public List<LOC> getLocales() {return locales;}
 	
 	protected EjbLangFactory<L> efLang;
 	protected EjbDescriptionFactory<D> efDescription;
@@ -49,8 +46,6 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription,
 	{
 		this.cL = cL;
 		this.cD = cD;
-		
-		locales = new ArrayList<LOC>();
 		
 		efLang = EjbLangFactory.instance(cL);
 		efDescription = EjbDescriptionFactory.instance(cD);
@@ -73,30 +68,24 @@ public class AbstractAdminBean <L extends JeeslLang, D extends JeeslDescription,
 		nnb = new NullNumberBinder();
 	}
 	
-	protected void initJeeslAdmin(JeeslTranslationBean<L,D,LOC> bTranslation, JeeslFacesMessageBean bMessage)
+	protected void initJeeslAdmin(JeeslLocaleProvider<LOC> lp, JeeslFacesMessageBean bMessage)
 	{
-		this.bTranslation=bTranslation;
+		this.lp=lp;
 		this.bMessage=bMessage;
 		
-		locales.addAll(bTranslation.getLocales());
-		
-		logger.info("bTranslation!=null: "+(bTranslation!=null));
-		logger.info("bTranslation.getLangKeys()!=null: "+(bTranslation.getLangKeys()!=null));
-		
-		localeCodes=bTranslation.getLangKeys().toArray(new String[bTranslation.getLangKeys().size()]);
-		langs=localeCodes;
+		localeCodes = EjbCodeFactory.toListCode(lp.getLocales()).toArray(new String[lp.getLocales().size()]);
 	}
 	
-	@Deprecated //Use initJeeslAdmin instead
-	protected void initAdmin(String[] langs, final Class<L> cL, final Class<D> cD, JeeslFacesMessageBean bMessage)
-	{
-		this.localeCodes=langs;
-		this.langs=langs;
-		this.bMessage=bMessage;
-		
-		efLang = EjbLangFactory.instance(cL);
-		efDescription = EjbDescriptionFactory.instance(cD);
-	}
+//	@Deprecated //Use initJeeslAdmin instead
+//	private void initAdmin(String[] langs, final Class<L> cL, final Class<D> cD, JeeslFacesMessageBean bMessage)
+//	{
+//		this.localeCodes=langs;
+//		this.langs=langs;
+//		this.bMessage=bMessage;
+//		
+//		efLang = EjbLangFactory.instance(cL);
+//		efDescription = EjbDescriptionFactory.instance(cD);
+//	}
 	
 	//Security Handling
 	protected boolean uiAllowAdd; public boolean isUiAllowAdd() {return uiAllowAdd;}

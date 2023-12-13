@@ -73,7 +73,7 @@ public abstract class AbstractCalendarTimeZoneBean <L extends JeeslLang, D exten
 	public void addZone()
 	{
 		zone = efZone.build();
-		zone.setName(efLang.createEmpty(langs));
+		zone.setName(efLang.buildEmpty(lp.getLocales()));
 	}
 	
 	public void saveZone() throws JeeslNotFoundException, JeeslConstraintViolationException, JeeslLockingException

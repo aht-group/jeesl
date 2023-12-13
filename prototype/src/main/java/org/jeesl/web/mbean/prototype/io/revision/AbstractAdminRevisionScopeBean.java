@@ -95,16 +95,16 @@ public class AbstractAdminRevisionScopeBean <L extends JeeslLang, D extends Jees
 	{
 		logger.info(AbstractLogMessage.createEntity(fbRevision.getClassScope()));
 		scope = efScope.build();
-		scope.setName(efLang.createEmpty(langs));
-		scope.setDescription(efDescription.createEmpty(langs));
+		scope.setName(efLang.buildEmpty(lp.getLocales()));
+		scope.setDescription(efDescription.buildEmpty(lp.getLocales()));
 	}
 
 	public void select() throws JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.selectEntity(scope));
 		scope = fRevision.find(fbRevision.getClassScope(),scope);
-		scope = efLang.persistMissingLangs(fRevision,langs,scope);
-		scope = efDescription.persistMissingLangs(fRevision,langs,scope);
+		scope = efLang.persistMissingLangs(fRevision,lp.getLocales(),scope);
+		scope = efDescription.persistMissingLangs(fRevision,lp.getLocales(),scope);
 		reloadScope();
 		attribute=null;
 	}

@@ -1,4 +1,4 @@
-package org.jeesl.jsf.components;
+package org.jeesl.jsf.jx.component.system;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import org.jeesl.jsf.jx.util.ComponentAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@FacesComponent("org.jeesl.jsf.components.Security")
+@FacesComponent("org.jeesl.jsf.component.Security")
 public class Security extends UIPanel
 {
 	final static Logger logger = LoggerFactory.getLogger(Security.class);

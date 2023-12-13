@@ -10,7 +10,7 @@ import jakarta.faces.context.ResponseWriter;
 
 import org.jeesl.jsf.jk.util.ComponentAttribute;
 
-@FacesComponent("org.jeesl.jsf.components.html.Li")
+@FacesComponent("org.jeesl.jsf.component.html.Li")
 public class Li extends UIPanel
 {	
 	private static enum Properties {styleClass}

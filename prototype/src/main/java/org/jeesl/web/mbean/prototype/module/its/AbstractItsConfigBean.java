@@ -78,8 +78,8 @@ public abstract class AbstractItsConfigBean <L extends JeeslLang, D extends Jees
 				try
 				{
 					C c = fbIts.ejbConfig().build(realm,rref,o);
-					c.setName(efLang.buildEmpty(bTranslation.getLocales()));
-					c.setDescription(efDescription.buildEmpty(bTranslation.getLocales()));
+					c.setName(efLang.buildEmpty(lp.getLocales()));
+					c.setDescription(efDescription.buildEmpty(lp.getLocales()));
 					configs.add(fIts.save(c));
 				}
 				catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
@@ -91,8 +91,8 @@ public abstract class AbstractItsConfigBean <L extends JeeslLang, D extends Jees
 	public void selectConfig()
 	{
 		logger.info(AbstractLogMessage.selectEntity(config));
-		config = efLang.persistMissingLangs(fIts,bTranslation.getLocales(),config);
-		config = efDescription.persistMissingLangs(fIts,bTranslation.getLocales(),config);
+		config = efLang.persistMissingLangs(fIts,lp.getLocales(),config);
+		config = efDescription.persistMissingLangs(fIts,lp.getLocales(),config);
 	}
 	
 	public void saveConfig() throws JeeslConstraintViolationException, JeeslLockingException

@@ -117,8 +117,8 @@ public class AbstractAdminJobTemplateBean <L extends JeeslLang, D extends JeeslD
 	public void selectTemplate()
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(template));}
-		template = efLang.persistMissingLangsForCode(fJob, bTranslation.getLangKeys(), template);
-		template = efDescription.persistMissingLangsForCode(fJob, bTranslation.getLangKeys(), template);
+		template = efLang.persistMissingLangs(fJob, lp.getLocales(), template);
+		template = efDescription.persistMissingLangs(fJob, lp.getLocales(), template);
 	}
 	
 	public void saveTemplate() throws JeeslConstraintViolationException, JeeslLockingException
