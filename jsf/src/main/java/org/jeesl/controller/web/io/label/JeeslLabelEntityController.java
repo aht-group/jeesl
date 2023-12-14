@@ -696,6 +696,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		StringBuilder url = new StringBuilder();
 		if(iFqcn.startsWith(JeeslExportRestFacade.packageJeesl)) {url.append(JeeslExportRestFacade.urlJeesl);}
 		else if(iFqcn.startsWith(JeeslExportRestFacade.packageGeojsf)) {url.append(JeeslExportRestFacade.urlGeojsf);}
+		else {logger.warn("NYI "+iFqcn);}
 		
 		return url.toString();
 	}
