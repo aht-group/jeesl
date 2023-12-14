@@ -96,8 +96,8 @@ public class TestRestHandler implements JeeslTestRestInterface
 	@Override public Test jaxb()
 	{
 		Test xml = new Test();
-//		xml.setName("Test Name");
-//		xml.setHash(XmlHashFactory.build("..hash.."));
+		xml.setKey("key");
+		xml.setValue("value");
 		return xml;
 	}
 }
