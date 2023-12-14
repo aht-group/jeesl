@@ -11,6 +11,7 @@ import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 
+import org.jeesl.JeeslUtilTestBootstrap;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
 import org.junit.After;
 import org.junit.Assert;
@@ -80,10 +81,7 @@ public class TestAccessTokenFactory extends AbstractFileProcessingTest
 	
 	public static void main(String[] args) throws FileNotFoundException
     {
-		LoggerInit loggerInit = new LoggerInit("log4j.xml");	
-			loggerInit.path("src/test/resources/config");
-			loggerInit.init();	
-		JaxbUtil.setNsPrefixMapper(new JeeslNsPrefixMapper());
+		JeeslUtilTestBootstrap.init();
 			
 		boolean saveReference = true;
 		int id = -1;
