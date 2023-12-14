@@ -10,15 +10,9 @@ version="2.1">
 		<jxb:serializable uid="1" />
 	</jxb:globalBindings>
   
-	<jxb:bindings schemaLocation="dummy.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="test.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.dummy"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
-    
-    <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.text"/>
+            <jxb:package name="org.jeesl.model.xml.test"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

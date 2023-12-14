@@ -69,27 +69,34 @@
    	   		</exclusions>
 		</dependency>
 		
-		<!-- JAXB -->
+		<!-- Required for Java 11 -->
+    	<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>4.0.0</version>
+			<scope>provided</scope>
+		</dependency> 
+    
+    	<!-- JAXB: All 3 Deprecated -->
       	<dependency>
-    	   	<groupId>javax.xml.bind</groupId>
-    	   	<artifactId>jaxb-api</artifactId>
-    	   	<scope>provided</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-impl</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>com.sun.xml.bind</groupId>
-   	   		<artifactId>jaxb-xjc</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
-   	   	<dependency>
-   	   		<groupId>commons-jxpath</groupId>
-   	   		<artifactId>commons-jxpath</artifactId>
-   	   		<scope>provided</scope>
-   	   	</dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+    		<type>jar</type>
+    		<scope>provided</scope>
+		</dependency>
+		<dependency>
+  			<groupId>com.sun.xml.bind</groupId>
+    		<artifactId>jaxb-impl</artifactId>
+    		<type>jar</type>
+    		<scope>provided</scope>
+    	</dependency>
+    	<dependency>
+ 			<groupId>com.sun.xml.bind</groupId>
+    		<artifactId>jaxb-xjc</artifactId>
+    		<type>jar</type>
+    		<scope>test</scope>
+  		</dependency>
+   	   	
 		<!-- Required for Java 11 -->
     	<dependency>
 			<groupId>jakarta.xml.bind</groupId>
@@ -98,6 +105,11 @@
 			<scope>provided</scope>
 		</dependency> 
    	   	
+		<dependency>
+   	   		<groupId>commons-jxpath</groupId>
+   	   		<artifactId>commons-jxpath</artifactId>
+   	   		<scope>provided</scope>
+   	   	</dependency>
    	   	<dependency>
    	   		<groupId>commons-lang</groupId>
    	   		<artifactId>commons-lang</artifactId>
@@ -117,7 +129,6 @@
 		    <version>2.0.0</version>
 		    <scope>provided</scope>
 		</dependency>
-
 
    	   	<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -178,14 +189,7 @@
 	
 	<build>
 		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<inherited>true</inherited>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
+			
 			<plugin>
   				<groupId>org.apache.maven.plugins</groupId>
   				<artifactId>maven-jar-plugin</artifactId>
@@ -237,7 +241,7 @@
 	
 	<profiles>
 		<profile>
-			<id>j8</id>
+			<id>javax</id>
 			<activation><jdk>1.8</jdk></activation>
 			<build>
 				<plugins>
@@ -256,7 +260,7 @@
 		                    			<xsdOption>
 											<bindingFile>${basedir}/src/main/xsd/javax.xjb</bindingFile>
 											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
-		                        			<xsd>${basedir}/src/main/xsd/dummy.xsd</xsd>
+		                        			<xsd>${basedir}/src/main/xsd/test.xsd</xsd>
 		                    			</xsdOption>
 		                			</xsdOptions>
 		            			</configuration>
@@ -288,6 +292,38 @@
 			                </execution>
 			            </executions>
 				      </plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jakarta</id>
+			<activation><jdk>11</jdk></activation>
+			<build>
+				<plugins>
+					<plugin>
+                		<groupId>org.apache.cxf</groupId>
+            			<artifactId>cxf-xjc-plugin</artifactId>
+            			<version>4.0.0</version>
+            			<executions>
+                			<execution>
+                    			<id>xjc</id>
+                    			<phase>generate-sources</phase>
+                    			<goals><goal>xsdtojava</goal></goals>
+          	         			<configuration>
+									<sourceRoot>${basedir}/src/main/jakarta</sourceRoot>
+                        			<xsdOptions>
+                            			<xsdOption>
+											
+											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
+		                        			<xsd>${basedir}/src/main/xsd/test.xsd</xsd>
+		                        			<packagename>${jeesl.jaxb.package.base}.test</packagename>
+		                    			</xsdOption>
+		                    			
+                        			</xsdOptions>
+                    			</configuration>
+                			</execution>
+            			</executions>                    
+           			</plugin>
 				</plugins>
 			</build>
 		</profile>
