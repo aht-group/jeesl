@@ -3,17 +3,14 @@ package org.jeesl.controller.handler.rest;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import org.exlp.model.xml.io.File;
 import org.jeesl.api.rest.i.system.JeeslTestRestInterface;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.json.system.job.JsonSystemJob;
 import org.jeesl.model.json.system.security.JsonSecurityUser;
 import org.jeesl.model.json.util.JsonTime;
+import org.jeesl.model.xml.test.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.exlp.factory.xml.io.XmlFileFactory;
-import net.sf.exlp.factory.xml.io.XmlHashFactory;
 
 public class TestRestHandler implements JeeslTestRestInterface
 {
@@ -96,11 +93,11 @@ public class TestRestHandler implements JeeslTestRestInterface
 		return json;
 	}
 
-	@Override public File jaxbFile()
+	@Override public Test jaxb()
 	{
-		File xml = XmlFileFactory.build();
-		xml.setName("Test Name");
-		xml.setHash(XmlHashFactory.build("..hash.."));
+		Test xml = new Test();
+//		xml.setName("Test Name");
+//		xml.setHash(XmlHashFactory.build("..hash.."));
 		return xml;
 	}
 }

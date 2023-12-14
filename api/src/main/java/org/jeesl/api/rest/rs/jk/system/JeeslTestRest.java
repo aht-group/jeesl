@@ -12,6 +12,7 @@ import org.jeesl.interfaces.util.qualifier.JeeslRestSecured;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.json.system.job.JsonSystemJob;
 import org.jeesl.model.json.util.JsonTime;
+import org.jeesl.model.xml.test.Test;
 
 @Path("/rest/test")
 public interface JeeslTestRest extends JeeslTestRestInterface
@@ -35,4 +36,7 @@ public interface JeeslTestRest extends JeeslTestRestInterface
 	
 	@POST @Path("/json/time/upload") @Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON) 
 	JsonTime jsonTimeUpload(JsonTime content);
+	
+	@GET @Path("/jaxb/test") @Produces(MediaType.APPLICATION_XML) 
+	Test jaxb();
 }

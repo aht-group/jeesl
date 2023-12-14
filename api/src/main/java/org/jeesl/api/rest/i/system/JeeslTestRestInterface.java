@@ -1,9 +1,9 @@
 package org.jeesl.api.rest.i.system;
 
-import org.exlp.model.xml.io.File;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.json.system.job.JsonSystemJob;
 import org.jeesl.model.json.util.JsonTime;
+import org.jeesl.model.xml.test.Test;
 
 public interface JeeslTestRestInterface
 {
@@ -16,5 +16,5 @@ public interface JeeslTestRestInterface
 	JsonTime jsonTimeDownload();
 	JsonTime jsonTimeUpload(JsonTime jsonTime);
 	
-	File jaxbFile();
+	Test jaxb();
 }
