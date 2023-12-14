@@ -9,6 +9,7 @@ import java.io.OutputStream;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
+import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jeesl.interfaces.controller.report.format.JeeslXlsReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.util.query.xpath.ReportXpath;
@@ -35,7 +36,6 @@ import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.io.LoggerInit;
 import net.sf.exlp.util.xml.JDomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 public class AbstractJeeslReportTest
 {

@@ -1,8 +1,7 @@
 package org.jeesl.model.xml;
 
+import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jdom2.Namespace;
-
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 

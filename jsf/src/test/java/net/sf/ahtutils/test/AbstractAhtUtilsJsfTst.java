@@ -2,13 +2,13 @@ package net.sf.ahtutils.test;
 
 import java.io.File;
 
+import org.exlp.interfaces.io.NsPrefixMapperInterface;
 import org.jeesl.model.xml.JeeslNsPrefixMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.exlp.util.io.LoggerInit;
-import net.sf.exlp.xml.ns.NsPrefixMapperInterface;
 
 public class AbstractAhtUtilsJsfTst extends AbstractJeeslTest
 {
