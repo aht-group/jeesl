@@ -44,6 +44,13 @@
         	<scope>provided</scope>
 	    </dependency>
    	   	
+   	   	<!-- XML Modules -->
+   	   	<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
+			<scope>provided</scope>
+		</dependency>
+   	   	
    	   	<!-- JSF -->
    	   	<dependency> 
 			<groupId>org.jboss.spec.javax.faces</groupId>

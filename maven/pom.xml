@@ -55,6 +55,13 @@
         	<scope>compile</scope>
 	    </dependency>
 	    
+	    <!-- XML Modules -->
+	    <dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	    
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>

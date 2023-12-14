@@ -37,10 +37,15 @@
 
 	<dependencies>
 		
-		<!-- JEESL -->
+		<!-- XML Modules -->
 		<dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-xml</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		

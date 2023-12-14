@@ -26,7 +26,12 @@
 	</dependencyManagement>
 	
 	<dependencies>
-		<!-- XML-JAXB -->
+		<!-- XML Modules -->
+		<dependency>
+			<groupId>net.sf.exlp</groupId>
+			<artifactId>exlp-xml</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 	   		<groupId>org.openfuxml</groupId>
 	   		<artifactId>ofx-xml</artifactId>
