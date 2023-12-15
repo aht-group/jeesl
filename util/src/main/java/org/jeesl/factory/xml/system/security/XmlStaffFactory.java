@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -50,8 +51,8 @@ public class XmlStaffFactory<L extends JeeslLang, D extends JeeslDescription,
 	{
 		this.q=q;
 		
-		if(q.isSetRole()){xfRole = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(localeCode,q.getRole());}
-		if(q.isSetUser()){xfUser = new XmlUserFactory<USER>(q.getUser());}
+		if(Objects.nonNull(q.getRole())) {xfRole = new XmlRoleFactory<>(localeCode,q.getRole());}
+		if(Objects.nonNull(q.getUser())) {xfUser = new XmlUserFactory<>(q.getUser());}
 	}
 	
 	public static Staff build()
@@ -72,12 +73,12 @@ public class XmlStaffFactory<L extends JeeslLang, D extends JeeslDescription,
 	{
 		Staff xml = new Staff();
 		
-		if(q.isSetId()){xml.setId(staff.getId());}
+		if(q.isSetId()) {xml.setId(staff.getId());}
 		
-		if(q.isSetUser()){xml.setUser(xfUser.build(staff.getUser()));}
-		if(q.isSetRole()){xml.setRole(xfRole.build(staff.getRole()));}
+		if(Objects.nonNull(q.getUser())) {xml.setUser(xfUser.build(staff.getUser()));}
+		if(Objects.nonNull(q.getRole())) {xml.setRole(xfRole.build(staff.getRole()));}
 		
-		if(q.isSetDomain())
+		if(Objects.nonNull(q.getDomain()))
 		{
 			Domain domain = new Domain();
 			domain.setId(staff.getDomain().getId());

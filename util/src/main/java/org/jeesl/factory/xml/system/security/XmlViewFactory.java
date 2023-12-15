@@ -32,16 +32,16 @@ public class XmlViewFactory <L extends JeeslLang, D extends JeeslDescription,
 		this.q=q;
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetNavigation()) {xfNavigation = new XmlNavigationFactory<>(q.getNavigation());}
+		if(Objects.nonNull(q.getNavigation())) {xfNavigation = new XmlNavigationFactory<>(q.getNavigation());}
 	}
 
 	public View build(V view)
 	{
 		View xml = new View();
-		if(q.isSetCode()){xml.setCode(view.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(view.getCode());}
 		if(q.isSetPosition()){xml.setPosition(view.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(view.isVisible());}
-		if(q.isSetDocumentation() && view.getDocumentation()!=null){xml.setDocumentation(view.getDocumentation());}
+		if(q.isSetDocumentation() && view.getDocumentation()!=null) {xml.setDocumentation(view.getDocumentation());}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(view.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescription.create(view.getDescription()));}

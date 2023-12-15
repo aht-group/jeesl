@@ -2,6 +2,7 @@ package net.sf.ahtutils.factory.xml.status;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -41,7 +42,7 @@ public class XmlLevelFactory <L extends JeeslLang, D extends JeeslDescription,S 
 		{
 
 		}
-		if(q.isSetLabel() && localeCode!=null)
+		if(ObjectUtils.allNotNull(q.getLabel(),localeCode))
 		{
 			if(ejb.getName()!=null)
 			{

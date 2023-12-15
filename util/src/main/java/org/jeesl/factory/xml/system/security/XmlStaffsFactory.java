@@ -1,5 +1,8 @@
 package org.jeesl.factory.xml.system.security;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
@@ -37,13 +40,13 @@ public class XmlStaffsFactory<L extends JeeslLang, D extends JeeslDescription,
 	public XmlStaffsFactory(String localeCode, Staffs q)
 	{
 		this.q=q;
-		if(q.isSetRole()) {xfRole = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(localeCode,q.getRole());}
+		if(Objects.nonNull(q.getRole())) {xfRole = new XmlRoleFactory<L,D,C,R,V,U,A,AT,USER>(localeCode,q.getRole());}
 	}
 	
 	public Staffs build(R role)
 	{
 		Staffs xml = new Staffs();
-		if(q.isSetRole() && role!=null) {xml.setRole(xfRole.build(role));}
+		if(ObjectUtils.allNotNull(q.getRole(),role)) {xml.setRole(xfRole.build(role));}
 		return xml;
 	}
 	

@@ -2,6 +2,7 @@ package org.jeesl.util.comparator.xml.status;
 
 import java.util.Comparator;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,13 +33,13 @@ public class StatusComparator
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
 			  if(a.isSetGroup() && b.isSetGroup()){ctb.append(a.getGroup(), b.getGroup());}
-			  if(a.isSetParent() && b.isSetParent())
+			  if(ObjectUtils.allNotNull(a.getParent(),b.getParent()))
 			  {
 				  if(a.getParent().isSetPosition() && b.getParent().isSetPosition()){ctb.append(a.getParent().getPosition(),b.getParent().getPosition());}
-				  if(a.getParent().isSetCode() && b.getParent().isSetCode()){ctb.append(a.getParent().getCode(),b.getParent().getCode());}
+				  if(ObjectUtils.allNotNull(a.getParent().getCode(),b.getParent().getCode())) {ctb.append(a.getParent().getCode(),b.getParent().getCode());}
 			  }
 			  if(a.isSetPosition() && b.isSetPosition()){ctb.append(a.getPosition(), b.getPosition());}
-			  if(a.isSetCode() && b.isSetCode()){ctb.append(a.getCode(), b.getCode());}
+			  if(ObjectUtils.allNotNull(a.getCode(),b.getCode())) {ctb.append(a.getCode(), b.getCode());}
 			  return ctb.toComparison();
         }
     }

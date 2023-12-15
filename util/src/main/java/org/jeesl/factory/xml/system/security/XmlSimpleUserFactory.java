@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.security;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
 import org.jeesl.model.xml.system.security.User;
 import org.slf4j.Logger;
@@ -21,9 +23,9 @@ public class XmlSimpleUserFactory<USER extends JeeslSimpleUser>
 		User xml = new User();
 		
 //		if(q.isSetId()){xml.setId(user.getId());}
-		if(q.isSetFirstName()){xml.setFirstName(user.getFirstName());}
-		if(q.isSetLastName()){xml.setLastName(user.getLastName());}
-		if(q.isSetEmail()){xml.setEmail(user.getEmail());}
+		if(Objects.nonNull(q.getFirstName())) {xml.setFirstName(user.getFirstName());}
+		if(Objects.nonNull(q.getLastName())) {xml.setLastName(user.getLastName());}
+		if(Objects.nonNull(q.getEmail())) {xml.setEmail(user.getEmail());}
 		
 		return xml;
 	}

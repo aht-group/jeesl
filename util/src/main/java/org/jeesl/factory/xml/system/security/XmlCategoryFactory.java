@@ -43,7 +43,7 @@ public class XmlCategoryFactory <L extends JeeslLang,D extends JeeslDescription,
 	public org.jeesl.model.xml.system.security.Category build(C category)
 	{
 		Category xml = new Category();
-		if(q.isSetCode()){xml.setCode(category.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(category.getCode());}
 		if(q.isSetPosition()){xml.setPosition(category.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(category.isVisible());}
 		if(q.isSetDocumentation() && category.getDocumentation()!=null){xml.setDocumentation(category.getDocumentation());}

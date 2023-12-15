@@ -33,7 +33,7 @@ public class XmlTemplateFactory <L extends JeeslLang, D extends JeeslDescription
 	public Template build(AT template)
 	{
 		Template xml = new Template();
-		if(q.isSetCode()){xml.setCode(template.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(template.getCode());}
 		if(q.isSetPosition()){xml.setPosition(template.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(template.isVisible());}
 		

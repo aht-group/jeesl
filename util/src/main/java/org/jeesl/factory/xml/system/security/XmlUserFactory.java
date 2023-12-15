@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.security;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
 import org.jeesl.model.xml.jeesl.QuerySecurity;
@@ -28,9 +30,9 @@ public class XmlUserFactory<USER extends JeeslUser<?>>
 	{
 		User xml = new User();
 		if(q.isSetId()){xml.setId(user.getId());}
-		if(q.isSetFirstName()){xml.setFirstName(user.getFirstName());}
-		if(q.isSetLastName()){xml.setLastName(user.getLastName());}
-		if(q.isSetName())
+		if(Objects.nonNull(q.getFirstName())) {xml.setFirstName(user.getFirstName());}
+		if(Objects.nonNull(q.getLastName())) {xml.setLastName(user.getLastName());}
+		if(Objects.nonNull(q.getName()))
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.append(user.getFirstName());
@@ -39,7 +41,7 @@ public class XmlUserFactory<USER extends JeeslUser<?>>
 			xml.setName(sb.toString().trim());
 		}
 		
-		if(q.isSetEmail() && user instanceof EjbWithEmail)
+		if(Objects.nonNull(q.getEmail()) && user instanceof EjbWithEmail)
 		{
 			EjbWithEmail email = (EjbWithEmail)user;
 			xml.setEmail(email.getEmail());

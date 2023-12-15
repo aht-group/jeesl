@@ -1,6 +1,7 @@
 package org.jeesl.factory.xml.system.security;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -23,13 +24,13 @@ public class XmlTemplatesFactory <L extends JeeslLang, D extends JeeslDescriptio
 	public XmlTemplatesFactory(Templates q)
 	{
 		this.q=q;
-		if(q.isSetTemplate()) {xfTemplate = new XmlTemplateFactory<>(q.getTemplate().get(0));}
+		if(Objects.nonNull(q.getTemplate())) {xfTemplate = new XmlTemplateFactory<>(q.getTemplate().get(0));}
 	}
 	
 	public Templates build(List<AT> templates)
 	{
 		Templates xml = build();
-		if(q.isSetTemplate())
+		if(Objects.nonNull(q.getTemplate()))
 		{
 			for(AT template : templates)
 			{

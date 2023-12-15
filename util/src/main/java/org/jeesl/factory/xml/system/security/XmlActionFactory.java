@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.security;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -49,7 +50,7 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 	public org.jeesl.model.xml.system.security.Action build(A action)
 	{
 		Action xml = new Action();
-		if(q.isSetCode()){xml.setCode(action.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(action.getCode());}
 		if(q.isSetPosition()){xml.setPosition(action.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(action.isVisible());}
 		
@@ -57,7 +58,7 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(action.getDescription()));}
 		if(q.isSetView()) {xml.setView(xfView.build(action.getView()));}
 		
-		if(q.isSetTemplate() && action.getTemplate()!=null) {xml.setTemplate(xfTemplate.build(action.getTemplate()));}
+		if(ObjectUtils.allNotNull(q.getTemplate(),action.getTemplate())) {xml.setTemplate(xfTemplate.build(action.getTemplate()));}
 		
 		return xml;
 	}

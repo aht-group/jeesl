@@ -57,18 +57,9 @@ public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 	public Role build(R role)
 	{
-    	if(logger.isTraceEnabled())
-    	{
-    		logger.info(StringUtil.stars());
-    		logger.info(role.toString());
-    		logger.info("Query: "+q.isSetDocumentation());
-    		logger.info("\t"+(role.getDocumentation()!=null));
-    		if(role.getDocumentation()!=null){logger.info("\t"+role.getDocumentation());}
-    	}
-		
 		Role xml = new Role();
 		if(q.isSetId()){xml.setId(role.getId());}
-		if(q.isSetCode()){xml.setCode(role.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(role.getCode());}
 		if(q.isSetPosition()){xml.setPosition(role.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(role.isVisible());}
 		if(q.isSetDocumentation() && role.getDocumentation()!=null){xml.setDocumentation(role.getDocumentation());}
@@ -76,11 +67,11 @@ public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(role.getName()));}
 		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescriptions.create(role.getDescription()));}
 		
-		if(q.isSetViews()) {xml.setViews(xfView.build(role.getViews()));}
-		if(q.isSetActions()){xml.setActions(xfAction.build(role.getActions()));}
-		if(q.isSetUsecases()){xml.setUsecases(xfUsecase.build(role.getUsecases()));}
+		if(Objects.nonNull(q.getViews())) {xml.setViews(xfView.build(role.getViews()));}
+		if(Objects.nonNull(q.getActions())) {xml.setActions(xfAction.build(role.getActions()));}
+		if(Objects.nonNull(q.getUsecases())) {xml.setUsecases(xfUsecase.build(role.getUsecases()));}
 		
-		if(q.isSetLabel() && localeCode!=null && role.getName().containsKey(localeCode))
+		if(Objects.nonNull(q.getLabel()) && localeCode!=null && role.getName().containsKey(localeCode))
 		{
 			xml.setLabel(role.getName().get(localeCode).getLang());
 		}

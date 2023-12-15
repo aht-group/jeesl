@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.symbol;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.status.XmlStyleFactory;
 import org.jeesl.factory.xml.system.status.XmlStylesFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
@@ -37,7 +39,7 @@ public class XmlSymbolFactory <L extends JeeslLang, D extends JeeslDescription,
 	{
 		Symbol xml = build();
 		
-		if(q.isSetStyles())
+		if(Objects.nonNull(q.getStyles()))
 		{
 			Styles styles = XmlStylesFactory.build();
 			
@@ -46,8 +48,8 @@ public class XmlSymbolFactory <L extends JeeslLang, D extends JeeslDescription,
 			xml.setStyles(styles);
 		}
 		
-		if(q.isSetColors()){xml.setColors(xfColors.build(graphic));}
-		if(q.isSetStyles()){xml.setSizes(xfSizes.build(graphic));}
+		if(Objects.nonNull(q.getColors())) {xml.setColors(xfColors.build(graphic));}
+		if(Objects.nonNull(q.getSizes())) {xml.setSizes(xfSizes.build(graphic));}
 		
 		return xml;
 	}

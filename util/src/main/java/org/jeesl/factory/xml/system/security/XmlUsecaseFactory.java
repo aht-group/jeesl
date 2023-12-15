@@ -40,7 +40,7 @@ public class XmlUsecaseFactory <L extends JeeslLang,
 	public Usecase build(U usecase)
 	{
 		Usecase xml = new Usecase();
-		if(q.isSetCode()){xml.setCode(usecase.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(usecase.getCode());}
 		if(q.isSetPosition()){xml.setPosition(usecase.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(usecase.isVisible());}
 		if(q.isSetDocumentation() && usecase.getDocumentation()!=null){xml.setDocumentation(usecase.getDocumentation());}
@@ -57,13 +57,13 @@ public class XmlUsecaseFactory <L extends JeeslLang,
 			xml.setDescriptions(f.create(usecase.getDescription()));
 		}
 		
-		if(q.isSetViews())
+		if(Objects.nonNull(q.getViews()))
 		{
 			XmlViewsFactory<L,D,C,R,V,U> f = new XmlViewsFactory<>(q.getViews());
 			xml.setViews(f.build(usecase.getViews()));
 		}
 		
-		if(q.isSetActions())
+		if(Objects.nonNull(q.getActions()))
 		{
 			XmlActionsFactory<L,D,C,R,V,U,A,AT> f = new XmlActionsFactory<>(q.getActions());
 			xml.setActions(f.build(usecase.getActions()));
