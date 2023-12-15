@@ -19,7 +19,7 @@ public class TestXmlStaff extends AbstractXmlSecurityTest<Staff>
     public Staff build(boolean withChilds)
     {
     	Staff xml = new Staff();
-    	xml.setId(123);
+    	xml.setId(123l);
     	
     	if(withChilds)
     	{

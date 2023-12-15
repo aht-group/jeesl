@@ -16,7 +16,7 @@ public class TestXmlType extends AbstractXmlStatusTest<Type>
     public Type build(boolean withChilds)
     {
     	Type xml = new Type();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setKey("myKey");
     	xml.setCode("myCode");
     	xml.setVisible(true);

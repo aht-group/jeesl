@@ -16,7 +16,7 @@ public class TestXmlProcess extends AbstractXmlStatusTest<Process>
     public Process build(boolean withChilds)
     {
     	Process xml = new Process();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

@@ -16,7 +16,7 @@ public class TestXmlResult extends AbstractXmlStatusTest<Result>
     public Result build(boolean withChilds)
     {
     	Result xml = new Result();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

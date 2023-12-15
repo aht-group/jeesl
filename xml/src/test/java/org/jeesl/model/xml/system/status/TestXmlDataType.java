@@ -16,7 +16,7 @@ public class TestXmlDataType extends AbstractXmlStatusTest<DataType>
     public DataType build(boolean withChilds)
     {
     	DataType xml = new DataType();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

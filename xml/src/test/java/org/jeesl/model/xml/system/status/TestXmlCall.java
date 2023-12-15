@@ -16,7 +16,7 @@ public class TestXmlCall extends AbstractXmlStatusTest<Call>
     public Call build(boolean withChilds)
     {
     	Call xml = new Call();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

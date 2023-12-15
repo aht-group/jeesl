@@ -16,7 +16,7 @@ public class TestXmlPriority extends AbstractXmlStatusTest<Priority>
     public Priority build(boolean withChildren)
     {
     	Priority xml = new Priority();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

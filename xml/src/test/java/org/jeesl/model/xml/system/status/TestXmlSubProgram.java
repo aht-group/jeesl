@@ -16,7 +16,7 @@ public class TestXmlSubProgram extends AbstractXmlStatusTest<SubProgram>
     public SubProgram build(boolean withChildren)
     {
     	SubProgram xml = new SubProgram();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

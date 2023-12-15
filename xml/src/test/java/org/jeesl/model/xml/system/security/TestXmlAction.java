@@ -16,7 +16,7 @@ public class TestXmlAction extends AbstractXmlSecurityTest<Action>
     public Action build(boolean withChilds)
     {
     	Action xml = new Action();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setPosition(1);
     	xml.setVisible(true);
     	xml.setDocumentation(true);

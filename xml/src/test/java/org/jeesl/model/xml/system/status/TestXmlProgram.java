@@ -16,7 +16,7 @@ public class TestXmlProgram extends AbstractXmlStatusTest<Program>
     public Program build(boolean withChildren)
     {
     	Program xml = new Program();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

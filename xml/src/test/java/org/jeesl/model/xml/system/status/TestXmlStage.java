@@ -16,7 +16,7 @@ public class TestXmlStage extends AbstractXmlStatusTest<Stage>
     public Stage build(boolean withChilds)
     {
     	Stage xml = new Stage();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

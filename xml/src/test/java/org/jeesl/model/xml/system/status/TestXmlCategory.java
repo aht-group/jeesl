@@ -16,7 +16,7 @@ public class TestXmlCategory extends AbstractXmlStatusTest<Category>
     public Category build(boolean withChilds)
     {
     	Category xml = new Category();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

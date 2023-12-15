@@ -18,7 +18,7 @@ public class TestXmlGraphic extends AbstractXmlSymbolTest<Graphic>
     public Graphic build(boolean withChilds)
     {
     	Graphic xml = new Graphic();
-    	xml.setId(123);
+    	xml.setId(123l);
     	
     	if(withChilds)
     	{

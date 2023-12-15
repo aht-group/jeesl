@@ -16,7 +16,7 @@ public class TestXmlMainType extends AbstractXmlStatusTest<MainType>
     public MainType build(boolean withChilds)
     {
     	MainType xml = new MainType();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

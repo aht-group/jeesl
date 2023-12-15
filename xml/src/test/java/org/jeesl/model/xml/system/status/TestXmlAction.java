@@ -16,7 +16,7 @@ public class TestXmlAction extends AbstractXmlStatusTest<Action>
     public Action build(boolean withChilds)
     {
     	Action xml = new Action();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setVisible(true);
     	xml.setGroup("myGroup");

@@ -17,7 +17,7 @@ public class TestXmlFigure extends AbstractXmlSymbolTest<Figure>
     public Figure build(boolean withChilds)
     {
     	Figure xml = new Figure();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setStyle(new Style());
     	xml.setCss(true);
     	xml.setSize(2);

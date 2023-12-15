@@ -16,7 +16,7 @@ public class TestXmlTemplate extends AbstractXmlSecurityTest<Template>
     public Template build(boolean withChilds)
     {
     	Template xml = new Template();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setPosition(1);
     	xml.setVisible(true);
     	xml.setDocumentation(true);

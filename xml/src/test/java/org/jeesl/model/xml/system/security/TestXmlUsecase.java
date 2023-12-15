@@ -16,7 +16,7 @@ public class TestXmlUsecase extends AbstractXmlSecurityTest<Usecase>
     public Usecase build(boolean withChilds)
     {
     	Usecase xml = new Usecase();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setPosition(1);
     	xml.setVisible(true);
     	xml.setCode("myCode");

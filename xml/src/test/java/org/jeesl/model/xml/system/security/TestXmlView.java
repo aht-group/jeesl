@@ -17,7 +17,7 @@ public class TestXmlView extends AbstractXmlSecurityTest<View>
     public View build(boolean withChilds)
     {
     	View xml = new View();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setPosition(1);
     	xml.setVisible(true);
     	xml.setCode("myCode");

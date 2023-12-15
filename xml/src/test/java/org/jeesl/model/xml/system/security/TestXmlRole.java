@@ -16,7 +16,7 @@ public class TestXmlRole extends AbstractXmlSecurityTest<Role>
     public Role build(boolean withChilds)
     {
     	Role xml = new Role();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setPosition(1);
     	xml.setVisible(true);
     	xml.setCode("myCode");
