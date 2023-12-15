@@ -72,12 +72,4 @@ public class Figures
         return this.figure;
     }
 
-    public boolean isSetFigure() {
-        return ((this.figure!= null)&&(!this.figure.isEmpty()));
-    }
-
-    public void unsetFigure() {
-        this.figure = null;
-    }
-
 }

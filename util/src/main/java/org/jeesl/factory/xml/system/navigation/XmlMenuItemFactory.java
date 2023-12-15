@@ -63,7 +63,7 @@ public class XmlMenuItemFactory <L extends JeeslLang, D extends JeeslDescription
 	{
 		MenuItem xml = build();
 		xml.setVisible(BooleanComparator.active(mi.isVisible()));
-		xml.setActive(mi.isSetActive() && mi.isActive());
+		xml.setActive(BooleanComparator.active(mi.isActive()));
 		xml.setCode(mi.getCode());
 		xml.setHref(mi.getHref());
 		xml.setName(mi.getName());

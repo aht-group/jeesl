@@ -74,10 +74,6 @@ public class Symbol
         this.styles = value;
     }
 
-    public boolean isSetStyles() {
-        return (this.styles!= null);
-    }
-
     /**
      * Gets the value of the colors property.
      * 
@@ -102,10 +98,6 @@ public class Symbol
         this.colors = value;
     }
 
-    public boolean isSetColors() {
-        return (this.colors!= null);
-    }
-
     /**
      * Gets the value of the sizes property.
      * 
@@ -128,10 +120,6 @@ public class Symbol
      */
     public void setSizes(Sizes value) {
         this.sizes = value;
-    }
-
-    public boolean isSetSizes() {
-        return (this.sizes!= null);
     }
 
 }

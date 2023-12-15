@@ -66,10 +66,6 @@ public class Color
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -92,10 +88,6 @@ public class Color
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
 }

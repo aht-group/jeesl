@@ -8,10 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.exlp.model.xml.io.File;
-
 import net.sf.ahtutils.xml.status.Type;
+import org.exlp.model.xml.io.File;
 
 
 /**
@@ -85,10 +83,6 @@ public class Graphic
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the file property.
      * 
@@ -111,10 +105,6 @@ public class Graphic
      */
     public void setFile(File value) {
         this.file = value;
-    }
-
-    public boolean isSetFile() {
-        return (this.file!= null);
     }
 
     /**
@@ -141,10 +131,6 @@ public class Graphic
         this.symbol = value;
     }
 
-    public boolean isSetSymbol() {
-        return (this.symbol!= null);
-    }
-
     /**
      * Gets the value of the figures property.
      * 
@@ -169,10 +155,6 @@ public class Graphic
         this.figures = value;
     }
 
-    public boolean isSetFigures() {
-        return (this.figures!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -181,7 +163,7 @@ public class Graphic
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -193,16 +175,8 @@ public class Graphic
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
 }

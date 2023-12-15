@@ -56,7 +56,7 @@ public class SymbolQuery
 		f.setData(new Data());
 		
 		Graphic g = new Graphic();
-		g.setId(0);
+		g.setId(0l);
 		
 		g.setType(XmlTypeFactory.create(""));
 		g.setFile(f);

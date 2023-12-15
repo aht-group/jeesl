@@ -1,5 +1,6 @@
 package org.jeesl.factory.xml.system.symbol;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.slf4j.Logger;
@@ -24,7 +25,7 @@ public class XmlColorsFactory <G extends JeeslGraphic<?,?,?>>
 	{
 		Colors xml = build();
 		
-		if(q.isSetColor())
+		if(ObjectUtils.isNotEmpty(q.getColor()))
 		{
 			xml.getColor().add(XmlColorFactory.build(JeeslGraphicShape.Color.outer, graphic.getColor()));
 		}

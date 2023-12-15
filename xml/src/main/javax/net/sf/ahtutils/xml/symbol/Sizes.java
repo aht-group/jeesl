@@ -72,12 +72,4 @@ public class Sizes
         return this.size;
     }
 
-    public boolean isSetSize() {
-        return ((this.size!= null)&&(!this.size.isEmpty()));
-    }
-
-    public void unsetSize() {
-        this.size = null;
-    }
-
 }

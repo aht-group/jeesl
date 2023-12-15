@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.status.Descriptions;
 import net.sf.ahtutils.xml.status.Langs;
-
 import org.jeesl.model.xml.io.cms.text.Description;
 import org.jeesl.model.xml.system.security.View;
 
@@ -109,14 +108,6 @@ public class MenuItem
         return this.menuItem;
     }
 
-    public boolean isSetMenuItem() {
-        return ((this.menuItem!= null)&&(!this.menuItem.isEmpty()));
-    }
-
-    public void unsetMenuItem() {
-        this.menuItem = null;
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -139,10 +130,6 @@ public class MenuItem
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -169,10 +156,6 @@ public class MenuItem
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the view property.
      * 
@@ -195,10 +178,6 @@ public class MenuItem
      */
     public void setView(View value) {
         this.view = value;
-    }
-
-    public boolean isSetView() {
-        return (this.view!= null);
     }
 
     /**
@@ -225,10 +204,6 @@ public class MenuItem
         this.description = value;
     }
 
-    public boolean isSetDescription() {
-        return (this.description!= null);
-    }
-
     /**
      * Gets the value of the name property.
      * 
@@ -251,10 +226,6 @@ public class MenuItem
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    public boolean isSetName() {
-        return (this.name!= null);
     }
 
     /**
@@ -281,10 +252,6 @@ public class MenuItem
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the href property.
      * 
@@ -309,10 +276,6 @@ public class MenuItem
         this.href = value;
     }
 
-    public boolean isSetHref() {
-        return (this.href!= null);
-    }
-
     /**
      * Gets the value of the active property.
      * 
@@ -321,7 +284,7 @@ public class MenuItem
      *     {@link Boolean }
      *     
      */
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
@@ -333,16 +296,8 @@ public class MenuItem
      *     {@link Boolean }
      *     
      */
-    public void setActive(boolean value) {
+    public void setActive(Boolean value) {
         this.active = value;
-    }
-
-    public boolean isSetActive() {
-        return (this.active!= null);
-    }
-
-    public void unsetActive() {
-        this.active = null;
     }
 
     /**
@@ -353,7 +308,7 @@ public class MenuItem
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -365,16 +320,8 @@ public class MenuItem
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
 }

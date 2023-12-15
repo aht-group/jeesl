@@ -72,12 +72,4 @@ public class Colors
         return this.color;
     }
 
-    public boolean isSetColor() {
-        return ((this.color!= null)&&(!this.color.isEmpty()));
-    }
-
-    public void unsetColor() {
-        this.color = null;
-    }
-
 }

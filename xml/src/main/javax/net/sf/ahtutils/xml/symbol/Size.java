@@ -66,10 +66,6 @@ public class Size
         this.group = value;
     }
 
-    public boolean isSetGroup() {
-        return (this.group!= null);
-    }
-
     /**
      * Gets the value of the value property.
      * 
@@ -78,7 +74,7 @@ public class Size
      *     {@link Integer }
      *     
      */
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
@@ -90,16 +86,8 @@ public class Size
      *     {@link Integer }
      *     
      */
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
-    }
-
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
-    public void unsetValue() {
-        this.value = null;
     }
 
 }

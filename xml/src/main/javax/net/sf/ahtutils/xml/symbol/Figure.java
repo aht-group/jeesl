@@ -88,10 +88,6 @@ public class Figure
         this.style = value;
     }
 
-    public boolean isSetStyle() {
-        return (this.style!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -100,7 +96,7 @@ public class Figure
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -112,16 +108,8 @@ public class Figure
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -132,7 +120,7 @@ public class Figure
      *     {@link Boolean }
      *     
      */
-    public boolean isCss() {
+    public Boolean isCss() {
         return css;
     }
 
@@ -144,16 +132,8 @@ public class Figure
      *     {@link Boolean }
      *     
      */
-    public void setCss(boolean value) {
+    public void setCss(Boolean value) {
         this.css = value;
-    }
-
-    public boolean isSetCss() {
-        return (this.css!= null);
-    }
-
-    public void unsetCss() {
-        this.css = null;
     }
 
     /**
@@ -180,10 +160,6 @@ public class Figure
         this.color = value;
     }
 
-    public boolean isSetColor() {
-        return (this.color!= null);
-    }
-
     /**
      * Gets the value of the size property.
      * 
@@ -192,7 +168,7 @@ public class Figure
      *     {@link Integer }
      *     
      */
-    public int getSize() {
+    public Integer getSize() {
         return size;
     }
 
@@ -204,16 +180,8 @@ public class Figure
      *     {@link Integer }
      *     
      */
-    public void setSize(int value) {
+    public void setSize(Integer value) {
         this.size = value;
-    }
-
-    public boolean isSetSize() {
-        return (this.size!= null);
-    }
-
-    public void unsetSize() {
-        this.size = null;
     }
 
     /**
@@ -224,7 +192,7 @@ public class Figure
      *     {@link Integer }
      *     
      */
-    public int getRotation() {
+    public Integer getRotation() {
         return rotation;
     }
 
@@ -236,16 +204,8 @@ public class Figure
      *     {@link Integer }
      *     
      */
-    public void setRotation(int value) {
+    public void setRotation(Integer value) {
         this.rotation = value;
-    }
-
-    public boolean isSetRotation() {
-        return (this.rotation!= null);
-    }
-
-    public void unsetRotation() {
-        this.rotation = null;
     }
 
     /**
@@ -256,7 +216,7 @@ public class Figure
      *     {@link Integer }
      *     
      */
-    public int getOffsetX() {
+    public Integer getOffsetX() {
         return offsetX;
     }
 
@@ -268,16 +228,8 @@ public class Figure
      *     {@link Integer }
      *     
      */
-    public void setOffsetX(int value) {
+    public void setOffsetX(Integer value) {
         this.offsetX = value;
-    }
-
-    public boolean isSetOffsetX() {
-        return (this.offsetX!= null);
-    }
-
-    public void unsetOffsetX() {
-        this.offsetX = null;
     }
 
     /**
@@ -288,7 +240,7 @@ public class Figure
      *     {@link Integer }
      *     
      */
-    public int getOffsetY() {
+    public Integer getOffsetY() {
         return offsetY;
     }
 
@@ -300,16 +252,8 @@ public class Figure
      *     {@link Integer }
      *     
      */
-    public void setOffsetY(int value) {
+    public void setOffsetY(Integer value) {
         this.offsetY = value;
-    }
-
-    public boolean isSetOffsetY() {
-        return (this.offsetY!= null);
-    }
-
-    public void unsetOffsetY() {
-        this.offsetY = null;
     }
 
 }
