@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.status;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -16,12 +17,12 @@ public class XmlPhaseFactory<L extends JeeslLang, D extends JeeslDescription, S 
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlPhaseFactory.class);
 		
-	private String lang;
+	private String localeCode;
 	private Phase q;
 	
-	public XmlPhaseFactory(String lang, Phase q)
+	public XmlPhaseFactory(String localeCode, Phase q)
 	{
-		this.lang=lang;
+		this.localeCode=localeCode;
 		this.q=q;
 	}
 	
@@ -45,14 +46,14 @@ public class XmlPhaseFactory<L extends JeeslLang, D extends JeeslDescription, S 
 
 			}
 			
-			if(q.isSetLabel() && lang!=null)
+			if(ObjectUtils.allNotNull(q.getLabel(),localeCode))
 			{
 				if(ejb.getName()!=null)
 				{
-					if(ejb.getName().containsKey(lang)){xml.setLabel(ejb.getName().get(lang).getLang());}
+					if(ejb.getName().containsKey(localeCode)){xml.setLabel(ejb.getName().get(localeCode).getLang());}
 					else
 					{
-						String msg = "No translation "+lang+" available in "+ejb;
+						String msg = "No translation "+localeCode+" available in "+ejb;
 						logger.warn(msg);
 						xml.setLabel(msg);
 					}
@@ -64,7 +65,7 @@ public class XmlPhaseFactory<L extends JeeslLang, D extends JeeslDescription, S 
 					xml.setLabel(msg);
 				}
 			}
-			else if(q.isSetLabel() && lang==null){logger.warn("Should render label, but lang is null");}
+			else if(q.isSetLabel() && localeCode==null){logger.warn("Should render label, but lang is null");}
 		}
 		
 		return xml;

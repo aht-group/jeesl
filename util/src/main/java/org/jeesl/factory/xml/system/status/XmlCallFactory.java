@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.status;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -16,14 +17,13 @@ public class XmlCallFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, D 
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlCallFactory.class);
 		
-	private String lang;
+	private String localeCode;
 	private Call q;
 	
-//	public XmlProgramFactory(Query q){this(q.getLang(),q.getType());}
 	public XmlCallFactory(Call q){this(null,q);}
-	public XmlCallFactory(String lang,Call q)
+	public XmlCallFactory(String localeCode, Call q)
 	{
-		this.lang=lang;
+		this.localeCode=localeCode;
 		this.q=q;
 	}
 	
@@ -47,14 +47,14 @@ public class XmlCallFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, D 
 			xml.setDescriptions(f.create(ejb.getDescription()));
 		}
 		
-		if(q.isSetLabel() && lang!=null)
+		if(ObjectUtils.allNotNull(q.getLabel(),localeCode))
 		{
 			if(ejb.getName()!=null)
 			{
-				if(ejb.getName().containsKey(lang)){xml.setLabel(ejb.getName().get(lang).getLang());}
+				if(ejb.getName().containsKey(localeCode)){xml.setLabel(ejb.getName().get(localeCode).getLang());}
 				else
 				{
-					String msg = "No translation "+lang+" available in "+ejb;
+					String msg = "No translation "+localeCode+" available in "+ejb;
 					logger.warn(msg);
 					xml.setLabel(msg);
 				}

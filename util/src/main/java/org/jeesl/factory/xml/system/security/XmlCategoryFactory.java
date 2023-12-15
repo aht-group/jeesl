@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.security;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -30,13 +31,13 @@ public class XmlCategoryFactory <L extends JeeslLang,D extends JeeslDescription,
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlRoleFactory.class);
 		
-	private String lang;
+	private String localeCode;
 	private org.jeesl.model.xml.system.security.Category q;
 	
 	public XmlCategoryFactory(Query q){this(q.getLang(),q.getCategory());}
-	public XmlCategoryFactory(String lang,org.jeesl.model.xml.system.security.Category q)
+	public XmlCategoryFactory(String localeCode, org.jeesl.model.xml.system.security.Category q)
 	{
-		this.lang=lang;
+		this.localeCode=localeCode;
 		this.q=q;
 	}
 	
@@ -60,14 +61,14 @@ public class XmlCategoryFactory <L extends JeeslLang,D extends JeeslDescription,
 			xml.setDescriptions(f.create(category.getDescription()));
 		}
 		
-		if(q.isSetLabel() && lang!=null)
+		if(ObjectUtils.allNotNull(q.getLabel(),localeCode))
 		{
 			if(category.getName()!=null)
 			{
-				if(category.getName().containsKey(lang)){xml.setLabel(category.getName().get(lang).getLang());}
+				if(category.getName().containsKey(localeCode)){xml.setLabel(category.getName().get(localeCode).getLang());}
 				else
 				{
-					String msg = "No translation "+lang+" available in "+category;
+					String msg = "No translation "+localeCode+" available in "+category;
 					logger.warn(msg);
 					xml.setLabel(msg);
 				}

@@ -2,6 +2,8 @@ package org.jeesl.factory.xml.system.status;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
+import org.jeesl.factory.xml.system.io.locale.XmlLabelFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -16,15 +18,16 @@ public class XmlSubProgramFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLa
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlSubProgramFactory.class);
 		
-	private String lang;
 	private SubProgram q;
 	
-//	public XmlProgramFactory(Query q){this(q.getLang(),q.getType());}
+	private XmlLabelFactory<L> xfLabel;
+	
 	public XmlSubProgramFactory(SubProgram q){this(null,q);}
-	public XmlSubProgramFactory(String lang,SubProgram q)
+	public XmlSubProgramFactory(String localeCode, SubProgram q)
 	{
-		this.lang=lang;
 		this.q=q;
+		
+		if(Objects.nonNull(q.getLabel())) {xfLabel = new XmlLabelFactory<>(localeCode);}
 	}
 	
 	public SubProgram build(S ejb){return build(ejb,null);}
@@ -47,25 +50,7 @@ public class XmlSubProgramFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLa
 			xml.setDescriptions(f.create(ejb.getDescription()));
 		}
 		
-		if(q.isSetLabel() && lang!=null)
-		{
-			if(ejb.getName()!=null)
-			{
-				if(ejb.getName().containsKey(lang)){xml.setLabel(ejb.getName().get(lang).getLang());}
-				else
-				{
-					String msg = "No translation "+lang+" available in "+ejb;
-					logger.warn(msg);
-					xml.setLabel(msg);
-				}
-			}
-			else
-			{
-				String msg = "No @name available in "+ejb;
-				logger.warn(msg);
-				xml.setLabel(msg);
-			}
-		}
+		if(ObjectUtils.allNotNull(q.getLabel(),xfLabel)) {xml.setLabel(xfLabel.build(ejb));}
 		
 		return xml;
 	}

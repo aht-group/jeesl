@@ -2,6 +2,7 @@ package net.sf.ahtutils.factory.xml.status;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -17,12 +18,12 @@ public class XmlCapabilityFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlCapabilityFactory.class);
 		
-	private String lang;
+	private String localeCode;
 	private Copy q;
 		
-	public XmlCapabilityFactory(String lang,Copy q)
+	public XmlCapabilityFactory(String localeCode, Copy q)
 	{
-		this.lang=lang;
+		this.localeCode=localeCode;
 		this.q=q;
 	}
 	
@@ -43,12 +44,12 @@ public class XmlCapabilityFactory
 		{
 
 		}
-		if(q.isSetLabel() && lang!=null)
+		if(ObjectUtils.allNotNull(q.getLabel(),localeCode))
 		{
 			if(ejb.getName()!=null)
 			{
-				if(ejb.getName().containsKey(lang)){xml.setLabel(ejb.getName().get(lang).getLang());}
-				else{logger.warn("No translation "+lang+" available in "+ejb);}
+				if(ejb.getName().containsKey(localeCode)){xml.setLabel(ejb.getName().get(localeCode).getLang());}
+				else{logger.warn("No translation "+localeCode+" available in "+ejb);}
 			}
 			else{logger.warn("No @name available in "+ejb);}
 		}
