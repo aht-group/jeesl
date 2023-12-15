@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -17,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.UtilsDocumentation;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.io.StringIO;
 
 public class AbstractDocumentationLatexWriter

@@ -7,9 +7,9 @@ public class XmlClassFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlClassFactory.class);
 		
-	public static net.sf.ahtutils.xml.status.Class create(String code)
+	public static org.jeesl.model.xml.io.locale.status.Class create(String code)
 	{
-		net.sf.ahtutils.xml.status.Class xml = new net.sf.ahtutils.xml.status.Class();
+		org.jeesl.model.xml.io.locale.status.Class xml = new org.jeesl.model.xml.io.locale.status.Class();
 		xml.setCode(code);
 		return xml;
 	}

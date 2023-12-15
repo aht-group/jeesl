@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.ofx.Paragraph;
 import org.openfuxml.content.table.Cell;
@@ -12,7 +13,6 @@ import org.openfuxml.factory.xml.table.XmlCellFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

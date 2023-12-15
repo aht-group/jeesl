@@ -13,10 +13,10 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.graphic.with.EjbWithCodeGraphic;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Status;
 import net.sf.exlp.util.io.StringUtil;
 
 public class JeeslDbGraphicUpdater <G extends JeeslGraphic<GT,?,?>, GT extends JeeslGraphicType<?,?,GT,G>>

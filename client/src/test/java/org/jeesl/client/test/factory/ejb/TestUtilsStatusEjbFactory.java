@@ -6,6 +6,8 @@ import org.jeesl.client.model.ejb.system.locale.Status;
 import org.jeesl.client.test.AbstractJeeslClientTest;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.ejb.system.status.EjbStatusFactory;
+import org.jeesl.model.xml.io.locale.status.Descriptions;
+import org.jeesl.model.xml.io.locale.status.Langs;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Descriptions;
-import net.sf.ahtutils.xml.status.Langs;
 import net.sf.exlp.util.io.LoggerInit;
 
 public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
@@ -23,7 +23,7 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
 	final static Logger logger = LoggerFactory.getLogger(TestUtilsStatusEjbFactory.class);
 	
 	private EjbStatusFactory<Lang,Description,Status> facStatus;
-	private net.sf.ahtutils.xml.status.Status status;
+	private org.jeesl.model.xml.io.locale.status.Status status;
 	
 	@BeforeEach
 	public void init()
@@ -64,8 +64,8 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
     @Test
     public void testTranslationValue() throws InstantiationException, IllegalAccessException, JeeslConstraintViolationException
     {
-    	net.sf.ahtutils.xml.status.Lang lang = status.getLangs().getLang().get(0);
-    	net.sf.ahtutils.xml.status.Description desc = status.getDescriptions().getDescription().get(0);
+    	org.jeesl.model.xml.io.locale.status.Lang lang = status.getLangs().getLang().get(0);
+    	org.jeesl.model.xml.io.locale.status.Description desc = status.getDescriptions().getDescription().get(0);
     	Status ejb = (Status)facStatus.create(status);
     	Assertions.assertEquals(lang.getTranslation(), ejb.getName().get(lang.getKey()).getLang());
     	Assertions.assertEquals(desc.getValue(), ejb.getDescription().get(lang.getKey()).getLang());
@@ -100,9 +100,9 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
     }
 
     
-    private net.sf.ahtutils.xml.status.Status createStatus()
+    private org.jeesl.model.xml.io.locale.status.Status createStatus()
     {
-    	net.sf.ahtutils.xml.status.Status status = new net.sf.ahtutils.xml.status.Status();
+    	org.jeesl.model.xml.io.locale.status.Status status = new org.jeesl.model.xml.io.locale.status.Status();
     	status.setCode("testCode");
     	status.setLangs(getLangs());
     	status.setDescriptions(getDescriptions());
@@ -112,16 +112,16 @@ public class TestUtilsStatusEjbFactory extends AbstractJeeslClientTest
     private Langs getLangs()
     {
     	Langs langs = new Langs();
-    	net.sf.ahtutils.xml.status.Lang l1 = new net.sf.ahtutils.xml.status.Lang();l1.setKey("en");l1.setTranslation("t1");langs.getLang().add(l1);
-    	net.sf.ahtutils.xml.status.Lang l2 = new net.sf.ahtutils.xml.status.Lang();l2.setKey("de");l2.setTranslation("t2");langs.getLang().add(l2);
+    	org.jeesl.model.xml.io.locale.status.Lang l1 = new org.jeesl.model.xml.io.locale.status.Lang();l1.setKey("en");l1.setTranslation("t1");langs.getLang().add(l1);
+    	org.jeesl.model.xml.io.locale.status.Lang l2 = new org.jeesl.model.xml.io.locale.status.Lang();l2.setKey("de");l2.setTranslation("t2");langs.getLang().add(l2);
     	return langs;
     }
     
     private Descriptions getDescriptions()
     {
     	Descriptions descriptions = new Descriptions();
-    	net.sf.ahtutils.xml.status.Description d1 = new net.sf.ahtutils.xml.status.Description();d1.setKey("en");d1.setValue("v1");descriptions.getDescription().add(d1);
-    	net.sf.ahtutils.xml.status.Description d2 = new net.sf.ahtutils.xml.status.Description();d2.setKey("de");d2.setValue("v2");descriptions.getDescription().add(d2);
+    	org.jeesl.model.xml.io.locale.status.Description d1 = new org.jeesl.model.xml.io.locale.status.Description();d1.setKey("en");d1.setValue("v1");descriptions.getDescription().add(d1);
+    	org.jeesl.model.xml.io.locale.status.Description d2 = new org.jeesl.model.xml.io.locale.status.Description();d2.setKey("de");d2.setValue("v2");descriptions.getDescription().add(d2);
     	return descriptions;
     }
 	

@@ -1,7 +1,6 @@
 package net.sf.ahtutils.factory.xml.status;
 
-import net.sf.ahtutils.xml.status.Family;
-
+import org.jeesl.model.xml.io.locale.status.Family;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

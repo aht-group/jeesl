@@ -2,6 +2,7 @@ package net.sf.ahtutils.doc.ofx.qa.section;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -17,7 +18,6 @@ import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaStaffTableFactory;
 import net.sf.ahtutils.xml.qa.Group;
 import net.sf.ahtutils.xml.qa.Groups;
-import net.sf.ahtutils.xml.status.Translations;
 
 public class OfxQaGroupSectionFactory extends AbstractUtilsOfxDocumentationFactory
 {

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Attribute;
 import org.jeesl.model.xml.system.revision.Diagrams;
@@ -27,8 +28,6 @@ import com.aspose.words.ImportFormatMode;
 import com.aspose.words.RowCollection;
 import com.aspose.words.Table;
 import com.aspose.words.Underline;
-
-import net.sf.ahtutils.xml.status.Status;
 
 public final class EntityWordRenderer extends AbstractEntityWordRenderer
 {

@@ -1,10 +1,10 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import org.jeesl.model.xml.io.locale.status.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.report.Size;
-import net.sf.ahtutils.xml.status.Type;
 
 public class XmlSizeFactory
 {

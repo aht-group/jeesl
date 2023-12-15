@@ -14,13 +14,13 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.property.JeeslProperty;
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.rest.AbstractUtilsRest;
 import net.sf.ahtutils.xml.aht.Container;
-import net.sf.ahtutils.xml.status.Status;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 import net.sf.ahtutils.xml.utils.Property;
 import net.sf.ahtutils.xml.utils.Utils;

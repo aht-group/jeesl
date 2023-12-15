@@ -2,13 +2,13 @@ package org.jeesl.doc.latex.builder;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.UtilsDocumentation;
-import net.sf.ahtutils.xml.status.Translations;
 
 public class JeeslLatexAdminDocumentationBuilder extends AbstractLatexDocumentationBuilder
 {	

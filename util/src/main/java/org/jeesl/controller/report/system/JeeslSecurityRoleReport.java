@@ -24,14 +24,13 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.model.xml.system.security.Roles;
 import org.jeesl.model.xml.system.security.Security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Descriptions;
 
 public class JeeslSecurityRoleReport <L extends JeeslLang, D extends JeeslDescription,
 								C extends JeeslSecurityCategory<L,D>,

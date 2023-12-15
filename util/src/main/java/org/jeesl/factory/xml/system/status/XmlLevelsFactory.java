@@ -1,10 +1,9 @@
 package org.jeesl.factory.xml.system.status;
 
+import org.jeesl.model.xml.io.locale.status.Level;
+import org.jeesl.model.xml.io.locale.status.Levels;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Level;
-import net.sf.ahtutils.xml.status.Levels;
 
 public class XmlLevelsFactory
 {

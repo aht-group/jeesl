@@ -17,11 +17,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Langs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Langs;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class EjbLangFactory<L extends JeeslLang> implements Serializable

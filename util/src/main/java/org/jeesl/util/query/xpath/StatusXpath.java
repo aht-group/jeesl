@@ -3,20 +3,20 @@ package org.jeesl.util.query.xpath;
 import java.util.List;
 
 import net.sf.ahtutils.xml.aht.Aht;
-import net.sf.ahtutils.xml.status.Description;
-import net.sf.ahtutils.xml.status.Descriptions;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Langs;
-import net.sf.ahtutils.xml.status.Status;
-import net.sf.ahtutils.xml.status.Translation;
-import net.sf.ahtutils.xml.status.Translations;
-import net.sf.ahtutils.xml.status.Type;
-import net.sf.ahtutils.xml.status.Types;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.apache.commons.jxpath.JXPathContext;
+import org.jeesl.model.xml.io.locale.status.Description;
+import org.jeesl.model.xml.io.locale.status.Descriptions;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.io.locale.status.Status;
+import org.jeesl.model.xml.io.locale.status.Translation;
+import org.jeesl.model.xml.io.locale.status.Translations;
+import org.jeesl.model.xml.io.locale.status.Type;
+import org.jeesl.model.xml.io.locale.status.Types;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -10,9 +10,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import net.sf.ahtutils.xml.status.Descriptions;
-import net.sf.ahtutils.xml.status.Langs;
-import net.sf.ahtutils.xml.status.Type;
+
+import org.jeesl.model.xml.io.locale.status.Descriptions;
+import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.io.locale.status.Type;
 
 
 /**

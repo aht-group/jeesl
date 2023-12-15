@@ -1,9 +1,8 @@
 package net.sf.ahtutils.controller.constraints;
 
 
-import net.sf.ahtutils.xml.status.Status;
-
 import org.jeesl.controller.processor.system.constraint.ConstraintsChecker;
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;

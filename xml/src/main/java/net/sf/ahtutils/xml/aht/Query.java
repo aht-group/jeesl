@@ -10,14 +10,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import net.sf.ahtutils.xml.qa.Test;
 import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.status.Langs;
-import net.sf.ahtutils.xml.status.Model;
-import net.sf.ahtutils.xml.status.Status;
-import net.sf.ahtutils.xml.status.Type;
 import net.sf.ahtutils.xml.utils.TrafficLight;
 import net.sf.ahtutils.xml.utils.TrafficLights;
 
 import org.jeesl.model.xml.io.graphic.Graphic;
+import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.io.locale.status.Model;
+import org.jeesl.model.xml.io.locale.status.Status;
+import org.jeesl.model.xml.io.locale.status.Type;
 import org.jeesl.model.xml.module.survey.Answer;
 import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.module.survey.Surveys;

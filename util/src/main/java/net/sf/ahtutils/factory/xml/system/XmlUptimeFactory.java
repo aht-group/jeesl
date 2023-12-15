@@ -2,11 +2,11 @@ package net.sf.ahtutils.factory.xml.system;
 
 import java.util.Date;
 
-import net.sf.ahtutils.xml.status.Type;
 import net.sf.ahtutils.xml.system.Uptime;
 import net.sf.exlp.util.DateUtil;
 
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
+import org.jeesl.model.xml.io.locale.status.Type;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

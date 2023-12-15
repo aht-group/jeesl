@@ -2,11 +2,10 @@ package org.jeesl.factory.xml.system.status;
 
 import java.util.List;
 
+import org.jeesl.model.xml.io.locale.status.Contexts;
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Contexts;
-import net.sf.ahtutils.xml.status.Status;
 
 public class XmlContextsFactory
 {

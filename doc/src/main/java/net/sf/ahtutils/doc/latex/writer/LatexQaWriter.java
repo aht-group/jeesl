@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.system.security.Staff;
@@ -36,7 +37,6 @@ import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory.Code;
 import net.sf.ahtutils.xml.aht.Aht;
 import net.sf.ahtutils.xml.qa.Category;
 import net.sf.ahtutils.xml.qa.Qa;
-import net.sf.ahtutils.xml.status.Translations;
 
 public class LatexQaWriter
 {	

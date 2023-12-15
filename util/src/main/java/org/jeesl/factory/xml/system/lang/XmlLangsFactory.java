@@ -5,10 +5,9 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.Objects;
 
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Langs;
-
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.util.comparator.xml.status.LangComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

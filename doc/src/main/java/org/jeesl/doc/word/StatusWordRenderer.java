@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Attribute;
 import org.jeesl.model.xml.system.revision.Entity;
@@ -16,8 +17,6 @@ import com.aspose.words.ImportFormatMode;
 import com.aspose.words.Row;
 import com.aspose.words.RowCollection;
 import com.aspose.words.Table;
-
-import net.sf.ahtutils.xml.status.Status;
 
 public class StatusWordRenderer extends AbstractEntityWordRenderer
 {

@@ -1,6 +1,6 @@
 package net.sf.ahtutils.factory.xml.status;
 
-import net.sf.ahtutils.xml.status.Types;
+import org.jeesl.model.xml.io.locale.status.Types;
 
 public class XmlTypesFactory
 {

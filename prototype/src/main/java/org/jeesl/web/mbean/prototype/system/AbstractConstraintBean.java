@@ -22,14 +22,14 @@ import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.xml.io.locale.status.Description;
+import org.jeesl.model.xml.io.locale.status.Lang;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.factory.xml.system.XmlConstraintFactory;
 import net.sf.ahtutils.factory.xml.system.XmlConstraintScopeFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-import net.sf.ahtutils.xml.status.Description;
-import net.sf.ahtutils.xml.status.Lang;
 import net.sf.ahtutils.xml.system.Constraint;
 import net.sf.ahtutils.xml.system.ConstraintScope;
 import net.sf.ahtutils.xml.system.ConstraintSolution;

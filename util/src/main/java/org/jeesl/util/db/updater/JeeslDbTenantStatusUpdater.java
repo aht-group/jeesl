@@ -17,12 +17,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Status;
 
 public class JeeslDbTenantStatusUpdater <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,G>,
 										R extends JeeslTenantRealm<L,D,R,G>, RREF extends EjbWithId,

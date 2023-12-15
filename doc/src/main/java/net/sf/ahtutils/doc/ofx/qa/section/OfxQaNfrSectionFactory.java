@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.module.survey.Answer;
 import org.jeesl.model.xml.module.survey.Question;
@@ -30,7 +31,6 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaNfrQuestionTableFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaNfrResultTableFactory;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxQaNfrSectionFactory extends AbstractUtilsOfxDocumentationFactory

@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import org.jeesl.model.xml.io.cms.text.Remark;
+import org.jeesl.model.xml.io.locale.status.Unit;
 
 import net.sf.ahtutils.xml.finance.Figures;
-import net.sf.ahtutils.xml.status.Unit;
 
 
 /**

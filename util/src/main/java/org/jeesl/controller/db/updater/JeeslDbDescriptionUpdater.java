@@ -11,11 +11,10 @@ import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
+import org.jeesl.model.xml.io.locale.status.Description;
+import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Description;
-import net.sf.ahtutils.xml.status.Descriptions;
 
 public class JeeslDbDescriptionUpdater<C extends EjbWithDescription<D>, D extends JeeslDescription>
 {

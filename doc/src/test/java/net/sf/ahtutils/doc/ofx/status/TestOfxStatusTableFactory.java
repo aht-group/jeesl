@@ -10,6 +10,10 @@ import org.apache.commons.configuration.DefaultConfigurationBuilder;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangFactory;
+import org.jeesl.model.xml.io.locale.status.Descriptions;
+import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.io.locale.status.Status;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,10 +27,6 @@ import net.sf.ahtutils.controller.factory.ofx.lang.AbstractOfxStatusFactoryTest;
 import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
 import net.sf.ahtutils.xml.aht.Aht;
-import net.sf.ahtutils.xml.status.Descriptions;
-import net.sf.ahtutils.xml.status.Langs;
-import net.sf.ahtutils.xml.status.Status;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestOfxStatusTableFactory extends AbstractOfxStatusFactoryTest

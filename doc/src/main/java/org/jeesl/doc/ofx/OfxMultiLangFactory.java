@@ -6,6 +6,12 @@ import java.util.List;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.xml.io.locale.status.Description;
+import org.jeesl.model.xml.io.locale.status.Descriptions;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.io.locale.status.Status;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.layout.Font;
@@ -23,12 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.aht.Aht;
-import net.sf.ahtutils.xml.status.Description;
-import net.sf.ahtutils.xml.status.Descriptions;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Langs;
-import net.sf.ahtutils.xml.status.Status;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

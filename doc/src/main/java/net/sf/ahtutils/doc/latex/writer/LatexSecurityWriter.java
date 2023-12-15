@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.api.rest.rs.system.security.JeeslSecurityRestExport;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.navigation.Menu;
 import org.jeesl.model.xml.system.security.Security;
 import org.jeesl.model.xml.system.security.View;
@@ -28,7 +29,6 @@ import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityPagesSectionFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityRolesSectionFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityUsecasesSectionFactory;
 import net.sf.ahtutils.doc.ofx.security.section.OfxSecurityViewsSectionFactory;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.io.StringIO;
 import net.sf.exlp.util.xml.JaxbUtil;
 

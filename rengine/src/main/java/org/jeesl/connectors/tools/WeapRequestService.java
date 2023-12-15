@@ -9,9 +9,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import net.sf.ahtutils.xml.status.Status;
+
 import org.jeesl.connectors.weap.WeapConnector;
 import org.jeesl.connectors.weap.WeapResultValueRequest;
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.jeesl.Container;
 
 @Path("/rest")

@@ -10,10 +10,9 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.model.xml.io.graphic.Symbol;
+import org.jeesl.model.xml.io.locale.status.Styles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Styles;
 
 public class XmlSymbolFactory <L extends JeeslLang, D extends JeeslDescription,
 								G extends JeeslGraphic<GT,?,GS>, GT extends JeeslGraphicType<L,D,GT,G>,

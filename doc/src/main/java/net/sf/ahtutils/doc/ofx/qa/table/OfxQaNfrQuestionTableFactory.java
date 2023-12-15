@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.module.survey.Question;
 import org.jeesl.util.query.xpath.StatusXpath;
@@ -25,8 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

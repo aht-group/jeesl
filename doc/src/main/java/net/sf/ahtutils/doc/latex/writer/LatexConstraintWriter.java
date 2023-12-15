@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.constraints.OfxConstraintScopeSectionFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
@@ -15,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.UtilsDocumentation;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.ahtutils.xml.system.ConstraintScope;
 import net.sf.ahtutils.xml.system.Constraints;
 import net.sf.exlp.util.xml.JaxbUtil;

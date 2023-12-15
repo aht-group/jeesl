@@ -1,10 +1,9 @@
 package org.jeesl.model.xml.system.status;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.locale.status.Freeze;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Freeze;
 
 public class TestXmlFreeze extends AbstractXmlStatusTest<Freeze>
 {

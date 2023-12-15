@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.content.ofx.Comment;
 import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
@@ -23,7 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.DocumentationCommentBuilder;
 import net.sf.ahtutils.doc.latex.writer.AbstractDocumentationLatexWriter;
-import net.sf.ahtutils.xml.status.Translations;
 
 public class AbstractLatexDocumentationBuilder extends AbstractDocumentationLatexWriter
 {	

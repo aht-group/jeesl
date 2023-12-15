@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Diagram;
 import org.jeesl.model.xml.system.revision.Diagrams;
@@ -14,8 +15,6 @@ import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.Shape;
 import com.aspose.words.WrapType;
-
-import net.sf.ahtutils.xml.status.Status;
 
 public abstract class AbstractEntityWordRenderer
 {

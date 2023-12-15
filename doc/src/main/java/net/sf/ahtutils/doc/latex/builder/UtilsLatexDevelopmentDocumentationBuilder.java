@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.latex.builder.AbstractLatexDocumentationBuilder;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.openfuxml.content.media.Image;
 import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.content.ofx.Section;
@@ -15,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.UtilsDocumentation;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

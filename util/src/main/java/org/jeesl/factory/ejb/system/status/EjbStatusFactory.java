@@ -15,14 +15,14 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.io.locale.status.Description;
+import org.jeesl.model.xml.io.locale.status.Descriptions;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.io.locale.status.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Description;
-import net.sf.ahtutils.xml.status.Descriptions;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Langs;
-import net.sf.ahtutils.xml.status.Status;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class EjbStatusFactory<L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>>

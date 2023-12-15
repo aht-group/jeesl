@@ -1,10 +1,9 @@
 package org.jeesl.factory.xml.system.status;
 
+import org.jeesl.model.xml.io.locale.status.Result;
+import org.jeesl.model.xml.io.locale.status.Results;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Result;
-import net.sf.ahtutils.xml.status.Results;
 
 public class XmlResultsFactory
 {

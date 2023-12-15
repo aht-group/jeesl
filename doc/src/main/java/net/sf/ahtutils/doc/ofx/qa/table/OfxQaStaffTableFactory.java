@@ -8,6 +8,7 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.security.Staff;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.ofx.Comment;
@@ -33,7 +34,6 @@ import net.sf.ahtutils.doc.DocumentationCommentBuilder;
 import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.xml.qa.Group;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

@@ -3,25 +3,26 @@ package org.jeesl.util.query.xml;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.jeesl.model.xml.io.locale.status.Category;
+import org.jeesl.model.xml.io.locale.status.Condition;
+import org.jeesl.model.xml.io.locale.status.Description;
+import org.jeesl.model.xml.io.locale.status.Descriptions;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.io.locale.status.Level;
+import org.jeesl.model.xml.io.locale.status.Model;
+import org.jeesl.model.xml.io.locale.status.Parent;
+import org.jeesl.model.xml.io.locale.status.Reason;
+import org.jeesl.model.xml.io.locale.status.Result;
+import org.jeesl.model.xml.io.locale.status.Scope;
+import org.jeesl.model.xml.io.locale.status.Scopes;
+import org.jeesl.model.xml.io.locale.status.Source;
+import org.jeesl.model.xml.io.locale.status.Status;
+import org.jeesl.model.xml.io.locale.status.SubType;
+import org.jeesl.model.xml.io.locale.status.Type;
+import org.jeesl.model.xml.io.locale.status.Verification;
+
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.ahtutils.xml.status.Category;
-import net.sf.ahtutils.xml.status.Condition;
-import net.sf.ahtutils.xml.status.Description;
-import net.sf.ahtutils.xml.status.Descriptions;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Langs;
-import net.sf.ahtutils.xml.status.Level;
-import net.sf.ahtutils.xml.status.Model;
-import net.sf.ahtutils.xml.status.Parent;
-import net.sf.ahtutils.xml.status.Reason;
-import net.sf.ahtutils.xml.status.Result;
-import net.sf.ahtutils.xml.status.Scope;
-import net.sf.ahtutils.xml.status.Scopes;
-import net.sf.ahtutils.xml.status.Source;
-import net.sf.ahtutils.xml.status.Status;
-import net.sf.ahtutils.xml.status.SubType;
-import net.sf.ahtutils.xml.status.Type;
-import net.sf.ahtutils.xml.status.Verification;
 
 public class XmlStatusQuery
 {

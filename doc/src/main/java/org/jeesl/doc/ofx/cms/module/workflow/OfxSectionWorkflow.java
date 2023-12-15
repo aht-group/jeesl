@@ -9,6 +9,8 @@ import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
+import org.jeesl.model.xml.io.locale.status.Context;
+import org.jeesl.model.xml.io.locale.status.Contexts;
 import org.jeesl.model.xml.module.workflow.Processes;
 import org.jeesl.model.xml.module.workflow.Workflow;
 import org.metachart.factory.xml.graph.XmlClusterFactory;
@@ -29,8 +31,6 @@ import org.openfuxml.interfaces.configuration.OfxTranslationProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Context;
-import net.sf.ahtutils.xml.status.Contexts;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxSectionWorkflow <L extends JeeslLang, LOC extends JeeslLocale<L,?,LOC,?>,

@@ -13,6 +13,7 @@ import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.security.XmlCategoryFactory;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.security.Category;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.security.list.OfxSecurityCategoryListFactory;
 import net.sf.ahtutils.test.AhtUtilsDocBootstrap;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestOfxCategoryListFactory extends AbstractOfxSecurityFactoryTest

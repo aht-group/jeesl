@@ -12,8 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.jeesl.model.xml.io.cms.text.Markup;
-
-import net.sf.ahtutils.xml.status.Type;
+import org.jeesl.model.xml.io.locale.status.Type;
 
 
 /**

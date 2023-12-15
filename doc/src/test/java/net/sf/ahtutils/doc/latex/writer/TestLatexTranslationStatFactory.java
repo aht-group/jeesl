@@ -6,6 +6,7 @@ import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.Namespace;
+import org.jeesl.model.xml.io.locale.status.Langs;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -15,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.model.pojo.status.TranslationStatistic;
 import net.sf.ahtutils.test.AbstractUtilsDocTest;
-import net.sf.ahtutils.xml.status.Langs;
 
 public class TestLatexTranslationStatFactory extends AbstractUtilsDocTest
 {

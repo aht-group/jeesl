@@ -4,8 +4,6 @@ import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusImageFactory;
 import net.sf.ahtutils.xml.qa.Result;
 import net.sf.ahtutils.xml.qa.Test;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -14,6 +12,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Columns;

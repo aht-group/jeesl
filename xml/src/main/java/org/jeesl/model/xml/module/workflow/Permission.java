@@ -8,8 +8,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import net.sf.ahtutils.xml.status.Level;
-import net.sf.ahtutils.xml.status.Type;
+
+import org.jeesl.model.xml.io.locale.status.Level;
+import org.jeesl.model.xml.io.locale.status.Type;
 import org.jeesl.model.xml.system.security.Role;
 
 

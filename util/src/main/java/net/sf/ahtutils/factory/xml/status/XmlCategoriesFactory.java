@@ -1,9 +1,8 @@
 package net.sf.ahtutils.factory.xml.status;
 
+import org.jeesl.model.xml.io.locale.status.Categories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Categories;
 
 public class XmlCategoriesFactory
 {

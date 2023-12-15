@@ -15,12 +15,11 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.model.xml.io.graphic.Size;
 import org.jeesl.model.xml.io.graphic.Symbol;
+import org.jeesl.model.xml.io.locale.status.Style;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.svg.SVGDocument;
-
-import net.sf.ahtutils.xml.status.Style;
 
 public class SvgSymbolFactory<G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
 								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>

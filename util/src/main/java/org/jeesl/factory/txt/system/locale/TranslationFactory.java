@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Translation;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.xml.JaxbUtil;
 
@@ -21,6 +18,9 @@ import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.FilenameUtils;
 import org.exlp.model.xml.io.Dir;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Translation;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -6,11 +6,11 @@ import java.io.StringWriter;
 import java.util.List;
 
 import net.sf.ahtutils.model.pojo.status.TranslationStatistic;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.io.StringIO;
 
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.table.Body;
 import org.openfuxml.content.table.Columns;

@@ -5,6 +5,9 @@ import java.io.StringWriter;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
+import org.jeesl.model.xml.io.locale.status.Description;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.list.Item;
@@ -22,9 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.status.Description;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

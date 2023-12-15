@@ -1,6 +1,8 @@
 package org.jeesl.util.query.xpath.status;
 
 import org.jeesl.AbstractJeeslUtilTest;
+import org.jeesl.model.xml.io.locale.status.Type;
+import org.jeesl.model.xml.io.locale.status.Types;
 import org.jeesl.model.xml.system.status.TestXmlType;
 import org.jeesl.model.xml.system.status.TestXmlTypes;
 import org.jeesl.util.query.xpath.StatusXpath;
@@ -10,8 +12,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.status.Type;
-import net.sf.ahtutils.xml.status.Types;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

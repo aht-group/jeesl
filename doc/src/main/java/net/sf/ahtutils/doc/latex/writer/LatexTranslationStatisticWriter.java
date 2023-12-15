@@ -10,9 +10,6 @@ import java.util.Set;
 
 import net.sf.ahtutils.doc.ofx.status.OfxLangStatisticTableFactory;
 import net.sf.ahtutils.model.pojo.status.TranslationStatistic;
-import net.sf.ahtutils.xml.status.Lang;
-import net.sf.ahtutils.xml.status.Langs;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.exception.ExlpConfigurationException;
 import net.sf.exlp.util.io.RelativePathFactory;
 import net.sf.exlp.util.io.RelativePathFactory.PathSeparator;
@@ -28,6 +25,9 @@ import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

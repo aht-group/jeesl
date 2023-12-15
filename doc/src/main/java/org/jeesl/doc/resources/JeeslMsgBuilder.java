@@ -11,12 +11,12 @@ import org.jdom2.Comment;
 import org.jdom2.Document;
 import org.jdom2.output.Format;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.locale.status.Translation;
+import org.jeesl.model.xml.io.locale.status.Translations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.UtilsDocumentation;
-import net.sf.ahtutils.xml.status.Translation;
-import net.sf.ahtutils.xml.status.Translations;
 import net.sf.exlp.util.io.FileIO;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.xml.JDomUtil;

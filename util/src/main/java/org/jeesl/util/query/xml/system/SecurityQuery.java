@@ -12,6 +12,7 @@ import org.jeesl.factory.xml.system.security.XmlUsecaseFactory;
 import org.jeesl.factory.xml.system.security.XmlUsecasesFactory;
 import org.jeesl.factory.xml.system.security.XmlViewFactory;
 import org.jeesl.factory.xml.system.security.XmlViewsFactory;
+import org.jeesl.model.xml.io.locale.status.Domain;
 import org.jeesl.model.xml.jeesl.QuerySecurity;
 import org.jeesl.model.xml.system.navigation.Navigation;
 import org.jeesl.model.xml.system.security.Category;
@@ -24,7 +25,6 @@ import org.jeesl.model.xml.system.security.View;
 import org.jeesl.util.query.xml.XmlStatusQuery;
 
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.ahtutils.xml.status.Domain;
 
 public class SecurityQuery
 {

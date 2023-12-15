@@ -152,7 +152,7 @@ public class WordResponsibilityMatrixFactory
 				for (Staff staff : staffs.getStaff()) {
 
 					Role role = staff.getRole();
-					net.sf.ahtutils.xml.status.Status status = staff
+					org.jeesl.model.xml.io.locale.status.Status status = staff
 							.getStatus();
 					createRows.put(roleIndex.get(role.getLabel()),
 							status.getCode());

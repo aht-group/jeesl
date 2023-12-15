@@ -6,12 +6,11 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
+import org.jeesl.model.xml.io.locale.status.Description;
+import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.util.comparator.xml.status.DescriptionComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.status.Description;
-import net.sf.ahtutils.xml.status.Descriptions;
 
 public class XmlDescriptionsFactory<D extends JeeslDescription>
 {

@@ -15,20 +15,20 @@ public class XmlProcessFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlProcessFactory.class);
 		
-	private net.sf.ahtutils.xml.status.Process q;
+	private org.jeesl.model.xml.io.locale.status.Process q;
 	private String localeCode;
 	
-	public XmlProcessFactory(net.sf.ahtutils.xml.status.Process q){this(null,q);}
-	public XmlProcessFactory(String localeCode, net.sf.ahtutils.xml.status.Process q)
+	public XmlProcessFactory(org.jeesl.model.xml.io.locale.status.Process q){this(null,q);}
+	public XmlProcessFactory(String localeCode, org.jeesl.model.xml.io.locale.status.Process q)
 	{
 		this.localeCode=localeCode;
 		this.q=q;
 	}
 	
-	public <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription> net.sf.ahtutils.xml.status.Process build(S ejb){return build(ejb,null);}
-	public <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription> net.sf.ahtutils.xml.status.Process build(S ejb, String group)
+	public <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription> org.jeesl.model.xml.io.locale.status.Process build(S ejb){return build(ejb,null);}
+	public <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription> org.jeesl.model.xml.io.locale.status.Process build(S ejb, String group)
 	{
-		net.sf.ahtutils.xml.status.Process xml = new net.sf.ahtutils.xml.status.Process();
+		org.jeesl.model.xml.io.locale.status.Process xml = new org.jeesl.model.xml.io.locale.status.Process();
 		xml.setGroup(group);
 		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
@@ -71,9 +71,9 @@ public class XmlProcessFactory
 		return xml;
 	}
 	
-	public static net.sf.ahtutils.xml.status.Process build(String code)
+	public static org.jeesl.model.xml.io.locale.status.Process build(String code)
 	{
-		net.sf.ahtutils.xml.status.Process xml = new net.sf.ahtutils.xml.status.Process();
+		org.jeesl.model.xml.io.locale.status.Process xml = new org.jeesl.model.xml.io.locale.status.Process();
 		xml.setCode(code);
 		return xml;
 	}

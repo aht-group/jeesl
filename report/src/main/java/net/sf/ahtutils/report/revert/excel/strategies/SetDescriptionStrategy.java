@@ -2,10 +2,9 @@ package net.sf.ahtutils.report.revert.excel.strategies;
 
 import java.util.Hashtable;
 
-import net.sf.ahtutils.xml.status.Description;
-
 import org.jeesl.api.controller.ImportStrategy;
 import org.jeesl.interfaces.facade.JeeslFacade;
+import org.jeesl.model.xml.io.locale.status.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
