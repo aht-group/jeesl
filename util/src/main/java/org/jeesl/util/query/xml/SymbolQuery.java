@@ -12,10 +12,10 @@ import org.jeesl.factory.xml.system.symbol.XmlColorFactory;
 import org.jeesl.factory.xml.system.symbol.XmlColorsFactory;
 import org.jeesl.factory.xml.system.symbol.XmlSizeFactory;
 import org.jeesl.factory.xml.system.symbol.XmlSizesFactory;
+import org.jeesl.model.xml.io.graphic.Graphic;
+import org.jeesl.model.xml.io.graphic.Symbol;
 
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.ahtutils.xml.symbol.Graphic;
-import net.sf.ahtutils.xml.symbol.Symbol;
 
 public class SymbolQuery
 {

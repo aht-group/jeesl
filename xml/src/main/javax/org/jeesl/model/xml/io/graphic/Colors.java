@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.symbol;
+package org.jeesl.model.xml.io.graphic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.jeesl.org/symbol}figure" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.jeesl.org/symbol}color" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,44 +32,44 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "figure"
+    "color"
 })
-@XmlRootElement(name = "figures")
-public class Figures
+@XmlRootElement(name = "colors")
+public class Colors
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Figure> figure;
+    protected List<Color> color;
 
     /**
-     * Gets the value of the figure property.
+     * Gets the value of the color property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the figure property.
+     * This is why there is not a <CODE>set</CODE> method for the color property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFigure().add(newItem);
+     *    getColor().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Figure }
+     * {@link Color }
      * 
      * 
      */
-    public List<Figure> getFigure() {
-        if (figure == null) {
-            figure = new ArrayList<Figure>();
+    public List<Color> getColor() {
+        if (color == null) {
+            color = new ArrayList<Color>();
         }
-        return this.figure;
+        return this.color;
     }
 
 }

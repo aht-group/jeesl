@@ -29,7 +29,7 @@
     </jxb:bindings>
     <jxb:bindings schemaLocation="jeesl/symbol.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="net.sf.ahtutils.xml.symbol"/>
+            <jxb:package name="org.jeesl.model.xml.io.graphic"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 

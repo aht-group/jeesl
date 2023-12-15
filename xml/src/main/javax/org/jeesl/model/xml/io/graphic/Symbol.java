@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.symbol;
+package org.jeesl.model.xml.io.graphic;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

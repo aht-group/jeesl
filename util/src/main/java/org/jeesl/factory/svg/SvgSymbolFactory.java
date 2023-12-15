@@ -13,14 +13,14 @@ import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
+import org.jeesl.model.xml.io.graphic.Size;
+import org.jeesl.model.xml.io.graphic.Symbol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.svg.SVGDocument;
 
 import net.sf.ahtutils.xml.status.Style;
-import net.sf.ahtutils.xml.symbol.Size;
-import net.sf.ahtutils.xml.symbol.Symbol;
 
 public class SvgSymbolFactory<G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<?,?,GT,G>,
 								GC extends JeeslGraphicComponent<G,GC,GS>, GS extends JeeslGraphicShape<?,?,GS,G>>
@@ -112,7 +112,7 @@ public class SvgSymbolFactory<G extends JeeslGraphic<GT,GC,GS>, GT extends Jeesl
 		String color = "000000";
 		if(Objects.nonNull(rule.getColors()) && Objects.nonNull(rule.getColors().getColor()))
 		{
-			for(net.sf.ahtutils.xml.symbol.Color c : rule.getColors().getColor())
+			for(org.jeesl.model.xml.io.graphic.Color c : rule.getColors().getColor())
 			{
 				if(c.getGroup().equals(JeeslGraphicShape.Color.outer.toString()))
 				{

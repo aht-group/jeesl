@@ -25,11 +25,11 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.io.graphic.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.report.Style;
-import net.sf.ahtutils.xml.symbol.Color;
 
 public class EjbIoReportStyleFactory<L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,

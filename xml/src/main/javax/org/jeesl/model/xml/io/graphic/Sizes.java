@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.symbol;
+package org.jeesl.model.xml.io.graphic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.jeesl.org/symbol}color" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.jeesl.org/symbol}size" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,44 +32,44 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "color"
+    "size"
 })
-@XmlRootElement(name = "colors")
-public class Colors
+@XmlRootElement(name = "sizes")
+public class Sizes
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Color> color;
+    protected List<Size> size;
 
     /**
-     * Gets the value of the color property.
+     * Gets the value of the size property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the color property.
+     * This is why there is not a <CODE>set</CODE> method for the size property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getColor().add(newItem);
+     *    getSize().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Color }
+     * {@link Size }
      * 
      * 
      */
-    public List<Color> getColor() {
-        if (color == null) {
-            color = new ArrayList<Color>();
+    public List<Size> getSize() {
+        if (size == null) {
+            size = new ArrayList<Size>();
         }
-        return this.color;
+        return this.size;
     }
 
 }

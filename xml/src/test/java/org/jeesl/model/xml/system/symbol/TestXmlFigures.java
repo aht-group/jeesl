@@ -1,10 +1,9 @@
 package org.jeesl.model.xml.system.symbol;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.graphic.Figures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.symbol.Figures;
 
 public class TestXmlFigures extends AbstractXmlSymbolTest<Figures>
 {

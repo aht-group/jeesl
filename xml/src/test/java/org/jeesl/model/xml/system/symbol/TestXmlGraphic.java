@@ -2,11 +2,10 @@ package org.jeesl.model.xml.system.symbol;
 
 import org.exlp.model.xml.io.File;
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.graphic.Graphic;
 import org.jeesl.model.xml.system.status.TestXmlType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.symbol.Graphic;
 
 public class TestXmlGraphic extends AbstractXmlSymbolTest<Graphic>
 {

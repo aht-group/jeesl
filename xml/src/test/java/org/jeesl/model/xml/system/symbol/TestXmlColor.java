@@ -1,10 +1,9 @@
 package org.jeesl.model.xml.system.symbol;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.graphic.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.symbol.Color;
 
 public class TestXmlColor extends AbstractXmlSymbolTest<Color>
 {

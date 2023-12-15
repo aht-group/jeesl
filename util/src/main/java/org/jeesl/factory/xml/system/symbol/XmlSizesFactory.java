@@ -4,11 +4,10 @@ import java.util.Objects;
 
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
+import org.jeesl.model.xml.io.graphic.Size;
+import org.jeesl.model.xml.io.graphic.Sizes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.symbol.Size;
-import net.sf.ahtutils.xml.symbol.Sizes;
 
 public class XmlSizesFactory <G extends JeeslGraphic<?,?,?>>
 {

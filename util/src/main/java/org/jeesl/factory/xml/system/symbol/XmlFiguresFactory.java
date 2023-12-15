@@ -2,11 +2,10 @@ package org.jeesl.factory.xml.system.symbol;
 
 import java.util.List;
 
+import org.jeesl.model.xml.io.graphic.Figure;
+import org.jeesl.model.xml.io.graphic.Figures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.symbol.Figure;
-import net.sf.ahtutils.xml.symbol.Figures;
 
 public class XmlFiguresFactory 
 {

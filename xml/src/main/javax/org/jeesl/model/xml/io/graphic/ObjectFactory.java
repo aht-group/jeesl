@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.symbol;
+package org.jeesl.model.xml.io.graphic;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

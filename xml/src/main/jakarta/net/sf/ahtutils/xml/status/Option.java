@@ -10,7 +10,7 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
-import org.jeesl.model.xml.io.cms.symbol.Graphic;
+import net.sf.ahtutils.xml.symbol.Graphic;
 
 
 /**
