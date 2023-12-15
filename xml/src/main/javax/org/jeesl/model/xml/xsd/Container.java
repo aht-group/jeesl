@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.io.locale.status.Type;
 
@@ -50,7 +49,6 @@ public class Container
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected List<Type> type;
 
-    
     /**
      * Gets the value of the status property.
      * 
@@ -80,14 +78,6 @@ public class Container
         return this.status;
     }
 
-    public boolean isSetStatus() {
-        return ((this.status!= null)&&(!this.status.isEmpty()));
-    }
-
-    public void unsetStatus() {
-        this.status = null;
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -115,14 +105,6 @@ public class Container
             type = new ArrayList<Type>();
         }
         return this.type;
-    }
-
-    public boolean isSetType() {
-        return ((this.type!= null)&&(!this.type.isEmpty()));
-    }
-
-    public void unsetType() {
-        this.type = null;
     }
 
 }

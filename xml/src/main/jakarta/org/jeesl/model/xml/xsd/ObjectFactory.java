@@ -37,4 +37,12 @@ public class ObjectFactory {
         return new Jeesl();
     }
 
+    /**
+     * Create an instance of {@link Container }
+     * 
+     */
+    public Container createContainer() {
+        return new Container();
+    }
+
 }

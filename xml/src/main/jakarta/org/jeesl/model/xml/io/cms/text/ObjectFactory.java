@@ -30,6 +30,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Description }
+     * 
+     */
+    public Description createDescription() {
+        return new Description();
+    }
+
+    /**
      * Create an instance of {@link Markups }
      * 
      */
@@ -43,14 +51,6 @@ public class ObjectFactory {
      */
     public Markup createMarkup() {
         return new Markup();
-    }
-
-    /**
-     * Create an instance of {@link Description }
-     * 
-     */
-    public Description createDescription() {
-        return new Description();
     }
 
     /**

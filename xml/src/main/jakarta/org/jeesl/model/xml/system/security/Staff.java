@@ -8,11 +8,11 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
-import net.sf.ahtutils.xml.status.Domain;
-import net.sf.ahtutils.xml.status.Level;
-import net.sf.ahtutils.xml.status.Responsible;
-import net.sf.ahtutils.xml.status.Status;
-import net.sf.ahtutils.xml.status.Type;
+import org.jeesl.model.xml.io.locale.status.Domain;
+import org.jeesl.model.xml.io.locale.status.Level;
+import org.jeesl.model.xml.io.locale.status.Responsible;
+import org.jeesl.model.xml.io.locale.status.Status;
+import org.jeesl.model.xml.io.locale.status.Type;
 
 
 /**
