@@ -72,7 +72,7 @@ public class XmlOutcomeFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang,
 	public static Outcome id()
 	{
 		Outcome xml = new Outcome();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

@@ -98,10 +98,6 @@ public class Staff
         this.role = value;
     }
 
-    public boolean isSetRole() {
-        return (this.role!= null);
-    }
-
     /**
      * Gets the value of the user property.
      * 
@@ -124,10 +120,6 @@ public class Staff
      */
     public void setUser(User value) {
         this.user = value;
-    }
-
-    public boolean isSetUser() {
-        return (this.user!= null);
     }
 
     /**
@@ -154,10 +146,6 @@ public class Staff
         this.domain = value;
     }
 
-    public boolean isSetDomain() {
-        return (this.domain!= null);
-    }
-
     /**
      * Gets the value of the status property.
      * 
@@ -180,10 +168,6 @@ public class Staff
      */
     public void setStatus(Status value) {
         this.status = value;
-    }
-
-    public boolean isSetStatus() {
-        return (this.status!= null);
     }
 
     /**
@@ -210,10 +194,6 @@ public class Staff
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the responsible property.
      * 
@@ -236,10 +216,6 @@ public class Staff
      */
     public void setResponsible(Responsible value) {
         this.responsible = value;
-    }
-
-    public boolean isSetResponsible() {
-        return (this.responsible!= null);
     }
 
     /**
@@ -266,10 +242,6 @@ public class Staff
         this.level = value;
     }
 
-    public boolean isSetLevel() {
-        return (this.level!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -278,7 +250,7 @@ public class Staff
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -290,16 +262,8 @@ public class Staff
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
 }

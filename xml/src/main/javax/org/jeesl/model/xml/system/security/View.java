@@ -116,10 +116,6 @@ public class View
         this.descriptions = value;
     }
 
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
-    }
-
     /**
      * Gets the value of the langs property.
      * 
@@ -142,10 +138,6 @@ public class View
      */
     public void setLangs(Langs value) {
         this.langs = value;
-    }
-
-    public boolean isSetLangs() {
-        return (this.langs!= null);
     }
 
     /**
@@ -172,10 +164,6 @@ public class View
         this.access = value;
     }
 
-    public boolean isSetAccess() {
-        return (this.access!= null);
-    }
-
     /**
      * Gets the value of the navigation property.
      * 
@@ -198,10 +186,6 @@ public class View
      */
     public void setNavigation(Navigation value) {
         this.navigation = value;
-    }
-
-    public boolean isSetNavigation() {
-        return (this.navigation!= null);
     }
 
     /**
@@ -228,10 +212,6 @@ public class View
         this.actions = value;
     }
 
-    public boolean isSetActions() {
-        return (this.actions!= null);
-    }
-
     /**
      * Gets the value of the roles property.
      * 
@@ -256,10 +236,6 @@ public class View
         this.roles = value;
     }
 
-    public boolean isSetRoles() {
-        return (this.roles!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -268,7 +244,7 @@ public class View
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -280,16 +256,8 @@ public class View
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -316,10 +284,6 @@ public class View
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -344,10 +308,6 @@ public class View
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -356,7 +316,7 @@ public class View
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -368,16 +328,8 @@ public class View
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -388,7 +340,7 @@ public class View
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -400,16 +352,8 @@ public class View
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -420,7 +364,7 @@ public class View
      *     {@link Boolean }
      *     
      */
-    public boolean isDocumentation() {
+    public Boolean isDocumentation() {
         return documentation;
     }
 
@@ -432,16 +376,8 @@ public class View
      *     {@link Boolean }
      *     
      */
-    public void setDocumentation(boolean value) {
+    public void setDocumentation(Boolean value) {
         this.documentation = value;
-    }
-
-    public boolean isSetDocumentation() {
-        return (this.documentation!= null);
-    }
-
-    public void unsetDocumentation() {
-        this.documentation = null;
     }
 
     /**
@@ -452,7 +388,7 @@ public class View
      *     {@link Boolean }
      *     
      */
-    public boolean isPublic() {
+    public Boolean isPublic() {
         return _public;
     }
 
@@ -464,16 +400,8 @@ public class View
      *     {@link Boolean }
      *     
      */
-    public void setPublic(boolean value) {
+    public void setPublic(Boolean value) {
         this._public = value;
-    }
-
-    public boolean isSetPublic() {
-        return (this._public!= null);
-    }
-
-    public void unsetPublic() {
-        this._public = null;
     }
 
     /**
@@ -484,7 +412,7 @@ public class View
      *     {@link Boolean }
      *     
      */
-    public boolean isOnlyLoginRequired() {
+    public Boolean isOnlyLoginRequired() {
         return onlyLoginRequired;
     }
 
@@ -496,16 +424,8 @@ public class View
      *     {@link Boolean }
      *     
      */
-    public void setOnlyLoginRequired(boolean value) {
+    public void setOnlyLoginRequired(Boolean value) {
         this.onlyLoginRequired = value;
-    }
-
-    public boolean isSetOnlyLoginRequired() {
-        return (this.onlyLoginRequired!= null);
-    }
-
-    public void unsetOnlyLoginRequired() {
-        this.onlyLoginRequired = null;
     }
 
     /**
@@ -530,10 +450,6 @@ public class View
      */
     public void setUrlParameter(String value) {
         this.urlParameter = value;
-    }
-
-    public boolean isSetUrlParameter() {
-        return (this.urlParameter!= null);
     }
 
 }

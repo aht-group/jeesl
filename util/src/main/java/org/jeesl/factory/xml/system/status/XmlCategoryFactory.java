@@ -76,7 +76,7 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 	public static Category id()
 	{
 		Category xml = new Category();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

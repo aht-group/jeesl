@@ -75,7 +75,7 @@ public class SecurityQuery
 	public static Role role()
 	{
 		Role xml = new Role();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setLangs(XmlStatusQuery.langs());
 		xml.setDescriptions(XmlStatusQuery.descriptions());
@@ -85,7 +85,7 @@ public class SecurityQuery
 	public static Role roleLabel()
 	{
 		Role xml = new Role();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;
@@ -105,7 +105,7 @@ public class SecurityQuery
 	public static User user()
 	{
 		User xml = new User();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setFirstName("");
 		xml.setLastName("");
 		xml.setName("");
@@ -122,7 +122,7 @@ public class SecurityQuery
 		domain.setId(0);
 		
 		User user = new User();
-		user.setId(0);
+		user.setId(0l);
 		
 		Staff xml = new Staff();
 		xml.setRole(role);

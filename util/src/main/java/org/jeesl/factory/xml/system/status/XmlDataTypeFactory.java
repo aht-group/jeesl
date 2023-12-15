@@ -72,7 +72,7 @@ public class XmlDataTypeFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang
 	public static DataType id()
 	{
 		DataType xml = new DataType();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

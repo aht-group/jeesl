@@ -92,7 +92,7 @@ public class XmlTypeFactory<L extends JeeslLang, D extends JeeslDescription,S ex
 	public static Type id()
 	{
 		Type xml = new Type();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

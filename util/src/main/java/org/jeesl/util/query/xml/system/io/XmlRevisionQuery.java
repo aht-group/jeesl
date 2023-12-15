@@ -129,7 +129,7 @@ public class XmlRevisionQuery
 	private static Revision rRevision()
 	{
 		User user = XmlUserFactory.build("","","");
-		user.setId(0);
+		user.setId(0l);
 		user.setName("");
 		
 		Revision xml = XmlRevisionFactory.build();

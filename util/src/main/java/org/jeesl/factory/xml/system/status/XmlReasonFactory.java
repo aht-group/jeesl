@@ -91,7 +91,7 @@ public class XmlReasonFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, 
 	public static Reason id()
 	{
 		Reason xml = new Reason();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

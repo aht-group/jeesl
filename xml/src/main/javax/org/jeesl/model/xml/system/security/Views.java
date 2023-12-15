@@ -72,12 +72,4 @@ public class Views
         return this.view;
     }
 
-    public boolean isSetView() {
-        return ((this.view!= null)&&(!this.view.isEmpty()));
-    }
-
-    public void unsetView() {
-        this.view = null;
-    }
-
 }

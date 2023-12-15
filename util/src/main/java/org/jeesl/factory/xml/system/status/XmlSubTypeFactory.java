@@ -72,7 +72,7 @@ public class XmlSubTypeFactory<L extends JeeslLang, D extends JeeslDescription,S
 	public static SubType id()
 	{
 		SubType xml = new SubType();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

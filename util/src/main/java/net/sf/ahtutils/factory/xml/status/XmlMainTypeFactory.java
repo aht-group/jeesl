@@ -77,7 +77,7 @@ public class XmlMainTypeFactory
 	public static MainType id()
 	{
 		MainType xml = new MainType();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

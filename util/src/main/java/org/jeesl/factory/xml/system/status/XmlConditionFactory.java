@@ -73,7 +73,7 @@ public class XmlConditionFactory<L extends JeeslLang, D extends JeeslDescription
 	public static Condition id()
 	{
 		Condition xml = new Condition();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

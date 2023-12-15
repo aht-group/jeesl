@@ -76,7 +76,7 @@ public class XmlAreaFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, D 
 	public static Area id()
 	{
 		Area xml = new Area();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

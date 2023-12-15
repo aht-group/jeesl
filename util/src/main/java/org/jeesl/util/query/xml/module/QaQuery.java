@@ -78,7 +78,7 @@ public class QaQuery
 	public static Staff staff()
 	{
 		Staff xml = new Staff();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setRole(SecurityQuery.role());
 		xml.setUser(SecurityQuery.user());
 		return xml;
@@ -90,7 +90,7 @@ public class QaQuery
 		role.setCode("");
 		
 		Staff staff = new Staff();
-		staff.setId(0);
+		staff.setId(0l);
 		staff.setRole(role);
 		staff.setUser(SecurityQuery.user());
 		
