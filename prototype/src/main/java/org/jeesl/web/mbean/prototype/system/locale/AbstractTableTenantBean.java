@@ -42,7 +42,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.jsf.handler.PositionListReorderer;
-import org.jeesl.model.xml.jeesl.Container;
+import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.util.db.updater.JeeslDbTenantStatusUpdater;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
 import org.primefaces.event.FileUploadEvent;

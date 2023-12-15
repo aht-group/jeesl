@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the net.sf.ahtutils.xml.status package. 
+ * generated in the org.jeesl.model.xml.io.locale.status package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,18 +23,18 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.ahtutils.xml.status
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.io.locale.status
      * 
      */
     public ObjectFactory() {
     }
 
     /**
-     * Create an instance of {@link Type }
+     * Create an instance of {@link Status }
      * 
      */
-    public Type createType() {
-        return new Type();
+    public Status createStatus() {
+        return new Status();
     }
 
     /**
@@ -86,14 +86,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Status }
-     * 
-     */
-    public Status createStatus() {
-        return new Status();
-    }
-
-    /**
      * Create an instance of {@link Tracked }
      * 
      */
@@ -107,6 +99,22 @@ public class ObjectFactory {
      */
     public Domain createDomain() {
         return new Domain();
+    }
+
+    /**
+     * Create an instance of {@link Type }
+     * 
+     */
+    public Type createType() {
+        return new Type();
+    }
+
+    /**
+     * Create an instance of {@link SubType }
+     * 
+     */
+    public SubType createSubType() {
+        return new SubType();
     }
 
     /**
@@ -139,14 +147,6 @@ public class ObjectFactory {
      */
     public Declaration createDeclaration() {
         return new Declaration();
-    }
-
-    /**
-     * Create an instance of {@link SubType }
-     * 
-     */
-    public SubType createSubType() {
-        return new SubType();
     }
 
     /**

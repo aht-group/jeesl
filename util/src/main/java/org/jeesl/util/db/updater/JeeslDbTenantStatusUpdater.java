@@ -18,7 +18,7 @@ import org.jeesl.interfaces.model.system.tenant.JeeslMcsStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.io.locale.status.Status;
-import org.jeesl.model.xml.jeesl.Container;
+import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

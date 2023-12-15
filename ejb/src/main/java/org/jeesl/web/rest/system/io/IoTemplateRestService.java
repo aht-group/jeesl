@@ -11,8 +11,8 @@ import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.io.template.Templates;
+import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,7 +83,7 @@ public class IoTemplateRestService <L extends JeeslLang,D extends JeeslDescripti
 	@Override public Container exportSystemIoTemplateScopes() {return xfContainer.build(fTemplate.allOrderedPosition(cScope));}
 	
 	
-	@Override public DataUpdate importSystemIoTemplateCategories(org.jeesl.model.xml.jeesl.Container categories){return importStatus(cCategory,categories,null);}
-	@Override public DataUpdate importSystemIoTemplateTypes(org.jeesl.model.xml.jeesl.Container types){return importStatus(cType,types,null);}
+	@Override public DataUpdate importSystemIoTemplateCategories(org.jeesl.model.xml.xsd.Container categories){return importStatus(cCategory,categories,null);}
+	@Override public DataUpdate importSystemIoTemplateTypes(org.jeesl.model.xml.xsd.Container types){return importStatus(cType,types,null);}
 	@Override public DataUpdate importSystemIoTemplateScopes(Container scopes){return importStatus(cScope,scopes,cCategory);}
 }

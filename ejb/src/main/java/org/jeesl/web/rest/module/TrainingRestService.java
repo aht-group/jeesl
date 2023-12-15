@@ -6,7 +6,7 @@ import org.jeesl.api.rest.rs.module.training.JeeslTrainingRestImport;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.xml.jeesl.Container;
+import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

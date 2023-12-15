@@ -42,7 +42,7 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.xml.jeesl.Container;
+import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportComparator;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportStyleComparator;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportTemplateComparator;

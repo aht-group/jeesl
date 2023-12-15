@@ -3,6 +3,8 @@ package org.jeesl.model.xml.jeesl;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
+import org.jeesl.model.xml.xsd.Container;
+
 
 /**
  * This object contains factory methods for each 

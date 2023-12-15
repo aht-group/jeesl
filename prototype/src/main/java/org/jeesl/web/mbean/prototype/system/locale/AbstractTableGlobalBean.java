@@ -46,7 +46,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslData;
 import org.jeesl.interfaces.qualifier.rest.option.JeeslOptionUploadable;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
-import org.jeesl.model.xml.jeesl.Container;
+import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.util.db.updater.JeeslDbGraphicUpdater;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;

@@ -12,7 +12,7 @@ import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.jeesl.Container;
+import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.layout.Font;
 import org.openfuxml.content.list.Item;

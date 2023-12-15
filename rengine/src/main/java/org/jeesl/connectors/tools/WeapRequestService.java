@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import org.jeesl.connectors.weap.WeapConnector;
 import org.jeesl.connectors.weap.WeapResultValueRequest;
 import org.jeesl.model.xml.io.locale.status.Status;
-import org.jeesl.model.xml.jeesl.Container;
+import org.jeesl.model.xml.xsd.Container;
 
 @Path("/rest")
 public class WeapRequestService

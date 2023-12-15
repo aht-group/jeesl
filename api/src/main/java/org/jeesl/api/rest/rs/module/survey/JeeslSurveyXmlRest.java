@@ -17,5 +17,5 @@ public interface JeeslSurveyXmlRest
 	Survey surveyAnswers(@PathParam("id") long id);
 	
 	@GET @Path("/json/question/units") @Produces(MediaType.APPLICATION_XML)
-	org.jeesl.model.xml.jeesl.Container surveyQuestionUnits();
+	org.jeesl.model.xml.xsd.Container surveyQuestionUnits();
 }

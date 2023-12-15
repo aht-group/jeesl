@@ -37,11 +37,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.io.locale.status.Status;
-import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Attribute;
 import org.jeesl.model.xml.system.revision.Diagrams;
 import org.jeesl.model.xml.system.revision.Entities;
 import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
 import org.jeesl.util.query.xml.XmlStatusQuery;
@@ -148,7 +148,7 @@ public class IoLabelRestService <L extends JeeslLang,D extends JeeslDescription,
 
 	public DataUpdate importSystemIoRevisionAttributeTypes(Container categories){return importStatus(fbRevision.getClassAttributeType(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
 	 public DataUpdate importSystemIoRevisionScopeTypes(Container categories){return importStatus(fbRevision.getClassScopeType(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
-	 public DataUpdate importSystemRevisionCategories(org.jeesl.model.xml.jeesl.Container categories){return importStatus(fbRevision.getClassCategory(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
+	 public DataUpdate importSystemRevisionCategories(org.jeesl.model.xml.xsd.Container categories){return importStatus(fbRevision.getClassCategory(),fbRevision.getClassL(),fbRevision.getClassD(),categories,null);}
 
 	 public DataUpdate importSystemRevisionEntities(Entities entities)
 	{

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://jeesl.org/xsd"
     xmlns="http://jeesl.org/xsd"
+    xmlns:js="http://ahtutils.aht-group.com/status"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     jaxb:version="2.0">
       
     <xsd:import namespace="http://jeesl.org/test" schemaLocation="jeesl/system/test.xsd"/>
     
+    <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="jeesl/status.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/text" schemaLocation="jeesl/text.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/symbol" schemaLocation="jeesl/symbol.xsd"/>
 
@@ -20,5 +22,14 @@
 			<xsd:attribute name="id" type="xsd:long"/>
 		</xsd:complexType>
 	</xsd:element>
+	
+	<xsd:element name="container">
+        <xsd:complexType>
+        	<xsd:sequence>
+                <xsd:element ref="js:status" maxOccurs="unbounded"/>
+                <xsd:element ref="js:type" maxOccurs="unbounded"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
     
 </xsd:schema>

@@ -15,15 +15,15 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
-import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.xsd.Container;
 
 @Path("/rest/jeesl/export")
 public interface JeeslSystemRest <L extends JeeslLang, D extends JeeslDescription,
 									R extends JeeslTenantRealm<L,D,R,?>,
 									G extends JeeslGraphic<?,?,?>>
 								extends JeeslSystemRestInterface<L,D,R,G>
-{	
+{
 	@GET @Path("/status/{code}") @Produces(MediaType.APPLICATION_XML)
 	<X extends JeeslStatus<L,D,X>> Container exportStatus(@PathParam("code") String code) throws UtilsConfigurationException;
 	

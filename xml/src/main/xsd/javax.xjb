@@ -35,7 +35,7 @@
 
      <jxb:bindings schemaLocation="jeesl/status.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="net.sf.ahtutils.xml.status"/>
+            <jxb:package name="org.jeesl.model.xml.io.locale.status"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     <jxb:bindings schemaLocation="aht/navigation.xsd" node="/xsd:schema">

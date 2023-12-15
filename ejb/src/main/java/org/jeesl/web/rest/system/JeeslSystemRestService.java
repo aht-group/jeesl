@@ -30,8 +30,8 @@ import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
 import org.jeesl.model.xml.io.locale.status.Status;
-import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.util.query.xml.SymbolQuery;
 import org.jeesl.util.query.xml.system.io.XmlRevisionQuery;
 import org.jeesl.web.rest.AbstractJeeslRestHandler;
@@ -101,14 +101,14 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 
 
 	@SuppressWarnings("unchecked")
-	@Override public <X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.jeesl.Container exportStatus(String code) throws UtilsConfigurationException
+	@Override public <X extends JeeslStatus<L,D,X>> org.jeesl.model.xml.xsd.Container exportStatus(String code) throws UtilsConfigurationException
 	{
 		try
 		{
 			Class<X> x = (Class<X>)Class.forName(code).asSubclass(JeeslStatus.class);
 			logger.info(x.getName());
 			logger.info("FG: "+(fGraphic!=null));
-			org.jeesl.model.xml.jeesl.Container xml = xfContainer.build(fGraphic.allOrderedPosition(x));
+			org.jeesl.model.xml.xsd.Container xml = xfContainer.build(fGraphic.allOrderedPosition(x));
 
 			if(EjbWithGraphic.class.isAssignableFrom(x))
 			{
@@ -137,7 +137,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 	}
 
 	@SuppressWarnings("unchecked")
-	public <Y extends JeeslMcsStatus<L,D,R,Y,G>, X extends JeeslStatus<L,D,X>, RREF extends EjbWithId> org.jeesl.model.xml.jeesl.Container exportMcsStatus(R realm, RREF rref, String code) throws UtilsConfigurationException
+	public <Y extends JeeslMcsStatus<L,D,R,Y,G>, X extends JeeslStatus<L,D,X>, RREF extends EjbWithId> org.jeesl.model.xml.xsd.Container exportMcsStatus(R realm, RREF rref, String code) throws UtilsConfigurationException
 	{
 		try
 		{
@@ -150,7 +150,7 @@ public class JeeslSystemRestService <L extends JeeslLang,D extends JeeslDescript
 				list2.add((X)y);
 			}
 
-			org.jeesl.model.xml.jeesl.Container xContainer = XmlContainerFactory.build();
+			org.jeesl.model.xml.xsd.Container xContainer = XmlContainerFactory.build();
 			xContainer = xfContainer.build(list2);
 
 			if(EjbWithGraphic.class.isAssignableFrom(cMcs))
