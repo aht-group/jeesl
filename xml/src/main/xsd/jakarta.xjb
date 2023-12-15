@@ -10,5 +10,15 @@
 		<jxb:serializable uid="1" />
 	</jxb:globalBindings>
   
-	
+	<jxb:bindings schemaLocation="jeesl.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.xsd"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="test.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.test"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    	
 </jxb:bindings>
