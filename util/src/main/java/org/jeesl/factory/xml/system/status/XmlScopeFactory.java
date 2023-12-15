@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.status;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -42,7 +44,7 @@ public class XmlScopeFactory<L extends JeeslLang, D extends JeeslDescription,S e
 	public Scope build(S ejb)
 	{
 		Scope xml = new Scope();
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}

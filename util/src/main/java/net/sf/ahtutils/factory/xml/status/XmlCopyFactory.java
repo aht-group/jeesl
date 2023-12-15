@@ -1,7 +1,6 @@
 package net.sf.ahtutils.factory.xml.status;
 
-import net.sf.ahtutils.xml.status.Copy;
-import net.sf.ahtutils.xml.status.Status;
+import java.util.Objects;
 
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -9,6 +8,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.status.Copy;
+import net.sf.ahtutils.xml.status.Status;
 
 public class XmlCopyFactory
 {
@@ -33,7 +35,7 @@ public class XmlCopyFactory
 	public <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription> Copy build(S ejb, String group)
 	{
 		Copy xml = new Copy();
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		

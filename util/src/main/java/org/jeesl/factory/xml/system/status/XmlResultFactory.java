@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.status;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -44,7 +46,7 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,S 
 	{
 		Result xml = new Result();
 		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		

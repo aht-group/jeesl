@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.module.survey;
 
+import java.util.Objects;
+
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
@@ -59,7 +61,7 @@ public class XmlQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetTopic()){xml.setTopic(ejb.getTopic());}
 		
 		// MultiLang Issue

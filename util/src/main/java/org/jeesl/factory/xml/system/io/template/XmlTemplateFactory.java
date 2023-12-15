@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.template;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
@@ -44,7 +46,7 @@ public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 		Template xml = new Template();
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
 		if(q.isSetCategory()){xml.setCategory(xfCategory.build(ejb.getCategory()));}		

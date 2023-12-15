@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.revision;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
@@ -51,7 +53,7 @@ public class XmlAttributeFactory <L extends JeeslLang,D extends JeeslDescription
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetType()){xml.setType(xfType.build(ejb.getType()));}
 		
 		if(q.isSetXpath()){xml.setXpath(ejb.getXpath());}

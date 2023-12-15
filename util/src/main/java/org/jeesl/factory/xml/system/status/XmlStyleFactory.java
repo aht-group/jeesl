@@ -1,7 +1,6 @@
 package org.jeesl.factory.xml.system.status;
 
-import net.sf.ahtutils.xml.status.Status;
-import net.sf.ahtutils.xml.status.Style;
+import java.util.Objects;
 
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -10,6 +9,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.status.Status;
+import net.sf.ahtutils.xml.status.Style;
 
 public class XmlStyleFactory<L extends JeeslLang, D extends JeeslDescription,S extends JeeslStatus<L,D,S>>
 {
@@ -29,7 +31,7 @@ public class XmlStyleFactory<L extends JeeslLang, D extends JeeslDescription,S e
 	public Style build(S ejb, String group)
 	{
 		Style xml = new Style();
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		

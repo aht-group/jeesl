@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.status;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -35,7 +36,7 @@ public class XmlReasonFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, 
 	{
 		Reason xml = new Reason();
 		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.poi.util.IOUtils;
@@ -203,7 +204,7 @@ public class UtilsDbXmlSeedUtil
 			Container c = (Container)o;
 			for(Status s : c.getStatus())
 			{
-				if(s.isSetGraphic() && s.getGraphic().isSetFile())
+				if(Objects.nonNull(s.getGraphic()) && Objects.nonNull(s.getGraphic().getFile()))
 				{
 					String file = buildSvgPath(ds,key)+File.separator+s.getCode()+".svg";
 					logger.info(file);

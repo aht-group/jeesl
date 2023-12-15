@@ -2,14 +2,15 @@ package org.jeesl.factory.xml.system.status;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.interfaces.model.system.locale.status.JeeslStatusWithSymbol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,7 +54,7 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 		Status xml = new Status();
 		xml.setGroup(group);
 		if(q.isSetId()){xml.setId(ejb.getId());}		
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		if(q.isSetStyle()){xml.setStyle(ejb.getStyle());}
