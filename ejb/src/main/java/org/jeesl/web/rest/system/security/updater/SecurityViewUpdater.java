@@ -1,5 +1,7 @@
 package org.jeesl.web.rest.system.security.updater;
 
+import java.util.Objects;
+
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
@@ -114,7 +116,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 	@Override protected void iuChilds(C eCategory, org.jeesl.model.xml.system.security.Category xCategory) throws UtilsConfigurationException
 	{
 		logger.info("iuChilds (security.views) "+xCategory.getTmp().getView().size());
-		if(xCategory.isSetTmp() && xCategory.getTmp().isSetView())
+		if(Objects.nonNull(xCategory.getTmp()) && Objects.nonNull(xCategory.getTmp().getView()))
 		{
 			for(org.jeesl.model.xml.system.security.View view : xCategory.getTmp().getView())
 			{

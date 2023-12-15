@@ -1,5 +1,7 @@
 package net.sf.ahtutils.factory.xml.status;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -26,11 +28,11 @@ public class XmlUnitFactory
 	public <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription> Unit build(S ejb, String group)
 	{
 		Unit xml = new Unit();
-		if(q.isSetCode()){xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getCode())){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
-		if(q.isSetLangs())
+		if(Objects.nonNull(q.getLangs()))
 		{
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
 			xml.setLangs(f.getUtilsLangs(ejb.getName()));

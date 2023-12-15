@@ -6,7 +6,7 @@
             xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
 	version="2.1">
 
-	<jxb:globalBindings>
+	<jxb:globalBindings  generateIsSetMethod="true">
 		<jxb:serializable uid="1" />
 	</jxb:globalBindings>
   
@@ -21,13 +21,32 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-
-	 <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
+    <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.cms.text"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-
+    <jxb:bindings schemaLocation="jeesl/symbol.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.cms.symbol"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+     <jxb:bindings schemaLocation="jeesl/status.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="net.sf.ahtutils.xml.status"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="aht/navigation.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.system.navigation"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="jeesl/system/security.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.system.security"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     
     
     <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/io.xsd" node="/xsd:schema">
@@ -35,6 +54,5 @@
             <jxb:package name="org.exlp.model.xml.io"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-     
     
 </jxb:bindings>
