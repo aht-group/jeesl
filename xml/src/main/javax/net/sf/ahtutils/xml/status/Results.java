@@ -76,14 +76,6 @@ public class Results
         return this.result;
     }
 
-    public boolean isSetResult() {
-        return ((this.result!= null)&&(!this.result.isEmpty()));
-    }
-
-    public void unsetResult() {
-        this.result = null;
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -106,10 +98,6 @@ public class Results
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
 }

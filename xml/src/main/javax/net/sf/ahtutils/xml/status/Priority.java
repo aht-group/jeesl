@@ -91,10 +91,6 @@ public class Priority
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -119,10 +115,6 @@ public class Priority
         this.descriptions = value;
     }
 
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -131,7 +123,7 @@ public class Priority
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -143,16 +135,8 @@ public class Priority
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -179,10 +163,6 @@ public class Priority
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -205,10 +185,6 @@ public class Priority
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
     /**
@@ -235,10 +211,6 @@ public class Priority
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the visible property.
      * 
@@ -247,7 +219,7 @@ public class Priority
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -259,16 +231,8 @@ public class Priority
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -295,10 +259,6 @@ public class Priority
         this.image = value;
     }
 
-    public boolean isSetImage() {
-        return (this.image!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -307,7 +267,7 @@ public class Priority
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -319,16 +279,8 @@ public class Priority
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
 }

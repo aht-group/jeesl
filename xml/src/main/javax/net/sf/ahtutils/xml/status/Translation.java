@@ -73,10 +73,6 @@ public class Translation
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -101,10 +97,6 @@ public class Translation
         this.descriptions = value;
     }
 
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
-    }
-
     /**
      * Gets the value of the key property.
      * 
@@ -127,10 +119,6 @@ public class Translation
      */
     public void setKey(String value) {
         this.key = value;
-    }
-
-    public boolean isSetKey() {
-        return (this.key!= null);
     }
 
 }

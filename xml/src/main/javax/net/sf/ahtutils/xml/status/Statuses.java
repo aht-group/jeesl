@@ -76,14 +76,6 @@ public class Statuses
         return this.status;
     }
 
-    public boolean isSetStatus() {
-        return ((this.status!= null)&&(!this.status.isEmpty()));
-    }
-
-    public void unsetStatus() {
-        this.status = null;
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -106,10 +98,6 @@ public class Statuses
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
 }

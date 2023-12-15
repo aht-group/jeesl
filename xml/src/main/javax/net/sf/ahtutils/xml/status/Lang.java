@@ -51,7 +51,7 @@ public class Lang
      *     {@link Integer }
      *     
      */
-    public int getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
@@ -63,16 +63,8 @@ public class Lang
      *     {@link Integer }
      *     
      */
-    public void setVersion(int value) {
+    public void setVersion(Integer value) {
         this.version = value;
-    }
-
-    public boolean isSetVersion() {
-        return (this.version!= null);
-    }
-
-    public void unsetVersion() {
-        this.version = null;
     }
 
     /**
@@ -99,10 +91,6 @@ public class Lang
         this.key = value;
     }
 
-    public boolean isSetKey() {
-        return (this.key!= null);
-    }
-
     /**
      * Gets the value of the translation property.
      * 
@@ -125,10 +113,6 @@ public class Lang
      */
     public void setTranslation(String value) {
         this.translation = value;
-    }
-
-    public boolean isSetTranslation() {
-        return (this.translation!= null);
     }
 
 }

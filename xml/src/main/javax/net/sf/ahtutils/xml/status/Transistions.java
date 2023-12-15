@@ -72,12 +72,4 @@ public class Transistions
         return this.status;
     }
 
-    public boolean isSetStatus() {
-        return ((this.status!= null)&&(!this.status.isEmpty()));
-    }
-
-    public void unsetStatus() {
-        this.status = null;
-    }
-
 }

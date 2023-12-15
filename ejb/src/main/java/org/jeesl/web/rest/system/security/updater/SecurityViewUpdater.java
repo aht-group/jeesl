@@ -166,8 +166,8 @@ public class SecurityViewUpdater <L extends JeeslLang,
 				ejb.setAccessLogin(false);
 			}
 			if(view.isSetDocumentation()){ejb.setDocumentation(view.isDocumentation());}else{ejb.setDocumentation(false);}
-			if(view.isSetVisible()){ejb.setVisible(view.isVisible());}else{ejb.setVisible(true);}
-			if(view.isSetPosition()){ejb.setPosition(view.getPosition());}else{ejb.setPosition(0);}
+			if(Objects.nonNull(view.isVisible())) {ejb.setVisible(view.isVisible());}else{ejb.setVisible(true);}
+			if(Objects.nonNull(view.getPosition())) {ejb.setPosition(view.getPosition());}else{ejb.setPosition(0);}
 			
 			ejb.setName(efLang.getLangMap(view.getLangs()));
 			ejb.setDescription(efDescription.create(view.getDescriptions()));

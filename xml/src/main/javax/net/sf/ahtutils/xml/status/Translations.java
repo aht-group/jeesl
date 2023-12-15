@@ -72,12 +72,4 @@ public class Translations
         return this.translation;
     }
 
-    public boolean isSetTranslation() {
-        return ((this.translation!= null)&&(!this.translation.isEmpty()));
-    }
-
-    public void unsetTranslation() {
-        this.translation = null;
-    }
-
 }

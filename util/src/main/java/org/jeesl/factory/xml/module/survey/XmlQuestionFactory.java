@@ -60,7 +60,7 @@ public class XmlQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
 		Question xml = new Question();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
-		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetTopic()){xml.setTopic(ejb.getTopic());}
 		

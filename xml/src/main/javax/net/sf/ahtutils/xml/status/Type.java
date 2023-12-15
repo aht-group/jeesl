@@ -112,10 +112,6 @@ public class Type
         this.parent = value;
     }
 
-    public boolean isSetParent() {
-        return (this.parent!= null);
-    }
-
     /**
      * Gets the value of the langs property.
      * 
@@ -140,10 +136,6 @@ public class Type
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -166,10 +158,6 @@ public class Type
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -201,14 +189,6 @@ public class Type
         return this.lang;
     }
 
-    public boolean isSetLang() {
-        return ((this.lang!= null)&&(!this.lang.isEmpty()));
-    }
-
-    public void unsetLang() {
-        this.lang = null;
-    }
-
     /**
      * Gets the value of the transistions property.
      * 
@@ -231,10 +211,6 @@ public class Type
      */
     public void setTransistions(Transistions value) {
         this.transistions = value;
-    }
-
-    public boolean isSetTransistions() {
-        return (this.transistions!= null);
     }
 
     /**
@@ -266,14 +242,6 @@ public class Type
         return this.subType;
     }
 
-    public boolean isSetSubType() {
-        return ((this.subType!= null)&&(!this.subType.isEmpty()));
-    }
-
-    public void unsetSubType() {
-        this.subType = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -282,7 +250,7 @@ public class Type
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -294,16 +262,8 @@ public class Type
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -330,10 +290,6 @@ public class Type
         this.key = value;
     }
 
-    public boolean isSetKey() {
-        return (this.key!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -356,10 +312,6 @@ public class Type
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
     /**
@@ -386,10 +338,6 @@ public class Type
         this.group = value;
     }
 
-    public boolean isSetGroup() {
-        return (this.group!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -414,10 +362,6 @@ public class Type
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the visible property.
      * 
@@ -426,7 +370,7 @@ public class Type
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -438,16 +382,8 @@ public class Type
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -474,10 +410,6 @@ public class Type
         this.image = value;
     }
 
-    public boolean isSetImage() {
-        return (this.image!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -486,7 +418,7 @@ public class Type
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -498,16 +430,8 @@ public class Type
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
 }

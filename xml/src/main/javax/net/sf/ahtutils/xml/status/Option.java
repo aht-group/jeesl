@@ -120,10 +120,6 @@ public class Option
         this.parent = value;
     }
 
-    public boolean isSetParent() {
-        return (this.parent!= null);
-    }
-
     /**
      * Gets the value of the langs property.
      * 
@@ -148,10 +144,6 @@ public class Option
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -174,10 +166,6 @@ public class Option
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -209,14 +197,6 @@ public class Option
         return this.lang;
     }
 
-    public boolean isSetLang() {
-        return ((this.lang!= null)&&(!this.lang.isEmpty()));
-    }
-
-    public void unsetLang() {
-        this.lang = null;
-    }
-
     /**
      * Gets the value of the transistions property.
      * 
@@ -239,10 +219,6 @@ public class Option
      */
     public void setTransistions(Transistions value) {
         this.transistions = value;
-    }
-
-    public boolean isSetTransistions() {
-        return (this.transistions!= null);
     }
 
     /**
@@ -274,14 +250,6 @@ public class Option
         return this.tracked;
     }
 
-    public boolean isSetTracked() {
-        return ((this.tracked!= null)&&(!this.tracked.isEmpty()));
-    }
-
-    public void unsetTracked() {
-        this.tracked = null;
-    }
-
     /**
      * Gets the value of the graphic property.
      * 
@@ -306,10 +274,6 @@ public class Option
         this.graphic = value;
     }
 
-    public boolean isSetGraphic() {
-        return (this.graphic!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -318,7 +282,7 @@ public class Option
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -330,16 +294,8 @@ public class Option
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -366,10 +322,6 @@ public class Option
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -392,10 +344,6 @@ public class Option
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
     /**
@@ -422,10 +370,6 @@ public class Option
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the symbol property.
      * 
@@ -450,10 +394,6 @@ public class Option
         this.symbol = value;
     }
 
-    public boolean isSetSymbol() {
-        return (this.symbol!= null);
-    }
-
     /**
      * Gets the value of the visible property.
      * 
@@ -462,7 +402,7 @@ public class Option
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -474,16 +414,8 @@ public class Option
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -510,10 +442,6 @@ public class Option
         this.image = value;
     }
 
-    public boolean isSetImage() {
-        return (this.image!= null);
-    }
-
     /**
      * Gets the value of the style property.
      * 
@@ -538,10 +466,6 @@ public class Option
         this.style = value;
     }
 
-    public boolean isSetStyle() {
-        return (this.style!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -550,7 +474,7 @@ public class Option
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -562,16 +486,8 @@ public class Option
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
 }

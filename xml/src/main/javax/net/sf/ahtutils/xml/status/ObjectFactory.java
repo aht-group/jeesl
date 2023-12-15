@@ -30,11 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Status }
+     * Create an instance of {@link Type }
      * 
      */
-    public Status createStatus() {
-        return new Status();
+    public Type createType() {
+        return new Type();
     }
 
     /**
@@ -86,6 +86,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Status }
+     * 
+     */
+    public Status createStatus() {
+        return new Status();
+    }
+
+    /**
      * Create an instance of {@link Tracked }
      * 
      */
@@ -99,22 +107,6 @@ public class ObjectFactory {
      */
     public Domain createDomain() {
         return new Domain();
-    }
-
-    /**
-     * Create an instance of {@link Type }
-     * 
-     */
-    public Type createType() {
-        return new Type();
-    }
-
-    /**
-     * Create an instance of {@link SubType }
-     * 
-     */
-    public SubType createSubType() {
-        return new SubType();
     }
 
     /**
@@ -150,6 +142,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SubType }
+     * 
+     */
+    public SubType createSubType() {
+        return new SubType();
+    }
+
+    /**
      * Create an instance of {@link Styles }
      * 
      */
@@ -163,70 +163,6 @@ public class ObjectFactory {
      */
     public Style createStyle() {
         return new Style();
-    }
-
-    /**
-     * Create an instance of {@link Model }
-     * 
-     */
-    public Model createModel() {
-        return new Model();
-    }
-
-    /**
-     * Create an instance of {@link Category }
-     * 
-     */
-    public Category createCategory() {
-        return new Category();
-    }
-
-    /**
-     * Create an instance of {@link Implementation }
-     * 
-     */
-    public Implementation createImplementation() {
-        return new Implementation();
-    }
-
-    /**
-     * Create an instance of {@link DataType }
-     * 
-     */
-    public DataType createDataType() {
-        return new DataType();
-    }
-
-    /**
-     * Create an instance of {@link Scope }
-     * 
-     */
-    public Scope createScope() {
-        return new Scope();
-    }
-
-    /**
-     * Create an instance of {@link Interval }
-     * 
-     */
-    public Interval createInterval() {
-        return new Interval();
-    }
-
-    /**
-     * Create an instance of {@link Source }
-     * 
-     */
-    public Source createSource() {
-        return new Source();
-    }
-
-    /**
-     * Create an instance of {@link Unit }
-     * 
-     */
-    public Unit createUnit() {
-        return new Unit();
     }
 
     /**
@@ -270,6 +206,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Interval }
+     * 
+     */
+    public Interval createInterval() {
+        return new Interval();
+    }
+
+    /**
      * Create an instance of {@link Call }
      * 
      */
@@ -307,6 +251,14 @@ public class ObjectFactory {
      */
     public MainType createMainType() {
         return new MainType();
+    }
+
+    /**
+     * Create an instance of {@link DataType }
+     * 
+     */
+    public DataType createDataType() {
+        return new DataType();
     }
 
     /**
@@ -358,11 +310,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Model }
+     * 
+     */
+    public Model createModel() {
+        return new Model();
+    }
+
+    /**
      * Create an instance of {@link Scopes }
      * 
      */
     public Scopes createScopes() {
         return new Scopes();
+    }
+
+    /**
+     * Create an instance of {@link Scope }
+     * 
+     */
+    public Scope createScope() {
+        return new Scope();
     }
 
     /**
@@ -387,6 +355,14 @@ public class ObjectFactory {
      */
     public Categories createCategories() {
         return new Categories();
+    }
+
+    /**
+     * Create an instance of {@link Category }
+     * 
+     */
+    public Category createCategory() {
+        return new Category();
     }
 
     /**
@@ -478,6 +454,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Source }
+     * 
+     */
+    public Source createSource() {
+        return new Source();
+    }
+
+    /**
      * Create an instance of {@link Legend }
      * 
      */
@@ -491,6 +475,14 @@ public class ObjectFactory {
      */
     public Outcome createOutcome() {
         return new Outcome();
+    }
+
+    /**
+     * Create an instance of {@link Unit }
+     * 
+     */
+    public Unit createUnit() {
+        return new Unit();
     }
 
     /**
@@ -635,6 +627,14 @@ public class ObjectFactory {
      */
     public Process createProcess() {
         return new Process();
+    }
+
+    /**
+     * Create an instance of {@link Implementation }
+     * 
+     */
+    public Implementation createImplementation() {
+        return new Implementation();
     }
 
     /**

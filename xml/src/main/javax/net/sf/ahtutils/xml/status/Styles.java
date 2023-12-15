@@ -76,14 +76,6 @@ public class Styles
         return this.style;
     }
 
-    public boolean isSetStyle() {
-        return ((this.style!= null)&&(!this.style.isEmpty()));
-    }
-
-    public void unsetStyle() {
-        this.style = null;
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -106,10 +98,6 @@ public class Styles
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
 }

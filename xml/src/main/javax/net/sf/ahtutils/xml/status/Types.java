@@ -84,14 +84,6 @@ public class Types
         return this.type;
     }
 
-    public boolean isSetType() {
-        return ((this.type!= null)&&(!this.type.isEmpty()));
-    }
-
-    public void unsetType() {
-        this.type = null;
-    }
-
     /**
      * Gets the value of the mainType property.
      * 
@@ -119,14 +111,6 @@ public class Types
             mainType = new ArrayList<MainType>();
         }
         return this.mainType;
-    }
-
-    public boolean isSetMainType() {
-        return ((this.mainType!= null)&&(!this.mainType.isEmpty()));
-    }
-
-    public void unsetMainType() {
-        this.mainType = null;
     }
 
     /**
@@ -158,14 +142,6 @@ public class Types
         return this.subType;
     }
 
-    public boolean isSetSubType() {
-        return ((this.subType!= null)&&(!this.subType.isEmpty()));
-    }
-
-    public void unsetSubType() {
-        this.subType = null;
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -188,10 +164,6 @@ public class Types
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
 }

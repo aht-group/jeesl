@@ -76,14 +76,6 @@ public class Levels
         return this.level;
     }
 
-    public boolean isSetLevel() {
-        return ((this.level!= null)&&(!this.level.isEmpty()));
-    }
-
-    public void unsetLevel() {
-        this.level = null;
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -106,10 +98,6 @@ public class Levels
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
 }

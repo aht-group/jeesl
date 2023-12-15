@@ -94,10 +94,6 @@ public class Original
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -122,10 +118,6 @@ public class Original
         this.descriptions = value;
     }
 
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -134,7 +126,7 @@ public class Original
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -146,16 +138,8 @@ public class Original
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -182,10 +166,6 @@ public class Original
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -208,10 +188,6 @@ public class Original
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
     /**
@@ -238,10 +214,6 @@ public class Original
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the visible property.
      * 
@@ -250,7 +222,7 @@ public class Original
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -262,16 +234,8 @@ public class Original
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -298,10 +262,6 @@ public class Original
         this.image = value;
     }
 
-    public boolean isSetImage() {
-        return (this.image!= null);
-    }
-
     /**
      * Gets the value of the style property.
      * 
@@ -326,10 +286,6 @@ public class Original
         this.style = value;
     }
 
-    public boolean isSetStyle() {
-        return (this.style!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -338,7 +294,7 @@ public class Original
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -350,16 +306,8 @@ public class Original
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
 }

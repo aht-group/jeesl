@@ -85,10 +85,6 @@ public class Tracked
         this.user = value;
     }
 
-    public boolean isSetUser() {
-        return (this.user!= null);
-    }
-
     /**
      * Gets the value of the status property.
      * 
@@ -111,10 +107,6 @@ public class Tracked
      */
     public void setStatus(Status value) {
         this.status = value;
-    }
-
-    public boolean isSetStatus() {
-        return (this.status!= null);
     }
 
     /**
@@ -141,10 +133,6 @@ public class Tracked
         this.statement = value;
     }
 
-    public boolean isSetStatement() {
-        return (this.statement!= null);
-    }
-
     /**
      * Gets the value of the declaration property.
      * 
@@ -169,10 +157,6 @@ public class Tracked
         this.declaration = value;
     }
 
-    public boolean isSetDeclaration() {
-        return (this.declaration!= null);
-    }
-
     /**
      * Gets the value of the record property.
      * 
@@ -195,10 +179,6 @@ public class Tracked
      */
     public void setRecord(XMLGregorianCalendar value) {
         this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
 }

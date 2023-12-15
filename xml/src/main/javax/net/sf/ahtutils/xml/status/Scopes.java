@@ -79,14 +79,6 @@ public class Scopes
         return this.scope;
     }
 
-    public boolean isSetScope() {
-        return ((this.scope!= null)&&(!this.scope.isEmpty()));
-    }
-
-    public void unsetScope() {
-        this.scope = null;
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -111,10 +103,6 @@ public class Scopes
         this.group = value;
     }
 
-    public boolean isSetGroup() {
-        return (this.group!= null);
-    }
-
     /**
      * Gets the value of the size property.
      * 
@@ -123,7 +111,7 @@ public class Scopes
      *     {@link Integer }
      *     
      */
-    public int getSize() {
+    public Integer getSize() {
         return size;
     }
 
@@ -135,16 +123,8 @@ public class Scopes
      *     {@link Integer }
      *     
      */
-    public void setSize(int value) {
+    public void setSize(Integer value) {
         this.size = value;
-    }
-
-    public boolean isSetSize() {
-        return (this.size!= null);
-    }
-
-    public void unsetSize() {
-        this.size = null;
     }
 
 }

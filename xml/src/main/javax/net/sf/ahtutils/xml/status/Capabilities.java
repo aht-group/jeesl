@@ -72,12 +72,4 @@ public class Capabilities
         return this.capability;
     }
 
-    public boolean isSetCapability() {
-        return ((this.capability!= null)&&(!this.capability.isEmpty()));
-    }
-
-    public void unsetCapability() {
-        this.capability = null;
-    }
-
 }

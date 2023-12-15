@@ -104,10 +104,6 @@ public class Scope
         this.transistions = value;
     }
 
-    public boolean isSetTransistions() {
-        return (this.transistions!= null);
-    }
-
     /**
      * Gets the value of the langs property.
      * 
@@ -132,10 +128,6 @@ public class Scope
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -158,10 +150,6 @@ public class Scope
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -193,14 +181,6 @@ public class Scope
         return this.lang;
     }
 
-    public boolean isSetLang() {
-        return ((this.lang!= null)&&(!this.lang.isEmpty()));
-    }
-
-    public void unsetLang() {
-        this.lang = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -209,7 +189,7 @@ public class Scope
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -221,16 +201,8 @@ public class Scope
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -257,10 +229,6 @@ public class Scope
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the group property.
      * 
@@ -283,10 +251,6 @@ public class Scope
      */
     public void setGroup(String value) {
         this.group = value;
-    }
-
-    public boolean isSetGroup() {
-        return (this.group!= null);
     }
 
     /**
@@ -313,10 +277,6 @@ public class Scope
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the visible property.
      * 
@@ -325,7 +285,7 @@ public class Scope
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -337,16 +297,8 @@ public class Scope
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -373,10 +325,6 @@ public class Scope
         this.image = value;
     }
 
-    public boolean isSetImage() {
-        return (this.image!= null);
-    }
-
     /**
      * Gets the value of the style property.
      * 
@@ -401,10 +349,6 @@ public class Scope
         this.style = value;
     }
 
-    public boolean isSetStyle() {
-        return (this.style!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -413,7 +357,7 @@ public class Scope
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -425,16 +369,8 @@ public class Scope
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
 }

@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlType;
     "description"
 })
 @XmlRootElement(name = "descriptions")
-public class Descriptions implements Serializable
+public class Descriptions
+    implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
@@ -69,14 +70,6 @@ public class Descriptions implements Serializable
             description = new ArrayList<Description>();
         }
         return this.description;
-    }
-
-    public boolean isSetDescription() {
-        return ((this.description!= null)&&(!this.description.isEmpty()));
-    }
-
-    public void unsetDescription() {
-        this.description = null;
     }
 
 }
