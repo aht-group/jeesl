@@ -1,6 +1,7 @@
 package org.jeesl.factory.xml.system.security;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -31,18 +32,15 @@ public class XmlActionsFactory <L extends JeeslLang, D extends JeeslDescription,
 	public XmlActionsFactory(Actions q)
 	{
 		this.q=q;
-		if(q.isSetAction()) {xfAction = new XmlActionFactory<>(q.getAction().get(0));}
+		if(Objects.nonNull(q.getAction())) {xfAction = new XmlActionFactory<>(q.getAction().get(0));}
 	}
 
 	public Actions build(List<A> actions)
 	{
 		Actions xml = build();
-		if(q.isSetAction())
+		for(A action : actions)
 		{
-			for(A action : actions)
-			{
-				xml.getAction().add(xfAction.build(action));
-			}
+			xml.getAction().add(xfAction.build(action));
 		}
 		return xml;
 	}

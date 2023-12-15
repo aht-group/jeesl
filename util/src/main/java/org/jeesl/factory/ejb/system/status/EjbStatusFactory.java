@@ -77,7 +77,7 @@ public class EjbStatusFactory<L extends JeeslLang, D extends JeeslDescription,S 
 		{
 			s = cStatus.newInstance();
 			s.setCode(status.getCode());
-			if(status.isSetPosition()){s.setPosition(status.getPosition());}
+			if(Objects.nonNull(status.getPosition())) {s.setPosition(status.getPosition());}
 			else{s.setPosition(0);}
 			
 			Langs langs = XmlLangsFactory.build();

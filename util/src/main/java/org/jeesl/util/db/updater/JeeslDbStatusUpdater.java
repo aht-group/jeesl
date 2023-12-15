@@ -77,7 +77,7 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 	public JeeslStatus<L,D,S> addVisible(JeeslStatus<L,D,S> ejbStatus, Status status)
 	{
 		boolean visible=true;
-		if(status.isSetVisible()){visible=status.isVisible();}
+		if(Objects.nonNull(status.isVisible())) {visible=status.isVisible();}
 		ejbStatus.setVisible(visible);
 		return ejbStatus;
 	}
@@ -240,10 +240,10 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 				catch (IllegalAccessException e) {logger.error("",e);}
 				catch (JeeslConstraintViolationException e) {logger.error("",e);}
 		        
-				if(xml.isSetPosition()){ejb.setPosition(xml.getPosition());}
+				if(Objects.nonNull(xml.getPosition())) {ejb.setPosition(xml.getPosition());}
 		        else{ejb.setPosition(0);}
 				
-				if(xml.isSetVisible()){ejb.setVisible(xml.isVisible());}
+				if(Objects.nonNull(xml.isVisible())) {ejb.setVisible(xml.isVisible());}
 				else{ejb.setVisible(false);}
 				
 				ejb = fStatus.update(ejb);

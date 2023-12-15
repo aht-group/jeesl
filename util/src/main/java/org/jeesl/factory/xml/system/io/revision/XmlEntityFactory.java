@@ -59,7 +59,7 @@ public class XmlEntityFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetCode()&&ejb.getCode()!=""){xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
 		if(q.isSetTimeseries()) {xml.setTimeseries(BooleanComparator.active(ejb.getTimeseries()));}
 		if(q.isSetDocumentation()) {xml.setDocumentation(BooleanComparator.active(ejb.getDocumentation()));}

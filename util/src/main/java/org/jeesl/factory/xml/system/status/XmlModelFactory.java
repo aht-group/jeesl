@@ -41,7 +41,7 @@ public class XmlModelFactory <L extends JeeslLang, D extends JeeslDescription, S
 		Model xml = new Model();
 
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
 		

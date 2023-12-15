@@ -54,14 +54,14 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 	{
 		Status xml = new Status();
 		xml.setGroup(group);
-		if(q.isSetId()){xml.setId(ejb.getId());}		
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}		
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getId())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.getStyle())) {xml.setStyle(ejb.getStyle());}
 		if(Objects.nonNull(q.getImage())) {xml.setImage(ejb.getImage());}
 		if(Objects.nonNull(q.getSymbol()) && (ejb instanceof JeeslStatusWithSymbol)){xml.setSymbol(ejb.getSymbol());}
-		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
 		
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}		
@@ -117,7 +117,7 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 		List<Long> result = new ArrayList<Long>();
 		for(Status type : list)
 		{
-			if(type.isSetId()){result.add(type.getId());}
+			if(Objects.nonNull(type.getId())) {result.add(type.getId());}
 		}
 		return result;
 	}

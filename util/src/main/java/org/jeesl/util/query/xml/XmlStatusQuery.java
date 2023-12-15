@@ -56,7 +56,7 @@ public class XmlStatusQuery
 	public static Status statusExport()
 	{
 		Parent parent = new Parent();
-		parent.setId(0);
+		parent.setId(0l);
 		parent.setCode("");
 		parent.setPosition(0);
 				
@@ -77,7 +77,7 @@ public class XmlStatusQuery
 	public static Status statusLabel()
 	{		
 		Status xml = new Status();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;
@@ -86,7 +86,7 @@ public class XmlStatusQuery
 	public static Type typeLabel()
 	{		
 		Type xml = new Type();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;
@@ -95,7 +95,7 @@ public class XmlStatusQuery
 	public static Level levelLabel()
 	{		
 		Level xml = new Level();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;
@@ -104,7 +104,7 @@ public class XmlStatusQuery
 	public static Result resultLabel()
 	{		
 		Result xml = new Result();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;
@@ -113,7 +113,7 @@ public class XmlStatusQuery
 	public static SubType subTypeLabel()
 	{		
 		SubType xml = new SubType();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;
@@ -140,7 +140,7 @@ public class XmlStatusQuery
 	public static Source sourceLabel()
 	{		
 		Source xml = new Source();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setLabel("");
 		return xml;

@@ -43,7 +43,7 @@ public class XmlPhaseFactory<L extends JeeslLang, D extends JeeslDescription, S 
 		if(ejb!=null)
 		{
 			if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-			if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+			if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 			xml.setGroup(group);
 			
 			if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}

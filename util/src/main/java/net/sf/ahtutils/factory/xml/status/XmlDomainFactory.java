@@ -28,7 +28,7 @@ public class XmlDomainFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang,
 		Condition xml = new Condition();
 
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.getLangs()))
 		{
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());

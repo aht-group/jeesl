@@ -38,9 +38,9 @@ public class XmlSubProgramFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLa
 	public SubProgram build(S ejb, String group)
 	{
 		SubProgram xml = new SubProgram();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
 		if(Objects.nonNull(q.getLabel())) {xml.setLabel(xfLabel.build(ejb));}

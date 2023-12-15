@@ -40,9 +40,9 @@ public class XmlPrecisionFactory<L extends JeeslLang, D extends JeeslDescription
 	public Precision build(S ejb, String group)
 	{
 		Precision xml = new Precision();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
 		if(Objects.nonNull(q.getLabel())) {xml.setLabel(xfLabel.build(ejb));}

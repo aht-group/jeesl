@@ -31,9 +31,9 @@ public class XmlRealmFactory<L extends JeeslLang, D extends JeeslDescription,S e
 	public Realm build(S ejb, String group)
 	{
 		Realm xml = new Realm();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
 		if(Objects.nonNull(q.getLangs()))

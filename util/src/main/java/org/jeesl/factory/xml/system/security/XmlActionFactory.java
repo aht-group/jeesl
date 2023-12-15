@@ -42,8 +42,8 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 		this.q=q;
 		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetView()) {xfView = new XmlViewFactory<>(q.getView());}
-		if(q.isSetTemplate()){xfTemplate= new XmlTemplateFactory<>(q.getTemplate());}
+		if(Objects.nonNull(q.getView())) {xfView = new XmlViewFactory<>(q.getView());}
+		if(Objects.nonNull(q.getTemplate())) {xfTemplate= new XmlTemplateFactory<>(q.getTemplate());}
 	}
 	
 
@@ -56,7 +56,7 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 		
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(action.getName()));}
 		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(action.getDescription()));}
-		if(q.isSetView()) {xml.setView(xfView.build(action.getView()));}
+		if(Objects.nonNull(q.getView())) {xml.setView(xfView.build(action.getView()));}
 		
 		if(ObjectUtils.allNotNull(q.getTemplate(),action.getTemplate())) {xml.setTemplate(xfTemplate.build(action.getTemplate()));}
 		

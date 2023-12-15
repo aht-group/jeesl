@@ -61,7 +61,7 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 		Section xml = new Section();
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetCode()) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
 		
 		if(q.isSetDescription()){xml.setDescription(XmlDescriptionFactory.build(ejb.getName().get(localeCode).getLang()));}

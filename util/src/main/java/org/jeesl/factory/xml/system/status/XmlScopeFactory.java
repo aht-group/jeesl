@@ -47,7 +47,7 @@ public class XmlScopeFactory<L extends JeeslLang, D extends JeeslDescription,S e
 	{
 		Scope xml = new Scope();
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		
 		if(Objects.nonNull(q.getLabel())) {xml.setLabel(xfLabel.build(ejb));}
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}

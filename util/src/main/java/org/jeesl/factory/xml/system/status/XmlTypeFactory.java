@@ -36,9 +36,9 @@ public class XmlTypeFactory<L extends JeeslLang, D extends JeeslDescription,S ex
 	public Type build(S ejb, String group)
 	{
 		Type xml = new Type();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
 		if(Objects.nonNull(q.getLangs()))
@@ -119,7 +119,7 @@ public class XmlTypeFactory<L extends JeeslLang, D extends JeeslDescription,S ex
 		List<Long> result = new ArrayList<Long>();
 		for(Type type : list)
 		{
-			if(type.isSetId()){result.add(type.getId());}
+			if(Objects.nonNull(type.getId())) {result.add(type.getId());}
 		}
 		return result;
 	}

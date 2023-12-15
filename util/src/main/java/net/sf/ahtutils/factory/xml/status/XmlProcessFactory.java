@@ -30,12 +30,12 @@ public class XmlProcessFactory
 	{
 		net.sf.ahtutils.xml.status.Process xml = new net.sf.ahtutils.xml.status.Process();
 		xml.setGroup(group);
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.getStyle())) {xml.setStyle(ejb.getStyle());}
 		if(Objects.nonNull(q.getImage())) {xml.setImage(ejb.getImage());}
-		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
 		
 		if(Objects.nonNull(q.getLangs()))
 		{

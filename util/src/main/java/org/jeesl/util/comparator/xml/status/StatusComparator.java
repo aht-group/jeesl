@@ -35,10 +35,10 @@ public class StatusComparator
 			  if(ObjectUtils.allNotNull(a.getGroup(),b.getGroup())) {ctb.append(a.getGroup(), b.getGroup());}
 			  if(ObjectUtils.allNotNull(a.getParent(),b.getParent()))
 			  {
-				  if(a.getParent().isSetPosition() && b.getParent().isSetPosition()){ctb.append(a.getParent().getPosition(),b.getParent().getPosition());}
+				  if(ObjectUtils.allNotNull(a.getParent().getPosition(),b.getParent().getPosition())) {ctb.append(a.getParent().getPosition(),b.getParent().getPosition());}
 				  if(ObjectUtils.allNotNull(a.getParent().getCode(),b.getParent().getCode())) {ctb.append(a.getParent().getCode(),b.getParent().getCode());}
 			  }
-			  if(a.isSetPosition() && b.isSetPosition()){ctb.append(a.getPosition(), b.getPosition());}
+			  if(ObjectUtils.allNotNull(a.getPosition(),b.getPosition())){ctb.append(a.getPosition(), b.getPosition());}
 			  if(ObjectUtils.allNotNull(a.getCode(),b.getCode())) {ctb.append(a.getCode(), b.getCode());}
 			  return ctb.toComparison();
         }

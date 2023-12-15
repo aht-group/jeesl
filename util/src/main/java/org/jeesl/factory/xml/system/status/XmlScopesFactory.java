@@ -30,7 +30,7 @@ public class XmlScopesFactory<L extends JeeslLang, D extends JeeslDescription,S 
 	{
 		Scopes xml = new Scopes();
 		
-		if(xml.isSetSize())
+		if(Objects.nonNull(xml.getSize()))
 		{
 			if(ejbs!=null){xml.setSize(ejbs.size());}
 			else{xml.setSize(0);}

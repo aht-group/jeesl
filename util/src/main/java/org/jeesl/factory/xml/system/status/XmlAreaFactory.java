@@ -45,9 +45,9 @@ public class XmlAreaFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, D 
 	public Area build(S ejb, String group)
 	{
 		Area xml = new Area();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
@@ -85,7 +85,7 @@ public class XmlAreaFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLang, D 
 		List<Long> result = new ArrayList<Long>();
 		for(Area c : list)
 		{
-			if(c.isSetId()){result.add(c.getId());}
+			if(Objects.nonNull(c.getId())) {result.add(c.getId());}
 		}
 		return result;
 	}

@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.util.query.xpath.StatusXpath;
@@ -389,7 +390,7 @@ public class OfxStatusTableFactory extends AbstractUtilsOfxDocumentationFactory
 		Body body = new Body();
 		for(Status status : listStatus.getStatus())
 		{
-			if(status.isSetVisible() && status.isVisible())
+			if(BooleanComparator.active(status.isVisible()))
 			{
 				body.getRow().add(row(status));
 				firstRow=false;

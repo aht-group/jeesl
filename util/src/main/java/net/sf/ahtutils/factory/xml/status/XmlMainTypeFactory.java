@@ -33,12 +33,12 @@ public class XmlMainTypeFactory
 	public <S extends JeeslStatus<L,D,S>,L extends JeeslLang, D extends JeeslDescription> MainType build(S ejb, String group)
 	{
 		MainType xml = new MainType();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		
 		if(ejb==null) {logger.info("ejb==null)");}
 		
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
 		if(Objects.nonNull(q.getLangs()))
@@ -110,7 +110,7 @@ public class XmlMainTypeFactory
 		List<Long> result = new ArrayList<Long>();
 		for(MainType type : list)
 		{
-			if(type.isSetId()){result.add(type.getId());}
+			if(Objects.nonNull(type.getId())) {result.add(type.getId());}
 		}
 		return result;
 	}

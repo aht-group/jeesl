@@ -47,7 +47,7 @@ public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
 		if(q.isSetCategory()){xml.setCategory(xfCategory.build(ejb.getCategory()));}		
 		

@@ -38,8 +38,8 @@ public class XmlStatementFactory <S extends JeeslStatus<L,D,S>, L extends JeeslL
 		Statement xml = new Statement();
 		xml.setGroup(group);
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
-		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
 		if(Objects.nonNull(q.getImage())) {xml.setImage(ejb.getImage());}
 
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}

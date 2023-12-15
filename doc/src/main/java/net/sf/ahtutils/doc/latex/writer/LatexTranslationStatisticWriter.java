@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import net.sf.ahtutils.doc.ofx.status.OfxLangStatisticTableFactory;
@@ -134,8 +135,8 @@ public class LatexTranslationStatisticWriter
 			for(String s : langs){sLangs.add(s);}
 			for(Lang lang : xmlLangs.getLang())
 			{
-				if(!lang.isSetVersion()){versionOutdated=true;}
-				if(version!=null && lang.getVersion()!=version){versionOutdated=true;}
+				if(Objects.isNull(lang.getVersion())) {versionOutdated=true;}
+				if(version!=null && Objects.nonNull(lang.getVersion())) {versionOutdated=true;}
 				
 				if(sLangs.contains(lang.getKey())){sLangs.remove(lang.getKey());}
 			}

@@ -52,7 +52,7 @@ public class XmlAttributeFactory <L extends JeeslLang,D extends JeeslDescription
 		Attribute xml = new Attribute();
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetType()){xml.setType(xfType.build(ejb.getType()));}
 		

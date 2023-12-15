@@ -118,7 +118,7 @@ public class OfxQaNfrResultTableFactory extends AbstractUtilsOfxDocumentationFac
 		{
 			boolean withAnswers = hasStaffAnswers(section,mapAnswers,staff);
 			boolean reportingRelevant = false;
-			if(Objects.nonNull(staff.getLevel()) && staff.getLevel().isSetVisible()){reportingRelevant=staff.getLevel().isVisible();}
+			if(Objects.nonNull(staff.getLevel()) && Objects.nonNull(staff.getLevel().isVisible())) {reportingRelevant=staff.getLevel().isVisible();}
 			
 			if(withAnswers && reportingRelevant)
 			{

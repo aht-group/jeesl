@@ -46,7 +46,7 @@ public class XmlDiagramFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(q.isSetCode()&&ejb.getCode()!=""){xml.setCode(ejb.getCode());}
-		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		
 		if(q.isSetDocumentation()) {xml.setDocumentation(ejb.isDocumentation());}
 		if(q.isSetCategory()){xml.setCategory(xfCategory.build(ejb.getCategory()));}		

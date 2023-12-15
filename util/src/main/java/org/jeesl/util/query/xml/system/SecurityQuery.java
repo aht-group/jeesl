@@ -119,7 +119,7 @@ public class SecurityQuery
 		role.setCode("");
 		
 		Domain domain = new Domain();
-		domain.setId(0);
+		domain.setId(0l);
 		
 		User user = new User();
 		user.setId(0l);
