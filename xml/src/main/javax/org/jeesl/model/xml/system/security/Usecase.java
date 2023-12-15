@@ -98,10 +98,6 @@ public class Usecase
         this.descriptions = value;
     }
 
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
-    }
-
     /**
      * Gets the value of the langs property.
      * 
@@ -124,10 +120,6 @@ public class Usecase
      */
     public void setLangs(Langs value) {
         this.langs = value;
-    }
-
-    public boolean isSetLangs() {
-        return (this.langs!= null);
     }
 
     /**
@@ -154,10 +146,6 @@ public class Usecase
         this.actions = value;
     }
 
-    public boolean isSetActions() {
-        return (this.actions!= null);
-    }
-
     /**
      * Gets the value of the views property.
      * 
@@ -182,10 +170,6 @@ public class Usecase
         this.views = value;
     }
 
-    public boolean isSetViews() {
-        return (this.views!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -194,7 +178,7 @@ public class Usecase
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -206,16 +190,8 @@ public class Usecase
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -242,10 +218,6 @@ public class Usecase
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -254,7 +226,7 @@ public class Usecase
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -266,16 +238,8 @@ public class Usecase
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -286,7 +250,7 @@ public class Usecase
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -298,16 +262,8 @@ public class Usecase
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -318,7 +274,7 @@ public class Usecase
      *     {@link Boolean }
      *     
      */
-    public boolean isDocumentation() {
+    public Boolean isDocumentation() {
         return documentation;
     }
 
@@ -330,16 +286,8 @@ public class Usecase
      *     {@link Boolean }
      *     
      */
-    public void setDocumentation(boolean value) {
+    public void setDocumentation(Boolean value) {
         this.documentation = value;
-    }
-
-    public boolean isSetDocumentation() {
-        return (this.documentation!= null);
-    }
-
-    public void unsetDocumentation() {
-        this.documentation = null;
     }
 
     /**
@@ -364,10 +312,6 @@ public class Usecase
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

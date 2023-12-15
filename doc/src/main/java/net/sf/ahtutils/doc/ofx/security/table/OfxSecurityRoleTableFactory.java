@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.model.xml.system.security.Role;
@@ -71,8 +72,7 @@ final static Logger logger = LoggerFactory.getLogger(OfxSecurityUsecaseTableFact
 		Body body = new Body();
 		for(Role role : roles.getRole())
 		{
-			if(!role.isSetDocumentation()){role.setDocumentation(false);}
-			if(role.isDocumentation())
+			if(BooleanComparator.active(role.isDocumentation()))
 			{
 				body.getRow().add(createRow(role));
 			}

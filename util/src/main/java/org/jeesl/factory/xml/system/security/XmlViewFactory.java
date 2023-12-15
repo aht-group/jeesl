@@ -41,7 +41,7 @@ public class XmlViewFactory <L extends JeeslLang, D extends JeeslDescription,
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
-		if(q.isSetDocumentation() && ejb.getDocumentation()!=null) {xml.setDocumentation(ejb.getDocumentation());}
+		if(Objects.nonNull(q.isDocumentation()) && ejb.getDocumentation()!=null) {xml.setDocumentation(ejb.getDocumentation());}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescription.create(ejb.getDescription()));}

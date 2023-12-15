@@ -72,12 +72,4 @@ public class Actions
         return this.action;
     }
 
-    public boolean isSetAction() {
-        return ((this.action!= null)&&(!this.action.isEmpty()));
-    }
-
-    public void unsetAction() {
-        this.action = null;
-    }
-
 }

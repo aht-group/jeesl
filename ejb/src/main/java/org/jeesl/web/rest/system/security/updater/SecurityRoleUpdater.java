@@ -123,7 +123,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 		
 		try
 		{
-			if(role.isSetDocumentation()){ejb.setDocumentation(role.isDocumentation());}else{ejb.setDocumentation(false);}
+			if(Objects.nonNull(role.isDocumentation())) {ejb.setDocumentation(role.isDocumentation());}else{ejb.setDocumentation(false);}
 			if(Objects.nonNull(role.isVisible())) {ejb.setVisible(role.isVisible());}else{ejb.setVisible(true);}
 			if(Objects.nonNull(role.getPosition())) {ejb.setPosition(role.getPosition());}else{ejb.setPosition(0);}
 			

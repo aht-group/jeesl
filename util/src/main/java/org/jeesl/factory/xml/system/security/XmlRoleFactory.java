@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.security;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -62,7 +63,7 @@ public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
-		if(q.isSetDocumentation() && ejb.getDocumentation()!=null){xml.setDocumentation(ejb.getDocumentation());}
+		if(ObjectUtils.allNotNull(q.isDocumentation(),ejb.getDocumentation())) {xml.setDocumentation(ejb.getDocumentation());}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
