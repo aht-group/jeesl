@@ -9,6 +9,7 @@
             <xsd:attribute name="value" type="xsd:string"/>
             <xsd:attribute name="description" type="xsd:string"/>
 			<xsd:attribute name="required" type="xsd:boolean"/>
+			<xsd:attribute name="version" type="xsd:int"/>
         </xsd:complexType>
     </xsd:element>
 </xsd:schema>

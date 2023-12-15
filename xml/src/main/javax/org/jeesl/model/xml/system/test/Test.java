@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="value" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="description" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="required" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -45,6 +46,8 @@ public class Test
     protected String description;
     @XmlAttribute(name = "required")
     protected Boolean required;
+    @XmlAttribute(name = "version")
+    protected Integer version;
 
     /**
      * Gets the value of the key property.
@@ -140,6 +143,30 @@ public class Test
      */
     public void setRequired(Boolean value) {
         this.required = value;
+    }
+
+    /**
+     * Gets the value of the version property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * Sets the value of the version property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setVersion(Integer value) {
+        this.version = value;
     }
 
 }

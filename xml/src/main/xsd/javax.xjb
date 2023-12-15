@@ -6,8 +6,9 @@
             xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
 	version="2.1">
 
-	<jxb:globalBindings  > <!-- generateIsSetMethod="true" -->
+	<jxb:globalBindings  generateIsSetMethod="false"> <!-- <jaxb:javaType name="java.util.Date" xmlType="xsd:date"/> -->
 		<jxb:serializable uid="1" />
+		
 	</jxb:globalBindings>
   
 	<jxb:bindings schemaLocation="jeesl.xsd" node="/xsd:schema">

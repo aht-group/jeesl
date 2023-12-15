@@ -22,6 +22,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;attribute name="value" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="description" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="required" type="{http://www.w3.org/2001/XMLSchema}boolean" /&gt;
+ *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -45,6 +46,8 @@ public class Test
     protected String description;
     @XmlAttribute(name = "required")
     protected Boolean required;
+    @XmlAttribute(name = "version")
+    protected Integer version;
 
     /**
      * Ruft den Wert der key-Eigenschaft ab.
@@ -140,6 +143,30 @@ public class Test
      */
     public void setRequired(Boolean value) {
         this.required = value;
+    }
+
+    /**
+     * Ruft den Wert der version-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getVersion() {
+        return version;
+    }
+
+    /**
+     * Legt den Wert der version-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setVersion(Integer value) {
+        this.version = value;
     }
 
 }
