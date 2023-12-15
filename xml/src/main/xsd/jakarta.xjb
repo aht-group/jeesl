@@ -26,5 +26,12 @@
             <jxb:package name="org.jeesl.model.xml.io.cms.text"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    
+    
+    <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/io.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.exlp.model.xml.io"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     	
 </jxb:bindings>

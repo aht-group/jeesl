@@ -274,6 +274,25 @@
 		    			</executions>                    
 					</plugin>
 					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<version>3.3.2</version>
+						<executions>
+							<execution>
+								<id>xjc-clean</id>
+	                    		<phase>process-sources</phase>
+								<goals><goal>clean</goal></goals>
+								<configuration>
+									<filesets>
+										<fileset>
+											<directory>src/main/javax/org/exlp</directory>
+											<followSymlinks>false</followSymlinks>
+										</fileset>
+									</filesets>
+								</configuration>
+							</execution>
+						</executions>
+  					</plugin>
+					<plugin>
 				        <groupId>org.codehaus.mojo</groupId>
 				        <artifactId>build-helper-maven-plugin</artifactId>
 				        <version>3.2.0</version>
@@ -327,7 +346,6 @@
 		                        			<packagename>${jeesl.jaxb.package.base}.test</packagename>
 		                    			</xsdOption>
 		                    			-->
-		                    			
 		                    			<xsdOption>
 											<bindingFile>${basedir}/src/main/xsd/jakarta.xjb</bindingFile>
 											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
@@ -339,6 +357,25 @@
                 			</execution>
             			</executions>                    
            			</plugin>
+           			<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<version>3.3.2</version>
+						<executions>
+							<execution>
+								<id>xjc-clean</id>
+	                    		<phase>process-sources</phase>
+								<goals><goal>clean</goal></goals>
+								<configuration>
+									<filesets>
+										<fileset>
+											<directory>src/main/jakarta/org/exlp</directory>
+											<followSymlinks>false</followSymlinks>
+										</fileset>
+									</filesets>
+								</configuration>
+							</execution>
+						</executions>
+  					</plugin>
            			<plugin>
 				        <groupId>org.codehaus.mojo</groupId>
 				        <artifactId>build-helper-maven-plugin</artifactId>
