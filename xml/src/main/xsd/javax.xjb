@@ -4,16 +4,31 @@
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
             xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
-version="2.1">
+	version="2.1">
 
 	<jxb:globalBindings>
 		<jxb:serializable uid="1" />
 	</jxb:globalBindings>
   
+	<jxb:bindings schemaLocation="jeesl.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.xsd"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 	<jxb:bindings schemaLocation="test.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.test"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    
+
+	 <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.text"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+
+    
+     
     
 </jxb:bindings>

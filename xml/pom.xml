@@ -265,9 +265,14 @@
 		                    			<xsdOption>
 											<bindingFile>${basedir}/src/main/xsd/javax.xjb</bindingFile>
 											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
-		                        			<xsd>${basedir}/src/main/xsd/test.xsd</xsd>
+		                        			<xsd>${basedir}/src/main/xsd/jeesl.xsd</xsd>
 		                    			</xsdOption>
-		                			</xsdOptions>
+<!--			                    			<xsdOption>
+											<bindingFile>${basedir}/src/main/xsd/javax.xjb</bindingFile>
+											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
+		                        			<xsd>${basedir}/src/main/xsd/text.xsd</xsd>
+		                    			</xsdOption>
+-->	                			</xsdOptions>
 		            			</configuration>
 		        			</execution>
 		    			</executions>                    
