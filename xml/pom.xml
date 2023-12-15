@@ -267,12 +267,7 @@
 											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
 		                        			<xsd>${basedir}/src/main/xsd/jeesl.xsd</xsd>
 		                    			</xsdOption>
-<!--			                    			<xsdOption>
-											<bindingFile>${basedir}/src/main/xsd/javax.xjb</bindingFile>
-											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
-		                        			<xsd>${basedir}/src/main/xsd/text.xsd</xsd>
-		                    			</xsdOption>
--->	                			</xsdOptions>
+									</xsdOptions>
 		            			</configuration>
 		        			</execution>
 		    			</executions>                    
@@ -320,13 +315,24 @@
                     			<phase>generate-sources</phase>
                     			<goals><goal>xsdtojava</goal></goals>
           	         			<configuration>
+									 <locale>en</locale>
 									<sourceRoot>${basedir}/src/main/jakarta</sourceRoot>
                         			<xsdOptions>
+										
                             			<xsdOption>
+											<bindingFile>${basedir}/src/main/xsd/jakarta.xjb</bindingFile>
 											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
 		                        			<xsd>${basedir}/src/main/xsd/test.xsd</xsd>
 		                        			<packagename>${jeesl.jaxb.package.base}.test</packagename>
 		                    			</xsdOption>
+		                    			
+		                    			<!--
+		                    			<xsdOption>
+											<bindingFile>${basedir}/src/main/xsd/jakarta.xjb</bindingFile>
+											<extensionArgs><arg>-encoding</arg><arg>UTF-8</arg><arg>-no-header</arg></extensionArgs>
+		                        			<xsd>${basedir}/src/main/xsd/jeesl.xsd</xsd>
+		                    			</xsdOption>
+		                    			-->
                         			</xsdOptions>
                     			</configuration>
                 			</execution>
