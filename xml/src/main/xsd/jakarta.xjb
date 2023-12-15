@@ -23,7 +23,7 @@
     
     <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.text"/>
+            <jxb:package name="org.jeesl.model.xml.io.cms.text"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     	
