@@ -15,9 +15,9 @@
             <jxb:package name="org.jeesl.model.xml.xsd"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-	<jxb:bindings schemaLocation="test.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="jeesl/system/test.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.test"/>
+            <jxb:package name="org.jeesl.model.xml.system.test"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

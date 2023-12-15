@@ -8,7 +8,7 @@ import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 import org.jeesl.model.json.system.job.JsonSystemJob;
 import org.jeesl.model.json.system.security.JsonSecurityUser;
 import org.jeesl.model.json.util.JsonTime;
-import org.jeesl.model.xml.test.Test;
+import org.jeesl.model.xml.system.test.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

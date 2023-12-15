@@ -43,6 +43,9 @@
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" jaxb:extensionBindingPrefixes="xjc"
     jaxb:version="2.0">
+    
+    <!-- This is the 'old' container file -->
+    
     <xsd:import namespace="http://ahtutils.aht-group.com/audit" schemaLocation="aht/audit.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="jeesl/status.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/symbol" schemaLocation="jeesl/symbol.xsd"/>

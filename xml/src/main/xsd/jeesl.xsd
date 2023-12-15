@@ -5,7 +5,8 @@
     xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
     jaxb:version="2.0">
       
-    <xsd:import namespace="http://jeesl.org/test" schemaLocation="test.xsd"/>
+    <xsd:import namespace="http://jeesl.org/test" schemaLocation="jeesl/system/test.xsd"/>
+    <xsd:import namespace="http://www.jeesl.org/text" schemaLocation="jeesl/text.xsd"/>
 <!--	<xsd:import namespace="http://www.jeesl.org/text" schemaLocation="jeesl/text.xsd"/>
 -->
 	<xsd:element name="jeesl">

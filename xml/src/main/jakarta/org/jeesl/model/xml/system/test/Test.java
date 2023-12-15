@@ -1,18 +1,18 @@
 
-package org.jeesl.model.xml.test;
+package org.jeesl.model.xml.system.test;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java-Klasse für anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
  * &lt;complexType&gt;
@@ -47,7 +47,7 @@ public class Test
     protected Boolean required;
 
     /**
-     * Gets the value of the key property.
+     * Ruft den Wert der key-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -59,7 +59,7 @@ public class Test
     }
 
     /**
-     * Sets the value of the key property.
+     * Legt den Wert der key-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -71,7 +71,7 @@ public class Test
     }
 
     /**
-     * Gets the value of the value property.
+     * Ruft den Wert der value-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -83,7 +83,7 @@ public class Test
     }
 
     /**
-     * Sets the value of the value property.
+     * Legt den Wert der value-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -95,7 +95,7 @@ public class Test
     }
 
     /**
-     * Gets the value of the description property.
+     * Ruft den Wert der description-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -107,7 +107,7 @@ public class Test
     }
 
     /**
-     * Sets the value of the description property.
+     * Legt den Wert der description-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -119,7 +119,7 @@ public class Test
     }
 
     /**
-     * Gets the value of the required property.
+     * Ruft den Wert der required-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -131,7 +131,7 @@ public class Test
     }
 
     /**
-     * Sets the value of the required property.
+     * Legt den Wert der required-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
