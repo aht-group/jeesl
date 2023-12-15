@@ -72,4 +72,12 @@ public class Templates
         return this.template;
     }
 
+    public boolean isSetTemplate() {
+        return ((this.template!= null)&&(!this.template.isEmpty()));
+    }
+
+    public void unsetTemplate() {
+        this.template = null;
+    }
+
 }

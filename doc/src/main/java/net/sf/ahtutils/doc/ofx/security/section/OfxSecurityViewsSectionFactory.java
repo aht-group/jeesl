@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.doc.latex.builder.JeeslLatexAdminDocumentationBuilder;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
@@ -82,8 +83,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		
 		for(org.jeesl.model.xml.system.security.Category category : security.getCategory())
 		{
-			if(!category.isSetDocumentation()){category.setDocumentation(false);}
-			if(category.isDocumentation())
+			if(BooleanComparator.active(category.isDocumentation()))
 			{
 				section.getContent().add(build(category));
 			}
@@ -104,8 +104,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		{
 			for(View view : category.getViews().getView())
 			{
-				if(!view.isSetDocumentation()){view.setDocumentation(false);}
-				if(view.isDocumentation() && Objects.nonNull(view.getActions()) && view.getActions().getAction().size()>0)
+				if(BooleanComparator.active(view.isDocumentation()) && Objects.nonNull(view.getActions()) && view.getActions().getAction().size()>0)
 				{
 					section.getContent().add(build(category, view));
 				}

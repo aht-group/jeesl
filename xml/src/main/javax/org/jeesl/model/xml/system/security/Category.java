@@ -117,6 +117,10 @@ public class Category
         this.langs = value;
     }
 
+    public boolean isSetLangs() {
+        return (this.langs!= null);
+    }
+
     /**
      * Gets the value of the descriptions property.
      * 
@@ -139,6 +143,10 @@ public class Category
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
+    }
+
+    public boolean isSetDescriptions() {
+        return (this.descriptions!= null);
     }
 
     /**
@@ -165,6 +173,10 @@ public class Category
         this.roles = value;
     }
 
+    public boolean isSetRoles() {
+        return (this.roles!= null);
+    }
+
     /**
      * Gets the value of the actions property.
      * 
@@ -187,6 +199,10 @@ public class Category
      */
     public void setActions(Actions value) {
         this.actions = value;
+    }
+
+    public boolean isSetActions() {
+        return (this.actions!= null);
     }
 
     /**
@@ -213,6 +229,10 @@ public class Category
         this.templates = value;
     }
 
+    public boolean isSetTemplates() {
+        return (this.templates!= null);
+    }
+
     /**
      * Gets the value of the usecases property.
      * 
@@ -235,6 +255,10 @@ public class Category
      */
     public void setUsecases(Usecases value) {
         this.usecases = value;
+    }
+
+    public boolean isSetUsecases() {
+        return (this.usecases!= null);
     }
 
     /**
@@ -261,6 +285,10 @@ public class Category
         this.tmp = value;
     }
 
+    public boolean isSetTmp() {
+        return (this.tmp!= null);
+    }
+
     /**
      * Gets the value of the views property.
      * 
@@ -283,6 +311,10 @@ public class Category
      */
     public void setViews(Views value) {
         this.views = value;
+    }
+
+    public boolean isSetViews() {
+        return (this.views!= null);
     }
 
     /**
@@ -314,6 +346,14 @@ public class Category
         return this.staffs;
     }
 
+    public boolean isSetStaffs() {
+        return ((this.staffs!= null)&&(!this.staffs.isEmpty()));
+    }
+
+    public void unsetStaffs() {
+        this.staffs = null;
+    }
+
     /**
      * Gets the value of the code property.
      * 
@@ -336,6 +376,10 @@ public class Category
      */
     public void setCode(String value) {
         this.code = value;
+    }
+
+    public boolean isSetCode() {
+        return (this.code!= null);
     }
 
     /**
@@ -362,6 +406,10 @@ public class Category
         this.label = value;
     }
 
+    public boolean isSetLabel() {
+        return (this.label!= null);
+    }
+
     /**
      * Gets the value of the position property.
      * 
@@ -370,7 +418,7 @@ public class Category
      *     {@link Integer }
      *     
      */
-    public Integer getPosition() {
+    public int getPosition() {
         return position;
     }
 
@@ -382,8 +430,16 @@ public class Category
      *     {@link Integer }
      *     
      */
-    public void setPosition(Integer value) {
+    public void setPosition(int value) {
         this.position = value;
+    }
+
+    public boolean isSetPosition() {
+        return (this.position!= null);
+    }
+
+    public void unsetPosition() {
+        this.position = null;
     }
 
     /**
@@ -394,7 +450,7 @@ public class Category
      *     {@link Boolean }
      *     
      */
-    public Boolean isVisible() {
+    public boolean isVisible() {
         return visible;
     }
 
@@ -406,8 +462,16 @@ public class Category
      *     {@link Boolean }
      *     
      */
-    public void setVisible(Boolean value) {
+    public void setVisible(boolean value) {
         this.visible = value;
+    }
+
+    public boolean isSetVisible() {
+        return (this.visible!= null);
+    }
+
+    public void unsetVisible() {
+        this.visible = null;
     }
 
     /**
@@ -418,7 +482,7 @@ public class Category
      *     {@link Boolean }
      *     
      */
-    public Boolean isDocumentation() {
+    public boolean isDocumentation() {
         return documentation;
     }
 
@@ -430,8 +494,16 @@ public class Category
      *     {@link Boolean }
      *     
      */
-    public void setDocumentation(Boolean value) {
+    public void setDocumentation(boolean value) {
         this.documentation = value;
+    }
+
+    public boolean isSetDocumentation() {
+        return (this.documentation!= null);
+    }
+
+    public void unsetDocumentation() {
+        this.documentation = null;
     }
 
 }

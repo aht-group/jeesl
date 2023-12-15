@@ -84,6 +84,10 @@ public class Staffs
         this.domain = value;
     }
 
+    public boolean isSetDomain() {
+        return (this.domain!= null);
+    }
+
     /**
      * Gets the value of the role property.
      * 
@@ -106,6 +110,10 @@ public class Staffs
      */
     public void setRole(Role value) {
         this.role = value;
+    }
+
+    public boolean isSetRole() {
+        return (this.role!= null);
     }
 
     /**
@@ -137,6 +145,14 @@ public class Staffs
         return this.staff;
     }
 
+    public boolean isSetStaff() {
+        return ((this.staff!= null)&&(!this.staff.isEmpty()));
+    }
+
+    public void unsetStaff() {
+        this.staff = null;
+    }
+
     /**
      * Gets the value of the staffs property.
      * 
@@ -166,6 +182,14 @@ public class Staffs
         return this.staffs;
     }
 
+    public boolean isSetStaffs() {
+        return ((this.staffs!= null)&&(!this.staffs.isEmpty()));
+    }
+
+    public void unsetStaffs() {
+        this.staffs = null;
+    }
+
     /**
      * Gets the value of the label property.
      * 
@@ -188,6 +212,10 @@ public class Staffs
      */
     public void setLabel(String value) {
         this.label = value;
+    }
+
+    public boolean isSetLabel() {
+        return (this.label!= null);
     }
 
 }

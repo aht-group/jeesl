@@ -83,6 +83,14 @@ public class Roles
         return this.roles;
     }
 
+    public boolean isSetRoles() {
+        return ((this.roles!= null)&&(!this.roles.isEmpty()));
+    }
+
+    public void unsetRoles() {
+        this.roles = null;
+    }
+
     /**
      * Gets the value of the role property.
      * 
@@ -112,6 +120,14 @@ public class Roles
         return this.role;
     }
 
+    public boolean isSetRole() {
+        return ((this.role!= null)&&(!this.role.isEmpty()));
+    }
+
+    public void unsetRole() {
+        this.role = null;
+    }
+
     /**
      * Gets the value of the type property.
      * 
@@ -136,6 +152,10 @@ public class Roles
         this.type = value;
     }
 
+    public boolean isSetType() {
+        return (this.type!= null);
+    }
+
     /**
      * Gets the value of the label property.
      * 
@@ -158,6 +178,10 @@ public class Roles
      */
     public void setLabel(String value) {
         this.label = value;
+    }
+
+    public boolean isSetLabel() {
+        return (this.label!= null);
     }
 
 }

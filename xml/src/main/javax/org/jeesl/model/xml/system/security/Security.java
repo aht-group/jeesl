@@ -76,6 +76,10 @@ public class Security
         this.menu = value;
     }
 
+    public boolean isSetMenu() {
+        return (this.menu!= null);
+    }
+
     /**
      * Gets the value of the roles property.
      * 
@@ -98,6 +102,10 @@ public class Security
      */
     public void setRoles(Roles value) {
         this.roles = value;
+    }
+
+    public boolean isSetRoles() {
+        return (this.roles!= null);
     }
 
     /**
@@ -127,6 +135,14 @@ public class Security
             category = new ArrayList<Category>();
         }
         return this.category;
+    }
+
+    public boolean isSetCategory() {
+        return ((this.category!= null)&&(!this.category.isEmpty()));
+    }
+
+    public void unsetCategory() {
+        this.category = null;
     }
 
 }

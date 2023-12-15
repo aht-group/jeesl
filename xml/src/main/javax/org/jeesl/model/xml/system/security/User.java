@@ -81,6 +81,10 @@ public class User
         this.staffs = value;
     }
 
+    public boolean isSetStaffs() {
+        return (this.staffs!= null);
+    }
+
     /**
      * Gets the value of the id property.
      * 
@@ -89,7 +93,7 @@ public class User
      *     {@link Long }
      *     
      */
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -101,8 +105,16 @@ public class User
      *     {@link Long }
      *     
      */
-    public void setId(Long value) {
+    public void setId(long value) {
         this.id = value;
+    }
+
+    public boolean isSetId() {
+        return (this.id!= null);
+    }
+
+    public void unsetId() {
+        this.id = null;
     }
 
     /**
@@ -129,6 +141,10 @@ public class User
         this.firstName = value;
     }
 
+    public boolean isSetFirstName() {
+        return (this.firstName!= null);
+    }
+
     /**
      * Gets the value of the lastName property.
      * 
@@ -151,6 +167,10 @@ public class User
      */
     public void setLastName(String value) {
         this.lastName = value;
+    }
+
+    public boolean isSetLastName() {
+        return (this.lastName!= null);
     }
 
     /**
@@ -177,6 +197,10 @@ public class User
         this.name = value;
     }
 
+    public boolean isSetName() {
+        return (this.name!= null);
+    }
+
     /**
      * Gets the value of the email property.
      * 
@@ -199,6 +223,10 @@ public class User
      */
     public void setEmail(String value) {
         this.email = value;
+    }
+
+    public boolean isSetEmail() {
+        return (this.email!= null);
     }
 
 }

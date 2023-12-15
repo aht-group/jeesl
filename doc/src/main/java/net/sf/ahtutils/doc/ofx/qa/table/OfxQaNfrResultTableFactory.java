@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.module.survey.Answer;
@@ -117,7 +118,7 @@ public class OfxQaNfrResultTableFactory extends AbstractUtilsOfxDocumentationFac
 		{
 			boolean withAnswers = hasStaffAnswers(section,mapAnswers,staff);
 			boolean reportingRelevant = false;
-			if(staff.isSetLevel() && staff.getLevel().isSetVisible()){reportingRelevant=staff.getLevel().isVisible();}
+			if(Objects.nonNull(staff.getLevel()) && staff.getLevel().isSetVisible()){reportingRelevant=staff.getLevel().isVisible();}
 			
 			if(withAnswers && reportingRelevant)
 			{

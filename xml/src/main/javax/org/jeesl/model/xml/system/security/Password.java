@@ -76,6 +76,14 @@ public class Password
         return this.rule;
     }
 
+    public boolean isSetRule() {
+        return ((this.rule!= null)&&(!this.rule.isEmpty()));
+    }
+
+    public void unsetRule() {
+        this.rule = null;
+    }
+
     /**
      * Gets the value of the valid property.
      * 
@@ -84,7 +92,7 @@ public class Password
      *     {@link Boolean }
      *     
      */
-    public Boolean isValid() {
+    public boolean isValid() {
         return valid;
     }
 
@@ -96,8 +104,16 @@ public class Password
      *     {@link Boolean }
      *     
      */
-    public void setValid(Boolean value) {
+    public void setValid(boolean value) {
         this.valid = value;
+    }
+
+    public boolean isSetValid() {
+        return (this.valid!= null);
+    }
+
+    public void unsetValid() {
+        this.valid = null;
     }
 
 }

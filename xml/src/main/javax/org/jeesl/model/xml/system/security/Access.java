@@ -48,7 +48,7 @@ public class Access
      *     {@link Boolean }
      *     
      */
-    public Boolean isPublicUser() {
+    public boolean isPublicUser() {
         return publicUser;
     }
 
@@ -60,8 +60,16 @@ public class Access
      *     {@link Boolean }
      *     
      */
-    public void setPublicUser(Boolean value) {
+    public void setPublicUser(boolean value) {
         this.publicUser = value;
+    }
+
+    public boolean isSetPublicUser() {
+        return (this.publicUser!= null);
+    }
+
+    public void unsetPublicUser() {
+        this.publicUser = null;
     }
 
     /**
@@ -72,7 +80,7 @@ public class Access
      *     {@link Boolean }
      *     
      */
-    public Boolean isAuthenticatedUser() {
+    public boolean isAuthenticatedUser() {
         return authenticatedUser;
     }
 
@@ -84,8 +92,16 @@ public class Access
      *     {@link Boolean }
      *     
      */
-    public void setAuthenticatedUser(Boolean value) {
+    public void setAuthenticatedUser(boolean value) {
         this.authenticatedUser = value;
+    }
+
+    public boolean isSetAuthenticatedUser() {
+        return (this.authenticatedUser!= null);
+    }
+
+    public void unsetAuthenticatedUser() {
+        this.authenticatedUser = null;
     }
 
 }

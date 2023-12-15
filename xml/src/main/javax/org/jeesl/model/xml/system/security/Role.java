@@ -110,6 +110,10 @@ public class Role
         this.descriptions = value;
     }
 
+    public boolean isSetDescriptions() {
+        return (this.descriptions!= null);
+    }
+
     /**
      * Gets the value of the langs property.
      * 
@@ -132,6 +136,10 @@ public class Role
      */
     public void setLangs(Langs value) {
         this.langs = value;
+    }
+
+    public boolean isSetLangs() {
+        return (this.langs!= null);
     }
 
     /**
@@ -158,6 +166,10 @@ public class Role
         this.category = value;
     }
 
+    public boolean isSetCategory() {
+        return (this.category!= null);
+    }
+
     /**
      * Gets the value of the views property.
      * 
@@ -180,6 +192,10 @@ public class Role
      */
     public void setViews(Views value) {
         this.views = value;
+    }
+
+    public boolean isSetViews() {
+        return (this.views!= null);
     }
 
     /**
@@ -206,6 +222,10 @@ public class Role
         this.actions = value;
     }
 
+    public boolean isSetActions() {
+        return (this.actions!= null);
+    }
+
     /**
      * Gets the value of the usecases property.
      * 
@@ -228,6 +248,10 @@ public class Role
      */
     public void setUsecases(Usecases value) {
         this.usecases = value;
+    }
+
+    public boolean isSetUsecases() {
+        return (this.usecases!= null);
     }
 
     /**
@@ -254,6 +278,10 @@ public class Role
         this.staffs = value;
     }
 
+    public boolean isSetStaffs() {
+        return (this.staffs!= null);
+    }
+
     /**
      * Gets the value of the id property.
      * 
@@ -262,7 +290,7 @@ public class Role
      *     {@link Long }
      *     
      */
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -274,8 +302,16 @@ public class Role
      *     {@link Long }
      *     
      */
-    public void setId(Long value) {
+    public void setId(long value) {
         this.id = value;
+    }
+
+    public boolean isSetId() {
+        return (this.id!= null);
+    }
+
+    public void unsetId() {
+        this.id = null;
     }
 
     /**
@@ -302,6 +338,10 @@ public class Role
         this.code = value;
     }
 
+    public boolean isSetCode() {
+        return (this.code!= null);
+    }
+
     /**
      * Gets the value of the position property.
      * 
@@ -310,7 +350,7 @@ public class Role
      *     {@link Integer }
      *     
      */
-    public Integer getPosition() {
+    public int getPosition() {
         return position;
     }
 
@@ -322,8 +362,16 @@ public class Role
      *     {@link Integer }
      *     
      */
-    public void setPosition(Integer value) {
+    public void setPosition(int value) {
         this.position = value;
+    }
+
+    public boolean isSetPosition() {
+        return (this.position!= null);
+    }
+
+    public void unsetPosition() {
+        this.position = null;
     }
 
     /**
@@ -334,7 +382,7 @@ public class Role
      *     {@link Boolean }
      *     
      */
-    public Boolean isVisible() {
+    public boolean isVisible() {
         return visible;
     }
 
@@ -346,8 +394,16 @@ public class Role
      *     {@link Boolean }
      *     
      */
-    public void setVisible(Boolean value) {
+    public void setVisible(boolean value) {
         this.visible = value;
+    }
+
+    public boolean isSetVisible() {
+        return (this.visible!= null);
+    }
+
+    public void unsetVisible() {
+        this.visible = null;
     }
 
     /**
@@ -358,7 +414,7 @@ public class Role
      *     {@link Boolean }
      *     
      */
-    public Boolean isDocumentation() {
+    public boolean isDocumentation() {
         return documentation;
     }
 
@@ -370,8 +426,16 @@ public class Role
      *     {@link Boolean }
      *     
      */
-    public void setDocumentation(Boolean value) {
+    public void setDocumentation(boolean value) {
         this.documentation = value;
+    }
+
+    public boolean isSetDocumentation() {
+        return (this.documentation!= null);
+    }
+
+    public void unsetDocumentation() {
+        this.documentation = null;
     }
 
     /**
@@ -396,6 +460,10 @@ public class Role
      */
     public void setLabel(String value) {
         this.label = value;
+    }
+
+    public boolean isSetLabel() {
+        return (this.label!= null);
     }
 
 }

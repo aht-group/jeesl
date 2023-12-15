@@ -76,6 +76,10 @@ public class Rule
         this.type = value;
     }
 
+    public boolean isSetType() {
+        return (this.type!= null);
+    }
+
     /**
      * Gets the value of the code property.
      * 
@@ -100,6 +104,10 @@ public class Rule
         this.code = value;
     }
 
+    public boolean isSetCode() {
+        return (this.code!= null);
+    }
+
     /**
      * Gets the value of the valid property.
      * 
@@ -108,7 +116,7 @@ public class Rule
      *     {@link Boolean }
      *     
      */
-    public Boolean isValid() {
+    public boolean isValid() {
         return valid;
     }
 
@@ -120,8 +128,16 @@ public class Rule
      *     {@link Boolean }
      *     
      */
-    public void setValid(Boolean value) {
+    public void setValid(boolean value) {
         this.valid = value;
+    }
+
+    public boolean isSetValid() {
+        return (this.valid!= null);
+    }
+
+    public void unsetValid() {
+        this.valid = null;
     }
 
     /**
@@ -132,7 +148,7 @@ public class Rule
      *     {@link Integer }
      *     
      */
-    public Integer getMin() {
+    public int getMin() {
         return min;
     }
 
@@ -144,8 +160,16 @@ public class Rule
      *     {@link Integer }
      *     
      */
-    public void setMin(Integer value) {
+    public void setMin(int value) {
         this.min = value;
+    }
+
+    public boolean isSetMin() {
+        return (this.min!= null);
+    }
+
+    public void unsetMin() {
+        this.min = null;
     }
 
     /**
@@ -156,7 +180,7 @@ public class Rule
      *     {@link Integer }
      *     
      */
-    public Integer getMax() {
+    public int getMax() {
         return max;
     }
 
@@ -168,8 +192,16 @@ public class Rule
      *     {@link Integer }
      *     
      */
-    public void setMax(Integer value) {
+    public void setMax(int value) {
         this.max = value;
+    }
+
+    public boolean isSetMax() {
+        return (this.max!= null);
+    }
+
+    public void unsetMax() {
+        this.max = null;
     }
 
     /**
@@ -180,7 +212,7 @@ public class Rule
      *     {@link Integer }
      *     
      */
-    public Integer getActual() {
+    public int getActual() {
         return actual;
     }
 
@@ -192,8 +224,16 @@ public class Rule
      *     {@link Integer }
      *     
      */
-    public void setActual(Integer value) {
+    public void setActual(int value) {
         this.actual = value;
+    }
+
+    public boolean isSetActual() {
+        return (this.actual!= null);
+    }
+
+    public void unsetActual() {
+        this.actual = null;
     }
 
 }

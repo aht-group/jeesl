@@ -1,8 +1,10 @@
 package net.sf.ahtutils.doc.ofx.security.section;
 
 import java.io.FileNotFoundException;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.doc.latex.builder.JeeslLatexAdminDocumentationBuilder;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
@@ -70,8 +72,7 @@ public class OfxSecurityUsecasesSectionFactory extends AbstractUtilsOfxDocumenta
 		
 		for(Category category : security.getCategory())
 		{
-			if(!category.isSetDocumentation()){category.setDocumentation(false);}
-			if(category.isDocumentation())
+			if(BooleanComparator.active(category.isDocumentation()))
 			{
 				section.getContent().add(build(category));
 			}
@@ -87,11 +88,11 @@ public class OfxSecurityUsecasesSectionFactory extends AbstractUtilsOfxDocumenta
 		
 		section.getContent().addAll(OfxMultiLangFactory.paragraph(langs, category.getDescriptions()));
 		
-		if(category.isSetUsecases())
+		if(Objects.nonNull(category.getUsecases()))
 		{
 			for(Usecase u : category.getUsecases().getUsecase())
 			{
-				if(!u.isSetDocumentation()){u.setDocumentation(false);}
+				if(Objects.isNull(u.isDocumentation())) {u.setDocumentation(false);}
 				if(u.isDocumentation())
 				{
 					section.getContent().add(build(u));

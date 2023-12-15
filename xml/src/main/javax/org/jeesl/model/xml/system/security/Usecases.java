@@ -72,4 +72,12 @@ public class Usecases
         return this.usecase;
     }
 
+    public boolean isSetUsecase() {
+        return ((this.usecase!= null)&&(!this.usecase.isEmpty()));
+    }
+
+    public void unsetUsecase() {
+        this.usecase = null;
+    }
+
 }

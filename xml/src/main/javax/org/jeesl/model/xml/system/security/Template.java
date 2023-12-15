@@ -90,6 +90,10 @@ public class Template
         this.descriptions = value;
     }
 
+    public boolean isSetDescriptions() {
+        return (this.descriptions!= null);
+    }
+
     /**
      * Gets the value of the langs property.
      * 
@@ -114,6 +118,10 @@ public class Template
         this.langs = value;
     }
 
+    public boolean isSetLangs() {
+        return (this.langs!= null);
+    }
+
     /**
      * Gets the value of the id property.
      * 
@@ -122,7 +130,7 @@ public class Template
      *     {@link Long }
      *     
      */
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -134,8 +142,16 @@ public class Template
      *     {@link Long }
      *     
      */
-    public void setId(Long value) {
+    public void setId(long value) {
         this.id = value;
+    }
+
+    public boolean isSetId() {
+        return (this.id!= null);
+    }
+
+    public void unsetId() {
+        this.id = null;
     }
 
     /**
@@ -162,6 +178,10 @@ public class Template
         this.code = value;
     }
 
+    public boolean isSetCode() {
+        return (this.code!= null);
+    }
+
     /**
      * Gets the value of the position property.
      * 
@@ -170,7 +190,7 @@ public class Template
      *     {@link Integer }
      *     
      */
-    public Integer getPosition() {
+    public int getPosition() {
         return position;
     }
 
@@ -182,8 +202,16 @@ public class Template
      *     {@link Integer }
      *     
      */
-    public void setPosition(Integer value) {
+    public void setPosition(int value) {
         this.position = value;
+    }
+
+    public boolean isSetPosition() {
+        return (this.position!= null);
+    }
+
+    public void unsetPosition() {
+        this.position = null;
     }
 
     /**
@@ -194,7 +222,7 @@ public class Template
      *     {@link Boolean }
      *     
      */
-    public Boolean isVisible() {
+    public boolean isVisible() {
         return visible;
     }
 
@@ -206,8 +234,16 @@ public class Template
      *     {@link Boolean }
      *     
      */
-    public void setVisible(Boolean value) {
+    public void setVisible(boolean value) {
         this.visible = value;
+    }
+
+    public boolean isSetVisible() {
+        return (this.visible!= null);
+    }
+
+    public void unsetVisible() {
+        this.visible = null;
     }
 
     /**
@@ -218,7 +254,7 @@ public class Template
      *     {@link Boolean }
      *     
      */
-    public Boolean isDocumentation() {
+    public boolean isDocumentation() {
         return documentation;
     }
 
@@ -230,8 +266,16 @@ public class Template
      *     {@link Boolean }
      *     
      */
-    public void setDocumentation(Boolean value) {
+    public void setDocumentation(boolean value) {
         this.documentation = value;
+    }
+
+    public boolean isSetDocumentation() {
+        return (this.documentation!= null);
+    }
+
+    public void unsetDocumentation() {
+        this.documentation = null;
     }
 
     /**
@@ -256,6 +300,10 @@ public class Template
      */
     public void setLabel(String value) {
         this.label = value;
+    }
+
+    public boolean isSetLabel() {
+        return (this.label!= null);
     }
 
 }
