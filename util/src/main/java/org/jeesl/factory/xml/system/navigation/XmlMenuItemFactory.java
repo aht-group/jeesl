@@ -1,5 +1,6 @@
 package org.jeesl.factory.xml.system.navigation;
 
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
@@ -37,15 +38,7 @@ public class XmlMenuItemFactory <L extends JeeslLang, D extends JeeslDescription
 	}
 	
 	public MenuItem build(M menu)
-	{
-		/*
-		logger.warn("localeCode:"+localeCode);
-		logger.warn("menu!=null:"+(menu!=null));
-		logger.warn("menu.getView()!=null:"+(menu.getView()!=null));
-		logger.warn("menu.getView().getName()!=null:"+(menu.getView().getName()!=null));
-		logger.warn("menu.getView().getName().containsKey(localeCode):"+(menu.getView().getName().containsKey(localeCode)));
-		*/
-		
+	{		
 		MenuItem xml = build();
 		xml.setVisible(menu.getView().isVisible());
 		xml.setCode(menu.getView().getCode());
@@ -69,7 +62,7 @@ public class XmlMenuItemFactory <L extends JeeslLang, D extends JeeslDescription
 	public static MenuItem build(MenuItem mi)
 	{
 		MenuItem xml = build();
-		xml.setVisible(mi.isSetVisible() && mi.isVisible());
+		xml.setVisible(BooleanComparator.active(mi.isVisible()));
 		xml.setActive(mi.isSetActive() && mi.isActive());
 		xml.setCode(mi.getCode());
 		xml.setHref(mi.getHref());

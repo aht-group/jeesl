@@ -76,14 +76,6 @@ public class Menu
         return this.menuItem;
     }
 
-    public boolean isSetMenuItem() {
-        return ((this.menuItem!= null)&&(!this.menuItem.isEmpty()));
-    }
-
-    public void unsetMenuItem() {
-        this.menuItem = null;
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -106,10 +98,6 @@ public class Menu
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

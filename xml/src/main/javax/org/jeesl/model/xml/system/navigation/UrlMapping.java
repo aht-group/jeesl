@@ -66,10 +66,6 @@ public class UrlMapping
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the url property.
      * 
@@ -92,10 +88,6 @@ public class UrlMapping
      */
     public void setUrl(String value) {
         this.url = value;
-    }
-
-    public boolean isSetUrl() {
-        return (this.url!= null);
     }
 
 }

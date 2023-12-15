@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.util.comparator.xml.status.DescriptionComparator;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class XmlDescriptionsFactory<D extends JeeslDescription>
 	{
 		Descriptions xml = new Descriptions();
 		
-		if(q.isSetDescription() && mapEjb!=null)
+		if(ObjectUtils.allNotNull(q.getDescription(),mapEjb))
 		{
 			XmlDescriptionFactory<D> f = new XmlDescriptionFactory<D>(q.getDescription().get(0));
 			for(D ejb : mapEjb.values())

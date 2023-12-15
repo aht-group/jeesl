@@ -48,9 +48,9 @@ public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())) {xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetViews()) {xfView = new XmlViewsFactory<>(q.getViews());}
-		if(q.isSetActions()) {xfAction = new XmlActionsFactory<>(q.getActions());}
-		if(q.isSetUsecases()) {xfUsecase = new XmlUsecasesFactory<L,D,C,R,V,U,A,AT,USER>(q.getUsecases());}
+		if(Objects.nonNull(q.getViews())) {xfView = new XmlViewsFactory<>(q.getViews());}
+		if(Objects.nonNull(q.getActions())) {xfAction = new XmlActionsFactory<>(q.getActions());}
+		if(Objects.nonNull(q.getUsecases())) {xfUsecase = new XmlUsecasesFactory<L,D,C,R,V,U,A,AT,USER>(q.getUsecases());}
 	}
 	
 	public static Role build() {return new Role();}

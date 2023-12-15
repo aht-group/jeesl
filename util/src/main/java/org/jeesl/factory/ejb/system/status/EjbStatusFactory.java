@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -161,7 +162,7 @@ public class EjbStatusFactory<L extends JeeslLang, D extends JeeslDescription,S 
 	
 	public Map<String,D> getDescriptionMap(Descriptions desciptions) throws InstantiationException, IllegalAccessException
 	{
-		if(desciptions!=null && desciptions.isSetDescription())
+		if(Objects.nonNull(desciptions) && ObjectUtils.isNotEmpty(desciptions.getDescription()))
 		{
 			return getDescriptionMap(desciptions.getDescription());
 		}

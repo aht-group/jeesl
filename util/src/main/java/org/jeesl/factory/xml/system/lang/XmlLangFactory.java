@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.lang;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.slf4j.Logger;
@@ -21,8 +23,8 @@ public class XmlLangFactory<L extends JeeslLang>
 	public Lang getUtilsLang(L ejb)
 	{
 		Lang lang = new Lang();
-		if(q.isSetKey()){lang.setKey(ejb.getLkey());}
-		if(q.isSetTranslation()){lang.setTranslation(ejb.getLang());}
+		if(Objects.nonNull(q.getKey())) {lang.setKey(ejb.getLkey());}
+		if(Objects.nonNull(q.getTranslation())) {lang.setTranslation(ejb.getLang());}
 		return lang;
 	}
 	

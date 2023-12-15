@@ -2,6 +2,7 @@ package net.sf.ahtutils.doc.ofx.menu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
@@ -65,7 +66,7 @@ public class OfxMenuTreeFactory extends AbstractUtilsOfxDocumentationFactory
 			Node node = new Node();
 			node.setCode(item.getCode());
 			
-			if(item.isSetView())
+			if(Objects.nonNull(item.getView()))
 			{
 				View view = SecurityXpath.getMenuItem(access,item.getView().getCode());
 				if(langs.length>1){logger.warn("Incorrect Assignment");}

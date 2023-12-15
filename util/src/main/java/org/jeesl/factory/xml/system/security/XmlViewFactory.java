@@ -45,8 +45,8 @@ public class XmlViewFactory <L extends JeeslLang, D extends JeeslDescription,
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(view.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescription.create(view.getDescription()));}
-		if(q.isSetNavigation()){xml.setNavigation(xfNavigation.build(view));}
-		if(q.isSetAccess()){xml.setAccess(XmlAccessFactory.build(view.getAccessPublic(), view.getAccessPublic()));}
+		if(Objects.nonNull(q.getNavigation())) {xml.setNavigation(xfNavigation.build(view));}
+		if(Objects.nonNull(q.getAccess())) {xml.setAccess(XmlAccessFactory.build(view.getAccessPublic(), view.getAccessPublic()));}
 		
 		return xml;
 	}

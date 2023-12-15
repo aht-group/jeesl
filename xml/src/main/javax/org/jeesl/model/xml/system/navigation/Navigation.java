@@ -76,10 +76,6 @@ public class Navigation
         this.viewPattern = value;
     }
 
-    public boolean isSetViewPattern() {
-        return (this.viewPattern!= null);
-    }
-
     /**
      * Gets the value of the urlMapping property.
      * 
@@ -102,10 +98,6 @@ public class Navigation
      */
     public void setUrlMapping(UrlMapping value) {
         this.urlMapping = value;
-    }
-
-    public boolean isSetUrlMapping() {
-        return (this.urlMapping!= null);
     }
 
     /**
@@ -132,10 +124,6 @@ public class Navigation
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the package property.
      * 
@@ -158,10 +146,6 @@ public class Navigation
      */
     public void setPackage(String value) {
         this._package = value;
-    }
-
-    public boolean isSetPackage() {
-        return (this._package!= null);
     }
 
 }
