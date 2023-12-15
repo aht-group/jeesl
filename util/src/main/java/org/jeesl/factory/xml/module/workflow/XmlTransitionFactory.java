@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.module.workflow;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowModificationLevel;
@@ -42,8 +44,8 @@ public class XmlTransitionFactory<L extends JeeslLang, D extends JeeslDescriptio
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<>(q.getLangs());}
-		if(q.isSetDescriptions()) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
 		if(q.isSetStage()) {xfStage = new XmlStageFactory<>(localeCode,q.getStage());}
 	}
 	
@@ -57,8 +59,8 @@ public class XmlTransitionFactory<L extends JeeslLang, D extends JeeslDescriptio
 		
 		if(localeCode!=null && q.isSetLabel() && transition.getName().containsKey(localeCode)) {xml.setLabel(transition.getName().get(localeCode).getLang());}
 		
-		if(q.isSetLangs()) {xml.setLangs(xfLangs.getUtilsLangs(transition.getName()));}
-		if(q.isSetDescriptions()) {xml.setDescriptions(xfDescription.create(transition.getDescription()));}
+		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(transition.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(transition.getDescription()));}
 		if(q.isSetStage()) {xml.setStage(xfStage.build(transition.getDestination()));}
 		return xml;
 	}

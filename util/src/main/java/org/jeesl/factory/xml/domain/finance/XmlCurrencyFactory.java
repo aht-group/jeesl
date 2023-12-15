@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.domain.finance;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlLangFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.module.currency.UtilsCurrency;
@@ -22,7 +24,7 @@ public class XmlCurrencyFactory <L extends JeeslLang, C extends UtilsCurrency<L>
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 	}
 	
 	public Currency build(C currency)
@@ -34,7 +36,7 @@ public class XmlCurrencyFactory <L extends JeeslLang, C extends UtilsCurrency<L>
 		if(q.isSetSymbol()) {xml.setSymbol(currency.getSymbol());}
 		
 		if(q.isSetLabel() && localeCode!=null){xml.setLabel(XmlLangFactory.label(localeCode,currency));}
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(currency.getName()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(currency.getName()));}
 		
 		return xml;
 	}

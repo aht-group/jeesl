@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
@@ -62,8 +64,8 @@ public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlReportFactory(String localeCode, Report q)
 	{
 		this.q=q;
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetCategory()){xfCategory = new XmlCategoryFactory<>(localeCode,q.getCategory());}
 		if(q.isSetXlsWorkbook()){xfWorkbook = new XmlWorkbookFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,q.getXlsWorkbook());}
 		
@@ -81,8 +83,8 @@ public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		if(q.isSetCategory()){xml.setCategory(xfCategory.build(report.getCategory()));}
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(report.getName()));}
-		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(report.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(report.getName()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(report.getDescription()));}
 		
 		if(q.isSetXlsWorkbook() && report.getWorkbook()!=null){xml.setXlsWorkbook(xfWorkbook.build(report.getWorkbook()));}
 		

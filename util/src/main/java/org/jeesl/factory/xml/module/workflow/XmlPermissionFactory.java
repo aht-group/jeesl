@@ -40,7 +40,7 @@ public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescriptio
 		if(q.isSetLevel()) {xfLevel = new XmlLevelFactory<>(localeCode,q.getLevel());}
 		
 		if(q.isSetRole() && q.getRole().isSetLangs()) {xfLangs = new XmlLangsFactory<>(q.getRole().getLangs());}
-//		if(q.isSetDescriptions()) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
+//		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
 	}
 	
 	public static Permission build(){return new Permission();}

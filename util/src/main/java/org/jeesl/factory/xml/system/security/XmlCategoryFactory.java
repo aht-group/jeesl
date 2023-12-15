@@ -1,10 +1,9 @@
 package org.jeesl.factory.xml.system.security;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
-import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
@@ -12,6 +11,9 @@ import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.model.xml.system.security.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,13 +48,13 @@ public class XmlCategoryFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetVisible()){xml.setVisible(category.isVisible());}
 		if(q.isSetDocumentation() && category.getDocumentation()!=null){xml.setDocumentation(category.getDocumentation());}
 		
-		if(q.isSetLangs())
+		if(Objects.nonNull(q.getLangs()))
 		{
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
 			xml.setLangs(f.getUtilsLangs(category.getName()));
 		}
 		
-		if(q.isSetDescriptions())
+		if(Objects.nonNull(q.getDescriptions()))
 		{
 			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
 			xml.setDescriptions(f.create(category.getDescription()));

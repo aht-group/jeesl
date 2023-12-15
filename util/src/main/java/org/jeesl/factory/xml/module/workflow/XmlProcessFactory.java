@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.module.workflow;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
@@ -76,8 +77,8 @@ public class XmlProcessFactory<L extends JeeslLang, D extends JeeslDescription,
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<>(q.getLangs());}
-		if(q.isSetDescriptions()) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
 		if(q.isSetContext()) {xfContext = new XmlContextFactory<>(localeCode,q.getContext());}
 		if(q.isSetStage()) {xfStage = new XmlStageFactory<>(localeCode,q.getStage().get(0));}
 	}
@@ -101,8 +102,8 @@ public class XmlProcessFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		if(localeCode!=null && q.isSetLabel() && process.getName().containsKey(localeCode)) {xml.setLabel(process.getName().get(localeCode).getLang());}
 		
-		if(q.isSetLangs()) {xml.setLangs(xfLangs.getUtilsLangs(process.getName()));}
-		if(q.isSetDescriptions()) {xml.setDescriptions(xfDescription.create(process.getDescription()));}
+		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(process.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(process.getDescription()));}
 		if(q.isSetContext()) {xml.setContext(xfContext.build(process.getContext()));}
 		
 		if(q.isSetStage())

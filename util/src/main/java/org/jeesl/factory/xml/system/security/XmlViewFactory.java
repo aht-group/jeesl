@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.security;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.navigation.XmlNavigationFactory;
@@ -28,8 +30,8 @@ public class XmlViewFactory <L extends JeeslLang, D extends JeeslDescription,
 	public XmlViewFactory(View q)
 	{
 		this.q=q;
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(q.isSetDescriptions()) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetNavigation()) {xfNavigation = new XmlNavigationFactory<>(q.getNavigation());}
 	}
 
@@ -41,8 +43,8 @@ public class XmlViewFactory <L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetVisible()){xml.setVisible(view.isVisible());}
 		if(q.isSetDocumentation() && view.getDocumentation()!=null){xml.setDocumentation(view.getDocumentation());}
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(view.getName()));}
-		if(q.isSetDescriptions()){xml.setDescriptions(xfDescription.create(view.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(view.getName()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescription.create(view.getDescription()));}
 		if(q.isSetNavigation()){xml.setNavigation(xfNavigation.build(view));}
 		if(q.isSetAccess()){xml.setAccess(XmlAccessFactory.build(view.getAccessPublic(), view.getAccessPublic()));}
 		

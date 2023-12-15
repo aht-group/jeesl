@@ -27,8 +27,8 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,S 
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}
 	
 	public static <E extends Enum<E>> Result build(E code){return build(code.toString());}
@@ -50,8 +50,8 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,S 
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
-		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
 		
 		if(q.isSetLabel() && localeCode!=null)
 		{

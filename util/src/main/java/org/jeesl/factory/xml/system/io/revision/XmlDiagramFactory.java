@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.revision;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
@@ -30,8 +32,8 @@ public class XmlDiagramFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		this.q=q;
 		
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<>(q.getLangs());}
-		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
 		if(q.isSetCategory()){xfCategory = new XmlCategoryFactory<>(q.getCategory());}
 	}
 	
@@ -49,8 +51,8 @@ public class XmlDiagramFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetDocumentation()) {xml.setDocumentation(ejb.isDocumentation());}
 		if(q.isSetCategory()){xml.setCategory(xfCategory.build(ejb.getCategory()));}		
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
-		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
 		
 		return xml;
 	}

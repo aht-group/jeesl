@@ -1,10 +1,9 @@
 package org.jeesl.factory.xml.system.security;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
-import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
@@ -12,6 +11,9 @@ import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.model.xml.system.security.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,8 +46,8 @@ public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription,
 		this.localeCode=localeCode;
 		this.q=q;
 		
-		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(q.isSetDescriptions()) {xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())) {xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetViews()) {xfView = new XmlViewsFactory<>(q.getViews());}
 		if(q.isSetActions()) {xfAction = new XmlActionsFactory<>(q.getActions());}
 		if(q.isSetUsecases()) {xfUsecase = new XmlUsecasesFactory<L,D,C,R,V,U,A,AT,USER>(q.getUsecases());}
@@ -71,8 +73,8 @@ public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetVisible()){xml.setVisible(role.isVisible());}
 		if(q.isSetDocumentation() && role.getDocumentation()!=null){xml.setDocumentation(role.getDocumentation());}
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(role.getName()));}
-		if(q.isSetDescriptions()) {xml.setDescriptions(xfDescriptions.create(role.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(role.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescriptions.create(role.getDescription()));}
 		
 		if(q.isSetViews()) {xml.setViews(xfView.build(role.getViews()));}
 		if(q.isSetActions()){xml.setActions(xfAction.build(role.getActions()));}

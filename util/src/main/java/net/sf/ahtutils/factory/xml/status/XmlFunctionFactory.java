@@ -33,12 +33,12 @@ public class XmlFunctionFactory
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
-		if(q.isSetLangs())
+		if(Objects.nonNull(q.getLangs()))
 		{
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
 			xml.setLangs(f.getUtilsLangs(ejb.getName()));
 		}
-		if(q.isSetDescriptions())
+		if(Objects.nonNull(q.getDescriptions()))
 		{
 
 		}
@@ -87,7 +87,7 @@ public class XmlFunctionFactory
 		xml.setCode(status.getCode());
 		xml.setDescriptions(status.getDescriptions());
 		xml.setLangs(status.getLangs());
-		if(status.isSetParent()){xml.setParent(status.getParent());}
+		if(Objects.nonNull(status.getParent())) {xml.setParent(status.getParent());}
 		return xml;
 	}
 }

@@ -6,11 +6,11 @@
             xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
 	version="2.1">
 
-	<jxb:globalBindings  generateIsSetMethod="false"> 
+	<jxb:globalBindings generateIsSetMethod="false"> 
 		<jxb:serializable uid="1" />
 		<!-- <jxb:javaType name="java.util.Date" xmlType="xsd:date"/> -->
 	</jxb:globalBindings>
-  
+
 	<jxb:bindings schemaLocation="jeesl.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.xsd"/>
@@ -21,7 +21,7 @@
             <jxb:package name="org.jeesl.model.xml.system.test"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-    
+
     <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.cms.text"/>
@@ -32,7 +32,7 @@
             <jxb:package name="net.sf.ahtutils.xml.symbol"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-    
+
      <jxb:bindings schemaLocation="jeesl/status.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="net.sf.ahtutils.xml.status"/>
@@ -48,12 +48,12 @@
             <jxb:package name="org.jeesl.model.xml.system.security"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-    
-    
+
+
     <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/io.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.exlp.model.xml.io"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-    
+
 </jxb:bindings>

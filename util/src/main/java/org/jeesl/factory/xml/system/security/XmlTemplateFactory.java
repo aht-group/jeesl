@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.security;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -24,8 +26,8 @@ public class XmlTemplateFactory <L extends JeeslLang, D extends JeeslDescription
 	public XmlTemplateFactory(Template q)
 	{
 		this.q=q;
-		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(q.isSetDescriptions()) {xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())) {xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}
 
 	public Template build(AT template)
@@ -35,8 +37,8 @@ public class XmlTemplateFactory <L extends JeeslLang, D extends JeeslDescription
 		if(q.isSetPosition()){xml.setPosition(template.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(template.isVisible());}
 		
-		if(q.isSetLangs()) {xml.setLangs(xfLangs.getUtilsLangs(template.getName()));}
-		if(q.isSetDescriptions()) {xml.setDescriptions(xfDescriptions.create(template.getDescription()));}
+		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(template.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescriptions.create(template.getDescription()));}
 		
 		return xml;
 	}

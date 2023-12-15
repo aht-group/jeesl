@@ -37,7 +37,7 @@ public class XmlUnitFactory
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
 			xml.setLangs(f.getUtilsLangs(ejb.getName()));
 		}
-		if(q.isSetDescriptions())
+		if(Objects.nonNull(q.getDescriptions()))
 		{
 
 		}

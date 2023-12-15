@@ -32,15 +32,16 @@ public class XmlStatementFactory <S extends JeeslStatus<L,D,S>, L extends JeeslL
 		xml.setGroup(group);
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
-		if(q.isSetImage()){xml.setImage(ejb.getImage());}
 		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
+		if(Objects.nonNull(q.getImage())) {xml.setImage(ejb.getImage());}
 		
-		if(q.isSetLangs())
+		
+		if(Objects.nonNull(q.getLangs()))
 		{
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
 			xml.setLangs(f.getUtilsLangs(ejb.getName()));
 		}
-		if(q.isSetDescriptions())
+		if(Objects.nonNull(q.getDescriptions()))
 		{
 			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
 			xml.setDescriptions(f.create(ejb.getDescription()));

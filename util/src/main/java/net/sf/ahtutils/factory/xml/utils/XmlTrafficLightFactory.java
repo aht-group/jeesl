@@ -1,5 +1,7 @@
 package net.sf.ahtutils.factory.xml.utils;
 
+import java.util.Objects;
+
 import org.jeesl.api.exception.xml.JeeslXmlStructureException;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -30,7 +32,7 @@ public class XmlTrafficLightFactory<L extends JeeslLang, D extends JeeslDescript
 	{
 		this.q=q;
 		if(q.isSetScope()) {xfScope = new XmlScopeFactory<>(q.getScope());}
-		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 	}
 	
 	public TrafficLight build(LIGHT ejb) throws JeeslXmlStructureException
@@ -42,8 +44,8 @@ public class XmlTrafficLightFactory<L extends JeeslLang, D extends JeeslDescript
 		if(q.isSetColorText()){xml.setColorText(ejb.getColorText());}
 		if(q.isSetColorBackground()){xml.setColorBackground(ejb.getColorBackground());}
 		
-		if(q.isSetLangs()) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
-		if(q.isSetDescriptions())
+		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
+		if(Objects.nonNull(q.getDescriptions()))
 		{
 			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
 			xml.setDescriptions(f.create(ejb.getDescription()));

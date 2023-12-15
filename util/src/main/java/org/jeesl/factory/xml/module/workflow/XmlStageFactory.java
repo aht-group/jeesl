@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.module.workflow;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
@@ -56,8 +57,8 @@ public class XmlStageFactory<L extends JeeslLang, D extends JeeslDescription,
 		this.localeCode=localeCode;
 		this.q=q;
 		if(q.isSetType()) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
-		if(q.isSetLangs()) {xfLangs = new XmlLangsFactory<>(q.getLangs());}
-		if(q.isSetDescriptions()) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
 		if(q.isSetTransition()) {xfTransition = new XmlTransitionFactory<>(localeCode,q.getTransition().get(0));}
 		if(q.isSetPermissions() && q.getPermissions().isSetPermission()) {xfPermission = new XmlPermissionFactory<>(localeCode,q.getPermissions().getPermission().get(0));}
 	}
@@ -84,8 +85,8 @@ public class XmlStageFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetId()) {xml.setId(stage.getId());}
 		if(q.isSetPosition()) {xml.setPosition(stage.getPosition());}
 		if(q.isSetType()) {xml.setType(xfType.build(stage.getType()));}
-		if(q.isSetLangs()) {xml.setLangs(xfLangs.getUtilsLangs(stage.getName()));}
-		if(q.isSetDescriptions()) {xml.setDescriptions(xfDescription.create(stage.getDescription()));}
+		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(stage.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(stage.getDescription()));}
 		
 		if(q.isSetTransition())
 		{

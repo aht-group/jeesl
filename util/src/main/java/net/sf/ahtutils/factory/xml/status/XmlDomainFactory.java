@@ -29,12 +29,12 @@ public class XmlDomainFactory <S extends JeeslStatus<L,D,S>,L extends JeeslLang,
 
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
-		if(q.isSetLangs())
+		if(Objects.nonNull(q.getLangs()))
 		{
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
 			xml.setLangs(f.getUtilsLangs(ejb.getName()));
 		}
-		if(q.isSetDescriptions())
+		if(Objects.nonNull(q.getDescriptions()))
 		{
 
 		}

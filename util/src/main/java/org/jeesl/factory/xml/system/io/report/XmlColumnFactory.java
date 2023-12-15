@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlDataTypeFactory;
@@ -61,8 +63,8 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlColumnFactory(String localeCode, XlsColumn q)
 	{
 		this.q=q;
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetDataType()){xfDataType = new XmlDataTypeFactory<CDT,L,D>(localeCode,q.getDataType());}
 		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
 	}
@@ -80,8 +82,8 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		if(q.isSetDataType() && column.getDataType()!=null){xml.setDataType(xfDataType.build(column.getDataType()));}
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(column.getName()));}
-		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(column.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(column.getName()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(column.getDescription()));}
 		
 		if(q.isSetQueries()){xml.setQueries(queries(column));}
 		if(q.isSetLayout()){xml.setLayout(xfLayout.build(column));}

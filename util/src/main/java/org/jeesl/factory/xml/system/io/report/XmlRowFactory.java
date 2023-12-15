@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlDataTypeFactory;
@@ -64,8 +66,8 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlRowFactory(String localeCode, Row q)
 	{
 		this.q=q;
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetType()){xfType = new XmlTypeFactory<>(localeCode,q.getType());}
 		if(q.isSetDataType()){xfDataType = new XmlDataTypeFactory<CDT,L,D>(localeCode,q.getDataType());}
 		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
@@ -80,8 +82,8 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetVisible()){xml.setVisible(row.isVisible());}
 		if(q.isSetPosition()){xml.setPosition(row.getPosition());}
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(row.getName()));}
-		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(row.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(row.getName()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(row.getDescription()));}
 		if(q.isSetType()){xml.setType(xfType.build(row.getType()));}
 		if(q.isSetDataType() && row.getDataType()!=null){xml.setDataType(xfDataType.build(row.getDataType()));}
 		if(q.isSetTemplate() && row.getTemplate()!=null){xml.setTemplate(xfTemplate.build(row.getTemplate()));}

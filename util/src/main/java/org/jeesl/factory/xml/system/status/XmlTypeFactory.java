@@ -40,12 +40,12 @@ public class XmlTypeFactory<L extends JeeslLang, D extends JeeslDescription,S ex
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
-		if(q.isSetLangs())
+		if(Objects.nonNull(q.getLangs()))
 		{
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
 			xml.setLangs(f.getUtilsLangs(ejb.getName()));
 		}
-		if(q.isSetDescriptions())
+		if(Objects.nonNull(q.getDescriptions()))
 		{
 			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
 			xml.setDescriptions(f.create(ejb.getDescription()));

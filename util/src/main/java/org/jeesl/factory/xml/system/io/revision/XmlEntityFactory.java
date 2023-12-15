@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.revision;
 
+import java.util.Objects;
+
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -41,8 +43,8 @@ public class XmlEntityFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlEntityFactory(Entity q)
 	{
 		this.q=q;
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<>(q.getLangs());}
-		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
 		if(q.isSetCategory()){xfCategory = new XmlCategoryFactory<>(q.getCategory());}
 		if(q.isSetAttribute()){xfAttribute = new XmlAttributeFactory<>(q.getAttribute().get(0));}
 		if(q.isSetDiagram()) {xfDiagram = new XmlDiagramFactory<>(q.getDiagram());}
@@ -63,8 +65,8 @@ public class XmlEntityFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetDocumentation()) {xml.setDocumentation(BooleanComparator.active(ejb.getDocumentation()));}
 		if(q.isSetCategory()){xml.setCategory(xfCategory.build(ejb.getCategory()));}		
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
-		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
 		if(q.isSetRemark()){xml.setRemark(XmlRemarkFactory.build(ejb.getDeveloperInfo()));}
 		
 		if(q.isSetAttribute())

@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
@@ -53,8 +55,8 @@ public class XmlCellFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlCellFactory(Cell q)
 	{
 		this.q=q;
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}
 	
 	public Cell build(CELL cell)
@@ -66,8 +68,8 @@ public class XmlCellFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetColNr()){xml.setColNr(cell.getColNr());}
 		if(q.isSetRowNr()){xml.setRowNr(cell.getRowNr());}
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(cell.getName()));}
-		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(cell.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(cell.getName()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(cell.getDescription()));}
 						
 		return xml;
 	}

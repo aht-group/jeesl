@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.io.report;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -65,8 +66,8 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 	{
 		this.q=q;
 		cColumn = new IoReportColumnComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP,COLUMN>().factory(IoReportColumnComparator.Type.position);
-		if(q.isSetLangs()){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(q.isSetDescriptions()){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetXlsColumn()){xfColumn = new XmlColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,q.getXlsColumn().get(0));}
 		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
 	}
@@ -84,8 +85,8 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 		
 		if(q.isSetQuery()){xml.setQuery(group.getQueryColumns());}
 		
-		if(q.isSetLangs()){xml.setLangs(xfLangs.getUtilsLangs(group.getName()));}
-		if(q.isSetDescriptions()){xml.setDescriptions(xfDescriptions.create(group.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(group.getName()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(group.getDescription()));}
 		if(q.isSetLayout()){xml.setLayout(xfLayout.build(group));}
 		
 		if(q.isSetXlsColumn())
