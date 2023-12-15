@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 import org.jeesl.api.controller.ImportStrategy;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.model.xml.text.Remark;
+import org.jeesl.model.xml.io.cms.text.Remark;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

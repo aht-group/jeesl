@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="http://www.jeesl.org"
 	xmlns:jeesl="http://www.jeesl.org"
+	
 	xmlns:cal="http://www.jeesl.org/calendar"
 	xmlns:us="http://ahtutils.aht-group.com/status"
 	xmlns:survey="http://www.jeesl.org/survey"
@@ -8,11 +9,10 @@
 	xmlns:ts="http://www.jeesl.org/timeseries"
 	xmlns:wf="http://www.jeesl.org/workflow"
 	xmlns:jatt="http://www.jeesl.org/io/attribute"
-	
-	xmlns:rev		="http://www.jeesl.org/revision"
-	
+	xmlns:rev="http://www.jeesl.org/revision"
 	xmlns:f="http://www.jeesl.org/finance"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	
 	<xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../jeesl/status.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/finance" schemaLocation="../jeesl/finance.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/calendar" schemaLocation="module/calendar.xsd"/>

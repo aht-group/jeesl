@@ -1,7 +1,7 @@
 package org.jeesl.factory.xml.system.util.text;
 
-import org.jeesl.model.xml.text.Description;
-import org.jeesl.model.xml.text.Markup;
+import org.jeesl.model.xml.io.cms.text.Description;
+import org.jeesl.model.xml.io.cms.text.Markup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

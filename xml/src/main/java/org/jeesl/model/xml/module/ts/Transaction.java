@@ -11,9 +11,10 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 import net.sf.ahtutils.xml.status.Source;
+
+import org.jeesl.model.xml.io.cms.text.Reference;
+import org.jeesl.model.xml.io.cms.text.Remark;
 import org.jeesl.model.xml.system.security.User;
-import org.jeesl.model.xml.text.Reference;
-import org.jeesl.model.xml.text.Remark;
 
 
 /**

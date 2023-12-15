@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.text;
+package org.jeesl.model.xml.io.cms.text;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "", propOrder = {
     "value"
 })
-@XmlRootElement(name = "label")
-public class Label
+@XmlRootElement(name = "remark")
+public class Remark
     implements Serializable
 {
 

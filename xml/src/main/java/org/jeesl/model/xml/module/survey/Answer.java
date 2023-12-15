@@ -10,7 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-import org.jeesl.model.xml.text.Remark;
+
+import org.jeesl.model.xml.io.cms.text.Remark;
 
 
 /**

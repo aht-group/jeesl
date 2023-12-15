@@ -8,7 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.jeesl.model.xml.text.Markups;
+
+import org.jeesl.model.xml.io.cms.text.Markups;
 
 
 /**

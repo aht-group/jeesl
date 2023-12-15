@@ -1,6 +1,6 @@
 package org.jeesl.factory.xml.system.util.text;
 
-import org.jeesl.model.xml.text.Reference;
+import org.jeesl.model.xml.io.cms.text.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

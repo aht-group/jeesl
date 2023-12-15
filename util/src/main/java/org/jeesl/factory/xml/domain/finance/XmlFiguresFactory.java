@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.jeesl.model.xml.text.Remark;
+import org.jeesl.model.xml.io.cms.text.Remark;
 import org.jeesl.util.query.xpath.FiguresXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

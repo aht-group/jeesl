@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.xml.text.Remark;
+import org.jeesl.model.xml.io.cms.text.Remark;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

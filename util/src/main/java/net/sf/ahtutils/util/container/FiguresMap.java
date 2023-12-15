@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.factory.xml.domain.finance.XmlFiguresFactory;
-import org.jeesl.model.xml.text.Remark;
+import org.jeesl.model.xml.io.cms.text.Remark;
 
 import net.sf.ahtutils.xml.finance.Figures;
 import net.sf.ahtutils.xml.finance.Finance;

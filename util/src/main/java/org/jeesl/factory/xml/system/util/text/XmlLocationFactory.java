@@ -1,6 +1,6 @@
 package org.jeesl.factory.xml.system.util.text;
 
-import org.jeesl.model.xml.text.Location;
+import org.jeesl.model.xml.io.cms.text.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

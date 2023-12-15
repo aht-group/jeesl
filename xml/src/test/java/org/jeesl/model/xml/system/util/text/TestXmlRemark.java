@@ -1,7 +1,7 @@
 package org.jeesl.model.xml.system.util.text;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.text.Remark;
+import org.jeesl.model.xml.io.cms.text.Remark;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
