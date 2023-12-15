@@ -157,7 +157,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 		{
 			if(Objects.nonNull(view.getAccess()))
 			{
-				if(view.getAccess().isSetPublicUser()){ejb.setAccessPublic(view.getAccess().isPublicUser());}else{ejb.setAccessPublic(false);}
+				if(Objects.nonNull(view.getAccess().isPublicUser())) {ejb.setAccessPublic(view.getAccess().isPublicUser());}else{ejb.setAccessPublic(false);}
 				if(view.getAccess().isSetAuthenticatedUser()){ejb.setAccessLogin(view.getAccess().isAuthenticatedUser());}else{ejb.setAccessPublic(false);}
 			}
 			else

@@ -47,18 +47,18 @@ public class XmlActionFactory <L extends JeeslLang, D extends JeeslDescription,
 	}
 	
 
-	public org.jeesl.model.xml.system.security.Action build(A action)
+	public org.jeesl.model.xml.system.security.Action build(A ejb)
 	{
 		Action xml = new Action();
-		if(Objects.nonNull(q.getCode())) {xml.setCode(action.getCode());}
-		if(q.isSetPosition()){xml.setPosition(action.getPosition());}
-		if(q.isSetVisible()){xml.setVisible(action.isVisible());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
+		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
 		
-		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(action.getName()));}
-		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(action.getDescription()));}
-		if(Objects.nonNull(q.getView())) {xml.setView(xfView.build(action.getView()));}
+		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(ejb.getDescription()));}
+		if(Objects.nonNull(q.getView())) {xml.setView(xfView.build(ejb.getView()));}
 		
-		if(ObjectUtils.allNotNull(q.getTemplate(),action.getTemplate())) {xml.setTemplate(xfTemplate.build(action.getTemplate()));}
+		if(ObjectUtils.allNotNull(q.getTemplate(),ejb.getTemplate())) {xml.setTemplate(xfTemplate.build(ejb.getTemplate()));}
 		
 		return xml;
 	}

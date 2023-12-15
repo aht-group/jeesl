@@ -30,15 +30,15 @@ public class XmlTemplateFactory <L extends JeeslLang, D extends JeeslDescription
 		if(Objects.nonNull(q.getDescriptions())) {xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}
 
-	public Template build(AT template)
+	public Template build(AT ejb)
 	{
 		Template xml = new Template();
-		if(Objects.nonNull(q.getCode())) {xml.setCode(template.getCode());}
-		if(q.isSetPosition()){xml.setPosition(template.getPosition());}
-		if(q.isSetVisible()){xml.setVisible(template.isVisible());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
 		
-		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(template.getName()));}
-		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescriptions.create(template.getDescription()));}
+		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
 		
 		return xml;
 	}

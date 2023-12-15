@@ -55,25 +55,25 @@ public class XmlRoleFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 	public static Role build() {return new Role();}
 		
-	public Role build(R role)
+	public Role build(R ejb)
 	{
 		Role xml = new Role();
-		if(q.isSetId()){xml.setId(role.getId());}
-		if(Objects.nonNull(q.getCode())) {xml.setCode(role.getCode());}
-		if(q.isSetPosition()){xml.setPosition(role.getPosition());}
-		if(q.isSetVisible()){xml.setVisible(role.isVisible());}
-		if(q.isSetDocumentation() && role.getDocumentation()!=null){xml.setDocumentation(role.getDocumentation());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
+		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
+		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
+		if(q.isSetDocumentation() && ejb.getDocumentation()!=null){xml.setDocumentation(ejb.getDocumentation());}
 		
-		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(role.getName()));}
-		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescriptions.create(role.getDescription()));}
+		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
 		
-		if(Objects.nonNull(q.getViews())) {xml.setViews(xfView.build(role.getViews()));}
-		if(Objects.nonNull(q.getActions())) {xml.setActions(xfAction.build(role.getActions()));}
-		if(Objects.nonNull(q.getUsecases())) {xml.setUsecases(xfUsecase.build(role.getUsecases()));}
+		if(Objects.nonNull(q.getViews())) {xml.setViews(xfView.build(ejb.getViews()));}
+		if(Objects.nonNull(q.getActions())) {xml.setActions(xfAction.build(ejb.getActions()));}
+		if(Objects.nonNull(q.getUsecases())) {xml.setUsecases(xfUsecase.build(ejb.getUsecases()));}
 		
-		if(Objects.nonNull(q.getLabel()) && localeCode!=null && role.getName().containsKey(localeCode))
+		if(Objects.nonNull(q.getLabel()) && localeCode!=null && ejb.getName().containsKey(localeCode))
 		{
-			xml.setLabel(role.getName().get(localeCode).getLang());
+			xml.setLabel(ejb.getName().get(localeCode).getLang());
 		}
 			
 		return xml;

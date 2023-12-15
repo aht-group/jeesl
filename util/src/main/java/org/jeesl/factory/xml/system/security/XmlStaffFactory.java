@@ -69,19 +69,18 @@ public class XmlStaffFactory<L extends JeeslLang, D extends JeeslDescription,
 		return xList;
 	}
 	
-	public Staff build(STAFF staff)
+	public Staff build(STAFF ejb)
 	{
 		Staff xml = new Staff();
 		
-		if(q.isSetId()) {xml.setId(staff.getId());}
-		
-		if(Objects.nonNull(q.getUser())) {xml.setUser(xfUser.build(staff.getUser()));}
-		if(Objects.nonNull(q.getRole())) {xml.setRole(xfRole.build(staff.getRole()));}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getUser())) {xml.setUser(xfUser.build(ejb.getUser()));}
+		if(Objects.nonNull(q.getRole())) {xml.setRole(xfRole.build(ejb.getRole()));}
 		
 		if(Objects.nonNull(q.getDomain()))
 		{
 			Domain domain = new Domain();
-			domain.setId(staff.getDomain().getId());
+			domain.setId(ejb.getDomain().getId());
 			xml.setDomain(domain);
 		}
 		

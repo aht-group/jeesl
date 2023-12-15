@@ -120,8 +120,8 @@ public class SecurityTemplateUpdater <L extends JeeslLang,
 		
 		try
 		{
-			if(role.isSetVisible()){ejb.setVisible(role.isVisible());}else{ejb.setVisible(true);}
-			if(role.isSetPosition()){ejb.setPosition(role.getPosition());}else{ejb.setPosition(0);}
+			if(Objects.nonNull(role.isVisible())) {ejb.setVisible(role.isVisible());}else{ejb.setVisible(true);}
+			if(Objects.nonNull(role.getPosition())) {ejb.setPosition(role.getPosition());}else{ejb.setPosition(0);}
 			
 			ejb.setName(efLang.getLangMap(role.getLangs()));
 			ejb.setDescription(efDescription.create(role.getDescriptions()));

@@ -1,5 +1,7 @@
 package net.sf.ahtutils.controller.db;
 
+import java.util.Objects;
+
 import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.model.xml.system.security.Security;
 import org.jeesl.model.xml.system.security.View;
@@ -35,7 +37,7 @@ public class UtilsSecurityMerger
 			catch (ExlpXpathNotFoundException e) {e.printStackTrace();}
 			catch (ExlpXpathNotUniqueException e) {e.printStackTrace();}
 
-			if(cFile.isSetViews())
+			if(Objects.nonNull(cFile.getViews()))
 			{
 				for(View vFile : cFile.getViews().getView())
 				{

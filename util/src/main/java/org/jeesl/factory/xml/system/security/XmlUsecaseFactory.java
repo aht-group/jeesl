@@ -37,36 +37,36 @@ public class XmlUsecaseFactory <L extends JeeslLang,
 	}
 	
 
-	public Usecase build(U usecase)
+	public Usecase build(U ejb)
 	{
 		Usecase xml = new Usecase();
-		if(Objects.nonNull(q.getCode())) {xml.setCode(usecase.getCode());}
-		if(q.isSetPosition()){xml.setPosition(usecase.getPosition());}
-		if(q.isSetVisible()){xml.setVisible(usecase.isVisible());}
-		if(q.isSetDocumentation() && usecase.getDocumentation()!=null){xml.setDocumentation(usecase.getDocumentation());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
+		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
+		if(q.isSetDocumentation() && ejb.getDocumentation()!=null){xml.setDocumentation(ejb.getDocumentation());}
 		
 		if(Objects.nonNull(q.getLangs()))
 		{
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
-			xml.setLangs(f.getUtilsLangs(usecase.getName()));
+			xml.setLangs(f.getUtilsLangs(ejb.getName()));
 		}
 		
 		if(Objects.nonNull(q.getDescriptions()))
 		{
 			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
-			xml.setDescriptions(f.create(usecase.getDescription()));
+			xml.setDescriptions(f.create(ejb.getDescription()));
 		}
 		
 		if(Objects.nonNull(q.getViews()))
 		{
 			XmlViewsFactory<L,D,C,R,V,U> f = new XmlViewsFactory<>(q.getViews());
-			xml.setViews(f.build(usecase.getViews()));
+			xml.setViews(f.build(ejb.getViews()));
 		}
 		
 		if(Objects.nonNull(q.getActions()))
 		{
 			XmlActionsFactory<L,D,C,R,V,U,A,AT> f = new XmlActionsFactory<>(q.getActions());
-			xml.setActions(f.build(usecase.getActions()));
+			xml.setActions(f.build(ejb.getActions()));
 		}
 		
 		return xml;

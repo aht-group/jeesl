@@ -1,5 +1,7 @@
 package org.jeesl.web.rest.system.security.updater;
 
+import java.util.Objects;
+
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -108,8 +110,8 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 				ejbCategory.setName(efLang.getLangMap(category.getLangs()));
 				ejbCategory.setDescription(efDescription.create(category.getDescriptions()));
 				
-				if(category.isSetVisible()){ejbCategory.setVisible(category.isVisible());}else{ejbCategory.setVisible(true);}
-				if(category.isSetPosition()){ejbCategory.setPosition(category.getPosition());}else{ejbCategory.setPosition(0);}
+				if(Objects.nonNull(category.isVisible())) {ejbCategory.setVisible(category.isVisible());}else{ejbCategory.setVisible(true);}
+				if(Objects.nonNull(category.getPosition())) {ejbCategory.setPosition(category.getPosition());}else{ejbCategory.setPosition(0);}
 				
 				ejbCategory=fSecurity.update(ejbCategory);
 				logger.trace("Proceeding with childs");
@@ -159,8 +161,8 @@ public class AbstractSecurityUpdater <L extends JeeslLang,
 				eCategory.setName(efLang.getLangMap(xCategory.getLangs()));
 				eCategory.setDescription(efDescription.create(xCategory.getDescriptions()));
 				
-				if(xCategory.isSetVisible()){eCategory.setVisible(xCategory.isVisible());}else{eCategory.setVisible(true);}
-				if(xCategory.isSetPosition()){eCategory.setPosition(xCategory.getPosition());}else{eCategory.setPosition(0);}
+				if(Objects.nonNull(xCategory.isVisible())) {eCategory.setVisible(xCategory.isVisible());}else{eCategory.setVisible(true);}
+				if(Objects.nonNull(xCategory.getPosition())) {eCategory.setPosition(xCategory.getPosition());}else{eCategory.setPosition(0);}
 				
 				eCategory=(C)fSecurity.update(eCategory);
 				iuChilds(eCategory,xCategory);

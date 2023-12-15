@@ -41,41 +41,41 @@ public class XmlCategoryFactory <L extends JeeslLang,D extends JeeslDescription,
 		this.q=q;
 	}
 	
-	public org.jeesl.model.xml.system.security.Category build(C category)
+	public org.jeesl.model.xml.system.security.Category build(C ejb)
 	{
 		Category xml = new Category();
-		if(Objects.nonNull(q.getCode())) {xml.setCode(category.getCode());}
-		if(q.isSetPosition()){xml.setPosition(category.getPosition());}
-		if(q.isSetVisible()){xml.setVisible(category.isVisible());}
-		if(q.isSetDocumentation() && category.getDocumentation()!=null){xml.setDocumentation(category.getDocumentation());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
+		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
+		if(q.isSetDocumentation() && ejb.getDocumentation()!=null){xml.setDocumentation(ejb.getDocumentation());}
 		
 		if(Objects.nonNull(q.getLangs()))
 		{
 			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
-			xml.setLangs(f.getUtilsLangs(category.getName()));
+			xml.setLangs(f.getUtilsLangs(ejb.getName()));
 		}
 		
 		if(Objects.nonNull(q.getDescriptions()))
 		{
 			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
-			xml.setDescriptions(f.create(category.getDescription()));
+			xml.setDescriptions(f.create(ejb.getDescription()));
 		}
 		
 		if(ObjectUtils.allNotNull(q.getLabel(),localeCode))
 		{
-			if(category.getName()!=null)
+			if(ejb.getName()!=null)
 			{
-				if(category.getName().containsKey(localeCode)){xml.setLabel(category.getName().get(localeCode).getLang());}
+				if(ejb.getName().containsKey(localeCode)){xml.setLabel(ejb.getName().get(localeCode).getLang());}
 				else
 				{
-					String msg = "No translation "+localeCode+" available in "+category;
+					String msg = "No translation "+localeCode+" available in "+ejb;
 					logger.warn(msg);
 					xml.setLabel(msg);
 				}
 			}
 			else
 			{
-				String msg = "No @name available in "+category;
+				String msg = "No @name available in "+ejb;
 				logger.warn(msg);
 				xml.setLabel(msg);
 			}

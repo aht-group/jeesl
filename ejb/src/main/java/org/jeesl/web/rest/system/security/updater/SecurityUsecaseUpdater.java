@@ -125,8 +125,8 @@ public class SecurityUsecaseUpdater <L extends JeeslLang,
 		
 		try
 		{
-			if(usecase.isSetVisible()){ebj.setVisible(usecase.isVisible());}else{ebj.setVisible(true);}
-			if(usecase.isSetPosition()){ebj.setPosition(usecase.getPosition());}else{ebj.setPosition(0);}
+			if(Objects.nonNull(usecase.isVisible())) {ebj.setVisible(usecase.isVisible());}else{ebj.setVisible(true);}
+			if(Objects.nonNull(usecase.getPosition())) {ebj.setPosition(usecase.getPosition());}else{ebj.setPosition(0);}
 			
 			ebj.setName(efLang.getLangMap(usecase.getLangs()));
 			ebj.setDescription(efDescription.create(usecase.getDescriptions()));

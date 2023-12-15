@@ -108,7 +108,7 @@ public class XmlSubPhaseFactory
 		List<Long> result = new ArrayList<Long>();
 		for(SubPhase phase : list)
 		{
-			if(phase.isSetId()){result.add(phase.getId());}
+			if(Objects.nonNull(phase.getId())) {result.add(phase.getId());}
 		}
 		return result;
 	}

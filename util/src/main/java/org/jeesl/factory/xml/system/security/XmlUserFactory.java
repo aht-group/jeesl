@@ -26,24 +26,24 @@ public class XmlUserFactory<USER extends JeeslUser<?>>
 		this.q=q;
 	}
 	
-	public User build(USER user)
+	public User build(USER ejb)
 	{
 		User xml = new User();
-		if(q.isSetId()){xml.setId(user.getId());}
-		if(Objects.nonNull(q.getFirstName())) {xml.setFirstName(user.getFirstName());}
-		if(Objects.nonNull(q.getLastName())) {xml.setLastName(user.getLastName());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getFirstName())) {xml.setFirstName(ejb.getFirstName());}
+		if(Objects.nonNull(q.getLastName())) {xml.setLastName(ejb.getLastName());}
 		if(Objects.nonNull(q.getName()))
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.append(user.getFirstName());
+			sb.append(ejb.getFirstName());
 			sb.append(" ");
-			sb.append(user.getLastName());
+			sb.append(ejb.getLastName());
 			xml.setName(sb.toString().trim());
 		}
 		
-		if(Objects.nonNull(q.getEmail()) && user instanceof EjbWithEmail)
+		if(Objects.nonNull(q.getEmail()) && ejb instanceof EjbWithEmail)
 		{
-			EjbWithEmail email = (EjbWithEmail)user;
+			EjbWithEmail email = (EjbWithEmail)ejb;
 			xml.setEmail(email.getEmail());
 		}
 		
