@@ -49,14 +49,17 @@ public class JeeslDbGraphicUpdater <G extends JeeslGraphic<GT,?,?>, GT extends J
 				W ejb = fGraphic.fByCode(cStatus,xml.getCode());
 				if(debugOnInfo) {logger.info(ejb.toString());}
 				
-				if(xml.isSetGraphic())
+				if(Objects.nonNull(xml.getGraphic()))
 				{
-					if(xml.getGraphic().isSetType() && xml.getGraphic().getType().isSetCode() && xml.getGraphic().getType().getCode().equals(JeeslGraphicType.Code.svg.toString())
-						&& xml.getGraphic().isSetFile() && Objects.nonNull(xml.getGraphic().getFile().getData()))
+					if(Objects.nonNull(xml.getGraphic().getType())
+						&& Objects.nonNull(xml.getGraphic().getType().getCode())
+						&& xml.getGraphic().getType().getCode().equals(JeeslGraphicType.Code.svg.toString())
+						&& Objects.nonNull(xml.getGraphic().getFile())
+						&& Objects.nonNull(xml.getGraphic().getFile().getData()))
 					{
 						updateSvg(cStatus,ejb,xml);
 					}
-					else if(xml.getGraphic().isSetType() && xml.getGraphic().getType().isSetCode() && xml.getGraphic().getType().getCode().equals(JeeslGraphicType.Code.symbol.toString()))
+					else if(Objects.nonNull(xml.getGraphic().getType()) && Objects.nonNull(xml.getGraphic().getType().getCode()) && xml.getGraphic().getType().getCode().equals(JeeslGraphicType.Code.symbol.toString()))
 					{
 						updateSymbol(cStatus,ejb,xml);	
 					}

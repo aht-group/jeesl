@@ -2,6 +2,8 @@ package org.jeesl.factory.xml.system.lang;
 
 import net.sf.ahtutils.xml.status.Description;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +22,8 @@ public class XmlDescriptionFactory<D extends JeeslDescription>
 	public Description create(D ejb)
 	{
 		Description xml = new Description();
-		if(q.isSetValue()){xml.setValue(ejb.getLang());}
-		if(q.isSetKey()){xml.setKey(ejb.getLkey());}
+		if(Objects.nonNull(q.getValue())) {xml.setValue(ejb.getLang());}
+		if(Objects.nonNull(q.getKey())) {xml.setKey(ejb.getLkey());}
 		return xml;
 	}
 	

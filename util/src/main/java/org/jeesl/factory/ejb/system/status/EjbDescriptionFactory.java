@@ -62,8 +62,8 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
 	
 	public D create(Description description) throws JeeslConstraintViolationException
 	{
-		if(!description.isSetKey()){throw new JeeslConstraintViolationException("Key not set: "+JaxbUtil.toString(description));}
-		if(!description.isSetValue()){throw new JeeslConstraintViolationException("Value not set: "+JaxbUtil.toString(description));}
+		if(Objects.isNull(description.getKey())) {throw new JeeslConstraintViolationException("Key not set: "+JaxbUtil.toString(description));}
+		if(Objects.isNull(description.getValue())) {throw new JeeslConstraintViolationException("Value not set: "+JaxbUtil.toString(description));}
     		return create(description.getKey(),description.getValue());
 	}
     
@@ -99,7 +99,7 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
 	
 	public Map<String,D> create(Descriptions descriptions) throws JeeslConstraintViolationException
 	{
-		if(descriptions!=null && descriptions.isSetDescription()){return create(descriptions.getDescription());}
+		if(descriptions!=null && Objects.nonNull(descriptions.getDescription())) {return create(descriptions.getDescription());}
 		else{return  new Hashtable<String,D>();}
 	}
 	

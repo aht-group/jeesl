@@ -155,7 +155,7 @@ public class SecurityViewUpdater <L extends JeeslLang,
 		
 		try
 		{
-			if(view.isSetAccess())
+			if(Objects.nonNull(view.getAccess()))
 			{
 				if(view.getAccess().isSetPublicUser()){ejb.setAccessPublic(view.getAccess().isPublicUser());}else{ejb.setAccessPublic(false);}
 				if(view.getAccess().isSetAuthenticatedUser()){ejb.setAccessLogin(view.getAccess().isAuthenticatedUser());}else{ejb.setAccessPublic(false);}
@@ -178,21 +178,20 @@ public class SecurityViewUpdater <L extends JeeslLang,
 			ejb.setUrlBase(null);
 			ejb.setUrlMapping(null);	
 			
-			if(view.isSetNavigation())
+			if(Objects.nonNull(view.getNavigation()))
 			{
-				if(view.getNavigation().isSetPackage()){ejb.setPackageName(view.getNavigation().getPackage());}
-				if(view.getNavigation().isSetViewPattern()){ejb.setViewPattern(view.getNavigation().getViewPattern().getValue());}
-				if(view.getNavigation().isSetUrlMapping())
+				if(Objects.nonNull(view.getNavigation().getPackage())) {ejb.setPackageName(view.getNavigation().getPackage());}
+				if(Objects.nonNull(view.getNavigation().getViewPattern())) {ejb.setViewPattern(view.getNavigation().getViewPattern().getValue());}
+				if(Objects.nonNull(view.getNavigation().getUrlMapping()))
 				{
 					ejb.setUrlMapping(view.getNavigation().getUrlMapping().getValue());
-					if(view.getNavigation().getUrlMapping().isSetUrl()){ejb.setUrlBase(view.getNavigation().getUrlMapping().getUrl());}
+					if(Objects.nonNull(view.getNavigation().getUrlMapping().getUrl())) {ejb.setUrlBase(view.getNavigation().getUrlMapping().getUrl());}
 				}
 			}
 			
 			ejb=fSecurity.save(ejb);
 
-			logger.trace("Actions: "+view.getCode()+" "+view.isSetActions());
-			if(view.isSetActions() && view.getActions().isSetAction())
+			if(Objects.nonNull(view.getActions()) && Objects.nonNull(view.getActions().getAction()))
 			{
 				for(org.jeesl.model.xml.system.security.Action action : view.getActions().getAction())
 				{

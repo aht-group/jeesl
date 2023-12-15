@@ -2,6 +2,7 @@ package net.sf.ahtutils.factory.xml.status;
 
 import java.util.Objects;
 
+import org.jeesl.factory.xml.system.io.locale.XmlLabelFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -16,13 +17,19 @@ public class XmlStatementFactory <S extends JeeslStatus<L,D,S>, L extends JeeslL
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlStatementFactory.class);
 		
-	private String lang;
 	private Statement q;
 	
-	public XmlStatementFactory(String lang, Statement q)
+	private XmlLabelFactory<L> xfLabel;
+	private XmlLangsFactory<L> xfLangs;
+	private XmlDescriptionsFactory<D> xfDescription;
+	
+	public XmlStatementFactory(String localeCode, Statement q)
 	{
-		this.lang=lang;
 		this.q=q;
+		
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getLabel())) {xfLabel = new XmlLabelFactory<>(localeCode);}
+		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}
 	
 	public Statement build(S ejb){return build(ejb,null);}
@@ -34,38 +41,10 @@ public class XmlStatementFactory <S extends JeeslStatus<L,D,S>, L extends JeeslL
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
 		if(Objects.nonNull(q.getImage())) {xml.setImage(ejb.getImage());}
-		
-		
-		if(Objects.nonNull(q.getLangs()))
-		{
-			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
-			xml.setLangs(f.getUtilsLangs(ejb.getName()));
-		}
-		if(Objects.nonNull(q.getDescriptions()))
-		{
-			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
-			xml.setDescriptions(f.create(ejb.getDescription()));
-		}
-		
-		if(q.isSetLabel())
-		{
-			if(ejb.getName()!=null)
-			{
-				if(ejb.getName().containsKey(lang)){xml.setLabel(ejb.getName().get(lang).getLang());}
-				else
-				{
-					String msg = "No translation "+lang+" available in "+ejb;
-					logger.warn(msg);
-					xml.setLabel(msg);
-				}
-			}
-			else
-			{
-				String msg = "No @name available in "+ejb;
-				logger.warn(msg);
-				xml.setLabel(msg);
-			}
-		}
+
+		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(ejb.getDescription()));}
+		if(Objects.nonNull(q.getLabel())) {xml.setLabel(xfLabel.build(ejb));}
 		
 		return xml;
 	}

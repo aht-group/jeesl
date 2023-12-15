@@ -1,5 +1,8 @@
 package org.jeesl.web.rest.system.security.updater;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.api.rest.rs.system.security.JeeslSecurityRestTemplateImport;
 import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
@@ -82,7 +85,7 @@ public class SecurityTemplateUpdater <L extends JeeslLang,
 	
 	@Override protected void iuChilds(C category, org.jeesl.model.xml.system.security.Category templates) throws UtilsConfigurationException
 	{
-		if(templates.isSetTemplates() && templates.getTemplates().isSetTemplate())
+		if(Objects.nonNull(templates.getTemplates()) && ObjectUtils.isNotEmpty(templates.getTemplates().getTemplate()))
 		{
 			for(org.jeesl.model.xml.system.security.Template template : templates.getTemplates().getTemplate())
 			{

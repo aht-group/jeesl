@@ -47,7 +47,7 @@ public class XmlModelFactory <L extends JeeslLang, D extends JeeslDescription, S
 		
 		if(ObjectUtils.allNotNull(q.getLabel(),localeCode)){xml.setLabel(XmlLangFactory.label(localeCode,ejb));}
 		
-		if(q.isSetParent() && ejb.getParent()!=null)
+		if(ObjectUtils.allNotNull( q.getParent(),ejb.getParent()))
 		{
 			Parent parent = new Parent();
 			parent.setCode(ejb.getParent().getCode());

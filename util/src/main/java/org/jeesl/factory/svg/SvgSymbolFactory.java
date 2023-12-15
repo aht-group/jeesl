@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.util.Objects;
 
 import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.svggen.SVGGraphics2D;
@@ -97,7 +98,7 @@ public class SvgSymbolFactory<G extends JeeslGraphic<GT,GC,GS>, GT extends Jeesl
 		DOMImplementation impl = SVGDOMImplementation.getDOMImplementation();
 		
 		int size = 5;
-		if(rule.isSetSizes() && rule.getSizes().isSetSize())
+		if(Objects.nonNull(rule.getSizes()) && Objects.nonNull(rule.getSizes().getSize()))
 		{
 			for(Size s : rule.getSizes().getSize())
 			{
@@ -109,7 +110,7 @@ public class SvgSymbolFactory<G extends JeeslGraphic<GT,GC,GS>, GT extends Jeesl
 		}
 		
 		String color = "000000";
-		if(rule.isSetColors() && rule.getColors().isSetColor())
+		if(Objects.nonNull(rule.getColors()) && Objects.nonNull(rule.getColors().getColor()))
 		{
 			for(net.sf.ahtutils.xml.symbol.Color c : rule.getColors().getColor())
 			{
@@ -121,7 +122,7 @@ public class SvgSymbolFactory<G extends JeeslGraphic<GT,GC,GS>, GT extends Jeesl
 		}
 		
 		JeeslGraphicShape.Code style = JeeslGraphicShape.Code.shapeCircle;
-		if(rule.isSetStyles() && rule.getStyles().isSetStyle())
+		if(Objects.nonNull(rule.getStyles()) && Objects.nonNull(rule.getStyles().getStyle()))
 		{
 			for(Style s : rule.getStyles().getStyle())
 			{

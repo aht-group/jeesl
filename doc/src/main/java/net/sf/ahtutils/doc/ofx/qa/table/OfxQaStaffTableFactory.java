@@ -2,8 +2,10 @@ package net.sf.ahtutils.doc.ofx.qa.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.system.security.Staff;
@@ -164,11 +166,11 @@ public class OfxQaStaffTableFactory extends AbstractUtilsOfxDocumentationFactory
 		switch(column)
 		{
 			case organisation: return XmlCellFactory.createParagraphCell(staff.getStatus().getLabel());
-			case department: if(staff.isSetType()){return XmlCellFactory.createParagraphCell(staff.getType().getLabel());}
+			case department: if(Objects.nonNull(staff.getType())) {return XmlCellFactory.createParagraphCell(staff.getType().getLabel());}
 			case organisationDepartment: StringBuffer sb = new StringBuffer();
-											if(staff.isSetStatus()){sb.append(staff.getStatus().getLabel());}
-											if(staff.isSetType() && staff.isSetStatus()){sb.append(", ");}
-											if(staff.isSetType()){sb.append(staff.getType().getLabel());}
+											if(Objects.nonNull(staff.getStatus())) {sb.append(staff.getStatus().getLabel());}
+											if(ObjectUtils.allNotNull(staff.getType(),staff.getStatus())){sb.append(", ");}
+											if(Objects.nonNull(staff.getType())) {sb.append(staff.getType().getLabel());}
 											return XmlCellFactory.createParagraphCell(sb.toString());
 			case role: return OfxMultiLangFactory.cell(langs, staff.getRole().getLangs());
 			case responsibility: return cellResponsibility(staff);
@@ -206,7 +208,7 @@ public class OfxQaStaffTableFactory extends AbstractUtilsOfxDocumentationFactory
 	
 	private Cell cellResponsibility(Staff staff)
 	{
-		if(staff.isSetResponsible() && staff.getResponsible().isSetLabel())
+		if(Objects.nonNull(staff.getResponsible()) && Objects.nonNull(staff.getResponsible().getLabel()))
 		{
 			return XmlCellFactory.createParagraphCell(staff.getResponsible().getLabel());
 		}

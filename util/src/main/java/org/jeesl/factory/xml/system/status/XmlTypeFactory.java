@@ -102,7 +102,7 @@ public class XmlTypeFactory<L extends JeeslLang, D extends JeeslDescription,S ex
 		type.setCode(status.getCode());
 		type.setDescriptions(status.getDescriptions());
 		type.setLangs(status.getLangs());
-		if(status.isSetParent()){type.setParent(status.getParent());}
+		if(Objects.nonNull(status.getParent())) {type.setParent(status.getParent());}
 		return type;
 	}
 	

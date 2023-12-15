@@ -32,7 +32,7 @@ public class StatusComparator
         public int compare(Status a, Status b)
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
-			  if(a.isSetGroup() && b.isSetGroup()){ctb.append(a.getGroup(), b.getGroup());}
+			  if(ObjectUtils.allNotNull(a.getGroup(),b.getGroup())) {ctb.append(a.getGroup(), b.getGroup());}
 			  if(ObjectUtils.allNotNull(a.getParent(),b.getParent()))
 			  {
 				  if(a.getParent().isSetPosition() && b.getParent().isSetPosition()){ctb.append(a.getParent().getPosition(),b.getParent().getPosition());}

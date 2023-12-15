@@ -2,6 +2,7 @@ package net.sf.ahtutils.doc.ofx.security.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
@@ -61,7 +62,7 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 	private Specification createSpecifications(View view)
 	{
 		int roles=0;
-		if(view.isSetRoles()){roles = view.getRoles().getRole().size();}
+		if(Objects.nonNull(view.getRoles())) {roles = view.getRoles().getRole().size();}
 		
 		Specification spec = new Specification();
 		spec.setFloat(XmlFloatFactory.build(false));
@@ -80,7 +81,7 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 	{
 		Head head = new Head();
 		head.getRow().add(createHeaderRow(headerKeys));
-		if(view.isSetRoles())
+		if(Objects.nonNull(view.getRoles()))
 		{
 			for(int i=1;i<=view.getRoles().getRole().size();i++)
 			{
@@ -114,7 +115,7 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 		row.getCell().add(XmlCellFactory.createParagraphCell("Page"));
 		row.getCell().add(XmlCellFactory.createParagraphCell("User is allowed to access the page."));
 		
-		if(view.isSetRoles())
+		if(Objects.nonNull(view.getRoles()))
 		{
 			for(Role role : view.getRoles().getRole())
 			{
@@ -131,12 +132,12 @@ public class OfxSecurityActionTableFactory extends AbstractUtilsOfxDocumentation
 		row.getCell().add(OfxMultiLangFactory.cell(langs, XmlActionFactory.toLangs(action)));
 		row.getCell().add(OfxMultiLangFactory.cell(langs, XmlActionFactory.toDescriptions(action)));
 		
-		if(view.isSetRoles())
+		if(Objects.nonNull(view.getRoles()))
 		{
 			for(Role role : view.getRoles().getRole())
 			{
 				boolean active = false;
-				if(action.isSetRoles())
+				if(Objects.nonNull(action.getRoles()))
 				{
 					for(Role r : action.getRoles().getRole())
 					{

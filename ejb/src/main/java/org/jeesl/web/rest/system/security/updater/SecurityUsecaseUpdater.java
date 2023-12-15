@@ -1,5 +1,8 @@
 package org.jeesl.web.rest.system.security.updater;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.api.rest.rs.system.security.JeeslSecurityRestUsecaseImport;
 import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
@@ -86,7 +89,7 @@ public class SecurityUsecaseUpdater <L extends JeeslLang,
 	@Override protected void iuChilds(C aclCategory, org.jeesl.model.xml.system.security.Category category) throws UtilsConfigurationException
 	{
 		logger.trace("iuChilds "+category.getCode());
-		if(category.isSetUsecases() && category.getUsecases().isSetUsecase())
+		if(Objects.nonNull(category.getUsecases()) && ObjectUtils.isNotEmpty(category.getUsecases().getUsecase()))
 		{
 			logger.trace("iuChilds "+category.getCode()+ " "+category.getUsecases().getUsecase().size());
 			for(org.jeesl.model.xml.system.security.Usecase usecase : category.getUsecases().getUsecase())

@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.symbol;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
@@ -29,25 +31,24 @@ public class XmlGraphicFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlGraphicFactory(String localeCode, Graphic q)
 	{
 		this.q=q;
-		if(q.isSetType()){xfType = new XmlTypeFactory<>(q.getType());}
-		if(q.isSetSymbol()){xfSymbol = new XmlSymbolFactory<>(localeCode,q.getSymbol());}
+		if(Objects.nonNull(q.getType())) {xfType = new XmlTypeFactory<>(q.getType());}
+		if(Objects.nonNull(q.getSymbol())) {xfSymbol = new XmlSymbolFactory<>(localeCode,q.getSymbol());}
 	}
 	
 	public Graphic build(G graphic)
 	{
 		Graphic xml = build();
 		
-		if(q.isSetType()){xml.setType(xfType.build(graphic.getType()));}
+		if(Objects.nonNull(q.getType())) {xml.setType(xfType.build(graphic.getType()));}
 		
 		if(graphic.getType().getCode().equals(JeeslGraphicType.Code.svg.toString()))
 		{
-			if(q.isSetFile()){xml.setFile(XmlFileFactory.build(graphic.getData()));}
+			if(Objects.nonNull(q.getFile())) {xml.setFile(XmlFileFactory.build(graphic.getData()));}
 		}
 		else if(graphic.getType().getCode().equals(JeeslGraphicType.Code.symbol.toString()))
 		{
-			if(q.isSetSymbol()){xml.setSymbol(xfSymbol.build(graphic));}
+			if(Objects.nonNull(q.getSymbol())) {xml.setSymbol(xfSymbol.build(graphic));}
 		}
-		
 		
 		return xml;
 	}

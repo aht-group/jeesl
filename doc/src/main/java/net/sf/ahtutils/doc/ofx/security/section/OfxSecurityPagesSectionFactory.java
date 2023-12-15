@@ -2,6 +2,7 @@ package net.sf.ahtutils.doc.ofx.security.section;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
@@ -79,12 +80,12 @@ public class OfxSecurityPagesSectionFactory extends AbstractUtilsOfxDocumentatio
 		OfxCommentBuilder.doNotModify(comment);
 		section.getContent().add(comment);
 		
-		if(view.isSetDescriptions())
+		if(Objects.nonNull(view.getDescriptions()))
 		{
 			section.getContent().addAll(OfxMultiLangFactory.paragraph(langs, view.getDescriptions()));
 		}
 
-		if(view.isSetActions() && view.getActions().getAction().size()>0)
+		if(Objects.nonNull(view.getActions()) && view.getActions().getAction().size()>0)
 		{
 			section.getContent().addAll(introductionAction(view));
 			List list = XmlListFactory.unordered();

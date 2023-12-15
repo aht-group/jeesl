@@ -1,6 +1,7 @@
 package org.jeesl.doc.word;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.model.xml.jeesl.Container;
@@ -24,7 +25,7 @@ public abstract class AbstractEntityWordRenderer
     {
         for (Status s : c.getStatus())
         {
-            if (s.isSetCode() && s.getCode() != "" && s.getCode().equals(code))
+            if(Objects.nonNull(s.getCode()) && s.getCode() != "" && s.getCode().equals(code))
             {
                 return s.getLangs().getLang().get(0).getTranslation();
             }
@@ -80,7 +81,7 @@ public abstract class AbstractEntityWordRenderer
     {
         for (Status s : c.getStatus())
         {
-            if (s.isSetCode() && s.getCode() != "" && s.getCode().equals(code))
+            if(Objects.nonNull(s.getCode()) && s.getCode() != "" && s.getCode().equals(code))
             {
                 return s.getSymbol();
             }

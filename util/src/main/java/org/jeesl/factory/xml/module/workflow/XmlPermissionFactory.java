@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.module.workflow;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.security.XmlRoleFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
@@ -39,7 +41,7 @@ public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescriptio
 		if(q.isSetType()) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
 		if(q.isSetLevel()) {xfLevel = new XmlLevelFactory<>(localeCode,q.getLevel());}
 		
-		if(q.isSetRole() && q.getRole().isSetLangs()) {xfLangs = new XmlLangsFactory<>(q.getRole().getLangs());}
+		if(q.isSetRole() && Objects.nonNull(q.getRole().getLangs())) {xfLangs = new XmlLangsFactory<>(q.getRole().getLangs());}
 //		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
 	}
 	
@@ -55,7 +57,7 @@ public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescriptio
 		if(q.isSetRole())
 		{
 			Role role = XmlRoleFactory.build(permission.getRole().getCode());
-			if(q.getRole().isSetLangs()) {role.setLangs(xfLangs.getUtilsLangs(permission.getRole().getName()));}
+			if(Objects.nonNull(q.getRole().getLangs())) {role.setLangs(xfLangs.getUtilsLangs(permission.getRole().getName()));}
 			xml.setRole(role);
 		}		
 		return xml;

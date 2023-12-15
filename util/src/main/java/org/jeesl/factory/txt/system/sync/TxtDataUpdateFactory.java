@@ -2,6 +2,8 @@ package org.jeesl.factory.txt.system.sync;
 
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,8 +17,8 @@ public class TxtDataUpdateFactory
 		
 		if(du.isSetType())
 		{
-			if(du.getType().isSetLabel()){sb.append(du.getType().getLabel());}
-			if(du.getType().isSetCode())
+			if(Objects.nonNull(du.getType().getLabel())) {sb.append(du.getType().getLabel());}
+			if(Objects.nonNull(du.getType().getCode()))
 			{
 				try
 				{
@@ -28,7 +30,7 @@ public class TxtDataUpdateFactory
 			}
 		}
 		
-		if(du.isSetResult() && du.getResult().isSetStatus() && du.getResult().getStatus().isSetCode())
+		if(du.isSetResult() && du.getResult().isSetStatus() && Objects.nonNull(du.getResult().getStatus().getCode()))
 		{
 			sb.append(" [");
 			sb.append(du.getResult().getStatus().getCode());

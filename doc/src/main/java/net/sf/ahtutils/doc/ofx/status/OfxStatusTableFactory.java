@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
@@ -213,7 +214,7 @@ public class OfxStatusTableFactory extends AbstractUtilsOfxDocumentationFactory
 			String parentString = null;
 			if(renderColumn.get(Code.parent))
 			{
-				if(!status.isSetParent()){throw new UtilsConfigurationException("A parent is exprected for the status:"+status.getCode());}
+				if(Objects.isNull(status.getParent())) {throw new UtilsConfigurationException("A parent is exprected for the status:"+status.getCode());}
 				Status parent = StatusXpath.getStatus(xmlP.getStatus(), status.getParent().getCode());
 				if(langs.length>1){logger.warn("Incorrect Assignment");}
 				parentString = StatusXpath.getLang(parent.getLangs(), langs[0]).getTranslation();

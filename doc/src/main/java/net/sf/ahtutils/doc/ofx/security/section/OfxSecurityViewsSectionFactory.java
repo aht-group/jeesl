@@ -3,6 +3,7 @@ package net.sf.ahtutils.doc.ofx.security.section;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.latex.builder.JeeslLatexAdminDocumentationBuilder;
@@ -99,12 +100,12 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		section.getContent().addAll(OfxMultiLangFactory.paragraph(langs, category.getDescriptions()));
 		section.getContent().add(ofSecurityViewTable.build(category));
 		
-		if(category.isSetViews())
+		if(Objects.nonNull(category.getViews()))
 		{
 			for(View view : category.getViews().getView())
 			{
 				if(!view.isSetDocumentation()){view.setDocumentation(false);}
-				if(view.isDocumentation() && view.isSetActions() && view.getActions().getAction().size()>0)
+				if(view.isDocumentation() && Objects.nonNull(view.getActions()) && view.getActions().getAction().size()>0)
 				{
 					section.getContent().add(build(category, view));
 				}
@@ -135,7 +136,7 @@ public class OfxSecurityViewsSectionFactory extends AbstractUtilsOfxDocumentatio
 		section.getContent().add(title);
 		section.getContent().addAll(OfxMultiLangFactory.paragraph(langs, view.getDescriptions()));
 		
-		if(view.isSetRoles() && view.getRoles().getRole().size()>0)
+		if(Objects.nonNull(view.getRoles()) && view.getRoles().getRole().size()>0)
 		{
 			section.getContent().addAll(buildRoles(view));
 		}

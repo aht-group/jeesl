@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.factory.xml.system.security.XmlRoleFactory;
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
@@ -82,7 +83,7 @@ public class TestResponsibilityMatrixFactory extends AbstractUtilsDocTest
 	
 	private void addStaff(User user, int roleIndex, int statusIndex)
 	{
-		if(!user.isSetStaffs()){user.setStaffs(new Staffs());}
+		if(Objects.nonNull(user.getStaffs())) {user.setStaffs(new Staffs());}
 		
 		Staff staff = new Staff();
 		staff.setRole(roles.get(roleIndex-1));

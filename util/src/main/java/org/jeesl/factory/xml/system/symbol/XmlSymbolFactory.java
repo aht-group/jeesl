@@ -30,9 +30,9 @@ public class XmlSymbolFactory <L extends JeeslLang, D extends JeeslDescription,
 	public XmlSymbolFactory(String localeCode, Symbol q)
 	{
 		this.q=q;
-		if(q.isSetStyles() && q.getStyles().isSetStyle()){xfStyle = new XmlStyleFactory<>(localeCode,q.getStyles().getStyle().get(0));}
-		if(q.isSetColors()){xfColors = new XmlColorsFactory<>(q.getColors());}
-		if(q.isSetSizes()){xfSizes = new XmlSizesFactory<>(q.getSizes());}
+		if(Objects.nonNull(q.getStyles()) && Objects.nonNull(q.getStyles().getStyle())) {xfStyle = new XmlStyleFactory<>(localeCode,q.getStyles().getStyle().get(0));}
+		if(Objects.nonNull(q.getColors())) {xfColors = new XmlColorsFactory<>(q.getColors());}
+		if(Objects.nonNull(q.getSizes())) {xfSizes = new XmlSizesFactory<>(q.getSizes());}
 	}
 	
 	public Symbol build(G graphic)

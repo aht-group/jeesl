@@ -2,6 +2,7 @@ package net.sf.ahtutils.doc.ofx.security.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
@@ -85,7 +86,7 @@ public class OfxSecurityUsecaseTableFactory extends AbstractUtilsOfxDocumentatio
 		
 		Body body = new Body();
 		body.setLayout(XmlLayoutFactory.build(font));
-		if(usecase.isSetViews())
+		if(Objects.nonNull(usecase.getViews()))
 		{
 			for(int i=0;i<usecase.getViews().getView().size();i++)
 			{
@@ -106,7 +107,7 @@ public class OfxSecurityUsecaseTableFactory extends AbstractUtilsOfxDocumentatio
 		logger.trace(view.getCode());
 		List<Row> rows = new ArrayList<Row>();
 		
-		if(!uc.isSetActions() && uc.getActions().getAction().size()==0)
+		if(Objects.nonNull(uc.getActions()) && uc.getActions().getAction().size()==0)
 		{
 			rows.add(viewOnly(view));
 		}

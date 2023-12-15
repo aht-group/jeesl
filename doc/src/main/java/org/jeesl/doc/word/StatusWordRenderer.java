@@ -2,6 +2,7 @@ package org.jeesl.doc.word;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.model.xml.jeesl.Container;
 import org.jeesl.model.xml.system.revision.Attribute;
@@ -70,7 +71,7 @@ public class StatusWordRenderer extends AbstractEntityWordRenderer
                         statusBuilder.moveToCell(0,4+rowHelper,0,0);
                         statusBuilder.getCurrentParagraph().getRuns().clear();
 
-                        if (status.isSetGraphic()&&status.getGraphic().getType().getCode().equals("svg")&&status.getGraphic().getFile().getData().getValue()!=null)
+                        if(Objects.nonNull(status.getGraphic()) && status.getGraphic().getType().getCode().equals("svg")&&status.getGraphic().getFile().getData().getValue()!=null)
                         {
                             statusBuilder.write(" ");
                             renderStatusSvg(statusBuilder,(byte[])status.getGraphic().getFile().getData().getValue());
@@ -83,7 +84,7 @@ public class StatusWordRenderer extends AbstractEntityWordRenderer
                         statusBuilder.moveToCell(0,4+rowHelper,1,0);
                         statusBuilder.getCurrentParagraph().getRuns().clear();
                         
-                        if (status.isSetDescriptions()&&status.getDescriptions().getDescription().get(0).getValue()!="")
+                        if(Objects.nonNull(status.getDescriptions()) && status.getDescriptions().getDescription().get(0).getValue()!="")
                         { 
                             statusBuilder.write(status.getDescriptions().getDescription().get(0).getValue());
                         }

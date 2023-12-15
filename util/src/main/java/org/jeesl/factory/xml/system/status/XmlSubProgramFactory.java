@@ -21,6 +21,8 @@ public class XmlSubProgramFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLa
 	private SubProgram q;
 	
 	private XmlLabelFactory<L> xfLabel;
+	private XmlLangsFactory<L> xfLangs;
+	private XmlDescriptionsFactory<D> xfDescription;
 	
 	public XmlSubProgramFactory(SubProgram q){this(null,q);}
 	public XmlSubProgramFactory(String localeCode, SubProgram q)
@@ -28,6 +30,8 @@ public class XmlSubProgramFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLa
 		this.q=q;
 		
 		if(Objects.nonNull(q.getLabel())) {xfLabel = new XmlLabelFactory<>(localeCode);}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}
 	
 	public SubProgram build(S ejb){return build(ejb,null);}
@@ -39,19 +43,10 @@ public class XmlSubProgramFactory<S extends JeeslStatus<L,D,S>,L extends JeeslLa
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
 		xml.setGroup(group);
 		
-		if(Objects.nonNull(q.getLangs()))
-		{
-			XmlLangsFactory<L> f = new XmlLangsFactory<L>(q.getLangs());
-			xml.setLangs(f.getUtilsLangs(ejb.getName()));
-		}
-		if(Objects.nonNull(q.getDescriptions()))
-		{
-			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
-			xml.setDescriptions(f.create(ejb.getDescription()));
-		}
-		
-		if(ObjectUtils.allNotNull(q.getLabel(),xfLabel)) {xml.setLabel(xfLabel.build(ejb));}
-		
+		if(Objects.nonNull(q.getLabel())) {xml.setLabel(xfLabel.build(ejb));}
+		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
+		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(ejb.getDescription()));}
+
 		return xml;
 	}
 	

@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.symbol;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.status.XmlStyleFactory;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent;
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
@@ -28,7 +30,7 @@ public class XmlFigureFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlFigureFactory(String localeCode, Figure q)
 	{
 		this.q=q;
-		if(q.isSetStyle()){xfStyle = new XmlStyleFactory<>(localeCode,q.getStyle());}
+		if(Objects.nonNull(q.getStyle())) {xfStyle = new XmlStyleFactory<>(localeCode,q.getStyle());}
 	}
 	
 	public Figure build(GC figure)

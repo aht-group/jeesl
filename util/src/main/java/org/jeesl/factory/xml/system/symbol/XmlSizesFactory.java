@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.symbol;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.slf4j.Logger;
@@ -24,7 +26,7 @@ public class XmlSizesFactory <G extends JeeslGraphic<?,?,?>>
 	{
 		Sizes xml = build();
 		
-		if(q.isSetSize())
+		if(Objects.nonNull(q.getSize()))
 		{
 			xml.getSize().add(XmlSizeFactory.build(JeeslGraphicShape.Size.outer, graphic.getSize()));
 		}

@@ -2,6 +2,7 @@ package org.jeesl.util.comparator.xml.status;
 
 import java.util.Comparator;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class DescriptionComparator
         public int compare(Description a, Description b)
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
-			  if(a.isSetKey() && b.isSetKey()){ctb.append(a.getKey(), b.getKey());}
+			  if(ObjectUtils.allNotNull(a.getKey(),b.getKey())) {ctb.append(a.getKey(), b.getKey());}
 			  return ctb.toComparison();
         }
     }

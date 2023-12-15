@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.system.lang;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Objects;
 
 import net.sf.ahtutils.xml.status.Lang;
 import net.sf.ahtutils.xml.status.Langs;
@@ -25,14 +26,14 @@ public class XmlLangsFactory <L extends JeeslLang>
 	public XmlLangsFactory(Langs q)
 	{
 		this.q=q;
-		if(q.isSetLang()){xfLang = new XmlLangFactory<L>(q.getLang().get(0));}
+		if(Objects.nonNull(q.getLang())) {xfLang = new XmlLangFactory<L>(q.getLang().get(0));}
 	}
 	
 	public Langs getUtilsLangs(Map<String,L> mapLangs)
 	{
 		Langs xml = new Langs();
 		
-		if(q.isSetLang() && mapLangs!=null)
+		if(Objects.nonNull(q.getLang()) && mapLangs!=null)
 		{
 			for(L ahtLang : mapLangs.values())
 			{

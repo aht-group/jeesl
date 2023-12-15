@@ -1,5 +1,8 @@
 package org.jeesl.web.rest.system.security.updater;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.system.JeeslSecurityFacade;
 import org.jeesl.api.rest.rs.system.security.JeeslSecurityRestRoleImport;
 import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
@@ -60,7 +63,7 @@ public class SecurityRoleUpdater <L extends JeeslLang,D extends JeeslDescription
 	
 	@Override protected void iuChilds(C aclCategory, org.jeesl.model.xml.system.security.Category category) throws UtilsConfigurationException
 	{
-		if(category.isSetRoles() && category.getRoles().isSetRole())
+		if(Objects.nonNull(category.getRoles()) && ObjectUtils.isNotEmpty(category.getRoles().getRole()))
 		{
 			for(org.jeesl.model.xml.system.security.Role role : category.getRoles().getRole())
 			{

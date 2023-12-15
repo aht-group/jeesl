@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
@@ -69,7 +70,7 @@ public class EjbStatusFactory<L extends JeeslLang, D extends JeeslDescription,S 
     
 	public S create(Status status) throws JeeslConstraintViolationException
 	{
-		if(!status.isSetLangs()){throw new JeeslConstraintViolationException("No <langs> available for "+JaxbUtil.toString(status));}
+		if(Objects.isNull(status.getLangs())) {throw new JeeslConstraintViolationException("No <langs> available for "+JaxbUtil.toString(status));}
         S s=null;
 		try
 		{
@@ -89,7 +90,7 @@ public class EjbStatusFactory<L extends JeeslLang, D extends JeeslDescription,S 
 			}
 			
 			Descriptions descriptions = XmlDescriptionsFactory.build();
-			if(status.isSetDescriptions())
+			if(Objects.nonNull(status.getDescriptions()))
 			{
 				if(localeCodes==null) {descriptions.getDescription().addAll(status.getDescriptions().getDescription());}
 				else

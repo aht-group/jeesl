@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jeesl.model.xml.jeesl.Container;
@@ -176,14 +177,14 @@ public final class EntityWordRenderer extends AbstractEntityWordRenderer
         { 
             logger.info("info about status parent: " + status.getParent().getCode());
             docBuilder.writeln();
-            if (status.isSetGraphic()&&status.getGraphic().getType().getCode().equals("svg")&&status.getGraphic().getFile().getData().getValue()!=null)
+            if(Objects.nonNull(status.getGraphic()) && status.getGraphic().getType().getCode().equals("svg")&&status.getGraphic().getFile().getData().getValue()!=null)
             {
                 renderStatusSvg(docBuilder,(byte[])status.getGraphic().getFile().getData().getValue());
                 docBuilder.write("");
             }				                
             else {docBuilder.write(" "); }
             docBuilder.writeln(status.getCode()+" = "+status.getLangs().getLang().get(0).getTranslation());
-            if (status.isSetDescriptions() && status.getDescriptions().getDescription().get(0).getValue()!="")
+            if (Objects.nonNull(status.getDescriptions()) && status.getDescriptions().getDescription().get(0).getValue()!="")
             {
                 docBuilder.getFont().setColor(Color.gray);docBuilder.getFont().setItalic(true);docBuilder.getFont().setSize(7);
                 docBuilder.write("  (" + status.getDescriptions().getDescription().get(0).getValue() +")");

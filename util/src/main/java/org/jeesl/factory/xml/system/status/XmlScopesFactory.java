@@ -1,6 +1,7 @@
 package org.jeesl.factory.xml.system.status;
 
 import java.util.List;
+import java.util.Objects;
 
 import net.sf.ahtutils.xml.status.Scopes;
 
@@ -22,7 +23,7 @@ public class XmlScopesFactory<L extends JeeslLang, D extends JeeslDescription,S 
 	public XmlScopesFactory(String localeCode, Scopes q)
 	{
 		this.q=q;
-		if(q.isSetScope()) {xfScope = new XmlScopeFactory<>(localeCode,q.getScope().get(0));}
+		if(Objects.nonNull(q.getScope())) {xfScope = new XmlScopeFactory<>(localeCode,q.getScope().get(0));}
 	}
 	
 	public Scopes build(List<S> ejbs) throws JeeslXmlStructureException
@@ -35,7 +36,7 @@ public class XmlScopesFactory<L extends JeeslLang, D extends JeeslDescription,S 
 			else{xml.setSize(0);}
 		}
 		
-		if(q.isSetScope() && ejbs!=null)
+		if(Objects.nonNull(q.getScope()) && ejbs!=null)
 		{
 			for(S s : ejbs)
 			{

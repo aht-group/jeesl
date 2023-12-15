@@ -7,8 +7,10 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.controller.monitoring.counter.DataUpdateTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
@@ -173,7 +175,7 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 		{
 			try
 			{
-				if(xml.isSetParent() && cParent!=null)
+				if(ObjectUtils.allNotNull(xml.getParent(),cParent))
 				{
 					logger.trace("Parent: "+xml.getParent().getCode());
 					S ejbStatus = fStatus.fByCode(cStatus,xml.getCode());
@@ -193,7 +195,7 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 	{
 		for(Status xml : list)
 		{
-			if(!xml.isSetGroup()) {xml.setGroup(cStatus.getName());}
+			if(Objects.isNull(xml.getGroup())) {xml.setGroup(cStatus.getName());}
 			try
 			{
 				logger.debug("Processing "+xml.getGroup()+" with "+xml.getCode());
@@ -231,8 +233,8 @@ public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescripti
 				{
 					addLangsAndDescriptions(ejb,xml);
 					ejb.setSymbol(xml.getSymbol());
-					if(xml.isSetImage()){ejb.setImage(xml.getImage());}
-					if(xml.isSetStyle()){ejb.setStyle(xml.getStyle());}
+					if(Objects.nonNull(xml.getImage())) {ejb.setImage(xml.getImage());}
+					if(Objects.nonNull(xml.getStyle())) {ejb.setStyle(xml.getStyle());}
 				}
 				catch (InstantiationException e) {logger.error("",e);}
 				catch (IllegalAccessException e) {logger.error("",e);}

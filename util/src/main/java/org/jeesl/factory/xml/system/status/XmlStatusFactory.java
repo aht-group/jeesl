@@ -58,16 +58,16 @@ public class XmlStatusFactory<L extends JeeslLang, D extends JeeslDescription, S
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		
 		if(q.isSetPosition()){xml.setPosition(ejb.getPosition());}
-		if(q.isSetStyle()){xml.setStyle(ejb.getStyle());}
-		if(q.isSetImage()){xml.setImage(ejb.getImage());}
-		if(q.isSetSymbol() && (ejb instanceof JeeslStatusWithSymbol)){xml.setSymbol(ejb.getSymbol());}
+		if(Objects.nonNull(q.getStyle())) {xml.setStyle(ejb.getStyle());}
+		if(Objects.nonNull(q.getImage())) {xml.setImage(ejb.getImage());}
+		if(Objects.nonNull(q.getSymbol()) && (ejb instanceof JeeslStatusWithSymbol)){xml.setSymbol(ejb.getSymbol());}
 		if(q.isSetVisible()){xml.setVisible(ejb.isVisible());}
 		
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}		
 		if(ObjectUtils.allNotNull(q.getLabel(),localeCode)){xml.setLabel(XmlLangFactory.label(localeCode,ejb));}
 		
-		if(q.isSetParent() && ejb.getParent()!=null)
+		if(ObjectUtils.allNotNull(q.getParent(),ejb.getParent()))
 		{
 			Parent parent = new Parent();
 			parent.setCode(ejb.getParent().getCode());

@@ -1,5 +1,8 @@
 package org.jeesl.factory.xml.system.navigation;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.model.xml.system.navigation.Navigation;
 import org.slf4j.Logger;
@@ -19,9 +22,9 @@ public class XmlNavigationFactory <V extends JeeslSecurityView<?,?,?,?,?,?>>
 	public Navigation build(V view)
 	{
 		Navigation xml = new Navigation();
-		if(q.isSetPackage()){xml.setPackage(view.getPackageName());}
-		if(q.isSetViewPattern() && view.getViewPattern()!=null){xml.setViewPattern(XmlViewPatternFactory.build(view.getViewPattern()));}
-		if(q.isSetUrlMapping() && view.getUrlMapping()!=null){xml.setUrlMapping(XmlUrlMappingFactory.build(view.getUrlMapping(), view.getUrlBase()));}
+		if(Objects.nonNull(q.getPackage())) {xml.setPackage(view.getPackageName());}
+		if(Objects.nonNull(q.getViewPattern())) {xml.setViewPattern(XmlViewPatternFactory.build(view.getViewPattern()));}
+		if(ObjectUtils.allNotNull(q.getUrlMapping(),view.getUrlMapping())) {xml.setUrlMapping(XmlUrlMappingFactory.build(view.getUrlMapping(), view.getUrlBase()));}
 		
 		return xml;
 	}
