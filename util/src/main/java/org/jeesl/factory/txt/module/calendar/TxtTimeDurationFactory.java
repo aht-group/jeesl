@@ -2,7 +2,6 @@ package org.jeesl.factory.txt.module.calendar;
 
 import java.time.Duration;
 
-import org.joda.time.Period;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

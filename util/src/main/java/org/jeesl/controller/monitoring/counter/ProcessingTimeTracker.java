@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.jeesl.factory.txt.module.calendar.TxtPeriodJodaFactory;
 import org.jeesl.factory.txt.module.calendar.TxtTimeDurationFactory;
 import org.jeesl.interfaces.controller.ProgressTimeTracker;
 import org.slf4j.Logger;
