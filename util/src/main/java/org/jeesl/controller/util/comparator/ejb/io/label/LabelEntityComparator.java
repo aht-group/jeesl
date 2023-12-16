@@ -1,7 +1,9 @@
 package org.jeesl.controller.util.comparator.ejb.io.label;
 
 import java.util.Comparator;
+import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -38,7 +40,7 @@ public class LabelEntityComparator<RC extends JeeslRevisionCategory<?,?,RC,?>,
         public int compare(RE a, RE b)
         {
 			  CompareToBuilder ctb = new CompareToBuilder();
-			  ctb.append(a.getCategory().getPosition(), b.getCategory().getPosition());
+			  if(ObjectUtils.allNotNull(a.getCategory(),b.getCategory())) {ctb.append(a.getCategory().getPosition(), b.getCategory().getPosition());}
 			  ctb.append(a.getPosition(), b.getPosition());
 			  return ctb.toComparison();
         }

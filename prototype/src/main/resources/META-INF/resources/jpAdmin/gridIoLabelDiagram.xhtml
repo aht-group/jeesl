@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"  xmlns:p="http://primefaces.org/ui"
 	xmlns:j="http://www.jeesl.org/jsf" xmlns:jp="http://jsf.jeesl.org/prototype" xmlns:jtp="http://jsf.jeesl.org/prototype/tag"
 	xmlns:mcg="http://www.metachart.org/graph"
 	xmlns:composite="http://java.sun.com/jsf/composite">
@@ -51,7 +51,7 @@
 							<f:facet name="actions">
 								<j:svg type="jeeslCancel" listener="#{cc.attrs.bean.cancelDiagram()}" update=":#{cc.id}:sDiagram :#{cc.id}:sSvg" tooltip="#{msg.jeeslTtCancel}"/>
 								<j:svg type="jeeslSave" listener="#{cc.attrs.bean.saveDiagram()}" update=":#{cc.id}:sDiagrams :#{cc.id}:sDiagram :#{cc.id}:sSvg"/>
-								<j:icon type="jeeslDelete" listener="#{cc.attrs.bean.rmDiagram()}" update=":#{cc.id}:sDiagrams :#{cc.id}:sDiagram :#{cc.id}:sSvg" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.diagram.id gt 0}"/>
+								<j:svg type="jeeslDelete" listener="#{cc.attrs.bean.rmDiagram()}" update=":#{cc.id}:sDiagrams :#{cc.id}:sDiagram :#{cc.id}:sSvg" tooltip="#{msg.ttDelete}" rendered="#{cc.attrs.bean.diagram.id gt 0}"/>
 							</f:facet>
 							<p:messages redisplay="false" severity="warn,error" showSummary="false" showDetail="true" closable="true"/>
 							<j:inputGrid >
@@ -83,7 +83,9 @@
 			</j:row>
 			<j:row>
 				<j:slot id="sSvg" width="12">
-					<mcg:graph dotScript="#{cc.attrs.bean.diagram.dotGraph}"/>
+					<ui:remove>
+						<mcg:graph dotScript="#{cc.attrs.bean.diagram.dotGraph}"/>
+					</ui:remove>
 				</j:slot>
 			</j:row>
 	    </jp:grid> 
