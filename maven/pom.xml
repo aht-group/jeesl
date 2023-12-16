@@ -60,7 +60,7 @@
 			<groupId>net.sf.exlp</groupId>
 			<artifactId>exlp-xml</artifactId>
 			<classifier>javax</classifier>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 	    
 		<dependency>

@@ -1,7 +1,7 @@
 package net.sf.ahtutils.factory.txt;
 
 import org.jeesl.JeeslUtilTestBootstrap;
-import org.jeesl.factory.txt.module.calendar.TxtPeriodFactory;
+import org.jeesl.factory.txt.module.calendar.TxtPeriodJodaFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -13,12 +13,12 @@ public class TestTxtPeriodFactory extends AbstractJeeslTest
 {
 	final static Logger logger = LoggerFactory.getLogger(TestTxtPeriodFactory.class);
 	
-	private TxtPeriodFactory tfPeriod;
+	private TxtPeriodJodaFactory tfPeriod;
 	
 	@Before
 	public void init()
 	{
-		tfPeriod = new TxtPeriodFactory();
+		tfPeriod = new TxtPeriodJodaFactory();
 	}
  
     @Test

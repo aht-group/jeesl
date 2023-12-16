@@ -1,15 +1,17 @@
 package org.jeesl.controller.monitoring.counter;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-import org.jeesl.factory.txt.module.calendar.TxtPeriodFactory;
+import org.jeesl.factory.txt.module.calendar.TxtPeriodJodaFactory;
+import org.jeesl.factory.txt.module.calendar.TxtTimeDurationFactory;
 import org.jeesl.interfaces.controller.ProgressTimeTracker;
-import org.joda.time.DateTime;
-import org.joda.time.Period;
-import org.joda.time.format.PeriodFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,39 +19,46 @@ public class ProcessingTimeTracker implements ProgressTimeTracker
 {
 	final static Logger logger = LoggerFactory.getLogger(ProcessingTimeTracker.class);
 	
-	private long start;
-	private long stop;
+	private Temporal tStart,tStop;
+	private long start,stop;
 	private long previousEvent;
 	private int counter;
 	private int delayOnTick; public void setDelayOnTick(int delayOnTick) {this.delayOnTick = delayOnTick;}
 
-	private final TxtPeriodFactory tfPeriod;
+	private final TxtTimeDurationFactory tfPeriod;
 	
 	private Map<String,Long> buckets;
 	private Map<String,Long> bucketStart;
 	
-	public ProcessingTimeTracker() {this(false);}
-	private ProcessingTimeTracker(boolean autoStart)
+	public static ProcessingTimeTracker instance() {return new ProcessingTimeTracker();}
+	private ProcessingTimeTracker()
 	{
 		counter=0;
-		start=0;
+//		start=0;stop=0;
 		previousEvent=0;
-		stop=0;
+		
 		delayOnTick=0;
 		
-		tfPeriod = new TxtPeriodFactory();
-		tfPeriod.setUnits(TxtPeriodFactory.UNITS.minuteSecondMilli);
+		tfPeriod = TxtTimeDurationFactory.instance();
+//		tfPeriod.setUnits(TxtPeriodJodaFactory.UNITS.minuteSecondMilli);
 		
 		buckets = new HashMap<String,Long>();
 		bucketStart = new HashMap<String,Long>();
-		
-		if(autoStart){start();}
 	}
 	
-	public static ProcessingTimeTracker instance() {return new ProcessingTimeTracker();}
-	
-	public ProcessingTimeTracker start() {start = System.currentTimeMillis();previousEvent=start;return this;}
-	public void stop() {stop = System.currentTimeMillis();}
+	public ProcessingTimeTracker start()
+	{
+		start = System.currentTimeMillis();
+		previousEvent=start;
+		tStart = Instant.now();
+		
+		return this;
+	}
+	public void stop()
+	{
+		stop = System.currentTimeMillis();
+		tStop = Instant.now();
+	}
 	
 	public void round()
 	{
@@ -83,11 +92,18 @@ public class ProcessingTimeTracker implements ProgressTimeTracker
 		return sb.toString();
 	}
 	
+//	public String toTotalPeriod()
+//	{
+//		if(stop==0){stop();}	
+//		Period period = new Period(new DateTime(start), new DateTime());
+//		return PeriodFormat.getDefault().print(period);
+//	}
+	
 	public String toTotalPeriod()
 	{
-		if(stop==0){stop();}	
-		Period period = new Period(new DateTime(start), new DateTime());
-		return PeriodFormat.getDefault().print(period);
+		if(Objects.isNull(tStop)) {stop();}
+		Duration d = Duration.between(tStart, tStop);
+		return TxtTimeDurationFactory.instance().build(d);
 	}
 	
 	public String buildDefaultDebug(String prefix)

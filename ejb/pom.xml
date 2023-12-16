@@ -43,6 +43,7 @@
          <dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-xml</artifactId>
+			<scope>provided</scope>
 			<type>jar</type>
 		</dependency>
 		

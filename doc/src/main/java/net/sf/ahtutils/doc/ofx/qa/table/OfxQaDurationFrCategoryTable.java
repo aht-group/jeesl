@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
-import org.jeesl.factory.txt.module.calendar.TxtPeriodFactory;
+import org.jeesl.factory.txt.module.calendar.TxtPeriodJodaFactory;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.content.ofx.Comment;
@@ -40,13 +40,13 @@ public class OfxQaDurationFrCategoryTable extends AbstractUtilsOfxDocumentationF
 	final static Logger logger = LoggerFactory.getLogger(OfxQaNfrQuestionTableFactory.class);
 	private static String keyCaptionPrefix = "auTableQaSummaryDuration";
 	
-	private TxtPeriodFactory tfPeriod;
+	private TxtPeriodJodaFactory tfPeriod;
 	private List<String> headerKeys;
 	
 	public OfxQaDurationFrCategoryTable(Configuration config, String[] langs, Translations translations)
 	{
 		super(config,langs,translations);
-		tfPeriod = new TxtPeriodFactory();
+		tfPeriod = new TxtPeriodJodaFactory();
 		
 		headerKeys = new ArrayList<String>();
 		headerKeys.add("auTableQaTestCode");

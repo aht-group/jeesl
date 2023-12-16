@@ -51,6 +51,17 @@
 			<scope>provided</scope>
 			<classifier>javax</classifier>
 		</dependency>
+		<dependency>
+   	   		<groupId>org.jeesl</groupId>
+   	   		<artifactId>jeesl-xml</artifactId>
+   	   		<scope>provided</scope>
+   	   		<exclusions>
+   	   			<exclusion>
+   	   				<artifactId>commons-jxpath</artifactId>
+   	   				<groupId>commons-jxpath</groupId>
+   	   			</exclusion>
+   	   		</exclusions>
+   	   	</dependency>
    	   	
    	   	<!-- JSF -->
    	   	<dependency> 
@@ -108,16 +119,6 @@
    	   		</exclusions>
    	   	</dependency>
    	   	
-   	   	<dependency>
-   	   		<groupId>org.jeesl</groupId>
-   	   		<artifactId>jeesl-xml</artifactId>
-   	   		<exclusions>
-   	   			<exclusion>
-   	   				<artifactId>commons-jxpath</artifactId>
-   	   				<groupId>commons-jxpath</groupId>
-   	   			</exclusion>
-   	   		</exclusions>
-   	   	</dependency>
    	   	<dependency>
    	   	   	<groupId>javax.xml.bind</groupId>
    	   		<artifactId>jaxb-api</artifactId>
