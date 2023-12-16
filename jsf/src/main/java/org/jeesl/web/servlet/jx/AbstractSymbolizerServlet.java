@@ -1,4 +1,4 @@
-package org.jeesl.web.servlet;
+package org.jeesl.web.servlet.jx;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
