@@ -193,6 +193,7 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
 	
 	public <T extends EjbWithDescription<D>> T persistMissingLangs(JeeslFacade fUtils, String[] keys, T ejb)
 	{
+		if(Objects.isNull(ejb.getDescription())) {ejb.setDescription(new HashMap<>());}
 		for(String key : keys)
 		{
 			if(!ejb.getDescription().containsKey(key))

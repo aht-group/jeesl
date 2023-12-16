@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.system.status;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -151,6 +152,7 @@ public class EjbLangFactory<L extends JeeslLang> implements Serializable
 
 	public <T extends EjbWithLang<L>> T persistMissingLangs(JeeslFacade fUtils, String[] keys, T ejb)
 	{
+		if(Objects.isNull(ejb.getName())) {ejb.setName(new HashMap<>());}
 		for(String key : keys)
 		{
 			if(!ejb.getName().containsKey(key))

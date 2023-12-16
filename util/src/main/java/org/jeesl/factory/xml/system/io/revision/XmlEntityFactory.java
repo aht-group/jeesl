@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.io.revision;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -46,7 +47,7 @@ public class XmlEntityFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
 		if(Objects.nonNull(q.getCategory())) {xfCategory = new XmlCategoryFactory<>(q.getCategory());}
-		if(Objects.nonNull(q.getAttribute())) {xfAttribute = new XmlAttributeFactory<>(q.getAttribute().get(0));}
+		if(ObjectUtils.isNotEmpty(q.getAttribute())) {xfAttribute = new XmlAttributeFactory<>(q.getAttribute().get(0));}
 		if(Objects.nonNull(q.getDiagram())) {xfDiagram = new XmlDiagramFactory<>(q.getDiagram());}
 	}
 	

@@ -391,27 +391,6 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		}
 		catch (JeeslConstraintViolationException e) {bMessage.constraintDuplicate(null);}
 	}
-	
-	public void downloadJeeslTranslations() throws UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
-	{
-		try
-		{
-			Class<?> c = Class.forName(entity.getCode());
-			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslDescription.class,c);
-			
-			Entity xml = JeeslLabelEntityController.rest(i.getName()).exportRevisionEntity(i.getName());
-
-			if(xml==null){logger.warn("No Result from REST !!");}
-			else
-			{
-				efLang.update(entity,xml.getLangs());
-				efDescription.update(entity,xml.getDescriptions());
-				saveEntity();
-				bLabel.reload(entity);
-			}
-		}
-		catch (ClassNotFoundException e){e.printStackTrace();}
-	}
 
 	public void rmEntity() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException
 	{
@@ -477,6 +456,26 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		updatePerformed();
 	}
 	
+	public void downloadJeeslTranslations() throws UtilsConfigurationException, JeeslLockingException, JeeslNotFoundException
+	{
+		try
+		{
+			Class<?> c = Class.forName(entity.getCode());
+			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslDescription.class,c);
+			
+			Entity xml = this.callback.downloadEntity(i.getName());
+
+			if(xml==null){logger.warn("No Result from REST !!");}
+			else
+			{
+				efLang.update(entity,xml.getLangs());
+				efDescription.update(entity,xml.getDescriptions());
+				saveEntity();
+				bLabel.reload(entity);
+			}
+		}
+		catch (ClassNotFoundException e){e.printStackTrace();}
+	}
 	public void downloadJeeslAttributes() throws UtilsConfigurationException, JeeslConstraintViolationException
 	{
 		reset(false,true);
@@ -486,7 +485,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			Class<?> c = Class.forName(entity.getCode());
 			Class<?> i = JeeslInterfaceAnnotationQuery.findClass(DownloadJeeslAttributes.class,c);
 			
-			Entity xml = JeeslLabelEntityController.rest(i.getName()).exportRevisionEntity(i.getName());
+			Entity xml = this.callback.downloadEntity(i.getName());
 
 			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
 			updater.updateAttributes2(entity,lp.getLocales(),xml);
@@ -496,10 +495,10 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		catch (ClassNotFoundException e){e.printStackTrace();}
 	}
 	
-//	protected Entity restJx(String code) throws UtilsConfigurationException
-//	{
-//		return JeeslLabelEntityController.rest(code).exportRevisionEntity(code);
-//	}
+	public Entity downloadRestJx(String code) throws UtilsConfigurationException
+	{
+		return JeeslLabelEntityController.rest(code).exportRevisionEntity(code);
+	}
 
 	public void addMapping() throws JeeslNotFoundException
 	{

@@ -3,6 +3,7 @@ package org.jeesl.util.db.updater;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.facade.io.JeeslIoRevisionFacade;
 import org.jeesl.controller.db.updater.JeeslDbLangUpdater;
@@ -31,7 +32,6 @@ import org.jeesl.util.db.cache.EjbCodeCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 											RC extends JeeslRevisionCategory<L,D,RC,?>,
@@ -80,7 +80,6 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 	public void updateAttributes(RE entity, List<String> eLocales, Entity xml) throws JeeslConstraintViolationException
 	{
 		logger.info("Creating/Updating Attributes of "+entity.toString()+ entity.getCode() +" for "+eLocales.toString());
-		JaxbUtil.trace(xml);
 
 		// Init the lazy loading of EJB properties
 		entity = fRevision.load(fbRevision.getClassEntity(), entity);
@@ -121,6 +120,10 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 			
 			ejbAttribute.setEntity(entity);
 			ejbAttribute.setType(cacheType.ejb(xmlAttribute.getType().getCode()));
+			
+			if(Objects.isNull(fRevision)) {logger.warn("NULL: fRevision");}
+			if(Objects.isNull(eLocales)) {logger.warn("NULL: eLocales");}
+			if(Objects.isNull(ejbAttribute)) {logger.warn("NULL: ejbAttribute");}
 			
 			efLang.persistMissingLangsForCode(fRevision, eLocales, ejbAttribute);
 			efLang.update(ejbAttribute,xmlAttribute.getLangs());

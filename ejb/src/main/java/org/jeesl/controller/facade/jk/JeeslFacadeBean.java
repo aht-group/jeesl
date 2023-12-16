@@ -190,7 +190,7 @@ public class JeeslFacadeBean implements JeeslFacade
 		catch (Exception e)
 		{
 			if(handleTransaction){em.getTransaction().rollback();}
-			if(e instanceof javax.validation.ConstraintViolationException) {throw new JeeslConstraintViolationException(e.getMessage());}
+			if(e instanceof jakarta.validation.ConstraintViolationException) {throw new JeeslConstraintViolationException(e.getMessage());}
 			if(e instanceof jakarta.persistence.OptimisticLockException) {throw new JeeslLockingException(e.getMessage());}
 			if(e instanceof jakarta.persistence.PersistenceException)
 			{
