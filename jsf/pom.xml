@@ -99,6 +99,24 @@
 		    <version>5.0.0</version>
 		    <scope>provided</scope>
 		</dependency>
+		
+		<!-- Batik -->
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-transcoder</artifactId>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-codec</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Infinispan -->
 		<dependency>
@@ -349,12 +367,7 @@
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.zxing</groupId>
-			<artifactId>core</artifactId>
-			<version>3.0.0</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	

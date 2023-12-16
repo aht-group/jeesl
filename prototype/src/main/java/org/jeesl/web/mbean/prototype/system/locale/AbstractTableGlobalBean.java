@@ -1,10 +1,7 @@
 package org.jeesl.web.mbean.prototype.system.locale;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.jeesl.api.bean.JeeslTranslationBean;
 import org.jeesl.api.bean.msg.JeeslFacesMessageBean;
 import org.jeesl.api.facade.io.JeeslIoGraphicFacade;
 import org.jeesl.controller.web.io.label.JeeslLabelEntityController;
@@ -57,7 +54,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.sync.DataUpdate;
 import net.sf.exlp.util.io.StringUtil;
-import net.sf.exlp.util.xml.JaxbUtil;
 
 public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 										G extends JeeslGraphic<GT,GC,GS>, GT extends JeeslGraphicType<L,D,GT,G>,
@@ -86,12 +82,6 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
 	{
 		super(fbStatus,fbSvg,fbRevision);
 		dbuGraphic = new JeeslDbGraphicUpdater<>(fbSvg);
-
-//		efGraphic = fbSvg.efGraphic();
-//
-//		efFigure = fbSvg.efFigure();
-
-//		index=1;
 
 		showDescription = false;
 //		hasDeveloperAction = false;
@@ -430,7 +420,7 @@ public abstract class AbstractTableGlobalBean <L extends JeeslLang, D extends Je
         asdi.setFacade(fGraphic);
         DataUpdate dataUpdate = asdi.iuStatus(xml.getStatus(),cS,cL,clParent);
         asdi.deleteUnusedStatus(cS, cL, cD);
-        JaxbUtil.info(dataUpdate);
+//        JaxbUtil.info(dataUpdate);
 
         dbuGraphic.update(cW,xml.getStatus());
 
