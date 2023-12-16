@@ -19,7 +19,7 @@ public class TestXmlAttribute extends AbstractXmlRevisionTest<Attribute>
     public Attribute build(boolean withChilds)
     {
     	Attribute xml = new Attribute();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setPosition(2);
     	xml.setCode("myCode");	
     	xml.setXpath("myXPath");

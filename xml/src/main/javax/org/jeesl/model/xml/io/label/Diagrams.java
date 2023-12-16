@@ -72,12 +72,4 @@ public class Diagrams
         return this.diagram;
     }
 
-    public boolean isSetDiagram() {
-        return ((this.diagram!= null)&&(!this.diagram.isEmpty()));
-    }
-
-    public void unsetDiagram() {
-        this.diagram = null;
-    }
-
 }

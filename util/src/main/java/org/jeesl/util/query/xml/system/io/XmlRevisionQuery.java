@@ -51,7 +51,7 @@ public class XmlRevisionQuery
 	private static Entity xEntity()
 	{	
 		Entity xml = new Entity();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setPosition(0);
 		xml.setVisible(true);
@@ -64,7 +64,7 @@ public class XmlRevisionQuery
 		xml.getAttribute().add(xAttribute());
 		
 		Diagram diagram = new Diagram();
-		diagram.setId(0);
+		diagram.setId(0l);
 		diagram.setCode("");
 		xml.setDiagram(diagram);
 		
@@ -107,7 +107,7 @@ public class XmlRevisionQuery
 	{		
 		Entity xml = new Entity();
 		
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 	
 		return xml;
@@ -116,7 +116,7 @@ public class XmlRevisionQuery
 	public static Diagram xDiagram()
 	{		
 		Diagram xml = new Diagram();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setPosition(0);
 		xml.setDocumentation(true);

@@ -45,9 +45,9 @@ public class XmlEntityFactory <L extends JeeslLang,D extends JeeslDescription,
 		this.q=q;
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
-		if(q.isSetCategory()){xfCategory = new XmlCategoryFactory<>(q.getCategory());}
-		if(q.isSetAttribute()){xfAttribute = new XmlAttributeFactory<>(q.getAttribute().get(0));}
-		if(q.isSetDiagram()) {xfDiagram = new XmlDiagramFactory<>(q.getDiagram());}
+		if(Objects.nonNull(q.getCategory())) {xfCategory = new XmlCategoryFactory<>(q.getCategory());}
+		if(Objects.nonNull(q.getAttribute())) {xfAttribute = new XmlAttributeFactory<>(q.getAttribute().get(0));}
+		if(Objects.nonNull(q.getDiagram())) {xfDiagram = new XmlDiagramFactory<>(q.getDiagram());}
 	}
 	
 	public static Entity build(Class<?> c) {Entity xml = build(); xml.setCode(c.getName());return xml;}
@@ -57,26 +57,26 @@ public class XmlEntityFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		Entity xml = build();
 		
-		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetCode()&&ejb.getCode()!=""){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getCode()) && ejb.getCode()!=""){xml.setCode(ejb.getCode());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
-		if(q.isSetTimeseries()) {xml.setTimeseries(BooleanComparator.active(ejb.getTimeseries()));}
-		if(q.isSetDocumentation()) {xml.setDocumentation(BooleanComparator.active(ejb.getDocumentation()));}
-		if(q.isSetCategory()){xml.setCategory(xfCategory.build(ejb.getCategory()));}		
+		if(Objects.nonNull(q.isTimeseries())) {xml.setTimeseries(BooleanComparator.active(ejb.getTimeseries()));}
+		if(Objects.nonNull(q.isDocumentation())) {xml.setDocumentation(BooleanComparator.active(ejb.getDocumentation()));}
+		if(Objects.nonNull(q.getCategory())) {xml.setCategory(xfCategory.build(ejb.getCategory()));}		
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
-		if(q.isSetRemark()){xml.setRemark(XmlRemarkFactory.build(ejb.getDeveloperInfo()));}
+		if(Objects.nonNull(q.getRemark())) {xml.setRemark(XmlRemarkFactory.build(ejb.getDeveloperInfo()));}
 		
-		if(q.isSetAttribute())
+		if(Objects.nonNull(q.getAttribute()))
 		{
 			for(RA attribute : ejb.getAttributes())
 			{
 				xml.getAttribute().add(xfAttribute.build(attribute));
 			}
 		}
-		if(q.isSetDiagram() && ejb.getDiagram()!=null) {xml.setDiagram(xfDiagram.build(ejb.getDiagram()));}
+		if(Objects.nonNull(q.getDiagram()) && ejb.getDiagram()!=null) {xml.setDiagram(xfDiagram.build(ejb.getDiagram()));}
 		
 		return xml;
 	}

@@ -36,7 +36,7 @@ public abstract class AbstractEntityWordRenderer
     {
         for (Diagram d : diagrams.getDiagram())
         {
-            if (d.isSetCode() && d.getCode() != "" && d.getCode().equals(code))
+            if (Objects.nonNull(d.getCode()) && d.getCode() != "" && d.getCode().equals(code))
             {
                 return d.getLangs().getLang().get(0).getTranslation();
             }

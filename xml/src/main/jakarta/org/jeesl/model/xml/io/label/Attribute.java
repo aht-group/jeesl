@@ -2,12 +2,12 @@
 package org.jeesl.model.xml.io.label;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.io.cms.text.Remark;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
@@ -15,9 +15,9 @@ import org.jeesl.model.xml.io.locale.status.Type;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java-Klasse für anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
  * &lt;complexType&gt;
@@ -96,7 +96,7 @@ public class Attribute
     protected Boolean construction;
 
     /**
-     * Gets the value of the type property.
+     * Ruft den Wert der type-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -108,7 +108,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the type property.
+     * Legt den Wert der type-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -120,7 +120,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the langs property.
+     * Ruft den Wert der langs-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -132,7 +132,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the langs property.
+     * Legt den Wert der langs-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -144,7 +144,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the descriptions property.
+     * Ruft den Wert der descriptions-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -156,7 +156,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the descriptions property.
+     * Legt den Wert der descriptions-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -168,7 +168,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the remark property.
+     * Ruft den Wert der remark-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -180,7 +180,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the remark property.
+     * Legt den Wert der remark-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -192,7 +192,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the relation property.
+     * Ruft den Wert der relation-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -204,7 +204,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the relation property.
+     * Legt den Wert der relation-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -216,7 +216,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the id property.
+     * Ruft den Wert der id-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -228,7 +228,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the id property.
+     * Legt den Wert der id-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -240,7 +240,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the position property.
+     * Ruft den Wert der position-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -252,7 +252,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the position property.
+     * Legt den Wert der position-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -264,7 +264,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the code property.
+     * Ruft den Wert der code-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -276,7 +276,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the code property.
+     * Legt den Wert der code-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -288,7 +288,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the xpath property.
+     * Ruft den Wert der xpath-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -300,7 +300,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the xpath property.
+     * Legt den Wert der xpath-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -312,7 +312,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the web property.
+     * Ruft den Wert der web-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -324,7 +324,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the web property.
+     * Legt den Wert der web-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -336,7 +336,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the print property.
+     * Ruft den Wert der print-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -348,7 +348,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the print property.
+     * Legt den Wert der print-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -360,7 +360,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the name property.
+     * Ruft den Wert der name-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -372,7 +372,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the name property.
+     * Legt den Wert der name-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -384,7 +384,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the enclosure property.
+     * Ruft den Wert der enclosure-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -396,7 +396,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the enclosure property.
+     * Legt den Wert der enclosure-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -408,7 +408,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the ui property.
+     * Ruft den Wert der ui-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -420,7 +420,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the ui property.
+     * Legt den Wert der ui-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -432,7 +432,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the bean property.
+     * Ruft den Wert der bean-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -444,7 +444,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the bean property.
+     * Legt den Wert der bean-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -456,7 +456,7 @@ public class Attribute
     }
 
     /**
-     * Gets the value of the construction property.
+     * Ruft den Wert der construction-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -468,7 +468,7 @@ public class Attribute
     }
 
     /**
-     * Sets the value of the construction property.
+     * Legt den Wert der construction-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is

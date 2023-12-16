@@ -1,6 +1,7 @@
 package org.jeesl.factory.xml.system.io.revision;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
 import org.jeesl.interfaces.model.io.label.revision.envers.JeeslRevision;
@@ -34,7 +35,7 @@ public class XmlRevisionFactory <REV extends JeeslRevision,
 	public XmlRevisionFactory(Revision q)
 	{
 		this.q=q;
-		if(q.isSetUser()) {xfUser = new XmlUserFactory<>(q.getUser());}
+		if(Objects.nonNull(q.getUser())) {xfUser = new XmlUserFactory<>(q.getUser());}
 	}
 	
 
@@ -58,8 +59,8 @@ public class XmlRevisionFactory <REV extends JeeslRevision,
 	public Revision build(C container)
 	{
 		Revision xml = XmlRevisionFactory.build();
-		if(q.isSetRecord()) {xml.setRecord(DateUtil.toXmlGc(container.getInfo().getAuditRecord()));}
-		if(q.isSetUser()) {xml.setUser(xfUser.build(container.getUser()));}
+		if(Objects.nonNull(q.getRecord())) {xml.setRecord(DateUtil.toXmlGc(container.getInfo().getAuditRecord()));}
+		if(Objects.nonNull(q.getUser())) {xml.setUser(xfUser.build(container.getUser()));}
 		return xml;
 	}
 }

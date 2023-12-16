@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.revision;
 
+import java.util.Objects;
+
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
@@ -35,8 +37,8 @@ public class XmlRelationFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlRelationFactory(Relation q)
 	{
 		this.q=q;
-		if(q.isSetEntity()){xfEntity = new XmlEntityFactory<>(q.getEntity());}
-		if(q.isSetType()){xfType = new XmlTypeFactory<>(q.getType());}
+		if(Objects.nonNull(q.getEntity())) {xfEntity = new XmlEntityFactory<>(q.getEntity());}
+		if(Objects.nonNull(q.getType())) {xfType = new XmlTypeFactory<>(q.getType());}
 	}
 	
 	public static Relation build() {return new Relation();}	
@@ -44,16 +46,16 @@ public class XmlRelationFactory <L extends JeeslLang,D extends JeeslDescription,
 	public Relation build(RA attribute) 
 	{
 		Relation xml = new Relation();
-		if(q.isSetDocOptionsTable()) {xml.setDocOptionsTable(BooleanComparator.active(attribute.getStatusTableDoc()));}
-		if(q.isSetDocOptionsInline()) {xml.setDocOptionsInline(BooleanComparator.active(attribute.getDocOptionsInline()));}
+		if(Objects.nonNull(q.isDocOptionsTable())) {xml.setDocOptionsTable(BooleanComparator.active(attribute.getStatusTableDoc()));}
+		if(Objects.nonNull(q.isDocOptionsInline())) {xml.setDocOptionsInline(BooleanComparator.active(attribute.getDocOptionsInline()));}
 		
-		if(q.isSetEntity())
+		if(Objects.nonNull(q.getEntity()))
 		{
 			if(attribute.getEntity()==null){xml.setEntity(XmlEntityFactory.build());}
 			else {xml.setEntity(xfEntity.build(attribute.getEntity()));}
 		}	
 		
-		if(q.isSetType()){xml.setType(xfType.build(attribute.getRelation()));}
+		if(Objects.nonNull(q.getType())) {xml.setType(xfType.build(attribute.getRelation()));}
 		
 		
 		

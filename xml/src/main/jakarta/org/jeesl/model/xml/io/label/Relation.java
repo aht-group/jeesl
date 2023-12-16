@@ -2,19 +2,19 @@
 package org.jeesl.model.xml.io.label;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.io.locale.status.Type;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java-Klasse für anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
  * &lt;complexType&gt;
@@ -57,7 +57,7 @@ public class Relation
     protected Boolean docOptionsInline;
 
     /**
-     * Gets the value of the entity property.
+     * Ruft den Wert der entity-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -69,7 +69,7 @@ public class Relation
     }
 
     /**
-     * Sets the value of the entity property.
+     * Legt den Wert der entity-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -81,7 +81,7 @@ public class Relation
     }
 
     /**
-     * Gets the value of the type property.
+     * Ruft den Wert der type-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -93,7 +93,7 @@ public class Relation
     }
 
     /**
-     * Sets the value of the type property.
+     * Legt den Wert der type-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -105,7 +105,7 @@ public class Relation
     }
 
     /**
-     * Gets the value of the owner property.
+     * Ruft den Wert der owner-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -117,7 +117,7 @@ public class Relation
     }
 
     /**
-     * Sets the value of the owner property.
+     * Legt den Wert der owner-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -129,7 +129,7 @@ public class Relation
     }
 
     /**
-     * Gets the value of the docOptionsTable property.
+     * Ruft den Wert der docOptionsTable-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -141,7 +141,7 @@ public class Relation
     }
 
     /**
-     * Sets the value of the docOptionsTable property.
+     * Legt den Wert der docOptionsTable-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -153,7 +153,7 @@ public class Relation
     }
 
     /**
-     * Gets the value of the docOptionsInline property.
+     * Ruft den Wert der docOptionsInline-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -165,7 +165,7 @@ public class Relation
     }
 
     /**
-     * Sets the value of the docOptionsInline property.
+     * Legt den Wert der docOptionsInline-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is

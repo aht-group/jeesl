@@ -105,7 +105,7 @@ public final class EntityWordRenderer extends AbstractEntityWordRenderer
 				{
 				    c.getParagraphs().get(0).getRuns().clear();
 				    logger.info("paragraphs count: " + c.getParagraphs().getCount());
-				    if (a.getRelation()!=null && a.getRelation().isSetEntity())
+				    if (a.getRelation()!=null && Objects.nonNull(a.getRelation().getEntity()))
 				    {       
 				        
 				        Entity e = RevisionXpath.getEntity(entities, a.getRelation().getEntity().getCode());
@@ -121,7 +121,7 @@ public final class EntityWordRenderer extends AbstractEntityWordRenderer
 				        }
 
 				        String parentDiagram = ":";
-				        if (e.isSetDiagram())
+				        if (Objects.nonNull(e.getDiagram()))
 				        {
 				            try{parentDiagram=diagramForCode(diagrams,e.getDiagram().getCode())+ ":";}catch(Exception e1){e1.printStackTrace();}
 				        }
@@ -136,9 +136,9 @@ public final class EntityWordRenderer extends AbstractEntityWordRenderer
 
 				    if (renderStatus) 
 				    {
-				        if (a.getRelation()!=null && a.getRelation().isSetDocOptionsTable()){makerStatusTable=true;attrbsStatusTable.add(a);}
+				        if (a.getRelation()!=null && Objects.nonNull(a.getRelation().isDocOptionsTable())) {makerStatusTable=true;attrbsStatusTable.add(a);}
 
-				        if (a.getRelation() !=null && a.getRelation().isSetDocOptionsInline())  
+				        if (a.getRelation() !=null && Objects.nonNull(a.getRelation().isDocOptionsInline()))  
 				        {
 				            for (String s : statusContainer.keySet()){if(s.equals(a.getCode())){renderStatusInline(docBuilder,s);}}
 				        }
@@ -195,8 +195,8 @@ public final class EntityWordRenderer extends AbstractEntityWordRenderer
 
     private void renderRelationOrType(DocumentBuilder docBuilder, Attribute a)
     {
-        if (a.getRelation()!=null && a.getRelation().isSetEntity()){docBuilder.write(relationTypeForCode(relationTypes, a.getRelation().getType().getCode()));}
-        else if (a.getRelation()==null || !a.getRelation().isSetEntity())
+        if (a.getRelation()!=null && Objects.nonNull(a.getRelation().getEntity())) {docBuilder.write(relationTypeForCode(relationTypes, a.getRelation().getType().getCode()));}
+        else if (a.getRelation()==null || Objects.isNull(a.getRelation().getEntity()))
         {
             if (a.getType().getCode().equals("bool")) {docBuilder.write("boolean");}
             if (a.getType().getCode().equals("text")) {docBuilder.write("string");}

@@ -2,21 +2,21 @@
 package org.jeesl.model.xml.io.label;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.io.locale.status.Category;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java-Klasse für anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
  * &lt;complexType&gt;
@@ -66,7 +66,7 @@ public class Diagram
     protected Boolean documentation;
 
     /**
-     * Gets the value of the category property.
+     * Ruft den Wert der category-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -78,7 +78,7 @@ public class Diagram
     }
 
     /**
-     * Sets the value of the category property.
+     * Legt den Wert der category-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -90,7 +90,7 @@ public class Diagram
     }
 
     /**
-     * Gets the value of the langs property.
+     * Ruft den Wert der langs-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -102,7 +102,7 @@ public class Diagram
     }
 
     /**
-     * Sets the value of the langs property.
+     * Legt den Wert der langs-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -114,7 +114,7 @@ public class Diagram
     }
 
     /**
-     * Gets the value of the descriptions property.
+     * Ruft den Wert der descriptions-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -126,7 +126,7 @@ public class Diagram
     }
 
     /**
-     * Sets the value of the descriptions property.
+     * Legt den Wert der descriptions-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -138,7 +138,7 @@ public class Diagram
     }
 
     /**
-     * Gets the value of the id property.
+     * Ruft den Wert der id-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -150,7 +150,7 @@ public class Diagram
     }
 
     /**
-     * Sets the value of the id property.
+     * Legt den Wert der id-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -162,7 +162,7 @@ public class Diagram
     }
 
     /**
-     * Gets the value of the code property.
+     * Ruft den Wert der code-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -174,7 +174,7 @@ public class Diagram
     }
 
     /**
-     * Sets the value of the code property.
+     * Legt den Wert der code-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -186,7 +186,7 @@ public class Diagram
     }
 
     /**
-     * Gets the value of the position property.
+     * Ruft den Wert der position-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -198,7 +198,7 @@ public class Diagram
     }
 
     /**
-     * Sets the value of the position property.
+     * Legt den Wert der position-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -210,7 +210,7 @@ public class Diagram
     }
 
     /**
-     * Gets the value of the documentation property.
+     * Ruft den Wert der documentation-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -222,7 +222,7 @@ public class Diagram
     }
 
     /**
-     * Sets the value of the documentation property.
+     * Legt den Wert der documentation-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is

@@ -2,23 +2,23 @@
 package org.jeesl.model.xml.io.label;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlSchemaType;
+import jakarta.xml.bind.annotation.XmlType;
 import org.jeesl.model.xml.io.cms.text.Remark;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.system.security.User;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java-Klasse für anonymous complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
  * &lt;complexType&gt;
@@ -63,7 +63,7 @@ public class Revision
     protected XMLGregorianCalendar record;
 
     /**
-     * Gets the value of the user property.
+     * Ruft den Wert der user-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -75,7 +75,7 @@ public class Revision
     }
 
     /**
-     * Sets the value of the user property.
+     * Legt den Wert der user-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -87,7 +87,7 @@ public class Revision
     }
 
     /**
-     * Gets the value of the status property.
+     * Ruft den Wert der status-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -99,7 +99,7 @@ public class Revision
     }
 
     /**
-     * Sets the value of the status property.
+     * Legt den Wert der status-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -111,7 +111,7 @@ public class Revision
     }
 
     /**
-     * Gets the value of the remark property.
+     * Ruft den Wert der remark-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -123,7 +123,7 @@ public class Revision
     }
 
     /**
-     * Sets the value of the remark property.
+     * Legt den Wert der remark-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -135,7 +135,7 @@ public class Revision
     }
 
     /**
-     * Gets the value of the version property.
+     * Ruft den Wert der version-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -147,7 +147,7 @@ public class Revision
     }
 
     /**
-     * Sets the value of the version property.
+     * Legt den Wert der version-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
@@ -159,7 +159,7 @@ public class Revision
     }
 
     /**
-     * Gets the value of the record property.
+     * Ruft den Wert der record-Eigenschaft ab.
      * 
      * @return
      *     possible object is
@@ -171,7 +171,7 @@ public class Revision
     }
 
     /**
-     * Sets the value of the record property.
+     * Legt den Wert der record-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is

@@ -43,37 +43,37 @@ public class XmlAttributeFactory <L extends JeeslLang,D extends JeeslDescription
 		this.q=q;
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
-		if(q.isSetType()){xfType = new XmlTypeFactory<>(q.getType());}
-		if(q.isSetRelation()){xfRelation = new XmlRelationFactory<>(q.getRelation());}
+		if(Objects.nonNull(q.getType())) {xfType = new XmlTypeFactory<>(q.getType());}
+		if(Objects.nonNull(q.getRelation())) {xfRelation = new XmlRelationFactory<>(q.getRelation());}
 	}
 	
 	public Attribute build(RA ejb)
 	{
 		Attribute xml = new Attribute();
 		
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())){xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(q.isSetType()){xml.setType(xfType.build(ejb.getType()));}
+		if(Objects.nonNull(q.getType())) {xml.setType(xfType.build(ejb.getType()));}
 		
-		if(q.isSetXpath()){xml.setXpath(ejb.getXpath());}
+		if(Objects.nonNull(q.getXpath())) {xml.setXpath(ejb.getXpath());}
 //		if(q.isSetJpa()){xml.setJpa(ejb.get);
 		
-		if(q.isSetWeb()){xml.setWeb(ejb.isShowWeb());}
-		if(q.isSetPrint()){xml.setPrint(ejb.isShowPrint());}
-		if(q.isSetName()){xml.setName(ejb.isShowName());}
-		if(q.isSetEnclosure()){xml.setEnclosure(ejb.isShowEnclosure());}
-		if(q.isSetUi())
+		if(Objects.nonNull(q.isWeb())) {xml.setWeb(ejb.isShowWeb());}
+		if(Objects.nonNull(q.isPrint())) {xml.setPrint(ejb.isShowPrint());}
+		if(Objects.nonNull(q.isName())) {xml.setName(ejb.isShowName());}
+		if(Objects.nonNull(q.isEnclosure())) {xml.setEnclosure(ejb.isShowEnclosure());}
+		if(Objects.nonNull(q.isUi()))
 		{
 			if(ejb.getUi()==null){xml.setUi(false);}
 			else{xml.setUi(ejb.getUi());}
 		}
-		if(q.isSetBean())
+		if(Objects.nonNull(q.isBean()))
 		{
 			if(ejb.getBean()==null){xml.setBean(false);}
 			else {xml.setBean(ejb.getBean());}
 		}
-		if(q.isSetConstruction())
+		if(Objects.nonNull(q.isConstruction()))
 		{
 			if(ejb.getConstruction()==null){xml.setConstruction(false);}
 			else {xml.setConstruction(ejb.getConstruction());}
@@ -81,9 +81,9 @@ public class XmlAttributeFactory <L extends JeeslLang,D extends JeeslDescription
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
-		if(q.isSetRemark()){xml.setRemark(XmlRemarkFactory.build(ejb.getDeveloperInfo()));}
+		if(Objects.nonNull(q.getRemark())) {xml.setRemark(XmlRemarkFactory.build(ejb.getDeveloperInfo()));}
 		
-		if(q.isSetRelation() && ejb.getRelation()!=null){xml.setRelation(xfRelation.build(ejb));}
+		if(Objects.nonNull(q.getRelation()) && ejb.getRelation()!=null){xml.setRelation(xfRelation.build(ejb));}
 		
 		return xml;
 	}

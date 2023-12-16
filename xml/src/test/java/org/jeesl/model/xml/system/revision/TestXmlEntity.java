@@ -19,7 +19,7 @@ public class TestXmlEntity extends AbstractXmlRevisionTest<Entity>
     public Entity build(boolean withChilds)
     {
     	Entity xml = new Entity();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setPosition(2);
     	xml.setVisible(true);

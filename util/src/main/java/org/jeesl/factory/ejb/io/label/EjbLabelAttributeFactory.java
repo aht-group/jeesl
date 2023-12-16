@@ -1,5 +1,8 @@
 package org.jeesl.factory.ejb.io.label;
 
+import java.util.Objects;
+
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -63,7 +66,7 @@ public class EjbLabelAttributeFactory<L extends JeeslLang,D extends JeeslDescrip
 	
 	public void applyValues(RA ejb, Attribute xml)
 	{
-		if(xml.isSetRemark()){ejb.setDeveloperInfo(xml.getRemark().getValue());}
+		if(Objects.nonNull(xml.getRemark())) {ejb.setDeveloperInfo(xml.getRemark().getValue());}
 		else{ejb.setDeveloperInfo(null);}
 		
 		ejb.setPosition(xml.getPosition());
@@ -75,7 +78,7 @@ public class EjbLabelAttributeFactory<L extends JeeslLang,D extends JeeslDescrip
 		ejb.setShowEnclosure(xml.isEnclosure());
 		ejb.setUi(xml.isUi());
 		ejb.setBean(xml.isBean());
-		ejb.setConstruction(xml.isSetConstruction() && xml.isConstruction());
+		ejb.setConstruction(BooleanComparator.active(xml.isConstruction()));
 	}
 	
 	public RA build(RAT type)

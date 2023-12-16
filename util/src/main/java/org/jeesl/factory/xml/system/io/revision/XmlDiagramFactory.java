@@ -34,7 +34,7 @@ public class XmlDiagramFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
-		if(q.isSetCategory()){xfCategory = new XmlCategoryFactory<>(q.getCategory());}
+		if(Objects.nonNull(q.getCategory())) {xfCategory = new XmlCategoryFactory<>(q.getCategory());}
 	}
 	
 	public static Diagram build(String code) {Diagram xml = build();xml.setCode(code);return xml;}
@@ -44,12 +44,12 @@ public class XmlDiagramFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		Diagram xml = build();
 		
-		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetCode()&&ejb.getCode()!=""){xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getCode()) && ejb.getCode()!=""){xml.setCode(ejb.getCode());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		
-		if(q.isSetDocumentation()) {xml.setDocumentation(ejb.isDocumentation());}
-		if(q.isSetCategory()){xml.setCategory(xfCategory.build(ejb.getCategory()));}		
+		if(Objects.nonNull(q.isDocumentation())) {xml.setDocumentation(ejb.isDocumentation());}
+		if(Objects.nonNull(q.getCategory())) {xml.setCategory(xfCategory.build(ejb.getCategory()));}		
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}

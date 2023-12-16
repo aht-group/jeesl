@@ -3,6 +3,7 @@ package org.jeesl.factory.ejb.io.label;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -86,7 +87,7 @@ public class EjbLabelEntityFactory<L extends JeeslLang,D extends JeeslDescriptio
 	
 	public void applyValues(RE ejb, Entity xml)
 	{
-		if(xml.isSetRemark()){ejb.setDeveloperInfo(xml.getRemark().getValue());}
+		if(Objects.nonNull(xml.getRemark())) {ejb.setDeveloperInfo(xml.getRemark().getValue());}
 		else{ejb.setDeveloperInfo(null);}
 		
 		ejb.setPosition(xml.getPosition());
