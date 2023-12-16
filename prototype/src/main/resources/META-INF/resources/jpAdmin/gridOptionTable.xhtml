@@ -167,7 +167,7 @@
 						<p:colorPicker value="#{cc.attrs.bean.status.color}" rendered="#{cc.attrs.bean.supportsColour}"/>
 
 					</j:inputGrid>
-					<j:tabTranslationEditor value="#{cc.attrs.bean.status}" keys="#{cc.attrs.langKeys}" withDescription="true"/>
+					<j:tabTranslationEditor value="#{cc.attrs.bean.status}" locales="#{appLabelBean.locales}" withDescription="true"/>
 								
 					<j:inputGrid rendered="#{(cc.attrs.bean.supportsGraphic) and (cc.attrs.bean.graphic.type.code eq 'symbol')}">
 						<jtp:label entity="IoGraphic" code="style"/>
