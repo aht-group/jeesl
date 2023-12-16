@@ -30,6 +30,7 @@ import org.jeesl.factory.ejb.io.label.EjbLabelEntityFactory;
 import org.jeesl.factory.ejb.io.label.EjbLabelMappingEntityFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbSingleBean;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
+import org.jeesl.interfaces.controller.web.io.label.JeeslIoLabelEntityCallback;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
@@ -48,7 +49,7 @@ import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslAttributes;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
-import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.db.updater.JeeslDbEntityAttributeUpdater;
 import org.jeesl.util.query.ejb.JeeslInterfaceAnnotationQuery;
@@ -76,6 +77,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	final static Logger logger = LoggerFactory.getLogger(JeeslLabelEntityController.class);
 
 	private final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision;
+	private final JeeslIoLabelEntityCallback callback;
 	
 	private JeeslIoRevisionFacade<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,ERD,?> fRevision;
 	
@@ -113,9 +115,10 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	private boolean supportsJeeslAttributeDownload; public boolean isSupportsJeeslAttributeDownload() {return supportsJeeslAttributeDownload;}
 	private boolean uiAllowSave; public boolean isUiAllowSave() {return uiAllowSave;}
 
-	public JeeslLabelEntityController(final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision)
+	public JeeslLabelEntityController(JeeslIoLabelEntityCallback callback, final IoRevisionFactoryBuilder<L,D,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD,?> fbRevision)
 	{
 		super(fbRevision.getClassL(),fbRevision.getClassD());
+		this.callback=callback;
 		this.fbRevision=fbRevision;
 		
 		cpEntity = fbRevision.cpEjbEntity(LabelEntityComparator.Type.position);
@@ -491,8 +494,12 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			bLabel.reload(entity);
 		}
 		catch (ClassNotFoundException e){e.printStackTrace();}
-		
 	}
+	
+//	protected Entity restJx(String code) throws UtilsConfigurationException
+//	{
+//		return JeeslLabelEntityController.rest(code).exportRevisionEntity(code);
+//	}
 
 	public void addMapping() throws JeeslNotFoundException
 	{
@@ -671,16 +678,6 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 		}
 		return false;
 	}
-	
-//	@SuppressWarnings("rawtypes")
-//	@Override protected void updateSecurity2(JeeslJsfSecurityHandler jsfSecurityHandler, String actionDeveloper)
-//	{
-//		uiAllowSave = jsfSecurityHandler.allow(actionDeveloper);
-//		if(logger.isTraceEnabled())
-//		{
-//			logger.info(uiAllowSave+" allowSave ("+actionDeveloper+")");
-//		}
-//	}
 	
 	@SuppressWarnings("unchecked")
 	public static <L extends JeeslLang, D extends JeeslDescription> JeeslSystemRest<L,D,?,?> rest(String iFqcn)

@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
-import org.jeesl.model.xml.system.revision.Entities;
-import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.io.label.Entities;
+import org.jeesl.model.xml.io.label.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

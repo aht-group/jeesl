@@ -1,6 +1,7 @@
 package org.jeesl.model.xml.system.revision;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.label.Revision;
 import org.jeesl.model.xml.system.security.TestXmlUser;
 import org.jeesl.model.xml.system.status.TestXmlStatus;
 import org.slf4j.Logger;

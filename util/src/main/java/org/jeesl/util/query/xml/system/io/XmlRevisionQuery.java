@@ -10,12 +10,12 @@ import org.jeesl.factory.xml.system.security.XmlUserFactory;
 import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
+import org.jeesl.model.xml.io.label.Attribute;
+import org.jeesl.model.xml.io.label.Diagram;
+import org.jeesl.model.xml.io.label.Entity;
+import org.jeesl.model.xml.io.label.Relation;
+import org.jeesl.model.xml.io.label.Revision;
 import org.jeesl.model.xml.jeesl.QueryRevision;
-import org.jeesl.model.xml.system.revision.Attribute;
-import org.jeesl.model.xml.system.revision.Diagram;
-import org.jeesl.model.xml.system.revision.Entity;
-import org.jeesl.model.xml.system.revision.Relation;
-import org.jeesl.model.xml.system.revision.Revision;
 import org.jeesl.model.xml.system.security.User;
 import org.jeesl.util.query.xml.XmlStatusQuery;
 

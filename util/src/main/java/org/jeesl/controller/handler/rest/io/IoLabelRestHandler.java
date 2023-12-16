@@ -20,7 +20,7 @@ import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMappin
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.xml.system.revision.Entities;
+import org.jeesl.model.xml.io.label.Entities;
 import org.jeesl.util.comparator.ejb.PositionParentComparator;
 import org.jeesl.util.query.xml.system.io.XmlRevisionQuery;
 import org.slf4j.Logger;

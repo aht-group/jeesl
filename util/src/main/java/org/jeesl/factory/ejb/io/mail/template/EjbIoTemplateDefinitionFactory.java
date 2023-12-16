@@ -9,7 +9,7 @@ import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.io.label.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

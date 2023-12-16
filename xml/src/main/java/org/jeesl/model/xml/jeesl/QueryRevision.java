@@ -8,9 +8,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.jeesl.model.xml.system.revision.Diagram;
-import org.jeesl.model.xml.system.revision.Entity;
-import org.jeesl.model.xml.system.revision.Revision;
+
+import org.jeesl.model.xml.io.label.Diagram;
+import org.jeesl.model.xml.io.label.Entity;
+import org.jeesl.model.xml.io.label.Revision;
 
 
 /**

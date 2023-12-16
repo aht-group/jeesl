@@ -1,7 +1,7 @@
 package org.jeesl.api.facade.system;
 
 import org.jeesl.exception.processing.UtilsConfigurationException;
-import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.xsd.Container;
 
 import net.sf.ahtutils.xml.report.Reports;

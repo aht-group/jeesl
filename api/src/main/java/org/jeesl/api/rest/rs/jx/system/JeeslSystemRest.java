@@ -15,7 +15,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
-import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.xsd.Container;
 
 @Path("/rest/jeesl/export")

@@ -7,8 +7,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.jeesl.api.rest.i.io.JeeslIoLabelRestInterface;
-import org.jeesl.model.xml.system.revision.Diagrams;
-import org.jeesl.model.xml.system.revision.Entities;
+import org.jeesl.model.xml.io.label.Diagrams;
+import org.jeesl.model.xml.io.label.Entities;
 import org.jeesl.model.xml.xsd.Container;
 import org.metachart.xml.graph.Graph;
 

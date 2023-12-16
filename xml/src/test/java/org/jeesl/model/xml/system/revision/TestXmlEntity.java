@@ -1,6 +1,7 @@
 package org.jeesl.model.xml.system.revision;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.system.status.TestXmlCategory;
 import org.jeesl.model.xml.system.status.TestXmlDescriptions;
 import org.jeesl.model.xml.system.status.TestXmlLangs;

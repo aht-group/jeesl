@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import org.jeesl.model.xml.io.label.Attribute;
+import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.io.locale.status.Status;
-import org.jeesl.model.xml.system.revision.Attribute;
-import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.model.xml.xsd.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

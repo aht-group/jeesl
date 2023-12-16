@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jeesl.model.xml.io.label.Diagram;
+import org.jeesl.model.xml.io.label.Diagrams;
 import org.jeesl.model.xml.io.locale.status.Status;
-import org.jeesl.model.xml.system.revision.Diagram;
-import org.jeesl.model.xml.system.revision.Diagrams;
 import org.jeesl.model.xml.xsd.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

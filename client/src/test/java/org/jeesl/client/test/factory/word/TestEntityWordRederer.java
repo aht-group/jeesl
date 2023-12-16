@@ -3,8 +3,8 @@ package org.jeesl.client.test.factory.word;
 import java.io.IOException;
 
 import org.jeesl.doc.word.EntityWordRenderer;
-import org.jeesl.model.xml.system.revision.Entities;
-import org.jeesl.model.xml.system.revision.Entity;
+import org.jeesl.model.xml.io.label.Entities;
+import org.jeesl.model.xml.io.label.Entity;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -14,6 +14,7 @@ import net.sf.ahtutils.xml.utils.TrafficLight;
 import net.sf.ahtutils.xml.utils.TrafficLights;
 
 import org.jeesl.model.xml.io.graphic.Graphic;
+import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Model;
 import org.jeesl.model.xml.io.locale.status.Status;
@@ -23,7 +24,6 @@ import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.module.survey.Surveys;
 import org.jeesl.model.xml.module.survey.Template;
 import org.jeesl.model.xml.module.survey.Templates;
-import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.model.xml.system.security.Staff;

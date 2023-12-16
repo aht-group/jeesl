@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.revision;
+package org.jeesl.model.xml.io.label;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.jeesl.org/revision}entity" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.jeesl.org/revision}diagram" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,52 +32,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "entity"
+    "diagram"
 })
-@XmlRootElement(name = "entities")
-public class Entities
+@XmlRootElement(name = "diagrams")
+public class Diagrams
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Entity> entity;
+    protected List<Diagram> diagram;
 
     /**
-     * Gets the value of the entity property.
+     * Gets the value of the diagram property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the entity property.
+     * This is why there is not a <CODE>set</CODE> method for the diagram property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEntity().add(newItem);
+     *    getDiagram().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Entity }
+     * {@link Diagram }
      * 
      * 
      */
-    public List<Entity> getEntity() {
-        if (entity == null) {
-            entity = new ArrayList<Entity>();
+    public List<Diagram> getDiagram() {
+        if (diagram == null) {
+            diagram = new ArrayList<Diagram>();
         }
-        return this.entity;
+        return this.diagram;
     }
 
-    public boolean isSetEntity() {
-        return ((this.entity!= null)&&(!this.entity.isEmpty()));
+    public boolean isSetDiagram() {
+        return ((this.diagram!= null)&&(!this.diagram.isEmpty()));
     }
 
-    public void unsetEntity() {
-        this.entity = null;
+    public void unsetDiagram() {
+        this.diagram = null;
     }
 
 }

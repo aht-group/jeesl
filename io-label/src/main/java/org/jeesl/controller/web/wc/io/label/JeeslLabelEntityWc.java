@@ -2,6 +2,7 @@ package org.jeesl.controller.web.wc.io.label;
 
 import org.jeesl.controller.web.io.label.JeeslLabelEntityController;
 import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
+import org.jeesl.interfaces.controller.web.io.label.JeeslIoLabelEntityCallback;
 import org.jeesl.model.ejb.io.label.entity.IoLabelAttribute;
 import org.jeesl.model.ejb.io.label.entity.IoLabelAttributeType;
 import org.jeesl.model.ejb.io.label.entity.IoLabelCategory;
@@ -21,8 +22,9 @@ public class JeeslLabelEntityWc extends JeeslLabelEntityController<IoLang,IoDesc
 {
 	private static final long serialVersionUID = 1L;
 
-	public JeeslLabelEntityWc(final IoRevisionFactoryBuilder<IoLang,IoDescription,IoLabelCategory,IoRevisionView,IoRevisionViewMapping,IoRevisionScope,IoRevisionScopeType,IoLabelEntity,IoRevisionEntityMapping,IoLabelAttribute,IoLabelEntityRelation,IoLabelAttributeType,IoLabelDiagram,?> fbRevision)
+	public JeeslLabelEntityWc(final JeeslIoLabelEntityCallback callback,
+								final IoRevisionFactoryBuilder<IoLang,IoDescription,IoLabelCategory,IoRevisionView,IoRevisionViewMapping,IoRevisionScope,IoRevisionScopeType,IoLabelEntity,IoRevisionEntityMapping,IoLabelAttribute,IoLabelEntityRelation,IoLabelAttributeType,IoLabelDiagram,?> fbRevision)
 	{
-		super(fbRevision);
+		super(callback,fbRevision);
 	}
 }

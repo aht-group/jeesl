@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.revision;
+package org.jeesl.model.xml.io.label;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

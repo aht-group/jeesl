@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jeesl.model.xml.io.label.Attribute;
+import org.jeesl.model.xml.io.label.Diagrams;
+import org.jeesl.model.xml.io.label.Entities;
+import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.io.locale.status.Status;
-import org.jeesl.model.xml.system.revision.Attribute;
-import org.jeesl.model.xml.system.revision.Diagrams;
-import org.jeesl.model.xml.system.revision.Entities;
-import org.jeesl.model.xml.system.revision.Entity;
 import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.util.query.xpath.RevisionXpath;
 import org.slf4j.Logger;

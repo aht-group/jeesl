@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.revision;
+package org.jeesl.model.xml.io.label;
 
 import java.io.Serializable;
 import java.util.ArrayList;
