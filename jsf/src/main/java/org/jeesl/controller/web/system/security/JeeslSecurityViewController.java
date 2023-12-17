@@ -163,7 +163,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	public void selectCategory() throws JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.selectEntity(category));
-		category = efLang.persistMissingLangs(fSecurity,lp.getLocales(),category);
+		category = efLang.persistMissingLangs(fSecurity,lp,category);
 		category = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),category);
 		this.reloadViews();
 		view=null;
@@ -214,8 +214,8 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		this.reset(false,false,true,true);
 		logger.info(AbstractLogMessage.selectEntity(view));
 		view = fSecurity.load(fbSecurity.getClassView(), view);
-		view = efLang.persistMissingLangs(fSecurity,lp.getLocales(),view);
-		view = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),view);
+		view = efLang.persistMissingLangs(fSecurity,lp,view);
+		view = efDescription.persistMissingLangs(fSecurity,lp,view);
 		
 		this.reloadView();
 		this.reloadActions();
@@ -302,7 +302,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	public void selectAction()
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(action));}
-		action = efLang.persistMissingLangs(fSecurity,lp.getLocales(),action);
+		action = efLang.persistMissingLangs(fSecurity,lp,action);
 		action = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),action);
 	}
 	public void addAction() throws JeeslConstraintViolationException
@@ -360,7 +360,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 		}
 		else
 		{
-			action = efLang.persistMissingLangs(fSecurity,lp.getLocales(),action);
+			action = efLang.persistMissingLangs(fSecurity,lp,action);
 			action = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),action);
 		}
 	}
@@ -393,7 +393,7 @@ public class JeeslSecurityViewController <L extends JeeslLang, D extends JeeslDe
 	public void selectArea() throws JeeslConstraintViolationException
 	{
 		logger.info(AbstractLogMessage.createEntity(fbSecurity.getClassArea()));
-		area = efLang.persistMissingLangs(fSecurity,lp.getLocales(),area);
+		area = efLang.persistMissingLangs(fSecurity,lp,area);
 		area = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),area);
 	}
 	

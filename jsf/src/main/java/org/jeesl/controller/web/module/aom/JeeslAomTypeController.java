@@ -200,7 +200,7 @@ public class JeeslAomTypeController <L extends JeeslLang, D extends JeeslDescrip
     {
 		logger.info("Selected "+event.getTreeNode().toString());
 		type = (ATYPE)event.getTreeNode().getData();
-		type = efLang.persistMissingLangs(fAsset,lp.getLocales(),type);
+		type = efLang.persistMissingLangs(fAsset,lp,type);
 		type = efDescription.persistMissingLangs(fAsset,lp.getLocales(),type);
     }
 

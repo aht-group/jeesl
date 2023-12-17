@@ -183,7 +183,7 @@ public class JeeslIoTemplateController <L extends JeeslLang,D extends JeeslDescr
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(template));}
 		template = fTemplate.find(fbTemplate.getClassTemplate(),template);
-		template = efLang.persistMissingLangs(fTemplate,lp.getLocales(),template);
+		template = efLang.persistMissingLangs(fTemplate,lp,template);
 		template = efDescription.persistMissingLangs(fTemplate,lp.getLocales(),template);
 		reloadTemplate();
 		reset(false,true);

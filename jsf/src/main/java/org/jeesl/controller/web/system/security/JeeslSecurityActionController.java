@@ -110,7 +110,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	public void selectCategory() throws JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.selectEntity(category));
-		category = efLang.persistMissingLangs(fSecurity,lp.getLocales(),category);
+		category = efLang.persistMissingLangs(fSecurity,lp,category);
 		category = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),category);
 		this.reloadTemplates();
 		template=null;
@@ -139,7 +139,7 @@ public class JeeslSecurityActionController <L extends JeeslLang, D extends Jeesl
 	{
 		logger.info(AbstractLogMessage.selectEntity(template));
 		template = fSecurity.find(fbSecurity.getClassTemplate(), template);
-		template = efLang.persistMissingLangs(fSecurity,lp.getLocales(),template);
+		template = efLang.persistMissingLangs(fSecurity,lp,template);
 		template = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),template);
 	}	
 	public void saveTemplate() throws JeeslConstraintViolationException, JeeslLockingException, JeeslNotFoundException

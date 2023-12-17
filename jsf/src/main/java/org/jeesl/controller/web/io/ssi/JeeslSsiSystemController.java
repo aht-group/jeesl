@@ -70,7 +70,7 @@ public class JeeslSsiSystemController <L extends JeeslLang, D extends JeeslDescr
 	public void selectSystem()
 	{
 		logger.info(AbstractLogMessage.selectEntity(system));
-		system = efLang.persistMissingLangs(fSsi,lp.getLocales(), system);
+		system = efLang.persistMissingLangs(fSsi,lp,system);
 		system = efDescription.persistMissingLangs(fSsi, lp.getLocales(), system);
 		reloadCredentials();
 		reset(true);

@@ -51,7 +51,7 @@ public class XmlRelationFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		if(Objects.nonNull(q.getEntity()))
 		{
-			if(attribute.getEntity()==null){xml.setEntity(XmlEntityFactory.build());}
+			if(Objects.isNull(attribute.getEntity())) {xml.setEntity(XmlEntityFactory.build());}
 			else {xml.setEntity(xfEntity.build(attribute.getEntity()));}
 		}	
 		

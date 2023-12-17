@@ -366,7 +366,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(entity));}
 		entity = fRevision.find(fbRevision.getClassEntity(), entity);
-		entity = efLang.persistMissingLangs(fRevision,lp.getLocales(),entity);
+		entity = efLang.persistMissingLangs(fRevision,lp,entity);
 		entity = efDescription.persistMissingLangs(fRevision,lp.getLocales(),entity);
 		reloadEntity();
 		attribute=null;
@@ -424,7 +424,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(attribute));}
 		attribute = fRevision.find(fbRevision.getClassAttribute(), attribute);
-		attribute = efLang.persistMissingLangs(fRevision,lp.getLocales(),attribute);
+		attribute = efLang.persistMissingLangs(fRevision,lp,attribute);
 		attribute = efDescription.persistMissingLangs(fRevision,lp.getLocales(),attribute);
 	}
 

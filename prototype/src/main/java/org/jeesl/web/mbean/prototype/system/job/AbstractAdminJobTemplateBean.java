@@ -117,7 +117,7 @@ public class AbstractAdminJobTemplateBean <L extends JeeslLang, D extends JeeslD
 	public void selectTemplate()
 	{
 		if(debugOnInfo){logger.info(AbstractLogMessage.selectEntity(template));}
-		template = efLang.persistMissingLangs(fJob, lp.getLocales(), template);
+		template = efLang.persistMissingLangs(fJob, lp, template);
 		template = efDescription.persistMissingLangs(fJob, lp.getLocales(), template);
 	}
 	

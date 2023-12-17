@@ -157,7 +157,7 @@ public class JeeslClTracklistGwc <L extends JeeslLang, D extends JeeslDescriptio
 	{
 		this.reset(false,false,true,true);
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(list));}
-		list = efLang.persistMissingLangs(fCl,lp.getLocales(),list);
+		list = efLang.persistMissingLangs(fCl,lp,list);
 		this.reloadList();
 		this.reloadItems();
 	}

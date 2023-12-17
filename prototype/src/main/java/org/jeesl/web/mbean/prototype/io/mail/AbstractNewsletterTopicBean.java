@@ -86,7 +86,7 @@ public abstract class AbstractNewsletterTopicBean <L extends JeeslLang, D extend
 	{
 		logger.info(AbstractLogMessage.selectEntity(topic));
 		topic = fNewsletter.find(fbNewsletter.getClassTopic(), topic);
-		topic = efLang.persistMissingLangs(fNewsletter, lp.getLocales(), topic);
+		topic = efLang.persistMissingLangs(fNewsletter, lp, topic);
 		topic = efDescription.persistMissingLangs(fNewsletter, lp.getLocales(), topic);
 	}
 	

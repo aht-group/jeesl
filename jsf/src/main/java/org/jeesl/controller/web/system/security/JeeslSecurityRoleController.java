@@ -166,7 +166,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	public void selectCategory() throws JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.selectEntity(category));
-		category = efLang.persistMissingLangs(fSecurity,lp.getLocales(),category);
+		category = efLang.persistMissingLangs(fSecurity,lp,category);
 		category = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),category);
 		reloadRoles();
 		role=null;
@@ -190,7 +190,7 @@ public class JeeslSecurityRoleController  <L extends JeeslLang, D extends JeeslD
 	{
 		logger.trace(AbstractLogMessage.selectEntity(role));
 		role = fSecurity.find(fbSecurity.getClassRole(),role);
-		role = efLang.persistMissingLangs(fSecurity,lp.getLocales(),role);
+		role = efLang.persistMissingLangs(fSecurity,lp,role);
 		role = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),role);		
 		role = fSecurity.load(role);
 		reloadActions();

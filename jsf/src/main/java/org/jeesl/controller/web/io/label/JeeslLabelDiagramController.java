@@ -99,7 +99,7 @@ public class JeeslLabelDiagramController <L extends JeeslLang, D extends JeeslDe
 	public void selectDiagram() throws JeeslNotFoundException
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(diagram));}
-		diagram = efLang.persistMissingLangs(fRevision,lp.getLocales(),diagram);
+		diagram = efLang.persistMissingLangs(fRevision,lp,diagram);
 		diagram = efDescription.persistMissingLangs(fRevision,lp.getLocales(),diagram);
 		reloadDiagram();
 	}

@@ -189,7 +189,7 @@ public class JeeslIoAttributeSetGwc <L extends JeeslLang, D extends JeeslDescrip
 	public void selectSet()
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(set));}
-		set = efLang.persistMissingLangs(fAttribute,lp.getLocales(),set);
+		set = efLang.persistMissingLangs(fAttribute,lp,set);
 		set = efDescription.persistMissingLangs(fAttribute,lp.getLocales(),set);
 		reloadItems();
 		reset(false,false,true);

@@ -152,7 +152,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	public void selectCategory() throws JeeslNotFoundException
 	{
 		logger.info(AbstractLogMessage.selectEntity(category));
-		category = efLang.persistMissingLangs(fSecurity,lp.getLocales(),category);
+		category = efLang.persistMissingLangs(fSecurity,lp,category);
 		category = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),category);
 		reloadUsecases();
 		usecase=null;
@@ -184,7 +184,7 @@ public class JeeslSecurityUsecaseController <L extends JeeslLang, D extends Jees
 	{
 		logger.info(AbstractLogMessage.selectEntity(usecase));
 		reloadUsecase();
-		usecase = efLang.persistMissingLangs(fSecurity,lp.getLocales(),usecase);
+		usecase = efLang.persistMissingLangs(fSecurity,lp,usecase);
 		usecase = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),usecase);
 		
 		reloadActions();

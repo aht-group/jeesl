@@ -193,7 +193,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	public void selectCriteria()
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(criteria));}
-		criteria = efLang.persistMissingLangs(fAttribute,lp.getLocales(),criteria);
+		criteria = efLang.persistMissingLangs(fAttribute,lp,criteria);
 		criteria = efDescription.persistMissingLangs(fAttribute,lp.getLocales(),criteria);
 		reloadOptions();
 		reset(false,false,true);
@@ -223,7 +223,7 @@ public class JeeslIoAttributePoolGwc <L extends JeeslLang, D extends JeeslDescri
 	public void selectOption()
 	{
 		if(debugOnInfo) {logger.info(AbstractLogMessage.selectEntity(criteria));}
-		option = efLang.persistMissingLangs(fAttribute,lp.getLocales(),option);
+		option = efLang.persistMissingLangs(fAttribute,lp,option);
 		option = efDescription.persistMissingLangs(fAttribute,lp.getLocales(),option);
 	}
 	

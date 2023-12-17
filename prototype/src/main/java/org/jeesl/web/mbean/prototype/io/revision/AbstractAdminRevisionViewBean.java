@@ -96,7 +96,7 @@ public class AbstractAdminRevisionViewBean <L extends JeeslLang, D extends Jeesl
 	{
 		logger.info(AbstractLogMessage.selectEntity(rv));
 		rv = fRevision.find(fbRevision.getClassView(), rv);
-		rv = efLang.persistMissingLangs(fRevision,lp.getLocales(),rv);
+		rv = efLang.persistMissingLangs(fRevision,lp,rv);
 		rv = efDescription.persistMissingLangs(fRevision,lp.getLocales(),rv);
 		mapping=null;
 		reloadView();

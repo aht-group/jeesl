@@ -98,7 +98,7 @@ public class JeeslSecurityContextController <L extends JeeslLang, D extends Jees
 	{
 		logger.trace(AbstractLogMessage.selectEntity(context));
 		context = fSecurity.find(fbSecurity.getClassContext(),context);
-		context = efLang.persistMissingLangs(fSecurity,lp.getLocales(),context);
+		context = efLang.persistMissingLangs(fSecurity,lp,context);
 		context = efDescription.persistMissingLangs(fSecurity,lp.getLocales(),context);	
 		efContext.ejb2nnb(context,nnb);
 	}

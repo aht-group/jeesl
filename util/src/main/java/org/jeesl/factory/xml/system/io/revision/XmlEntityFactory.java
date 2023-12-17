@@ -22,13 +22,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class XmlEntityFactory <L extends JeeslLang,D extends JeeslDescription,
-								RC extends JeeslRevisionCategory<L,D,RC,?>,	
+								CAT extends JeeslRevisionCategory<L,D,CAT,?>,	
 								REM extends JeeslRevisionEntityMapping<?,?,?>,
-								RE extends JeeslRevisionEntity<L,D,RC,REM,RA,ERD>,	
+								RE extends JeeslRevisionEntity<L,D,CAT,REM,RA,ERD>,	
 								RA extends JeeslRevisionAttribute<L,D,RE,RER,RAT>,
 								RER extends JeeslStatus<L,D,RER>,
 								RAT extends JeeslStatus<L,D,RAT>,
-								ERD extends JeeslRevisionDiagram<L,D,RC>>
+								ERD extends JeeslRevisionDiagram<L,D,CAT>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlEntityFactory.class);
 	
@@ -36,9 +36,9 @@ public class XmlEntityFactory <L extends JeeslLang,D extends JeeslDescription,
 	
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
-	private XmlCategoryFactory<L,D,RC> xfCategory;
-	private XmlAttributeFactory<L,D,RC,REM,RE,RA,RER,RAT,ERD> xfAttribute;
-	private XmlDiagramFactory<L,D,RC,ERD> xfDiagram;
+	private XmlCategoryFactory<L,D,CAT> xfCategory;
+	private XmlAttributeFactory<L,D,CAT,REM,RE,RA,RER,RAT,ERD> xfAttribute;
+	private XmlDiagramFactory<L,D,CAT,ERD> xfDiagram;
 	
 	public XmlEntityFactory(QueryRevision q){this(q.getEntity());}
 	public XmlEntityFactory(Entity q)
@@ -70,14 +70,14 @@ public class XmlEntityFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
 		if(Objects.nonNull(q.getRemark())) {xml.setRemark(XmlRemarkFactory.build(ejb.getDeveloperInfo()));}
 		
-		if(Objects.nonNull(q.getAttribute()))
+		if(ObjectUtils.isNotEmpty(q.getAttribute()))
 		{
 			for(RA attribute : ejb.getAttributes())
 			{
 				xml.getAttribute().add(xfAttribute.build(attribute));
 			}
 		}
-		if(Objects.nonNull(q.getDiagram()) && ejb.getDiagram()!=null) {xml.setDiagram(xfDiagram.build(ejb.getDiagram()));}
+		if(ObjectUtils.allNotNull(q.getDiagram(),ejb.getDiagram())) {xml.setDiagram(xfDiagram.build(ejb.getDiagram()));}
 		
 		return xml;
 	}
