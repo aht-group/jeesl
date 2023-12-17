@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -169,27 +170,36 @@ public class EjbLangFactory<L extends JeeslLang> implements Serializable
 		}
 		return ejb;
 	}
+	
+	public <T extends EjbWithLang<L>, LOC extends JeeslLocale<L,?,LOC,?>> T persistMissingLangs(JeeslFacade fUtils, JeeslLocaleProvider<LOC> lp, T ejb)
+	{
+		if(Objects.isNull(ejb.getName())) {ejb.setName(new HashMap<>());}
+		try
+		{
+			boolean hasChanges = false;
+			for(LOC locale : lp.getLocales())
+			{
+				if(!ejb.getName().containsKey(locale.getCode()))
+				{
+					
+					L l = createLang(locale.getCode(), "");
+					if(EjbIdFactory.isSaved(ejb)) {l = fUtils.persist(l);}
+					ejb.getName().put(locale.getCode(), l);
+					hasChanges=true;
+				}
+			}
+			if(EjbIdFactory.isSaved(ejb) && hasChanges)
+			{
+				ejb = fUtils.update(ejb);
+			}
+		}
+		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
+		return ejb;
+	}
 
 	public <LOC extends JeeslLocale<L,?,LOC,?>> Map<String,L> persistMissigLangs(JeeslFacade fUtils, JeeslLocaleProvider<LOC> lp, Map<String,L> map)
 	{
 		for(LOC loc : lp.getLocales())
-		{
-			if(!map.containsKey(loc.getCode()))
-			{
-				try
-				{
-					L l = fUtils.persist(createLang(loc.getCode(), ""));
-					map.put(loc.getCode(), l);
-				}
-				catch (JeeslConstraintViolationException e) {e.printStackTrace();}
-			}
-		}
-		return map;
-	}
-	
-	public <LOC extends JeeslStatus<L,?,LOC>> Map<String,L> checkMissigLangs(JeeslFacade fUtils, List<LOC> locales, Map<String,L> map)
-	{
-		for(LOC loc : locales)
 		{
 			if(!map.containsKey(loc.getCode()))
 			{

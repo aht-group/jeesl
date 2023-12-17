@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.factory.txt.system.status.TxtStatusFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
@@ -18,6 +19,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithDescription;
+import org.jeesl.interfaces.model.with.system.locale.EjbWithLang;
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.slf4j.Logger;
@@ -176,6 +178,31 @@ public class EjbDescriptionFactory<D extends JeeslDescription> implements Serial
 		}
 	}
 	
+	public <T extends EjbWithDescription<D>, LOC extends JeeslLocale<?,D,LOC,?>> T persistMissingLangs(JeeslFacade fUtils, JeeslLocaleProvider<LOC> lp, T ejb)
+	{
+		if(Objects.isNull(ejb.getDescription())) {ejb.setDescription(new HashMap<>());}
+		try
+		{
+			boolean hasChanges = false;
+			for(LOC locale : lp.getLocales())
+			{
+				if(!ejb.getDescription().containsKey(locale.getCode()))
+				{
+					
+					D d = create(locale.getCode(), "");
+					if(EjbIdFactory.isSaved(ejb)) {d = fUtils.persist(d);}
+					ejb.getDescription().put(locale.getCode(), d);
+					hasChanges=true;
+				}
+			}
+			if(EjbIdFactory.isSaved(ejb) && hasChanges)
+			{
+				ejb = fUtils.update(ejb);
+			}
+		}
+		catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
+		return ejb;
+	}
 	public <T extends EjbWithDescription<D>, S extends JeeslStatus<L,D,S>, L extends JeeslLang> T persistMissingLangs(JeeslFacade fUtils, List<S> locales, T ejb)
 	{
 		return persistMissingLangs(fUtils,TxtStatusFactory.toCodes(locales).toArray(new String[0]),ejb);

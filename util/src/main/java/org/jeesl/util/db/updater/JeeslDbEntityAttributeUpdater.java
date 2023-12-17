@@ -12,6 +12,7 @@ import org.jeesl.factory.builder.io.IoRevisionFactoryBuilder;
 import org.jeesl.factory.ejb.system.status.EjbDescriptionFactory;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
+import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleProvider;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttribute;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionAttributeType;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionCategory;
@@ -73,11 +74,15 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 		dbuLang = JeeslDbLangUpdater.factory(fbRevision.getClassAttribute(),fbRevision.getClassL());
 	}
 	
-	public void updateAttributes2(RE entity, List<LOC> locales, Entity xml) throws JeeslConstraintViolationException
+	public void updateAttributes2(RE entity, JeeslLocaleProvider<LOC> lp, Entity xml) throws JeeslConstraintViolationException
 	{
-		updateAttributes(entity,EjbCodeFactory.toListCode(locales),xml);
+		updateAttributes4(entity,lp,EjbCodeFactory.toListCode(lp.getLocales()),xml);
 	}
 	public void updateAttributes(RE entity, List<String> eLocales, Entity xml) throws JeeslConstraintViolationException
+	{
+		this.updateAttributes4(entity, null, eLocales, xml);
+	}
+	private void updateAttributes4(RE entity, JeeslLocaleProvider<LOC> lp, List<String> eLocales, Entity xml) throws JeeslConstraintViolationException
 	{
 		logger.info("Creating/Updating Attributes of "+entity.toString()+ entity.getCode() +" for "+eLocales.toString());
 
@@ -125,10 +130,12 @@ public class JeeslDbEntityAttributeUpdater <L extends JeeslLang, D extends Jeesl
 			if(Objects.isNull(eLocales)) {logger.warn("NULL: eLocales");}
 			if(Objects.isNull(ejbAttribute)) {logger.warn("NULL: ejbAttribute");}
 			
-			efLang.persistMissingLangsForCode(fRevision, eLocales, ejbAttribute);
+			if(Objects.isNull(ejbAttribute.getName())) {ejbAttribute.setName(new HashMap<>());}
+			if(Objects.nonNull(lp)){efLang.persistMissingLangs(fRevision,lp,ejbAttribute);}
 			efLang.update(ejbAttribute,xmlAttribute.getLangs());
 			
-			efDescription.persistMissingLangsForCode(fRevision, eLocales, ejbAttribute);
+			if(Objects.isNull(ejbAttribute.getDescription())) {ejbAttribute.setDescription(new HashMap<>());}
+			if(Objects.nonNull(lp)){efDescription.persistMissingLangs(fRevision, lp, ejbAttribute);}
 			efDescription.update(ejbAttribute,xmlAttribute.getDescriptions());
 			
 			try

@@ -488,7 +488,7 @@ public class JeeslLabelEntityController <L extends JeeslLang, D extends JeeslDes
 			Entity xml = this.callback.downloadEntity(i.getName());
 
 			JeeslDbEntityAttributeUpdater<L,D,LOC,RC,RV,RVM,RS,RST,RE,REM,RA,RER,RAT,ERD> updater = new JeeslDbEntityAttributeUpdater<>(fbRevision,fRevision);
-			updater.updateAttributes2(entity,lp.getLocales(),xml);
+			updater.updateAttributes2(entity,lp,xml);
 			reloadEntity();
 			bLabel.reload(entity);
 		}
