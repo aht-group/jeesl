@@ -2,13 +2,13 @@ package org.jeesl.factory.ejb.io.db.backup;
 
 import java.util.Date;
 
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EjbIoDumpFactory<SYSTEM extends JeeslIoSsiSystem<?,?>,
-								DUMP extends JeeslDbDump<SYSTEM,?>>
+								DUMP extends JeeslDbBackupArchive<SYSTEM,?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(EjbIoDumpFactory.class);
 	

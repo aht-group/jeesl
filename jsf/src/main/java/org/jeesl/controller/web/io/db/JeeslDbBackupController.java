@@ -13,9 +13,9 @@ import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.interfaces.bean.sb.bean.SbDateSelectionBean;
 import org.jeesl.interfaces.bean.sb.handler.SbDateSelection;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupStatus;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -30,10 +30,10 @@ import net.sf.exlp.util.DateUtil;
 
 public class JeeslDbBackupController <L extends JeeslLang,D extends JeeslDescription, LOC extends JeeslLocale<L,D,LOC,?>,
 									SYSTEM extends JeeslIoSsiSystem<L,D>,
-									DUMP extends JeeslDbDump<SYSTEM,DF>,
-									DF extends JeeslDbDumpFile<DUMP,DH,DS>,
+									DUMP extends JeeslDbBackupArchive<SYSTEM,DF>,
+									DF extends JeeslDbBackupFile<DUMP,DH,DS>,
 									DH extends JeeslIoSsiHost<L,D,?>,
-									DS extends JeeslDbDumpStatus<L,D,DS,?>>
+									DS extends JeeslDbBackupStatus<L,D,DS,?>>
 						extends AbstractJeeslLocaleWebController<L,D,LOC>
 						implements Serializable,SbDateSelectionBean
 {

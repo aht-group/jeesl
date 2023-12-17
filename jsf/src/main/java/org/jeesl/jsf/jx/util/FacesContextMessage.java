@@ -23,7 +23,7 @@ public class FacesContextMessage implements JeeslFacesContextMessage
 	public void info(String summary, String detail) {info(null,summary, detail);}
 	public <FID extends Enum<FID>> void info(FID id, String summary, String detail)
 	{
-		if(Objects.isNull(detail)) {addMessage(null, FacesMessage.SEVERITY_INFO,summary,detail);}
+		if(Objects.isNull(id)) {addMessage(null, FacesMessage.SEVERITY_INFO,summary,detail);}
 		else {addMessage(id.toString(), FacesMessage.SEVERITY_INFO,summary,detail);}
 		
 	}

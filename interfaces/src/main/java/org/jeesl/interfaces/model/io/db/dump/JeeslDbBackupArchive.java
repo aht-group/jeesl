@@ -12,8 +12,8 @@ import org.jeesl.interfaces.model.with.primitive.text.EjbWithName;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
-public interface JeeslDbDump<SYSTEM extends JeeslIoSsiSystem<?,?>,
-							FILE extends JeeslDbDumpFile<?,?,?>
+public interface JeeslDbBackupArchive<SYSTEM extends JeeslIoSsiSystem<?,?>,
+							FILE extends JeeslDbBackupFile<?,?,?>
 							>
 					extends Serializable,EjbWithId,EjbSaveable,EjbRemoveable,EjbWithRecord,EjbWithName
 {

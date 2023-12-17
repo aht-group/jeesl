@@ -1,4 +1,4 @@
-package org.jeesl.model.ejb.io.db.dump;
+package org.jeesl.model.ejb.io.db.backup;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,12 +18,12 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
 import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 
 @Entity
 @Table(name="IoDbDump",uniqueConstraints=@UniqueConstraint(columnNames={"name"}))
-public class IoDbDump implements JeeslDbDump<IoSsiSystem,IoDbDumpFile>
+public class IoDbBackupArchive implements JeeslDbBackupArchive<IoSsiSystem,IoDbBackupFile>
 {
 	public static final long serialVersionUID=1;
 
@@ -52,11 +52,11 @@ public class IoDbDump implements JeeslDbDump<IoSsiSystem,IoDbDumpFile>
 	@Override public void setSize(long size){this.size = size;}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="dump")
-	private List<IoDbDumpFile> files;
-	@Override public List<IoDbDumpFile> getFiles() {if(Objects.isNull(files)){files = new ArrayList<>();} return files;}
-	@Override public void setFiles(List<IoDbDumpFile> files) {this.files = files;}
+	private List<IoDbBackupFile> files;
+	@Override public List<IoDbBackupFile> getFiles() {if(Objects.isNull(files)){files = new ArrayList<>();} return files;}
+	@Override public void setFiles(List<IoDbBackupFile> files) {this.files = files;}
 
 
-	@Override public boolean equals(Object object){return (object instanceof IoDbDump) ? id == ((IoDbDump) object).getId() : (object == this);}
+	@Override public boolean equals(Object object){return (object instanceof IoDbBackupArchive) ? id == ((IoDbBackupArchive) object).getId() : (object == this);}
 	@Override public int hashCode() {return new HashCodeBuilder(17,53).append(id).toHashCode();}
 }

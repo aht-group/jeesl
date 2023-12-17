@@ -11,7 +11,7 @@ import org.jeesl.api.facade.system.JeeslSystemPropertyFacade;
 import org.jeesl.controller.web.AbstractJeeslLocaleWebController;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.system.PropertyFactoryBuilder;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
@@ -38,7 +38,7 @@ public class JeeslSystemPropertyVersionGwc <L extends JeeslLang, D extends Jeesl
 	{
 		try
 		{
-			String backupTag = fProperty.valueStringForKey(JeeslDbDump.Tag.dbBackupTag.toString(),null);
+			String backupTag = fProperty.valueStringForKey(JeeslDbBackupArchive.Tag.dbBackupTag.toString(),null);
 			return LocalDateTime.parse(backupTag,DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 		}
 		catch (JeeslNotFoundException e) {return null;}

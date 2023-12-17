@@ -7,9 +7,9 @@ import org.jeesl.factory.builder.io.db.IoDbDumpFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbMetaFactoryBuilder;
 import org.jeesl.factory.builder.io.db.IoDbPgFactoryBuilder;
 import org.jeesl.factory.builder.io.ssi.IoSsiCoreFactoryBuilder;
-import org.jeesl.model.ejb.io.db.dump.IoDbDump;
-import org.jeesl.model.ejb.io.db.dump.IoDbDumpFile;
-import org.jeesl.model.ejb.io.db.dump.IoDbDumpStatus;
+import org.jeesl.model.ejb.io.db.backup.IoDbBackupArchive;
+import org.jeesl.model.ejb.io.db.backup.IoDbBackupFile;
+import org.jeesl.model.ejb.io.db.backup.IoDbBackupStatus;
 import org.jeesl.model.ejb.io.db.flyway.IoDbFlyway;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaColumn;
 import org.jeesl.model.ejb.io.db.meta.IoDbMetaColumnType;
@@ -36,22 +36,22 @@ import org.jeesl.model.ejb.io.ssi.core.IoSsiSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class IoDbRestHandler extends IoDbRestGenericHandler<IoLang,IoDescription,IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbDumpStatus,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbStatement,IoDbStatementGroup>
+public class IoDbRestHandler extends IoDbRestGenericHandler<IoLang,IoDescription,IoSsiSystem,IoDbBackupArchive,IoDbBackupFile,IoSsiHost,IoDbBackupStatus,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbStatement,IoDbStatementGroup>
 					implements JeeslIoDbRestInterface
 {
 	final static Logger logger = LoggerFactory.getLogger(IoDbRestHandler.class);
 	
-	public static IoDbRestHandler instance(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbDumpStatus> fbDb,
+	public static IoDbRestHandler instance(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbBackupArchive,IoDbBackupFile,IoSsiHost,IoDbBackupStatus> fbDb,
 											IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference> fbDbMeta,
-											JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique,IoDbFlyway> fDb,
+											JeeslIoDbFacade<IoSsiSystem,IoDbBackupArchive,IoDbBackupFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique,IoDbFlyway> fDb,
 											IoSsiSystem system)
 	{
 		return new IoDbRestHandler(fbDb,fbDbMeta,fDb,system);
 	}
 	
-	private IoDbRestHandler(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbDumpStatus> fbDb,
+	private IoDbRestHandler(IoDbDumpFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbBackupArchive,IoDbBackupFile,IoSsiHost,IoDbBackupStatus> fbDb,
 							IoDbMetaFactoryBuilder<IoLang,IoDescription,IoSsiSystem,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaColumnType,IoDbMetaConstraint,IoDbMetaConstraintType,IoDbMetaUnique,IoDbMetaDifference> fbDbMeta,
-							JeeslIoDbFacade<IoSsiSystem,IoDbDump,IoDbDumpFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique,IoDbFlyway> fDb,
+							JeeslIoDbFacade<IoSsiSystem,IoDbBackupArchive,IoDbBackupFile,IoSsiHost,IoDbMetaSnapshot,IoDbMetaTable,IoDbMetaColumn,IoDbMetaConstraint,IoDbMetaUnique,IoDbFlyway> fDb,
 							IoSsiSystem system)
 	{
 		super(fbDb,fbDbMeta,

@@ -6,8 +6,8 @@ import java.util.Map;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.interfaces.facade.JeeslFacade;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
 import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
@@ -20,8 +20,8 @@ import org.jeesl.interfaces.util.query.io.EjbIoDbQuery;
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 
 public interface JeeslIoDbFacade <SYSTEM extends JeeslIoSsiSystem<?,?>,
-								DUMP extends JeeslDbDump<SYSTEM,DF>,
-								DF extends JeeslDbDumpFile<DUMP,DH,?>,
+								DUMP extends JeeslDbBackupArchive<SYSTEM,DF>,
+								DF extends JeeslDbBackupFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
 								
 								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,

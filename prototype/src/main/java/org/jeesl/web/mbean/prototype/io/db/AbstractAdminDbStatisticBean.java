@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.jeesl.api.facade.io.JeeslIoDbFacade;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupStatus;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiHost;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -18,10 +18,10 @@ import org.slf4j.LoggerFactory;
 
 public class AbstractAdminDbStatisticBean <L extends JeeslLang, D extends JeeslDescription,
 											SYSTEM extends JeeslIoSsiSystem<L,D>,
-											DUMP extends JeeslDbDump<SYSTEM,FILE>,
-											FILE extends JeeslDbDumpFile<DUMP,HOST,STATUS>,
+											DUMP extends JeeslDbBackupArchive<SYSTEM,FILE>,
+											FILE extends JeeslDbBackupFile<DUMP,HOST,STATUS>,
 											HOST extends JeeslIoSsiHost<L,D,?>,
-											STATUS extends JeeslDbDumpStatus<L,D,STATUS,?>> 
+											STATUS extends JeeslDbBackupStatus<L,D,STATUS,?>> 
 implements Serializable
 {
 	private static final long serialVersionUID = 1L;

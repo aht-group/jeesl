@@ -29,9 +29,9 @@ import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaTableFactory;
 import org.jeesl.factory.ejb.io.db.meta.EjbIoDbMetaUniqueFactory;
 import org.jeesl.factory.ejb.util.EjbCodeFactory;
 import org.jeesl.factory.json.io.db.meta.JsonDbMetaTableFactory;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpStatus;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupStatus;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumnType;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
@@ -61,10 +61,10 @@ import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescription,
 							SYSTEM extends JeeslIoSsiSystem<L,D>,
-							DUMP extends JeeslDbDump<SYSTEM,FILE>,
-							FILE extends JeeslDbDumpFile<DUMP,HOST,STATUS>,
+							DUMP extends JeeslDbBackupArchive<SYSTEM,FILE>,
+							FILE extends JeeslDbBackupFile<DUMP,HOST,STATUS>,
 							HOST extends JeeslIoSsiHost<L,D,SYSTEM>,
-							STATUS extends JeeslDbDumpStatus<L,D,STATUS,?>,
+							STATUS extends JeeslDbBackupStatus<L,D,STATUS,?>,
 							
 							SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
 							TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
@@ -135,8 +135,8 @@ public class IoDbRestGenericHandler<L extends JeeslLang,D extends JeeslDescripti
 		
 		try
 		{
-			eStatusStored = fDb.fByCode(fbDb.getClassDumpStatus(),JeeslDbDumpFile.Status.stored);
-			eStatusDeleted = fDb.fByCode(fbDb.getClassDumpStatus(),JeeslDbDumpFile.Status.deleted);
+			eStatusStored = fDb.fByCode(fbDb.getClassDumpStatus(),JeeslDbBackupFile.Status.stored);
+			eStatusDeleted = fDb.fByCode(fbDb.getClassDumpStatus(),JeeslDbBackupFile.Status.deleted);
 		}
 		catch (JeeslNotFoundException e) {dut.fail(e, true);return dut.toDataUpdate();}
 		

@@ -10,9 +10,9 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.qualifier.rest.option.DownloadJeeslDescription;
 
 @DownloadJeeslDescription
-public interface JeeslDbDumpFile<DUMP extends JeeslDbDump<?,?>,
+public interface JeeslDbBackupFile<DUMP extends JeeslDbBackupArchive<?,?>,
 								HOST extends JeeslIoSsiHost<?,?,?>,
-								STATUS extends JeeslDbDumpStatus<?,?,STATUS,?>>
+								STATUS extends JeeslDbBackupStatus<?,?,STATUS,?>>
 					extends Serializable,EjbSaveable,EjbRemoveable,EjbWithId,EjbWithParentAttributeResolver
 {
 	public static enum Attributes{dump,host,status}

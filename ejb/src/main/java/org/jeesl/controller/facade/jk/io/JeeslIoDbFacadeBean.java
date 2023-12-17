@@ -30,8 +30,8 @@ import org.jeesl.factory.json.system.io.db.JsonPostgresConnectionFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresFactory;
 import org.jeesl.factory.json.system.io.db.JsonPostgresStatementFactory;
 import org.jeesl.factory.sql.system.db.SqlDbPgStatFactory;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDumpFile;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupFile;
 import org.jeesl.interfaces.model.io.db.flyway.JeeslIoDbFlyway;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaColumn;
 import org.jeesl.interfaces.model.io.db.meta.JeeslDbMetaConstraint;
@@ -47,8 +47,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
-								DUMP extends JeeslDbDump<SYSTEM,DF>,
-								DF extends JeeslDbDumpFile<DUMP,DH,?>,
+								DUMP extends JeeslDbBackupArchive<SYSTEM,DF>,
+								DF extends JeeslDbBackupFile<DUMP,DH,?>,
 								DH extends JeeslIoSsiHost<?,?,?>,
 								SNAP extends JeeslDbMetaSnapshot<SYSTEM,TAB,COL,CON>,
 								TAB extends JeeslDbMetaTable<SYSTEM,SNAP>,
@@ -75,12 +75,12 @@ public class JeeslIoDbFacadeBean <SYSTEM extends JeeslIoSsiSystem<?,?>,
 	
 	@Override public List<DF> fDumpFiles(DH host) 
 	{
-		return this.allForParent(fbDb.getClassDumpFile(),JeeslDbDumpFile.Attributes.host, host);
+		return this.allForParent(fbDb.getClassDumpFile(),JeeslDbBackupFile.Attributes.host, host);
 	}
 	
 	@Override public DF fDumpFile(DUMP dump, DH host) throws JeeslNotFoundException
 	{
-		return this.oneForParents(fbDb.getClassDumpFile(), JeeslDbDumpFile.Attributes.dump,dump, JeeslDbDumpFile.Attributes.host,host);
+		return this.oneForParents(fbDb.getClassDumpFile(), JeeslDbBackupFile.Attributes.dump,dump, JeeslDbBackupFile.Attributes.host,host);
 	}
 	
 	@Override public String version()

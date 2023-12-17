@@ -15,7 +15,7 @@ import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.module.TsFactoryBuilder;
-import org.jeesl.interfaces.model.io.db.dump.JeeslDbDump;
+import org.jeesl.interfaces.model.io.db.dump.JeeslDbBackupArchive;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.jeesl.interfaces.model.module.ts.config.JeeslTsInterval;
@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 import net.sf.exlp.util.DateUtil;
 
 public class TsDbBackupSizeProcessor<SYSTEM extends JeeslIoSsiSystem<?,?>,
-									DUMP extends JeeslDbDump<SYSTEM,?>,
+									DUMP extends JeeslDbBackupArchive<SYSTEM,?>,
 									SCOPE extends JeeslTsScope<?,?,?,ST,?,EC,INT>,
 									ST extends JeeslTsScopeType<?,?,ST,?>,
 									MP extends JeeslTsMultiPoint<?,?,SCOPE,?>,
