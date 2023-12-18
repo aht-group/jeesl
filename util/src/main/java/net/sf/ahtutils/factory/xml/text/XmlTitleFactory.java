@@ -1,8 +1,9 @@
 package net.sf.ahtutils.factory.xml.text;
 
-import org.jeesl.model.xml.io.cms.text.Title;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.text.Title;
 
 public class XmlTitleFactory
 {

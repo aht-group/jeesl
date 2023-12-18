@@ -3,9 +3,6 @@ package net.sf.ahtutils.xml.text;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
-import org.jeesl.model.xml.io.cms.text.Answer;
-import org.jeesl.model.xml.io.cms.text.Title;
-
 
 /**
  * This object contains factory methods for each 

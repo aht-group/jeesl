@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.io.cms.text;
+package net.sf.ahtutils.xml.text;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
