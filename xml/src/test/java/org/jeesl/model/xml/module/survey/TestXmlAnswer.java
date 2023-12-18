@@ -24,8 +24,8 @@ public class TestXmlAnswer extends AbstractXmlSurveyTest<Answer>
     	{
     		xml.setData(TestXmlData.create(false));
     		xml.setQuestion(TestXmlQuestion.create(false));
-    		xml.setAnswer(org.jeesl.model.xml.text.TestXmlAnswer.create(false));
-    		xml.setRemark(org.jeesl.model.xml.text.TestXmlRemark.create(false));
+    		xml.setAnswer(org.jeesl.model.xml.io.cms.text.TestXmlAnswer.create(false));
+    		xml.setRemark(org.jeesl.model.xml.io.cms.text.TestXmlRemark.create(false));
     		xml.setOption(TestXmlOption.create(false));
     	}
     	

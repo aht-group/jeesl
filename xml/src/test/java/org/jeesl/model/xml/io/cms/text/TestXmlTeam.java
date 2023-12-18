@@ -1,4 +1,4 @@
-package org.jeesl.model.xml.text;
+package org.jeesl.model.xml.io.cms.text;
 
 import org.jeesl.JeeslXmlTestBootstrap;
 import org.jeesl.model.xml.io.cms.text.Team;

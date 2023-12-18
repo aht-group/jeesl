@@ -1,10 +1,10 @@
 package org.jeesl.model.xml.module.survey;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.cms.text.TestXmlRemark;
 import org.jeesl.model.xml.system.status.TestXmlCategory;
 import org.jeesl.model.xml.system.status.TestXmlDescription;
 import org.jeesl.model.xml.system.status.TestXmlStatus;
-import org.jeesl.model.xml.text.TestXmlRemark;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

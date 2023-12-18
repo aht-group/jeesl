@@ -2,8 +2,8 @@ package org.jeesl.model.xml.module.survey;
 
 import org.jeesl.JeeslXmlTestBootstrap;
 import org.jeesl.model.xml.domain.finance.TestXmlFigures;
+import org.jeesl.model.xml.io.cms.text.TestXmlRemark;
 import org.jeesl.model.xml.system.status.TestXmlUnit;
-import org.jeesl.model.xml.text.TestXmlRemark;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +27,7 @@ public class TestXmlQuestion extends AbstractXmlSurveyTest<Question>
     	{
     		xml.setUnit(TestXmlUnit.create(false));
     		xml.setRemark(TestXmlRemark.create(false));
-    		xml.setQuestion(org.jeesl.model.xml.text.TestXmlQuestion.create(false));
+    		xml.setQuestion(org.jeesl.model.xml.io.cms.text.TestXmlQuestion.create(false));
     		xml.setAnswer(TestXmlAnswer.create(false));
     		xml.setScore(TestXmlScore.create(false));
     		xml.setFigures(TestXmlFigures.create(false));
