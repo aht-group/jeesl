@@ -64,7 +64,7 @@ public class Answer
     @XmlElement(required = true)
     protected Question question;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/text", required = true)
-    protected net.sf.ahtutils.xml.text.Answer answer;
+    protected org.jeesl.model.xml.io.cms.text.Answer answer;
     @XmlElement(namespace = "http://www.jeesl.org/text", required = true)
     protected Remark remark;
     @XmlElement(required = true)
@@ -146,10 +146,10 @@ public class Answer
      * 
      * @return
      *     possible object is
-     *     {@link net.sf.ahtutils.xml.text.Answer }
+     *     {@link org.jeesl.model.xml.io.cms.text.Answer }
      *     
      */
-    public net.sf.ahtutils.xml.text.Answer getAnswer() {
+    public org.jeesl.model.xml.io.cms.text.Answer getAnswer() {
         return answer;
     }
 
@@ -158,10 +158,10 @@ public class Answer
      * 
      * @param value
      *     allowed object is
-     *     {@link net.sf.ahtutils.xml.text.Answer }
+     *     {@link org.jeesl.model.xml.io.cms.text.Answer }
      *     
      */
-    public void setAnswer(net.sf.ahtutils.xml.text.Answer value) {
+    public void setAnswer(org.jeesl.model.xml.io.cms.text.Answer value) {
         this.answer = value;
     }
 
