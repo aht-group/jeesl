@@ -1,7 +1,7 @@
 
 package net.sf.ahtutils.xml.text;
 
-import javax.xml.bind.annotation.XmlRegistry;
+import jakarta.xml.bind.annotation.XmlRegistry;
 
 
 /**

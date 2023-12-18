@@ -69,10 +69,6 @@ public class Answer
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the version property.
      * 
@@ -81,7 +77,7 @@ public class Answer
      *     {@link Integer }
      *     
      */
-    public int getVersion() {
+    public Integer getVersion() {
         return version;
     }
 
@@ -93,16 +89,8 @@ public class Answer
      *     {@link Integer }
      *     
      */
-    public void setVersion(int value) {
+    public void setVersion(Integer value) {
         this.version = value;
-    }
-
-    public boolean isSetVersion() {
-        return (this.version!= null);
-    }
-
-    public void unsetVersion() {
-        this.version = null;
     }
 
     /**
@@ -127,10 +115,6 @@ public class Answer
      */
     public void setKey(String value) {
         this.key = value;
-    }
-
-    public boolean isSetKey() {
-        return (this.key!= null);
     }
 
 }
