@@ -14,7 +14,8 @@
     
     <xsd:import namespace="http://www.jeesl.org/revision" schemaLocation="jeesl/io/revision.xsd"/>
 
-	<xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../exlp/xml/src/main/xsd/io.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/text" schemaLocation="aht/text.xsd"/>
+
 
 	<xsd:element name="jeesl">
 		<xsd:complexType>

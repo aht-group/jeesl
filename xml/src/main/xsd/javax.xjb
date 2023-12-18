@@ -55,7 +55,12 @@
             <jxb:package name="org.jeesl.model.xml.system.security"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-
+    
+    <jxb:bindings schemaLocation="aht/text.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="net.sf.ahtutils.xml.text"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 
     <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/io.xsd" node="/xsd:schema">
         <jxb:schemaBindings>

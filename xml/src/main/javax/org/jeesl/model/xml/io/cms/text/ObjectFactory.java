@@ -149,4 +149,12 @@ public class ObjectFactory {
         return new Reference();
     }
 
+    /**
+     * Create an instance of {@link Title }
+     * 
+     */
+    public Title createTitle() {
+        return new Title();
+    }
+
 }
