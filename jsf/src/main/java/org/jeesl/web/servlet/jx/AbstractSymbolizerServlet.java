@@ -102,7 +102,7 @@ public abstract class AbstractSymbolizerServlet<G extends JeeslGraphic<GT,GC,GS>
         return image;
 	}
 	
-	protected void respond(HttpServletRequest request, HttpServletResponse response,byte[] bytes, String suffix) throws IOException
+	protected void respond(HttpServletRequest request, HttpServletResponse response, byte[] bytes, String suffix) throws IOException
     {
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 		

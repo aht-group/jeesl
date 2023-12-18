@@ -95,6 +95,8 @@ public class TranslationFactory
 	
 	public void add(ClassLoader cl, String xmlFile) throws FileNotFoundException
 	{
+		logger.info("Will load translations: "+xmlFile);
+	
 		Translations translations = (Translations)JaxbUtil.loadJAXB(cl, FilenameUtils.normalize(xmlFile), Translations.class);
 		logger.debug("Loaded "+translations.getTranslation().size()+" Elements from "+xmlFile);
 		add(translations);
