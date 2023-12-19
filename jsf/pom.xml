@@ -54,6 +54,7 @@
 		<dependency>
    	   		<groupId>org.jeesl</groupId>
    	   		<artifactId>jeesl-xml</artifactId>
+   	   		<classifier>javax</classifier>
    	   		<scope>provided</scope>
    	   		<exclusions>
    	   			<exclusion>

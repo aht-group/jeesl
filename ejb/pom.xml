@@ -40,11 +40,19 @@
          	<artifactId>jeesl-util</artifactId>
          	<scope>provided</scope>
          </dependency>
+         
+         <!-- XML Modules -->
          <dependency>
 			<groupId>org.jeesl</groupId>
 			<artifactId>jeesl-xml</artifactId>
+			<classifier>javax</classifier>
 			<scope>provided</scope>
-			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jeesl</groupId>
+			<artifactId>jeesl-xml</artifactId>
+			<classifier>javax</classifier>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- ExLP -->

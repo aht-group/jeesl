@@ -34,11 +34,14 @@
         	<scope>provided</scope>
 	    </dependency>
 	
-		<!-- XML 
+		<!-- XML Modules -->
 		<dependency>
-			<groupId>org.jdom</groupId>
-			<artifactId>jdom</artifactId>
-		</dependency> -->
+        	<groupId>org.jeesl</groupId>
+        	<artifactId>jeesl-xml</artifactId>
+        	<classifier>javax</classifier>
+        	<type>jar</type>
+        	<scope>compile</scope>
+	    </dependency>
 		
 		<dependency>
 			<groupId>jaxen</groupId>
@@ -140,12 +143,9 @@
         		</exclusion>
         	</exclusions>
 		</dependency>
-		<dependency>
-        	<groupId>org.jeesl</groupId>
-        	<artifactId>jeesl-xml</artifactId>
-        	<type>jar</type>
-        	<scope>compile</scope>
-	    </dependency>
+		
+		
+		
 	    
 		<!-- Need to check if this is really required -->
        <dependency>

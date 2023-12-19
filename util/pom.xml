@@ -56,10 +56,11 @@
 			<artifactId>exlp-xml</artifactId>
 			<classifier>javax</classifier>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> 
 		<dependency>
             <groupId>org.jeesl</groupId>
             <artifactId>jeesl-xml</artifactId>
+            <classifier>javax</classifier>
             <type>jar</type>
             <scope>provided</scope>
         </dependency>

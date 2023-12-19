@@ -128,11 +128,24 @@
 				<version>${project.version}</version>
 				<classifier>sources</classifier>
 			</dependency>
-        	<dependency>
+ <!--       	<dependency>
 				<groupId>org.jeesl</groupId>
 				<artifactId>jeesl-xml</artifactId>
+				<type>jar</type>
 				<version>${project.version}</version>
 			</dependency>
+-->			<dependency>
+	        	<groupId>org.jeesl</groupId>
+	        	<artifactId>jeesl-xml</artifactId>
+				<version>${project.version}</version>
+	        	<classifier>javax</classifier>
+	        </dependency>
+	        <dependency>
+	        	<groupId>org.jeesl</groupId>
+	        	<artifactId>jeesl-xml</artifactId>
+				<version>${project.version}</version>
+	        	<classifier>jakarta</classifier>
+	        </dependency>
 			<dependency>
 	        	<groupId>org.jeesl</groupId>
 	        	<artifactId>jeesl-xml</artifactId>
