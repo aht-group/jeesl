@@ -15,6 +15,7 @@ import org.jeesl.controller.handler.tuple.JsonTuple2Handler;
 import org.jeesl.controller.monitoring.counter.ProcessingTimeTracker;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
+import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.builder.io.ssi.IoSsiDataFactoryBuilder;
 import org.jeesl.factory.ejb.util.EjbIdFactory;
 import org.jeesl.interfaces.bean.sb.bean.SbToggleBean;
@@ -48,6 +49,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	final static Logger logger = LoggerFactory.getLogger(JeeslSsiDataController.class);
 	
 	private JeeslIoSsiFacade<?,?,CTX,?,DATA,STATUS,?,?,?,JOB,?> fSsi;
+	private final IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,?,JOB> fbSsiData;
 	private final JeeslIoSsiDataCallback callback;
 	
 	protected final SbMultiHandler<STATUS> sbhStatus; public SbMultiHandler<STATUS> getSbhStatus() {return sbhStatus;}
@@ -72,6 +74,7 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 						IoSsiDataFactoryBuilder<?,?,?,?,?,DATA,STATUS,?,?,?,JOB> fbSsiData)
 	{
 		this.callback=callback;
+		this.fbSsiData=fbSsiData;
 		
 		sbhStatus = new SbMultiHandler<>(fbSsiData.getClassStatus(),this);
 		
@@ -146,7 +149,8 @@ public class JeeslSsiDataController <CTX extends JeeslIoSsiContext<?,?>,
 	@Override public DATA getRowData(String rowKey)
 	{
 		Long id = new Long(rowKey);
-
+		for (DATA d : datas) {if(d.getId()==id){return d;}}
+		try {return fSsi.find(fbSsiData.getClassData(),id);} catch (JeeslNotFoundException e) {logger.error(e.getMessage());}
 		return null;
 	}
 }

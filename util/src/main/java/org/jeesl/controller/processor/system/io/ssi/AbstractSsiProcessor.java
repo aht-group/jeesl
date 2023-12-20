@@ -1,6 +1,7 @@
 package org.jeesl.controller.processor.system.io.ssi;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -180,20 +181,25 @@ public abstract class AbstractSsiProcessor<L extends JeeslLang,D extends JeeslDe
 	{
 		if(ObjectUtils.isNotEmpty(datas))
 		{
+			List<DATA> processed = new ArrayList<>();
 			for(DATA data : datas)
 			{
 				try
 				{
-					if(!data.getLink().equals(cacheLink.ejb(JeeslIoSsiStatus.Code.linked)))
+					if(cacheLink.notEquals(data.getLink(),JeeslIoSsiStatus.Code.linked))
 					{
-						evaluate(data,JsonUtil.read(this.getClassJson(),data.getJson()));
+						DATA d = evaluate(data,JsonUtil.read(this.getClassJson(),data.getJson()));
+						if(Objects.nonNull(d)) {processed.add(d);}
 					}
 				}
 				catch (IOException e) {e.printStackTrace();}
 			}
 			try
 			{
-				fSsi.save(datas);
+				if(ObjectUtils.isNotEmpty(processed))
+				{
+					fSsi.save(datas);
+				}
 			}
 			catch (JeeslConstraintViolationException | JeeslLockingException e) {e.printStackTrace();}
 		}
