@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.module.survey.Answer;
 import org.jeesl.model.xml.module.survey.Question;
@@ -99,7 +100,7 @@ public class OfxQaNfrSectionFactory extends AbstractUtilsOfxDocumentationFactory
 		
 		Table table = ofxTableAnswers.build(subSection,mapAnswers,staff);
 		JaxbUtil.trace(table);
-		if(withResults && table.isSetContent() && table.getContent().isSetBody() && table.getContent().getBody().get(0).isSetRow())
+		if(withResults && Objects.nonNull(table.getContent()) && ObjectUtils.isNotEmpty(table.getContent().getBody()) && ObjectUtils.isNotEmpty(table.getContent().getBody().get(0).getRow()))
 		{
 			xml.getContent().add(table);
 		}
