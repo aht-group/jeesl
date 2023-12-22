@@ -20,14 +20,14 @@ import org.metachart.processor.graph.Graph2DotConverter;
 import org.metachart.processor.graph.GraphFileWriter;
 import org.metachart.xml.graph.Clusters;
 import org.metachart.xml.graph.Graph;
-import org.openfuxml.content.media.Image;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.list.XmlListFactory;
 import org.openfuxml.factory.xml.media.XmlImageFactory;
 import org.openfuxml.factory.xml.media.XmlMediaFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.interfaces.configuration.OfxTranslationProvider;
+import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,10 +85,10 @@ public class OfxSectionWorkflow <L extends JeeslLang, LOC extends JeeslLocale<L,
 		return xml;
 	}
 	
-	public org.openfuxml.content.list.List contextList(JeeslLocaleManager<LOC> lp, Contexts contexts)
+	public org.openfuxml.model.xml.core.list.List contextList(JeeslLocaleManager<LOC> lp, Contexts contexts)
 	{
 
-		org.openfuxml.content.list.List list = XmlListFactory.description();
+		org.openfuxml.model.xml.core.list.List list = XmlListFactory.description();
 		
 		logger.info("Building for"+contexts.getContext().size());
 		for(Context context : contexts.getContext())

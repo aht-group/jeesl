@@ -45,7 +45,7 @@ public class Section implements Serializable
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
         @XmlElementRef(name = "section", namespace = "http://www.jeesl.org/dev/srs", type = Section.class, required = false),
-        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = org.openfuxml.content.ofx.Section.class, required = false)
+        @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = org.openfuxml.model.xml.core.ofx.Section.class, required = false)
     })
     protected List<Serializable> content;
     @XmlAttribute(name = "title")

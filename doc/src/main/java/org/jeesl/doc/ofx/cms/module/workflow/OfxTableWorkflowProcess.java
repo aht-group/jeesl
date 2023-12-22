@@ -11,14 +11,6 @@ import org.jeesl.model.xml.module.workflow.Permissions;
 import org.jeesl.model.xml.module.workflow.Stage;
 import org.jeesl.model.xml.module.workflow.Transition;
 import org.jeesl.util.query.xpath.StatusXpath;
-import org.openfuxml.content.ofx.Comment;
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.table.Body;
-import org.openfuxml.content.table.Columns;
-import org.openfuxml.content.table.Content;
-import org.openfuxml.content.table.Row;
-import org.openfuxml.content.table.Specification;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.layout.XmlFloatFactory;
 import org.openfuxml.factory.xml.list.XmlListFactory;
 import org.openfuxml.factory.xml.list.XmlListItemFactory;
@@ -31,6 +23,14 @@ import org.openfuxml.factory.xml.table.XmlColumnsFactory;
 import org.openfuxml.factory.xml.table.XmlContentFactory;
 import org.openfuxml.factory.xml.table.XmlRowFactory;
 import org.openfuxml.interfaces.configuration.OfxTranslationProvider;
+import org.openfuxml.model.xml.core.ofx.Comment;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.model.xml.core.table.Body;
+import org.openfuxml.model.xml.core.table.Columns;
+import org.openfuxml.model.xml.core.table.Content;
+import org.openfuxml.model.xml.core.table.Row;
+import org.openfuxml.model.xml.core.table.Specification;
+import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.util.OfxCommentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,9 +119,9 @@ public class OfxTableWorkflowProcess <L extends JeeslLang, LOC extends JeeslLoca
 		return row;
 	}
 	
-	private org.openfuxml.content.list.List permissions(JeeslLocaleManager<LOC> lp, Permissions permissions)
+	private org.openfuxml.model.xml.core.list.List permissions(JeeslLocaleManager<LOC> lp, Permissions permissions)
 	{
-		org.openfuxml.content.list.List list = XmlListFactory.unordered();
+		org.openfuxml.model.xml.core.list.List list = XmlListFactory.unordered();
 		for(Permission permission : permissions.getPermission())
 		{
 			for(String localeCode : lp.getLocaleCodes())
@@ -138,9 +138,9 @@ public class OfxTableWorkflowProcess <L extends JeeslLang, LOC extends JeeslLoca
 		return list;
 	}
 	
-	private org.openfuxml.content.list.List transitions(JeeslLocaleManager<LOC> lp, org.jeesl.model.xml.module.workflow.Process process, List<Transition> transitions)
+	private org.openfuxml.model.xml.core.list.List transitions(JeeslLocaleManager<LOC> lp, org.jeesl.model.xml.module.workflow.Process process, List<Transition> transitions)
 	{
-		org.openfuxml.content.list.List list = XmlListFactory.unordered();
+		org.openfuxml.model.xml.core.list.List list = XmlListFactory.unordered();
 		for(Transition t : transitions)
 		{
 			for(String localeCode : lp.getLocaleCodes())

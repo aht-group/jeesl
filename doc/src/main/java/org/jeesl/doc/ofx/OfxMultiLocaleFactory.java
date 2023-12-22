@@ -11,14 +11,14 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.util.query.xpath.StatusXpath;
-import org.openfuxml.content.list.Item;
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Title;
-import org.openfuxml.content.table.Cell;
 import org.openfuxml.factory.xml.list.XmlListItemFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.factory.xml.table.XmlCellFactory;
+import org.openfuxml.model.xml.core.list.Item;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.model.xml.core.ofx.Title;
+import org.openfuxml.model.xml.core.table.Cell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

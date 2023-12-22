@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsSection;
-import org.openfuxml.content.ofx.Section;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

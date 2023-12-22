@@ -5,13 +5,6 @@ import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.xsd.Container;
-import org.openfuxml.content.layout.Layout;
-import org.openfuxml.content.media.Image;
-import org.openfuxml.content.media.Media;
-import org.openfuxml.content.ofx.Comment;
-import org.openfuxml.content.ofx.Marginalia;
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlSpacingFactory;
 import org.openfuxml.factory.xml.layout.XmlWidthFactory;
@@ -21,6 +14,13 @@ import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.factory.xml.ofx.editorial.XmlMarginaliaFactory;
 import org.openfuxml.factory.xml.ofx.layout.XmlLayoutFactory;
+import org.openfuxml.model.xml.core.layout.Layout;
+import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.media.Media;
+import org.openfuxml.model.xml.core.ofx.Comment;
+import org.openfuxml.model.xml.core.ofx.Marginalia;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.util.OfxCommentBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,9 +71,9 @@ public class OfxConstraintScopeSectionFactory extends AbstractUtilsOfxDocumentat
 		return section;
 	}
 		
-	private org.openfuxml.content.list.List list(ConstraintScope scope) throws OfxAuthoringException
+	private org.openfuxml.model.xml.core.list.List list(ConstraintScope scope) throws OfxAuthoringException
 	{
-		org.openfuxml.content.list.List list = XmlListFactory2.unordered();
+		org.openfuxml.model.xml.core.list.List list = XmlListFactory2.unordered();
 		list.setLayout(layout);
 		for(Constraint c : scope.getConstraint())
 		{

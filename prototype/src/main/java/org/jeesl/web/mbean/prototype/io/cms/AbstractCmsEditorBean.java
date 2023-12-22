@@ -49,7 +49,7 @@ import org.jeesl.jsf.handler.op.OpEntitySelectionHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
 import org.jeesl.jsf.helper.TreeHelper;
 import org.jeesl.web.mbean.prototype.system.AbstractAdminBean;
-import org.openfuxml.content.ofx.Section;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.primefaces.event.NodeCollapseEvent;
 import org.primefaces.event.NodeExpandEvent;
 import org.primefaces.event.NodeSelectEvent;

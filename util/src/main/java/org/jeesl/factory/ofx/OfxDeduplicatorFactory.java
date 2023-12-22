@@ -7,13 +7,13 @@ import org.jeesl.interfaces.controller.processor.JeeslDeduplicator;
 import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.openfuxml.content.table.Body;
-import org.openfuxml.content.table.Content;
-import org.openfuxml.content.table.Row;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
 import org.openfuxml.factory.xml.table.XmlCellFactory;
 import org.openfuxml.factory.xml.table.XmlHeadFactory;
+import org.openfuxml.model.xml.core.table.Body;
+import org.openfuxml.model.xml.core.table.Content;
+import org.openfuxml.model.xml.core.table.Row;
+import org.openfuxml.model.xml.core.table.Table;
 
 public class OfxDeduplicatorFactory<RE extends JeeslRevisionEntity<?,?,?,?,?,?>, ICON extends JeeslStatus<?,?,ICON>, EJB extends EjbWithId>
 {

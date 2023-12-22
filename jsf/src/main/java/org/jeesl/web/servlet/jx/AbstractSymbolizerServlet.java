@@ -19,8 +19,8 @@ import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicComponent
 import org.jeesl.interfaces.model.system.graphic.component.JeeslGraphicShape;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
-import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.xml.media.XmlImageFactory;
+import org.openfuxml.model.xml.core.media.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -16,10 +16,10 @@ public class JeeslCmsStatusListFactory<E extends JeeslIoCmsElement<?,?,?,?,C,?>,
 
 	}
 	
-	public org.openfuxml.content.list.List build(String localeCode, E element)
+	public org.openfuxml.model.xml.core.list.List build(String localeCode, E element)
 	{
 		logger.info("Building Paragraph ");
-		org.openfuxml.content.list.List list = XmlListFactory.unordered();
+		org.openfuxml.model.xml.core.list.List list = XmlListFactory.unordered();
 		
 		
 		return list;

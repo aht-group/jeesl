@@ -22,8 +22,8 @@ import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphic;
 import org.jeesl.interfaces.model.system.graphic.core.JeeslGraphicType;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.graphic.EjbWithGraphic;
-import org.openfuxml.content.media.Image;
 import org.openfuxml.media.transcode.Svg2SvgTranscoder;
+import org.openfuxml.model.xml.core.media.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

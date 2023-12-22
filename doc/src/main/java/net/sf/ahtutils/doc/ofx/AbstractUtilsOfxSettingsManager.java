@@ -1,7 +1,7 @@
 package net.sf.ahtutils.doc.ofx;
 
-import org.openfuxml.content.ofx.Listing;
 import org.openfuxml.interfaces.configuration.DefaultSettingsManager;
+import org.openfuxml.model.xml.core.ofx.Listing;
 import org.openfuxml.util.configuration.settings.AbstractDefaultSettingsManager;
 
 public class AbstractUtilsOfxSettingsManager extends AbstractDefaultSettingsManager implements DefaultSettingsManager

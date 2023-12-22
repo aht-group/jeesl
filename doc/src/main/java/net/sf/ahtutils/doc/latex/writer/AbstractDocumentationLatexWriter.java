@@ -6,11 +6,11 @@ import java.io.StringWriter;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.model.xml.core.ofx.Section;
+import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.latex.content.structure.LatexSectionRenderer;
 import org.openfuxml.renderer.latex.content.table.LatexTableRenderer;
 import org.openfuxml.renderer.latex.preamble.LatexPreamble;

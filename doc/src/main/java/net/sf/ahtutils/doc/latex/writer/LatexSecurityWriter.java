@@ -13,11 +13,11 @@ import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.model.xml.system.navigation.Menu;
 import org.jeesl.model.xml.system.security.Security;
 import org.jeesl.model.xml.system.security.View;
-import org.openfuxml.content.graph.Node;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.exception.OfxConfigurationException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
+import org.openfuxml.model.xml.addon.graph.Node;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.openfuxml.renderer.latex.OfxMultiLangLatexWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,7 +105,7 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 			for(String lang : langs)
 			{
 				OfxMenuTreeFactory f = new OfxMenuTreeFactory(config,lang,translations);
-				org.openfuxml.content.graph.Tree tree = f.build(menu,access);
+				org.openfuxml.model.xml.addon.graph.Tree tree = f.build(menu,access);
 				JaxbUtil.trace(tree);
 				for(Node node : tree.getNode().getNode())
 				{
@@ -143,7 +143,7 @@ public class LatexSecurityWriter extends AbstractDocumentationLatexWriter
 		logger.info("Creating descriptions from "+xmlFile+" to LaTex");
 		
 		Security security = JaxbUtil.loadJAXB(xmlFile, Security.class);
-		org.openfuxml.content.list.List list;
+		org.openfuxml.model.xml.core.list.List list;
 		try {list = ofSecurityCategoryList.descriptionList(security.getCategory());}
 		catch (OfxAuthoringException e) {throw new UtilsConfigurationException(e.getMessage());}
 		JaxbUtil.info(list);

@@ -2,8 +2,8 @@ package org.jeesl.doc.ofx.system.io;
 
 import org.jeesl.model.json.io.db.pg.JsonPostgres;
 import org.jeesl.model.json.io.db.pg.JsonPostgresConnection;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
+import org.openfuxml.model.xml.core.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -17,11 +17,11 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.openfuxml.content.ofx.Section;
-import org.openfuxml.content.ofx.Sections;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionsFactory;
 import org.openfuxml.factory.xml.ofx.content.text.XmlTitleFactory;
+import org.openfuxml.model.xml.core.ofx.Section;
+import org.openfuxml.model.xml.core.ofx.Sections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

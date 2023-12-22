@@ -13,9 +13,9 @@ import org.jeesl.model.xml.system.security.Security;
 import org.jeesl.model.xml.system.security.View;
 import org.jeesl.util.query.xpath.SecurityXpath;
 import org.jeesl.util.query.xpath.StatusXpath;
-import org.openfuxml.content.graph.Node;
-import org.openfuxml.content.graph.Tree;
 import org.openfuxml.exception.OfxAuthoringException;
+import org.openfuxml.model.xml.addon.graph.Node;
+import org.openfuxml.model.xml.addon.graph.Tree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

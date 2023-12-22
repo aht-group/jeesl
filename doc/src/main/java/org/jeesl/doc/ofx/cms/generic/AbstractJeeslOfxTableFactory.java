@@ -10,14 +10,14 @@ import org.jeesl.model.json.io.label.JsonTranslation;
 import org.jeesl.model.xml.io.locale.status.Translations;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.openfuxml.content.ofx.Paragraph;
-import org.openfuxml.content.table.Cell;
-import org.openfuxml.content.table.Head;
-import org.openfuxml.content.table.Row;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlParagraphFactory;
 import org.openfuxml.factory.xml.table.XmlCellFactory;
 import org.openfuxml.factory.xml.table.XmlHeadFactory;
 import org.openfuxml.interfaces.configuration.OfxTranslationProvider;
+import org.openfuxml.model.xml.core.ofx.Paragraph;
+import org.openfuxml.model.xml.core.table.Cell;
+import org.openfuxml.model.xml.core.table.Head;
+import org.openfuxml.model.xml.core.table.Row;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

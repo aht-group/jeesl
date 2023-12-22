@@ -1,9 +1,9 @@
 package net.sf.ahtutils.doc.ofx.status;
 
 import org.jeesl.model.xml.io.locale.status.Status;
-import org.openfuxml.content.media.Image;
-import org.openfuxml.content.media.Media;
 import org.openfuxml.factory.xml.layout.XmlHeightFactory;
+import org.openfuxml.model.xml.core.media.Image;
+import org.openfuxml.model.xml.core.media.Media;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

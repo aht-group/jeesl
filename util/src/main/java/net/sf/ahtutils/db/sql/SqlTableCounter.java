@@ -6,8 +6,8 @@ import java.util.*;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.LineIterator;
-import org.openfuxml.content.table.Table;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
+import org.openfuxml.model.xml.core.table.Table;
 import org.openfuxml.renderer.text.OfxTextRenderer;
 
 public class SqlTableCounter

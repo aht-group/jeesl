@@ -22,9 +22,9 @@ import org.jeesl.interfaces.model.io.fr.JeeslFileContainer;
 import org.jeesl.interfaces.model.io.fr.JeeslFileMeta;
 import org.jeesl.interfaces.model.io.fr.JeeslFileStorage;
 import org.jeesl.interfaces.model.io.fr.JeeslFileType;
-import org.openfuxml.content.media.Image;
 import org.openfuxml.factory.xml.media.XmlImageFactory;
 import org.openfuxml.factory.xml.media.XmlMediaFactory;
+import org.openfuxml.model.xml.core.media.Image;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -3,8 +3,8 @@ package org.jeesl.doc.ofx.cms.jeesl;
 import org.jeesl.doc.ofx.cms.generic.JeeslMarkupFactory;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsContent;
 import org.jeesl.interfaces.model.io.cms.JeeslIoCmsElement;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

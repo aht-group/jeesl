@@ -29,9 +29,9 @@ import org.jeesl.interfaces.model.system.security.context.JeeslSecurityContext;
 import org.jeesl.interfaces.model.system.security.context.JeeslSecurityMenu;
 import org.jeesl.interfaces.model.system.security.doc.JeeslSecurityOnlineHelp;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
-import org.openfuxml.content.ofx.Section;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
+import org.openfuxml.model.xml.core.ofx.Section;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
