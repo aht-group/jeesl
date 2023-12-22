@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.ssi;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.io.ssi.core.JeeslIoSsiSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +24,8 @@ public class XmlSystemFactory<SYSTEM extends JeeslIoSsiSystem<?,?>>
 	{
 		org.jeesl.model.xml.io.ssi.System xml = new org.jeesl.model.xml.io.ssi.System();
 
-		if(q.isSetId()){xml.setId(system.getId());}
-		if(q.isSetCode()){xml.setCode(system.getCode());}
+		if(Objects.nonNull(q.getId())) {xml.setId(system.getId());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(system.getCode());}
 	
 		return xml;
 	}

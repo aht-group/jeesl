@@ -81,10 +81,6 @@ public class Docker
         this.system = value;
     }
 
-    public boolean isSetSystem() {
-        return (this.system!= null);
-    }
-
     /**
      * Gets the value of the container property.
      * 
@@ -114,14 +110,6 @@ public class Docker
         return this.container;
     }
 
-    public boolean isSetContainer() {
-        return ((this.container!= null)&&(!this.container.isEmpty()));
-    }
-
-    public void unsetContainer() {
-        this.container = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -130,7 +118,7 @@ public class Docker
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -142,16 +130,8 @@ public class Docker
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -178,10 +158,6 @@ public class Docker
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -204,10 +180,6 @@ public class Docker
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

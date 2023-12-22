@@ -72,12 +72,4 @@ public class Systems
         return this.system;
     }
 
-    public boolean isSetSystem() {
-        return ((this.system!= null)&&(!this.system.isEmpty()));
-    }
-
-    public void unsetSystem() {
-        this.system = null;
-    }
-
 }

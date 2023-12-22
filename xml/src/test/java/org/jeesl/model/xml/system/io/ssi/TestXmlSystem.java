@@ -15,7 +15,7 @@ public class TestXmlSystem extends AbstractXmlSsiTest<System>
     public System build(boolean withChilds)
     {
     	System xml = new System();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setName("myName");
     	
