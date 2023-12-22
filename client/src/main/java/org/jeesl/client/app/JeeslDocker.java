@@ -20,7 +20,7 @@ import org.jeesl.factory.xml.system.io.ssi.docker.XmlContainerFactory;
 import org.jeesl.factory.xml.system.io.ssi.docker.XmlDockerFactory;
 import org.jeesl.model.json.io.ssi.docker.JsonDocker;
 import org.jeesl.model.json.io.ssi.docker.JsonDockerContainer;
-import org.jeesl.model.xml.system.io.ssi.Docker;
+import org.jeesl.model.xml.io.ssi.Docker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

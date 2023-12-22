@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.model.json.io.ssi.docker.JsonDockerContainer;
-import org.jeesl.model.xml.system.io.ssi.Container;
+import org.jeesl.model.xml.io.ssi.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

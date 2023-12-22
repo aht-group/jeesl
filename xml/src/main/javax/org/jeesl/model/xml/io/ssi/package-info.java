@@ -1,2 +1,2 @@
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://www.jeesl.org/io/ssi", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package org.jeesl.model.xml.system.io.ssi;
+package org.jeesl.model.xml.io.ssi;

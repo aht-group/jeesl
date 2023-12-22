@@ -11,7 +11,7 @@ public class EjbIoSsiSystemFactory <SYSTEM extends JeeslIoSsiSystem<?,?>>
         this.cSystem = cSystem;
 	}
 	
-	public SYSTEM build(org.jeesl.model.xml.system.io.ssi.System system)
+	public SYSTEM build(org.jeesl.model.xml.io.ssi.System system)
     {
         return create(system.getCode(),system.getName());
     }

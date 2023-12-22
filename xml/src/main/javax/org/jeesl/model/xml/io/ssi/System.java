@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.io.ssi;
+package org.jeesl.model.xml.io.ssi;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="status" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "container")
-public class Container
+@XmlRootElement(name = "system")
+public class System
     implements Serializable
 {
 
@@ -42,8 +42,8 @@ public class Container
     protected Long id;
     @XmlAttribute(name = "code")
     protected String code;
-    @XmlAttribute(name = "status")
-    protected String status;
+    @XmlAttribute(name = "name")
+    protected String name;
 
     /**
      * Gets the value of the id property.
@@ -106,31 +106,31 @@ public class Container
     }
 
     /**
-     * Gets the value of the status property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getStatus() {
-        return status;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the status property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setStatus(String value) {
-        this.status = value;
+    public void setName(String value) {
+        this.name = value;
     }
 
-    public boolean isSetStatus() {
-        return (this.status!= null);
+    public boolean isSetName() {
+        return (this.name!= null);
     }
 
 }
