@@ -80,14 +80,6 @@ public class Releases
         return this.releases;
     }
 
-    public boolean isSetReleases() {
-        return ((this.releases!= null)&&(!this.releases.isEmpty()));
-    }
-
-    public void unsetReleases() {
-        this.releases = null;
-    }
-
     /**
      * Gets the value of the release property.
      * 
@@ -117,14 +109,6 @@ public class Releases
         return this.release;
     }
 
-    public boolean isSetRelease() {
-        return ((this.release!= null)&&(!this.release.isEmpty()));
-    }
-
-    public void unsetRelease() {
-        this.release = null;
-    }
-
     /**
      * Gets the value of the module property.
      * 
@@ -147,10 +131,6 @@ public class Releases
      */
     public void setModule(String value) {
         this.module = value;
-    }
-
-    public boolean isSetModule() {
-        return (this.module!= null);
     }
 
 }

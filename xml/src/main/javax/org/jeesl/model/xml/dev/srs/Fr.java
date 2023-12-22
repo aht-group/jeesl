@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.openfuxml.model.xml.core.ofx.Sections;
 
 
@@ -77,10 +76,6 @@ public class Fr implements Serializable
         this.module = value;
     }
 
-    public boolean isSetModule() {
-        return (this.module!= null);
-    }
-
     /**
      * Gets the value of the sections property.
      * 
@@ -103,10 +98,6 @@ public class Fr implements Serializable
      */
     public void setSections(Sections value) {
         this.sections = value;
-    }
-
-    public boolean isSetSections() {
-        return (this.sections!= null);
     }
 
     /**
@@ -133,10 +124,6 @@ public class Fr implements Serializable
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the name property.
      * 
@@ -159,10 +146,6 @@ public class Fr implements Serializable
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    public boolean isSetName() {
-        return (this.name!= null);
     }
 
 }

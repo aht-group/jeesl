@@ -65,8 +65,4 @@ public class Meta
         this.product = value;
     }
 
-    public boolean isSetProduct() {
-        return (this.product!= null);
-    }
-
 }

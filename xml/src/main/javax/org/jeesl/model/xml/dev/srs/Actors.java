@@ -80,14 +80,6 @@ public class Actors
         return this.actors;
     }
 
-    public boolean isSetActors() {
-        return ((this.actors!= null)&&(!this.actors.isEmpty()));
-    }
-
-    public void unsetActors() {
-        this.actors = null;
-    }
-
     /**
      * Gets the value of the actor property.
      * 
@@ -117,14 +109,6 @@ public class Actors
         return this.actor;
     }
 
-    public boolean isSetActor() {
-        return ((this.actor!= null)&&(!this.actor.isEmpty()));
-    }
-
-    public void unsetActor() {
-        this.actor = null;
-    }
-
     /**
      * Gets the value of the module property.
      * 
@@ -147,10 +131,6 @@ public class Actors
      */
     public void setModule(String value) {
         this.module = value;
-    }
-
-    public boolean isSetModule() {
-        return (this.module!= null);
     }
 
 }

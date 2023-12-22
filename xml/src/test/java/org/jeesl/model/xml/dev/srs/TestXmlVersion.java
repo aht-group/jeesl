@@ -14,7 +14,7 @@ public class TestXmlVersion extends AbstractXmlSrsTest<Version>
     public Version build(boolean withChildren)
     {
     	Version xml = new Version();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	
     	if(withChildren)

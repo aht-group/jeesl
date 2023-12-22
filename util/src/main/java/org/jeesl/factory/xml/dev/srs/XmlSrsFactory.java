@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.dev.srs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.model.xml.dev.srs.Actors;
 import org.jeesl.model.xml.dev.srs.Frs;
@@ -25,7 +26,7 @@ public class XmlSrsFactory
     	List<Actors> actors = new ArrayList<Actors>();
     	for(Srs srs : list)
     	{
-    		if(srs.isSetActors() && !srs.getActors().getActor().isEmpty()) {actors.add(XmlActorsFactory.applySrs(srs));}
+    		if(Objects.nonNull(srs.getActors()) && !srs.getActors().getActor().isEmpty()) {actors.add(XmlActorsFactory.applySrs(srs));}
     	}
     	Srs xml = build();
     	xml.setActors(XmlActorsFactory.combine(actors));

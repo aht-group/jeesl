@@ -72,12 +72,4 @@ public class Frs
         return this.fr;
     }
 
-    public boolean isSetFr() {
-        return ((this.fr!= null)&&(!this.fr.isEmpty()));
-    }
-
-    public void unsetFr() {
-        this.fr = null;
-    }
-
 }

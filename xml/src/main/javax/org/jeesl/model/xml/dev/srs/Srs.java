@@ -91,10 +91,6 @@ public class Srs
         this.version = value;
     }
 
-    public boolean isSetVersion() {
-        return (this.version!= null);
-    }
-
     /**
      * Gets the value of the meta property.
      * 
@@ -117,10 +113,6 @@ public class Srs
      */
     public void setMeta(Meta value) {
         this.meta = value;
-    }
-
-    public boolean isSetMeta() {
-        return (this.meta!= null);
     }
 
     /**
@@ -147,10 +139,6 @@ public class Srs
         this.actors = value;
     }
 
-    public boolean isSetActors() {
-        return (this.actors!= null);
-    }
-
     /**
      * Gets the value of the releases property.
      * 
@@ -175,10 +163,6 @@ public class Srs
         this.releases = value;
     }
 
-    public boolean isSetReleases() {
-        return (this.releases!= null);
-    }
-
     /**
      * Gets the value of the frs property.
      * 
@@ -201,10 +185,6 @@ public class Srs
      */
     public void setFrs(Frs value) {
         this.frs = value;
-    }
-
-    public boolean isSetFrs() {
-        return (this.frs!= null);
     }
 
     /**
@@ -236,14 +216,6 @@ public class Srs
         return this.chapter;
     }
 
-    public boolean isSetChapter() {
-        return ((this.chapter!= null)&&(!this.chapter.isEmpty()));
-    }
-
-    public void unsetChapter() {
-        this.chapter = null;
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -266,10 +238,6 @@ public class Srs
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

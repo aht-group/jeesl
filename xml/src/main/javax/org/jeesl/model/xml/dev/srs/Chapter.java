@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.openfuxml.model.xml.core.ofx.Section;
 
 
@@ -49,9 +48,9 @@ public class Chapter implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "fr", namespace = "http://www.jeesl.org/dev/srs", type = Fr.class),
+        @XmlElementRef(name = "chapter", namespace = "http://www.jeesl.org/dev/srs", type = Chapter.class),
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "chapter", namespace = "http://www.jeesl.org/dev/srs", type = Chapter.class)
+        @XmlElementRef(name = "fr", namespace = "http://www.jeesl.org/dev/srs", type = Fr.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -79,9 +78,9 @@ public class Chapter implements Serializable
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link String }
+     * {@link Chapter }
      * {@link Fr }
      * {@link Section }
-     * {@link Chapter }
      * 
      * 
      */
@@ -90,14 +89,6 @@ public class Chapter implements Serializable
             content = new ArrayList<Serializable>();
         }
         return this.content;
-    }
-
-    public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
-    }
-
-    public void unsetContent() {
-        this.content = null;
     }
 
     /**
@@ -124,10 +115,6 @@ public class Chapter implements Serializable
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the title property.
      * 
@@ -150,10 +137,6 @@ public class Chapter implements Serializable
      */
     public void setTitle(String value) {
         this.title = value;
-    }
-
-    public boolean isSetTitle() {
-        return (this.title!= null);
     }
 
 }
