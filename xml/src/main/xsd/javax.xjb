@@ -56,9 +56,52 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+	<jxb:bindings schemaLocation="../xsd/jeesl/dev/srs.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.dev.srs"/>
+        </jxb:schemaBindings>
+    </jxb:bindings> 
+    
     <jxb:bindings schemaLocation="aht/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="net.sf.ahtutils.xml.text"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+    
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/ofx.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.ofx"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/editorial.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.editorial"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/layout.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.layout"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/list.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.list"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/media.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.media"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/table.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.table"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/text.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.text"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 
