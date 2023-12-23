@@ -1,12 +1,12 @@
 package org.jeesl.factory.ejb.finance;
 
-import net.sf.ahtutils.xml.finance.Currency;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.model.module.currency.UtilsCurrency;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.model.xml.module.finance.Currency;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

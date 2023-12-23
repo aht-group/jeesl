@@ -2,7 +2,7 @@ package org.jeesl.factory.txt.module.finance;
 
 import java.text.DecimalFormat;
 
-import net.sf.ahtutils.xml.finance.Counter;
+import org.jeesl.model.xml.module.finance.Counter;
 
 public class TxtCounterFactory
 {

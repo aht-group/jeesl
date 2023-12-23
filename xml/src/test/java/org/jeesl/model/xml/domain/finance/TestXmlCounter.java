@@ -1,10 +1,9 @@
 package org.jeesl.model.xml.domain.finance;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.module.finance.Counter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.finance.Counter;
 
 public class TestXmlCounter extends AbstractXmlFinanceTest<Counter>
 {

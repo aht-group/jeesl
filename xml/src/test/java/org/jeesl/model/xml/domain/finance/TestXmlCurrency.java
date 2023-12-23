@@ -1,11 +1,10 @@
 package org.jeesl.model.xml.domain.finance;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.module.finance.Currency;
 import org.jeesl.model.xml.system.status.TestXmlLangs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.finance.Currency;
 
 public class TestXmlCurrency extends AbstractXmlFinanceTest<Currency>
 {

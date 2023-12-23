@@ -2,7 +2,7 @@ package org.jeesl.factory.txt.module.finance;
 
 import java.text.DecimalFormat;
 
-import net.sf.ahtutils.xml.finance.Finance;
+import org.jeesl.model.xml.module.finance.Finance;
 
 public class TxtFinanceFactory
 {

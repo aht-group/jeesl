@@ -10,12 +10,11 @@ import org.apache.commons.io.FileUtils;
 import org.jeesl.factory.xml.domain.finance.XmlCounterFactory;
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.module.finance.Figures;
 import org.openfuxml.factory.xml.table.XmlTableFactory;
 import org.openfuxml.renderer.text.OfxTextRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.finance.Figures;
 
 public class BucketSizeCounter
 {

@@ -14,8 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.jeesl.model.xml.io.locale.status.Status;
-
-import net.sf.ahtutils.xml.finance.Figures;
+import org.jeesl.model.xml.module.finance.Figures;
 
 
 /**
