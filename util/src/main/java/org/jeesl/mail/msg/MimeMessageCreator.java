@@ -2,6 +2,7 @@ package org.jeesl.mail.msg;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.mail.Address;
 import javax.mail.Message;
@@ -36,8 +37,8 @@ public class MimeMessageCreator
 	{
 		createFrom(header.getFrom());
 		createTo(header.getTo());
-		if(header.isSetCc()){createCc(header.getCc());}
-		if(header.isSetBcc()){createBcc(header.getBcc());}
+		if(Objects.nonNull(header.getCc())) {createCc(header.getCc());}
+		if(Objects.nonNull(header.getBcc())) {createBcc(header.getBcc());}
 		
 		msg.setSubject(header.getSubject(),encoding);
 		msg.setSentDate(new Date());
@@ -86,7 +87,7 @@ public class MimeMessageCreator
 	{
 		InternetAddress ia = new InternetAddress();
 		ia.setAddress(xmlAddress.getEmail());
-		if(xmlAddress.isSetName()){ia.setPersonal(xmlAddress.getName());}
+		if(Objects.nonNull(xmlAddress.getName())) {ia.setPersonal(xmlAddress.getName());}
 		return ia;
 	}
 }

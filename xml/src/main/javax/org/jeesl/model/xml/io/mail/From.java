@@ -65,8 +65,4 @@ public class From
         this.emailAddress = value;
     }
 
-    public boolean isSetEmailAddress() {
-        return (this.emailAddress!= null);
-    }
-
 }

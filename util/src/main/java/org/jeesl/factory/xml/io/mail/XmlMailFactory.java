@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.io.mail;
 
+import java.util.Objects;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
@@ -62,7 +64,7 @@ public class XmlMailFactory
     public Mail build(Message message) throws MessagingException
     {
     	Mail mail = new Mail();
-    	mail.setId(message.getMessageNumber());
+    	mail.setId(Integer.valueOf(message.getMessageNumber()).longValue());
     	mail.setMsgId(message.getHeader("Message-ID")[0]);
     	
     	XmlHeaderFactory f = new XmlHeaderFactory();
@@ -73,7 +75,7 @@ public class XmlMailFactory
     
     public static void overwriteRecipients(Mail mail, EmailAddress address)
     {
-    	if(mail.isSetHeader())
+    	if(Objects.nonNull(mail.getHeader()))
     	{
     		mail.getHeader().setBcc(null);
     		mail.getHeader().setTo(new To());

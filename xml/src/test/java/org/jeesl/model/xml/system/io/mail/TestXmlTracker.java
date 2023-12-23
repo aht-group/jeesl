@@ -17,8 +17,8 @@ public class TestXmlTracker extends AbstractXmlMailTest<Tracker>
     public Tracker build(boolean withChilds)
     {
     	Tracker xml = new Tracker();
-    	xml.setId(123);
-    	xml.setRefId(345);
+    	xml.setId(123l);
+    	xml.setRefId(345l);
     	xml.setType("myType");
     	xml.setCreated(AbstractAhtUtilsXmlTest.getDefaultXmlDate());
     	xml.setSent(AbstractAhtUtilsXmlTest.getDefaultXmlDate());

@@ -16,8 +16,8 @@ public class TestXmlLink extends AbstractXmlMailTest<Link>
     {
     	Link xml = new Link();
 
-    	xml.setId(123);
-    	xml.setRefId(345);
+    	xml.setId(123l);
+    	xml.setRefId(345l);
     	xml.setType("myType");
     	xml.setCode("myCode");
     	xml.setUrl("myUrl");

@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import org.exlp.model.xml.io.File;
 
 
@@ -83,10 +82,6 @@ public class Image
         this.data = value;
     }
 
-    public boolean isSetData() {
-        return (this.data!= null);
-    }
-
     /**
      * Gets the value of the file property.
      * 
@@ -111,10 +106,6 @@ public class Image
         this.file = value;
     }
 
-    public boolean isSetFile() {
-        return (this.file!= null);
-    }
-
     /**
      * Gets the value of the cid property.
      * 
@@ -137,10 +128,6 @@ public class Image
      */
     public void setCid(String value) {
         this.cid = value;
-    }
-
-    public boolean isSetCid() {
-        return (this.cid!= null);
     }
 
 }

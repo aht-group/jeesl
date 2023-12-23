@@ -64,10 +64,6 @@ public class EmailAddress
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the email property.
      * 
@@ -90,10 +86,6 @@ public class EmailAddress
      */
     public void setEmail(String value) {
         this.email = value;
-    }
-
-    public boolean isSetEmail() {
-        return (this.email!= null);
     }
 
 }

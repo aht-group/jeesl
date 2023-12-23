@@ -6,6 +6,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.model.xml.io.mail.Attachment;
 import org.jeesl.model.xml.io.mail.Image;
 import org.jeesl.model.xml.io.mail.Mail;
@@ -31,7 +32,7 @@ public class XmlMimeContentCreator extends AbstractMimeContentCreator
 		Multipart mpAlternative = new MimeMultipart("alternative");
 		mpAlternative.addBodyPart(createTxt(mail));	   
 	    
-	    if(!mail.isSetAttachment() && !mail.isSetImage())
+	    if(ObjectUtils.isEmpty(mail.getAttachment()) && ObjectUtils.isEmpty(mail.getImage()))
 	    {
 	    	message.setContent(mpAlternative);
 	    }
@@ -62,7 +63,7 @@ public class XmlMimeContentCreator extends AbstractMimeContentCreator
 		Multipart mpAlternative = new MimeMultipart("alternative");
 		mpAlternative.addBodyPart(buildTxt(mail));	   
 	    
-	    if(!mail.isSetAttachment() && !mail.isSetImage())
+	    if(ObjectUtils.isEmpty(mail.getAttachment())&& ObjectUtils.isEmpty(mail.getImage()))
 	    {
 	    	message.setContent(mpAlternative);
 	    }
@@ -91,7 +92,7 @@ public class XmlMimeContentCreator extends AbstractMimeContentCreator
 	{
 		MimeBodyPart txt = new MimeBodyPart();
 	
-		if(mail.isSetAttachment())
+		if(ObjectUtils.isNotEmpty(mail.getAttachment()))
 		{
 			txt.setContent(mail.getExample()+System.lineSeparator(), "text/plain; charset=\"ISO-8859-1\"");
 		}
@@ -107,7 +108,7 @@ public class XmlMimeContentCreator extends AbstractMimeContentCreator
 	{
 		MimeBodyPart txt = new MimeBodyPart();
 	
-		if(mail.isSetAttachment())
+		if(ObjectUtils.isNotEmpty(mail.getAttachment()))
 		{
 			txt.setContent(mail.getText().getValue()+System.lineSeparator(), "text/plain; charset=\"ISO-8859-1\"");
 		}

@@ -1,6 +1,7 @@
 package org.jeesl.mail.smtp;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Objects;
 
 import javax.mail.MessagingException;
 import javax.mail.Transport;
@@ -79,14 +80,14 @@ public class XmlMailSender extends AbstractMailSender
 		}
 		else
 		{
-			if(!header.isSetBcc()){header.setBcc(new Bcc());}
+			if(Objects.isNull(header.getBcc())) {header.setBcc(new Bcc());}
 			header.getBcc().getEmailAddress().addAll(alwaysBcc);
 		}
 		mmc.createHeader(header);
 		
 		Mail mail = getMailAndDetachAtt(doc.getRootElement());
 		
-		if(!mail.isSetLang())
+		if(Objects.isNull(mail.getLang()))
 		{
 			mail.setLang("de");
 			logger.warn("No @lang is set in this mail! Setting to "+mail.getLang());

@@ -89,10 +89,6 @@ public class Link
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the url property.
      * 
@@ -117,10 +113,6 @@ public class Link
         this.url = value;
     }
 
-    public boolean isSetUrl() {
-        return (this.url!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -129,7 +121,7 @@ public class Link
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -141,16 +133,8 @@ public class Link
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -177,10 +161,6 @@ public class Link
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the refId property.
      * 
@@ -189,7 +169,7 @@ public class Link
      *     {@link Long }
      *     
      */
-    public long getRefId() {
+    public Long getRefId() {
         return refId;
     }
 
@@ -201,16 +181,8 @@ public class Link
      *     {@link Long }
      *     
      */
-    public void setRefId(long value) {
+    public void setRefId(Long value) {
         this.refId = value;
-    }
-
-    public boolean isSetRefId() {
-        return (this.refId!= null);
-    }
-
-    public void unsetRefId() {
-        this.refId = null;
     }
 
 }

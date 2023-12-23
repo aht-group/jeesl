@@ -1,5 +1,7 @@
 package org.jeesl.controller.mail;
 
+import java.util.Objects;
+
 import javax.mail.MessagingException;
 
 import org.apache.commons.cli.Option;
@@ -93,7 +95,7 @@ public class AbstractSmtpSpooler
 			}
 			catch (MessagingException e) {e.printStackTrace();}
 		}
-		if(mails.isSetQueue()){return mails.getQueue();}
+		if(Objects.nonNull(mails.getQueue())) {return mails.getQueue();}
 		else {return Integer.MAX_VALUE;}
 	}
 	

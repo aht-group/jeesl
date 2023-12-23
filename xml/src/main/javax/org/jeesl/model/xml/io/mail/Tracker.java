@@ -64,7 +64,7 @@ public class Tracker
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -76,16 +76,8 @@ public class Tracker
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -96,7 +88,7 @@ public class Tracker
      *     {@link Long }
      *     
      */
-    public long getRefId() {
+    public Long getRefId() {
         return refId;
     }
 
@@ -108,16 +100,8 @@ public class Tracker
      *     {@link Long }
      *     
      */
-    public void setRefId(long value) {
+    public void setRefId(Long value) {
         this.refId = value;
-    }
-
-    public boolean isSetRefId() {
-        return (this.refId!= null);
-    }
-
-    public void unsetRefId() {
-        this.refId = null;
     }
 
     /**
@@ -144,10 +128,6 @@ public class Tracker
         this.created = value;
     }
 
-    public boolean isSetCreated() {
-        return (this.created!= null);
-    }
-
     /**
      * Gets the value of the sent property.
      * 
@@ -170,10 +150,6 @@ public class Tracker
      */
     public void setSent(XMLGregorianCalendar value) {
         this.sent = value;
-    }
-
-    public boolean isSetSent() {
-        return (this.sent!= null);
     }
 
     /**
@@ -200,10 +176,6 @@ public class Tracker
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the retryCounter property.
      * 
@@ -212,7 +184,7 @@ public class Tracker
      *     {@link Integer }
      *     
      */
-    public int getRetryCounter() {
+    public Integer getRetryCounter() {
         return retryCounter;
     }
 
@@ -224,16 +196,8 @@ public class Tracker
      *     {@link Integer }
      *     
      */
-    public void setRetryCounter(int value) {
+    public void setRetryCounter(Integer value) {
         this.retryCounter = value;
-    }
-
-    public boolean isSetRetryCounter() {
-        return (this.retryCounter!= null);
-    }
-
-    public void unsetRetryCounter() {
-        this.retryCounter = null;
     }
 
 }

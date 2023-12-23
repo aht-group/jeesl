@@ -16,7 +16,7 @@ public class TestXmlMail extends AbstractXmlMailTest<Mail>
     public Mail build(boolean withChilds)
     {
     	Mail xml = new Mail();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setLang("myLang");
     	xml.setType("myType");

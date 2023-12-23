@@ -9,6 +9,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jdom2.Document;
 import org.jeesl.controller.mail.freemarker.FreemarkerEngine;
 import org.jeesl.exception.processing.UtilsMailException;
@@ -54,7 +55,7 @@ public class FreemarkerMimeContentCreator extends AbstractMimeContentCreator
     	if(txtBody){mpAlternative.addBodyPart(mbpTxt);}
     	if(htmlBody){mpAlternative.addBodyPart(mbpHtml);}
 		
-	    if(!mail.isSetAttachment() && !mail.isSetImage())
+	    if(ObjectUtils.isEmpty(mail.getAttachment()) && ObjectUtils.isEmpty(mail.getImage()))
 	    {
 	    	message.setContent(mpAlternative);
 	    }
@@ -86,7 +87,7 @@ public class FreemarkerMimeContentCreator extends AbstractMimeContentCreator
 	
 		try
 		{
-			if(mail.isSetAttachment())
+			if(ObjectUtils.isNotEmpty(mail.getAttachment()))
 			{
 				txt.setContent(fme.process(xml)+System.lineSeparator(), "text/plain; charset=\""+encoding+"\"");
 			}
@@ -106,7 +107,7 @@ public class FreemarkerMimeContentCreator extends AbstractMimeContentCreator
 		MimeBodyPart html = new MimeBodyPart();
 		try
 		{
-			if(mail.isSetAttachment())
+			if(ObjectUtils.isNotEmpty(mail.getAttachment()))
 			{
 				html.setContent(fme.process(xml)+System.lineSeparator(), "text/html; charset=\""+encoding+"\"");
 

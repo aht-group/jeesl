@@ -72,12 +72,4 @@ public class Bcc
         return this.emailAddress;
     }
 
-    public boolean isSetEmailAddress() {
-        return ((this.emailAddress!= null)&&(!this.emailAddress.isEmpty()));
-    }
-
-    public void unsetEmailAddress() {
-        this.emailAddress = null;
-    }
-
 }

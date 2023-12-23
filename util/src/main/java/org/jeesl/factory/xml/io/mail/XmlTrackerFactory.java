@@ -3,6 +3,8 @@ package org.jeesl.factory.xml.io.mail;
 import net.sf.ahtutils.interfaces.model.system.mail.UtilsMailTracker;
 import net.sf.exlp.util.DateUtil;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -27,12 +29,12 @@ public class XmlTrackerFactory
     {
     	Tracker xml = new Tracker();
     	
-    	if(q.isSetId()){xml.setId(ejb.getId());}
-    	if(q.isSetRefId()){xml.setRefId(ejb.getRefId());}
-    	if(q.isSetType()){xml.setType(ejb.getType().getCode());}
-    	if(q.isSetCreated()){xml.setCreated(DateUtil.toXmlGc(ejb.getRecordCreated()));}
-    	if(q.isSetSent()){xml.setSent(DateUtil.toXmlGc(ejb.getRecordSent()));}
-    	if(q.isSetRetryCounter()){xml.setRetryCounter(ejb.getRetryCounter());}
+    	if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+    	if(Objects.nonNull(q.getRefId())) {xml.setRefId(ejb.getRefId());}
+    	if(Objects.nonNull(q.getType())) {xml.setType(ejb.getType().getCode());}
+    	if(Objects.nonNull(q.getCreated())) {xml.setCreated(DateUtil.toXmlGc(ejb.getRecordCreated()));}
+    	if(Objects.nonNull(q.getSent())) {xml.setSent(DateUtil.toXmlGc(ejb.getRecordSent()));}
+    	if(Objects.nonNull(q.getRetryCounter())) {xml.setRetryCounter(ejb.getRetryCounter());}
     	
     	return xml;
     }

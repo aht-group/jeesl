@@ -67,10 +67,6 @@ public class Template
         this.lang = value;
     }
 
-    public boolean isSetLang() {
-        return (this.lang!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -95,10 +91,6 @@ public class Template
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the file property.
      * 
@@ -121,10 +113,6 @@ public class Template
      */
     public void setFile(String value) {
         this.file = value;
-    }
-
-    public boolean isSetFile() {
-        return (this.file!= null);
     }
 
 }

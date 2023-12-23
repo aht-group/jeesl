@@ -1,6 +1,7 @@
 package org.jeesl.factory.ejb.io.mail.core;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMail;
 import org.jeesl.interfaces.model.io.mail.core.JeeslIoMailStatus;
@@ -36,7 +37,7 @@ public class EjbIoMailFactory <CATEGORY extends JeeslStatus<?,?,CATEGORY>,
 			ejb.setRetention(retention);
 			ejb.setCounter(0);
 			ejb.setRecordCreation(new Date());
-			if(mail.isSetHeader() && mail.getHeader().isSetTo() && mail.getHeader().getTo().isSetEmailAddress()){ejb.setRecipient(mail.getHeader().getTo().getEmailAddress().get(0).getEmail());}
+			if(Objects.nonNull(mail.getHeader()) && Objects.nonNull(mail.getHeader().getTo()) && Objects.nonNull(mail.getHeader().getTo().getEmailAddress())){ejb.setRecipient(mail.getHeader().getTo().getEmailAddress().get(0).getEmail());}
 			ejb.setXml(JaxbUtil.toString(mail));
 		}
 		catch (InstantiationException e) {e.printStackTrace();}

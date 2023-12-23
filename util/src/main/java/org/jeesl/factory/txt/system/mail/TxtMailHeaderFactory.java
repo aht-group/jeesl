@@ -1,5 +1,7 @@
 package org.jeesl.factory.txt.system.mail;
 
+import java.util.Objects;
+
 import org.jeesl.model.xml.io.mail.EmailAddress;
 import org.jeesl.model.xml.io.mail.Header;
 import org.slf4j.Logger;
@@ -12,7 +14,7 @@ public class TxtMailHeaderFactory
 	public static String to(Header header)
 	{
 		StringBuffer sb = new StringBuffer();
-		if(header.isSetTo())
+		if(Objects.nonNull(header.getTo()))
 		{
 			for(EmailAddress email : header.getTo().getEmailAddress())
 			{

@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.cms.text.Example;
 
 
@@ -119,10 +118,6 @@ public class Mail
         this.mail = value;
     }
 
-    public boolean isSetMail() {
-        return (this.mail!= null);
-    }
-
     /**
      * Gets the value of the header property.
      * 
@@ -145,10 +140,6 @@ public class Mail
      */
     public void setHeader(Header value) {
         this.header = value;
-    }
-
-    public boolean isSetHeader() {
-        return (this.header!= null);
     }
 
     /**
@@ -180,14 +171,6 @@ public class Mail
         return this.template;
     }
 
-    public boolean isSetTemplate() {
-        return ((this.template!= null)&&(!this.template.isEmpty()));
-    }
-
-    public void unsetTemplate() {
-        this.template = null;
-    }
-
     /**
      * Gets the value of the text property.
      * 
@@ -212,10 +195,6 @@ public class Mail
         this.text = value;
     }
 
-    public boolean isSetText() {
-        return (this.text!= null);
-    }
-
     /**
      * Gets the value of the html property.
      * 
@@ -238,10 +217,6 @@ public class Mail
      */
     public void setHtml(Html value) {
         this.html = value;
-    }
-
-    public boolean isSetHtml() {
-        return (this.html!= null);
     }
 
     /**
@@ -273,14 +248,6 @@ public class Mail
         return this.attachment;
     }
 
-    public boolean isSetAttachment() {
-        return ((this.attachment!= null)&&(!this.attachment.isEmpty()));
-    }
-
-    public void unsetAttachment() {
-        this.attachment = null;
-    }
-
     /**
      * Gets the value of the image property.
      * 
@@ -310,14 +277,6 @@ public class Mail
         return this.image;
     }
 
-    public boolean isSetImage() {
-        return ((this.image!= null)&&(!this.image.isEmpty()));
-    }
-
-    public void unsetImage() {
-        this.image = null;
-    }
-
     /**
      * Gets the value of the example property.
      * 
@@ -342,10 +301,6 @@ public class Mail
         this.example = value;
     }
 
-    public boolean isSetExample() {
-        return (this.example!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -354,7 +309,7 @@ public class Mail
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -366,16 +321,8 @@ public class Mail
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -402,10 +349,6 @@ public class Mail
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the lang property.
      * 
@@ -428,10 +371,6 @@ public class Mail
      */
     public void setLang(String value) {
         this.lang = value;
-    }
-
-    public boolean isSetLang() {
-        return (this.lang!= null);
     }
 
     /**
@@ -458,10 +397,6 @@ public class Mail
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the msgId property.
      * 
@@ -484,10 +419,6 @@ public class Mail
      */
     public void setMsgId(String value) {
         this.msgId = value;
-    }
-
-    public boolean isSetMsgId() {
-        return (this.msgId!= null);
     }
 
     /**
@@ -514,10 +445,6 @@ public class Mail
         this.dir = value;
     }
 
-    public boolean isSetDir() {
-        return (this.dir!= null);
-    }
-
     /**
      * Gets the value of the test property.
      * 
@@ -526,7 +453,7 @@ public class Mail
      *     {@link Boolean }
      *     
      */
-    public boolean isTest() {
+    public Boolean isTest() {
         return test;
     }
 
@@ -538,16 +465,8 @@ public class Mail
      *     {@link Boolean }
      *     
      */
-    public void setTest(boolean value) {
+    public void setTest(Boolean value) {
         this.test = value;
-    }
-
-    public boolean isSetTest() {
-        return (this.test!= null);
-    }
-
-    public void unsetTest() {
-        this.test = null;
     }
 
 }

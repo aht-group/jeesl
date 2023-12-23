@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import org.exlp.model.xml.io.File;
 
 
@@ -79,10 +78,6 @@ public class Attachment
         this.data = value;
     }
 
-    public boolean isSetData() {
-        return (this.data!= null);
-    }
-
     /**
      * Gets the value of the file property.
      * 
@@ -105,10 +100,6 @@ public class Attachment
      */
     public void setFile(File value) {
         this.file = value;
-    }
-
-    public boolean isSetFile() {
-        return (this.file!= null);
     }
 
 }

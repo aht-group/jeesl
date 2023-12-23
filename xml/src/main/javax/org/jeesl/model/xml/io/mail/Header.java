@@ -86,10 +86,6 @@ public class Header
         this.from = value;
     }
 
-    public boolean isSetFrom() {
-        return (this.from!= null);
-    }
-
     /**
      * Gets the value of the to property.
      * 
@@ -112,10 +108,6 @@ public class Header
      */
     public void setTo(To value) {
         this.to = value;
-    }
-
-    public boolean isSetTo() {
-        return (this.to!= null);
     }
 
     /**
@@ -142,10 +134,6 @@ public class Header
         this.cc = value;
     }
 
-    public boolean isSetCc() {
-        return (this.cc!= null);
-    }
-
     /**
      * Gets the value of the bcc property.
      * 
@@ -170,10 +158,6 @@ public class Header
         this.bcc = value;
     }
 
-    public boolean isSetBcc() {
-        return (this.bcc!= null);
-    }
-
     /**
      * Gets the value of the subject property.
      * 
@@ -196,10 +180,6 @@ public class Header
      */
     public void setSubject(String value) {
         this.subject = value;
-    }
-
-    public boolean isSetSubject() {
-        return (this.subject!= null);
     }
 
 }

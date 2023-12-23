@@ -79,14 +79,6 @@ public class Mails
         return this.mail;
     }
 
-    public boolean isSetMail() {
-        return ((this.mail!= null)&&(!this.mail.isEmpty()));
-    }
-
-    public void unsetMail() {
-        this.mail = null;
-    }
-
     /**
      * Gets the value of the dir property.
      * 
@@ -111,10 +103,6 @@ public class Mails
         this.dir = value;
     }
 
-    public boolean isSetDir() {
-        return (this.dir!= null);
-    }
-
     /**
      * Gets the value of the queue property.
      * 
@@ -123,7 +111,7 @@ public class Mails
      *     {@link Integer }
      *     
      */
-    public int getQueue() {
+    public Integer getQueue() {
         return queue;
     }
 
@@ -135,16 +123,8 @@ public class Mails
      *     {@link Integer }
      *     
      */
-    public void setQueue(int value) {
+    public void setQueue(Integer value) {
         this.queue = value;
-    }
-
-    public boolean isSetQueue() {
-        return (this.queue!= null);
-    }
-
-    public void unsetQueue() {
-        this.queue = null;
     }
 
 }
