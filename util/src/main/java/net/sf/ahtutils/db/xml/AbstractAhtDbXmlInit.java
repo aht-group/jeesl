@@ -3,7 +3,7 @@ package net.sf.ahtutils.db.xml;
 import org.jeesl.controller.handler.system.property.ConfigBootstrap;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.xml.system.io.db.Db;
+import org.jeesl.model.xml.io.db.Db;
 import org.jeesl.util.db.updater.JeeslDbStatusUpdater;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

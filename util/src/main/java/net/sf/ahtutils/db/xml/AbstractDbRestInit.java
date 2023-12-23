@@ -8,7 +8,7 @@ import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.interfaces.controller.db.UtilsDbXmlInit.Priority;
-import org.jeesl.model.xml.system.io.db.Db;
+import org.jeesl.model.xml.io.db.Db;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

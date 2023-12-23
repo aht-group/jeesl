@@ -6,8 +6,8 @@ import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.jeesl.model.xml.system.io.db.Db;
-import org.jeesl.model.xml.system.io.db.Seed;
+import org.jeesl.model.xml.io.db.Db;
+import org.jeesl.model.xml.io.db.Seed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

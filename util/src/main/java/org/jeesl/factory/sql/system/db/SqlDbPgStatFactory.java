@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.factory.xml.system.io.db.XmlQueryFactory;
-import org.jeesl.model.xml.system.io.db.Query;
+import org.jeesl.model.xml.io.db.Query;
 
 public class SqlDbPgStatFactory
 {

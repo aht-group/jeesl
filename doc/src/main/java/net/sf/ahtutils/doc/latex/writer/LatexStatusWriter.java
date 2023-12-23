@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
+import org.jeesl.model.xml.io.db.Db;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.system.io.db.Db;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.interfaces.configuration.ConfigurationProvider;
 import org.openfuxml.model.xml.core.table.Table;

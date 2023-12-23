@@ -110,6 +110,11 @@
             <jxb:package name="org.openfuxml.model.xml.core.text"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/addon/wiki.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.addon.wiki"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 
     <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/io.xsd" node="/xsd:schema">
         <jxb:schemaBindings>

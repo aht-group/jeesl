@@ -1,8 +1,8 @@
 package net.sf.ahtutils.util.query.xpath.dbseed;
 
 import org.jeesl.factory.xml.system.io.db.XmlSeedFactory;
-import org.jeesl.model.xml.system.io.db.Db;
-import org.jeesl.model.xml.system.io.db.Seed;
+import org.jeesl.model.xml.io.db.Db;
+import org.jeesl.model.xml.io.db.Seed;
 import org.jeesl.model.xml.system.io.db.TestDb;
 import org.jeesl.util.query.xpath.DbseedXpath;
 import org.junit.Assert;

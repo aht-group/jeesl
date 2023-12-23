@@ -282,10 +282,8 @@
 								<goals><goal>clean</goal></goals>
 								<configuration>
 									<filesets>
-										<fileset>
-											<directory>src/main/javax/org/exlp</directory>
-											<followSymlinks>false</followSymlinks>
-										</fileset>
+										<fileset><directory>src/main/javax/org/exlp</directory><followSymlinks>false</followSymlinks></fileset>
+										<fileset><directory>src/main/javax/org/openfuxml</directory><followSymlinks>false</followSymlinks></fileset>
 									</filesets>
 								</configuration>
 							</execution>
@@ -366,10 +364,8 @@
 								<goals><goal>clean</goal></goals>
 								<configuration>
 									<filesets>
-										<fileset>
-											<directory>src/main/jakarta/org/exlp</directory>
-											<followSymlinks>false</followSymlinks>
-										</fileset>
+										<fileset><directory>src/main/jakarta/org/exlp</directory><followSymlinks>false</followSymlinks></fileset>
+										<fileset><directory>src/main/jakarta/org/openfuxml</directory><followSymlinks>false</followSymlinks></fileset>
 									</filesets>
 								</configuration>
 							</execution>
