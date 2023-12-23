@@ -22,8 +22,9 @@
 	<xsd:import namespace="http://www.jeesl.org/bb" schemaLocation="jeesl/module/bb.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/calendar" schemaLocation="jeesl/module/calendar.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/workflow" schemaLocation="jeesl/module/workflow.xsd"/>
-
 	<xsd:import namespace="http://www.jeesl.org/dev/srs" schemaLocation="jeesl/dev/srs.xsd"/>
+	
+	<xsd:import namespace="http://www.jeesl.org/job" schemaLocation="jeesl/module/job.xsd"/>
 
 	<xsd:import namespace="http://ahtutils.aht-group.com/text" schemaLocation="aht/text.xsd"/>
 

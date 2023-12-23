@@ -15,7 +15,7 @@ public class TestXmlJob extends AbstractXmlJobTest<Job>
     public Job build(boolean withChilds)
     {
     	Job xml = new Job();
-    	xml.setId(123);
+    	xml.setId(123l);
     	
     	if(withChilds)
     	{

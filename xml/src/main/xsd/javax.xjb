@@ -74,13 +74,7 @@
 		<jxb:schemaBindings>
 			<jxb:package name="org.jeesl.model.xml.io.template"/>
 		</jxb:schemaBindings>
-    </jxb:bindings>
-    
-	<jxb:bindings schemaLocation="jeesl/system/security.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.system.security"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
+    </jxb:bindings> 
     
 	<jxb:bindings schemaLocation="jeesl/module/calendar.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
@@ -100,6 +94,17 @@
 	<jxb:bindings schemaLocation="../xsd/jeesl/module/workflow.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.workflow"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+	<jxb:bindings schemaLocation="../xsd/jeesl/module/job.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.system.job"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="jeesl/system/security.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.system.security"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

@@ -76,14 +76,6 @@ public class Jobs
         return this.job;
     }
 
-    public boolean isSetJob() {
-        return ((this.job!= null)&&(!this.job.isEmpty()));
-    }
-
-    public void unsetJob() {
-        this.job = null;
-    }
-
     /**
      * Gets the value of the queue property.
      * 
@@ -92,7 +84,7 @@ public class Jobs
      *     {@link Integer }
      *     
      */
-    public int getQueue() {
+    public Integer getQueue() {
         return queue;
     }
 
@@ -104,16 +96,8 @@ public class Jobs
      *     {@link Integer }
      *     
      */
-    public void setQueue(int value) {
+    public void setQueue(Integer value) {
         this.queue = value;
-    }
-
-    public boolean isSetQueue() {
-        return (this.queue!= null);
-    }
-
-    public void unsetQueue() {
-        this.queue = null;
     }
 
 }

@@ -15,7 +15,7 @@ public class TestXmlTemplate extends AbstractXmlJobTest<Template>
     public Template build(boolean withChilds)
     {
     	Template xml = new Template();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	
     	if(withChilds)
