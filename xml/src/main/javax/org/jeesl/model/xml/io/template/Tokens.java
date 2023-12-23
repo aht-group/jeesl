@@ -72,12 +72,4 @@ public class Tokens
         return this.token;
     }
 
-    public boolean isSetToken() {
-        return ((this.token!= null)&&(!this.token.isEmpty()));
-    }
-
-    public void unsetToken() {
-        this.token = null;
-    }
-
 }

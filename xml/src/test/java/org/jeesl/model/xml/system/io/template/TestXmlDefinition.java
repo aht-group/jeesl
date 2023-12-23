@@ -17,7 +17,7 @@ public class TestXmlDefinition extends AbstractXmlTemplateTest<Definition>
     public Definition build(boolean withChilds)
     {
     	Definition xml = new Definition();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setPosition(2);
     	xml.setVisible(true);
     	

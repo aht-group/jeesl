@@ -72,12 +72,4 @@ public class Definitions
         return this.definition;
     }
 
-    public boolean isSetDefinition() {
-        return ((this.definition!= null)&&(!this.definition.isEmpty()));
-    }
-
-    public void unsetDefinition() {
-        this.definition = null;
-    }
-
 }

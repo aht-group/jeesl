@@ -17,7 +17,7 @@ public class TestXmlTemplate extends AbstractXmlTemplateTest<Template>
     public Template build(boolean withChilds)
     {
     	Template xml = new Template();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setPosition(2);
     	xml.setVisible(true);

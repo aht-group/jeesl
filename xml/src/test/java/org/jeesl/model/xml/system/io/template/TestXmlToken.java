@@ -18,7 +18,7 @@ public class TestXmlToken extends AbstractXmlTemplateTest<Token>
     public Token build(boolean withChilds)
     {
     	Token xml = new Token();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setPosition(2);
     	xml.setVisible(true);
