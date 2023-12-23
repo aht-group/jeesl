@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Type;
 
 
@@ -77,10 +76,6 @@ public class Calendar
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the item property.
      * 
@@ -110,14 +105,6 @@ public class Calendar
         return this.item;
     }
 
-    public boolean isSetItem() {
-        return ((this.item!= null)&&(!this.item.isEmpty()));
-    }
-
-    public void unsetItem() {
-        this.item = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -126,7 +113,7 @@ public class Calendar
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -138,16 +125,8 @@ public class Calendar
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
 }

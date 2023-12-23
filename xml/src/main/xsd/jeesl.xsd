@@ -20,6 +20,7 @@
     <xsd:import namespace="http://www.jeesl.org/io/template" schemaLocation="jeesl/io/template.xsd"/>
 	
 	<xsd:import namespace="http://www.jeesl.org/bb" schemaLocation="jeesl/module/bb.xsd"/>
+	<xsd:import namespace="http://www.jeesl.org/calendar" schemaLocation="jeesl/module/calendar.xsd"/>
 
 	<xsd:import namespace="http://www.jeesl.org/dev/srs" schemaLocation="jeesl/dev/srs.xsd"/>
 
