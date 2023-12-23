@@ -79,14 +79,6 @@ public class Times
         return this.time;
     }
 
-    public boolean isSetTime() {
-        return ((this.time!= null)&&(!this.time.isEmpty()));
-    }
-
-    public void unsetTime() {
-        this.time = null;
-    }
-
     /**
      * Gets the value of the reference property.
      * 
@@ -109,10 +101,6 @@ public class Times
      */
     public void setReference(XMLGregorianCalendar value) {
         this.reference = value;
-    }
-
-    public boolean isSetReference() {
-        return (this.reference!= null);
     }
 
 }

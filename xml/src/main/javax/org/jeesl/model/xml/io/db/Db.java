@@ -86,14 +86,6 @@ public class Db
         return this.seed;
     }
 
-    public boolean isSetSeed() {
-        return ((this.seed!= null)&&(!this.seed.isEmpty()));
-    }
-
-    public void unsetSeed() {
-        this.seed = null;
-    }
-
     /**
      * Gets the value of the query property.
      * 
@@ -123,14 +115,6 @@ public class Db
         return this.query;
     }
 
-    public boolean isSetQuery() {
-        return ((this.query!= null)&&(!this.query.isEmpty()));
-    }
-
-    public void unsetQuery() {
-        this.query = null;
-    }
-
     /**
      * Gets the value of the pathIde property.
      * 
@@ -153,10 +137,6 @@ public class Db
      */
     public void setPathIde(String value) {
         this.pathIde = value;
-    }
-
-    public boolean isSetPathIde() {
-        return (this.pathIde!= null);
     }
 
     /**
@@ -183,10 +163,6 @@ public class Db
         this.pathIdeSvg = value;
     }
 
-    public boolean isSetPathIdeSvg() {
-        return (this.pathIdeSvg!= null);
-    }
-
     /**
      * Gets the value of the pathExport property.
      * 
@@ -209,10 +185,6 @@ public class Db
      */
     public void setPathExport(String value) {
         this.pathExport = value;
-    }
-
-    public boolean isSetPathExport() {
-        return (this.pathExport!= null);
     }
 
 }

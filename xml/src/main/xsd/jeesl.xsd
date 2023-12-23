@@ -14,6 +14,7 @@
     
     <xsd:import namespace="http://www.jeesl.org/revision" schemaLocation="jeesl/io/revision.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/io/ssi" schemaLocation="jeesl/io/ssi.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/dbseed" schemaLocation="aht/dbseed.xsd"/>
 
 	<xsd:import namespace="http://www.jeesl.org/dev/srs" schemaLocation="jeesl/dev/srs.xsd"/>
 

@@ -67,10 +67,6 @@ public class Seed
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the template property.
      * 
@@ -95,10 +91,6 @@ public class Seed
         this.template = value;
     }
 
-    public boolean isSetTemplate() {
-        return (this.template!= null);
-    }
-
     /**
      * Gets the value of the content property.
      * 
@@ -121,10 +113,6 @@ public class Seed
      */
     public void setContent(String value) {
         this.content = value;
-    }
-
-    public boolean isSetContent() {
-        return (this.content!= null);
     }
 
 }

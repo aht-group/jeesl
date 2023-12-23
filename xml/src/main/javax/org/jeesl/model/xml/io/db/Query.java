@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Status;
 
 
@@ -78,10 +77,6 @@ public class Query
         this.times = value;
     }
 
-    public boolean isSetTimes() {
-        return (this.times!= null);
-    }
-
     /**
      * Gets the value of the status property.
      * 
@@ -106,10 +101,6 @@ public class Query
         this.status = value;
     }
 
-    public boolean isSetStatus() {
-        return (this.status!= null);
-    }
-
     /**
      * Gets the value of the pid property.
      * 
@@ -118,7 +109,7 @@ public class Query
      *     {@link Long }
      *     
      */
-    public long getPid() {
+    public Long getPid() {
         return pid;
     }
 
@@ -130,16 +121,8 @@ public class Query
      *     {@link Long }
      *     
      */
-    public void setPid(long value) {
+    public void setPid(Long value) {
         this.pid = value;
-    }
-
-    public boolean isSetPid() {
-        return (this.pid!= null);
-    }
-
-    public void unsetPid() {
-        this.pid = null;
     }
 
     /**
@@ -164,10 +147,6 @@ public class Query
      */
     public void setStatement(String value) {
         this.statement = value;
-    }
-
-    public boolean isSetStatement() {
-        return (this.statement!= null);
     }
 
 }

@@ -180,7 +180,7 @@ public class UtilsDbXmlSeedUtil
 	
 	private void checkPath(String fileName) throws UtilsConfigurationException
 	{
-		if(!dbSeed.isSetPathExport()){throw new UtilsConfigurationException("Config element "+configKeyPathExport+" is not set!");}
+		if(Objects.isNull(dbSeed.getPathExport())) {throw new UtilsConfigurationException("Config element "+configKeyPathExport+" is not set!");}
 		File base = new File(dbSeed.getPathExport());
 		if(!base.exists() || !base.isDirectory()){throw new UtilsConfigurationException("Path "+dbSeed.getPathExport()+" does not exist");}
 		

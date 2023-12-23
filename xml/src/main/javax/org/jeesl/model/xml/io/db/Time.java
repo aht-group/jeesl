@@ -70,10 +70,6 @@ public class Time
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the value property.
      * 
@@ -98,10 +94,6 @@ public class Time
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the offset property.
      * 
@@ -110,7 +102,7 @@ public class Time
      *     {@link Integer }
      *     
      */
-    public int getOffset() {
+    public Integer getOffset() {
         return offset;
     }
 
@@ -122,16 +114,8 @@ public class Time
      *     {@link Integer }
      *     
      */
-    public void setOffset(int value) {
+    public void setOffset(Integer value) {
         this.offset = value;
-    }
-
-    public boolean isSetOffset() {
-        return (this.offset!= null);
-    }
-
-    public void unsetOffset() {
-        this.offset = null;
     }
 
 }
