@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.jxpath.Pointer;
@@ -355,7 +356,7 @@ public class XlsFactory <L extends JeeslLang,D extends JeeslDescription,
 						case none: xfCell.cell(ioColumn,xlsRow,columnNr,Double.valueOf(f.getFinance().get(nr-1).getValue()));break;
 						case last: for(Finance f2 : f.getFinance().get(nr-1).getFinance())
 								   {
-										if(f2.isSetValue()){xfCell.cell(ioColumn,xlsRow,columnNr,f2.getValue());}
+										if(Objects.nonNull(f2.getValue())) {xfCell.cell(ioColumn,xlsRow,columnNr,f2.getValue());}
 										else{columnNr.add(1);}
 								   }break;
 						

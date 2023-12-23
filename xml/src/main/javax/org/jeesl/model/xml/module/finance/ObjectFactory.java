@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the net.sf.ahtutils.xml.finance package. 
+ * generated in the org.jeesl.model.xml.module.finance package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,18 +23,10 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.ahtutils.xml.finance
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.module.finance
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link Currency }
-     * 
-     */
-    public Currency createCurrency() {
-        return new Currency();
     }
 
     /**
@@ -51,6 +43,14 @@ public class ObjectFactory {
      */
     public Finance createFinance() {
         return new Finance();
+    }
+
+    /**
+     * Create an instance of {@link Currency }
+     * 
+     */
+    public Currency createCurrency() {
+        return new Currency();
     }
 
     /**

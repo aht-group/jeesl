@@ -15,7 +15,7 @@ public class TestXmlFinance extends AbstractXmlFinanceTest<Finance>
     public Finance build(boolean withChilds)
     {
     	Finance xml = new Finance();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setNr(1);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");

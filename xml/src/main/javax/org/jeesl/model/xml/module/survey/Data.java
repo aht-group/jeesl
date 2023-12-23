@@ -83,10 +83,6 @@ public class Data
         this.survey = value;
     }
 
-    public boolean isSetSurvey() {
-        return (this.survey!= null);
-    }
-
     /**
      * Gets the value of the correlation property.
      * 
@@ -109,10 +105,6 @@ public class Data
      */
     public void setCorrelation(Correlation value) {
         this.correlation = value;
-    }
-
-    public boolean isSetCorrelation() {
-        return (this.correlation!= null);
     }
 
     /**
@@ -144,14 +136,6 @@ public class Data
         return this.answer;
     }
 
-    public boolean isSetAnswer() {
-        return ((this.answer!= null)&&(!this.answer.isEmpty()));
-    }
-
-    public void unsetAnswer() {
-        this.answer = null;
-    }
-
     /**
      * Gets the value of the section property.
      * 
@@ -181,14 +165,6 @@ public class Data
         return this.section;
     }
 
-    public boolean isSetSection() {
-        return ((this.section!= null)&&(!this.section.isEmpty()));
-    }
-
-    public void unsetSection() {
-        this.section = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -197,7 +173,7 @@ public class Data
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -209,16 +185,8 @@ public class Data
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
 }

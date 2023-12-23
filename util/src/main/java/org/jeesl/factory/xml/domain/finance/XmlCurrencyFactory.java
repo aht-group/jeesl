@@ -31,9 +31,9 @@ public class XmlCurrencyFactory <L extends JeeslLang, C extends UtilsCurrency<L>
 	{
 		Currency xml = build();
 		
-		if(q.isSetId()) {xml.setId(currency.getId());}
-		if(q.isSetCode()) {xml.setCode(currency.getCode());}
-		if(q.isSetSymbol()) {xml.setSymbol(currency.getSymbol());}
+		if(Objects.nonNull(q.getId())) {xml.setId(currency.getId());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(currency.getCode());}
+		if(Objects.nonNull(q.getSymbol())) {xml.setSymbol(currency.getSymbol());}
 		
 		if(ObjectUtils.allNotNull(q.getLabel(),localeCode)){xml.setLabel(XmlLangFactory.label(localeCode,currency));}
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(currency.getName()));}

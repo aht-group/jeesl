@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.cms.text.Remark;
 
 
@@ -109,10 +108,6 @@ public class Answer
         this.data = value;
     }
 
-    public boolean isSetData() {
-        return (this.data!= null);
-    }
-
     /**
      * Gets the value of the question property.
      * 
@@ -135,10 +130,6 @@ public class Answer
      */
     public void setQuestion(Question value) {
         this.question = value;
-    }
-
-    public boolean isSetQuestion() {
-        return (this.question!= null);
     }
 
     /**
@@ -165,10 +156,6 @@ public class Answer
         this.answer = value;
     }
 
-    public boolean isSetAnswer() {
-        return (this.answer!= null);
-    }
-
     /**
      * Gets the value of the remark property.
      * 
@@ -191,10 +178,6 @@ public class Answer
      */
     public void setRemark(Remark value) {
         this.remark = value;
-    }
-
-    public boolean isSetRemark() {
-        return (this.remark!= null);
     }
 
     /**
@@ -221,10 +204,6 @@ public class Answer
         this.option = value;
     }
 
-    public boolean isSetOption() {
-        return (this.option!= null);
-    }
-
     /**
      * Gets the value of the matrix property.
      * 
@@ -249,10 +228,6 @@ public class Answer
         this.matrix = value;
     }
 
-    public boolean isSetMatrix() {
-        return (this.matrix!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -261,7 +236,7 @@ public class Answer
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -273,16 +248,8 @@ public class Answer
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -293,7 +260,7 @@ public class Answer
      *     {@link Boolean }
      *     
      */
-    public boolean isValueBoolean() {
+    public Boolean isValueBoolean() {
         return valueBoolean;
     }
 
@@ -305,16 +272,8 @@ public class Answer
      *     {@link Boolean }
      *     
      */
-    public void setValueBoolean(boolean value) {
+    public void setValueBoolean(Boolean value) {
         this.valueBoolean = value;
-    }
-
-    public boolean isSetValueBoolean() {
-        return (this.valueBoolean!= null);
-    }
-
-    public void unsetValueBoolean() {
-        this.valueBoolean = null;
     }
 
     /**
@@ -325,7 +284,7 @@ public class Answer
      *     {@link Integer }
      *     
      */
-    public int getValueNumber() {
+    public Integer getValueNumber() {
         return valueNumber;
     }
 
@@ -337,16 +296,8 @@ public class Answer
      *     {@link Integer }
      *     
      */
-    public void setValueNumber(int value) {
+    public void setValueNumber(Integer value) {
         this.valueNumber = value;
-    }
-
-    public boolean isSetValueNumber() {
-        return (this.valueNumber!= null);
-    }
-
-    public void unsetValueNumber() {
-        this.valueNumber = null;
     }
 
     /**
@@ -357,7 +308,7 @@ public class Answer
      *     {@link Double }
      *     
      */
-    public double getValueDouble() {
+    public Double getValueDouble() {
         return valueDouble;
     }
 
@@ -369,16 +320,8 @@ public class Answer
      *     {@link Double }
      *     
      */
-    public void setValueDouble(double value) {
+    public void setValueDouble(Double value) {
         this.valueDouble = value;
-    }
-
-    public boolean isSetValueDouble() {
-        return (this.valueDouble!= null);
-    }
-
-    public void unsetValueDouble() {
-        this.valueDouble = null;
     }
 
     /**
@@ -405,10 +348,6 @@ public class Answer
         this.valueDate = value;
     }
 
-    public boolean isSetValueDate() {
-        return (this.valueDate!= null);
-    }
-
     /**
      * Gets the value of the score property.
      * 
@@ -417,7 +356,7 @@ public class Answer
      *     {@link Double }
      *     
      */
-    public double getScore() {
+    public Double getScore() {
         return score;
     }
 
@@ -429,16 +368,8 @@ public class Answer
      *     {@link Double }
      *     
      */
-    public void setScore(double value) {
+    public void setScore(Double value) {
         this.score = value;
-    }
-
-    public boolean isSetScore() {
-        return (this.score!= null);
-    }
-
-    public void unsetScore() {
-        this.score = null;
     }
 
 }

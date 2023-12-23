@@ -72,10 +72,6 @@ public class Column
         this.cell = value;
     }
 
-    public boolean isSetCell() {
-        return (this.cell!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -100,10 +96,6 @@ public class Column
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -126,10 +118,6 @@ public class Column
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

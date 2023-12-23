@@ -79,14 +79,6 @@ public class Row
         return this.column;
     }
 
-    public boolean isSetColumn() {
-        return ((this.column!= null)&&(!this.column.isEmpty()));
-    }
-
-    public void unsetColumn() {
-        this.column = null;
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -111,10 +103,6 @@ public class Row
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -137,10 +125,6 @@ public class Row
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

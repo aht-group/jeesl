@@ -16,7 +16,7 @@ public class TestXmlCurrency extends AbstractXmlFinanceTest<Currency>
     public Currency build(boolean withChilds)
     {
     	Currency xml = new Currency();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
     	xml.setSymbol("mySymbol");

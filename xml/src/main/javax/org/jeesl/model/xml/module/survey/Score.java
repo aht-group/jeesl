@@ -50,7 +50,7 @@ public class Score
      *     {@link Double }
      *     
      */
-    public double getMin() {
+    public Double getMin() {
         return min;
     }
 
@@ -62,16 +62,8 @@ public class Score
      *     {@link Double }
      *     
      */
-    public void setMin(double value) {
+    public void setMin(Double value) {
         this.min = value;
-    }
-
-    public boolean isSetMin() {
-        return (this.min!= null);
-    }
-
-    public void unsetMin() {
-        this.min = null;
     }
 
     /**
@@ -82,7 +74,7 @@ public class Score
      *     {@link Double }
      *     
      */
-    public double getMax() {
+    public Double getMax() {
         return max;
     }
 
@@ -94,16 +86,8 @@ public class Score
      *     {@link Double }
      *     
      */
-    public void setMax(double value) {
+    public void setMax(Double value) {
         this.max = value;
-    }
-
-    public boolean isSetMax() {
-        return (this.max!= null);
-    }
-
-    public void unsetMax() {
-        this.max = null;
     }
 
 }

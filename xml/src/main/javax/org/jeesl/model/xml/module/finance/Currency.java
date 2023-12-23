@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Langs;
 
 
@@ -80,10 +79,6 @@ public class Currency
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -92,7 +87,7 @@ public class Currency
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -104,16 +99,8 @@ public class Currency
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -140,10 +127,6 @@ public class Currency
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the symbol property.
      * 
@@ -168,10 +151,6 @@ public class Currency
         this.symbol = value;
     }
 
-    public boolean isSetSymbol() {
-        return (this.symbol!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -194,10 +173,6 @@ public class Currency
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

@@ -38,7 +38,7 @@ public class XmlFinanceFactory <L extends JeeslLang, C extends UtilsCurrency<L>>
 		Finance xml = build();
 		xml.setCode(code.toString());
 		xml.setValue(value);
-		if(q.isSetCurrency()) {xml.setCurrency(xfCurrency.build(currency));}
+		if(Objects.nonNull(q.getCurrency())) {xml.setCurrency(xfCurrency.build(currency));}
 		return xml;
 	}
 	

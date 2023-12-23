@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.cms.text.Remark;
 import org.jeesl.model.xml.io.locale.status.Unit;
 import org.jeesl.model.xml.module.finance.Figures;
@@ -130,10 +129,6 @@ public class Question
         this.question = value;
     }
 
-    public boolean isSetQuestion() {
-        return (this.question!= null);
-    }
-
     /**
      * Gets the value of the remark property.
      * 
@@ -156,10 +151,6 @@ public class Question
      */
     public void setRemark(Remark value) {
         this.remark = value;
-    }
-
-    public boolean isSetRemark() {
-        return (this.remark!= null);
     }
 
     /**
@@ -186,10 +177,6 @@ public class Question
         this.unit = value;
     }
 
-    public boolean isSetUnit() {
-        return (this.unit!= null);
-    }
-
     /**
      * Gets the value of the score property.
      * 
@@ -212,10 +199,6 @@ public class Question
      */
     public void setScore(Score value) {
         this.score = value;
-    }
-
-    public boolean isSetScore() {
-        return (this.score!= null);
     }
 
     /**
@@ -242,10 +225,6 @@ public class Question
         this.answer = value;
     }
 
-    public boolean isSetAnswer() {
-        return (this.answer!= null);
-    }
-
     /**
      * Gets the value of the options property.
      * 
@@ -268,10 +247,6 @@ public class Question
      */
     public void setOptions(Options value) {
         this.options = value;
-    }
-
-    public boolean isSetOptions() {
-        return (this.options!= null);
     }
 
     /**
@@ -298,10 +273,6 @@ public class Question
         this.figures = value;
     }
 
-    public boolean isSetFigures() {
-        return (this.figures!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -310,7 +281,7 @@ public class Question
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -322,16 +293,8 @@ public class Question
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -342,7 +305,7 @@ public class Question
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -354,16 +317,8 @@ public class Question
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -374,7 +329,7 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -386,16 +341,8 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -422,10 +369,6 @@ public class Question
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the topic property.
      * 
@@ -450,10 +393,6 @@ public class Question
         this.topic = value;
     }
 
-    public boolean isSetTopic() {
-        return (this.topic!= null);
-    }
-
     /**
      * Gets the value of the showBoolean property.
      * 
@@ -462,7 +401,7 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public boolean isShowBoolean() {
+    public Boolean isShowBoolean() {
         return showBoolean;
     }
 
@@ -474,16 +413,8 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public void setShowBoolean(boolean value) {
+    public void setShowBoolean(Boolean value) {
         this.showBoolean = value;
-    }
-
-    public boolean isSetShowBoolean() {
-        return (this.showBoolean!= null);
-    }
-
-    public void unsetShowBoolean() {
-        this.showBoolean = null;
     }
 
     /**
@@ -494,7 +425,7 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public boolean isShowInteger() {
+    public Boolean isShowInteger() {
         return showInteger;
     }
 
@@ -506,16 +437,8 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public void setShowInteger(boolean value) {
+    public void setShowInteger(Boolean value) {
         this.showInteger = value;
-    }
-
-    public boolean isSetShowInteger() {
-        return (this.showInteger!= null);
-    }
-
-    public void unsetShowInteger() {
-        this.showInteger = null;
     }
 
     /**
@@ -526,7 +449,7 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public boolean isShowDouble() {
+    public Boolean isShowDouble() {
         return showDouble;
     }
 
@@ -538,16 +461,8 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public void setShowDouble(boolean value) {
+    public void setShowDouble(Boolean value) {
         this.showDouble = value;
-    }
-
-    public boolean isSetShowDouble() {
-        return (this.showDouble!= null);
-    }
-
-    public void unsetShowDouble() {
-        this.showDouble = null;
     }
 
     /**
@@ -558,7 +473,7 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public boolean isShowText() {
+    public Boolean isShowText() {
         return showText;
     }
 
@@ -570,16 +485,8 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public void setShowText(boolean value) {
+    public void setShowText(Boolean value) {
         this.showText = value;
-    }
-
-    public boolean isSetShowText() {
-        return (this.showText!= null);
-    }
-
-    public void unsetShowText() {
-        this.showText = null;
     }
 
     /**
@@ -590,7 +497,7 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public boolean isShowScore() {
+    public Boolean isShowScore() {
         return showScore;
     }
 
@@ -602,16 +509,8 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public void setShowScore(boolean value) {
+    public void setShowScore(Boolean value) {
         this.showScore = value;
-    }
-
-    public boolean isSetShowScore() {
-        return (this.showScore!= null);
-    }
-
-    public void unsetShowScore() {
-        this.showScore = null;
     }
 
     /**
@@ -622,7 +521,7 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public boolean isShowRemark() {
+    public Boolean isShowRemark() {
         return showRemark;
     }
 
@@ -634,16 +533,8 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public void setShowRemark(boolean value) {
+    public void setShowRemark(Boolean value) {
         this.showRemark = value;
-    }
-
-    public boolean isSetShowRemark() {
-        return (this.showRemark!= null);
-    }
-
-    public void unsetShowRemark() {
-        this.showRemark = null;
     }
 
     /**
@@ -654,7 +545,7 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public boolean isShowSelectOne() {
+    public Boolean isShowSelectOne() {
         return showSelectOne;
     }
 
@@ -666,16 +557,8 @@ public class Question
      *     {@link Boolean }
      *     
      */
-    public void setShowSelectOne(boolean value) {
+    public void setShowSelectOne(Boolean value) {
         this.showSelectOne = value;
-    }
-
-    public boolean isSetShowSelectOne() {
-        return (this.showSelectOne!= null);
-    }
-
-    public void unsetShowSelectOne() {
-        this.showSelectOne = null;
     }
 
 }

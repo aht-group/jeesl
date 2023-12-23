@@ -72,12 +72,4 @@ public class Surveys
         return this.survey;
     }
 
-    public boolean isSetSurvey() {
-        return ((this.survey!= null)&&(!this.survey.isEmpty()));
-    }
-
-    public void unsetSurvey() {
-        this.survey = null;
-    }
-
 }

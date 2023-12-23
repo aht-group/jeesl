@@ -15,7 +15,7 @@ public class TestXmlCounter extends AbstractXmlFinanceTest<Counter>
     public Counter build(boolean withChilds)
     {
     	Counter xml = new Counter();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
     	xml.setCounter(2345);

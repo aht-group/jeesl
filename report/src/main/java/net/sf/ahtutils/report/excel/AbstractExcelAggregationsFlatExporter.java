@@ -8,6 +8,7 @@ import net.sf.ahtutils.xml.report.Info;
 import net.sf.ahtutils.xml.report.Label;
 
 import org.apache.commons.jxpath.JXPathContext;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -189,33 +190,33 @@ public abstract class AbstractExcelAggregationsFlatExporter
 		
 		for (short i = dataFieldCounter; i>0; i --)
 		{
-                    if (logger.isTraceEnabled()) {logger.trace("Content adding iterator = " +i +" while position = " +position);}
-                    Cell financeCell = row.createCell(position);
-                    if (figures.isSetFinance())
+            if (logger.isTraceEnabled()) {logger.trace("Content adding iterator = " +i +" while position = " +position);}
+            Cell financeCell = row.createCell(position);
+            if(ObjectUtils.isNotEmpty(figures.getFinance()))
+            {
+                if (logger.isTraceEnabled()) {logger.trace("There are " +figures.getFinance().size() +" finances for " +figures.getLabel());}
+                for (Finance finance : figures.getFinance())
+                {
+                    if (finance.getNr() == i)
                     {
-                        if (logger.isTraceEnabled()) {logger.trace("There are " +figures.getFinance().size() +" finances for " +figures.getLabel());}
-                        for (Finance finance : figures.getFinance())
-                        {
-                            if (finance.getNr() == i)
-                            {
-                                financeCell.setCellStyle(numericStyle);
-                                financeCell.setCellValue(finance.getValue());
-                                if (logger.isTraceEnabled()){logger.trace("Set value to " +finance.getValue() +" for " +figures.getLabel());}
-                            }	
-                        }
-                    }
-                    if (figures.isSetTime())
+                        financeCell.setCellStyle(numericStyle);
+                        financeCell.setCellValue(finance.getValue());
+                        if (logger.isTraceEnabled()){logger.trace("Set value to " +finance.getValue() +" for " +figures.getLabel());}
+                    }	
+                }
+            }
+            if(ObjectUtils.isNotEmpty(figures.getTime()))
+            {
+                for (Time time : figures.getTime())
+                {
+                    if (time.getNr() == i)
                     {
-                        for (Time time : figures.getTime())
-                        {
-                            if (time.getNr() == i)
-                            {
-                                financeCell.setCellStyle(dateStyle);
-                                financeCell.setCellValue(time.getRecord().toGregorianCalendar().getTime());
-                            }
-                        }
+                        financeCell.setCellStyle(dateStyle);
+                        financeCell.setCellValue(time.getRecord().toGregorianCalendar().getTime());
                     }
-                    position++;
+                }
+            }
+            position++;
 		}
 		
 		// Recursevely call the next levels

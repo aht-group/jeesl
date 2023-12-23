@@ -78,10 +78,6 @@ public class Cell
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the valueOption property.
      * 
@@ -106,10 +102,6 @@ public class Cell
         this.valueOption = value;
     }
 
-    public boolean isSetValueOption() {
-        return (this.valueOption!= null);
-    }
-
     /**
      * Gets the value of the valueBoolean property.
      * 
@@ -118,7 +110,7 @@ public class Cell
      *     {@link Boolean }
      *     
      */
-    public boolean isValueBoolean() {
+    public Boolean isValueBoolean() {
         return valueBoolean;
     }
 
@@ -130,16 +122,8 @@ public class Cell
      *     {@link Boolean }
      *     
      */
-    public void setValueBoolean(boolean value) {
+    public void setValueBoolean(Boolean value) {
         this.valueBoolean = value;
-    }
-
-    public boolean isSetValueBoolean() {
-        return (this.valueBoolean!= null);
-    }
-
-    public void unsetValueBoolean() {
-        this.valueBoolean = null;
     }
 
     /**
@@ -150,7 +134,7 @@ public class Cell
      *     {@link Integer }
      *     
      */
-    public int getValueNumber() {
+    public Integer getValueNumber() {
         return valueNumber;
     }
 
@@ -162,16 +146,8 @@ public class Cell
      *     {@link Integer }
      *     
      */
-    public void setValueNumber(int value) {
+    public void setValueNumber(Integer value) {
         this.valueNumber = value;
-    }
-
-    public boolean isSetValueNumber() {
-        return (this.valueNumber!= null);
-    }
-
-    public void unsetValueNumber() {
-        this.valueNumber = null;
     }
 
     /**
@@ -182,7 +158,7 @@ public class Cell
      *     {@link Double }
      *     
      */
-    public double getValueDouble() {
+    public Double getValueDouble() {
         return valueDouble;
     }
 
@@ -194,16 +170,8 @@ public class Cell
      *     {@link Double }
      *     
      */
-    public void setValueDouble(double value) {
+    public void setValueDouble(Double value) {
         this.valueDouble = value;
-    }
-
-    public boolean isSetValueDouble() {
-        return (this.valueDouble!= null);
-    }
-
-    public void unsetValueDouble() {
-        this.valueDouble = null;
     }
 
     /**
@@ -228,10 +196,6 @@ public class Cell
      */
     public void setValueText(String value) {
         this.valueText = value;
-    }
-
-    public boolean isSetValueText() {
-        return (this.valueText!= null);
     }
 
 }
