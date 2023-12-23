@@ -12,9 +12,11 @@
     <xsd:import namespace="http://www.jeesl.org/text" schemaLocation="jeesl/text.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/symbol" schemaLocation="jeesl/symbol.xsd"/>
     
+    <xsd:import namespace="http://ahtutils.aht-group.com/dbseed" schemaLocation="aht/dbseed.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/revision" schemaLocation="jeesl/io/revision.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/io/ssi" schemaLocation="jeesl/io/ssi.xsd"/>
-	<xsd:import namespace="http://ahtutils.aht-group.com/dbseed" schemaLocation="aht/dbseed.xsd"/>
+    <xsd:import namespace="http://www.jeesl.org/io/template" schemaLocation="jeesl/io/template.xsd"/>
+	
 
 	<xsd:import namespace="http://www.jeesl.org/dev/srs" schemaLocation="jeesl/dev/srs.xsd"/>
 

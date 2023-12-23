@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.io.template;
+package org.jeesl.model.xml.io.template;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

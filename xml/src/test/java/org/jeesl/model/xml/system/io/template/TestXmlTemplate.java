@@ -1,6 +1,7 @@
 package org.jeesl.model.xml.system.io.template;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.template.Template;
 import org.jeesl.model.xml.system.status.TestXmlDescriptions;
 import org.jeesl.model.xml.system.status.TestXmlLangs;
 import org.slf4j.Logger;

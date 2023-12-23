@@ -5,7 +5,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jeesl.model.xml.system.io.template.Templates;
+import org.jeesl.model.xml.io.template.Templates;
 import org.jeesl.model.xml.xsd.Container;
 
 public interface JeeslIoTemplateRestExport

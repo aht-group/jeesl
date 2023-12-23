@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.io.template;
+package org.jeesl.model.xml.io.template;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.jeesl.org/io/template}token" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://www.jeesl.org/io/template}template" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,52 +32,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "token"
+    "template"
 })
-@XmlRootElement(name = "tokens")
-public class Tokens
+@XmlRootElement(name = "templates")
+public class Templates
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Token> token;
+    protected List<Template> template;
 
     /**
-     * Gets the value of the token property.
+     * Gets the value of the template property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the token property.
+     * This is why there is not a <CODE>set</CODE> method for the template property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getToken().add(newItem);
+     *    getTemplate().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Token }
+     * {@link Template }
      * 
      * 
      */
-    public List<Token> getToken() {
-        if (token == null) {
-            token = new ArrayList<Token>();
+    public List<Template> getTemplate() {
+        if (template == null) {
+            template = new ArrayList<Template>();
         }
-        return this.token;
+        return this.template;
     }
 
-    public boolean isSetToken() {
-        return ((this.token!= null)&&(!this.token.isEmpty()));
+    public boolean isSetTemplate() {
+        return ((this.template!= null)&&(!this.template.isEmpty()));
     }
 
-    public void unsetToken() {
-        this.token = null;
+    public void unsetTemplate() {
+        this.template = null;
     }
 
 }

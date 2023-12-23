@@ -60,6 +60,11 @@
             <jxb:package name="org.jeesl.model.xml.io.label"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+	<jxb:bindings schemaLocation="../xsd/jeesl/io/template.xsd" node="/xsd:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="org.jeesl.model.xml.io.template"/>
+		</jxb:schemaBindings>
+    </jxb:bindings>
     
 	<jxb:bindings schemaLocation="jeesl/system/security.xsd" node="/xsd:schema">
         <jxb:schemaBindings>

@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.io.mail.template.JeeslTemplateChannel;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.xml.system.io.template.Template;
+import org.jeesl.model.xml.io.template.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
