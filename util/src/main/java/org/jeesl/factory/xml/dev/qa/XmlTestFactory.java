@@ -59,7 +59,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 							QAUS extends JeeslStatus<L2,D2,QAUS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlTestFactory.class);
-		
+/*		
 	private Test q;
 	
 	private Class<QAT> cQAT;
@@ -84,8 +84,6 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		this.fQa=fQa;
 		this.cQAT=cQAT;
 	}
-	
-	
 	
 	public static Test build()
 	{
@@ -131,4 +129,5 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		return xml;
 	}
+*/
 }

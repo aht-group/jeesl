@@ -87,12 +87,13 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		if(q.isSetTest())
 		{
-			XmlTestFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> f = new XmlTestFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>(q.getTest().get(0));
-			f.lazyLoader(fQa, cQAT);
-			for(QAT test : category.getTests())
-			{
-				xml.getTest().add(f.build(test));
-			}
+			logger.warn("Deactivated -- XMAS Issue");
+//			XmlTestFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> f = new XmlTestFactory<>(q.getTest().get(0));
+//			f.lazyLoader(fQa, cQAT);
+//			for(QAT test : category.getTests())
+//			{
+//				xml.getTest().add(f.build(test));
+//			}
 		}
 		
 		return xml;
