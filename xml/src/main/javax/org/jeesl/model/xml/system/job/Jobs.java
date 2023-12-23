@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.module.job;
+package org.jeesl.model.xml.system.job;
 
 import java.io.Serializable;
 import java.util.ArrayList;

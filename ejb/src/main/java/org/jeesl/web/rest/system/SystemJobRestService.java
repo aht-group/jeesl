@@ -22,7 +22,7 @@ import org.jeesl.interfaces.model.system.job.template.JeeslJobType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.model.xml.module.job.Jobs;
+import org.jeesl.model.xml.system.job.Jobs;
 import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;

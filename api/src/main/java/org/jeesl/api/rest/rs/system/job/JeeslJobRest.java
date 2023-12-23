@@ -6,7 +6,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jeesl.model.xml.module.job.Jobs;
+import org.jeesl.model.xml.system.job.Jobs;
 
 public interface JeeslJobRest
 {

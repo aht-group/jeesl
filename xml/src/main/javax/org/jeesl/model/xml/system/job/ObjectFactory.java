@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.module.job;
+package org.jeesl.model.xml.system.job;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
