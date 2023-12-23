@@ -1,5 +1,6 @@
 package org.jeesl.factory.xml.dev.qa;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.model.xml.module.dev.qa.Groups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ public class XmlGroupsFactory<GROUP extends UtilsQaGroup<?,?,?>,
 	public XmlGroupsFactory(Groups q)
 	{
 		this.q=q;
-		if(q.isSetGroup()){xfGroup  = new XmlGroupFactory<GROUP>(q.getGroup().get(0));}
+		if(ObjectUtils.isNotEmpty(q.getGroup())) {xfGroup  = new XmlGroupFactory<GROUP>(q.getGroup().get(0));}
 	}
 	
 	public Groups build(QAT test)
