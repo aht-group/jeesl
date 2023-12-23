@@ -80,14 +80,6 @@ public class Attributes
         return this.attribute;
     }
 
-    public boolean isSetAttribute() {
-        return ((this.attribute!= null)&&(!this.attribute.isEmpty()));
-    }
-
-    public void unsetAttribute() {
-        this.attribute = null;
-    }
-
     /**
      * Gets the value of the attributes property.
      * 
@@ -117,14 +109,6 @@ public class Attributes
         return this.attributes;
     }
 
-    public boolean isSetAttributes() {
-        return ((this.attributes!= null)&&(!this.attributes.isEmpty()));
-    }
-
-    public void unsetAttributes() {
-        this.attributes = null;
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -147,10 +131,6 @@ public class Attributes
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }
