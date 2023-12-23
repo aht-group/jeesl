@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -120,9 +121,9 @@ public class McTimeSeriesFactory <SCOPE extends JeeslTsScope<?,?,?,?,?,EC,INT>,
 	{
 		Ds ds = new Ds();
 
-		for(org.jeesl.model.xml.module.ts.Data tsD: timeSeries.getData())
+		for(org.jeesl.model.xml.module.ts.Data tsD : timeSeries.getData())
 		{
-			if (tsD.isSetValue())
+			if(Objects.nonNull(tsD.getValue()))
 			{
 				Data cd = new Data();
 				cd.setRecord(tsD.getRecord());

@@ -72,12 +72,4 @@ public class Points
         return this.point;
     }
 
-    public boolean isSetPoint() {
-        return ((this.point!= null)&&(!this.point.isEmpty()));
-    }
-
-    public void unsetPoint() {
-        this.point = null;
-    }
-
 }

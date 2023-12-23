@@ -14,7 +14,7 @@ public class TestXmlData extends AbstractXmlTimeseriesTest<Data>
     public Data build(boolean withChilds)
     {
     	Data xml = new Data();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setValue(234.56);
     	xml.setRecord(AbstractXmlTimeseriesTest.getDefaultXmlDate());
     	

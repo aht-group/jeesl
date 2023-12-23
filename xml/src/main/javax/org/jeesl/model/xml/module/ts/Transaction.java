@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.cms.text.Reference;
 import org.jeesl.model.xml.io.cms.text.Remark;
 import org.jeesl.model.xml.io.locale.status.Source;
@@ -92,10 +91,6 @@ public class Transaction
         this.user = value;
     }
 
-    public boolean isSetUser() {
-        return (this.user!= null);
-    }
-
     /**
      * Gets the value of the source property.
      * 
@@ -118,10 +113,6 @@ public class Transaction
      */
     public void setSource(Source value) {
         this.source = value;
-    }
-
-    public boolean isSetSource() {
-        return (this.source!= null);
     }
 
     /**
@@ -148,10 +139,6 @@ public class Transaction
         this.reference = value;
     }
 
-    public boolean isSetReference() {
-        return (this.reference!= null);
-    }
-
     /**
      * Gets the value of the remark property.
      * 
@@ -176,10 +163,6 @@ public class Transaction
         this.remark = value;
     }
 
-    public boolean isSetRemark() {
-        return (this.remark!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -188,7 +171,7 @@ public class Transaction
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -200,16 +183,8 @@ public class Transaction
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -234,10 +209,6 @@ public class Transaction
      */
     public void setRecord(XMLGregorianCalendar value) {
         this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
 }

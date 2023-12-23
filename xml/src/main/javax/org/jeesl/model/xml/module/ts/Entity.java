@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.cms.text.Markups;
 
 
@@ -74,10 +73,6 @@ public class Entity
         this.markups = value;
     }
 
-    public boolean isSetMarkups() {
-        return (this.markups!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -86,7 +81,7 @@ public class Entity
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -98,16 +93,8 @@ public class Entity
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -132,10 +119,6 @@ public class Entity
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

@@ -30,6 +30,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link TsCollection }
+     * 
+     */
+    public TsCollection createTsCollection() {
+        return new TsCollection();
+    }
+
+    /**
      * Create an instance of {@link Ts }
      * 
      */
@@ -99,14 +107,6 @@ public class ObjectFactory {
      */
     public Ds createDs() {
         return new Ds();
-    }
-
-    /**
-     * Create an instance of {@link TsCollection }
-     * 
-     */
-    public TsCollection createTsCollection() {
-        return new TsCollection();
     }
 
     /**

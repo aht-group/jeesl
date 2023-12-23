@@ -14,7 +14,7 @@ public class TestXmlEntity extends AbstractXmlTimeseriesTest<Entity>
     public Entity build(boolean withChilds)
     {
     	Entity xml = new Entity();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	return xml;
     }

@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Interval;
 import org.jeesl.model.xml.io.locale.status.Scope;
 
@@ -98,10 +97,6 @@ public class Ts
         this.scope = value;
     }
 
-    public boolean isSetScope() {
-        return (this.scope!= null);
-    }
-
     /**
      * Gets the value of the interval property.
      * 
@@ -124,10 +119,6 @@ public class Ts
      */
     public void setInterval(Interval value) {
         this.interval = value;
-    }
-
-    public boolean isSetInterval() {
-        return (this.interval!= null);
     }
 
     /**
@@ -154,10 +145,6 @@ public class Ts
         this.entity = value;
     }
 
-    public boolean isSetEntity() {
-        return (this.entity!= null);
-    }
-
     /**
      * Gets the value of the bridge property.
      * 
@@ -182,10 +169,6 @@ public class Ts
         this.bridge = value;
     }
 
-    public boolean isSetBridge() {
-        return (this.bridge!= null);
-    }
-
     /**
      * Gets the value of the statistic property.
      * 
@@ -208,10 +191,6 @@ public class Ts
      */
     public void setStatistic(Statistic value) {
         this.statistic = value;
-    }
-
-    public boolean isSetStatistic() {
-        return (this.statistic!= null);
     }
 
     /**
@@ -243,14 +222,6 @@ public class Ts
         return this.transaction;
     }
 
-    public boolean isSetTransaction() {
-        return ((this.transaction!= null)&&(!this.transaction.isEmpty()));
-    }
-
-    public void unsetTransaction() {
-        this.transaction = null;
-    }
-
     /**
      * Gets the value of the data property.
      * 
@@ -280,14 +251,6 @@ public class Ts
         return this.data;
     }
 
-    public boolean isSetData() {
-        return ((this.data!= null)&&(!this.data.isEmpty()));
-    }
-
-    public void unsetData() {
-        this.data = null;
-    }
-
     /**
      * Gets the value of the ds property.
      * 
@@ -315,14 +278,6 @@ public class Ts
             ds = new ArrayList<Ds>();
         }
         return this.ds;
-    }
-
-    public boolean isSetDs() {
-        return ((this.ds!= null)&&(!this.ds.isEmpty()));
-    }
-
-    public void unsetDs() {
-        this.ds = null;
     }
 
 }

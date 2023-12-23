@@ -24,6 +24,7 @@
 	<xsd:import namespace="http://www.jeesl.org/finance" schemaLocation="jeesl/finance.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/dev/srs" schemaLocation="jeesl/dev/srs.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/survey" schemaLocation="jeesl/module/survey.xsd"/>
+	<xsd:import namespace="http://www.jeesl.org/timeseries" schemaLocation="jeesl/module/timeseries.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/workflow" schemaLocation="jeesl/module/workflow.xsd"/>
 	
 	<xsd:import namespace="http://www.jeesl.org/job" schemaLocation="jeesl/module/job.xsd"/>

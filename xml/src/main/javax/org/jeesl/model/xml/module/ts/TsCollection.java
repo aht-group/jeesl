@@ -72,12 +72,4 @@ public class TsCollection
         return this.ts;
     }
 
-    public boolean isSetTs() {
-        return ((this.ts!= null)&&(!this.ts.isEmpty()));
-    }
-
-    public void unsetTs() {
-        this.ts = null;
-    }
-
 }
