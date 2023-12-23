@@ -72,12 +72,4 @@ public class Activities
         return this.activity;
     }
 
-    public boolean isSetActivity() {
-        return ((this.activity!= null)&&(!this.activity.isEmpty()));
-    }
-
-    public void unsetActivity() {
-        this.activity = null;
-    }
-
 }

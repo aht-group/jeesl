@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Contexts;
 
 
@@ -79,10 +78,6 @@ public class Workflow
         this.contexts = value;
     }
 
-    public boolean isSetContexts() {
-        return (this.contexts!= null);
-    }
-
     /**
      * Gets the value of the processes property.
      * 
@@ -105,10 +100,6 @@ public class Workflow
      */
     public void setProcesses(Processes value) {
         this.processes = value;
-    }
-
-    public boolean isSetProcesses() {
-        return (this.processes!= null);
     }
 
     /**
@@ -135,10 +126,6 @@ public class Workflow
         this.activities = value;
     }
 
-    public boolean isSetActivities() {
-        return (this.activities!= null);
-    }
-
     /**
      * Gets the value of the stage property.
      * 
@@ -161,10 +148,6 @@ public class Workflow
      */
     public void setStage(Stage value) {
         this.stage = value;
-    }
-
-    public boolean isSetStage() {
-        return (this.stage!= null);
     }
 
 }

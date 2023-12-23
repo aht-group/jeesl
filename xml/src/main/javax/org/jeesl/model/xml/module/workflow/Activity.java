@@ -83,10 +83,6 @@ public class Activity
         this.user = value;
     }
 
-    public boolean isSetUser() {
-        return (this.user!= null);
-    }
-
     /**
      * Gets the value of the transition property.
      * 
@@ -111,10 +107,6 @@ public class Activity
         this.transition = value;
     }
 
-    public boolean isSetTransition() {
-        return (this.transition!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -123,7 +115,7 @@ public class Activity
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -135,16 +127,8 @@ public class Activity
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -155,7 +139,7 @@ public class Activity
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -167,16 +151,8 @@ public class Activity
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -201,10 +177,6 @@ public class Activity
      */
     public void setRecord(XMLGregorianCalendar value) {
         this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
@@ -79,8 +80,8 @@ public class XmlProcessFactory<L extends JeeslLang, D extends JeeslDescription,
 		this.q=q;
 		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
-		if(q.isSetContext()) {xfContext = new XmlContextFactory<>(localeCode,q.getContext());}
-		if(q.isSetStage()) {xfStage = new XmlStageFactory<>(localeCode,q.getStage().get(0));}
+		if(Objects.nonNull(q.getContext())) {xfContext = new XmlContextFactory<>(localeCode,q.getContext());}
+		if(ObjectUtils.isNotEmpty(q.getStage())) {xfStage = new XmlStageFactory<>(localeCode,q.getStage().get(0));}
 	}
 	
 	public void lazy(WorkflowFactoryBuilder<L,D,WX,WP,WPD,WS,WST,WSP,?,?,?,WT,WTT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?> fbWorkflow,
@@ -96,17 +97,17 @@ public class XmlProcessFactory<L extends JeeslLang, D extends JeeslDescription,
 	public org.jeesl.model.xml.module.workflow.Process build(WP process)
 	{
 		org.jeesl.model.xml.module.workflow.Process xml = build();
-		if(q.isSetId()) {xml.setId(process.getId());}
-		if(q.isSetPosition()) {xml.setPosition(process.getPosition());}
-		if(q.isSetCode()) {xml.setCode(process.getCode());}
+		if(Objects.nonNull(q.getId())) {xml.setId(process.getId());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(process.getPosition());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(process.getCode());}
 		
-		if(localeCode!=null && q.isSetLabel() && process.getName().containsKey(localeCode)) {xml.setLabel(process.getName().get(localeCode).getLang());}
+		if(localeCode!=null && Objects.nonNull(q.getLabel()) && process.getName().containsKey(localeCode)) {xml.setLabel(process.getName().get(localeCode).getLang());}
 		
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(process.getName()));}
 		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(process.getDescription()));}
-		if(q.isSetContext()) {xml.setContext(xfContext.build(process.getContext()));}
+		if(Objects.nonNull(q.getContext())) {xml.setContext(xfContext.build(process.getContext()));}
 		
-		if(q.isSetStage())
+		if(ObjectUtils.isNotEmpty(q.getStage()))
 		{
 			List<WS> stages = new ArrayList<WS>();
 			if(fbWorkflow!=null && fWorkflow!=null) {stages.addAll(fWorkflow.allForParent(fbWorkflow.getClassStage(), process));}

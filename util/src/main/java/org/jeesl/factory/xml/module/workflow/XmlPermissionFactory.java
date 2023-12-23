@@ -38,10 +38,10 @@ public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescriptio
 	public XmlPermissionFactory(String localeCode, Permission q)
 	{
 		this.q=q;
-		if(q.isSetType()) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
-		if(q.isSetLevel()) {xfLevel = new XmlLevelFactory<>(localeCode,q.getLevel());}
+		if(Objects.nonNull(q.getType())) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
+		if(Objects.nonNull(q.getLevel())) {xfLevel = new XmlLevelFactory<>(localeCode,q.getLevel());}
 		
-		if(q.isSetRole() && Objects.nonNull(q.getRole().getLangs())) {xfLangs = new XmlLangsFactory<>(q.getRole().getLangs());}
+		if(Objects.nonNull(q.getRole()) && Objects.nonNull(q.getRole().getLangs())) {xfLangs = new XmlLangsFactory<>(q.getRole().getLangs());}
 //		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
 	}
 	
@@ -50,11 +50,11 @@ public class XmlPermissionFactory<L extends JeeslLang, D extends JeeslDescriptio
 	public Permission build(WSP permission)
 	{
 		Permission xml = build();
-		if(q.isSetId()) {xml.setId(permission.getId());}
-		if(q.isSetPosition()) {xml.setPosition(permission.getPosition());}
-		if(q.isSetType()) {xml.setType(xfType.build(permission.getType()));}
-		if(q.isSetLevel()) {xml.setLevel(xfLevel.build(permission.getModificationLevel()));}
-		if(q.isSetRole())
+		if(Objects.nonNull(q.getId())) {xml.setId(permission.getId());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(permission.getPosition());}
+		if(Objects.nonNull(q.getType())) {xml.setType(xfType.build(permission.getType()));}
+		if(Objects.nonNull(q.getLevel())) {xml.setLevel(xfLevel.build(permission.getModificationLevel()));}
+		if(Objects.nonNull(q.getRole()))
 		{
 			Role role = XmlRoleFactory.build(permission.getRole().getCode());
 			if(Objects.nonNull(q.getRole().getLangs())) {role.setLangs(xfLangs.getUtilsLangs(permission.getRole().getName()));}
