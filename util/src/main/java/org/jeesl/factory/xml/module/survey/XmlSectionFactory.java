@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.module.survey;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
@@ -44,8 +45,8 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 		this.localeCode=localeCode;
 		this.q=q;
 		
-		if(q.isSetSection()) {xfSection = new XmlSectionFactory<>(localeCode,q.getSection().get(0));}
-		if(q.isSetQuestion()){xfQuestion = new XmlQuestionFactory<>(localeCode,q.getQuestion().get(0));}
+		if(ObjectUtils.isNotEmpty(q.getSection())) {xfSection = new XmlSectionFactory<>(localeCode,q.getSection().get(0));}
+		if(ObjectUtils.isNotEmpty(q.getQuestion())) {xfQuestion = new XmlQuestionFactory<>(localeCode,q.getQuestion().get(0));}
 	}
 	
 	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,SECTION,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey)
@@ -59,15 +60,15 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 	{
 		if(fSurvey!=null){ejb = fSurvey.load(ejb);}
 		Section xml = new Section();
-		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetCode()) {xml.setCode(ejb.getCode());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
 		
-		if(q.isSetDescription()){xml.setDescription(XmlDescriptionFactory.build(ejb.getName().get(localeCode).getLang()));}
-		if(q.isSetRemark() && ejb.getRemark()!=null){xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
+		if(Objects.nonNull(q.getDescription())) {xml.setDescription(XmlDescriptionFactory.build(ejb.getName().get(localeCode).getLang()));}
+		if(ObjectUtils.allNotNull(q.getRemark(),ejb.getRemark())) {xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
 		
-		if(q.isSetQuestion())
+		if(ObjectUtils.isNotEmpty(q.getQuestion()))
 		{
 			for(QUESTION question : ejb.getQuestions())
 			{
@@ -75,7 +76,7 @@ public class XmlSectionFactory<L extends JeeslLang,D extends JeeslDescription,
 			}
 		}
 		
-		if(q.isSetSection())
+		if(ObjectUtils.isNotEmpty(q.getSection()))
 		{
 			for(SECTION section : ejb.getSections())
 			{

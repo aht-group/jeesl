@@ -1,5 +1,8 @@
 package org.jeesl.factory.xml.module.survey;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurvey;
@@ -63,10 +66,10 @@ public class XmlDataFactory<L extends JeeslLang,D extends JeeslDescription,
 	{
 		this.q=q;
 		
-		if(q.isSetSurvey()) {xfSurvey = new XmlSurveyFactory<>(localeCode,q.getSurvey());}
-		if(q.isSetCorrelation()){xfCorrelation = new XmlCorrelationFactory<>(q.getCorrelation());}
-		if(q.isSetAnswer()){xfAnswer = new XmlAnswerFactory<>(localeCode,q.getAnswer().get(0));}
-		if(q.isSetSection()){xfSection = new XmlSectionFactory<>(localeCode,q.getSection().get(0));}
+		if(Objects.nonNull(q.getSurvey())) {xfSurvey = new XmlSurveyFactory<>(localeCode,q.getSurvey());}
+		if(Objects.nonNull(q.getCorrelation())) {xfCorrelation = new XmlCorrelationFactory<>(q.getCorrelation());}
+		if(ObjectUtils.isNotEmpty(q.getSection())) {xfSection = new XmlSectionFactory<>(localeCode,q.getSection().get(0));}
+		if(ObjectUtils.isNotEmpty(q.getAnswer())) {xfAnswer = new XmlAnswerFactory<>(localeCode,q.getAnswer().get(0));}
 	}
 	
 	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey,
@@ -74,8 +77,8 @@ public class XmlDataFactory<L extends JeeslLang,D extends JeeslDescription,
 	{
 		this.fTemplate=fTemplate;
 		this.fSurvey=fSurvey;
-		if(q.isSetSection()){xfSection.lazyLoad(fSurvey);}
-		if(q.isSetAnswer()) {xfAnswer.lazyLoad(fSurvey);}
+		if(ObjectUtils.isNotEmpty(q.getSection())) {xfSection.lazyLoad(fSurvey);}
+		if(ObjectUtils.isNotEmpty(q.getAnswer())) {xfAnswer.lazyLoad(fSurvey);}
 	}
 	
 	public Data build(DATA ejb)
@@ -83,20 +86,12 @@ public class XmlDataFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(fSurvey!=null){ejb = fSurvey.load(ejb);}
 		
 		Data xml = build();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		
-		if(q.isSetSurvey()) {xml.setSurvey(xfSurvey.build(ejb.getSurvey()));}
-		if(q.isSetCorrelation()){xml.setCorrelation(xfCorrelation.build(ejb.getCorrelation()));}
+		if(Objects.nonNull(q.getSurvey())) {xml.setSurvey(xfSurvey.build(ejb.getSurvey()));}
+		if(Objects.nonNull(q.getCorrelation())) {xml.setCorrelation(xfCorrelation.build(ejb.getCorrelation()));}
 		
-		if(q.isSetAnswer())
-		{
-			for(ANSWER answer : ejb.getAnswers())
-			{
-				xml.getAnswer().add(xfAnswer.build(answer));
-			}
-		}
-		
-		if(q.isSetSection())
+		if(ObjectUtils.isNotEmpty(q.getSection()))
 		{
 			TEMPLATE template = ejb.getSurvey().getTemplate();
 			if(fTemplate!=null){template = fTemplate.load(template,false,false);}
@@ -106,13 +101,21 @@ public class XmlDataFactory<L extends JeeslLang,D extends JeeslDescription,
 			}
 		}
 		
+		if(ObjectUtils.isNotEmpty(q.getAnswer()))
+		{
+			for(ANSWER answer : ejb.getAnswers())
+			{
+				xml.getAnswer().add(xfAnswer.build(answer));
+			}
+		}
+		
 		return xml;
 	}
 	
 	public static Data id()
 	{
 		Data xml = build();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	

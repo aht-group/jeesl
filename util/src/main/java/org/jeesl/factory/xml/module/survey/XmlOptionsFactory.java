@@ -1,5 +1,6 @@
 package org.jeesl.factory.xml.module.survey;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyOption;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -21,7 +22,7 @@ public class XmlOptionsFactory <L extends JeeslLang, D extends JeeslDescription,
 	public XmlOptionsFactory(String localeCode, Options q)
 	{
 		this.q=q;
-		if(q.isSetOption()) {xfOption = new XmlOptionFactory<L,D,OPTION>(localeCode,q.getOption().get(0));}
+		if(ObjectUtils.isNotEmpty(q.getOption())) {xfOption = new XmlOptionFactory<L,D,OPTION>(localeCode,q.getOption().get(0));}
 	}
 	
 	public static Options build() {return new Options();}

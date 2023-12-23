@@ -76,6 +76,11 @@
 		</jxb:schemaBindings>
     </jxb:bindings> 
     
+    <jxb:bindings schemaLocation="jeesl/module/bb.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.bb"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 	<jxb:bindings schemaLocation="jeesl/module/calendar.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.calendar"/>
@@ -86,9 +91,9 @@
             <jxb:package name="org.jeesl.model.xml.module.srs"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-	<jxb:bindings schemaLocation="jeesl/module/bb.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="../xsd/jeesl/module/survey.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.module.bb"/>
+            <jxb:package name="org.jeesl.model.xml.module.survey"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 	<jxb:bindings schemaLocation="../xsd/jeesl/module/workflow.xsd" node="/xsd:schema">

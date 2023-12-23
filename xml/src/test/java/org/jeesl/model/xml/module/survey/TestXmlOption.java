@@ -13,15 +13,15 @@ public class TestXmlOption extends AbstractXmlSurveyTest<Option>
 
     public Option build(boolean withChilds)
     {
-    		Option xml = new Option();
-	    	xml.setId(123);
-	    	xml.setLabel("myLabel");
-	    	xml.setCode("myCode");
-    	
-	    	if(withChilds)
-	    	{
+		Option xml = new Option();
+    	xml.setId(123l);
+    	xml.setLabel("myLabel");
+    	xml.setCode("myCode");
 	
-	    	}
+    	if(withChilds)
+    	{
+
+    	}
     	
     	return xml;
     }

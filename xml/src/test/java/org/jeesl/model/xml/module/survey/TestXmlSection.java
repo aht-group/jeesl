@@ -16,7 +16,7 @@ public class TestXmlSection extends AbstractXmlSurveyTest<Section>
     public Section build(boolean withChilds)
     {
     	Section xml = new Section();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setPosition(2);
     	xml.setVisible(true);

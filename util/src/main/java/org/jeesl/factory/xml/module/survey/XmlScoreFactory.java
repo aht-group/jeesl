@@ -1,5 +1,6 @@
 package org.jeesl.factory.xml.module.survey;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
@@ -7,13 +8,9 @@ import org.jeesl.model.xml.module.survey.Score;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XmlScoreFactory<
-				SCHEME extends JeeslSurveyScheme<?,?,?,SCORE>,
-				
-				QUESTION extends JeeslSurveyQuestion<?,?,?,?,?,?,SCORE,?,?,?,?>,
-				
-				SCORE extends JeeslSurveyScore<?,?,SCHEME,QUESTION>
-				>
+public class XmlScoreFactory<SCHEME extends JeeslSurveyScheme<?,?,?,SCORE>,
+							QUESTION extends JeeslSurveyQuestion<?,?,?,?,?,?,SCORE,?,?,?,?>,
+							SCORE extends JeeslSurveyScore<?,?,SCHEME,QUESTION>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlScoreFactory.class);
 	
@@ -31,7 +28,7 @@ public class XmlScoreFactory<
 	{
 		Score xml = build();
 		
-		if(q.isSetMax() && ejb.getMaxScore()!=null){xml.setMax(ejb.getMaxScore());}
+		if(ObjectUtils.allNotNull(q.getMax(),ejb.getMaxScore())) {xml.setMax(ejb.getMaxScore());}
 		
 		return xml;
 	}

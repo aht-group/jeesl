@@ -16,7 +16,7 @@ public class TestXmlSurvey extends AbstractXmlSurveyTest<Survey>
     public Survey build(boolean withChilds)
     {
     	Survey xml = new Survey();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setName("myName");
     	xml.setValidFrom(AbstractXmlSurveyTest.getDefaultXmlDate());
     	xml.setValidTo(AbstractXmlSurveyTest.getDefaultXmlDate());
