@@ -16,7 +16,7 @@ public class TestXmlTest extends AbstractXmlQaTest<org.jeesl.model.xml.module.de
     public org.jeesl.model.xml.module.dev.qa.Test build(boolean withChilds)
     {
     	org.jeesl.model.xml.module.dev.qa.Test xml = new org.jeesl.model.xml.module.dev.qa.Test();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setName("myName");
     	xml.setDuration(120);

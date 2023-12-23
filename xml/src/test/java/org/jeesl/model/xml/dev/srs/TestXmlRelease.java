@@ -1,7 +1,7 @@
 package org.jeesl.model.xml.dev.srs;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.srs.Release;
+import org.jeesl.model.xml.module.dev.srs.Release;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

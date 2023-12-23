@@ -84,16 +84,22 @@
             <jxb:package name="org.jeesl.model.xml.module.calendar"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+        <jxb:bindings schemaLocation="aht/qa.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.dev.qa"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="jeesl/dev/srs.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.dev.srs"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 	<jxb:bindings schemaLocation="jeesl/finance.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.finance"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-	<jxb:bindings schemaLocation="jeesl/dev/srs.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.module.srs"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
+	
 	<jxb:bindings schemaLocation="../xsd/jeesl/module/survey.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.survey"/>

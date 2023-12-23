@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.module.srs;
+package org.jeesl.model.xml.module.dev.srs;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
