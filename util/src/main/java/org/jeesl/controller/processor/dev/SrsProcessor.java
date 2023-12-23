@@ -3,7 +3,7 @@ package org.jeesl.controller.processor.dev;
 import java.util.List;
 
 import org.jeesl.factory.xml.dev.srs.XmlSrsFactory;
-import org.jeesl.model.xml.dev.srs.Srs;
+import org.jeesl.model.xml.module.srs.Srs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

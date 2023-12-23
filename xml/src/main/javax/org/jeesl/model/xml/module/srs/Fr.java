@@ -1,12 +1,14 @@
 
-package org.jeesl.model.xml.dev.srs;
+package org.jeesl.model.xml.module.srs;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.openfuxml.model.xml.core.ofx.Sections;
 
 
 /**
@@ -19,6 +21,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element ref="{http://www.jeesl.org/dev/srs}module"/&gt;
+ *         &lt;element ref="{http://www.openfuxml.org}sections"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -30,17 +34,71 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "release")
-public class Release
-    implements Serializable
+@XmlType(name = "", propOrder = {
+    "module",
+    "sections"
+})
+@XmlRootElement(name = "fr")
+public class Fr implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
+    @XmlElement(required = true)
+    protected Module module;
+    @XmlElement(namespace = "http://www.openfuxml.org", required = true)
+    protected Sections sections;
     @XmlAttribute(name = "code")
     protected String code;
     @XmlAttribute(name = "name")
     protected String name;
+
+    /**
+     * Gets the value of the module property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Module }
+     *     
+     */
+    public Module getModule() {
+        return module;
+    }
+
+    /**
+     * Sets the value of the module property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Module }
+     *     
+     */
+    public void setModule(Module value) {
+        this.module = value;
+    }
+
+    /**
+     * Gets the value of the sections property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Sections }
+     *     
+     */
+    public Sections getSections() {
+        return sections;
+    }
+
+    /**
+     * Sets the value of the sections property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Sections }
+     *     
+     */
+    public void setSections(Sections value) {
+        this.sections = value;
+    }
 
     /**
      * Gets the value of the code property.

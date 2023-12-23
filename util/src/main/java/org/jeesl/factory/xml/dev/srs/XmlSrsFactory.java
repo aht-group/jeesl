@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.jeesl.model.xml.dev.srs.Actors;
-import org.jeesl.model.xml.dev.srs.Frs;
-import org.jeesl.model.xml.dev.srs.Srs;
+import org.jeesl.model.xml.module.srs.Actors;
+import org.jeesl.model.xml.module.srs.Frs;
+import org.jeesl.model.xml.module.srs.Srs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
