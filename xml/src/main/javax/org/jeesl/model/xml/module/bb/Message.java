@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.cms.text.Markup;
 import org.jeesl.model.xml.io.locale.status.Type;
 
@@ -82,10 +81,6 @@ public class Message
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the markup property.
      * 
@@ -108,10 +103,6 @@ public class Message
      */
     public void setMarkup(Markup value) {
         this.markup = value;
-    }
-
-    public boolean isSetMarkup() {
-        return (this.markup!= null);
     }
 
     /**
@@ -138,10 +129,6 @@ public class Message
         this.date = value;
     }
 
-    public boolean isSetDate() {
-        return (this.date!= null);
-    }
-
     /**
      * Gets the value of the subject property.
      * 
@@ -164,10 +151,6 @@ public class Message
      */
     public void setSubject(String value) {
         this.subject = value;
-    }
-
-    public boolean isSetSubject() {
-        return (this.subject!= null);
     }
 
 }
