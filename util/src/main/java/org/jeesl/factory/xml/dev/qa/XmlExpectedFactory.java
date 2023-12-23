@@ -1,7 +1,6 @@
 package org.jeesl.factory.xml.dev.qa;
 
-import net.sf.ahtutils.xml.qa.Expected;
-
+import org.jeesl.model.xml.module.dev.qa.Expected;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

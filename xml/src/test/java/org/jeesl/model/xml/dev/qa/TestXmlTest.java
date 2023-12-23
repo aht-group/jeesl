@@ -6,16 +6,16 @@ import org.jeesl.model.xml.system.status.TestXmlStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestXmlTest extends AbstractXmlQaTest<net.sf.ahtutils.xml.qa.Test>
+public class TestXmlTest extends AbstractXmlQaTest<org.jeesl.model.xml.module.dev.qa.Test>
 {
-	final static Logger logger = LoggerFactory.getLogger(net.sf.ahtutils.xml.qa.Test.class);
+	final static Logger logger = LoggerFactory.getLogger(org.jeesl.model.xml.module.dev.qa.Test.class);
 	
-	public TestXmlTest(){super(net.sf.ahtutils.xml.qa.Test.class);}
-	public static net.sf.ahtutils.xml.qa.Test create(boolean withChildren){return (new TestXmlTest()).build(withChildren);}   
+	public TestXmlTest(){super(org.jeesl.model.xml.module.dev.qa.Test.class);}
+	public static org.jeesl.model.xml.module.dev.qa.Test create(boolean withChildren){return (new TestXmlTest()).build(withChildren);}   
     
-    public net.sf.ahtutils.xml.qa.Test build(boolean withChilds)
+    public org.jeesl.model.xml.module.dev.qa.Test build(boolean withChilds)
     {
-    	net.sf.ahtutils.xml.qa.Test xml = new net.sf.ahtutils.xml.qa.Test();
+    	org.jeesl.model.xml.module.dev.qa.Test xml = new org.jeesl.model.xml.module.dev.qa.Test();
     	xml.setId(123);
     	xml.setCode("myCode");
     	xml.setName("myName");

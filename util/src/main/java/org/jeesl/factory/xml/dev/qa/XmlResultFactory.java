@@ -12,6 +12,10 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.model.xml.module.dev.qa.Actual;
+import org.jeesl.model.xml.module.dev.qa.Comment;
+import org.jeesl.model.xml.module.dev.qa.Result;
+import org.jeesl.model.xml.module.dev.qa.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,10 +29,6 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaStakeholder;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
-import net.sf.ahtutils.xml.qa.Actual;
-import net.sf.ahtutils.xml.qa.Comment;
-import net.sf.ahtutils.xml.qa.Result;
-import net.sf.ahtutils.xml.qa.Test;
 import net.sf.exlp.util.DateUtil;
 
 public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,

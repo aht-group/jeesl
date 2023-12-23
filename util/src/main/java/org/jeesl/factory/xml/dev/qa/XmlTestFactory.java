@@ -12,6 +12,7 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.model.xml.module.dev.qa.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +29,6 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestDiscussion;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestInfo;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
-import net.sf.ahtutils.xml.qa.Test;
 
 public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 							L2 extends JeeslLang, D2 extends JeeslDescription,

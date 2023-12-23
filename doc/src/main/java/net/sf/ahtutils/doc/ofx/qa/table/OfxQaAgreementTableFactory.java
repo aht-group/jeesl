@@ -8,8 +8,6 @@ import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusImageFactory;
 import net.sf.ahtutils.xml.aht.Aht;
-import net.sf.ahtutils.xml.qa.Category;
-import net.sf.ahtutils.xml.qa.Test;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
@@ -17,6 +15,8 @@ import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translations;
+import org.jeesl.model.xml.module.dev.qa.Category;
+import org.jeesl.model.xml.module.dev.qa.Test;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;

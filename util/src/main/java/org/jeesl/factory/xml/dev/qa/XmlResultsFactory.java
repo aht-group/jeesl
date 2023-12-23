@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.dev.qa;
 
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.model.xml.module.dev.qa.Results;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -25,7 +26,6 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestDiscussion;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestInfo;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
-import net.sf.ahtutils.xml.qa.Results;
 
 public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 								L2 extends JeeslLang, D2 extends JeeslDescription,

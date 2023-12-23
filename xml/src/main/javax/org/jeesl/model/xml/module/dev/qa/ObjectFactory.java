@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.qa;
+package org.jeesl.model.xml.module.dev.qa;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

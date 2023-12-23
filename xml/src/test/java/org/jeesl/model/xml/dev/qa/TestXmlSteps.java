@@ -1,14 +1,13 @@
 package org.jeesl.model.xml.dev.qa;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.module.dev.qa.Steps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.qa.Steps;
-
 public class TestXmlSteps extends AbstractXmlQaTest<Steps>
 {
-	final static Logger logger = LoggerFactory.getLogger(net.sf.ahtutils.xml.qa.Test.class);
+	final static Logger logger = LoggerFactory.getLogger(org.jeesl.model.xml.module.dev.qa.Test.class);
 	
 	public TestXmlSteps(){super(Steps.class);}
 	public static Steps create(boolean withChildren){return (new TestXmlSteps()).build(withChildren);}  
