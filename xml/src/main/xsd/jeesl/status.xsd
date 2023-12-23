@@ -6,7 +6,7 @@
 	xmlns:symbol="http://www.jeesl.org/symbol"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 	<xsd:import namespace="https://www.jeesl.org/jeesl/xsd/system/security" schemaLocation="system/security.xsd"/>
-	<xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../exlp/xml/src/main/xsd/io.xsd"/>
+	<xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../exlp/xml/src/main/xsd/exlp/io.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/symbol" schemaLocation="../jeesl/symbol.xsd"/>
 	<xsd:element name="area">
         <xsd:complexType>
