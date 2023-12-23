@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.dev.qa;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.security.XmlStaffFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -61,7 +63,7 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 	public XmlResultFactory(Result q)
 	{
 		this.q=q;
-		if(q.isSetStatus()) {xfResultStatus = new XmlStatusFactory<>(null,q.getStatus());}
+		if(Objects.nonNull(q.getStatus())) {xfResultStatus = new XmlStatusFactory<>(null,q.getStatus());}
 		if(q.isSetStaff()) {xfStaff = new XmlStaffFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QA>(q.getStaff());}
 	}
 	
@@ -79,7 +81,7 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetId()){xml.setId(result.getId());}
 		if(q.isSetRecord() && result.getRecord()!=null){xml.setRecord(DateUtil.toXmlGc(result.getRecord()));}
 		
-		if(q.isSetStatus()){xml.setStatus(xfResultStatus.build(result.getStatus()));}
+		if(Objects.nonNull(q.getStatus())) {xml.setStatus(xfResultStatus.build(result.getStatus()));}
 		if(q.isSetStaff()) {xml.setStaff(xfStaff.build(result.getStaff()));}
 		if(q.isSetActual()){xml.setActual(buildActual(result.getActualResult()));}
 		if(q.isSetComment()){xml.setComment(buildComment(result.getComment()));}

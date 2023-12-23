@@ -1,5 +1,7 @@
 package net.sf.ahtutils.doc.ofx.qa.table;
 
+import java.util.Objects;
+
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translations;
@@ -156,7 +158,7 @@ public class OfxQaFrTableFactory extends AbstractUtilsOfxDocumentationFactory
 	{
 		Row row = new Row();
 		row.getCell().add(XmlCellFactory.createParagraphCell("Pre-Condition"));
-		if(test.isSetPreCondition() && test.getPreCondition().isSetValue())
+		if(Objects.nonNull(test.getPreCondition()) && test.getPreCondition().isSetValue())
 		{
 			row.getCell().add(XmlCellFactory.createParagraphCell(test.getPreCondition().getValue()));
 		}

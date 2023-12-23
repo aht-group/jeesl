@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.dev.qa;
 
+import java.util.Objects;
+
 import org.jeesl.api.facade.module.JeeslQaFacade;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -70,7 +72,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 	public XmlTestFactory(Test q)
 	{
 		this.q=q;
-		if(q.isSetStatus()){xfDeveloperStatus = new XmlStatusFactory<>(null,q.getStatus());}
+		if(Objects.nonNull(q.getStatus())) {xfDeveloperStatus = new XmlStatusFactory<>(null,q.getStatus());}
 		if(q.isSetGroups()) {xfGroups = new XmlGroupsFactory<GROUP,QAT>(q.getGroups());}
 		if(q.isSetInfo()) {xfInfo = new XmlInfoFactory<L2,D2,QATI,QATC>(q.getInfo());}
 		if(q.isSetStatement()) {xfStatement = new XmlStatementFactory<QATS,L2,D2>(null,q.getStatement());}
@@ -98,28 +100,28 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		Test xml = new Test();
 		
-		if(q.isSetId()){xml.setId(test.getId());}
-		if(q.isSetCode()){xml.setCode(test.getCode());}
-		if(q.isSetName()){xml.setName(test.getName());}
-		if(q.isSetVisible()){xml.setVisible(test.getVisible());}
+		if(Objects.nonNull(q.getId())) {xml.setId(test.getId());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(test.getCode());}
+		if(Objects.nonNull(q.getName())) {xml.setName(test.getName());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(test.getVisible());}
 		if(q.isSetDuration())
 		{
 			if(test.getDuration()!=null){xml.setDuration(test.getDuration());}
 			else{xml.setDuration(0);}
 		}
 
-		if(q.isSetReference() && test.getReference()!=null){xml.setReference(XmlReferenceFactory.build(test.getReference()));}
-		if(q.isSetDescription() && test.getDescription()!=null){xml.setDescription(XmlDescriptionFactory.build(test.getDescription()));}
-		if(q.isSetPreCondition() && test.getPreCondition()!=null){xml.setPreCondition(XmlPreConditionFactory.build(test.getPreCondition()));}
+		if(Objects.nonNull(q.getReference()) && test.getReference()!=null){xml.setReference(XmlReferenceFactory.build(test.getReference()));}
+		if(Objects.nonNull(q.getDescription()) && test.getDescription()!=null){xml.setDescription(XmlDescriptionFactory.build(test.getDescription()));}
+		if(Objects.nonNull(q.getPreCondition()) && test.getPreCondition()!=null){xml.setPreCondition(XmlPreConditionFactory.build(test.getPreCondition()));}
 		if(q.isSetSteps() && test.getSteps()!=null){xml.setSteps(XmlStepsFactory.build(test.getSteps()));}
-		if(q.isSetExpected() && test.getExpectedResult()!=null){xml.setExpected(XmlExpectedFactory.build(test.getExpectedResult()));}
+		if(Objects.nonNull(q.getExpected()) && test.getExpectedResult()!=null){xml.setExpected(XmlExpectedFactory.build(test.getExpectedResult()));}
 		
-		if(q.isSetStatement() && test.getClientStatus()!=null){xml.setStatement(xfStatement.build(test.getClientStatus()));}
-		if(q.isSetStatus() && test.getDeveloperStatus()!=null){xml.setStatus(xfDeveloperStatus.build(test.getDeveloperStatus()));}
+		if(Objects.nonNull(q.getStatement()) && test.getClientStatus()!=null){xml.setStatement(xfStatement.build(test.getClientStatus()));}
+		if(Objects.nonNull(q.getStatus()) && test.getDeveloperStatus()!=null){xml.setStatus(xfDeveloperStatus.build(test.getDeveloperStatus()));}
 		
 		if(q.isSetResults())
 		{
-			XmlResultsFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> f = new XmlResultsFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>(q.getResults());
+			XmlResultsFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> f = new XmlResultsFactory<>(q.getResults());
 			xml.setResults(f.build(test));
 		}
 		

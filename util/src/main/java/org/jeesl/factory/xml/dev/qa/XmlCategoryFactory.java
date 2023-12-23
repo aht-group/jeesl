@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.dev.qa;
 
+import java.util.Objects;
+
 import org.jeesl.api.facade.module.JeeslQaFacade;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
@@ -79,9 +81,9 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		Category xml = new Category();
 		
-		if(q.isSetId()){xml.setId(category.getId());}
-		if(q.isSetCode()){xml.setCode(category.getCode());}
-		if(q.isSetName()){xml.setName(category.getName());}
+		if(Objects.nonNull(q.getId())) {xml.setId(category.getId());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(category.getCode());}
+		if(Objects.nonNull(q.getName())) {xml.setName(category.getName());}
 		
 		if(q.isSetTest())
 		{

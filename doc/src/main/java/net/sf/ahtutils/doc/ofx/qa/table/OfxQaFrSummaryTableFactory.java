@@ -2,6 +2,7 @@ package net.sf.ahtutils.doc.ofx.qa.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
@@ -164,7 +165,7 @@ public class OfxQaFrSummaryTableFactory extends AbstractUtilsOfxDocumentationFac
 			row.getCell().add(XmlCellFactory.createParagraphCell(test.getCode()));
 			row.getCell().add(XmlCellFactory.createParagraphCell(test.getName()));
 			
-			if(test.isSetInfo() && test.getInfo().isSetStatus())
+			if(Objects.nonNull(test.getInfo()) && Objects.nonNull(test.getInfo().getStatus()))
 			{
 				row.getCell().add(XmlCellFactory.image(OfxStatusImageFactory.build(imagePathPrefix,StatusXpath.getStatus(testConditions.getStatus(), test.getInfo().getStatus().getCode()))));
 			}
