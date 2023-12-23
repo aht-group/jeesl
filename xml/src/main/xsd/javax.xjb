@@ -50,6 +50,11 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+	<jxb:bindings schemaLocation="jeesl/io/attribute.xsd" node="/xsd:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="org.jeesl.model.xml.io.attribute"/>
+		</jxb:schemaBindings>
+    </jxb:bindings>
 	<jxb:bindings schemaLocation="aht/dbseed.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.db"/>

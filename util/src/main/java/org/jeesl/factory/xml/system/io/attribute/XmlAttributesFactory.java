@@ -8,8 +8,8 @@ import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeSet;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.model.xml.io.attribute.Attributes;
 import org.jeesl.model.xml.jeesl.QueryAttribute;
-import org.jeesl.model.xml.system.io.attribute.Attributes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
