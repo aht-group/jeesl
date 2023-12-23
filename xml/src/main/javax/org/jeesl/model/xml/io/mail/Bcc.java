@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.io.mail;
+package org.jeesl.model.xml.io.mail;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "emailAddress"
 })
-@XmlRootElement(name = "to")
-public class To
+@XmlRootElement(name = "bcc")
+public class Bcc
     implements Serializable
 {
 

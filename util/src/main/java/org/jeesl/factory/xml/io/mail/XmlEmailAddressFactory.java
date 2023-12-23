@@ -4,7 +4,7 @@ import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 
 import org.jeesl.interfaces.model.system.security.user.JeeslSimpleUser;
-import org.jeesl.model.xml.system.io.mail.EmailAddress;
+import org.jeesl.model.xml.io.mail.EmailAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

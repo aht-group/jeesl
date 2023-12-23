@@ -10,7 +10,7 @@ import javax.mail.internet.MimeMultipart;
 
 import org.jeesl.mail.msg.FreemarkerMimeContentCreator;
 import org.jeesl.mail.msg.MimeMessageCreator;
-import org.jeesl.model.xml.system.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

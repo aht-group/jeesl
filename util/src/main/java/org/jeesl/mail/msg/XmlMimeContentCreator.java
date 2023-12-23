@@ -6,9 +6,9 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import org.jeesl.model.xml.system.io.mail.Attachment;
-import org.jeesl.model.xml.system.io.mail.Image;
-import org.jeesl.model.xml.system.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Attachment;
+import org.jeesl.model.xml.io.mail.Image;
+import org.jeesl.model.xml.io.mail.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

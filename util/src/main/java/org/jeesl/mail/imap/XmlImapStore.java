@@ -11,8 +11,8 @@ import javax.mail.Store;
 import javax.mail.search.FlagTerm;
 
 import org.jeesl.factory.xml.io.mail.XmlMailFactory;
-import org.jeesl.model.xml.system.io.mail.Mail;
-import org.jeesl.model.xml.system.io.mail.Mails;
+import org.jeesl.model.xml.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

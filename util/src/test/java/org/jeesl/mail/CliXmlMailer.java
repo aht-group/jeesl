@@ -17,9 +17,9 @@ import org.jeesl.factory.xml.io.mail.XmlHeaderFactory;
 import org.jeesl.factory.xml.io.mail.XmlMailFactory;
 import org.jeesl.factory.xml.system.util.text.XmlExampleFactory;
 import org.jeesl.mail.smtp.XmlMailSender;
-import org.jeesl.model.xml.system.io.mail.Header;
-import org.jeesl.model.xml.system.io.mail.Mail;
-import org.jeesl.model.xml.system.io.mail.Mails;
+import org.jeesl.model.xml.io.mail.Header;
+import org.jeesl.model.xml.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -14,7 +14,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
-import org.jeesl.model.xml.system.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mail;
 
 public interface JeeslIoMailFacade <L extends JeeslLang,D extends JeeslDescription,
 									CATEGORY extends JeeslStatus<L,D,CATEGORY>,

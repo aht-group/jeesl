@@ -15,8 +15,8 @@ import net.sf.exlp.util.xml.JaxbUtil;
 import org.jdom2.Document;
 import org.jdom2.output.Format;
 import org.jeesl.exception.processing.UtilsDeveloperException;
-import org.jeesl.model.xml.system.io.mail.Mail;
-import org.jeesl.model.xml.system.io.mail.Mails;
+import org.jeesl.model.xml.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mails;
 import org.jeesl.util.query.xpath.MailXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,8 +71,8 @@ public class FreemarkerEngine
 		{
 			Mail mail = MailXpath.getMail(mails, cfgMail.getCode());
 
-			org.jeesl.model.xml.system.io.mail.Template requestedTemplate =  cfgMail.getTemplate().get(0);
-			org.jeesl.model.xml.system.io.mail.Template template = MailXpath.getTemplate(mail, requestedTemplate.getLang(), requestedTemplate.getType());
+			org.jeesl.model.xml.io.mail.Template requestedTemplate =  cfgMail.getTemplate().get(0);
+			org.jeesl.model.xml.io.mail.Template template = MailXpath.getTemplate(mail, requestedTemplate.getLang(), requestedTemplate.getType());
 			
 			StringBuffer sb = new StringBuffer();
 				sb.append(mails.getDir());

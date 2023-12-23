@@ -7,9 +7,9 @@ import org.jeesl.api.rest.rs.jx.io.mail.JeeslIoMailRest;
 import org.jeesl.controller.handler.cli.JeeslCliOptionHandler;
 import org.jeesl.factory.txt.system.io.mail.core.TxtMailFactory;
 import org.jeesl.mail.smtp.TextMailSender;
-import org.jeesl.model.xml.system.io.mail.Attachment;
-import org.jeesl.model.xml.system.io.mail.Mail;
-import org.jeesl.model.xml.system.io.mail.Mails;
+import org.jeesl.model.xml.io.mail.Attachment;
+import org.jeesl.model.xml.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -18,9 +18,9 @@ import org.jeesl.interfaces.model.module.workflow.msg.JeeslWorkflowNotification;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowStage;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.model.xml.system.io.mail.EmailAddress;
-import org.jeesl.model.xml.system.io.mail.Mail;
-import org.jeesl.model.xml.system.io.mail.Mails;
+import org.jeesl.model.xml.io.mail.EmailAddress;
+import org.jeesl.model.xml.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mails;
 
 public interface JeeslWorkflowMessageHandler<WS extends JeeslWorkflowStage<?,?,?,?,?,?,?>,
 											WAN extends JeeslWorkflowActionNotification<?,MT,MC,SR,RE>,

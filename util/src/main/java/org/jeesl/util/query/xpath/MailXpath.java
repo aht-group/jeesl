@@ -6,9 +6,9 @@ import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.jeesl.model.xml.system.io.mail.Mail;
-import org.jeesl.model.xml.system.io.mail.Mails;
-import org.jeesl.model.xml.system.io.mail.Template;
+import org.jeesl.model.xml.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mails;
+import org.jeesl.model.xml.io.mail.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.io.mail;
+package org.jeesl.model.xml.io.mail;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

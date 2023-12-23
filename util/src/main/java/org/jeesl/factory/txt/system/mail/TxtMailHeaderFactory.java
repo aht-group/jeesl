@@ -1,7 +1,7 @@
 package org.jeesl.factory.txt.system.mail;
 
-import org.jeesl.model.xml.system.io.mail.EmailAddress;
-import org.jeesl.model.xml.system.io.mail.Header;
+import org.jeesl.model.xml.io.mail.EmailAddress;
+import org.jeesl.model.xml.io.mail.Header;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

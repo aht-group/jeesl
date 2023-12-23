@@ -3,10 +3,10 @@ package org.jeesl.factory.xml.io.mail;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 
-import org.jeesl.model.xml.system.io.mail.EmailAddress;
-import org.jeesl.model.xml.system.io.mail.From;
-import org.jeesl.model.xml.system.io.mail.Header;
-import org.jeesl.model.xml.system.io.mail.To;
+import org.jeesl.model.xml.io.mail.EmailAddress;
+import org.jeesl.model.xml.io.mail.From;
+import org.jeesl.model.xml.io.mail.Header;
+import org.jeesl.model.xml.io.mail.To;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

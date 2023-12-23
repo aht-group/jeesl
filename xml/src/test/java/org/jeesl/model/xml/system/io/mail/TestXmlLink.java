@@ -1,6 +1,7 @@
 package org.jeesl.model.xml.system.io.mail;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.mail.Link;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

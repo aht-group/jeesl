@@ -1,7 +1,7 @@
 package org.jeesl.factory.xml.io.mail;
 
-import org.jeesl.model.xml.system.io.mail.Bcc;
-import org.jeesl.model.xml.system.io.mail.EmailAddress;
+import org.jeesl.model.xml.io.mail.Bcc;
+import org.jeesl.model.xml.io.mail.EmailAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

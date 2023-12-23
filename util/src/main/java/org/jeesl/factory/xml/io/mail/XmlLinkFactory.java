@@ -1,7 +1,7 @@
 package org.jeesl.factory.xml.io.mail;
 
 import org.jeesl.interfaces.model.io.mail.JeeslMailLink;
-import org.jeesl.model.xml.system.io.mail.Link;
+import org.jeesl.model.xml.io.mail.Link;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

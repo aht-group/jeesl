@@ -16,10 +16,10 @@ import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.mail.msg.FreemarkerMimeContentCreator;
 import org.jeesl.mail.msg.MimeMessageCreator;
 import org.jeesl.mail.msg.XmlMimeContentCreator;
-import org.jeesl.model.xml.system.io.mail.Bcc;
-import org.jeesl.model.xml.system.io.mail.Header;
-import org.jeesl.model.xml.system.io.mail.Mail;
-import org.jeesl.model.xml.system.io.mail.Mails;
+import org.jeesl.model.xml.io.mail.Bcc;
+import org.jeesl.model.xml.io.mail.Header;
+import org.jeesl.model.xml.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

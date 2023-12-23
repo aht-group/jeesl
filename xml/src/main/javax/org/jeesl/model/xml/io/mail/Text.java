@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.io.mail;
+package org.jeesl.model.xml.io.mail;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -29,8 +29,8 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "", propOrder = {
     "value"
 })
-@XmlRootElement(name = "html")
-public class Html
+@XmlRootElement(name = "text")
+public class Text
     implements Serializable
 {
 

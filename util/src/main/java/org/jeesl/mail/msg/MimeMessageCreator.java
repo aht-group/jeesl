@@ -9,12 +9,12 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.jeesl.model.xml.system.io.mail.Bcc;
-import org.jeesl.model.xml.system.io.mail.Cc;
-import org.jeesl.model.xml.system.io.mail.EmailAddress;
-import org.jeesl.model.xml.system.io.mail.From;
-import org.jeesl.model.xml.system.io.mail.Header;
-import org.jeesl.model.xml.system.io.mail.To;
+import org.jeesl.model.xml.io.mail.Bcc;
+import org.jeesl.model.xml.io.mail.Cc;
+import org.jeesl.model.xml.io.mail.EmailAddress;
+import org.jeesl.model.xml.io.mail.From;
+import org.jeesl.model.xml.io.mail.Header;
+import org.jeesl.model.xml.io.mail.To;
 
 public class MimeMessageCreator
 {

@@ -1,10 +1,10 @@
 package org.jeesl.mail;
 
 import org.jeesl.exception.processing.UtilsConfigurationException;
-import org.jeesl.model.xml.system.io.mail.EmailAddress;
-import org.jeesl.model.xml.system.io.mail.From;
-import org.jeesl.model.xml.system.io.mail.Header;
-import org.jeesl.model.xml.system.io.mail.To;
+import org.jeesl.model.xml.io.mail.EmailAddress;
+import org.jeesl.model.xml.io.mail.From;
+import org.jeesl.model.xml.io.mail.Header;
+import org.jeesl.model.xml.io.mail.To;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.IOUtils;
-import org.jeesl.model.xml.system.io.mail.Attachment;
+import org.jeesl.model.xml.io.mail.Attachment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

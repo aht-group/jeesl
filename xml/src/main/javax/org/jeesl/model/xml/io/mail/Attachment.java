@@ -1,10 +1,9 @@
 
-package org.jeesl.model.xml.system.io.mail;
+package org.jeesl.model.xml.io.mail;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -32,7 +31,6 @@ import org.exlp.model.xml.io.File;
  *         &lt;/element&gt;
  *         &lt;element ref="{http://exlp.sf.net/io}file"/&gt;
  *       &lt;/sequence&gt;
- *       &lt;attribute name="cid" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -45,8 +43,8 @@ import org.exlp.model.xml.io.File;
     "data",
     "file"
 })
-@XmlRootElement(name = "image")
-public class Image
+@XmlRootElement(name = "attachment")
+public class Attachment
     implements Serializable
 {
 
@@ -56,8 +54,6 @@ public class Image
     protected byte[] data;
     @XmlElement(namespace = "http://exlp.sf.net/io", required = true)
     protected File file;
-    @XmlAttribute(name = "cid")
-    protected String cid;
 
     /**
      * Gets the value of the data property.
@@ -113,34 +109,6 @@ public class Image
 
     public boolean isSetFile() {
         return (this.file!= null);
-    }
-
-    /**
-     * Gets the value of the cid property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCid() {
-        return cid;
-    }
-
-    /**
-     * Sets the value of the cid property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCid(String value) {
-        this.cid = value;
-    }
-
-    public boolean isSetCid() {
-        return (this.cid!= null);
     }
 
 }

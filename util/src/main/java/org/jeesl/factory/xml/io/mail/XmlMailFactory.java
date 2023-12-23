@@ -4,11 +4,11 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 
 import org.jeesl.factory.xml.system.util.text.XmlExampleFactory;
-import org.jeesl.model.xml.system.io.mail.EmailAddress;
-import org.jeesl.model.xml.system.io.mail.Header;
-import org.jeesl.model.xml.system.io.mail.Mail;
-import org.jeesl.model.xml.system.io.mail.Template;
-import org.jeesl.model.xml.system.io.mail.To;
+import org.jeesl.model.xml.io.mail.EmailAddress;
+import org.jeesl.model.xml.io.mail.Header;
+import org.jeesl.model.xml.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Template;
+import org.jeesl.model.xml.io.mail.To;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

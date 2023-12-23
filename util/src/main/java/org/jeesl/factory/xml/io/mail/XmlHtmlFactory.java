@@ -1,6 +1,6 @@
 package org.jeesl.factory.xml.io.mail;
 
-import org.jeesl.model.xml.system.io.mail.Html;
+import org.jeesl.model.xml.io.mail.Html;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

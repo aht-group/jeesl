@@ -3,8 +3,8 @@ package org.jeesl.factory.txt.system.io.mail.core;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.jeesl.model.xml.system.io.mail.Mail;
-import org.jeesl.model.xml.system.io.mail.Mails;
+import org.jeesl.model.xml.io.mail.Mail;
+import org.jeesl.model.xml.io.mail.Mails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
