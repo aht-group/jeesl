@@ -31,7 +31,6 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 
 public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
-								L2 extends JeeslLang, D2 extends JeeslDescription,
 								C extends JeeslSecurityCategory<L,D>,
 								R extends JeeslSecurityRole<L,D,C,V,U,A>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -45,16 +44,12 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 								QASD extends UtilsQaSchedule<QA,QASS>,
 								QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
 								QAC extends UtilsQaCategory<QA,QAT>,
-								QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,QATS>,
+								QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,?>,
 								QAU extends UtilsQaUsability,
-								QAR extends UtilsQaResult<STAFF,QAT,QARS>,
+								QAR extends UtilsQaResult<STAFF,QAT,?>,
 								QASH extends UtilsQaStakeholder<QA>,
 								QATD extends UtilsQaTestDiscussion<STAFF,QAT>,
-								QATI extends UtilsQaTestInfo<QATC>,
-								QATC extends JeeslStatus<L2,D2,QATC>,
-								QATS extends JeeslStatus<L2,D2,QATS>,
-								QARS extends JeeslStatus<L2,D2,QARS>,
-								QAUS extends JeeslStatus<L2,D2,QAUS>>
+								QATI extends UtilsQaTestInfo<?>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlCategoryFactory.class);
 		
@@ -67,8 +62,8 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 	private Class<QAC> cQAC;
 	private Class<QAT> cQAT;
-	private JeeslQaFacade<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> fQa;
-	public void lazyLoader(JeeslQaFacade<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> fQa,Class<QAC> cQAC, Class<QAT> cQAT)
+	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI> fQa;
+	public void lazyLoader(JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI> fQa,Class<QAC> cQAC, Class<QAT> cQAT)
 	{
 		this.fQa=fQa;
 		this.cQAC=cQAC;
