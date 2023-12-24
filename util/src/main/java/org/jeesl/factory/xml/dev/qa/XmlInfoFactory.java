@@ -34,7 +34,7 @@ public class XmlInfoFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 		if(Objects.nonNull(q.getStatus())) {xml.setStatus(xfCondition.build(info.getCondition()));}
 		
-		if(q.isSetComment())
+		if(Objects.nonNull(q.getComment()))
 		{
 			xml.setComment(new Comment());
 			xml.getComment().setValue(info.getDescription());

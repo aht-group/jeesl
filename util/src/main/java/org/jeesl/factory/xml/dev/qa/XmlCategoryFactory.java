@@ -80,7 +80,7 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(Objects.nonNull(q.getCode())) {xml.setCode(category.getCode());}
 		if(Objects.nonNull(q.getName())) {xml.setName(category.getName());}
 		
-		if(q.isSetTest())
+		if(Objects.nonNull(q.getTest()))
 		{
 			logger.warn("Deactivated -- XMAS Issue");
 //			XmlTestFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> f = new XmlTestFactory<>(q.getTest().get(0));

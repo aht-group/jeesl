@@ -72,9 +72,9 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 	{
 		this.q=q;
 		if(Objects.nonNull(q.getStatus())) {xfDeveloperStatus = new XmlStatusFactory<>(null,q.getStatus());}
-		if(q.isSetGroups()) {xfGroups = new XmlGroupsFactory<GROUP,QAT>(q.getGroups());}
-		if(q.isSetInfo()) {xfInfo = new XmlInfoFactory<L,D,QATI,QATC>(q.getInfo());}
-		if(q.isSetStatement()) {xfStatement = new XmlStatementFactory<QATS,L,D>(null,q.getStatement());}
+		if(Objects.nonNull(q.getGroups())) {xfGroups = new XmlGroupsFactory<GROUP,QAT>(q.getGroups());}
+		if(Objects.nonNull(q.getInfo())) {xfInfo = new XmlInfoFactory<L,D,QATI,QATC>(q.getInfo());}
+		if(Objects.nonNull(q.getStatement())) {xfStatement = new XmlStatementFactory<QATS,L,D>(null,q.getStatement());}
 	}
 	
 	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI> fQa;

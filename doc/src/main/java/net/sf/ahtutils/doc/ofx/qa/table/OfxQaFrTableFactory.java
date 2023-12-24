@@ -98,7 +98,7 @@ public class OfxQaFrTableFactory extends AbstractUtilsOfxDocumentationFactory
 		body.getRow().add(buildPreCondition(test));
 		body.getRow().add(buildSteps(test));
 		body.getRow().add(buildDuration(test));
-		if(test.isSetGroups() && test.getGroups().isSetGroup()){body.getRow().add(buildGroups(test.getGroups()));}
+		if(Objects.nonNull(test.getGroups()) && Objects.nonNull(test.getGroups().getGroup())) {body.getRow().add(buildGroups(test.getGroups()));}
 		
 		Content content = new Content();
 		content.getBody().add(body);
@@ -119,7 +119,7 @@ public class OfxQaFrTableFactory extends AbstractUtilsOfxDocumentationFactory
 	{
 		Row row = new Row();
 		row.getCell().add(XmlCellFactory.createParagraphCell("Reference"));
-		if(test.isSetReference() && test.getReference().isSetValue())
+		if(Objects.nonNull(test.getReference()) && Objects.nonNull(test.getReference().getValue()))
 		{
 			row.getCell().add(XmlCellFactory.createParagraphCell(test.getReference().getValue()));
 		}
@@ -158,7 +158,7 @@ public class OfxQaFrTableFactory extends AbstractUtilsOfxDocumentationFactory
 	{
 		Row row = new Row();
 		row.getCell().add(XmlCellFactory.createParagraphCell("Pre-Condition"));
-		if(Objects.nonNull(test.getPreCondition()) && test.getPreCondition().isSetValue())
+		if(Objects.nonNull(test.getPreCondition()) && Objects.nonNull(test.getPreCondition().getValue()))
 		{
 			row.getCell().add(XmlCellFactory.createParagraphCell(test.getPreCondition().getValue()));
 		}
@@ -173,7 +173,7 @@ public class OfxQaFrTableFactory extends AbstractUtilsOfxDocumentationFactory
 	{
 		Row row = new Row();
 		row.getCell().add(XmlCellFactory.createParagraphCell("Test Steps"));
-		if(test.isSetSteps() && test.getSteps().isSetValue())
+		if(Objects.nonNull(test.getSteps()) && Objects.nonNull(test.getSteps().getValue()))
 		{
 			logger.trace("Steps");
 			HtmlTranscoder transcoder = new HtmlTranscoder();
