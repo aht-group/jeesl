@@ -84,7 +84,7 @@
             <jxb:package name="org.jeesl.model.xml.module.calendar"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-        <jxb:bindings schemaLocation="aht/qa.xsd" node="/xsd:schema">
+ <!-- 	<jxb:bindings schemaLocation="aht/qa.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.dev.qa"/>
         </jxb:schemaBindings>
@@ -94,7 +94,7 @@
             <jxb:package name="org.jeesl.model.xml.module.dev.srs"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-	<jxb:bindings schemaLocation="jeesl/finance.xsd" node="/xsd:schema">
+ -->	<jxb:bindings schemaLocation="jeesl/finance.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.finance"/>
         </jxb:schemaBindings>
@@ -133,7 +133,7 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-    
+<!--      
 	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/ofx.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.openfuxml.model.xml.core.ofx"/>
@@ -174,7 +174,7 @@
             <jxb:package name="org.openfuxml.model.xml.addon.wiki"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-
+-->
     <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/exlp/io.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.exlp.model.xml.io"/>
