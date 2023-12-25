@@ -15,13 +15,9 @@ import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaCategory;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaGroup;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaResult;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaSchedule;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaScheduleSlot;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaStaff;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaStakeholder;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
@@ -43,11 +39,8 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 							GROUP extends UtilsQaGroup<STAFF,QA,?>,
 							QA extends UtilsQualityAssurarance<STAFF,?,?>,
 							
-							
-					
-							QAT extends UtilsQaTest<GROUP,?,QAR,?,?,?>,
-							QAU extends UtilsQaUsability,
-							QAR extends UtilsQaResult<STAFF,QAT,QARS>,
+
+							QAR extends UtilsQaResult<STAFF,?,QARS>,
 							QARS extends JeeslStatus<L,D,QARS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlResultFactory.class);
