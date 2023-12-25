@@ -75,10 +75,6 @@ public class Attribute
         this.option = value;
     }
 
-    public boolean isSetOption() {
-        return (this.option!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -101,10 +97,6 @@ public class Attribute
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
     /**
@@ -131,10 +123,6 @@ public class Attribute
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the bool property.
      * 
@@ -143,7 +131,7 @@ public class Attribute
      *     {@link Boolean }
      *     
      */
-    public boolean isBool() {
+    public Boolean isBool() {
         return bool;
     }
 
@@ -155,16 +143,8 @@ public class Attribute
      *     {@link Boolean }
      *     
      */
-    public void setBool(boolean value) {
+    public void setBool(Boolean value) {
         this.bool = value;
-    }
-
-    public boolean isSetBool() {
-        return (this.bool!= null);
-    }
-
-    public void unsetBool() {
-        this.bool = null;
     }
 
 }
