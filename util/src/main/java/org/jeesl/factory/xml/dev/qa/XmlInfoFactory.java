@@ -4,12 +4,12 @@ import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.xml.module.dev.qa.Comment;
+import org.jeesl.model.xml.module.dev.qa.Info;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestInfo;
-import net.sf.ahtutils.xml.qa.Comment;
-import net.sf.ahtutils.xml.qa.Info;
 
 public class XmlInfoFactory<L extends JeeslLang, D extends JeeslDescription,
 							QATI extends UtilsQaTestInfo<QATC>,

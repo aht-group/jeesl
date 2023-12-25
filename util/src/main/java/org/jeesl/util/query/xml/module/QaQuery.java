@@ -10,25 +10,25 @@ import org.jeesl.factory.xml.dev.qa.XmlResultFactory;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.model.xml.io.locale.status.Status;
+import org.jeesl.model.xml.module.dev.qa.Category;
+import org.jeesl.model.xml.module.dev.qa.Comment;
+import org.jeesl.model.xml.module.dev.qa.Description;
+import org.jeesl.model.xml.module.dev.qa.Expected;
+import org.jeesl.model.xml.module.dev.qa.Group;
+import org.jeesl.model.xml.module.dev.qa.Groups;
+import org.jeesl.model.xml.module.dev.qa.Info;
+import org.jeesl.model.xml.module.dev.qa.PreCondition;
+import org.jeesl.model.xml.module.dev.qa.Reference;
+import org.jeesl.model.xml.module.dev.qa.Result;
+import org.jeesl.model.xml.module.dev.qa.Results;
+import org.jeesl.model.xml.module.dev.qa.Steps;
+import org.jeesl.model.xml.module.dev.qa.Test;
 import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.model.xml.system.security.Staff;
 import org.jeesl.util.query.xml.system.SecurityQuery;
 
 import net.sf.ahtutils.factory.xml.status.XmlStatementFactory;
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.ahtutils.xml.qa.Category;
-import net.sf.ahtutils.xml.qa.Comment;
-import net.sf.ahtutils.xml.qa.Description;
-import net.sf.ahtutils.xml.qa.Expected;
-import net.sf.ahtutils.xml.qa.Group;
-import net.sf.ahtutils.xml.qa.Groups;
-import net.sf.ahtutils.xml.qa.Info;
-import net.sf.ahtutils.xml.qa.PreCondition;
-import net.sf.ahtutils.xml.qa.Reference;
-import net.sf.ahtutils.xml.qa.Result;
-import net.sf.ahtutils.xml.qa.Results;
-import net.sf.ahtutils.xml.qa.Steps;
-import net.sf.ahtutils.xml.qa.Test;
 import net.sf.exlp.util.DateUtil;
 
 public class QaQuery

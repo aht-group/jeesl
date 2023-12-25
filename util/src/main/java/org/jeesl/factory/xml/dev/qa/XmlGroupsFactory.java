@@ -1,11 +1,11 @@
 package org.jeesl.factory.xml.dev.qa;
 
+import org.jeesl.model.xml.module.dev.qa.Groups;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaGroup;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
-import net.sf.ahtutils.xml.qa.Groups;
 
 public class XmlGroupsFactory<GROUP extends UtilsQaGroup<?,?,?>,
 								QAT extends UtilsQaTest<GROUP,?,?,?,?,?>>
