@@ -10,11 +10,11 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.factory.xls.system.io.report.XlsCellFactory;
 import org.jeesl.factory.xls.system.io.report.XlsColumnFactory;
+import org.jeesl.model.xml.module.finance.Figures;
+import org.jeesl.model.xml.module.finance.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.finance.Figures;
-import net.sf.ahtutils.xml.finance.Time;
 import net.sf.exlp.util.DateUtil;
 
 public class XmlTimeFactory

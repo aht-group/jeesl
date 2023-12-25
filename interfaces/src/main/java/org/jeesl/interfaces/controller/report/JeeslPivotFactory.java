@@ -7,9 +7,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.module.finance.Finance;
 
 import net.sf.ahtutils.interfaces.controller.report.JeeslPivotAggregator;
-import net.sf.ahtutils.xml.finance.Finance;
 
 public interface JeeslPivotFactory <L extends JeeslLang, D extends JeeslDescription,
 									A extends JeeslStatus<L,D,A>>

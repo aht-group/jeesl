@@ -15,10 +15,10 @@ import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Implementation;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.module.finance.Figures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.finance.Figures;
 import net.sf.ahtutils.xml.report.ColumnGroup;
 import net.sf.ahtutils.xml.report.DataAssociation;
 import net.sf.ahtutils.xml.report.DataHandler;
@@ -291,7 +291,7 @@ public class ReportXpath
 	
 	public static <E extends Enum<E>> Figures getFigures(E code, List<Figures> list) throws ExlpXpathNotFoundException
 	{
-		for(net.sf.ahtutils.xml.finance.Figures figures : list)
+		for(org.jeesl.model.xml.module.finance.Figures figures : list)
 		{
 			if(figures.getCode().equals(code.toString())){return figures;}
 		}		

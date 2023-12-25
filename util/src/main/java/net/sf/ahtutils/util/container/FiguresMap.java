@@ -5,9 +5,8 @@ import java.util.Map;
 
 import org.jeesl.factory.xml.domain.finance.XmlFiguresFactory;
 import org.jeesl.model.xml.io.cms.text.Remark;
-
-import net.sf.ahtutils.xml.finance.Figures;
-import net.sf.ahtutils.xml.finance.Finance;
+import org.jeesl.model.xml.module.finance.Figures;
+import org.jeesl.model.xml.module.finance.Finance;
 
 public class FiguresMap
 {

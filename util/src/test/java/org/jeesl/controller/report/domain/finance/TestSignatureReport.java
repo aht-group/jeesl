@@ -4,11 +4,11 @@ import org.jeesl.AbstractJeeslUtilTest;
 import org.jeesl.JeeslUtilTestBootstrap;
 import org.jeesl.factory.xml.domain.finance.XmlSignatureFactory;
 import org.jeesl.factory.xml.domain.finance.XmlSignaturesFactory;
+import org.jeesl.model.xml.module.finance.Signature;
+import org.jeesl.model.xml.module.finance.Signatures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.finance.Signature;
-import net.sf.ahtutils.xml.finance.Signatures;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestSignatureReport extends AbstractJeeslUtilTest

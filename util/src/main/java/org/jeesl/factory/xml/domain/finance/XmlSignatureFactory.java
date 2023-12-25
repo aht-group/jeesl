@@ -1,9 +1,8 @@
 package org.jeesl.factory.xml.domain.finance;
 
+import org.jeesl.model.xml.module.finance.Signature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.finance.Signature;
 
 public class XmlSignatureFactory
 {

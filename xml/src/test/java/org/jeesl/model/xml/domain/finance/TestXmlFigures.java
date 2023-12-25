@@ -2,10 +2,9 @@ package org.jeesl.model.xml.domain.finance;
 
 import org.jeesl.JeeslXmlTestBootstrap;
 import org.jeesl.model.xml.io.cms.text.TestXmlRemark;
+import org.jeesl.model.xml.module.finance.Figures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.finance.Figures;
 
 public class TestXmlFigures extends AbstractXmlFinanceTest<Figures>
 {

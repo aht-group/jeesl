@@ -1,11 +1,11 @@
 package org.jeesl.model.xml.domain.finance;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.module.finance.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.test.AbstractAhtUtilsXmlTest;
-import net.sf.ahtutils.xml.finance.Time;
 
 public class TestXmlTime extends AbstractXmlFinanceTest<Time>
 {

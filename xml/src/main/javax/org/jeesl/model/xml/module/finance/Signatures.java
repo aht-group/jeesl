@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.finance;
+package org.jeesl.model.xml.module.finance;
 
 import java.io.Serializable;
 import java.util.ArrayList;

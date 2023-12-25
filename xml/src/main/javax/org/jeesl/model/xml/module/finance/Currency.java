@@ -1,14 +1,15 @@
 
-package net.sf.ahtutils.xml.finance;
+package org.jeesl.model.xml.module.finance;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
+
+import org.jeesl.model.xml.io.locale.status.Langs;
 
 
 /**
@@ -20,11 +21,13 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
+ *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
- *       &lt;attribute name="nr" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="symbol" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="record" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -33,24 +36,53 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
-@XmlRootElement(name = "time")
-public class Time
+@XmlType(name = "", propOrder = {
+    "langs"
+})
+@XmlRootElement(name = "currency")
+public class Currency
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
+    @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
+    protected Langs langs;
     @XmlAttribute(name = "id")
     protected Long id;
-    @XmlAttribute(name = "nr")
-    protected Integer nr;
     @XmlAttribute(name = "code")
     protected String code;
+    @XmlAttribute(name = "symbol")
+    protected String symbol;
     @XmlAttribute(name = "label")
     protected String label;
-    @XmlAttribute(name = "record")
-    @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar record;
+
+    /**
+     * Gets the value of the langs property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Langs }
+     *     
+     */
+    public Langs getLangs() {
+        return langs;
+    }
+
+    /**
+     * Sets the value of the langs property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Langs }
+     *     
+     */
+    public void setLangs(Langs value) {
+        this.langs = value;
+    }
+
+    public boolean isSetLangs() {
+        return (this.langs!= null);
+    }
 
     /**
      * Gets the value of the id property.
@@ -85,38 +117,6 @@ public class Time
     }
 
     /**
-     * Gets the value of the nr property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Integer }
-     *     
-     */
-    public int getNr() {
-        return nr;
-    }
-
-    /**
-     * Sets the value of the nr property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Integer }
-     *     
-     */
-    public void setNr(int value) {
-        this.nr = value;
-    }
-
-    public boolean isSetNr() {
-        return (this.nr!= null);
-    }
-
-    public void unsetNr() {
-        this.nr = null;
-    }
-
-    /**
      * Gets the value of the code property.
      * 
      * @return
@@ -145,6 +145,34 @@ public class Time
     }
 
     /**
+     * Gets the value of the symbol property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getSymbol() {
+        return symbol;
+    }
+
+    /**
+     * Sets the value of the symbol property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSymbol(String value) {
+        this.symbol = value;
+    }
+
+    public boolean isSetSymbol() {
+        return (this.symbol!= null);
+    }
+
+    /**
      * Gets the value of the label property.
      * 
      * @return
@@ -170,34 +198,6 @@ public class Time
 
     public boolean isSetLabel() {
         return (this.label!= null);
-    }
-
-    /**
-     * Gets the value of the record property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getRecord() {
-        return record;
-    }
-
-    /**
-     * Sets the value of the record property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setRecord(XMLGregorianCalendar value) {
-        this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
 }

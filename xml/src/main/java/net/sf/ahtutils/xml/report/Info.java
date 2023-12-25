@@ -14,8 +14,7 @@ import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.exlp.model.xml.io.Data;
-
-import net.sf.ahtutils.xml.finance.Signatures;
+import org.jeesl.model.xml.module.finance.Signatures;
 
 
 /**
