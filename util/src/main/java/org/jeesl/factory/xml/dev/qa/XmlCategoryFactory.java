@@ -85,7 +85,7 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		if(q.isSetTest())
 		{
-			XmlTestFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> f = new XmlTestFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>(q.getTest().get(0));
+			XmlTestFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS> f = new XmlTestFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS>(q.getTest().get(0));
 			f.lazyLoader(fQa, cQAT);
 			for(QAT test : category.getTests())
 			{

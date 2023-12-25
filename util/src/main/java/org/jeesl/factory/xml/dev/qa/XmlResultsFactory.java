@@ -50,19 +50,18 @@ public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 								QATI extends UtilsQaTestInfo<QATC>,
 								QATC extends JeeslStatus<L,D,QATC>,
 								QATS extends JeeslStatus<L,D,QATS>,
-								QARS extends JeeslStatus<L,D,QARS>,
-								QAUS extends JeeslStatus<L,D,QAUS>>
+								QARS extends JeeslStatus<L,D,QARS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlResultsFactory.class);
 		
 	private Results q;
 	
-	private XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QARS> xfResult;
+	private XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASS,QAC,QAT,QAU,QAR,QARS> xfResult;
 	
 	public XmlResultsFactory(Results q)
 	{
 		this.q=q;
-		if(q.isSetResult()) {xfResult = new XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QARS>(q.getResult().get(0));}
+		if(q.isSetResult()) {xfResult = new XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASS,QAC,QAT,QAU,QAR,QARS>(q.getResult().get(0));}
 	}
 	
 	

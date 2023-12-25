@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.dev.qa;
 
+import java.util.Objects;
+
 import org.jeesl.api.facade.module.JeeslQaFacade;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -53,8 +55,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 							QATI extends UtilsQaTestInfo<QATC>,
 							QATC extends JeeslStatus<L,D,QATC>,
 							QATS extends JeeslStatus<L,D,QATS>,
-							QARS extends JeeslStatus<L,D,QARS>,
-							QAUS extends JeeslStatus<L,D,QAUS>>
+							QARS extends JeeslStatus<L,D,QARS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlTestFactory.class);
 		
@@ -66,6 +67,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 	private XmlGroupsFactory<GROUP,QAT> xfGroups;
 	private XmlInfoFactory<L,D,QATI,QATC> xfInfo;
 	private XmlStatementFactory<QATS,L,D> xfStatement;
+	private XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS> xfResults;
 	
 	public XmlTestFactory(Test q)
 	{
@@ -74,6 +76,8 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetGroups()) {xfGroups = new XmlGroupsFactory<GROUP,QAT>(q.getGroups());}
 		if(q.isSetInfo()) {xfInfo = new XmlInfoFactory<L,D,QATI,QATC>(q.getInfo());}
 		if(q.isSetStatement()) {xfStatement = new XmlStatementFactory<QATS,L,D>(null,q.getStatement());}
+		
+		if(Objects.nonNull(q.getResults())) {xfResults = new XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS>(q.getResults());}
 	}
 	
 	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI> fQa;
@@ -117,11 +121,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetStatement() && test.getClientStatus()!=null){xml.setStatement(xfStatement.build(test.getClientStatus()));}
 		if(q.isSetStatus() && test.getDeveloperStatus()!=null){xml.setStatus(xfDeveloperStatus.build(test.getDeveloperStatus()));}
 		
-		if(q.isSetResults())
-		{
-			XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> f = new XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>(q.getResults());
-			xml.setResults(f.build(test));
-		}
+		if(q.isSetResults()) {xml.setResults(xfResults.build(test));}
 		
 		if(q.isSetInfo() && test.getInfo()!=null) {xml.setInfo(xfInfo.build(test.getInfo()));}
 		

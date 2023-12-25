@@ -39,16 +39,15 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 							A extends JeeslSecurityAction<L,D,R,V,U,AT>,
 							AT extends JeeslSecurityTemplate<L,D,C>,
 							USER extends JeeslUser<R>,
-							STAFF extends UtilsQaStaff<R,USER,GROUP,QA,QASH>,
+							STAFF extends UtilsQaStaff<R,USER,GROUP,QA,?>,
 							GROUP extends UtilsQaGroup<STAFF,QA,QASS>,
-							QA extends UtilsQualityAssurarance<STAFF,QAC,QASH>,
-							QASD extends UtilsQaSchedule<QA,QASS>,
-							QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
+							QA extends UtilsQualityAssurarance<STAFF,QAC,?>,
+							
+							QASS extends UtilsQaScheduleSlot<GROUP,?>,
 							QAC extends UtilsQaCategory<QA,QAT>,
 							QAT extends UtilsQaTest<GROUP,QAC,QAR,?,?,?>,
 							QAU extends UtilsQaUsability,
 							QAR extends UtilsQaResult<STAFF,QAT,QARS>,
-							QASH extends UtilsQaStakeholder<QA>,
 							QARS extends JeeslStatus<L,D,QARS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlResultFactory.class);
