@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.io.attribute;
+package org.jeesl.model.xml.io.attribute;
 
 import java.io.Serializable;
 import java.util.ArrayList;

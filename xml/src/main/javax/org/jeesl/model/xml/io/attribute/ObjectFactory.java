@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.system.io.attribute;
+package org.jeesl.model.xml.io.attribute;
 
 import javax.xml.bind.annotation.XmlRegistry;
 
