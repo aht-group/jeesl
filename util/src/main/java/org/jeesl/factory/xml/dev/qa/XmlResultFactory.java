@@ -35,8 +35,8 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 							A extends JeeslSecurityAction<L,D,R,V,U,AT>,
 							AT extends JeeslSecurityTemplate<L,D,C>,
 							USER extends JeeslUser<R>,
-							STAFF extends UtilsQaStaff<R,USER,GROUP,QA,?>,
-							GROUP extends UtilsQaGroup<STAFF,QA,?>,
+							STAFF extends UtilsQaStaff<R,USER,?,QA,?>,
+							
 							QA extends UtilsQualityAssurarance<STAFF,?,?>,
 							
 

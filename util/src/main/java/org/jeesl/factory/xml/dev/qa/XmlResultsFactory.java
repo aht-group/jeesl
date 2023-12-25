@@ -36,32 +36,29 @@ public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 								A extends JeeslSecurityAction<L,D,R,V,U,AT>,
 								AT extends JeeslSecurityTemplate<L,D,C>,
 								USER extends JeeslUser<R>,
-								STAFF extends UtilsQaStaff<R,USER,GROUP,QA,QASH>,
+								STAFF extends UtilsQaStaff<R,USER,GROUP,QA,?>,
 								GROUP extends UtilsQaGroup<STAFF,QA,QASS>,
-								QA extends UtilsQualityAssurarance<STAFF,QAC,QASH>,
+								QA extends UtilsQualityAssurarance<STAFF,?,?>,
 								QASD extends UtilsQaSchedule<QA,QASS>,
 								QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
-								QAC extends UtilsQaCategory<QA,QAT>,
-								QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,QATS>,
-								QAU extends UtilsQaUsability,
+								
+								QAT extends UtilsQaTest<GROUP,?,QAR,?,?,?>,
+							
 								QAR extends UtilsQaResult<STAFF,QAT,QARS>,
-								QASH extends UtilsQaStakeholder<QA>,
-								QATD extends UtilsQaTestDiscussion<STAFF,QAT>,
-								QATI extends UtilsQaTestInfo<QATC>,
-								QATC extends JeeslStatus<L,D,QATC>,
-								QATS extends JeeslStatus<L,D,QATS>,
+								
+
 								QARS extends JeeslStatus<L,D,QARS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlResultsFactory.class);
 		
 	private Results q;
 	
-	private XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QAR,QARS> xfResult;
+	private XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QAR,QARS> xfResult;
 	
 	public XmlResultsFactory(Results q)
 	{
 		this.q=q;
-		if(q.isSetResult()) {xfResult = new XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QAR,QARS>(q.getResult().get(0));}
+		if(q.isSetResult()) {xfResult = new XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QAR,QARS>(q.getResult().get(0));}
 	}
 	
 	
