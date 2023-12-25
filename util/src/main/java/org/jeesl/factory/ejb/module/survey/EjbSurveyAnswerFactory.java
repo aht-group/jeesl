@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -44,8 +45,8 @@ public class EjbSurveyAnswerFactory<SECTION extends JeeslSurveySection<?,?,?,SEC
    	
 	public ANSWER build(QUESTION question, DATA data, Answer answer)
 	{
-		Boolean valueBoolean = null;if(answer.isSetValueBoolean()){valueBoolean=answer.isValueBoolean();}
-		Integer valueNumber = null;if(answer.isSetValueNumber()){valueNumber=answer.getValueNumber();}
+		Boolean valueBoolean = null; if(Objects.nonNull(answer.isValueBoolean())) {valueBoolean=answer.isValueBoolean();}
+		Integer valueNumber = null; if(Objects.nonNull(answer.getValueNumber())) {valueNumber=answer.getValueNumber();}
 		return build(question, data,valueBoolean,valueNumber);
 	}
 	public ANSWER build(QUESTION question, DATA data)

@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.module.survey;
 
+import java.util.Objects;
+
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
@@ -66,36 +68,36 @@ public class XmlAnswerFactory<L extends JeeslLang,D extends JeeslDescription,
 	{
 		this.q=q;
 		
-		if(q.isSetQuestion()) {xfQuestion = new XmlQuestionFactory<L,D,SCHEME,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION>(localeCode,q.getQuestion());}
-		if(q.isSetData()) {xfData = new XmlDataFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,q.getData());}
-		if(q.isSetOption()) {xfOption = new XmlOptionFactory<L,D,OPTION>(localeCode,q.getOption());}
-		if(q.isSetMatrix()) {xfMatrix = new XmlMatrixFactory<>(localeCode,q.getMatrix());}
+		if(Objects.nonNull(q.getQuestion())) {xfQuestion = new XmlQuestionFactory<L,D,SCHEME,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION>(localeCode,q.getQuestion());}
+		if(Objects.nonNull(q.getData())) {xfData = new XmlDataFactory<L,D,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION>(localeCode,q.getData());}
+		if(Objects.nonNull(q.getOption())) {xfOption = new XmlOptionFactory<L,D,OPTION>(localeCode,q.getOption());}
+		if(Objects.nonNull(q.getMatrix())) {xfMatrix = new XmlMatrixFactory<>(localeCode,q.getMatrix());}
 	}
 	
 	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,SURVEY,SS,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,ANSWER,MATRIX,DATA,OPTIONS,OPTION,CORRELATION> fSurvey)
 	{
-		if(q.isSetMatrix()){xfMatrix.lazyLoad(fSurvey);}
+		if(Objects.nonNull(q.getMatrix())) {xfMatrix.lazyLoad(fSurvey);}
 	}
 	
 	public Answer build(ANSWER ejb)
 	{		
 		Answer xml = new Answer();
-		if(q.isSetId()){xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		
-		if(q.isSetQuestion()){xml.setQuestion(xfQuestion.build(ejb.getQuestion()));}
-		if(q.isSetData()){xml.setData(xfData.build(ejb.getData()));}
+		if(Objects.nonNull(q.getQuestion())) {xml.setQuestion(xfQuestion.build(ejb.getQuestion()));}
+		if(Objects.nonNull(q.getData())) {xml.setData(xfData.build(ejb.getData()));}
 		
-		if(q.isSetValueBoolean() && ejb.getQuestion().getShowBoolean() && ejb.getValueBoolean()!=null){xml.setValueBoolean(ejb.getValueBoolean());}
-		if(q.isSetValueNumber() && ejb.getQuestion().getShowInteger() && ejb.getValueNumber()!=null){xml.setValueNumber(ejb.getValueNumber());}
-		if(q.isSetValueDouble() && ejb.getQuestion().getShowDouble() && ejb.getValueDouble()!=null){xml.setValueDouble(ejb.getValueDouble());}
-		if(q.isSetValueDate() && BooleanComparator.active(ejb.getQuestion().getShowDate()) && ejb.getValueDate()!=null){xml.setValueDate(DateUtil.toXmlGc(ejb.getValueDate()));}
+		if(Objects.nonNull(q.isValueBoolean()) && ejb.getQuestion().getShowBoolean() && ejb.getValueBoolean()!=null){xml.setValueBoolean(ejb.getValueBoolean());}
+		if(Objects.nonNull(q.getValueNumber()) && ejb.getQuestion().getShowInteger() && ejb.getValueNumber()!=null){xml.setValueNumber(ejb.getValueNumber());}
+		if(Objects.nonNull(q.getValueDouble()) && ejb.getQuestion().getShowDouble() && ejb.getValueDouble()!=null){xml.setValueDouble(ejb.getValueDouble());}
+		if(Objects.nonNull(q.getValueDate()) && BooleanComparator.active(ejb.getQuestion().getShowDate()) && ejb.getValueDate()!=null){xml.setValueDate(DateUtil.toXmlGc(ejb.getValueDate()));}
 		
-		if(q.isSetScore() && BooleanComparator.active(ejb.getQuestion().getShowScore()) && ejb.getScore()!=null){xml.setScore(ejb.getScore());}
-		if(q.isSetAnswer() && ejb.getQuestion().getShowText() && ejb.getValueText()!=null){xml.setAnswer(net.sf.ahtutils.factory.xml.text.XmlAnswerFactory.build(ejb.getValueText()));}
-		if(q.isSetRemark() && ejb.getQuestion().getShowRemark() && ejb.getRemark()!=null){xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
+		if(Objects.nonNull(q.getScore()) && BooleanComparator.active(ejb.getQuestion().getShowScore()) && ejb.getScore()!=null){xml.setScore(ejb.getScore());}
+		if(Objects.nonNull(q.getAnswer()) && ejb.getQuestion().getShowText() && ejb.getValueText()!=null){xml.setAnswer(net.sf.ahtutils.factory.xml.text.XmlAnswerFactory.build(ejb.getValueText()));}
+		if(Objects.nonNull(q.getRemark()) && ejb.getQuestion().getShowRemark() && ejb.getRemark()!=null){xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
 	
-		if(q.isSetOption() && BooleanComparator.active(ejb.getQuestion().getShowSelectOne())){if(ejb.getOption()!=null) {xml.setOption(xfOption.build(ejb.getOption()));}}
-		if(q.isSetMatrix() && BooleanComparator.active(ejb.getQuestion().getShowMatrix())){xml.setMatrix(xfMatrix.build(ejb));}
+		if(Objects.nonNull(q.getOption()) && BooleanComparator.active(ejb.getQuestion().getShowSelectOne())){if(ejb.getOption()!=null) {xml.setOption(xfOption.build(ejb.getOption()));}}
+		if(Objects.nonNull(q.getMatrix()) && BooleanComparator.active(ejb.getQuestion().getShowMatrix())){xml.setMatrix(xfMatrix.build(ejb));}
 		
 		return xml;
 	}
@@ -103,7 +105,7 @@ public class XmlAnswerFactory<L extends JeeslLang,D extends JeeslDescription,
 	public static Answer id()
 	{
 		Answer xml = new Answer();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 }

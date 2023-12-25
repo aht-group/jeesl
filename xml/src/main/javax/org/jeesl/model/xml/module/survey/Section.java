@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.cms.text.Remark;
 import org.jeesl.model.xml.io.locale.status.Description;
 
@@ -95,10 +94,6 @@ public class Section
         this.description = value;
     }
 
-    public boolean isSetDescription() {
-        return (this.description!= null);
-    }
-
     /**
      * Gets the value of the remark property.
      * 
@@ -121,10 +116,6 @@ public class Section
      */
     public void setRemark(Remark value) {
         this.remark = value;
-    }
-
-    public boolean isSetRemark() {
-        return (this.remark!= null);
     }
 
     /**
@@ -156,14 +147,6 @@ public class Section
         return this.section;
     }
 
-    public boolean isSetSection() {
-        return ((this.section!= null)&&(!this.section.isEmpty()));
-    }
-
-    public void unsetSection() {
-        this.section = null;
-    }
-
     /**
      * Gets the value of the question property.
      * 
@@ -193,14 +176,6 @@ public class Section
         return this.question;
     }
 
-    public boolean isSetQuestion() {
-        return ((this.question!= null)&&(!this.question.isEmpty()));
-    }
-
-    public void unsetQuestion() {
-        this.question = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -209,7 +184,7 @@ public class Section
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -221,16 +196,8 @@ public class Section
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -241,7 +208,7 @@ public class Section
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -253,16 +220,8 @@ public class Section
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -289,10 +248,6 @@ public class Section
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the visible property.
      * 
@@ -301,7 +256,7 @@ public class Section
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -313,16 +268,8 @@ public class Section
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
 }

@@ -14,7 +14,7 @@ public class TestXmlAnswer extends AbstractXmlSurveyTest<Answer>
     public Answer build(boolean withChilds)
     {
 	    	Answer xml = new Answer();
-	    	xml.setId(123);
+	    	xml.setId(123l);
 	    	xml.setValueBoolean(true);
 	    	xml.setValueNumber(123);
 	    	xml.setValueDouble(123.45);

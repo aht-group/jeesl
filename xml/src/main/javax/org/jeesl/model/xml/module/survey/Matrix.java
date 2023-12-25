@@ -72,12 +72,4 @@ public class Matrix
         return this.row;
     }
 
-    public boolean isSetRow() {
-        return ((this.row!= null)&&(!this.row.isEmpty()));
-    }
-
-    public void unsetRow() {
-        this.row = null;
-    }
-
 }

@@ -1,5 +1,8 @@
 package org.jeesl.factory.xml.module.survey;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
@@ -65,9 +68,9 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(q.isSetData()){xfData = new XmlDataFactory<>(localeCode,q.getData().get(0));}
-		if(q.isSetStatus()){xfStatus = new XmlStatusFactory<>(q.getStatus());}
-		if(q.isSetTemplate()) {xfTemplate = new XmlTemplateFactory<>(localeCode,q.getTemplate());}
+		if(Objects.nonNull(q.getStatus())) {xfStatus = new XmlStatusFactory<>(q.getStatus());}
+		if(Objects.nonNull(q.getTemplate())) {xfTemplate = new XmlTemplateFactory<>(localeCode,q.getTemplate());}
+		if(ObjectUtils.isNotEmpty(q.getData())) {xfData = new XmlDataFactory<>(localeCode,q.getData().get(0));}
 	}
 	
 	public void lazyLoad(JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
@@ -78,7 +81,7 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 	{
 		this.fSurvey=fSurvey;
 		
-		if(q.isSetData()){xfData.lazyLoad(fSurvey,fTemplate);}
+		if(ObjectUtils.isNotEmpty(q.getData())) {xfData.lazyLoad(fSurvey,fTemplate);}
 	}
 	
 	public Survey build(SURVEY ejb)
@@ -86,16 +89,15 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(fSurvey!=null){ejb = fSurvey.load(ejb);}
 		
 		Survey xml = new Survey();
-		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetName()){xml.setName(ejb.getName().get(localeCode).getLang());}
-		if(q.isSetValidFrom()){xml.setValidFrom(DateUtil.toXmlGc(ejb.getStartDate()));}
-		if(q.isSetValidTo()){xml.setValidTo(DateUtil.toXmlGc(ejb.getEndDate()));}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getName())) {xml.setName(ejb.getName().get(localeCode).getLang());}
+		if(Objects.nonNull(q.getValidFrom())) {xml.setValidFrom(DateUtil.toXmlGc(ejb.getStartDate()));}
+		if(Objects.nonNull(q.getValidTo())) {xml.setValidTo(DateUtil.toXmlGc(ejb.getEndDate()));}
 		
-		if(q.isSetStatus()) {xml.setStatus(xfStatus.build(ejb.getStatus()));}
+		if(Objects.nonNull(q.getStatus())) {xml.setStatus(xfStatus.build(ejb.getStatus()));}
+		if(Objects.nonNull(q.getTemplate())) {xml.setTemplate(xfTemplate.build(ejb.getTemplate()));}
 		
-		if(q.isSetTemplate()) {xml.setTemplate(xfTemplate.build(ejb.getTemplate()));}
-		
-		if(q.isSetData())
+		if(ObjectUtils.isNotEmpty(q.getData()))
 		{
 			for(DATA data : ejb.getSurveyData())
 			{
@@ -109,7 +111,7 @@ public class XmlSurveyFactory<L extends JeeslLang,D extends JeeslDescription,
 	public static Survey id()
 	{
 		Survey xml = build();
-		xml.setId(0);
+		xml.setId(0l);
 		return xml;
 	}
 	public static Survey build(Data data)

@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.module.finance.Figures;
 
@@ -111,10 +110,6 @@ public class Survey
         this.templates = value;
     }
 
-    public boolean isSetTemplates() {
-        return (this.templates!= null);
-    }
-
     /**
      * Gets the value of the template property.
      * 
@@ -139,10 +134,6 @@ public class Survey
         this.template = value;
     }
 
-    public boolean isSetTemplate() {
-        return (this.template!= null);
-    }
-
     /**
      * Gets the value of the status property.
      * 
@@ -165,10 +156,6 @@ public class Survey
      */
     public void setStatus(Status value) {
         this.status = value;
-    }
-
-    public boolean isSetStatus() {
-        return (this.status!= null);
     }
 
     /**
@@ -200,14 +187,6 @@ public class Survey
         return this.data;
     }
 
-    public boolean isSetData() {
-        return ((this.data!= null)&&(!this.data.isEmpty()));
-    }
-
-    public void unsetData() {
-        this.data = null;
-    }
-
     /**
      * Gets the value of the figures property.
      * 
@@ -230,10 +209,6 @@ public class Survey
      */
     public void setFigures(Figures value) {
         this.figures = value;
-    }
-
-    public boolean isSetFigures() {
-        return (this.figures!= null);
     }
 
     /**
@@ -265,14 +240,6 @@ public class Survey
         return this.section;
     }
 
-    public boolean isSetSection() {
-        return ((this.section!= null)&&(!this.section.isEmpty()));
-    }
-
-    public void unsetSection() {
-        this.section = null;
-    }
-
     /**
      * Gets the value of the question property.
      * 
@@ -302,14 +269,6 @@ public class Survey
         return this.question;
     }
 
-    public boolean isSetQuestion() {
-        return ((this.question!= null)&&(!this.question.isEmpty()));
-    }
-
-    public void unsetQuestion() {
-        this.question = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -318,7 +277,7 @@ public class Survey
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -330,16 +289,8 @@ public class Survey
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -366,10 +317,6 @@ public class Survey
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the validFrom property.
      * 
@@ -394,10 +341,6 @@ public class Survey
         this.validFrom = value;
     }
 
-    public boolean isSetValidFrom() {
-        return (this.validFrom!= null);
-    }
-
     /**
      * Gets the value of the validTo property.
      * 
@@ -420,10 +363,6 @@ public class Survey
      */
     public void setValidTo(XMLGregorianCalendar value) {
         this.validTo = value;
-    }
-
-    public boolean isSetValidTo() {
-        return (this.validTo!= null);
     }
 
 }

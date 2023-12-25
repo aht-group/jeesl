@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.module.survey;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScore;
 import org.jeesl.interfaces.model.module.survey.question.JeeslSurveyQuestion;
@@ -31,7 +33,7 @@ public class XmlScoreFactory<
 	{
 		Score xml = build();
 		
-		if(q.isSetMax() && ejb.getMaxScore()!=null){xml.setMax(ejb.getMaxScore());}
+		if(Objects.nonNull(q.getMax()) && ejb.getMaxScore()!=null){xml.setMax(ejb.getMaxScore());}
 		
 		return xml;
 	}

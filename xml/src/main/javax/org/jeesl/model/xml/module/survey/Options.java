@@ -72,12 +72,4 @@ public class Options
         return this.option;
     }
 
-    public boolean isSetOption() {
-        return ((this.option!= null)&&(!this.option.isEmpty()));
-    }
-
-    public void unsetOption() {
-        this.option = null;
-    }
-
 }

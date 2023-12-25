@@ -91,8 +91,8 @@ public class OfxQaNfrSectionFactory extends AbstractUtilsOfxDocumentationFactory
 
 		xml.getContent().add(XmlTitleFactory.build(subSection.getDescription().getValue()));
 		
-		if(subSection.isSetRemark()){xml.getContent().add(XmlParagraphFactory.text(subSection.getRemark().getValue()));}
-		if(subSection.isSetQuestion())
+		if(Objects.nonNull(subSection.getRemark())) {xml.getContent().add(XmlParagraphFactory.text(subSection.getRemark().getValue()));}
+		if(ObjectUtils.isNotEmpty(subSection.getQuestion()))
 		{
 			xml.getContent().add(ofxTableQuestions.build(mainSection,subSection));
 			xml.getContent().addAll(questionRemarks(subSection));
@@ -129,8 +129,7 @@ public class OfxQaNfrSectionFactory extends AbstractUtilsOfxDocumentationFactory
 		
 		for(Question q : section.getQuestion())
 		{
-			
-			if(q.isSetRemark() && Objects.nonNull(q.getRemark()) && q.getRemark().getValue().trim().length()>0)
+			if(Objects.nonNull(q.getRemark()) && Objects.nonNull(q.getRemark()) && q.getRemark().getValue().trim().length()>0)
 			{
 				JaxbUtil.trace(q);
 				StringBuffer sb = new StringBuffer();

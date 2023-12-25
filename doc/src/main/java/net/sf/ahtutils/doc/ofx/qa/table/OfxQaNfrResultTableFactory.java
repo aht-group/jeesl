@@ -164,7 +164,7 @@ public class OfxQaNfrResultTableFactory extends AbstractUtilsOfxDocumentationFac
 				{
 					Answer answer = mapAnswers.get(q.getId());
 					
-					if(answer.isSetValueBoolean())
+					if(Objects.nonNull(answer.isValueBoolean()))
 					{
 						if(answer.isValueBoolean()){row.getCell().add(XmlCellFactory.image(image("check")));}
 						else{row.getCell().add(XmlCellFactory.image(image("cross")));}

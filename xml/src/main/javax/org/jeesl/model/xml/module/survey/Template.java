@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.cms.text.Remark;
 import org.jeesl.model.xml.io.locale.status.Category;
 import org.jeesl.model.xml.io.locale.status.Description;
@@ -95,10 +94,6 @@ public class Template
         this.description = value;
     }
 
-    public boolean isSetDescription() {
-        return (this.description!= null);
-    }
-
     /**
      * Gets the value of the category property.
      * 
@@ -121,10 +116,6 @@ public class Template
      */
     public void setCategory(Category value) {
         this.category = value;
-    }
-
-    public boolean isSetCategory() {
-        return (this.category!= null);
     }
 
     /**
@@ -151,10 +142,6 @@ public class Template
         this.status = value;
     }
 
-    public boolean isSetStatus() {
-        return (this.status!= null);
-    }
-
     /**
      * Gets the value of the remark property.
      * 
@@ -177,10 +164,6 @@ public class Template
      */
     public void setRemark(Remark value) {
         this.remark = value;
-    }
-
-    public boolean isSetRemark() {
-        return (this.remark!= null);
     }
 
     /**
@@ -212,14 +195,6 @@ public class Template
         return this.section;
     }
 
-    public boolean isSetSection() {
-        return ((this.section!= null)&&(!this.section.isEmpty()));
-    }
-
-    public void unsetSection() {
-        this.section = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -228,7 +203,7 @@ public class Template
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -240,16 +215,8 @@ public class Template
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -274,10 +241,6 @@ public class Template
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

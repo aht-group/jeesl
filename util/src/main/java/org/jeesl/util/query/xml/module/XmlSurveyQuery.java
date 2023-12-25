@@ -68,7 +68,7 @@ public class XmlSurveyQuery
 	public static Template exTemplate()
 	{		
 		Template xml = new Template();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setDescription(XmlDescriptionFactory.build(""));
 		xml.setRemark(XmlRemarkFactory.build(""));
@@ -98,7 +98,7 @@ public class XmlSurveyQuery
 	public static Section rSection()
 	{		
 		Section xml = new Section();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setDescription(XmlDescriptionFactory.build(""));
 		xml.setRemark(XmlRemarkFactory.build(""));
@@ -109,7 +109,7 @@ public class XmlSurveyQuery
 	public static Question exQuestion()
 	{		
 		Question xml = new Question();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setPosition(0);
 		xml.setVisible(true);
 		xml.setCode("");
@@ -127,7 +127,7 @@ public class XmlSurveyQuery
 		xml.setShowSelectOne(true);
 		
 		Score score = XmlScoreFactory.build();
-		score.setMax(0);
+		score.setMax(0d);
 		xml.setScore(score);
 		
 		xml.setOptions(exOptions());
@@ -138,7 +138,7 @@ public class XmlSurveyQuery
 	public static Question rQuestion()
 	{		
 		Question xml = new Question();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setTopic("");
 		return xml;
@@ -171,7 +171,7 @@ public class XmlSurveyQuery
 	public static Survey exSurvey()
 	{				
 		Survey xml = new Survey();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setName("");
 		xml.setValidFrom(DateUtil.toXmlGc(new Date()));
 		xml.setValidTo(DateUtil.toXmlGc(new Date()));
@@ -244,7 +244,7 @@ public class XmlSurveyQuery
 	private static Data dataWithStructure()
 	{	
 		Data xml = new Data();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.getSection().add(exSection());
 		return xml;
 	}
@@ -258,7 +258,7 @@ public class XmlSurveyQuery
 		answer.setQuestion(question);
 		
 		Data xml = new Data();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.getAnswer().add(answer);
 		return xml;
 	}
@@ -273,7 +273,7 @@ public class XmlSurveyQuery
 		answer.setQuestion(question);
 		
 		Data xml = new Data();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.getAnswer().add(answer);
 		return xml;
 	}
@@ -290,14 +290,14 @@ public class XmlSurveyQuery
 		Answer xml = XmlAnswerFactory.id();
 		xml.setValueBoolean(true);
 		xml.setValueNumber(0);
-		xml.setValueDouble(0);
+		xml.setValueDouble(0d);
 		xml.setValueDate(DateUtil.toXmlGc(new Date()));
-		xml.setScore(0);
+		xml.setScore(0d);
 		xml.setAnswer(net.sf.ahtutils.factory.xml.text.XmlAnswerFactory.build(""));
 		xml.setRemark(XmlRemarkFactory.build(""));
 		
 		Option option = new Option();
-		option.setId(0);
+		option.setId(0l);
 		option.setCode("");
 		option.setLabel("");
 		xml.setOption(option);

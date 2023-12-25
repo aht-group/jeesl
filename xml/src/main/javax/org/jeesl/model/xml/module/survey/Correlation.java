@@ -79,14 +79,6 @@ public class Correlation
         return this.correlation;
     }
 
-    public boolean isSetCorrelation() {
-        return ((this.correlation!= null)&&(!this.correlation.isEmpty()));
-    }
-
-    public void unsetCorrelation() {
-        this.correlation = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -95,7 +87,7 @@ public class Correlation
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -107,16 +99,8 @@ public class Correlation
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -141,10 +125,6 @@ public class Correlation
      */
     public void setType(String value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
 }
