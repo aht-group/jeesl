@@ -40,12 +40,12 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 							AT extends JeeslSecurityTemplate<L,D,C>,
 							USER extends JeeslUser<R>,
 							STAFF extends UtilsQaStaff<R,USER,GROUP,QA,?>,
-							GROUP extends UtilsQaGroup<STAFF,QA,QASS>,
-							QA extends UtilsQualityAssurarance<STAFF,QAC,?>,
+							GROUP extends UtilsQaGroup<STAFF,QA,?>,
+							QA extends UtilsQualityAssurarance<STAFF,?,?>,
 							
-							QASS extends UtilsQaScheduleSlot<GROUP,?>,
-							QAC extends UtilsQaCategory<QA,QAT>,
-							QAT extends UtilsQaTest<GROUP,QAC,QAR,?,?,?>,
+							
+					
+							QAT extends UtilsQaTest<GROUP,?,QAR,?,?,?>,
 							QAU extends UtilsQaUsability,
 							QAR extends UtilsQaResult<STAFF,QAT,QARS>,
 							QARS extends JeeslStatus<L,D,QARS>>
