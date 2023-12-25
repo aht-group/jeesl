@@ -17,7 +17,7 @@ public class TestXmlTime extends AbstractXmlFinanceTest<Time>
     public Time build(boolean withChilds)
     {
     	Time xml = new Time();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setNr(1);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");

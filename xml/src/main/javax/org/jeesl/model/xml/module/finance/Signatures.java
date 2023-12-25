@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Levels;
 
 
@@ -84,10 +83,6 @@ public class Signatures
         this.levels = value;
     }
 
-    public boolean isSetLevels() {
-        return (this.levels!= null);
-    }
-
     /**
      * Gets the value of the signatures property.
      * 
@@ -115,14 +110,6 @@ public class Signatures
             signatures = new ArrayList<Signatures>();
         }
         return this.signatures;
-    }
-
-    public boolean isSetSignatures() {
-        return ((this.signatures!= null)&&(!this.signatures.isEmpty()));
-    }
-
-    public void unsetSignatures() {
-        this.signatures = null;
     }
 
     /**
@@ -154,14 +141,6 @@ public class Signatures
         return this.signature;
     }
 
-    public boolean isSetSignature() {
-        return ((this.signature!= null)&&(!this.signature.isEmpty()));
-    }
-
-    public void unsetSignature() {
-        this.signature = null;
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -186,10 +165,6 @@ public class Signatures
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -212,10 +187,6 @@ public class Signatures
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

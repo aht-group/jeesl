@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.cms.text.Remark;
 
 
@@ -103,14 +102,6 @@ public class Figures
         return this.remark;
     }
 
-    public boolean isSetRemark() {
-        return ((this.remark!= null)&&(!this.remark.isEmpty()));
-    }
-
-    public void unsetRemark() {
-        this.remark = null;
-    }
-
     /**
      * Gets the value of the finance property.
      * 
@@ -138,14 +129,6 @@ public class Figures
             finance = new ArrayList<Finance>();
         }
         return this.finance;
-    }
-
-    public boolean isSetFinance() {
-        return ((this.finance!= null)&&(!this.finance.isEmpty()));
-    }
-
-    public void unsetFinance() {
-        this.finance = null;
     }
 
     /**
@@ -177,14 +160,6 @@ public class Figures
         return this.time;
     }
 
-    public boolean isSetTime() {
-        return ((this.time!= null)&&(!this.time.isEmpty()));
-    }
-
-    public void unsetTime() {
-        this.time = null;
-    }
-
     /**
      * Gets the value of the counter property.
      * 
@@ -212,14 +187,6 @@ public class Figures
             counter = new ArrayList<Counter>();
         }
         return this.counter;
-    }
-
-    public boolean isSetCounter() {
-        return ((this.counter!= null)&&(!this.counter.isEmpty()));
-    }
-
-    public void unsetCounter() {
-        this.counter = null;
     }
 
     /**
@@ -251,14 +218,6 @@ public class Figures
         return this.figures;
     }
 
-    public boolean isSetFigures() {
-        return ((this.figures!= null)&&(!this.figures.isEmpty()));
-    }
-
-    public void unsetFigures() {
-        this.figures = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -267,7 +226,7 @@ public class Figures
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -279,16 +238,8 @@ public class Figures
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -315,10 +266,6 @@ public class Figures
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -343,10 +290,6 @@ public class Figures
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the flagged property.
      * 
@@ -355,7 +298,7 @@ public class Figures
      *     {@link Boolean }
      *     
      */
-    public boolean isFlagged() {
+    public Boolean isFlagged() {
         return flagged;
     }
 
@@ -367,16 +310,8 @@ public class Figures
      *     {@link Boolean }
      *     
      */
-    public void setFlagged(boolean value) {
+    public void setFlagged(Boolean value) {
         this.flagged = value;
-    }
-
-    public boolean isSetFlagged() {
-        return (this.flagged!= null);
-    }
-
-    public void unsetFlagged() {
-        this.flagged = null;
     }
 
 }

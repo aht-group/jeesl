@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.model.xml.io.cms.text.Remark;
 import org.jeesl.model.xml.module.finance.Counter;
@@ -99,7 +100,7 @@ public class XmlFiguresFactory
 	
 	public static boolean hasFinanceElements(Figures figures)
 	{
-		if(figures.isSetFinance()){return true;}
+		if(ObjectUtils.isNotEmpty(figures.getFinance())) {return true;}
 		else
 		{
 			for(Figures f : figures.getFigures())

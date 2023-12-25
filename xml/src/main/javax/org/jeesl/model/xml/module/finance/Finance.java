@@ -98,14 +98,6 @@ public class Finance
         return this.finance;
     }
 
-    public boolean isSetFinance() {
-        return ((this.finance!= null)&&(!this.finance.isEmpty()));
-    }
-
-    public void unsetFinance() {
-        this.finance = null;
-    }
-
     /**
      * Gets the value of the currency property.
      * 
@@ -130,10 +122,6 @@ public class Finance
         this.currency = value;
     }
 
-    public boolean isSetCurrency() {
-        return (this.currency!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -142,7 +130,7 @@ public class Finance
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -154,16 +142,8 @@ public class Finance
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -174,7 +154,7 @@ public class Finance
      *     {@link Integer }
      *     
      */
-    public int getNr() {
+    public Integer getNr() {
         return nr;
     }
 
@@ -186,16 +166,8 @@ public class Finance
      *     {@link Integer }
      *     
      */
-    public void setNr(int value) {
+    public void setNr(Integer value) {
         this.nr = value;
-    }
-
-    public boolean isSetNr() {
-        return (this.nr!= null);
-    }
-
-    public void unsetNr() {
-        this.nr = null;
     }
 
     /**
@@ -222,10 +194,6 @@ public class Finance
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -250,10 +218,6 @@ public class Finance
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the value property.
      * 
@@ -262,7 +226,7 @@ public class Finance
      *     {@link Double }
      *     
      */
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
@@ -274,16 +238,8 @@ public class Finance
      *     {@link Double }
      *     
      */
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
-    }
-
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
-    public void unsetValue() {
-        this.value = null;
     }
 
     /**
@@ -310,10 +266,6 @@ public class Finance
         this.symbol = value;
     }
 
-    public boolean isSetSymbol() {
-        return (this.symbol!= null);
-    }
-
     /**
      * Gets the value of the flagged property.
      * 
@@ -322,7 +274,7 @@ public class Finance
      *     {@link Boolean }
      *     
      */
-    public boolean isFlagged() {
+    public Boolean isFlagged() {
         return flagged;
     }
 
@@ -334,16 +286,8 @@ public class Finance
      *     {@link Boolean }
      *     
      */
-    public void setFlagged(boolean value) {
+    public void setFlagged(Boolean value) {
         this.flagged = value;
-    }
-
-    public boolean isSetFlagged() {
-        return (this.flagged!= null);
-    }
-
-    public void unsetFlagged() {
-        this.flagged = null;
     }
 
 }

@@ -60,7 +60,7 @@ public class Time
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -72,16 +72,8 @@ public class Time
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -92,7 +84,7 @@ public class Time
      *     {@link Integer }
      *     
      */
-    public int getNr() {
+    public Integer getNr() {
         return nr;
     }
 
@@ -104,16 +96,8 @@ public class Time
      *     {@link Integer }
      *     
      */
-    public void setNr(int value) {
+    public void setNr(Integer value) {
         this.nr = value;
-    }
-
-    public boolean isSetNr() {
-        return (this.nr!= null);
-    }
-
-    public void unsetNr() {
-        this.nr = null;
     }
 
     /**
@@ -140,10 +124,6 @@ public class Time
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -168,10 +148,6 @@ public class Time
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the record property.
      * 
@@ -194,10 +170,6 @@ public class Time
      */
     public void setRecord(XMLGregorianCalendar value) {
         this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.jxpath.JXPathContext;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -191,7 +192,7 @@ public class JeeslAggregationsHierachicalExporter
 			if (logger.isTraceEnabled()) {logger.trace("Content adding iterator = " +i +" while position = " +position);}
 			Cell financeCell = row.createCell(position);
 			if (offset == 0) {financeCell.setCellStyle(dateHeaderStyle);}
-			if (figures.isSetFinance())
+			 if(ObjectUtils.isNotEmpty(figures.getFinance()))
 			{
 				if (logger.isTraceEnabled()) {logger.trace("There are " +figures.getFinance().size() +" finances for " +figures.getLabel());}
 				for (Finance finance : figures.getFinance())
@@ -204,7 +205,7 @@ public class JeeslAggregationsHierachicalExporter
 					}	
 				}
 			}
-			if (figures.isSetTime())
+			 if(ObjectUtils.isNotEmpty(figures.getTime()))
 			{
 				for (Time time : figures.getTime())
 				{

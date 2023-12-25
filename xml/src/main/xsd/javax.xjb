@@ -86,7 +86,12 @@
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.dev.srs"/>
         </jxb:schemaBindings>
-    </jxb:bindings> 
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../xsd/jeesl/finance.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.finance"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     
     <jxb:bindings schemaLocation="aht/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
