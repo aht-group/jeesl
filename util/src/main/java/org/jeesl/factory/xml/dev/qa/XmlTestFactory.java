@@ -80,14 +80,12 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(Objects.nonNull(q.getResults())) {xfResults = new XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAT,QAR,QARS>(q.getResults());}
 	}
 	
-	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU> fQa;
-	public void lazyLoader(JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU> fQa,Class<QAT> cQAT)
+	private JeeslQaFacade<L,D,STAFF,GROUP,QA,QASD,QASS,QAC,QAT> fQa;
+	public void lazyLoader(JeeslQaFacade<L,D,STAFF,GROUP,QA,QASD,QASS,QAC,QAT> fQa,Class<QAT> cQAT)
 	{
 		this.fQa=fQa;
 		this.cQAT=cQAT;
 	}
-	
-	
 	
 	public static Test build()
 	{

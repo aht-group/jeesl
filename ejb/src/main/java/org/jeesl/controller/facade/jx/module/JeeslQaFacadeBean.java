@@ -37,25 +37,19 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 
 public class JeeslQaFacadeBean <L extends JeeslLang, D extends JeeslDescription,
-								C extends JeeslSecurityCategory<L,D>,
-								R extends JeeslSecurityRole<L,D,C,V,U,A>,
-								V extends JeeslSecurityView<L,D,C,R,U,A>,
-								U extends JeeslSecurityUsecase<L,D,C,R,V,A>,
-								A extends JeeslSecurityAction<L,D,R,V,U,AT>,
-								AT extends JeeslSecurityTemplate<L,D,C>,
-								USER extends JeeslUser<R>,
-								STAFF extends UtilsQaStaff<R,USER,GROUP,QA,QASH>,
+								
+								USER extends JeeslUser<?>,
+								STAFF extends UtilsQaStaff<?,USER,GROUP,QA,QASH>,
 								GROUP extends UtilsQaGroup<STAFF,QA,QASS>,
 								QA extends UtilsQualityAssurarance<STAFF,QAC,QASH>,
 								QASD extends UtilsQaSchedule<QA,QASS>,
 								QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
 								QAC extends UtilsQaCategory<QA,QAT>,
-								QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,?,?>,
+								QAT extends UtilsQaTest<GROUP,QAC,QAR,?,?,?>,
 								QAU extends UtilsQaUsability,
 								QAR extends UtilsQaResult<STAFF,QAT,?>,
-								QASH extends UtilsQaStakeholder<QA>,
-								QATD extends UtilsQaTestDiscussion<STAFF,QAT>> 
-		extends JeeslFacadeBean implements JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU>
+								QASH extends UtilsQaStakeholder<QA>> 
+		extends JeeslFacadeBean implements JeeslQaFacade<L,D,STAFF,GROUP,QA,QASD,QASS,QAC,QAT>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(JeeslQaFacadeBean.class);
