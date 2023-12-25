@@ -1,7 +1,5 @@
 package org.jeesl.factory.xml.module.survey;
 
-import java.util.Objects;
-
 import org.jeesl.interfaces.model.module.survey.correlation.JeeslSurveyCorrelation;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.xml.module.survey.Correlation;
@@ -22,14 +20,14 @@ public class XmlCorrelationFactory<CORRELATION extends JeeslSurveyCorrelation<?>
 	public Correlation build(CORRELATION ejb)
 	{		
 		Correlation xml = new Correlation();
-		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(q.isSetId()){xml.setId(ejb.getId());}
 		return xml;
 	}
 	
 	public static Correlation id()
 	{
 		Correlation xml = new Correlation();
-		xml.setId(0l);
+		xml.setId(0);
 		return xml;
 	}
 	

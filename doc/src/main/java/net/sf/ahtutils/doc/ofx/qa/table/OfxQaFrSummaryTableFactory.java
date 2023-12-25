@@ -2,15 +2,11 @@ package net.sf.ahtutils.doc.ofx.qa.table;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.module.dev.qa.Category;
-import org.jeesl.model.xml.module.dev.qa.Result;
-import org.jeesl.model.xml.module.dev.qa.Test;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
@@ -37,6 +33,9 @@ import net.sf.ahtutils.doc.UtilsDocumentation;
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusImageFactory;
 import net.sf.ahtutils.xml.aht.Aht;
+import net.sf.ahtutils.xml.qa.Category;
+import net.sf.ahtutils.xml.qa.Result;
+import net.sf.ahtutils.xml.qa.Test;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -165,7 +164,7 @@ public class OfxQaFrSummaryTableFactory extends AbstractUtilsOfxDocumentationFac
 			row.getCell().add(XmlCellFactory.createParagraphCell(test.getCode()));
 			row.getCell().add(XmlCellFactory.createParagraphCell(test.getName()));
 			
-			if(Objects.nonNull(test.getInfo()) && Objects.nonNull(test.getInfo().getStatus()))
+			if(test.isSetInfo() && test.getInfo().isSetStatus())
 			{
 				row.getCell().add(XmlCellFactory.image(OfxStatusImageFactory.build(imagePathPrefix,StatusXpath.getStatus(testConditions.getStatus(), test.getInfo().getStatus().getCode()))));
 			}

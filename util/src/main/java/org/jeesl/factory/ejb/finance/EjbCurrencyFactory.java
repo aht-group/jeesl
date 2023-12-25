@@ -1,14 +1,12 @@
 package org.jeesl.factory.ejb.finance;
 
+import net.sf.ahtutils.xml.finance.Currency;
 import net.sf.exlp.util.xml.JaxbUtil;
-
-import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.factory.ejb.system.status.EjbLangFactory;
 import org.jeesl.interfaces.model.module.currency.UtilsCurrency;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.xml.module.finance.Currency;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,9 +43,9 @@ public class EjbCurrencyFactory<C extends UtilsCurrency<L>, L extends JeeslLang>
 	
 	public C create(Currency xml) throws JeeslConstraintViolationException
 	{
-		if(Objects.isNull(xml.getLangs())) {throw new JeeslConstraintViolationException("No <langs> available for "+JaxbUtil.toString(xml));}
-		if(Objects.isNull(xml.getCode())) {throw new JeeslConstraintViolationException("No @code available for "+JaxbUtil.toString(xml));}
-		if(Objects.isNull(xml.getSymbol())) {throw new JeeslConstraintViolationException("No @symbol available for "+JaxbUtil.toString(xml));}
+		if(!xml.isSetLangs()){throw new JeeslConstraintViolationException("No <langs> available for "+JaxbUtil.toString(xml));}
+		if(!xml.isSetCode()){throw new JeeslConstraintViolationException("No @code available for "+JaxbUtil.toString(xml));}
+		if(!xml.isSetSymbol()){throw new JeeslConstraintViolationException("No @symbol available for "+JaxbUtil.toString(xml));}
 		
 		try
 		{

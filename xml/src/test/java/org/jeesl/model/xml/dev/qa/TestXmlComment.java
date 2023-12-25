@@ -1,13 +1,14 @@
 package org.jeesl.model.xml.dev.qa;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.dev.qa.Comment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.ahtutils.xml.qa.Comment;
+
 public class TestXmlComment extends AbstractXmlQaTest<Comment>
 {
-	final static Logger logger = LoggerFactory.getLogger(org.jeesl.model.xml.module.dev.qa.Test.class);
+	final static Logger logger = LoggerFactory.getLogger(net.sf.ahtutils.xml.qa.Test.class);
 	
 	public TestXmlComment(){super(Comment.class);}
 	public static Comment create(boolean withChildren){return (new TestXmlComment()).build(withChildren);}

@@ -17,7 +17,7 @@ public class TestXmlQuestion extends AbstractXmlSurveyTest<Question>
     public Question build(boolean withChilds)
     {
     	Question xml = new Question();
-    	xml.setId(123l);
+    	xml.setId(123);
     	xml.setPosition(2);
     	xml.setVisible(true);
     	xml.setCode("myCode");

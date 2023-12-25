@@ -1,6 +1,6 @@
 package org.jeesl.factory.xml.dev.srs;
 
-import org.jeesl.model.xml.module.dev.srs.Chapter;
+import org.jeesl.model.xml.dev.srs.Chapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

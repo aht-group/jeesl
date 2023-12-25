@@ -1,7 +1,5 @@
 package org.jeesl.factory.xml.module.calendar;
 
-import java.util.Objects;
-
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendar;
 import org.jeesl.interfaces.model.module.calendar.JeeslCalendarItem;
@@ -31,7 +29,7 @@ public class XmlCalendarFactory <L extends JeeslLang, D extends JeeslDescription
 	
 	public XmlCalendarFactory(String localeCode, Calendar q)
 	{
-		if(Objects.nonNull(q.getType())) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
+		if(q.isSetType()){xfType = new XmlTypeFactory<>(localeCode,q.getType());}
 	}
 	
 	public Calendar build(CALENDAR calendar)

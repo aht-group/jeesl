@@ -3,13 +3,13 @@ package org.jeesl.util.query.xpath;
 import java.util.List;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.jeesl.model.xml.module.finance.Counter;
-import org.jeesl.model.xml.module.finance.Figures;
-import org.jeesl.model.xml.module.finance.Finance;
-import org.jeesl.model.xml.module.finance.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.ahtutils.xml.finance.Counter;
+import net.sf.ahtutils.xml.finance.Figures;
+import net.sf.ahtutils.xml.finance.Finance;
+import net.sf.ahtutils.xml.finance.Time;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

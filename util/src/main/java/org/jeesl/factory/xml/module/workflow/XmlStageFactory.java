@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.JeeslWorkflowFacade;
 import org.jeesl.factory.builder.module.WorkflowFactoryBuilder;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
@@ -57,11 +56,11 @@ public class XmlStageFactory<L extends JeeslLang, D extends JeeslDescription,
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(Objects.nonNull(q.getType())) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
+		if(q.isSetType()) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
 		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
-		if(ObjectUtils.isNotEmpty(q.getTransition())) {xfTransition = new XmlTransitionFactory<>(localeCode,q.getTransition().get(0));}
-		if(Objects.nonNull(q.getPermissions()) && ObjectUtils.isNotEmpty(q.getPermissions().getPermission())) {xfPermission = new XmlPermissionFactory<>(localeCode,q.getPermissions().getPermission().get(0));}
+		if(q.isSetTransition()) {xfTransition = new XmlTransitionFactory<>(localeCode,q.getTransition().get(0));}
+		if(q.isSetPermissions() && q.getPermissions().isSetPermission()) {xfPermission = new XmlPermissionFactory<>(localeCode,q.getPermissions().getPermission().get(0));}
 	}
 	
 	public void lazy(WorkflowFactoryBuilder<L,D,  ?,?,?,WS,WST,WSP,?,?,?,WT,WTT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?> fbWorkflow,
@@ -83,13 +82,13 @@ public class XmlStageFactory<L extends JeeslLang, D extends JeeslDescription,
 	public Stage build(WS stage)
 	{
 		Stage xml = build();
-		if(Objects.nonNull(q.getId())) {xml.setId(stage.getId());}
-		if(Objects.nonNull(q.getPosition())) {xml.setPosition(stage.getPosition());}
-		if(Objects.nonNull(q.getType())) {xml.setType(xfType.build(stage.getType()));}
+		if(q.isSetId()) {xml.setId(stage.getId());}
+		if(q.isSetPosition()) {xml.setPosition(stage.getPosition());}
+		if(q.isSetType()) {xml.setType(xfType.build(stage.getType()));}
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(stage.getName()));}
 		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(stage.getDescription()));}
 		
-		if(ObjectUtils.isNotEmpty(q.getTransition()))
+		if(q.isSetTransition())
 		{
 			List<WT> transitions = new ArrayList<WT>();
 			if(fbWorkflow!=null && fWorkflow!=null) {transitions.addAll(fWorkflow.allForParent(fbWorkflow.getClassTransition(), stage));}
@@ -101,10 +100,10 @@ public class XmlStageFactory<L extends JeeslLang, D extends JeeslDescription,
 			}
 		}
 		
-		if(Objects.nonNull(q.getPermissions()))
+		if(q.isSetPermissions())
 		{
 			Permissions xPermissions = XmlPermissionsFactory.build();
-			if(ObjectUtils.isNotEmpty(q.getPermissions().getPermission()))
+			if(q.getPermissions().isSetPermission())
 			{
 				
 				List<WSP> ePermissions = new ArrayList<WSP>();
@@ -118,7 +117,7 @@ public class XmlStageFactory<L extends JeeslLang, D extends JeeslDescription,
 			xml.setPermissions(xPermissions);
 		}
 		
-		if(ObjectUtils.allNotNull(q.getLabel(),localeCode,stage.getName()) && stage.getName().containsKey(localeCode)) {xml.setLabel(stage.getName().get(localeCode).getLang());}
+		if(q.isSetLabel() && localeCode!=null && stage.getName()!=null && stage.getName().containsKey(localeCode)) {xml.setLabel(stage.getName().get(localeCode).getLang());}
 		
 		return xml;
 	}

@@ -1,9 +1,10 @@
 package org.jeesl.model.xml.dev.qa;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.dev.qa.Category;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.qa.Category;
 
 public class TestXmlCategory extends AbstractXmlQaTest<Category>
 {
@@ -15,7 +16,7 @@ public class TestXmlCategory extends AbstractXmlQaTest<Category>
     public Category build(boolean withChilds)
     {
     	Category xml = new Category();
-    	xml.setId(123l);
+    	xml.setId(123);
     	xml.setName("myName");
     	xml.setCode("myCode");
     	

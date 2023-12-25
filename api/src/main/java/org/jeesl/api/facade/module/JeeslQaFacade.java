@@ -29,6 +29,7 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 
 public interface JeeslQaFacade
 				<L extends JeeslLang, D extends JeeslDescription,
+				L2 extends JeeslLang, D2 extends JeeslDescription,
 				C extends JeeslSecurityCategory<L,D>,
 				R extends JeeslSecurityRole<L,D,C,V,U,A>,
 				V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -42,12 +43,16 @@ public interface JeeslQaFacade
 				QASD extends UtilsQaSchedule<QA,QASS>,
 				QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
 				QAC extends UtilsQaCategory<QA,QAT>,
-				QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,?>,
+				QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,QATS>,
 				QAU extends UtilsQaUsability,
-				QAR extends UtilsQaResult<STAFF,QAT,?>,
+				QAR extends UtilsQaResult<STAFF,QAT,QARS>,
 				QASH extends UtilsQaStakeholder<QA>,
 				QATD extends UtilsQaTestDiscussion<STAFF,QAT>,
-				QATI extends UtilsQaTestInfo<?>>
+				QATI extends UtilsQaTestInfo<QATC>,
+				QATC extends JeeslStatus<L2,D2,QATC>,
+				QATS extends JeeslStatus<L2,D2,QATS>,
+				QARS extends JeeslStatus<L2,D2,QARS>,
+				QAUS extends JeeslStatus<L2,D2,QAUS>>
 
 		extends JeeslFacade
 {	

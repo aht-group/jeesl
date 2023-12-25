@@ -1,11 +1,12 @@
 package org.jeesl.model.xml.domain.finance;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.finance.Signature;
 import org.jeesl.model.xml.system.security.TestXmlRole;
 import org.jeesl.model.xml.system.status.TestXmlLevel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.finance.Signature;
 
 public class TestXmlSignature extends AbstractXmlFinanceTest<Signature>
 {

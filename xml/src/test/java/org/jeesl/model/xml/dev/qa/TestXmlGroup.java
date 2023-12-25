@@ -1,10 +1,11 @@
 package org.jeesl.model.xml.dev.qa;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.dev.qa.Group;
 import org.jeesl.model.xml.system.security.TestXmlStaff;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.qa.Group;
 
 public class TestXmlGroup extends AbstractXmlQaTest<Group>
 {
@@ -16,7 +17,7 @@ public class TestXmlGroup extends AbstractXmlQaTest<Group>
     public Group build(boolean withChilds)
     {
     	Group xml = new Group();
-    	xml.setId(123l);
+    	xml.setId(123);
     	xml.setPosition(1);
     	xml.setName("myName");
     	

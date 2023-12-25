@@ -2,7 +2,6 @@ package org.jeesl.factory.xml.module.survey;
 
 import java.util.Objects;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.api.facade.module.survey.JeeslSurveyTemplateFacade;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
@@ -61,9 +60,9 @@ public class XmlTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 	public XmlTemplateFactory(String localeCode, Template q)
 	{
 		this.q=q;
-		if(Objects.nonNull(q.getStatus())) {xfStatus = new XmlStatusFactory<>(q.getStatus());}
-		if(Objects.nonNull(q.getCategory())) {xfCategory = new XmlCategoryFactory<>(q.getCategory());}
-		if(ObjectUtils.isNotEmpty(q.getSection())) {xfSection  = new XmlSectionFactory<>(localeCode,q.getSection().get(0));}	
+		if(q.isSetStatus()) {xfStatus = new XmlStatusFactory<>(q.getStatus());}
+		if(q.isSetCategory()) {xfCategory = new XmlCategoryFactory<>(q.getCategory());}
+		if(q.isSetSection()) {xfSection  = new XmlSectionFactory<>(localeCode,q.getSection().get(0));}	
 	}
 	
 	public void lazyLoad(JeeslSurveyTemplateFacade<L,D,SCHEME,TEMPLATE,VERSION,TS,TC,SECTION,QUESTION,QE,SCORE,UNIT,OPTIONS,OPTION> fTemplate,
@@ -78,15 +77,15 @@ public class XmlTemplateFactory<L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(fTemplate)){ejb = fTemplate.load(ejb,false,false);}
 		
 		Template xml = new Template();
-		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(q.isSetId()){xml.setId(ejb.getId());}
 		
-		if(Objects.nonNull(q.getDescription())) {xml.setDescription(XmlDescriptionFactory.build(ejb.getName()));}
-		if(ObjectUtils.allNotNull(q.getRemark(),ejb.getRemark())) {xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
+		if(q.isSetDescription()){xml.setDescription(XmlDescriptionFactory.build(ejb.getName()));}
+		if(q.isSetRemark() && ejb.getRemark()!=null){xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
 		
-		if(Objects.nonNull(q.getCategory())) {xml.setCategory(xfCategory.build(ejb.getCategory()));}
-		if(Objects.nonNull(q.getStatus())) {xml.setStatus(xfStatus.build(ejb.getStatus()));}
+		if(q.isSetCategory()){xml.setCategory(xfCategory.build(ejb.getCategory()));}
+		if(q.isSetStatus()){xml.setStatus(xfStatus.build(ejb.getStatus()));}
 		
-		if(ObjectUtils.isNotEmpty(q.getSection()))
+		if(q.isSetSection())
 		{			
 			for(SECTION section : ejb.getSections())
 			{

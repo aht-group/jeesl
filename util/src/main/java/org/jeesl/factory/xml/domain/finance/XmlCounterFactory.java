@@ -1,10 +1,11 @@
 package org.jeesl.factory.xml.domain.finance;
 
 import org.jeesl.interfaces.model.with.primitive.code.EjbWithCode;
-import org.jeesl.model.xml.module.finance.Counter;
-import org.jeesl.model.xml.module.finance.Figures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.finance.Counter;
+import net.sf.ahtutils.xml.finance.Figures;
 
 public class XmlCounterFactory
 {

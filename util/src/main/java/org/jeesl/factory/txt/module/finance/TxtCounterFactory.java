@@ -1,9 +1,8 @@
 package org.jeesl.factory.txt.module.finance;
 
 import java.text.DecimalFormat;
-import java.util.Objects;
 
-import org.jeesl.model.xml.module.finance.Counter;
+import net.sf.ahtutils.xml.finance.Counter;
 
 public class TxtCounterFactory
 {
@@ -17,7 +16,7 @@ public class TxtCounterFactory
 	
 	public String valueWithCurrency(Counter c)
 	{
-		if(Objects.isNull(c) || Objects.isNull(c.getCounter())) {return "";}
+		if(c==null || !c.isSetCounter()) {return "";}
 		StringBuilder sb = new StringBuilder();
 		sb.append(c.getCounter());
 		return sb.toString();

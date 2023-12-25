@@ -1,9 +1,7 @@
 package org.jeesl.doc.ofx.cms.module.workflow;
 
 import java.util.List;
-import java.util.Objects;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.doc.ofx.cms.generic.AbstractJeeslOfxTableFactory;
 import org.jeesl.interfaces.controller.handler.system.locales.JeeslLocaleManager;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -112,10 +110,10 @@ public class OfxTableWorkflowProcess <L extends JeeslLang, LOC extends JeeslLoca
 		Row row = XmlRowFactory.build();
 		row.getCell().add(ofxMultiLocale.cell(lp, stage.getLangs()));
 		
-		if(ObjectUtils.isNotEmpty(stage.getTransition())) {row.getCell().add(XmlCellFactory.list(transitions(lp,process,stage.getTransition())));}
+		if(stage.isSetTransition()) {row.getCell().add(XmlCellFactory.list(transitions(lp,process,stage.getTransition())));}
 		else {row.getCell().add(XmlCellFactory.createParagraphCell(""));}
 		
-		if(Objects.nonNull(stage.getPermissions()) && ObjectUtils.isNotEmpty(stage.getPermissions().getPermission())) {row.getCell().add(XmlCellFactory.list(permissions(lp,stage.getPermissions())));}
+		if(stage.isSetPermissions() && stage.getPermissions().isSetPermission()) {row.getCell().add(XmlCellFactory.list(permissions(lp,stage.getPermissions())));}
 		else {row.getCell().add(XmlCellFactory.createParagraphCell(""));}
 		
 		return row;

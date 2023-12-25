@@ -6,10 +6,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jeesl.model.xml.module.dev.qa.Qa;
-import org.jeesl.model.xml.module.dev.qa.Test;
-
 import net.sf.ahtutils.xml.aht.Aht;
+import net.sf.ahtutils.xml.qa.Qa;
+import net.sf.ahtutils.xml.qa.Test;
 
 @Path("/rest/qa")
 public interface UtilsQualityAssuranceRest
@@ -58,7 +57,7 @@ public interface UtilsQualityAssuranceRest
 	
 	@GET @Path("/category/{id:[0-9]*}/tests")
 	@Produces(MediaType.APPLICATION_XML)
-	org.jeesl.model.xml.module.dev.qa.Category qaCategory(@PathParam("id") long categoryId);
+	net.sf.ahtutils.xml.qa.Category qaCategory(@PathParam("id") long categoryId);
 	
 	@GET @Path("/test/{id:[0-9]*}")
 	@Produces(MediaType.APPLICATION_XML)

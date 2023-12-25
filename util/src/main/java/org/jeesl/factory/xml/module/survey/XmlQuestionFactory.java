@@ -2,7 +2,6 @@ package org.jeesl.factory.xml.module.survey;
 
 import java.util.Objects;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.survey.JeeslSurveyCoreFacade;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
 import org.jeesl.interfaces.model.module.survey.core.JeeslSurveyScheme;
@@ -45,8 +44,8 @@ public class XmlQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(Objects.nonNull(q.getScore())) {xfScore = new XmlScoreFactory<SCHEME,QUESTION,SCORE>(q.getScore());}
-		if(Objects.nonNull(q.getOptions())) {xfOptions = new XmlOptionsFactory<L,D,QUESTION,OPTION>(localeCode,q.getOptions());}
+		if(q.isSetScore()){xfScore = new XmlScoreFactory<SCHEME,QUESTION,SCORE>(q.getScore());}
+		if(q.isSetOptions()) {xfOptions = new XmlOptionsFactory<L,D,QUESTION,OPTION>(localeCode,q.getOptions());}
 	}
 	
 	public void lazyLoad(JeeslSurveyCoreFacade<L,D,?,?,?,SCHEME,?,?,?,?,?,QUESTION,QE,SCORE,UNIT,?,?,?,OPTIONS,OPTION,?> fSurvey)
@@ -59,33 +58,35 @@ public class XmlQuestionFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(fSurvey!=null){ejb = fSurvey.load(ejb);}
 		
 		Question xml = new Question();
-		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(q.isSetId()){xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(ejb.getPosition());}
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(ejb.isVisible());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(ejb.getCode());}
-		if(Objects.nonNull(q.getTopic())) {xml.setTopic(ejb.getTopic());}
+		if(q.isSetTopic()){xml.setTopic(ejb.getTopic());}
 		
 		// MultiLang Issue
 		//	if(q.isSetQuestion() && ejb.getQuestion()!=null){xml.setQuestion(net.sf.ahtutils.factory.xml.text.XmlQuestionFactory.build(ejb.getQuestion()));}
-		if(Objects.nonNull(q.getQuestion()) && ejb.getName().containsKey(localeCode)){xml.setQuestion(net.sf.ahtutils.factory.xml.text.XmlQuestionFactory.build(ejb.getName().get(localeCode).getLang()));}
-		if(ObjectUtils.allNotNull(q.getRemark(),ejb.getRemark())) {xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
+		if(q.isSetQuestion() && ejb.getName().containsKey(localeCode)){xml.setQuestion(net.sf.ahtutils.factory.xml.text.XmlQuestionFactory.build(ejb.getName().get(localeCode).getLang()));}
+		if(q.isSetRemark() && ejb.getRemark()!=null){xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
 		
-		if(ObjectUtils.allNotNull(q.getUnit(),ejb.getUnit()))
+		if(q.isSetUnit() && ejb.getUnit()!=null)
 		{
 			XmlUnitFactory f = new XmlUnitFactory(localeCode,q.getUnit());
 			xml.setUnit(f.build(ejb.getUnit()));
 		}
 		
-		if(Objects.nonNull(q.isShowBoolean())) {if(ejb.getShowBoolean()!=null) {xml.setShowBoolean(ejb.getShowBoolean());} else{xml.setShowBoolean(false);}}
-		if(Objects.nonNull(q.isShowInteger())) {if(ejb.getShowInteger()!=null) {xml.setShowInteger(ejb.getShowInteger());} else{xml.setShowInteger(false);}}
-		if(Objects.nonNull(q.isShowDouble())) {if(ejb.getShowDouble()!=null) {xml.setShowDouble(ejb.getShowDouble());} else{xml.setShowDouble(false);}}
-		if(Objects.nonNull(q.isShowText())) {if(ejb.getShowText()!=null) {xml.setShowText(ejb.getShowText());} else{xml.setShowText(false);}}
-		if(Objects.nonNull(q.isShowScore())) {if(ejb.getShowScore()!=null) {xml.setShowScore(ejb.getShowScore());} else{xml.setShowScore(false);}}
-		if(Objects.nonNull(q.isShowRemark())) {if(ejb.getShowRemark()!=null) {xml.setShowRemark(ejb.getShowRemark());} else{xml.setShowRemark(false);}}
-		if(Objects.nonNull(q.isShowSelectOne())) {if(ejb.getShowSelectOne()!=null){xml.setShowSelectOne(ejb.getShowSelectOne());} else{xml.setShowSelectOne(false);}}
+		if(q.isSetShowBoolean()){if(ejb.getShowBoolean()!=null){xml.setShowBoolean(ejb.getShowBoolean());}else{xml.setShowBoolean(false);}}
+		if(q.isSetShowInteger()){if(ejb.getShowInteger()!=null){xml.setShowInteger(ejb.getShowInteger());}else{xml.setShowInteger(false);}}
+		if(q.isSetShowDouble()){if(ejb.getShowDouble()!=null){xml.setShowDouble(ejb.getShowDouble());}else{xml.setShowDouble(false);}}
+		if(q.isSetShowText()){if(ejb.getShowText()!=null){xml.setShowText(ejb.getShowText());}else{xml.setShowText(false);}}
+		if(q.isSetShowScore()){if(ejb.getShowScore()!=null){xml.setShowScore(ejb.getShowScore());}else{xml.setShowScore(false);}}
+		if(q.isSetShowRemark()){if(ejb.getShowRemark()!=null){xml.setShowRemark(ejb.getShowRemark());}else{xml.setShowRemark(false);}}
 		
-		if(Objects.nonNull(q.getScore())) {xml.setScore(xfScore.build(ejb));}
-		if(Objects.nonNull(q.getOptions())) {xml.setOptions(xfOptions.build(ejb));}
+		if(q.isSetScore()){xml.setScore(xfScore.build(ejb));}
+		
+		if(q.isSetShowSelectOne()){if(ejb.getShowSelectOne()!=null){xml.setShowSelectOne(ejb.getShowSelectOne());}else{xml.setShowSelectOne(false);}}
+		
+		if(q.isSetOptions()){xml.setOptions(xfOptions.build(ejb));}
 		
 		return xml;
 	}

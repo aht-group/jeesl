@@ -2,17 +2,11 @@ package net.sf.ahtutils.doc.ofx.qa.section;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.module.dev.qa.Category;
-import org.jeesl.model.xml.module.dev.qa.Expected;
-import org.jeesl.model.xml.module.dev.qa.Info;
-import org.jeesl.model.xml.module.dev.qa.Test;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.XmlHighlightFactory;
@@ -34,6 +28,10 @@ import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaFrResultTableFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaFrTableFactory;
 import net.sf.ahtutils.xml.aht.Aht;
+import net.sf.ahtutils.xml.qa.Category;
+import net.sf.ahtutils.xml.qa.Expected;
+import net.sf.ahtutils.xml.qa.Info;
+import net.sf.ahtutils.xml.qa.Test;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
@@ -83,25 +81,25 @@ public class OfxQaFrSectionFactory extends AbstractUtilsOfxDocumentationFactory
 		section.getContent().add(XmlTitleFactory.build(test.getName()));
 		
 		Paragraph p = XmlParagraphFactory.build();
-		if(Objects.nonNull(test.getInfo()) && Objects.nonNull(test.getInfo().getStatus())) {p.getContent().add(marginalia(test.getInfo()));}
-		if(Objects.nonNull(test.getDescription()) && Objects.nonNull(test.getDescription().getValue()))
+		if(test.isSetInfo() && test.getInfo().isSetStatus()){p.getContent().add(marginalia(test.getInfo()));}
+		if(test.isSetDescription() && test.getDescription().isSetValue())
 		{
 			p.getContent().add(test.getDescription().getValue());	
 		}
 		if(p.getContent().size()>0){section.getContent().add(p);}
 		
 		section.getContent().add(fOfxTableTest.buildTableTestDetails(test));
-		if(Objects.nonNull(test.getExpected())) {section.getContent().addAll(expectedParagraph(test.getExpected()));}
-		if(Objects.nonNull(test.getInfo()))
+		if(test.isSetExpected()){section.getContent().addAll(expectedParagraph(test.getExpected()));}
+		if(test.isSetInfo())
 		{
 			Info info = test.getInfo();
-			if(Objects.nonNull(info.getComment()) && Objects.nonNull(info.getComment().getValue()) && info.getComment().getValue().length()>0)
+			if(info.isSetComment() && info.getComment().isSetValue() && info.getComment().getValue().length()>0)
 			{
 				section.getContent().add(testInfo(test.getInfo()));
 			}
 		}
 		
-		if(withResults && Objects.nonNull(test.getResults()) && ObjectUtils.isNotEmpty(test.getResults().getResult()))
+		if(withResults && test.isSetResults() && test.getResults().isSetResult())
 		{
 			section.getContent().add(fOfxTableTestResult.build(test));
 		}

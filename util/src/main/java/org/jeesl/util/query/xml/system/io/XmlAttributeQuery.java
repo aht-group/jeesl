@@ -3,9 +3,9 @@ package org.jeesl.util.query.xml.system.io;
 import java.util.Hashtable;
 import java.util.Map;
 
-import org.jeesl.model.xml.io.attribute.Attribute;
-import org.jeesl.model.xml.io.attribute.Attributes;
 import org.jeesl.model.xml.jeesl.QueryAttribute;
+import org.jeesl.model.xml.system.io.attribute.Attribute;
+import org.jeesl.model.xml.system.io.attribute.Attributes;
 
 public class XmlAttributeQuery
 {

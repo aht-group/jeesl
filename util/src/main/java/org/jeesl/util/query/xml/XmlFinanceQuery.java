@@ -6,8 +6,9 @@ import java.util.Map;
 import org.jeesl.factory.xml.domain.finance.XmlCurrencyFactory;
 import org.jeesl.factory.xml.domain.finance.XmlFinanceFactory;
 import org.jeesl.model.xml.jeesl.QueryFinance;
-import org.jeesl.model.xml.module.finance.Currency;
-import org.jeesl.model.xml.module.finance.Finance;
+
+import net.sf.ahtutils.xml.finance.Currency;
+import net.sf.ahtutils.xml.finance.Finance;
 
 public class XmlFinanceQuery
 {

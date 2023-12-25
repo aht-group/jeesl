@@ -1,11 +1,11 @@
 package org.jeesl.model.xml.domain.finance;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.finance.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.test.AbstractAhtUtilsXmlTest;
+import net.sf.ahtutils.xml.finance.Time;
 
 public class TestXmlTime extends AbstractXmlFinanceTest<Time>
 {
@@ -17,7 +17,7 @@ public class TestXmlTime extends AbstractXmlFinanceTest<Time>
     public Time build(boolean withChilds)
     {
     	Time xml = new Time();
-    	xml.setId(123l);
+    	xml.setId(123);
     	xml.setNr(1);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");

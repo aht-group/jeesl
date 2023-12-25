@@ -1,14 +1,15 @@
 package org.jeesl.model.xml.dev.qa;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.dev.qa.Result;
 import org.jeesl.model.xml.system.status.TestXmlStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.ahtutils.xml.qa.Result;
+
 public class TestXmlResult extends AbstractXmlQaTest<Result>
 {
-	final static Logger logger = LoggerFactory.getLogger(org.jeesl.model.xml.module.dev.qa.Test.class);
+	final static Logger logger = LoggerFactory.getLogger(net.sf.ahtutils.xml.qa.Test.class);
 	
 	public TestXmlResult(){super(Result.class);}
 	public static Result create(boolean withChildren){return (new TestXmlResult()).build(withChildren);}  
@@ -16,7 +17,7 @@ public class TestXmlResult extends AbstractXmlQaTest<Result>
     @Override public Result build(boolean withChilds)
     {
     	Result xml = new Result();
-    	xml.setId(123l);
+    	xml.setId(123);
     	xml.setRecord(TestXmlResult.getDefaultXmlDate());
     	
     	if(withChilds)

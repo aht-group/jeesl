@@ -7,9 +7,10 @@ import org.jeesl.factory.xml.system.lang.XmlLangFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.module.currency.UtilsCurrency;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.xml.module.finance.Currency;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.finance.Currency;
 
 public class XmlCurrencyFactory <L extends JeeslLang, C extends UtilsCurrency<L>>
 {
@@ -31,9 +32,9 @@ public class XmlCurrencyFactory <L extends JeeslLang, C extends UtilsCurrency<L>
 	{
 		Currency xml = build();
 		
-		if(Objects.nonNull(q.getId())) {xml.setId(currency.getId());}
-		if(Objects.nonNull(q.getCode())) {xml.setCode(currency.getCode());}
-		if(Objects.nonNull(q.getSymbol())) {xml.setSymbol(currency.getSymbol());}
+		if(q.isSetId()) {xml.setId(currency.getId());}
+		if(q.isSetCode()) {xml.setCode(currency.getCode());}
+		if(q.isSetSymbol()) {xml.setSymbol(currency.getSymbol());}
 		
 		if(ObjectUtils.allNotNull(q.getLabel(),localeCode)){xml.setLabel(XmlLangFactory.label(localeCode,currency));}
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(currency.getName()));}

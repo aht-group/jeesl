@@ -1,9 +1,10 @@
 package org.jeesl.model.xml.domain.finance;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.finance.Finance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.finance.Finance;
 
 public class TestXmlFinance extends AbstractXmlFinanceTest<Finance>
 {
@@ -15,7 +16,7 @@ public class TestXmlFinance extends AbstractXmlFinanceTest<Finance>
     public Finance build(boolean withChilds)
     {
     	Finance xml = new Finance();
-    	xml.setId(123l);
+    	xml.setId(123);
     	xml.setNr(1);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");

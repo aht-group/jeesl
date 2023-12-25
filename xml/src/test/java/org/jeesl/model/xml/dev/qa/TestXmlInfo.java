@@ -1,10 +1,11 @@
 package org.jeesl.model.xml.dev.qa;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.dev.qa.Info;
 import org.jeesl.model.xml.system.status.TestXmlStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.qa.Info;
 
 public class TestXmlInfo extends AbstractXmlQaTest<Info>
 {
@@ -16,7 +17,7 @@ public class TestXmlInfo extends AbstractXmlQaTest<Info>
     public Info build(boolean withChilds)
     {
     	Info xml = new Info();
-    	xml.setId(123l);
+    	xml.setId(123);
     	xml.setRecord(TestXmlInfo.getDefaultXmlDate());
     	
     	if(withChilds)

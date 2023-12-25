@@ -2,10 +2,6 @@ package org.jeesl.factory.xml.dev.qa;
 
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
-import org.jeesl.model.xml.module.dev.qa.Results;
-
-import java.util.Objects;
-
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -29,6 +25,7 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestDiscussion;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestInfo;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
+import net.sf.ahtutils.xml.qa.Results;
 
 public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 								L2 extends JeeslLang, D2 extends JeeslDescription,
@@ -65,7 +62,7 @@ public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 	public XmlResultsFactory(Results q)
 	{
 		this.q=q;
-		if(Objects.nonNull(q.getResult())) {xfResult = new XmlResultFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QARS>(q.getResult().get(0));}
+		if(q.isSetResult()) {xfResult = new XmlResultFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QARS>(q.getResult().get(0));}
 	}
 	
 	
@@ -73,7 +70,7 @@ public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 	{
 		Results xml = new Results();
 	
-		if(Objects.nonNull(q.getResult()))
+		if(q.isSetResult())
 		{
 			for(QAR result : test.getResults())
 			{

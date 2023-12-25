@@ -1,6 +1,7 @@
 package org.jeesl.factory.xml.dev.qa;
 
-import org.jeesl.model.xml.module.dev.qa.Reference;
+import net.sf.ahtutils.xml.qa.Reference;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

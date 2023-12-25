@@ -52,7 +52,7 @@ public class XmlWorkflowQuery
 	private static org.jeesl.model.xml.module.workflow.Process xProcess()
 	{		
 		org.jeesl.model.xml.module.workflow.Process xml = new org.jeesl.model.xml.module.workflow.Process();
-		xml.setId(0l);
+		xml.setId(0);
 		xml.setCode("");
 		xml.setPosition(0);
 		xml.setLangs(XmlStatusQuery.langs());
@@ -65,7 +65,7 @@ public class XmlWorkflowQuery
 	private static org.jeesl.model.xml.module.workflow.Process rProcess()
 	{		
 		org.jeesl.model.xml.module.workflow.Process xml = new org.jeesl.model.xml.module.workflow.Process();
-		xml.setId(0l);
+		xml.setId(0);
 		xml.setCode("");
 		xml.setPosition(0);
 		xml.setContext(XmlContextFactory.build("",""));
@@ -76,7 +76,7 @@ public class XmlWorkflowQuery
 	private static Stage xStage()
 	{		
 		Stage xml = new Stage();
-		xml.setId(0l);
+		xml.setId(0);
 		xml.setPosition(0);
 		xml.setType(XmlTypeFactory.build("",""));
 		xml.setLangs(XmlStatusQuery.langs());
@@ -91,7 +91,7 @@ public class XmlWorkflowQuery
 	private static Permissions permissions()
 	{
 		Permission xml = XmlPermissionFactory.build();
-		xml.setId(0l);
+		xml.setId(0);
 		xml.setPosition(0);
 		xml.setType(XmlTypeFactory.build("",""));
 		xml.setLevel(XmlLevelFactory.build("",""));
@@ -114,10 +114,10 @@ public class XmlWorkflowQuery
 	private static Transition xTransition()
 	{		
 		Stage stage = new Stage();
-		stage.setId(0l);
+		stage.setId(0);
 		
 		Transition xml = new Transition();
-		xml.setId(0l);
+		xml.setId(0);
 		xml.setPosition(0);
 		xml.setLangs(XmlStatusQuery.langs());
 		xml.setDescriptions(XmlStatusQuery.descriptions());
@@ -128,7 +128,7 @@ public class XmlWorkflowQuery
 	private static Stage rStage()
 	{		
 		Stage xml = new Stage();
-		xml.setId(0l);
+		xml.setId(0);
 		xml.setPosition(0);
 		xml.setLabel("");
 		return xml;
@@ -144,7 +144,7 @@ public class XmlWorkflowQuery
 	private static Transition rTransition2Process()
 	{		
 		Transition xml = new Transition();
-		xml.setId(0l);
+		xml.setId(0);
 		xml.setPosition(0);
 		xml.setLabel("");
 		xml.setStage(rStage2Process());
@@ -154,7 +154,7 @@ public class XmlWorkflowQuery
 	public static Activity rLastActivity()
 	{		
 		Activity xml = new Activity();
-		xml.setId(0l);
+		xml.setId(0);
 		xml.setUser(XmlUserFactory.build("","",""));
 		
 		

@@ -1,13 +1,8 @@
 package net.sf.ahtutils.doc.ofx.qa.table;
 
-import java.util.Objects;
-
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.module.dev.qa.Group;
-import org.jeesl.model.xml.module.dev.qa.Groups;
-import org.jeesl.model.xml.module.dev.qa.Test;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
@@ -28,6 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
+import net.sf.ahtutils.xml.qa.Group;
+import net.sf.ahtutils.xml.qa.Groups;
+import net.sf.ahtutils.xml.qa.Test;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
@@ -98,7 +96,7 @@ public class OfxQaFrTableFactory extends AbstractUtilsOfxDocumentationFactory
 		body.getRow().add(buildPreCondition(test));
 		body.getRow().add(buildSteps(test));
 		body.getRow().add(buildDuration(test));
-		if(Objects.nonNull(test.getGroups()) && Objects.nonNull(test.getGroups().getGroup())) {body.getRow().add(buildGroups(test.getGroups()));}
+		if(test.isSetGroups() && test.getGroups().isSetGroup()){body.getRow().add(buildGroups(test.getGroups()));}
 		
 		Content content = new Content();
 		content.getBody().add(body);
@@ -119,7 +117,7 @@ public class OfxQaFrTableFactory extends AbstractUtilsOfxDocumentationFactory
 	{
 		Row row = new Row();
 		row.getCell().add(XmlCellFactory.createParagraphCell("Reference"));
-		if(Objects.nonNull(test.getReference()) && Objects.nonNull(test.getReference().getValue()))
+		if(test.isSetReference() && test.getReference().isSetValue())
 		{
 			row.getCell().add(XmlCellFactory.createParagraphCell(test.getReference().getValue()));
 		}
@@ -158,7 +156,7 @@ public class OfxQaFrTableFactory extends AbstractUtilsOfxDocumentationFactory
 	{
 		Row row = new Row();
 		row.getCell().add(XmlCellFactory.createParagraphCell("Pre-Condition"));
-		if(Objects.nonNull(test.getPreCondition()) && Objects.nonNull(test.getPreCondition().getValue()))
+		if(test.isSetPreCondition() && test.getPreCondition().isSetValue())
 		{
 			row.getCell().add(XmlCellFactory.createParagraphCell(test.getPreCondition().getValue()));
 		}
@@ -173,7 +171,7 @@ public class OfxQaFrTableFactory extends AbstractUtilsOfxDocumentationFactory
 	{
 		Row row = new Row();
 		row.getCell().add(XmlCellFactory.createParagraphCell("Test Steps"));
-		if(Objects.nonNull(test.getSteps()) && Objects.nonNull(test.getSteps().getValue()))
+		if(test.isSetSteps() && test.getSteps().isSetValue())
 		{
 			logger.trace("Steps");
 			HtmlTranscoder transcoder = new HtmlTranscoder();

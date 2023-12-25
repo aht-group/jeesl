@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -18,12 +17,12 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.jeesl.model.xml.module.finance.Figures;
-import org.jeesl.model.xml.module.finance.Finance;
-import org.jeesl.model.xml.module.finance.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.ahtutils.xml.finance.Figures;
+import net.sf.ahtutils.xml.finance.Finance;
+import net.sf.ahtutils.xml.finance.Time;
 import net.sf.ahtutils.xml.report.Info;
 import net.sf.ahtutils.xml.report.Label;
 
@@ -190,33 +189,33 @@ public class JeeslAggregationsFlatExporter
 		
 		for (short i = dataFieldCounter; i>0; i --)
 		{
-            if (logger.isTraceEnabled()) {logger.trace("Content adding iterator = " +i +" while position = " +position);}
-            Cell financeCell = row.createCell(position);
-            if (ObjectUtils.isNotEmpty(figures.getFinance()))
-            {
-                if (logger.isTraceEnabled()) {logger.trace("There are " +figures.getFinance().size() +" finances for " +figures.getLabel());}
-                for (Finance finance : figures.getFinance())
-                {
-                    if (finance.getNr() == i)
+                    if (logger.isTraceEnabled()) {logger.trace("Content adding iterator = " +i +" while position = " +position);}
+                    Cell financeCell = row.createCell(position);
+                    if (figures.isSetFinance())
                     {
-                        financeCell.setCellStyle(numericStyle);
-                        financeCell.setCellValue(finance.getValue());
-                        if (logger.isTraceEnabled()){logger.trace("Set value to " +finance.getValue() +" for " +figures.getLabel());}
-                    }	
-                }
-            }
-            if(ObjectUtils.isNotEmpty(figures.getTime()))
-            {
-                for (Time time : figures.getTime())
-                {
-                    if (time.getNr() == i)
-                    {
-                        financeCell.setCellStyle(dateStyle);
-                        financeCell.setCellValue(time.getRecord().toGregorianCalendar().getTime());
+                        if (logger.isTraceEnabled()) {logger.trace("There are " +figures.getFinance().size() +" finances for " +figures.getLabel());}
+                        for (Finance finance : figures.getFinance())
+                        {
+                            if (finance.getNr() == i)
+                            {
+                                financeCell.setCellStyle(numericStyle);
+                                financeCell.setCellValue(finance.getValue());
+                                if (logger.isTraceEnabled()){logger.trace("Set value to " +finance.getValue() +" for " +figures.getLabel());}
+                            }	
+                        }
                     }
-                }
-            }
-            position++;
+                    if (figures.isSetTime())
+                    {
+                        for (Time time : figures.getTime())
+                        {
+                            if (time.getNr() == i)
+                            {
+                                financeCell.setCellStyle(dateStyle);
+                                financeCell.setCellValue(time.getRecord().toGregorianCalendar().getTime());
+                            }
+                        }
+                    }
+                    position++;
 		}
 		
 		// Recursevely call the next levels

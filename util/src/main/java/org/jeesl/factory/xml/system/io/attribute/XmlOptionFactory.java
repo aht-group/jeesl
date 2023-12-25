@@ -3,7 +3,7 @@ package org.jeesl.factory.xml.system.io.attribute;
 import org.jeesl.interfaces.model.module.attribute.JeeslAttributeOption;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.model.xml.io.attribute.Option;
+import org.jeesl.model.xml.system.io.attribute.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

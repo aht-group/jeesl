@@ -70,6 +70,12 @@
             <jxb:package name="net.sf.ahtutils.xml.issue"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+
+   	<jxb:bindings schemaLocation="../xsd/jeesl/finance.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="net.sf.ahtutils.xml.finance"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     
     <jxb:bindings schemaLocation="../xsd/aht/qa.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
@@ -119,11 +125,6 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-	<jxb:bindings schemaLocation="../xsd/jeesl/finance.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="net.sf.ahtutils.xml.finance"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
 	<jxb:bindings schemaLocation="../xsd/jeesl/module/timeseries.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.ts"/>

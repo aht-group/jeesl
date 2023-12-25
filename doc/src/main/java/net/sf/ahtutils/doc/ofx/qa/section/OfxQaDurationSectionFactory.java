@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.module.dev.qa.Category;
-import org.jeesl.model.xml.module.dev.qa.Groups;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
@@ -23,6 +21,8 @@ import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaDurationGroupTable;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaDurationFrSummaryTable;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaDurationFrCategoryTable;
+import net.sf.ahtutils.xml.qa.Category;
+import net.sf.ahtutils.xml.qa.Groups;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class OfxQaDurationSectionFactory extends AbstractUtilsOfxDocumentationFactory

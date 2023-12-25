@@ -1,8 +1,5 @@
 package org.jeesl.factory.xml.module.ts;
 
-import java.util.Objects;
-
-import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.security.XmlUserFactory;
 import org.jeesl.factory.xml.system.status.XmlSourceFactory;
 import org.jeesl.factory.xml.system.util.text.XmlReferenceFactory;
@@ -37,7 +34,7 @@ public class XmlTransactionFactory<L extends JeeslLang,D extends JeeslDescriptio
 	{
 		this.localeCode=localeCode;
 		this.q=q;
-		if(Objects.nonNull(q.getUser())) {xfUser = new XmlUserFactory<>(q.getUser());}
+		if(q.isSetUser()) {xfUser = new XmlUserFactory<>(q.getUser());}
 	}
 
 	public static Transaction build() {return new Transaction();}
@@ -46,14 +43,14 @@ public class XmlTransactionFactory<L extends JeeslLang,D extends JeeslDescriptio
 	{
 		Transaction xml = new Transaction();
 
-		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
-		if(Objects.nonNull(q.getRecord())) {xml.setRecord(DateUtil.toXmlGc(ejb.getRecord()));}
-		if(Objects.nonNull(q.getUser())) {xml.setUser(xfUser.build(ejb.getUser()));}
+		if(q.isSetId()) {xml.setId(ejb.getId());}
+		if(q.isSetRecord()) {xml.setRecord(DateUtil.toXmlGc(ejb.getRecord()));}
+		if(q.isSetUser()) {xml.setUser(xfUser.build(ejb.getUser()));}
 		
-		if(Objects.nonNull(q.getRemark())) {xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
-		if(Objects.nonNull(q.getReference())) {xml.setReference(XmlReferenceFactory.build(ejb.getReference()));}
+		if(q.isSetRemark()) {xml.setRemark(XmlRemarkFactory.build(ejb.getRemark()));}
+		if(q.isSetReference()) {xml.setReference(XmlReferenceFactory.build(ejb.getReference()));}
 		
-		if(ObjectUtils.allNotNull(q.getSource(),ejb.getSource()) && ejb.getSource().getName().containsKey(localeCode))
+		if(q.isSetSource() && ejb.getSource()!=null && ejb.getSource().getName().containsKey(localeCode))
 		{
 			Source source = XmlSourceFactory.label(null,ejb.getSource().getName().get(localeCode).getLang());
 			xml.setSource(source);

@@ -8,8 +8,6 @@ import java.util.List;
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.module.dev.qa.Category;
-import org.jeesl.model.xml.module.dev.qa.Qa;
 import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.system.security.Staff;
 import org.jeesl.model.xml.xsd.Container;
@@ -37,6 +35,8 @@ import net.sf.ahtutils.doc.ofx.qa.table.OfxQaStaffTableFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusTableFactory.Code;
 import net.sf.ahtutils.xml.aht.Aht;
+import net.sf.ahtutils.xml.qa.Category;
+import net.sf.ahtutils.xml.qa.Qa;
 
 public class LatexQaWriter
 {	

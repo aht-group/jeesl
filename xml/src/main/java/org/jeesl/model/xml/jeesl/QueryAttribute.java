@@ -8,9 +8,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
-import org.jeesl.model.xml.io.attribute.Attribute;
-import org.jeesl.model.xml.io.attribute.Attributes;
+import org.jeesl.model.xml.system.io.attribute.Attribute;
+import org.jeesl.model.xml.system.io.attribute.Attributes;
 
 
 /**

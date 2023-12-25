@@ -2,8 +2,6 @@ package net.sf.ahtutils.doc.ofx.qa.section;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.module.dev.qa.Group;
-import org.jeesl.model.xml.module.dev.qa.Groups;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
 import org.openfuxml.factory.xml.ofx.content.structure.XmlSectionFactory;
@@ -16,6 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.qa.table.OfxQaStaffTableFactory;
+import net.sf.ahtutils.xml.qa.Group;
+import net.sf.ahtutils.xml.qa.Groups;
 
 public class OfxQaScheduleSectionFactory extends AbstractUtilsOfxDocumentationFactory
 {

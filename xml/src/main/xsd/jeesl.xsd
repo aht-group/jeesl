@@ -12,27 +12,14 @@
     <xsd:import namespace="http://www.jeesl.org/text" schemaLocation="jeesl/text.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/symbol" schemaLocation="jeesl/symbol.xsd"/>
     
-    <xsd:import namespace="http://www.jeesl.org/io/attribute" schemaLocation="jeesl/io/attribute.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/dbseed" schemaLocation="aht/dbseed.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/io/mail" schemaLocation="jeesl/io/mail.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/revision" schemaLocation="jeesl/io/revision.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/io/ssi" schemaLocation="jeesl/io/ssi.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/io/template" schemaLocation="jeesl/io/template.xsd"/>
 	
-	<xsd:import namespace="http://www.jeesl.org/bb" schemaLocation="jeesl/module/bb.xsd"/>
-	<xsd:import namespace="http://www.jeesl.org/calendar" schemaLocation="jeesl/module/calendar.xsd"/>
-<!-- 	
+
 	<xsd:import namespace="http://www.jeesl.org/dev/srs" schemaLocation="jeesl/dev/srs.xsd"/>
-	<xsd:import namespace="http://ahtutils.aht-group.com/qa" schemaLocation="aht/qa.xsd"/>
- -->	
-	
-	<xsd:import namespace="http://www.jeesl.org/finance" schemaLocation="jeesl/finance.xsd"/>
-	
-	<xsd:import namespace="http://www.jeesl.org/survey" schemaLocation="jeesl/module/survey.xsd"/>
-	<xsd:import namespace="http://www.jeesl.org/timeseries" schemaLocation="jeesl/module/timeseries.xsd"/>
-	<xsd:import namespace="http://www.jeesl.org/workflow" schemaLocation="jeesl/module/workflow.xsd"/>
-	
-	<xsd:import namespace="http://www.jeesl.org/job" schemaLocation="jeesl/module/job.xsd"/>
 
 	<xsd:import namespace="http://ahtutils.aht-group.com/text" schemaLocation="aht/text.xsd"/>
 

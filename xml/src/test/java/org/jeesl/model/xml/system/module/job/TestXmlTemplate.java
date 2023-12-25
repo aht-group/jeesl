@@ -1,7 +1,7 @@
 package org.jeesl.model.xml.system.module.job;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.system.job.Template;
+import org.jeesl.model.xml.module.job.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +15,7 @@ public class TestXmlTemplate extends AbstractXmlJobTest<Template>
     public Template build(boolean withChilds)
     {
     	Template xml = new Template();
-    	xml.setId(123l);
+    	xml.setId(123);
     	xml.setCode("myCode");
     	
     	if(withChilds)

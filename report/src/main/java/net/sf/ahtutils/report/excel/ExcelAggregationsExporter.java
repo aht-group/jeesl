@@ -3,12 +3,13 @@ package net.sf.ahtutils.report.excel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import net.sf.ahtutils.xml.finance.Figures;
+import net.sf.ahtutils.xml.finance.Finance;
+import net.sf.ahtutils.xml.finance.Time;
 import net.sf.ahtutils.xml.report.Info;
 import net.sf.ahtutils.xml.report.Label;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -22,9 +23,6 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.jeesl.model.xml.module.finance.Figures;
-import org.jeesl.model.xml.module.finance.Finance;
-import org.jeesl.model.xml.module.finance.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -190,7 +188,7 @@ public class ExcelAggregationsExporter
 			if (logger.isTraceEnabled()) {logger.trace("Content adding iterator = " +i +" while position = " +position);}
 			Cell financeCell = row.createCell(position);
 			if (offset == 0) {financeCell.setCellStyle(dateHeaderStyle);}
-			if(ObjectUtils.isNotEmpty(figures.getFinance()))
+			if (figures.isSetFinance())
 			{
 				if (logger.isTraceEnabled()) {logger.trace("There are " +figures.getFinance().size() +" finances for " +figures.getLabel());}
 				for (Finance finance : figures.getFinance())
@@ -203,7 +201,7 @@ public class ExcelAggregationsExporter
 					}	
 				}
 			}
-			if(ObjectUtils.isNotEmpty(figures.getTime()))
+			if (figures.isSetTime())
 			{
 				for (Time time : figures.getTime())
 				{

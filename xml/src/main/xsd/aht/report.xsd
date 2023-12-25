@@ -14,7 +14,7 @@
 	<xsd:import namespace="http://www.jeesl.org/timeseries"			schemaLocation="../jeesl/module/timeseries.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/text"				schemaLocation="../jeesl/text.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/finance"			schemaLocation="../jeesl/finance.xsd"/>
-	 <xsd:import namespace="http://exlp.sf.net/io"					schemaLocation="../../../../../../exlp/xml/src/main/xsd/exlp/io.xsd"/>
+	 <xsd:import namespace="http://exlp.sf.net/io"					schemaLocation="../../../../../../exlp/xml/src/main/xsd/io.xsd"/>
 	<xsd:element name="reports">
 	    <xsd:complexType>
             <xsd:sequence>

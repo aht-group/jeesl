@@ -2,19 +2,18 @@ package net.sf.ahtutils.doc.ofx.qa.table;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
 import net.sf.ahtutils.doc.ofx.status.OfxStatusImageFactory;
+import net.sf.ahtutils.xml.qa.Result;
+import net.sf.ahtutils.xml.qa.Test;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.module.dev.qa.Result;
-import org.jeesl.model.xml.module.dev.qa.Test;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlAlignmentFactory;
@@ -101,7 +100,7 @@ public class OfxQaFrResultTableFactory extends AbstractUtilsOfxDocumentationFact
 		head.getRow().add(createHeaderRow(test));
 		
 		Body body = new Body();
-		if(Objects.nonNull(test.getResults()))
+		if(test.isSetResults())
 		{
 			for(Result result : test.getResults().getResult())
 			{
@@ -121,7 +120,7 @@ public class OfxQaFrResultTableFactory extends AbstractUtilsOfxDocumentationFact
 		JaxbUtil.trace(result);
 		Row row = new Row();
 		
-		if(Objects.nonNull(result.getRecord())) {row.getCell().add(XmlCellFactory.createParagraphCell(df.format(result.getRecord().toGregorianCalendar().getTime())));}
+		if(result.isSetRecord()){row.getCell().add(XmlCellFactory.createParagraphCell(df.format(result.getRecord().toGregorianCalendar().getTime())));}
 		else{row.getCell().add(XmlCellFactory.createParagraphCell(""));}
 		
 		row.getCell().add(XmlCellFactory.createParagraphCell(result.getStaff().getUser().getLastName()));

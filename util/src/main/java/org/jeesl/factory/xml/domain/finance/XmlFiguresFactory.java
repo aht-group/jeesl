@@ -6,16 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jeesl.model.xml.io.cms.text.Remark;
-import org.jeesl.model.xml.module.finance.Counter;
-import org.jeesl.model.xml.module.finance.Figures;
-import org.jeesl.model.xml.module.finance.Finance;
 import org.jeesl.util.query.xpath.FiguresXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.sf.ahtutils.xml.finance.Counter;
+import net.sf.ahtutils.xml.finance.Figures;
+import net.sf.ahtutils.xml.finance.Finance;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
@@ -100,7 +99,7 @@ public class XmlFiguresFactory
 	
 	public static boolean hasFinanceElements(Figures figures)
 	{
-		if(ObjectUtils.isNotEmpty(figures.getFinance())) {return true;}
+		if(figures.isSetFinance()){return true;}
 		else
 		{
 			for(Figures f : figures.getFigures())

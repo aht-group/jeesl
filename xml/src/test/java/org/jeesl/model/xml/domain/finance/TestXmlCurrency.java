@@ -1,10 +1,11 @@
 package org.jeesl.model.xml.domain.finance;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.finance.Currency;
 import org.jeesl.model.xml.system.status.TestXmlLangs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.finance.Currency;
 
 public class TestXmlCurrency extends AbstractXmlFinanceTest<Currency>
 {
@@ -16,7 +17,7 @@ public class TestXmlCurrency extends AbstractXmlFinanceTest<Currency>
     public Currency build(boolean withChilds)
     {
     	Currency xml = new Currency();
-    	xml.setId(123l);
+    	xml.setId(123);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
     	xml.setSymbol("mySymbol");

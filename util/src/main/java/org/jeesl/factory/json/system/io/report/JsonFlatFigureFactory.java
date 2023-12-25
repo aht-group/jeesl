@@ -2,10 +2,11 @@ package org.jeesl.factory.json.system.io.report;
 
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.model.json.JsonFlatFigure;
-import org.jeesl.model.xml.module.finance.Figures;
-import org.jeesl.model.xml.module.finance.Finance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.sf.ahtutils.xml.finance.Figures;
+import net.sf.ahtutils.xml.finance.Finance;
 
 public class JsonFlatFigureFactory
 {

@@ -3,8 +3,6 @@ package net.sf.ahtutils.doc.ofx.qa.section;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.io.FilenameUtils;
 import org.jeesl.model.xml.io.locale.status.Translations;
-import org.jeesl.model.xml.module.dev.qa.Category;
-import org.jeesl.model.xml.module.dev.qa.Qa;
 import org.jeesl.model.xml.module.survey.Template;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.ofx.content.XmlCommentFactory;
@@ -16,6 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
+import net.sf.ahtutils.xml.qa.Category;
+import net.sf.ahtutils.xml.qa.Qa;
 
 public class OfxQaInputSectionFactory extends AbstractUtilsOfxDocumentationFactory
 {

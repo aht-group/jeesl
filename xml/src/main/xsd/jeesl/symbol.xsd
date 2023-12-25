@@ -4,7 +4,7 @@
     xmlns:us="http://ahtutils.aht-group.com/status"
     xmlns:io ="http://exlp.sf.net/io"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../exlp/xml/src/main/xsd/exlp/io.xsd"/>
+    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../exlp/xml/src/main/xsd/io.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/status" schemaLocation="../jeesl/status.xsd"/>
 	<xsd:element name="graphic">
         <xsd:complexType>
