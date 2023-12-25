@@ -76,14 +76,6 @@ public class Permissions
         return this.permission;
     }
 
-    public boolean isSetPermission() {
-        return ((this.permission!= null)&&(!this.permission.isEmpty()));
-    }
-
-    public void unsetPermission() {
-        this.permission = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -92,7 +84,7 @@ public class Permissions
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -104,16 +96,8 @@ public class Permissions
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
 }

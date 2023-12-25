@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 
@@ -86,10 +85,6 @@ public class Transition
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -112,10 +107,6 @@ public class Transition
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -142,10 +133,6 @@ public class Transition
         this.stage = value;
     }
 
-    public boolean isSetStage() {
-        return (this.stage!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -154,7 +141,7 @@ public class Transition
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -166,16 +153,8 @@ public class Transition
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -186,7 +165,7 @@ public class Transition
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -198,16 +177,8 @@ public class Transition
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -232,10 +203,6 @@ public class Transition
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

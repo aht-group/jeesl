@@ -72,12 +72,4 @@ public class Processes
         return this.process;
     }
 
-    public boolean isSetProcess() {
-        return ((this.process!= null)&&(!this.process.isEmpty()));
-    }
-
-    public void unsetProcess() {
-        this.process = null;
-    }
-
 }

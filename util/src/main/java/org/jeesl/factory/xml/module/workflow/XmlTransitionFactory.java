@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.module.workflow;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.module.workflow.stage.JeeslWorkflowModificationLevel;
@@ -46,7 +47,7 @@ public class XmlTransitionFactory<L extends JeeslLang, D extends JeeslDescriptio
 		this.q=q;
 		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())) {xfDescription = new XmlDescriptionsFactory<>(q.getDescriptions());}
-		if(q.isSetStage()) {xfStage = new XmlStageFactory<>(localeCode,q.getStage());}
+		if(Objects.nonNull(q.getStage())) {xfStage = new XmlStageFactory<>(localeCode,q.getStage());}
 	}
 	
 	public static Transition build(){return new Transition();}
@@ -54,14 +55,14 @@ public class XmlTransitionFactory<L extends JeeslLang, D extends JeeslDescriptio
 	public Transition build(WT transition)
 	{
 		Transition xml = build();
-		if(q.isSetId()) {xml.setId(transition.getId());}
-		if(q.isSetPosition()) {xml.setPosition(transition.getPosition());}
+		if(Objects.nonNull(q.getId())) {xml.setId(transition.getId());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(transition.getPosition());}
 		
-		if(localeCode!=null && q.isSetLabel() && transition.getName().containsKey(localeCode)) {xml.setLabel(transition.getName().get(localeCode).getLang());}
+		if(ObjectUtils.allNotNull(localeCode,q.getLabel()) && transition.getName().containsKey(localeCode)) {xml.setLabel(transition.getName().get(localeCode).getLang());}
 		
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(transition.getName()));}
 		if(Objects.nonNull(q.getDescriptions())) {xml.setDescriptions(xfDescription.create(transition.getDescription()));}
-		if(q.isSetStage()) {xml.setStage(xfStage.build(transition.getDestination()));}
+		if(Objects.nonNull(q.getStage())) {xml.setStage(xfStage.build(transition.getDestination()));}
 		return xml;
 	}
 }

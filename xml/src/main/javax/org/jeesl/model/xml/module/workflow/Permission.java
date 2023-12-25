@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Level;
 import org.jeesl.model.xml.io.locale.status.Type;
 import org.jeesl.model.xml.system.security.Role;
@@ -84,10 +83,6 @@ public class Permission
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the level property.
      * 
@@ -110,10 +105,6 @@ public class Permission
      */
     public void setLevel(Level value) {
         this.level = value;
-    }
-
-    public boolean isSetLevel() {
-        return (this.level!= null);
     }
 
     /**
@@ -140,10 +131,6 @@ public class Permission
         this.role = value;
     }
 
-    public boolean isSetRole() {
-        return (this.role!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -152,7 +139,7 @@ public class Permission
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -164,16 +151,8 @@ public class Permission
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -184,7 +163,7 @@ public class Permission
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -196,16 +175,8 @@ public class Permission
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
 }
