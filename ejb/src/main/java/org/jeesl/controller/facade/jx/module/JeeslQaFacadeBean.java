@@ -1,5 +1,4 @@
-
-package net.sf.ahtutils.controller.facade;
+package org.jeesl.controller.facade.jx.module;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
-import org.jeesl.api.facade.module.JeeslQaFacade;
+import org.jeesl.api.facade.module.dev.JeeslQaFacade;
 import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -34,11 +33,10 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaStaff;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaStakeholder;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestDiscussion;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestInfo;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 
-public class UtilsQaFacadeBean <L extends JeeslLang, D extends JeeslDescription,
+public class JeeslQaFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 								C extends JeeslSecurityCategory<L,D>,
 								R extends JeeslSecurityRole<L,D,C,V,U,A>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -52,19 +50,18 @@ public class UtilsQaFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 								QASD extends UtilsQaSchedule<QA,QASS>,
 								QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
 								QAC extends UtilsQaCategory<QA,QAT>,
-								QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,?>,
+								QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,?,?>,
 								QAU extends UtilsQaUsability,
 								QAR extends UtilsQaResult<STAFF,QAT,?>,
 								QASH extends UtilsQaStakeholder<QA>,
-								QATD extends UtilsQaTestDiscussion<STAFF,QAT>,
-								QATI extends UtilsQaTestInfo<?>> 
-		extends JeeslFacadeBean implements JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH>
+								QATD extends UtilsQaTestDiscussion<STAFF,QAT>> 
+		extends JeeslFacadeBean implements JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU>
 {
 	private static final long serialVersionUID = 1L;
-	final static Logger logger = LoggerFactory.getLogger(UtilsQaFacadeBean.class);
+	final static Logger logger = LoggerFactory.getLogger(JeeslQaFacadeBean.class);
 	
-	public UtilsQaFacadeBean(EntityManager em){this(em,false);}
-	public UtilsQaFacadeBean(EntityManager em, boolean handleTransaction)
+	public JeeslQaFacadeBean(EntityManager em){this(em,false);}
+	public JeeslQaFacadeBean(EntityManager em, boolean handleTransaction)
 	{
 		super(em,handleTransaction);
 	}

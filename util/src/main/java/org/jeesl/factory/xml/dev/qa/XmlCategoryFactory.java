@@ -1,8 +1,8 @@
 package org.jeesl.factory.xml.dev.qa;
 
-import org.jeesl.api.facade.module.JeeslQaFacade;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.api.facade.module.dev.JeeslQaFacade;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -65,8 +65,8 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 	private Class<QAC> cQAC;
 	private Class<QAT> cQAT;
-	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH> fQa;
-	public void lazyLoader(JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH> fQa,Class<QAC> cQAC, Class<QAT> cQAT)
+	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU> fQa;
+	public void lazyLoader(JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU> fQa,Class<QAC> cQAC, Class<QAT> cQAT)
 	{
 		this.fQa=fQa;
 		this.cQAC=cQAC;

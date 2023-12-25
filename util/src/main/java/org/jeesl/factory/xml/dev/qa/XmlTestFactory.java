@@ -2,7 +2,7 @@ package org.jeesl.factory.xml.dev.qa;
 
 import java.util.Objects;
 
-import org.jeesl.api.facade.module.JeeslQaFacade;
+import org.jeesl.api.facade.module.dev.JeeslQaFacade;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -80,8 +80,8 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(Objects.nonNull(q.getResults())) {xfResults = new XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAT,QAR,QARS>(q.getResults());}
 	}
 	
-	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH> fQa;
-	public void lazyLoader(JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH> fQa,Class<QAT> cQAT)
+	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU> fQa;
+	public void lazyLoader(JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU> fQa,Class<QAT> cQAT)
 	{
 		this.fQa=fQa;
 		this.cQAT=cQAT;
