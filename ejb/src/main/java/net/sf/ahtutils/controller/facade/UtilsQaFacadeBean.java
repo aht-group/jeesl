@@ -40,7 +40,6 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 
 public class UtilsQaFacadeBean <L extends JeeslLang, D extends JeeslDescription,
-								L2 extends JeeslLang, D2 extends JeeslDescription,
 								C extends JeeslSecurityCategory<L,D>,
 								R extends JeeslSecurityRole<L,D,C,V,U,A>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -54,17 +53,13 @@ public class UtilsQaFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 								QASD extends UtilsQaSchedule<QA,QASS>,
 								QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
 								QAC extends UtilsQaCategory<QA,QAT>,
-								QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,QATS>,
+								QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,?>,
 								QAU extends UtilsQaUsability,
-								QAR extends UtilsQaResult<STAFF,QAT,QARS>,
+								QAR extends UtilsQaResult<STAFF,QAT,?>,
 								QASH extends UtilsQaStakeholder<QA>,
 								QATD extends UtilsQaTestDiscussion<STAFF,QAT>,
-								QATI extends UtilsQaTestInfo<QATC>,
-								QATC extends JeeslStatus<L,D,QATC>,
-								QATS extends JeeslStatus<L,D,QATS>,
-								QARS extends JeeslStatus<L,D,QARS>,
-								QAUS extends JeeslStatus<L,D,QAUS>> 
-		extends JeeslFacadeBean implements JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>
+								QATI extends UtilsQaTestInfo<?>> 
+		extends JeeslFacadeBean implements JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(UtilsQaFacadeBean.class);
