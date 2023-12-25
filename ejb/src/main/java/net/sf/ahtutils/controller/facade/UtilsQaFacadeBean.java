@@ -64,7 +64,7 @@ public class UtilsQaFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 								QATS extends JeeslStatus<L,D,QATS>,
 								QARS extends JeeslStatus<L,D,QARS>,
 								QAUS extends JeeslStatus<L,D,QAUS>> 
-		extends JeeslFacadeBean implements JeeslQaFacade<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>
+		extends JeeslFacadeBean implements JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>
 {
 	private static final long serialVersionUID = 1L;
 	final static Logger logger = LoggerFactory.getLogger(UtilsQaFacadeBean.class);
