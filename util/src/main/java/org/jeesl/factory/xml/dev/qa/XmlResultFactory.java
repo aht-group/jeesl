@@ -50,12 +50,12 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 							QAU extends UtilsQaUsability,
 							QAR extends UtilsQaResult<STAFF,QAT,QARS>,
 							QASH extends UtilsQaStakeholder<QA>,
-							QARS extends JeeslStatus<L2,D2,QARS>>
+							QARS extends JeeslStatus<L,D,QARS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlResultFactory.class);
 		
 	private Result q;
-	private XmlStatusFactory<L2,D2,QARS> xfResultStatus;
+	private XmlStatusFactory<L,D,QARS> xfResultStatus;
 	private XmlStaffFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QA> xfStaff;
 	
 	public XmlResultFactory(Result q)

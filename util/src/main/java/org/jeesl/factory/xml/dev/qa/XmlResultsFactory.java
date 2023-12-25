@@ -48,10 +48,10 @@ public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 								QASH extends UtilsQaStakeholder<QA>,
 								QATD extends UtilsQaTestDiscussion<STAFF,QAT>,
 								QATI extends UtilsQaTestInfo<QATC>,
-								QATC extends JeeslStatus<L2,D2,QATC>,
-								QATS extends JeeslStatus<L2,D2,QATS>,
-								QARS extends JeeslStatus<L2,D2,QARS>,
-								QAUS extends JeeslStatus<L2,D2,QAUS>>
+								QATC extends JeeslStatus<L,D,QATC>,
+								QATS extends JeeslStatus<L,D,QATS>,
+								QARS extends JeeslStatus<L,D,QARS>,
+								QAUS extends JeeslStatus<L,D,QAUS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlResultsFactory.class);
 		

@@ -51,10 +51,10 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 							QASH extends UtilsQaStakeholder<QA>,
 							QATD extends UtilsQaTestDiscussion<STAFF,QAT>,
 							QATI extends UtilsQaTestInfo<QATC>,
-							QATC extends JeeslStatus<L2,D2,QATC>,
-							QATS extends JeeslStatus<L2,D2,QATS>,
-							QARS extends JeeslStatus<L2,D2,QARS>,
-							QAUS extends JeeslStatus<L2,D2,QAUS>>
+							QATC extends JeeslStatus<L,D,QATC>,
+							QATS extends JeeslStatus<L,D,QATS>,
+							QARS extends JeeslStatus<L,D,QARS>,
+							QAUS extends JeeslStatus<L,D,QAUS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlTestFactory.class);
 		
@@ -62,18 +62,18 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 	private Class<QAT> cQAT;
 	
-	private XmlStatusFactory<L2,D2,QATS> xfDeveloperStatus;
+	private XmlStatusFactory<L,D,QATS> xfDeveloperStatus;
 	private XmlGroupsFactory<GROUP,QAT> xfGroups;
-	private XmlInfoFactory<L2,D2,QATI,QATC> xfInfo;
-	private XmlStatementFactory<QATS,L2,D2> xfStatement;
+	private XmlInfoFactory<L,D,QATI,QATC> xfInfo;
+	private XmlStatementFactory<QATS,L,D> xfStatement;
 	
 	public XmlTestFactory(Test q)
 	{
 		this.q=q;
 		if(q.isSetStatus()){xfDeveloperStatus = new XmlStatusFactory<>(null,q.getStatus());}
 		if(q.isSetGroups()) {xfGroups = new XmlGroupsFactory<GROUP,QAT>(q.getGroups());}
-		if(q.isSetInfo()) {xfInfo = new XmlInfoFactory<L2,D2,QATI,QATC>(q.getInfo());}
-		if(q.isSetStatement()) {xfStatement = new XmlStatementFactory<QATS,L2,D2>(null,q.getStatement());}
+		if(q.isSetInfo()) {xfInfo = new XmlInfoFactory<L,D,QATI,QATC>(q.getInfo());}
+		if(q.isSetStatement()) {xfStatement = new XmlStatementFactory<QATS,L,D>(null,q.getStatement());}
 	}
 	
 	private JeeslQaFacade<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> fQa;
