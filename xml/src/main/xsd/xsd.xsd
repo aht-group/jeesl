@@ -82,7 +82,7 @@
 	<xsd:import namespace="http://www.jeesl.org/workflow" schemaLocation="jeesl/module/workflow.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/revision" schemaLocation="jeesl/io/revision.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/text" schemaLocation="jeesl/text.xsd"/>
-    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../exlp/xml/src/main/xsd/io.xsd"/>
+    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../exlp/xml/src/main/xsd/exlp/io.xsd"/>
     <xsd:annotation>
         <xsd:appinfo>
             <jaxb:globalBindings generateIsSetMethod="true">

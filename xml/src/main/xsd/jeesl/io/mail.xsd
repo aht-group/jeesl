@@ -4,7 +4,7 @@
     xmlns:io="http://exlp.sf.net/io"
     xmlns:t="http://www.jeesl.org/text"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../../exlp/xml/src/main/xsd/io.xsd"/>
+    <xsd:import namespace="http://exlp.sf.net/io" schemaLocation="../../../../../../../exlp/xml/src/main/xsd/exlp/io.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/text" schemaLocation="../text.xsd"/>
     <xsd:element name="mails">
 	    <xsd:complexType>
