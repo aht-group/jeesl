@@ -12,7 +12,7 @@ import org.jeesl.model.xml.io.locale.status.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class XmlStatementFactory <S extends JeeslStatus<L,D,S>, L extends JeeslLang, D extends JeeslDescription>
+public class XmlStatementFactory <L extends JeeslLang, D extends JeeslDescription, S extends JeeslStatus<L,D,S>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlStatementFactory.class);
 		

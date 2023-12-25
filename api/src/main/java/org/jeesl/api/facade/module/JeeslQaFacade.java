@@ -43,12 +43,10 @@ public interface JeeslQaFacade
 				QASD extends UtilsQaSchedule<QA,QASS>,
 				QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
 				QAC extends UtilsQaCategory<QA,QAT>,
-				QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,?>,
+				QAT extends UtilsQaTest<GROUP,QAC,QAR,?,?,?>,
 				QAU extends UtilsQaUsability,
 				QAR extends UtilsQaResult<STAFF,QAT,?>,
-				QASH extends UtilsQaStakeholder<QA>,
-				QATD extends UtilsQaTestDiscussion<STAFF,QAT>,
-				QATI extends UtilsQaTestInfo<?>>
+				QASH extends UtilsQaStakeholder<QA>>
 
 		extends JeeslFacade
 {	

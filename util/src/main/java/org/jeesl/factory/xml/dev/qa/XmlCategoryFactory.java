@@ -65,8 +65,8 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 	
 	private Class<QAC> cQAC;
 	private Class<QAT> cQAT;
-	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI> fQa;
-	public void lazyLoader(JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI> fQa,Class<QAC> cQAC, Class<QAT> cQAT)
+	private JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH> fQa;
+	public void lazyLoader(JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH> fQa,Class<QAC> cQAC, Class<QAT> cQAT)
 	{
 		this.fQa=fQa;
 		this.cQAC=cQAC;
