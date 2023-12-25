@@ -14,13 +14,7 @@ import org.jeesl.controller.facade.jx.JeeslFacadeBean;
 import org.jeesl.controller.facade.jx.ParentPredicateBuilder;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,12 +26,9 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaScheduleSlot;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaStaff;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaStakeholder;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestDiscussion;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 
 public class JeeslQaFacadeBean <L extends JeeslLang, D extends JeeslDescription,
-								
 								USER extends JeeslUser<?>,
 								STAFF extends UtilsQaStaff<?,USER,GROUP,QA,QASH>,
 								GROUP extends UtilsQaGroup<STAFF,QA,QASS>,
@@ -46,7 +37,6 @@ public class JeeslQaFacadeBean <L extends JeeslLang, D extends JeeslDescription,
 								QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
 								QAC extends UtilsQaCategory<QA,QAT>,
 								QAT extends UtilsQaTest<GROUP,QAC,QAR,?,?,?>,
-								QAU extends UtilsQaUsability,
 								QAR extends UtilsQaResult<STAFF,QAT,?>,
 								QASH extends UtilsQaStakeholder<QA>> 
 		extends JeeslFacadeBean implements JeeslQaFacade<L,D,STAFF,GROUP,QA,QASD,QASS,QAC,QAT>

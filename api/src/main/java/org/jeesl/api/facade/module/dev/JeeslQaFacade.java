@@ -5,35 +5,23 @@ import java.util.List;
 import org.jeesl.interfaces.facade.JeeslFacade;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
-import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
-import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
-import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaCategory;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaGroup;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaResult;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaSchedule;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaScheduleSlot;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaStaff;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 
-public interface JeeslQaFacade
-				<L extends JeeslLang, D extends JeeslDescription,
-			
-			
-				STAFF extends UtilsQaStaff<?,?,GROUP,QA,?>,
-				GROUP extends UtilsQaGroup<STAFF,QA,QASS>,
-				QA extends UtilsQualityAssurarance<STAFF,QAC,?>,
-				QASD extends UtilsQaSchedule<QA,QASS>,
-				QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
-				QAC extends UtilsQaCategory<QA,QAT>,
-				QAT extends UtilsQaTest<GROUP,QAC,?,?,?,?>>
+public interface JeeslQaFacade <L extends JeeslLang, D extends JeeslDescription,
+								STAFF extends UtilsQaStaff<?,?,GROUP,QA,?>,
+								GROUP extends UtilsQaGroup<STAFF,QA,QASS>,
+								QA extends UtilsQualityAssurarance<STAFF,QAC,?>,
+								QASD extends UtilsQaSchedule<QA,QASS>,
+								QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
+								QAC extends UtilsQaCategory<QA,QAT>,
+								QAT extends UtilsQaTest<GROUP,QAC,?,?,?,?>>
 
 		extends JeeslFacade
 {	

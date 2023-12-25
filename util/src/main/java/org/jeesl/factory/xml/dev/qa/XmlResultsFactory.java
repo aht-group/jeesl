@@ -28,7 +28,6 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 import net.sf.ahtutils.xml.qa.Results;
 
 public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
-								
 								C extends JeeslSecurityCategory<L,D>,
 								R extends JeeslSecurityRole<L,D,C,V,U,A>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -36,17 +35,13 @@ public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 								A extends JeeslSecurityAction<L,D,R,V,U,AT>,
 								AT extends JeeslSecurityTemplate<L,D,C>,
 								USER extends JeeslUser<R>,
-								STAFF extends UtilsQaStaff<R,USER,GROUP,QA,?>,
-								GROUP extends UtilsQaGroup<STAFF,QA,QASS>,
+								STAFF extends UtilsQaStaff<R,USER,?,QA,?>,
+								
 								QA extends UtilsQualityAssurarance<STAFF,?,?>,
 								QASD extends UtilsQaSchedule<QA,QASS>,
-								QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
-								
-								QAT extends UtilsQaTest<GROUP,?,QAR,?,?,?>,
-							
+								QASS extends UtilsQaScheduleSlot<?,QASD>,
+								QAT extends UtilsQaTest<?,?,QAR,?,?,?>,
 								QAR extends UtilsQaResult<STAFF,QAT,QARS>,
-								
-
 								QARS extends JeeslStatus<L,D,QARS>>
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlResultsFactory.class);
@@ -60,7 +55,6 @@ public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 		this.q=q;
 		if(q.isSetResult()) {xfResult = new XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QAR,QARS>(q.getResult().get(0));}
 	}
-	
 	
 	public Results build(QAT test)
 	{

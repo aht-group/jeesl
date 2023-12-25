@@ -36,10 +36,7 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 							AT extends JeeslSecurityTemplate<L,D,C>,
 							USER extends JeeslUser<R>,
 							STAFF extends UtilsQaStaff<R,USER,?,QA,?>,
-							
 							QA extends UtilsQualityAssurarance<STAFF,?,?>,
-							
-
 							QAR extends UtilsQaResult<STAFF,?,QARS>,
 							QARS extends JeeslStatus<L,D,QARS>>
 {

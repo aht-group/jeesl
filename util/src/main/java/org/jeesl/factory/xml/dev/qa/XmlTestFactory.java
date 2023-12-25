@@ -28,12 +28,10 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQaStakeholder;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestDiscussion;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestInfo;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 import net.sf.ahtutils.xml.qa.Test;
 
 public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
-							
 							C extends JeeslSecurityCategory<L,D>,
 							R extends JeeslSecurityRole<L,D,C,V,U,A>,
 							V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -43,12 +41,10 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 							USER extends JeeslUser<R>,
 							STAFF extends UtilsQaStaff<R,USER,GROUP,QA,QASH>,
 							GROUP extends UtilsQaGroup<STAFF,QA,QASS>,
-							QA extends UtilsQualityAssurarance<STAFF,QAC,QASH>,
+							QA extends UtilsQualityAssurarance<STAFF,?,QASH>,
 							QASD extends UtilsQaSchedule<QA,QASS>,
 							QASS extends UtilsQaScheduleSlot<GROUP,QASD>,
-							QAC extends UtilsQaCategory<QA,QAT>,
-							QAT extends UtilsQaTest<GROUP,QAC,QAR,QATD,QATI,QATS>,
-							QAU extends UtilsQaUsability,
+							QAT extends UtilsQaTest<GROUP,?,QAR,QATD,QATI,QATS>,
 							QAR extends UtilsQaResult<STAFF,QAT,QARS>,
 							QASH extends UtilsQaStakeholder<QA>,
 							QATD extends UtilsQaTestDiscussion<STAFF,QAT>,
@@ -67,7 +63,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 	private XmlGroupsFactory<GROUP,QAT> xfGroups;
 	private XmlInfoFactory<L,D,QATI,QATC> xfInfo;
 	private XmlStatementFactory<L,D,QATS> xfStatement;
-	private XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAT,QAR,QARS> xfResults;
+	private XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QASD,QASS,QAT,QAR,QARS> xfResults;
 	
 	public XmlTestFactory(Test q)
 	{
@@ -77,11 +73,11 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetInfo()) {xfInfo = new XmlInfoFactory<L,D,QATI,QATC>(q.getInfo());}
 		if(q.isSetStatement()) {xfStatement = new XmlStatementFactory<L,D,QATS>(null,q.getStatement());}
 		
-		if(Objects.nonNull(q.getResults())) {xfResults = new XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAT,QAR,QARS>(q.getResults());}
+		if(Objects.nonNull(q.getResults())) {xfResults = new XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QASD,QASS,QAT,QAR,QARS>(q.getResults());}
 	}
 	
-	private JeeslQaFacade<L,D,STAFF,GROUP,QA,QASD,QASS,QAC,QAT> fQa;
-	public void lazyLoader(JeeslQaFacade<L,D,STAFF,GROUP,QA,QASD,QASS,QAC,QAT> fQa,Class<QAT> cQAT)
+	private JeeslQaFacade<L,D,STAFF,GROUP,QA,QASD,QASS,?,QAT> fQa;
+	public void lazyLoader(JeeslQaFacade<L,D,STAFF,GROUP,QA,QASD,QASS,?,QAT> fQa,Class<QAT> cQAT)
 	{
 		this.fQa=fQa;
 		this.cQAT=cQAT;
