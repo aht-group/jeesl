@@ -77,8 +77,8 @@ public class QaRestService <L extends JeeslLang, D extends JeeslDescription,
 	
 	private XmlStaffFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QA> xfStaff;
 	private XmlGroupFactory<GROUP> xfGroup;
-	private XmlCategoryFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> xfCategory;
-	private XmlCategoryFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> xfFrDuration;
+	private XmlCategoryFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> xfCategory;
+	private XmlCategoryFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS> xfFrDuration;
 	
 	private QaRestService(JeeslQaFacade<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI> fQa, final Class<L> cL, final Class<D> cD,final Class<GROUP> cGroup,final Class<QA> cQa,final Class<QAC> cQAC,final Class<QAT> cQAT)
 	{
@@ -88,8 +88,8 @@ public class QaRestService <L extends JeeslLang, D extends JeeslDescription,
 		
 		xfStaff = new XmlStaffFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QA>(QaQuery.staff());
 		xfGroup = new XmlGroupFactory<GROUP>(QaQuery.group());
-		xfCategory = new XmlCategoryFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>(QaQuery.category());
-		xfFrDuration = new XmlCategoryFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>(QaQuery.frDuration());
+		xfCategory = new XmlCategoryFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>(QaQuery.category());
+		xfFrDuration = new XmlCategoryFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QATD,QATI,QATC,QATS,QARS,QAUS>(QaQuery.frDuration());
 		
 		xfFrDuration.lazyLoader(fQa,cQAC,cQAT);
 	}
