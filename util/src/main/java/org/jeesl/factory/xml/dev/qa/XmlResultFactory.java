@@ -32,7 +32,6 @@ import net.sf.ahtutils.xml.qa.Test;
 import net.sf.exlp.util.DateUtil;
 
 public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
-							L2 extends JeeslLang, D2 extends JeeslDescription,
 							C extends JeeslSecurityCategory<L,D>,
 							R extends JeeslSecurityRole<L,D,C,V,U,A>,
 							V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -62,7 +61,7 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 	{
 		this.q=q;
 		if(q.isSetStatus()) {xfResultStatus = new XmlStatusFactory<>(null,q.getStatus());}
-		if(q.isSetStaff()) {xfStaff = new XmlStaffFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QA>(q.getStaff());}
+		if(q.isSetStaff()) {xfStaff = new XmlStaffFactory<>(q.getStaff());}
 	}
 	
 	public static Test build()

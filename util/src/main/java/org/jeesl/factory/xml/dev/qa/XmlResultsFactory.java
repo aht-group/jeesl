@@ -28,7 +28,7 @@ import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 import net.sf.ahtutils.xml.qa.Results;
 
 public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
-								L2 extends JeeslLang, D2 extends JeeslDescription,
+								
 								C extends JeeslSecurityCategory<L,D>,
 								R extends JeeslSecurityRole<L,D,C,V,U,A>,
 								V extends JeeslSecurityView<L,D,C,R,U,A>,
@@ -57,12 +57,12 @@ public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 	private Results q;
 	
-	private XmlResultFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QARS> xfResult;
+	private XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QARS> xfResult;
 	
 	public XmlResultsFactory(Results q)
 	{
 		this.q=q;
-		if(q.isSetResult()) {xfResult = new XmlResultFactory<L,D,L2,D2,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QARS>(q.getResult().get(0));}
+		if(q.isSetResult()) {xfResult = new XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAC,QAT,QAU,QAR,QASH,QARS>(q.getResult().get(0));}
 	}
 	
 	
