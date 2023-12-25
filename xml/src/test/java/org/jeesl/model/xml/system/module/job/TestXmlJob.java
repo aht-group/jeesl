@@ -1,7 +1,7 @@
 package org.jeesl.model.xml.system.module.job;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.module.job.Job;
+import org.jeesl.model.xml.system.job.Job;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +15,7 @@ public class TestXmlJob extends AbstractXmlJobTest<Job>
     public Job build(boolean withChilds)
     {
     	Job xml = new Job();
-    	xml.setId(123);
+    	xml.setId(123l);
     	
     	if(withChilds)
     	{

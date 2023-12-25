@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.module.job;
+package org.jeesl.model.xml.system.job;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -69,10 +69,6 @@ public class Job
         this.template = value;
     }
 
-    public boolean isSetTemplate() {
-        return (this.template!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -81,7 +77,7 @@ public class Job
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -93,16 +89,8 @@ public class Job
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
 }
