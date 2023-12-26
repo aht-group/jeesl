@@ -117,6 +117,11 @@
             <jxb:package name="org.jeesl.model.xml.module.monitoring"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    <jxb:bindings schemaLocation="../xsd/jeesl/module/timeseries.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.ts"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     <jxb:bindings schemaLocation="jeesl/module/survey.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.survey"/>

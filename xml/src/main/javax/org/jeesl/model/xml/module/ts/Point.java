@@ -66,10 +66,6 @@ public class Point
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the value property.
      * 
@@ -78,7 +74,7 @@ public class Point
      *     {@link Double }
      *     
      */
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
@@ -90,16 +86,8 @@ public class Point
      *     {@link Double }
      *     
      */
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
-    }
-
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
-    public void unsetValue() {
-        this.value = null;
     }
 
 }

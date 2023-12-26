@@ -71,10 +71,6 @@ public class TimeSeries
         this.entity = value;
     }
 
-    public boolean isSetEntity() {
-        return (this.entity!= null);
-    }
-
     /**
      * Gets the value of the data property.
      * 
@@ -102,14 +98,6 @@ public class TimeSeries
             data = new ArrayList<Data>();
         }
         return this.data;
-    }
-
-    public boolean isSetData() {
-        return ((this.data!= null)&&(!this.data.isEmpty()));
-    }
-
-    public void unsetData() {
-        this.data = null;
     }
 
 }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.interfaces.model.module.ts.core.JeeslTimeSeries;
@@ -34,7 +35,7 @@ public class EjbTsDataFactory<TS extends JeeslTimeSeries<?,TS,?,?,?>,
 	
 	public DATA build(WS workspace, TS timeSeries, TRANSACTION transaction, Data data)
 	{
-		if (data.isSetValue())
+		if(Objects.nonNull(data.getValue()))
 		{
 			return build(workspace,timeSeries,transaction,data.getRecord().toGregorianCalendar().getTime(),data.getValue());
 		}

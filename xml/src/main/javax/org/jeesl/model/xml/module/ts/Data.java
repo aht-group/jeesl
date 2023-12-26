@@ -84,10 +84,6 @@ public class Data
         this.points = value;
     }
 
-    public boolean isSetPoints() {
-        return (this.points!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -96,7 +92,7 @@ public class Data
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -108,16 +104,8 @@ public class Data
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -144,10 +132,6 @@ public class Data
         this.record = value;
     }
 
-    public boolean isSetRecord() {
-        return (this.record!= null);
-    }
-
     /**
      * Gets the value of the value property.
      * 
@@ -156,7 +140,7 @@ public class Data
      *     {@link Double }
      *     
      */
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
@@ -168,16 +152,8 @@ public class Data
      *     {@link Double }
      *     
      */
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
-    }
-
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
-    public void unsetValue() {
-        this.value = null;
     }
 
     /**
@@ -188,7 +164,7 @@ public class Data
      *     {@link Double }
      *     
      */
-    public double getX() {
+    public Double getX() {
         return x;
     }
 
@@ -200,16 +176,8 @@ public class Data
      *     {@link Double }
      *     
      */
-    public void setX(double value) {
+    public void setX(Double value) {
         this.x = value;
-    }
-
-    public boolean isSetX() {
-        return (this.x!= null);
-    }
-
-    public void unsetX() {
-        this.x = null;
     }
 
     /**
@@ -220,7 +188,7 @@ public class Data
      *     {@link Double }
      *     
      */
-    public double getY() {
+    public Double getY() {
         return y;
     }
 
@@ -232,16 +200,8 @@ public class Data
      *     {@link Double }
      *     
      */
-    public void setY(double value) {
+    public void setY(Double value) {
         this.y = value;
-    }
-
-    public boolean isSetY() {
-        return (this.y!= null);
-    }
-
-    public void unsetY() {
-        this.y = null;
     }
 
 }

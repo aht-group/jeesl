@@ -46,7 +46,7 @@ public class XmlTsQuery
 		user.setName("");
 		
 		Transaction xml = new Transaction();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setRecord(DateUtil.toXmlGc(new Date()));
 		xml.setUser(user);
 		xml.setRemark(XmlRemarkFactory.build(""));

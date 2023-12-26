@@ -86,14 +86,6 @@ public class Ds
         return this.data;
     }
 
-    public boolean isSetData() {
-        return ((this.data!= null)&&(!this.data.isEmpty()));
-    }
-
-    public void unsetData() {
-        this.data = null;
-    }
-
     /**
      * Gets the value of the ds property.
      * 
@@ -123,14 +115,6 @@ public class Ds
         return this.ds;
     }
 
-    public boolean isSetDs() {
-        return ((this.ds!= null)&&(!this.ds.isEmpty()));
-    }
-
-    public void unsetDs() {
-        this.ds = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -139,7 +123,7 @@ public class Ds
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -151,16 +135,8 @@ public class Ds
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -187,10 +163,6 @@ public class Ds
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -213,10 +185,6 @@ public class Ds
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }
