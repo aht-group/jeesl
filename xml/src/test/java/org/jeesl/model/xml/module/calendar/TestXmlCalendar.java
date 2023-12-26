@@ -15,7 +15,7 @@ public class TestXmlCalendar extends AbstractXmlCalendarTest<Calendar>
     public Calendar build(boolean withChilds)
     {
     	Calendar xml = new Calendar();
-    	xml.setId(123);
+    	xml.setId(123l);
 
     	if(withChilds)
     	{

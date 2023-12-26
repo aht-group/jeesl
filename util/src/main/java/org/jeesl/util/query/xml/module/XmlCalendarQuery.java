@@ -35,7 +35,7 @@ public class XmlCalendarQuery
 	private static Item rItem()
 	{		
 		Item xml = new Item();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setType(XmlTypeFactory.build("",""));
 		
 		return xml;

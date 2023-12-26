@@ -15,7 +15,7 @@ public class TestXmlItem extends AbstractXmlCalendarTest<Item>
     public Item build(boolean withChilds)
     {
     	Item xml = new Item();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setAllDay(true);
     	xml.setStart(AbstractXmlCalendarTest.getDefaultXmlDate());
     	xml.setEnd(AbstractXmlCalendarTest.getDefaultXmlDate());

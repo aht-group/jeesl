@@ -21,6 +21,7 @@
     <xsd:import namespace="http://www.jeesl.org/io/template" schemaLocation="jeesl/io/template.xsd"/>
 	
 	<xsd:import namespace="http://xsd.jeesl.org/module/bb" schemaLocation="jeesl/module/bb.xsd"/>
+	<xsd:import namespace="http://www.jeesl.org/calendar" schemaLocation="jeesl/module/calendar.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/finance" schemaLocation="jeesl/finance.xsd"/>
 	<xsd:import namespace="http://xsd.jeesl.org/module/dev/srs" schemaLocation="jeesl/dev/srs.xsd"/>
 	<xsd:import namespace="http://xsd.jeesl.org/module/monitoring" schemaLocation="aht/monitoring.xsd"/>

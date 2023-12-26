@@ -1,6 +1,7 @@
 package org.jeesl.factory.xml.module.calendar;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.jeesl.controller.processor.TimeZoneProcessor;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
@@ -37,7 +38,7 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 	{
 		this.q=q;
 //		this.tzp=tzp;
-		if(q.isSetType()) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
+		if(Objects.nonNull(q.getType())) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
 	}
 	
 	public static <L extends JeeslLang, D extends JeeslDescription,
@@ -56,7 +57,7 @@ public class XmlCalendarItemFactory <L extends JeeslLang, D extends JeeslDescrip
 	public Item build(ITEM item)
 	{
 		Item xml = build();		
-		if(q.isSetType()){xml.setType(xfType.build(item.getType()));}
+		if(Objects.nonNull(q.getType())) {xml.setType(xfType.build(item.getType()));}
 		
 		
 		logger.error("NYI XML Date conversion");

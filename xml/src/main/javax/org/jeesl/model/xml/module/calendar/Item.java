@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.locale.status.Type;
 
 
@@ -84,10 +83,6 @@ public class Item
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -96,7 +91,7 @@ public class Item
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -108,16 +103,8 @@ public class Item
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -144,10 +131,6 @@ public class Item
         this.start = value;
     }
 
-    public boolean isSetStart() {
-        return (this.start!= null);
-    }
-
     /**
      * Gets the value of the end property.
      * 
@@ -172,10 +155,6 @@ public class Item
         this.end = value;
     }
 
-    public boolean isSetEnd() {
-        return (this.end!= null);
-    }
-
     /**
      * Gets the value of the allDay property.
      * 
@@ -184,7 +163,7 @@ public class Item
      *     {@link Boolean }
      *     
      */
-    public boolean isAllDay() {
+    public Boolean isAllDay() {
         return allDay;
     }
 
@@ -196,16 +175,8 @@ public class Item
      *     {@link Boolean }
      *     
      */
-    public void setAllDay(boolean value) {
+    public void setAllDay(Boolean value) {
         this.allDay = value;
-    }
-
-    public boolean isSetAllDay() {
-        return (this.allDay!= null);
-    }
-
-    public void unsetAllDay() {
-        this.allDay = null;
     }
 
 }
