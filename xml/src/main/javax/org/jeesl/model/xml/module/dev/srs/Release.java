@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.dev.srs;
+package org.jeesl.model.xml.module.dev.srs;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,8 +18,10 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -29,16 +31,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "module")
-public class Module
+@XmlRootElement(name = "release")
+public class Release
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlAttribute(name = "code")
     protected String code;
-    @XmlAttribute(name = "label")
-    protected String label;
+    @XmlAttribute(name = "name")
+    protected String name;
 
     /**
      * Gets the value of the code property.
@@ -65,27 +67,27 @@ public class Module
     }
 
     /**
-     * Gets the value of the label property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getLabel() {
-        return label;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the label property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setLabel(String value) {
-        this.label = value;
+    public void setName(String value) {
+        this.name = value;
     }
 
 }

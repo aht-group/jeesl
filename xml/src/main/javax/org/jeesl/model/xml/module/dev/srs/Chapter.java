@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.dev.srs;
+package org.jeesl.model.xml.module.dev.srs;
 
 import java.io.Serializable;
 import java.util.ArrayList;

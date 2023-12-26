@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.dev.srs;
+package org.jeesl.model.xml.module.dev.srs;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -29,8 +29,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "product")
-public class Product
+@XmlRootElement(name = "actor")
+public class Actor
     implements Serializable
 {
 
