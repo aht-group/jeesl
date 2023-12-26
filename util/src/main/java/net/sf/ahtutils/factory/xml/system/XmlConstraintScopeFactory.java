@@ -1,9 +1,8 @@
 package net.sf.ahtutils.factory.xml.system;
 
+import org.jeesl.model.xml.system.constraint.ConstraintScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.system.ConstraintScope;
 
 public class XmlConstraintScopeFactory
 {

@@ -1,9 +1,8 @@
 package org.jeesl.factory.xml.system.constraint;
 
+import org.jeesl.model.xml.system.constraint.Constraints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.system.Constraints;
 
 public class XmlConstraintsFactory
 {

@@ -15,10 +15,9 @@ import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintScope;
 import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
+import org.jeesl.model.xml.system.constraint.Constraint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.system.Constraint;
 
 public class EjbConstraintFactory <L extends JeeslLang, D extends JeeslDescription,
 										SCOPE extends JeeslConstraintScope<L,D,CATEGORY>,

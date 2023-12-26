@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.system;
+package org.jeesl.model.xml.system.constraint;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

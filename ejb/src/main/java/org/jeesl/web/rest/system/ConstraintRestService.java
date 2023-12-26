@@ -21,15 +21,15 @@ import org.jeesl.interfaces.model.system.constraint.core.JeeslConstraintType;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.xml.system.constraint.Constraint;
+import org.jeesl.model.xml.system.constraint.ConstraintScope;
+import org.jeesl.model.xml.system.constraint.Constraints;
 import org.jeesl.model.xml.xsd.Container;
 import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.sync.DataUpdate;
-import net.sf.ahtutils.xml.system.Constraint;
-import net.sf.ahtutils.xml.system.ConstraintScope;
-import net.sf.ahtutils.xml.system.Constraints;
 
 public class ConstraintRestService <L extends JeeslLang, D extends JeeslDescription,
 									GROUP extends JeeslConstraintAlgorithmGroup<L,D,GROUP,?>,

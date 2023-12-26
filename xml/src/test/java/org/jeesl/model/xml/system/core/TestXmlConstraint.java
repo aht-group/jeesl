@@ -1,6 +1,7 @@
 package org.jeesl.model.xml.system.core;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.system.constraint.Constraint;
 import org.jeesl.model.xml.system.status.TestXmlDescription;
 import org.jeesl.model.xml.system.status.TestXmlDescriptions;
 import org.jeesl.model.xml.system.status.TestXmlLang;
@@ -8,8 +9,6 @@ import org.jeesl.model.xml.system.status.TestXmlLangs;
 import org.jeesl.model.xml.system.status.TestXmlType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.system.Constraint;
 
 public class TestXmlConstraint extends AbstractXmlSystemTest<Constraint>
 {

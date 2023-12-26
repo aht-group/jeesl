@@ -1,10 +1,9 @@
 package org.jeesl.controller.processor.system.constraint;
 
+import org.jeesl.model.xml.system.constraint.Constraint;
+import org.jeesl.model.xml.system.constraint.ConstraintAttribute;
+import org.jeesl.model.xml.system.constraint.ConstraintScope;
 import org.jeesl.util.ReflectionUtil;
-
-import net.sf.ahtutils.xml.system.Constraint;
-import net.sf.ahtutils.xml.system.ConstraintAttribute;
-import net.sf.ahtutils.xml.system.ConstraintScope;
 
 public class ConstraintsChecker
 {

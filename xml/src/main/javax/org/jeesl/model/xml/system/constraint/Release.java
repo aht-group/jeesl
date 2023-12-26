@@ -1,12 +1,15 @@
 
-package net.sf.ahtutils.xml.system;
+package org.jeesl.model.xml.system.constraint;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 
@@ -23,6 +26,8 @@ import org.jeesl.model.xml.io.locale.status.Descriptions;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
  *       &lt;/sequence&gt;
+ *       &lt;attribute name="version" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="date" type="{http://www.w3.org/2001/XMLSchema}date" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -34,14 +39,19 @@ import org.jeesl.model.xml.io.locale.status.Descriptions;
 @XmlType(name = "", propOrder = {
     "descriptions"
 })
-@XmlRootElement(name = "constraintSolution")
-public class ConstraintSolution
+@XmlRootElement(name = "release")
+public class Release
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Descriptions descriptions;
+    @XmlAttribute(name = "version")
+    protected String version;
+    @XmlAttribute(name = "date")
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar date;
 
     /**
      * Gets the value of the descriptions property.
@@ -69,6 +79,62 @@ public class ConstraintSolution
 
     public boolean isSetDescriptions() {
         return (this.descriptions!= null);
+    }
+
+    /**
+     * Gets the value of the version property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getVersion() {
+        return version;
+    }
+
+    /**
+     * Sets the value of the version property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setVersion(String value) {
+        this.version = value;
+    }
+
+    public boolean isSetVersion() {
+        return (this.version!= null);
+    }
+
+    /**
+     * Gets the value of the date property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public XMLGregorianCalendar getDate() {
+        return date;
+    }
+
+    /**
+     * Sets the value of the date property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link XMLGregorianCalendar }
+     *     
+     */
+    public void setDate(XMLGregorianCalendar value) {
+        this.date = value;
+    }
+
+    public boolean isSetDate() {
+        return (this.date!= null);
     }
 
 }

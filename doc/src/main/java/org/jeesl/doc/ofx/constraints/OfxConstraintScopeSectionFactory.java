@@ -4,6 +4,8 @@ import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
 import org.jeesl.exception.processing.UtilsConfigurationException;
 import org.jeesl.model.xml.io.locale.status.Translations;
+import org.jeesl.model.xml.system.constraint.Constraint;
+import org.jeesl.model.xml.system.constraint.ConstraintScope;
 import org.jeesl.model.xml.xsd.Container;
 import org.openfuxml.exception.OfxAuthoringException;
 import org.openfuxml.factory.xml.layout.XmlSpacingFactory;
@@ -26,8 +28,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.doc.ofx.AbstractUtilsOfxDocumentationFactory;
-import net.sf.ahtutils.xml.system.Constraint;
-import net.sf.ahtutils.xml.system.ConstraintScope;
 
 public class OfxConstraintScopeSectionFactory extends AbstractUtilsOfxDocumentationFactory
 {

@@ -24,16 +24,16 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.io.locale.status.Lang;
+import org.jeesl.model.xml.system.constraint.Constraint;
+import org.jeesl.model.xml.system.constraint.ConstraintScope;
+import org.jeesl.model.xml.system.constraint.ConstraintSolution;
+import org.jeesl.model.xml.system.constraint.Constraints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.factory.xml.system.XmlConstraintFactory;
 import net.sf.ahtutils.factory.xml.system.XmlConstraintScopeFactory;
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-import net.sf.ahtutils.xml.system.Constraint;
-import net.sf.ahtutils.xml.system.ConstraintScope;
-import net.sf.ahtutils.xml.system.ConstraintSolution;
-import net.sf.ahtutils.xml.system.Constraints;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescription,

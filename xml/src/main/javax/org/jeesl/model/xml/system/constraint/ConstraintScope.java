@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.system;
+package org.jeesl.model.xml.system.constraint;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,15 +9,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Langs;
-import org.jeesl.model.xml.io.locale.status.Type;
 
 
 /**
@@ -30,16 +27,15 @@ import org.jeesl.model.xml.io.locale.status.Type;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/status}type"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}langs"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}descriptions"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/system}constraintAttribute" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/system}constraint" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}lang"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/status}description"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/system}constraintSolution"/&gt;
  *       &lt;/sequence&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *       &lt;attribute name="category" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="since" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -49,67 +45,34 @@ import org.jeesl.model.xml.io.locale.status.Type;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "type",
     "langs",
     "descriptions",
-    "constraintAttribute",
+    "constraint",
     "lang",
-    "description",
-    "constraintSolution"
+    "description"
 })
-@XmlRootElement(name = "constraint")
-public class Constraint
+@XmlRootElement(name = "constraintScope")
+public class ConstraintScope
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
-    protected Type type;
-    @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Langs langs;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Descriptions descriptions;
     @XmlElement(required = true)
-    protected List<ConstraintAttribute> constraintAttribute;
+    protected List<Constraint> constraint;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Lang lang;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
     protected Description description;
-    @XmlElement(required = true)
-    protected ConstraintSolution constraintSolution;
+    @XmlAttribute(name = "id")
+    protected Long id;
+    @XmlAttribute(name = "category")
+    protected String category;
     @XmlAttribute(name = "code")
     protected String code;
-    @XmlAttribute(name = "since")
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar since;
-
-    /**
-     * Gets the value of the type property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Type }
-     *     
-     */
-    public Type getType() {
-        return type;
-    }
-
-    /**
-     * Sets the value of the type property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Type }
-     *     
-     */
-    public void setType(Type value) {
-        this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
 
     /**
      * Gets the value of the langs property.
@@ -168,40 +131,40 @@ public class Constraint
     }
 
     /**
-     * Gets the value of the constraintAttribute property.
+     * Gets the value of the constraint property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the constraintAttribute property.
+     * This is why there is not a <CODE>set</CODE> method for the constraint property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getConstraintAttribute().add(newItem);
+     *    getConstraint().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ConstraintAttribute }
+     * {@link Constraint }
      * 
      * 
      */
-    public List<ConstraintAttribute> getConstraintAttribute() {
-        if (constraintAttribute == null) {
-            constraintAttribute = new ArrayList<ConstraintAttribute>();
+    public List<Constraint> getConstraint() {
+        if (constraint == null) {
+            constraint = new ArrayList<Constraint>();
         }
-        return this.constraintAttribute;
+        return this.constraint;
     }
 
-    public boolean isSetConstraintAttribute() {
-        return ((this.constraintAttribute!= null)&&(!this.constraintAttribute.isEmpty()));
+    public boolean isSetConstraint() {
+        return ((this.constraint!= null)&&(!this.constraint.isEmpty()));
     }
 
-    public void unsetConstraintAttribute() {
-        this.constraintAttribute = null;
+    public void unsetConstraint() {
+        this.constraint = null;
     }
 
     /**
@@ -261,31 +224,63 @@ public class Constraint
     }
 
     /**
-     * Gets the value of the constraintSolution property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
-     *     {@link ConstraintSolution }
+     *     {@link Long }
      *     
      */
-    public ConstraintSolution getConstraintSolution() {
-        return constraintSolution;
+    public long getId() {
+        return id;
     }
 
     /**
-     * Sets the value of the constraintSolution property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
-     *     {@link ConstraintSolution }
+     *     {@link Long }
      *     
      */
-    public void setConstraintSolution(ConstraintSolution value) {
-        this.constraintSolution = value;
+    public void setId(long value) {
+        this.id = value;
     }
 
-    public boolean isSetConstraintSolution() {
-        return (this.constraintSolution!= null);
+    public boolean isSetId() {
+        return (this.id!= null);
+    }
+
+    public void unsetId() {
+        this.id = null;
+    }
+
+    /**
+     * Gets the value of the category property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * Sets the value of the category property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCategory(String value) {
+        this.category = value;
+    }
+
+    public boolean isSetCategory() {
+        return (this.category!= null);
     }
 
     /**
@@ -314,34 +309,6 @@ public class Constraint
 
     public boolean isSetCode() {
         return (this.code!= null);
-    }
-
-    /**
-     * Gets the value of the since property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public XMLGregorianCalendar getSince() {
-        return since;
-    }
-
-    /**
-     * Sets the value of the since property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
-     */
-    public void setSince(XMLGregorianCalendar value) {
-        this.since = value;
-    }
-
-    public boolean isSetSince() {
-        return (this.since!= null);
     }
 
 }

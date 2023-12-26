@@ -1,10 +1,9 @@
 package org.jeesl.model.xml.system.core;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.system.constraint.ConstraintAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.system.ConstraintAttribute;
 
 public class TestXmlConstraintAttribute extends AbstractXmlSystemTest<ConstraintAttribute>
 {

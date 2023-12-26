@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.system;
+package org.jeesl.model.xml.system.constraint;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,8 +21,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/system}constraintScope" maxOccurs="unbounded"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/system}constraintAttribute" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/system}uptime" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/system}request" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -33,92 +33,92 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "constraintScope",
-    "constraintAttribute"
+    "uptime",
+    "request"
 })
-@XmlRootElement(name = "constraints")
-public class Constraints
+@XmlRootElement(name = "info")
+public class Info
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<ConstraintScope> constraintScope;
+    protected List<Uptime> uptime;
     @XmlElement(required = true)
-    protected List<ConstraintAttribute> constraintAttribute;
+    protected List<Request> request;
 
     /**
-     * Gets the value of the constraintScope property.
+     * Gets the value of the uptime property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the constraintScope property.
+     * This is why there is not a <CODE>set</CODE> method for the uptime property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getConstraintScope().add(newItem);
+     *    getUptime().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ConstraintScope }
+     * {@link Uptime }
      * 
      * 
      */
-    public List<ConstraintScope> getConstraintScope() {
-        if (constraintScope == null) {
-            constraintScope = new ArrayList<ConstraintScope>();
+    public List<Uptime> getUptime() {
+        if (uptime == null) {
+            uptime = new ArrayList<Uptime>();
         }
-        return this.constraintScope;
+        return this.uptime;
     }
 
-    public boolean isSetConstraintScope() {
-        return ((this.constraintScope!= null)&&(!this.constraintScope.isEmpty()));
+    public boolean isSetUptime() {
+        return ((this.uptime!= null)&&(!this.uptime.isEmpty()));
     }
 
-    public void unsetConstraintScope() {
-        this.constraintScope = null;
+    public void unsetUptime() {
+        this.uptime = null;
     }
 
     /**
-     * Gets the value of the constraintAttribute property.
+     * Gets the value of the request property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the constraintAttribute property.
+     * This is why there is not a <CODE>set</CODE> method for the request property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getConstraintAttribute().add(newItem);
+     *    getRequest().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ConstraintAttribute }
+     * {@link Request }
      * 
      * 
      */
-    public List<ConstraintAttribute> getConstraintAttribute() {
-        if (constraintAttribute == null) {
-            constraintAttribute = new ArrayList<ConstraintAttribute>();
+    public List<Request> getRequest() {
+        if (request == null) {
+            request = new ArrayList<Request>();
         }
-        return this.constraintAttribute;
+        return this.request;
     }
 
-    public boolean isSetConstraintAttribute() {
-        return ((this.constraintAttribute!= null)&&(!this.constraintAttribute.isEmpty()));
+    public boolean isSetRequest() {
+        return ((this.request!= null)&&(!this.request.isEmpty()));
     }
 
-    public void unsetConstraintAttribute() {
-        this.constraintAttribute = null;
+    public void unsetRequest() {
+        this.request = null;
     }
 
 }
