@@ -76,14 +76,6 @@ public class Constraints
         return this.constraintScope;
     }
 
-    public boolean isSetConstraintScope() {
-        return ((this.constraintScope!= null)&&(!this.constraintScope.isEmpty()));
-    }
-
-    public void unsetConstraintScope() {
-        this.constraintScope = null;
-    }
-
     /**
      * Gets the value of the constraintAttribute property.
      * 
@@ -111,14 +103,6 @@ public class Constraints
             constraintAttribute = new ArrayList<ConstraintAttribute>();
         }
         return this.constraintAttribute;
-    }
-
-    public boolean isSetConstraintAttribute() {
-        return ((this.constraintAttribute!= null)&&(!this.constraintAttribute.isEmpty()));
-    }
-
-    public void unsetConstraintAttribute() {
-        this.constraintAttribute = null;
     }
 
 }

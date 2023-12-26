@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.locale.status.Type;
 
 
@@ -74,10 +73,6 @@ public class Uptime
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the since property.
      * 
@@ -100,10 +95,6 @@ public class Uptime
      */
     public void setSince(XMLGregorianCalendar value) {
         this.since = value;
-    }
-
-    public boolean isSetSince() {
-        return (this.since!= null);
     }
 
 }

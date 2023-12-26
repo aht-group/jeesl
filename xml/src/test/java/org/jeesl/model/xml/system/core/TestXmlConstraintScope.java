@@ -19,7 +19,7 @@ public class TestXmlConstraintScope extends AbstractXmlSystemTest<ConstraintScop
     public ConstraintScope build(boolean withChilds)
     {
     	ConstraintScope xml = new ConstraintScope();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setCategory("myCategory");
     	

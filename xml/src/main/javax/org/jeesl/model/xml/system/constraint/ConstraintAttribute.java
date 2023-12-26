@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 
@@ -79,10 +78,6 @@ public class ConstraintAttribute
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -105,10 +100,6 @@ public class ConstraintAttribute
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -135,10 +126,6 @@ public class ConstraintAttribute
         this.clazz = value;
     }
 
-    public boolean isSetClazz() {
-        return (this.clazz!= null);
-    }
-
     /**
      * Gets the value of the attribute property.
      * 
@@ -161,10 +148,6 @@ public class ConstraintAttribute
      */
     public void setAttribute(String value) {
         this.attribute = value;
-    }
-
-    public boolean isSetAttribute() {
-        return (this.attribute!= null);
     }
 
 }

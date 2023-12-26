@@ -16,7 +16,7 @@ public class TestXmlRequest extends AbstractXmlSystemTest<Request>
     public Request build(boolean withChilds)
     {
     	Request xml = new Request();
-    	xml.setCounter(123);
+    	xml.setCounter(123l);
     	
     	if(withChilds)
     	{

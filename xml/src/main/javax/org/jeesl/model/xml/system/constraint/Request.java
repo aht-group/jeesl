@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Type;
 
 
@@ -71,10 +70,6 @@ public class Request
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the counter property.
      * 
@@ -83,7 +78,7 @@ public class Request
      *     {@link Long }
      *     
      */
-    public long getCounter() {
+    public Long getCounter() {
         return counter;
     }
 
@@ -95,16 +90,8 @@ public class Request
      *     {@link Long }
      *     
      */
-    public void setCounter(long value) {
+    public void setCounter(Long value) {
         this.counter = value;
-    }
-
-    public boolean isSetCounter() {
-        return (this.counter!= null);
-    }
-
-    public void unsetCounter() {
-        this.counter = null;
     }
 
 }

@@ -76,14 +76,6 @@ public class Info
         return this.uptime;
     }
 
-    public boolean isSetUptime() {
-        return ((this.uptime!= null)&&(!this.uptime.isEmpty()));
-    }
-
-    public void unsetUptime() {
-        this.uptime = null;
-    }
-
     /**
      * Gets the value of the request property.
      * 
@@ -111,14 +103,6 @@ public class Info
             request = new ArrayList<Request>();
         }
         return this.request;
-    }
-
-    public boolean isSetRequest() {
-        return ((this.request!= null)&&(!this.request.isEmpty()));
-    }
-
-    public void unsetRequest() {
-        this.request = null;
     }
 
 }

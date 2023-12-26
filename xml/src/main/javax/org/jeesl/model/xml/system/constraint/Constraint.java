@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Lang;
@@ -107,10 +106,6 @@ public class Constraint
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the langs property.
      * 
@@ -135,10 +130,6 @@ public class Constraint
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -161,10 +152,6 @@ public class Constraint
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -196,14 +183,6 @@ public class Constraint
         return this.constraintAttribute;
     }
 
-    public boolean isSetConstraintAttribute() {
-        return ((this.constraintAttribute!= null)&&(!this.constraintAttribute.isEmpty()));
-    }
-
-    public void unsetConstraintAttribute() {
-        this.constraintAttribute = null;
-    }
-
     /**
      * Gets the value of the lang property.
      * 
@@ -226,10 +205,6 @@ public class Constraint
      */
     public void setLang(Lang value) {
         this.lang = value;
-    }
-
-    public boolean isSetLang() {
-        return (this.lang!= null);
     }
 
     /**
@@ -256,10 +231,6 @@ public class Constraint
         this.description = value;
     }
 
-    public boolean isSetDescription() {
-        return (this.description!= null);
-    }
-
     /**
      * Gets the value of the constraintSolution property.
      * 
@@ -282,10 +253,6 @@ public class Constraint
      */
     public void setConstraintSolution(ConstraintSolution value) {
         this.constraintSolution = value;
-    }
-
-    public boolean isSetConstraintSolution() {
-        return (this.constraintSolution!= null);
     }
 
     /**
@@ -312,10 +279,6 @@ public class Constraint
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the since property.
      * 
@@ -338,10 +301,6 @@ public class Constraint
      */
     public void setSince(XMLGregorianCalendar value) {
         this.since = value;
-    }
-
-    public boolean isSetSince() {
-        return (this.since!= null);
     }
 
 }

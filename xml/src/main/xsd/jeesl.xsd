@@ -31,6 +31,7 @@
 	<xsd:import namespace="http://www.jeesl.org/workflow" schemaLocation="jeesl/module/workflow.xsd"/>
 
 	<xsd:import namespace="http://www.jeesl.org/job" schemaLocation="jeesl/module/job.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/system" schemaLocation="aht/system.xsd"/>
 
 	<xsd:import namespace="http://ahtutils.aht-group.com/text" schemaLocation="aht/text.xsd"/>
 

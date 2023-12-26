@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 
 
@@ -77,10 +76,6 @@ public class Release
         this.descriptions = value;
     }
 
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
-    }
-
     /**
      * Gets the value of the version property.
      * 
@@ -105,10 +100,6 @@ public class Release
         this.version = value;
     }
 
-    public boolean isSetVersion() {
-        return (this.version!= null);
-    }
-
     /**
      * Gets the value of the date property.
      * 
@@ -131,10 +122,6 @@ public class Release
      */
     public void setDate(XMLGregorianCalendar value) {
         this.date = value;
-    }
-
-    public boolean isSetDate() {
-        return (this.date!= null);
     }
 
 }

@@ -26,6 +26,11 @@
             <jxb:package name="org.jeesl.model.xml.system.job"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    	<jxb:bindings schemaLocation="../xsd/aht/system.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.system.constraint"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 
     <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>

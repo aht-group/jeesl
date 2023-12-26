@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.api.bean.msg.JeeslConstraintsBean;
 import org.jeesl.api.facade.system.JeeslSystemConstraintFacade;
@@ -151,7 +152,7 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 				scopes.put(scopeCode, scope);
 				for(Constraint constraint : scope.getConstraint())
 				{
-					if(constraint.isSetCode())
+					if(Objects.nonNull(constraint.getCode()))
 					{
 						String key = scopeCode+"-"+constraint.getCode();
 						constraints.put(key, constraint);
@@ -181,7 +182,7 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 				scopes.put(scopeCode, scope);
 				for(Constraint constraint : scope.getConstraint())
 				{
-					if(constraint.isSetCode())
+					if(Objects.nonNull(constraint.getCode()))
 					{
 						String key = scopeCode+"-"+constraint.getCode();
 						constraints.put(key, constraint);
@@ -199,7 +200,7 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
     	if(constraints.containsKey(key))
     	{
     		Constraint c = constraints.get(key);
-        	if(c.isSetDescriptions())
+        	if(Objects.nonNull(c.getDescriptions()))
         	{
         		for(Description d : c.getDescriptions().getDescription())
             	{
@@ -218,10 +219,10 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
 	    	if(constraints.containsKey(key))
 	    	{
 	    		Constraint c = constraints.get(key);
-	    		if(c.isSetConstraintSolution())
+	    		if(Objects.nonNull(c.getConstraintSolution()))
 	    		{
 	    			ConstraintSolution s = c.getConstraintSolution();
-	    			if(s.isSetDescriptions())
+	    			if(Objects.nonNull(s.getDescriptions()))
 	            	{
 	            		for(Description d : s.getDescriptions().getDescription())
 	                	{
@@ -247,11 +248,11 @@ public class AbstractConstraintBean <L extends JeeslLang, D extends JeeslDescrip
     		for(Constraint c : x.getConstraint())
     		{
     			Constraint xmlC = XmlConstraintFactory.build();
-    			if(c.isSetLangs())
+    			if(Objects.nonNull(c.getLangs()))
     			{
     				for(Lang l : c.getLangs().getLang()){if(l.getKey().equals(lang)){xmlC.setLang(l);}}
     			}
-    			if(c.isSetDescriptions())
+    			if(Objects.nonNull(c.getDescriptions()))
     			{
     				for(Description d : c.getDescriptions().getDescription()) {if(d.getKey().equals(lang)){xmlC.setDescription(d);}}
     			}

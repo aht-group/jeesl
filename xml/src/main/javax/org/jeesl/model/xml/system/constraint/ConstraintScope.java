@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Lang;
@@ -98,10 +97,6 @@ public class ConstraintScope
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -124,10 +119,6 @@ public class ConstraintScope
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -159,14 +150,6 @@ public class ConstraintScope
         return this.constraint;
     }
 
-    public boolean isSetConstraint() {
-        return ((this.constraint!= null)&&(!this.constraint.isEmpty()));
-    }
-
-    public void unsetConstraint() {
-        this.constraint = null;
-    }
-
     /**
      * Gets the value of the lang property.
      * 
@@ -189,10 +172,6 @@ public class ConstraintScope
      */
     public void setLang(Lang value) {
         this.lang = value;
-    }
-
-    public boolean isSetLang() {
-        return (this.lang!= null);
     }
 
     /**
@@ -219,10 +198,6 @@ public class ConstraintScope
         this.description = value;
     }
 
-    public boolean isSetDescription() {
-        return (this.description!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -231,7 +206,7 @@ public class ConstraintScope
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -243,16 +218,8 @@ public class ConstraintScope
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -279,10 +246,6 @@ public class ConstraintScope
         this.category = value;
     }
 
-    public boolean isSetCategory() {
-        return (this.category!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -305,10 +268,6 @@ public class ConstraintScope
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }
