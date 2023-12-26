@@ -48,7 +48,7 @@ public class Font
      *     {@link Boolean }
      *     
      */
-    public boolean isBold() {
+    public Boolean isBold() {
         return bold;
     }
 
@@ -60,16 +60,8 @@ public class Font
      *     {@link Boolean }
      *     
      */
-    public void setBold(boolean value) {
+    public void setBold(Boolean value) {
         this.bold = value;
-    }
-
-    public boolean isSetBold() {
-        return (this.bold!= null);
-    }
-
-    public void unsetBold() {
-        this.bold = null;
     }
 
     /**
@@ -80,7 +72,7 @@ public class Font
      *     {@link Boolean }
      *     
      */
-    public boolean isItalic() {
+    public Boolean isItalic() {
         return italic;
     }
 
@@ -92,16 +84,8 @@ public class Font
      *     {@link Boolean }
      *     
      */
-    public void setItalic(boolean value) {
+    public void setItalic(Boolean value) {
         this.italic = value;
-    }
-
-    public boolean isSetItalic() {
-        return (this.italic!= null);
-    }
-
-    public void unsetItalic() {
-        this.italic = null;
     }
 
 }

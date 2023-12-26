@@ -72,12 +72,4 @@ public class XlsDefinition
         return this.xlsWorkbook;
     }
 
-    public boolean isSetXlsWorkbook() {
-        return ((this.xlsWorkbook!= null)&&(!this.xlsWorkbook.isEmpty()));
-    }
-
-    public void unsetXlsWorkbook() {
-        this.xlsWorkbook = null;
-    }
-
 }

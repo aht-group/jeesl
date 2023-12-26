@@ -67,10 +67,6 @@ public class Label
         this.scope = value;
     }
 
-    public boolean isSetScope() {
-        return (this.scope!= null);
-    }
-
     /**
      * Gets the value of the key property.
      * 
@@ -95,10 +91,6 @@ public class Label
         this.key = value;
     }
 
-    public boolean isSetKey() {
-        return (this.key!= null);
-    }
-
     /**
      * Gets the value of the value property.
      * 
@@ -121,10 +113,6 @@ public class Label
      */
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public boolean isSetValue() {
-        return (this.value!= null);
     }
 
 }

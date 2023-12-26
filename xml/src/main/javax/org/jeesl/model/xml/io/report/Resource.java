@@ -88,10 +88,6 @@ public class Resource
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -116,10 +112,6 @@ public class Resource
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the name property.
      * 
@@ -142,10 +134,6 @@ public class Resource
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    public boolean isSetName() {
-        return (this.name!= null);
     }
 
 
@@ -199,10 +187,6 @@ public class Resource
          */
         public void setValue(String value) {
             this.value = value;
-        }
-
-        public boolean isSetValue() {
-            return (this.value!= null);
         }
 
     }

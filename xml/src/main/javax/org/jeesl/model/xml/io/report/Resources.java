@@ -76,14 +76,6 @@ public class Resources
         return this.resource;
     }
 
-    public boolean isSetResource() {
-        return ((this.resource!= null)&&(!this.resource.isEmpty()));
-    }
-
-    public void unsetResource() {
-        this.resource = null;
-    }
-
     /**
      * Gets the value of the dir property.
      * 
@@ -106,10 +98,6 @@ public class Resources
      */
     public void setDir(String value) {
         this.dir = value;
-    }
-
-    public boolean isSetDir() {
-        return (this.dir!= null);
     }
 
 }

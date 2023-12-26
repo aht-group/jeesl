@@ -75,10 +75,6 @@ public class XlsWorkbook
         this.xlsSheets = value;
     }
 
-    public boolean isSetXlsSheets() {
-        return (this.xlsSheets!= null);
-    }
-
     /**
      * Gets the value of the xlsSheet property.
      * 
@@ -108,14 +104,6 @@ public class XlsWorkbook
         return this.xlsSheet;
     }
 
-    public boolean isSetXlsSheet() {
-        return ((this.xlsSheet!= null)&&(!this.xlsSheet.isEmpty()));
-    }
-
-    public void unsetXlsSheet() {
-        this.xlsSheet = null;
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -138,10 +126,6 @@ public class XlsWorkbook
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

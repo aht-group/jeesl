@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.DataType;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
@@ -130,10 +129,6 @@ public class XlsColumn implements Serializable
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -156,10 +151,6 @@ public class XlsColumn implements Serializable
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -186,10 +177,6 @@ public class XlsColumn implements Serializable
         this.dataType = value;
     }
 
-    public boolean isSetDataType() {
-        return (this.dataType!= null);
-    }
-
     /**
      * Gets the value of the queries property.
      * 
@@ -212,10 +199,6 @@ public class XlsColumn implements Serializable
      */
     public void setQueries(Queries value) {
         this.queries = value;
-    }
-
-    public boolean isSetQueries() {
-        return (this.queries!= null);
     }
 
     /**
@@ -242,10 +225,6 @@ public class XlsColumn implements Serializable
         this.layout = value;
     }
 
-    public boolean isSetLayout() {
-        return (this.layout!= null);
-    }
-
     /**
      * Gets the value of the styles property.
      * 
@@ -268,10 +247,6 @@ public class XlsColumn implements Serializable
      */
     public void setStyles(Styles value) {
         this.styles = value;
-    }
-
-    public boolean isSetStyles() {
-        return (this.styles!= null);
     }
 
     /**
@@ -298,10 +273,6 @@ public class XlsColumn implements Serializable
         this.xlsTransformation = value;
     }
 
-    public boolean isSetXlsTransformation() {
-        return (this.xlsTransformation!= null);
-    }
-
     /**
      * Gets the value of the dataAssociation property.
      * 
@@ -324,10 +295,6 @@ public class XlsColumn implements Serializable
      */
     public void setDataAssociation(DataAssociation value) {
         this.dataAssociation = value;
-    }
-
-    public boolean isSetDataAssociation() {
-        return (this.dataAssociation!= null);
     }
 
     /**
@@ -354,10 +321,6 @@ public class XlsColumn implements Serializable
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -366,7 +329,7 @@ public class XlsColumn implements Serializable
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -378,16 +341,8 @@ public class XlsColumn implements Serializable
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -398,7 +353,7 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -410,16 +365,8 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -430,7 +377,7 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isShowLabel() {
+    public Boolean isShowLabel() {
         return showLabel;
     }
 
@@ -442,16 +389,8 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setShowLabel(boolean value) {
+    public void setShowLabel(Boolean value) {
         this.showLabel = value;
-    }
-
-    public boolean isSetShowLabel() {
-        return (this.showLabel!= null);
-    }
-
-    public void unsetShowLabel() {
-        this.showLabel = null;
     }
 
     /**
@@ -462,7 +401,7 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isShowWeb() {
+    public Boolean isShowWeb() {
         return showWeb;
     }
 
@@ -474,16 +413,8 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setShowWeb(boolean value) {
+    public void setShowWeb(Boolean value) {
         this.showWeb = value;
-    }
-
-    public boolean isSetShowWeb() {
-        return (this.showWeb!= null);
-    }
-
-    public void unsetShowWeb() {
-        this.showWeb = null;
     }
 
     /**
@@ -510,10 +441,6 @@ public class XlsColumn implements Serializable
         this.column = value;
     }
 
-    public boolean isSetColumn() {
-        return (this.column!= null);
-    }
-
     /**
      * Gets the value of the required property.
      * 
@@ -522,7 +449,7 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isRequired() {
+    public Boolean isRequired() {
         return required;
     }
 
@@ -534,16 +461,8 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setRequired(boolean value) {
+    public void setRequired(Boolean value) {
         this.required = value;
-    }
-
-    public boolean isSetRequired() {
-        return (this.required!= null);
-    }
-
-    public void unsetRequired() {
-        this.required = null;
     }
 
     /**
@@ -570,10 +489,6 @@ public class XlsColumn implements Serializable
         this.label = value;
     }
 
-    public boolean isSetLabel() {
-        return (this.label!= null);
-    }
-
     /**
      * Gets the value of the example property.
      * 
@@ -598,10 +513,6 @@ public class XlsColumn implements Serializable
         this.example = value;
     }
 
-    public boolean isSetExample() {
-        return (this.example!= null);
-    }
-
     /**
      * Gets the value of the autoWidth property.
      * 
@@ -610,7 +521,7 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isAutoWidth() {
+    public Boolean isAutoWidth() {
         return autoWidth;
     }
 
@@ -622,16 +533,8 @@ public class XlsColumn implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setAutoWidth(boolean value) {
+    public void setAutoWidth(Boolean value) {
         this.autoWidth = value;
-    }
-
-    public boolean isSetAutoWidth() {
-        return (this.autoWidth!= null);
-    }
-
-    public void unsetAutoWidth() {
-        this.autoWidth = null;
     }
 
     /**
@@ -642,7 +545,7 @@ public class XlsColumn implements Serializable
      *     {@link Integer }
      *     
      */
-    public int getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
@@ -654,16 +557,8 @@ public class XlsColumn implements Serializable
      *     {@link Integer }
      *     
      */
-    public void setWidth(int value) {
+    public void setWidth(Integer value) {
         this.width = value;
-    }
-
-    public boolean isSetWidth() {
-        return (this.width!= null);
-    }
-
-    public void unsetWidth() {
-        this.width = null;
     }
 
 }

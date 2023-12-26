@@ -72,12 +72,4 @@ public class Styles
         return this.style;
     }
 
-    public boolean isSetStyle() {
-        return ((this.style!= null)&&(!this.style.isEmpty()));
-    }
-
-    public void unsetStyle() {
-        this.style = null;
-    }
-
 }

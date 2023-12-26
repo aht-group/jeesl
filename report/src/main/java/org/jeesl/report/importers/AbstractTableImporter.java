@@ -96,7 +96,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
                 }
             }
             if(Objects.nonNull(association.getValidatedBy())) {validators.put(column, Class.forName(association.getValidatedBy()));}
-            if(association.isSetTargetClass()) {targetClasses.put(column, Class.forName(association.getTargetClass()));}
+            if(Objects.nonNull(association.getTargetClass())) {targetClasses.put(column, Class.forName(association.getTargetClass()));}
         }
     }
 

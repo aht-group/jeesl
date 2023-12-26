@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.graphic.Color;
 
 
@@ -85,10 +84,6 @@ public class Layout
         this.font = value;
     }
 
-    public boolean isSetFont() {
-        return (this.font!= null);
-    }
-
     /**
      * Gets the value of the offset property.
      * 
@@ -111,10 +106,6 @@ public class Layout
      */
     public void setOffset(Offset value) {
         this.offset = value;
-    }
-
-    public boolean isSetOffset() {
-        return (this.offset!= null);
     }
 
     /**
@@ -146,14 +137,6 @@ public class Layout
         return this.size;
     }
 
-    public boolean isSetSize() {
-        return ((this.size!= null)&&(!this.size.isEmpty()));
-    }
-
-    public void unsetSize() {
-        this.size = null;
-    }
-
     /**
      * Gets the value of the color property.
      * 
@@ -183,14 +166,6 @@ public class Layout
         return this.color;
     }
 
-    public boolean isSetColor() {
-        return ((this.color!= null)&&(!this.color.isEmpty()));
-    }
-
-    public void unsetColor() {
-        this.color = null;
-    }
-
     /**
      * Gets the value of the styles property.
      * 
@@ -213,10 +188,6 @@ public class Layout
      */
     public void setStyles(Styles value) {
         this.styles = value;
-    }
-
-    public boolean isSetStyles() {
-        return (this.styles!= null);
     }
 
 }

@@ -77,10 +77,6 @@ public class Field
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the expression property.
      * 
@@ -103,10 +99,6 @@ public class Field
      */
     public void setExpression(String value) {
         this.expression = value;
-    }
-
-    public boolean isSetExpression() {
-        return (this.expression!= null);
     }
 
     /**
@@ -133,10 +125,6 @@ public class Field
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the className property.
      * 
@@ -159,10 +147,6 @@ public class Field
      */
     public void setClassName(String value) {
         this.className = value;
-    }
-
-    public boolean isSetClassName() {
-        return (this.className!= null);
     }
 
 }

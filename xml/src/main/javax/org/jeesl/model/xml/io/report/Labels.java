@@ -72,12 +72,4 @@ public class Labels
         return this.label;
     }
 
-    public boolean isSetLabel() {
-        return ((this.label!= null)&&(!this.label.isEmpty()));
-    }
-
-    public void unsetLabel() {
-        this.label = null;
-    }
-
 }

@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Type;
 
 
@@ -74,10 +73,6 @@ public class Size
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -102,10 +97,6 @@ public class Size
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the value property.
      * 
@@ -114,7 +105,7 @@ public class Size
      *     {@link Integer }
      *     
      */
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
@@ -126,16 +117,8 @@ public class Size
      *     {@link Integer }
      *     
      */
-    public void setValue(int value) {
+    public void setValue(Integer value) {
         this.value = value;
-    }
-
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
-    public void unsetValue() {
-        this.value = null;
     }
 
 }

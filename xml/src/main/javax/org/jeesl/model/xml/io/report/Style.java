@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 
@@ -92,10 +91,6 @@ public class Style
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -118,10 +113,6 @@ public class Style
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -148,10 +139,6 @@ public class Style
         this.layout = value;
     }
 
-    public boolean isSetLayout() {
-        return (this.layout!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -160,7 +147,7 @@ public class Style
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -172,16 +159,8 @@ public class Style
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -208,10 +187,6 @@ public class Style
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -236,10 +211,6 @@ public class Style
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -248,7 +219,7 @@ public class Style
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -260,16 +231,8 @@ public class Style
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -280,7 +243,7 @@ public class Style
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -292,16 +255,8 @@ public class Style
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
 }

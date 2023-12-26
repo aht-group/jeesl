@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.DataType;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
@@ -108,10 +107,6 @@ public class Row
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -134,10 +129,6 @@ public class Row
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -164,10 +155,6 @@ public class Row
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the dataType property.
      * 
@@ -190,10 +177,6 @@ public class Row
      */
     public void setDataType(DataType value) {
         this.dataType = value;
-    }
-
-    public boolean isSetDataType() {
-        return (this.dataType!= null);
     }
 
     /**
@@ -220,10 +203,6 @@ public class Row
         this.template = value;
     }
 
-    public boolean isSetTemplate() {
-        return (this.template!= null);
-    }
-
     /**
      * Gets the value of the queries property.
      * 
@@ -246,10 +225,6 @@ public class Row
      */
     public void setQueries(Queries value) {
         this.queries = value;
-    }
-
-    public boolean isSetQueries() {
-        return (this.queries!= null);
     }
 
     /**
@@ -276,10 +251,6 @@ public class Row
         this.styles = value;
     }
 
-    public boolean isSetStyles() {
-        return (this.styles!= null);
-    }
-
     /**
      * Gets the value of the layout property.
      * 
@@ -302,10 +273,6 @@ public class Row
      */
     public void setLayout(Layout value) {
         this.layout = value;
-    }
-
-    public boolean isSetLayout() {
-        return (this.layout!= null);
     }
 
     /**
@@ -332,10 +299,6 @@ public class Row
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -344,7 +307,7 @@ public class Row
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -356,16 +319,8 @@ public class Row
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -376,7 +331,7 @@ public class Row
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -388,16 +343,8 @@ public class Row
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
 }

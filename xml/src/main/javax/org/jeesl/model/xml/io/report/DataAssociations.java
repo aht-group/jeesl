@@ -72,12 +72,4 @@ public class DataAssociations
         return this.dataAssociation;
     }
 
-    public boolean isSetDataAssociation() {
-        return ((this.dataAssociation!= null)&&(!this.dataAssociation.isEmpty()));
-    }
-
-    public void unsetDataAssociation() {
-        this.dataAssociation = null;
-    }
-
 }

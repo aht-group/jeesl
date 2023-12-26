@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Implementation;
 import org.jeesl.model.xml.io.locale.status.Langs;
@@ -62,16 +61,16 @@ public class XlsSheet
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "descriptions", namespace = "http://ahtutils.aht-group.com/status", type = Descriptions.class),
-        @XmlElementRef(name = "importStructure", namespace = "http://ahtutils.aht-group.com/report", type = ImportStructure.class),
-        @XmlElementRef(name = "xlsColumns", namespace = "http://ahtutils.aht-group.com/report", type = XlsColumns.class),
         @XmlElementRef(name = "langs", namespace = "http://ahtutils.aht-group.com/status", type = Langs.class),
+        @XmlElementRef(name = "descriptions", namespace = "http://ahtutils.aht-group.com/status", type = Descriptions.class),
         @XmlElementRef(name = "implementation", namespace = "http://ahtutils.aht-group.com/status", type = Implementation.class),
-        @XmlElementRef(name = "queries", namespace = "http://ahtutils.aht-group.com/report", type = Queries.class),
         @XmlElementRef(name = "xlsMultiColumn", namespace = "http://ahtutils.aht-group.com/report", type = XlsMultiColumn.class),
-        @XmlElementRef(name = "columnGroup", namespace = "http://ahtutils.aht-group.com/report", type = ColumnGroup.class),
+        @XmlElementRef(name = "xlsColumns", namespace = "http://ahtutils.aht-group.com/report", type = XlsColumns.class),
         @XmlElementRef(name = "xlsColumn", namespace = "http://ahtutils.aht-group.com/report", type = XlsColumn.class),
-        @XmlElementRef(name = "rows", namespace = "http://ahtutils.aht-group.com/report", type = Rows.class)
+        @XmlElementRef(name = "columnGroup", namespace = "http://ahtutils.aht-group.com/report", type = ColumnGroup.class),
+        @XmlElementRef(name = "rows", namespace = "http://ahtutils.aht-group.com/report", type = Rows.class),
+        @XmlElementRef(name = "importStructure", namespace = "http://ahtutils.aht-group.com/report", type = ImportStructure.class),
+        @XmlElementRef(name = "queries", namespace = "http://ahtutils.aht-group.com/report", type = Queries.class)
     })
     @XmlMixed
     protected List<Serializable> content;
@@ -104,17 +103,17 @@ public class XlsSheet
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Descriptions }
-     * {@link ImportStructure }
-     * {@link XlsColumns }
      * {@link String }
-     * {@link Langs }
+     * {@link Descriptions }
      * {@link Implementation }
-     * {@link Queries }
-     * {@link XlsMultiColumn }
+     * {@link Langs }
      * {@link ColumnGroup }
-     * {@link XlsColumn }
+     * {@link ImportStructure }
+     * {@link Queries }
      * {@link Rows }
+     * {@link XlsColumn }
+     * {@link XlsColumns }
+     * {@link XlsMultiColumn }
      * 
      * 
      */
@@ -123,14 +122,6 @@ public class XlsSheet
             content = new ArrayList<Serializable>();
         }
         return this.content;
-    }
-
-    public boolean isSetContent() {
-        return ((this.content!= null)&&(!this.content.isEmpty()));
-    }
-
-    public void unsetContent() {
-        this.content = null;
     }
 
     /**
@@ -157,10 +148,6 @@ public class XlsSheet
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -169,7 +156,7 @@ public class XlsSheet
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -181,16 +168,8 @@ public class XlsSheet
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -201,7 +180,7 @@ public class XlsSheet
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -213,16 +192,8 @@ public class XlsSheet
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -249,10 +220,6 @@ public class XlsSheet
         this.query = value;
     }
 
-    public boolean isSetQuery() {
-        return (this.query!= null);
-    }
-
     /**
      * Gets the value of the primaryKey property.
      * 
@@ -275,10 +242,6 @@ public class XlsSheet
      */
     public void setPrimaryKey(String value) {
         this.primaryKey = value;
-    }
-
-    public boolean isSetPrimaryKey() {
-        return (this.primaryKey!= null);
     }
 
 }

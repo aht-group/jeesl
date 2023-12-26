@@ -74,10 +74,6 @@ public class XlsTransformation
         this.dataClass = value;
     }
 
-    public boolean isSetDataClass() {
-        return (this.dataClass!= null);
-    }
-
     /**
      * Gets the value of the formatPattern property.
      * 
@@ -100,10 +96,6 @@ public class XlsTransformation
      */
     public void setFormatPattern(String value) {
         this.formatPattern = value;
-    }
-
-    public boolean isSetFormatPattern() {
-        return (this.formatPattern!= null);
     }
 
     /**
@@ -130,10 +122,6 @@ public class XlsTransformation
         this.beanProperty = value;
     }
 
-    public boolean isSetBeanProperty() {
-        return (this.beanProperty!= null);
-    }
-
     /**
      * Gets the value of the xPath property.
      * 
@@ -156,10 +144,6 @@ public class XlsTransformation
      */
     public void setXPath(String value) {
         this.xPath = value;
-    }
-
-    public boolean isSetXPath() {
-        return (this.xPath!= null);
     }
 
 }

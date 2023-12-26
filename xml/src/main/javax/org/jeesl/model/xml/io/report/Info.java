@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.exlp.model.xml.io.Data;
 import org.jeesl.model.xml.module.finance.Signatures;
 
@@ -149,10 +148,6 @@ public class Info
         this.title = value;
     }
 
-    public boolean isSetTitle() {
-        return (this.title!= null);
-    }
-
     /**
      * Gets the value of the record property.
      * 
@@ -175,10 +170,6 @@ public class Info
      */
     public void setRecord(Info.Record value) {
         this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
     /**
@@ -205,10 +196,6 @@ public class Info
         this.subtitle = value;
     }
 
-    public boolean isSetSubtitle() {
-        return (this.subtitle!= null);
-    }
-
     /**
      * Gets the value of the footer property.
      * 
@@ -231,10 +218,6 @@ public class Info
      */
     public void setFooter(Info.Footer value) {
         this.footer = value;
-    }
-
-    public boolean isSetFooter() {
-        return (this.footer!= null);
     }
 
     /**
@@ -266,14 +249,6 @@ public class Info
         return this.media;
     }
 
-    public boolean isSetMedia() {
-        return ((this.media!= null)&&(!this.media.isEmpty()));
-    }
-
-    public void unsetMedia() {
-        this.media = null;
-    }
-
     /**
      * Gets the value of the jr property.
      * 
@@ -303,14 +278,6 @@ public class Info
         return this.jr;
     }
 
-    public boolean isSetJr() {
-        return ((this.jr!= null)&&(!this.jr.isEmpty()));
-    }
-
-    public void unsetJr() {
-        this.jr = null;
-    }
-
     /**
      * Gets the value of the file property.
      * 
@@ -333,10 +300,6 @@ public class Info
      */
     public void setFile(File value) {
         this.file = value;
-    }
-
-    public boolean isSetFile() {
-        return (this.file!= null);
     }
 
     /**
@@ -363,10 +326,6 @@ public class Info
         this.hash = value;
     }
 
-    public boolean isSetHash() {
-        return (this.hash!= null);
-    }
-
     /**
      * Gets the value of the user property.
      * 
@@ -389,10 +348,6 @@ public class Info
      */
     public void setUser(User value) {
         this.user = value;
-    }
-
-    public boolean isSetUser() {
-        return (this.user!= null);
     }
 
     /**
@@ -419,10 +374,6 @@ public class Info
         this.footers = value;
     }
 
-    public boolean isSetFooters() {
-        return (this.footers!= null);
-    }
-
     /**
      * Gets the value of the labels property.
      * 
@@ -445,10 +396,6 @@ public class Info
      */
     public void setLabels(Labels value) {
         this.labels = value;
-    }
-
-    public boolean isSetLabels() {
-        return (this.labels!= null);
     }
 
     /**
@@ -475,10 +422,6 @@ public class Info
         this.signatures = value;
     }
 
-    public boolean isSetSignatures() {
-        return (this.signatures!= null);
-    }
-
     /**
      * Gets the value of the data property.
      * 
@@ -501,10 +444,6 @@ public class Info
      */
     public void setData(Data value) {
         this.data = value;
-    }
-
-    public boolean isSetData() {
-        return (this.data!= null);
     }
 
 
@@ -558,10 +497,6 @@ public class Info
          */
         public void setValue(String value) {
             this.value = value;
-        }
-
-        public boolean isSetValue() {
-            return (this.value!= null);
         }
 
     }
@@ -620,10 +555,6 @@ public class Info
             this.value = value;
         }
 
-        public boolean isSetValue() {
-            return (this.value!= null);
-        }
-
     }
 
 
@@ -679,10 +610,6 @@ public class Info
             this.value = value;
         }
 
-        public boolean isSetValue() {
-            return (this.value!= null);
-        }
-
     }
 
 
@@ -736,10 +663,6 @@ public class Info
          */
         public void setValue(String value) {
             this.value = value;
-        }
-
-        public boolean isSetValue() {
-            return (this.value!= null);
         }
 
     }

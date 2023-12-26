@@ -62,8 +62,4 @@ public class Hash
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
 }

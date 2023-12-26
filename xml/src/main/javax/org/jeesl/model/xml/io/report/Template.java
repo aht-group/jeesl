@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 
@@ -99,10 +98,6 @@ public class Template
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -125,10 +120,6 @@ public class Template
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -160,14 +151,6 @@ public class Template
         return this.cell;
     }
 
-    public boolean isSetCell() {
-        return ((this.cell!= null)&&(!this.cell.isEmpty()));
-    }
-
-    public void unsetCell() {
-        this.cell = null;
-    }
-
     /**
      * Gets the value of the field property.
      * 
@@ -195,14 +178,6 @@ public class Template
             field = new ArrayList<Field>();
         }
         return this.field;
-    }
-
-    public boolean isSetField() {
-        return ((this.field!= null)&&(!this.field.isEmpty()));
-    }
-
-    public void unsetField() {
-        this.field = null;
     }
 
     /**
@@ -234,14 +209,6 @@ public class Template
         return this.element;
     }
 
-    public boolean isSetElement() {
-        return ((this.element!= null)&&(!this.element.isEmpty()));
-    }
-
-    public void unsetElement() {
-        this.element = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -264,10 +231,6 @@ public class Template
      */
     public void setId(String value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
     }
 
     /**
@@ -294,10 +257,6 @@ public class Template
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -306,7 +265,7 @@ public class Template
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -318,16 +277,8 @@ public class Template
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -338,7 +289,7 @@ public class Template
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -350,16 +301,8 @@ public class Template
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
 }

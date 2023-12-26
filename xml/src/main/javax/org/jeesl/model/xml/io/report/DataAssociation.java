@@ -76,10 +76,6 @@ public class DataAssociation
         this.column = value;
     }
 
-    public boolean isSetColumn() {
-        return (this.column!= null);
-    }
-
     /**
      * Gets the value of the property property.
      * 
@@ -102,10 +98,6 @@ public class DataAssociation
      */
     public void setProperty(String value) {
         this.property = value;
-    }
-
-    public boolean isSetProperty() {
-        return (this.property!= null);
     }
 
     /**
@@ -132,10 +124,6 @@ public class DataAssociation
         this.targetClass = value;
     }
 
-    public boolean isSetTargetClass() {
-        return (this.targetClass!= null);
-    }
-
     /**
      * Gets the value of the handledBy property.
      * 
@@ -158,10 +146,6 @@ public class DataAssociation
      */
     public void setHandledBy(String value) {
         this.handledBy = value;
-    }
-
-    public boolean isSetHandledBy() {
-        return (this.handledBy!= null);
     }
 
     /**
@@ -188,10 +172,6 @@ public class DataAssociation
         this.validatedBy = value;
     }
 
-    public boolean isSetValidatedBy() {
-        return (this.validatedBy!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -214,10 +194,6 @@ public class DataAssociation
      */
     public void setType(ImportType value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
 }

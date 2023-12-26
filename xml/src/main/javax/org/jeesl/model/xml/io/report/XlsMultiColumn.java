@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Langs;
 
 
@@ -87,14 +86,6 @@ public class XlsMultiColumn implements Serializable
         return this.xlsColumn;
     }
 
-    public boolean isSetXlsColumn() {
-        return ((this.xlsColumn!= null)&&(!this.xlsColumn.isEmpty()));
-    }
-
-    public void unsetXlsColumn() {
-        this.xlsColumn = null;
-    }
-
     /**
      * Gets the value of the langs property.
      * 
@@ -117,10 +108,6 @@ public class XlsMultiColumn implements Serializable
      */
     public void setLangs(Langs value) {
         this.langs = value;
-    }
-
-    public boolean isSetLangs() {
-        return (this.langs!= null);
     }
 
     /**
@@ -147,10 +134,6 @@ public class XlsMultiColumn implements Serializable
         this.id = value;
     }
 
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
     /**
      * Gets the value of the columnLabel property.
      * 
@@ -175,10 +158,6 @@ public class XlsMultiColumn implements Serializable
         this.columnLabel = value;
     }
 
-    public boolean isSetColumnLabel() {
-        return (this.columnLabel!= null);
-    }
-
     /**
      * Gets the value of the query property.
      * 
@@ -201,10 +180,6 @@ public class XlsMultiColumn implements Serializable
      */
     public void setQuery(String value) {
         this.query = value;
-    }
-
-    public boolean isSetQuery() {
-        return (this.query!= null);
     }
 
 }

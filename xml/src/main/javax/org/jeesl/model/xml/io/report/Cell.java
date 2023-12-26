@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 
@@ -85,10 +84,6 @@ public class Cell
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -111,10 +106,6 @@ public class Cell
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -141,10 +132,6 @@ public class Cell
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the visible property.
      * 
@@ -153,7 +140,7 @@ public class Cell
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -165,16 +152,8 @@ public class Cell
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -185,7 +164,7 @@ public class Cell
      *     {@link Integer }
      *     
      */
-    public int getRowNr() {
+    public Integer getRowNr() {
         return rowNr;
     }
 
@@ -197,16 +176,8 @@ public class Cell
      *     {@link Integer }
      *     
      */
-    public void setRowNr(int value) {
+    public void setRowNr(Integer value) {
         this.rowNr = value;
-    }
-
-    public boolean isSetRowNr() {
-        return (this.rowNr!= null);
-    }
-
-    public void unsetRowNr() {
-        this.rowNr = null;
     }
 
     /**
@@ -217,7 +188,7 @@ public class Cell
      *     {@link Integer }
      *     
      */
-    public int getColNr() {
+    public Integer getColNr() {
         return colNr;
     }
 
@@ -229,16 +200,8 @@ public class Cell
      *     {@link Integer }
      *     
      */
-    public void setColNr(int value) {
+    public void setColNr(Integer value) {
         this.colNr = value;
-    }
-
-    public boolean isSetColNr() {
-        return (this.colNr!= null);
-    }
-
-    public void unsetColNr() {
-        this.colNr = null;
     }
 
 }

@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 
@@ -100,10 +99,6 @@ public class ColumnGroup implements Serializable
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -128,10 +123,6 @@ public class ColumnGroup implements Serializable
         this.descriptions = value;
     }
 
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
-    }
-
     /**
      * Gets the value of the layout property.
      * 
@@ -154,10 +145,6 @@ public class ColumnGroup implements Serializable
      */
     public void setLayout(Layout value) {
         this.layout = value;
-    }
-
-    public boolean isSetLayout() {
-        return (this.layout!= null);
     }
 
     /**
@@ -189,14 +176,6 @@ public class ColumnGroup implements Serializable
         return this.xlsColumn;
     }
 
-    public boolean isSetXlsColumn() {
-        return ((this.xlsColumn!= null)&&(!this.xlsColumn.isEmpty()));
-    }
-
-    public void unsetXlsColumn() {
-        this.xlsColumn = null;
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -221,10 +200,6 @@ public class ColumnGroup implements Serializable
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -233,7 +208,7 @@ public class ColumnGroup implements Serializable
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -245,16 +220,8 @@ public class ColumnGroup implements Serializable
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -265,7 +232,7 @@ public class ColumnGroup implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -277,16 +244,8 @@ public class ColumnGroup implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -297,7 +256,7 @@ public class ColumnGroup implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isShowLabel() {
+    public Boolean isShowLabel() {
         return showLabel;
     }
 
@@ -309,16 +268,8 @@ public class ColumnGroup implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setShowLabel(boolean value) {
+    public void setShowLabel(Boolean value) {
         this.showLabel = value;
-    }
-
-    public boolean isSetShowLabel() {
-        return (this.showLabel!= null);
-    }
-
-    public void unsetShowLabel() {
-        this.showLabel = null;
     }
 
     /**
@@ -329,7 +280,7 @@ public class ColumnGroup implements Serializable
      *     {@link Boolean }
      *     
      */
-    public boolean isShowWeb() {
+    public Boolean isShowWeb() {
         return showWeb;
     }
 
@@ -341,16 +292,8 @@ public class ColumnGroup implements Serializable
      *     {@link Boolean }
      *     
      */
-    public void setShowWeb(boolean value) {
+    public void setShowWeb(Boolean value) {
         this.showWeb = value;
-    }
-
-    public boolean isSetShowWeb() {
-        return (this.showWeb!= null);
-    }
-
-    public void unsetShowWeb() {
-        this.showWeb = null;
     }
 
     /**
@@ -375,10 +318,6 @@ public class ColumnGroup implements Serializable
      */
     public void setQuery(String value) {
         this.query = value;
-    }
-
-    public boolean isSetQuery() {
-        return (this.query!= null);
     }
 
 }

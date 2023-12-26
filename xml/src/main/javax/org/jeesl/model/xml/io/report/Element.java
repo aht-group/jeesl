@@ -72,10 +72,6 @@ public class Element
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the file property.
      * 
@@ -98,10 +94,6 @@ public class Element
      */
     public void setFile(String value) {
         this.file = value;
-    }
-
-    public boolean isSetFile() {
-        return (this.file!= null);
     }
 
 }

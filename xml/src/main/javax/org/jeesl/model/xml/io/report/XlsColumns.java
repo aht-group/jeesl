@@ -75,14 +75,6 @@ public class XlsColumns implements Serializable
         return this.xlsColumn;
     }
 
-    public boolean isSetXlsColumn() {
-        return ((this.xlsColumn!= null)&&(!this.xlsColumn.isEmpty()));
-    }
-
-    public void unsetXlsColumn() {
-        this.xlsColumn = null;
-    }
-
     /**
      * Gets the value of the query property.
      * 
@@ -105,10 +97,6 @@ public class XlsColumns implements Serializable
      */
     public void setQuery(String value) {
         this.query = value;
-    }
-
-    public boolean isSetQuery() {
-        return (this.query!= null);
     }
 
 }

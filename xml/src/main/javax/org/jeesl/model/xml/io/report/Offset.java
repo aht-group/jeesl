@@ -50,7 +50,7 @@ public class Offset
      *     {@link Integer }
      *     
      */
-    public int getRows() {
+    public Integer getRows() {
         return rows;
     }
 
@@ -62,16 +62,8 @@ public class Offset
      *     {@link Integer }
      *     
      */
-    public void setRows(int value) {
+    public void setRows(Integer value) {
         this.rows = value;
-    }
-
-    public boolean isSetRows() {
-        return (this.rows!= null);
-    }
-
-    public void unsetRows() {
-        this.rows = null;
     }
 
     /**
@@ -82,7 +74,7 @@ public class Offset
      *     {@link Integer }
      *     
      */
-    public int getColumns() {
+    public Integer getColumns() {
         return columns;
     }
 
@@ -94,16 +86,8 @@ public class Offset
      *     {@link Integer }
      *     
      */
-    public void setColumns(int value) {
+    public void setColumns(Integer value) {
         this.columns = value;
-    }
-
-    public boolean isSetColumns() {
-        return (this.columns!= null);
-    }
-
-    public void unsetColumns() {
-        this.columns = null;
     }
 
 }

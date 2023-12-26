@@ -92,10 +92,6 @@ public class Media
         this.template = value;
     }
 
-    public boolean isSetTemplate() {
-        return (this.template!= null);
-    }
-
     /**
      * Gets the value of the jr property.
      * 
@@ -125,14 +121,6 @@ public class Media
         return this.jr;
     }
 
-    public boolean isSetJr() {
-        return ((this.jr!= null)&&(!this.jr.isEmpty()));
-    }
-
-    public void unsetJr() {
-        this.jr = null;
-    }
-
     /**
      * Gets the value of the refId property.
      * 
@@ -141,7 +129,7 @@ public class Media
      *     {@link Long }
      *     
      */
-    public long getRefId() {
+    public Long getRefId() {
         return refId;
     }
 
@@ -153,16 +141,8 @@ public class Media
      *     {@link Long }
      *     
      */
-    public void setRefId(long value) {
+    public void setRefId(Long value) {
         this.refId = value;
-    }
-
-    public boolean isSetRefId() {
-        return (this.refId!= null);
-    }
-
-    public void unsetRefId() {
-        this.refId = null;
     }
 
     /**
@@ -189,10 +169,6 @@ public class Media
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the dir property.
      * 
@@ -217,10 +193,6 @@ public class Media
         this.dir = value;
     }
 
-    public boolean isSetDir() {
-        return (this.dir!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -243,10 +215,6 @@ public class Media
      */
     public void setType(String value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
 }

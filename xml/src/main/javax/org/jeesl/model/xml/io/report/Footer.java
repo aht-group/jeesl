@@ -64,10 +64,6 @@ public class Footer
         this.orientation = value;
     }
 
-    public boolean isSetOrientation() {
-        return (this.orientation!= null);
-    }
-
     /**
      * Gets the value of the value property.
      * 
@@ -90,10 +86,6 @@ public class Footer
      */
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public boolean isSetValue() {
-        return (this.value!= null);
     }
 
 }

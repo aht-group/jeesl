@@ -82,14 +82,6 @@ public class Reports
         return this.report;
     }
 
-    public boolean isSetReport() {
-        return ((this.report!= null)&&(!this.report.isEmpty()));
-    }
-
-    public void unsetReport() {
-        this.report = null;
-    }
-
     /**
      * Gets the value of the dir property.
      * 
@@ -112,10 +104,6 @@ public class Reports
      */
     public void setDir(String value) {
         this.dir = value;
-    }
-
-    public boolean isSetDir() {
-        return (this.dir!= null);
     }
 
     /**
@@ -142,10 +130,6 @@ public class Reports
         this.resources = value;
     }
 
-    public boolean isSetResources() {
-        return (this.resources!= null);
-    }
-
     /**
      * Gets the value of the templates property.
      * 
@@ -168,10 +152,6 @@ public class Reports
      */
     public void setTemplates(String value) {
         this.templates = value;
-    }
-
-    public boolean isSetTemplates() {
-        return (this.templates!= null);
     }
 
 }

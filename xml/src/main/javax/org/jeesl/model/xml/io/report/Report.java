@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Category;
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
@@ -134,14 +133,6 @@ public class Report
         return this.media;
     }
 
-    public boolean isSetMedia() {
-        return ((this.media!= null)&&(!this.media.isEmpty()));
-    }
-
-    public void unsetMedia() {
-        this.media = null;
-    }
-
     /**
      * Gets the value of the example property.
      * 
@@ -164,10 +155,6 @@ public class Report
      */
     public void setExample(String value) {
         this.example = value;
-    }
-
-    public boolean isSetExample() {
-        return (this.example!= null);
     }
 
     /**
@@ -194,10 +181,6 @@ public class Report
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -220,10 +203,6 @@ public class Report
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -250,10 +229,6 @@ public class Report
         this.category = value;
     }
 
-    public boolean isSetCategory() {
-        return (this.category!= null);
-    }
-
     /**
      * Gets the value of the xlsWorkbook property.
      * 
@@ -276,10 +251,6 @@ public class Report
      */
     public void setXlsWorkbook(XlsWorkbook value) {
         this.xlsWorkbook = value;
-    }
-
-    public boolean isSetXlsWorkbook() {
-        return (this.xlsWorkbook!= null);
     }
 
     /**
@@ -306,10 +277,6 @@ public class Report
         this.ts = value;
     }
 
-    public boolean isSetTs() {
-        return (this.ts!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -332,10 +299,6 @@ public class Report
      */
     public void setId(String value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
     }
 
     /**
@@ -362,10 +325,6 @@ public class Report
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the position property.
      * 
@@ -374,7 +333,7 @@ public class Report
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -386,16 +345,8 @@ public class Report
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -406,7 +357,7 @@ public class Report
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -418,16 +369,8 @@ public class Report
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
     /**
@@ -454,10 +397,6 @@ public class Report
         this.dir = value;
     }
 
-    public boolean isSetDir() {
-        return (this.dir!= null);
-    }
-
     /**
      * Gets the value of the ltr property.
      * 
@@ -466,7 +405,7 @@ public class Report
      *     {@link Boolean }
      *     
      */
-    public boolean isLtr() {
+    public Boolean isLtr() {
         return ltr;
     }
 
@@ -478,16 +417,8 @@ public class Report
      *     {@link Boolean }
      *     
      */
-    public void setLtr(boolean value) {
+    public void setLtr(Boolean value) {
         this.ltr = value;
-    }
-
-    public boolean isSetLtr() {
-        return (this.ltr!= null);
-    }
-
-    public void unsetLtr() {
-        this.ltr = null;
     }
 
     /**
@@ -498,7 +429,7 @@ public class Report
      *     {@link Boolean }
      *     
      */
-    public boolean isRtl() {
+    public Boolean isRtl() {
         return rtl;
     }
 
@@ -510,16 +441,8 @@ public class Report
      *     {@link Boolean }
      *     
      */
-    public void setRtl(boolean value) {
+    public void setRtl(Boolean value) {
         this.rtl = value;
-    }
-
-    public boolean isSetRtl() {
-        return (this.rtl!= null);
-    }
-
-    public void unsetRtl() {
-        this.rtl = null;
     }
 
     /**
@@ -546,10 +469,6 @@ public class Report
         this.test = value;
     }
 
-    public boolean isSetTest() {
-        return (this.test!= null);
-    }
-
     /**
      * Gets the value of the xmlExample property.
      * 
@@ -572,10 +491,6 @@ public class Report
      */
     public void setXmlExample(String value) {
         this.xmlExample = value;
-    }
-
-    public boolean isSetXmlExample() {
-        return (this.xmlExample!= null);
     }
 
 }

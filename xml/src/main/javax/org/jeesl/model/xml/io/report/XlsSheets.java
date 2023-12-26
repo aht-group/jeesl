@@ -76,14 +76,6 @@ public class XlsSheets
         return this.xlsSheet;
     }
 
-    public boolean isSetXlsSheet() {
-        return ((this.xlsSheet!= null)&&(!this.xlsSheet.isEmpty()));
-    }
-
-    public void unsetXlsSheet() {
-        this.xlsSheet = null;
-    }
-
     /**
      * Gets the value of the query property.
      * 
@@ -106,10 +98,6 @@ public class XlsSheets
      */
     public void setQuery(String value) {
         this.query = value;
-    }
-
-    public boolean isSetQuery() {
-        return (this.query!= null);
     }
 
 }

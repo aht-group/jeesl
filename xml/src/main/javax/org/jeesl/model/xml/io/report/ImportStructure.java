@@ -68,10 +68,6 @@ public class ImportStructure implements Serializable
         this.dataAssociations = value;
     }
 
-    public boolean isSetDataAssociations() {
-        return (this.dataAssociations!= null);
-    }
-
     /**
      * Gets the value of the targetClass property.
      * 
@@ -94,10 +90,6 @@ public class ImportStructure implements Serializable
      */
     public void setTargetClass(String value) {
         this.targetClass = value;
-    }
-
-    public boolean isSetTargetClass() {
-        return (this.targetClass!= null);
     }
 
 }

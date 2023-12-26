@@ -71,12 +71,4 @@ public class Queries implements Serializable
         return this.query;
     }
 
-    public boolean isSetQuery() {
-        return ((this.query!= null)&&(!this.query.isEmpty()));
-    }
-
-    public void unsetQuery() {
-        this.query = null;
-    }
-
 }

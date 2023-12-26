@@ -77,10 +77,6 @@ public class Jr
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the name property.
      * 
@@ -103,10 +99,6 @@ public class Jr
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    public boolean isSetName() {
-        return (this.name!= null);
     }
 
     /**
@@ -133,10 +125,6 @@ public class Jr
         this.alternateDir = value;
     }
 
-    public boolean isSetAlternateDir() {
-        return (this.alternateDir!= null);
-    }
-
     /**
      * Gets the value of the visible property.
      * 
@@ -145,7 +133,7 @@ public class Jr
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -157,16 +145,8 @@ public class Jr
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
 }

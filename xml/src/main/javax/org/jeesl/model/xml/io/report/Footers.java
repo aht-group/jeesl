@@ -72,12 +72,4 @@ public class Footers
         return this.footer;
     }
 
-    public boolean isSetFooter() {
-        return ((this.footer!= null)&&(!this.footer.isEmpty()));
-    }
-
-    public void unsetFooter() {
-        this.footer = null;
-    }
-
 }
