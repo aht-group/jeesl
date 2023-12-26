@@ -8,6 +8,7 @@ import net.sf.exlp.util.xml.JaxbUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.io.locale.status.Lang;
@@ -100,7 +101,7 @@ public class OfxQaFrResultTableFactory extends AbstractUtilsOfxDocumentationFact
 		head.getRow().add(createHeaderRow(test));
 		
 		Body body = new Body();
-		if(test.isSetResults())
+		if(Objects.nonNull(test.getResults()))
 		{
 			for(Result result : test.getResults().getResult())
 			{
@@ -120,7 +121,7 @@ public class OfxQaFrResultTableFactory extends AbstractUtilsOfxDocumentationFact
 		JaxbUtil.trace(result);
 		Row row = new Row();
 		
-		if(result.isSetRecord()){row.getCell().add(XmlCellFactory.createParagraphCell(df.format(result.getRecord().toGregorianCalendar().getTime())));}
+		if(Objects.nonNull(result.getRecord())) {row.getCell().add(XmlCellFactory.createParagraphCell(df.format(result.getRecord().toGregorianCalendar().getTime())));}
 		else{row.getCell().add(XmlCellFactory.createParagraphCell(""));}
 		
 		row.getCell().add(XmlCellFactory.createParagraphCell(result.getStaff().getUser().getLastName()));

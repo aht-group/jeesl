@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Statement;
 import org.jeesl.model.xml.io.locale.status.Status;
 
@@ -120,10 +119,6 @@ public class Test
         this.status = value;
     }
 
-    public boolean isSetStatus() {
-        return (this.status!= null);
-    }
-
     /**
      * Gets the value of the statement property.
      * 
@@ -146,10 +141,6 @@ public class Test
      */
     public void setStatement(Statement value) {
         this.statement = value;
-    }
-
-    public boolean isSetStatement() {
-        return (this.statement!= null);
     }
 
     /**
@@ -176,10 +167,6 @@ public class Test
         this.reference = value;
     }
 
-    public boolean isSetReference() {
-        return (this.reference!= null);
-    }
-
     /**
      * Gets the value of the description property.
      * 
@@ -202,10 +189,6 @@ public class Test
      */
     public void setDescription(Description value) {
         this.description = value;
-    }
-
-    public boolean isSetDescription() {
-        return (this.description!= null);
     }
 
     /**
@@ -232,10 +215,6 @@ public class Test
         this.preCondition = value;
     }
 
-    public boolean isSetPreCondition() {
-        return (this.preCondition!= null);
-    }
-
     /**
      * Gets the value of the steps property.
      * 
@@ -258,10 +237,6 @@ public class Test
      */
     public void setSteps(Steps value) {
         this.steps = value;
-    }
-
-    public boolean isSetSteps() {
-        return (this.steps!= null);
     }
 
     /**
@@ -288,10 +263,6 @@ public class Test
         this.expected = value;
     }
 
-    public boolean isSetExpected() {
-        return (this.expected!= null);
-    }
-
     /**
      * Gets the value of the results property.
      * 
@@ -314,10 +285,6 @@ public class Test
      */
     public void setResults(Results value) {
         this.results = value;
-    }
-
-    public boolean isSetResults() {
-        return (this.results!= null);
     }
 
     /**
@@ -344,10 +311,6 @@ public class Test
         this.info = value;
     }
 
-    public boolean isSetInfo() {
-        return (this.info!= null);
-    }
-
     /**
      * Gets the value of the groups property.
      * 
@@ -372,10 +335,6 @@ public class Test
         this.groups = value;
     }
 
-    public boolean isSetGroups() {
-        return (this.groups!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -384,7 +343,7 @@ public class Test
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -396,16 +355,8 @@ public class Test
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -432,10 +383,6 @@ public class Test
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -460,10 +407,6 @@ public class Test
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the duration property.
      * 
@@ -472,7 +415,7 @@ public class Test
      *     {@link Integer }
      *     
      */
-    public int getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
@@ -484,16 +427,8 @@ public class Test
      *     {@link Integer }
      *     
      */
-    public void setDuration(int value) {
+    public void setDuration(Integer value) {
         this.duration = value;
-    }
-
-    public boolean isSetDuration() {
-        return (this.duration!= null);
-    }
-
-    public void unsetDuration() {
-        this.duration = null;
     }
 
     /**
@@ -504,7 +439,7 @@ public class Test
      *     {@link Boolean }
      *     
      */
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
@@ -516,16 +451,8 @@ public class Test
      *     {@link Boolean }
      *     
      */
-    public void setVisible(boolean value) {
+    public void setVisible(Boolean value) {
         this.visible = value;
-    }
-
-    public boolean isSetVisible() {
-        return (this.visible!= null);
-    }
-
-    public void unsetVisible() {
-        this.visible = null;
     }
 
 }

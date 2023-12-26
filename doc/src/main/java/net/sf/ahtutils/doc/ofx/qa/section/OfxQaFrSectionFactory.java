@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.io.locale.status.Translations;
@@ -83,24 +84,24 @@ public class OfxQaFrSectionFactory extends AbstractUtilsOfxDocumentationFactory
 		
 		Paragraph p = XmlParagraphFactory.build();
 		if(Objects.nonNull(test.getInfo()) && Objects.nonNull(test.getInfo().getStatus())) {p.getContent().add(marginalia(test.getInfo()));}
-		if(test.isSetDescription() && test.getDescription().isSetValue())
+		if(Objects.nonNull(test.getDescription()) && Objects.nonNull(test.getDescription().getValue()))
 		{
 			p.getContent().add(test.getDescription().getValue());	
 		}
 		if(p.getContent().size()>0){section.getContent().add(p);}
 		
 		section.getContent().add(fOfxTableTest.buildTableTestDetails(test));
-		if(test.isSetExpected()){section.getContent().addAll(expectedParagraph(test.getExpected()));}
-		if(test.isSetInfo())
+		if(Objects.nonNull(test.getExpected())) {section.getContent().addAll(expectedParagraph(test.getExpected()));}
+		if(Objects.nonNull(test.getInfo()))
 		{
 			Info info = test.getInfo();
-			if(info.isSetComment() && info.getComment().isSetValue() && info.getComment().getValue().length()>0)
+			if(Objects.nonNull(info.getComment()) && Objects.nonNull(info.getComment().getValue()) && info.getComment().getValue().length()>0)
 			{
 				section.getContent().add(testInfo(test.getInfo()));
 			}
 		}
 		
-		if(withResults && test.isSetResults() && test.getResults().isSetResult())
+		if(withResults && Objects.nonNull(test.getResults()) && ObjectUtils.isNotEmpty((test.getResults().getResult())))
 		{
 			section.getContent().add(fOfxTableTestResult.build(test));
 		}

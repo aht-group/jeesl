@@ -100,14 +100,6 @@ public class Qa
         return this.category;
     }
 
-    public boolean isSetCategory() {
-        return ((this.category!= null)&&(!this.category.isEmpty()));
-    }
-
-    public void unsetCategory() {
-        this.category = null;
-    }
-
     /**
      * Gets the value of the staff property.
      * 
@@ -137,14 +129,6 @@ public class Qa
         return this.staff;
     }
 
-    public boolean isSetStaff() {
-        return ((this.staff!= null)&&(!this.staff.isEmpty()));
-    }
-
-    public void unsetStaff() {
-        this.staff = null;
-    }
-
     /**
      * Gets the value of the survey property.
      * 
@@ -169,10 +153,6 @@ public class Qa
         this.survey = value;
     }
 
-    public boolean isSetSurvey() {
-        return (this.survey!= null);
-    }
-
     /**
      * Gets the value of the groups property.
      * 
@@ -195,10 +175,6 @@ public class Qa
      */
     public void setGroups(Groups value) {
         this.groups = value;
-    }
-
-    public boolean isSetGroups() {
-        return (this.groups!= null);
     }
 
     /**
@@ -230,14 +206,6 @@ public class Qa
         return this.checklist;
     }
 
-    public boolean isSetChecklist() {
-        return ((this.checklist!= null)&&(!this.checklist.isEmpty()));
-    }
-
-    public void unsetChecklist() {
-        this.checklist = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -246,7 +214,7 @@ public class Qa
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -258,16 +226,8 @@ public class Qa
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -294,10 +254,6 @@ public class Qa
         this.client = value;
     }
 
-    public boolean isSetClient() {
-        return (this.client!= null);
-    }
-
     /**
      * Gets the value of the developer property.
      * 
@@ -320,10 +276,6 @@ public class Qa
      */
     public void setDeveloper(String value) {
         this.developer = value;
-    }
-
-    public boolean isSetDeveloper() {
-        return (this.developer!= null);
     }
 
 }

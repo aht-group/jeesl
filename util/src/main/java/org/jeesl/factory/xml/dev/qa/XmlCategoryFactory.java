@@ -92,7 +92,7 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		if(Objects.nonNull(q.getId())) {xml.setId(category.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(category.getCode());}
-		if(q.isSetName()){xml.setName(category.getName());}
+		if(Objects.nonNull(q.getName())) {xml.setName(category.getName());}
 		
 		if(ObjectUtils.isNotEmpty(q.getTest()))
 		{

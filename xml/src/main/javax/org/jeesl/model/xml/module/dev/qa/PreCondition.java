@@ -62,8 +62,4 @@ public class PreCondition
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
 }

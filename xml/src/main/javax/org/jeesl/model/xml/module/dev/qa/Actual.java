@@ -62,8 +62,4 @@ public class Actual
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
 }

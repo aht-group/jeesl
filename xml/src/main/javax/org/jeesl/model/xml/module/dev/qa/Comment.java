@@ -62,8 +62,4 @@ public class Comment
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
 }

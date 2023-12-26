@@ -72,12 +72,4 @@ public class Results
         return this.result;
     }
 
-    public boolean isSetResult() {
-        return ((this.result!= null)&&(!this.result.isEmpty()));
-    }
-
-    public void unsetResult() {
-        this.result = null;
-    }
-
 }

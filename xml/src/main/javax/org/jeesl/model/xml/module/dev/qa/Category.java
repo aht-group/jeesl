@@ -81,10 +81,6 @@ public class Category
         this.qa = value;
     }
 
-    public boolean isSetQa() {
-        return (this.qa!= null);
-    }
-
     /**
      * Gets the value of the test property.
      * 
@@ -114,14 +110,6 @@ public class Category
         return this.test;
     }
 
-    public boolean isSetTest() {
-        return ((this.test!= null)&&(!this.test.isEmpty()));
-    }
-
-    public void unsetTest() {
-        this.test = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -130,7 +118,7 @@ public class Category
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -142,16 +130,8 @@ public class Category
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -178,10 +158,6 @@ public class Category
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -204,10 +180,6 @@ public class Category
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

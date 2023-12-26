@@ -72,10 +72,6 @@ public class Checklist
         this.staff = value;
     }
 
-    public boolean isSetStaff() {
-        return (this.staff!= null);
-    }
-
     /**
      * Gets the value of the category property.
      * 
@@ -103,14 +99,6 @@ public class Checklist
             category = new ArrayList<Category>();
         }
         return this.category;
-    }
-
-    public boolean isSetCategory() {
-        return ((this.category!= null)&&(!this.category.isEmpty()));
-    }
-
-    public void unsetCategory() {
-        this.category = null;
     }
 
 }

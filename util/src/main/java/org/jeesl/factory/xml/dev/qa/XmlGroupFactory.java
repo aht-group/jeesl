@@ -24,8 +24,8 @@ public class XmlGroupFactory<GROUP extends UtilsQaGroup<?,?,?>>
 		Group xml = new Group();
 		if(Objects.nonNull(q.getId())) {xml.setId(group.getId());}
 		
-		if(q.isSetName()){xml.setName(group.getName());}
-		if(q.isSetDescription()){xml.setDescription(org.jeesl.factory.xml.system.lang.XmlDescriptionFactory.build(group.getDescription()));}
+		if(Objects.nonNull(q.getName())) {xml.setName(group.getName());}
+		if(Objects.nonNull(q.getDescription())) {xml.setDescription(org.jeesl.factory.xml.system.lang.XmlDescriptionFactory.build(group.getDescription()));}
 		
 		return xml;
 	}

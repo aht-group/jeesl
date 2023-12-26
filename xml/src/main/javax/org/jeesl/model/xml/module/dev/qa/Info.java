@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.locale.status.Status;
 
 
@@ -81,10 +80,6 @@ public class Info
         this.status = value;
     }
 
-    public boolean isSetStatus() {
-        return (this.status!= null);
-    }
-
     /**
      * Gets the value of the comment property.
      * 
@@ -109,10 +104,6 @@ public class Info
         this.comment = value;
     }
 
-    public boolean isSetComment() {
-        return (this.comment!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -121,7 +112,7 @@ public class Info
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -133,16 +124,8 @@ public class Info
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -167,10 +150,6 @@ public class Info
      */
     public void setRecord(XMLGregorianCalendar value) {
         this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
 }

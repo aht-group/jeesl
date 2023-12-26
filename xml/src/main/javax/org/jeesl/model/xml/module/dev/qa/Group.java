@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Description;
 import org.jeesl.model.xml.system.security.Staff;
 
@@ -84,10 +83,6 @@ public class Group
         this.description = value;
     }
 
-    public boolean isSetDescription() {
-        return (this.description!= null);
-    }
-
     /**
      * Gets the value of the staff property.
      * 
@@ -117,14 +112,6 @@ public class Group
         return this.staff;
     }
 
-    public boolean isSetStaff() {
-        return ((this.staff!= null)&&(!this.staff.isEmpty()));
-    }
-
-    public void unsetStaff() {
-        this.staff = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -133,7 +120,7 @@ public class Group
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -145,16 +132,8 @@ public class Group
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -165,7 +144,7 @@ public class Group
      *     {@link Integer }
      *     
      */
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
@@ -177,16 +156,8 @@ public class Group
      *     {@link Integer }
      *     
      */
-    public void setPosition(int value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    public boolean isSetPosition() {
-        return (this.position!= null);
-    }
-
-    public void unsetPosition() {
-        this.position = null;
     }
 
     /**
@@ -211,10 +182,6 @@ public class Group
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    public boolean isSetName() {
-        return (this.name!= null);
     }
 
 }

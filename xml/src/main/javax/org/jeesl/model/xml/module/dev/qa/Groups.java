@@ -72,12 +72,4 @@ public class Groups
         return this.group;
     }
 
-    public boolean isSetGroup() {
-        return ((this.group!= null)&&(!this.group.isEmpty()));
-    }
-
-    public void unsetGroup() {
-        this.group = null;
-    }
-
 }

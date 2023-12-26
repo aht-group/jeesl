@@ -2,6 +2,7 @@ package net.sf.ahtutils.doc.ofx.qa.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.doc.ofx.OfxMultiLangFactory;
@@ -133,7 +134,7 @@ public class OfxQaDurationGroupTable extends AbstractUtilsOfxDocumentationFactor
 		{
 			for(Test t : c.getTest())
 			{
-				if(t.isVisible() && t.isSetGroups())
+				if(t.isVisible() && Objects.nonNull(t.getGroups()))
 				{
 					for(Group g : t.getGroups().getGroup())
 					{

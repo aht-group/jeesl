@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.system.security.Staff;
 
@@ -90,10 +89,6 @@ public class Result
         this.staff = value;
     }
 
-    public boolean isSetStaff() {
-        return (this.staff!= null);
-    }
-
     /**
      * Gets the value of the status property.
      * 
@@ -116,10 +111,6 @@ public class Result
      */
     public void setStatus(Status value) {
         this.status = value;
-    }
-
-    public boolean isSetStatus() {
-        return (this.status!= null);
     }
 
     /**
@@ -146,10 +137,6 @@ public class Result
         this.comment = value;
     }
 
-    public boolean isSetComment() {
-        return (this.comment!= null);
-    }
-
     /**
      * Gets the value of the actual property.
      * 
@@ -174,10 +161,6 @@ public class Result
         this.actual = value;
     }
 
-    public boolean isSetActual() {
-        return (this.actual!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -186,7 +169,7 @@ public class Result
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -198,16 +181,8 @@ public class Result
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -232,10 +207,6 @@ public class Result
      */
     public void setRecord(XMLGregorianCalendar value) {
         this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
 }

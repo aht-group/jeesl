@@ -1,5 +1,7 @@
 package org.jeesl.web.rest.dev;
 
+import java.util.Objects;
+
 import org.jeesl.api.facade.module.dev.JeeslQaFacade;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.factory.xml.dev.qa.XmlCategoryFactory;
@@ -217,7 +219,7 @@ public class QaRestService <L extends JeeslLang, D extends JeeslDescription,
 //					logger.info(StringUtil.stars());
 					for(Test t : c.getTest())
 					{
-						logger.info("\tVisible?"+t.isSetVisible());
+						logger.info("\tVisible?"+Objects.nonNull(t.isVisible()));
 					}
 				}
 				
