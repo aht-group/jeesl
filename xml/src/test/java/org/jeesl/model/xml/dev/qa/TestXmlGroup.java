@@ -16,7 +16,7 @@ public class TestXmlGroup extends AbstractXmlQaTest<Group>
     public Group build(boolean withChilds)
     {
     	Group xml = new Group();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setPosition(1);
     	xml.setName("myName");
     	

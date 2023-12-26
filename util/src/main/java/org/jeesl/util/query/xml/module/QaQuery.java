@@ -98,7 +98,7 @@ public class QaQuery
 		status.setImage("");
 		
 		Result xml = new Result();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setStaff(staff);
 		xml.setRecord(DateUtil.toXmlGc(new Date()));
 		xml.setStatus(status);
@@ -111,7 +111,7 @@ public class QaQuery
 	public static Category category()
 	{
 		Category xml = new Category();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setName("");
 		return xml;
@@ -120,7 +120,7 @@ public class QaQuery
 	public static Group group()
 	{
 		Group xml = new Group();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setName("");
 		xml.setDescription(XmlDescriptionFactory.build(""));
 		return xml;
@@ -129,7 +129,7 @@ public class QaQuery
 	public static Category frDuration()
 	{
 		Group g = new Group();
-		g.setId(0);
+		g.setId(0l);
 		
 		Groups groups = new Groups();
 		groups.getGroup().add(g);
@@ -149,7 +149,7 @@ public class QaQuery
 	public static Test test()
 	{
 		Test xml = new Test();
-		xml.setId(0);
+		xml.setId(0l);
 		xml.setCode("");
 		xml.setName("");
 		

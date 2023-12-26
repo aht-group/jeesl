@@ -15,7 +15,7 @@ public class TestXmlCategory extends AbstractXmlQaTest<Category>
     public Category build(boolean withChilds)
     {
     	Category xml = new Category();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setName("myName");
     	xml.setCode("myCode");
     	

@@ -16,7 +16,7 @@ public class TestXmlResult extends AbstractXmlQaTest<Result>
     @Override public Result build(boolean withChilds)
     {
     	Result xml = new Result();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setRecord(TestXmlResult.getDefaultXmlDate());
     	
     	if(withChilds)

@@ -23,6 +23,7 @@
 	<xsd:import namespace="http://xsd.jeesl.org/module/bb" schemaLocation="jeesl/module/bb.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/calendar" schemaLocation="jeesl/module/calendar.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/finance" schemaLocation="jeesl/finance.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/qa" schemaLocation="aht/qa.xsd"/>
 	<xsd:import namespace="http://xsd.jeesl.org/module/dev/srs" schemaLocation="jeesl/dev/srs.xsd"/>
 	<xsd:import namespace="http://xsd.jeesl.org/module/monitoring" schemaLocation="aht/monitoring.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/timeseries" schemaLocation="jeesl/module/timeseries.xsd"/>

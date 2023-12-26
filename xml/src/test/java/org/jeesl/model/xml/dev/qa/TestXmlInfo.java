@@ -16,7 +16,7 @@ public class TestXmlInfo extends AbstractXmlQaTest<Info>
     public Info build(boolean withChilds)
     {
     	Info xml = new Info();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setRecord(TestXmlInfo.getDefaultXmlDate());
     	
     	if(withChilds)

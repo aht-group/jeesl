@@ -17,7 +17,7 @@ public class TestXmlQa extends AbstractXmlQaTest<Qa>
     public Qa build(boolean withChilds)
     {
     	Qa xml = new Qa();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setClient("myClient");
     	xml.setDeveloper("myDeveloper");
     	
