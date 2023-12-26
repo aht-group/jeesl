@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema targetNamespace="http://www.jeesl.org/bb"
-	xmlns:bb="http://www.jeesl.org/bb"
+<xsd:schema targetNamespace="http://xsd.jeesl.org/module/bb"
+	xmlns:bb="http://xsd.jeesl.org/module/bb"
 	xmlns:js="http://ahtutils.aht-group.com/status"
 	xmlns:jt="http://www.jeesl.org/text"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
