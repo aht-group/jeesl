@@ -15,7 +15,7 @@ public class TestXmlObserver extends AbstractXmlMonitoringTest<Observer>
     public Observer build(boolean withChilds)
     {
     	Observer xml = new Observer();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
     	if(withChilds){}

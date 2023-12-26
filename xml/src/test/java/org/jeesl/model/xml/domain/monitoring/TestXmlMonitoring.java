@@ -15,7 +15,7 @@ public class TestXmlMonitoring extends AbstractXmlMonitoringTest<Monitoring>
     public Monitoring build(boolean withChilds)
     {
     	Monitoring xml = new Monitoring();
-    	xml.setId(123);
+    	xml.setId(123l);
     	
     	if(withChilds)
     	{

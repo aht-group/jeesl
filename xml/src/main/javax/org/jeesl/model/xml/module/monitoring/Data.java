@@ -88,10 +88,6 @@ public class Data
         this.indicator = value;
     }
 
-    public boolean isSetIndicator() {
-        return (this.indicator!= null);
-    }
-
     /**
      * Gets the value of the observer property.
      * 
@@ -114,10 +110,6 @@ public class Data
      */
     public void setObserver(Observer value) {
         this.observer = value;
-    }
-
-    public boolean isSetObserver() {
-        return (this.observer!= null);
     }
 
     /**
@@ -149,14 +141,6 @@ public class Data
         return this.value;
     }
 
-    public boolean isSetValue() {
-        return ((this.value!= null)&&(!this.value.isEmpty()));
-    }
-
-    public void unsetValue() {
-        this.value = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -165,7 +149,7 @@ public class Data
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -177,16 +161,8 @@ public class Data
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -213,10 +189,6 @@ public class Data
         this.record = value;
     }
 
-    public boolean isSetRecord() {
-        return (this.record!= null);
-    }
-
     /**
      * Gets the value of the range property.
      * 
@@ -225,7 +197,7 @@ public class Data
      *     {@link Long }
      *     
      */
-    public long getRange() {
+    public Long getRange() {
         return range;
     }
 
@@ -237,16 +209,8 @@ public class Data
      *     {@link Long }
      *     
      */
-    public void setRange(long value) {
+    public void setRange(Long value) {
         this.range = value;
-    }
-
-    public boolean isSetRange() {
-        return (this.range!= null);
-    }
-
-    public void unsetRange() {
-        this.range = null;
     }
 
 }

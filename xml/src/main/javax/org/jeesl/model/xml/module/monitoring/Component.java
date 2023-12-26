@@ -82,14 +82,6 @@ public class Component
         return this.indicator;
     }
 
-    public boolean isSetIndicator() {
-        return ((this.indicator!= null)&&(!this.indicator.isEmpty()));
-    }
-
-    public void unsetIndicator() {
-        this.indicator = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -98,7 +90,7 @@ public class Component
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -110,16 +102,8 @@ public class Component
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -146,10 +130,6 @@ public class Component
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -172,10 +152,6 @@ public class Component
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

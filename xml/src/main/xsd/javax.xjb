@@ -97,6 +97,11 @@
             <jxb:package name="org.jeesl.model.xml.module.finance"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+	<jxb:bindings schemaLocation="aht/monitoring.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.monitoring"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     <jxb:bindings schemaLocation="jeesl/module/survey.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.survey"/>
@@ -156,10 +161,16 @@
         </jxb:schemaBindings>
     </jxb:bindings>
 
+	<jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/identity.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.exlp.model.xml.identity"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/exlp/io.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.exlp.model.xml.io"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    
 
 </jxb:bindings>

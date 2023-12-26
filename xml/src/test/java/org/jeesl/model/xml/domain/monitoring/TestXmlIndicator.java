@@ -15,7 +15,7 @@ public class TestXmlIndicator extends AbstractXmlMonitoringTest<Indicator>
     public Indicator build(boolean withChilds)
     {
     	Indicator xml = new Indicator();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
     	

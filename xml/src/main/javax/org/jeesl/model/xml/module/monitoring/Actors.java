@@ -82,14 +82,6 @@ public class Actors
         return this.actor;
     }
 
-    public boolean isSetActor() {
-        return ((this.actor!= null)&&(!this.actor.isEmpty()));
-    }
-
-    public void unsetActor() {
-        this.actor = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -98,7 +90,7 @@ public class Actors
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -110,16 +102,8 @@ public class Actors
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -146,10 +130,6 @@ public class Actors
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the name property.
      * 
@@ -172,10 +152,6 @@ public class Actors
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    public boolean isSetName() {
-        return (this.name!= null);
     }
 
 }

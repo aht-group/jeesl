@@ -15,7 +15,7 @@ public class TestXmlActor extends AbstractXmlMonitoringTest<Actor>
     public Actor build(boolean withChilds)
     {
     	Actor xml = new Actor();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
     	xml.setUri("myUri");

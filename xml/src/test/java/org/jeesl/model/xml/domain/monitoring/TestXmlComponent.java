@@ -15,7 +15,7 @@ public class TestXmlComponent extends AbstractXmlMonitoringTest<Component>
     public Component build(boolean withChilds)
     {
     	Component xml = new Component();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
     	

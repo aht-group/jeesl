@@ -21,6 +21,7 @@
 	
 	<xsd:import namespace="http://www.jeesl.org/finance" schemaLocation="jeesl/finance.xsd"/>
 	<xsd:import namespace="http://xsd.jeesl.org/module/dev/srs" schemaLocation="jeesl/dev/srs.xsd"/>
+	<xsd:import namespace="http://ahtutils.aht-group.com/monitoring" schemaLocation="aht/monitoring.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/survey" schemaLocation="jeesl/module/survey.xsd"/>
 	<xsd:import namespace="http://www.jeesl.org/workflow" schemaLocation="jeesl/module/workflow.xsd"/>
 

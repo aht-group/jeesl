@@ -66,10 +66,6 @@ public class Value
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -92,10 +88,6 @@ public class Value
      */
     public void setType(String value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
 }

@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.exlp.model.xml.identity.User;
 
 
@@ -73,10 +72,6 @@ public class Transmission
         this.user = value;
     }
 
-    public boolean isSetUser() {
-        return (this.user!= null);
-    }
-
     /**
      * Gets the value of the dataSet property.
      * 
@@ -104,14 +99,6 @@ public class Transmission
             dataSet = new ArrayList<DataSet>();
         }
         return this.dataSet;
-    }
-
-    public boolean isSetDataSet() {
-        return ((this.dataSet!= null)&&(!this.dataSet.isEmpty()));
-    }
-
-    public void unsetDataSet() {
-        this.dataSet = null;
     }
 
 }

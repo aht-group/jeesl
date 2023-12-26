@@ -15,7 +15,7 @@ public class TestXmlDataSet extends AbstractXmlMonitoringTest<DataSet>
     public DataSet build(boolean withChilds)
     {
     	DataSet xml = new DataSet();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setLabel("myLabel");
     	if(withChilds)

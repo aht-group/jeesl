@@ -17,8 +17,8 @@ public class TestXmlData extends AbstractXmlMonitoringTest<Data>
     public Data build(boolean withChilds)
     {
     	Data xml = new Data();
-    	xml.setId(123);
-    	xml.setRange(1000);
+    	xml.setId(123l);
+    	xml.setRange(1000l);
     	xml.setRecord(AbstractAhtUtilsXmlTest.getDefaultXmlDate());
     	
     	if(withChilds)

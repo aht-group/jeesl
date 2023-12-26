@@ -85,10 +85,6 @@ public class DataSet
         this.indicator = value;
     }
 
-    public boolean isSetIndicator() {
-        return (this.indicator!= null);
-    }
-
     /**
      * Gets the value of the observer property.
      * 
@@ -111,10 +107,6 @@ public class DataSet
      */
     public void setObserver(Observer value) {
         this.observer = value;
-    }
-
-    public boolean isSetObserver() {
-        return (this.observer!= null);
     }
 
     /**
@@ -146,14 +138,6 @@ public class DataSet
         return this.data;
     }
 
-    public boolean isSetData() {
-        return ((this.data!= null)&&(!this.data.isEmpty()));
-    }
-
-    public void unsetData() {
-        this.data = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -162,7 +146,7 @@ public class DataSet
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -174,16 +158,8 @@ public class DataSet
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -210,10 +186,6 @@ public class DataSet
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -236,10 +208,6 @@ public class DataSet
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }
