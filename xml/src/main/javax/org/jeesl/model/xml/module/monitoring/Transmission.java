@@ -23,7 +23,7 @@ import org.exlp.model.xml.identity.User;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://exlp.sf.net/identity}user"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}dataSet" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://xsd.jeesl.org/module/monitoring}dataSet" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
