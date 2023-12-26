@@ -54,7 +54,7 @@ public class XmlStyleFactory <L extends JeeslLang,D extends JeeslDescription,
 		this.q=q;
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
+		if(Objects.nonNull(q.getLayout())) {xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
 	}
 	
 	
@@ -71,7 +71,7 @@ public class XmlStyleFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(style.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(style.getDescription()));}
 		
-		if(q.isSetLayout()){xml.setLayout(xfLayout.layout(style));}
+		if(Objects.nonNull(q.getLayout())) {xml.setLayout(xfLayout.layout(style));}
 		
 		return xml;
 	}

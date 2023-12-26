@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.io.report;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
@@ -66,8 +67,8 @@ public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
 		this.q=q;
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetCategory()){xfCategory = new XmlCategoryFactory<>(localeCode,q.getCategory());}
-		if(q.isSetXlsWorkbook()){xfWorkbook = new XmlWorkbookFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,q.getXlsWorkbook());}
+		if(Objects.nonNull(q.getCategory())) {xfCategory = new XmlCategoryFactory<>(localeCode,q.getCategory());}
+		if(Objects.nonNull(q.getXlsWorkbook())) {xfWorkbook = new XmlWorkbookFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,q.getXlsWorkbook());}
 		
 	}
 	
@@ -79,14 +80,14 @@ public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getCode())) {xml.setCode(report.getCode());}
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(report.isVisible());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(report.getPosition());}
-		if(q.isSetXmlExample()){xml.setXmlExample(report.getXmlExample());}
+		if(Objects.nonNull(q.getXmlExample())) {xml.setXmlExample(report.getXmlExample());}
 		
-		if(q.isSetCategory()){xml.setCategory(xfCategory.build(report.getCategory()));}
+		if(Objects.nonNull(q.getCategory())) {xml.setCategory(xfCategory.build(report.getCategory()));}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(report.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(report.getDescription()));}
 		
-		if(q.isSetXlsWorkbook() && report.getWorkbook()!=null){xml.setXlsWorkbook(xfWorkbook.build(report.getWorkbook()));}
+		if(ObjectUtils.allNotNull(q.getXlsWorkbook(),report.getWorkbook())){xml.setXlsWorkbook(xfWorkbook.build(report.getWorkbook()));}
 		
 		return xml;
 	}

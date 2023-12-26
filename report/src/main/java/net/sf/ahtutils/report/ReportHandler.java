@@ -13,6 +13,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
@@ -253,7 +254,7 @@ public class ReportHandler
 		
 		String reportDir = (String)JXPathContext.newContext(reports).getValue("report[@id='"+ id +"']/@dir");
 		String location = "jrxml";
-		if (jr.isSetAlternateDir())
+		if(Objects.nonNull(jr.getAlternateDir()))
 		{
 			location = location +"/" +jr.getAlternateDir() +"/" +format +"/" +type +jr.getName() +".jrxml";
 		}
@@ -318,7 +319,7 @@ public class ReportHandler
 		
 		String reportDir = (String)JXPathContext.newContext(reports).getValue("report[@id='"+ reportId +"']/@dir");
 		String location = "jasper";
-		if (report.isSetAlternateDir())
+		if(Objects.nonNull(report.getAlternateDir()))
 		{
 			location = location +"/" +report.getAlternateDir() +"/" +format +"/ltr/"  +type +report.getName() +".jasper";
 		}

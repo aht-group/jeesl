@@ -189,7 +189,7 @@ public class ExcelExporter
 		{
 			String responsible = "___________________";
 			Label label = signatureLabels.get(i);
-			if (label.isSetValue()) {responsible = label.getValue();}
+			if(Objects.nonNull(label.getValue())) {responsible = label.getValue();}
 			createCell(sheet, rowNr,   columnNr, label.getKey(), "String", style);
 			createCell(sheet, rowNr+1, columnNr, responsible, "String", style);
 			createCell(sheet, rowNr+2, columnNr, "Date: ___/___/_____", "String", style);

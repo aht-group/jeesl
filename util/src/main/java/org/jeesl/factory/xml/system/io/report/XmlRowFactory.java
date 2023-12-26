@@ -58,7 +58,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 	private XmlLangsFactory<L> xfLangs;
 	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlTypeFactory<L,D,RT> xfType;
-	private XmlDataTypeFactory<CDT,L,D> xfDataType;
+	private XmlDataTypeFactory<L,D,CDT> xfDataType;
 	private XmlLayoutFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,ENTITY,ATTRIBUTE> xfLayout;
 	private XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS> xfTemplate;
 	
@@ -68,8 +68,8 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetType()){xfType = new XmlTypeFactory<>(localeCode,q.getType());}
-		if(q.isSetDataType()){xfDataType = new XmlDataTypeFactory<CDT,L,D>(localeCode,q.getDataType());}
-		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
+		if(q.isSetDataType()){xfDataType = new XmlDataTypeFactory<L,D,CDT>(localeCode,q.getDataType());}
+		if(Objects.nonNull(q.getLayout())) {xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
 		if(q.isSetTemplate()){xfTemplate = new XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(q.getTemplate());}
 	}
 	
@@ -88,7 +88,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(q.isSetTemplate() && row.getTemplate()!=null){xml.setTemplate(xfTemplate.build(row.getTemplate()));}
 		
 		if(q.isSetQueries()){xml.setQueries(queries(row));}
-		if(q.isSetLayout()){xml.setLayout(xfLayout.build(row));}
+		if(Objects.nonNull(q.getLayout())) {xml.setLayout(xfLayout.build(row));}
 						
 		return xml;
 	}

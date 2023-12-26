@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
 import org.jeesl.model.xml.io.report.Font;
 import org.slf4j.Logger;
@@ -20,8 +22,8 @@ public class XmlFontFactory <STYLE extends JeeslReportStyle<?,?>>
 	{
 		Font xml = build();
 		
-		if(q.isSetBold()){xml.setBold(style.isFontBold());}
-		if(q.isSetItalic()){xml.setItalic(style.isFontItalic());}
+		if(Objects.nonNull(q.isBold())) {xml.setBold(style.isFontBold());}
+		if(Objects.nonNull(q.isItalic())) {xml.setItalic(style.isFontItalic());}
 		
 		return xml;
 	}

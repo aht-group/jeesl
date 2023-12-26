@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.jeesl.controller.db.updater.JeeslDbDescriptionUpdater;
@@ -118,7 +119,7 @@ public class EjbIoReportColumnGroupFactory<L extends JeeslLang,D extends JeeslDe
 		eGroup.setShowLabel(xGroup.isShowLabel());
 		eGroup.setShowWeb(xGroup.isSetShowWeb() && xGroup.isShowWeb());
 		
-		if(xGroup.isSetLayout())
+		if(Objects.nonNull(xGroup.getLayout()))
 		{
 			if(xGroup.getLayout().isSetStyles())
 			{

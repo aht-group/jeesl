@@ -84,7 +84,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
         {
             String column = association.getColumn();
             propertyRelations.put(column, association.getProperty());
-            if (association.isSetHandledBy())	
+            if (Objects.nonNull(association.getHandledBy()))	
             {
                 strategies.put(column, Class.forName(association.getHandledBy()));
                 if(Objects.nonNull(association.getType()))
@@ -95,8 +95,8 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
                     }
                 }
             }
-            if (association.isSetValidatedBy()) {validators.put(column, Class.forName(association.getValidatedBy()));}
-            if (association.isSetTargetClass()) {targetClasses.put(column, Class.forName(association.getTargetClass()));}
+            if(Objects.nonNull(association.getValidatedBy())) {validators.put(column, Class.forName(association.getValidatedBy()));}
+            if(association.isSetTargetClass()) {targetClasses.put(column, Class.forName(association.getTargetClass()));}
         }
     }
 

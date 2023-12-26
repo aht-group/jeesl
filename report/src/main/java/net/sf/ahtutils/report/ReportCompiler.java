@@ -9,6 +9,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 
 import org.jdom2.JDOMException;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.model.xml.io.report.Jr;
 import org.jeesl.model.xml.io.report.Media;
 import org.jeesl.model.xml.io.report.Report;
@@ -145,7 +146,7 @@ public class ReportCompiler
 						logger.info(jr.getName());
 						//Compiling for left to right and right to left languages
 						String jrxml  = reportRoot +"/" +"jrxml"  +"/" +report.getDir() +"/" + media.getType() + "/" + jr.getType() + jr.getName() +".jrxml";
-						if(report.isSetLtr() && report.isLtr())
+						if(BooleanComparator.active(report.isLtr()))
 						{
 							String jasperLtr = targetDir +"/" +"jasper" +"/" +report.getDir() +"/" + media.getType() + "/ltr/" + jr.getType() + jr.getName() +".jasper";
 							logger.info("Compiling LTR " +jrxml +" to " +jasperLtr);
@@ -153,7 +154,7 @@ public class ReportCompiler
 							compileReport(jrxml, jasperLtr);
 						}
 
-						if(report.isSetRtl() && report.isRtl())
+						if(BooleanComparator.active(report.isRtl()))
 						{	
 							String jasperRtl = targetDir +"/" +"jasper" +"/" +report.getDir() +"/" + media.getType() + "/rtl/" + jr.getType() + jr.getName() +".jasper";
 							logger.info("Compiling RTL " +jrxml +" to " +jasperRtl);

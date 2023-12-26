@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.io.report;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.symbol.XmlColorFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
@@ -52,7 +53,7 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 	{
 		this.q=q;
 		if(q.isSetSize()){xfType = new XmlTypeFactory<>(localeCode,q.getSize().get(0).getType());}
-		if(q.isSetStyles()){xfStyles = new XmlStylesFactory<>(localeCode,q.getStyles());}
+		if(Objects.nonNull(q.getStyles())) {xfStyles = new XmlStylesFactory<>(localeCode,q.getStyles());}
 		if(Objects.nonNull(q.getFont())) {xfFont = new XmlFontFactory<>(q.getFont());}
 	}
 	
@@ -66,7 +67,7 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 	public Layout build(COLUMN column)
 	{
 		Layout xml = build();
-		if(q.isSetSize())
+		if(ObjectUtils.isNotEmpty(q.getSize()))
 		{
 			if(column.getColumWidth()!=null)
 			{
@@ -82,7 +83,7 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 	public Layout build(GROUP group)
 	{
 		Layout xml = build();
-		if(q.isSetStyles()){xml.setStyles(xfStyles.build(group));}
+		if(Objects.nonNull(q.getStyles())) {xml.setStyles(xfStyles.build(group));}
 		return xml;
 	}
 	

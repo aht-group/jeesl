@@ -68,7 +68,7 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetXlsColumn()){xfColumn = new XmlColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,q.getXlsColumn().get(0));}
-		if(q.isSetLayout()){xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
+		if(Objects.nonNull(q.getLayout())) {xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
 	}
 	
 	public ColumnGroup build(GROUP group)
@@ -86,7 +86,7 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(group.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(group.getDescription()));}
-		if(q.isSetLayout()){xml.setLayout(xfLayout.build(group));}
+		if(Objects.nonNull(q.getLayout())) {xml.setLayout(xfLayout.build(group));}
 		
 		if(q.isSetXlsColumn())
 		{
