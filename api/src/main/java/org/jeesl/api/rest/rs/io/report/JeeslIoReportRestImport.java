@@ -7,12 +7,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.jeesl.interfaces.util.qualifier.JeeslRestSecured;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Reports;
+import org.jeesl.model.xml.io.report.Styles;
+import org.jeesl.model.xml.io.report.Templates;
 import org.jeesl.model.xml.xsd.Container;
 
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Reports;
-import net.sf.ahtutils.xml.report.Styles;
-import net.sf.ahtutils.xml.report.Templates;
 import net.sf.ahtutils.xml.sync.DataUpdate;
 
 public interface JeeslIoReportRestImport

@@ -44,11 +44,10 @@ import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
+import org.jeesl.model.xml.io.report.Report;
 import org.jeesl.model.xml.module.ts.Ts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.Report;
 
 public class TimeSeriesReport <L extends JeeslLang,D extends JeeslDescription,
 						CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,

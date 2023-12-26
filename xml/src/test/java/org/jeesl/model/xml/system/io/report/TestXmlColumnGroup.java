@@ -1,12 +1,11 @@
 package org.jeesl.model.xml.system.io.report;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.report.ColumnGroup;
 import org.jeesl.model.xml.system.status.TestXmlDescriptions;
 import org.jeesl.model.xml.system.status.TestXmlLangs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.ColumnGroup;
 
 public class TestXmlColumnGroup extends AbstractXmlReportTest<ColumnGroup>
 {

@@ -9,13 +9,12 @@ import org.jeesl.interfaces.model.io.label.entity.JeeslRevisionEntity;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.xml.io.report.Label;
+import org.jeesl.model.xml.io.report.Labels;
 import org.openfuxml.interfaces.configuration.OfxTranslationProvider;
 import org.openfuxml.util.translation.OfxDefaultTranslationProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.Label;
-import net.sf.ahtutils.xml.report.Labels;
 
 public class XmlLabelsFactory
 {

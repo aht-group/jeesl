@@ -14,12 +14,12 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.jeesl.model.xml.io.report.Jr;
+import org.jeesl.model.xml.io.report.Media;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Reports;
 import org.w3c.dom.Document;
 
-import net.sf.ahtutils.xml.report.Jr;
-import net.sf.ahtutils.xml.report.Media;
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Reports;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.xml.DomUtil;
 import net.sf.exlp.util.xml.JDomUtil;

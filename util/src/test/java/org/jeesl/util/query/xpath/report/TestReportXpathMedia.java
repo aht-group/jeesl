@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeesl.AbstractJeeslUtilTest;
+import org.jeesl.model.xml.io.report.Media;
 import org.jeesl.model.xml.system.io.report.TestXmlMedia;
 import org.jeesl.util.query.xpath.ReportXpath;
 import org.junit.Assert;
@@ -12,7 +13,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.report.Media;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.xml.JaxbUtil;

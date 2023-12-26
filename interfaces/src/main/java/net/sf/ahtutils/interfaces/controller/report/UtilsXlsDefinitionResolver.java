@@ -1,6 +1,6 @@
 package net.sf.ahtutils.interfaces.controller.report;
 
-import net.sf.ahtutils.xml.report.XlsWorkbook;
+import org.jeesl.model.xml.io.report.XlsWorkbook;
 
 public interface UtilsXlsDefinitionResolver
 {		

@@ -1,10 +1,9 @@
 package org.jeesl.model.xml.system.io.report;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.report.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.User;
 
 public class TestXmlUser extends AbstractXmlReportTest<User>
 {

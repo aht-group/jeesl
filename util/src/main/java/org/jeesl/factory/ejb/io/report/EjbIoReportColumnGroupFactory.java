@@ -30,11 +30,11 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.io.report.ColumnGroup;
 import org.jeesl.util.query.xpath.ReportXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.report.ColumnGroup;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class EjbIoReportColumnGroupFactory<L extends JeeslLang,D extends JeeslDescription,

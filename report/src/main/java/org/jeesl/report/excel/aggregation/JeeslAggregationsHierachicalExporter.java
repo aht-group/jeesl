@@ -19,14 +19,13 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jeesl.model.xml.io.report.Info;
+import org.jeesl.model.xml.io.report.Label;
 import org.jeesl.model.xml.module.finance.Figures;
 import org.jeesl.model.xml.module.finance.Finance;
 import org.jeesl.model.xml.module.finance.Time;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.Info;
-import net.sf.ahtutils.xml.report.Label;
 
 public class JeeslAggregationsHierachicalExporter
 {

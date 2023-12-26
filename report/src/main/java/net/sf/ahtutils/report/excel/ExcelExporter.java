@@ -26,18 +26,18 @@ import org.jeesl.factory.xls.system.io.report.XlsRowFactory;
 import org.jeesl.factory.xls.system.io.report.XlsSheetFactory;
 import org.jeesl.model.xml.io.locale.status.Lang;
 import org.jeesl.model.xml.io.locale.status.Langs;
+import org.jeesl.model.xml.io.report.Label;
+import org.jeesl.model.xml.io.report.XlsColumn;
+import org.jeesl.model.xml.io.report.XlsMultiColumn;
+import org.jeesl.model.xml.io.report.XlsSheet;
+import org.jeesl.model.xml.io.report.XlsTransformation;
+import org.jeesl.model.xml.io.report.XlsWorkbook;
 import org.jeesl.util.query.xpath.ReportXpath;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.controller.report.UtilsXlsDefinitionResolver;
-import net.sf.ahtutils.xml.report.Label;
-import net.sf.ahtutils.xml.report.XlsColumn;
-import net.sf.ahtutils.xml.report.XlsMultiColumn;
-import net.sf.ahtutils.xml.report.XlsSheet;
-import net.sf.ahtutils.xml.report.XlsTransformation;
-import net.sf.ahtutils.xml.report.XlsWorkbook;
 import net.sf.exlp.util.io.StringUtil;
 
 @Deprecated // Use JeeslExcelDomainExporter

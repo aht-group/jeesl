@@ -24,11 +24,10 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.io.report.Queries;
+import org.jeesl.model.xml.io.report.Row;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.Queries;
-import net.sf.ahtutils.xml.report.Row;
 
 public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,

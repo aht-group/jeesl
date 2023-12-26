@@ -9,9 +9,8 @@ import org.jeesl.interfaces.model.io.report.setting.JeeslReportSetting;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
+import org.jeesl.model.xml.io.report.Info;
 import org.jeesl.model.xml.module.finance.Figures;
-
-import net.sf.ahtutils.xml.report.Info;
 
 public class JeeslAggregationsExcelExporter
 {

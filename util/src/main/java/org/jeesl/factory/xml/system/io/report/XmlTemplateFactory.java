@@ -23,11 +23,10 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.io.report.Template;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportCellComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.Template;
 
 public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,

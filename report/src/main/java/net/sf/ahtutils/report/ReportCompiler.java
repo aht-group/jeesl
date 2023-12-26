@@ -4,15 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import net.sf.ahtutils.xml.report.Jr;
-import net.sf.ahtutils.xml.report.Media;
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Reports;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 
 import org.jdom2.JDOMException;
+import org.jeesl.model.xml.io.report.Jr;
+import org.jeesl.model.xml.io.report.Media;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Reports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

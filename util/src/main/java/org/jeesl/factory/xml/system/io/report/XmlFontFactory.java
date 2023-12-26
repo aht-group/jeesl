@@ -1,10 +1,9 @@
 package org.jeesl.factory.xml.system.io.report;
 
 import org.jeesl.interfaces.model.io.report.style.JeeslReportStyle;
+import org.jeesl.model.xml.io.report.Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.Font;
 
 public class XmlFontFactory <STYLE extends JeeslReportStyle<?,?>>
 {

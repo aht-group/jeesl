@@ -6,11 +6,11 @@ import java.io.Serializable;
 import net.sf.ahtutils.interfaces.controller.report.UtilsXlsDefinitionResolver;
 
 import net.sf.ahtutils.report.revert.excel.AbstractExcelImporter;
-import net.sf.ahtutils.xml.report.XlsSheet;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 
 import org.jeesl.api.controller.ImportStrategy;
+import org.jeesl.model.xml.io.report.XlsSheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

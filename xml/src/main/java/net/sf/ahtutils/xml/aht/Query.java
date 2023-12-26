@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import net.sf.ahtutils.xml.report.Report;
 import net.sf.ahtutils.xml.utils.TrafficLight;
 import net.sf.ahtutils.xml.utils.TrafficLights;
 
@@ -19,6 +18,7 @@ import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Model;
 import org.jeesl.model.xml.io.locale.status.Status;
 import org.jeesl.model.xml.io.locale.status.Type;
+import org.jeesl.model.xml.io.report.Report;
 import org.jeesl.model.xml.module.dev.qa.Test;
 import org.jeesl.model.xml.module.survey.Answer;
 import org.jeesl.model.xml.module.survey.Survey;

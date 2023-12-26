@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jeesl.model.xml.io.report.Info;
+import org.jeesl.model.xml.io.report.Info.Title;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -12,8 +14,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import net.sf.ahtutils.test.AbstractAhtUtilsReportTest;
-import net.sf.ahtutils.xml.report.Info;
-import net.sf.ahtutils.xml.report.Info.Title;
 import net.sf.exlp.util.xml.DomUtil;
 import net.sf.exlp.util.xml.JaxbUtil;
 

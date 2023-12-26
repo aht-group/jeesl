@@ -6,17 +6,17 @@ import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jeesl.model.xml.io.report.Element;
+import org.jeesl.model.xml.io.report.Field;
+import org.jeesl.model.xml.io.report.Jr;
+import org.jeesl.model.xml.io.report.Media;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Reports;
+import org.jeesl.model.xml.io.report.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
-import net.sf.ahtutils.xml.report.Element;
-import net.sf.ahtutils.xml.report.Field;
-import net.sf.ahtutils.xml.report.Jr;
-import net.sf.ahtutils.xml.report.Media;
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Reports;
-import net.sf.ahtutils.xml.report.Template;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.exlp.util.xml.JaxbUtil;
 import net.sf.jasperreports.engine.JRException;

@@ -1,9 +1,8 @@
 package org.jeesl.factory.xml.report;
 
+import org.jeesl.model.xml.io.report.Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.Hash;
 
 public class XmlHashFactory
 {

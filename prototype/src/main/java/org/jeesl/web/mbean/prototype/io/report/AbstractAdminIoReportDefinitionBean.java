@@ -57,6 +57,9 @@ import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
 import org.jeesl.interfaces.web.JeeslJsfSecurityHandler;
 import org.jeesl.jsf.handler.PositionListReorderer;
 import org.jeesl.jsf.handler.sb.SbMultiHandler;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Reports;
+import org.jeesl.model.xml.io.report.XlsSheet;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportColumnComparator;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportComparator;
 import org.jeesl.util.comparator.ejb.system.io.report.IoReportGroupComparator;
@@ -68,9 +71,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.mbean.util.AbstractLogMessage;
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Reports;
-import net.sf.ahtutils.xml.report.XlsSheet;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.util.xml.JaxbUtil;
 

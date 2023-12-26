@@ -33,16 +33,16 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.io.report.ColumnGroup;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Row;
+import org.jeesl.model.xml.io.report.Rows;
+import org.jeesl.model.xml.io.report.XlsColumn;
+import org.jeesl.model.xml.io.report.XlsSheet;
+import org.jeesl.model.xml.io.report.XlsWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.report.ColumnGroup;
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Row;
-import net.sf.ahtutils.xml.report.Rows;
-import net.sf.ahtutils.xml.report.XlsColumn;
-import net.sf.ahtutils.xml.report.XlsSheet;
-import net.sf.ahtutils.xml.report.XlsWorkbook;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 
 public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,

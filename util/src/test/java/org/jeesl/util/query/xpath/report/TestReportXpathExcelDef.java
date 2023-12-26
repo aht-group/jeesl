@@ -1,6 +1,8 @@
 package org.jeesl.util.query.xpath.report;
 
 import org.jeesl.AbstractJeeslUtilTest;
+import org.jeesl.model.xml.io.report.XlsDefinition;
+import org.jeesl.model.xml.io.report.XlsWorkbook;
 import org.jeesl.util.query.xpath.ReportXpath;
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,8 +10,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.report.XlsDefinition;
-import net.sf.ahtutils.xml.report.XlsWorkbook;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 

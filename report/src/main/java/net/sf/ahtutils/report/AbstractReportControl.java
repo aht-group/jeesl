@@ -7,10 +7,6 @@ import java.io.InputStream;
 import java.util.Hashtable;
 import java.util.Map;
 
-import net.sf.ahtutils.xml.report.Jr;
-import net.sf.ahtutils.xml.report.Media;
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Reports;
 import net.sf.exlp.util.io.resourceloader.MultiResourceLoader;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -22,6 +18,10 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.jxpath.JXPathContext;
 import org.jdom2.JDOMException;
+import org.jeesl.model.xml.io.report.Jr;
+import org.jeesl.model.xml.io.report.Media;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Reports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

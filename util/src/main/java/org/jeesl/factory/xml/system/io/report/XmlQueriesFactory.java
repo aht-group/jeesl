@@ -1,9 +1,8 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import org.jeesl.model.xml.io.report.Queries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.Queries;
 
 public class XmlQueriesFactory
 {

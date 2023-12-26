@@ -18,11 +18,10 @@ import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
+import org.jeesl.model.xml.io.report.DataAssociation;
+import org.jeesl.model.xml.io.report.DataAssociations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.DataAssociation;
-import net.sf.ahtutils.xml.report.DataAssociations;
 
 public class XmlDataAssociationsFactory <L extends JeeslLang,D extends JeeslDescription,
 								CATEGORY extends JeeslIoReportCategory<L,D,CATEGORY,?>,

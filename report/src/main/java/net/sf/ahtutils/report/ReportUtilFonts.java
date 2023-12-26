@@ -5,10 +5,6 @@ import java.io.IOException;
 import java.util.List;
 
 import net.sf.ahtutils.report.exception.ReportException;
-import net.sf.ahtutils.xml.report.Jr;
-import net.sf.ahtutils.xml.report.Media;
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Reports;
 import net.sf.exlp.util.xml.JDomUtil;
 
 import org.jdom2.Element;
@@ -17,6 +13,10 @@ import org.jdom2.filter.Filters;
 import org.jdom2.output.XMLOutputter;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
+import org.jeesl.model.xml.io.report.Jr;
+import org.jeesl.model.xml.io.report.Media;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Reports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,13 +1,12 @@
 package org.jeesl.model.xml.system.io.report;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.report.XlsColumn;
 import org.jeesl.model.xml.system.status.TestXmlDataType;
 import org.jeesl.model.xml.system.status.TestXmlDescriptions;
 import org.jeesl.model.xml.system.status.TestXmlLangs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.XlsColumn;
 
 public class TestXmlXlsColumn extends AbstractXmlReportTest<XlsColumn>
 {

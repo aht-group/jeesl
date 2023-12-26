@@ -14,14 +14,14 @@ import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
+import org.jeesl.model.xml.io.report.Reports;
+import org.jeesl.model.xml.io.report.Resource;
+import org.jeesl.model.xml.io.report.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import net.sf.ahtutils.report.exception.ReportException;
-import net.sf.ahtutils.xml.report.Reports;
-import net.sf.ahtutils.xml.report.Resource;
-import net.sf.ahtutils.xml.report.Resources;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JasperExportManager;

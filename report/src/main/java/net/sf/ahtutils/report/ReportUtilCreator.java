@@ -12,11 +12,6 @@ import java.util.Map;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.ParserConfigurationException;
 
-import net.sf.ahtutils.xml.report.Jr;
-import net.sf.ahtutils.xml.report.Media;
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Reports;
-import net.sf.ahtutils.xml.report.Templates;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
 import net.sf.exlp.util.DateUtil;
@@ -30,6 +25,11 @@ import org.apache.commons.io.IOUtils;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.jeesl.model.xml.io.report.Jr;
+import org.jeesl.model.xml.io.report.Media;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Reports;
+import org.jeesl.model.xml.io.report.Templates;
 import org.jeesl.util.query.xpath.ReportXpath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,7 +111,7 @@ public class ReportUtilCreator
 		
 		//Load the template given by template name
 		Templates templates = JaxbUtil.loadJAXB(templateFile, Templates.class);
-		net.sf.ahtutils.xml.report.Template template = ReportXpath.getTemplate(templates, getReportId());
+		org.jeesl.model.xml.io.report.Template template = ReportXpath.getTemplate(templates, getReportId());
 		
 		
 		JasperDesign design = templateManager.create(template);

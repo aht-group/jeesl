@@ -3,11 +3,10 @@ package org.jeesl.util.filter.xml.system.io;
 import java.util.List;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.XlsSheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.XlsSheet;
 
 public class XmlReportFilter
 {

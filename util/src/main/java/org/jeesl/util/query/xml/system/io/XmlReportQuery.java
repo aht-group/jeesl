@@ -18,20 +18,20 @@ import org.jeesl.factory.xml.system.status.XmlDataTypeFactory;
 import org.jeesl.factory.xml.system.status.XmlImplementationFactory;
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.interfaces.model.io.report.style.JeeslReportColumnWidth;
+import org.jeesl.model.xml.io.report.Cell;
+import org.jeesl.model.xml.io.report.ColumnGroup;
+import org.jeesl.model.xml.io.report.Font;
+import org.jeesl.model.xml.io.report.Layout;
+import org.jeesl.model.xml.io.report.Report;
+import org.jeesl.model.xml.io.report.Row;
+import org.jeesl.model.xml.io.report.Style;
+import org.jeesl.model.xml.io.report.Template;
+import org.jeesl.model.xml.io.report.XlsColumn;
+import org.jeesl.model.xml.io.report.XlsSheet;
+import org.jeesl.model.xml.io.report.XlsWorkbook;
 import org.jeesl.util.query.xml.XmlStatusQuery;
 
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.ahtutils.xml.report.Cell;
-import net.sf.ahtutils.xml.report.ColumnGroup;
-import net.sf.ahtutils.xml.report.Font;
-import net.sf.ahtutils.xml.report.Layout;
-import net.sf.ahtutils.xml.report.Report;
-import net.sf.ahtutils.xml.report.Row;
-import net.sf.ahtutils.xml.report.Style;
-import net.sf.ahtutils.xml.report.Template;
-import net.sf.ahtutils.xml.report.XlsColumn;
-import net.sf.ahtutils.xml.report.XlsSheet;
-import net.sf.ahtutils.xml.report.XlsWorkbook;
 
 public class XmlReportQuery
 {
