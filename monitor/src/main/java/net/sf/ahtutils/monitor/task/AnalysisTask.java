@@ -9,6 +9,8 @@ import org.jeesl.api.facade.module.JeeslMonitoringFacade;
 import org.jeesl.controller.monitoring.result.net.IcmpResult;
 import org.jeesl.exception.processing.UtilsProcessingException;
 import org.jeesl.interfaces.model.with.date.ju.EjbWithRecord;
+import org.jeesl.model.xml.module.monitoring.Indicator;
+import org.jeesl.model.xml.module.monitoring.Transmission;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.MutableDateTime;
@@ -22,8 +24,6 @@ import net.sf.ahtutils.monitor.factory.net.TxIcmpFactory;
 import net.sf.ahtutils.monitor.util.DbCleaner;
 import net.sf.ahtutils.monitor.util.IntervalHelper;
 import net.sf.ahtutils.monitor.util.RestTransmission;
-import net.sf.ahtutils.xml.monitoring.Indicator;
-import net.sf.ahtutils.xml.monitoring.Transmission;
 
 public class AnalysisTask  implements Runnable 
 {

@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.monitoring;
+package org.jeesl.model.xml.module.monitoring;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,8 +18,10 @@ import javax.xml.bind.annotation.XmlType;
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="uri" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -29,16 +31,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "processingResult")
-public class ProcessingResult
+@XmlRootElement(name = "actor")
+public class Actor
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
+    @XmlAttribute(name = "id")
+    protected Long id;
     @XmlAttribute(name = "code")
     protected String code;
     @XmlAttribute(name = "label")
     protected String label;
+    @XmlAttribute(name = "uri")
+    protected String uri;
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setId(long value) {
+        this.id = value;
+    }
+
+    public boolean isSetId() {
+        return (this.id!= null);
+    }
+
+    public void unsetId() {
+        this.id = null;
+    }
 
     /**
      * Gets the value of the code property.
@@ -94,6 +132,34 @@ public class ProcessingResult
 
     public boolean isSetLabel() {
         return (this.label!= null);
+    }
+
+    /**
+     * Gets the value of the uri property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUri() {
+        return uri;
+    }
+
+    /**
+     * Sets the value of the uri property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUri(String value) {
+        this.uri = value;
+    }
+
+    public boolean isSetUri() {
+        return (this.uri!= null);
     }
 
 }

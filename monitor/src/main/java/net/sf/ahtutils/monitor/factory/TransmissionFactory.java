@@ -3,12 +3,11 @@ package net.sf.ahtutils.monitor.factory;
 import java.util.List;
 
 import org.jeesl.api.facade.module.JeeslMonitoringFacade;
+import org.jeesl.model.xml.module.monitoring.Component;
+import org.jeesl.model.xml.module.monitoring.Indicator;
+import org.jeesl.model.xml.module.monitoring.Transmission;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.monitoring.Component;
-import net.sf.ahtutils.xml.monitoring.Indicator;
-import net.sf.ahtutils.xml.monitoring.Transmission;
 
 public class TransmissionFactory extends AbstractTransmissionFactory
 {

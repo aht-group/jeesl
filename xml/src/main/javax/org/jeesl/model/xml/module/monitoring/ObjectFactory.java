@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.monitoring;
+package org.jeesl.model.xml.module.monitoring;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

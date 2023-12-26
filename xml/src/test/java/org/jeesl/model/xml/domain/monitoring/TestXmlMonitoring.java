@@ -1,10 +1,9 @@
 package org.jeesl.model.xml.domain.monitoring;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.module.monitoring.Monitoring;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.monitoring.Monitoring;
 
 public class TestXmlMonitoring extends AbstractXmlMonitoringTest<Monitoring>
 {

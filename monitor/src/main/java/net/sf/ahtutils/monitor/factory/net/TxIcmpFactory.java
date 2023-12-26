@@ -7,6 +7,10 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.jeesl.api.facade.module.JeeslMonitoringFacade;
 import org.jeesl.controller.monitoring.result.net.DnsResult;
 import org.jeesl.controller.monitoring.result.net.IcmpResult;
+import org.jeesl.model.xml.module.monitoring.Data;
+import org.jeesl.model.xml.module.monitoring.DataSet;
+import org.jeesl.model.xml.module.monitoring.Indicator;
+import org.jeesl.model.xml.module.monitoring.Value;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.MutableDateTime;
@@ -15,10 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.monitor.factory.AbstractTransmissionFactory;
 import net.sf.ahtutils.monitor.util.DbCleaner;
-import net.sf.ahtutils.xml.monitoring.Data;
-import net.sf.ahtutils.xml.monitoring.DataSet;
-import net.sf.ahtutils.xml.monitoring.Indicator;
-import net.sf.ahtutils.xml.monitoring.Value;
 
 public class TxIcmpFactory extends AbstractTransmissionFactory
 {

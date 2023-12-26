@@ -1,11 +1,11 @@
 package org.jeesl.model.xml.domain.monitoring;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.module.monitoring.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.test.AbstractAhtUtilsXmlTest;
-import net.sf.ahtutils.xml.monitoring.Data;
 
 public class TestXmlData extends AbstractXmlMonitoringTest<Data>
 {

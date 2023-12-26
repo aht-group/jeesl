@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.monitoring;
+package org.jeesl.model.xml.module.monitoring;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,9 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}indicator"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}observer"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}data" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}indicator" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -38,22 +36,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "indicator",
-    "observer",
-    "data"
+    "indicator"
 })
-@XmlRootElement(name = "dataSet")
-public class DataSet
+@XmlRootElement(name = "component")
+public class Component
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected Indicator indicator;
-    @XmlElement(required = true)
-    protected Observer observer;
-    @XmlElement(required = true)
-    protected List<Data> data;
+    protected List<Indicator> indicator;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "code")
@@ -64,94 +56,38 @@ public class DataSet
     /**
      * Gets the value of the indicator property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Indicator }
-     *     
-     */
-    public Indicator getIndicator() {
-        return indicator;
-    }
-
-    /**
-     * Sets the value of the indicator property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Indicator }
-     *     
-     */
-    public void setIndicator(Indicator value) {
-        this.indicator = value;
-    }
-
-    public boolean isSetIndicator() {
-        return (this.indicator!= null);
-    }
-
-    /**
-     * Gets the value of the observer property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Observer }
-     *     
-     */
-    public Observer getObserver() {
-        return observer;
-    }
-
-    /**
-     * Sets the value of the observer property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Observer }
-     *     
-     */
-    public void setObserver(Observer value) {
-        this.observer = value;
-    }
-
-    public boolean isSetObserver() {
-        return (this.observer!= null);
-    }
-
-    /**
-     * Gets the value of the data property.
-     * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the data property.
+     * This is why there is not a <CODE>set</CODE> method for the indicator property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getData().add(newItem);
+     *    getIndicator().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Data }
+     * {@link Indicator }
      * 
      * 
      */
-    public List<Data> getData() {
-        if (data == null) {
-            data = new ArrayList<Data>();
+    public List<Indicator> getIndicator() {
+        if (indicator == null) {
+            indicator = new ArrayList<Indicator>();
         }
-        return this.data;
+        return this.indicator;
     }
 
-    public boolean isSetData() {
-        return ((this.data!= null)&&(!this.data.isEmpty()));
+    public boolean isSetIndicator() {
+        return ((this.indicator!= null)&&(!this.indicator.isEmpty()));
     }
 
-    public void unsetData() {
-        this.data = null;
+    public void unsetIndicator() {
+        this.indicator = null;
     }
 
     /**

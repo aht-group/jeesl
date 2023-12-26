@@ -7,8 +7,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import net.sf.ahtutils.xml.monitoring.ProcessingResult;
-import net.sf.ahtutils.xml.monitoring.Transmission;
+import org.jeesl.model.xml.module.monitoring.ProcessingResult;
+import org.jeesl.model.xml.module.monitoring.Transmission;
 
 @Path("/monitoring")
 public interface UtilsMonitoringRest

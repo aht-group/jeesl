@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.monitoring;
+package org.jeesl.model.xml.module.monitoring;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}indicator" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}dataSet" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -36,16 +36,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "indicator"
+    "dataSet"
 })
-@XmlRootElement(name = "component")
-public class Component
+@XmlRootElement(name = "indicator")
+public class Indicator
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
     @XmlElement(required = true)
-    protected List<Indicator> indicator;
+    protected List<DataSet> dataSet;
     @XmlAttribute(name = "id")
     protected Long id;
     @XmlAttribute(name = "code")
@@ -54,40 +54,40 @@ public class Component
     protected String label;
 
     /**
-     * Gets the value of the indicator property.
+     * Gets the value of the dataSet property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the indicator property.
+     * This is why there is not a <CODE>set</CODE> method for the dataSet property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIndicator().add(newItem);
+     *    getDataSet().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Indicator }
+     * {@link DataSet }
      * 
      * 
      */
-    public List<Indicator> getIndicator() {
-        if (indicator == null) {
-            indicator = new ArrayList<Indicator>();
+    public List<DataSet> getDataSet() {
+        if (dataSet == null) {
+            dataSet = new ArrayList<DataSet>();
         }
-        return this.indicator;
+        return this.dataSet;
     }
 
-    public boolean isSetIndicator() {
-        return ((this.indicator!= null)&&(!this.indicator.isEmpty()));
+    public boolean isSetDataSet() {
+        return ((this.dataSet!= null)&&(!this.dataSet.isEmpty()));
     }
 
-    public void unsetIndicator() {
-        this.indicator = null;
+    public void unsetDataSet() {
+        this.dataSet = null;
     }
 
     /**

@@ -1,7 +1,6 @@
 package org.jeesl.factory.xml.domain.monitoring;
 
-import net.sf.ahtutils.xml.monitoring.Observer;
-
+import org.jeesl.model.xml.module.monitoring.Observer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

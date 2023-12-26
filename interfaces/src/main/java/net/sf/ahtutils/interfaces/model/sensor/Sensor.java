@@ -1,8 +1,8 @@
 package net.sf.ahtutils.interfaces.model.sensor;
 
-import net.sf.ahtutils.xml.monitoring.Data;
-import net.sf.ahtutils.xml.monitoring.Indicator;
-import net.sf.ahtutils.xml.monitoring.Observer;
+import org.jeesl.model.xml.module.monitoring.Data;
+import org.jeesl.model.xml.module.monitoring.Indicator;
+import org.jeesl.model.xml.module.monitoring.Observer;
 
 public interface Sensor extends SensorRead
 {	

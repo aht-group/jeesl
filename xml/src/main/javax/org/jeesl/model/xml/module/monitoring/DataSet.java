@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.monitoring;
+package org.jeesl.model.xml.module.monitoring;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,9 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -26,11 +24,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *       &lt;sequence&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}indicator"/&gt;
  *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}observer"/&gt;
- *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}value" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/monitoring}data" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
- *       &lt;attribute name="record" type="{http://www.w3.org/2001/XMLSchema}dateTime" /&gt;
- *       &lt;attribute name="range" type="{http://www.w3.org/2001/XMLSchema}long" /&gt;
+ *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="label" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -42,10 +40,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlType(name = "", propOrder = {
     "indicator",
     "observer",
-    "value"
+    "data"
 })
-@XmlRootElement(name = "data")
-public class Data
+@XmlRootElement(name = "dataSet")
+public class DataSet
     implements Serializable
 {
 
@@ -55,14 +53,13 @@ public class Data
     @XmlElement(required = true)
     protected Observer observer;
     @XmlElement(required = true)
-    protected List<Value> value;
+    protected List<Data> data;
     @XmlAttribute(name = "id")
     protected Long id;
-    @XmlAttribute(name = "record")
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar record;
-    @XmlAttribute(name = "range")
-    protected Long range;
+    @XmlAttribute(name = "code")
+    protected String code;
+    @XmlAttribute(name = "label")
+    protected String label;
 
     /**
      * Gets the value of the indicator property.
@@ -121,40 +118,40 @@ public class Data
     }
 
     /**
-     * Gets the value of the value property.
+     * Gets the value of the data property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the value property.
+     * This is why there is not a <CODE>set</CODE> method for the data property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getValue().add(newItem);
+     *    getData().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Value }
+     * {@link Data }
      * 
      * 
      */
-    public List<Value> getValue() {
-        if (value == null) {
-            value = new ArrayList<Value>();
+    public List<Data> getData() {
+        if (data == null) {
+            data = new ArrayList<Data>();
         }
-        return this.value;
+        return this.data;
     }
 
-    public boolean isSetValue() {
-        return ((this.value!= null)&&(!this.value.isEmpty()));
+    public boolean isSetData() {
+        return ((this.data!= null)&&(!this.data.isEmpty()));
     }
 
-    public void unsetValue() {
-        this.value = null;
+    public void unsetData() {
+        this.data = null;
     }
 
     /**
@@ -190,63 +187,59 @@ public class Data
     }
 
     /**
-     * Gets the value of the record property.
+     * Gets the value of the code property.
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public XMLGregorianCalendar getRecord() {
-        return record;
+    public String getCode() {
+        return code;
     }
 
     /**
-     * Sets the value of the record property.
+     * Sets the value of the code property.
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link String }
      *     
      */
-    public void setRecord(XMLGregorianCalendar value) {
-        this.record = value;
+    public void setCode(String value) {
+        this.code = value;
     }
 
-    public boolean isSetRecord() {
-        return (this.record!= null);
+    public boolean isSetCode() {
+        return (this.code!= null);
     }
 
     /**
-     * Gets the value of the range property.
+     * Gets the value of the label property.
      * 
      * @return
      *     possible object is
-     *     {@link Long }
+     *     {@link String }
      *     
      */
-    public long getRange() {
-        return range;
+    public String getLabel() {
+        return label;
     }
 
     /**
-     * Sets the value of the range property.
+     * Sets the value of the label property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Long }
+     *     {@link String }
      *     
      */
-    public void setRange(long value) {
-        this.range = value;
+    public void setLabel(String value) {
+        this.label = value;
     }
 
-    public boolean isSetRange() {
-        return (this.range!= null);
-    }
-
-    public void unsetRange() {
-        this.range = null;
+    public boolean isSetLabel() {
+        return (this.label!= null);
     }
 
 }
