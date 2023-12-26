@@ -25,9 +25,9 @@ import org.openfuxml.model.xml.core.ofx.Section;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.jeesl.org/dev/srs}chapter" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://xsd.jeesl.org/module/dev/srs}chapter" maxOccurs="unbounded"/&gt;
  *         &lt;element ref="{http://www.openfuxml.org}section" maxOccurs="unbounded"/&gt;
- *         &lt;element ref="{http://www.jeesl.org/dev/srs}fr" maxOccurs="unbounded"/&gt;
+ *         &lt;element ref="{http://xsd.jeesl.org/module/dev/srs}fr" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="title" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -48,9 +48,9 @@ public class Chapter implements Serializable
 
     private final static long serialVersionUID = 1L;
     @XmlElementRefs({
-        @XmlElementRef(name = "chapter", namespace = "http://www.jeesl.org/dev/srs", type = Chapter.class),
+        @XmlElementRef(name = "chapter", namespace = "http://xsd.jeesl.org/module/dev/srs", type = Chapter.class),
         @XmlElementRef(name = "section", namespace = "http://www.openfuxml.org", type = Section.class),
-        @XmlElementRef(name = "fr", namespace = "http://www.jeesl.org/dev/srs", type = Fr.class)
+        @XmlElementRef(name = "fr", namespace = "http://xsd.jeesl.org/module/dev/srs", type = Fr.class)
     })
     @XmlMixed
     protected List<Serializable> content;

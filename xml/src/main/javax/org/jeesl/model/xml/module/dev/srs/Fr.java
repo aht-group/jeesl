@@ -21,7 +21,7 @@ import org.openfuxml.model.xml.core.ofx.Sections;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.jeesl.org/dev/srs}module"/&gt;
+ *         &lt;element ref="{http://xsd.jeesl.org/module/dev/srs}module"/&gt;
  *         &lt;element ref="{http://www.openfuxml.org}sections"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema targetNamespace="http://www.jeesl.org/dev/srs"
-    xmlns:srs="http://www.jeesl.org/dev/srs"
+<xsd:schema targetNamespace="http://xsd.jeesl.org/module/dev/srs"
+    xmlns:srs="http://xsd.jeesl.org/module/dev/srs"
     xmlns:ofx="http://www.openfuxml.org"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <xsd:import namespace="http://www.openfuxml.org" schemaLocation="../../../../../../../ofx/xml/src/main/xsd/content/ofx.xsd"/>
