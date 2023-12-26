@@ -87,6 +87,11 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
+	<jxb:bindings schemaLocation="../xsd/jeesl/module/bb.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.bb"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 	<jxb:bindings schemaLocation="jeesl/dev/srs.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.dev.srs"/>

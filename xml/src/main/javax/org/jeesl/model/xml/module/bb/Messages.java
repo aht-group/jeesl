@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Type;
 
 
@@ -77,10 +76,6 @@ public class Messages
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the messages property.
      * 
@@ -110,14 +105,6 @@ public class Messages
         return this.messages;
     }
 
-    public boolean isSetMessages() {
-        return ((this.messages!= null)&&(!this.messages.isEmpty()));
-    }
-
-    public void unsetMessages() {
-        this.messages = null;
-    }
-
     /**
      * Gets the value of the message property.
      * 
@@ -145,14 +132,6 @@ public class Messages
             message = new ArrayList<Message>();
         }
         return this.message;
-    }
-
-    public boolean isSetMessage() {
-        return ((this.message!= null)&&(!this.message.isEmpty()));
-    }
-
-    public void unsetMessage() {
-        this.message = null;
     }
 
 }
