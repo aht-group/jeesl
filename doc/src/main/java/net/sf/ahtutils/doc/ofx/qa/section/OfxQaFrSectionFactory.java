@@ -2,6 +2,7 @@ package net.sf.ahtutils.doc.ofx.qa.section;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.configuration.Configuration;
 import org.jeesl.model.xml.io.locale.status.Lang;
@@ -81,7 +82,7 @@ public class OfxQaFrSectionFactory extends AbstractUtilsOfxDocumentationFactory
 		section.getContent().add(XmlTitleFactory.build(test.getName()));
 		
 		Paragraph p = XmlParagraphFactory.build();
-		if(test.isSetInfo() && test.getInfo().isSetStatus()){p.getContent().add(marginalia(test.getInfo()));}
+		if(Objects.nonNull(test.getInfo()) && Objects.nonNull(test.getInfo().getStatus())) {p.getContent().add(marginalia(test.getInfo()));}
 		if(test.isSetDescription() && test.getDescription().isSetValue())
 		{
 			p.getContent().add(test.getDescription().getValue());	

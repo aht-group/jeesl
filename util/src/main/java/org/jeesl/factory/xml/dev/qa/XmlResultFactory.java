@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.dev.qa;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.security.XmlStaffFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -67,12 +68,12 @@ public class XmlResultFactory<L extends JeeslLang, D extends JeeslDescription,
 		Result xml = new Result();
 	
 		if(Objects.nonNull(q.getId())) {xml.setId(result.getId());}
-		if(q.isSetRecord() && result.getRecord()!=null){xml.setRecord(DateUtil.toXmlGc(result.getRecord()));}
+		if(ObjectUtils.allNotNull(q.getRecord(),result.getRecord())) {xml.setRecord(DateUtil.toXmlGc(result.getRecord()));}
 		
 		if(Objects.nonNull(q.getStatus())) {xml.setStatus(xfResultStatus.build(result.getStatus()));}
 		if(Objects.nonNull(q.getStaff())) {xml.setStaff(xfStaff.build(result.getStaff()));}
-		if(q.isSetActual()){xml.setActual(buildActual(result.getActualResult()));}
-		if(q.isSetComment()){xml.setComment(buildComment(result.getComment()));}
+		if(Objects.nonNull(q.getActual())) {xml.setActual(buildActual(result.getActualResult()));}
+		if(Objects.nonNull(q.getComment())) {xml.setComment(buildComment(result.getComment()));}
 		
 		return xml;
 	}

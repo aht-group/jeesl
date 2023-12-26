@@ -1,8 +1,6 @@
 package org.jeesl.factory.xml.dev.qa;
 
-import org.jeesl.interfaces.model.system.security.user.JeeslUser;
-import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
-import org.jeesl.model.xml.module.dev.qa.Results;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
@@ -11,20 +9,17 @@ import org.jeesl.interfaces.model.system.security.access.JeeslSecurityUsecase;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityAction;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
+import org.jeesl.interfaces.model.system.security.user.JeeslUser;
+import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.model.xml.module.dev.qa.Results;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaCategory;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaGroup;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaResult;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaSchedule;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaScheduleSlot;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaStaff;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaStakeholder;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQaTest;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestDiscussion;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaTestInfo;
-import net.sf.ahtutils.interfaces.model.qa.UtilsQaUsability;
 import net.sf.ahtutils.interfaces.model.qa.UtilsQualityAssurarance;
 
 public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
@@ -53,14 +48,14 @@ public class XmlResultsFactory<L extends JeeslLang, D extends JeeslDescription,
 	public XmlResultsFactory(Results q)
 	{
 		this.q=q;
-		if(q.isSetResult()) {xfResult = new XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QAR,QARS>(q.getResult().get(0));}
+		if(ObjectUtils.isNotEmpty(q.getResult())) {xfResult = new XmlResultFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QAR,QARS>(q.getResult().get(0));}
 	}
 	
 	public Results build(QAT test)
 	{
 		Results xml = new Results();
 	
-		if(q.isSetResult())
+		if(ObjectUtils.isNotEmpty(q.getResult()))
 		{
 			for(QAR result : test.getResults())
 			{

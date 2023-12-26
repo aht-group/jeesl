@@ -70,11 +70,12 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 	{
 		this.q=q;
 		if(Objects.nonNull(q.getStatus())) {xfDeveloperStatus = new XmlStatusFactory<>(null,q.getStatus());}
-		if(q.isSetGroups()) {xfGroups = new XmlGroupsFactory<GROUP,QAT>(q.getGroups());}
-		if(q.isSetInfo()) {xfInfo = new XmlInfoFactory<L,D,QATI,QATC>(q.getInfo());}
-		if(q.isSetStatement()) {xfStatement = new XmlStatementFactory<L,D,QATS>(null,q.getStatement());}
+		
+		if(Objects.nonNull(q.getInfo())) {xfInfo = new XmlInfoFactory<L,D,QATI,QATC>(q.getInfo());}
+		if(Objects.nonNull(q.getStatement())) {xfStatement = new XmlStatementFactory<L,D,QATS>(null,q.getStatement());}
 		
 		if(Objects.nonNull(q.getResults())) {xfResults = new XmlResultsFactory<L,D,C,R,V,U,A,AT,USER,STAFF,QA,QASD,QASS,QAT,QAR,QARS>(q.getResults());}
+		if(Objects.nonNull(q.getGroups())) {xfGroups = new XmlGroupsFactory<GROUP,QAT>(q.getGroups());}
 	}
 	
 	private JeeslQaFacade<L,D,STAFF,GROUP,QA,QASD,QASS,?,QAT> fQa;
@@ -99,28 +100,28 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		if(Objects.nonNull(q.getId())) {xml.setId(test.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(test.getCode());}
-		if(q.isSetName()){xml.setName(test.getName());}
-		if(q.isSetVisible()){xml.setVisible(test.getVisible());}
-		if(q.isSetDuration())
+		if(Objects.nonNull(q.getName())) {xml.setName(test.getName());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(test.getVisible());}
+		if(Objects.nonNull(q.getDuration()))
 		{
 			if(test.getDuration()!=null){xml.setDuration(test.getDuration());}
 			else{xml.setDuration(0);}
 		}
 
-		if(q.isSetReference() && test.getReference()!=null){xml.setReference(XmlReferenceFactory.build(test.getReference()));}
-		if(q.isSetDescription() && test.getDescription()!=null){xml.setDescription(XmlDescriptionFactory.build(test.getDescription()));}
-		if(q.isSetPreCondition() && test.getPreCondition()!=null){xml.setPreCondition(XmlPreConditionFactory.build(test.getPreCondition()));}
-		if(q.isSetSteps() && test.getSteps()!=null){xml.setSteps(XmlStepsFactory.build(test.getSteps()));}
-		if(q.isSetExpected() && test.getExpectedResult()!=null){xml.setExpected(XmlExpectedFactory.build(test.getExpectedResult()));}
+		if(ObjectUtils.allNotNull(q.getReference(),test.getReference())) {xml.setReference(XmlReferenceFactory.build(test.getReference()));}
+		if(ObjectUtils.allNotNull(q.getDescription(),test.getDescription())) {xml.setDescription(XmlDescriptionFactory.build(test.getDescription()));}
+		if(ObjectUtils.allNotNull(q.getPreCondition(),test.getPreCondition())) {xml.setPreCondition(XmlPreConditionFactory.build(test.getPreCondition()));}
+		if(ObjectUtils.allNotNull(q.getSteps(),test.getSteps())) {xml.setSteps(XmlStepsFactory.build(test.getSteps()));}
+		if(ObjectUtils.allNotNull(q.getExpected(),test.getExpectedResult())) {xml.setExpected(XmlExpectedFactory.build(test.getExpectedResult()));}
 		
-		if(q.isSetStatement() && test.getClientStatus()!=null){xml.setStatement(xfStatement.build(test.getClientStatus()));}
+		if(Objects.nonNull(q.getStatement()) && test.getClientStatus()!=null){xml.setStatement(xfStatement.build(test.getClientStatus()));}
 		if(ObjectUtils.allNotNull(q.getStatus(),test.getDeveloperStatus())) {xml.setStatus(xfDeveloperStatus.build(test.getDeveloperStatus()));}
 		
-		if(q.isSetResults()) {xml.setResults(xfResults.build(test));}
+		if(Objects.nonNull(q.getResults())) {xml.setResults(xfResults.build(test));}
 		
-		if(q.isSetInfo() && test.getInfo()!=null) {xml.setInfo(xfInfo.build(test.getInfo()));}
+		if(ObjectUtils.allNotNull(q.getInfo(),test.getInfo())) {xml.setInfo(xfInfo.build(test.getInfo()));}
 		
-		if(q.isSetGroups()) {xml.setGroups(xfGroups.build(test));}
+		if(Objects.nonNull(q.getGroups())) {xml.setGroups(xfGroups.build(test));}
 		
 		return xml;
 	}
