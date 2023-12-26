@@ -35,8 +35,7 @@ import javax.xml.bind.annotation.XmlType;
     "lang"
 })
 @XmlRootElement(name = "langs")
-public class Langs
-    implements Serializable
+public class Langs implements Serializable
 {
 
     private final static long serialVersionUID = 1L;

@@ -76,9 +76,9 @@ public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
 		Report xml = build();
 		
 //		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetCode()){xml.setCode(report.getCode());}
-		if(q.isSetVisible()){xml.setVisible(report.isVisible());}
-		if(q.isSetPosition()){xml.setPosition(report.getPosition());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(report.getCode());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(report.isVisible());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(report.getPosition());}
 		if(q.isSetXmlExample()){xml.setXmlExample(report.getXmlExample());}
 		
 		if(q.isSetCategory()){xml.setCategory(xfCategory.build(report.getCategory()));}

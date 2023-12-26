@@ -70,6 +70,11 @@
             <jxb:package name="org.jeesl.model.xml.io.mail"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+	<jxb:bindings schemaLocation="aht/report.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.report"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     <jxb:bindings schemaLocation="jeesl/io/revision.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.label"/>

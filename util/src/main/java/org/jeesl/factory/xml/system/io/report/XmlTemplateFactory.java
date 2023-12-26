@@ -75,9 +75,9 @@ public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		Template xml = XmlTemplateFactory.build();
 		
-		if(q.isSetCode()){xml.setCode(template.getCode());}
-		if(q.isSetVisible()){xml.setVisible(template.isVisible());}
-		if(q.isSetPosition()){xml.setPosition(template.getPosition());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(template.getCode());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(template.isVisible());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(template.getPosition());}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(template.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(template.getDescription()));}

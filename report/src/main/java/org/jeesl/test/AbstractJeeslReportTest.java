@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Locale;
+import java.util.Objects;
 
 import org.apache.commons.io.IOUtils;
 import org.exlp.interfaces.io.NsPrefixMapperInterface;
@@ -134,7 +135,7 @@ public class AbstractJeeslReportTest
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append("target/");
-		if(info!=null && info.isSetFile() && info.getFile().getValue().length()>0)
+		if(Objects.nonNull(info) && Objects.nonNull(info.getFile()) && info.getFile().getValue().length()>0)
 		{
 			// Replacing the /'s is required, because they may be interpreted as directory separators
 			sb.append(info.getFile().getValue().replaceAll("/", "-"));

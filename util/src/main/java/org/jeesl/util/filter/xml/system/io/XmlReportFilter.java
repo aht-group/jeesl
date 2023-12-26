@@ -1,6 +1,7 @@
 package org.jeesl.util.filter.xml.system.io;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.exception.ejb.JeeslNotFoundException;
 import org.jeesl.model.xml.io.report.Report;
@@ -14,8 +15,8 @@ public class XmlReportFilter
 	
 	public static XlsSheet fSheet(Report report, String code) throws JeeslNotFoundException
 	{
-		if(!report.isSetXlsWorkbook()) {throw new JeeslNotFoundException("Now workbook");}
-		else if(!report.getXlsWorkbook().isSetXlsSheets()){throw new JeeslNotFoundException("Now sheets in workbook");}
+		if(Objects.isNull(report.getXlsWorkbook())) {throw new JeeslNotFoundException("Now workbook");}
+		else if(Objects.isNull(report.getXlsWorkbook().getXlsSheets())) {throw new JeeslNotFoundException("Now sheets in workbook");}
 		else {return fSheet(report.getXlsWorkbook().getXlsSheets().getXlsSheet(),code);}
 	}
 	public static XlsSheet fSheet(List<XlsSheet> sheets, String code) throws JeeslNotFoundException

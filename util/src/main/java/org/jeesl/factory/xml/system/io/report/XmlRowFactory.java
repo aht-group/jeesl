@@ -77,9 +77,9 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		Row xml = new Row();
 		
-		if(q.isSetCode()){xml.setCode(row.getCode());}
-		if(q.isSetVisible()){xml.setVisible(row.isVisible());}
-		if(q.isSetPosition()){xml.setPosition(row.getPosition());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(row.getCode());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(row.isVisible());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(row.getPosition());}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(row.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(row.getDescription()));}

@@ -11,6 +11,7 @@ import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
 import net.sf.exlp.exception.ExlpXpathNotUniqueException;
@@ -86,7 +87,7 @@ public abstract class AbstractTableImporter <C extends Serializable, I extends I
             if (association.isSetHandledBy())	
             {
                 strategies.put(column, Class.forName(association.getHandledBy()));
-                if (association.isSetType())
+                if(Objects.nonNull(association.getType()))
                 {
                     if(association.getType().equals(ImportType.LIST))
                     {

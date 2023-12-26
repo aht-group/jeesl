@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -268,7 +269,7 @@ public class ExcelExporter
 		for(Label header : headerLabels)
 		{
 			String value = "";
-			if(header.isSetKey()) {value = header.getKey() + ": ";}
+			if(Objects.nonNull(header.getKey())) {value = header.getKey() + ": ";}
 			value = value + header.getValue();
 			createCell(sheet, rowNr, 0, value, "String", style);
 			rowNr++;

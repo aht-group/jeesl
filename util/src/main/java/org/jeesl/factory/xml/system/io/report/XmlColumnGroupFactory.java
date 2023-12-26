@@ -75,9 +75,9 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 	{
 		ColumnGroup xml = new ColumnGroup();
 		
-		if(q.isSetCode()){xml.setCode(group.getCode());}
-		if(q.isSetVisible()){xml.setVisible(group.isVisible());}
-		if(q.isSetPosition()){xml.setPosition(group.getPosition());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(group.getCode());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(group.isVisible());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(group.getPosition());}
 		
 		if(q.isSetShowLabel()){xml.setShowLabel(group.getShowLabel());}
 		if(q.isSetShowWeb()){xml.setShowWeb(group.getShowWeb());}

@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
 import org.jeesl.factory.xml.system.symbol.XmlColorFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
@@ -51,7 +53,7 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 		this.q=q;
 		if(q.isSetSize()){xfType = new XmlTypeFactory<>(localeCode,q.getSize().get(0).getType());}
 		if(q.isSetStyles()){xfStyles = new XmlStylesFactory<>(localeCode,q.getStyles());}
-		if(q.isSetFont()){xfFont = new XmlFontFactory<>(q.getFont());}
+		if(Objects.nonNull(q.getFont())) {xfFont = new XmlFontFactory<>(q.getFont());}
 	}
 	
 	public Layout build(ROW row)
@@ -89,7 +91,7 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 		Layout xml = XmlLayoutFactory.build();
 		
 		xml.getColor().add(XmlColorFactory.build("background", style.getColorBackground()));
-		if(q.isSetFont()){xml.setFont(xfFont.build(style));}
+		if(Objects.nonNull(q.getFont())) {xml.setFont(xfFont.build(style));}
 		
 		return xml;
 	}

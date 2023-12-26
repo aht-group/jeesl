@@ -64,9 +64,9 @@ public class XmlStyleFactory <L extends JeeslLang,D extends JeeslDescription,
 		Style xml = XmlStyleFactory.build();
 		
 		if(type!=null){xml.setType(type.toString());}
-		if(q.isSetCode()){xml.setCode(style.getCode());}
-		if(q.isSetVisible()){xml.setVisible(style.isVisible());}
-		if(q.isSetPosition()){xml.setPosition(style.getPosition());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(style.getCode());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(style.isVisible());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(style.getPosition());}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(style.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(style.getDescription()));}

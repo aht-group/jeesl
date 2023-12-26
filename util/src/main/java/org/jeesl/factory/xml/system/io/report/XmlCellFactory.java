@@ -62,8 +62,8 @@ public class XmlCellFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		Cell xml = new Cell();
 		
-		if(q.isSetCode()){xml.setCode(cell.getCode());}
-		if(q.isSetVisible()){xml.setVisible(cell.isVisible());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(cell.getCode());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(cell.isVisible());}
 		if(q.isSetColNr()){xml.setColNr(cell.getColNr());}
 		if(q.isSetRowNr()){xml.setRowNr(cell.getRowNr());}
 		

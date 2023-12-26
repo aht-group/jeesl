@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.io.report;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
@@ -84,9 +85,9 @@ public class XmlSheetFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		XlsSheet xml = new XlsSheet();
 		
-		if(q.isSetCode()){xml.setCode(sheet.getCode());}
-		if(q.isSetVisible()){xml.setVisible(sheet.isVisible());}
-		if(q.isSetPosition()){xml.setPosition(sheet.getPosition());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(sheet.getCode());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(sheet.isVisible());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(sheet.getPosition());}
 		
 		try {ReportXpath.getLangs(q);xml.getContent().add(xfLangs.getUtilsLangs(sheet.getName()));} catch (ExlpXpathNotFoundException e) {}
 		try {ReportXpath.getDescriptions(q);xml.getContent().add(xfDescriptions.create(sheet.getDescription()));} catch (ExlpXpathNotFoundException e) {}

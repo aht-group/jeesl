@@ -72,9 +72,9 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		XlsColumn xml = new XlsColumn();
 		
-		if(q.isSetCode()){xml.setCode(column.getCode());}
-		if(q.isSetVisible()){xml.setVisible(column.isVisible());}
-		if(q.isSetPosition()){xml.setPosition(column.getPosition());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(column.getCode());}
+		if(Objects.nonNull(q.isVisible())) {xml.setVisible(column.isVisible());}
+		if(Objects.nonNull(q.getPosition())) {xml.setPosition(column.getPosition());}
 		
 		if(q.isSetShowLabel()){xml.setShowLabel(column.getShowLabel());}
 		if(q.isSetShowWeb()){xml.setShowWeb(column.getShowWeb());}
