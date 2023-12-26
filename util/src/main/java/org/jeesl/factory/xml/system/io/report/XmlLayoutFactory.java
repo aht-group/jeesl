@@ -52,15 +52,15 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 	public XmlLayoutFactory(String localeCode, Layout q)
 	{
 		this.q=q;
-		if(q.isSetSize()){xfType = new XmlTypeFactory<>(localeCode,q.getSize().get(0).getType());}
 		if(Objects.nonNull(q.getStyles())) {xfStyles = new XmlStylesFactory<>(localeCode,q.getStyles());}
 		if(Objects.nonNull(q.getFont())) {xfFont = new XmlFontFactory<>(q.getFont());}
+		if(ObjectUtils.isNotEmpty(q.getSize())) {xfType = new XmlTypeFactory<>(localeCode,q.getSize().get(0).getType());}
 	}
 	
 	public Layout build(ROW row)
 	{
 		Layout xml = build();
-		if(q.isSetOffset()){xml.setOffset(XmlOffsetFactory.build(row.getOffsetRows(), row.getOffsetColumns()));}
+		if(Objects.nonNull(q.getOffset())) {xml.setOffset(XmlOffsetFactory.build(row.getOffsetRows(), row.getOffsetColumns()));}
 		return xml;
 	}
 	
@@ -76,7 +76,7 @@ public class XmlLayoutFactory<L extends JeeslLang,D extends JeeslDescription,
 						column.getColumSize()));
 			}
 		}
-		if(q.isSetStyles()){xml.setStyles(xfStyles.build(column));}
+		if(Objects.nonNull(q.getStyles())) {xml.setStyles(xfStyles.build(column));}
 		return xml;
 	}
 	

@@ -2,6 +2,7 @@ package org.jeesl.factory.ejb.io.report;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
@@ -113,8 +114,8 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 		
 	public ROW update(JeeslIoReportFacade<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION> fReport, ROW eRow, Row xRow) throws JeeslNotFoundException
 	{
-		CDT eDataType = null;if(xRow.isSetDataType()){eDataType = fReport.fByCode(cDataType, xRow.getDataType().getCode());}
-		TEMPLATE eTemplate = null;if(xRow.isSetTemplate()){eTemplate = fReport.fByCode(cTemplate, xRow.getTemplate().getCode());}
+		CDT eDataType = null; if(Objects.nonNull(xRow.getDataType())) {eDataType = fReport.fByCode(cDataType, xRow.getDataType().getCode());}
+		TEMPLATE eTemplate = null; if(Objects.nonNull(xRow.getTemplate())) {eTemplate = fReport.fByCode(cTemplate, xRow.getTemplate().getCode());}
 		
 		eRow.setType(fReport.fByCode(cRt, xRow.getType().getCode()));
 		eRow.setPosition(xRow.getPosition());
@@ -122,14 +123,14 @@ public class EjbIoReportRowFactory<L extends JeeslLang,D extends JeeslDescriptio
 		eRow.setDataType(eDataType);
 		eRow.setTemplate(eTemplate);
 		
-		if(xRow.isSetQueries())
+		if(Objects.nonNull(xRow.getQueries()))
 		{			
 			try{eRow.setQueryCell(ReportXpath.getQuery(JeeslReportQueryType.Row.cell.toString(), xRow.getQueries()).getValue());}
 			catch (ExlpXpathNotFoundException e) {eRow.setQueryCell(null);}
 		}
-		if(xRow.isSetLayout())
+		if(Objects.nonNull(xRow.getLayout()))
 		{
-			if(xRow.getLayout().isSetOffset())
+			if(Objects.nonNull(xRow.getLayout().getOffset()))
 			{
 				eRow.setOffsetRows(xRow.getLayout().getOffset().getRows());
 				eRow.setOffsetColumns(xRow.getLayout().getOffset().getColumns());

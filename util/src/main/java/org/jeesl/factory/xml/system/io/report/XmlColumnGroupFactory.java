@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
@@ -67,8 +68,8 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 		cColumn = new IoReportColumnComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP,COLUMN>().factory(IoReportColumnComparator.Type.position);
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetXlsColumn()){xfColumn = new XmlColumnFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,q.getXlsColumn().get(0));}
 		if(Objects.nonNull(q.getLayout())) {xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
+		if(ObjectUtils.isNotEmpty(q.getXlsColumn())) {xfColumn = new XmlColumnFactory<>(localeCode,q.getXlsColumn().get(0));}
 	}
 	
 	public ColumnGroup build(GROUP group)
@@ -79,16 +80,16 @@ public class XmlColumnGroupFactory <L extends JeeslLang,D extends JeeslDescripti
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(group.isVisible());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(group.getPosition());}
 		
-		if(q.isSetShowLabel()){xml.setShowLabel(group.getShowLabel());}
-		if(q.isSetShowWeb()){xml.setShowWeb(group.getShowWeb());}
+		if(Objects.nonNull(q.isShowLabel())) {xml.setShowLabel(group.getShowLabel());}
+		if(Objects.nonNull(q.isShowWeb())) {xml.setShowWeb(group.getShowWeb());}
 		
-		if(q.isSetQuery()){xml.setQuery(group.getQueryColumns());}
+		if(Objects.nonNull(q.getQuery())) {xml.setQuery(group.getQueryColumns());}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(group.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(group.getDescription()));}
 		if(Objects.nonNull(q.getLayout())) {xml.setLayout(xfLayout.build(group));}
 		
-		if(q.isSetXlsColumn())
+		if(ObjectUtils.isNotEmpty(q.getXlsColumn()))
 		{
 			Collections.sort(group.getColumns(),cColumn);
 			for(COLUMN column : group.getColumns())

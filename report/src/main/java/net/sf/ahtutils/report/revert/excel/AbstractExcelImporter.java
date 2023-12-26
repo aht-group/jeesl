@@ -16,6 +16,8 @@ import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 import net.sf.ahtutils.interfaces.controller.report.UtilsXlsDefinitionResolver;
 import net.sf.ahtutils.report.util.DataUtil;
 import net.sf.exlp.exception.ExlpXpathNotFoundException;
@@ -96,17 +98,19 @@ public abstract class AbstractExcelImporter <C extends Serializable, I extends I
 		{
 			String column = association.getColumn();
 			propertyRelations.put(column, association.getProperty());
-			if (association.isSetHandledBy())	{strategies.put(column, Class.forName(association.getHandledBy()));
-													if (association.isSetType())
-													{
-														if(association.getType().equals(ImportType.LIST))
-														{
-															isList.put(column, true);
-														}
-													}
-												}
-			if (association.isSetValidatedBy()) {validators.put(column, Class.forName(association.getValidatedBy()));}
-			if (association.isSetTargetClass()) {targetClasses.put(column, Class.forName(association.getTargetClass()));}
+			if(Objects.nonNull(association.getHandledBy()))
+			{
+				strategies.put(column, Class.forName(association.getHandledBy()));
+				if(Objects.nonNull(association.getType()))
+				{
+					if(association.getType().equals(ImportType.LIST))
+					{
+						isList.put(column, true);
+					}
+				}
+			}
+			if(Objects.nonNull(association.getValidatedBy())) {validators.put(column, Class.forName(association.getValidatedBy()));}
+			if(Objects.nonNull(association.getTargetClass())) {targetClasses.put(column, Class.forName(association.getTargetClass()));}
 		}
 	}
 	
@@ -135,8 +139,10 @@ public abstract class AbstractExcelImporter <C extends Serializable, I extends I
 		{
 			String column = association.getColumn();
 			propertyRelations.put(column, association.getProperty());
-			if (association.isSetHandledBy())	{strategies.put(column, Class.forName(association.getHandledBy()));
-													if (association.isSetType())
+			if(Objects.nonNull(association.getHandledBy()))
+			{
+				strategies.put(column, Class.forName(association.getHandledBy()));
+				if(Objects.nonNull(association.getType()))
 													{
 														if(association.getType().equals(ImportType.LIST))
 														{
@@ -144,8 +150,8 @@ public abstract class AbstractExcelImporter <C extends Serializable, I extends I
 														}
 													}
 												}
-			if (association.isSetValidatedBy()) {validators.put(column, Class.forName(association.getValidatedBy()));}
-			if (association.isSetTargetClass()) {targetClasses.put(column, Class.forName(association.getTargetClass()));}
+			if(Objects.nonNull(association.getValidatedBy())) {validators.put(column, Class.forName(association.getValidatedBy()));}
+			if(Objects.nonNull(association.getTargetClass())) {targetClasses.put(column, Class.forName(association.getTargetClass()));}
 		}
 	}
 	

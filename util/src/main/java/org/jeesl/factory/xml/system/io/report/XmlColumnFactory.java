@@ -77,15 +77,15 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(column.isVisible());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(column.getPosition());}
 		
-		if(q.isSetShowLabel()){xml.setShowLabel(column.getShowLabel());}
-		if(q.isSetShowWeb()){xml.setShowWeb(column.getShowWeb());}
+		if(Objects.nonNull(q.isShowLabel())) {xml.setShowLabel(column.getShowLabel());}
+		if(Objects.nonNull(q.isShowWeb())) {xml.setShowWeb(column.getShowWeb());}
 		
 		if(ObjectUtils.allNotNull(q.getDataType(),column.getDataType())) {xml.setDataType(xfDataType.build(column.getDataType()));}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(column.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(column.getDescription()));}
 		
-		if(q.isSetQueries()){xml.setQueries(queries(column));}
+		if(Objects.nonNull(q.getQueries())) {xml.setQueries(queries(column));}
 		if(Objects.nonNull(q.getLayout())) {xml.setLayout(xfLayout.build(column));}
 						
 		return xml;

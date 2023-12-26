@@ -6,9 +6,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.controller.db.updater.JeeslDbDescriptionUpdater;
 import org.jeesl.controller.db.updater.JeeslDbLangUpdater;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -126,9 +128,9 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 		eColumn.setVisible(xColumn.isVisible());
 		
 		eColumn.setShowLabel(xColumn.isShowLabel());
-		eColumn.setShowWeb(xColumn.isSetShowWeb() && xColumn.isShowWeb());
+		eColumn.setShowWeb(BooleanComparator.active(xColumn.isShowWeb()));
 		
-		if(xColumn.isSetQueries())
+		if(Objects.nonNull(xColumn.getQueries()))
 		{
 			try{eColumn.setQueryHeader(ReportXpath.getQuery(JeeslReportQueryType.Column.header.toString(), xColumn.getQueries()).getValue());}
 			catch (ExlpXpathNotFoundException e) {eColumn.setQueryHeader(null);}
@@ -139,9 +141,9 @@ public class EjbIoReportColumnFactory<L extends JeeslLang,D extends JeeslDescrip
 			try{eColumn.setQueryFooter(ReportXpath.getQuery(JeeslReportQueryType.Column.footer.toString(), xColumn.getQueries()).getValue());}
 			catch (ExlpXpathNotFoundException e) {eColumn.setQueryFooter(null);}
 		}
-		if(xColumn.isSetLayout())
+		if(Objects.nonNull(xColumn.getLayout()))
 		{
-			if(xColumn.getLayout().isSetSize())
+			if(ObjectUtils.isNotEmpty(xColumn.getLayout().getSize()))
 			{
 				try
 				{

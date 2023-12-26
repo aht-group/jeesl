@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import org.jeesl.controller.db.updater.JeeslDbDescriptionUpdater;
 import org.jeesl.controller.db.updater.JeeslDbLangUpdater;
+import org.jeesl.controller.util.comparator.primitive.BooleanComparator;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
 import org.jeesl.exception.ejb.JeeslLockingException;
 import org.jeesl.exception.ejb.JeeslNotFoundException;
@@ -117,11 +118,11 @@ public class EjbIoReportColumnGroupFactory<L extends JeeslLang,D extends JeeslDe
 		eGroup.setQueryColumns(xGroup.getQuery());
 		
 		eGroup.setShowLabel(xGroup.isShowLabel());
-		eGroup.setShowWeb(xGroup.isSetShowWeb() && xGroup.isShowWeb());
+		eGroup.setShowWeb(BooleanComparator.active(xGroup.isShowWeb()));
 		
 		if(Objects.nonNull(xGroup.getLayout()))
 		{
-			if(xGroup.getLayout().isSetStyles())
+			if(Objects.nonNull(xGroup.getLayout().getStyles()))
 			{
 				try {eGroup.setStyleHeader(fReport.fByCode(cStyle, ReportXpath.getStyle(JeeslReportLayout.Style.header, xGroup.getLayout().getStyles()).getCode()));}
 				catch (ExlpXpathNotFoundException e) {}

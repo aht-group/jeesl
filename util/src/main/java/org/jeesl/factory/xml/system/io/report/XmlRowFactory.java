@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.io.report;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.factory.xml.system.status.XmlDataTypeFactory;
@@ -67,10 +68,10 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 		this.q=q;
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetType()){xfType = new XmlTypeFactory<>(localeCode,q.getType());}
-		if(q.isSetDataType()){xfDataType = new XmlDataTypeFactory<>(localeCode,q.getDataType());}
+		if(Objects.nonNull(q.getType())) {xfType = new XmlTypeFactory<>(localeCode,q.getType());}
+		if(Objects.nonNull(q.getDataType())) {xfDataType = new XmlDataTypeFactory<>(localeCode,q.getDataType());}
 		if(Objects.nonNull(q.getLayout())) {xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
-		if(q.isSetTemplate()){xfTemplate = new XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(q.getTemplate());}
+		if(Objects.nonNull(q.getTemplate())) {xfTemplate = new XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(q.getTemplate());}
 	}
 	
 	public Row build(ROW row)
@@ -83,11 +84,11 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(row.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(row.getDescription()));}
-		if(q.isSetType()){xml.setType(xfType.build(row.getType()));}
-		if(q.isSetDataType() && row.getDataType()!=null){xml.setDataType(xfDataType.build(row.getDataType()));}
-		if(q.isSetTemplate() && row.getTemplate()!=null){xml.setTemplate(xfTemplate.build(row.getTemplate()));}
+		if(Objects.nonNull(q.getType())) {xml.setType(xfType.build(row.getType()));} 
+		if(ObjectUtils.allNotNull(q.getDataType(),row.getDataType())) {xml.setDataType(xfDataType.build(row.getDataType()));}
+		if(ObjectUtils.allNotNull(q.getTemplate(),row.getTemplate())) {xml.setTemplate(xfTemplate.build(row.getTemplate()));}
 		
-		if(q.isSetQueries()){xml.setQueries(queries(row));}
+		if(Objects.nonNull(q.getQueries())) {xml.setQueries(queries(row));}
 		if(Objects.nonNull(q.getLayout())) {xml.setLayout(xfLayout.build(row));}
 						
 		return xml;

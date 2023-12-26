@@ -1,5 +1,8 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
@@ -33,7 +36,6 @@ public class XmlStylesFactory <L extends JeeslLang,D extends JeeslDescription,
 								CELL extends JeeslReportCell<L,D,TEMPLATE>,
 								STYLE extends JeeslReportStyle<L,D>,CDT extends JeeslStatus<L,D,CDT>,
 								CW extends JeeslStatus<L,D,CW>,
-								
 								ENTITY extends EjbWithId,
 								ATTRIBUTE extends EjbWithId
 								>
@@ -47,14 +49,14 @@ public class XmlStylesFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlStylesFactory(String localeCode, Styles q)
 	{
 		this.q = q;
-		if(q.isSetStyle()){xfStyle = new XmlStyleFactory<>(localeCode,q.getStyle().get(0));}
+		if(ObjectUtils.isNotEmpty(q.getStyle())) {xfStyle = new XmlStyleFactory<>(localeCode,q.getStyle().get(0));}
 	}
 	
 	public Styles build(GROUP group)
 	{
 		Styles xml = build();
 		
-		if(q.isSetStyle())
+		if(ObjectUtils.isNotEmpty(q.getStyle()))
 		{
 			if(group.getStyleHeader()!=null){xml.getStyle().add(xfStyle.build(JeeslReportLayout.Style.header, group.getStyleHeader()));}
 		}
@@ -66,7 +68,7 @@ public class XmlStylesFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		Styles xml = build();
 		
-		if(q.isSetStyle())
+		if(ObjectUtils.isNotEmpty(q.getStyle()))
 		{
 			if(column.getStyleHeader()!=null){xml.getStyle().add(xfStyle.build(JeeslReportLayout.Style.header, column.getStyleHeader()));}
 			if(column.getStyleCell()!=null){xml.getStyle().add(xfStyle.build(JeeslReportLayout.Style.cell, column.getStyleCell()));}

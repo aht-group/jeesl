@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.system.io.report;
 
+import java.util.Objects;
+
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
@@ -52,14 +54,14 @@ public class XmlWorkbookFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlWorkbookFactory(String localeCode, XlsWorkbook q)
 	{
 		this.q=q;
-		if(q.isSetXlsSheets()){xfSheets = new XmlSheetsFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,q.getXlsSheets());}
+		if(Objects.nonNull(q.getXlsSheets())) {xfSheets = new XmlSheetsFactory<>(localeCode,q.getXlsSheets());}
 	}
 	
 	public XlsWorkbook build(WORKBOOK workbook)
 	{
 		XlsWorkbook xml = new XlsWorkbook();
 		
-		if(q.isSetXlsSheets()){xml.setXlsSheets(xfSheets.build(workbook));}
+		if(Objects.nonNull(q.getXlsSheets())) {xml.setXlsSheets(xfSheets.build(workbook));}
 						
 		return xml;
 	}

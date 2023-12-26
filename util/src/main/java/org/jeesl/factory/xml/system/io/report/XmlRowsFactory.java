@@ -3,6 +3,7 @@ package org.jeesl.factory.xml.system.io.report;
 import java.util.Collections;
 import java.util.Comparator;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
 import org.jeesl.interfaces.model.io.report.JeeslIoReportCategory;
 import org.jeesl.interfaces.model.io.report.row.JeeslReportRow;
@@ -60,14 +61,14 @@ public class XmlRowsFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		this.q=q;
 		cRow = new IoReportRowComparator<L,D,CATEGORY,REPORT,WORKBOOK,SHEET,GROUP,COLUMN,ROW>().factory(IoReportRowComparator.Type.position);
-		if(q.isSetRow()){xfRow = new XmlRowFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS,FILLING,TRANSFORMATION>(localeCode,q.getRow().get(0));}
+		if(ObjectUtils.isNotEmpty(q.getRow())) {xfRow = new XmlRowFactory<>(localeCode,q.getRow().get(0));}
 	}
 	
 	public Rows build(SHEET sheet)
 	{
 		Rows xml = new Rows();
 				
-		if(q.isSetRow())
+		if(ObjectUtils.isNotEmpty(q.getRow()))
 		{
 			Collections.sort(sheet.getRows(),cRow);
 			for(ROW row : sheet.getRows())

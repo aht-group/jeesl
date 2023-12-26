@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.factory.xml.system.lang.XmlDescriptionsFactory;
 import org.jeesl.factory.xml.system.lang.XmlLangsFactory;
 import org.jeesl.interfaces.model.io.report.JeeslIoReport;
@@ -62,9 +63,9 @@ public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlTemplateFactory(String localeCode, Template q)
 	{
 		this.q=q;
-		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(q.isSetCell())
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
+		if(ObjectUtils.isNotEmpty(q.getCell()))
 		{
 			comparatorCell = new IoReportCellComparator<TEMPLATE,CELL>().factory(IoReportCellComparator.Type.position);
 			xfCell = new XmlCellFactory<>(q.getCell().get(0));
@@ -82,7 +83,7 @@ public class XmlTemplateFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(template.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(template.getDescription()));}
 		
-		if(q.isSetCell())
+		if(ObjectUtils.isNotEmpty(q.getCell()))
 		{
 			Collections.sort(template.getCells(),comparatorCell);
 			for(CELL cell : template.getCells())

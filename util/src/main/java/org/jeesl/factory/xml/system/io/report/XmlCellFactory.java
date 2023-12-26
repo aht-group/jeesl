@@ -64,8 +64,8 @@ public class XmlCellFactory <L extends JeeslLang,D extends JeeslDescription,
 		
 		if(Objects.nonNull(q.getCode())) {xml.setCode(cell.getCode());}
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(cell.isVisible());}
-		if(q.isSetColNr()){xml.setColNr(cell.getColNr());}
-		if(q.isSetRowNr()){xml.setRowNr(cell.getRowNr());}
+		if(Objects.nonNull(q.getColNr())) {xml.setColNr(cell.getColNr());}
+		if(Objects.nonNull(q.getRowNr())) {xml.setRowNr(cell.getRowNr());}
 		
 		if(Objects.nonNull(q.getLangs())){xml.setLangs(xfLangs.getUtilsLangs(cell.getName()));}
 		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(cell.getDescription()));}

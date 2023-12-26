@@ -1,8 +1,10 @@
 package org.jeesl.controller.report;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.UUID;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.io.JeeslIoReportFacade;
 import org.jeesl.controller.db.updater.JeeslDbCodeEjbUpdater;
 import org.jeesl.exception.ejb.JeeslConstraintViolationException;
@@ -111,7 +113,7 @@ public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 	private void generateUuidsForCloning(Report xReport)
 	{
 		xReport.setCode(UUID.randomUUID().toString());
-		if(xReport.isSetXlsWorkbook() && xReport.getXlsWorkbook().isSetXlsSheets())
+		if(Objects.nonNull(xReport.getXlsWorkbook()) && ObjectUtils.isNotEmpty(xReport.getXlsWorkbook().getXlsSheets()))
 		{
 			for(XlsSheet xSheet : xReport.getXlsWorkbook().getXlsSheets().getXlsSheet())
 			{
@@ -165,7 +167,7 @@ public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 		eReport = fReport.save(eReport);
 		eReport = efReport.updateLD(fReport,eReport,xReport);
 				
-		if(xReport.isSetXlsWorkbook())
+		if(Objects.nonNull(xReport.getXlsWorkbook()))
 		{
 			importWorkbook(eReport,xReport.getXlsWorkbook());
 		}
@@ -192,7 +194,7 @@ public class JeeslReportUpdater <L extends JeeslLang,D extends JeeslDescription,
 		
 		JeeslDbCodeEjbUpdater<SHEET> dbUpdaterSheet = JeeslDbCodeEjbUpdater.createFactory(fbReport.getClassSheet());
 		dbUpdaterSheet.dbEjbs(eWorkbook.getSheets());
-		if(xWorkbook.isSetXlsSheets())
+		if(ObjectUtils.isNotEmpty(xWorkbook.getXlsSheets()))
 		{
 			for(XlsSheet xSheet : xWorkbook.getXlsSheets().getXlsSheet())
 			{

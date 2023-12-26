@@ -334,18 +334,18 @@ public class ExcelExporter
 				
 				Boolean relative  = true;
 				Boolean isJoin    = false;
-				if (columnDefinition.getXlsTransformation().isSetBeanProperty())
+				if(Objects.nonNull(columnDefinition.getXlsTransformation().getBeanProperty()))
 				{
 					expression = columnDefinition.getXlsTransformation().getBeanProperty();
 					if (expression.startsWith("string-join")) {logger.info("Polyfill for XPath 2 string-join activated for " +expression);isJoin = true;}
 				}
-				else if (columnDefinition.getXlsTransformation().isSetXPath())
+				else if(Objects.nonNull(columnDefinition.getXlsTransformation().getXPath()))
 				{
 					expression = columnDefinition.getXlsTransformation().getXPath();
 					relative   = false;
 				}
 				
-				if (sheetDefinition.isSetPrimaryKey())
+				if(Objects.nonNull(sheetDefinition.getPrimaryKey()))
 				{
 					String primaryKey = relativeContext.getValue(sheetDefinition.getPrimaryKey()).toString();
 					expression = expression.replace("@@@primaryKey@@@", primaryKey);
@@ -429,18 +429,19 @@ public class ExcelExporter
 		{
 			// Create styles
 			style.setDataFormat(createHelper.createDataFormat().getFormat("dd.MM.yyyy"));
-			if (columnDefinition.getXlsTransformation().isSetFormatPattern())
+			if(Objects.nonNull(columnDefinition.getXlsTransformation().getFormatPattern()))
 			{
 				style.setDataFormat(createHelper.createDataFormat().getFormat(columnDefinition.getXlsTransformation().getFormatPattern()));
 			}
 			style.setAlignment(HorizontalAlignment.CENTER);
 			style.setVerticalAlignment(VerticalAlignment.CENTER);
 		} 
-		else if (dataClass.equalsIgnoreCase("Integer"))
+		else if(dataClass.equalsIgnoreCase("Integer"))
 		{
 			// BuiltIn Style: 1, "0"
 			style.setDataFormat((short) 1);
-		} else if (columnDefinition.getXlsTransformation().isSetFormatPattern())
+		}
+		else if(Objects.nonNull(columnDefinition.getXlsTransformation().getFormatPattern()))
 		{
 			// Use custom style
 			style.setDataFormat(createHelper.createDataFormat().getFormat(columnDefinition.getXlsTransformation().getFormatPattern()));
@@ -496,7 +497,7 @@ public class ExcelExporter
 		for (int i = 0; i<columns.size(); i++)
             {
 				String formatPattern = "";
-				if (columns.get(i).getXlsTransformation().isSetFormatPattern())
+				if(Objects.nonNull(columns.get(i).getXlsTransformation().getFormatPattern()))
 				{
 					formatPattern = columns.get(i).getXlsTransformation().getFormatPattern();
 					logger.trace("Format Pattern " +formatPattern);
