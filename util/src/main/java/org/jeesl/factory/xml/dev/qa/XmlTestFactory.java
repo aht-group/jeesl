@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.dev.qa;
 
 import java.util.Objects;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.dev.JeeslQaFacade;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
@@ -68,7 +69,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 	public XmlTestFactory(Test q)
 	{
 		this.q=q;
-		if(q.isSetStatus()){xfDeveloperStatus = new XmlStatusFactory<>(null,q.getStatus());}
+		if(Objects.nonNull(q.getStatus())) {xfDeveloperStatus = new XmlStatusFactory<>(null,q.getStatus());}
 		if(q.isSetGroups()) {xfGroups = new XmlGroupsFactory<GROUP,QAT>(q.getGroups());}
 		if(q.isSetInfo()) {xfInfo = new XmlInfoFactory<L,D,QATI,QATC>(q.getInfo());}
 		if(q.isSetStatement()) {xfStatement = new XmlStatementFactory<L,D,QATS>(null,q.getStatement());}
@@ -96,8 +97,8 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		Test xml = new Test();
 		
-		if(q.isSetId()){xml.setId(test.getId());}
-		if(q.isSetCode()){xml.setCode(test.getCode());}
+		if(Objects.nonNull(q.getId())) {xml.setId(test.getId());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(test.getCode());}
 		if(q.isSetName()){xml.setName(test.getName());}
 		if(q.isSetVisible()){xml.setVisible(test.getVisible());}
 		if(q.isSetDuration())
@@ -113,7 +114,7 @@ public class XmlTestFactory<L extends JeeslLang, D extends JeeslDescription,
 		if(q.isSetExpected() && test.getExpectedResult()!=null){xml.setExpected(XmlExpectedFactory.build(test.getExpectedResult()));}
 		
 		if(q.isSetStatement() && test.getClientStatus()!=null){xml.setStatement(xfStatement.build(test.getClientStatus()));}
-		if(q.isSetStatus() && test.getDeveloperStatus()!=null){xml.setStatus(xfDeveloperStatus.build(test.getDeveloperStatus()));}
+		if(ObjectUtils.allNotNull(q.getStatus(),test.getDeveloperStatus())) {xml.setStatus(xfDeveloperStatus.build(test.getDeveloperStatus()));}
 		
 		if(q.isSetResults()) {xml.setResults(xfResults.build(test));}
 		

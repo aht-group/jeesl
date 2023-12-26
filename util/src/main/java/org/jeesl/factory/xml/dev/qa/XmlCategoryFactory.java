@@ -3,6 +3,10 @@ package org.jeesl.factory.xml.dev.qa;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
 import org.jeesl.model.xml.module.dev.qa.Category;
+
+import java.util.Objects;
+
+import org.apache.commons.lang3.ObjectUtils;
 import org.jeesl.api.facade.module.dev.JeeslQaFacade;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -58,9 +62,16 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 	private Category q;
 	
+	private XmlTestFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAT,QAR,QASH,QATD,QATI,QATC,QATS,QARS> xfTest;
+	
 	public XmlCategoryFactory(Category q)
 	{
 		this.q=q;
+		
+		if(ObjectUtils.isNotEmpty(q.getTest()))
+		{
+			xfTest = new XmlTestFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAT,QAR,QASH,QATD,QATI,QATC,QATS,QARS>(q.getTest().get(0));
+		}
 	}
 	
 	private Class<QAC> cQAC;
@@ -79,17 +90,16 @@ public class XmlCategoryFactory<L extends JeeslLang, D extends JeeslDescription,
 		
 		Category xml = new Category();
 		
-		if(q.isSetId()){xml.setId(category.getId());}
-		if(q.isSetCode()){xml.setCode(category.getCode());}
+		if(Objects.nonNull(q.getId())) {xml.setId(category.getId());}
+		if(Objects.nonNull(q.getCode())) {xml.setCode(category.getCode());}
 		if(q.isSetName()){xml.setName(category.getName());}
 		
-		if(q.isSetTest())
+		if(ObjectUtils.isNotEmpty(q.getTest()))
 		{
-			XmlTestFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAT,QAR,QASH,QATD,QATI,QATC,QATS,QARS> f = new XmlTestFactory<L,D,C,R,V,U,A,AT,USER,STAFF,GROUP,QA,QASD,QASS,QAT,QAR,QASH,QATD,QATI,QATC,QATS,QARS>(q.getTest().get(0));
-			f.lazyLoader(fQa, cQAT);
+			xfTest.lazyLoader(fQa, cQAT);
 			for(QAT test : category.getTests())
 			{
-				xml.getTest().add(f.build(test));
+				xml.getTest().add(xfTest.build(test));
 			}
 		}
 		

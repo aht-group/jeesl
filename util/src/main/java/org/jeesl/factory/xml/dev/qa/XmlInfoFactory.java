@@ -1,5 +1,7 @@
 package org.jeesl.factory.xml.dev.qa;
 
+import java.util.Objects;
+
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
@@ -23,14 +25,14 @@ public class XmlInfoFactory<L extends JeeslLang, D extends JeeslDescription,
 	public XmlInfoFactory(Info q)
 	{
 		this.q=q;
-		if(q.isSetStatus()){xfCondition = new XmlStatusFactory<>(null,q.getStatus());}
+		if(Objects.nonNull(q.getStatus())) {xfCondition = new XmlStatusFactory<>(null,q.getStatus());}
 	}
 	
 	public Info build(QATI info)
 	{
 		Info xml = new Info();
 	
-		if(q.isSetStatus()){xml.setStatus(xfCondition.build(info.getCondition()));}
+		if(Objects.nonNull(q.getStatus())) {xml.setStatus(xfCondition.build(info.getCondition()));}
 		
 		if(q.isSetComment())
 		{
