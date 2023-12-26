@@ -63,9 +63,9 @@ public class XmlColumnFactory <L extends JeeslLang,D extends JeeslDescription,
 	public XmlColumnFactory(String localeCode, XlsColumn q)
 	{
 		this.q=q;
-		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
-		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
-		if(Objects.nonNull(q.getDataType())) {xfDataType = new XmlDataTypeFactory<L,D,CDT>(localeCode,q.getDataType());}
+		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<>(q.getDescriptions());}
+		if(Objects.nonNull(q.getDataType())) {xfDataType = new XmlDataTypeFactory<>(localeCode,q.getDataType());}
 		if(Objects.nonNull(q.getLayout())) {xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
 	}
 	

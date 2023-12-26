@@ -68,7 +68,7 @@ public class XmlRowFactory <L extends JeeslLang,D extends JeeslDescription,
 		if(Objects.nonNull(q.getLangs())){xfLangs = new XmlLangsFactory<L>(q.getLangs());}
 		if(Objects.nonNull(q.getDescriptions())){xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 		if(q.isSetType()){xfType = new XmlTypeFactory<>(localeCode,q.getType());}
-		if(q.isSetDataType()){xfDataType = new XmlDataTypeFactory<L,D,CDT>(localeCode,q.getDataType());}
+		if(q.isSetDataType()){xfDataType = new XmlDataTypeFactory<>(localeCode,q.getDataType());}
 		if(Objects.nonNull(q.getLayout())) {xfLayout = new XmlLayoutFactory<>(localeCode,q.getLayout());}
 		if(q.isSetTemplate()){xfTemplate = new XmlTemplateFactory<L,D,CATEGORY,REPORT,IMPLEMENTATION,WORKBOOK,SHEET,GROUP,COLUMN,ROW,TEMPLATE,CELL,STYLE,CDT,CW,RT,ENTITY,ATTRIBUTE,TL,TLS>(q.getTemplate());}
 	}
