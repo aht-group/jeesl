@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.text.EjbWithEmail;
-import org.jeesl.model.xml.jeesl.QuerySecurity;
+import org.jeesl.model.xml.io.db.query.QuerySecurity;
 import org.jeesl.model.xml.system.security.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

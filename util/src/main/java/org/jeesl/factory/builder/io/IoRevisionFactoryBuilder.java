@@ -25,7 +25,7 @@ import org.jeesl.interfaces.model.io.label.revision.core.JeeslRevisionViewMappin
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.jeesl.model.xml.jeesl.QueryRevision;
+import org.jeesl.model.xml.io.db.query.QueryRevision;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

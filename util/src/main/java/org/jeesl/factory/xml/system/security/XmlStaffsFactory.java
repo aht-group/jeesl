@@ -12,7 +12,7 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
-import org.jeesl.model.xml.jeesl.QuerySecurity;
+import org.jeesl.model.xml.io.db.query.QuerySecurity;
 import org.jeesl.model.xml.system.security.Staff;
 import org.jeesl.model.xml.system.security.Staffs;
 import org.slf4j.Logger;

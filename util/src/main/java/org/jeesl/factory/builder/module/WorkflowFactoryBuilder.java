@@ -47,7 +47,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.with.primitive.number.EjbWithId;
-import org.jeesl.model.xml.jeesl.QueryWf;
+import org.jeesl.model.xml.io.db.query.QueryWf;
 import org.jeesl.util.query.xml.module.XmlWorkflowQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

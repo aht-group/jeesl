@@ -30,7 +30,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.tenant.JeeslTenantRealm;
 import org.jeesl.model.json.module.attribute.JsonAttributeData;
-import org.jeesl.model.xml.jeesl.QueryAttribute;
+import org.jeesl.model.xml.io.db.query.QueryAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

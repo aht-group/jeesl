@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.jeesl;
+package org.jeesl.model.xml.io.db.query;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.jeesl.model.xml.module.ts.Transaction;
+import org.jeesl.model.xml.module.calendar.Item;
 
 
 /**
@@ -21,7 +21,7 @@ import org.jeesl.model.xml.module.ts.Transaction;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element ref="{http://www.jeesl.org/timeseries}transaction"/&gt;
+ *         &lt;element ref="{http://www.jeesl.org/calendar}item"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="localeCode" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
@@ -33,45 +33,45 @@ import org.jeesl.model.xml.module.ts.Transaction;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "transaction"
+    "item"
 })
-@XmlRootElement(name = "queryTs")
-public class QueryTs
+@XmlRootElement(name = "queryCalendar")
+public class QueryCalendar
     implements Serializable
 {
 
     private final static long serialVersionUID = 1L;
-    @XmlElement(namespace = "http://www.jeesl.org/timeseries", required = true)
-    protected Transaction transaction;
+    @XmlElement(namespace = "http://www.jeesl.org/calendar", required = true)
+    protected Item item;
     @XmlAttribute(name = "localeCode")
     protected String localeCode;
 
     /**
-     * Gets the value of the transaction property.
+     * Gets the value of the item property.
      * 
      * @return
      *     possible object is
-     *     {@link Transaction }
+     *     {@link Item }
      *     
      */
-    public Transaction getTransaction() {
-        return transaction;
+    public Item getItem() {
+        return item;
     }
 
     /**
-     * Sets the value of the transaction property.
+     * Sets the value of the item property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Transaction }
+     *     {@link Item }
      *     
      */
-    public void setTransaction(Transaction value) {
-        this.transaction = value;
+    public void setItem(Item value) {
+        this.item = value;
     }
 
-    public boolean isSetTransaction() {
-        return (this.transaction!= null);
+    public boolean isSetItem() {
+        return (this.item!= null);
     }
 
     /**

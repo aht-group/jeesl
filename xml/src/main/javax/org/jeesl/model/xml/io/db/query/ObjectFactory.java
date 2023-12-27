@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.jeesl;
+package org.jeesl.model.xml.io.db.query;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

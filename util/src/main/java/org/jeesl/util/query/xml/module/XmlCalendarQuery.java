@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jeesl.factory.xml.system.status.XmlTypeFactory;
-import org.jeesl.model.xml.jeesl.QueryCalendar;
+import org.jeesl.model.xml.io.db.query.QueryCalendar;
 import org.jeesl.model.xml.module.calendar.Item;
 
 public class XmlCalendarQuery

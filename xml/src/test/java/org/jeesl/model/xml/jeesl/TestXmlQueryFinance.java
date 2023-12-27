@@ -2,6 +2,7 @@ package org.jeesl.model.xml.jeesl;
 
 import org.jeesl.JeeslXmlTestBootstrap;
 import org.jeesl.model.xml.domain.finance.TestXmlFinance;
+import org.jeesl.model.xml.io.db.query.QueryFinance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

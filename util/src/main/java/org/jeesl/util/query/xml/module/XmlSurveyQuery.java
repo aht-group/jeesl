@@ -17,7 +17,7 @@ import org.jeesl.factory.xml.system.lang.XmlDescriptionFactory;
 import org.jeesl.factory.xml.system.status.XmlCategoryFactory;
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.factory.xml.system.util.text.XmlRemarkFactory;
-import org.jeesl.model.xml.jeesl.QuerySurvey;
+import org.jeesl.model.xml.io.db.query.QuerySurvey;
 import org.jeesl.model.xml.module.survey.Answer;
 import org.jeesl.model.xml.module.survey.Cell;
 import org.jeesl.model.xml.module.survey.Column;

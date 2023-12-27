@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.jeesl.model.xml.io.attribute.Attribute;
 import org.jeesl.model.xml.io.attribute.Attributes;
-import org.jeesl.model.xml.jeesl.QueryAttribute;
+import org.jeesl.model.xml.io.db.query.QueryAttribute;
 
 public class XmlAttributeQuery
 {

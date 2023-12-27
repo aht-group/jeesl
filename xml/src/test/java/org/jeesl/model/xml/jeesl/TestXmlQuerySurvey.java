@@ -1,6 +1,7 @@
 package org.jeesl.model.xml.jeesl;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.db.query.QuerySurvey;
 import org.jeesl.model.xml.module.survey.TestXmlAnswer;
 import org.jeesl.model.xml.module.survey.TestXmlData;
 import org.jeesl.model.xml.module.survey.TestXmlTemplate;

@@ -21,7 +21,7 @@ import org.jeesl.interfaces.model.module.workflow.transition.JeeslWorkflowTransi
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
-import org.jeesl.model.xml.jeesl.QueryWf;
+import org.jeesl.model.xml.io.db.query.QueryWf;
 import org.jeesl.model.xml.module.workflow.Permissions;
 import org.jeesl.model.xml.module.workflow.Stage;
 import org.jeesl.util.comparator.ejb.PositionComparator;

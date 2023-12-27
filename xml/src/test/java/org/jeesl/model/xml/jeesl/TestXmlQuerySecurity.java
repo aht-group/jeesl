@@ -1,6 +1,7 @@
 package org.jeesl.model.xml.jeesl;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.db.query.QuerySecurity;
 import org.jeesl.model.xml.system.security.TestXmlRole;
 import org.jeesl.model.xml.system.security.TestXmlStaff;
 import org.jeesl.model.xml.system.security.TestXmlUser;

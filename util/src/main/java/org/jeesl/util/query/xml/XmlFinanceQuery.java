@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.jeesl.factory.xml.domain.finance.XmlCurrencyFactory;
 import org.jeesl.factory.xml.domain.finance.XmlFinanceFactory;
-import org.jeesl.model.xml.jeesl.QueryFinance;
+import org.jeesl.model.xml.io.db.query.QueryFinance;
 import org.jeesl.model.xml.module.finance.Currency;
 import org.jeesl.model.xml.module.finance.Finance;
 
