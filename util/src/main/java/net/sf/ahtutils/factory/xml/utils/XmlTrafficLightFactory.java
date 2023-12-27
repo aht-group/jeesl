@@ -25,32 +25,30 @@ public class XmlTrafficLightFactory<L extends JeeslLang, D extends JeeslDescript
 	private TrafficLight q;
 	
 	private XmlLangsFactory<L> xfLangs;
+	private XmlDescriptionsFactory<D> xfDescriptions;
 	private XmlScopeFactory<L,D,SCOPE> xfScope;
 	
 	public XmlTrafficLightFactory(Query query){this(query.getTrafficLight());}
 	public XmlTrafficLightFactory(TrafficLight q)
 	{
 		this.q=q;
-		if(q.isSetScope()) {xfScope = new XmlScopeFactory<>(q.getScope());}
+		if(Objects.nonNull(q.getScope())) {xfScope = new XmlScopeFactory<>(q.getScope());}
 		if(Objects.nonNull(q.getLangs())) {xfLangs = new XmlLangsFactory<L>(q.getLangs());}
+		if(Objects.nonNull(q.getDescriptions())) {xfDescriptions = new XmlDescriptionsFactory<D>(q.getDescriptions());}
 	}
 	
 	public TrafficLight build(LIGHT ejb) throws JeeslXmlStructureException
 	{
 		TrafficLight xml = new TrafficLight();
 		
-		if(q.isSetId()){xml.setId(ejb.getId());}
-		if(q.isSetThreshold()){xml.setThreshold(ejb.getThreshold());}
-		if(q.isSetColorText()){xml.setColorText(ejb.getColorText());}
-		if(q.isSetColorBackground()){xml.setColorBackground(ejb.getColorBackground());}
+		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
+		if(Objects.nonNull(q.getThreshold())) {xml.setThreshold(ejb.getThreshold());}
+		if(Objects.nonNull(q.getColorText())) {xml.setColorText(ejb.getColorText());}
+		if(Objects.nonNull(q.getColorBackground())) {xml.setColorBackground(ejb.getColorBackground());}
 		
 		if(Objects.nonNull(q.getLangs())) {xml.setLangs(xfLangs.getUtilsLangs(ejb.getName()));}
-		if(Objects.nonNull(q.getDescriptions()))
-		{
-			XmlDescriptionsFactory<D> f = new XmlDescriptionsFactory<D>(q.getDescriptions());
-			xml.setDescriptions(f.create(ejb.getDescription()));
-		}
-		if(q.isSetScope()){xml.setScope(xfScope.build(ejb.getScope()));}
+		if(Objects.nonNull(q.getDescriptions())){xml.setDescriptions(xfDescriptions.create(ejb.getDescription()));}
+		if(Objects.nonNull(q.getScope())){xml.setScope(xfScope.build(ejb.getScope()));}
 		
 		return xml;
 	}

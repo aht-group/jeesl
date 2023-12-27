@@ -72,12 +72,4 @@ public class TrafficLights
         return this.trafficLight;
     }
 
-    public boolean isSetTrafficLight() {
-        return ((this.trafficLight!= null)&&(!this.trafficLight.isEmpty()));
-    }
-
-    public void unsetTrafficLight() {
-        this.trafficLight = null;
-    }
-
 }

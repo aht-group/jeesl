@@ -54,7 +54,7 @@ public class Criteria
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -66,16 +66,8 @@ public class Criteria
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -102,10 +94,6 @@ public class Criteria
         this.code = value;
     }
 
-    public boolean isSetCode() {
-        return (this.code!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -130,10 +118,6 @@ public class Criteria
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the value property.
      * 
@@ -156,10 +140,6 @@ public class Criteria
      */
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public boolean isSetValue() {
-        return (this.value!= null);
     }
 
 }

@@ -107,12 +107,6 @@
 		</jxb:schemaBindings>
     </jxb:bindings>
     
-	<jxb:bindings schemaLocation="jeesl/system/security.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.system.security"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
-    
 	<jxb:bindings schemaLocation="jeesl/module/bb.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.bb"/>
@@ -156,6 +150,17 @@
 	<jxb:bindings schemaLocation="../xsd/jeesl/module/workflow.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.workflow"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+	<jxb:bindings schemaLocation="jeesl/system/security.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.system.security"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../xsd/aht/utils.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.system.util"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     

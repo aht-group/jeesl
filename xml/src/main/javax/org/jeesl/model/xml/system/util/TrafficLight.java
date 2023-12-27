@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Descriptions;
 import org.jeesl.model.xml.io.locale.status.Langs;
 import org.jeesl.model.xml.io.locale.status.Scope;
@@ -90,10 +89,6 @@ public class TrafficLight
         this.langs = value;
     }
 
-    public boolean isSetLangs() {
-        return (this.langs!= null);
-    }
-
     /**
      * Gets the value of the descriptions property.
      * 
@@ -116,10 +111,6 @@ public class TrafficLight
      */
     public void setDescriptions(Descriptions value) {
         this.descriptions = value;
-    }
-
-    public boolean isSetDescriptions() {
-        return (this.descriptions!= null);
     }
 
     /**
@@ -146,10 +137,6 @@ public class TrafficLight
         this.scope = value;
     }
 
-    public boolean isSetScope() {
-        return (this.scope!= null);
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -158,7 +145,7 @@ public class TrafficLight
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -170,16 +157,8 @@ public class TrafficLight
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -190,7 +169,7 @@ public class TrafficLight
      *     {@link Double }
      *     
      */
-    public double getThreshold() {
+    public Double getThreshold() {
         return threshold;
     }
 
@@ -202,16 +181,8 @@ public class TrafficLight
      *     {@link Double }
      *     
      */
-    public void setThreshold(double value) {
+    public void setThreshold(Double value) {
         this.threshold = value;
-    }
-
-    public boolean isSetThreshold() {
-        return (this.threshold!= null);
-    }
-
-    public void unsetThreshold() {
-        this.threshold = null;
     }
 
     /**
@@ -238,10 +209,6 @@ public class TrafficLight
         this.colorText = value;
     }
 
-    public boolean isSetColorText() {
-        return (this.colorText!= null);
-    }
-
     /**
      * Gets the value of the colorBackground property.
      * 
@@ -264,10 +231,6 @@ public class TrafficLight
      */
     public void setColorBackground(String value) {
         this.colorBackground = value;
-    }
-
-    public boolean isSetColorBackground() {
-        return (this.colorBackground!= null);
     }
 
 }

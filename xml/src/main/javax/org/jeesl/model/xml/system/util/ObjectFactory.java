@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRegistry;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the net.sf.ahtutils.xml.utils package. 
+ * generated in the org.jeesl.model.xml.system.util package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -23,26 +23,10 @@ public class ObjectFactory {
 
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: net.sf.ahtutils.xml.utils
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.jeesl.model.xml.system.util
      * 
      */
     public ObjectFactory() {
-    }
-
-    /**
-     * Create an instance of {@link TrafficLight }
-     * 
-     */
-    public TrafficLight createTrafficLight() {
-        return new TrafficLight();
-    }
-
-    /**
-     * Create an instance of {@link TrafficLights }
-     * 
-     */
-    public TrafficLights createTrafficLights() {
-        return new TrafficLights();
     }
 
     /**
@@ -67,6 +51,22 @@ public class ObjectFactory {
      */
     public Criteria createCriteria() {
         return new Criteria();
+    }
+
+    /**
+     * Create an instance of {@link TrafficLights }
+     * 
+     */
+    public TrafficLights createTrafficLights() {
+        return new TrafficLights();
+    }
+
+    /**
+     * Create an instance of {@link TrafficLight }
+     * 
+     */
+    public TrafficLight createTrafficLight() {
+        return new TrafficLight();
     }
 
 }

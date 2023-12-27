@@ -69,10 +69,6 @@ public class Property
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the key property.
      * 
@@ -97,10 +93,6 @@ public class Property
         this.key = value;
     }
 
-    public boolean isSetKey() {
-        return (this.key!= null);
-    }
-
     /**
      * Gets the value of the frozen property.
      * 
@@ -109,7 +101,7 @@ public class Property
      *     {@link Boolean }
      *     
      */
-    public boolean isFrozen() {
+    public Boolean isFrozen() {
         return frozen;
     }
 
@@ -121,16 +113,8 @@ public class Property
      *     {@link Boolean }
      *     
      */
-    public void setFrozen(boolean value) {
+    public void setFrozen(Boolean value) {
         this.frozen = value;
-    }
-
-    public boolean isSetFrozen() {
-        return (this.frozen!= null);
-    }
-
-    public void unsetFrozen() {
-        this.frozen = null;
     }
 
 }

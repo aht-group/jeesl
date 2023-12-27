@@ -77,14 +77,6 @@ public class Utils
         return this.category;
     }
 
-    public boolean isSetCategory() {
-        return ((this.category!= null)&&(!this.category.isEmpty()));
-    }
-
-    public void unsetCategory() {
-        this.category = null;
-    }
-
     /**
      * Gets the value of the property property.
      * 
@@ -112,14 +104,6 @@ public class Utils
             property = new ArrayList<Property>();
         }
         return this.property;
-    }
-
-    public boolean isSetProperty() {
-        return ((this.property!= null)&&(!this.property.isEmpty()));
-    }
-
-    public void unsetProperty() {
-        this.property = null;
     }
 
 }

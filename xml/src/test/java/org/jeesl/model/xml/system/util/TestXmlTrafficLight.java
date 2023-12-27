@@ -17,7 +17,7 @@ public class TestXmlTrafficLight extends AbstractXmlUtilsTest<TrafficLight>
     public TrafficLight build(boolean withChilds)
     {
     	TrafficLight xml = new TrafficLight();
-        xml.setId(123);
+        xml.setId(123l);
         xml.setColorText("ff00ff");
         xml.setColorBackground("00ff00");
     	

@@ -14,7 +14,7 @@ public class TestXmlCiteria extends AbstractXmlUtilsTest<Criteria>
     public Criteria build(boolean withChilds)
     {
     	Criteria xml = new Criteria();
-        xml.setId(123);
+        xml.setId(123l);
         xml.setCode("myCode");
         xml.setType("Boolean");
         xml.setValue("xx");

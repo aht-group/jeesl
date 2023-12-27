@@ -45,8 +45,8 @@ public class UtilsQuery
 	public static TrafficLight exTrafficLight()
 	{		
 		TrafficLight xml = new TrafficLight();
-		xml.setId(0);
-		xml.setThreshold(0);
+		xml.setId(0l);
+		xml.setThreshold(0d);
 		xml.setScope(XmlScopeFactory.build(""));
 		
 		xml.setColorBackground("");
