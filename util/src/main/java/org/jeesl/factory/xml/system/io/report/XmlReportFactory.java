@@ -76,7 +76,7 @@ public class XmlReportFactory <L extends JeeslLang,D extends JeeslDescription,
 	{
 		Report xml = build();
 		
-//		if(q.isSetId()){xml.setId(ejb.getId());}
+//		if(Objects.nonNull(q.getId())) {xml.setId(ejb.getId());}
 		if(Objects.nonNull(q.getCode())) {xml.setCode(report.getCode());}
 		if(Objects.nonNull(q.isVisible())) {xml.setVisible(report.isVisible());}
 		if(Objects.nonNull(q.getPosition())) {xml.setPosition(report.getPosition());}

@@ -22,7 +22,7 @@ public class XmlSimpleUserFactory<USER extends JeeslSimpleUser>
 	{
 		User xml = new User();
 		
-//		if(q.isSetId()){xml.setId(user.getId());}
+//		if(Objects.nonNull(q.getId())) {xml.setId(user.getId());}
 		if(Objects.nonNull(q.getFirstName())) {xml.setFirstName(user.getFirstName());}
 		if(Objects.nonNull(q.getLastName())) {xml.setLastName(user.getLastName());}
 		if(Objects.nonNull(q.getEmail())) {xml.setEmail(user.getEmail());}
