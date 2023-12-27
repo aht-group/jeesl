@@ -1,9 +1,8 @@
 package net.sf.ahtutils.factory.xml.utils;
 
+import org.jeesl.model.xml.system.util.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.utils.Criteria;
 
 public class XmlCriteriaFactory
 {

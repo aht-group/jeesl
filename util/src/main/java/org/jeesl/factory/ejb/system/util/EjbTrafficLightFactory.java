@@ -7,10 +7,9 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLight;
 import org.jeesl.interfaces.model.system.util.JeeslTrafficLightScope;
+import org.jeesl.model.xml.system.util.TrafficLight;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.utils.TrafficLight;
 
 public class EjbTrafficLightFactory<L extends JeeslLang,D extends JeeslDescription,
 									SCOPE extends JeeslTrafficLightScope<L,D,SCOPE,?>,

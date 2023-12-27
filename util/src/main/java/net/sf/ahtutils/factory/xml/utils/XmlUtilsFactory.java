@@ -1,7 +1,6 @@
 package net.sf.ahtutils.factory.xml.utils;
 
-import net.sf.ahtutils.xml.utils.Utils;
-
+import org.jeesl.model.xml.system.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

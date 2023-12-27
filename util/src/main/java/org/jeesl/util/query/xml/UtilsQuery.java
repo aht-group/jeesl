@@ -4,11 +4,11 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.jeesl.factory.xml.system.status.XmlScopeFactory;
+import org.jeesl.model.xml.system.util.TrafficLight;
+import org.jeesl.model.xml.system.util.TrafficLights;
 
 import net.sf.ahtutils.factory.xml.utils.XmlTrafficLightsFactory;
 import net.sf.ahtutils.xml.aht.Query;
-import net.sf.ahtutils.xml.utils.TrafficLight;
-import net.sf.ahtutils.xml.utils.TrafficLights;
 
 public class UtilsQuery
 {

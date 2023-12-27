@@ -4,8 +4,6 @@ import org.jeesl.JeeslXmlTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.utils.Criteria;
-
 public class TestXmlCiteria extends AbstractXmlUtilsTest<Criteria>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlCiteria.class);

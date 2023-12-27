@@ -20,8 +20,8 @@ import org.slf4j.LoggerFactory;
 import net.sf.ahtutils.factory.xml.utils.XmlTrafficLightFactory;
 import net.sf.ahtutils.factory.xml.utils.XmlTrafficLightsFactory;
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
-import net.sf.ahtutils.xml.utils.TrafficLight;
-import net.sf.ahtutils.xml.utils.TrafficLights;
+import org.jeesl.model.xml.system.util.TrafficLight;
+import org.jeesl.model.xml.system.util.TrafficLights;
 
 public class TrafficLightRestService <L extends JeeslLang, D extends JeeslDescription,
 										SCOPE extends JeeslTrafficLightScope<L,D,SCOPE,?>,

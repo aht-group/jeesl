@@ -7,7 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
-import net.sf.ahtutils.xml.utils.TrafficLights;
+import org.jeesl.model.xml.system.util.TrafficLights;
 
 public interface JeeslTrafficLightRestImport
 {

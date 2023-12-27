@@ -9,9 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import net.sf.ahtutils.xml.utils.TrafficLight;
-import net.sf.ahtutils.xml.utils.TrafficLights;
-
 import org.jeesl.model.xml.io.graphic.Graphic;
 import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.io.locale.status.Langs;
@@ -28,6 +25,8 @@ import org.jeesl.model.xml.module.survey.Templates;
 import org.jeesl.model.xml.system.security.Category;
 import org.jeesl.model.xml.system.security.Role;
 import org.jeesl.model.xml.system.security.Staff;
+import org.jeesl.model.xml.system.util.TrafficLight;
+import org.jeesl.model.xml.system.util.TrafficLights;
 
 
 /**

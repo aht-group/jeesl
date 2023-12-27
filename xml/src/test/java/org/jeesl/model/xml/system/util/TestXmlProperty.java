@@ -4,8 +4,6 @@ import org.jeesl.JeeslXmlTestBootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.utils.Property;
-
 public class TestXmlProperty extends AbstractXmlUtilsTest<Property>
 {
 	final static Logger logger = LoggerFactory.getLogger(TestXmlProperty.class);
