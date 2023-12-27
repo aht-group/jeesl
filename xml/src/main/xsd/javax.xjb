@@ -48,11 +48,7 @@
         </jxb:schemaBindings>
     </jxb:bindings>
     
-	<jxb:bindings schemaLocation="jeesl/io/ssi.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.io.ssi"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
+
 
 	<jxb:bindings schemaLocation="jeesl/status.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
@@ -88,6 +84,11 @@
     <jxb:bindings schemaLocation="jeesl/io/revision.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.label"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="jeesl/io/ssi.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.ssi"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 	<jxb:bindings schemaLocation="../xsd/jeesl/io/template.xsd" node="/xsd:schema">
