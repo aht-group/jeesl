@@ -13,7 +13,7 @@ import org.jeesl.model.xml.io.report.Styles;
 import org.jeesl.model.xml.io.report.Templates;
 import org.jeesl.model.xml.xsd.Container;
 
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public interface JeeslIoReportRestImport
 {

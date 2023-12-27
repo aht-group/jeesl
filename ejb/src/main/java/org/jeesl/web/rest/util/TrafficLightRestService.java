@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.factory.xml.utils.XmlTrafficLightFactory;
 import net.sf.ahtutils.factory.xml.utils.XmlTrafficLightsFactory;
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import net.sf.ahtutils.xml.utils.TrafficLight;
 import net.sf.ahtutils.xml.utils.TrafficLights;
 

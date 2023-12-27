@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.xml.aht.Aht;
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class JeeslDbStatusUpdater <L extends JeeslLang, D extends JeeslDescription, 

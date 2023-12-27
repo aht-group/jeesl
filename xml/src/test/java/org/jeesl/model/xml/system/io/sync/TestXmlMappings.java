@@ -1,10 +1,9 @@
 package org.jeesl.model.xml.system.io.sync;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.ssi.sync.Mappings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.sync.Mappings;
 
 public class TestXmlMappings extends AbstractXmlSyncTest<Mappings>
 {

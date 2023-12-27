@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.sync;
+package org.jeesl.model.xml.io.ssi.sync;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

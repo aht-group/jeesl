@@ -1,11 +1,10 @@
 package org.jeesl.model.xml.system.io.sync;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.ssi.sync.Sync;
 import org.jeesl.model.xml.system.status.TestXmlStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.sync.Sync;
 
 public class TestXmlSync extends AbstractXmlSyncTest<Sync>
 {

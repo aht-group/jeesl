@@ -1,6 +1,6 @@
 package org.jeesl.factory.xml.system.io.sync;
 
-import net.sf.ahtutils.xml.sync.Result;
+import org.jeesl.model.xml.io.ssi.sync.Result;
 
 import org.jeesl.factory.xml.system.status.XmlStatusFactory;
 import org.jeesl.interfaces.model.io.db.JeeslSync;

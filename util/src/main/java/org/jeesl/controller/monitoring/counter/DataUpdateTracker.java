@@ -15,12 +15,12 @@ import org.jeesl.model.json.io.ssi.update.JsonSsiMessage;
 import org.jeesl.model.json.io.ssi.update.JsonSsiStatistic;
 import org.jeesl.model.json.system.job.JsonSystemJob;
 import org.jeesl.model.xml.io.locale.status.Type;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.Mapper;
+import org.jeesl.model.xml.io.ssi.sync.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.sync.DataUpdate;
-import net.sf.ahtutils.xml.sync.Mapper;
-import net.sf.ahtutils.xml.sync.Result;
 import net.sf.exlp.util.DateUtil;
 
 public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.DataUpdateTracker

@@ -1,6 +1,6 @@
 package org.jeesl.factory.txt.system.sync;
 
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 import java.util.Objects;
 

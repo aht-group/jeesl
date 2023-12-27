@@ -57,7 +57,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.interfaces.rest.security.UtilsSecurityViewImport;
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public class SecurityRestService <L extends JeeslLang,D extends JeeslDescription,
 								C extends JeeslSecurityCategory<L,D>,

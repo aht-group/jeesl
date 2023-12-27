@@ -12,9 +12,9 @@ public class XmlExceptionFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlExceptionFactory.class);
 			
-	public static net.sf.ahtutils.xml.sync.Exception build(Throwable e)
+	public static org.jeesl.model.xml.io.ssi.sync.Exception build(Throwable e)
 	{
-		net.sf.ahtutils.xml.sync.Exception xml = new net.sf.ahtutils.xml.sync.Exception();
+		org.jeesl.model.xml.io.ssi.sync.Exception xml = new org.jeesl.model.xml.io.ssi.sync.Exception();
 		xml.setType(e.getClass().getName());
 		xml.setMessage(e.getMessage());
 		xml.setRecord(DateUtil.toXmlGc(new Date()));
@@ -36,7 +36,7 @@ public class XmlExceptionFactory
 		return xml;
 	}
 	
-	private static void removeRecursiveDates(net.sf.ahtutils.xml.sync.Exception xml)
+	private static void removeRecursiveDates(org.jeesl.model.xml.io.ssi.sync.Exception xml)
 	{
 		xml.setRecord(null);
 		if(xml.isSetException()){removeRecursiveDates(xml.getException());}

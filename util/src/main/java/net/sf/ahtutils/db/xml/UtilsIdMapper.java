@@ -3,9 +3,9 @@ package net.sf.ahtutils.db.xml;
 import java.util.Hashtable;
 import java.util.Map;
 
-import net.sf.ahtutils.xml.sync.DataUpdate;
-import net.sf.ahtutils.xml.sync.Mapper;
-import net.sf.ahtutils.xml.sync.Mappings;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.Mapper;
+import org.jeesl.model.xml.io.ssi.sync.Mappings;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 import org.jeesl.exception.processing.UtilsConfigurationException;

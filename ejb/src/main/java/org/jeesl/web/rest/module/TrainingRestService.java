@@ -11,7 +11,7 @@ import org.jeesl.web.rest.AbstractJeeslRestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public class TrainingRestService <L extends JeeslLang,D extends JeeslDescription,
 									TYPE extends JeeslStatus<L,D,TYPE>>

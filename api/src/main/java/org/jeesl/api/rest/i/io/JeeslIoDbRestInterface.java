@@ -5,7 +5,7 @@ import org.jeesl.model.json.io.db.pg.meta.JsonPostgresMetaSnapshot;
 import org.jeesl.model.json.io.db.pg.statement.JsonPostgresStatementGroup;
 import org.jeesl.model.json.io.ssi.update.JsonSsiUpdate;
 
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public interface JeeslIoDbRestInterface
 {	

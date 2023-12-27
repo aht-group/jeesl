@@ -10,7 +10,7 @@ import org.jeesl.model.xml.io.label.Entities;
 import org.jeesl.model.xml.xsd.Container;
 import org.metachart.xml.graph.Graph;
 
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public interface JeeslRevisionRestImport
 {

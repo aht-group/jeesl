@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import org.jeesl.model.xml.system.constraint.Constraints;
 import org.jeesl.model.xml.xsd.Container;
 
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public interface JeeslConstraintRestImport
 {

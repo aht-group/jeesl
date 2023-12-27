@@ -1,6 +1,6 @@
 package org.jeesl.factory.xml.system.io.sync;
 
-import net.sf.ahtutils.xml.sync.Mapper;
+import org.jeesl.model.xml.io.ssi.sync.Mapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

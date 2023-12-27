@@ -7,7 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import net.sf.ahtutils.xml.aht.Container;
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import net.sf.ahtutils.xml.utils.Utils;
 
 public interface JeeslSystemPropertyRestImport

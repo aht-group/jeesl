@@ -31,14 +31,14 @@ public class TestXmlExceptionFactory extends AbstractFileProcessingTest
 	@Test
 	public void single()
 	{
-		net.sf.ahtutils.xml.sync.Exception xml = XmlExceptionFactory.build(eSingle);
+		org.jeesl.model.xml.io.ssi.sync.Exception xml = XmlExceptionFactory.build(eSingle);
 		JaxbUtil.info(xml);
 	}
 	
 	@Test
 	public void multi()
 	{
-		net.sf.ahtutils.xml.sync.Exception xml = XmlExceptionFactory.build(eMulti);
+		org.jeesl.model.xml.io.ssi.sync.Exception xml = XmlExceptionFactory.build(eMulti);
 		JaxbUtil.info(xml);
 	}
 }

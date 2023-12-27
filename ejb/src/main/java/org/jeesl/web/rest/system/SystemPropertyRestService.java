@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import net.sf.ahtutils.web.rest.AbstractUtilsRest;
 import net.sf.ahtutils.xml.aht.Container;
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import net.sf.ahtutils.xml.utils.Property;
 import net.sf.ahtutils.xml.utils.Utils;
 

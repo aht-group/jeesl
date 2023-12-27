@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.jeesl.model.xml.system.security.Security;
 
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public interface UtilsSecurityViewImport
 {

@@ -10,7 +10,7 @@ import org.jeesl.model.xml.module.survey.Survey;
 import org.jeesl.model.xml.module.survey.Templates;
 
 import net.sf.ahtutils.xml.aht.Aht;
-import net.sf.ahtutils.xml.sync.DataUpdate;
+import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public interface JeeslSurveyRestImport
 {
