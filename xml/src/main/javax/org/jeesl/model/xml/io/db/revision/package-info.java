@@ -1,2 +1,2 @@
 @javax.xml.bind.annotation.XmlSchema(namespace = "http://ahtutils.aht-group.com/audit", elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package net.sf.ahtutils.xml.audit;
+package org.jeesl.model.xml.io.db.revision;

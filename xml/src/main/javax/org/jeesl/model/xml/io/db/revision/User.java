@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.audit;
+package org.jeesl.model.xml.io.db.revision;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;

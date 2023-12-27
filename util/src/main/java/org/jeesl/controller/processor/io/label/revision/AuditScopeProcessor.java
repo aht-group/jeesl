@@ -3,9 +3,10 @@ package org.jeesl.controller.processor.io.label.revision;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.ahtutils.xml.audit.Change;
-import net.sf.ahtutils.xml.audit.Revision;
-import net.sf.ahtutils.xml.audit.Scope;
+import org.jeesl.model.xml.io.db.revision.Change;
+import org.jeesl.model.xml.io.db.revision.Revision;
+import org.jeesl.model.xml.io.db.revision.Scope;
+
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class AuditScopeProcessor

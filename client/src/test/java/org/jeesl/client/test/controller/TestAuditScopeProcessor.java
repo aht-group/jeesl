@@ -15,6 +15,10 @@ import org.jeesl.client.model.ejb.system.security.SecurityUsecase;
 import org.jeesl.client.model.ejb.system.security.SecurityView;
 import org.jeesl.client.model.ejb.user.User;
 import org.jeesl.controller.processor.io.label.revision.AuditScopeProcessor;
+import org.jeesl.model.xml.io.db.revision.Change;
+import org.jeesl.model.xml.io.db.revision.Revision;
+import org.jeesl.model.xml.io.db.revision.Revisions;
+import org.jeesl.model.xml.io.db.revision.Scope;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -27,10 +31,6 @@ import net.sf.ahtutils.factory.xml.audit.XmlRevisionFactory;
 import net.sf.ahtutils.factory.xml.audit.XmlRevisionsFactory;
 import net.sf.ahtutils.factory.xml.audit.XmlScopeFactory;
 import net.sf.ahtutils.test.AbstractJeeslTest;
-import net.sf.ahtutils.xml.audit.Change;
-import net.sf.ahtutils.xml.audit.Revision;
-import net.sf.ahtutils.xml.audit.Revisions;
-import net.sf.ahtutils.xml.audit.Scope;
 import net.sf.exlp.util.xml.JaxbUtil;
 
 public class TestAuditScopeProcessor extends AbstractJeeslTest

@@ -1,9 +1,8 @@
 package net.sf.ahtutils.factory.xml.audit;
 
+import org.jeesl.model.xml.io.db.revision.Revisions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.audit.Revisions;
 
 public class XmlRevisionsFactory
 {

@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.model.xml.io.db.revision.Revision;
+import org.jeesl.model.xml.io.db.revision.User;
 import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.security.access.JeeslSecurityRole;
@@ -14,8 +16,6 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.audit.Revision;
-import net.sf.ahtutils.xml.audit.User;
 import net.sf.exlp.util.DateUtil;
 
 public class XmlRevisionFactory <L extends JeeslLang, D extends JeeslDescription,

@@ -27,10 +27,9 @@ import org.jeesl.interfaces.model.system.security.page.JeeslSecurityTemplate;
 import org.jeesl.interfaces.model.system.security.page.JeeslSecurityView;
 import org.jeesl.interfaces.model.system.security.user.JeeslUser;
 import org.jeesl.interfaces.model.system.security.util.JeeslSecurityCategory;
+import org.jeesl.model.xml.io.db.revision.Change;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.audit.Change;
 
 public class RevisionEngine<L extends JeeslLang, D extends JeeslDescription,
 							RC extends JeeslRevisionCategory<L,D,RC,?>,

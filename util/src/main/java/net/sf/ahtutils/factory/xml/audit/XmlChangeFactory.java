@@ -1,10 +1,9 @@
 package net.sf.ahtutils.factory.xml.audit;
 
+import org.jeesl.model.xml.io.db.revision.Change;
+import org.jeesl.model.xml.io.db.revision.Scope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.audit.Change;
-import net.sf.ahtutils.xml.audit.Scope;
 
 public class XmlChangeFactory
 {
