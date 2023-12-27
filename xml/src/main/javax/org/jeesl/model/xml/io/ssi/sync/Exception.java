@@ -84,10 +84,6 @@ public class Exception
         this.exception = value;
     }
 
-    public boolean isSetException() {
-        return (this.exception!= null);
-    }
-
     /**
      * Gets the value of the record property.
      * 
@@ -110,10 +106,6 @@ public class Exception
      */
     public void setRecord(XMLGregorianCalendar value) {
         this.record = value;
-    }
-
-    public boolean isSetRecord() {
-        return (this.record!= null);
     }
 
     /**
@@ -140,10 +132,6 @@ public class Exception
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the className property.
      * 
@@ -168,10 +156,6 @@ public class Exception
         this.className = value;
     }
 
-    public boolean isSetClassName() {
-        return (this.className!= null);
-    }
-
     /**
      * Gets the value of the line property.
      * 
@@ -180,7 +164,7 @@ public class Exception
      *     {@link Integer }
      *     
      */
-    public int getLine() {
+    public Integer getLine() {
         return line;
     }
 
@@ -192,16 +176,8 @@ public class Exception
      *     {@link Integer }
      *     
      */
-    public void setLine(int value) {
+    public void setLine(Integer value) {
         this.line = value;
-    }
-
-    public boolean isSetLine() {
-        return (this.line!= null);
-    }
-
-    public void unsetLine() {
-        this.line = null;
     }
 
     /**
@@ -226,10 +202,6 @@ public class Exception
      */
     public void setMessage(String value) {
         this.message = value;
-    }
-
-    public boolean isSetMessage() {
-        return (this.message!= null);
     }
 
 }

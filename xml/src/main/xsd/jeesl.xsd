@@ -18,6 +18,7 @@
 	<xsd:import namespace="http://ahtutils.aht-group.com/report" schemaLocation="aht/report.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/revision" schemaLocation="jeesl/io/revision.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/io/ssi" schemaLocation="jeesl/io/ssi.xsd"/>
+    <xsd:import namespace="http://ahtutils.aht-group.com/sync" schemaLocation="aht/sync.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/io/template" schemaLocation="jeesl/io/template.xsd"/>
 	
 	<xsd:import namespace="http://xsd.jeesl.org/module/bb" schemaLocation="jeesl/module/bb.xsd"/>

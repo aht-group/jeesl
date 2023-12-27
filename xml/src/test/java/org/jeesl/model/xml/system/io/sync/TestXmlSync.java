@@ -16,8 +16,8 @@ public class TestXmlSync extends AbstractXmlSyncTest<Sync>
     public Sync build(boolean withChilds)
     {
     	Sync xml = new Sync();
-    	xml.setClientId(123);
-    	xml.setServerId(345);
+    	xml.setClientId(123l);
+    	xml.setServerId(345l);
     	
     	if(withChilds)
     	{

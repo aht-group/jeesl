@@ -72,12 +72,4 @@ public class Mappings
         return this.mapper;
     }
 
-    public boolean isSetMapper() {
-        return ((this.mapper!= null)&&(!this.mapper.isEmpty()));
-    }
-
-    public void unsetMapper() {
-        this.mapper = null;
-    }
-
 }

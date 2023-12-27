@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
-
 import org.jeesl.model.xml.io.locale.status.Type;
 
 
@@ -96,10 +95,6 @@ public class DataUpdate
         this.result = value;
     }
 
-    public boolean isSetResult() {
-        return (this.result!= null);
-    }
-
     /**
      * Gets the value of the mapper property.
      * 
@@ -129,14 +124,6 @@ public class DataUpdate
         return this.mapper;
     }
 
-    public boolean isSetMapper() {
-        return ((this.mapper!= null)&&(!this.mapper.isEmpty()));
-    }
-
-    public void unsetMapper() {
-        this.mapper = null;
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -159,10 +146,6 @@ public class DataUpdate
      */
     public void setType(Type value) {
         this.type = value;
-    }
-
-    public boolean isSetType() {
-        return (this.type!= null);
     }
 
     /**
@@ -194,14 +177,6 @@ public class DataUpdate
         return this.sync;
     }
 
-    public boolean isSetSync() {
-        return ((this.sync!= null)&&(!this.sync.isEmpty()));
-    }
-
-    public void unsetSync() {
-        this.sync = null;
-    }
-
     /**
      * Gets the value of the exceptions property.
      * 
@@ -224,10 +199,6 @@ public class DataUpdate
      */
     public void setExceptions(Exceptions value) {
         this.exceptions = value;
-    }
-
-    public boolean isSetExceptions() {
-        return (this.exceptions!= null);
     }
 
     /**
@@ -254,10 +225,6 @@ public class DataUpdate
         this.begin = value;
     }
 
-    public boolean isSetBegin() {
-        return (this.begin!= null);
-    }
-
     /**
      * Gets the value of the finished property.
      * 
@@ -280,10 +247,6 @@ public class DataUpdate
      */
     public void setFinished(XMLGregorianCalendar value) {
         this.finished = value;
-    }
-
-    public boolean isSetFinished() {
-        return (this.finished!= null);
     }
 
 }

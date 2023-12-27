@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Result;
 import org.jeesl.model.xml.io.locale.status.Status;
 
@@ -79,10 +78,6 @@ public class Sync
         this.status = value;
     }
 
-    public boolean isSetStatus() {
-        return (this.status!= null);
-    }
-
     /**
      * Gets the value of the result property.
      * 
@@ -107,10 +102,6 @@ public class Sync
         this.result = value;
     }
 
-    public boolean isSetResult() {
-        return (this.result!= null);
-    }
-
     /**
      * Gets the value of the clientId property.
      * 
@@ -119,7 +110,7 @@ public class Sync
      *     {@link Long }
      *     
      */
-    public long getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
@@ -131,16 +122,8 @@ public class Sync
      *     {@link Long }
      *     
      */
-    public void setClientId(long value) {
+    public void setClientId(Long value) {
         this.clientId = value;
-    }
-
-    public boolean isSetClientId() {
-        return (this.clientId!= null);
-    }
-
-    public void unsetClientId() {
-        this.clientId = null;
     }
 
     /**
@@ -151,7 +134,7 @@ public class Sync
      *     {@link Long }
      *     
      */
-    public long getServerId() {
+    public Long getServerId() {
         return serverId;
     }
 
@@ -163,16 +146,8 @@ public class Sync
      *     {@link Long }
      *     
      */
-    public void setServerId(long value) {
+    public void setServerId(Long value) {
         this.serverId = value;
-    }
-
-    public boolean isSetServerId() {
-        return (this.serverId!= null);
-    }
-
-    public void unsetServerId() {
-        this.serverId = null;
     }
 
 }

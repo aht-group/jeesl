@@ -72,12 +72,4 @@ public class Exceptions
         return this.exception;
     }
 
-    public boolean isSetException() {
-        return ((this.exception!= null)&&(!this.exception.isEmpty()));
-    }
-
-    public void unsetException() {
-        this.exception = null;
-    }
-
 }

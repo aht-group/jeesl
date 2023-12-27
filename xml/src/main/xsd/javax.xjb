@@ -91,12 +91,12 @@
             <jxb:package name="org.jeesl.model.xml.io.ssi.core"/>
         </jxb:schemaBindings>
     </jxb:bindings>
- <!--       <jxb:bindings schemaLocation="../xsd/aht/sync.xsd" node="/xsd:schema">
+ 	<jxb:bindings schemaLocation="../xsd/aht/sync.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.ssi.sync"/>
         </jxb:schemaBindings>
     </jxb:bindings>
- -->	<jxb:bindings schemaLocation="../xsd/jeesl/io/template.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="../xsd/jeesl/io/template.xsd" node="/xsd:schema">
 		<jxb:schemaBindings>
 			<jxb:package name="org.jeesl.model.xml.io.template"/>
 		</jxb:schemaBindings>

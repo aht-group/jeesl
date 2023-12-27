@@ -15,7 +15,7 @@ public class TestXmlEntity extends AbstractXmlSyncTest<Entity>
     public Entity build(boolean withChilds)
     {
     	Entity xml = new Entity();
-    	xml.setVersion(0);
+    	xml.setVersion(0l);
     	xml.setType("myType");
     	xml.setValue("123");
     	

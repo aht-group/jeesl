@@ -60,7 +60,7 @@ public class Mapper
      *     {@link Long }
      *     
      */
-    public long getOldId() {
+    public Long getOldId() {
         return oldId;
     }
 
@@ -72,16 +72,8 @@ public class Mapper
      *     {@link Long }
      *     
      */
-    public void setOldId(long value) {
+    public void setOldId(Long value) {
         this.oldId = value;
-    }
-
-    public boolean isSetOldId() {
-        return (this.oldId!= null);
-    }
-
-    public void unsetOldId() {
-        this.oldId = null;
     }
 
     /**
@@ -92,7 +84,7 @@ public class Mapper
      *     {@link Long }
      *     
      */
-    public long getNewId() {
+    public Long getNewId() {
         return newId;
     }
 
@@ -104,16 +96,8 @@ public class Mapper
      *     {@link Long }
      *     
      */
-    public void setNewId(long value) {
+    public void setNewId(Long value) {
         this.newId = value;
-    }
-
-    public boolean isSetNewId() {
-        return (this.newId!= null);
-    }
-
-    public void unsetNewId() {
-        this.newId = null;
     }
 
     /**
@@ -140,10 +124,6 @@ public class Mapper
         this.clazz = value;
     }
 
-    public boolean isSetClazz() {
-        return (this.clazz!= null);
-    }
-
     /**
      * Gets the value of the oldCode property.
      * 
@@ -166,10 +146,6 @@ public class Mapper
      */
     public void setOldCode(String value) {
         this.oldCode = value;
-    }
-
-    public boolean isSetOldCode() {
-        return (this.oldCode!= null);
     }
 
     /**
@@ -196,10 +172,6 @@ public class Mapper
         this.newCode = value;
     }
 
-    public boolean isSetNewCode() {
-        return (this.newCode!= null);
-    }
-
     /**
      * Gets the value of the code property.
      * 
@@ -222,10 +194,6 @@ public class Mapper
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    public boolean isSetCode() {
-        return (this.code!= null);
     }
 
 }

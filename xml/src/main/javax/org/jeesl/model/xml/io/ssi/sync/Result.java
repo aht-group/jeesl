@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.locale.status.Status;
 
 
@@ -80,10 +79,6 @@ public class Result
         this.status = value;
     }
 
-    public boolean isSetStatus() {
-        return (this.status!= null);
-    }
-
     /**
      * Gets the value of the total property.
      * 
@@ -92,7 +87,7 @@ public class Result
      *     {@link Long }
      *     
      */
-    public long getTotal() {
+    public Long getTotal() {
         return total;
     }
 
@@ -104,16 +99,8 @@ public class Result
      *     {@link Long }
      *     
      */
-    public void setTotal(long value) {
+    public void setTotal(Long value) {
         this.total = value;
-    }
-
-    public boolean isSetTotal() {
-        return (this.total!= null);
-    }
-
-    public void unsetTotal() {
-        this.total = null;
     }
 
     /**
@@ -124,7 +111,7 @@ public class Result
      *     {@link Long }
      *     
      */
-    public long getSuccess() {
+    public Long getSuccess() {
         return success;
     }
 
@@ -136,16 +123,8 @@ public class Result
      *     {@link Long }
      *     
      */
-    public void setSuccess(long value) {
+    public void setSuccess(Long value) {
         this.success = value;
-    }
-
-    public boolean isSetSuccess() {
-        return (this.success!= null);
-    }
-
-    public void unsetSuccess() {
-        this.success = null;
     }
 
     /**
@@ -156,7 +135,7 @@ public class Result
      *     {@link Long }
      *     
      */
-    public long getSkip() {
+    public Long getSkip() {
         return skip;
     }
 
@@ -168,16 +147,8 @@ public class Result
      *     {@link Long }
      *     
      */
-    public void setSkip(long value) {
+    public void setSkip(Long value) {
         this.skip = value;
-    }
-
-    public boolean isSetSkip() {
-        return (this.skip!= null);
-    }
-
-    public void unsetSkip() {
-        this.skip = null;
     }
 
     /**
@@ -188,7 +159,7 @@ public class Result
      *     {@link Long }
      *     
      */
-    public long getFail() {
+    public Long getFail() {
         return fail;
     }
 
@@ -200,16 +171,8 @@ public class Result
      *     {@link Long }
      *     
      */
-    public void setFail(long value) {
+    public void setFail(Long value) {
         this.fail = value;
-    }
-
-    public boolean isSetFail() {
-        return (this.fail!= null);
-    }
-
-    public void unsetFail() {
-        this.fail = null;
     }
 
 }

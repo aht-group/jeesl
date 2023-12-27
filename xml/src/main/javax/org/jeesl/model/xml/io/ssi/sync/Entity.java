@@ -69,10 +69,6 @@ public class Entity
         this.value = value;
     }
 
-    public boolean isSetValue() {
-        return (this.value!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -97,10 +93,6 @@ public class Entity
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the version property.
      * 
@@ -109,7 +101,7 @@ public class Entity
      *     {@link Long }
      *     
      */
-    public long getVersion() {
+    public Long getVersion() {
         return version;
     }
 
@@ -121,16 +113,8 @@ public class Entity
      *     {@link Long }
      *     
      */
-    public void setVersion(long value) {
+    public void setVersion(Long value) {
         this.version = value;
-    }
-
-    public boolean isSetVersion() {
-        return (this.version!= null);
-    }
-
-    public void unsetVersion() {
-        this.version = null;
     }
 
 }

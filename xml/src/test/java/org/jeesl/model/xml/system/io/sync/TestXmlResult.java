@@ -16,10 +16,10 @@ public class TestXmlResult extends AbstractXmlSyncTest<Result>
     public Result build(boolean withChilds)
     {
     	Result xml = new Result();
-    	xml.setTotal(3);
-    	xml.setSuccess(2);
-    	xml.setFail(1);
-    	xml.setSkip(0);
+    	xml.setTotal(3l);
+    	xml.setSuccess(2l);
+    	xml.setFail(1l);
+    	xml.setSkip(0l);
     	
     	if(withChilds)
     	{
