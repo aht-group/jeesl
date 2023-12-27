@@ -21,6 +21,16 @@
             <jxb:package name="org.jeesl.model.xml.system.test"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    <jxb:bindings schemaLocation="../xsd/jeesl/module/job.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.system.job"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    	<jxb:bindings schemaLocation="../xsd/aht/system.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.system.constraint"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 
     <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
@@ -30,6 +40,12 @@
     <jxb:bindings schemaLocation="jeesl/symbol.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.graphic"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
+	<jxb:bindings schemaLocation="jeesl/io/ssi.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.ssi"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 
@@ -43,29 +59,146 @@
             <jxb:package name="org.jeesl.model.xml.system.navigation"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-
+    
+	<jxb:bindings schemaLocation="../xsd/jeesl/io/attribute.xsd" node="/xsd:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="org.jeesl.model.xml.io.attribute"/>
+		</jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="aht/dbseed.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.db"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="jeesl/io/mail.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.mail"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="aht/report.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.report"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
     <jxb:bindings schemaLocation="jeesl/io/revision.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.label"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-
+	<jxb:bindings schemaLocation="../xsd/jeesl/io/template.xsd" node="/xsd:schema">
+		<jxb:schemaBindings>
+			<jxb:package name="org.jeesl.model.xml.io.template"/>
+		</jxb:schemaBindings>
+    </jxb:bindings>
+    
 	<jxb:bindings schemaLocation="jeesl/system/security.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.system.security"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-
+    
+	<jxb:bindings schemaLocation="jeesl/module/bb.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.bb"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="jeesl/module/calendar.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.calendar"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="aht/qa.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.dev.qa"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="jeesl/dev/srs.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.dev.srs"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../xsd/jeesl/finance.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.finance"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="aht/monitoring.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.monitoring"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../xsd/jeesl/module/timeseries.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.ts"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="jeesl/module/survey.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.survey"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../xsd/jeesl/module/workflow.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.module.workflow"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    
     <jxb:bindings schemaLocation="aht/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="net.sf.ahtutils.xml.text"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+    
+    
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/ofx.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.ofx"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/editorial.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.editorial"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/layout.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.layout"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/list.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.list"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/media.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.media"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/table.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.table"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/text.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.core.text"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/addon/wiki.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.openfuxml.model.xml.addon.wiki"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 
-    <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/io.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/exlp/identity.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.exlp.model.xml.identity"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../../../../../exlp/xml/src/main/xsd/exlp/io.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.exlp.model.xml.io"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-
 </jxb:bindings>
