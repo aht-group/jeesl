@@ -16,7 +16,7 @@ public class TestXmlTask extends AbstractXmlIssueTest<Task>
     public Task build(boolean withChilds)
     {
     	Task xml = new Task();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setName("myName");
     	

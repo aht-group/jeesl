@@ -14,7 +14,7 @@ public class TestXmlSoftware extends AbstractXmlInventoryPcTest<Software>
     public Software build(boolean withChilds)
     {
     	Software xml = new Software();
-    	xml.setId(123);
+    	xml.setId(123l);
 
     	if(withChilds)
     	{

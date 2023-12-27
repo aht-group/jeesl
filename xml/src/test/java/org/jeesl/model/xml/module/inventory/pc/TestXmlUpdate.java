@@ -14,7 +14,7 @@ public class TestXmlUpdate extends AbstractXmlInventoryPcTest<Update>
     public Update build(boolean withChilds)
     { 
     	Update xml = new Update();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("KB3365213");
     	xml.setDescription("myDescription");
     	xml.setVersion("myVersion");

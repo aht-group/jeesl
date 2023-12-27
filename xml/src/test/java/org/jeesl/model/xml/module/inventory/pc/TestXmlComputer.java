@@ -14,7 +14,7 @@ public class TestXmlComputer extends AbstractXmlInventoryPcTest<Computer>
     public Computer build(boolean withChilds)
     {
     	Computer xml = new Computer();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCode("myCode");
     	xml.setName("myName");
     	xml.setUuid("myUuid");

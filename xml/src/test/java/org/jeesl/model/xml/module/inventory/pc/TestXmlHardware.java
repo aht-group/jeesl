@@ -14,7 +14,7 @@ public class TestXmlHardware extends AbstractXmlInventoryPcTest<Hardware>
     public Hardware build(boolean withChilds)
     {
     	Hardware xml = new Hardware();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setManufacturer("Lasse");
     	xml.setModel("XYZ");
     	xml.setSerial("01234-56789");    
