@@ -15,7 +15,7 @@ public class TxtDataUpdateFactory
 	{
 		StringBuffer sb = new StringBuffer();
 		
-		if(du.isSetType())
+		if(Objects.nonNull(du.getType()))
 		{
 			if(Objects.nonNull(du.getType().getLabel())) {sb.append(du.getType().getLabel());}
 			if(Objects.nonNull(du.getType().getCode()))
@@ -30,18 +30,18 @@ public class TxtDataUpdateFactory
 			}
 		}
 		
-		if(du.isSetResult() && du.getResult().isSetStatus() && Objects.nonNull(du.getResult().getStatus().getCode()))
+		if(Objects.nonNull(du.getResult()) && Objects.nonNull(du.getResult().getStatus()) && Objects.nonNull(du.getResult().getStatus().getCode()))
 		{
 			sb.append(" [");
 			sb.append(du.getResult().getStatus().getCode());
 			sb.append("]");
 		}
 		
-		if(du.isSetResult() && du.getResult().isSetSuccess() && du.getResult().isSetTotal() && du.getResult().getTotal()>0)
+		if(Objects.nonNull(du.getResult()) && Objects.nonNull(du.getResult().getSuccess()) && Objects.nonNull(du.getResult().getTotal()) && du.getResult().getTotal()>0)
 		{
 			sb.append(" ").append(du.getResult().getSuccess());
 			sb.append("/"+du.getResult().getTotal());
-			if(du.getResult().isSetSkip()){sb.append(" (skipped:").append(du.getResult().getSkip()).append(")");}
+			if(Objects.nonNull(du.getResult().getSkip())) {sb.append(" (skipped:").append(du.getResult().getSkip()).append(")");}
 		}
 		
 		return sb.toString();

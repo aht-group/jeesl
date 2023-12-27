@@ -2,6 +2,7 @@ package net.sf.ahtutils.db.xml;
 
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 import org.jeesl.model.xml.io.ssi.sync.Mapper;
@@ -56,12 +57,12 @@ public class UtilsIdMapper
 		try
 		{
 			Class<?> c = Class.forName(mapper.getClazz());
-			if(mapper.isSetOldId() && mapper.isSetNewId())
+			if(Objects.nonNull(mapper.getOldId()) && Objects.nonNull(mapper.getNewId()))
 			{
 				if(!map.containsKey(c)){map.put(c, new Hashtable<Long,Long>());}
 				map.get(c).put(mapper.getOldId(), mapper.getNewId());
 			}
-			else if(mapper.isSetOldCode() && mapper.isSetNewCode())
+			else if(Objects.nonNull(mapper.getOldCode()) && Objects.nonNull(mapper.getNewCode()))
 			{
 				if(!mapCode.containsKey(c)){mapCode.put(c, new Hashtable<String,String>());}
 				mapCode.get(c).put(mapper.getOldCode(), mapper.getNewCode());

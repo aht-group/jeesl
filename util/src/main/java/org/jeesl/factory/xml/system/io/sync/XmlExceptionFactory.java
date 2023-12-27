@@ -2,6 +2,7 @@ package org.jeesl.factory.xml.system.io.sync;
 
 
 import java.util.Date;
+import java.util.Objects;
 
 import net.sf.exlp.util.DateUtil;
 
@@ -31,7 +32,7 @@ public class XmlExceptionFactory
 			xml.setException(XmlExceptionFactory.build(e.getCause()));
 		}
 		
-		if(xml.isSetException()){removeRecursiveDates(xml.getException());}
+		if(Objects.nonNull(xml.getException())) {removeRecursiveDates(xml.getException());}
 		
 		return xml;
 	}
@@ -39,6 +40,6 @@ public class XmlExceptionFactory
 	private static void removeRecursiveDates(org.jeesl.model.xml.io.ssi.sync.Exception xml)
 	{
 		xml.setRecord(null);
-		if(xml.isSetException()){removeRecursiveDates(xml.getException());}
+		if(Objects.nonNull(xml.getException())) {removeRecursiveDates(xml.getException());}
 	}
 }

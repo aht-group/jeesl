@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.jeesl.factory.xml.system.io.sync.XmlExceptionFactory;
@@ -46,10 +47,10 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 		json.setStatistic(new JsonSsiStatistic());
 		
 		update.setResult(new Result());
-		update.getResult().setSuccess(0);
-		update.getResult().setFail(0);
-		update.getResult().setSkip(0);
-		update.getResult().setTotal(0);
+		update.getResult().setSuccess(0l);
+		update.getResult().setFail(0l);
+		update.getResult().setSkip(0l);
+		update.getResult().setTotal(0l);
 		
 		updateSuccess = new HashMap<String,Integer>();
 		updateFail = new HashMap<String,Integer>();
@@ -159,7 +160,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	{
 		if(printStackTrace){t.printStackTrace();}
 		update.getResult().setFail(update.getResult().getFail()+1);
-		if(!update.isSetExceptions()){update.setExceptions(XmlExceptionsFactory.build());}
+		if(Objects.isNull(update.getExceptions())) {update.setExceptions(XmlExceptionsFactory.build());}
 		update.getExceptions().getException().add(XmlExceptionFactory.build(t));
 	}
 	
@@ -178,7 +179,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 	
 	public DataUpdate toDataUpdate()
 	{
-		if(!update.isSetFinished()){stop();}
+		if(Objects.isNull(update.getFinished())) {stop();}
 		
 		if(update.getResult().getSuccess()==update.getResult().getTotal()){update.getResult().setStatus(XmlStatusFactory.create(Code.success.toString()));}
 		else if(update.getResult().getFail()==update.getResult().getTotal()){update.getResult().setStatus(XmlStatusFactory.create(Code.fail.toString()));}
@@ -191,7 +192,7 @@ public class DataUpdateTracker implements net.sf.ahtutils.interfaces.controller.
 				Mapper m = new Mapper();
 				m.setClazz(key);
 				m.setCode("updateSuccess");
-				m.setNewId(updateSuccess.get(key));
+				m.setNewId(Long.valueOf(updateSuccess.get(key)));
 				update.getMapper().add(m);
 			}
 		}
