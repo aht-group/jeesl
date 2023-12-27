@@ -85,10 +85,6 @@ public class QuerySecurity
         this.user = value;
     }
 
-    public boolean isSetUser() {
-        return (this.user!= null);
-    }
-
     /**
      * Gets the value of the staff property.
      * 
@@ -111,10 +107,6 @@ public class QuerySecurity
      */
     public void setStaff(Staff value) {
         this.staff = value;
-    }
-
-    public boolean isSetStaff() {
-        return (this.staff!= null);
     }
 
     /**
@@ -141,10 +133,6 @@ public class QuerySecurity
         this.staffs = value;
     }
 
-    public boolean isSetStaffs() {
-        return (this.staffs!= null);
-    }
-
     /**
      * Gets the value of the role property.
      * 
@@ -169,10 +157,6 @@ public class QuerySecurity
         this.role = value;
     }
 
-    public boolean isSetRole() {
-        return (this.role!= null);
-    }
-
     /**
      * Gets the value of the localeCode property.
      * 
@@ -195,10 +179,6 @@ public class QuerySecurity
      */
     public void setLocaleCode(String value) {
         this.localeCode = value;
-    }
-
-    public boolean isSetLocaleCode() {
-        return (this.localeCode!= null);
     }
 
 }

@@ -30,22 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Workflow }
-     * 
-     */
-    public Workflow createWorkflow() {
-        return new Workflow();
-    }
-
-    /**
-     * Create an instance of {@link Processes }
-     * 
-     */
-    public Processes createProcesses() {
-        return new Processes();
-    }
-
-    /**
      * Create an instance of {@link Process }
      * 
      */
@@ -91,6 +75,22 @@ public class ObjectFactory {
      */
     public Activity createActivity() {
         return new Activity();
+    }
+
+    /**
+     * Create an instance of {@link Workflow }
+     * 
+     */
+    public Workflow createWorkflow() {
+        return new Workflow();
+    }
+
+    /**
+     * Create an instance of {@link Processes }
+     * 
+     */
+    public Processes createProcesses() {
+        return new Processes();
     }
 
     /**

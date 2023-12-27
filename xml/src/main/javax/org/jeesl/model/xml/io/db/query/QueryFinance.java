@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.module.finance.Finance;
 
 
@@ -71,10 +70,6 @@ public class QueryFinance
         this.finance = value;
     }
 
-    public boolean isSetFinance() {
-        return (this.finance!= null);
-    }
-
     /**
      * Gets the value of the localeCode property.
      * 
@@ -97,10 +92,6 @@ public class QueryFinance
      */
     public void setLocaleCode(String value) {
         this.localeCode = value;
-    }
-
-    public boolean isSetLocaleCode() {
-        return (this.localeCode!= null);
     }
 
 }

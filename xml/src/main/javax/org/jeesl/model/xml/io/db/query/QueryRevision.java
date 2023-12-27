@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.label.Diagram;
 import org.jeesl.model.xml.io.label.Entity;
 import org.jeesl.model.xml.io.label.Revision;
@@ -81,10 +80,6 @@ public class QueryRevision
         this.entity = value;
     }
 
-    public boolean isSetEntity() {
-        return (this.entity!= null);
-    }
-
     /**
      * Gets the value of the diagram property.
      * 
@@ -107,10 +102,6 @@ public class QueryRevision
      */
     public void setDiagram(Diagram value) {
         this.diagram = value;
-    }
-
-    public boolean isSetDiagram() {
-        return (this.diagram!= null);
     }
 
     /**
@@ -137,10 +128,6 @@ public class QueryRevision
         this.revision = value;
     }
 
-    public boolean isSetRevision() {
-        return (this.revision!= null);
-    }
-
     /**
      * Gets the value of the localeCode property.
      * 
@@ -163,10 +150,6 @@ public class QueryRevision
      */
     public void setLocaleCode(String value) {
         this.localeCode = value;
-    }
-
-    public boolean isSetLocaleCode() {
-        return (this.localeCode!= null);
     }
 
 }

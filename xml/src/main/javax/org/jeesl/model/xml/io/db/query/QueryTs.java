@@ -70,10 +70,6 @@ public class QueryTs
         this.transaction = value;
     }
 
-    public boolean isSetTransaction() {
-        return (this.transaction!= null);
-    }
-
     /**
      * Gets the value of the localeCode property.
      * 
@@ -96,10 +92,6 @@ public class QueryTs
      */
     public void setLocaleCode(String value) {
         this.localeCode = value;
-    }
-
-    public boolean isSetLocaleCode() {
-        return (this.localeCode!= null);
     }
 
 }

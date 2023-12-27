@@ -30,22 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Survey }
-     * 
-     */
-    public Survey createSurvey() {
-        return new Survey();
-    }
-
-    /**
-     * Create an instance of {@link Templates }
-     * 
-     */
-    public Templates createTemplates() {
-        return new Templates();
-    }
-
-    /**
      * Create an instance of {@link Template }
      * 
      */
@@ -91,6 +75,22 @@ public class ObjectFactory {
      */
     public Data createData() {
         return new Data();
+    }
+
+    /**
+     * Create an instance of {@link Survey }
+     * 
+     */
+    public Survey createSurvey() {
+        return new Survey();
+    }
+
+    /**
+     * Create an instance of {@link Templates }
+     * 
+     */
+    public Templates createTemplates() {
+        return new Templates();
     }
 
     /**

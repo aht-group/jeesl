@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Calendar }
-     * 
-     */
-    public Calendar createCalendar() {
-        return new Calendar();
-    }
-
-    /**
      * Create an instance of {@link Item }
      * 
      */
     public Item createItem() {
         return new Item();
+    }
+
+    /**
+     * Create an instance of {@link Calendar }
+     * 
+     */
+    public Calendar createCalendar() {
+        return new Calendar();
     }
 
 }

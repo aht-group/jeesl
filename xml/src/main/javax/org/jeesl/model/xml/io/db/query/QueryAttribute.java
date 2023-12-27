@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-
 import org.jeesl.model.xml.io.attribute.Attribute;
 import org.jeesl.model.xml.io.attribute.Attributes;
 
@@ -76,10 +75,6 @@ public class QueryAttribute
         this.attributes = value;
     }
 
-    public boolean isSetAttributes() {
-        return (this.attributes!= null);
-    }
-
     /**
      * Gets the value of the attribute property.
      * 
@@ -104,10 +99,6 @@ public class QueryAttribute
         this.attribute = value;
     }
 
-    public boolean isSetAttribute() {
-        return (this.attribute!= null);
-    }
-
     /**
      * Gets the value of the localeCode property.
      * 
@@ -130,10 +121,6 @@ public class QueryAttribute
      */
     public void setLocaleCode(String value) {
         this.localeCode = value;
-    }
-
-    public boolean isSetLocaleCode() {
-        return (this.localeCode!= null);
     }
 
 }

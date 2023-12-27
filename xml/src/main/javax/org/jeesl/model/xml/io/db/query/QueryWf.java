@@ -80,10 +80,6 @@ public class QueryWf
         this.process = value;
     }
 
-    public boolean isSetProcess() {
-        return (this.process!= null);
-    }
-
     /**
      * Gets the value of the stage property.
      * 
@@ -106,10 +102,6 @@ public class QueryWf
      */
     public void setStage(Stage value) {
         this.stage = value;
-    }
-
-    public boolean isSetStage() {
-        return (this.stage!= null);
     }
 
     /**
@@ -136,10 +128,6 @@ public class QueryWf
         this.transition = value;
     }
 
-    public boolean isSetTransition() {
-        return (this.transition!= null);
-    }
-
     /**
      * Gets the value of the localeCode property.
      * 
@@ -162,10 +150,6 @@ public class QueryWf
      */
     public void setLocaleCode(String value) {
         this.localeCode = value;
-    }
-
-    public boolean isSetLocaleCode() {
-        return (this.localeCode!= null);
     }
 
 }

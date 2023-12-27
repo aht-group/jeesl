@@ -70,10 +70,6 @@ public class QueryCalendar
         this.item = value;
     }
 
-    public boolean isSetItem() {
-        return (this.item!= null);
-    }
-
     /**
      * Gets the value of the localeCode property.
      * 
@@ -96,10 +92,6 @@ public class QueryCalendar
      */
     public void setLocaleCode(String value) {
         this.localeCode = value;
-    }
-
-    public boolean isSetLocaleCode() {
-        return (this.localeCode!= null);
     }
 
 }

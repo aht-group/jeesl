@@ -30,14 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Entities }
-     * 
-     */
-    public Entities createEntities() {
-        return new Entities();
-    }
-
-    /**
      * Create an instance of {@link Entity }
      * 
      */
@@ -70,19 +62,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Revisions }
-     * 
-     */
-    public Revisions createRevisions() {
-        return new Revisions();
-    }
-
-    /**
      * Create an instance of {@link Revision }
      * 
      */
     public Revision createRevision() {
         return new Revision();
+    }
+
+    /**
+     * Create an instance of {@link Entities }
+     * 
+     */
+    public Entities createEntities() {
+        return new Entities();
+    }
+
+    /**
+     * Create an instance of {@link Revisions }
+     * 
+     */
+    public Revisions createRevisions() {
+        return new Revisions();
     }
 
     /**

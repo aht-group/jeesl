@@ -30,22 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Signatures }
-     * 
-     */
-    public Signatures createSignatures() {
-        return new Signatures();
-    }
-
-    /**
-     * Create an instance of {@link Signature }
-     * 
-     */
-    public Signature createSignature() {
-        return new Signature();
-    }
-
-    /**
      * Create an instance of {@link Figures }
      * 
      */
@@ -83,6 +67,22 @@ public class ObjectFactory {
      */
     public Counter createCounter() {
         return new Counter();
+    }
+
+    /**
+     * Create an instance of {@link Signatures }
+     * 
+     */
+    public Signatures createSignatures() {
+        return new Signatures();
+    }
+
+    /**
+     * Create an instance of {@link Signature }
+     * 
+     */
+    public Signature createSignature() {
+        return new Signature();
     }
 
 }

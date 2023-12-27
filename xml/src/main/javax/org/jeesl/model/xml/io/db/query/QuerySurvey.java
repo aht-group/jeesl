@@ -85,10 +85,6 @@ public class QuerySurvey
         this.template = value;
     }
 
-    public boolean isSetTemplate() {
-        return (this.template!= null);
-    }
-
     /**
      * Gets the value of the question property.
      * 
@@ -111,10 +107,6 @@ public class QuerySurvey
      */
     public void setQuestion(Question value) {
         this.question = value;
-    }
-
-    public boolean isSetQuestion() {
-        return (this.question!= null);
     }
 
     /**
@@ -141,10 +133,6 @@ public class QuerySurvey
         this.data = value;
     }
 
-    public boolean isSetData() {
-        return (this.data!= null);
-    }
-
     /**
      * Gets the value of the answer property.
      * 
@@ -169,10 +157,6 @@ public class QuerySurvey
         this.answer = value;
     }
 
-    public boolean isSetAnswer() {
-        return (this.answer!= null);
-    }
-
     /**
      * Gets the value of the localeCode property.
      * 
@@ -195,10 +179,6 @@ public class QuerySurvey
      */
     public void setLocaleCode(String value) {
         this.localeCode = value;
-    }
-
-    public boolean isSetLocaleCode() {
-        return (this.localeCode!= null);
     }
 
 }
