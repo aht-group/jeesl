@@ -88,7 +88,7 @@
     </jxb:bindings>
 	<jxb:bindings schemaLocation="jeesl/io/ssi.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.io.ssi"/>
+            <jxb:package name="org.jeesl.model.xml.io.ssie"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 	<jxb:bindings schemaLocation="../xsd/jeesl/io/template.xsd" node="/xsd:schema">
@@ -147,7 +147,7 @@
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.workflow"/>
         </jxb:schemaBindings>
-    </jxb:bindings>    
+    </jxb:bindings>
     
 	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/ofx.xsd" node="/xsd:schema">
         <jxb:schemaBindings>

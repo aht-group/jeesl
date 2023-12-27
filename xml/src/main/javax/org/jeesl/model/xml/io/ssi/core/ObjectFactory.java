@@ -1,5 +1,5 @@
 
-package org.jeesl.model.xml.io.ssi;
+package org.jeesl.model.xml.io.ssi.core;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

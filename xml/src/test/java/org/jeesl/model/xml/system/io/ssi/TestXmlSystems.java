@@ -1,7 +1,7 @@
 package org.jeesl.model.xml.system.io.ssi;
 
 import org.jeesl.JeeslXmlTestBootstrap;
-import org.jeesl.model.xml.io.ssi.Systems;
+import org.jeesl.model.xml.io.ssi.core.Systems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
