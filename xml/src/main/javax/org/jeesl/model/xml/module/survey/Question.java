@@ -67,7 +67,7 @@ public class Question
 
     private final static long serialVersionUID = 1L;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/text", required = true)
-    protected net.sf.ahtutils.xml.text.Question question;
+    protected org.jeesl.model.xml.io.cms.chars.Question question;
     @XmlElement(namespace = "http://www.jeesl.org/text", required = true)
     protected Remark remark;
     @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
@@ -110,10 +110,10 @@ public class Question
      * 
      * @return
      *     possible object is
-     *     {@link net.sf.ahtutils.xml.text.Question }
+     *     {@link org.jeesl.model.xml.io.cms.chars.Question }
      *     
      */
-    public net.sf.ahtutils.xml.text.Question getQuestion() {
+    public org.jeesl.model.xml.io.cms.chars.Question getQuestion() {
         return question;
     }
 
@@ -122,10 +122,10 @@ public class Question
      * 
      * @param value
      *     allowed object is
-     *     {@link net.sf.ahtutils.xml.text.Question }
+     *     {@link org.jeesl.model.xml.io.cms.chars.Question }
      *     
      */
-    public void setQuestion(net.sf.ahtutils.xml.text.Question value) {
+    public void setQuestion(org.jeesl.model.xml.io.cms.chars.Question value) {
         this.question = value;
     }
 

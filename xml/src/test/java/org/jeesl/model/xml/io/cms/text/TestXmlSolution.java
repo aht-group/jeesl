@@ -1,10 +1,9 @@
 package org.jeesl.model.xml.io.cms.text;
 
 import org.jeesl.JeeslXmlTestBootstrap;
+import org.jeesl.model.xml.io.cms.chars.Solution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.ahtutils.xml.text.Solution;
 
 public class TestXmlSolution extends AbstractXmlTextOldTest<Solution>
 {

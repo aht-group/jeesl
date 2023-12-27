@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.text;
+package org.jeesl.model.xml.io.cms.chars;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

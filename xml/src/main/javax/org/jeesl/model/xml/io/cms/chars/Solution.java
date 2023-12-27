@@ -1,5 +1,5 @@
 
-package net.sf.ahtutils.xml.text;
+package org.jeesl.model.xml.io.cms.chars;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "", propOrder = {
     "value"
 })
-@XmlRootElement(name = "objective")
-public class Objective
+@XmlRootElement(name = "solution")
+public class Solution
     implements Serializable
 {
 

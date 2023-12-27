@@ -26,7 +26,7 @@
             <jxb:package name="org.jeesl.model.xml.system.job"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-    	<jxb:bindings schemaLocation="../xsd/aht/system.xsd" node="/xsd:schema">
+	<jxb:bindings schemaLocation="../xsd/aht/system.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.system.constraint"/>
         </jxb:schemaBindings>
@@ -35,6 +35,11 @@
     <jxb:bindings schemaLocation="jeesl/text.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.cms.text"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+	<jxb:bindings schemaLocation="aht/text.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.cms.chars"/>
         </jxb:schemaBindings>
     </jxb:bindings>
     <jxb:bindings schemaLocation="jeesl/symbol.xsd" node="/xsd:schema">
@@ -141,14 +146,7 @@
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.module.workflow"/>
         </jxb:schemaBindings>
-    </jxb:bindings>
-    
-    <jxb:bindings schemaLocation="aht/text.xsd" node="/xsd:schema">
-        <jxb:schemaBindings>
-            <jxb:package name="net.sf.ahtutils.xml.text"/>
-        </jxb:schemaBindings>
-    </jxb:bindings>
-    
+    </jxb:bindings>    
     
 	<jxb:bindings schemaLocation="../../../../../ofx/xml/src/main/xsd/content/ofx.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
