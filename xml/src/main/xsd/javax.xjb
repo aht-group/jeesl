@@ -88,7 +88,7 @@
     </jxb:bindings>
 	<jxb:bindings schemaLocation="jeesl/io/ssi.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
-            <jxb:package name="org.jeesl.model.xml.io.ssie"/>
+            <jxb:package name="org.jeesl.model.xml.io.ssi.core"/>
         </jxb:schemaBindings>
     </jxb:bindings>
 	<jxb:bindings schemaLocation="../xsd/jeesl/io/template.xsd" node="/xsd:schema">

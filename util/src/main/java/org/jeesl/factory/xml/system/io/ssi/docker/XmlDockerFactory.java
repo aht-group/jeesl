@@ -1,6 +1,6 @@
 package org.jeesl.factory.xml.system.io.ssi.docker;
 
-import org.jeesl.model.xml.io.ssi.Docker;
+import org.jeesl.model.xml.io.ssi.core.Docker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
