@@ -1,7 +1,6 @@
 package net.sf.ahtutils.factory.xml.text;
 
-import net.sf.ahtutils.xml.text.Hint;
-
+import org.jeesl.model.xml.io.cms.chars.Hint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

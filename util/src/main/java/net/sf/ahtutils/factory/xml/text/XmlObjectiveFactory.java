@@ -1,9 +1,9 @@
 package net.sf.ahtutils.factory.xml.text;
 
+import org.jeesl.model.xml.io.cms.chars.Objective;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.ahtutils.xml.text.Objective;
 
 public class XmlObjectiveFactory
 {

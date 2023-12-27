@@ -1,7 +1,7 @@
 package net.sf.ahtutils.factory.xml.text;
 
-import net.sf.ahtutils.xml.text.Question;
 
+import org.jeesl.model.xml.io.cms.chars.Question;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
