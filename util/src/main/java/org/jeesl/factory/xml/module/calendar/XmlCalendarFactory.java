@@ -35,7 +35,7 @@ public class XmlCalendarFactory <L extends JeeslLang, D extends JeeslDescription
 	public Calendar build(CALENDAR calendar)
 	{
 		Calendar xml = build();		
-//		if(q.isSetType()){xml.setType(xfType.build(calendar.g));
+//		if(Objects.nonNull(q.getType())) {xml.setType(xfType.build(calendar.g));
 		
 		return xml;
 	}
