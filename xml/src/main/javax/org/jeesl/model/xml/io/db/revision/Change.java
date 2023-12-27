@@ -78,10 +78,6 @@ public class Change
         this.scope = value;
     }
 
-    public boolean isSetScope() {
-        return (this.scope!= null);
-    }
-
     /**
      * Gets the value of the aid property.
      * 
@@ -90,7 +86,7 @@ public class Change
      *     {@link Integer }
      *     
      */
-    public int getAid() {
+    public Integer getAid() {
         return aid;
     }
 
@@ -102,16 +98,8 @@ public class Change
      *     {@link Integer }
      *     
      */
-    public void setAid(int value) {
+    public void setAid(Integer value) {
         this.aid = value;
-    }
-
-    public boolean isSetAid() {
-        return (this.aid!= null);
-    }
-
-    public void unsetAid() {
-        this.aid = null;
     }
 
     /**
@@ -138,10 +126,6 @@ public class Change
         this.action = value;
     }
 
-    public boolean isSetAction() {
-        return (this.action!= null);
-    }
-
     /**
      * Gets the value of the type property.
      * 
@@ -166,10 +150,6 @@ public class Change
         this.type = value;
     }
 
-    public boolean isSetType() {
-        return (this.type!= null);
-    }
-
     /**
      * Gets the value of the text property.
      * 
@@ -192,10 +172,6 @@ public class Change
      */
     public void setText(String value) {
         this.text = value;
-    }
-
-    public boolean isSetText() {
-        return (this.text!= null);
     }
 
 }

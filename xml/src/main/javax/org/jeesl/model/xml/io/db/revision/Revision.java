@@ -81,10 +81,6 @@ public class Revision
         this.user = value;
     }
 
-    public boolean isSetUser() {
-        return (this.user!= null);
-    }
-
     /**
      * Gets the value of the scope property.
      * 
@@ -114,14 +110,6 @@ public class Revision
         return this.scope;
     }
 
-    public boolean isSetScope() {
-        return ((this.scope!= null)&&(!this.scope.isEmpty()));
-    }
-
-    public void unsetScope() {
-        this.scope = null;
-    }
-
     /**
      * Gets the value of the rev property.
      * 
@@ -130,7 +118,7 @@ public class Revision
      *     {@link Long }
      *     
      */
-    public long getRev() {
+    public Long getRev() {
         return rev;
     }
 
@@ -142,16 +130,8 @@ public class Revision
      *     {@link Long }
      *     
      */
-    public void setRev(long value) {
+    public void setRev(Long value) {
         this.rev = value;
-    }
-
-    public boolean isSetRev() {
-        return (this.rev!= null);
-    }
-
-    public void unsetRev() {
-        this.rev = null;
     }
 
     /**
@@ -176,10 +156,6 @@ public class Revision
      */
     public void setDate(XMLGregorianCalendar value) {
         this.date = value;
-    }
-
-    public boolean isSetDate() {
-        return (this.date!= null);
     }
 
 }

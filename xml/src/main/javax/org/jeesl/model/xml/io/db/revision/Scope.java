@@ -84,10 +84,6 @@ public class Scope
         this.revision = value;
     }
 
-    public boolean isSetRevision() {
-        return (this.revision!= null);
-    }
-
     /**
      * Gets the value of the change property.
      * 
@@ -117,14 +113,6 @@ public class Scope
         return this.change;
     }
 
-    public boolean isSetChange() {
-        return ((this.change!= null)&&(!this.change.isEmpty()));
-    }
-
-    public void unsetChange() {
-        this.change = null;
-    }
-
     /**
      * Gets the value of the id property.
      * 
@@ -133,7 +121,7 @@ public class Scope
      *     {@link Long }
      *     
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -145,16 +133,8 @@ public class Scope
      *     {@link Long }
      *     
      */
-    public void setId(long value) {
+    public void setId(Long value) {
         this.id = value;
-    }
-
-    public boolean isSetId() {
-        return (this.id!= null);
-    }
-
-    public void unsetId() {
-        this.id = null;
     }
 
     /**
@@ -181,10 +161,6 @@ public class Scope
         this.clazz = value;
     }
 
-    public boolean isSetClazz() {
-        return (this.clazz!= null);
-    }
-
     /**
      * Gets the value of the category property.
      * 
@@ -209,10 +185,6 @@ public class Scope
         this.category = value;
     }
 
-    public boolean isSetCategory() {
-        return (this.category!= null);
-    }
-
     /**
      * Gets the value of the entity property.
      * 
@@ -235,10 +207,6 @@ public class Scope
      */
     public void setEntity(String value) {
         this.entity = value;
-    }
-
-    public boolean isSetEntity() {
-        return (this.entity!= null);
     }
 
 }

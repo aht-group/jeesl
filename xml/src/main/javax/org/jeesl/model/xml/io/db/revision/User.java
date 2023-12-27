@@ -73,10 +73,6 @@ public class User
         this.firstName = value;
     }
 
-    public boolean isSetFirstName() {
-        return (this.firstName!= null);
-    }
-
     /**
      * Gets the value of the lastName property.
      * 
@@ -99,10 +95,6 @@ public class User
      */
     public void setLastName(String value) {
         this.lastName = value;
-    }
-
-    public boolean isSetLastName() {
-        return (this.lastName!= null);
     }
 
     /**
@@ -129,10 +121,6 @@ public class User
         this.name = value;
     }
 
-    public boolean isSetName() {
-        return (this.name!= null);
-    }
-
     /**
      * Gets the value of the email property.
      * 
@@ -157,10 +145,6 @@ public class User
         this.email = value;
     }
 
-    public boolean isSetEmail() {
-        return (this.email!= null);
-    }
-
     /**
      * Gets the value of the label property.
      * 
@@ -183,10 +167,6 @@ public class User
      */
     public void setLabel(String value) {
         this.label = value;
-    }
-
-    public boolean isSetLabel() {
-        return (this.label!= null);
     }
 
 }

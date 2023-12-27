@@ -2,6 +2,7 @@ package org.jeesl.controller.processor.io.label.revision;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.model.xml.io.db.revision.Change;
 import org.jeesl.model.xml.io.db.revision.Revision;
@@ -28,7 +29,7 @@ public class AuditScopeProcessor
     
     public static boolean hasChanges(Scope scope)
     {
-    	return (scope.isSetChange());
+    	return Objects.nonNull(scope.getChange());
     }
 
     private void modificationWithChanges(List<Change> changes, Scope me, String elementToAdd)
@@ -88,7 +89,7 @@ public class AuditScopeProcessor
         for (E e : elements)
         {
             if(e instanceof Change){((Change)e).setScope(null);}
-            if(e instanceof Revision){((Revision) e).unsetScope();}
+            if(e instanceof Revision){((Revision) e).getScope().clear();;}
         }
     }
 
@@ -105,7 +106,7 @@ public class AuditScopeProcessor
 				}
 				modificationWithChanges(changes, sc, "Scope");
 				modificationWithRevisions(revisions, sc, "Revision");
-				sc.unsetChange();
+				sc.getChange().clear();;
             }
         }
         deleteScopes(revisions);

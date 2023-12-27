@@ -15,7 +15,7 @@ public class TestXmlRevision extends AbstractXmlAuditTest<Revision>
     public Revision build(boolean withChilds)
     {
     	Revision xml = new Revision();
-    	xml.setRev(123);
+    	xml.setRev(123l);
     	xml.setDate(AbstractXmlAuditTest.getDefaultXmlDate());
     	
     	if(withChilds)

@@ -72,12 +72,4 @@ public class Revisions
         return this.revision;
     }
 
-    public boolean isSetRevision() {
-        return ((this.revision!= null)&&(!this.revision.isEmpty()));
-    }
-
-    public void unsetRevision() {
-        this.revision = null;
-    }
-
 }

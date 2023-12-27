@@ -14,6 +14,7 @@
     
     <xsd:import namespace="http://www.jeesl.org/io/attribute" schemaLocation="jeesl/io/attribute.xsd"/>
     <xsd:import namespace="http://ahtutils.aht-group.com/dbseed" schemaLocation="aht/dbseed.xsd"/>
+    <xsd:import namespace="http://ahtutils.aht-group.com/audit" schemaLocation="aht/audit.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/io/mail" schemaLocation="jeesl/io/mail.xsd"/>
 	<xsd:import namespace="http://ahtutils.aht-group.com/report" schemaLocation="aht/report.xsd"/>
     <xsd:import namespace="http://www.jeesl.org/revision" schemaLocation="jeesl/io/revision.xsd"/>

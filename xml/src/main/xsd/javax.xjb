@@ -71,6 +71,11 @@
             <jxb:package name="org.jeesl.model.xml.io.db"/>
         </jxb:schemaBindings>
     </jxb:bindings>
+	<jxb:bindings schemaLocation="../xsd/aht/audit.xsd" node="/xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="org.jeesl.model.xml.io.db.revision"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
 	<jxb:bindings schemaLocation="jeesl/io/mail.xsd" node="/xsd:schema">
         <jxb:schemaBindings>
             <jxb:package name="org.jeesl.model.xml.io.mail"/>

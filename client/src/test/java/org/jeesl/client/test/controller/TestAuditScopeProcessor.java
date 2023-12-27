@@ -3,6 +3,7 @@ package org.jeesl.client.test.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.jeesl.client.JeeslBootstrap;
 import org.jeesl.client.model.ejb.system.locale.Description;
@@ -109,7 +110,7 @@ public class TestAuditScopeProcessor extends AbstractJeeslTest
         List<Scope> actual = asp.group(list);
         for(Scope s : actual)
         {
-        	Assertions.assertTrue(s.isSetChange());
+        	Assertions.assertTrue(Objects.nonNull(s.getChange()));
         }
         Revision r = new Revision();
         r.getScope().addAll(actual);

@@ -15,7 +15,7 @@ public class TestXmlScope extends AbstractXmlAuditTest<Scope>
     public Scope build(boolean withChilds)
     {
     	Scope xml = new Scope();
-    	xml.setId(123);
+    	xml.setId(123l);
     	xml.setCategory("myCategory");
     	xml.setEntity("myEntity");
     	xml.setClazz("myClass");

@@ -11,7 +11,7 @@ public class XmlScopeFactory
 {
 	final static Logger logger = LoggerFactory.getLogger(XmlScopeFactory.class);
 	
-	public static Scope build(int id, String cl)
+	public static Scope build(long id, String cl)
 	{
 		Scope xml = new Scope();
 		xml.setId(id);
