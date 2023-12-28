@@ -72,7 +72,7 @@ import org.jeesl.model.json.JsonFlatFigures;
 import org.jeesl.model.json.module.survey.JsonSurveyValue;
 import org.jeesl.model.json.module.survey.JsonSurveyValues;
 import org.jeesl.model.pojo.map.generic.Nested2Map;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

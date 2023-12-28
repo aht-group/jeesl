@@ -22,7 +22,7 @@ import org.jeesl.interfaces.model.system.locale.JeeslDescription;
 import org.jeesl.interfaces.model.system.locale.JeeslLang;
 import org.jeesl.interfaces.model.system.locale.JeeslLocale;
 import org.jeesl.jsf.handler.sb.SbDateHandler;
-import org.metachart.xml.chart.Chart;
+import org.metachart.model.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

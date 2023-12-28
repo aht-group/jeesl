@@ -8,8 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.jeesl.model.xml.io.label.Entities;
 import org.jeesl.model.xml.xsd.Container;
-import org.metachart.xml.graph.Graph;
-
+import org.metachart.model.xml.graph.Graph;
 import org.jeesl.model.xml.io.ssi.sync.DataUpdate;
 
 public interface JeeslRevisionRestImport

@@ -31,7 +31,7 @@ import org.jeesl.model.json.module.ts.JsonTsData;
 import org.jeesl.model.json.module.ts.JsonTsPoint;
 import org.jeesl.model.json.module.ts.JsonTsSeries;
 import org.joda.time.DateTime;
-import org.metachart.xml.chart.Chart;
+import org.metachart.model.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

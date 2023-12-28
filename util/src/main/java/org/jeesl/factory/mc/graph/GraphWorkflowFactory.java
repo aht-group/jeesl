@@ -4,11 +4,11 @@ import org.jeesl.model.xml.module.workflow.Stage;
 import org.jeesl.model.xml.module.workflow.Transition;
 import org.jeesl.util.query.xpath.StatusXpath;
 import org.metachart.factory.xml.graph.XmlEdgeFactory;
-import org.metachart.xml.graph.Edge;
-import org.metachart.xml.graph.Edges;
-import org.metachart.xml.graph.Graph;
-import org.metachart.xml.graph.Node;
-import org.metachart.xml.graph.Nodes;
+import org.metachart.model.xml.graph.Edge;
+import org.metachart.model.xml.graph.Edges;
+import org.metachart.model.xml.graph.Graph;
+import org.metachart.model.xml.graph.Node;
+import org.metachart.model.xml.graph.Nodes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

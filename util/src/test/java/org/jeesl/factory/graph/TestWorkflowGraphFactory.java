@@ -8,11 +8,11 @@ import org.jeesl.factory.mc.graph.GraphWorkflowFactory;
 import org.jeesl.model.xml.module.workflow.Workflow;
 import org.metachart.factory.xml.graph.XmlClusterFactory;
 import org.metachart.factory.xml.graph.XmlClustersFactory;
+import org.metachart.model.xml.graph.Clusters;
+import org.metachart.model.xml.graph.Graph;
 import org.metachart.processor.graph.ColorSchemeManager;
 import org.metachart.processor.graph.Graph2DotConverter;
 import org.metachart.processor.graph.GraphFileWriter;
-import org.metachart.xml.graph.Clusters;
-import org.metachart.xml.graph.Graph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

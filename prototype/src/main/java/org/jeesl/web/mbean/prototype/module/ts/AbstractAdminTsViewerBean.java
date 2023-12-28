@@ -39,7 +39,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.interfaces.util.query.module.EjbTimeSeriesQuery;
 import org.jeesl.jsf.handler.op.OpEntitySelectionHandler;
 import org.jeesl.jsf.handler.sb.SbSingleHandler;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

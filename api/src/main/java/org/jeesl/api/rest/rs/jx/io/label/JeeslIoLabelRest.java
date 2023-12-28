@@ -10,7 +10,7 @@ import org.jeesl.api.rest.i.io.JeeslIoLabelRestInterface;
 import org.jeesl.model.xml.io.label.Diagrams;
 import org.jeesl.model.xml.io.label.Entities;
 import org.jeesl.model.xml.xsd.Container;
-import org.metachart.xml.graph.Graph;
+import org.metachart.model.xml.graph.Graph;
 
 @Path("/rest/jeesl/io/label")
 public interface JeeslIoLabelRest extends JeeslIoLabelRestInterface

@@ -48,7 +48,7 @@ import org.jeesl.util.query.xml.XmlStatusQuery;
 import org.jeesl.util.query.xml.system.io.XmlRevisionQuery;
 import org.metachart.factory.xml.graph.XmlDotFactory;
 import org.metachart.factory.xml.graph.XmlGraphFactory;
-import org.metachart.xml.graph.Graph;
+import org.metachart.model.xml.graph.Graph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

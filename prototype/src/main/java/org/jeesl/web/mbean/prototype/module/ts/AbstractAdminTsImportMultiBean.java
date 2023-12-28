@@ -51,7 +51,7 @@ import org.jeesl.interfaces.model.with.system.locale.EjbWithLangDescription;
 import org.jeesl.model.xml.module.ts.Data;
 import org.jeesl.model.xml.module.ts.TimeSeries;
 import org.jeesl.util.comparator.xml.ts.TsDataComparator;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Ds;
 import org.primefaces.event.FileUploadEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

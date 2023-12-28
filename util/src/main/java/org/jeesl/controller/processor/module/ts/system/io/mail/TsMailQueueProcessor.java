@@ -25,7 +25,7 @@ import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
 import org.jeesl.model.json.io.db.tuple.container.JsonTuples1;
 import org.jeesl.model.json.io.db.tuple.instance.JsonTuple1;
-import org.metachart.xml.chart.Chart;
+import org.metachart.model.xml.chart.Chart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

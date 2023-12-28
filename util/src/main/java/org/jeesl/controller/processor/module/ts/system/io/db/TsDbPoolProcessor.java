@@ -20,8 +20,8 @@ import org.jeesl.interfaces.model.module.ts.data.JeeslTsDataPoint;
 import org.jeesl.interfaces.model.module.ts.data.JeeslTsTransaction;
 import org.jeesl.interfaces.model.module.ts.stat.JeeslTsStatistic;
 import org.jeesl.interfaces.model.system.locale.status.JeeslStatus;
-import org.metachart.xml.chart.Chart;
-import org.metachart.xml.chart.Ds;
+import org.metachart.model.xml.chart.Chart;
+import org.metachart.model.xml.chart.Ds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
