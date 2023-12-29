@@ -44,8 +44,7 @@ import jakarta.xml.bind.annotation.XmlType;
     "descriptions"
 })
 @XmlRootElement(name = "implementation")
-public class Implementation
-    implements Serializable
+public class Implementation implements Serializable
 {
 
     private final static long serialVersionUID = 1L;

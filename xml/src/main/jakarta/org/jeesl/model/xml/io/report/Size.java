@@ -1,0 +1,124 @@
+
+package org.jeesl.model.xml.io.report;
+
+import java.io.Serializable;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+import org.jeesl.model.xml.io.locale.status.Type;
+
+
+/**
+ * <p>Java-Klasse für anonymous complex type.
+ * 
+ * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
+ * 
+ * <pre>
+ * &lt;complexType&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element ref="{http://ahtutils.aht-group.com/status}type"/&gt;
+ *       &lt;/sequence&gt;
+ *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="value" type="{http://www.w3.org/2001/XMLSchema}int" /&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
+ * </pre>
+ * 
+ * 
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {
+    "type"
+})
+@XmlRootElement(name = "size")
+public class Size
+    implements Serializable
+{
+
+    private final static long serialVersionUID = 1L;
+    @XmlElement(namespace = "http://ahtutils.aht-group.com/status", required = true)
+    protected Type type;
+    @XmlAttribute(name = "code")
+    protected String code;
+    @XmlAttribute(name = "value")
+    protected Integer value;
+
+    /**
+     * Ruft den Wert der type-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Type }
+     *     
+     */
+    public Type getType() {
+        return type;
+    }
+
+    /**
+     * Legt den Wert der type-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Type }
+     *     
+     */
+    public void setType(Type value) {
+        this.type = value;
+    }
+
+    /**
+     * Ruft den Wert der code-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Legt den Wert der code-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCode(String value) {
+        this.code = value;
+    }
+
+    /**
+     * Ruft den Wert der value-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getValue() {
+        return value;
+    }
+
+    /**
+     * Legt den Wert der value-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+}
