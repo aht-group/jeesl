@@ -220,6 +220,5 @@
             <jxb:package name="org.exlp.model.xml.io"/>
         </jxb:schemaBindings>
     </jxb:bindings>
-    
 
 </jxb:bindings>
